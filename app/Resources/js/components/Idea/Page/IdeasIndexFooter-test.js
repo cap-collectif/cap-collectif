@@ -5,15 +5,15 @@ import { IdeasIndexFooter } from './IdeasIndexFooter';
 
 const props = {
   trashUrl: 'trash.html',
-  countTrashed: 5
+  countTrashed: 5,
 };
 
 const featuresIdeaTrashEnabled = {
-  idea_trash: true
+  idea_trash: true,
 };
 
 const featuresIdeaTrashDisabled = {
-  idea_trash: false
+  idea_trash: false,
 };
 
 describe('<IdeasIndexFooter />', () => {

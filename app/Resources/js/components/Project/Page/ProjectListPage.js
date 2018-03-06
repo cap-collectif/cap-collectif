@@ -14,7 +14,7 @@ export const ProjectListPage = React.createClass({
     features: PropTypes.object.isRequired,
     themes: PropTypes.array.isRequired,
     project: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
   },
 
   componentDidMount() {
@@ -47,13 +47,13 @@ export const ProjectListPage = React.createClass({
         </Row>
       </div>
     );
-  }
+  },
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   features: state.default.features,
   themes: state.default.themes,
-  project: state.project
+  project: state.project,
 });
 
 export default connect(mapStateToProps)(ProjectListPage);

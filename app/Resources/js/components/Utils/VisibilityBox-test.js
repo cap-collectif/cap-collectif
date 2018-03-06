@@ -11,7 +11,7 @@ describe('<VisibilityBox />', () => {
     const wrapper = shallow(
       <VisibilityBox {...props}>
         <div className="foo" />
-      </VisibilityBox>
+      </VisibilityBox>,
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -20,7 +20,7 @@ describe('<VisibilityBox />', () => {
     const wrapper = shallow(
       <VisibilityBox enabled user={{}} {...props}>
         <div className="foo" />
-      </VisibilityBox>
+      </VisibilityBox>,
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -29,7 +29,7 @@ describe('<VisibilityBox />', () => {
     const wrapper = shallow(
       <VisibilityBox enabled user={null} {...props}>
         <div className="foo" />
-      </VisibilityBox>
+      </VisibilityBox>,
     );
     expect(wrapper).toMatchSnapshot();
   });

@@ -9,13 +9,13 @@ const VoteButtonOverlay = React.createClass({
     popoverId: PropTypes.string.isRequired,
     hasReachedLimit: PropTypes.bool,
     hasUserEnoughCredits: PropTypes.bool,
-    limit: PropTypes.number
+    limit: PropTypes.number,
   },
 
   getDefaultProps() {
     return {
       hasReachedLimit: false,
-      hasUserEnoughCredits: true
+      hasUserEnoughCredits: true,
     };
   },
 
@@ -26,7 +26,7 @@ const VoteButtonOverlay = React.createClass({
       userHasVote,
       hasReachedLimit,
       hasUserEnoughCredits,
-      limit
+      limit,
     } = this.props;
     if (userHasVote || (hasUserEnoughCredits && !hasReachedLimit)) {
       return children;
@@ -42,7 +42,7 @@ const VoteButtonOverlay = React.createClass({
         <FormattedMessage
           id="proposal.vote.popover.limit_reached_and_not_enough_credits_text"
           values={{
-            num: limit
+            num: limit,
           }}
         />
       );
@@ -59,7 +59,7 @@ const VoteButtonOverlay = React.createClass({
         <FormattedMessage
           id="proposal.vote.popover.limit_reached_text"
           values={{
-            num: limit
+            num: limit,
           }}
         />
       );
@@ -78,12 +78,12 @@ const VoteButtonOverlay = React.createClass({
         <span style={{ cursor: 'not-allowed' }}>
           {cloneElement(children, {
             disabled: true,
-            style: { ...children.props.style, pointerEvents: 'none' }
+            style: { ...children.props.style, pointerEvents: 'none' },
           })}
         </span>
       </OverlayTrigger>
     );
-  }
+  },
 });
 
 export default VoteButtonOverlay;

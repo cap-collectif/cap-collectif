@@ -14,13 +14,13 @@ const ProposalPreview = React.createClass({
     proposal: PropTypes.object.isRequired,
     step: PropTypes.object.isRequired,
     showThemes: PropTypes.bool,
-    showComments: PropTypes.bool
+    showComments: PropTypes.bool,
   },
 
   getDefaultProps() {
     return {
       showThemes: false,
-      showComments: false
+      showComments: false,
     };
   },
 
@@ -29,7 +29,7 @@ const ProposalPreview = React.createClass({
     const voteType = step.voteType;
     const classes = classNames({
       box: true,
-      'bg-vip': proposal.author && proposal.author.vip
+      'bg-vip': proposal.author && proposal.author.vip,
     });
 
     return (
@@ -63,7 +63,7 @@ const ProposalPreview = React.createClass({
         </div>
       </Col>
     );
-  }
+  },
 });
 
 export default ProposalPreview;

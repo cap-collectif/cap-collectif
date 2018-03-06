@@ -10,7 +10,7 @@ import DeleteUserInGroupMutation from '../../../mutations/DeleteUserInGroupMutat
 import {
   groupAdminUsersUserDeletionSuccessful,
   groupAdminUsersUserDeletionFailed,
-  groupAdminUsersUserDeletionReset
+  groupAdminUsersUserDeletionReset,
 } from '../../../redux/modules/user';
 import type { GroupAdminUsersListGroupItem_user } from './__generated__/GroupAdminUsersListGroupItem_user.graphql';
 import type { Uuid, Dispatch } from '../../../types';
@@ -18,11 +18,11 @@ import type { Uuid, Dispatch } from '../../../types';
 type Props = {
   groupId: string,
   user: GroupAdminUsersListGroupItem_user,
-  dispatch: Dispatch
+  dispatch: Dispatch,
 };
 
 type State = {
-  showRemoveUserModal: boolean
+  showRemoveUserModal: boolean,
 };
 
 const onDelete = (userId: Uuid, groupId: Uuid, dispatch) => {
@@ -31,8 +31,8 @@ const onDelete = (userId: Uuid, groupId: Uuid, dispatch) => {
   return DeleteUserInGroupMutation.commit({
     input: {
       userId,
-      groupId
-    }
+      groupId,
+    },
   })
     .then(() => {
       dispatch(groupAdminUsersUserDeletionSuccessful());
@@ -44,7 +44,7 @@ const onDelete = (userId: Uuid, groupId: Uuid, dispatch) => {
 
 export class GroupAdminUsersListGroupItem extends React.Component<Props, State> {
   state = {
-    showRemoveUserModal: false
+    showRemoveUserModal: false,
   };
 
   cancelCloseRemoveUserModal = () => {
@@ -120,5 +120,5 @@ export default createFragmentContainer(
         url(format: "default_avatar")
       }
     }
-  `
+  `,
 );

@@ -8,7 +8,7 @@ const idea = {
   createdAt: '2017-07-10T18:53:58+0200',
   updatedAt: '2017-07-10T18:53:58+0200',
   author: {},
-  votesCount: 5
+  votesCount: 5,
 };
 
 const ideaWithTheme = {
@@ -19,9 +19,9 @@ const ideaWithTheme = {
   theme: {
     title: 'Theme',
     _links: {
-      show: ''
-    }
-  }
+      show: '',
+    },
+  },
 };
 
 const ideaTrashed = {
@@ -29,7 +29,7 @@ const ideaTrashed = {
   createdAt: '2017-07-10T18:53:58+0200',
   updatedAt: '2017-07-10T18:53:58+0200',
   author: {},
-  trashed: true
+  trashed: true,
 };
 
 const ideaCommentable = {
@@ -38,15 +38,15 @@ const ideaCommentable = {
   updatedAt: '2017-07-10T18:53:58+0200',
   author: {},
   commentable: true,
-  commentsCount: 10
+  commentsCount: 10,
 };
 
 const featuresThemesEnabled = {
-  themes: true
+  themes: true,
 };
 
 const featuresThemesDisabled = {
-  themes: false
+  themes: false,
 };
 
 describe('<IdeaPageHeaderInfos />', () => {
@@ -59,21 +59,21 @@ describe('<IdeaPageHeaderInfos />', () => {
 
   it('it should render a theme when idea has one and feature is activated', () => {
     const wrapper = shallow(
-      <IdeaPageHeaderInfos features={featuresThemesEnabled} idea={ideaWithTheme} />
+      <IdeaPageHeaderInfos features={featuresThemesEnabled} idea={ideaWithTheme} />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('it should not render a theme when idea has one and feature is disabled', () => {
     const wrapper = shallow(
-      <IdeaPageHeaderInfos features={featuresThemesDisabled} idea={ideaWithTheme} />
+      <IdeaPageHeaderInfos features={featuresThemesDisabled} idea={ideaWithTheme} />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('it should render comments number when idea is commentable', () => {
     const wrapper = shallow(
-      <IdeaPageHeaderInfos features={featuresThemesDisabled} idea={ideaCommentable} />
+      <IdeaPageHeaderInfos features={featuresThemesDisabled} idea={ideaCommentable} />,
     );
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.find('#idea-comments-nb')).toHaveLength(1);
@@ -81,7 +81,7 @@ describe('<IdeaPageHeaderInfos />', () => {
 
   it('it should render trashed label when idea is trashed', () => {
     const wrapper = shallow(
-      <IdeaPageHeaderInfos features={featuresThemesDisabled} idea={ideaTrashed} />
+      <IdeaPageHeaderInfos features={featuresThemesDisabled} idea={ideaTrashed} />,
     );
     expect(wrapper).toMatchSnapshot();
     expect(wrapper.find('.label.label-default')).toHaveLength(1);

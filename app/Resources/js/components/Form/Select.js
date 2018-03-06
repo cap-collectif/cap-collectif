@@ -12,7 +12,7 @@ type Props = {
     value: Value,
     onBlur: () => void,
     onChange: (value: Value) => void,
-    onFocus: () => void
+    onFocus: () => void,
   },
   meta: { touched: boolean, error: ?string },
   label: string | React.Node,
@@ -28,7 +28,7 @@ type Props = {
   filterOptions?: Function,
   onChange: () => void,
   labelClassName?: string,
-  inputClassName?: string
+  inputClassName?: string,
 };
 
 export class renderSelect extends React.Component<Props> {
@@ -36,7 +36,7 @@ export class renderSelect extends React.Component<Props> {
     multi: false,
     disabled: false,
     autoload: false,
-    clearable: true
+    clearable: true,
   };
 
   render() {
@@ -55,7 +55,7 @@ export class renderSelect extends React.Component<Props> {
       loadOptions,
       filterOptions,
       help,
-      meta: { touched, error }
+      meta: { touched, error },
     } = this.props;
     const { name, value, onBlur, onFocus } = input;
     return (

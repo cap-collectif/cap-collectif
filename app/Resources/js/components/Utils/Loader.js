@@ -5,11 +5,11 @@ import { Circle } from 'styled-spinkit';
 
 type Props = {
   show: boolean,
-  children?: ?React.Node
+  children?: ?React.Node,
 };
 
 export const Container = styled.div.attrs({
-  className: 'col-xs-2 col-xs-offset-5'
+  className: 'col-xs-2 col-xs-offset-5',
 })`
   text-align: center;
   padding-top: 50px;
@@ -18,7 +18,7 @@ export const Container = styled.div.attrs({
 
 export class Loader extends React.Component<Props> {
   static defaultProps = {
-    show: true
+    show: true,
   };
 
   render() {

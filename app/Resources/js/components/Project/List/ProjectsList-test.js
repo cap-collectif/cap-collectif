@@ -9,13 +9,13 @@ const props = {
   projects: [
     {
       hasParticipativeStep: false,
-      title: 'project without participative step'
+      title: 'project without participative step',
     },
     {
       hasParticipativeStep: true,
-      title: 'project with participative step'
-    }
-  ]
+      title: 'project with participative step',
+    },
+  ],
 };
 
 describe('<ProjectsList />', () => {

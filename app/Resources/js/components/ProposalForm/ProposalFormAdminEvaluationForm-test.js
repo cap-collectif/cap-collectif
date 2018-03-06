@@ -12,8 +12,8 @@ describe('<ProposalFormAdminEvaluationForm />', () => {
     // $FlowFixMe $refType
     proposalForm: {
       id: 'proposalFormId',
-      evaluationForm: null
-    }
+      evaluationForm: null,
+    },
   };
 
   it('render correctly', () => {

@@ -6,7 +6,7 @@ import { RegistrationQuestionForm } from './RegistrationQuestionForm';
 
 describe('<RegistrationQuestionForm />', () => {
   const props = {
-    showChoices: false
+    showChoices: false,
   };
 
   it('renders correctly', () => {

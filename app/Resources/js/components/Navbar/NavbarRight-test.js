@@ -7,7 +7,7 @@ import { NavbarRight } from './NavbarRight';
 
 const props = {
   user: {},
-  features: {}
+  features: {},
 };
 
 describe('<NavbarRight />', () => {

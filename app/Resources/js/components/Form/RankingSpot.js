@@ -5,7 +5,7 @@ import { ITEM_TYPE } from '../../constants/RankingConstants';
 const spotTarget = {
   drop(props, monitor) {
     props.onDrop(monitor.getItem());
-  }
+  },
 };
 
 const RankingSpot = React.createClass({
@@ -16,7 +16,7 @@ const RankingSpot = React.createClass({
     isOver: PropTypes.bool.isRequired,
     onDrop: PropTypes.func.isRequired,
     canDrop: PropTypes.bool.isRequired,
-    children: PropTypes.element
+    children: PropTypes.element,
   },
 
   render() {
@@ -25,14 +25,14 @@ const RankingSpot = React.createClass({
     return connectDropTarget(
       <div className="ranking__spot" style={{ backgroundColor: color }}>
         {children}
-      </div>
+      </div>,
     );
-  }
+  },
 });
 
 export default DropTarget(ITEM_TYPE, spotTarget, (connect, monitor) => ({
   // eslint-disable-line new-cap
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver(),
-  canDrop: monitor.canDrop()
+  canDrop: monitor.canDrop(),
 }))(RankingSpot);

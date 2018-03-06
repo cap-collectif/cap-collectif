@@ -9,7 +9,7 @@ import UserActions from '../../../actions/UserActions';
 const PhoneModal = React.createClass({
   propTypes: {
     show: PropTypes.bool.isRequired,
-    onClose: PropTypes.func.isRequired
+    onClose: PropTypes.func.isRequired,
   },
 
   getInitialState() {
@@ -17,7 +17,7 @@ const PhoneModal = React.createClass({
       isSubmitting: false,
       isResending: false,
       smsSentToNumber: null,
-      alert: null
+      alert: null,
     };
   },
 
@@ -53,8 +53,8 @@ const PhoneModal = React.createClass({
           isResending: false,
           alert: {
             type: 'success',
-            message: <FormattedMessage id="phone.confirm.alert.received" />
-          }
+            message: <FormattedMessage id="phone.confirm.alert.received" />,
+          },
         });
       })
       .catch(err => {
@@ -67,7 +67,7 @@ const PhoneModal = React.createClass({
         }
         this.setState({
           isResending: false,
-          alert: { type: 'danger', message }
+          alert: { type: 'danger', message },
         });
       });
   },
@@ -149,7 +149,7 @@ const PhoneModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  }
+  },
 });
 
 export default PhoneModal;

@@ -14,7 +14,7 @@ export const ProposalFormAdminDistrictModal = React.createClass({
     onClose: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     member: PropTypes.string.isRequired,
-    isCreating: PropTypes.bool.isRequired
+    isCreating: PropTypes.bool.isRequired,
   },
 
   render() {
@@ -70,7 +70,7 @@ export const ProposalFormAdminDistrictModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  }
+  },
 });
 
 export default connect()(ProposalFormAdminDistrictModal);

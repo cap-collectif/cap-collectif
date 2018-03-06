@@ -4,7 +4,7 @@ import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 
 type Props = {
-  +endAt: string
+  +endAt: string,
 };
 
 export class RemainingTime extends React.Component<Props> {

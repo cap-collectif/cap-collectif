@@ -11,7 +11,7 @@ import OpinionSourceFooter from './OpinionSourceFooter';
 
 const OpinionSource = React.createClass({
   propTypes: {
-    source: React.PropTypes.object.isRequired
+    source: React.PropTypes.object.isRequired,
   },
 
   render() {
@@ -19,7 +19,7 @@ const OpinionSource = React.createClass({
     const classes = classNames({
       opinion: true,
       'block--bordered': true,
-      'bg-vip': source.author && source.author.vip
+      'bg-vip': source.author && source.author.vip,
     });
     return (
       <li className={classes} id={`source-${source.id}`}>
@@ -38,7 +38,7 @@ const OpinionSource = React.createClass({
         </Row>
       </li>
     );
-  }
+  },
 });
 
 export default OpinionSource;

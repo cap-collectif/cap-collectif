@@ -10,7 +10,7 @@ describe('<NewEmailNotConfirmedAlert />', () => {
   });
   it('should render an alert if there is a newEmailToConfirm', () => {
     const wrapper = shallow(
-      <NewEmailNotConfirmedAlert sendSucceed newEmailToConfirm="new-email@test.com" />
+      <NewEmailNotConfirmedAlert sendSucceed newEmailToConfirm="new-email@test.com" />,
     );
     expect(wrapper).toMatchSnapshot();
   });

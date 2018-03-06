@@ -13,7 +13,7 @@ import type { State } from '../../types';
 
 type RelayProps = {
   isSuperAdmin: boolean,
-  proposalForm: ProposalFormAdminSettingsForm_proposalForm
+  proposalForm: ProposalFormAdminSettingsForm_proposalForm,
 };
 type Props = RelayProps & {
   intl: IntlShape,
@@ -23,7 +23,7 @@ type Props = RelayProps & {
   submitting: boolean,
   valid: boolean,
   submitSucceeded: boolean,
-  submitFailed: boolean
+  submitFailed: boolean,
 };
 
 const formName = 'proposal-form-admin-settings';
@@ -36,7 +36,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   values.proposalFormId = proposalForm.id;
   delete values.id;
   return ChangeProposalFormParametersMutation.commit({
-    input: values
+    input: values,
   });
 };
 
@@ -51,7 +51,7 @@ export class ProposalFormAdminSettingsForm extends Component<Props> {
       submitting,
       valid,
       submitSucceeded,
-      submitFailed
+      submitFailed,
     } = this.props;
 
     return (
@@ -126,7 +126,7 @@ const form = reduxForm({
   onSubmit,
   validate,
   enableReinitialize: true,
-  form: formName
+  form: formName,
 })(ProposalFormAdminSettingsForm);
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => {
@@ -136,8 +136,8 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayPro
     initialValues: {
       title: proposalForm.title,
       commentable: proposalForm.commentable,
-      costable: proposalForm.costable
-    }
+      costable: proposalForm.costable,
+    },
   };
 };
 
@@ -153,5 +153,5 @@ export default createFragmentContainer(
       commentable
       costable
     }
-  `
+  `,
 );

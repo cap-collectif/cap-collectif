@@ -13,11 +13,11 @@ import type { ProposalFusionEditForm_proposal } from './__generated__/ProposalFu
 export const formName = 'update-proposal-fusion';
 
 type RelayProps = {
-  proposal: ProposalFusionEditForm_proposal
+  proposal: ProposalFusionEditForm_proposal,
 };
 
 type FormValues = {
-  fromProposals: $ReadOnlyArray<{ value: Uuid, title: string }>
+  fromProposals: $ReadOnlyArray<{ value: Uuid, title: string }>,
 };
 
 type Props = RelayProps & { onClose: () => void, intl: IntlShape };
@@ -36,8 +36,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   return UpdateProposalFusionMutation.commit({
     input: {
       proposalId: props.proposal.id,
-      fromProposals: values.fromProposals.map(proposal => proposal.value)
-    }
+      fromProposals: values.fromProposals.map(proposal => proposal.value),
+    },
   })
     .then(response => {
       if (!response.updateProposalFusion || !response.updateProposalFusion.proposal) {
@@ -47,7 +47,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     })
     .catch(() => {
       throw new SubmissionError({
-        _error: intl.formatMessage({ id: 'global.error.server.form' })
+        _error: intl.formatMessage({ id: 'global.error.server.form' }),
       });
     });
 };
@@ -73,19 +73,19 @@ export class ProposalFusionEditForm extends React.Component<Props> {
           clearable={false}
           loadOptions={(input: string) =>
             Fetcher.postToJson(`/collect_steps/${stepId}/proposals/search`, {
-              terms: input
+              terms: input,
             }).then(res => ({
               options: res.proposals
                 .map(p => ({
                   value: p.id,
-                  label: p.title
+                  label: p.title,
                 }))
                 .concat(
                   proposal.mergedFrom.map(p => ({
                     value: p.id,
-                    label: p.title
-                  }))
-                )
+                    label: p.title,
+                  })),
+                ),
             }))
           }
         />
@@ -98,7 +98,7 @@ const form = reduxForm({
   form: formName,
   enableReinitialize: true,
   validate,
-  onSubmit
+  onSubmit,
 })(ProposalFusionEditForm);
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => {
@@ -106,9 +106,9 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayPro
     initialValues: {
       fromProposals: props.proposal.mergedFrom.map(p => ({
         value: p.id,
-        label: p.title
-      }))
-    }
+        label: p.title,
+      })),
+    },
   };
 };
 const container = connect(mapStateToProps)(injectIntl(form));
@@ -129,5 +129,5 @@ export default createFragmentContainer(
         }
       }
     }
-  `
+  `,
 );

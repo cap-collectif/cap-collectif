@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 
 const OpinionLinkCreateInfos = React.createClass({
   propTypes: {
-    opinion: React.PropTypes.object.isRequired
+    opinion: React.PropTypes.object.isRequired,
   },
 
   render() {
@@ -20,7 +20,7 @@ const OpinionLinkCreateInfos = React.createClass({
         </p>
       </div>
     );
-  }
+  },
 });
 
 export default OpinionLinkCreateInfos;

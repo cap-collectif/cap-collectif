@@ -4,7 +4,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 
 type Props = {
   value: ?any,
-  onChange: (response: string) => void
+  onChange: (response: string) => void,
 };
 
 export class Captcha extends React.PureComponent<Props> {

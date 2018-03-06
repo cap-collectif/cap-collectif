@@ -9,8 +9,8 @@ const idea = {
   trashed: false,
   title: 'Title',
   _links: {
-    show: ''
-  }
+    show: '',
+  },
 };
 
 const ideaTrashed = {
@@ -18,8 +18,8 @@ const ideaTrashed = {
   title: 'Title',
   trashed: true,
   _links: {
-    show: ''
-  }
+    show: '',
+  },
 };
 
 describe('<IdeaPreviewBody />', () => {

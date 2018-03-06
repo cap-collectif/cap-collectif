@@ -34,11 +34,11 @@ describe('<ProposalAdminSelections />', () => {
             title: 'step-2',
             kind: 'selection',
             allowingProgressSteps: true,
-            statuses: []
-          }
-        ]
-      }
-    }
+            statuses: [],
+          },
+        ],
+      },
+    },
   };
 
   it('render correctly', () => {

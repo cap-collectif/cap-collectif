@@ -7,7 +7,7 @@ const props = {
   connectDropTarget: cp => {
     return cp;
   },
-  onDrop: () => {}
+  onDrop: () => {},
 };
 
 const OriginalComponent = RankingSpot.DecoratedComponent;

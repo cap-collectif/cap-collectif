@@ -6,13 +6,13 @@ import OpinionLink from './OpinionLink';
 describe('<OpinionLink />', () => {
   const linkUserVip = {
     author: {
-      vip: true
-    }
+      vip: true,
+    },
   };
   const linkUserNotVip = {
     author: {
-      vip: false
-    }
+      vip: false,
+    },
   };
 
   it('should render a li bordered', () => {

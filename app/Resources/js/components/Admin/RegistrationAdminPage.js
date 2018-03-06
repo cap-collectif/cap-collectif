@@ -19,7 +19,7 @@ type Props = {
   addNewField: () => void,
   isSuperAdmin: boolean,
   reorder: (list: Array<Object>) => void,
-  dynamicFields: Array<Object>
+  dynamicFields: Array<Object>,
 };
 
 export const RegistrationAdminPage = React.createClass({
@@ -29,7 +29,7 @@ export const RegistrationAdminPage = React.createClass({
     onToggle: PropTypes.func.isRequired,
     addNewField: PropTypes.func.isRequired,
     reorder: PropTypes.func.isRequired,
-    dynamicFields: PropTypes.array.isRequired
+    dynamicFields: PropTypes.array.isRequired,
   },
 
   render() {
@@ -73,7 +73,7 @@ export const RegistrationAdminPage = React.createClass({
               onChange={() =>
                 onToggle(
                   'restrict_registration_via_email_domain',
-                  !features.restrict_registration_via_email_domain
+                  !features.restrict_registration_via_email_domain,
                 )
               }
             />
@@ -170,7 +170,7 @@ export const RegistrationAdminPage = React.createClass({
                       }/admin/settings/settings.global/list`}>
                       <FormattedMessage id="proposal.admin.general" />
                     </a>
-                  )
+                  ),
                 }}
               />
             </p>
@@ -190,13 +190,13 @@ export const RegistrationAdminPage = React.createClass({
         <RegistrationCommunicationForm />
       </div>
     );
-  }
+  },
 });
 
 const mapStateToProps = (state: State) => ({
   features: state.default.features,
   isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
-  dynamicFields: state.user.registration_form.questions
+  dynamicFields: state.user.registration_form.questions,
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   onToggle: (feature: FeatureToggle, value: boolean) => {
@@ -207,7 +207,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
   reorder: (list: Array<Object>) => {
     reorderRegistrationQuestions(list, dispatch);
-  }
+  },
 });
 
 const connector: Connector<{}, Props> = connect(mapStateToProps, mapDispatchToProps);

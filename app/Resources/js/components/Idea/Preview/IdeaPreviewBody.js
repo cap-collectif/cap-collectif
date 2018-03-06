@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 const IdeaPreviewBody = React.createClass({
   propTypes: {
-    idea: React.PropTypes.object.isRequired
+    idea: React.PropTypes.object.isRequired,
   },
 
   render() {
@@ -20,7 +20,7 @@ const IdeaPreviewBody = React.createClass({
         ) : null}
       </div>
     );
-  }
+  },
 });
 
 export default IdeaPreviewBody;

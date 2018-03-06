@@ -17,19 +17,19 @@ export default props => {
 
   const redirectToDefaultInbox = (nextState, replace) => {
     replace({
-      pathname: '/inbox/new'
+      pathname: '/inbox/new',
     });
   };
 
   const redirectToFirstSettings = (nextState, replace) => {
     replace({
-      pathname: '/settings/display'
+      pathname: '/settings/display',
     });
   };
 
   const SynthesisBoxWrapper = React.createClass({
     propTypes: {
-      children: PropTypes.object.isRequired
+      children: PropTypes.object.isRequired,
     },
     render() {
       const { children } = this.props;
@@ -39,7 +39,7 @@ export default props => {
           {children}
         </SynthesisBox>
       );
-    }
+    },
   });
 
   return (

@@ -5,7 +5,7 @@ import RemainingTime from './RemainingTime';
 
 const props = {
   startAt: '2017-01-10T09:00:24+01:00',
-  endAt: '2017-11-25T09:00:24+01:00'
+  endAt: '2017-11-25T09:00:24+01:00',
 };
 
 describe('<RemainingTime />', () => {

@@ -10,7 +10,7 @@ const FlashMessages = React.createClass({
     style: React.PropTypes.object,
     form: React.PropTypes.bool,
     onDismissMessage: React.PropTypes.func,
-    translate: React.PropTypes.bool
+    translate: React.PropTypes.bool,
   },
 
   getDefaultProps(): Object {
@@ -20,7 +20,7 @@ const FlashMessages = React.createClass({
       style: {},
       form: false,
       onDismissMessage: null,
-      translate: true
+      translate: true,
     };
   },
 
@@ -74,7 +74,7 @@ const FlashMessages = React.createClass({
       );
     }
     return null;
-  }
+  },
 });
 
 export default FlashMessages;

@@ -9,14 +9,14 @@ import DraftBox from '../../Utils/DraftBox';
 import Loader from '../../Utils/Loader';
 
 type Props = {
-  step: Object
+  step: Object,
 };
 const renderDraftProposals = ({
   error,
-  props
+  props,
 }: {
   error: ?Error,
-  props: ?{ draftProposalsForUserInStep?: Array<{ title: string, show_url: string }> }
+  props: ?{ draftProposalsForUserInStep?: Array<{ title: string, show_url: string }> },
 }) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
@@ -26,7 +26,7 @@ const renderDraftProposals = ({
   if (props) {
     const classes = classNames({
       'list-group': true,
-      'mb-40': true
+      'mb-40': true,
     });
 
     // eslint-disable-next-line react/prop-types
@@ -67,7 +67,7 @@ export default class DraftProposalList extends React.Component<Props> {
             }
           `}
           variables={{
-            stepId: this.props.step.id
+            stepId: this.props.step.id,
           }}
           render={renderDraftProposals}
         />

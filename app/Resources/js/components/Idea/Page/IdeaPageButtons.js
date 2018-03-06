@@ -12,12 +12,12 @@ import { showIdeaEditModal } from '../../../redux/modules/idea';
 export const IdeaPageButtons = React.createClass({
   propTypes: {
     idea: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
   },
 
   getInitialState() {
     return {
-      showDeleteModal: false
+      showDeleteModal: false,
     };
   },
 
@@ -59,7 +59,7 @@ export const IdeaPageButtons = React.createClass({
         />
       </div>
     );
-  }
+  },
 });
 
 export default connect()(IdeaPageButtons);

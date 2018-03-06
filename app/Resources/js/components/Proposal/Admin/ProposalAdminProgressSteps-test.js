@@ -8,7 +8,7 @@ describe('<ProposalAdminProgressSteps />', () => {
   const props = {
     dispatch: jest.fn(),
     fields: { length: 0, map: () => [], remove: jest.fn() },
-    progressSteps: []
+    progressSteps: [],
   };
 
   it('render correctly', () => {

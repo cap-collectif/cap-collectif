@@ -14,14 +14,14 @@ const Editor = React.createClass({
     onBlur: PropTypes.func, // redux-form
     id: PropTypes.string,
     className: PropTypes.string,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
   },
 
   getDefaultProps() {
     return {
       id: '',
       className: '',
-      disabled: false
+      disabled: false,
     };
   },
 
@@ -31,7 +31,7 @@ const Editor = React.createClass({
       this._editor = new Quill(ReactDOM.findDOMNode(this.refs.editor), {
         modules: {
           toolbar: {
-            container: ReactDOM.findDOMNode(this.refs.toolbar)
+            container: ReactDOM.findDOMNode(this.refs.toolbar),
           },
           'image-tooltip': {
             template: `
@@ -43,7 +43,7 @@ const Editor = React.createClass({
                 ${intl.formatMessage({ id: 'global.cancel' })}</a>
               <a href="javascript:;" class="insert">
                 ${intl.formatMessage({ id: 'global.insert' })}
-              </a>`
+              </a>`,
           },
           'link-tooltip': {
             template: `
@@ -61,11 +61,11 @@ const Editor = React.createClass({
               </a>
               <a href="javascript:;" class="done">
                 ${intl.formatMessage({ id: 'global.done' })}
-              </a>`
-          }
+              </a>`,
+          },
         },
         styles: false,
-        theme: 'snow'
+        theme: 'snow',
       });
       this._editor.getModule('keyboard').removeHotkeys(9);
 
@@ -107,7 +107,7 @@ const Editor = React.createClass({
     const classes = {
       editor: !disabled,
       'form-control': disabled,
-      [className]: true
+      [className]: true,
     };
     if (disabled) {
       return <textarea id={id} className={classNames(classes)} disabled />;
@@ -118,7 +118,7 @@ const Editor = React.createClass({
         <div ref="editor" style={{ position: 'static' }} />
       </div>
     );
-  }
+  },
 });
 
 export default injectIntl(Editor);

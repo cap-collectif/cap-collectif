@@ -47,7 +47,7 @@ export type FeatureToggles = {
   export: boolean,
   server_side_rendering: boolean,
   zipcode_at_register: boolean,
-  vote_without_account: boolean
+  vote_without_account: boolean,
 };
 export type FeatureToggle =
   | 'blog'
@@ -101,7 +101,7 @@ export type GlobalState = {
   project: ProjectState,
   report: ReportState,
   user: UserState,
-  opinion: OpinionState
+  opinion: OpinionState,
 };
 export type State = GlobalState;
 

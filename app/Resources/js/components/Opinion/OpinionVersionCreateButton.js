@@ -11,14 +11,14 @@ type Props = {
   className?: string,
   style: Object,
   isContribuable: boolean,
-  dispatch: Dispatch
+  dispatch: Dispatch,
 };
 
 class OpinionVersionCreateButton extends React.Component<Props> {
   static defaultProps = {
     isContribuable: false,
     className: '',
-    style: {}
+    style: {},
   };
 
   render() {

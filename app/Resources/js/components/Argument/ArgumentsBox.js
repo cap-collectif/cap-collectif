@@ -6,7 +6,7 @@ import ArgumentCreate from './Creation/ArgumentCreate';
 
 const ArgumentsBox = React.createClass({
   propTypes: {
-    opinion: React.PropTypes.object.isRequired
+    opinion: React.PropTypes.object.isRequired,
   },
 
   getCommentSystem() {
@@ -44,7 +44,7 @@ const ArgumentsBox = React.createClass({
     }
 
     return null;
-  }
+  },
 });
 
 export default ArgumentsBox;

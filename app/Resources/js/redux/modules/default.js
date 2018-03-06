@@ -5,7 +5,7 @@ import type { Exact, Action, Dispatch, FeatureToggle, FeatureToggles } from '../
 import {
   addRegistrationFieldSucceeded,
   updateRegistrationFieldSucceeded,
-  deleteRegistrationFieldSucceeded
+  deleteRegistrationFieldSucceeded,
 } from './user';
 
 type ShowNewFieldModalAction = { type: 'default/SHOW_NEW_FIELD_MODAL' };
@@ -13,11 +13,11 @@ type HideNewFieldModalAction = { type: 'default/HIDE_NEW_FIELD_MODAL' };
 type ToggleFeatureSucceededAction = {
   type: 'default/TOGGLE_FEATURE_SUCCEEDED',
   feature: string,
-  enabled: boolean
+  enabled: boolean,
 };
 type ShowUpdateFieldModalAction = {
   type: 'default/SHOW_UPDATE_FIELD_MODAL',
-  id: number
+  id: number,
 };
 type HideUpdateFieldModalAction = { type: 'default/HIDE_UPDATE_FIELD_MODAL' };
 
@@ -33,7 +33,7 @@ export type State = {
   +features: Exact<FeatureToggles>,
   +userTypes: Array<Object>,
   +parameters: Object,
-  +updatingRegistrationFieldModal: ?number
+  +updatingRegistrationFieldModal: ?number,
 };
 
 export const features = {
@@ -67,7 +67,7 @@ export const features = {
   export: false,
   server_side_rendering: false,
   zipcode_at_register: false,
-  vote_without_account: false
+  vote_without_account: false,
 };
 
 const initialState: State = {
@@ -76,35 +76,35 @@ const initialState: State = {
   features,
   userTypes: [],
   parameters: {},
-  updatingRegistrationFieldModal: null
+  updatingRegistrationFieldModal: null,
 };
 
 export const toggleFeatureSucceeded = (
   feature: FeatureToggle,
-  enabled: boolean
+  enabled: boolean,
 ): ToggleFeatureSucceededAction => ({
   type: 'default/TOGGLE_FEATURE_SUCCEEDED',
   feature,
-  enabled
+  enabled,
 });
 export const showNewFieldModal = (): ShowNewFieldModalAction => ({
-  type: 'default/SHOW_NEW_FIELD_MODAL'
+  type: 'default/SHOW_NEW_FIELD_MODAL',
 });
 export const hideNewFieldModal = (): HideNewFieldModalAction => ({
-  type: 'default/HIDE_NEW_FIELD_MODAL'
+  type: 'default/HIDE_NEW_FIELD_MODAL',
 });
 export const updateRegistrationFieldModal = (id: number): ShowUpdateFieldModalAction => ({
   type: 'default/SHOW_UPDATE_FIELD_MODAL',
-  id
+  id,
 });
 export const hideRegistrationFieldModal = (): HideUpdateFieldModalAction => ({
-  type: 'default/HIDE_UPDATE_FIELD_MODAL'
+  type: 'default/HIDE_UPDATE_FIELD_MODAL',
 });
 
 export const requestUpdateRegistrationField = (
   values: Object,
   dispatch: Dispatch,
-  { fieldId }: { fieldId: number }
+  { fieldId }: { fieldId: number },
 ) => {
   return Fetcher.putToJson(`/registration_form/questions/${fieldId}`, values).then(
     (question: Object) => {
@@ -113,7 +113,7 @@ export const requestUpdateRegistrationField = (
     },
     () => {
       throw new SubmissionError({ _error: 'Un problème est survenu' });
-    }
+    },
   );
 };
 
@@ -122,7 +122,7 @@ export const updateRegistrationCommunicationForm = (values: Object) => {
     () => {},
     () => {
       throw new SubmissionError({ _error: 'Un problème est survenu' });
-    }
+    },
   );
 };
 
@@ -137,7 +137,7 @@ export const addNewRegistrationField = (values: Object, dispatch: Dispatch) => {
     },
     () => {
       throw new SubmissionError({ _error: 'Un problème est survenu' });
-    }
+    },
   );
 };
 
@@ -148,7 +148,7 @@ export const deleteRegistrationField = (id: number, dispatch: Dispatch) => {
       () => {
         dispatch(deleteRegistrationFieldSucceeded(id));
       },
-      () => {}
+      () => {},
     );
   }
 };
@@ -156,13 +156,13 @@ export const deleteRegistrationField = (id: number, dispatch: Dispatch) => {
 export const toggleFeature = (
   dispatch: Dispatch,
   feature: FeatureToggle,
-  enabled: boolean
+  enabled: boolean,
 ): Promise<*> => {
   return Fetcher.put(`/toggles/${feature}`, { enabled }).then(
     () => {
       dispatch(toggleFeatureSucceeded(feature, enabled));
     },
-    () => {}
+    () => {},
   );
 };
 
@@ -181,7 +181,7 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
     case 'default/TOGGLE_FEATURE_SUCCEEDED':
       return {
         ...state,
-        features: { ...state.features, [action.feature]: action.enabled }
+        features: { ...state.features, [action.feature]: action.enabled },
       };
     default:
       return state;

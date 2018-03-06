@@ -9,11 +9,11 @@ describe('<GroupAdminAddUsersForm />', () => {
     group: {
       id: 'group4',
       title: 'Comité de suvi',
-      usersConnection: { edges: [] }
+      usersConnection: { edges: [] },
     },
     handleSubmit: jest.fn(),
     dispatch: jest.fn(),
-    onClose: jest.fn()
+    onClose: jest.fn(),
   };
 
   it('render correctly', () => {

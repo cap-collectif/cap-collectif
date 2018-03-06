@@ -4,7 +4,7 @@ import commitMutation from './commitMutation';
 import environnement from '../createRelayEnvironment';
 import type {
   FollowProposalMutationVariables,
-  FollowProposalMutationResponse as Response
+  FollowProposalMutationResponse as Response,
 } from './__generated__/FollowProposalMutation.graphql';
 
 const mutation = graphql`
@@ -45,12 +45,12 @@ const commit = (variables: FollowProposalMutationVariables): Promise<Response> =
         connectionInfo: [
           {
             key: 'ProposalPageFollowers_followerConnection',
-            rangeBehavior: 'append'
-          }
+            rangeBehavior: 'append',
+          },
         ],
-        edgeName: 'followerEdge'
-      }
-    ]
+        edgeName: 'followerEdge',
+      },
+    ],
     // updater: (store) => {
     //     // Get the payload returned from the server
     //     const payload = store.getRootField('followProposal');

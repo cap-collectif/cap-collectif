@@ -7,7 +7,7 @@ const Field = React.createClass({
   propTypes: {
     meta: PropTypes.shape({
       touched: PropTypes.bool.isRequired,
-      error: PropTypes.any
+      error: PropTypes.any,
     }).isRequired,
     labelClassName: PropTypes.string,
     divClassName: PropTypes.string,
@@ -33,7 +33,7 @@ const Field = React.createClass({
       'medias',
       'ranking',
       'radio',
-      'button'
+      'button',
     ]).isRequired,
     addonAfter: PropTypes.any,
     addonBefore: PropTypes.any,
@@ -52,9 +52,9 @@ const Field = React.createClass({
       autoFocus: PropTypes.bool,
       onChange: PropTypes.func,
       onBlur: PropTypes.func,
-      value: PropTypes.any
+      value: PropTypes.any,
     }).isRequired,
-    style: PropTypes.object
+    style: PropTypes.object,
   },
   render() {
     const { touched, error } = this.props.meta;
@@ -78,7 +78,7 @@ const Field = React.createClass({
       choices,
       isOtherAllowed,
       style,
-      radioChecked
+      radioChecked,
     } = this.props;
     const { autoFocus, name } = this.props.input;
     const check = touched && !disableValidation;
@@ -125,7 +125,7 @@ const Field = React.createClass({
       return <div className={divClassName}>{input}</div>;
     }
     return input;
-  }
+  },
 });
 
 export default Field;

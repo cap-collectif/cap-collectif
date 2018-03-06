@@ -15,10 +15,10 @@ describe('<OpinionCreateModal />', () => {
     opinionType: {
       id: 'opinionTypeId',
       title: 'opinionTypeTitle',
-      appendixTypes: []
+      appendixTypes: [],
     },
     submitting: true,
-    dispatch: jest.fn()
+    dispatch: jest.fn(),
   };
 
   it('renders correctly', () => {

@@ -5,5 +5,5 @@ export default {
     return Fetcher.get(`/opinion_types/${type}`).then(opinionType => {
       return opinionType.availableLinkTypes;
     });
-  }
+  },
 };

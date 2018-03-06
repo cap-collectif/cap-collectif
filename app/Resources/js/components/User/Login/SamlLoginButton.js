@@ -8,7 +8,7 @@ export const SamlLoginButton = React.createClass({
   displayName: 'SamlLoginButton',
 
   propTypes: {
-    show: PropTypes.bool.isRequired
+    show: PropTypes.bool.isRequired,
   },
 
   render() {
@@ -25,11 +25,11 @@ export const SamlLoginButton = React.createClass({
         {title}
       </a>
     );
-  }
+  },
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  show: state.default.features.login_saml
+  show: state.default.features.login_saml,
 });
 
 export default connect(mapStateToProps)(SamlLoginButton);

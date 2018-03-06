@@ -15,27 +15,27 @@ describe('<ProposalForm />', () => {
       id: 'proposalForm1',
       description: 'Description 1',
       step: {
-        id: 'step1'
+        id: 'step1',
       },
       districts: [
         {
           id: 'district1',
-          name: 'District 1'
+          name: 'District 1',
         },
         {
           id: 'district2',
-          name: 'District 2'
-        }
+          name: 'District 2',
+        },
       ],
       categories: [
         {
           id: 'category1',
-          name: 'Category 1'
+          name: 'Category 1',
         },
         {
           id: 'category2',
-          name: 'Category 2'
-        }
+          name: 'Category 2',
+        },
       ],
       questions: [
         {
@@ -48,8 +48,8 @@ describe('<ProposalForm />', () => {
           required: true,
           validationRule: null,
           choices: [],
-          isOtherAllowed: false
-        }
+          isOtherAllowed: false,
+        },
       ],
       usingDistrict: true,
       districtMandatory: true,
@@ -66,7 +66,7 @@ describe('<ProposalForm />', () => {
       illustrationHelpText: 'Illustration help',
       descriptionHelpText: 'Description help',
       addressHelpText: 'Address help',
-      proposalInAZoneRequired: true
+      proposalInAZoneRequired: true,
     },
     themes: [{ id: 'theme1', title: 'Theme 1' }],
     submitting: false,
@@ -74,7 +74,7 @@ describe('<ProposalForm />', () => {
     features: {
       ...features,
       themes: true,
-      districts: true
+      districts: true,
     },
     titleValue: 'Proposal title',
     addressValue: null,
@@ -92,18 +92,18 @@ describe('<ProposalForm />', () => {
       responses: [
         {
           question: {
-            id: 'question1'
+            id: 'question1',
           },
-          value: 'lol'
-        }
+          value: 'lol',
+        },
       ],
       media: {
         id: 'media1',
         url: 'http://capco.dev',
         size: '50',
-        name: 'paul.jpg'
-      }
-    }
+        name: 'paul.jpg',
+      },
+    },
   };
 
   it('should render an edit form', () => {

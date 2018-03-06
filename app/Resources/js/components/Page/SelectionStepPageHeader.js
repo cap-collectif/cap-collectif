@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 const SelectionStepPageHeader = React.createClass({
   propTypes: {
     queryCount: PropTypes.number,
-    total: PropTypes.number.isRequired
+    total: PropTypes.number.isRequired,
   },
 
   render() {
@@ -17,22 +17,22 @@ const SelectionStepPageHeader = React.createClass({
             id="proposal.count_with_total"
             values={{
               num: queryCount,
-              total
+              total,
             }}
           />
         ) : (
           <FormattedMessage
             id="proposal.count"
             values={{
-              num: total
+              num: total,
             }}
           />
         )}
       </h3>
     );
-  }
+  },
 });
 
 export default connect(state => ({ queryCount: state.proposal.queryCount }))(
-  SelectionStepPageHeader
+  SelectionStepPageHeader,
 );

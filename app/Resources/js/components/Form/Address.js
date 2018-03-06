@@ -13,15 +13,15 @@ type PassedProps = {
   id: string,
   placeholder: string,
   formName: string,
-  disabled: boolean
+  disabled: boolean,
 };
 type DefaultProps = { disabled: boolean };
 type Props = PassedProps & DefaultProps & { updateAddressValue: (value: ?string) => void };
 
 const renderSuggestion = ({
-  formattedSuggestion
+  formattedSuggestion,
 }: {
-  formattedSuggestion: { mainText: string, secondaryText: string }
+  formattedSuggestion: { mainText: string, secondaryText: string },
 }) => (
   <div className="places-autocomplete">
     <strong>{formattedSuggestion.mainText}</strong> {formattedSuggestion.secondaryText}
@@ -30,7 +30,7 @@ const renderSuggestion = ({
 
 class Address extends React.Component<Props> {
   static defaultProps = {
-    disabled: false
+    disabled: false,
   };
 
   resetAddressField = () => {
@@ -63,7 +63,7 @@ class Address extends React.Component<Props> {
           placeholder,
           value,
           type: 'text',
-          id
+          id,
         }}
         renderSuggestion={renderSuggestion}
         onEnterKeyDown={this.handleAddressChange}
@@ -75,7 +75,7 @@ class Address extends React.Component<Props> {
           input: 'form-control',
           autocompleteContainer: 'autocompleteContainer',
           autocompleteItem: 'autocompleteItem',
-          autocompleteItemActive: 'autocompleteItemActive'
+          autocompleteItemActive: 'autocompleteItemActive',
         }}
       />
     );
@@ -85,7 +85,7 @@ class Address extends React.Component<Props> {
 const mapDispatchToProps = (dispatch: Dispatch, props: PassedProps) => ({
   updateAddressValue: value => {
     dispatch(change(props.formName, 'address', value));
-  }
+  },
 });
 
 const connector: Connector<PassedProps, Props> = connect(null, mapDispatchToProps);

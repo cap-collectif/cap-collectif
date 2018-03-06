@@ -5,7 +5,7 @@ import AnswerBody from '../Answer/AnswerBody';
 
 const OpinionAnswer = React.createClass({
   propTypes: {
-    answer: PropTypes.object
+    answer: PropTypes.object,
   },
 
   render() {
@@ -15,7 +15,7 @@ const OpinionAnswer = React.createClass({
     }
     const classes = classNames({
       opinion__answer: true,
-      'bg-vip': answer.author && answer.author.vip
+      'bg-vip': answer.author && answer.author.vip,
     });
     return (
       <div className={classes} id="answer">
@@ -27,7 +27,7 @@ const OpinionAnswer = React.createClass({
         <AnswerBody answer={answer} />
       </div>
     );
-  }
+  },
 });
 
 export default OpinionAnswer;

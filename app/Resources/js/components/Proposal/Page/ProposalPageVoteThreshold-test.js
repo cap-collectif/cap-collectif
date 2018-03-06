@@ -6,30 +6,30 @@ import ProposalPageVoteThreshold from './ProposalPageVoteThreshold';
 describe('<ProposalPageVoteThreshold />', () => {
   const proposal = {
     votesCountByStepId: {
-      42: 30
-    }
+      42: 30,
+    },
   };
 
   const stepWithVoteThreshold = {
     id: 42,
-    voteThreshold: 100
+    voteThreshold: 100,
   };
 
   const stepWithVoteThresholdReached = {
     id: 42,
-    voteThreshold: 20
+    voteThreshold: 20,
   };
 
   it('should render proposal page vote threshold', () => {
     const wrapper = shallow(
-      <ProposalPageVoteThreshold proposal={proposal} step={stepWithVoteThreshold} />
+      <ProposalPageVoteThreshold proposal={proposal} step={stepWithVoteThreshold} />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render proposal page vote threshold reached', () => {
     const wrapper = shallow(
-      <ProposalPageVoteThreshold proposal={proposal} step={stepWithVoteThresholdReached} />
+      <ProposalPageVoteThreshold proposal={proposal} step={stepWithVoteThresholdReached} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

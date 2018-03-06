@@ -8,12 +8,12 @@ import { showSourceCreateModal } from '../../../redux/modules/opinion';
 const OpinionSourceAdd = React.createClass({
   propTypes: {
     disabled: PropTypes.bool,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
   },
 
   getDefaultProps() {
     return {
-      disabled: false
+      disabled: false,
     };
   },
 
@@ -30,7 +30,7 @@ const OpinionSourceAdd = React.createClass({
         {!disabled && <OpinionSourceFormModal source={null} />}
       </div>
     );
-  }
+  },
 });
 
 export default connect()(OpinionSourceAdd);

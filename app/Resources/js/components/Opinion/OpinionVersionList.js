@@ -6,7 +6,7 @@ import OpinionVersion from './OpinionVersion';
 const OpinionVersionList = React.createClass({
   propTypes: {
     versions: PropTypes.array.isRequired,
-    rankingThreshold: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.number]).isRequired
+    rankingThreshold: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.number]).isRequired,
   },
 
   render() {
@@ -34,7 +34,7 @@ const OpinionVersionList = React.createClass({
         })}
       </ul>
     );
-  }
+  },
 });
 
 export default OpinionVersionList;

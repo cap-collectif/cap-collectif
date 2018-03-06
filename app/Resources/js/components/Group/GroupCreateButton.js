@@ -11,11 +11,11 @@ import GroupForm from './GroupForm';
 
 type Props = {
   submit: Function,
-  submitting: boolean
+  submitting: boolean,
 };
 
 type ComponentState = {
-  showModal: boolean
+  showModal: boolean,
 };
 
 type FormValues = Object;
@@ -45,7 +45,7 @@ export class GroupCreateButton extends React.Component<Props, ComponentState> {
     super(props);
 
     this.state = {
-      showModal: false
+      showModal: false,
     };
   }
 
@@ -104,5 +104,5 @@ export class GroupCreateButton extends React.Component<Props, ComponentState> {
 export default reduxForm({
   onSubmit,
   validate,
-  form: formName
+  form: formName,
 })(GroupCreateButton);

@@ -8,12 +8,12 @@ const ProposalDetailLikers = React.createClass({
 
   propTypes: {
     proposal: PropTypes.object.isRequired,
-    componentClass: PropTypes.oneOf(['div', 'span'])
+    componentClass: PropTypes.oneOf(['div', 'span']),
   },
 
   getDefaultProps() {
     return {
-      componentClass: 'span'
+      componentClass: 'span',
     };
   },
 
@@ -40,7 +40,7 @@ const ProposalDetailLikers = React.createClass({
     }
 
     return null;
-  }
+  },
 });
 
 export default ProposalDetailLikers;

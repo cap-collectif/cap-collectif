@@ -11,19 +11,19 @@ const Other = React.createClass({
     onChange: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
     isReduxForm: PropTypes.bool,
-    value: PropTypes.string
+    value: PropTypes.string,
   },
 
   getDefaultProps() {
     return {
-      isReduxForm: false
+      isReduxForm: false,
     };
   },
 
   getInitialState() {
     return {
       value: this.props.value || '',
-      checked: !!this.props.value
+      checked: !!this.props.value,
     };
   },
 
@@ -36,11 +36,11 @@ const Other = React.createClass({
         (event: FocusEvent) => {
           if (event.target.value === '') {
             this.setState({
-              checked: false
+              checked: false,
             });
           }
         },
-        true
+        true,
       );
     }
   },
@@ -50,7 +50,7 @@ const Other = React.createClass({
 
     this.setState({
       value: e.target.value,
-      checked: true
+      checked: true,
     });
 
     onChange(e, e.target.value);
@@ -69,7 +69,7 @@ const Other = React.createClass({
       } else {
         input.value = '';
         this.setState({
-          value: ''
+          value: '',
         });
         if (this.props.isReduxForm) {
           this.props.onChange(e, undefined);
@@ -77,14 +77,14 @@ const Other = React.createClass({
       }
     }
     this.setState({
-      checked: e.target.checked
+      checked: e.target.checked,
     });
   },
 
   clear() {
     this.setState({
       value: '',
-      checked: false
+      checked: false,
     });
     // $FlowFixMe
     const input = ReactDOM.findDOMNode(this.textField).getElementsByTagName('input')[0];
@@ -127,7 +127,7 @@ const Other = React.createClass({
         </Col>
       </Row>
     );
-  }
+  },
 });
 
 export default Other;

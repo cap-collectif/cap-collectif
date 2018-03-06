@@ -13,7 +13,7 @@ const NewOpinionButton = React.createClass({
     projectId: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
   },
 
   render() {
@@ -35,7 +35,7 @@ const NewOpinionButton = React.createClass({
         <OpinionCreateModal opinionType={opinionType} stepId={stepId} projectId={projectId} />
       </span>
     );
-  }
+  },
 });
 
 export default connect()(NewOpinionButton);

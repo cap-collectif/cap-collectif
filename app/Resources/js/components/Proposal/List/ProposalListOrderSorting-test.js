@@ -12,7 +12,7 @@ const props = {
   order: PROPOSAL_ORDER_RANDOM,
   defaultSort: PROPOSAL_ORDER_RANDOM,
   stepId: 'selectionstep1',
-  intl: intlMock
+  intl: intlMock,
 };
 
 describe('<ProposalListOrderSorting />', () => {

@@ -6,12 +6,12 @@ const NewIdeaButton = React.createClass({
   propTypes: {
     link: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
-    user: PropTypes.object
+    user: PropTypes.object,
   },
 
   getDefaultProps() {
     return {
-      user: null
+      user: null,
     };
   },
 
@@ -26,12 +26,12 @@ const NewIdeaButton = React.createClass({
         </div>
       </LoginOverlay>
     );
-  }
+  },
 });
 
 const mapStateToProps = state => {
   return {
-    user: state.user.user
+    user: state.user.user,
   };
 };
 

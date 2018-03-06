@@ -8,7 +8,7 @@ import renderComponent from '../Form/Field';
 export const form = 'password';
 export const ConfirmPasswordForm = React.createClass({
   propTypes: {
-    handleSubmit: PropTypes.func.isRequired
+    handleSubmit: PropTypes.func.isRequired,
   },
 
   render() {
@@ -24,7 +24,7 @@ export const ConfirmPasswordForm = React.createClass({
         />
       </form>
     );
-  }
+  },
 });
 
 export default reduxForm({ form, onSubmit })(ConfirmPasswordForm);

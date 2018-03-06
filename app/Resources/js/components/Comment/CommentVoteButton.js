@@ -8,7 +8,7 @@ const CommentVoteButton = React.createClass({
   propTypes: {
     comment: PropTypes.object,
     user: PropTypes.object,
-    onVote: PropTypes.func.isRequired
+    onVote: PropTypes.func.isRequired,
   },
 
   deleteVote() {
@@ -73,12 +73,12 @@ const CommentVoteButton = React.createClass({
         <span className="opinion__votes-nb">{comment.votesCount}</span>
       </span>
     );
-  }
+  },
 });
 
 const mapStateToProps = state => {
   return {
-    user: state.user.user
+    user: state.user.user,
   };
 };
 

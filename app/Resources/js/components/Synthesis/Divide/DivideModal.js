@@ -23,7 +23,7 @@ const DivideModal = React.createClass({
     synthesis: React.PropTypes.object,
     element: React.PropTypes.object,
     show: React.PropTypes.bool,
-    toggle: React.PropTypes.func
+    toggle: React.PropTypes.func,
   },
 
   getInitialState() {
@@ -32,7 +32,7 @@ const DivideModal = React.createClass({
       newElements: element.division ? element.division.elements : [],
       currentElement: null,
       showPublishModal: false,
-      selectedText: null
+      selectedText: null,
     };
   },
 
@@ -69,14 +69,14 @@ const DivideModal = React.createClass({
   togglePublishModal(value, element = null) {
     this.setState({
       currentElement: element || this.state.currentElement,
-      showPublishModal: value
+      showPublishModal: value,
     });
   },
 
   selectText() {
     const selectedText = this.getSelectedText(ReactDOM.findDOMNode(this.refs.originalText));
     this.setState({
-      selectedText
+      selectedText,
     });
   },
 
@@ -89,7 +89,7 @@ const DivideModal = React.createClass({
         body,
         archived: false,
         published: false,
-        parent: element.parent
+        parent: element.parent,
       };
       this.addElement(newElement);
       this.togglePublishModal(true, newElement);
@@ -106,7 +106,7 @@ const DivideModal = React.createClass({
     newElements = ArrayHelper.addElementToArray(newElements, element, 'body');
     this.setState({
       newElements,
-      selectedText: null
+      selectedText: null,
     });
   },
 
@@ -114,7 +114,7 @@ const DivideModal = React.createClass({
     let newElements = this.state.newElements;
     newElements = ArrayHelper.removeElementFromArray(newElements, element, 'body');
     this.setState({
-      newElements
+      newElements,
     });
   },
 
@@ -125,8 +125,8 @@ const DivideModal = React.createClass({
       archived: true,
       published: false,
       division: {
-        elements: this.state.newElements
-      }
+        elements: this.state.newElements,
+      },
     };
     SynthesisElementActions.update(synthesis.id, element.id, data);
     hashHistory.push('inbox', { type: 'new' });
@@ -265,7 +265,7 @@ const DivideModal = React.createClass({
     const { show } = this.props;
     const modalClasses = classNames({
       'modal--divide': true,
-      hidden: this.state.showPublishModal
+      hidden: this.state.showPublishModal,
     });
     return (
       <div>
@@ -293,7 +293,7 @@ const DivideModal = React.createClass({
         {this.renderPublishModal()}
       </div>
     );
-  }
+  },
 });
 
 export default DivideModal;

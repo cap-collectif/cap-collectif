@@ -6,7 +6,7 @@ import AlertAutoDismissable from './AlertAutoDismissable';
 const AlertBox = React.createClass({
   getInitialState() {
     return {
-      alert: null
+      alert: null,
     };
   },
 
@@ -20,13 +20,13 @@ const AlertBox = React.createClass({
 
   onChange() {
     this.setState({
-      alert: AlertStore.alert
+      alert: AlertStore.alert,
     });
   },
 
   handleDismiss() {
     this.setState({
-      alert: null
+      alert: null,
     });
   },
 
@@ -41,7 +41,7 @@ const AlertBox = React.createClass({
         <FormattedMessage id={alert.content} />
       </AlertAutoDismissable>
     );
-  }
+  },
 });
 
 export default AlertBox;

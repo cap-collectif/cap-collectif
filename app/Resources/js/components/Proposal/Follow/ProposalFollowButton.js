@@ -11,17 +11,17 @@ import AppDispatcher from '../../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../../constants/AlertConstants';
 
 type Props = {
-  proposal: ProposalFollowButton_proposal
+  proposal: ProposalFollowButton_proposal,
 };
 type State = {
-  isHovering: boolean
+  isHovering: boolean,
 };
 
 export class ProposalFollowButton extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      isHovering: false
+      isHovering: false,
     };
   }
 
@@ -53,14 +53,14 @@ export class ProposalFollowButton extends React.Component<Props, State> {
           onMouseOver={() => {
             if (proposal.viewerIsFollowing) {
               this.setState({
-                isHovering: true
+                isHovering: true,
               });
             }
           }}
           onMouseOut={() => {
             if (proposal.viewerIsFollowing) {
               this.setState({
-                isHovering: false
+                isHovering: false,
               });
             }
           }}
@@ -72,11 +72,11 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                     actionType: UPDATE_ALERT,
                     alert: {
                       bsStyle: 'success',
-                      content: 'flash-message-unfollow'
-                    }
+                      content: 'flash-message-unfollow',
+                    },
                   });
                   return true;
-                }
+                },
               );
             }
             return FollowProposalMutation.commit({ input: { proposalId: proposal.id } }).then(
@@ -85,12 +85,12 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                   actionType: UPDATE_ALERT,
                   alert: {
                     bsStyle: 'success',
-                    content: 'flash-message-following'
-                  }
+                    content: 'flash-message-following',
+                  },
                 });
 
                 return true;
-              }
+              },
             );
           }}
           id={buttonFollowId}>
@@ -108,5 +108,5 @@ export default createFragmentContainer(
       id
       viewerIsFollowing
     }
-  `
+  `,
 );

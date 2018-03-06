@@ -10,12 +10,12 @@ import type { State } from '../../../types';
 export const LoginSocialButtons = React.createClass({
   propTypes: {
     features: PropTypes.object.isRequired,
-    prefix: PropTypes.string
+    prefix: PropTypes.string,
   },
 
   getDefaultProps() {
     return {
-      prefix: 'login.'
+      prefix: 'login.',
     };
   },
 
@@ -34,11 +34,11 @@ export const LoginSocialButtons = React.createClass({
         </p>
       </div>
     );
-  }
+  },
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  features: state.default.features
+  features: state.default.features,
 });
 
 export default connect(mapStateToProps)(LoginSocialButtons);

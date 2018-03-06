@@ -18,18 +18,18 @@ type Props = {
   disabled?: ?boolean,
   errors?: Array<string>,
   value: ?Object,
-  change: (field: string, value: any) => void
+  change: (field: string, value: any) => void,
 };
 
 type State = {
-  otherChecked: boolean
+  otherChecked: boolean,
 };
 
 export class MultipleChoiceRadio extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      otherChecked: false
+      otherChecked: false,
     };
   }
 

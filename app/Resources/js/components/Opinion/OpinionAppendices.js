@@ -5,7 +5,7 @@ import OpinionAppendix from './OpinionAppendix';
 
 const OpinionAppendices = React.createClass({
   propTypes: {
-    opinion: React.PropTypes.object.isRequired
+    opinion: React.PropTypes.object.isRequired,
   },
 
   isVersion() {
@@ -46,7 +46,7 @@ const OpinionAppendices = React.createClass({
         })}
       </div>
     );
-  }
+  },
 });
 
 export default OpinionAppendices;

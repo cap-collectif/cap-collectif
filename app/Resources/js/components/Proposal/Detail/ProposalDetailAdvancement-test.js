@@ -9,15 +9,15 @@ describe('<ProposalDetailAdvancement />', () => {
       {
         step: {
           id: 2,
-          position: 2
+          position: 2,
         },
         status: {
           name: 'En cours',
-          color: 'info'
-        }
-      }
+          color: 'info',
+        },
+      },
     ],
-    progressSteps: []
+    progressSteps: [],
   };
   const project = {
     steps: [
@@ -27,7 +27,7 @@ describe('<ProposalDetailAdvancement />', () => {
         position: 1,
         endAt: 'endAt',
         startAt: 'startAt',
-        title: 'Collecte 1'
+        title: 'Collecte 1',
       },
       {
         id: 3,
@@ -35,7 +35,7 @@ describe('<ProposalDetailAdvancement />', () => {
         position: 3,
         endAt: 'endAt',
         startAt: 'startAt',
-        title: 'Selection 2'
+        title: 'Selection 2',
       },
       {
         id: 2,
@@ -43,9 +43,9 @@ describe('<ProposalDetailAdvancement />', () => {
         position: 2,
         endAt: 'endAt',
         startAt: 'startAt',
-        title: 'Selection 1'
-      }
-    ]
+        title: 'Selection 1',
+      },
+    ],
   };
 
   it('should render steps with according colors', () => {

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Model\ModerableInterface;
+use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Error\UserError;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -16,11 +17,11 @@ class GlobalIdResolver
         $this->container = $container;
     }
 
-    public function resolveMultiple(array $array): array
+    public function resolveMultiple(array $array, $user): array
     {
         $results = [];
         foreach ($array as $value) {
-            $results[] = $this->resolve($value);
+            $results[] = $this->resolve($value, $user);
         }
 
         return $results;

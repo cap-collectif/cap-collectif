@@ -30,5 +30,5 @@ export default [
   'voila.fr',
   'wanadoo.fr',
   'yahoo.com',
-  'yahoo.fr'
+  'yahoo.fr',
 ];

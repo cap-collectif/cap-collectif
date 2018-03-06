@@ -10,12 +10,12 @@ const RankingBox = React.createClass({
     listType: PropTypes.oneOf(['pickBox', 'choiceBox']),
     fieldId: PropTypes.any.isRequired,
     moveItem: PropTypes.func.isRequired,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
   },
 
   getDefaultProps() {
     return {
-      disabled: false
+      disabled: false,
     };
   },
 
@@ -23,7 +23,7 @@ const RankingBox = React.createClass({
     const { spotsNb, items, listType, moveItem, fieldId, disabled } = this.props;
     const className = classNames({
       'ranking__choice-box__choices': listType === 'choiceBox',
-      'ranking__pick-box__choices': listType === 'pickBox'
+      'ranking__pick-box__choices': listType === 'pickBox',
     });
     return (
       <div className={className}>
@@ -32,12 +32,12 @@ const RankingBox = React.createClass({
           const arrowFunctions =
             listType === 'pickBox'
               ? {
-                  right: it => moveItem('choiceBox', spotsNb, it)
+                  right: it => moveItem('choiceBox', spotsNb, it),
                 }
               : {
                   up: i > 0 ? it => moveItem('choiceBox', i - 1, it) : null,
                   down: i < items.length - 1 ? it => moveItem('choiceBox', i + 1, it) : null,
-                  left: it => moveItem('pickBox', spotsNb, it)
+                  left: it => moveItem('pickBox', spotsNb, it),
                 };
           return (
             <RankingSpot key={i} onDrop={it => moveItem(listType, i, it)}>
@@ -56,7 +56,7 @@ const RankingBox = React.createClass({
         })}
       </div>
     );
-  }
+  },
 });
 
 export default RankingBox;

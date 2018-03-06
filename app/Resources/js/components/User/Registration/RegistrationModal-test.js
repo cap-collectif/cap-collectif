@@ -9,7 +9,7 @@ describe('<RegistrationModal />', () => {
   const props = {
     onClose: jest.fn(),
     onSubmit: jest.fn(),
-    submitting: false
+    submitting: false,
   };
 
   it('renders hidden modal if not shown', () => {
@@ -37,7 +37,7 @@ describe('<RegistrationModal />', () => {
     const top = 'Texte du haut';
     const bottom = 'Texte du bas';
     const wrapper = shallow(
-      <RegistrationModal show features={{}} textTop={top} textBottom={bottom} {...props} />
+      <RegistrationModal show features={{}} textTop={top} textBottom={bottom} {...props} />,
     );
     const topText = wrapper.find('Alert');
     expect(topText).toHaveLength(1);

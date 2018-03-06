@@ -12,7 +12,7 @@ export const ProposalUserVoteItem = React.createClass({
   propTypes: {
     dispatch: PropTypes.func.isRequired,
     proposal: PropTypes.object.isRequired,
-    step: PropTypes.object.isRequired
+    step: PropTypes.object.isRequired,
   },
 
   render() {
@@ -56,7 +56,7 @@ export const ProposalUserVoteItem = React.createClass({
         </Col>
       </Row>
     );
-  }
+  },
 });
 
 export default connect()(ProposalUserVoteItem);

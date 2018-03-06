@@ -17,11 +17,11 @@ type Step = {
   title: string,
   startAt: ?string,
   endAt: ?string,
-  timeless: boolean
+  timeless: boolean,
 };
 
 type Props = {
-  step: Step
+  step: Step,
 };
 
 export class ConsultationPropositionBox extends React.Component<Props> {
@@ -30,7 +30,7 @@ export class ConsultationPropositionBox extends React.Component<Props> {
 
     const renderSectionRecursiveList = ({
       error,
-      props
+      props,
     }: { props: ?ConsultationPropositionBoxQueryResponse } & ReadyState) => {
       if (error) {
         console.log(error); // eslint-disable-line no-console
@@ -89,7 +89,7 @@ export class ConsultationPropositionBox extends React.Component<Props> {
             }
           `}
           variables={{
-            consultationId: step.id
+            consultationId: step.id,
           }}
           render={renderSectionRecursiveList}
         />

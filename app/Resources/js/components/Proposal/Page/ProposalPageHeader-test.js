@@ -9,19 +9,19 @@ describe('<ProposalPageHeader />', () => {
   const proposal = {
     title: 'titre',
     theme: {
-      title: 'titre du theme'
+      title: 'titre du theme',
     },
     author: {
       username: 'userAdmin',
       displayName: 'userAdmin',
       media: {
-        url: 'http://media.url'
-      }
+        url: 'http://media.url',
+      },
     },
     createdAt: '2015-01-01 00:00:00',
     updatedAt: '2015-01-05 00:00:00',
     publicationStatus: 'PUBLISHED',
-    show_url: 'true'
+    show_url: 'true',
   };
   // $FlowFixMe $refType
   const proposalWithoutTheme = {
@@ -31,13 +31,13 @@ describe('<ProposalPageHeader />', () => {
       username: 'userAdmin',
       displayName: 'userAdmin',
       media: {
-        url: 'http://media.url'
-      }
+        url: 'http://media.url',
+      },
     },
     createdAt: '2015-01-01 00:00:00',
     updatedAt: '2015-01-05 00:00:00',
     publicationStatus: 'PUBLISHED',
-    show_url: 'true'
+    show_url: 'true',
   };
 
   const props = {
@@ -47,16 +47,16 @@ describe('<ProposalPageHeader />', () => {
       selections: [],
       votesByStepId: {
         selectionstep1: [],
-        collectstep1: []
+        collectstep1: [],
       },
       votableStepId: 'selectionstep1',
       votesCountByStepId: {
         selectionstep1: 0,
-        collectstep1: 0
+        collectstep1: 0,
       },
       isDraft: false,
-      viewerCanSeeEvaluation: true
-    }
+      viewerCanSeeEvaluation: true,
+    },
   };
 
   it('should render a proposal header', () => {

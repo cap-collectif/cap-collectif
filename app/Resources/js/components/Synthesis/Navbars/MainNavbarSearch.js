@@ -8,14 +8,14 @@ const MainNavbarSearch = React.createClass({
   displayName: 'MainNavbarSearch',
 
   contextTypes: {
-    router: PropTypes.object.isRequired
+    router: PropTypes.object.isRequired,
   },
 
   mixins: [DeepLinkStateMixin],
 
   getInitialState() {
     return {
-      searchTerm: ''
+      searchTerm: '',
     };
   },
 
@@ -45,7 +45,7 @@ const MainNavbarSearch = React.createClass({
         </form>
       </Navbar.Form>
     );
-  }
+  },
 });
 
 export default MainNavbarSearch;

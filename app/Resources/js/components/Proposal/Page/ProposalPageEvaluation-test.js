@@ -24,27 +24,27 @@ describe('<ProposalPageEvaluation />', () => {
             type: 'text',
             isOtherAllowed: false,
             validationRule: null,
-            choices: []
-          }
-        ]
-      }
+            choices: [],
+          },
+        ],
+      },
     },
     evaluation: {
       version: 1,
       responses: [
         {
           question: { id: 'question1' },
-          value: 'Paul'
-        }
-      ]
-    }
+          value: 'Paul',
+        },
+      ],
+    },
   };
 
   const props = {
     ...formMock,
     proposal,
     intl: intlMock,
-    responses: []
+    responses: [],
   };
 
   it('render a form if viewer is an evaluer', () => {
@@ -57,7 +57,7 @@ describe('<ProposalPageEvaluation />', () => {
     proposal: { ...proposal, viewerIsAnEvaluer: false },
     ...formMock,
     intl: intlMock,
-    responses: []
+    responses: [],
   };
 
   it('render a disabled form if viewer is not an evaluer', () => {

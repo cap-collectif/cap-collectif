@@ -9,10 +9,10 @@ import Loader from '../Utils/Loader';
 
 const renderOpinionList = ({
   error,
-  props
+  props,
 }: {
   error: ?Error,
-  props: ?{ contributionsBySection: Array<Object> }
+  props: ?{ contributionsBySection: Array<Object> },
 }) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
@@ -35,7 +35,7 @@ export const OpinionList = React.createClass({
   propTypes: {
     section: PropTypes.object.isRequired,
     consultation: PropTypes.object.isRequired,
-    intl: PropTypes.object.isRequired
+    intl: PropTypes.object.isRequired,
   },
 
   render() {
@@ -107,7 +107,7 @@ export const OpinionList = React.createClass({
               `}
               variables={{
                 sectionId: section.id,
-                limit: consultation.opinionCountShownBySection
+                limit: consultation.opinionCountShownBySection,
               }}
               render={renderOpinionList}
             />
@@ -122,7 +122,7 @@ export const OpinionList = React.createClass({
         )}
       </div>
     );
-  }
+  },
 });
 
 const container = injectIntl(OpinionList);
@@ -142,5 +142,5 @@ export default createFragmentContainer(container, {
         position
       }
     }
-  `
+  `,
 });

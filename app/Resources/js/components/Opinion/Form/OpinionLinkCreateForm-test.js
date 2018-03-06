@@ -10,7 +10,7 @@ describe('<OpinionLinkCreateForm />', () => {
     availableTypes,
     currentType: availableTypes[0],
     handleSubmit: jest.fn(),
-    opinion: {}
+    opinion: {},
   };
 
   it('renders correctly', () => {

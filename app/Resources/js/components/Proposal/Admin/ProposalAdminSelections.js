@@ -22,7 +22,7 @@ const selector = formValueSelector(formName);
 
 type FormValues = Object;
 type PassedProps = {
-  proposal: ProposalAdminSelections_proposal
+  proposal: ProposalAdminSelections_proposal,
 };
 
 type Props = PassedProps & {
@@ -35,7 +35,7 @@ type Props = PassedProps & {
   valid: boolean,
   submitSucceeded: boolean,
   submitFailed: boolean,
-  submitting: boolean
+  submitting: boolean,
 };
 
 const validate = () => {
@@ -56,9 +56,9 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
           input: {
             stepId: selection.step,
             proposalId: proposal.id,
-            statusId: selection.status
-          }
-        })
+            statusId: selection.status,
+          },
+        }),
       );
     }
     if (selection.selected && previousSelection && previousSelection.status !== selection.status) {
@@ -67,9 +67,9 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
           input: {
             stepId: selection.step,
             proposalId: proposal.id,
-            statusId: selection.status
-          }
-        })
+            statusId: selection.status,
+          },
+        }),
       );
     }
     if (!selection.selected && previousSelection) {
@@ -77,9 +77,9 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
         UnselectProposalMutation.commit({
           input: {
             stepId: selection.step,
-            proposalId: proposal.id
-          }
-        })
+            proposalId: proposal.id,
+          },
+        }),
       );
     }
   }
@@ -91,10 +91,10 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
           progressSteps: values.progressSteps.map(v => ({
             title: v.title,
             startAt: v.startAt,
-            endAt: v.endAt
-          }))
-        }
-      })
+            endAt: v.endAt,
+          })),
+        },
+      }),
     );
   }
 
@@ -103,9 +103,9 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       ChangeCollectStatusMutation.commit({
         input: {
           proposalId: proposal.id,
-          statusId: values.collectStatus
-        }
-      })
+          statusId: values.collectStatus,
+        },
+      }),
     );
   }
   return Promise.all(promises);
@@ -124,7 +124,7 @@ export class ProposalAdminSelections extends Component<Props> {
       valid,
       submitSucceeded,
       submitFailed,
-      submitting
+      submitting,
     } = this.props;
     const steps = proposal.project.steps;
     const collectStep = steps.filter(step => step.kind === 'collect')[0];
@@ -252,7 +252,7 @@ const form = reduxForm({
   onSubmit,
   validate,
   enableReinitialize: true,
-  form: formName
+  form: formName,
 })(ProposalAdminSelections);
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: PassedProps) => {
@@ -266,17 +266,17 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: PassedPr
       collectStatus: props.proposal.status ? props.proposal.status.id : null,
       selections: selectionSteps.map(step => {
         const selectionAsArray = props.proposal.selections.filter(
-          selection => selection.step.id === step.id
+          selection => selection.step.id === step.id,
         );
         const selection = selectionAsArray.length ? selectionAsArray[0] : null;
         const selected = selection != null;
         return {
           step: step.id,
           selected,
-          status: selection && selection.status ? selection.status.id : null
+          status: selection && selection.status ? selection.status.id : null,
         };
-      })
-    }
+      }),
+    },
   };
 };
 
@@ -325,5 +325,5 @@ export default createFragmentContainer(
         }
       }
     }
-  `
+  `,
 );

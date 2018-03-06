@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 const ResponseValue = React.createClass({
   propTypes: {
-    response: PropTypes.object.isRequired
+    response: PropTypes.object.isRequired,
   },
 
   render() {
@@ -43,7 +43,7 @@ const ResponseValue = React.createClass({
       );
     }
     return <p>{response.value}</p>;
-  }
+  },
 });
 
 export default ResponseValue;

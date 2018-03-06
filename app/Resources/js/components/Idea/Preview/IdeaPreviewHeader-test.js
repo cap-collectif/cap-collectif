@@ -8,7 +8,7 @@ import UserLink from '../../User/UserLink';
 
 const idea = {
   id: 1,
-  author: {}
+  author: {},
 };
 
 describe('<IdeaPreviewHeader />', () => {

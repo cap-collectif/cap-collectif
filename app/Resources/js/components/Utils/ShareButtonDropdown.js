@@ -11,7 +11,7 @@ const ShareButtonDropdown = React.createClass({
     url: PropTypes.string.isRequired,
     className: PropTypes.string,
     bsStyle: PropTypes.string,
-    style: PropTypes.object
+    style: PropTypes.object,
   },
 
   getDefaultProps() {
@@ -19,13 +19,13 @@ const ShareButtonDropdown = React.createClass({
       id: 'share-button',
       className: '',
       title: '',
-      style: {}
+      style: {},
     };
   },
 
   getInitialState() {
     return {
-      show: false
+      show: false,
     };
   },
 
@@ -38,7 +38,7 @@ const ShareButtonDropdown = React.createClass({
     const { title } = this.props;
     this.openSharer(
       `http://www.facebook.com/sharer.php?u=${this.getEncodedUrl()}&t=${title}`,
-      'Facebook'
+      'Facebook',
     );
   },
 
@@ -46,7 +46,7 @@ const ShareButtonDropdown = React.createClass({
     const { title } = this.props;
     this.openSharer(
       `https://twitter.com/share?url=${this.getEncodedUrl()}&text=${title}`,
-      'Twitter'
+      'Twitter',
     );
   },
 
@@ -54,7 +54,7 @@ const ShareButtonDropdown = React.createClass({
     const { title } = this.props;
     this.openSharer(
       `https://www.linkedin.com/shareArticle?mini=true&url=${this.getEncodedUrl()}&text=${title}`,
-      'Linkedin'
+      'Linkedin',
     );
   },
 
@@ -66,19 +66,19 @@ const ShareButtonDropdown = React.createClass({
     window.open(
       href,
       name,
-      `top=${top},left=${left},menubar=0,toolbar=0,status=0,width=${width},height=${height}`
+      `top=${top},left=${left},menubar=0,toolbar=0,status=0,width=${width},height=${height}`,
     );
   },
 
   showModal() {
     this.setState({
-      show: true
+      show: true,
     });
   },
 
   hideModal() {
     this.setState({
-      show: false
+      show: false,
     });
   },
 
@@ -139,11 +139,11 @@ const ShareButtonDropdown = React.createClass({
         {this.renderModal()}
       </div>
     );
-  }
+  },
 });
 
 const mapStateToProps = state => ({
-  enabled: state.default.features.share_buttons
+  enabled: state.default.features.share_buttons,
 });
 
 export default connect(mapStateToProps)(ShareButtonDropdown);

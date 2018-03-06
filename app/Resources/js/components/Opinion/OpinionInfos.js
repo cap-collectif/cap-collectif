@@ -9,7 +9,7 @@ const OpinionInfos = React.createClass({
   propTypes: {
     opinion: PropTypes.object.isRequired,
     rankingThreshold: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.number]),
-    opinionTerm: PropTypes.number
+    opinionTerm: PropTypes.number,
   },
 
   isVersion() {
@@ -86,21 +86,21 @@ const OpinionInfos = React.createClass({
             <FormattedMessage
               id="opinion.ranking.versions"
               values={{
-                max: rankingThreshold
+                max: rankingThreshold,
               }}
             />
           ) : opinionTerm === 0 ? (
             <FormattedMessage
               id="opinion.ranking.opinions"
               values={{
-                max: rankingThreshold
+                max: rankingThreshold,
               }}
             />
           ) : (
             <FormattedMessage
               id="opinion.ranking.articles"
               values={{
-                max: rankingThreshold
+                max: rankingThreshold,
               }}
             />
           )}
@@ -122,7 +122,7 @@ const OpinionInfos = React.createClass({
         {this.renderRankingLabel()}
       </p>
     );
-  }
+  },
 });
 
 export default OpinionInfos;

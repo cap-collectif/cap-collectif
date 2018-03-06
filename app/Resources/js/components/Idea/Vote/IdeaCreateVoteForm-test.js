@@ -10,7 +10,7 @@ const props = {
   dispatch: jest.fn(),
   idea: {},
   isSubmitting: false,
-  anonymous: false
+  anonymous: false,
 };
 
 describe('<IdeaCreateVoteForm />', () => {

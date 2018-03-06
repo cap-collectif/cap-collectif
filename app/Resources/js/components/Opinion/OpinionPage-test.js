@@ -8,7 +8,7 @@ describe('<OpinionPage />', () => {
   const props = {
     opinionId: 'opinion1',
     versionId: null,
-    fetchOpinionVotes: jest.fn()
+    fetchOpinionVotes: jest.fn(),
   };
 
   it('should render correctly', () => {

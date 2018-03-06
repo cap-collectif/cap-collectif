@@ -18,14 +18,14 @@ const onSubmit = (data: Object, dispatch: Dispatch, props: Object) => {
         appendixType: availableTypes
           .filter(type => type.id === data.opinionType)[0]
           .appendixTypes.filter(t => t.title === key)[0].id,
-        body: data[key]
+        body: data[key],
       };
     });
   const form = {
     OpinionType: data.opinionType,
     title: data.title,
     body: data.body,
-    appendices
+    appendices,
   };
   return Fetcher.post(`/opinions/${opinion.id}/links`, form)
     .then(json)
@@ -39,7 +39,7 @@ export const OpinionLinkCreateForm = React.createClass({
     availableTypes: PropTypes.array.isRequired,
     currentType: PropTypes.object.isRequired,
     opinion: PropTypes.object.isRequired,
-    handleSubmit: PropTypes.func.isRequired
+    handleSubmit: PropTypes.func.isRequired,
   },
 
   render() {
@@ -88,13 +88,13 @@ export const OpinionLinkCreateForm = React.createClass({
         ))}
       </form>
     );
-  }
+  },
 });
 
 type PassedProps = { availableTypes: Array<Object> };
 const mapStateToProps: MapStateToProps<*, *, *> = (
   state: State,
-  { availableTypes }: PassedProps
+  { availableTypes }: PassedProps,
 ) => {
   const currentTypeId = formValueSelector(formName)(state, 'opinionType');
   const initialType = availableTypes[0];
@@ -103,21 +103,21 @@ const mapStateToProps: MapStateToProps<*, *, *> = (
       ? availableTypes.filter(t => t.id === currentTypeId)[0]
       : initialType,
     initialValues: {
-      opinionType: initialType.id
-    }
+      opinionType: initialType.id,
+    },
   };
 };
 type Props = {
   currentType: ?Object,
   initialValues: {
-    opinionType: ?Uuid
-  }
+    opinionType: ?Uuid,
+  },
 };
 const connector: Connector<PassedProps, Props> = connect(mapStateToProps);
 
 export default connector(
   reduxForm({
     form: formName,
-    onSubmit
-  })(OpinionLinkCreateForm)
+    onSubmit,
+  })(OpinionLinkCreateForm),
 );

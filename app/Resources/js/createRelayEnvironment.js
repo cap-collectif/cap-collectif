@@ -25,7 +25,7 @@ function fetchQuery(operation, variables, cacheConfig, uploadables) {
   return Fetcher.graphql({
     operationName: operation.name,
     query: operation.text,
-    variables
+    variables,
   });
 }
 
@@ -35,5 +35,5 @@ export const graphqlError = (
 
 export default new Environment({
   network: Network.create(fetchQuery),
-  store: new Store(new RecordSource())
+  store: new Store(new RecordSource()),
 });

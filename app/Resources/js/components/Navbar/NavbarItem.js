@@ -7,7 +7,7 @@ const NavbarItem = React.createClass({
     isChild: PropTypes.bool,
     refCallback: PropTypes.func,
     className: PropTypes.string,
-    onKeyDown: PropTypes.func
+    onKeyDown: PropTypes.func,
   },
 
   getDefaultProps() {
@@ -15,7 +15,7 @@ const NavbarItem = React.createClass({
       isChild: false,
       refCallback: () => {},
       className: '',
-      onKeyDown: () => {}
+      onKeyDown: () => {},
     };
   },
 
@@ -77,7 +77,7 @@ const NavbarItem = React.createClass({
       );
     }
     return null;
-  }
+  },
 });
 
 export default NavbarItem;

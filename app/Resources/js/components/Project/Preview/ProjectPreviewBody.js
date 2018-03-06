@@ -11,7 +11,7 @@ import ProjectPreviewCounters from './ProjectPreviewCounters';
 
 type Props = {
   project: Object,
-  hasSecondTitle?: boolean
+  hasSecondTitle?: boolean,
 };
 
 const getStepsFilter = (project: Object) => {
@@ -30,7 +30,7 @@ const getStepsFilter = (project: Object) => {
     stepClosed,
     stepFuture,
     stepOpen,
-    stepContinuousParticipation
+    stepContinuousParticipation,
   };
 };
 
@@ -129,7 +129,7 @@ export class ProjectPreviewBody extends React.Component<Props> {
                   marginLeft: 5,
                   display: 'inline-block',
                   height: 16,
-                  width: 16
+                  width: 16,
                 }}
                 version="1.1"
                 id="Calque_1"

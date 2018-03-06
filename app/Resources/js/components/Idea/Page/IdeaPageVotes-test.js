@@ -7,25 +7,25 @@ const fetchIdeaVotes = () => {};
 const idea = {
   id: 1,
   votesCount: 2,
-  votes: [{}, {}]
+  votes: [{}, {}],
 };
 
 const ideaWithNoVotes = {
   id: 1,
   votesCount: 0,
-  votes: []
+  votes: [],
 };
 
 const ideaWithLoadsOfVotes = {
   id: 1,
   votesCount: 11,
-  votes: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
+  votes: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}],
 };
 
 describe('<IdeaPageVotes />', () => {
   it('it should render nothing when idea has no votes', () => {
     const wrapper = shallow(
-      <IdeaPageVotes fetchIdeaVotes={fetchIdeaVotes} idea={ideaWithNoVotes} />
+      <IdeaPageVotes fetchIdeaVotes={fetchIdeaVotes} idea={ideaWithNoVotes} />,
     );
     expect(wrapper.children()).toHaveLength(0);
     expect(wrapper).toMatchSnapshot();
@@ -49,7 +49,7 @@ describe('<IdeaPageVotes />', () => {
 
   it('it should render show more button when idea has too much votes', () => {
     const wrapper = shallow(
-      <IdeaPageVotes fetchIdeaVotes={fetchIdeaVotes} idea={ideaWithLoadsOfVotes} />
+      <IdeaPageVotes fetchIdeaVotes={fetchIdeaVotes} idea={ideaWithLoadsOfVotes} />,
     );
     expect(wrapper.find('.idea__votes__show-more')).toHaveLength(1);
     expect(wrapper).toMatchSnapshot();

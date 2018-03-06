@@ -10,7 +10,7 @@ export const ProposalPageMetadata = React.createClass({
     showDistricts: PropTypes.bool.isRequired,
     showCategories: PropTypes.bool.isRequired,
     showNullEstimation: PropTypes.bool.isRequired,
-    showThemes: PropTypes.bool.isRequired
+    showThemes: PropTypes.bool.isRequired,
   },
 
   render() {
@@ -59,7 +59,7 @@ export const ProposalPageMetadata = React.createClass({
         )}
       </div>
     );
-  }
+  },
 });
 
 export default ProposalPageMetadata;

@@ -11,7 +11,7 @@ import { PROPOSAL_FOLLOWERS_TO_SHOW } from '../../../constants/ProposalConstants
 type Props = {
   proposal: ProposalPageFollowers_proposal,
   relay: RelayPaginationProp,
-  pageAdmin: boolean
+  pageAdmin: boolean,
 };
 
 export class ProposalPageFollowers extends React.Component<Props> {
@@ -101,14 +101,14 @@ export default createPaginationContainer(
     getFragmentVariables(prevVars, totalCount) {
       return {
         ...prevVars,
-        count: totalCount
+        count: totalCount,
       };
     },
     getVariables(props, { count, cursor }) {
       return {
         count,
         cursor,
-        proposalId: props.proposal.id
+        proposalId: props.proposal.id,
       };
     },
     query: graphql`
@@ -117,6 +117,6 @@ export default createPaginationContainer(
           ...ProposalPageFollowers_proposal
         }
       }
-    `
-  }
+    `,
+  },
 );

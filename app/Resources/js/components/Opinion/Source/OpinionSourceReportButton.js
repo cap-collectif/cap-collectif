@@ -8,7 +8,7 @@ import { submitSourceReport } from '../../../redux/modules/report';
 const OpinionSourceReportButton = React.createClass({
   propTypes: {
     dispatch: PropTypes.func.isRequired,
-    source: PropTypes.object.isRequired
+    source: PropTypes.object.isRequired,
   },
 
   handleReport(data) {
@@ -28,7 +28,7 @@ const OpinionSourceReportButton = React.createClass({
         buttonClassName="source__btn--report"
       />
     );
-  }
+  },
 });
 
 export default connect()(OpinionSourceReportButton);

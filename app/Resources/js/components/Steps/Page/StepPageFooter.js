@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 
 const StepPageFooter = React.createClass({
   propTypes: {
-    step: PropTypes.object.isRequired
+    step: PropTypes.object.isRequired,
   },
 
   render() {
@@ -20,7 +20,7 @@ const StepPageFooter = React.createClass({
         </div>
       </div>
     );
-  }
+  },
 });
 
 export default StepPageFooter;

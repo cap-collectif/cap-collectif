@@ -6,7 +6,7 @@ type State = void;
 
 export default class UserLink extends React.Component<Props, State> {
   static defaultProps = {
-    className: ''
+    className: '',
   };
 
   render() {

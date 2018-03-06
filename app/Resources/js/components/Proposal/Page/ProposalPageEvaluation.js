@@ -10,7 +10,7 @@ import ChangeProposalEvaluationMutation from '../../../mutations/ChangeProposalE
 import {
   validate,
   formatInitialResponses,
-  type ResponsesValues
+  type ResponsesValues,
 } from '../Admin/ProposalAdminNotationForm';
 import { renderResponses, formatSubmitResponses } from '../../../utils/responsesHelper';
 import type { ProposalPageEvaluation_proposal } from './__generated__/ProposalPageEvaluation_proposal.graphql';
@@ -18,7 +18,7 @@ import type { Dispatch, State } from '../../../types';
 
 type FormValues = { responses: ResponsesValues };
 type RelayProps = {
-  proposal: ProposalPageEvaluation_proposal
+  proposal: ProposalPageEvaluation_proposal,
 };
 type Props = FormProps & FormValues & RelayProps & { intl: IntlShape };
 
@@ -32,9 +32,9 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
         version: props.proposal.evaluation ? props.proposal.evaluation.version : 1,
         responses: formatSubmitResponses(
           values.responses,
-          props.proposal.form.evaluationForm.questions
-        )
-      }
+          props.proposal.form.evaluationForm.questions,
+        ),
+      },
     });
   }
 };
@@ -53,7 +53,7 @@ export class ProposalPageEvaluation extends React.Component<Props> {
       proposal,
       responses,
       change,
-      intl
+      intl,
     } = this.props;
     const evaluationForm = proposal.form.evaluationForm;
     if (!evaluationForm) {
@@ -108,16 +108,16 @@ const form = injectIntl(
     onSubmit,
     validate,
     enableReinitialize: true,
-    form: formName
-  })(ProposalPageEvaluation)
+    form: formName,
+  })(ProposalPageEvaluation),
 );
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
   responses: formValueSelector(formName)(state, 'responses'),
   initialValues: {
     version: props.proposal.evaluation ? props.proposal.evaluation.version : 1,
-    responses: formatInitialResponses(props)
-  }
+    responses: formatInitialResponses(props),
+  },
 });
 
 const container = connect(mapStateToProps)(form);
@@ -173,5 +173,5 @@ export default createFragmentContainer(
         }
       }
     }
-  `
+  `,
 );

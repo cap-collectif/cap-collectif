@@ -9,7 +9,7 @@ describe('<MainNavbar />', () => {
     const wrapper = shallow(<MainNavbar />);
     expect(wrapper.find('Uncontrolled(Navbar)')).toHaveLength(1);
     expect(wrapper.find('Uncontrolled(Navbar)').prop('className')).toEqual(
-      'synthesis__main-navbar'
+      'synthesis__main-navbar',
     );
     expect(wrapper.find('MainNavbarHeader')).toHaveLength(1);
     expect(wrapper.find('MainNavbarSearch')).toHaveLength(1);

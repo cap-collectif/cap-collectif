@@ -14,7 +14,7 @@ type Props = {
   className?: string,
   formWrapperClassName?: string,
   submitting: boolean,
-  dispatch: Dispatch
+  dispatch: Dispatch,
 };
 
 export class IdeaVoteBox extends React.Component<Props> {
@@ -59,7 +59,7 @@ export class IdeaVoteBox extends React.Component<Props> {
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   user: state.user.user,
-  submitting: isSubmitting('IdeaVoteForm')(state)
+  submitting: isSubmitting('IdeaVoteForm')(state),
 });
 
 export default connect(mapStateToProps)(IdeaVoteBox);

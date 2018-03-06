@@ -4,13 +4,13 @@ import ArgumentVoteButton from './ArgumentVoteButton';
 
 const ArgumentVoteBox = React.createClass({
   propTypes: {
-    argument: React.PropTypes.object.isRequired
+    argument: React.PropTypes.object.isRequired,
   },
 
   getInitialState() {
     const { argument } = this.props;
     return {
-      hasVoted: argument.hasUserVoted
+      hasVoted: argument.hasUserVoted,
     };
   },
 
@@ -46,7 +46,7 @@ const ArgumentVoteBox = React.createClass({
         </span>
       </span>
     );
-  }
+  },
 });
 
 export default ArgumentVoteBox;

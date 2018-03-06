@@ -14,7 +14,7 @@ describe('<RegistrationForm />', () => {
     cguName: 'la charte',
     cguLink: '/charte',
     dynamicFields: [],
-    organizationName: 'Cap Collectif'
+    organizationName: 'Cap Collectif',
   };
 
   it('renders a form with inputs and a captcha', () => {
@@ -24,7 +24,7 @@ describe('<RegistrationForm />', () => {
 
   it('renders a form with user_type select if enabled', () => {
     const wrapper = shallow(
-      <RegistrationForm {...props} userTypes={[{ id: 1, name: 'type_1' }]} addUserTypeField />
+      <RegistrationForm {...props} userTypes={[{ id: 1, name: 'type_1' }]} addUserTypeField />,
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -45,10 +45,10 @@ describe('<RegistrationForm />', () => {
             private: false,
             question: 'Champ pas facultatif',
             slug: 'champ-pas-facultatif',
-            id: 6
-          }
+            id: 6,
+          },
         ]}
-      />
+      />,
     );
     expect(wrapper).toMatchSnapshot();
   });

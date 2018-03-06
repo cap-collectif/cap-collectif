@@ -8,7 +8,7 @@ import type { EvaluationsIndexPageQueryResponse } from './__generated__/Evaluati
 
 export const render = ({
   error,
-  props
+  props,
 }: ReadyState & { props: ?EvaluationsIndexPageQueryResponse }) => {
   if (error) {
     return graphqlError;

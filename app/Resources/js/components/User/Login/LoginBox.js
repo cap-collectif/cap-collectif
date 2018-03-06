@@ -9,7 +9,7 @@ import type { State } from '../../../types';
 export const LoginBox = React.createClass({
   propTypes: {
     textTop: PropTypes.string,
-    textBottom: PropTypes.string
+    textBottom: PropTypes.string,
   },
 
   render() {
@@ -32,12 +32,12 @@ export const LoginBox = React.createClass({
         )}
       </div>
     );
-  }
+  },
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   textTop: state.default.parameters['login.text.top'],
-  textBottom: state.default.parameters['login.text.bottom']
+  textBottom: state.default.parameters['login.text.bottom'],
 });
 
 export default connect(mapStateToProps)(LoginBox);

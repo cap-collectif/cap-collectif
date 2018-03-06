@@ -10,19 +10,19 @@ import SubmitButton from '../../Form/SubmitButton';
 const OpinionDelete = React.createClass({
   propTypes: {
     opinion: PropTypes.object.isRequired,
-    user: PropTypes.object
+    user: PropTypes.object,
   },
 
   getDefaultProps() {
     return {
-      user: null
+      user: null,
     };
   },
 
   getInitialState() {
     return {
       showModal: false,
-      isSubmitting: false
+      isSubmitting: false,
     };
   },
 
@@ -105,12 +105,12 @@ const OpinionDelete = React.createClass({
     }
 
     return null;
-  }
+  },
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => {
   return {
-    user: state.user.user
+    user: state.user.user,
   };
 };
 

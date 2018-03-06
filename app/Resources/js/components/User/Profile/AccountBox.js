@@ -14,7 +14,7 @@ export const AccountBox = React.createClass({
     user: PropTypes.object.isRequired,
     submitting: PropTypes.bool.isRequired,
     invalid: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
   },
 
   render() {
@@ -39,13 +39,13 @@ export const AccountBox = React.createClass({
         <ConfirmPasswordModal />
       </Panel>
     );
-  }
+  },
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   user: state.user.user,
   submitting: state.user.isSubmittingAccountForm,
-  invalid: isInvalid('account')(state)
+  invalid: isInvalid('account')(state),
 });
 
 export default connect(mapStateToProps)(AccountBox);

@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 const CommentEdit = React.createClass({
   propTypes: {
-    comment: React.PropTypes.object
+    comment: React.PropTypes.object,
   },
 
   render() {
@@ -18,7 +18,7 @@ const CommentEdit = React.createClass({
     }
 
     return <a />;
-  }
+  },
 });
 
 export default CommentEdit;

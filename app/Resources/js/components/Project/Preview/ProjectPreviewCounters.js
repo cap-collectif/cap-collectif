@@ -4,7 +4,7 @@ import ProjectPreviewCounter from './ProjectPreviewCounter';
 
 const ProjectPreviewCounters = React.createClass({
   propTypes: {
-    project: React.PropTypes.object.isRequired
+    project: React.PropTypes.object.isRequired,
   },
 
   getNbCounters() {
@@ -40,7 +40,7 @@ const ProjectPreviewCounters = React.createClass({
         />
       </div>
     );
-  }
+  },
 });
 
 export default ProjectPreviewCounters;

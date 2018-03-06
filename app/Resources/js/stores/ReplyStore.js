@@ -7,7 +7,7 @@ import {
   UPDATE_REPLY_SUCCESS,
   UPDATE_REPLY_FAILURE,
   DELETE_REPLY_SUCCESS,
-  DELETE_REPLY_FAILURE
+  DELETE_REPLY_FAILURE,
 } from '../constants/ReplyConstants';
 
 class ReplyStore extends BaseStore {

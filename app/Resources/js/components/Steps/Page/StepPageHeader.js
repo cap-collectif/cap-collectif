@@ -6,7 +6,7 @@ import DatesInterval from './../../Utils/DatesInterval';
 import StepInfos from './StepInfos';
 
 type Props = {
-  step: Object
+  step: Object,
 };
 
 export class StepPageHeader extends React.Component<Props> {
@@ -59,7 +59,7 @@ export class StepPageHeader extends React.Component<Props> {
               <FormattedMessage
                 id="proposal.vote.threshold.step"
                 values={{
-                  num: step.voteThreshold
+                  num: step.voteThreshold,
                 }}
               />
             </h4>

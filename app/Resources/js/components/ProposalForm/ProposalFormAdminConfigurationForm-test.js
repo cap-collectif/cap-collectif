@@ -36,8 +36,8 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
       categories: [
         {
           id: 'category1',
-          name: 'Category 1'
-        }
+          name: 'Category 1',
+        },
       ],
       districts: [],
       questions: [
@@ -49,15 +49,15 @@ describe('<ProposalFormAdminConfigurationForm />', () => {
           type: 'text',
           private: false,
           position: 1,
-          kind: 'simple'
-        }
-      ]
+          kind: 'simple',
+        },
+      ],
     },
     usingAddress: true,
     usingCategories: true,
     usingThemes: true,
     usingDistrict: true,
-    features
+    features,
   };
 
   it('render correctly', () => {

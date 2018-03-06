@@ -9,13 +9,13 @@ import {
   fetchAllOpinionVotes,
   fetchOpinionVotes,
   OPINION_VOTES_FETCH_FAILED,
-  OPINION_VOTES_FETCH_SUCCEEDED
+  OPINION_VOTES_FETCH_SUCCEEDED,
 } from './opinion';
 import Fetcher from '../../services/Fetcher';
 
 const vote = {
   value: 1,
-  user: { uniqueId: 'admin' }
+  user: { uniqueId: 'admin' },
 };
 
 describe('Opinion Reducers', () => {
@@ -30,9 +30,9 @@ describe('Opinion Reducers', () => {
           votesCountNok: 0,
           votesCountMitige: 0,
           userVote: null,
-          userHasVote: false
-        }
-      }
+          userHasVote: false,
+        },
+      },
     };
     const newState = reducer(initialState, opinionVoteSuccess(1, vote));
     expect(newState).toMatchSnapshot();
@@ -50,9 +50,9 @@ describe('Opinion Reducers', () => {
           votesCountNok: 0,
           votesCountMitige: 0,
           userVote: null,
-          userHasVote: false
-        }
-      }
+          userHasVote: false,
+        },
+      },
     };
     const newState = reducer(initialState, versionVoteSuccess(1, vote));
     expect(newState).toMatchSnapshot();

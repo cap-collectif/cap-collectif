@@ -8,14 +8,14 @@ describe('<ProposalCollectStatus />', () => {
   const proposalWithoutStatus = {
     // $FlowFixMe $refType
     proposal: {
-      status: null
-    }
+      status: null,
+    },
   };
   const proposalWithStatus = {
     // $FlowFixMe $refType
     proposal: {
-      status: { name: 'Terminé', color: 'success' }
-    }
+      status: { name: 'Terminé', color: 'success' },
+    },
   };
 
   it('renders proposal without status', () => {

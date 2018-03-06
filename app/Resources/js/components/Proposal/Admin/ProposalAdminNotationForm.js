@@ -8,7 +8,7 @@ import {
   reduxForm,
   formValueSelector,
   Field,
-  FieldArray
+  FieldArray,
 } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Glyphicon, ButtonToolbar, Button } from 'react-bootstrap';
@@ -24,7 +24,7 @@ import type { ProposalPageEvaluation_proposal } from '../Page/__generated__/Prop
 import {
   formatInitialResponsesValues,
   formatSubmitResponses,
-  renderResponses
+  renderResponses,
 } from '../../../utils/responsesHelper';
 import type { Dispatch, State } from '../../../types';
 
@@ -39,7 +39,7 @@ const formName = 'proposal-admin-evaluation';
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const data = {
     ...values,
-    likers: values.likers.map(u => u.value)
+    likers: values.likers.map(u => u.value),
   };
 
   if (props.proposal.form.evaluationForm) {
@@ -49,22 +49,22 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
         version: props.proposal.evaluation ? props.proposal.evaluation.version : 1,
         responses: formatSubmitResponses(
           data.responses,
-          props.proposal.form.evaluationForm.questions
-        )
-      }
+          props.proposal.form.evaluationForm.questions,
+        ),
+      },
     };
     return ChangeProposalEvaluationMutation.commit(evaluationInput).then(response => {
       if (!response.changeProposalEvaluation) {
         throw new SubmissionError({
-          _error: 'proposal_form.admin.evaluation.error.modified_since'
+          _error: 'proposal_form.admin.evaluation.error.modified_since',
         });
       } else {
         return ChangeProposalNotationMutation.commit({
           input: {
             proposalId: props.proposal.id,
             estimation: data.estimation,
-            likers: data.likers
-          }
+            likers: data.likers,
+          },
         });
       }
     });
@@ -73,8 +73,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     input: {
       proposalId: props.proposal.id,
       estimation: data.estimation,
-      likers: data.likers
-    }
+      likers: data.likers,
+    },
   });
 };
 
@@ -107,8 +107,8 @@ export const validate = (values: FormValues, { proposal }: Props) => {
           responseError.value = {
             id: 'reply.constraints.choices_min',
             values: {
-              nb: rule.number
-            }
+              nb: rule.number,
+            },
           };
 
           responsesArrayErrors[index] = responseError;
@@ -119,8 +119,8 @@ export const validate = (values: FormValues, { proposal }: Props) => {
           responseError.value = {
             id: 'reply.constraints.choices_max',
             values: {
-              nb: rule.number
-            }
+              nb: rule.number,
+            },
           };
 
           responsesArrayErrors[index] = responseError;
@@ -131,8 +131,8 @@ export const validate = (values: FormValues, { proposal }: Props) => {
           responseError.value = {
             id: 'reply.constraints.choices_equal',
             values: {
-              nb: rule.number
-            }
+              nb: rule.number,
+            },
           };
 
           responsesArrayErrors[index] = responseError;
@@ -180,7 +180,7 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
       handleSubmit,
       submitting,
       proposal,
-      intl
+      intl,
     } = this.props;
     const evaluationForm = proposal.form.evaluationForm;
 
@@ -228,14 +228,14 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
                         options: res.users
                           .map(u => ({
                             value: u.id,
-                            label: u.displayName
+                            label: u.displayName,
                           }))
                           .concat(
                             proposal.likers.map(u => ({
                               value: u.id,
-                              label: u.displayName
-                            }))
-                          )
+                              label: u.displayName,
+                            })),
+                          ),
                       }))
                       // eslint-disable-next-line no-console
                       .catch(e => console.error(e))
@@ -288,8 +288,8 @@ const form = injectIntl(
     onSubmit,
     validate,
     enableReinitialize: true,
-    form: formName
-  })(ProposalAdminNotationForm)
+    form: formName,
+  })(ProposalAdminNotationForm),
 );
 
 export const formatInitialResponses = (props: MinimalRelayProps | RelayProps) => {
@@ -297,7 +297,7 @@ export const formatInitialResponses = (props: MinimalRelayProps | RelayProps) =>
     ? []
     : formatInitialResponsesValues(
         props.proposal.form.evaluationForm.questions,
-        props.proposal.evaluation ? props.proposal.evaluation.responses : []
+        props.proposal.evaluation ? props.proposal.evaluation.responses : [],
       );
 };
 
@@ -307,11 +307,11 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayPro
     estimation: props.proposal.estimation,
     likers: props.proposal.likers.map(u => ({
       value: u.id,
-      label: u.displayName
+      label: u.displayName,
     })),
     version: props.proposal.evaluation ? props.proposal.evaluation.version : 1,
-    responses: formatInitialResponses(props)
-  }
+    responses: formatInitialResponses(props),
+  },
 });
 
 const container = connect(mapStateToProps)(form);
@@ -372,5 +372,5 @@ export default createFragmentContainer(
         }
       }
     }
-  `
+  `,
 );

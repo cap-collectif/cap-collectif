@@ -11,7 +11,7 @@ const ProposalDetailAdvancementStep = React.createClass({
     roundColor: PropTypes.string.isRequired,
     status: PropTypes.object,
     borderColor: PropTypes.string,
-    children: PropTypes.node
+    children: PropTypes.node,
   },
 
   renderDate() {
@@ -40,11 +40,11 @@ const ProposalDetailAdvancementStep = React.createClass({
                   borderLeftStyle: 'solid',
                   borderLeftColor: borderColor,
                   borderLeftWidth: '3px',
-                  paddingLeft: '10px'
+                  paddingLeft: '10px',
                 }
               : {
                   paddingTop: '10px',
-                  paddingLeft: '13px'
+                  paddingLeft: '13px',
                 }
           }>
           <div
@@ -58,7 +58,7 @@ const ProposalDetailAdvancementStep = React.createClass({
               color: '#767676',
               textAlign: 'center',
               backgroundColor: roundColor,
-              borderRadius: '50%'
+              borderRadius: '50%',
             }}
           />
           <div style={{ marginTop: '-15px' }}>
@@ -77,7 +77,7 @@ const ProposalDetailAdvancementStep = React.createClass({
         {children}
       </span>
     );
-  }
+  },
 });
 
 export default ProposalDetailAdvancementStep;

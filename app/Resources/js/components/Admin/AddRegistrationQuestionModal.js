@@ -15,7 +15,7 @@ export const AddRegistrationQuestionModal = React.createClass({
     submitting: PropTypes.bool.isRequired,
     show: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
-    onSubmit: PropTypes.func.isRequired
+    onSubmit: PropTypes.func.isRequired,
   },
 
   render() {
@@ -51,19 +51,19 @@ export const AddRegistrationQuestionModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  }
+  },
 });
 
 type Props = {
   submitting: boolean,
   show: boolean,
   onSubmit: (e: Event) => void,
-  onClose: () => void
+  onClose: () => void,
 };
 
 const mapStateToProps = (state: State) => ({
   submitting: isSubmitting(formName)(state),
-  show: state.default.showNewFieldModal
+  show: state.default.showNewFieldModal,
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   onSubmit: (e: Event) => {
@@ -72,7 +72,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
   onClose: () => {
     dispatch(hideNewFieldModal());
-  }
+  },
 });
 
 const connector: Connector<{}, Props> = connect(mapStateToProps, mapDispatchToProps);

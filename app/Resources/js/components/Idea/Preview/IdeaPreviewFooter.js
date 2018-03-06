@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 const IdeaPreviewFooter = React.createClass({
   propTypes: {
-    idea: React.PropTypes.object.isRequired
+    idea: React.PropTypes.object.isRequired,
   },
 
   render() {
@@ -14,7 +14,7 @@ const IdeaPreviewFooter = React.createClass({
           <FormattedMessage
             id="idea.preview.counters.votes"
             values={{
-              num: idea.votesCount
+              num: idea.votesCount,
             }}
           />
           {idea.commentable ? (
@@ -23,7 +23,7 @@ const IdeaPreviewFooter = React.createClass({
               <FormattedMessage
                 id="idea.preview.counters.comments"
                 values={{
-                  num: idea.commentsCount
+                  num: idea.commentsCount,
                 }}
               />
             </span>
@@ -31,7 +31,7 @@ const IdeaPreviewFooter = React.createClass({
         </span>
       </div>
     );
-  }
+  },
 });
 
 export default IdeaPreviewFooter;

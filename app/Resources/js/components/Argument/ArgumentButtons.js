@@ -13,12 +13,12 @@ import { openArgumentEditModal } from '../../redux/modules/opinion';
 const ArgumentButtons = React.createClass({
   propTypes: {
     argument: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
   },
 
   getInitialState() {
     return {
-      isDeleting: false
+      isDeleting: false,
     };
   },
 
@@ -61,7 +61,7 @@ const ArgumentButtons = React.createClass({
         />
       </div>
     );
-  }
+  },
 });
 
 export default connect()(ArgumentButtons);

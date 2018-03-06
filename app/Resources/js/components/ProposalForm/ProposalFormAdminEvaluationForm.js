@@ -22,7 +22,7 @@ type Props = RelayProps & {
   submitting: boolean,
   valid: boolean,
   submitSucceeded: boolean,
-  submitFailed: boolean
+  submitFailed: boolean,
 };
 
 type DefaultProps = void;
@@ -36,7 +36,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { proposalForm }: Prop
 
   const input = {
     proposalFormId,
-    evaluationFormId
+    evaluationFormId,
   };
 
   return SetEvaluationFormInProposalFormMutation.commit({ input });
@@ -55,7 +55,7 @@ export class ProposalFormAdminEvaluationForm extends React.Component<Props> {
       invalid,
       valid,
       submitSucceeded,
-      submitFailed
+      submitFailed,
     } = this.props;
 
     return (
@@ -148,13 +148,13 @@ export class ProposalFormAdminEvaluationForm extends React.Component<Props> {
 const form = reduxForm({
   onSubmit,
   enableReinitialize: true,
-  form: formName
+  form: formName,
 })(ProposalFormAdminEvaluationForm);
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
   initialValues: {
-    evaluationForm: props.proposalForm.evaluationForm ? props.proposalForm.evaluationForm.id : null
-  }
+    evaluationForm: props.proposalForm.evaluationForm ? props.proposalForm.evaluationForm.id : null,
+  },
 });
 
 const container = connect(mapStateToProps)(form);
@@ -170,5 +170,5 @@ export default createFragmentContainer(
         title
       }
     }
-  `
+  `,
 );

@@ -11,7 +11,7 @@ export const calculPourcentage = (element: Object, parent: Object): number => {
 const SynthesisPourcentageTooltipLabel = React.createClass({
   propTypes: {
     element: PropTypes.object.isRequired,
-    parent: PropTypes.object.isRequired
+    parent: PropTypes.object.isRequired,
   },
 
   render() {
@@ -23,11 +23,11 @@ const SynthesisPourcentageTooltipLabel = React.createClass({
           contributions: element.childrenCount,
           scoreSign: element.childrenScore < 0 ? '-' : '+',
           score: Math.abs(element.childrenScore),
-          percentage: calculPourcentage(element, parent)
+          percentage: calculPourcentage(element, parent),
         }}
       />
     );
-  }
+  },
 });
 
 export default SynthesisPourcentageTooltipLabel;

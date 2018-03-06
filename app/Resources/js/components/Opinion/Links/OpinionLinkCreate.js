@@ -15,17 +15,17 @@ import type { GlobalState, Dispatch } from '../../../types';
 type Props = {
   submitting: boolean,
   opinion: Object,
-  dispatch: Dispatch
+  dispatch: Dispatch,
 };
 type State = {
   showModal: boolean,
-  availableTypes: Array<Object>
+  availableTypes: Array<Object>,
 };
 
 class OpinionLinkCreate extends React.Component<Props, State> {
   state = {
     showModal: false,
-    availableTypes: []
+    availableTypes: [],
   };
 
   componentDidMount() {
@@ -91,7 +91,7 @@ class OpinionLinkCreate extends React.Component<Props, State> {
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
-  submitting: isSubmitting(formName)(state)
+  submitting: isSubmitting(formName)(state),
 });
 const connector: Connector<{ opinion: Object }, Props> = connect(mapStateToProps);
 

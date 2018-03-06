@@ -10,19 +10,19 @@ describe('<ProposalPageContent />', () => {
     referer: 'http://capco.test',
     responses: [],
     _links: {
-      show: 'http://capco.test'
+      show: 'http://capco.test',
     },
-    id: 'proposal3'
+    id: 'proposal3',
   };
 
   const props = {
     dispatch: () => {},
     form: {
       usingThemes: true,
-      usingCategories: false
+      usingCategories: false,
     },
     categories: [],
-    className: ''
+    className: '',
   };
 
   it('should render a proposal page content', () => {

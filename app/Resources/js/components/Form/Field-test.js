@@ -10,11 +10,11 @@ describe('<Field />', () => {
     input: {
       autoFocus: false,
       name: 'name',
-      label: 'label'
+      label: 'label',
     },
     meta: {
-      touched: false
-    }
+      touched: false,
+    },
   };
 
   it('pass input props to children', () => {
@@ -34,7 +34,7 @@ describe('<Field />', () => {
 
   it('renders an errored <Input /> element', () => {
     const wrapper = shallow(
-      <Field {...defaultProps} meta={{ touched: true, error: 'global.required' }} />
+      <Field {...defaultProps} meta={{ touched: true, error: 'global.required' }} />,
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -44,7 +44,7 @@ describe('<Field />', () => {
       <Field
         {...defaultProps}
         input={Object.assign(defaultProps.input, { disableValidation: true })}
-      />
+      />,
     );
     expect(wrapper).toMatchSnapshot();
   });

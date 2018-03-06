@@ -11,12 +11,12 @@ const ReplyEditModal = React.createClass({
     reply: React.PropTypes.object.isRequired,
     show: React.PropTypes.bool.isRequired,
     onToggleModal: React.PropTypes.func.isRequired,
-    onEdit: React.PropTypes.func.isRequired
+    onEdit: React.PropTypes.func.isRequired,
   },
 
   getInitialState() {
     return {
-      isSubmitting: false
+      isSubmitting: false,
     };
   },
 
@@ -32,20 +32,20 @@ const ReplyEditModal = React.createClass({
 
   handleSubmit() {
     this.setState({
-      isSubmitting: true
+      isSubmitting: true,
     });
   },
 
   handleSubmitSuccess() {
     this.setState({
-      isSubmitting: false
+      isSubmitting: false,
     });
     this.close();
   },
 
   handleFailure() {
     this.setState({
-      isSubmitting: false
+      isSubmitting: false,
     });
   },
 
@@ -90,7 +90,7 @@ const ReplyEditModal = React.createClass({
         </Modal>
       </div>
     );
-  }
+  },
 });
 
 export default ReplyEditModal;

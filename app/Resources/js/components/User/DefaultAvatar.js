@@ -32,10 +32,10 @@ export default class DefaultAvatar extends React.Component {
 
 DefaultAvatar.propTypes = {
   className: React.PropTypes.string,
-  size: React.PropTypes.number
+  size: React.PropTypes.number,
 };
 
 DefaultAvatar.defaultProps = {
   className: 'img-circle avatar',
-  size: 45
+  size: 45,
 };

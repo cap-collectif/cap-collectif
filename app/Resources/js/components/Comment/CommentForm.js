@@ -19,7 +19,7 @@ const CommentForm = React.createClass({
     focus: PropTypes.bool,
     comment: PropTypes.func,
     user: PropTypes.object,
-    intl: PropTypes.object
+    intl: PropTypes.object,
   },
 
   mixins: [DeepLinkStateMixin, FormMixin],
@@ -27,7 +27,7 @@ const CommentForm = React.createClass({
   getDefaultProps() {
     return {
       isAnswer: false,
-      user: null
+      user: null,
     };
   },
 
@@ -36,15 +36,15 @@ const CommentForm = React.createClass({
       form: {
         body: '',
         authorName: '',
-        authorEmail: ''
+        authorEmail: '',
       },
       errors: {
         body: [],
         authorName: [],
-        authorEmail: []
+        authorEmail: [],
       },
       expanded: false,
-      isSubmitting: false
+      isSubmitting: false,
     };
   },
 
@@ -74,7 +74,7 @@ const CommentForm = React.createClass({
   getFormClasses() {
     const { isAnswer } = this.props;
     return classNames({
-      'comment-answer-form': isAnswer
+      'comment-answer-form': isAnswer,
     });
   },
 
@@ -84,17 +84,17 @@ const CommentForm = React.createClass({
     this.formValidationRules = {
       body: {
         notBlank: { message: 'comment.constraints.body' },
-        min: { value: 2, message: 'comment.constraints.body' }
-      }
+        min: { value: 2, message: 'comment.constraints.body' },
+      },
     };
     if (anonymous) {
       this.formValidationRules.authorEmail = {
         notBlank: { message: 'comment.constraints.author_email' },
-        isEmail: { message: 'comment.constraints.author_email' }
+        isEmail: { message: 'comment.constraints.author_email' },
       };
       this.formValidationRules.authorName = {
         notBlank: { message: 'comment.constraints.author_name' },
-        min: { value: 2, message: 'comment.constraints.author_name' }
+        min: { value: 2, message: 'comment.constraints.author_name' },
       };
     }
   },
@@ -240,7 +240,7 @@ const CommentForm = React.createClass({
   render() {
     const { isAnswer, user, intl } = this.props;
     const classes = classNames({
-      'comment-answer-form': isAnswer
+      'comment-answer-form': isAnswer,
     });
     return (
       <div className={classes} style={{ padding: '5px' }}>
@@ -264,7 +264,7 @@ const CommentForm = React.createClass({
         </div>
       </div>
     );
-  }
+  },
 });
 
 const mapStateToProps = state => {

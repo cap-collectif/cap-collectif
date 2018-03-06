@@ -10,15 +10,15 @@ describe('<ProposalAdminNewsForm />', () => {
     intl: intlMock,
     // $FlowFixMe $refType
     proposal: {
-      news: [{ id: '1', title: 'news-1' }]
-    }
+      news: [{ id: '1', title: 'news-1' }],
+    },
   };
   const props2 = {
     intl: intlMock,
     // $FlowFixMe $refType
     proposal: {
-      news: []
-    }
+      news: [],
+    },
   };
 
   it('render correctly', () => {

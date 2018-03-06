@@ -11,5 +11,5 @@ export default {
     return Fetcher.delete(`/sources/${source}/votes`).then(() => {
       return true;
     });
-  }
+  },
 };

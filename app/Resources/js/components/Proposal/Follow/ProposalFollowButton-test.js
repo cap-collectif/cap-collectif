@@ -8,23 +8,23 @@ describe('<ProposalFollowButton />', () => {
   // $FlowFixMe $refType
   const proposalViewIsFollowing = {
     id: 'proposal1',
-    viewerIsFollowing: true
+    viewerIsFollowing: true,
   };
   // $FlowFixMe $refType
   const proposalViewIsNotFollowing = {
     id: 'proposal1',
-    viewerIsFollowing: false
+    viewerIsFollowing: false,
   };
   // $FlowFixMe $refType
   const props = {
     className: '',
     referer: 'http://capco.test',
-    oldProposal: {}
+    oldProposal: {},
   };
 
   it('should render a button to follow a proposal', () => {
     const wrapper = shallow(
-      <ProposalFollowButton proposal={proposalViewIsNotFollowing} {...props} />
+      <ProposalFollowButton proposal={proposalViewIsNotFollowing} {...props} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

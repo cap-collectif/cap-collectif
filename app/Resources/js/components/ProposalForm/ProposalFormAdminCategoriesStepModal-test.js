@@ -10,7 +10,7 @@ describe('<ProposalFormAdminCategoriesStepModal />', () => {
     onClose: jest.fn(),
     onSubmit: jest.fn(),
     member: 'member',
-    isCreating: true
+    isCreating: true,
   };
 
   it('render correctly', () => {

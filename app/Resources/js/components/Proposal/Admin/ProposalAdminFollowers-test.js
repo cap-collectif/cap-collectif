@@ -10,21 +10,21 @@ describe('<ProposalAdminFollowers />', () => {
   const proposalWithUsers = {
     id: 'proposal1',
     followerConnection: {
-      totalCount: 3
-    }
+      totalCount: 3,
+    },
   };
   // $FlowFixMe $refType
   const proposalWithoutUsers = {
     id: 'proposal1',
     followerConnection: {
-      totalCount: 0
-    }
+      totalCount: 0,
+    },
   };
   const props = {
     className: '',
     referer: 'http://capco.test',
     oldProposal: {},
-    relay: relayPaginationMock
+    relay: relayPaginationMock,
   };
 
   it('should render a proposal page follower with 3 users', () => {

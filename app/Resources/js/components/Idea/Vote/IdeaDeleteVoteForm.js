@@ -10,7 +10,7 @@ import { UPDATE_ALERT } from '../../../constants/AlertConstants';
 type Props = {
   dispatch: Function,
   idea: Object,
-  anonymous: boolean
+  anonymous: boolean,
 };
 
 const onSubmit = (values, dispatch, props) => {
@@ -22,7 +22,7 @@ const onSubmit = (values, dispatch, props) => {
     .then(vote => {
       AppDispatcher.dispatch({
         actionType: UPDATE_ALERT,
-        alert: { bsStyle: 'success', content: 'alert.success.delete.vote' }
+        alert: { bsStyle: 'success', content: 'alert.success.delete.vote' },
       });
       dispatch(deleteVoteSucceeded(idea.id, vote));
       return vote;
@@ -30,7 +30,7 @@ const onSubmit = (values, dispatch, props) => {
     .catch(() => {
       AppDispatcher.dispatch({
         actionType: UPDATE_ALERT,
-        alert: { bsStyle: 'warning', content: 'alert.danger.delete.vote' }
+        alert: { bsStyle: 'warning', content: 'alert.danger.delete.vote' },
       });
       return false;
     });

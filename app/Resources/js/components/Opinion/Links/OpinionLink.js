@@ -6,7 +6,7 @@ import OpinionPreview from '../OpinionPreview';
 
 const OpinionLink = React.createClass({
   propTypes: {
-    link: React.PropTypes.object.isRequired
+    link: React.PropTypes.object.isRequired,
   },
 
   render() {
@@ -14,7 +14,7 @@ const OpinionLink = React.createClass({
     const classes = classNames({
       opinion: true,
       'block--bordered': true,
-      'bg-vip': link.author && link.author.vip
+      'bg-vip': link.author && link.author.vip,
     });
 
     return (
@@ -26,7 +26,7 @@ const OpinionLink = React.createClass({
         </Row>
       </li>
     );
-  }
+  },
 });
 
 export default OpinionLink;

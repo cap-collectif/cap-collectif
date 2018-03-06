@@ -7,7 +7,7 @@ import { ShieldPage } from './ShieldPage';
 describe('<ShieldPage />', () => {
   const props = {
     onSubmit: jest.fn(),
-    submitting: false
+    submitting: false,
   };
 
   it('renders with registration enabled', () => {

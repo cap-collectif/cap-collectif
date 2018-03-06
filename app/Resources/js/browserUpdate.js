@@ -52,11 +52,11 @@ var $buo = function(op, test) {
       s: 'Apple Safari',
       n: 'Netscape Navigator',
       c: 'Chrome',
-      x: 'Other'
+      x: 'Other',
     };
     if (
       /bot|googlebot|facebook|slurp|wii|silk|blackberry|maxthon|maxton|mediapartners|dolfin|dolphin|adsbot|silk|android|phone|bingbot|google web preview|like firefox|chromeframe|seamonkey|opera mini|min|meego|netfront|moblin|maemo|arora|camino|flot|k-meleon|fennec|kazehakase|galeon|android|mobile|iphone|ipod|ipad|epiphany|konqueror|rekonq|symbian|webos|coolnovo|blackberry|bb10|RIM|PlayBook|PaleMoon|QupZilla|YaBrowser|Otter/i.test(
-        ua
+        ua,
       )
     )
       n = 'x';

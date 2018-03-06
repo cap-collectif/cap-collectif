@@ -14,7 +14,7 @@ export const RegistrationCommunicationForm = React.createClass({
     useTopText: PropTypes.bool.isRequired,
     useBottomText: PropTypes.bool.isRequired,
     submitting: PropTypes.bool.isRequired,
-    handleSubmit: PropTypes.func.isRequired
+    handleSubmit: PropTypes.func.isRequired,
   },
 
   render() {
@@ -44,7 +44,7 @@ export const RegistrationCommunicationForm = React.createClass({
         </Button>
       </form>
     );
-  }
+  },
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
@@ -58,13 +58,13 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
     topTextDisplayed: state.user.registration_form.topTextDisplayed,
     topText: state.user.registration_form.topText,
     bottomText: state.user.registration_form.bottomText,
-    bottomTextDisplayed: state.user.registration_form.bottomTextDisplayed
-  }
+    bottomTextDisplayed: state.user.registration_form.bottomTextDisplayed,
+  },
 });
 
 export default connect(mapStateToProps)(
   reduxForm({
     onSubmit,
-    form: formName
-  })(RegistrationCommunicationForm)
+    form: formName,
+  })(RegistrationCommunicationForm),
 );

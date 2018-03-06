@@ -6,7 +6,7 @@ import moment from 'moment';
 export const Post = React.createClass({
   propTypes: {
     post: PropTypes.object.isRequired,
-    features: PropTypes.object.isRequired
+    features: PropTypes.object.isRequired,
   },
 
   render() {
@@ -197,7 +197,7 @@ export const Post = React.createClass({
                     month="long"
                     year="numeric"
                   />
-                )
+                ),
               }}
             />{' '}
             {post.authors.length > 0 && (
@@ -217,7 +217,7 @@ export const Post = React.createClass({
                         </span>
                       ))}
                     </span>
-                  )
+                  ),
                 }}
               />
             )}
@@ -226,12 +226,12 @@ export const Post = React.createClass({
         </div>
       </li>
     );
-  }
+  },
 });
 
 const mapStateToProps = state => {
   return {
-    features: state.default.features
+    features: state.default.features,
   };
 };
 

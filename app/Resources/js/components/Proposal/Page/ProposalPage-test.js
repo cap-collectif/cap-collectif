@@ -11,7 +11,7 @@ describe('<ProposalPage />', () => {
   const props = {
     form: {
       usingThemes: true,
-      usingCategories: false
+      usingCategories: false,
     },
     themes: [],
     districts: [],
@@ -19,10 +19,10 @@ describe('<ProposalPage />', () => {
     features: {
       ...features,
       themes: true,
-      districts: false
+      districts: false,
     },
     steps: [{ id: '1', voteType: VOTE_TYPE_DISABLED }, { id: '2', voteType: VOTE_TYPE_SIMPLE }],
-    viewerCanSeeEvaluation: true
+    viewerCanSeeEvaluation: true,
   };
 
   const proposalNoVotes = {
@@ -30,29 +30,29 @@ describe('<ProposalPage />', () => {
     referer: 'http://capco.test',
     votableStepId: '2',
     votesCountByStepId: {
-      '2': 0
+      '2': 0,
     },
     commentsCount: 5,
     selections: [],
     votesByStepId: {
       selectionstep1: [],
-      collectstep1: []
+      collectstep1: [],
     },
-    viewerCanSeeEvaluation: true
+    viewerCanSeeEvaluation: true,
   };
   const proposalWithVotes = {
     id: 42,
     referer: 'http://capco.test',
     votableStepId: '2',
     votesCountByStepId: {
-      '2': 5
+      '2': 5,
     },
     selections: [],
     votesByStepId: {
       selectionstep1: [],
-      collectstep1: []
+      collectstep1: [],
     },
-    viewerCanSeeEvaluation: true
+    viewerCanSeeEvaluation: true,
   };
 
   const proposalWithoutVotableStep = {
@@ -63,9 +63,9 @@ describe('<ProposalPage />', () => {
     selections: [],
     votesByStepId: {
       selectionstep1: [],
-      collectstep1: []
+      collectstep1: [],
     },
-    viewerCanSeeEvaluation: true
+    viewerCanSeeEvaluation: true,
   };
 
   it('should render a proposal page', () => {
@@ -75,7 +75,7 @@ describe('<ProposalPage />', () => {
 
   it('should render a proposal page with evaluation tab', () => {
     const wrapper = shallow(
-      <ProposalPage {...props} proposal={{ ...proposalNoVotes, viewerCanSeeEvaluation: true }} />
+      <ProposalPage {...props} proposal={{ ...proposalNoVotes, viewerCanSeeEvaluation: true }} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

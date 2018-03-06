@@ -9,7 +9,7 @@ describe('<OpinionList />', () => {
   const props = {
     section: {},
     consultation: {},
-    intl: intlMock
+    intl: intlMock,
   };
 
   it('renders correcty', () => {

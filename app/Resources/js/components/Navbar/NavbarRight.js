@@ -12,12 +12,12 @@ import type { State } from '../../types';
 export const NavbarRight = React.createClass({
   propTypes: {
     user: PropTypes.object,
-    features: PropTypes.object.isRequired
+    features: PropTypes.object.isRequired,
   },
 
   getDefaultProps() {
     return {
-      user: null
+      user: null,
     };
   },
 
@@ -85,13 +85,13 @@ export const NavbarRight = React.createClass({
         )}
       </Nav>
     );
-  }
+  },
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
   return {
     features: state.default.features,
-    user: state.user.user
+    user: state.user.user,
   };
 };
 

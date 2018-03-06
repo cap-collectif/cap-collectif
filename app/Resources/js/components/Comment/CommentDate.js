@@ -4,7 +4,7 @@ import moment from 'moment';
 
 const CommentDate = React.createClass({
   propTypes: {
-    comment: React.PropTypes.object
+    comment: React.PropTypes.object,
   },
 
   renderDate() {
@@ -60,7 +60,7 @@ const CommentDate = React.createClass({
         {this.renderEditionDate()}
       </span>
     );
-  }
+  },
 });
 
 export default CommentDate;

@@ -3,12 +3,12 @@ import TreeView from '../TreeView';
 
 const Preview = React.createClass({
   propTypes: {
-    synthesis: React.PropTypes.object
+    synthesis: React.PropTypes.object,
   },
 
   getDefaultProps() {
     return {
-      synthesis: {}
+      synthesis: {},
     };
   },
 
@@ -19,7 +19,7 @@ const Preview = React.createClass({
         <TreeView synthesis={synthesis} />
       </div>
     );
-  }
+  },
 });
 
 export default Preview;

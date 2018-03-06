@@ -14,7 +14,7 @@ export const OpinionBox = React.createClass({
   propTypes: {
     opinion: PropTypes.object.isRequired,
     rankingThreshold: PropTypes.number,
-    opinionTerm: PropTypes.number
+    opinionTerm: PropTypes.number,
   },
 
   getMaxVotesValue() {
@@ -89,19 +89,19 @@ export const OpinionBox = React.createClass({
         <OpinionAnswer answer={opinion.answer} />
       </div>
     );
-  }
+  },
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (
   state: State,
-  props: { opinion: OpinionAndVersion }
+  props: { opinion: OpinionAndVersion },
 ) => ({
   opinion: {
     ...props.opinion,
     ...(Object.keys(state.opinion.opinionsById).length
       ? state.opinion.opinionsById[props.opinion.id]
-      : state.opinion.versionsById[props.opinion.id])
-  }
+      : state.opinion.versionsById[props.opinion.id]),
+  },
 });
 
 export default connect(mapStateToProps)(OpinionBox);

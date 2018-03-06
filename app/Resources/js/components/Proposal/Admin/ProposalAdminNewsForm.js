@@ -9,7 +9,7 @@ import type { ProposalAdminNewsForm_proposal } from './__generated__/ProposalAdm
 type DefaultProps = void;
 type Props = {
   proposal: ProposalAdminNewsForm_proposal,
-  intl: IntlShape
+  intl: IntlShape,
 };
 type State = void;
 
@@ -86,5 +86,5 @@ export default createFragmentContainer(
         title
       }
     }
-  `
+  `,
 );

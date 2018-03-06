@@ -5,10 +5,10 @@ import IdeaDeleteModal from './IdeaDeleteModal';
 
 const props = {
   idea: {
-    title: 'title'
+    title: 'title',
   },
   show: true,
-  onToggleModal: jest.fn()
+  onToggleModal: jest.fn(),
 };
 
 describe('<IdeaDeleteModal />', () => {

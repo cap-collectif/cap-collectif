@@ -7,7 +7,7 @@ import { RegistrationQuestionSortableList } from './RegistrationQuestionSortable
 describe('<RegistrationSortableQuestionList />', () => {
   const props = {
     showChoices: false,
-    items: [{}, {}]
+    items: [{}, {}],
   };
 
   it('renders correctly', () => {

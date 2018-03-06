@@ -11,42 +11,42 @@ const props = {
       { id: 'step1', title: 'Open step' },
       { id: 'step2', title: 'Open step & timeless' },
       { id: 'step3', title: 'closed step' },
-      { id: 'step4', title: 'future step' }
-    ]
-  }
+      { id: 'step4', title: 'future step' },
+    ],
+  },
 };
 
 const openStep = {
   actualStep: {
-    status: 'open'
-  }
+    status: 'open',
+  },
 };
 
 const timelessStep = {
   actualStep: {
     status: 'open',
-    timeless: true
-  }
+    timeless: true,
+  },
 };
 
 const closedStep = {
   actualStep: {
-    status: 'closed'
+    status: 'closed',
   },
-  isCurrentStep: false
+  isCurrentStep: false,
 };
 
 const futureStep = {
   actualStep: {
-    status: 'future'
-  }
+    status: 'future',
+  },
 };
 
 const closedAndCurrentStep = {
   actualStep: {
-    status: 'closed'
+    status: 'closed',
   },
-  isCurrentStep: true
+  isCurrentStep: true,
 };
 
 describe('<ProjectPreviewProgressBar />', () => {

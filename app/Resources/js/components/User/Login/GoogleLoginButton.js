@@ -7,7 +7,7 @@ export const GoogleLoginButton = React.createClass({
 
   propTypes: {
     features: PropTypes.object.isRequired,
-    prefix: PropTypes.string.isRequired
+    prefix: PropTypes.string.isRequired,
   },
 
   render() {
@@ -24,7 +24,7 @@ export const GoogleLoginButton = React.createClass({
         {<FormattedMessage id={label} />}
       </a>
     );
-  }
+  },
 });
 
 export default GoogleLoginButton;

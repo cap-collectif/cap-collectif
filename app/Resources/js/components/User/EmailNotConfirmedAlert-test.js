@@ -6,10 +6,10 @@ import { EmailNotConfirmedAlert } from './EmailNotConfirmedAlert';
 describe('<EmailNotConfirmedAlert />', () => {
   const props = {};
   const userWithConfirmedEmail = {
-    isEmailConfirmed: true
+    isEmailConfirmed: true,
   };
   const userWithNotConfirmedEmail = {
-    isEmailConfirmed: false
+    isEmailConfirmed: false,
   };
 
   it('renders nothing if not logged', () => {

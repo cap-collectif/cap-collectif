@@ -14,7 +14,7 @@ type Props = {
   isSuperAdmin: boolean,
   value: Object,
   deleteField: () => void,
-  updateField: () => void
+  updateField: () => void,
 };
 
 export const RegistrationSortableQuestion = React.createClass({
@@ -22,7 +22,7 @@ export const RegistrationSortableQuestion = React.createClass({
     value: PropTypes.object.isRequired,
     isSuperAdmin: PropTypes.bool.isRequired,
     deleteField: PropTypes.func.isRequired,
-    updateField: PropTypes.func.isRequired
+    updateField: PropTypes.func.isRequired,
   },
 
   render() {
@@ -55,11 +55,11 @@ export const RegistrationSortableQuestion = React.createClass({
         </div>
       </ListGroupItem>
     );
-  }
+  },
 });
 
 const mapStateToProps = (state: State) => ({
-  isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN'))
+  isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
 });
 const mapDispatchToProps = (dispatch: Dispatch, props: ParentProps) => ({
   updateField: () => {
@@ -67,7 +67,7 @@ const mapDispatchToProps = (dispatch: Dispatch, props: ParentProps) => ({
   },
   deleteField: () => {
     deleteRegistrationField(props.value.id, dispatch);
-  }
+  },
 });
 const connector: Connector<ParentProps, Props> = connect(mapStateToProps, mapDispatchToProps);
 export default SortableElement(connector(RegistrationSortableQuestion));

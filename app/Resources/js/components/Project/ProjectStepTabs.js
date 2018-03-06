@@ -7,14 +7,14 @@ import { type GlobalState } from '../../types';
 type Props = {
   steps: Array<Object>,
   currentStepId: ?string,
-  projectId: string
+  projectId: string,
 };
 
 type State = {
   translateX: number,
   showArrowRight: boolean,
   showArrowLeft: boolean,
-  firstArrowDisplay: boolean
+  firstArrowDisplay: boolean,
 };
 
 const getNavValues = () => {
@@ -51,7 +51,7 @@ const getNavValues = () => {
     barRight,
     barLeft,
     activeTabLeft,
-    activeTabRight
+    activeTabRight,
   };
 };
 
@@ -63,7 +63,7 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
       translateX: 0,
       showArrowRight: false,
       showArrowLeft: false,
-      firstArrowDisplay: true
+      firstArrowDisplay: true,
     };
   }
 
@@ -76,14 +76,14 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
       activeTabLeft,
       scrollNavWidth,
       stepTabsSvgWidth,
-      stepTabsBarWidth
+      stepTabsBarWidth,
     } = getNavValues();
 
     // move left
     if (activeTabRight > barRight) {
       const diffRight = barRight - activeTabRight;
       this.setState({
-        translateX: diffRight - stepTabsSvgWidth
+        translateX: diffRight - stepTabsSvgWidth,
       });
     }
 
@@ -95,7 +95,7 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
       (scrollNavWidth > stepTabsBarWidth && !activeTab)
     ) {
       this.setState({
-        showArrowRight: true
+        showArrowRight: true,
       });
     }
   };
@@ -111,7 +111,7 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
     if (preState.translateX === 0 && this.state.translateX !== 0) {
       if (this.state.translateX < 0) {
         this.setState({
-          showArrowLeft: true
+          showArrowLeft: true,
         });
       }
     }
@@ -120,7 +120,7 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
       if (scrollNavRight + translateX > barRight) {
         this.setState({
           showArrowRight: true,
-          firstArrowDisplay: false
+          firstArrowDisplay: false,
         });
       }
     }
@@ -132,7 +132,7 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
       this.state.showArrowRight !== false
     ) {
       this.setState({
-        translateX: translateX - nextArrowWidth
+        translateX: translateX - nextArrowWidth,
       });
     }
   };
@@ -155,14 +155,14 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
       this.setState({
         translateX: translateX + diffLeft,
         showArrowLeft: false,
-        showArrowRight: true
+        showArrowRight: true,
       });
     }
 
     if (diffLeft > stepTabsBarWidth) {
       this.setState({
         translateX: translateX + stepTabsBarWidth,
-        showArrowRight: true
+        showArrowRight: true,
       });
     }
 
@@ -170,7 +170,7 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
       this.setState({
         translateX: translateX + stepTabsBarWidth,
         showArrowRight: true,
-        showArrowLeft: false
+        showArrowLeft: false,
       });
     }
   };
@@ -185,14 +185,14 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
       this.setState({
         translateX: translateX - diffRight - stepTabsSvgWidth,
         showArrowRight: false,
-        showArrowLeft: true
+        showArrowLeft: true,
       });
     }
 
     if (diffRight > stepTabsBarWidth) {
       this.setState({
         translateX: translateX - stepTabsBarWidth,
-        showArrowLeft: true
+        showArrowLeft: true,
       });
     }
 
@@ -200,7 +200,7 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
       this.setState({
         translateX: translateX - stepTabsBarWidth,
         showArrowLeft: true,
-        showArrowRight: false
+        showArrowRight: false,
       });
     }
   };
@@ -291,7 +291,7 @@ export class ProjectStepTabs extends PureComponent<Props, State> {
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Props) => ({
   steps: state.project.projectsById[props.projectId].steps,
-  currentStepId: state.project.currentProjectStepById
+  currentStepId: state.project.currentProjectStepById,
 });
 
 export default connect(mapStateToProps)(ProjectStepTabs);

@@ -6,7 +6,7 @@ const CommentList = React.createClass({
   propTypes: {
     root: PropTypes.bool,
     comments: PropTypes.array.isRequired,
-    onVote: PropTypes.func.isRequired
+    onVote: PropTypes.func.isRequired,
   },
 
   render() {
@@ -18,7 +18,7 @@ const CommentList = React.createClass({
     const classes = classNames({
       'media-list': true,
       opinion__list: true,
-      'comment-answers': !root
+      'comment-answers': !root,
     });
 
     return (
@@ -36,7 +36,7 @@ const CommentList = React.createClass({
         })}
       </ul>
     );
-  }
+  },
 });
 
 export default CommentList;

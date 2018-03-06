@@ -13,12 +13,12 @@ import type { State } from '../../types';
 const OpinionButtons = React.createClass({
   propTypes: {
     opinion: PropTypes.object.isRequired,
-    user: PropTypes.object
+    user: PropTypes.object,
   },
 
   getDefaultProps() {
     return {
-      user: null
+      user: null,
     };
   },
 
@@ -78,12 +78,12 @@ const OpinionButtons = React.createClass({
         <OpinionVersionEditModal />
       </ButtonToolbar>
     );
-  }
+  },
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   features: state.default.features,
-  user: state.user.user
+  user: state.user.user,
 });
 
 export default connect(mapStateToProps)(OpinionButtons);

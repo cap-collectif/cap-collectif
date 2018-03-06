@@ -9,7 +9,7 @@ describe('<ProposalAdminRealisationStepModal />', () => {
     show: true,
     onClose: jest.fn(),
     member: 'member',
-    isCreating: true
+    isCreating: true,
   };
 
   it('render correctly', () => {

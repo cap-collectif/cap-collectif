@@ -15,7 +15,7 @@ const ReportModal = React.createClass({
     dispatch: PropTypes.func.isRequired,
     isLoading: PropTypes.bool.isRequired,
     show: PropTypes.bool.isRequired,
-    onSubmit: PropTypes.func.isRequired
+    onSubmit: PropTypes.func.isRequired,
   },
 
   render() {
@@ -47,12 +47,12 @@ const ReportModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  }
+  },
 });
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    isLoading: state.report.currentReportingModal === ownProps.id && isSubmitting(formName)(state)
+    isLoading: state.report.currentReportingModal === ownProps.id && isSubmitting(formName)(state),
   };
 };
 

@@ -16,7 +16,7 @@ type Props = {
   style: Object,
   disabled: boolean,
   loginOverlay: boolean,
-  user: Object
+  user: Object,
 };
 
 class SubmitButton extends React.Component<Props> {
@@ -26,7 +26,7 @@ class SubmitButton extends React.Component<Props> {
     className: '',
     style: {},
     disabled: false,
-    loginOverlay: false
+    loginOverlay: false,
   };
 
   onClick = () => {
@@ -59,7 +59,7 @@ class SubmitButton extends React.Component<Props> {
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
   return {
-    user: state.user.user
+    user: state.user.user,
   };
 };
 

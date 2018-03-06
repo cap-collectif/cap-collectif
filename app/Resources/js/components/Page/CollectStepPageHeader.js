@@ -9,7 +9,7 @@ const CollectStepPageHeader = React.createClass({
     queryCount: PropTypes.number,
     countFusions: PropTypes.number,
     form: PropTypes.object.isRequired,
-    categories: PropTypes.array.isRequired
+    categories: PropTypes.array.isRequired,
   },
 
   render() {
@@ -21,14 +21,14 @@ const CollectStepPageHeader = React.createClass({
             id="proposal.count_with_total"
             values={{
               num: queryCount,
-              total
+              total,
             }}
           />
         ) : (
           <FormattedMessage
             id="proposal.count"
             values={{
-              num: total
+              num: total,
             }}
           />
         )}{' '}
@@ -37,7 +37,7 @@ const CollectStepPageHeader = React.createClass({
             <FormattedMessage
               id="proposal.count_fusions"
               values={{
-                num: countFusions
+                num: countFusions,
               }}
             />
           </span>
@@ -47,7 +47,7 @@ const CollectStepPageHeader = React.createClass({
         </span>
       </h3>
     );
-  }
+  },
 });
 
 export default connect(state => ({ queryCount: state.proposal.queryCount }))(CollectStepPageHeader);

@@ -35,5 +35,5 @@ export default createFragmentContainer(container, {
       ...GroupAdminUsers_group
       ...GroupAdminParameters_group
     }
-  `
+  `,
 });

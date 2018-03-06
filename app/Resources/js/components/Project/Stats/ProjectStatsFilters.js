@@ -14,7 +14,7 @@ export const ProjectStatsFilters = React.createClass({
     onDistrictChange: React.PropTypes.func.isRequired,
     onCategoryChange: React.PropTypes.func.isRequired,
     showThemes: React.PropTypes.bool.isRequired,
-    showDistricts: React.PropTypes.bool.isRequired
+    showDistricts: React.PropTypes.bool.isRequired,
   },
 
   render() {
@@ -27,7 +27,7 @@ export const ProjectStatsFilters = React.createClass({
       showFilters,
       themes,
       showThemes,
-      showDistricts
+      showDistricts,
     } = this.props;
     if (!showFilters) {
       return null;
@@ -99,12 +99,12 @@ export const ProjectStatsFilters = React.createClass({
         )}
       </Row>
     );
-  }
+  },
 });
 
 export default connect((state, props) => {
   return {
     showThemes: state.default.features.themes && props.showThemes,
-    showDistricts: state.default.features.districts && props.showDistricts
+    showDistricts: state.default.features.districts && props.showDistricts,
   };
 })(ProjectStatsFilters);

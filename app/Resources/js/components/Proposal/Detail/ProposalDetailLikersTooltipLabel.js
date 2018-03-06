@@ -4,7 +4,7 @@ import Truncate from 'react-truncate';
 
 const ProposalDetailLikersTooltipLabel = React.createClass({
   propTypes: {
-    likers: PropTypes.array.isRequired
+    likers: PropTypes.array.isRequired,
   },
 
   render() {
@@ -15,7 +15,7 @@ const ProposalDetailLikersTooltipLabel = React.createClass({
           <FormattedMessage
             id="proposal.likers.label"
             values={{
-              user: likers[0].displayName
+              user: likers[0].displayName,
             }}
           />
         </Truncate>
@@ -28,7 +28,7 @@ const ProposalDetailLikersTooltipLabel = React.createClass({
           <FormattedMessage
             id="proposal.likers.count"
             values={{
-              num: likers.length
+              num: likers.length,
             }}
           />
           <br />
@@ -39,7 +39,7 @@ const ProposalDetailLikersTooltipLabel = React.createClass({
       );
     }
     return null;
-  }
+  },
 });
 
 export default ProposalDetailLikersTooltipLabel;

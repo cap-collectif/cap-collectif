@@ -52,7 +52,7 @@ const QuillToolbar = React.createClass({
         </span>
       </div>
     );
-  }
+  },
 });
 
 export default QuillToolbar;

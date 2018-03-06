@@ -6,7 +6,7 @@ import { submitProposalReport } from '../../../redux/modules/report';
 const ProposalReportButton = React.createClass({
   propTypes: {
     dispatch: PropTypes.func.isRequired,
-    proposal: PropTypes.object.isRequired
+    proposal: PropTypes.object.isRequired,
   },
 
   handleReport(data) {
@@ -26,7 +26,7 @@ const ProposalReportButton = React.createClass({
         buttonClassName="proposal__btn--report"
       />
     );
-  }
+  },
 });
 
 export default connect()(ProposalReportButton);

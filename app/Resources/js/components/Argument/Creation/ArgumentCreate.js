@@ -6,7 +6,7 @@ import {
   submit,
   SubmissionError,
   clearSubmitErrors,
-  type FormProps
+  type FormProps,
 } from 'redux-form';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { Button, Alert } from 'react-bootstrap';
@@ -19,7 +19,7 @@ import type { State, Dispatch } from '../../../types';
 const onSubmit = (values, dispatch, { opinion, type, reset }) => {
   const data = {
     body: values.body,
-    type: type === 'yes' || type === 'simple' ? 1 : 0
+    type: type === 'yes' || type === 'simple' ? 1 : 0,
   };
   return ArgumentActions.add(opinion, data)
     .then(() => {
@@ -51,7 +51,7 @@ type Props = FormProps & {
   user: Object,
   submitting: boolean,
   form: string,
-  dispatch: Dispatch
+  dispatch: Dispatch,
 };
 
 export class ArgumentCreate extends React.Component<Props> {
@@ -117,12 +117,12 @@ export class ArgumentCreate extends React.Component<Props> {
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  user: state.user.user
+  user: state.user.user,
 });
 
 export default connect(mapStateToProps)(
   reduxForm({
     onSubmit,
-    validate
-  })(ArgumentCreate)
+    validate,
+  })(ArgumentCreate),
 );

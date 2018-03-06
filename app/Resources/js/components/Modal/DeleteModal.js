@@ -11,7 +11,7 @@ type Props = {
   deleteElement: Function,
   deleteModalTitle: string,
   deleteModalContent: string,
-  buttonConfirmMessage?: string
+  buttonConfirmMessage?: string,
 };
 
 export class DeleteModal extends React.Component<Props> {
@@ -22,7 +22,7 @@ export class DeleteModal extends React.Component<Props> {
       deleteElement,
       deleteModalContent,
       deleteModalTitle,
-      buttonConfirmMessage
+      buttonConfirmMessage,
     } = this.props;
 
     const onDelete = () => {

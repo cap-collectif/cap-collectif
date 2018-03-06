@@ -18,7 +18,7 @@ const Comment = React.createClass({
     object: PropTypes.number,
     comment: PropTypes.object,
     root: PropTypes.bool,
-    onVote: PropTypes.func.isRequired
+    onVote: PropTypes.func.isRequired,
   },
 
   getInitialState() {
@@ -26,19 +26,19 @@ const Comment = React.createClass({
     if (comment.answers.length > 0) {
       return {
         answerFormShown: true,
-        answerFormFocus: false
+        answerFormFocus: false,
       };
     }
     return {
       answerFormShown: false,
-      answerFormFocus: false
+      answerFormFocus: false,
     };
   },
 
   answer() {
     this.setState({
       answerFormShown: true,
-      answerFormFocus: true
+      answerFormFocus: true,
     });
   },
 
@@ -53,11 +53,11 @@ const Comment = React.createClass({
     const comment = this.props.comment;
     const classes = classNames({
       opinion: true,
-      'opinion--comment': true
+      'opinion--comment': true,
     });
     const detailClasses = classNames({
       'bg-vip': comment.author && comment.author.vip,
-      comment__descript: true
+      comment__descript: true,
     });
 
     return (
@@ -95,7 +95,7 @@ const Comment = React.createClass({
         </div>
       </li>
     );
-  }
+  },
 });
 
 export default Comment;

@@ -19,7 +19,7 @@ export type State = {
   +term: ?string,
   +theme: ?string,
   +isLoading: boolean,
-  +count: number
+  +count: number,
 };
 
 const initialState: State = {
@@ -37,26 +37,26 @@ const initialState: State = {
   term: null,
   theme: null,
   isLoading: true,
-  count: 0
+  count: 0,
 };
 type RequestFetchProjectsAction = { type: 'project/PROJECTS_FETCH_REQUESTED' };
 type ChangePageAction = { type: 'project/CHANGE_PAGE', page: number };
 type ChangeOrderByAction = {
   type: 'project/CHANGE_ORDER_BY',
-  orderBy: ?string
+  orderBy: ?string,
 };
 type ChangeProjectTypeAction = {
   type: 'project/CHANGE_TYPE',
-  projectType: ?string
+  projectType: ?string,
 };
 type ChangeProjectTermAction = { type: 'project/CHANGE_TERM', term: ?string };
 type ChangeProjectThemeAction = {
   type: 'project/CHANGE_THEME',
-  theme: ?string
+  theme: ?string,
 };
 type ReceivedProjectSucceedAction = {
   type: 'project/PROJECTS_FETCH_SUCCEEDED',
-  project: Object
+  project: Object,
 };
 
 export type ProjectAction =
@@ -71,27 +71,27 @@ export type ProjectAction =
   | { type: 'project/CHANGE_FILTER', filter: string, value: string };
 
 export const fetchProjects = (): RequestFetchProjectsAction => ({
-  type: 'project/PROJECTS_FETCH_REQUESTED'
+  type: 'project/PROJECTS_FETCH_REQUESTED',
 });
 export const changePage = (page: number): ChangePageAction => ({
   type: 'project/CHANGE_PAGE',
-  page
+  page,
 });
 export const changeOrderBy = (orderBy: ?string): ChangeOrderByAction => ({
   type: 'project/CHANGE_ORDER_BY',
-  orderBy
+  orderBy,
 });
 export const changeType = (projectType: ?string): ChangeProjectTypeAction => ({
   type: 'project/CHANGE_TYPE',
-  projectType
+  projectType,
 });
 export const changeTerm = (term: ?string): ChangeProjectTermAction => ({
   type: 'project/CHANGE_TERM',
-  term
+  term,
 });
 export const changeTheme = (theme: ?string): ChangeProjectThemeAction => ({
   type: 'project/CHANGE_THEME',
-  theme
+  theme,
 });
 
 export function* fetchProjectsSaga(): Generator<*, *, *> {
@@ -103,12 +103,12 @@ export function* fetchProjectsSaga(): Generator<*, *, *> {
       type: state.type || undefined,
       term: state.term || undefined,
       theme: state.theme || undefined,
-      page: state.page || undefined
+      page: state.page || undefined,
     };
     const result: Object = yield call(Fetcher.get, `/projects?${stringify(queryStrings)}`);
     const succeedAction: ReceivedProjectSucceedAction = {
       type: 'project/PROJECTS_FETCH_SUCCEEDED',
-      project: result
+      project: result,
     };
     yield put(succeedAction);
   } catch (e) {
@@ -133,7 +133,7 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
         page: action.project.page,
         pages: action.project.pages,
         visibleProjects: action.project.projects.map(p => p.id),
-        isLoading: false
+        isLoading: false,
       };
     case 'project/PROJECTS_FETCH_FAILED':
       return { ...state, isLoading: false };

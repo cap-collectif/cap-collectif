@@ -9,8 +9,8 @@ describe('<StepPageHeader />', () => {
     counters: {},
     body: '',
     _links: {
-      stats: 'https://www.test.com'
-    }
+      stats: 'https://www.test.com',
+    },
   };
 
   it('should render a title and a StepInfos', () => {

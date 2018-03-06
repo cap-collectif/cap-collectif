@@ -12,7 +12,7 @@ describe('<OpinionEditModal />', () => {
     opinion: {},
     step: {},
     submitting: false,
-    dispatch: jest.fn()
+    dispatch: jest.fn(),
   };
 
   it('renders correctly', () => {

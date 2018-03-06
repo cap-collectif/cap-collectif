@@ -7,7 +7,7 @@ import { ProjectTrashButton } from './ProjectTrashButton';
 describe('<ProjectTrashButton />', () => {
   const props = {
     user: {},
-    link: 'www.test.com'
+    link: 'www.test.com',
   };
 
   it('should render correctly', () => {

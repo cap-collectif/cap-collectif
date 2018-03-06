@@ -7,28 +7,28 @@ describe('Proposal Reducer', () => {
   it('Should handle POSTS_FETCH_SUCCEEDED', () => {
     const initialState = {
       proposalsById: {
-        proposal1: {}
-      }
+        proposal1: {},
+      },
     };
     const posts = [{}, {}];
     const newState = reducer(initialState, {
       type: 'proposal/POSTS_FETCH_SUCCEEDED',
       proposalId: 'proposal1',
-      posts
+      posts,
     });
     expect(newState).toEqual({
       proposalsById: {
         proposal1: {
-          posts
-        }
-      }
+          posts,
+        },
+      },
     });
   });
 
   it('Should handle deleteVoteSucceeded', () => {
     const initialState = {
       userVotesByStepId: { step6: ['proposal2', 'proposal3'] },
-      proposalsById: {}
+      proposalsById: {},
     };
     const newState = reducer(initialState, deleteVoteSucceeded('step6', 'proposal2', {}));
     expect(newState).toMatchSnapshot();
@@ -38,7 +38,7 @@ describe('Proposal Reducer', () => {
 describe('Proposal Sagas', () => {
   it('Should fetchPosts', () => {
     const generator = fetchPosts({
-      proposalId: 'proposal1'
+      proposalId: 'proposal1',
     });
     const posts = [];
     expect(generator.next().value).toEqual(call(Fetcher.get, '/proposals/proposal1/posts'));
@@ -46,12 +46,12 @@ describe('Proposal Sagas', () => {
       put({
         type: 'proposal/POSTS_FETCH_SUCCEEDED',
         proposalId: 'proposal1',
-        posts
-      })
+        posts,
+      }),
     );
 
     expect(generator.throw({}).value).toEqual(
-      put({ type: 'proposal/POSTS_FETCH_FAILED', error: {} })
+      put({ type: 'proposal/POSTS_FETCH_FAILED', error: {} }),
     );
   });
 });

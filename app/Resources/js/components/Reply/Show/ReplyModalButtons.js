@@ -6,13 +6,13 @@ const ReplyModalButtons = React.createClass({
   propTypes: {
     reply: PropTypes.object.isRequired,
     form: PropTypes.object.isRequired,
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
   },
 
   getInitialState() {
     return {
       showEditModal: false,
-      showDeleteModal: false
+      showDeleteModal: false,
     };
   },
 
@@ -51,7 +51,7 @@ const ReplyModalButtons = React.createClass({
         )}
       </span>
     );
-  }
+  },
 });
 
 export default ReplyModalButtons;

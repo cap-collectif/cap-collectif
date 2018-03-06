@@ -8,7 +8,7 @@ import RankingBox from './RankingBox';
 import { ITEM_TYPE } from '../../constants/RankingConstants';
 
 const itemTarget = {
-  drop() {}
+  drop() {},
 };
 
 const RankingBlock = React.createClass({
@@ -19,12 +19,12 @@ const RankingBlock = React.createClass({
     connectDropTarget: PropTypes.func.isRequired,
     onRankingChange: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
-    onBlur: PropTypes.func
+    onBlur: PropTypes.func,
   },
 
   getDefaultProps() {
     return {
-      disabled: false
+      disabled: false,
     };
   },
 
@@ -33,9 +33,9 @@ const RankingBlock = React.createClass({
     return {
       items: {
         pickBox: field.choices,
-        choiceBox: field.values || []
+        choiceBox: field.values || [],
       },
-      choicesHeight: 'auto'
+      choicesHeight: 'auto',
     };
   },
 
@@ -51,12 +51,12 @@ const RankingBlock = React.createClass({
     items[atList].splice(atIndex, 0, item);
     this.setState(
       {
-        items
+        items,
       },
       () => {
         onRankingChange(this.state.items.choiceBox);
         this.recalculateChoicesHeight();
-      }
+      },
     );
 
     onBlur();
@@ -66,7 +66,7 @@ const RankingBlock = React.createClass({
     const height = `${$(ReactDOM.findDOMNode(this.choiceBox)).height()}px`;
     if (height !== '0px') {
       this.setState({
-        choicesHeight: height
+        choicesHeight: height,
       });
     }
   },
@@ -88,7 +88,7 @@ const RankingBlock = React.createClass({
     return {
       item,
       list: itemList,
-      index: itemIndex
+      index: itemIndex,
     };
   },
 
@@ -148,14 +148,14 @@ const RankingBlock = React.createClass({
             </ListGroup>
           </Col>
         </Row>
-      </div>
+      </div>,
     );
-  }
+  },
 });
 
 export default DragDropContext(HTML5Backend)(
   DropTarget(ITEM_TYPE, itemTarget, connect => ({
     // eslint-disable-line new-cap
-    connectDropTarget: connect.dropTarget()
-  }))(RankingBlock)
+    connectDropTarget: connect.dropTarget(),
+  }))(RankingBlock),
 );

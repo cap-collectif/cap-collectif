@@ -16,12 +16,12 @@ export type User = {
     +email: string,
     +newEmailToConfirm: ?string,
     +media: ?{
-      +url: string
+      +url: string,
     },
     +roles: Array<string>,
     +displayName: string,
-    +uniqueId: string
-  }
+    +uniqueId: string,
+  },
 };
 
 export type State = {
@@ -36,7 +36,7 @@ export type State = {
     +bottomText: string,
     +topText: string,
     +questions: Array<Object>,
-    +domains: Array<string>
+    +domains: Array<string>,
   },
   +user: ?{
     +id: string,
@@ -48,21 +48,21 @@ export type State = {
     +email: string,
     +newEmailToConfirm: ?string,
     +media: ?{
-      +url: string
+      +url: string,
     },
     +roles: Array<string>,
     +displayName: string,
-    +uniqueId: string
+    +uniqueId: string,
   },
   +groupAdminUsersUserDeletionSuccessful: boolean,
-  +groupAdminUsersUserDeletionFailed: boolean
+  +groupAdminUsersUserDeletionFailed: boolean,
 };
 
 type AddRegistrationFieldAction = { type: 'ADD_REGISTRATION_FIELD_SUCCEEDED', element: Object };
 type UpdateRegistrationFieldAction = {
   type: 'UPDATE_REGISTRATION_FIELD_SUCCEEDED',
   id: number,
-  element: Object
+  element: Object,
 };
 type CloseRegistrationModalAction = { type: 'CLOSE_REGISTRATION_MODAL' };
 type ShowRegistrationModalAction = { type: 'SHOW_REGISTRATION_MODAL' };
@@ -75,22 +75,22 @@ type CancelEmailChangeSucceedAction = { type: 'CANCEL_EMAIL_CHANGE' };
 type ConfirmPasswordAction = { type: 'SHOW_CONFIRM_PASSWORD_MODAL' };
 export type SubmitConfirmPasswordAction = {
   type: 'SUBMIT_CONFIRM_PASSWORD_FORM',
-  password: string
+  password: string,
 };
 type CloseConfirmPasswordModalAction = { type: 'CLOSE_CONFIRM_PASSWORD_MODAL' };
 type DeleteRegistrationFieldSucceededAction = {
   type: 'DELETE_REGISTRATION_FIELD_SUCCEEDED',
-  id: number
+  id: number,
 };
 type ReorderSucceededAction = { type: 'REORDER_REGISTRATION_QUESTIONS', questions: Array<Object> };
 type GroupAdminUsersUserDeletionSuccessfulAction = {
-  type: 'GROUP_ADMIN_USERS_USER_DELETION_SUCCESSFUL'
+  type: 'GROUP_ADMIN_USERS_USER_DELETION_SUCCESSFUL',
 };
 type GroupAdminUsersUserDeletionFailedAction = {
-  type: 'GROUP_ADMIN_USERS_USER_DELETION_FAILED'
+  type: 'GROUP_ADMIN_USERS_USER_DELETION_FAILED',
 };
 type GroupAdminUsersUserDeletionResetAction = {
-  type: 'GROUP_ADMIN_USERS_USER_DELETION_RESET'
+  type: 'GROUP_ADMIN_USERS_USER_DELETION_RESET',
 };
 
 export type UserAction =
@@ -126,63 +126,63 @@ const initialState: State = {
     bottomTextDisplayed: false,
     topTextDisplayed: false,
     questions: [],
-    domains: []
+    domains: [],
   },
   groupAdminUsersUserDeletionSuccessful: false,
-  groupAdminUsersUserDeletionFailed: false
+  groupAdminUsersUserDeletionFailed: false,
 };
 
 export const addRegistrationFieldSucceeded = (element: Object): AddRegistrationFieldAction => ({
   type: 'ADD_REGISTRATION_FIELD_SUCCEEDED',
-  element
+  element,
 });
 export const updateRegistrationFieldSucceeded = (
   id: number,
-  element: Object
+  element: Object,
 ): UpdateRegistrationFieldAction => ({ type: 'UPDATE_REGISTRATION_FIELD_SUCCEEDED', element, id });
 export const deleteRegistrationFieldSucceeded = (
-  id: number
+  id: number,
 ): DeleteRegistrationFieldSucceededAction => ({ type: 'DELETE_REGISTRATION_FIELD_SUCCEEDED', id });
 export const showRegistrationModal = (): ShowRegistrationModalAction => ({
-  type: 'SHOW_REGISTRATION_MODAL'
+  type: 'SHOW_REGISTRATION_MODAL',
 });
 export const closeRegistrationModal = (): CloseRegistrationModalAction => ({
-  type: 'CLOSE_REGISTRATION_MODAL'
+  type: 'CLOSE_REGISTRATION_MODAL',
 });
 export const closeLoginModal = (): CloseLoginModalAction => ({ type: 'CLOSE_LOGIN_MODAL' });
 export const showLoginModal = (): ShowLoginModalAction => ({ type: 'SHOW_LOGIN_MODAL' });
 export const confirmPassword = (): ConfirmPasswordAction => ({
-  type: 'SHOW_CONFIRM_PASSWORD_MODAL'
+  type: 'SHOW_CONFIRM_PASSWORD_MODAL',
 });
 export const closeConfirmPasswordModal = (): CloseConfirmPasswordModalAction => ({
-  type: 'CLOSE_CONFIRM_PASSWORD_MODAL'
+  type: 'CLOSE_CONFIRM_PASSWORD_MODAL',
 });
 export const startSubmittingAccountForm = (): StartSubmittingAccountFormAction => ({
-  type: 'SUBMIT_ACCOUNT_FORM'
+  type: 'SUBMIT_ACCOUNT_FORM',
 });
 export const stopSubmittingAccountForm = (): StopSubmittingAccountFormAction => ({
-  type: 'STOP_SUBMIT_ACCOUNT_FORM'
+  type: 'STOP_SUBMIT_ACCOUNT_FORM',
 });
 export const userRequestEmailChange = (email: string): UserRequestEmailChangeAction => ({
   type: 'USER_REQUEST_EMAIL_CHANGE',
-  email
+  email,
 });
 export const cancelEmailChangeSucceed = (): CancelEmailChangeSucceedAction => ({
-  type: 'CANCEL_EMAIL_CHANGE'
+  type: 'CANCEL_EMAIL_CHANGE',
 });
 export const submitConfirmPasswordFormSucceed = (
-  password: string
+  password: string,
 ): SubmitConfirmPasswordAction => ({ type: 'SUBMIT_CONFIRM_PASSWORD_FORM', password });
 
 export const setRegistrationEmailDomains = (values: {
-  domains: Array<{ value: string }>
+  domains: Array<{ value: string }>,
 }): Promise<*> => {
   return Fetcher.put('/registration_form', values);
 };
 
 export const login = (
   data: { username: string, password: string },
-  dispatch: Dispatch
+  dispatch: Dispatch,
 ): Promise<*> => {
   return fetch(`${window.location.protocol}//${window.location.host}/login_check`, {
     method: 'POST',
@@ -191,8 +191,8 @@ export const login = (
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      'X-Requested-With': 'XMLHttpRequest'
-    }
+      'X-Requested-With': 'XMLHttpRequest',
+    },
   })
     .then(response => response.json())
     .then((response: { success: boolean }) => {
@@ -221,7 +221,7 @@ export const register = (values: Object, dispatch: Dispatch, { dynamicFields }: 
         }
         responses.push({
           question,
-          value
+          value,
         });
       }
     } else {
@@ -235,7 +235,7 @@ export const register = (values: Object, dispatch: Dispatch, { dynamicFields }: 
     .then(() => {
       FluxDispatcher.dispatch({
         actionType: 'UPDATE_ALERT',
-        alert: { bsStyle: 'success', content: 'alert.success.add.user' }
+        alert: { bsStyle: 'success', content: 'alert.success.add.user' },
       });
       login({ username: values.email, password: values.plainPassword }, dispatch);
       dispatch(closeRegistrationModal());
@@ -270,7 +270,7 @@ export const register = (values: Object, dispatch: Dispatch, { dynamicFields }: 
 
 export const submitConfirmPasswordForm = (
   { password }: { password: string },
-  dispatch: Dispatch
+  dispatch: Dispatch,
 ): void => {
   dispatch(submitConfirmPasswordFormSucceed(password));
   dispatch(closeConfirmPasswordModal());
@@ -289,7 +289,7 @@ export const cancelEmailChange = (dispatch: Dispatch, previousEmail: string): vo
 const sendEmail = () => {
   FluxDispatcher.dispatch({
     actionType: UPDATE_ALERT,
-    alert: { bsStyle: 'success', content: 'user.confirm.sent' }
+    alert: { bsStyle: 'success', content: 'user.confirm.sent' },
   });
 };
 
@@ -308,9 +308,9 @@ export const submitAccountForm = (values: Object, dispatch: Dispatch): Promise<*
     })
     .catch(
       ({
-        response: { message, errors }
+        response: { message, errors },
       }: {
-        response: { message: string, errors: Array<Object> }
+        response: { message: string, errors: Array<Object> },
       }): void => {
         dispatch(stopSubmittingAccountForm());
         if (message === 'You must specify your password to update your email.') {
@@ -329,18 +329,18 @@ export const submitAccountForm = (values: Object, dispatch: Dispatch): Promise<*
           ) {
             throw new SubmissionError({
               // $FlowFixMe
-              _error: `registration.constraints.${errors.children.newEmailToConfirm.errors[0]}`
+              _error: `registration.constraints.${errors.children.newEmailToConfirm.errors[0]}`,
             });
           }
         }
         throw new SubmissionError({ _error: 'global.error' });
-      }
+      },
     );
 };
 
 const reorderSuceeded = (questions: Array<Object>): ReorderSucceededAction => ({
   type: 'REORDER_REGISTRATION_QUESTIONS',
-  questions
+  questions,
 });
 export const reorderRegistrationQuestions = (questions: Array<Object>, dispatch: Dispatch) => {
   Fetcher.patch('/registration_form/questions', { questions });
@@ -348,13 +348,13 @@ export const reorderRegistrationQuestions = (questions: Array<Object>, dispatch:
 };
 
 export const groupAdminUsersUserDeletionSuccessful = (): GroupAdminUsersUserDeletionSuccessfulAction => ({
-  type: 'GROUP_ADMIN_USERS_USER_DELETION_SUCCESSFUL'
+  type: 'GROUP_ADMIN_USERS_USER_DELETION_SUCCESSFUL',
 });
 export const groupAdminUsersUserDeletionFailed = (): GroupAdminUsersUserDeletionFailedAction => ({
-  type: 'GROUP_ADMIN_USERS_USER_DELETION_FAILED'
+  type: 'GROUP_ADMIN_USERS_USER_DELETION_FAILED',
 });
 export const groupAdminUsersUserDeletionReset = (): GroupAdminUsersUserDeletionResetAction => ({
-  type: 'GROUP_ADMIN_USERS_USER_DELETION_RESET'
+  type: 'GROUP_ADMIN_USERS_USER_DELETION_RESET',
 });
 
 export const reducer = (state: State = initialState, action: Action): Exact<State> => {
@@ -369,9 +369,9 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
           ...state.registration_form,
           questions: [
             ...state.registration_form.questions.slice(0, index),
-            ...state.registration_form.questions.slice(index + 1)
-          ]
-        }
+            ...state.registration_form.questions.slice(index + 1),
+          ],
+        },
       };
     }
     case 'UPDATE_REGISTRATION_FIELD_SUCCEEDED': {
@@ -383,9 +383,9 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
           questions: [
             ...state.registration_form.questions.slice(0, index),
             action.element,
-            ...state.registration_form.questions.slice(index + 1)
-          ]
-        }
+            ...state.registration_form.questions.slice(index + 1),
+          ],
+        },
       };
     }
     case 'ADD_REGISTRATION_FIELD_SUCCEEDED': {
@@ -393,8 +393,8 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
         ...state,
         registration_form: {
           ...state.registration_form,
-          questions: [...state.registration_form.questions, action.element]
-        }
+          questions: [...state.registration_form.questions, action.element],
+        },
       };
     }
     case 'REORDER_REGISTRATION_QUESTIONS': {
@@ -402,8 +402,8 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
         ...state,
         registration_form: {
           ...state.registration_form,
-          questions: action.questions
-        }
+          questions: action.questions,
+        },
       };
     }
     case 'SHOW_REGISTRATION_MODAL':
@@ -418,7 +418,7 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
       return {
         ...state,
         user: { ...state.user, newEmailToConfirm: null },
-        confirmationEmailResent: false
+        confirmationEmailResent: false,
       };
     case 'SUBMIT_ACCOUNT_FORM':
       return { ...state, isSubmittingAccountForm: true };
@@ -438,7 +438,7 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
       return {
         ...state,
         groupAdminUsersUserDeletionSuccessful: false,
-        groupAdminUsersUserDeletionFailed: false
+        groupAdminUsersUserDeletionFailed: false,
       };
     default:
       return state;

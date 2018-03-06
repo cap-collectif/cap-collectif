@@ -5,7 +5,7 @@ import { ProposalPageBlog } from './ProposalPageBlog';
 
 describe('<ProposalPageBlog />', () => {
   const proposal = {
-    posts: [{}, {}]
+    posts: [{}, {}],
   };
 
   it('should render a list of posts', () => {

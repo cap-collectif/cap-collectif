@@ -9,44 +9,44 @@ describe('<ProposalPageTabs />', () => {
   // $FlowFixMe $refType
   const proposal = {
     followerConnection: {
-      totalCount: 169
+      totalCount: 169,
     },
     postsCount: 1,
-    viewerCanSeeEvaluation: true
+    viewerCanSeeEvaluation: true,
   };
   // $FlowFixMe $refType
   const props = {
     form: {
       usingThemes: true,
-      usingCategories: true
+      usingCategories: true,
     },
     oldProposal: {
       selections: [],
       votesByStepId: {
         selectionstep1: [],
-        collectstep1: []
+        collectstep1: [],
       },
       votableStepId: 'selectionstep1',
       votesCountByStepId: {
         selectionstep1: 0,
-        collectstep1: 0
+        collectstep1: 0,
       },
       isDraft: false,
-      viewerCanSeeEvaluation: true
+      viewerCanSeeEvaluation: true,
     },
     categories: [],
     steps: [
       {
         title: 'title',
-        id: 'step1'
-      }
+        id: 'step1',
+      },
     ],
     features: {
       ...features,
       districts: true,
-      themes: true
+      themes: true,
     },
-    votesCount: 150
+    votesCount: 150,
   };
 
   it('should render Tabs with correct DOM structure', () => {

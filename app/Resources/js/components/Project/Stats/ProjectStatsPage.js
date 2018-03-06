@@ -11,7 +11,7 @@ type Props = {
   steps: Array<Object>,
   themes: Array<Object>,
   districts: Array<Object>,
-  categories: Array<Object>
+  categories: Array<Object>,
 };
 
 type State = { selectedStepIndex: number };
@@ -21,17 +21,17 @@ const icons = {
   districts: 'cap cap-marker-1-1',
   themes: 'cap cap-tag-1-1',
   userTypes: 'cap cap-contacts-1',
-  votes: 'cap cap-hand-like-2-1'
+  votes: 'cap cap-hand-like-2-1',
 };
 
 export class ProjectStatsPage extends React.Component<Props, State> {
   state = {
-    selectedStepIndex: 0
+    selectedStepIndex: 0,
   };
 
   selectStep = (index: number) => {
     this.setState({
-      selectedStepIndex: index
+      selectedStepIndex: index,
     });
   };
 
@@ -95,7 +95,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props) =>
     categories:
       collectSteps.length > 0 && collectSteps[0].stats && collectSteps[0].stats.categories
         ? collectSteps[0].stats.categories.values || []
-        : []
+        : [],
   };
 };
 

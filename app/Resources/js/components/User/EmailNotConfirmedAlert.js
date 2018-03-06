@@ -8,19 +8,19 @@ import type { State } from '../../types';
 
 export const EmailNotConfirmedAlert = React.createClass({
   propTypes: {
-    user: PropTypes.object
+    user: PropTypes.object,
   },
 
   getDefaultProps() {
     return {
-      user: null
+      user: null,
     };
   },
 
   getInitialState() {
     return {
       resendingConfirmation: false,
-      confirmationSent: false
+      confirmationSent: false,
     };
   },
 
@@ -30,13 +30,13 @@ export const EmailNotConfirmedAlert = React.createClass({
       .then(() => {
         this.setState({
           resendingConfirmation: false,
-          confirmationSent: true
+          confirmationSent: true,
         });
       })
       .catch(() => {
         this.setState({
           resendingConfirmation: false,
-          confirmationSent: true
+          confirmationSent: true,
         });
       });
   },
@@ -59,7 +59,7 @@ export const EmailNotConfirmedAlert = React.createClass({
               values={{
                 email: user.email,
                 link:
-                  'http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique'
+                  'http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique',
               }}
             />
           </div>
@@ -87,11 +87,11 @@ export const EmailNotConfirmedAlert = React.createClass({
         </div>
       </Alert>
     );
-  }
+  },
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  user: state.user.user
+  user: state.user.user,
 });
 
 export default connect(mapStateToProps)(EmailNotConfirmedAlert);

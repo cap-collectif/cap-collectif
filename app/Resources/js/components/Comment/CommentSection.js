@@ -15,7 +15,7 @@ const CommentSection = React.createClass({
   propTypes: {
     uri: PropTypes.string,
     object: PropTypes.string,
-    intl: PropTypes.object
+    intl: PropTypes.object,
   },
 
   getInitialState() {
@@ -30,8 +30,8 @@ const CommentSection = React.createClass({
       limit: MessagePagination,
       messages: {
         errors: [],
-        success: []
-      }
+        success: [],
+      },
     };
   },
 
@@ -55,7 +55,7 @@ const CommentSection = React.createClass({
 
   onChange() {
     this.setState({
-      messages: CommentStore.messages
+      messages: CommentStore.messages,
     });
     if (CommentStore.isSync) {
       this.setState(
@@ -64,22 +64,22 @@ const CommentSection = React.createClass({
           count: CommentStore.count,
           comments: CommentStore.comments,
           isLoading: false,
-          isLoadingMore: false
+          isLoadingMore: false,
         },
         () => {
           this.resetLoadMoreButton();
-        }
+        },
       );
       return;
     }
 
     this.setState(
       {
-        isLoading: true
+        isLoading: true,
       },
       () => {
         this.loadCommentsFromServer();
-      }
+      },
     );
   },
 
@@ -92,7 +92,7 @@ const CommentSection = React.createClass({
     this.setState({
       filter: $(ReactDOM.findDOMNode(this.refs.filter)).val(),
       isLoading: true,
-      comments: []
+      comments: [],
     });
   },
 
@@ -103,7 +103,7 @@ const CommentSection = React.createClass({
       object,
       this.state.offset,
       this.state.limit,
-      this.state.filter
+      this.state.filter,
     );
   },
 
@@ -119,11 +119,11 @@ const CommentSection = React.createClass({
     this.setState(
       {
         isLoadingMore: true,
-        limit: this.state.limit + MessagePagination
+        limit: this.state.limit + MessagePagination,
       },
       () => {
         this.loadCommentsFromServer();
-      }
+      },
     );
   },
 
@@ -181,7 +181,7 @@ const CommentSection = React.createClass({
             <FormattedHTMLMessage
               id="comment.list"
               values={{
-                num: this.state.countWithAnswers
+                num: this.state.countWithAnswers,
               }}
             />
           </Col>
@@ -198,7 +198,7 @@ const CommentSection = React.createClass({
         {this.renderLoadMore()}
       </div>
     );
-  }
+  },
 });
 
 export default injectIntl(CommentSection);

@@ -13,7 +13,7 @@ const ProposalPageVotes = React.createClass({
     proposal: PropTypes.object.isRequired,
     stepId: PropTypes.string.isRequired,
     showModal: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
   },
 
   componentDidMount() {
@@ -41,7 +41,7 @@ const ProposalPageVotes = React.createClass({
           <FormattedMessage
             id="proposal.vote.count"
             values={{
-              num: votesCount
+              num: votesCount,
             }}
           />
         </h2>
@@ -74,7 +74,7 @@ const ProposalPageVotes = React.createClass({
         />
       </div>
     );
-  }
+  },
 });
 
 const mapStateToProps = (state, props) => {
@@ -83,7 +83,7 @@ const mapStateToProps = (state, props) => {
       state.proposal.currentVotesModal &&
       state.proposal.currentVotesModal.proposalId === props.proposal.id &&
       state.proposal.currentVotesModal.stepId === props.stepId
-    )
+    ),
   };
 };
 export default connect(mapStateToProps)(ProposalPageVotes);

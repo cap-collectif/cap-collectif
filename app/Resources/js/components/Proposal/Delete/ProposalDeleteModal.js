@@ -12,7 +12,7 @@ const ProposalDeleteModal = React.createClass({
     proposal: PropTypes.object.isRequired,
     show: PropTypes.bool.isRequired,
     isDeleting: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
   },
 
   render() {
@@ -37,7 +37,7 @@ const ProposalDeleteModal = React.createClass({
               <FormattedHTMLMessage
                 id="proposal.delete.confirm"
                 values={{
-                  title: proposal.title
+                  title: proposal.title,
                 }}
               />
             </p>
@@ -61,13 +61,13 @@ const ProposalDeleteModal = React.createClass({
         </Modal>
       </div>
     );
-  }
+  },
 });
 
 const mapStateToProps = state => {
   return {
     isDeleting: state.proposal.isDeleting,
-    show: state.proposal.showDeleteModal
+    show: state.proposal.showDeleteModal,
   };
 };
 export default connect(mapStateToProps)(ProposalDeleteModal);

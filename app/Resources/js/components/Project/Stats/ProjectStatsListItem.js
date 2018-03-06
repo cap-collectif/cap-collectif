@@ -6,7 +6,7 @@ const ProjectStatsListItem = React.createClass({
   propTypes: {
     item: React.PropTypes.object.isRequired,
     showPercentage: React.PropTypes.bool.isRequired,
-    isCurrency: React.PropTypes.bool.isRequired
+    isCurrency: React.PropTypes.bool.isRequired,
   },
 
   getFormattedValue() {
@@ -39,7 +39,7 @@ const ProjectStatsListItem = React.createClass({
         </div>
       </ListGroupItem>
     );
-  }
+  },
 });
 
 export default ProjectStatsListItem;

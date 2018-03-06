@@ -5,14 +5,14 @@ import { FormattedMessage } from 'react-intl';
 type Props = {
   show: boolean,
   children: React.Node,
-  divClassName: string
+  divClassName: string,
 };
 
 export class ProposalPrivateField extends React.Component<Props> {
   static defaultProps = {
     show: true,
     children: null,
-    divClassName: ''
+    divClassName: '',
   };
 
   render() {

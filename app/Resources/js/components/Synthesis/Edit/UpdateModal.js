@@ -13,14 +13,14 @@ const UpdateModal = React.createClass({
     element: React.PropTypes.object.isRequired,
     show: React.PropTypes.bool.isRequired,
     toggle: React.PropTypes.func.isRequired,
-    process: React.PropTypes.func
+    process: React.PropTypes.func,
   },
 
   mixins: [DeepLinkStateMixin],
 
   getDefaultProps() {
     return {
-      process: null
+      process: null,
     };
   },
 
@@ -32,9 +32,9 @@ const UpdateModal = React.createClass({
       description: element ? element.description : null,
       elements: [],
       expanded: {
-        root: true
+        root: true,
       },
-      isLoading: true
+      isLoading: true,
     };
   },
 
@@ -54,7 +54,7 @@ const UpdateModal = React.createClass({
           parentId: this.getElementParentId(nextProps.element),
           title: nextProps.element.title,
           description: nextProps.element.description,
-          expanded: this.getExpandedBasedOnElement()
+          expanded: this.getExpandedBasedOnElement(),
         });
       }
     }
@@ -67,7 +67,7 @@ const UpdateModal = React.createClass({
   onChange() {
     this.setState({
       elements: SynthesisElementStore.elements.notIgnoredTree,
-      isLoading: false
+      isLoading: false,
     });
   },
 
@@ -83,7 +83,7 @@ const UpdateModal = React.createClass({
 
   getExpandedBasedOnElement() {
     const expanded = {
-      root: true
+      root: true,
     };
     const element = this.props.element;
     if (this.state.elements && element && element.id !== 'root') {
@@ -101,7 +101,7 @@ const UpdateModal = React.createClass({
     if (element) {
       const value = element !== 'root' ? element.id : null;
       this.setState({
-        parentId: value
+        parentId: value,
       });
     }
   },
@@ -122,7 +122,7 @@ const UpdateModal = React.createClass({
     const data = {
       parent: this.state.parentId,
       title: this.state.title,
-      description: this.state.description
+      description: this.state.description,
     };
     if (typeof process === 'function') {
       const element = this.props.element;
@@ -139,7 +139,7 @@ const UpdateModal = React.createClass({
     const expanded = this.state.expanded;
     expanded[element.id] = !this.state.expanded[element.id];
     this.setState({
-      expanded
+      expanded,
     });
   },
 
@@ -234,7 +234,7 @@ const UpdateModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  }
+  },
 });
 
 export default UpdateModal;

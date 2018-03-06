@@ -12,7 +12,7 @@ import OpinionVersionCreateModal from './OpinionVersionCreateModal';
 const OpinionVersionsBox = React.createClass({
   propTypes: {
     opinionId: React.PropTypes.string.isRequired,
-    opinionBody: React.PropTypes.string.isRequired
+    opinionBody: React.PropTypes.string.isRequired,
   },
 
   getInitialState() {
@@ -21,7 +21,7 @@ const OpinionVersionsBox = React.createClass({
       isLoading: true,
       filter: 'last',
       offset: 0,
-      rankingThreshold: null
+      rankingThreshold: null,
     };
   },
 
@@ -41,7 +41,7 @@ const OpinionVersionsBox = React.createClass({
       this.setState({
         filter: $(element).val(),
         isLoading: true,
-        versions: []
+        versions: [],
       });
     }
   },
@@ -51,12 +51,12 @@ const OpinionVersionsBox = React.createClass({
     this.setState({ isLoading: true });
 
     Fetcher.get(
-      `/opinions/${opinionId}/versions?offset=${this.state.offset}&filter=${this.state.filter}`
+      `/opinions/${opinionId}/versions?offset=${this.state.offset}&filter=${this.state.filter}`,
     ).then(data => {
       this.setState({
         isLoading: false,
         versions: data.versions,
-        rankingThreshold: data.rankingThreshold
+        rankingThreshold: data.rankingThreshold,
       });
       return true;
     });
@@ -121,7 +121,7 @@ const OpinionVersionsBox = React.createClass({
         )}
       </div>
     );
-  }
+  },
 });
 
 export default OpinionVersionsBox;

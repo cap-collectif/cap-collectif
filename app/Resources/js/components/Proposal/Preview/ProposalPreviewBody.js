@@ -9,7 +9,7 @@ const ProposalPreviewBody = React.createClass({
     proposal: PropTypes.object.isRequired,
     showNullEstimation: PropTypes.bool.isRequired,
     showThemes: PropTypes.bool.isRequired,
-    features: PropTypes.object.isRequired
+    features: PropTypes.object.isRequired,
   },
 
   render() {
@@ -50,7 +50,7 @@ const ProposalPreviewBody = React.createClass({
         </div>
       </div>
     );
-  }
+  },
 });
 
 const mapStateToProps = state => {

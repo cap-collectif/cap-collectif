@@ -9,12 +9,12 @@ export const MainNavbarUser = React.createClass({
 
   propTypes: {
     user: PropTypes.object,
-    features: PropTypes.object
+    features: PropTypes.object,
   },
 
   getDefaultProps() {
     return {
-      user: null
+      user: null,
     };
   },
 
@@ -58,13 +58,13 @@ export const MainNavbarUser = React.createClass({
       );
     }
     return null;
-  }
+  },
 });
 
 const mapStateToProps = state => {
   return {
     user: state.user.user,
-    features: state.default.features
+    features: state.default.features,
   };
 };
 

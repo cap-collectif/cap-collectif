@@ -7,13 +7,13 @@ describe('<ProjectStatsListItem />', () => {
   const item = {
     name: 'test',
     value: 2,
-    percentage: 35.3
+    percentage: 35.3,
   };
 
   const props = {
     item,
     showPercentage: true,
-    isCurrency: false
+    isCurrency: false,
   };
 
   it('should render a bar and a value', () => {

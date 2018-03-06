@@ -6,13 +6,13 @@ import OpinionSource from './OpinionSource';
 describe('<OpinionSource />', () => {
   const sourceUserVip = {
     author: {
-      vip: true
-    }
+      vip: true,
+    },
   };
   const sourceUserNotVip = {
     author: {
-      vip: false
-    }
+      vip: false,
+    },
   };
 
   it('should render a li bordered even for empty source', () => {

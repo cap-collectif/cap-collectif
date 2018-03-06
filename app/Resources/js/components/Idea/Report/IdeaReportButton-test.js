@@ -10,9 +10,9 @@ const props = {
     id: 1,
     userHasReport: false,
     author: {
-      displayName: 'user'
-    }
-  }
+      displayName: 'user',
+    },
+  },
 };
 
 describe('<IdeaReportButton />', () => {

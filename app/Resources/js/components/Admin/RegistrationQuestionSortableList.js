@@ -5,7 +5,7 @@ import { SortableContainer } from 'react-sortable-hoc';
 import RegistrationSortableQuestion from './RegistrationSortableQuestion';
 
 export const RegistrationQuestionSortableList = (
-  { items }: { items: Array<Object> } // eslint-disable-line
+  { items }: { items: Array<Object> }, // eslint-disable-line
 ) => (
   <ListGroup>
     {items.map((value, index) => (

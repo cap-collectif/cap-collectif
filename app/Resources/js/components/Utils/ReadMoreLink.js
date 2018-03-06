@@ -8,13 +8,13 @@ const ReadMoreLink = React.createClass({
   propTypes: {
     visible: React.PropTypes.bool,
     expanded: React.PropTypes.bool,
-    onClick: React.PropTypes.func.isRequired
+    onClick: React.PropTypes.func.isRequired,
   },
 
   getDefaultProps() {
     return {
       visible: false,
-      expanded: false
+      expanded: false,
     };
   },
 
@@ -32,7 +32,7 @@ const ReadMoreLink = React.createClass({
         )}
       </Button>
     );
-  }
+  },
 });
 
 export default ReadMoreLink;

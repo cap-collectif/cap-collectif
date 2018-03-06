@@ -12,28 +12,28 @@ describe('<MultipleChoiceRadio />', () => {
         color: null,
         description: null,
         id: 'questionchoice26',
-        label: 'Je dis oui'
+        label: 'Je dis oui',
       },
       {
         color: null,
         description: null,
         id: 'questionchoice27',
-        label: 'Je dis non'
+        label: 'Je dis non',
       },
       {
         color: null,
         description: null,
         id: 'questionchoice28',
-        label: "J'ai rien compris"
-      }
+        label: "J'ai rien compris",
+      },
     ],
     helpText: 'Une seule réponse valable ici, faites le bon choix !',
     isOtherAllowed: true,
     value: {
       labels: null,
-      other: 'Autre valeur'
+      other: 'Autre valeur',
     },
-    change: jest.fn()
+    change: jest.fn(),
   };
 
   it('render correctly', () => {

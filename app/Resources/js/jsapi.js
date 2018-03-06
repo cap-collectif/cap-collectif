@@ -21,8 +21,8 @@ if (!window['google']['loader']) {
       city: 'Gardanne',
       region: "Provence-Alpes-C\u00f4te d'Azur",
       country: 'France',
-      country_code: 'FR'
-    }
+      country_code: 'FR',
+    },
   };
   google.loader.AdditionalParams = '';
   (function() {
@@ -119,7 +119,7 @@ if (!window['google']['loader']) {
               ? d.addEventListener('DOMContentLoaded', R, !1)
               : E('msie')
                 ? h.write(
-                    "<script defer onreadystatechange='google.loader.domReady()' src=//:>\x3c/script>"
+                    "<script defer onreadystatechange='google.loader.domReady()' src=//:>\x3c/script>",
                   )
                 : (E('safari') || E('konqueror')) && d[v](aa, 10)),
           P[z](a))
@@ -426,7 +426,7 @@ if (!window['google']['loader']) {
           for (c = 0; c < b[B]; c++) b[c] = g(b[c][C]()[w](/[^a-z0-9_.]+/g, '_'));
           d[v](
             H(Z, null, `//gg.google.com/csi?s=uds&v=2&action=${a[m](',')}&it=${b[m](',')}`),
-            1e4
+            1e4,
           );
         }
       },
@@ -474,9 +474,9 @@ if (!window['google']['loader']) {
           params: {
             country: { string: 'gl' },
             callback: { string: 'callback' },
-            language: { string: 'hl' }
-          }
-        }
+            language: { string: 'hl' },
+          },
+        },
       },
       'language',
       'gdata',
@@ -498,8 +498,8 @@ if (!window['google']['loader']) {
           deferred: true,
           params: {
             callback: { regex: 'callback\u003d$1\u0026async\u003d2' },
-            language: { string: 'hl' }
-          }
+            language: { string: 'hl' },
+          },
         },
         customSpecs: [
           {
@@ -508,9 +508,9 @@ if (!window['google']['loader']) {
             version: { string: 'v' },
             deferred: true,
             params: { callback: { string: 'callback' }, language: { string: 'hl' } },
-            pattern: '^(3|3..*)$'
-          }
-        ]
+            pattern: '^(3|3..*)$',
+          },
+        ],
       },
       {
         name: 'friendconnect',
@@ -520,8 +520,8 @@ if (!window['google']['loader']) {
           key: { string: 'key' },
           version: { string: 'v' },
           deferred: false,
-          params: {}
-        }
+          params: {},
+        },
       },
       {
         name: 'sharing',
@@ -531,8 +531,8 @@ if (!window['google']['loader']) {
           key: { string: 'key' },
           version: { string: 'v' },
           deferred: false,
-          params: { language: { string: 'hl' } }
-        }
+          params: { language: { string: 'hl' } },
+        },
       },
       'ads',
       {
@@ -543,13 +543,13 @@ if (!window['google']['loader']) {
           key: { string: 'key' },
           version: { string: 'v' },
           deferred: true,
-          params: { callback: { string: 'callback' }, language: { string: 'hl' } }
-        }
+          params: { callback: { string: 'callback' }, language: { string: 'hl' } },
+        },
       },
       'elements',
       'earth',
-      'ima'
-    ]
+      'ima',
+    ],
   });
   google.loader.rfm({
     ':search': {
@@ -560,85 +560,85 @@ if (!window['google']['loader']) {
       properties: {
         ':Version': '1.0',
         ':NoOldNames': false,
-        ':JSHash': '5392cbaa0b641a2ba70e25095e18ee0f'
-      }
+        ':JSHash': '5392cbaa0b641a2ba70e25095e18ee0f',
+      },
     },
     ':language': {
       versions: { ':1': '1', ':1.0': '1' },
       path: '/api/language/1.0/cddd1e0315f352539fc3732010bda57f/',
       js: 'default+fr.I.js',
-      properties: { ':Version': '1.0', ':JSHash': 'cddd1e0315f352539fc3732010bda57f' }
+      properties: { ':Version': '1.0', ':JSHash': 'cddd1e0315f352539fc3732010bda57f' },
     },
     ':annotations': {
       versions: { ':1': '1', ':1.0': '1' },
       path: '/api/annotations/1.0/69e4c522bede40545878d7b96b100995/',
       js: 'default+fr.I.js',
-      properties: { ':Version': '1.0', ':JSHash': '69e4c522bede40545878d7b96b100995' }
+      properties: { ':Version': '1.0', ':JSHash': '69e4c522bede40545878d7b96b100995' },
     },
     ':wave': {
       versions: { ':1': '1', ':1.0': '1' },
       path: '/api/wave/1.0/3b6f7573ff78da6602dda5e09c9025bf/',
       js: 'default.I.js',
-      properties: { ':Version': '1.0', ':JSHash': '3b6f7573ff78da6602dda5e09c9025bf' }
+      properties: { ':Version': '1.0', ':JSHash': '3b6f7573ff78da6602dda5e09c9025bf' },
     },
     ':earth': {
       versions: { ':1': '1', ':1.0': '1' },
       path: '/api/earth/1.0/db22e5693e0a8de1f62f3536f5a8d7d3/',
       js: 'default.I.js',
-      properties: { ':Version': '1.0', ':JSHash': 'db22e5693e0a8de1f62f3536f5a8d7d3' }
+      properties: { ':Version': '1.0', ':JSHash': 'db22e5693e0a8de1f62f3536f5a8d7d3' },
     },
     ':feeds': {
       versions: { ':1': '1', ':1.0': '1' },
       path: '/api/feeds/1.0/482f2817cdf8982edf2e5669f9e3a627/',
       js: 'default+fr.I.js',
       css: 'default+fr.css',
-      properties: { ':Version': '1.0', ':JSHash': '482f2817cdf8982edf2e5669f9e3a627' }
+      properties: { ':Version': '1.0', ':JSHash': '482f2817cdf8982edf2e5669f9e3a627' },
     },
     ':picker': {
       versions: { ':1': '1', ':1.0': '1' },
       path: '/api/picker/1.0/1c635e91b9d0c082c660a42091913907/',
       js: 'default.I.js',
       css: 'default.css',
-      properties: { ':Version': '1.0', ':JSHash': '1c635e91b9d0c082c660a42091913907' }
+      properties: { ':Version': '1.0', ':JSHash': '1c635e91b9d0c082c660a42091913907' },
     },
     ':ima': {
       versions: { ':3': '1', ':3.0': '1' },
       path: '/api/ima/3.0/28a914332232c9a8ac0ae8da68b1006e/',
       js: 'default.I.js',
-      properties: { ':Version': '3.0', ':JSHash': '28a914332232c9a8ac0ae8da68b1006e' }
-    }
+      properties: { ':Version': '3.0', ':JSHash': '28a914332232c9a8ac0ae8da68b1006e' },
+    },
   });
   google.loader.rpl({
     ':swfobject': {
       versions: {
         ':2.1': { uncompressed: 'swfobject_src.js', compressed: 'swfobject.js' },
-        ':2.2': { uncompressed: 'swfobject_src.js', compressed: 'swfobject.js' }
+        ':2.2': { uncompressed: 'swfobject_src.js', compressed: 'swfobject.js' },
       },
-      aliases: { ':2': '2.2' }
+      aliases: { ':2': '2.2' },
     },
     ':chrome-frame': {
       versions: {
         ':1.0.0': { uncompressed: 'CFInstall.js', compressed: 'CFInstall.min.js' },
         ':1.0.1': { uncompressed: 'CFInstall.js', compressed: 'CFInstall.min.js' },
-        ':1.0.2': { uncompressed: 'CFInstall.js', compressed: 'CFInstall.min.js' }
+        ':1.0.2': { uncompressed: 'CFInstall.js', compressed: 'CFInstall.min.js' },
       },
-      aliases: { ':1': '1.0.2', ':1.0': '1.0.2' }
+      aliases: { ':1': '1.0.2', ':1.0': '1.0.2' },
     },
     ':ext-core': {
       versions: {
         ':3.1.0': { uncompressed: 'ext-core-debug.js', compressed: 'ext-core.js' },
-        ':3.0.0': { uncompressed: 'ext-core-debug.js', compressed: 'ext-core.js' }
+        ':3.0.0': { uncompressed: 'ext-core-debug.js', compressed: 'ext-core.js' },
       },
-      aliases: { ':3': '3.1.0', ':3.0': '3.0.0', ':3.1': '3.1.0' }
+      aliases: { ':3': '3.1.0', ':3.0': '3.0.0', ':3.1': '3.1.0' },
     },
     ':scriptaculous': {
       versions: {
         ':1.8.3': { uncompressed: 'scriptaculous.js', compressed: 'scriptaculous.js' },
         ':1.9.0': { uncompressed: 'scriptaculous.js', compressed: 'scriptaculous.js' },
         ':1.8.1': { uncompressed: 'scriptaculous.js', compressed: 'scriptaculous.js' },
-        ':1.8.2': { uncompressed: 'scriptaculous.js', compressed: 'scriptaculous.js' }
+        ':1.8.2': { uncompressed: 'scriptaculous.js', compressed: 'scriptaculous.js' },
       },
-      aliases: { ':1': '1.9.0', ':1.8': '1.8.3', ':1.9': '1.9.0' }
+      aliases: { ':1': '1.9.0', ':1.8': '1.8.3', ':1.9': '1.9.0' },
     },
     ':webfont': {
       versions: {
@@ -668,9 +668,9 @@ if (!window['google']['loader']) {
         ':1.0.18': { uncompressed: 'webfont_debug.js', compressed: 'webfont.js' },
         ':1.0.1': { uncompressed: 'webfont_debug.js', compressed: 'webfont.js' },
         ':1.0.19': { uncompressed: 'webfont_debug.js', compressed: 'webfont.js' },
-        ':1.0.2': { uncompressed: 'webfont_debug.js', compressed: 'webfont.js' }
+        ':1.0.2': { uncompressed: 'webfont_debug.js', compressed: 'webfont.js' },
       },
-      aliases: { ':1': '1.0.29', ':1.0': '1.0.29' }
+      aliases: { ':1': '1.0.29', ':1.0': '1.0.29' },
     },
     ':jqueryui': {
       versions: {
@@ -697,7 +697,7 @@ if (!window['google']['loader']) {
         ':1.8.1': { uncompressed: 'jquery-ui.js', compressed: 'jquery-ui.min.js' },
         ':1.7.2': { uncompressed: 'jquery-ui.js', compressed: 'jquery-ui.min.js' },
         ':1.8.2': { uncompressed: 'jquery-ui.js', compressed: 'jquery-ui.min.js' },
-        ':1.7.3': { uncompressed: 'jquery-ui.js', compressed: 'jquery-ui.min.js' }
+        ':1.7.3': { uncompressed: 'jquery-ui.js', compressed: 'jquery-ui.min.js' },
       },
       aliases: {
         ':1': '1.8.17',
@@ -705,8 +705,8 @@ if (!window['google']['loader']) {
         ':1.5': '1.5.3',
         ':1.6': '1.6.0',
         ':1.7': '1.7.3',
-        ':1.8': '1.8.17'
-      }
+        ':1.8': '1.8.17',
+      },
     },
     ':mootools': {
       versions: {
@@ -722,7 +722,7 @@ if (!window['google']['loader']) {
         ':1.4.2': { uncompressed: 'mootools.js', compressed: 'mootools-yui-compressed.js' },
         ':1.2.4': { uncompressed: 'mootools.js', compressed: 'mootools-yui-compressed.js' },
         ':1.2.5': { uncompressed: 'mootools.js', compressed: 'mootools-yui-compressed.js' },
-        ':1.1.1': { uncompressed: 'mootools.js', compressed: 'mootools-yui-compressed.js' }
+        ':1.1.1': { uncompressed: 'mootools.js', compressed: 'mootools-yui-compressed.js' },
       },
       aliases: {
         ':1': '1.1.2',
@@ -730,36 +730,36 @@ if (!window['google']['loader']) {
         ':1.2': '1.2.5',
         ':1.3': '1.3.2',
         ':1.4': '1.4.2',
-        ':1.11': '1.1.1'
-      }
+        ':1.11': '1.1.1',
+      },
     },
     ':yui': {
       versions: {
         ':2.8.0r4': {
           uncompressed: 'build/yuiloader/yuiloader.js',
-          compressed: 'build/yuiloader/yuiloader-min.js'
+          compressed: 'build/yuiloader/yuiloader-min.js',
         },
         ':2.9.0': {
           uncompressed: 'build/yuiloader/yuiloader.js',
-          compressed: 'build/yuiloader/yuiloader-min.js'
+          compressed: 'build/yuiloader/yuiloader-min.js',
         },
         ':2.8.1': {
           uncompressed: 'build/yuiloader/yuiloader.js',
-          compressed: 'build/yuiloader/yuiloader-min.js'
+          compressed: 'build/yuiloader/yuiloader-min.js',
         },
         ':2.6.0': {
           uncompressed: 'build/yuiloader/yuiloader.js',
-          compressed: 'build/yuiloader/yuiloader-min.js'
+          compressed: 'build/yuiloader/yuiloader-min.js',
         },
         ':2.7.0': {
           uncompressed: 'build/yuiloader/yuiloader.js',
-          compressed: 'build/yuiloader/yuiloader-min.js'
+          compressed: 'build/yuiloader/yuiloader-min.js',
         },
         ':3.3.0': { uncompressed: 'build/yui/yui.js', compressed: 'build/yui/yui-min.js' },
         ':2.8.2r1': {
           uncompressed: 'build/yuiloader/yuiloader.js',
-          compressed: 'build/yuiloader/yuiloader-min.js'
-        }
+          compressed: 'build/yuiloader/yuiloader-min.js',
+        },
       },
       aliases: {
         ':2': '2.9.0',
@@ -770,15 +770,15 @@ if (!window['google']['loader']) {
         ':2.6': '2.6.0',
         ':2.7': '2.7.0',
         ':2.8': '2.8.2r1',
-        ':2.9': '2.9.0'
-      }
+        ':2.9': '2.9.0',
+      },
     },
     ':prototype': {
       versions: {
         ':1.6.1.0': { uncompressed: 'prototype.js', compressed: 'prototype.js' },
         ':1.6.0.2': { uncompressed: 'prototype.js', compressed: 'prototype.js' },
         ':1.7.0.0': { uncompressed: 'prototype.js', compressed: 'prototype.js' },
-        ':1.6.0.3': { uncompressed: 'prototype.js', compressed: 'prototype.js' }
+        ':1.6.0.3': { uncompressed: 'prototype.js', compressed: 'prototype.js' },
       },
       aliases: {
         ':1': '1.7.0.0',
@@ -786,8 +786,8 @@ if (!window['google']['loader']) {
         ':1.6.1': '1.6.1.0',
         ':1.7.0': '1.7.0.0',
         ':1.6': '1.6.1.0',
-        ':1.7': '1.7.0.0'
-      }
+        ':1.7': '1.7.0.0',
+      },
     },
     ':jquery': {
       versions: {
@@ -810,7 +810,7 @@ if (!window['google']['loader']) {
         ':1.4.4': { uncompressed: 'jquery.js', compressed: 'jquery.min.js' },
         ':1.2.6': { uncompressed: 'jquery.js', compressed: 'jquery.min.js' },
         ':1.6.3': { uncompressed: 'jquery.js', compressed: 'jquery.min.js' },
-        ':1.6.4': { uncompressed: 'jquery.js', compressed: 'jquery.min.js' }
+        ':1.6.4': { uncompressed: 'jquery.js', compressed: 'jquery.min.js' },
       },
       aliases: {
         ':1': '1.7.1',
@@ -819,66 +819,66 @@ if (!window['google']['loader']) {
         ':1.4': '1.4.4',
         ':1.5': '1.5.2',
         ':1.6': '1.6.4',
-        ':1.7': '1.7.1'
-      }
+        ':1.7': '1.7.1',
+      },
     },
     ':dojo': {
       versions: {
         ':1.3.0': {
           uncompressed: 'dojo/dojo.xd.js.uncompressed.js',
-          compressed: 'dojo/dojo.xd.js'
+          compressed: 'dojo/dojo.xd.js',
         },
         ':1.4.0': {
           uncompressed: 'dojo/dojo.xd.js.uncompressed.js',
-          compressed: 'dojo/dojo.xd.js'
+          compressed: 'dojo/dojo.xd.js',
         },
         ':1.3.1': {
           uncompressed: 'dojo/dojo.xd.js.uncompressed.js',
-          compressed: 'dojo/dojo.xd.js'
+          compressed: 'dojo/dojo.xd.js',
         },
         ':1.5.0': {
           uncompressed: 'dojo/dojo.xd.js.uncompressed.js',
-          compressed: 'dojo/dojo.xd.js'
+          compressed: 'dojo/dojo.xd.js',
         },
         ':1.4.1': {
           uncompressed: 'dojo/dojo.xd.js.uncompressed.js',
-          compressed: 'dojo/dojo.xd.js'
+          compressed: 'dojo/dojo.xd.js',
         },
         ':1.3.2': {
           uncompressed: 'dojo/dojo.xd.js.uncompressed.js',
-          compressed: 'dojo/dojo.xd.js'
+          compressed: 'dojo/dojo.xd.js',
         },
         ':1.2.3': {
           uncompressed: 'dojo/dojo.xd.js.uncompressed.js',
-          compressed: 'dojo/dojo.xd.js'
+          compressed: 'dojo/dojo.xd.js',
         },
         ':1.6.0': {
           uncompressed: 'dojo/dojo.xd.js.uncompressed.js',
-          compressed: 'dojo/dojo.xd.js'
+          compressed: 'dojo/dojo.xd.js',
         },
         ':1.5.1': {
           uncompressed: 'dojo/dojo.xd.js.uncompressed.js',
-          compressed: 'dojo/dojo.xd.js'
+          compressed: 'dojo/dojo.xd.js',
         },
         ':1.7.0': { uncompressed: 'dojo/dojo.js.uncompressed.js', compressed: 'dojo/dojo.js' },
         ':1.6.1': {
           uncompressed: 'dojo/dojo.xd.js.uncompressed.js',
-          compressed: 'dojo/dojo.xd.js'
+          compressed: 'dojo/dojo.xd.js',
         },
         ':1.4.3': {
           uncompressed: 'dojo/dojo.xd.js.uncompressed.js',
-          compressed: 'dojo/dojo.xd.js'
+          compressed: 'dojo/dojo.xd.js',
         },
         ':1.7.1': { uncompressed: 'dojo/dojo.js.uncompressed.js', compressed: 'dojo/dojo.js' },
         ':1.7.2': { uncompressed: 'dojo/dojo.js.uncompressed.js', compressed: 'dojo/dojo.js' },
         ':1.2.0': {
           uncompressed: 'dojo/dojo.xd.js.uncompressed.js',
-          compressed: 'dojo/dojo.xd.js'
+          compressed: 'dojo/dojo.xd.js',
         },
         ':1.1.1': {
           uncompressed: 'dojo/dojo.xd.js.uncompressed.js',
-          compressed: 'dojo/dojo.xd.js'
-        }
+          compressed: 'dojo/dojo.xd.js',
+        },
       },
       aliases: {
         ':1': '1.6.1',
@@ -888,8 +888,8 @@ if (!window['google']['loader']) {
         ':1.4': '1.4.3',
         ':1.5': '1.5.1',
         ':1.6': '1.6.1',
-        ':1.7': '1.7.2'
-      }
-    }
+        ':1.7': '1.7.2',
+      },
+    },
   });
 }

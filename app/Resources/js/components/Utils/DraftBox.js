@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 
 type Props = {
-  children: any
+  children: any,
 };
 
 export class DraftBox extends React.Component<Props> {

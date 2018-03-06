@@ -9,7 +9,7 @@ import RankingItem from './RankingItem';
 const props = {
   fieldId: 42,
   spotsNb: 3,
-  moveItem: () => {}
+  moveItem: () => {},
 };
 
 const item1 = { id: 1 };
@@ -60,7 +60,7 @@ describe('<RankingBox />', () => {
 
   it('should render ranking choice box with disabled items', () => {
     const wrapper = shallow(
-      <RankingBox {...props} items={itemsList} disabled listType="choiceBox" />
+      <RankingBox {...props} items={itemsList} disabled listType="choiceBox" />,
     );
     expect(wrapper.find('.ranking__choice-box__choices')).toHaveLength(1);
     const spots = wrapper.find(RankingSpot);

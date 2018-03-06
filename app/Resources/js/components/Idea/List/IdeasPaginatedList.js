@@ -8,7 +8,7 @@ const IdeasPaginatedList = React.createClass({
     ideas: PropTypes.array.isRequired,
     currentPage: PropTypes.number.isRequired,
     nbPages: PropTypes.number.isRequired,
-    onChangePage: PropTypes.func.isRequired
+    onChangePage: PropTypes.func.isRequired,
   },
 
   render() {
@@ -25,7 +25,7 @@ const IdeasPaginatedList = React.createClass({
         ) : null}
       </div>
     );
-  }
+  },
 });
 
 export default IdeasPaginatedList;

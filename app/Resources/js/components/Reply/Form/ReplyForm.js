@@ -40,7 +40,7 @@ const ReplyForm = React.createClass({
     onSubmitSuccess: PropTypes.func.isRequired,
     onSubmitFailure: PropTypes.func.isRequired,
     reply: PropTypes.object,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
   },
 
   mixins: [DeepLinkStateMixin, FormMixin],
@@ -48,9 +48,9 @@ const ReplyForm = React.createClass({
   getDefaultProps() {
     return {
       reply: {
-        responses: []
+        responses: [],
       },
-      disabled: false
+      disabled: false,
     };
   },
 
@@ -75,11 +75,11 @@ const ReplyForm = React.createClass({
       if (field.required) {
         if (field.type === 'checkbox' || field.type === 'ranking') {
           fieldRules = {
-            notEmpty: { message: 'reply.constraints.field_mandatory' }
+            notEmpty: { message: 'reply.constraints.field_mandatory' },
           };
         } else {
           fieldRules = {
-            notBlank: { message: 'reply.constraints.field_mandatory' }
+            notBlank: { message: 'reply.constraints.field_mandatory' },
           };
         }
       }
@@ -90,21 +90,21 @@ const ReplyForm = React.createClass({
             fieldRules.min = {
               message: 'reply.constraints.choices_min',
               messageParams: { nb: rule.number },
-              value: rule.number
+              value: rule.number,
             };
             break;
           case 'max':
             fieldRules.max = {
               message: 'reply.constraints.choices_max',
               messageParams: { nb: rule.number },
-              value: rule.number
+              value: rule.number,
             };
             break;
           case 'equal':
             fieldRules.length = {
               message: 'reply.constraints.choices_equal',
               messageParams: { nb: rule.number },
-              value: rule.number
+              value: rule.number,
             };
             break;
           default:
@@ -117,7 +117,7 @@ const ReplyForm = React.createClass({
     return {
       form,
       errors: {},
-      private: false
+      private: false,
     };
   },
 
@@ -128,7 +128,7 @@ const ReplyForm = React.createClass({
       onValidationFailure,
       disabled,
       form,
-      isSubmitting
+      isSubmitting,
     } = this.props;
     if (!disabled && nextProps.isSubmitting && !isSubmitting) {
       if (this.isValid()) {
@@ -184,7 +184,7 @@ const ReplyForm = React.createClass({
       form[field.id] = value;
     }
     this.setState({
-      form
+      form,
     });
   },
 
@@ -194,7 +194,7 @@ const ReplyForm = React.createClass({
       reply.responses,
       { field: { id } },
       'field',
-      'id'
+      'id',
     );
     if (index > -1) {
       return reply.responses[index].value;
@@ -217,7 +217,7 @@ const ReplyForm = React.createClass({
     });
     this.setState({
       form,
-      private: false
+      private: false,
     });
   },
 
@@ -399,7 +399,7 @@ const ReplyForm = React.createClass({
         )}
       </form>
     );
-  }
+  },
 });
 
 export default ReplyForm;

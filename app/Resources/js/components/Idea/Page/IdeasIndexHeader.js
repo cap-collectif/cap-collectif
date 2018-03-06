@@ -3,7 +3,7 @@ import * as React from 'react';
 
 const IdeasIndexHeader = React.createClass({
   propTypes: {
-    description: React.PropTypes.string
+    description: React.PropTypes.string,
   },
 
   render() {
@@ -15,7 +15,7 @@ const IdeasIndexHeader = React.createClass({
         {description && <div dangerouslySetInnerHTML={{ __html: description }} />}
       </div>
     );
-  }
+  },
 });
 
 export default IdeasIndexHeader;

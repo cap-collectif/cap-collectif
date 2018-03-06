@@ -13,12 +13,12 @@ type Props = {
   group: GroupAdminUsers_group,
   handleSubmit: Function,
   dispatch: Dispatch,
-  onClose: Function
+  onClose: Function,
 };
 
 type DefaultProps = void;
 type FormValues = {
-  users: Array<Object>
+  users: Array<Object>,
 };
 
 export const formName = 'group-users-add';
@@ -35,8 +35,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { group, onClose, rese
   const variables = {
     input: {
       users,
-      groupId: group.id
-    }
+      groupId: group.id,
+    },
   };
 
   return AddUsersInGroupMutation.commit(variables).then(() => {
@@ -73,8 +73,8 @@ export class GroupAdminAddUsersForm extends React.Component<Props> {
               Fetcher.postToJson(`/users/search`, { terms, notInIds: usersInGroup }).then(res => ({
                 options: res.users.map(u => ({
                   value: u.id,
-                  label: u.displayName
-                }))
+                  label: u.displayName,
+                })),
               }))
             }
           />
@@ -87,7 +87,7 @@ export class GroupAdminAddUsersForm extends React.Component<Props> {
 const form = reduxForm({
   onSubmit,
   form: formName,
-  destroyOnUnmount: false
+  destroyOnUnmount: false,
 })(GroupAdminAddUsersForm);
 
 export default injectIntl(form);

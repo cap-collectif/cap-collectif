@@ -4,7 +4,7 @@ import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
 import type {
   UpdateProposalFusionMutationResponse,
-  UpdateProposalFusionMutationVariables
+  UpdateProposalFusionMutationVariables,
 } from './__generated__/UpdateProposalFusionMutation.graphql';
 
 // We use this mutation from a child or a fusion, that's why we
@@ -70,11 +70,11 @@ const mutation = graphql`
 `;
 
 const commit = (
-  variables: UpdateProposalFusionMutationVariables
+  variables: UpdateProposalFusionMutationVariables,
 ): Promise<UpdateProposalFusionMutationResponse> =>
   commitMutation(environment, {
     mutation,
-    variables
+    variables,
   });
 
 export default { commit };

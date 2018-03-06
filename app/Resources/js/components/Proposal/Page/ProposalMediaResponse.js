@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 type Props = {
-  medias: Array<Object>
+  medias: Array<Object>,
 };
 
 export class ProposalMediaResponse extends React.PureComponent<Props> {

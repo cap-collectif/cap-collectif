@@ -5,12 +5,12 @@ import CommentSection from '../../Comment/CommentSection';
 const IdeaPageComments = React.createClass({
   propTypes: {
     id: React.PropTypes.string.isRequired,
-    className: React.PropTypes.string
+    className: React.PropTypes.string,
   },
 
   getDefaultProps() {
     return {
-      className: ''
+      className: '',
     };
   },
 
@@ -18,14 +18,14 @@ const IdeaPageComments = React.createClass({
     const { className, id } = this.props;
     const classes = {
       idea__comments: true,
-      [className]: true
+      [className]: true,
     };
     return (
       <div className={classNames(classes)}>
         <CommentSection uri="ideas" object={id} />
       </div>
     );
-  }
+  },
 });
 
 export default IdeaPageComments;

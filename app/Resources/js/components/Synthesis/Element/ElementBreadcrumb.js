@@ -4,12 +4,12 @@ import ElementTitle from './ElementTitle';
 const ElementBreadcrumb = React.createClass({
   propTypes: {
     element: React.PropTypes.object,
-    link: React.PropTypes.string
+    link: React.PropTypes.string,
   },
 
   getDefaultProps() {
     return {
-      link: 'edition'
+      link: 'edition',
     };
   },
 
@@ -22,7 +22,7 @@ const ElementBreadcrumb = React.createClass({
         const id = splitted.slice(splitted.length - 5, splitted.length).join('-');
         const item = {
           title: title || null,
-          id
+          id,
         };
         items.push(item);
       });
@@ -30,7 +30,7 @@ const ElementBreadcrumb = React.createClass({
     }
     items.push({
       id: null,
-      title: '(...)'
+      title: '(...)',
     });
     if (element.parent) {
       items.push(element.parent);
@@ -60,7 +60,7 @@ const ElementBreadcrumb = React.createClass({
         })}
       </p>
     );
-  }
+  },
 });
 
 export default ElementBreadcrumb;

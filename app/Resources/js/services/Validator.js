@@ -19,7 +19,7 @@ class Validator {
     Object.keys(this.rules).map(rule => {
       const message = {
         message: this.rules[rule].message,
-        params: this.rules[rule].messageParams || []
+        params: this.rules[rule].messageParams || [],
       };
       switch (rule) {
         case 'min':

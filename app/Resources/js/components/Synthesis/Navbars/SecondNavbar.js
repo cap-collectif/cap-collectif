@@ -23,7 +23,7 @@ const SecondNavbar = React.createClass({
         </Nav>
       </Navbar>
     );
-  }
+  },
 });
 
 export default SecondNavbar;

@@ -8,7 +8,7 @@ describe('<ReportButton />', () => {
     id: 'opinion-1',
     user: {},
     reported: false,
-    onClick: () => {}
+    onClick: () => {},
   };
 
   it('renders clickable button', () => {

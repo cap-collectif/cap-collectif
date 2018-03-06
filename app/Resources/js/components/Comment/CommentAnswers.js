@@ -4,7 +4,7 @@ import CommentList from './CommentList';
 const CommentAnswers = React.createClass({
   propTypes: {
     comments: PropTypes.array,
-    onVote: PropTypes.func.isRequired
+    onVote: PropTypes.func.isRequired,
   },
 
   render() {
@@ -17,7 +17,7 @@ const CommentAnswers = React.createClass({
       );
     }
     return null;
-  }
+  },
 });
 
 export default CommentAnswers;

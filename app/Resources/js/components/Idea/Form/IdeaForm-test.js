@@ -8,14 +8,14 @@ const props = {
   themes: [],
   onValidationFailure: () => {},
   onSubmitSuccess: () => {},
-  onSubmitFailure: () => {}
+  onSubmitFailure: () => {},
 };
 
 const idea = {
   id: 1,
   theme: {
-    id: 1
-  }
+    id: 1,
+  },
 };
 
 describe('<IdeaForm />', () => {
@@ -34,7 +34,7 @@ describe('<IdeaForm />', () => {
 
   it('it should render the confirm checkbox when idea is provided', () => {
     const wrapper = shallow(
-      <IdeaForm {...props} idea={idea} isSubmitting={false} showThemes={false} />
+      <IdeaForm {...props} idea={idea} isSubmitting={false} showThemes={false} />,
     );
     const form = wrapper.find('#idea-form');
     expect(form).toHaveLength(1);

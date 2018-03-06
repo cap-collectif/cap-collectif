@@ -26,7 +26,7 @@ decorators.Header = (props: Object) => {
             float: 'left',
             marginRight: '5px',
             paddingLeft: '5px',
-            color: props.node.displayType === 'folder' ? '#4B515D' : '#33b5e5'
+            color: props.node.displayType === 'folder' ? '#4B515D' : '#33b5e5',
           }}
         />
         <div
@@ -34,7 +34,7 @@ decorators.Header = (props: Object) => {
             overflow: 'hidden',
             color: 'black',
             fontSize: '16px',
-            fontWeight: props.node.displayType === 'folder' ? '500' : 'normal'
+            fontWeight: props.node.displayType === 'folder' ? '500' : 'normal',
           }}>
           {titleElement}
         </div>
@@ -84,14 +84,14 @@ const preToggleElement = (elements: Array<Object>, depth: number): Array<Object>
 
 const TreeView = React.createClass({
   propTypes: {
-    synthesis: React.PropTypes.object.isRequired
+    synthesis: React.PropTypes.object.isRequired,
   },
 
   getInitialState() {
     return {
       settings: SynthesisStore.settings,
       elements: [],
-      isLoading: true
+      isLoading: true,
     };
   },
 
@@ -110,7 +110,7 @@ const TreeView = React.createClass({
   onChange() {
     this.setState({
       elements: SynthesisElementStore.elements.publishedTree,
-      isLoading: false
+      isLoading: false,
     });
   },
 
@@ -136,7 +136,7 @@ const TreeView = React.createClass({
             decorators={decorators}
             onToggle={(node, toggled) => {
               this.setState({
-                elements: updateToggle(elements, node, toggled)
+                elements: updateToggle(elements, node, toggled),
               });
             }}
             style={styles}
@@ -144,7 +144,7 @@ const TreeView = React.createClass({
         ))}
       </Loader>
     );
-  }
+  },
 });
 
 export default TreeView;

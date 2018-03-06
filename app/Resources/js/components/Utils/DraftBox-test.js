@@ -11,7 +11,7 @@ describe('<DraftBox />', () => {
     const wrapper = shallow(
       <DraftBox {...props}>
         <div className="foo" />
-      </DraftBox>
+      </DraftBox>,
     );
     expect(wrapper).toMatchSnapshot();
   });

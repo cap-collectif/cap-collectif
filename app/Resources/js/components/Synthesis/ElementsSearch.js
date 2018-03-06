@@ -11,12 +11,12 @@ const Pagination = 15;
 const ElementsSearch = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object.isRequired,
-    params: React.PropTypes.object
+    params: React.PropTypes.object,
   },
 
   getDefaultProps() {
     return {
-      params: { term: '' }
+      params: { term: '' },
     };
   },
 
@@ -27,7 +27,7 @@ const ElementsSearch = React.createClass({
       isLoading: true,
       isLoadingMore: false,
       offset: 0,
-      limit: Pagination
+      limit: Pagination,
     };
   },
 
@@ -45,13 +45,13 @@ const ElementsSearch = React.createClass({
       this.setState(
         {
           isLoading: true,
-          limit: Pagination
+          limit: Pagination,
         },
         () => {
           this.loadElementsByTermFromServer(nextProps.params.term).then(() => {
             this.resetLoadMoreButton();
           });
-        }
+        },
       );
     }
   },
@@ -65,7 +65,7 @@ const ElementsSearch = React.createClass({
       elements: SynthesisElementStore.elements.search,
       count: SynthesisElementStore.counts.search,
       isLoading: false,
-      isLoadingMore: false
+      isLoadingMore: false,
     });
   },
 
@@ -82,7 +82,7 @@ const ElementsSearch = React.createClass({
       synthesis.id,
       term,
       this.state.offset,
-      this.state.limit
+      this.state.limit,
     );
   },
 
@@ -91,11 +91,11 @@ const ElementsSearch = React.createClass({
     this.setState(
       {
         isLoadingMore: true,
-        limit: this.state.limit + Pagination
+        limit: this.state.limit + Pagination,
       },
       () => {
         this.loadElementsByTermFromServer();
-      }
+      },
     );
   },
 
@@ -138,7 +138,7 @@ const ElementsSearch = React.createClass({
         {this.renderLoadMore()}
       </div>
     );
-  }
+  },
 });
 
 export default ElementsSearch;

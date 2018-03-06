@@ -7,7 +7,7 @@ import ProjectPreviewBody from './ProjectPreviewBody';
 
 type Props = {
   project: Object,
-  hasSecondTitle?: boolean
+  hasSecondTitle?: boolean,
 };
 
 export class ProjectPreview extends React.Component<Props> {

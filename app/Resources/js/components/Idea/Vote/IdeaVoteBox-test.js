@@ -8,15 +8,15 @@ import { IdeaVoteBox } from './IdeaVoteBox';
 const props = {
   idea: {},
   submitting: false,
-  dispatch: jest.fn()
+  dispatch: jest.fn(),
 };
 
 const propsWithVote = {
   idea: {
-    userHasVote: true
+    userHasVote: true,
   },
   submitting: false,
-  dispatch: jest.fn()
+  dispatch: jest.fn(),
 };
 
 const user = {};

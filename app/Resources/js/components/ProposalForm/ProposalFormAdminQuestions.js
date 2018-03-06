@@ -13,13 +13,13 @@ const selector = formValueSelector(formName);
 type Props = {
   dispatch: Dispatch,
   fields: { length: number, map: Function, remove: Function },
-  questions: Array<Object>
+  questions: Array<Object>,
 };
 type State = { editIndex: ?number };
 
 export class ProposalFormAdminQuestions extends React.Component<Props, State> {
   state = {
-    editIndex: null
+    editIndex: null,
   };
 
   handleClose = (index: number) => {
@@ -80,7 +80,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
                         if (
                           window.confirm(
                             'Êtes-vous sûr de vouloir supprimer cette question ?',
-                            'Les propositions liées ne seront pas supprimées. Cette action est irréversible.'
+                            'Les propositions liées ne seront pas supprimées. Cette action est irréversible.',
                           )
                         ) {
                           fields.remove(index);
@@ -102,8 +102,8 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
               arrayPush(formName, 'questions', {
                 private: false,
                 required: false,
-                position: fields.length + 1
-              })
+                position: fields.length + 1,
+              }),
             );
             this.setState({ editIndex: fields.length });
           }}>
@@ -115,7 +115,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
-  questions: selector(state, 'questions')
+  questions: selector(state, 'questions'),
 });
 
 export default connect(mapStateToProps)(ProposalFormAdminQuestions);

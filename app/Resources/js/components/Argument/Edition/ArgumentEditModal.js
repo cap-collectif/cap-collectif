@@ -14,7 +14,7 @@ const ArgumentEditModal = React.createClass({
     show: PropTypes.bool.isRequired,
     argument: PropTypes.object,
     dispatch: PropTypes.func.isRequired,
-    submitting: PropTypes.bool.isRequired
+    submitting: PropTypes.bool.isRequired,
   },
 
   render() {
@@ -53,10 +53,10 @@ const ArgumentEditModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  }
+  },
 });
 
 export default connect((state: State, { argument }) => ({
   show: state.opinion.showArgumentEditModal === argument.id,
-  submitting: isSubmitting(formName)(state)
+  submitting: isSubmitting(formName)(state),
 }))(ArgumentEditModal);

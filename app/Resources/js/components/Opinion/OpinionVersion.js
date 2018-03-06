@@ -9,7 +9,7 @@ import VotePiechart from '../Utils/VotePiechart';
 const OpinionVersion = React.createClass({
   propTypes: {
     version: PropTypes.object.isRequired,
-    rankingThreshold: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.number]).isRequired
+    rankingThreshold: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.number]).isRequired,
   },
 
   render() {
@@ -19,7 +19,7 @@ const OpinionVersion = React.createClass({
       opinion: true,
       'block--bordered': true,
       'has-chart': true,
-      'bg-vip': version.author && version.author.vip
+      'bg-vip': version.author && version.author.vip,
     });
     return (
       <li className={classes}>
@@ -40,7 +40,7 @@ const OpinionVersion = React.createClass({
         </Row>
       </li>
     );
-  }
+  },
 });
 
 export default OpinionVersion;

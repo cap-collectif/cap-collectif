@@ -4,7 +4,7 @@ import { Alert } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
 type Props = {
-  proposal: { isDraft: boolean }
+  proposal: { isDraft: boolean },
 };
 
 export default class ProposalDraftAlert extends React.Component<Props> {

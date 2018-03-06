@@ -13,13 +13,13 @@ import RegistrationButton from '../User/Registration/RegistrationButton';
 type Props = {
   showRegistration: boolean,
   submitting: boolean,
-  onSubmit: (e: Event) => void
+  onSubmit: (e: Event) => void,
 };
 export const ShieldPage = React.createClass({
   propTypes: {
     showRegistration: PropTypes.bool.isRequired,
     submitting: PropTypes.bool.isRequired,
-    onSubmit: PropTypes.func.isRequired
+    onSubmit: PropTypes.func.isRequired,
   },
 
   render() {
@@ -59,18 +59,18 @@ export const ShieldPage = React.createClass({
         </div>
       </div>
     );
-  }
+  },
 });
 
 const mapStateToProps = (state: State) => ({
   showRegistration: state.default.features.registration,
-  submitting: isSubmitting('login')(state)
+  submitting: isSubmitting('login')(state),
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   onSubmit: (e: Event) => {
     e.preventDefault();
     dispatch(submit('login'));
-  }
+  },
 });
 const connector: Connector<{}, Props> = connect(mapStateToProps, mapDispatchToProps);
 export default connector(ShieldPage);

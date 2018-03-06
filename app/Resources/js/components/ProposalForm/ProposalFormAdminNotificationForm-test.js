@@ -24,9 +24,9 @@ describe('<ProposalFormAdminNotificationForm />', () => {
         onDelete: true,
         onCommentCreate: true,
         onCommentUpdate: true,
-        onCommentDelete: true
-      }
-    }
+        onCommentDelete: true,
+      },
+    },
   };
 
   it('render correctly', () => {

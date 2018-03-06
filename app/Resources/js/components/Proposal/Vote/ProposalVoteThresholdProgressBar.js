@@ -5,7 +5,7 @@ import { ProgressBar } from 'react-bootstrap';
 const ProposalVoteThresholdProgressBar = React.createClass({
   propTypes: {
     proposal: PropTypes.object.isRequired,
-    step: PropTypes.object.isRequired
+    step: PropTypes.object.isRequired,
   },
 
   render() {
@@ -21,7 +21,7 @@ const ProposalVoteThresholdProgressBar = React.createClass({
             <FormattedMessage
               id="vote.count"
               values={{
-                count: votesCount
+                count: votesCount,
               }}
             />
           )}
@@ -41,7 +41,7 @@ const ProposalVoteThresholdProgressBar = React.createClass({
         />
       </div>
     );
-  }
+  },
 });
 
 export default ProposalVoteThresholdProgressBar;

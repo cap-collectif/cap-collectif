@@ -14,7 +14,7 @@ export const RegistrationButton = React.createClass({
     className: PropTypes.string,
     bsStyle: PropTypes.string,
     buttonStyle: PropTypes.object,
-    openRegistrationModal: PropTypes.func.isRequired
+    openRegistrationModal: PropTypes.func.isRequired,
   },
 
   getDefaultProps() {
@@ -23,7 +23,7 @@ export const RegistrationButton = React.createClass({
       buttonStyle: {},
       user: null,
       className: '',
-      bsStyle: 'primary'
+      bsStyle: 'primary',
     };
   },
 
@@ -35,7 +35,7 @@ export const RegistrationButton = React.createClass({
       features,
       style,
       user,
-      openRegistrationModal
+      openRegistrationModal,
     } = this.props;
     if (!features.registration || !!user) {
       return null;
@@ -52,17 +52,17 @@ export const RegistrationButton = React.createClass({
         <RegistrationModal />
       </span>
     );
-  }
+  },
 });
 
 const mapStateToProps = (state: State) => ({
   features: state.default.features,
-  user: state.user.user
+  user: state.user.user,
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   openRegistrationModal: () => {
     dispatch(showRegistrationModal());
-  }
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegistrationButton);

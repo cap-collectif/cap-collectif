@@ -6,7 +6,7 @@ export default class PaginationItem extends React.Component {
     const { active, ariaLabel, disabled, label, onSelect, page } = this.props;
     const classes = classNames({
       disabled,
-      active
+      active,
     });
     return (
       <li className={classes}>
@@ -29,14 +29,14 @@ PaginationItem.propTypes = {
   label: React.PropTypes.string,
   ariaLabel: React.PropTypes.string,
   disabled: React.PropTypes.bool,
-  active: React.PropTypes.bool
+  active: React.PropTypes.bool,
 };
 
 PaginationItem.defaultProps = {
   disabled: false,
   active: false,
   label: null,
-  ariaLabel: null
+  ariaLabel: null,
 };
 
 PaginationItem.displayName = 'PaginationItem';

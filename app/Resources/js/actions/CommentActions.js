@@ -3,7 +3,7 @@ import Fetcher from '../services/Fetcher';
 import {
   CREATE_COMMENT_SUCCESS,
   CREATE_COMMENT_FAILURE,
-  RECEIVE_COMMENTS
+  RECEIVE_COMMENTS,
 } from '../constants/CommentConstants';
 import { UPDATE_ALERT } from '../constants/AlertConstants';
 
@@ -13,20 +13,20 @@ export default {
     object,
     data,
     successMessage = 'comment.submit_success',
-    errorMessage = 'comment.submit_error'
+    errorMessage = 'comment.submit_error',
   ) => {
     return Fetcher.post(`/${uri}/${object}/comments`, data)
       .then(() => {
         AppDispatcher.dispatch({
           actionType: CREATE_COMMENT_SUCCESS,
-          message: successMessage
+          message: successMessage,
         });
         return true;
       })
       .catch(() => {
         AppDispatcher.dispatch({
           actionType: CREATE_COMMENT_FAILURE,
-          message: errorMessage
+          message: errorMessage,
         });
         return false;
       });
@@ -38,7 +38,7 @@ export default {
         data.actionType = RECEIVE_COMMENTS;
         AppDispatcher.dispatch(data);
         return true;
-      }
+      },
     );
   },
 
@@ -47,14 +47,14 @@ export default {
       .then(() => {
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: 'alert.success.add.vote' }
+          alert: { bsStyle: 'success', content: 'alert.success.add.vote' },
         });
         return true;
       })
       .catch(() => {
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'danger', content: 'alert.danger.add.vote' }
+          alert: { bsStyle: 'danger', content: 'alert.danger.add.vote' },
         });
       });
   },
@@ -64,15 +64,15 @@ export default {
       .then(() => {
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: 'alert.success.delete.vote' }
+          alert: { bsStyle: 'success', content: 'alert.success.delete.vote' },
         });
         return true;
       })
       .catch(() => {
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'danger', content: 'alert.danger.delete.vote' }
+          alert: { bsStyle: 'danger', content: 'alert.danger.delete.vote' },
         });
       });
-  }
+  },
 };

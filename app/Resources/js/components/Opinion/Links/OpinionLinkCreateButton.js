@@ -6,7 +6,7 @@ import LoginOverlay from '../../Utils/LoginOverlay';
 
 const OpinionLinkCreateButton = React.createClass({
   propTypes: {
-    handleClick: PropTypes.func.isRequired
+    handleClick: PropTypes.func.isRequired,
   },
 
   render() {
@@ -19,7 +19,7 @@ const OpinionLinkCreateButton = React.createClass({
         </Button>
       </LoginOverlay>
     );
-  }
+  },
 });
 
 export default OpinionLinkCreateButton;

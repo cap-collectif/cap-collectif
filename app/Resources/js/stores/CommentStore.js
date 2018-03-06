@@ -1,7 +1,7 @@
 import {
   RECEIVE_COMMENTS,
   CREATE_COMMENT_SUCCESS,
-  CREATE_COMMENT_FAILURE
+  CREATE_COMMENT_FAILURE,
 } from '../constants/CommentConstants';
 import BaseStore from './BaseStore';
 
@@ -15,7 +15,7 @@ class CommentStore extends BaseStore {
     this._isSync = true;
     this._messages = {
       errors: [],
-      success: []
+      success: [],
     };
   }
 

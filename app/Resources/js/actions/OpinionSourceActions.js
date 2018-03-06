@@ -5,7 +5,7 @@ import {
   CREATE_OPINION_SOURCE_FAILURE,
   UPDATE_OPINION_SOURCE_SUCCESS,
   UPDATE_OPINION_SOURCE_FAILURE,
-  RECEIVE_SOURCES
+  RECEIVE_SOURCES,
 } from '../constants/OpinionSourceConstants';
 
 import { UPDATE_ALERT } from '../constants/AlertConstants';
@@ -20,7 +20,7 @@ export default {
         sources: data.sources,
         count: data.count,
         opinion,
-        filter
+        filter,
       });
       return true;
     });
@@ -31,21 +31,21 @@ export default {
       .then(source => {
         AppDispatcher.dispatch({
           actionType: CREATE_OPINION_SOURCE_SUCCESS,
-          source: source.json()
+          source: source.json(),
         });
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: 'alert.success.add.source' }
+          alert: { bsStyle: 'success', content: 'alert.success.add.source' },
         });
         return true;
       })
       .catch(() => {
         AppDispatcher.dispatch({
-          actionType: CREATE_OPINION_SOURCE_FAILURE
+          actionType: CREATE_OPINION_SOURCE_FAILURE,
         });
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'danger', content: 'alert.danger.add.source' }
+          alert: { bsStyle: 'danger', content: 'alert.danger.add.source' },
         });
       });
   },
@@ -55,21 +55,21 @@ export default {
       .then(updatedSource => {
         AppDispatcher.dispatch({
           actionType: UPDATE_OPINION_SOURCE_SUCCESS,
-          source: updatedSource.json()
+          source: updatedSource.json(),
         });
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: 'alert.success.update.source' }
+          alert: { bsStyle: 'success', content: 'alert.success.update.source' },
         });
         return true;
       })
       .catch(() => {
         AppDispatcher.dispatch({
-          actionType: UPDATE_OPINION_SOURCE_FAILURE
+          actionType: UPDATE_OPINION_SOURCE_FAILURE,
         });
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'danger', content: 'alert.danger.update.source' }
+          alert: { bsStyle: 'danger', content: 'alert.danger.update.source' },
         });
       });
   },
@@ -78,8 +78,8 @@ export default {
     return Fetcher.delete(`/${baseUrl(opinion)}/${opinion.id}/sources/${source}`).then(() => {
       AppDispatcher.dispatch({
         actionType: UPDATE_ALERT,
-        alert: { bsStyle: 'success', content: 'alert.success.delete.source' }
+        alert: { bsStyle: 'success', content: 'alert.success.delete.source' },
       });
     });
-  }
+  },
 };

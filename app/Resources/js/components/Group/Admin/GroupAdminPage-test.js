@@ -6,7 +6,7 @@ import { GroupAdminPage } from './GroupAdminPage';
 
 describe('<GroupAdminPage />', () => {
   const props = {
-    groupId: 'group4'
+    groupId: 'group4',
   };
 
   it('render correctly', () => {

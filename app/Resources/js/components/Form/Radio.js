@@ -16,14 +16,14 @@ const Radio = React.createClass({
     label: PropTypes.any,
     labelClassName: PropTypes.string,
     isReduxForm: PropTypes.bool.isRequired,
-    checkedValue: PropTypes.string
+    checkedValue: PropTypes.string,
   },
 
   getDefaultProps() {
     return {
       disabled: false,
       labelClassName: '',
-      isReduxForm: false
+      isReduxForm: false,
     };
   },
 
@@ -35,7 +35,7 @@ const Radio = React.createClass({
     const { field, onChange, isReduxForm } = this.props;
     if (field.isOtherAllowed) {
       const otherRadioElement = Array.from(
-        ReactDOM.findDOMNode(this.other).getElementsByTagName('*')
+        ReactDOM.findDOMNode(this.other).getElementsByTagName('*'),
       ).find(node => {
         return node.type === 'radio';
       });
@@ -56,7 +56,7 @@ const Radio = React.createClass({
   empty() {
     this.other.clear();
     const radioElements = Array.from(
-      ReactDOM.findDOMNode(this.radioGroup).getElementsByTagName('input')
+      ReactDOM.findDOMNode(this.radioGroup).getElementsByTagName('input'),
     ).filter(node => {
       return node.type === 'radio';
     });
@@ -73,13 +73,13 @@ const Radio = React.createClass({
       labelClassName,
       label,
       renderFormErrors,
-      checkedValue
+      checkedValue,
     } = this.props;
     const field = this.props.field;
     const fieldName = `choices-for-field-${field.id}`;
 
     const labelClasses = {
-      'control-label': true
+      'control-label': true,
     };
     labelClasses[labelClassName] = true;
 
@@ -122,7 +122,7 @@ const Radio = React.createClass({
         {renderFormErrors(field.id)}
       </div>
     );
-  }
+  },
 });
 
 export default Radio;

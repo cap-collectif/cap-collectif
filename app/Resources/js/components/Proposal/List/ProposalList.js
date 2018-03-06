@@ -10,13 +10,13 @@ export const ProposalList = React.createClass({
     proposals: PropTypes.array.isRequired,
     step: PropTypes.object.isRequired,
     showThemes: PropTypes.bool,
-    showComments: PropTypes.bool
+    showComments: PropTypes.bool,
   },
 
   getDefaultProps() {
     return {
       showThemes: false,
-      showComments: false
+      showComments: false,
     };
   },
 
@@ -40,7 +40,7 @@ export const ProposalList = React.createClass({
     const classes = classNames({
       'media-list': true,
       'proposal-preview-list': true,
-      opinion__list: true
+      opinion__list: true,
     });
 
     let privateProposals = [];
@@ -83,7 +83,7 @@ export const ProposalList = React.createClass({
         )}
       </Row>
     );
-  }
+  },
 });
 
 export default ProposalList;

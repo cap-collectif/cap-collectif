@@ -13,7 +13,7 @@ import {
   Checkbox,
   OverlayTrigger,
   Popover,
-  Radio
+  Radio,
 } from 'react-bootstrap';
 import { RadioGroup, RadioButton } from 'react-radio-buttons';
 import type { IntlShape } from 'react-intl';
@@ -50,7 +50,7 @@ const acceptedMimeTypes = [
   'application/vnd.oasis.opendocument.formula',
   'application/vnd.oasis.opendocument.database',
   'text/csv',
-  'application/xml'
+  'application/xml',
 ];
 
 type Props = {
@@ -80,7 +80,7 @@ type Props = {
   onChange?: any,
   radioChecked?: boolean,
   checkedValue?: ?string,
-  maxLength?: ?string
+  maxLength?: ?string,
 };
 
 class ReactBootstrapInput extends React.Component<Props> {
@@ -88,7 +88,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     labelClassName: 'h5',
     errors: null,
     image: null,
-    medias: []
+    medias: [],
   };
 
   constructor(props, context) {
@@ -276,10 +276,10 @@ class ReactBootstrapInput extends React.Component<Props> {
       let choices;
       if (value) {
         values = props.choices.filter(
-          choice => choice.label === value.find(val => val === choice.label)
+          choice => choice.label === value.find(val => val === choice.label),
         );
         choices = props.choices.filter(
-          choice => choice.label !== value.find(val => val === choice.label)
+          choice => choice.label !== value.find(val => val === choice.label),
         );
       } else {
         choices = props.choices;

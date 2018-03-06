@@ -9,7 +9,7 @@ import VotePiechart from '../Utils/VotePiechart';
 
 export const Opinion = React.createClass({
   propTypes: {
-    opinion: React.PropTypes.object.isRequired
+    opinion: React.PropTypes.object.isRequired,
   },
 
   render() {
@@ -41,7 +41,7 @@ export const Opinion = React.createClass({
         </div>
       </li>
     );
-  }
+  },
 });
 
 export default createFragmentContainer(
@@ -78,5 +78,5 @@ export default createFragmentContainer(
         voteWidgetType
       }
     }
-  `
+  `,
 );

@@ -9,12 +9,12 @@ const IdeaDeleteModal = React.createClass({
   propTypes: {
     idea: React.PropTypes.object.isRequired,
     show: React.PropTypes.bool.isRequired,
-    onToggleModal: React.PropTypes.func.isRequired
+    onToggleModal: React.PropTypes.func.isRequired,
   },
 
   getInitialState() {
     return {
-      isSubmitting: false
+      isSubmitting: false,
     };
   },
 
@@ -60,7 +60,7 @@ const IdeaDeleteModal = React.createClass({
               <FormattedMessage
                 id="idea.delete.confirm"
                 values={{
-                  title: idea.title
+                  title: idea.title,
                 }}
               />
             </p>
@@ -78,7 +78,7 @@ const IdeaDeleteModal = React.createClass({
         </Modal>
       </div>
     );
-  }
+  },
 });
 
 export default IdeaDeleteModal;

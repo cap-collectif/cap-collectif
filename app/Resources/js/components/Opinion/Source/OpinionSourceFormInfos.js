@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 
 const OpinionSourceFormInfos = React.createClass({
   propTypes: {
-    action: PropTypes.string.isRequired
+    action: PropTypes.string.isRequired,
   },
 
   render() {
@@ -18,7 +18,7 @@ const OpinionSourceFormInfos = React.createClass({
         <p>{<FormattedMessage id="source.add_infos" />}</p>
       </div>
     );
-  }
+  },
 });
 
 export default OpinionSourceFormInfos;

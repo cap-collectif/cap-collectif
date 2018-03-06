@@ -4,7 +4,7 @@ import IdeaListItem from './IdeaListItem';
 
 const IdeasList = React.createClass({
   propTypes: {
-    ideas: React.PropTypes.array.isRequired
+    ideas: React.PropTypes.array.isRequired,
   },
 
   render() {
@@ -13,7 +13,7 @@ const IdeasList = React.createClass({
       return <Row>{ideas.map(idea => <IdeaListItem key={idea.id} idea={idea} />)}</Row>;
     }
     return null;
-  }
+  },
 });
 
 export default IdeasList;

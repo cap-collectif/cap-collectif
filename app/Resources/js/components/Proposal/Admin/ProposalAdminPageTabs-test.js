@@ -10,9 +10,9 @@ describe('<ProposalAdminPageTabs />', () => {
     intl: intlMock,
     proposal: {
       followerConnection: {
-        totalCount: 169
-      }
-    }
+        totalCount: 169,
+      },
+    },
   };
 
   it('render correctly', () => {

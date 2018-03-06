@@ -8,7 +8,7 @@ describe('<LoginModal />', () => {
   const props = {
     submitting: false,
     onClose: jest.fn(),
-    onSubmit: jest.fn()
+    onSubmit: jest.fn(),
   };
 
   it('renders an hidden modal if not shown', () => {

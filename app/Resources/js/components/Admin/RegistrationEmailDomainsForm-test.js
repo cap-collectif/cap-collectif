@@ -7,7 +7,7 @@ import { RegistrationEmailDomainsForm } from './RegistrationEmailDomainsForm';
 describe('<RegistrationEmailDomainsForm />', () => {
   const props = {
     submitting: false,
-    handleSubmit: jest.fn()
+    handleSubmit: jest.fn(),
   };
 
   it('renders correctly', () => {

@@ -6,7 +6,7 @@ import LoginOverlay from '../../Utils/LoginOverlay';
 const ProposalCreateButton = React.createClass({
   propTypes: {
     handleClick: PropTypes.func.isRequired,
-    disabled: PropTypes.bool.isRequired
+    disabled: PropTypes.bool.isRequired,
   },
 
   render() {
@@ -23,7 +23,7 @@ const ProposalCreateButton = React.createClass({
         </Button>
       </LoginOverlay>
     );
-  }
+  },
 });
 
 export default ProposalCreateButton;

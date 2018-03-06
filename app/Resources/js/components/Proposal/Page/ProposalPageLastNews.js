@@ -7,10 +7,10 @@ import type { State } from '../../../types';
 
 export class ProposalPageLastNews extends React.Component<{
   proposal: Object,
-  className?: string
+  className?: string,
 }> {
   static defaultProps = {
-    className: ''
+    className: '',
   };
 
   render() {
@@ -24,7 +24,7 @@ export class ProposalPageLastNews extends React.Component<{
     const classes = {
       'bg-vip': answer.author && answer.author.vip,
       block: true,
-      className: false
+      className: false,
     };
     if (className) {
       classes[className] = true;
@@ -43,7 +43,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
   return {
     proposal:
       state.proposal.currentProposalId &&
-      state.proposal.proposalsById[state.proposal.currentProposalId]
+      state.proposal.proposalsById[state.proposal.currentProposalId],
   };
 };
 

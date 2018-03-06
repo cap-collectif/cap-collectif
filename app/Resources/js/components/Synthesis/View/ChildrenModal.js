@@ -8,19 +8,19 @@ const ChildrenModal = React.createClass({
   propTypes: {
     elements: React.PropTypes.array.isRequired,
     show: React.PropTypes.bool.isRequired,
-    toggle: React.PropTypes.func.isRequired
+    toggle: React.PropTypes.func.isRequired,
   },
 
   getInitialState() {
     const { elements } = this.props;
     return {
-      isLoading: elements.length === 0
+      isLoading: elements.length === 0,
     };
   },
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      isLoading: nextProps.elements.length === 0
+      isLoading: nextProps.elements.length === 0,
     });
   },
 
@@ -60,7 +60,7 @@ const ChildrenModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  }
+  },
 });
 
 export default ChildrenModal;

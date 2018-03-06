@@ -6,7 +6,7 @@ import UserLink from '../../User/UserLink';
 
 const ProposalPreviewHeader = React.createClass({
   propTypes: {
-    proposal: React.PropTypes.object.isRequired
+    proposal: React.PropTypes.object.isRequired,
   },
 
   render() {
@@ -27,7 +27,7 @@ const ProposalPreviewHeader = React.createClass({
         </div>
       </div>
     );
-  }
+  },
 });
 
 export default ProposalPreviewHeader;

@@ -8,7 +8,7 @@ const AllVotesModal = React.createClass({
   propTypes: {
     votes: PropTypes.array.isRequired,
     showModal: PropTypes.bool.isRequired,
-    onToggleModal: PropTypes.func.isRequired
+    onToggleModal: PropTypes.func.isRequired,
   },
 
   close() {
@@ -30,7 +30,7 @@ const AllVotesModal = React.createClass({
             <FormattedMessage
               id="vote.count"
               values={{
-                count: votes.length
+                count: votes.length,
               }}
             />
           </Modal.Title>
@@ -47,7 +47,7 @@ const AllVotesModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  }
+  },
 });
 
 export default AllVotesModal;

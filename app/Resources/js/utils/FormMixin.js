@@ -42,7 +42,7 @@ const FormMixin = {
       return this.state.errors[ref];
     }
     return [];
-  }
+  },
 };
 
 export default FormMixin;

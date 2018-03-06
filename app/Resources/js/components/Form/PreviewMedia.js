@@ -6,23 +6,23 @@ import { FormattedMessage } from 'react-intl';
 type Media = {
   id: string,
   name: string,
-  url: string
+  url: string,
 };
 
 type Props = {
   medias: Array<Media>,
-  onRemoveMedia: (newMedia: Media) => void
+  onRemoveMedia: (newMedia: Media) => void,
 };
 
 type State = {
-  initialMedias: Array<Media>
+  initialMedias: Array<Media>,
 };
 
 export class PreviewMedia extends React.PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      initialMedias: props.medias
+      initialMedias: props.medias,
     };
   }
 

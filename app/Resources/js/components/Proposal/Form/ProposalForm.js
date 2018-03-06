@@ -9,14 +9,14 @@ import {
   reduxForm,
   Field,
   FieldArray,
-  formValueSelector
+  formValueSelector,
 } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { debounce } from 'lodash';
 import { Alert, Collapse, Panel, Glyphicon, Button } from 'react-bootstrap';
 import component from '../../Form/Field';
 import query, {
-  type ProposalFormAvailableDistrictsForLocalisationQueryResponse
+  type ProposalFormAvailableDistrictsForLocalisationQueryResponse,
 } from './__generated__/ProposalFormAvailableDistrictsForLocalisationQuery.graphql';
 import type { ProposalForm_proposal } from './__generated__/ProposalForm_proposal.graphql';
 import type { ProposalForm_proposalForm } from './__generated__/ProposalForm_proposalForm.graphql';
@@ -27,14 +27,14 @@ import CreateProposalMutation from '../../../mutations/CreateProposalMutation';
 import {
   closeCreateModal,
   closeEditProposalModal,
-  addProposalInRandomResultsByStep
+  addProposalInRandomResultsByStep,
 } from '../../../redux/modules/proposal';
 import ChangeProposalContentMutation from '../../../mutations/ChangeProposalContentMutation';
 import {
   formatInitialResponsesValues,
   formatSubmitResponses,
   renderResponses,
-  type ResponsesInReduxForm
+  type ResponsesInReduxForm,
 } from '../../../utils/responsesHelper';
 import { validateProposalContent } from '../Admin/ProposalAdminContentForm';
 
@@ -58,14 +58,14 @@ const getAvailableDistrictsQuery = graphql`
 
 type LatLng = {
   lat: number,
-  lng: number
+  lng: number,
 };
 
 export const formName = 'proposal-form';
 
 type RelayProps = {
   +proposalForm: ProposalForm_proposalForm,
-  +proposal: ?ProposalForm_proposal
+  +proposal: ?ProposalForm_proposal,
 };
 
 type Props = FormProps &
@@ -75,7 +75,7 @@ type Props = FormProps &
     +dispatch: Dispatch,
     +features: FeatureToggles,
     +titleValue: ?string,
-    +addressValue: ?string
+    +addressValue: ?string,
   };
 
 type FormValues = {|
@@ -90,7 +90,7 @@ type FormValues = {|
   district?: ?string,
   responses: ResponsesInReduxForm,
   media?: ?any,
-  draft: boolean
+  draft: boolean,
 |};
 
 // const catchServerSubmitErrors = (reason: Object) => {
@@ -125,7 +125,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     draft: values.draft,
     responses: formatSubmitResponses(values.responses, proposalForm.questions),
     media: typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null,
-    addressText: undefined
+    addressText: undefined,
   };
 
   if (!proposalForm.step) {
@@ -133,7 +133,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   }
   if (proposal) {
     return ChangeProposalContentMutation.commit({
-      input: { ...data, id: proposal.id }
+      input: { ...data, id: proposal.id },
     })
       .then(response => {
         if (!response.changeProposalContent || !response.changeProposalContent.proposal) {
@@ -148,13 +148,13 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       })
       .catch(() => {
         throw new SubmissionError({
-          _error: 'global.error.server.form'
+          _error: 'global.error.server.form',
         });
       });
   }
 
   return CreateProposalMutation.commit({
-    input: { ...data, proposalFormId: proposalForm.id }
+    input: { ...data, proposalFormId: proposalForm.id },
   })
     .then(response => {
       if (!response.createProposal || !response.createProposal.proposal) {
@@ -169,7 +169,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     })
     .catch(() => {
       throw new SubmissionError({
-        _error: 'global.error.server.form'
+        _error: 'global.error.server.form',
       });
     });
 };
@@ -195,7 +195,7 @@ const validate = (values: FormValues, { proposalForm, features }: Props) => {
 type State = {
   titleSuggestions: Array<Object>,
   isLoadingTitleSuggestions: boolean,
-  districtIdsFilteredByAddress: Array<string>
+  districtIdsFilteredByAddress: Array<string>,
 };
 
 export class ProposalForm extends React.Component<Props, State> {
@@ -204,7 +204,7 @@ export class ProposalForm extends React.Component<Props, State> {
     this.state = {
       titleSuggestions: [],
       isLoadingTitleSuggestions: false,
-      districtIdsFilteredByAddress: props.proposalForm.districts.map(district => district.id)
+      districtIdsFilteredByAddress: props.proposalForm.districts.map(district => district.id),
     };
   }
 
@@ -228,7 +228,7 @@ export class ProposalForm extends React.Component<Props, State> {
       loadSuggestions(this.props.proposalForm.step.id, title).then(res => {
         this.setState({
           titleSuggestions: res.proposals,
-          isLoadingTitleSuggestions: false
+          isLoadingTitleSuggestions: false,
         });
       });
     }
@@ -241,11 +241,11 @@ export class ProposalForm extends React.Component<Props, State> {
       variables: {
         proposalFormId: this.props.proposalForm.id,
         latitude: location.lat,
-        longitude: location.lng
-      }
+        longitude: location.lng,
+      },
     }).then((response: { data: ProposalFormAvailableDistrictsForLocalisationQueryResponse }) => {
       const districtIdsFilteredByAddress = response.data.availableDistrictsForLocalisation.map(
-        district => district.id
+        district => district.id,
       );
       // Select a district if not editing
       if (!this.props.proposal) {
@@ -253,12 +253,12 @@ export class ProposalForm extends React.Component<Props, State> {
           change(
             formName,
             'district',
-            districtIdsFilteredByAddress.length === 0 ? null : districtIdsFilteredByAddress[0]
-          )
+            districtIdsFilteredByAddress.length === 0 ? null : districtIdsFilteredByAddress[0],
+          ),
         );
       }
       this.setState({
-        districtIdsFilteredByAddress
+        districtIdsFilteredByAddress,
       });
     });
   }
@@ -268,7 +268,7 @@ export class ProposalForm extends React.Component<Props, State> {
     const {
       districtIdsFilteredByAddress,
       isLoadingTitleSuggestions,
-      titleSuggestions
+      titleSuggestions,
     } = this.state;
 
     const optional = (
@@ -310,7 +310,7 @@ export class ProposalForm extends React.Component<Props, State> {
                 id="proposal.suggest_header"
                 values={{
                   matches: titleSuggestions.length,
-                  terms: titleValue ? titleValue.split(' ').length : ''
+                  terms: titleValue ? titleValue.split(' ').length : '',
                 }}
               />
             }>
@@ -477,7 +477,7 @@ const selector = formValueSelector(formName);
 
 const mapStateToProps: MapStateToProps<*, *, *> = (
   state: GlobalState,
-  { proposal, proposalForm }: Props
+  { proposal, proposalForm }: Props,
 ) => ({
   initialValues: {
     draft: proposal ? proposal.publicationStatus === 'DRAFT' : true,
@@ -493,20 +493,20 @@ const mapStateToProps: MapStateToProps<*, *, *> = (
     address: (proposal && proposal.address) || undefined,
     responses: formatInitialResponsesValues(
       proposalForm.questions,
-      proposal ? proposal.responses : []
-    )
+      proposal ? proposal.responses : [],
+    ),
   },
   titleValue: selector(state, 'title'),
   addressValue: selector(state, 'address'),
   features: state.default.features,
   themes: state.default.themes,
-  currentStepId: state.project.currentProjectStepById
+  currentStepId: state.project.currentProjectStepById,
 });
 
 const form = reduxForm({
   form: formName,
   validate,
-  onSubmit
+  onSubmit,
 })(ProposalForm);
 
 const container = connect(mapStateToProps)(injectIntl(form));
@@ -605,5 +605,5 @@ export default createFragmentContainer(container, {
       addressHelpText
       proposalInAZoneRequired
     }
-  `
+  `,
 });

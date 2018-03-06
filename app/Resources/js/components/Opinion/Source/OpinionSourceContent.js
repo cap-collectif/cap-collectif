@@ -6,7 +6,7 @@ const OpinionSourceContent = ({ source }: Object) => {
 };
 
 OpinionSourceContent.propTypes = {
-  source: PropTypes.object.isRequired
+  source: PropTypes.object.isRequired,
 };
 
 export default OpinionSourceContent;

@@ -8,14 +8,14 @@ import IdeaVoteForm from './IdeaVoteForm';
 import { voteSuccess } from '../../../redux/modules/idea';
 import {
   CREATE_COMMENT_SUCCESS,
-  CREATE_COMMENT_FAILURE
+  CREATE_COMMENT_FAILURE,
 } from '../../../constants/CommentConstants';
 import { UPDATE_ALERT } from '../../../constants/AlertConstants';
 
 type Props = {
   dispatch: Function,
   idea: Object,
-  anonymous: boolean
+  anonymous: boolean,
 };
 
 const onSubmit = (values, dispatch, props) => {
@@ -29,13 +29,13 @@ const onSubmit = (values, dispatch, props) => {
     .then(vote => {
       AppDispatcher.dispatch({
         actionType: UPDATE_ALERT,
-        alert: { bsStyle: 'success', content: 'alert.success.add.vote' }
+        alert: { bsStyle: 'success', content: 'alert.success.add.vote' },
       });
       dispatch(voteSuccess(idea.id, vote));
       if (hasComment) {
         AppDispatcher.dispatch({
           actionType: CREATE_COMMENT_SUCCESS,
-          message: 'comment.submit_success'
+          message: 'comment.submit_success',
         });
       }
       return vote;
@@ -49,12 +49,12 @@ const onSubmit = (values, dispatch, props) => {
       }
       AppDispatcher.dispatch({
         actionType: UPDATE_ALERT,
-        alert: { bsStyle: 'warning', content: 'alert.danger.add.vote' }
+        alert: { bsStyle: 'warning', content: 'alert.danger.add.vote' },
       });
       if (hasComment) {
         AppDispatcher.dispatch({
           actionType: CREATE_COMMENT_FAILURE,
-          message: 'comment.submit_error'
+          message: 'comment.submit_error',
         });
       }
     });

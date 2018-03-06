@@ -6,7 +6,7 @@ import {
   DELETE_OPINION_SUCCESS,
   DELETE_OPINION_FAILURE,
   DELETE_OPINION_VERSION_SUCCESS,
-  DELETE_OPINION_VERSION_FAILURE
+  DELETE_OPINION_VERSION_FAILURE,
 } from '../constants/OpinionConstants';
 
 export default {
@@ -19,7 +19,7 @@ export default {
         actionType: RECEIVE_OPINION,
         opinion: data.opinion ? data.opinion : data.version,
         rankingThreshold: data.rankingThreshold,
-        opinionTerm: data.opinionTerm
+        opinionTerm: data.opinionTerm,
       });
       return true;
     });
@@ -29,12 +29,12 @@ export default {
     return Fetcher.delete(`/opinions/${opinion}`)
       .then(() => {
         AppDispatcher.dispatch({
-          actionType: DELETE_OPINION_SUCCESS
+          actionType: DELETE_OPINION_SUCCESS,
         });
       })
       .catch(() => {
         AppDispatcher.dispatch({
-          actionType: DELETE_OPINION_FAILURE
+          actionType: DELETE_OPINION_FAILURE,
         });
       });
   },
@@ -51,7 +51,7 @@ export default {
     while (hasMore) {
       // eslint-disable-next-line no-await-in-loop
       const result = await Fetcher.get(
-        `${url}?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`
+        `${url}?offset=${iterationCount * votesPerIteration}&limit=${votesPerIteration}`,
       );
       hasMore = result.hasMore;
       iterationCount++;
@@ -66,12 +66,12 @@ export default {
     return Fetcher.delete(`/opinions/${opinion}/versions/${version}`)
       .then(() => {
         AppDispatcher.dispatch({
-          actionType: DELETE_OPINION_VERSION_SUCCESS
+          actionType: DELETE_OPINION_VERSION_SUCCESS,
         });
       })
       .catch(() => {
         AppDispatcher.dispatch({
-          actionType: DELETE_OPINION_VERSION_FAILURE
+          actionType: DELETE_OPINION_VERSION_FAILURE,
         });
       });
   },
@@ -80,5 +80,5 @@ export default {
     return Fetcher.post(`/opinions/${opinion}/versions/${version}/sources`, data).then(() => {
       return true;
     });
-  }
+  },
 };

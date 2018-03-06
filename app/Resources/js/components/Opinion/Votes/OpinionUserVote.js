@@ -6,12 +6,12 @@ import UserAvatar from '../../User/UserAvatar';
 const OpinionUserVote = React.createClass({
   propTypes: {
     vote: PropTypes.object.isRequired,
-    style: PropTypes.object
+    style: PropTypes.object,
   },
 
   getDefaultProps() {
     return {
-      style: {}
+      style: {},
     };
   },
 
@@ -24,7 +24,7 @@ const OpinionUserVote = React.createClass({
         <UserAvatar user={vote.user} style={style} />
       </OverlayTrigger>
     );
-  }
+  },
 });
 
 export default OpinionUserVote;

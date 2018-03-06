@@ -9,64 +9,64 @@ type OpinionVote = { user: { uniqueId: string }, value: VoteValue };
 type OpinionVotes = Array<OpinionVote>;
 
 type ShowSourceCreateModalAction = {
-  type: 'opinion/SHOW_SOURCE_CREATE_MODAL'
+  type: 'opinion/SHOW_SOURCE_CREATE_MODAL',
 };
 type HideSourceCreateModalAction = {
-  type: 'opinion/HIDE_SOURCE_CREATE_MODAL'
+  type: 'opinion/HIDE_SOURCE_CREATE_MODAL',
 };
 type HideArgumentEditModalAction = {
-  type: 'opinion/HIDE_ARGUMENT_EDIT_MODAL'
+  type: 'opinion/HIDE_ARGUMENT_EDIT_MODAL',
 };
 type ShowArgumentEditModalAction = {
   type: 'opinion/SHOW_ARGUMENT_EDIT_MODAL',
-  id: Uuid
+  id: Uuid,
 };
 type ShowSourceEditModalAction = {
   type: 'opinion/SHOW_SOURCE_EDIT_MODAL',
-  id: Uuid
+  id: Uuid,
 };
 type HideSourceEditModalAction = {
-  type: 'opinion/HIDE_SOURCE_EDIT_MODAL'
+  type: 'opinion/HIDE_SOURCE_EDIT_MODAL',
 };
 type StartEditOpinionVersionAction = {
-  type: 'opinion/START_EDIT_OPINION_VERSION'
+  type: 'opinion/START_EDIT_OPINION_VERSION',
 };
 type CancelEditOpinionVersionAction = {
-  type: 'opinion/CANCEL_EDIT_OPINION_VERSION'
+  type: 'opinion/CANCEL_EDIT_OPINION_VERSION',
 };
 type StartCreateOpinionVersionAction = {
-  type: 'opinion/START_CREATE_OPINION_VERSION'
+  type: 'opinion/START_CREATE_OPINION_VERSION',
 };
 type CancelCreateOpinionVersionAction = {
-  type: 'opinion/CANCEL_CREATE_OPINION_VERSION'
+  type: 'opinion/CANCEL_CREATE_OPINION_VERSION',
 };
 type ShowOpinionVersionEditModalAction = {
-  type: 'opinion/SHOW_OPINION_VERSION_EDIT_MODAL'
+  type: 'opinion/SHOW_OPINION_VERSION_EDIT_MODAL',
 };
 type CloseOpinionVersionEditModalAction = {
-  type: 'opinion/CLOSE_OPINION_VERSION_EDIT_MODAL'
+  type: 'opinion/CLOSE_OPINION_VERSION_EDIT_MODAL',
 };
 type ShowOpinionVersionCreateModalAction = {
-  type: 'opinion/SHOW_OPINION_VERSION_CREATE_MODAL'
+  type: 'opinion/SHOW_OPINION_VERSION_CREATE_MODAL',
 };
 type CloseOpinionVersionCreateModalAction = {
-  type: 'opinion/CLOSE_OPINION_VERSION_CREATE_MODAL'
+  type: 'opinion/CLOSE_OPINION_VERSION_CREATE_MODAL',
 };
 type FetchOpinionVotesAction = {
   type: 'opinion/OPINION_VOTES_FETCH_REQUESTED',
   opinionId: Uuid,
-  versionId: ?Uuid
+  versionId: ?Uuid,
 };
 type ShowOpinionCreateModalAction = {
   type: 'opinion/SHOW_OPINION_CREATE_MODAL',
-  opinionTypeId: Uuid
+  opinionTypeId: Uuid,
 };
 type CloseOpinionCreateModalAction = {
-  type: 'opinion/CLOSE_OPINION_CREATE_MODAL'
+  type: 'opinion/CLOSE_OPINION_CREATE_MODAL',
 };
 type ShowOpinionEditModalAction = {
   type: 'opinion/SHOW_OPINION_EDIT_MODAL',
-  opinionId: Uuid
+  opinionId: Uuid,
 };
 type CloseOpinionEditModalAction = { type: 'opinion/CLOSE_OPINION_EDIT_MODAL' };
 
@@ -74,27 +74,27 @@ export type OpinionAction =
   | {
       type: 'opinion/OPINION_VOTE_SUCCEEDED',
       opinionId: Uuid,
-      vote: OpinionVote
+      vote: OpinionVote,
     }
   | {
       type: 'opinion/VERSION_VOTE_SUCCEEDED',
       versionId: Uuid,
-      vote: OpinionVote
+      vote: OpinionVote,
     }
   | {
       type: 'opinion/DELETE_OPINION_VOTE_SUCCEEDED',
       opinionId: Uuid,
-      vote: OpinionVote
+      vote: OpinionVote,
     }
   | {
       type: 'opinion/DELETE_VERSION_VOTE_SUCCEEDED',
       versionId: Uuid,
-      vote: OpinionVote
+      vote: OpinionVote,
     }
   | {
       type: 'opinion/OPINION_VOTES_FETCH_SUCCEEDED',
       votes: OpinionVotes,
-      opinionId: Uuid
+      opinionId: Uuid,
     }
   | { type: 'opinion/OPINION_VOTES_FETCH_FAILED', error: Object }
   | ShowSourceCreateModalAction
@@ -123,12 +123,12 @@ type ContributionMap = {
     title: string,
     comment: string,
     parent: {
-      id: Uuid
+      id: Uuid,
     },
     votes: OpinionVotes,
     votesCount: number,
-    userVote: ?VoteValue
-  }
+    userVote: ?VoteValue,
+  },
 };
 export type State = {
   +currentOpinionId: ?Uuid,
@@ -143,7 +143,7 @@ export type State = {
   +isCreatingOpinionVersion: boolean,
   +showOpinionVersionCreateModal: boolean,
   +showSourceCreateModal: boolean,
-  +showSourceEditModal: ?Uuid
+  +showSourceEditModal: ?Uuid,
 };
 
 const VOTES_PREVIEW_COUNT = 8;
@@ -168,77 +168,77 @@ const initialState: State = {
   isCreatingOpinionVersion: false,
   showOpinionVersionCreateModal: false,
   showSourceCreateModal: false,
-  showSourceEditModal: null
+  showSourceEditModal: null,
 };
 
 export const openArgumentEditModal = (id: Uuid): ShowArgumentEditModalAction => ({
   type: 'opinion/SHOW_ARGUMENT_EDIT_MODAL',
-  id
+  id,
 });
 
 export const showSourceEditModal = (id: Uuid): ShowSourceEditModalAction => ({
   type: 'opinion/SHOW_SOURCE_EDIT_MODAL',
-  id
+  id,
 });
 export const hideSourceEditModal = (): HideSourceEditModalAction => ({
-  type: 'opinion/HIDE_SOURCE_EDIT_MODAL'
+  type: 'opinion/HIDE_SOURCE_EDIT_MODAL',
 });
 
 export const showSourceCreateModal = (): ShowSourceCreateModalAction => ({
-  type: 'opinion/SHOW_SOURCE_CREATE_MODAL'
+  type: 'opinion/SHOW_SOURCE_CREATE_MODAL',
 });
 export const hideSourceCreateModal = (): HideSourceCreateModalAction => ({
-  type: 'opinion/HIDE_SOURCE_CREATE_MODAL'
+  type: 'opinion/HIDE_SOURCE_CREATE_MODAL',
 });
 
 export const closeArgumentEditModal = (): HideArgumentEditModalAction => ({
-  type: 'opinion/HIDE_ARGUMENT_EDIT_MODAL'
+  type: 'opinion/HIDE_ARGUMENT_EDIT_MODAL',
 });
 
 const startCreatingOpinionVersion = (): StartCreateOpinionVersionAction => ({
-  type: 'opinion/START_CREATE_OPINION_VERSION'
+  type: 'opinion/START_CREATE_OPINION_VERSION',
 });
 const cancelCreatingOpinionVersion = (): CancelCreateOpinionVersionAction => ({
-  type: 'opinion/CANCEL_CREATE_OPINION_VERSION'
+  type: 'opinion/CANCEL_CREATE_OPINION_VERSION',
 });
 const startEditingOpinionVersion = (): StartEditOpinionVersionAction => ({
-  type: 'opinion/START_EDIT_OPINION_VERSION'
+  type: 'opinion/START_EDIT_OPINION_VERSION',
 });
 const cancelEditingOpinionVersion = (): CancelEditOpinionVersionAction => ({
-  type: 'opinion/CANCEL_EDIT_OPINION_VERSION'
+  type: 'opinion/CANCEL_EDIT_OPINION_VERSION',
 });
 export const showOpinionVersionEditModal = (): ShowOpinionVersionEditModalAction => ({
-  type: 'opinion/SHOW_OPINION_VERSION_EDIT_MODAL'
+  type: 'opinion/SHOW_OPINION_VERSION_EDIT_MODAL',
 });
 export const closeOpinionVersionEditModal = (): CloseOpinionVersionEditModalAction => ({
-  type: 'opinion/CLOSE_OPINION_VERSION_EDIT_MODAL'
+  type: 'opinion/CLOSE_OPINION_VERSION_EDIT_MODAL',
 });
 export const closeOpinionVersionCreateModal = (): CloseOpinionVersionCreateModalAction => ({
-  type: 'opinion/CLOSE_OPINION_VERSION_CREATE_MODAL'
+  type: 'opinion/CLOSE_OPINION_VERSION_CREATE_MODAL',
 });
 export const showOpinionVersionCreateModal = (): ShowOpinionVersionCreateModalAction => ({
-  type: 'opinion/SHOW_OPINION_VERSION_CREATE_MODAL'
+  type: 'opinion/SHOW_OPINION_VERSION_CREATE_MODAL',
 });
 
 export const openOpinionCreateModal = (opinionTypeId: Uuid): ShowOpinionCreateModalAction => ({
   type: 'opinion/SHOW_OPINION_CREATE_MODAL',
-  opinionTypeId
+  opinionTypeId,
 });
 export const closeOpinionCreateModal = (): CloseOpinionCreateModalAction => ({
-  type: 'opinion/CLOSE_OPINION_CREATE_MODAL'
+  type: 'opinion/CLOSE_OPINION_CREATE_MODAL',
 });
 export const openOpinionEditModal = (opinionId: Uuid): ShowOpinionEditModalAction => ({
   type: 'opinion/SHOW_OPINION_EDIT_MODAL',
-  opinionId
+  opinionId,
 });
 export const closeOpinionEditModal = (): CloseOpinionEditModalAction => ({
-  type: 'opinion/CLOSE_OPINION_EDIT_MODAL'
+  type: 'opinion/CLOSE_OPINION_EDIT_MODAL',
 });
 
 export const createOpinionVersion = (
   data: Object,
   dispatch: Dispatch,
-  { opinionId }: { opinionId: string }
+  { opinionId }: { opinionId: string },
 ): Promise<*> => {
   dispatch(startCreatingOpinionVersion());
   return Fetcher.postToJson(`/opinions/${opinionId}/versions`, data).then(
@@ -248,20 +248,20 @@ export const createOpinionVersion = (
     },
     () => {
       dispatch(cancelCreatingOpinionVersion());
-    }
+    },
   );
 };
 
 export const editOpinionVersion = (
   data: Object,
   dispatch: Dispatch,
-  { opinionId, versionId }: { opinionId: string, versionId: string }
+  { opinionId, versionId }: { opinionId: string, versionId: string },
 ): Promise<*> => {
   dispatch(startEditingOpinionVersion());
   const apiData = {
     title: data.title,
     body: data.body,
-    comment: data.comment
+    comment: data.comment,
   };
   return Fetcher.put(`/opinions/${opinionId}/versions/${versionId}`, apiData).then(
     () => {
@@ -270,7 +270,7 @@ export const editOpinionVersion = (
     },
     () => {
       dispatch(cancelEditingOpinionVersion());
-    }
+    },
   );
 };
 
@@ -292,7 +292,7 @@ export function* fetchAllOpinionVotes(action: FetchOpinionVotesAction): Generato
       yield put({
         type: OPINION_VOTES_FETCH_SUCCEEDED,
         votes: result.votes,
-        opinionId
+        opinionId,
       });
     }
   } catch (e) {
@@ -307,31 +307,31 @@ export function* saga(): Generator<*, *, *> {
 export const fetchOpinionVotes = (opinionId: Uuid, versionId: ?Uuid): FetchOpinionVotesAction => ({
   type: OPINION_VOTES_FETCH_REQUESTED,
   opinionId,
-  versionId
+  versionId,
 });
 
 export const versionVoteSuccess = (versionId: Uuid, vote: OpinionVote): Action => ({
   type: VERSION_VOTE_SUCCEEDED,
   versionId,
-  vote
+  vote,
 });
 
 export const opinionVoteSuccess = (opinionId: Uuid, vote: OpinionVote): Action => ({
   type: OPINION_VOTE_SUCCEEDED,
   opinionId,
-  vote
+  vote,
 });
 
 export const deleteOpinionVoteSuccess = (opinionId: Uuid, vote: OpinionVote): Action => ({
   type: DELETE_OPINION_VOTE_SUCCEEDED,
   opinionId,
-  vote
+  vote,
 });
 
 export const deleteVersionVoteSuccess = (versionId: Uuid, vote: OpinionVote): Action => ({
   type: DELETE_VERSION_VOTE_SUCCEEDED,
   versionId,
-  vote
+  vote,
 });
 
 const deleteVote = (opinion: Uuid, parent: ?Uuid, dispatch: Dispatch): void => {
@@ -348,13 +348,13 @@ const deleteVote = (opinion: Uuid, parent: ?Uuid, dispatch: Dispatch): void => {
       }
       FluxDispatcher.dispatch({
         actionType: UPDATE_OPINION_SUCCESS,
-        message: 'opinion.request.delete_vote.success'
+        message: 'opinion.request.delete_vote.success',
       });
     })
     .catch(e => {
       FluxDispatcher.dispatch({
         actionType: UPDATE_OPINION_FAILURE,
-        message: 'opinion.request.failure'
+        message: 'opinion.request.failure',
       });
       console.error(e); // eslint-disable-line no-console
     });
@@ -374,13 +374,13 @@ const vote = (value: VoteValue, opinion: Uuid, parent: ?Uuid, dispatch: Dispatch
       }
       FluxDispatcher.dispatch({
         actionType: UPDATE_OPINION_SUCCESS,
-        message: 'opinion.request.create_vote.success'
+        message: 'opinion.request.create_vote.success',
       });
     })
     .catch(e => {
       FluxDispatcher.dispatch({
         actionType: UPDATE_OPINION_FAILURE,
-        message: 'opinion.request.failure'
+        message: 'opinion.request.failure',
       });
       console.error(e); // eslint-disable-line no-console
     });
@@ -399,17 +399,17 @@ export const voteVersion = (
   value: VoteValue,
   version: Uuid,
   opinion: Uuid,
-  dispatch: Dispatch
+  dispatch: Dispatch,
 ): void => vote(value, version, opinion, dispatch);
 
 const updateOpinion = (state: State, opinion: Opinion): Exact<State> => ({
   ...state,
-  opinionsById: { ...state.opinionsById, [opinion.id]: opinion }
+  opinionsById: { ...state.opinionsById, [opinion.id]: opinion },
 });
 
 const updateVersion = (state: State, version: Version): Exact<State> => ({
   ...state,
-  versionsById: { ...state.versionsById, [version.id]: version }
+  versionsById: { ...state.versionsById, [version.id]: version },
 });
 
 const getVoteStringByValue = (value: VoteValue): string => {
@@ -429,14 +429,14 @@ const appendVote = (state: State, newVote: Object, object: Object, type: string)
       userHasVote: true,
       [voteCountIncreasing]: object[voteCountIncreasing] + 1,
       votesCount: object.votesCount + 1,
-      userVote: newVote.value
+      userVote: newVote.value,
     };
     return type === 'version'
       ? updateVersion(state, contribution)
       : updateOpinion(state, contribution);
   }
   const indexOfCurrentUserVote = object.votes.findIndex(
-    v => v.user.uniqueId === newVote.user.uniqueId
+    v => v.user.uniqueId === newVote.user.uniqueId,
   );
   object.votes.splice(indexOfCurrentUserVote, 1);
   const voteCountDecreasing = `votesCount${getVoteStringByValue(previousVote.value)}`;
@@ -445,7 +445,7 @@ const appendVote = (state: State, newVote: Object, object: Object, type: string)
     votes: [...object.votes, newVote],
     [voteCountDecreasing]: object[voteCountDecreasing] - 1,
     [voteCountIncreasing]: object[voteCountIncreasing] + 1,
-    userVote: newVote.value
+    userVote: newVote.value,
   };
   return type === 'version'
     ? updateVersion(state, contribution)
@@ -454,7 +454,7 @@ const appendVote = (state: State, newVote: Object, object: Object, type: string)
 
 const removeVote = (state: State, oldVote: Object, object: Object, type: string): Exact<State> => {
   const indexToRemove = object.votes.findIndex(
-    v => v.user && v.user.uniqueId === oldVote.user.uniqueId
+    v => v.user && v.user.uniqueId === oldVote.user.uniqueId,
   );
   const voteCountDecreasing = `votesCount${getVoteStringByValue(oldVote.value)}`;
   const lol = {
@@ -463,7 +463,7 @@ const removeVote = (state: State, oldVote: Object, object: Object, type: string)
     [voteCountDecreasing]: object[voteCountDecreasing] - 1,
     userVote: null,
     userHasVote: false,
-    votesCount: object.votesCount - 1
+    votesCount: object.votesCount - 1,
   };
   return type === 'version' ? updateVersion(state, lol) : updateOpinion(state, lol);
 };
@@ -530,7 +530,7 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
       votes.push(...action.votes);
       return updateOpinion(state, {
         ...state.opinionsById[action.opinionId],
-        votes
+        votes,
       });
     }
     case OPINION_VOTE_SUCCEEDED: {

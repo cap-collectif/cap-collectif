@@ -10,9 +10,9 @@ describe('<OpinionEditForm />', () => {
     opinion: {
       appendices: [{ type: { title: 'Exposé des motifs' } }],
       title: 'titre',
-      body: 'body'
+      body: 'body',
     },
-    step: {}
+    step: {},
   };
 
   it('renders a form', () => {

@@ -5,24 +5,24 @@ import { shallow } from 'enzyme';
 import IdeaPageBody from './IdeaPageBody';
 
 const props = {
-  themes: []
+  themes: [],
 };
 
 const classes = 'css-class';
 
 const idea = {
   id: 1,
-  body: '<p>blabla</p>'
+  body: '<p>blabla</p>',
 };
 
 const ideaWithMediaObjectAndUrl = {
   id: 1,
   body: '<p>blabla</p>',
   media: {
-    url: 'image.png'
+    url: 'image.png',
   },
   object: '<p>blabla</p>',
-  url: 'http://www.google.fr'
+  url: 'http://www.google.fr',
 };
 
 describe('<IdeaPageBody />', () => {

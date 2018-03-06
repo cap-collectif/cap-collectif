@@ -14,7 +14,7 @@ const ElementBlock = React.createClass({
     showStatus: React.PropTypes.bool,
     showNotation: React.PropTypes.bool,
     hasLink: React.PropTypes.bool,
-    linkType: React.PropTypes.string
+    linkType: React.PropTypes.string,
   },
 
   getDefaultProps() {
@@ -23,7 +23,7 @@ const ElementBlock = React.createClass({
       showStatus: true,
       showNotation: true,
       hasLink: true,
-      linkType: 'edition'
+      linkType: 'edition',
     };
   },
 
@@ -94,7 +94,7 @@ const ElementBlock = React.createClass({
         {showStatus ? this.renderStatus() : null}
       </div>
     );
-  }
+  },
 });
 
 export default ElementBlock;

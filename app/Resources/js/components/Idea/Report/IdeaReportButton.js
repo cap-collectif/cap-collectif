@@ -7,7 +7,7 @@ export const IdeaReportButton = React.createClass({
   displayName: 'IdeaReportButton',
   propTypes: {
     dispatch: PropTypes.func.isRequired,
-    idea: PropTypes.object.isRequired
+    idea: PropTypes.object.isRequired,
   },
 
   report(data) {
@@ -26,7 +26,7 @@ export const IdeaReportButton = React.createClass({
         buttonClassName="idea__btn--report"
       />
     );
-  }
+  },
 });
 
 export default connect()(IdeaReportButton);

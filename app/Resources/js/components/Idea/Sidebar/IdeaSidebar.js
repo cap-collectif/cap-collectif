@@ -8,7 +8,7 @@ const IdeaSidebar = React.createClass({
   propTypes: {
     idea: React.PropTypes.object.isRequired,
     expanded: React.PropTypes.bool.isRequired,
-    onToggleExpand: React.PropTypes.func.isRequired
+    onToggleExpand: React.PropTypes.func.isRequired,
   },
 
   render() {
@@ -18,7 +18,7 @@ const IdeaSidebar = React.createClass({
     }
     const wrapperClassName = classNames({
       'sidebar-hideable': true,
-      'sidebar-hidden-small': !expanded
+      'sidebar-hidden-small': !expanded,
     });
 
     return (
@@ -44,7 +44,7 @@ const IdeaSidebar = React.createClass({
         </Button>
       </Col>
     );
-  }
+  },
 });
 
 export default IdeaSidebar;

@@ -5,7 +5,7 @@ import {
   CHANGE_ARGUMENTS_SORT_ORDER,
   CREATE_ARGUMENT_SUCCESS,
   UPDATE_ARGUMENT_FAILURE,
-  UPDATE_ARGUMENT_SUCCESS
+  UPDATE_ARGUMENT_SUCCESS,
 } from '../constants/ArgumentConstants';
 
 class ArgumentStore extends BaseStore {
@@ -15,15 +15,15 @@ class ArgumentStore extends BaseStore {
     this._opinion = {};
     this._arguments = {
       0: [],
-      1: []
+      1: [],
     };
     this._countByType = {
       0: 0,
-      1: 0
+      1: 0,
     };
     this._orderByType = {
       0: 'last',
-      1: 'last'
+      1: 'last',
     };
   }
 

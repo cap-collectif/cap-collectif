@@ -8,14 +8,14 @@ describe('<LoginOverlay />', () => {
     openLoginModal: jest.fn(),
     isLoginOrRegistrationModalOpen: false,
     showRegistrationButton: false,
-    openRegistrationModal: jest.fn()
+    openRegistrationModal: jest.fn(),
   };
 
   it('renders children if not enabled', () => {
     const wrapper = shallow(
       <LoginOverlay enabled={false} showRegistrationButton {...props}>
         <div className="foo" />
-      </LoginOverlay>
+      </LoginOverlay>,
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -24,7 +24,7 @@ describe('<LoginOverlay />', () => {
     const wrapper = shallow(
       <LoginOverlay enabled user={{}} showRegistrationButton {...props}>
         <div className="foo" />
-      </LoginOverlay>
+      </LoginOverlay>,
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -33,7 +33,7 @@ describe('<LoginOverlay />', () => {
     const wrapper = shallow(
       <LoginOverlay enabled user={null} showRegistrationButton {...props}>
         <div className="foo" />
-      </LoginOverlay>
+      </LoginOverlay>,
     );
     expect(wrapper).toMatchSnapshot();
   });

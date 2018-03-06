@@ -8,7 +8,7 @@ type Props = {
   intl: intlShape,
   logo?: ?string,
   items: Array,
-  siteName: ?string
+  siteName: ?string,
 };
 
 class Navbar extends React.Component<Props> {
@@ -26,7 +26,7 @@ class Navbar extends React.Component<Props> {
               id: 'see-more',
               title: intl.formatMessage({ id: 'global.navbar.see_more' }),
               hasEnabledFeature: true,
-              children: items.filter((item, index) => index >= 6)
+              children: items.filter((item, index) => index >= 6),
             }}
             className="navbar-dropdown-more"
           />
@@ -45,7 +45,7 @@ class Navbar extends React.Component<Props> {
               id: 'see-more',
               title: intl.formatMessage({ id: 'global.navbar.see_more' }),
               hasEnabledFeature: true,
-              children: items.filter((item, index) => index >= 3)
+              children: items.filter((item, index) => index >= 3),
             }}
             className="navbar-dropdown-more"
           />
@@ -64,7 +64,7 @@ class Navbar extends React.Component<Props> {
               id: 'see-more',
               title: intl.formatMessage({ id: 'global.navbar.see_more' }),
               hasEnabledFeature: true,
-              children: items.filter((item, index) => index >= 1)
+              children: items.filter((item, index) => index >= 1),
             }}
             className="navbar-dropdown-more"
           />

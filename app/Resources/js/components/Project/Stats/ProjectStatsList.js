@@ -19,14 +19,14 @@ type Props = {
   themes: Array<Object>,
   districts: Array<Object>,
   categories: Array<Object>,
-  showFilters: boolean
+  showFilters: boolean,
 };
 type State = {
   showPercentage: boolean,
   data: Object,
   theme: ?string,
   district: ?string,
-  category: ?string
+  category: ?string,
 };
 
 export class ProjectStatsList extends React.Component<Props, State> {
@@ -37,46 +37,46 @@ export class ProjectStatsList extends React.Component<Props, State> {
       data: props.data,
       theme: null,
       district: null,
-      category: null
+      category: null,
     };
   }
 
   showPercentage = (value: boolean) => {
     this.setState({
-      showPercentage: value
+      showPercentage: value,
     });
   };
 
   changeTheme = (ev: SyntheticInputEvent<HTMLInputElement>) => {
     this.setState(
       {
-        theme: ev.target.value
+        theme: ev.target.value,
       },
       () => {
         this.reloadData();
-      }
+      },
     );
   };
 
   changeDistrict = (ev: SyntheticInputEvent<HTMLInputElement>) => {
     this.setState(
       {
-        district: ev.target.value
+        district: ev.target.value,
       },
       () => {
         this.reloadData();
-      }
+      },
     );
   };
 
   changeCategory = (ev: SyntheticInputEvent<HTMLInputElement>) => {
     this.setState(
       {
-        category: ev.target.value
+        category: ev.target.value,
       },
       () => {
         this.reloadData();
-      }
+      },
     );
   };
 
@@ -88,10 +88,10 @@ export class ProjectStatsList extends React.Component<Props, State> {
       DEFAULT_STATS_PAGINATION,
       this.state.theme,
       this.state.district,
-      this.state.category
+      this.state.category,
     ).then(response => {
       this.setState({
-        data: response.data
+        data: response.data,
       });
     });
   };
@@ -107,7 +107,7 @@ export class ProjectStatsList extends React.Component<Props, State> {
       themes,
       categories,
       type,
-      step
+      step,
     } = this.props;
     const { data } = this.state;
     const haveData = data.values.reduce((a, b) => a + parseInt(b.value, 10), 0) !== 0;

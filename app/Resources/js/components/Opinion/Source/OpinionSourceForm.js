@@ -54,7 +54,7 @@ export const formName = 'opinion-source-form';
 const OpinionSourceForm = React.createClass({
   propTypes: {
     opinion: PropTypes.object.isRequired,
-    source: PropTypes.object
+    source: PropTypes.object,
   },
 
   render() {
@@ -115,7 +115,7 @@ const OpinionSourceForm = React.createClass({
         />
       </form>
     );
-  }
+  },
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state, { source }) => ({
@@ -124,13 +124,13 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state, { source }) => ({
     title: source ? source.title : '',
     body: source ? source.body : '',
     category: source ? source.category.id : null,
-    check: !source
-  }
+    check: !source,
+  },
 });
 export default connect(mapStateToProps)(
   reduxForm({
     validate,
     onSubmit,
-    form: formName
-  })(OpinionSourceForm)
+    form: formName,
+  })(OpinionSourceForm),
 );

@@ -5,7 +5,7 @@ const AlertAutoDismissable = React.createClass({
   propTypes: {
     children: PropTypes.element.isRequired,
     onDismiss: PropTypes.func.isRequired,
-    bsStyle: PropTypes.string.isRequired
+    bsStyle: PropTypes.string.isRequired,
   },
 
   componentDidMount() {
@@ -21,7 +21,7 @@ const AlertAutoDismissable = React.createClass({
         {children}
       </Alert>
     );
-  }
+  },
 });
 
 export default AlertAutoDismissable;

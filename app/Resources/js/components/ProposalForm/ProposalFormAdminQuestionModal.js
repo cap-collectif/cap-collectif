@@ -18,7 +18,7 @@ export const ProposalFormAdminQuestionModal = React.createClass({
     member: PropTypes.string.isRequired,
     isCreating: PropTypes.bool.isRequired,
     kind: PropTypes.string.isRequired,
-    dispatch: PropTypes.func.isRequired
+    dispatch: PropTypes.func.isRequired,
   },
 
   componentWillUpdate(nextProps) {
@@ -124,11 +124,11 @@ export const ProposalFormAdminQuestionModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  }
+  },
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state, props) => ({
-  kind: selector(state, `${props.member}.kind`) || ''
+  kind: selector(state, `${props.member}.kind`) || '',
 });
 
 export default connect(mapStateToProps)(ProposalFormAdminQuestionModal);

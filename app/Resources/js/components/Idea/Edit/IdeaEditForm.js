@@ -33,13 +33,13 @@ const IdeaEditForm = React.createClass({
   propTypes: {
     themeId: PropTypes.number,
     idea: PropTypes.object,
-    features: PropTypes.object.isRequired
+    features: PropTypes.object.isRequired,
   },
 
   getDefaultProps() {
     return {
       themeId: -1,
-      idea: null
+      idea: null,
     };
   },
 
@@ -48,12 +48,12 @@ const IdeaEditForm = React.createClass({
     return (
       <IdeaForm {...this.props} showThemes={features.themes} onSubmit={onSubmit} form={formName} />
     );
-  }
+  },
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => {
   return {
-    features: state.default.features
+    features: state.default.features,
   };
 };
 

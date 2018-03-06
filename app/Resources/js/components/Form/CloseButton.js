@@ -5,12 +5,12 @@ import { FormattedMessage } from 'react-intl';
 
 type Props = {
   onClose: () => any,
-  label: string
+  label: string,
 };
 
 class CloseButton extends React.Component<Props> {
   static defaultProps = {
-    label: 'global.cancel'
+    label: 'global.cancel',
   };
 
   render() {

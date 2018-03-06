@@ -6,17 +6,17 @@ import ProposalDetailLikersTooltipLabel from './ProposalDetailLikersTooltipLabel
 describe('<ProposalDetailLikersTooltipLabel />', () => {
   const oneLiker = [
     {
-      displayName: 'user'
-    }
+      displayName: 'user',
+    },
   ];
 
   const severalLikers = [
     {
-      displayName: 'user 1'
+      displayName: 'user 1',
     },
     {
-      displayName: 'user 2'
-    }
+      displayName: 'user 2',
+    },
   ];
 
   it('should render a formatted message when one liker', () => {

@@ -9,7 +9,7 @@ const ArgumentVoteButton = React.createClass({
     hasVoted: PropTypes.bool.isRequired,
     onClick: PropTypes.func.isRequired,
     argument: PropTypes.object.isRequired,
-    user: PropTypes.object
+    user: PropTypes.object,
   },
 
   isTheUserTheAuthor() {
@@ -40,12 +40,12 @@ const ArgumentVoteButton = React.createClass({
         </Button>
       </LoginOverlay>
     );
-  }
+  },
 });
 
 const mapStateToProps = state => {
   return {
-    user: state.user.user
+    user: state.user.user,
   };
 };
 

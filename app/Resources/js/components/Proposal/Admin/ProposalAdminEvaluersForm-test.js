@@ -12,8 +12,8 @@ describe('<ProposalAdminEvaluersForm />', () => {
     disabled: false,
     proposal: {
       id: '1',
-      evaluers: [{ id: 'group1', title: 'Group 1' }]
-    }
+      evaluers: [{ id: 'group1', title: 'Group 1' }],
+    },
   };
 
   it('render correctly', () => {

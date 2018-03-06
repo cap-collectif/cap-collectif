@@ -15,7 +15,7 @@ const MainNavbarHeader = React.createClass({
         </Navbar.Brand>
       </Navbar.Header>
     );
-  }
+  },
 });
 
 export default MainNavbarHeader;

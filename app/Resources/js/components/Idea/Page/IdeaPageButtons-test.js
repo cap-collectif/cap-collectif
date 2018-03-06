@@ -11,9 +11,9 @@ const props = {
     author: {},
     canContribute: false,
     _links: {
-      show: ''
-    }
-  }
+      show: '',
+    },
+  },
 };
 
 describe('<IdeaPageButtons />', () => {

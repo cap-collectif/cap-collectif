@@ -5,7 +5,7 @@ import { Modal } from 'react-bootstrap';
 
 const OpinionSourceFormModalTitle = React.createClass({
   propTypes: {
-    action: PropTypes.string.isRequired
+    action: PropTypes.string.isRequired,
   },
 
   render() {
@@ -19,7 +19,7 @@ const OpinionSourceFormModalTitle = React.createClass({
         )}
       </Modal.Title>
     );
-  }
+  },
 });
 
 export default OpinionSourceFormModalTitle;

@@ -7,13 +7,13 @@ const ProposalPreviewFooter = React.createClass({
     proposal: PropTypes.object.isRequired,
     stepId: PropTypes.string.isRequired,
     showVotes: PropTypes.bool,
-    showComments: PropTypes.bool
+    showComments: PropTypes.bool,
   },
 
   getDefaultProps() {
     return {
       showVotes: false,
-      showComments: false
+      showComments: false,
     };
   },
 
@@ -39,7 +39,7 @@ const ProposalPreviewFooter = React.createClass({
                 <FormattedMessage
                   id="comment.count_no_nb"
                   values={{
-                    count: proposal.commentsCount
+                    count: proposal.commentsCount,
                   }}
                 />
               </div>
@@ -54,7 +54,7 @@ const ProposalPreviewFooter = React.createClass({
                 <FormattedMessage
                   id="proposal.vote.count_no_nb"
                   values={{
-                    count: votesCount
+                    count: votesCount,
                   }}
                 />
               </div>
@@ -63,7 +63,7 @@ const ProposalPreviewFooter = React.createClass({
         </div>
       </div>
     );
-  }
+  },
 });
 
 export default ProposalPreviewFooter;

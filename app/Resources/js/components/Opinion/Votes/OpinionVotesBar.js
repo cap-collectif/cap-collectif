@@ -9,7 +9,7 @@ import type { State, OpinionAndVersion } from '../../../types';
 
 const OpinionVotesBar = React.createClass({
   propTypes: {
-    opinion: PropTypes.object.isRequired
+    opinion: PropTypes.object.isRequired,
   },
 
   getOpinionType() {
@@ -38,25 +38,25 @@ const OpinionVotesBar = React.createClass({
           <FormattedMessage
             id="global.votes"
             values={{
-              num: opinion.votesCount
+              num: opinion.votesCount,
             }}
           />
         </div>
       </div>
     );
-  }
+  },
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (
   state: State,
-  props: { opinion: OpinionAndVersion }
+  props: { opinion: OpinionAndVersion },
 ) => ({
   opinion: {
     ...props.opinion,
     ...(Object.keys(state.opinion.opinionsById).length
       ? state.opinion.opinionsById[props.opinion.id]
-      : state.opinion.versionsById[props.opinion.id])
-  }
+      : state.opinion.versionsById[props.opinion.id]),
+  },
 });
 
 export default connect(mapStateToProps)(OpinionVotesBar);

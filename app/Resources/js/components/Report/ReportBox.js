@@ -17,7 +17,7 @@ export const ReportBox = React.createClass({
     author: PropTypes.object,
     buttonStyle: PropTypes.object,
     buttonBsSize: PropTypes.string,
-    buttonClassName: PropTypes.string
+    buttonClassName: PropTypes.string,
   },
 
   getDefaultProps() {
@@ -26,7 +26,7 @@ export const ReportBox = React.createClass({
       author: null,
       buttonBsSize: null,
       buttonClassName: '',
-      user: null
+      user: null,
     };
   },
 
@@ -42,7 +42,7 @@ export const ReportBox = React.createClass({
       user,
       author,
       features,
-      buttonStyle
+      buttonStyle,
     } = this.props;
     if (features.reporting && (!user || !author || user.uniqueId !== author.uniqueId)) {
       return (
@@ -60,14 +60,14 @@ export const ReportBox = React.createClass({
       );
     }
     return null;
-  }
+  },
 });
 
 const mapStateToProps = (state, ownProps) => {
   return {
     features: state.default.features,
     user: state.user.user,
-    showModal: state.report.currentReportingModal === ownProps.id
+    showModal: state.report.currentReportingModal === ownProps.id,
   };
 };
 

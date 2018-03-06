@@ -6,7 +6,7 @@ import { LeafletMap } from './LeafletMap';
 describe('<LeafletMap />', () => {
   const defaultMapOptions = {
     center: { lat: 48.8586047, lng: 2.3137325 },
-    zoom: 12
+    zoom: 12,
   };
 
   const markers = {
@@ -16,23 +16,23 @@ describe('<LeafletMap />', () => {
         lng: 24.0297,
         url: 'http://test',
         title: 'test',
-        author: { username: 'test', url: 'http://test' }
+        author: { username: 'test', url: 'http://test' },
       },
       {
         lat: 52.2297,
         lng: 21.0122,
         url: 'http://test',
         title: 'test',
-        author: { username: 'test', url: 'http://test' }
+        author: { username: 'test', url: 'http://test' },
       },
       {
         lat: 51.5074,
         lng: -0.0901,
         url: 'http://test',
         title: 'test',
-        author: { username: 'test', url: 'http://test' }
-      }
-    ]
+        author: { username: 'test', url: 'http://test' },
+      },
+    ],
   };
 
   it('should render a map with markers', () => {
@@ -44,7 +44,7 @@ describe('<LeafletMap />', () => {
         stepId="step1"
         stepType="collect"
         dispatch={() => {}}
-      />
+      />,
     );
     wrapper.setState({ loaded: true });
     expect(wrapper).toMatchSnapshot();
@@ -59,7 +59,7 @@ describe('<LeafletMap />', () => {
         stepId="step1"
         stepType="collect"
         dispatch={() => {}}
-      />
+      />,
     );
     expect(wrapper).toMatchSnapshot();
   });

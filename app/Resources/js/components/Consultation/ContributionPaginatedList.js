@@ -9,7 +9,7 @@ export const pageSize = 20;
 
 type Props = {
   consultation: ContributionPaginatedList_consultation,
-  relay: RelayPaginationProp
+  relay: RelayPaginationProp,
 };
 
 export class ContributionPaginatedList extends React.Component<Props> {
@@ -87,14 +87,14 @@ export default createPaginationContainer(
     },
     getFragmentVariables(prevVars) {
       return {
-        ...prevVars
+        ...prevVars,
       };
     },
     getVariables(props: Props, { count, cursor }) {
       return {
         count,
         cursor,
-        consultationId: props.consultation.id
+        consultationId: props.consultation.id,
       };
     },
     query: graphql`
@@ -103,6 +103,6 @@ export default createPaginationContainer(
           ...ContributionPaginatedList_consultation
         }
       }
-    `
-  }
+    `,
+  },
 );

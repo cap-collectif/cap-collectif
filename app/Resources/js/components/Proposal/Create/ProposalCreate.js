@@ -30,7 +30,7 @@ type Props = {
   showModal: boolean,
   submitting: boolean,
   pristine: boolean,
-  dispatch: Dispatch
+  dispatch: Dispatch,
 };
 
 export class ProposalCreate extends React.Component<Props> {
@@ -71,7 +71,7 @@ export class ProposalCreate extends React.Component<Props> {
                 }
               `}
               variables={{
-                proposalFormId: form.id
+                proposalFormId: form.id,
               }}
               render={render}
             />
@@ -116,7 +116,7 @@ export class ProposalCreate extends React.Component<Props> {
 const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
   submitting: isSubmitting(formName)(state),
   pristine: isPristine(formName)(state),
-  showModal: state.proposal.showCreateModal
+  showModal: state.proposal.showCreateModal,
 });
 
 export default connect(mapStateToProps)(injectIntl(ProposalCreate));

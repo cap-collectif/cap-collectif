@@ -14,14 +14,14 @@ import { scrollToAnchor } from '../../services/ScrollToAnchor';
 
 const OpinionTabs = React.createClass({
   propTypes: {
-    opinion: PropTypes.object.isRequired
+    opinion: PropTypes.object.isRequired,
   },
 
   getInitialState() {
     const { opinion } = this.props;
     return {
       sourcesCount: opinion.sourcesCount,
-      argumentsCount: opinion.argumentsCount
+      argumentsCount: opinion.argumentsCount,
     };
   },
 
@@ -40,13 +40,13 @@ const OpinionTabs = React.createClass({
 
   onSourceChange() {
     this.setState({
-      sourcesCount: OpinionSourceStore.count
+      sourcesCount: OpinionSourceStore.count,
     });
   },
 
   onArgumentChange() {
     this.setState({
-      argumentsCount: ArgumentStore.count
+      argumentsCount: ArgumentStore.count,
     });
   },
 
@@ -245,7 +245,7 @@ const OpinionTabs = React.createClass({
     }
 
     return null;
-  }
+  },
 });
 
 export default OpinionTabs;

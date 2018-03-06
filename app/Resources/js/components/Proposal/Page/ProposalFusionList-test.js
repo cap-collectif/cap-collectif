@@ -12,15 +12,15 @@ describe('<ProposalFusionList />', () => {
       {
         id: 'proposal2',
         show_url: true,
-        title: 'Title Proposal 2'
+        title: 'Title Proposal 2',
       },
       {
         id: 'proposal3',
         show_url: true,
-        title: 'Title Proposal 3'
-      }
+        title: 'Title Proposal 3',
+      },
     ],
-    mergedFrom: []
+    mergedFrom: [],
   };
   // $FlowFixMe $refType
   const proposalFusionnedMergedFrom = {
@@ -30,19 +30,19 @@ describe('<ProposalFusionList />', () => {
       {
         id: 'proposal2',
         show_url: true,
-        title: 'Title Proposal 2'
+        title: 'Title Proposal 2',
       },
       {
         id: 'proposal3',
         show_url: true,
-        title: 'Title Proposal 3'
-      }
-    ]
+        title: 'Title Proposal 3',
+      },
+    ],
   };
   const props = {
     className: '',
     referer: 'http://capco.test',
-    oldProposal: {}
+    oldProposal: {},
   };
 
   it('should render a list of proposal merged from other proposal', () => {
@@ -52,7 +52,7 @@ describe('<ProposalFusionList />', () => {
 
   it('should render a list of proposal of merged in other proposal', () => {
     const wrapper = shallow(
-      <ProposalFusionList proposal={proposalFusionnedMergedFrom} {...props} />
+      <ProposalFusionList proposal={proposalFusionnedMergedFrom} {...props} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

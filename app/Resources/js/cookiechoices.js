@@ -14,7 +14,7 @@ var cookieChoices = function() {
     linkText,
     linkHref,
     linkTitle,
-    dismissLinkTitle
+    dismissLinkTitle,
   ) {
     var butterBarStyles = 'margin-bottom:0;text-align:center;';
 
@@ -79,7 +79,7 @@ var cookieChoices = function() {
     linkHref,
     isDialog,
     linkTitle,
-    dismissLinkTitle
+    dismissLinkTitle,
   ) {
     if (_shouldDisplayConsent()) {
       _removeCookieConsent();
@@ -89,7 +89,7 @@ var cookieChoices = function() {
         linkText,
         linkHref,
         linkTitle,
-        dismissLinkTitle
+        dismissLinkTitle,
       );
       var fragment = document.createDocumentFragment();
       fragment.appendChild(consentElement);
@@ -104,7 +104,7 @@ var cookieChoices = function() {
     linkText,
     linkHref,
     linkTitle,
-    dismissLinkTitle
+    dismissLinkTitle,
   ) {
     _showCookieConsent(
       cookieText,
@@ -113,7 +113,7 @@ var cookieChoices = function() {
       linkHref,
       false,
       linkTitle,
-      dismissLinkTitle
+      dismissLinkTitle,
     );
   };
 
@@ -142,7 +142,7 @@ var cookieChoices = function() {
 
   return {
     showCookieConsentBar,
-    showCookieConsentDialog
+    showCookieConsentDialog,
   };
 };
 

@@ -12,7 +12,7 @@ const OpinionVersionEditModal = React.createClass({
   propTypes: {
     show: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
-    submitting: PropTypes.bool.isRequired
+    submitting: PropTypes.bool.isRequired,
   },
 
   render() {
@@ -55,12 +55,12 @@ const OpinionVersionEditModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  }
+  },
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   show: state.opinion.showOpinionVersionEditModal,
-  submitting: state.opinion.isEditingOpinionVersion
+  submitting: state.opinion.isEditingOpinionVersion,
 });
 
 export default connect(mapStateToProps)(OpinionVersionEditModal);

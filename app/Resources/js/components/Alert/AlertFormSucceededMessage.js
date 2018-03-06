@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 type Props = {};
 
 type State = {
-  showSucceededMessage: boolean
+  showSucceededMessage: boolean,
 };
 
 export class AlertFormSucceededMessage extends React.Component<Props, State> {
@@ -12,7 +12,7 @@ export class AlertFormSucceededMessage extends React.Component<Props, State> {
     super(props);
 
     this.state = {
-      showSucceededMessage: true
+      showSucceededMessage: true,
     };
   }
 
@@ -23,7 +23,7 @@ export class AlertFormSucceededMessage extends React.Component<Props, State> {
   showDelayMessage() {
     setTimeout(() => {
       this.setState({
-        showSucceededMessage: false
+        showSucceededMessage: false,
       });
     }, 10000);
   }

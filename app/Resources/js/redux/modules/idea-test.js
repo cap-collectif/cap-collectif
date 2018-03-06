@@ -7,42 +7,42 @@ describe('Idea Reducer', () => {
   it('Should handle VOTES_FETCH_SUCCEEDED', () => {
     const initialState = {
       ideas: {
-        1: { votes: [] }
-      }
+        1: { votes: [] },
+      },
     };
     const votes = [{ username: 'paul' }, { username: 'popo' }];
     const newState = reducer(initialState, {
       type: 'idea/VOTES_FETCH_SUCCEEDED',
       ideaId: 1,
-      votes
+      votes,
     });
     expect(newState).toEqual({
       ideas: {
         1: {
-          votes
-        }
-      }
+          votes,
+        },
+      },
     });
   });
   it('Should handle VOTE_SUCCEEDED', () => {
     const initialState = {
       ideas: {
-        1: { votesCount: 1, votes: [{ id: 1 }] }
-      }
+        1: { votesCount: 1, votes: [{ id: 1 }] },
+      },
     };
     const newState = reducer(initialState, {
       type: 'idea/VOTE_SUCCEEDED',
       ideaId: 1,
-      vote: { id: 2 }
+      vote: { id: 2 },
     });
     expect(newState).toEqual({
       ideas: {
         1: {
           votesCount: 2,
           userHasVote: true,
-          votes: [{ id: 2 }, { id: 1 }]
-        }
-      }
+          votes: [{ id: 2 }, { id: 1 }],
+        },
+      },
     });
   });
   it('Should handle DELETE_VOTE_SUCCEEDED', () => {
@@ -50,37 +50,37 @@ describe('Idea Reducer', () => {
       ideas: {
         1: {
           votesCount: 2,
-          votes: [{ user: { unidId: 'user' }, private: false }, { private: true }]
-        }
-      }
+          votes: [{ user: { unidId: 'user' }, private: false }, { private: true }],
+        },
+      },
     };
     let newState = reducer(initialState, {
       type: 'idea/DELETE_VOTE_SUCCEEDED',
       ideaId: 1,
-      vote: { user: { unidId: 'user' } }
+      vote: { user: { unidId: 'user' } },
     });
     expect(newState).toEqual({
       ideas: {
         1: {
           votesCount: 1,
           userHasVote: false,
-          votes: [{ private: true }]
-        }
-      }
+          votes: [{ private: true }],
+        },
+      },
     });
     newState = reducer(initialState, {
       type: 'idea/DELETE_VOTE_SUCCEEDED',
       ideaId: 1,
-      vote: { private: true }
+      vote: { private: true },
     });
     expect(newState).toEqual({
       ideas: {
         1: {
           votesCount: 1,
           userHasVote: false,
-          votes: [{ user: { unidId: 'user' }, private: false }]
-        }
-      }
+          votes: [{ user: { unidId: 'user' }, private: false }],
+        },
+      },
     });
   });
 });
@@ -88,7 +88,7 @@ describe('Idea Reducer', () => {
 describe('Idea Sagas', () => {
   it('Should fetchAllVotes', () => {
     const generator = fetchAllVotes({
-      ideaId: 1
+      ideaId: 1,
     });
 
     const votes = [];
@@ -96,14 +96,14 @@ describe('Idea Sagas', () => {
     expect(
       generator.next({
         hasMore: true,
-        votes
-      }).value
+        votes,
+      }).value,
     ).toEqual(
       put({
         type: 'idea/VOTES_FETCH_SUCCEEDED',
         ideaId: 1,
-        votes
-      })
+        votes,
+      }),
     );
     expect(generator.next().value).toEqual(call(Fetcher.get, '/ideas/1/votes?offset=50&limit=50'));
 

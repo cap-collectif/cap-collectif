@@ -6,7 +6,7 @@ import { Opinion } from './Opinion';
 
 describe('<Opinion />', () => {
   const props = {
-    opinion: { id: 'opinionId' }
+    opinion: { id: 'opinionId' },
   };
 
   it('renders correcty', () => {

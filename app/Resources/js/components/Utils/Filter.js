@@ -7,13 +7,13 @@ const Filter = React.createClass({
     value: React.PropTypes.any.isRequired,
     values: React.PropTypes.array,
     show: React.PropTypes.bool,
-    onChange: React.PropTypes.func.isRequired
+    onChange: React.PropTypes.func.isRequired,
   },
 
   getDefaultProps(): Object {
     return {
       values: ['popular', 'last', 'old'],
-      show: true
+      show: true,
     };
   },
 
@@ -34,7 +34,7 @@ const Filter = React.createClass({
       );
     }
     return null;
-  }
+  },
 });
 
 export default Filter;

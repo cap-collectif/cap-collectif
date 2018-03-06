@@ -8,7 +8,7 @@ describe('<ToggleMapButton />', () => {
   const onChange = () => {};
   const mode = {
     mosaic: 'mosaic',
-    map: 'map'
+    map: 'map',
   };
 
   it('should render a toggle button with mosaic selected', () => {

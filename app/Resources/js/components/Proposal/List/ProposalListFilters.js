@@ -10,7 +10,7 @@ import ProposalListOrderSorting from './ProposalListOrderSorting';
 import {
   changeFilter,
   loadProposals,
-  changeProposalListView
+  changeProposalListView,
 } from '../../../redux/modules/proposal';
 import ToggleMapButton from './../Map/ToggleMapButton';
 
@@ -32,7 +32,7 @@ export const ProposalListFilters = React.createClass({
     showDistrictFilter: PropTypes.bool.isRequired,
     showCategoriesFilter: PropTypes.bool.isRequired,
     showToggleMapButton: PropTypes.bool,
-    intl: PropTypes.object.isRequired
+    intl: PropTypes.object.isRequired,
   },
 
   getDefaultProps() {
@@ -40,7 +40,7 @@ export const ProposalListFilters = React.createClass({
       orderByVotes: false,
       orderByComments: false,
       orderByCost: false,
-      showToggleMapButton: false
+      showToggleMapButton: false,
     };
   },
 
@@ -54,18 +54,18 @@ export const ProposalListFilters = React.createClass({
       themes,
       types,
       showDistrictFilter,
-      showCategoriesFilter
+      showCategoriesFilter,
     } = this.props;
 
     return {
       displayedFilters: []
         .concat(features.user_type && types.length > 0 ? ['types'] : [])
         .concat(
-          features.districts && districts.length > 0 && showDistrictFilter ? ['districts'] : []
+          features.districts && districts.length > 0 && showDistrictFilter ? ['districts'] : [],
         )
         .concat(features.themes && showThemes && themes.length > 0 ? ['themes'] : [])
         .concat(showCategoriesFilter && categories.length > 1 ? ['categories'] : [])
-        .concat(statuses.length > 0 ? ['statuses'] : [])
+        .concat(statuses.length > 0 ? ['statuses'] : []),
     };
   },
 
@@ -77,7 +77,7 @@ export const ProposalListFilters = React.createClass({
       orderByCost,
       showToggleMapButton,
       defaultSort,
-      intl
+      intl,
     } = this.props;
     const { displayedFilters, orderByVotes } = this.state;
 
@@ -131,7 +131,7 @@ export const ProposalListFilters = React.createClass({
         </Row>
       </div>
     );
-  }
+  },
 });
 
 const mapStateToProps = (state: State) => {
@@ -139,7 +139,7 @@ const mapStateToProps = (state: State) => {
     features: state.default.features,
     themes: state.default.themes,
     types: state.default.userTypes,
-    filters: state.proposal.filters || {}
+    filters: state.proposal.filters || {},
   };
 };
 

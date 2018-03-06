@@ -5,12 +5,12 @@ import RankingArrows from './RankingArrows';
 
 const arrowFunctions = {
   right: () => {},
-  left: () => {}
+  left: () => {},
 };
 
 const arrowFunctionsEmpty = {
   right: null,
-  left: null
+  left: null,
 };
 
 const item = {};

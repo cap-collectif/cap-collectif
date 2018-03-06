@@ -7,13 +7,13 @@ import RankingArrows from './RankingArrows';
 const itemSource = {
   beginDrag(props) {
     return {
-      id: props.item.id
+      id: props.item.id,
     };
   },
 
   canDrag(props) {
     return !props.disabled;
-  }
+  },
 };
 
 const RankingItem = React.createClass({
@@ -25,12 +25,12 @@ const RankingItem = React.createClass({
     connectDragSource: PropTypes.func.isRequired,
     isDragging: PropTypes.bool.isRequired,
     arrowFunctions: PropTypes.object,
-    disabled: PropTypes.bool.isRequired
+    disabled: PropTypes.bool.isRequired,
   },
 
   getDefaultProps() {
     return {
-      position: null
+      position: null,
     };
   },
 
@@ -42,13 +42,13 @@ const RankingItem = React.createClass({
       isDragging,
       connectDragSource,
       arrowFunctions,
-      disabled
+      disabled,
     } = this.props;
     const opacity = isDragging ? 0.5 : 1;
     const classes = classNames({
       ranking__item: true,
       'list-group-item': true,
-      disabled
+      disabled,
     });
     return connectDragSource(
       <div className={classes} id={id} style={{ opacity }}>
@@ -72,13 +72,13 @@ const RankingItem = React.createClass({
           </div>
         )}
         <RankingArrows item={item} arrowFunctions={arrowFunctions} disabled={disabled} />
-      </div>
+      </div>,
     );
-  }
+  },
 });
 
 export default DragSource(ITEM_TYPE, itemSource, (connect, monitor) => ({
   // eslint-disable-line new-cap
   connectDragSource: connect.dragSource(),
-  isDragging: monitor.isDragging()
+  isDragging: monitor.isDragging(),
 }))(RankingItem);

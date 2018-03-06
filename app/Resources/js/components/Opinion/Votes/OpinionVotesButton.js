@@ -9,7 +9,7 @@ import {
   deleteVoteVersion,
   deleteVoteOpinion,
   voteOpinion,
-  voteVersion
+  voteVersion,
 } from '../../../redux/modules/opinion';
 import type { VoteValue, OpinionAndVersion, State } from '../../../types';
 
@@ -18,20 +18,20 @@ const valueToObject = (value: VoteValue): Object => {
     return {
       style: 'danger',
       str: 'nok',
-      icon: 'cap cap-hand-unlike-2-1'
+      icon: 'cap cap-hand-unlike-2-1',
     };
   }
   if (value === 0) {
     return {
       style: 'warning',
       str: 'mitige',
-      icon: 'cap cap-hand-like-2 icon-rotate'
+      icon: 'cap cap-hand-like-2 icon-rotate',
     };
   }
   return {
     style: 'success',
     str: 'ok',
-    icon: 'cap cap-hand-like-2-1'
+    icon: 'cap cap-hand-like-2-1',
   };
 };
 
@@ -44,13 +44,13 @@ export const OpinionVotesButton = React.createClass({
     disabled: PropTypes.bool,
     dispatch: PropTypes.func.isRequired,
     user: PropTypes.object,
-    features: PropTypes.object.isRequired
+    features: PropTypes.object.isRequired,
   },
 
   getDefaultProps() {
     return {
       style: {},
-      disabled: false
+      disabled: false,
     };
   },
 
@@ -123,12 +123,12 @@ export const OpinionVotesButton = React.createClass({
         </Button>
       </LoginOverlay>
     );
-  }
+  },
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (
   state: State,
-  { opinion, value }: { value: VoteValue, opinion: OpinionAndVersion }
+  { opinion, value }: { value: VoteValue, opinion: OpinionAndVersion },
 ) => {
   const vote = opinion.parent
     ? state.opinion.versionsById[opinion.id].userVote
@@ -136,7 +136,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (
   return {
     features: state.default.features,
     user: state.user.user,
-    active: vote !== null && vote === value
+    active: vote !== null && vote === value,
   };
 };
 

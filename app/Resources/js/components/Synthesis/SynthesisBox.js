@@ -18,15 +18,15 @@ type Props = {
   mode: string,
   synthesis_id: string,
   children: ?Object,
-  sideMenu: ?boolean
+  sideMenu: ?boolean,
 };
 
 type State = {
   synthesis: ?Object,
   messages: {
     errors: Array<*>,
-    success: Array<*>
-  }
+    success: Array<*>,
+  },
 };
 
 export class SynthesisBox extends React.Component<Props, State> {
@@ -39,15 +39,15 @@ export class SynthesisBox extends React.Component<Props, State> {
       mode: '',
       synthesis_id: '',
       children: null,
-      sideMenu: false
+      sideMenu: false,
     };
 
     this.state = {
       synthesis: null,
       messages: {
         errors: [],
-        success: []
-      }
+        success: [],
+      },
     };
   }
 
@@ -68,13 +68,13 @@ export class SynthesisBox extends React.Component<Props, State> {
 
   onElementsChange = () => {
     this.setState({
-      messages: SynthesisElementStore.messages
+      messages: SynthesisElementStore.messages,
     });
   };
 
   onSynthesisChange = () => {
     this.setState({
-      synthesis: SynthesisStore.synthesis
+      synthesis: SynthesisStore.synthesis,
     });
   };
 
@@ -156,7 +156,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
     state.project.projectsById[state.project.currentProjectById].stepsById[
       state.project.currentProjectStepById
     ],
-  user: state.user.user
+  user: state.user.user,
 });
 
 export default connect(mapStateToProps)(SynthesisBox);

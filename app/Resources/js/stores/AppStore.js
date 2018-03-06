@@ -10,7 +10,7 @@ import { reducer as ideaReducer, saga as ideaSaga } from '../redux/modules/idea'
 import {
   reducer as proposalReducer,
   saga as proposalSaga,
-  initialState as proposalInitialState
+  initialState as proposalInitialState,
 } from '../redux/modules/proposal';
 import { reducer as opinionReducer, saga as opinionSaga } from '../redux/modules/opinion';
 import { reducer as userReducer } from '../redux/modules/user';
@@ -73,13 +73,13 @@ export default function configureStore(initialState: Object): Store {
           case 'SUBMIT_CONFIRM_PASSWORD_FORM':
             return {
               ...state,
-              values: { ...state.values, password: action.password }
+              values: { ...state.values, password: action.password },
             };
           default:
             return state;
         }
-      }
-    })
+      },
+    }),
   };
 
   initialState.proposal = { ...proposalInitialState, ...initialState.proposal };
@@ -92,8 +92,8 @@ export default function configureStore(initialState: Object): Store {
       applyMiddleware(sagaMiddleware),
       typeof window === 'object' && typeof window.devToolsExtension !== 'undefined'
         ? window.devToolsExtension()
-        : f => f
-    )
+        : f => f,
+    ),
   );
 
   sagaMiddleware.run(ideaSaga);

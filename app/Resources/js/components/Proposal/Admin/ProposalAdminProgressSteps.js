@@ -17,7 +17,7 @@ const selector = formValueSelector(formName);
 type Props = {
   dispatch: Dispatch,
   fields: { length: number, map: Function, remove: Function },
-  progressSteps: Array<Object>
+  progressSteps: Array<Object>,
 };
 type DefaultProps = void;
 type State = { editIndex: ?number, showModal: ?number };
@@ -26,7 +26,7 @@ export class ProposalAdminProgressSteps extends React.Component<Props, State> {
   static defaultProps: DefaultProps;
   state = {
     editIndex: null,
-    showModal: null
+    showModal: null,
   };
 
   handleClose = () => {
@@ -119,7 +119,7 @@ export class ProposalAdminProgressSteps extends React.Component<Props, State> {
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
-  progressSteps: selector(state, 'progressSteps')
+  progressSteps: selector(state, 'progressSteps'),
 });
 
 export default connect(mapStateToProps)(ProposalAdminProgressSteps);

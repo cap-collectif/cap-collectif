@@ -40,7 +40,7 @@ export class GroupAdminPage extends Component<Props, State> {
             }
           `}
           variables={{
-            id: this.props.groupId
+            id: this.props.groupId,
           }}
           render={component}
         />

@@ -4,7 +4,7 @@ import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
 import type {
   DeleteGroupMutationVariables,
-  DeleteGroupMutationResponse
+  DeleteGroupMutationResponse,
 } from './__generated__/DeleteGroupMutation.graphql';
 
 const mutation = graphql`
@@ -18,7 +18,7 @@ const mutation = graphql`
 const commit = (variables: DeleteGroupMutationVariables): Promise<DeleteGroupMutationResponse> =>
   commitMutation(environment, {
     mutation,
-    variables
+    variables,
   });
 
 export default { commit };
