@@ -4,7 +4,7 @@ import IdeaPreview from '../Preview/IdeaPreview';
 
 const IdeaListItem = React.createClass({
   propTypes: {
-    idea: React.PropTypes.object.isRequired,
+    idea: React.PropTypes.object.isRequired
   },
 
   render() {
@@ -14,7 +14,7 @@ const IdeaListItem = React.createClass({
         <IdeaPreview idea={idea} />
       </Col>
     );
-  },
+  }
 });
 
 export default IdeaListItem;

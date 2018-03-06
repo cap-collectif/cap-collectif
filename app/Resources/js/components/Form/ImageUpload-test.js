@@ -15,8 +15,8 @@ describe('<ImageUpload />', () => {
       id: 'media1',
       url: 'http://capco.dev',
       name: 'image.jpg',
-      size: 42,
-    },
+      size: 42
+    }
   };
 
   it('render correctly', () => {

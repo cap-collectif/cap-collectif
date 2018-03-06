@@ -21,8 +21,8 @@ describe('<ProposalFormAdminSettingsForm />', () => {
       id: 'proposalFormId',
       title: 'title',
       commentable: true,
-      costable: true,
-    },
+      costable: true
+    }
   };
 
   it('render correctly', () => {

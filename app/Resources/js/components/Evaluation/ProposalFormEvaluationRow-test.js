@@ -10,8 +10,8 @@ describe('<ProposalFormEvaluationRow />', () => {
     proposal: {
       show_url: 'http://capco.dev/proposal',
       reference: '1-1',
-      title: 'Title',
-    },
+      title: 'Title'
+    }
   };
 
   it('renders correcty', () => {

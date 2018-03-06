@@ -11,7 +11,7 @@ export const Toggle = React.createClass({
     error: PropTypes.any,
     labelClassName: PropTypes.string,
     inputClassName: PropTypes.string,
-    id: PropTypes.string,
+    id: PropTypes.string
   },
 
   getDefaultProps() {
@@ -34,7 +34,7 @@ export const Toggle = React.createClass({
         {touched && error}
       </div>
     );
-  },
+  }
 });
 
 export default Toggle;

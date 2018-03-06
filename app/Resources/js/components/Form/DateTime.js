@@ -5,7 +5,7 @@ import BaseDateTime from 'react-datetime';
 const DateTime = React.createClass({
   propTypes: {
     value: PropTypes.any,
-    onChange: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired
   },
 
   render() {
@@ -20,7 +20,7 @@ const DateTime = React.createClass({
         }}
       />
     );
-  },
+  }
 });
 
 export default DateTime;

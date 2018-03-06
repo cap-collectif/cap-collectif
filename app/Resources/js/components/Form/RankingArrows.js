@@ -10,14 +10,14 @@ const RankingArrows = React.createClass({
       left: PropTypes.func,
       right: PropTypes.func,
       up: PropTypes.func,
-      down: PropTypes.func,
+      down: PropTypes.func
     }),
-    disabled: PropTypes.bool,
+    disabled: PropTypes.bool
   },
 
   getDefaultProps() {
     return {
-      disabled: false,
+      disabled: false
     };
   },
 
@@ -37,7 +37,7 @@ const RankingArrows = React.createClass({
         })}
       </ButtonGroup>
     );
-  },
+  }
 });
 
 export default RankingArrows;

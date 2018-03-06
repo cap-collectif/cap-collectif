@@ -6,7 +6,7 @@ class MessageStore extends BaseStore {
     this.register(this._registerToActions.bind(this));
     this._messages = {
       errors: [],
-      success: [],
+      success: []
     };
   }
 

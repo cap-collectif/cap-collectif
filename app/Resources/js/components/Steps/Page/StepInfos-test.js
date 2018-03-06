@@ -6,7 +6,7 @@ import StepInfos from './StepInfos';
 describe('<StepInfos />', () => {
   const step = {
     counters: {},
-    body: 'Coucou',
+    body: 'Coucou'
   };
 
   it('should render a step infos block, a CountersNav and a StepText', () => {

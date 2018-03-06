@@ -7,13 +7,13 @@ const StepPreview = React.createClass({
   propTypes: {
     step: React.PropTypes.object.isRequired,
     className: React.PropTypes.string,
-    votes: React.PropTypes.number,
+    votes: React.PropTypes.number
   },
 
   getDefaultProps() {
     return {
       className: '',
-      votes: null,
+      votes: null
     };
   },
 
@@ -47,7 +47,7 @@ const StepPreview = React.createClass({
         </div>
       </li>
     );
-  },
+  }
 });
 
 export default StepPreview;

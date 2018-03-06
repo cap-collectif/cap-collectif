@@ -12,12 +12,12 @@ const OpinionSourceVoteButton = React.createClass({
     hasVoted: PropTypes.bool.isRequired,
     onClick: PropTypes.func.isRequired,
     user: PropTypes.object,
-    features: PropTypes.object.isRequired,
+    features: PropTypes.object.isRequired
   },
 
   getDefaultProps() {
     return {
-      user: null,
+      user: null
     };
   },
 
@@ -41,13 +41,13 @@ const OpinionSourceVoteButton = React.createClass({
         </Button>
       </LoginOverlay>
     );
-  },
+  }
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
   return {
     user: state.user.user,
-    features: state.default.features,
+    features: state.default.features
   };
 };
 

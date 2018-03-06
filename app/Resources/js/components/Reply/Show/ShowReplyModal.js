@@ -12,7 +12,7 @@ const ShowReplyModal = React.createClass({
     show: PropTypes.bool.isRequired,
     reply: PropTypes.object.isRequired,
     form: PropTypes.object.isRequired,
-    onClose: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired
   },
 
   onChange() {
@@ -47,7 +47,7 @@ const ShowReplyModal = React.createClass({
                 ),
                 time: (
                   <FormattedDate value={moment(reply.createdAt)} hour="numeric" minute="numeric" />
-                ),
+                )
               }}
             />
           </Modal.Title>
@@ -68,7 +68,7 @@ const ShowReplyModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  },
+  }
 });
 
 export default ShowReplyModal;

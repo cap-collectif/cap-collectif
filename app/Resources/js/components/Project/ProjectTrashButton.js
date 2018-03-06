@@ -7,7 +7,7 @@ import { type State } from '../../types';
 
 type Props = {
   link: string,
-  user: ?Object,
+  user: ?Object
 };
 
 export class ProjectTrashButton extends React.PureComponent<Props> {
@@ -39,7 +39,7 @@ export class ProjectTrashButton extends React.PureComponent<Props> {
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  user: state.user.user,
+  user: state.user.user
 });
 
 export default connect(mapStateToProps)(ProjectTrashButton);

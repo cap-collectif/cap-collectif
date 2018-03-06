@@ -2,7 +2,7 @@
 import {
   commitMutation as relayCommitMutation,
   type Environment,
-  type MutationConfig,
+  type MutationConfig
 } from 'react-relay';
 
 const commitMutation = (environment: Environment, config: MutationConfig<*>): Promise<any> =>
@@ -10,7 +10,7 @@ const commitMutation = (environment: Environment, config: MutationConfig<*>): Pr
     relayCommitMutation(environment, {
       ...config,
       onCompleted: (response: ?Object) => resolve(response),
-      onError: (error: Error) => reject(error),
+      onError: (error: Error) => reject(error)
     });
   });
 

@@ -8,7 +8,7 @@ import {
   CHANGE_IDEAS_SEARCH_TERMS,
   CHANGE_IDEAS_ORDER,
   CHANGE_IDEAS_THEME,
-  RECEIVE_IDEAS,
+  RECEIVE_IDEAS
 } from '../constants/IdeaConstants';
 
 class IdeaStore extends BaseStore {

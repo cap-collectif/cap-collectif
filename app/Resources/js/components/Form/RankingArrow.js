@@ -9,13 +9,13 @@ const RankingArrow = React.createClass({
   propTypes: {
     type: PropTypes.string.isRequired,
     onClick: PropTypes.func,
-    disabled: PropTypes.bool,
+    disabled: PropTypes.bool
   },
 
   getDefaultProps() {
     return {
       disabled: false,
-      onClick: null,
+      onClick: null
     };
   },
 
@@ -26,7 +26,7 @@ const RankingArrow = React.createClass({
       'cap-delete-1': type === 'left',
       'cap-arrow-2-1': type === 'right',
       'cap-arrow-67': type === 'down',
-      'cap-arrow-68': type === 'up',
+      'cap-arrow-68': type === 'up'
     });
     return (
       <Button
@@ -41,7 +41,7 @@ const RankingArrow = React.createClass({
         <i className={classes} />
       </Button>
     );
-  },
+  }
 });
 
 export default RankingArrow;

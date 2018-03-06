@@ -9,26 +9,26 @@ const propsNotParticipativeSteps = {
   project: {
     hasParticipativeStep: false,
     title: 'project without participative step',
-    projectType: { title: 'presentation', color: '#337ab7' },
+    projectType: { title: 'presentation', color: '#337ab7' }
   },
-  hasNotParticipativeSteps: false,
+  hasNotParticipativeSteps: false
 };
 
 const propsNotParticipativeSteps2 = {
   project: {
     hasParticipativeStep: false,
     title: 'project without participative step 2',
-    projectType: { title: 'presentation', color: '#337ab7' },
+    projectType: { title: 'presentation', color: '#337ab7' }
   },
-  hasNotParticipativeSteps: true,
+  hasNotParticipativeSteps: true
 };
 
 const propsParticipativeSteps = {
   project: {
     hasParticipativeStep: true,
-    title: 'project with participative step',
+    title: 'project with participative step'
   },
-  hasNotParticipativeSteps: false,
+  hasNotParticipativeSteps: false
 };
 
 describe('<ProjectPreview />', () => {

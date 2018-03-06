@@ -14,7 +14,7 @@ import type { NotificationsForm_viewer } from './__generated__/NotificationsForm
 import type { State } from '../../../types';
 
 type RelayProps = {
-  viewer: NotificationsForm_viewer,
+  viewer: NotificationsForm_viewer
 };
 type FormValues = Object;
 type Props = {
@@ -26,14 +26,14 @@ type Props = {
   valid: boolean,
   submitSucceeded: boolean,
   submitFailed: boolean,
-  handleSubmit: () => void,
+  handleSubmit: () => void
 };
 
 const formName = 'user-notifications';
 
 const onSubmit = (values: FormValues) => {
   const variables = {
-    input: { ...values },
+    input: { ...values }
   };
   return ChangeUserNotificationsConfigurationMutation.commit(variables);
 };
@@ -47,7 +47,7 @@ export class NotificationsForm extends Component<Props> {
       handleSubmit,
       valid,
       submitSucceeded,
-      submitFailed,
+      submitFailed
     } = this.props;
     return (
       <div>
@@ -103,12 +103,12 @@ export class NotificationsForm extends Component<Props> {
 const form = reduxForm({
   onSubmit,
   form: formName,
-  enableReinitialize: true,
+  enableReinitialize: true
 })(NotificationsForm);
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => {
   return {
-    initialValues: props.viewer.notificationsConfiguration,
+    initialValues: props.viewer.notificationsConfiguration
   };
 };
 
@@ -122,5 +122,5 @@ export default createFragmentContainer(
         onProposalCommentMail
       }
     }
-  `,
+  `
 );

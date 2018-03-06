@@ -19,7 +19,7 @@ import {
   renderResponses,
   formatSubmitResponses,
   formatInitialResponsesValues,
-  type ResponsesInReduxForm,
+  type ResponsesInReduxForm
 } from '../../../utils/responsesHelper';
 
 type ProposalForm = ProposalForm_proposalForm;
@@ -35,17 +35,17 @@ type FormValues = {|
   addresstext?: ?string,
   category?: ?Uuid,
   district?: ?Uuid,
-  address?: ?string,
+  address?: ?string
 |};
 type RelayProps = {
-  +proposal: ProposalAdminContentForm_proposal,
+  +proposal: ProposalAdminContentForm_proposal
 };
 type Props = FormProps &
   RelayProps & {
     +themes: Array<{ id: Uuid, title: string }>,
     +features: FeatureToggles,
     +intl: IntlShape,
-    +isSuperAdmin: boolean,
+    +isSuperAdmin: boolean
   };
 
 const formName = 'proposal-admin-edit';
@@ -63,7 +63,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { proposal, isSuperAdm
     media: typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null,
     responses: formatSubmitResponses(values.responses, proposal.form.questions),
     author: isSuperAdmin ? values.author : undefined,
-    id: proposal.id,
+    id: proposal.id
   };
 
   return ChangeProposalContentMutation.commit({ input })
@@ -74,7 +74,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { proposal, isSuperAdm
     })
     .catch(() => {
       throw new SubmissionError({
-        _error: 'global.error.server.form',
+        _error: 'global.error.server.form'
       });
     });
 };
@@ -83,7 +83,7 @@ export const validateProposalContent = (
   values: FormValues,
   // $FlowFixMe $refType
   proposalForm: ProposalForm,
-  features: FeatureToggles,
+  features: FeatureToggles
 ) => {
   const errors = {};
   if (!values.title || values.title.length <= 2) {
@@ -142,12 +142,12 @@ const validate = (values: FormValues, { proposal, features }: Props) => {
 };
 
 type State = {
-  showEditFusionModal: boolean,
+  showEditFusionModal: boolean
 };
 
 export class ProposalAdminContentForm extends React.Component<Props, State> {
   state = {
-    showEditFusionModal: false,
+    showEditFusionModal: false
   };
 
   render() {
@@ -163,7 +163,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
       isSuperAdmin,
       themes,
       handleSubmit,
-      intl,
+      intl
     } = this.props;
     const form = proposal.form;
     const categories = proposal.form.categories;
@@ -196,7 +196,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                       onClick={() => {
                         if (
                           window.confirm(
-                            intl.formatMessage({ id: 'are-you-sure-you-want-to-delete-this-item' }),
+                            intl.formatMessage({ id: 'are-you-sure-you-want-to-delete-this-item' })
                           )
                         ) {
                           UpdateProposalFusionMutation.commit({
@@ -204,8 +204,8 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                               proposalId: parent.id,
                               fromProposals: parent.mergedFrom
                                 .map(child => child.id)
-                                .filter(id => id !== proposal.id),
-                            },
+                                .filter(id => id !== proposal.id)
+                            }
                           });
                         }
                       }}>
@@ -236,14 +236,14 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                     onClick={() => {
                       if (
                         window.confirm(
-                          intl.formatMessage({ id: 'are-you-sure-you-want-to-delete-this-item' }),
+                          intl.formatMessage({ id: 'are-you-sure-you-want-to-delete-this-item' })
                         )
                       ) {
                         UpdateProposalFusionMutation.commit({
                           input: {
                             proposalId: proposal.id,
-                            fromProposals: [],
-                          },
+                            fromProposals: []
+                          }
                         });
                       }
                     }}>
@@ -310,14 +310,14 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                     options: res.users
                       .map(u => ({
                         value: u.id,
-                        label: u.displayName,
+                        label: u.displayName
                       }))
                       .concat([
                         {
                           value: proposal.author.id,
-                          label: proposal.author.displayName,
-                        },
-                      ]),
+                          label: proposal.author.displayName
+                        }
+                      ])
                   }))
                   // eslint-disable-next-line no-console
                   .catch(e => console.error(e))
@@ -457,12 +457,12 @@ const form = reduxForm({
   onSubmit,
   validate,
   enableReinitialize: true,
-  form: formName,
+  form: formName
 })(ProposalAdminContentForm);
 
 const mapStateToProps: MapStateToProps<*, *, *> = (
   state: GlobalState,
-  { proposal }: RelayProps,
+  { proposal }: RelayProps
 ) => ({
   isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
   features: state.default.features,
@@ -487,8 +487,8 @@ const mapStateToProps: MapStateToProps<*, *, *> = (
     address: proposal.form.usingAddress ? proposal.address : undefined,
     media: proposal.media ? proposal.media : null,
     responses: formatInitialResponsesValues(proposal.form.questions, proposal.responses),
-    addressText: proposal.address && JSON.parse(proposal.address)[0].formatted_address,
-  },
+    addressText: proposal.address && JSON.parse(proposal.address)[0].formatted_address
+  }
 });
 
 const container = connect(mapStateToProps)(injectIntl(form));
@@ -601,5 +601,5 @@ export default createFragmentContainer(
         proposalInAZoneRequired
       }
     }
-  `,
+  `
 );

@@ -1,8 +1,11 @@
 Project:
     type: object
     config:
-        description: "A budget contribution"
+        interfaces: [Node]
+        description: "A participatory project."
         fields:
+            id:
+              type: "ID!"
             steps:
               type: "[Step!]!"
               resolve: "@=resolver('project_steps', [value])"

@@ -10,18 +10,18 @@ import IdeaPageComments from './IdeaPageComments';
 
 export const IdeaPage = React.createClass({
   propTypes: {
-    idea: PropTypes.object.isRequired,
+    idea: PropTypes.object.isRequired
   },
 
   getInitialState() {
     return {
-      expandSidebar: false,
+      expandSidebar: false
     };
   },
 
   toggleSidebarExpand() {
     this.setState({
-      expandSidebar: !this.state.expandSidebar,
+      expandSidebar: !this.state.expandSidebar
     });
   },
 
@@ -31,16 +31,16 @@ export const IdeaPage = React.createClass({
     const showSidebar = idea.canContribute;
     const wrapperClassName = classNames({
       container: showSidebar,
-      sidebar__container: showSidebar,
+      sidebar__container: showSidebar
     });
     const containersClassName = classNames({
       container: !showSidebar,
       'container--thinner': !showSidebar,
       'container--custom': true,
-      'container--with-sidebar': showSidebar,
+      'container--with-sidebar': showSidebar
     });
     const overlayClassName = classNames({
-      'sidebar__darkened-overlay': expandSidebar,
+      'sidebar__darkened-overlay': expandSidebar
     });
     return (
       <div>
@@ -64,12 +64,12 @@ export const IdeaPage = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 });
 
 const mapStateToProps = state => {
   return {
-    idea: state.idea.ideas[state.idea.currentIdeaById],
+    idea: state.idea.ideas[state.idea.currentIdeaById]
   };
 };
 

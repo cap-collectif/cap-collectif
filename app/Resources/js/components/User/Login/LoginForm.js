@@ -8,18 +8,18 @@ import { login as onSubmit } from '../../../redux/modules/user';
 
 type LoginValues = {
   username: string,
-  password: string,
+  password: string
 };
 const formName = 'login';
 
 const initialValues: LoginValues = {
   username: '',
-  password: '',
+  password: ''
 };
 
 export const LoginForm = React.createClass({
   propTypes: {
-    error: PropTypes.string,
+    error: PropTypes.string
   },
 
   render() {
@@ -60,12 +60,12 @@ export const LoginForm = React.createClass({
         </a>
       </div>
     );
-  },
+  }
 });
 
 export default reduxForm({
   initialValues,
   onSubmit,
   form: formName,
-  destroyOnUnmount: true,
+  destroyOnUnmount: true
 })(LoginForm);

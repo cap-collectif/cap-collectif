@@ -9,7 +9,7 @@ describe('<RegistrationCommunicationForm />', () => {
     useTopText: true,
     useBottomText: true,
     submitting: false,
-    handleSubmit: jest.fn(),
+    handleSubmit: jest.fn()
   };
 
   it('renders correctly', () => {

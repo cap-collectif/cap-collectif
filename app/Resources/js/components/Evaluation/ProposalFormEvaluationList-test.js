@@ -11,8 +11,8 @@ describe('<ProposalFormEvaluationList />', () => {
       step: {
         title: 'My form title',
         project: {
-          title: 'My Project title',
-        },
+          title: 'My Project title'
+        }
       },
       proposals: {
         totalCount: 2,
@@ -20,10 +20,10 @@ describe('<ProposalFormEvaluationList />', () => {
           // $FlowFixMe
           { node: { id: '1' } },
           // $FlowFixMe
-          { node: { id: '2' } },
-        ],
-      },
-    },
+          { node: { id: '2' } }
+        ]
+      }
+    }
   };
 
   it('renders correcty', () => {
@@ -37,14 +37,14 @@ describe('<ProposalFormEvaluationList />', () => {
       step: {
         title: 'My form title',
         project: {
-          title: 'My Project title',
-        },
+          title: 'My Project title'
+        }
       },
       proposals: {
         totalCount: 0,
-        edges: [],
-      },
-    },
+        edges: []
+      }
+    }
   };
 
   it('renders nothing when no evaluations', () => {

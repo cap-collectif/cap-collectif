@@ -7,12 +7,12 @@ import IdeaPageButtons from './IdeaPageButtons';
 const IdeaPageBody = React.createClass({
   propTypes: {
     idea: PropTypes.object.isRequired,
-    className: React.PropTypes.string,
+    className: React.PropTypes.string
   },
 
   getDefaultProps() {
     return {
-      className: '',
+      className: ''
     };
   },
 
@@ -20,7 +20,7 @@ const IdeaPageBody = React.createClass({
     const { idea, className } = this.props;
 
     const classes = {
-      idea__body: true,
+      idea__body: true
     };
     classes[className] = true;
 
@@ -61,7 +61,7 @@ const IdeaPageBody = React.createClass({
         <IdeaPageButtons idea={idea} />
       </div>
     );
-  },
+  }
 });
 
 export default IdeaPageBody;

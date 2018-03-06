@@ -16,18 +16,18 @@ type Props = {
   order?: string,
   defaultSort?: string,
   stepId?: string,
-  intl: IntlShape,
+  intl: IntlShape
 };
 
 type ComponentState = {
-  displayedOrders: Array<string>,
+  displayedOrders: Array<string>
 };
 
 export class ProposalListOrderSorting extends React.Component<Props, ComponentState> {
   static defaultProps = {
     orderByVotes: false,
     orderByComments: false,
-    orderByCost: false,
+    orderByCost: false
   };
 
   constructor(props: Props) {
@@ -37,7 +37,7 @@ export class ProposalListOrderSorting extends React.Component<Props, ComponentSt
       // eslint-disable-next-line react/prop-types
       displayedOrders: PROPOSAL_AVAILABLE_ORDERS.concat(props.orderByVotes ? ['votes'] : [])
         .concat(props.orderByComments ? ['comments'] : [])
-        .concat(props.orderByCost ? ['expensive', 'cheap'] : []),
+        .concat(props.orderByCost ? ['expensive', 'cheap'] : [])
     };
   }
 
@@ -82,7 +82,7 @@ export class ProposalListOrderSorting extends React.Component<Props, ComponentSt
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
   return {
     order: state.proposal.order,
-    stepId: state.project.currentProjectStepById || null,
+    stepId: state.project.currentProjectStepById || null
   };
 };
 

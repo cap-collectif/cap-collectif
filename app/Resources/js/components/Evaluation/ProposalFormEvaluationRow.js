@@ -50,5 +50,5 @@ export default createFragmentContainer(ProposalFormEvaluationRow, {
       ...ProposalCollectStatus_proposal
       ...ProposalLastUpdateInfo_proposal
     }
-  `,
+  `
 });

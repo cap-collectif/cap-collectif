@@ -6,7 +6,7 @@ import { Modal, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 const OpinionBodyDiffModal = React.createClass({
   propTypes: {
     link: React.PropTypes.string.isRequired,
-    modal: React.PropTypes.object.isRequired,
+    modal: React.PropTypes.object.isRequired
   },
 
   getInitialState() {
@@ -51,7 +51,7 @@ const OpinionBodyDiffModal = React.createClass({
         </Modal>
       </span>
     );
-  },
+  }
 });
 
 export default OpinionBodyDiffModal;

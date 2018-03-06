@@ -8,7 +8,7 @@ import {
   changeOrderBy,
   changeType,
   changeTheme,
-  changeTerm,
+  changeTerm
 } from '../../../redux/modules/project';
 import Input from '../../Form/ReactBootstrapInput';
 import type { State } from '../../../types';
@@ -21,12 +21,12 @@ const ProjectListFilter = React.createClass({
     dispatch: PropTypes.func.isRequired,
     orderBy: PropTypes.string.isRequired,
     intl: PropTypes.object.isRequired,
-    type: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired
   },
 
   getInitialState() {
     return {
-      termInputValue: '',
+      termInputValue: ''
     };
   },
 
@@ -64,7 +64,7 @@ const ProjectListFilter = React.createClass({
         <option key="popularity" value="popularity">
           {intl.formatMessage({ id: 'global.filter_f_popular' })}
         </option>
-      </FormControl>,
+      </FormControl>
     );
 
     if (projectTypes.length > 0) {
@@ -87,7 +87,7 @@ const ProjectListFilter = React.createClass({
               {message => <option value={projectType.slug}>{message}</option>}
             </FormattedMessage>
           ))}
-        </FormControl>,
+        </FormControl>
       );
     }
 
@@ -112,7 +112,7 @@ const ProjectListFilter = React.createClass({
               </option>
             );
           })}
-        </FormControl>,
+        </FormControl>
       );
     }
 
@@ -131,7 +131,7 @@ const ProjectListFilter = React.createClass({
           value={this.state.value}
           onChange={this.handleChangeTermInput}
         />
-      </form>,
+      </form>
     );
 
     const columnWidth = 12 / filters.length;
@@ -147,7 +147,7 @@ const ProjectListFilter = React.createClass({
         })}
       </Row>
     );
-  },
+  }
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
@@ -155,7 +155,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
     features: state.default.features,
     themes: state.default.themes,
     orderBy: state.project.orderBy || 'date',
-    type: state.project.type || 'all',
+    type: state.project.type || 'all'
   };
 };
 

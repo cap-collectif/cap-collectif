@@ -13,7 +13,7 @@ describe('<NotificationsBox />', () => {
   });
   it('should render and enabled button when the form is valid', () => {
     const wrapper = shallow(
-      <NotificationsBox dispatch={dispatch} invalid={false} submitting={false} />,
+      <NotificationsBox dispatch={dispatch} invalid={false} submitting={false} />
     );
     expect(wrapper).toMatchSnapshot();
   });

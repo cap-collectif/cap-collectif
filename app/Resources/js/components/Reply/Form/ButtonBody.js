@@ -5,12 +5,12 @@ import { FormattedMessage } from 'react-intl';
 
 const ButtonBody = React.createClass({
   propTypes: {
-    body: React.PropTypes.string.isRequired,
+    body: React.PropTypes.string.isRequired
   },
 
   getInitialState() {
     return {
-      expanded: false,
+      expanded: false
     };
   },
 
@@ -39,7 +39,7 @@ const ButtonBody = React.createClass({
 
   expand(expanded): void {
     this.setState({
-      expanded,
+      expanded
     });
   },
 
@@ -62,7 +62,7 @@ const ButtonBody = React.createClass({
         {this.renderReadMoreOrLess()}
       </div>
     );
-  },
+  }
 });
 
 export default ButtonBody;

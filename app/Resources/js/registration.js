@@ -107,5 +107,5 @@ ReactOnRails.register({
   ShareButtonDropdownApp,
   ProposalFormAdminPageApp,
   GroupAdminPageApp,
-  GroupCreateButtonApp,
+  GroupCreateButtonApp
 });

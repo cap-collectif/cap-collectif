@@ -9,7 +9,7 @@ const ElementListItem = React.createClass({
     showStatus: React.PropTypes.bool,
     showNotation: React.PropTypes.bool,
     hasLink: React.PropTypes.bool,
-    linkType: React.PropTypes.string,
+    linkType: React.PropTypes.string
   },
 
   getDefaultProps() {
@@ -18,7 +18,7 @@ const ElementListItem = React.createClass({
       showStatus: true,
       showNotation: true,
       hasLink: true,
-      linkType: 'edition',
+      linkType: 'edition'
     };
   },
 
@@ -27,7 +27,7 @@ const ElementListItem = React.createClass({
     const classes = classNames({
       'synthesis__list-item': true,
       box: true,
-      archived: element.archived,
+      archived: element.archived
     });
     return (
       <li className={classes}>
@@ -41,7 +41,7 @@ const ElementListItem = React.createClass({
         />
       </li>
     );
-  },
+  }
 });
 
 export default ElementListItem;

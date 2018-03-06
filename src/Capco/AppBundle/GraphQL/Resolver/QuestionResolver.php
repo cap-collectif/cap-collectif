@@ -76,18 +76,6 @@ class QuestionResolver implements ContainerAwareInterface
             ->getAvailableQuestionnaires();
     }
 
-    public function resolveQuestionnaire(int $id): Questionnaire
-    {
-        $questionnaire = $this->container
-            ->get('capco.questionnaire.repository')
-            ->find($id);
-        if (!$questionnaire) {
-            throw new UserError('Could not resolve your questionnaire.');
-        }
-
-        return $questionnaire;
-    }
-
     public function resolveQuestionnaireQuestions(Questionnaire $questionnaire)
     {
         return $questionnaire->getRealQuestions();

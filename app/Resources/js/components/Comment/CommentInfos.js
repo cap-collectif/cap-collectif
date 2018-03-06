@@ -4,7 +4,7 @@ import UserLink from '../User/UserLink';
 
 const CommentInfos = React.createClass({
   propTypes: {
-    comment: React.PropTypes.object,
+    comment: React.PropTypes.object
   },
 
   renderAuthorName() {
@@ -25,7 +25,7 @@ const CommentInfos = React.createClass({
         <PinnedLabel show={comment.pinned} type="comment" />
       </p>
     );
-  },
+  }
 });
 
 export default CommentInfos;

@@ -34,7 +34,7 @@ const ProposalVoteForm = React.createClass({
     anonymous: PropTypes.bool.isRequired,
     comment: PropTypes.string.isRequired,
     error: PropTypes.string,
-    voteWithoutAccount: PropTypes.bool.isRequired,
+    voteWithoutAccount: PropTypes.bool.isRequired
   },
 
   render() {
@@ -97,20 +97,20 @@ const ProposalVoteForm = React.createClass({
           )}
       </form>
     );
-  },
+  }
 });
 
 const mapStateToProps = state => ({
   comment: formValueSelector(form)(state, 'comment') || '',
   isPrivate: formValueSelector(form)(state, 'private') || false,
   anonymous: state.user.user === null,
-  voteWithoutAccount: state.default.features.vote_without_account,
+  voteWithoutAccount: state.default.features.vote_without_account
 });
 
 export default connect(mapStateToProps)(
   reduxForm({
     form,
     validate,
-    onSubmit: (values, dispatch, { proposal, step }) => vote(dispatch, step, proposal, values),
-  })(ProposalVoteForm),
+    onSubmit: (values, dispatch, { proposal, step }) => vote(dispatch, step, proposal, values)
+  })(ProposalVoteForm)
 );

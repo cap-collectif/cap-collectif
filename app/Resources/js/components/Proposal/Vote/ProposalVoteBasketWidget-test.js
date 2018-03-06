@@ -10,13 +10,13 @@ describe('<ProposalVoteBasketWidget />', () => {
       {
         id: '1',
         voteType: 1,
-        budget: null,
-      },
+        budget: null
+      }
     ],
     votesPageUrl: 'http//capco.dev/votes',
     userVotesCountByStepId: { '1': 12 },
     creditsLeftByStepId: {},
-    image: 'http://capco.dev/images.png',
+    image: 'http://capco.dev/images.png'
   };
 
   const simpleWithLimitProps = {
@@ -26,13 +26,13 @@ describe('<ProposalVoteBasketWidget />', () => {
         id: '1',
         voteType: 1,
         budget: null,
-        votesLimit: 2,
-      },
+        votesLimit: 2
+      }
     ],
     votesPageUrl: 'http//capco.dev/votes',
     userVotesCountByStepId: { '1': 1 },
     creditsLeftByStepId: {},
-    image: 'http://capco.dev/images.png',
+    image: 'http://capco.dev/images.png'
   };
 
   const budgetProps = {
@@ -41,13 +41,13 @@ describe('<ProposalVoteBasketWidget />', () => {
       {
         id: '1',
         voteType: 1,
-        budget: 350000,
-      },
+        budget: 350000
+      }
     ],
     votesPageUrl: 'http//capco.dev/votes',
     userVotesCountByStepId: { '1': 12 },
     creditsLeftByStepId: { '1': 120000 },
-    image: 'http://capco.dev/images.png',
+    image: 'http://capco.dev/images.png'
   };
 
   it('should render a vote widget for a simple vote without limit', () => {

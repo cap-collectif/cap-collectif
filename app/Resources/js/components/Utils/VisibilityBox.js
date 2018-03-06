@@ -9,13 +9,13 @@ export const VisibilityBox = React.createClass({
   propTypes: {
     user: PropTypes.object,
     children: PropTypes.element.isRequired,
-    enabled: PropTypes.bool,
+    enabled: PropTypes.bool
   },
 
   getDefaultProps() {
     return {
       user: null,
-      enabled: false,
+      enabled: false
     };
   },
 
@@ -53,12 +53,12 @@ export const VisibilityBox = React.createClass({
         <div className={boxClasses}>{children}</div>
       </div>
     );
-  },
+  }
 });
 
 const mapStateToProps = state => {
   return {
-    user: state.user.user,
+    user: state.user.user
   };
 };
 

@@ -5,20 +5,20 @@ import RankingBlock from './RankingBlock';
 
 const field = {
   id: 42,
-  choices: [{}, {}, {}],
+  choices: [{}, {}, {}]
 };
 
 const props = {
   connectDropTarget: c => c,
   onRankingChange: () => {},
-  field,
+  field
 };
 
 const state = {
   items: {
     pickBox: [{}, {}],
-    choiceBox: [{}],
-  },
+    choiceBox: [{}]
+  }
 };
 
 const OriginalComponent = RankingBlock.DecoratedComponent;

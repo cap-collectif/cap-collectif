@@ -8,7 +8,7 @@ import renderInput from '../Form/Field';
 import type { State } from '../../types';
 
 const renderDynamicFields = (
-  { fields, meta: { error } }, // eslint-disable-line
+  { fields, meta: { error } } // eslint-disable-line
 ) => (
   <div>
     <p>Options</p>
@@ -33,11 +33,11 @@ const renderDynamicFields = (
 );
 
 type Props = {
-  showChoices: boolean,
+  showChoices: boolean
 };
 export const RegistrationQuestionForm = React.createClass({
   propTypes: {
-    showChoices: PropTypes.bool.isRequired,
+    showChoices: PropTypes.bool.isRequired
   },
 
   render() {
@@ -75,11 +75,11 @@ export const RegistrationQuestionForm = React.createClass({
         {showChoices && <FieldArray name="choices" component={renderDynamicFields} />}
       </form>
     );
-  },
+  }
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: { form: string }) => ({
-  showChoices: formValueSelector(props.form)(state, 'type') === '4',
+  showChoices: formValueSelector(props.form)(state, 'type') === '4'
 });
 const connector: Connector<{ form: string }, Props> = connect(mapStateToProps);
 export default connector(RegistrationQuestionForm);

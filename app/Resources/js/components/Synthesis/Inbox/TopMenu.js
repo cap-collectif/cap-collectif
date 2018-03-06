@@ -5,7 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 const TopMenu = React.createClass({
   propTypes: {
-    synthesis: React.PropTypes.object,
+    synthesis: React.PropTypes.object
   },
 
   getMenuItems() {
@@ -14,32 +14,32 @@ const TopMenu = React.createClass({
         link: '/inbox/new',
         color: 'blue',
         icon: 'cap-download-6',
-        label: 'inbox',
+        label: 'inbox'
       },
       {
         link: '/inbox/archived',
         color: 'orange',
         icon: 'cap-check-4',
-        label: 'archived',
+        label: 'archived'
       },
       {
         link: '/inbox/published',
         color: 'green',
         icon: 'cap-tag-1',
-        label: 'published',
+        label: 'published'
       },
       {
         link: '/inbox/unpublished',
         color: 'gray',
         icon: 'cap-delete-2',
-        label: 'unpublished',
+        label: 'unpublished'
       },
       {
         link: '/inbox/all',
         color: 'black',
         icon: 'cap-baloon',
-        label: 'all',
-      },
+        label: 'all'
+      }
     ];
   },
 
@@ -68,7 +68,7 @@ const TopMenu = React.createClass({
         })}
       </Nav>
     );
-  },
+  }
 });
 
 export default TopMenu;

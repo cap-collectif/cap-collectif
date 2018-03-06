@@ -19,7 +19,7 @@ type Props = {
   invalid: boolean,
   open: () => void,
   onClose: () => void,
-  submitForm: () => void,
+  submitForm: () => void
 };
 
 export class ProposalFusionEditModal extends React.Component<Props> {
@@ -58,13 +58,13 @@ export class ProposalFusionEditModal extends React.Component<Props> {
 const mapStateToProps = (state: State) => ({
   submitting: isSubmitting(formName)(state),
   pristine: isPristine(formName)(state),
-  invalid: isInvalid(formName)(state),
+  invalid: isInvalid(formName)(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   submitForm: () => {
     dispatch(submit(formName));
-  },
+  }
 });
 
 const container = connect(mapStateToProps, mapDispatchToProps)(ProposalFusionEditModal);
@@ -75,5 +75,5 @@ export default createFragmentContainer(
     fragment ProposalFusionEditModal_proposal on Proposal {
       ...ProposalFusionEditForm_proposal
     }
-  `,
+  `
 );

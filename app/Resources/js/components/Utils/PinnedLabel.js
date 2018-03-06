@@ -5,7 +5,7 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 const PinnedLabel = React.createClass({
   propTypes: {
     show: React.PropTypes.bool.isRequired,
-    type: React.PropTypes.string.isRequired,
+    type: React.PropTypes.string.isRequired
   },
 
   render() {
@@ -26,7 +26,7 @@ const PinnedLabel = React.createClass({
       );
     }
     return null;
-  },
+  }
 });
 
 export default PinnedLabel;

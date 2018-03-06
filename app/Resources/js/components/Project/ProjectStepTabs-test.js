@@ -13,14 +13,14 @@ describe('<ProposalUserVoteItem />', () => {
         type: 'presentation',
         label: 'presentation step',
         status: 'open',
-        enabled: true,
+        enabled: true
       },
       {
         _links: { show: 'www.test.com' },
         id: 'cs2',
         label: 'open step',
         status: 'open',
-        enabled: true,
+        enabled: true
       },
       {
         _links: { show: 'www.test.com' },
@@ -28,18 +28,18 @@ describe('<ProposalUserVoteItem />', () => {
         label: 'timeless step',
         status: 'open',
         timeless: true,
-        enabled: true,
+        enabled: true
       },
       {
         _links: { show: 'www.test.com' },
         id: 'cs4',
         label: 'last step',
         status: 'closed',
-        enabled: true,
-      },
+        enabled: true
+      }
     ],
     currentStepId: 'cs3',
-    projectId: '5',
+    projectId: '5'
   };
 
   const oneStepProps = {
@@ -50,11 +50,11 @@ describe('<ProposalUserVoteItem />', () => {
         type: 'presentation',
         label: 'presentation step',
         status: 'open',
-        enabled: true,
-      },
+        enabled: true
+      }
     ],
     currentStepId: 'cs1',
-    projectId: '5',
+    projectId: '5'
   };
 
   it('should render correctly without arrow & with active tab', () => {

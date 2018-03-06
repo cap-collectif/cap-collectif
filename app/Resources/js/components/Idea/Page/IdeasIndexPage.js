@@ -17,14 +17,14 @@ const IdeasIndexPage = React.createClass({
     ideas: React.PropTypes.array.isRequired,
     themes: React.PropTypes.array.isRequired,
     trashUrl: React.PropTypes.string,
-    description: React.PropTypes.string,
+    description: React.PropTypes.string
   },
 
   getDefaultProps() {
     return {
       trashUrl: null,
       description: null,
-      pagination: DEFAULT_IDEAS_PAGINATION,
+      pagination: DEFAULT_IDEAS_PAGINATION
     };
   },
 
@@ -33,7 +33,7 @@ const IdeasIndexPage = React.createClass({
       ideas: IdeaStore.ideas,
       count: IdeaStore.count,
       countTrashed: IdeaStore.countTrashed,
-      isLoading: false,
+      isLoading: false
     };
   },
 
@@ -61,13 +61,13 @@ const IdeasIndexPage = React.createClass({
       count: IdeaStore.count,
       countTrashed: IdeaStore.countTrashed,
       currentPage: IdeaStore.currentPage,
-      isLoading: false,
+      isLoading: false
     });
   },
 
   loadIdeas() {
     this.setState({
-      isLoading: true,
+      isLoading: true
     });
     IdeaActions.load();
   },
@@ -104,7 +104,7 @@ const IdeasIndexPage = React.createClass({
         <IdeasIndexFooter trashUrl={trashUrl} countTrashed={this.state.countTrashed} />
       </div>
     );
-  },
+  }
 });
 
 export default IdeasIndexPage;

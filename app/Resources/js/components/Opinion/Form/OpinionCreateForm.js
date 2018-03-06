@@ -17,11 +17,11 @@ const onSubmit = (data: Object, dispatch: Dispatch, props: Object) => {
   const form = {
     title: data.title,
     body: data.body,
-    appendices,
+    appendices
   };
   return Fetcher.post(
     `/projects/${projectId}/steps/${stepId}/opinion_types/${opinionType.id}/opinions`,
-    form,
+    form
   )
     .then(json)
     .then((opinion: Object) => {
@@ -51,7 +51,7 @@ type Props = FormProps & {
   projectId: string,
   stepId: string,
   opinionType: Object,
-  step: Object,
+  step: Object
 };
 
 export class OpinionCreateForm extends React.Component<Props> {
@@ -115,5 +115,5 @@ export class OpinionCreateForm extends React.Component<Props> {
 export default reduxForm({
   form: formName,
   onSubmit,
-  validate,
+  validate
 })(OpinionCreateForm);

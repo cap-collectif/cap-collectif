@@ -11,7 +11,7 @@ import type { State } from '../../../types';
 
 export const ProfileBox = React.createClass({
   propTypes: {
-    user: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired
   },
 
   getInitialState() {
@@ -19,7 +19,7 @@ export const ProfileBox = React.createClass({
       isSubmitting: false,
       isUpdating: false,
       smsSentToNumber: null,
-      alert: null,
+      alert: null
     };
   },
 
@@ -48,8 +48,8 @@ export const ProfileBox = React.createClass({
           actionType: UPDATE_ALERT,
           alert: {
             bsStyle: 'success',
-            content: 'phone.confirm.alert.received',
-          },
+            content: 'phone.confirm.alert.received'
+          }
         });
       })
       .catch(err => {
@@ -62,7 +62,7 @@ export const ProfileBox = React.createClass({
         }
         this.setState({
           alert: { type: 'danger', message },
-          isSubmitting: false,
+          isSubmitting: false
         });
       });
   },
@@ -80,7 +80,7 @@ export const ProfileBox = React.createClass({
     UserActions.update({ phone: null }).then(() => {
       AppDispatcher.dispatch({
         actionType: UPDATE_ALERT,
-        alert: { bsStyle: 'success', content: 'alert.success.delete.phone' },
+        alert: { bsStyle: 'success', content: 'alert.success.delete.phone' }
       });
     });
     this.setState({ isUpdating: true });
@@ -157,11 +157,11 @@ export const ProfileBox = React.createClass({
         )}
       </Panel>
     );
-  },
+  }
 });
 
 const mapStateToProps = (state: State) => ({
-  user: state.user.user,
+  user: state.user.user
 });
 
 export default connect(mapStateToProps)(ProfileBox);

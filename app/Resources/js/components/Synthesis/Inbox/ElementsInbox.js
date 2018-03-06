@@ -12,13 +12,13 @@ const ElementsInbox = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object,
     params: React.PropTypes.object,
-    searchTerm: React.PropTypes.string,
+    searchTerm: React.PropTypes.string
   },
 
   getDefaultProps() {
     return {
       params: { type: 'new' },
-      searchTerm: '',
+      searchTerm: ''
     };
   },
 
@@ -29,7 +29,7 @@ const ElementsInbox = React.createClass({
       isLoading: true,
       isLoadingMore: false,
       offset: 0,
-      limit: Pagination,
+      limit: Pagination
     };
   },
 
@@ -47,11 +47,11 @@ const ElementsInbox = React.createClass({
       this.setState(
         {
           isLoading: true,
-          limit: Pagination,
+          limit: Pagination
         },
         () => {
           this.loadElementsByTypeFromServer(nextProps.params.type);
-        },
+        }
       );
     }
   },
@@ -66,7 +66,7 @@ const ElementsInbox = React.createClass({
       elements: SynthesisElementStore.elements[params.type],
       count: SynthesisElementStore.counts[params.type],
       isLoading: false,
-      isLoadingMore: false,
+      isLoadingMore: false
     });
   },
 
@@ -83,7 +83,7 @@ const ElementsInbox = React.createClass({
       synthesis.id,
       type,
       this.state.offset,
-      this.state.limit,
+      this.state.limit
     );
   },
 
@@ -92,13 +92,13 @@ const ElementsInbox = React.createClass({
     this.setState(
       {
         isLoadingMore: true,
-        limit: this.state.limit + Pagination,
+        limit: this.state.limit + Pagination
       },
       () => {
         this.loadElementsByTypeFromServer().then(() => {
           this.resetLoadMoreButton();
         });
-      },
+      }
     );
   },
 
@@ -141,7 +141,7 @@ const ElementsInbox = React.createClass({
         {this.renderLoadMore()}
       </div>
     );
-  },
+  }
 });
 
 export default ElementsInbox;

@@ -5,7 +5,7 @@ const CounterNavItem = React.createClass({
   propTypes: {
     counter: React.PropTypes.number.isRequired,
     icon: React.PropTypes.string.isRequired,
-    label: React.PropTypes.string.isRequired,
+    label: React.PropTypes.string.isRequired
   },
 
   render() {
@@ -19,14 +19,14 @@ const CounterNavItem = React.createClass({
             <FormattedMessage
               id={label}
               values={{
-                num: counter,
+                num: counter
               }}
             />
           </span>
         </div>
       </li>
     );
-  },
+  }
 });
 
 export default CounterNavItem;

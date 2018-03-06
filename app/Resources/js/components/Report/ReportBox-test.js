@@ -14,7 +14,7 @@ describe('<ReportBox />', () => {
     features: { reporting: true },
     user: { uniqueId: 'michel' },
     author: { uniqueId: 'pierre' },
-    buttonClassName: 'test-button-classNAme',
+    buttonClassName: 'test-button-classNAme'
   };
 
   it('renders a report button and a modal', () => {

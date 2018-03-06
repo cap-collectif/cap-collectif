@@ -4,7 +4,7 @@ import OpinionBodyDiffModal from './OpinionBodyDiffModal';
 
 const OpinionBodyDiffContent = React.createClass({
   propTypes: {
-    opinion: React.PropTypes.object.isRequired,
+    opinion: React.PropTypes.object.isRequired
   },
 
   render() {
@@ -34,14 +34,14 @@ const OpinionBodyDiffContent = React.createClass({
       if (!foundModal) {
         parts.push({
           content: section,
-          link: false,
+          link: false
         });
       } else {
         parts.push({
           before: section.slice(0, section.indexOf(foundModal.key)),
           link: foundModal.key,
           after: section.slice(section.indexOf(foundModal.key) + foundModal.key.length),
-          modal: foundModal,
+          modal: foundModal
         });
       }
     });
@@ -62,7 +62,7 @@ const OpinionBodyDiffContent = React.createClass({
         })}
       </div>
     );
-  },
+  }
 });
 
 export default OpinionBodyDiffContent;

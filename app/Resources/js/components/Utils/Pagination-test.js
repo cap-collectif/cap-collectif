@@ -6,7 +6,7 @@ import Pagination from './Pagination';
 
 const props = {
   nbPages: 10,
-  onChange: () => {},
+  onChange: () => {}
 };
 
 describe('<Pagination />', () => {

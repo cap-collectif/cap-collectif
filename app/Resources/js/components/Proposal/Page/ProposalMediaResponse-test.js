@@ -7,8 +7,8 @@ describe('<ProposalMediaResponse />', () => {
   const props = {
     medias: [
       { url: '/media/1.jpg', name: 'Media1', size: '2 Mo' },
-      { url: '/media/2.jpg', name: 'Media2', size: '2 Mo' },
-    ],
+      { url: '/media/2.jpg', name: 'Media2', size: '2 Mo' }
+    ]
   };
 
   it('should render a list of files', () => {

@@ -7,7 +7,7 @@ describe('<CounterNavItem />', () => {
   const props = {
     counter: 2,
     icon: 'cap cap-hand-1-2',
-    label: 'blabla',
+    label: 'blabla'
   };
   it('should render a li, an icon, a value and a label', () => {
     const wrapper = shallow(<CounterNavItem {...props} />);

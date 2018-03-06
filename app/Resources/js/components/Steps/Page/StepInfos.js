@@ -4,7 +4,7 @@ import StepText from './StepText';
 
 const StepInfos = React.createClass({
   propTypes: {
-    step: React.PropTypes.object.isRequired,
+    step: React.PropTypes.object.isRequired
   },
 
   render() {
@@ -23,7 +23,7 @@ const StepInfos = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 });
 
 export default StepInfos;

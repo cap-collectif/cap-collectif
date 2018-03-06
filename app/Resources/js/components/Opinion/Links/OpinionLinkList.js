@@ -5,7 +5,7 @@ import OpinionLink from './OpinionLink';
 
 const OpinionLinkList = React.createClass({
   propTypes: {
-    links: React.PropTypes.array.isRequired,
+    links: React.PropTypes.array.isRequired
   },
 
   render() {
@@ -27,7 +27,7 @@ const OpinionLinkList = React.createClass({
         })}
       </ul>
     );
-  },
+  }
 });
 
 export default OpinionLinkList;

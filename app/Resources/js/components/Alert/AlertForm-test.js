@@ -11,7 +11,7 @@ describe('<AlertForm />', () => {
     submitting: false,
     submitSucceeded: true,
     submitFailed: true,
-    errorMessage: 'error.test',
+    errorMessage: 'error.test'
   };
 
   const submitSucceededForm = {
@@ -19,7 +19,7 @@ describe('<AlertForm />', () => {
     invalid: false,
     submitting: false,
     submitSucceeded: true,
-    submitFailed: false,
+    submitFailed: false
   };
 
   const submitFailedForm = {
@@ -27,7 +27,7 @@ describe('<AlertForm />', () => {
     invalid: false,
     submitting: false,
     submitSucceeded: false,
-    submitFailed: true,
+    submitFailed: true
   };
 
   const invalidForm = {
@@ -35,7 +35,7 @@ describe('<AlertForm />', () => {
     invalid: true,
     submitting: false,
     submitSucceeded: true,
-    submitFailed: false,
+    submitFailed: false
   };
 
   const validForm = {
@@ -43,7 +43,7 @@ describe('<AlertForm />', () => {
     invalid: false,
     submitting: false,
     submitSucceeded: false,
-    submitFailed: false,
+    submitFailed: false
   };
 
   const submittingForm = {
@@ -51,7 +51,7 @@ describe('<AlertForm />', () => {
     invalid: false,
     submitting: true,
     submitSucceeded: false,
-    submitFailed: false,
+    submitFailed: false
   };
 
   it('render correctly the message with a custom error message', () => {

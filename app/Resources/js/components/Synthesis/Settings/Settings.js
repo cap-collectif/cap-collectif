@@ -5,12 +5,12 @@ const Settings = React.createClass({
   propTypes: {
     synthesis: PropTypes.object,
     params: PropTypes.object,
-    children: PropTypes.object.isRequired,
+    children: PropTypes.object.isRequired
   },
 
   getDefaultProps() {
     return {
-      params: { type: 'display' },
+      params: { type: 'display' }
     };
   },
 
@@ -26,7 +26,7 @@ const Settings = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 });
 
 export default Settings;

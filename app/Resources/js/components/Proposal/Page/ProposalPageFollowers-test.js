@@ -21,9 +21,9 @@ describe('<ProposalPageFollowers />', () => {
             contributionsCount: 0,
             show_url: true,
             media: {
-              url: 'http://capco.dev',
-            },
-          },
+              url: 'http://capco.dev'
+            }
+          }
         },
         {
           cursor: 'YXJyYXljb25uZWN0aW9uOjE=',
@@ -34,9 +34,9 @@ describe('<ProposalPageFollowers />', () => {
             contributionsCount: 55,
             show_url: true,
             media: {
-              url: 'http://capco.dev',
-            },
-          },
+              url: 'http://capco.dev'
+            }
+          }
         },
         {
           cursor: 'YXJyYXljb25uZWN0aW9uOjI=',
@@ -47,18 +47,18 @@ describe('<ProposalPageFollowers />', () => {
             contributionsCount: 44,
             show_url: true,
             media: {
-              url: 'http://capco.dev',
-            },
-          },
-        },
+              url: 'http://capco.dev'
+            }
+          }
+        }
       ],
       pageInfo: {
         hasNextPage: true,
-        endCursor: 'YXJyYXljb25uZWN0aW9uOjI=',
+        endCursor: 'YXJyYXljb25uZWN0aW9uOjI='
       },
 
-      totalCount: 3,
-    },
+      totalCount: 3
+    }
   };
   // $FlowFixMe $refType
   const proposalWithoutUsers = {
@@ -67,21 +67,21 @@ describe('<ProposalPageFollowers />', () => {
       edges: [],
       pageInfo: {
         hasNextPage: false,
-        endCursor: 'null',
+        endCursor: 'null'
       },
-      totalCount: 0,
-    },
+      totalCount: 0
+    }
   };
   const props = {
     className: '',
     referer: 'http://capco.test',
     oldProposal: {},
-    relay: relayPaginationMock,
+    relay: relayPaginationMock
   };
 
   it('should render a proposal page follower with users', () => {
     const wrapper = shallow(
-      <ProposalPageFollowers proposal={proposalWithUsers} pageAdmin={pageAdmin} {...props} />,
+      <ProposalPageFollowers proposal={proposalWithUsers} pageAdmin={pageAdmin} {...props} />
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -93,14 +93,14 @@ describe('<ProposalPageFollowers />', () => {
         {...props}
         pageAdmin={pageAdmin}
         relay={{ ...relayPaginationMock, hasMore: () => true }}
-      />,
+      />
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render a proposal page follower without users', () => {
     const wrapper = shallow(
-      <ProposalPageFollowers proposal={proposalWithoutUsers} pageAdmin={pageAdmin} {...props} />,
+      <ProposalPageFollowers proposal={proposalWithoutUsers} pageAdmin={pageAdmin} {...props} />
     );
     expect(wrapper).toMatchSnapshot();
   });

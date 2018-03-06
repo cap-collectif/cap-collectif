@@ -18,12 +18,12 @@ describe('<GroupAdminUsers />', () => {
           {
             // $FlowFixMe $fragmentRefs
             node: {
-              id: 'id1',
-            },
-          },
-        ],
-      },
-    },
+              id: 'id1'
+            }
+          }
+        ]
+      }
+    }
   };
 
   const SuccessDeleteUser = {
@@ -31,7 +31,7 @@ describe('<GroupAdminUsers />', () => {
     userIsDeleted: true,
     userIsNotDeleted: false,
     submitFailed: false,
-    submitSucceeded: false,
+    submitSucceeded: false
   };
 
   const FailDeleteUser = {
@@ -39,7 +39,7 @@ describe('<GroupAdminUsers />', () => {
     userIsDeleted: false,
     userIsNotDeleted: true,
     submitFailed: false,
-    submitSucceeded: false,
+    submitSucceeded: false
   };
 
   const SuccessAddUser = {
@@ -47,7 +47,7 @@ describe('<GroupAdminUsers />', () => {
     userIsDeleted: false,
     userIsNotDeleted: false,
     submitFailed: false,
-    submitSucceeded: true,
+    submitSucceeded: true
   };
 
   const FailAddUser = {
@@ -55,7 +55,7 @@ describe('<GroupAdminUsers />', () => {
     userIsDeleted: false,
     userIsNotDeleted: false,
     submitFailed: true,
-    submitSucceeded: false,
+    submitSucceeded: false
   };
 
   it('render correctly group admin user with confirmation notification when deleting a user', () => {

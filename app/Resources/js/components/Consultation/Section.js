@@ -7,7 +7,7 @@ export const Section = React.createClass({
   propTypes: {
     section: React.PropTypes.object.isRequired,
     consultation: React.PropTypes.object.isRequired,
-    level: React.PropTypes.number.isRequired,
+    level: React.PropTypes.number.isRequired
   },
 
   render() {
@@ -26,7 +26,7 @@ export const Section = React.createClass({
         )}
       </div>
     );
-  },
+  }
 });
 
 export default createFragmentContainer(
@@ -40,5 +40,5 @@ export default createFragmentContainer(
       contributionsCount
       ...OpinionList_section
     }
-  `,
+  `
 );

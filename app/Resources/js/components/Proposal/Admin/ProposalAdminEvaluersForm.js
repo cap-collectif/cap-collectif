@@ -22,8 +22,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   return ChangeProposalEvaluersMutation.commit({
     input: {
       proposalId: props.proposal.id,
-      evaluers: values.evaluers.map(u => u.value),
-    },
+      evaluers: values.evaluers.map(u => u.value)
+    }
   });
 };
 
@@ -36,7 +36,7 @@ export class ProposalAdminEvaluersForm extends React.Component<Props> {
       submitFailed,
       pristine,
       handleSubmit,
-      submitting,
+      submitting
     } = this.props;
     return (
       <div>
@@ -73,12 +73,12 @@ export class ProposalAdminEvaluersForm extends React.Component<Props> {
                             title
                           }
                         }
-                      `,
+                      `
                 }).then(response => ({
                   options: response.data.groups.map(group => ({
                     value: group.id,
-                    label: group.title,
-                  })),
+                    label: group.title
+                  }))
                 }))
               }
             />
@@ -109,16 +109,16 @@ export class ProposalAdminEvaluersForm extends React.Component<Props> {
 const form = reduxForm({
   onSubmit,
   enableReinitialize: true,
-  form: formName,
+  form: formName
 })(ProposalAdminEvaluersForm);
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
   initialValues: {
     evaluers: props.proposal.evaluers.map(u => ({
       value: u.id,
-      label: u.title,
-    })),
-  },
+      label: u.title
+    }))
+  }
 });
 
 const container = connect(mapStateToProps)(form);
@@ -133,5 +133,5 @@ export default createFragmentContainer(
         title
       }
     }
-  `,
+  `
 );

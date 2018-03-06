@@ -14,7 +14,7 @@ export const ProposalFormAdminCategoriesStepModal = React.createClass({
     onClose: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     member: PropTypes.string.isRequired,
-    isCreating: PropTypes.bool.isRequired,
+    isCreating: PropTypes.bool.isRequired
   },
 
   render() {
@@ -46,7 +46,7 @@ export const ProposalFormAdminCategoriesStepModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  },
+  }
 });
 
 export default connect()(ProposalFormAdminCategoriesStepModal);

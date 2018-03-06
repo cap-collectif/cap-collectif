@@ -4,7 +4,7 @@ import {
   CREATE_SOURCE_SUCCESS,
   CREATE_SOURCE_FAILURE,
   UPDATE_SOURCE_SUCCESS,
-  UPDATE_SOURCE_FAILURE,
+  UPDATE_SOURCE_FAILURE
 } from '../constants/OpinionSourceConstants';
 import ArrayHelper from '../services/ArrayHelper';
 

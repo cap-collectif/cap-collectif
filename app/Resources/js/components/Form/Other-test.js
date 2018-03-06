@@ -18,8 +18,8 @@ describe('<Other />', () => {
       { id: 20, label: 'Athlétisme' },
       { id: 21, label: 'Natation' },
       { id: 22, label: 'Sports collectifs' },
-      { id: 23, label: 'Sports individuels' },
-    ],
+      { id: 23, label: 'Sports individuels' }
+    ]
   };
   const radioField = {
     id: 12,
@@ -33,8 +33,8 @@ describe('<Other />', () => {
       { id: 24, label: 'Maxime Arrouard' },
       { id: 25, label: 'Spylou Super Sayen' },
       { id: 26, label: 'Cyril Lage' },
-      { id: 27, label: 'Superman' },
-    ],
+      { id: 27, label: 'Superman' }
+    ]
   };
   const emptyFunction = () => {};
 
@@ -61,10 +61,10 @@ describe('<Other />', () => {
 
   it('should render 2 Input components (checkbox + text) with right props', () => {
     const wrapper = shallow(
-      <Other field={checkboxField} onChange={emptyFunction} disabled={false} />,
+      <Other field={checkboxField} onChange={emptyFunction} disabled={false} />
     );
     const checkboxComponent = wrapper.findWhere(
-      n => n.type() === Input && n.prop('type') === 'checkbox',
+      n => n.type() === Input && n.prop('type') === 'checkbox'
     );
     expect(checkboxComponent).toHaveLength(1);
     expect(checkboxComponent.prop('id')).toEqual(`reply-${checkboxField.id}_choice-other--check`);

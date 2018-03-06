@@ -14,9 +14,9 @@ describe('<GroupAdminUsers />', () => {
       biography: 'biooooo',
       email: 'toto@cap-collectif.com',
       phone: null,
-      media: { url: 'https://capco.dev' },
+      media: { url: 'https://capco.dev' }
     },
-    dispatch: jest.fn(),
+    dispatch: jest.fn()
   };
 
   it('render correctly', () => {

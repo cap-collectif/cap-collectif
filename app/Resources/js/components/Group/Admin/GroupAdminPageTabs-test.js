@@ -9,7 +9,7 @@ describe('<GroupAdminPageTabs />', () => {
   const props = {
     intl: intlMock,
     // $FlowFixMe $refType
-    group: {},
+    group: {}
   };
 
   it('render correctly', () => {

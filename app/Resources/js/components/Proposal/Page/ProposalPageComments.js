@@ -8,19 +8,19 @@ import CommentSection from '../../Comment/CommentSection';
 type Props = {
   id: string,
   form: Object,
-  className: string,
+  className: string
 };
 
 class ProposalPageComments extends React.Component<Props> {
   static defaultProps = {
-    className: '',
+    className: ''
   };
 
   render() {
     const { className, form, id } = this.props;
     const classes = {
       proposal__comments: true,
-      [className]: true,
+      [className]: true
     };
 
     const component = ({ props }: { props: ?{ proposalForm: { commentable: boolean } } }) => {
@@ -41,7 +41,7 @@ class ProposalPageComments extends React.Component<Props> {
             }
           `}
           variables={{
-            id: form.id,
+            id: form.id
           }}
           render={component}
         />

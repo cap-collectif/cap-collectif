@@ -7,7 +7,7 @@ import { fetchProposalPosts } from '../../../redux/modules/proposal';
 export const ProposalPageBlog = React.createClass({
   propTypes: {
     proposal: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired
   },
 
   componentDidMount() {
@@ -28,12 +28,12 @@ export const ProposalPageBlog = React.createClass({
     return (
       <ul className="media-list">{posts.map((post, index) => <Post post={post} key={index} />)}</ul>
     );
-  },
+  }
 });
 
 const mapStateToProps = state => {
   return {
-    proposal: state.proposal.proposalsById[state.proposal.currentProposalId],
+    proposal: state.proposal.proposalsById[state.proposal.currentProposalId]
   };
 };
 

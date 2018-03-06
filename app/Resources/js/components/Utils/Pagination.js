@@ -20,7 +20,7 @@ export default class Pagination extends React.Component {
       showFirst,
       showLast,
       showNext,
-      showPrev,
+      showPrev
     } = this.props;
     const offset = Math.floor(displayedPages / 2);
     let firstNumber = current - offset;
@@ -109,7 +109,7 @@ Pagination.propTypes = {
   showFirst: React.PropTypes.bool,
   showLast: React.PropTypes.bool,
   showPrev: React.PropTypes.bool,
-  showNext: React.PropTypes.bool,
+  showNext: React.PropTypes.bool
 };
 
 Pagination.defaultProps = {
@@ -117,7 +117,7 @@ Pagination.defaultProps = {
   showFirst: true,
   showLast: true,
   showPrev: true,
-  showNext: true,
+  showNext: true
 };
 
 Pagination.displayName = 'Pagination';

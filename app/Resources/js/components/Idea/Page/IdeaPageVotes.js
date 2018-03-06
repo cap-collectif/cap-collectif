@@ -11,18 +11,18 @@ export const IdeaPageVotes = React.createClass({
   propTypes: {
     fetchIdeaVotes: PropTypes.func.isRequired,
     idea: PropTypes.object.isRequired,
-    className: PropTypes.string,
+    className: PropTypes.string
   },
 
   getDefaultProps() {
     return {
-      className: '',
+      className: ''
     };
   },
 
   getInitialState() {
     return {
-      showModal: false,
+      showModal: false
     };
   },
 
@@ -36,7 +36,7 @@ export const IdeaPageVotes = React.createClass({
 
   toggleModal(value) {
     this.setState({
-      showModal: value,
+      showModal: value
     });
   },
 
@@ -52,7 +52,7 @@ export const IdeaPageVotes = React.createClass({
 
     const classes = {
       idea__votes: true,
-      [className]: true,
+      [className]: true
     };
 
     return (
@@ -61,7 +61,7 @@ export const IdeaPageVotes = React.createClass({
           <FormattedMessage
             id="idea.vote.count"
             values={{
-              num: idea.votesCount,
+              num: idea.votesCount
             }}
           />
         </h2>
@@ -88,12 +88,12 @@ export const IdeaPageVotes = React.createClass({
         <AllVotesModal votes={idea.votes} onToggleModal={this.toggleModal} showModal={showModal} />
       </div>
     );
-  },
+  }
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchIdeaVotes: ideaId => dispatch(fetchIdeaVotes(ideaId)),
+    fetchIdeaVotes: ideaId => dispatch(fetchIdeaVotes(ideaId))
   };
 };
 

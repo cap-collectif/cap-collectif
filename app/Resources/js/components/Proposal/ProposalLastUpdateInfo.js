@@ -6,7 +6,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import type { ProposalLastUpdateInfo_proposal } from './__generated__/ProposalLastUpdateInfo_proposal.graphql';
 
 type Props = {
-  proposal: ProposalLastUpdateInfo_proposal,
+  proposal: ProposalLastUpdateInfo_proposal
 };
 
 export class ProposalLastUpdateInfo extends React.PureComponent<Props> {
@@ -44,5 +44,5 @@ export default createFragmentContainer(ProposalLastUpdateInfo, {
         displayName
       }
     }
-  `,
+  `
 });

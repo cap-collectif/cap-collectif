@@ -15,7 +15,7 @@ import {
   UPDATE_IDEA_FAILURE,
   DELETE_IDEA_SUCCESS,
   DELETE_IDEA_FAILURE,
-  RECEIVE_IDEAS,
+  RECEIVE_IDEAS
 } from '../constants/IdeaConstants';
 import { UPDATE_ALERT } from '../constants/AlertConstants';
 
@@ -23,14 +23,14 @@ export default {
   initIdeas: ideas => {
     AppDispatcher.dispatch({
       actionType: INIT_IDEAS,
-      ideas,
+      ideas
     });
   },
 
   setPagination: pagination => {
     AppDispatcher.dispatch({
       actionType: SET_IDEAS_PAGINATION,
-      pagination,
+      pagination
     });
   },
 
@@ -38,7 +38,7 @@ export default {
     AppDispatcher.dispatch({
       actionType: INIT_IDEAS_COUNTS,
       count,
-      countTrashed,
+      countTrashed
     });
   },
 
@@ -63,7 +63,7 @@ export default {
           actionType: RECEIVE_IDEAS,
           ideas: result.ideas,
           count: result.count,
-          countTrashed: result.countTrashed,
+          countTrashed: result.countTrashed
         });
         return true;
       });
@@ -73,28 +73,28 @@ export default {
   changePage: page => {
     AppDispatcher.dispatch({
       actionType: CHANGE_IDEAS_PAGE,
-      page,
+      page
     });
   },
 
   changeOrder: order => {
     AppDispatcher.dispatch({
       actionType: CHANGE_IDEAS_ORDER,
-      order,
+      order
     });
   },
 
   changeTheme: theme => {
     AppDispatcher.dispatch({
       actionType: CHANGE_IDEAS_THEME,
-      theme,
+      theme
     });
   },
 
   changeSearchTerms: terms => {
     AppDispatcher.dispatch({
       actionType: CHANGE_IDEAS_SEARCH_TERMS,
-      terms,
+      terms
     });
   },
 
@@ -107,21 +107,21 @@ export default {
     return Fetcher.postFormData('/ideas', formData)
       .then(() => {
         AppDispatcher.dispatch({
-          actionType: CREATE_IDEA_SUCCESS,
+          actionType: CREATE_IDEA_SUCCESS
         });
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: 'alert.success.add.idea' },
+          alert: { bsStyle: 'success', content: 'alert.success.add.idea' }
         });
         return true;
       })
       .catch(() => {
         AppDispatcher.dispatch({
-          actionType: CREATE_IDEA_FAILURE,
+          actionType: CREATE_IDEA_FAILURE
         });
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'warning', content: 'alert.danger.add.idea' },
+          alert: { bsStyle: 'warning', content: 'alert.danger.add.idea' }
         });
         return false;
       });
@@ -135,21 +135,21 @@ export default {
     return Fetcher.postFormData(`/ideas/${idea}`, formData)
       .then(() => {
         AppDispatcher.dispatch({
-          actionType: UPDATE_IDEA_SUCCESS,
+          actionType: UPDATE_IDEA_SUCCESS
         });
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: 'alert.success.update.idea' },
+          alert: { bsStyle: 'success', content: 'alert.success.update.idea' }
         });
         return true;
       })
       .catch(() => {
         AppDispatcher.dispatch({
-          actionType: UPDATE_IDEA_FAILURE,
+          actionType: UPDATE_IDEA_FAILURE
         });
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'warning', content: 'alert.danger.update.idea' },
+          alert: { bsStyle: 'warning', content: 'alert.danger.update.idea' }
         });
         return false;
       });
@@ -159,23 +159,23 @@ export default {
     return Fetcher.delete(`/ideas/${idea}`)
       .then(() => {
         AppDispatcher.dispatch({
-          actionType: DELETE_IDEA_SUCCESS,
+          actionType: DELETE_IDEA_SUCCESS
         });
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: 'alert.success.delete.idea' },
+          alert: { bsStyle: 'success', content: 'alert.success.delete.idea' }
         });
         return true;
       })
       .catch(() => {
         AppDispatcher.dispatch({
-          actionType: DELETE_IDEA_FAILURE,
+          actionType: DELETE_IDEA_FAILURE
         });
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'warning', content: 'alert.danger.delete.idea' },
+          alert: { bsStyle: 'warning', content: 'alert.danger.delete.idea' }
         });
         return false;
       });
-  },
+  }
 };

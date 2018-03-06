@@ -25,13 +25,13 @@ describe('<ProposalAdminContentForm />', () => {
         { question: { id: '1' }, value: 'value-1' },
         {
           question: { id: '2' },
-          medias: [{ id: '1', name: 'media-1', size: '100', url: '' }],
-        },
+          medias: [{ id: '1', name: 'media-1', size: '100', url: '' }]
+        }
       ],
       mergedIn: [],
       mergedFrom: [
         { id: '1', title: 'Child 1', adminUrl: 'http://capco.dev/child1' },
-        { id: '2', title: 'Child 2', adminUrl: 'http://capco.dev/child2' },
+        { id: '2', title: 'Child 2', adminUrl: 'http://capco.dev/child2' }
       ],
       media: { id: '1', url: '' },
       form: {
@@ -39,7 +39,7 @@ describe('<ProposalAdminContentForm />', () => {
         description: 'Description',
         districts: [],
         step: {
-          id: 'step1',
+          id: 'step1'
         },
         categories: [{ id: '1', name: 'category-1' }, { id: '2', name: 'category-2' }],
         questions: [
@@ -53,8 +53,8 @@ describe('<ProposalAdminContentForm />', () => {
             required: true,
             validationRule: null,
             choices: [],
-            isOtherAllowed: false,
-          },
+            isOtherAllowed: false
+          }
         ],
         usingDistrict: true,
         districtMandatory: true,
@@ -71,17 +71,17 @@ describe('<ProposalAdminContentForm />', () => {
         illustrationHelpText: 'Illustration Help',
         descriptionHelpText: 'Description Help',
         addressHelpText: 'Address Help',
-        proposalInAZoneRequired: true,
+        proposalInAZoneRequired: true
       },
       author: {
         id: '1',
-        displayName: 'Author',
+        displayName: 'Author'
       },
       theme: { id: 'theme-1' },
       category: { id: '1' },
       address: null,
-      district: { id: '1' },
-    },
+      district: { id: '1' }
+    }
   };
 
   it('render correctly', () => {

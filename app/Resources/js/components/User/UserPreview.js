@@ -11,7 +11,7 @@ const UserPreview = React.createClass({
     user: React.PropTypes.object,
     username: React.PropTypes.string,
     className: React.PropTypes.string,
-    style: React.PropTypes.object,
+    style: React.PropTypes.object
   },
 
   getDefaultProps() {
@@ -19,7 +19,7 @@ const UserPreview = React.createClass({
       user: null,
       username: null,
       className: '',
-      style: {},
+      style: {}
     };
   },
 
@@ -41,7 +41,7 @@ const UserPreview = React.createClass({
       'media--user-thumbnail': true,
       'media--macro__user': true,
       box: true,
-      [className]: true,
+      [className]: true
     };
 
     return (
@@ -64,7 +64,7 @@ const UserPreview = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 });
 
 export default UserPreview;

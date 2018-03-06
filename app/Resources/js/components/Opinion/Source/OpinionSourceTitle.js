@@ -14,7 +14,7 @@ const OpinionSourceTitle = ({ source }: Object) => {
 };
 
 OpinionSourceTitle.propTypes = {
-  source: PropTypes.object.isRequired,
+  source: PropTypes.object.isRequired
 };
 
 export default OpinionSourceTitle;

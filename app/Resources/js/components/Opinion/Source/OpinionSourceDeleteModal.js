@@ -12,12 +12,12 @@ const OpinionSourceDeleteModal = React.createClass({
   propTypes: {
     show: PropTypes.bool.isRequired,
     source: PropTypes.object.isRequired,
-    onClose: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired
   },
 
   getInitialState() {
     return {
-      isSubmitting: false,
+      isSubmitting: false
     };
   },
 
@@ -68,7 +68,7 @@ const OpinionSourceDeleteModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  },
+  }
 });
 
 export default OpinionSourceDeleteModal;

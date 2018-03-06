@@ -6,7 +6,7 @@ import UserLink from '../../User/UserLink';
 
 const IdeaPreviewHeader = React.createClass({
   propTypes: {
-    idea: React.PropTypes.object.isRequired,
+    idea: React.PropTypes.object.isRequired
   },
 
   render() {
@@ -29,7 +29,7 @@ const IdeaPreviewHeader = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 });
 
 export default IdeaPreviewHeader;

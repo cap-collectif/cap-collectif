@@ -6,16 +6,16 @@ import { IdeaPage } from './IdeaPage';
 
 const contribuableIdea = {
   id: '1',
-  canContribute: true,
+  canContribute: true
 };
 
 const uncontribuableIdea = {
   id: '1',
-  canContribute: false,
+  canContribute: false
 };
 
 const idea = {
-  id: '1',
+  id: '1'
 };
 
 describe('<IdeaPage />', () => {

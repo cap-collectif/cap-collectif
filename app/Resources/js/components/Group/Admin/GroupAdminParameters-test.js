@@ -10,7 +10,7 @@ describe('<GroupAdminParameters />', () => {
     group: {
       id: 'group4',
       title: 'Comité de suvi',
-      description: 'Lorem ipsum dolor sit amet sapien estiam',
+      description: 'Lorem ipsum dolor sit amet sapien estiam'
     },
     submitting: false,
     submit: () => {},
@@ -18,7 +18,7 @@ describe('<GroupAdminParameters />', () => {
     pristine: false,
     valid: false,
     submitSucceeded: false,
-    submitFailed: false,
+    submitFailed: false
   };
 
   it('render correctly', () => {

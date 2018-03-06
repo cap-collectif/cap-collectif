@@ -12,17 +12,17 @@ describe('<OpinionCreateForm />', () => {
     stepId: '1',
     step: {
       titleHelpText: null,
-      descriptionHelpText: null,
+      descriptionHelpText: null
     },
     opinionType: {
       appendixTypes: [
         {
           type: '1',
           id: '1',
-          title: 'appendice',
-        },
-      ],
-    },
+          title: 'appendice'
+        }
+      ]
+    }
   };
 
   it('renders correctly', () => {

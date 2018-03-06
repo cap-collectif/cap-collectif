@@ -25,12 +25,12 @@ export const ProposalPageContent = React.createClass({
     form: PropTypes.object.isRequired,
     categories: PropTypes.array.isRequired,
     className: PropTypes.string,
-    dispatch: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired
   },
 
   getDefaultProps() {
     return {
-      className: '',
+      className: ''
     };
   },
 
@@ -38,7 +38,7 @@ export const ProposalPageContent = React.createClass({
     const { proposal, className, form, categories, dispatch, user } = this.props;
     const classes = {
       proposal__content: true,
-      [className]: true,
+      [className]: true
     };
     if (config.canUseDOM) {
       L = require('leaflet'); // eslint-disable-line
@@ -99,13 +99,13 @@ export const ProposalPageContent = React.createClass({
               <Map
                 center={{
                   lat: address[0].geometry.location.lat,
-                  lng: address[0].geometry.location.lng,
+                  lng: address[0].geometry.location.lng
                 }}
                 zoom={16}
                 maxZoom={18}
                 style={{
                   width: '100%',
-                  height: 175,
+                  height: 175
                 }}>
                 <TileLayer
                   url={`https://api.mapbox.com/styles/v1/capcollectif/cj4zmeym20uhr2smcmgbf49cz/tiles/256/{z}/{x}/{y}?access_token=${
@@ -119,7 +119,7 @@ export const ProposalPageContent = React.createClass({
                     iconUrl: '/svg/marker.svg',
                     iconSize: [40, 40],
                     iconAnchor: [20, 40],
-                    popupAnchor: [0, -40],
+                    popupAnchor: [0, -40]
                   })}
                 />
               </Map>
@@ -146,12 +146,12 @@ export const ProposalPageContent = React.createClass({
         {!proposal.isDraft && <ProposalPageComments id={proposal.id} form={form} />}
       </div>
     );
-  },
+  }
 });
 
 const mapStateToProps = state => {
   return {
-    user: state.user.user,
+    user: state.user.user
   };
 };
 

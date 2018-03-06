@@ -1,7 +1,7 @@
 CollectStep:
     type: object
     config:
-        interfaces: [Step]
+        interfaces: [Node, Step]
         fields:
             id:
               type: "ID!"

@@ -3,12 +3,12 @@ import ReadMoreLink from '../../Utils/ReadMoreLink';
 
 const StepText = React.createClass({
   propTypes: {
-    text: React.PropTypes.string,
+    text: React.PropTypes.string
   },
 
   getDefaultProps() {
     return {
-      text: null,
+      text: null
     };
   },
 
@@ -16,13 +16,13 @@ const StepText = React.createClass({
     return {
       expanded: true,
       truncated: false,
-      hideText: false,
+      hideText: false
     };
   },
 
   toggleExpand() {
     this.setState({
-      expanded: !this.state.expanded,
+      expanded: !this.state.expanded
     });
   },
 
@@ -33,7 +33,7 @@ const StepText = React.createClass({
     }
     const style = {
       maxHeight: this.state.expanded ? 'none' : '85px',
-      visibility: this.state.hideText ? 'hidden' : 'visible',
+      visibility: this.state.hideText ? 'hidden' : 'visible'
     };
     return (
       <div className="step__intro">
@@ -56,7 +56,7 @@ const StepText = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 });
 
 export default StepText;

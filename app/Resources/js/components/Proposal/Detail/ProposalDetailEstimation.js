@@ -4,7 +4,7 @@ import { FormattedNumber } from 'react-intl';
 const ProposalDetailEstimation = React.createClass({
   propTypes: {
     proposal: PropTypes.object.isRequired,
-    showNullEstimation: PropTypes.bool.isRequired,
+    showNullEstimation: PropTypes.bool.isRequired
   },
 
   render() {
@@ -22,7 +22,7 @@ const ProposalDetailEstimation = React.createClass({
         />
       </div>
     ) : null;
-  },
+  }
 });
 
 export default ProposalDetailEstimation;

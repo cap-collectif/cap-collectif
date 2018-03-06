@@ -7,7 +7,7 @@ import LoginOverlay from '../../Utils/LoginOverlay';
 const OpinionSourceAddButton = React.createClass({
   propTypes: {
     handleClick: PropTypes.func.isRequired,
-    disabled: PropTypes.bool,
+    disabled: PropTypes.bool
   },
 
   render() {
@@ -24,7 +24,7 @@ const OpinionSourceAddButton = React.createClass({
         </Button>
       </LoginOverlay>
     );
-  },
+  }
 });
 
 export default OpinionSourceAddButton;

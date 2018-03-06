@@ -8,7 +8,7 @@ const ProposalDetailLikersLabel = React.createClass({
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
     onMouseOver: PropTypes.func,
-    onMouseOut: PropTypes.func,
+    onMouseOut: PropTypes.func
   },
 
   getDefaultProps() {
@@ -16,7 +16,7 @@ const ProposalDetailLikersLabel = React.createClass({
       onFocus: () => {},
       onBlur: () => {},
       onMouseOver: () => {},
-      onMouseOut: () => {},
+      onMouseOut: () => {}
     };
   },
 
@@ -30,7 +30,7 @@ const ProposalDetailLikersLabel = React.createClass({
         <FormattedMessage
           id="proposal.likers.count"
           values={{
-            num: likers.length,
+            num: likers.length
           }}
         />
       );
@@ -44,7 +44,7 @@ const ProposalDetailLikersLabel = React.createClass({
       onFocus,
       onBlur,
       onMouseOver,
-      onMouseOut,
+      onMouseOut
     };
 
     if (likers.length > 0) {
@@ -56,7 +56,7 @@ const ProposalDetailLikersLabel = React.createClass({
       );
     }
     return null;
-  },
+  }
 });
 
 export default ProposalDetailLikersLabel;

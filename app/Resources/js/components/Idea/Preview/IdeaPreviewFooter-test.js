@@ -7,7 +7,7 @@ const idea = {
   id: 1,
   commentable: false,
   votesCount: 10,
-  commentsCount: 0,
+  commentsCount: 0
 };
 
 const ideaCommentable = {
@@ -15,7 +15,7 @@ const ideaCommentable = {
   title: 'Title',
   commentable: true,
   votesCount: 10,
-  commentsCount: 5,
+  commentsCount: 5
 };
 
 describe('<IdeaPreviewFooter />', () => {

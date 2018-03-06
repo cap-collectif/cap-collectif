@@ -9,7 +9,7 @@ import {
   UPDATE_OPINION_VERSION_SUCCESS,
   UPDATE_OPINION_VERSION_FAILURE,
   DELETE_OPINION_VERSION_SUCCESS,
-  DELETE_OPINION_VERSION_FAILURE,
+  DELETE_OPINION_VERSION_FAILURE
 } from '../constants/OpinionConstants';
 
 class OpinionStore extends BaseStore {
@@ -23,7 +23,7 @@ class OpinionStore extends BaseStore {
     this._isOpinionSync = false;
     this._messages = {
       errors: [],
-      success: [],
+      success: []
     };
   }
 

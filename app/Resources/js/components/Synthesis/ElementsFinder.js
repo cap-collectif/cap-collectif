@@ -14,7 +14,7 @@ const ElementsFinder = React.createClass({
     expanded: React.PropTypes.object,
     onSelect: React.PropTypes.func,
     onExpand: React.PropTypes.func,
-    hiddenElementId: React.PropTypes.string,
+    hiddenElementId: React.PropTypes.string
   },
 
   getDefaultProps() {
@@ -22,12 +22,12 @@ const ElementsFinder = React.createClass({
       selectedId: 'root',
       elements: {},
       expanded: {
-        root: true,
+        root: true
       },
       onSelect: null,
       onExpand: null,
       type: 'notIgnored',
-      hiddenElementId: null,
+      hiddenElementId: null
     };
   },
 
@@ -38,8 +38,8 @@ const ElementsFinder = React.createClass({
         id: 'root',
         title: <FormattedMessage id="synthesis.edition.finder.root" />,
         displayType: 'root',
-        children: elements,
-      },
+        children: elements
+      }
     ];
   },
 
@@ -70,7 +70,7 @@ const ElementsFinder = React.createClass({
           {elements.map(element => {
             const classes = classNames({
               tree__item: true,
-              published: element.published,
+              published: element.published
             });
             if (!hiddenElementId || element.id !== hiddenElementId) {
               return (
@@ -90,7 +90,7 @@ const ElementsFinder = React.createClass({
     const { selectedId } = this.props;
     const classes = classNames({
       tree__item__content: true,
-      selected: selectedId === element.id,
+      selected: selectedId === element.id
     });
     return (
       <div id={`element-${element.id}`} className={classes} onClick={() => this.select(element)}>
@@ -113,7 +113,7 @@ const ElementsFinder = React.createClass({
     const classes = classNames({
       tree__item__caret: true,
       'cap-arrow-67': expanded[element.id],
-      'cap-arrow-66': !expanded[element.id],
+      'cap-arrow-66': !expanded[element.id]
     });
     if (element.childrenCount > 0) {
       return <i className={classes} onClick={ev => this.toggleExpand(ev, element)} />;
@@ -126,7 +126,7 @@ const ElementsFinder = React.createClass({
 
   render() {
     return <div className="synthesis__tree">{this.renderTree()}</div>;
-  },
+  }
 });
 
 export default ElementsFinder;

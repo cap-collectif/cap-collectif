@@ -9,7 +9,7 @@ describe('<AddRegistrationQuestionModal />', () => {
     submitting: false,
     show: true,
     onClose: jest.fn(),
-    onSubmit: jest.fn(),
+    onSubmit: jest.fn()
   };
 
   it('renders correctly', () => {

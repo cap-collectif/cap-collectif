@@ -13,7 +13,7 @@ export const ProposalAdminRealisationStepModal = React.createClass({
     show: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
     member: PropTypes.string.isRequired,
-    isCreating: PropTypes.bool.isRequired,
+    isCreating: PropTypes.bool.isRequired
   },
 
   render() {
@@ -72,7 +72,7 @@ export const ProposalAdminRealisationStepModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  },
+  }
 });
 
 export default connect()(ProposalAdminRealisationStepModal);

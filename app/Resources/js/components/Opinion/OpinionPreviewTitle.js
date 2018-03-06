@@ -5,7 +5,7 @@ import OpinionTypeLabel from './OpinionTypeLabel';
 type Props = {
   link: boolean,
   opinion: Object,
-  showTypeLabel: boolean,
+  showTypeLabel: boolean
 };
 
 export default class OpinionPreviewTitle extends React.Component<Props> {

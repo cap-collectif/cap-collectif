@@ -10,7 +10,7 @@ const ElementTitle = React.createClass({
     hasLink: React.PropTypes.bool,
     className: React.PropTypes.string,
     style: React.PropTypes.object,
-    onClick: React.PropTypes.func,
+    onClick: React.PropTypes.func
   },
 
   getDefaultProps() {
@@ -19,7 +19,7 @@ const ElementTitle = React.createClass({
       linkType: 'none',
       style: {},
       className: '',
-      onClick: null,
+      onClick: null
     };
   },
 
@@ -71,7 +71,7 @@ const ElementTitle = React.createClass({
         {this.renderTitle()}
       </a>
     );
-  },
+  }
 });
 
 export default ElementTitle;

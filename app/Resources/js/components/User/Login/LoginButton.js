@@ -13,13 +13,13 @@ type Props = {
   dispatch: Dispatch,
   className: ?string,
   style: ?Object,
-  loginWithMonCompteParis: boolean,
+  loginWithMonCompteParis: boolean
 };
 export class LoginButton extends React.Component<Props> {
   static defaultProps = {
     bsStyle: 'default',
     className: '',
-    style: {},
+    style: {}
   };
 
   render() {
@@ -37,7 +37,7 @@ export class LoginButton extends React.Component<Props> {
               window.open(
                 `${monCompteBaseUrl}jsp/site/Portal.jsp?page=myluteceusergu&view=createAccountModal&back_url=${backUrl}`,
                 '_blank',
-                `width=${wW},height=${wH},scrollbars=yes,status=yes,resizable=yes,toolbar=0,menubar=0,location=0,screenx=0,screeny=0`,
+                `width=${wW},height=${wH},scrollbars=yes,status=yes,resizable=yes,toolbar=0,menubar=0,location=0,screenx=0,screeny=0`
               );
             } else {
               dispatch(showLoginModal());
@@ -53,7 +53,7 @@ export class LoginButton extends React.Component<Props> {
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  loginWithMonCompteParis: state.default.features.login_paris,
+  loginWithMonCompteParis: state.default.features.login_paris
 });
 
 const connector = connect(mapStateToProps);

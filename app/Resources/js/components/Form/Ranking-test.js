@@ -13,8 +13,8 @@ describe('<Ranking />', () => {
       { id: 24, label: 'Maxime Arrouard' },
       { id: 25, label: 'Spylou Super Sayen' },
       { id: 26, label: 'Cyril Lage' },
-      { id: 27, label: 'Superman' },
-    ],
+      { id: 27, label: 'Superman' }
+    ]
   };
 
   const props = {
@@ -23,7 +23,7 @@ describe('<Ranking />', () => {
     labelClassName: 'label-class',
     getGroupStyle: jest.fn(),
     renderFormErrors: jest.fn(),
-    onChange: jest.fn(),
+    onChange: jest.fn()
   };
 
   it('should render correctly', () => {

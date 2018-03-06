@@ -8,7 +8,7 @@ import IdeasListSearch from './IdeasListSearch';
 import Input from '../../Form/Input';
 
 const props = {
-  onChange: () => {},
+  onChange: () => {}
 };
 
 describe('<IdeasListSearch />', () => {

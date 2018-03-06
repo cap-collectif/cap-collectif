@@ -13,7 +13,7 @@ const CreateModal = React.createClass({
     elements: React.PropTypes.array,
     show: React.PropTypes.bool,
     toggle: React.PropTypes.func,
-    process: React.PropTypes.func,
+    process: React.PropTypes.func
   },
 
   mixins: [DeepLinkStateMixin],
@@ -21,7 +21,7 @@ const CreateModal = React.createClass({
   getDefaultProps() {
     return {
       process: null,
-      selectedId: 'root',
+      selectedId: 'root'
     };
   },
 
@@ -32,7 +32,7 @@ const CreateModal = React.createClass({
       parent: this.getElementInTreeById(elements, selectedId),
       expanded: this.getExpandedBasedOnSelectedId(),
       description: null,
-      displayType: 'folder',
+      displayType: 'folder'
     };
   },
 
@@ -41,7 +41,7 @@ const CreateModal = React.createClass({
     if (nextProps.selectedId !== selectedId) {
       this.setState({
         parent: this.getElementInTreeById(nextProps.elements, nextProps.selectedId),
-        expanded: this.getExpandedBasedOnSelectedId(),
+        expanded: this.getExpandedBasedOnSelectedId()
       });
     }
   },
@@ -49,7 +49,7 @@ const CreateModal = React.createClass({
   getExpandedBasedOnSelectedId() {
     const { elements, selectedId } = this.props;
     const expanded = {
-      root: true,
+      root: true
     };
     if (elements && selectedId !== 'root') {
       expanded[selectedId] = true;
@@ -81,13 +81,13 @@ const CreateModal = React.createClass({
 
   setName(event) {
     this.setState({
-      name: event.target.value,
+      name: event.target.value
     });
   },
 
   setDescription(event) {
     this.setState({
-      description: event.target.value,
+      description: event.target.value
     });
   },
 
@@ -99,7 +99,7 @@ const CreateModal = React.createClass({
     if (element) {
       const value = element !== 'root' ? element : null;
       this.setState({
-        parent: value,
+        parent: value
       });
     }
   },
@@ -108,7 +108,7 @@ const CreateModal = React.createClass({
     const expanded = this.state.expanded;
     expanded[element.id] = !this.state.expanded[element.id];
     this.setState({
-      expanded,
+      expanded
     });
   },
 
@@ -122,7 +122,7 @@ const CreateModal = React.createClass({
     this.setState({
       name: null,
       description: null,
-      displayType: 'folder',
+      displayType: 'folder'
     });
     toggle(false);
   },
@@ -136,7 +136,7 @@ const CreateModal = React.createClass({
       title: this.state.name,
       description: this.state.description,
       parent: this.state.parent,
-      displayType: this.state.displayType,
+      displayType: this.state.displayType
     };
     if (typeof process === 'function') {
       process(element);
@@ -257,7 +257,7 @@ const CreateModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  },
+  }
 });
 
 export default CreateModal;

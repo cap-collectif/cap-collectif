@@ -7,7 +7,7 @@ const VotesBar = React.createClass({
     style: React.PropTypes.object,
     max: React.PropTypes.number.isRequired,
     value: React.PropTypes.number.isRequired,
-    helpText: React.PropTypes.string,
+    helpText: React.PropTypes.string
   },
 
   renderBar() {
@@ -36,7 +36,7 @@ const VotesBar = React.createClass({
             fontSize: '24px',
             color: '#999',
             paddingLeft: '15px',
-            top: '-5px',
+            top: '-5px'
           }}
           className="pull-right cap cap-information"
         />
@@ -52,7 +52,7 @@ const VotesBar = React.createClass({
         <FormattedMessage
           id="opinion.progress.done"
           values={{
-            num: value,
+            num: value
           }}
         />
       </p>
@@ -69,7 +69,7 @@ const VotesBar = React.createClass({
             id="opinion.progress.left"
             values={{
               left,
-              max,
+              max
             }}
           />
           {this.renderIcon()}
@@ -81,7 +81,7 @@ const VotesBar = React.createClass({
         <FormattedMessage
           id="opinion.progress.reached"
           values={{
-            with: value,
+            with: value
           }}
         />
         {this.renderIcon()}
@@ -113,7 +113,7 @@ const VotesBar = React.createClass({
       );
     }
     return null;
-  },
+  }
 });
 
 export default VotesBar;

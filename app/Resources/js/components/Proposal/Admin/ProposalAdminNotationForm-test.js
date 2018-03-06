@@ -18,15 +18,20 @@ describe('<ProposalAdminNotationForm />', () => {
       likers: [{ id: '1', displayName: 'liker-1' }],
       form: {
         evaluationForm: {
+<<<<<<< HEAD
           description: null,
           questions: [],
         },
+=======
+          questions: []
+        }
+>>>>>>> Implement relay-node pattern
       },
       evaluation: {
         version: 1,
-        responses: [],
-      },
-    },
+        responses: []
+      }
+    }
   };
 
   it('render correctly', () => {

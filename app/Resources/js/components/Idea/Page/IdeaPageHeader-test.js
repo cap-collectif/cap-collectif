@@ -6,8 +6,8 @@ import IdeaPageHeader from './IdeaPageHeader';
 const props = {
   idea: {
     id: 1,
-    title: 'Title',
-  },
+    title: 'Title'
+  }
 };
 
 describe('<IdeaPageHeader />', () => {

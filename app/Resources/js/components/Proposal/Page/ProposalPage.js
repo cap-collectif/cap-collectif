@@ -19,7 +19,7 @@ type Props = {
   proposal: Proposal,
   categories: Array<Object>,
   steps: Array<Object>,
-  features: FeatureToggles,
+  features: FeatureToggles
 };
 
 export class ProposalPage extends React.Component<Props> {
@@ -111,7 +111,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
       state.proposal.proposalsById[state.proposal.currentProposalId],
     steps:
       state.project.currentProjectById &&
-      state.project.projectsById[state.project.currentProjectById].steps,
+      state.project.projectsById[state.project.currentProjectById].steps
   };
 };
 

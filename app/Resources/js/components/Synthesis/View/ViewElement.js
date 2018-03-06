@@ -7,7 +7,7 @@ import VotePiechart from '../../Utils/VotePiechart';
 import ChildrenModal from './ChildrenModal';
 import SynthesisDisplayRules from '../../../services/SynthesisDisplayRules';
 import SynthesisPourcentageTooltipLabel, {
-  calculPourcentage,
+  calculPourcentage
 } from './SynthesisPourcentageTooltipLabel';
 
 const ViewElement = React.createClass({
@@ -15,18 +15,18 @@ const ViewElement = React.createClass({
     element: React.PropTypes.object.isRequired,
     parent: React.PropTypes.object,
     settings: React.PropTypes.array.isRequired,
-    onExpandElement: React.PropTypes.func.isRequired,
+    onExpandElement: React.PropTypes.func.isRequired
   },
 
   getDefaultProps() {
     return {
-      parent: null,
+      parent: null
     };
   },
 
   getInitialState() {
     return {
-      showChildrenModal: false,
+      showChildrenModal: false
     };
   },
 
@@ -40,7 +40,7 @@ const ViewElement = React.createClass({
     const { element, onExpandElement } = this.props;
     onExpandElement(element);
     this.setState({
-      showChildrenModal: value,
+      showChildrenModal: value
     });
   },
 
@@ -75,7 +75,7 @@ const ViewElement = React.createClass({
             <FormattedMessage
               id="synthesis.vote.total"
               values={{
-                nb: (votes[-1] || 0) + (votes[0] || 0) + (votes[1] || 0),
+                nb: (votes[-1] || 0) + (votes[0] || 0) + (votes[1] || 0)
               }}
             />
           </p>
@@ -149,7 +149,7 @@ const ViewElement = React.createClass({
     const childrenModal = SynthesisDisplayRules.getValueForRule(
       settings,
       'display',
-      'childrenInModal',
+      'childrenInModal'
     );
     return (
       <ElementTitle
@@ -216,7 +216,7 @@ const ViewElement = React.createClass({
         />
       </div>
     );
-  },
+  }
 });
 
 export default ViewElement;

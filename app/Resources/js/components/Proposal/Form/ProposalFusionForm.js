@@ -6,7 +6,7 @@ import { Field, SubmissionError, reduxForm, formValueSelector, change } from 're
 import Fetcher from '../../../services/Fetcher';
 import select from '../../Form/Select';
 import CreateProposalFusionMutation, {
-  type CreateProposalFusionMutationResponse,
+  type CreateProposalFusionMutationResponse
 } from '../../../mutations/CreateProposalFusionMutation';
 import { closeCreateFusionModal } from '../../../redux/modules/proposal';
 import type { State, Dispatch, Uuid } from '../../../types';
@@ -15,7 +15,7 @@ export const formName = 'create-proposal-fusion';
 
 type FormValues = {
   project: ?Uuid,
-  fromProposals: $ReadOnlyArray<{ value: Uuid }>,
+  fromProposals: $ReadOnlyArray<{ value: Uuid }>
 };
 
 type Props = {
@@ -23,7 +23,7 @@ type Props = {
   projects: Array<Object>,
   currentCollectStep: Object,
   onProjectChange: (form: string, field: string, value: any) => void,
-  intl: IntlShape,
+  intl: IntlShape
 };
 
 const validate = (values: FormValues, props: Props) => {
@@ -40,7 +40,7 @@ const validate = (values: FormValues, props: Props) => {
 
 const onSubmit = (values: FormValues, dispatch: Dispatch) => {
   return CreateProposalFusionMutation.commit({
-    input: { fromProposals: values.fromProposals.map(proposal => proposal.value) },
+    input: { fromProposals: values.fromProposals.map(proposal => proposal.value) }
   })
     .then((response: CreateProposalFusionMutationResponse) => {
       if (!response.createProposalFusion || !response.createProposalFusion.proposal) {
@@ -52,7 +52,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch) => {
     })
     .catch(() => {
       throw new SubmissionError({
-        _error: 'global.error.server.form',
+        _error: 'global.error.server.form'
       });
     });
 };
@@ -90,13 +90,13 @@ export class ProposalFusionForm extends React.Component<Props> {
             }
             loadOptions={input =>
               Fetcher.postToJson(`/collect_steps/${currentCollectStep.id}/proposals/search`, {
-                terms: input,
+                terms: input
               }).then(res => ({
                 options: res.proposals.map(p => ({
                   value: p.id,
                   label: p.title,
-                  stepId: currentCollectStep.id,
-                })),
+                  stepId: currentCollectStep.id
+                }))
               }))
             }
           />
@@ -132,14 +132,14 @@ const getCurrentCollectStep = (state: State): ?Object => {
 
 const mapStateToProps = (state: State) => ({
   projects: getBudgetProjects(state.project.projectsById),
-  currentCollectStep: getCurrentCollectStep(state),
+  currentCollectStep: getCurrentCollectStep(state)
 });
 
 const form = reduxForm({
   form: formName,
   destroyOnUnmount: false,
   validate,
-  onSubmit,
+  onSubmit
 })(ProposalFusionForm);
 
 export default connect(mapStateToProps, { onProjectChange: change })(injectIntl(form));

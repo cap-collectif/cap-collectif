@@ -12,12 +12,12 @@ import { showSourceEditModal } from '../../../redux/modules/opinion';
 const OpinionSourceButtons = React.createClass({
   propTypes: {
     source: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired
   },
 
   getInitialState() {
     return {
-      isDeleting: false,
+      isDeleting: false
     };
   },
 
@@ -55,7 +55,7 @@ const OpinionSourceButtons = React.createClass({
         />
       </div>
     );
-  },
+  }
 });
 
 export default connect()(OpinionSourceButtons);

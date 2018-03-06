@@ -12,14 +12,14 @@ type Props = {
   className: ?string,
   onClick: Function,
   style: ?Object,
-  bsSize: ?string,
+  bsSize: ?string
 };
 
 export class ReportButton extends React.PureComponent<Props> {
   static defaultProps = {
     className: '',
     style: {},
-    bsSize: null,
+    bsSize: null
   };
 
   render() {
@@ -49,7 +49,7 @@ export class ReportButton extends React.PureComponent<Props> {
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, ownProps) => {
   return {
-    reported: ownProps.reported || state.report.elements.includes(ownProps.id),
+    reported: ownProps.reported || state.report.elements.includes(ownProps.id)
   };
 };
 

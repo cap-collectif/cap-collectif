@@ -8,7 +8,7 @@ describe('<SectionRecursiveList />', () => {
   const props = {
     // $FlowFixMe $refType
     sections: [{ sections: [] }, { sections: [] }],
-    consultation: {},
+    consultation: {}
   };
 
   it('renders correcty', () => {

@@ -7,7 +7,7 @@ import FormattedText from '../../services/FormattedText';
 
 const OpinionBody = React.createClass({
   propTypes: {
-    opinion: React.PropTypes.object.isRequired,
+    opinion: React.PropTypes.object.isRequired
   },
 
   isVersion() {
@@ -37,7 +37,7 @@ const OpinionBody = React.createClass({
     }
 
     return <OpinionBodyDiffContent opinion={opinion} />;
-  },
+  }
 });
 
 export default OpinionBody;

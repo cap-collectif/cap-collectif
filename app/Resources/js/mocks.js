@@ -15,7 +15,7 @@ export const intlMock: IntlShape = {
   formatRelative: message => String(message),
   formatTime: message => String(message),
   formatDate: message => String(message),
-  formatMessage: message => String(message.id),
+  formatMessage: message => String(message.id)
 };
 
 export const formMock: FormProps = {
@@ -30,7 +30,7 @@ export const formMock: FormProps = {
     shift: jest.fn(),
     splice: jest.fn(),
     swap: jest.fn(),
-    unshift: jest.fn(),
+    unshift: jest.fn()
   },
   asyncValidate: jest.fn(),
   asyncValidating: false,
@@ -57,7 +57,7 @@ export const formMock: FormProps = {
   touch: jest.fn(),
   untouch: jest.fn(),
   valid: true,
-  warning: null,
+  warning: null
 };
 
 export const relayPaginationMock: RelayPaginationProp = {
@@ -69,10 +69,10 @@ export const relayPaginationMock: RelayPaginationProp = {
     subscribe: jest.fn(),
     streamQuery: jest.fn(),
     retain: jest.fn(),
-    unstable_internal: {},
+    unstable_internal: {}
   },
   hasMore: () => false,
   isLoading: () => false,
   loadMore: jest.fn(),
-  refetchConnection: jest.fn(),
+  refetchConnection: jest.fn()
 };

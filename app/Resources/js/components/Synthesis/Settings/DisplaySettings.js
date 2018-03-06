@@ -12,14 +12,14 @@ import type { State } from '../../../types';
 type Props = {
   synthesis: Object,
   submitting: boolean,
-  handleSubmit?: Function,
+  handleSubmit?: Function
 };
 
 const onSubmit = (values, dispatch, props) => {
   const { synthesis } = props;
 
   return Fetcher.put(`/syntheses/${synthesis.id}/display`, {
-    rules: { level: values.level },
+    rules: { level: values.level }
   }).then(() => {
     return SynthesisActions.load(synthesis.id);
   });
@@ -69,14 +69,14 @@ export class DisplaySettings extends React.Component<Props> {
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) => ({
   initialValues: {
-    level: props.synthesis.displayRules.level,
-  },
+    level: props.synthesis.displayRules.level
+  }
 });
 
 export default connect(mapStateToProps)(
   reduxForm({
     validate,
     onSubmit,
-    form: formName,
-  })(DisplaySettings),
+    form: formName
+  })(DisplaySettings)
 );

@@ -7,7 +7,7 @@ describe('<AccountForm />', () => {
   const props = {
     dispatch: () => {},
     handleSubmit: () => {},
-    initialValues: { email: 'initial-email@gmail.fr' },
+    initialValues: { email: 'initial-email@gmail.fr' }
   };
 
   it('should render a form', () => {
@@ -17,11 +17,7 @@ describe('<AccountForm />', () => {
 
   it('should render a form with an alert if submitted password is wrong', () => {
     const wrapper = shallow(
-      <AccountForm
-        {...props}
-        confirmationEmailResent={false}
-        error="user.confirm.wrong_password"
-      />,
+      <AccountForm {...props} confirmationEmailResent={false} error="user.confirm.wrong_password" />
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -32,14 +28,14 @@ describe('<AccountForm />', () => {
         {...props}
         confirmationEmailResent={false}
         newEmailToConfirm="new-email@test.com"
-      />,
+      />
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render a form with an info if a confirmation email has been resent', () => {
     const wrapper = shallow(
-      <AccountForm {...props} confirmationEmailResent newEmailToConfirm="new-email@test.com" />,
+      <AccountForm {...props} confirmationEmailResent newEmailToConfirm="new-email@test.com" />
     );
     expect(wrapper).toMatchSnapshot();
   });

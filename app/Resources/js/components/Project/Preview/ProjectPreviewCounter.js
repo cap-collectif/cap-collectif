@@ -6,12 +6,12 @@ const ProjectPreviewCounter = React.createClass({
   propTypes: {
     value: React.PropTypes.number.isRequired,
     label: React.PropTypes.string.isRequired,
-    showZero: React.PropTypes.bool,
+    showZero: React.PropTypes.bool
   },
 
   getDefaultProps() {
     return {
-      showZero: false,
+      showZero: false
     };
   },
 
@@ -26,7 +26,7 @@ const ProjectPreviewCounter = React.createClass({
       );
     }
     return null;
-  },
+  }
 });
 
 export default ProjectPreviewCounter;

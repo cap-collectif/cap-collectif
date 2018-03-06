@@ -9,14 +9,14 @@ import UserBox from '../../User/UserBox';
 
 const OpinionVotesModal = React.createClass({
   propTypes: {
-    opinion: React.PropTypes.object.isRequired,
+    opinion: React.PropTypes.object.isRequired
   },
 
   getInitialState() {
     return {
       showModal: false,
       isLoading: true,
-      votes: [],
+      votes: []
     };
   },
 
@@ -27,7 +27,7 @@ const OpinionVotesModal = React.createClass({
     OpinionActions.loadAllVotes(opinionId, versionId).then(votes => {
       this.setState({
         isLoading: false,
-        votes,
+        votes
       });
     });
   },
@@ -89,7 +89,7 @@ const OpinionVotesModal = React.createClass({
         </Modal>
       </span>
     );
-  },
+  }
 });
 
 export default OpinionVotesModal;

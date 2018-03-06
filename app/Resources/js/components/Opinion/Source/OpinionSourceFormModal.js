@@ -17,7 +17,7 @@ const OpinionSourceFormModal = React.createClass({
     show: PropTypes.bool.isRequired,
     source: PropTypes.object,
     submitting: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired
   },
 
   render() {
@@ -64,7 +64,7 @@ const OpinionSourceFormModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  },
+  }
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props) => ({
@@ -72,7 +72,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props) => ({
     (!props.source && state.opinion.showSourceCreateModal) ||
     (props.source && state.opinion.showSourceEditModal === props.source.id) ||
     false,
-  submitting: isSubmitting(formName)(state),
+  submitting: isSubmitting(formName)(state)
 });
 
 export default connect(mapStateToProps)(OpinionSourceFormModal);

@@ -11,7 +11,7 @@ const OpinionSourceFooter = ({ source }: Object) => {
 };
 
 OpinionSourceFooter.propTypes = {
-  source: PropTypes.object.isRequired,
+  source: PropTypes.object.isRequired
 };
 
 export default OpinionSourceFooter;

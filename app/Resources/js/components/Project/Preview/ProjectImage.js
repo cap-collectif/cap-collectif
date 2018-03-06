@@ -4,7 +4,7 @@ import DefaultProjectImage from './DefaultProjectImage';
 
 const ProjectImage = React.createClass({
   propTypes: {
-    project: React.PropTypes.object.isRequired,
+    project: React.PropTypes.object.isRequired
   },
 
   render() {
@@ -17,7 +17,7 @@ const ProjectImage = React.createClass({
         {!project.video ? <DefaultProjectImage /> : null}
       </div>
     );
-  },
+  }
 });
 
 export default ProjectImage;

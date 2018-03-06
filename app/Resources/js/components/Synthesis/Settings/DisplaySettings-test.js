@@ -8,7 +8,7 @@ import { DisplaySettings } from './DisplaySettings';
 const props = {
   synthesis: {},
   submitting: false,
-  handleSubmit: jest.fn(),
+  handleSubmit: jest.fn()
 };
 
 describe('<DisplaySettings />', () => {

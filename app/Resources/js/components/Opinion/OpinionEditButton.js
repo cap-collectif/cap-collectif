@@ -9,7 +9,7 @@ import { openOpinionEditModal } from '../../redux/modules/opinion';
 export const OpinionEditButton = React.createClass({
   propTypes: {
     dispatch: PropTypes.func.isRequired,
-    opinion: PropTypes.object.isRequired,
+    opinion: PropTypes.object.isRequired
   },
 
   render() {
@@ -27,7 +27,7 @@ export const OpinionEditButton = React.createClass({
         <OpinionEditModal opinion={opinion} />
       </span>
     );
-  },
+  }
 });
 
 export default connect()(OpinionEditButton);

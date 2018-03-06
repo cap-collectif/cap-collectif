@@ -11,7 +11,7 @@ const EditButton = React.createClass({
     style: PropTypes.object,
     editable: PropTypes.bool,
     id: PropTypes.string,
-    user: PropTypes.object,
+    user: PropTypes.object
   },
 
   getDefaultProps() {
@@ -21,7 +21,7 @@ const EditButton = React.createClass({
       style: null,
       editable: true,
       id: 'edit-button',
-      user: null,
+      user: null
     };
   },
 
@@ -44,7 +44,7 @@ const EditButton = React.createClass({
       const classes = {
         btn: true,
         'btn-dark-gray': true,
-        'btn--outline': true,
+        'btn--outline': true
       };
 
       return (
@@ -59,12 +59,12 @@ const EditButton = React.createClass({
       );
     }
     return null;
-  },
+  }
 });
 
 const mapStateToProps = state => {
   return {
-    user: state.user.user,
+    user: state.user.user
   };
 };
 

@@ -23,7 +23,7 @@ type Props = RelayProps &
     usingCategories: boolean,
     usingThemes: boolean,
     usingDistrict: boolean,
-    features: FeatureToggles,
+    features: FeatureToggles
   };
 
 const zoomLevels = [
@@ -46,7 +46,7 @@ const zoomLevels = [
   { id: 17, name: '17' },
   { id: 18, name: '18' },
   { id: 19, name: '19' },
-  { id: 20, name: '20 - Immeubles' },
+  { id: 20, name: '20 - Immeubles' }
 ];
 const formName = 'proposal-form-admin-configuration';
 
@@ -208,9 +208,9 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
       question: {
         ...question,
         position: undefined,
-        kind: undefined,
-      },
-    })),
+        kind: undefined
+      }
+    }))
   };
 
   return UpdateProposalFormMutation.commit({ input });
@@ -231,7 +231,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
       usingThemes,
       usingCategories,
       usingDistrict,
-      features,
+      features
     } = this.props;
     const optional = (
       <span className="excerpt">
@@ -515,7 +515,7 @@ const form = reduxForm({
   onSubmit,
   validate,
   enableReinitialize: true,
-  form: formName,
+  form: formName
 })(ProposalFormAdminConfigurationForm);
 
 const selector = formValueSelector(formName);
@@ -526,7 +526,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayPro
   usingCategories: selector(state, 'usingCategories'),
   usingThemes: selector(state, 'usingThemes'),
   usingDistrict: selector(state, 'usingDistrict'),
-  features: state.default.features,
+  features: state.default.features
 });
 
 const container = connect(mapStateToProps)(form);
@@ -578,5 +578,5 @@ export default createFragmentContainer(
         kind
       }
     }
-  `,
+  `
 );

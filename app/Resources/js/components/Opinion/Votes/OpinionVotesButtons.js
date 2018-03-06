@@ -10,12 +10,12 @@ const OpinionVotesButtons = React.createClass({
     opinion: PropTypes.object.isRequired,
     show: PropTypes.bool.isRequired,
     disabled: PropTypes.bool.isRequired,
-    user: PropTypes.object,
+    user: PropTypes.object
   },
 
   getDefaultProps() {
     return {
-      user: null,
+      user: null
     };
   },
 
@@ -49,11 +49,11 @@ const OpinionVotesButtons = React.createClass({
         />
       </ButtonToolbar>
     );
-  },
+  }
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  user: state.user.user,
+  user: state.user.user
 });
 
 export default connect(mapStateToProps)(OpinionVotesButtons);

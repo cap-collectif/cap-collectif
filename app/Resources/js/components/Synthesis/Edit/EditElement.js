@@ -17,7 +17,7 @@ import DivideModal from './../Divide/DivideModal';
 const EditElement = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object,
-    params: React.PropTypes.object,
+    params: React.PropTypes.object
   },
 
   getInitialState() {
@@ -25,7 +25,7 @@ const EditElement = React.createClass({
       element: null,
       isLoading: true,
       showPublishModal: false,
-      showDivideModal: false,
+      showDivideModal: false
     };
   },
 
@@ -42,11 +42,11 @@ const EditElement = React.createClass({
     if (nextProps.params.element_id !== params.element_id) {
       this.setState(
         {
-          isLoading: true,
+          isLoading: true
         },
         () => {
           this.loadElementFromServer(nextProps.params.element_id);
-        },
+        }
       );
     }
   },
@@ -60,21 +60,21 @@ const EditElement = React.createClass({
   onChange() {
     this.setState({
       element: SynthesisElementStore.element,
-      isLoading: false,
+      isLoading: false
     });
   },
 
   togglePublishModal(value) {
     this.setState({
       showDivideModal: false,
-      showPublishModal: value,
+      showPublishModal: value
     });
   },
 
   toggleDivideModal(value) {
     this.setState({
       showPublishModal: false,
-      showDivideModal: value,
+      showDivideModal: value
     });
   },
 
@@ -205,7 +205,7 @@ const EditElement = React.createClass({
         {this.renderDivideModal()}
       </div>
     );
-  },
+  }
 });
 
 export default EditElement;

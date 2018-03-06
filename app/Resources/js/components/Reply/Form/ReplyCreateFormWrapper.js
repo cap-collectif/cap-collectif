@@ -11,12 +11,12 @@ export const ReplyCreateFormWrapper = React.createClass({
   propTypes: {
     form: PropTypes.object.isRequired,
     userReplies: PropTypes.array.isRequired,
-    user: PropTypes.object,
+    user: PropTypes.object
   },
 
   getInitialState() {
     return {
-      showPhoneModal: false,
+      showPhoneModal: false
     };
   },
 
@@ -83,12 +83,12 @@ export const ReplyCreateFormWrapper = React.createClass({
         <PhoneModal show={this.state.showPhoneModal} onClose={this.closePhoneModal} />
       </div>
     );
-  },
+  }
 });
 
 const mapStateToProps = state => {
   return {
-    user: state.user.user,
+    user: state.user.user
   };
 };
 

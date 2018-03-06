@@ -6,7 +6,7 @@ import moment from 'moment';
 type Props = {
   startAt: ?string,
   endAt: ?string,
-  fullDay: ?boolean,
+  fullDay: ?boolean
 };
 
 export class DatesInterval extends React.Component<Props> {
@@ -38,7 +38,7 @@ export class DatesInterval extends React.Component<Props> {
               id="global.dates.full_day"
               values={{
                 date: startDay,
-                time: startTime,
+                time: startTime
               }}
             />
           );
@@ -48,7 +48,7 @@ export class DatesInterval extends React.Component<Props> {
           <FormattedMessage
             id="global.dates.startDay.startNoTime"
             values={{
-              startD: startDay,
+              startD: startDay
             }}
           />
         );
@@ -64,7 +64,7 @@ export class DatesInterval extends React.Component<Props> {
               values={{
                 date: startDay,
                 startTime,
-                endTime,
+                endTime
               }}
             />
           );
@@ -78,7 +78,7 @@ export class DatesInterval extends React.Component<Props> {
                 startD: startDay,
                 startT: startTime,
                 endD: endDay,
-                endT: endTime,
+                endT: endTime
               }}
             />
           );
@@ -91,7 +91,7 @@ export class DatesInterval extends React.Component<Props> {
               values={{
                 startD: startDay,
                 endD: endDay,
-                endT: endTime,
+                endT: endTime
               }}
             />
           );
@@ -104,7 +104,7 @@ export class DatesInterval extends React.Component<Props> {
               values={{
                 startD: startDay,
                 startT: startTime,
-                endD: endDay,
+                endD: endDay
               }}
             />
           );
@@ -115,7 +115,7 @@ export class DatesInterval extends React.Component<Props> {
             id="global.dates.between"
             values={{
               start: startDay,
-              end: endDay,
+              end: endDay
             }}
           />
         );
@@ -132,7 +132,7 @@ export class DatesInterval extends React.Component<Props> {
           <FormattedMessage
             id="global.dates.pastDate"
             values={{
-              endD: endDay,
+              endD: endDay
             }}
           />
         );
@@ -144,7 +144,7 @@ export class DatesInterval extends React.Component<Props> {
             id="global.dates.endDate"
             values={{
               endD: endDay,
-              endT: endTime,
+              endT: endTime
             }}
           />
         );
@@ -154,7 +154,7 @@ export class DatesInterval extends React.Component<Props> {
         <FormattedMessage
           id="global.dates.endDate.endNoTime"
           values={{
-            endD: endDay,
+            endD: endDay
           }}
         />
       );

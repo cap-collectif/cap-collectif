@@ -5,7 +5,7 @@ import OpinionSource from './OpinionSource';
 
 const OpinionSourceList = React.createClass({
   propTypes: {
-    sources: React.PropTypes.array.isRequired,
+    sources: React.PropTypes.array.isRequired
   },
 
   render() {
@@ -27,7 +27,7 @@ const OpinionSourceList = React.createClass({
         })}
       </ul>
     );
-  },
+  }
 });
 
 export default OpinionSourceList;

@@ -4,7 +4,7 @@ import ProposalPrivateField from '../ProposalPrivateField';
 import ProposalMediaResponse from '../Page/ProposalMediaResponse';
 
 type Props = {
-  response: Object,
+  response: Object
 };
 
 class ProposalResponse extends React.PureComponent<Props> {

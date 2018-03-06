@@ -4,7 +4,7 @@ import moment from 'moment';
 
 const IdeaPageTrashBlock = React.createClass({
   propTypes: {
-    idea: React.PropTypes.object.isRequired,
+    idea: React.PropTypes.object.isRequired
   },
 
   render() {
@@ -35,13 +35,13 @@ const IdeaPageTrashBlock = React.createClass({
                   hour="numeric"
                   minute="numeric"
                 />
-              ),
+              )
             }}
           />
         </p>
       </div>
     );
-  },
+  }
 });
 
 export default IdeaPageTrashBlock;

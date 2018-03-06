@@ -5,7 +5,7 @@ import LoginOverlay from '../../Utils/LoginOverlay';
 
 export const IdeaCreateButton = React.createClass({
   propTypes: {
-    handleClick: PropTypes.func.isRequired,
+    handleClick: PropTypes.func.isRequired
   },
 
   render() {
@@ -22,7 +22,7 @@ export const IdeaCreateButton = React.createClass({
         </Button>
       </LoginOverlay>
     );
-  },
+  }
 });
 
 export default IdeaCreateButton;

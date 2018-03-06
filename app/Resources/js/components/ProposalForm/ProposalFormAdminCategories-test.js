@@ -8,7 +8,7 @@ describe('<ProposalFormAdminCategories />', () => {
   const props = {
     dispatch: jest.fn(),
     fields: { length: 0, map: () => [], remove: jest.fn() },
-    categories: [],
+    categories: []
   };
 
   it('render correctly', () => {

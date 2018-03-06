@@ -9,14 +9,14 @@ import IdeaPreviewFooter from './IdeaPreviewFooter';
 
 const idea = {
   id: 1,
-  author: {},
+  author: {}
 };
 
 const ideaVip = {
   id: 1,
   author: {
-    vip: true,
-  },
+    vip: true
+  }
 };
 
 describe('<IdeaPreview />', () => {

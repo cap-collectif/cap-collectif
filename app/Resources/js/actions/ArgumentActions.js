@@ -5,7 +5,7 @@ import {
   CHANGE_ARGUMENTS_SORT_ORDER,
   CREATE_ARGUMENT_SUCCESS,
   UPDATE_ARGUMENT_SUCCESS,
-  UPDATE_ARGUMENT_FAILURE,
+  UPDATE_ARGUMENT_FAILURE
 } from '../constants/ArgumentConstants';
 import { UPDATE_ALERT } from '../constants/AlertConstants';
 import ArgumentStore from '../stores/ArgumentStore';
@@ -16,14 +16,14 @@ export default {
   load: (opinion, type) => {
     const order = ArgumentStore.orderByType[type];
     return Fetcher.get(
-      `/${baseUrl(opinion)}/${opinion.id}/arguments?type=${type}&order=${order}`,
+      `/${baseUrl(opinion)}/${opinion.id}/arguments?type=${type}&order=${order}`
     ).then(data => {
       AppDispatcher.dispatch({
         actionType: RECEIVE_ARGUMENTS,
         arguments: data.arguments,
         count: data.count,
         type,
-        opinion,
+        opinion
       });
       return true;
     });
@@ -33,7 +33,7 @@ export default {
     AppDispatcher.dispatch({
       actionType: CHANGE_ARGUMENTS_SORT_ORDER,
       type,
-      order,
+      order
     });
   },
 
@@ -42,11 +42,11 @@ export default {
       AppDispatcher.dispatch({
         actionType: CREATE_ARGUMENT_SUCCESS,
         type: data.type,
-        argument: argument.json(),
+        argument: argument.json()
       });
       AppDispatcher.dispatch({
         actionType: UPDATE_ALERT,
-        alert: { bsStyle: 'success', content: 'alert.success.add.argument' },
+        alert: { bsStyle: 'success', content: 'alert.success.add.argument' }
       });
       return true;
     });
@@ -58,21 +58,21 @@ export default {
         AppDispatcher.dispatch({
           actionType: UPDATE_ARGUMENT_SUCCESS,
           argument: updatedArgument.json(),
-          type: data.type,
+          type: data.type
         });
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: 'alert.success.update.argument' },
+          alert: { bsStyle: 'success', content: 'alert.success.update.argument' }
         });
         return true;
       })
       .catch(() => {
         AppDispatcher.dispatch({
-          actionType: UPDATE_ARGUMENT_FAILURE,
+          actionType: UPDATE_ARGUMENT_FAILURE
         });
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'danger', content: 'alert.danger.update.argument' },
+          alert: { bsStyle: 'danger', content: 'alert.danger.update.argument' }
         });
       });
   },
@@ -81,7 +81,7 @@ export default {
     return Fetcher.delete(`/${baseUrl(opinion)}/${opinion.id}/arguments/${argument}`).then(() => {
       AppDispatcher.dispatch({
         actionType: UPDATE_ALERT,
-        alert: { bsStyle: 'success', content: 'alert.success.delete.argument' },
+        alert: { bsStyle: 'success', content: 'alert.success.delete.argument' }
       });
     });
   },
@@ -89,11 +89,11 @@ export default {
   report: (opinion, argument, data) => {
     return Fetcher.post(
       `/${baseUrl(opinion)}/${opinion.id}/arguments/${argument}/reports`,
-      data,
+      data
     ).then(() => {
       AppDispatcher.dispatch({
         actionType: UPDATE_ALERT,
-        alert: { bsStyle: 'success', content: 'alert.success.report.argument' },
+        alert: { bsStyle: 'success', content: 'alert.success.report.argument' }
       });
     });
   },
@@ -103,14 +103,14 @@ export default {
       .then(() => {
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: 'alert.success.add.vote' },
+          alert: { bsStyle: 'success', content: 'alert.success.add.vote' }
         });
         return true;
       })
       .catch(() => {
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'danger', content: 'alert.danger.add.vote' },
+          alert: { bsStyle: 'danger', content: 'alert.danger.add.vote' }
         });
       });
   },
@@ -120,15 +120,15 @@ export default {
       .then(() => {
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: 'alert.success.delete.vote' },
+          alert: { bsStyle: 'success', content: 'alert.success.delete.vote' }
         });
         return true;
       })
       .catch(() => {
         AppDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'danger', content: 'alert.danger.delete.vote' },
+          alert: { bsStyle: 'danger', content: 'alert.danger.delete.vote' }
         });
       });
-  },
+  }
 };

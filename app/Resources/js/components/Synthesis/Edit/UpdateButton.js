@@ -5,18 +5,18 @@ import UpdateModal from './UpdateModal';
 const UpdateButton = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object.isRequired,
-    element: React.PropTypes.object.isRequired,
+    element: React.PropTypes.object.isRequired
   },
 
   getInitialState() {
     return {
-      showUpdateModal: false,
+      showUpdateModal: false
     };
   },
 
   toggleUpdateModal() {
     this.setState({
-      showUpdateModal: !this.state.showUpdateModal,
+      showUpdateModal: !this.state.showUpdateModal
     });
   },
 
@@ -43,7 +43,7 @@ const UpdateButton = React.createClass({
         />
       </div>
     );
-  },
+  }
 });
 
 export default UpdateButton;

@@ -7,7 +7,7 @@ import ArgumentStore from '../../stores/ArgumentStore';
 const ArgumentReportButton = React.createClass({
   propTypes: {
     dispatch: PropTypes.func.isRequired,
-    argument: PropTypes.object.isRequired,
+    argument: PropTypes.object.isRequired
   },
 
   handleReport(data) {
@@ -27,7 +27,7 @@ const ArgumentReportButton = React.createClass({
         buttonClassName="argument__btn--report"
       />
     );
-  },
+  }
 });
 
 export default connect()(ArgumentReportButton);

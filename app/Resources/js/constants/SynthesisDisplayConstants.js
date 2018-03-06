@@ -11,8 +11,8 @@ export const ALLOWED_RULES = {
     'percentage',
     'expanded',
     'foldersOrderedByCount',
-    'noChildrenSorting',
-  ],
+    'noChildrenSorting'
+  ]
 };
 
 export const DISPLAY_SETTINGS = [
@@ -20,258 +20,258 @@ export const DISPLAY_SETTINGS = [
     conditions: [
       {
         type: 'level',
-        value: 0,
+        value: 0
       },
       {
         type: 'display_type',
-        value: 'folder',
-      },
+        value: 'folder'
+      }
     ],
     rules: [
       {
         category: 'style',
         name: 'fontSize',
-        value: '26px',
+        value: '26px'
       },
       {
         category: 'style',
         name: 'color',
-        value: '#000000',
+        value: '#000000'
       },
       {
         category: 'style',
         name: 'textAlign',
-        value: 'center',
+        value: 'center'
       },
       {
         category: 'display',
         name: 'subtitle',
-        value: 'true',
+        value: 'true'
       },
       {
         category: 'display',
         name: 'expanded',
-        value: 'true',
-      },
-    ],
+        value: 'true'
+      }
+    ]
   },
   {
     conditions: [
       {
         type: 'level',
-        value: 1,
+        value: 1
       },
       {
         type: 'display_type',
-        value: 'folder',
-      },
+        value: 'folder'
+      }
     ],
     rules: [
       {
         category: 'style',
         name: 'fontSize',
-        value: '22px',
+        value: '22px'
       },
       {
         category: 'style',
         name: 'color',
-        value: '#000000',
+        value: '#000000'
       },
       {
         category: 'style',
         name: 'textAlign',
-        value: 'center',
+        value: 'center'
       },
       {
         category: 'display',
         name: 'subtitle',
-        value: 'true',
+        value: 'true'
       },
       {
         category: 'display',
         name: 'expanded',
-        value: 'true',
-      },
-    ],
+        value: 'true'
+      }
+    ]
   },
   {
     conditions: [
       {
         type: 'level',
-        value: 2,
+        value: 2
       },
       {
         type: 'display_type',
-        value: 'folder',
-      },
+        value: 'folder'
+      }
     ],
     rules: [
       {
         category: 'style',
         name: 'fontSize',
-        value: '17px',
+        value: '17px'
       },
       {
         category: 'style',
         name: 'color',
-        value: '#000000',
+        value: '#000000'
       },
       {
         category: 'style',
         name: 'textAlign',
-        value: 'center',
+        value: 'center'
       },
       {
         category: 'display',
         name: 'subtitle',
-        value: 'true',
+        value: 'true'
       },
       {
         category: 'display',
         name: 'foldersOrderedByCount',
-        value: 'true',
-      },
-    ],
+        value: 'true'
+      }
+    ]
   },
   {
     conditions: [
       {
         type: 'contributions_level_delta',
-        value: 0,
+        value: 0
       },
       {
         type: 'display_type',
-        value: 'contribution',
-      },
+        value: 'contribution'
+      }
     ],
     rules: [
       {
         category: 'style',
         name: 'fontSize',
-        value: '16px',
+        value: '16px'
       },
       {
         category: 'style',
         name: 'fontWeight',
-        value: 'bold',
+        value: 'bold'
       },
       {
         category: 'containerStyle',
         name: 'borderTop',
-        value: '5px solid #dddddd',
+        value: '5px solid #dddddd'
       },
       {
         category: 'containerStyle',
         name: 'paddingTop',
-        value: '15px',
+        value: '15px'
       },
       {
         category: 'display',
         name: 'author',
-        value: true,
+        value: true
       },
       {
         category: 'display',
         name: 'piechart',
-        value: true,
+        value: true
       },
       {
         category: 'display',
         name: 'counters',
-        value: true,
+        value: true
       },
       {
         category: 'display',
         name: 'expanded',
-        value: 'true',
-      },
-    ],
+        value: 'true'
+      }
+    ]
   },
   {
     conditions: [
       {
         type: 'contributions_level_delta',
-        value: 0,
+        value: 0
       },
       {
         type: 'display_type',
-        value: 'folder',
-      },
+        value: 'folder'
+      }
     ],
     rules: [
       {
         category: 'display',
         name: 'asProgressBar',
-        value: true,
+        value: true
       },
       {
         category: 'display',
         name: 'childrenInModal',
-        value: true,
-      },
-    ],
+        value: true
+      }
+    ]
   },
   {
     conditions: [
       {
         type: 'contributions_level_delta',
-        value: 1,
+        value: 1
       },
       {
         type: 'display_type',
-        value: 'folder',
-      },
+        value: 'folder'
+      }
     ],
     rules: [
       {
         category: 'style',
         name: 'fontSize',
-        value: '16px',
+        value: '16px'
       },
       {
         category: 'style',
         name: 'fontWeight',
-        value: 'bold',
+        value: 'bold'
       },
       {
         category: 'display',
         name: 'percentage',
-        value: true,
+        value: true
       },
       {
         category: 'display',
         name: 'expanded',
-        value: 'true',
+        value: 'true'
       },
       {
         category: 'display',
         name: 'foldersOrderedByCount',
-        value: 'true',
-      },
-    ],
+        value: 'true'
+      }
+    ]
   },
   {
     conditions: [
       {
         type: 'contributions_level_delta',
-        value: 2,
+        value: 2
       },
       {
         type: 'display_type',
-        value: 'folder',
-      },
+        value: 'folder'
+      }
     ],
     rules: [
       {
         category: 'display',
         name: 'asProgressBar',
-        value: true,
+        value: true
       },
       {
         category: 'display',
         name: 'childrenInModal',
-        value: true,
-      },
-    ],
-  },
+        value: true
+      }
+    ]
+  }
 ];

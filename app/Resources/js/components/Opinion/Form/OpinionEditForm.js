@@ -32,13 +32,13 @@ const onSubmit = (data: Object, dispatch: Dispatch, props: Object) => {
     .map(key => {
       return {
         appendixType: opinion.appendices.filter(a => a.type.title === key)[0].type.id,
-        body: data[key],
+        body: data[key]
       };
     });
   const form = {
     title: data.title,
     body: data.body,
-    appendices,
+    appendices
   };
   return Fetcher.put(`/opinions/${opinion.id}`, form)
     .then(json)
@@ -52,7 +52,7 @@ export const OpinionEditForm = React.createClass({
   propTypes: {
     opinion: PropTypes.object.isRequired,
     step: PropTypes.object.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired
   },
 
   render() {
@@ -97,7 +97,7 @@ export const OpinionEditForm = React.createClass({
         ))}
       </form>
     );
-  },
+  }
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, { opinion }: Object) => {
@@ -109,18 +109,18 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, { opinion }: Ob
     initialValues: {
       title: opinion.title,
       body: opinion.body,
-      ...dynamicsInitialValues,
-    },
+      ...dynamicsInitialValues
+    }
   };
 };
 type Props = {
-  initialValues: Object,
+  initialValues: Object
 };
 const connector: Connector<{}, Props> = connect(mapStateToProps);
 export default connector(
   reduxForm({
     form: formName,
     onSubmit,
-    validate,
-  })(OpinionEditForm),
+    validate
+  })(OpinionEditForm)
 );

@@ -5,7 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 const SettingsSideMenu = React.createClass({
   contextTypes: {
-    router: React.PropTypes.object.isRequired,
+    router: React.PropTypes.object.isRequired
   },
 
   render() {
@@ -29,7 +29,7 @@ const SettingsSideMenu = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 });
 
 export default SettingsSideMenu;

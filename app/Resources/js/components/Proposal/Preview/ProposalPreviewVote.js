@@ -4,7 +4,7 @@ import ProposalVoteButtonWrapper from '../Vote/ProposalVoteButtonWrapper';
 
 const ProposalPreviewVote = React.createClass({
   propTypes: {
-    proposal: PropTypes.object.isRequired,
+    proposal: PropTypes.object.isRequired
   },
 
   render() {
@@ -20,7 +20,7 @@ const ProposalPreviewVote = React.createClass({
         <ProposalVoteModal proposal={proposal} />
       </div>
     );
-  },
+  }
 });
 
 export default ProposalPreviewVote;

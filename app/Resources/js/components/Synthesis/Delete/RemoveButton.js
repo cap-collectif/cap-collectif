@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 const RemoveButton = React.createClass({
   propTypes: {
     element: React.PropTypes.object,
-    onRemove: React.PropTypes.func,
+    onRemove: React.PropTypes.func
   },
 
   click() {
@@ -24,7 +24,7 @@ const RemoveButton = React.createClass({
         </Button>
       </div>
     );
-  },
+  }
 });
 
 export default RemoveButton;

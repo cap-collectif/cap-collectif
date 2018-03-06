@@ -7,7 +7,7 @@ describe('<ReadMoreLink />', () => {
   const emptyFunction = () => {};
   it('should not render anything if not visible', () => {
     const wrapper = shallow(
-      <ReadMoreLink visible={false} expanded={false} onClick={emptyFunction} />,
+      <ReadMoreLink visible={false} expanded={false} onClick={emptyFunction} />
     );
     expect(wrapper).toMatchSnapshot();
   });

@@ -68,11 +68,6 @@ class ProposalFormResolver implements ContainerAwareInterface
         return $paginator->auto($args, $totalCount);
     }
 
-    public function resolve(Arg $args): ProposalForm
-    {
-        return $this->container->get('capco.proposal_form.repository')->find($args['id']);
-    }
-
     public function resolveAll(): array
     {
         return $this->container->get('capco.proposal_form.repository')->findAll();

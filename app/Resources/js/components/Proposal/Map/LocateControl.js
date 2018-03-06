@@ -14,26 +14,26 @@ export class LocateControl extends MapControl {
       strings: {
         title: intl.formatMessage({ id: 'proposal.map.form.control.title' }),
         metersUnit: intl.formatMessage({
-          id: 'proposal.map.form.control.metersUnit',
+          id: 'proposal.map.form.control.metersUnit'
         }),
         feetUnit: intl.formatMessage({
-          id: 'proposal.map.form.control.feetUnit',
+          id: 'proposal.map.form.control.feetUnit'
         }),
         popup: intl.formatMessage({
           id: 'proposal.map.form.control.popup',
-          values: {},
+          values: {}
         }),
         outsideMapBoundsMsg: intl.formatMessage({
-          id: 'proposal.map.form.control.outsideMapBoundsMsg',
-        }),
+          id: 'proposal.map.form.control.outsideMapBoundsMsg'
+        })
       },
-      drawCircle: false,
+      drawCircle: false
     });
   }
 }
 
 LocateControl.propTypes = {
-  intl: intlShape.isRequired,
+  intl: intlShape.isRequired
 };
 
 export default injectIntl(LocateControl);

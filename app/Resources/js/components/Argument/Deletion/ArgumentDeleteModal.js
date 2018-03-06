@@ -12,12 +12,12 @@ const ArgumentDeleteModal = React.createClass({
   propTypes: {
     show: PropTypes.bool.isRequired,
     argument: PropTypes.object.isRequired,
-    onClose: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired
   },
 
   getInitialState() {
     return {
-      isSubmitting: false,
+      isSubmitting: false
     };
   },
 
@@ -67,7 +67,7 @@ const ArgumentDeleteModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  },
+  }
 });
 
 export default ArgumentDeleteModal;

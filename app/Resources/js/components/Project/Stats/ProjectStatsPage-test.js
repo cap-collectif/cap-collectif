@@ -8,25 +8,25 @@ describe('<ProjectStatsPage />', () => {
     {
       id: 1,
       title: 'Step 1',
-      stats: [],
+      stats: []
     },
     {
       id: 2,
       title: 'Step 2',
-      stats: [],
+      stats: []
     },
     {
       id: 3,
       title: 'Step 3',
-      stats: [],
-    },
+      stats: []
+    }
   ];
 
   const props = {
     projectId: '1',
     themes: [],
     districts: [],
-    categories: [],
+    categories: []
   };
 
   it('should render only one block', () => {

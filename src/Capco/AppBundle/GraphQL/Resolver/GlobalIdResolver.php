@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Model\ModerableInterface;
+use Overblog\GraphQLBundle\Error\UserError;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class GlobalIdResolver
 {
@@ -16,17 +16,64 @@ class GlobalIdResolver
         $this->container = $container;
     }
 
-    public function resolve(string $uuid)// : Node
+    public function resolveMultiple(array $array): array
     {
+        $results = [];
+        foreach ($array as $value) {
+            $results[] = $this->resolve($value);
+        }
+
+        return $results;
+    }
+
+    public function resolve(string $uuid, $user)// : Node
+    {
+        $em = $this->container->get('doctrine.orm.default_entity_manager');
+        if ($user instanceof User && $user->isAdmin()) {
+            // If user is an admin, we allow to retrieve softdeleted nodes
+            $em->getFilters()->disable('softdeleted');
+        }
+
         $node = null;
         $node = $this->container->get('capco.opinion.repository')->find($uuid);
+
+        if (!$node) {
+            $node = $this->container->get('capco.opinion_version.repository')->find($uuid);
+        }
+
+        if (!$node) {
+            $node = $this->container->get('capco.group.repository')->find($uuid);
+        }
+
+        if (!$node) {
+            $node = $this->container->get('capco.proposal.repository')->find($uuid);
+        }
+
+        if (!$node) {
+            $node = $this->container->get('capco.proposal_form.repository')->find($uuid);
+        }
+
+        if (!$node) {
+            $node = $this->container->get('capco.project.repository')->find($uuid);
+        }
+
+        if (!$node) {
+            $node = $this->container->get('capco.step.repository')->find($uuid);
+        }
 
         if (!$node) {
             $node = $this->container->get('capco.argument.repository')->find($uuid);
         }
 
         if (!$node) {
-            throw new AccessDeniedException('Not found');
+            $node = $this->container
+            ->get('capco.questionnaire.repository')
+            ->find($uuid);
+        }
+
+        if (!$node) {
+            $this->container->get('logger')->warn('Unknown id: ' . $uuid);
+            throw new UserError('Not found');
         }
 
         return $node;

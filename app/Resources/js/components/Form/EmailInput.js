@@ -7,16 +7,16 @@ import domains from '../../utils/email_domains';
 
 type Props = {
   value: ?any,
-  onChange: (response: ?string) => void,
+  onChange: (response: ?string) => void
 };
 
 type State = {
-  suggestion: ?string,
+  suggestion: ?string
 };
 
 export class EmailInput extends React.Component<Props, State> {
   state = {
-    suggestion: null,
+    suggestion: null
   };
 
   componentDidUpdate(prevProps: Props) {
@@ -37,7 +37,7 @@ export class EmailInput extends React.Component<Props, State> {
       email: value,
       domains,
       suggested: suggestion => this.setState({ suggestion: suggestion.full }),
-      empty: () => this.setState({ suggestion: null }),
+      empty: () => this.setState({ suggestion: null })
     });
   }
 

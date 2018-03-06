@@ -16,13 +16,13 @@ export const LoginOverlay = React.createClass({
     isLoginOrRegistrationModalOpen: PropTypes.bool.isRequired,
     showRegistrationButton: PropTypes.bool.isRequired,
     openLoginModal: PropTypes.func.isRequired,
-    openRegistrationModal: PropTypes.func.isRequired,
+    openRegistrationModal: PropTypes.func.isRequired
   },
 
   getDefaultProps() {
     return {
       user: null,
-      enabled: true,
+      enabled: true
     };
   },
 
@@ -35,7 +35,7 @@ export const LoginOverlay = React.createClass({
       showRegistrationButton,
       isLoginOrRegistrationModalOpen,
       openRegistrationModal,
-      openLoginModal,
+      openLoginModal
     } = this.props;
 
     if (!enabled || user) {
@@ -71,14 +71,14 @@ export const LoginOverlay = React.createClass({
         </OverlayTrigger>
       </span>
     );
-  },
+  }
 });
 
 const mapStateToProps = (state: State) => ({
   user: state.user.user,
   showRegistrationButton: state.default.features.registration,
   isLoginOrRegistrationModalOpen:
-    state.user.showLoginModal || state.user.showRegistrationModal || false,
+    state.user.showLoginModal || state.user.showRegistrationModal || false
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   openLoginModal: () => {
@@ -86,7 +86,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
   openRegistrationModal: () => {
     dispatch(showRegistrationModal());
-  },
+  }
 });
 
 const connector = connect(mapStateToProps, mapDispatchToProps);

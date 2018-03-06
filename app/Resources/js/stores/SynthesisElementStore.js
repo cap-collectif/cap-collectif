@@ -18,7 +18,7 @@ class SynthesisElementStore extends BaseStore {
       publishedTree: [],
       notIgnoredTree: [],
       fromDivision: [],
-      search: [],
+      search: []
     };
     this._counts = {
       new: 0,
@@ -29,20 +29,20 @@ class SynthesisElementStore extends BaseStore {
       publishedTree: 0,
       notIgnoredTree: 0,
       fromDivision: 0,
-      search: 0,
+      search: 0
     };
     this._expandedItems = {
       nav: {
-        root: true,
+        root: true
       },
       view: {
-        root: true,
-      },
+        root: true
+      }
     };
     this._selectedNavItem = 'root';
     this._messages = {
       errors: [],
-      success: [],
+      success: []
     };
   }
 
@@ -103,11 +103,11 @@ class SynthesisElementStore extends BaseStore {
           this.elements.archived = ArrayHelper.addElementToArray(this._elements.archived, element);
           this._elements.published = ArrayHelper.addElementToArray(
             this._elements.published,
-            element,
+            element
           );
           this._elements.unpublished = ArrayHelper.removeElementFromArray(
             this._elements.unpublished,
-            element,
+            element
           );
         } else if (element) {
           this.removeElementFromTree(element);
@@ -298,7 +298,7 @@ class SynthesisElementStore extends BaseStore {
       const id = splitted.slice(splitted.length - 5, splitted.length).join('-');
       const item = {
         title: title || null,
-        id,
+        id
       };
       items.push(item);
     });

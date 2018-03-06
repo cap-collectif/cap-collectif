@@ -19,7 +19,7 @@ export const json = (response: Object) => response.json();
 export const createHeaders = (): { [string]: string } => {
   const headers: { [string]: string } = {
     Accept: 'application/json',
-    'Content-Type': 'application/json',
+    'Content-Type': 'application/json'
   };
 
   if (LocalStorageService.isValid('jwt')) {
@@ -53,7 +53,7 @@ class Fetcher {
       return fetch(config.api + uri, {
         method: 'GET',
         headers: createHeaders(),
-        beforeSend: addAuthorization,
+        beforeSend: addAuthorization
       })
         .then(status)
         .then(json);
@@ -66,7 +66,7 @@ class Fetcher {
         method: 'POST',
         headers: createFormDataHeaders(),
         beforeSend: addAuthorization,
-        body,
+        body
       })
         .then(status)
         .then(json);
@@ -79,7 +79,7 @@ class Fetcher {
         method: 'POST',
         headers: createHeaders(),
         beforeSend: addAuthorization,
-        body: JSON.stringify(body),
+        body: JSON.stringify(body)
       })
         .then(status)
         .then(json);
@@ -92,7 +92,7 @@ class Fetcher {
         method: 'POST',
         headers: createFormDataHeaders(),
         beforeSend: addAuthorization,
-        body,
+        body
       }).then(status);
     });
   }
@@ -103,7 +103,7 @@ class Fetcher {
         method: 'POST',
         headers: createHeaders(),
         beforeSend: addAuthorization,
-        body: JSON.stringify(body),
+        body: JSON.stringify(body)
       }).then(status);
     });
   }
@@ -114,7 +114,7 @@ class Fetcher {
         method: 'POST',
         headers: createHeaders(),
         beforeSend: addAuthorization,
-        body: JSON.stringify(body),
+        body: JSON.stringify(body)
       })
         .then(status)
         .then(json);
@@ -127,7 +127,7 @@ class Fetcher {
         method: 'PUT',
         headers: createHeaders(),
         beforeSend: addAuthorization,
-        body: JSON.stringify(body),
+        body: JSON.stringify(body)
       }).then(status);
     });
   }
@@ -138,7 +138,7 @@ class Fetcher {
         method: 'PUT',
         headers: createHeaders(),
         beforeSend: addAuthorization,
-        body: JSON.stringify(body),
+        body: JSON.stringify(body)
       })
         .then(status)
         .then(json);
@@ -151,7 +151,7 @@ class Fetcher {
         method: 'PATCH',
         headers: createHeaders(),
         beforeSend: addAuthorization,
-        body: JSON.stringify(body),
+        body: JSON.stringify(body)
       }).then(status);
     });
   }
@@ -161,7 +161,7 @@ class Fetcher {
       return fetch(config.api + uri, {
         method: 'DELETE',
         headers: createHeaders(),
-        beforeSend: addAuthorization,
+        beforeSend: addAuthorization
       }).then(status);
     });
   }

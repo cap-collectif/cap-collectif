@@ -10,12 +10,12 @@ const ProposalListSearch = React.createClass({
   propTypes: {
     dispatch: PropTypes.func.isRequired,
     terms: PropTypes.string.isRequired,
-    intl: PropTypes.object.isRequired,
+    intl: PropTypes.object.isRequired
   },
 
   getInitialState() {
     return {
-      terms: this.props.terms,
+      terms: this.props.terms
     };
   },
 
@@ -54,12 +54,12 @@ const ProposalListSearch = React.createClass({
         />
       </form>
     );
-  },
+  }
 });
 
 const mapStateToProps = (state: State) => {
   return {
-    terms: state.proposal.terms ? state.proposal.terms : '',
+    terms: state.proposal.terms ? state.proposal.terms : ''
   };
 };
 

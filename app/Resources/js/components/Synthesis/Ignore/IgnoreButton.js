@@ -7,12 +7,12 @@ import SynthesisElementActions from '../../../actions/SynthesisElementActions';
 const IgnoreButton = React.createClass({
   propTypes: {
     synthesis: React.PropTypes.object,
-    element: React.PropTypes.object,
+    element: React.PropTypes.object
   },
 
   getInitialState() {
     return {
-      showConfirmModal: false,
+      showConfirmModal: false
     };
   },
 
@@ -22,13 +22,13 @@ const IgnoreButton = React.createClass({
 
   showConfirmModal() {
     this.setState({
-      showConfirmModal: true,
+      showConfirmModal: true
     });
   },
 
   hideConfirmModal() {
     this.setState({
-      showConfirmModal: false,
+      showConfirmModal: false
     });
   },
 
@@ -37,7 +37,7 @@ const IgnoreButton = React.createClass({
     this.hideConfirmModal();
     const data = {
       archived: true,
-      published: false,
+      published: false
     };
     SynthesisElementActions.update(synthesis.id, element.id, data);
     hashHistory.push('inbox', { type: 'new' });
@@ -68,7 +68,7 @@ const IgnoreButton = React.createClass({
             <FormattedMessage
               id="synthesis.edition.action.confirm_ignore.title"
               values={{
-                name: element.title,
+                name: element.title
               }}
             />
           </Modal.Title>
@@ -99,7 +99,7 @@ const IgnoreButton = React.createClass({
         {this.renderConfirmModal()}
       </div>
     );
-  },
+  }
 });
 
 export default IgnoreButton;

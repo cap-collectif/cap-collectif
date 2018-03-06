@@ -8,7 +8,7 @@ import ProposalDetailLikersLabel from './ProposalDetailLikersLabel';
 
 describe('<ProposalDetailLikers />', () => {
   const proposalWithoutLikers = {
-    likers: [],
+    likers: []
   };
 
   it('should not render anything when proposal has no likers', () => {
@@ -20,9 +20,9 @@ describe('<ProposalDetailLikers />', () => {
     id: 1,
     likers: [
       {
-        displayName: 'user',
-      },
-    ],
+        displayName: 'user'
+      }
+    ]
   };
 
   it('should render a span with class proposal__info when proposal has likers', () => {
@@ -52,7 +52,7 @@ describe('<ProposalDetailLikers />', () => {
 
   it('should render a div with class proposal__info when specified', () => {
     const wrapper = shallow(
-      <ProposalDetailLikers componentClass="div" proposal={proposalWithLikers} />,
+      <ProposalDetailLikers componentClass="div" proposal={proposalWithLikers} />
     );
     expect(wrapper.find('div.proposal__info')).toHaveLength(1);
   });

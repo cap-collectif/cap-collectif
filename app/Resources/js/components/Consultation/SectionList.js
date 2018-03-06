@@ -6,7 +6,7 @@ export const SectionList = React.createClass({
   propTypes: {
     section: React.PropTypes.object.isRequired,
     consultation: React.PropTypes.object.isRequired,
-    level: React.PropTypes.number.isRequired,
+    level: React.PropTypes.number.isRequired
   },
 
   render() {
@@ -25,7 +25,7 @@ export const SectionList = React.createClass({
           ))}
       </div>
     );
-  },
+  }
 });
 
 export default SectionList;

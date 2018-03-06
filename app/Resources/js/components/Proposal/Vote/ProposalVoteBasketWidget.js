@@ -15,20 +15,20 @@ export const ProposalVoteBasketWidget = React.createClass({
     votesPageUrl: PropTypes.string.isRequired,
     userVotesCountByStepId: PropTypes.object.isRequired,
     creditsLeftByStepId: PropTypes.object.isRequired,
-    image: PropTypes.string,
+    image: PropTypes.string
   },
 
   mixins: [DeepLinkStateMixin],
 
   getDefaultProps() {
     return {
-      image: null,
+      image: null
     };
   },
 
   getInitialState() {
     return {
-      selectedStepId: this.props.votableSteps[0].id,
+      selectedStepId: this.props.votableSteps[0].id
     };
   },
 
@@ -38,7 +38,7 @@ export const ProposalVoteBasketWidget = React.createClass({
       votesPageUrl,
       votableSteps,
       userVotesCountByStepId,
-      creditsLeftByStepId,
+      creditsLeftByStepId
     } = this.props;
     const selectedStep = votableSteps.filter(step => step.id === this.state.selectedStepId)[0];
     const budget = selectedStep.budget;
@@ -53,7 +53,7 @@ export const ProposalVoteBasketWidget = React.createClass({
     } else {
       percentage = getSpentPercentage(
         selectedStep.votesLimit,
-        userVotesCountByStepId[selectedStep.id],
+        userVotesCountByStepId[selectedStep.id]
       );
     }
     return (
@@ -210,7 +210,7 @@ export const ProposalVoteBasketWidget = React.createClass({
         </Navbar.Collapse>
       </Navbar>
     );
-  },
+  }
 });
 
 const mapStateToProps = state => {
@@ -218,9 +218,9 @@ const mapStateToProps = state => {
     userVotesCountByStepId: mapValues(state.proposal.userVotesByStepId, votes => votes.length),
     creditsLeftByStepId: state.proposal.creditsLeftByStepId,
     votableSteps: state.project.projectsById[state.project.currentProjectById].steps.filter(
-      step => step.votable,
+      step => step.votable
     ),
-    projectId: state.project.currentProjectById,
+    projectId: state.project.currentProjectById
   };
 };
 export default connect(mapStateToProps)(ProposalVoteBasketWidget);

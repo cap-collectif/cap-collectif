@@ -12,7 +12,7 @@ const UserAvatar = React.createClass({
     onBlur: React.PropTypes.func,
     onFocus: React.PropTypes.func,
     onMouseOver: React.PropTypes.func,
-    onMouseOut: React.PropTypes.func,
+    onMouseOut: React.PropTypes.func
   },
 
   getDefaultProps() {
@@ -25,7 +25,7 @@ const UserAvatar = React.createClass({
       onBlur: () => {},
       onFocus: () => {},
       onMouseOver: () => {},
-      onMouseOut: () => {},
+      onMouseOut: () => {}
     };
   },
 
@@ -51,7 +51,7 @@ const UserAvatar = React.createClass({
       onBlur,
       onFocus,
       onMouseOver,
-      onMouseOut,
+      onMouseOut
     };
 
     if (user && user._links && user._links.profile && anchor) {
@@ -67,7 +67,7 @@ const UserAvatar = React.createClass({
         {this.renderAvatar()}
       </span>
     );
-  },
+  }
 });
 
 export default UserAvatar;

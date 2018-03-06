@@ -6,7 +6,7 @@ import type { SectionRecursiveList_sections } from './__generated__/SectionRecur
 
 type Props = {
   sections: SectionRecursiveList_sections,
-  consultation: Object,
+  consultation: Object
 };
 
 export class SectionRecursiveList extends React.Component<Props> {
@@ -40,5 +40,5 @@ export default createFragmentContainer(
         }
       }
     }
-  `,
+  `
 );

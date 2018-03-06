@@ -18,7 +18,7 @@ const Checkbox = React.createClass({
     labelClassName: PropTypes.string,
     isReduxForm: PropTypes.bool.isRequired,
     value: PropTypes.object.isRequired,
-    errors: PropTypes.any,
+    errors: PropTypes.any
   },
 
   other: Other,
@@ -28,14 +28,14 @@ const Checkbox = React.createClass({
       disabled: false,
       labelClassName: '',
       isReduxForm: false,
-      value: {},
+      value: {}
     };
   },
 
   getInitialState() {
     return {
       mixinValue: [],
-      currentValue: [],
+      currentValue: []
     };
   },
 
@@ -48,7 +48,7 @@ const Checkbox = React.createClass({
         onChange({ labels: newValue, other: otherValue });
 
         this.setState({
-          currentValue: newValue,
+          currentValue: newValue
         });
       } else {
         onChange(newValue);
@@ -81,7 +81,7 @@ const Checkbox = React.createClass({
     }
 
     this.setState({
-      mixinValue: resolveValue,
+      mixinValue: resolveValue
     });
 
     onChange(field, resolveValue);
@@ -124,7 +124,7 @@ const Checkbox = React.createClass({
       field,
       value,
       onBlur,
-      isReduxForm,
+      isReduxForm
     } = this.props;
     const { mixinValue, currentValue } = this.state;
 
@@ -137,7 +137,7 @@ const Checkbox = React.createClass({
     const fieldName = `choices-for-field-${field.id}`;
 
     const labelClasses = {
-      'control-label': true,
+      'control-label': true
     };
     if (labelClassName) {
       labelClasses[labelClassName] = true;
@@ -198,7 +198,7 @@ const Checkbox = React.createClass({
         {renderFormErrors(field.id)}
       </div>
     );
-  },
+  }
 });
 
 export default Checkbox;

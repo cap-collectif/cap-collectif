@@ -12,7 +12,7 @@ import { closeConfirmPasswordModal } from '../../redux/modules/user';
 export const ConfirmPasswordModal = React.createClass({
   propTypes: {
     show: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired
   },
 
   render() {
@@ -47,12 +47,12 @@ export const ConfirmPasswordModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  },
+  }
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   show: state.user.showConfirmPasswordModal,
-  isSubmitting: state.user.isSubmittingAccountForm,
+  isSubmitting: state.user.isSubmittingAccountForm
 });
 
 export default connect(mapStateToProps)(ConfirmPasswordModal);

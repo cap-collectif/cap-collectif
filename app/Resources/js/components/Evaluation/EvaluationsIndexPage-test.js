@@ -16,7 +16,7 @@ describe('<EvaluationsIndexPage />', () => {
     const component = render({
       props: { proposalForms: [{ id: '1' }, { id: '2' }] },
       error: null,
-      retry: jest.fn(),
+      retry: jest.fn()
     });
     const wrapper = shallow(component);
     expect(wrapper).toMatchSnapshot();

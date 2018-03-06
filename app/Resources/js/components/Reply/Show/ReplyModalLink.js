@@ -7,24 +7,24 @@ import ShowReplyModal from './ShowReplyModal';
 const ReplyModalLink = React.createClass({
   propTypes: {
     reply: React.PropTypes.object.isRequired,
-    form: React.PropTypes.object.isRequired,
+    form: React.PropTypes.object.isRequired
   },
 
   getInitialState() {
     return {
-      showModal: false,
+      showModal: false
     };
   },
 
   showModal() {
     this.setState({
-      showModal: true,
+      showModal: true
     });
   },
 
   hideModal() {
     this.setState({
-      showModal: false,
+      showModal: false
     });
   },
 
@@ -45,7 +45,7 @@ const ReplyModalLink = React.createClass({
               />
             ),
 
-            time: <FormattedDate value={moment(reply.createdAt)} hour="numeric" minute="numeric" />,
+            time: <FormattedDate value={moment(reply.createdAt)} hour="numeric" minute="numeric" />
           }}
         />
         {reply.private && (
@@ -61,7 +61,7 @@ const ReplyModalLink = React.createClass({
         />
       </ListGroupItem>
     );
-  },
+  }
 });
 
 export default ReplyModalLink;

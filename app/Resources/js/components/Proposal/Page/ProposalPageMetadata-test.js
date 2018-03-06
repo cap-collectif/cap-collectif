@@ -7,28 +7,28 @@ import { ProposalPageMetadata } from './ProposalPageMetadata';
 const proposal = {
   title: 'Titre',
   category: {
-    name: 'Nom de la catégorie',
+    name: 'Nom de la catégorie'
   },
   district: {
-    name: 'Nom du quartier',
+    name: 'Nom du quartier'
   },
-  reference: 'Reference',
+  reference: 'Reference'
 };
 
 const proposalWithoutCategory = {
   title: 'Titre',
   district: {
-    name: 'Nom du quartier',
+    name: 'Nom du quartier'
   },
-  reference: 'Reference',
+  reference: 'Reference'
 };
 
 const proposalWithoutDistrict = {
   title: 'Titre',
   category: {
-    name: 'Nom de la catégorie',
+    name: 'Nom de la catégorie'
   },
-  reference: 'Reference',
+  reference: 'Reference'
 };
 
 describe('<ProposalPageMetadata />', () => {
@@ -40,7 +40,7 @@ describe('<ProposalPageMetadata />', () => {
         showDistricts
         showNullEstimation
         showThemes
-      />,
+      />
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -53,7 +53,7 @@ describe('<ProposalPageMetadata />', () => {
         showDistricts
         showNullEstimation
         showThemes
-      />,
+      />
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -66,7 +66,7 @@ describe('<ProposalPageMetadata />', () => {
         showDistricts
         showNullEstimation
         showThemes
-      />,
+      />
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -79,7 +79,7 @@ describe('<ProposalPageMetadata />', () => {
         showDistricts={false}
         showNullEstimation
         showThemes
-      />,
+      />
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -92,7 +92,7 @@ describe('<ProposalPageMetadata />', () => {
         showDistricts
         showNullEstimation
         showThemes
-      />,
+      />
     );
     expect(wrapper).toMatchSnapshot();
   });

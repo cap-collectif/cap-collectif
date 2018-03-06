@@ -9,7 +9,7 @@ import FlashMessages from '../../Utils/FlashMessages';
 
 const SmsCodeForm = React.createClass({
   propTypes: {
-    onSubmitSuccess: PropTypes.func.isRequired,
+    onSubmitSuccess: PropTypes.func.isRequired
   },
 
   mixins: [DeepLinkStateMixin, FormMixin],
@@ -18,11 +18,11 @@ const SmsCodeForm = React.createClass({
     return {
       isSubmitting: false,
       form: {
-        code: '',
+        code: ''
       },
       errors: {
-        code: [],
-      },
+        code: []
+      }
     };
   },
 
@@ -30,8 +30,8 @@ const SmsCodeForm = React.createClass({
     code: {
       min: { value: 6, message: 'phone.confirm.constraints.code' },
       max: { value: 6, message: 'phone.confirm.constraints.code' },
-      notBlank: { message: 'phone.confirm.constraints.code' },
-    },
+      notBlank: { message: 'phone.confirm.constraints.code' }
+    }
   },
 
   handleSubmit(e) {
@@ -91,7 +91,7 @@ const SmsCodeForm = React.createClass({
         />
       </form>
     );
-  },
+  }
 });
 
 export default SmsCodeForm;

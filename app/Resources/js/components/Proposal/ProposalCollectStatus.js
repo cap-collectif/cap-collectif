@@ -5,14 +5,14 @@ import classNames from 'classnames';
 import type { ProposalCollectStatus_proposal } from './__generated__/ProposalCollectStatus_proposal.graphql';
 
 type Props = {
-  proposal: ProposalCollectStatus_proposal,
+  proposal: ProposalCollectStatus_proposal
 };
 
 export class ProposalCollectStatus extends React.Component<Props> {
   render() {
     const { status } = this.props.proposal;
     const statusClasses = {
-      proposal__status: true,
+      proposal__status: true
     };
     if (status) {
       statusClasses[`status--${status.color}`] = true;
@@ -31,5 +31,5 @@ export default createFragmentContainer(
         name
       }
     }
-  `,
+  `
 );

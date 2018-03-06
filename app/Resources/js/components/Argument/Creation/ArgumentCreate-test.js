@@ -13,7 +13,7 @@ describe('<ArgumentCreate />', () => {
     user: {},
     submitting: false,
     form: 'create-argument',
-    dispatch: jest.fn(),
+    dispatch: jest.fn()
   };
 
   it('renders correctly', () => {

@@ -27,11 +27,11 @@ type Props = RelayProps & {
   submitting: boolean,
   dispatch: Dispatch,
   handleSubmit: () => void,
-  intl: IntlShape,
+  intl: IntlShape
 };
 type FormValues = {
   publicationStatus: 'PUBLISHED' | 'TRASHED' | 'TRASHED_NOT_VISIBLE' | 'DRAFT',
-  trashedReason: ?string,
+  trashedReason: ?string
 };
 
 const formName = 'proposal-admin-status';
@@ -39,21 +39,21 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const input = {
     publicationStatus: values.publicationStatus,
     proposalId: props.proposal.id,
-    trashedReason: undefined,
+    trashedReason: undefined
   };
   if (values.trashedReason) {
     input.trashedReason = values.trashedReason;
   }
   return ChangeProposalPublicationStatusMutation.commit({
-    input,
+    input
   });
 };
 
 const onDelete = (proposalId: string) => {
   return DeleteProposalMutation.commit({
     input: {
-      proposalId,
-    },
+      proposalId
+    }
   });
 };
 
@@ -73,7 +73,7 @@ export class ProposalAdminStatusForm extends Component<Props> {
       handleSubmit,
       publicationStatus,
       dispatch,
-      intl,
+      intl
     } = this.props;
     return (
       <div className="box box-primary container">
@@ -165,7 +165,7 @@ export class ProposalAdminStatusForm extends Component<Props> {
                     onClick={() => {
                       if (
                         window.confirm(
-                          intl.formatMessage({ id: 'proposal.admin.status.delete.confirmation' }),
+                          intl.formatMessage({ id: 'proposal.admin.status.delete.confirmation' })
                         )
                       ) {
                         onDelete(proposal.id);
@@ -191,7 +191,7 @@ export class ProposalAdminStatusForm extends Component<Props> {
 const componentIntl = injectIntl(ProposalAdminStatusForm);
 const form = reduxForm({
   enableReinitialize: true,
-  form: formName,
+  form: formName
 })(componentIntl);
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, { proposal }: RelayProps) => ({
@@ -200,9 +200,9 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, { proposal }: R
   onSubmit,
   initialValues: {
     publicationStatus: proposal.publicationStatus,
-    trashedReason: proposal.trashedReason,
+    trashedReason: proposal.trashedReason
   },
-  publicationStatus: formValueSelector(formName)(state, 'publicationStatus'),
+  publicationStatus: formValueSelector(formName)(state, 'publicationStatus')
 });
 
 const container = connect(mapStateToProps)(form);
@@ -221,5 +221,5 @@ export default createFragmentContainer(
         email
       }
     }
-  `,
+  `
 );

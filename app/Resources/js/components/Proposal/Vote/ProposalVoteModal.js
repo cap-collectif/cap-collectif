@@ -21,13 +21,13 @@ const ProposalVoteModal = React.createClass({
     valid: PropTypes.bool.isRequired,
     creditsLeft: PropTypes.number,
     user: PropTypes.object,
-    voteWithoutAccount: PropTypes.bool.isRequired,
+    voteWithoutAccount: PropTypes.bool.isRequired
   },
 
   getDefaultProps() {
     return {
       user: null,
-      creditsLeft: null,
+      creditsLeft: null
     };
   },
 
@@ -58,7 +58,7 @@ const ProposalVoteModal = React.createClass({
       isSubmitting,
       valid,
       user,
-      voteWithoutAccount,
+      voteWithoutAccount
     } = this.props;
     return (
       <Modal
@@ -107,13 +107,13 @@ const ProposalVoteModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  },
+  }
 });
 
 const mapStateToProps = (state, props) => {
   const steps = state.project.currentProjectById
     ? state.project.projectsById[state.project.currentProjectById].steps.filter(
-        s => s.id === props.proposal.votableStepId,
+        s => s.id === props.proposal.votableStepId
       )
     : [];
   return {
@@ -124,7 +124,7 @@ const mapStateToProps = (state, props) => {
     isSubmitting: !!state.proposal.isVoting,
     valid: isValid('proposalVote')(state),
     step: steps.length === 1 ? steps[0] : null,
-    voteWithoutAccount: state.default.features.vote_without_account,
+    voteWithoutAccount: state.default.features.vote_without_account
   };
 };
 

@@ -15,7 +15,7 @@ const MainNavbar = React.createClass({
         <MainNavbarSearch />
       </Navbar>
     );
-  },
+  }
 });
 
 export default MainNavbar;

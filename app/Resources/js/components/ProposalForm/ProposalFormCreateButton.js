@@ -79,11 +79,11 @@ export const ProposalFormCreateButton = React.createClass({
         </Modal>
       </div>
     );
-  },
+  }
 });
 
 export default reduxForm({
   onSubmit,
   validate,
-  form: formName,
+  form: formName
 })(ProposalFormCreateButton);

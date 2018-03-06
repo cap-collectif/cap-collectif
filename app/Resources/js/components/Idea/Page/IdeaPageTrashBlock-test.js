@@ -6,13 +6,13 @@ import IdeaPageTrashBlock from './IdeaPageTrashBlock';
 const ideaNotTrashed = {
   id: 1,
   trashedAt: '2017-07-10T18:53:58+0200',
-  trashed: false,
+  trashed: false
 };
 
 const ideaTrashed = {
   id: 1,
   trashedAt: '2017-07-10T18:53:58+0200',
-  trashed: true,
+  trashed: true
 };
 
 describe('<IdeaPageTrashBlock />', () => {

@@ -168,7 +168,7 @@
       },
       addAsyncTest(e) {
         g.push({ name: null, fn: e });
-      },
+      }
     },
     Modernizr = function() {};
   (Modernizr.prototype = C), (Modernizr = new Modernizr());

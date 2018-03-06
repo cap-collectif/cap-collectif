@@ -9,19 +9,19 @@ describe('<MainNavbarUser />', () => {
     isAdmin: false,
     _links: {
       profile: '',
-      settings: '',
-    },
+      settings: ''
+    }
   };
   const admin = {
     displayName: 'admin',
     isAdmin: true,
     _links: {
       profile: '',
-      settings: '',
-    },
+      settings: ''
+    }
   };
   const features = {
-    profiles: true,
+    profiles: true
   };
 
   it('should render nothing when user is not logged in', () => {

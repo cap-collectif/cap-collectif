@@ -15,7 +15,7 @@ type Props = {
   opinion: Object,
   step: ?Object,
   submitting: boolean,
-  dispatch: Dispatch,
+  dispatch: Dispatch
 };
 
 export class OpinionEditModal extends React.Component<Props & { intl: IntlShape }> {
@@ -71,9 +71,9 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: ParentPr
   submitting: isSubmitting(formName)(state),
   step: state.project.currentProjectById
     ? state.project.projectsById[state.project.currentProjectById].steps.filter(
-        step => step.type === 'consultation',
+        step => step.type === 'consultation'
       )[0]
-    : null,
+    : null
 });
 
 const connector: Connector<ParentProps, Props> = connect(mapStateToProps);

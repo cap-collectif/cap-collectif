@@ -3,7 +3,7 @@ import React from 'react';
 const ElementNotation = React.createClass({
   propTypes: {
     element: React.PropTypes.object,
-    classes: React.PropTypes.string,
+    classes: React.PropTypes.string
   },
 
   getNotationStarsClasses() {
@@ -43,7 +43,7 @@ const ElementNotation = React.createClass({
       );
     }
     return <span className="element__notation" />;
-  },
+  }
 });
 
 export default ElementNotation;

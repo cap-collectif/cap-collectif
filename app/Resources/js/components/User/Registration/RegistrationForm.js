@@ -52,7 +52,7 @@ export const RegistrationForm = React.createClass({
     cguName: PropTypes.string.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     dynamicFields: PropTypes.array.isRequired,
-    organizationName: PropTypes.string.isRequired,
+    organizationName: PropTypes.string.isRequired
   },
 
   render() {
@@ -66,7 +66,7 @@ export const RegistrationForm = React.createClass({
       userTypes,
       handleSubmit,
       addCaptchaField,
-      organizationName,
+      organizationName
     } = this.props;
     return (
       <form onSubmit={handleSubmit}>
@@ -87,7 +87,7 @@ export const RegistrationForm = React.createClass({
           labelClassName="h5"
           popover={{
             id: 'registration-email-tooltip',
-            message: <FormattedMessage id="registration.tooltip.email" />,
+            message: <FormattedMessage id="registration.tooltip.email" />
           }}
         />
         <Field
@@ -99,7 +99,7 @@ export const RegistrationForm = React.createClass({
           labelClassName="h5"
           popover={{
             id: 'registration-password-tooltip',
-            message: <FormattedMessage id="registration.tooltip.password" />,
+            message: <FormattedMessage id="registration.tooltip.password" />
           }}
         />
         {addUserTypeField && (
@@ -161,7 +161,7 @@ export const RegistrationForm = React.createClass({
                   </option>
                 )}
               </FormattedMessage>,
-              ...choices,
+              ...choices
             ];
           }
           return (
@@ -199,7 +199,7 @@ export const RegistrationForm = React.createClass({
                   <a className="external-link" href={cguLink}>
                     {cguName}
                   </a>
-                ),
+                )
               }}
             />
           }
@@ -214,7 +214,7 @@ export const RegistrationForm = React.createClass({
               <FormattedMessage
                 id="registration.consent_external_communication"
                 values={{
-                  organization_name: organizationName,
+                  organization_name: organizationName
                 }}
               />
             }
@@ -225,7 +225,7 @@ export const RegistrationForm = React.createClass({
         )}
       </form>
     );
-  },
+  }
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
@@ -237,7 +237,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   cguName: state.default.parameters['signin.cgu.name'],
   cguLink: state.default.parameters['signin.cgu.link'],
   organizationName: state.default.parameters['global.site.organization_name'],
-  dynamicFields: state.user.registration_form.questions,
+  dynamicFields: state.user.registration_form.questions
 });
 
 const connector = connect(mapStateToProps);
@@ -245,6 +245,6 @@ export default connector(
   reduxForm({
     form,
     validate,
-    onSubmit,
-  })(RegistrationForm),
+    onSubmit
+  })(RegistrationForm)
 );

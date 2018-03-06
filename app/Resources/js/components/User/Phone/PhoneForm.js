@@ -12,14 +12,14 @@ const PhoneForm = React.createClass({
     onSubmit: PropTypes.func.isRequired,
     onSubmitSuccess: PropTypes.func.isRequired,
     onSubmitFailure: PropTypes.func.isRequired,
-    initialValue: PropTypes.string,
+    initialValue: PropTypes.string
   },
 
   mixins: [DeepLinkStateMixin, FormMixin],
 
   getDefaultProps() {
     return {
-      initialValue: null,
+      initialValue: null
     };
   },
 
@@ -27,11 +27,11 @@ const PhoneForm = React.createClass({
     const { initialValue } = this.props;
     return {
       form: {
-        phone: initialValue || '',
+        phone: initialValue || ''
       },
       errors: {
-        phone: [],
-      },
+        phone: []
+      }
     };
   },
 
@@ -85,8 +85,8 @@ const PhoneForm = React.createClass({
 
   formValidationRules: {
     phone: {
-      notBlank: { message: 'global.constraints.notBlank' },
-    },
+      notBlank: { message: 'global.constraints.notBlank' }
+    }
   },
 
   renderFormErrors(field) {
@@ -119,7 +119,7 @@ const PhoneForm = React.createClass({
         />
       </form>
     );
-  },
+  }
 });
 
 export default PhoneForm;

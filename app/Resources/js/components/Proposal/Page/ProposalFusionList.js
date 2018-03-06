@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import type { ProposalFusionList_proposal } from './__generated__/ProposalFusionList_proposal.graphql';
 
 type Props = {
-  proposal: ProposalFusionList_proposal,
+  proposal: ProposalFusionList_proposal
 };
 
 export class ProposalFusionList extends React.Component<Props> {
@@ -65,5 +65,5 @@ export default createFragmentContainer(
         title
       }
     }
-  `,
+  `
 );

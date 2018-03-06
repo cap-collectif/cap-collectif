@@ -8,7 +8,7 @@ import {
   userRequestEmailChange,
   closeConfirmPasswordModal,
   confirmPassword,
-  submitConfirmPasswordFormSucceed,
+  submitConfirmPasswordFormSucceed
 } from './user';
 import type { State } from './user';
 
@@ -24,11 +24,11 @@ const initialState: State = {
     bottomText: '',
     topText: '',
     questions: [],
-    domains: [],
+    domains: []
   },
   user: null,
   groupAdminUsersUserDeletionSuccessful: false,
-  groupAdminUsersUserDeletionFailed: false,
+  groupAdminUsersUserDeletionFailed: false
 };
 
 describe('User Reducer', () => {
@@ -37,8 +37,8 @@ describe('User Reducer', () => {
       ...initialState,
       user: {
         ...initialState.user,
-        newEmailToConfirm: 'new-email@gmail.com',
-      },
+        newEmailToConfirm: 'new-email@gmail.com'
+      }
     };
     const newState = reducer(state, cancelEmailChangeSucceed());
     expect(newState).toMatchSnapshot();
@@ -46,14 +46,14 @@ describe('User Reducer', () => {
   it('Should handle SUBMIT_ACCOUNT_FORM', () => {
     const newState = reducer(
       { ...initialState, isSubmittingAccountForm: false },
-      startSubmittingAccountForm(),
+      startSubmittingAccountForm()
     );
     expect(newState).toMatchSnapshot();
   });
   it('Should handle STOP_SUBMIT_ACCOUNT_FORM', () => {
     const newState = reducer(
       { ...initialState, isSubmittingAccountForm: true },
-      stopSubmittingAccountForm(),
+      stopSubmittingAccountForm()
     );
     expect(newState).toMatchSnapshot();
   });
@@ -68,14 +68,14 @@ describe('User Reducer', () => {
   it('Should handle SHOW_CONFIRM_PASSWORD_MODAL', () => {
     const newState = reducer(
       { ...initialState, showConfirmPasswordModal: false },
-      confirmPassword(),
+      confirmPassword()
     );
     expect(newState).toMatchSnapshot();
   });
   it('Should handle CLOSE_CONFIRM_PASSWORD_MODAL', () => {
     const newState = reducer(
       { ...initialState, showConfirmPasswordModal: true },
-      closeConfirmPasswordModal(),
+      closeConfirmPasswordModal()
     );
     expect(newState).toMatchSnapshot();
   });

@@ -10,7 +10,7 @@ import {
   isSubmitting,
   hasSubmitSucceeded,
   hasSubmitFailed,
-  type FormProps,
+  type FormProps
 } from 'redux-form';
 import type { GroupAdminUsers_group } from './__generated__/GroupAdminUsers_group.graphql';
 import AlertForm from '../../Alert/AlertForm';
@@ -22,12 +22,12 @@ type Props = FormProps & {
   group: GroupAdminUsers_group,
   userIsDeleted: ?boolean,
   userIsNotDeleted: ?boolean,
-  intl: Object,
+  intl: Object
 };
 
 type State = {
   showAddUsersModal: boolean,
-  user: Object,
+  user: Object
 };
 
 export const formName = 'group-admin-users';
@@ -35,7 +35,7 @@ export const formName = 'group-admin-users';
 export class GroupAdminUsers extends React.Component<Props, State> {
   state = {
     showAddUsersModal: false,
-    user: {},
+    user: {}
   };
 
   getAlertForm() {
@@ -46,7 +46,7 @@ export class GroupAdminUsers extends React.Component<Props, State> {
       submitSucceeded,
       submitFailed,
       userIsDeleted,
-      userIsNotDeleted,
+      userIsNotDeleted
     } = this.props;
 
     if (userIsDeleted) {
@@ -145,7 +145,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
     submitSucceeded: hasSubmitSucceeded('group-users-add')(state),
     submitFailed: hasSubmitFailed('group-users-add')(state),
     userIsDeleted: state.user.groupAdminUsersUserDeletionSuccessful,
-    userIsNotDeleted: state.user.groupAdminUsersUserDeletionFailed,
+    userIsNotDeleted: state.user.groupAdminUsersUserDeletionFailed
   };
 };
 
@@ -168,5 +168,5 @@ export default createFragmentContainer(
         }
       }
     }
-  `,
+  `
 );

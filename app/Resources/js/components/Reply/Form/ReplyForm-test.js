@@ -13,7 +13,7 @@ describe('<ReplyForm />', () => {
     question:
       "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
     helpText: '',
-    required: true,
+    required: true
   };
 
   const facultativeCheckbox = {
@@ -28,8 +28,8 @@ describe('<ReplyForm />', () => {
       { id: 20, label: 'Athlétisme' },
       { id: 21, label: 'Natation' },
       { id: 22, label: 'Sports collectifs' },
-      { id: 23, label: 'Sports individuels' },
-    ],
+      { id: 23, label: 'Sports individuels' }
+    ]
   };
 
   const requiredRadio = {
@@ -44,8 +44,8 @@ describe('<ReplyForm />', () => {
       { id: 24, label: 'Maxime Arrouard' },
       { id: 25, label: 'Spylou Super Sayen' },
       { id: 26, label: 'Cyril Lage' },
-      { id: 27, label: 'Superman' },
-    ],
+      { id: 27, label: 'Superman' }
+    ]
   };
 
   const facultativeSelect = {
@@ -58,8 +58,8 @@ describe('<ReplyForm />', () => {
     choices: [
       { id: 28, label: 'Pas assez fort (Mon sonotone est en panne)' },
       { id: 29, label: 'Assez fort (Mon sonotone est mal réglé)' },
-      { id: 30, label: 'Trop fort (Mon sonotone est tout neuf)' },
-    ],
+      { id: 30, label: 'Trop fort (Mon sonotone est tout neuf)' }
+    ]
   };
 
   const facultativeRanking = {
@@ -72,25 +72,25 @@ describe('<ReplyForm />', () => {
     choices: [
       { id: 28, label: 'Pas assez fort (Mon sonotone est en panne)' },
       { id: 29, label: 'Assez fort (Mon sonotone est mal réglé)' },
-      { id: 30, label: 'Trop fort (Mon sonotone est tout neuf)' },
-    ],
+      { id: 30, label: 'Trop fort (Mon sonotone est tout neuf)' }
+    ]
   };
 
   const props = {
     isSubmitting: false,
     onSubmitSuccess: jest.fn(),
     onSubmitFailure: jest.fn(),
-    onValidationFailure: jest.fn(),
+    onValidationFailure: jest.fn()
   };
 
   it('should render correctly with equal required and facultative fields', () => {
     const wrapper = shallow(
       <ReplyForm
         form={{
-          fields: [requiredText, requiredRadio, facultativeSelect, facultativeRanking],
+          fields: [requiredText, requiredRadio, facultativeSelect, facultativeRanking]
         }}
         {...props}
-      />,
+      />
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -104,25 +104,25 @@ describe('<ReplyForm />', () => {
             facultativeCheckbox,
             requiredRadio,
             facultativeSelect,
-            facultativeRanking,
-          ],
+            facultativeRanking
+          ]
         }}
         {...props}
-      />,
+      />
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render correctly with majority of required fields', () => {
     const wrapper = shallow(
-      <ReplyForm form={{ fields: [requiredText, requiredRadio, facultativeRanking] }} {...props} />,
+      <ReplyForm form={{ fields: [requiredText, requiredRadio, facultativeRanking] }} {...props} />
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render correctly with only required fields', () => {
     const wrapper = shallow(
-      <ReplyForm form={{ fields: [requiredText, requiredRadio] }} {...props} />,
+      <ReplyForm form={{ fields: [requiredText, requiredRadio] }} {...props} />
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -131,10 +131,10 @@ describe('<ReplyForm />', () => {
     const wrapper = shallow(
       <ReplyForm
         form={{
-          fields: [facultativeCheckbox, facultativeSelect, facultativeRanking],
+          fields: [facultativeCheckbox, facultativeSelect, facultativeRanking]
         }}
         {...props}
-      />,
+      />
     );
     expect(wrapper).toMatchSnapshot();
   });

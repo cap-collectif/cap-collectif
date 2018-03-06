@@ -42,7 +42,7 @@ export class ProposalAdminPage extends Component<Props, State> {
           variables={{
             id: this.props.proposalId,
             count: PROPOSAL_FOLLOWERS_TO_SHOW,
-            cursor: null,
+            cursor: null
           }}
           render={component}
         />

@@ -6,15 +6,15 @@ import IdeaSidebar from './IdeaSidebar';
 import IdeaVoteBox from '../Vote/IdeaVoteBox';
 
 const ideaContribuable = {
-  canContribute: true,
+  canContribute: true
 };
 
 const ideaNotContribuable = {
-  canContribute: false,
+  canContribute: false
 };
 
 const props = {
-  onToggleExpand: () => {},
+  onToggleExpand: () => {}
 };
 
 describe('<IdeaSidebar />', () => {

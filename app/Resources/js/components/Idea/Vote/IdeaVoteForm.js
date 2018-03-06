@@ -11,7 +11,7 @@ type Props = {
   idea: Object,
   anonymous: boolean,
   hasCommentValue: boolean,
-  isPrivate: boolean,
+  isPrivate: boolean
 };
 
 const validate = ({ username, email }: Object, props: Props) => {
@@ -93,12 +93,12 @@ export class IdeaVoteForm extends React.Component<Props> {
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   hasCommentValue: formValueSelector(formName)(state, 'comment'),
-  isPrivate: formValueSelector(formName)(state, 'private'),
+  isPrivate: formValueSelector(formName)(state, 'private')
 });
 
 export default connect(mapStateToProps)(
   reduxForm({
     validate,
-    form: formName,
-  })(IdeaVoteForm),
+    form: formName
+  })(IdeaVoteForm)
 );

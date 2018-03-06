@@ -11,9 +11,9 @@ type Props = { proposalFormId: Uuid };
 
 const component = ({
   error,
-  props,
+  props
 }: ReadyState & {
-  props: ?ProposalFormAdminPageQueryResponse,
+  props: ?ProposalFormAdminPageQueryResponse
 }) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
@@ -43,7 +43,7 @@ export class ProposalFormAdminPage extends Component<Props> {
             }
           `}
           variables={{
-            id: this.props.proposalFormId,
+            id: this.props.proposalFormId
           }}
           render={component}
         />

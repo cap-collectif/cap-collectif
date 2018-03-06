@@ -7,12 +7,12 @@ export const IdeasIndexFooter = React.createClass({
   propTypes: {
     trashUrl: PropTypes.string,
     countTrashed: PropTypes.number.isRequired,
-    features: PropTypes.object.isRequired,
+    features: PropTypes.object.isRequired
   },
 
   getDefaultProps() {
     return {
-      trashUrl: null,
+      trashUrl: null
     };
   },
 
@@ -30,7 +30,7 @@ export const IdeasIndexFooter = React.createClass({
               <FormattedMessage
                 id="idea.appendices.trashed.nb"
                 values={{
-                  num: countTrashed,
+                  num: countTrashed
                 }}
               />
             </p>
@@ -43,7 +43,7 @@ export const IdeasIndexFooter = React.createClass({
         </Row>
       </div>
     );
-  },
+  }
 });
 
 const mapStateToProps = state => {

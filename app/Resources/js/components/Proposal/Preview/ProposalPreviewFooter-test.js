@@ -8,14 +8,14 @@ describe('<ProposalPreviewFooter />', () => {
     commentsCount: 3,
     votesCountByStepId: {
       '1': 1,
-      '42': 5,
-    },
+      '42': 5
+    }
   };
 
   const props = {
     proposal,
     stepId: '1',
-    showComments: true,
+    showComments: true
   };
 
   it('should render a footer with comment counter', () => {
@@ -31,7 +31,7 @@ describe('<ProposalPreviewFooter />', () => {
     const commentsCounter = countersDiv.find('div.proposal__counter--comments');
     expect(commentsCounter).toHaveLength(1);
     expect(commentsCounter.find('.proposal__counter__value').text()).toEqual(
-      `${proposal.commentsCount}`,
+      `${proposal.commentsCount}`
     );
   });
 
@@ -48,19 +48,19 @@ describe('<ProposalPreviewFooter />', () => {
     const commentsCounter = countersDiv.find('div.proposal__counter--comments');
     expect(commentsCounter).toHaveLength(1);
     expect(commentsCounter.find('.proposal__counter__value').text()).toEqual(
-      `${proposal.commentsCount}`,
+      `${proposal.commentsCount}`
     );
 
     const votesCounter = countersDiv.find('div.proposal__counter--votes');
     expect(votesCounter).toHaveLength(1);
     expect(votesCounter.find('.proposal__counter__value').text()).toEqual(
-      `${proposal.votesCountByStepId['1']}`,
+      `${proposal.votesCountByStepId['1']}`
     );
   });
 
   it('should render a footer without comment and votes counters', () => {
     const wrapper = shallow(
-      <ProposalPreviewFooter {...props} showVotes={false} showComments={false} />,
+      <ProposalPreviewFooter {...props} showVotes={false} showComments={false} />
     );
 
     const footer = wrapper.find('div.proposal__footer');

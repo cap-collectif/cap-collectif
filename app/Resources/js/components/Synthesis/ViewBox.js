@@ -5,12 +5,12 @@ import TreeView from './TreeView';
 const ViewBox = React.createClass({
   propTypes: {
     synthesis: PropTypes.object.isRequired,
-    user: PropTypes.object,
+    user: PropTypes.object
   },
 
   getDefaultProps() {
     return {
-      user: null,
+      user: null
     };
   },
 
@@ -24,12 +24,12 @@ const ViewBox = React.createClass({
       );
     }
     return null;
-  },
+  }
 });
 
 const mapStateToProps = state => {
   return {
-    user: state.user.user,
+    user: state.user.user
   };
 };
 

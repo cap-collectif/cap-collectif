@@ -4,7 +4,7 @@ import commitMutation from './commitMutation';
 import environnement from '../createRelayEnvironment';
 import type {
   UnfollowProposalMutationVariables,
-  UnfollowProposalMutationResponse,
+  UnfollowProposalMutationResponse
 } from './__generated__/UnfollowProposalMutation.graphql';
 
 const mutation = graphql`
@@ -22,7 +22,7 @@ const mutation = graphql`
 `;
 
 const commit = (
-  variables: UnfollowProposalMutationVariables,
+  variables: UnfollowProposalMutationVariables
 ): Promise<UnfollowProposalMutationResponse> =>
   commitMutation(environnement, {
     mutation,
@@ -33,13 +33,13 @@ const commit = (
         parentID: variables.input.proposalId,
         connectionKeys: [
           {
-            key: 'ProposalPageFollowers_followerConnection',
-          },
+            key: 'ProposalPageFollowers_followerConnection'
+          }
         ],
         pathToConnection: ['proposal', 'followerConnection'],
-        deletedIDFieldName: 'unfollowerId',
-      },
-    ],
+        deletedIDFieldName: 'unfollowerId'
+      }
+    ]
   });
 
 export default { commit };

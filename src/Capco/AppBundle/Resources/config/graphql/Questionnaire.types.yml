@@ -1,6 +1,7 @@
 Questionnaire:
     type: object
     config:
+        # interfaces: [Node]
         fields:
             id:
                 type: "String!"

@@ -9,7 +9,7 @@ const ElementsList = React.createClass({
     showStatus: React.PropTypes.bool,
     showNotation: React.PropTypes.bool,
     hasLink: React.PropTypes.bool,
-    linkType: React.PropTypes.string,
+    linkType: React.PropTypes.string
   },
 
   getDefaultProps() {
@@ -18,7 +18,7 @@ const ElementsList = React.createClass({
       showStatus: true,
       showNotation: true,
       hasLink: true,
-      linkType: 'edition',
+      linkType: 'edition'
     };
   },
 
@@ -45,7 +45,7 @@ const ElementsList = React.createClass({
         })}
       </Nav>
     );
-  },
+  }
 });
 
 export default ElementsList;

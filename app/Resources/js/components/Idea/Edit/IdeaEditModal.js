@@ -15,7 +15,7 @@ export const IdeaEditModal = React.createClass({
     idea: PropTypes.object.isRequired,
     show: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
-    submitting: PropTypes.bool.isRequired,
+    submitting: PropTypes.bool.isRequired
   },
 
   render() {
@@ -55,11 +55,11 @@ export const IdeaEditModal = React.createClass({
         </Modal>
       </div>
     );
-  },
+  }
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props) => ({
   show: state.idea.showEditModal === props.idea.id,
-  submitting: isSubmitting(formName)(state),
+  submitting: isSubmitting(formName)(state)
 });
 export default connect(mapStateToProps)(IdeaEditModal);

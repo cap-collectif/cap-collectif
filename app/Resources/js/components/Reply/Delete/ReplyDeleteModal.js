@@ -11,12 +11,12 @@ const ReplyDeleteModal = React.createClass({
     reply: React.PropTypes.object.isRequired,
     show: React.PropTypes.bool.isRequired,
     onToggleModal: React.PropTypes.func.isRequired,
-    onDelete: React.PropTypes.func.isRequired,
+    onDelete: React.PropTypes.func.isRequired
   },
 
   getInitialState() {
     return {
-      isSubmitting: false,
+      isSubmitting: false
     };
   },
 
@@ -77,7 +77,7 @@ const ReplyDeleteModal = React.createClass({
         </Modal>
       </div>
     );
-  },
+  }
 });
 
 export default ReplyDeleteModal;

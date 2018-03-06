@@ -8,49 +8,49 @@ const CountersNav = React.createClass({
 
   propTypes: {
     counters: React.PropTypes.object,
-    bordered: React.PropTypes.bool,
+    bordered: React.PropTypes.bool
   },
 
   getDefaultProps() {
     return {
       counters: {},
-      bordered: false,
+      bordered: false
     };
   },
 
   countersData: {
     contributions: {
       icon: 'cap cap-file-edit-1',
-      label: 'global.counters.contributions',
+      label: 'global.counters.contributions'
     },
     proposals: {
       icon: 'cap cap-file-edit-1',
-      label: 'global.counters.proposals',
+      label: 'global.counters.proposals'
     },
     replies: {
       icon: 'cap cap-file-edit-1',
-      label: 'global.counters.replies',
+      label: 'global.counters.replies'
     },
     votes: {
       icon: 'cap-hand-like-2-1',
-      label: 'global.counters.votes',
+      label: 'global.counters.votes'
     },
     contributors: {
       icon: 'cap cap-contacts-1',
-      label: 'global.counters.contributors',
+      label: 'global.counters.contributors'
     },
     voters: {
       icon: 'cap cap-contacts-1',
-      label: 'global.counters.voters',
+      label: 'global.counters.voters'
     },
     remainingDays: {
       icon: 'cap cap-hourglass-1-1',
-      label: 'global.counters.remaining_days',
+      label: 'global.counters.remaining_days'
     },
     remainingHours: {
       icon: 'cap cap-hourglass-1-1',
-      label: 'global.counters.remaining_hours',
-    },
+      label: 'global.counters.remaining_hours'
+    }
   },
 
   render() {
@@ -80,7 +80,7 @@ const CountersNav = React.createClass({
     //   );
     // }
     return null;
-  },
+  }
 });
 
 export default CountersNav;

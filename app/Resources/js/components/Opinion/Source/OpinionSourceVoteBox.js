@@ -8,19 +8,19 @@ import type { State } from '../../../types';
 const OpinionSourceVoteBox = React.createClass({
   propTypes: {
     source: PropTypes.object.isRequired,
-    user: PropTypes.object,
+    user: PropTypes.object
   },
 
   getDefaultProps() {
     return {
-      user: null,
+      user: null
     };
   },
 
   getInitialState() {
     const { source } = this.props;
     return {
-      hasVoted: source.hasUserVoted,
+      hasVoted: source.hasUserVoted
     };
   },
 
@@ -64,12 +64,12 @@ const OpinionSourceVoteBox = React.createClass({
         </span>
       </span>
     );
-  },
+  }
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
   return {
-    user: state.user.user,
+    user: state.user.user
   };
 };
 

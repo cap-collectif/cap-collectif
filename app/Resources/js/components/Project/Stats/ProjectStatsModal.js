@@ -16,7 +16,7 @@ const ProjectStatsModal = React.createClass({
     showPercentage: React.PropTypes.bool.isRequired,
     isCurrency: React.PropTypes.bool.isRequired,
     theme: React.PropTypes.number.isRequired,
-    district: React.PropTypes.number.isRequired,
+    district: React.PropTypes.number.isRequired
   },
 
   getInitialState() {
@@ -24,7 +24,7 @@ const ProjectStatsModal = React.createClass({
     return {
       showModal: false,
       isLoading: true,
-      data,
+      data
     };
   },
 
@@ -44,20 +44,20 @@ const ProjectStatsModal = React.createClass({
     ProjectStatsActions.load(stepId, type, null, theme, district).then(response => {
       this.setState({
         data: response.data,
-        isLoading: false,
+        isLoading: false
       });
     });
   },
 
   showModal() {
     this.setState({
-      showModal: true,
+      showModal: true
     });
   },
 
   hideModal() {
     this.setState({
-      showModal: false,
+      showModal: false
     });
   },
 
@@ -107,7 +107,7 @@ const ProjectStatsModal = React.createClass({
         </Modal>
       </div>
     );
-  },
+  }
 });
 
 export default ProjectStatsModal;

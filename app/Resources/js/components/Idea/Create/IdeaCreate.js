@@ -18,13 +18,13 @@ export const IdeaCreate = React.createClass({
     className: PropTypes.string,
     show: PropTypes.bool.isRequired,
     submitting: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired
   },
 
   getDefaultProps() {
     return {
       className: '',
-      themeId: -1,
+      themeId: -1
     };
   },
 
@@ -70,12 +70,12 @@ export const IdeaCreate = React.createClass({
         </Modal>
       </div>
     );
-  },
+  }
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   show: state.idea.showCreateModal,
-  submitting: isSubmitting(formName)(state),
+  submitting: isSubmitting(formName)(state)
 });
 
 export default connect(mapStateToProps)(IdeaCreate);

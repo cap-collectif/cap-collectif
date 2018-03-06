@@ -14,10 +14,10 @@ describe('<ProposalAdminStatusForm />', () => {
       author: {
         id: 'author1',
         expiresAt: 'Soon',
-        email: 'soon@yopmail.com',
+        email: 'soon@yopmail.com'
       },
       deletedAt: null,
-      publicationStatus: 'PUBLISHED',
+      publicationStatus: 'PUBLISHED'
     };
     const wrapper = shallow(
       <ProposalAdminStatusForm
@@ -35,7 +35,7 @@ describe('<ProposalAdminStatusForm />', () => {
         proposal={proposalToBeExpired}
         handleSubmit={jest.fn()}
         intl={intlMock}
-      />,
+      />
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -49,9 +49,9 @@ describe('<ProposalAdminStatusForm />', () => {
       author: {
         id: 'author1',
         expiresAt: null,
-        email: 'osef@yopmail.com',
+        email: 'osef@yopmail.com'
       },
-      deletedAt: null,
+      deletedAt: null
     };
     const wrapper = shallow(
       <ProposalAdminStatusForm
@@ -69,7 +69,7 @@ describe('<ProposalAdminStatusForm />', () => {
         proposal={proposalExpired}
         handleSubmit={jest.fn()}
         intl={intlMock}
-      />,
+      />
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -81,11 +81,11 @@ describe('<ProposalAdminStatusForm />', () => {
       author: {
         id: 'author1',
         expiresAt: null,
-        email: 'soon@yopmail.com',
+        email: 'soon@yopmail.com'
       },
       trashedReason: null,
       deletedAt: null,
-      publicationStatus: 'PUBLISHED',
+      publicationStatus: 'PUBLISHED'
     };
     const wrapper = shallow(
       <ProposalAdminStatusForm
@@ -103,7 +103,7 @@ describe('<ProposalAdminStatusForm />', () => {
         proposal={proposalConfirmed}
         handleSubmit={jest.fn()}
         intl={intlMock}
-      />,
+      />
     );
     expect(wrapper).toMatchSnapshot();
   });

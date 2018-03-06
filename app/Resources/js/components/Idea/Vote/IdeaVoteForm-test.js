@@ -8,44 +8,44 @@ import { IdeaVoteForm } from './IdeaVoteForm';
 // eslint-disable-next-line react/prop-types
 const idea = {
   userHasVote: false,
-  commentable: true,
+  commentable: true
 };
 
 const ideaWithVote = {
   userHasVote: true,
-  commentable: true,
+  commentable: true
 };
 
 const ideaNotCommentable = {
   userHasVote: false,
-  commentable: false,
+  commentable: false
 };
 
 describe('<IdeaVoteForm />', () => {
   it('should render the form with username, email, comment and private when user is not logged in', () => {
     const wrapper = shallow(
-      <IdeaVoteForm anonymous idea={idea} hasCommentValue={false} isPrivate={false} />,
+      <IdeaVoteForm anonymous idea={idea} hasCommentValue={false} isPrivate={false} />
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render the form with only comment and private when user is logged in', () => {
     const wrapper = shallow(
-      <IdeaVoteForm anonymous={false} idea={idea} hasCommentValue={false} isPrivate={false} />,
+      <IdeaVoteForm anonymous={false} idea={idea} hasCommentValue={false} isPrivate={false} />
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should not show comment field when private is checked', () => {
     const wrapper = shallow(
-      <IdeaVoteForm anonymous idea={idea} isPrivate hasCommentValue={false} />,
+      <IdeaVoteForm anonymous idea={idea} isPrivate hasCommentValue={false} />
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should not show private checkbox when comment is filled', () => {
     const wrapper = shallow(
-      <IdeaVoteForm anonymous idea={idea} hasCommentValue isPrivate={false} />,
+      <IdeaVoteForm anonymous idea={idea} hasCommentValue isPrivate={false} />
     );
     expect(wrapper).toMatchSnapshot();
   });
@@ -57,19 +57,14 @@ describe('<IdeaVoteForm />', () => {
         idea={ideaWithVote}
         hasCommentValue={false}
         isPrivate={false}
-      />,
+      />
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should not show comment field when idea is not commentable', () => {
     const wrapper = shallow(
-      <IdeaVoteForm
-        anonymous
-        idea={ideaNotCommentable}
-        hasCommentValue={false}
-        isPrivate={false}
-      />,
+      <IdeaVoteForm anonymous idea={ideaNotCommentable} hasCommentValue={false} isPrivate={false} />
     );
     expect(wrapper).toMatchSnapshot();
   });

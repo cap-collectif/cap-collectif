@@ -7,7 +7,7 @@ import type { ProposalAdminFollowers_proposal } from './__generated__/ProposalAd
 import ProposalPageFollowers from '../Page/ProposalPageFollowers';
 
 type Props = {
-  proposal: ProposalAdminFollowers_proposal,
+  proposal: ProposalAdminFollowers_proposal
 };
 
 export class ProposalAdminFollowers extends React.Component<Props> {
@@ -94,5 +94,5 @@ export default createFragmentContainer(
         totalCount
       }
     }
-  `,
+  `
 );

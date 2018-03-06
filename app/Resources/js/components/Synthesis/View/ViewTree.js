@@ -15,7 +15,7 @@ import SynthesisDisplayRules from '../../../services/SynthesisDisplayRules';
 
 const ViewTree = React.createClass({
   propTypes: {
-    synthesis: React.PropTypes.object.isRequired,
+    synthesis: React.PropTypes.object.isRequired
   },
 
   getInitialState() {
@@ -23,7 +23,7 @@ const ViewTree = React.createClass({
       settings: SynthesisStore.settings,
       elements: [],
       expanded: {},
-      isLoading: true,
+      isLoading: true
     };
   },
 
@@ -43,7 +43,7 @@ const ViewTree = React.createClass({
     this.setState({
       elements: SynthesisElementStore.elements.publishedTree,
       expanded: SynthesisElementStore.expandedItems.view,
-      isLoading: false,
+      isLoading: false
     });
   },
 
@@ -64,7 +64,7 @@ const ViewTree = React.createClass({
       synthesis.id,
       'published',
       parent,
-      depth > 2 ? depth : depth + NAV_DEPTH,
+      depth > 2 ? depth : depth + NAV_DEPTH
     );
   },
 
@@ -80,7 +80,7 @@ const ViewTree = React.createClass({
         this.state.settings,
         'display',
         'expanded',
-        displayRules,
+        displayRules
       ) || this.state.expanded[element.id]
     );
   },
@@ -94,7 +94,7 @@ const ViewTree = React.createClass({
         this.state.settings,
         'display',
         'childrenInModal',
-        displayRules,
+        displayRules
       )
     ) {
       return null;
@@ -105,7 +105,7 @@ const ViewTree = React.createClass({
         this.state.settings,
         'display',
         'expanded',
-        displayRules,
+        displayRules
       )
     ) {
       return null;
@@ -114,7 +114,7 @@ const ViewTree = React.createClass({
     if (element.publishedChildrenCount > 0 && element.childrenCount > 0) {
       const classes = classNames({
         'cap-arrow-67': expanded,
-        'cap-arrow-66': !expanded,
+        'cap-arrow-66': !expanded
       });
       return (
         <div
@@ -125,14 +125,14 @@ const ViewTree = React.createClass({
               <FormattedMessage
                 id="synthesis.readmore.hide"
                 values={{
-                  title: element.title,
+                  title: element.title
                 }}
               />
             ) : (
               <FormattedMessage
                 id="synthesis.readmore.show"
                 values={{
-                  title: element.title,
+                  title: element.title
                 }}
               />
             )}
@@ -155,7 +155,7 @@ const ViewTree = React.createClass({
         this.state.settings,
         'display',
         'childrenInModal',
-        displayRules,
+        displayRules
       )
     ) {
       const orderedElements = SynthesisDisplayRules.getValueForRuleAndElement(
@@ -163,7 +163,7 @@ const ViewTree = React.createClass({
         this.state.settings,
         'display',
         'foldersOrderedByCount',
-        displayRules,
+        displayRules
       )
         ? ArrayHelper.sortArrayByField(elements, 'childrenElementsNb', false, 'DESC')
         : ArrayHelper.sortArrayByField(elements, 'title', true);
@@ -179,7 +179,7 @@ const ViewTree = React.createClass({
                   settings={SynthesisDisplayRules.getMatchingSettingsForElement(
                     element,
                     this.state.settings,
-                    displayRules,
+                    displayRules
                   )}
                   onExpandElement={() => this.toggleExpand(element)}
                 />
@@ -199,7 +199,7 @@ const ViewTree = React.createClass({
         {this.state.elements.length > 0 ? this.renderTreeItems(this.state.elements, null) : null}
       </Loader>
     );
-  },
+  }
 });
 
 export default ViewTree;

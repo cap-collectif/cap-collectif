@@ -35,12 +35,12 @@ export const IdeaForm = React.createClass({
     themes: PropTypes.array.isRequired,
     themeId: PropTypes.string,
     idea: PropTypes.object,
-    showThemes: PropTypes.bool.isRequired,
+    showThemes: PropTypes.bool.isRequired
   },
 
   getDefaultProps() {
     return {
-      themeId: null,
+      themeId: null
     };
   },
 
@@ -118,7 +118,7 @@ export const IdeaForm = React.createClass({
         />
       </form>
     );
-  },
+  }
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, { idea, themeId }) => {
@@ -131,14 +131,14 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, { idea, themeId
       url: idea ? idea.url : '',
       media: null,
       theme: idea ? idea.theme.id : themeId,
-      confirm: !!!idea, // eslint-disable-line no-extra-boolean-cast
-    },
+      confirm: !!!idea // eslint-disable-line no-extra-boolean-cast
+    }
   };
 };
 
 const connector = connect(mapStateToProps, null, null, { withRef: true });
 export default connector(
   reduxForm({
-    validate,
-  })(IdeaForm),
+    validate
+  })(IdeaForm)
 );

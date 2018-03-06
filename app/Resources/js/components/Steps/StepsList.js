@@ -5,14 +5,14 @@ const StepsList = React.createClass({
   propTypes: {
     steps: React.PropTypes.array,
     style: React.PropTypes.object,
-    votes: React.PropTypes.object,
+    votes: React.PropTypes.object
   },
 
   getDefaultProps() {
     return {
       steps: [],
       style: {},
-      votes: {},
+      votes: {}
     };
   },
 
@@ -30,7 +30,7 @@ const StepsList = React.createClass({
         </ul>
       </div>
     );
-  },
+  }
 });
 
 export default StepsList;

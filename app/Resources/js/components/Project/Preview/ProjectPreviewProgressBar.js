@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 type Props = {
   project: Object,
   actualStep: Object,
-  isCurrentStep?: ?boolean,
+  isCurrentStep?: ?boolean
 };
 
 export class ProjectPreviewProgressBar extends React.Component<Props> {

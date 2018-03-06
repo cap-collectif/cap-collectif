@@ -13,7 +13,7 @@ describe('<ProjectStatsFilters />', () => {
     onDistrictChange: () => {},
     onCategoryChange: () => {},
     showThemes: true,
-    showDistricts: true,
+    showDistricts: true
   };
 
   const propsWithoutDistrictsAndThemes = {
@@ -25,7 +25,7 @@ describe('<ProjectStatsFilters />', () => {
     onDistrictChange: () => {},
     onCategoryChange: () => {},
     showThemes: false,
-    showDistricts: false,
+    showDistricts: false
   };
 
   it('should render 3 filters', () => {

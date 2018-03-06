@@ -8,9 +8,9 @@ import { setRegistrationEmailDomains as onSubmit } from '../../redux/modules/use
 import type { State } from '../../types';
 
 const renderDomains = ({
-  fields,
+  fields
 }: {
-  fields: { push: Function, map: Function, remove: Function },
+  fields: { push: Function, map: Function, remove: Function }
 }) => (
   <div>
     {fields.map((member, index) => (
@@ -32,7 +32,7 @@ const renderDomains = ({
 export const RegistrationEmailDomainsForm = React.createClass({
   propTypes: {
     handleSubmit: PropTypes.func.isRequired,
-    submitting: PropTypes.bool.isRequired,
+    submitting: PropTypes.bool.isRequired
   },
 
   render() {
@@ -50,20 +50,20 @@ export const RegistrationEmailDomainsForm = React.createClass({
         </form>
       </div>
     );
-  },
+  }
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   submitting: isSubmitting('registration-email-domains')(state),
   initialValues: {
-    domains: state.user.registration_form.domains,
-  },
+    domains: state.user.registration_form.domains
+  }
 });
 
 const connector = connect(mapStateToProps);
 export default connector(
   reduxForm({
     form: 'registration-email-domains',
-    onSubmit,
-  })(RegistrationEmailDomainsForm),
+    onSubmit
+  })(RegistrationEmailDomainsForm)
 );

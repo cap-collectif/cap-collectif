@@ -12,11 +12,11 @@ import Loader from '../../Utils/Loader';
 
 const SideMenu = React.createClass({
   propTypes: {
-    synthesis: React.PropTypes.object,
+    synthesis: React.PropTypes.object
   },
 
   contextTypes: {
-    router: React.PropTypes.object.isRequired,
+    router: React.PropTypes.object.isRequired
   },
 
   getInitialState() {
@@ -25,9 +25,9 @@ const SideMenu = React.createClass({
       navItems: [],
       selectedId: 'root',
       expanded: {
-        root: true,
+        root: true
       },
-      isLoading: true,
+      isLoading: true
     };
   },
 
@@ -49,7 +49,7 @@ const SideMenu = React.createClass({
       navItems: SynthesisElementStore.elements.notIgnoredTree,
       expanded: SynthesisElementStore.expandedItems.nav,
       selectedId: SynthesisElementStore.selectedNavItem,
-      isLoading: false,
+      isLoading: false
     });
   },
 
@@ -74,7 +74,7 @@ const SideMenu = React.createClass({
 
   toggleCreateModal(value) {
     this.setState({
-      showCreateModal: value,
+      showCreateModal: value
     });
   },
 
@@ -151,7 +151,7 @@ const SideMenu = React.createClass({
         />
       </div>
     );
-  },
+  }
 });
 
 export default SideMenu;

@@ -6,22 +6,22 @@ import { IdeasListFilters } from './IdeasListFilters';
 
 const props = {
   onChange: () => {},
-  themes: [],
+  themes: []
 };
 
 const featuresThemesEnabled = {
   themes: true,
-  idea_creation: false,
+  idea_creation: false
 };
 
 const featuresIdeaCreationEnabled = {
   themes: false,
-  idea_creation: true,
+  idea_creation: true
 };
 
 const featuresDisabled = {
   themes: false,
-  idea_creation: false,
+  idea_creation: false
 };
 
 describe('<IdeasListFilters />', () => {

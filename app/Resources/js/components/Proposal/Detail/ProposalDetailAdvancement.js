@@ -41,7 +41,7 @@ const generateProgressStepsWithColorAndStatus = progressSteps => {
     const props = {
       roundColor: isPastCurrent ? grey : green,
       borderColor: isPastCurrent ? grey : green,
-      status: null,
+      status: null
     };
 
     if (progressStep.title === stepConsideredCurrent.title) {
@@ -87,7 +87,7 @@ export const ProposalDetailAdvancement = React.createClass({
 
   propTypes: {
     proposal: PropTypes.object.isRequired,
-    project: PropTypes.object.isRequired,
+    project: PropTypes.object.isRequired
   },
 
   getStatus(step) {
@@ -145,7 +145,7 @@ export const ProposalDetailAdvancement = React.createClass({
                 startAt: step.startAt,
                 endAt: step.endAt,
                 progressStep: false,
-                timeless: step.timeless,
+                timeless: step.timeless
               }}
               status={step.isCurrent ? this.getStatus(step) : null}
               roundColor={roundColor}
@@ -169,7 +169,7 @@ export const ProposalDetailAdvancement = React.createClass({
                           endAt: progressStep.endAt
                             ? moment(progressStep.endAt).format('ll')
                             : null,
-                          progressStep: true,
+                          progressStep: true
                         }}
                         status={progressStep.status}
                         roundColor={progressStep.roundColor}
@@ -186,12 +186,12 @@ export const ProposalDetailAdvancement = React.createClass({
         })}
       </div>
     );
-  },
+  }
 });
 
 const mapStateToProps = state => {
   return {
-    project: state.project.projectsById[state.project.currentProjectById],
+    project: state.project.projectsById[state.project.currentProjectById]
   };
 };
 

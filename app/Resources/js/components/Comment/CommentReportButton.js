@@ -6,7 +6,7 @@ import ReportBox from '../Report/ReportBox';
 const CommentReportButton = React.createClass({
   propTypes: {
     dispatch: PropTypes.func.isRequired,
-    comment: PropTypes.object.isRequired,
+    comment: PropTypes.object.isRequired
   },
 
   handleReport(data) {
@@ -26,7 +26,7 @@ const CommentReportButton = React.createClass({
         buttonClassName="btn btn-sm btn-dark-gray btn--outline"
       />
     );
-  },
+  }
 });
 
 export default connect()(CommentReportButton);

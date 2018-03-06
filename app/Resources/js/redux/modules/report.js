@@ -7,7 +7,7 @@ import Fetcher from '../../services/Fetcher';
 export type State = {
   +currentReportingModal: ?number,
   +isLoading: boolean,
-  +elements: Array<*>,
+  +elements: Array<*>
 };
 
 const baseUrl = (opinion: { parent: ?{ id: number } }) =>
@@ -16,7 +16,7 @@ const baseUrl = (opinion: { parent: ?{ id: number } }) =>
 const initialState: State = {
   currentReportingModal: null,
   isLoading: false,
-  elements: [],
+  elements: []
 };
 
 type OpenModalAction = { type: 'report/OPEN_MODAL', id: number };
@@ -34,30 +34,30 @@ export type ReportAction =
 
 export const openModal = (id: number): OpenModalAction => ({
   type: 'report/OPEN_MODAL',
-  id,
+  id
 });
 
 export const closeModal = (): CloseModalAction => ({
-  type: 'report/CLOSE_MODAL',
+  type: 'report/CLOSE_MODAL'
 });
 
 const startLoading = (): StartReportingAction => ({
-  type: 'report/START_LOADING',
+  type: 'report/START_LOADING'
 });
 
 const stopLoading = (): StopReportingAction => ({
-  type: 'report/STOP_LOADING',
+  type: 'report/STOP_LOADING'
 });
 
 const addReported = (): AddReportedAction => ({
-  type: 'report/ADD_REPORTED',
+  type: 'report/ADD_REPORTED'
 });
 
 const submitReport = (
   url: string,
   data: Object,
   dispatch: Dispatch,
-  successMessage: string,
+  successMessage: string
 ): Promise<void> => {
   dispatch(startLoading());
   return new Promise((resolve, reject) => {
@@ -68,7 +68,7 @@ const submitReport = (
         dispatch(closeModal());
         FluxDispatcher.dispatch({
           actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: successMessage },
+          alert: { bsStyle: 'success', content: successMessage }
         });
         resolve();
       })
@@ -87,13 +87,13 @@ export const submitSourceReport = (
   opinion: Object,
   sourceId: Uuid,
   data: Object,
-  dispatch: Dispatch,
+  dispatch: Dispatch
 ) => {
   return submitReport(
     `/${baseUrl(opinion)}/${opinion.id}/sources/${sourceId}/reports`,
     data,
     dispatch,
-    'alert.success.report.source',
+    'alert.success.report.source'
   );
 };
 
@@ -101,13 +101,13 @@ export const submitArgumentReport = (
   opinion: Object,
   argument: Uuid,
   data: Object,
-  dispatch: Dispatch,
+  dispatch: Dispatch
 ) => {
   return submitReport(
     `/${baseUrl(opinion)}/${opinion.id}/arguments/${argument}/reports`,
     data,
     dispatch,
-    'alert.success.report.argument',
+    'alert.success.report.argument'
   );
 };
 
@@ -116,7 +116,7 @@ export const submitOpinionReport = (opinion: Object, data: Object, dispatch: Dis
     `/${baseUrl(opinion)}/${opinion.id}/reports`,
     data,
     dispatch,
-    'alert.success.report.opinion',
+    'alert.success.report.opinion'
   );
 };
 
@@ -125,7 +125,7 @@ export const submitCommentReport = (comment: Object, data: Object, dispatch: Dis
     `/comments/${comment.id}/reports`,
     data,
     dispatch,
-    'alert.success.report.comment',
+    'alert.success.report.comment'
   );
 };
 
@@ -134,7 +134,7 @@ export const submitProposalReport = (proposal: Object, data: Object, dispatch: D
     `/proposals/${proposal.id}/reports`,
     data,
     dispatch,
-    'alert.success.report.proposal',
+    'alert.success.report.proposal'
   );
 };
 

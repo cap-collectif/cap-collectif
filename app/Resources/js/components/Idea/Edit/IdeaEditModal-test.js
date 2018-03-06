@@ -8,7 +8,7 @@ const props = {
   themes: [],
   show: true,
   submitting: false,
-  dispatch: jest.fn(),
+  dispatch: jest.fn()
 };
 
 describe('<IdeaEditModal />', () => {

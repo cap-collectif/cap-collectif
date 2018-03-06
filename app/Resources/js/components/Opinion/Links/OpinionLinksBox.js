@@ -10,7 +10,7 @@ import OpinionLinkStore from '../../../stores/OpinionLinkStore';
 
 const OpinionLinksBox = React.createClass({
   propTypes: {
-    opinion: React.PropTypes.object.isRequired,
+    opinion: React.PropTypes.object.isRequired
   },
 
   getInitialState() {
@@ -18,7 +18,7 @@ const OpinionLinksBox = React.createClass({
     return {
       links: opinion.connections || [],
       isLoading: false,
-      filter: 'last',
+      filter: 'last'
     };
   },
 
@@ -40,7 +40,7 @@ const OpinionLinksBox = React.createClass({
   onChange() {
     this.setState({
       links: OpinionLinkStore.links,
-      isLoading: false,
+      isLoading: false
     });
   },
 
@@ -48,7 +48,7 @@ const OpinionLinksBox = React.createClass({
     this.setState({
       filter: event.target.value,
       isLoading: true,
-      links: [],
+      links: []
     });
   },
 
@@ -72,7 +72,7 @@ const OpinionLinksBox = React.createClass({
         {!this.state.isLoading ? <OpinionLinkList links={this.state.links} /> : <Loader />}
       </div>
     );
-  },
+  }
 });
 
 export default OpinionLinksBox;

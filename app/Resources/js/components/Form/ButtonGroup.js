@@ -8,12 +8,12 @@ type Props = {
   onChange: Function,
   value: any,
   name: string,
-  children: any,
+  children: any
 };
 
 class ButtonGroup extends Component<Props, void> {
   static defaultProps = {
-    disabled: false,
+    disabled: false
   };
 
   render() {

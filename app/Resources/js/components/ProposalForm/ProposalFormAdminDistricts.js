@@ -13,13 +13,13 @@ const selector = formValueSelector(formName);
 type Props = {
   dispatch: Dispatch,
   fields: { length: number, map: Function, remove: Function },
-  districts: Array<Object>,
+  districts: Array<Object>
 };
 type State = { editIndex: ?number };
 
 export class ProposalFormAdminDistricts extends React.Component<Props, State> {
   state = {
-    editIndex: null,
+    editIndex: null
   };
 
   handleClose = (index: number) => {
@@ -77,7 +77,7 @@ export class ProposalFormAdminDistricts extends React.Component<Props, State> {
                         if (
                           window.confirm(
                             'Êtes-vous sûr de vouloir supprimer cette zone ?',
-                            'Les propositions liées ne seront pas supprimées. Cette action est irréversible.',
+                            'Les propositions liées ne seront pas supprimées. Cette action est irréversible.'
                           )
                         ) {
                           fields.remove(index);
@@ -107,7 +107,7 @@ export class ProposalFormAdminDistricts extends React.Component<Props, State> {
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
-  districts: selector(state, 'districts'),
+  districts: selector(state, 'districts')
 });
 
 export default connect(mapStateToProps)(ProposalFormAdminDistricts);

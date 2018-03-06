@@ -11,7 +11,7 @@ import DeepLinkStateMixin from '../../utils/DeepLinkStateMixin';
 const ArgumentList = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
-    type: React.PropTypes.string.isRequired,
+    type: React.PropTypes.string.isRequired
   },
   mixins: [DeepLinkStateMixin],
 
@@ -21,7 +21,7 @@ const ArgumentList = React.createClass({
       count: 0,
       isLoading: true,
       order: ArgumentStore.orderByType[this.getNumericType()],
-      type: this.getNumericType(),
+      type: this.getNumericType()
     };
   },
 
@@ -43,13 +43,13 @@ const ArgumentList = React.createClass({
         arguments: ArgumentStore.arguments[this.state.type],
         count: ArgumentStore.countByType[this.state.type],
         order: ArgumentStore.orderByType[this.state.type],
-        isLoading: false,
+        isLoading: false
       });
       return;
     }
     this.setState({
       order: ArgumentStore.orderByType[this.state.type],
-      isLoading: true,
+      isLoading: true
     });
     this.loadArguments();
   },
@@ -137,7 +137,7 @@ const ArgumentList = React.createClass({
         )}
       </div>
     );
-  },
+  }
 });
 
 export default ArgumentList;

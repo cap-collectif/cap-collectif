@@ -8,31 +8,31 @@ const ReplyCreateForm = React.createClass({
 
   propTypes: {
     form: PropTypes.object.isRequired,
-    disabled: PropTypes.bool,
+    disabled: PropTypes.bool
   },
 
   getDefaultProps() {
     return {
-      disabled: false,
+      disabled: false
     };
   },
 
   getInitialState() {
     return {
-      isSubmitting: false,
+      isSubmitting: false
     };
   },
 
   handleSubmit() {
     this.setState({
-      isSubmitting: true,
+      isSubmitting: true
     });
   },
 
   handleSubmitSuccess() {
     const { form } = this.props;
     this.setState({
-      isSubmitting: false,
+      isSubmitting: false
     });
     if (form.multipleRepliesAllowed) {
       this.replyForm.emptyForm();
@@ -42,7 +42,7 @@ const ReplyCreateForm = React.createClass({
 
   handleFailure() {
     this.setState({
-      isSubmitting: false,
+      isSubmitting: false
     });
   },
 
@@ -67,7 +67,7 @@ const ReplyCreateForm = React.createClass({
         />
       </div>
     );
-  },
+  }
 });
 
 export default ReplyCreateForm;

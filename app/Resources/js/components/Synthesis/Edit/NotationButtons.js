@@ -5,7 +5,7 @@ const NotationButtons = React.createClass({
   propTypes: {
     notation: React.PropTypes.number,
     onChange: React.PropTypes.func,
-    block: React.PropTypes.bool,
+    block: React.PropTypes.bool
   },
 
   getNotationStarsClasses() {
@@ -50,7 +50,7 @@ const NotationButtons = React.createClass({
         </Button>
       </div>
     );
-  },
+  }
 });
 
 export default NotationButtons;

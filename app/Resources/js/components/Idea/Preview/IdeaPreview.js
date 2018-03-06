@@ -6,7 +6,7 @@ import IdeaPreviewFooter from './IdeaPreviewFooter';
 
 const IdeaPreview = React.createClass({
   propTypes: {
-    idea: React.PropTypes.object.isRequired,
+    idea: React.PropTypes.object.isRequired
   },
 
   render() {
@@ -16,7 +16,7 @@ const IdeaPreview = React.createClass({
       block: true,
       'block--bordered': true,
       box: true,
-      'bg-vip': idea.author.vip,
+      'bg-vip': idea.author.vip
     });
     return (
       <div className={classes}>
@@ -25,7 +25,7 @@ const IdeaPreview = React.createClass({
         <IdeaPreviewFooter idea={idea} />
       </div>
     );
-  },
+  }
 });
 
 export default IdeaPreview;

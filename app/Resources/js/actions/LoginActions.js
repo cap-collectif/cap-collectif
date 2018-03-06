@@ -7,5 +7,5 @@ export default {
 
   logoutUser: () => {
     LocalStorageService.remove('jwt');
-  },
+  }
 };

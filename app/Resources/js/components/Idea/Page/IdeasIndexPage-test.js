@@ -8,7 +8,7 @@ const props = {
   count: 5,
   countTrashed: 0,
   ideas: [],
-  themes: [],
+  themes: []
 };
 
 describe('<IdeasIndexPage />', () => {

@@ -8,7 +8,7 @@ import { IdeaDeleteVoteForm } from './IdeaDeleteVoteForm';
 const props = {
   dispatch: jest.fn(),
   idea: {},
-  anonymous: false,
+  anonymous: false
 };
 
 describe('<IdeaDeleteVoteForm />', () => {

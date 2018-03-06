@@ -9,7 +9,7 @@ import type { State } from '../../types';
 export const NewEmailNotConfirmedAlert = React.createClass({
   propTypes: {
     newEmailToConfirm: PropTypes.string,
-    sendSucceed: PropTypes.bool,
+    sendSucceed: PropTypes.bool
   },
 
   render() {
@@ -46,12 +46,12 @@ export const NewEmailNotConfirmedAlert = React.createClass({
         </div>
       </Alert>
     );
-  },
+  }
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   newEmailToConfirm: state.user.user && state.user.user.newEmailToConfirm,
-  sendSucceed: true,
+  sendSucceed: true
 });
 
 export default connect(mapStateToProps)(NewEmailNotConfirmedAlert);

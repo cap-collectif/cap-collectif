@@ -25,7 +25,7 @@ type Props = {
   oldProposal: Proposal,
   categories: Array<Object>,
   steps: Array<Object>,
-  features: FeatureToggles,
+  features: FeatureToggles
 };
 
 export class ProposalPageTabs extends React.Component<Props> {
@@ -63,7 +63,7 @@ export class ProposalPageTabs extends React.Component<Props> {
     // $FlowFixMe
     const votesCount = Object.values(oldProposal.votesCountByStepId).reduce(
       (a, b) => parseInt(a, 10) + parseInt(b, 10),
-      0,
+      0
     );
     const showVotesTab = votesCount > 0 || currentVotableStep !== null;
     const votableSteps = steps.filter(step => step.votable);
@@ -198,5 +198,5 @@ export default createFragmentContainer(
         totalCount
       }
     }
-  `,
+  `
 );

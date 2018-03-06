@@ -17,7 +17,7 @@ export const RegistrationModal = React.createClass({
     textTop: PropTypes.string,
     textBottom: PropTypes.string,
     submitting: PropTypes.bool.isRequired,
-    onSubmit: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired
   },
 
   render() {
@@ -67,7 +67,7 @@ export const RegistrationModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  },
+  }
 });
 
 const mapStateToProps = (state: State) => ({
@@ -78,7 +78,7 @@ const mapStateToProps = (state: State) => ({
     ? state.user.registration_form.bottomText
     : null,
   show: state.user.showRegistrationModal,
-  submitting: isSubmitting(form)(state),
+  submitting: isSubmitting(form)(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -87,7 +87,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
   onSubmit: () => {
     dispatch(submit(form));
-  },
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegistrationModal);

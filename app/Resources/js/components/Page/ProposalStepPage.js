@@ -33,7 +33,7 @@ export const ProposalStepPage = React.createClass({
     isLogged: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
-    selectedViewByStep: PropTypes.string.isRequired,
+    selectedViewByStep: PropTypes.string.isRequired
   },
 
   componentDidMount() {
@@ -56,7 +56,7 @@ export const ProposalStepPage = React.createClass({
       isLoading,
       isLogged,
       randomOrder,
-      selectedViewByStep,
+      selectedViewByStep
     } = this.props;
     const total = queryCount || count;
     const nbPages = Math.ceil(total / PROPOSAL_PAGINATION);
@@ -104,7 +104,7 @@ export const ProposalStepPage = React.createClass({
             geoJsons={geoJsons}
             defaultMapOptions={{
               center: { lat: form.latMap, lng: form.lngMap },
-              zoom: form.zoomMap,
+              zoom: form.zoomMap
             }}
             visible={selectedViewByStep === 'map' && !step.isPrivate}
           />
@@ -146,7 +146,7 @@ export const ProposalStepPage = React.createClass({
         </Loader>
       </div>
     );
-  },
+  }
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Object) => ({
@@ -156,12 +156,12 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Object) 
     state.project.currentProjectById &&
     state.project.projectsById[state.project.currentProjectById].stepsById[props.stepId],
   proposals: state.proposal.proposalShowedId.map(
-    proposal => state.proposal.proposalsById[proposal],
+    proposal => state.proposal.proposalsById[proposal]
   ),
   queryCount: state.proposal.queryCount,
   currentPage: state.proposal.currentPaginationPage,
   randomOrder: state.proposal.order === 'random',
   isLoading: state.proposal.isLoading,
-  selectedViewByStep: state.proposal.selectedViewByStep || 'mosaic',
+  selectedViewByStep: state.proposal.selectedViewByStep || 'mosaic'
 });
 export default connect(mapStateToProps)(ProposalStepPage);

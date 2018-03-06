@@ -4,7 +4,7 @@ import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
 import type {
   SetEvaluationFormInProposalFormMutationVariables,
-  SetEvaluationFormInProposalFormMutationResponse,
+  SetEvaluationFormInProposalFormMutationResponse
 } from './__generated__/SetEvaluationFormInProposalFormMutation.graphql';
 
 const mutation = graphql`
@@ -22,11 +22,11 @@ const mutation = graphql`
 `;
 
 const commit = (
-  variables: SetEvaluationFormInProposalFormMutationVariables,
+  variables: SetEvaluationFormInProposalFormMutationVariables
 ): Promise<SetEvaluationFormInProposalFormMutationResponse> =>
   commitMutation(environment, {
     mutation,
-    variables,
+    variables
   });
 
 export default { commit };

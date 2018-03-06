@@ -10,7 +10,7 @@ const DeleteButton = React.createClass({
     className: PropTypes.string,
     style: PropTypes.object,
     id: PropTypes.string,
-    user: PropTypes.object,
+    user: PropTypes.object
   },
 
   getDefaultProps() {
@@ -19,7 +19,7 @@ const DeleteButton = React.createClass({
       className: '',
       style: null,
       id: 'delete-button',
-      user: null,
+      user: null
     };
   },
 
@@ -41,7 +41,7 @@ const DeleteButton = React.createClass({
       const classes = {
         btn: true,
         'btn-danger': true,
-        'btn--outline': true,
+        'btn--outline': true
       };
       classes[className] = true;
 
@@ -53,12 +53,12 @@ const DeleteButton = React.createClass({
       );
     }
     return null;
-  },
+  }
 });
 
 const mapStateToProps = state => {
   return {
-    user: state.user.user,
+    user: state.user.user
   };
 };
 

@@ -2,7 +2,7 @@
 import * as React from 'react';
 
 type Props = {
-  proposal: Object,
+  proposal: Object
 };
 
 export default class DraftProposalPreview extends React.Component<Props> {

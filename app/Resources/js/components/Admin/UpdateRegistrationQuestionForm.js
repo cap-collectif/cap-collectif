@@ -39,14 +39,14 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
       type: typeToEnum(field.type),
       choices: field.choices
         ? field.choices.map(choice => ({
-            label: choice.label,
+            label: choice.label
           }))
-        : undefined,
-    },
+        : undefined
+    }
   };
 };
 type Props = {
-  initialValues: Object,
+  initialValues: Object
 };
 const connector: Connector<{}, Props> = connect(mapStateToProps);
 
@@ -54,6 +54,6 @@ export default connector(
   reduxForm({
     onSubmit,
     validate,
-    form: formName,
-  })(RegistrationQuestionForm),
+    form: formName
+  })(RegistrationQuestionForm)
 );

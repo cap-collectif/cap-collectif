@@ -7,9 +7,9 @@ export default {
     Fetcher.get('/categories').then(categories => {
       AppDispatcher.dispatch({
         actionType: RECEIVE_CATEGORIES,
-        categories,
+        categories
       });
       return true;
     });
-  },
+  }
 };

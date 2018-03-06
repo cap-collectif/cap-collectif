@@ -7,7 +7,7 @@ import UserLink from '../../User/UserLink';
 export const IdeaPageHeaderInfos = React.createClass({
   propTypes: {
     idea: PropTypes.object.isRequired,
-    features: PropTypes.object.isRequired,
+    features: PropTypes.object.isRequired
   },
 
   render() {
@@ -46,7 +46,7 @@ export const IdeaPageHeaderInfos = React.createClass({
             values={{
               user: <UserLink user={idea.author} />,
               created: createdDate,
-              theme: themeLink,
+              theme: themeLink
             }}
           />
         ) : (
@@ -54,7 +54,7 @@ export const IdeaPageHeaderInfos = React.createClass({
             id="idea.header.infos_no_theme"
             values={{
               user: <UserLink user={idea.author} />,
-              created: createdDate,
+              created: createdDate
             }}
           />
         )}
@@ -64,7 +64,7 @@ export const IdeaPageHeaderInfos = React.createClass({
             <FormattedMessage
               id="global.edited_on"
               values={{
-                updated: updatedDate,
+                updated: updatedDate
               }}
             />
           </span>
@@ -76,7 +76,7 @@ export const IdeaPageHeaderInfos = React.createClass({
               <FormattedMessage
                 id="idea.header.comments"
                 values={{
-                  num: idea.commentsCount,
+                  num: idea.commentsCount
                 }}
               />
             </a>
@@ -88,7 +88,7 @@ export const IdeaPageHeaderInfos = React.createClass({
             <FormattedMessage
               id="idea.header.votes"
               values={{
-                num: idea.votesCount,
+                num: idea.votesCount
               }}
             />
           </a>
@@ -100,12 +100,12 @@ export const IdeaPageHeaderInfos = React.createClass({
         ) : null}
       </p>
     );
-  },
+  }
 });
 
 const mapStateToProps = state => {
   return {
-    features: state.default.features,
+    features: state.default.features
   };
 };
 

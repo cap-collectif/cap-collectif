@@ -28,7 +28,7 @@ const validate = ({ body, title, comment }: Object, props: Object) => {
 
 const OpinionVersionCreateForm = React.createClass({
   propTypes: {
-    opinionId: PropTypes.string.isRequired,
+    opinionId: PropTypes.string.isRequired
   },
 
   render() {
@@ -56,7 +56,7 @@ const OpinionVersionCreateForm = React.createClass({
         />
       </form>
     );
-  },
+  }
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
@@ -65,15 +65,15 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
     body:
       state.opinion.currentOpinionId &&
       state.opinion.opinionsById[state.opinion.currentOpinionId].body,
-    comment: '',
+    comment: ''
   },
-  opinionId: state.opinion.currentOpinionId,
+  opinionId: state.opinion.currentOpinionId
 });
 
 export default connect(mapStateToProps)(
   reduxForm({
     form: formName,
     onSubmit,
-    validate,
-  })(OpinionVersionCreateForm),
+    validate
+  })(OpinionVersionCreateForm)
 );

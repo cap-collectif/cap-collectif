@@ -6,19 +6,19 @@ import { Button, Panel } from 'react-bootstrap';
 const OpinionAppendix = React.createClass({
   propTypes: {
     appendix: React.PropTypes.object.isRequired,
-    expanded: React.PropTypes.bool,
+    expanded: React.PropTypes.bool
   },
 
   getInitialState() {
     const { expanded } = this.props;
     return {
-      expanded: expanded !== 'undefined' ? expanded : false,
+      expanded: expanded !== 'undefined' ? expanded : false
     };
   },
 
   toggle() {
     this.setState({
-      expanded: !this.state.expanded,
+      expanded: !this.state.expanded
     });
   },
 
@@ -64,14 +64,14 @@ const OpinionAppendix = React.createClass({
               <FormattedMessage
                 id="opinion.appendices.hide"
                 values={{
-                  title: this.props.appendix.type.title,
+                  title: this.props.appendix.type.title
                 }}
               />
             ) : (
               <FormattedMessage
                 id="opinion.appendices.show"
                 values={{
-                  title: this.props.appendix.type.title,
+                  title: this.props.appendix.type.title
                 }}
               />
             )
@@ -82,7 +82,7 @@ const OpinionAppendix = React.createClass({
         {this.renderContent()}
       </div>
     );
-  },
+  }
 });
 
 export default OpinionAppendix;

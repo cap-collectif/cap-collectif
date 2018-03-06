@@ -10,13 +10,13 @@ const OpinionPreview = React.createClass({
     opinion: PropTypes.object.isRequired,
     rankingThreshold: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.number]),
     link: PropTypes.bool,
-    showTypeLabel: PropTypes.bool,
+    showTypeLabel: PropTypes.bool
   },
 
   getDefaultProps() {
     return {
       link: true,
-      showTypeLabel: false,
+      showTypeLabel: false
     };
   },
 
@@ -33,7 +33,7 @@ const OpinionPreview = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 });
 
 export default OpinionPreview;

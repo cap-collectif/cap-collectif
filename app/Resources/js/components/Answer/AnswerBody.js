@@ -6,7 +6,7 @@ import UserLink from '../User/UserLink';
 
 const AnswerBody = React.createClass({
   propTypes: {
-    answer: PropTypes.object.isRequired,
+    answer: PropTypes.object.isRequired
   },
 
   render() {
@@ -38,7 +38,7 @@ const AnswerBody = React.createClass({
         <div dangerouslySetInnerHTML={{ __html: answer.body }} />
       </div>
     );
-  },
+  }
 });
 
 export default AnswerBody;

@@ -8,7 +8,7 @@ const EditBox = React.createClass({
   propTypes: {
     synthesis: PropTypes.object,
     children: PropTypes.element,
-    sideMenu: PropTypes.bool.isRequired,
+    sideMenu: PropTypes.bool.isRequired
   },
 
   render() {
@@ -38,7 +38,7 @@ const EditBox = React.createClass({
         </div>
       );
     }
-  },
+  }
 });
 
 export default EditBox;

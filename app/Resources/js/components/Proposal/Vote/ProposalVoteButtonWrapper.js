@@ -15,14 +15,14 @@ export const ProposalVoteButtonWrapper = React.createClass({
     userVotesCount: PropTypes.number.isRequired,
     user: PropTypes.object,
     style: PropTypes.object,
-    className: PropTypes.string,
+    className: PropTypes.string
   },
 
   getDefaultProps() {
     return {
       id: undefined,
       style: {},
-      className: '',
+      className: ''
     };
   },
 
@@ -82,7 +82,7 @@ export const ProposalVoteButtonWrapper = React.createClass({
         />
       </VoteButtonOverlay>
     );
-  },
+  }
 });
 
 const mapStateToProps = (state, props) => {
@@ -99,7 +99,7 @@ const mapStateToProps = (state, props) => {
     userHasVote:
       user && step && state.proposal.userVotesByStepId[step.id].includes(props.proposal.id),
     creditsLeft: step ? state.proposal.creditsLeftByStepId[step.id] : null,
-    step,
+    step
   };
 };
 

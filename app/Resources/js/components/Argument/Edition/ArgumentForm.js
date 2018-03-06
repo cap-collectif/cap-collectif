@@ -34,7 +34,7 @@ const onSubmit = (values: Object, dispatch, { argument }) => {
 
 const ArgumentForm = React.createClass({
   propTypes: {
-    argument: PropTypes.object.isRequired,
+    argument: PropTypes.object.isRequired
   },
 
   render() {
@@ -59,7 +59,7 @@ const ArgumentForm = React.createClass({
         />
       </form>
     );
-  },
+  }
 });
 
 type PassedProps = { argument: Object };
@@ -67,8 +67,8 @@ type PassedProps = { argument: Object };
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: PassedProps) => ({
   initialValues: {
     body: props.argument ? props.argument.body : '',
-    confirm: false,
-  },
+    confirm: false
+  }
 });
 const connector: Connector<PassedProps, {}> = connect(mapStateToProps);
 
@@ -76,6 +76,6 @@ export default connector(
   reduxForm({
     validate,
     onSubmit,
-    form: formName,
-  })(ArgumentForm),
+    form: formName
+  })(ArgumentForm)
 );

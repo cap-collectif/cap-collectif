@@ -6,7 +6,7 @@ import { ProposalPageLastNews } from './ProposalPageLastNews';
 
 describe('<ProposalPageLastNews />', () => {
   const proposal = {
-    posts: [{ authors: [{}] }],
+    posts: [{ authors: [{}] }]
   };
 
   it('should render correctly', () => {

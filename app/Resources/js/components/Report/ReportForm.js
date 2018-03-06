@@ -18,7 +18,7 @@ const validate = ({ status, body }) => {
 
 const ReportForm = React.createClass({
   propTypes: {
-    handleSubmit: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired
   },
 
   render() {
@@ -49,10 +49,10 @@ const ReportForm = React.createClass({
         />
       </form>
     );
-  },
+  }
 });
 
 export default reduxForm({
   form: formName,
-  validate,
+  validate
 })(ReportForm);

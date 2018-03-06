@@ -17,7 +17,7 @@ type Props = {
   invalid: boolean,
   open: () => void,
   close: () => void,
-  submitForm: () => void,
+  submitForm: () => void
 };
 
 export class ProposalCreateFusionButton extends React.Component<Props> {
@@ -66,7 +66,7 @@ const mapStateToProps = (state: State) => ({
   showModal: state.proposal.isCreatingFusion,
   submitting: isSubmitting(formName)(state),
   pristine: isPristine(formName)(state),
-  invalid: isInvalid(formName)(state),
+  invalid: isInvalid(formName)(state)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -78,7 +78,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
   submitForm: () => {
     dispatch(submit(formName));
-  },
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProposalCreateFusionButton);

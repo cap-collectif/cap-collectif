@@ -14,14 +14,14 @@ export const IdeasListFilters = React.createClass({
   propTypes: {
     onChange: PropTypes.func.isRequired,
     themes: PropTypes.array.isRequired,
-    features: PropTypes.object.isRequired,
+    features: PropTypes.object.isRequired
   },
 
   getInitialState() {
     return {
       order: IdeaStore.order,
       theme: IdeaStore.theme,
-      isLoading: true,
+      isLoading: true
     };
   },
 
@@ -47,7 +47,7 @@ export const IdeasListFilters = React.createClass({
   onChange() {
     this.setState({
       order: IdeaStore.order,
-      theme: IdeaStore.theme,
+      theme: IdeaStore.theme
     });
   },
 
@@ -119,7 +119,7 @@ export const IdeasListFilters = React.createClass({
         </Col>
       </Row>
     );
-  },
+  }
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {

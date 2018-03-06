@@ -6,7 +6,7 @@ import { VOTE_WIDGET_DISABLED } from '../../constants/VoteConstants';
 
 const OpinionPreviewCounters = React.createClass({
   propTypes: {
-    opinion: React.PropTypes.object.isRequired,
+    opinion: React.PropTypes.object.isRequired
   },
 
   getType() {
@@ -29,9 +29,9 @@ const OpinionPreviewCounters = React.createClass({
         <FormattedMessage
           id="global.votes"
           values={{
-            num: opinion.votesCount,
+            num: opinion.votesCount
           }}
-        />,
+        />
       );
     }
     if (!opinion.parent && type.versionable) {
@@ -39,9 +39,9 @@ const OpinionPreviewCounters = React.createClass({
         <FormattedMessage
           id="global.versions"
           values={{
-            num: opinion.versionsCount,
+            num: opinion.versionsCount
           }}
-        />,
+        />
       );
     }
     if (type.commentSystem !== COMMENT_SYSTEM_NONE) {
@@ -49,9 +49,9 @@ const OpinionPreviewCounters = React.createClass({
         <FormattedMessage
           id="global.arguments"
           values={{
-            num: opinion.argumentsCount,
+            num: opinion.argumentsCount
           }}
-        />,
+        />
       );
     }
     if (type.sourceable) {
@@ -59,9 +59,9 @@ const OpinionPreviewCounters = React.createClass({
         <FormattedMessage
           id="global.sources"
           values={{
-            num: opinion.sourcesCount,
+            num: opinion.sourcesCount
           }}
-        />,
+        />
       );
     }
     if (!opinion.parent && type.linkable) {
@@ -69,9 +69,9 @@ const OpinionPreviewCounters = React.createClass({
         <FormattedMessage
           id="global.links"
           values={{
-            num: opinion.connectionsCount,
+            num: opinion.connectionsCount
           }}
-        />,
+        />
       );
     }
     return (
@@ -89,7 +89,7 @@ const OpinionPreviewCounters = React.createClass({
         })}
       </p>
     );
-  },
+  }
 });
 
 export default OpinionPreviewCounters;

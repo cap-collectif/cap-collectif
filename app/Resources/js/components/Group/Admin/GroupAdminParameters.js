@@ -16,7 +16,7 @@ import DeleteModal from '../../Modal/DeleteModal';
 
 type State = { showDeleteModal: boolean };
 type RelayProps = {
-  group: GroupAdminParameters_group,
+  group: GroupAdminParameters_group
 };
 
 type Props = RelayProps & {
@@ -27,7 +27,7 @@ type Props = RelayProps & {
   pristine: boolean,
   valid: boolean,
   submitSucceeded: boolean,
-  submitFailed: boolean,
+  submitFailed: boolean
 };
 
 type FormValues = Object;
@@ -36,8 +36,8 @@ const formName = 'group-edit';
 const onDelete = (groupId: string) => {
   return DeleteGroupMutation.commit({
     input: {
-      groupId,
-    },
+      groupId
+    }
   }).then(() => {
     window.location.href = `${window.location.protocol}//${
       window.location.host
@@ -62,7 +62,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { group }: Props) => {
 
 export class GroupAdminParameters extends React.Component<Props, State> {
   state = {
-    showDeleteModal: false,
+    showDeleteModal: false
   };
 
   openDeleteModal = () => {
@@ -81,7 +81,7 @@ export class GroupAdminParameters extends React.Component<Props, State> {
       valid,
       submitSucceeded,
       submitFailed,
-      pristine,
+      pristine
     } = this.props;
     const { showDeleteModal } = this.state;
 
@@ -137,14 +137,14 @@ const form = reduxForm({
   onSubmit,
   validate,
   enableReinitialize: true,
-  form: formName,
+  form: formName
 })(GroupAdminParameters);
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
   initialValues: {
     title: props.group.title,
-    description: props.group.description,
-  },
+    description: props.group.description
+  }
 });
 
 const container = connect(mapStateToProps)(form);
@@ -157,5 +157,5 @@ export default createFragmentContainer(
       title
       description
     }
-  `,
+  `
 );

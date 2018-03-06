@@ -9,7 +9,7 @@ describe('<RegistrationSortableQuestion />', () => {
     value: { type: 'select' },
     isSuperAdmin: true,
     deleteField: jest.fn(),
-    updateField: jest.fn(),
+    updateField: jest.fn()
   };
 
   it('renders correctly', () => {

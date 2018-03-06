@@ -7,14 +7,14 @@ import IdeaActions from '../../../actions/IdeaActions';
 
 const IdeasListSearch = React.createClass({
   propTypes: {
-    onChange: React.PropTypes.func.isRequired,
+    onChange: React.PropTypes.func.isRequired
   },
 
   mixins: [DeepLinkStateMixin],
 
   getInitialState() {
     return {
-      value: '',
+      value: ''
     };
   },
 
@@ -52,7 +52,7 @@ const IdeasListSearch = React.createClass({
         />
       </form>
     );
-  },
+  }
 });
 
 export default IdeasListSearch;

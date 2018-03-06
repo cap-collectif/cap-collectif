@@ -10,16 +10,16 @@ import type { Dispatch, State } from '../../../types';
 
 type MapCenterObject = {
   lat: number,
-  lng: number,
+  lng: number
 };
 
 type MapOptions = {
   center: MapCenterObject,
-  zoom: number,
+  zoom: number
 };
 
 type ComponentState = {
-  loaded: boolean,
+  loaded: boolean
 };
 
 type Props = {
@@ -29,12 +29,12 @@ type Props = {
   visible: boolean,
   stepId: string,
   stepType: string,
-  dispatch: Dispatch,
+  dispatch: Dispatch
 };
 
 type DefaultProps = {
   defaultMapOptions: MapOptions,
-  visible: boolean,
+  visible: boolean
 };
 
 let L;
@@ -44,9 +44,9 @@ export class LeafletMap extends Component<Props, ComponentState> {
     markers: null,
     defaultMapOptions: {
       center: { lat: 48.8586047, lng: 2.3137325 },
-      zoom: 12,
+      zoom: 12
     },
-    visible: true,
+    visible: true
   };
 
   static getStringPopup(marker: Object): string {
@@ -104,9 +104,9 @@ export class LeafletMap extends Component<Props, ComponentState> {
                 iconUrl: '/svg/marker.svg',
                 iconSize: [40, 40],
                 iconAnchor: [20, 40],
-                popupAnchor: [0, -40],
-              }),
-            },
+                popupAnchor: [0, -40]
+              })
+            }
           }))
         : [];
 
@@ -117,7 +117,7 @@ export class LeafletMap extends Component<Props, ComponentState> {
         maxZoom={18}
         style={{
           width: '100%',
-          height: '50vw',
+          height: '50vw'
         }}>
         <TileLayer
           url={`https://api.mapbox.com/styles/v1/capcollectif/cj4zmeym20uhr2smcmgbf49cz/tiles/256/{z}/{x}/{y}?access_token=${token}`}
@@ -128,7 +128,7 @@ export class LeafletMap extends Component<Props, ComponentState> {
             spiderfyOnMaxZoom: true,
             showCoverageOnHover: false,
             zoomToBoundsOnClick: true,
-            maxClusterRadius: 30,
+            maxClusterRadius: 30
           }}
           markers={markersList}
         />
@@ -145,7 +145,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   stepType:
     state.project.projectsById[state.project.currentProjectById || ''].stepsById[
       state.project.currentProjectStepById
-    ].type,
+    ].type
 });
 
 const connector: Connector<DefaultProps, Props> = connect(mapStateToProps);

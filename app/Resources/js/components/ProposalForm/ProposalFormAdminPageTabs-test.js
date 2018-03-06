@@ -11,8 +11,8 @@ describe('<ProposalFormAdminPageTabs />', () => {
     // $FlowFixMe $refType
     proposalForm: {
       url: 'http://capco.dev/top-budget',
-      reference: '2',
-    },
+      reference: '2'
+    }
   };
 
   it('render correctly', () => {

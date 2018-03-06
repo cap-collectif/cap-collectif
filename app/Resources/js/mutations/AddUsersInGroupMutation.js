@@ -4,7 +4,7 @@ import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
 import type {
   AddUsersInGroupMutationVariables,
-  AddUsersInGroupMutationResponse,
+  AddUsersInGroupMutationResponse
 } from './__generated__/AddUsersInGroupMutation.graphql';
 
 const mutation = graphql`
@@ -25,11 +25,11 @@ const mutation = graphql`
 `;
 
 const commit = (
-  variables: AddUsersInGroupMutationVariables,
+  variables: AddUsersInGroupMutationVariables
 ): Promise<AddUsersInGroupMutationResponse> =>
   commitMutation(environment, {
     mutation,
-    variables,
+    variables
   });
 
 export default { commit };

@@ -6,14 +6,14 @@ const UserBox = React.createClass({
   propTypes: {
     user: React.PropTypes.object,
     username: React.PropTypes.string,
-    className: React.PropTypes.string,
+    className: React.PropTypes.string
   },
 
   getDefaultProps() {
     return {
       user: null,
       username: null,
-      className: '',
+      className: ''
     };
   },
 
@@ -27,7 +27,7 @@ const UserBox = React.createClass({
         <UserPreview className="block block--bordered" user={user} username={username} />
       </Col>
     );
-  },
+  }
 });
 
 export default UserBox;

@@ -12,16 +12,16 @@ import UpdateButton from './Edit/UpdateButton';
 
 const FolderManager = React.createClass({
   propTypes: {
-    synthesis: React.PropTypes.object,
+    synthesis: React.PropTypes.object
   },
 
   getInitialState() {
     return {
       elements: [],
       expanded: {
-        root: true,
+        root: true
       },
-      isLoading: true,
+      isLoading: true
     };
   },
 
@@ -40,7 +40,7 @@ const FolderManager = React.createClass({
   onChange() {
     this.setState({
       elements: SynthesisElementStore.elements.notIgnoredTree,
-      isLoading: false,
+      isLoading: false
     });
   },
 
@@ -52,7 +52,7 @@ const FolderManager = React.createClass({
     const expanded = this.state.expanded;
     expanded[element.id] = !this.state.expanded[element.id];
     this.setState({
-      expanded,
+      expanded
     });
   },
 
@@ -78,7 +78,7 @@ const FolderManager = React.createClass({
     const classes = classNames({
       tree__item__caret: true,
       'cap-arrow-67': this.state.expanded[element.id],
-      'cap-arrow-66': !this.state.expanded[element.id],
+      'cap-arrow-66': !this.state.expanded[element.id]
     });
     if (element.childrenCount > 0) {
       return <i className={classes} onClick={this.toggleExpand.bind(this, element)} />;
@@ -116,7 +116,7 @@ const FolderManager = React.createClass({
           <FormattedMessage
             id="synthesis.common.elements.nb"
             values={{
-              num: element.childrenCount,
+              num: element.childrenCount
             }}
           />
         </span>
@@ -131,7 +131,7 @@ const FolderManager = React.createClass({
         {this.renderTreeItems(this.state.elements, 0)}
       </div>
     );
-  },
+  }
 });
 
 export default FolderManager;

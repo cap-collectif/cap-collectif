@@ -6,7 +6,7 @@ import type { State } from '../../../types';
 const ProjectPreviewThemes = React.createClass({
   propTypes: {
     project: PropTypes.object.isRequired,
-    features: PropTypes.object.isRequired,
+    features: PropTypes.object.isRequired
   },
 
   render() {
@@ -28,7 +28,7 @@ const ProjectPreviewThemes = React.createClass({
       );
     }
     return <div className="excerpt project__preview__themes small" />;
-  },
+  }
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {

@@ -29,7 +29,7 @@ const AutosizedTextarea = React.createClass({
         {...this.props}
       />
     );
-  },
+  }
 });
 
 export default AutosizedTextarea;

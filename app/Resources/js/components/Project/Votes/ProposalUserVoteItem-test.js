@@ -10,21 +10,21 @@ describe('<ProposalUserVoteItem />', () => {
       id: 1,
       title: 'proposal',
       district: {
-        name: 'district',
+        name: 'district'
       },
       _links: {
-        show: 'http://capco.test/proposal',
+        show: 'http://capco.test/proposal'
       },
       author: {
         id: 1,
-        displayName: 'user',
-      },
+        displayName: 'user'
+      }
     },
     step: {
       id: 1,
       voteType: 2,
-      open: true,
-    },
+      open: true
+    }
   };
 
   it('should render a vote item', () => {

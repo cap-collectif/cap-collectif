@@ -6,7 +6,7 @@ import ReplyModalLink from './Show/ReplyModalLink';
 const UserReplies = React.createClass({
   propTypes: {
     replies: React.PropTypes.array.isRequired,
-    form: React.PropTypes.object.isRequired,
+    form: React.PropTypes.object.isRequired
   },
 
   render() {
@@ -21,7 +21,7 @@ const UserReplies = React.createClass({
           <FormattedMessage
             id="reply.show.title"
             values={{
-              num: replies.length,
+              num: replies.length
             }}
           />
         </h3>
@@ -33,7 +33,7 @@ const UserReplies = React.createClass({
         <hr />
       </div>
     );
-  },
+  }
 });
 
 export default UserReplies;

@@ -9,13 +9,13 @@ const OpinionVersionEditButton = React.createClass({
   propTypes: {
     className: PropTypes.string,
     style: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired
   },
 
   getDefaultProps() {
     return {
       className: '',
-      style: {},
+      style: {}
     };
   },
 
@@ -35,7 +35,7 @@ const OpinionVersionEditButton = React.createClass({
         </Button>
       </div>
     );
-  },
+  }
 });
 
 export default connect()(OpinionVersionEditButton);

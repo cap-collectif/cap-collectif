@@ -34,9 +34,9 @@ export const ConsultationFilterForm = React.createClass({
         </Field>
       </form>
     );
-  },
+  }
 });
 
 export default reduxForm({
-  form,
+  form
 })(ConsultationFilterForm);

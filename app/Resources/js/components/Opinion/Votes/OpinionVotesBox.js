@@ -8,7 +8,7 @@ import OpinionVotesButtons from './OpinionVotesButtons';
 
 const OpinionVotesBox = React.createClass({
   propTypes: {
-    opinion: PropTypes.object.isRequired,
+    opinion: PropTypes.object.isRequired
   },
 
   getOpinionType() {
@@ -71,7 +71,7 @@ const OpinionVotesBox = React.createClass({
         </Row>
       </div>
     );
-  },
+  }
 });
 
 export default OpinionVotesBox;

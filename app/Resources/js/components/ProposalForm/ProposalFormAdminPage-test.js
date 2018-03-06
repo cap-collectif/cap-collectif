@@ -8,7 +8,7 @@ import { intlMock } from '../../mocks';
 describe('<ProposalFormAdminPage />', () => {
   const props = {
     intl: intlMock,
-    proposalFormId: '1',
+    proposalFormId: '1'
   };
 
   it('render correctly', () => {

@@ -9,7 +9,7 @@ const VotePiechart = React.createClass({
     height: PropTypes.string,
     width: PropTypes.string,
     top: PropTypes.number,
-    left: PropTypes.number,
+    left: PropTypes.number
   },
 
   getDefaultProps() {
@@ -20,7 +20,7 @@ const VotePiechart = React.createClass({
       height: '100%',
       width: '100%',
       top: 0,
-      left: 0,
+      left: 0
     };
   },
 
@@ -36,7 +36,7 @@ const VotePiechart = React.createClass({
               [{ type: 'string' }, { type: 'number' }],
               [<FormattedMessage id="vote.ok" />, ok],
               [<FormattedMessage id="vote.mitige" />, mitige],
-              [<FormattedMessage id="vote.nok" />, nok],
+              [<FormattedMessage id="vote.nok" />, nok]
             ]}
             height={height}
             width={width}
@@ -46,18 +46,18 @@ const VotePiechart = React.createClass({
                 left,
                 top,
                 width: '100%',
-                height: '85%',
+                height: '85%'
               },
               colors: ['#5cb85c', '#f0ad4e', '#d9534f'],
               pieSliceText: 'value',
-              backgroundColor: 'transparent',
+              backgroundColor: 'transparent'
             }}
           />
         </div>
       );
     }
     return null;
-  },
+  }
 });
 
 export default VotePiechart;

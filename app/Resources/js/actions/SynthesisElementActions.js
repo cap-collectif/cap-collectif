@@ -21,20 +21,20 @@ const updateElementFromData = (
   element,
   data,
   successMessage = 'synthesis.common.success.update_success',
-  errorMessage = 'synthesis.common.errors.update_error',
+  errorMessage = 'synthesis.common.errors.update_error'
 ) => {
   return Fetcher.put(`/syntheses/${synthesis}/elements/${element}`, data)
     .then(() => {
       AppDispatcher.dispatch({
         actionType: Actions.UPDATE_ELEMENT_SUCCESS,
-        message: successMessage,
+        message: successMessage
       });
       return true;
     })
     .catch(() => {
       AppDispatcher.dispatch({
         actionType: Actions.UPDATE_ELEMENT_FAILURE,
-        message: errorMessage,
+        message: errorMessage
       });
       return false;
     });
@@ -44,7 +44,7 @@ const createElementFromData = (
   synthesis,
   data,
   successMessage = 'synthesis.common.success.update_success',
-  errorMessage = 'synthesis.common.errors.update_error',
+  errorMessage = 'synthesis.common.errors.update_error'
 ) => {
   return Fetcher.post(`/syntheses/${synthesis}/elements`, data)
     .then(response => {
@@ -52,7 +52,7 @@ const createElementFromData = (
         AppDispatcher.dispatch({
           actionType: Actions.CREATE_ELEMENT_SUCCESS,
           element,
-          message: successMessage,
+          message: successMessage
         });
         return true;
       });
@@ -61,7 +61,7 @@ const createElementFromData = (
     .catch(() => {
       AppDispatcher.dispatch({
         actionType: Actions.CREATE_ELEMENT_FAILURE,
-        message: errorMessage,
+        message: errorMessage
       });
       return false;
     });
@@ -72,7 +72,7 @@ const fetchElementById = (synthesis, element) => {
     .then(data => {
       AppDispatcher.dispatch({
         actionType: Actions.RECEIVE_ELEMENT_SUCCESS,
-        element: data,
+        element: data
       });
       return true;
     })
@@ -85,7 +85,7 @@ export default {
   create: (synthesis, data) => {
     AppDispatcher.dispatch({
       actionType: Actions.CREATE_ELEMENT,
-      element: data,
+      element: data
     });
     if (data.parent) {
       data.parent = idOf(data.parent);
@@ -94,21 +94,21 @@ export default {
       synthesis,
       data,
       'synthesis.common.success.create_success',
-      'synthesis.common.errors.create_error',
+      'synthesis.common.errors.create_error'
     );
   },
 
   loadElementFromServer: (synthesis, element) => {
     AppDispatcher.dispatch({
       actionType: Actions.RECEIVE_ELEMENT,
-      elementId: element,
+      elementId: element
     });
     fetchElementById(synthesis, element);
   },
 
   loadElementsFromServer: (synthesis, type, offset, limit) => {
     Fetcher.get(
-      `/syntheses/${synthesis}/elements?type=${type}&offset=${offset}&limit=${limit}`,
+      `/syntheses/${synthesis}/elements?type=${type}&offset=${offset}&limit=${limit}`
     ).then(data => {
       data.actionType = Actions.RECEIVE_ELEMENTS_SUCCESS;
       data.type = type;
@@ -119,7 +119,7 @@ export default {
 
   loadElementsByTermFromServer: (synthesis, term, offset, limit, type = 'all') => {
     Fetcher.get(
-      `/syntheses/${synthesis}/elements?term=${term}&type=${type}&offset=${offset}&limit=${limit}`,
+      `/syntheses/${synthesis}/elements?term=${term}&type=${type}&offset=${offset}&limit=${limit}`
     ).then(data => {
       data.actionType = Actions.RECEIVE_ELEMENTS_SUCCESS;
       data.type = 'search';
@@ -138,7 +138,7 @@ export default {
           actionType: Actions.RECEIVE_ELEMENTS_SUCCESS,
           type: `${type}Tree`,
           elements: data,
-          parent,
+          parent
         });
         return true;
       })
@@ -152,7 +152,7 @@ export default {
       AppDispatcher.dispatch({
         actionType: Actions.RECEIVE_COUNT,
         type,
-        count: data.count,
+        count: data.count
       });
       return true;
     });
@@ -164,14 +164,14 @@ export default {
         actionType: Actions.ARCHIVE_ELEMENT,
         archived: data.archived,
         published: data.published,
-        elementId: element,
+        elementId: element
       });
     }
     if (data.parent) {
       AppDispatcher.dispatch({
         actionType: Actions.MOVE_ELEMENT,
         parent: data.parent,
-        elementId: element,
+        elementId: element
       });
       data.parent = idOf(data.parent);
     }
@@ -179,28 +179,28 @@ export default {
       AppDispatcher.dispatch({
         actionType: Actions.NOTE_ELEMENT,
         notation: data.notation,
-        elementId: element,
+        elementId: element
       });
     }
     if (data.title) {
       AppDispatcher.dispatch({
         actionType: Actions.NAME_ELEMENT,
         title: data.title,
-        elementId: element,
+        elementId: element
       });
     }
     if (data.description) {
       AppDispatcher.dispatch({
         actionType: Actions.DESCRIBE_ELEMENT,
         description: data.description,
-        elementId: element,
+        elementId: element
       });
     }
     if (data.comment) {
       AppDispatcher.dispatch({
         actionType: Actions.COMMENT_ELEMENT,
         comment: data.comment,
-        elementId: element,
+        elementId: element
       });
     }
     if (data.division) {
@@ -210,7 +210,7 @@ export default {
       AppDispatcher.dispatch({
         actionType: Actions.DIVIDE_ELEMENT,
         division: data.division,
-        elementId: element,
+        elementId: element
       });
     }
     updateElementFromData(
@@ -218,7 +218,7 @@ export default {
       element,
       data,
       'synthesis.common.success.archive_success',
-      'synthesis.common.errors.archive_error',
+      'synthesis.common.errors.archive_error'
     );
   },
 
@@ -227,14 +227,14 @@ export default {
       actionType: Actions.EXPAND_TREE_ITEM,
       elementId,
       expanded,
-      type,
+      type
     });
   },
 
   selectNavItem(elementId) {
     AppDispatcher.dispatch({
       actionType: Actions.SELECT_NAV_ITEM,
-      elementId,
+      elementId
     });
   },
 
@@ -242,7 +242,7 @@ export default {
     AppDispatcher.dispatch({
       actionType: DISMISS_MESSAGE,
       message,
-      type,
+      type
     });
-  },
+  }
 };

@@ -15,14 +15,14 @@ const PublishModal = React.createClass({
     element: React.PropTypes.object.isRequired,
     show: React.PropTypes.bool.isRequired,
     toggle: React.PropTypes.func.isRequired,
-    process: React.PropTypes.func,
+    process: React.PropTypes.func
   },
 
   mixins: [DeepLinkStateMixin],
 
   getDefaultProps() {
     return {
-      process: null,
+      process: null
     };
   },
 
@@ -37,9 +37,9 @@ const PublishModal = React.createClass({
       displayType: element ? element.displayType : null,
       elements: [],
       expanded: {
-        root: true,
+        root: true
       },
-      isLoading: true,
+      isLoading: true
     };
   },
 
@@ -62,7 +62,7 @@ const PublishModal = React.createClass({
           title: nextProps.element.title,
           description: nextProps.element.description,
           displayType: nextProps.element.displayType,
-          expanded: this.getExpandedBasedOnElement(),
+          expanded: this.getExpandedBasedOnElement()
         });
       }
     }
@@ -78,7 +78,7 @@ const PublishModal = React.createClass({
 
   getExpandedBasedOnElement() {
     const expanded = {
-      root: true,
+      root: true
     };
     const element = this.props.element;
     if (this.state.elements && element && element.id !== 'root') {
@@ -94,7 +94,7 @@ const PublishModal = React.createClass({
 
   setNotation(notation) {
     this.setState({
-      notation,
+      notation
     });
   },
 
@@ -102,7 +102,7 @@ const PublishModal = React.createClass({
     if (element) {
       const value = element !== 'root' ? element : null;
       this.setState({
-        parent: value,
+        parent: value
       });
     }
   },
@@ -132,7 +132,7 @@ const PublishModal = React.createClass({
       comment: this.state.comment,
       description: this.state.description,
       displayType: this.state.displayType,
-      title: this.state.title,
+      title: this.state.title
     };
     if (typeof process === 'function') {
       const element = this.props.element;
@@ -155,7 +155,7 @@ const PublishModal = React.createClass({
     const expanded = this.state.expanded;
     expanded[element.id] = !this.state.expanded[element.id];
     this.setState({
-      expanded,
+      expanded
     });
   },
 
@@ -164,7 +164,7 @@ const PublishModal = React.createClass({
       elements: SynthesisElementStore.elements.notIgnoredTree,
       expanded: SynthesisElementStore.expandedItems.nav,
       selectedId: SynthesisElementStore.selectedNavItem,
-      isLoading: false,
+      isLoading: false
     });
   },
 
@@ -329,7 +329,7 @@ const PublishModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  },
+  }
 });
 
 export default PublishModal;

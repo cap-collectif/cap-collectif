@@ -9,7 +9,7 @@ import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 const ProposalsUserVotesPage = React.createClass({
   propTypes: {
     userVotesByStepId: PropTypes.object.isRequired,
-    votableSteps: PropTypes.array.isRequired,
+    votableSteps: PropTypes.array.isRequired
   },
 
   render() {
@@ -55,7 +55,7 @@ const ProposalsUserVotesPage = React.createClass({
                   <FormattedMessage
                     id="project.votes.nb"
                     values={{
-                      num: userVotesByStepId[step.id].length,
+                      num: userVotesByStepId[step.id].length
                     }}
                   />
                 </h3>
@@ -72,7 +72,7 @@ const ProposalsUserVotesPage = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state, props) => {
@@ -89,10 +89,10 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state, props) => {
   }
   return {
     votableSteps: state.project.projectsById[state.project.currentProjectById].steps.filter(
-      step => step.votable,
+      step => step.votable
     ),
     currentUserVotesByStepId: undefined,
-    userVotesByStepId,
+    userVotesByStepId
   };
 };
 

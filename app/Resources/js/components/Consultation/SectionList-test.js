@@ -8,7 +8,7 @@ describe('<SectionList />', () => {
   const props = {
     section: {},
     consultation: {},
-    level: 0,
+    level: 0
   };
 
   it('renders correcty', () => {

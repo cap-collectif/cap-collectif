@@ -5,7 +5,7 @@ import { ProgressBar } from 'react-bootstrap';
 const ProposalPageVoteThreshold = React.createClass({
   propTypes: {
     proposal: PropTypes.object.isRequired,
-    step: PropTypes.object.isRequired,
+    step: PropTypes.object.isRequired
   },
 
   render() {
@@ -28,7 +28,7 @@ const ProposalPageVoteThreshold = React.createClass({
             <FormattedMessage
               id="proposal.vote.count"
               values={{
-                num: votesCount,
+                num: votesCount
               }}
             />
           </p>
@@ -45,7 +45,7 @@ const ProposalPageVoteThreshold = React.createClass({
                 id="proposal.vote.threshold.progress_reached"
                 values={{
                   num: votesCount,
-                  max: step.voteThreshold,
+                  max: step.voteThreshold
                 }}
               />
             )}
@@ -54,7 +54,7 @@ const ProposalPageVoteThreshold = React.createClass({
                 id="proposal.vote.threshold.progress"
                 values={{
                   num: votesRemaining,
-                  max: step.voteThreshold,
+                  max: step.voteThreshold
                 }}
               />
             )}
@@ -62,7 +62,7 @@ const ProposalPageVoteThreshold = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 });
 
 export default ProposalPageVoteThreshold;

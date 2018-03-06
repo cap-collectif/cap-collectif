@@ -7,7 +7,7 @@ import ReportBox from '../Report/ReportBox';
 const OpinionReportButton = React.createClass({
   propTypes: {
     dispatch: PropTypes.func.isRequired,
-    opinion: PropTypes.object.isRequired,
+    opinion: PropTypes.object.isRequired
   },
 
   handleReport(data) {
@@ -26,7 +26,7 @@ const OpinionReportButton = React.createClass({
         buttonClassName="opinion__action--report pull-right btn--outline btn-dark-gray"
       />
     );
-  },
+  }
 });
 
 export default connect()(OpinionReportButton);

@@ -19,27 +19,27 @@ type Questions = $ReadOnlyArray<{|
   +isOtherAllowed: boolean,
   +validationRule: ?{|
     +type: ?string,
-    +number: ?string,
+    +number: ?string
   |},
   +choices: ?$ReadOnlyArray<{|
     +id: string,
     +title: string,
     +description: ?string,
-    +color: ?string,
-  |}>,
+    +color: ?string
+  |}>
 |}>;
 
 type ResponsesFromAPI = $ReadOnlyArray<?{|
   +question: {|
-    +id: string,
+    +id: string
   |},
   +value?: ?string,
   +medias?: $ReadOnlyArray<{|
     +id: string,
     +name: string,
     +url: string,
-    +size: string,
-  |}>,
+    +size: string
+  |}>
 |}>;
 
 export type ResponsesInReduxForm = $ReadOnlyArray<{|
@@ -51,8 +51,8 @@ export type ResponsesInReduxForm = $ReadOnlyArray<{|
         +id: string,
         +name: string,
         +url: string,
-        +size: string,
-      |}>,
+        +size: string
+      |}>
 |}>;
 
 // The real type is
@@ -67,12 +67,12 @@ export type ResponsesInReduxForm = $ReadOnlyArray<{|
 type SubmitResponses = $ReadOnlyArray<{
   value?: ?string,
   question: string,
-  medias?: ?$ReadOnlyArray<string>,
+  medias?: ?$ReadOnlyArray<string>
 }>;
 
 export const formatSubmitResponses = (
   responses: ?ResponsesInReduxForm,
-  questions: Questions,
+  questions: Questions
 ): SubmitResponses => {
   if (!responses) return [];
   return responses.map(res => {
@@ -80,14 +80,14 @@ export const formatSubmitResponses = (
     if (question.type === 'medias') {
       return {
         question: res.question,
-        medias: Array.isArray(res.value) ? res.value.map(value => value.id) : [],
+        medias: Array.isArray(res.value) ? res.value.map(value => value.id) : []
       };
     }
     let value = res.value;
     if (question.type === 'ranking' || question.type === 'button') {
       value = JSON.stringify({
         labels: Array.isArray(res.value) ? res.value : [res.value],
-        other: null,
+        other: null
       });
     } else if (question.type === 'checkbox' || question.type === 'radio') {
       value = JSON.stringify(res.value);
@@ -101,7 +101,7 @@ export const formatSubmitResponses = (
 
 export const formatInitialResponsesValues = (
   questions: Questions,
-  responses: ResponsesFromAPI,
+  responses: ResponsesFromAPI
 ): ResponsesInReduxForm => {
   return questions.map(question => {
     const response = responses.filter(res => res && res.question.id === question.id)[0];
@@ -129,7 +129,7 @@ export const formatInitialResponsesValues = (
         }
         return {
           question: question.id,
-          value: responseValue,
+          value: responseValue
         };
       }
       if (typeof response.medias !== 'undefined') {
@@ -151,7 +151,7 @@ const formattedChoicesInField = field => {
       id: choice.id,
       label: choice.title,
       description: choice.description,
-      color: choice.color,
+      color: choice.color
     };
   });
 };
@@ -162,13 +162,13 @@ export const renderResponses = ({
   responses,
   intl,
   change,
-  disabled,
+  disabled
 }: FieldArrayProps & {
   questions: Questions,
   responses: ResponsesInReduxForm,
   change: (field: string, value: any) => void,
   intl: IntlShape,
-  disabled: boolean,
+  disabled: boolean
 }) => (
   <div>
     {fields.map((member, index) => {

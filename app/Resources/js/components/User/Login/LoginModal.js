@@ -14,7 +14,7 @@ export const LoginModal = React.createClass({
     submitting: PropTypes.bool.isRequired,
     show: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
-    onSubmit: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired
   },
 
   render() {
@@ -49,12 +49,12 @@ export const LoginModal = React.createClass({
         </form>
       </Modal>
     );
-  },
+  }
 });
 
 const mapStateToProps = (state: State) => ({
   submitting: isSubmitting('login')(state),
-  show: state.user.showLoginModal || false,
+  show: state.user.showLoginModal || false
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   onSubmit: (e: Event) => {
@@ -63,7 +63,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
   onClose: () => {
     dispatch(closeLoginModal());
-  },
+  }
 });
 
 const connector = connect(mapStateToProps, mapDispatchToProps);

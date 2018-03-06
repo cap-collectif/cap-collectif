@@ -5,7 +5,7 @@ const ProposalVoteBoxMessage = React.createClass({
   propTypes: {
     step: PropTypes.object.isRequired,
     enoughCredits: PropTypes.bool.isRequired,
-    submitting: PropTypes.bool.isRequired,
+    submitting: PropTypes.bool.isRequired
   },
 
   getMessage() {
@@ -25,7 +25,7 @@ const ProposalVoteBoxMessage = React.createClass({
   render() {
     const message = this.getMessage();
     return message ? <p style={{ marginBottom: '15px' }}>{message}</p> : null;
-  },
+  }
 });
 
 export default ProposalVoteBoxMessage;

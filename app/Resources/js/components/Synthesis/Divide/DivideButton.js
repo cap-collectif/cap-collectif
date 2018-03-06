@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 const DivideButton = React.createClass({
   propTypes: {
     element: React.PropTypes.object,
-    onModal: React.PropTypes.func,
+    onModal: React.PropTypes.func
   },
 
   click() {
@@ -24,7 +24,7 @@ const DivideButton = React.createClass({
         </Button>
       </div>
     );
-  },
+  }
 });
 
 export default DivideButton;

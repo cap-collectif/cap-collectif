@@ -7,7 +7,7 @@ import { reduxForm, Field } from 'redux-form';
 import {
   submitAccountForm as onSubmit,
   resendConfirmation,
-  cancelEmailChange,
+  cancelEmailChange
 } from '../../../redux/modules/user';
 import { isEmail } from '../../../services/Validator';
 import renderComponent from '../../Form/Field';
@@ -16,7 +16,7 @@ import type { State } from '../../../types';
 export const form = 'account';
 const validate = (
   values: { email: ?string },
-  props: { initialValues: { email: string } },
+  props: { initialValues: { email: string } }
 ): { email: ?string } => {
   const errors = {};
   if (!values.email) {
@@ -37,7 +37,7 @@ export const AccountForm = React.createClass({
     initialValues: PropTypes.object.isRequired,
     confirmationEmailResent: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired
   },
 
   render() {
@@ -47,7 +47,7 @@ export const AccountForm = React.createClass({
       handleSubmit,
       confirmationEmailResent,
       error,
-      newEmailToConfirm,
+      newEmailToConfirm
     } = this.props;
     return (
       <form onSubmit={handleSubmit} className="form-horizontal">
@@ -96,21 +96,21 @@ export const AccountForm = React.createClass({
         )}
       </form>
     );
-  },
+  }
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   newEmailToConfirm: state.user.user && state.user.user.newEmailToConfirm,
   confirmationEmailResent: state.user.confirmationEmailResent,
   initialValues: {
-    email: state.user.user && state.user.user.email,
-  },
+    email: state.user.user && state.user.user.email
+  }
 });
 
 export default connect(mapStateToProps)(
   reduxForm({
     form,
     validate,
-    onSubmit,
-  })(AccountForm),
+    onSubmit
+  })(AccountForm)
 );

@@ -17,7 +17,7 @@ type Props = {
   accept: string,
   maxSize: number,
   minSize: number,
-  disablePreview: boolean,
+  disablePreview: boolean
 };
 
 export class ImageUpload extends React.Component<Props> {
@@ -27,7 +27,7 @@ export class ImageUpload extends React.Component<Props> {
     multiple: false,
     maxSize: Infinity,
     minSize: 0,
-    disablePreview: false,
+    disablePreview: false
   };
 
   onDrop = (acceptedFiles: Array<File>) => {
@@ -41,7 +41,7 @@ export class ImageUpload extends React.Component<Props> {
           const newFile = {
             id: res.id,
             name: res.name,
-            url: res.url,
+            url: res.url
           };
           this.uncheckDelete();
           const newValue = multiple ? [...value, newFile] : newFile;
@@ -77,7 +77,7 @@ export class ImageUpload extends React.Component<Props> {
   render() {
     const { className, id, multiple, accept, maxSize, minSize, disablePreview, value } = this.props;
     const classes = {
-      'image-uploader': true,
+      'image-uploader': true
     };
     if (className) {
       classes[className] = true;

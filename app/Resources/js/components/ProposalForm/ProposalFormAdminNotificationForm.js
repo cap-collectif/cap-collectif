@@ -20,7 +20,7 @@ type Props = RelayProps & {
   submitting: boolean,
   valid: boolean,
   submitSucceeded: boolean,
-  submitFailed: boolean,
+  submitFailed: boolean
 };
 
 const formName = 'proposal-form-admin-notification';
@@ -33,7 +33,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const inputs = values;
   inputs.proposalFormId = proposalForm.id;
   return UpdateProposalFormNotificationsConfigurationMutation.commit({
-    input: inputs,
+    input: inputs
   });
 };
 
@@ -47,7 +47,7 @@ export class ProposalFormAdminNotificationForm extends Component<Props> {
       submitting,
       valid,
       submitSucceeded,
-      submitFailed,
+      submitFailed
     } = this.props;
     return (
       <div className="box box-primary container">
@@ -138,11 +138,11 @@ const form = reduxForm({
   onSubmit,
   validate,
   enableReinitialize: true,
-  form: formName,
+  form: formName
 })(ProposalFormAdminNotificationForm);
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
-  initialValues: props.proposalForm.notificationsConfiguration,
+  initialValues: props.proposalForm.notificationsConfiguration
 });
 
 const container = connect(mapStateToProps)(form);
@@ -161,5 +161,5 @@ export default createFragmentContainer(intlContainer, {
         onCommentDelete
       }
     }
-  `,
+  `
 });

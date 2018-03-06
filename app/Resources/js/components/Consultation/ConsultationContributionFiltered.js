@@ -8,7 +8,7 @@ import type { ConsultationContributionFilteredQueryResponse } from './__generate
 
 const renderConsultationPaginated = ({
   error,
-  props,
+  props
 }: { props: ?ConsultationContributionFilteredQueryResponse } & ReadyState) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
@@ -25,7 +25,7 @@ const renderConsultationPaginated = ({
 };
 
 type Props = {
-  consultationId: string,
+  consultationId: string
 };
 
 export class ConsultationContributionFiltered extends React.Component<Props> {

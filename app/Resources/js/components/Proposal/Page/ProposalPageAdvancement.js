@@ -5,7 +5,7 @@ const ProposalPageAdvancement = React.createClass({
   displayName: 'ProposalPageAdvancement',
 
   propTypes: {
-    proposal: PropTypes.object.isRequired,
+    proposal: PropTypes.object.isRequired
   },
 
   render() {
@@ -17,7 +17,7 @@ const ProposalPageAdvancement = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 });
 
 export default ProposalPageAdvancement;

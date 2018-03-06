@@ -11,7 +11,7 @@ const resolvePath = (obj, names) => {
   }
   return {
     obj: current,
-    name: namesArray[lastIndex],
+    name: namesArray[lastIndex]
   };
 };
 
@@ -32,9 +32,9 @@ const DeepLinkStateMixin = {
       requestChange: newValue => {
         setPath(this.state, path, newValue);
         this.forceUpdate();
-      },
+      }
     };
-  },
+  }
 };
 
 export default DeepLinkStateMixin;

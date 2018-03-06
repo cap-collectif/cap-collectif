@@ -9,10 +9,10 @@ describe('<OpinionBox />', () => {
     opinion: {
       title: 'title',
       answer: {},
-      type: { title: 'opinionType', color: 'info' },
+      type: { title: 'opinionType', color: 'info' }
     },
     rankingThreshold: 0,
-    opinionTerm: 0,
+    opinionTerm: 0
   };
 
   it('should render correctly', () => {

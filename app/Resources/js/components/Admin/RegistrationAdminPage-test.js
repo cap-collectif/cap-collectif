@@ -11,7 +11,7 @@ describe('<RegistrationAdminPage />', () => {
     onToggle: jest.fn(),
     reorder: jest.fn(),
     addNewField: jest.fn(),
-    dynamicFields: [],
+    dynamicFields: []
   };
 
   it('renders correctly', () => {

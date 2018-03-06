@@ -6,7 +6,7 @@ import type { State } from '../../../types';
 
 type Props = {
   projects: Array<Object>,
-  hasSecondTitle?: boolean,
+  hasSecondTitle?: boolean
 };
 
 export class ProjectsList extends React.Component<Props> {
@@ -26,6 +26,6 @@ export class ProjectsList extends React.Component<Props> {
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Object) => ({
-  projects: props.projects.map(project => state.project.projectsById[project.id]),
+  projects: props.projects.map(project => state.project.projectsById[project.id])
 });
 export default connect(mapStateToProps)(ProjectsList);

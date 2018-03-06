@@ -28,7 +28,7 @@ ReplyUpdateForm.propTypes = {
   onValidationFailure: PropTypes.func,
   onSubmitSuccess: PropTypes.func,
   onSubmitFailure: PropTypes.func,
-  reply: PropTypes.object.isRequired,
+  reply: PropTypes.object.isRequired
 };
 
 export default ReplyUpdateForm;

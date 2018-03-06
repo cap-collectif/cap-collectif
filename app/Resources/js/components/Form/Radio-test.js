@@ -16,15 +16,15 @@ describe('<Radio />', () => {
       { id: 24, label: 'Maxime Arrouard' },
       { id: 25, label: 'Spylou Super Sayen' },
       { id: 26, label: 'Cyril Lage' },
-      { id: 27, label: 'Superman' },
-    ],
+      { id: 27, label: 'Superman' }
+    ]
   };
   const props = {
     id: 'reply-1',
     label: 'label',
     onChange: jest.fn(),
     getGroupStyle: jest.fn(),
-    renderFormErrors: jest.fn(),
+    renderFormErrors: jest.fn()
   };
 
   it('should render correctly', () => {

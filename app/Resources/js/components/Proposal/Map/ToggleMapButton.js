@@ -8,7 +8,7 @@ import type { State } from '../../../types';
 export const ToggleMapButton = React.createClass({
   propTypes: {
     onChange: PropTypes.func.isRequired,
-    mode: PropTypes.string.isRequired,
+    mode: PropTypes.string.isRequired
   },
 
   handleClick(chooseMode) {
@@ -46,11 +46,11 @@ export const ToggleMapButton = React.createClass({
         </Button>
       </div>
     );
-  },
+  }
 });
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  mode: state.proposal.selectedViewByStep || 'mosaic',
+  mode: state.proposal.selectedViewByStep || 'mosaic'
 });
 
 export default connect(mapStateToProps)(ToggleMapButton);

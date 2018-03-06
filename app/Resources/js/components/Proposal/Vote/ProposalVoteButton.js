@@ -12,7 +12,7 @@ import type { User } from '../../../redux/modules/user';
 
 type Step = {
   id: Uuid,
-  type: string,
+  type: string
 };
 
 type Props = {
@@ -23,11 +23,11 @@ type Props = {
   dispatch: Dispatch,
   id: string,
   userHasVote: boolean,
-  isDeleting: boolean,
+  isDeleting: boolean
 };
 
 type State = {
-  isHovering: boolean,
+  isHovering: boolean
 };
 
 // Should only be used via ProposalVoteButtonWrapper
@@ -35,7 +35,7 @@ export class ProposalVoteButton extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      isHovering: false,
+      isHovering: false
     };
   }
   render() {
@@ -73,14 +73,14 @@ export class ProposalVoteButton extends React.Component<Props, State> {
         onMouseOver={() => {
           if (userHasVote) {
             this.setState({
-              isHovering: true,
+              isHovering: true
             });
           }
         }}
         onMouseOut={() => {
           if (userHasVote) {
             this.setState({
-              isHovering: false,
+              isHovering: false
             });
           }
         }}
@@ -96,7 +96,7 @@ export class ProposalVoteButton extends React.Component<Props, State> {
 const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Props) => ({
   isDeleting: state.proposal.currentDeletingVote === props.proposal.id,
   userHasVote:
-    props.step && state.proposal.userVotesByStepId[props.step.id].includes(props.proposal.id),
+    props.step && state.proposal.userVotesByStepId[props.step.id].includes(props.proposal.id)
 });
 
 export default connect(mapStateToProps)(ProposalVoteButton);

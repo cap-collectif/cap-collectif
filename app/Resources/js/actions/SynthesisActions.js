@@ -10,9 +10,9 @@ export default {
     return Fetcher.get(`/syntheses/${synthesis}`).then(data => {
       AppDispatcher.dispatch({
         actionType: Actions.RECEIVE_SYNTHESIS,
-        synthesis: data,
+        synthesis: data
       });
       return true;
     });
-  },
+  }
 };

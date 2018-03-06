@@ -6,11 +6,11 @@ import ProposalDraftAlert from './ProposalDraftAlert';
 
 describe('<ProposalDraftAlert />', () => {
   const proposal = {
-    isDraft: true,
+    isDraft: true
   };
 
   const proposalNotInDraft = {
-    isDraft: false,
+    isDraft: false
   };
 
   it('should render draft alert', () => {

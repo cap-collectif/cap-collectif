@@ -6,7 +6,7 @@ import { RegistrationButton } from './RegistrationButton';
 
 describe('<RegistrationButton />', () => {
   const props = {
-    openRegistrationModal: jest.fn(),
+    openRegistrationModal: jest.fn()
   };
 
   const style = { marginTop: '0' };
@@ -29,14 +29,14 @@ describe('<RegistrationButton />', () => {
 
   it('renders specified className on button', () => {
     const wrapper = shallow(
-      <RegistrationButton features={{ registration: true }} className="css-class" {...props} />,
+      <RegistrationButton features={{ registration: true }} className="css-class" {...props} />
     );
     expect(wrapper.find('Button').prop('className')).toEqual('btn--registration css-class');
   });
 
   it('renders specified style on wrapper', () => {
     const wrapper = shallow(
-      <RegistrationButton features={{ registration: true }} style={style} {...props} />,
+      <RegistrationButton features={{ registration: true }} style={style} {...props} />
     );
     expect(wrapper.find('span').prop('style')).toEqual(style);
     expect(wrapper.find('Button').prop('style')).toEqual({});
@@ -44,7 +44,7 @@ describe('<RegistrationButton />', () => {
 
   it('renders specified button style on button', () => {
     const wrapper = shallow(
-      <RegistrationButton features={{ registration: true }} buttonStyle={style} {...props} />,
+      <RegistrationButton features={{ registration: true }} buttonStyle={style} {...props} />
     );
     expect(wrapper.find('span').prop('style')).toEqual({});
     expect(wrapper.find('Button').prop('style')).toEqual(style);

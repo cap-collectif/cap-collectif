@@ -11,5 +11,5 @@ export default {
 
   sendSmsCode: data => {
     return Fetcher.post('/sms-confirmation', data);
-  },
+  }
 };

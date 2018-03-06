@@ -17,7 +17,7 @@ const ProposalVoteBox = React.createClass({
     formWrapperClassName: PropTypes.string,
     isSubmitting: PropTypes.bool.isRequired,
     user: PropTypes.object,
-    features: PropTypes.object.isRequired,
+    features: PropTypes.object.isRequired
   },
 
   getDefaultProps() {
@@ -25,7 +25,7 @@ const ProposalVoteBox = React.createClass({
       creditsLeft: null,
       className: '',
       formWrapperClassName: '',
-      user: null,
+      user: null
     };
   },
 
@@ -33,7 +33,7 @@ const ProposalVoteBox = React.createClass({
     const {
       creditsLeft,
       proposal,
-      user,
+      user
       // step,
     } = this.props;
     if (user && creditsLeft !== null && proposal.estimation !== null) {
@@ -55,7 +55,7 @@ const ProposalVoteBox = React.createClass({
       proposal,
       step,
       user,
-      features,
+      features
     } = this.props;
     return (
       <div className={className} id="proposal-vote-box">
@@ -101,7 +101,7 @@ const ProposalVoteBox = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 });
 
 const mapStateToProps = state => ({ features: state.default.features });

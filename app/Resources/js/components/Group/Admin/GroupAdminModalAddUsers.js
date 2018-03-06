@@ -15,7 +15,7 @@ type Props = {
   onClose: Function,
   group: GroupAdminUsers_group,
   dispatch: Dispatch,
-  intl: IntlShape,
+  intl: IntlShape
 };
 
 export class GroupAdminModalAddUsers extends React.Component<Props> {

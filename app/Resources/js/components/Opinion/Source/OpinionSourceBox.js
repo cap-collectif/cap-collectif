@@ -12,14 +12,14 @@ import Filter from '../../Utils/Filter';
 
 const OpinionSourceBox = React.createClass({
   propTypes: {
-    opinion: PropTypes.object.isRequired,
+    opinion: PropTypes.object.isRequired
   },
 
   getInitialState() {
     return {
       sources: [],
       isLoading: true,
-      filter: OpinionSourceStore.filter,
+      filter: OpinionSourceStore.filter
     };
   },
 
@@ -46,13 +46,13 @@ const OpinionSourceBox = React.createClass({
     this.setState({
       sources: OpinionSourceStore.sources,
       filter: OpinionSourceStore.filter,
-      isLoading: false,
+      isLoading: false
     });
   },
 
   handleFilterChange(event) {
     this.setState({
-      filter: event.target.value,
+      filter: event.target.value
     });
   },
 
@@ -84,7 +84,7 @@ const OpinionSourceBox = React.createClass({
         </Loader>
       </div>
     );
-  },
+  }
 });
 
 export default OpinionSourceBox;

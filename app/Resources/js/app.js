@@ -77,7 +77,7 @@ const App = ($ => {
         maxHeight: 720,
         fitToView: false,
         width: '90%',
-        height: '90%',
+        height: '90%'
       });
       return false;
     }); // on
@@ -112,13 +112,13 @@ const App = ($ => {
       const mapOptions = {
         center: new google.maps.LatLng($(el).attr('data-lat'), $(el).attr('data-lng')),
         zoom: 15,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
       };
       const map = new google.maps.Map(el, mapOptions);
 
       // Marker
       const marker = new google.maps.Marker({
-        position: new google.maps.LatLng($(el).attr('data-lat'), $(el).attr('data-lng')),
+        position: new google.maps.LatLng($(el).attr('data-lat'), $(el).attr('data-lng'))
       });
       marker.setMap(map);
     });
@@ -171,7 +171,7 @@ const App = ($ => {
     makeSidebar,
     carousel,
     customModal,
-    skipLinks,
+    skipLinks
   };
 })(jQuery);
 

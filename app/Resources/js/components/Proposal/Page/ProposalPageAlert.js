@@ -6,7 +6,7 @@ const ProposalPageAlert = React.createClass({
   displayName: 'ProposalPageAlert',
 
   propTypes: {
-    proposal: React.PropTypes.object.isRequired,
+    proposal: React.PropTypes.object.isRequired
   },
 
   render() {
@@ -21,7 +21,7 @@ const ProposalPageAlert = React.createClass({
               <FormattedMessage
                 id="proposal.trashed.motive"
                 values={{
-                  motive: proposal.trashedReason,
+                  motive: proposal.trashedReason
                 }}
               />
             </span>
@@ -30,7 +30,7 @@ const ProposalPageAlert = React.createClass({
       );
     }
     return null;
-  },
+  }
 });
 
 export default ProposalPageAlert;

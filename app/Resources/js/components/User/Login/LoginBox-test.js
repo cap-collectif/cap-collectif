@@ -9,7 +9,7 @@ describe('<LoginBox />', () => {
 
   const texts = {
     textTop: 'Texte du haut',
-    textBottom: 'Texte du bas',
+    textBottom: 'Texte du bas'
   };
 
   it('renders', () => {

@@ -9,7 +9,7 @@ import ArgumentButtons from './ArgumentButtons';
 
 const ArgumentItem = React.createClass({
   propTypes: {
-    argument: React.PropTypes.object.isRequired,
+    argument: React.PropTypes.object.isRequired
   },
 
   renderDate() {
@@ -36,7 +36,7 @@ const ArgumentItem = React.createClass({
     const classes = classNames({
       opinion: true,
       'opinion--argument': true,
-      'bg-vip': argument.author && argument.author.vip,
+      'bg-vip': argument.author && argument.author.vip
     });
     return (
       <li className={classes} id={`arg-${argument.id}`}>
@@ -54,7 +54,7 @@ const ArgumentItem = React.createClass({
               overflow: 'hidden',
               float: 'left',
               width: '100%',
-              wordWrap: 'break-word',
+              wordWrap: 'break-word'
             }}>
             <Linkify properties={{ className: 'external-link' }}>{argument.body}</Linkify>
           </p>
@@ -62,7 +62,7 @@ const ArgumentItem = React.createClass({
         </div>
       </li>
     );
-  },
+  }
 });
 
 export default ArgumentItem;

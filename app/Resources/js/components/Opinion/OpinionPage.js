@@ -16,7 +16,7 @@ import Loader from '../Utils/Loader';
 type Props = {
   opinionId: string,
   versionId: ?string,
-  fetchOpinionVotes: Function,
+  fetchOpinionVotes: Function
 };
 type State = {
   opinion: ?Object,
@@ -25,8 +25,8 @@ type State = {
   opinionTerm: number,
   messages: {
     errors: Array<string>,
-    success: Array<string>,
-  },
+    success: Array<string>
+  }
 };
 
 export class OpinionPage extends React.Component<Props, State> {
@@ -37,8 +37,8 @@ export class OpinionPage extends React.Component<Props, State> {
     opinionTerm: 0,
     messages: {
       errors: [],
-      success: [],
-    },
+      success: []
+    }
   };
 
   componentWillMount = () => {
@@ -60,7 +60,7 @@ export class OpinionPage extends React.Component<Props, State> {
         rankingThreshold: OpinionStore.rankingThreshold,
         opinionTerm: OpinionStore.opinionTerm,
         isLoading: false,
-        messages: OpinionStore.messages,
+        messages: OpinionStore.messages
       });
       return;
     }
@@ -107,7 +107,7 @@ export class OpinionPage extends React.Component<Props, State> {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    fetchOpinionVotes: opinionId => dispatch(fetchOpinionVotes(opinionId)),
+    fetchOpinionVotes: opinionId => dispatch(fetchOpinionVotes(opinionId))
   };
 };
 

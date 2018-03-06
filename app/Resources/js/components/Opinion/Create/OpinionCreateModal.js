@@ -19,7 +19,7 @@ type Props = {
   step: Object,
   opinionType: Object,
   submitting: boolean,
-  dispatch: Dispatch,
+  dispatch: Dispatch
 };
 
 export class OpinionCreateModal extends React.Component<Props> {
@@ -81,7 +81,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Object) 
   return {
     show: state.opinion.showOpinionCreateModal === props.opinionType.id,
     submitting: isSubmitting(formName)(state),
-    step: state.project.projectsById[props.projectId].stepsById[props.stepId],
+    step: state.project.projectsById[props.projectId].stepsById[props.stepId]
   };
 };
 

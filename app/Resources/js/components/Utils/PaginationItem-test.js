@@ -6,7 +6,7 @@ import PaginationItem from './PaginationItem';
 
 const props = {
   page: 3,
-  onSelect: () => {},
+  onSelect: () => {}
 };
 
 describe('<PaginationItem />', () => {

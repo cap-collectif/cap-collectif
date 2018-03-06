@@ -6,12 +6,12 @@ import IdeaPageHeaderInfos from './IdeaPageHeaderInfos';
 const IdeaPageHeader = React.createClass({
   propTypes: {
     idea: React.PropTypes.object.isRequired,
-    className: React.PropTypes.string,
+    className: React.PropTypes.string
   },
 
   getDefaultProps() {
     return {
-      className: '',
+      className: ''
     };
   },
 
@@ -19,7 +19,7 @@ const IdeaPageHeader = React.createClass({
     const { idea, className } = this.props;
 
     const classes = {
-      idea__header: true,
+      idea__header: true
     };
     classes[className] = true;
 
@@ -36,7 +36,7 @@ const IdeaPageHeader = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 });
 
 export default IdeaPageHeader;

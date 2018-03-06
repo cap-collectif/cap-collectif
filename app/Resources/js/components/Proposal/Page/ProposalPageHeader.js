@@ -17,12 +17,12 @@ type Props = {
   proposal: ProposalPageHeader_proposal,
   className: string,
   referer: string,
-  oldProposal: Proposal,
+  oldProposal: Proposal
 };
 
 export class ProposalPageHeader extends React.Component<Props> {
   static defaultProps = {
-    className: '',
+    className: ''
   };
 
   render() {
@@ -50,7 +50,7 @@ export class ProposalPageHeader extends React.Component<Props> {
 
     const classes = {
       proposal__header: true,
-      [className]: true,
+      [className]: true
     };
 
     return (
@@ -70,7 +70,7 @@ export class ProposalPageHeader extends React.Component<Props> {
                 id="proposal.infos.header"
                 values={{
                   user: <UserLink user={proposal.author} />,
-                  createdDate,
+                  createdDate
                 }}
               />
               {moment(proposal.updatedAt).diff(proposal.createdAt, 'seconds') > 1 && (
@@ -79,7 +79,7 @@ export class ProposalPageHeader extends React.Component<Props> {
                   <FormattedMessage
                     id="global.edited_on"
                     values={{
-                      updated: updatedDate,
+                      updated: updatedDate
                     }}
                   />
                 </span>
@@ -105,7 +105,7 @@ export class ProposalPageHeader extends React.Component<Props> {
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
   return {
-    referer: state.proposal.referer,
+    referer: state.proposal.referer
   };
 };
 
@@ -132,5 +132,5 @@ export default createFragmentContainer(
       publicationStatus
       show_url
     }
-  `,
+  `
 );

@@ -11,7 +11,7 @@ const AdminModals = React.createClass({
         <UpdateRegistrationQuestionModal />
       </div>
     );
-  },
+  }
 });
 
 export default AdminModals;

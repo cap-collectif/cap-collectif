@@ -12,11 +12,11 @@ import { type GlobalState } from '../../types';
 type Props = {
   step: Object,
   form: Object,
-  userReplies: Array<*>,
+  userReplies: Array<*>
 };
 
 type State = {
-  userReplies: Array<*>,
+  userReplies: Array<*>
 };
 
 export class QuestionnaireStepPage extends React.Component<Props, State> {
@@ -24,7 +24,7 @@ export class QuestionnaireStepPage extends React.Component<Props, State> {
     super(props);
 
     this.state = {
-      userReplies: [],
+      userReplies: []
     };
   }
 
@@ -43,7 +43,7 @@ export class QuestionnaireStepPage extends React.Component<Props, State> {
 
   onChange = () => {
     this.setState({
-      userReplies: ReplyStore.userReplies,
+      userReplies: ReplyStore.userReplies
     });
   };
 
@@ -64,7 +64,7 @@ export class QuestionnaireStepPage extends React.Component<Props, State> {
 const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Props) => ({
   step:
     state.project.currentProjectById &&
-    state.project.projectsById[state.project.currentProjectById].stepsById[props.step.id],
+    state.project.projectsById[state.project.currentProjectById].stepsById[props.step.id]
 });
 
 export default connect(mapStateToProps)(QuestionnaireStepPage);

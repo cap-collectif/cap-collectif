@@ -5,12 +5,12 @@ import nl2br from 'react-nl2br';
 
 const CommentBody = React.createClass({
   propTypes: {
-    comment: React.PropTypes.object,
+    comment: React.PropTypes.object
   },
 
   getInitialState() {
     return {
-      expanded: false,
+      expanded: false
     };
   },
 
@@ -39,7 +39,7 @@ const CommentBody = React.createClass({
 
   expand(expanded) {
     this.setState({
-      expanded,
+      expanded
     });
   },
 
@@ -73,7 +73,7 @@ const CommentBody = React.createClass({
         {this.renderReadMoreOrLess()}
       </div>
     );
-  },
+  }
 });
 
 export default CommentBody;

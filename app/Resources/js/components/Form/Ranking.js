@@ -15,14 +15,14 @@ const Ranking = React.createClass({
     disabled: PropTypes.bool,
     label: PropTypes.any,
     labelClassName: PropTypes.string,
-    isReduxForm: PropTypes.bool.isRequired,
+    isReduxForm: PropTypes.bool.isRequired
   },
 
   getDefaultProps() {
     return {
       disabled: false,
       labelClassName: '',
-      isReduxForm: false,
+      isReduxForm: false
     };
   },
 
@@ -56,11 +56,11 @@ const Ranking = React.createClass({
       getGroupStyle,
       disabled,
       label,
-      renderFormErrors,
+      renderFormErrors
     } = this.props;
     const labelClasses = classNames({
       'control-label': true,
-      [labelClassName]: true,
+      [labelClassName]: true
     });
     return (
       <div className={`form-group ${getGroupStyle(field.id)}`} id={id}>
@@ -78,7 +78,7 @@ const Ranking = React.createClass({
         {renderFormErrors(field.id)}
       </div>
     );
-  },
+  }
 });
 
 export default Ranking;

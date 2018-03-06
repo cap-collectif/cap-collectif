@@ -65,5 +65,5 @@ export default createFragmentContainer(
       ...ProposalFormAdminSettingsForm_proposalForm
       ...ProposalFormAdminEvaluationForm_proposalForm
     }
-  `,
+  `
 );
