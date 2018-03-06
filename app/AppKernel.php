@@ -109,6 +109,9 @@ class AppKernel extends Kernel
 
             // PolyCollection support.
             new \Infinite\FormBundle\InfiniteFormBundle(),
+
+            // ICU translation
+            new \Webfactory\IcuTranslationBundle\WebfactoryIcuTranslationBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

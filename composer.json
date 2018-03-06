@@ -120,6 +120,8 @@
         "overblog/graphql-bundle": "0.9.3"
         "symfony/polyfill-apcu": "^1.7",
         "overblog/graphql-bundle": "0.9.3",
+        "symfony/polyfill-apcu": "^1.7",
+        "webfactory/icu-translation-bundle": "^0.6.1",
         "ruflin/elastica": "~5"
     },
     "require-dev": {

@@ -9886,6 +9886,70 @@
             "time": "2016-01-29T00:19:22+00:00"
         },
         {
+            "name": "webfactory/icu-translation-bundle",
+            "version": "0.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webfactory/WebfactoryIcuTranslationBundle.git",
+                "reference": "026a44956e129b22e43bab926f5a68fb591c7aa6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webfactory/WebfactoryIcuTranslationBundle/zipball/026a44956e129b22e43bab926f5a68fb591c7aa6",
+                "reference": "026a44956e129b22e43bab926f5a68fb591c7aa6",
+                "shasum": ""
+            },
+            "require": {
+                "ext-intl": "*",
+                "jms/parser-lib": "^1.0.0",
+                "lib-icu": ">=4.8",
+                "php": "^5.5.0 | ^7.0.0",
+                "psr/log": "^1.0.0",
+                "symfony/framework-bundle": "~2.2|~3.0"
+            },
+            "require-dev": {
+                "matthiasnoback/symfony-service-definition-validator": "~1.0",
+                "mayflower/php-codebrowser": "~1.1",
+                "pdepend/pdepend": "~1.1.0",
+                "phploc/phploc": "~2.0.0",
+                "phpmd/phpmd": "1.*",
+                "phpunit/phpunit": "~3.7",
+                "satooshi/php-coveralls": "^1.0.0",
+                "sebastian/phpcpd": "~2.0",
+                "squizlabs/php_codesniffer": "1.*",
+                "symfony/monolog-bundle": "~2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Webfactory\\IcuTranslationBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "webfactory GmbH",
+                    "email": "info@webfactory.de",
+                    "homepage": "http://www.webfactory.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Enables ICU message formatting for translations in Symfony applications.",
+            "keywords": [
+                "formatting",
+                "icu",
+                "message",
+                "pluralization",
+                "symfony",
+                "translation",
+                "translator"
+            ],
+            "time": "2016-11-09T12:12:49+00:00"
+        },
+        {
             "name": "webmozart/assert",
             "version": "1.2.0",
             "source": {
