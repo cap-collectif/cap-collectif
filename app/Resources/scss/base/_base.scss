@@ -119,3 +119,35 @@ svg.avatar {
         }
     }
 }
+
+#proposal-follow-btn:focus{
+    background-color: white;
+}
+
+.following-project{
+
+}
+.following-project .panel-body{
+    padding: 0;
+}
+.following-project .panel-body .list-group{
+    margin-bottom: 0;
+    padding-left: 0;
+    border: none;
+}
+.following-project .panel-body .list-group .list-group-item:first-child{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+.following-project .panel-body .list-group .list-group-item:last-child{
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+}
+.following-project .panel-body .list-group .list-group-item{
+    border-left: none;
+    border-right: none;
+}
+
+

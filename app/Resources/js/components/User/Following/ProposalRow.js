@@ -38,12 +38,16 @@ export class ProposalRow extends Component<Props, State> {
     return (
       <Collapse in={this.state.open}>
         <div>
-          <h3>
-            <a href={proposal.show_url}>{proposal.title}</a>
-          </h3>
-          <Button onClick={this.onUnfollowCurrentProposal.bind(this, proposal.id)}>
-            <FormattedMessage id="unfollow" />
-          </Button>
+          <h4>
+            <a href={proposal.show_url} title={proposal.title}>
+              {proposal.title}
+            </a>
+            <Button
+              style={{ float: 'right' }}
+              onClick={this.onUnfollowCurrentProposal.bind(this, proposal.id)}>
+              <FormattedMessage id="unfollow" />
+            </Button>
+          </h4>
         </div>
       </Collapse>
     );

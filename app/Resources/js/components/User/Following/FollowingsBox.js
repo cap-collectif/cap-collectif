@@ -2,8 +2,6 @@
  * @flow
  */
 import React, { Component } from 'react';
-import { Panel } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
 import { QueryRenderer, graphql } from 'react-relay';
 import Loader from '../../Utils/Loader';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
@@ -32,14 +30,14 @@ export class FollowingsBox extends Component<Props> {
       return <Loader />;
     };
     return (
-      <Panel header={<FormattedMessage id="followings" />}>
+      <div>
         <QueryRenderer
           variables={{}}
           environment={environment}
           query={query}
           render={renderFollowingProjectProposal}
         />
-      </Panel>
+      </div>
     );
   }
 }

@@ -47,13 +47,22 @@ export class FollowingsProposals extends Component<Props, State> {
 
     return (
       <div>
+        <h2>
+          <FormattedMessage id="followings" />
+          {projects.length > 0 ? (
+            <Collapse style={{ float: 'right' }} in={this.state.open}>
+              <Button onClick={this.onUnfollowAll.bind(this)}>
+                <FormattedMessage id="unfollow-all" />
+              </Button>
+            </Collapse>
+          ) : (
+            ''
+          )}
+        </h2>
         <div>
           {projects.length > 0 ? (
             <Collapse in={this.state.open}>
               <div>
-                <Button onClick={this.onUnfollowAll.bind(this)}>
-                  <FormattedMessage id="unfollow-all" />
-                </Button>
                 {projects.map((project, id) => {
                   return (
                     <div key={id}>
