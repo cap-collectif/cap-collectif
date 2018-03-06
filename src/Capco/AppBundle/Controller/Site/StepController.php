@@ -12,6 +12,7 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
+use Doctrine\Common\Collections\ArrayCollection;
 use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -315,7 +316,7 @@ class StepController extends Controller
                 if ($question->isRandomQuestionChoices()) {
                     $choices = $question->getQuestionChoices()->toArray();
                     shuffle($choices);
-                    $question->setQuestionChoices($choices);
+                    $question->setQuestionChoices(new ArrayCollection($choices));
                 }
             }
         }

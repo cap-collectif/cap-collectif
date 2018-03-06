@@ -237,7 +237,10 @@ const ReplyForm = React.createClass({
     return (
       <form id="reply-form" ref="form">
         {form.description && (
-          <div style={{ color: 'black' }} dangerouslySetInnerHTML={{ __html: form.description }} />
+          <div
+            style={{ color: 'black', marginBottom: 30 }}
+            dangerouslySetInnerHTML={{ __html: form.description }}
+          />
         )}
         {strategy === 'all_required' && (
           <Alert bsStyle="warning">Tous les champs sont obligatoires</Alert>

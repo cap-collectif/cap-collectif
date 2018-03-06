@@ -329,6 +329,7 @@ export default createFragmentContainer(
       }
       form {
         evaluationForm {
+          description
           questions {
             id
             title

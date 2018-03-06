@@ -63,6 +63,12 @@ export class ProposalPageEvaluation extends React.Component<Props> {
       <div className="container">
         <form onSubmit={handleSubmit}>
           <div>
+            {evaluationForm.description && (
+              <div
+                style={{ color: 'black' }}
+                dangerouslySetInnerHTML={{ __html: evaluationForm.description }}
+              />
+            )}
             <FieldArray
               name="responses"
               component={renderResponses}
@@ -124,6 +130,7 @@ export default createFragmentContainer(
       viewerIsAnEvaluer
       form {
         evaluationForm {
+          description
           questions {
             id
             title

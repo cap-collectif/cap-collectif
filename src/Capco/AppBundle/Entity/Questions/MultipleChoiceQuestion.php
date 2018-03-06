@@ -4,11 +4,10 @@ namespace Capco\AppBundle\Entity\Questions;
 
 use Capco\AppBundle\Entity\QuestionChoice;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * MultipleChoiceQuestion.
- *
  * @ORM\Table(name="multiple_choice_question")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\MultipleChoiceQuestionRepository")
  */
@@ -21,14 +20,14 @@ class MultipleChoiceQuestion extends AbstractQuestion
         self::QUESTION_TYPE_CHECKBOX => 'question.types.checkbox',
         self::QUESTION_TYPE_RANKING => 'question.types.ranking',
     ];
+
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\QuestionChoice", mappedBy="question", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
     protected $questionChoices;
+
     /**
-     * @var bool
-     *
      * @ORM\Column(name="random_question_choices", type="boolean", nullable=false)
      */
     protected $randomQuestionChoices = false;
@@ -57,37 +56,27 @@ class MultipleChoiceQuestion extends AbstractQuestion
     public function __construct()
     {
         $this->questionChoices = new ArrayCollection();
-        unset(self::$questionTypesInputs[self::QUESTION_TYPE_SIMPLE_TEXT], self::$questionTypesInputs[self::QUESTION_TYPE_MULTILINE_TEXT], self::$questionTypesInputs[self::QUESTION_TYPE_EDITOR], self::$questionTypesInputs[self::QUESTION_TYPE_MEDIAS]);
+        unset(
+            self::$questionTypesInputs[self::QUESTION_TYPE_SIMPLE_TEXT],
+            self::$questionTypesInputs[self::QUESTION_TYPE_MULTILINE_TEXT],
+            self::$questionTypesInputs[self::QUESTION_TYPE_EDITOR],
+            self::$questionTypesInputs[self::QUESTION_TYPE_MEDIAS]
+        );
     }
 
-    /**
-     * @return ArrayCollection
-     */
-    public function getQuestionChoices()
+    public function getQuestionChoices(): Collection
     {
         return $this->questionChoices;
     }
 
-    /**
-     * @param ArrayCollection $questionChoices
-     *
-     * @return $this
-     */
-    public function setQuestionChoices($questionChoices)
+    public function setQuestionChoices(Collection $questionChoices): self
     {
         $this->questionChoices = $questionChoices;
 
         return $this;
     }
 
-    /**
-     * Add questionChoice.
-     *
-     * @param QuestionChoice $questionChoice
-     *
-     * @return $this
-     */
-    public function addQuestionChoice(QuestionChoice $questionChoice)
+    public function addQuestionChoice(QuestionChoice $questionChoice): self
     {
         if (!$this->questionChoices->contains($questionChoice)) {
             $this->questionChoices->add($questionChoice);
@@ -97,14 +86,7 @@ class MultipleChoiceQuestion extends AbstractQuestion
         return $this;
     }
 
-    /**
-     * Remove questionChoice.
-     *
-     * @param QuestionChoice $questionChoice
-     *
-     * @return $this
-     */
-    public function removeQuestionChoice(QuestionChoice $questionChoice)
+    public function removeQuestionChoice(QuestionChoice $questionChoice): self
     {
         $this->questionChoices->removeElement($questionChoice);
         $questionChoice->setQuestion(null);
@@ -122,86 +104,47 @@ class MultipleChoiceQuestion extends AbstractQuestion
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isMultipleChoiceQuestion()
+    public function isMultipleChoiceQuestion(): bool
     {
         return true;
     }
 
-    /**
-     * @return bool
-     */
-    public function isRandomQuestionChoices()
+    public function isRandomQuestionChoices(): bool
     {
         return $this->randomQuestionChoices;
     }
 
-    /**
-     * @param bool $randomQuestionChoices
-     *
-     * @return $this
-     */
-    public function setRandomQuestionChoices($randomQuestionChoices)
+    public function setRandomQuestionChoices(bool $randomQuestionChoices): self
     {
         $this->randomQuestionChoices = $randomQuestionChoices;
 
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isOtherAllowed()
+    public function isOtherAllowed(): bool
     {
         return $this->otherAllowed;
     }
 
-    /**
-     * @param bool $otherAllowed
-     *
-     * @return $this
-     */
-    public function setOtherAllowed($otherAllowed)
+    public function setOtherAllowed(bool $otherAllowed): self
     {
         $this->otherAllowed = $otherAllowed;
 
         return $this;
     }
 
-    /**
-     * @return MultipleChoiceQuestionValidationRule
-     */
-    public function getValidationRule()
+    public function getValidationRule(): ? MultipleChoiceQuestionValidationRule
     {
         return $this->hasValidationRule ? $this->validationRule : null;
     }
 
-    /**
-     * @param MultipleChoiceQuestionValidationRule $validationRule
-     *
-     * @return $this
-     */
-    public function setValidationRule(MultipleChoiceQuestionValidationRule $validationRule = null)
+    public function setValidationRule(MultipleChoiceQuestionValidationRule $validationRule = null): self
     {
         if (!$validationRule || !$validationRule->getType() || !$validationRule->getNumber()) {
             $validationRule = null;
         }
         $this->validationRule = $validationRule;
-        $this->hasValidationRule = $validationRule !== null;
-
-        return $this;
-    }
-
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description = null): self
-    {
-        $this->description = $description;
+        $this->hasValidationRule = null !== $validationRule;
 
         return $this;
     }

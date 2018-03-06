@@ -12,6 +12,7 @@ describe('<ProposalPageEvaluation />', () => {
     viewerIsAnEvaluer: true,
     form: {
       evaluationForm: {
+        description: null,
         questions: [
           {
             id: 'question1',

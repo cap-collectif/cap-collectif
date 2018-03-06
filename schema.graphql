@@ -469,6 +469,9 @@ type EvaluationForm {
   # The title of evaluation form (question)
   title: String!
 
+  # The description of evaluation form
+  description: String
+
   # List of questions in the evaluation form
   questions: [Question!]!
 }
@@ -591,6 +594,7 @@ type MultipleChoiceQuestion implements Question {
   private: Boolean!
   required: Boolean!
   helpText: String
+  description: String
   kind: String!
   isOtherAllowed: Boolean!
   choices: [QuestionChoice!]

@@ -18,6 +18,7 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
             },
             "form": Object {
               "evaluationForm": Object {
+                "description": null,
                 "questions": Array [],
               },
             },

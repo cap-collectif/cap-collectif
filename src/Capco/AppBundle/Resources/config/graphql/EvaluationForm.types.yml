@@ -9,6 +9,9 @@ EvaluationForm:
             title:
                 type: "String!"
                 description: "The title of evaluation form (question)"
+            description:
+                type: "String"
+                description: "The description of evaluation form"
             questions:
                 type: "[Question!]!"
                 description: "List of questions in the evaluation form"

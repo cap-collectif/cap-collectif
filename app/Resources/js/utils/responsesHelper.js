@@ -190,18 +190,20 @@ export const renderResponses = ({
       switch (inputType) {
         case 'medias': {
           return (
-            <ProposalPrivateField key={field.id} show={field.private}>
-              <Field
-                name={`${member}.value`}
-                id={member}
-                type="medias"
-                component={component}
-                help={field.helpText}
-                placeholder="reply.your_response"
-                label={label}
-                disabled={disabled}
-              />
-            </ProposalPrivateField>
+            <div>
+              <ProposalPrivateField key={field.id} show={field.private}>
+                <Field
+                  name={`${member}.value`}
+                  id={member}
+                  type="medias"
+                  component={component}
+                  help={field.helpText}
+                  placeholder="reply.your_response"
+                  label={label}
+                  disabled={disabled}
+                />
+              </ProposalPrivateField>
+            </div>
           );
         }
         default: {
@@ -220,40 +222,44 @@ export const renderResponses = ({
             choices = formattedChoicesInField(field);
             if (inputType === 'radio') {
               return (
-                <ProposalPrivateField key={field.id} show={field.private}>
-                  <div key={`${member}-container`}>
-                    <MultipleChoiceRadio
-                      id={member}
-                      name={member}
-                      helpText={field.helpText}
-                      isOtherAllowed={isOtherAllowed}
-                      label={label}
-                      change={change}
-                      choices={choices}
-                      value={response}
-                      disabled={disabled}
-                    />
-                  </div>
-                </ProposalPrivateField>
+                <div>
+                  <ProposalPrivateField key={field.id} show={field.private}>
+                    <div key={`${member}-container`}>
+                      <MultipleChoiceRadio
+                        id={member}
+                        name={member}
+                        helpText={field.helpText}
+                        isOtherAllowed={isOtherAllowed}
+                        label={label}
+                        change={change}
+                        choices={choices}
+                        value={response}
+                        disabled={disabled}
+                      />
+                    </div>
+                  </ProposalPrivateField>
+                </div>
               );
             }
           }
 
           return (
-            <ProposalPrivateField key={field.id} show={field.private}>
-              <Field
-                name={`${member}.value`}
-                id={member}
-                type={inputType}
-                component={component}
-                help={field.helpText}
-                isOtherAllowed={isOtherAllowed}
-                placeholder="reply.your_response"
-                choices={choices}
-                label={label}
-                disabled={disabled}
-              />
-            </ProposalPrivateField>
+            <div>
+              <ProposalPrivateField key={field.id} show={field.private}>
+                <Field
+                  name={`${member}.value`}
+                  id={member}
+                  type={inputType}
+                  component={component}
+                  help={field.helpText}
+                  isOtherAllowed={isOtherAllowed}
+                  placeholder="reply.your_response"
+                  choices={choices}
+                  label={label}
+                  disabled={disabled}
+                />
+              </ProposalPrivateField>
+            </div>
           );
         }
       }

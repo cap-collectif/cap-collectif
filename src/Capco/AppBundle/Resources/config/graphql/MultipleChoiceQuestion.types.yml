@@ -20,6 +20,8 @@ MultipleChoiceQuestion:
                 type: "Boolean!"
             helpText:
                 type: "String"
+            description:
+                type: "String"
             kind:
                 type: "String!"
                 resolve: "multiple_choice"

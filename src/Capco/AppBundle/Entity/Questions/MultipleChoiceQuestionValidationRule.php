@@ -6,8 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * MultipleChoiceQuestionValidationRule.
- *
  * @ORM\Embeddable
  *
  * Make all fields nullable is currently the only way to make the VO nullable
@@ -21,14 +19,12 @@ final class MultipleChoiceQuestionValidationRule
     ];
 
     /**
-     * @var string
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Choice(choices={"min", "max", "equal"})
      */
     private $type;
 
     /**
-     * @var string
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\Range(min=1)
      */
@@ -39,7 +35,7 @@ final class MultipleChoiceQuestionValidationRule
     {
     }
 
-    public static function create($type, $number)
+    public static function create(string $type = null, int $number = null): self
     {
         $rule = new self();
         $rule->type = $type;
@@ -48,18 +44,12 @@ final class MultipleChoiceQuestionValidationRule
         return $rule;
     }
 
-    /**
-     * @return string
-     */
-    public function getType()
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    /**
-     * @return string
-     */
-    public function getNumber()
+    public function getNumber(): ?int
     {
         return $this->number;
     }
