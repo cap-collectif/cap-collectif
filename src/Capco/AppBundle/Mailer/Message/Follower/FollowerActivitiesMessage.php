@@ -38,7 +38,7 @@ final class FollowerActivitiesMessage extends DefaultMessage
     private static function getMySubjectVars(string $siteName): array
     {
         return [
-            'siteName' => $siteName,
+            '{siteName}' => $siteName,
         ];
     }
 
@@ -54,6 +54,11 @@ final class FollowerActivitiesMessage extends DefaultMessage
             'username' => $username,
             'siteName' => $siteName,
             'timezone' => $sendAt->getTimezone(),
+            'to' => self::escape('assistance@cap-collectif.com'),
+            'sitename' => $siteName,
+            'siteUrl' => '',
+            'business' => 'Cap Collectif',
+            'businessUrl' => 'https://cap-collectif.com/',
         ];
     }
 }

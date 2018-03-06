@@ -1,11 +1,12 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+    {% set siteName = capco_site_parameter_value('global.site.fullname') %}
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Affichage du zoom avant pour les mobiles -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Active les media queries pour Windows Phone 8 -->
-    <meta name="format-detection" content="telephone=no"> <!-- Désactive les liens bleus des numéros de téléphone sous iOS -->
-    <title>Responsive & Flat - Un kit pour newsletters gratuit et libre</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    <title>{{ 'your-activity-summary-of'|trans({'{siteName}': siteName}, 'CapcoAppBundle') }}</title>
     <style type="text/css" media="screen">
 
         .ExternalClass * {line-height:100%}
@@ -36,24 +37,19 @@
             hr[class=resp-hr-center] {text-align: center !important; margin-left:auto !important; margin-right:auto !important;}
         }
 
-        /* Fin style responsive */
-
     </style>
 </head>
 <body>
 <div align="center" style="">
     {% set activitiesDate =  sendAt|localizeddate('long', 'none', 'fr_FR', timezone)  %}
-    {% set siteName = capco_site_parameter_value('global.site.fullname') %}
     <table id="email-penrose-conteneur" width="660" align="center" style="margin: 20px; background-color:#ffffff;" border="0" cellspacing="0" cellpadding="0">
         <tr>
             <td>
                 <table width="660" class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                         <td class="resp-full-td" valign="top" style="margin:0 20px; text-align:center;">
-                            <a class="resp-punchline" href="#" style="color:#337ab7; outline:none; text-decoration:none; font-size:20px; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">{{ siteName }}
-                            </a>
-                            <h1 class="resp-punchline" style="color:#000000; outline:none; text-decoration:none; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">  {{ 'summary-of-activities'|trans({},'CapcoAppBundle') }}
-                            </h1>
+                            <a class="resp-punchline" href="#" style="color:#337ab7; outline:none; text-decoration:none; font-size:20px; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">{{ siteName }}</a>
+                            <h1 class="resp-punchline" style="color:#000000; outline:none; text-decoration:none; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">  {{ 'summary-of-activities'|trans({},'CapcoAppBundle') }}</h1>
                             <span class="resp-punchline" style="color:#999999; outline:none; font-size:12px; text-decoration:none; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">
 								{{ activitiesDate }}
 							</span>
@@ -79,7 +75,7 @@
                                         <td class="resp-full-td-center" valign="top" style="padding:20px; text-align:center;background-color: #f3f3f3;">
                                             <span class="resp-punchline" style="color:#999999; outline:none; font-size:14px; text-decoration:bold; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;"> {{ 'admin.fields.highlighted_content.project'|trans({},'CapcoAppBundle') }}</span>
                                             <h2 class="resp-punchline" style="color:#337ab7; outline:none; text-decoration:none; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">{{ project.projectTitle }}</h2>
-                                            <h3 class="resp-punchline" style="color:#6aa84f; outline:none; text-decoration:none; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">{{ 'new-activity'|trans({'{num}': 5}, 'CapcoAppBundle') }}</h3>
+                                            <h3 class="resp-punchline" style="color:#6aa84f; outline:none; text-decoration:none; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">{{ 'new-activity'| transchoice(project.countActivities, {'%num%': project.countActivities}, 'CapcoAppBundle') }}</h3>
                                         </td>
                                     </tr>
                                 </table>
@@ -108,13 +104,15 @@
                                                         <li>Proposition supprimée</li>
                                                     {% endif %}
                                                     {% if proposal.votes > 0 %}
-                                                        <li>🗳<b>{{ proposal.votes }}</b> nouveaux votes</li>
+                                                        <li>🗳 {{ 'new-vote'| transchoice(proposal.votes, {'%num%':  proposal.votes}, 'CapcoAppBundle') }}</li>
                                                     {% endif %}
                                                     {% if proposal.comments > 0 %}
-                                                        <li>💬<b>{{ proposal.comments }}</b> nouveaux commentaires</li>
+                                                        <li>💬 {{ 'new-comment'| transchoice(proposal.comments, {'%num%':  proposal.comments}, 'CapcoAppBundle') }}</li>
                                                     {% endif %}
-                                                    {% if proposal.lastStep %}
-                                                        <li>✔️ Est passé à l'étape <b>{{proposal.lastStep.titleStep }}</b> avec le status <b>{{ proposal.lastStep.sName}}</b></li>
+                                                    {% if proposal.lastStep and proposal.lastStep.sName %}
+                                                        <li>✔️ {{ 'moving-to-the-step'|trans({'{titleStep}': proposal.lastStep.titleStep, '{statusName}': proposal.lastStep.sName}, 'CapcoAppBundle') }}</li>
+                                                    {% elseif proposal.lastStep  %}
+                                                        <li>✔️ {{ 'moving-to-the-step'|trans({'{titleStep}': proposal.lastStep.titleStep}, 'CapcoAppBundle') }}</li>
                                                     {% endif %}
                                                 </ul>
                                             </td>
@@ -137,8 +135,7 @@
                             <span>{{ 'you-receive-this-email-because'|trans({}, 'CapcoAppBundle') }}</span>
                             <span>{{ 'you-follow-these-proposals'|trans({}, 'CapcoAppBundle') }}</span><br>
                             <span><a href="">{{ 'set-up-my-subscriptions'|trans({}, 'CapcoAppBundle') }}</a></span>
-                            <hr align="left" style="margin-left:0px; text-align:left; background-color:#aeb2b3; color:#aeb2b3; height: 1px; border: 0 none;" />
-                            <span style="font-size:12px; font-family:'Helvetica Neue', helvetica, arial, sans-serif; color:#aeb2b3">{{ 'notification.email.moderator_footer'|trans({}, 'CapcoAppBundle') }}</span>
+                            <span style="font-size:12px; font-family:'Helvetica Neue', helvetica, arial, sans-serif; color:#aeb2b3">{{ 'notification.email.moderator_footer'|trans({'{to}': to, '{sitename}': siteName, '{business}': business, '{siteUrl}': siteUrl, '{businessUrl}': businessUrl}, 'CapcoAppBundle') | raw }}</span>
                         </td>
                     </tr>
                 </table>
