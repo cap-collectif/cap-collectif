@@ -35,8 +35,10 @@ class ProposalPageComments extends React.Component<Props> {
           environment={environment}
           query={graphql`
             query ProposalPageCommentsQuery($id: ID!) {
-              proposalForm(id: $id) {
-                commentable
+              proposalForm: node(id: $id) {
+                ... on ProposalForm {
+                  commentable
+                }
               }
             }
           `}

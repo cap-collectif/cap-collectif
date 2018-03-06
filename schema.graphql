@@ -1053,7 +1053,7 @@ type ProposalEvaluation {
 }
 
 # A budget form
-type ProposalForm {
+type ProposalForm implements Node {
   id: ID!
   reference: String!
   description: String

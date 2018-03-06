@@ -65,7 +65,7 @@ export class ProposalCreate extends React.Component<Props> {
               environment={environment}
               query={graphql`
                 query ProposalCreateQuery($proposalFormId: ID!) {
-                  proposalForm(id: $proposalFormId) {
+                  proposalForm: node(id: $proposalFormId) {
                     ...ProposalForm_proposalForm
                   }
                 }
