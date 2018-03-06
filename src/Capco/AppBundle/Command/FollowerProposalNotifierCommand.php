@@ -125,6 +125,8 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
                             continue;
                         }
                         $project = $userActivity->getUserProject($proposal['projectId']);
+                        $project['countActivities'] += $proposal['countActivities'];
+
                         if (!isset($project['proposals'])) {
                             $project['proposals'] = [];
                         }
@@ -213,7 +215,6 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
                 $currentProposal['lastStep'] = !empty($proposalStepInYesterday) ? $proposalStepInYesterday[0] : false;
                 $currentProposal['projectId'] = $projectId;
                 $currentProposal['countActivities'] = $this->countProposalActivities($currentProposal);
-                $projects[$projectId]['countActivities'] += $currentProposal['countActivities'];
                 if (0 === $currentProposal['countActivities']) {
                     unset($currentProposal);
                 } else {
