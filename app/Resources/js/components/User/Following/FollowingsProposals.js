@@ -1,39 +1,81 @@
 /**
  * @flow
  */
-import React, {Component} from 'react';
-import {graphql, createFragmentContainer} from 'react-relay';
-import type {FollowingsProposals_viewer} from './__generated__/FollowingsProposals_viewer.graphql'
-import ProjectRow from "./ProjectRow";
+import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
+import { Button, Collapse } from 'react-bootstrap';
+import { graphql, createFragmentContainer } from 'react-relay';
+import type { FollowingsProposals_viewer } from './__generated__/FollowingsProposals_viewer.graphql';
+import ProjectRow from './ProjectRow';
+import UnfollowProposalMutation from '../../../mutations/UnfollowProposalMutation';
 
 type Props = {
-  viewer: FollowingsProposals_viewer
+  viewer: FollowingsProposals_viewer,
+};
+type State = {
+  open: boolean,
 };
 
-
-export class FollowingsProposals extends Component<Props> {
-  constructor(props, context) {
-    super(props, context);
+export class FollowingsProposals extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
 
     this.state = {
-      open: true
+      open: true,
     };
   }
+
+  onUnfollowAll() {
+    const { viewer } = this.props;
+    const ids = viewer.followingProposals.map(proposal => {
+      return proposal.id;
+    });
+
+    this.setState({ open: !this.state.open }, () => {
+      UnfollowProposalMutation.commit({ input: { ids } }).then(() => {
+        return true;
+      });
+    });
+  }
+
   render() {
     const { viewer } = this.props;
     const projects = [];
     viewer.followingProposals.map(proposal => {
-      projects[proposal.project.id] = proposal.project;
+      projects[parseInt(proposal.project.id, 10)] = proposal.project;
     });
+
     return (
       <div>
-        {projects.map((project, id) => {
-          return (
-            <div key={id}>
-              <ProjectRow project={project} viewer={viewer}/>
+        <div>
+          {projects.length > 0 ? (
+            <Collapse in={this.state.open}>
+              <div>
+                <Button onClick={this.onUnfollowAll.bind(this)}>
+                  <FormattedMessage id="unfollow-all" />
+                </Button>
+                {projects.map((project, id) => {
+                  return (
+                    <div key={id}>
+                      <ProjectRow project={project} viewer={viewer} />
+                    </div>
+                  );
+                })}
+              </div>
+            </Collapse>
+          ) : (
+            <div>
+              <FormattedMessage id="no-following" />
             </div>
-          );
-        })}
+          )}
+        </div>
+        <div>
+          <Collapse in={!this.state.open}>
+            <div>
+              <FormattedMessage id="no-following" />
+            </div>
+          </Collapse>
+        </div>
       </div>
     );
   }
