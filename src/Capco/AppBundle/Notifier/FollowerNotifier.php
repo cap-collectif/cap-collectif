@@ -46,7 +46,9 @@ final class FollowerNotifier extends BaseNotifier
                 'notifier@cap-collectif.com',
                 $userActivity->getUserProjects(),
                 $sendAt,
-                $siteName
+                $siteName,
+                $siteUrl,
+                $userActivity->getUrlManagingFollowings()
             )
         );
     }

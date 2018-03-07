@@ -46,8 +46,9 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
         $followersWithActivities = $this->orderUserProposalActivitiesInProject($followersWithActivities, $proposalActivities['projects'], $proposalActivities['proposals']);
         unset($proposalActivities);
         $sendAt = (new \DateTime('yesterday'))->setTimezone(new \DateTimeZone('Europe/Paris'));
+        $siteUrl = $container->get('router')->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL);
         foreach ($followersWithActivities as $userId => $userActivity) {
-            $notifier->onReportActivities($userActivity, $sendAt, $siteName);
+            $notifier->onReportActivities($userActivity, $sendAt, $siteName, $siteUrl);
         }
         $nbNewsletters = count($followersWithActivities);
         $output->writeln(
@@ -88,6 +89,8 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
                 continue;
             }
             if (!isset($followersWithActivities[$userId])) {
+                $unfollowingPage = $container->get('router')->generate('capco_profile_followings_login', ['token' => $user->getNotificationsConfiguration()->getUnsubscribeToken()],
+                    UrlGeneratorInterface::ABSOLUTE_URL);
                 $userActivity = new UserActivity();
                 $userActivity->setId($userId);
                 $userActivity->setEmail($user->getEmailCanonical());
@@ -96,7 +99,7 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
                 $userActivity->setLastname($user->getLastname());
                 $userActivity->addUserProposal($proposalId);
                 $userActivity->setNotifiedOf($follower->getNotifiedOf());
-                $userActivity->setConnectionToken($user->getNotificationsConfiguration()->getUnsubscribeToken());
+                $userActivity->setUrlManagingFollowings($unfollowingPage);
                 /* UserActivity */
                 $followersWithActivities[$userId] = $userActivity;
                 continue;
