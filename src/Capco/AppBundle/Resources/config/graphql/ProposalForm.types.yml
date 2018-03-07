@@ -2,7 +2,7 @@ ProposalForm:
     type: object
     config:
         description: "A budget form"
-        # interfaces: [Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
+        interfaces: [Node]
         fields:
             id:
                 type: "ID!"

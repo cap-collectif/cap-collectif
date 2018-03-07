@@ -7,11 +7,13 @@ Scenario: GraphQL client wants to retrieve questions
   When I send a GraphQL request:
   """
   {
-      questionnaire(id: 1) {
-        questions {
-          id
-       }
-    }
+      questionnaire: node(id: "1") {
+        ... on Questionnaire {
+          questions {
+            id
+          }
+        }
+      }
   }
   """
   Then the JSON response should match:

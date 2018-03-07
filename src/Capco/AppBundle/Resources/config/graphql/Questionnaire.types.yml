@@ -1,9 +1,10 @@
 Questionnaire:
     type: object
     config:
+        interfaces: [Node]
         fields:
             id:
-                type: "String!"
+                type: "ID!"
             title:
                 type: "String!"
             questions:

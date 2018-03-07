@@ -1,11 +1,12 @@
 Group:
     type: object
     config:
-        description: "A list of groups"
+        interfaces: [Node]
+        description: "A group of User"
         fields:
             id:
                 type: "ID!"
-                description: "The content of the group."
+                description: "The id of the group."
             title:
                 type: "String!"
                 description: "Identifies the group name."

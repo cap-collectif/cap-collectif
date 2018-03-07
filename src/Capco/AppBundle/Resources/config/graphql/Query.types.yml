@@ -5,13 +5,14 @@ Query:
             viewer:
                 access: "@=isAuthenticated()"
                 type: "User!"
-                description: "Get currently logged in user"
+                description: "The currently authenticated user."
                 resolve: "@=user"
             users:
-                type: "[User]"
+                type: "[User!]!"
                 args:
                     superAdmin:
-                        type: "Boolean!"
+                        type: "Boolean"
+                        defaultValue: false
                         description: "Remove super admin from export."
                 resolve: "@=resolver('user', [args])"
             consultations:
@@ -29,11 +30,6 @@ Query:
                 type: "[ProposalForm!]!"
                 access: "@=hasRole('ROLE_USER')"
                 resolve: "@=resolver('proposalForms')"
-            notificationsConfiguration:
-                access: "@=isAuthenticated()"
-                type: "UserNotificationsConfiguration"
-                description: "Get a user notifications configuration"
-                resolve: "@=resolver('user_notifications_configuration', [user])"
             availableDistrictsForLocalisation:
                 type: "[District!]!"
                 description: "Retrieve availables districts for a given address"
@@ -46,20 +42,20 @@ Query:
                         type: "Float!"
                 resolve: "@=resolver('query_available_districts_for_location', [args['proposalFormId'], args['latitude'], args['longitude']])"
             votesByContribution:
-                type: "[PropositionVote]"
+                type: "[PropositionVote!]!"
                 args:
                     contribution:
-                        type: "Int!"
+                        type: "ID!"
                 resolve: "@=resolver('votesByContribution', [args])"
             contributions:
-                type: "[Opinion]"
+                type: "[Opinion!]!"
                 args:
                     consultation:
                         description: "Returns all contributions of the provided consultation."
                         type: "ID!"
                 resolve: "@=resolver('contributions', [args])"
             contributionsBySection:
-                type: "[Opinion]"
+                type: "[Opinion!]!"
                 args:
                     sectionId:
                         type: "ID!"
@@ -67,24 +63,6 @@ Query:
                         description: "Max depth."
                         type: "Int!"
                 resolve: "@=resolver('contributionsBySection', [args])"
-            section:
-                type: "Section"
-                args:
-                    id:
-                        type: "ID!"
-                resolve: "@=resolver('query_section', [args])"
-            proposal:
-                type: "Proposal!"
-                args:
-                    id:
-                        type: "ID!"
-                resolve: "@=resolver('query_proposal', [args['id'], user])"
-            proposalForm:
-                type: "ProposalForm!"
-                args:
-                    id:
-                        type: "ID!"
-                resolve: "@=resolver('query_proposalForm', [args])"
             question:
                 type: "Question!"
                 args:
@@ -92,24 +70,25 @@ Query:
                         type: "Int!"
                 resolve: "@=resolver('query_question', [args])"
             availableQuestionnaires:
-                type: "[Questionnaire!]"
+                type: "[Questionnaire!]!"
                 resolve: "@=resolver('query_get_available_questionnaires')"
             draftProposalsForUserInStep:
-                type: "[Proposal!]"
+                type: "[Proposal!]!"
                 access: "@=hasRole('ROLE_USER')"
                 args:
                     stepId:
                         type: "ID!"
                 resolve: "@=resolver('query_get_draft_proposals_for_user_in_step', [args['stepId'], user])"
-            group:
-                type: "Group!"
+            node:
+                builder: "Relay::Node"
+                builderConfig:
+                    nodeInterfaceType: Node
+                    idFetcher: '@=resolver("query_node", [value, user])'
+            nodes:
+                type: "[Node]!"
+                description: "Lookup nodes by a list of IDs."
                 args:
-                    id:
-                        type: "ID!"
-                resolve: "@=resolver('query_group', [args['id'], user])"
-            questionnaire:
-                type: "Questionnaire"
-                args:
-                    id:
-                        type: "ID!"
-                resolve: "@=resolver('query_questionnaire', [args['id']])"
+                    ids:
+                        type: "[ID!]!"
+                        description: "The list of node IDs."
+                resolve: "@=resolver('query_nodes', [args['ids'], user])"

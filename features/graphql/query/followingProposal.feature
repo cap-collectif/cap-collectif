@@ -8,9 +8,11 @@ Scenario: GraphQL client wants to get list of users who following a proposal
   """
   {
     "query": "query getFollowers ($proposalId: ID!){
-      proposal(id: $proposalId) {
-        followers {
-          id
+      proposal: node(id: $proposalId) {
+        ... on Proposal {
+          followers {
+            id
+          }
         }
       }
     }",
@@ -77,20 +79,22 @@ Scenario: I'm on a proposal and GraphQL want to know the total number of proposa
   """
   {
     "query": "query ($proposalId: ID!, $count: Int, $cursor: String) {
-      proposal(id: $proposalId) {
+      proposal: node(id: $proposalId) {
         id
-        followerConnection(first: $count, after: $cursor) {
-          edges {
-            cursor
-            node {
-              id
+        ... on Proposal {
+          followerConnection(first: $count, after: $cursor) {
+            edges {
+              cursor
+              node {
+                id
+              }
             }
+            pageInfo {
+              hasNextPage
+              endCursor
+            }
+            totalCount
           }
-          pageInfo {
-            hasNextPage
-            endCursor
-          }
-          totalCount
         }
       }
     }",
@@ -135,20 +139,22 @@ Scenario: I'm on qqa proposal and I want to load 32 followers from a cursor
   """
   {
     "query": "query ($proposalId: ID!, $count: Int, $cursor: String) {
-      proposal(id: $proposalId) {
+      proposal: node(id: $proposalId) {
         id
-        followerConnection(first: $count, after: $cursor) {
-          edges {
-            cursor
-            node {
-              id
+        ... on Proposal {
+          followerConnection(first: $count, after: $cursor) {
+            edges {
+              cursor
+              node {
+                id
+              }
             }
+            pageInfo {
+              hasNextPage
+              endCursor
+            }
+            totalCount
           }
-          pageInfo {
-            hasNextPage
-            endCursor
-          }
-          totalCount
         }
       }
     }",

@@ -15,7 +15,7 @@ type AddUsersInGroupPayload {
 scalar Address
 
 # An argument
-type Argument implements Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
+type Argument implements Node & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
   # Identifies the date and time when the object was created.
   createdAt: String!
 
@@ -220,7 +220,7 @@ type ChangeUserNotificationsConfigurationPayload {
   clientMutationId: String
 }
 
-type CollectStep implements Step {
+type CollectStep implements Node & Step {
   id: ID!
   kind: String!
   title: String!
@@ -230,7 +230,7 @@ type CollectStep implements Step {
 }
 
 # A consultation
-type Consultation implements Step {
+type Consultation implements Node & Step {
   kind: String!
 
   # The id of the consultation.
@@ -518,9 +518,9 @@ type FollowerEdge {
 
 scalar GeoJSON
 
-# A list of groups
-type Group {
-  # The content of the group.
+# A group of User
+type Group implements Node {
+  # The id of the group.
   id: ID!
 
   # Identifies the group name.
@@ -638,6 +638,12 @@ type Mutation {
   addUsersInGroup(input: AddUsersInGroupInput!): AddUsersInGroupPayload
 }
 
+# Fetches an object given its ID
+interface Node {
+  # The ID of an object
+  id: ID!
+}
+
 # A notifications configuration
 type NotificationsConfiguration {
   onCreate: Boolean!
@@ -649,7 +655,7 @@ type NotificationsConfiguration {
 }
 
 # A contribution
-type Opinion implements Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
+type Opinion implements Node & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
   # Identifies the date and time when the object was created.
   createdAt: String!
 
@@ -885,14 +891,15 @@ input ProgressStepInput {
   endAt: DateTime
 }
 
-# A budget contribution
-type Project {
+# A participatory project.
+type Project implements Node {
+  id: ID!
   steps: [Step!]!
   title: String!
 }
 
 # A budget contribution
-type Proposal {
+type Proposal implements Node {
   # The HTTP show url for this contribution.
   show_url: URI!
 
@@ -930,8 +937,8 @@ type Proposal {
   publicationStatus: PublicationStatus!
   trashedReason: String
 
-  # The content of the contribution.
-  id: String!
+  # The id of the contribution.
+  id: ID!
 
   # The unique reference of proposal
   reference: String!
@@ -1046,7 +1053,7 @@ type ProposalEvaluation {
 }
 
 # A budget form
-type ProposalForm {
+type ProposalForm implements Node {
   id: ID!
   reference: String!
   description: String
@@ -1137,12 +1144,12 @@ enum PublicationStatus {
 }
 
 type Query {
-  # Get currently logged in user
+  # The currently authenticated user.
   viewer: User!
   users(
     # Remove super admin from export.
-    superAdmin: Boolean!
-  ): [User]
+    superAdmin: Boolean = false
+  ): [User!]!
   consultations(
     # If omitted, returns all consultations. If provided, returns the consultation of the particular id.
     id: ID
@@ -1150,30 +1157,34 @@ type Query {
   groups: [Group!]!
   proposalForms: [ProposalForm!]!
 
-  # Get a user notifications configuration
-  notificationsConfiguration: UserNotificationsConfiguration
-
   # Retrieve availables districts for a given address
   availableDistrictsForLocalisation(proposalFormId: ID!, latitude: Float!, longitude: Float!): [District!]!
-  votesByContribution(contribution: Int!): [PropositionVote]
+  votesByContribution(contribution: ID!): [PropositionVote!]!
   contributions(
     # Returns all contributions of the provided consultation.
     consultation: ID!
-  ): [Opinion]
+  ): [Opinion!]!
   contributionsBySection(
     sectionId: ID!
 
     # Max depth.
     limit: Int!
-  ): [Opinion]
-  section(id: ID!): Section
-  proposal(id: ID!): Proposal!
-  proposalForm(id: ID!): ProposalForm!
+  ): [Opinion!]!
   question(id: Int!): Question!
-  availableQuestionnaires: [Questionnaire!]
-  draftProposalsForUserInStep(stepId: ID!): [Proposal!]
-  group(id: ID!): Group!
-  questionnaire(id: ID!): Questionnaire
+  availableQuestionnaires: [Questionnaire!]!
+  draftProposalsForUserInStep(stepId: ID!): [Proposal!]!
+
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
+
+  # Lookup nodes by a list of IDs.
+  nodes(
+    # The list of node IDs.
+    ids: [ID!]!
+  ): [Node]!
 }
 
 interface Question {
@@ -1296,7 +1307,7 @@ input ResponseInput {
 }
 
 # A section
-type Section {
+type Section implements Node {
   # The id of the section.
   id: ID!
 
@@ -1415,7 +1426,7 @@ type SimpleQuestion implements Question {
 }
 
 # A source
-type Source implements Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
+type Source implements Node & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
   # Identifies the date and time when the object was created.
   createdAt: String!
 
@@ -1597,8 +1608,8 @@ type UpdateProposalFusionPayload {
   clientMutationId: String
 }
 
-# A user
-type User {
+# A user is an individual's account.
+type User implements Node {
   # The id of the user.
   id: ID!
   vip: Boolean!

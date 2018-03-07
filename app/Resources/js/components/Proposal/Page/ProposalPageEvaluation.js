@@ -65,7 +65,7 @@ export class ProposalPageEvaluation extends React.Component<Props> {
           <div>
             {evaluationForm.description && (
               <div
-                style={{ color: 'black', marginBottom: 30 }}
+                style={{ color: 'black' }}
                 dangerouslySetInnerHTML={{ __html: evaluationForm.description }}
               />
             )}

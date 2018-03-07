@@ -59,7 +59,7 @@ export class ProposalPage extends React.Component<Props> {
           environment={environment}
           query={graphql`
             query ProposalPageQuery($proposalId: ID!, $count: Int!, $cursor: String) {
-              proposal(id: $proposalId) {
+              proposal: node(id: $proposalId) {
                 ...ProposalPageTabs_proposal
                 ...ProposalPageHeader_proposal
               }
