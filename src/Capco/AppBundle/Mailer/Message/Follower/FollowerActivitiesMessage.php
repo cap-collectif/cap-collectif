@@ -11,10 +11,11 @@ final class FollowerActivitiesMessage extends DefaultMessage
         Contribution $contribution,
         string $recipentEmail,
         string $recipientName = null,
-        string $senderEmail = null,
         array $userProjectsActivities,
         \DateTime $sendAt,
-        $siteName
+        string $siteName,
+        string $siteUrl,
+        string $urlManagingFollowings
     ): self {
         $message = new self(
             $recipentEmail,
@@ -26,7 +27,10 @@ final class FollowerActivitiesMessage extends DefaultMessage
                 $userProjectsActivities,
                 $sendAt,
                 $recipientName,
-                $siteName
+                $siteName,
+                $siteUrl,
+                $urlManagingFollowings,
+                $recipentEmail
             ),
             null,
             $siteName
@@ -46,7 +50,10 @@ final class FollowerActivitiesMessage extends DefaultMessage
         array $userProjectsActivities,
         \DateTime $sendAt,
         string $username,
-        string $siteName
+        string $siteName,
+        string $siteUrl,
+        string $urlManagingFollowings,
+        string $recipentEmail
     ): array {
         return [
             'userProjectsActivities' => $userProjectsActivities,
@@ -54,9 +61,10 @@ final class FollowerActivitiesMessage extends DefaultMessage
             'username' => $username,
             'siteName' => $siteName,
             'timezone' => $sendAt->getTimezone(),
-            'to' => self::escape('assistance@cap-collectif.com'),
+            'to' => self::escape($recipentEmail),
             'sitename' => $siteName,
-            'siteUrl' => '',
+            'siteUrl' => $siteUrl,
+            'urlManagingFollowings' => $urlManagingFollowings,
             'business' => 'Cap Collectif',
             'businessUrl' => 'https://cap-collectif.com/',
         ];

@@ -15,7 +15,7 @@ class UserActivity implements FollowerNotifiedOfInterface
     protected $userProposals = [];
     protected $userProjects = [];
     protected $notifiedOf;
-    protected $connectionToken;
+    protected $urlManagingFollowings;
 
     public function getUsername()
     {
@@ -152,15 +152,15 @@ class UserActivity implements FollowerNotifiedOfInterface
         return $this->notifiedOf;
     }
 
-    public function setConnectionToken(string $token): self
+    public function setUrlManagingFollowings(string $urlManagingFollowings): self
     {
-        $this->connectionToken = $token;
+        $this->urlManagingFollowings = $urlManagingFollowings;
 
         return $this;
     }
 
-    public function getConnectionToken(): string
+    public function getUrlManagingFollowings(): string
     {
-        return $this->connectionToken;
+        return $this->urlManagingFollowings;
     }
 }

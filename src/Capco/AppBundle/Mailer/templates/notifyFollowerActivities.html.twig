@@ -134,8 +134,8 @@
                         <td width="100%" class="resp-full-td" style="text-align: center;">
                             <span>{{ 'you-receive-this-email-because'|trans({}, 'CapcoAppBundle') }}</span>
                             <span>{{ 'you-follow-these-proposals'|trans({}, 'CapcoAppBundle') }}</span><br>
-                            <span><a href="">{{ 'set-up-my-subscriptions'|trans({}, 'CapcoAppBundle') }}</a></span>
-                            <span style="font-size:12px; font-family:'Helvetica Neue', helvetica, arial, sans-serif; color:#aeb2b3">{{ 'notification.email.moderator_footer'|trans({'{to}': to, '{sitename}': siteName, '{business}': business, '{siteUrl}': siteUrl, '{businessUrl}': businessUrl}, 'CapcoAppBundle') | raw }}</span>
+                            <span><a href="{{ urlManagingFollowings }}">{{ 'set-up-my-subscriptions'|trans({}, 'CapcoAppBundle') }}</a></span>
+                            <span style="font-size:12px; font-family:'Helvetica Neue', helvetica, arial, sans-serif; color:#aeb2b3">{{ 'notification.email.external_footer'|trans({'{to}': to, '{sitename}': siteName, '{business}': business, '{siteUrl}': siteUrl, '{businessUrl}': businessUrl}, 'CapcoAppBundle') | raw }}</span>
                         </td>
                     </tr>
                 </table>

@@ -79,12 +79,23 @@ class ProfileController extends BaseController
      */
     public function editFollowingsAction(Request $request)
     {
-        $user = $this->getUser();
-        if (!is_object($user) || !$user instanceof UserInterface) {
-            throw $this->createAccessDeniedException('This user does not have access to this section.');
+        return [];
+    }
+
+    /**
+     * @Route("/followings/{token}", name="capco_profile_followings_login")
+     */
+    public function loginAndShowEditFollowingsAction(Request $request, string $token)
+    {
+        $userNotificationsConfiguration = $this->get('capco.user_notifications_configuration.repository')->findOneBy(['unsubscribeToken' => $token]);
+        if (!$userNotificationsConfiguration) {
+            throw new NotFoundHttpException();
+        }
+        if (!$this->getUser()) {
+            $this->loginWithToken($request, $userNotificationsConfiguration);
         }
 
-        return [];
+        return $this->redirectToRoute('capco_profile_edit_followings');
     }
 
     /**

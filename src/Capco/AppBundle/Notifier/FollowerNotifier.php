@@ -24,16 +24,17 @@ final class FollowerNotifier extends BaseNotifier
         $this->logger = $logger;
     }
 
-    public function onReportActivities(UserActivity $userActivity, \DateTime $sendAt, string $siteName)
+    public function onReportActivities(UserActivity $userActivity, \DateTime $sendAt, string $siteName, $siteUrl)
     {
         $this->mailer->sendMessage(
             FollowerActivitiesMessage::create(
                 $userActivity->getEmail(),
                 $userActivity->getUsername(),
-                'notifier@cap-collectif.com',
                 $userActivity->getUserProjects(),
                 $sendAt,
-                $siteName
+                $siteName,
+                $siteUrl,
+                $userActivity->getUrlManagingFollowings()
             )
         );
     }
