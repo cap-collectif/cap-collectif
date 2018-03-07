@@ -789,4 +789,16 @@ class UserRepository extends EntityRepository
             ->andWhere('u.enabled = :enabled')
             ->setParameter('enabled', true);
     }
+
+    private function getUsersIdThatCreatedAnOpinionQB(ConsultationStep $consultation): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('userOpinion');
+        $qb->select('DISTINCT userOpinion.id')
+            ->innerJoin('userOpinion.opinions', 'opinion', 'WITH', 'opinion.isEnabled = true AND opinion.expired = false AND opinion.isTrashed = false')
+            ->where('opinion.step = :consultation')
+            ->setParameter('consultation', $consultation)
+        ;
+
+        return $qb;
+    }
 }

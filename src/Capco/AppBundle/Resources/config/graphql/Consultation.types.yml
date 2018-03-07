@@ -28,6 +28,8 @@ Consultation:
                 type: "[Section]"
                 description: "List of sections."
                 resolve: "@=resolver('consultation_sections', [value, args])"
+            contributors:
+                type:
             contributionConnection:
                 type: "ContributionConnection"
                 args:
