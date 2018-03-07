@@ -66,8 +66,8 @@ export class ProjectRow extends Component<Props, State> {
               .filter(proposal => proposal.project.id === project.id)
               .map((proposal, key) => {
                 return (
-                  <ListGroupItem>
-                    <div className="ml-25" key={`proposal_${key}`}>
+                  <ListGroupItem key={`proposal_${key}`}>
+                    <div className="ml-25">
                       <ProposalRow proposal={proposal} />
                     </div>
                   </ListGroupItem>

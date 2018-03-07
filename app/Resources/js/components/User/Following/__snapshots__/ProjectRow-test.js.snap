@@ -1,0 +1,223 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectRow /> should render the project 1 with his proposal displayed 1`] = `
+<Collapse
+  class="following-project"
+  dimension="height"
+  getDimensionValue={[Function]}
+  in={true}
+  mountOnEnter={false}
+  timeout={300}
+  transitionAppear={false}
+  unmountOnExit={false}
+>
+  <Panel
+    bsClass="panel"
+    bsStyle="default"
+    className="following-project"
+    defaultExpanded={false}
+    header={
+      <div>
+        <h3>
+          <a
+            href="http://perdu.com"
+            title="Perdu sur internet ?"
+          >
+            Perdu sur internet ?
+          </a>
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="default"
+            disabled={false}
+            onClick={[Function]}
+            style={
+              Object {
+                "float": "right",
+              }
+            }
+          >
+            <FormattedMessage
+              id="unfollow-this-project"
+              values={Object {}}
+            />
+          </Button>
+        </h3>
+      </div>
+    }
+  >
+    <ListGroup
+      bsClass="list-group"
+    >
+      <ListGroupItem
+        bsClass="list-group-item"
+        listItem={false}
+      >
+        <div
+          className="ml-25"
+        >
+          <ProposalRow
+            proposal={
+              Object {
+                "id": "proposal1",
+                "project": Object {
+                  "id": "project1",
+                },
+                "show_url": "http://carte.perdu.com",
+                "title": "Une carte de l'internet",
+              }
+            }
+          />
+        </div>
+      </ListGroupItem>
+      <ListGroupItem
+        bsClass="list-group-item"
+        listItem={false}
+      >
+        <div
+          className="ml-25"
+        >
+          <ProposalRow
+            proposal={
+              Object {
+                "id": "proposal2",
+                "project": Object {
+                  "id": "project1",
+                },
+                "show_url": "http://gps.perdu.com",
+                "title": "Un GPS de l'internet",
+              }
+            }
+          />
+        </div>
+      </ListGroupItem>
+    </ListGroup>
+  </Panel>
+</Collapse>
+`;
+
+exports[`<ProjectRow /> should render the project 2 with his proposal displayed 1`] = `
+<Collapse
+  class="following-project"
+  dimension="height"
+  getDimensionValue={[Function]}
+  in={true}
+  mountOnEnter={false}
+  timeout={300}
+  transitionAppear={false}
+  unmountOnExit={false}
+>
+  <Panel
+    bsClass="panel"
+    bsStyle="default"
+    className="following-project"
+    defaultExpanded={false}
+    header={
+      <div>
+        <h3>
+          <a
+            href="http://theuselessweb.com"
+            title="Se perdre sur internet"
+          >
+            Se perdre sur internet
+          </a>
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="default"
+            disabled={false}
+            onClick={[Function]}
+            style={
+              Object {
+                "float": "right",
+              }
+            }
+          >
+            <FormattedMessage
+              id="unfollow-this-project"
+              values={Object {}}
+            />
+          </Button>
+        </h3>
+      </div>
+    }
+  >
+    <ListGroup
+      bsClass="list-group"
+    >
+      <ListGroupItem
+        bsClass="list-group-item"
+        listItem={false}
+      >
+        <div
+          className="ml-25"
+        >
+          <ProposalRow
+            proposal={
+              Object {
+                "id": "proposal3",
+                "project": Object {
+                  "id": "project2",
+                },
+                "show_url": "https://randomstreetview.com/",
+                "title": "Go  nowhere",
+              }
+            }
+          />
+        </div>
+      </ListGroupItem>
+    </ListGroup>
+  </Panel>
+</Collapse>
+`;
+
+exports[`<ProjectRow /> should render without project 1`] = `
+<Collapse
+  class="following-project"
+  dimension="height"
+  getDimensionValue={[Function]}
+  in={false}
+  mountOnEnter={false}
+  timeout={300}
+  transitionAppear={false}
+  unmountOnExit={false}
+>
+  <Panel
+    bsClass="panel"
+    bsStyle="default"
+    className="following-project"
+    defaultExpanded={false}
+    header={
+      <div>
+        <h3>
+          <a />
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="default"
+            disabled={false}
+            onClick={[Function]}
+            style={
+              Object {
+                "float": "right",
+              }
+            }
+          >
+            <FormattedMessage
+              id="unfollow-this-project"
+              values={Object {}}
+            />
+          </Button>
+        </h3>
+      </div>
+    }
+  >
+    <ListGroup
+      bsClass="list-group"
+    />
+  </Panel>
+</Collapse>
+`;

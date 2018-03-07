@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FollowingsProposals /> should render following proposal close 1`] = `
+<div>
+  <h2>
+    <FormattedMessage
+      id="followings"
+      values={Object {}}
+    />
+  </h2>
+  <div>
+    <div>
+      <FormattedMessage
+        id="no-following"
+        values={Object {}}
+      />
+    </div>
+  </div>
+  <div>
+    <Collapse
+      dimension="height"
+      getDimensionValue={[Function]}
+      in={true}
+      mountOnEnter={false}
+      timeout={300}
+      transitionAppear={false}
+      unmountOnExit={false}
+    >
+      <div>
+        <FormattedMessage
+          id="no-following"
+          values={Object {}}
+        />
+      </div>
+    </Collapse>
+  </div>
+</div>
+`;
+
+exports[`<FollowingsProposals /> should render following proposal open 1`] = `
+<div>
+  <h2>
+    <FormattedMessage
+      id="followings"
+      values={Object {}}
+    />
+  </h2>
+  <div>
+    <div>
+      <FormattedMessage
+        id="no-following"
+        values={Object {}}
+      />
+    </div>
+  </div>
+  <div>
+    <Collapse
+      dimension="height"
+      getDimensionValue={[Function]}
+      in={false}
+      mountOnEnter={false}
+      timeout={300}
+      transitionAppear={false}
+      unmountOnExit={false}
+    >
+      <div>
+        <FormattedMessage
+          id="no-following"
+          values={Object {}}
+        />
+      </div>
+    </Collapse>
+  </div>
+</div>
+`;
