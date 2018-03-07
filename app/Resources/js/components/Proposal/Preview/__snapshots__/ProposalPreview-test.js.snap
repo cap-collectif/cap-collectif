@@ -63,7 +63,7 @@ exports[`<ProposalPreview /> should render a proposal preview votable 1`] = `
         showThemes={true}
       />
       <div
-        className="proposal__buttons text-center"
+        className="proposal__buttons"
       >
         <ProposalPreviewVote
           proposal={
@@ -262,7 +262,7 @@ exports[`<ProposalPreview /> should render a proposal preview with different ste
         showThemes={true}
       />
       <div
-        className="proposal__buttons text-center"
+        className="proposal__buttons"
       >
         <ProposalPreviewVote
           proposal={
