@@ -7,7 +7,7 @@ Scenario: GraphQL client wants to retrieve questions
   When I send a GraphQL request:
   """
   {
-      questionnaire: node(id: 1) {
+      questionnaire(id: 1) {
         questions {
           id
        }

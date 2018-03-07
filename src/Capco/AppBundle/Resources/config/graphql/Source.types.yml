@@ -2,7 +2,7 @@ Source:
     type: object
     config:
         description: "A source"
-        interfaces: [Node, Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
+        interfaces: [Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
         fields:
             createdAt:
                 type: "String!"

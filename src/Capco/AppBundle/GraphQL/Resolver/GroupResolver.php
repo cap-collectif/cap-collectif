@@ -13,6 +13,11 @@ class GroupResolver implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
+    public function resolve(string $groupId): Group
+    {
+        return $this->container->get('capco.group.repository')->find($groupId);
+    }
+
     public function resolveAll(): array
     {
         return $this->container->get('capco.group.repository')->findAll();

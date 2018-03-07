@@ -64,10 +64,10 @@ class ProposalEditModal extends React.Component<Props> {
               environment={environment}
               query={graphql`
                 query ProposalEditModalQuery($proposalFormId: ID!, $proposalId: ID!) {
-                  proposalForm: node(id: $proposalFormId) {
+                  proposalForm(id: $proposalFormId) {
                     ...ProposalForm_proposalForm
                   }
-                  proposal: node(id: $proposalId) {
+                  proposal(id: $proposalId) {
                     ...ProposalForm_proposal
                   }
                 }

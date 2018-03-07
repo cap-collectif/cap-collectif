@@ -34,7 +34,7 @@ export class ProposalAdminPage extends Component<Props, State> {
           environment={environment}
           query={graphql`
             query ProposalAdminPageQuery($id: ID!, $count: Int!, $cursor: String) {
-              proposal: node(id: $id) {
+              proposal(id: $id) {
                 ...ProposalAdminPageTabs_proposal
               }
             }

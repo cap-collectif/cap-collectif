@@ -1,54 +1,54 @@
 @consultations
 Feature: Consultations
 
-Scenario: GraphQL client wants to list consultations
-  When I send a GraphQL request:
-  """
-  {
-    consultations {
-       id
-       title
-       contribuable
-       sections {
-         title
-       }
-       contributions {
+  Scenario: GraphQL client wants to list consultations
+    When I send a GraphQL request:
+    """
+    {
+      consultations {
          id
+         title
+         contribuable
+         sections {
+           title
+         }
+         contributions {
+           id
+         }
        }
-     }
-  }
-  """
-  Then the JSON response should match:
-  """
-  {
-    "data": {
-      "consultations": [
-        {
-          "id": @string@,
-          "title": @string@,
-          "contribuable": @boolean@,
-          "sections": [
-            {
-              "title": @string@
-            },
-            @...@
-          ],
-          "contributions": [
-            {
-              "id": @string@
-            },
-            @...@
-          ]
-        },
-        @...@
-      ]
     }
-  }
-  """
+    """
+    Then the JSON response should match:
+    """
+    {
+      "data": {
+        "consultations": [
+          {
+            "id": @string@,
+            "title": @string@,
+            "contribuable": @boolean@,
+            "sections": [
+              {
+                "title": @string@
+              },
+              @...@
+            ],
+            "contributions": [
+              {
+                "id": @string@
+              },
+              @...@
+            ]
+          },
+          @...@
+        ]
+      }
+    }
+    """
 
-Scenario: GraphQL client wants to list consultations
-  When I send a GraphQL request:
-  """
+    Scenario: GraphQL client wants to list consultations
+      When I send a GraphQL request:
+      """
 query OpinionListQuery {
       contributionsBySection(sectionId: "opinionType12", limit: 5) {
           ...Opinion_opinion
@@ -88,10 +88,10 @@ query OpinionListQuery {
       id
       }
       }
-  """
-  Then the JSON response should match:
-  """
-  {
+      """
+      Then the JSON response should match:
+      """
+      {
      "data":{
         "contributionsBySection":[
            {
@@ -127,11 +127,11 @@ query OpinionListQuery {
         ]
      }
   }
-  """
+      """
 
-Scenario: GraphQL client wants to list contributions in a consultation
-  When I send a GraphQL request:
-  """
+      Scenario: GraphQL client wants to list contributions in a consultation
+        When I send a GraphQL request:
+        """
 query {
   consultations(id: "cstep5") {
     	id
@@ -149,9 +149,9 @@ query {
   	}
   }
 }
-  """
-  Then the JSON response should match:
-  """
+        """
+        Then the JSON response should match:
+        """
 {
   "data": {
     "consultations": [
@@ -176,13 +176,13 @@ query {
     ]
   }
 }
-  """
+        """
 
-Scenario: GraphQL client wants to list contributions in a section
-  When I send a GraphQL request:
-  """
+        Scenario: GraphQL client wants to list contributions in a section
+          When I send a GraphQL request:
+          """
 query {
-  section: node(id: "opinionType5") {
+  section(id: "opinionType5") {
       contributionConnection(first: 5, orderBy: { field: VOTE_COUNT, direction: DESC }) {
           totalCount
           edges {
@@ -194,9 +194,9 @@ query {
   }
  }
 }
-  """
-  Then the JSON response should match:
-  """
+          """
+          Then the JSON response should match:
+          """
 {
   "data": {
     "section": {
@@ -215,4 +215,4 @@ query {
     }
   }
 }
-  """
+          """

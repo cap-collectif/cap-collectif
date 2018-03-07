@@ -113,7 +113,7 @@ export default createPaginationContainer(
     },
     query: graphql`
       query ProposalPageFollowersQuery($proposalId: ID!, $count: Int!, $cursor: String) {
-        proposal: node(id: $proposalId) {
+        proposal(id: $proposalId) {
           ...ProposalPageFollowers_proposal
         }
       }

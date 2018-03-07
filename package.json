@@ -79,7 +79,7 @@
     "bracketSpacing": true,
     "singleQuote": true,
     "jsxBracketSameLine": true,
-    "trailingComma": "all",
+    "trailing-comma": "all",
     "printWidth": 100
   },
   "jest": {

@@ -2,7 +2,6 @@ Section:
     type: object
     config:
         description: "A section"
-        interfaces: [Node]
         fields:
             id:
                 type: "ID!"

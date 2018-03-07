@@ -1,8 +1,7 @@
 User:
     type: object
     config:
-        description: "A user is an individual's account."
-        interfaces: [Node]
+        description: "A user"
         fields:
             id:
                 type: "ID!"

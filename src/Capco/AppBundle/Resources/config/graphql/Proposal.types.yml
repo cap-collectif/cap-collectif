@@ -2,7 +2,7 @@ Proposal:
     type: object
     config:
         description: "A budget contribution"
-        interfaces: [Node]
+        # interfaces: [Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
         fields:
             show_url:
                 type: "URI!"
@@ -65,8 +65,8 @@ Proposal:
             trashedReason:
                 type: "String"
             id:
-                type: "ID!"
-                description: "The id of the contribution."
+                type: "String!"
+                description: "The content of the contribution."
             reference:
                 type: "String!"
                 description: "The unique reference of proposal"

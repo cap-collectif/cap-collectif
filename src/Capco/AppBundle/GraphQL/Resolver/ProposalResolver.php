@@ -96,6 +96,21 @@ class ProposalResolver implements ContainerAwareInterface
         throw new UserError('Could not resolve type of Response.');
     }
 
+    public function resolve(string $proposalId, $user): Proposal
+    {
+        $em = $this->container->get('doctrine.orm.default_entity_manager');
+        if ($user instanceof User && $user->isAdmin()) {
+            // If user is an admin, we allow to retrieve deleted proposal
+            $em->getFilters()->disable('softdeleted');
+        }
+        $proposal = $this->container->get('capco.proposal.repository')->find($proposalId);
+        if (!$proposal) {
+            throw new UserError(sprintf('Unknown proposal with id "%d"', $proposalId));
+        }
+
+        return $proposal;
+    }
+
     public function resolveProposalPublicationStatus(Proposal $proposal): string
     {
         if ($proposal->isDraft()) {

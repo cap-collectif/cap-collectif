@@ -1,7 +1,7 @@
 Consultation:
     type: object
     config:
-        interfaces: [Node, Step]
+        interfaces: [Step]
         description: "A consultation"
         fields:
             kind:
