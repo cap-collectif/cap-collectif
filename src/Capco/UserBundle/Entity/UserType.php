@@ -3,9 +3,13 @@
 namespace Capco\UserBundle\Entity;
 
 use Capco\AppBundle\Traits\IdTrait;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * UserType.
+ *
+ * @ORM\HasLifecycleCallbacks()
  */
 class UserType
 {
@@ -20,6 +24,7 @@ class UserType
 
     /**
      * @var string
+     * @Gedmo\Slug(fields={"name"}, updatable=false)
      */
     private $slug;
 

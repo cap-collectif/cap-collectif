@@ -19,11 +19,14 @@ use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
+use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Capco\AppBundle\EventListener\ReferenceEventListener;
 use Capco\AppBundle\Traits\VoteTypeTrait;
 use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Entity\UserType;
 use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Collection as CollectionInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use League\Csv\Reader;
@@ -36,6 +39,7 @@ use Symfony\Component\Stopwatch\Stopwatch;
 class ParisImportCommand extends ContainerAwareCommand
 {
     protected const PROPOSAL_BATCH_SIZE = 200;
+    protected const USERS_BATCH_SIZE = 100;
     protected const COMMENT_BATCH_SIZE = 500;
 
     protected const PROJECT_HEADER = [
@@ -52,6 +56,19 @@ class ParisImportCommand extends ContainerAwareCommand
     protected const CATEGORY_HEADER = [
         'project_id',
         'name',
+    ];
+
+    protected const USER_HEADER = [
+        'name',
+        'firstname',
+        'lastname',
+        'user_type',
+        'user_type_rattachement',
+        'password',
+        'email',
+        'created_at',
+        'last_login_at',
+        'birthdate',
     ];
 
     protected const COMMENT_HEADER = [
@@ -88,6 +105,44 @@ class ParisImportCommand extends ContainerAwareCommand
         ['Vote' => 'success'],
     ];
 
+    protected const PROFILES_TYPES = [
+        'p' => 'Un particulier',
+        'a' => 'Un agent de la ville de Paris',
+    ];
+
+    protected const PROFILES_TYPES_RATTACHEMENT = [
+        'Cabinet de la Maire',
+        'Caisses des écoles',
+        "CASVP : Centre d'Action social de la Ville de Paris",
+        'DAC : Direction des Affaires culturelles',
+        'DAJ : Direction des Affaires juridiques',
+        'DASCO : Direction des Affaires scolaires',
+        "DASES : Direction de l'Action sociale, de l'Enfance et de la Santé",
+        'DDCT : Direction de la Démocratie, des Citoyens et des Territoires',
+        "DDEEES : Direction du Développement économique , de l'Emploi et de l'Enseignement supérieur",
+        "DEVE : Direction des Espaces verts et de l'Environnement",
+        'DFA : Direction des Finances et des Achats',
+        'DFPE : Direction des Familles et de la petite Enfance',
+        "DICOM : Direction de l'Information et de la Communication",
+        "DILT : Direction de l'Immobilier, de la Logistique et des Transports",
+        'DJS : Direction de la Jeunesse et des Sports',
+        "DLH : Direction du Logement et de l'Habitat",
+        "DPA : Direction du Patrimoine et de l'Architecture",
+        "DPE : Direction de la Propreté et de l'Eau",
+        'DPP : Direction de la Prévention et de la Protection',
+        'DRH : Direction des Ressources humaines',
+        "DSTI : Direction des Systèmes et Technologies de l'Information",
+        "DU : Direction de l'Urbanisme",
+        'DVD : Direction de la Voirie et des Déplacements',
+        'EPM : Paris Musées',
+        'IG : Inspection générale',
+        'SGVP : Secrétariat général de la Ville de Paris',
+        "SG_Hors budget d'investissement",
+        'SG_Hors compétence Ville',
+        'SG_Projet existant ou prévu',
+        'SG_Projet Imprécis',
+    ];
+
     /** @var EntityManagerInterface */
     protected $em;
 
@@ -104,11 +159,11 @@ class ParisImportCommand extends ContainerAwareCommand
             ->setDescription('(Import data from paris');
     }
 
-    protected function initialize(InputInterface $input, OutputInterface $output)
+    protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->em = $this->getContainer()->get('doctrine.orm.entity_manager');
         $this->em->getConnection()->getConfiguration()->setSQLLogger(null);
-        $this->users = $this->em->getRepository(User::class)->findAll();
+        $this->users = $this->createUsers();
         $this->categories = $this->createCategories();
         $this->proposals = $this->createProposals();
         $this->comments = $this->createComments();
@@ -122,13 +177,59 @@ class ParisImportCommand extends ContainerAwareCommand
         }
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $stopwatch = new Stopwatch();
         $stopwatch->start('import');
+        $this->importUsers($output);
         $this->importProjects($output);
         $event = $stopwatch->stop('import');
-        $output->writeln("\n<info>Elapsed time : " . $event->getDuration() / 1000 . " seconds. \n Memory usage : " . $event->getMemory() / 1000000 . ' MB</info>');
+        $output->writeln("\n<info>Elapsed time : " . $event->getDuration() / 1000000 . " minutes. \n Memory usage : " . $event->getMemory() / 1000000 . ' MB</info>');
+    }
+
+    protected function importUsers(OutputInterface $output): void
+    {
+        $output->writeln('<info>Importing users...</info>');
+        $count = 1;
+        $progress = new ProgressBar($output, \count($this->users));
+        $types = $this->createUsersTypes($output);
+        foreach ($this->users as $user) {
+            $type = $types->filter(function (UserType $type) use ($user) {
+                if (!$user['user_type'] || 'p' === $user['user_type']) {
+                    return 'Un particulier' === $type->getName();
+                }
+                if ($user['user_type_rattachement']) {
+                    return $type->getName() === $user['user_type_rattachement'];
+                }
+
+                return $type->getName() === self::PROFILES_TYPES[$user['user_type']];
+            })->first();
+            $user = (new User())
+                ->setFirstname('' !== $user['firstname'] ? $user['firstname'] : null)
+                ->setLastname('' !== $user['lastname'] ? $user['lastname'] : null)
+                ->setPassword('')
+                ->setUserType($type)
+                ->setEmail($user['email'])
+                ->setParisId($user['email'])
+                ->setCreatedAt(new \DateTime($user['created_at']))
+                ->setLastLogin(new \DateTime($user['last_login_at']))
+                ->setDateOfBirth(new \DateTime($user['birthdate']));
+            $this->em->persist($user);
+            if (0 === $count % self::USERS_BATCH_SIZE) {
+                $this->em->flush();
+                $this->em->clear(User::class);
+                $this->em->clear(UserNotificationsConfiguration::class);
+                $this->printMemoryUsage($output);
+            }
+            $progress->advance();
+            ++$count;
+        }
+        unset($count);
+        $this->em->flush();
+        $this->em->clear(User::class);
+        $this->em->clear(UserNotificationsConfiguration::class);
+        $progress->finish();
+        $output->writeln('<info>Successfully imported users...</info>');
     }
 
     protected function importProjects(OutputInterface $output): void
@@ -203,7 +304,7 @@ class ParisImportCommand extends ContainerAwareCommand
                 $this->importProposals($output, $parisProjectId, $project);
             }
         }
-        $output->writeln("\n<info>Successfuly imported " . \count($this->projects) . ' projects.</info>');
+        $output->writeln("\n<info>Successfully imported " . \count($this->projects) . ' projects.</info>');
     }
 
     protected function importDistricts(OutputInterface $output, ProposalForm $proposalForm): void
@@ -218,7 +319,7 @@ class ParisImportCommand extends ContainerAwareCommand
                 ->setForm($proposalForm);
             $this->em->persist($entity);
         }
-        $output->writeln('<info>Successfuly imported districts.</info>');
+        $output->writeln('<info>Successfully imported districts.</info>');
     }
 
     protected function importProposals(OutputInterface $output, int $parisProjectId, Project $project): void
@@ -243,6 +344,12 @@ class ParisImportCommand extends ContainerAwareCommand
                 $category = $categories->filter(function (ProposalCategory $category) use ($proposal) {
                     return false !== stripos($category->getName(), $proposal['category']);
                 })->first();
+                $status = $statuses->filter(function (Status $status) use ($proposal) {
+                    return false !== stripos(
+                            Slugify::create()->slugify($status->getName()),
+                            $proposal['status']
+                        );
+                })->first();
                 $proposal = (new Proposal())
                     ->setTitle($proposal['title'])
                     ->setAuthor($user)
@@ -252,14 +359,7 @@ class ParisImportCommand extends ContainerAwareCommand
                     ->setUpdatedAt(new \DateTime($proposal['updated_at']))
                     ->setReference($count)
                     ->setBody($proposal['body'])
-                    ->setStatus(
-                        $statuses->filter(function (Status $status) use ($proposal) {
-                            return false !== stripos(
-                                    Slugify::create()->slugify($status->getName()),
-                                    $proposal['status']
-                                );
-                        })->first()
-                    )
+                    ->setStatus($status)
                     ->setDistrict($district, false);
                 if ($category) {
                     $proposal->setCategory($category);
@@ -279,7 +379,7 @@ class ParisImportCommand extends ContainerAwareCommand
             $this->em->clear(AbstractResponse::class);
             $this->em->clear(Proposal::class);
             $progress->finish();
-            $output->writeln("\n<info>Successfuly imported proposals.</info>");
+            $output->writeln("\n<info>Successfully imported proposals.</info>");
         } else {
             $output->writeln("\n<info>No proposals found for project \"" . $project->getTitle() . '"</info>');
         }
@@ -311,7 +411,7 @@ class ParisImportCommand extends ContainerAwareCommand
             $this->em->flush();
             $this->em->clear(Comment::class);
             $progress->finish();
-            $output->writeln("\n<info>Successfuly imported comments for proposal.</info>");
+            $output->writeln("\n<info>Successfully imported comments for proposal.</info>");
         } else {
             $output->writeln('<info>No comments found for proposal "' . $proposal->getTitle() . '"</info>');
         }
@@ -400,9 +500,41 @@ class ParisImportCommand extends ContainerAwareCommand
         $this->em->persist($proposalForm);
         $this->em->flush();
 
-        $output->writeln('<info>Successfuly added "' . $formName . '" form.</info>');
+        $output->writeln('<info>Successfully added "' . $formName . '" form.</info>');
 
         return $proposalForm;
+    }
+
+    protected function createUsers(): array
+    {
+        $csv = Reader::createFromPath(__DIR__ . '/paris_users.csv');
+        $iterator = $csv->setOffset(1)->fetchAssoc(self::USER_HEADER);
+        $users = [];
+        foreach ($iterator as $item) {
+            $users[] = $item;
+        }
+
+        return $users;
+    }
+
+    protected function createUsersTypes(OutputInterface $output): Collection
+    {
+        $output->writeln('<info>Creating user types...</info>');
+        foreach (self::PROFILES_TYPES as $key => $value) {
+            $type = (new UserType())
+                ->setName($value);
+            $this->em->persist($type);
+        }
+        foreach (self::PROFILES_TYPES_RATTACHEMENT as $agentName) {
+            $type = (new UserType())
+                ->setName($agentName);
+            $this->em->persist($type);
+        }
+        $this->em->flush();
+        $this->em->clear();
+        $output->writeln('<info>User types created successfully.</info>');
+
+        return new ArrayCollection($this->em->getRepository(UserType::class)->findAll());
     }
 
     protected function createCategories(): array

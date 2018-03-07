@@ -1141,12 +1141,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return $this->userType;
     }
 
-    /**
-     * @param mixed $userType
-     */
-    public function setUserType($userType)
+    public function setUserType(UserType $userType): self
     {
         $this->userType = $userType;
+
+        return $this;
     }
 
     public function isVip()
@@ -1354,9 +1353,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return $this->notificationsConfiguration;
     }
 
-    public function setNotificationsConfiguration(UserNotificationsConfiguration $notificationsConfiguration)
+    public function setNotificationsConfiguration(UserNotificationsConfiguration $notificationsConfiguration): self
     {
         $this->notificationsConfiguration = $notificationsConfiguration;
+
+        return $this;
     }
 
     public function isConsentExternalCommunication(): bool
