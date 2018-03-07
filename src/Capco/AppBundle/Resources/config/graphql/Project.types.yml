@@ -16,4 +16,6 @@ Project:
                 description: "A list of contributor associated with the project."
                 argsBuilder: "Relay::Connection"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProjectContributorResolver", [value, args])'
-                
+            url:
+              type: "String"
+              resolve: "@=resolver('project_url', [value])"

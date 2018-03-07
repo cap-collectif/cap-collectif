@@ -822,10 +822,7 @@ class Project implements IndexableInterface
         return $count;
     }
 
-    /**
-     * @return AbstractStep|null
-     */
-    public function getFirstStep()
+    public function getFirstStep(): ?AbstractStep
     {
         $first = null;
         if (!empty($this->steps)) {
