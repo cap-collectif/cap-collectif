@@ -6,7 +6,7 @@ Scenario: GraphQL client wants to retrieve his evaluations
   When I send a GraphQL request:
   """
   {
-      proposalForm(id: "proposalForm1") {
+      proposalForm: node(id: "proposalForm1") {
         step {
           title
           project {
@@ -60,7 +60,7 @@ Scenario: Evaluer wants to retrieve evaluation form questions
   When I send a GraphQL request:
   """
   {
-      proposalForm(id: "proposalForm1") {
+      proposalForm: node(id: "proposalForm1") {
         evaluationForm {
           questions {
             id
@@ -93,7 +93,7 @@ Scenario: Anonymous wants to retrieve evaluation form questions
   Given I send a GraphQL request:
   """
   {
-      proposalForm(id: "proposalForm1") {
+      proposalForm: node(id: "proposalForm1") {
         evaluationForm {
           questions {
             id
