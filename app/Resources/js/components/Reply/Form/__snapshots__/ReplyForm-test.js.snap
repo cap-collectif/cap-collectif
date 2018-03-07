@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ReplyForm /> should render correctly with equal required and facultative fields 1`] = `
-<form
-  id="reply-form"
-  onSubmit={[MockFunction]}
+<div
+  id="create-reply-form"
 >
+<<<<<<< HEAD
 <<<<<<< HEAD
   <InjectIntl(ReactBootstrapInput)
     disabled={false}
@@ -243,21 +243,145 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
     disabled={true}
     id="proposal_admin_content_save"
     type="submit"
+=======
+  <form
+    id="reply-form"
+    onSubmit={[MockFunction]}
+>>>>>>> [ADD] children fragment for container's fragment & [CHG] jest test
   >
-    <FormattedMessage
-      id="global.save"
-      values={Object {}}
+    <FieldArray
+      change={[MockFunction]}
+      component={[Function]}
+      disabled={true}
+      intl={
+        Object {
+          "formatDate": [Function],
+          "formatHTMLMessage": [Function],
+          "formatMessage": [Function],
+          "formatNumber": [Function],
+          "formatPlural": [Function],
+          "formatRelative": [Function],
+          "formatTime": [Function],
+          "formats": Object {},
+          "locale": "fr-FR",
+          "messages": Object {},
+          "now": [Function],
+        }
+      }
+      name="responses"
+      questions={
+        Array [
+          Object {
+            "helpText": "",
+            "id": 10,
+            "question": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+            "required": true,
+            "slug": "etes-vous-satisfait-que-la-ville-de-paris-soit-candidate-a-l-organisation-des-jo-de-2024",
+            "type": "text",
+          },
+          Object {
+            "choices": Array [
+              Object {
+                "id": 24,
+                "label": "Maxime Arrouard",
+              },
+              Object {
+                "id": 25,
+                "label": "Spylou Super Sayen",
+              },
+              Object {
+                "id": 26,
+                "label": "Cyril Lage",
+              },
+              Object {
+                "id": 27,
+                "label": "Superman",
+              },
+            ],
+            "helpText": "Un seul choix possible",
+            "id": 12,
+            "isOtherAllowed": true,
+            "question": "Quel est ton athlète favori ?",
+            "required": true,
+            "slug": "quel-est-ton-athlete-favori",
+            "type": "radio",
+          },
+          Object {
+            "choices": Array [
+              Object {
+                "id": 28,
+                "label": "Pas assez fort (Mon sonotone est en panne)",
+              },
+              Object {
+                "id": 29,
+                "label": "Assez fort (Mon sonotone est mal réglé)",
+              },
+              Object {
+                "id": 30,
+                "label": "Trop fort (Mon sonotone est tout neuf)",
+              },
+            ],
+            "helpText": "Merci de répondre sincèrement",
+            "id": 13,
+            "question": "Nelson Monfort parle-t-il:",
+            "required": false,
+            "slug": "nelson-monfort-parle-t-il",
+            "type": "select",
+          },
+          Object {
+            "choices": Array [
+              Object {
+                "id": 28,
+                "label": "Pas assez fort (Mon sonotone est en panne)",
+              },
+              Object {
+                "id": 29,
+                "label": "Assez fort (Mon sonotone est mal réglé)",
+              },
+              Object {
+                "id": 30,
+                "label": "Trop fort (Mon sonotone est tout neuf)",
+              },
+            ],
+            "helpText": "Merci de répondre sincèrement",
+            "id": 14,
+            "question": "Nelson Monfort parle-t-il:",
+            "required": false,
+            "slug": "nelson-monfort-parle-t-il",
+            "type": "ranking",
+          },
+        ]
+      }
     />
+<<<<<<< HEAD
   </Button>
 >>>>>>> [ADD] good jest test & [RMV] flow error
 </form>
+=======
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="primary"
+      disabled={true}
+      id="proposal_admin_content_save"
+      type="submit"
+    >
+      <FormattedMessage
+        id="global.save"
+        values={Object {}}
+      />
+    </Button>
+  </form>
+</div>
+>>>>>>> [ADD] children fragment for container's fragment & [CHG] jest test
 `;
 
 exports[`<ReplyForm /> should render correctly with majority of required fields 1`] = `
-<form
-  id="reply-form"
-  onSubmit={[MockFunction]}
+<div
+  id="create-reply-form"
 >
+<<<<<<< HEAD
 <<<<<<< HEAD
   <InjectIntl(ReactBootstrapInput)
     disabled={false}
@@ -460,20 +584,117 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
     disabled={true}
     id="proposal_admin_content_save"
     type="submit"
+=======
+  <form
+    id="reply-form"
+    onSubmit={[MockFunction]}
+>>>>>>> [ADD] children fragment for container's fragment & [CHG] jest test
   >
-    <FormattedMessage
-      id="global.save"
-      values={Object {}}
+    <FieldArray
+      change={[MockFunction]}
+      component={[Function]}
+      disabled={true}
+      intl={
+        Object {
+          "formatDate": [Function],
+          "formatHTMLMessage": [Function],
+          "formatMessage": [Function],
+          "formatNumber": [Function],
+          "formatPlural": [Function],
+          "formatRelative": [Function],
+          "formatTime": [Function],
+          "formats": Object {},
+          "locale": "fr-FR",
+          "messages": Object {},
+          "now": [Function],
+        }
+      }
+      name="responses"
+      questions={
+        Array [
+          Object {
+            "helpText": "",
+            "id": 10,
+            "question": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+            "required": true,
+            "slug": "etes-vous-satisfait-que-la-ville-de-paris-soit-candidate-a-l-organisation-des-jo-de-2024",
+            "type": "text",
+          },
+          Object {
+            "choices": Array [
+              Object {
+                "id": 24,
+                "label": "Maxime Arrouard",
+              },
+              Object {
+                "id": 25,
+                "label": "Spylou Super Sayen",
+              },
+              Object {
+                "id": 26,
+                "label": "Cyril Lage",
+              },
+              Object {
+                "id": 27,
+                "label": "Superman",
+              },
+            ],
+            "helpText": "Un seul choix possible",
+            "id": 12,
+            "isOtherAllowed": true,
+            "question": "Quel est ton athlète favori ?",
+            "required": true,
+            "slug": "quel-est-ton-athlete-favori",
+            "type": "radio",
+          },
+          Object {
+            "choices": Array [
+              Object {
+                "id": 28,
+                "label": "Pas assez fort (Mon sonotone est en panne)",
+              },
+              Object {
+                "id": 29,
+                "label": "Assez fort (Mon sonotone est mal réglé)",
+              },
+              Object {
+                "id": 30,
+                "label": "Trop fort (Mon sonotone est tout neuf)",
+              },
+            ],
+            "helpText": "Merci de répondre sincèrement",
+            "id": 14,
+            "question": "Nelson Monfort parle-t-il:",
+            "required": false,
+            "slug": "nelson-monfort-parle-t-il",
+            "type": "ranking",
+          },
+        ]
+      }
     />
-  </Button>
-</form>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="primary"
+      disabled={true}
+      id="proposal_admin_content_save"
+      type="submit"
+    >
+      <FormattedMessage
+        id="global.save"
+        values={Object {}}
+      />
+    </Button>
+  </form>
+</div>
 `;
 
 exports[`<ReplyForm /> should render correctly with minority of required fields 1`] = `
-<form
-  id="reply-form"
-  onSubmit={[MockFunction]}
+<div
+  id="create-reply-form"
 >
+<<<<<<< HEAD
 <<<<<<< HEAD
   <InjectIntl(ReactBootstrapInput)
     disabled={false}
@@ -796,21 +1017,172 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
     disabled={true}
     id="proposal_admin_content_save"
     type="submit"
+=======
+  <form
+    id="reply-form"
+    onSubmit={[MockFunction]}
+>>>>>>> [ADD] children fragment for container's fragment & [CHG] jest test
   >
-    <FormattedMessage
-      id="global.save"
-      values={Object {}}
+    <FieldArray
+      change={[MockFunction]}
+      component={[Function]}
+      disabled={true}
+      intl={
+        Object {
+          "formatDate": [Function],
+          "formatHTMLMessage": [Function],
+          "formatMessage": [Function],
+          "formatNumber": [Function],
+          "formatPlural": [Function],
+          "formatRelative": [Function],
+          "formatTime": [Function],
+          "formats": Object {},
+          "locale": "fr-FR",
+          "messages": Object {},
+          "now": [Function],
+        }
+      }
+      name="responses"
+      questions={
+        Array [
+          Object {
+            "helpText": "",
+            "id": 10,
+            "question": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+            "required": true,
+            "slug": "etes-vous-satisfait-que-la-ville-de-paris-soit-candidate-a-l-organisation-des-jo-de-2024",
+            "type": "text",
+          },
+          Object {
+            "choices": Array [
+              Object {
+                "id": 20,
+                "label": "Athlétisme",
+              },
+              Object {
+                "id": 21,
+                "label": "Natation",
+              },
+              Object {
+                "id": 22,
+                "label": "Sports collectifs",
+              },
+              Object {
+                "id": 23,
+                "label": "Sports individuels",
+              },
+            ],
+            "helpText": "Plusieurs choix sont possibles",
+            "id": 11,
+            "isOtherAllowed": true,
+            "question": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+            "required": false,
+            "slug": "pour-quel-type-d-epreuve-etes-vous-pret-a-acheter-des-places",
+            "type": "checkbox",
+          },
+          Object {
+            "choices": Array [
+              Object {
+                "id": 24,
+                "label": "Maxime Arrouard",
+              },
+              Object {
+                "id": 25,
+                "label": "Spylou Super Sayen",
+              },
+              Object {
+                "id": 26,
+                "label": "Cyril Lage",
+              },
+              Object {
+                "id": 27,
+                "label": "Superman",
+              },
+            ],
+            "helpText": "Un seul choix possible",
+            "id": 12,
+            "isOtherAllowed": true,
+            "question": "Quel est ton athlète favori ?",
+            "required": true,
+            "slug": "quel-est-ton-athlete-favori",
+            "type": "radio",
+          },
+          Object {
+            "choices": Array [
+              Object {
+                "id": 28,
+                "label": "Pas assez fort (Mon sonotone est en panne)",
+              },
+              Object {
+                "id": 29,
+                "label": "Assez fort (Mon sonotone est mal réglé)",
+              },
+              Object {
+                "id": 30,
+                "label": "Trop fort (Mon sonotone est tout neuf)",
+              },
+            ],
+            "helpText": "Merci de répondre sincèrement",
+            "id": 13,
+            "question": "Nelson Monfort parle-t-il:",
+            "required": false,
+            "slug": "nelson-monfort-parle-t-il",
+            "type": "select",
+          },
+          Object {
+            "choices": Array [
+              Object {
+                "id": 28,
+                "label": "Pas assez fort (Mon sonotone est en panne)",
+              },
+              Object {
+                "id": 29,
+                "label": "Assez fort (Mon sonotone est mal réglé)",
+              },
+              Object {
+                "id": 30,
+                "label": "Trop fort (Mon sonotone est tout neuf)",
+              },
+            ],
+            "helpText": "Merci de répondre sincèrement",
+            "id": 14,
+            "question": "Nelson Monfort parle-t-il:",
+            "required": false,
+            "slug": "nelson-monfort-parle-t-il",
+            "type": "ranking",
+          },
+        ]
+      }
     />
+<<<<<<< HEAD
   </Button>
 >>>>>>> [ADD] good jest test & [RMV] flow error
 </form>
+=======
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="primary"
+      disabled={true}
+      id="proposal_admin_content_save"
+      type="submit"
+    >
+      <FormattedMessage
+        id="global.save"
+        values={Object {}}
+      />
+    </Button>
+  </form>
+</div>
+>>>>>>> [ADD] children fragment for container's fragment & [CHG] jest test
 `;
 
 exports[`<ReplyForm /> should render correctly with only facultatives fields 1`] = `
-<form
-  id="reply-form"
-  onSubmit={[MockFunction]}
+<div
+  id="create-reply-form"
 >
+<<<<<<< HEAD
   <FieldArray
     component={[Function]}
     disabled={true}
@@ -1031,21 +1403,137 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
     disabled={true}
     id="proposal_admin_content_save"
     type="submit"
+=======
+  <form
+    id="reply-form"
+    onSubmit={[MockFunction]}
+>>>>>>> [ADD] children fragment for container's fragment & [CHG] jest test
   >
-    <FormattedMessage
-      id="global.save"
-      values={Object {}}
+    <FieldArray
+      change={[MockFunction]}
+      component={[Function]}
+      disabled={true}
+      intl={
+        Object {
+          "formatDate": [Function],
+          "formatHTMLMessage": [Function],
+          "formatMessage": [Function],
+          "formatNumber": [Function],
+          "formatPlural": [Function],
+          "formatRelative": [Function],
+          "formatTime": [Function],
+          "formats": Object {},
+          "locale": "fr-FR",
+          "messages": Object {},
+          "now": [Function],
+        }
+      }
+      name="responses"
+      questions={
+        Array [
+          Object {
+            "choices": Array [
+              Object {
+                "id": 20,
+                "label": "Athlétisme",
+              },
+              Object {
+                "id": 21,
+                "label": "Natation",
+              },
+              Object {
+                "id": 22,
+                "label": "Sports collectifs",
+              },
+              Object {
+                "id": 23,
+                "label": "Sports individuels",
+              },
+            ],
+            "helpText": "Plusieurs choix sont possibles",
+            "id": 11,
+            "isOtherAllowed": true,
+            "question": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+            "required": false,
+            "slug": "pour-quel-type-d-epreuve-etes-vous-pret-a-acheter-des-places",
+            "type": "checkbox",
+          },
+          Object {
+            "choices": Array [
+              Object {
+                "id": 28,
+                "label": "Pas assez fort (Mon sonotone est en panne)",
+              },
+              Object {
+                "id": 29,
+                "label": "Assez fort (Mon sonotone est mal réglé)",
+              },
+              Object {
+                "id": 30,
+                "label": "Trop fort (Mon sonotone est tout neuf)",
+              },
+            ],
+            "helpText": "Merci de répondre sincèrement",
+            "id": 13,
+            "question": "Nelson Monfort parle-t-il:",
+            "required": false,
+            "slug": "nelson-monfort-parle-t-il",
+            "type": "select",
+          },
+          Object {
+            "choices": Array [
+              Object {
+                "id": 28,
+                "label": "Pas assez fort (Mon sonotone est en panne)",
+              },
+              Object {
+                "id": 29,
+                "label": "Assez fort (Mon sonotone est mal réglé)",
+              },
+              Object {
+                "id": 30,
+                "label": "Trop fort (Mon sonotone est tout neuf)",
+              },
+            ],
+            "helpText": "Merci de répondre sincèrement",
+            "id": 14,
+            "question": "Nelson Monfort parle-t-il:",
+            "required": false,
+            "slug": "nelson-monfort-parle-t-il",
+            "type": "ranking",
+          },
+        ]
+      }
     />
+<<<<<<< HEAD
   </Button>
 >>>>>>> [ADD] good jest test & [RMV] flow error
 </form>
+=======
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="primary"
+      disabled={true}
+      id="proposal_admin_content_save"
+      type="submit"
+    >
+      <FormattedMessage
+        id="global.save"
+        values={Object {}}
+      />
+    </Button>
+  </form>
+</div>
+>>>>>>> [ADD] children fragment for container's fragment & [CHG] jest test
 `;
 
 exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
-<form
-  id="reply-form"
-  onSubmit={[MockFunction]}
+<div
+  id="create-reply-form"
 >
+<<<<<<< HEAD
 <<<<<<< HEAD
   <Alert
     bsClass="alert"
@@ -1156,11 +1644,86 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
     disabled={true}
     id="proposal_admin_content_save"
     type="submit"
+=======
+  <form
+    id="reply-form"
+    onSubmit={[MockFunction]}
+>>>>>>> [ADD] children fragment for container's fragment & [CHG] jest test
   >
-    <FormattedMessage
-      id="global.save"
-      values={Object {}}
+    <FieldArray
+      change={[MockFunction]}
+      component={[Function]}
+      disabled={true}
+      intl={
+        Object {
+          "formatDate": [Function],
+          "formatHTMLMessage": [Function],
+          "formatMessage": [Function],
+          "formatNumber": [Function],
+          "formatPlural": [Function],
+          "formatRelative": [Function],
+          "formatTime": [Function],
+          "formats": Object {},
+          "locale": "fr-FR",
+          "messages": Object {},
+          "now": [Function],
+        }
+      }
+      name="responses"
+      questions={
+        Array [
+          Object {
+            "helpText": "",
+            "id": 10,
+            "question": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+            "required": true,
+            "slug": "etes-vous-satisfait-que-la-ville-de-paris-soit-candidate-a-l-organisation-des-jo-de-2024",
+            "type": "text",
+          },
+          Object {
+            "choices": Array [
+              Object {
+                "id": 24,
+                "label": "Maxime Arrouard",
+              },
+              Object {
+                "id": 25,
+                "label": "Spylou Super Sayen",
+              },
+              Object {
+                "id": 26,
+                "label": "Cyril Lage",
+              },
+              Object {
+                "id": 27,
+                "label": "Superman",
+              },
+            ],
+            "helpText": "Un seul choix possible",
+            "id": 12,
+            "isOtherAllowed": true,
+            "question": "Quel est ton athlète favori ?",
+            "required": true,
+            "slug": "quel-est-ton-athlete-favori",
+            "type": "radio",
+          },
+        ]
+      }
     />
-  </Button>
-</form>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="primary"
+      disabled={true}
+      id="proposal_admin_content_save"
+      type="submit"
+    >
+      <FormattedMessage
+        id="global.save"
+        values={Object {}}
+      />
+    </Button>
+  </form>
+</div>
 `;

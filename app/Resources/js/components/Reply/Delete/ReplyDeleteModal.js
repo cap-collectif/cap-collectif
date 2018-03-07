@@ -1,29 +1,33 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { createFragmentContainer, graphql } from 'react-relay';
 import { Modal } from 'react-bootstrap';
+import type { ReplyDeleteModal_reply } from './__generated__/ReplyDeleteModal_reply.graphql';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import ReplyActions from '../../../actions/ReplyActions';
 
-const ReplyDeleteModal = React.createClass({
-  propTypes: {
-    form: React.PropTypes.object.isRequired,
-    reply: React.PropTypes.object.isRequired,
-    show: React.PropTypes.bool.isRequired,
-    onToggleModal: React.PropTypes.func.isRequired,
-    onDelete: React.PropTypes.func.isRequired,
-  },
+type Props = {
+  reply: ReplyDeleteModal_reply,
+  show: boolean,
+  onToggleModal: Function,
+  onDelete: Function,
+};
 
-  getInitialState() {
-    return {
+export class ReplyDeleteModal extends React.Component<Props> {
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
       isSubmitting: false,
     };
-  },
+  }
 
   handleSubmit() {
-    const { form, onDelete, reply } = this.props;
+    const { onDelete, reply } = this.props;
+
     this.setState({ isSubmitting: true });
-    ReplyActions.delete(form.id, reply.id)
+    ReplyActions.delete(reply.questionnaire.id, reply.id)
       .then(() => {
         this.close();
         onDelete();
@@ -31,17 +35,17 @@ const ReplyDeleteModal = React.createClass({
       .catch(() => {
         this.setState({ isSubmitting: false });
       });
-  },
+  }
 
   close() {
     const { onToggleModal } = this.props;
     onToggleModal(false);
-  },
+  }
 
   show() {
     const { onToggleModal } = this.props;
     onToggleModal(true);
-  },
+  }
 
   render() {
     const { reply, show } = this.props;
@@ -77,7 +81,16 @@ const ReplyDeleteModal = React.createClass({
         </Modal>
       </div>
     );
-  },
-});
+  }
+}
 
-export default ReplyDeleteModal;
+export default createFragmentContainer(ReplyDeleteModal, {
+  reply: graphql`
+    fragment ReplyDeleteModal_reply on Reply {
+      id
+      questionnaire {
+        id
+      }
+    }
+  `,
+});

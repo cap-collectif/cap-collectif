@@ -1,7 +1,14 @@
 // @flow
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
-import { type FormProps, reduxForm, FieldArray, Field, SubmissionError } from 'redux-form';
+import {
+  type FormProps,
+  formValueSelector,
+  reduxForm,
+  FieldArray,
+  Field,
+  SubmissionError,
+} from 'redux-form';
 import { connect, type MapStateToProps } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Button } from 'react-bootstrap';
@@ -20,6 +27,7 @@ import AddReplyMutation from '../../../mutations/AddReplyMutation';
 
 type Props = FormProps & {
   +questionnaire: ReplyForm_questionnaire,
+  +responses: ResponsesInReduxForm,
   +user: ?Object,
   +intl: IntlShape,
 };
@@ -29,7 +37,7 @@ type FormValues = {|
 |};
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  const { questionnaire, reset } = props;
+  const { questionnaire } = props;
 
   const data = {};
 
@@ -44,10 +52,10 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   return AddReplyMutation.commit({ input: data })
     .then(() => {
       ReplyActions.loadUserReplies(questionnaire.id);
-      if (questionnaire.multipleRepliesAllowed) {
-        // dispatch(reset('ReplyForm'));
-        reset();
-      }
+      // if (questionnaire.multipleRepliesAllowed) {
+      //   // dispatch(reset('ReplyForm'));
+      //   reset();
+      // }
     })
     .catch(() => {
       throw new SubmissionError({
@@ -149,57 +157,62 @@ export class ReplyForm extends React.Component<Props> {
       submitSucceeded,
       submitFailed,
       handleSubmit,
+      responses,
     } = this.props;
 
     const disabled = this.formIsDisabled();
 
     return (
-      <form id="reply-form" ref="form" onSubmit={handleSubmit}>
-        {questionnaire.description && (
-          <p dangerouslySetInnerHTML={{ __html: questionnaire.description }} />
-        )}
-        <FieldArray
-          name="responses"
-          change={change}
-          component={renderResponses}
-          questions={questionnaire.questions}
-          intl={intl}
-          disabled={disabled}
-        />
-        {questionnaire.anonymousAllowed && (
-          <div>
-            <hr style={{ marginBottom: '30px' }} />
-            <Field
-              type="checkbox"
-              name="private"
-              component={renderComponent}
-              children={<FormattedMessage id="reply.form.private" />}
-              disabled={disabled}
-            />
-          </div>
-        )}
-        <Button
-          type="submit"
-          id="proposal_admin_content_save"
-          bsStyle="primary"
-          disabled={pristine || invalid || submitting || disabled}>
-          <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
-        </Button>
-        {!disabled && (
-          <AlertForm
-            valid={valid}
-            invalid={invalid}
-            submitSucceeded={submitSucceeded}
-            submitFailed={submitFailed}
-            submitting={submitting}
+      <div id="create-reply-form">
+        <form id="reply-form" ref="form" onSubmit={handleSubmit}>
+          {questionnaire.description && (
+            <p dangerouslySetInnerHTML={{ __html: questionnaire.description }} />
+          )}
+          <FieldArray
+            name="responses"
+            change={change}
+            responses={responses}
+            component={renderResponses}
+            questions={questionnaire.questions}
+            intl={intl}
+            disabled={disabled}
           />
-        )}
-      </form>
+          {questionnaire.anonymousAllowed && (
+            <div>
+              <hr style={{ marginBottom: '30px' }} />
+              <Field
+                type="checkbox"
+                name="private"
+                component={renderComponent}
+                children={<FormattedMessage id="reply.form.private" />}
+                disabled={disabled}
+              />
+            </div>
+          )}
+          <Button
+            type="submit"
+            id="proposal_admin_content_save"
+            bsStyle="primary"
+            disabled={pristine || invalid || submitting || disabled}>
+            <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
+          </Button>
+          {!disabled && (
+            <AlertForm
+              valid={valid}
+              invalid={invalid}
+              submitSucceeded={submitSucceeded}
+              submitFailed={submitFailed}
+              submitting={submitting}
+            />
+          )}
+        </form>
+      </div>
     );
   }
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) => ({
+  responses: formValueSelector(formName)(state, 'responses'),
   initialValues: {
     responses: formatInitialResponsesValues(props.questionnaire.questions, []),
   },
@@ -209,7 +222,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) =
 const form = reduxForm({
   validate,
   onSubmit,
-  enableReinitialize: true,
+  // enableReinitialize: true,
   form: formName,
 })(ReplyForm);
 

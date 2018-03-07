@@ -57,7 +57,6 @@ const acceptedMimeTypes = [
 type Props = {
   intl: IntlShape,
   name?: ?string,
-  name: ?string,
   image?: ?string,
   id: ?string,
   children?: any,
@@ -257,7 +256,6 @@ class ReactBootstrapInput extends React.Component<Props> {
     }
 
     if (type === 'radio') {
-      console.log("ici radio");
       formControl = (
         <Radio value={value} {...props} checked={radioChecked}>
           {children}

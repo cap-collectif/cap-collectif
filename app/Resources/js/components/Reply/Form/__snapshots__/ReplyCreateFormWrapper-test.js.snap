@@ -2,9 +2,8 @@
 
 exports[`<ReplyCreateFormWrapper /> should no alert an a disabled form when form is not contribuable 1`] = `
 <div>
-  <ReplyCreateForm
-    disabled={true}
-    form={
+  <ReplyForm
+    questionnaire={
       Object {
         "contribuable": false,
       }
@@ -33,12 +32,19 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
       />
     </p>
   </Alert>
-  <ReplyCreateForm
-    disabled={true}
-    form={
+  <ReplyForm
+    questionnaire={
       Object {
         "contribuable": true,
         "multipleRepliesAllowed": false,
+        "viewerReplies": Array [
+          Object {
+            "id": 326,
+          },
+          Object {
+            "id": 289,
+          },
+        ],
       }
     }
   />
@@ -75,12 +81,16 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
       }
     />
   </Alert>
-  <ReplyCreateForm
-    disabled={true}
-    form={
+  <ReplyForm
+    questionnaire={
       Object {
         "contribuable": true,
         "multipleRepliesAllowed": true,
+        "viewerReplies": Array [
+          Object {
+            "id": 289,
+          },
+        ],
       }
     }
   />
@@ -89,12 +99,16 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
 
 exports[`<ReplyCreateFormWrapper /> should render no alert an an enabled form 1`] = `
 <div>
-  <ReplyCreateForm
-    disabled={false}
-    form={
+  <ReplyForm
+    questionnaire={
       Object {
         "contribuable": true,
         "multipleRepliesAllowed": true,
+        "viewerReplies": Array [
+          Object {
+            "id": 289,
+          },
+        ],
       }
     }
   />

@@ -1,48 +1,38 @@
-import React, { PropTypes } from 'react';
+import * as React from 'react';
+import { createFragmentContainer, graphql } from 'react-relay';
+import { Button } from 'react-bootstrap';
+import { type ReplyModalButtons_reply } from './__generated__/ReplyModalButtons_reply.graphql';
 import ReplyDeleteModal from '../Delete/ReplyDeleteModal';
-import DeleteButton from '../../Form/DeleteButton';
 
-const ReplyModalButtons = React.createClass({
-  propTypes: {
-    reply: PropTypes.object.isRequired,
-    form: PropTypes.object.isRequired,
-    onChange: PropTypes.func.isRequired,
-  },
+type Props = {
+  reply: ReplyModalButtons_reply,
+  onChange: Function,
+};
 
-  getInitialState() {
-    return {
-      showEditModal: false,
-      showDeleteModal: false,
-    };
-  },
-
-  toggleEditModal(value) {
-    this.setState({ showEditModal: value });
-  },
+export class ReplyModalButtons extends React.Component<Props> {
+  state = {
+    showEditModal: false,
+    showDeleteModal: false,
+  };
 
   toggleDeleteModal(value) {
     this.setState({ showDeleteModal: value });
-  },
+  }
 
   render() {
-    const { reply, form, onChange } = this.props;
+    const { reply, onChange } = this.props;
     return (
       <span className="pull-left reply__buttons">
-        {form.contribuable && (
-          <DeleteButton
-            id={`reply-delete-button${reply.id}`}
-            className="reply__delete-btn"
-            author={reply.author}
-            onClick={this.toggleDeleteModal.bind(null, true)}
-            style={{ marginLeft: '15px' }}
-            deletable={form.isContribuable}
-          />
-        )}
-        {form.contribuable && (
+        {reply.viewerCanDelete && (
           <div>
+            <Button
+              id={`reply-delete-button${reply.id}`}
+              className="reply__delete-btn"
+              onClick={this.toggleDeleteModal.bind(null, true)}
+              style={{ marginLeft: '15px' }}
+            />
             <ReplyDeleteModal
               reply={reply}
-              form={form}
               show={this.state.showDeleteModal}
               onToggleModal={this.toggleDeleteModal}
               onDelete={onChange}
@@ -51,7 +41,15 @@ const ReplyModalButtons = React.createClass({
         )}
       </span>
     );
-  },
-});
+  }
+}
 
-export default ReplyModalButtons;
+export default createFragmentContainer(ReplyModalButtons, {
+  reply: graphql`
+    fragment ReplyModalButtons_reply on Reply {
+      id
+      viewerCanDelete
+      ...ReplyDeleteModal_reply
+    }
+  `,
+});

@@ -1,35 +1,35 @@
 import React from 'react';
 import { FormattedMessage, FormattedDate } from 'react-intl';
 import { ListGroupItem } from 'react-bootstrap';
+import { createFragmentContainer, graphql } from 'react-relay';
 import moment from 'moment';
+import { type ReplyModalLink_reply } from './__generated__/ReplyModalLink_reply.graphql';
 import ShowReplyModal from './ShowReplyModal';
 
-const ReplyModalLink = React.createClass({
-  propTypes: {
-    reply: React.PropTypes.object.isRequired,
-    form: React.PropTypes.object.isRequired,
-  },
+type Props = {
+  reply: ReplyModalLink_reply,
+  questionnaire: Object,
+};
 
-  getInitialState() {
-    return {
-      showModal: false,
-    };
-  },
+export class ReplyModalLink extends React.Component<Props> {
+  state = {
+    showModal: false,
+  };
 
   showModal() {
     this.setState({
       showModal: true,
     });
-  },
+  }
 
   hideModal() {
     this.setState({
       showModal: false,
     });
-  },
+  }
 
   render() {
-    const { reply, form } = this.props;
+    const { reply, questionnaire } = this.props;
 
     return (
       <ListGroupItem className="reply" id={`reply-link-${reply.id}`} onClick={this.showModal}>
@@ -58,11 +58,20 @@ const ReplyModalLink = React.createClass({
           show={this.state.showModal}
           onClose={this.hideModal}
           reply={reply}
-          form={form}
+          questionnaire={questionnaire}
         />
       </ListGroupItem>
     );
-  },
-});
+  }
+}
 
-export default ReplyModalLink;
+export default createFragmentContainer(ReplyModalLink, {
+  reply: graphql`
+    fragment ReplyModalLink_reply on Reply {
+      createdAt
+      id
+      private
+      ...ShowReplyModal_reply
+    }
+  `,
+});

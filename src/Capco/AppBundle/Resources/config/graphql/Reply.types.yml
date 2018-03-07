@@ -27,3 +27,6 @@ Reply:
               type: "DateTime!"
               description: "Identifies the date and time when the object was created."
               resolve: "@=resolver('proposal_created_at', [value])"
+            viewerCanDelete:
+              type: "Boolean!"
+              resolve: "@=false"
