@@ -50,7 +50,7 @@ export class ProjectRow extends Component<Props, State> {
           header={
             <div>
               <h3>
-                <a href={project.show_url} title={project.title}>
+                <a href={project.url} title={project.title}>
                   {project.title}
                 </a>
                 <Button

@@ -910,6 +910,7 @@ type Project implements Node {
 
   # A list of contributor associated with the project.
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
+  url: String
 }
 
 # A budget contribution

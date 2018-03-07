@@ -101,6 +101,7 @@ export default createFragmentContainer(
         project {
           id
           title
+          url
         }
       }
     }
