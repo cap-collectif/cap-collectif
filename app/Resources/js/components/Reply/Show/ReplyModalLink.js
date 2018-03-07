@@ -16,17 +16,17 @@ export class ReplyModalLink extends React.Component<Props> {
     showModal: false,
   };
 
-  showModal() {
+  showModal = () => {
     this.setState({
       showModal: true,
     });
-  }
+  };
 
-  hideModal() {
+  hideModal = () => {
     this.setState({
       showModal: false,
     });
-  }
+  };
 
   render() {
     const { reply, questionnaire } = this.props;

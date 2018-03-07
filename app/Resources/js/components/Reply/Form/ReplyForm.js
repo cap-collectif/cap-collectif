@@ -52,10 +52,10 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   return AddReplyMutation.commit({ input: data })
     .then(() => {
       ReplyActions.loadUserReplies(questionnaire.id);
-      // if (questionnaire.multipleRepliesAllowed) {
-      //   // dispatch(reset('ReplyForm'));
-      //   reset();
-      // }
+      if (questionnaire.multipleRepliesAllowed) {
+        // dispatch(reset('ReplyForm'));
+        // reset(); ?
+      }
     })
     .catch(() => {
       throw new SubmissionError({
@@ -137,6 +137,7 @@ export const formName = 'ReplyForm';
 export class ReplyForm extends React.Component<Props> {
   formIsDisabled() {
     const { questionnaire, user } = this.props;
+
     return (
       !questionnaire.open ||
       !user ||

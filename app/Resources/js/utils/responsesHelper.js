@@ -104,6 +104,26 @@ export const formatSubmitResponses = (
   });
 };
 
+export const getValueFromResponse = (questionType: string, responseValue: string) => {
+  // For some questions type we need to parse the JSON of previous value
+  try {
+    if (questionType === 'button') {
+      return JSON.parse(responseValue).labels[0];
+    }
+    if (questionType === 'radio' || questionType === 'checkbox') {
+      return JSON.parse(responseValue);
+    }
+    if (questionType === 'ranking') {
+      return JSON.parse(responseValue).labels;
+    }
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(`Failed to parse : ${responseValue}`);
+  }
+
+  return responseValue;
+};
+
 export const formatInitialResponsesValues = (
   questions: Questions,
   responses: ResponsesFromAPI,
@@ -114,27 +134,9 @@ export const formatInitialResponsesValues = (
     // If we have a previous response format it
     if (response) {
       if (typeof response.value !== 'undefined' && response.value !== null) {
-        const questionType = question.type;
-
-        // For some questions type we need to parse the JSON of previous value
-        let responseValue = response.value;
-        try {
-          if (questionType === 'button') {
-            responseValue = JSON.parse(response.value).labels[0];
-          }
-          if (questionType === 'radio' || questionType === 'checkbox') {
-            responseValue = JSON.parse(response.value);
-          }
-          if (questionType === 'ranking') {
-            responseValue = JSON.parse(response.value).labels;
-          }
-        } catch (e) {
-          // eslint-disable-next-line no-console
-          console.error(`Failed to parse : ${response.value}`);
-        }
         return {
           question: question.id,
-          value: responseValue,
+          value: getValueFromResponse(question.type, response.value),
         };
       }
       if (typeof response.medias !== 'undefined') {

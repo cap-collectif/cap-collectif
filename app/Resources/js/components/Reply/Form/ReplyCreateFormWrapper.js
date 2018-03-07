@@ -7,7 +7,7 @@ import { type ReplyCreateFormWrapper_questionnaire } from './__generated__/Reply
 import LoginButton from '../../User/Login/LoginButton';
 import RegistrationButton from '../../User/Registration/RegistrationButton';
 import PhoneModal from '../../User/Phone/PhoneModal';
-import { ReplyForm } from './ReplyForm';
+import ReplyForm from './ReplyForm';
 
 type Props = {
   questionnaire: ReplyCreateFormWrapper_questionnaire,

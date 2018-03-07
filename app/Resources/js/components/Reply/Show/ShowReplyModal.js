@@ -80,9 +80,7 @@ export default createFragmentContainer(ShowReplyModal, {
           id
           title
         }
-        ... on ValueResponse {
-          value
-        }
+        ...ResponseValue_response
       }
       ...ReplyModalButtons_reply
     }

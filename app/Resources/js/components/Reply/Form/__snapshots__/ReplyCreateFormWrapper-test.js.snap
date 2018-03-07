@@ -2,7 +2,7 @@
 
 exports[`<ReplyCreateFormWrapper /> should no alert an a disabled form when form is not contribuable 1`] = `
 <div>
-  <ReplyForm
+  <Relay(Connect(InjectIntl(ReduxForm)))
     questionnaire={
       Object {
         "contribuable": false,
@@ -32,7 +32,7 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
       />
     </p>
   </Alert>
-  <ReplyForm
+  <Relay(Connect(InjectIntl(ReduxForm)))
     questionnaire={
       Object {
         "contribuable": true,
@@ -81,7 +81,7 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
       }
     />
   </Alert>
-  <ReplyForm
+  <Relay(Connect(InjectIntl(ReduxForm)))
     questionnaire={
       Object {
         "contribuable": true,
@@ -99,7 +99,7 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
 
 exports[`<ReplyCreateFormWrapper /> should render no alert an an enabled form 1`] = `
 <div>
-  <ReplyForm
+  <Relay(Connect(InjectIntl(ReduxForm)))
     questionnaire={
       Object {
         "contribuable": true,
