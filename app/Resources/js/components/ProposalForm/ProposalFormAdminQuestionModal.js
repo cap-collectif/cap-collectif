@@ -1,5 +1,5 @@
 // @flow
-import React, { PropTypes } from 'react';
+import * as React from 'react';
 import { Modal } from 'react-bootstrap';
 import { connect, type MapStateToProps } from 'react-redux';
 import { Field, formValueSelector, change } from 'redux-form';
@@ -7,26 +7,27 @@ import { FormattedMessage } from 'react-intl';
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
 import component from '../Form/Field';
+import type { Dispatch, State } from '../../types';
 
 const selector = formValueSelector('proposal-form-admin-configuration');
 
-export const ProposalFormAdminQuestionModal = React.createClass({
-  propTypes: {
-    show: PropTypes.bool.isRequired,
-    onClose: PropTypes.func.isRequired,
-    onSubmit: PropTypes.func.isRequired,
-    member: PropTypes.string.isRequired,
-    isCreating: PropTypes.bool.isRequired,
-    kind: PropTypes.string.isRequired,
-    dispatch: PropTypes.func.isRequired,
-  },
+type Props = {
+  show: boolean,
+  onClose: () => void,
+  onSubmit: () => void,
+  member: string,
+  isCreating: boolean,
+  kind: string,
+  dispatch: Dispatch,
+};
 
-  componentWillUpdate(nextProps) {
+export class ProposalFormAdminQuestionModal extends React.Component<Props> {
+  componentWillUpdate(nextProps: Props) {
     const { kind, dispatch, member } = this.props;
     if (nextProps.kind === 'media' && nextProps.kind !== kind) {
       dispatch(change('proposal-form-admin-configuration', `${member}.type`, 'medias'));
     }
-  },
+  }
 
   render() {
     const { member, show, isCreating, onClose, onSubmit, kind } = this.props;
@@ -71,7 +72,7 @@ export const ProposalFormAdminQuestionModal = React.createClass({
               <FormattedMessage id="admin.fields.questionnaire_abstractquestion.questions_add" />
             </option>
             <option value="simple">
-              <FormattedMessage id="global.question.types.text" />
+              <FormattedMessage id="question.types.text" />
             </option>
             <option value="media">
               <FormattedMessage id="global.question.types.medias" />
@@ -124,10 +125,10 @@ export const ProposalFormAdminQuestionModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  },
-});
+  }
+}
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state, props) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props) => ({
   kind: selector(state, `${props.member}.kind`) || '',
 });
 
