@@ -27,6 +27,11 @@ const Col = styled.div.attrs({
 const openProject = {
   title: "Mon projet",
   theme: "Immobilier, Transport",
+  label: "danger",
+  status: {
+    name: "Soumis au vote",
+    color: "status--success",
+  },
   cover: "https://source.unsplash.com/random",
     type: {
     title: "Consultation",
@@ -47,6 +52,11 @@ const openProject = {
 const continuousProject = {
   title: "Mon autre projet",
   theme: "Immobilier, Transport",
+  label: "success",
+  status: {
+    name: "Aucun statut",
+    color: "status--primary",
+  },
   cover: "https://source.unsplash.com/random",
   type: {
     title: "Questionnaire",
@@ -67,6 +77,11 @@ const continuousProject = {
 const endedProject = {
   title: "Mon terminé",
   theme: "Immobilier, Transport",
+  label: "primary",
+  status: {
+    name: "Vote gagné",
+    color: "status--danger",
+  },
   cover: "https://source.unsplash.com/random",
   type: {
     title: "Budget participatif",
@@ -86,6 +101,11 @@ const endedProject = {
 const toComeProject = {
   title: "Projet à venir",
   theme: "Immobilier, Transport",
+  label: "info",
+  status: {
+    name: "Aucun statut",
+    color: "status--info",
+  },
   cover: "https://source.unsplash.com/random",
   type: {
     title: "Interpellation",
@@ -140,26 +160,26 @@ storiesOf('Components', module)
         <hr/>
         <Row>
           <Col>
-            <CardProposal project={openProject} />
+            <CardProposal proposal={openProject} />
           </Col>
           <Col>
-            <CardProposal project={endedProject} />
+            <CardProposal proposal={endedProject} />
           </Col>
           <Col>
-            <CardProposal project={continuousProject} />
+            <CardProposal proposal={continuousProject} />
           </Col>
         </Row>
         <h3>Theme Card</h3>
         <hr/>
         <Row>
           <Col>
-            <CardTheme />
+            <CardTheme theme={openProject} />
           </Col>
           <Col>
-            <CardTheme />
+            <CardTheme theme={endedProject} />
           </Col>
           <Col>
-            <CardTheme />
+            <CardTheme theme={continuousProject} />
           </Col>
         </Row>
         <h3>Idea Card</h3>

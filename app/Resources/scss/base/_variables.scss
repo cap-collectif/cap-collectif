@@ -100,3 +100,15 @@ $btns-outline:
         (dark-gray $dark-gray $dark-gray $white)
         (light-gray $page-bgc $page-bgc $dark);
 
+$statuses: (primary $primary-color $white) (success $success-color $white) (info $info-color $white) (warning $warning-color $white) (danger $danger-color $white) (default $dark-gray $white);
+
+@each $status in $statuses {
+    $name: nth($status, 1);
+    $bg: nth($status, 2);
+    $color: nth($status, 3);
+
+    &.status--#{$name} {
+        background-color: $bg;
+        color: $color;
+    }
+}

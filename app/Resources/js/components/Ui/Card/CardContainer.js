@@ -30,20 +30,6 @@ export const CardContainer = styled.div`
     }
   }
   
-  .card__tags {
-    margin-top: 5px;
-    font-size: 14px;
-  
-    .card__tag{
-      padding: 5px 0 0 5px;
-      display: block;
-      
-      .cap {
-        padding-right: 5px;
-      }
-    } 
-  }
-  
   .card__actions {
     color: #707070;
     font-size: 14px;

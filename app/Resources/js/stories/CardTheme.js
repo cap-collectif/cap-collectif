@@ -2,42 +2,27 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { CardContainer } from '../components/Ui/Card/CardContainer';
+import DotList from "../components/Ui/List/DotList";
+import CardCover from "../components/Ui/Card/CardCover";
 
-type Props = {};
-
-const Image = styled.div` 
-  width: 100%;
-  background: url('https://source.unsplash.com/random') center;
-  background-size: cover;
-  height: 175px; 
-`; // do component
-
-const DotList = styled.ul.attrs({
-  className: 'excerpt'
-})`
-  li::after {
-    content: "•";
-    padding: 0 .1em;
-  }
-  
-  li:lastchild::after {
-    content: '';
-    padding: 0;
-  }
-`;
+type Props = {
+  theme: Object,
+};
 
 export class CardTheme extends React.Component<Props> {
-  static defaultProps = {};
-
   render() {
+    const { theme } = this.props;
+
     return (
       <CardContainer className="text-center">
-        <Image />
+        <CardCover>
+          <img src={theme.cover} alt={theme.title}/>
+        </CardCover>
         <div className="card__body">
           <div className="card__body__infos">
             <h3 className="card__title">
               <a href="#">
-                Mon titre
+                {theme.title}
               </a>
             </h3>
             <DotList>
@@ -46,8 +31,8 @@ export class CardTheme extends React.Component<Props> {
               <li>2 évènements</li>
               <li>4 idées</li>
             </DotList>
-            <span className="label label-danger">
-              Danger
+            <span className={`label label-${theme.label}`}>
+              {theme.label}
             </span>
           </div>
         </div>

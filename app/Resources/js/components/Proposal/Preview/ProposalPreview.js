@@ -42,7 +42,7 @@ const ProposalPreview = React.createClass({
             showThemes={showThemes}
           />
           {step.id === proposal.votableStepId && (
-            <div className="proposal__buttons text-center">
+            <div>
               <ProposalPreviewVote proposal={proposal} />
             </div>
           )}
@@ -51,6 +51,7 @@ const ProposalPreview = React.createClass({
               <ProposalVoteThresholdProgressBar proposal={proposal} step={step} />
             </div>
           )}
+          {/*to change with tags*/}
           <ProposalPreviewFooter
             proposal={proposal}
             showVotes={voteType !== VOTE_TYPE_DISABLED}

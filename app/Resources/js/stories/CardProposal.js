@@ -3,51 +3,28 @@ import * as React from 'react';
 import styled from 'styled-components';
 import {CardContainer} from "../components/Ui/Card/CardContainer";
 import {CardUser} from "../components/Ui/Card/CardUser";
+import CardStatus from "../components/Ui/Card/CardStatus";
+import TagsList from "../components/Ui/List/TagsList";
 
 
 type Props = {
-  project: Object,
+  proposal: Object,
 };
-
-const Counters = styled.div`
-  padding: 5px;
-  background-color: #f6f6f6;
-  border-top: 1px solid #e3e3e3;
-`;
-
-const Counter = styled.div`
-  
-`;
-
-const Value = styled.div`
-  font-size: 18px;
-`;
-
-const Label = styled.div`
-  
-`;
-
-const Status = styled.div`
-  background-color: #707070;
-  color: #fff;
-  padding: 3px;
-  border-radius: 0 0 4px 4px;
-`;
 
 export class CardProposal extends React.Component<Props> {
   static defaultProps = {};
 
   render() {
-    const { project } = this.props;
+    const { proposal } = this.props;
 
     return (
       <CardContainer>
         <CardUser>
           <div className="card__user__avatar">
-            <img src={project.user.avatar} alt={project.user.name}/>
+            <img src={proposal.user.avatar} alt={proposal.user.name}/>
           </div>
           <div>
-            <a href="">{project.user.name}</a>
+            <a href="">{proposal.user.name}</a>
             <p>
               <div className="excerpt small">
                 1 janvier 2015
@@ -60,40 +37,32 @@ export class CardProposal extends React.Component<Props> {
           <div className="card__body__infos">
             <h3 className="card__title">
               <a href="#">
-                {project.title}
+                {proposal.title}
               </a>
             </h3>
             <div className="excerpt small">
               Lorem aque eius excepturi expedita ipptio quasi quisquam sunt tenetur vitae voluptas? Ad, iste.
             </div>
-            <div className="card__tags">
-              <div className="card__tag ellipsis">
+            <TagsList>
+              <div className="tags-list__tag ellipsis">
                 <i className="cap cap-tag-1-1 icon--blue" />
                 Justice
               </div>
-              <div className="card__tag ellipsis">
+              <div className="tags-list__tag ellipsis">
                 <i className="cap cap-marker-1-1 icon--blue" />
                 Maurepas Patton
               </div>
-            </div>
-
+              <hr/>
+              <div className="tags-list__tag ellipsis">
+                <i className="cap cap-marker-1-1 icon--blue" />
+                15 commentaires
+              </div>
+            </TagsList>
           </div>
         </div>
-        <div className="small text-center">
-          <Counters>
-            <Counter>
-              <Value>
-                15
-              </Value>
-              <Label>
-                commentaires
-              </Label>
-            </Counter>
-          </Counters>
-          <Status>
-            Aucun statut
-          </Status>
-        </div>
+        <CardStatus className={proposal.status.color}>
+          {proposal.status.name}
+        </CardStatus>
       </CardContainer>
     );
   }

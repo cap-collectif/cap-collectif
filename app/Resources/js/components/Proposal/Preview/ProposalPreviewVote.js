@@ -13,9 +13,7 @@ const ProposalPreviewVote = React.createClass({
       <div>
         <ProposalVoteButtonWrapper
           proposal={proposal}
-          style={{ width: '100%' }}
           id={`proposal-vote-btn-${proposal.id}`}
-          className="proposal__preview__vote"
         />
         <ProposalVoteModal proposal={proposal} />
       </div>

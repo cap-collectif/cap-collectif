@@ -12,7 +12,7 @@ const ProposalDetailEstimation = React.createClass({
     const estimation = !proposal.estimation && showNullEstimation ? 0 : proposal.estimation;
 
     return estimation !== null && typeof estimation !== 'undefined' ? (
-      <div className="card__tag ellipsis">
+      <div className="tags-list__tag ellipsis">
         <i className="cap cap-coins-2-1 icon--blue" />
         <FormattedNumber
           minimumFractionDigits={0}

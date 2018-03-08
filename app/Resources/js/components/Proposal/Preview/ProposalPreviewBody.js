@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Truncate from 'react-truncate';
 import ProposalDetailEstimation from '../Detail/ProposalDetailEstimation';
 import ProposalDetailLikers from '../Detail/ProposalDetailLikers';
+import TagsList from "../../Ui/List/TagsList";
 
 const ProposalPreviewBody = React.createClass({
   propTypes: {
@@ -24,32 +25,31 @@ const ProposalPreviewBody = React.createClass({
             </h2>
           </a>
           <div className="excerpt small">{proposal.summaryOrBodyExcerpt}</div>
-          <div className="card__tags">
+          <TagsList>
             {features.themes &&
             showThemes &&
             proposal.theme && (
-              <div className="card__tag ellipsis">
+              <div className="tags-list__tag ellipsis">
                 <i className="cap cap-tag-1-1 icon--blue" />
                 {proposal.theme.title}
               </div>
             )}
             {proposal.category && (
-              <div className="card__tag ellipsis">
+              <div className="tags-list__tag ellipsis">
                 <i className="cap cap-tag-1-1 icon--blue" />
                 {proposal.category.name}
               </div>
             )}
             {features.districts &&
             proposal.district && (
-              <div className="card__tag ellipsis">
+              <div className="tags-list__tag ellipsis">
                 <i className="cap cap-marker-1-1 icon--blue" />
                 {proposal.district.name}
               </div>
             )}
             <ProposalDetailEstimation proposal={proposal} showNullEstimation={showNullEstimation} />
             <ProposalDetailLikers proposal={proposal} />
-        </div>
-
+          </TagsList>
         </div>
       </div>
     );

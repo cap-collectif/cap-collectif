@@ -212,26 +212,26 @@ $statuses: (primary $primary-color $white) (success $success-color $white) (info
     }
 }
 
-.proposal__preview .proposal__status {
-    overflow: hidden;
-    padding: 3px;
-    margin: 0;
-    color: $white;
-    text-align: center;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-
-    @each $status in $statuses {
-        $name: nth($status, 1);
-        $bg: nth($status, 2);
-        $color: nth($status, 3);
-
-        &.status--#{$name} {
-            background-color: $bg;
-            color: $color;
-        }
-    }
-}
+//.proposal__preview .proposal__status {
+//    overflow: hidden;
+//    padding: 3px;
+//    margin: 0;
+//    color: $white;
+//    text-align: center;
+//    white-space: nowrap;
+//    text-overflow: ellipsis;
+//
+//    @each $status in $statuses {
+//        $name: nth($status, 1);
+//        $bg: nth($status, 2);
+//        $color: nth($status, 3);
+//
+//        &.status--#{$name} {
+//            background-color: $bg;
+//            color: $color;
+//        }
+//    }
+//}
 
 @media (min-width: $screen-sm-min) {
     .proposal__details__button {

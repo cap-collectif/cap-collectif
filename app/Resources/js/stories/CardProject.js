@@ -5,13 +5,13 @@ import {CardContainer} from "../components/Ui/Card/CardContainer";
 import CardType from "../components/Ui/Card/CardType";
 import {Progress} from "../components/Ui/Progress";
 import CardCover from "../components/Ui/Card/CardCover";
+import TagsList from "../components/Ui/List/TagsList";
 
 type Props = {
   project: Object,
 };
 
 export class CardProject extends React.Component<Props> {
-
   render() {
     const { project } = this.props;
 
@@ -25,20 +25,25 @@ export class CardProject extends React.Component<Props> {
         </CardCover>
         <div className="card__body">
           <div className="card__body__infos">
-            <div className="excerpt small">
-              {project.theme}
-            </div>
             <h3 className="card__title">
               <a href="#">
                 {project.title}
               </a>
             </h3>
-            <div className="excerpt small">
-              <span className="excerpt_dark">0</span> contribution
-            </div>
-            <div className="excerpt small">
-              <span className="excerpt_dark">0</span> participant
-            </div>
+            <TagsList>
+              <div className="tags-list__tag ellipsis">
+                <i className="cap cap-tag-1-1 icon--blue" />
+                {project.theme}
+              </div>
+              <div className="tags-list__tag ellipsis">
+                <i className="cap cap-marker-1-1 icon--blue" />
+                0 contributions
+              </div>
+              <div className="tags-list__tag ellipsis">
+                <i className="cap cap-marker-1-1 icon--blue" />
+                0 participants
+              </div>
+            </TagsList>
           </div>
           <Progress>
             <ProgressBar
