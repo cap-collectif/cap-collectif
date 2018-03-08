@@ -79,6 +79,7 @@ services:
           - { name: overblog_graphql.resolver, alias: "post_abstract", method: "resolvePostAbstract" }
           - { name: overblog_graphql.resolver, alias: "proposal_news", method: "resolveNews" }
           - { name: overblog_graphql.resolver, alias: "project_steps", method: "resolveProjectSteps" }
+          - { name: overblog_graphql.resolver, alias: "project_url", method: "resolveProjectUrl" }
           - { name: overblog_graphql.resolver, alias: "step_type", method: "resolveStepType" }
           - { name: overblog_graphql.resolver, alias: "response_type", method: "resolveResponseType" }
           - { name: overblog_graphql.resolver, alias: "proposal_publicationStatus", method: "resolveProposalPublicationStatus" }
@@ -140,8 +141,8 @@ services:
           - { name: overblog_graphql.resolver, alias: "user_gender", method: "resolveGender" }
           - { name: overblog_graphql.resolver, alias: "user_rolesText", method: "resolveRolesText" }
 
-    Capco\AppBundle\GraphQL\Resolver\UserFollowingProposalResolver:
-        class: Capco\AppBundle\GraphQL\Resolver\UserFollowingProposalResolver
+    Capco\AppBundle\GraphQL\Resolver\UsersFollowingProposalResolver:
+        class: Capco\AppBundle\GraphQL\Resolver\UsersFollowingProposalResolver
         arguments:
             - "@capco.user.repository"
             - "@logger"

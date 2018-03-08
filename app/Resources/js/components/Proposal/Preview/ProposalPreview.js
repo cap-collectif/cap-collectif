@@ -59,14 +59,8 @@ export class ProposalPreview extends React.Component<Props> {
                 environment={environment}
                 query={graphql`
                   query ProposalPreviewFollowerButtonQuery($proposalId: ID!) {
-                    proposal(id: $proposalId) {
+                    proposal: node(id: $proposalId) {
                       ...ProposalFollowButton_proposal
-                      id
-                      viewerIsFollowing
-                      viewerAsFollower {
-                        id
-                        notifiedOf
-                      }
                     }
                   }
                 `}
