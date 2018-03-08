@@ -70,7 +70,7 @@ mappings:
             Author: &Author
                 type: object
                 properties:
-                    slug: { type: keyword }
+                    id: { type: keyword }
 
     district:
         properties:

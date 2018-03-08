@@ -30,7 +30,7 @@ class CollectStepsController extends FOSRestController
      * @QueryParam(name="page", requirements="[0-9.]+", default="1")
      * @QueryParam(name="pagination", requirements="[0-9.]+", default="100")
      * @QueryParam(name="order", requirements="(old|last|votes|comments|random|expensive|cheap)", nullable=true)
-     * @View(statusCode=200, serializerGroups={"Proposals", "UsersInfos", "UserMedias"})
+     * @View(statusCode=200, serializerGroups={"Proposals", "ThemeDetails", "UsersInfos", "UserMedias"})
      */
     public function getProposalsByCollectStepAction(
         Request $request,
@@ -49,7 +49,7 @@ class CollectStepsController extends FOSRestController
                 return ['proposals' => [], 'count' => 0, 'order' => $order];
             }
             if (!$user->isAdmin()) {
-                $providedFilters['authorUniqueId'] = $user->getUniqueIdentifier();
+                $providedFilters['author'] = $user->getId();
             }
         }
 
@@ -73,7 +73,7 @@ class CollectStepsController extends FOSRestController
     /**
      * @Post("/collect_steps/{collect_step_id}/proposals/search-in")
      * @ParamConverter("collectStep", options={"mapping": {"collect_step_id": "id"}})
-     * @View(statusCode=200, serializerGroups={"Proposals", "UsersInfos", "UserMedias"})
+     * @View(statusCode=200, serializerGroups={"Proposals", "ThemeDetails", "UsersInfos", "UserMedias"})
      */
     public function getSelectProposalsByCollectStepAction(Request $request, CollectStep $collectStep): array
     {
@@ -91,7 +91,7 @@ class CollectStepsController extends FOSRestController
                 return ['proposals' => [], 'count' => 0];
             }
             if (!$user->isAdmin()) {
-                $providedFilters['authorUniqueId'] = $user->getUniqueIdentifier();
+                $providedFilters['author'] = $user->getId();
             }
         }
 
@@ -101,7 +101,7 @@ class CollectStepsController extends FOSRestController
         $orderedProposals = [];
         foreach ($selectedIds as $selectedId) {
             foreach ($results['proposals'] as $proposal) {
-                if ($selectedId === $proposal['id']) {
+                if ($selectedId === $proposal->getId()) {
                     $orderedProposals[] = $proposal;
                 }
             }
@@ -180,12 +180,6 @@ class CollectStepsController extends FOSRestController
 
         $em->persist($vote);
         $em->flush();
-
-        $indexer = $this->get('capco.elasticsearch.indexer');
-        $indexer->index(get_class($vote), $vote->getId());
-
-        $index = $this->get('capco.elasticsearch.index');
-        $index->refresh();
 
         return $vote;
     }

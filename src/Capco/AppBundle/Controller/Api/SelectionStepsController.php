@@ -43,7 +43,7 @@ class SelectionStepsController extends FOSRestController
      * @QueryParam(name="page", requirements="[0-9.]+", default="1")
      * @QueryParam(name="pagination", requirements="[0-9.]+", default="100")
      * @QueryParam(name="order", requirements="(old|last|votes|comments|random|expensive|cheap)", nullable=true)
-     * @View(statusCode=200, serializerGroups={"Proposals", "UsersInfos", "UserMedias"})
+     * @View(statusCode=200, serializerGroups={"Proposals", "ThemeDetails", "UsersInfos", "UserMedias"})
      */
     public function postProposalsBySelectionStepAction(Request $request, SelectionStep $selectionStep, ParamFetcherInterface $paramFetcher)
     {
@@ -82,7 +82,7 @@ class SelectionStepsController extends FOSRestController
     /**
      * @Post("/selection_steps/{selectionStepId}/proposals/search-in")
      * @ParamConverter("selectionStep", options={"mapping": {"selectionStepId": "id"}})
-     * @View(statusCode=200, serializerGroups={"Proposals", "UsersInfos", "UserMedias"})
+     * @View(statusCode=200, serializerGroups={"Proposals", "ThemeDetails", "UsersInfos", "UserMedias"})
      */
     public function postSelectProposalsByCollectStepAction(Request $request, SelectionStep $selectionStep): array
     {
@@ -98,7 +98,7 @@ class SelectionStepsController extends FOSRestController
         $orderedProposals = [];
         foreach ($selectedIds as $selectedId) {
             foreach ($results['proposals'] as $proposal) {
-                if ($selectedId === $proposal['id']) {
+                if ($selectedId === $proposal->getId()) {
                     $orderedProposals[] = $proposal;
                 }
             }
@@ -227,10 +227,6 @@ class SelectionStepsController extends FOSRestController
         $em->persist($vote);
         $em->flush();
 
-        $this
-            ->get('fos_elastica.object_persister.app.proposal')
-            ->insertOne($proposal);
-
         return $vote;
     }
 
@@ -269,10 +265,6 @@ class SelectionStepsController extends FOSRestController
 
         $em->remove($vote);
         $em->flush();
-
-        $this
-            ->get('fos_elastica.object_persister.app.proposal')
-            ->insertOne($proposal);
 
         return $vote;
     }

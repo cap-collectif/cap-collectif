@@ -22,10 +22,12 @@ class ProposalSearch extends Search
         'teaser.std',
     ];
 
-    public function __construct(Index $index, ElasticaToDoctrineTransformer $transformer, $validator)
+    private $proposalRepo;
+
+    public function __construct(Index $index, ElasticaToDoctrineTransformer $transformer, $validator, $proposalRepo)
     {
         parent::__construct($index, $transformer, $validator);
-
+        $this->proposalRepo = $proposalRepo;
         $this->type = 'proposal';
     }
 
@@ -42,9 +44,9 @@ class ProposalSearch extends Search
         $results = $this->getResults($query, count($selectedIds), false);
 
         return [
-            'proposals' => array_map(function (Result $result) {
-                return $result->getSource();
-            }, $results['results']),
+            'proposals' => $this->proposalRepo->findById(array_map(function (Result $result) {
+                return $result->getSource()['id'];
+            }, $results['results'])),
             'count' => $results['count'],
         ];
     }
@@ -96,9 +98,7 @@ class ProposalSearch extends Search
         $boolFilter = !empty($filters) ? $this->getBoolFilter($filters) : null;
 
         if ($boolFilter) {
-            $query = new Query\Filtered($query, $boolFilter);
-            // TODO when upgrade version of elasticsearch use this line instead (Query\Filtered is deprecated)
-            // $query->addFilter($boolFilter);
+            $query->addFilter($boolFilter);
         }
 
         if ('random' === $order) {
@@ -120,9 +120,9 @@ class ProposalSearch extends Search
         $results = $resultSet->getResults();
 
         return [
-            'proposals' => array_map(function (Result $result) {
-                return $result->getSource();
-            }, $results),
+            'proposals' => $this->proposalRepo->findById(array_map(function (Result $result) {
+                return $result->getSource()['id'];
+            }, $results)),
             'count' => $count,
             'order' => $order,
         ];
@@ -178,8 +178,8 @@ class ProposalSearch extends Search
         if (isset($providedFilters['categories'])) {
             $filters['category.id'] = $providedFilters['categories'];
         }
-        if (array_key_exists('authorUniqueId', $providedFilters)) {
-            $filters['author.uniqueId'] = $providedFilters['authorUniqueId'];
+        if (array_key_exists('author', $providedFilters)) {
+            $filters['author.id'] = $providedFilters['author'];
         }
 
         return $filters;

@@ -1023,27 +1023,18 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isIndexable(): bool
     {
         return $this->enabled && !$this->expired;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getElasticsearchTypeName(): string
     {
         return 'proposal';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['Proposals', 'ThemeDetails', 'UsersInfos'];
+        return ['Proposals', 'ThemeDetails', 'UserId'];
     }
 }

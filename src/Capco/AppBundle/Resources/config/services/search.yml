@@ -13,4 +13,4 @@ services:
 
   capco.search.proposal_search:
     class: Capco\AppBundle\Search\ProposalSearch
-    parent: capco.search.search
+    arguments: ['@fos_elastica.index', '@capco.elasticsearch.elastica_to_doctrine_transformer', '@validator', '@capco.proposal.repository']

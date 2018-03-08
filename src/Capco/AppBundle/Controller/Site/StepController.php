@@ -260,7 +260,7 @@ class StepController extends Controller
             $filters = ['proposalForm' => $proposalForm->getId()];
 
             if ($step->isPrivate() && $this->getUser()) {
-                $filters['authorUniqueId'] = $this->getUser()->getUniqueIdentifier();
+                $providedFilters['authorUniqueId'] = $user->getId();
                 $searchResults = $this->get('capco.search.proposal_search')
                     ->searchProposals(1, 51, null, null, $filters);
             } else {

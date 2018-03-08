@@ -354,10 +354,6 @@ EOF;
     }
 
     /**
-     * Checks that response has specific status code.
-     *
-     * @param string $code status code
-     *
      * @Then /^(?:the )?JSON response status code should be (\d+)$/
      */
     public function theJsonResponseStatusCodeShouldBe(int $code)

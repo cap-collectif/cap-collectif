@@ -143,7 +143,6 @@ abstract class Search
             ->addSort([
                 $sort => [
                     'order' => $order,
-                    'missing' => 'desc' === $order ? 1 - PHP_INT_MAX : PHP_INT_MAX - 1,
                 ],
             ]);
     }
