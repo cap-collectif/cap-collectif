@@ -137,11 +137,7 @@ mappings:
             slug: { type: keyword }
             body: *text_analysis_highlighted_autocompleted
             author: *Author
-            createdAt:
-                type: date
-                fields:
-                    # wtf?
-                    std: { type: text, analyzer: standard }
+            createdAt: { type: date }
             updatedAt: { type: date }
             deletedAt: { type: date }
             isTrashed: { type: boolean }
@@ -164,12 +160,12 @@ mappings:
             category:
                 type: object
                 properties:
-                    id: { type: long }
+                    id: { type: keyword }
                     name: { type: keyword }
             theme:
                 type: object
                 properties:
-                    id: { type: long }
+                    id: { type: keyword }
             selections:
                 type: object
                 properties:

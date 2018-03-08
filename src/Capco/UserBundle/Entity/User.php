@@ -1429,7 +1429,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     public function isIndexable(): bool
     {
-        return $this->notificationsConfiguration;
+        return $this->isEnabled();
     }
 
     public static function getElasticsearchTypeName(): string
