@@ -19,8 +19,6 @@ import UpdateFollowProposalMutation from '../../../mutations/UpdateFollowProposa
 import type { ProposalFollowButton_proposal } from './__generated__/ProposalFollowButton_proposal.graphql';
 import UnfollowProposalMutation from '../../../mutations/UnfollowProposalMutation';
 import LoginOverlay from '../../Utils/LoginOverlay';
-import AppDispatcher from '../../../dispatchers/AppDispatcher';
-import { UPDATE_ALERT } from '../../../constants/AlertConstants';
 
 type Props = {
   proposal: ProposalFollowButton_proposal,
@@ -63,7 +61,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                 return true;
               });
             }}
-            id="proposal-follow-btn">
+            id={`proposal-follow-btn-${proposal.id}`}>
             <FormattedMessage id="follow" />
           </Button>
         </LoginOverlay>
@@ -74,8 +72,8 @@ export class ProposalFollowButton extends React.Component<Props, State> {
         <LoginOverlay>
           <span className="mb-0 proposal-follow-dropdown">
             <Dropdown
-              className="mb-0 width250"
-              id="proposal-follow-btn"
+              className="mb-0 width250 fifty-shade-of-grey"
+              id={`proposal-follow-btn-${proposal.id}`}
               defaultOpen={isJustFollowed}>
               <Dropdown.Toggle>
                 <FormattedMessage id="following" />
@@ -99,141 +97,119 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                       </OverlayTrigger>
                     </span>
                   }>
-                  <FormGroup className="bn mb-0">
-                    <ListGroup className="mb-0">
-                      <ListGroupItem className="">
-                        <Radio
-                          name="radioGroup"
-                          checked={
-                            proposal.viewerAsFollower.notifiedOf === 'DEFAULT' ? 'checked' : ''
-                          }
-                          inline
-                          onClick={() => {
-                            if (
-                              proposal.viewerIsFollowing &&
-                              proposal.viewerAsFollower !== null &&
-                              typeof proposal.viewerAsFollower !== 'undefined'
-                            ) {
-                              return UpdateFollowProposalMutation.commit({
-                                input: {
-                                  proposalId: proposal.id,
-                                  followerId: proposal.viewerAsFollower.id,
-                                  notifiedOf: 'DEFAULT',
-                                },
-                              }).then(() => {
-                                AppDispatcher.dispatch({
-                                  actionType: UPDATE_ALERT,
-                                  alert: {
-                                    bsStyle: 'success',
-                                    content: 'flash-message-follow-update',
-                                  },
-                                });
-                                return true;
-                              });
+                  <form>
+                    <FormGroup className="bn mb-0" id={`proposal-follow-btn-${proposal.id}`}>
+                      <ListGroup className="mb-0">
+                        <ListGroupItem className="">
+                          <Radio
+                            id={`proposal-follow-btn-default-${proposal.id}`}
+                            name="default"
+                            title="default"
+                            checked={
+                              proposal.viewerAsFollower.notifiedOf === 'DEFAULT' ? 'checked' : ''
                             }
-                          }}>
-                          <b>
-                            <FormattedMessage id="the-progress" />
-                          </b>{' '}
-                          <br />
-                          <FormattedMessage id="list-of-progress-notifications" />
-                        </Radio>
-                      </ListGroupItem>
-                      <ListGroupItem className="">
-                        <Radio
-                          name="radioGroup"
-                          checked={
-                            proposal.viewerAsFollower.notifiedOf === 'DEFAULT_AND_COMMENTS'
-                              ? 'checked'
-                              : ''
-                          }
-                          inline
-                          onClick={() => {
-                            if (
-                              proposal.viewerIsFollowing &&
-                              proposal.viewerAsFollower !== null &&
-                              typeof proposal.viewerAsFollower !== 'undefined'
-                            ) {
-                              return UpdateFollowProposalMutation.commit({
-                                input: {
-                                  proposalId: proposal.id,
-                                  followerId: proposal.viewerAsFollower.id,
-                                  notifiedOf: 'DEFAULT_AND_COMMENTS',
-                                },
-                              }).then(() => {
-                                AppDispatcher.dispatch({
-                                  actionType: UPDATE_ALERT,
-                                  alert: {
-                                    bsStyle: 'success',
-                                    content: 'flash-message-follow-update',
+                            inline
+                            onClick={() => {
+                              if (
+                                proposal.viewerIsFollowing &&
+                                proposal.viewerAsFollower !== null &&
+                                typeof proposal.viewerAsFollower !== 'undefined'
+                              ) {
+                                return UpdateFollowProposalMutation.commit({
+                                  input: {
+                                    proposalId: proposal.id,
+                                    followerId: proposal.viewerAsFollower.id,
+                                    notifiedOf: 'DEFAULT',
                                   },
+                                }).then(() => {
+                                  return true;
                                 });
-                                return true;
-                              });
+                              }
+                            }}>
+                            <b>
+                              <FormattedMessage id="the-progress" />
+                            </b>{' '}
+                            <br />
+                            <FormattedMessage id="list-of-progress-notifications" />
+                          </Radio>
+                        </ListGroupItem>
+                        <ListGroupItem className="">
+                          <Radio
+                            name="default_and_comments"
+                            id={`proposal-follow-btn-default_and_comments-${proposal.id}`}
+                            checked={
+                              proposal.viewerAsFollower.notifiedOf === 'DEFAULT_AND_COMMENTS'
+                                ? 'checked'
+                                : ''
                             }
-                          }}>
-                          <b>
-                            <FormattedMessage id="progress-and-comments" />
-                          </b>
-                          <br />
-
-                          <FormattedMessage id="list-of-progress-notifications-and-comments" />
-                        </Radio>
-                      </ListGroupItem>
-                      <ListGroupItem className="">
-                        <Radio
-                          name="radioGroup"
-                          checked={proposal.viewerAsFollower.notifiedOf === 'ALL' ? 'checked' : ''}
-                          inline
-                          onClick={() => {
-                            if (
-                              proposal.viewerIsFollowing &&
-                              proposal.viewerAsFollower !== null &&
-                              typeof proposal.viewerAsFollower !== 'undefined'
-                            ) {
-                              return UpdateFollowProposalMutation.commit({
-                                input: {
-                                  proposalId: proposal.id,
-                                  followerId: proposal.viewerAsFollower.id,
-                                  notifiedOf: 'ALL',
-                                },
-                              }).then(() => {
-                                AppDispatcher.dispatch({
-                                  actionType: UPDATE_ALERT,
-                                  alert: {
-                                    bsStyle: 'success',
-                                    content: 'flash-message-follow-update',
+                            title="default_and_comments"
+                            onClick={() => {
+                              if (
+                                proposal.viewerIsFollowing &&
+                                proposal.viewerAsFollower !== null &&
+                                typeof proposal.viewerAsFollower !== 'undefined'
+                              ) {
+                                return UpdateFollowProposalMutation.commit({
+                                  input: {
+                                    proposalId: proposal.id,
+                                    followerId: proposal.viewerAsFollower.id,
+                                    notifiedOf: 'DEFAULT_AND_COMMENTS',
                                   },
+                                }).then(() => {
+                                  return true;
                                 });
-                                return true;
-                              });
+                              }
+                            }}>
+                            <b>
+                              <FormattedMessage id="progress-and-comments" />
+                            </b>
+                          </Radio>
+                        </ListGroupItem>
+                        <ListGroupItem className="">
+                          <Radio
+                            name="all"
+                            title="all"
+                            id={`proposal-follow-btn-all-${proposal.id}`}
+                            checked={
+                              proposal.viewerAsFollower.notifiedOf === 'ALL' ? 'checked' : ''
                             }
-                          }}>
-                          <b>
-                            <FormattedMessage id="all-activities" />
-                          </b>
-                          <br />
-                          <FormattedMessage id="list-of-activity-notifications" />
-                        </Radio>
-                      </ListGroupItem>
-                    </ListGroup>
-                  </FormGroup>
+                            onClick={() => {
+                              if (
+                                proposal.viewerIsFollowing &&
+                                proposal.viewerAsFollower !== null &&
+                                typeof proposal.viewerAsFollower !== 'undefined'
+                              ) {
+                                return UpdateFollowProposalMutation.commit({
+                                  input: {
+                                    proposalId: proposal.id,
+                                    followerId: proposal.viewerAsFollower.id,
+                                    notifiedOf: 'ALL',
+                                  },
+                                }).then(() => {
+                                  return true;
+                                });
+                              }
+                            }}>
+                            <b>
+                              <FormattedMessage id="all-activities" />
+                            </b>
+                            <br />
+                            <FormattedMessage id="list-of-activity-notifications" />
+                          </Radio>
+                        </ListGroupItem>
+                      </ListGroup>
+                    </FormGroup>
+                  </form>
                 </Panel>
                 <MenuItem
                   eventKey="1"
                   className="mt--1"
+                  id={`proposal-unfollow-btn-${proposal.id}`}
                   onClick={() => {
                     if (proposal.viewerIsFollowing) {
                       return UnfollowProposalMutation.commit({
                         input: { proposalId: proposal.id },
                       }).then(() => {
-                        AppDispatcher.dispatch({
-                          actionType: UPDATE_ALERT,
-                          alert: {
-                            bsStyle: 'success',
-                            content: 'flash-message-unfollow',
-                          },
-                        });
                         this.setState({
                           isJustFollowed: false,
                         });

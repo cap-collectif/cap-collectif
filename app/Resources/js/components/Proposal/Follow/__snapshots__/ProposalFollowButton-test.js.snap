@@ -9,7 +9,7 @@ exports[`<ProposalFollowButton /> should render a button to follow a proposal 1`
     bsStyle="default"
     className="btn btn-default"
     disabled={false}
-    id="proposal-follow-btn"
+    id="proposal-follow-btn-proposal1"
     onClick={[Function]}
   >
     <FormattedMessage
@@ -26,9 +26,9 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
     className="mb-0 proposal-follow-dropdown"
   >
     <Uncontrolled(Dropdown)
-      className="mb-0 width250"
+      className="mb-0 width250 fifty-shade-of-grey"
       defaultOpen={false}
-      id="proposal-follow-btn"
+      id="proposal-follow-btn-proposal1"
     >
       <DropdownToggle
         bsClass="dropdown-toggle"
@@ -89,98 +89,99 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
             </span>
           }
         >
-          <FormGroup
-            bsClass="form-group"
-            className="bn mb-0"
-          >
-            <ListGroup
-              bsClass="list-group"
-              className="mb-0"
+          <form>
+            <FormGroup
+              bsClass="form-group"
+              className="bn mb-0"
+              id="proposal-follow-btn-proposal1"
             >
-              <ListGroupItem
-                bsClass="list-group-item"
-                className=""
-                listItem={false}
+              <ListGroup
+                bsClass="list-group"
+                className="mb-0"
               >
-                <Radio
-                  bsClass="radio"
-                  checked="checked"
-                  disabled={false}
-                  inline={true}
-                  name="radioGroup"
-                  onClick={[Function]}
-                  title=""
+                <ListGroupItem
+                  bsClass="list-group-item"
+                  className=""
+                  listItem={false}
                 >
-                  <b>
+                  <Radio
+                    bsClass="radio"
+                    checked="checked"
+                    disabled={false}
+                    id="proposal-follow-btn-default-proposal1"
+                    inline={true}
+                    name="default"
+                    onClick={[Function]}
+                    title="default"
+                  >
+                    <b>
+                      <FormattedMessage
+                        id="the-progress"
+                        values={Object {}}
+                      />
+                    </b>
+                     
+                    <br />
                     <FormattedMessage
-                      id="the-progress"
+                      id="list-of-progress-notifications"
                       values={Object {}}
                     />
-                  </b>
-                   
-                  <br />
-                  <FormattedMessage
-                    id="list-of-progress-notifications"
-                    values={Object {}}
-                  />
-                </Radio>
-              </ListGroupItem>
-              <ListGroupItem
-                bsClass="list-group-item"
-                className=""
-                listItem={false}
-              >
-                <Radio
-                  bsClass="radio"
-                  checked=""
-                  disabled={false}
-                  inline={true}
-                  name="radioGroup"
-                  onClick={[Function]}
-                  title=""
+                  </Radio>
+                </ListGroupItem>
+                <ListGroupItem
+                  bsClass="list-group-item"
+                  className=""
+                  listItem={false}
                 >
-                  <b>
+                  <Radio
+                    bsClass="radio"
+                    checked=""
+                    disabled={false}
+                    id="proposal-follow-btn-default_and_comments-proposal1"
+                    inline={false}
+                    name="default_and_comments"
+                    onClick={[Function]}
+                    title="default_and_comments"
+                  >
+                    <b>
+                      <FormattedMessage
+                        id="progress-and-comments"
+                        values={Object {}}
+                      />
+                    </b>
+                  </Radio>
+                </ListGroupItem>
+                <ListGroupItem
+                  bsClass="list-group-item"
+                  className=""
+                  listItem={false}
+                >
+                  <Radio
+                    bsClass="radio"
+                    checked=""
+                    disabled={false}
+                    id="proposal-follow-btn-all-proposal1"
+                    inline={false}
+                    name="all"
+                    onClick={[Function]}
+                    title="all"
+                  >
+                    <b>
+                      <FormattedMessage
+                        id="all-activities"
+                        values={Object {}}
+                      />
+                    </b>
+                    <br />
                     <FormattedMessage
-                      id="progress-and-comments"
+                      id="list-of-activity-notifications"
                       values={Object {}}
                     />
-                  </b>
-                  <br />
-                  <FormattedMessage
-                    id="list-of-progress-notifications-and-comments"
-                    values={Object {}}
-                  />
-                </Radio>
-              </ListGroupItem>
-              <ListGroupItem
-                bsClass="list-group-item"
-                className=""
-                listItem={false}
-              >
-                <Radio
-                  bsClass="radio"
-                  checked=""
-                  disabled={false}
-                  inline={true}
-                  name="radioGroup"
-                  onClick={[Function]}
-                  title=""
-                >
-                  <b>
-                    <FormattedMessage
-                      id="all-activities"
-                      values={Object {}}
-                    />
-                  </b>
-                  <br />
-                  <FormattedMessage
-                    id="list-of-activity-notifications"
-                    values={Object {}}
-                  />
-                </Radio>
-              </ListGroupItem>
-            </ListGroup>
-          </FormGroup>
+                  </Radio>
+                </ListGroupItem>
+              </ListGroup>
+            </FormGroup>
+          </form>
         </Panel>
         <MenuItem
           bsClass="dropdown"
@@ -189,6 +190,7 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
           divider={false}
           eventKey="1"
           header={false}
+          id="proposal-unfollow-btn-proposal1"
           onClick={[Function]}
         >
           <FormattedMessage

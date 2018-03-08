@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity\Steps;
 
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Traits\DateHelperTrait;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
@@ -163,36 +162,36 @@ abstract class AbstractStep
 
     abstract public function getType();
 
-    public function getTitle():string
+    public function getTitle(): string
     {
         return $this->title;
     }
 
-    public function setTitle(string $title):self
+    public function setTitle(string $title): self
     {
         $this->title = $title;
 
         return $this;
     }
 
-    public function getSlug():string
+    public function getSlug(): string
     {
         return $this->slug;
     }
 
-    public function setSlug(string $slug):self
+    public function setSlug(string $slug): self
     {
         $this->slug = $slug;
 
         return $this;
     }
 
-    public function getIsEnabled():bool
+    public function getIsEnabled(): bool
     {
         return $this->isEnabled;
     }
 
-    public function setIsEnabled(bool $isEnabled):self
+    public function setIsEnabled(bool $isEnabled): self
     {
         $this->isEnabled = $isEnabled;
 
@@ -204,7 +203,7 @@ abstract class AbstractStep
         return $this->startAt;
     }
 
-    public function setStartAt(\DateTime $startAt) :self
+    public function setStartAt(?\DateTime $startAt): self
     {
         $this->startAt = $startAt;
 
@@ -216,7 +215,7 @@ abstract class AbstractStep
         return $this->endAt;
     }
 
-    public function setEndAt(\DateTime $endAt):self
+    public function setEndAt(?\DateTime $endAt): self
     {
         $this->endAt = $endAt;
 
@@ -228,9 +227,10 @@ abstract class AbstractStep
         return $this->projectAbstractStep;
     }
 
-    public function setProjectAbstractStep(?ProjectAbstractStep $projectAbstractStep):self
+    public function setProjectAbstractStep(?ProjectAbstractStep $projectAbstractStep): self
     {
         $this->projectAbstractStep = $projectAbstractStep;
+
         return $this;
     }
 
@@ -249,7 +249,7 @@ abstract class AbstractStep
         return $this->statuses;
     }
 
-    public function addStatus(Status $status):self
+    public function addStatus(Status $status): self
     {
         if (!$this->statuses->contains($status)) {
             $this->statuses->add($status);
@@ -259,7 +259,7 @@ abstract class AbstractStep
         return $this;
     }
 
-    public function removeStatus(Status $status):self
+    public function removeStatus(Status $status): self
     {
         $this->statuses->removeElement($status);
 
@@ -280,7 +280,7 @@ abstract class AbstractStep
 
     // ************************* Custom methods *********************
 
-    public function getProject(): ?Project
+    public function getProject()
     {
         if ($this->projectAbstractStep) {
             return $this->projectAbstractStep->getProject();
@@ -301,7 +301,7 @@ abstract class AbstractStep
         }
     }
 
-    public function canDisplay():bool
+    public function canDisplay(): bool
     {
         return $this->isEnabled && $this->getProject()->canDisplay();
     }
@@ -384,7 +384,7 @@ abstract class AbstractStep
         return false;
     }
 
-    public function isOpen():bool
+    public function isOpen(): bool
     {
         $now = new \DateTime();
 
@@ -418,7 +418,7 @@ abstract class AbstractStep
         return false;
     }
 
-    public function isFuture():?bool
+    public function isFuture(): ?bool
     {
         $now = new \DateTime();
 
@@ -432,7 +432,7 @@ abstract class AbstractStep
         return false;
     }
 
-    public function isTimeless():?bool
+    public function isTimeless(): ?bool
     {
         if (!property_exists($this, 'timeless')) {
             return false;
@@ -441,7 +441,7 @@ abstract class AbstractStep
         return $this->timeless;
     }
 
-    public function isParticipative():bool
+    public function isParticipative(): bool
     {
         return false;
     }
