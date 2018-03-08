@@ -432,12 +432,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return $this->slug;
     }
 
-    /**
-     * @param mixed $slug
-     */
-    public function setSlug($slug)
+    public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
     }
 
     /**

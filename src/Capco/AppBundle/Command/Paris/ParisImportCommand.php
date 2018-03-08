@@ -19,19 +19,17 @@ use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
-use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Capco\AppBundle\EventListener\ReferenceEventListener;
 use Capco\AppBundle\Traits\VoteTypeTrait;
 use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\Entity\UserType;
 use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Collection as CollectionInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use League\Csv\Reader;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
@@ -39,7 +37,6 @@ use Symfony\Component\Stopwatch\Stopwatch;
 class ParisImportCommand extends ContainerAwareCommand
 {
     protected const PROPOSAL_BATCH_SIZE = 200;
-    protected const USERS_BATCH_SIZE = 100;
     protected const COMMENT_BATCH_SIZE = 500;
 
     protected const PROJECT_HEADER = [
@@ -56,19 +53,6 @@ class ParisImportCommand extends ContainerAwareCommand
     protected const CATEGORY_HEADER = [
         'project_id',
         'name',
-    ];
-
-    protected const USER_HEADER = [
-        'name',
-        'firstname',
-        'lastname',
-        'user_type',
-        'user_type_rattachement',
-        'password',
-        'email',
-        'created_at',
-        'last_login_at',
-        'birthdate',
     ];
 
     protected const COMMENT_HEADER = [
@@ -105,54 +89,15 @@ class ParisImportCommand extends ContainerAwareCommand
         ['Vote' => 'success'],
     ];
 
-    protected const PROFILES_TYPES = [
-        'p' => 'Un particulier',
-        'a' => 'Un agent de la ville de Paris',
-    ];
-
-    protected const PROFILES_TYPES_RATTACHEMENT = [
-        'Cabinet de la Maire',
-        'Caisses des écoles',
-        "CASVP : Centre d'Action social de la Ville de Paris",
-        'DAC : Direction des Affaires culturelles',
-        'DAJ : Direction des Affaires juridiques',
-        'DASCO : Direction des Affaires scolaires',
-        "DASES : Direction de l'Action sociale, de l'Enfance et de la Santé",
-        'DDCT : Direction de la Démocratie, des Citoyens et des Territoires',
-        "DDEEES : Direction du Développement économique , de l'Emploi et de l'Enseignement supérieur",
-        "DEVE : Direction des Espaces verts et de l'Environnement",
-        'DFA : Direction des Finances et des Achats',
-        'DFPE : Direction des Familles et de la petite Enfance',
-        "DICOM : Direction de l'Information et de la Communication",
-        "DILT : Direction de l'Immobilier, de la Logistique et des Transports",
-        'DJS : Direction de la Jeunesse et des Sports',
-        "DLH : Direction du Logement et de l'Habitat",
-        "DPA : Direction du Patrimoine et de l'Architecture",
-        "DPE : Direction de la Propreté et de l'Eau",
-        'DPP : Direction de la Prévention et de la Protection',
-        'DRH : Direction des Ressources humaines',
-        "DSTI : Direction des Systèmes et Technologies de l'Information",
-        "DU : Direction de l'Urbanisme",
-        'DVD : Direction de la Voirie et des Déplacements',
-        'EPM : Paris Musées',
-        'IG : Inspection générale',
-        'SGVP : Secrétariat général de la Ville de Paris',
-        "SG_Hors budget d'investissement",
-        'SG_Hors compétence Ville',
-        'SG_Projet existant ou prévu',
-        'SG_Projet Imprécis',
-    ];
-
     /** @var EntityManagerInterface */
     protected $em;
 
-    protected $users = [];
     protected $projects = [];
     protected $proposals = [];
     protected $categories = [];
     protected $comments = [];
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('capco:import:paris')
@@ -163,73 +108,22 @@ class ParisImportCommand extends ContainerAwareCommand
     {
         $this->em = $this->getContainer()->get('doctrine.orm.entity_manager');
         $this->em->getConnection()->getConfiguration()->setSQLLogger(null);
-        $this->users = $this->createUsers();
         $this->categories = $this->createCategories();
         $this->proposals = $this->createProposals();
         $this->comments = $this->createComments();
-        foreach ($this->em->getEventManager()->getListeners() as $event => $listeners) {
-            foreach ($listeners as $key => $listener) {
-                if ($listener instanceof ReferenceEventListener) {
-                    $this->em->getEventManager()->removeEventListener(['preFlush'], $listener);
-                    $output->writeln('Disabled Reference Listener');
-                }
-            }
-        }
+        $this->disableListeners($output);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
+        $importUsersCommand = $this->getApplication()->find('capco:import:paris-users');
+        $usersInput = new ArrayInput(['command' => 'capco:import:paris-users']);
+        $importUsersCommand->run($usersInput, $output);
         $stopwatch = new Stopwatch();
         $stopwatch->start('import');
-        $this->importUsers($output);
         $this->importProjects($output);
         $event = $stopwatch->stop('import');
-        $output->writeln("\n<info>Elapsed time : " . $event->getDuration() / 1000000 . " minutes. \n Memory usage : " . $event->getMemory() / 1000000 . ' MB</info>');
-    }
-
-    protected function importUsers(OutputInterface $output): void
-    {
-        $output->writeln('<info>Importing users...</info>');
-        $count = 1;
-        $progress = new ProgressBar($output, \count($this->users));
-        $types = $this->createUsersTypes($output);
-        foreach ($this->users as $user) {
-            $type = $types->filter(function (UserType $type) use ($user) {
-                if (!$user['user_type'] || 'p' === $user['user_type']) {
-                    return 'Un particulier' === $type->getName();
-                }
-                if ($user['user_type_rattachement']) {
-                    return $type->getName() === $user['user_type_rattachement'];
-                }
-
-                return $type->getName() === self::PROFILES_TYPES[$user['user_type']];
-            })->first();
-            $user = (new User())
-                ->setFirstname('' !== $user['firstname'] ? $user['firstname'] : null)
-                ->setLastname('' !== $user['lastname'] ? $user['lastname'] : null)
-                ->setPassword('')
-                ->setUserType($type)
-                ->setEmail($user['email'])
-                ->setParisId($user['email'])
-                ->setCreatedAt(new \DateTime($user['created_at']))
-                ->setLastLogin(new \DateTime($user['last_login_at']))
-                ->setDateOfBirth(new \DateTime($user['birthdate']));
-            $this->em->persist($user);
-            if (0 === $count % self::USERS_BATCH_SIZE) {
-                $this->em->flush();
-                $this->em->clear(User::class);
-                $this->em->clear(UserNotificationsConfiguration::class);
-                $this->printMemoryUsage($output);
-            }
-            $progress->advance();
-            ++$count;
-        }
-        unset($count);
-        $this->em->flush();
-        $this->em->clear(User::class);
-        $this->em->clear(UserNotificationsConfiguration::class);
-        $progress->finish();
-        $output->writeln('<info>Successfully imported users...</info>');
+        $output->writeln("\n<info>Elapsed time : " . round($event->getDuration() / 1000 / 60, 2) . " minutes. \n Memory usage : " . round($event->getMemory() / 1000000, 2) . ' MB</info>');
     }
 
     protected function importProjects(OutputInterface $output): void
@@ -243,8 +137,8 @@ class ParisImportCommand extends ContainerAwareCommand
         }
 
         $output->writeln('<info>Importing projects...</info>');
+        $author = $this->em->getRepository(User::class)->findOneBy(['username' => 'Mairie de Paris']);
         foreach ($rows as $row) {
-            $user = $this->users[random_int(0, \count($this->users) - 1)];
             $introductionStep = (new PresentationStep())
                 ->setTitle('Présentation')
                 ->setLabel('Présentation')
@@ -260,7 +154,7 @@ class ParisImportCommand extends ContainerAwareCommand
             );
             $project = (new Project())
                 ->setTitle($row['title'])
-                ->setAuthor($user)
+                ->setAuthor($author)
                 ->setProjectType($type)
                 ->setCreatedAt(new \DateTime($row['created_at']))
                 ->setPublishedAt(new \DateTime($row['created_at']))
@@ -333,13 +227,12 @@ class ParisImportCommand extends ContainerAwareCommand
             $statuses = $step->getStatuses();
             $progress = new ProgressBar($output, \count($proposals));
             $count = 1;
-            $users = $this->em->getRepository(User::class)->findAll();
+            $author = $this->em->getRepository(User::class)->findOneBy(['username' => 'Mairie de Paris']);
             foreach ($proposals as $proposal) {
                 $proposalParisId = $proposal['proposal_id'];
                 $district = $this->em->getRepository(District::class)->findOneBy(
                     ['form' => $step->getProposalForm(), 'name' => $proposal['district']]
                 );
-                $user = $users[\random_int(0, \count($users) - 1)];
                 $responses = $this->createResponses($proposal, $questions);
                 $category = $categories->filter(function (ProposalCategory $category) use ($proposal) {
                     return false !== stripos($category->getName(), $proposal['category']);
@@ -352,7 +245,7 @@ class ParisImportCommand extends ContainerAwareCommand
                 })->first();
                 $proposal = (new Proposal())
                     ->setTitle($proposal['title'])
-                    ->setAuthor($user)
+                    ->setAuthor($author)
                     ->setProposalForm($step->getProposalForm())
                     ->setResponses(new ArrayCollection($responses))
                     ->setCreatedAt(new \DateTime($proposal['created_at']))
@@ -365,7 +258,7 @@ class ParisImportCommand extends ContainerAwareCommand
                     $proposal->setCategory($category);
                 }
                 $this->em->persist($proposal);
-                $this->importComments($output, $proposal, $proposalParisId, $users);
+                $this->importComments($output, $proposal, $proposalParisId, $author);
                 if (0 === $count % self::PROPOSAL_BATCH_SIZE) {
                     $this->printMemoryUsage($output);
                     $this->em->flush();
@@ -385,7 +278,7 @@ class ParisImportCommand extends ContainerAwareCommand
         }
     }
 
-    protected function importComments(OutputInterface $output, Proposal $proposal, int $proposalParisId, array $users): void
+    protected function importComments(OutputInterface $output, Proposal $proposal, int $proposalParisId, User $user): void
     {
         if (isset($this->comments[$proposalParisId])) {
             $output->writeln("\n<info>Importing comments for proposal \"" . $proposal->getTitle() . '"</info>');
@@ -393,7 +286,7 @@ class ParisImportCommand extends ContainerAwareCommand
             $progress = new ProgressBar($output, \count($comments));
             $count = 1;
             foreach ($comments as $comment) {
-                $user = $users[\random_int(0, \count($users) - 1)];
+//                $user = $users[\random_int(0, \count($users) - 1)];
                 $comment = (new ProposalComment())
                     ->setProposal($proposal, false)
                     ->setAuthor($user)
@@ -505,38 +398,6 @@ class ParisImportCommand extends ContainerAwareCommand
         return $proposalForm;
     }
 
-    protected function createUsers(): array
-    {
-        $csv = Reader::createFromPath(__DIR__ . '/paris_users.csv');
-        $iterator = $csv->setOffset(1)->fetchAssoc(self::USER_HEADER);
-        $users = [];
-        foreach ($iterator as $item) {
-            $users[] = $item;
-        }
-
-        return $users;
-    }
-
-    protected function createUsersTypes(OutputInterface $output): Collection
-    {
-        $output->writeln('<info>Creating user types...</info>');
-        foreach (self::PROFILES_TYPES as $key => $value) {
-            $type = (new UserType())
-                ->setName($value);
-            $this->em->persist($type);
-        }
-        foreach (self::PROFILES_TYPES_RATTACHEMENT as $agentName) {
-            $type = (new UserType())
-                ->setName($agentName);
-            $this->em->persist($type);
-        }
-        $this->em->flush();
-        $this->em->clear();
-        $output->writeln('<info>User types created successfully.</info>');
-
-        return new ArrayCollection($this->em->getRepository(UserType::class)->findAll());
-    }
-
     protected function createCategories(): array
     {
         $csv = Reader::createFromPath(__DIR__ . '/paris_categories.csv');
@@ -608,8 +469,17 @@ class ParisImportCommand extends ContainerAwareCommand
         foreach ($this->projects as $parisProjectId => $project) {
             $this->projects[$parisProjectId] = $this->em->merge($project);
         }
-        foreach ($this->users as &$user) {
-            $user = $this->em->merge($user);
+    }
+
+    private function disableListeners(OutputInterface $output): void
+    {
+        foreach ($this->em->getEventManager()->getListeners() as $event => $listeners) {
+            foreach ($listeners as $key => $listener) {
+                if ($listener instanceof ReferenceEventListener) {
+                    $this->em->getEventManager()->removeEventListener(['preFlush'], $listener);
+                    $output->writeln('Disabled <info>' . \get_class($listener) . '</info>');
+                }
+            }
         }
     }
 

@@ -83,12 +83,11 @@ class UserType
         return $this->slug;
     }
 
-    /**
-     * @param string $slug
-     */
-    public function setSlug($slug)
+    public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
     }
 
     /**
@@ -97,6 +96,13 @@ class UserType
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTime $value): self
+    {
+        $this->createdAt = $value;
+
+        return $this;
     }
 
     /**
