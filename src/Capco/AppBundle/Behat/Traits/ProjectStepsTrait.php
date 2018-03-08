@@ -120,6 +120,44 @@ trait ProjectStepsTrait
     }
 
     /**
+     * @When I follow the first proposal
+     */
+    public function iFollowForTheFirstProposal()
+    {
+        $this->navigationContext->getPage('collect page')->clickFollowProposalButton();
+        $this->iWait(1);
+    }
+
+    /**
+     * @When I should see proposal followed as :type
+     */
+    public function iShouldSeeProposalFollowedAs(string $type)
+    {
+        $this->navigationContext->getPage('collect page')->isFollowedAs($type);
+        $this->iWait(1);
+    }
+
+    /**
+     * @When I change the type of proposal follow with type :type
+     *
+     * @param mixed $type
+     */
+    public function iChangeTypeOfProposalFollow($type)
+    {
+        $this->navigationContext->getPage('collect page')->changeTypeOfProposalFollow($type);
+        $this->iWait(1);
+    }
+
+    /**
+     * @When I unfollow the first proposal
+     */
+    public function iUnfollowForTheFirstProposal()
+    {
+        $this->navigationContext->getPage('collect page')->clickFollowProposalButton();
+        $this->iWait(1);
+    }
+
+    /**
      * @Then I should see all districts stats
      */
     public function iShouldSeeAllDistrictsStats()

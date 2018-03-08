@@ -50,7 +50,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
       return (
         <LoginOverlay>
           <Button
-            className="btn btn-default"
+            className="btn btn-default proposal__button__follow"
             onClick={() => {
               return FollowProposalMutation.commit({
                 input: { proposalId: proposal.id, notifiedOf: 'DEFAULT' },
@@ -105,6 +105,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                             id={`proposal-follow-btn-default-${proposal.id}`}
                             name="default"
                             title="default"
+                            className="proposal__follow__advancement"
                             checked={
                               proposal.viewerAsFollower.notifiedOf === 'DEFAULT' ? 'checked' : ''
                             }
@@ -137,6 +138,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                           <Radio
                             name="default_and_comments"
                             id={`proposal-follow-btn-default_and_comments-${proposal.id}`}
+                            className="proposal__follow__default_and_comments"
                             checked={
                               proposal.viewerAsFollower.notifiedOf === 'DEFAULT_AND_COMMENTS'
                                 ? 'checked'
@@ -170,6 +172,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                             name="all"
                             title="all"
                             id={`proposal-follow-btn-all-${proposal.id}`}
+                            className="proposal__follow__all"
                             checked={
                               proposal.viewerAsFollower.notifiedOf === 'ALL' ? 'checked' : ''
                             }
@@ -203,7 +206,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                 </Panel>
                 <MenuItem
                   eventKey="1"
-                  className="mt--1"
+                  className="mt--1 proposal__unfollow"
                   id={`proposal-unfollow-btn-${proposal.id}`}
                   onClick={() => {
                     if (proposal.viewerIsFollowing) {

@@ -7,7 +7,7 @@ exports[`<ProposalFollowButton /> should render a button to follow a proposal 1`
     block={false}
     bsClass="btn"
     bsStyle="default"
-    className="btn btn-default"
+    className="btn btn-default proposal__button__follow"
     disabled={false}
     id="proposal-follow-btn-proposal1"
     onClick={[Function]}
@@ -107,6 +107,7 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
                   <Radio
                     bsClass="radio"
                     checked="checked"
+                    className="proposal__follow__advancement"
                     disabled={false}
                     id="proposal-follow-btn-default-proposal1"
                     inline={true}
@@ -136,6 +137,7 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
                   <Radio
                     bsClass="radio"
                     checked=""
+                    className="proposal__follow__default_and_comments"
                     disabled={false}
                     id="proposal-follow-btn-default_and_comments-proposal1"
                     inline={false}
@@ -159,6 +161,7 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
                   <Radio
                     bsClass="radio"
                     checked=""
+                    className="proposal__follow__all"
                     disabled={false}
                     id="proposal-follow-btn-all-proposal1"
                     inline={false}
@@ -185,7 +188,7 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
         </Panel>
         <MenuItem
           bsClass="dropdown"
-          className="mt--1"
+          className="mt--1 proposal__unfollow"
           disabled={false}
           divider={false}
           eventKey="1"
