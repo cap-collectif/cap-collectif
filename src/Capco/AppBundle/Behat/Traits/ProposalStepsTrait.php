@@ -187,9 +187,9 @@ trait ProposalStepsTrait
     /**
      * @When I go to a proposal made by user@test.com
      */
-    public function iGoToAProposalFollowedByUser()
+    public function iGoToAProposalMadeByUser()
     {
-        $this->visitPageWithParams('proposal page', self::$proposalWithOneFollower);
+        $this->visitPageWithParams('proposal page', self::$proposalsByUserTest);
         $this->getSession()->wait(5000, "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1");
     }
 
@@ -1042,22 +1042,58 @@ trait ProposalStepsTrait
     }
 
     /**
-     * @When I click the proposal follow button
+     * @When I click the proposal follow button on :proposalId
      */
-    public function iClickTheProposalFollowButton()
+    public function iClickTheProposalFollowButton(string $proposalId)
     {
         $page = $this->getCurrentPage();
-        $page->clickFollowButton();
+        $page->clickFollowButton($proposalId);
         $this->iWait(2);
     }
 
     /**
-     * @When I click the proposal unfollow button
+     * @When I click on :choice choice on :proposalId
      */
-    public function iClickTheProposalUnfollowButton()
+    public function iClickOnFollow(string $choice, string $proposalId)
     {
         $page = $this->getCurrentPage();
-        $page->clickFollowButton(false);
+        $page->clickFollowChoice($choice, $proposalId);
+    }
+
+    /**
+     * @When I should see advancement checked on :proposalId
+     */
+    public function iShouldSeeAdvancementCheckedOnProposal(string $proposalid)
+    {
+        $page = $this->getCurrentPage();
+        $page->followAdvancementIsChecked($proposalid);
+    }
+
+    /**
+     * @When I should see follow advancement and comment checked on :proposalId
+     */
+    public function iShouldSeeFollowAdvancementAndCommentCheckedOnProposal(string $proposalid)
+    {
+        $page = $this->getCurrentPage();
+        $page->followAdvancementAndCommentIsChecked($proposalid);
+    }
+
+    /**
+     * @When I should see follow all activities checked on :proposalId
+     */
+    public function iShouldSeeFollowAllActivitiesCheckedOnProposal(string $proposalid)
+    {
+        $page = $this->getCurrentPage();
+        $page->followAllIsChecked($proposalid);
+    }
+
+    /**
+     * @When I click the proposal unfollow button on :proposalId
+     */
+    public function iClickTheProposalUnfollowButton(string $proposalId)
+    {
+        $page = $this->getCurrentPage();
+        $page->clickUnfollowButton($proposalId);
         $this->iWait(2);
     }
 
@@ -1158,26 +1194,6 @@ trait ProposalStepsTrait
             new FilesystemIterator('/var/www/web/media/sources/0001/01', FilesystemIterator::SKIP_DOTS)
         );
         \PHPUnit_Framework_Assert::assertSame($filesNumber, $filesCount);
-    }
-
-    /**
-     * @When I click the proposal follow button
-     */
-    public function iClickTheProposalFollowButton()
-    {
-        $page = $this->getCurrentPage();
-        $page->clickFollowButton();
-        $this->iWait(2);
-    }
-
-    /**
-     * @When I click the proposal unfollow button
-     */
-    public function iClickTheProposalUnfollowButton()
-    {
-        $page = $this->getCurrentPage();
-        $page->clickFollowButton(false);
-        $this->iWait(2);
     }
 
     protected function openCollectStepIsOpen()
