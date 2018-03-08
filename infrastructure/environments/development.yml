@@ -29,11 +29,6 @@ builder:
         - ~/Library/Caches/Bower:/home/capco/.cache/bower
     command: echo "Use 'docker-compose run builder build' to build deps"
 
-elasticsearch:
-    build: ../services/local/elasticsearch
-    ports:
-        - "9200:9200"
-
 database:
     ports:
         - "3306:3306"

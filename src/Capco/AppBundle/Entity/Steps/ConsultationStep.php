@@ -134,11 +134,6 @@ class ConsultationStep extends AbstractStep implements IndexableInterface, Parti
         return $this;
     }
 
-    public function isIndexable()
-    {
-        return $this->getIsEnabled();
-    }
-
     public function getOpinionCount(): int
     {
         return $this->opinionCount ?? 0;
@@ -456,25 +451,16 @@ class ConsultationStep extends AbstractStep implements IndexableInterface, Parti
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isIndexable(): bool
     {
         return $this->getIsEnabled();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getElasticsearchTypeName(): string
     {
         return 'consultationStep';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getElasticsearchSerializationGroups(): array
     {
         return ['ConsultationSteps'];

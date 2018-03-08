@@ -8,8 +8,3 @@ builder:
         - ~/.composer:/home/capco/.composer
         - ~/.cache/yarn:/home/capco/.cache/yarn
     command: echo "Use 'docker-compose run builder build' to build deps"
-
-elasticsearch:
-    image: ../service/elasticsearch
-    volumes:
-        - ../services/local/elasticsearch/capco.yml:/usr/share/elasticsearch/config/elasticsearch.yml

@@ -116,38 +116,17 @@ class ProposalCategory implements IndexableInterface
         return $this;
     }
 
-<<<<<<< HEAD
-    public function isIndexable()
-=======
-    /**
-     * {@inheritdoc}
-     */
     public function isIndexable(): bool
->>>>>>> Update codebase
     {
         return true;
     }
 
-<<<<<<< HEAD
-    public static function getElasticsearchTypeName()
-=======
-    /**
-     * {@inheritdoc}
-     */
     public static function getElasticsearchTypeName(): string
->>>>>>> Update codebase
     {
         return 'category';
     }
 
-<<<<<<< HEAD
-    public function getElasticsearchSerializationGroups()
-=======
-    /**
-     * {@inheritdoc}
-     */
     public static function getElasticsearchSerializationGroups(): array
->>>>>>> Update codebase
     {
         return ['ProposalCategories'];
     }

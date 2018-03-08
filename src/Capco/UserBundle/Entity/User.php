@@ -2,8 +2,8 @@
 
 namespace Capco\UserBundle\Entity;
 
-use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
+use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface;
 use Capco\AppBundle\Entity\UserGroup;
@@ -1344,12 +1344,87 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return !$this->profilePageIndexed;
     }
 
-    /**
-     * @param bool $profilePageIndexed
-     */
     public function setProfilePageIndexed(bool $profilePageIndexed = true)
     {
         $this->profilePageIndexed = !$profilePageIndexed;
+    }
+
+    public function getNotificationsConfiguration(): UserNotificationsConfiguration
+    {
+        return $this->notificationsConfiguration;
+    }
+
+    public function setNotificationsConfiguration(UserNotificationsConfiguration $notificationsConfiguration)
+    {
+        $this->notificationsConfiguration = $notificationsConfiguration;
+    }
+
+    public function isConsentExternalCommunication(): bool
+    {
+        return $this->consentExternalCommunication;
+    }
+
+    public function setConsentExternalCommunication(bool $consentExternalCommunication): self
+    {
+        $this->consentExternalCommunication = $consentExternalCommunication;
+
+        return $this;
+    }
+
+    public function getUserGroups(): Collection
+    {
+        return $this->userGroups;
+    }
+
+    public function setUserGroups(Collection $userGroups): self
+    {
+        $this->userGroups = $userGroups;
+
+        return $this;
+    }
+
+    public function addUserGroup(UserGroup $userGroup): self
+    {
+        if (!$this->userGroups->contains($userGroup)) {
+            $this->userGroups->add($userGroup);
+        }
+
+        return $this;
+    }
+
+    public function removeUserGroup(UserGroup $userGroup): self
+    {
+        $this->userGroups->removeElement($userGroup);
+
+        return $this;
+    }
+
+    public function getFollowingProposals(): Collection
+    {
+        return $this->followingProposals;
+    }
+
+    public function addFollowingProposal(Follower $followingProposal): self
+    {
+        if (!$this->followingProposals->contains($followingProposal)) {
+            $this->followingProposals->add($followingProposal);
+        }
+
+        return $this;
+    }
+
+    public function removeFollowingProposal(Follower $followingProposal): self
+    {
+        $this->followingProposals->removeElement($followingProposal);
+
+        return $this;
+    }
+
+    public function setFollowingProposals(Collection $followingProposals): self
+    {
+        $this->followingProposals = $followingProposals;
+
+        return $this;
     }
 
     public function isIndexable(): bool
