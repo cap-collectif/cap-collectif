@@ -15,10 +15,6 @@
         },
         {
             "type": "vcs",
-            "url": "https://github.com/emgiezet/FOSElasticaBundle"
-        },
-        {
-            "type": "vcs",
             "url": "https://github.com/cap-collectif/behat-parallel-scenario"
         },
         {
