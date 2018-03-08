@@ -1,4 +1,4 @@
-@consultations
+@consultations @consultations_graphql
 Feature: Consultations
 
 Scenario: GraphQL client wants to list consultations
@@ -59,24 +59,6 @@ query OpinionListQuery {
       fragment Opinion_opinion on Opinion {
       id
       url
-      title
-      createdAt
-      updatedAt
-      votesCountOk
-      votesCountNok
-      votesCountMitige
-      votesCount
-      versionsCount
-      connectionsCount
-      sourcesCount
-      argumentsCount
-      author {
-      vip
-      displayName
-      media {
-        url
-        id
-      }
       id
       }
       section {
@@ -169,12 +151,18 @@ query {
                 "votesCount": @integer@
               }
             },
-            @...@
-          ]
-        }
-      }
-    ]
-  }
+            "section": {
+               "title": "Les causes",
+               "versionable": true,
+               "linkable": false,
+               "sourceable": true,
+               "voteWidgetType": 2,
+               "id": @string@
+            }
+         },
+         @...@
+      ]
+   }
 }
   """
 
@@ -200,20 +188,64 @@ query {
   Then the JSON response should match:
   """
 {
-  "data": {
-    "section": {
+"data": {
+  "consultations": [
+    {
+      "id": "cstep5",
+      "title": "Elaboration de la Loi",
       "contributionConnection": {
-        "totalCount": @integer@,
+        "totalCount": 6,
         "edges": [
           {
             "cursor": @string@,
             "node": {
-              "title": @string@
+              "title": @string@,
+              "pinned": @boolean@,
+              "votesCount": @integer@
             }
           },
           @...@
         ]
       }
+    }
+  ]
+}
+}
+      """
+
+Scenario: GraphQL client wants to list contributions in a section
+  When I send a GraphQL request:
+        """
+query {
+section(id: "opinionType5") {
+    contributionConnection(first: 5, orderBy: { field: VOTE_COUNT, direction: DESC }) {
+        totalCount
+        edges {
+          cursor
+          node {
+            title
+        }
+    }
+}
+}
+}
+  """
+  Then the JSON response should match:
+  """
+{
+"data": {
+  "section": {
+    "contributionConnection": {
+      "totalCount": @integer@,
+      "edges": [
+        {
+          "cursor": @string@,
+          "node": {
+            "title": @string@
+          }
+        },
+        @...@
+      ]
     }
   }
 }

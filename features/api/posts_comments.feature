@@ -15,7 +15,7 @@ Scenario: API client wants to list comments of a blogpost
     [
       {
         "canContribute": @boolean@,
-        "id": @string@,
+        "id": @integer@,
         "body": @string@,
         "createdAt": "@string@.isDateTime()",
         "updatedAt": "@string@.isDateTime()",
@@ -60,7 +60,7 @@ Scenario: API client wants to find the first comment of a blogpost
     [
       {
         "canContribute": @boolean@,
-        "id": @string@,
+        "id": @integer@,
         "body": @string@,
         "createdAt": "@string@.isDateTime()",
         "updatedAt": "@string@.isDateTime()",
@@ -97,7 +97,7 @@ Scenario: API client wants to find popular comments of a blogpost
 
 ## Create Comments
 
-  ### Anonymous
+### Anonymous
 
 @database
 Scenario: Anonymous API client wants to add a comment
@@ -107,6 +107,19 @@ Scenario: Anonymous API client wants to add a comment
     "authorName": "Kéké",
     "authorEmail": "vivele94@gmail.com",
     "body": "Vive moi qui suis plus fort que www.google.fr !"
+  }
+  """
+  Then the JSON response status code should be 201
+
+@database
+Scenario: Anonymous API client wants to add an answer to a comment
+  When I send a POST request to "/api/posts/1/comments" with json:
+  """
+  {
+    "parent": 163,
+    "authorName": "Kéké",
+    "authorEmail": "vivele94@gmail.com",
+    "body": "Ma super réponse"
   }
   """
   Then the JSON response status code should be 201
@@ -121,7 +134,7 @@ Scenario: Anonymous API client wants to add a comment without user informations
   """
   Then the JSON response status code should be 400
 
-  ### Logged
+### Logged
 
 @database
 Scenario: logged in API client wants to add a comment
@@ -134,13 +147,25 @@ Scenario: logged in API client wants to add a comment
   """
   Then the JSON response status code should be 201
 
+@database
+Scenario: logged in API client wants to add an answer to a comment
+  Given I am logged in to api as user
+  When I send a POST request to "/api/posts/1/comments" with json:
+  """
+  {
+    "parent": 163,
+    "body": "Oh oui j'ose :-P"
+  }
+  """
+  Then the JSON response status code should be 201
+
 @security
 Scenario: logged in API client wants to add a comment by hacking
   Given I am logged in to api as user
   When I send a POST request to "/api/posts/3/comments" with json:
   """
   {
-    "parent": "postComment6",
+    "parent": 193,
     "body": "Pr0 Hacker"
   }
   """
