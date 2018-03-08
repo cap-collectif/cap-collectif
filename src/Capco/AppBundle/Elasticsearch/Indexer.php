@@ -32,14 +32,8 @@ class Indexer
      */
     protected $client;
 
-    /**
-     * @var array
-     */
     protected $currentInsertBulk = [];
 
-    /**
-     * @var array
-     */
     protected $currentDeleteBulk = [];
 
     /**

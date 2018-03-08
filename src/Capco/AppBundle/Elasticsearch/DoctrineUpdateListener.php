@@ -7,9 +7,6 @@ use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-/**
- * @todo Complete me.
- */
 class DoctrineUpdateListener implements EventSubscriber, ContainerAwareInterface
 {
     private $container;
@@ -19,7 +16,7 @@ class DoctrineUpdateListener implements EventSubscriber, ContainerAwareInterface
         $this->container = $container;
     }
 
-    public function getSubscribedEvents()
+    public function getSubscribedEvents(): array
     {
         return [
             'postPersist',

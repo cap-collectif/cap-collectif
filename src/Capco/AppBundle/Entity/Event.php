@@ -16,8 +16,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Event.
- *
  * @ORM\Table(name="event")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\EventRepository")
  * @ORM\HasLifecycleCallbacks()
@@ -28,107 +26,81 @@ class Event implements CommentableInterface, IndexableInterface
     use DateHelperTrait, CommentableTrait, IdTrait, TextableTrait, MetaDescriptionCustomCodeTrait;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="title", type="string", length=255)
      * @Assert\NotBlank()
      */
     private $title;
 
     /**
-     * @var string
      * @Gedmo\Slug(separator="-", unique=true, fields={"title"}, updatable=false)
      * @ORM\Column(name="slug", type="string", length=255)
      */
     private $slug;
 
     /**
-     * @var \DateTime
-     *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
     /**
-     * @var \DateTime
-     *
      * @Gedmo\Timestampable(on="change", field={"title", "body", "startAt", "endAt", "zipCode", "address", "nbAddress", "link", "Media", "Theme"})
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
 
     /**
-     * @var bool
-     *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
     private $isEnabled = true;
 
     /**
-     * @var \DateTime
-     *
      * @ORM\Column(name="start_at", type="datetime")
      */
     private $startAt;
 
     /**
-     * @var \DateTime
-     *
      * @ORM\Column(name="end_at", type="datetime", nullable=true)
      */
     private $endAt = null;
 
     /**
-     * @var int
-     *
      * @ORM\Column(name="zipCode", type="integer", nullable=true)
      */
     private $zipCode;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
     private $address;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="city", type="string", length=255, nullable=true)
      */
     private $city;
 
     /**
-     * @var string
      * @ORM\Column(name="country", type="string", nullable=true)
      */
     private $country;
 
     /**
-     * @var float
      * @ORM\Column(name="lat", type="float", nullable=true)
      */
     private $lat;
 
     /**
-     * @var float
      * @ORM\Column(name="lng", type="float", nullable=true)
      */
     private $lng;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="link", type="string", length=255, nullable=true)
      * @Assert\Url()
      */
     private $link;
 
     /**
-     * @var
-     *
      * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", fetch="LAZY", cascade={"persist"})
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @Assert\Valid()
@@ -136,22 +108,18 @@ class Event implements CommentableInterface, IndexableInterface
     private $Media;
 
     /**
-     * @var
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="events", cascade={"persist"})
      * @ORM\JoinTable(name="theme_event")
      */
     private $themes;
 
     /**
-     * @var
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Project", inversedBy="events", cascade={"persist"})
      * @ORM\JoinTable(name="project_event")
      */
     private $projects;
 
     /**
-     * @var
-     *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      * @Assert\NotNull()
@@ -159,7 +127,6 @@ class Event implements CommentableInterface, IndexableInterface
     private $Author;
 
     /**
-     * @var
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\EventComment", mappedBy="Event",  cascade={"persist", "remove"})
      */
     private $comments;
@@ -705,25 +672,16 @@ class Event implements CommentableInterface, IndexableInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isIndexable(): bool
     {
         return $this->getIsEnabled();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getElasticsearchTypeName(): string
     {
         return 'event';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getElasticsearchSerializationGroups(): array
     {
         return ['Events'];

@@ -473,25 +473,16 @@ class Idea implements Contribution, CommentableInterface, VotableInterface, HasA
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isIndexable(): bool
     {
         return $this->getIsEnabled() && !$this->isExpired();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getElasticsearchTypeName(): string
     {
         return 'idea';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getElasticsearchSerializationGroups(): array
     {
         return ['Ideas', 'ThemeDetails'];
