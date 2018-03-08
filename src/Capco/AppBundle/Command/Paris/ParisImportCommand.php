@@ -19,6 +19,7 @@ use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
+use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Capco\AppBundle\EventListener\ReferenceEventListener;
 use Capco\AppBundle\Traits\VoteTypeTrait;
 use Capco\UserBundle\Entity\User;
@@ -36,7 +37,7 @@ use Symfony\Component\Stopwatch\Stopwatch;
 
 class ParisImportCommand extends ContainerAwareCommand
 {
-    protected const PROPOSAL_BATCH_SIZE = 200;
+    protected const PROPOSAL_BATCH_SIZE = 100;
     protected const COMMENT_BATCH_SIZE = 500;
 
     protected const PROJECT_HEADER = [
@@ -266,6 +267,8 @@ class ParisImportCommand extends ContainerAwareCommand
                     $this->em->flush();
                     $this->em->clear(AbstractResponse::class);
                     $this->em->clear(Proposal::class);
+                    $this->em->clear(User::class);
+                    $this->em->clear(UserNotificationsConfiguration::class);
                 }
                 $progress->advance();
                 ++$count;
@@ -273,6 +276,8 @@ class ParisImportCommand extends ContainerAwareCommand
             $this->em->flush();
             $this->em->clear(AbstractResponse::class);
             $this->em->clear(Proposal::class);
+            $this->em->clear(User::class);
+            $this->em->clear(UserNotificationsConfiguration::class);
             $progress->finish();
             $output->writeln("\n<info>Successfully imported proposals.</info>");
         } else {
