@@ -16,7 +16,8 @@ Scenario: GraphQL client wants to follow a proposal with current user and check 
     }",
     "variables": {
       "input": {
-        "proposalId": "proposal8"
+        "proposalId": "proposal8",
+        "notifiedOf": "DEFAULT"
       }
     }
   }
@@ -38,7 +39,7 @@ Scenario: GraphQL client wants to follow a proposal with current user and check 
   {
     "query": "query getFollowingProposal {
       viewer {
-        followingProposal {
+        followingProposals {
           id
         }
       }
@@ -50,7 +51,7 @@ Scenario: GraphQL client wants to follow a proposal with current user and check 
   {
     "data": {
       "viewer": {
-        "followingProposal": [
+        "followingProposals": [
           {
             "id": "proposal1"
           },
@@ -81,7 +82,8 @@ Scenario: GraphQL client wants to follow then unfollow a proposal with current u
     }",
     "variables": {
       "input": {
-        "proposalId": "proposal8"
+        "proposalId": "proposal8",
+        "notifiedOf": "DEFAULT"
       }
     }
   }
@@ -103,7 +105,7 @@ Scenario: GraphQL client wants to follow then unfollow a proposal with current u
   {
     "query": "query getFollowingProposal {
       viewer {
-        followingProposal {
+        followingProposals {
           id
         }
       }
@@ -115,7 +117,7 @@ Scenario: GraphQL client wants to follow then unfollow a proposal with current u
   {
     "data": {
       "viewer": {
-        "followingProposal": [
+        "followingProposals": [
           {
             "id": "proposal1"
           },
@@ -164,7 +166,7 @@ Scenario: GraphQL client wants to follow then unfollow a proposal with current u
   {
     "query": "query getFollowingProposal {
       viewer {
-        followingProposal {
+        followingProposals {
           id
         }
       }
@@ -176,7 +178,7 @@ Scenario: GraphQL client wants to follow then unfollow a proposal with current u
   {
     "data": {
       "viewer": {
-        "followingProposal": [
+        "followingProposals": [
           {
             "id": "proposal1"
           },
