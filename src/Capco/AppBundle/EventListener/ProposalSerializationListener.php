@@ -58,6 +58,11 @@ class ProposalSerializationListener extends AbstractSerializationListener
 
     public function onPostProposal(ObjectEvent $event)
     {
+        // We skip if we are serializing for Elasticsearch
+        if (isset($this->getIncludedGroups($event)['Elasticsearch'])) {
+            return;
+        }
+
         $proposal = $event->getObject();
         $step = $proposal->getStep();
         $project = $step->getProject();

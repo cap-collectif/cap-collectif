@@ -661,6 +661,6 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['Opinions'];
+        return ['Opinions', 'Elasticsearch'];
     }
 }

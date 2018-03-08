@@ -1035,6 +1035,6 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['Proposals', 'ThemeDetails', 'UserId'];
+        return ['Proposals', 'ThemeDetails', 'UserId', 'Elasticsearch'];
     }
 }
