@@ -49,6 +49,13 @@ elasticsearch:
         hard: -1
     mem_limit: 1g
 
+kibana:
+    image: kibana:5
+    links:
+        - elasticsearch
+    ports:
+        - "5601:5601"
+
 seleniumhub:
   build: ../services/seleniumhub
   ports:

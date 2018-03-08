@@ -39,17 +39,3 @@ services:
             - [ setContainer, [ "@service_container" ] ]
         tags:
             - { name: doctrine.event_subscriber, connection: default }
-
-
-    # Kept for Backward compatibility
-    fos_elastica.index.app.proposal:
-        class: Elastica\Type
-        arguments: ['@capco.elasticsearch.index', 'proposal']
-
-    fos_elastica.index:
-        alias: 'capco.elasticsearch.index'
-
-    fos_elastica.elastica_to_model_transformer.collection.app:
-        alias: 'capco.elasticsearch.elastica_to_doctrine_transformer'
-
-

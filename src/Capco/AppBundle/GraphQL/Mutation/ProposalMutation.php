@@ -46,11 +46,9 @@ class ProposalMutation implements ContainerAwareInterface
             ])
         ));
 
-        // If not present, es listener will take some time to execute the refresh
-        // and, next time proposals will be fetched, the set of data will be outdated.
-        // Keep in mind that refresh should usually not be triggered manually.
-        $index = $this->container->get('fos_elastica.index');
-        $index->refresh();
+        // Synchronous indexation
+        $indexer = $this->container->get('capco.elasticsearch.indexer');
+        $indexer->index(get_class($proposal), $proposal->getId());
 
         return ['proposal' => $proposal];
     }
@@ -354,11 +352,9 @@ class ProposalMutation implements ContainerAwareInterface
 
         $this->container->get('redis_storage.helper')->recomputeUserCounters($user);
 
-        // If not present, es listener will take some time to execute the refresh
-        // and, next time proposals will be fetched, the set of data will be outdated.
-        // Keep in mind that refresh should usually not be triggered manually.
-        $index = $this->container->get('fos_elastica.index');
-        $index->refresh();
+        // Synchronous indexation
+        $indexer = $this->container->get('capco.elasticsearch.indexer');
+        $indexer->index(get_class($proposal), $proposal->getId());
 
         $this->container->get('swarrot.publisher')->publish('proposal.create', new Message(
             json_encode([

@@ -93,10 +93,9 @@ class Indexer
      * Reindex a specific entity.
      * You HAVE to call self::finishBulk after!
      *
-     * @param $entityFQN
-     * @param $identifier
+     * @param mixed $identifier
      */
-    public function index($entityFQN, $identifier)
+    public function index(string $entityFQN, $identifier)
     {
         $repository = $this->em->getRepository($entityFQN);
         $object = $repository->findOneBy(['id' => $identifier]);
