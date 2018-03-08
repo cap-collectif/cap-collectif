@@ -1,4 +1,4 @@
-@consultations
+@consultations @consultations_graphql
 Feature: Consultations
 
 Scenario: GraphQL client wants to list consultations
@@ -59,24 +59,6 @@ Scenario: GraphQL client wants to list consultations
       fragment Opinion_opinion on Opinion {
       id
       url
-      title
-      createdAt
-      updatedAt
-      votesCountOk
-      votesCountNok
-      votesCountMitige
-      votesCount
-      versionsCount
-      connectionsCount
-      sourcesCount
-      argumentsCount
-      author {
-      vip
-      displayName
-      media {
-        url
-        id
-      }
       id
       }
       section {
@@ -203,17 +185,58 @@ Scenario: GraphQL client wants to list contributions in a section
   "data": {
     "section": {
       "contributionConnection": {
-        "totalCount": @integer@,
+        "totalCount": 6,
         "edges": [
           {
             "cursor": @string@,
             "node": {
-              "title": @string@
+              "title": @string@,
+              "pinned": @boolean@,
+              "votesCount": @integer@
             }
           },
           @...@
         ]
       }
+    }
+  ]
+}
+}
+      """
+
+Scenario: GraphQL client wants to list contributions in a section
+  When I send a GraphQL request:
+        """
+query {
+section(id: "opinionType5") {
+    contributionConnection(first: 5, orderBy: { field: VOTE_COUNT, direction: DESC }) {
+        totalCount
+        edges {
+          cursor
+          node {
+            title
+        }
+    }
+}
+}
+}
+  """
+  Then the JSON response should match:
+  """
+{
+"data": {
+  "section": {
+    "contributionConnection": {
+      "totalCount": @integer@,
+      "edges": [
+        {
+          "cursor": @string@,
+          "node": {
+            "title": @string@
+          }
+        },
+        @...@
+      ]
     }
   }
   }
