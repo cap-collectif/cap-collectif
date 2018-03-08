@@ -27,6 +27,10 @@ class SourceSerializationListener extends AbstractSerializationListener
 
     public function onPostSource(ObjectEvent $event)
     {
+        // We skip if we are serializing for Elasticsearch
+        if (isset($this->getIncludedGroups($event)['Elasticsearch'])) {
+            return;
+        }
         $source = $event->getObject();
         $token = $this->tokenStorage->getToken();
         $user = $token ? $token->getUser() : 'anon.';

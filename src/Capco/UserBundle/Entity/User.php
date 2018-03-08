@@ -1439,6 +1439,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['UsersInfos'];
+        return ['Elasticsearch'];
     }
 }

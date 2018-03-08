@@ -96,10 +96,10 @@ mappings:
             authorName: *text_analysis
             Author: *Author
 
-    consultationStep:
-        properties:
-            id: { type: keyword }
-            title: *text_analysis_highlighted
+    # consultationStep:
+    #     properties:
+    #         id: { type: keyword }
+    #         title: *text_analysis_highlighted
 
     event:
         properties:
@@ -232,15 +232,15 @@ mappings:
                 properties:
                     id: { type: keyword }
 
-    selectionStep:
-        properties:
-            id: { type: keyword }
-            title: *text_analysis_highlighted
-
-    collectStep:
-        properties:
-            id: { type: keyword }
-            title: *text_analysis_highlighted
+    # selectionStep:
+    #     properties:
+    #         id: { type: keyword }
+    #         title: *text_analysis_highlighted
+    #
+    # collectStep:
+    #     properties:
+    #         id: { type: keyword }
+    #         title: *text_analysis_highlighted
 
     status:
         properties:

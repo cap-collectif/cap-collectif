@@ -164,27 +164,18 @@ class CollectStep extends AbstractStep implements IndexableInterface, Participat
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isIndexable(): bool
     {
         return $this->getIsEnabled();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getElasticsearchTypeName(): string
     {
         return 'collectStep';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['CollectSteps'];
+        return ['Elasticsearch'];
     }
 }

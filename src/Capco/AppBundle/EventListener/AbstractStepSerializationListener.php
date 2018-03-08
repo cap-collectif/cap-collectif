@@ -62,6 +62,10 @@ class AbstractStepSerializationListener extends AbstractSerializationListener
 
     public function onPostAbstractStep(ObjectEvent $event)
     {
+        // We skip if we are serializing for Elasticsearch
+        if (isset($this->getIncludedGroups($event)['Elasticsearch'])) {
+            return;
+        }
         if (isset($this->getIncludedGroups($event)['Steps'])) {
             $step = $event->getObject();
             $event->getVisitor()->addData('status', $this->stepHelper->getStatus($step));

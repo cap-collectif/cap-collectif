@@ -684,6 +684,6 @@ class Event implements CommentableInterface, IndexableInterface
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['Events'];
+        return ['Elasticsearch'];
     }
 }

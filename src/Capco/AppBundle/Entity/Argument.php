@@ -472,27 +472,18 @@ class Argument implements Contribution, VotableInterface, IsPublishableInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isIndexable(): bool
     {
         return $this->getIsEnabled();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getElasticsearchTypeName(): string
     {
         return 'argument';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['Opinions', 'OpinionVersions'];
+        return ['Elasticsearch'];
     }
 }

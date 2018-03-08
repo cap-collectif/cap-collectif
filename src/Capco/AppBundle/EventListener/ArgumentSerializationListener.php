@@ -32,6 +32,11 @@ class ArgumentSerializationListener extends AbstractSerializationListener
 
     public function onPostArgument(ObjectEvent $event)
     {
+        // We skip if we are serializing for Elasticsearch
+        if (isset($this->getIncludedGroups($event)['Elasticsearch'])) {
+            return;
+        }
+
         $argument = $event->getObject();
         $opinion = $argument->getLinkedOpinion();
         $opinionType = $opinion ? $opinion->getOpinionType() : null;
@@ -80,11 +85,11 @@ class ArgumentSerializationListener extends AbstractSerializationListener
         }
 
         $event->getVisitor()->addData(
-            'hasUserVoted', $user === 'anon.' ? false : $argument->userHasVote($user)
+            'hasUserVoted', 'anon.' === $user ? false : $argument->userHasVote($user)
         );
 
         $event->getVisitor()->addData(
-            'hasUserReported', $user === 'anon.' ? false : $argument->userHasReport($user)
+            'hasUserReported', 'anon.' === $user ? false : $argument->userHasReport($user)
         );
     }
 }

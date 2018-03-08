@@ -23,6 +23,10 @@ class PostSerializationListener extends AbstractSerializationListener
 
     public function onPostSerialize(ObjectEvent $event)
     {
+        // We skip if we are serializing for Elasticsearch
+        if (isset($this->getIncludedGroups($event)['Elasticsearch'])) {
+            return;
+        }
         $post = $event->getObject();
 
         $event->getVisitor()->addData('_links', [

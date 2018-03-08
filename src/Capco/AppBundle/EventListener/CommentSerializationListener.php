@@ -29,6 +29,10 @@ class CommentSerializationListener extends AbstractSerializationListener
 
     public function onPostCommentSerialize(ObjectEvent $event)
     {
+        // We skip if we are serializing for Elasticsearch
+        if (isset($this->getIncludedGroups($event)['Elasticsearch'])) {
+            return;
+        }
         $comment = $event->getObject();
         $event->getVisitor()->addData(
             '_links',

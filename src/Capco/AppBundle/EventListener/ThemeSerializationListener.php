@@ -27,6 +27,10 @@ class ThemeSerializationListener extends AbstractSerializationListener
 
     public function onPostTheme(ObjectEvent $event)
     {
+        // We skip if we are serializing for Elasticsearch
+        if (isset($this->getIncludedGroups($event)['Elasticsearch'])) {
+            return;
+        }
         $theme = $event->getObject();
 
         $event->getVisitor()->addData(

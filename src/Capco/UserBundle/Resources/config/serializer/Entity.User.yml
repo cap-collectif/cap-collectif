@@ -4,7 +4,7 @@ Capco\UserBundle\Entity\User:
       id:
         expose: true
         type: string
-        groups: [UserId]
+        groups: [UserId, Elasticsearch]
       slug:
         expose: true
         type: string
@@ -24,7 +24,7 @@ Capco\UserBundle\Entity\User:
       getDisplayName:
         serialized_name: displayName
         type: string
-        groups: [UserDetails, UsersInfos]
+        groups: [UserDetails, UsersInfos, Elasticsearch]
       getUniqueIdentifier:
         serialized_name: uniqueId
         type: string

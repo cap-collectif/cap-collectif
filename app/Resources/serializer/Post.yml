@@ -4,7 +4,7 @@ Capco\AppBundle\Entity\Post:
         id:
             expose: true
             type: integer
-            groups: [Posts, PostDetails]
+            groups: [Posts, PostDetails, Elasticsearch]
         Media:
             expose: true
             groups: [Posts, PostDetails]
@@ -12,29 +12,29 @@ Capco\AppBundle\Entity\Post:
         title:
             expose: true
             type: string
-            groups: [Posts, PostDetails]
+            groups: [Posts, PostDetails, Elasticsearch]
         body:
             expose: true
             type: string
-            groups: [PostDetails]
+            groups: [PostDetails, Elasticsearch]
         createdAt:
             expose: true
             type: DateTime
             serialized_name: createdAt
-            groups: [Posts, PostDetails]
+            groups: [Posts, PostDetails, Elasticsearch]
         updatedAt:
             expose: true
             type: DateTime
-            groups: [Posts, PostDetails]
+            groups: [Posts, PostDetails, Elasticsearch]
         Authors:
             expose: true
-            groups: [Posts, PostDetails]
+            groups: [Posts, PostDetails, Elasticsearch]
             serialized_name: authors
         themes:
             expose: true
-            groups: [Posts, PostDetails]
+            groups: [Posts, PostDetails, Elasticsearch]
     virtual_properties:
         getAbstractOrBeginningOfTheText:
             serialized_name: abstract
             type: string
-            groups: [Posts]
+            groups: [Posts, Elasticsearch]
