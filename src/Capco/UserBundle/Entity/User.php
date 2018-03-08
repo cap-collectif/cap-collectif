@@ -605,12 +605,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return $this->address;
     }
 
-    /**
-     * @param string $address
-     */
-    public function setAddress($address)
+    public function setAddress(?string $address): self
     {
         $this->address = $address;
+
+        return $this;
     }
 
     /**
@@ -637,12 +636,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return $this->zipCode;
     }
 
-    /**
-     * @param int $zipCode
-     */
-    public function setZipCode($zipCode)
+    public function setZipCode(?int $zipCode): self
     {
         $this->zipCode = $zipCode;
+
+        return $this;
     }
 
     /**

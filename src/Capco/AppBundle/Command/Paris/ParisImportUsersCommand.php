@@ -29,6 +29,8 @@ class ParisImportUsersCommand extends ContainerAwareCommand
         'lastname',
         'user_type',
         'user_type_rattachement',
+        'address',
+        'zipcode',
         'password',
         'email',
         'created_at',
@@ -176,6 +178,8 @@ class ParisImportUsersCommand extends ContainerAwareCommand
                 ->setUsername($user['name'])
                 ->setPassword('')
                 ->setEmailCanonical($user['email'])
+                ->setAddress('' === $user['address'] ? null : $user['address'])
+                ->setZipCode('' === $user['zipcode'] ? null : (int) $user['zipcode'])
                 ->setSlug($slug->slugify($user['name']) . $count)
                 ->setEnabled(true)
                 ->setPhone($user['phone'])
