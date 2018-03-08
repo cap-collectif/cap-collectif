@@ -27,7 +27,6 @@ const Other = React.createClass({
   },
 
   componentDidUpdate() {
-    const { field } = this.props;
     // $FlowFixMe
     const input = ReactDOM.findDOMNode(this.textField).getElementsByTagName('input')[0];
     if (input instanceof HTMLInputElement) {
@@ -44,10 +43,13 @@ const Other = React.createClass({
         true,
       );
     }
+  },
 
-    // run after reset();
-    if (field.checked === false) {
-      input.value = '';
+  componentDidMount() {
+    const { field } = this.props;
+
+    if (field.pristine) {
+      this.clear();
     }
   },
 
@@ -105,6 +107,8 @@ const Other = React.createClass({
 
     const fieldName = `choices-for-field-${field.id}`;
 
+    console.log(field);
+
     return (
       <div id={`reply-${field.id}_choice-other`} className="other-field">
         <div className="other-field__input">
@@ -112,7 +116,7 @@ const Other = React.createClass({
             id={`reply-${field.id}_choice-other--check`}
             name={fieldName}
             type={this.props.field.type}
-            checked={field.checked === false ? false : this.state.checked}
+            checked={this.state.checked}
             onChange={this.onCheckUncheck}
             disabled={disabled}>
             {<FormattedMessage id="reply.other" />}

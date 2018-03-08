@@ -198,6 +198,7 @@ exports[`<Checkbox /> should render with an other field 1`] = `
       }
       isReduxForm={false}
       onChange={[Function]}
+      value=""
     />
   </CheckboxGroup>
 </div>

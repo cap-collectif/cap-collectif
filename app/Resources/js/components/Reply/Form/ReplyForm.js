@@ -21,7 +21,6 @@ import {
   type ResponsesInReduxForm,
 } from '../../../utils/responsesHelper';
 import renderComponent from '../../Form/Field';
-import ReplyActions from '../../../actions/ReplyActions';
 import AlertForm from '../../Alert/AlertForm';
 import AddReplyMutation from '../../../mutations/AddReplyMutation';
 
@@ -51,10 +50,8 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 
   return AddReplyMutation.commit({ input: data })
     .then(() => {
-      ReplyActions.loadUserReplies(questionnaire.id);
       if (questionnaire.multipleRepliesAllowed) {
-        // dispatch(reset('ReplyForm'));
-        // reset(); ?
+        // reset();
       }
     })
     .catch(() => {
@@ -89,12 +86,19 @@ const validate = (values: FormValues, props: Props) => {
       question.type !== 'button' &&
       response.value &&
       typeof response.value === 'object' &&
-      Array.isArray(response.value.labels)
+      (Array.isArray(response.value.labels) || Array.isArray(response.value))
     ) {
       const rule = question.validationRule;
-      const labelsNumber = response.value.labels.length;
-      const hasOtherValue = response.value.other ? 1 : 0;
-      const responsesNumber = labelsNumber + hasOtherValue;
+      let responsesNumber = 0;
+      if (typeof response.value === 'object' && Array.isArray(response.value.labels)) {
+        const labelsNumber = response.value.labels.length;
+        const hasOtherValue = response.value.other ? 1 : 0;
+        responsesNumber = labelsNumber + hasOtherValue;
+      }
+
+      if (typeof response.value === 'object' && Array.isArray(response.value)) {
+        responsesNumber = response.value.length;
+      }
 
       if (rule.type === 'min' && (rule.number && responsesNumber < rule.number)) {
         responsesError[index] = {
@@ -223,7 +227,6 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) =
 const form = reduxForm({
   validate,
   onSubmit,
-  // enableReinitialize: true,
   form: formName,
 })(ReplyForm);
 

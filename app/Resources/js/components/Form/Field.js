@@ -8,6 +8,7 @@ const Field = React.createClass({
     meta: PropTypes.shape({
       touched: PropTypes.bool.isRequired,
       dirty: PropTypes.bool,
+      pristine: PropTypes.bool,
       error: PropTypes.any,
     }).isRequired,
     labelClassName: PropTypes.string,
@@ -112,6 +113,7 @@ const Field = React.createClass({
         wrapperClassName={wrapperClassName || ''}
         labelClassName={labelClassName || ''}
         label={label || null}
+        // pristine={pristine}
         placeholder={placeholder || null}
         errors={errorMessage}
         validationState={check ? (error ? 'error' : 'success') : null}

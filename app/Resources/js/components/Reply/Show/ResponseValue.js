@@ -27,9 +27,9 @@ export class ResponseValue extends React.Component<Props> {
       );
     }
     if (response.question.type === 'ranking') {
-      return responseValue.labels && responseValue.labels.length > 0 ? (
+      return responseValue.length > 0 ? (
         <ol>
-          {responseValue.labels.map((label, index) => {
+          {responseValue.map((label, index) => {
             return <li key={index}>{label}</li>;
           })}
         </ol>
@@ -39,16 +39,23 @@ export class ResponseValue extends React.Component<Props> {
         </p>
       );
     }
+
     if (
       responseValue &&
-      typeof responseValue === 'object' &&
-      typeof responseValue.labels !== 'undefined'
+      (typeof responseValue === 'object' && typeof responseValue.labels !== 'undefined')
     ) {
-      const labels = responseValue.labels;
-      if (labels && responseValue.other) {
-        labels.push(responseValue.other);
+      let labels;
+
+      if (typeof responseValue === 'object') {
+        labels = responseValue.labels;
+        if (labels && responseValue.other) {
+          labels.push(responseValue.other);
+        }
+      } else {
+        labels = responseValue;
       }
-      return labels.length > 0 ? (
+
+      return labels && labels.length > 0 ? (
         <p>{labels.join(', ')}</p>
       ) : (
         <p>{<FormattedMessage id="reply.show.response.no_value" />}</p>

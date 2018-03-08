@@ -12,6 +12,11 @@ const mutation = graphql`
     addReply(input: $input) {
       reply {
         id
+        questionnaire {
+          id
+          ...ReplyCreateFormWrapper_questionnaire
+          ...UserReplies_questionnaire
+        }
       }
     }
   }

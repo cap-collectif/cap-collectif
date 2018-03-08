@@ -41,7 +41,7 @@ const Checkbox = React.createClass({
 
   onChange(newValue) {
     const { onChange, value } = this.props;
-    const otherValue = value.other ? value.other : null;
+    const otherValue = value.other;
 
     if (Array.isArray(newValue)) {
       onChange({ labels: newValue, other: otherValue });
@@ -90,7 +90,7 @@ const Checkbox = React.createClass({
 
     const finalValue = value.labels ? value.labels : [];
 
-    const otherValue = value.other;
+    const otherValue = value.other ? value.other : '';
     const fieldName = `choices-for-field-${field.id}`;
 
     const labelClasses = {
@@ -116,6 +116,7 @@ const Checkbox = React.createClass({
         )}
         <CheckboxGroup id={fieldName} ref={'choices'} name={fieldName} className="input-choices">
           {field.choices.map(choice => {
+            // console.warn(finalValue.indexOf(choice.label));
             const choiceKey = `choice-${choice.id}`;
             return (
               <div key={choiceKey}>
@@ -125,7 +126,6 @@ const Checkbox = React.createClass({
                   type="checkbox"
                   value={choice.label}
                   checked={finalValue.indexOf(choice.label) !== -1}
-                  // disabledValidation
                   description={choice.description}
                   disabled={disabled}
                   onBlur={event => {
@@ -148,12 +148,12 @@ const Checkbox = React.createClass({
               </div>
             );
           })}
-          {this.props.field.isOtherAllowed ? (
+          {field.isOtherAllowed ? (
             <Other
               ref={c => (this.other = c)}
               value={otherValue}
               isReduxForm={isReduxForm}
-              field={this.props.field}
+              field={field}
               onChange={this.onOtherChange}
               disabled={disabled}
             />

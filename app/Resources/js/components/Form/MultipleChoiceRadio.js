@@ -67,8 +67,6 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
     const finalValue = value && Array.isArray(value.labels) ? value.labels[0] : undefined;
     const otherValue = value ? value.other : undefined;
 
-    // console.log(choices.map((choice) => choice));
-
     return (
       <div>
         <FormGroup validationState={validationState}>
