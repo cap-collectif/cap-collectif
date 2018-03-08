@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\Search;
 
+use Capco\AppBundle\Elasticsearch\ElasticaToDoctrineTransformer;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Result;
-use FOS\ElasticaBundle\Transformer\ElasticaToModelTransformerInterface;
 
 class ProposalSearch extends Search
 {
@@ -22,7 +22,7 @@ class ProposalSearch extends Search
         'teaser.std',
     ];
 
-    public function __construct(Index $index, ElasticaToModelTransformerInterface $transformer, $validator)
+    public function __construct(Index $index, ElasticaToDoctrineTransformer $transformer, $validator)
     {
         parent::__construct($index, $transformer, $validator);
 

@@ -1,7 +1,7 @@
 services:
   capco.search.search:
     class: Capco\AppBundle\Search\Search
-    arguments: ['@fos_elastica.index', '@fos_elastica.elastica_to_model_transformer.collection.app', '@validator']
+    arguments: ['@fos_elastica.index', '@capco.elasticsearch.elastica_to_doctrine_transformer', '@validator']
 
   capco.search.global_search:
     class: Capco\AppBundle\Search\GlobalSearch

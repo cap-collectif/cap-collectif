@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\Search;
 
+use Capco\AppBundle\Elasticsearch\ElasticaToDoctrineTransformer;
 use Elastica\Filter\BoolFilter;
 use Elastica\Filter\Nested;
 use Elastica\Filter\Term;
 use Elastica\Index;
 use Elastica\Query;
-use FOS\ElasticaBundle\Transformer\ElasticaToModelTransformerInterface;
 
 abstract class Search
 {
@@ -26,7 +26,7 @@ abstract class Search
     protected $validator;
     protected $type;
 
-    public function __construct(Index $index, ElasticaToModelTransformerInterface $transformer, $validator)
+    public function __construct(Index $index, ElasticaToDoctrineTransformer $transformer, $validator)
     {
         $this->index = $index;
         $this->transformer = $transformer;

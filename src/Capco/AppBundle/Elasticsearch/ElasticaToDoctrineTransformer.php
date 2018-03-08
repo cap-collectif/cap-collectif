@@ -21,16 +21,12 @@ class ElasticaToDoctrineTransformer
     const ENTITY_ALIAS = 'o';
 
     /**
-     * Manager registry.
-     *
      * @var ManagerRegistry
      */
     protected $registry = null;
 
     /**
      * Optional parameters.
-     *
-     * @var array
      */
     protected $options = [
         'hints' => [],
@@ -41,8 +37,6 @@ class ElasticaToDoctrineTransformer
     ];
 
     /**
-     * PropertyAccessor instance.
-     *
      * @var PropertyAccessorInterface
      */
     protected $propertyAccessor;
@@ -52,11 +46,6 @@ class ElasticaToDoctrineTransformer
      */
     private $indexer;
 
-    /**
-     * Instantiates a new Mapper.
-     *
-     * @param ManagerRegistry $registry
-     */
     public function __construct(ManagerRegistry $registry, Indexer $indexer)
     {
         $this->registry = $registry;
@@ -134,11 +123,6 @@ class ElasticaToDoctrineTransformer
         return $this->options['identifier'];
     }
 
-    /**
-     * Set the PropertyAccessor instance.
-     *
-     * @param PropertyAccessorInterface $propertyAccessor
-     */
     public function setPropertyAccessor(PropertyAccessorInterface $propertyAccessor)
     {
         $this->propertyAccessor = $propertyAccessor;
