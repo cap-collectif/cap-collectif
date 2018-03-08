@@ -116,7 +116,6 @@ const Checkbox = React.createClass({
         )}
         <CheckboxGroup id={fieldName} ref={'choices'} name={fieldName} className="input-choices">
           {field.choices.map(choice => {
-            // console.warn(finalValue.indexOf(choice.label));
             const choiceKey = `choice-${choice.id}`;
             return (
               <div key={choiceKey}>

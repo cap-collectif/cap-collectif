@@ -12,7 +12,6 @@ type Props = {
 export class UserReplies extends React.Component<Props> {
   render() {
     const { questionnaire } = this.props;
-    // console.log(questionnaire);
 
     if (questionnaire.viewerReplies.length === 0) {
       return null;

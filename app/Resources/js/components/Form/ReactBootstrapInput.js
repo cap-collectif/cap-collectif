@@ -212,7 +212,6 @@ class ReactBootstrapInput extends React.Component<Props> {
         field.isOtherAllowed = props.isOtherAllowed;
         field.choices = props.choices;
         field.checked = props.checked;
-        // field.pristine = props.pristine;
 
         return (
           <MultipleChoiceCheckbox

@@ -113,7 +113,6 @@ const Field = React.createClass({
         wrapperClassName={wrapperClassName || ''}
         labelClassName={labelClassName || ''}
         label={label || null}
-        // pristine={pristine}
         placeholder={placeholder || null}
         errors={errorMessage}
         validationState={check ? (error ? 'error' : 'success') : null}

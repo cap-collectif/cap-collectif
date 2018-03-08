@@ -4,8 +4,6 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { type ResponseValue_response } from './__generated__/ResponseValue_response.graphql';
 import { getValueFromResponse } from '../../../utils/responsesHelper';
 
-// create test for this component
-
 type Props = {
   response: ResponseValue_response,
 };

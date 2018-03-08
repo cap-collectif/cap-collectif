@@ -45,14 +45,6 @@ const Other = React.createClass({
     }
   },
 
-  componentDidMount() {
-    const { field } = this.props;
-
-    if (field.pristine) {
-      this.clear();
-    }
-  },
-
   onType(e) {
     const { onChange } = this.props;
 
@@ -106,8 +98,6 @@ const Other = React.createClass({
     const { value } = this.state;
 
     const fieldName = `choices-for-field-${field.id}`;
-
-    console.log(field);
 
     return (
       <div id={`reply-${field.id}_choice-other`} className="other-field">
