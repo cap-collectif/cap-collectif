@@ -33,6 +33,7 @@ class ParisImportUsersCommand extends ContainerAwareCommand
         'zipcode',
         'password',
         'email',
+        'email_init',
         'created_at',
         'last_login_at',
         'birthdate',
@@ -177,15 +178,15 @@ class ParisImportUsersCommand extends ContainerAwareCommand
                 ->setLastname($lastName)
                 ->setUsername($user['name'])
                 ->setPassword('')
-                ->setEmailCanonical($user['email'])
+                ->setEmailCanonical('' === $user['email'] ? $user['email_init'] : $user['email'])
+                ->setEmail('' === $user['email'] ? $user['email_init'] : $user['email'])
                 ->setAddress('' === $user['address'] ? null : $user['address'])
                 ->setZipCode('' === $user['zipcode'] ? null : (int) $user['zipcode'])
                 ->setSlug($slug->slugify($user['name']) . $count)
                 ->setEnabled(true)
                 ->setPhone($user['phone'])
                 ->setUserType($type)
-                ->setEmail($user['email'])
-                ->setParisId($user['email'])
+                ->setParisId('' === $user['email'] ? $user['email_init'] : $user['email'])
                 ->setCreatedAt(new \DateTime($user['created_at']))
                 ->setLastLogin(new \DateTime($user['last_login_at']))
                 ->setDateOfBirth(new \DateTime($user['birthdate']))

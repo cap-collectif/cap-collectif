@@ -66,6 +66,7 @@ class ParisImportCommand extends ContainerAwareCommand
         'project_id',
         'proposal_id',
         'title',
+        'author_name',
         'district',
         'category',
         'body',
@@ -101,7 +102,8 @@ class ParisImportCommand extends ContainerAwareCommand
     {
         $this
             ->setName('capco:import:paris')
-            ->setDescription('(Import data from paris');
+            ->setDescription('(Import data from paris')
+        ;
     }
 
     protected function initialize(InputInterface $input, OutputInterface $output): void
@@ -227,8 +229,8 @@ class ParisImportCommand extends ContainerAwareCommand
             $statuses = $step->getStatuses();
             $progress = new ProgressBar($output, \count($proposals));
             $count = 1;
-            $author = $this->em->getRepository(User::class)->findOneBy(['username' => 'Mairie de Paris']);
             foreach ($proposals as $proposal) {
+                $author = $this->em->getRepository(User::class)->findOneBy(['username' => $proposal['author_name']]);
                 $proposalParisId = $proposal['proposal_id'];
                 $district = $this->em->getRepository(District::class)->findOneBy(
                     ['form' => $step->getProposalForm(), 'name' => $proposal['district']]
