@@ -41,7 +41,7 @@ class CollectStepsController extends FOSRestController
         $page = (int) $paramFetcher->get('page');
         $pagination = (int) $paramFetcher->get('pagination');
         $order = $paramFetcher->get('order');
-        $providedFilters = $request->request->has('filters') ? $request->request->get('filters') : [];
+        $filters = $request->request->has('filters') ? $request->request->get('filters') : [];
 
         if ($proposalForm->getStep()->isPrivate()) {
             $user = $this->getUser();
@@ -49,22 +49,22 @@ class CollectStepsController extends FOSRestController
                 return ['proposals' => [], 'count' => 0, 'order' => $order];
             }
             if (!$user->isAdmin()) {
-                $providedFilters['author'] = $user->getId();
+                $filters['author'] = $user->getId();
             }
         }
 
         $terms = $request->request->has('terms') ? $request->request->get('terms') : null;
 
         // Filters
-        $providedFilters['proposalForm'] = $proposalForm->getId();
-        $providedFilters['step'] = $collectStep->getId();
+        $filters['proposalForm'] = $proposalForm->getId();
+        $filters['step'] = $collectStep->getId();
 
         $results = $this->get('capco.search.proposal_search')->searchProposals(
             $page,
             $pagination,
             $order,
             $terms,
-            $providedFilters
+            $filters
         );
 
         return $results;
@@ -84,6 +84,7 @@ class CollectStepsController extends FOSRestController
         }
 
         $proposalForm = $collectStep->getProposalForm();
+        $filters = ['id' => $selectedIds];
 
         if ($proposalForm->getStep()->isPrivate()) {
             $user = $this->getUser();
@@ -91,23 +92,11 @@ class CollectStepsController extends FOSRestController
                 return ['proposals' => [], 'count' => 0];
             }
             if (!$user->isAdmin()) {
-                $providedFilters['author'] = $user->getId();
+                $filters['author'] = $user->getId();
             }
         }
 
-        $results = $this->get('capco.search.proposal_search')->searchProposalsIn($selectedIds);
-
-        // Reorder proposals
-        $orderedProposals = [];
-        foreach ($selectedIds as $selectedId) {
-            foreach ($results['proposals'] as $proposal) {
-                if ($selectedId === $proposal->getId()) {
-                    $orderedProposals[] = $proposal;
-                }
-            }
-        }
-
-        $results['proposals'] = $orderedProposals;
+        $results = $this->get('capco.search.proposal_search')->searchProposalsIn($filters);
 
         return $results;
     }

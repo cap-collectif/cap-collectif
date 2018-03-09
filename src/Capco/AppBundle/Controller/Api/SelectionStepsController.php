@@ -58,14 +58,12 @@ class SelectionStepsController extends FOSRestController
         $terms = $request->request->has('terms') ? $request->request->get('terms') : null;
 
         // Filters
-        $providedFilters = $request->request->has('filters') ? $request->request->get('filters') : [];
+        $filters = $request->request->has('filters') ? $request->request->get('filters') : [];
+        $filters['selectionStep'] = $selectionStep->getId();
 
-        $providedFilters['selectionStep'] = $selectionStep->getId();
-        $providedFilters['step'] = $selectionStep->getId();
-
-        if (array_key_exists('statuses', $providedFilters)) {
-            $providedFilters['selectionStatuses'] = $providedFilters['statuses'];
-            unset($providedFilters['statuses']);
+        if (array_key_exists('statuses', $filters)) {
+            $filters['selectionStatuses'] = $filters['statuses'];
+            unset($filters['statuses']);
         }
 
         $results = $this->get('capco.search.proposal_search')->searchProposals(
@@ -73,7 +71,7 @@ class SelectionStepsController extends FOSRestController
             $pagination,
             $order,
             $terms,
-            $providedFilters
+            $filters
         );
 
         return $results;
@@ -92,19 +90,7 @@ class SelectionStepsController extends FOSRestController
             throw new HttpException(400, 'ids are not setted');
         }
 
-        $results = $this->get('capco.search.proposal_search')->searchProposalsIn($selectedIds, $selectionStep->getId());
-
-        // Reorder proposals
-        $orderedProposals = [];
-        foreach ($selectedIds as $selectedId) {
-            foreach ($results['proposals'] as $proposal) {
-                if ($selectedId === $proposal->getId()) {
-                    $orderedProposals[] = $proposal;
-                }
-            }
-        }
-
-        $results['proposals'] = $orderedProposals;
+        $results = $this->get('capco.search.proposal_search')->searchProposalsIn(['id' => $selectedIds, 'selectionStep' => $selectionStep->getId()]);
 
         return $results;
     }

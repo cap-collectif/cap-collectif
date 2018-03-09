@@ -556,7 +556,6 @@ Scenario: Anonymous API client wants to get proposals from a collect step with f
   When I send a POST request to "/api/collect_steps/collectstep1/proposals/search?order=last" with json:
   """
   {
-    "terms": null,
     "filters": {
       "categories": "pCategory2"
     }

@@ -31,23 +31,21 @@ class ProposalSearch extends Search
         $this->type = 'proposal';
     }
 
-    public function searchProposalsIn(array $selectedIds, string $selectedStepId = null): array
+    public function searchProposalsIn(array $providedFilters): array
     {
         $boolQuery = new Query\BoolQuery();
 
-        $boolQuery->addMust(new Term([
-            'id' => ['value' => $selectedIds],
-        ]));
-
-        if (null !== $selectedStepId) {
+        $filters = $this->getFilters($providedFilters);
+        foreach ($filters as $key => $value) {
             $boolQuery->addMust(new Term([
-              'selections.step.id' => ['value' => $selectedStepId],
-          ]));
+                $key => ['value' => $value],
+            ]));
         }
 
         $query = new Query($boolQuery);
         $query
             ->setSource(['id'])
+            ->setSize(100)
         ;
         $resultSet = $this->index->getType($this->type)->search($query);
 
@@ -147,6 +145,10 @@ class ProposalSearch extends Search
         // Trashed proposals are indexed
         // but most of the time we don't want to see them
         $filters['isTrashed'] = false;
+
+        if (array_key_exists('id', $providedFilters)) {
+            $filters['id'] = $providedFilters['id'];
+        }
 
         if (array_key_exists('selectionStep', $providedFilters)) {
             $filters['selections.step.id'] = $providedFilters['selectionStep'];
