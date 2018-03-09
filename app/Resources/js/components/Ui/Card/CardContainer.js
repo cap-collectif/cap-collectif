@@ -23,6 +23,10 @@ export const CardContainer = styled.div`
     }
   }
 
+  .card__threshold .progress {
+    margin-bottom: 0;
+  }
+
   .card__title {
     font-size: 18px;
     line-height: 1.2;
