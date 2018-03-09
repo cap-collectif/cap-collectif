@@ -32,7 +32,7 @@ class ProposalSearch extends Search
         $this->type = 'proposal';
     }
 
-    public function searchProposalsIn(array $ids)
+    public function searchProposalsIn(array $ids): array
     {
         $idQuery = new Query\Ids($ids);
         $query = new Query($idQuery);
@@ -72,7 +72,8 @@ class ProposalSearch extends Search
         $query
             ->setSource(['id'])
             ->setFrom($from)
-            ->setSize($pagination);
+            ->setSize($pagination)
+        ;
 
         $resultSet = $this->index->getType($this->type)->search($query);
 
@@ -104,7 +105,7 @@ class ProposalSearch extends Search
               $sortOrder = 'desc';
               break;
           case 'votes':
-              $stepId = $filters['step'] ?? $filters['selectionStep'];
+              $stepId = $filters['collectStep'] ?? $filters['selectionStep'];
               $sortField = 'votesCountByStepId.' . $stepId;
               $sortOrder = 'desc';
               break;
