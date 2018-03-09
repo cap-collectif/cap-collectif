@@ -24,7 +24,9 @@ class ProposalDeleteProcessor implements ProcessorInterface
     public function process(Message $message, array $options)
     {
         $json = json_decode($message->getBody(), true);
-        $this->em->getFilters()->disable('softdeleted');
+        if ($this->em->getFilters()->isEnabled('softdeleted')) {
+            $this->em->getFilters()->disable('softdeleted');
+        }
         $proposal = $this->proposalRepository->find($json['proposalId']);
         $this->em->getFilters()->enable('softdeleted');
         $this->notifier->onDelete($proposal);

@@ -32,7 +32,9 @@ class GlobalIdResolver
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         if ($user instanceof User && $user->isAdmin()) {
             // If user is an admin, we allow to retrieve softdeleted nodes
-            $em->getFilters()->disable('softdeleted');
+            if ($em->getFilters()->isEnabled('softdeleted')) {
+                $em->getFilters()->disable('softdeleted');
+            }
         }
 
         $node = null;

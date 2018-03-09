@@ -64,6 +64,18 @@ class MultipleChoiceQuestion extends AbstractQuestion
         );
     }
 
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description = null): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
     public function getQuestionChoices(): Collection
     {
         return $this->questionChoices;

@@ -244,7 +244,9 @@ class ProposalMutation implements ContainerAwareInterface
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         if ($user && $user->isAdmin()) {
             // If user is an admin, we allow to retrieve deleted proposal
-            $em->getFilters()->disable('softdeleted');
+            if ($em->getFilters()->isEnabled('softdeleted')) {
+                $em->getFilters()->disable('softdeleted');
+            }
         }
         $proposal = $this->getProposal($values['proposalId']);
         if (!$proposal) {
