@@ -48,14 +48,14 @@ const openProject = {
     name: 'Soumis au vote',
     color: 'status--success',
   },
-  cover: 'https://source.unsplash.com/random',
+  cover: 'https://source.unsplash.com/collection/1127828',
   type: {
     title: 'Consultation',
     color: '#337ab7',
   },
   user: {
     name: 'Jean Pierre',
-    avatar: 'https://source.unsplash.com/random',
+    avatar: 'https://source.unsplash.com/collection/181462',
     publicationDate: '1 février 2015',
   },
   step: {
@@ -99,14 +99,14 @@ const continuousProject = {
     name: 'Aucun statut',
     color: 'status--primary',
   },
-  cover: 'https://source.unsplash.com/random',
+  cover: 'https://source.unsplash.com/collection/1127828',
   type: {
     title: 'Questionnaire',
     color: '#999999',
   },
   user: {
     name: 'Jean Pierre',
-    avatar: 'https://source.unsplash.com/random',
+    avatar: 'https://source.unsplash.com/collection/181462',
     publicationDate: '1 février 2015',
   },
   step: {
@@ -150,14 +150,14 @@ const endedProject = {
     name: 'Vote gagné',
     color: 'status--danger',
   },
-  cover: 'https://source.unsplash.com/random',
+  cover: 'https://source.unsplash.com/collection/1127828',
   type: {
     title: 'Budget participatif',
     color: '#5bc0de',
   },
   user: {
     name: 'Jean Pierre',
-    avatar: 'https://source.unsplash.com/random',
+    avatar: 'https://source.unsplash.com/collection/181462',
     publicationDate: '1 février 2015',
   },
   step: {
@@ -197,14 +197,14 @@ const toComeProject = {
     name: 'Aucun statut',
     color: 'status--info',
   },
-  cover: 'https://source.unsplash.com/random',
+  cover: 'https://source.unsplash.com/collection/1127828',
   type: {
     title: 'Interpellation',
     color: '#5cb85c',
   },
   user: {
     name: 'Jean Pierre',
-    avatar: 'https://source.unsplash.com/random',
+    avatar: 'https://source.unsplash.com/collection/181462',
     publicationDate: '1 février 2015',
   },
   step: {
