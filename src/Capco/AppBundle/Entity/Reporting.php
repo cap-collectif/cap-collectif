@@ -281,7 +281,6 @@ class Reporting implements CreatableInterface
     {
         if (null !== $this->Opinion) {
             return $this->Opinion;
-<<<<<<< HEAD
         } elseif (null !== $this->Source) {
             return $this->Source;
         } elseif (null !== $this->Argument) {
@@ -293,31 +292,6 @@ class Reporting implements CreatableInterface
         } elseif (null !== $this->opinionVersion) {
             return $this->opinionVersion;
         } elseif (null !== $this->proposal) {
-=======
-        }
-
-        if ($this->Source !== null) {
-            return $this->Source;
-        }
-
-        if ($this->Argument !== null) {
-            return $this->Argument;
-        }
-
-        if ($this->Idea !== null) {
-            return $this->Idea;
-        }
-
-        if ($this->Comment !== null) {
-            return $this->Comment;
-        }
-
-        if ($this->opinionVersion !== null) {
-            return $this->opinionVersion;
-        }
-
-        if ($this->proposal !== null) {
->>>>>>> Update codebase
             return $this->proposal;
         }
     }

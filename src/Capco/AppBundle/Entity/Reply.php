@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
-use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\VoteContribution;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\ExpirableTrait;

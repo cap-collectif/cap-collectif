@@ -53,7 +53,7 @@ class SourceVote extends AbstractVote
      */
     public function deleteVote()
     {
-        if ($this->source !== null) {
+        if (null !== $this->source) {
             $this->source->removeVote($this);
         }
     }
