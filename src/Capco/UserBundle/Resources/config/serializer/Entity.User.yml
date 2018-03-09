@@ -18,7 +18,7 @@ Capco\UserBundle\Entity\User:
         groups: [UsersInfos, UserDetails]
       userType:
         expose: true
-        groups: [UsersInfos]
+        groups: [UsersInfos, Elasticsearch]
         serialized_name: userType
     virtual_properties:
       getDisplayName:

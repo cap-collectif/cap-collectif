@@ -71,7 +71,10 @@ mappings:
                 type: object
                 properties:
                     id: { type: keyword }
-
+                    userType:
+                      type: object
+                      properties:
+                          id: { type: long }
     district:
         properties:
             id: { type: keyword }
@@ -163,6 +166,11 @@ mappings:
                 type: object
                 properties:
                     id: { type: keyword }
+            votesCountByStepId:
+                type: object
+            #    attributes:
+            #       key: { type: keyword }
+            #       value: { type: float }
             selections:
                 type: object
                 properties:

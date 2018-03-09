@@ -49,7 +49,7 @@ class ProposalSearch extends Search
         ];
     }
 
-    public function searchProposals(int $page, int $pagination = null, string $order, string $terms = null, array $providedFilters): array
+    public function searchProposals(int $page, int $pagination = null, string $order, $terms, array $providedFilters): array
     {
         $boolQuery = new Query\BoolQuery();
         $boolQuery = $this->searchTermsInMultipleFields($boolQuery, self::SEARCH_FIELDS, $terms, 'phrase_prefix');

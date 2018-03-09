@@ -19,7 +19,7 @@ Capco\AppBundle\Entity\Steps\AbstractStep:
     title:
       expose: true
       type: string
-      groups: [Steps, Elasticsearch]
+      groups: [Steps]
     isEnabled:
       expose: true
       type: boolean
@@ -28,17 +28,17 @@ Capco\AppBundle\Entity\Steps\AbstractStep:
     startAt:
       expose: true
       type: DateTime
-      groups: [Steps, Elasticsearch]
+      groups: [Steps]
       serialized_name: startAt
     endAt:
       expose: true
       type: DateTime
-      groups: [Steps, Elasticsearch]
+      groups: [Steps]
       serialized_name: endAt
     body:
       expose: true
       type: string
-      groups: [Steps, Elasticsearch]
+      groups: [Steps]
     statuses:
       expose: true
       groups: [SelectionSteps, Statuses]

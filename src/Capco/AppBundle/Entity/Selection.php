@@ -111,6 +111,6 @@ class Selection implements IndexableInterface
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['Proposals', 'SelectionSteps'];
+        return ['Elasticsearch'];
     }
 }
