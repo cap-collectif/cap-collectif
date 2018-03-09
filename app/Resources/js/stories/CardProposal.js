@@ -10,8 +10,6 @@ type Props = {
 };
 
 export class CardProposal extends React.Component<Props> {
-  static defaultProps = {};
-
   render() {
     const { proposal } = this.props;
 
