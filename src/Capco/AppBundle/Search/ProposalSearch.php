@@ -33,14 +33,22 @@ class ProposalSearch extends Search
 
     public function searchProposalsIn(array $selectedIds, string $selectedStepId = null): array
     {
-        $query = new Query\BoolQuery();
+        $boolQuery = new Query\BoolQuery();
 
-        $query = $this->searchTermsInField($query, 'id', $selectedIds);
+        $boolQuery->addMust(new Term([
+            'id' => ['value' => $selectedIds],
+        ]));
 
         if (null !== $selectedStepId) {
-            $query = $this->searchTermsInField($query, 'selections.step.id', $selectedStepId);
+            $boolQuery->addMust(new Term([
+              'selections.step.id' => ['value' => $selectedStepId],
+          ]));
         }
 
+        $query = new Query($boolQuery);
+        $query
+            ->setSource(['id'])
+        ;
         $resultSet = $this->index->getType($this->type)->search($query);
 
         return [

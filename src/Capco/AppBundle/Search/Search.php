@@ -25,19 +25,6 @@ abstract class Search
         $this->index = $index;
     }
 
-    protected function searchTermsInField(Query\BoolQuery $query, string $fieldName, $terms): Query\BoolQuery
-    {
-        if (is_array($terms)) {
-            $termsQuery = new Query\Terms($fieldName, $terms);
-        } else {
-            $termsQuery = new Query\Match($fieldName, $terms);
-        }
-
-        $query->addMust($termsQuery);
-
-        return $query;
-    }
-
     protected function searchTermsInMultipleFields(Query\BoolQuery $query, array $fields, $terms = null, $type = null): Query\BoolQuery
     {
         if (empty(trim($terms))) {
