@@ -114,10 +114,9 @@ class Indexer
      * Remove / Delete from the index.
      * You HAVE to call self::finishBulk after!
      *
-     * @param $entityFQN
-     * @param $identifier
+     * @param mixed $identifier
      */
-    public function remove($entityFQN, $identifier)
+    public function remove(string $entityFQN, $identifier)
     {
         $classes = $this->getClassesToIndex();
         $type = array_search($entityFQN, $classes, true);
@@ -188,17 +187,10 @@ class Indexer
     /**
      * Add a Document to the current bulk.
      * This does not send the bulk! /!\ (only if the threshold is hit).
-     *
-     * @param Document     $document
-     * @param Index|string $index
      */
-    private function addToBulk(Document $document, $index = null)
+    private function addToBulk(Document $document)
     {
-        if ($index) {
-            $document->setIndex($index instanceof Index ? $index->getName() : $index);
-        } else {
-            $document->setIndex($this->index);
-        }
+        $document->setIndex($this->index);
 
         if (!empty($document->getData())) {
             $this->currentInsertBulk[] = $document;
@@ -213,31 +205,29 @@ class Indexer
 
     /**
      * Index child of demormalized entities.
-     *
-     * @todo COMPLETE ME
      */
     private function indexDemoralizedChildren(IndexableInterface $object)
     {
-        if ($object instanceof Status) {
-            foreach ($object->getProposals() as $proposal) {
-                $this->addToBulk($this->buildDocument($proposal));
-            }
-
-            $selections = $this->em->getRepository(Selection::class)->findBy(['status' => $object]);
-            foreach ($selections as $selection) {
-                $this->addToBulk($this->buildDocument($selection));
-                $this->addToBulk($this->buildDocument($selection->getProposal()));
-            }
-        }
-
-        if ($object instanceof District) {
-            foreach ($object->getProposals() as $proposal) {
-                $this->addToBulk($this->buildDocument($proposal));
-            }
-        }
-
-        if ($object instanceof Selection) {
-            $this->addToBulk($this->buildDocument($object->getProposal()));
-        }
+        // if ($object instanceof Status) {
+        //     foreach ($object->getProposals() as $proposal) {
+        //         $this->addToBulk($this->buildDocument($proposal));
+        //     }
+        //
+        //     $selections = $this->em->getRepository(Selection::class)->findBy(['status' => $object]);
+        //     foreach ($selections as $selection) {
+        //         $this->addToBulk($this->buildDocument($selection));
+        //         $this->addToBulk($this->buildDocument($selection->getProposal()));
+        //     }
+        // }
+        //
+        // if ($object instanceof District) {
+        //     foreach ($object->getProposals() as $proposal) {
+        //         $this->addToBulk($this->buildDocument($proposal));
+        //     }
+        // }
+        //
+        // if ($object instanceof Selection) {
+        //     $this->addToBulk($this->buildDocument($object->getProposal()));
+        // }
     }
 }

@@ -4,16 +4,16 @@ namespace Capco\AppBundle\Elasticsearch;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Swarrot\Broker\Message;
+use Swarrot\SwarrotBundle\Broker\Publisher;
 
-class DoctrineUpdateListener implements EventSubscriber, ContainerAwareInterface
+class DoctrineUpdateListener implements EventSubscriber
 {
-    private $container;
+    private $publisher;
 
-    public function setContainer(ContainerInterface $container = null)
+    public function __construct(Publisher $publisher)
     {
-        $this->container = $container;
+        $this->publisher = $publisher;
     }
 
     public function getSubscribedEvents(): array
@@ -42,9 +42,8 @@ class DoctrineUpdateListener implements EventSubscriber, ContainerAwareInterface
 
     private function sendOrder($entity)
     {
-        // @todo send the Indexation order to the worker.
-        $message = ['class' => get_class($entity), 'id' => $entity->getId()];
-
-        // @todo the worker can then use Indexer::index(FQN, ID)
+        $this->publisher->publish('elasticsearch.indexation', new Message(
+            json_encode(['class' => get_class($entity), 'id' => $entity->getId()])
+        ));
     }
 }

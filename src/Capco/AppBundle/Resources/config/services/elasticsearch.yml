@@ -32,10 +32,14 @@ services:
         calls:
             - ['setPropertyAccessor', ['@property_accessor']]
 
-    # to complete
     capco.elasticsearch.listener:
         class: Capco\AppBundle\Elasticsearch\DoctrineUpdateListener
-        calls:
-            - [ setContainer, [ "@service_container" ] ]
+        arguments:
+          - '@swarrot.publisher'
         tags:
-            - { name: doctrine.event_subscriber, connection: default }
+          - { name: doctrine.event_subscriber, connection: default }
+
+    elasticsearch_indexation.processor:
+        class: Capco\AppBundle\Elasticsearch\IndexationProcessor
+        arguments:
+            - '@capco.elasticsearch.indexer'
