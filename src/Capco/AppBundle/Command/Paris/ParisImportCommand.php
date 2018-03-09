@@ -289,6 +289,7 @@ class ParisImportCommand extends ContainerAwareCommand
                     $this->em->clear(AbstractResponse::class);
                     $this->em->clear(Proposal::class);
                     $this->em->clear(User::class);
+                    $this->em->clear(Comment::class);
                     $this->em->clear(UserNotificationsConfiguration::class);
                 }
                 $progress->advance();
@@ -298,6 +299,7 @@ class ParisImportCommand extends ContainerAwareCommand
             $this->em->clear(AbstractResponse::class);
             $this->em->clear(Proposal::class);
             $this->em->clear(User::class);
+            $this->em->clear(Comment::class);
             $this->em->clear(UserNotificationsConfiguration::class);
             $progress->finish();
             $output->writeln("\n<info>Successfully imported proposals.</info>");
@@ -312,32 +314,21 @@ class ParisImportCommand extends ContainerAwareCommand
             $output->writeln("\n<info>Importing comments for proposal \"" . $proposal->getTitle() . '"</info>');
             $comments = $this->comments[$proposalParisId];
             $progress = new ProgressBar($output, \count($comments));
-            $count = 1;
             foreach ($comments as $comment) {
                 if ('' === $comment['author_name']) {
                     $progress->advance();
-                    ++$count;
                     continue;
                 }
                 $author = $this->em->getRepository(User::class)->findOneBy(['username' => $comment['author_name']]);
                 $comment = (new ProposalComment())
-                    ->setProposal($proposal, false)
                     ->setAuthor($author)
+                    ->setProposal($proposal)
                     ->setCreatedAt(new \DateTime($comment['created_at']))
                     ->setUpdatedAt(new \DateTime($comment['updated_at']))
                     ->setBody($comment['body']);
                 $this->em->persist($comment);
-                if (0 === $count % self::COMMENT_BATCH_SIZE) {
-                    sleep(0.5); // Try for fixing Deadlock exception in production
-                    $this->em->flush();
-                    $this->em->clear(Comment::class);
-                }
                 $progress->advance();
-                ++$count;
             }
-            sleep(0.5); // Try for fixing Deadlock exception in production
-            $this->em->flush();
-            $this->em->clear(Comment::class);
             $progress->finish();
             $output->writeln("\n<info>Successfully imported comments for proposal.</info>");
         } else {
