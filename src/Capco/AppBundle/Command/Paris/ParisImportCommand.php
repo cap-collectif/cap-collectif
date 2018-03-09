@@ -40,6 +40,11 @@ class ParisImportCommand extends ContainerAwareCommand
     protected const PROPOSAL_BATCH_SIZE = 50;
     protected const COMMENT_BATCH_SIZE = 500;
 
+    protected const CATEGORIES_FILE = 'paris_categories.csv';
+    protected const COMMENTS_FILE = 'paris_comments.csv';
+    protected const PROJECTS_FILE = 'paris_projects.csv';
+    protected const PROPOSALS_FILE = 'paris_proposals.csv';
+
     protected const PROJECT_HEADER = [
         'id',
         'title',
@@ -134,7 +139,7 @@ class ParisImportCommand extends ContainerAwareCommand
 
     protected function importProjects(OutputInterface $output): void
     {
-        $csv = Reader::createFromPath(__DIR__ . '/paris_projects.csv');
+        $csv = Reader::createFromPath(__DIR__ . '/' . self::PROJECTS_FILE);
         $rows = [];
         $type = $this->em->getRepository(ProjectType::class)->findOneBy(['title' => 'project.types.participatoryBudgeting']);
         $iterator = $csv->setOffset(1)->fetchAssoc(self::PROJECT_HEADER);
@@ -428,7 +433,7 @@ class ParisImportCommand extends ContainerAwareCommand
 
     protected function createCategories(): array
     {
-        $csv = Reader::createFromPath(__DIR__ . '/paris_categories.csv');
+        $csv = Reader::createFromPath(__DIR__ . '/' . self::CATEGORIES_FILE);
         $iterator = $csv->setOffset(1)->fetchAssoc(self::CATEGORY_HEADER);
         $categories = [];
         foreach ($iterator as $item) {
@@ -446,7 +451,7 @@ class ParisImportCommand extends ContainerAwareCommand
 
     protected function createProposals(): array
     {
-        $csv = Reader::createFromPath(__DIR__ . '/paris_proposals.csv');
+        $csv = Reader::createFromPath(__DIR__ . '/' . self::PROPOSALS_FILE);
         $iterator = $csv->setOffset(1)->fetchAssoc(self::PROPOSAL_HEADER);
         $proposals = [];
         foreach ($iterator as $item) {
@@ -461,7 +466,7 @@ class ParisImportCommand extends ContainerAwareCommand
 
     protected function createComments(): array
     {
-        $csv = Reader::createFromPath(__DIR__ . '/paris_comments.csv');
+        $csv = Reader::createFromPath(__DIR__ . '/' . self::COMMENTS_FILE);
         $iterator = $csv->setOffset(1)->fetchAssoc(self::COMMENT_HEADER);
         $comments = [];
         foreach ($iterator as $item) {

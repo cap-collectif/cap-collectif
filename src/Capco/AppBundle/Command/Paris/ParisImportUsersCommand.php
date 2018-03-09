@@ -27,6 +27,8 @@ class ParisImportUsersCommand extends ContainerAwareCommand
 {
     protected const USERS_BATCH_SIZE = 500;
 
+    protected  const USERS_FILE = 'paris_comments.csv';
+
     protected const LISTENERS_WHITELIST = [
         SluggableListener::class,
         MediaEventSubscriber::class,
@@ -130,7 +132,7 @@ class ParisImportUsersCommand extends ContainerAwareCommand
 
     protected function createUsers(): array
     {
-        $csv = Reader::createFromPath(__DIR__ . '/paris_users.csv');
+        $csv = Reader::createFromPath(__DIR__ . '/' . self::USERS_FILE);
         $iterator = $csv->setOffset(1)->fetchAssoc(self::USER_HEADER);
         $users = [];
         foreach ($iterator as $item) {
