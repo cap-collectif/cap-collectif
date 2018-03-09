@@ -54,22 +54,19 @@ class ProposalCategory implements IndexableInterface
         return $this->getId() ? $this->getName() : 'New category';
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(string $name)
+    public function setName(string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    public function getForm()
+    public function getForm(): ?ProposalForm
     {
         return $this->form;
     }
@@ -86,13 +83,6 @@ class ProposalCategory implements IndexableInterface
         return $this->proposals;
     }
 
-    /**
-     * Add proposal.
-     *
-     * @param Proposal $proposal
-     *
-     * @return $this
-     */
     public function addProposal(Proposal $proposal)
     {
         if (!$this->proposals->contains($proposal)) {
@@ -102,13 +92,6 @@ class ProposalCategory implements IndexableInterface
         return $this;
     }
 
-    /**
-     * Remove proposal.
-     *
-     * @param Proposal $proposal
-     *
-     * @return $this
-     */
     public function removeProposal(Proposal $proposal)
     {
         $this->proposals->removeElement($proposal);
@@ -128,6 +111,6 @@ class ProposalCategory implements IndexableInterface
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['ProposalCategories'];
+        return ['Elasticsearch'];
     }
 }

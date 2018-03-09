@@ -141,18 +141,16 @@ mappings:
             updatedAt: { type: date }
             deletedAt: { type: date }
             isTrashed: { type: boolean }
-            commentsCount: { type: integer }
+            commentsCount: { type: long }
             estimation: { type: float }
             district:
                 type: object
                 properties:
-                    name: { type: keyword }
                     id: { type: keyword }
             status:
                 type: object
                 properties:
                     id: { type: keyword }
-                    name: { type: keyword }
             proposalForm:
                 type: object
                 properties:
@@ -161,7 +159,6 @@ mappings:
                 type: object
                 properties:
                     id: { type: keyword }
-                    name: { type: keyword }
             theme:
                 type: object
                 properties:
@@ -238,15 +235,15 @@ mappings:
     #         id: { type: keyword }
     #         title: *text_analysis_highlighted
 
-    status:
-        properties:
-            name: { type: keyword }
-            color: { type: keyword }
-
-    category:
-        properties:
-            id: { type: keyword }
-            color: { type: keyword }
+    # status:
+    #     properties:
+    #         name: { type: keyword }
+    #         color: { type: keyword }
+    #
+    # category:
+    #     properties:
+    #         id: { type: keyword }
+    #         color: { type: keyword }
 
     theme:
         properties:
