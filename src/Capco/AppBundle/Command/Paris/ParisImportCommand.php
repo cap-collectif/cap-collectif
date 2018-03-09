@@ -25,7 +25,7 @@ use Capco\AppBundle\Traits\VoteTypeTrait;
 use Capco\UserBundle\Entity\User;
 use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection as CollectionInterface;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
 use League\Csv\Reader;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -354,7 +354,7 @@ class ParisImportCommand extends ContainerAwareCommand
         unset($i);
     }
 
-    protected function createResponses(array $row, CollectionInterface $questions): array
+    protected function createResponses(array $row, Collection $questions): array
     {
         $responses = [];
         $questionColumns = ['objectif', 'diagnostic'];
