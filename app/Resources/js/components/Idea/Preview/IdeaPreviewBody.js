@@ -16,8 +16,8 @@ const IdeaPreviewBody = React.createClass({
           </h3>
           {idea.trashed ? (
             <span className="label label-default">
-            {<FormattedMessage id="idea.preview.trashed" />}
-          </span>
+              {<FormattedMessage id="idea.preview.trashed" />}
+            </span>
           ) : null}
         </div>
         <span className="excerpt small">

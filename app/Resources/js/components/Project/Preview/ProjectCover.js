@@ -2,7 +2,7 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import ProjectImage from './ProjectImage';
-import CardCover from "../../Ui/Card/CardCover";
+import CardCover from '../../Ui/Card/CardCover';
 
 const ProjectCover = React.createClass({
   propTypes: {

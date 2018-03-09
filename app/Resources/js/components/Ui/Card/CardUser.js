@@ -2,25 +2,24 @@
 // import * as React from 'react';
 import styled from 'styled-components';
 
-
 export const CardUser = styled.div`
   padding: 15px 15px 0;
 
   hr {
     margin: 20px 0 0;
   }
-  
+
   a {
     color: #707070;
   }
-  
+
   .card__user__avatar {
     float: left;
     margin-right: 10px;
     width: 45px;
     height: 45px;
     border-radius: 50%;
-    
+
     img {
       width: 100%;
       object-fit: cover;

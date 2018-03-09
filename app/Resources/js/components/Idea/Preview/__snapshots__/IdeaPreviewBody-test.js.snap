@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<IdeaPreviewBody /> it should render idea preview body 1`] = `
+<div
+  className="card__body"
+>
+  <div
+    className="card__body__infos"
+  >
+    <h3
+      className="card__title"
+    >
+      <a
+        href=""
+      >
+        Title
+      </a>
+    </h3>
+  </div>
+  <span
+    className="excerpt small"
+  >
+    <FormattedMessage
+      id="idea.preview.counters.votes"
+      values={
+        Object {
+          "num": undefined,
+        }
+      }
+    />
+  </span>
+</div>
+`;
+
+exports[`<IdeaPreviewBody /> should render trashed label when idea is trashed 1`] = `
+<div
+  className="card__body"
+>
+  <div
+    className="card__body__infos"
+  >
+    <h3
+      className="card__title"
+    >
+      <a
+        href=""
+      >
+        Title
+      </a>
+    </h3>
+    <span
+      className="label label-default"
+    >
+      <FormattedMessage
+        id="idea.preview.trashed"
+        values={Object {}}
+      />
+    </span>
+  </div>
+  <span
+    className="excerpt small"
+  >
+    <FormattedMessage
+      id="idea.preview.counters.votes"
+      values={
+        Object {
+          "num": undefined,
+        }
+      }
+    />
+  </span>
+</div>
+`;

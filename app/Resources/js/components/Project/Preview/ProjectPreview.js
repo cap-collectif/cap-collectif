@@ -4,7 +4,7 @@ import { Col } from 'react-bootstrap';
 import ProjectType from './ProjectType';
 import ProjectCover from './ProjectCover';
 import ProjectPreviewBody from './ProjectPreviewBody';
-import { CardContainer } from "../../Ui/Card/CardContainer";
+import { CardContainer } from '../../Ui/Card/CardContainer';
 
 type Props = {
   project: Object,

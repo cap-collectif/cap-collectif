@@ -13,7 +13,9 @@ const ProposalVoteThresholdProgressBar = React.createClass({
     const votesCount = proposal.votesCountByStepId[step.id];
     const voteThreshold = step.voteThreshold;
     return (
-      <div className="propopal__vote_threshold--no-min-width" style={{ fontSize: '85%', marginTop: '20px' }}>
+      <div
+        className="propopal__vote_threshold--no-min-width"
+        style={{ fontSize: '85%', marginTop: '20px' }}>
         <p>
           <i className="cap cap-hand-like-2-1" />{' '}
           {votesCount >= voteThreshold && <FormattedMessage id="proposal.vote.threshold.reached" />}

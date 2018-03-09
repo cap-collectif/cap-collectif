@@ -12,8 +12,8 @@ type Props = {
 
 export class ProposalPreviewFooter extends React.Component<Props> {
   static defaultProps = {
-      showVotes: false,
-      showComments: false,
+    showVotes: false,
+    showComments: false,
   };
 
   render() {

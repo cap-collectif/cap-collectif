@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import IdeaPreviewHeader from './IdeaPreviewHeader';
 import IdeaPreviewBody from './IdeaPreviewBody';
-import {CardContainer} from "../../Ui/Card/CardContainer";
+import { CardContainer } from '../../Ui/Card/CardContainer';
 
 const IdeaPreview = React.createClass({
   propTypes: {

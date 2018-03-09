@@ -5,7 +5,7 @@ import ProposalDetailEstimation from '../Detail/ProposalDetailEstimation';
 import ProposalPreviewVote from './ProposalPreviewVote';
 import ProposalDetailLikers from '../Detail/ProposalDetailLikers';
 import ProposalVoteThresholdProgressBar from '../Vote/ProposalVoteThresholdProgressBar';
-import TagsList from "../../Ui/List/TagsList";
+import TagsList from '../../Ui/List/TagsList';
 import { type State } from '../../../types';
 
 type Props = {
@@ -14,7 +14,7 @@ type Props = {
   showThemes: boolean,
   features: Object,
   step: Object,
-}
+};
 
 export class ProposalPreviewBody extends React.Component<Props> {
   render() {
@@ -31,13 +31,13 @@ export class ProposalPreviewBody extends React.Component<Props> {
           <div className="excerpt small">{proposal.summaryOrBodyExcerpt}</div>
           <TagsList>
             {features.themes &&
-            showThemes &&
-            proposal.theme && (
-              <div className="tags-list__tag">
-                <i className="cap cap-tag-1-1 icon--blue" />
-                {proposal.theme.title}
-              </div>
-            )}
+              showThemes &&
+              proposal.theme && (
+                <div className="tags-list__tag">
+                  <i className="cap cap-tag-1-1 icon--blue" />
+                  {proposal.theme.title}
+                </div>
+              )}
             {proposal.category && (
               <div className="tags-list__tag">
                 <i className="cap cap-tag-1-1 icon--blue" />
@@ -45,19 +45,17 @@ export class ProposalPreviewBody extends React.Component<Props> {
               </div>
             )}
             {features.districts &&
-            proposal.district && (
-              <div className="tags-list__tag">
-                <i className="cap cap-marker-1-1 icon--blue" />
-                {proposal.district.name}
-              </div>
-            )}
+              proposal.district && (
+                <div className="tags-list__tag">
+                  <i className="cap cap-marker-1-1 icon--blue" />
+                  {proposal.district.name}
+                </div>
+              )}
             <ProposalDetailEstimation proposal={proposal} showNullEstimation={showNullEstimation} />
             <ProposalDetailLikers proposal={proposal} />
           </TagsList>
         </div>
-        {step.id === proposal.votableStepId && (
-          <ProposalPreviewVote proposal={proposal} />
-        )}
+        {step.id === proposal.votableStepId && <ProposalPreviewVote proposal={proposal} />}
         {step.voteThreshold > 0 && (
           <ProposalVoteThresholdProgressBar proposal={proposal} step={step} />
         )}
@@ -68,7 +66,7 @@ export class ProposalPreviewBody extends React.Component<Props> {
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
   return {
-    features: state.default.features
+    features: state.default.features,
   };
 };
 

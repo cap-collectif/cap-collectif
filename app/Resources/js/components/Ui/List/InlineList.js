@@ -3,18 +3,18 @@
 import styled from 'styled-components';
 
 const InlineList = styled.ul.attrs({
-  className: "excerpt"
+  className: 'excerpt',
 })`
   padding: 0;
 
   li {
     display: inline;
-  
+
     &::after {
-      content: "•";
+      content: '•';
       padding: 0 5px;
     }
-    
+
     &:last-child::after {
       content: '';
       padding: 0;
@@ -22,7 +22,4 @@ const InlineList = styled.ul.attrs({
   }
 `;
 
-
 export default InlineList;
-
-

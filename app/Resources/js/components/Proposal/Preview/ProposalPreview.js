@@ -1,14 +1,11 @@
 import React, { PropTypes } from 'react';
 import { Col } from 'react-bootstrap';
-import classNames from 'classnames';
 import ProposalPreviewHeader from './ProposalPreviewHeader';
 import ProposalPreviewBody from './ProposalPreviewBody';
-import ProposalPreviewVote from './ProposalPreviewVote';
 import ProposalPreviewFooter from './ProposalPreviewFooter';
 import ProposalStatus from './ProposalStatus';
-import ProposalVoteThresholdProgressBar from '../Vote/ProposalVoteThresholdProgressBar';
 import { VOTE_TYPE_DISABLED, VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
-import { CardContainer } from "../../Ui/Card/CardContainer";
+import { CardContainer } from '../../Ui/Card/CardContainer';
 
 const ProposalPreview = React.createClass({
   propTypes: {
@@ -33,8 +30,7 @@ const ProposalPreview = React.createClass({
       <Col componentClass="li" xs={12} sm={6} md={4} lg={3}>
         <CardContainer
           id={`proposal-${proposal.id}`}
-          className={proposal.author && proposal.author.vip ? 'bg-vip ' : null}
-        >
+          className={proposal.author && proposal.author.vip ? 'bg-vip ' : null}>
           <ProposalPreviewHeader proposal={proposal} />
           <ProposalPreviewBody
             proposal={proposal}

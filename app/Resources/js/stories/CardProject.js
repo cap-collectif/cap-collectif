@@ -1,11 +1,12 @@
 // @flow
 import * as React from 'react';
 import { ProgressBar } from 'react-bootstrap';
-import {CardContainer} from "../components/Ui/Card/CardContainer";
-import CardType from "../components/Ui/Card/CardType";
-import {Progress} from "../components/Ui/Progress";
-import CardCover from "../components/Ui/Card/CardCover";
-import TagsList from "../components/Ui/List/TagsList";
+import { CardContainer } from '../components/Ui/Card/CardContainer';
+import CardType from '../components/Ui/Card/CardType';
+import { Progress } from '../components/Ui/Progress';
+import CardCover from '../components/Ui/Card/CardCover';
+import TagsList from '../components/Ui/List/TagsList';
+import InlineList from '../components/Ui/List/InlineList';
 
 type Props = {
   project: Object,
@@ -17,31 +18,26 @@ export class CardProject extends React.Component<Props> {
 
     return (
       <CardContainer>
-        <CardType color={project.type.color}>
-          {project.type.title}
-        </CardType>
+        <CardType color={project.type.color}>{project.type.title}</CardType>
         <CardCover>
-          <img src={project.cover} alt={project.title}/>
+          <img src={project.cover} alt={project.title} />
         </CardCover>
         <div className="card__body">
           <div className="card__body__infos">
+            <InlineList className="small">
+              {project.theme.map(theme => <li>{theme}</li>)}
+            </InlineList>
             <h3 className="card__title">
-              <a href="#">
-                {project.title}
-              </a>
+              <a href="#">{project.title}</a>
             </h3>
             <TagsList>
-              <div className="tags-list__tag ellipsis">
-                <i className="cap cap-tag-1-1 icon--blue" />
-                {project.theme}
+              <div className="tags-list__tag">
+                <i className="cap cap-baloon-1 icon--blue" />
+                {project.tags.contributions}
               </div>
-              <div className="tags-list__tag ellipsis">
-                <i className="cap cap-marker-1-1 icon--blue" />
-                0 contributions
-              </div>
-              <div className="tags-list__tag ellipsis">
-                <i className="cap cap-marker-1-1 icon--blue" />
-                0 participants
+              <div className="tags-list__tag">
+                <i className="cap cap-hand-like-2-1 icon--blue" />
+                {project.tags.participations}
               </div>
             </TagsList>
           </div>
@@ -54,17 +50,9 @@ export class CardProject extends React.Component<Props> {
             />
           </Progress>
           <div className="card__actions">
-            <div className="excerpt">
-              <a href="">
-                Participer
-              </a>
-              <span className="excerpt_dark">
-                10
-              </span>{' '}
-              <span>
-                jours restants {/* <remainingTime /> */}
-              </span>
-            </div>
+            {project.step.actionLink && <a href="">{project.step.actionLink}</a>}
+            <span className="excerpt_dark">{project.step.remainingTime.value}</span>{' '}
+            <span>{project.step.remainingTime && project.step.remainingTime.label}</span>
           </div>
         </div>
       </CardContainer>

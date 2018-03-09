@@ -157,18 +157,10 @@ export class ProjectPreviewBody extends React.Component<Props> {
     const { hasSecondTitle } = this.props;
 
     if (hasSecondTitle) {
-      return (
-        <h2 className="card__title">
-          {this.getTitleContent()}
-        </h2>
-      );
+      return <h2 className="card__title">{this.getTitleContent()}</h2>;
     }
 
-    return (
-      <h3 className="card__title">
-        {this.getTitleContent()}
-      </h3>
-    );
+    return <h3 className="card__title">{this.getTitleContent()}</h3>;
   };
 
   actualStepIsParticipative() {

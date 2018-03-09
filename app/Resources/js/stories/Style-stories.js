@@ -2,8 +2,8 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { FontStyle } from './FontStyle';
-import InlineList from "../components/Ui/List/InlineList";
-import TagsList from "../components/Ui/List/TagsList";
+import InlineList from '../components/Ui/List/InlineList';
+import TagsList from '../components/Ui/List/TagsList';
 
 storiesOf('Style', module)
   .add('Fonts', () => {
@@ -16,14 +16,14 @@ storiesOf('Style', module)
   .add('List', () => {
     return (
       <div className="container storybook-container">
-        <h3>Dot list</h3>
+        <h3>Inline list</h3>
         <InlineList>
           <li>5 projets</li>
           <li>10 articles</li>
           <li>2 évènements</li>
           <li>4 idées</li>
         </InlineList>
-        <hr/>
+        <hr />
         <h3>Tags list</h3>
         <TagsList>
           <div className="tags-list__tag">
@@ -43,8 +43,7 @@ storiesOf('Style', module)
             4 idées
           </div>
         </TagsList>
-        <hr/>
+        <hr />
       </div>
     );
   });
-

@@ -3,7 +3,7 @@ import moment from 'moment';
 import { FormattedDate } from 'react-intl';
 import UserAvatar from '../../User/UserAvatar';
 import UserLink from '../../User/UserLink';
-import { CardUser } from "../../Ui/Card/CardUser";
+import { CardUser } from '../../Ui/Card/CardUser';
 
 const ProposalPreviewHeader = React.createClass({
   propTypes: {
@@ -28,7 +28,7 @@ const ProposalPreviewHeader = React.createClass({
             />
           </p>
         </div>
-        <hr/>
+        <hr />
       </CardUser>
     );
   },

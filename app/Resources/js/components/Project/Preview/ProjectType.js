@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import CardType from "../../Ui/Card/CardType";
+import CardType from '../../Ui/Card/CardType';
 
 const ProjectType = React.createClass({
   propTypes: {

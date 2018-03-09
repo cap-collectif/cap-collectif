@@ -3,15 +3,14 @@
 exports[`<ProjectPreview /> should render correctly project with participative step, without type 1`] = `
 <Col
   bsClass="col"
+  className="d-flex"
   componentClass="div"
   lg={3}
   md={4}
   sm={6}
   xs={12}
 >
-  <div
-    className="thumbnail  thumbnail--custom  block  block--bordered"
-  >
+  <CardContainer>
     <ProjectCover
       project={
         Object {
@@ -28,22 +27,21 @@ exports[`<ProjectPreview /> should render correctly project with participative s
         }
       }
     />
-  </div>
+  </CardContainer>
 </Col>
 `;
 
 exports[`<ProjectPreview /> should render correctly project without participative step (all projects have not participative steps) 1`] = `
 <Col
   bsClass="col"
+  className="d-flex"
   componentClass="div"
   lg={3}
   md={4}
   sm={6}
   xs={12}
 >
-  <div
-    className="thumbnail  thumbnail--custom  block  block--bordered"
-  >
+  <CardContainer>
     <ProjectType
       project={
         Object {
@@ -80,22 +78,21 @@ exports[`<ProjectPreview /> should render correctly project without participativ
         }
       }
     />
-  </div>
+  </CardContainer>
 </Col>
 `;
 
 exports[`<ProjectPreview /> should render correctly project without participative step 1`] = `
 <Col
   bsClass="col"
+  className="d-flex"
   componentClass="div"
   lg={3}
   md={4}
   sm={6}
   xs={12}
 >
-  <div
-    className="thumbnail  thumbnail--custom  block  block--bordered"
-  >
+  <CardContainer>
     <ProjectType
       project={
         Object {
@@ -132,6 +129,6 @@ exports[`<ProjectPreview /> should render correctly project without participativ
         }
       }
     />
-  </div>
+  </CardContainer>
 </Col>
 `;

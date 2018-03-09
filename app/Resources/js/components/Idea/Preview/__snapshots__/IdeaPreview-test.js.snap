@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<IdeaPreview /> it should render idea preview 1`] = `
+<CardContainer
+  className=""
+>
+  <IdeaPreviewHeader
+    idea={
+      Object {
+        "author": Object {},
+        "id": 1,
+      }
+    }
+  />
+  <IdeaPreviewBody
+    idea={
+      Object {
+        "author": Object {},
+        "id": 1,
+      }
+    }
+  />
+</CardContainer>
+`;
+
+exports[`<IdeaPreview /> should render vip background when idea author is vip 1`] = `
+<CardContainer
+  className="bg-vip"
+>
+  <IdeaPreviewHeader
+    idea={
+      Object {
+        "author": Object {
+          "vip": true,
+        },
+        "id": 1,
+      }
+    }
+  />
+  <IdeaPreviewBody
+    idea={
+      Object {
+        "author": Object {
+          "vip": true,
+        },
+        "id": 1,
+      }
+    }
+  />
+</CardContainer>
+`;
