@@ -328,12 +328,14 @@ class ParisImportCommand extends ContainerAwareCommand
                     ->setBody($comment['body']);
                 $this->em->persist($comment);
                 if (0 === $count % self::COMMENT_BATCH_SIZE) {
+                    sleep(0.5); // Try for fixing Deadlock exception in production
                     $this->em->flush();
                     $this->em->clear(Comment::class);
                 }
                 $progress->advance();
                 ++$count;
             }
+            sleep(0.5); // Try for fixing Deadlock exception in production
             $this->em->flush();
             $this->em->clear(Comment::class);
             $progress->finish();
