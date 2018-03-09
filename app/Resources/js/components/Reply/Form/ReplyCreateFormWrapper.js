@@ -8,10 +8,11 @@ import LoginButton from '../../User/Login/LoginButton';
 import RegistrationButton from '../../User/Registration/RegistrationButton';
 import PhoneModal from '../../User/Phone/PhoneModal';
 import ReplyForm from './ReplyForm';
+import { type User } from '../../../redux/modules/user';
 
 type Props = {
   questionnaire: ReplyCreateFormWrapper_questionnaire,
-  user: Object,
+  user: User,
 };
 
 export class ReplyCreateFormWrapper extends React.Component<Props> {
@@ -79,7 +80,6 @@ export class ReplyCreateFormWrapper extends React.Component<Props> {
               </span>
             </Alert>
           )}
-        {/* <ReplyCreateForm form={questionnaire} disabled={this.formIsDisabled()} /> */}
         <ReplyForm questionnaire={questionnaire} />
         {/* <PhoneModal show={this.state.showPhoneModal} onClose={this.closePhoneModal} /> */}
       </div>

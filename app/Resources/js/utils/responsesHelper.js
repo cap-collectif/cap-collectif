@@ -166,7 +166,7 @@ const formattedChoicesInField = field => {
   });
 };
 
-export const getRequiredFieldIndicationStrategory = (fields: Questions) => {
+export const getRequiredFieldIndicationStrategy = (fields: Questions) => {
   const numberOfRequiredFields = fields.reduce((a, b) => a + (b.required ? 1 : 0), 0);
   const numberOfFields = fields.length;
   const halfNumberOfFields = numberOfFields / 2;
@@ -199,7 +199,7 @@ export const renderResponses = ({
   intl: IntlShape,
   disabled: boolean,
 }) => {
-  const strategy = getRequiredFieldIndicationStrategory(questions);
+  const strategy = getRequiredFieldIndicationStrategy(questions);
 
   return (
     <div>

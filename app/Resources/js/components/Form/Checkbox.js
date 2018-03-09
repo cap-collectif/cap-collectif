@@ -58,11 +58,10 @@ const Checkbox = React.createClass({
     const { value } = this.props;
     const values = value.labels ? value.labels : [];
 
-    if (changeValue) {
-      this.onChange({ labels: values, other: changeValue });
-    } else {
-      this.onChange({ labels: values, other: null });
-    }
+    this.onChange({
+      labels: values,
+      other: changeValue || null,
+    });
   },
 
   empty() {

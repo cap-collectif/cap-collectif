@@ -15,13 +15,9 @@ type Props = {
 };
 
 export class ReplyDeleteModal extends React.Component<Props> {
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      isSubmitting: false,
-    };
-  }
+  state = {
+    isSubmitting: false,
+  };
 
   handleSubmit() {
     const { onDelete, reply } = this.props;
