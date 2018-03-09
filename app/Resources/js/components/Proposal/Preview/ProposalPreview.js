@@ -11,7 +11,7 @@ import environment, { graphqlError } from '../../../createRelayEnvironment';
 import ProposalVoteThresholdProgressBar from '../Vote/ProposalVoteThresholdProgressBar';
 import { VOTE_TYPE_DISABLED, VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 import type { Proposal } from '../../../redux/modules/proposal';
-import { ProposalFollowButton } from '../Follow/ProposalFollowButton';
+import ProposalFollowButton from '../Follow/ProposalFollowButton';
 import type { Uuid } from '../../../types';
 import Loader from '../../Utils/Loader';
 import type ProposalPreviewFollowerButtonQueryResponse from '../Preview/__generated__/ProposalPreviewFollowerButtonQuery.graphql';

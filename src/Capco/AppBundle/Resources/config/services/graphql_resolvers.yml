@@ -165,6 +165,14 @@ services:
         tags:
             - { name: overblog_graphql.resolver }
 
+    Capco\AppBundle\GraphQL\Resolver\ViewerFollowerProposalResolver:
+      class: Capco\AppBundle\GraphQL\Resolver\ViewerFollowerProposalResolver
+      arguments:
+          - "@capco.follower.repository"
+          - "@logger"
+      tags:
+        - { name: overblog_graphql.resolver }
+
     Capco\AppBundle\GraphQL\Resolver\ProposalFollowerConnection:
         class: Capco\AppBundle\GraphQL\Resolver\ProposalFollowerConnection
         arguments:

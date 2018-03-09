@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button, Collapse } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
-import type { FollowingsProposals_viewer } from './__generated__/FollowingsProposals_viewer.graphql';
+import type FollowingsProposals_viewer from './__generated__/FollowingsProposals_viewer.graphql';
 import ProjectRow from './ProjectRow';
 import UnfollowProposalMutation from '../../../mutations/UnfollowProposalMutation';
 
@@ -40,18 +40,17 @@ export class FollowingsProposals extends Component<Props, State> {
 
   render() {
     const { viewer } = this.props;
-    const projects = [];
+    const projectsById = {};
     viewer.followingProposals.map(proposal => {
-      projects[parseInt(proposal.project.id, 10)] = proposal.project;
+      projectsById[proposal.project.id] = proposal.project;
     });
-
     return (
       <div>
         <h2>
           <FormattedMessage id="followings" />
-          {projects.length > 0 ? (
+          {Object.keys(projectsById).length > 0 ? (
             <Collapse style={{ float: 'right' }} in={this.state.open}>
-              <Button onClick={this.onUnfollowAll.bind(this)}>
+              <Button id="unfollow-all" onClick={this.onUnfollowAll.bind(this)}>
                 <FormattedMessage id="unfollow-all" />
               </Button>
             </Collapse>
@@ -60,15 +59,11 @@ export class FollowingsProposals extends Component<Props, State> {
           )}
         </h2>
         <div>
-          {projects.length > 0 ? (
+          {Object.keys(projectsById).length > 0 ? (
             <Collapse in={this.state.open}>
-              <div>
-                {projects.map((project, id) => {
-                  return (
-                    <div key={id}>
-                      <ProjectRow project={project} viewer={viewer} />
-                    </div>
-                  );
+              <div id="all-projects">
+                {Object.keys(projectsById).map((project, id) => {
+                  return <ProjectRow key={id} project={projectsById[project]} viewer={viewer} />;
                 })}
               </div>
             </Collapse>

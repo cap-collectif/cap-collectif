@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Button, Collapse } from 'react-bootstrap';
+import { Button, Collapse, ListGroupItem } from 'react-bootstrap';
 import UnfollowProposalMutation from '../../../mutations/UnfollowProposalMutation';
 
 type Props = {
@@ -36,18 +36,26 @@ export class ProposalRow extends Component<Props, State> {
   render() {
     const { proposal } = this.props;
     return (
-      <Collapse in={this.state.open}>
+      <Collapse in={this.state.open} id={`collapse-proposal-${proposal.id}`}>
         <div>
-          <h4>
-            <a href={proposal.show_url} title={proposal.title}>
-              {proposal.title}
-            </a>
-            <Button
-              style={{ float: 'right' }}
-              onClick={this.onUnfollowCurrentProposal.bind(this, proposal.id)}>
-              <FormattedMessage id="unfollow" />
-            </Button>
-          </h4>
+          <ListGroupItem id={`item-proposal-${proposal.id}`}>
+            <div className="ml-25">
+              <h4>
+                <a
+                  href={proposal.show_url}
+                  title={proposal.title}
+                  className="profile__proposal__open__link">
+                  {proposal.title}
+                </a>
+                <Button
+                  style={{ float: 'right' }}
+                  className="profile__proposal__unfollow__button"
+                  onClick={this.onUnfollowCurrentProposal.bind(this, proposal.id)}>
+                  <FormattedMessage id="unfollow" />
+                </Button>
+              </h4>
+            </div>
+          </ListGroupItem>
         </div>
       </Collapse>
     );

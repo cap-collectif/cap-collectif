@@ -4,6 +4,7 @@ exports[`<ProposalRow /> should render proposal displayed 1`] = `
 <Collapse
   dimension="height"
   getDimensionValue={[Function]}
+  id="collapse-proposal-proposal1"
   in={true}
   mountOnEnter={false}
   timeout={300}
@@ -11,32 +12,44 @@ exports[`<ProposalRow /> should render proposal displayed 1`] = `
   unmountOnExit={false}
 >
   <div>
-    <h4>
-      <a
-        href="http://perdu.com"
-        title="perdu sur internet ?"
+    <ListGroupItem
+      bsClass="list-group-item"
+      id="item-proposal-proposal1"
+      listItem={false}
+    >
+      <div
+        className="ml-25"
       >
-        perdu sur internet ?
-      </a>
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="default"
-        disabled={false}
-        onClick={[Function]}
-        style={
-          Object {
-            "float": "right",
-          }
-        }
-      >
-        <FormattedMessage
-          id="unfollow"
-          values={Object {}}
-        />
-      </Button>
-    </h4>
+        <h4>
+          <a
+            className="profile__proposal__open__link"
+            href="http://perdu.com"
+            title="perdu sur internet ?"
+          >
+            perdu sur internet ?
+          </a>
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="default"
+            className="profile__proposal__unfollow__button"
+            disabled={false}
+            onClick={[Function]}
+            style={
+              Object {
+                "float": "right",
+              }
+            }
+          >
+            <FormattedMessage
+              id="unfollow"
+              values={Object {}}
+            />
+          </Button>
+        </h4>
+      </div>
+    </ListGroupItem>
   </div>
 </Collapse>
 `;
@@ -45,6 +58,7 @@ exports[`<ProposalRow /> should render proposal hidden 1`] = `
 <Collapse
   dimension="height"
   getDimensionValue={[Function]}
+  id="collapse-proposal-proposal1"
   in={false}
   mountOnEnter={false}
   timeout={300}
@@ -52,32 +66,44 @@ exports[`<ProposalRow /> should render proposal hidden 1`] = `
   unmountOnExit={false}
 >
   <div>
-    <h4>
-      <a
-        href="http://perdu.com"
-        title="perdu sur internet ?"
+    <ListGroupItem
+      bsClass="list-group-item"
+      id="item-proposal-proposal1"
+      listItem={false}
+    >
+      <div
+        className="ml-25"
       >
-        perdu sur internet ?
-      </a>
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="default"
-        disabled={false}
-        onClick={[Function]}
-        style={
-          Object {
-            "float": "right",
-          }
-        }
-      >
-        <FormattedMessage
-          id="unfollow"
-          values={Object {}}
-        />
-      </Button>
-    </h4>
+        <h4>
+          <a
+            className="profile__proposal__open__link"
+            href="http://perdu.com"
+            title="perdu sur internet ?"
+          >
+            perdu sur internet ?
+          </a>
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="default"
+            className="profile__proposal__unfollow__button"
+            disabled={false}
+            onClick={[Function]}
+            style={
+              Object {
+                "float": "right",
+              }
+            }
+          >
+            <FormattedMessage
+              id="unfollow"
+              values={Object {}}
+            />
+          </Button>
+        </h4>
+      </div>
+    </ListGroupItem>
   </div>
 </Collapse>
 `;

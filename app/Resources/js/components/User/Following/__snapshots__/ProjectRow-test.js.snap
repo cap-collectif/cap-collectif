@@ -2,7 +2,6 @@
 
 exports[`<ProjectRow /> should render the project 1 with his proposal displayed 1`] = `
 <Collapse
-  class="following-project"
   dimension="height"
   getDimensionValue={[Function]}
   in={true}
@@ -17,9 +16,12 @@ exports[`<ProjectRow /> should render the project 1 with his proposal displayed 
     className="following-project"
     defaultExpanded={false}
     header={
-      <div>
+      <div
+        id="all-proposals"
+      >
         <h3>
           <a
+            className="profile__project__open__link"
             href="http://perdu.com"
             title="Perdu sur internet ?"
           >
@@ -30,6 +32,7 @@ exports[`<ProjectRow /> should render the project 1 with his proposal displayed 
             block={false}
             bsClass="btn"
             bsStyle="default"
+            className="profile__project__unfollow__button"
             disabled={false}
             onClick={[Function]}
             style={
@@ -50,48 +53,30 @@ exports[`<ProjectRow /> should render the project 1 with his proposal displayed 
     <ListGroup
       bsClass="list-group"
     >
-      <ListGroupItem
-        bsClass="list-group-item"
-        listItem={false}
-      >
-        <div
-          className="ml-25"
-        >
-          <ProposalRow
-            proposal={
-              Object {
-                "id": "proposal1",
-                "project": Object {
-                  "id": "project1",
-                },
-                "show_url": "http://carte.perdu.com",
-                "title": "Une carte de l'internet",
-              }
-            }
-          />
-        </div>
-      </ListGroupItem>
-      <ListGroupItem
-        bsClass="list-group-item"
-        listItem={false}
-      >
-        <div
-          className="ml-25"
-        >
-          <ProposalRow
-            proposal={
-              Object {
-                "id": "proposal2",
-                "project": Object {
-                  "id": "project1",
-                },
-                "show_url": "http://gps.perdu.com",
-                "title": "Un GPS de l'internet",
-              }
-            }
-          />
-        </div>
-      </ListGroupItem>
+      <ProposalRow
+        proposal={
+          Object {
+            "id": "proposal1",
+            "project": Object {
+              "id": "project1",
+            },
+            "show_url": "http://carte.perdu.com",
+            "title": "Une carte de l'internet",
+          }
+        }
+      />
+      <ProposalRow
+        proposal={
+          Object {
+            "id": "proposal2",
+            "project": Object {
+              "id": "project1",
+            },
+            "show_url": "http://gps.perdu.com",
+            "title": "Un GPS de l'internet",
+          }
+        }
+      />
     </ListGroup>
   </Panel>
 </Collapse>
@@ -99,7 +84,6 @@ exports[`<ProjectRow /> should render the project 1 with his proposal displayed 
 
 exports[`<ProjectRow /> should render the project 2 with his proposal displayed 1`] = `
 <Collapse
-  class="following-project"
   dimension="height"
   getDimensionValue={[Function]}
   in={true}
@@ -114,9 +98,12 @@ exports[`<ProjectRow /> should render the project 2 with his proposal displayed 
     className="following-project"
     defaultExpanded={false}
     header={
-      <div>
+      <div
+        id="all-proposals"
+      >
         <h3>
           <a
+            className="profile__project__open__link"
             href="http://theuselessweb.com"
             title="Se perdre sur internet"
           >
@@ -127,6 +114,7 @@ exports[`<ProjectRow /> should render the project 2 with his proposal displayed 
             block={false}
             bsClass="btn"
             bsStyle="default"
+            className="profile__project__unfollow__button"
             disabled={false}
             onClick={[Function]}
             style={
@@ -147,27 +135,18 @@ exports[`<ProjectRow /> should render the project 2 with his proposal displayed 
     <ListGroup
       bsClass="list-group"
     >
-      <ListGroupItem
-        bsClass="list-group-item"
-        listItem={false}
-      >
-        <div
-          className="ml-25"
-        >
-          <ProposalRow
-            proposal={
-              Object {
-                "id": "proposal3",
-                "project": Object {
-                  "id": "project2",
-                },
-                "show_url": "https://randomstreetview.com/",
-                "title": "Go  nowhere",
-              }
-            }
-          />
-        </div>
-      </ListGroupItem>
+      <ProposalRow
+        proposal={
+          Object {
+            "id": "proposal3",
+            "project": Object {
+              "id": "project2",
+            },
+            "show_url": "https://randomstreetview.com/",
+            "title": "Go  nowhere",
+          }
+        }
+      />
     </ListGroup>
   </Panel>
 </Collapse>
@@ -175,7 +154,6 @@ exports[`<ProjectRow /> should render the project 2 with his proposal displayed 
 
 exports[`<ProjectRow /> should render without project 1`] = `
 <Collapse
-  class="following-project"
   dimension="height"
   getDimensionValue={[Function]}
   in={false}
@@ -190,14 +168,19 @@ exports[`<ProjectRow /> should render without project 1`] = `
     className="following-project"
     defaultExpanded={false}
     header={
-      <div>
+      <div
+        id="all-proposals"
+      >
         <h3>
-          <a />
+          <a
+            className="profile__project__open__link"
+          />
           <Button
             active={false}
             block={false}
             bsClass="btn"
             bsStyle="default"
+            className="profile__project__unfollow__button"
             disabled={false}
             onClick={[Function]}
             style={

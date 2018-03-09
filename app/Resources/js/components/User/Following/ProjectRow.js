@@ -3,9 +3,9 @@
  */
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Button, Collapse, Panel, ListGroupItem, ListGroup } from 'react-bootstrap';
+import { Button, Collapse, Panel, ListGroup } from 'react-bootstrap';
 import UnfollowProposalMutation from '../../../mutations/UnfollowProposalMutation';
-import type { FollowingsProposals_viewer } from './__generated__/FollowingsProposals_viewer.graphql';
+import type FollowingsProposals_viewer from './__generated__/FollowingsProposals_viewer.graphql';
 import ProposalRow from './ProposalRow';
 
 type Props = {
@@ -44,17 +44,21 @@ export class ProjectRow extends Component<Props, State> {
   render() {
     const { project, viewer } = this.props;
     return (
-      <Collapse class="following-project" in={this.state.open}>
+      <Collapse in={this.state.open}>
         <Panel
           className="following-project"
           header={
-            <div>
+            <div id="all-proposals">
               <h3>
-                <a href={project.url} title={project.title}>
+                <a
+                  href={project.url}
+                  title={project.title}
+                  className="profile__project__open__link">
                   {project.title}
                 </a>
                 <Button
                   style={{ float: 'right' }}
+                  className="profile__project__unfollow__button"
                   onClick={this.onUnfollowCurrentProject.bind(this)}>
                   <FormattedMessage id="unfollow-this-project" />
                 </Button>
@@ -65,13 +69,7 @@ export class ProjectRow extends Component<Props, State> {
             {viewer.followingProposals
               .filter(proposal => proposal.project.id === project.id)
               .map((proposal, key) => {
-                return (
-                  <ListGroupItem key={`proposal_${key}`}>
-                    <div className="ml-25">
-                      <ProposalRow proposal={proposal} />
-                    </div>
-                  </ListGroupItem>
-                );
+                return <ProposalRow key={key} proposal={proposal} />;
               })}
           </ListGroup>
         </Panel>
