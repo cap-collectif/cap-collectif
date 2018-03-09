@@ -67,7 +67,7 @@ Capco\UserBundle\Entity\User:
     user5:
         id: 'user5'
         username: user
-        firstname: Utilisater
+        firstname: Utilisateur
         lastname: authentifier
         email: user@test.com
         enabled: true
