@@ -286,7 +286,7 @@ textarea {
 }
 
 .following-project{
-
+    border-bottom: none;
 }
 .following-project .panel-body{
     padding: 0;
@@ -304,7 +304,9 @@ textarea {
 .following-project .panel-body .list-group .list-group-item:last-child{
     border-left: none;
     border-right: none;
-    border-bottom: none;
+    border-bottom: 1px solid rgb(221, 221, 221);
+    border-radius: 0px;
+    -moz-border-radius: 0;
 }
 .following-project .panel-body .list-group .list-group-item{
     border-left: none;
