@@ -37,7 +37,7 @@ use Symfony\Component\Stopwatch\Stopwatch;
 
 class ParisImportCommand extends ContainerAwareCommand
 {
-    protected const PROPOSAL_BATCH_SIZE = 100;
+    protected const PROPOSAL_BATCH_SIZE = 50;
     protected const COMMENT_BATCH_SIZE = 500;
 
     protected const PROJECT_HEADER = [
@@ -45,6 +45,8 @@ class ParisImportCommand extends ContainerAwareCommand
         'title',
         'body',
         'excerpt',
+        'animateur_title',
+        'animateur_body',
         'created_at',
         'updated_at',
         'end_at',
@@ -58,6 +60,7 @@ class ParisImportCommand extends ContainerAwareCommand
 
     protected const COMMENT_HEADER = [
         'proposal_id',
+        'author_name',
         'body',
         'created_at',
         'updated_at',
@@ -68,6 +71,7 @@ class ParisImportCommand extends ContainerAwareCommand
         'proposal_id',
         'title',
         'author_name',
+        'published',
         'district',
         'category',
         'body',
@@ -81,14 +85,14 @@ class ParisImportCommand extends ContainerAwareCommand
     ];
 
     protected const STATUSES = [
-        ['Arbitrage' => 'info'],
-        ['Atelier' => 'info'],
-        ['Discussion' => 'info'],
-        ['Étude' => 'info'],
-        ['Nouvelle' => 'info'],
-        ['Refusée' => 'danger'],
-        ['Retenu' => 'success'],
-        ['Vote' => 'success'],
+        'Arbitrage' => 'info',
+        'Atelier' => 'info',
+        'Discussion' => 'info',
+        'Étude' => 'info',
+        'Nouvelle' => 'info',
+        'Refusée' => 'danger',
+        'Retenu' => 'success',
+        'Vote' => 'success',
     ];
 
     /** @var EntityManagerInterface */
@@ -103,8 +107,7 @@ class ParisImportCommand extends ContainerAwareCommand
     {
         $this
             ->setName('capco:import:paris')
-            ->setDescription('(Import data from paris')
-        ;
+            ->setDescription('Import data from paris');
     }
 
     protected function initialize(InputInterface $input, OutputInterface $output): void
@@ -114,7 +117,6 @@ class ParisImportCommand extends ContainerAwareCommand
         $this->categories = $this->createCategories();
         $this->proposals = $this->createProposals();
         $this->comments = $this->createComments();
-        $this->disableListeners($output);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): void
@@ -122,6 +124,7 @@ class ParisImportCommand extends ContainerAwareCommand
         $importUsersCommand = $this->getApplication()->find('capco:import:paris-users');
         $usersInput = new ArrayInput(['command' => 'capco:import:paris-users']);
         $importUsersCommand->run($usersInput, $output);
+        $this->disableListeners($output);
         $stopwatch = new Stopwatch();
         $stopwatch->start('import');
         $this->importProjects($output);
@@ -142,27 +145,34 @@ class ParisImportCommand extends ContainerAwareCommand
         $output->writeln('<info>Importing projects...</info>');
         $author = $this->em->getRepository(User::class)->findOneBy(['username' => 'Mairie de Paris']);
         foreach ($rows as $row) {
+            $body = $row['animateur_title'] . $row['animateur_body'] . $row['body'];
             $introductionStep = (new PresentationStep())
                 ->setTitle('Présentation')
                 ->setLabel('Présentation')
-                ->setBody($row['body']);
+                ->setBody($body);
             $collectStep = (new CollectStep())
                 ->setTitle('Dépôt')
                 ->setLabel('Dépôt')
                 ->setStartAt(new \DateTime($row['created_at']))
                 ->setEndAt(new \DateTime($row['end_at']))
                 ->setVoteType(VoteTypeTrait::$VOTE_TYPE_SIMPLE);
-            $thumbnail = $this->getContainer()->get('capco.media.manager')->createImageFromPath(
-                __DIR__ . '/images/' . $row['filename']
-            );
             $project = (new Project())
                 ->setTitle($row['title'])
                 ->setAuthor($author)
                 ->setProjectType($type)
                 ->setCreatedAt(new \DateTime($row['created_at']))
                 ->setPublishedAt(new \DateTime($row['created_at']))
-                ->setUpdatedAt(new \DateTime($row['updated_at']))
-                ->setCover($thumbnail);
+                ->setUpdatedAt(new \DateTime($row['updated_at']));
+            try {
+                if ('' !== $row['filename'] && file_exists(__DIR__ . '/images/' . $row['filename'])) {
+                    $thumbnail = $this->getContainer()->get('capco.media.manager')->createImageFromPath(
+                        __DIR__ . '/images/' . $row['filename']
+                    );
+                    $project->setCover($thumbnail);
+                }
+            } catch (\Exception $exception) {
+                $output->writeln('<info>' . $row['filename'] . '</info> not found. Set default image instead...');
+            }
             $project->addStep(
                 (new ProjectAbstractStep())
                     ->setProject($project)
@@ -231,6 +241,11 @@ class ParisImportCommand extends ContainerAwareCommand
             $progress = new ProgressBar($output, \count($proposals));
             $count = 1;
             foreach ($proposals as $proposal) {
+                if ('' === $proposal['author_name']) {
+                    $progress->advance();
+                    ++$count;
+                    continue;
+                }
                 $author = $this->em->getRepository(User::class)->findOneBy(['username' => $proposal['author_name']]);
                 $proposalParisId = $proposal['proposal_id'];
                 $district = $this->em->getRepository(District::class)->findOneBy(
@@ -249,6 +264,7 @@ class ParisImportCommand extends ContainerAwareCommand
                 $proposal = (new Proposal())
                     ->setTitle($proposal['title'])
                     ->setAuthor($author)
+                    ->setEnabled((int) $proposal['published'])
                     ->setProposalForm($step->getProposalForm())
                     ->setResponses(new ArrayCollection($responses))
                     ->setCreatedAt(new \DateTime($proposal['created_at']))
@@ -261,7 +277,7 @@ class ParisImportCommand extends ContainerAwareCommand
                     $proposal->setCategory($category);
                 }
                 $this->em->persist($proposal);
-                $this->importComments($output, $proposal, $proposalParisId, $author);
+                $this->importComments($output, $proposal, $proposalParisId);
                 if (0 === $count % self::PROPOSAL_BATCH_SIZE) {
                     $this->printMemoryUsage($output);
                     $this->em->flush();
@@ -285,7 +301,7 @@ class ParisImportCommand extends ContainerAwareCommand
         }
     }
 
-    protected function importComments(OutputInterface $output, Proposal $proposal, int $proposalParisId, User $user): void
+    protected function importComments(OutputInterface $output, Proposal $proposal, int $proposalParisId): void
     {
         if (isset($this->comments[$proposalParisId])) {
             $output->writeln("\n<info>Importing comments for proposal \"" . $proposal->getTitle() . '"</info>');
@@ -293,10 +309,15 @@ class ParisImportCommand extends ContainerAwareCommand
             $progress = new ProgressBar($output, \count($comments));
             $count = 1;
             foreach ($comments as $comment) {
-//                $user = $users[\random_int(0, \count($users) - 1)];
+                if ('' === $comment['author_name']) {
+                    $progress->advance();
+                    ++$count;
+                    continue;
+                }
+                $author = $this->em->getRepository(User::class)->findOneBy(['username' => $comment['author_name']]);
                 $comment = (new ProposalComment())
                     ->setProposal($proposal, false)
-                    ->setAuthor($user)
+                    ->setAuthor($author)
                     ->setCreatedAt(new \DateTime($comment['created_at']))
                     ->setUpdatedAt(new \DateTime($comment['updated_at']))
                     ->setBody($comment['body']);
@@ -457,12 +478,11 @@ class ParisImportCommand extends ContainerAwareCommand
     {
         $statuses = new ArrayCollection();
         $i = 0;
-        foreach (self::STATUSES as $status) {
-            $statusName = array_keys($status)[0];
+        foreach (self::STATUSES as $statusName => $color) {
             $status = (new Status())
                 ->setName($statusName)
                 ->setPosition($i)
-                ->setColor($status[$statusName]);
+                ->setColor($color);
             ++$i;
             $statuses->add($status);
         }

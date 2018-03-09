@@ -2,16 +2,21 @@
 
 namespace Capco\AppBundle\Command\Paris;
 
+use Capco\AppBundle\Entity\NewsletterSubscription;
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
+use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Entity\UserType;
-use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
 use Faker\Factory;
 use Faker\Generator;
+use Gedmo\Sluggable\SluggableListener;
+use Gedmo\Timestampable\TimestampableListener;
 use League\Csv\Reader;
+use Sonata\EasyExtendsBundle\Mapper\DoctrineORMMapper;
+use Sonata\MediaBundle\Listener\ORM\MediaEventSubscriber;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
@@ -21,6 +26,13 @@ use Symfony\Component\Stopwatch\Stopwatch;
 class ParisImportUsersCommand extends ContainerAwareCommand
 {
     protected const USERS_BATCH_SIZE = 500;
+
+    protected const LISTENERS_WHITELIST = [
+        SluggableListener::class,
+        MediaEventSubscriber::class,
+        DoctrineORMMapper::class,
+        TimestampableListener::class,
+    ];
 
     protected const USER_HEADER = [
         'name',
@@ -34,6 +46,9 @@ class ParisImportUsersCommand extends ContainerAwareCommand
         'password',
         'email',
         'email_init',
+        'filename',
+        'notification_type',
+        'newsletter_subscription',
         'created_at',
         'last_login_at',
         'birthdate',
@@ -100,13 +115,13 @@ class ParisImportUsersCommand extends ContainerAwareCommand
         $this->em->getConnection()->getConfiguration()->setSQLLogger(null);
         $this->users = $this->createUsers();
         $this->faker = Factory::create();
-        $this->disableListeners($output);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $stopwatch = new Stopwatch();
         $stopwatch->start('import');
+        $this->disableListeners($output);
         $this->importUsers($output);
         $this->enableListeners($output);
         $event = $stopwatch->stop('import');
@@ -125,14 +140,12 @@ class ParisImportUsersCommand extends ContainerAwareCommand
         return $users;
     }
 
-    protected function getUserTypes(OutputInterface $output): Collection
+    protected function getUserTypes(): Collection
     {
-        $slug = Slugify::create();
         foreach (self::PROFILES_TYPES as $key => $value) {
             if (!$this->em->getRepository(UserType::class)->findOneBy(['name' => $value])) {
                 $type = (new UserType())
                     ->setName($value)
-                    ->setSlug($slug->slugify($value))
                     ->setCreatedAt(new \DateTime());
                 $this->em->persist($type);
                 $this->em->flush();
@@ -142,7 +155,6 @@ class ParisImportUsersCommand extends ContainerAwareCommand
             if (!$this->em->getRepository(UserType::class)->findOneBy(['name' => $agentName])) {
                 $type = (new UserType())
                     ->setName($agentName)
-                    ->setSlug($slug->slugify($agentName))
                     ->setCreatedAt(new \DateTime());
                 $this->em->persist($type);
                 $this->em->flush();
@@ -158,44 +170,72 @@ class ParisImportUsersCommand extends ContainerAwareCommand
         $output->writeln('<info>Importing users...</info>');
         $count = 1;
         $progress = new ProgressBar($output, \count($this->users));
-        $types = $this->getUserTypes($output);
-        foreach ($this->users as $user) {
-            $type = $types->filter(function (UserType $type) use ($user) {
-                if (!$user['user_type'] || 'p' === $user['user_type']) {
+        $types = $this->getUserTypes();
+        foreach ($this->users as $userRow) {
+            $type = $types->filter(function (UserType $type) use ($userRow) {
+                if (!$userRow['user_type'] || 'p' === $userRow['user_type']) {
                     return 'Un particulier' === $type->getName();
                 }
-                if ($user['user_type_rattachement']) {
-                    return $type->getName() === $user['user_type_rattachement'];
+                if ($userRow['user_type_rattachement']) {
+                    return $type->getName() === $userRow['user_type_rattachement'];
                 }
 
-                return $type->getName() === self::PROFILES_TYPES[$user['user_type']];
+                return $type->getName() === self::PROFILES_TYPES[$userRow['user_type']];
             })->first();
-            $firstName = ('' === $user['firstname'] || !$user['firstname']) ? $this->faker->firstName : $user['firstname'];
-            $lastName = ('' === $user['lastname'] || !$user['lastname']) ? $this->faker->lastName : $user['lastname'];
-            $slug = Slugify::create();
+            $firstName = ('' === $userRow['firstname'] || !$userRow['firstname']) ? $this->faker->firstName : $userRow['firstname'];
+            $lastName = ('' === $userRow['lastname'] || !$userRow['lastname']) ? $this->faker->lastName : $userRow['lastname'];
+            $email = '' === $userRow['email'] ? $userRow['email_init'] : $userRow['email'];
+            $address = '' === $userRow['address'] ? null : $userRow['address'];
+            $zipCode = '' === $userRow['zipcode'] ? null : (int) $userRow['zipcode'];
             $user = (new User())
                 ->setFirstname($firstName)
                 ->setLastname($lastName)
-                ->setUsername($user['name'])
+                ->setUsername($userRow['name'])
                 ->setPassword('')
-                ->setEmailCanonical('' === $user['email'] ? $user['email_init'] : $user['email'])
-                ->setEmail('' === $user['email'] ? $user['email_init'] : $user['email'])
-                ->setAddress('' === $user['address'] ? null : $user['address'])
-                ->setZipCode('' === $user['zipcode'] ? null : (int) $user['zipcode'])
-                ->setSlug($slug->slugify($user['name']) . $count)
+                ->setEmailCanonical($email)
+                ->setEmail($email)
+                ->setAddress($address)
+                ->setZipCode($zipCode)
                 ->setEnabled(true)
-                ->setPhone($user['phone'])
+                ->setPhone($userRow['phone'])
                 ->setUserType($type)
-                ->setParisId('' === $user['email'] ? $user['email_init'] : $user['email'])
-                ->setCreatedAt(new \DateTime($user['created_at']))
-                ->setLastLogin(new \DateTime($user['last_login_at']))
-                ->setDateOfBirth(new \DateTime($user['birthdate']))
+                ->setParisId($email)
+                ->setCreatedAt(new \DateTime($userRow['created_at']))
+                ->setLastLogin(new \DateTime($userRow['last_login_at']))
+                ->setDateOfBirth(new \DateTime($userRow['birthdate']))
             ;
+            try {
+                if ('' !== $userRow['filename'] && file_exists(__DIR__ . '/images/' . $userRow['filename'])) {
+                    $avatar = $this->getContainer()->get('capco.media.manager')->createImageFromPath(
+                        __DIR__ . '/images/' . $userRow['filename']
+                    );
+                    $user->setMedia($avatar);
+                }
+            } catch (\Exception $exception) {
+                $output->writeln('<info>' . $userRow['filename'] . '</info> not found. Set default image instead...');
+            }
+            if ('' === $userRow['notification_type']) {
+                $user->setNotificationsConfiguration(
+                    (new UserNotificationsConfiguration())
+                        ->setOnProposalCommentMail(false)
+                );
+                $output->write("\n");
+                $output->writeln('Disabled on proposal comment notifications for user <info>' . $user->getUsername() . '</info>');
+            }
             $this->em->persist($user);
+            if ('' !== $userRow['newsletter_subscription']) {
+                $newsletter = (new NewsletterSubscription())
+                    ->setCreatedAt(new \DateTime($userRow['newsletter_subscription']))
+                    ->setIsEnabled(true)
+                    ->setEmail($email);
+                $this->em->persist($newsletter);
+            }
             if (0 === $count % self::USERS_BATCH_SIZE) {
                 $this->em->flush();
                 $this->em->clear(User::class);
                 $this->em->clear(UserNotificationsConfiguration::class);
+                $this->em->clear(NewsletterSubscription::class);
+                $this->em->clear(Media::class);
                 $this->printMemoryUsage($output);
             }
             $progress->advance();
@@ -203,8 +243,12 @@ class ParisImportUsersCommand extends ContainerAwareCommand
         }
         unset($count);
         $this->em->flush();
-        $this->em->clear();
+        $this->em->clear(User::class);
+        $this->em->clear(UserNotificationsConfiguration::class);
+        $this->em->clear(NewsletterSubscription::class);
+        $this->em->clear(Media::class);
         $progress->finish();
+        $this->enableListeners($output);
         $output->writeln('<info>Successfully imported users...</info>');
     }
 
@@ -216,9 +260,12 @@ class ParisImportUsersCommand extends ContainerAwareCommand
 
     private function disableListeners(OutputInterface $output): void
     {
-        $this->events = $this->em->getEventManager()->getListeners();
         foreach ($this->em->getEventManager()->getListeners() as $event => $listeners) {
+            $this->events = $this->em->getEventManager()->getListeners();
             foreach ($listeners as $key => $listener) {
+                if (\is_string($listener) || \in_array(\get_class($listener), self::LISTENERS_WHITELIST, true)) {
+                    continue;
+                }
                 if (method_exists($listener, 'getSubscribedEvents')) {
                     $this->em->getEventManager()->removeEventListener($listener->getSubscribedEvents(), $listener);
                     $output->writeln('Disabled <info>' . \get_class($listener) . '</info>');

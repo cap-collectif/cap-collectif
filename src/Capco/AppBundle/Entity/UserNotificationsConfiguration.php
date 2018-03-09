@@ -73,12 +73,11 @@ class UserNotificationsConfiguration
         return $this->onProposalCommentMail;
     }
 
-    /**
-     * @param bool $onProposalCommentMail
-     */
-    public function setOnProposalCommentMail(bool $onProposalCommentMail)
+    public function setOnProposalCommentMail(bool $onProposalCommentMail): self
     {
         $this->onProposalCommentMail = $onProposalCommentMail;
+
+        return $this;
     }
 
     /**
