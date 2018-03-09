@@ -1,5 +1,4 @@
 // @flow
-// mport * as React from 'react';
 import styled from 'styled-components';
 
 const CardStatus = styled.div.attrs({
