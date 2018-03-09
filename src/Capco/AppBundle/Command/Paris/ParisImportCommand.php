@@ -402,7 +402,7 @@ class ParisImportCommand extends ContainerAwareCommand
 
         $projectCategories = [];
 
-        if (array_key_exists($parisProjectId, $this->categories)) {
+        if (isset($this->categories[$parisProjectId])) {
             $projectCategories[] = $this->categories[$parisProjectId];
         }
 
