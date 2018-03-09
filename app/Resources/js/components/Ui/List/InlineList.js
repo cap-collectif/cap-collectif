@@ -2,7 +2,7 @@
 // mport * as React from 'react';
 import styled from 'styled-components';
 
-const DotList = styled.ul.attrs({
+const InlineList = styled.ul.attrs({
   className: "excerpt"
 })`
   padding: 0;
@@ -23,6 +23,6 @@ const DotList = styled.ul.attrs({
 `;
 
 
-export default DotList;
+export default InlineList;
 
 

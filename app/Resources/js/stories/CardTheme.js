@@ -1,8 +1,7 @@
 // @flow
 import * as React from 'react';
-import styled from 'styled-components';
 import { CardContainer } from '../components/Ui/Card/CardContainer';
-import DotList from "../components/Ui/List/DotList";
+import InlineList from "../components/Ui/List/InlineList";
 import CardCover from "../components/Ui/Card/CardCover";
 
 type Props = {
@@ -25,12 +24,13 @@ export class CardTheme extends React.Component<Props> {
                 {theme.title}
               </a>
             </h3>
-            <DotList>
-              <li>5 projets</li>
-              <li>10 articles</li>
-              <li>2 évènements</li>
-              <li>4 idées</li>
-            </DotList>
+            <InlineList>
+              {theme.counters.list.map(counter => (
+                <li>{counter}</li>
+              ))}
+            </InlineList>
+          </div>
+          <div>
             <span className={`label label-${theme.label}`}>
               {theme.label}
             </span>

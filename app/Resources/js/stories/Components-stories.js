@@ -2,10 +2,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import styled from 'styled-components';
-// import { injectGlobal } from 'styled-components';
 import { ProgressBar } from "react-bootstrap";
-import Card from './Card';
-import CardCustom from './CardCustom';
 import CardProject from './CardProject';
 import CardProposal from './CardProposal';
 import CardTheme from './CardTheme';
@@ -25,7 +22,23 @@ const Col = styled.div.attrs({
 `;
 
 const openProject = {
-  title: "Mon projet",
+  title: "Rénovation du gymnase",
+  counters: {
+    list: ["5 projets", "10 articles", "2 évènements", "4 idées"],
+    comments: {
+      value: "15",
+      label: "commentaires",
+    },
+    votes: {
+      value: "3",
+      label: "votes",
+    }
+  },
+  tags: {
+    tag: "Justice",
+    localisation: "Maurepas Patton",
+  },
+  content: "Lorem aque eius excepturi expedita ipptio quasi quisquam sunt tenetur vitae voluptas? Ad, iste.",
   theme: "Immobilier, Transport",
   label: "danger",
   status: {
@@ -50,8 +63,24 @@ const openProject = {
 };
 
 const continuousProject = {
-  title: "Mon autre projet",
+  title: "Croissance, innovation, disruption",
   theme: "Immobilier, Transport",
+  counters: {
+    list: ["5 projets", "10 articles", "2 évènements", "4 idées"],
+    comments: {
+      value: "15",
+      label: "commentaires",
+    },
+    votes: {
+      value: "3",
+      label: "votes",
+    }
+  },
+  tags: {
+    tag: "Justice",
+    localisation: "Maurepas Patton",
+  },
+  content: "Lorem aque eius excepturi expedita ipptio quasi quisquam sunt tenetur vitae voluptas? Ad, iste.",
   label: "success",
   status: {
     name: "Aucun statut",
@@ -75,8 +104,24 @@ const continuousProject = {
 };
 
 const endedProject = {
-  title: "Mon terminé",
+  title: "Startégie technologique de l'État et services publics",
   theme: "Immobilier, Transport",
+  counters: {
+    list: ["5 projets", "10 articles", "2 évènements", "4 idées"],
+    comments: {
+      value: "15",
+      label: "commentaires",
+    },
+    votes: {
+      value: "3",
+      label: "votes",
+    }
+  },
+  tags: {
+    tag: "Justice",
+    localisation: "Maurepas Patton",
+  },
+  content: "Lorem aque eius excepturi expedita ipptio quasi quisquam sunt tenetur vitae voluptas? Ad, iste.",
   label: "primary",
   status: {
     name: "Vote gagné",
@@ -101,6 +146,22 @@ const endedProject = {
 const toComeProject = {
   title: "Projet à venir",
   theme: "Immobilier, Transport",
+  counters: {
+    list: ["5 projets", "10 articles", "2 évènements", "4 idées"],
+    comments: {
+      value: "15",
+      label: "commentaires",
+    },
+    votes: {
+      value: "3",
+      label: "votes",
+    }
+  },
+  tags: {
+    tag: "Justice",
+    localisation: "Maurepas Patton",
+  },
+  content: "Lorem aque eius excepturi expedita ipptio quasi quisquam sunt tenetur vitae voluptas? Ad, iste.",
   label: "info",
   status: {
     name: "Aucun statut",
@@ -126,20 +187,6 @@ storiesOf('Components', module)
   .add('Cards', () => {
     return (
       <div className="container storybook-container">
-        <h3>Customized Card</h3>
-        <p>You can customized the card with "Knobs" tab</p>
-        <hr/>
-        <Row>
-          <Col>
-            <CardCustom />
-          </Col>
-          <Col>
-            <CardCustom />
-          </Col>
-          <Col>
-            <CardCustom />
-          </Col>
-        </Row>
         <h3>Project Card</h3>
         <hr/>
         <Row>
@@ -168,6 +215,9 @@ storiesOf('Components', module)
           <Col>
             <CardProposal proposal={continuousProject} />
           </Col>
+          <Col>
+            <CardProposal proposal={toComeProject} />
+          </Col>
         </Row>
         <h3>Theme Card</h3>
         <hr/>
@@ -181,26 +231,8 @@ storiesOf('Components', module)
           <Col>
             <CardTheme theme={continuousProject} />
           </Col>
-        </Row>
-        <h3>Idea Card</h3>
-        <hr/>
-        <Row>
           <Col>
-            <Card project={openProject} />
-          </Col>
-        </Row>
-        <h3>event Card</h3>
-        <hr/>
-        <Row>
-          <Col>
-            <Card project={openProject} />
-          </Col>
-        </Row>
-        <h3>New Card</h3>
-        <hr/>
-        <Row>
-          <Col>
-            <Card project={openProject} />
+            <CardTheme theme={toComeProject} />
           </Col>
         </Row>
       </div>

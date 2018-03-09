@@ -7,7 +7,7 @@ export const CardUser = styled.div`
   padding: 15px 15px 0;
 
   hr {
-    margin: 15px 0 0;
+    margin: 20px 0 0;
   }
   
   a {

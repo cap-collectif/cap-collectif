@@ -6,7 +6,6 @@ import {CardUser} from "../components/Ui/Card/CardUser";
 import CardStatus from "../components/Ui/Card/CardStatus";
 import TagsList from "../components/Ui/List/TagsList";
 
-
 type Props = {
   proposal: Object,
 };
@@ -27,7 +26,7 @@ export class CardProposal extends React.Component<Props> {
             <a href="">{proposal.user.name}</a>
             <p>
               <div className="excerpt small">
-                1 janvier 2015
+                {proposal.user.publicationDate}
               </div>
             </p>
           </div>
@@ -41,23 +40,32 @@ export class CardProposal extends React.Component<Props> {
               </a>
             </h3>
             <div className="excerpt small">
-              Lorem aque eius excepturi expedita ipptio quasi quisquam sunt tenetur vitae voluptas? Ad, iste.
+              {proposal.content}
             </div>
             <TagsList>
-              <div className="tags-list__tag ellipsis">
+              <div className="tags-list__tag">
                 <i className="cap cap-tag-1-1 icon--blue" />
-                Justice
+                {proposal.tags.tag}
               </div>
-              <div className="tags-list__tag ellipsis">
+              <div className="tags-list__tag">
                 <i className="cap cap-marker-1-1 icon--blue" />
-                Maurepas Patton
-              </div>
-              <hr/>
-              <div className="tags-list__tag ellipsis">
-                <i className="cap cap-marker-1-1 icon--blue" />
-                15 commentaires
+                {proposal.tags.localisation}
               </div>
             </TagsList>
+          </div>
+        </div>
+        <div className="card__counters card__counters_multiple">
+          <div className="card__counter">
+            <div className="card__counter__value">
+              {proposal.counters.comments.value}
+            </div>
+            {proposal.counters.comments.label}
+          </div>
+          <div className="card__counter">
+            <div className="card__counter__value">
+              {proposal.counters.votes.value}
+            </div>
+            {proposal.counters.votes.label}
           </div>
         </div>
         <CardStatus className={proposal.status.color}>

@@ -16,7 +16,7 @@ export class ProjectPreview extends React.Component<Props> {
     const { project, hasSecondTitle } = this.props;
 
     return (
-      <Col xs={12} sm={6} md={4} lg={3}>
+      <Col xs={12} sm={6} md={4} lg={3} className="d-flex">
         <CardContainer>
           {project.projectType && <ProjectType project={project} />}
           <ProjectCover project={project} />

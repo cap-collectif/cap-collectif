@@ -16,7 +16,7 @@ export const CardContainer = styled.div`
   .card__title {
     font-size: 18px;
     line-height: 1.2;
-    margin: 5px 0 10px;
+    margin: 0 0 10px;
   }
   
   .card__body {
@@ -28,6 +28,10 @@ export const CardContainer = styled.div`
     &__infos {
       flex: 1 0 auto;
     }
+  }
+  
+  button {
+    margin-top: 15px;
   }
   
   .card__actions {
@@ -44,9 +48,23 @@ export const CardContainer = styled.div`
     padding: 5px;
     background-color: #f6f6f6;
     border-top: 1px solid #e3e3e3;
-  }
-  
-  .card__counter__value {
-      font-size: 18px;
+    font-size: 14px;
+    text-align: center;
+    
+    &_multiple .card__counter {
+       width: 50%;
+       
+       &:nth-child(2) {
+        border-left: 1px solid #e3e3e3;
+       }
     }
+    
+    .card__counter {
+      display: inline-block;
+    
+      &__value {
+        font-size: 18px;
+      }
+    }
+  }
 `;

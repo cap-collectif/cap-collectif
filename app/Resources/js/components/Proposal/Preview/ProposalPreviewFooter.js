@@ -1,68 +1,66 @@
 // @flow
-import React, { PropTypes } from 'react';
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import classNames from 'classnames';
 
-const ProposalPreviewFooter = React.createClass({
-  propTypes: {
-    proposal: PropTypes.object.isRequired,
-    stepId: PropTypes.string.isRequired,
-    showVotes: PropTypes.bool,
-    showComments: PropTypes.bool,
-  },
+type Props = {
+  proposal: Object,
+  stepId: string,
+  showVotes?: boolean,
+  showComments?: boolean,
+};
 
-  getDefaultProps() {
-    return {
+export class ProposalPreviewFooter extends React.Component<Props> {
+  static defaultProps = {
       showVotes: false,
       showComments: false,
-    };
-  },
+  };
 
   render() {
     const { proposal, stepId, showVotes, showComments } = this.props;
     const votesCount = proposal.votesCountByStepId[stepId];
-    const counterVoteWidth = showVotes ? '50%' : '100%';
-    const counterCommentsWidth = showComments ? '50%' : '100%';
 
     if (!showVotes && !showComments) {
       return null;
     }
 
+    const countersClasses = {};
+
+    if (showVotes && showComments) {
+      countersClasses[`card__counters_multiple`] = true;
+    }
+
     return (
-      <div className="small text-center">
-        <div className="card__counters">
-          {showComments && (
-            <div
-              className="proposal__counter proposal__counter--comments"
-              style={{ width: counterVoteWidth }}>
-              <div className="card__counter__value">{proposal.commentsCount}</div>
-              <div className="proposal__counter__label">
-                <FormattedMessage
-                  id="comment.count_no_nb"
-                  values={{
-                    count: proposal.commentsCount,
-                  }}
-                />
-              </div>
+      <div className={`card__counters ${classNames(countersClasses)}`}>
+        {showComments && (
+          <div className="card__counter">
+            <div className="card__counter__value">{proposal.commentsCount}</div>
+            <div>
+              <FormattedMessage
+                id="comment.count_no_nb"
+                values={{
+                  count: proposal.commentsCount,
+                }}
+              />
             </div>
-          )}
-          {showVotes && (
-            <div
-              style={{ width: counterCommentsWidth, borderLeft: '1px solid #ccc' }}>
-              <div className="card__counter__value">{votesCount}</div>
-              <div>
-                <FormattedMessage
-                  id="proposal.vote.count_no_nb"
-                  values={{
-                    count: votesCount,
-                  }}
-                />
-              </div>
+          </div>
+        )}
+        {showVotes && (
+          <div className="card__counter">
+            <div className="card__counter__value">{votesCount}</div>
+            <div>
+              <FormattedMessage
+                id="proposal.vote.count_no_nb"
+                values={{
+                  count: votesCount,
+                }}
+              />
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     );
-  },
-});
+  }
+}
 
 export default ProposalPreviewFooter;

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { FontStyle } from './FontStyle';
-import DotList from "../components/Ui/List/DotList";
+import InlineList from "../components/Ui/List/InlineList";
 import TagsList from "../components/Ui/List/TagsList";
 
 storiesOf('Style', module)
@@ -17,12 +17,12 @@ storiesOf('Style', module)
     return (
       <div className="container storybook-container">
         <h3>Dot list</h3>
-        <DotList>
+        <InlineList>
           <li>5 projets</li>
           <li>10 articles</li>
           <li>2 évènements</li>
           <li>4 idées</li>
-        </DotList>
+        </InlineList>
         <hr/>
         <h3>Tags list</h3>
         <TagsList>
