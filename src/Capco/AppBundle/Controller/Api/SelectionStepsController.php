@@ -78,6 +78,8 @@ class SelectionStepsController extends FOSRestController
     }
 
     /**
+     * TODO remove this.
+     *
      * @Post("/selection_steps/{selectionStepId}/proposals/search-in")
      * @ParamConverter("selectionStep", options={"mapping": {"selectionStepId": "id"}})
      * @View(statusCode=200, serializerGroups={"Proposals", "ThemeDetails", "UsersInfos", "UserMedias"})
@@ -90,7 +92,7 @@ class SelectionStepsController extends FOSRestController
             throw new HttpException(400, 'ids are not setted');
         }
 
-        $results = $this->get('capco.search.proposal_search')->searchProposalsIn(['id' => $selectedIds, 'selectionStep' => $selectionStep->getId()]);
+        $results = $this->get('capco.search.proposal_search')->searchProposalsIn($selectedIds);
 
         return $results;
     }

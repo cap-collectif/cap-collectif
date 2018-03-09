@@ -71,6 +71,8 @@ class CollectStepsController extends FOSRestController
     }
 
     /**
+     * TODO remove this.
+     *
      * @Post("/collect_steps/{collect_step_id}/proposals/search-in")
      * @ParamConverter("collectStep", options={"mapping": {"collect_step_id": "id"}})
      * @View(statusCode=200, serializerGroups={"Proposals", "ThemeDetails", "UsersInfos", "UserMedias"})
@@ -84,19 +86,15 @@ class CollectStepsController extends FOSRestController
         }
 
         $proposalForm = $collectStep->getProposalForm();
-        $filters = ['id' => $selectedIds];
 
         if ($proposalForm->getStep()->isPrivate()) {
             $user = $this->getUser();
             if (!$user) {
                 return ['proposals' => [], 'count' => 0];
             }
-            if (!$user->isAdmin()) {
-                $filters['author'] = $user->getId();
-            }
         }
 
-        $results = $this->get('capco.search.proposal_search')->searchProposalsIn($filters);
+        $results = $this->get('capco.search.proposal_search')->searchProposalsIn($selectedIds);
 
         return $results;
     }

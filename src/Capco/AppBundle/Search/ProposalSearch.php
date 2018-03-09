@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Search;
 
+use Capco\AppBundle\Repository\ProposalRepository;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\Term;
@@ -24,29 +25,18 @@ class ProposalSearch extends Search
 
     private $proposalRepo;
 
-    public function __construct(Index $index, $proposalRepo)
+    public function __construct(Index $index, ProposalRepository $proposalRepo)
     {
         parent::__construct($index);
         $this->proposalRepo = $proposalRepo;
         $this->type = 'proposal';
     }
 
-    public function searchProposalsIn(array $providedFilters): array
+    public function searchProposalsIn(array $ids)
     {
-        $boolQuery = new Query\BoolQuery();
-
-        $filters = $this->getFilters($providedFilters);
-        foreach ($filters as $key => $value) {
-            $boolQuery->addMust(new Term([
-                $key => ['value' => $value],
-            ]));
-        }
-
-        $query = new Query($boolQuery);
-        $query
-            ->setSource(['id'])
-            ->setSize(100)
-        ;
+        $idQuery = new Query\Ids($ids);
+        $query = new Query($idQuery);
+        $query->setSource(['id']);
         $resultSet = $this->index->getType($this->type)->search($query);
 
         return [
@@ -55,7 +45,7 @@ class ProposalSearch extends Search
         ];
     }
 
-    public function searchProposals(int $page, int $pagination = null, string $order, $terms, array $providedFilters): array
+    public function searchProposals(int $page, int $pagination = null, string $order = null, $terms, array $providedFilters): array
     {
         $boolQuery = new Query\BoolQuery();
         $boolQuery = $this->searchTermsInMultipleFields($boolQuery, self::SEARCH_FIELDS, $terms, 'phrase_prefix');
@@ -71,7 +61,9 @@ class ProposalSearch extends Search
             $query = $this->getRandomSortedQuery($boolQuery);
         } else {
             $query = new Query($boolQuery);
-            $query->setSort($this->getSort($order, $providedFilters));
+            if ($order) {
+                $query->setSort($this->getSort($order, $providedFilters));
+            }
         }
 
         $pagination = $pagination ?? self::RESULTS_PER_PAGE;
@@ -145,10 +137,6 @@ class ProposalSearch extends Search
         // Trashed proposals are indexed
         // but most of the time we don't want to see them
         $filters['isTrashed'] = false;
-
-        if (array_key_exists('id', $providedFilters)) {
-            $filters['id'] = $providedFilters['id'];
-        }
 
         if (array_key_exists('selectionStep', $providedFilters)) {
             $filters['selections.step.id'] = $providedFilters['selectionStep'];
