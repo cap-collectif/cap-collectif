@@ -1016,7 +1016,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return $this;
     }
 
-    public function setFollowers(ArrayCollection $followers): self
+    public function setFollowers(Collection $followers): self
     {
         $this->followers = $followers;
 
@@ -1025,7 +1025,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
 
     public function isIndexable(): bool
     {
-        return $this->enabled && !$this->expired;
+        return $this->enabled && !$this->expired && !$this->isDeleted();
     }
 
     public static function getElasticsearchTypeName(): string

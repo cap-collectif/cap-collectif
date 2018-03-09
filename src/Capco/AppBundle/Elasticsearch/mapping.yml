@@ -141,8 +141,8 @@ mappings:
             updatedAt: { type: date }
             deletedAt: { type: date }
             isTrashed: { type: boolean }
-            enabled: { type: boolean }
-            address: { type: keyword }
+            commentsCount: { type: integer }
+            estimation: { type: float }
             district:
                 type: object
                 properties:
@@ -173,10 +173,6 @@ mappings:
                         type: object
                         properties:
                             id: { type: keyword }
-            likers:
-                type: object
-                properties:
-                    slug: { type: keyword }
 
     opinion:
         properties:
