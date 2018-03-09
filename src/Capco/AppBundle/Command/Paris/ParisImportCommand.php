@@ -479,7 +479,7 @@ class ParisImportCommand extends ContainerAwareCommand
         return $comments;
     }
 
-    protected function createStatuses(): CollectionInterface
+    protected function createStatuses(): Collection
     {
         $statuses = new ArrayCollection();
         $i = 0;

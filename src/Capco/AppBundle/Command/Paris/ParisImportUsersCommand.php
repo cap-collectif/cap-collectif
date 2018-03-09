@@ -27,7 +27,7 @@ class ParisImportUsersCommand extends ContainerAwareCommand
 {
     protected const USERS_BATCH_SIZE = 500;
 
-    protected  const USERS_FILE = 'paris_comments.csv';
+    protected  const USERS_FILE = 'paris_users.csv';
 
     protected const LISTENERS_WHITELIST = [
         SluggableListener::class,
