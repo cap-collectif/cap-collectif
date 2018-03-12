@@ -78,7 +78,7 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
         </div>
       }
     >
-      <Relay(InjectIntl(ProposalAdminFollowers))
+      <Relay(ProposalAdminFollowers)
         proposal={
           Object {
             "followerConnection": Object {
