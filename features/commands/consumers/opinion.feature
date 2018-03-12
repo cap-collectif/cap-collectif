@@ -51,4 +51,4 @@ Scenario: Author should receive a trashed opinion email
   Then 1 mail should be sent
   And I open mail with subject 'notification-subject-proposal-in-the-trash {"{title}":"Article visible \u00e0 la corbeille"}' from 'assistance@cap-collectif.com' to 'sfavot@jolicode.com'
   And I should see 'notification-content-proposal-in-the-trash {"{trashedReason}":"reporting.status.spam","{title}":"Article visible \u00e0 la corbeille","{body}":"Je suis du spam","{trashedDate}":"01\/03\/2017","{trashedTime}":"00:00:00","{opinionLink}":"http:\/\/capco.dev\/consultations\/projet-de-loi-renseignement\/consultation\/elaboration-de-la-loi\/opinions\/titre-ier-la-circulation-des-donnees-et-du-savoir\/chapitre-ier-economie-de-la-donnee\/section-1-ouverture-des-donnees-publiques\/sous-partie-1\/article-visible-a-la-corbeille"}' in mail
-  And I should see 'notification.email.external_footer {"%to%":"sfavot@jolicode.com","%sitename%":"Cap-Collectif"}' in mail
+  And I should see 'notification.email.external_footer {"%to%":"sfavot@jolicode.com","%sitename%":"Cap-Collectif","%siteUrl%":"http:\/\/capco.dev\/"}' in mail

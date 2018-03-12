@@ -18,7 +18,6 @@ parameters:
         - %currentWorkingDirectory%/src/Capco/AppBundle/GraphQL/Resolver/ConsultationResolver.php
         - %currentWorkingDirectory%/src/Capco/AppBundle/Command/ImportProposalsFromCsvCommand.php
         - %currentWorkingDirectory%/src/Capco/AppBundle/Resolver/ProjectStatsResolver.php
-        # @Liinkiing is refactoring this part
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Mailer/Message/*
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Notifier/ProposalNotifier.php
-        - %currentWorkingDirectory%/src/Capco/AppBundle/Manager/Notify.php
+        - %currentWorkingDirectory%/src/Capco/AppBundle/Command/Maker/templates/*
+        - %currentWorkingDirectory%/src/Capco/AppBundle/Notifier/ContributionNotifier
+        - %currentWorkingDirectory%/src/Capco/AppBundle/Mailer/Message/Contribution/ContributionModerationMessage

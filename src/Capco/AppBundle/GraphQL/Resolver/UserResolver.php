@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\UserBundle\Entity\User;
+use FOS\UserBundle\Model\UserInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
@@ -33,6 +34,30 @@ class UserResolver implements ContainerAwareInterface
         return $repo->findAll();
     }
 
+    public function resolveResettingPassworldUrl(UserInterface $user): string
+    {
+        $router = $this->container->get('router');
+
+        return $router->generate('fos_user_resetting_reset', ['token' => $user->getConfirmationToken()],
+            UrlGeneratorInterface::ABSOLUTE_URL);
+    }
+
+    public function resolveRegistrationConfirmationUrl(UserInterface $user): string
+    {
+        $router = $this->container->get('router');
+
+        return $router->generate('account_confirm_email', ['token' => $user->getConfirmationToken()],
+            UrlGeneratorInterface::ABSOLUTE_URL);
+    }
+
+    public function resolveConfirmNewEmailUrl(User $user): string
+    {
+        $router = $this->container->get('router');
+
+        return $router->generate('account_confirm_new_email', ['token' => $user->getNewEmailConfirmationToken()],
+            UrlGeneratorInterface::ABSOLUTE_URL);
+    }
+
     public function resolveEmail($object): string
     {
         if (0 === strpos($object->getEmail(), 'twitter_')) {
@@ -52,6 +77,29 @@ class UserResolver implements ContainerAwareInterface
         $router = $this->container->get('router');
 
         return $router->generate('capco_user_profile_show_all', ['slug' => $user->getSlug()], UrlGeneratorInterface::ABSOLUTE_URL);
+    }
+
+    public function resolveShowNotificationsPreferencesUrl(): string
+    {
+        $router = $this->container->get('router');
+
+        return $router->generate('capco_profile_notifications_edit_account', [], UrlGeneratorInterface::ABSOLUTE_URL);
+    }
+
+    public function resolveDisableNotificationsUrl(User $user): string
+    {
+        $router = $this->container->get('router');
+
+        return $router->generate('capco_profile_notifications_disable',
+            ['token' => $user->getNotificationsConfiguration()->getUnsubscribeToken()], UrlGeneratorInterface::ABSOLUTE_URL);
+    }
+
+    public function resolveShowUrlBySlug(string $slug)
+    {
+        $router = $this->container->get('router');
+
+        return $router->generate('capco_user_profile_show_all', compact('slug'),
+            UrlGeneratorInterface::ABSOLUTE_URL);
     }
 
     public function resolveUpdatedAt($object): string

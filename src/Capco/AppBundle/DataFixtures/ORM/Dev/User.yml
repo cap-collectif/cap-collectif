@@ -355,23 +355,3 @@ Capco\UserBundle\Entity\User:
         Media: '@MediaUser5'
         vip: true
         confirmationToken: ~
-
-    user6:
-         id: 'user6'
-         username: sanzo
-         firstname: Pierre
-         lastname: Bellenger
-         email: pierre.bellenger@cap-collectif.com
-         enabled: true
-         userType: '@UserType1'
-         plainPassword: azerty
-         roles:
-          - 'ROLE_SUPER_ADMIN'
-         Media: '@MediaUser1'
-         city: Antony
-         website: http://www.sfavot.fr
-         biography: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum earum fuga quaerat expedita minima labore vitae voluptate, repellendus perspiciatis consequuntur cum, dignissimos quas temporibus consequatur tempora est repellat. Architecto, quia.
-         vip: true
-         phone: '+3300000000'
-         confirmationToken: ~
-         phoneConfirmed: true

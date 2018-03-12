@@ -20,7 +20,7 @@ class ExpireUsersCommand extends ContainerAwareCommand
     {
         $container = $this->getContainer();
         $em = $container->get('doctrine')->getManager();
-        $notifier = $container->get('capco.notify_manager');
+        $notifier = $container->get('capco.user_notifier');
         $manager = $container->get('capco.contribution.manager');
 
         $users = $em->getRepository('CapcoUserBundle:User')
@@ -31,7 +31,7 @@ class ExpireUsersCommand extends ContainerAwareCommand
             $user->setExpired(true);
             $user->setExpiresAt(null);
             $em->flush();
-            $notifier->sendExpiredUserEmail($user, $contributionDeleted);
+            $notifier->expired($user, $contributionDeleted);
         }
 
         $output->writeln(count($users) . ' user(s) expired.');
