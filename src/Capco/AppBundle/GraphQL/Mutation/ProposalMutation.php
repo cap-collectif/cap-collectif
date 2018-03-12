@@ -40,11 +40,16 @@ class ProposalMutation implements ContainerAwareInterface
 
         $this->container->get('redis_storage.helper')->recomputeUserCounters($author);
 
-        $this->container->get('swarrot.publisher')->publish('proposal.delete', new Message(
-            json_encode([
+        if (
+            $proposalForm->getNotificationsConfiguration()
+            && $proposalForm->getNotificationsConfiguration()->isOnDelete()
+        ) {
+            $this->container->get('swarrot.publisher')->publish('proposal.delete', new Message(
+              json_encode([
                 'proposalId' => $proposal->getId(),
-            ])
-        ));
+              ])
+            ));
+        }
 
         // If not present, es listener will take some time to execute the refresh
         // and, next time proposals will be fetched, the set of data will be outdated.
@@ -153,7 +158,7 @@ class ProposalMutation implements ContainerAwareInterface
         $proposal->setStatus($status);
         $em->flush();
 
-        $this->container->get('capco.proposal_notifier')->onStatusChangeInCollect($proposal);
+        $this->container->get('capco.notify_manager')->notifyProposalStatusChangeInCollect($proposal);
 
         return ['proposal' => $proposal];
     }
@@ -179,7 +184,7 @@ class ProposalMutation implements ContainerAwareInterface
         $selection->setStatus($status);
         $em->flush();
 
-        $this->container->get('capco.proposal_notifier')->onStatusChangeInSelection($selection);
+        $this->container->get('capco.notify_manager')->notifyProposalStatusChangeInSelection($selection);
 
         $proposal = $this->getProposal($proposalId);
 
@@ -360,11 +365,13 @@ class ProposalMutation implements ContainerAwareInterface
         $index = $this->container->get('fos_elastica.index');
         $index->refresh();
 
-        $this->container->get('swarrot.publisher')->publish('proposal.create', new Message(
-            json_encode([
+        if ($proposalForm->isNotifyingOnCreate()) {
+            $this->container->get('swarrot.publisher')->publish('proposal.create', new Message(
+              json_encode([
                 'proposalId' => $proposal->getId(),
-            ])
-        ));
+              ])
+            ));
+        }
 
         return ['proposal' => $proposal];
     }
@@ -408,8 +415,9 @@ class ProposalMutation implements ContainerAwareInterface
         }
 
         $proposal
-            ->setDraft($draft)
-            ->setEnabled($draft ? false : true);
+          ->setDraft($draft)
+          ->setEnabled($draft ? false : true)
+        ;
 
         $values = $this->fixValues($values, $proposalForm);
 
@@ -438,11 +446,16 @@ class ProposalMutation implements ContainerAwareInterface
         $proposal->setUpdateAuthor($user);
         $em->flush();
 
-        $this->container->get('swarrot.publisher')->publish('proposal.update', new Message(
-            json_encode([
+        if (
+            $proposalForm->getNotificationsConfiguration()
+            && $proposalForm->getNotificationsConfiguration()->isOnUpdate()
+        ) {
+            $this->container->get('swarrot.publisher')->publish('proposal.update', new Message(
+              json_encode([
                 'proposalId' => $proposal->getId(),
-            ])
-        ));
+              ])
+            ));
+        }
 
         return ['proposal' => $proposal];
     }

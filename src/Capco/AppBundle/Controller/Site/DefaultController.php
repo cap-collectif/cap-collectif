@@ -54,7 +54,16 @@ class DefaultController extends Controller
                     return $this->redirect($this->generateUrl('app_homepage'));
                 }
 
-                $this->get('capco.contact_notifier')->onContact($adminEmail, $data['email'], $data['name'], $data['message']);
+                $subject = $this->get('translator')->trans('contact.email.subject', ['%sitename%' => $this->get('capco.site_parameter.resolver')->getValue('global.site.fullname'), '%sender%' => $data['name']], 'CapcoAppBundle');
+
+                $message = (new \Swift_Message())
+                    ->setTo($adminEmail)
+                    ->setSubject($subject)
+                    ->setBody($data['message'])
+                    ->setFrom($data['email'])
+                    ->setReplyTo($data['email'])
+                ;
+                $this->get('mailer')->send($message);
                 $this->get('session')->getFlashBag()->add('success', 'contact.email.sent_success');
 
                 return $this->redirect($this->generateUrl('app_homepage'));
