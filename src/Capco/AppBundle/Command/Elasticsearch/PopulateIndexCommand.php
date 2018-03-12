@@ -29,7 +29,7 @@ class PopulateIndexCommand extends ContainerAwareCommand
             $indexer->indexAll();
             $indexer->finishBulk();
         } catch (\Exception $e) {
-            $output->writeln('<error>'. $e->getMessage() .'</error>');
+            $output->writeln('<error>' . $e->getMessage() . '</error>');
 
             return 1;
         }
