@@ -29,6 +29,7 @@ class CommandContext implements KernelAwareContext
 
     /**
      * @Given I consume :queue
+     * @Given I consume :masMessage messages in :queue
      *
      * @param mixed $maxMessage
      */

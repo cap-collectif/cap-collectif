@@ -65,13 +65,6 @@ swarrot:
                  - configurator: swarrot.processor.max_messages
                  - configurator: swarrot.processor.doctrine_connection
                  - configurator: swarrot.processor.doctrine_object_manager
-                 - configurator: swarrot.processor.exception_catcher
-                 - configurator: swarrot.processor.ack
-                 - configurator: swarrot.processor.retry
-                   extras:
-                       retry_attempts: 3
-                       retry_exchange: 'retry'
-                       retry_routing_key_pattern: 'elasticsearch_indexation_retry_%%attempt%%'
         opinion_create:
             processor: opinion_create.processor
             middleware_stack:
