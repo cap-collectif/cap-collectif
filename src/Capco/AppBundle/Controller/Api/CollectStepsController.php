@@ -94,9 +94,14 @@ class CollectStepsController extends FOSRestController
             }
         }
 
-        $results = $this->get('capco.search.proposal_search')->searchProposalsIn($selectedIds);
+        $proposals = array_map(function (string $id) {
+            return $this->container->get('capco.proposal.repository')->find($id);
+        }, $selectedIds);
 
-        return $results;
+        return [
+          'proposals' => $proposals,
+          'count' => count($proposals),
+        ];
     }
 
     /**

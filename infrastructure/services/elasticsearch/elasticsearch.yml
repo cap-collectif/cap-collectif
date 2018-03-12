@@ -1,5 +1,7 @@
 # https://www.elastic.co/guide/en/elasticsearch/reference/5.5/docker.html#_notes_for_production_use_and_defaults
 
+cluster.routing.allocation.disk.threshold_enabled: false
+
 discovery.zen.minimum_master_nodes: 1
 
 http.host: 0.0.0.0

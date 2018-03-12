@@ -553,7 +553,7 @@ Scenario: Anonymous API client wants to get all proposals from a private collect
 
 @elasticsearch
 Scenario: Anonymous API client wants to get proposals from a collect step with filters
-  When I send a POST request to "/api/collect_steps/collectstep1/proposals/search?order=last" with json:
+  When I send a POST request to "/api/collect_steps/collectstep1/proposals/search?page=1&pagination=50&order=last" with json:
   """
   {
     "filters": {
@@ -655,7 +655,6 @@ Scenario: Anonymous API client wants to get proposals from a collect step with f
   }
   """
 
-@elasticsearch
 Scenario: Anonymous API client wants to get some proposals from a collect step
   When I send a POST request to "/api/collect_steps/collectstep1/proposals/search-in" with json:
   """
@@ -824,7 +823,7 @@ Scenario: Anonymous API client wants to get some proposals from a collect step
   }
   """
 
-@elasticsearch @security
+@security
 Scenario: Anonymous API client wants to get some proposals from a collect step without define ids
   When I send a POST request to "/api/collect_steps/collectstep1/proposals/search-in" with json:
   """
@@ -840,7 +839,6 @@ Scenario: Anonymous API client wants to get some proposals from a collect step w
   }
   """
 
-@elasticsearch
 Scenario: Anonymous API client wants to get some selection proposals from a collect step
   When I send a POST request to "/api/selection_steps/selectionstep1/proposals/search-in" with json:
   """
@@ -924,7 +922,7 @@ Scenario: Anonymous API client wants to get some selection proposals from a coll
   }
   """
 
-@elasticsearch @security
+@security
 Scenario: Anonymous API client wants to get some proposals from a selection step without define ids
   When I send a POST request to "/api/selection_steps/selectionstep1/proposals/search-in" with json:
   """

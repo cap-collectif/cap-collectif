@@ -354,6 +354,10 @@ EOF;
     }
 
     /**
+     * Checks that response has specific status code.
+     *
+     * @param string $code status code
+     *
      * @Then /^(?:the )?JSON response status code should be (\d+)$/
      */
     public function theJsonResponseStatusCodeShouldBe(int $code)
@@ -371,6 +375,7 @@ EOF;
     public function theJsonResponseShouldMatch(PyStringNode $pattern)
     {
         $body = (string) $this->response->getBody();
+        var_dump($body);
         $factory = new SimpleFactory();
         $matcher = $factory->createMatcher();
         PHPUnit::assertTrue($matcher->match($body, $pattern->getRaw()), $matcher->getError());

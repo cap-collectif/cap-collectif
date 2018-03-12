@@ -32,19 +32,6 @@ class ProposalSearch extends Search
         $this->type = 'proposal';
     }
 
-    public function searchProposalsIn(array $ids): array
-    {
-        $idQuery = new Query\Ids($ids);
-        $query = new Query($idQuery);
-        $query->setSource(['id']);
-        $resultSet = $this->index->getType($this->type)->search($query);
-
-        return [
-            'proposals' => $this->getHydratedResults($resultSet->getResults()),
-            'count' => $resultSet->getTotalHits(),
-        ];
-    }
-
     public function searchProposals(int $page, int $pagination = null, string $order = null, $terms, array $providedFilters): array
     {
         $boolQuery = new Query\BoolQuery();
