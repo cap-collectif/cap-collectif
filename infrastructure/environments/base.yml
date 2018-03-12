@@ -40,7 +40,7 @@ redis:
 elasticsearch:
     build: ../services/elasticsearch
     environment:
-       - cluster.name=docker-cluster
+       - cluster.name=capco
        - bootstrap.memory_lock=true
        - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ulimits:
