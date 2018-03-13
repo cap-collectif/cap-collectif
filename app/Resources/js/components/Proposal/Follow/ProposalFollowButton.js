@@ -29,12 +29,9 @@ type State = {
 };
 
 export class ProposalFollowButton extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      isJustFollowed: false,
-    };
-  }
+  state = {
+    isJustFollowed: false,
+  };
   componentWillReceiveProps(nextProps: Props) {
     if (this.props !== nextProps) {
       this.setState({
@@ -122,8 +119,6 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                                     followerId: proposal.viewerAsFollower.id,
                                     notifiedOf: 'DEFAULT',
                                   },
-                                }).then(() => {
-                                  return true;
                                 });
                               }
                             }}>
@@ -157,8 +152,6 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                                     followerId: proposal.viewerAsFollower.id,
                                     notifiedOf: 'DEFAULT_AND_COMMENTS',
                                   },
-                                }).then(() => {
-                                  return true;
                                 });
                               }
                             }}>
@@ -188,8 +181,6 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                                     followerId: proposal.viewerAsFollower.id,
                                     notifiedOf: 'ALL',
                                   },
-                                }).then(() => {
-                                  return true;
                                 });
                               }
                             }}>

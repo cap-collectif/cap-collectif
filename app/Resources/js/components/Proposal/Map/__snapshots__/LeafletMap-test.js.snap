@@ -3,7 +3,7 @@
 exports[`<LeafletMap /> should not render a map with visible = false 1`] = `null`;
 
 exports[`<LeafletMap /> should render a map with markers 1`] = `
-<Decorated
+<LeafletUnivMap
   center={
     Object {
       "lat": 48.8586047,
@@ -19,7 +19,7 @@ exports[`<LeafletMap /> should render a map with markers 1`] = `
   }
   zoom={12}
 >
-  <Decorated
+  <LeafletUnivTileLayer
     url="https://api.mapbox.com/styles/v1/capcollectif/cj4zmeym20uhr2smcmgbf49cz/tiles/256/{z}/{x}/{y}?access_token=***REMOVED***"
   />
   <r
@@ -39,5 +39,5 @@ exports[`<LeafletMap /> should render a map with markers 1`] = `
     }
   />
   <InjectIntl(LocateControl) />
-</Decorated>
+</LeafletUnivMap>
 `;

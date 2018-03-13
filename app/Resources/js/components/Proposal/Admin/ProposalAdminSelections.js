@@ -115,7 +115,6 @@ export class ProposalAdminSelections extends Component<Props> {
   render() {
     const {
       intl,
-      initialValues,
       selectionValues,
       proposal,
       handleSubmit,
@@ -193,7 +192,6 @@ export class ProposalAdminSelections extends Component<Props> {
                   {selectionValues[index] &&
                     selectionValues[index].selected && (
                       <div>
-                        {initialValues.selections[index].status !== selectionValues[index].status}
                         <Field
                           type="select"
                           label="Statut"
