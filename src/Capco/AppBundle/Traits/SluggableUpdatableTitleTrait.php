@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
-trait SluggableTitleTrait
+trait SluggableUpdatableTitleTrait
 {
     /**
      * @ORM\Column(name="title", type="string", length=255, nullable=false)
@@ -15,7 +15,7 @@ trait SluggableTitleTrait
     protected $title;
 
     /**
-     * @Gedmo\Slug(fields={"title"}, updatable=false, unique=true)
+     * @Gedmo\Slug(fields={"title"}, updatable=true, unique=true)
      * @ORM\Column(length=255)
      */
     protected $slug;
