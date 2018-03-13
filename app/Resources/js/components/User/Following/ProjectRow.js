@@ -44,7 +44,7 @@ export class ProjectRow extends Component<Props, State> {
   render() {
     const { project, viewer } = this.props;
     return (
-      <Collapse in={this.state.open}>
+      <Collapse in={this.state.open} id={`profile-project-collapse-${project.id}`}>
         <Panel
           className="following-project"
           header={
@@ -53,12 +53,14 @@ export class ProjectRow extends Component<Props, State> {
                 <a
                   href={project.url}
                   title={project.title}
+                  id={`profile-project-link-${project.id}`}
                   className="profile__project__open__link">
                   {project.title}
                 </a>
                 <Button
                   style={{ float: 'right' }}
                   className="profile__project__unfollow__button"
+                  id={`profile-project-unfollow-button-${project.id}`}
                   onClick={this.onUnfollowCurrentProject.bind(this)}>
                   <FormattedMessage id="unfollow-this-project" />
                 </Button>

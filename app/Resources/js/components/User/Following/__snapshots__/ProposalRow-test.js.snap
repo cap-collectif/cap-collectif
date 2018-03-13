@@ -24,6 +24,7 @@ exports[`<ProposalRow /> should render proposal displayed 1`] = `
           <a
             className="profile__proposal__open__link"
             href="http://perdu.com"
+            id="item-proposal-link-proposal1"
             title="perdu sur internet ?"
           >
             perdu sur internet ?
@@ -35,6 +36,7 @@ exports[`<ProposalRow /> should render proposal displayed 1`] = `
             bsStyle="default"
             className="profile__proposal__unfollow__button"
             disabled={false}
+            id="profile-proposal-unfollow-button-proposal1"
             onClick={[Function]}
             style={
               Object {
@@ -78,6 +80,7 @@ exports[`<ProposalRow /> should render proposal hidden 1`] = `
           <a
             className="profile__proposal__open__link"
             href="http://perdu.com"
+            id="item-proposal-link-proposal1"
             title="perdu sur internet ?"
           >
             perdu sur internet ?
@@ -89,6 +92,7 @@ exports[`<ProposalRow /> should render proposal hidden 1`] = `
             bsStyle="default"
             className="profile__proposal__unfollow__button"
             disabled={false}
+            id="profile-proposal-unfollow-button-proposal1"
             onClick={[Function]}
             style={
               Object {

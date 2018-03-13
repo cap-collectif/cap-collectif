@@ -44,12 +44,14 @@ export class ProposalRow extends Component<Props, State> {
                 <a
                   href={proposal.show_url}
                   title={proposal.title}
+                  id={`item-proposal-link-${proposal.id}`}
                   className="profile__proposal__open__link">
                   {proposal.title}
                 </a>
                 <Button
                   style={{ float: 'right' }}
                   className="profile__proposal__unfollow__button"
+                  id={`profile-proposal-unfollow-button-${proposal.id}`}
                   onClick={this.onUnfollowCurrentProposal.bind(this, proposal.id)}>
                   <FormattedMessage id="unfollow" />
                 </Button>
