@@ -139,7 +139,7 @@ Proposal:
                 type: "Boolean!"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowProposalResolver", [value, user])'
                 description: "View follow current proposal"
-            viewerAsFollower:
+            followerConfiguration:
                 type: "Follower"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowerProposalResolver", [value, user])'
                 description: "View follow current proposal"

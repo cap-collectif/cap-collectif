@@ -504,7 +504,6 @@ type FollowProposalPayload {
 
 # A follower
 type Follower {
-  id: ID!
   proposal: Proposal!
   user: User!
   notifiedOf: PickFollowTypeValue
@@ -1017,7 +1016,7 @@ type Proposal implements Node {
   viewerIsFollowing: Boolean!
 
   # View follow current proposal
-  viewerAsFollower: Follower
+  followerConfiguration: Follower
   postsCount: Int!
   viewerCanSeeEvaluation: Boolean!
 }
@@ -1576,9 +1575,6 @@ type UnselectProposalPayload {
 }
 
 input UpdateFollowProposalInput {
-  # The follower id
-  followerId: ID!
-
   # The proposal id
   proposalId: ID!
   notifiedOf: PickFollowTypeValue!

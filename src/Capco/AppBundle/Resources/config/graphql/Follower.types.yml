@@ -3,8 +3,6 @@ Follower:
     config:
         description: "A follower"
         fields:
-            id:
-                type: "ID!"
             proposal:
                 type: "Proposal!"
             user:

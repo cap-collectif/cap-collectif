@@ -64,7 +64,10 @@ export class ProposalFollowButton extends React.Component<Props, State> {
         </LoginOverlay>
       );
     }
-    if (proposal.viewerAsFollower !== null && typeof proposal.viewerAsFollower !== 'undefined') {
+    if (
+      proposal.followerConfiguration !== null &&
+      typeof proposal.followerConfiguration !== 'undefined'
+    ) {
       return (
         <LoginOverlay>
           <span className="mb-0 proposal-follow-dropdown">
@@ -104,19 +107,20 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                             title="default"
                             className="proposal__follow__advancement"
                             checked={
-                              proposal.viewerAsFollower.notifiedOf === 'DEFAULT' ? 'checked' : ''
+                              proposal.followerConfiguration.notifiedOf === 'DEFAULT'
+                                ? 'checked'
+                                : ''
                             }
                             inline
                             onClick={() => {
                               if (
                                 proposal.viewerIsFollowing &&
-                                proposal.viewerAsFollower !== null &&
-                                typeof proposal.viewerAsFollower !== 'undefined'
+                                proposal.followerConfiguration !== null &&
+                                typeof proposal.followerConfiguration !== 'undefined'
                               ) {
                                 return UpdateFollowProposalMutation.commit({
                                   input: {
                                     proposalId: proposal.id,
-                                    followerId: proposal.viewerAsFollower.id,
                                     notifiedOf: 'DEFAULT',
                                   },
                                 });
@@ -135,7 +139,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                             id={`proposal-follow-btn-default_and_comments-${proposal.id}`}
                             className="proposal__follow__default_and_comments"
                             checked={
-                              proposal.viewerAsFollower.notifiedOf === 'DEFAULT_AND_COMMENTS'
+                              proposal.followerConfiguration.notifiedOf === 'DEFAULT_AND_COMMENTS'
                                 ? 'checked'
                                 : ''
                             }
@@ -143,13 +147,12 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                             onClick={() => {
                               if (
                                 proposal.viewerIsFollowing &&
-                                proposal.viewerAsFollower !== null &&
-                                typeof proposal.viewerAsFollower !== 'undefined'
+                                proposal.followerConfiguration !== null &&
+                                typeof proposal.followerConfiguration !== 'undefined'
                               ) {
                                 return UpdateFollowProposalMutation.commit({
                                   input: {
                                     proposalId: proposal.id,
-                                    followerId: proposal.viewerAsFollower.id,
                                     notifiedOf: 'DEFAULT_AND_COMMENTS',
                                   },
                                 });
@@ -167,18 +170,17 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                             id={`proposal-follow-btn-all-${proposal.id}`}
                             className="proposal__follow__all"
                             checked={
-                              proposal.viewerAsFollower.notifiedOf === 'ALL' ? 'checked' : ''
+                              proposal.followerConfiguration.notifiedOf === 'ALL' ? 'checked' : ''
                             }
                             onClick={() => {
                               if (
                                 proposal.viewerIsFollowing &&
-                                proposal.viewerAsFollower !== null &&
-                                typeof proposal.viewerAsFollower !== 'undefined'
+                                proposal.followerConfiguration !== null &&
+                                typeof proposal.followerConfiguration !== 'undefined'
                               ) {
                                 return UpdateFollowProposalMutation.commit({
                                   input: {
                                     proposalId: proposal.id,
-                                    followerId: proposal.viewerAsFollower.id,
                                     notifiedOf: 'ALL',
                                   },
                                 });
@@ -228,8 +230,7 @@ export default createFragmentContainer(
     fragment ProposalFollowButton_proposal on Proposal {
       id
       viewerIsFollowing
-      viewerAsFollower {
-        id
+      followerConfiguration {
         notifiedOf
       }
     }

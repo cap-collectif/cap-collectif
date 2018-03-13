@@ -10,9 +10,6 @@ import type {
 const mutation = graphql`
   mutation UpdateFollowProposalMutation($input: UpdateFollowProposalInput!) {
     UpdateFollowProposal(input: $input) {
-      follower {
-        id
-      }
       proposal {
         id
         ...ProposalFollowButton_proposal

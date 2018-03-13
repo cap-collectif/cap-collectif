@@ -77,11 +77,6 @@ class OpinionVersionVote extends AbstractVote
         return $this->value;
     }
 
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
     public function setValue($value): self
     {
         $this->value = $value;

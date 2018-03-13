@@ -9,8 +9,7 @@ describe('<ProposalFollowButton />', () => {
   const proposalViewIsFollowing = {
     id: 'proposal1',
     viewerIsFollowing: true,
-    viewerAsFollower: {
-      id: 'follower1',
+    followerConfiguration: {
       notifiedOf: 'DEFAULT',
     },
   };
@@ -18,7 +17,7 @@ describe('<ProposalFollowButton />', () => {
   const proposalViewIsNotFollowing = {
     id: 'proposal1',
     viewerIsFollowing: false,
-    viewerAsFollower: null,
+    followerConfiguration: null,
   };
   // $FlowFixMe $refType
   const props = {
