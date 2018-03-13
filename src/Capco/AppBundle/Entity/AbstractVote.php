@@ -6,6 +6,7 @@ use Capco\AppBundle\Model\HasAuthorInterface;
 use Capco\AppBundle\Model\VoteContribution;
 use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\IdTrait;
+use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\UniqueConstraint;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -66,13 +67,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 abstract class AbstractVote implements VoteContribution, HasAuthorInterface
 {
-    use ExpirableTrait, DateTrait, IdTrait;
-
-    /**
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="created_at", type="datetime")
-     */
-    private $createdAt;
+    use ExpirableTrait, TimestampableTrait, IdTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="votes")
@@ -88,16 +83,6 @@ abstract class AbstractVote implements VoteContribution, HasAuthorInterface
     public function getRelated()
     {
         return null;
-    }
-
-    /**
-     * Get createdAt.
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
     }
 
     /**

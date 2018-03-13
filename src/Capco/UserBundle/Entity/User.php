@@ -1426,7 +1426,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return $this;
     }
 
-    public function isFollowingProposal()
+    public function isFollowingProposal(): bool
     {
         return count($this->followingProposals) > 0;
     }

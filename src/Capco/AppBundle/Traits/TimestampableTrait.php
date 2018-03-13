@@ -14,37 +14,18 @@ trait TimestampableTrait
      */
     protected $createdAt;
 
-    /**
-     * Sets createdAt.
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return $this
-     */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function setCreatedAt(\DateTime $createdAt):self
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    /**
-     * Returns createdAt.
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * Sets updatedAt.
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return $this
-     */
     public function setUpdatedAt(\DateTime $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
@@ -52,13 +33,33 @@ trait TimestampableTrait
         return $this;
     }
 
-    /**
-     * Returns updatedAt.
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?\DateTime
     {
         return $this->updatedAt;
+    }
+
+    public function isCreatedInLastInterval(\DateTime $to, \DateInterval $interval): bool
+    {
+        $diff = $this->createdAt->diff($to);
+
+        return $diff < $interval;
+    }
+
+    public function isUpdatedInLastInterval(\DateTime $to, \DateInterval $interval): bool
+    {
+        $diff = $this->updatedAt->diff($to);
+
+        return $diff < $interval;
+    }
+
+    public function isDeletedInLastInterval(\DateTime $to, \DateInterval $interval): bool
+    {
+        if ($this->isDeleted() && isset($this->deletedAt)) {
+            $diff = $this->deletedAt->diff($to);
+
+            return $diff < $interval;
+        }
+
+        return false;
     }
 }
