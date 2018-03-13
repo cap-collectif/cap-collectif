@@ -128,7 +128,6 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
                             continue;
                         }
                         $project = $userActivity->getUserProject($proposal['projectId']);
-                        $project['countActivities'] += $proposal['countActivities'];
 
                         if (!isset($project['proposals'])) {
                             $project['proposals'] = [];
@@ -141,6 +140,12 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
                             $proposal['votes'] = self::NOT_FOLLOWED;
                         }
 
+                        // recount because we get what the user is following
+                        $proposal['countActivities'] = $this->countProposalActivities($proposal);
+                        if (0 === $proposal['countActivities']) {
+                            continue;
+                        }
+                        $project['countActivities'] += $proposal['countActivities'];
                         $project['proposals'][$proposalId] = $proposal;
                         $userActivity->addUserProject($project, $proposal['projectId']);
                     }
