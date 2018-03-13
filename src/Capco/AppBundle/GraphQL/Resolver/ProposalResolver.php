@@ -40,14 +40,6 @@ class ProposalResolver implements ContainerAwareInterface
         return $project->getRealSteps();
     }
 
-    public function resolveShowUrlBySlug(string $projectSlug, string $stepSlug, string $proposalSlug)
-    {
-        $router = $this->container->get('router');
-
-        return $router->generate('app_project_show_proposal', compact('projectSlug', 'stepSlug', 'proposalSlug'),
-            UrlGeneratorInterface::ABSOLUTE_URL);
-    }
-
     public function resolvePostAbstract(Post $post): string
     {
         return $post->getAbstractOrBeginningOfTheText();

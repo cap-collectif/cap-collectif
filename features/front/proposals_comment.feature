@@ -7,7 +7,7 @@ Scenario: User comment a proposal and admin should be notified if the proposal h
   And I go to a proposal which is comment notifiable
   And I comment "Salut les filles"
   Then the queue associated to "comment_create" producer has messages below:
-  | 0 | {"commentId": "@number@"} |
+  | 0 | {"notifyTo": "admin", "commentId": "@number@"} |
 
 @javascript @database @rabbitmq
 Scenario: User comment a proposal and admin should not be notified if the proposal have comments notifications off
@@ -15,21 +15,21 @@ Scenario: User comment a proposal and admin should not be notified if the propos
   And I go to a proposal which is not comment notifiable
   And I comment "Salut les filles"
   Then the queue associated to "comment_create" producer has messages below:
-  | 0 | {"commentId": "@number@"} |
+  | 0 | {"notifyTo": "author", "commentId": "@number@"} |
 
 @javascript @database @rabbitmq
 Scenario: Anonymous user comment a proposal and admin should be notified if the proposal have comments notifications on
   Given I go to a proposal which is comment notifiable
   And I anonymously comment "Salut les filles" as "Marie Lopez" with address "enjoyphoenix@gmail.com"
   Then the queue associated to "comment_create" producer has messages below:
-  | 0 | {"commentId": "@number@"} |
+  | 0 | {"notifyTo": "admin", "commentId": "@number@"} |
 
 @javascript @database @rabbitmq
 Scenario: Anonymous user comment a proposal and admin should not be notified if the proposal have comments notifications off
   Given I go to a proposal which is not comment notifiable
   And I anonymously comment "Salut les filles" as "Marie Lopez" with address "enjoyphoenix@gmail.com"
   Then the queue associated to "comment_create" producer has messages below:
-  | 0 | {"commentId": "@number@"} |
+  | 0 | {"notifyTo": "author", "commentId": "@number@"} |
 
 @javascript @database @rabbitmq
 Scenario: User update his comment and admin should be notified if the proposal have comments notifications on
@@ -39,7 +39,7 @@ Scenario: User update his comment and admin should be notified if the proposal h
   And I click the edit comment button
   And I fill and submit the edit comment form with "Salut les filles, il faut que vous essayiez ce DOP à la madeleine"
   Then the queue associated to "comment_update" producer has messages below:
-  | 0 | {"commentId": "@number@"} |
+  | 0 | {"notifyTo": "admin", "commentId": "@number@"} |
 
 @javascript @database @rabbitmq
 Scenario: User update his comment and admin should not be notified if the proposal have comments notifications off
@@ -48,5 +48,4 @@ Scenario: User update his comment and admin should not be notified if the propos
   And I comment "Salut les filles"
   And I click the edit comment button
   And I fill and submit the edit comment form with "Salut les filles, il faut que vous essayiez ce DOP à la madeleine"
-  Then the queue associated to "comment_update" producer has messages below:
-  | 0 | {"commentId": "@number@"} |
+  Then the queue associated to "comment_update" should be empty

@@ -22,10 +22,7 @@ class ProposalCreateProcessor implements ProcessorInterface
     {
         $json = json_decode($message->getBody(), true);
         $proposal = $this->proposalRepository->find($json['proposalId']);
-
-        if ($proposal->getProposalForm()->isNotifyingOnCreate()) {
-            $this->notifier->onCreate($proposal);
-        }
+        $this->notifier->onCreate($proposal);
 
         return true;
     }

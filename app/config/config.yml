@@ -45,8 +45,6 @@ twig:
     globals:
         facebook_app_id: "%facebook_app_id%"
         google_maps_key: '%google_maps_key%'
-    paths:
-        '%kernel.root_dir%/../src/Capco/AppBundle/Mailer/templates': CapcoMail
 
 ekino_new_relic:
     enabled:          true
@@ -184,7 +182,7 @@ fos_user:
     user_class:     Capco\UserBundle\Entity\User
     service:
         user_manager: sonata.user.orm.user_manager
-        mailer: capco.fos_notifier
+        mailer: capco.notify_manager
     registration:
         confirmation:
             enabled:    true

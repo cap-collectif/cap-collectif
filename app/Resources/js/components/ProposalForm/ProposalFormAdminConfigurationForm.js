@@ -129,7 +129,7 @@ const validate = (values: Object) => {
 };
 
 const headerPanelUsingCategories = (
-  <div>
+  <div id="category">
     <h4 className="pull-left">
       <FormattedMessage id="proposal_form.category" />
     </h4>
@@ -163,7 +163,7 @@ const headerPanelUsingThemes = (
 );
 
 const headerPanelUsingAddress = (
-  <div>
+  <div id="address">
     <h4 className="pull-left">
       <FormattedMessage id="proposal_form.address" />
     </h4>
@@ -372,7 +372,11 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
                 />
               </Panel>
             )}
-            <Panel collapsible expanded={usingCategories} header={headerPanelUsingCategories}>
+            <Panel
+              id="category-body"
+              collapsible
+              expanded={usingCategories}
+              header={headerPanelUsingCategories}>
               <Field
                 name="categoryMandatory"
                 component={component}
@@ -394,7 +398,11 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
               />
               <FieldArray name="categories" component={ProposalFormAdminCategories} />
             </Panel>
-            <Panel collapsible expanded={usingAddress} header={headerPanelUsingAddress}>
+            <Panel
+              id="address-body"
+              collapsible
+              expanded={usingAddress}
+              header={headerPanelUsingAddress}>
               <Field
                 name="addressHelpText"
                 component={component}
@@ -490,7 +498,11 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
             </div>
             <FieldArray name="questions" component={ProposalFormAdminQuestions} />
             <ButtonToolbar className="box-content__toolbar">
-              <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
+              <Button
+                disabled={invalid || pristine || submitting}
+                type="submit"
+                bsStyle="primary"
+                id="proposal-form-admin-content-save">
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
               </Button>
               <Button bsStyle="danger" disabled>
