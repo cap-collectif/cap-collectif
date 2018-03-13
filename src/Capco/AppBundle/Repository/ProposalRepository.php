@@ -548,7 +548,7 @@ class ProposalRepository extends EntityRepository
 
     public function countProposalVotesCreatedBetween(\DateTime $from, \DateTime $to, string $proposalId): array
     {
-        $qb = $this->getIsEnabledQueryBuilder();
+        $qb = $this->createQueryBuilder('proposal');
         $qb->select('proposal.id')
         ->addSelect('COUNT(selectionVotes.id) as sVotes,COUNT(collectVotes.id) as cVotes')
         ->leftJoin('proposal.collectVotes', 'collectVotes')
@@ -581,7 +581,7 @@ class ProposalRepository extends EntityRepository
 
     public function countProposalCommentsCreatedBetween(\DateTime $from, \DateTime $to, string $proposalId): array
     {
-        $qb = $this->getIsEnabledQueryBuilder();
+        $qb = $this->createQueryBuilder('proposal');
         $qb->select('proposal.id');
         $qb->addSelect('COUNT(comments.id) as countComment')
             ->leftJoin('proposal.comments', 'comments')
@@ -607,7 +607,6 @@ class ProposalRepository extends EntityRepository
 
     public function proposalStepChangedBetween(\DateTime $from, \DateTime $to, string $proposalId): array
     {
-//        $qb = $this->getIsEnabledQueryBuilder();
         $qb = $this->createQueryBuilder('proposal');
         $qb->select('proposal.id')
             ->addSelect('sStep.title as titleStep', 'selections.createdAt', 'status.name as sName')

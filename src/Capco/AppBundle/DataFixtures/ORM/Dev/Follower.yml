@@ -3,7 +3,7 @@ Capco\AppBundle\Entity\Follower:
     proposal: '@proposal1'
     user: '@user1'
     followedAt: <dateTimeBetween('-50 days', 'now')>
-    notifiedOf: 3
+    notifiedOf: 2
   follower2:
     proposal: '@proposal1'
     user: '@user2'
@@ -13,22 +13,22 @@ Capco\AppBundle\Entity\Follower:
     proposal: '@proposal1'
     user: '@user4'
     followedAt: <dateTimeBetween('-50 days', 'now')>
-    notifiedOf: 3 
+    notifiedOf: 1
   follower5:
     proposal: '@proposal1'
     user: '@user5'
     followedAt: <dateTimeBetween('-50 days', 'now')>
-    notifiedOf: 3 
+    notifiedOf: 1
   follower7:
     proposal: '@proposal1'
     user: '@user6'
     followedAt: <dateTimeBetween('-50 days', 'now')>
-    notifiedOf: 3 
+    notifiedOf: 2
   follower9:
     proposal: '@proposal1'
     user: '@user7'
     followedAt: <dateTimeBetween('-50 days', 'now')>
-    notifiedOf: 3 
+    notifiedOf: 2
   follower11:
      proposal: '@proposal1'
      user: '@user8'
@@ -53,12 +53,12 @@ Capco\AppBundle\Entity\Follower:
      proposal: '@proposal2'
      user: '@user2'
      followedAt: <dateTimeBetween('-50 days', 'now')>
-     notifiedOf: 3
+     notifiedOf: 1
   follower17:
      proposal: '@proposal2'
      user: '@user4'
      followedAt: <dateTimeBetween('-50 days', 'now')>
-     notifiedOf: 3
+     notifiedOf: 2
   follower18:
      proposal: '@proposal2'
      user: '@user6'
@@ -68,17 +68,17 @@ Capco\AppBundle\Entity\Follower:
      proposal: '@proposal2'
      user: '@user7'
      followedAt: <dateTimeBetween('-50 days', 'now')>
-     notifiedOf: 3
+     notifiedOf: 1
   follower20:
      proposal: '@proposal2'
      user: '@user8'
      followedAt: <dateTimeBetween('-50 days', 'now')>
-     notifiedOf: 3
+     notifiedOf: 1
   follower21:
      proposal: '@proposal2'
      user: '@user9'
      followedAt: <dateTimeBetween('-50 days', 'now')>
-     notifiedOf: 3
+     notifiedOf: 2
   follower22:
      proposal: '@proposal2'
      user: '@user10'
@@ -89,7 +89,7 @@ Capco\AppBundle\Entity\Follower:
      user: '@user11'
      followedAt: <dateTimeBetween('-50 days', 'now')>
      notifiedOf: 3
-  follower{24..200}:
+  follower{24..80}:
     proposal: '@proposal1'
     user: '@user<current()>'
     followedAt: <dateTimeBetween('-50 days', 'now')>
@@ -119,3 +119,8 @@ Capco\AppBundle\Entity\Follower:
     user: '@user5'
     followedAt: <dateTimeBetween('-50 days', 'now')>
     notifiedOf: 3
+  follower219:
+    proposal: '@proposal9'
+    user: '@user1'
+    followedAt: <dateTimeBetween('-50 days', 'now')>
+    notifiedOf: 1

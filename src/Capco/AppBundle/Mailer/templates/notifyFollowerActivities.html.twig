@@ -97,12 +97,6 @@
                                                 <span class="resp-punchline" style="color:#999999; outline:none; font-size:14px; text-decoration:bold; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">{{ 'admin.fields.source.opinion'|trans({}, 'CapcoAppBundle') }}</span>
                                                 <ul style="list-style: none; padding:0px">
                                                     <a href="{{ proposal.link }}"><h4 class="resp-punchline" style="color:#337ab7; outline:none; text-decoration:none; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">{{ proposal.title }}</h4></a>
-                                                    {% if proposal.isUpdated %}
-                                                        <li>Proposition mise à jour</li>
-                                                    {% endif %}
-                                                    {% if proposal.isDeleted %}
-                                                        <li>Proposition supprimée</li>
-                                                    {% endif %}
                                                     {% if proposal.votes > 0 %}
                                                         <li>🗳 {{ 'new-vote'| transchoice(proposal.votes, {'%num%':  proposal.votes}, 'CapcoAppBundle') }}</li>
                                                     {% endif %}
