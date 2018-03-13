@@ -619,7 +619,7 @@ type Mutation {
   changeProposalNotation(input: ChangeProposalNotationInput!): ChangeProposalNotationPayload
   changeProposalEvaluers(input: ChangeProposalEvaluersInput!): ChangeProposalEvaluersPayload
   followProposal(input: FollowProposalInput!): FollowProposalPayload
-  UpdateFollowProposal(input: UpdateFollowProposalInput!): UpdateFollowProposalPayload
+  updateFollowProposal(input: UpdateFollowProposalInput!): UpdateFollowProposalPayload
   unfollowProposal(input: UnfollowProposalInput!): UnfollowProposalPayload
   selectProposal(input: SelectProposalInput!): SelectProposalPayload
   unselectProposal(input: UnselectProposalInput!): UnselectProposalPayload

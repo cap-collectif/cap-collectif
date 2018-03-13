@@ -56,7 +56,7 @@ Scenario: Logged in user wants to change his password
   And I press "user.profile.edit.submit"
   Then I should see "change_password.flash.success" in the "#symfony-flash-messages" element
 
-@javascript @database @elasticsearch @dev
+@javascript @database @elasticsearch
 Scenario: Logged in user wants to manage his followings and unfollow all and stay unfollow after refresh
   Given I am logged in as user
   And I visited "manage followings page"
@@ -64,7 +64,7 @@ Scenario: Logged in user wants to manage his followings and unfollow all and sta
   And I click the "#unfollow-all" element
   Then I should see "no-following"
 
-@javascript @database @elasticsearch @dev
+@javascript @database @elasticsearch
 Scenario: Logged in user wants to manage his followings and unfollow the first project and stay unfollow after refresh
   Given I am logged in as user
   And I visited "manage followings page"
@@ -75,7 +75,7 @@ Scenario: Logged in user wants to manage his followings and unfollow the first p
   And I reload the page
   Then I should not see an "#profile-project-collapse-project6" element
 
-@javascript @database @elasticsearch @dev
+@javascript @database @elasticsearch
 Scenario: Logged in user wants to manage his followings and unfollow the first proposal and stay unfollow after refresh
   Given I am logged in as user
   And I visited "manage followings page"
@@ -86,7 +86,7 @@ Scenario: Logged in user wants to manage his followings and unfollow the first p
   And I reload the page
   Then I should not see an "#profile-proposal-unfollow-button-proposal1" element
 
-@javascript @database @elasticsearch @dev
+@javascript @database @elasticsearch
 Scenario: Logged in user wants to manage his followings and click on a proposal
   Given I am logged in as user
   And I visited "manage followings page"
@@ -94,10 +94,10 @@ Scenario: Logged in user wants to manage his followings and click on a proposal
   When I follow "Ravalement de la façade de la bibliothèque municipale"
   And I should be redirected to "/projects/budget-participatif-rennes/collect/collecte-des-propositions/proposals/ravalement-de-la-facade-de-la-bibliotheque-municipale"
 
-@javascript @database @elasticsearch @dev
+@javascript @database @elasticsearch
 Scenario: Logged in user wants to manage his followings and click on a project
   Given I am logged in as user
-#  And I visited "manage followings page"
+  And I visited "manage followings page"
   And I wait 2 seconds
   When I click the "#profile-project-link-project6" element
   Then I should be redirected to "/project/budget-participatif-rennes/collect/collecte-des-propositions"

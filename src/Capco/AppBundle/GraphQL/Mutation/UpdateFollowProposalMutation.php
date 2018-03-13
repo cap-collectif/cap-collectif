@@ -28,27 +28,27 @@ final class UpdateFollowProposalMutation
     /**
      * @throws UserError
      */
-    public function __invoke(string $proposalId, string $followerId, string $notifiedOf, User $user): array
+    public function __invoke(string $proposalId, string $notifiedOf, User $user): array
     {
-        /** @var Follower $follower */
-        $follower = $this->followerRepository->find($followerId);
         /** @var Proposal $proposal */
         $proposal = $this->proposalRepository->find($proposalId);
+
+        if (!$proposal) {
+            throw new UserError('Cant find the proposal');
+        }
+        if (!$user instanceof User) {
+            throw new UserError('User is different than user follower');
+        }
+
+        /** @var Follower $follower */
+        $follower = $this->followerRepository->findBy(['user' => $user, 'proposal' => $proposal]);
 
         if (!$follower) {
             throw new UserError('Cant find the follower');
         }
-        if (!$proposal) {
-            throw new UserError('Cant find the proposal');
-        }
+        $follower = $follower[0];
 
-        if ($proposalId !== $follower->getProposal()->getId()) {
-            throw new UserError('Cant find the proposal');
-        }
-        if ($user !== $follower->getUser()) {
-            throw new UserError('User is different than user follower');
-        }
-        if ($notifiedOf !== $follower->getNotifiedOf()) {
+        if ($notifiedOf) {
             $follower->setNotifiedOf($notifiedOf);
             $this->em->flush();
         }

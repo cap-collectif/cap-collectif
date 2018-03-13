@@ -11,6 +11,9 @@ Scenario: GraphQL client wants to follow a proposal with current user and check 
       followProposal(input: $input) {
         proposal {
           id
+          followerConfiguration{
+            notifiedOf
+          }
         }
       }
     }",
@@ -28,7 +31,10 @@ Scenario: GraphQL client wants to follow a proposal with current user and check 
     "data": {
       "followProposal": {
         "proposal": {
-          "id": "proposal8"
+          "id": "proposal8",
+          "followerConfiguration":{
+            "notifiedOf":"DEFAULT"
+          }
         }
       }
     }
