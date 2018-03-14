@@ -796,8 +796,7 @@ class UserRepository extends EntityRepository
     {
         $followerQuery = $this->getEntityManager()->getRepository('CapcoAppBundle:Follower');
         $followerQuery = $followerQuery->createQueryBuilder('f2')->select('f2.user');
-//        $qb = $this->getIsEnabledQueryBuilder()
-        $qb = $this->getIsEnabledQueryBuilder('u')
+        $qb = $this->getIsEnabledQueryBuilder()
             ->select('u, p, f1')
             ->join('u.followingProposals', 'f1')
             ->join('f1.proposal', 'p');

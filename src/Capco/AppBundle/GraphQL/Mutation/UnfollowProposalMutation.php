@@ -8,8 +8,8 @@ use Capco\AppBundle\Repository\FollowerRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Error\UserError;
 
 class UnfollowProposalMutation
 {
@@ -26,7 +26,8 @@ class UnfollowProposalMutation
 
     public function __invoke(Argument $args, User $user): array
     {
-        if(isset($args['proposalId'])) {
+        $proposal = '';
+        if (isset($args['proposalId'])) {
             /** @var Proposal $proposal */
             $proposal = $this->proposalRepository->find($args['proposalId']);
             $this->unfollowAProposal($proposal, $user);

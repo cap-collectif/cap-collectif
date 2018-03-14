@@ -14,7 +14,7 @@ trait TimestampableTrait
      */
     protected $createdAt;
 
-    public function setCreatedAt(\DateTime $createdAt):self
+    public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -28,36 +28,50 @@ trait TimestampableTrait
 
     public function setUpdatedAt(\DateTime $updatedAt): self
     {
-        $this->updatedAt = $updatedAt;
+        if (property_exists($this, 'updatedAt')) {
+            $this->updatedAt = $updatedAt;
+        }
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTime
+    public function getUpdatedAt()
     {
-        return $this->updatedAt;
+        if (property_exists($this, 'updatedAt')) {
+            return $this->updatedAt;
+        }
     }
 
     public function isCreatedInLastInterval(\DateTime $to, \DateInterval $interval): bool
     {
-        $diff = $this->createdAt->diff($to);
+        if (property_exists($this, 'updatedAt')) {
+            $diff = $this->createdAt->diff($to);
 
-        return $diff < $interval;
+            return $diff < $interval;
+        }
+
+        return false;
     }
 
     public function isUpdatedInLastInterval(\DateTime $to, \DateInterval $interval): bool
     {
-        $diff = $this->updatedAt->diff($to);
+        if (property_exists($this, 'updatedAt')) {
+            $diff = $this->updatedAt->diff($to);
 
-        return $diff < $interval;
+            return $diff < $interval;
+        }
+
+        return false;
     }
 
     public function isDeletedInLastInterval(\DateTime $to, \DateInterval $interval): bool
     {
-        if ($this->isDeleted() && isset($this->deletedAt)) {
-            $diff = $this->deletedAt->diff($to);
+        if (method_exists($this, 'isDeleted')) {
+            if ($this->isDeleted() && isset($this->deletedAt)) {
+                $diff = $this->deletedAt->diff($to);
 
-            return $diff < $interval;
+                return $diff < $interval;
+            }
         }
 
         return false;

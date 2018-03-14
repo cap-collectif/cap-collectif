@@ -27,7 +27,7 @@ trait VotableOkTrait
 
     public function userHasVote(User $user = null)
     {
-        if ($user !== null) {
+        if (null !== $user) {
             foreach ($this->votes as $vote) {
                 if ($vote->getUser() === $user) {
                     return true;
