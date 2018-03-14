@@ -38,7 +38,7 @@ export class ProposalFormAdminQuestions extends React.Component<Props, State> {
     const { dispatch, fields, questions } = this.props;
     const { editIndex } = this.state;
     return (
-      <div className="form-group" id="proposal_form_admin_questions_panel_personal">
+      <div className="form-group">
         <ListGroup>
           {fields.map((member, index) => (
             <ListGroupItem key={index}>

@@ -96,9 +96,7 @@ class ProposalSearch extends Search
         $boolFilter = !empty($filters) ? $this->getBoolFilter($filters) : null;
 
         if ($boolFilter) {
-            $query = new Query\Filtered($query, $boolFilter);
-            // TODO when upgrade version of elasticsearch use this line instead (Query\Filtered is deprecated)
-            // $query->addFilter($boolFilter);
+            $query->addFilter($boolFilter);
         }
 
         if ('random' === $order) {
