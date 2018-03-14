@@ -40,25 +40,35 @@ class ShieldListener
         $route = $request->get('_route');
 
         $availableRoutes = [
-          'capco_api_login_check',
-          'overblog_graphql_endpoint',
-          'overblog_graphql_graphiql',
-          'facebook_login',
-          'google_login',
-          'nelmio_api_doc_index',
-          'api_login_check',
-          'account_confirm_email',
-          'account_confirm_new_email',
-          'capco_app_api_users_postuser',
-          'hwi_oauth_service_redirect',
+          // Basics
           'app_get_api_token',
           'sonata_media_view',
+          'sonata_media_download',
+          '_wdt',
+
+          // Login
+          'capco_api_login_check',
+          'facebook_login',
+          'google_login',
+          'api_login_check',
+          'hwi_oauth_service_redirect',
+
+          // API documentation
+          'overblog_graphql_graphiql',
+          'nelmio_api_doc_index',
+
+          // Account confirmation
+          'account_confirm_email',
+          'account_confirm_new_email',
+
+          // Registration
+          'capco_app_api_users_postuser',
+
+          // Password reset
           'fos_user_resetting_request',
           'fos_user_resetting_reset',
           'fos_user_resetting_send_email',
           'fos_user_resetting_check_email',
-          'sonata_media_download',
-          '_wdt',
         ];
 
         if (in_array($route, $availableRoutes, true)) {
