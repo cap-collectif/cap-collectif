@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Behat\Traits;
 trait AdminTrait
 {
     use AdminProposalTrait;
+    use AdminProposalFormTrait;
 
     /**
      * @When I go to the admin proposals list page
@@ -70,5 +71,13 @@ trait AdminTrait
     public function iGoToTheAdminProposalPageWithId(string $proposalid)
     {
         $this->visitPageWithParams('admin proposal page', ['proposalid' => $proposalid]);
+    }
+
+    /**
+     * @When I go to the admin proposal form page with proposalformpageid :proposalformpageid
+     */
+    public function iGoToTheAdminProposalFormPageWithId(string $proposalformpageid)
+    {
+        $this->visitPageWithParams('admin proposal form page', ['proposalformpageid' => $proposalformpageid]);
     }
 }

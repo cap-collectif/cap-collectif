@@ -34,5 +34,5 @@ Scenario: Email should be sent if a message is sent to the proposal_update queue
   }
   """
   And I consume "proposal_update"
-  Then I open mail with subject "notification.email.proposal.update.subject"
-  And I should see "notification.email.proposal.update.body" in mail
+  Then I open mail with subject "notification.email.proposal.edit.subject"
+  And I should see "notification.email.proposal.edit.body" in mail

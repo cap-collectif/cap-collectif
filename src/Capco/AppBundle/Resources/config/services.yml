@@ -8,7 +8,6 @@ imports:
     - { resource: services/processors.yml }
     - { resource: services/search.yml }
     - { resource: services/utils.yml }
-    - { resource: services/makers.yml }
     - { resource: services/graphql_mutations.yml }
     - { resource: services/graphql_resolvers.yml }
     - { resource: services/notifiers.yml }
@@ -58,6 +57,19 @@ services:
     tags:
       - {name: doctrine.event_subscriber, event: loadClassMetadata}
     arguments: ["%traits%"]
+
+  ## Service Notify - send mail
+  capco.notify_manager:
+    class: Capco\AppBundle\Manager\Notify
+    arguments:
+      - "@mailer"
+      - "@templating"
+      - "@translator"
+      - "@capco.site_parameter.resolver"
+      - "@router"
+      - "@capco.url.resolver"
+      - "@validator"
+      - {confirmation.template: "%fos_user.registration.confirmation.template%", resetting.template: "%fos_user.resetting.email.template%", disable_delivery: "%disable_mail_delivery%"}
 
   capco.contribution.manager:
     class: Capco\AppBundle\Manager\ContributionManager
