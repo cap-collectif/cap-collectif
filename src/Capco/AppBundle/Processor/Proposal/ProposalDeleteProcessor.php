@@ -29,7 +29,12 @@ class ProposalDeleteProcessor implements ProcessorInterface
         }
         $proposal = $this->proposalRepository->find($json['proposalId']);
         $this->em->getFilters()->enable('softdeleted');
-        $this->notifier->onDelete($proposal);
+        if (
+            $proposal->getProposalForm()->getNotificationsConfiguration()
+            && $proposal->getProposalForm()->getNotificationsConfiguration()->isOnDelete()
+        ) {
+            $this->notifier->onDelete($proposal);
+        }
 
         return true;
     }

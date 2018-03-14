@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalAdminFollowers } from './ProposalAdminFollowers';
-import { relayPaginationMock } from '../../../mocks';
+import { intlMock } from '../../../mocks';
 
 describe('<ProposalAdminFollowers />', () => {
   // $FlowFixMe $refType
@@ -21,10 +21,7 @@ describe('<ProposalAdminFollowers />', () => {
     },
   };
   const props = {
-    className: '',
-    referer: 'http://capco.test',
-    oldProposal: {},
-    relay: relayPaginationMock,
+    intl: intlMock,
   };
 
   it('should render a proposal page follower with 3 users', () => {

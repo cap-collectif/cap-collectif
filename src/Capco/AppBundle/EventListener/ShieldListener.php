@@ -45,6 +45,7 @@ class ShieldListener
           'overblog_graphql_graphiql',
           'facebook_login',
           'google_login',
+          'nelmio_api_doc_index',
           'api_login_check',
           'account_confirm_email',
           'account_confirm_new_email',
@@ -64,7 +65,7 @@ class ShieldListener
             return;
         }
 
-        if (strpos($route, '_imagine') !== false) {
+        if (false !== strpos($route, '_imagine')) {
             return;
         }
 

@@ -12,6 +12,7 @@ use Capco\AppBundle\Entity\PostComment;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityNotFoundException;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Router;
 
 class CommentResolver
@@ -98,6 +99,12 @@ class CommentResolver
         $object = $this->getRelatedObject($comment);
 
         return $this->urlResolver->getAdminObjectUrl($object, $absolute);
+    }
+
+    public function getAdminUrl(Comment $comment, $absolute = false)
+    {
+        return $this->router->generate('admin_capco_app_comment_show', ['id' => $comment->getId()],
+            $absolute ? UrlGeneratorInterface::ABSOLUTE_URL : UrlGeneratorInterface::RELATIVE_PATH);
     }
 
     public function canShowCommentOn($object)
