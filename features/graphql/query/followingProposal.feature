@@ -1,4 +1,4 @@
-@proposal_follow
+@proposal_follow @proposal_follow_graphql
 Feature: Proposals
 
 @database
@@ -47,7 +47,7 @@ Scenario: GraphQL client wants to get list of proposals followed by the current 
   {
     "query": "query getFollowingProposal {
       viewer {
-        followingProposal {
+        followingProposals {
           id
         }
       }
@@ -59,7 +59,7 @@ Scenario: GraphQL client wants to get list of proposals followed by the current 
   {
     "data": {
       "viewer": {
-        "followingProposal": [
+        "followingProposals": [
           {
             "id": "proposal1"
           },
@@ -125,7 +125,7 @@ Scenario: I'm on a proposal and GraphQL want to know the total number of proposa
             "hasNextPage": true,
             "endCursor": @string@
           },
-          "totalCount": 186
+          "totalCount": 66
         }
       }
     }
@@ -185,7 +185,7 @@ Scenario: I'm on qqa proposal and I want to load 32 followers from a cursor
             "hasNextPage": true,
             "endCursor": @string@
           },
-          "totalCount": 186
+          "totalCount": 66
         }
       }
     }

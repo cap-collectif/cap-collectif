@@ -1,4 +1,4 @@
-@proposal_follow
+@proposal_follow @proposal_follow_graphql
 Feature: Unfollow Proposals
 
 @database
@@ -38,7 +38,7 @@ Scenario: GraphQL client wants to unfollow a proposal with current user and chec
   {
     "query": "query getFollowingProposal {
       viewer {
-        followingProposal {
+        followingProposals {
           id
         }
       }
@@ -50,7 +50,7 @@ Scenario: GraphQL client wants to unfollow a proposal with current user and chec
   {
     "data": {
       "viewer": {
-        "followingProposal": [
+        "followingProposals": [
           {
             "id": "proposal2"
           }
