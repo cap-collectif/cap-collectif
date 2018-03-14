@@ -255,7 +255,9 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
         defaultExpanded={false}
         expanded={true}
         header={
-          <div>
+          <div
+            id="proposal_form_admin_category_panel"
+          >
             <h4
               className="pull-left"
             >
@@ -279,6 +281,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
             />
           </div>
         }
+        id="proposal_form_admin_category_panel_body"
       >
         <Field
           component={[Function]}
@@ -326,7 +329,9 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
         defaultExpanded={false}
         expanded={true}
         header={
-          <div>
+          <div
+            id="address"
+          >
             <h4
               className="pull-left"
             >
@@ -350,6 +355,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
             />
           </div>
         }
+        id="address-body"
       >
         <Field
           component={[Function]}
@@ -601,6 +607,7 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
           bsClass="btn"
           bsStyle="primary"
           disabled={true}
+          id="proposal-form-admin-content-save"
           type="submit"
         >
           <FormattedMessage

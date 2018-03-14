@@ -26,7 +26,7 @@ class EventRegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if ($this->registered) {
-            $builder->add('submit', SubmitType::class, [
+            $builder->add('submit', 'submit', [
               'label' => 'event_registration.unsubscribe',
               'attr' => ['class' => 'btn  btn-danger  btn-block'],
             ]);
@@ -34,7 +34,7 @@ class EventRegistrationType extends AbstractType
             return;
         }
 
-        if (null !== $this->user) {
+        if ($this->user !== null) {
             $builder
               ->add('private', null, [
                   'required' => false,
