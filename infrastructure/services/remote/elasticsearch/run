@@ -1,3 +1,5 @@
 #!/bin/bash
 
+chown -R capco:capco /etc/elasticsearch/config
+
 exec su capco -c "/etc/elasticsearch/bin/elasticsearch"
