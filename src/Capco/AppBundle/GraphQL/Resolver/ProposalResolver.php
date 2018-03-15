@@ -198,11 +198,4 @@ class ProposalResolver implements ContainerAwareInterface
 
         return null !== $evalForm && (!$evalForm->isFullyPrivate() || $this->resolveViewerIsEvaluer($proposal, $user));
     }
-
-    public function resolveHasEvaluation(Proposal $proposal): bool
-    {
-        $evalForm = $proposal->getProposalForm()->getEvaluationForm();
-
-        return null !== $evalForm && !$evalForm->isFullyPrivate();
-    }
 }
