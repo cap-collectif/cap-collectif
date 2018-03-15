@@ -557,6 +557,7 @@ trait ProposalStepsTrait
     public function theProposalTitleShouldHaveChanged()
     {
         $this->assertPageNotContainsText('Rénovation du gymnase');
+        $this->iWait(1);
         $this->assertPageContainsText('Nouveau titre');
     }
 

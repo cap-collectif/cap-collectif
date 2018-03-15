@@ -1,0 +1,54 @@
+{% block body_text %}
+    {% autoescape false %}
+    <p>
+        {{ 'reply.acknowledgement.hello'|trans({
+            '%username%' : reply.author.username
+        }, 'CapcoAppBundle') }}
+    </p>
+    <p>
+        {{ 'reply.acknowledgement.thx'|trans({
+            '%projectname%': project.title
+        }, 'CapcoAppBundle') }}
+    </p>
+    <p>
+        {{ 'reply.acknowledgement.replies'|trans({}, 'CapcoAppBundle') }}
+    </p>
+    {% for response in reply.responses %}
+        <p>
+            <strong>{{ response.question.title }}</strong><br>
+            {% if response.value is null or (response.value is iterable and response.value | length == 0) %}
+                <span>{{ 'reply.acknowledgement.no_value'|trans({}, 'CapcoAppBundle') }}</span>
+            {% elseif response.question.type == 'editor' %}
+                <span>{{ response.value | raw }}</span>
+            {% elseif response.question.type == 'ranking' %}
+                {% if response.value.labels | length > 0 %}
+                    <ol>
+                        {% for label in response.value.labels %}
+                            <li>{{ label }}</li>
+                        {% endfor %}
+                    </ol>
+                {% else %}
+                    <span>{{ 'reply.acknowledgement.no_value'|trans({}, 'CapcoAppBundle') }}</span>
+                {% endif %}
+            {% elseif response.value is iterable %}
+                {% set labels = response.value.labels %}
+                {% if response.value.other is defined and response.value.other is not null %}
+                    {% set labels = labels | merge([response.value.other]) %}
+                {% endif %}
+                {% if labels | length > 0 %}
+                    <span>{{ labels | join(', ') }}</span>
+                {% else %}
+                    <span>{{ 'reply.acknowledgement.no_value'|trans({}, 'CapcoAppBundle') }}</span>
+                {% endif %}
+            {% else %}
+                <span>{{ response.value }}</span>
+            {% endif %}
+        </p>
+    {% endfor %}
+    <p>
+        {{ 'reply.acknowledgement.done'|trans({}, 'CapcoAppBundle') }}
+    </p>
+    <hr/>
+    {% endautoescape %}
+{% endblock %}
+{% block body_html %}{% endblock %}

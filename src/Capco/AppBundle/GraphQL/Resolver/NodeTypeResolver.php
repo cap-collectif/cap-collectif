@@ -13,6 +13,14 @@ use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Source;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\OtherStep;
+use Capco\AppBundle\Entity\Steps\PresentationStep;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Entity\Steps\RankingStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Resolver\TypeResolver;
@@ -65,6 +73,31 @@ class NodeTypeResolver implements ResolverInterface
 
         if ($node instanceof Group) {
             return $this->typeResolver->resolve('Group');
+        }
+
+        if ($node instanceof SelectionStep) {
+            return $this->typeResolver->resolve('SelectionStep');
+        }
+        if ($node instanceof CollectStep) {
+            return $this->typeResolver->resolve('CollectStep');
+        }
+        if ($node instanceof PresentationStep) {
+            return $this->typeResolver->resolve('PresentationStep');
+        }
+        if ($node instanceof QuestionnaireStep) {
+            return $this->typeResolver->resolve('QuestionnaireStep');
+        }
+        if ($node instanceof ConsultationStep) {
+            return $this->typeResolver->resolve('Consultation');
+        }
+        if ($node instanceof OtherStep) {
+            return $this->typeResolver->resolve('OtherStep');
+        }
+        if ($node instanceof SynthesisStep) {
+            return $this->typeResolver->resolve('SynthesisStep');
+        }
+        if ($node instanceof RankingStep) {
+            return $this->typeResolver->resolve('RankingStep');
         }
 
         throw new UserError('Could not resolve type of Node.');

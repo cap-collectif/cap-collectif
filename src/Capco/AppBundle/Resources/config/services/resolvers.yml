@@ -99,6 +99,7 @@ services:
     class: Capco\AppBundle\Resolver\Project\ProjectSerializer
     arguments: ['@jms_serializer.serializer']
 
+
   capco.project.json.serializer:
     class: Capco\AppBundle\Resolver\Project\JsonProjectSerializer
     arguments: ['@capco.project.serializer']

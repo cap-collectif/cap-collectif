@@ -11,6 +11,7 @@ abstract class BaseNotifier
     protected $mailer;
     protected $siteParams;
     protected $userResolver;
+    protected $message;
 
     public function __construct(MailerService $mailer, Resolver $siteParams, UserResolver $userResolver)
     {
