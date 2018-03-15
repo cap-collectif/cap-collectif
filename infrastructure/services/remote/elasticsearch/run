@@ -1,5 +1,3 @@
 #!/bin/bash
 
-su - capco
-
-exec /etc/elasticsearch/bin/elasticsearch
+exec su capco -c "/etc/elasticsearch/bin/elasticsearch"
