@@ -125,7 +125,11 @@ export class ProposalFormAdminEvaluationForm extends React.Component<Props> {
             }}
           />
           <ButtonToolbar style={{ marginBottom: 10 }}>
-            <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
+            <Button
+              disabled={invalid || pristine || submitting}
+              id="evaluation-submit"
+              type="submit"
+              bsStyle="primary">
               <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
             </Button>
             <Button bsStyle="danger" disabled>

@@ -112,7 +112,7 @@ class RecentContributionsController extends Controller
             $contribution->setTrashedReason($motives);
             $contribution->setTrashedAt(new \DateTime());
             $em->flush();
-            $this->get('capco.notify_manager')->notifyModeration($contribution);
+            $this->get('capco.contribution_notifier')->onModeration($contribution);
 
             $this->addFlash(
                 'sonata_flash_success',
@@ -159,7 +159,7 @@ class RecentContributionsController extends Controller
             $contribution->setTrashedReason($motives);
             $contribution->setTrashedAt(new \DateTime());
             $em->flush();
-            $this->get('capco.notify_manager')->notifyModeration($contribution);
+            $this->get('capco.contribution_notifier')->onModeration($contribution);
 
             $this->addFlash(
                 'sonata_flash_success',

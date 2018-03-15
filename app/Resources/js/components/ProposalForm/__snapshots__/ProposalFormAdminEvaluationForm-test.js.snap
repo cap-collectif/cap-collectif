@@ -105,6 +105,7 @@ exports[`<ProposalFormAdminEvaluationForm /> render correctly 1`] = `
         bsClass="btn"
         bsStyle="primary"
         disabled={true}
+        id="evaluation-submit"
         type="submit"
       >
         <FormattedMessage

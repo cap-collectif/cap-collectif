@@ -71,7 +71,7 @@ class CollectPage extends Page
         $this->getElement('proposal form submit button')->click();
     }
 
-    /* protected function verifyUrl(array $urlParameters = [])
+    protected function verifyUrl(array $urlParameters = [])
     {
         $expectedUrl = $this->getUrl($urlParameters);
         $currentUrl = $this->getSession()->getCurrentUrl();
@@ -87,5 +87,5 @@ class CollectPage extends Page
                 ));
             }
         }
-    } */
+    }
 }

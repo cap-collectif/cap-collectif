@@ -92,6 +92,7 @@ export class ProposalFormAdminSettingsForm extends Component<Props> {
                   children={<FormattedMessage id="proposal_form.commentable" />}
                   component={component}
                   type="checkbox"
+                  id="proposal_form_commentable"
                 />
               </div>
             )}
@@ -100,9 +101,14 @@ export class ProposalFormAdminSettingsForm extends Component<Props> {
               children={<FormattedMessage id="proposal_form.admin.settings.costable" />}
               component={component}
               type="checkbox"
+              id="proposal_form_costable"
             />
             <ButtonToolbar className="box-content__toolbar">
-              <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
+              <Button
+                disabled={invalid || pristine || submitting}
+                id="parameters-submit"
+                type="submit"
+                bsStyle="primary">
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
               </Button>
               <Button bsStyle="danger" disabled>

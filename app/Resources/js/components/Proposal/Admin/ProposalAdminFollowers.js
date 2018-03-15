@@ -1,18 +1,19 @@
 // @flow
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { MenuItem, DropdownButton } from 'react-bootstrap';
 import type { ProposalAdminFollowers_proposal } from './__generated__/ProposalAdminFollowers_proposal.graphql';
 import ProposalPageFollowers from '../Page/ProposalPageFollowers';
 
 type Props = {
   proposal: ProposalAdminFollowers_proposal,
+  intl: IntlShape,
 };
 
 export class ProposalAdminFollowers extends React.Component<Props> {
   render() {
-    const { proposal } = this.props;
+    const { proposal, intl } = this.props;
     const totalCount = proposal.followerConnection.totalCount;
     const isAdmin = true;
     return (
@@ -28,7 +29,7 @@ export class ProposalAdminFollowers extends React.Component<Props> {
             className="pull-right link"
             target="_blank"
             rel="noopener noreferrer"
-            href="https://aide.cap-collectif.com/article/143-suivre-une-proposition">
+            href={intl.formatMessage({ id: 'admin.help.link.proposal.subscribers' })}>
             <i className="fa fa-info-circle" /> <FormattedMessage id="global.help" />
           </a>
         </div>
@@ -84,8 +85,10 @@ export class ProposalAdminFollowers extends React.Component<Props> {
   }
 }
 
+const container = injectIntl(ProposalAdminFollowers);
+
 export default createFragmentContainer(
-  ProposalAdminFollowers,
+  container,
   graphql`
     fragment ProposalAdminFollowers_proposal on Proposal {
       ...ProposalPageFollowers_proposal

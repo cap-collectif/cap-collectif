@@ -114,7 +114,7 @@ class SelectionPage extends Page
         $this->getVoteButton($id)->mouseOver();
     }
 
-    /* protected function verifyUrl(array $urlParameters = [])
+    protected function verifyUrl(array $urlParameters = [])
     {
         $expectedUrl = $this->getUrl($urlParameters);
         $currentUrl = $this->getSession()->getCurrentUrl();
@@ -130,5 +130,5 @@ class SelectionPage extends Page
                 ));
             }
         }
-    } */
+    }
 }
