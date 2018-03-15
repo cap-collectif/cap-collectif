@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Processor\Comment;
 
-use Capco\AppBundle\Notifier\CommentNotifier;
+use Capco\AppBundle\Manager\Notify;
 use Capco\AppBundle\Repository\CommentRepository;
 use Swarrot\Broker\Message;
 use Swarrot\Processor\ProcessorInterface;
@@ -12,7 +12,7 @@ class CommentUpdateProcessor implements ProcessorInterface
     private $commentRepository;
     private $notifier;
 
-    public function __construct(CommentRepository $commentRepository, CommentNotifier $notifier)
+    public function __construct(CommentRepository $commentRepository, Notify $notifier)
     {
         $this->commentRepository = $commentRepository;
         $this->notifier = $notifier;
@@ -21,13 +21,8 @@ class CommentUpdateProcessor implements ProcessorInterface
     public function process(Message $message, array $options)
     {
         $json = json_decode($message->getBody(), true);
-        $id = $json['commentId'];
-        $comment = $this->commentRepository->find($id);
-        if (!$comment) {
-            throw new \RuntimeException('Unable to find comment with id : ' . $id);
-        }
-
-        $this->notifier->onUpdate($comment);
+        $comment = $this->commentRepository->find($json['commentId']);
+        $this->notifier->notifyProposalComment($comment, 'update');
 
         return true;
     }

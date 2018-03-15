@@ -346,7 +346,7 @@ class IdeasController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $em->persist($report);
         $em->flush();
-        $this->get('capco.report_notifier')->onCreate($report);
+        $this->get('capco.notify_manager')->sendNotifyMessage($report);
 
         return $report;
     }

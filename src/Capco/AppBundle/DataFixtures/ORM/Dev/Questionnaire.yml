@@ -1,6 +1,6 @@
 Capco\AppBundle\Entity\Questionnaire:
   questionnaire1:
-    id: questionnaire1
+    id: 1
     title: Votre avis sur les JO 2024 à Paris
     description: <p><text(100)></p>
     step: '@questionnairestep1'
@@ -8,22 +8,22 @@ Capco\AppBundle\Entity\Questionnaire:
     anonymousAllowed: true
     acknowledgeReplies: true
   questionnaire2:
-    id: questionnaire2
+    id: 2
     title: Questionnaire de test
     description: <p><text(100)></p>
     step: '@questionnairestep2'
     multipleRepliesAllowed: false
   questionnaire3:
-    id: questionnaire3
+    id: 3
     title: Questionnaire dans une étape fermée
     description: <p><text(100)></p>
     step: '@questionnairestep3'
     multipleRepliesAllowed: true
   questionnaire4:
-    id: questionnaire4
+    id: 4
     title: Questionnaire pour budget participatif
     description: <p><text(100)></p>
   questionnaire5:
-    id: questionnaire5
+    id: 5
     title: Questionnaire pour budget participatif disponible
     description: <p><text(100)></p>
