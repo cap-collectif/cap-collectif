@@ -21,7 +21,7 @@ exports[`<ProposalAdminFollowers /> should render a proposal page follower with 
     </h3>
     <a
       className="pull-right link"
-      href="https://aide.cap-collectif.com/article/143-suivre-une-proposition"
+      href="admin.help.link.proposal.subscribers"
       rel="noopener noreferrer"
       target="_blank"
     >
@@ -139,7 +139,7 @@ exports[`<ProposalAdminFollowers /> should render a proposal page follower witho
     </h3>
     <a
       className="pull-right link"
-      href="https://aide.cap-collectif.com/article/143-suivre-une-proposition"
+      href="admin.help.link.proposal.subscribers"
       rel="noopener noreferrer"
       target="_blank"
     >

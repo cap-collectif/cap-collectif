@@ -24,6 +24,11 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Questions\AbstractQuestion']
 
+  capco.questionnaire_abstract_question.repository:
+    class: Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:Questions\QuestionnaireAbstractQuestion']
+
   capco.blog.post.repository:
     class: Capco\AppBundle\Repository\PostRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]

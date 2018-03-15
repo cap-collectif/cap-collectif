@@ -207,9 +207,10 @@ Scenario: Admin API client can register an other admin
     "_links": @...@
   }
   """
+  And I wait 2 seconds
   And 1 mail should be sent
-  And I open mail with subject "Votre inscription sur Cap-Collectif"
-  Then I should see "Accéder à votre compte administrateur" in mail
+  And I open mail with subject 'email-subject-confirm-admin-account {"{sitename}":"Cap-Collectif"}'
+  Then I should see 'email-content-confirm-admin-account' in mail
 
 @security
 Scenario: API client wants to update his phone

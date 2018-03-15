@@ -15,7 +15,7 @@ class ConsultationPage extends Page
      */
     protected $path = '/project/{projectSlug}/consultation/{stepSlug}';
 
-    /* protected function verifyUrl(array $urlParameters = [])
+    protected function verifyUrl(array $urlParameters = [])
     {
         $expectedUrl = $this->getUrl($urlParameters);
         $currentUrl = $this->getSession()->getCurrentUrl();
@@ -31,5 +31,5 @@ class ConsultationPage extends Page
                 ));
             }
         }
-    } */
+    }
 }

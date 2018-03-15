@@ -67,12 +67,12 @@ class CreateAnswersFromCsvCommand extends ContainerAwareCommand
             ;
 
             $object = null;
-            if ($type === 'opinion') {
+            if ('opinion' === $type) {
                 $object = $em
                     ->getRepository('CapcoAppBundle:Opinion')
                     ->findOneBy(['slug' => $slug])
                 ;
-            } elseif ($type === 'version') {
+            } elseif ('version' === $type) {
                 $object = $em
                     ->getRepository('CapcoAppBundle:OpinionVersion')
                     ->findOneBy(['slug' => $slug])
@@ -109,8 +109,6 @@ class CreateAnswersFromCsvCommand extends ContainerAwareCommand
         }
 
         $dump .= '</ul>';
-
-        $this->getContainer()->get('capco.notify_manager')->sendEmail('maxime@cap-collectif.com', 'swag@tonsite.com', 'Karamazov', '&#128169;', 'Nouvelle réponse au gouvernement');
 
         (new Filesystem())->dumpFile('answers_list.html', $dump);
 
