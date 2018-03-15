@@ -14,7 +14,6 @@ class AdminMessage extends Message
         return [
             '%to%' => $this->getRecipient(0) ? self::escape($this->getRecipient(0)->getEmailAddress()) : '',
             '%sitename%' => $this->getSitename(),
-            '%siteUrl%' => $this->getSiteUrl(),
         ];
     }
 }
