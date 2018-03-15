@@ -80,9 +80,9 @@ export class ProposalPreview extends React.Component<Props> {
                     // eslint-disable-next-line react/prop-types
                     if (props.proposal) {
                       return (
-                        <span>
+                        <div>
                           <ProposalFollowButton proposal={props.proposal} />
-                        </span>
+                        </div>
                       );
                     }
                     return graphqlError;

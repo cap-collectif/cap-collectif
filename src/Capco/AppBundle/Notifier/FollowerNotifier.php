@@ -14,8 +14,6 @@ final class FollowerNotifier extends BaseNotifier
 {
     protected $urlResolver;
     protected $logger;
-    protected static $proposalActivities;
-    protected static $projectsInfos;
 
     public function __construct(MailerService $mailer, Resolver $siteParams, UserResolver $userResolver, UrlResolver $urlResolver, LoggerInterface $logger)
     {

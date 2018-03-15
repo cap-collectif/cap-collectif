@@ -39,6 +39,20 @@ export class ProposalFollowButton extends React.Component<Props, State> {
       });
     }
   }
+  changeFollowType(proposal: ProposalFollowButton_proposal, type: string) {
+    if (
+      proposal.viewerIsFollowing &&
+      proposal.followerConfiguration !== null &&
+      typeof proposal.followerConfiguration !== 'undefined'
+    ) {
+      return UpdateFollowProposalMutation.commit({
+        input: {
+          proposalId: proposal.id,
+          notifiedOf: type,
+        },
+      });
+    }
+  }
 
   render() {
     const { proposal } = this.props;
@@ -104,7 +118,6 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                           <Radio
                             id={`proposal-follow-btn-default-${proposal.id}`}
                             name="default"
-                            title="default"
                             className="proposal__follow__advancement"
                             checked={
                               proposal.followerConfiguration.notifiedOf === 'DEFAULT'
@@ -113,18 +126,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                             }
                             inline
                             onClick={() => {
-                              if (
-                                proposal.viewerIsFollowing &&
-                                proposal.followerConfiguration !== null &&
-                                typeof proposal.followerConfiguration !== 'undefined'
-                              ) {
-                                return UpdateFollowProposalMutation.commit({
-                                  input: {
-                                    proposalId: proposal.id,
-                                    notifiedOf: 'DEFAULT',
-                                  },
-                                });
-                              }
+                              return this.changeFollowType(proposal, 'DEFAULT');
                             }}>
                             <b>
                               <FormattedMessage id="the-progress" />
@@ -143,20 +145,8 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                                 ? 'checked'
                                 : ''
                             }
-                            title="default_and_comments"
                             onClick={() => {
-                              if (
-                                proposal.viewerIsFollowing &&
-                                proposal.followerConfiguration !== null &&
-                                typeof proposal.followerConfiguration !== 'undefined'
-                              ) {
-                                return UpdateFollowProposalMutation.commit({
-                                  input: {
-                                    proposalId: proposal.id,
-                                    notifiedOf: 'DEFAULT_AND_COMMENTS',
-                                  },
-                                });
-                              }
+                              return this.changeFollowType(proposal, 'DEFAULT_AND_COMMENTS');
                             }}>
                             <b>
                               <FormattedMessage id="progress-and-comments" />
@@ -166,25 +156,13 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                         <ListGroupItem className="">
                           <Radio
                             name="all"
-                            title="all"
                             id={`proposal-follow-btn-all-${proposal.id}`}
                             className="proposal__follow__all"
                             checked={
                               proposal.followerConfiguration.notifiedOf === 'ALL' ? 'checked' : ''
                             }
                             onClick={() => {
-                              if (
-                                proposal.viewerIsFollowing &&
-                                proposal.followerConfiguration !== null &&
-                                typeof proposal.followerConfiguration !== 'undefined'
-                              ) {
-                                return UpdateFollowProposalMutation.commit({
-                                  input: {
-                                    proposalId: proposal.id,
-                                    notifiedOf: 'ALL',
-                                  },
-                                });
-                              }
+                              return this.changeFollowType(proposal, 'ALL');
                             }}>
                             <b>
                               <FormattedMessage id="all-activities" />
@@ -199,7 +177,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                 </Panel>
                 <MenuItem
                   eventKey="1"
-                  className="mt--1 proposal__unfollow"
+                  className="proposal__unfollow"
                   id={`proposal-unfollow-btn-${proposal.id}`}
                   onClick={() => {
                     if (proposal.viewerIsFollowing) {
@@ -209,7 +187,6 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                         this.setState({
                           isJustFollowed: false,
                         });
-                        return true;
                       });
                     }
                   }}>

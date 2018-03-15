@@ -26,9 +26,9 @@ class ViewerFollowerProposalResolver implements ResolverInterface
         }
 
         try {
-            $follower = $this->followerRepository->findBy(['proposal' => $proposal, 'user' => $viewer]);
-            if ($follower && isset($follower[0])) {
-                return $follower[0];
+            $follower = $this->followerRepository->findOneBy(['proposal' => $proposal, 'user' => $viewer]);
+            if ($follower && isset($follower)) {
+                return $follower;
             }
 
             return null;

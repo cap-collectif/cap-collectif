@@ -42,7 +42,7 @@ class Follower
      */
     protected $proposal;
 
-    /** @ORM\Column(name="notified_of", type="string", nullable=true) */
+    /** @ORM\Column(name="notified_of", type="string", nullable=false) */
     protected $notifiedOf;
 
     public function getFollowedAt(): \DateTime

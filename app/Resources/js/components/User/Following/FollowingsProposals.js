@@ -17,13 +17,9 @@ type State = {
 };
 
 export class FollowingsProposals extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      open: true,
-    };
-  }
+  state = {
+    open: true,
+  };
 
   onUnfollowAll() {
     const { viewer } = this.props;
@@ -32,9 +28,7 @@ export class FollowingsProposals extends Component<Props, State> {
     });
 
     this.setState({ open: !this.state.open }, () => {
-      UnfollowProposalMutation.commit({ input: { ids } }).then(() => {
-        return true;
-      });
+      UnfollowProposalMutation.commit({ input: { ids } });
     });
   }
 
@@ -50,7 +44,11 @@ export class FollowingsProposals extends Component<Props, State> {
           <FormattedMessage id="followings" />
           {Object.keys(projectsById).length > 0 ? (
             <Collapse style={{ float: 'right' }} in={this.state.open}>
-              <Button id="unfollow-all" onClick={this.onUnfollowAll.bind(this)}>
+              <Button
+                id="unfollow-all"
+                onClick={() => {
+                  this.onUnfollowAll();
+                }}>
                 <FormattedMessage id="unfollow-all" />
               </Button>
             </Collapse>

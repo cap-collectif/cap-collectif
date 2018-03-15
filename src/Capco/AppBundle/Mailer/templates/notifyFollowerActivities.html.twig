@@ -20,9 +20,8 @@
             border-collapse: collapse;
         }
         .b-lrb {
-            border-left: 0.5px solid #d9d9d9;
-            border-right: 0.5px solid #d9d9d9;
-            border-bottom: 0.5px solid #d9d9d9;
+            border:0.5px solid #d9d9d9;
+            border-top: 0;
             border-collapse: collapse;
         }
         /* Début style responsive (via media queries) */
@@ -40,7 +39,7 @@
     </style>
 </head>
 <body>
-<div align="center" style="">
+<div align="center">
     {% set activitiesDate =  sendAt|localizeddate('long', 'none', 'fr_FR', timezone)  %}
     <table id="email-penrose-conteneur" width="660" align="center" style="margin: 20px; background-color:#ffffff;" border="0" cellspacing="0" cellpadding="0">
         <tr>
@@ -51,7 +50,7 @@
                             <a class="resp-punchline" href="#" style="color:#337ab7; outline:none; text-decoration:none; font-size:20px; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">{{ siteName }}</a>
                             <h1 class="resp-punchline" style="color:#000000; outline:none; text-decoration:none; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">  {{ 'summary-of-activities'|trans({},'CapcoAppBundle') }}</h1>
                             <span class="resp-punchline" style="color:#999999; outline:none; font-size:12px; text-decoration:none; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">
-								{{ activitiesDate }}
+                                {{ activitiesDate }}
 							</span>
                         </td>
                     </tr>

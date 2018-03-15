@@ -7,9 +7,10 @@ import { Button, Collapse, Panel, ListGroup } from 'react-bootstrap';
 import UnfollowProposalMutation from '../../../mutations/UnfollowProposalMutation';
 import type FollowingsProposals_viewer from './__generated__/FollowingsProposals_viewer.graphql';
 import ProposalRow from './ProposalRow';
+import type { Uuid } from '../../../types';
 
 type Props = {
-  project: Object,
+  project: { id: Uuid, url: string, title: string },
   viewer: FollowingsProposals_viewer,
 };
 

@@ -15,7 +15,7 @@ const query = graphql`
   }
 `;
 
-type Props = Object;
+type Props = {};
 
 export class FollowingsBox extends Component<Props> {
   render() {

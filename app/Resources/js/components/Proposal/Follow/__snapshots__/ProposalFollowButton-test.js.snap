@@ -113,7 +113,7 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
                     inline={true}
                     name="default"
                     onClick={[Function]}
-                    title="default"
+                    title=""
                   >
                     <b>
                       <FormattedMessage
@@ -143,7 +143,7 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
                     inline={false}
                     name="default_and_comments"
                     onClick={[Function]}
-                    title="default_and_comments"
+                    title=""
                   >
                     <b>
                       <FormattedMessage
@@ -167,7 +167,7 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
                     inline={false}
                     name="all"
                     onClick={[Function]}
-                    title="all"
+                    title=""
                   >
                     <b>
                       <FormattedMessage
@@ -188,7 +188,7 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
         </Panel>
         <MenuItem
           bsClass="dropdown"
-          className="mt--1 proposal__unfollow"
+          className="proposal__unfollow"
           disabled={false}
           divider={false}
           eventKey="1"
