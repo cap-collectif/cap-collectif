@@ -33,7 +33,7 @@ class GlobalSearch extends Search
         $this->transformer = $transformer;
     }
 
-    public function search($page, $terms, $sortField, $sortOrder): array
+    public function search($page, $terms, $sortField, $sortOrder, $type = 'all'): array
     {
         $boolQuery = new Query\BoolQuery();
         $boolQuery = $this->searchTermsInMultipleFields($boolQuery, self::SEARCH_FIELDS, $terms, 'phrase_prefix');
@@ -48,7 +48,12 @@ class GlobalSearch extends Search
         $query->setFrom($from);
         $query->setSize($pagination);
 
-        $resultSet = $this->index->search($query);
+        if ('all' === $type) {
+            $resultSet = $this->index->search($query);
+        } else {
+            $resultSet = $this->index->getType($type)->search($query);
+        }
+
         $count = $resultSet->getTotalHits();
 
         $results = $this->transformer->hybridTransform($resultSet->getResults());

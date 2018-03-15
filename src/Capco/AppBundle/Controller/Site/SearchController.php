@@ -43,7 +43,8 @@ class SearchController extends Controller
             $page,
             $searchParams['term'],
             $sortField,
-            $sortOrder
+            $sortOrder,
+            $searchParams['type']
         );
 
         return [
