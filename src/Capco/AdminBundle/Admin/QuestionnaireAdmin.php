@@ -20,6 +20,17 @@ class QuestionnaireAdmin extends Admin
         'cascade_validation' => true,
     ];
 
+    public function preUpdate($object)
+    {
+        // We must make sure a question position by questionnaire is unique
+        $questionRepo = $this->getConfigurationPool()->getContainer()->get('capco.questionnaire_abstract_question.repository');
+        $delta = $questionRepo->getCurrentMaxPositionForQuestionnaire($object->getId());
+
+        foreach ($object->getQuestions() as $question) {
+            $question->setPosition($question->getPosition() + $delta);
+        }
+    }
+
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {

@@ -10,23 +10,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateUserAccountsFromCSVCommand extends ContainerAwareCommand
 {
-    public function sendEmail($user, $confirmationUrl)
-    {
-        $container = $this->getContainer();
-        $resolver = $container->get('capco.site_parameter.resolver');
-        $to = $user->getEmail();
-        $fromAddress = $resolver->getValue('admin.mail.notifications.send_address');
-        $fromName = $resolver->getValue('admin.mail.notifications.send_name');
-        $templating = $container->get('templating');
-        $subject = 'Votre compte';
-
-        $body = $templating->render('CapcoAppBundle:Mail:confirmUserAccountByCreatingPassword.html.twig', [
-      'user' => $user,
-      'confirmationUrl' => $confirmationUrl,
-    ]);
-        $container->get('capco.notify_manager')->sendEmail($to, $fromAddress, $fromName, $body, $subject);
-    }
-
     protected function configure()
     {
         $this
@@ -70,7 +53,7 @@ class CreateUserAccountsFromCSVCommand extends ContainerAwareCommand
                   'token' => $user->getConfirmationToken(),
                 ], true);
                 if ($sendEmail) {
-                    $this->sendEmail($user, $confirmationUrl);
+                    $this->getContainer()->get('capco.user_notifier')->emailConfirmation($user);
                 }
                 $writer->insertOne([$user->getEmail(), $confirmationUrl]);
                 ++$createdCount;

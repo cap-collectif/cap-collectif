@@ -582,8 +582,9 @@ class ApplicationContext extends UserContext
         try {
             $swarrot = $this->getContainer()->get('swarrot.factory.default');
             foreach ($this->queues as $queue) {
-                $q = $swarrot->getQueue($queue, 'rabbitmq');
-                $q->purge();
+                if ($q = $swarrot->getQueue($queue, 'rabbitmq')) {
+                    $q->purge();
+                }
             }
         } catch (\Exception $exception) {
             echo $exception->getMessage();

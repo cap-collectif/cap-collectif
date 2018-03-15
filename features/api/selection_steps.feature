@@ -244,8 +244,8 @@ Scenario: Admin API client wants to update proposal status
   Then the JSON response status code should be 204
   And selection "selectionstep1" "proposal3" should have status "status1"
   And 1 mail should be sent
-  And I open mail with subject 'proposal_status_change_selection.notification.subject {"%sitename%":"Cap-Collectif"}'
-  Then I should see 'proposal_status_change_selection.notification.body {"%sitename%":"Cap-Collectif","%project%":"Budget Participatif Rennes","%proposal%":"Installation de bancs sur la place de la mairie","%step%":"S\u00e9lection","%status%":"En cours","%proposal_link%":"http:\/\/capco.test\/projects\/budget-participatif-rennes\/collect\/collecte-des-propositions\/proposals\/installation-de-bancs-sur-la-place-de-la-mairie","%user%":"welcomattic"}' in mail
+  And I open mail with subject 'proposal_status_change_selection.notification.subject'
+  Then I should see 'proposal_status_change_selection.notification.body {"%project%":"Budget Participatif Rennes","%proposal%":"Installation de bancs sur la place de la mairie","%step%":"S\u00e9lection","%status%":"En cours","%proposal_link%":"http:\/\/capco.test\/projects\/budget-participatif-rennes\/collect\/collecte-des-propositions\/proposals\/installation-de-bancs-sur-la-place-de-la-mairie","%user%":"welcomattic"}' in mail
   When I send a PATCH request to "/api/selection_steps/selectionstep1/selections/proposal3" with json:
   """
   {

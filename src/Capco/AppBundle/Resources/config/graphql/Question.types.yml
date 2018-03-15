@@ -10,6 +10,7 @@ Question:
             type:
                 type: "QuestionTypeValue!"
                 resolve: "@=resolver('question_type', [value])"
+            # This field should not be exposed
             position:
                 type: "Int!"
                 resolve: "@=resolver('question_position', [value])"
