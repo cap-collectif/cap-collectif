@@ -75,9 +75,9 @@ class ProposalSearch extends Search
     {
         // We can't use findById because we would lost the correct order given by ES
         // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
-        return array_map(function (Result $result) {
-            return $this->proposalRepo->find($result->getData()['id']);
-        }, $results);
+        return array_values(array_filter(array_map(function (Result $result) {
+            return $this->proposalRepo->findOneBy(['id' => $result->getData()['id'], 'deletedAt' => null]);
+        }, $results), function (?Proposal $proposal) {return null !== $proposal; }));
     }
 
     private function getSort(string $order, array $filters): array
