@@ -498,54 +498,6 @@ class ProposalRepository extends EntityRepository
         return $query->getQuery()->getResult();
     }
 
-    public function getProposalsWithOwnFollowersAndProject(): array
-    {
-        $qb = $this->getIsEnabledQueryBuilder('p')
-        ->addSelect('followers', 'pas', 'f', 's')
-        ->innerJoin('p.followers', 'followers')
-        ->leftJoin('p.proposalForm', 'f')
-        ->leftJoin('f.step', 's')
-        ->leftJoin('s.projectAbstractStep', 'pas');
-
-        return $qb->getQuery()->getResult();
-    }
-
-    public function getProposalsActivities($from, $to): array
-    {
-        $qb = $this->createQueryBuilder('proposal');
-        $qb->select('proposal.id')
-            ->addSelect('COUNT(selectionVotes.id) as sVotes,COUNT(collectVotes.id) as cVotes')
-            ->addSelect('COUNT(comments.id) as countComment', 'project.title as pTitle')
-            ->leftJoin('proposal.comments', 'comments')
-            ->leftJoin('proposal.collectVotes', 'collectVotes')
-            ->leftJoin('proposal.selectionVotes', 'selectionVotes')
-            ->andWhere(
-                $qb->expr()->between(
-                    'comments.createdAt',
-                    ':from',
-                    ':to'
-                ))
-            ->orWhere(
-                $qb->expr()->between(
-                    'selectionVotes.createdAt',
-                    ':from',
-                    ':to'
-                ))
-            ->orWhere(
-                $qb->expr()->between(
-                    'collectVotes.createdAt',
-                    ':from',
-                    ':to'
-                ))
-            ->andWhere('proposal.id = :proposalId')
-            ->setParameters([
-                'from' => $from,
-                'to' => $to,
-            ]);
-
-        return $qb->getQuery()->getArrayResult();
-    }
-
     public function countProposalVotesCreatedBetween(\DateTime $from, \DateTime $to, string $proposalId): array
     {
         $qb = $this->createQueryBuilder('proposal');
@@ -644,7 +596,7 @@ class ProposalRepository extends EntityRepository
             ->andWhere($alias . '.enabled = true');
     }
 
-    private function qbProposalsByFormAndEvaluer(ProposalForm $form, User $user)
+    private function qbProposalsByFormAndEvaluer(ProposalForm $form, User $user): QueryBuilder
     {
         return $this->createQueryBuilder('proposal')
             ->leftJoin('proposal.evaluers', 'group')

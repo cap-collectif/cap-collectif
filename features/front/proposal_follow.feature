@@ -29,7 +29,7 @@ Scenario: Logged, I want to unfollow a proposal
   When I click the proposal follow button on "proposal3"
   Then I should see a ".dropdown-menu" element
   And I click the proposal unfollow button on "proposal3"
-# TODO  need to be fixed on unfollow mutation by @splyl
+# TODO  need to be fixed on unfollow mutation by @spyl
 #  And I wait 2 seconds
 #  Then I go to the proposal followers tab
 #  And I should not see my subscription on the proposal followers list
