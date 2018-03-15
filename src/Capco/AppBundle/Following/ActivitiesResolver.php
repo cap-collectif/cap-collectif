@@ -80,7 +80,7 @@ class ActivitiesResolver
                 $userActivity->setLastname($user->getLastname());
                 $userActivity->addUserProposal($proposalId, $follower->getNotifiedOf());
                 $userActivity->setUrlManagingFollowings($unfollowingPage);
-                /* UserActivity */
+                /* @var UserActivity $followersWithActivities[$userId] */
                 $followersWithActivities[$userId] = $userActivity;
                 continue;
             }
