@@ -23,7 +23,7 @@ class CommentType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if ($options['actionType'] === 'edit') {
+        if ('edit' === $options['actionType']) {
             $builder
                 ->add('confirm',
                     CheckboxType::class, [
@@ -37,7 +37,7 @@ class CommentType extends AbstractType
 
         $builder->add('body', PurifiedTextareaType::class, ['required' => true]);
 
-        if ($options['actionType'] === 'create') {
+        if ('create' === $options['actionType']) {
             $builder->add('parent', null, ['required' => false]);
         }
 
@@ -59,7 +59,7 @@ class CommentType extends AbstractType
         ]);
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return '';
     }
