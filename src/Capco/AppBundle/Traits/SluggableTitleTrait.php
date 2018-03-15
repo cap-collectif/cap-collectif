@@ -20,24 +20,40 @@ trait SluggableTitleTrait
      */
     protected $slug;
 
-    public function getTitle(): ?string
+    /**
+     * @return string
+     */
+    public function getTitle()
     {
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    /**
+     * @param string $title
+     *
+     * @return $this
+     */
+    public function setTitle($title)
     {
         $this->title = $title;
 
         return $this;
     }
 
-    public function getSlug(): ?string
+    /**
+     * @return string
+     */
+    public function getSlug()
     {
         return $this->slug;
     }
 
-    public function setSlug(string $slug): self
+    /**
+     * @param string $slug
+     *
+     * @return $this
+     */
+    public function setSlug($slug)
     {
         $this->slug = $slug;
 

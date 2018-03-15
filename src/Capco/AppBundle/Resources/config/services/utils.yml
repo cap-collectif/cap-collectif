@@ -6,6 +6,3 @@ services:
   capco.utils.array_hydrator:
     class: pmill\Doctrine\Hydrator\ArrayHydrator
     arguments: ["@doctrine.orm.default_entity_manager"]
-
-  capco.maker_parser:
-    class: Capco\AppBundle\Command\Maker\Parser

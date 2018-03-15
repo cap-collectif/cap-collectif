@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Entity\Questions;
 
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Traits\IdTrait;
-use Capco\AppBundle\Traits\SluggableUpdatableTitleTrait;
+use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -24,7 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 abstract class AbstractQuestion
 {
     use TimestampableTrait;
-    use SluggableUpdatableTitleTrait;
+    use SluggableTitleTrait;
     use IdTrait;
 
     const QUESTION_TYPE_SIMPLE_TEXT = 0;

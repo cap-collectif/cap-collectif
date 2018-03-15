@@ -20,7 +20,7 @@ class ReportingController extends Controller
 
         if ($related) {
             $related->setIsEnabled(false);
-            $this->get('capco.contribution_notifier')->onModeration($related);
+            $this->get('capco.notify_manager')->notifyModeration($related);
         }
 
         $this->admin->update($related);
@@ -49,7 +49,7 @@ class ReportingController extends Controller
 
         if ($related) {
             $related->setIsTrashed(true);
-            $this->get('capco.contribution_notifier')->onModeration($related);
+            $this->get('capco.notify_manager')->notifyModeration($related);
         }
 
         $this->admin->update($related);
