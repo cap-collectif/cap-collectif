@@ -934,6 +934,6 @@ class Project implements IndexableInterface
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['Opinions', 'OpinionVersions'];
+        return ['Elasticsearch'];
     }
 }

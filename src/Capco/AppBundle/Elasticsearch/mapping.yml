@@ -45,7 +45,7 @@ mappings:
         properties:
             id: { type: keyword }
             slug: { type: keyword }
-            username: &text_analysis
+            displayName: &text_analysis
                 type: text
                 analyzer: capco_french
                 fields:

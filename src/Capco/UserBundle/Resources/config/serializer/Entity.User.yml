@@ -5,10 +5,13 @@ Capco\UserBundle\Entity\User:
         expose: true
         type: string
         groups: [UserId, Elasticsearch]
+      biography:
+        expose: true
+        groups: [Elasticsearch]
       slug:
         expose: true
         type: string
-        groups: [Default]
+        groups: [Default, Elasticsearch]
       Media:
         expose: true
         serialized_name: media
