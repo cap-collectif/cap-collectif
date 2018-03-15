@@ -4,9 +4,4 @@ discovery.zen.minimum_master_nodes: 1
 
 http.host: 0.0.0.0
 transport.host: 127.0.0.1
-bootstrap.memory_lock: true
-
-xpack.security.enabled: false
-xpack.ml.enabled: false
-xpack.monitoring.enabled: false
-xpack.watcher.enabled: false
+# bootstrap.memory_lock: true
