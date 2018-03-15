@@ -2,9 +2,6 @@
 
 namespace Capco\AppBundle\Elasticsearch;
 
-use Capco\AppBundle\Entity\District;
-use Capco\AppBundle\Entity\Selection;
-use Capco\AppBundle\Entity\Status;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
 use Elastica\Bulk;
@@ -201,33 +198,5 @@ class Indexer
         if (count($this->currentInsertBulk) >= self::BULK_SIZE || count($this->currentDeleteBulk) >= self::BULK_SIZE) {
             $this->finishBulk();
         }
-    }
-
-    /**
-     * Index child of demormalized entities.
-     */
-    private function indexDemoralizedChildren(IndexableInterface $object)
-    {
-        // if ($object instanceof Status) {
-        //     foreach ($object->getProposals() as $proposal) {
-        //         $this->addToBulk($this->buildDocument($proposal));
-        //     }
-        //
-        //     $selections = $this->em->getRepository(Selection::class)->findBy(['status' => $object]);
-        //     foreach ($selections as $selection) {
-        //         $this->addToBulk($this->buildDocument($selection));
-        //         $this->addToBulk($this->buildDocument($selection->getProposal()));
-        //     }
-        // }
-        //
-        // if ($object instanceof District) {
-        //     foreach ($object->getProposals() as $proposal) {
-        //         $this->addToBulk($this->buildDocument($proposal));
-        //     }
-        // }
-        //
-        // if ($object instanceof Selection) {
-        //     $this->addToBulk($this->buildDocument($object->getProposal()));
-        // }
     }
 }
