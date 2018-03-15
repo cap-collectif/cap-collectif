@@ -21,20 +21,6 @@ class FollowerRepository extends EntityRepository
         return $query->getQuery()->getSingleScalarResult();
     }
 
-    public function isFollowerUserFollowingProposal(Proposal $proposal, User $user): int
-    {
-        $query = $this->createQueryBuilder('f')
-            ->select('count(f.id)')
-            ->join('f.proposal', 'p')
-            ->join('f.user', 'u')
-            ->andWhere('u.id = :userId')
-            ->andWhere('p.id = :proposalId')
-            ->setParameter('userId', $user->getId())
-            ->setParameter('proposalId', $proposal->getId());
-
-        return $query->getQuery()->getSingleScalarResult();
-    }
-
     public function getByCriteriaOrdered(array $criteria, array $orderBy, $limit = 32, $offset = 0): Paginator
     {
         $qb = $this->createQueryBuilder('f')
@@ -73,17 +59,5 @@ class FollowerRepository extends EntityRepository
         ;
 
         return new Paginator($query);
-    }
-
-    public function getProposalFollowedGroupByUser()
-    {
-        $qb = $this->createQueryBuilder('f')
-            ->select('f.id as followerId')
-            ->addSelect('u.id as uId', 'u.username', 'u.email', 'p.id as proposalId')
-            ->join('f.proposal', 'p')
-            ->join('f.user', 'u')
-        ;
-
-        return $qb->getQuery()->getArrayResult();
     }
 }
