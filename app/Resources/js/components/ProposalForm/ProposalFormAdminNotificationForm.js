@@ -113,7 +113,11 @@ export class ProposalFormAdminNotificationForm extends Component<Props> {
               <FormattedMessage id="proposal_form.notifications_comment.on_delete" />
             </Field>
             <ButtonToolbar className="box-content__toolbar">
-              <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
+              <Button
+                disabled={invalid || pristine || submitting}
+                id="notification-submit"
+                type="submit"
+                bsStyle="primary">
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
               </Button>
               <Button bsStyle="danger" disabled>
