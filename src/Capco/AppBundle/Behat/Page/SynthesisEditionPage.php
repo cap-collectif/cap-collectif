@@ -124,7 +124,7 @@ class SynthesisEditionPage extends Page
         $this->getElement('element creation submit button')->click();
     }
 
-    /* protected function verifyUrl(array $urlParameters = [])
+    protected function verifyUrl(array $urlParameters = [])
     {
         $expectedUrl = $this->getUrl($urlParameters);
         $currentUrl = $this->getSession()->getCurrentUrl();
@@ -137,5 +137,5 @@ class SynthesisEditionPage extends Page
                     $this->getSession()->getCurrentUrl()
                 ));
         }
-    } */
+    }
 }
