@@ -67,8 +67,8 @@ class ApplicationContext extends UserContext
             $this->purgeRabbitMqQueues();
         }
         if ($scenario->hasTag('elasticsearch')) {
-            $jobs[] = new Process('SYMFONY_ROUTER__REQUEST_CONTEXT__HOST=capco.test php bin/console capco:es:create -e test -n');
-            $jobs[] = new Process('SYMFONY_ROUTER__REQUEST_CONTEXT__HOST=capco.test php bin/console capco:es:populate -e test -n');
+            $jobs[] = new Process('php bin/console capco:es:create -e test -n');
+            $jobs[] = new Process('php bin/console capco:es:populate -e test -n');
             // It can take some time for the new index to be live…
             $jobs[] = new Process('sleep 2');
         }

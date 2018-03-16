@@ -32,7 +32,7 @@ class ElasticaToDoctrineTransformer
         'hints' => [],
         'hydrate' => true,
         'identifier' => 'id',
-        'ignore_missing' => true,
+        'ignore_missing' => false,
         'query_builder_method' => 'createQueryBuilder',
     ];
 
@@ -79,7 +79,7 @@ class ElasticaToDoctrineTransformer
         }
 
         $propertyAccessor = $this->propertyAccessor;
-        $identifier = $this->options['identifier'];
+        $identifier = $this->getIdentifierField();
 
         // sort objects in the order of ids
         $idPos = array_flip($ids);
@@ -102,25 +102,20 @@ class ElasticaToDoctrineTransformer
     {
         $indexedElasticaResults = [];
         foreach ($elasticaObjects as $elasticaObject) {
-            $indexedElasticaResults[(string) $elasticaObject->getId()] = $elasticaObject;
+            $indexedElasticaResults[$elasticaObject->getId()] = $elasticaObject;
         }
         $objects = $this->transform($elasticaObjects);
         $result = [];
         foreach ($objects as $object) {
             if ($this->options['hydrate']) {
-                $id = $this->propertyAccessor->getValue($object, $this->options['identifier']);
+                $id = $this->propertyAccessor->getValue($object, $this->getIdentifierField());
             } else {
-                $id = $object[$this->options['identifier']];
+                $id = $object[$this->getIdentifierField()];
             }
-            $result[] = new HybridResult($indexedElasticaResults[(string) $id], $object);
+            $result[] = new HybridResult($indexedElasticaResults[$id], $object);
         }
 
         return $result;
-    }
-
-    public function getIdentifierField()
-    {
-        return $this->options['identifier'];
     }
 
     public function setPropertyAccessor(PropertyAccessorInterface $propertyAccessor)
@@ -141,7 +136,7 @@ class ElasticaToDoctrineTransformer
         $hydrationMode = $hydrate ? Query::HYDRATE_OBJECT : Query::HYDRATE_ARRAY;
 
         $qb = $this->getEntityQueryBuilder($objectClass);
-        $qb->andWhere($qb->expr()->in(static::ENTITY_ALIAS . '.' . $this->options['identifier'], ':values'))
+        $qb->andWhere($qb->expr()->in(static::ENTITY_ALIAS . '.' . $this->getIdentifierField(), ':values'))
             ->setParameter('values', $identifierValues);
 
         $query = $qb->getQuery();
@@ -178,6 +173,11 @@ class ElasticaToDoctrineTransformer
         return function ($a, $b) use ($idPos, $identifierPath, $propertyAccessor) {
             return $idPos[(string) $propertyAccessor->getValue($a, $identifierPath)] > $idPos[(string) $propertyAccessor->getValue($b, $identifierPath)];
         };
+    }
+
+    private function getIdentifierField()
+    {
+        return $this->options['identifier'];
     }
 
     private function getObjectClassFromType($type): string

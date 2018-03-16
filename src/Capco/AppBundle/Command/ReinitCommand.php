@@ -30,10 +30,6 @@ class ReinitCommand extends ContainerAwareCommand
                 'no-toggles', false, InputOption::VALUE_NONE,
                 'set this option to skip reseting feature flags'
             )
-            ->addOption(
-                'no-es-populate', false, InputOption::VALUE_NONE,
-                'set this option to skip populating ES'
-            )
         ;
     }
 
@@ -72,9 +68,8 @@ class ReinitCommand extends ContainerAwareCommand
         if (!$input->getOption('no-toggles')) {
             $this->loadToggles($output);
         }
-        if (!$input->getOption('no-es-populate')) {
-            $this->populateElastica($output);
-        }
+
+        $this->populateElastica($output);
         $this->getContainer()->get('doctrine')->getManager()->clear();
         $this->recalculateCounters($output);
         $this->updateSyntheses($output);
