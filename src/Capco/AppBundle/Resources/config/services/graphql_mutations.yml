@@ -227,3 +227,13 @@ services:
           - "@logger"
       tags:
           - { name: overblog_graphql.mutation }
+
+  Capco\AppBundle\GraphQL\Mutation\DeleteReplyMutation:
+      # only for sf < 3.3
+      class: Capco\AppBundle\GraphQL\Mutation\DeleteReplyMutation
+      arguments:
+          - "@doctrine.orm.default_entity_manager"
+          - "@capco.reply.repository"
+          - "@redis_storage.helper"
+      tags:
+          - { name: overblog_graphql.mutation }

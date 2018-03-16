@@ -664,6 +664,17 @@ type DeleteProposalPayload {
   clientMutationId: String
 }
 
+input DeleteReplyInput {
+  # The id of the reply
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteReplyPayload {
+  questionnaire: Questionnaire!
+  clientMutationId: String
+}
+
 input DeleteUserInGroupInput {
   # The user id
   userId: ID!
@@ -886,6 +897,7 @@ type MultipleChoiceQuestionValidationRule {
 
 type Mutation {
   addReply(input: AddReplyInput!): AddReplyPayload
+  deleteReply(input: DeleteReplyInput!): DeleteReplyPayload
   changeUserNotificationsConfiguration(input: ChangeUserNotificationsConfigurationInput!): ChangeUserNotificationsConfigurationPayload
   addProposalVote(input: AddProposalVoteInput!): AddProposalVotePayload
   removeProposalVote(input: RemoveProposalVoteInput!): RemoveProposalVotePayload

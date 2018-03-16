@@ -1,0 +1,8 @@
+DeleteReplyInput:
+    type: relay-mutation-input
+    config:
+        description: "Delete a reply"
+        fields:
+            id:
+                type: "ID!"
+                description: "The id of the reply"

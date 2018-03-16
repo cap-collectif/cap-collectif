@@ -1,18 +1,20 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Modal } from 'react-bootstrap';
 import type { ReplyDeleteModal_reply } from './__generated__/ReplyDeleteModal_reply.graphql';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
-import ReplyActions from '../../../actions/ReplyActions';
+import AppDispatcher from '../../../dispatchers/AppDispatcher';
+import DeleteReplyMutation from '../../../mutations/DeleteReplyMutation';
+import { UPDATE_ALERT } from '../../../constants/AlertConstants';
 
 type Props = {
   reply: ReplyDeleteModal_reply,
   show: boolean,
-  onToggleModal: Function,
-  onDelete: Function,
+  onToggleModal: (value: boolean) => void,
+  onDelete: () => void,
 };
 
 type State = {
@@ -28,13 +30,21 @@ export class ReplyDeleteModal extends React.Component<Props, State> {
     const { onDelete, reply } = this.props;
 
     this.setState({ isSubmitting: true });
-    ReplyActions.delete(reply.questionnaire.id, reply.id)
+    DeleteReplyMutation.commit({ input: { id: reply.id } })
       .then(() => {
         this.close();
+        AppDispatcher.dispatch({
+          actionType: UPDATE_ALERT,
+          alert: { bsStyle: 'success', content: 'reply.request.delete.success' },
+        });
         onDelete();
       })
       .catch(() => {
         this.setState({ isSubmitting: false });
+        AppDispatcher.dispatch({
+          actionType: UPDATE_ALERT,
+          alert: { bsStyle: 'warning', content: 'reply.request.delete.failure' },
+        });
       });
   }
 

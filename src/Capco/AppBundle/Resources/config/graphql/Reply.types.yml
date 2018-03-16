@@ -2,7 +2,7 @@ Reply:
     type: object
     config:
         description: "A reply contribution"
-        # interfaces: [Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
+        interfaces: [Node]
         fields:
             enabled:
                 type: "Boolean!"
@@ -29,4 +29,4 @@ Reply:
               resolve: "@=resolver('proposal_created_at', [value])"
             viewerCanDelete:
               type: "Boolean!"
-              resolve: "@=false"
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ReplyViewerCanDeleteResolver", [value, user])'

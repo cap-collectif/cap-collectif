@@ -90,17 +90,6 @@ class RepliesController extends FOSRestController
     }
 
     /**
-     * Delete a reply.
-     *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Delete a reply",
-     *  statusCodes={
-     *    200 = "Returned when successful",
-     *    404 = "Returned when proposal is not found",
-     *  }
-     * )
-     *
      * @Security("has_role('ROLE_USER')")
      * @Delete("/questionnaires/{questionnaire_id}/replies/{reply_id}")
      * @ParamConverter("questionnaire", options={"mapping": {"questionnaire_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
@@ -109,23 +98,6 @@ class RepliesController extends FOSRestController
      */
     public function deleteReplyAction(Questionnaire $questionnaire, Reply $reply)
     {
-        if ($this->getUser() !== $reply->getAuthor()) {
-            throw $this->createAccessDeniedException('You are not the author of this reply');
-        }
-
-        if (!$reply) {
-            throw $this->createNotFoundException('Reply not found');
-        }
-
-        if (!$questionnaire->canContribute()) {
-            throw new BadRequestHttpException('This reply is no longer deletable.');
-        }
-
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($reply);
-        $em->flush();
-        $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
-
-        return [];
+        throw new BadRequestHttpException('Deprecated.');
     }
 }
