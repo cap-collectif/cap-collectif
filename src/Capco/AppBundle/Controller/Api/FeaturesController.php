@@ -66,10 +66,10 @@ class FeaturesController extends FOSRestController
 
         $data = $form->getData();
         $question = null;
-        if ($data['type'] === '0') {
+        if ('0' === $data['type']) {
             $question = new SimpleQuestion();
         }
-        if ($data['type'] === '4') {
+        if ('4' === $data['type']) {
             $question = new MultipleChoiceQuestion();
             foreach ($data['choices'] as $key => $choice) {
                 $questionChoice = new QuestionChoice();
@@ -106,7 +106,7 @@ class FeaturesController extends FOSRestController
         $orderedQuestions = json_decode($request->getContent(), true)['questions'];
         $em = $this->get('doctrine')->getManager();
         $registrationForm = $em->getRepository('CapcoAppBundle:RegistrationForm')->findCurrent();
-        $absQuestions = $em->getRepository('CapcoAppBundle:Questions\QuestionnaireAbstractQuestion')->findByRegistrationForm($registrationForm);
+        $absQuestions = $this->get('capco.questionnaire_abstract_question.repository')->findByRegistrationForm($registrationForm);
 
         foreach ($orderedQuestions as $key => $orderQuestion) {
             foreach ($absQuestions as $absQuestion) {
@@ -142,7 +142,7 @@ class FeaturesController extends FOSRestController
 
             return $this->postRegistrationQuestionAction($request);
         }
-        if ($data['type'] === '4') {
+        if ('4' === $data['type']) {
             // Remove previous choices
             $question->resetQuestionChoices();
             foreach ($data['choices'] as $key => $choice) {

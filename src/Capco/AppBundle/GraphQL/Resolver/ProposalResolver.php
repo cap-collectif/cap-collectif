@@ -17,7 +17,6 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
-use Capco\AppBundle\Model\CreatableInterface;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Error\UserError;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -38,6 +37,14 @@ class ProposalResolver implements ContainerAwareInterface
     public function resolveProjectSteps(Project $project)
     {
         return $project->getRealSteps();
+    }
+
+    public function resolveShowUrlBySlug(string $projectSlug, string $stepSlug, string $proposalSlug)
+    {
+        $router = $this->container->get('router');
+
+        return $router->generate('app_project_show_proposal', compact('projectSlug', 'stepSlug', 'proposalSlug'),
+            UrlGeneratorInterface::ABSOLUTE_URL);
     }
 
     public function resolvePostAbstract(Post $post): string
@@ -178,11 +185,6 @@ class ProposalResolver implements ContainerAwareInterface
         ]);
 
         return $proposals;
-    }
-
-    public function resolveCreatedAt(CreatableInterface $object): \DateTime
-    {
-        return $object->getCreatedAt();
     }
 
     public function resolvePostsCount(Proposal $proposal): int

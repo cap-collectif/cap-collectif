@@ -154,7 +154,7 @@ class CommentsController extends FOSRestController
 
         $this->get('doctrine.orm.entity_manager')->persist($report);
         $this->get('doctrine.orm.entity_manager')->flush();
-        $this->get('capco.notify_manager')->sendNotifyMessage($report);
+        $this->get('capco.report_notifier')->onCreate($report);
 
         return $report;
     }

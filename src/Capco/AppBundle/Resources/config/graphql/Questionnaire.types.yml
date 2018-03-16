@@ -7,6 +7,7 @@ Questionnaire:
                 type: "ID!"
             title:
                 type: "String!"
+            # order by position
             questions:
                 type: "[Question!]!"
                 resolve: "@=resolver('questionnaire_questions', [value])"

@@ -102,7 +102,7 @@ Proposal:
             createdAt:
               type: "DateTime!"
               description: "Identifies the date and time when the object was created."
-              resolve: "@=resolver('proposal_created_at', [value])"
+              resolve: "@=value.getCreatedAt()"
             mergedFrom:
                 type: "[Proposal!]!"
                 description: "If the proposal is a fusion, contains the list of merged proposals."
