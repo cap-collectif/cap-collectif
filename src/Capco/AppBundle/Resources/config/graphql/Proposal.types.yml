@@ -140,6 +140,7 @@ Proposal:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowProposalResolver", [value, user])'
                 description: "View follow current proposal"
             followerConfiguration:
+                access: "@=hasRole('ROLE_USER')"
                 type: "Follower"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowerProposalResolver", [value, user])'
                 description: "View follow current proposal"
