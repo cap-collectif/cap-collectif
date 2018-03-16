@@ -7,9 +7,9 @@ use Capco\AppBundle\Model\VoteContribution;
 use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\UniqueConstraint;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(
@@ -85,32 +85,29 @@ abstract class AbstractVote implements VoteContribution, HasAuthorInterface
         return null;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getUser()
+    public function isIndexable(): bool
+    {
+        return !$this->isExpired();
+    }
+
+    public function getUser(): User
     {
         return $this->user;
     }
 
-    /**
-     * @param $user
-     *
-     * @return $this
-     */
-    public function setUser($user)
+    public function setUser(User $user): self
     {
         $this->user = $user;
 
         return $this;
     }
 
-    public function getAuthor()
+    public function getAuthor(): User
     {
         return $this->user;
     }
 
-    public function hasUser()
+    public function hasUser(): bool
     {
         return (bool) $this->getUser();
     }
