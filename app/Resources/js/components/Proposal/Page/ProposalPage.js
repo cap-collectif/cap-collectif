@@ -19,6 +19,7 @@ type Props = {
   categories: Array<Object>,
   steps: Array<Object>,
   features: FeatureToggles,
+  isAuthenticated: boolean,
 };
 
 export class ProposalPage extends React.Component<Props> {
@@ -33,14 +34,24 @@ export class ProposalPage extends React.Component<Props> {
         <QueryRenderer
           environment={environment}
           query={graphql`
-            query ProposalPageQuery($proposalId: ID!, $count: Int!, $cursor: String) {
+            query ProposalPageQuery(
+              $proposalId: ID!
+              $count: Int!
+              $cursor: String
+              $isAuthenticated: Boolean!
+            ) {
               proposal: node(id: $proposalId) {
                 ...ProposalPageTabs_proposal
                 ...ProposalPageHeader_proposal
               }
             }
           `}
-          variables={{ proposalId: proposal.id, count: PROPOSAL_FOLLOWERS_TO_SHOW, cursor: null }}
+          variables={{
+            proposalId: proposal.id,
+            count: PROPOSAL_FOLLOWERS_TO_SHOW,
+            cursor: null,
+            isAuthenticated: this.props.isAuthenticated,
+          }}
           render={({ error, props }: { error: ?Error, props?: ProposalPageQueryResponse }) => {
             if (error) {
               console.log(error); // eslint-disable-line no-console
@@ -80,6 +91,7 @@ export class ProposalPage extends React.Component<Props> {
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
   return {
+    isAuthenticated: state.user.user !== null,
     features: state.default.features,
     proposal:
       state.proposal.currentProposalId &&
