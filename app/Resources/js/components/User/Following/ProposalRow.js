@@ -52,7 +52,9 @@ export class ProposalRow extends Component<Props, State> {
                   style={{ float: 'right' }}
                   className="profile__proposal__unfollow__button"
                   id={`profile-proposal-unfollow-button-${proposal.id}`}
-                  onClick={this.onUnfollowCurrentProposal.bind(this, proposal.id)}>
+                  onClick={() => {
+                    this.onUnfollowCurrentProposal(proposal.id);
+                  }}>
                   <FormattedMessage id="unfollow" />
                 </Button>
               </h4>
