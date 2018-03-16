@@ -9,3 +9,11 @@ services:
 
   capco.maker_parser:
     class: Capco\AppBundle\Command\Maker\Parser
+
+  capco.utils.throwable_email_checker:
+    class: EmailChecker\EmailChecker
+    arguments: ["@capco.utils.throwable_email_checker.adapter"]
+
+  capco.utils.throwable_email_checker.adapter:
+    class: EmailChecker\Adapter\FileAdapter
+    arguments: ["%kernel.root_dir%/config/throwable_emails.txt"]

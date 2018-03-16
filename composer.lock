@@ -4316,16 +4316,16 @@
         },
         {
             "name": "mattketmo/email-checker",
-            "version": "v1.5.0",
+            "version": "v1.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MattKetmo/EmailChecker.git",
-                "reference": "69670d8ad40777a84a7d428caa936ea6846743e7"
+                "reference": "4d8042b1685e53a917bb065bce163a97da11de06"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MattKetmo/EmailChecker/zipball/69670d8ad40777a84a7d428caa936ea6846743e7",
-                "reference": "69670d8ad40777a84a7d428caa936ea6846743e7",
+                "url": "https://api.github.com/repos/MattKetmo/EmailChecker/zipball/4d8042b1685e53a917bb065bce163a97da11de06",
+                "reference": "4d8042b1685e53a917bb065bce163a97da11de06",
                 "shasum": ""
             },
             "require": {
@@ -4364,7 +4364,7 @@
                 "email",
                 "throwaway"
             ],
-            "time": "2016-01-25T17:12:39+00:00"
+            "time": "2017-10-11T11:06:03+00:00"
         },
         {
             "name": "michelf/php-markdown",
