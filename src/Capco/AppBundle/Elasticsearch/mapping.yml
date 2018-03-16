@@ -45,17 +45,13 @@ mappings:
         properties:
             id: { type: keyword }
             slug: { type: keyword }
-            displayName: &text_analysis
-                type: text
-                analyzer: capco_french
-                fields:
-                    std: { type: text, analyzer: capco_standard }
-            biography: &text_analysis_highlighted
+            displayName: &text_analysis_highlighted
                 type: text
                 analyzer: capco_french
                 index_options: offsets
                 fields:
                     std: { type: text, analyzer: capco_standard }
+            biography: *text_analysis_highlighted
             user_type:
                 type: object
                 properties:
@@ -82,21 +78,14 @@ mappings:
 
     project:
         properties:
-            id: { type: keyword }
-            slug: { type: keyword }
             title: *text_analysis_highlighted
-            publishedAt: { type: date }
-            updatedAt: { type: date }
             createdAt: { type: date }
-            Author: *Author
 
     comment:
         properties:
-            id: { type: keyword }
             body: *text_analysis_highlighted
             createdAt: { type: date }
-            updatedAt: { type: date }
-            authorName: *text_analysis
+            authorName: *text_analysis_highlighted
             Author: *Author
 
     event:
