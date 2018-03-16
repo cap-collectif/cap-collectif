@@ -116,7 +116,7 @@ Scenario: Anonymous API client wants to add an answer to a comment
   When I send a POST request to "/api/posts/1/comments" with json:
   """
   {
-    "parent": 163,
+    "parent": 178,
     "authorName": "Kéké",
     "authorEmail": "vivele94@gmail.com",
     "body": "Ma super réponse"
@@ -153,7 +153,7 @@ Scenario: logged in API client wants to add an answer to a comment
   When I send a POST request to "/api/posts/1/comments" with json:
   """
   {
-    "parent": 163,
+    "parent": 178,
     "body": "Oh oui j'ose :-P"
   }
   """
