@@ -133,27 +133,18 @@ class District implements IndexableInterface
         $this->proposals->removeElement($proposal);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isIndexable(): bool
     {
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getElasticsearchTypeName(): string
     {
         return 'district';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['Districts'];
+        return ['Elasticsearch'];
     }
 }
