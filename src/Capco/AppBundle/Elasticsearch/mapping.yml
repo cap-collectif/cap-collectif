@@ -83,7 +83,6 @@ mappings:
 
     comment:
         properties:
-            id: { type: long }
             body: *text_analysis_highlighted
             createdAt: { type: date }
             authorName: *text_analysis_highlighted
