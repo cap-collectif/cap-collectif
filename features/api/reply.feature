@@ -5,7 +5,7 @@ Feature: Reply Restful Api
 @elasticsearch
 Scenario: Logged in API client wants to get one of his replies
   Given I am logged in to api as admin
-  When I send a GET request to "/api/questionnaires/questionnaire1/replies/2"
+  When I send a GET request to "/api/questionnaires/1/replies/2"
   Then the JSON response should match:
   """
   {
@@ -53,19 +53,19 @@ Scenario: Logged in API client wants to get one of his replies
 
 @elasticsearch @security
 Scenario: Anonymous API client wants to get one reply
-  When I send a GET request to "/api/questionnaires/questionnaire1/replies/2"
+  When I send a GET request to "/api/questionnaires/1/replies/2"
   Then the JSON response status code should be 401
 
 @elasticsearch @security
 Scenario: Logged in API client wants to get one reply when he's not the author
   Given I am logged in to api as user
-  When I send a GET request to "/api/questionnaires/questionnaire1/replies/2"
+  When I send a GET request to "/api/questionnaires/1/replies/2"
   Then the JSON response status code should be 403
 
 @elasticsearch
 Scenario: Logged in API client wants to get his replies
   Given I am logged in to api as admin
-  When I send a GET request to "/api/questionnaires/questionnaire1/replies"
+  When I send a GET request to "/api/questionnaires/1/replies"
   Then the JSON response should match:
   """
   {
@@ -118,7 +118,7 @@ Scenario: Logged in API client wants to get his replies
 @security @elasticsearch
 Scenario: Logged in API client wants to add a reply
   Given I am logged in to api as user_with_phone_not_phone_confirmed
-  When I send a POST request to "/api/questionnaires/questionnaire1/replies" with json:
+  When I send a POST request to "/api/questionnaires/1/replies" with json:
   """
   {
     "responses": [
@@ -146,7 +146,7 @@ Scenario: Logged in API client wants to add a reply
 @database @elasticsearch
 Scenario: Logged in API client wants to add a reply
   Given I am logged in to api as user
-  When I send a POST request to "/api/questionnaires/questionnaire1/replies" with json:
+  When I send a POST request to "/api/questionnaires/1/replies" with json:
   """
   {
     "responses": [
@@ -171,7 +171,7 @@ Scenario: Logged in API client wants to add a reply
 @database @elasticsearch
 Scenario: Logged in API client wants to add an anonymous reply
   Given I am logged in to api as user
-  When I send a POST request to "/api/questionnaires/questionnaire1/replies" with json:
+  When I send a POST request to "/api/questionnaires/1/replies" with json:
   """
   {
     "responses": [
@@ -193,7 +193,7 @@ Scenario: Logged in API client wants to add an anonymous reply
 
 @security @elasticsearch
 Scenario: Anonymous API client wants to add a reply
-  Given I send a POST request to "/api/questionnaires/questionnaire1/replies" with json:
+  Given I send a POST request to "/api/questionnaires/1/replies" with json:
   """
   {
     "responses": [
@@ -215,7 +215,7 @@ Scenario: Anonymous API client wants to add a reply
 @security @elasticsearch
 Scenario: Logged in API client wants to add a reply without a required response
   Given I am logged in to api as user
-  When I send a POST request to "/api/questionnaires/questionnaire1/replies" with json:
+  When I send a POST request to "/api/questionnaires/1/replies" with json:
   """
   {
     "responses": [
@@ -244,7 +244,7 @@ Scenario: Logged in API client wants to add a reply without a required response
 @security @elasticsearch
 Scenario: Logged in API client wants to add a reply with not enough choices for required field with validation rules
   Given I am logged in to api as user
-  When I send a POST request to "/api/questionnaires/questionnaire1/replies" with json:
+  When I send a POST request to "/api/questionnaires/1/replies" with json:
   """
   {
     "responses": [
@@ -291,7 +291,7 @@ Scenario: Logged in API client wants to add a reply with not enough choices for 
 @security @elasticsearch
 Scenario: Logged in API client wants to add a reply with not enough choices for optional field with validation rules
   Given I am logged in to api as user
-  When I send a POST request to "/api/questionnaires/questionnaire1/replies" with json:
+  When I send a POST request to "/api/questionnaires/1/replies" with json:
   """
   {
     "responses": [
@@ -345,7 +345,7 @@ Scenario: Logged in API client wants to add a reply with not enough choices for 
 @security @elasticsearch
 Scenario: Logged in API client wants to add a reply to closed questionnaire step
   Given I am logged in to api as user
-  And I send a POST request to "/api/questionnaires/questionnaire3/replies" with json:
+  And I send a POST request to "/api/questionnaires/3/replies" with json:
   """
   {
     "responses": [
@@ -375,7 +375,7 @@ Scenario: Logged in API client wants to add a reply to closed questionnaire step
 @database @elasticsearch
 Scenario: Logged in API client wants to add another reply when multiple replies is allowed
   Given I am logged in to api as admin
-  When I send a POST request to "/api/questionnaires/questionnaire1/replies" with json:
+  When I send a POST request to "/api/questionnaires/1/replies" with json:
   """
   {
     "responses": [
@@ -397,7 +397,7 @@ Scenario: Logged in API client wants to add another reply when multiple replies 
 @security @elasticsearch
 Scenario: Logged in API client wants to add another reply when multiple replies is not allowed
   Given I am logged in to api as admin
-  Given I send a POST request to "/api/questionnaires/questionnaire2/replies" with json:
+  Given I send a POST request to "/api/questionnaires/2/replies" with json:
   """
   {
     "responses": [
@@ -427,7 +427,7 @@ Scenario: Logged in API client wants to add another reply when multiple replies 
 @database @elasticsearch
 Scenario: logged in API client wants to edit a reply
   Given I am logged in to api as admin
-  When I send a PUT request to "api/questionnaires/questionnaire1/replies/2" with json:
+  When I send a PUT request to "api/questionnaires/1/replies/2" with json:
   """
   {
     "responses": [
@@ -449,7 +449,7 @@ Scenario: logged in API client wants to edit a reply
 @security @elasticsearch
 Scenario: logged in API client wants to edit a reply when he is not the author
   Given I am logged in to api as user
-  When I send a PUT request to "api/questionnaires/questionnaire1/replies/2" with json:
+  When I send a PUT request to "api/questionnaires/1/replies/2" with json:
   """
   {
     "responses": [
@@ -471,7 +471,7 @@ Scenario: logged in API client wants to edit a reply when he is not the author
 @security @elasticsearch
 Scenario: Logged in API client wants to edit a reply in a closed questionnaire step
   Given I am logged in to api as admin
-  And I send a PUT request to "/api/questionnaires/questionnaire3/replies/3" with json:
+  And I send a PUT request to "/api/questionnaires/3/replies/3" with json:
   """
   {
     "responses": [
@@ -501,19 +501,19 @@ Scenario: Logged in API client wants to edit a reply in a closed questionnaire s
 @database @elasticsearch
 Scenario: Logged in API client wants to remove a reply
   Given I am logged in to api as admin
-  When I send a DELETE request to "api/questionnaires/questionnaire1/replies/2"
+  When I send a DELETE request to "api/questionnaires/1/replies/2"
   Then the JSON response status code should be 204
 
 @security @elasticsearch
 Scenario: Logged in API client wants to remove a reply when he is not the author
   Given I am logged in to api as user
-  When I send a DELETE request to "api/questionnaires/questionnaire1/replies/2"
+  When I send a DELETE request to "api/questionnaires/1/replies/2"
   Then the JSON response status code should be 403
 
 @security @elasticsearch
 Scenario: Logged in API client wants to remove a reply in a closed questionnaire step
   Given I am logged in to api as admin
-  And I send a DELETE request to "/api/questionnaires/questionnaire3/replies/3"
+  And I send a DELETE request to "/api/questionnaires/3/replies/3"
   Then the JSON response status code should be 400
   And the JSON response should match:
   """

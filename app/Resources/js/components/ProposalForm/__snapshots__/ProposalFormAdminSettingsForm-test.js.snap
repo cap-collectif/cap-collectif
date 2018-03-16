@@ -69,7 +69,6 @@ exports[`<ProposalFormAdminSettingsForm /> render correctly 1`] = `
         </h2>
         <Field
           component={[Function]}
-          id="proposal_form_commentable"
           name="commentable"
           type="checkbox"
         >
@@ -81,7 +80,6 @@ exports[`<ProposalFormAdminSettingsForm /> render correctly 1`] = `
       </div>
       <Field
         component={[Function]}
-        id="proposal_form_costable"
         name="costable"
         type="checkbox"
       >
@@ -100,7 +98,6 @@ exports[`<ProposalFormAdminSettingsForm /> render correctly 1`] = `
           bsClass="btn"
           bsStyle="primary"
           disabled={false}
-          id="parameters-submit"
           type="submit"
         >
           <FormattedMessage

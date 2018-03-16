@@ -109,7 +109,6 @@ Scenario: Posts menu for project should display correct number of posts
   And I follow "project-posts"
   And I should see 5 ".media--news" elements
 
-@javascript
 Scenario: Project header should display correct number of votes
   Given I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |

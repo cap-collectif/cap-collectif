@@ -3,6 +3,7 @@ Capco\AppBundle\Entity\Questionnaire:
   properties:
     id:
       expose: true
+      type: integer
       groups: [Questionnaires]
     title:
       expose: true
