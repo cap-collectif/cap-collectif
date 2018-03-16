@@ -34,7 +34,7 @@ final class UpdateFollowProposalMutation
         $proposal = $this->proposalRepository->find($proposalId);
 
         if (!$proposal) {
-            throw new UserError('Cant find the proposal');
+            throw new UserError('Can\'t find the proposal');
         }
         if (!$user instanceof User) {
             throw new UserError('User is different than user follower');
@@ -44,7 +44,7 @@ final class UpdateFollowProposalMutation
         $follower = $this->followerRepository->findBy(['user' => $user, 'proposal' => $proposal]);
 
         if (!$follower) {
-            throw new UserError('Cant find the follower');
+            throw new UserError('Can\'t find the follower');
         }
         $follower = $follower[0];
 
