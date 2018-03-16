@@ -99,3 +99,8 @@ Scenario: On Proposal Preview, I want to follow a proposal and change the type o
   Then I should see "follow"
   And I go to a collect step with vote
   Then I should see "follow"
+
+@javascript
+Scenario: User with true unfollow token wants to connect via email activities link
+  When I go to an email notifications preferences link with token "TzbDnxtD-QnB_q3Tvx0m9Wv6lPO25SuV9KmpLOhAY4Q"
+  Then I should not be redirected to "/profile/followings"
