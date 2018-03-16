@@ -1,3 +1,4 @@
+// @flow
 import * as React from 'react';
 import { Modal } from 'react-bootstrap';
 import { FormattedDate, FormattedMessage } from 'react-intl';
@@ -11,7 +12,7 @@ import CloseButton from '../../Form/CloseButton';
 type Props = {
   show: boolean,
   reply: ShowReplyModal_reply,
-  onClose: Function,
+  onClose: () => void,
 };
 
 export class ShowReplyModal extends React.Component<Props> {
@@ -52,16 +53,18 @@ export class ShowReplyModal extends React.Component<Props> {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {reply.responses.map((response, index) => {
+          {reply.responses.filter(Boolean).map((response, index) => {
             return (
               <div key={index}>
                 {response.question.title}
+                {/* $FlowFixMe $refType */}
                 <ResponseValue response={response} />
               </div>
             );
           })}
         </Modal.Body>
         <Modal.Footer>
+          {/* $FlowFixMe $refType */}
           <ReplyModalButtons reply={reply} onChange={this.onChange} onClose={onClose} />
           <CloseButton onClose={onClose} />
         </Modal.Footer>

@@ -1,6 +1,7 @@
+// @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Alert, Button } from 'react-bootstrap';
 import { type ReplyCreateFormWrapper_questionnaire } from './__generated__/ReplyCreateFormWrapper_questionnaire.graphql';
@@ -9,13 +10,18 @@ import RegistrationButton from '../../User/Registration/RegistrationButton';
 import PhoneModal from '../../User/Phone/PhoneModal';
 import ReplyForm from './ReplyForm';
 import { type User } from '../../../redux/modules/user';
+import type { GlobalState } from '../../../types';
 
 type Props = {
   questionnaire: ReplyCreateFormWrapper_questionnaire,
   user: User,
 };
 
-export class ReplyCreateFormWrapper extends React.Component<Props> {
+type State = {
+  showPhoneModal: boolean,
+};
+
+export class ReplyCreateFormWrapper extends React.Component<Props, State> {
   state = {
     showPhoneModal: false,
   };
@@ -87,7 +93,7 @@ export class ReplyCreateFormWrapper extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => {
   return {
     user: state.user.user,
   };

@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -14,7 +15,11 @@ type Props = {
   onDelete: Function,
 };
 
-export class ReplyDeleteModal extends React.Component<Props> {
+type State = {
+  isSubmitting: boolean,
+};
+
+export class ReplyDeleteModal extends React.Component<Props, State> {
   state = {
     isSubmitting: false,
   };

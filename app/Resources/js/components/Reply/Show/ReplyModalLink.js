@@ -1,9 +1,10 @@
+// @flow
 import React from 'react';
 import { FormattedMessage, FormattedDate } from 'react-intl';
 import { ListGroupItem } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
 import moment from 'moment';
-import { type ReplyModalLink_reply } from './__generated__/ReplyModalLink_reply.graphql';
+import type { ReplyModalLink_reply } from './__generated__/ReplyModalLink_reply.graphql';
 import ShowReplyModal from './ShowReplyModal';
 
 type Props = {
@@ -11,7 +12,11 @@ type Props = {
   questionnaire: Object,
 };
 
-export class ReplyModalLink extends React.Component<Props> {
+type State = {
+  showModal: boolean,
+};
+
+export class ReplyModalLink extends React.Component<Props, State> {
   state = {
     showModal: false,
   };
@@ -54,6 +59,7 @@ export class ReplyModalLink extends React.Component<Props> {
             <FormattedMessage id="reply.private" />
           </span>
         )}
+        {/* $FlowFixMe $refType */}
         <ShowReplyModal
           show={this.state.showModal}
           onClose={this.hideModal}

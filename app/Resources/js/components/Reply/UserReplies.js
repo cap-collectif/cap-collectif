@@ -1,3 +1,4 @@
+// @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -29,6 +30,7 @@ export class UserReplies extends React.Component<Props> {
         </h3>
         <ListGroup>
           {questionnaire.viewerReplies.map((reply, index) => {
+            // $FlowFixMe $refType
             return <ReplyModalLink key={index} reply={reply} questionnaire={questionnaire} />;
           })}
         </ListGroup>

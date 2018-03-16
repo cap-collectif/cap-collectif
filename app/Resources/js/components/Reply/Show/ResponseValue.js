@@ -1,3 +1,4 @@
+// @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -11,8 +12,9 @@ type Props = {
 export class ResponseValue extends React.Component<Props> {
   render() {
     const { response } = this.props;
-
-    const responseValue = getValueFromResponse(response.question.type, response.value);
+    const responseValue = response.value
+      ? getValueFromResponse(response.question.type, response.value)
+      : null;
 
     if (!responseValue || (Array.isArray(responseValue) && !responseValue.length)) {
       return <p>{<FormattedMessage id="reply.show.response.no_value" />}</p>;
@@ -25,7 +27,7 @@ export class ResponseValue extends React.Component<Props> {
       );
     }
     if (response.question.type === 'ranking') {
-      return responseValue.length > 0 ? (
+      return Array.isArray(responseValue) && responseValue.length > 0 ? (
         <ol>
           {responseValue.map((label, index) => {
             return <li key={index}>{label}</li>;

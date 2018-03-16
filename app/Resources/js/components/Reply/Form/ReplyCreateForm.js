@@ -1,10 +1,12 @@
+// @flow
 import React from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
 import ReplyForm from './ReplyForm';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import Loader from '../../Utils/Loader';
+import type { ReplyCreateFormQueryResponse } from './__generated__/ReplyCreateFormQuery.graphql';
 
-const component = ({ error, props }: { error: ?Error, props: any }) => {
+const component = ({ error, props }: { error: ?Error, props: ?ReplyCreateFormQueryResponse }) => {
   if (error) {
     return graphqlError;
   }
@@ -24,7 +26,7 @@ const component = ({ error, props }: { error: ?Error, props: any }) => {
 };
 
 type Props = {
-  form: Object,
+  form: { id: string },
   disabled: boolean,
 };
 

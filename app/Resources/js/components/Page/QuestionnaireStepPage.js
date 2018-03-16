@@ -13,7 +13,7 @@ import { Loader } from '../Utils/Loader';
 
 type Props = {
   step: Object,
-  form: Object,
+  form: { id: string },
 };
 
 const component = ({
@@ -32,6 +32,7 @@ const component = ({
     if (props.questionnaire !== null) {
       return (
         <div>
+          {/* $FlowFixMe $refType */}
           <UserReplies questionnaire={props.questionnaire} />
           <ReplyCreateFormWrapper questionnaire={props.questionnaire} />
         </div>
@@ -53,7 +54,7 @@ export class QuestionnaireStepPage extends React.Component<Props> {
           environment={environment}
           query={graphql`
             query QuestionnaireStepPageQuery($id: ID!) {
-              questionnaire(id: $id) {
+              questionnaire: node(id: $id) {
                 ...ReplyCreateFormWrapper_questionnaire
                 ...UserReplies_questionnaire
               }

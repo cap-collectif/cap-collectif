@@ -1,3 +1,4 @@
+// @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Button } from 'react-bootstrap';
@@ -6,16 +7,21 @@ import ReplyDeleteModal from '../Delete/ReplyDeleteModal';
 
 type Props = {
   reply: ReplyModalButtons_reply,
-  onChange: Function,
+  onChange: () => void,
 };
 
-export class ReplyModalButtons extends React.Component<Props> {
+type State = {
+  showEditModal: boolean,
+  showDeleteModal: boolean,
+};
+
+export class ReplyModalButtons extends React.Component<Props, State> {
   state = {
     showEditModal: false,
     showDeleteModal: false,
   };
 
-  toggleDeleteModal(value) {
+  toggleDeleteModal(value: boolean) {
     this.setState({ showDeleteModal: value });
   }
 
@@ -28,9 +34,12 @@ export class ReplyModalButtons extends React.Component<Props> {
             <Button
               id={`reply-delete-button${reply.id}`}
               className="reply__delete-btn"
-              onClick={this.toggleDeleteModal.bind(null, true)}
+              onClick={() => {
+                this.toggleDeleteModal(true);
+              }}
               style={{ marginLeft: '15px' }}
             />
+            {/* $FlowFixMe $refType */}
             <ReplyDeleteModal
               reply={reply}
               show={this.state.showDeleteModal}
