@@ -42,8 +42,10 @@ class DoctrineUpdateListener implements EventSubscriber
 
     private function sendOrder($entity)
     {
-        $this->publisher->publish('elasticsearch.indexation', new Message(
-            json_encode(['class' => get_class($entity), 'id' => $entity->getId()])
-        ));
+        if ($entity instanceof IndexableInterface) {
+            $this->publisher->publish('elasticsearch.indexation', new Message(
+              json_encode(['class' => get_class($entity), 'id' => $entity->getId()])
+          ));
+        }
     }
 }

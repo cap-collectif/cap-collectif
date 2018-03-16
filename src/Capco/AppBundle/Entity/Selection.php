@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\HasLifecycleCallbacks
  * @CapcoAssert\StatusBelongsToSelectionStep()
  */
-class Selection implements IndexableInterface
+class Selection
 {
     /**
      * @ORM\Id
@@ -97,20 +96,5 @@ class Selection implements IndexableInterface
         if ($this->getProposal()) {
             $this->getProposal()->removeSelection($this);
         }
-    }
-
-    public function isIndexable(): bool
-    {
-        return true;
-    }
-
-    public static function getElasticsearchTypeName(): string
-    {
-        return 'selection';
-    }
-
-    public static function getElasticsearchSerializationGroups(): array
-    {
-        return ['Elasticsearch'];
     }
 }

@@ -99,11 +99,6 @@ mappings:
             authorName: *text_analysis
             Author: *Author
 
-    # consultationStep:
-    #     properties:
-    #         id: { type: keyword }
-    #         title: *text_analysis_highlighted
-
     event:
         properties:
             id: { type: keyword }
@@ -168,9 +163,6 @@ mappings:
                     id: { type: keyword }
             votesCountByStepId:
                 type: object
-            #    attributes:
-            #       key: { type: keyword }
-            #       value: { type: float }
             selections:
                 type: object
                 properties:
@@ -220,38 +212,6 @@ mappings:
             createdAt: { type: date }
             updatedAt: { type: date }
             Author: *Author
-
-    selection:
-        properties:
-            id: { type: keyword }
-            status:
-                type: object
-                properties:
-                    id: { type: keyword }
-            selectionStep:
-                type: object
-                properties:
-                    id: { type: keyword }
-
-    # selectionStep:
-    #     properties:
-    #         id: { type: keyword }
-    #         title: *text_analysis_highlighted
-    #
-    # collectStep:
-    #     properties:
-    #         id: { type: keyword }
-    #         title: *text_analysis_highlighted
-
-    # status:
-    #     properties:
-    #         name: { type: keyword }
-    #         color: { type: keyword }
-    #
-    # category:
-    #     properties:
-    #         id: { type: keyword }
-    #         color: { type: keyword }
 
     theme:
         properties:

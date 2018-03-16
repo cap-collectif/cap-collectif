@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity\Steps;
 
-use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Status;
@@ -16,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="collect_step")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\CollectStepRepository")
  */
-class CollectStep extends AbstractStep implements IndexableInterface, ParticipativeStepInterface
+class CollectStep extends AbstractStep implements ParticipativeStepInterface
 {
     use TimelessStepTrait, VoteThresholdTrait, VoteTypeTrait;
 
@@ -162,20 +161,5 @@ class CollectStep extends AbstractStep implements IndexableInterface, Participat
     public function isParticipative(): bool
     {
         return true;
-    }
-
-    public function isIndexable(): bool
-    {
-        return $this->getIsEnabled();
-    }
-
-    public static function getElasticsearchTypeName(): string
-    {
-        return 'collectStep';
-    }
-
-    public static function getElasticsearchSerializationGroups(): array
-    {
-        return ['Elasticsearch'];
     }
 }

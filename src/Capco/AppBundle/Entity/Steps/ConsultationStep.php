@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity\Steps;
 
-use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Traits\TimelessStepTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -14,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ConsultationStepRepository")
  */
-class ConsultationStep extends AbstractStep implements IndexableInterface, ParticipativeStepInterface
+class ConsultationStep extends AbstractStep implements ParticipativeStepInterface
 {
     use TimelessStepTrait;
 
@@ -449,20 +448,5 @@ class ConsultationStep extends AbstractStep implements IndexableInterface, Parti
         $this->descriptionHelpText = $descriptionHelpText;
 
         return $this;
-    }
-
-    public function isIndexable(): bool
-    {
-        return $this->getIsEnabled();
-    }
-
-    public static function getElasticsearchTypeName(): string
-    {
-        return 'consultationStep';
-    }
-
-    public static function getElasticsearchSerializationGroups(): array
-    {
-        return ['ConsultationSteps'];
     }
 }
