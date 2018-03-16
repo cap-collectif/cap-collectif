@@ -7,6 +7,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
       Object {
         "commentsCount": 5,
         "id": 41,
+        "isAuthenticated": true,
         "referer": "http://capco.test",
         "selections": Array [],
         "viewerCanSeeEvaluation": true,
@@ -26,6 +27,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
       Object {
         "commentsCount": 5,
         "id": 41,
+        "isAuthenticated": true,
         "referer": "http://capco.test",
         "selections": Array [],
         "viewerCanSeeEvaluation": true,
@@ -96,6 +98,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
       Object {
         "count": 32,
         "cursor": null,
+        "isAuthenticated": true,
         "proposalId": 41,
       }
     }
@@ -110,6 +113,7 @@ exports[`<ProposalPage /> should render a proposal page with evaluation tab 1`] 
       Object {
         "commentsCount": 5,
         "id": 41,
+        "isAuthenticated": true,
         "referer": "http://capco.test",
         "selections": Array [],
         "viewerCanSeeEvaluation": true,
@@ -129,6 +133,7 @@ exports[`<ProposalPage /> should render a proposal page with evaluation tab 1`] 
       Object {
         "commentsCount": 5,
         "id": 41,
+        "isAuthenticated": true,
         "referer": "http://capco.test",
         "selections": Array [],
         "viewerCanSeeEvaluation": true,
@@ -199,6 +204,7 @@ exports[`<ProposalPage /> should render a proposal page with evaluation tab 1`] 
       Object {
         "count": 32,
         "cursor": null,
+        "isAuthenticated": true,
         "proposalId": 41,
       }
     }
@@ -212,6 +218,7 @@ exports[`<ProposalPage /> should render a vote tab and a vote modal if votable s
     proposal={
       Object {
         "id": 42,
+        "isAuthenticated": true,
         "referer": "http://capco.test",
         "selections": Array [],
         "viewerCanSeeEvaluation": true,
@@ -230,6 +237,7 @@ exports[`<ProposalPage /> should render a vote tab and a vote modal if votable s
     proposal={
       Object {
         "id": 42,
+        "isAuthenticated": true,
         "referer": "http://capco.test",
         "selections": Array [],
         "viewerCanSeeEvaluation": true,
@@ -300,6 +308,7 @@ exports[`<ProposalPage /> should render a vote tab and a vote modal if votable s
       Object {
         "count": 32,
         "cursor": null,
+        "isAuthenticated": true,
         "proposalId": 42,
       }
     }

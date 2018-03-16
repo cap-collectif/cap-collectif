@@ -3,6 +3,7 @@ import React from 'react';
 import { Col } from 'react-bootstrap';
 import classNames from 'classnames';
 import { QueryRenderer, graphql } from 'react-relay';
+import { connect, type MapStateToProps } from 'react-redux';
 import ProposalPreviewHeader from './ProposalPreviewHeader';
 import ProposalPreviewBody from './ProposalPreviewBody';
 import ProposalPreviewFooter from './ProposalPreviewFooter';
@@ -12,7 +13,7 @@ import ProposalVoteThresholdProgressBar from '../Vote/ProposalVoteThresholdProgr
 import { VOTE_TYPE_DISABLED, VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 import type { Proposal } from '../../../redux/modules/proposal';
 import ProposalFollowButton from '../Follow/ProposalFollowButton';
-import type { Uuid } from '../../../types';
+import type { State, Uuid } from '../../../types';
 import Loader from '../../Utils/Loader';
 import type ProposalPreviewFollowerButtonQueryResponse from '../Preview/__generated__/ProposalPreviewFollowerButtonQuery.graphql';
 import { CardContainer } from '../../Ui/Card/CardContainer';
@@ -28,6 +29,7 @@ type Props = {
   step: Step,
   showThemes: boolean,
   showComments: boolean,
+  isAuthenticated: boolean,
 };
 
 export class ProposalPreview extends React.Component<Props> {
@@ -58,13 +60,16 @@ export class ProposalPreview extends React.Component<Props> {
               <QueryRenderer
                 environment={environment}
                 query={graphql`
-                  query ProposalPreviewFollowerButtonQuery($proposalId: ID!) {
+                  query ProposalPreviewFollowerButtonQuery(
+                    $proposalId: ID!
+                    $isAuthenticated: Boolean!
+                  ) {
                     proposal: node(id: $proposalId) {
                       ...ProposalFollowButton_proposal
                     }
                   }
                 `}
-                variables={{ proposalId: proposal.id }}
+                variables={{ proposalId: proposal.id, isAuthenticated: this.props.isAuthenticated }}
                 render={({
                   error,
                   props,
@@ -109,4 +114,10 @@ export class ProposalPreview extends React.Component<Props> {
   }
 }
 
-export default ProposalPreview;
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
+  return {
+    isAuthenticated: state.user.user !== null,
+  };
+};
+
+export default connect(mapStateToProps)(ProposalPreview);

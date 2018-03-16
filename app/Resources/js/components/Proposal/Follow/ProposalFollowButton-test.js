@@ -19,6 +19,7 @@ describe('<ProposalFollowButton />', () => {
     viewerIsFollowing: false,
     followerConfiguration: null,
   };
+
   // $FlowFixMe $refType
   const props = {
     className: '',

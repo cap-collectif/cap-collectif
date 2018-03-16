@@ -141,6 +141,7 @@ exports[`<ProposalPreview /> should render a proposal preview votable 1`] = `
           render={[Function]}
           variables={
             Object {
+              "isAuthenticated": true,
               "proposalId": undefined,
             }
           }
@@ -340,6 +341,7 @@ exports[`<ProposalPreview /> should render a proposal preview with different ste
           render={[Function]}
           variables={
             Object {
+              "isAuthenticated": true,
               "proposalId": undefined,
             }
           }

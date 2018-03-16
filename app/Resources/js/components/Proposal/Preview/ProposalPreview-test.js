@@ -49,6 +49,7 @@ describe('<ProposalPreview />', () => {
     referer: 'http://capco.test',
     showThemes: true,
     showComments: true,
+    isAuthenticated: true,
   };
 
   const step2 = {
