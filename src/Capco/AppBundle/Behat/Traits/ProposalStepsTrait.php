@@ -621,7 +621,7 @@ trait ProposalStepsTrait
      */
     public function iShouldSeeTheProposalLikers()
     {
-        $this->assertPageContainsText('proposal.likers.count {"num":2}');
+        $this->assertPageContainsText('proposal.likers.count {"num":5}');
     }
 
     /**
