@@ -49,7 +49,7 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
         <Panel
           bsClass="panel"
           bsStyle="default"
-          className="mb-0 bn width250"
+          className="mb-0 b-none width250"
           defaultExpanded={false}
           header={
             <span>
@@ -92,7 +92,7 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
           <form>
             <FormGroup
               bsClass="form-group"
-              className="bn mb-0"
+              className="b-none mb-0"
               id="proposal-follow-btn-proposal1"
             >
               <ListGroup

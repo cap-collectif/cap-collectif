@@ -94,7 +94,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
               </Dropdown.Toggle>
               <Dropdown.Menu>
                 <Panel
-                  className="mb-0 bn width250"
+                  className="mb-0 b-none width250"
                   header={
                     <span>
                       <FormattedMessage id="to-be-notified-of-new-of" />
@@ -112,7 +112,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                     </span>
                   }>
                   <form>
-                    <FormGroup className="bn mb-0" id={`proposal-follow-btn-${proposal.id}`}>
+                    <FormGroup className="b-none mb-0" id={`proposal-follow-btn-${proposal.id}`}>
                       <ListGroup className="mb-0">
                         <ListGroupItem className="">
                           <Radio
