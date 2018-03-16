@@ -4,7 +4,7 @@ Capco\AppBundle\Entity\Project:
     id:
       expose: true
       type: string
-      groups: [Projects]
+      groups: [Projects, Elasticsearch]
     title:
       expose: true
       type: string

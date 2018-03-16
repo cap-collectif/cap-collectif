@@ -4,7 +4,7 @@ Capco\AppBundle\Entity\Comment:
     id:
       expose: true
       type: string
-      groups: [Comments]
+      groups: [Comments, Elasticsearch]
     body:
       expose: true
       type: string
