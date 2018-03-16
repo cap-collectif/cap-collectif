@@ -43,3 +43,4 @@ services:
         class: Capco\AppBundle\Elasticsearch\IndexationProcessor
         arguments:
             - '@capco.elasticsearch.indexer'
+            - '@logger'
