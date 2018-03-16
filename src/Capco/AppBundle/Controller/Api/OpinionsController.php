@@ -804,7 +804,7 @@ class OpinionsController extends FOSRestController
 
         $this->getDoctrine()->getManager()->persist($report);
         $this->getDoctrine()->getManager()->flush();
-        $this->get('capco.notify_manager')->sendNotifyMessage($report);
+        $this->get('capco.report_notifier')->onCreate($report);
 
         return $report;
     }
@@ -835,7 +835,7 @@ class OpinionsController extends FOSRestController
 
         $this->getDoctrine()->getManager()->persist($report);
         $this->getDoctrine()->getManager()->flush();
-        $this->get('capco.notify_manager')->sendNotifyMessage($report);
+        $this->get('capco.report_notifier')->onCreate($report);
 
         return $report;
     }

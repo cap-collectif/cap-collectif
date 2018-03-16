@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Association between questionnaire and questions.
  *
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository")
  * @ORM\Table(
  *  name="questionnaire_abstractquestion",
  *  uniqueConstraints={

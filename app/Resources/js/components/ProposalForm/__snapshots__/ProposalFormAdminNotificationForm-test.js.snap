@@ -137,6 +137,7 @@ exports[`<ProposalFormAdminNotificationForm /> render correctly 1`] = `
           bsClass="btn"
           bsStyle="primary"
           disabled={false}
+          id="notification-submit"
           type="submit"
         >
           <FormattedMessage
