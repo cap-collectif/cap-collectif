@@ -388,3 +388,10 @@ services:
       class: Capco\AppBundle\GraphQL\Resolver\ResponsesResolver
       tags:
           - { name: overblog_graphql.resolver }
+
+    Capco\AppBundle\GraphQL\Resolver\QuestionnaireViewerRepliesResolver:
+      class: Capco\AppBundle\GraphQL\Resolver\QuestionnaireViewerRepliesResolver
+      arguments:
+          - "@capco.reply.repository"
+      tags:
+          - { name: overblog_graphql.resolver }

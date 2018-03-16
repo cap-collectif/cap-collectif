@@ -17,7 +17,6 @@ const Checkbox = React.createClass({
     renderFormErrors: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
     labelClassName: PropTypes.string,
-    isReduxForm: PropTypes.bool.isRequired,
     value: PropTypes.object.isRequired,
     errors: PropTypes.any,
   },
@@ -28,7 +27,6 @@ const Checkbox = React.createClass({
     return {
       disabled: false,
       labelClassName: '',
-      isReduxForm: false,
       value: {},
     };
   },
@@ -84,7 +82,6 @@ const Checkbox = React.createClass({
       field,
       value,
       onBlur,
-      isReduxForm,
     } = this.props;
 
     const finalValue = value.labels ? value.labels : [];
@@ -150,7 +147,6 @@ const Checkbox = React.createClass({
             <Other
               ref={c => (this.other = c)}
               value={otherValue}
-              isReduxForm={isReduxForm}
               field={field}
               onChange={this.onOtherChange}
               disabled={disabled}

@@ -220,7 +220,6 @@ class ReactBootstrapInput extends React.Component<Props> {
             label={null}
             renderFormErrors={() => {}}
             getGroupStyle={() => {}}
-            isReduxForm
             errors={errors}
             {...props}
           />
@@ -301,7 +300,7 @@ class ReactBootstrapInput extends React.Component<Props> {
           label={null}
           renderFormErrors={() => {}}
           getGroupStyle={() => {}}
-          isReduxForm
+          labelClassName="h4"
           onBlur={props.onBlur}
           {...props}
         />

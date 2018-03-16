@@ -16,14 +16,12 @@ const Ranking = React.createClass({
     disabled: PropTypes.bool,
     label: PropTypes.any,
     labelClassName: PropTypes.string,
-    isReduxForm: PropTypes.bool.isRequired,
   },
 
   getDefaultProps() {
     return {
       disabled: false,
-      labelClassName: 'h5',
-      isReduxForm: false,
+      labelClassName: '',
     };
   },
 
@@ -36,17 +34,11 @@ const Ranking = React.createClass({
   },
 
   handleRankingChange(ranking) {
-    const { field, onChange, isReduxForm } = this.props;
+    const { onChange } = this.props;
     const values = [];
     ranking.map(item => values.push(item.label));
 
-    if (isReduxForm) {
-      onChange(values);
-
-      return;
-    }
-
-    onChange(field, values);
+    onChange(values);
   },
 
   render() {

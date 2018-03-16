@@ -14,7 +14,7 @@ export class UserReplies extends React.Component<Props> {
   render() {
     const { questionnaire } = this.props;
 
-    if (questionnaire.viewerReplies.length === 0) {
+    if (!questionnaire.viewerReplies || questionnaire.viewerReplies.length === 0) {
       return null;
     }
 
@@ -43,7 +43,7 @@ export class UserReplies extends React.Component<Props> {
 export default createFragmentContainer(UserReplies, {
   questionnaire: graphql`
     fragment UserReplies_questionnaire on Questionnaire {
-      viewerReplies {
+      viewerReplies @include(if: $isAuthenticated) {
         id
         ...ReplyModalLink_reply
       }

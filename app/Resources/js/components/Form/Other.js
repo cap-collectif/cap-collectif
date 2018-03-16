@@ -9,14 +9,7 @@ const Other = React.createClass({
     field: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
-    isReduxForm: PropTypes.bool,
     value: PropTypes.string,
-  },
-
-  getDefaultProps() {
-    return {
-      isReduxForm: false,
-    };
   },
 
   getInitialState() {
@@ -63,17 +56,13 @@ const Other = React.createClass({
     if (input instanceof HTMLInputElement) {
       if (e.target.checked) {
         input.focus();
-        if (this.props.isReduxForm) {
-          this.props.onChange(e, this.state.value);
-        }
+        this.props.onChange(e, this.state.value);
       } else {
         input.value = '';
         this.setState({
           value: '',
         });
-        if (this.props.isReduxForm) {
-          this.props.onChange(e, undefined);
-        }
+        this.props.onChange(e, undefined);
       }
     }
     this.setState({
@@ -109,7 +98,7 @@ const Other = React.createClass({
             checked={this.state.checked}
             onChange={this.onCheckUncheck}
             disabled={disabled}>
-            {<FormattedMessage id="reply.other" />}
+            <FormattedMessage id="reply.other" />
           </Input>
         </div>
         <div className="other-field__value">

@@ -15,14 +15,15 @@ Questionnaire:
                 type: "Boolean!"
             open:
                 type: "Boolean!"
-                resolve: "@=resolver('questionnaire_open', [value])"
+                resolve: "@=value.canContribute()"
                 description: "accept answers or not"
             phoneConfirmationRequired:
                 type: "Boolean!"
-                resolve: "@=resolver('questionnaire_phoneConfirmationRequired', [value])"
+                resolve: "@=value.isPhoneConfirmationRequired()"
             questions:
                 type: "[Question!]!"
                 resolve: "@=resolver('questionnaire_questions', [value])"
             viewerReplies:
                 type: "[Reply!]!"
-                resolve: "@=resolver('questionnaire_viewerReplies', [value, user])"
+                access: "@=isAuthenticated()"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionnaireViewerRepliesResolver", [value, user])'

@@ -26,12 +26,9 @@ type State = {
 };
 
 export class MultipleChoiceRadio extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      otherChecked: false,
-    };
-  }
+  state = {
+    otherChecked: false,
+  };
 
   checkOtherRadio = () => {
     this.props.change(`${this.props.name}.value.labels`, []);

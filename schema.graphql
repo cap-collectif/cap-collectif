@@ -1916,7 +1916,7 @@ type RemoveProposalVotePayload {
 }
 
 # A reply contribution
-type Reply {
+type Reply implements Node {
   enabled: Boolean!
   private: Boolean!
   responses: [Response]!

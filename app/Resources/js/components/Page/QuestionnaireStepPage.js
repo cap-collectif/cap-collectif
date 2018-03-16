@@ -14,6 +14,7 @@ import { Loader } from '../Utils/Loader';
 type Props = {
   step: Object,
   form: { id: string },
+  isAuthenticated: boolean,
 };
 
 const component = ({
@@ -53,7 +54,7 @@ export class QuestionnaireStepPage extends React.Component<Props> {
         <QueryRenderer
           environment={environment}
           query={graphql`
-            query QuestionnaireStepPageQuery($id: ID!) {
+            query QuestionnaireStepPageQuery($id: ID!, $isAuthenticated: Boolean!) {
               questionnaire: node(id: $id) {
                 ...ReplyCreateFormWrapper_questionnaire
                 ...UserReplies_questionnaire
@@ -62,6 +63,7 @@ export class QuestionnaireStepPage extends React.Component<Props> {
           `}
           variables={{
             id: form.id,
+            isAuthenticated: this.props.isAuthenticated,
           }}
           render={component}
         />
@@ -72,6 +74,7 @@ export class QuestionnaireStepPage extends React.Component<Props> {
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Props) => ({
+  isAuthenticated: state.user.user !== null,
   step:
     state.project.currentProjectById &&
     state.project.projectsById[state.project.currentProjectById].stepsById[props.step.id],

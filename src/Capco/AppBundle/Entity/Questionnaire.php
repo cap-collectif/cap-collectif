@@ -247,10 +247,7 @@ class Questionnaire
         return $this->getStep()->canDisplay();
     }
 
-    /**
-     * @return bool
-     */
-    public function canContribute()
+    public function canContribute(): bool
     {
         return $this->getStep() && $this->getStep()->canContribute();
     }
@@ -367,7 +364,7 @@ class Questionnaire
         return $this;
     }
 
-    public function isPhoneConfirmationRequired()
+    public function isPhoneConfirmationRequired(): bool
     {
         return $this->step && $this->step->isPhoneConfirmationRequired();
     }

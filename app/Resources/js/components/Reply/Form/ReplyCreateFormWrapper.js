@@ -40,7 +40,9 @@ export class ReplyCreateFormWrapper extends React.Component<Props, State> {
       !questionnaire.open ||
       !user ||
       (questionnaire.phoneConfirmationRequired && !user.isPhoneConfirmed) ||
-      (questionnaire.viewerReplies.length > 0 && !questionnaire.multipleRepliesAllowed)
+      (questionnaire.viewerReplies &&
+        questionnaire.viewerReplies.length > 0 &&
+        !questionnaire.multipleRepliesAllowed)
     );
   }
 
@@ -59,6 +61,7 @@ export class ReplyCreateFormWrapper extends React.Component<Props, State> {
           </Alert>
         ) : (
           questionnaire.contribuable &&
+          questionnaire.viewerReplies &&
           questionnaire.viewerReplies.length > 0 &&
           !questionnaire.multipleRepliesAllowed && (
             <Alert bsStyle="warning">
@@ -93,11 +96,9 @@ export class ReplyCreateFormWrapper extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => {
-  return {
-    user: state.user.user,
-  };
-};
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
+  user: state.user.user,
+});
 
 const container = connect(mapStateToProps)(ReplyCreateFormWrapper);
 
@@ -109,7 +110,7 @@ export default createFragmentContainer(container, {
       multipleRepliesAllowed
       phoneConfirmationRequired
       open
-      viewerReplies {
+      viewerReplies @include(if: $isAuthenticated) {
         id
       }
       id
