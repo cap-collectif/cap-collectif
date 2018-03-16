@@ -172,13 +172,13 @@ Scenario: Admin API client can create a project
 
 @parallel-scenario
 Scenario: API client wants to get all project steps
-  When I send a GET request to "/api/projects/project1/steps"
+  When I send a GET request to "/api/projects/1/steps"
   Then the JSON response status code should be 200
   And the JSON response should match:
   """
   [
     {
-      "projectId": "project1",
+      "projectId": "1",
       "position": 1,
       "open": false,
       "timeless": false,

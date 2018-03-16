@@ -5,6 +5,10 @@ PropositionVote:
         fields:
             id:
               type: "ID!"
+            related:
+                type: "Contribution"
+                description: "The related proposition."
+                # resolve: "@=resolver('proposition_vote_proposition', [value])"
             author:
                 type: "User!"
                 description: "The author of the contribution."
@@ -15,8 +19,9 @@ PropositionVote:
                 type: "Boolean!"
                 description: "If vote is expired, it exists but doesn't count."
             createdAt:
-                type: "DateTime!"
+                type: "String!"
                 description: "Date of vote."
+                resolve: "@=resolver('vote_createdAt', [value])"
             related:
                 type: "Contribution"
                 description: "Return the related contribution if the contribution is related to another."
