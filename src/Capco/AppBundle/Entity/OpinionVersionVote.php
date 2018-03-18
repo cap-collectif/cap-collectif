@@ -49,7 +49,7 @@ class OpinionVersionVote extends AbstractVote
      * @Gedmo\Timestampable(on="update", field={"value"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
-    private $updatedAt;
+    protected $updatedAt;
 
     /**
      * @ORM\Column(name="value", type="integer")
