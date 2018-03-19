@@ -2,6 +2,7 @@ application:
     build: ../services/local
     ports:
         - "80:80"
+        - "443:443"
         - "15672:15672"
     environment:
         SYMFONY_DATABASE_HOST: database
