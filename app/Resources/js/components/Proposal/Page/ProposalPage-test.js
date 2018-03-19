@@ -23,7 +23,6 @@ describe('<ProposalPage />', () => {
     },
     steps: [{ id: '1', voteType: VOTE_TYPE_DISABLED }, { id: '2', voteType: VOTE_TYPE_SIMPLE }],
     viewerCanSeeEvaluation: true,
-    isAuthenticated: true,
   };
 
   const proposalNoVotes = {
@@ -40,7 +39,6 @@ describe('<ProposalPage />', () => {
       collectstep1: [],
     },
     viewerCanSeeEvaluation: true,
-    isAuthenticated: true,
   };
   const proposalWithVotes = {
     id: 42,
@@ -55,7 +53,6 @@ describe('<ProposalPage />', () => {
       collectstep1: [],
     },
     viewerCanSeeEvaluation: true,
-    isAuthenticated: true,
   };
 
   const proposalWithoutVotableStep = {
@@ -69,7 +66,6 @@ describe('<ProposalPage />', () => {
       collectstep1: [],
     },
     viewerCanSeeEvaluation: true,
-    isAuthenticated: true,
   };
 
   it('should render a proposal page', () => {

@@ -207,7 +207,7 @@ export default createFragmentContainer(
     fragment ProposalFollowButton_proposal on Proposal {
       id
       viewerIsFollowing
-      followerConfiguration @include(if: $isAuthenticated) {
+      followerConfiguration {
         notifiedOf
       }
     }
