@@ -79,58 +79,6 @@ svg.avatar {
 
 /* ======================= Storybook ============================*/
 
-.proposal-follow-dropdown ul.dropdown-menu {
-  margin: 0;
-  padding: 0;
-  min-width: 250px;
-}
-
-.proposal-follow-dropdown .dropdown ul.dropdown-menu div.panel div.panel-body {
-  margin: 0;
-  padding: 0;
-  border-top: 0;
-  border-left: 0;
-  border-right: 0;
-}
-
-.proposal-follow-dropdown .dropdown ul.dropdown-menu div.panel div.panel-body .form-group {
-  border-top: 0;
-  border-left: 0;
-  border-right: 0;
-  margin-bottom: 0;
-}
-
-.proposal-follow-dropdown .dropdown ul.dropdown-menu div.panel div.panel-body li.list-group-item {
-  border-top: 0;
-  border-left: 0;
-  border-right: 0;
-  border-bottom: 1.8px solid rgb(221, 221, 221);
-  border-radius: 0;
-  -moz-border-radius: 0;
-}
-
-.storybook-container {
-    hr {
-        margin: 20px 0;
-    }
-
-    a {
-        color: $brand-color-2;
-
-        &:hover {
-            color: $brand-color-1;
-        }
-    }
-}
-
-#proposal-follow-btn:focus{
-    background-color: $border-color;
-}
-
-#proposal-follow-btn:focus {
-  background-color: white;
-}
-
 .following-project {
   border-bottom: none;
 }

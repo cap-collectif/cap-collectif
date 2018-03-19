@@ -23,7 +23,7 @@ exports[`<ProposalFollowButton /> should render a button to follow a proposal 1`
 exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 1`] = `
 <Connect(LoginOverlay)>
   <span
-    className="mb-0 proposal-follow-dropdown"
+    className="mb-0 proposal-follow-dropdown custom-dropdown"
   >
     <Uncontrolled(Dropdown)
       className="mb-0 width250 fifty-shade-of-grey"
