@@ -10,7 +10,9 @@ exports[`<ProjectPreview /> should render correctly project with participative s
   sm={6}
   xs={12}
 >
-  <CardContainer>
+  <CardContainer
+    id="project-preview"
+  >
     <ProjectCover
       project={
         Object {
@@ -41,7 +43,9 @@ exports[`<ProjectPreview /> should render correctly project without participativ
   sm={6}
   xs={12}
 >
-  <CardContainer>
+  <CardContainer
+    id="project-preview"
+  >
     <ProjectType
       project={
         Object {
@@ -92,7 +96,9 @@ exports[`<ProjectPreview /> should render correctly project without participativ
   sm={6}
   xs={12}
 >
-  <CardContainer>
+  <CardContainer
+    id="project-preview"
+  >
     <ProjectType
       project={
         Object {

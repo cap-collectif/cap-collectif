@@ -30,7 +30,9 @@ const ProposalPreview = React.createClass({
       <Col componentClass="li" xs={12} sm={6} md={4} lg={3}>
         <CardContainer
           id={`proposal-${proposal.id}`}
-          className={proposal.author && proposal.author.vip ? 'bg-vip ' : null}>
+          className={
+            proposal.author && proposal.author.vip ? 'bg-vip proposal-preview' : 'proposal-preview'
+          }>
           <ProposalPreviewHeader proposal={proposal} />
           <ProposalPreviewBody
             proposal={proposal}

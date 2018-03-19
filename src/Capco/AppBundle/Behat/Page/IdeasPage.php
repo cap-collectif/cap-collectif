@@ -17,7 +17,7 @@ class IdeasPage extends Page
     protected $elements = [
         'idea create button' => '#idea-create-button',
         'idea form submit button' => '#confirm-idea-create',
-        'idea' => '.idea__preview',
+        'idea' => '#idea-preview',
         'sorting select' => 'select#idea-sorting',
         'selected sorting option' => '#idea-sorting option[selected]',
         'ideas trash link' => '#ideas-trash',

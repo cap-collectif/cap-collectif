@@ -5,7 +5,7 @@ exports[`<ProposalPreviewFooter /> should render a footer with comment and votes
   className="card__counters card__counters_multiple"
 >
   <div
-    className="card__counter"
+    className="card__counter card__counter-comments"
   >
     <div
       className="card__counter__value"
@@ -24,7 +24,7 @@ exports[`<ProposalPreviewFooter /> should render a footer with comment and votes
     </div>
   </div>
   <div
-    className="card__counter"
+    className="card__counter card__counter-votes"
   >
     <div
       className="card__counter__value"
@@ -50,7 +50,7 @@ exports[`<ProposalPreviewFooter /> should render a footer with comment counter 1
   className="card__counters "
 >
   <div
-    className="card__counter"
+    className="card__counter card__counter-comments"
   >
     <div
       className="card__counter__value"

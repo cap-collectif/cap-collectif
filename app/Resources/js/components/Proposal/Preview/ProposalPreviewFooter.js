@@ -33,7 +33,7 @@ export class ProposalPreviewFooter extends React.Component<Props> {
     return (
       <div className={`card__counters ${classNames(countersClasses)}`}>
         {showComments && (
-          <div className="card__counter">
+          <div className="card__counter card__counter-comments">
             <div className="card__counter__value">{proposal.commentsCount}</div>
             <div>
               <FormattedMessage
@@ -46,7 +46,7 @@ export class ProposalPreviewFooter extends React.Component<Props> {
           </div>
         )}
         {showVotes && (
-          <div className="card__counter">
+          <div className="card__counter card__counter-votes">
             <div className="card__counter__value">{votesCount}</div>
             <div>
               <FormattedMessage

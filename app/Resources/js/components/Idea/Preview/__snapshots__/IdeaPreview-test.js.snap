@@ -3,6 +3,7 @@
 exports[`<IdeaPreview /> it should render idea preview 1`] = `
 <CardContainer
   className=""
+  id="idea-preview"
 >
   <IdeaPreviewHeader
     idea={
@@ -26,6 +27,7 @@ exports[`<IdeaPreview /> it should render idea preview 1`] = `
 exports[`<IdeaPreview /> should render vip background when idea author is vip 1`] = `
 <CardContainer
   className="bg-vip"
+  id="idea-preview"
 >
   <IdeaPreviewHeader
     idea={

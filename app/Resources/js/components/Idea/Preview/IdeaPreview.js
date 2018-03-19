@@ -15,7 +15,7 @@ const IdeaPreview = React.createClass({
       'bg-vip': idea.author.vip,
     });
     return (
-      <CardContainer className={classes}>
+      <CardContainer className={classes} id="idea-preview">
         <IdeaPreviewHeader idea={idea} />
         <IdeaPreviewBody idea={idea} />
       </CardContainer>
