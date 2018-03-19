@@ -2,7 +2,7 @@
 
 namespace Capco\UserBundle\Form\Type;
 
-use Capco\AppBundle\Validator\Constraints\NotThrowableEmail;
+use EmailChecker\Constraints\NotThrowawayEmail;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,7 +18,7 @@ class ApiProfileAccountFormType extends AbstractType
               'constraints' => [
                 new Assert\NotNull(),
                 new Assert\Email(['message' => 'email.invalid']),
-                new NotThrowableEmail(['message' => 'email.throwable']),
+                new NotThrowawayEmail(['message' => 'email.throwable']),
               ],
             ])
         ;

@@ -15,7 +15,7 @@ Capco\UserBundle\Entity\User:
     email:
       - NotBlank: { message: email.blank, groups: [registration, registrationAdmin] }
       - Email: { message: email.invalid, groups: [registration, registrationAdmin] }
-      - Capco\AppBundle\Validator\Constraints\NotThrowableEmail: { message: email.throwable, groups: [registration] }
+      - EmailChecker\Constraints\NotThrowawayEmail: { message: email.throwable, groups: [registration] }
       - Capco\AppBundle\Validator\Constraints\CheckEmailDomain: { groups: [registration] }
     twitterUrl:
       - Url: { groups: [profile] }

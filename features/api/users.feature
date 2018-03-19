@@ -77,7 +77,7 @@ Scenario: Anonymous API client wants to register
   """
   {
     "username": "user2",
-    "email": "user2@gmail.com",
+    "email": "user2@test.com",
     "plainPassword": "supersecureuserpass",
     "captcha": "fakekey",
     "responses": [
@@ -134,7 +134,7 @@ Scenario: Anonymous API client wants to register with additional data
   """
   {
     "username": "user2",
-    "email": "user2@gmail.com",
+    "email": "user2@test.com",
     "plainPassword": "supersecureuserpass",
     "captcha": "fakekey",
     "userType": 1,
@@ -168,7 +168,7 @@ Scenario: Anonymous API client wants to register with zipcode and type
   """
   {
     "username": "user2",
-    "email": "user2@gmail.com",
+    "email": "user2@test.com",
     "plainPassword": "supersecureuserpass",
     "captcha": "fakekey",
     "userType": 1,
@@ -270,9 +270,9 @@ Scenario: API client wants to update his email
   When I send a PUT request to "/api/users/me" with json:
   """
   {
-    "email": "popopopopo@gmail.com",
+    "email": "popopopopo@test.com",
     "password": "user"
   }
   """
   Then the JSON response status code should be 204
-  And user "user" email_to_confirm should be "popopopopo@gmail.com"
+  And user "user" email_to_confirm should be "popopopopo@test.com"
