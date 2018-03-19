@@ -3,7 +3,7 @@ import std;
 
 backend default {
   .host = "localhost";
-  .port = "443";
+  .port = "8080";
 }
 
 # Called at the beginning of a request, after the complete request has been received and parsed.
@@ -15,7 +15,11 @@ sub vcl_recv {
   }
 
   # Ensure that the Symfony Router generates URLs correctly with Varnish
-  set req.http.X-Forwarded-Port = "443";
+  if (req.http.X-Forwarded-Proto == "https" ) {
+    set req.http.X-Forwarded-Port = "443";
+  } else {
+    set req.http.X-Forwarded-Port = "80";
+  }
 
   # Disable cache for development
   if (req.http.host == "capco.dev") {

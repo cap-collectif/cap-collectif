@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\GraphQL\Resolver\ProposalResolver;
 use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
+use Capco\AppBundle\Mailer\Message\Proposal\ProposalAknowledgeMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalCreateAdminMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalDeleteAdminMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalOfficialAnswerMessage;
@@ -93,5 +94,13 @@ class ProposalNotifier extends BaseNotifier
                 $child->getAuthor()->getEmail()
             ));
         }
+    }
+
+    public function afterCreate(Proposal $proposal)
+    {
+        $this->mailer->sendMessage(ProposalAknowledgeMessage::create(
+            $proposal,
+            $proposal->getAuthor()->getEmail()
+        ));
     }
 }

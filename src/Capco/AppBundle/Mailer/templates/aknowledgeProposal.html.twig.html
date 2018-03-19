@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC>
+<html>
+<head>
+    {% set siteName = capco_site_parameter_value('global.site.fullname') %}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    <title>{{ 'your-activity-summary-of'|trans({'{siteName}': siteName}, 'CapcoAppBundle') }}</title>
+    <style type="text/css" media="screen">
+
+        .ExternalClass * {line-height:100%}
+        .bb {
+            border-bottom: 1px solid #d9d9d9;
+            border-collapse: collapse;
+        }
+
+        .ba {
+            border: 0.5px solid #d9d9d9;
+            border-collapse: collapse;
+        }
+        .b-lrb {
+            border:0.5px solid #d9d9d9;
+            border-top: 0;
+            border-collapse: collapse;
+        }
+        /* Début style responsive (via media queries) */
+
+        @media only screen and (max-width:480px) {
+            *[id=email-penrose-conteneur] {width:100% !important;}
+            table[class=resp-full-table] {width:100% !important; clear:both;}
+            td[class=resp-full-td] {width:100% !important; clear:both;}
+            td[class=resp-full-td-center] {width:100%!important; clear:both; text-align: center !important;}
+            img[class=email-penrose-img-header] {width:100% !important; max-width:340px !important;}
+            a[class=resp-punchline] {font-size:50px !important;}
+            hr[class=resp-hr-center] {text-align: center !important; margin-left:auto !important; margin-right:auto !important;}
+        }
+
+    </style>
+</head>
+<body>
+<div align="center">
+    {% set activitiesDate =  sendAt|localizeddate('long', 'none', 'fr_FR', timezone)  %}
+    <table id="email-penrose-conteneur" width="660px" align="center" style="margin: 20px; background-color:#ffffff;" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td>
+                <table width="660px" class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td class="resp-full-td" valign="top" style="margin:0 20px; text-align:center;">
+                            <a class="resp-punchline" href="#" style="color:#337ab7; outline:none; text-decoration:none; font-size:20px; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">{{ siteName }}</a>
+                            <h1 class="resp-punchline" style="color:#000000; outline:none; text-decoration:none; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">  {{ 'summary-of-activities'|trans({},'CapcoAppBundle') }}</h1>
+                            <span class="resp-punchline" style="color:#999999; outline:none; font-size:12px; text-decoration:none; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">
+                                {{ activitiesDate }}
+							</span>
+                        </td>
+                    </tr>
+                    <tr style="margin-top: 20px">
+                        <td class="resp-full-td-center" valign="top" style="padding-top:50px; padding-left: 10px">
+                            <b>{{ 'hello-username'|trans({'{username}': username}, 'CapcoAppBundle') }}</b><br>
+                            {{ 'activity-summary-introduction'|trans({'{siteName}': siteName, '{activitiesDate}': activitiesDate}, 'CapcoAppBundle') }}
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <table id="email-penrose-conteneur" width="600px" align="center" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td style="margin:20px 0px;">
+                <table width="600px" class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="100%" class="resp-full-td" style="text-align: center;">
+                            <span>{{ 'you-receive-this-email-because'|trans({}, 'CapcoAppBundle') }}</span>
+                            <span>{{ 'you-follow-these-proposals'|trans({}, 'CapcoAppBundle') }}</span><br>
+                            <span><a href="{{ urlManagingFollowings }}">{{ 'set-up-my-subscriptions'|trans({}, 'CapcoAppBundle') }}</a></span>
+                            <span style="font-size:12px; font-family:'Helvetica Neue', helvetica, arial, sans-serif; color:#aeb2b3">{{ 'notification.email.external_footer'|trans({'{to}': to, '{sitename}': siteName, '{business}': business, '{siteUrl}': siteUrl, '{businessUrl}': businessUrl}, 'CapcoAppBundle') | raw }}</span>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
