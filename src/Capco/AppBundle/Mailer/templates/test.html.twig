@@ -1,0 +1,6 @@
+{{ capco_site_parameter_value('global.site.fullname') }},
+{{ proposal.title }}
+{{ url('app_project_show_proposal', {'projectSlug': proposal.step.project.slug, 'stepSlug': proposal.step.slug, 'proposalSlug': proposal.slug}) }}
+{{ proposal.step.project.title }}
+{{ proposal.author.getDisplayName() }}
+
