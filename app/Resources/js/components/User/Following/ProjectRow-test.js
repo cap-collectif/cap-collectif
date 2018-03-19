@@ -49,22 +49,31 @@ describe('<ProjectRow />', () => {
   const viewerWithoutProjectProposal = {
     followingProposals: [],
   };
+  const isAuthenticated = true;
 
   it('should render the project 1 with his proposal displayed', () => {
-    const wrapper = shallow(<ProjectRow viewer={viewer} project={project1} />);
+    const wrapper = shallow(
+      <ProjectRow viewer={viewer} project={project1} isAuthenticated={isAuthenticated} />,
+    );
     wrapper.setState({ open: true });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render the project 2 with his proposal displayed', () => {
-    const wrapper = shallow(<ProjectRow viewer={viewer} project={project2} />);
+    const wrapper = shallow(
+      <ProjectRow viewer={viewer} project={project2} isAuthenticated={isAuthenticated} />,
+    );
     wrapper.setState({ open: true });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render without project', () => {
     const wrapper = shallow(
-      <ProjectRow viewer={viewerWithoutProjectProposal} project={emptyProject} />,
+      <ProjectRow
+        viewer={viewerWithoutProjectProposal}
+        project={emptyProject}
+        isAuthenticated={isAuthenticated}
+      />,
     );
     wrapper.setState({ open: false });
     expect(wrapper).toMatchSnapshot();

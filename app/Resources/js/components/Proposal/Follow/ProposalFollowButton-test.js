@@ -19,22 +19,53 @@ describe('<ProposalFollowButton />', () => {
     viewerIsFollowing: false,
     followerConfiguration: null,
   };
+
+  // $FlowFixMe $refType
+  const proposalViewIsNotConnected = {
+    id: 'proposal1',
+    viewerIsFollowing: false,
+    followerConfiguration: null,
+  };
   // $FlowFixMe $refType
   const props = {
     className: '',
     referer: 'http://capco.test',
     oldProposal: {},
+    isAuthenticated: true,
   };
+
+  const isAuth = true;
 
   it('should render a button to follow a proposal', () => {
     const wrapper = shallow(
-      <ProposalFollowButton proposal={proposalViewIsNotFollowing} {...props} />,
+      <ProposalFollowButton
+        proposal={proposalViewIsNotFollowing}
+        isAuthenticated={isAuth}
+        {...props}
+      />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render a button to unfollow a proposal', () => {
-    const wrapper = shallow(<ProposalFollowButton proposal={proposalViewIsFollowing} {...props} />);
+    const wrapper = shallow(
+      <ProposalFollowButton
+        proposal={proposalViewIsFollowing}
+        isAuthenticated={isAuth}
+        {...props}
+      />,
+    );
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render a button to follow a proposal and user is not connected', () => {
+    const wrapper = shallow(
+      <ProposalFollowButton
+        proposal={proposalViewIsNotConnected}
+        isAuthenticated={!isAuth}
+        {...props}
+      />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 });

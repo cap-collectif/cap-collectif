@@ -9,15 +9,16 @@ describe('<ProposalRow />', () => {
     id: 'proposal1',
     title: 'perdu sur internet ?',
   };
+  const isAuthenticated = true;
 
   it('should render proposal displayed', () => {
-    const wrapper = shallow(<ProposalRow proposal={proposal} />);
+    const wrapper = shallow(<ProposalRow proposal={proposal} isAuthenticated={isAuthenticated} />);
     wrapper.setState({ open: true });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render proposal hidden', () => {
-    const wrapper = shallow(<ProposalRow proposal={proposal} />);
+    const wrapper = shallow(<ProposalRow proposal={proposal} isAuthenticated={isAuthenticated} />);
     wrapper.setState({ open: false });
     expect(wrapper).toMatchSnapshot();
   });

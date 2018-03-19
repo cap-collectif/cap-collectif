@@ -20,10 +20,30 @@ exports[`<ProposalFollowButton /> should render a button to follow a proposal 1`
 </Connect(LoginOverlay)>
 `;
 
+exports[`<ProposalFollowButton /> should render a button to follow a proposal and user is not connected 1`] = `
+<Connect(LoginOverlay)>
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="default"
+    className="btn btn-default proposal__button__follow"
+    disabled={false}
+    id="proposal-follow-btn-proposal1"
+    onClick={[Function]}
+  >
+    <FormattedMessage
+      id="follow"
+      values={Object {}}
+    />
+  </Button>
+</Connect(LoginOverlay)>
+`;
+
 exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 1`] = `
 <Connect(LoginOverlay)>
   <span
-    className="mb-0"
+    className="mb-0 proposal-follow-dropdown custom-dropdown"
   >
     <Uncontrolled(Dropdown)
       className="mb-0 width250 custom-dropdown  proposal-follow-dropdown"

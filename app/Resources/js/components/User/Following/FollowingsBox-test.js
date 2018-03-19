@@ -5,7 +5,9 @@ import { shallow } from 'enzyme';
 import { FollowingsBox } from './FollowingsBox';
 
 describe('<FollowingsBox />', () => {
-  const props = {};
+  const props = {
+    isAuthenticated: true,
+  };
 
   it('render', () => {
     const wrapper = shallow(<FollowingsBox {...props} />);

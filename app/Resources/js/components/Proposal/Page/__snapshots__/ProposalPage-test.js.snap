@@ -96,6 +96,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
       Object {
         "count": 32,
         "cursor": null,
+        "isAuthenticated": true,
         "proposalId": 41,
       }
     }
@@ -199,6 +200,7 @@ exports[`<ProposalPage /> should render a proposal page with evaluation tab 1`] 
       Object {
         "count": 32,
         "cursor": null,
+        "isAuthenticated": true,
         "proposalId": 41,
       }
     }
@@ -300,6 +302,7 @@ exports[`<ProposalPage /> should render a vote tab and a vote modal if votable s
       Object {
         "count": 32,
         "cursor": null,
+        "isAuthenticated": true,
         "proposalId": 42,
       }
     }
