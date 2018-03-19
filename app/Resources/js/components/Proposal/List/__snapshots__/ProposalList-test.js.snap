@@ -24,7 +24,7 @@ exports[`<ProposalList /> should render a proposal list 1`] = `
   <ul
     className="media-list proposal-preview-list opinion__list"
   >
-    <Connect(ProposalPreview)
+    <ProposalPreview
       proposal={
         Object {
           "body": "test1",
@@ -41,7 +41,7 @@ exports[`<ProposalList /> should render a proposal list 1`] = `
         }
       }
     />
-    <Connect(ProposalPreview)
+    <ProposalPreview
       proposal={
         Object {
           "body": "test2",
