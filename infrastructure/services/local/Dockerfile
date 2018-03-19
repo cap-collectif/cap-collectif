@@ -125,6 +125,7 @@ COPY nodejs/run                 /etc/service/nodejs/run
 # Configuration
 COPY nginx/ssl/capco.crt            /etc/ssl/certs/capco.crt
 COPY nginx/ssl/capco.key            /etc/ssl/private/capco.key
+COPY nginx/ssl/capco.pem            /etc/ssl/certs/capco.pem
 COPY nginx/nginx.conf               /etc/nginx/nginx.conf
 COPY php-fpm/fpm.conf               /etc/service/php-fpm/fpm.conf
 COPY php-fpm/capco.ini              /etc/php/7.1/fpm/conf.d/capco.ini
