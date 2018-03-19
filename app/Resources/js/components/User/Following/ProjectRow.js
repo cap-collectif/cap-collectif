@@ -12,6 +12,7 @@ import type { Uuid } from '../../../types';
 type Props = {
   project: { id: Uuid, url: string, title: string },
   viewer: FollowingsProposals_viewer,
+  isAuthenticated: boolean,
 };
 
 type State = {
@@ -36,7 +37,10 @@ export class ProjectRow extends Component<Props, State> {
       });
 
     this.setState({ open: !this.state.open }, () => {
-      UnfollowProposalMutation.commit({ input: { ids } }).then(() => {
+      UnfollowProposalMutation.commit({
+        input: { ids },
+        isAuthenticated: this.props.isAuthenticated,
+      }).then(() => {
         return true;
       });
     });
@@ -74,7 +78,13 @@ export class ProjectRow extends Component<Props, State> {
             {viewer.followingProposals
               .filter(proposal => proposal.project.id === project.id)
               .map((proposal, key) => {
-                return <ProposalRow key={key} proposal={proposal} />;
+                return (
+                  <ProposalRow
+                    key={key}
+                    proposal={proposal}
+                    isAuthenticated={this.props.isAuthenticated}
+                  />
+                );
               })}
           </ListGroup>
         </Panel>

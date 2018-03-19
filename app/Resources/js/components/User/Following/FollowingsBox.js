@@ -4,8 +4,11 @@
 import React, { Component } from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
 import Loader from '../../Ui/Loader';
+import type { MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import FollowingsProposals from './FollowingsProposals';
+import type { State } from '../../../types';
 
 const query = graphql`
   query FollowingsBoxQuery {
@@ -15,7 +18,9 @@ const query = graphql`
   }
 `;
 
-type Props = {};
+type Props = {
+  isAuthenticated: boolean,
+};
 
 export class FollowingsBox extends Component<Props> {
   render() {
@@ -25,7 +30,9 @@ export class FollowingsBox extends Component<Props> {
         return graphqlError;
       }
       if (props) {
-        return <FollowingsProposals viewer={props.viewer} />;
+        return (
+          <FollowingsProposals viewer={props.viewer} isAuthenticated={this.props.isAuthenticated} />
+        );
       }
       return <Loader />;
     };
@@ -42,4 +49,9 @@ export class FollowingsBox extends Component<Props> {
   }
 }
 
-export default FollowingsBox;
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
+  return {
+    isAuthenticated: state.user.user !== null,
+  };
+};
+export default connect(mapStateToProps)(FollowingsBox);

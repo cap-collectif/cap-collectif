@@ -22,6 +22,7 @@ import LoginOverlay from '../../Utils/LoginOverlay';
 
 type Props = {
   proposal: ProposalFollowButton_proposal,
+  isAuthenticated: boolean,
 };
 
 type State = {
@@ -39,7 +40,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
       });
     }
   }
-  changeFollowType(proposal: ProposalFollowButton_proposal, type: string) {
+  changeFollowType(proposal: ProposalFollowButton_proposal, type: string, isAuth: boolean) {
     if (
       proposal.viewerIsFollowing &&
       proposal.followerConfiguration !== null &&
@@ -50,6 +51,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
           proposalId: proposal.id,
           notifiedOf: type,
         },
+        isAuthenticated: isAuth,
       });
     }
   }
@@ -65,6 +67,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
             onClick={() => {
               return FollowProposalMutation.commit({
                 input: { proposalId: proposal.id, notifiedOf: 'DEFAULT' },
+                isAuthenticated: this.props.isAuthenticated,
               }).then(() => {
                 this.setState({
                   isJustFollowed: true,
@@ -84,7 +87,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
     ) {
       return (
         <LoginOverlay>
-          <span className="mb-0">
+          <span className="mb-0 proposal-follow-dropdown custom-dropdown">
             <Dropdown
               className="mb-0 width250 custom-dropdown  proposal-follow-dropdown"
               id={`proposal-follow-btn-${proposal.id}`}
@@ -124,7 +127,11 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                             }
                             inline
                             onClick={() => {
-                              return this.changeFollowType(proposal, 'DEFAULT');
+                              return this.changeFollowType(
+                                proposal,
+                                'DEFAULT',
+                                this.props.isAuthenticated,
+                              );
                             }}>
                             <b>
                               <FormattedMessage id="the-progress" />
@@ -144,7 +151,11 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                                 : ''
                             }
                             onClick={() => {
-                              return this.changeFollowType(proposal, 'DEFAULT_AND_COMMENTS');
+                              return this.changeFollowType(
+                                proposal,
+                                'DEFAULT_AND_COMMENTS',
+                                this.props.isAuthenticated,
+                              );
                             }}>
                             <b>
                               <FormattedMessage id="progress-and-comments" />
@@ -160,7 +171,11 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                               proposal.followerConfiguration.notifiedOf === 'ALL' ? 'checked' : ''
                             }
                             onClick={() => {
-                              return this.changeFollowType(proposal, 'ALL');
+                              return this.changeFollowType(
+                                proposal,
+                                'ALL',
+                                this.props.isAuthenticated,
+                              );
                             }}>
                             <b>
                               <FormattedMessage id="all-activities" />
@@ -181,6 +196,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                     if (proposal.viewerIsFollowing) {
                       return UnfollowProposalMutation.commit({
                         input: { proposalId: proposal.id },
+                        isAuthenticated: this.props.isAuthenticated,
                       }).then(() => {
                         this.setState({
                           isJustFollowed: false,
@@ -204,8 +220,8 @@ export default createFragmentContainer(
   graphql`
     fragment ProposalFollowButton_proposal on Proposal {
       id
-      viewerIsFollowing
-      followerConfiguration {
+      viewerIsFollowing @include(if: $isAuthenticated)
+      followerConfiguration @include(if: $isAuthenticated) {
         notifiedOf
       }
     }

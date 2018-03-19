@@ -69,6 +69,8 @@ Scenario: On Proposal Preview, Proposal should stay followed after user refresh 
   Given I am logged in as user
   And I go to a collect step with vote
   And I follow the first proposal
+  And I wait 1 seconds
+  And I should see "following"
   Then I go to a collect step with vote
   And I should see "following"
 
