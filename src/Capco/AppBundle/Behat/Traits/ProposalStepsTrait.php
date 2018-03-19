@@ -945,14 +945,6 @@ trait ProposalStepsTrait
      */
     public function iShouldSeeTheProposalVoteTooltip()
     {
-        $button = $this->navigationContext->getPage('selection page')->getVoteButton($this->getProposalId());
-        // useless click to scroll the page
-        $this->getSession()->getDriver()->click($button->getParent()->getParent()->getParent()->getParent()->getXpath());
-        try {
-            $this->getSession()->getDriver()->click($button->getParent()->getXpath());
-        } catch (\Exception $e) {
-        }
-        $this->iWait(10);
         $this->assertPageContainsText('proposal.vote.popover.not_enough_credits_text');
     }
 

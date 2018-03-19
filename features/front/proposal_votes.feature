@@ -62,9 +62,8 @@ Scenario: Anonymous user wants to vote in a selection step with an email already
 Scenario: Logged in user wants to vote when he has not enough credits left in a selection step
   Given I am logged in as admin
   When I go to a selection step with budget vote enabled
-  And I wait 5 seconds
   Then the proposal vote button must be disabled
-  And I wait 10 seconds
+  When I click the proposal "proposal8" vote button
   And I should see the proposal vote tooltip
 
 @javascript @security @elasticsearch @votes_from_selection_step
