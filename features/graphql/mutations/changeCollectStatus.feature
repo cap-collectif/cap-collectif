@@ -40,4 +40,4 @@ Scenario: GraphQL client wants to change proposal collect status
   """
   And 1 mail should be sent
   And I open mail with subject 'proposal_status_change_collect.notification.subject'
-  Then I should see 'proposal_status_change_collect.notification.body {"%sitename%":"Cap-Collectif","%project%":"Budget Participatif Rennes","%proposal%":"R\u00e9novation du gymnase","%status%":"Rejet\u00e9","%proposal_link%":"https:\/\/capco.test\/projects\/budget-participatif-rennes\/collect\/collecte-des-propositions\/proposals\/renovation-du-gymnase","%user%":"user"}' in mail
+  Then I should see 'proposal_status_change_collect.notification.body {"%sitename%":"Cap-Collectif","%project%":"Budget Participatif Rennes","%proposal%":"R\u00e9novation du gymnase","%status%":"Rejet\u00e9","%proposal_link%":"http:\/\/capco.test\/projects\/budget-participatif-rennes\/collect\/collecte-des-propositions\/proposals\/renovation-du-gymnase","%user%":"user"}' in mail
