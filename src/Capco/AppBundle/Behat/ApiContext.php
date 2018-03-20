@@ -25,7 +25,11 @@ class ApiContext extends ApplicationContext
      */
     public function createClient()
     {
-        $this->client = new Client(['base_uri' => 'http://capco.test/']);
+        $this->client = new Client([
+            'base_uri' => 'https://capco.test/',
+            'cert' => '/etc/ssl/certs/capco.pem',
+            'verify' => false,
+        ]);
         $this->token = null;
     }
 

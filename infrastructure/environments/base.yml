@@ -2,7 +2,9 @@ application:
     build: ../services/local
     ports:
         - "80:80"
+        - "443:443"
         - "15672:15672"
+        - "1664:1664"
     environment:
         SYMFONY_DATABASE_HOST: database
         SYMFONY_DATABASE_SERVER_VERSION: 5.5.46-0+deb8u1
@@ -44,7 +46,6 @@ mailcatcher:
   build: ../services/mailcatcher
   ports:
     - "25:25"
-    - "1080:80"
 
 chrome:
    build: ../services/chrome
