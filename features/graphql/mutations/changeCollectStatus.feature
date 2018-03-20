@@ -1,7 +1,7 @@
 @changeCollectStatus
 Feature: changeCollectStatus
 
-@database @test
+@database
 Scenario: GraphQL client wants to change proposal collect status
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
