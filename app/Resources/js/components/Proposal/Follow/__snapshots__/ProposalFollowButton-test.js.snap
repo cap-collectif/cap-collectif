@@ -46,13 +46,14 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
     className="mb-0 proposal-follow-dropdown custom-dropdown"
   >
     <Uncontrolled(Dropdown)
-      className="mb-0 width250 custom-dropdown  proposal-follow-dropdown"
+      className="mb-0 width250 custom-dropdown-bgd"
       defaultOpen={false}
       id="proposal-follow-btn-proposal1"
     >
       <DropdownToggle
         bsClass="dropdown-toggle"
         bsRole="toggle"
+        className="custom-dropdown-button"
         open={false}
         useAnchor={false}
       >

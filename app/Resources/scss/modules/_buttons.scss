@@ -6,7 +6,8 @@
     margin-top: 30px;
 }
 
-.btn-default_focus, .custom-dropdown button {
+.btn-default_focus, .custom-dropdown button,
+.custom-dropdown-bgd {
     background-color: $border-color;
 }
 
@@ -98,4 +99,8 @@
 .custom-dropdown .dropdown ul.dropdown-menu div.panel div.panel-body .form-group {
     border-top: 0;
     border-right: 0;
+}
+
+.custom-dropdown-bgd .dropdown-toggle {
+    background-color: $border-color;
 }
