@@ -162,7 +162,7 @@ abstract class AbstractStep
 
     abstract public function getType();
 
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
         return $this->title;
     }
@@ -174,7 +174,7 @@ abstract class AbstractStep
         return $this;
     }
 
-    public function getSlug(): string
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
@@ -266,12 +266,12 @@ abstract class AbstractStep
         return $this;
     }
 
-    public function getLabel(): string
+    public function getLabel(): ?string
     {
         return $this->label;
     }
 
-    public function setLabel(string $label): self
+    public function setLabel(?string $label): self
     {
         $this->label = $label;
 
@@ -384,7 +384,7 @@ abstract class AbstractStep
         return false;
     }
 
-    public function isOpen(): bool
+    public function isOpen(): ?bool
     {
         $now = new \DateTime();
 

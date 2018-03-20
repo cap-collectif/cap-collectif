@@ -306,7 +306,7 @@ class ProposalForm
         return $this;
     }
 
-    public function getStep(): CollectStep
+    public function getStep(): ?CollectStep
     {
         return $this->step;
     }
