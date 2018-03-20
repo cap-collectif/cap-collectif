@@ -8,7 +8,7 @@ use JMS\Serializer\EventDispatcher\PreSerializeEvent;
 
 class IdeaVoteSerializationListener implements EventSubscriberInterface
 {
-    public static function getSubscribedEvents(): array
+    public static function getSubscribedEvents()
     {
         return [
             [

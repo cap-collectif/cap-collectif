@@ -17,3 +17,5 @@ index.number_of_replicas: 0
 # Set this on the monitoring cluster, which is used to receive and analyze data from production,
 # to avoid collecting data from the monitoring cluster itself.
 marvel.agent.enabled: false
+
+script.disable_dynamic: false

@@ -30,3 +30,30 @@
         color: $white;
     }
 }
+
+// = btn-outline
+// to remove with bootstrap 4
+// -----------------------------
+@mixin btn-outline($color) {
+    border: 1px solid $color;
+    color: $color;
+    background-color: transparent;
+
+    &:hover,
+    &:active {
+        background-color: $color;
+        color: $white;
+    }
+}
+
+.btn-outline-danger.btn-danger {
+    @include btn-outline($danger-color);
+}
+
+.btn-outline-warning.btn-warning {
+    @include btn-outline($warning-color);
+}
+
+.btn-outline-primary.btn-primary {
+    @include btn-outline($primary-color);
+}

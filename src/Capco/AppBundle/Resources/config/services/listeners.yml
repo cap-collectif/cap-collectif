@@ -81,7 +81,7 @@ services:
 
   capco.source.serialization_listener:
     class: Capco\AppBundle\EventListener\SourceSerializationListener
-    arguments: ["@security.token_storage"]
+    arguments: ["@router", "@security.token_storage"]
     tags:
       - { name: "jms_serializer.event_subscriber" }
 
@@ -129,7 +129,7 @@ services:
 
   capco.selection_step.serialization_listener:
     class: Capco\AppBundle\EventListener\SelectionStepSerializationListener
-    arguments: [ "@jms_serializer", "@router"]
+    arguments: ["@security.token_storage", "@capco.proposal_votes.resolver", "@jms_serializer", "@router"]
     tags:
       - { name: "jms_serializer.event_subscriber" }
 
@@ -150,6 +150,16 @@ services:
     arguments: []
     tags:
       - { name: "jms_serializer.event_subscriber" }
+
+  capco.elastica.listener:
+    class: Capco\AppBundle\EventListener\ElasticaListener
+    arguments:
+      - '@fos_elastica.object_persister.app.proposal'
+      - '@fos_elastica.object_persister.app.selection'
+    calls:
+      - [ setContainer, [ "@service_container" ] ]
+    tags:
+       - { name: doctrine.event_subscriber, connection: default }
 
   capco.project.serialization_listener:
     class: Capco\AppBundle\EventListener\ProjectSerializationListener

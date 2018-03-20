@@ -295,7 +295,6 @@ class Reporting implements CreatableInterface
             return $this->proposal;
         }
     }
-    
 
     // ***************************** Lifecycle *******************************
 

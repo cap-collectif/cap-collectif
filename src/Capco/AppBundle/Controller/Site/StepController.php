@@ -260,12 +260,12 @@ class StepController extends Controller
             $filters = ['proposalForm' => $proposalForm->getId()];
 
             if ($step->isPrivate() && $this->getUser()) {
-                $providedFilters['authorUniqueId'] = $this->getUser()->getId();
+                $filters['authorUniqueId'] = $this->getUser()->getUniqueIdentifier();
                 $searchResults = $this->get('capco.search.proposal_search')
-                    ->searchProposals(1, 51, 'last', null, $filters);
+                    ->searchProposals(1, 51, null, null, $filters);
             } else {
                 $searchResults = $this->get('capco.search.proposal_search')
-                    ->searchProposals(1, 51, 'last', null, $filters);
+                    ->searchProposals(1, 51, null, null, $filters);
             }
             $countFusions = $em
               ->getRepository('CapcoAppBundle:Proposal')

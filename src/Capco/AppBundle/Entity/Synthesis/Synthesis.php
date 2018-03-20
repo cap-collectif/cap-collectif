@@ -193,10 +193,10 @@ class Synthesis
      */
     public function init()
     {
-        if (null === $this->sourceType) {
+        if ($this->sourceType === null) {
             $this->sourceType = 'none';
         }
-        if (null === $this->elements) {
+        if ($this->elements === null) {
             $this->elements = new ArrayCollection();
         }
     }

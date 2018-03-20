@@ -6,7 +6,7 @@ use JMS\Serializer\EventDispatcher\ObjectEvent;
 
 class QuestionnaireStepSerializationListener extends AbstractSerializationListener
 {
-    public static function getSubscribedEvents(): array
+    public static function getSubscribedEvents()
     {
         return [
             [

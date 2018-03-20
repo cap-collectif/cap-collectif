@@ -11,6 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 class SearchController extends Controller
 {
     /**
+     * @param Request $request
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     *
      * @Route("/search", name="app_search", defaults={"_feature_flags" = "search"})
      * @Template("CapcoAppBundle:Default:search.html.twig")
      */
@@ -33,7 +37,7 @@ class SearchController extends Controller
             $searchParams = $form->getData();
         }
 
-        if ($searchParams['sort'] && 'date' === $searchParams['sort']) {
+        if ($searchParams['sort'] && $searchParams['sort'] === 'date') {
             $sortField = 'createdAt';
             $sortOrder = 'desc';
         }
@@ -43,8 +47,7 @@ class SearchController extends Controller
             $page,
             $searchParams['term'],
             $sortField,
-            $sortOrder,
-            $searchParams['type']
+            $sortOrder
         );
 
         return [

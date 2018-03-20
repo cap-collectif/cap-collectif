@@ -39,8 +39,8 @@ export class ProposalAdminPageTabs extends Component<Props, State> {
             eventKey={4}
             title={
               <div>
-                <FormattedMessage id="proposal.tabs.followers" />
-                <span className="ml-10 badge">{proposal.followerConnection.totalCount}</span>
+                <FormattedMessage id="proposal.tabs.followers" />{' '}
+                <span className="badge">{proposal.followerConnection.totalCount}</span>
               </div>
             }>
             <ProposalAdminFollowers proposal={proposal} />

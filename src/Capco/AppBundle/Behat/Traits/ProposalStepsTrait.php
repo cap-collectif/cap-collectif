@@ -477,7 +477,7 @@ trait ProposalStepsTrait
     public function iSubmitTheCreateProposalForm()
     {
         $this->navigationContext->getPage('collect page')->submitProposalForm();
-        $this->iWait(8);
+        $this->iWait(7);
     }
 
     /**

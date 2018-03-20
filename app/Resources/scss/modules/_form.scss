@@ -1,6 +1,168 @@
 /* ===============================================================
    $FORMS
 ================================================================*/
+
+/*
+Image uploader dropzone
+*/
+.image-uploader {
+    &__dropzone {
+        width: 200px;
+        height: 200px;
+        margin-top: 5px;
+        border: 2px dashed $border-color;
+        background-color: $form-bgc;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &-label {
+            padding: 15px;
+
+            &:after {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                width: 50%;
+                height: 1.2em;
+                text-align: right;
+                content: "";
+            }
+
+            p {
+                margin-bottom: 5px;
+            }
+        }
+
+        &--fullwidth {
+            @extend .image-uploader__dropzone;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+    }
+
+    &__btn, .form-group .checkbox {
+        margin-top: 15px;
+    }
+
+    &__preview {
+        img {
+            max-width: 100%;
+        }
+    }
+}
+
+/*
+Editor
+*/
+.editor {
+    position: relative;
+
+    .ql-toolbar, .ql-container {
+        border: 1px solid $border-color;
+    }
+
+    .ql-toolbar {
+        border-radius: 5px 5px 0 0;
+    }
+
+    .ql-container {
+        border-radius: 0 0 5px 5px;
+        border-top: none;
+        background-color: $form-bgc;
+
+        .ql-editor {
+            min-height: 100px;
+        }
+    }
+}
+
+.cke_chrome {
+    border: 1px solid $border-color !important;
+}
+
+.cke_top {
+    border-bottom: 1px solid $border-color !important;
+}
+
+/*
+Ranking
+*/
+.ranking {
+    &__spot {
+        width: 100%;
+        min-height: 45px;
+    }
+
+    &__item {
+        background-color: $form-bgc;
+        cursor: move;
+        margin-bottom: 5px !important;
+
+        &.disabled {
+            opacity: 0.5;
+            cursor: auto;
+        }
+
+        &__icon {
+            margin-right: 5px;
+            color: $dark-gray;
+        }
+
+        &__arrows {
+            margin-top: 10px;
+        }
+
+        &__image {
+            max-width: 100%;
+        }
+    }
+
+    &__choice-box {
+        position: relative;
+
+        &__choices {
+            position: absolute;
+            z-index: 10;
+            top: 0;
+            right: 0;
+            left: 0;
+            border: 1px dashed $border-color;
+        }
+
+        &__placeholder {
+            position: absolute;
+            z-index: 0;
+            top: 0;
+            right: 0;
+            left: 0;
+            padding: 30px;
+            color: $dark-gray;
+            text-align: center;
+        }
+    }
+
+    &__pick-box__choices {
+        border: 1px dashed $border-color;
+    }
+}
+
+/*
+ Draghandle
+*/
+
+.draghandle {
+    display: block;
+    width: 18px;
+    height: 18px;
+    background-image: url(../svg/draghandle.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: .25;
+    margin-right: 20px;
+    cursor: row-resize;
+}
+
 /*
 Hack form button - radio check
 */
@@ -52,28 +214,6 @@ Hack form button - radio check
 
 .help-block {
     color: $dark-gray;
-}
-
-.editor {
-    position: relative;
-
-    .ql-toolbar, .ql-container {
-        border: 1px solid $border-color;
-    }
-
-    .ql-toolbar {
-        border-radius: 5px 5px 0 0;
-    }
-
-    .ql-container {
-        border-radius: 0 0 5px 5px;
-        border-top: none;
-        background-color: $form-bgc;
-
-        .ql-editor {
-            min-height: 100px;
-        }
-    }
 }
 
 .has-error {
@@ -149,63 +289,6 @@ Hack form button - radio check
     .help-block {
         color: $dark-gray;
     }
-}
-
-.ranking__spot {
-    width: 100%;
-    min-height: 45px;
-}
-
-.ranking__item {
-    background-color: $form-bgc;
-    cursor: move;
-    margin-bottom: 5px !important;
-}
-
-.ranking__item.disabled {
-    opacity: 0.5;
-    cursor: auto;
-}
-
-.ranking__choice-box {
-    position: relative;
-}
-
-.ranking__pick-box__choices {
-    border: 1px dashed $border-color;
-}
-
-.ranking__choice-box__choices {
-    position: absolute;
-    z-index: 10;
-    top: 0;
-    right: 0;
-    left: 0;
-    border: 1px dashed $border-color;
-}
-
-.ranking__choice-box__placeholder {
-    position: absolute;
-    z-index: 0;
-    top: 0;
-    right: 0;
-    left: 0;
-    padding: 30px;
-    color: $dark-gray;
-    text-align: center;
-}
-
-.ranking__item__icon {
-    margin-right: 5px;
-    color: $dark-gray;
-}
-
-.ranking__item__arrows {
-    margin-top: 10px;
-}
-
-.ranking__item__image {
-    max-width: 100%;
 }
 
 .well-form {

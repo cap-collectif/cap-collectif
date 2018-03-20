@@ -46,7 +46,7 @@ class CommentVote extends AbstractVote
      */
     public function deleteVote()
     {
-        if (null !== $this->comment) {
+        if ($this->comment !== null) {
             $this->comment->removeVote($this);
         }
     }

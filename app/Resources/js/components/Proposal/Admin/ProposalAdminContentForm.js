@@ -174,7 +174,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
       </span>
     );
     return (
-      <div className="box box-primary container">
+      <div className="box box-primary container-fluid">
         <ProposalFusionEditModal
           onClose={() => {
             this.setState({ showEditFusionModal: false });

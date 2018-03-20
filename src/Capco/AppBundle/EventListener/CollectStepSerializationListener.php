@@ -7,7 +7,7 @@ use JMS\Serializer\Serializer;
 
 class CollectStepSerializationListener extends AbstractSerializationListener
 {
-    public static function getSubscribedEvents(): array
+    public static function getSubscribedEvents()
     {
         return [
             [
@@ -20,10 +20,6 @@ class CollectStepSerializationListener extends AbstractSerializationListener
 
     public function onPostCollectStep(ObjectEvent $event)
     {
-        // We skip if we are serializing for Elasticsearch
-        if (isset($this->getIncludedGroups($event)['Elasticsearch'])) {
-            return;
-        }
         $step = $event->getObject();
 
         $counters = [

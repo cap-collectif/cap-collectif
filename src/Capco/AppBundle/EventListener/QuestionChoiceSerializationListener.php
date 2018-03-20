@@ -16,7 +16,7 @@ class QuestionChoiceSerializationListener extends AbstractSerializationListener
         $this->mediaExtension = $mediaExtension;
     }
 
-    public static function getSubscribedEvents(): array
+    public static function getSubscribedEvents()
     {
         return [
             [
