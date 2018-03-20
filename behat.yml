@@ -13,7 +13,7 @@ frontend:
             namespaces:
                 page: [ Capco\AppBundle\Behat\Page ]
         Behat\MinkExtension:
-            base_url: 'https://capco.test'
+            base_url: 'http://capco.test'
             sessions:
                default:
                    symfony2: ~
@@ -40,7 +40,7 @@ javascript:
             namespaces:
                 page: [ Capco\AppBundle\Behat\Page ]
         Behat\MinkExtension:
-            base_url: 'https://capco.test'
+            base_url: 'http://capco.test'
             # browser_name: firefox
             browser_name: chrome
             sessions:
@@ -48,7 +48,6 @@ javascript:
                     selenium2:
                         capabilities:
                             version: ''
-                            acceptSslCerts: true
                         wd_host: http://selenium:4444/wd/hub
     suites:
         javascript:
@@ -131,14 +130,13 @@ back:
             namespaces:
                 page: [ Capco\AppBundle\Behat\Page ]
         Behat\MinkExtension:
-            base_url: 'https://capco.test'
+            base_url: 'http://capco.test'
             browser_name: chrome
             sessions:
                default:
                     selenium2:
                         capabilities:
                             version: ''
-                            acceptSslCerts: true
                         wd_host: http://selenium:4444/wd/hub
     suites:
         javascript:
