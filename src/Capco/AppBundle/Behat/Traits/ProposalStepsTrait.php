@@ -937,7 +937,7 @@ trait ProposalStepsTrait
      */
     public function iShouldSeeTheProposalVoteLimitedTooltip()
     {
-        $this->assertPageContainsText('proposal.vote.popover.limit_reached_title');
+        $this->assertElementContainsText('#vote-tooltip-proposal-proposal18', 'proposal.vote.popover.limit_reached_title');
     }
 
     /**
@@ -945,7 +945,7 @@ trait ProposalStepsTrait
      */
     public function iShouldSeeTheProposalVoteTooltip()
     {
-        $this->assertPageContainsText('proposal.vote.popover.not_enough_credits_text');
+        $this->assertElementContainsText('#vote-tooltip-proposal-proposal8', 'proposal.vote.popover.not_enough_credits_text');
     }
 
     /**
