@@ -7,7 +7,6 @@ use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\GraphQL\Resolver\ProposalResolver;
 use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
-use Capco\AppBundle\Mailer\Message\Proposal\ProposalAknowledgeMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalCreateAdminMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalDeleteAdminMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalOfficialAnswerMessage;
@@ -28,18 +27,12 @@ class ProposalNotifier extends BaseNotifier
 
     public function onCreate(Proposal $proposal)
     {
-        if ($proposal->getProposalForm()->isNotifyingOnCreate()) {
-            $this->mailer->sendMessage(ProposalCreateAdminMessage::create(
-                $proposal,
-                $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                $this->proposalResolver->resolveShowUrl($proposal),
-                $this->proposalResolver->resolveAdminUrl($proposal),
-                $this->userResolver->resolveShowUrl($proposal->getAuthor())
-            ));
-        }
-        $this->mailer->sendMessage(ProposalAknowledgeMessage::create(
+        $this->mailer->sendMessage(ProposalCreateAdminMessage::create(
             $proposal,
-            $proposal->getAuthor()->getEmail()
+            $this->siteParams->getValue('admin.mail.notifications.receive_address'),
+            $this->proposalResolver->resolveShowUrl($proposal),
+            $this->proposalResolver->resolveAdminUrl($proposal),
+            $this->userResolver->resolveShowUrl($proposal->getAuthor())
         ));
     }
 
