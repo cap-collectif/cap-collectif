@@ -53,7 +53,7 @@ class ApplicationContext extends UserContext
     {
         $jobs = [ // Let's stick with the old way for now
             new Process('curl -sS -XDELETE \'http://elasticsearch:9200/_all\''),
-            new Process('curl -sS -XBAN https://capco.test/'),
+            new Process('curl -sS -XBAN http://capco.test/'),
             new Process('redis-cli -h redis FLUSHALL'),
         ];
 
