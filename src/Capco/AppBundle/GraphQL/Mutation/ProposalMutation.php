@@ -352,6 +352,8 @@ class ProposalMutation implements ContainerAwareInterface
         $em->persist($proposal);
         $em->flush();
 
+        $this->container->get('capco.proposal_notifier')->onCreate($proposal);
+
         $this->container->get('redis_storage.helper')->recomputeUserCounters($user);
 
         // If not present, es listener will take some time to execute the refresh
