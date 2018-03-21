@@ -110,7 +110,7 @@ Scenario: Anonymous API client wants to add an answer to a comment
   When I send a POST request to "/api/proposal_forms/proposalForm1/proposals/proposal1/comments" with json:
   """
   {
-    "parent": "proposalComment1",
+    "parent": 154,
     "authorName": "Kéké",
     "authorEmail": "vivele94@gmail.com",
     "body": "Ma super réponse"
@@ -145,7 +145,7 @@ Scenario: logged in API client wants to add an answer to a comment
   When I send a POST request to "/api/proposal_forms/proposalForm1/proposals/proposal1/comments" with json:
   """
   {
-    "parent": "proposalComment1",
+    "parent": 154,
     "body": "Oh oui j'ose :-P"
   }
   """
@@ -157,7 +157,7 @@ Scenario: logged in API client wants to add a comment by hacking
   When I send a POST request to "/api/proposal_forms/proposalForm1/proposals/proposal1/comments" with json:
   """
   {
-    "parent": "ideaComment1",
+    "parent": 1,
     "body": "Pr0 Hacker"
   }
   """
@@ -177,7 +177,7 @@ Scenario: logged in API client wants to add a comment to the wrong proposal
   When I send a POST request to "/api/proposal_forms/proposalForm1/proposals/proposal1/comments" with json:
   """
   {
-    "parent": "ideaComment1",
+    "parent": 1,
     "body": "Pr0 Hacker"
   }
   """
@@ -197,7 +197,7 @@ Scenario: logged in API client wants to add an answer to an answer
   When I send a POST request to "/api/proposal_forms/proposalForm1/proposals/proposal1/comments" with json:
   """
   {
-    "parent": "proposalComment5",
+    "parent": 158,
     "body": "Pr0 Hacker"
   }
   """

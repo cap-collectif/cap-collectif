@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\Entity\Post as BlogPost;
-use Capco\AppBundle\Entity\PostComment;
+use Capco\AppBundle\Entity\PostComment as PostComment;
 use Capco\AppBundle\Event\CommentChangedEvent;
 use Capco\AppBundle\Form\CommentType;
 use FOS\RestBundle\Controller\Annotations\Get;

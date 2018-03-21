@@ -103,18 +103,23 @@ def configure_vhosts():
 @task
 def generate_ssl():
     """
-    Generate CRT
+    Generate CRT (Black Magic)
     """
     env.ssl_dir = env.real_fabfile[:-10] + "infrastructure/services/local/nginx/ssl/"
+    env.root.crt = env.ssl_dir + "rootCA.crt"
+    env.root.key = env.ssl_dir + "rootCA.key"
     env.csr = env.ssl_dir + "capco.csr"
+    env.pem = env.ssl_dir + "capco.pem"
+    env.csr.conf = env.ssl_dir + "capco.csr.cnf"
+    env.csr.v3 = env.ssl_dir + "v3.ext"
     env.key = env.ssl_dir + "capco.key"
     env.crt = env.ssl_dir + "capco.crt"
-    env.conf = env.ssl_dir + "openssl.conf"
+    env.pfx = env.ssl_dir + "capco.pfx"
 
-    if not os.path.isfile(env.csr):
-        local('openssl genrsa -out %s 2048' % env.key)
-        local('openssl req -new -key %s -out %s -subj "/C=/ST=/O=/localityName=/commonName=*.%s/organizationalUnitName=/emailAddress=/" -config %s -passin pass:' % (env.key, env.csr, "capco.dev", env.conf))
-        local('openssl x509 -req -days 1026 -in %s -signkey %s -out %s -extensions v3_req -extfile %s' % (env.csr, env.key, env.crt, env.conf))
+    local('openssl req -new -sha256 -nodes -out %s -newkey rsa:2048 -keyout %s -config <( cat %s )' % (env.csr, env.key, env.csr.conf))
+    local('openssl x509 -req -in %s -CA %s -CAkey %s -CAcreateserial -out %s -days 3000 -sha256 -extfile %s' % (env.csr, env.root.crt, env.root.key, env.crt, env.csr.v3))
+    local('cat %s %s > %s' % (env.crt, env.key, env.pem))
+    local('openssl pkcs12 -export -inkey %s  -in %s -name "capco.dev" -out %s' % (env.key, env.pem, env.pfx))
 
 
 @task

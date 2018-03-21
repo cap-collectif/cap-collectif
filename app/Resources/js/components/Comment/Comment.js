@@ -15,7 +15,7 @@ import CommentActions from '../../actions/CommentActions';
 const Comment = React.createClass({
   propTypes: {
     uri: PropTypes.string,
-    object: PropTypes.string,
+    object: PropTypes.number,
     comment: PropTypes.object,
     root: PropTypes.bool,
     onVote: PropTypes.func.isRequired,
