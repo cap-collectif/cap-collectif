@@ -29,13 +29,13 @@ const ProjectPreviewCounters = React.createClass({
         <ProjectPreviewCounter
           value={project.votesCount}
           label="project.preview.counters.votes"
-          icon="cap-user-2-1"
+          icon="cap-hand-like-2-1"
         />
         <ProjectPreviewCounter
           value={project.participantsCount}
           label="project.preview.counters.contributors"
           showZero
-          icon="cap-hand-like-2-1"
+          icon="cap-user-2-1"
         />
       </TagsList>
     );

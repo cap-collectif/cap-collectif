@@ -42,7 +42,7 @@ $navbar-collapsed-height: 60px;
 
 // = Opinion types
 // -------------------------------
-$opinion-types: // to change with variable ?
+$opinion-types:
         ("default" $page-bgc)
         ("red" #f2dede)
         ("orange" #fcf8e3)
@@ -51,13 +51,13 @@ $opinion-types: // to change with variable ?
         ("green" #dff0d8) ("white" #fff)
         ("gray" $border-color)
         ("light-gray", $page-bgc)
-        (source darken(#428bca, 6.5%)); // to remove
+        (source darken(#428bca, 6.5%));
 
 // = Opinion labels
 // -------------------------------
 $opinion-labels:
         ("blue" #5bc0de)
-        ("green" #5cb85c); // to change with variable
+        ("green" #5cb85c);
 
 // = Icons color
 $icons-colors:
@@ -65,7 +65,7 @@ $icons-colors:
         (icon--yellow #ff0)
         (icon--blue #5bc0de)
         (icon--green #5cb85c)
-        (icon--black $dark); // to change with variable ?
+        (icon--black $dark);
 
 /* ===============================================================
     $Variables Custom
@@ -100,7 +100,7 @@ $btns-outline:
         (dark-gray $dark-gray $dark-gray $white)
         (light-gray $page-bgc $page-bgc $dark);
 
-$statuses: (primary $primary-color $white) (success $success-color $white) (info $info-color $white) (warning $warning-color $white) (danger $danger-color $white) (default $dark-gray $white);
+$statuses: (primary $primary-color $white) (success $success-color $white) (info #5bc0de $white) (warning $warning-color $white) (danger $danger-color $white) (default $dark-gray $white);
 
 @each $status in $statuses {
     $name: nth($status, 1);
