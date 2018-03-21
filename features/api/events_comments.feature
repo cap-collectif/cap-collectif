@@ -16,7 +16,7 @@ Scenario: API client wants to list comments of an event
       {
         "canContribute": @boolean@,
         "pinned": @boolean@,
-        "id": @integer@,
+        "id": @string@,
         "body": @string@,
         "createdAt": "@string@.isDateTime()",
         "updatedAt": "@string@.isDateTime()",
@@ -60,7 +60,7 @@ Scenario: API client wants to find the first comment of an event
     [
       {
         "canContribute": @boolean@,
-        "id": @integer@,
+        "id": @string@,
         "body": @string@,
         "createdAt": "@string@.isDateTime()",
         "updatedAt": "@string@.isDateTime()",
