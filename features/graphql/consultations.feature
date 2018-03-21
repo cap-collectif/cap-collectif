@@ -96,7 +96,7 @@ query OpinionListQuery {
         "contributionsBySection":[
            {
               "id": "opinion51",
-              "url": "http://capco.test/consultations/strategie-technologique-de-l-etat-et-services-publics/consultation/collecte-des-avis-pour-une-meilleur-strategie/opinions/les-causes/opinion-51",
+              "url": "https://capco.test/consultations/strategie-technologique-de-l-etat-et-services-publics/consultation/collecte-des-avis-pour-une-meilleur-strategie/opinions/les-causes/opinion-51",
               "title": "Opinion 51",
               "createdAt": @string@,
               "updatedAt": @string@,
