@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Search;
 
+use Capco\UserBundle\Entity\User;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Result;
@@ -26,7 +27,7 @@ class UserSearch extends Search
     {
         $query = new Query\BoolQuery();
 
-        if ($terms && !empty($terms)) {
+        if ($terms) {
             $query = $this->searchTermsInMultipleFields($query, self::SEARCH_FIELDS, $terms, 'phrase_prefix');
         }
         if (count($notInIds) > 0) {
@@ -45,8 +46,8 @@ class UserSearch extends Search
     {
         // We can't use findById because we would lost the correct order given by ES
         // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
-        return array_map(function (Result $result) {
-            return $this->userRepo->find($result->getData()['id']);
-        }, $results);
+        return array_values(array_filter(array_map(function (Result $result) {
+            return $this->userRepo->findOneBy(['id' => $result->getData()['id']]);
+        }, $results), function (?User $user) {return null !== $user; }));
     }
 }

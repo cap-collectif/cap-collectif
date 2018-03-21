@@ -45,7 +45,7 @@ mappings:
         properties:
             id: { type: keyword }
             slug: { type: keyword }
-            displayName: &text_analysis_highlighted
+            username: &text_analysis_highlighted
                 type: text
                 analyzer: capco_french
                 index_options: offsets
@@ -159,7 +159,10 @@ mappings:
                         type: object
                         properties:
                             id: { type: keyword }
-
+                    status:
+                        type: object
+                        properties:
+                            id: { type: keyword }
     opinion:
         properties:
             id: { type: keyword }

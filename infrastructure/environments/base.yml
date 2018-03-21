@@ -5,6 +5,7 @@ application:
         - "443:443"
         - "8686:8686"
         - "1664:1664"
+        - "1337:1337"
     environment:
         SYMFONY_DATABASE_HOST: database
         SYMFONY_DATABASE_SERVER_VERSION: 5.5.46-0+deb8u1
@@ -18,6 +19,7 @@ application:
     links:
         - database:database
         - elasticsearch:elasticsearch
+        - kibana:kibana
         - redis:redis
         - seleniumhub:selenium
         - mailcatcher:mailcatchersmtp

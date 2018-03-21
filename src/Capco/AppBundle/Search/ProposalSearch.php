@@ -128,17 +128,19 @@ class ProposalSearch extends Search
 
         if (array_key_exists('selectionStep', $providedFilters)) {
             $filters['selections.step.id'] = $providedFilters['selectionStep'];
+            if (array_key_exists('statuses', $providedFilters) && $providedFilters['statuses']) {
+                $filters['selections.status.id'] = $providedFilters['statuses'];
+            }
+        } else {
+            if (array_key_exists('statuses', $providedFilters) && $providedFilters['statuses']) {
+                $filters['status.id'] = $providedFilters['statuses'];
+            }
         }
 
         if (isset($providedFilters['proposalForm'])) {
             $filters['proposalForm.id'] = $providedFilters['proposalForm'];
         }
-        if (array_key_exists('statuses', $providedFilters) && $providedFilters['statuses']) {
-            $filters['status.id'] = $providedFilters['statuses'];
-        }
-        if (array_key_exists('selectionStatuses', $providedFilters) && $providedFilters['selectionStatuses']) {
-            $filters['selections.status.id'] = $providedFilters['selectionStatuses'];
-        }
+
         if (isset($providedFilters['districts'])) {
             $filters['district.id'] = $providedFilters['districts'];
         }

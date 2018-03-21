@@ -1303,11 +1303,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return $this->slug;
     }
 
-    /**
-     * Get display name.
-     *
-     * @return string
-     */
     public function getDisplayName()
     {
         return $this->username ?: 'Utilisateur supprimé';

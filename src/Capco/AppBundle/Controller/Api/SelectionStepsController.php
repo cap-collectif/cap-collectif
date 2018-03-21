@@ -61,11 +61,6 @@ class SelectionStepsController extends FOSRestController
         $filters = $request->request->has('filters') ? $request->request->get('filters') : [];
         $filters['selectionStep'] = $selectionStep->getId();
 
-        if (array_key_exists('statuses', $filters)) {
-            $filters['selectionStatuses'] = $filters['statuses'];
-            unset($filters['statuses']);
-        }
-
         $results = $this->get('capco.search.proposal_search')->searchProposals(
             $page,
             $pagination,

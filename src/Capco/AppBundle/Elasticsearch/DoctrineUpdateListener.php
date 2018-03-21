@@ -2,6 +2,9 @@
 
 namespace Capco\AppBundle\Elasticsearch;
 
+use Capco\AppBundle\Entity\AbstractVote;
+use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\Selection;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Swarrot\Broker\Message;
@@ -46,6 +49,15 @@ class DoctrineUpdateListener implements EventSubscriber
             $this->publisher->publish('elasticsearch.indexation', new Message(
               json_encode(['class' => get_class($entity), 'id' => $entity->getId()])
           ));
+        }
+        if ($entity instanceof Comment && $entity->getRelatedObject()) {
+            $this->sendOrder($entity->getRelatedObject());
+        }
+        if ($entity instanceof AbstractVote && $entity->getRelatedEntity()) {
+            $this->sendOrder($entity->getRelatedEntity());
+        }
+        if ($entity instanceof Selection) {
+            $this->sendOrder($entity->getProposal());
         }
     }
 }

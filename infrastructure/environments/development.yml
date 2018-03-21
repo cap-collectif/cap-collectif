@@ -16,6 +16,7 @@ application:
     links:
         - database:database
         - elasticsearch:elasticsearch
+        - kibana:kibana
         - redis:redis
         - seleniumhub:selenium
         - mailcatcher:mailcatchersmtp

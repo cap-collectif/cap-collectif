@@ -24,10 +24,14 @@ Capco\UserBundle\Entity\User:
         groups: [UsersInfos, Elasticsearch]
         serialized_name: userType
     virtual_properties:
+      getUsername:
+        serialized_name: username
+        type: string
+        groups: [Elasticsearch]
       getDisplayName:
         serialized_name: displayName
         type: string
-        groups: [UserDetails, UsersInfos, Elasticsearch]
+        groups: [UserDetails, UsersInfos]
       getUniqueIdentifier:
         serialized_name: uniqueId
         type: string
