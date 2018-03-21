@@ -203,7 +203,7 @@ Scenario: logged in API client wants to add an answer to an answer
   When I send a POST request to "/api/ideas/2/comments" with json:
   """
   {
-    "parent": "ideaComment5",
+    "parent": "ideaComment101",
     "body": "Pr0 Hacker"
   }
   """
