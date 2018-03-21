@@ -532,7 +532,7 @@ trait IdeaStepsTrait
         $this->element1ShouldBeBeforeElement2ForSelector(
             $idea1,
             $idea2,
-            '.idea__preview .idea__title a'
+            '#idea-preview .card__title a'
         );
     }
 

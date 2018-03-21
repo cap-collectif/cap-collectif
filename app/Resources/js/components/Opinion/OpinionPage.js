@@ -11,7 +11,7 @@ import type { Dispatch } from '../../types';
 
 import OpinionBox from './OpinionBox';
 import OpinionTabs from './OpinionTabs';
-import Loader from '../Utils/Loader';
+import Loader from '../Ui/Loader';
 
 type Props = {
   opinionId: string,

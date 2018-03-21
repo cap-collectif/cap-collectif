@@ -51,7 +51,7 @@ export const LoginForm = React.createClass({
           disableValidation
           id="password"
           label={<FormattedMessage id="global.password" />}
-          labelClassName="w100 h5"
+          labelClassName="w-100 h5"
           autoComplete="current-password"
           component={renderInput}
         />

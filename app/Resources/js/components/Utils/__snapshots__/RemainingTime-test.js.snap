@@ -1,11 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<RemainingTime /> should render correctly remaining time (days left) 1`] = `
-<span
-  className="remaining-time__container"
->
+<span>
   <span
-    className="remaining-time__number"
+    className="excerpt_dark"
   >
     2
   </span>
@@ -22,11 +20,9 @@ exports[`<RemainingTime /> should render correctly remaining time (days left) 1`
 `;
 
 exports[`<RemainingTime /> should render correctly remaining time (hours left) 1`] = `
-<span
-  className="remaining-time__container"
->
+<span>
   <span
-    className="remaining-time__number"
+    className="excerpt_dark"
   >
     4
   </span>
@@ -43,11 +39,9 @@ exports[`<RemainingTime /> should render correctly remaining time (hours left) 1
 `;
 
 exports[`<RemainingTime /> should render correctly remaining time (minutes left) 1`] = `
-<span
-  className="remaining-time__container"
->
+<span>
   <span
-    className="remaining-time__number"
+    className="excerpt_dark"
   >
     20
   </span>

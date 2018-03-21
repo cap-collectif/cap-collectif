@@ -145,7 +145,7 @@ class CommentsController extends FOSRestController
             ->setComment($comment)
         ;
 
-        $form = $this->createForm(new ReportingType(), $report, ['csrf_protection' => false]);
+        $form = $this->createForm(new ReportingType(), $report);
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {

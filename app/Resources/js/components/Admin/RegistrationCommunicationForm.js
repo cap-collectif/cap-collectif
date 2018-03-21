@@ -35,13 +35,20 @@ export const RegistrationCommunicationForm = React.createClass({
           component={renderInput}
         />
         {useBottomText && <Field name="bottomText" type="editor" component={renderInput} />}
-        <Button type="submit" disabled={submitting} style={{ marginBottom: 15 }}>
-          {submitting ? (
-            <FormattedMessage id="global.loading" />
-          ) : (
-            <FormattedMessage id="global.save" />
-          )}
-        </Button>
+        <div className="box-content__toolbar btn-toolbar">
+          <Button
+            type="submit"
+            disabled={submitting}
+            className="btn btn-primary"
+          >
+            {submitting ? (
+              <FormattedMessage id="global.loading" />
+            ) : (
+              <FormattedMessage id="global.save" />
+            )}
+          </Button>
+        </div>
+
       </form>
     );
   },
