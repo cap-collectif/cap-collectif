@@ -128,6 +128,7 @@ const CommentSection = React.createClass({
   },
 
   renderFilter() {
+    const { intl } = this.props;
     if (this.state.count > 1) {
       return (
         <Col
@@ -140,9 +141,9 @@ const CommentSection = React.createClass({
             className="form-control"
             value={this.state.filter}
             onChange={() => this.updateSelectedValue()}>
-            <option value="popular">{<FormattedMessage id="global.filter_popular" />}</option>
-            <option value="last">{<FormattedMessage id="global.filter_last" />}</option>
-            <option value="old">{<FormattedMessage id="global.filter_old" />}</option>
+            <option value="popular">{intl.formatMessage({ id: 'global.filter_popular' })}</option>
+            <option value="last">{intl.formatMessage({ id: 'global.filter_last' })}</option>
+            <option value="old">{intl.formatMessage({ id: 'global.filter_old' })}</option>
           </select>
         </Col>
       );
