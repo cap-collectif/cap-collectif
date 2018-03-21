@@ -214,14 +214,14 @@ Scenario: Author of a proposal should be notified when someone comment if he has
   Given I go to a proposal made by msantostefano@jolicode.com
   And I anonymously comment "Salut les filles" as "Marie Lopez" with address "enjoyphoenix@gmail.com"
   Then the queue associated to "comment_create" producer has messages below:
-  | 0 | {"commentId": "@string@"} |
+  | 0 | {"commentId": "@number@"} |
 
 @javascript @database @rabbitmq
 Scenario: Author of a proposal should not be notified when someone comment if he has turned off comments notifications
   Given I go to a proposal made by user@test.com
   And I anonymously comment "Salut les filles" as "Marie Lopez" with address "enjoyphoenix@gmail.com"
   Then the queue associated to "comment_create" producer has messages below:
-  | 0 | {"commentId": "@string@"} |
+  | 0 | {"commentId": "@number@"} |
 
 @javascript
 Scenario: Non author of a proposal wants to delete it

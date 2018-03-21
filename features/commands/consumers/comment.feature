@@ -6,7 +6,7 @@ Scenario: Email should be sent to admin if a message is sent to the comment_crea
   Given I publish in "comment_create" with message below:
   """
   {
-    "commentId": "proposalComment1"
+    "commentId": 154
   }
   """
   And I consume "comment_create"
@@ -18,7 +18,7 @@ Scenario: Email sent to admin should have correct subject and footer if comment 
   Given I publish in "comment_create" with message below:
   """
   {
-    "commentId": "proposalComment6"
+    "commentId": 159
   }
   """
   And I consume "comment_create"
@@ -30,7 +30,7 @@ Scenario: Email should be sent to admin if a message is sent to the comment_upda
   Given I publish in "comment_update" with message below:
   """
   {
-    "commentId": "proposalComment1"
+    "commentId": 154
   }
   """
   And I consume "comment_update"
@@ -42,7 +42,7 @@ Scenario: Email sent to admin should have correct subject and footer if comment 
   Given I publish in "comment_update" with message below:
   """
   {
-    "commentId": "proposalComment6"
+    "commentId": 159
   }
   """
   And I consume "comment_update"
