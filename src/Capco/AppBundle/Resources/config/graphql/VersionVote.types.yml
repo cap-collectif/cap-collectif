@@ -15,9 +15,8 @@ VersionVote:
                 type: "Boolean!"
                 description: "If vote is expired, it exists but doesn't count."
             createdAt:
-                type: "String!"
+                type: "DateTime!"
                 description: "Date of vote."
-                resolve: "@=resolver('vote_createdAt', [value])"
             related:
                 type: "Contribution"
                 description: "Return the related contribution if the contribution is related to another."
