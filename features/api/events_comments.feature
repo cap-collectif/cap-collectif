@@ -116,7 +116,7 @@ Scenario: Anonymous API client wants to add an answer to a comment
   When I send a POST request to "/api/events/2/comments" with json:
   """
   {
-    "parent": 210,
+    "parent": "eventComment1",
     "authorName": "Kéké",
     "authorEmail": "vivele94@gmail.com",
     "body": "Ma super réponse"
@@ -170,7 +170,7 @@ Scenario: logged in API client wants to add an answer to a comment
   When I send a POST request to "/api/events/2/comments" with json:
   """
   {
-    "parent": 210,
+    "parent": "eventComment1",
     "body": "Oh oui j'ose :-P"
   }
   """
@@ -182,7 +182,7 @@ Scenario: logged in API client wants to add a comment by hacking
   When I send a POST request to "/api/events/2/comments" with json:
   """
   {
-    "parent": 1,
+    "parent": "ideaComment1",
     "body": "Pr0 Hacker"
   }
   """
