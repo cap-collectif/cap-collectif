@@ -1,3 +1,5 @@
+$statuses: (primary $primary-color $white) (success $success-color $white) (info $brand-info $white) (warning $warning-color $white) (danger $brand-danger $white) (default $dark-gray $white);
+
 .ellipsis {
     @include ellipsis();
 }

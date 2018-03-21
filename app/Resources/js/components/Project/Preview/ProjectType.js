@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import CardType from '../../Ui/Card/CardType';
+import classNames from 'classnames';
 
 const ProjectType = React.createClass({
   propTypes: {
@@ -11,10 +11,13 @@ const ProjectType = React.createClass({
   render() {
     const { project } = this.props;
 
+    const divClasses = classNames({
+      project__preview__type: true,
+    });
     return (
-      <CardType color={project.projectType.color}>
+      <div className={divClasses} style={{ backgroundColor: project.projectType.color }}>
         <FormattedMessage id={project.projectType.title} />
-      </CardType>
+      </div>
     );
   },
 });

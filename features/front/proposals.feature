@@ -181,7 +181,6 @@ Scenario: Author of a proposal wants to update it
   And I attach the file "/var/www/features/files/document.pdf" to "responses[2]_field"
   And I wait 3 seconds
   And I submit the edit proposal form
-  And I wait 1 seconds
   Then the proposal title should have changed
 
 @javascript
