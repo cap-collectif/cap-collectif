@@ -5,13 +5,13 @@ Argument:
         interfaces: [Node, Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
         fields:
             createdAt:
-                type: "String!"
+                type: "DateTime!"
                 description: "Identifies the date and time when the object was created."
-                resolve: "@=resolver('proposition_createdAt', [value])"
+                resolve: "@=value.getCreatedAt()"
             updatedAt:
-                type: "String!"
+                type: "DateTime"
                 description: "Identifies the date and time when the object was last updated."
-                resolve: "@=resolver('proposition_updatedAt', [value])"
+                resolve: "@=value.getUpdatedAt()"
             url:
                 type: "String!"
                 resolve: "@=resolver('argument_url', [value])"

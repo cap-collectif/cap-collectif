@@ -1,17 +1,20 @@
 Capco\AppBundle\Entity\IdeaComment:
   iComment{1..4}:
+    id: 'ideaComment<current()>'
     Idea: '@Idea2'
     Author: '@user<numberBetween(1, 3)>'
     body: <text(300)>
     isEnabled: true
     isTrashed: false
   iComment{5..100}:
+    id: 'ideaComment<current()>'
     Idea: '@Idea<numberBetween(4, 10)>'
     Author: '@user<numberBetween(1, 3)>'
     body: <text(300)>
     isEnabled: <boolean()>
     isTrashed: <boolean()>
   iComment{101..150}:
+    id: 'ideaComment<current()>'
     Idea: '@Idea2'
     Author: '@user<numberBetween(1, 3)>'
     body: <text(300)>
@@ -19,6 +22,7 @@ Capco\AppBundle\Entity\IdeaComment:
     isEnabled: <boolean()>
     isTrashed: <boolean()>
   iComment151:
+    id: 'ideaComment151'
     Idea: '@Idea3'
     Author: '@user5'
     body: Coucou ! Je suis un commentaire épinglé.
@@ -27,6 +31,7 @@ Capco\AppBundle\Entity\IdeaComment:
     pinned: true
     updatedAt: <(new \DateTime('2015-08-14'))>
   iComment152:
+    id: 'ideaComment152'
     Idea: '@Idea3'
     Author: '@user5'
     body: Coucou, je suis un simple commentaire.
@@ -34,6 +39,7 @@ Capco\AppBundle\Entity\IdeaComment:
     isTrashed: false
     updatedAt: <(new \DateTime('2014-08-14'))>
   iComment153:
+    id: 'ideaComment153'
     Idea: '@Idea3'
     Author: '@user2'
     body: Commentaire d'un VIP !

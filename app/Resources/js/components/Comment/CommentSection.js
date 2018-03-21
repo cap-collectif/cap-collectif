@@ -14,7 +14,7 @@ const MessagePagination = 10;
 const CommentSection = React.createClass({
   propTypes: {
     uri: PropTypes.string,
-    object: PropTypes.string,
+    object: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     intl: PropTypes.object,
   },
 

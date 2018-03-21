@@ -254,6 +254,7 @@ class StepController extends Controller
 
         $proposalForm = $step->getProposalForm();
         $searchResults = ['proposals' => [], 'count' => 0];
+        $countFusions = 0;
 
         if ($proposalForm) {
             $filters = ['proposalForm' => $proposalForm->getId()];
@@ -266,12 +267,11 @@ class StepController extends Controller
                 $searchResults = $this->get('capco.search.proposal_search')
                     ->searchProposals(1, 51, null, null, $filters);
             }
+            $countFusions = $em
+              ->getRepository('CapcoAppBundle:Proposal')
+              ->countFusionsByProposalForm($proposalForm)
+            ;
         }
-
-        $countFusions = $em
-          ->getRepository('CapcoAppBundle:Proposal')
-          ->countFusionsByProposalForm($proposalForm)
-        ;
 
         $props = $serializer->serialize([
             'statuses' => $step->getStatuses(),
