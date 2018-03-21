@@ -5,9 +5,9 @@ Reporting:
         interfaces: [Contribution, ContributionWithAuthor]
         fields:
             createdAt:
-                type: "DateTime!"
+                type: "String!"
                 description: "Identifies the date and time when the object was created."
-                resolve: "@=value.getCreatedAt()"
+                resolve: "@=resolver('proposition_createdAt', [value])"
             author:
                 type: "User!"
                 description: "The author of the reporting."
