@@ -167,6 +167,8 @@ class Indexer
             }
         }
 
+        $this->classes['comment'] = "Capco\AppBundle\Entity\Comment";
+
         return $this->classes;
     }
 

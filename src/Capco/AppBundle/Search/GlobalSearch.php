@@ -55,7 +55,7 @@ class GlobalSearch extends Search
         }
 
         $results = $this->transformer->hybridTransform($resultSet->getResults());
-        $count = count($results);
+        $count = $resultSet->getTotalHits();
 
         return [
             'count' => $count,

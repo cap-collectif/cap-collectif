@@ -18,11 +18,6 @@ class ProposalComment extends Comment
      */
     private $proposal;
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     public function getProposal(): ?Proposal
     {
         return $this->proposal;
