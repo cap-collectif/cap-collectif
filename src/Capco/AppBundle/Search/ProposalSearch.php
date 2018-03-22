@@ -50,7 +50,7 @@ class ProposalSearch extends Search
         } else {
             $query = new Query($boolQuery);
             if ($order) {
-                $query->setSort($this->getSort($order, $providedFilters));
+                $query->setSort($this->getSort($order, $providedFilters['collectStep'] ?? $providedFilters['selectionStep']));
             }
         }
 
@@ -81,7 +81,7 @@ class ProposalSearch extends Search
         }, $results), function (?Proposal $proposal) {return null !== $proposal; }));
     }
 
-    private function getSort(string $order, array $filters): array
+    private function getSort(string $order, string $stepId): array
     {
         switch ($order) {
           case 'old':
@@ -93,9 +93,15 @@ class ProposalSearch extends Search
               $sortOrder = 'desc';
               break;
           case 'votes':
-              $stepId = $filters['collectStep'] ?? $filters['selectionStep'];
-              $sortField = 'votesCountByStepId.' . $stepId;
-              $sortOrder = 'desc';
+              return [
+                'votesCountByStep.count' => [
+                  'order' => 'desc',
+                  'nested_path' => 'votesCountByStep',
+                  'nested_filter' => [
+                      'term' => ['votesCountByStep.step.id' => $stepId],
+                  ],
+                ],
+              ];
               break;
           case 'comments':
               $sortField = 'commentsCount';
@@ -115,7 +121,7 @@ class ProposalSearch extends Search
       }
 
         return [
-          $sortField => ['order' => $sortOrder, 'unmapped_type' => 'integer'],
+          $sortField => ['order' => $sortOrder],
       ];
     }
 

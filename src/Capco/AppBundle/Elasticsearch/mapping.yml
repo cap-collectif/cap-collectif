@@ -162,9 +162,15 @@ mappings:
                         type: object
                         properties:
                             id: { type: keyword }
-            votesCountByStepId:
-                type: object
-
+            votesCountByStep:
+                type: nested
+                properties:
+                    step:
+                        type: object
+                        properties:
+                            id: { type: keyword }
+                    count:
+                        type: long
     opinion:
         properties:
             id: { type: keyword }
