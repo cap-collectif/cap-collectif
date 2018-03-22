@@ -6,7 +6,7 @@ import CommentList from './CommentList';
 import CommentForm from './CommentForm';
 import CommentActions from '../../actions/CommentActions';
 import CommentStore from '../../stores/CommentStore';
-import Loader from '../Ui/Loader';
+import Loader from '../Utils/Loader';
 import FlashMessages from '../Utils/FlashMessages';
 
 const MessagePagination = 10;

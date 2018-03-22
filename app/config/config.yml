@@ -19,10 +19,9 @@ framework:
         enabled: true
         enable_annotations: true
     templating:
+        assets_version: "%assets_version%"
         engines:
             - twig
-    assets:
-        version: "%assets_version%"
     default_locale: "%locale%"
     trusted_hosts: null
     trusted_proxies: ['127.0.0.1']
@@ -38,10 +37,11 @@ framework:
 twig:
     debug: "%kernel.debug%"
     strict_variables: "%kernel.debug%"
-    form_themes :
-        - 'CapcoAppBundle:Form:bootstrap.html.twig'
-        - 'CapcoAppBundle:Form:media_widgets.html.twig'
-        - 'SonataCoreBundle:Form:datepicker.html.twig'
+    form:
+        resources:
+            - 'CapcoAppBundle:Form:bootstrap.html.twig'
+            - 'CapcoAppBundle:Form:media_widgets.html.twig'
+            - 'SonataCoreBundle:Form:datepicker.html.twig'
     globals:
         facebook_app_id: "%facebook_app_id%"
         google_maps_key: '%google_maps_key%'

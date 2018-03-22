@@ -19,7 +19,7 @@ services:
   capco.form.type_extension.media:
     class: Capco\AppBundle\Form\Extension\MediaTypeExtension
     tags:
-      - { name: form.type_extension, extended-type: sonata_media_type }
+      - { name: form.type_extension, alias: sonata_media_type }
 
   capco.form.opinion:
     class: Capco\AppBundle\Form\OpinionForm

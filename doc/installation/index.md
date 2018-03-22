@@ -52,7 +52,7 @@ Recommandé pour les performances:
 $ fab local.system.dinghy_install
 ```
 
-Sinon utilisez directement docker-machine:
+Sinon utilisez directemment docker-machine:
 
 ```
 $ fab local.system.docker_machine_install
@@ -73,22 +73,3 @@ Sinon l'installation manuelle : [OSX](osx.md) ou [Linux](linux.md).
 $ fab local.infrastructure.clean
 ```
 La commande suivante va nettoyer complètement les containers, ensuite il faudra rebuild toute l'application!
-
-## Installation des certificats pour le dev
-
-### Chrome
-#### Mac OSX
-Il suffit juste d'exécuter cette commande :
-```
-$ fab local.system.sign_ssl()
-```
-#### Linux
-```
-$ sudo cp infrastructure/service/local/nginx/ssl/rootCA.crt /etc/ssl/certs/
-$ sudo cp infrastructure/service/local/nginx/ssl/rootCA.key /etc/ssl/private
-```
-
-### Firefox
-
-Préférences > Afficher les certificats > Onglet Authorité > Importer > infrastructure/service/local/nginx/ssl/rootCA.crt
-Préférences > Afficher les certificats > Onglet Vos Certificats > Importer > infrastructure/service/local/nginx/ssl/capco.pfx
