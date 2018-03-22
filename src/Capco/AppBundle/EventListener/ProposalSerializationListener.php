@@ -70,6 +70,18 @@ class ProposalSerializationListener extends AbstractSerializationListener
 
         // We skip the rest if we are serializing for Elasticsearch
         if (isset($this->getIncludedGroups($event)['Elasticsearch'])) {
+            // $data = [
+            //   'step'=> ['id' => array_keys($collectVotesCount)[0] ],
+            //   'count' => $collectVotesCount[array_keys($collectVotesCount)[0]],
+            // ];
+            // foreach ($selectionVotesCount as $stepId => $value) {
+            //   $data[] = [
+            //     'step'=> ['id' => $stepId],
+            //     'count' => $value,
+            //   ]
+            // }
+            // $event->getVisitor()->addData('votesCountByStep', $data);
+
             return;
         }
 

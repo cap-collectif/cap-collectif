@@ -115,7 +115,7 @@ class ProposalSearch extends Search
       }
 
         return [
-          $sortField => ['order' => $sortOrder],
+          $sortField => ['order' => $sortOrder, 'unmapped_type' => 'integer'],
       ];
     }
 

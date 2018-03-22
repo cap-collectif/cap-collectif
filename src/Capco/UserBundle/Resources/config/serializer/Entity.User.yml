@@ -5,9 +5,6 @@ Capco\UserBundle\Entity\User:
         expose: true
         type: string
         groups: [UserId, Elasticsearch]
-      biography:
-        expose: true
-        groups: [Elasticsearch]
       slug:
         expose: true
         type: string
@@ -23,11 +20,14 @@ Capco\UserBundle\Entity\User:
         expose: true
         groups: [UsersInfos, Elasticsearch]
         serialized_name: userType
+      biography:
+        expose: true
+        groups: [Default, sonata_api_read, sonata_api_write, sonata_search, UsersInfos, Elasticsearch]
     virtual_properties:
       getUsername:
         serialized_name: username
         type: string
-        groups: [Elasticsearch]
+        groups: [Default, Elasticsearch, sonata_api_read, sonata_api_write, sonata_search, UsersInfos]
       getDisplayName:
         serialized_name: displayName
         type: string
