@@ -181,11 +181,6 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         return null;
     }
 
-    public function isIndexable()
-    {
-        return $this->getIsEnabled() && !$this->isExpired();
-    }
-
     public function getPosition(): ?int
     {
         return $this->position;
@@ -652,5 +647,20 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         }
 
         return $connections;
+    }
+
+    public function isIndexable(): bool
+    {
+        return $this->getIsEnabled() && !$this->isExpired();
+    }
+
+    public static function getElasticsearchTypeName(): string
+    {
+        return 'opinion';
+    }
+
+    public static function getElasticsearchSerializationGroups(): array
+    {
+        return ['Elasticsearch'];
     }
 }

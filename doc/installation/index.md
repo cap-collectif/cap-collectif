@@ -16,13 +16,13 @@ $ sudo pip install docker-compose==1.8.0 Fabric==1.10.2
 
 ##### Erreurs possibles
 
-Si vous avez l'erreur suivante en lançant docker-compose : 
+Si vous avez l'erreur suivante en lançant docker-compose :
 
 ```
 $ [...] ImportError: cannot import name _thread
 ```
 
-Il faut pour corriger le problème réinstaller six : 
+Il faut pour corriger le problème réinstaller six :
 
 ```
 pip install -I six
@@ -50,6 +50,8 @@ Recommandé pour les performances:
 
 ```
 $ fab local.system.dinghy_install
+$ dinghy ssh
+$ sudo sysctl -w vm.max_map_count=262144 # https://www.elastic.co/guide/en/elasticsearch/reference/5.6/docker.html
 ```
 
 Sinon utilisez directement docker-machine:

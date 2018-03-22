@@ -94,7 +94,7 @@ class UserNotificationsConfiguration
      *
      * @return UserNotificationsConfiguration
      */
-    public function setUser(User $user): UserNotificationsConfiguration
+    public function setUser(User $user): self
     {
         $this->user = $user;
 

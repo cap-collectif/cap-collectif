@@ -30,10 +30,6 @@ class ReinitCommand extends ContainerAwareCommand
                 'no-toggles', false, InputOption::VALUE_NONE,
                 'set this option to skip reseting feature flags'
             )
-            ->addOption(
-                'no-es-populate', false, InputOption::VALUE_NONE,
-                'set this option to skip populating ES'
-            )
         ;
     }
 
@@ -72,10 +68,9 @@ class ReinitCommand extends ContainerAwareCommand
         if (!$input->getOption('no-toggles')) {
             $this->loadToggles($output);
         }
-        $this->recalculateCounters($output);
-        if (!$input->getOption('no-es-populate')) {
-            $this->populateElastica($output);
-        }
+
+        $this->populateElastica($output);
+        $this->getContainer()->get('doctrine')->getManager()->clear();
         $this->recalculateCounters($output);
         $this->updateSyntheses($output);
 
@@ -154,8 +149,12 @@ class ReinitCommand extends ContainerAwareCommand
     protected function populateElastica(OutputInterface $output)
     {
         $this->runCommands([
-        'fos:elastica:populate' => ['--quiet' => true, '--no-debug' => true],
-      ], $output);
+            'capco:es:create' => ['--quiet' => true, '--no-debug' => true],
+        ], $output);
+
+        $this->runCommands([
+            'capco:es:populate' => ['--quiet' => true, '--no-debug' => true],
+        ], $output);
     }
 
     protected function executeMigrations(OutputInterface $output)

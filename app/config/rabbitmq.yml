@@ -5,6 +5,13 @@
             durable: true
             with_unroutable: true
     queues:
+        elasticsearch_indexation:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                -
+                    exchange: capco_direct_exchange
+                    routing_key: elasticsearch_indexation
         opinion_create:
             durable: true
             retries: [25, 125, 625]

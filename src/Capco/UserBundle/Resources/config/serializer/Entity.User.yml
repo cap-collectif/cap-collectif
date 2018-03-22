@@ -4,11 +4,14 @@ Capco\UserBundle\Entity\User:
       id:
         expose: true
         type: string
-        groups: [UserId]
+        groups: [UserId, Elasticsearch]
+      biography:
+        expose: true
+        groups: [Elasticsearch]
       slug:
         expose: true
         type: string
-        groups: [Default]
+        groups: [Default, Elasticsearch]
       Media:
         expose: true
         serialized_name: media
@@ -18,9 +21,13 @@ Capco\UserBundle\Entity\User:
         groups: [UsersInfos, UserDetails]
       userType:
         expose: true
-        groups: [UsersInfos]
+        groups: [UsersInfos, Elasticsearch]
         serialized_name: userType
     virtual_properties:
+      getUsername:
+        serialized_name: username
+        type: string
+        groups: [Elasticsearch]
       getDisplayName:
         serialized_name: displayName
         type: string

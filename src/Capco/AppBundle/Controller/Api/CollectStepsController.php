@@ -30,7 +30,7 @@ class CollectStepsController extends FOSRestController
      * @QueryParam(name="page", requirements="[0-9.]+", default="1")
      * @QueryParam(name="pagination", requirements="[0-9.]+", default="100")
      * @QueryParam(name="order", requirements="(old|last|votes|comments|random|expensive|cheap)", nullable=true)
-     * @View(statusCode=200, serializerGroups={"Proposals", "UsersInfos", "UserMedias"})
+     * @View(statusCode=200, serializerGroups={"Proposals", "ThemeDetails", "UsersInfos", "UserMedias"})
      */
     public function getProposalsByCollectStepAction(
         Request $request,
@@ -41,7 +41,7 @@ class CollectStepsController extends FOSRestController
         $page = (int) $paramFetcher->get('page');
         $pagination = (int) $paramFetcher->get('pagination');
         $order = $paramFetcher->get('order');
-        $providedFilters = $request->request->has('filters') ? $request->request->get('filters') : [];
+        $filters = $request->request->has('filters') ? $request->request->get('filters') : [];
 
         if ($proposalForm->getStep()->isPrivate()) {
             $user = $this->getUser();
@@ -49,31 +49,33 @@ class CollectStepsController extends FOSRestController
                 return ['proposals' => [], 'count' => 0, 'order' => $order];
             }
             if (!$user->isAdmin()) {
-                $providedFilters['authorUniqueId'] = $user->getUniqueIdentifier();
+                $filters['author'] = $user->getId();
             }
         }
 
         $terms = $request->request->has('terms') ? $request->request->get('terms') : null;
 
         // Filters
-        $providedFilters['proposalForm'] = $proposalForm->getId();
-        $providedFilters['step'] = $collectStep->getId();
+        $filters['proposalForm'] = $proposalForm->getId();
+        $filters['collectStep'] = $collectStep->getId();
 
         $results = $this->get('capco.search.proposal_search')->searchProposals(
             $page,
             $pagination,
             $order,
             $terms,
-            $providedFilters
+            $filters
         );
 
         return $results;
     }
 
     /**
+     * TODO remove this.
+     *
      * @Post("/collect_steps/{collect_step_id}/proposals/search-in")
      * @ParamConverter("collectStep", options={"mapping": {"collect_step_id": "id"}})
-     * @View(statusCode=200, serializerGroups={"Proposals", "UsersInfos", "UserMedias"})
+     * @View(statusCode=200, serializerGroups={"Proposals", "ThemeDetails", "UsersInfos", "UserMedias"})
      */
     public function getSelectProposalsByCollectStepAction(Request $request, CollectStep $collectStep): array
     {
@@ -90,26 +92,16 @@ class CollectStepsController extends FOSRestController
             if (!$user) {
                 return ['proposals' => [], 'count' => 0];
             }
-            if (!$user->isAdmin()) {
-                $providedFilters['authorUniqueId'] = $user->getUniqueIdentifier();
-            }
         }
 
-        $results = $this->get('capco.search.proposal_search')->searchProposalsIn($selectedIds);
+        $proposals = array_map(function (string $id) {
+            return $this->container->get('capco.proposal.repository')->find($id);
+        }, $selectedIds);
 
-        // Reorder proposals
-        $orderedProposals = [];
-        foreach ($selectedIds as $selectedId) {
-            foreach ($results['proposals'] as $proposal) {
-                if ($selectedId === $proposal['id']) {
-                    $orderedProposals[] = $proposal;
-                }
-            }
-        }
-
-        $results['proposals'] = $orderedProposals;
-
-        return $results;
+        return [
+          'proposals' => $proposals,
+          'count' => count($proposals),
+        ];
     }
 
     /**
@@ -181,12 +173,6 @@ class CollectStepsController extends FOSRestController
         $em->persist($vote);
         $em->flush();
 
-        // If not present, es listener will take some time to execute the refresh
-        // and, next time proposals will be fetched, the set of data will be outdated.
-        // Keep in mind that refresh should usually not be triggered manually.
-        $index = $this->get('fos_elastica.index');
-        $index->refresh();
-
         return $vote;
     }
 
@@ -227,12 +213,6 @@ class CollectStepsController extends FOSRestController
 
         $em->remove($vote);
         $em->flush();
-
-        // If not present, es listener will take some time to execute the refresh
-        // and, next time proposals will be fetched, the set of data will be outdated.
-        // Keep in mind that refresh should usually not be triggered manually.
-        $index = $this->get('fos_elastica.index');
-        $index->refresh();
 
         return $vote;
     }

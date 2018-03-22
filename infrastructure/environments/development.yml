@@ -16,6 +16,7 @@ application:
     links:
         - database:database
         - elasticsearch:elasticsearch
+        - kibana:kibana
         - redis:redis
         - seleniumhub:selenium
         - mailcatcher:mailcatchersmtp
@@ -28,13 +29,6 @@ builder:
         - ~/Library/Caches/Yarn:/home/capco/.cache/yarn
         - ~/Library/Caches/Bower:/home/capco/.cache/bower
     command: echo "Use 'docker-compose run builder build' to build deps"
-
-elasticsearch:
-    image: elasticsearch:1.7.3
-    volumes:
-        - ../services/local/elasticsearch/capco.yml:/etc/elasticsearch/config/elasticsearch.yml
-    ports:
-        - "9200:9200"
 
 database:
     ports:

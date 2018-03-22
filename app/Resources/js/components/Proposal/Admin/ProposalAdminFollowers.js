@@ -17,7 +17,7 @@ export class ProposalAdminFollowers extends React.Component<Props> {
     const totalCount = proposal.followerConnection.totalCount;
     const isAdmin = true;
     return (
-      <div className="box box-primary container-fluid">
+      <div className="box box-primary container">
         <div className="box-header">
           <h3 className="box-title">
             <FormattedMessage

@@ -63,19 +63,18 @@
 @import
   "base/tools",
   "base/utils",
-  "base/front",
   "base/base",
   "base/header",
-  "base/footer"
+  "base/footer",
+  "base/alert"
 ;
 
 /* ===============================================================
     $MODULES
 ================================================================*/
 @import
-  "modules/form",
   "modules/filter",
-  "modules/alert",
+  "modules/autocomplete",
   "modules/macro",
   "modules/news",
   "modules/thumbnail",
@@ -86,11 +85,13 @@
   "modules/login",
   "modules/profile",
   "modules/step-tabs",
+  "modules/sub-navbar",
   "modules/consult",
   "modules/opinion",
   "modules/dialog",
   "modules/user-settings",
   "modules/user-notifications",
+  "modules/form",
   "modules/appendices",
   "modules/video",
   "modules/carousel",
@@ -104,6 +105,8 @@
   "modules/modal",
   "modules/project",
   "modules/proposal",
+  "modules/reply",
+  "modules/editor",
   "modules/idea",
   "modules/stats",
   "modules/buttons"
