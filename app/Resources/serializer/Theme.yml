@@ -4,11 +4,11 @@ Capco\AppBundle\Entity\Theme:
     id:
       expose: true
       type: string
-      groups: [ThemeDetails, Elasticsearch]
+      groups: [ThemeDetails]
     title:
       expose: true
       type: string
-      groups: [Themes, ThemeDetails, Elasticsearch]
+      groups: [Themes, ThemeDetails]
     isEnabled:
       expose: true
       type: boolean

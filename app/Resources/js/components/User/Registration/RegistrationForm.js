@@ -69,14 +69,13 @@ export const RegistrationForm = React.createClass({
       organizationName,
     } = this.props;
     return (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="form_no-bold-label">
         <Field
           name="username"
           id="username"
           component={renderComponent}
           type="text"
           label={<FormattedMessage id="registration.username" />}
-          labelClassName="h5"
         />
         <Field
           name="email"
@@ -84,7 +83,6 @@ export const RegistrationForm = React.createClass({
           component={renderComponent}
           type="email"
           label={<FormattedMessage id="global.email" />}
-          labelClassName="h5"
           popover={{
             id: 'registration-email-tooltip',
             message: <FormattedMessage id="registration.tooltip.email" />,
@@ -96,7 +94,6 @@ export const RegistrationForm = React.createClass({
           component={renderComponent}
           type="password"
           label={<FormattedMessage id="registration.password" />}
-          labelClassName="h5"
           popover={{
             id: 'registration-password-tooltip',
             message: <FormattedMessage id="registration.tooltip.password" />,
@@ -115,8 +112,7 @@ export const RegistrationForm = React.createClass({
                   <FormattedMessage id="global.form.optional" />
                 </span>
               </span>
-            }
-            labelClassName="h5">
+            }>
             <FormattedMessage id="registration.select.type">
               {message => <option value="">{message}</option>}
             </FormattedMessage>
@@ -141,7 +137,6 @@ export const RegistrationForm = React.createClass({
                 </span>
               </span>
             }
-            labelClassName="h5"
             autoComplete="postal-code"
           />
         )}
@@ -181,7 +176,6 @@ export const RegistrationForm = React.createClass({
                   )}
                 </span>
               }
-              labelClassName="h5"
               children={children}
             />
           );

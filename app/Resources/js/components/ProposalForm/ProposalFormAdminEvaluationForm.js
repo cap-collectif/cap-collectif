@@ -59,11 +59,10 @@ export class ProposalFormAdminEvaluationForm extends React.Component<Props> {
     } = this.props;
 
     return (
-      <div className="box box-primary container">
+      <div className="box box-primary container-fluid">
         <div className="box-header">
           <h3
-            className="box-title"
-            style={{ fontSize: 22, padding: 0, paddingTop: 10, paddingBottom: 30 }}>
+            className="box-title">
             <FormattedMessage id="proposal_form.evaluation" />
           </h3>
           <a

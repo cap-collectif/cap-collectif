@@ -130,7 +130,7 @@ export class ProposalAdminSelections extends Component<Props> {
     const collectStep = steps.filter(step => step.kind === 'collect')[0];
     const selectionSteps = steps.filter(step => step.kind === 'selection');
     return (
-      <div className="box box-primary container">
+      <div className="box box-primary container-fluid">
         <div className="box-header">
           <h3 className="box-title">
             <FormattedMessage id="proposal.admin.steps" />

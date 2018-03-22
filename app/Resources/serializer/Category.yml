@@ -4,7 +4,7 @@ Capco\AppBundle\Entity\Category:
         id:
             expose: true
             type: string
-            groups: [Categories, Elasticsearch]
+            groups: [Categories]
         title:
             expose: true
             type: string

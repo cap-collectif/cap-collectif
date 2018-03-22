@@ -241,7 +241,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
     );
 
     return (
-      <div className="box box-primary container">
+      <div className="box box-primary container-fluid">
         <div className="box-header">
           <h3 className="box-title">
             <FormattedMessage id="proposal_form.admin.configuration.form" />

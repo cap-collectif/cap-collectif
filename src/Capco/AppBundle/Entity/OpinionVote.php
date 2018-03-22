@@ -114,7 +114,7 @@ class OpinionVote extends AbstractVote
      */
     public function deleteVote()
     {
-        if (null !== $this->opinion) {
+        if ($this->opinion !== null) {
             $this->opinion->removeVote($this);
         }
     }

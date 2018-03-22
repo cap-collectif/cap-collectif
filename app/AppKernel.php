@@ -65,6 +65,9 @@ class AppKernel extends Kernel
 
             new FOS\HttpCacheBundle\FOSHttpCacheBundle(),
 
+            // search
+            new FOS\ElasticaBundle\FOSElasticaBundle(),
+
             // feature activation / deactivation
             new Qandidate\Bundle\ToggleBundle\QandidateToggleBundle(),
 

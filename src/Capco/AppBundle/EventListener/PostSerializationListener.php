@@ -14,7 +14,7 @@ class PostSerializationListener extends AbstractSerializationListener
         $this->router = $router;
     }
 
-    public static function getSubscribedEvents(): array
+    public static function getSubscribedEvents()
     {
         return [
             ['event' => 'serializer.post_serialize', 'class' => 'Capco\AppBundle\Entity\Post', 'method' => 'onPostSerialize'],
@@ -23,10 +23,6 @@ class PostSerializationListener extends AbstractSerializationListener
 
     public function onPostSerialize(ObjectEvent $event)
     {
-        // We skip if we are serializing for Elasticsearch
-        if (isset($this->getIncludedGroups($event)['Elasticsearch'])) {
-            return;
-        }
         $post = $event->getObject();
 
         $event->getVisitor()->addData('_links', [

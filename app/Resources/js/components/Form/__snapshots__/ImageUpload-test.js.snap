@@ -115,11 +115,6 @@ exports[`<ImageUpload /> render correctly without preview 1`] = `
     bsClass="col"
     componentClass="div"
     sm={12}
-    style={
-      Object {
-        "marginBottom": 5,
-      }
-    }
     xs={12}
   >
     <PreviewMedia

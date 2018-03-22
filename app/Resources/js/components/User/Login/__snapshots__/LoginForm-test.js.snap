@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<LoginForm /> renders a form with inputs 1`] = `
-<div>
+<div
+  className="form_no-bold-label"
+>
   <Field
     autoComplete="email"
     autoFocus={true}
@@ -14,7 +16,6 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
         values={Object {}}
       />
     }
-    labelClassName="h5"
     name="username"
     type="email"
   />
@@ -30,12 +31,11 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
         values={Object {}}
       />
     }
-    labelClassName="w100 h5"
+    labelClassName="w-100"
     name="password"
     type="password"
   />
   <a
-    className="small"
     href="/resetting/request"
   >
     <FormattedMessage

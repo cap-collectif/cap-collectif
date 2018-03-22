@@ -23,7 +23,7 @@ const OpinionBody = React.createClass({
         <div>
           {opinion.comment !== null && FormattedText.strip(opinion.comment).length ? (
             <div>
-              <p className="control-label h5">
+              <p className="control-label">
                 <FormattedMessage id="opinion.version_comment" />
               </p>
               <Well bsSize="small">
