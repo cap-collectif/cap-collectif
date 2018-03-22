@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Modal, Row } from 'react-bootstrap';
 import CloseButton from '../../Form/CloseButton';
 import OpinionActions from '../../../actions/OpinionActions';
-import Loader from '../../Ui/Loader';
+import Loader from '../../Utils/Loader';
 import UserBox from '../../User/UserBox';
 
 const OpinionVotesModal = React.createClass({

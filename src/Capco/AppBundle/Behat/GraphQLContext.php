@@ -20,11 +20,7 @@ class GraphQLContext implements Context
      */
     public function createClient()
     {
-        $this->client = new Client([
-            'base_uri' => 'https://capco.test/',
-            'cert' => '/etc/ssl/certs/capco.pem',
-            'verify' => false,
-        ]);
+        $this->client = new Client(['base_uri' => 'http://capco.test/']);
         $this->token = null;
     }
 

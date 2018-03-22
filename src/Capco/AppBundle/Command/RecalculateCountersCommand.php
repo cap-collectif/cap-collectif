@@ -155,7 +155,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         $em->createQuery('UPDATE CapcoAppBundle:Post p set p.commentsCount = (
           select count(DISTINCT pc.id)
           from CapcoAppBundle:PostComment pc
-          where pc.post = p AND pc.isEnabled = 1 AND pc.isTrashed = 0 AND pc.expired = 0 GROUP BY pc.post
+          where pc.Post = p AND pc.isEnabled = 1 AND pc.isTrashed = 0 AND pc.expired = 0 GROUP BY pc.Post
         )')->execute();
 
         $em->createQuery('UPDATE CapcoAppBundle:Event e set e.commentsCount = (
@@ -309,7 +309,7 @@ class RecalculateCountersCommand extends ContainerAwareCommand
           select count(DISTINCT pv.id)
           from CapcoAppBundle:ProposalSelectionVote pv INNER JOIN CapcoAppBundle:Proposal p WITH pv.proposal = p
           where pv.selectionStep = ss AND pv.expired = 0 AND p.expired = 0 AND p.draft = 0 AND p.isTrashed = 0 AND p.deletedAt IS NULL AND p.enabled = 1
-          group by pv.selectionStep
+          group by pv.selectionStep          
         )')->execute();
 
         $selectionSteps = $em->getRepository('CapcoAppBundle:Steps\SelectionStep')->findAll();

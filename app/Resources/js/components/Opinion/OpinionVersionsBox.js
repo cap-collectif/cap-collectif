@@ -5,7 +5,7 @@ import { Row, Col } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import OpinionVersionList from './OpinionVersionList';
 import OpinionVersionCreateButton from './OpinionVersionCreateButton';
-import Loader from '../Ui/Loader';
+import Loader from '../Utils/Loader';
 import Fetcher from '../../services/Fetcher';
 import OpinionVersionCreateModal from './OpinionVersionCreateModal';
 

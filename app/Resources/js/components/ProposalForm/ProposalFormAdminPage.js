@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { type ReadyState, QueryRenderer, graphql } from 'react-relay';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import ProposalFormAdminPageTabs from './ProposalFormAdminPageTabs';
-import Loader from '../Ui/Loader';
+import Loader from '../Utils/Loader';
 import type { ProposalFormAdminPageQueryResponse } from './__generated__/ProposalFormAdminPageQuery.graphql';
 import type { Uuid } from '../../types';
 

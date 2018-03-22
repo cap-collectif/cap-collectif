@@ -1,0 +1,177 @@
+.admin_proposal_form {
+    .panel_flex {
+        .panel-title {
+            display: flex;
+            align-items: center;
+
+            span {
+                flex: 1 0 auto;
+            }
+        }
+
+        .list-group-item {
+            display: flex;
+            align-items: center;
+
+            button {
+                margin-left: auto;
+            }
+        }
+    }
+
+    .box-primary {
+        padding: 0 20px 20px;
+    }
+
+    .box-header {
+        padding: 10px 0;
+
+        h3.box-title {
+            margin: 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid $border-color;
+            font-size: 24px;
+            width: 100%;
+        }
+
+        a.link {
+            position: absolute;
+            right: 10px;
+            top: 30px;
+        }
+    }
+
+    .box-content {
+        &.box-content__notation-form,
+        &.box-content__status-form {
+            .box-content__toolbar {
+                margin-top: 20px;
+            }
+        }
+
+        .list-group {
+            margin-bottom: 0;
+        }
+
+        .panel-heading {
+            a:hover {
+                color: currentColor;
+            }
+
+            h4 {
+                margin: 0;
+                line-height: 31px;
+            }
+
+            .form-group {
+                margin: 5px 0 0;
+            }
+        }
+
+        .panel-body .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-group .checkbox {
+            margin-top: 0;
+        }
+
+        .box-content__toolbar:not(button) {
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid $border-color;
+            margin-left: 0;
+
+            >.btn:first-child {
+                margin-left: 0;
+            }
+        }
+
+        button.box-content__toolbar {
+            margin-top: 20px;
+        }
+    }
+
+    .editor {
+        position: relative;
+
+        .ql-toolbar, .ql-container {
+            border: 1px solid $border-color;
+        }
+
+        .ql-toolbar {
+            border-radius: 5px 5px 0 0;
+        }
+
+        .ql-container {
+            border-radius: 0 0 5px 5px;
+            border-top: none;
+            background-color: $form-bgc;
+
+            .ql-editor {
+                min-height: 100px;
+            }
+        }
+    }
+
+    .image-uploader {
+        &__dropzone {
+            width: 200px;
+            height: 200px;
+            margin-top: 5px;
+            border: 2px dashed $border-color;
+            background-color: $form-bgc;
+            border-radius: 5px;
+            cursor: pointer;
+
+            &-label {
+                padding: 15px;
+
+                &:after {
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    width: 50%;
+                    height: 1.2em;
+                    text-align: right;
+                    content: "";
+                }
+
+                p {
+                    margin-bottom: 5px;
+                }
+            }
+
+            &--fullwidth {
+                @extend .image-uploader__dropzone;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+            }
+        }
+
+        &__btn, .form-group .checkbox {
+            margin-top: 15px;
+        }
+
+        &__preview {
+            img {
+                max-width: 100%;
+            }
+        }
+    }
+
+    .proposal__private-excerpt {
+        color: $info-color;
+        margin-top: 20px;
+    }
+}
+
+.label-info {
+    background-color: $info-color;
+
+    a, a:hover {
+        color: $white;
+        font-weight: 400;
+    }
+}

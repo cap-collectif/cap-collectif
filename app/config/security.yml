@@ -74,7 +74,7 @@ security:
                     service: capco.oauth.provider
             remember_me:
               always_remember_me: false
-              secret: "%remember_secret%"
+              key: "%remember_secret%"
               lifetime: 31536000
               path: /
               domain: ~

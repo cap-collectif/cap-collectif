@@ -57,6 +57,10 @@
     margin-bottom: 40px;
 }
 
+.ml-10 {
+    margin-left: 10px;
+}
+
 .mr-15 {
     margin-right: 15px;
 }
@@ -95,23 +99,11 @@
 }
 
 /* =====
-  Width
-==== */
-
-.w-100 {
-    width: 100%;
-}
-
-/* =====
-  Display
+  Others
 ==== */
 
 .d-flex {
     display: flex;
-}
-
-.flex-wrap {
-  flex-wrap: wrap;
 }
 
 .d-ib {

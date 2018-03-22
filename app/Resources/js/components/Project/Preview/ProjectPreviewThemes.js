@@ -2,7 +2,6 @@
 import React, { PropTypes } from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
 import type { State } from '../../../types';
-import InlineList from '../../Ui/List/InlineList';
 
 const ProjectPreviewThemes = React.createClass({
   propTypes: {
@@ -14,18 +13,21 @@ const ProjectPreviewThemes = React.createClass({
     const { project, features } = this.props;
     if (features.themes && project.themes.length > 0) {
       return (
-        <InlineList className="small excerpt">
+        <div className="excerpt project__preview__themes ellipsis">
           {project.themes.map((theme, index) => {
             return (
-              <li key={index}>
-                <a href={theme._links.show}>{theme.title}</a>
-              </li>
+              <span key={index}>
+                <a className="excerpt" href={theme._links.show}>
+                  {theme.title}
+                </a>
+                {index < project.themes.length - 1 && <span>, </span>}
+              </span>
             );
           })}
-        </InlineList>
+        </div>
       );
     }
-    return null;
+    return <div className="excerpt project__preview__themes small" />;
   },
 });
 

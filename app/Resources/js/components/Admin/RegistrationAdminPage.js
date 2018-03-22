@@ -35,8 +35,8 @@ export const RegistrationAdminPage = React.createClass({
   render() {
     const { reorder, isSuperAdmin, onToggle, addNewField, features, dynamicFields } = this.props;
     return (
-      <div className="box-content">
-        <div className="row">
+      <div style={{ margin: '0 15px' }}>
+        <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
             <Toggle
               checked={features.registration}
@@ -45,7 +45,7 @@ export const RegistrationAdminPage = React.createClass({
           </Col>
           <Col xs={11}>Permettre l'inscription</Col>
         </div>
-        <h4>Réseaux sociaux</h4>
+        <h2>Réseaux sociaux</h2>
         <p>Permettre l'inscription via :</p>
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
@@ -65,7 +65,7 @@ export const RegistrationAdminPage = React.createClass({
           </Col>
           <Col xs={11}>Google</Col>
         </div>
-        <h4>Autorisation</h4>
+        <h2>Autorisation</h2>
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
             <Toggle
@@ -81,7 +81,7 @@ export const RegistrationAdminPage = React.createClass({
           <Col xs={11}>Limiter l'inscription à certains noms de domaine</Col>
         </div>
         {features.restrict_registration_via_email_domain && <RegistrationEmailDomainsForm />}
-        <h4>Données recueillies</h4>
+        <h2>Données recueillies</h2>
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
             <Toggle checked disabled />
@@ -132,7 +132,6 @@ export const RegistrationAdminPage = React.createClass({
             />
           )}
           <Button
-            className="box-content__toolbar"
             disabled={!isSuperAdmin}
             style={{ marginBottom: 10 }}
             onClick={
@@ -187,7 +186,7 @@ export const RegistrationAdminPage = React.createClass({
           </Col>
           <Col xs={11}>Je ne suis pas un robot</Col>
         </div>
-        <h3>Communication</h3>
+        <h2>Communication</h2>
         <RegistrationCommunicationForm />
       </div>
     );

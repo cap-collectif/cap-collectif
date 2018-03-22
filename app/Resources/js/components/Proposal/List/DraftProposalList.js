@@ -6,7 +6,7 @@ import { Row } from 'react-bootstrap';
 import DraftProposalPreview from '../Preview/DraftProposalPreview';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import DraftBox from '../../Utils/DraftBox';
-import Loader from '../../Ui/Loader';
+import Loader from '../../Utils/Loader';
 
 type Props = {
   step: Object,
