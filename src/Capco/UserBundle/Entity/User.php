@@ -1296,6 +1296,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return $this->ideaCommentsCount + $this->postCommentsCount + $this->eventCommentsCount;
     }
 
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
     // ********************* Methods for synthesis tool **************************
 
     public function getUniqueIdentifier()
@@ -1305,7 +1310,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     public function getDisplayName()
     {
-        return $this->username ?: 'Utilisateur supprimé';
+        return $this->username ?: 'Utilisateur sans nom.';
     }
 
     public function isSuperAdmin()
