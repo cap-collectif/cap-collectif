@@ -2,10 +2,10 @@
 
 exports[`<ProjectPreviewBody /> should render correctly project preview body & elements for closed step which remains a current step 1`] = `
 <div
-  className="box project__preview__body"
+  className="card__body"
 >
   <div
-    className="project__preview__body__infos"
+    className="card__body__infos"
   >
     <Connect(ProjectPreviewThemes)
       project={
@@ -51,14 +51,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
       }
     />
     <h3
-      className="project__preview__title"
-      style={
-        Object {
-          "height": "auto",
-          "lineHeight": "auto",
-          "marginTop": "5px",
-        }
-      }
+      className="card__title"
     >
       <OverlayTrigger
         defaultOverlayShown={false}
@@ -158,7 +151,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
     }
   />
   <div
-    className="project__preview__actions"
+    className="card__actions"
   >
     <a
       href="http://capco/closed-step2/show-link"
@@ -176,10 +169,10 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
 
 exports[`<ProjectPreviewBody /> should render correctly project preview body & elements for future project 1`] = `
 <div
-  className="box project__preview__body"
+  className="card__body"
 >
   <div
-    className="project__preview__body__infos"
+    className="card__body__infos"
   >
     <Connect(ProjectPreviewThemes)
       project={
@@ -215,14 +208,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
       }
     />
     <h3
-      className="project__preview__title"
-      style={
-        Object {
-          "height": "auto",
-          "lineHeight": "auto",
-          "marginTop": "5px",
-        }
-      }
+      className="card__title"
     >
       <OverlayTrigger
         defaultOverlayShown={false}
@@ -312,7 +298,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
     }
   />
   <div
-    className="project__preview__actions"
+    className="card__actions"
   >
      
     <span
@@ -337,10 +323,10 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
 
 exports[`<ProjectPreviewBody /> should render correctly project preview body & elements for open participative step 1`] = `
 <div
-  className="box project__preview__body"
+  className="card__body"
 >
   <div
-    className="project__preview__body__infos"
+    className="card__body__infos"
   >
     <Connect(ProjectPreviewThemes)
       project={
@@ -386,14 +372,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
       }
     />
     <h3
-      className="project__preview__title"
-      style={
-        Object {
-          "height": "auto",
-          "lineHeight": "auto",
-          "marginTop": "5px",
-        }
-      }
+      className="card__title"
     >
       <OverlayTrigger
         defaultOverlayShown={false}
@@ -537,7 +516,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
     }
   />
   <div
-    className="project__preview__actions"
+    className="card__actions"
   >
     <a
       href="http://capco/step1/show-link"
@@ -558,10 +537,10 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
 
 exports[`<ProjectPreviewBody /> should render correctly project preview body & elements for open step (with no actual participative step) 1`] = `
 <div
-  className="box project__preview__body"
+  className="card__body"
 >
   <div
-    className="project__preview__body__infos"
+    className="card__body__infos"
   >
     <Connect(ProjectPreviewThemes)
       project={
@@ -607,14 +586,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
       }
     />
     <h3
-      className="project__preview__title"
-      style={
-        Object {
-          "height": "auto",
-          "lineHeight": "auto",
-          "marginTop": "5px",
-        }
-      }
+      className="card__title"
     >
       <OverlayTrigger
         defaultOverlayShown={false}
@@ -758,7 +730,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
     }
   />
   <div
-    className="project__preview__actions"
+    className="card__actions"
   >
     <a
       href="http://capco/step1/show-link"
@@ -776,10 +748,10 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
 
 exports[`<ProjectPreviewBody /> should render correctly project preview body & elements for timeless step 1`] = `
 <div
-  className="box project__preview__body"
+  className="card__body"
 >
   <div
-    className="project__preview__body__infos"
+    className="card__body__infos"
   >
     <Connect(ProjectPreviewThemes)
       project={
@@ -826,14 +798,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
       }
     />
     <h3
-      className="project__preview__title"
-      style={
-        Object {
-          "height": "auto",
-          "lineHeight": "auto",
-          "marginTop": "5px",
-        }
-      }
+      className="card__title"
     >
       <OverlayTrigger
         defaultOverlayShown={false}
@@ -963,7 +928,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
     }
   />
   <div
-    className="project__preview__actions"
+    className="card__actions"
   >
     <a
       href="http://capco/timeless-step/show-link"
@@ -981,10 +946,10 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body & e
 
 exports[`<ProjectPreviewBody /> should render correctly project preview body with h2 title & elements for closed step 1`] = `
 <div
-  className="box project__preview__body"
+  className="card__body"
 >
   <div
-    className="project__preview__body__infos"
+    className="card__body__infos"
   >
     <Connect(ProjectPreviewThemes)
       project={
@@ -1020,14 +985,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
       }
     />
     <h2
-      className="project__preview__title"
-      style={
-        Object {
-          "height": "auto",
-          "lineHeight": "auto",
-          "marginTop": "5px",
-        }
-      }
+      className="card__title"
     >
       <OverlayTrigger
         defaultOverlayShown={false}
@@ -1117,7 +1075,7 @@ exports[`<ProjectPreviewBody /> should render correctly project preview body wit
     }
   />
   <div
-    className="project__preview__actions"
+    className="card__actions"
   >
     <a
       href="http://capco/closed-step2/show-link"

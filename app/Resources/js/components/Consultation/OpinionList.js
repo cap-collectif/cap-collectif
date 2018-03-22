@@ -5,7 +5,7 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import Opinion from './Opinion';
 import NewOpinionButton from '../Opinion/NewOpinionButton';
 import environment, { graphqlError } from '../../createRelayEnvironment';
-import Loader from '../Utils/Loader';
+import Loader from '../Ui/Loader';
 
 const renderOpinionList = ({
   error,

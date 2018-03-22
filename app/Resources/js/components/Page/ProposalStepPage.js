@@ -7,7 +7,7 @@ import ProposalListFilters from '../Proposal/List/ProposalListFilters';
 import ProposalListRandomRow from '../Proposal/List/ProposalListRandomRow';
 import ProposalList from '../Proposal/List/ProposalList';
 import DraftProposalList from '../Proposal/List/DraftProposalList';
-import Loader from '../Utils/Loader';
+import Loader from '../Ui/Loader';
 import Pagination from '../Utils/Pagination';
 import CollectStepPageHeader from './CollectStepPageHeader';
 import SelectionStepPageHeader from './SelectionStepPageHeader';

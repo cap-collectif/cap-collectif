@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import IdeaPreviewHeader from './IdeaPreviewHeader';
 import IdeaPreviewBody from './IdeaPreviewBody';
-import IdeaPreviewFooter from './IdeaPreviewFooter';
+import { CardContainer } from '../../Ui/Card/CardContainer';
 
 const IdeaPreview = React.createClass({
   propTypes: {
@@ -12,18 +12,13 @@ const IdeaPreview = React.createClass({
   render() {
     const { idea } = this.props;
     const classes = classNames({
-      idea__preview: true,
-      block: true,
-      'block--bordered': true,
-      box: true,
       'bg-vip': idea.author.vip,
     });
     return (
-      <div className={classes}>
+      <CardContainer className={classes} id="idea-preview">
         <IdeaPreviewHeader idea={idea} />
         <IdeaPreviewBody idea={idea} />
-        <IdeaPreviewFooter idea={idea} />
-      </div>
+      </CardContainer>
     );
   },
 });

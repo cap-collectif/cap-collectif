@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import ProposalAdminPageTabs from './ProposalAdminPageTabs';
-import Loader from '../../Utils/Loader';
 import { PROPOSAL_FOLLOWERS_TO_SHOW } from '../../../constants/ProposalConstants';
+import Loader from '../../Ui/Loader';
 
 type DefaultProps = void;
 type Props = { proposalId: number };
