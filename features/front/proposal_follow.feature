@@ -21,10 +21,11 @@ Scenario: Logged, I want to follow a proposal and change the type of following
   Then I go to the proposal followers tab
   And I should see my subscription as "user" in the proposal followers list
 
-@database @javascript 
+@database @javascript
 Scenario: Logged, I want to unfollow a proposal
   Given I am logged in as user
   And I go to a proposal followed by user
+  And I wait 3 seconds
   When I click the proposal follow button on "proposal3"
   Then I should see a ".dropdown-menu" element
   And I click the proposal unfollow button on "proposal3"

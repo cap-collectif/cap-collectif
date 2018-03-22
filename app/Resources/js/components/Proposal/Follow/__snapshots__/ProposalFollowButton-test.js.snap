@@ -80,11 +80,9 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
                   ]
                 }
               >
-                <a>
-                  <span
-                    className="cap-information"
-                  />
-                </a>
+                <span
+                  className="cap-information ml-30"
+                />
               </OverlayTrigger>
             </span>
           }

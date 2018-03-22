@@ -15,7 +15,7 @@ Scenario: API client wants to list comments of an idea
     [
       {
         "canContribute": @boolean@,
-        "id": @integer@,
+        "id": @string@,
         "body": @string@,
         "createdAt": "@string@.isDateTime()",
         "updatedAt": "@string@.isDateTime()",
@@ -60,7 +60,7 @@ Scenario: API client wants to find the first comment of an idea
     [
       {
         "canContribute": @boolean@,
-        "id": @integer@,
+        "id": @string@,
         "body": @string@,
         "createdAt": "@string@.isDateTime()",
         "updatedAt": "@string@.isDateTime()",
@@ -96,9 +96,7 @@ Scenario: API client wants to find popular comments of an idea
   And the comments should be ordered by popularity
 
 ## Create Comments
-
 ### Anonymous
-
 @database
 Scenario: Anonymous API client wants to add a comment
   When I send a POST request to "/api/ideas/2/comments" with json:
@@ -116,7 +114,7 @@ Scenario: Anonymous API client wants to add an answer to a comment
   When I send a POST request to "/api/ideas/2/comments" with json:
   """
   {
-    "parent": 1,
+    "parent": "ideaComment1",
     "authorName": "Kéké",
     "authorEmail": "vivele94@gmail.com",
     "body": "Ma super réponse"
@@ -153,7 +151,7 @@ Scenario: logged in API client wants to add an answer to a comment
   When I send a POST request to "/api/ideas/2/comments" with json:
   """
   {
-    "parent": 1,
+    "parent": "ideaComment1",
     "body": "Oh oui j'ose :-P"
   }
   """
@@ -165,7 +163,7 @@ Scenario: logged in API client wants to add a comment by hacking
   When I send a POST request to "/api/ideas/2/comments" with json:
   """
   {
-    "parent": 57,
+    "parent": "ideaComment57",
     "body": "Pr0 Hacker"
   }
   """
@@ -185,7 +183,7 @@ Scenario: logged in API client wants to add a comment to the wrong idea
   When I send a POST request to "/api/ideas/2/comments" with json:
   """
   {
-    "parent": 55,
+    "parent": "ideaComment55",
     "body": "Pr0 Hacker"
   }
   """
@@ -205,7 +203,7 @@ Scenario: logged in API client wants to add an answer to an answer
   When I send a POST request to "/api/ideas/2/comments" with json:
   """
   {
-    "parent": 5,
+    "parent": "ideaComment101",
     "body": "Pr0 Hacker"
   }
   """

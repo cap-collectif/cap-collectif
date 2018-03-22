@@ -3,12 +3,10 @@
 namespace Capco\AppBundle\Mailer\Message\Follower;
 
 use Capco\AppBundle\Mailer\Message\DefaultMessage;
-use Capco\AppBundle\Model\Contribution;
 
 final class FollowerActivitiesMessage extends DefaultMessage
 {
     public static function create(
-        Contribution $contribution,
         string $recipentEmail,
         string $recipientName = null,
         array $userProjectsActivities,
@@ -17,7 +15,7 @@ final class FollowerActivitiesMessage extends DefaultMessage
         string $siteUrl,
         string $urlManagingFollowings
     ): self {
-        $message = new self(
+        return new self(
             $recipentEmail,
             $recipientName,
             'your-activity-summary-of',
@@ -35,8 +33,6 @@ final class FollowerActivitiesMessage extends DefaultMessage
             null,
             $siteName
         );
-
-        $message->setBcc($followersEmailList);
     }
 
     private static function getMySubjectVars(string $siteName): array

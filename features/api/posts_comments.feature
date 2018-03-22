@@ -15,7 +15,7 @@ Scenario: API client wants to list comments of a blogpost
     [
       {
         "canContribute": @boolean@,
-        "id": @integer@,
+        "id": @string@,
         "body": @string@,
         "createdAt": "@string@.isDateTime()",
         "updatedAt": "@string@.isDateTime()",
@@ -60,7 +60,7 @@ Scenario: API client wants to find the first comment of a blogpost
     [
       {
         "canContribute": @boolean@,
-        "id": @integer@,
+        "id": @string@,
         "body": @string@,
         "createdAt": "@string@.isDateTime()",
         "updatedAt": "@string@.isDateTime()",
@@ -116,7 +116,7 @@ Scenario: Anonymous API client wants to add an answer to a comment
   When I send a POST request to "/api/posts/1/comments" with json:
   """
   {
-    "parent": 178,
+    "parent": "postComment11",
     "authorName": "Kéké",
     "authorEmail": "vivele94@gmail.com",
     "body": "Ma super réponse"
@@ -153,7 +153,7 @@ Scenario: logged in API client wants to add an answer to a comment
   When I send a POST request to "/api/posts/1/comments" with json:
   """
   {
-    "parent": 178,
+    "parent": "postComment11",
     "body": "Oh oui j'ose :-P"
   }
   """
@@ -165,7 +165,7 @@ Scenario: logged in API client wants to add a comment by hacking
   When I send a POST request to "/api/posts/3/comments" with json:
   """
   {
-    "parent": 193,
+    "parent": "postComment6",
     "body": "Pr0 Hacker"
   }
   """

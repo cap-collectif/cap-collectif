@@ -198,7 +198,6 @@ class ActivitiesResolver
 
                         $currentProject['proposals'][$proposalId] = $proposal;
                         $currentProject['projectTitle'] = $project->getTitle();
-                        $currentProject['projectType'] = $project->getProjectType()->getTitle();
 
                         $userActivity->addUserProject($currentProject, $proposal['projectId']);
                     }

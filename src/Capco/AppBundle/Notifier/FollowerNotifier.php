@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Notifier;
 use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Follower\FollowerActivitiesMessage;
-use Capco\AppBundle\Model\Contribution;
+use Capco\AppBundle\Model\UserActivity;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Psr\Log\LoggerInterface;

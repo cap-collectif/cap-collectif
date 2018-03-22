@@ -1,14 +1,13 @@
-<!DOCTYPE HTML PUBLIC>
-<html>
+<!DOCTYPE>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     {% set siteName = capco_site_parameter_value('global.site.fullname') %}
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>{{ 'your-activity-summary-of'|trans({'{siteName}': siteName}, 'CapcoAppBundle') }}</title>
-    <style type="text/css" media="screen">
-
+    <style type="text/css">
         .ExternalClass * {line-height:100%}
         .bb {
             border-bottom: 1px solid #d9d9d9;
@@ -26,7 +25,7 @@
         }
         /* Début style responsive (via media queries) */
 
-        @media only screen and (max-width:480px) {
+        @media screen and (max-width:500px) {
             *[id=email-penrose-conteneur] {width:100% !important;}
             table[class=resp-full-table] {width:100% !important; clear:both;}
             td[class=resp-full-td] {width:100% !important; clear:both;}
@@ -39,17 +38,17 @@
     </style>
 </head>
 <body>
-<div align="center">
+<div id='body' align="center">
     {% set activitiesDate =  sendAt|localizeddate('long', 'none', 'fr_FR', timezone)  %}
-    <table id="email-penrose-conteneur" width="660px" align="center" style="margin: 20px; background-color:#ffffff;" border="0" cellspacing="0" cellpadding="0">
+    <table id="email-penrose-conteneur" width="660" align="center" style="margin: 20px; background-color:#ffffff;" border="0" cellspacing="0" cellpadding="0">
         <tr>
             <td>
-                <table width="660px" class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0">
+                <table width="660" class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                         <td class="resp-full-td" valign="top" style="margin:0 20px; text-align:center;">
-                            <a class="resp-punchline" href="#" style="color:#337ab7; outline:none; text-decoration:none; font-size:20px; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">{{ siteName }}</a>
-                            <h1 class="resp-punchline" style="color:#000000; outline:none; text-decoration:none; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">  {{ 'summary-of-activities'|trans({},'CapcoAppBundle') }}</h1>
-                            <span class="resp-punchline" style="color:#999999; outline:none; font-size:12px; text-decoration:none; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">
+                            <a class="resp-punchline" href="#" style="color:#337ab7; outline:none; text-decoration:none; font-size:20px; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">{{ siteName }}</a>
+                            <h1 class="resp-punchline" style="color:#000000; outline:none; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">  {{ 'summary-of-activities'|trans({},'CapcoAppBundle') }}</h1>
+                            <span class="resp-punchline" style="color:#999999; outline:none; font-size:12px; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">
                                 {{ activitiesDate }}
 							</span>
                         </td>
@@ -66,15 +65,15 @@
         {% for currentProjectId, project in userProjectsActivities %}
             <tr style="margin-top: 20px">
                 <td class="" style="padding-top: 50px">
-                    <table width="660px" class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0" style="">
+                    <table width="660" class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0" style="">
                         <tr>
-                            <td width="660px">
+                            <td width="660">
                                 <table width="100%" align="left" class="resp-full-table ba" border="0" cellpadding="0" cellspacing="0" style="border-color: #d9d9d9; margin-top: 0px;">
                                     <tr>
                                         <td class="resp-full-td-center" valign="top" style="padding:20px; text-align:center;background-color: #f3f3f3;">
-                                            <span class="resp-punchline" style="color:#999999; outline:none; font-size:14px; text-decoration:bold; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;"> {{ 'admin.fields.highlighted_content.project'|trans({},'CapcoAppBundle') }}</span>
-                                            <h2 class="resp-punchline" style="color:#337ab7; outline:none; text-decoration:none; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">{{ project.projectTitle }}</h2>
-                                            <h3 class="resp-punchline" style="color:#6aa84f; outline:none; text-decoration:none; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">{{ 'new-activity'| transchoice(project.countActivities, {'%num%': project.countActivities}, 'CapcoAppBundle') }}</h3>
+                                            <span class="resp-punchline" style="color:#999999; outline:none; font-size:14px;line-height:20px; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight: bold;"> {{ 'admin.fields.highlighted_content.project'|trans({},'CapcoAppBundle') }}</span>
+                                            <h2 class="resp-punchline" style="color:#337ab7; outline:none; text-decoration:none; line-height:20px;font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">{{ project.projectTitle }}</h2>
+                                            <h3 class="resp-punchline" style="color:#6aa84f; outline:none; text-decoration:none; line-height:20px;font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">{{ 'new-activity'| transchoice(project.countActivities, {'%num%': project.countActivities}, 'CapcoAppBundle') }}</h3>
                                         </td>
                                     </tr>
                                 </table>
@@ -87,15 +86,15 @@
             {% for proposal in project.proposals %}
                 <tr style="border-bottom: 1px solid #e2e8ea">
                     <td class="b-lrb">
-                        <table width="660px" class="resp-full-table" align="left" border="0" cellspacing="0" cellpadding="0" style="padding:20px;">
+                        <table width="660" class="resp-full-table" align="left" border="0" cellspacing="0" cellpadding="0" style="padding:20px;">
                             <tr>
-                                <td width="660px">
+                                <td width="660">
                                     <table width="100%" align="center" class="resp-full-table" border="0" cellpadding="0" cellspacing="0" >
                                         <tr>
                                             <td class="resp-full-td" valign="top" style="margin:20px 0; text-align:left;">
-                                                <span class="resp-punchline" style="color:#999999; outline:none; font-size:14px; text-decoration:bold; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">{{ 'admin.fields.source.opinion'|trans({}, 'CapcoAppBundle') }}</span>
-                                                <ul style="list-style: none; padding:0px">
-                                                    <a href="{{ proposal.link }}"><h4 class="resp-punchline" style="color:#337ab7; outline:none; text-decoration:none; font-family:'Helvetica Neue', helvetica, arial, sans-serif; font-weight:100;">{{ proposal.title }}</h4></a>
+                                                <span class="resp-punchline" style="color:#999999; outline:none; font-size:14px; font-weight: bold; font-family:'Open Sans', helvetica, arial, sans-serif; ">{{ 'admin.fields.source.opinion'|trans({}, 'CapcoAppBundle') }}</span>
+                                                <ul style="list-style: none; padding:0">
+                                                    <a href="{{ proposal.link }}"><h4 class="resp-punchline" style="color:#337ab7; outline:none; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:100;">{{ proposal.title }}</h4></a>
                                                     {% if proposal.votes > 0 %}
                                                         <li>🗳 {{ 'new-vote'| transchoice(proposal.votes, {'%num%':  proposal.votes}, 'CapcoAppBundle') }}</li>
                                                     {% endif %}
@@ -119,16 +118,16 @@
             {% endfor %}
         {% endfor %}
     </table>
-    <table id="email-penrose-conteneur" width="600px" align="center" border="0" cellspacing="0" cellpadding="0">
+    <table id="email-penrose-conteneur" width="600" align="center" border="0" cellspacing="0" cellpadding="0">
         <tr>
-            <td style="margin:20px 0px;">
-                <table width="600px" class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0">
+            <td style="margin:20px 0;">
+                <table width="600" class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                         <td width="100%" class="resp-full-td" style="text-align: center;">
                             <span>{{ 'you-receive-this-email-because'|trans({}, 'CapcoAppBundle') }}</span>
                             <span>{{ 'you-follow-these-proposals'|trans({}, 'CapcoAppBundle') }}</span><br>
                             <span><a href="{{ urlManagingFollowings }}">{{ 'set-up-my-subscriptions'|trans({}, 'CapcoAppBundle') }}</a></span>
-                            <span style="font-size:12px; font-family:'Helvetica Neue', helvetica, arial, sans-serif; color:#aeb2b3">{{ 'notification.email.external_footer'|trans({'{to}': to, '{sitename}': siteName, '{business}': business, '{siteUrl}': siteUrl, '{businessUrl}': businessUrl}, 'CapcoAppBundle') | raw }}</span>
+                            <span style="font-size:12px; font-family:'Open Sans', helvetica, arial, sans-serif; color:#aeb2b3">{{ 'notification.email.external_footer'|trans({'{to}': to, '{sitename}': siteName, '{business}': business, '{siteUrl}': siteUrl, '{businessUrl}': businessUrl}, 'CapcoAppBundle') | raw }}</span>
                         </td>
                     </tr>
                 </table>

@@ -1,4 +1,4 @@
-@proposal_followers @proposal_follower_email
+@proposal_follow @proposal_follower_email
 Feature: Notify Followers Command
 
 @parallel-scenario

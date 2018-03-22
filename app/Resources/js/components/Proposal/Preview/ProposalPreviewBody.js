@@ -60,7 +60,7 @@ export class ProposalPreviewBody extends React.Component<Props> {
             <ProposalDetailLikers proposal={proposal} />
           </TagsList>
         </div>
-        <div className="proposal__buttons text-center">
+        <div className="proposal__buttons">
           {step.id === proposal.votableStepId && <ProposalPreviewVote proposal={proposal} />}
           <QueryRenderer
             environment={environment}

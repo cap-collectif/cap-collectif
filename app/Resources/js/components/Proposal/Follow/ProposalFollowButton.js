@@ -105,9 +105,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                             <FormattedMessage id="you-will-receive-a-summary-of-your-notifications-once-a-day" />
                           </Popover>
                         }>
-                        <a>
-                          <span className="cap-information" />
-                        </a>
+                        <span className="cap-information ml-30" />
                       </OverlayTrigger>
                     </span>
                   }>
