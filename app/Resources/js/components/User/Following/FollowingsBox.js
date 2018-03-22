@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
-import Loader from '../../Utils/Loader';
+import Loader from '../../Ui/Loader';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import FollowingsProposals from './FollowingsProposals';
 

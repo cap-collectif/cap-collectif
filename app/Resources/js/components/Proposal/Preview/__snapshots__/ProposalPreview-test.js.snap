@@ -9,144 +9,63 @@ exports[`<ProposalPreview /> should render a proposal preview votable 1`] = `
   sm={6}
   xs={12}
 >
-  <div
-    className="block block--bordered proposal__preview"
+  <CardContainer
+    className="bg-vip proposal-preview"
     id="proposal-undefined"
   >
-    <div
-      className="box bg-vip"
-    >
-      <ProposalPreviewHeader
-        proposal={
-          Object {
-            "author": Object {
-              "vip": true,
-            },
-            "category": Object {},
-            "commentsCount": 5,
-            "referer": "http://capco.test",
-            "selections": Array [],
-            "viewerCanSeeEvaluation": true,
-            "votableStepId": "step2",
-            "votesByStepId": Object {
-              "collectstep1": Array [],
-              "selectionstep1": Array [],
-            },
-            "votesCountByStepId": Object {
-              "2": 0,
-            },
-          }
+    <ProposalPreviewHeader
+      proposal={
+        Object {
+          "author": Object {
+            "vip": true,
+          },
+          "category": Object {},
+          "commentsCount": 5,
+          "referer": "http://capco.test",
+          "selections": Array [],
+          "viewerCanSeeEvaluation": true,
+          "votableStepId": "step2",
+          "votesByStepId": Object {
+            "collectstep1": Array [],
+            "selectionstep1": Array [],
+          },
+          "votesCountByStepId": Object {
+            "2": 0,
+          },
         }
-      />
-      <Connect(ProposalPreviewBody)
-        proposal={
-          Object {
-            "author": Object {
-              "vip": true,
-            },
-            "category": Object {},
-            "commentsCount": 5,
-            "referer": "http://capco.test",
-            "selections": Array [],
-            "viewerCanSeeEvaluation": true,
-            "votableStepId": "step2",
-            "votesByStepId": Object {
-              "collectstep1": Array [],
-              "selectionstep1": Array [],
-            },
-            "votesCountByStepId": Object {
-              "2": 0,
-            },
-          }
+      }
+    />
+    <Connect(ProposalPreviewBody)
+      proposal={
+        Object {
+          "author": Object {
+            "vip": true,
+          },
+          "category": Object {},
+          "commentsCount": 5,
+          "referer": "http://capco.test",
+          "selections": Array [],
+          "viewerCanSeeEvaluation": true,
+          "votableStepId": "step2",
+          "votesByStepId": Object {
+            "collectstep1": Array [],
+            "selectionstep1": Array [],
+          },
+          "votesCountByStepId": Object {
+            "2": 0,
+          },
         }
-        showNullEstimation={true}
-        showThemes={true}
-      />
-      <div
-        className="proposal__buttons"
-      >
-        <ProposalPreviewVote
-          proposal={
-            Object {
-              "author": Object {
-                "vip": true,
-              },
-              "category": Object {},
-              "commentsCount": 5,
-              "referer": "http://capco.test",
-              "selections": Array [],
-              "viewerCanSeeEvaluation": true,
-              "votableStepId": "step2",
-              "votesByStepId": Object {
-                "collectstep1": Array [],
-                "selectionstep1": Array [],
-              },
-              "votesCountByStepId": Object {
-                "2": 0,
-              },
-            }
-          }
-        />
-        <ReactRelayQueryRenderer
-          environment={
-            RelayModernEnvironment {
-              "__setNet": [Function],
-              "_deferrableSelections": Array [],
-              "_network": Object {
-                "execute": [Function],
-              },
-              "_publishQueue": RelayPublishQueue {
-                "_appliedOptimisticUpdates": Array [],
-                "_backup": Object {},
-                "_handlerProvider": [Function],
-                "_pendingBackupRebase": false,
-                "_pendingData": Array [],
-                "_pendingOptimisticUpdates": Array [],
-                "_pendingUpdaters": Array [],
-                "_store": RelayMarkSweepStore {
-                  "_gcEnabled": true,
-                  "_hasScheduledGC": false,
-                  "_index": 0,
-                  "_recordSource": Object {},
-                  "_roots": Array [],
-                  "_subscriptions": Array [],
-                  "_updatedRecordIDs": Object {},
-                },
-              },
-              "_store": RelayMarkSweepStore {
-                "_gcEnabled": true,
-                "_hasScheduledGC": false,
-                "_index": 0,
-                "_recordSource": Object {},
-                "_roots": Array [],
-                "_subscriptions": Array [],
-                "_updatedRecordIDs": Object {},
-              },
-              "configName": undefined,
-              "unstable_internal": Object {
-                "areEqualSelectors": [Function],
-                "createFragmentSpecResolver": [Function],
-                "createOperationSelector": [Function],
-                "getDataIDsFromObject": [Function],
-                "getFragment": [Function],
-                "getRequest": [Function],
-                "getSelector": [Function],
-                "getSelectorList": [Function],
-                "getSelectorsFromObject": [Function],
-                "getVariablesFromObject": [Function],
-              },
-            }
-          }
-          query={[Function]}
-          render={[Function]}
-          variables={
-            Object {
-              "proposalId": undefined,
-            }
-          }
-        />
-      </div>
-    </div>
+      }
+      showNullEstimation={true}
+      showThemes={true}
+      step={
+        Object {
+          "id": "step2",
+          "voteThreshold": 0,
+          "voteType": 2,
+        }
+      }
+    />
     <ProposalPreviewFooter
       proposal={
         Object {
@@ -195,7 +114,7 @@ exports[`<ProposalPreview /> should render a proposal preview votable 1`] = `
       }
       stepId="step2"
     />
-  </div>
+  </CardContainer>
 </Col>
 `;
 
@@ -208,144 +127,63 @@ exports[`<ProposalPreview /> should render a proposal preview with different ste
   sm={6}
   xs={12}
 >
-  <div
-    className="block block--bordered proposal__preview"
+  <CardContainer
+    className="proposal-preview"
     id="proposal-undefined"
   >
-    <div
-      className="box"
-    >
-      <ProposalPreviewHeader
-        proposal={
-          Object {
-            "author": Object {
-              "vip": false,
-            },
-            "category": Object {},
-            "commentsCount": 5,
-            "referer": "http://capco.test",
-            "selections": Array [],
-            "viewerCanSeeEvaluation": true,
-            "votableStepId": "step3",
-            "votesByStepId": Object {
-              "collectstep1": Array [],
-              "selectionstep1": Array [],
-            },
-            "votesCountByStepId": Object {
-              "2": 0,
-            },
-          }
+    <ProposalPreviewHeader
+      proposal={
+        Object {
+          "author": Object {
+            "vip": false,
+          },
+          "category": Object {},
+          "commentsCount": 5,
+          "referer": "http://capco.test",
+          "selections": Array [],
+          "viewerCanSeeEvaluation": true,
+          "votableStepId": "step3",
+          "votesByStepId": Object {
+            "collectstep1": Array [],
+            "selectionstep1": Array [],
+          },
+          "votesCountByStepId": Object {
+            "2": 0,
+          },
         }
-      />
-      <Connect(ProposalPreviewBody)
-        proposal={
-          Object {
-            "author": Object {
-              "vip": false,
-            },
-            "category": Object {},
-            "commentsCount": 5,
-            "referer": "http://capco.test",
-            "selections": Array [],
-            "viewerCanSeeEvaluation": true,
-            "votableStepId": "step3",
-            "votesByStepId": Object {
-              "collectstep1": Array [],
-              "selectionstep1": Array [],
-            },
-            "votesCountByStepId": Object {
-              "2": 0,
-            },
-          }
+      }
+    />
+    <Connect(ProposalPreviewBody)
+      proposal={
+        Object {
+          "author": Object {
+            "vip": false,
+          },
+          "category": Object {},
+          "commentsCount": 5,
+          "referer": "http://capco.test",
+          "selections": Array [],
+          "viewerCanSeeEvaluation": true,
+          "votableStepId": "step3",
+          "votesByStepId": Object {
+            "collectstep1": Array [],
+            "selectionstep1": Array [],
+          },
+          "votesCountByStepId": Object {
+            "2": 0,
+          },
         }
-        showNullEstimation={true}
-        showThemes={true}
-      />
-      <div
-        className="proposal__buttons"
-      >
-        <ProposalPreviewVote
-          proposal={
-            Object {
-              "author": Object {
-                "vip": false,
-              },
-              "category": Object {},
-              "commentsCount": 5,
-              "referer": "http://capco.test",
-              "selections": Array [],
-              "viewerCanSeeEvaluation": true,
-              "votableStepId": "step3",
-              "votesByStepId": Object {
-                "collectstep1": Array [],
-                "selectionstep1": Array [],
-              },
-              "votesCountByStepId": Object {
-                "2": 0,
-              },
-            }
-          }
-        />
-        <ReactRelayQueryRenderer
-          environment={
-            RelayModernEnvironment {
-              "__setNet": [Function],
-              "_deferrableSelections": Array [],
-              "_network": Object {
-                "execute": [Function],
-              },
-              "_publishQueue": RelayPublishQueue {
-                "_appliedOptimisticUpdates": Array [],
-                "_backup": Object {},
-                "_handlerProvider": [Function],
-                "_pendingBackupRebase": false,
-                "_pendingData": Array [],
-                "_pendingOptimisticUpdates": Array [],
-                "_pendingUpdaters": Array [],
-                "_store": RelayMarkSweepStore {
-                  "_gcEnabled": true,
-                  "_hasScheduledGC": false,
-                  "_index": 0,
-                  "_recordSource": Object {},
-                  "_roots": Array [],
-                  "_subscriptions": Array [],
-                  "_updatedRecordIDs": Object {},
-                },
-              },
-              "_store": RelayMarkSweepStore {
-                "_gcEnabled": true,
-                "_hasScheduledGC": false,
-                "_index": 0,
-                "_recordSource": Object {},
-                "_roots": Array [],
-                "_subscriptions": Array [],
-                "_updatedRecordIDs": Object {},
-              },
-              "configName": undefined,
-              "unstable_internal": Object {
-                "areEqualSelectors": [Function],
-                "createFragmentSpecResolver": [Function],
-                "createOperationSelector": [Function],
-                "getDataIDsFromObject": [Function],
-                "getFragment": [Function],
-                "getRequest": [Function],
-                "getSelector": [Function],
-                "getSelectorList": [Function],
-                "getSelectorsFromObject": [Function],
-                "getVariablesFromObject": [Function],
-              },
-            }
-          }
-          query={[Function]}
-          render={[Function]}
-          variables={
-            Object {
-              "proposalId": undefined,
-            }
-          }
-        />
-      </div>
-    </div>
+      }
+      showNullEstimation={true}
+      showThemes={true}
+      step={
+        Object {
+          "id": "step3",
+          "voteThreshold": 0,
+          "voteType": 2,
+        }
+      }
+    />
     <ProposalPreviewFooter
       proposal={
         Object {
@@ -394,6 +232,6 @@ exports[`<ProposalPreview /> should render a proposal preview with different ste
       }
       stepId="step3"
     />
-  </div>
+  </CardContainer>
 </Col>
 `;

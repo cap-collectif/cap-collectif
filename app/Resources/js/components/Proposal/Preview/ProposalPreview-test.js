@@ -64,13 +64,27 @@ describe('<ProposalPreview />', () => {
   };
 
   it('should render a proposal preview votable', () => {
-    const wrapper = shallow(<ProposalPreview proposal={proposalVotable} step={step2} {...props} />);
+    const wrapper = shallow(
+      <ProposalPreview
+        proposal={proposalVotable}
+        showThemes
+        showComments
+        step={step2}
+        {...props}
+      />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render a proposal preview with different step id and vip false', () => {
     const wrapper = shallow(
-      <ProposalPreview proposal={proposalWithDifferentStepId} step={step3} {...props} />,
+      <ProposalPreview
+        proposal={proposalWithDifferentStepId}
+        showThemes
+        showComments
+        step={step3}
+        {...props}
+      />,
     );
     expect(wrapper).toMatchSnapshot();
   });

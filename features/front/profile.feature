@@ -63,6 +63,9 @@ Scenario: Logged in user wants to manage his followings and unfollow all and sta
   And I wait 2 seconds
   And I click the "#unfollow-all" element
   Then I should see "no-following"
+  Then I reload the page
+  And I wait 2 seconds
+  And I should see "no-following"
 
 @javascript @database @elasticsearch
 Scenario: Logged in user wants to manage his followings and unfollow the first project and stay unfollow after refresh

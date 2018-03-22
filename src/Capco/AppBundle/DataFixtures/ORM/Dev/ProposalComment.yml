@@ -24,6 +24,7 @@ Capco\AppBundle\Entity\ProposalComment:
     isEnabled: true
     isTrashed: false
   propComment{7..20}:
+    id: 'proposalComment<current()>'
     proposal: '@proposal1'
     Author: '@user<numberBetween(1, 5)>'
     body: <text(300)>
