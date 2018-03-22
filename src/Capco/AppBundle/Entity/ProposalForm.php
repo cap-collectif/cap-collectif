@@ -13,7 +13,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -124,37 +123,32 @@ class ProposalForm
     private $illustrationHelpText;
 
     /**
-     * @ORM\Column(name="using_themes", type="boolean", nullable=false)
+     * @ORM\Column(name="using_themes", type="boolean")
      */
     private $usingThemes = false;
 
     /**
-     * @ORM\Column(name="allow_aknowledge", type="boolean", nullable=false)
-     */
-    private $allowAknowledge = false;
-
-    /**
-     * @ORM\Column(name="theme_mandatory", type="boolean", nullable=false)
+     * @ORM\Column(name="theme_mandatory", type="boolean")
      */
     private $themeMandatory = false;
 
     /**
-     * @ORM\Column(name="using_categories", type="boolean", nullable=false)
+     * @ORM\Column(name="using_categories", type="boolean")
      */
     private $usingCategories = false;
 
     /**
-     * @ORM\Column(name="category_mandatory", type="boolean", nullable=false)
+     * @ORM\Column(name="category_mandatory", type="boolean")
      */
     private $categoryMandatory = false;
 
     /**
-     * @ORM\Column(name="district_mandatory", type="boolean", nullable=false)
+     * @ORM\Column(name="district_mandatory", type="boolean")
      */
     private $districtMandatory = false;
 
     /**
-     * @ORM\Column(name="using_district", type="boolean", nullable=false)
+     * @ORM\Column(name="using_district", type="boolean")
      */
     private $usingDistrict = false;
 
@@ -651,18 +645,6 @@ class ProposalForm
     public function setEvaluationForm(Questionnaire $evaluationForm = null): self
     {
         $this->evaluationForm = $evaluationForm;
-
-        return $this;
-    }
-
-    public function isAllowAknowledge(): bool
-    {
-        return $this->allowAknowledge;
-    }
-
-    public function setAllowAknowledge($allowAknowledge): self
-    {
-        $this->allowAknowledge = $allowAknowledge;
 
         return $this;
     }

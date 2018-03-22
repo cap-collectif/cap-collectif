@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import GroupAdminPageTabs from './GroupAdminPageTabs';
-import Loader from '../../Utils/Loader';
+import Loader from '../../Ui/Loader';
 
 type DefaultProps = void;
 type Props = { groupId: string };

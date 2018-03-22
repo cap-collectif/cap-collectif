@@ -19,7 +19,7 @@ export default class UserLink extends React.Component<Props, State> {
     if (userUrl) {
       return (
         <a className={className} href={userUrl}>
-          <span style={{ color: '#666' }}>{username}</span>
+          <span>{username}</span>
         </a>
       );
     }

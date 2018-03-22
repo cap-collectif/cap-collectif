@@ -8,7 +8,7 @@ import ProposalPageAlert from './ProposalPageAlert';
 import ProposalDraftAlert from './ProposalDraftAlert';
 import ProposalPageTabs from './ProposalPageTabs';
 import { scrollToAnchor } from '../../../services/ScrollToAnchor';
-import Loader from '../../Utils/Loader';
+import Loader from '../../Ui/Loader';
 import type { FeatureToggles, State } from '../../../types';
 import type { Proposal } from '../../../redux/modules/proposal';
 import { PROPOSAL_FOLLOWERS_TO_SHOW } from '../../../constants/ProposalConstants';

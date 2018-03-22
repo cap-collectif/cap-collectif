@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import ProjectPreviewCounter from './ProjectPreviewCounter';
+import TagsList from '../../Ui/List/TagsList';
 
 const ProjectPreviewCounters = React.createClass({
   propTypes: {
@@ -17,28 +18,26 @@ const ProjectPreviewCounters = React.createClass({
 
   render() {
     const { project } = this.props;
-    const nbCounters = this.getNbCounters();
-    const counterWidth = `${100 / nbCounters}%`;
     return (
-      <div className="project__preview__counters">
+      <TagsList>
         <ProjectPreviewCounter
           value={project.contributionsCount}
           label="project.preview.counters.contributions"
-          style={{ width: counterWidth }}
           showZero
+          icon="cap-baloon-1"
         />
         <ProjectPreviewCounter
           value={project.votesCount}
           label="project.preview.counters.votes"
-          style={{ width: counterWidth }}
+          icon="cap-hand-like-2-1"
         />
         <ProjectPreviewCounter
           value={project.participantsCount}
           label="project.preview.counters.contributors"
-          style={{ width: counterWidth }}
           showZero
+          icon="cap-user-2-1"
         />
-      </div>
+      </TagsList>
     );
   },
 });

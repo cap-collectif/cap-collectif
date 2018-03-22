@@ -12,8 +12,6 @@ Scenario: Email should be sent if a message is sent to the proposal_create queue
   And I consume "proposal_create"
   Then I open mail with subject "notification.email.proposal.create.subject"
   And I should see "notification.email.proposal.create.body" in mail
-  Then I open mail with subject "acknowledgment-of-receipt"
-  And I should see "your-proposal-has-been-registered-an-published" in mail
 
 @rabbitmq
 Scenario: Email should be sent if a message is sent to the proposal_delete queue

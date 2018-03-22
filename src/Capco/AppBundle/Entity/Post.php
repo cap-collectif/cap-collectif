@@ -108,8 +108,7 @@ class Post implements CommentableInterface, IndexableInterface
     private $Authors;
 
     /**
-     * @var
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\PostComment", mappedBy="Post",  cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\PostComment", mappedBy="post")
      */
     private $comments;
 
@@ -231,7 +230,7 @@ class Post implements CommentableInterface, IndexableInterface
         return $this->isPublished;
     }
 
-    public function setdisplayedOnBlog(bool $displayedOnBlog): Post
+    public function setdisplayedOnBlog(bool $displayedOnBlog): self
     {
         $this->displayedOnBlog = $displayedOnBlog;
 
@@ -480,7 +479,7 @@ class Post implements CommentableInterface, IndexableInterface
         return $this->proposals;
     }
 
-    public function addProposal(Proposal $proposal): Post
+    public function addProposal(Proposal $proposal): self
     {
         if (!$this->proposals->contains($proposal)) {
             $this->proposals->add($proposal);
@@ -489,7 +488,7 @@ class Post implements CommentableInterface, IndexableInterface
         return $this;
     }
 
-    public function removeProposal(Proposal $proposal): Post
+    public function removeProposal(Proposal $proposal): self
     {
         if ($this->proposals->contains($proposal)) {
             $this->proposals->removeElement($proposal);
