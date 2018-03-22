@@ -14,7 +14,7 @@ class HomePage extends Page
         'Registration button' => '.btn.btn--registration',
         'Logged user dropdown' => '#navbar-username',
         'Logout button' => '.nav #logout-button',
-        'idea' => '#idea-preview',
+        'idea' => '.idea__preview',
     ];
 
     /**

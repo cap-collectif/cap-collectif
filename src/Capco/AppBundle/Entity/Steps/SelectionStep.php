@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\Entity\Steps;
 
-use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Selection;
+use Capco\AppBundle\Model\IndexableInterface;
 use Capco\AppBundle\Traits\TimelessStepTrait;
 use Capco\AppBundle\Traits\VoteThresholdTrait;
 use Capco\AppBundle\Traits\VoteTypeTrait;
@@ -198,32 +198,13 @@ class SelectionStep extends AbstractStep implements IndexableInterface, Particip
         return !$this->isProposalsHidden() || $this->getStartAt() <= new \DateTime();
     }
 
-    public function isParticipative(): bool
-    {
-        return true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isIndexable()
+    public function isIndexable(): bool
     {
         return $this->getIsEnabled();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function getElasticsearchTypeName()
+    public function isParticipative(): bool
     {
-        return 'selectionStep';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getElasticsearchSerializationGroups()
-    {
-        return ['SelectionSteps'];
+        return true;
     }
 }

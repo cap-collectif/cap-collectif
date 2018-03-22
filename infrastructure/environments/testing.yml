@@ -24,4 +24,4 @@ builder:
 elasticsearch:
     build: ../services/elasticsearch
     volumes:
-        - ../services/local/elasticsearch/capco.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+        - ../services/local/elasticsearch/capco.yml:/etc/elasticsearch/config/elasticsearch.yml

@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Model\IndexableInterface;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 use Capco\AppBundle\Traits\UuidTrait;
-use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -145,6 +145,11 @@ class Theme implements IndexableInterface
     public function __toString()
     {
         return $this->getId() ? $this->getTitle() : 'New theme';
+    }
+
+    public function isIndexable()
+    {
+        return $this->getIsEnabled();
     }
 
     /**
@@ -582,29 +587,5 @@ class Theme implements IndexableInterface
     public function isFuture()
     {
         return $this->status === self::$statuses['future'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isIndexable()
-    {
-        return $this->getIsEnabled();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function getElasticsearchTypeName()
-    {
-        return 'theme';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getElasticsearchSerializationGroups()
-    {
-        return ['ThemeDetails'];
     }
 }

@@ -154,12 +154,8 @@ class ReinitCommand extends ContainerAwareCommand
     protected function populateElastica(OutputInterface $output)
     {
         $this->runCommands([
-            'capco:es:create' => ['--quiet' => true, '--no-debug' => true],
-        ], $output);
-
-        $this->runCommands([
-            'capco:es:populate' => ['--quiet' => true, '--no-debug' => true],
-        ], $output);
+        'fos:elastica:populate' => ['--quiet' => true, '--no-debug' => true],
+      ], $output);
     }
 
     protected function executeMigrations(OutputInterface $output)

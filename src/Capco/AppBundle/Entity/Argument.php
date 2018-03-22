@@ -148,6 +148,11 @@ class Argument implements Contribution, VotableInterface, IsPublishableInterface
         return $this->getParent();
     }
 
+    public function isIndexable()
+    {
+        return $this->getIsEnabled();
+    }
+
     public function getCreatedAt()
     {
         return $this->createdAt;
@@ -470,29 +475,5 @@ class Argument implements Contribution, VotableInterface, IsPublishableInterface
         if (null !== $this->opinionVersion) {
             $this->opinionVersion->removeArgument($this);
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isIndexable()
-    {
-        return $this->getIsEnabled();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function getElasticsearchTypeName()
-    {
-        return 'argument';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getElasticsearchSerializationGroups()
-    {
-        return ['Opinions', 'OpinionVersions'];
     }
 }

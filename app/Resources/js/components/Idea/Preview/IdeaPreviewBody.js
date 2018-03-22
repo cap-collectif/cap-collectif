@@ -9,36 +9,15 @@ const IdeaPreviewBody = React.createClass({
   render() {
     const { idea } = this.props;
     return (
-      <div className="card__body">
-        <div className="card__body__infos">
-          <h3 className="card__title">
-            <a href={idea._links.show}>{idea.title}</a>
-          </h3>
-          {idea.trashed ? (
-            <span className="label label-default">
-              {<FormattedMessage id="idea.preview.trashed" />}
-            </span>
-          ) : null}
-        </div>
-        <span className="excerpt small">
-          <FormattedMessage
-            id="idea.preview.counters.votes"
-            values={{
-              num: idea.votesCount,
-            }}
-          />
-          {idea.commentable ? (
-            <span>
-              {' • '}
-              <FormattedMessage
-                id="idea.preview.counters.comments"
-                values={{
-                  num: idea.commentsCount,
-                }}
-              />
-            </span>
-          ) : null}
-        </span>
+      <div className="idea__preview__body">
+        <h2 className="h4 idea__title smart-fade">
+          <a href={idea._links.show}>{idea.title}</a>
+        </h2>
+        {idea.trashed ? (
+          <span className="idea__label label label-default">
+            {<FormattedMessage id="idea.preview.trashed" />}
+          </span>
+        ) : null}
       </div>
     );
   },

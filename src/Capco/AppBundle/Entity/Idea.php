@@ -172,6 +172,11 @@ class Idea implements Contribution, CommentableInterface, VotableInterface, HasA
         return null;
     }
 
+    public function isIndexable()
+    {
+        return $this->getIsEnabled() && !$this->isExpired();
+    }
+
     /**
      * Set title.
      *
@@ -471,29 +476,5 @@ class Idea implements Contribution, CommentableInterface, VotableInterface, HasA
         if (null !== $this->theme) {
             $this->theme->removeIdea($this);
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isIndexable()
-    {
-        return $this->getIsEnabled() && !$this->isExpired();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function getElasticsearchTypeName()
-    {
-        return 'idea';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getElasticsearchSerializationGroups()
-    {
-        return ['Ideas', 'ThemeDetails'];
     }
 }

@@ -9,7 +9,7 @@ class IsCollectOrSelectionStepValidator extends ConstraintValidator
 {
     public function validate($object, Constraint $constraint)
     {
-        if ($object && !$object->isSelectionStep() && !$object->isCollectStep()) {
+        if (!$object->isSelectionStep() && !$object->isCollectStep()) {
             $this->context->addViolation($constraint->message, []);
         }
     }

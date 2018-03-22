@@ -6,9 +6,9 @@ use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\HasAuthorInterface;
 use Capco\AppBundle\Traits\ExpirableTrait;
+use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\PinnableTrait;
 use Capco\AppBundle\Traits\TextableTrait;
-use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Traits\ValidableTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
@@ -19,6 +19,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * Class Comment.
+ *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\CommentRepository")
  * @ORM\Table(name="comment")
  * @ORM\HasLifecycleCallbacks()
@@ -34,7 +36,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 abstract class Comment implements Contribution, VotableInterface, HasAuthorInterface
 {
-    use ValidableTrait, VotableOkTrait, PinnableTrait, ExpirableTrait, UuidTrait, TextableTrait;
+    use ValidableTrait, VotableOkTrait, PinnableTrait, ExpirableTrait, IdTrait, TextableTrait;
 
     public static $sortCriterias = [
         'date' => 'argument.sort.date',
@@ -153,6 +155,11 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
         return null;
     }
 
+    public function isIndexable()
+    {
+        return $this->getIsEnabled();
+    }
+
     /**
      * Get createdAt.
      *
@@ -173,7 +180,12 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
         return $this->updatedAt;
     }
 
-    public function getIsEnabled(): bool
+    /**
+     * Get isEnabled.
+     *
+     * @return bool
+     */
+    public function getIsEnabled()
     {
         return $this->isEnabled;
     }
@@ -206,7 +218,10 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
         return $this;
     }
 
-    public function getParent(): ?self
+    /**
+     * @return mixed
+     */
+    public function getParent()
     {
         return $this->parent;
     }
@@ -485,29 +500,5 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
     public function deleteComment()
     {
         $this->removeCommentFromRelatedObject();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isIndexable()
-    {
-        return $this->getIsEnabled();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function getElasticsearchTypeName()
-    {
-        return 'comment';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getElasticsearchSerializationGroups()
-    {
-        return ['Comments'];
     }
 }

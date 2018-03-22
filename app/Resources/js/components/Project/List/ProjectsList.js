@@ -14,7 +14,7 @@ export class ProjectsList extends React.Component<Props> {
     const { projects, hasSecondTitle } = this.props;
     if (projects.length > 0) {
       return (
-        <div className="d-flex flex-wrap">
+        <div className="project__preview">
           {projects.map((project, index) => (
             <ProjectPreview key={index} project={project} hasSecondTitle={hasSecondTitle} />
           ))}

@@ -288,6 +288,11 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return null;
     }
 
+    public function isIndexable(): bool
+    {
+        return $this->enabled && !$this->expired;
+    }
+
     public function getRating()
     {
         return $this->rating;
@@ -1021,29 +1026,5 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         $this->followers = $followers;
 
         return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isIndexable()
-    {
-        return $this->enabled && !$this->expired;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function getElasticsearchTypeName()
-    {
-        return 'proposal';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getElasticsearchSerializationGroups()
-    {
-        return ['Proposals', 'ThemeDetails', 'UsersInfos'];
     }
 }

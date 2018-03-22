@@ -3,7 +3,6 @@
 namespace Capco\UserBundle\Entity;
 
 use Capco\AppBundle\Entity\Follower;
-use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface;
 use Capco\AppBundle\Entity\UserGroup;
@@ -19,7 +18,7 @@ use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface as RealUserInterface;
 
-class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInterface, EquatableInterface, IndexableInterface
+class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInterface, EquatableInterface
 {
     const SORT_ORDER_CREATED_AT = 0;
     const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;
@@ -405,6 +404,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         $this->newEmailConfirmationToken = $token;
 
         return $this;
+    }
+
+    public function isIndexable()
+    {
+        return $this->isEnabled();
     }
 
     // for EncoderAwareInterface
@@ -1434,20 +1438,5 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         $this->followingProposals = $followingProposals;
 
         return $this;
-    }
-
-    public function isIndexable()
-    {
-        return $this->isEnabled();
-    }
-
-    public static function getElasticsearchTypeName()
-    {
-        return 'user';
-    }
-
-    public function getElasticsearchSerializationGroups()
-    {
-        return ['UsersInfos'];
     }
 }

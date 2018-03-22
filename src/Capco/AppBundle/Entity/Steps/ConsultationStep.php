@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Entity\Steps;
 
-use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
+use Capco\AppBundle\Model\IndexableInterface;
 use Capco\AppBundle\Traits\TimelessStepTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -454,20 +454,5 @@ class ConsultationStep extends AbstractStep implements IndexableInterface, Parti
         $this->descriptionHelpText = $descriptionHelpText;
 
         return $this;
-    }
-
-    public function isIndexable()
-    {
-        return $this->getIsEnabled();
-    }
-
-    public static function getElasticsearchTypeName()
-    {
-        return 'consultationStep';
-    }
-
-    public function getElasticsearchSerializationGroups()
-    {
-        return ['ConsultationSteps'];
     }
 }

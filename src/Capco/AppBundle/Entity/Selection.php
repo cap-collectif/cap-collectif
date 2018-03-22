@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\HasLifecycleCallbacks
  * @CapcoAssert\StatusBelongsToSelectionStep()
  */
-class Selection implements IndexableInterface
+class Selection
 {
     /**
      * @ORM\Id
@@ -40,7 +39,10 @@ class Selection implements IndexableInterface
 
     public function getId() // for elasticsearch
     {
-        return sprintf('%s#%s', $this->selectionStep->getId(), $this->proposal->getId());
+        return [
+          'selectionStep' => $this->selectionStep->getId(),
+          'proposal' => $this->proposal->getId(),
+       ];
     }
 
     public function getStep(): SelectionStep
@@ -97,29 +99,5 @@ class Selection implements IndexableInterface
         if ($this->getProposal()) {
             $this->getProposal()->removeSelection($this);
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isIndexable()
-    {
-        return true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function getElasticsearchTypeName()
-    {
-        return 'selection';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getElasticsearchSerializationGroups()
-    {
-        return ['Proposals', 'SelectionSteps'];
     }
 }

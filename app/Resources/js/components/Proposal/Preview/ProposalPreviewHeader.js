@@ -3,7 +3,6 @@ import moment from 'moment';
 import { FormattedDate } from 'react-intl';
 import UserAvatar from '../../User/UserAvatar';
 import UserLink from '../../User/UserLink';
-import { CardUser } from '../../Ui/Card/CardUser';
 
 const ProposalPreviewHeader = React.createClass({
   propTypes: {
@@ -13,13 +12,11 @@ const ProposalPreviewHeader = React.createClass({
   render() {
     const proposal = this.props.proposal;
     return (
-      <CardUser>
-        <div className="card__user__avatar">
-          <UserAvatar user={proposal.author} />
-        </div>
-        <div className="ellipsis">
+      <div>
+        <UserAvatar user={proposal.author} className="pull-left proposal__avatar" />
+        <div className="proposal__author">
           <UserLink user={proposal.author} />
-          <p className="excerpt small">
+          <p className="excerpt small proposal__date">
             <FormattedDate
               value={moment(proposal.createdAt)}
               day="numeric"
@@ -28,8 +25,7 @@ const ProposalPreviewHeader = React.createClass({
             />
           </p>
         </div>
-        <hr />
-      </CardUser>
+      </div>
     );
   },
 });

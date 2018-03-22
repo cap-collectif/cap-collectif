@@ -12,9 +12,144 @@
         }
     }
 
+    .project__preview {
+        &__cover {
+            overflow: hidden;
+            width: 100%;
+            height: 175px;
+
+            img {
+                width: 100%;
+                object-fit: cover;
+                height: 100%;
+            }
+        }
+
+        &__type {
+            @include border-top-radius(3px);
+            overflow: hidden;
+            width: 100%;
+            height: 24px;
+            line-height: 24px;
+            color: $white;
+            text-align: center;
+        }
+
+        &__themes {
+            overflow: hidden;
+
+            &:after {
+                height: 15px;
+            }
+        }
+
+        &__title {
+            overflow: hidden;
+            height: 75px;
+            margin-top: 10px;
+
+            &:after {
+                height: 25px;
+            }
+        }
+
+        &__author {
+            overflow: hidden;
+            height: 15px;
+        }
+
+        &__body {
+            flex: 1 0 auto;
+            display: flex;
+            flex-direction: column;
+
+            &__infos {
+                flex: 1 0 auto;
+                margin-bottom: 15px;
+            }
+
+            h3, h2 {
+                font-size: 18px;
+            }
+        }
+
+        &__actions {
+            a {
+                text-transform: uppercase;
+                margin-right: 10px;
+            }
+
+            .remaining-time{
+                &__number {
+                    color: $dark;
+                }
+
+                &__container {
+                    color: $dark-gray;
+                }
+            }
+        }
+    }
+
     .progress-bar--custom {
         text-align: left;
         padding-left: 15px;
+    }
+
+    .thumbnail__steps-bar {
+        width: 100%;
+
+        .progress {
+            margin-bottom: 15px;
+            background-color: $page-bgc;
+
+            &_future-step .progress-bar {
+                background-color: $page-bgc;
+                color: $dark-gray;
+                @include box-shadow(inset 0 1px 2px rgba($dark, 0.1));
+            }
+
+            &_closed-step .progress-bar {
+                background-color: $dark-gray;
+            }
+        }
+
+        .thumbnail__steps-bar__item--closed {
+            background-color: $success-color;
+        }
+
+        .thumbnail__steps-bar__item--open {
+            background-color: $warning-color;
+        }
+
+        .thumbnail__steps-bar__item--future {
+            background-color: $border-color;
+        }
+    }
+
+    .thumbnail__numbers {
+        height: 55px;
+        padding: 5px;
+        background-color: $page-bgc;
+        border-top: 1px solid $border-color;
+
+        .thumbnail__number-block {
+            display: inline-block;
+            text-align: center;
+            border-left: 1px solid $border-color;
+
+            &:first-of-type {
+                border-left: 0;
+            }
+        }
+
+        .thumbnail__number {
+            font-size: 18px;
+        }
+
+        .thumbnail__number__label {
+            font-size: 12px;
+        }
     }
 }
 
@@ -22,4 +157,20 @@
     background-color: $primary-color;
     padding-top: 30px;
     padding-bottom: 30px;
+}
+
+.project__preview {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 14px;
+
+    & > div, .thumbnail--custom {
+        @include border-radius(4px);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .thumbnail--custom {
+        flex: 1 0 auto;
+    }
 }
