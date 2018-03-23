@@ -29,6 +29,14 @@ services:
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
+  capco.listener.empty_username:
+    class: Capco\AppBundle\EventListener\EmptyUsernameListener
+    arguments:
+      - "@security.token_storage"
+      - "@templating"
+    tags:
+      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
   capco.diff.subscriber:
     class: Capco\AppBundle\EventListener\DiffSubscriber
     arguments: ["@capco.diff.generator"]

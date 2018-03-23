@@ -244,3 +244,13 @@ declare class moment$Moment {
 declare module 'moment' {
   declare module.exports: Class<moment$Moment>;
 }
+
+declare module 'moment/locale/fr' {
+  declare module.exports: any;
+}
+declare module 'moment/locale/en-gb' {
+  declare module.exports: any;
+}
+declare module 'moment/locale/es' {
+  declare module.exports: any;
+}

@@ -197,3 +197,10 @@ Mutation:
               inputType: AddUsersInGroupInput
               payloadType: AddUsersInGroupPayload
               mutateAndGetPayload: "@=mutation('addUsersInGroup', [value['users'], value['groupId']])"
+          updateProfile:
+            access: "@=isAuthenticated()"
+            builder: "Relay::Mutation"
+            builderConfig:
+              inputType: UpdateProfileInput
+              payloadType: UpdateProfilePayload
+              mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProfileMutation", [value, user])'

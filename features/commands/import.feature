@@ -28,7 +28,7 @@ Scenario: Admin wants to import a BP
   Given "proposals.csv" contains:
   """
   name;author;district_name;address;collect_status;estimation;category;summary;body;"Evaluez l'importance de votre proposition";"Evaluez le coût de votre proposition"
-  new proposition 1;adavid@jolicode.com;Nord Saint-Martin;5 Allée Rallier-du-Baty 35000 Rennes;Rejeté;200 euros;Politique;blalala;blalblal body;très important;gratuit
+  new proposition 1;aurelien@cap-collectif.com;Nord Saint-Martin;5 Allée Rallier-du-Baty 35000 Rennes;Rejeté;200 euros;Politique;blalala;blalblal body;très important;gratuit
   new proposition 2;Pierre Michel;Nord Saint-Martin;cacccccccccccccccccccccccccccccccccccccccccccxxxxxx;Rejeté;200 euros;Politique;blalala;blalblal body;nulle;pas chère
   new proposition 3;Pierre Michel;Nord Saint-Martin;cacccccccccccccccccccccccccccccccccccccccccccxxxxxx;Rejeté;200 euros;Politique;blalala;blalblal body;nulle;pas chère
   """
