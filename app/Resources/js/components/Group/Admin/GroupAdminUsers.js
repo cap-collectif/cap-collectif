@@ -93,7 +93,7 @@ export class GroupAdminUsers extends React.Component<Props, State> {
     const { showAddUsersModal } = this.state;
 
     return (
-      <div className="box box-primary container-fluid">
+      <div className="box box-primary container">
         <div className="box-header  pl-0">
           <h3 className="box-title">
             <FormattedMessage id="group.admin.users" />

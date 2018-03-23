@@ -9,36 +9,60 @@
   Margin
 ==== */
 
-@for $i from 0 to 8 {
-    $m: 5 + ($i * 5);
-    .mt-#{$m} {
-        margin-top: #{$m}px;
-    }
-    .mr-#{$m} {
-        margin-right: #{$m}px;
-    }
-    .mb-#{$m} {
-        margin-bottom: #{$m}px;
-    }
-    .ml-#{$m} {
-        margin-left: #{$m}px;
-    }
-}
-
 .mt-0 {
     margin-top: 0;
+}
+
+.mt-5 {
+    margin-top: 5px;
+}
+
+.mt-10 {
+    margin-top: 10px;
+}
+
+.mt-15 {
+    margin-top: 15px;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.mt-30 {
+    margin-top: 30px;
 }
 
 .mb-0 {
     margin-bottom: 0;
 }
 
-.mr-0 {
-    margin-right: 0;
+.mb-15 {
+    margin-bottom: 15px;
 }
 
-.ml-0 {
-    margin-left: 0;
+.mb-25 {
+    margin-bottom: 25px;
+}
+
+.mb-30 {
+    margin-bottom: 30px;
+}
+
+.mb-35 {
+    margin-bottom: 35px;
+}
+
+.mb-40 {
+    margin-bottom: 40px;
+}
+
+.ml-10 {
+    margin-left: 10px;
+}
+
+.mr-15 {
+    margin-right: 15px;
 }
 
 /* =====
@@ -52,10 +76,6 @@
 .px-15 {
     padding-left: 15px;
     padding-right: 15px;
-}
-
-.pb-10 {
-    padding-bottom: 10px;
 }
 
 /* =====
@@ -79,29 +99,13 @@
 }
 
 /* =====
-  Width
-==== */
-
-.w-100 {
-    width: 100%;
-}
-
-/* =====
-  Display
+  Others
 ==== */
 
 .d-flex {
     display: flex;
 }
 
-.flex-wrap {
-  flex-wrap: wrap;
-}
-
 .d-ib {
     display: inline-block;
-}
-
-.font-weight-normal {
-    font-weight: normal;
 }

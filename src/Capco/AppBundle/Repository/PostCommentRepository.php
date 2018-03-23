@@ -18,9 +18,9 @@ class PostCommentRepository extends EntityRepository
             ->leftJoin('aut.Media', 'm')
             ->leftJoin('c.votes', 'v')
             ->leftJoin('c.Reports', 'r')
-            ->leftJoin('c.post', 'p')
+            ->leftJoin('c.Post', 'p')
             ->leftJoin('c.answers', 'ans', 'WITH', 'ans.isEnabled = :enabled AND ans.isTrashed = :notTrashed')
-            ->andWhere('c.post = :post')
+            ->andWhere('c.Post = :post')
             ->andWhere('c.parent is NULL')
             ->andWhere('c.isTrashed = :notTrashed')
             ->setParameter('enabled', true)
@@ -29,15 +29,15 @@ class PostCommentRepository extends EntityRepository
             ->orderBy('c.pinned', 'DESC')
         ;
 
-        if ('old' === $filter) {
+        if ($filter === 'old') {
             $qb->addOrderBy('c.updatedAt', 'ASC');
         }
 
-        if ('last' === $filter) {
+        if ($filter === 'last') {
             $qb->addOrderBy('c.updatedAt', 'DESC');
         }
 
-        if ('popular' === $filter) {
+        if ($filter === 'popular') {
             $qb->addOrderBy('c.votesCount', 'DESC');
         }
 
@@ -52,7 +52,7 @@ class PostCommentRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
                    ->select('count(c.id)')
-                   ->andWhere('c.post = :post')
+                   ->andWhere('c.Post = :post')
                    ->andWhere('c.isTrashed = false')
                    ->setParameter('post', $post)
                 ;

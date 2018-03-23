@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import ElementsList from './../List/ElementsList';
-import Loader from '../../Ui/Loader';
+import Loader from '../../Utils/Loader';
 
 const ChildrenModal = React.createClass({
   propTypes: {

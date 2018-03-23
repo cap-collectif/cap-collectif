@@ -157,10 +157,22 @@ export class ProjectPreviewBody extends React.Component<Props> {
     const { hasSecondTitle } = this.props;
 
     if (hasSecondTitle) {
-      return <h2 className="card__title">{this.getTitleContent()}</h2>;
+      return (
+        <h2
+          className="project__preview__title"
+          style={{ height: 'auto', lineHeight: 'auto', marginTop: '5px' }}>
+          {this.getTitleContent()}
+        </h2>
+      );
     }
 
-    return <h3 className="card__title">{this.getTitleContent()}</h3>;
+    return (
+      <h3
+        className="project__preview__title"
+        style={{ height: 'auto', lineHeight: 'auto', marginTop: '5px' }}>
+        {this.getTitleContent()}
+      </h3>
+    );
   };
 
   actualStepIsParticipative() {
@@ -183,8 +195,8 @@ export class ProjectPreviewBody extends React.Component<Props> {
     const isCurrentStep = getCurrentStep(project);
 
     return (
-      <div className="card__body">
-        <div className="card__body__infos">
+      <div className="box project__preview__body">
+        <div className="project__preview__body__infos">
           <ProjectPreviewThemes project={project} />
           {this.getTitle()}
           {project.hasParticipativeStep && <ProjectPreviewCounters project={project} />}
@@ -196,7 +208,7 @@ export class ProjectPreviewBody extends React.Component<Props> {
             isCurrentStep={isCurrentStep}
           />
         )}
-        <div className="card__actions">
+        <div className="project__preview__actions">
           {actualStep && this.getAction(actualStep)} {actualStep && this.getStartDate(actualStep)}{' '}
           {actualStep &&
             actualStep.status === 'open' &&

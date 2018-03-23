@@ -76,7 +76,7 @@ exports[`<ProposalPageFollowers /> should render a proposal page follower with m
     className="text-center"
   >
     <button
-      className="text-center btn btn-secondary"
+      className="center text-center btn btn-secondary grey"
       onClick={[Function]}
     >
       <FormattedMessage

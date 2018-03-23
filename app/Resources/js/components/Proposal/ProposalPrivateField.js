@@ -20,11 +20,11 @@ export class ProposalPrivateField extends React.Component<Props> {
     if (show) {
       return (
         <div>
-          <p className="excerpt_private">
+          <p className="excerpt proposal__private-excerpt">
             <i className="cap cap-lock-2" />
             <FormattedMessage id="global.form.private" />
           </p>
-          <div className={`private-box ${divClassName}`}>{children}</div>
+          <div className={`well well-form proposal__private-field ${divClassName}`}>{children}</div>
         </div>
       );
     }

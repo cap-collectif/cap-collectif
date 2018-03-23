@@ -26,8 +26,9 @@ User:
                 description: "URL to user profile, null if the feature profiles is disabled."
                 resolve: "@=resolver('user_show_url', [value])"
             createdAt:
-                type: "DateTime!"
+                type: "String!"
                 description: "Identifies the date and time when the object was created."
+                resolve: "@=resolver('user_createdAt', [value])"
             updatedAt:
                 type: "String"
                 description: "Updated date of the user."

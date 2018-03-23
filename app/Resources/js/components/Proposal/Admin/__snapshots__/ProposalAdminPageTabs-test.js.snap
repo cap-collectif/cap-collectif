@@ -71,7 +71,7 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
             values={Object {}}
           />
           <span
-            className="badge ml-10"
+            className="ml-10 badge"
           >
             169
           </span>

@@ -2,7 +2,7 @@
 
 exports[`<ProposalAdminFollowers /> should render a proposal page follower with 3 users 1`] = `
 <div
-  className="box box-primary container-fluid"
+  className="box box-primary container"
 >
   <div
     className="box-header"
@@ -120,7 +120,7 @@ exports[`<ProposalAdminFollowers /> should render a proposal page follower with 
 
 exports[`<ProposalAdminFollowers /> should render a proposal page follower without users 1`] = `
 <div
-  className="box box-primary container-fluid"
+  className="box box-primary container"
 >
   <div
     className="box-header"

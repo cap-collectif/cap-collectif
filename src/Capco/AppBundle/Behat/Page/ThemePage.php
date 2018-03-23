@@ -15,7 +15,7 @@ class ThemePage extends Page
     protected $path = '/themes/{themeSlug}';
 
     protected $elements = [
-      'idea' => '#idea-preview',
+      'idea' => '.idea__preview',
       'idea create button' => '#idea-create-button',
       'idea form submit button' => '#confirm-idea-create',
     ];

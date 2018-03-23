@@ -48,20 +48,20 @@
 
 
 {% block sonata_admin_content_actions_wrappers %}
-  {% if admin.class == 'Capco\\AppBundle\\Entity\\Proposal' and admin.subject is same as(false) %}
+  {% if admin.class == 'Capco\\AppBundle\\Entity\\Proposal' and admin.subject is sameas(false) %}
         <ul class="nav navbar-nav navbar-right">
             <li>
                 {{ react_render_component('ProposalCreateFusionButtonApp') }}
             </li>
         </ul>
   {% endif %}
-  {% if admin.class == 'Capco\\AppBundle\\Entity\\ProposalForm' and admin.subject is same as(false) %}
+  {% if admin.class == 'Capco\\AppBundle\\Entity\\ProposalForm' and admin.subject is sameas(false) %}
       <ul class="nav navbar-nav navbar-right">
         <li>
             {{ react_render_component('ProposalFormCreateButtonApp') }}
         </li>
       </ul>
-  {% elseif admin.class == 'Capco\\AppBundle\\Entity\\Group' and admin.subject is same as(false) %}
+  {% elseif admin.class == 'Capco\\AppBundle\\Entity\\Group' and admin.subject is sameas(false) %}
       <ul class="nav navbar-nav navbar-right">
           <li>
               {{ react_render_component('GroupCreateButtonApp') }}
@@ -100,7 +100,7 @@
 {% endblock %}
 
 {% block side_bar_nav %}
-    {% if app.user and is_granted('ROLE_SONATA_ADMIN') %}
+    {% if app.security.token and is_granted('ROLE_SONATA_ADMIN') %}
         <ul class="sidebar-menu">
             {% for group in admin_pool.dashboardgroups %}
                 {% set display = (group.roles is empty or is_granted('ROLE_SUPER_ADMIN') ) %}

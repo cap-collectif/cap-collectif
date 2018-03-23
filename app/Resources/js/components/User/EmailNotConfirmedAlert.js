@@ -51,7 +51,7 @@ export const EmailNotConfirmedAlert = React.createClass({
     }/profile/edit-account`;
     const { confirmationSent, resendingConfirmation } = this.state;
     return (
-      <Alert bsStyle="warning" className="mb-0" id="alert-email-not-confirmed">
+      <Alert bsStyle="warning" id="alert-email-not-confirmed">
         <div className="container">
           <div className="col-md-7" style={{ marginBottom: 5 }}>
             <FormattedHTMLMessage

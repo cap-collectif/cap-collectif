@@ -6,7 +6,7 @@ import CommentList from './CommentList';
 import CommentForm from './CommentForm';
 import CommentActions from '../../actions/CommentActions';
 import CommentStore from '../../stores/CommentStore';
-import Loader from '../Ui/Loader';
+import Loader from '../Utils/Loader';
 import FlashMessages from '../Utils/FlashMessages';
 
 const MessagePagination = 10;
@@ -14,7 +14,7 @@ const MessagePagination = 10;
 const CommentSection = React.createClass({
   propTypes: {
     uri: PropTypes.string,
-    object: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    object: PropTypes.string,
     intl: PropTypes.object,
   },
 
@@ -128,7 +128,6 @@ const CommentSection = React.createClass({
   },
 
   renderFilter() {
-    const { intl } = this.props;
     if (this.state.count > 1) {
       return (
         <Col
@@ -141,9 +140,9 @@ const CommentSection = React.createClass({
             className="form-control"
             value={this.state.filter}
             onChange={() => this.updateSelectedValue()}>
-            <option value="popular">{intl.formatMessage({ id: 'global.filter_popular' })}</option>
-            <option value="last">{intl.formatMessage({ id: 'global.filter_last' })}</option>
-            <option value="old">{intl.formatMessage({ id: 'global.filter_old' })}</option>
+            <option value="popular">{<FormattedMessage id="global.filter_popular" />}</option>
+            <option value="last">{<FormattedMessage id="global.filter_last" />}</option>
+            <option value="old">{<FormattedMessage id="global.filter_old" />}</option>
           </select>
         </Col>
       );

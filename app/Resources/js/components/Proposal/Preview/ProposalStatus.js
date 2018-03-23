@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-import CardStatus from '../../Ui/Card/CardStatus';
 
 const ProposalStatus = React.createClass({
   propTypes: {
@@ -29,12 +28,14 @@ const ProposalStatus = React.createClass({
 
   render() {
     const status = this.getStatus();
-    const statusClasses = {};
+    const statusClasses = {
+      proposal__status: true,
+    };
     if (status) {
       statusClasses[`status--${status.color}`] = true;
     }
 
-    return <CardStatus className={classNames(statusClasses)}>{status && status.name}</CardStatus>;
+    return <div className={classNames(statusClasses)}>{status && status.name}</div>;
   },
 });
 
