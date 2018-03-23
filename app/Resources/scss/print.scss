@@ -5,6 +5,10 @@
 @import "bower_components/compass-mixins/lib/compass";
 @import "base/fonts";
 
+a[href]:after {
+    content: none;
+}
+
 body {
     font-family: "openSans", sans-serif;
     font-size: 13.5pt;

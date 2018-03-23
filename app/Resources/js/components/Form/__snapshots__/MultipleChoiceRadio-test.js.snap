@@ -46,16 +46,12 @@ exports[`<MultipleChoiceRadio /> render correctly 1`] = `
     >
       J'ai rien compris
     </Field>
-    <Row
-      bsClass="row"
-      componentClass="div"
+    <div
+      className="other-field"
       id="responses[4]-other-value-row"
     >
-      <Col
-        bsClass="col"
-        componentClass="div"
-        md={1}
-        xs={2}
+      <div
+        className="other-field__input"
       >
         <Field
           component={[Function]}
@@ -71,12 +67,9 @@ exports[`<MultipleChoiceRadio /> render correctly 1`] = `
             values={Object {}}
           />
         </Field>
-      </Col>
-      <Col
-        bsClass="col"
-        componentClass="div"
-        md={11}
-        xs={10}
+      </div>
+      <div
+        className="other-field__value"
       >
         <Field
           component={[Function]}
@@ -87,8 +80,8 @@ exports[`<MultipleChoiceRadio /> render correctly 1`] = `
           type="text"
           value="Autre valeur"
         />
-      </Col>
-    </Row>
+      </div>
+    </div>
   </FormGroup>
 </div>
 `;
