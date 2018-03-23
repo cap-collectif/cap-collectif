@@ -38,12 +38,12 @@ Scenario: Logged in admin wants edit a proposal form page content
   And I wait 1 seconds
   Then I should see "global.saved"
 
-@database
+@database @test
 Scenario: Logged in admin wants edit a proposal form on evaluation tab
   Given I am logged in as admin
   And I go to the admin proposal form page with id "proposalFormVote"
   Then I go to the admin proposal form evaluation tab
-  And I change the proposal form select "proposal form evaluation question" with option 5
+  And I change the proposal form select "proposal form evaluation question" with option questionnaire5
   Then I save current admin proposal form "evaluation"
   And I wait 1 seconds
   Then I should see "global.saved"
