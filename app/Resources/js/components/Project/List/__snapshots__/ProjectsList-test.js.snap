@@ -2,7 +2,7 @@
 
 exports[`<ProjectsList /> should render correctly 1`] = `
 <div
-  className="project__preview"
+  className="d-flex flex-wrap"
 >
   <ProjectPreview
     project={

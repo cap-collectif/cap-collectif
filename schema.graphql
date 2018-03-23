@@ -17,10 +17,10 @@ scalar Address
 # An argument
 type Argument implements Node & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
   # Identifies the date and time when the object was created.
-  createdAt: String!
+  createdAt: DateTime!
 
   # Identifies the date and time when the object was last updated.
-  updatedAt: String!
+  updatedAt: DateTime
   url: String!
   expired: Boolean!
   published: Boolean!
@@ -458,7 +458,7 @@ enum DistrictOrderField {
 # A contribution with an author
 interface EditableContribution {
   # Identifies the date and time when the object was last updated.
-  updatedAt: String!
+  updatedAt: DateTime
 }
 
 # A Evaluation form (question)
@@ -657,10 +657,10 @@ type NotificationsConfiguration {
 # A contribution
 type Opinion implements Node & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
   # Identifies the date and time when the object was created.
-  createdAt: String!
+  createdAt: DateTime!
 
   # Identifies the date and time when the object was last updated.
-  updatedAt: String!
+  updatedAt: DateTime
 
   # The HTTP url for this contribution.
   url: URI!
@@ -754,10 +754,10 @@ union OpinionOrVersion = Opinion | Version
 # A type of opinion
 type OpinionType implements Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
   # Identifies the date and time when the object was created.
-  createdAt: String!
+  createdAt: DateTime!
 
   # Identifies the date and time when the object was last updated.
-  updatedAt: String!
+  updatedAt: DateTime
 
   # The url of contribution.
   url: String!
@@ -1093,7 +1093,6 @@ type ProposalForm implements Node {
 
   # Identifies the step that use the proposal form.
   step: CollectStep
-  allowAknowledge: Boolean!
 }
 
 input ProposalsConnectionFilter {
@@ -1114,7 +1113,7 @@ type PropositionVote implements YesNoPairedVote & Contribution & ContributionWit
   expired: Boolean!
 
   # Date of vote.
-  createdAt: String!
+  createdAt: DateTime!
 
   # Returns 'vote'.
   kind: String!
@@ -1260,7 +1259,7 @@ type RankingStep implements Step {
 # A report
 type Reporting implements Contribution & ContributionWithAuthor {
   # Identifies the date and time when the object was created.
-  createdAt: String!
+  createdAt: DateTime!
 
   # The author of the reporting.
   author: User!
@@ -1429,10 +1428,10 @@ type SimpleQuestion implements Question {
 # A source
 type Source implements Node & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
   # Identifies the date and time when the object was created.
-  createdAt: String!
+  createdAt: DateTime!
 
   # Identifies the date and time when the object was last updated.
-  updatedAt: String!
+  updatedAt: DateTime
   expired: Boolean!
   published: Boolean!
   trashed: Boolean!
@@ -1567,7 +1566,6 @@ input UpdateProposalFormInput {
   categories: [ProposalCategoryInput!]
   districts: [DistrictInput!]
   questions: [QuestionnaireAbstractQuestionInput!]
-  allowAknowledge: Boolean
   clientMutationId: String
 }
 
@@ -1630,7 +1628,7 @@ type User implements Node {
   show_url: URI
 
   # Identifies the date and time when the object was created.
-  createdAt: String!
+  createdAt: DateTime!
 
   # Updated date of the user.
   updatedAt: String
@@ -1752,10 +1750,10 @@ type ValueResponse implements Response {
 # A version of contribution
 type Version implements Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
   # Identifies the date and time when the object was created.
-  createdAt: String!
+  createdAt: DateTime!
 
   # Identifies the date and time when the object was last updated.
-  updatedAt: String!
+  updatedAt: DateTime
 
   # The url of version.
   url: String!
@@ -1840,7 +1838,7 @@ type VersionVote implements YesNoPairedVote & Contribution & ContributionWithAut
   expired: Boolean!
 
   # Date of vote.
-  createdAt: String!
+  createdAt: DateTime!
 
   # Return the related contribution if the contribution is related to another.
   related: Contribution
@@ -1860,7 +1858,7 @@ interface YesNoPairedVote {
   expired: Boolean!
 
   # Date of vote.
-  createdAt: String!
+  createdAt: DateTime!
 }
 
 # 3 possible values

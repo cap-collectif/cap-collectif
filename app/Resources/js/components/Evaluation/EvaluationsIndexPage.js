@@ -3,7 +3,7 @@ import * as React from 'react';
 import { type ReadyState, QueryRenderer, graphql } from 'react-relay';
 import ProposalFormEvaluationList from './ProposalFormEvaluationList';
 import environment, { graphqlError } from '../../createRelayEnvironment';
-import Loader from '../Utils/Loader';
+import Loader from '../Ui/Loader';
 import type { EvaluationsIndexPageQueryResponse } from './__generated__/EvaluationsIndexPageQuery.graphql';
 
 export const render = ({

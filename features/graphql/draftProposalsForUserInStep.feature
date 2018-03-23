@@ -24,7 +24,7 @@ Scenario: GraphQL client wants to get list of available districts for a particul
       "draftProposalsForUserInStep": [
         {
           "title": "Proposition brouillon 3",
-          "show_url": "http:\/\/capco.test\/projects\/budget-participatif-rennes\/collect\/collecte-des-propositions\/proposals\/proposition-brouillon-3"
+          "show_url": "https:\/\/capco.test\/projects\/budget-participatif-rennes\/collect\/collecte-des-propositions\/proposals\/proposition-brouillon-3"
         }
       ]
     }

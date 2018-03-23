@@ -22,6 +22,8 @@ for _curVar in `env | grep SYMFONY_ | awk -F = '{print $1}'`;do
     set_env_variable ${_curVar} ${!_curVar}
 done
 
+update-ca-certificates --fresh
+
 echo "Starting nginx..."
 
 exec nginx

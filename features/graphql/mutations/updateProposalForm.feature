@@ -13,7 +13,6 @@ Scenario: GraphQL client wants to update a proposal form
           id
           title
           titleHelpText
-          allowAknowledge
           description
           descriptionHelpText
           summaryHelpText
@@ -68,7 +67,6 @@ Scenario: GraphQL client wants to update a proposal form
         "themeMandatory": true,
         "themeHelpText": "Theme Help",
         "usingDistrict": true,
-        "allowAknowledge": true,
         "districtMandatory": true,
         "districtHelpText": "District Help",
         "usingCategories": true,
@@ -124,7 +122,6 @@ Scenario: GraphQL client wants to update a proposal form
           "summaryHelpText": "Summary Help",
           "illustrationHelpText": "Illustration Help",
           "usingThemes": true,
-          "allowAknowledge": true,
           "themeMandatory": true,
           "themeHelpText": "Theme Help",
           "usingDistrict": true,

@@ -11,12 +11,7 @@ const ProposalPreviewVote = React.createClass({
     const { proposal } = this.props;
     return (
       <div>
-        <ProposalVoteButtonWrapper
-          proposal={proposal}
-          style={{ width: '100%' }}
-          id={`proposal-vote-btn-${proposal.id}`}
-          className="proposal__preview__vote"
-        />
+        <ProposalVoteButtonWrapper proposal={proposal} id={`proposal-vote-btn-${proposal.id}`} />
         <ProposalVoteModal proposal={proposal} />
       </div>
     );

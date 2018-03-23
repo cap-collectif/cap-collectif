@@ -250,11 +250,6 @@ class ConsultationResolver implements ContainerAwareInterface
         return null;
     }
 
-    public function resolverPropositionVoteCreatedAt(array $vote): string
-    {
-        return $vote['createdAt']->format(\DateTime::ATOM);
-    }
-
     public function resolveTrashedAt(TrashableInterface $object)
     {
         return $object->getTrashedAt() ? $object->getTrashedAt()->format(\DateTime::ATOM) : null;

@@ -17,7 +17,6 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
-use Capco\AppBundle\Model\CreatableInterface;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Error\UserError;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -188,20 +187,15 @@ class ProposalResolver implements ContainerAwareInterface
         return $proposals;
     }
 
-    public function resolveCreatedAt(CreatableInterface $object): \DateTime
-    {
-        return $object->getCreatedAt();
-    }
-
     public function resolvePostsCount(Proposal $proposal): int
     {
         return $this->container->get('capco.blog.post.repository')->countPublishedPostsByProposal($proposal);
     }
 
-    public function resolveViewerCanSeeEvaluation(Proposal $proposal): bool
+    public function resolveViewerCanSeeEvaluation(Proposal $proposal, $user): bool
     {
         $evalForm = $proposal->getProposalForm()->getEvaluationForm();
 
-        return null !== $evalForm && !$evalForm->isFullyPrivate();
+        return null !== $evalForm && (!$evalForm->isFullyPrivate() || $this->resolveViewerIsEvaluer($proposal, $user));
     }
 }
