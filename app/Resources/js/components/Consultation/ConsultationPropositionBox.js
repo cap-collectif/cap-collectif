@@ -6,7 +6,7 @@ import environment, { graphqlError } from '../../createRelayEnvironment';
 // import ConsultationContributionFiltered
 //   from './ConsultationContributionFiltered';
 import SectionRecursiveList from './SectionRecursiveList';
-import Loader from '../Ui/Loader';
+import Loader from '../Utils/Loader';
 import RemainingTime from './../Utils/RemainingTime';
 import DatesInterval from './../Utils/DatesInterval';
 import StepInfos from '../../components/Steps/Page/StepInfos';

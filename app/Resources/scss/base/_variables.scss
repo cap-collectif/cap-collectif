@@ -16,14 +16,6 @@ $primary-color: #0388cc;
 $success-color: #088A20;
 $info-color: #1D8293;
 
-$basic-colors:
-    (danger or error $danger-color)
-    (warning $warning-color)
-    (primary $primary-color)
-    ("default" $dark-gray)
-    (success $success-color)
-    (info $info-color);
-
 $facebook-color: #3B5998;
 $twitter-color: #00ACED;
 $linkedin-color: #0077B5;
@@ -50,7 +42,7 @@ $navbar-collapsed-height: 60px;
 
 // = Opinion types
 // -------------------------------
-$opinion-types:
+$opinion-types: // to change with variable ?
         ("default" $page-bgc)
         ("red" #f2dede)
         ("orange" #fcf8e3)
@@ -59,13 +51,13 @@ $opinion-types:
         ("green" #dff0d8) ("white" #fff)
         ("gray" $border-color)
         ("light-gray", $page-bgc)
-        (source darken(#428bca, 6.5%));
+        (source darken(#428bca, 6.5%)); // to remove
 
 // = Opinion labels
 // -------------------------------
 $opinion-labels:
         ("blue" #5bc0de)
-        ("green" #5cb85c);
+        ("green" #5cb85c); // to change with variable
 
 // = Icons color
 $icons-colors:
@@ -73,7 +65,7 @@ $icons-colors:
         (icon--yellow #ff0)
         (icon--blue #5bc0de)
         (icon--green #5cb85c)
-        (icon--black $dark);
+        (icon--black $dark); // to change with variable ?
 
 /* ===============================================================
     $Variables Custom
@@ -85,8 +77,8 @@ $custom-video-play: 50px;
 
 // = Default custom colors
 // ------------------------------
-$brand-color-1: #007c91; // color text custom
-$brand-color-2: #00acc1; // bgc custom
+$brand-color-1: #16a085; // color text custom
+$brand-color-2: #1abc9c; // bgc custom
 
 // = Custom buttons
 // -----------------------------
@@ -108,15 +100,3 @@ $btns-outline:
         (dark-gray $dark-gray $dark-gray $white)
         (light-gray $page-bgc $page-bgc $dark);
 
-$statuses: (primary $primary-color $white) (success $success-color $white) (info #5bc0de $white) (warning $warning-color $white) (danger $danger-color $white) (default $dark-gray $white);
-
-@each $status in $statuses {
-    $name: nth($status, 1);
-    $bg: nth($status, 2);
-    $color: nth($status, 3);
-
-    &.status--#{$name} {
-        background-color: $bg;
-        color: $color;
-    }
-}

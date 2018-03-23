@@ -5,7 +5,7 @@ import { Row, Col } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import OpinionVersionList from './OpinionVersionList';
 import OpinionVersionCreateButton from './OpinionVersionCreateButton';
-import Loader from '../Ui/Loader';
+import Loader from '../Utils/Loader';
 import Fetcher from '../../services/Fetcher';
 import OpinionVersionCreateModal from './OpinionVersionCreateModal';
 
@@ -66,7 +66,7 @@ const OpinionVersionsBox = React.createClass({
     if (this.state.versions.length > 1) {
       return (
         <form>
-          <label htmlFor="filter-opinion-version" className="control-label sr-only">
+          <label htmlFor="filter-opinion-version" className="control-label h5 sr-only">
             <FormattedMessage id="opinion.version.filter" />
           </label>
           <select

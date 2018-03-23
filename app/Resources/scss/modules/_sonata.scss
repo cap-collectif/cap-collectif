@@ -1,0 +1,24 @@
+.sonata-ba-sortable-handler:hover {
+    cursor: move;
+}
+
+.sonata-ba-list-field-actions {
+    display: inline-table;
+    margin: 8px;
+}
+
+.capco--sonata-ba-field-help {
+    color: $warning-color !important;
+}
+
+.checkbox[disabled="disabled"] {
+    label,
+    ins {
+        cursor: not-allowed;
+    }
+}
+
+svg.avatar {
+    background-color: $dark-gray;
+    vertical-align: middle;
+}

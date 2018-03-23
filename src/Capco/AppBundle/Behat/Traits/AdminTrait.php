@@ -54,7 +54,7 @@ trait AdminTrait
     public function iShouldBeRedirectedToAMergeProposal()
     {
         $url = $this->getSession()->getCurrentUrl();
-        expect(preg_match('/^https:\/\/capco.test\/admin\/capco\/app\/proposal\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\/edit$/i', $url))->toBe(1);
+        expect(preg_match('/^http:\/\/capco.test\/admin\/capco\/app\/proposal\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\/edit$/i', $url))->toBe(1);
     }
 
     /**

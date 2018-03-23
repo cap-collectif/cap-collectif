@@ -3,7 +3,7 @@ import React from 'react';
 import { Field } from 'redux-form';
 import ReactDOM from 'react-dom';
 import { FormattedMessage } from 'react-intl';
-import { FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap';
+import { FormGroup, ControlLabel, HelpBlock, Row, Col } from 'react-bootstrap';
 import component from './Field';
 
 type Props = {
@@ -70,7 +70,7 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
     return (
       <div>
         <FormGroup validationState={validationState}>
-          {label && <ControlLabel bsClass="control-label">{label}</ControlLabel>}
+          {label && <ControlLabel bsClass="control-label h4">{label}</ControlLabel>}
           {helpText && <HelpBlock>{helpText}</HelpBlock>}
 
           {choices.map((choice, index) => (
@@ -90,8 +90,8 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
           ))}
 
           {props.isOtherAllowed && (
-            <div className="other-field" id={`${name}-other-value-row`}>
-              <div className="other-field__input">
+            <Row id={`${name}-other-value-row`}>
+              <Col xs={2} md={1}>
                 <Field
                   component={component}
                   type="radio"
@@ -103,8 +103,8 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
                   value="other">
                   {<FormattedMessage id="reply.other" />}
                 </Field>
-              </div>
-              <div className="other-field__value">
+              </Col>
+              <Col xs={10} md={11}>
                 <Field
                   component={component}
                   type="text"
@@ -117,8 +117,8 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
                   // $FlowFixMe
                   ref={c => (this.textField = c)}
                 />
-              </div>
-            </div>
+              </Col>
+            </Row>
           )}
 
           {props.description && <HelpBlock>{props.description}</HelpBlock>}

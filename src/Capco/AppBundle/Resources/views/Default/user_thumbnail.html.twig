@@ -12,7 +12,7 @@
 <div class=" {{ 'col-xs-12  col-sm-6  col-md-' ~ col ~ ' col-lg-' ~ col }} ">
     <div class="media  media--macro media--user-thumbnail  box  block  block--bordered">
 
-        {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': user, 'private': private, 'classes': 'media-object', 'link_classes': 'pull-left mr-10'} only %}
+        {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': user, 'private': private, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
 
         <div class="media-body">
             <p class="{% if user is not null and not private %}media-heading{% else %}media--aligned{% endif %} media--macro__user">

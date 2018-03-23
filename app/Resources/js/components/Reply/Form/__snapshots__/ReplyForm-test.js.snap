@@ -19,6 +19,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
         }
       />
     }
+    labelClassName="h4"
     placeholder="reply.your_response"
     type="text"
     valueLink={
@@ -71,7 +72,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
         }
       />
     }
-    labelClassName=""
+    labelClassName="h4"
     onChange={[Function]}
     renderFormErrors={[Function]}
   />
@@ -91,6 +92,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
         }
       />
     }
+    labelClassName="h4"
     type="select"
     valueLink={
       Object {
@@ -162,7 +164,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
         }
       />
     }
-    labelClassName=""
+    labelClassName="h4"
     onChange={[Function]}
     renderFormErrors={[Function]}
   />
@@ -188,6 +190,7 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
         }
       />
     }
+    labelClassName="h4"
     placeholder="reply.your_response"
     type="text"
     valueLink={
@@ -240,7 +243,7 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
         }
       />
     }
-    labelClassName=""
+    labelClassName="h4"
     onChange={[Function]}
     renderFormErrors={[Function]}
   />
@@ -282,7 +285,7 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
         }
       />
     }
-    labelClassName=""
+    labelClassName="h4"
     onChange={[Function]}
     renderFormErrors={[Function]}
   />
@@ -308,6 +311,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
         }
       />
     }
+    labelClassName="h4"
     placeholder="reply.your_response"
     type="text"
     valueLink={
@@ -360,7 +364,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
         }
       />
     }
-    labelClassName=""
+    labelClassName="h4"
     onChange={[Function]}
     renderFormErrors={[Function]}
     value={Object {}}
@@ -417,7 +421,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
         }
       />
     }
-    labelClassName=""
+    labelClassName="h4"
     onChange={[Function]}
     renderFormErrors={[Function]}
   />
@@ -437,6 +441,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
         }
       />
     }
+    labelClassName="h4"
     type="select"
     valueLink={
       Object {
@@ -508,7 +513,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
         }
       />
     }
-    labelClassName=""
+    labelClassName="h4"
     onChange={[Function]}
     renderFormErrors={[Function]}
   />
@@ -562,7 +567,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
         }
       />
     }
-    labelClassName=""
+    labelClassName="h4"
     onChange={[Function]}
     renderFormErrors={[Function]}
     value={Object {}}
@@ -590,6 +595,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
         }
       />
     }
+    labelClassName="h4"
     type="select"
     valueLink={
       Object {
@@ -661,7 +667,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
         }
       />
     }
-    labelClassName=""
+    labelClassName="h4"
     onChange={[Function]}
     renderFormErrors={[Function]}
   />
@@ -694,6 +700,7 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
         }
       />
     }
+    labelClassName="h4"
     placeholder="reply.your_response"
     type="text"
     valueLink={
@@ -746,7 +753,7 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
         }
       />
     }
-    labelClassName=""
+    labelClassName="h4"
     onChange={[Function]}
     renderFormErrors={[Function]}
   />

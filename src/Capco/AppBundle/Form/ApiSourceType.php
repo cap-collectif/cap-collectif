@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Form;
 use Capco\AppBundle\Form\Type\PurifiedTextareaType;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,7 +16,7 @@ class ApiSourceType extends AbstractType
             ->add('title', PurifiedTextType::class, ['required' => true])
             ->add('body', PurifiedTextareaType::class, ['required' => true])
             ->add('Category', null, ['required' => true])
-            ->add('link', UrlType::class, [
+            ->add('link', 'url', [
                 'required' => true,
                 'default_protocol' => 'http',
             ])

@@ -16,7 +16,7 @@ class CollectPage extends Page
     protected $path = '/project/{projectSlug}/collect/{stepSlug}';
 
     protected $elements = [
-        'proposal' => '.proposal-preview',
+        'proposal' => '.proposal__preview',
         'vote proposal button' => '.proposal__button__vote.btn.btn-success',
         'proposal vote form submit button' => '#confirm-proposal-vote',
         'create proposal button' => '#add-proposal',

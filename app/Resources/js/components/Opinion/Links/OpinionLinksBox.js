@@ -4,7 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 import OpinionLinkList from './OpinionLinkList';
 import OpinionLinkCreate from './OpinionLinkCreate';
 import Filter from '../../Utils/Filter';
-import Loader from '../../Ui/Loader';
+import Loader from '../../Utils/Loader';
 import OpinionLinkActions from '../../../actions/OpinionLinkActions';
 import OpinionLinkStore from '../../../stores/OpinionLinkStore';
 

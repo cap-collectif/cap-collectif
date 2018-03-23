@@ -6,7 +6,7 @@ import SynthesisElementActions from '../../actions/SynthesisElementActions';
 
 import ElementIcon from './Element/ElementIcon';
 import ElementTitle from './Element/ElementTitle';
-import Loader from '../Ui/Loader';
+import Loader from '../Utils/Loader';
 import IgnoreButton from './Ignore/IgnoreButton';
 import UpdateButton from './Edit/UpdateButton';
 

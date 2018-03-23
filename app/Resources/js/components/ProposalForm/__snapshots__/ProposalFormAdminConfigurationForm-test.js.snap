@@ -2,7 +2,7 @@
 
 exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
 <div
-  className="box box-primary container-fluid"
+  className="box box-primary container"
 >
   <div
     className="box-header"
@@ -597,6 +597,17 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
         component={[Function]}
         name="questions"
       />
+      <Field
+        component={[Function]}
+        id="proposal_form_allow_aknowledge"
+        name="allowAknowledge"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="automatically-send-an-acknowledgement-of-receipt-by-email-to-the-contributor"
+          values={Object {}}
+        />
+      </Field>
       <ButtonToolbar
         bsClass="btn-toolbar"
         className="box-content__toolbar"

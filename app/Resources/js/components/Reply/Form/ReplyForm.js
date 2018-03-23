@@ -270,6 +270,7 @@ const ReplyForm = React.createClass({
                   onChange={this.onChange}
                   values={this.state.form}
                   label={label}
+                  labelClassName="h4"
                   disabled={disabled}
                 />
               );
@@ -284,6 +285,7 @@ const ReplyForm = React.createClass({
                   renderFormErrors={this.renderFormErrors}
                   onChange={this.onChange}
                   label={label}
+                  labelClassName="h4"
                   disabled={disabled}
                 />
               );
@@ -300,6 +302,7 @@ const ReplyForm = React.createClass({
                   errors={this.renderFormErrors(field.id)}
                   defaultValue=""
                   label={label}
+                  labelClassName="h4"
                   disabled={disabled}>
                   <option value="" disabled>
                     {<FormattedMessage id="global.select" />}
@@ -322,13 +325,14 @@ const ReplyForm = React.createClass({
                   renderFormErrors={this.renderFormErrors}
                   onChange={this.onChange}
                   label={label}
+                  labelClassName="h4"
                   disabled={disabled}
                 />
               );
             case 'button':
               return (
                 <div className="form-group" id={`reply-${field.id}`}>
-                  <label htmlFor={`reply-${field.id}`} className="control-label">
+                  <label htmlFor={`reply-${field.id}`} className="control-label h4">
                     {label}
                   </label>
                   {field.helpText && (
@@ -375,6 +379,7 @@ const ReplyForm = React.createClass({
                   errors={this.renderFormErrors(field.id)}
                   placeholder="reply.your_response"
                   label={label}
+                  labelClassName="h4"
                   disabled={disabled}
                 />
               );

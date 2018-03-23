@@ -14,5 +14,5 @@ YesNoPairedVote:
                 type: "Boolean!"
                 description: "If vote is expired, it exists but doesn't count."
             createdAt:
-                type: "DateTime!"
+                type: "String!"
                 description: "Date of vote."
