@@ -24,7 +24,7 @@ class SerializationListener extends AbstractSerializationListener
         $this->serializer = $serializer;
     }
 
-    public static function getSubscribedEvents(): array
+    public static function getSubscribedEvents()
     {
         return [
             ['event' => 'serializer.post_serialize', 'class' => 'Gedmo\Loggable\Entity\LogEntry', 'method' => 'onPostLogSerialize'],

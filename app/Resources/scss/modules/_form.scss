@@ -1,6 +1,332 @@
 /* ===============================================================
    $FORMS
 ================================================================*/
+
+/** Index
+ * ..........Basic form elements,
+ * ..........Feedbacks,
+ * ..........Autocomplete,
+ * ..........Image uploader dropzone,
+ * ..........Editor,
+ * ..........Ranking,
+ * ..........Draghandle,
+ * ..........???,
+ */
+
+/* ================== Basic form elements ====================*/
+
+form {
+    font-size: 14px;
+
+    input, textarea, select, .form-control, .Select-control {
+        background-color: $form-bgc;
+        border-color: $border-color;
+        color: $dark;
+        font-size: 14px;
+        border-radius: 5px;
+
+        &::placeholder {
+            color: $dark-gray;
+        }
+    }
+
+    .checkbox[disabled="disabled"] {
+        label,
+        ins {
+            cursor: not-allowed;
+        }
+    }
+
+    .other-field {
+        display: flex;
+
+        .form-group {
+            margin: 0;
+        }
+
+        .other-field__input {
+            align-self: center;
+
+            .checkbox, .radio {
+                margin: 0;
+            }
+        }
+
+        .other-field__value {
+            flex: 1 0 auto;
+            margin-left: 15px;
+        }
+    }
+}
+
+
+/* ======================== Feedbacks =========================*/
+
+@each $feedback in $basic-colors {
+    $name: nth($feedback, 1);
+    $color: nth($feedback, 2);
+
+    .form-group.has-#{$name} {
+        label {
+            color: $color;
+        }
+
+        .form-control,
+        .editor .ql-container,
+        .editor .ql-toolbar,
+        .ranking__pick-box__choices,
+        .ranking__choice-box__choices {
+             border-color: $color;
+         }
+
+        .editor .ql-toolbar {
+            border-bottom-color: $border-color;
+        }
+
+        .help-block {
+            color: $dark-gray;
+        }
+    }
+}
+
+.has-error .error-block {
+    display: block;
+    color: $danger-color;
+    margin-top: 5px;
+}
+
+/* ======================== Autocomplete =========================*/
+
+#PlacesAutocomplete__autocomplete-container {
+    border: 1px solid $border-color;
+    border-radius: 0 0 5px 5px;
+    color: $dark-gray;
+
+    .places-autocomplete {
+        padding: 5px 9px;
+
+        &:hover {
+            background-color: $page-bgc;
+        }
+
+        strong {
+            font-weight: 500;
+        }
+    }
+}
+
+#PlacesAutocomplete__root {
+    position: relative;
+
+    input {
+        padding-left: 35px;
+    }
+
+    &:after {
+        font-family: "cap-collectif", sans-serif;
+        // magnifying glass for address
+        content: "\6f";
+        position: absolute;
+        top: 7px;
+        left: 15px;
+    }
+}
+
+.places-autocomplete__field {
+    position: relative;
+}
+
+.places-autocomplete__icon {
+    width: 30px;
+    text-align: center;
+    position: absolute;
+    top: 8px;
+    left: 4px;
+}
+
+/* =============== Image uploader dropzone ==================*/
+
+.image-uploader {
+    &__dropzone {
+        width: 200px;
+        height: 200px;
+        margin-top: 5px;
+        border: 2px dashed $border-color;
+        background-color: $form-bgc;
+        border-radius: 5px;
+        cursor: pointer;
+        color: $dark-gray;
+
+        &-label {
+            padding: 15px;
+
+            &:after {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                width: 50%;
+                height: 1.2em;
+                text-align: right;
+                content: "";
+            }
+
+            p {
+                margin-bottom: 5px;
+            }
+        }
+
+        &--fullwidth {
+            @extend .image-uploader__dropzone;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+    }
+
+    &__btn, .form-group .checkbox {
+        margin-top: 10px;
+    }
+
+    &__preview {
+        img {
+            max-width: 100%;
+        }
+    }
+
+    &__label-info {
+        margin-bottom: 5px;
+    }
+}
+
+/* ========================= Editor ============================*/
+
+.editor {
+    position: relative;
+
+    .ql-toolbar, .ql-container {
+        border: 1px solid $border-color;
+    }
+
+    .ql-toolbar {
+        border-radius: 5px 5px 0 0;
+    }
+
+    .ql-container {
+        border-radius: 0 0 5px 5px;
+        border-top: none;
+        background-color: $form-bgc;
+
+        .ql-editor {
+            min-height: 100px;
+            font-size: 14px;
+        }
+    }
+}
+
+.cke_chrome {
+    border: 1px solid $border-color !important;
+}
+
+.cke_top {
+    border-bottom: 1px solid $border-color !important;
+}
+
+/* ========================= Ranking ===========================*/
+
+.ranking {
+    &__spot {
+        width: 100%;
+        min-height: 45px;
+    }
+
+    &__item {
+        background-color: $form-bgc;
+        cursor: move;
+        margin-bottom: 5px !important;
+
+        &.disabled {
+            opacity: 0.5;
+            cursor: auto;
+        }
+
+        &__icon {
+            margin-right: 5px;
+            color: $dark-gray;
+        }
+
+        &__arrows {
+            margin-top: 10px;
+        }
+
+        &__image {
+            max-width: 100%;
+        }
+    }
+
+    &__choice-box {
+        position: relative;
+
+        &__choices {
+            position: absolute;
+            z-index: 10;
+            top: 0;
+            right: 0;
+            left: 0;
+            border: 1px dashed $border-color;
+        }
+
+        &__placeholder {
+            position: absolute;
+            z-index: 0;
+            top: 0;
+            right: 0;
+            left: 0;
+            padding: 30px;
+            color: $dark-gray;
+            text-align: center;
+        }
+    }
+
+    &__pick-box__choices {
+        border: 1px dashed $border-color;
+    }
+}
+
+@media (max-width: $screen-sm-max) {
+    .ranking__item__arrows {
+
+        .ranking__item__arrow {
+            padding: 10px 14px;
+            border-radius: 0;
+        }
+    }
+}
+
+/* ======================== Draghandle ==========================*/
+
+.draghandle {
+    display: block;
+    width: 18px;
+    height: 18px;
+    background-image: url(../svg/draghandle.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: .25;
+    margin-right: 20px;
+    cursor: row-resize;
+}
+
+/* ======================== ReplyForm ==========================*/
+
+#reply-form .control-label {
+    font-size: 18px;
+}
+
+
+
+
+
+
 /*
 Hack form button - radio check
 */
@@ -31,183 +357,6 @@ Hack form button - radio check
     margin-bottom: 0;
 }
 
-.form-group.has-warning {
-    margin-bottom: 5px;
-
-    .input-choices {
-        background-color: $white;
-    }
-}
-
-.checkbox--other .form-group input {
-    margin-top: 6px;
-}
-
-.help-block,
-.error-block {
-    font-size: 14px;
-    margin-top: 0;
-    margin-bottom: 5px;
-}
-
-.help-block {
-    color: $dark-gray;
-}
-
-.editor {
-    position: relative;
-
-    .ql-toolbar, .ql-container {
-        border: 1px solid $border-color;
-    }
-
-    .ql-toolbar {
-        border-radius: 5px 5px 0 0;
-    }
-
-    .ql-container {
-        border-radius: 0 0 5px 5px;
-        border-top: none;
-        background-color: $form-bgc;
-
-        .ql-editor {
-            min-height: 100px;
-        }
-    }
-}
-
-.has-error {
-    .error-block {
-        color: $danger-color;
-    }
-}
-
-.has-warning {
-
-    .form-control {
-        border-color: $danger-color;
-        background-color: $white;
-    }
-
-    .checkbox--other .form-control {
-        border-color: $border-color;
-        background-color: initial;
-    }
-
-    .cke_wysiwyg_frame {
-        background-color: $white;
-    }
-
-    .control-label,
-    .error-block {
-        color: $danger-color;
-    }
-
-    .help-block {
-        color: $dark-gray;
-    }
-
-    .editor {
-        border: 1px solid $danger-color;
-    }
-
-    input[type="checkbox"] + span,
-    input[type="radio"] + span {
-        color: $dark;
-    }
-
-    *:not('.has-warning') input[type="checkbox"] + span {
-        color: $danger-color;
-    }
-
-    .ranking__choice-box__placeholder {
-        background-color: $white;
-        color: $danger-color;
-    }
-
-    .ranking__choice-box__choices {
-        border-color: $danger-color;
-    }
-
-}
-
-.has-success {
-
-    .form-control {
-        border-color: $success-color;
-    }
-
-    .control-label,
-    .error-block {
-        color: $success-color;
-    }
-
-    .editor {
-        border: 1px solid $success-color;
-    }
-
-    .help-block {
-        color: $dark-gray;
-    }
-}
-
-.ranking__spot {
-    width: 100%;
-    min-height: 45px;
-}
-
-.ranking__item {
-    background-color: $form-bgc;
-    cursor: move;
-    margin-bottom: 5px !important;
-}
-
-.ranking__item.disabled {
-    opacity: 0.5;
-    cursor: auto;
-}
-
-.ranking__choice-box {
-    position: relative;
-}
-
-.ranking__pick-box__choices {
-    border: 1px dashed $border-color;
-}
-
-.ranking__choice-box__choices {
-    position: absolute;
-    z-index: 10;
-    top: 0;
-    right: 0;
-    left: 0;
-    border: 1px dashed $border-color;
-}
-
-.ranking__choice-box__placeholder {
-    position: absolute;
-    z-index: 0;
-    top: 0;
-    right: 0;
-    left: 0;
-    padding: 30px;
-    color: $dark-gray;
-    text-align: center;
-}
-
-.ranking__item__icon {
-    margin-right: 5px;
-    color: $dark-gray;
-}
-
-.ranking__item__arrows {
-    margin-top: 10px;
-}
-
-.ranking__item__image {
-    max-width: 100%;
-}
-
 .well-form {
     padding: 8px 15px 15px;
     border-radius: 5px;
@@ -221,19 +370,12 @@ Hack form button - radio check
     }
 }
 
-@media (max-width: $screen-sm-max) {
-    .ranking__item__arrows {
-
-        .ranking__item__arrow {
-            padding: 10px 14px;
-            border-radius: 0;
-        }
-    }
-}
-
 .has-feedback label.h5 ~ .form-control-feedback {
     top: 35px;
 }
+
+
+// add stylesheet for spin
 
 .glyphicon-spin {
     -webkit-animation: spin 1000ms infinite linear;

@@ -116,13 +116,11 @@ RUN echo "deb http://http.debian.net/debian jessie-backports main" > /etc/apt/so
     rm -rf /var/lib/apt/lists/*
 
 # Install ES
-ENV ES_VERSION 5.6.8
 RUN cd / && \
-    wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-$ES_VERSION.tar.gz && \
-    tar -xzf elasticsearch-$ES_VERSION.tar.gz && \
-    rm -f elasticsearch-$ES_VERSION.tar.gz && \
-    mv /elasticsearch-$ES_VERSION /etc/elasticsearch
-RUN /etc/elasticsearch/bin/elasticsearch-plugin install --batch analysis-icu
+    wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.7.3.tar.gz && \
+    tar xvzf elasticsearch-1.7.3.tar.gz && \
+    rm -f elasticsearch-1.7.3.tar.gz && \
+    mv /elasticsearch-1.7.3 /etc/elasticsearch
 
 # Install rabbitmq
 RUN echo 'deb http://www.rabbitmq.com/debian/ testing main' >> /etc/apt/sources.list.d/rabbitmq.list && \

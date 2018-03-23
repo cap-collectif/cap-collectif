@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Command;
 
-use Capco\AppBundle\Elasticsearch\DoctrineUpdateListener;
 use Doctrine\DBAL\ConnectionException;
 use Joli\JoliNotif\Notification;
 use Joli\JoliNotif\NotifierFactory;
@@ -31,6 +30,10 @@ class ReinitCommand extends ContainerAwareCommand
                 'no-toggles', false, InputOption::VALUE_NONE,
                 'set this option to skip reseting feature flags'
             )
+            ->addOption(
+                'no-es-populate', false, InputOption::VALUE_NONE,
+                'set this option to skip populating ES'
+            )
         ;
     }
 
@@ -58,16 +61,6 @@ class ReinitCommand extends ContainerAwareCommand
             }
         }
 
-        $em = $this->getContainer()->get('doctrine')->getEntityManager();
-        foreach ($em->getEventManager()->getListeners() as $event => $listeners) {
-            foreach ($listeners as $key => $listener) {
-                if ($listener instanceof DoctrineUpdateListener) {
-                    $em->getEventManager()->removeEventListener(['postPersist', 'postUpdate', 'preRemove'], $listener);
-                    $output->writeln('Disabled <info>' . \get_class($listener) . '</info>');
-                }
-            }
-        }
-
         $this->createDatabase($output);
         if ($input->getOption('migrate')) {
             $this->executeMigrations($output);
@@ -79,12 +72,12 @@ class ReinitCommand extends ContainerAwareCommand
         if (!$input->getOption('no-toggles')) {
             $this->loadToggles($output);
         }
-
-        $this->getContainer()->get('doctrine')->getManager()->clear();
+        $this->recalculateCounters($output);
+        if (!$input->getOption('no-es-populate')) {
+            $this->populateElastica($output);
+        }
         $this->recalculateCounters($output);
         $this->updateSyntheses($output);
-
-        $this->populateElastica($output);
 
         $output->writeln('Reinit completed');
 
@@ -161,12 +154,8 @@ class ReinitCommand extends ContainerAwareCommand
     protected function populateElastica(OutputInterface $output)
     {
         $this->runCommands([
-            'capco:es:create' => ['--quiet' => true, '--no-debug' => true],
-        ], $output);
-
-        $this->runCommands([
-            'capco:es:populate' => ['--quiet' => true, '--no-debug' => true],
-        ], $output);
+        'fos:elastica:populate' => ['--quiet' => true, '--no-debug' => true],
+      ], $output);
     }
 
     protected function executeMigrations(OutputInterface $output)

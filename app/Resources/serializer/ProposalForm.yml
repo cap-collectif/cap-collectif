@@ -4,7 +4,7 @@ Capco\AppBundle\Entity\ProposalForm:
         id:
             expose: true
             type: string
-            groups: [Proposals, ProposalForms, Elasticsearch]
+            groups: [Proposals, ProposalForms]
         title:
             expose: true
             type: string

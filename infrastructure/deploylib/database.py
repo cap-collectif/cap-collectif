@@ -3,11 +3,11 @@ from fabric.api import env
 
 
 @task(environments=['local', 'ci'])
-def generate(migrate='false'):
+def generate(populate='true', migrate='false'):
     "Generate database"
     env.service_command('rm -rf web/media/*', 'application')
     env.service_command('curl -sS -XDELETE http://elasticsearch:9200/_all', 'application')
-    env.service_command('php bin/console capco:reinit --force ' + ('', ' --migrate')[migrate == 'true'], 'application', env.www_app)
+    env.service_command('php bin/console capco:reinit --force ' + ('', ' --migrate')[migrate == 'true'] + ('', ' --no-es-populate')[populate != 'true'], 'application', env.www_app)
 
 
 @task(environments=['local'])

@@ -6,7 +6,7 @@
     margin-top: 30px;
 }
 
-.fifty-shade-of-grey {
+.btn-default_focus {
     background-color: $border-color;
 }
 
@@ -29,4 +29,36 @@
         border-color: darken($secondary-color, 10%);
         color: $white;
     }
+}
+
+// = btn-outline
+// to remove with bootstrap 4
+// -----------------------------
+@mixin btn-outline($color) {
+    border: 1px solid $color;
+    color: $color;
+    background-color: transparent;
+
+    &:hover,
+    &:active {
+        background-color: $color;
+        color: $white;
+    }
+}
+
+
+.btn-outline-default.btn-default {
+    @include btn-outline($border-color);
+}
+
+.btn-outline-danger.btn-danger {
+    @include btn-outline($danger-color);
+}
+
+.btn-outline-warning.btn-warning {
+    @include btn-outline($warning-color);
+}
+
+.btn-outline-primary.btn-primary {
+    @include btn-outline($primary-color);
 }

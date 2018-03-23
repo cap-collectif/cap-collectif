@@ -2,8 +2,12 @@
 
 namespace Capco\AppBundle\Search;
 
+use Elastica\Filter\BoolFilter;
+use Elastica\Filter\Nested;
+use Elastica\Filter\Term;
 use Elastica\Index;
 use Elastica\Query;
+use FOS\ElasticaBundle\Transformer\ElasticaToModelTransformerInterface;
 
 abstract class Search
 {
@@ -18,11 +22,35 @@ abstract class Search
     ];
 
     protected $index;
+    protected $transformer;
+    protected $validator;
     protected $type;
 
-    public function __construct(Index $index)
+    public function __construct(Index $index, ElasticaToModelTransformerInterface $transformer, $validator)
     {
         $this->index = $index;
+        $this->transformer = $transformer;
+        $this->validator = $validator;
+    }
+
+    protected function setType(string $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    protected function searchTermsInField(Query\BoolQuery $query, string $fieldName, $terms): Query\BoolQuery
+    {
+        if (is_array($terms)) {
+            $termsQuery = new Query\Terms($fieldName, $terms);
+        } else {
+            $termsQuery = new Query\Match($fieldName, $terms);
+        }
+
+        $query->addMust($termsQuery);
+
+        return $query;
     }
 
     protected function searchTermsInMultipleFields(Query\BoolQuery $query, array $fields, $terms = null, $type = null): Query\BoolQuery
@@ -58,6 +86,28 @@ abstract class Search
         return $query;
     }
 
+    protected function getResults(Query\BoolQuery $queryToExecute, int $size = null, bool $hybridResults = true): array
+    {
+        $query = new Query();
+        $query
+            ->setQuery($queryToExecute)
+            ->setSize($size ?? self::RESULTS_PER_PAGE);
+
+        $search = $this->index->getType($this->type)->search($query);
+        $totalHits = $search->getTotalHits();
+
+        if ($hybridResults) {
+            $results = $this->transformer->hybridTransform($search->getResults());
+        } else {
+            $results = $search->getResults();
+        }
+
+        return [
+            'count' => $totalHits,
+            'results' => $results,
+        ];
+    }
+
     protected function getRandomSortedQuery(Query\AbstractQuery $query): Query
     {
         $functionScore = new Query\FunctionScore();
@@ -65,5 +115,36 @@ abstract class Search
         $functionScore->setRandomScore();
 
         return new Query($functionScore);
+    }
+
+    protected function getBoolFilter(array $filters): BoolFilter
+    {
+        $boolFilter = new BoolFilter();
+
+        foreach ($filters as $filterName => $filterData) {
+            if (is_array($filterData)) {
+                $nested = new Nested();
+                $nested->setPath($filterName);
+                $nested->setFilter($this->getBoolFilter($filterData));
+                $boolFilter->addMust($nested);
+            } else {
+                $boolFilter->addMust(new Term([
+                    $filterName => $filterData,
+                ]));
+            }
+        }
+
+        return $boolFilter;
+    }
+
+    protected function addSort(Query $query, string $sort = '_score', string $order = 'desc')
+    {
+        $query
+            ->addSort([
+                $sort => [
+                    'order' => $order,
+                    'missing' => 'desc' === $order ? 1 - PHP_INT_MAX : PHP_INT_MAX - 1,
+                ],
+            ]);
     }
 }

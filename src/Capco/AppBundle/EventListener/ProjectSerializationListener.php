@@ -34,7 +34,7 @@ class ProjectSerializationListener extends AbstractSerializationListener
         $this->router = $router;
     }
 
-    public static function getSubscribedEvents(): array
+    public static function getSubscribedEvents()
     {
         return [
             [

@@ -2,8 +2,6 @@
 
 namespace Capco\AppBundle\Search;
 
-use Capco\AppBundle\Elasticsearch\ElasticaToDoctrineTransformer;
-use Elastica\Index;
 use Elastica\Query;
 
 class GlobalSearch extends Search
@@ -25,42 +23,57 @@ class GlobalSearch extends Search
         'biography.std',
     ];
 
-    protected $transformer;
-
-    public function __construct(Index $index, ElasticaToDoctrineTransformer $transformer)
+    public function search($page, $terms, $sortField, $sortOrder, $useTransformation = true): array
     {
-        parent::__construct($index);
-        $this->transformer = $transformer;
-    }
-
-    public function search($page, $terms, $sortField, $sortOrder, $type = 'all'): array
-    {
-        $boolQuery = new Query\BoolQuery();
-        $boolQuery = $this->searchTermsInMultipleFields($boolQuery, self::SEARCH_FIELDS, $terms, 'phrase_prefix');
-
-        $query = new Query($boolQuery);
-        $query->setSort([
-            $sortField => ['order' => $sortOrder],
-        ]);
-
         $pagination = self::RESULTS_PER_PAGE;
+
         $from = ($page - 1) * $pagination;
+
+        $query = new Query\BoolQuery();
+
+        $query = $this->searchTermsInMultipleFields($query, self::SEARCH_FIELDS, $terms, 'phrase_prefix');
+
+        $query = new Query($query);
+
+        $this->addSort($query, $sortField, $sortOrder);
+        $query->setHighlight($this->getHighlightSettings());
+
         $query->setFrom($from);
         $query->setSize($pagination);
 
-        if ('all' === $type) {
-            $resultSet = $this->index->search($query);
-        } else {
-            $resultSet = $this->index->getType($type)->search($query);
-        }
+        $resultSet = $this->index->search($query);
 
-        $results = $this->transformer->hybridTransform($resultSet->getResults());
         $count = $resultSet->getTotalHits();
+
+        if ($useTransformation) {
+            $results = $this->transformer->hybridTransform($resultSet->getResults());
+        } else {
+            $results = $resultSet->getResults();
+        }
 
         return [
             'count' => $count,
             'results' => $results,
             'pages' => ceil($count / $pagination),
+        ];
+    }
+
+    private function getHighlightSettings(): array
+    {
+        return [
+            'pre_tags' => ['<span class="search__highlight">'],
+            'post_tags' => ['</span>'],
+            'number_of_fragments' => 3,
+            'fragment_size' => 175,
+            'fields' => [
+                'title' => ['number_of_fragments' => 0],
+                'object' => new \stdClass(),
+                'body' => new \stdClass(),
+                'teaser' => new \stdClass(),
+                'excerpt' => new \stdClass(),
+                'username' => ['number_of_fragments' => 0],
+                'biography' => new \stdClass(),
+            ],
         ];
     }
 }

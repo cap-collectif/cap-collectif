@@ -62,7 +62,7 @@ class IdeaVote extends AbstractVote
      */
     public function deleteVote()
     {
-        if (null !== $this->idea) {
+        if ($this->idea !== null) {
             $this->idea->removeVote($this);
         }
     }

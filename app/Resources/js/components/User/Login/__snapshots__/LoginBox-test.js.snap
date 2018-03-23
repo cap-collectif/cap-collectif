@@ -26,7 +26,7 @@ exports[`<LoginBox /> renders a top text and a bottom text if specified 1`] = `
   <Connect(LoginSocialButtons) />
   <ReduxForm />
   <div
-    className="text-center small excerpt"
+    className="text-center excerpt"
     dangerouslySetInnerHTML={
       Object {
         "__html": "Texte du bas",

@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 const QuillToolbar = React.createClass({
   render() {
     return (
-      <div style={{ borderBottom: '1px solid #ddd', padding: '5px 12px' }}>
+      <div>
         <span className="ql-format-group">
           <select title="Size" className="ql-size">
             <option value="10px">{<FormattedMessage id="editor.size.small" />}</option>

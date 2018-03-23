@@ -16,7 +16,7 @@ export class ProposalListRandomMessage extends React.Component<Props> {
         <p>
           <a href="#proposals-list" onClick={() => dispatch(loadProposals(null, true))}>
             <FormattedMessage id="proposal.random_search" />
-          </a>
+          </a>{' '}
           <FormattedMessage id="proposal.change_filter" />
         </p>
       </div>
