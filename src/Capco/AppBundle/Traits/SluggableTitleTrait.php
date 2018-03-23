@@ -20,9 +20,9 @@ trait SluggableTitleTrait
      */
     protected $slug;
 
-    public function getTitle(): ?string
+    public function getTitle(): string
     {
-        return $this->title;
+        return $this->title ?? '';
     }
 
     public function setTitle(string $title): self
