@@ -1,16 +1,16 @@
 services:
   capco.search.search:
     class: Capco\AppBundle\Search\Search
-    arguments: ['@fos_elastica.index', '@fos_elastica.elastica_to_model_transformer.collection.app', '@validator']
+    arguments: ['@capco.elasticsearch.index']
 
   capco.search.global_search:
     class: Capco\AppBundle\Search\GlobalSearch
-    parent: capco.search.search
+    arguments: ['@capco.elasticsearch.index', '@capco.elasticsearch.elastica_to_doctrine_transformer']
 
   capco.search.user_search:
     class: Capco\AppBundle\Search\UserSearch
-    parent: capco.search.search
+    arguments: ['@capco.elasticsearch.index', '@capco.user.repository']
 
   capco.search.proposal_search:
     class: Capco\AppBundle\Search\ProposalSearch
-    parent: capco.search.search
+    arguments: ['@capco.elasticsearch.index', '@capco.proposal.repository']

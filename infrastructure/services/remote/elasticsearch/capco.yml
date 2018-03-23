@@ -1,19 +1,7 @@
-# Cluster name identifies your cluster for auto-discovery. If you're running
-# multiple clusters on the same network, make sure you're using unique names.
-cluster.name: capco
+# https://www.elastic.co/guide/en/elasticsearch/reference/5.5/docker.html#_notes_for_production_use_and_defaults
 
-# Disable network
-node.local: true
-discovery.zen.ping.multicast: false
+discovery.zen.minimum_master_nodes: 1
 
-# Disable swaping
-bootstrap.mlockall: true
-
-# Index
-index.number_of_shards: 1
-index.number_of_replicas: 0
-
-# Set this to false to disable all exporting of data.
-# Set this on the monitoring cluster, which is used to receive and analyze data from production,
-# to avoid collecting data from the monitoring cluster itself.
-marvel.agent.enabled: false
+http.host: 0.0.0.0
+transport.host: 127.0.0.1
+# bootstrap.memory_lock: true

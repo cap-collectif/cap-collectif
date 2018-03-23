@@ -309,6 +309,6 @@ class Section
 
     public function isCustom()
     {
-        return $this->type === 'custom';
+        return 'custom' === $this->type;
     }
 }

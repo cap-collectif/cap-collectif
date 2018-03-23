@@ -4,29 +4,29 @@ Capco\AppBundle\Entity\Opinion:
         id:
             expose: true
             type: string
-            groups: [Opinions, OpinionVersions, OpinionLinkPreviews]
+            groups: [Opinions, OpinionVersions, OpinionLinkPreviews, Elasticsearch]
         title:
             expose: true
             type: string
-            groups: [Opinions, OpinionVersions, OpinionLinkPreviews]
+            groups: [Opinions, OpinionVersions, OpinionLinkPreviews, Elasticsearch]
         body:
             expose: true
             type: string
-            groups: [Opinions, OpinionVersions]
+            groups: [Opinions, OpinionVersions, Elasticsearch]
         OpinionType:
             expose: true
             serialized_name: type
-            groups: [Opinions, OpinionVersions, OpinionVersionPreviews, OpinionLinkPreviews]
+            groups: [Opinions, OpinionVersions, OpinionVersionPreviews, OpinionLinkPreviews, Elasticsearch]
         createdAt:
             expose: true
             serialized_name: createdAt
             type: DateTime
-            groups: [Opinions, OpinionLinkPreviews]
+            groups: [Opinions, OpinionLinkPreviews, Elasticsearch]
         updatedAt:
             expose: true
             type: DateTime
             serialized_name: updatedAt
-            groups: [Opinions, OpinionLinkPreviews]
+            groups: [Opinions, OpinionLinkPreviews, Elasticsearch]
         versionsCount:
             expose: true
             type: integer
@@ -82,7 +82,7 @@ Capco\AppBundle\Entity\Opinion:
             expose: true
             type: Capco\UserBundle\Entity\User
             serialized_name: author
-            groups: [Opinions, UserMedias, OpinionLinkPreviews]
+            groups: [Opinions, UserMedias, OpinionLinkPreviews, Elasticsearch]
         answer:
             expose: true
             groups: [Opinions]
@@ -93,7 +93,7 @@ Capco\AppBundle\Entity\Opinion:
             serialized_name: isTrashed
         trashedReason:
             expose: true
-            groups: [Opinions]
+            groups: [Opinions, Elasticsearch]
             serialized_name: trashedReason
         ranking:
             expose: true

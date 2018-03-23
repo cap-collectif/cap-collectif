@@ -1,12 +1,14 @@
 Capco\AppBundle\Entity\PostComment:
     pComment{1..5}:
-        Post: '@post3'
+        id: 'postComment<current()>'
+        post: '@post3'
         Author: '@user<numberBetween(1, 3)>'
         body: <text(300)>
         isEnabled: true
         isTrashed: false
     pComment{6..50}:
-        Post: '@post<numberBetween(1, 2)>'
+        id: 'postComment<current()>'
+        post: '@post<numberBetween(1, 2)>'
         Author: '@user<numberBetween(1, 3)>'
         body: <text(300)>
         isEnabled: <boolean()>

@@ -15,7 +15,7 @@ Capco\AppBundle\Entity\Steps\AbstractStep:
     id:
       expose: true
       type: string
-      groups: [Opinions, Proposals, Steps, SelectionStepId]
+      groups: [Opinions, Proposals, Steps, SelectionStepId, Elasticsearch]
     title:
       expose: true
       type: string

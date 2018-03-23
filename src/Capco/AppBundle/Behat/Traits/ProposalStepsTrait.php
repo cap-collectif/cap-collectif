@@ -477,7 +477,7 @@ trait ProposalStepsTrait
     public function iSubmitTheCreateProposalForm()
     {
         $this->navigationContext->getPage('collect page')->submitProposalForm();
-        $this->iWait(7);
+        $this->iWait(8);
     }
 
     /**
@@ -937,7 +937,7 @@ trait ProposalStepsTrait
      */
     public function iShouldSeeTheProposalVoteLimitedTooltip()
     {
-        $this->assertPageContainsText('proposal.vote.popover.limit_reached_title');
+        $this->assertElementContainsText('#vote-tooltip-proposal-proposal18', 'proposal.vote.popover.limit_reached_title');
     }
 
     /**
@@ -945,15 +945,7 @@ trait ProposalStepsTrait
      */
     public function iShouldSeeTheProposalVoteTooltip()
     {
-        $button = $this->navigationContext->getPage('selection page')->getVoteButton($this->getProposalId());
-        // useless click to scroll the page
-        $this->getSession()->getDriver()->click($button->getParent()->getParent()->getParent()->getParent()->getXpath());
-        try {
-            $this->getSession()->getDriver()->click($button->getParent()->getXpath());
-        } catch (\Exception $e) {
-        }
-        $this->iWait(1);
-        $this->assertPageContainsText('proposal.vote.popover.not_enough_credits_text');
+        $this->assertElementContainsText('#vote-tooltip-proposal-proposal8', 'proposal.vote.popover.not_enough_credits_text');
     }
 
     /**
@@ -1100,7 +1092,7 @@ trait ProposalStepsTrait
             function ($element) {
                 return $element->getText();
             },
-            $this->getSession()->getPage()->findAll('css', '.opinion__list .proposal__title')
+            $this->getSession()->getPage()->findAll('css', '.opinion__list .card__title')
         );
 
         $this->currentCollectsStep = $items;
@@ -1112,7 +1104,7 @@ trait ProposalStepsTrait
     public function iShouldSeeSameProposals()
     {
         $savedSteps = $this->currentCollectsStep;
-        $selector = '.opinion__list .proposal__title';
+        $selector = '.opinion__list .card__title';
 
         $items = array_map(
             function ($element) {
@@ -1130,7 +1122,7 @@ trait ProposalStepsTrait
     public function iShouldSeeOtherProposals()
     {
         $savedSteps = $this->currentCollectsStep;
-        $selector = '.opinion__list .proposal__title span span';
+        $selector = '.opinion__list .card__title span span';
 
         $items = array_map(
             function ($element) {
@@ -1203,7 +1195,7 @@ trait ProposalStepsTrait
         $this->element1ShouldBeBeforeElement2ForSelector(
             $proposal1,
             $proposal2,
-            '.proposal__preview .proposal__title'
+            '.proposal-preview .card__title'
         );
     }
 

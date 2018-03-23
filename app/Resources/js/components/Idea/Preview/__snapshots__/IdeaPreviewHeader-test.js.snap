@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<IdeaPreviewHeader /> should render idea preview header 1`] = `
+<CardUser>
+  <div
+    className="card__user__avatar"
+  >
+    <UserAvatar
+      anchor={true}
+      className="pull-left idea__avatar"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      onMouseOut={[Function]}
+      onMouseOver={[Function]}
+      size={45}
+      style={Object {}}
+      user={Object {}}
+    />
+  </div>
+  <div
+    className="ellipsis"
+  >
+    <UserLink
+      className="small"
+      user={Object {}}
+    />
+    <p
+      className="excerpt small"
+    >
+      <FormattedDate
+        day="numeric"
+        hour="numeric"
+        minute="numeric"
+        month="long"
+        value={"2018-03-09T15:05:34.372Z"}
+        year="numeric"
+      />
+    </p>
+  </div>
+  <hr />
+</CardUser>
+`;

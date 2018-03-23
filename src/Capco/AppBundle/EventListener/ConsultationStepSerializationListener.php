@@ -7,7 +7,7 @@ use JMS\Serializer\Serializer;
 
 class ConsultationStepSerializationListener extends AbstractSerializationListener
 {
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             [

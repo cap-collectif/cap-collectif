@@ -4,7 +4,7 @@ Capco\AppBundle\Entity\ProposalCategory:
         id:
             expose: true
             type: string
-            groups: [ProposalForms, ProposalCategories, Proposals]
+            groups: [ProposalForms, ProposalCategories, Proposals, Elasticsearch]
         name:
             expose: true
             type: string

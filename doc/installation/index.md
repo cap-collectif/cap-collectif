@@ -16,13 +16,13 @@ $ sudo pip install docker-compose==1.8.0 Fabric==1.10.2
 
 ##### Erreurs possibles
 
-Si vous avez l'erreur suivante en lançant docker-compose : 
+Si vous avez l'erreur suivante en lançant docker-compose :
 
 ```
 $ [...] ImportError: cannot import name _thread
 ```
 
-Il faut pour corriger le problème réinstaller six : 
+Il faut pour corriger le problème réinstaller six :
 
 ```
 pip install -I six
@@ -50,9 +50,11 @@ Recommandé pour les performances:
 
 ```
 $ fab local.system.dinghy_install
+$ dinghy ssh
+$ sudo sysctl -w vm.max_map_count=262144 # https://www.elastic.co/guide/en/elasticsearch/reference/5.6/docker.html
 ```
 
-Sinon utilisez directemment docker-machine:
+Sinon utilisez directement docker-machine:
 
 ```
 $ fab local.system.docker_machine_install
@@ -73,3 +75,22 @@ Sinon l'installation manuelle : [OSX](osx.md) ou [Linux](linux.md).
 $ fab local.infrastructure.clean
 ```
 La commande suivante va nettoyer complètement les containers, ensuite il faudra rebuild toute l'application!
+
+## Installation des certificats pour le dev
+
+### Chrome
+#### Mac OSX
+Il suffit juste d'exécuter cette commande :
+```
+$ fab local.system.sign_ssl()
+```
+#### Linux
+```
+$ sudo cp infrastructure/service/local/nginx/ssl/rootCA.crt /etc/ssl/certs/
+$ sudo cp infrastructure/service/local/nginx/ssl/rootCA.key /etc/ssl/private
+```
+
+### Firefox
+
+Préférences > Afficher les certificats > Onglet Authorité > Importer > infrastructure/service/local/nginx/ssl/rootCA.crt
+Préférences > Afficher les certificats > Onglet Vos Certificats > Importer > infrastructure/service/local/nginx/ssl/capco.pfx

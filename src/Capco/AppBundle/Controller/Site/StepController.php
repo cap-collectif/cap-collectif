@@ -254,24 +254,24 @@ class StepController extends Controller
 
         $proposalForm = $step->getProposalForm();
         $searchResults = ['proposals' => [], 'count' => 0];
+        $countFusions = 0;
 
         if ($proposalForm) {
-            $filters = ['proposalForm' => $proposalForm->getId()];
+            $filters = ['proposalForm' => $proposalForm->getId(), 'collectStep' => $step->getId()];
 
             if ($step->isPrivate() && $this->getUser()) {
-                $filters['authorUniqueId'] = $this->getUser()->getUniqueIdentifier();
+                $providedFilters['authorUniqueId'] = $this->getUser()->getId();
                 $searchResults = $this->get('capco.search.proposal_search')
-                    ->searchProposals(1, 51, null, null, $filters);
+                    ->searchProposals(1, 51, 'last', null, $filters);
             } else {
                 $searchResults = $this->get('capco.search.proposal_search')
-                    ->searchProposals(1, 51, null, null, $filters);
+                    ->searchProposals(1, 51, 'last', null, $filters);
             }
+            $countFusions = $em
+              ->getRepository('CapcoAppBundle:Proposal')
+              ->countFusionsByProposalForm($proposalForm)
+            ;
         }
-
-        $countFusions = $em
-          ->getRepository('CapcoAppBundle:Proposal')
-          ->countFusionsByProposalForm($proposalForm)
-        ;
 
         $props = $serializer->serialize([
             'statuses' => $step->getStatuses(),

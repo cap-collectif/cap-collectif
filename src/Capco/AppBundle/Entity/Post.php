@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Model\CommentableInterface;
-use Capco\AppBundle\Model\IndexableInterface;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
@@ -108,8 +108,7 @@ class Post implements CommentableInterface, IndexableInterface
     private $Authors;
 
     /**
-     * @var
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\PostComment", mappedBy="Post",  cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\PostComment", mappedBy="post")
      */
     private $comments;
 
@@ -128,11 +127,6 @@ class Post implements CommentableInterface, IndexableInterface
     public function __toString()
     {
         return $this->getId() ? $this->getTitle() : 'New post';
-    }
-
-    public function isIndexable()
-    {
-        return $this->getIsPublished();
     }
 
     /**
@@ -231,7 +225,7 @@ class Post implements CommentableInterface, IndexableInterface
         return $this->isPublished;
     }
 
-    public function setdisplayedOnBlog(bool $displayedOnBlog): Post
+    public function setdisplayedOnBlog(bool $displayedOnBlog): self
     {
         $this->displayedOnBlog = $displayedOnBlog;
 
@@ -480,7 +474,7 @@ class Post implements CommentableInterface, IndexableInterface
         return $this->proposals;
     }
 
-    public function addProposal(Proposal $proposal): Post
+    public function addProposal(Proposal $proposal): self
     {
         if (!$this->proposals->contains($proposal)) {
             $this->proposals->add($proposal);
@@ -489,7 +483,7 @@ class Post implements CommentableInterface, IndexableInterface
         return $this;
     }
 
-    public function removeProposal(Proposal $proposal): Post
+    public function removeProposal(Proposal $proposal): self
     {
         if ($this->proposals->contains($proposal)) {
             $this->proposals->removeElement($proposal);
@@ -548,5 +542,20 @@ class Post implements CommentableInterface, IndexableInterface
                 $project->removePost($this);
             }
         }
+    }
+
+    public function isIndexable(): bool
+    {
+        return $this->getIsPublished();
+    }
+
+    public static function getElasticsearchTypeName(): string
+    {
+        return 'post';
+    }
+
+    public static function getElasticsearchSerializationGroups(): array
+    {
+        return ['Elasticsearch'];
     }
 }
