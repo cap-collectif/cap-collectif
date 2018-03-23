@@ -69,12 +69,8 @@ describe('<ProposalPage />', () => {
     viewerCanSeeEvaluation: true,
   };
 
-  const isAuth = true;
-
   it('should render a proposal page', () => {
-    const wrapper = shallow(
-      <ProposalPage {...props} isAuthenticated={isAuth} proposal={proposalNoVotes} />,
-    );
+    const wrapper = shallow(<ProposalPage {...props} isAuthenticated proposal={proposalNoVotes} />);
     expect(wrapper).toMatchSnapshot();
   });
 
@@ -87,14 +83,14 @@ describe('<ProposalPage />', () => {
 
   it('should render a vote tab and a vote modal if votable step is specified', () => {
     const wrapper = shallow(
-      <ProposalPage {...props} isAuthenticated={isAuth} proposal={proposalWithVotes} />,
+      <ProposalPage {...props} isAuthenticated proposal={proposalWithVotes} />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should not render a vote modal if proposal has no votabledStep', () => {
     const wrapper = shallow(
-      <ProposalPage {...props} isAuthenticated={isAuth} proposal={proposalWithoutVotableStep} />,
+      <ProposalPage {...props} isAuthenticated proposal={proposalWithoutVotableStep} />,
     );
     const tabContainer = wrapper.find(Tab.Container);
     const proposalVoteModal = tabContainer.find('Connect(ProposalVoteModal)');

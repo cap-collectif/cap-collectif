@@ -11,7 +11,6 @@ import UnfollowProposalMutation from '../../../mutations/UnfollowProposalMutatio
 
 type Props = {
   viewer: FollowingsProposals_viewer,
-  isAuthenticated: boolean,
 };
 type State = {
   open: boolean,
@@ -31,7 +30,6 @@ export class FollowingsProposals extends Component<Props, State> {
     this.setState({ open: !this.state.open }, () => {
       UnfollowProposalMutation.commit({
         input: { ids },
-        isAuthenticated: this.props.isAuthenticated,
       });
     });
   }
@@ -65,14 +63,7 @@ export class FollowingsProposals extends Component<Props, State> {
             <Collapse in={this.state.open}>
               <div id="all-projects">
                 {Object.keys(projectsById).map((project, id) => {
-                  return (
-                    <ProjectRow
-                      key={id}
-                      project={projectsById[project]}
-                      isAuthenticated={this.props.isAuthenticated}
-                      viewer={viewer}
-                    />
-                  );
+                  return <ProjectRow key={id} project={projectsById[project]} viewer={viewer} />;
                 })}
               </div>
             </Collapse>

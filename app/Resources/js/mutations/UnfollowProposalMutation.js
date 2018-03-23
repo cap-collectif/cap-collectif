@@ -8,7 +8,7 @@ import type {
 } from './__generated__/UnfollowProposalMutation.graphql';
 
 const mutation = graphql`
-  mutation UnfollowProposalMutation($input: UnfollowProposalInput!, $isAuthenticated: Boolean!) {
+  mutation UnfollowProposalMutation($input: UnfollowProposalInput!) {
     unfollowProposal(input: $input) {
       proposal {
         ...ProposalFollowButton_proposal

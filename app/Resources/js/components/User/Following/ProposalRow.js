@@ -8,8 +8,8 @@ import UnfollowProposalMutation from '../../../mutations/UnfollowProposalMutatio
 
 type Props = {
   proposal: Object,
-  isAuthenticated: boolean,
 };
+
 type State = {
   open: boolean,
 };
@@ -22,13 +22,12 @@ export class ProposalRow extends Component<Props, State> {
     };
   }
 
-  onUnfollowCurrentProposal(proposalId: string, Auth: boolean) {
+  onUnfollowCurrentProposal(proposalId: string) {
     this.setState({ open: !this.state.open }, () => {
       UnfollowProposalMutation.commit({
         input: {
           proposalId,
         },
-        isAuthenticated: Auth,
       }).then(() => {
         return true;
       });
@@ -36,7 +35,7 @@ export class ProposalRow extends Component<Props, State> {
   }
 
   render() {
-    const { proposal, isAuthenticated } = this.props;
+    const { proposal } = this.props;
     return (
       <Collapse in={this.state.open} id={`collapse-proposal-${proposal.id}`}>
         <div>
@@ -55,7 +54,7 @@ export class ProposalRow extends Component<Props, State> {
                   className="profile__proposal__unfollow__button"
                   id={`profile-proposal-unfollow-button-${proposal.id}`}
                   onClick={() => {
-                    this.onUnfollowCurrentProposal(proposal.id, isAuthenticated);
+                    this.onUnfollowCurrentProposal(proposal.id);
                   }}>
                   <FormattedMessage id="unfollow" />
                 </Button>

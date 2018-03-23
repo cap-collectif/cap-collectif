@@ -9,19 +9,14 @@ describe('<FollowingsProposals />', () => {
   const viewer = {
     followingProposals: [],
   };
-  const isAuthenticated = true;
 
   it('should render following proposal open', () => {
-    const wrapper = shallow(
-      <FollowingsProposals viewer={viewer} isAuthenticated={isAuthenticated} />,
-    );
+    const wrapper = shallow(<FollowingsProposals viewer={viewer} />);
     wrapper.setState({ open: true });
     expect(wrapper).toMatchSnapshot();
   });
   it('should render following proposal close', () => {
-    const wrapper = shallow(
-      <FollowingsProposals viewer={viewer} isAuthenticated={isAuthenticated} />,
-    );
+    const wrapper = shallow(<FollowingsProposals viewer={viewer} />);
     wrapper.setState({ open: false });
     expect(wrapper).toMatchSnapshot();
   });

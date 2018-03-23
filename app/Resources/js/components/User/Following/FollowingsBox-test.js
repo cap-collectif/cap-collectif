@@ -5,12 +5,8 @@ import { shallow } from 'enzyme';
 import { FollowingsBox } from './FollowingsBox';
 
 describe('<FollowingsBox />', () => {
-  const props = {
-    isAuthenticated: true,
-  };
-
   it('render', () => {
-    const wrapper = shallow(<FollowingsBox {...props} />);
+    const wrapper = shallow(<FollowingsBox />);
     expect(wrapper).toMatchSnapshot();
   });
 });

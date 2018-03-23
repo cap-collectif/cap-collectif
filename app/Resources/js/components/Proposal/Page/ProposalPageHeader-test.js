@@ -60,18 +60,14 @@ describe('<ProposalPageHeader />', () => {
     },
   };
 
-  const isAuth = true;
-
   it('should render a proposal header', () => {
-    const wrapper = shallow(
-      <ProposalPageHeader proposal={proposal} isAuthenticated={isAuth} {...props} />,
-    );
+    const wrapper = shallow(<ProposalPageHeader proposal={proposal} isAuthenticated {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should not render theme if proposal has none', () => {
     const wrapper = shallow(
-      <ProposalPageHeader proposal={proposalWithoutTheme} isAuthenticated={isAuth} {...props} />,
+      <ProposalPageHeader proposal={proposalWithoutTheme} isAuthenticated {...props} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

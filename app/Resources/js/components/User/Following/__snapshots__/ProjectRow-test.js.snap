@@ -57,7 +57,6 @@ exports[`<ProjectRow /> should render the project 1 with his proposal displayed 
       bsClass="list-group"
     >
       <ProposalRow
-        isAuthenticated={true}
         proposal={
           Object {
             "id": "proposal1",
@@ -70,7 +69,6 @@ exports[`<ProjectRow /> should render the project 1 with his proposal displayed 
         }
       />
       <ProposalRow
-        isAuthenticated={true}
         proposal={
           Object {
             "id": "proposal2",
@@ -144,7 +142,6 @@ exports[`<ProjectRow /> should render the project 2 with his proposal displayed 
       bsClass="list-group"
     >
       <ProposalRow
-        isAuthenticated={true}
         proposal={
           Object {
             "id": "proposal3",

@@ -50,12 +50,8 @@ describe('<ProposalPageTabs />', () => {
     isAuthenticated: true,
   };
 
-  const isAuth = true;
-
   it('should render Tabs with correct DOM structure', () => {
-    const wrapper = shallow(
-      <ProposalPageTabs proposal={proposal} isAuthenticated={isAuth} {...props} />,
-    );
+    const wrapper = shallow(<ProposalPageTabs proposal={proposal} isAuthenticated {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

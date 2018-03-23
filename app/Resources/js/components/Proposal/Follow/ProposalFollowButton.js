@@ -40,7 +40,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
       });
     }
   }
-  changeFollowType(proposal: ProposalFollowButton_proposal, type: string, isAuth: boolean) {
+  changeFollowType(proposal: ProposalFollowButton_proposal, type: string) {
     if (
       proposal.viewerIsFollowing &&
       proposal.followerConfiguration !== null &&
@@ -51,7 +51,6 @@ export class ProposalFollowButton extends React.Component<Props, State> {
           proposalId: proposal.id,
           notifiedOf: type,
         },
-        isAuthenticated: isAuth,
       });
     }
   }
@@ -67,7 +66,6 @@ export class ProposalFollowButton extends React.Component<Props, State> {
             onClick={() => {
               return FollowProposalMutation.commit({
                 input: { proposalId: proposal.id, notifiedOf: 'DEFAULT' },
-                isAuthenticated: this.props.isAuthenticated,
               }).then(() => {
                 this.setState({
                   isJustFollowed: true,
@@ -127,11 +125,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                             }
                             inline
                             onClick={() => {
-                              return this.changeFollowType(
-                                proposal,
-                                'DEFAULT',
-                                this.props.isAuthenticated,
-                              );
+                              return this.changeFollowType(proposal, 'DEFAULT');
                             }}>
                             <b>
                               <FormattedMessage id="the-progress" />
@@ -151,11 +145,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                                 : ''
                             }
                             onClick={() => {
-                              return this.changeFollowType(
-                                proposal,
-                                'DEFAULT_AND_COMMENTS',
-                                this.props.isAuthenticated,
-                              );
+                              return this.changeFollowType(proposal, 'DEFAULT_AND_COMMENTS');
                             }}>
                             <b>
                               <FormattedMessage id="progress-and-comments" />
@@ -171,11 +161,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                               proposal.followerConfiguration.notifiedOf === 'ALL' ? 'checked' : ''
                             }
                             onClick={() => {
-                              return this.changeFollowType(
-                                proposal,
-                                'ALL',
-                                this.props.isAuthenticated,
-                              );
+                              return this.changeFollowType(proposal, 'ALL');
                             }}>
                             <b>
                               <FormattedMessage id="all-activities" />
@@ -196,7 +182,6 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                     if (proposal.viewerIsFollowing) {
                       return UnfollowProposalMutation.commit({
                         input: { proposalId: proposal.id },
-                        isAuthenticated: this.props.isAuthenticated,
                       }).then(() => {
                         this.setState({
                           isJustFollowed: false,
@@ -218,7 +203,8 @@ export class ProposalFollowButton extends React.Component<Props, State> {
 export default createFragmentContainer(
   ProposalFollowButton,
   graphql`
-    fragment ProposalFollowButton_proposal on Proposal {
+    fragment ProposalFollowButton_proposal on Proposal
+      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
       id
       viewerIsFollowing @include(if: $isAuthenticated)
       followerConfiguration @include(if: $isAuthenticated) {

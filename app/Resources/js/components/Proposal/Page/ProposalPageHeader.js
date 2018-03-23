@@ -121,7 +121,7 @@ export default createFragmentContainer(
   container,
   graphql`
     fragment ProposalPageHeader_proposal on Proposal {
-      ...ProposalFollowButton_proposal
+      ...ProposalFollowButton_proposal @arguments(isAuthenticated: $isAuthenticated)
       title
       theme {
         title
