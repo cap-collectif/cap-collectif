@@ -53,7 +53,6 @@ describe('<Other />', () => {
     expect(textComponent).toHaveLength(1);
     expect(textComponent.prop('id')).toEqual(`reply-${radioField.id}_choice-other--field`);
     expect(textComponent.prop('type')).toEqual('text');
-    expect(textComponent.prop('bsSize')).toEqual('small');
     expect(textComponent.prop('placeholder')).toBeDefined();
     expect(textComponent.prop('disabled')).toBeDefined();
     expect(textComponent.prop('onChange')).toBeDefined();
@@ -78,7 +77,6 @@ describe('<Other />', () => {
     expect(textComponent).toHaveLength(1);
     expect(textComponent.prop('id')).toEqual(`reply-${checkboxField.id}_choice-other--field`);
     expect(textComponent.prop('type')).toEqual('text');
-    expect(textComponent.prop('bsSize')).toEqual('small');
     expect(textComponent.prop('placeholder')).toBeDefined();
     expect(textComponent.prop('disabled')).toBeDefined();
     expect(textComponent.prop('onChange')).toBeDefined();

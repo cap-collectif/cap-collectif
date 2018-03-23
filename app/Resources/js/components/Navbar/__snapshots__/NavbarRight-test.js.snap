@@ -22,11 +22,7 @@ exports[`<NavbarRight /> should render correctly 1`] = `
           onMouseOut={[Function]}
           onMouseOver={[Function]}
           size={34}
-          style={
-            Object {
-              "marginRight": "10px",
-            }
-          }
+          style={Object {}}
           user={Object {}}
         />
         <span

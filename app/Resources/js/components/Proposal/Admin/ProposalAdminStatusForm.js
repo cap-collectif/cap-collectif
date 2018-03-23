@@ -76,7 +76,7 @@ export class ProposalAdminStatusForm extends Component<Props> {
       intl,
     } = this.props;
     return (
-      <div className="box box-primary container">
+      <div className="box box-primary container-fluid">
         <div className="box-header">
           <h3 className="box-title">
             <FormattedMessage id="proposal.admin.state" />

@@ -25,7 +25,7 @@ export const LoginBox = React.createClass({
         <LoginForm />
         {textBottom && (
           <div
-            className="text-center small excerpt"
+            className="text-center excerpt"
             style={{ marginTop: '15px' }}
             dangerouslySetInnerHTML={{ __html: textBottom }}
           />

@@ -192,10 +192,10 @@ class ProposalResolver implements ContainerAwareInterface
         return $this->container->get('capco.blog.post.repository')->countPublishedPostsByProposal($proposal);
     }
 
-    public function resolveViewerCanSeeEvaluation(Proposal $proposal, $user): bool
+    public function resolveViewerCanSeeEvaluation(Proposal $proposal): bool
     {
         $evalForm = $proposal->getProposalForm()->getEvaluationForm();
 
-        return null !== $evalForm && (!$evalForm->isFullyPrivate() || $this->resolveViewerIsEvaluer($proposal, $user));
+        return null !== $evalForm && !$evalForm->isFullyPrivate();
     }
 }

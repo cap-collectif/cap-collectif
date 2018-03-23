@@ -2,6 +2,7 @@
 
 exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
 <form
+  id="registration-form"
   onSubmit={[MockFunction]}
 >
   <Field
@@ -13,7 +14,7 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
         values={Object {}}
       />
     }
-    labelClassName="h5"
+    labelClassName="font-weight-normal"
     name="username"
     type="text"
   />
@@ -26,7 +27,7 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
         values={Object {}}
       />
     }
-    labelClassName="h5"
+    labelClassName="font-weight-normal"
     name="email"
     popover={
       Object {
@@ -48,7 +49,7 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
         values={Object {}}
       />
     }
-    labelClassName="h5"
+    labelClassName="font-weight-normal"
     name="plainPassword"
     popover={
       Object {
@@ -70,13 +71,14 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
          
       </span>
     }
-    labelClassName="h5"
+    labelClassName="font-weight-normal"
     name="dynamic-6"
     type="text"
   />
   <Field
     component={[Function]}
     id="charte"
+    labelClassName="font-weight-normal"
     name="charte"
     type="checkbox"
   >
@@ -97,6 +99,7 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
   <Field
     component={[Function]}
     id="consent-external-communication"
+    labelClassName="font-weight-normal"
     name="consentExternalCommunication"
     type="checkbox"
   >
@@ -120,6 +123,7 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
 
 exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
 <form
+  id="registration-form"
   onSubmit={[MockFunction]}
 >
   <Field
@@ -131,7 +135,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
         values={Object {}}
       />
     }
-    labelClassName="h5"
+    labelClassName="font-weight-normal"
     name="username"
     type="text"
   />
@@ -144,7 +148,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
         values={Object {}}
       />
     }
-    labelClassName="h5"
+    labelClassName="font-weight-normal"
     name="email"
     popover={
       Object {
@@ -166,7 +170,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
         values={Object {}}
       />
     }
-    labelClassName="h5"
+    labelClassName="font-weight-normal"
     name="plainPassword"
     popover={
       Object {
@@ -182,6 +186,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
   <Field
     component={[Function]}
     id="charte"
+    labelClassName="font-weight-normal"
     name="charte"
     type="checkbox"
   >
@@ -202,6 +207,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
   <Field
     component={[Function]}
     id="consent-external-communication"
+    labelClassName="font-weight-normal"
     name="consentExternalCommunication"
     type="checkbox"
   >
@@ -225,6 +231,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
 
 exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`] = `
 <form
+  id="registration-form"
   onSubmit={[MockFunction]}
 >
   <Field
@@ -236,7 +243,7 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
         values={Object {}}
       />
     }
-    labelClassName="h5"
+    labelClassName="font-weight-normal"
     name="username"
     type="text"
   />
@@ -249,7 +256,7 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
         values={Object {}}
       />
     }
-    labelClassName="h5"
+    labelClassName="font-weight-normal"
     name="email"
     popover={
       Object {
@@ -271,7 +278,7 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
         values={Object {}}
       />
     }
-    labelClassName="h5"
+    labelClassName="font-weight-normal"
     name="plainPassword"
     popover={
       Object {
@@ -304,7 +311,7 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
         </span>
       </span>
     }
-    labelClassName="h5"
+    labelClassName="font-weight-normal"
     name="userType"
     type="select"
   >
@@ -321,6 +328,7 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
   <Field
     component={[Function]}
     id="charte"
+    labelClassName="font-weight-normal"
     name="charte"
     type="checkbox"
   >
@@ -341,6 +349,7 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
   <Field
     component={[Function]}
     id="consent-external-communication"
+    labelClassName="font-weight-normal"
     name="consentExternalCommunication"
     type="checkbox"
   >
@@ -364,6 +373,7 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
 
 exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
 <form
+  id="registration-form"
   onSubmit={[MockFunction]}
 >
   <Field
@@ -375,7 +385,7 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
         values={Object {}}
       />
     }
-    labelClassName="h5"
+    labelClassName="font-weight-normal"
     name="username"
     type="text"
   />
@@ -388,7 +398,7 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
         values={Object {}}
       />
     }
-    labelClassName="h5"
+    labelClassName="font-weight-normal"
     name="email"
     popover={
       Object {
@@ -410,7 +420,7 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
         values={Object {}}
       />
     }
-    labelClassName="h5"
+    labelClassName="font-weight-normal"
     name="plainPassword"
     popover={
       Object {
@@ -444,13 +454,14 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
         </span>
       </span>
     }
-    labelClassName="h5"
+    labelClassName="font-weight-normal"
     name="zipcode"
     type="text"
   />
   <Field
     component={[Function]}
     id="charte"
+    labelClassName="font-weight-normal"
     name="charte"
     type="checkbox"
   >
@@ -471,6 +482,7 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
   <Field
     component={[Function]}
     id="consent-external-communication"
+    labelClassName="font-weight-normal"
     name="consentExternalCommunication"
     type="checkbox"
   >
