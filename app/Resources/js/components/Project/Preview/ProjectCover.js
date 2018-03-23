@@ -2,7 +2,6 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import ProjectImage from './ProjectImage';
-import CardCover from '../../Ui/Card/CardCover';
 
 const ProjectCover = React.createClass({
   propTypes: {
@@ -15,13 +14,16 @@ const ProjectCover = React.createClass({
     const linkClasses = classNames({
       bg__wrapper: !project.cover,
     });
+    const divClasses = classNames({
+      project__preview__cover: true,
+    });
 
     return (
-      <CardCover>
+      <div className={divClasses}>
         <a href={link} alt={project.title} className={linkClasses}>
           <ProjectImage project={project} />
         </a>
-      </CardCover>
+      </div>
     );
   },
 });

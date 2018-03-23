@@ -19,16 +19,16 @@ export class RemainingTime extends React.Component<Props> {
     const minutesLeft = endDate.diff(now, 'minutes');
 
     let timeLeft = (
-      <span>
-        <span className="excerpt_dark">{daysLeft}</span>{' '}
+      <span className="remaining-time__container">
+        <span className="remaining-time__number">{daysLeft}</span>{' '}
         <FormattedMessage id="count.daysLeft" values={{ count: daysLeft }} />
       </span>
     );
 
     if (daysLeft === 0 && hoursLeft === 0 && minutesLeft !== 0) {
       timeLeft = (
-        <span>
-          <span className="excerpt_dark">{minutesLeft}</span>{' '}
+        <span className="remaining-time__container">
+          <span className="remaining-time__number">{minutesLeft}</span>{' '}
           <FormattedMessage id="count.minutesLeft" values={{ count: minutesLeft }} />
         </span>
       );
@@ -36,8 +36,8 @@ export class RemainingTime extends React.Component<Props> {
 
     if (daysLeft === 0 && hoursLeft !== 0 && minutesLeft !== 0) {
       timeLeft = (
-        <span>
-          <span className="excerpt_dark">{hoursLeft}</span>{' '}
+        <span className="remaining-time__container">
+          <span className="remaining-time__number">{hoursLeft}</span>{' '}
           <FormattedMessage id="count.hoursLeft" values={{ count: hoursLeft }} />
         </span>
       );

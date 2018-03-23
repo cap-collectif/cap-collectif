@@ -45,9 +45,9 @@ export class ProposalPageTabs extends React.Component<Props> {
     if (hash.indexOf('followers') !== -1) {
       return 'followers';
     }
-    return 'content';
-  }
 
+    throw new Error('Nothing selected.');
+  }
   getDefaultKey() {
     const hash = typeof window !== 'undefined' ? window.location.hash : null;
     if (hash) {

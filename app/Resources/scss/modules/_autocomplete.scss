@@ -1,0 +1,25 @@
+/* ===============================================================
+   $Autocomplete
+================================================================*/
+
+.autocompleteContainer {
+  z-index: 9999;
+  position: absolute;
+  top: 100%;
+  background-color: white;
+  border: 1px solid #555555;
+  width: 100%;
+}
+
+.autocompleteItem {
+  z-index: 9999;
+  background-color: #ffffff;
+  padding: 10px;
+  color: #555555;
+  cursor: pointer;
+}
+
+.autocompleteItemActive {
+  z-index: 9999;
+  background-color: #fafafa;
+}

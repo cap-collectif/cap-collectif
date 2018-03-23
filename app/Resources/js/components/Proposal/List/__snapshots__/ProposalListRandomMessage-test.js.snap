@@ -12,7 +12,6 @@ exports[`<ProposalListRandomMessage /> should render the random message 1`] = `
         values={Object {}}
       />
     </a>
-     
     <FormattedMessage
       id="proposal.change_filter"
       values={Object {}}

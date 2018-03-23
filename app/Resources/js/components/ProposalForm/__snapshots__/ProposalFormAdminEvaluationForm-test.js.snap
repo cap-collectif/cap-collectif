@@ -2,13 +2,21 @@
 
 exports[`<ProposalFormAdminEvaluationForm /> render correctly 1`] = `
 <div
-  className="box box-primary container-fluid"
+  className="box box-primary container"
 >
   <div
     className="box-header"
   >
     <h3
       className="box-title"
+      style={
+        Object {
+          "fontSize": 22,
+          "padding": 0,
+          "paddingBottom": 30,
+          "paddingTop": 10,
+        }
+      }
     >
       <FormattedMessage
         id="proposal_form.evaluation"

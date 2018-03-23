@@ -5,7 +5,7 @@ import { connect, type MapStateToProps } from 'react-redux';
 import Pagination from '../../Utils/Pagination';
 import ProjectList from './../List/ProjectsList';
 import ProjectListFilter from '../List/ProjectListFilter';
-import Loader from '../../Ui/Loader';
+import Loader from '../../Utils/Loader';
 import { changePage, fetchProjects } from '../../../redux/modules/project';
 import type { State } from '../../../types';
 

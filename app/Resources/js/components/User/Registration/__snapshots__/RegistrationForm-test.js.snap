@@ -2,7 +2,6 @@
 
 exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
 <form
-  className="form_no-bold-label"
   onSubmit={[MockFunction]}
 >
   <Field
@@ -14,6 +13,7 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
         values={Object {}}
       />
     }
+    labelClassName="h5"
     name="username"
     type="text"
   />
@@ -26,6 +26,7 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
         values={Object {}}
       />
     }
+    labelClassName="h5"
     name="email"
     popover={
       Object {
@@ -47,6 +48,7 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
         values={Object {}}
       />
     }
+    labelClassName="h5"
     name="plainPassword"
     popover={
       Object {
@@ -68,6 +70,7 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
          
       </span>
     }
+    labelClassName="h5"
     name="dynamic-6"
     type="text"
   />
@@ -117,7 +120,6 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
 
 exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
 <form
-  className="form_no-bold-label"
   onSubmit={[MockFunction]}
 >
   <Field
@@ -129,6 +131,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
         values={Object {}}
       />
     }
+    labelClassName="h5"
     name="username"
     type="text"
   />
@@ -141,6 +144,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
         values={Object {}}
       />
     }
+    labelClassName="h5"
     name="email"
     popover={
       Object {
@@ -162,6 +166,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
         values={Object {}}
       />
     }
+    labelClassName="h5"
     name="plainPassword"
     popover={
       Object {
@@ -220,7 +225,6 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
 
 exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`] = `
 <form
-  className="form_no-bold-label"
   onSubmit={[MockFunction]}
 >
   <Field
@@ -232,6 +236,7 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
         values={Object {}}
       />
     }
+    labelClassName="h5"
     name="username"
     type="text"
   />
@@ -244,6 +249,7 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
         values={Object {}}
       />
     }
+    labelClassName="h5"
     name="email"
     popover={
       Object {
@@ -265,6 +271,7 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
         values={Object {}}
       />
     }
+    labelClassName="h5"
     name="plainPassword"
     popover={
       Object {
@@ -297,6 +304,7 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
         </span>
       </span>
     }
+    labelClassName="h5"
     name="userType"
     type="select"
   >
@@ -356,7 +364,6 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
 
 exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
 <form
-  className="form_no-bold-label"
   onSubmit={[MockFunction]}
 >
   <Field
@@ -368,6 +375,7 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
         values={Object {}}
       />
     }
+    labelClassName="h5"
     name="username"
     type="text"
   />
@@ -380,6 +388,7 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
         values={Object {}}
       />
     }
+    labelClassName="h5"
     name="email"
     popover={
       Object {
@@ -401,6 +410,7 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
         values={Object {}}
       />
     }
+    labelClassName="h5"
     name="plainPassword"
     popover={
       Object {
@@ -434,6 +444,7 @@ exports[`<RegistrationForm /> renders a form with zipcode if enabled 1`] = `
         </span>
       </span>
     }
+    labelClassName="h5"
     name="zipcode"
     type="text"
   />

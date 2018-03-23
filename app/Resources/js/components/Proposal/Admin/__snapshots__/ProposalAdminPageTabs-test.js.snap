@@ -70,9 +70,8 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
             id="proposal.tabs.followers"
             values={Object {}}
           />
-           
           <span
-            className="badge"
+            className="ml-10 badge"
           >
             169
           </span>

@@ -26,7 +26,7 @@ exports.config = {
   conventions: {
     assets: /^app\/Resources\/assets/,
     ignored: [
-      /^app\/Resources\/scss\/(modules|base)/,
+      /^app\/Resources\/scss\/(modules|base|admin)/,
       /^codemod/,
       'bower_components/iframe-resizer/js/iframeResizer.contentWindow.js',
       'bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss',

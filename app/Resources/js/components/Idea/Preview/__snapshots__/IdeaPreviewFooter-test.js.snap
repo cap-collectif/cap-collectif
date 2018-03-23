@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<IdeaPreviewFooter /> should render comment counter when idea is commentable 1`] = `
+<div
+  className="idea__preview__footer"
+>
+  <span
+    className="excerpt small"
+  >
+    <FormattedMessage
+      id="idea.preview.counters.votes"
+      values={
+        Object {
+          "num": 10,
+        }
+      }
+    />
+    <span>
+       • 
+      <FormattedMessage
+        id="idea.preview.counters.comments"
+        values={
+          Object {
+            "num": 5,
+          }
+        }
+      />
+    </span>
+  </span>
+</div>
+`;
+
+exports[`<IdeaPreviewFooter /> should render idea preview footer with votes counter 1`] = `
+<div
+  className="idea__preview__footer"
+>
+  <span
+    className="excerpt small"
+  >
+    <FormattedMessage
+      id="idea.preview.counters.votes"
+      values={
+        Object {
+          "num": 10,
+        }
+      }
+    />
+  </span>
+</div>
+`;

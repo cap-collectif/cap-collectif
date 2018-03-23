@@ -3,7 +3,7 @@ Capco\AppBundle\Entity\Comment:
   properties:
     id:
       expose: true
-      type: string
+      type: integer
       groups: [Comments]
     body:
       expose: true

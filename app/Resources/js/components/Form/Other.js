@@ -2,6 +2,7 @@
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { FormattedMessage } from 'react-intl';
+import { Row, Col } from 'react-bootstrap';
 import Input from './Input';
 
 const Other = React.createClass({
@@ -99,8 +100,8 @@ const Other = React.createClass({
     const fieldName = `choices-for-field-${field.id}`;
 
     return (
-      <div id={`reply-${field.id}_choice-other`} className="other-field">
-        <div className="other-field__input">
+      <Row id={`reply-${field.id}_choice-other`} className="checkbox--other">
+        <Col xs={2} md={1}>
           <Input
             id={`reply-${field.id}_choice-other--check`}
             name={fieldName}
@@ -110,20 +111,21 @@ const Other = React.createClass({
             disabled={disabled}>
             {<FormattedMessage id="reply.other" />}
           </Input>
-        </div>
-        <div className="other-field__value">
+        </Col>
+        <Col xs={10} md={11}>
           <Input
             id={`reply-${field.id}_choice-other--field`}
             // $FlowFixMe
             ref={c => (this.textField = c)}
             type="text"
+            bsSize="small"
             onChange={this.onType}
             placeholder="reply.your_response"
             value={value}
             disabled={disabled}
           />
-        </div>
-      </div>
+        </Col>
+      </Row>
     );
   },
 });

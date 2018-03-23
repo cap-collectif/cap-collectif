@@ -3,7 +3,7 @@ import * as React from 'react';
 import IdeaStore from '../../../stores/IdeaStore';
 import IdeaActions from '../../../actions/IdeaActions';
 import { DEFAULT_IDEAS_PAGINATION } from '../../../constants/IdeaConstants';
-import Loader from '../../Ui/Loader';
+import Loader from '../../Utils/Loader';
 import IdeasListFilters from '../List/IdeasListFilters';
 import IdeasIndexHeader from './IdeasIndexHeader';
 import IdeasIndexFooter from './IdeasIndexFooter';

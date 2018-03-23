@@ -241,7 +241,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
     );
 
     return (
-      <div className="box box-primary container-fluid">
+      <div className="box box-primary container">
         <div className="box-header">
           <h3 className="box-title">
             <FormattedMessage id="proposal_form.admin.configuration.form" />
@@ -497,6 +497,13 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
               </h3>
             </div>
             <FieldArray name="questions" component={ProposalFormAdminQuestions} />
+            <Field
+              name="allowAknowledge"
+              component={component}
+              type="checkbox"
+              id="proposal_form_allow_aknowledge">
+              <FormattedMessage id="automatically-send-an-acknowledgement-of-receipt-by-email-to-the-contributor" />
+            </Field>
             <ButtonToolbar className="box-content__toolbar">
               <Button
                 disabled={invalid || pristine || submitting}
@@ -569,6 +576,7 @@ export default createFragmentContainer(
       usingDistrict
       districtHelpText
       districtMandatory
+      allowAknowledge
       districts {
         id
         name

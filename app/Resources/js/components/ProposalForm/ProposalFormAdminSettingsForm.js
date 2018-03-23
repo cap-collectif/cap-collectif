@@ -55,7 +55,7 @@ export class ProposalFormAdminSettingsForm extends Component<Props> {
     } = this.props;
 
     return (
-      <div className="box box-primary container-fluid">
+      <div className="box box-primary container">
         <div className="box-header">
           <h3 className="box-title">
             <FormattedMessage id="proposal_form.admin.settings" />
@@ -69,9 +69,9 @@ export class ProposalFormAdminSettingsForm extends Component<Props> {
         </div>
         <div className="box-content">
           <form onSubmit={handleSubmit}>
-            <h4>
+            <h2>
               <FormattedMessage id="proposal_form.admin.settings.main" />
-            </h4>
+            </h2>
             <Field
               name="title"
               label={<FormattedMessage id="proposal_form.title" />}
@@ -79,14 +79,14 @@ export class ProposalFormAdminSettingsForm extends Component<Props> {
               type="text"
               id="proposal_form_title"
             />
-            <h4>
+            <h2>
               <FormattedMessage id="proposal_form.admin.settings.options" />
-            </h4>
+            </h2>
             {isSuperAdmin && (
               <div>
-                <h4>
+                <h2>
                   <FormattedMessage id="proposal_form.admin.settings.commentable" />
-                </h4>
+                </h2>
                 <Field
                   name="commentable"
                   children={<FormattedMessage id="proposal_form.commentable" />}

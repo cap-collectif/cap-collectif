@@ -5,13 +5,13 @@ Source:
         interfaces: [Node, Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
         fields:
             createdAt:
-                type: "DateTime!"
+                type: "String!"
                 description: "Identifies the date and time when the object was created."
-                resolve: "@=value.getCreatedAt()"
+                resolve: "@=resolver('proposition_createdAt', [value])"
             updatedAt:
-                type: "DateTime"
+                type: "String!"
                 description: "Identifies the date and time when the object was last updated."
-                resolve: "@=value.getUpdatedAt()"
+                resolve: "@=resolver('proposition_updatedAt', [value])"
             expired:
                 type: "Boolean!"
             published:

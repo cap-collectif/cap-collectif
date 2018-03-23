@@ -55,7 +55,7 @@ export class ProposalPageFollowers extends React.Component<Props> {
               onClick={() => {
                 relay.loadMore(PROPOSAL_FOLLOWERS_TO_SHOW);
               }}
-              className="text-center btn btn-secondary">
+              className="center text-center btn btn-secondary grey">
               <FormattedMessage id="see-more-followers" />
             </button>
           </div>

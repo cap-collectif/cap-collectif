@@ -4,7 +4,7 @@ import moment from 'moment';
 
 import SynthesisElementStore from '../../../stores/SynthesisElementStore';
 import SynthesisElementActions from '../../../actions/SynthesisElementActions';
-import Loader from '../../Ui/Loader';
+import Loader from '../../Utils/Loader';
 import ElementTitle from './../Element/ElementTitle';
 import ElementBlock from './../Element/ElementBlock';
 import ElementsList from './../List/ElementsList';
