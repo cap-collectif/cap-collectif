@@ -2,7 +2,7 @@
 
 exports[`<ProposalAdminNewsForm /> render correctly 1`] = `
 <div
-  className="box box-primary container-fluid"
+  className="box box-primary container"
 >
   <div
     className="box-header"
@@ -128,7 +128,7 @@ exports[`<ProposalAdminNewsForm /> render correctly 1`] = `
 
 exports[`<ProposalAdminNewsForm /> render correctly when there are no news 1`] = `
 <div
-  className="box box-primary container-fluid"
+  className="box box-primary container"
 >
   <div
     className="box-header"

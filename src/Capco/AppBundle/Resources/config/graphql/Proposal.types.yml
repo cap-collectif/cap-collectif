@@ -144,4 +144,4 @@ Proposal:
                 resolve: "@=resolver('proposal_posts_count', [value])"
             viewerCanSeeEvaluation:
                 type: "Boolean!"
-                resolve: "@=resolver('proposal_viewer_can_see_evaluation', [value, user])"
+                resolve: "@=resolver('proposal_viewer_can_see_evaluation', [value])"

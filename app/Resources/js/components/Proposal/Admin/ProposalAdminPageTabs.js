@@ -40,7 +40,7 @@ export class ProposalAdminPageTabs extends Component<Props, State> {
             title={
               <div>
                 <FormattedMessage id="proposal.tabs.followers" />
-                <span className="badge ml-10">{proposal.followerConnection.totalCount}</span>
+                <span className="ml-10 badge">{proposal.followerConnection.totalCount}</span>
               </div>
             }>
             <ProposalAdminFollowers proposal={proposal} />

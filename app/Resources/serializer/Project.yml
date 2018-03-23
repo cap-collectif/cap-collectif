@@ -4,11 +4,11 @@ Capco\AppBundle\Entity\Project:
     id:
       expose: true
       type: string
-      groups: [Projects]
+      groups: [Projects, Elasticsearch]
     title:
       expose: true
       type: string
-      groups: [Projects]
+      groups: [Projects, Elasticsearch]
     Author:
       expose: true
       groups: [Projects]
@@ -35,7 +35,7 @@ Capco\AppBundle\Entity\Project:
     createdAt:
       expose: true
       type: DateTime
-      groups: [Projects]
+      groups: [Projects, Elasticsearch]
       serialized_name: createdAt
     updatedAt:
       expose: true

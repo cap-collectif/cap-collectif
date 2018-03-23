@@ -2,10 +2,13 @@
 
 namespace Capco\AppBundle\Search;
 
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Repository\ProposalRepository;
 use Elastica\Index;
 use Elastica\Query;
+use Elastica\Query\Exists;
+use Elastica\Query\Term;
 use Elastica\Result;
-use FOS\ElasticaBundle\Transformer\ElasticaToModelTransformerInterface;
 
 class ProposalSearch extends Search
 {
@@ -22,150 +25,131 @@ class ProposalSearch extends Search
         'teaser.std',
     ];
 
-    public function __construct(Index $index, ElasticaToModelTransformerInterface $transformer, $validator)
-    {
-        parent::__construct($index, $transformer, $validator);
+    private $proposalRepo;
 
+    public function __construct(Index $index, ProposalRepository $proposalRepo)
+    {
+        parent::__construct($index);
+        $this->proposalRepo = $proposalRepo;
         $this->type = 'proposal';
     }
 
-    public function searchProposalsIn(array $selectedIds, string $selectedStepId = null): array
+    public function searchProposals(int $page, int $pagination = null, string $order = null, $terms, array $providedFilters): array
     {
-        $query = new Query\BoolQuery();
+        $boolQuery = new Query\BoolQuery();
+        $boolQuery = $this->searchTermsInMultipleFields($boolQuery, self::SEARCH_FIELDS, $terms, 'phrase_prefix');
 
-        $query = $this->searchTermsInField($query, 'id', $selectedIds);
-
-        if (null !== $selectedStepId) {
-            $query = $this->searchTermsInField($query, 'selections.step.id', $selectedStepId);
+        $filters = $this->getFilters($providedFilters);
+        foreach ($filters as $key => $value) {
+            $boolQuery->addMust(new Term([
+                $key => ['value' => $value],
+            ]));
         }
-
-        $results = $this->getResults($query, count($selectedIds), false);
-
-        return [
-            'proposals' => array_map(function (Result $result) {
-                return $result->getSource();
-            }, $results['results']),
-            'count' => $results['count'],
-        ];
-    }
-
-    public function searchProposals($page, int $pagination = null, $order, $terms, $providedFilters): array
-    {
-        $pagination = $pagination ?? self::RESULTS_PER_PAGE;
-
-        switch ($order) {
-            case 'old':
-                $sortField = 'createdAt';
-                $sortOrder = 'asc';
-                break;
-            case 'last':
-                $sortField = 'createdAt';
-                $sortOrder = 'desc';
-                break;
-            case 'votes':
-                $stepId = $providedFilters['step'] ?? $providedFilters['selectionStep'];
-                $sortField = 'votesCountByStepId.' . $stepId;
-                $sortOrder = 'desc';
-                break;
-            case 'comments':
-                $sortField = 'commentsCount';
-                $sortOrder = 'desc';
-                break;
-            case 'expensive':
-                $sortField = 'estimation';
-                $sortOrder = 'desc';
-                break;
-            case 'cheap':
-                $sortField = 'estimation';
-                $sortOrder = 'asc';
-                break;
-            default:
-                $sortField = '_score';
-                $sortOrder = 'desc';
-                break;
-        }
-
-        $filters = $this->initFilters($providedFilters);
-
-        $from = ($page - 1) * $pagination;
-
-        $query = new Query\BoolQuery();
-
-        $query = $this->searchTermsInMultipleFields($query, self::SEARCH_FIELDS, $terms, 'phrase_prefix');
-
-        $boolFilter = !empty($filters) ? $this->getBoolFilter($filters) : null;
-
-        if ($boolFilter) {
-            $query = new Query\Filtered($query, $boolFilter);
-            // TODO when upgrade version of elasticsearch use this line instead (Query\Filtered is deprecated)
-            // $query->addFilter($boolFilter);
-        }
+        $boolQuery->addMust(new Exists('id'));
 
         if ('random' === $order) {
-            $query = $this->getRandomSortedQuery($query);
+            $query = $this->getRandomSortedQuery($boolQuery);
         } else {
-            $query = new Query($query);
+            $query = new Query($boolQuery);
+            if ($order) {
+                $query->setSort($this->getSort($order, $providedFilters['collectStep'] ?? $providedFilters['selectionStep']));
+            }
         }
 
-        $this->addSort($query, $sortField, $sortOrder);
+        $pagination = $pagination ?? self::RESULTS_PER_PAGE;
+        $from = ($page - 1) * $pagination;
 
         $query
-            ->setHighlight($this->getHighlightSettings())
+            ->setSource(['id'])
             ->setFrom($from)
-            ->setSize($pagination);
+            ->setSize($pagination)
+        ;
 
         $resultSet = $this->index->getType($this->type)->search($query);
 
-        $count = $resultSet->getTotalHits();
-        $results = $resultSet->getResults();
-
         return [
-            'proposals' => array_map(function (Result $result) {
-                return $result->getSource();
-            }, $results),
-            'count' => $count,
+            'proposals' => $this->getHydratedResults(array_map(function (Result $result) { return $result->getData()['id']; }, $resultSet->getResults())),
+            'count' => $resultSet->getTotalHits(),
             'order' => $order,
         ];
     }
 
-    private function getHighlightSettings(): array
+    public function getHydratedResults(array $ids): array
     {
-        return [
-            'pre_tags' => ['<span class="search__highlight">'],
-            'post_tags' => ['</span>'],
-            'number_of_fragments' => 3,
-            'fragment_size' => 175,
-            'fields' => [
-                'title' => ['number_of_fragments' => 0],
-                'object' => new \stdClass(),
-                'body' => new \stdClass(),
-                'teaser' => new \stdClass(),
-                'excerpt' => new \stdClass(),
-                'username' => ['number_of_fragments' => 0],
-                'biography' => new \stdClass(),
-            ],
-        ];
+        // We can't use findById because we would lost the correct order of ids
+        // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
+        return array_values(array_filter(array_map(function (string $id) {
+            return $this->proposalRepo->findOneBy(['id' => $id, 'deletedAt' => null]);
+        }, $ids), function (?Proposal $proposal) {return null !== $proposal; }));
     }
 
-    private function initFilters(array $providedFilters): array
+    private function getSort(string $order, string $stepId): array
+    {
+        switch ($order) {
+          case 'old':
+              $sortField = 'createdAt';
+              $sortOrder = 'asc';
+              break;
+          case 'last':
+              $sortField = 'createdAt';
+              $sortOrder = 'desc';
+              break;
+          case 'votes':
+              return [
+                'votesCountByStep.count' => [
+                  'order' => 'desc',
+                  'nested_path' => 'votesCountByStep',
+                  'nested_filter' => [
+                      'term' => ['votesCountByStep.step.id' => $stepId],
+                  ],
+                ],
+              ];
+              break;
+          case 'comments':
+              $sortField = 'commentsCount';
+              $sortOrder = 'desc';
+              break;
+          case 'expensive':
+              $sortField = 'estimation';
+              $sortOrder = 'desc';
+              break;
+          case 'cheap':
+              $sortField = 'estimation';
+              $sortOrder = 'asc';
+              break;
+          default:
+              throw new \RuntimeException('Unknow order: ' . $order);
+              break;
+      }
+
+        return [
+          $sortField => ['order' => $sortOrder],
+      ];
+    }
+
+    private function getFilters(array $providedFilters): array
     {
         $filters = [];
+
+        // Trashed proposals are indexed
+        // but most of the time we don't want to see them
         $filters['isTrashed'] = false;
-        $filters['enabled'] = true;
 
         if (array_key_exists('selectionStep', $providedFilters)) {
             $filters['selections.step.id'] = $providedFilters['selectionStep'];
+            if (array_key_exists('statuses', $providedFilters) && $providedFilters['statuses']) {
+                $filters['selections.status.id'] = $providedFilters['statuses'];
+            }
+        } else {
+            if (array_key_exists('statuses', $providedFilters) && $providedFilters['statuses']) {
+                $filters['status.id'] = $providedFilters['statuses'];
+            }
         }
 
         if (isset($providedFilters['proposalForm'])) {
             $filters['proposalForm.id'] = $providedFilters['proposalForm'];
         }
-        if (array_key_exists('statuses', $providedFilters) && $providedFilters['statuses']) {
-            $filters['status.id'] = $providedFilters['statuses'];
-        }
-        if (array_key_exists('selectionStatuses', $providedFilters) && $providedFilters['selectionStatuses']) {
-            $filters['selections.status.id'] = $providedFilters['selectionStatuses'];
-        }
+
         if (isset($providedFilters['districts'])) {
             $filters['district.id'] = $providedFilters['districts'];
         }
@@ -178,8 +162,8 @@ class ProposalSearch extends Search
         if (isset($providedFilters['categories'])) {
             $filters['category.id'] = $providedFilters['categories'];
         }
-        if (array_key_exists('authorUniqueId', $providedFilters)) {
-            $filters['author.uniqueId'] = $providedFilters['authorUniqueId'];
+        if (array_key_exists('author', $providedFilters)) {
+            $filters['author.id'] = $providedFilters['author'];
         }
 
         return $filters;

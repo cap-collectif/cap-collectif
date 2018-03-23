@@ -34,23 +34,23 @@ exports[`<RegistrationCommunicationForm /> renders correctly 1`] = `
     name="bottomText"
     type="editor"
   />
-  <div
-    className="box-content__toolbar btn-toolbar"
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="default"
+    disabled={false}
+    style={
+      Object {
+        "marginBottom": 15,
+      }
+    }
+    type="submit"
   >
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="default"
-      className="btn btn-primary"
-      disabled={false}
-      type="submit"
-    >
-      <FormattedMessage
-        id="global.save"
-        values={Object {}}
-      />
-    </Button>
-  </div>
+    <FormattedMessage
+      id="global.save"
+      values={Object {}}
+    />
+  </Button>
 </form>
 `;

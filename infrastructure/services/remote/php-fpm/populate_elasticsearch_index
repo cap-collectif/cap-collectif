@@ -7,8 +7,9 @@ while ! curl http://localhost:9200 > /dev/null 2>&1;
 done
 echo "Elasticsearch is up"
 
+su capco -c "php bin/console capco:es:create --env=prod --no-interaction"
 # Increasing memory_limit is required when importing a lot of content
-su capco -c "php -d memory_limit=512M bin/console fos:elastica:populate --env=prod --no-interaction"
+su capco -c "php -d memory_limit=512m bin/console capco:es:populate --env=prod --no-interaction"
 
 if [ $? -eq 1 ]; then
   echo "Populating the index failed... Exiting" >&2

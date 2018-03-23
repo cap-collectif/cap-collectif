@@ -7,55 +7,33 @@ use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\GraphQL\Resolver\ProposalResolver;
 use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
-use Capco\AppBundle\Mailer\Message\Proposal\ProposalAknowledgeMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalCreateAdminMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalDeleteAdminMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalOfficialAnswerMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalStatusChangeInCollectMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalStatusChangeInSelectionMessage;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalUpdateAdminMessage;
-use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\AppBundle\SiteParameter\Resolver;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Routing\Router;
 
 class ProposalNotifier extends BaseNotifier
 {
     protected $proposalResolver;
-    protected $urlResolver;
-    protected $router;
 
-    public function __construct(MailerService $mailer, Resolver $siteParams, UserResolver $userResolver, ProposalResolver $proposalResolver, UrlResolver $urlResolver, Router $router)
+    public function __construct(MailerService $mailer, Resolver $siteParams, UserResolver $userResolver, ProposalResolver $proposalResolver)
     {
         parent::__construct($mailer, $siteParams, $userResolver);
         $this->proposalResolver = $proposalResolver;
-        $this->urlResolver = $urlResolver;
-        $this->router = $router;
     }
 
     public function onCreate(Proposal $proposal)
     {
-        if ($proposal->getProposalForm()->isNotifyingOnCreate()) {
-            $this->mailer->sendMessage(ProposalCreateAdminMessage::create(
-                $proposal,
-                $this->siteParams->getValue('admin.mail.notifications.receive_address'),
-                $this->proposalResolver->resolveShowUrl($proposal),
-                $this->proposalResolver->resolveAdminUrl($proposal),
-                $this->userResolver->resolveShowUrl($proposal->getAuthor())
-            ));
-        }
-
-        if ($proposal->getProposalForm()->isAllowAknowledge()) {
-            $stepUrl = $this->urlResolver->getStepUrl($proposal->getStep(), true);
-            $this->mailer->sendMessage(ProposalAknowledgeMessage::create(
-                $proposal,
-                $proposal->getAuthor()->getEmail(),
-                $stepUrl,
-                $this->proposalResolver->resolveShowUrl($proposal),
-                $this->router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL),
-                'create'
-            ));
-        }
+        $this->mailer->sendMessage(ProposalCreateAdminMessage::create(
+            $proposal,
+            $this->siteParams->getValue('admin.mail.notifications.receive_address'),
+            $this->proposalResolver->resolveShowUrl($proposal),
+            $this->proposalResolver->resolveAdminUrl($proposal),
+            $this->userResolver->resolveShowUrl($proposal->getAuthor())
+        ));
     }
 
     public function onDelete(Proposal $proposal)
@@ -78,18 +56,6 @@ class ProposalNotifier extends BaseNotifier
             $this->proposalResolver->resolveAdminUrl($proposal),
             $this->userResolver->resolveShowUrl($proposal->getAuthor())
         ));
-
-        if ($proposal->getProposalForm()->isAllowAknowledge()) {
-            $stepUrl = $this->urlResolver->getStepUrl($proposal->getStep(), true);
-            $this->mailer->sendMessage(ProposalAknowledgeMessage::create(
-                $proposal,
-                $proposal->getAuthor()->getEmail(),
-                $stepUrl,
-                $this->proposalResolver->resolveShowUrl($proposal),
-                $this->router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL),
-                'update'
-            ));
-        }
     }
 
     public function onOfficialAnswer(Proposal $proposal, $post)

@@ -39,10 +39,7 @@ class Selection
 
     public function getId() // for elasticsearch
     {
-        return [
-          'selectionStep' => $this->selectionStep->getId(),
-          'proposal' => $this->proposal->getId(),
-       ];
+        return sprintf('%s#%s', $this->selectionStep->getId(), $this->proposal->getId());
     }
 
     public function getStep(): SelectionStep

@@ -1,32 +1,4 @@
-.sonata-ba-sortable-handler:hover {
-    cursor: move;
-}
-
-.sonata-ba-list-field-actions {
-    display: inline-table;
-    margin: 8px;
-}
-
-.capco--sonata-ba-field-help {
-    color: $warning-color !important;
-}
-
-svg.avatar {
-    background-color: $dark-gray;
-}
-
-.sonata-bc {
-    .table > tbody > tr > td,
-    .table-bordered > thead > tr > th {
-        border-color: $page-bgc;
-    }
-
-    .nav > li:not(.active) > a:hover {
-        background-color: $page-bgc;
-    }
-}
-
-.sonata-ba-form {
+.admin_proposal_form {
     .panel_flex {
         .panel-title {
             display: flex;
@@ -118,5 +90,88 @@ svg.avatar {
         button.box-content__toolbar {
             margin-top: 20px;
         }
+    }
+
+    .editor {
+        position: relative;
+
+        .ql-toolbar, .ql-container {
+            border: 1px solid $border-color;
+        }
+
+        .ql-toolbar {
+            border-radius: 5px 5px 0 0;
+        }
+
+        .ql-container {
+            border-radius: 0 0 5px 5px;
+            border-top: none;
+            background-color: $form-bgc;
+
+            .ql-editor {
+                min-height: 100px;
+            }
+        }
+    }
+
+    .image-uploader {
+        &__dropzone {
+            width: 200px;
+            height: 200px;
+            margin-top: 5px;
+            border: 2px dashed $border-color;
+            background-color: $form-bgc;
+            border-radius: 5px;
+            cursor: pointer;
+
+            &-label {
+                padding: 15px;
+
+                &:after {
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    width: 50%;
+                    height: 1.2em;
+                    text-align: right;
+                    content: "";
+                }
+
+                p {
+                    margin-bottom: 5px;
+                }
+            }
+
+            &--fullwidth {
+                @extend .image-uploader__dropzone;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+            }
+        }
+
+        &__btn, .form-group .checkbox {
+            margin-top: 15px;
+        }
+
+        &__preview {
+            img {
+                max-width: 100%;
+            }
+        }
+    }
+
+    .proposal__private-excerpt {
+        color: $info-color;
+        margin-top: 20px;
+    }
+}
+
+.label-info {
+    background-color: $info-color;
+
+    a, a:hover {
+        color: $white;
+        font-weight: 400;
     }
 }

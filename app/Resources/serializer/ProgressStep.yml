@@ -3,12 +3,12 @@ Capco\AppBundle\Entity\ProgressStep:
   properties:
     title:
       expose: true
-      groups: [Proposals]
+      groups: [Proposals, Elasticsearch]
     startAt:
       expose: true
-      groups: [Proposals]
+      groups: [Proposals, Elasticsearch]
       serialized_name: startAt
     endAt:
       expose: true
-      groups: [Proposals]
+      groups: [Proposals, Elasticsearch]
       serialized_name: endAt

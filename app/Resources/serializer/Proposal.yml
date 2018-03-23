@@ -4,28 +4,28 @@ Capco\AppBundle\Entity\Proposal:
     id:
       expose: true
       type: string
-      groups: [Proposals]
+      groups: [Proposals, Elasticsearch]
     title:
       expose: true
       type: string
-      groups: [Proposals, ProposalFusions]
+      groups: [Proposals, ProposalFusions, Elasticsearch]
     summary:
       expose: true
       type: string
-      groups: [Proposals]
+      groups: [Proposals, Elasticsearch]
     body:
       expose: true
       type: string
-      groups: [Proposals]
+      groups: [Proposals, Elasticsearch]
     author:
       expose: true
       type: Capco\UserBundle\Entity\User
       serialized_name: author
-      groups: [Proposals]
+      groups: [Proposals, Elasticsearch]
     commentsCount:
       expose: true
       type: integer
-      groups: [Proposals]
+      groups: [Proposals, Elasticsearch]
       serialized_name: commentsCount
     canContribute:
       expose: true
@@ -35,35 +35,35 @@ Capco\AppBundle\Entity\Proposal:
       expose: true
       type: DateTime
       serialized_name: createdAt
-      groups: [Proposals]
+      groups: [Proposals, Elasticsearch]
     updatedAt:
       expose: true
       type: DateTime
       serialized_name: updatedAt
-      groups: [Proposals]
+      groups: [Proposals, Elasticsearch]
     theme:
       expose: true
-      groups: [Proposals]
+      groups: [Proposals, Elasticsearch]
     district:
       expose: true
-      groups: [Proposals]
+      groups: [Proposals, Elasticsearch]
     status:
       expose: true
-      groups: [Proposals]
+      groups: [Proposals, Elasticsearch]
     category:
       expose: true
-      groups: [Proposals]
+      groups: [Proposals, Elasticsearch]
     estimation:
       expose: true
       type: float
-      groups: [Proposals]
+      groups: [Proposals, Elasticsearch]
     comments:
       expose: true
       groups: [Proposals]
     isTrashed:
       expose: true
       serialized_name: isTrashed
-      groups: [Proposals]
+      groups: [Proposals, Elasticsearch]
     draft:
       expose: true
       serialized_name: isDraft
@@ -71,13 +71,13 @@ Capco\AppBundle\Entity\Proposal:
     trashedReason:
       expose: true
       serialized_name: trashedReason
-      groups: [Proposals]
+      groups: [Proposals, Elasticsearch]
     enabled:
       expose: true
       groups: [Proposals]
     proposalForm:
       expose: true
-      groups: [Proposals]
+      groups: [Proposals, Elasticsearch]
       serialized_name: proposalForm
     progressSteps:
       expose: true
@@ -85,7 +85,7 @@ Capco\AppBundle\Entity\Proposal:
       serialized_name: progressSteps
     selections:
       expose: true
-      groups: [Proposals, Statuses]
+      groups: [Proposals, Statuses, Elasticsearch]
       serialized_name: selections
     likers:
       expose: true
@@ -107,5 +107,5 @@ Capco\AppBundle\Entity\Proposal:
     getFullReference:
       expose: true
       type: string
-      groups: [Proposals]
+      groups: [Proposals, Elasticsearch]
       serialized_name: reference
