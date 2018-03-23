@@ -12,7 +12,7 @@ Scenario: Project can be sorted by published date
   And I wait 1 seconds
   And I select "global.filter_f_last" from "project-sorting"
   And I wait 1 seconds
-  Then "Projet vide" should be before "Dépot avec selection vote budget" for selector ".thumbnail--custom .project__preview__title a"
+  Then "Projet vide" should be before "Dépot avec selection vote budget" for selector "#project-preview .card__title a"
 
 @javascript @elasticsearch
 Scenario: Project can be sorted by contributions number
@@ -20,7 +20,7 @@ Scenario: Project can be sorted by contributions number
   And I visited "projects page"
   And I select "global.filter_f_popular" from "project-sorting"
   And I wait 1 seconds
-  Then "Croissance, innovation, disruption" should be before "Projet de loi Renseignement" for selector ".thumbnail--custom .project__preview__title a"
+  Then "Croissance, innovation, disruption" should be before "Projet de loi Renseignement" for selector "#project-preview .card__title a"
 
 @javascript
 Scenario: Project can be filtered by theme
@@ -28,10 +28,10 @@ Scenario: Project can be filtered by theme
   And feature "projects_form" is enabled
   And I visited "projects page"
   And I wait 1 seconds
-  Then I should see 13 ".thumbnail--custom" elements
+  Then I should see 13 "#project-preview" elements
   And I select "Transport" from "project-theme"
   And I wait 1 seconds
-  Then I should see 7 ".thumbnail--custom" elements
+  Then I should see 7 "#project-preview" elements
   And I should see "Projet vide"
   And I should see "Dépot avec selection vote budget"
   And I should not see "Croissance, innovation, disruption"
@@ -45,11 +45,11 @@ Scenario: Project can be filtered by theme and sorted by contributions number at
   And I wait 1 seconds
   And I select "global.filter_f_popular" from "project-sorting"
   And I wait 1 seconds
-  Then I should see 7 ".thumbnail--custom" elements
+  Then I should see 7 "#project-preview" elements
   And I should see "Projet de loi Renseignement"
   And I should see "Budget Participatif Rennes"
   And I should not see "Croissance, innovation, disruption"
-  And "Stratégie technologique de l'Etat et services publics" should be before "Projet vide" for selector ".thumbnail--custom .project__preview__title a"
+  And "Stratégie technologique de l'Etat et services publics" should be before "Projet vide" for selector "#project-preview .card__title a"
 
 @javascript
 Scenario: Project can be filtered by type and sorted by contributions number at the same time
@@ -59,11 +59,11 @@ Scenario: Project can be filtered by type and sorted by contributions number at 
   And I wait 1 seconds
   And I select "global.filter_f_popular" from "project-sorting"
   And I wait 1 seconds
-  Then I should see 5 ".thumbnail--custom" elements
+  Then I should see 5 "#project-preview" elements
   And I should see "Projet de loi Renseignement"
   And I should see "Stratégie technologique de l'Etat et services publics"
   And I should not see "Croissance, innovation, disruption"
-  And "Stratégie technologique de l'Etat et services publics" should be before "Projet vide" for selector ".thumbnail--custom .project__preview__title a"
+  And "Stratégie technologique de l'Etat et services publics" should be before "Projet vide" for selector "#project-preview .card__title a"
 
 @javascript
 Scenario: Project can be filtered by title
@@ -73,7 +73,7 @@ Scenario: Project can be filtered by title
     | project-search-input | innovation |
   And I click the "#project-search-button" element
   And I wait 1 seconds
-  Then I should see 1 ".thumbnail--custom" elements
+  Then I should see 1 "#project-preview" elements
   And I should see "Croissance, innovation, disruption"
   And I should not see "Stratégie technologique de l'Etat et services publics"
   And I should not see "Projet vide"

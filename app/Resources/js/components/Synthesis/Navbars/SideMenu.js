@@ -8,7 +8,7 @@ import SynthesisElementActions from '../../../actions/SynthesisElementActions';
 
 import CreateModal from './../Create/CreateModal';
 import ElementsFinder from './../ElementsFinder';
-import Loader from '../../Utils/Loader';
+import Loader from '../../Ui/Loader';
 
 const SideMenu = React.createClass({
   propTypes: {

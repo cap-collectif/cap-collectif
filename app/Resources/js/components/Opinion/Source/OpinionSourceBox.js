@@ -4,7 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 
 import OpinionSourceList from './OpinionSourceList';
 import OpinionSourceAdd from './OpinionSourceAdd';
-import Loader from '../../Utils/Loader';
+import Loader from '../../Ui/Loader';
 import OpinionSourceActions from '../../../actions/OpinionSourceActions';
 import CategoriesActions from '../../../actions/CategoriesActions';
 import OpinionSourceStore from '../../../stores/OpinionSourceStore';

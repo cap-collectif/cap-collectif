@@ -1,0 +1,12 @@
+QuestionnaireStep:
+    type: object
+    config:
+        interfaces: [Step]
+        fields:
+            id:
+              type: "ID!"
+            kind:
+               type: "String!"
+               resolve: "questionnaire"
+            title:
+               type: "String!"

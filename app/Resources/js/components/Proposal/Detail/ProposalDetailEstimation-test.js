@@ -11,24 +11,24 @@ describe('<ProposalDetailEstimation />', () => {
     estimation: null,
   };
 
-  it('should render a div with class proposal__info when estimation is not null', () => {
+  it('should render a div when estimation is not null', () => {
     const wrapper = shallow(
       <ProposalDetailEstimation proposal={proposal} showNullEstimation={false} />,
     );
-    expect(wrapper.find('div.proposal__info')).toHaveLength(1);
+    expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render a div with class proposal_info when estimation is null and showNullEstimation is true', () => {
+  it('should render a div when estimation is null and showNullEstimation is true', () => {
     const wrapper = shallow(
       <ProposalDetailEstimation proposal={proposalWithNullEstimation} showNullEstimation />,
     );
-    expect(wrapper.find('div.proposal__info')).toHaveLength(1);
+    expect(wrapper).toMatchSnapshot();
   });
 
-  it('should not render a div with class proposal_info when estimation is null and showNullEstimation is false', () => {
+  it('should not render a div when estimation is null and showNullEstimation is false', () => {
     const wrapper = shallow(
       <ProposalDetailEstimation proposal={proposalWithNullEstimation} showNullEstimation={false} />,
     );
-    expect(wrapper.find('div.proposal__info')).toHaveLength(0.0);
+    expect(wrapper).toMatchSnapshot();
   });
 });

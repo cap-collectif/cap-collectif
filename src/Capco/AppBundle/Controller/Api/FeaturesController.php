@@ -40,7 +40,6 @@ class FeaturesController extends FOSRestController
             return $form;
         }
 
-        $data = $form->getData();
         if ($form->getData()['enabled']) {
             $toggleManager->activate($feature);
         } else {
@@ -62,8 +61,6 @@ class FeaturesController extends FOSRestController
             return $form;
         }
 
-        $em = $this->get('doctrine')->getManager();
-
         $data = $form->getData();
         $question = null;
         if ('0' === $data['type']) {
@@ -83,11 +80,12 @@ class FeaturesController extends FOSRestController
         $question->setRequired($data['required']);
 
         $abs = new QuestionnaireAbstractQuestion();
-        $registrationForm = $em->getRepository('CapcoAppBundle:RegistrationForm')->findCurrent();
+        $registrationForm = $this->get('capco.registration_form.repository')->findCurrent();
         $abs->setRegistrationForm($registrationForm);
         $abs->setQuestion($question);
         $abs->setPosition(0);
 
+        $em = $this->get('doctrine')->getManager();
         $em->persist($abs);
         $em->flush();
 
@@ -104,8 +102,7 @@ class FeaturesController extends FOSRestController
     public function patchRegistrationQuestionAction(Request $request)
     {
         $orderedQuestions = json_decode($request->getContent(), true)['questions'];
-        $em = $this->get('doctrine')->getManager();
-        $registrationForm = $em->getRepository('CapcoAppBundle:RegistrationForm')->findCurrent();
+        $registrationForm = $this->get('capco.registration_form.repository')->findCurrent();
         $absQuestions = $this->get('capco.questionnaire_abstract_question.repository')->findByRegistrationForm($registrationForm);
 
         foreach ($orderedQuestions as $key => $orderQuestion) {
@@ -115,7 +112,7 @@ class FeaturesController extends FOSRestController
                 }
             }
         }
-        $em->flush();
+        $this->get('doctrine')->getManager()->flush();
     }
 
     /**
@@ -168,8 +165,7 @@ class FeaturesController extends FOSRestController
      */
     public function putRegistrationFormAction(Request $request)
     {
-        $em = $this->get('doctrine')->getManager();
-        $registrationForm = $em->getRepository('CapcoAppBundle:RegistrationForm')->findCurrent();
+        $registrationForm = $this->get('capco.registration_form.repository')->findCurrent();
 
         $form = $this->createForm(new AdminConfigureRegistrationType(), $registrationForm);
         $form->submit($request->request->all(), false);
@@ -178,7 +174,7 @@ class FeaturesController extends FOSRestController
             return $form;
         }
 
-        $em->flush();
+        $this->get('doctrine')->getManager()->flush();
 
         $cacheManager = $this->get('fos_http_cache.cache_manager');
         $cacheManager->invalidateRoute('app_homepage')->flush();

@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import ArgumentStore from '../../stores/ArgumentStore';
 import ArgumentActions from '../../actions/ArgumentActions';
 import ArgumentItem from './ArgumentItem';
-import Loader from '../Utils/Loader';
+import Loader from '../Ui/Loader';
 import DeepLinkStateMixin from '../../utils/DeepLinkStateMixin';
 
 const ArgumentList = React.createClass({
