@@ -20,7 +20,7 @@ class UserContext extends DefaultContext
     /**
      * @Given I am logged in as no_name
      */
-    public function iAmLoggedInAsUserNotConfirmed()
+    public function iAmLoggedInAsNoName()
     {
         $this->logInWith('no_name@cap-collectif.com', 'no_name');
     }
