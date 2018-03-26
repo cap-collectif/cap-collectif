@@ -207,3 +207,10 @@ services:
         class: Capco\AppBundle\GraphQL\Resolver\ValueResponseResolver
         tags:
           - { name: overblog_graphql.resolver, alias: "value_response_value", method: "resolveValue" }
+
+    Capco\AppBundle\GraphQL\Resolver\ProjectUrlResolver:
+        class: Capco\AppBundle\GraphQL\Resolver\ProjectUrlResolver
+        arguments:
+            - "@router"
+        tags:
+            - { name: overblog_graphql.resolver }

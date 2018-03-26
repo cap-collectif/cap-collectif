@@ -18,4 +18,4 @@ Project:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProjectContributorResolver", [value, args])'
             url:
               type: "String"
-              resolve: "@=resolver('project_url', [value])"
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProjectUrlResolver", [value])'
