@@ -1060,7 +1060,21 @@ type ProposalForm implements Node {
   summaryHelpText: String
   illustrationHelpText: String
   title: String!
-  proposals(affiliations: [ProposalAffiliation]): ProposalConnection!
+  proposals(
+    affiliations: [ProposalAffiliation]
+
+    # Returns the elements in the list that come after the specified global ID.
+    after: String
+
+    # Returns the first n elements from the list.
+    first: Int = 10
+
+    # Returns the elements in the list that come before the specified global ID.
+    before: String
+
+    # Returns the last n elements from the list.
+    last: Int
+  ): ProposalConnection!
   categories: [ProposalCategory!]!
   usingThemes: Boolean!
   themeMandatory: Boolean!
@@ -1102,9 +1116,6 @@ input ProposalsConnectionFilter {
 type PropositionVote implements YesNoPairedVote & Contribution & ContributionWithAuthor {
   id: ID!
 
-  # The related proposition.
-  related: Contribution
-
   # The author of the contribution.
   author: User!
   value: YesNoPairedVoteValue!
@@ -1114,6 +1125,9 @@ type PropositionVote implements YesNoPairedVote & Contribution & ContributionWit
 
   # Date of vote.
   createdAt: DateTime!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
 
   # Returns 'vote'.
   kind: String!
@@ -1248,6 +1262,12 @@ type QuestionnaireAbstractQuestion {
 input QuestionnaireAbstractQuestionInput {
   question: QuestionInput!
   position: Int!
+}
+
+type QuestionnaireStep implements Step {
+  id: ID!
+  kind: String!
+  title: String!
 }
 
 type RankingStep implements Step {

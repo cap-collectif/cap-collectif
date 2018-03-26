@@ -177,7 +177,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     private $estimation = null;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProgressStep", mappedBy="proposal", cascade={"persist","remove"},  orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProgressStep", mappedBy="proposal", cascade={"persist"})
      */
     private $progressSteps;
 
