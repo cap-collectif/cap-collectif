@@ -25,8 +25,8 @@
 {% endblock %}
 
 {% block core_mail %}
-    <p>{{ 'hello-username'|trans({'{username}': username}, 'CapcoAppBundle')|raw }}</p>
-    <span>
+    <p style="color:#000;">{{ 'hello-username'|trans({'{username}': username}, 'CapcoAppBundle')|raw }}</p>
+    <span style="color:#000;">
         {{ 'thank-you-for-participating-in-the-project'|trans({'{projectTitle}': projectTitle, '{projectLink}': projectLink},'CapcoAppBundle')|raw }}
         {% if typeOfMail == 'create' %}
             {{ 'your-proposal-has-been-registered'|trans({'{proposalTitle}': proposalName,'{proposalLink}': proposalLink},'CapcoAppBundle')|raw }}
@@ -40,7 +40,7 @@
             },'CapcoAppBundle')|raw }}
         {% endif %}
     </span>
-    <p>
+    <p style="color:#000;">
         {{ 'you-can-modify-or-delete-your-proposal'|trans({'{modifier}':proposalLink, '{supprimer}': proposalLink},'CapcoAppBundle') }}
         {{ ' ' ~ 'until-date'|trans({'{date}':endAt|localizeddate('long', 'none', 'fr_FR', timezone)},'CapcoAppBundle') }}.
     </p>

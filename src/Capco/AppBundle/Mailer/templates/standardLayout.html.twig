@@ -49,15 +49,15 @@
     </style>
 </head>
 <body>
-<div style="text-align:center" align="center">
+<div align="center">
     <table id="email-penrose-conteneur" align="center" style="margin: 20px; background-color:#ffffff;" border="0" cellspacing="0" cellpadding="0">
         <tr>
             <td>
-                <table width="100%" id="top-mail" class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0">
+                <table width="100%" id="top-mail" class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0" style="text-align:center">
                     {% block header_mail %}
                     {% endblock %}
                     <tr style="margin-top: 20px">
-                        <td class="resp-full-td-center" valign="top" style="color:#000; ,padding-top:40px; font-family: 'Open Sans', helvetica, arial, sans-serif; font-size: 15px">
+                        <td class="resp-full-td-center" valign="top" style="padding-top:40px; font-family: 'Open Sans', helvetica, arial, sans-serif; font-size: 15px">
                             {% block core_mail %}
                             {% endblock %}
                         </td>
