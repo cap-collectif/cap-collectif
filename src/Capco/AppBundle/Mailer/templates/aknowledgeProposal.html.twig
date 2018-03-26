@@ -25,22 +25,25 @@
 {% endblock %}
 
 {% block core_mail %}
-    <b>{{ 'hello-username'|trans({'{username}': username}, 'CapcoAppBundle')|raw }}</b>
-    {{ 'thank-you-for-participating-in-the-project'|trans({'{projectTitle}': projectTitle, '{projectLink}': projectLink},'CapcoAppBundle')|raw }}
-    {% if typeOfMail == 'create' %}
-        {{ 'your-proposal-has-been-registered'|trans({'{proposalTitle}': proposalName,'{proposalLink}': proposalLink},'CapcoAppBundle')|raw }}
-        {{ 'on-date-at-time'|trans({'{date}':proposalDate, '{heure}': proposalHour},'CapcoAppBundle')|raw }}.
-    {% else %}
-        {{ 'you-have-modified-your-proposal'|trans({
-            '{proposalTitle}': proposalName,
-            '{proposalLink}': proposalLink,
-            '{proposalChangeDate}': proposalDate,
-            '{proposalChangeTime}' : proposalHour
-        },'CapcoAppBundle')|raw }}
-    {% endif %}
-    <br><br>
-    {{ 'you-can-modify-or-delete-your-proposal'|trans({'{modifier}':proposalLink, '{supprimer}': proposalLink},'CapcoAppBundle') }}
-    {{ ' ' ~ 'until-date'|trans({'{date}':endAt|localizeddate('long', 'none', 'fr_FR', timezone)},'CapcoAppBundle') }}.
+    <p>{{ 'hello-username'|trans({'{username}': username}, 'CapcoAppBundle')|raw }}</p>
+    <span>
+        {{ 'thank-you-for-participating-in-the-project'|trans({'{projectTitle}': projectTitle, '{projectLink}': projectLink},'CapcoAppBundle')|raw }}
+        {% if typeOfMail == 'create' %}
+            {{ 'your-proposal-has-been-registered'|trans({'{proposalTitle}': proposalName,'{proposalLink}': proposalLink},'CapcoAppBundle')|raw }}
+            {{ 'on-date-at-time'|trans({'{date}':proposalDate, '{heure}': proposalHour},'CapcoAppBundle')|raw }}.
+        {% else %}
+            {{ 'you-have-modified-your-proposal'|trans({
+                '{proposalTitle}': proposalName,
+                '{proposalLink}': proposalLink,
+                '{proposalChangeDate}': proposalDate,
+                '{proposalChangeTime}' : proposalHour
+            },'CapcoAppBundle')|raw }}
+        {% endif %}
+    </span>
+    <p>
+        {{ 'you-can-modify-or-delete-your-proposal'|trans({'{modifier}':proposalLink, '{supprimer}': proposalLink},'CapcoAppBundle') }}
+        {{ ' ' ~ 'until-date'|trans({'{date}':endAt|localizeddate('long', 'none', 'fr_FR', timezone)},'CapcoAppBundle') }}.
+    </p>
 {% endblock %}
 
 {% block footer_mail %}
