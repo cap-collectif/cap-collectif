@@ -1,0 +1,7 @@
+ProposalOrderField:
+    type: enum
+    config:
+        description: "Ordering options for proposals connections."
+        values:
+            CREATED_AT:
+                value: "CREATED_AT"

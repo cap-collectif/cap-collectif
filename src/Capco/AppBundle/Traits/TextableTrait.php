@@ -19,7 +19,7 @@ trait TextableTrait
 
     public function getBodyText()
     {
-        return Text::htmlToString($this->body);
+        return strip_tags($this->body);
     }
 
     public function setBody(string $body = null): self

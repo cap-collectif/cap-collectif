@@ -97,7 +97,7 @@ Scenario: API client wants to find popular comments of a blogpost
 
 ## Create Comments
 
-  ### Anonymous
+### Anonymous
 
 @database
 Scenario: Anonymous API client wants to add a comment
@@ -107,6 +107,19 @@ Scenario: Anonymous API client wants to add a comment
     "authorName": "Kéké",
     "authorEmail": "vivele94@gmail.com",
     "body": "Vive moi qui suis plus fort que www.google.fr !"
+  }
+  """
+  Then the JSON response status code should be 201
+
+@database
+Scenario: Anonymous API client wants to add an answer to a comment
+  When I send a POST request to "/api/posts/1/comments" with json:
+  """
+  {
+    "parent": "postComment11",
+    "authorName": "Kéké",
+    "authorEmail": "vivele94@gmail.com",
+    "body": "Ma super réponse"
   }
   """
   Then the JSON response status code should be 201
@@ -121,7 +134,7 @@ Scenario: Anonymous API client wants to add a comment without user informations
   """
   Then the JSON response status code should be 400
 
-  ### Logged
+### Logged
 
 @database
 Scenario: logged in API client wants to add a comment
@@ -130,6 +143,18 @@ Scenario: logged in API client wants to add a comment
   """
   {
     "body": "Vive moi user ! Réponds à ça si tu l'oses."
+  }
+  """
+  Then the JSON response status code should be 201
+
+@database
+Scenario: logged in API client wants to add an answer to a comment
+  Given I am logged in to api as user
+  When I send a POST request to "/api/posts/1/comments" with json:
+  """
+  {
+    "parent": "postComment11",
+    "body": "Oh oui j'ose :-P"
   }
   """
   Then the JSON response status code should be 201

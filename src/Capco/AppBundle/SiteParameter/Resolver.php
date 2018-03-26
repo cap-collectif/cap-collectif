@@ -18,12 +18,12 @@ class Resolver
         $this->logger = $logger;
     }
 
-    public function getValue($key, $value = null)
+    public function getValue(?string $key, ?string $value = null)
     {
         if (!$this->parameters) {
             $this->parameters = $this->repository->getValuesIfEnabled();
         }
-        if (!array_key_exists($key, $this->parameters)) {
+        if (!isset($this->parameters[$key])) {
             return $value;
         }
 

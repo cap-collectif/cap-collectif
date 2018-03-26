@@ -116,9 +116,9 @@ export class GroupAdminUsers extends React.Component<Props, State> {
             onClose={this.handleClose}
             group={group}
           />
-          {group.usersConnection.edges ? (
+          {group.users.edges ? (
             <ListGroup className="mt-15">
-              {group.usersConnection.edges
+              {group.users.edges
                 .map(edge => edge && edge.node)
                 // https://stackoverflow.com/questions/44131502/filtering-an-array-of-maybe-nullable-types-in-flow-to-remove-null-values
                 .filter(Boolean)
@@ -159,7 +159,7 @@ export default createFragmentContainer(
     fragment GroupAdminUsers_group on Group {
       id
       title
-      usersConnection {
+      users {
         edges {
           node {
             id

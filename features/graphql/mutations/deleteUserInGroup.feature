@@ -11,7 +11,7 @@ Scenario: GraphQL client wants to remove a user from group
       deleteUserInGroup(input: $input) {
         group {
           id
-          usersConnection {
+          users {
             edges {
               node {
                 id
@@ -36,7 +36,7 @@ Scenario: GraphQL client wants to remove a user from group
         "deleteUserInGroup": {
           "group": {
             "id": "group2",
-            "usersConnection": {
+            "users": {
               "edges": [
               {
                 "node": {

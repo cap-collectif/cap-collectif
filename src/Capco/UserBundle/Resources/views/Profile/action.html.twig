@@ -30,6 +30,9 @@
             <li role="presentation" class="{% if app.request.attributes.get('_route') == 'capco_profile_notifications_edit_account' %}active{% endif %} ">
                 <a href="{{ path('capco_profile_notifications_edit_account') }}">{{ 'user.profile.notifications.title' | trans({}, 'CapcoAppBundle') }}</a>
             </li>
+            <li role="presentation" class="{% if app.request.attributes.get('_route') == 'capco_profile_edit_followings' %}active{% endif %} ">
+                <a href="{{ path('capco_profile_edit_followings') }}">{{ 'followings' | trans({}, 'CapcoAppBundle') }}</a>
+            </li>
         </ul>
     </div>
 </div>

@@ -9,6 +9,11 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Argument']
 
+  capco.reply.repository:
+    class: Capco\AppBundle\Repository\ReplyRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:Reply']
+
   capco.argument_vote.repository:
     class: Capco\AppBundle\Repository\ArgumentVoteRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
@@ -243,3 +248,13 @@ services:
     class: Capco\AppBundle\Repository\FollowerRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Follower']
+
+  capco.source_vote.repository:
+    class: Capco\AppBundle\Repository\SourceVoteRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:SourceVote']
+
+  capco.opinion_version_vote.repository:
+    class: Capco\AppBundle\Repository\OpinionVersionVoteRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:OpinionVersionVote']

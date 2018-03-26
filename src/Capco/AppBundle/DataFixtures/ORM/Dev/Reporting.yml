@@ -4,7 +4,7 @@ Capco\AppBundle\Entity\Reporting:
         body: |
              <p><text(100)></p>
              <p><text(300)></p>
-        Reporter: '@user499'
+        Reporter: '@user100'
         Opinion: '@opinion1'
         status: 2
         isArchived: false
@@ -13,7 +13,7 @@ Capco\AppBundle\Entity\Reporting:
         body: |
              <p><text(100)></p>
              <p><text(300)></p>
-        Reporter: '@user499'
+        Reporter: '@user100'
         proposal: '@proposal1'
         status: 2
         isArchived: false
@@ -22,7 +22,7 @@ Capco\AppBundle\Entity\Reporting:
         body: |
              <p><text(100)></p>
              <p><text(300)></p>
-        Reporter: '@user499'
+        Reporter: '@user100'
         Source: '@source1'
         status: 2
         isArchived: false
@@ -31,7 +31,7 @@ Capco\AppBundle\Entity\Reporting:
         body: |
              <p><text(100)></p>
              <p><text(300)></p>
-        Reporter: '@user499'
+        Reporter: '@user100'
         opinionVersion: '@version1'
         status: 2
         isArchived: false
@@ -40,7 +40,7 @@ Capco\AppBundle\Entity\Reporting:
         body: |
              <p><text(100)></p>
              <p><text(300)></p>
-        Reporter: '@user499'
+        Reporter: '@user100'
         Argument: '@argument1'
         status: 2
         isArchived: false
@@ -49,7 +49,7 @@ Capco\AppBundle\Entity\Reporting:
         body: |
              <p><text(100)></p>
              <p><text(300)></p>
-        Reporter: '@user499'
+        Reporter: '@user100'
         Idea: '@Idea1'
         status: 2
         isArchived: false
@@ -58,7 +58,7 @@ Capco\AppBundle\Entity\Reporting:
         body: |
              <p><text(100)></p>
              <p><text(300)></p>
-        Reporter: '@user499'
+        Reporter: '@user100'
         Comment: '@iComment1'
         status: 2
         isArchived: false

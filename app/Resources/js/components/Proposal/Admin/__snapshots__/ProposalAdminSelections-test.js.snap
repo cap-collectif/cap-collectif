@@ -103,7 +103,6 @@ exports[`<ProposalAdminSelections /> render correctly 1`] = `
             normalize={[Function]}
           />
           <div>
-            @
             <Field
               component={[Function]}
               id="selections[0].status"

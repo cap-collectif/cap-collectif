@@ -12,7 +12,7 @@ Capco\AppBundle\Entity\Proposal:
     district: '@district1'
     status: '@status1'
     createdAt: <(new \DateTime('2015-01-01'))>
-    likers: ['@user1', '@user2']
+    likers: ['@user1', '@user2', '@user3', '@user4', '@user5']
     category: '@pCategory2'
     address: '[{"address_components":[{"long_name":"10","short_name":"10","types":["street_number"]},{"long_name":"Cours des Alliés","short_name":"Cours des Alliés","types":["route"]},{"long_name":"Rennes","short_name":"Rennes","types":["locality","political"]},{"long_name":"Ille-et-Vilaine","short_name":"Ille-et-Vilaine","types":["administrative_area_level_2","political"]},{"long_name":"Bretagne","short_name":"Bretagne","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"35000","short_name":"35000","types":["postal_code"]}],"formatted_address":"10 Cours des Alliés, 35000 Rennes, France","geometry":{"location":{"lat":48.1051781,"lng":-1.6744521},"location_type":"ROOFTOP","viewport":{"northeast":{"lat":48.1065270802915,"lng":-1.673103119708498},"southwest":{"lat":48.1038291197085,"lng":-1.675801080291502}}},"place_id":"ChIJ59pcgLXfDkgR8WJ9mp5A204","types":["establishment","library","point_of_interest"]}]'
     reference: 1
@@ -143,6 +143,7 @@ Capco\AppBundle\Entity\Proposal:
     enabled: true
     isTrashed: false
     rating: 3
+    likers: ['@user1', '@user2', '@user3']
     author: '@user4'
     proposalForm: '@proposalform3'
     theme: '@theme2'
@@ -151,6 +152,7 @@ Capco\AppBundle\Entity\Proposal:
     estimation: 100
     category: '@pCategory3'
     reference: 2
+    updatedAt: <(new \DateTime('yesterday'))>
   proposal9:
     id: proposal9
     title: Proposition gratuite

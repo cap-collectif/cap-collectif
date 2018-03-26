@@ -88,7 +88,7 @@ class MenuItemResolver
             $constraint
         );
 
-        if (count($errorList) === 0) {
+        if (0 === count($errorList)) {
             return $url;
         }
 

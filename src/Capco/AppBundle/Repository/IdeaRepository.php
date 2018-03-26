@@ -236,13 +236,13 @@ class IdeaRepository extends EntityRepository
             ->andWhere('i.isTrashed = :notTrashed')
             ->setParameter('notTrashed', false);
 
-        if ($themeId !== null) {
+        if (null !== $themeId) {
             $qb->andWhere('t.id = :themeId')
                 ->setParameter('themeId', $themeId)
             ;
         }
 
-        if ($term !== null) {
+        if (null !== $term) {
             $qb->andWhere('i.title LIKE :term')
                 ->setParameter('term', '%' . $term . '%')
             ;
@@ -258,16 +258,16 @@ class IdeaRepository extends EntityRepository
                 ->setParameter('to', $to);
         }
 
-        if ($sort === 'last') {
+        if ('last' === $sort) {
             $qb->orderBy('i.createdAt', 'DESC');
             $qb->addOrderBy('i.votesCount', 'DESC');
-        } elseif ($sort === 'old') {
+        } elseif ('old' === $sort) {
             $qb->orderBy('i.createdAt', 'ASC');
             $qb->addOrderBy('i.votesCount', 'DESC');
-        } elseif ($sort === 'popular') {
+        } elseif ('popular' === $sort) {
             $qb->orderBy('i.votesCount', 'DESC');
             $qb->addOrderBy('i.updatedAt', 'DESC');
-        } elseif ($sort === 'comments') {
+        } elseif ('comments' === $sort) {
             $qb->orderBy('i.commentsCount', 'DESC');
             $qb->addOrderBy('i.updatedAt', 'DESC');
         }
@@ -307,13 +307,13 @@ class IdeaRepository extends EntityRepository
             ->setParameter('notTrashed', false)
         ;
 
-        if ($themeId !== null) {
+        if (null !== $themeId) {
             $qb->andWhere('t.id = :themeId')
                 ->setParameter('themeId', $themeId)
             ;
         }
 
-        if ($term !== null) {
+        if (null !== $term) {
             $qb->andWhere('i.title LIKE :term')
                 ->setParameter('term', '%' . $term . '%')
             ;

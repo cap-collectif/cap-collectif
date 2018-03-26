@@ -109,6 +109,7 @@ class AppKernel extends Kernel
 
             // PolyCollection support.
             new \Infinite\FormBundle\InfiniteFormBundle(),
+
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
@@ -116,6 +117,11 @@ class AppKernel extends Kernel
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
+        }
+
+        if (in_array($this->getEnvironment(), ['dev', 'prod'], true)) {
+                // ICU translation
+            $bundles[] =new \Webfactory\IcuTranslationBundle\WebfactoryIcuTranslationBundle();
         }
 
         return $bundles;

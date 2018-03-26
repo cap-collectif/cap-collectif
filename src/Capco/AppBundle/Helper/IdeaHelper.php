@@ -10,7 +10,7 @@ class IdeaHelper
 {
     public function hasUserVoted(Idea $idea, User $user = null)
     {
-        if ($user !== null) {
+        if (null !== $user) {
             foreach ($idea->getVotes() as $vote) {
                 if ($vote->getUser() === $user) {
                     return true;
@@ -23,7 +23,7 @@ class IdeaHelper
 
     public function findUserVoteOrCreate(Idea $idea, User $user = null)
     {
-        if ($user === null) {
+        if (null === $user) {
             return new IdeaVote($idea);
         }
 
@@ -38,7 +38,7 @@ class IdeaHelper
 
     public function hasUserReported(Idea $idea, User $user = null)
     {
-        if ($user !== null) {
+        if (null !== $user) {
             foreach ($idea->getReports() as $report) {
                 if ($report->getReporter() === $user) {
                     return true;

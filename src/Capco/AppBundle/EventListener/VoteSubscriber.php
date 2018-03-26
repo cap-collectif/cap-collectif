@@ -31,15 +31,15 @@ class VoteSubscriber implements EventSubscriberInterface
         $action = $event->getAction();
         $opinion = $opinionVote->getOpinion();
 
-        if ($action === 'remove') {
+        if ('remove' === $action) {
             $opinion->decreaseVotesCount($opinionVote->getValue());
         }
 
-        if ($action === 'add') {
+        if ('add' === $action) {
             $opinion->increaseVotesCount($opinionVote->getValue());
         }
 
-        if ($action === 'update') {
+        if ('update' === $action) {
             $opinion->increaseVotesCount($opinionVote->getValue());
             $opinion->decreaseVotesCount($event->getPrevious());
         }
@@ -51,11 +51,11 @@ class VoteSubscriber implements EventSubscriberInterface
         $action = $event->getAction();
         $entity = $vote->getRelatedEntity();
 
-        if ($action === 'remove') {
+        if ('remove' === $action) {
             $entity->decrementVotesCount();
         }
 
-        if ($action === 'add') {
+        if ('add' === $action) {
             $entity->incrementVotesCount();
         }
     }

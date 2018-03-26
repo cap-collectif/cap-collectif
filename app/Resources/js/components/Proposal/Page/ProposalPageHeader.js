@@ -18,6 +18,7 @@ type Props = {
   className: string,
   referer: string,
   oldProposal: Proposal,
+  isAuthenticated: boolean,
 };
 
 export class ProposalPageHeader extends React.Component<Props> {
@@ -26,7 +27,7 @@ export class ProposalPageHeader extends React.Component<Props> {
   };
 
   render() {
-    const { proposal, oldProposal, className, referer } = this.props;
+    const { proposal, oldProposal, className, referer, isAuthenticated } = this.props;
     const createdDate = (
       <FormattedDate
         value={moment(proposal.createdAt)}
@@ -96,7 +97,11 @@ export class ProposalPageHeader extends React.Component<Props> {
         )}
         {proposal.publicationStatus !== 'DRAFT' && (
           /* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */
-          <ProposalFollowButton proposal={proposal} className="pull-right btn-lg" />
+          <ProposalFollowButton
+            proposal={proposal}
+            isAuthenticated={isAuthenticated}
+            className="pull-right btn-lg"
+          />
         )}
       </div>
     );
@@ -106,6 +111,7 @@ export class ProposalPageHeader extends React.Component<Props> {
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
   return {
     referer: state.proposal.referer,
+    isAuthenticated: state.user.user !== null,
   };
 };
 
@@ -115,7 +121,7 @@ export default createFragmentContainer(
   container,
   graphql`
     fragment ProposalPageHeader_proposal on Proposal {
-      ...ProposalFollowButton_proposal
+      ...ProposalFollowButton_proposal @arguments(isAuthenticated: $isAuthenticated)
       title
       theme {
         title
