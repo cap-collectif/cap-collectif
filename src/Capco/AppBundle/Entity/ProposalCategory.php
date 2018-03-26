@@ -53,19 +53,22 @@ class ProposalCategory
         return $this->getId() ? $this->getName() : 'New category';
     }
 
-    public function getName(): ?string
+    /**
+     * @return string
+     */
+    public function getName()
     {
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(string $name)
     {
         $this->name = $name;
 
         return $this;
     }
 
-    public function getForm(): ?ProposalForm
+    public function getForm()
     {
         return $this->form;
     }
@@ -82,6 +85,13 @@ class ProposalCategory
         return $this->proposals;
     }
 
+    /**
+     * Add proposal.
+     *
+     * @param Proposal $proposal
+     *
+     * @return $this
+     */
     public function addProposal(Proposal $proposal)
     {
         if (!$this->proposals->contains($proposal)) {
@@ -91,6 +101,13 @@ class ProposalCategory
         return $this;
     }
 
+    /**
+     * Remove proposal.
+     *
+     * @param Proposal $proposal
+     *
+     * @return $this
+     */
     public function removeProposal(Proposal $proposal)
     {
         $this->proposals->removeElement($proposal);

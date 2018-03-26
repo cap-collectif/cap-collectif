@@ -66,7 +66,7 @@ const OpinionVersionsBox = React.createClass({
     if (this.state.versions.length > 1) {
       return (
         <form>
-          <label htmlFor="filter-opinion-version" className="control-label h5 sr-only">
+          <label htmlFor="filter-opinion-version" className="control-label sr-only">
             <FormattedMessage id="opinion.version.filter" />
           </label>
           <select

@@ -7,7 +7,6 @@ import ProposalPageHeader from './ProposalPageHeader';
 import ProposalPageAlert from './ProposalPageAlert';
 import ProposalDraftAlert from './ProposalDraftAlert';
 import ProposalPageTabs from './ProposalPageTabs';
-import { scrollToAnchor } from '../../../services/ScrollToAnchor';
 import Loader from '../../Ui/Loader';
 import type { FeatureToggles, State } from '../../../types';
 import type { Proposal } from '../../../redux/modules/proposal';
@@ -23,30 +22,6 @@ type Props = {
 };
 
 export class ProposalPage extends React.Component<Props> {
-  componentDidMount() {
-    setTimeout(scrollToAnchor, 20); // We use setTimeout to interact with DOM in componentDidMount (see React documentation)
-  }
-
-  getHashKey(hash: string) {
-    let key = null;
-    if (hash.indexOf('content') !== -1) {
-      key = 'content';
-    }
-    if (hash.indexOf('evaluation') !== -1) {
-      key = 'evaluation';
-    }
-    if (hash.indexOf('comments') !== -1) {
-      key = 'comments';
-    }
-    if (hash.indexOf('votes') !== -1) {
-      key = 'votes';
-    }
-    if (hash.indexOf('followers') !== -1) {
-      key = 'followers';
-    }
-    return key;
-  }
-
   render() {
     const { proposal, steps, features, categories, form } = this.props;
     // $FlowFixMe

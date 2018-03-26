@@ -16,7 +16,7 @@ class DiffSubscriber implements EventSubscriber
         $this->diffGenerator = $diffGenerator;
     }
 
-    public function getSubscribedEvents(): array
+    public function getSubscribedEvents()
     {
         return [
             'prePersist',

@@ -17,7 +17,7 @@ class DynamicRelationSubscriber implements EventSubscriber
     /**
      * {@inheritdoc}
      */
-    public function getSubscribedEvents(): array
+    public function getSubscribedEvents()
     {
         return [
             'loadClassMetadata',

@@ -24,7 +24,7 @@ class MediaResponseSerializationListener extends AbstractSerializationListener
         $this->templateExtension = $templateExtension;
     }
 
-    public static function getSubscribedEvents(): array
+    public static function getSubscribedEvents()
     {
         return [
             [

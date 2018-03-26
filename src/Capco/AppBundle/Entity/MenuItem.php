@@ -368,7 +368,7 @@ class MenuItem
      */
     public function deleteMenuItem()
     {
-        if (null !== $this->Page) {
+        if ($this->Page !== null) {
             $this->Page->removeMenuItem($this);
         }
     }

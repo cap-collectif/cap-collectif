@@ -86,7 +86,7 @@ export class GroupAdminParameters extends React.Component<Props, State> {
     const { showDeleteModal } = this.state;
 
     return (
-      <div className="box box-primary container">
+      <div className="box box-primary container-fluid">
         <div className="box-header  pl-0">
           <h3 className="box-title">
             <FormattedMessage id="group.admin.parameters" />

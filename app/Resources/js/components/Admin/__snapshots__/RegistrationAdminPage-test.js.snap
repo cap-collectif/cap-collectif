@@ -2,19 +2,10 @@
 
 exports[`<RegistrationAdminPage /> renders correctly 1`] = `
 <div
-  style={
-    Object {
-      "margin": "0 15px",
-    }
-  }
+  className="box-content"
 >
   <div
     className="row"
-    style={
-      Object {
-        "padding": "10px 0",
-      }
-    }
   >
     <Col
       bsClass="col"
@@ -39,9 +30,9 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       Permettre l'inscription
     </Col>
   </div>
-  <h2>
+  <h4>
     Réseaux sociaux
-  </h2>
+  </h4>
   <p>
     Permettre l'inscription via :
   </p>
@@ -107,9 +98,9 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       Google
     </Col>
   </div>
-  <h2>
+  <h4>
     Autorisation
-  </h2>
+  </h4>
   <div
     className="row"
     style={
@@ -141,9 +132,9 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       Limiter l'inscription à certains noms de domaine
     </Col>
   </div>
-  <h2>
+  <h4>
     Données recueillies
-  </h2>
+  </h4>
   <div
     className="row"
     style={
@@ -289,6 +280,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       block={false}
       bsClass="btn"
       bsStyle="default"
+      className="box-content__toolbar"
       disabled={false}
       onClick={[Function]}
       style={
@@ -387,28 +379,19 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       Je ne suis pas un robot
     </Col>
   </div>
-  <h2>
+  <h3>
     Communication
-  </h2>
+  </h3>
   <Connect(ReduxForm) />
 </div>
 `;
 
 exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = `
 <div
-  style={
-    Object {
-      "margin": "0 15px",
-    }
-  }
+  className="box-content"
 >
   <div
     className="row"
-    style={
-      Object {
-        "padding": "10px 0",
-      }
-    }
   >
     <Col
       bsClass="col"
@@ -433,9 +416,9 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       Permettre l'inscription
     </Col>
   </div>
-  <h2>
+  <h4>
     Réseaux sociaux
-  </h2>
+  </h4>
   <p>
     Permettre l'inscription via :
   </p>
@@ -501,9 +484,9 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       Google
     </Col>
   </div>
-  <h2>
+  <h4>
     Autorisation
-  </h2>
+  </h4>
   <div
     className="row"
     style={
@@ -535,9 +518,9 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       Limiter l'inscription à certains noms de domaine
     </Col>
   </div>
-  <h2>
+  <h4>
     Données recueillies
-  </h2>
+  </h4>
   <div
     className="row"
     style={
@@ -690,6 +673,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       block={false}
       bsClass="btn"
       bsStyle="default"
+      className="box-content__toolbar"
       disabled={true}
       onClick={null}
       style={
@@ -788,9 +772,9 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       Je ne suis pas un robot
     </Col>
   </div>
-  <h2>
+  <h3>
     Communication
-  </h2>
+  </h3>
   <Connect(ReduxForm) />
 </div>
 `;

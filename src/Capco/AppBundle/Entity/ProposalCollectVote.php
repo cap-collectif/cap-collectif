@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -61,6 +62,15 @@ class ProposalCollectVote extends AbstractVote
     public function getRelatedEntity()
     {
         return $this->proposal;
+    }
+
+    public function isIndexable()
+    {
+        try {
+            return !$this->isExpired() && !$this->getRelatedEntity()->isDeleted();
+        } catch (EntityNotFoundException $e) {
+            return false;
+        }
     }
 
     /**

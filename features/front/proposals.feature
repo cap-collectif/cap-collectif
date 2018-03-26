@@ -147,7 +147,7 @@ Scenario: Logged in user wants to create a proposal with theme
   And I click the "#proposal-page-tabs-tab-followers" element
   And I should see my subscription as "user" in the proposal followers list
 
-@javascript @security @elasticsearch
+@javascript @security
 Scenario: Logged in user wants to create a proposal without providing required response
   Given feature "districts" is enabled
   And I am logged in as user
@@ -157,7 +157,7 @@ Scenario: Logged in user wants to create a proposal without providing required r
   And I submit the create proposal form
   Then I should see "proposal.constraints.field_mandatory"
 
-@javascript @security @elasticsearch
+@javascript @security
 Scenario: Logged in user wants to create a proposal in closed collect step
   Given I am logged in as user
   And I go to a closed collect step
@@ -198,9 +198,8 @@ Scenario: Author of a proposal wants to delete it
   And I go to a proposal
   When I click the delete proposal button
   And I confirm proposal deletion
-  And I wait 2 seconds
-  And I should not see my proposal anymore
   Then there should be 5 proposals
+  And I should not see my proposal anymore
 
 @javascript @database
 Scenario: Admin should not be notified when an user deletes his proposal on an non notifiable proposal

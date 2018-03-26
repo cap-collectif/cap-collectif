@@ -24,7 +24,7 @@ const UserBox = React.createClass({
     }
     return (
       <Col xs={12} sm={6} md={4} lg={3} className={className}>
-        <UserPreview className="block block--bordered" user={user} username={username} />
+        <UserPreview user={user} username={username} />
       </Col>
     );
   },

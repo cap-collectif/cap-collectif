@@ -11,47 +11,7 @@ const mutation = graphql`
   mutation UpdateProposalFormMutation($input: UpdateProposalFormInput!) {
     updateProposalForm(input: $input) {
       proposalForm {
-        id
-        description
-        usingThemes
-        themeMandatory
-        usingCategories
-        categoryMandatory
-        usingAddress
-        latMap
-        lngMap
-        zoomMap
-        proposalInAZoneRequired
-        illustrationHelpText
-        addressHelpText
-        themeHelpText
-        categoryHelpText
-        descriptionHelpText
-        summaryHelpText
-        titleHelpText
-        usingDistrict
-        districtHelpText
-        districtMandatory
-        districts {
-          id
-          name
-          displayedOnMap
-          geojson
-        }
-        categories {
-          id
-          name
-        }
-        questions {
-          id
-          title
-          helpText
-          type
-          private
-          required
-          position
-          kind
-        }
+        ...ProposalFormAdminConfigurationForm_proposalForm
       }
     }
   }

@@ -298,7 +298,6 @@ class ReactBootstrapInput extends React.Component<Props> {
           renderFormErrors={() => {}}
           getGroupStyle={() => {}}
           isReduxForm
-          labelClassName="h4"
           onBlur={props.onBlur}
           {...props}
         />

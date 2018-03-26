@@ -783,6 +783,9 @@ class UserRepository extends EntityRepository
         return $query->getQuery()->getSingleScalarResult();
     }
 
+    /**
+     * @return \Doctrine\ORM\QueryBuilder
+     */
     protected function getIsEnabledQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('u')

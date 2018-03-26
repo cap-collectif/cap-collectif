@@ -25,7 +25,7 @@ export const LoginForm = React.createClass({
   render() {
     const { error } = this.props;
     return (
-      <div>
+      <div className="form_no-bold-label">
         {error && (
           <Alert bsStyle="danger">
             <p>
@@ -39,9 +39,9 @@ export const LoginForm = React.createClass({
           autoFocus
           disableValidation
           id="username"
-          labelClassName="h5"
           label={<FormattedMessage id="global.email" />}
           autoComplete="email"
+          labelClassName="font-weight-normal"
           component={renderInput}
         />
         <Field
@@ -51,13 +51,11 @@ export const LoginForm = React.createClass({
           disableValidation
           id="password"
           label={<FormattedMessage id="global.password" />}
-          labelClassName="w100 h5"
+          labelClassName="w-100 font-weight-normal"
           autoComplete="current-password"
           component={renderInput}
         />
-        <a className="small" href="/resetting/request">
-          {<FormattedMessage id="global.forgot_password" />}
-        </a>
+        <a href="/resetting/request">{<FormattedMessage id="global.forgot_password" />}</a>
       </div>
     );
   },

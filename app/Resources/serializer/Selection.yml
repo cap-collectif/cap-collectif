@@ -6,8 +6,8 @@ Capco\AppBundle\Entity\Selection:
       groups: [Proposals, SelectionSteps]
     selectionStep:
       expose: true
-      groups: [Proposals, SelectionSteps, Statuses, Elasticsearch]
+      groups: [Proposals, SelectionSteps, Statuses]
       serialized_name: step
     status:
       expose: true
-      groups: [Proposals, SelectionSteps, Statuses, Elasticsearch]
+      groups: [Proposals, SelectionSteps, Statuses]

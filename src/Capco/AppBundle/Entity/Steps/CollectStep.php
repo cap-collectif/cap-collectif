@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity\Steps;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Status;
+use Capco\AppBundle\Model\IndexableInterface;
 use Capco\AppBundle\Traits\TimelessStepTrait;
 use Capco\AppBundle\Traits\VoteThresholdTrait;
 use Capco\AppBundle\Traits\VoteTypeTrait;
@@ -15,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="collect_step")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\CollectStepRepository")
  */
-class CollectStep extends AbstractStep implements ParticipativeStepInterface
+class CollectStep extends AbstractStep implements IndexableInterface, ParticipativeStepInterface
 {
     use TimelessStepTrait, VoteThresholdTrait, VoteTypeTrait;
 
@@ -156,6 +157,11 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
     public function isCollectStep(): bool
     {
         return true;
+    }
+
+    public function isIndexable(): bool
+    {
+        return $this->getIsEnabled();
     }
 
     public function isParticipative(): bool

@@ -4,6 +4,7 @@ imports:
     - { resource: security.yml }
     - { resource: sonata.yml }
     - { resource: liip_imagine.yml }
+    - { resource: elastica.yml }
     - { resource: swarrot.yml }
     - { resource: joli/jolitypo.yml }
 
