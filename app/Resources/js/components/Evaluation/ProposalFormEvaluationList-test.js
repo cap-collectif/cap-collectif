@@ -3,9 +3,11 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalFormEvaluationList } from './ProposalFormEvaluationList';
+import { relayPaginationMock } from '../../mocks';
 
 describe('<ProposalFormEvaluationList />', () => {
   const propsWithEvaluations = {
+    relay: relayPaginationMock,
     // $FlowFixMe $refType
     proposalForm: {
       step: {
@@ -16,6 +18,12 @@ describe('<ProposalFormEvaluationList />', () => {
       },
       proposals: {
         totalCount: 2,
+        pageInfo: {
+          endCursor: 'cursor1',
+          hasNextPage: true,
+          hasPreviousPage: false,
+          startCursor: null,
+        },
         edges: [
           // $FlowFixMe
           { node: { id: '1' } },
@@ -32,6 +40,7 @@ describe('<ProposalFormEvaluationList />', () => {
   });
 
   const propsWithoutEvaluations = {
+    relay: relayPaginationMock,
     // $FlowFixMe $refType
     proposalForm: {
       step: {
@@ -42,6 +51,12 @@ describe('<ProposalFormEvaluationList />', () => {
       },
       proposals: {
         totalCount: 0,
+        pageInfo: {
+          endCursor: null,
+          hasNextPage: false,
+          hasPreviousPage: false,
+          startCursor: null,
+        },
         edges: [],
       },
     },

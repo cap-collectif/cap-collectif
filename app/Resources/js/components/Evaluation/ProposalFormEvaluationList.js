@@ -1,16 +1,20 @@
 // @flow
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { createFragmentContainer, graphql } from 'react-relay';
-import { Table } from 'react-bootstrap';
+import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
+import { Table, Button } from 'react-bootstrap';
 import ProposalFormEvaluationRow from './ProposalFormEvaluationRow';
 import type { ProposalFormEvaluationList_proposalForm } from './__generated__/ProposalFormEvaluationList_proposalForm.graphql';
 
-type Props = { proposalForm: ProposalFormEvaluationList_proposalForm };
+export const pageSize = 1;
+
+type Props = { relay: RelayPaginationProp } & {
+  proposalForm: ProposalFormEvaluationList_proposalForm,
+};
 
 export class ProposalFormEvaluationList extends Component<Props> {
   render() {
-    const { proposalForm } = this.props;
+    const { relay, proposalForm } = this.props;
     if (proposalForm.proposals.totalCount === 0) {
       return null;
     }
@@ -53,23 +57,48 @@ export class ProposalFormEvaluationList extends Component<Props> {
                 .map(edge => <ProposalFormEvaluationRow key={edge.node.id} proposal={edge.node} />)}
           </tbody>
         </Table>
+        {relay.hasMore() && (
+          <Button
+            bsStyle="primary"
+            onClick={() => {
+              if (relay.isLoading()) {
+                return;
+              }
+              relay.loadMore(pageSize);
+            }}
+            disabled={relay.isLoading()}>
+            <FormattedMessage id={relay.isLoading() ? 'global.loading' : 'see-more-proposals'} />
+          </Button>
+        )}
       </div>
     );
   }
 }
 
-export default createFragmentContainer(
+export default createPaginationContainer(
   ProposalFormEvaluationList,
   graphql`
-    fragment ProposalFormEvaluationList_proposalForm on ProposalForm {
+    fragment ProposalFormEvaluationList_proposalForm on ProposalForm
+      @argumentDefinitions(
+        count: { type: "Int", defaultValue: 10 }
+        cursor: { type: "String", defaultValue: null }
+      ) {
+      id
       step {
         title
         project {
           title
         }
       }
-      proposals(affiliations: [EVALUER]) {
+      proposals(first: $count, after: $cursor, affiliations: [EVALUER])
+        @connection(key: "ProposalFormEvaluationList_proposals") {
         totalCount
+        pageInfo {
+          endCursor
+          hasNextPage
+          hasPreviousPage
+          startCursor
+        }
         edges {
           node {
             id
@@ -79,4 +108,29 @@ export default createFragmentContainer(
       }
     }
   `,
+  {
+    direction: 'forward',
+    getConnectionFromProps(props: Props) {
+      return props.proposalForm && props.proposalForm.proposals;
+    },
+    getFragmentVariables(prevVars) {
+      return {
+        ...prevVars,
+      };
+    },
+    getVariables(props: Props, { count, cursor }) {
+      return {
+        count,
+        cursor,
+        proposalFormId: props.proposalForm.id,
+      };
+    },
+    query: graphql`
+      query ProposalFormEvaluationListQuery($proposalFormId: ID!, $count: Int!, $cursor: String) {
+        proposalForm: node(id: $proposalFormId) {
+          ...ProposalFormEvaluationList_proposalForm @arguments(count: $count, cursor: $cursor)
+        }
+      }
+    `,
+  },
 );
