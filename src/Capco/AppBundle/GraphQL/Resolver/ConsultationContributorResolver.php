@@ -24,17 +24,11 @@ class ConsultationContributorResolver
     public function __invoke(ConsultationStep $consultation, Arg $args): Connection
     {
         $paginator = new Paginator(function ($offset, $limit) use ($consultation) {
-            // $field = $args->offsetGet('orderBy')['field'];
-            // $direction = $args->offsetGet('orderBy')['direction'];
-            // $orderBy = [$field => $direction];
-            // $criteria = [
-            //   'proposal' => $proposal,
-            // ];
             try {
                 $contributorsId = $this->userRepository->getRegisteredContributorByConsultation($consultation, $offset, $limit);
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
-                throw new \RuntimeException('Find following proposal by user failed');
+                throw new \RuntimeException('Find contributors failed.');
             }
 
             return array_values(array_filter(array_map(function (array $criteria) {

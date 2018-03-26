@@ -12,4 +12,4 @@ Step:
               type: "String!"
             # project:
             #     type: "Project!"
-            #     description: "The project"
+            #     description: "The related project"
