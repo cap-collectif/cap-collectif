@@ -14,9 +14,6 @@ class CommentSubscriber implements EventSubscriberInterface
     const NOTIFY_TO_ADMIN = 'admin';
     const NOTIFY_TO_AUTHOR = 'author';
 
-    /**
-     * @var Publisher
-     */
     private $publisher;
 
     public function __construct(Publisher $publisher)
@@ -24,7 +21,7 @@ class CommentSubscriber implements EventSubscriberInterface
         $this->publisher = $publisher;
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             CapcoAppBundleEvents::COMMENT_CHANGED => 'onCommentChanged',

@@ -7,7 +7,7 @@ exports[`<ProposalFollowButton /> should render a button to follow a proposal 1`
     block={false}
     bsClass="btn"
     bsStyle="default"
-    className=""
+    className="btn"
     disabled={false}
     id="proposal-follow-btn"
     onClick={[Function]}
@@ -29,7 +29,7 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
     block={false}
     bsClass="btn"
     bsStyle="default"
-    className="btn-default_focus"
+    className="btn fifty-shade-of-grey "
     disabled={false}
     id="proposal-unfollow-btn"
     onClick={[Function]}

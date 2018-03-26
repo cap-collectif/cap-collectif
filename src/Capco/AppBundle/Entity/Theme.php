@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Model\IndexableInterface;
+use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -145,11 +145,6 @@ class Theme implements IndexableInterface
     public function __toString()
     {
         return $this->getId() ? $this->getTitle() : 'New theme';
-    }
-
-    public function isIndexable()
-    {
-        return $this->getIsEnabled();
     }
 
     /**
@@ -587,5 +582,20 @@ class Theme implements IndexableInterface
     public function isFuture()
     {
         return $this->status === self::$statuses['future'];
+    }
+
+    public function isIndexable(): bool
+    {
+        return $this->getIsEnabled();
+    }
+
+    public static function getElasticsearchTypeName(): string
+    {
+        return 'theme';
+    }
+
+    public static function getElasticsearchSerializationGroups(): array
+    {
+        return ['Elasticsearch'];
     }
 }

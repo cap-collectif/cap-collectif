@@ -69,14 +69,14 @@ export const RegistrationForm = React.createClass({
       organizationName,
     } = this.props;
     return (
-      <form onSubmit={handleSubmit} id="registration-form">
+      <form onSubmit={handleSubmit}>
         <Field
           name="username"
           id="username"
           component={renderComponent}
           type="text"
           label={<FormattedMessage id="registration.username" />}
-          labelClassName="font-weight-normal"
+          labelClassName="h5"
         />
         <Field
           name="email"
@@ -84,7 +84,7 @@ export const RegistrationForm = React.createClass({
           component={renderComponent}
           type="email"
           label={<FormattedMessage id="global.email" />}
-          labelClassName="font-weight-normal"
+          labelClassName="h5"
           popover={{
             id: 'registration-email-tooltip',
             message: <FormattedMessage id="registration.tooltip.email" />,
@@ -96,7 +96,7 @@ export const RegistrationForm = React.createClass({
           component={renderComponent}
           type="password"
           label={<FormattedMessage id="registration.password" />}
-          labelClassName="font-weight-normal"
+          labelClassName="h5"
           popover={{
             id: 'registration-password-tooltip',
             message: <FormattedMessage id="registration.tooltip.password" />,
@@ -108,7 +108,6 @@ export const RegistrationForm = React.createClass({
             name="userType"
             component={renderComponent}
             type="select"
-            labelClassName="font-weight-normal"
             label={
               <span>
                 <FormattedMessage id="registration.type" />{' '}
@@ -116,7 +115,8 @@ export const RegistrationForm = React.createClass({
                   <FormattedMessage id="global.form.optional" />
                 </span>
               </span>
-            }>
+            }
+            labelClassName="h5">
             <FormattedMessage id="registration.select.type">
               {message => <option value="">{message}</option>}
             </FormattedMessage>
@@ -133,7 +133,6 @@ export const RegistrationForm = React.createClass({
             name="zipcode"
             component={renderComponent}
             type="text"
-            labelClassName="font-weight-normal"
             label={
               <span>
                 <FormattedMessage id="registration.zipcode" />{' '}
@@ -142,6 +141,7 @@ export const RegistrationForm = React.createClass({
                 </span>
               </span>
             }
+            labelClassName="h5"
             autoComplete="postal-code"
           />
         )}
@@ -171,7 +171,6 @@ export const RegistrationForm = React.createClass({
               name={`dynamic-${field.id}`}
               component={renderComponent}
               type={field.type}
-              labelClassName="font-weight-normal"
               label={
                 <span>
                   {field.question}{' '}
@@ -182,6 +181,7 @@ export const RegistrationForm = React.createClass({
                   )}
                 </span>
               }
+              labelClassName="h5"
               children={children}
             />
           );
@@ -191,7 +191,6 @@ export const RegistrationForm = React.createClass({
           name="charte"
           component={renderComponent}
           type="checkbox"
-          labelClassName="font-weight-normal"
           children={
             <FormattedMessage
               id="registration.charte"
@@ -211,7 +210,6 @@ export const RegistrationForm = React.createClass({
             name="consentExternalCommunication"
             component={renderComponent}
             type="checkbox"
-            labelClassName="font-weight-normal"
             children={
               <FormattedMessage
                 id="registration.consent_external_communication"

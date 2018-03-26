@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import classNames from 'classnames';
 import RankingBlock from './RankingBlock';
 
 const Ranking = React.createClass({
@@ -48,10 +49,24 @@ const Ranking = React.createClass({
   },
 
   render() {
-    const { field, id, getGroupStyle, disabled, renderFormErrors } = this.props;
-
+    const {
+      field,
+      id,
+      labelClassName,
+      getGroupStyle,
+      disabled,
+      label,
+      renderFormErrors,
+    } = this.props;
+    const labelClasses = classNames({
+      'control-label': true,
+      [labelClassName]: true,
+    });
     return (
       <div className={`form-group ${getGroupStyle(field.id)}`} id={id}>
+        <label htmlFor={id} className={labelClasses}>
+          {label}
+        </label>
         {field.helpText ? <span className="help-block">{field.helpText}</span> : null}
         <RankingBlock
           ref={c => (this.rankingBlock = c)}

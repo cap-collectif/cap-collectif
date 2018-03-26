@@ -1,0 +1,112 @@
+/* ===============================================================
+    $SUB-NAVBAR
+================================================================*/
+.navbar--sub {
+    border: 1px solid $border-color;
+    background-color: $white;
+    margin-bottom: 0;
+    font-size: 15px;
+
+    .nav {
+
+        li {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            border-top: 1px solid $border-color;
+
+            & > div {
+                position: relative;
+                display: block;
+                padding: 10px 15px;
+            }
+
+            &:first-child {
+                border-top: 0;
+            }
+
+            &.active a,
+            &.active > div,
+            &.active:hover a,
+            &.active:hover > div {
+                border-left: 5px solid $primary-color;
+                background-color: $page-bgc;
+            }
+
+            &:hover a,
+            &:hover > div {
+                background-color: $page-bgc;
+            }
+
+            &.trash__step {
+                i {
+                    margin-right: 4px;
+                }
+
+                a {
+                    text-decoration: none;
+                }
+
+                &.active:hover a,
+                a,
+                a:hover {
+                    border: none;
+                }
+            }
+        }
+    }
+
+    .navbar__step-nb {
+        float: left;
+        color: $primary-color;
+        font-size: 25px;
+        padding-bottom: 0;
+    }
+
+    .navbar__step-title {
+        margin-bottom: 5px;
+        margin-top: 8px;
+        padding-top: 0;
+        color: $dark;
+        font-size: 16px;
+    }
+
+    .navbar__step {
+        margin-left: 25px;
+
+        p.excerpt {
+            margin-bottom: 5px;
+        }
+
+        &-date {
+            font-size: 14px;
+        }
+    }
+}
+
+.navbar--sub.navbar--no-nb .navbar__step-title {
+    margin-top: 0;
+}
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+    .navbar--sub {
+
+        .navbar__step-nb {
+            float: none;
+        }
+
+        .navbar__step-title {
+            margin-top: 0;
+        }
+
+        .navbar__step-nb {
+            padding-top: 0;
+            padding-bottom: 5px;
+        }
+
+        .navbar__step {
+            margin-left: 0;
+        }
+
+    }
+}

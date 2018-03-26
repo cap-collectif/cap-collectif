@@ -2,7 +2,7 @@
 
 exports[`<GroupAdminUsers /> render correctly group admin user with confirmation notification when adding a user 1`] = `
 <div
-  className="box box-primary container-fluid"
+  className="box box-primary container"
 >
   <div
     className="box-header  pl-0"
@@ -93,7 +93,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
 
 exports[`<GroupAdminUsers /> render correctly group admin user with confirmation notification when deleting a user 1`] = `
 <div
-  className="box box-primary container-fluid"
+  className="box box-primary container"
 >
   <div
     className="box-header  pl-0"
@@ -182,7 +182,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
 
 exports[`<GroupAdminUsers /> render correctly group admin user with error notification when adding a user 1`] = `
 <div
-  className="box box-primary container-fluid"
+  className="box box-primary container"
 >
   <div
     className="box-header  pl-0"
@@ -273,7 +273,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
 
 exports[`<GroupAdminUsers /> render correctly group admin user with error notification when deleting a user 1`] = `
 <div
-  className="box box-primary container-fluid"
+  className="box box-primary container"
 >
   <div
     className="box-header  pl-0"

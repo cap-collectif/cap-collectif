@@ -3,23 +3,25 @@ import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import UserAvatar from './UserAvatar';
 import UserLink from './UserLink';
-import { CardContainer } from '../Ui/Card/CardContainer';
-import { CardUser } from '../Ui/Card/CardUser';
 
-type Props = {
-  user: ?Object,
-  username: ?string,
-  className: ?string,
-  style: ?Object,
-};
+const UserPreview = React.createClass({
+  displayName: 'UserPreview',
 
-export class UserPreview extends React.Component<Props> {
-  static defaultProps = {
-    user: null,
-    username: null,
-    className: '',
-    style: {},
-  };
+  propTypes: {
+    user: React.PropTypes.object,
+    username: React.PropTypes.string,
+    className: React.PropTypes.string,
+    style: React.PropTypes.object,
+  },
+
+  getDefaultProps() {
+    return {
+      user: null,
+      username: null,
+      className: '',
+      style: {},
+    };
+  },
 
   render() {
     const { className, style } = this.props;
@@ -35,33 +37,34 @@ export class UserPreview extends React.Component<Props> {
     }
     const contributionsCount = user && user.contributionsCount ? user.contributionsCount : 0;
     const classes = {
-      'pb-10': true,
+      media: true,
+      'media--user-thumbnail': true,
+      'media--macro__user': true,
+      box: true,
       [className]: true,
     };
 
     return (
-      <CardContainer className={classNames(classes)} style={style}>
-        <CardUser>
-          <div className="card__user__avatar">
-            <UserAvatar user={user} />
-          </div>
-          <div className="ellipsis">
+      <div className={classNames(classes)} style={style}>
+        <UserAvatar user={user} className="pull-left" />
+        <div className="media-body">
+          <p className="media--macro__user  small">
             {user ? <UserLink user={user} /> : <span>{username}</span>}
-            <p className="excerpt small">
-              {contributionsCount === false ? null : (
-                <span>
-                  <FormattedMessage
-                    id="global.counters.contributions"
-                    values={{ num: contributionsCount }}
-                  />
-                </span>
-              )}
-            </p>
-          </div>
-        </CardUser>
-      </CardContainer>
+          </p>
+          <span className="excerpt">
+            {contributionsCount === false ? null : (
+              <div>
+                <FormattedMessage
+                  id="global.counters.contributions"
+                  values={{ num: contributionsCount }}
+                />
+              </div>
+            )}
+          </span>
+        </div>
+      </div>
     );
-  }
-}
+  },
+});
 
 export default UserPreview;

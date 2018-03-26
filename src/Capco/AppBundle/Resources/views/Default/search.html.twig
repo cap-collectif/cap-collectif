@@ -76,9 +76,9 @@
                             {% set type_label    = 'search.results.type.' ~ result.result.hit['_type'] %}
 
                             {% if result.result.hit['_type'] == 'user' %}
-                                {% set title = result.result.hit['highlight']['username'] is defined ? result.result.hit['highlight']['username'][0] : result.transformed.username %}
+                                {% set title = result.result.hit['_source']['displayName'] is defined ? result.result.hit['_source']['displayName'] : result.transformed.displayName %}
                             {% else %}
-                                {% set title = result.result.hit['highlight']['title'] is defined ? result.result.hit['highlight']['title'][0] : ( result.transformed.title is defined ? result.transformed.title : default_title) %}
+                                {% set title = result.result.hit['_source']['title'] is defined ? result.result.hit['_source']['title'] : ( result.transformed.title is defined ? result.transformed.title : default_title) %}
                             {% endif %}
                             <li>
                                 <h4 class="h4 search-result__title">
@@ -100,21 +100,11 @@
                                         {{ ('global.reference'|trans({}, 'CapcoAppBundle'))~' '~entity.fullReference }}
                                     {% endif %}
                                 </span>
-                                {% if result.result.hit['highlight'] is defined %}
-                                    {% for key, highlights in result.result.hit['highlight'] if key != 'title' and key != 'username' %}
-                                        <p class="excerpt small search-result__preview">
-                                            {% for excerpt in highlights %}
-                                                {{ excerpt | striptags('<span>') | raw }}...
-                                            {% endfor %}
-                                        </p>
-                                    {% endfor %}
-                                {% else %}
-                                    {% for key in ['biography', 'body'] if attribute(entity, key) is defined %}
+                                {% for key in ['biography', 'body'] if attribute(entity, key) is defined %}
                                         <p class="excerpt small search-result__preview">
                                             {{ attribute(entity, key)|striptags|truncate(175) }}
                                         </p>
-                                    {% endfor %}
-                                {% endif %}
+                                {% endfor %}
                             </li>
                         {% endfor %}
                     </ul>

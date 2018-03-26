@@ -102,7 +102,7 @@ export class ImageUpload extends React.Component<Props> {
     return (
       <Row id={id} className={classNames(classes)}>
         {disablePreview && (
-          <Col xs={12} sm={12}>
+          <Col xs={12} sm={12} style={{ marginBottom: 5 }}>
             <PreviewMedia
               medias={Array.isArray(value) ? value : [value]}
               onRemoveMedia={media => {

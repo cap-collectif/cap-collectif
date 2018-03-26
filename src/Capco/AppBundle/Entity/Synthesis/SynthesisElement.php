@@ -806,16 +806,16 @@ class SynthesisElement
      */
     public function init()
     {
-        if ($this->updatedAt === null) {
+        if (null === $this->updatedAt) {
             $this->updatedAt = new \DateTime();
         }
-        if ($this->votes === null) {
+        if (null === $this->votes) {
             $this->votes = [];
         }
-        if ($this->children === null) {
+        if (null === $this->children) {
             $this->children = new ArrayCollection();
         }
-        if ($this->displayType === null) {
+        if (null === $this->displayType) {
             $this->displayType = 'folder';
         }
     }

@@ -185,7 +185,7 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
     const evaluationForm = proposal.form.evaluationForm;
 
     return (
-      <div className="box box-primary container-fluid">
+      <div className="box box-primary container">
         <div className="box-content box-content__notation-form">
           <div>
             <ProposalAdminEvaluersForm proposal={proposal} />

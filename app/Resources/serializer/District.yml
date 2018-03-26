@@ -4,11 +4,11 @@ Capco\AppBundle\Entity\District:
         id:
             expose: true
             type: string
-            groups: [Districts, Proposals]
+            groups: [Districts, Proposals, Elasticsearch]
         name:
             expose: true
             type: string
-            groups: [Districts, Proposals]
+            groups: [Districts, Proposals, Elasticsearch]
         geojson:
             expose: true
             type: string

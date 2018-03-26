@@ -124,11 +124,6 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         return $this->getParent();
     }
 
-    public function isIndexable()
-    {
-        return $this->isEnabled() && !$this->isExpired();
-    }
-
     public function getReports()
     {
         return $this->reports;
@@ -427,5 +422,20 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         --$this->argumentsCount;
 
         return $this;
+    }
+
+    public function isIndexable(): bool
+    {
+        return $this->isEnabled() && !$this->isExpired();
+    }
+
+    public static function getElasticsearchTypeName(): string
+    {
+        return 'opinionVersion';
+    }
+
+    public static function getElasticsearchSerializationGroups(): array
+    {
+        return ['OpinionVersions'];
     }
 }

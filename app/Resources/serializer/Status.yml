@@ -4,11 +4,11 @@ Capco\AppBundle\Entity\Status:
         id:
             expose: true
             type: string
-            groups: [Statuses, Proposals]
+            groups: [Statuses, Proposals, Elasticsearch]
         name:
             expose: true
             type: string
-            groups: [Statuses, Proposals]
+            groups: [Statuses, Proposals, Elasticsearch]
         color:
             expose: true
             type: string

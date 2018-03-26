@@ -17,7 +17,7 @@ class CommentSerializationListener extends AbstractSerializationListener
         $this->tokenStorage = $tokenStorage;
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             ['event' => 'serializer.post_serialize', 'class' => 'Capco\AppBundle\Entity\IdeaComment', 'method' => 'onPostCommentSerialize'],
@@ -29,6 +29,10 @@ class CommentSerializationListener extends AbstractSerializationListener
 
     public function onPostCommentSerialize(ObjectEvent $event)
     {
+        // We skip if we are serializing for Elasticsearch
+        if (isset($this->getIncludedGroups($event)['Elasticsearch'])) {
+            return;
+        }
         $comment = $event->getObject();
         $event->getVisitor()->addData(
             '_links',

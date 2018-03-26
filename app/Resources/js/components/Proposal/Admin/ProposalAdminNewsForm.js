@@ -19,7 +19,7 @@ export class ProposalAdminNewsForm extends Component<Props, State> {
     const { proposal, intl } = this.props;
 
     return (
-      <div className="box box-primary container-fluid">
+      <div className="box box-primary container">
         <div className="box-header">
           <h3 className="box-title">
             <FormattedMessage id="proposal.admin.news" />
