@@ -21,7 +21,6 @@ type Props = {
   step: Step,
   showThemes: boolean,
   showComments: boolean,
-  isAuthenticated: boolean,
 };
 
 export class ProposalPreview extends React.Component<Props> {
@@ -60,10 +59,4 @@ export class ProposalPreview extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
-  return {
-    isAuthenticated: state.user.user !== null,
-  };
-};
-
-export default connect(mapStateToProps)(ProposalPreview);
+export default ProposalPreview;

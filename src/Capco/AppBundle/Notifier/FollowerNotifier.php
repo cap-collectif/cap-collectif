@@ -36,20 +36,4 @@ final class FollowerNotifier extends BaseNotifier
             )
         );
     }
-
-    public function onReportActivities(\stdClass $userActivities)
-    {
-        $this->mailer->sendMessage(
-            FollowerActivitiesMessage::create(
-                $userActivity->getEmail(),
-                $userActivity->getUsername(),
-                'notifier@cap-collectif.com',
-                $userActivity->getUserProjects(),
-                $sendAt,
-                $siteName,
-                $siteUrl,
-                $userActivity->getUrlManagingFollowings()
-            )
-        );
-    }
 }

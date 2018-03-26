@@ -19,6 +19,7 @@ type Props = {
   showThemes: boolean,
   features: Object,
   step: Object,
+  isAuthenticated: boolean,
 };
 
 export class ProposalPreviewBody extends React.Component<Props> {
@@ -65,13 +66,16 @@ export class ProposalPreviewBody extends React.Component<Props> {
           <QueryRenderer
             environment={environment}
             query={graphql`
-              query ProposalPreviewBodyFollowerButtonQuery($proposalId: ID!) {
+              query ProposalPreviewBodyFollowerButtonQuery(
+                $proposalId: ID!
+                $isAuthenticated: Boolean!
+              ) {
                 proposal: node(id: $proposalId) {
-                  ...ProposalFollowButton_proposal
+                  ...ProposalFollowButton_proposal @arguments(isAuthenticated: $isAuthenticated)
                 }
               }
             `}
-            variables={{ proposalId: proposal.id }}
+            variables={{ proposalId: proposal.id, isAuthenticated: this.props.isAuthenticated }}
             render={({
               error,
               props,
@@ -107,6 +111,7 @@ export class ProposalPreviewBody extends React.Component<Props> {
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
   return {
     features: state.default.features,
+    isAuthenticated: state.user.user !== null,
   };
 };
 

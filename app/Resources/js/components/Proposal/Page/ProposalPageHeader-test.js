@@ -56,7 +56,6 @@ describe('<ProposalPageHeader />', () => {
       },
       isDraft: false,
       viewerCanSeeEvaluation: true,
-      isAuthenticated: true,
     },
   };
 

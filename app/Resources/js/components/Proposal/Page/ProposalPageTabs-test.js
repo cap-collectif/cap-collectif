@@ -47,11 +47,10 @@ describe('<ProposalPageTabs />', () => {
       themes: true,
     },
     votesCount: 150,
-    isAuthenticated: true,
   };
 
   it('should render Tabs with correct DOM structure', () => {
-    const wrapper = shallow(<ProposalPageTabs proposal={proposal} isAuthenticated {...props} />);
+    const wrapper = shallow(<ProposalPageTabs proposal={proposal} {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

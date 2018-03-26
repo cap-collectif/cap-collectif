@@ -102,7 +102,6 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none 1`]
     id="proposal-vote-btn"
     proposal={
       Object {
-        "isAuthenticated": true,
         "isDraft": false,
         "selections": Array [],
         "viewerCanSeeEvaluation": true,
@@ -244,7 +243,6 @@ exports[`<ProposalPageHeader /> should render a proposal header 1`] = `
     id="proposal-vote-btn"
     proposal={
       Object {
-        "isAuthenticated": true,
         "isDraft": false,
         "selections": Array [],
         "viewerCanSeeEvaluation": true,

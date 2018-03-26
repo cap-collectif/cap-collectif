@@ -7,7 +7,6 @@ import {
   Panel,
   ListGroup,
   ListGroupItem,
-  FormGroup,
   Radio,
   Button,
   Popover,
@@ -85,9 +84,9 @@ export class ProposalFollowButton extends React.Component<Props, State> {
     ) {
       return (
         <LoginOverlay>
-          <span className="mb-0 proposal-follow-dropdown custom-dropdown">
+          <span className="mb-0 custom-dropdown">
             <Dropdown
-              className="mb-0 width250 custom-dropdown-bgd"
+              className="mb-0 width250 custom-dropdown-bgd proposal-follow-dropdown"
               id={`proposal-follow-btn-${proposal.id}`}
               defaultOpen={isJustFollowed}>
               <Dropdown.Toggle className="custom-dropdown-button">
@@ -110,69 +109,65 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                       </OverlayTrigger>
                     </span>
                   }>
-                  <form>
-                    <FormGroup className="b-none mb-0" id={`proposal-follow-btn-${proposal.id}`}>
-                      <ListGroup className="mb-0">
-                        <ListGroupItem className="">
-                          <Radio
-                            id={`proposal-follow-btn-default-${proposal.id}`}
-                            name="default"
-                            className="proposal__follow__advancement"
-                            checked={
-                              proposal.followerConfiguration.notifiedOf === 'DEFAULT'
-                                ? 'checked'
-                                : ''
-                            }
-                            inline
-                            onClick={() => {
-                              return this.changeFollowType(proposal, 'DEFAULT');
-                            }}>
-                            <b>
-                              <FormattedMessage id="the-progress" />
-                            </b>{' '}
-                            <br />
-                            <FormattedMessage id="list-of-progress-notifications" />
-                          </Radio>
-                        </ListGroupItem>
-                        <ListGroupItem className="">
-                          <Radio
-                            name="default_and_comments"
-                            id={`proposal-follow-btn-default_and_comments-${proposal.id}`}
-                            className="proposal__follow__default_and_comments"
-                            checked={
-                              proposal.followerConfiguration.notifiedOf === 'DEFAULT_AND_COMMENTS'
-                                ? 'checked'
-                                : ''
-                            }
-                            onClick={() => {
-                              return this.changeFollowType(proposal, 'DEFAULT_AND_COMMENTS');
-                            }}>
-                            <b>
-                              <FormattedMessage id="progress-and-comments" />
-                            </b>
-                          </Radio>
-                        </ListGroupItem>
-                        <ListGroupItem className="">
-                          <Radio
-                            name="all"
-                            id={`proposal-follow-btn-all-${proposal.id}`}
-                            className="proposal__follow__all"
-                            checked={
-                              proposal.followerConfiguration.notifiedOf === 'ALL' ? 'checked' : ''
-                            }
-                            onClick={() => {
-                              return this.changeFollowType(proposal, 'ALL');
-                            }}>
-                            <b>
-                              <FormattedMessage id="all-activities" />
-                            </b>
-                            <br />
-                            <FormattedMessage id="list-of-activity-notifications" />
-                          </Radio>
-                        </ListGroupItem>
-                      </ListGroup>
-                    </FormGroup>
-                  </form>
+                  <div className="b-none mb-0" id={`proposal-follow-btn-${proposal.id}`}>
+                    <ListGroup className="mb-0">
+                      <ListGroupItem>
+                        <Radio
+                          id={`proposal-follow-btn-default-${proposal.id}`}
+                          name="default"
+                          className="proposal__follow__advancement"
+                          checked={
+                            proposal.followerConfiguration.notifiedOf === 'DEFAULT' ? 'checked' : ''
+                          }
+                          inline
+                          onClick={() => {
+                            return this.changeFollowType(proposal, 'DEFAULT');
+                          }}>
+                          <b>
+                            <FormattedMessage id="the-progress" />
+                          </b>{' '}
+                          <br />
+                          <FormattedMessage id="list-of-progress-notifications" />
+                        </Radio>
+                      </ListGroupItem>
+                      <ListGroupItem>
+                        <Radio
+                          name="default_and_comments"
+                          id={`proposal-follow-btn-default_and_comments-${proposal.id}`}
+                          className="proposal__follow__default_and_comments"
+                          checked={
+                            proposal.followerConfiguration.notifiedOf === 'DEFAULT_AND_COMMENTS'
+                              ? 'checked'
+                              : ''
+                          }
+                          onClick={() => {
+                            return this.changeFollowType(proposal, 'DEFAULT_AND_COMMENTS');
+                          }}>
+                          <b>
+                            <FormattedMessage id="progress-and-comments" />
+                          </b>
+                        </Radio>
+                      </ListGroupItem>
+                      <ListGroupItem>
+                        <Radio
+                          name="all"
+                          id={`proposal-follow-btn-all-${proposal.id}`}
+                          className="proposal__follow__all"
+                          checked={
+                            proposal.followerConfiguration.notifiedOf === 'ALL' ? 'checked' : ''
+                          }
+                          onClick={() => {
+                            return this.changeFollowType(proposal, 'ALL');
+                          }}>
+                          <b>
+                            <FormattedMessage id="all-activities" />
+                          </b>
+                          <br />
+                          <FormattedMessage id="list-of-activity-notifications" />
+                        </Radio>
+                      </ListGroupItem>
+                    </ListGroup>
+                  </div>
                 </Panel>
                 <MenuItem
                   eventKey="1"

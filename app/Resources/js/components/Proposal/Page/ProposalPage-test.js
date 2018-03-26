@@ -23,7 +23,6 @@ describe('<ProposalPage />', () => {
     },
     steps: [{ id: '1', voteType: VOTE_TYPE_DISABLED }, { id: '2', voteType: VOTE_TYPE_SIMPLE }],
     viewerCanSeeEvaluation: true,
-    isAuthenticated: true,
   };
 
   const proposalNoVotes = {
@@ -75,9 +74,7 @@ describe('<ProposalPage />', () => {
   });
 
   it('should render a proposal page with evaluation tab', () => {
-    const wrapper = shallow(
-      <ProposalPage {...props} proposal={{ ...proposalNoVotes, viewerCanSeeEvaluation: true }} />,
-    );
+    const wrapper = shallow(<ProposalPage {...props} proposal={proposalNoVotes} isAuthenticated />);
     expect(wrapper).toMatchSnapshot();
   });
 
