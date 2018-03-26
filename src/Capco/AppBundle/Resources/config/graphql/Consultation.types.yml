@@ -34,19 +34,7 @@ Consultation:
             contributors:
                 type: "UserConnection!"
                 description: "A list of contributor associated with the consultation."
-                args:
-                    after:
-                      type: "String"
-                      description: "Returns the elements in the list that come after the specified global ID."
-                    first:
-                      type: "Int"
-                      description: "Returns the first n elements from the list."
-                    before:
-                      type: "String"
-                      description: "Returns the elements in the list that come before the specified global ID."
-                    last:
-                      type: "Int"
-                      description: "Returns the last n elements from the list."
+                argsBuilder: "Relay::Connection"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationContributorResolver", [value, args])'
             contributionConnection:
                 type: "ContributionConnection"
