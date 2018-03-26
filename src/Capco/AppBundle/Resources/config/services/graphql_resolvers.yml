@@ -14,6 +14,22 @@ services:
         tags:
             - { name: overblog_graphql.resolver }
 
+    Capco\AppBundle\GraphQL\Resolver\ConsultationContributorResolver:
+        class: Capco\AppBundle\GraphQL\Resolver\ConsultationContributorResolver
+        arguments:
+            - "@capco.user.repository"
+            - "@logger"
+        tags:
+            - { name: overblog_graphql.resolver }
+
+    Capco\AppBundle\GraphQL\Resolver\ProjectContributorResolver:
+        class: Capco\AppBundle\GraphQL\Resolver\ProjectContributorResolver
+        arguments:
+            - "@capco.user.repository"
+            - "@logger"
+        tags:
+            - { name: overblog_graphql.resolver }
+
     capco.resolver.proposal_form:
         class: Capco\AppBundle\GraphQL\Resolver\ProposalFormResolver
         tags:

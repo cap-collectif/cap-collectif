@@ -1,0 +1,7 @@
+UserConnection:
+    type: relay-connection
+    config:
+        nodeType: User!
+        connectionFields:
+            totalCount:
+                type: Int!
