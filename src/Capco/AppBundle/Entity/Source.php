@@ -183,11 +183,6 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
         return $this->getParent();
     }
 
-    public function isIndexable()
-    {
-        return $this->getIsEnabled() && !$this->isExpired();
-    }
-
     /**
      * Get title.
      *
@@ -554,7 +549,7 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
      */
     public function userHasReport(User $user = null)
     {
-        if ($user !== null) {
+        if (null !== $user) {
             foreach ($this->Reports as $report) {
                 if ($report->getReporter() === $user) {
                     return true;
@@ -596,14 +591,29 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
      */
     public function deleteSource()
     {
-        if ($this->Category !== null) {
+        if (null !== $this->Category) {
             $this->Category->removeSource($this);
         }
-        if ($this->Opinion !== null) {
+        if (null !== $this->Opinion) {
             $this->Opinion->removeSource($this);
         }
-        if ($this->opinionVersion !== null) {
+        if (null !== $this->opinionVersion) {
             $this->opinionVersion->removeSource($this);
         }
+    }
+
+    public function isIndexable(): bool
+    {
+        return $this->getIsEnabled() && !$this->isExpired();
+    }
+
+    public static function getElasticsearchTypeName(): string
+    {
+        return 'source';
+    }
+
+    public static function getElasticsearchSerializationGroups(): array
+    {
+        return ['Elasticsearch'];
     }
 }

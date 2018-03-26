@@ -551,7 +551,7 @@ class OpinionType
         return $this->parent;
     }
 
-    public function setParent(OpinionType $parent = null)
+    public function setParent(self $parent = null)
     {
         $this->parent = $parent;
 

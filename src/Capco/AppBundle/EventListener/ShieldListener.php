@@ -3,8 +3,10 @@
 namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\Toggle\Manager;
+use Symfony\Bridge\Twig\TwigEngine;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class ShieldListener
@@ -13,7 +15,7 @@ class ShieldListener
     protected $tokenStorage;
     protected $templating;
 
-    public function __construct(Manager $manager, $tokenStorage, $templating)
+    public function __construct(Manager $manager, TokenStorage $tokenStorage, TwigEngine $templating)
     {
         $this->manager = $manager;
         $this->tokenStorage = $tokenStorage;

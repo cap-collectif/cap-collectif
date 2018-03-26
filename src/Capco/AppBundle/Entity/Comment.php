@@ -153,11 +153,6 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
         return null;
     }
 
-    public function isIndexable()
-    {
-        return $this->getIsEnabled();
-    }
-
     /**
      * Get createdAt.
      *
@@ -490,5 +485,20 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
     public function deleteComment()
     {
         $this->removeCommentFromRelatedObject();
+    }
+
+    public function isIndexable(): bool
+    {
+        return $this->getIsEnabled();
+    }
+
+    public static function getElasticsearchTypeName(): string
+    {
+        return 'comment';
+    }
+
+    public static function getElasticsearchSerializationGroups(): array
+    {
+        return ['Elasticsearch'];
     }
 }

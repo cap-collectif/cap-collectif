@@ -7,30 +7,18 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class ProposalComment.
- *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalCommentRepository")
  */
 class ProposalComment extends Comment
 {
     /**
-     * @var
-     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="comments", cascade={"persist"})
      * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE")
      * @Assert\NotNull()
      */
     private $proposal;
 
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
-     * @return Proposal
-     */
-    public function getProposal()
+    public function getProposal(): ?Proposal
     {
         return $this->proposal;
     }
@@ -45,7 +33,7 @@ class ProposalComment extends Comment
 
     // ************************ Overriden methods *********************************
 
-    public function isIndexable()
+    public function isIndexable(): bool
     {
         try {
             return $this->getIsEnabled() && !$this->getRelatedObject()->isDeleted();
@@ -54,9 +42,6 @@ class ProposalComment extends Comment
         }
     }
 
-    /**
-     * @return Proposal
-     */
     public function getRelatedObject()
     {
         return $this->proposal;

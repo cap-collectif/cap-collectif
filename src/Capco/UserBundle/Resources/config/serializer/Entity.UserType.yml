@@ -4,7 +4,7 @@ Capco\UserBundle\Entity\UserType:
       id:
         expose: true
         type: integer
-        groups: [Default, UsersInfos]
+        groups: [Default, UsersInfos, Elasticsearch]
       slug:
         expose: true
         type: string

@@ -17,7 +17,7 @@ class VoteSubscriber implements EventSubscriberInterface
         $this->em = $em;
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             CapcoAppBundleEvents::OPINION_VOTE_CHANGED => 'onOpinionVoteChanged',

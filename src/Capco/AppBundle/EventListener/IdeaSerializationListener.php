@@ -24,7 +24,7 @@ class IdeaSerializationListener extends AbstractSerializationListener
         $this->ideaHelper = $ideaHelper;
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             [
