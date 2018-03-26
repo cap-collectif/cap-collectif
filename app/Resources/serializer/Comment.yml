@@ -4,15 +4,15 @@ Capco\AppBundle\Entity\Comment:
     id:
       expose: true
       type: string
-      groups: [Comments, Elasticsearch]
+      groups: [Comments]
     body:
       expose: true
       type: string
-      groups: [Comments, Elasticsearch]
+      groups: [Comments]
     createdAt:
       expose: true
       type: DateTime
-      groups: [Comments, Elasticsearch]
+      groups: [Comments]
       serialized_name: createdAt
     updatedAt:
       expose: true
@@ -32,7 +32,7 @@ Capco\AppBundle\Entity\Comment:
     authorName:
       expose: true
       type: string
-      groups: [Comments, Elasticsearch]
+      groups: [Comments]
     authorEmail:
       expose: true
       type: string

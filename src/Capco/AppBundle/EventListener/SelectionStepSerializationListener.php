@@ -2,22 +2,28 @@
 
 namespace Capco\AppBundle\EventListener;
 
+use Capco\AppBundle\Resolver\ProposalStepVotesResolver;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use JMS\Serializer\Serializer;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class SelectionStepSerializationListener extends AbstractSerializationListener
 {
     protected $serializer;
     protected $router;
+    private $tokenStorage;
+    private $proposalStepVotesResolver;
 
-    public function __construct(Serializer $serializer, RouterInterface $router)
+    public function __construct(TokenStorageInterface $tokenStorage, ProposalStepVotesResolver $proposalStepVotesResolver, Serializer $serializer, RouterInterface $router)
     {
+        $this->tokenStorage = $tokenStorage;
+        $this->proposalStepVotesResolver = $proposalStepVotesResolver;
         $this->serializer = $serializer;
         $this->router = $router;
     }
 
-    public static function getSubscribedEvents(): array
+    public static function getSubscribedEvents()
     {
         return [
             [
@@ -32,6 +38,8 @@ class SelectionStepSerializationListener extends AbstractSerializationListener
     {
         $step = $event->getObject();
         $project = $step->getProject();
+        $token = $this->tokenStorage->getToken();
+        $user = $token ? $token->getUser() : 'anon.';
 
         if (isset($this->getIncludedGroups($event)['Steps'])) {
             $counters = [];

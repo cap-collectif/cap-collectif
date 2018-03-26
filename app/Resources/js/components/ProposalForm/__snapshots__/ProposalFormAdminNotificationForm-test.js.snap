@@ -2,7 +2,7 @@
 
 exports[`<ProposalFormAdminNotificationForm /> render correctly 1`] = `
 <div
-  className="box box-primary container"
+  className="box box-primary container-fluid"
 >
   <div
     className="box-header"

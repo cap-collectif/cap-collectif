@@ -143,7 +143,7 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
 
     public function isPhoneConfirmationRequired()
     {
-        return self::VERIFICATION_SMS === $this->verification;
+        return $this->verification === self::VERIFICATION_SMS;
     }
 
     /**

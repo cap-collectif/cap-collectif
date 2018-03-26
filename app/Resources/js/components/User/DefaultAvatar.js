@@ -36,6 +36,6 @@ DefaultAvatar.propTypes = {
 };
 
 DefaultAvatar.defaultProps = {
-  className: 'img-circle avatar',
+  className: 'img-circle avatar mr-10',
   size: 45,
 };

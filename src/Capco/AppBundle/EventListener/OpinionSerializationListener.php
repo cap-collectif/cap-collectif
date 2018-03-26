@@ -23,7 +23,7 @@ class OpinionSerializationListener extends AbstractSerializationListener
         $this->voteRepository = $voteRepository;
     }
 
-    public static function getSubscribedEvents(): array
+    public static function getSubscribedEvents()
     {
         return [
             [
@@ -41,11 +41,6 @@ class OpinionSerializationListener extends AbstractSerializationListener
 
     public function onPostOpinionVersion(ObjectEvent $event)
     {
-        // We skip if we are serializing for Elasticsearch
-        if (isset($this->getIncludedGroups($event)['Elasticsearch'])) {
-            return;
-        }
-
         $version = $event->getObject();
         $opinion = $version->getParent();
         $opinionType = $opinion->getOpinionType();
@@ -94,11 +89,6 @@ class OpinionSerializationListener extends AbstractSerializationListener
 
     public function onPostOpinion(ObjectEvent $event)
     {
-        // We skip if we are serializing for Elasticsearch
-        if (isset($this->getIncludedGroups($event)['Elasticsearch'])) {
-            return;
-        }
-
         $opinion = $event->getObject();
         $opinionType = $opinion->getOpinionType();
         $step = $opinion->getStep();

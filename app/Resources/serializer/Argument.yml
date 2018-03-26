@@ -4,23 +4,23 @@ Capco\AppBundle\Entity\Argument:
         id:
             expose: true
             type: string
-            groups: [Opinions, OpinionVersions, Elasticsearch]
+            groups: [Opinions, OpinionVersions]
         body:
             expose: true
             type: string
-            groups: [Opinions, OpinionVersions, Elasticsearch]
+            groups: [Opinions, OpinionVersions]
         type:
             expose: true
             groups: [Opinions, OpinionVersions]
         createdAt:
             expose: true
             type: DateTime
-            groups: [Opinions, OpinionVersions, Elasticsearch]
+            groups: [Opinions, OpinionVersions]
             serialized_name: createdAt
         updatedAt:
             expose: true
             type: DateTime
-            groups: [Opinions, OpinionVersions, Elasticsearch]
+            groups: [Opinions, OpinionVersions]
             serialized_name: updatedAt
         votesCount:
             expose: true
@@ -31,7 +31,7 @@ Capco\AppBundle\Entity\Argument:
             expose: true
             type: Capco\UserBundle\Entity\User
             serialized_name: author
-            groups: [Opinions, OpinionVersions, UserMedias, Elasticsearch]
+            groups: [Opinions, OpinionVersions, UserMedias]
         isTrashed:
             expose: true
             type: boolean

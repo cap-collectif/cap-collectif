@@ -43,7 +43,7 @@ class SelectionStepsController extends FOSRestController
      * @QueryParam(name="page", requirements="[0-9.]+", default="1")
      * @QueryParam(name="pagination", requirements="[0-9.]+", default="100")
      * @QueryParam(name="order", requirements="(old|last|votes|comments|random|expensive|cheap)", nullable=true)
-     * @View(statusCode=200, serializerGroups={"Proposals", "ThemeDetails", "UsersInfos", "UserMedias"})
+     * @View(statusCode=200, serializerGroups={"Proposals", "UsersInfos", "UserMedias"})
      */
     public function postProposalsBySelectionStepAction(Request $request, SelectionStep $selectionStep, ParamFetcherInterface $paramFetcher)
     {
@@ -58,26 +58,31 @@ class SelectionStepsController extends FOSRestController
         $terms = $request->request->has('terms') ? $request->request->get('terms') : null;
 
         // Filters
-        $filters = $request->request->has('filters') ? $request->request->get('filters') : [];
-        $filters['selectionStep'] = $selectionStep->getId();
+        $providedFilters = $request->request->has('filters') ? $request->request->get('filters') : [];
+
+        $providedFilters['selectionStep'] = $selectionStep->getId();
+        $providedFilters['step'] = $selectionStep->getId();
+
+        if (array_key_exists('statuses', $providedFilters)) {
+            $providedFilters['selectionStatuses'] = $providedFilters['statuses'];
+            unset($providedFilters['statuses']);
+        }
 
         $results = $this->get('capco.search.proposal_search')->searchProposals(
             $page,
             $pagination,
             $order,
             $terms,
-            $filters
+            $providedFilters
         );
 
         return $results;
     }
 
     /**
-     * TODO remove this.
-     *
      * @Post("/selection_steps/{selectionStepId}/proposals/search-in")
      * @ParamConverter("selectionStep", options={"mapping": {"selectionStepId": "id"}})
-     * @View(statusCode=200, serializerGroups={"Proposals", "ThemeDetails", "UsersInfos", "UserMedias"})
+     * @View(statusCode=200, serializerGroups={"Proposals", "UsersInfos", "UserMedias"})
      */
     public function postSelectProposalsByCollectStepAction(Request $request, SelectionStep $selectionStep): array
     {
@@ -87,12 +92,21 @@ class SelectionStepsController extends FOSRestController
             throw new HttpException(400, 'ids are not setted');
         }
 
-        $proposals = $this->get('capco.search.proposal_search')->getHydratedResults($selectedIds);
+        $results = $this->get('capco.search.proposal_search')->searchProposalsIn($selectedIds, $selectionStep->getId());
 
-        return [
-          'proposals' => $proposals,
-          'count' => count($proposals),
-        ];
+        // Reorder proposals
+        $orderedProposals = [];
+        foreach ($selectedIds as $selectedId) {
+            foreach ($results['proposals'] as $proposal) {
+                if ($selectedId === $proposal['id']) {
+                    $orderedProposals[] = $proposal;
+                }
+            }
+        }
+
+        $results['proposals'] = $orderedProposals;
+
+        return $results;
     }
 
     /**
@@ -213,6 +227,10 @@ class SelectionStepsController extends FOSRestController
         $em->persist($vote);
         $em->flush();
 
+        $this
+            ->get('fos_elastica.object_persister.app.proposal')
+            ->insertOne($proposal);
+
         return $vote;
     }
 
@@ -251,6 +269,10 @@ class SelectionStepsController extends FOSRestController
 
         $em->remove($vote);
         $em->flush();
+
+        $this
+            ->get('fos_elastica.object_persister.app.proposal')
+            ->insertOne($proposal);
 
         return $vote;
     }

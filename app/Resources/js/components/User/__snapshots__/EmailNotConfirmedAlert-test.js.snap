@@ -4,6 +4,7 @@ exports[`<EmailNotConfirmedAlert /> renders a button to resend confirmation & an
 <Alert
   bsClass="alert"
   bsStyle="warning"
+  className="mb-0"
   closeLabel="Close alert"
   id="alert-email-not-confirmed"
 >
@@ -77,6 +78,7 @@ exports[`<EmailNotConfirmedAlert /> renders a disabled button when resending 1`]
 <Alert
   bsClass="alert"
   bsStyle="warning"
+  className="mb-0"
   closeLabel="Close alert"
   id="alert-email-not-confirmed"
 >
@@ -150,6 +152,7 @@ exports[`<EmailNotConfirmedAlert /> renders a disabled button when resending is 
 <Alert
   bsClass="alert"
   bsStyle="warning"
+  className="mb-0"
   closeLabel="Close alert"
   id="alert-email-not-confirmed"
 >

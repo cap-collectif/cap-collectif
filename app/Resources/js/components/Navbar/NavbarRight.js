@@ -45,7 +45,7 @@ export const NavbarRight = React.createClass({
             eventKey={3}
             title={
               <span>
-                <UserAvatar user={user} size={34} style={{ marginRight: '10px' }} anchor={false} />
+                <UserAvatar user={user} size={34} anchor={false} />
                 <span className="hidden-xs">{user.username}</span>
               </span>
             }

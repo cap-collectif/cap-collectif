@@ -31,25 +31,28 @@ export class ProposalFollowButton extends React.Component<Props, State> {
     const buttonFollowId = proposal.viewerIsFollowing
       ? 'proposal-unfollow-btn'
       : 'proposal-follow-btn';
-    let style = 'btn';
+    let style = '';
+    let bsStyle = '';
     let buttonText = '';
     if (!proposal.viewerIsFollowing) {
       buttonText = 'follow';
-      style = 'btn';
+      bsStyle = 'default';
     }
     if (proposal.viewerIsFollowing && isHovering) {
       buttonText = 'unfollow';
-      style = 'btn btn-danger';
+      bsStyle = 'danger';
     }
     if (proposal.viewerIsFollowing && !isHovering) {
       buttonText = 'following';
-      style = 'btn fifty-shade-of-grey ';
+      style = 'btn-default_focus';
+      bsStyle = 'default';
     }
 
     return (
       <LoginOverlay>
         <Button
           className={`${style}`}
+          bsStyle={`${bsStyle}`}
           onMouseOver={() => {
             if (proposal.viewerIsFollowing) {
               this.setState({

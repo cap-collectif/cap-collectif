@@ -4,15 +4,15 @@ Capco\AppBundle\Entity\Event:
         id:
             expose: true
             type: integer
-            groups: [Events, Elasticsearch]
+            groups: [Events]
         title:
             expose: true
             type: string
-            groups: [Events, Elasticsearch]
+            groups: [Events]
         body:
             expose: true
             type: string
-            groups: [Events, Elasticsearch]
+            groups: [Events]
         zipcode:
             expose: true
             type: string
@@ -45,7 +45,7 @@ Capco\AppBundle\Entity\Event:
             expose: true
             type: Capco\UserBundle\Entity\User
             serialized_name: author
-            groups: [Events, Elasticsearch]
+            groups: [Events]
         commentsCount:
             expose: true
             type: integer
@@ -57,7 +57,7 @@ Capco\AppBundle\Entity\Event:
         createdAt:
             expose: true
             type: DateTime
-            groups: [Events, Elasticsearch]
+            groups: [Events]
             serialized_name: createdAt
         updatedAt:
             expose: true

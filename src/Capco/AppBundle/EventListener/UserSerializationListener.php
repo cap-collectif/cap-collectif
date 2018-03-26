@@ -17,7 +17,7 @@ class UserSerializationListener extends AbstractSerializationListener
         $this->manager = $manager;
     }
 
-    public static function getSubscribedEvents(): array
+    public static function getSubscribedEvents()
     {
         return [
             ['event' => 'serializer.post_serialize', 'class' => 'Capco\UserBundle\Entity\User', 'method' => 'onPostUserSerialize'],
@@ -26,11 +26,6 @@ class UserSerializationListener extends AbstractSerializationListener
 
     public function onPostUserSerialize(ObjectEvent $event)
     {
-        // We skip if we are serializing for Elasticsearch
-        if (isset($this->getIncludedGroups($event)['Elasticsearch'])) {
-            return;
-        }
-
         $user = $event->getObject();
 
         $links = [

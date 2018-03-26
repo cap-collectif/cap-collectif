@@ -3,25 +3,23 @@ import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import UserAvatar from './UserAvatar';
 import UserLink from './UserLink';
+import { CardContainer } from '../Ui/Card/CardContainer';
+import { CardUser } from '../Ui/Card/CardUser';
 
-const UserPreview = React.createClass({
-  displayName: 'UserPreview',
+type Props = {
+  user: ?Object,
+  username: ?string,
+  className: ?string,
+  style: ?Object,
+};
 
-  propTypes: {
-    user: React.PropTypes.object,
-    username: React.PropTypes.string,
-    className: React.PropTypes.string,
-    style: React.PropTypes.object,
-  },
-
-  getDefaultProps() {
-    return {
-      user: null,
-      username: null,
-      className: '',
-      style: {},
-    };
-  },
+export class UserPreview extends React.Component<Props> {
+  static defaultProps = {
+    user: null,
+    username: null,
+    className: '',
+    style: {},
+  };
 
   render() {
     const { className, style } = this.props;
@@ -37,34 +35,33 @@ const UserPreview = React.createClass({
     }
     const contributionsCount = user && user.contributionsCount ? user.contributionsCount : 0;
     const classes = {
-      media: true,
-      'media--user-thumbnail': true,
-      'media--macro__user': true,
-      box: true,
+      'pb-10': true,
       [className]: true,
     };
 
     return (
-      <div className={classNames(classes)} style={style}>
-        <UserAvatar user={user} className="pull-left" />
-        <div className="media-body">
-          <p className="media--macro__user  small">
+      <CardContainer className={classNames(classes)} style={style}>
+        <CardUser>
+          <div className="card__user__avatar">
+            <UserAvatar user={user} />
+          </div>
+          <div className="ellipsis">
             {user ? <UserLink user={user} /> : <span>{username}</span>}
-          </p>
-          <span className="excerpt">
-            {contributionsCount === false ? null : (
-              <div>
-                <FormattedMessage
-                  id="global.counters.contributions"
-                  values={{ num: contributionsCount }}
-                />
-              </div>
-            )}
-          </span>
-        </div>
-      </div>
+            <p className="excerpt small">
+              {contributionsCount === false ? null : (
+                <span>
+                  <FormattedMessage
+                    id="global.counters.contributions"
+                    values={{ num: contributionsCount }}
+                  />
+                </span>
+              )}
+            </p>
+          </div>
+        </CardUser>
+      </CardContainer>
     );
-  },
-});
+  }
+}
 
 export default UserPreview;
