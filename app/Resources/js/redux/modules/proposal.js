@@ -9,6 +9,7 @@ import { CREATE_COMMENT_SUCCESS } from '../../constants/CommentConstants';
 import { PROPOSAL_PAGINATION, PROPOSAL_ORDER_RANDOM } from '../../constants/ProposalConstants';
 import type { Exact, State as GlobalState, Dispatch, Uuid, Action } from '../../types';
 
+
 type Status = { name: string, id: number, color: string };
 type ChangeFilterAction = {
   type: 'proposal/CHANGE_FILTER',

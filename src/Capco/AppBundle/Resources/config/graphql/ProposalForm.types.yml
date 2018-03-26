@@ -22,19 +22,6 @@ ProposalForm:
                 args:
                   affiliations:
                     type: "[ProposalAffiliation]"
-                  after:
-                    type: "String"
-                    description: "Returns the elements in the list that come after the specified global ID."
-                  first:
-                    type: "Int"
-                    defaultValue: 10
-                    description: "Returns the first n elements from the list."
-                  before:
-                    type: "String"
-                    description: "Returns the elements in the list that come before the specified global ID."
-                  last:
-                    type: "Int"
-                    description: "Returns the last n elements from the list."
                 resolve: "@=resolver('proposal_form_proposals', [value, args, user])"
             categories:
                 type: "[ProposalCategory!]!"
@@ -99,3 +86,5 @@ ProposalForm:
             step:
                 type: "CollectStep"
                 description: "Identifies the step that use the proposal form."
+            allowAknowledge:
+                type: "Boolean!"

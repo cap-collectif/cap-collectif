@@ -57,7 +57,7 @@ class ProposalFormResolver implements ContainerAwareInterface
             if ($args->offsetExists('affiliations')) {
                 $affiliations = $args->offsetGet('affiliations');
                 if (in_array('EVALUER', $affiliations, true)) {
-                    return $repo->getProposalsByFormAndEvaluer($form, $user, $offset, $limit)->getIterator()->getArrayCopy();
+                    return $repo->getProposalsByFormAndEvaluer($form, $user)->getIterator()->getArrayCopy();
                 }
             }
             throw new UserError('Not implemented');

@@ -23,6 +23,7 @@ Capco\AppBundle\Entity\ProposalForm:
     lngMap: -1.7234738
     reference: 1
     evaluationForm: "@questionnaire4"
+    allowAknowledge: true
   proposalform2:
     id: proposalForm2
     title: Formulaire de la collecte 2
