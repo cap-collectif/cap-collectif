@@ -11,13 +11,13 @@
 {% block header_mail %}
     <tr>
         <td class="resp-full-td" valign="top" style="margin:0 20px; text-align:center;">
-            <a class="resp-punchline" href="#" style="color:#337ab7; outline:none; text-decoration:none; font-size:20px; font-family:'Open Sans', helvetica, arial, sans-serif;">
+            <a class="resp-punchline" href="#" style="color:#337ab7; outline:none; text-decoration:none; font-size:20px; font-family:'Open Sans', helvetica, arial, sans-serif; text-align:center;">
                 {{ siteName }}
             </a>
-            <h1 class="resp-punchline" style="color:#000000; outline:none; font-size:22px; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:500;">
+            <h1 class="resp-punchline" style="color:#000000; outline:none; font-size:22px; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; font-weight:500; text-align:center;">
                 {{ 'acknowledgment-of-receipt'|trans({},'CapcoAppBundle') }}
             </h1>
-            <span class="resp-punchline" style="color:#999999; outline:none; font-size:20px; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif;">
+            <span class="resp-punchline" style="color:#999999; outline:none; font-size:20px; text-decoration:none; font-family:'Open Sans', helvetica, arial, sans-serif; text-align:center;">
                 {{ proposalDate }}
             </span>
         </td>
@@ -26,7 +26,7 @@
 
 {% block core_mail %}
     <span style="color:#000;font-weight: bold">{{ 'hello-username'|trans({'{username}': username}, 'CapcoAppBundle')|raw }}</span>
-        {{ 'thank-you-for-participating-in-the-project'|trans({'{projectTitle}': projectTitle, '{projectLink}': projectLink},'CapcoAppBundle')|raw }}
+    <p style="color:#000;">{{ 'thank-you-for-participating-in-the-project'|trans({'{projectTitle}': projectTitle, '{projectLink}': projectLink},'CapcoAppBundle')|raw }}</p>
     <span style="color:#000;">
         {% if typeOfMail == 'create' %}
             {{ 'your-proposal-has-been-registered'|trans({'{proposalTitle}': proposalName,'{proposalLink}': proposalLink},'CapcoAppBundle')|raw }}
