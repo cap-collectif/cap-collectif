@@ -31,24 +31,26 @@
         #footer-mail  a {
             color: #999999 !important;
         }
+        #email-penrose-conteneur {width:600px;}
         /* Début style responsive (via media queries) */
 
-        @media only screen and (max-width:600px) {
+        @media (max-width:580px) {
             *[id=email-penrose-conteneur] {width:100% !important;}
             table[class=resp-full-table] {width:100% !important; clear:both;}
             td[class=resp-full-td] {width:100% !important; clear:both;}
             td[class=resp-full-td-center] {width:100%!important; clear:both; text-align: center !important;}
             img[class=email-penrose-img-header] {width:100% !important; max-width:340px !important;}
             hr[class=resp-hr-center] {text-align: center !important; margin-left:auto !important; margin-right:auto !important;}
+            #email-penrose-conteneur {width:300px;}
         }
     </style>
 </head>
 <body>
 <div align="center">
-    <table id="email-penrose-conteneur" width="600px" align="center" style="margin: 20px; background-color:#ffffff;" border="0" cellspacing="0" cellpadding="0">
+    <table id="email-penrose-conteneur" align="center" style="margin: 20px; background-color:#ffffff;" border="0" cellspacing="0" cellpadding="0">
         <tr>
             <td>
-                <table width="600px" id="top-mail" class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0">
+                <table width="100%" id="top-mail" class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0">
                     {% block header_mail %}
                     {% endblock %}
                     <tr style="margin-top: 20px">
@@ -61,7 +63,7 @@
             </td>
         </tr>
     </table>
-    <table id="email-penrose-conteneur" width="100%" align="center" border="0" cellspacing="0" cellpadding="0">
+    <table id="email-penrose-conteneur" align="center" border="0" cellspacing="0" cellpadding="0">
         <tr>
             <td style="margin:20px 0px;">
                 <table width="100%" id="footer-mail" class="resp-full-table" align="center" border="0" cellspacing="0" cellpadding="0">
