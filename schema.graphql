@@ -1093,6 +1093,7 @@ type ProposalForm implements Node {
 
   # Identifies the step that use the proposal form.
   step: CollectStep
+  allowAknowledge: Boolean!
 }
 
 input ProposalsConnectionFilter {
@@ -1566,6 +1567,7 @@ input UpdateProposalFormInput {
   categories: [ProposalCategoryInput!]
   districts: [DistrictInput!]
   questions: [QuestionnaireAbstractQuestionInput!]
+  allowAknowledge: Boolean
   clientMutationId: String
 }
 
