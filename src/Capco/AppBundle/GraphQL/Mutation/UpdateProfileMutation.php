@@ -15,14 +15,12 @@ class UpdateProfileMutation
     private $em;
     private $formFactory;
     private $logger;
-    private $securityContext;
 
-    public function __construct(EntityManagerInterface $em, FormFactory $formFactory, LoggerInterface $logger, $securityContext)
+    public function __construct(EntityManagerInterface $em, FormFactory $formFactory, LoggerInterface $logger)
     {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->logger = $logger;
-        $this->securityContext = $securityContext;
     }
 
     public function __invoke(Argument $input, User $user): array

@@ -14,6 +14,14 @@ const onSubmit = (values: Object) => {
   });
 };
 
+const validate = ({ username }: { username: ?string }) => {
+  const errors = {};
+  if (!username || username.length < 2) {
+    errors.username = 'registration.constraints.username.min';
+  }
+  return errors;
+};
+
 export class ChooseAUsernameForm extends React.Component<FormProps> {
   render() {
     const { handleSubmit } = this.props;
@@ -31,4 +39,4 @@ export class ChooseAUsernameForm extends React.Component<FormProps> {
   }
 }
 
-export default reduxForm({ form: formName, onSubmit })(ChooseAUsernameForm);
+export default reduxForm({ form: formName, validate, onSubmit })(ChooseAUsernameForm);

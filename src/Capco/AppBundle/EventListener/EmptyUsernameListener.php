@@ -26,19 +26,20 @@ class EmptyUsernameListener
 
         $token = $this->tokenStorage->getToken();
 
-        // Skip if none is authenticated
-        if (!$token || is_string($token->getUser())) {
+        // Skip if anonymous
+        if (!$token || 'anon.' === $token->getUser()) {
             return;
         }
 
         // Skip if user has a username
-        if ($token->getUser()->getUsername()) {
+        if (null !== $token->getUser()->getUsername()) {
             return;
         }
 
         $request = $event->getRequest();
         $route = $request->get('_route');
 
+        // Skip if route is allowed
         $routes = array_merge(ShieldListener::AVAILABLE_ROUTES, ['overblog_graphql_endpoint']);
         if (in_array($route, $routes, true)) {
             return;

@@ -1,20 +1,23 @@
 // @flow
 import * as React from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
-import { submit } from 'redux-form';
-import type { Dispatch } from '../../../types';
-import CloseButton from '../../Form/CloseButton';
+import { submit, isSubmitting, isInvalid, isPristine } from 'redux-form';
+import type { Dispatch, GlobalState } from '../../../types';
 import ChooseAUsernameForm, { formName } from './ChooseAUsernameForm';
+import SubmitButton from '../../Form/SubmitButton';
 
 type Props = {
   dispatch: Dispatch,
+  invalid: boolean,
+  submitting: boolean,
+  pristine: boolean,
 };
 
 export class ChooseAUsernameModal extends React.Component<Props> {
   render() {
-    const { dispatch } = this.props;
+    const { dispatch, pristine, invalid, submitting } = this.props;
     return (
       <Modal
         animation={false}
@@ -31,22 +34,25 @@ export class ChooseAUsernameModal extends React.Component<Props> {
           <ChooseAUsernameForm />
         </Modal.Body>
         <Modal.Footer>
-          <CloseButton onClose={() => {}} />
-          <Button
+          <SubmitButton
             id="confirm-username-form-submit"
-            type="submit"
-            onClick={() => {
+            isSubmitting={submitting}
+            disabled={pristine || invalid || submitting}
+            label="global.save"
+            onSubmit={() => {
               dispatch(submit(formName));
             }}
-            bsStyle="primary">
-            <FormattedMessage id="global.save" />
-          </Button>
+          />
         </Modal.Footer>
       </Modal>
     );
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = () => ({});
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
+  submitting: isSubmitting(formName)(state),
+  invalid: isInvalid(formName)(state),
+  pristine: isPristine(formName)(state),
+});
 
 export default connect(mapStateToProps)(ChooseAUsernameModal);
