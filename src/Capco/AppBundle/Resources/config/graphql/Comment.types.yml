@@ -1,0 +1,34 @@
+Comment:
+    type: object
+    config:
+        description: "A comment"
+        fields:
+            id:
+              type: "ID!"
+            body:
+              type: "String"
+            createdAt:
+              type: "DateTime!"
+            editedAt:
+              type: "DateTime"
+            isEnabled:
+              type: "Boolean!"
+            author:
+              type: "User"
+            parent:
+              type: "Comment"
+            answers:
+              type: "[Comment]"
+            authorName:
+              type: "String"
+            authorEmail:
+              type: "String"
+            authorIp:
+              type: "String"
+            reports:
+              type: "[Reporting]"
+            isTrashed:
+              type: "Boolean!"
+            trashedReason:
+              type: "String"
+

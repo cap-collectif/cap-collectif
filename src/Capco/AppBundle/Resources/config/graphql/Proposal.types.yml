@@ -99,6 +99,13 @@ Proposal:
             commentsCount:
               type: "Int!"
               description: "Count number of comments for the proposal."
+            comments:
+              type: "CommentConnection"
+              argsBuilder: "Relay::Connection"
+              args:
+                test:
+                  type: "String"
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalCommentsResolver", [value, args])'
             createdAt:
               type: "DateTime!"
               description: "Identifies the date and time when the object was created."

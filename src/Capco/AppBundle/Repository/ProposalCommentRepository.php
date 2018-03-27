@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Proposal;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
@@ -10,7 +11,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class ProposalCommentRepository extends EntityRepository
 {
-    public function getEnabledByProposal($proposal, $offset = 0, $limit = 10, $filter = 'last')
+    public function getEnabledByProposal(Proposal $proposal, $offset = 0, $limit = 10, $filter = 'last')
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('aut', 'm', 'v', 'i', 'r', 'ans')
@@ -48,7 +49,7 @@ class ProposalCommentRepository extends EntityRepository
         return new Paginator($qb);
     }
 
-    public function countCommentsAndAnswersEnabledByProposal($proposal)
+    public function countCommentsAndAnswersEnabledByProposal(Proposal $proposal): int
     {
         $qb = $this->getIsEnabledQueryBuilder()
                    ->select('count(c.id)')
@@ -57,7 +58,7 @@ class ProposalCommentRepository extends EntityRepository
                    ->setParameter('proposal', $proposal)
                 ;
 
-        return $qb->getQuery()->getSingleScalarResult();
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     protected function getIsEnabledQueryBuilder()

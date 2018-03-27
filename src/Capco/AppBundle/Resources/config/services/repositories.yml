@@ -94,6 +94,11 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Comment']
 
+  capco.proposal_comment.repository:
+    class: Capco\AppBundle\Repository\ProposalCommentRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:ProposalComment']
+
   capco.proposal.repository:
     class: Capco\AppBundle\Repository\ProposalRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
