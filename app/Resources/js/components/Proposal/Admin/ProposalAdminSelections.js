@@ -225,7 +225,7 @@ export class ProposalAdminSelections extends Component<Props> {
                 </ListGroupItem>
               ))}
             </ListGroup>
-            <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">
+            <ButtonToolbar className="box-content__toolbar">
               <Button
                 type="submit"
                 bsStyle="primary"

@@ -315,7 +315,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     if (popover) {
       return (
         <OverlayTrigger
-          placement="right"
+          placement={window.innerWidth >= 768 ? 'right' : 'top'}
           overlay={<Popover id={popover.id}>{popover.message}</Popover>}>
           {formControl}
         </OverlayTrigger>
