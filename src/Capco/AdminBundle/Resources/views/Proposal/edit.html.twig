@@ -1,8 +1,5 @@
 {% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
 
-{% block sonata_breadcrumb %}
-{% endblock %}
-
 {% block form %}
 {% include '@CapcoApp/redux_store.html.twig' with {
   'project': admin.subject.proposalForm.step.getProject(),
