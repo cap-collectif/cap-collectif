@@ -25,6 +25,8 @@ Comment:
               type: "String"
             authorIp:
               type: "String"
+            expired:
+              type: "Boolean"
             reports:
               type: "[Reporting]"
             isTrashed:
