@@ -64,6 +64,12 @@ Proposal:
                 resolve: "@=resolver('proposal_publicationStatus', [value])"
             trashedReason:
                 type: "String"
+            trashed:
+                type: "Boolean"
+            trashedAt:
+                type: "DateTime"
+            expired:
+                type: "Boolean"
             id:
                 type: "ID!"
                 description: "The id of the contribution."
