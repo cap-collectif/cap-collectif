@@ -72,11 +72,6 @@ exports[`<EvaluationsIndexPage /> renders correcty 1`] = `
   }
   query={[Function]}
   render={[Function]}
-  variables={
-    Object {
-      "count": 100,
-      "cursor": null,
-    }
-  }
+  variables={Object {}}
 />
 `;
