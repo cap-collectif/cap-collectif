@@ -31,6 +31,17 @@ Comment:
               type: "[Reporting]"
             isTrashed:
               type: "Boolean!"
+            votes:
+              type: "CommentVoteConnection"
+              argsBuilder: "Relay::Connection"
+              args:
+                first:
+                  type: "Int"
+                  defaultValue: 30
+                orderBy:
+                  type: "CommentVoteOrder"
+                  defaultValue: { field: CREATED_AT, direction: DESC }
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\CommentVotesResolver", [value, args])'
             trashedReason:
               type: "String"
 
