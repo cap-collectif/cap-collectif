@@ -27,7 +27,7 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
         $followedProposalsByUserId = [];
         try {
             $followedProposalsByUserId = $activitiesResolver->getFollowedProposalsByUserId();
-        } catch (\Exception $e) {
+        } catch (\RuntimeException $e) {
             $output->writeln(
                 '<error>' . $e->getMessage() . '</error>'
             );
@@ -41,6 +41,7 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
             $notifier->onReportActivities($activities, $sendAt, $siteName, $siteUrl);
         }
         $nbNewsletters = count($followedProposalsActivitiesByUserId);
+        $this->getContainer()->get('logger')->addInfo('Notification correctly send to ' . $nbNewsletters . ' users');
         $output->writeln(
             '<info>Notification correctly send to ' . $nbNewsletters . ' users</info>'
         );
