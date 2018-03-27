@@ -226,3 +226,15 @@ services:
         tags:
           - { name: overblog_graphql.resolver }
         arguments: ['@capco.proposal_comment.repository','@logger']
+
+    capco.resolver.proposal_selection_votes:
+        class: Capco\AppBundle\GraphQL\Resolver\ProposalSelectionVotesResolver
+        tags:
+          - { name: overblog_graphql.resolver }
+        arguments: ['@capco.proposal_selection_vote.repository', '@monolog.logger']
+
+    capco.resolver.proposal_collect_votes:
+        class: Capco\AppBundle\GraphQL\Resolver\ProposalCollectVotesResolver
+        tags:
+          - { name: overblog_graphql.resolver }
+        arguments: ['@capco.proposal_collect_vote.repository', '@monolog.logger']

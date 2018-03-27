@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Traits\AnonymousVoteRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class ProposalSelectionVoteRepository extends EntityRepository
 {
@@ -117,6 +118,35 @@ class ProposalSelectionVoteRepository extends EntityRepository
     public function getCountsByProposalGroupedByStepsTitle(Proposal $proposal): array
     {
         return $this->getCountsByProposalGroupedBySteps($proposal, true);
+    }
+
+    public function getVotesForProposal(Proposal $proposal, ?int $limit = null, ?string $field, int $offset = 0, ?string $direction = 'ASC'): Paginator
+    {
+        $query = $this->createQueryBuilder('pv')
+            ->andWhere('pv.proposal = :proposal')
+            ->setParameter('proposal', $proposal)
+        ;
+
+        if ('CREATED_AT' === $field) {
+            $query->addOrderBy('pv.createdAt', $direction);
+        }
+
+        if ($limit) {
+            $query->setMaxResults($limit);
+            $query->setFirstResult($offset);
+        }
+
+        return new Paginator($query);
+    }
+
+    public function countVotesForProposal(Proposal $proposal): int
+    {
+        return (int) $this->createQueryBuilder('pv')
+            ->select('COUNT(pv.id)')
+            ->andWhere('pv.proposal = :proposal')
+            ->setParameter('proposal', $proposal)
+            ->getQuery()->getSingleScalarResult()
+        ;
     }
 
     public function getVotesForProposalByStepId(Proposal $proposal, string $stepId, $limit = null, $offset = 0)

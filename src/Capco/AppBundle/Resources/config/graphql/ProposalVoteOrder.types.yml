@@ -1,10 +1,10 @@
-ProposalOrder:
+ProposalVoteOrder:
     type: input-object
     config:
-        description: "Ways in which lists of proposals can be ordered upon return."
+        description: "Ways in which lists of proposal votes can be ordered upon return."
         fields:
             field:
-                type: "ProposalOrderField!"
+                type: "ProposalVoteOrderField!"
                 defaultValue: "CREATED_AT"
             direction:
                 type: "OrderDirection!"

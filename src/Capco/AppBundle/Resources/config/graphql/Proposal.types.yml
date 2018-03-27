@@ -103,6 +103,28 @@ Proposal:
               type: "CommentConnection"
               argsBuilder: "Relay::Connection"
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalCommentsResolver", [value, args])'
+            selectionVotes:
+              type: "ProposalSelectionVoteConnection"
+              argsBuilder: "Relay::Connection"
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalSelectionVotesResolver", [value, args])'
+              args:
+                orderBy:
+                  type: "ProposalVoteOrder"
+                  defaultValue: { field: CREATED_AT, direction: DESC }
+                first:
+                  type: "Int"
+                  defaultValue: 30
+            collectVotes:
+              type: "ProposalCollectVoteConnection"
+              argsBuilder: "Relay::Connection"
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalCollectVotesResolver", [value, args])'
+              args:
+                orderBy:
+                  type: "ProposalVoteOrder"
+                  defaultValue: { field: CREATED_AT, direction: DESC }
+                first:
+                  type: "Int"
+                  defaultValue: 30
             createdAt:
               type: "DateTime!"
               description: "Identifies the date and time when the object was created."
