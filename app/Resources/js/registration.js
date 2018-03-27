@@ -1,4 +1,3 @@
-// @flow
 import moment from 'moment';
 import ReactOnRails from 'react-on-rails';
 import { addLocaleData } from 'react-intl';
@@ -48,7 +47,6 @@ import ShieldApp from './startup/ShieldApp';
 import GroupAdminPageApp from './startup/GroupAdminPageApp';
 import GroupCreateButtonApp from './startup/GroupCreateButtonApp';
 import EvaluationsIndexPageApp from './startup/EvaluationsIndexPageApp';
-import ChooseAUsernameApp from './startup/ChooseAUsernameApp';
 
 import appStore from '../js/stores/AppStore';
 
@@ -74,7 +72,6 @@ ReactOnRails.register({
   AccountProfileNotificationsApp,
   AdminModalsApp,
   RegistrationAdminApp,
-  ChooseAUsernameApp,
   ShieldApp,
   ProjectListPageApp,
   ProposalFormCreateButtonApp,

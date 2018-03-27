@@ -19,7 +19,7 @@ User:
             displayName:
                 type: "String!"
             username:
-                type: "String"
+                type: "String!"
                 description: "Username of the user."
             show_url:
                 type: "URI"

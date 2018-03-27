@@ -208,7 +208,6 @@ httplug:
     clients:
         default:
             factory: 'httplug.factory.curl'
-            http_methods_client: true
         hwi:
             factory: 'httplug.factory.guzzle6'
             config:

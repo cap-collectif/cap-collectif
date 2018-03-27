@@ -1,7 +1,0 @@
-UpdateProfileInput:
-    type: relay-mutation-input
-    config:
-        description: "Update your profile"
-        fields:
-            username:
-                type: "String"

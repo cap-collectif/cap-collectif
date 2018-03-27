@@ -29,7 +29,7 @@ class OpenAmClient
         $json = json_decode((string) $response->getBody(), true);
 
         if (false === $json['valid']) {
-            throw new \RuntimeException('Token not valid.');
+            throw new \Exception('Token not valid.');
         }
 
         return $json['uid'];

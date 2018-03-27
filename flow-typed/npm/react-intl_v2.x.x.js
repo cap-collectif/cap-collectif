@@ -230,13 +230,3 @@ declare module "react-intl" {
   > {}
   declare type IntlShape = $npm$ReactIntl$IntlShape;
 }
-
-declare module 'react-intl/locale-data/fr' {
-  declare module.exports: any;
-}
-declare module 'react-intl/locale-data/en' {
-  declare module.exports: any;
-}
-declare module 'react-intl/locale-data/es' {
-  declare module.exports: any;
-}

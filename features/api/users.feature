@@ -37,9 +37,9 @@ Scenario: API client wants to know the number of citoyens who registered since 2
   """
 
 @parallel-scenario
-Scenario: API client wants to know the number of citoyens who have email aurelien@cap-collectif.com
+Scenario: API client wants to know the number of citoyens who have email adavid@jolicode.com
   Given I am logged in to api as admin
-  When I send a GET request to "/api/users?email=aurelien@cap-collectif.com"
+  When I send a GET request to "/api/users?email=adavid@jolicode.com"
   Then the JSON response should match:
   """
   {

@@ -27,7 +27,7 @@ class MonCompteParisUserProvider implements UserProviderInterface
 
             $user = $this->userManager->createUser();
             $user->setParisId($id);
-            $user->setUsername(null);
+            $user->setUsername($infos['username']);
             $user->setEmail($infos['mail']);
             $user->setPlainPassword('No password is stored locally.');
             $user->setEnabled(true);

@@ -199,7 +199,6 @@ trait ProposalStepsTrait
     public function iGoToACommentNotifiableProposal()
     {
         $this->visitPageWithParams('proposal page', self::$proposalCommentNotifiable);
-        $this->getSession()->wait(5000, "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1");
     }
 
     /**

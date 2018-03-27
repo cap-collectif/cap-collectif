@@ -111,7 +111,7 @@ Capco\UserBundle\Entity\User:
         username: spyl
         firstname: Aurélien
         lastname: David
-        email: aurelien@cap-collectif.com
+        email: adavid@jolicode.com
         enabled: true
         userType: '@UserType1'
         plainPassword: toto
@@ -356,8 +356,8 @@ Capco\UserBundle\Entity\User:
         vip: true
         confirmationToken: ~
 
-    user517:
-         id: 'user517'
+    user6:
+         id: 'user6'
          username: sanzo
          firstname: Pierre
          lastname: Bellenger
@@ -375,12 +375,3 @@ Capco\UserBundle\Entity\User:
          phone: '+3300000000'
          confirmationToken: ~
          phoneConfirmed: true
-    user518:
-     id: 'user518'
-     username: null
-     email: no_name@cap-collectif.com
-     enabled: true
-     userType: '@UserType1'
-     plainPassword: no_name
-     roles:
-      - 'ROLE_USER'
