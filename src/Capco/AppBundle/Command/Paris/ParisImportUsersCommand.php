@@ -184,8 +184,8 @@ class ParisImportUsersCommand extends ContainerAwareCommand
 
                 return $type->getName() === self::PROFILES_TYPES[$userRow['user_type']];
             })->first();
-            $firstName = ('' === $userRow['firstname'] || !$userRow['firstname']) ? $this->faker->firstName : $userRow['firstname'];
-            $lastName = ('' === $userRow['lastname'] || !$userRow['lastname']) ? $this->faker->lastName : $userRow['lastname'];
+            $firstName = ('' === $userRow['firstname'] || !$userRow['firstname']) ? null : $userRow['firstname'];
+            $lastName = ('' === $userRow['lastname'] || !$userRow['lastname']) ? null : $userRow['lastname'];
             $email = '' === $userRow['email'] ? $userRow['email_init'] : $userRow['email'];
             $address = '' === $userRow['address'] ? null : $userRow['address'];
             $zipCode = '' === $userRow['zipcode'] ? null : (int) $userRow['zipcode'];
