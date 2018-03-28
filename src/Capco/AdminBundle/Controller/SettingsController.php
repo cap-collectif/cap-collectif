@@ -17,6 +17,9 @@ class SettingsController extends Controller
      */
     public function registrationAction(Request $request)
     {
+        $em = $this->get('doctrine')->getManager();
+        $form = $em->getRepository('CapcoAppBundle:RegistrationForm')->findCurrent();
+
         $adminPool = $this->get('sonata.admin.pool');
 
         return [
@@ -52,6 +55,7 @@ class SettingsController extends Controller
         ], ['position' => 'ASC']);
 
         $featuresCategoryResolver = $this->get('capco.admin.features_category_resolver');
+
         $toggles = $featuresCategoryResolver->getTogglesByCategory($category);
         $group = $featuresCategoryResolver->getGroupNameForCategory($category);
 

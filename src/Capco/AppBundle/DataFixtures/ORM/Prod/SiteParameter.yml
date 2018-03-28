@@ -458,20 +458,3 @@ Capco\AppBundle\Entity\SiteParameter:
         value: ''
         position: 442
         type: 3
-
-    SiteParameterCharterContent:
-        keyname: charter.body
-        category: pages.charter
-        value: |
-               Retrouvez sur cette page la possibilité de pouvoir afficher la charte du site.
-               <h2>Charte</h2>
-               <p><text(1000)></p>
-               <p><text(350)></p>
-               <h3>En tant que membre de Cap-Collectif</h3>
-               <p><text(350)></p>
-               <p><text(550)></p>
-               <h2>En conséquence, je m’engage :</h2>
-               <h3>En conséquence, je m’engage :</h3>
-               <p><text(350)></p>
-        position: 1
-        type: 1

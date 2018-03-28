@@ -430,7 +430,7 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
                 </span>
               }
             />
-            <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">
+            <ButtonToolbar className="box-content__toolbar">
               <Button
                 type="submit"
                 id="proposal_admin_content_save"

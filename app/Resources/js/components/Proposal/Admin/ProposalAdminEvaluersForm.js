@@ -82,7 +82,7 @@ export class ProposalAdminEvaluersForm extends React.Component<Props> {
                 }))
               }
             />
-            <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">
+            <ButtonToolbar className="box-content__toolbar">
               <Button
                 disabled={invalid || pristine || submitting}
                 id="proposal-evaluation-analysts-groupes-save"
