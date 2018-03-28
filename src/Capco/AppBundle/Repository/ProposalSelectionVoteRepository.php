@@ -120,7 +120,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
         return $this->getCountsByProposalGroupedBySteps($proposal, true);
     }
 
-    public function getVotesForProposal(Proposal $proposal, ?int $limit = null, ?string $field, int $offset = 0, ?string $direction = 'ASC'): Paginator
+    public function getVotesForProposal(Proposal $proposal, ?int $limit = null, string $field, int $offset = 0, string $direction = 'ASC'): Paginator
     {
         $query = $this->createQueryBuilder('pv')
             ->andWhere('pv.proposal = :proposal')
