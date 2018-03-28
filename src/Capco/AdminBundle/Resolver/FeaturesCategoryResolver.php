@@ -56,6 +56,10 @@ class FeaturesCategoryResolver
             'conditions' => [],
             'features' => [],
         ],
+        'pages.charter' => [
+            'conditions' => [],
+            'features' => [],
+        ],
         'pages.shield' => [
             'conditions' => [],
             'features' => ['shield_mode'],

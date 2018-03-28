@@ -64,7 +64,7 @@ export class ProposalAdminNewsForm extends Component<Props, State> {
           ) : (
             <FormattedMessage id="proposal.admin.news.empty" />
           )}
-          <ButtonToolbar className="box-content__toolbar">
+          <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">
             <Button bsStyle="primary" href={`${baseUrl}/admin/capco/app/post/create`}>
               <FormattedMessage id="global.add" />
             </Button>
