@@ -9,11 +9,6 @@
 {% if items | length > 0 %}
     {% for item in items %}
         {% set label = 'admin.label.' ~ item %}
-        <li {% if category is defined and category == item %} class="active"{% endif %} >
-            <a href="{{ path('capco_admin_settings', {'category': item }) }}">
-                <i class="fa fa-angle-double-right"></i>
-                {{ label |trans({}, 'CapcoAppBundle') }}
-            </a>
-        </li>
+        <li {% if category is defined and category == item %} class="active"{% endif %} ><a href="{{ path('capco_admin_settings', {'category': item }) }}"><i class="fa fa-angle-double-right"></i> {{ label |trans({}, 'CapcoAppBundle') }}</a></li>
     {% endfor %}
 {% endif %}

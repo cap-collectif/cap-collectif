@@ -244,11 +244,10 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
               </div>
 
               {evaluationForm && (
-                <div>
-                  <h3>
+                <div className="box-header">
+                  <h3 className="box-title">
                     <FormattedMessage id="proposal.admin.personalize" />
                   </h3>
-                  <hr />
                 </div>
               )}
               <FieldArray
@@ -258,7 +257,7 @@ export class ProposalAdminNotationForm extends React.Component<Props> {
                 responses={this.props.responses}
                 intl={this.props.intl}
               />
-              <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">
+              <ButtonToolbar className="box-content__toolbar">
                 <Button
                   id="proposal-evaluation-custom-save"
                   disabled={invalid || pristine || submitting}

@@ -102,11 +102,6 @@ exports[`<ProposalAdminNewsForm /> render correctly 1`] = `
     <ButtonToolbar
       bsClass="btn-toolbar"
       className="box-content__toolbar"
-      style={
-        Object {
-          "marginBottom": 10,
-        }
-      }
     >
       <Button
         active={false}
@@ -167,11 +162,6 @@ exports[`<ProposalAdminNewsForm /> render correctly when there are no news 1`] =
     <ButtonToolbar
       bsClass="btn-toolbar"
       className="box-content__toolbar"
-      style={
-        Object {
-          "marginBottom": 10,
-        }
-      }
     >
       <Button
         active={false}
