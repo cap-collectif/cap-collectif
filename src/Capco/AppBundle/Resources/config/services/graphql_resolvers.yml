@@ -250,3 +250,9 @@ services:
         tags:
           - { name: overblog_graphql.resolver }
         arguments: ['@capco.comment_vote.repository', '@monolog.logger']
+
+    capco.resolver.proposal_news:
+        class: Capco\AppBundle\GraphQL\Resolver\ProposalNewsResolver
+        tags:
+          - { name: overblog_graphql.resolver }
+        arguments: ['@capco.blog.post.repository', '@monolog.logger']

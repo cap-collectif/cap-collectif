@@ -21,8 +21,16 @@ Proposal:
               type: "Boolean!"
               resolve: "@=resolver('proposal_viewer_is_evaluer', [value, user])"
             news:
-              type: "[Post!]!"
-              resolve: "@=resolver('proposal_news', [value])"
+              type: "NewsConnection"
+              argsBuilder: "Relay::Connection"
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalNewsResolver", [value, args])'
+              args:
+                  first:
+                      type: "Int"
+                      defaultValue: 30
+                  orderBy:
+                      type: "ProposalNewsOrder"
+                      defaultValue: { field: CREATED_AT, direction: DESC }
             project:
               type: "Project!"
             status:
