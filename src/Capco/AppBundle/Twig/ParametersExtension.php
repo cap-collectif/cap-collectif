@@ -62,7 +62,7 @@ class ParametersExtension extends \Twig_Extension
             $exposedParameters[$key] = $value && strlen($value) > 0 ? $value : null;
         }
         $exposedParameters['signin.cgu.name'] = $this->translator->trans('the-charter', [], 'CapcoAppBundle');
-        $exposedParameters['signin.cgu.link'] = $this->router->generate('app_page_charter', ['slug' => $slug]);
+        $exposedParameters['signin.cgu.link'] = $this->router->generate('app_page_show', ['slug' => $slug]);
 
         return $exposedParameters;
     }
