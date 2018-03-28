@@ -19,12 +19,12 @@ class ProgessStepType extends AbstractType
             ])
             ->add('startAt', DateTimeType::class, [
               'widget' => 'single_text',
-              'format' => 'Y-MM-d H:i:s',
+              'format' => 'Y-MM-dd HH:mm:ss',
               // 'required' => true
             ])
             ->add('endAt', DateTimeType::class, [
               'widget' => 'single_text',
-              'format' => 'Y-MM-d H:i:s',
+              'format' => 'Y-MM-dd HH:mm:ss',
               // 'required' => false
             ])
         ;
