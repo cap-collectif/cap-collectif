@@ -149,6 +149,32 @@ class ProposalSelectionVoteRepository extends EntityRepository
         ;
     }
 
+    public function getByProposalAndStep(Proposal $proposal, SelectionStep $step, int $litmit, int $offset): Paginator
+    {
+        $qb = $this->createQueryBuilder('pv')
+            ->andWhere('pv.selectionStep = :step')
+            ->andWhere('pv.proposal = :proposal')
+            ->setParameter('step', $step)
+            ->setParameter('proposal', $proposal);
+
+        $qb->setMaxResults($litmit)
+            ->setFirstResult($offset);
+
+        return new Paginator($qb);
+    }
+
+    public function countVotesByProposalAndStep(Proposal $proposal, SelectionStep $step): int
+    {
+        return (int) $this->createQueryBuilder('pv')
+            ->select('COUNT(pv)')
+            ->andWhere('pv.selectionStep = :step')
+            ->andWhere('pv.proposal = :proposal')
+            ->setParameter('proposal', $proposal)
+            ->setParameter('step', $step)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     public function getVotesForProposalByStepId(Proposal $proposal, string $stepId, $limit = null, $offset = 0)
     {
         $qb = $this->createQueryBuilder('pv')

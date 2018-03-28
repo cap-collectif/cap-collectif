@@ -117,28 +117,16 @@ Proposal:
               type: "CommentConnection"
               argsBuilder: "Relay::Connection"
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalCommentsResolver", [value, args])'
-            selectionVotes:
-              type: "ProposalSelectionVoteConnection"
+            votes:
+              type: "ProposalVoteConnection"
               argsBuilder: "Relay::Connection"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalSelectionVotesResolver", [value, args])'
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalVotesResolver", [value, args])'
               args:
-                orderBy:
-                  type: "ProposalVoteOrder"
-                  defaultValue: { field: CREATED_AT, direction: DESC }
                 first:
                   type: "Int"
                   defaultValue: 30
-            collectVotes:
-              type: "ProposalCollectVoteConnection"
-              argsBuilder: "Relay::Connection"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalCollectVotesResolver", [value, args])'
-              args:
-                orderBy:
-                  type: "ProposalVoteOrder"
-                  defaultValue: { field: CREATED_AT, direction: DESC }
-                first:
-                  type: "Int"
-                  defaultValue: 30
+                step:
+                  type: "ID!"
             createdAt:
               type: "DateTime!"
               description: "Identifies the date and time when the object was created."
@@ -208,3 +196,8 @@ Proposal:
             viewerCanSeeEvaluation:
                 type: "Boolean!"
                 resolve: "@=resolver('proposal_viewer_can_see_evaluation', [value, user])"
+
+#status : en paramètre, la step
+# addressText : faire un resolver et json decode address de proposal
+# voir si y a un type html pour strip les tags
+# créé un field formattedValue sur les Value Response pour gérer tout les cas

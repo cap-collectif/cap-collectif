@@ -1,4 +1,4 @@
-ProposalSelectionVoteConnection:
+ProposalVoteConnection:
     type: relay-connection
     config:
         nodeType: PropositionVote!
