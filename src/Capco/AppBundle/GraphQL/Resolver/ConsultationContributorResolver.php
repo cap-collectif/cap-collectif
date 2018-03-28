@@ -3,8 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\Repository\UserRepository;
+use Capco\AppBundle\Search\UserSearch;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
@@ -12,32 +11,34 @@ use Psr\Log\LoggerInterface;
 
 class ConsultationContributorResolver
 {
-    private $userRepository;
+    private $userSearch;
     private $logger;
 
-    public function __construct(UserRepository $userRepository, LoggerInterface $logger)
+    public function __construct(UserSearch $userSearch, LoggerInterface $logger)
     {
-        $this->userRepository = $userRepository;
+        $this->userSearch = $userSearch;
         $this->logger = $logger;
     }
 
     public function __invoke(ConsultationStep $consultation, Arg $args): Connection
     {
-        $paginator = new Paginator(function ($offset, $limit) use ($consultation) {
+        $totalCount = 0;
+        $paginator = new Paginator(function ($offset, $limit) use (&$totalCount, $consultation) {
             try {
-                $contributorsId = $this->userRepository->getRegisteredContributorByConsultation($consultation, $offset, $limit);
+                $value = $this->userSearch->getContributorByStep($consultation, $offset, $limit);
+                $contributors = $value['results'];
+                $totalCount = $value['totalCount'];
+
+                return $contributors;
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
                 throw new \RuntimeException('Find contributors failed.');
             }
-
-            return array_values(array_filter(array_map(function (array $criteria) {
-                return $this->userRepository->findOneBy($criteria);
-            }, $contributorsId), function (?User $user) {return null !== $user; }));
         });
 
-        $totalCount = $this->userRepository->countContributorByConsultation($consultation);
+        $connection = $paginator->auto($args, $totalCount);
+        $connection->totalCount = $totalCount;
 
-        return $paginator->auto($args, $totalCount);
+        return $connection;
     }
 }

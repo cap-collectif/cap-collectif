@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\EventListener;
 
+use Capco\AppBundle\GraphQL\Resolver\UserContributionByProjectResolver;
 use Capco\AppBundle\Toggle\Manager;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Symfony\Component\Routing\RouterInterface;
@@ -10,11 +11,17 @@ class UserSerializationListener extends AbstractSerializationListener
 {
     private $router;
     private $manager;
+    private $contributionProjectResolver;
+    private $contributionStepResolver;
+    private $projectRepository;
 
-    public function __construct(RouterInterface $router, Manager $manager)
+    public function __construct(RouterInterface $router, Manager $manager, UserContributionByProjectResolver $contributionProjectResolver, $contributionStepResolver, $projectRepository)
     {
         $this->router = $router;
         $this->manager = $manager;
+        $this->contributionProjectResolver = $contributionProjectResolver;
+        $this->contributionStepResolver = $contributionStepResolver;
+        $this->projectRepository = $projectRepository;
     }
 
     public static function getSubscribedEvents(): array
@@ -26,12 +33,29 @@ class UserSerializationListener extends AbstractSerializationListener
 
     public function onPostUserSerialize(ObjectEvent $event)
     {
+        $user = $event->getObject();
+
         // We skip if we are serializing for Elasticsearch
         if (isset($this->getIncludedGroups($event)['Elasticsearch'])) {
+            $contributionsCountByProject = [];
+            $contributionsCountByStep = [];
+            foreach ($this->projectRepository->findAll() as $project) {
+                $contributionsCountByProject[] = [
+                'project' => ['id' => $project->getId()],
+                'count' => $this->contributionProjectResolver->__invoke($user, $project, ['first' => 1])->totalCount,
+              ];
+                foreach ($project->getRealSteps() as $step) {
+                    $contributionsCountByStep[] = [
+                  'step' => ['id' => $step->getId()],
+                  'count' => $this->contributionStepResolver->__invoke($user, $step, ['first' => 1])->totalCount,
+                ];
+                }
+            }
+            $event->getVisitor()->addData('contributionsCountByProject', $contributionsCountByProject);
+            $event->getVisitor()->addData('contributionsCountByStep', $contributionsCountByStep);
+
             return;
         }
-
-        $user = $event->getObject();
 
         $links = [
             'settings' => $this->router->generate('capco_profile_edit', [], true),

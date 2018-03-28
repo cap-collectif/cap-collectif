@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Repository;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
@@ -237,6 +238,34 @@ class OpinionRepository extends EntityRepository
             ->orderBy('o.trashedAt', 'DESC');
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function countByAuthorAndProject(User $user, Project $project): int
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+          ->select('count(DISTINCT o)')
+          ->leftJoin('o.step', 'step')
+          ->leftJoin('step.projectAbstractStep', 'pas')
+          ->andWhere('pas.project = :project')
+          ->andWhere('o.Author = :author')
+          ->setParameter('author', $user)
+          ->setParameter('project', $project)
+          ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function countByAuthorAndStep(User $user, ConsultationStep $step): int
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+          ->select('count(DISTINCT o)')
+          ->andWhere('o.step = :step')
+          ->andWhere('o.Author = :author')
+          ->setParameter('author', $user)
+          ->setParameter('step', $step)
+      ;
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
     /**
