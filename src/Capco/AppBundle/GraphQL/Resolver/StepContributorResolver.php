@@ -2,14 +2,14 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
-use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Search\UserSearch;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
-class ConsultationContributorResolver
+class StepContributorResolver
 {
     private $userSearch;
     private $logger;
@@ -20,12 +20,12 @@ class ConsultationContributorResolver
         $this->logger = $logger;
     }
 
-    public function __invoke(ConsultationStep $consultation, Arg $args): Connection
+    public function __invoke(AbstractStep $step, Arg $args): Connection
     {
         $totalCount = 0;
-        $paginator = new Paginator(function ($offset, $limit) use (&$totalCount, $consultation) {
+        $paginator = new Paginator(function ($offset, $limit) use (&$totalCount, $step) {
             try {
-                $value = $this->userSearch->getContributorByStep($consultation, $offset, $limit);
+                $value = $this->userSearch->getContributorByStep($step, $offset, $limit);
                 $contributors = $value['results'];
                 $totalCount = $value['totalCount'];
 

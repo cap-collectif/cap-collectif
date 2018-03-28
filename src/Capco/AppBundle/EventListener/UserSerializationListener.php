@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\GraphQL\Resolver\UserContributionByProjectResolver;
+use Capco\AppBundle\GraphQL\Resolver\UserContributionByStepResolver;
 use Capco\AppBundle\Toggle\Manager;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Symfony\Component\Routing\RouterInterface;
@@ -15,7 +16,7 @@ class UserSerializationListener extends AbstractSerializationListener
     private $contributionStepResolver;
     private $projectRepository;
 
-    public function __construct(RouterInterface $router, Manager $manager, UserContributionByProjectResolver $contributionProjectResolver, $contributionStepResolver, $projectRepository)
+    public function __construct(RouterInterface $router, Manager $manager, UserContributionByProjectResolver $contributionProjectResolver, UserContributionByStepResolver $contributionStepResolver, $projectRepository)
     {
         $this->router = $router;
         $this->manager = $manager;
@@ -40,16 +41,17 @@ class UserSerializationListener extends AbstractSerializationListener
             $contributionsCountByProject = [];
             $contributionsCountByStep = [];
             foreach ($this->projectRepository->findAll() as $project) {
+                $count = $this->contributionProjectResolver->__invoke($user, $project, ['first' => 1])->totalCount;
                 $contributionsCountByProject[] = [
-                'project' => ['id' => $project->getId()],
-                'count' => $this->contributionProjectResolver->__invoke($user, $project, ['first' => 1])->totalCount,
-              ];
-                foreach ($project->getRealSteps() as $step) {
-                    $contributionsCountByStep[] = [
-                  'step' => ['id' => $step->getId()],
-                  'count' => $this->contributionStepResolver->__invoke($user, $step, ['first' => 1])->totalCount,
+                  'project' => ['id' => $project->getId()],
+                  'count' => $count,
                 ];
-                }
+                // foreach ($project->getRealSteps() as $step) {
+                //     $contributionsCountByStep[] = [
+                //   'step' => ['id' => $step->getId()],
+                //   'count' => $count === 0 ? 0 : $this->contributionStepResolver->__invoke($user, $step, ['first' => 1])->totalCount,
+                // ];
+                // }
             }
             $event->getVisitor()->addData('contributionsCountByProject', $contributionsCountByProject);
             $event->getVisitor()->addData('contributionsCountByStep', $contributionsCountByStep);

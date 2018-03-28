@@ -28,8 +28,8 @@ services:
         tags:
             - { name: overblog_graphql.resolver }
 
-    Capco\AppBundle\GraphQL\Resolver\ConsultationContributorResolver:
-        class: Capco\AppBundle\GraphQL\Resolver\ConsultationContributorResolver
+    Capco\AppBundle\GraphQL\Resolver\StepContributorResolver:
+        class: Capco\AppBundle\GraphQL\Resolver\StepContributorResolver
         arguments:
             - "@capco.search.user_search"
             - "@logger"

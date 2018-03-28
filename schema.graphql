@@ -227,6 +227,9 @@ type CollectStep implements Node & Step {
   statuses: [Status!]!
   voteThreshold: Int
   project: Project!
+
+  # A list of contributor associated with the consultation.
+  contributors(after: String, first: Int, before: String, last: Int): UserConnection!
 }
 
 # A consultation
@@ -1278,6 +1281,9 @@ type QuestionnaireStep implements Step {
   id: ID!
   kind: String!
   title: String!
+
+  # A list of contributor associated with the consultation.
+  contributors(after: String, first: Int, before: String, last: Int): UserConnection!
 }
 
 type RankingStep implements Step {
@@ -1426,6 +1432,9 @@ type SelectionStep implements Step {
   # Only one selection step inside a project can have realisation steps, true if this one
   allowingProgressSteps: Boolean!
   voteThreshold: Int
+
+  # A list of contributor associated with the consultation.
+  contributors(after: String, first: Int, before: String, last: Int): UserConnection!
 }
 
 input SetEvaluationFormInProposalFormInput {

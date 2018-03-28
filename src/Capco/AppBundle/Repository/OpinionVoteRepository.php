@@ -15,12 +15,12 @@ class OpinionVoteRepository extends EntityRepository
         $qb = $this->getQueryBuilder()
           ->select('COUNT (DISTINCT v)')
           ->leftJoin('v.opinion', 'o')
-          ->leftJoin('o.step', 'step')
-          ->leftJoin('step.projectAbstractStep', 'pas')
-          ->andWhere('pas.project = :project')
+          ->andWhere('o.step IN (:steps)')
           ->andWhere('o.isEnabled = 1')
           ->andWhere('v.user = :author')
-          ->setParameter('project', $project)
+          ->setParameter('steps', array_map(function ($step) {
+              return $step;
+          }, $project->getRealSteps()))
           ->setParameter('author', $author)
         ;
 

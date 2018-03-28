@@ -35,7 +35,7 @@ Consultation:
                 type: "UserConnection!"
                 description: "A list of contributor associated with the consultation."
                 argsBuilder: "Relay::Connection"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationContributorResolver", [value, args])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\StepContributorResolver", [value, args])'
             contributionConnection:
                 type: "ContributionConnection"
                 args:
