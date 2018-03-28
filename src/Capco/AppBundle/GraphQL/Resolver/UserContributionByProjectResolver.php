@@ -22,17 +22,25 @@ class UserContributionByProjectResolver
         $paginator = new Paginator(function ($offset, $limit) {
             return [];
         });
-
         $totalCount = 0;
+
+        // Contributions
         $totalCount += $this->container->get('capco.opinion.repository')->countByAuthorAndProject($user, $project);
         $totalCount += $this->container->get('capco.opinion_version.repository')->countByAuthorAndProject($user, $project);
         $totalCount += $this->container->get('capco.argument.repository')->countByAuthorAndProject($user, $project);
         $totalCount += $this->container->get('capco.source.repository')->countByAuthorAndProject($user, $project);
+        $totalCount += $this->container->get('capco.proposal.repository')->countByAuthorAndProject($user, $project);
+        $totalCount += $this->container->get('capco.reply.repository')->countByAuthorAndProject($user, $project);
 
-        // $totalCount += $this->container->get('capco.opinion_vote.repository')->countByAuthorAndProject($user, $project);
-        // $totalCount += $this->container->get('capco.argument_vote.repository')->countByAuthorAndProject($user, $project);
-        // $totalCount += $this->container->get('capco.source_vote.repository')->countByAuthorAndProject($user, $project);
-        // $totalCount += $this->container->get('capco.opinion_version_vote.repository')->countByAuthorAndProject($user, $project);
+        // Votes
+        $totalCount += $this->container->get('capco.opinion_vote.repository')->countByAuthorAndProject($user, $project);
+        $totalCount += $this->container->get('capco.argument_vote.repository')->countByAuthorAndProject($user, $project);
+        $totalCount += $this->container->get('capco.source_vote.repository')->countByAuthorAndProject($user, $project);
+        $totalCount += $this->container->get('capco.opinion_version_vote.repository')->countByAuthorAndProject($user, $project);
+        $totalCount += $this->container->get('capco.proposal_collect_vote.repository')->countByAuthorAndProject($user, $project);
+        $totalCount += $this->container->get('capco.proposal_selection_vote.repository')->countByAuthorAndProject($user, $project);
+
+        // Commentaires ?
 
         return $paginator->auto($args, $totalCount);
     }

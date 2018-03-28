@@ -2,18 +2,50 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Traits\AnonymousVoteRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
-/**
- * ProposalSelectionVoteRepository.
- */
 class ProposalSelectionVoteRepository extends EntityRepository
 {
     use AnonymousVoteRepositoryTrait;
+
+    public function countByAuthorAndProject(User $author, Project $project): int
+    {
+        return $this->createQueryBuilder('pv')
+        ->select('COUNT(DISTINCT pv)')
+        ->leftJoin('pv.selectionStep', 'step')
+        ->leftJoin('step.projectAbstractStep', 'pas')
+        ->andWhere('pas.project = :project')
+        ->andWhere('pv.user = :author')
+        ->andWhere('pv.expired = false')
+        ->leftJoin('pv.proposal', 'proposal')
+        ->andWhere('proposal.deletedAt IS NULL')
+        ->setParameter('author', $author)
+        ->setParameter('project', $project)
+        ->getQuery()
+        ->getSingleScalarResult()
+      ;
+    }
+
+    public function countByAuthorAndStep(User $author, SelectionStep $step): int
+    {
+        return $this->createQueryBuilder('pv')
+        ->select('COUNT(DISTINCT pv)')
+        ->andWhere('pv.selectionStep = :step')
+        ->andWhere('pv.user = :author')
+        ->andWhere('pv.expired = false')
+        ->leftJoin('pv.proposal', 'proposal')
+        ->andWhere('proposal.deletedAt IS NULL')
+        ->setParameter('author', $author)
+        ->setParameter('step', $step)
+        ->getQuery()
+        ->getSingleScalarResult()
+      ;
+    }
 
     public function getVotesByStepAndUser(SelectionStep $step, User $user)
     {

@@ -2,14 +2,12 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
-/**
- * ProposalCollectVoteRepository.
- */
 class ProposalCollectVoteRepository extends EntityRepository
 {
     public function getAnonymousCount(): int
@@ -24,13 +22,47 @@ class ProposalCollectVoteRepository extends EntityRepository
         ;
     }
 
+    public function countByAuthorAndProject(User $author, Project $project): int
+    {
+        return $this->createQueryBuilder('pv')
+        ->select('COUNT(DISTINCT pv)')
+        ->leftJoin('pv.collectStep', 'step')
+        ->leftJoin('step.projectAbstractStep', 'pas')
+        ->andWhere('pas.project = :project')
+        ->andWhere('pv.user = :author')
+        ->andWhere('pv.expired = false')
+        ->leftJoin('pv.proposal', 'proposal')
+        ->andWhere('proposal.deletedAt IS NULL')
+        ->setParameter('author', $author)
+        ->setParameter('project', $project)
+        ->getQuery()
+        ->getSingleScalarResult()
+      ;
+    }
+
+    public function countByAuthorAndStep(User $author, CollectStep $step): int
+    {
+        return $this->createQueryBuilder('pv')
+        ->select('COUNT(DISTINCT pv)')
+        ->andWhere('pv.collectStep = :step')
+        ->andWhere('pv.user = :author')
+        ->andWhere('pv.expired = false')
+        ->leftJoin('pv.proposal', 'proposal')
+        ->andWhere('proposal.deletedAt IS NULL')
+        ->setParameter('author', $author)
+        ->setParameter('step', $step)
+        ->getQuery()
+        ->getSingleScalarResult()
+      ;
+    }
+
     public function getVotesByStepAndUser(CollectStep $step, User $user)
     {
         return $this->createQueryBuilder('pv')
           ->select('pv', 'proposal')
           ->andWhere('pv.collectStep = :step')
           ->andWhere('pv.user = :user')
-          ->andWhere('pv.expired = 0')
+          ->andWhere('pv.expired = false')
           ->leftJoin('pv.proposal', 'proposal')
           ->andWhere('proposal.id IS NOT NULL')
           ->andWhere('proposal.deletedAt IS NULL')
