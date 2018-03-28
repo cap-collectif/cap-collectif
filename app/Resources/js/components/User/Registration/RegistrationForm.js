@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
@@ -7,19 +7,6 @@ import { isEmail } from '../../../services/Validator';
 import type { State } from '../../../types';
 import { register as onSubmit } from '../../../redux/modules/user';
 import renderComponent from '../../Form/Field';
-
-type Props = {
-  addUserTypeField: boolean,
-  addZipcodeField: boolean,
-  addCaptchaField: boolean,
-  addConsentExternalCommunicationField: boolean,
-  userTypes: Array<Object>,
-  cguLink: string,
-  cguName: string,
-  handleSubmit: Function,
-  dynamicFields: Array<Object>,
-  organizationName: string,
-};
 
 export const validate = (values: Object, props: Object) => {
   const errors = {};
@@ -54,7 +41,20 @@ export const validate = (values: Object, props: Object) => {
 };
 
 export const form = 'registration-form';
-export class RegistrationForm extends React.Component<Props> {
+export const RegistrationForm = React.createClass({
+  propTypes: {
+    addUserTypeField: PropTypes.bool.isRequired,
+    addZipcodeField: PropTypes.bool.isRequired,
+    addCaptchaField: PropTypes.bool.isRequired,
+    addConsentExternalCommunicationField: PropTypes.bool.isRequired,
+    userTypes: PropTypes.array.isRequired,
+    cguLink: PropTypes.string.isRequired,
+    cguName: PropTypes.string.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    dynamicFields: PropTypes.array.isRequired,
+    organizationName: PropTypes.string.isRequired,
+  },
+
   render() {
     const {
       cguLink,
@@ -227,8 +227,8 @@ export class RegistrationForm extends React.Component<Props> {
         )}
       </form>
     );
-  }
-}
+  },
+});
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   addCaptchaField: state.default.features.captcha,

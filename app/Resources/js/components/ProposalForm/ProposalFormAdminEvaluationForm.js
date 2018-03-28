@@ -71,79 +71,77 @@ export class ProposalFormAdminEvaluationForm extends React.Component<Props> {
             <i className="fa fa-info-circle" /> Aide
           </a>
         </div>
-        <div className="box-content">
-          <form onSubmit={handleSubmit}>
-            <QueryRenderer
-              variables={{}}
-              environment={environment}
-              query={graphql`
-                query ProposalFormAdminEvaluationForm_availableQuestionnairesQuery {
-                  availableQuestionnaires {
-                    id
-                    title
-                  }
+        <form onSubmit={handleSubmit}>
+          <QueryRenderer
+            variables={{}}
+            environment={environment}
+            query={graphql`
+              query ProposalFormAdminEvaluationForm_availableQuestionnairesQuery {
+                availableQuestionnaires {
+                  id
+                  title
                 }
-              `}
-              render={({ error, props }: { error: ?Error, props: any }) => {
-                if (error) {
-                  console.log(error); // eslint-disable-line no-console
-                  return graphqlError;
-                }
-                if (props) {
-                  const { availableQuestionnaires } = props;
+              }
+            `}
+            render={({ error, props }: { error: ?Error, props: any }) => {
+              if (error) {
+                console.log(error); // eslint-disable-line no-console
+                return graphqlError;
+              }
+              if (props) {
+                const { availableQuestionnaires } = props;
 
-                  return (
-                    <Field
-                      name="evaluationForm"
-                      component={component}
-                      type="select"
-                      id="evaluation-form"
-                      label={<FormattedMessage id="proposal_form.evaluation_form" />}>
-                      <FormattedMessage id="proposal_form.select_evaluation_form">
-                        {message => <option value="">{message}</option>}
-                      </FormattedMessage>
+                return (
+                  <Field
+                    name="evaluationForm"
+                    component={component}
+                    type="select"
+                    id="evaluation-form"
+                    label={<FormattedMessage id="proposal_form.evaluation_form" />}>
+                    <FormattedMessage id="proposal_form.select_evaluation_form">
+                      {message => <option value="">{message}</option>}
+                    </FormattedMessage>
 
-                      {proposalForm.evaluationForm && (
-                        <option
-                          key={proposalForm.evaluationForm.id}
-                          value={proposalForm.evaluationForm.id}>
-                          {proposalForm.evaluationForm.title}
+                    {proposalForm.evaluationForm && (
+                      <option
+                        key={proposalForm.evaluationForm.id}
+                        value={proposalForm.evaluationForm.id}>
+                        {proposalForm.evaluationForm.title}
+                      </option>
+                    )}
+                    {availableQuestionnaires &&
+                      availableQuestionnaires.map(evaluationForm => (
+                        <option key={evaluationForm.id} value={evaluationForm.id}>
+                          {evaluationForm.title}
                         </option>
-                      )}
-                      {availableQuestionnaires &&
-                        availableQuestionnaires.map(evaluationForm => (
-                          <option key={evaluationForm.id} value={evaluationForm.id}>
-                            {evaluationForm.title}
-                          </option>
-                        ))}
-                    </Field>
-                  );
-                }
+                      ))}
+                  </Field>
+                );
+              }
 
-                return <Loader />;
-              }}
+              return <Loader />;
+            }}
+          />
+          <ButtonToolbar style={{ marginBottom: 10 }}>
+            <Button
+              disabled={invalid || pristine || submitting}
+              id="evaluation-submit"
+              type="submit"
+              bsStyle="primary">
+              <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
+            </Button>
+            <Button bsStyle="danger" disabled>
+              <FormattedMessage id="global.delete" />
+            </Button>
+            <AlertForm
+              valid={valid}
+              invalid={invalid}
+              submitSucceeded={submitSucceeded}
+              submitFailed={submitFailed}
+              submitting={submitting}
             />
-            <ButtonToolbar className="box-content__toolbar">
-              <Button
-                disabled={invalid || pristine || submitting}
-                id="evaluation-submit"
-                type="submit"
-                bsStyle="primary">
-                <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
-              </Button>
-              <Button bsStyle="danger" disabled>
-                <FormattedMessage id="global.delete" />
-              </Button>
-              <AlertForm
-                valid={valid}
-                invalid={invalid}
-                submitSucceeded={submitSucceeded}
-                submitFailed={submitFailed}
-                submitting={submitting}
-              />
-            </ButtonToolbar>
-          </form>
-        </div>
+          </ButtonToolbar>
+        </form>
       </div>
     );
   }

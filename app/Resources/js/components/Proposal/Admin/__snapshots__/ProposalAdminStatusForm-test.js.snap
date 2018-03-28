@@ -80,6 +80,11 @@ exports[`<ProposalAdminStatusForm /> render correctly if expired 1`] = `
       <ButtonToolbar
         bsClass="btn-toolbar"
         className="box-content__toolbar"
+        style={
+          Object {
+            "marginBottom": 10,
+          }
+        }
       >
         <Button
           active={false}
@@ -191,6 +196,11 @@ exports[`<ProposalAdminStatusForm /> render correctly if published and user is c
       <ButtonToolbar
         bsClass="btn-toolbar"
         className="box-content__toolbar"
+        style={
+          Object {
+            "marginBottom": 10,
+          }
+        }
       >
         <Button
           active={false}
@@ -306,6 +316,11 @@ exports[`<ProposalAdminStatusForm /> render correctly if published but user can 
       <ButtonToolbar
         bsClass="btn-toolbar"
         className="box-content__toolbar"
+        style={
+          Object {
+            "marginBottom": 10,
+          }
+        }
       >
         <Button
           active={false}
