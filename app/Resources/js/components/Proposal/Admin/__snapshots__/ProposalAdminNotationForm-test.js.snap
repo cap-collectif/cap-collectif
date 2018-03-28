@@ -97,14 +97,17 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
             placeholder="Sélectionnez un coup de coeur"
           />
         </div>
-        <div>
-          <h3>
+        <div
+          className="box-header"
+        >
+          <h3
+            className="box-title"
+          >
             <FormattedMessage
               id="proposal.admin.personalize"
               values={Object {}}
             />
           </h3>
-          <hr />
         </div>
         <FieldArray
           component={[Function]}
@@ -130,11 +133,6 @@ exports[`<ProposalAdminNotationForm /> render correctly 1`] = `
         <ButtonToolbar
           bsClass="btn-toolbar"
           className="box-content__toolbar"
-          style={
-            Object {
-              "marginBottom": 10,
-            }
-          }
         >
           <Button
             active={false}

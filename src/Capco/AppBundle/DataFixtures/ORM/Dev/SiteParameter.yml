@@ -189,6 +189,20 @@ Capco\AppBundle\Entity\SiteParameter:
         value: 18
         position: 730
         type: 2
+
+    SiteParameter27:
+        keyname: signin.cgu.name
+        category: pages.registration
+        value: la charte
+        position: 800
+        type: 0
+    SiteParameter28:
+        keyname: signin.cgu.link
+        category: pages.registration
+        value: /pages/charte
+        position: 810
+        type: 5
+
     SiteParameter29:
         keyname: admin.mail.notifications.receive_address
         category: settings.notifications
@@ -450,20 +464,3 @@ Capco\AppBundle\Entity\SiteParameter:
         value: ''
         position: 442
         type: 3
-
-    SiteParameterCharterContent:
-        keyname: charter.body
-        category: pages.charter
-        value: |
-               Retrouvez sur cette page la possibilité de pouvoir afficher la charte du site.
-               <h2>Charte</h2>
-               <p><text(1000)></p>
-               <p><text(350)></p>
-               <h3>En tant que membre de Cap-Collectif</h3>
-               <p><text(350)></p>
-               <p><text(550)></p>
-               <h2>En conséquence, je m’engage :</h2>
-               <h3>En conséquence, je m’engage :</h3>
-               <p><text(350)></p>
-        position: 1
-        type: 1
