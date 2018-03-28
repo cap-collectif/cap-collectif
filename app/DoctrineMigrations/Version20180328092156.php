@@ -30,7 +30,7 @@ class Version20180328092156 extends AbstractMigration
 
     public function postUp(Schema $schema)
     {
-        $request = $this->connection->fetchAll("SELECT body FROM page WHERE slug = 'charte'", ['']);
+        $request = $this->connection->fetchAll("SELECT body FROM page WHERE slug = 'charte' LIMIT 1", ['']);
         $this->siteParamer['value'] = $request[0]['body'];
 
         $this->connection->insert('site_parameter', $this->siteParamer);
