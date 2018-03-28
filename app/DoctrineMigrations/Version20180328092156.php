@@ -30,11 +30,12 @@ class Version20180328092156 extends AbstractMigration
 
     public function postUp(Schema $schema)
     {
-        $body = $this->connection->fetchAll('SELECT body FROM page WHERE id = 1', ['']);
+        $request = $this->connection->fetchAll('SELECT body FROM page WHERE id = 1', ['']);
+        $this->siteParamer['value'] = $request[0]['body'];
 
-        $this->siteParamer['value'] = $body;
         $this->connection->insert('site_parameter', $this->siteParamer);
         $this->write('-> new site parameter');
+
         $this->connection->delete('page', ['id' => 1]);
         $this->write('-> delete charte page');
 
