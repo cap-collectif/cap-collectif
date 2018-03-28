@@ -149,13 +149,17 @@ class ProposalSelectionVoteRepository extends EntityRepository
         ;
     }
 
-    public function getByProposalAndStep(Proposal $proposal, SelectionStep $step, int $litmit, int $offset): Paginator
+    public function getByProposalAndStep(Proposal $proposal, SelectionStep $step, int $litmit, int $offset, string $field, string $direction): Paginator
     {
         $qb = $this->createQueryBuilder('pv')
             ->andWhere('pv.selectionStep = :step')
             ->andWhere('pv.proposal = :proposal')
             ->setParameter('step', $step)
             ->setParameter('proposal', $proposal);
+
+        if ('CREATED_AT' === $field) {
+            $qb->addOrderBy('pv.createdAt', $direction);
+        }
 
         $qb->setMaxResults($litmit)
             ->setFirstResult($offset);

@@ -125,6 +125,9 @@ Proposal:
                 first:
                   type: "Int"
                   defaultValue: 30
+                orderBy:
+                  type: "ProposalVotesOrder"
+                  defaultValue: { field: CREATED_AT, direction: DESC }
                 step:
                   type: "ID!"
             createdAt:

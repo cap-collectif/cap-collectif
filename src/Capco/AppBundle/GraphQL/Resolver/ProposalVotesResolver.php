@@ -33,15 +33,17 @@ class ProposalVotesResolver
     {
         try {
             $step = $this->abstractStepRepository->find($args['step']);
+            $field = $args->offsetGet('orderBy')['field'];
+            $direction = $args->offsetGet('orderBy')['direction'];
             if ($step instanceof CollectStep) {
-                $paginator = new Paginator(function (int $offset, int $limit) use ($proposal, $step) {
-                    return $this->proposalCollectVoteRepository->getByProposalAndStep($proposal, $step, $limit, $offset)->getIterator()->getArrayCopy();
+                $paginator = new Paginator(function (int $offset, int $limit) use ($proposal, $step, $field, $direction) {
+                    return $this->proposalCollectVoteRepository->getByProposalAndStep($proposal, $step, $limit, $offset, $field, $direction)->getIterator()->getArrayCopy();
                 });
 
                 $totalCount = $this->proposalCollectVoteRepository->countVotesByProposalAndStep($proposal, $step);
             } else {
-                $paginator = new Paginator(function (int $offset, int $limit) use ($proposal, $step) {
-                    return $this->proposalSelectionVoteRepository->getByProposalAndStep($proposal, $step, $limit, $offset)->getIterator()->getArrayCopy();
+                $paginator = new Paginator(function (int $offset, int $limit) use ($proposal, $step, $field, $direction) {
+                    return $this->proposalSelectionVoteRepository->getByProposalAndStep($proposal, $step, $limit, $offset, $field, $direction)->getIterator()->getArrayCopy();
                 });
 
                 $totalCount = $this->proposalSelectionVoteRepository->countVotesByProposalAndStep($proposal, $step);
