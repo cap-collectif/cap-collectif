@@ -22,8 +22,11 @@ class PostCommentsResolver
     public function __invoke(Post $post, Argument $args)
     {
         try {
-            $paginator = new Paginator(function (int $offset, int $limit) use ($post) {
-                return $this->commentRepository->getAllByPost($post, $offset, $limit)->getIterator()->getArrayCopy();
+            $paginator = new Paginator(function (int $offset, int $limit) use ($post, $args) {
+                $field = $args->offsetGet('orderBy')['field'];
+                $direction = $args->offsetGet('orderBy')['direction'];
+
+                return $this->commentRepository->getAllByPost($post, $limit, $field, $offset, $direction)->getIterator()->getArrayCopy();
             });
 
             $totalCount = $this->commentRepository->countAllCommentsAndAnswersByPost($post);

@@ -49,7 +49,7 @@ class PostCommentRepository extends EntityRepository
         return new Paginator($qb);
     }
 
-    public function getAllByPost(Post $post, ?int $offset = 0, ?int $limit = 10, ?string $filter = 'last'): Paginator
+    public function getAllByPost(Post $post, ?int $limit = null, string $field, int $offset = 0, string $direction = 'ASC'): Paginator
     {
         $qb = $this->createQueryBuilder('c')
             ->addSelect('aut', 'm', 'v', 'p', 'r', 'ans')
@@ -65,16 +65,16 @@ class PostCommentRepository extends EntityRepository
             ->orderBy('c.pinned', 'DESC')
         ;
 
-        if ('old' === $filter) {
-            $qb->addOrderBy('c.updatedAt', 'ASC');
+        if ('CREATED_AT' === $field) {
+            $qb->addOrderBy('c.createdAt', $direction);
         }
 
-        if ('last' === $filter) {
-            $qb->addOrderBy('c.updatedAt', 'DESC');
+        if ('UPDATED_AT' === $field) {
+            $qb->addOrderBy('c.updatedAt', $direction);
         }
 
-        if ('popular' === $filter) {
-            $qb->addOrderBy('c.votesCount', 'DESC');
+        if ('POPULARITY' === $field) {
+            $qb->addOrderBy('c.votesCount', $direction);
         }
 
         $qb
