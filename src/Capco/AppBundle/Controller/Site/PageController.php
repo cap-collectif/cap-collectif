@@ -15,6 +15,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class PageController extends Controller
 {
     /**
+     * @Route("/{slug}", name="app_page_charter")
+     * @Template("CapcoAppBundle:Page:charter.html.twig")
+     * @Cache(smaxage=60, public=true)
+     */
+    public function charterAction()
+    {
+        $body = $this->container->get('capco.site_parameter.resolver')->getValue('charter.body');
+
+        if (null === $body) {
+            throw $this->createNotFoundException($this->get('translator')->trans('page.error.not_found', [], 'CapcoAppBundle'));
+        }
+
+        return [
+            'body' => $body,
+        ];
+    }
+
+    /**
      * @Route("/{slug}", name="app_page_show")
      * @ParamConverter("page", class="CapcoAppBundle:Page", options={"mapping": {"slug": "slug"}})
      * @Template("CapcoAppBundle:Page:show.html.twig")
