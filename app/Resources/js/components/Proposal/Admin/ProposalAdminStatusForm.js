@@ -154,7 +154,7 @@ export class ProposalAdminStatusForm extends Component<Props> {
               </div>
             )}
             {proposal.deletedAt && <p>Supprimé le {moment(proposal.deletedAt).format('ll')}</p>}
-            <ButtonToolbar className="box-content__toolbar">
+            <ButtonToolbar style={{ marginBottom: 10 }} className="box-content__toolbar">
               <Button disabled={pristine || invalid || submitting} type="submit" bsStyle="primary">
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
               </Button>

@@ -1,3 +1,4 @@
+// @flow
 import moment from 'moment';
 import ReactOnRails from 'react-on-rails';
 import ProjectsListApp from '../js/startup/ProjectsListAppClient';
@@ -37,6 +38,7 @@ import RegistrationAdminApp from '../js/startup/RegistrationAdminApp';
 import AdminModalsApp from '../js/startup/AdminModalsApp';
 import GroupAdminPageApp from '../js/startup/GroupAdminPageApp';
 import EvaluationsIndexPageApp from '../js/startup/EvaluationsIndexPageApp';
+import ChooseAUsernameApp from '../js/startup/ChooseAUsernameApp';
 import appStore from '../js/stores/AppStore';
 
 moment.locale('fr');
@@ -51,6 +53,7 @@ ReactOnRails.register({
   AdminModalsApp,
   RegistrationAdminApp,
   ShieldApp,
+  ChooseAUsernameApp,
   ProposalFormCreateButtonApp,
   ProjectListPageApp,
   ProposalCreateFusionButtonApp,

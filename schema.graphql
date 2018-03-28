@@ -636,6 +636,7 @@ type Mutation {
   deleteGroup(input: DeleteGroupInput!): DeleteGroupPayload
   deleteUserInGroup(input: DeleteUserInGroupInput!): DeleteUserInGroupPayload
   addUsersInGroup(input: AddUsersInGroupInput!): AddUsersInGroupPayload
+  updateProfile(input: UpdateProfileInput!): UpdateProfilePayload
 }
 
 # Fetches an object given its ID
@@ -1558,6 +1559,17 @@ type UpdateGroupPayload {
   clientMutationId: String
 }
 
+input UpdateProfileInput {
+  username: String
+  clientMutationId: String
+}
+
+type UpdateProfilePayload {
+  # The viewer
+  viewer: User!
+  clientMutationId: String
+}
+
 input UpdateProposalFormInput {
   proposalFormId: ID!
   title: String
@@ -1642,7 +1654,7 @@ type User implements Node {
   displayName: String!
 
   # Username of the user.
-  username: String!
+  username: String
 
   # URL to user profile, null if the feature profiles is disabled.
   show_url: URI

@@ -3,19 +3,50 @@
 namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\Toggle\Manager;
-use Symfony\Bridge\Twig\TwigEngine;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Templating\EngineInterface;
 
 class ShieldListener
 {
+    const AVAILABLE_ROUTES = [
+      // Basics
+      'app_get_api_token',
+      'sonata_media_view',
+      'sonata_media_download',
+      '_wdt',
+
+      // Login
+      'capco_api_login_check',
+      'facebook_login',
+      'google_login',
+      'api_login_check',
+      'hwi_oauth_service_redirect',
+
+      // API documentation
+      'overblog_graphql_graphiql',
+      'nelmio_api_doc_index',
+
+      // Account confirmation
+      'account_confirm_email',
+      'account_confirm_new_email',
+
+      // Registration
+      'capco_app_api_users_postuser',
+
+      // Password reset
+      'fos_user_resetting_request',
+      'fos_user_resetting_reset',
+      'fos_user_resetting_send_email',
+      'fos_user_resetting_check_email',
+    ];
     protected $manager;
     protected $tokenStorage;
     protected $templating;
 
-    public function __construct(Manager $manager, TokenStorage $tokenStorage, TwigEngine $templating)
+    public function __construct(Manager $manager, TokenStorageInterface $tokenStorage, EngineInterface $templating)
     {
         $this->manager = $manager;
         $this->tokenStorage = $tokenStorage;
@@ -41,39 +72,7 @@ class ShieldListener
         $request = $event->getRequest();
         $route = $request->get('_route');
 
-        $availableRoutes = [
-          // Basics
-          'app_get_api_token',
-          'sonata_media_view',
-          'sonata_media_download',
-          '_wdt',
-
-          // Login
-          'capco_api_login_check',
-          'facebook_login',
-          'google_login',
-          'api_login_check',
-          'hwi_oauth_service_redirect',
-
-          // API documentation
-          'overblog_graphql_graphiql',
-          'nelmio_api_doc_index',
-
-          // Account confirmation
-          'account_confirm_email',
-          'account_confirm_new_email',
-
-          // Registration
-          'capco_app_api_users_postuser',
-
-          // Password reset
-          'fos_user_resetting_request',
-          'fos_user_resetting_reset',
-          'fos_user_resetting_send_email',
-          'fos_user_resetting_check_email',
-        ];
-
-        if (in_array($route, $availableRoutes, true)) {
+        if (in_array($route, self::AVAILABLE_ROUTES, true)) {
             return;
         }
 
