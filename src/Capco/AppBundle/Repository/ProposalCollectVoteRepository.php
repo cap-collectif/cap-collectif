@@ -26,15 +26,15 @@ class ProposalCollectVoteRepository extends EntityRepository
     {
         return $this->createQueryBuilder('pv')
         ->select('COUNT(DISTINCT pv)')
-        ->leftJoin('pv.collectStep', 'step')
-        ->leftJoin('step.projectAbstractStep', 'pas')
-        ->andWhere('pas.project = :project')
         ->andWhere('pv.user = :author')
         ->andWhere('pv.expired = false')
         ->leftJoin('pv.proposal', 'proposal')
         ->andWhere('proposal.deletedAt IS NULL')
+        ->andWhere('proposal.collectStep IN (:steps)')
+        ->setParameter('steps', array_map(function ($step) {
+            return $step;
+        }, $project->getRealSteps()))
         ->setParameter('author', $author)
-        ->setParameter('project', $project)
         ->getQuery()
         ->getSingleScalarResult()
       ;

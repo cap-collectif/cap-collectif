@@ -189,12 +189,11 @@ class OpinionVersionRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder('version')
           ->select('count(DISTINCT version)')
           ->leftJoin('version.parent', 'opinion')
-          ->leftJoin('opinion.step', 's')
-          ->leftJoin('s.projectAbstractStep', 'cas')
-          ->andWhere('cas.project = :project')
-          ->andWhere('version.isTrashed = false')
           ->andWhere('version.author = :author')
-          ->setParameter('project', $project)
+          ->andWhere('opinion.step IN (:steps)')
+          ->setParameter('steps', array_map(function ($step) {
+              return $step;
+          }, $project->getRealSteps()))
           ->setParameter('author', $author)
       ;
 

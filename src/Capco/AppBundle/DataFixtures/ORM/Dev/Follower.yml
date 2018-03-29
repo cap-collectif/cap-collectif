@@ -71,7 +71,7 @@ Capco\AppBundle\Entity\Follower:
      proposal: '@proposal2'
      user: '@user11'
      followedAt: <dateTimeBetween('-50 days', 'now')>
-  follower{24..150}:
+  follower{24..200}:
     proposal: '@proposal1'
     user: '@user<current()>'
     followedAt: <dateTimeBetween('-50 days', 'now')>

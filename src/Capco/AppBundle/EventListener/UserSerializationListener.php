@@ -46,12 +46,12 @@ class UserSerializationListener extends AbstractSerializationListener
                   'project' => ['id' => $project->getId()],
                   'count' => $count,
                 ];
-                // foreach ($project->getRealSteps() as $step) {
-                //     $contributionsCountByStep[] = [
-                //   'step' => ['id' => $step->getId()],
-                //   'count' => $count === 0 ? 0 : $this->contributionStepResolver->__invoke($user, $step, ['first' => 1])->totalCount,
-                // ];
-                // }
+                foreach ($project->getRealSteps() as $step) {
+                    $contributionsCountByStep[] = [
+                  'step' => ['id' => $step->getId()],
+                  'count' => 0 === $count ? 0 : $this->contributionStepResolver->__invoke($user, $step, ['first' => 1])->totalCount,
+                ];
+                }
             }
             $event->getVisitor()->addData('contributionsCountByProject', $contributionsCountByProject);
             $event->getVisitor()->addData('contributionsCountByStep', $contributionsCountByStep);

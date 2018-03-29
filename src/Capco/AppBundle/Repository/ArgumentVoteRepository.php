@@ -17,13 +17,11 @@ class ArgumentVoteRepository extends EntityRepository
         ->leftJoin('argument.opinion', 'o')
         ->leftJoin('argument.opinionVersion', 'ov')
         ->leftJoin('ov.parent', 'ovo')
-        ->leftJoin('o.step', 'step')
-        ->leftJoin('ovo.step', 'step2')
-        ->leftJoin('step.projectAbstractStep', 'pas')
-        ->leftJoin('step2.projectAbstractStep', 'pas2')
-        ->andWhere('pas.project = :project OR pas2.project = :project')
+        ->andWhere('o.step IN (:steps) OR ovo.step IN (:steps)')
+        ->setParameter('steps', array_map(function ($step) {
+            return $step;
+        }, $project->getRealSteps()))
         ->andWhere('v.user = :author')
-        ->setParameter('project', $project)
         ->setParameter('author', $author)
       ;
 

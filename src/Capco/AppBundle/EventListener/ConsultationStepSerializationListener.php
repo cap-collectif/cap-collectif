@@ -20,6 +20,11 @@ class ConsultationStepSerializationListener extends AbstractSerializationListene
 
     public function onPostConsultationStep(ObjectEvent $event)
     {
+        // We skip if we are serializing for Elasticsearch
+        if (isset($this->getIncludedGroups($event)['Elasticsearch'])) {
+            return;
+        }
+
         $step = $event->getObject();
 
         $counters = [

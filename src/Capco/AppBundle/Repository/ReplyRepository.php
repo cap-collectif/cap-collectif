@@ -55,11 +55,11 @@ class ReplyRepository extends EntityRepository
           ->getIsEnabledQueryBuilder()
           ->select('COUNT(DISTINCT reply)')
           ->leftJoin('reply.questionnaire', 'questionnaire')
-          ->leftJoin('questionnaire.step', 'step')
-          ->leftJoin('step.projectAbstractStep', 'pas')
-          ->andWhere('pas.project = :project')
+          ->andWhere('questionnaire.step IN (:steps)')
           ->andWhere('reply.author = :author')
-          ->setParameter('project', $project)
+          ->setParameter('steps', array_map(function ($step) {
+              return $step;
+          }, $project->getRealSteps()))
           ->setParameter('author', $author)
         ;
 

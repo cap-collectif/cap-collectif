@@ -278,13 +278,13 @@ class ProposalRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder()
           ->select('COUNT(DISTINCT proposal)')
           ->leftJoin('proposal.proposalForm', 'form')
-          ->leftJoin('form.step', 's')
-          ->leftJoin('s.projectAbstractStep', 'pas')
+          ->andWhere('form.step IN (:steps)')
+          ->setParameter('steps', array_map(function ($step) {
+              return $step;
+          }, $project->getRealSteps()))
           ->andWhere('proposal.author = :author')
-          ->andWhere('pas.project = :project')
-          ->setParameter('project', $project)
           ->setParameter('author', $author)
-      ;
+        ;
 
         return $qb->getQuery()->getSingleScalarResult();
     }
