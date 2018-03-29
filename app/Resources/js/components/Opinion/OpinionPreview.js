@@ -23,6 +23,7 @@ const OpinionPreview = React.createClass({
   render() {
     const { rankingThreshold } = this.props;
     const opinion = this.props.opinion;
+
     return (
       <div className="opinion__body box">
         <UserAvatar user={opinion.author} className="pull-left" />
