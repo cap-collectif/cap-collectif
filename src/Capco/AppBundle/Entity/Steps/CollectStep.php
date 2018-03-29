@@ -19,7 +19,7 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
 {
     use TimelessStepTrait, VoteThresholdTrait, VoteTypeTrait;
 
-    public static $sort = ['old', 'last', 'votes', 'comments', 'random', 'expensive', 'cheap'];
+    public static $sort = ['old', 'last', 'votes', 'least-votes', 'comments', 'random', 'expensive', 'cheap'];
 
     public static $sortLabels = [
         'comments' => 'step.sort.comments',
@@ -27,6 +27,7 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
         'old' => 'step.sort.old',
         'random' => 'step.sort.random',
         'votes' => 'step.sort.votes',
+        'least-votes' => 'step.sort.least-votes',
         'expensive' => 'step.sort.expensive',
         'cheap' => 'step.sort.cheap',
     ];
@@ -59,7 +60,7 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
 
     /**
      * @ORM\Column(name="default_sort", type="string", nullable=false)
-     * @Assert\Choice(choices={"old","last","votes","comments","random", "cheap", "expensive"})
+     * @Assert\Choice(choices={"old","last","votes","least-votes","comments","random", "cheap", "expensive"})
      */
     private $defaultSort = 'random';
 
