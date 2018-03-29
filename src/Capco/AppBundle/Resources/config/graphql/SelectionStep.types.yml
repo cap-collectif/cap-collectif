@@ -1,7 +1,7 @@
 SelectionStep:
     type: object
     config:
-        interfaces: [Step]
+        interfaces: [Step, Node]
         description: "A budget contribution"
         fields:
             id:

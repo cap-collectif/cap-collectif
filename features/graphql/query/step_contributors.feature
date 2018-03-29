@@ -35,18 +35,17 @@ Scenario: GraphQL client want to get the list of contributors of a consultation
     "data": {
       "consultation": {
         "contributors": {
-          "totalCount": 24,
+          "totalCount": 26,
           "pageInfo": {
             "hasNextPage": true,
             "endCursor": "YXJyYXljb25uZWN0aW9uOjQ="
           },
           "edges": [
-            {
-              "node": {
-                "id": @string@
-              }
-            },
-            @...@
+            { "node": { "id": "user1" } },
+            { "node": { "id": "user12" } },
+            { "node": { "id": "user16" } },
+            { "node": { "id": "user17" } },
+            { "node": { "id": "user18" } }
           ]
         }
       }
@@ -88,18 +87,16 @@ Scenario: GraphQL client want to get the list of contributors of a collectStep
     "data": {
       "collectStep": {
         "contributors": {
-          "totalCount": 24,
+          "totalCount": 4,
           "pageInfo": {
-            "hasNextPage": true,
-            "endCursor": "YXJyYXljb25uZWN0aW9uOjQ="
+            "hasNextPage": false,
+            "endCursor": "YXJyYXljb25uZWN0aW9uOjM="
           },
           "edges": [
-            {
-              "node": {
-                "id": @string@
-              }
-            },
-            @...@
+            { "node": {"id":"user5"} },
+            { "node": {"id":"user502"} },
+            { "node": {"id":"user7"} },
+            { "node": {"id":"userAdmin"} }
           ]
         }
       }
@@ -114,7 +111,7 @@ Scenario: GraphQL client want to get the list of contributors of a selectionStep
   {
     "query": "query node ($selectionStep: ID!){
       selectionStep: node(id: $selectionStep) {
-        ... on CollectStep {
+        ... on SelectionStep {
           contributors(first: 5) {
             totalCount
             pageInfo {
@@ -141,18 +138,15 @@ Scenario: GraphQL client want to get the list of contributors of a selectionStep
     "data": {
       "selectionStep": {
         "contributors": {
-          "totalCount": 24,
+          "totalCount": 3,
           "pageInfo": {
-            "hasNextPage": true,
-            "endCursor": "YXJyYXljb25uZWN0aW9uOjQ="
+            "hasNextPage": false,
+            "endCursor": "YXJyYXljb25uZWN0aW9uOjI="
           },
           "edges": [
-            {
-              "node": {
-                "id": @string@
-              }
-            },
-            @...@
+            {"node":{"id":"user5"}},
+            {"node":{"id":"user7"}},
+            {"node":{"id":"userAdmin"}}
           ]
         }
       }
@@ -167,7 +161,7 @@ Scenario: GraphQL client want to get the list of contributors of a questionnaire
   {
     "query": "query node ($questionnaireStep: ID!){
       questionnaireStep: node(id: $questionnaireStep) {
-        ... on CollectStep {
+        ... on QuestionnaireStep {
           contributors(first: 5) {
             totalCount
             pageInfo {
@@ -194,18 +188,14 @@ Scenario: GraphQL client want to get the list of contributors of a questionnaire
     "data": {
       "questionnaireStep": {
         "contributors": {
-          "totalCount": 24,
+          "totalCount": 2,
           "pageInfo": {
-            "hasNextPage": true,
-            "endCursor": "YXJyYXljb25uZWN0aW9uOjQ="
+            "hasNextPage": false,
+            "endCursor": "YXJyYXljb25uZWN0aW9uOjE="
           },
           "edges": [
-            {
-              "node": {
-                "id": @string@
-              }
-            },
-            @...@
+            {"node":{"id":"user502"}},
+            {"node":{"id":"userAdmin"}}
           ]
         }
       }
