@@ -1,7 +1,7 @@
 @proposal @update_proposal_steps
 Feature: Update Proposal Steps
 
-@database @rabbitmq @test
+@database @rabbitmq
 Scenario: Admin should be able to create and delete a proposal step in admin
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
