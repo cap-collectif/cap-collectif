@@ -5,8 +5,15 @@ exports[`<IdeaPreviewHeader /> should render idea preview header 1`] = `
   <div
     className="card__user__avatar"
   >
-    <Connect(UserAvatar)
+    <UserAvatar
+      anchor={true}
       className="pull-left idea__avatar"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      onMouseOut={[Function]}
+      onMouseOver={[Function]}
+      size={45}
+      style={Object {}}
       user={Object {}}
     />
   </div>
