@@ -20,9 +20,6 @@ ProposalForm:
             proposals:
                 type: "ProposalConnection!"
                 args:
-                  orderBy:
-                    type: "AnalyzeOrder"
-                    description: "Ordering analyze by ref."
                   affiliations:
                     type: "[ProposalAffiliation]"
                   after:
