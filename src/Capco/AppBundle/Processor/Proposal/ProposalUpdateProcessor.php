@@ -23,12 +23,11 @@ class ProposalUpdateProcessor implements ProcessorInterface
         $json = json_decode($message->getBody(), true);
         $proposal = $this->proposalRepository->find($json['proposalId']);
 
-        if (
-            $proposal->getProposalForm()->getNotificationsConfiguration()
-            && $proposal->getProposalForm()->getNotificationsConfiguration()->isOnUpdate()
-        ) {
-            $this->notifier->onUpdate($proposal);
+        if (null === $proposal) {
+            throw new \RuntimeException('Unable to find proposal with id : ' . $json['proposalId']);
         }
+
+        $this->notifier->onUpdate($proposal);
 
         return true;
     }
