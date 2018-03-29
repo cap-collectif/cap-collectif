@@ -1,7 +1,7 @@
 QuestionnaireStep:
     type: object
     config:
-        interfaces: [Node, Step]
+        interfaces: [Step]
         fields:
             id:
               type: "ID!"
@@ -10,8 +10,3 @@ QuestionnaireStep:
                resolve: "questionnaire"
             title:
                type: "String!"
-            contributors:
-                type: "UserConnection!"
-                description: "A list of contributor associated with the consultation."
-                argsBuilder: "Relay::Connection"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\StepContributorResolver", [value, args])'

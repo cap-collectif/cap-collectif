@@ -26,7 +26,7 @@ class PopulateIndexCommand extends ContainerAwareCommand
         $output->writeln(['Start indexing.', '']);
 
         try {
-            $indexer->indexAll($output);
+            $indexer->indexAll();
             $indexer->finishBulk();
         } catch (\Exception $e) {
             $output->writeln('<error>' . $e->getMessage() . '</error>');
