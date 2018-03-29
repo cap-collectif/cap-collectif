@@ -99,5 +99,3 @@ ProposalForm:
             step:
                 type: "CollectStep"
                 description: "Identifies the step that use the proposal form."
-            allowAknowledge:
-                type: "Boolean!"

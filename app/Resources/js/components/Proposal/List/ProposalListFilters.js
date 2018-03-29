@@ -75,11 +75,12 @@ export const ProposalListFilters = React.createClass({
       filters,
       orderByComments,
       orderByCost,
+      orderByVotes,
       showToggleMapButton,
       defaultSort,
       intl,
     } = this.props;
-    const { displayedFilters, orderByVotes } = this.state;
+    const { displayedFilters } = this.state;
 
     return (
       <div className="mb-15 mt-30">
