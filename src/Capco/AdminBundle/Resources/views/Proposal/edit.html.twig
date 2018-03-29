@@ -34,14 +34,4 @@
 {% block javascripts %}
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=***REMOVED***&libraries=places"></script>
 {{ parent() }}
-    <script>
-        (function () {
-            jQuery('form').one('change', function () {
-                alert('ok');
-                window.onbeforeunload = function () {
-                    return true;
-                };
-            });
-        })();
-    </script>
 {% endblock %}
