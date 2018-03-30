@@ -1050,6 +1050,7 @@ type Proposal implements Node {
   category: ProposalCategory
   district: District
   address: Address
+  formattedAddress: String
 
   # The author of the contribution.
   author: User!
@@ -2045,6 +2046,7 @@ type ValueResponse implements Response {
 
   # The value
   value: String
+  formattedValue: String
 }
 
 # A version of contribution

@@ -250,3 +250,13 @@ services:
         tags:
           - { name: overblog_graphql.resolver }
         arguments: ['@capco.abstract_step.repository','@capco.proposal_collect_vote.repository', '@capco.proposal_selection_vote.repository', '@monolog.logger']
+
+    capco.resolver.formatted_address:
+        class: Capco\AppBundle\GraphQL\Resolver\FormattedAddressResolver
+        tags:
+          - { name: overblog_graphql.resolver }
+
+    capco.resolver.formatted_value_response:
+        class: Capco\AppBundle\GraphQL\Resolver\FormattedValueResponseResolver
+        tags:
+          - { name: overblog_graphql.resolver }
