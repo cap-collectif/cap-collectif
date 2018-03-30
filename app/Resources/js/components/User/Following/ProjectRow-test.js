@@ -19,32 +19,40 @@ describe('<ProjectRow />', () => {
   const emptyProject = {};
 
   const viewer = {
-    followingProposals: [
-      {
-        show_url: 'http://carte.perdu.com',
-        id: 'proposal1',
-        title: "Une carte de l'internet",
-        project: {
-          id: 'project1',
+    followingProposals: {
+      edges: [
+        {
+          node: {
+            show_url: 'http://carte.perdu.com',
+            id: 'proposal1',
+            title: "Une carte de l'internet",
+            project: {
+              id: 'project1',
+            },
+          },
         },
-      },
-      {
-        show_url: 'http://gps.perdu.com',
-        id: 'proposal2',
-        title: "Un GPS de l'internet",
-        project: {
-          id: 'project1',
+        {
+          node: {
+            show_url: 'http://gps.perdu.com',
+            id: 'proposal2',
+            title: "Un GPS de l'internet",
+            project: {
+              id: 'project1',
+            },
+          },
         },
-      },
-      {
-        show_url: 'https://randomstreetview.com/',
-        id: 'proposal3',
-        title: 'Go  nowhere',
-        project: {
-          id: 'project2',
+        {
+          node: {
+            show_url: 'https://randomstreetview.com/',
+            id: 'proposal3',
+            title: 'Go  nowhere',
+            project: {
+              id: 'project2',
+            },
+          },
         },
-      },
-    ],
+      ],
+    },
   };
   const viewerWithoutProjectProposal = {
     followingProposals: [],
