@@ -23,7 +23,7 @@ ProposalForm:
                 args:
                   orderBy:
                     type: "ProposalOrder"
-                    description: "Ordering proposal by ref."
+                    description: "Order for connection."
                     defaultValue: { field: "CREATED_AT", direction: "ASC" }
                   affiliations:
                     type: "[ProposalAffiliation]"
