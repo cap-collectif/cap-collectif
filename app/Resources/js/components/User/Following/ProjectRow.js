@@ -29,10 +29,10 @@ export class ProjectRow extends Component<Props, State> {
 
   onUnfollowCurrentProject() {
     const { project, viewer } = this.props;
-    const ids = viewer.followingProposals
-      .filter(proposal => proposal.project.id === project.id)
-      .map(proposal => {
-        return proposal.id;
+    const ids = viewer.followingProposals.edges
+      .filter(edge => edge.node.project.id === project.id)
+      .map(edge => {
+        return edge.node.id;
       });
 
     this.setState({ open: !this.state.open }, () => {
@@ -73,11 +73,13 @@ export class ProjectRow extends Component<Props, State> {
             </div>
           }>
           <ListGroup>
-            {viewer.followingProposals
-              .filter(proposal => proposal.project.id === project.id)
-              .map((proposal, key) => {
-                return <ProposalRow key={key} proposal={proposal} />;
-              })}
+            {viewer.followingProposals.edges &&
+              viewer.followingProposals.edges
+                .filter(Boolean)
+                .filter(edge => edge.node.project.id === project.id)
+                .map((edge, key) => {
+                  return <ProposalRow key={key} proposal={edge.node} />;
+                })}
           </ListGroup>
         </Panel>
       </Collapse>

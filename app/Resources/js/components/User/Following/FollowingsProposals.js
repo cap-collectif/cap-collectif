@@ -37,8 +37,8 @@ export class FollowingsProposals extends Component<Props, State> {
   render() {
     const { viewer } = this.props;
     const projectsById = {};
-    viewer.followingProposals.map(proposal => {
-      projectsById[proposal.project.id] = proposal.project;
+    viewer.followingProposals.edges.map(edge => {
+      projectsById[edge.node.project.id] = edge.node.project;
     });
     return (
       <div>
@@ -89,14 +89,19 @@ export default createFragmentContainer(
   FollowingsProposals,
   graphql`
     fragment FollowingsProposals_viewer on User {
-      followingProposals {
-        id
-        title
-        show_url
-        project {
-          id
-          title
-          url
+      followingProposals(first: $count, after: $cursor) {
+        totalCount
+        edges {
+          node {
+            id
+            title
+            show_url
+            project {
+              id
+              title
+              url
+            }
+          }
         }
       }
     }

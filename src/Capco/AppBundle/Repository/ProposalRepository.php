@@ -487,15 +487,27 @@ class ProposalRepository extends EntityRepository
             ->andWhere($alias . '.address IS NOT NULL');
     }
 
-    public function findFollowingProposalByUser(string $userid): array
+    public function findFollowingProposalByUser(User $user, $first = 0, $offset = 100): Paginator
     {
         $query = $this->createQueryBuilder('p')
             ->leftJoin('p.followers', 'f')
-            ->leftJoin('f.user', 'u')
-            ->where('u.id = :userId')
-            ->setParameter('userId', $userid);
+            ->where('f.user = :user')
+            ->setParameter('user', $user)
+            ->setMaxResults($offset)
+            ->setFirstResult($first);
 
-        return $query->getQuery()->getResult();
+        return new Paginator($query);
+    }
+
+    public function countFollowingProposalByUser(User $user): int
+    {
+        $query = $this->createQueryBuilder('p');
+        $query->select('COUNT(p.id)')
+            ->leftJoin('p.followers', 'f')
+            ->where('f.user = :user')
+            ->setParameter('user', $user);
+
+        return (int) $query->getQuery()->getSingleScalarResult();
     }
 
     public function countProposalVotesCreatedBetween(\DateTime $from, \DateTime $to, string $proposalId): array

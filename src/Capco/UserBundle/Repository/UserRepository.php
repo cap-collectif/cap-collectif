@@ -692,15 +692,17 @@ class UserRepository extends EntityRepository
         return $query->getQuery()->getResult();
     }
 
-    public function findUsersFollowingAProposal(Proposal $proposal): array
+    public function findUsersFollowingAProposal(Proposal $proposal, $first = 0, $offset = 100): Paginator
     {
         $query = $this->createQueryBuilder('u')
             ->join('u.followingProposals', 'f')
             ->join('f.proposal', 'p')
-            ->where('p.id = :proposalId')
-            ->setParameter('proposalId', $proposal->getId());
+            ->where('f.proposal = :propsoal')
+            ->setParameter('propsoal', $proposal)
+            ->setMaxResults($offset)
+            ->setFirstResult($first);
 
-        return $query->getQuery()->getResult();
+        return new Paginator($query);
     }
 
     public function findFollowersToExport(string $proposalId): array
@@ -771,11 +773,10 @@ class UserRepository extends EntityRepository
         $query = $this->createQueryBuilder('u')
             ->select('count(u.id)')
             ->join('u.followingProposals', 'f')
-            ->join('f.proposal', 'p')
-            ->andWhere('p.id = :proposalId')
-            ->setParameter('proposalId', $proposal->getId());
+            ->andWhere('f.proposal = :proposal')
+            ->setParameter('proposal', $proposal);
 
-        return $query->getQuery()->getSingleScalarResult();
+        return (int) $query->getQuery()->getSingleScalarResult();
     }
 
     public function countFollowerForProposalAndUser(Proposal $proposal, User $user): int
@@ -805,6 +806,17 @@ class UserRepository extends EntityRepository
         ));
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function countProposalsFollowed(User $user): int
+    {
+        $query = $this->createQueryBuilder('u')
+            ->select('count(f.id)')
+            ->join('u.followingProposals', 'f')
+            ->andWhere('f.user = :user')
+            ->setParameter('user', $user);
+
+        return $query->getQuery()->getSingleScalarResult();
     }
 
     /**

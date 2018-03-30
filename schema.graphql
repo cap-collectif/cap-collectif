@@ -994,7 +994,22 @@ type Proposal implements Node {
   mergedIn: [Proposal!]!
 
   # Array of users following proposal.
-  followers: [User!]!
+  followers(
+    # Ordering options for followers returning from the connection
+    orderBy: String
+
+    # Returns the elements in the list that come after the specified global ID.
+    after: String
+
+    # Returns the first n elements from the list.
+    first: Int = 32
+
+    # Returns the elements in the list that come before the specified global ID.
+    before: String
+
+    # Returns the last n elements from the list.
+    last: Int
+  ): UsersConnection!
   followerConnection(
     # Ordering options for followers returning from the connection
     orderBy: String
@@ -1763,7 +1778,22 @@ type User implements Node {
   consentExternalCommunication: Boolean!
 
   # Array of proposals followed by current user.
-  followingProposals: [Proposal!]!
+  followingProposals(
+    # Ordering options for followers returning from the connection
+    orderBy: String
+
+    # Returns the elements in the list that come after the specified global ID.
+    after: String
+
+    # Returns the first n elements from the list.
+    first: Int = 32
+
+    # Returns the elements in the list that come before the specified global ID.
+    before: String
+
+    # Returns the last n elements from the list.
+    last: Int
+  ): ProposalConnection!
 
   # Total of contributions count
   contributionsCount: Int!
