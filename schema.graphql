@@ -232,6 +232,101 @@ type CollectStep implements Node & Step {
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
 }
 
+# A comment
+type Comment {
+  id: ID!
+  body: String
+  createdAt: DateTime!
+  editedAt: DateTime
+  isEnabled: Boolean!
+  author: User
+  parent: Comment
+  answers: [Comment]
+  authorName: String
+  authorEmail: String
+  authorIp: String
+  expired: Boolean
+  reports: [Reporting]
+  isTrashed: Boolean!
+  votes(after: String, first: Int = 30, before: String, last: Int, orderBy: CommentVoteOrder = {field: CREATED_AT, direction: DESC}): CommentVoteConnection
+  trashedReason: String
+}
+
+# A connection to a list of items.
+type CommentConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [CommentEdge]
+}
+
+# An edge in a connection.
+type CommentEdge {
+  # The item at the end of the edge.
+  node: Comment!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# Ways in which lists of comment votes can be ordered upon return.
+input CommentNewsOrder {
+  field: CommentVoteOrderField! = CREATED_AT
+  direction: OrderDirection! = DESC
+}
+
+type CommentVote {
+  id: ID!
+
+  # Date of vote.
+  createdAt: DateTime
+
+  # If vote is expired, it exists but doesn't count.
+  expired: Boolean!
+
+  # The author of the contribution.
+  author: User!
+
+  # Returns 'vote'.
+  kind: String!
+}
+
+# A connection to a list of items.
+type CommentVoteConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [CommentVoteEdge]
+}
+
+# An edge in a connection.
+type CommentVoteEdge {
+  # The item at the end of the edge.
+  node: CommentVote!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# Ways in which lists of comment votes can be ordered upon return.
+input CommentVoteOrder {
+  field: CommentVoteOrderField! = CREATED_AT
+  direction: OrderDirection! = DESC
+}
+
+# Ordering options for votes.
+enum CommentVoteOrderField {
+  CREATED_AT
+  UPDATED_AT
+  POPULARITY
+}
+
 # A consultation
 type Consultation implements Node & Step {
   kind: String!
@@ -641,6 +736,26 @@ type Mutation {
   updateProfile(input: UpdateProfileInput!): UpdateProfilePayload
 }
 
+# A connection to a list of items.
+type NewsConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [NewsEdge]
+}
+
+# An edge in a connection.
+type NewsEdge {
+  # The item at the end of the edge.
+  node: Post!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
 # Fetches an object given its ID
 interface Node {
   # The ID of an object
@@ -878,6 +993,7 @@ enum PickFollowTypeValue {
 type Post {
   id: String!
   title: String!
+  comments(after: String, first: Int = 30, before: String, last: Int, orderBy: CommentNewsOrder = {field: CREATED_AT, direction: DESC}): CommentConnection
   abstract: String!
 }
 
@@ -922,7 +1038,7 @@ type Proposal implements Node {
   progressSteps: [ProgressStep!]!
   evaluers: [Group!]!
   viewerIsAnEvaluer: Boolean!
-  news: [Post!]!
+  news(after: String, first: Int = 30, before: String, last: Int, orderBy: ProposalNewsOrder = {field: CREATED_AT, direction: DESC}): NewsConnection
   project: Project!
   status: Status
   selections: [Selection!]!
@@ -950,6 +1066,9 @@ type Proposal implements Node {
   # The publication status.
   publicationStatus: PublicationStatus!
   trashedReason: String
+  trashed: Boolean
+  trashedAt: DateTime
+  expired: Boolean
 
   # The id of the contribution.
   id: ID!
@@ -983,6 +1102,8 @@ type Proposal implements Node {
 
   # Count number of comments for the proposal.
   commentsCount: Int!
+  comments(after: String, first: Int, before: String, last: Int): CommentConnection
+  votes(after: String, first: Int = 30, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}, step: ID!): ProposalVoteConnection
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
@@ -1159,6 +1280,43 @@ enum ProposalOrderField {
   CREATED_AT
 }
 
+# A connection to a list of items.
+type ProposalVoteConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [ProposalVoteEdge]
+}
+
+# An edge in a connection.
+type ProposalVoteEdge {
+  # The item at the end of the edge.
+  node: PropositionVote!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# Ways in which lists of proposal votes can be ordered upon return.
+input ProposalVoteOrder {
+  field: ProposalVoteOrderField! = CREATED_AT
+  direction: OrderDirection! = DESC
+}
+
+# Ordering options for proposals votes connections.
+enum ProposalVoteOrderField {
+  CREATED_AT
+}
+
+# Ways in which lists of votes can be ordered upon return.
+input ProposalVotesOrder {
+  field: VoteOrderField! = CREATED_AT
+  direction: OrderDirection! = DESC
+}
+
 input ProposalsConnectionFilter {
   viewerIsEvaluer: Boolean = false
 }
@@ -1168,6 +1326,9 @@ type PropositionVote implements YesNoPairedVote & Contribution & ContributionWit
 
   # The author of the contribution.
   author: User!
+
+  # Is the vote private ?
+  private: Boolean
   value: YesNoPairedVoteValue!
 
   # If vote is expired, it exists but doesn't count.
@@ -1872,6 +2033,8 @@ type UserNotificationsConfiguration {
 
 # A type of person
 type UserType {
+  id: ID!
+
   # The name of the type.
   name: String!
 }
@@ -1982,6 +2145,11 @@ type VersionVote implements YesNoPairedVote & Contribution & ContributionWithAut
 
   # Returns 'vote'.
   kind: String!
+}
+
+# Ordering options for votes.
+enum VoteOrderField {
+  CREATED_AT
 }
 
 interface YesNoPairedVote {

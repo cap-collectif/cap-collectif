@@ -15,7 +15,7 @@ type State = void;
 
 export class ProposalAdminNewsForm extends Component<Props, State> {
   static defaultProps: DefaultProps;
-  render() {
+  render() {g
     const { proposal, intl } = this.props;
 
     return (
@@ -33,26 +33,26 @@ export class ProposalAdminNewsForm extends Component<Props, State> {
           </a>
         </div>
         <div className="box-content">
-          {proposal.news.length !== 0 ? (
+          {proposal.news.totalCount !== 0 ? (
             <ListGroup>
-              {proposal.news.map((news, index) => (
+              {proposal.news.edges.map((news, index) => (
                 <ListGroupItem key={index}>
                   <Row>
                     <Col xs={6}>
-                      <strong>{news.title}</strong>
+                      <strong>{news.node.title}</strong>
                     </Col>
                     <Col xs={6}>
                       <ButtonToolbar className="pull-right">
                         <Button
                           bsStyle="warning"
                           className="btn-outline-warning"
-                          href={`${baseUrl}/admin/capco/app/post/${news.id}/edit`}>
+                          href={`${baseUrl}/admin/capco/app/post/${news.node.id}/edit`}>
                           <i className="fa fa-pencil" /> <FormattedMessage id="global.edit" />
                         </Button>
                         <Button
                           bsStyle="danger"
                           className="btn-outline-danger"
-                          href={`${baseUrl}/admin/capco/app/post/${news.id}/delete`}>
+                          href={`${baseUrl}/admin/capco/app/post/${news.node.id}/delete`}>
                           <i className="fa fa-trash" />
                         </Button>
                       </ButtonToolbar>
@@ -82,8 +82,14 @@ export default createFragmentContainer(
   graphql`
     fragment ProposalAdminNewsForm_proposal on Proposal {
       news {
-        id
-        title
+        totalCount
+        edges {
+          cursor
+          node {
+            id
+            title
+          }
+        }
       }
     }
   `,
