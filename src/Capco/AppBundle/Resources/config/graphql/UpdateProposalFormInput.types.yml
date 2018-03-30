@@ -57,3 +57,5 @@ UpdateProposalFormInput:
                 type: "[DistrictInput!]"
             questions:
                 type: "[QuestionnaireAbstractQuestionInput!]"
+            allowAknowledge:
+                type: "Boolean"

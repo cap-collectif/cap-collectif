@@ -1,7 +1,7 @@
 @proposal @create_proposal
 Feature: Create proposal
 
-@database @elasticsearch
+@database @elasticsearch @rabbitmq
 Scenario: GraphQL client wants to add a draft proposal
   Given features themes, districts are enabled
   And I am logged in to graphql as user
@@ -40,6 +40,8 @@ Scenario: GraphQL client wants to add a draft proposal
     }
   }
   """
+  Then the queue associated to "proposal_create" producer has messages below:
+  | 0 | {"proposalId": "@uuid@"} |
 
 @database @elasticsearch
 Scenario: GraphQL client wants to create a proposal
