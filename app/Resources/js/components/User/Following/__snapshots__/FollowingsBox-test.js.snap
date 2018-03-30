@@ -54,7 +54,12 @@ exports[`<FollowingsBox /> render 1`] = `
     }
     query={[Function]}
     render={[Function]}
-    variables={Object {}}
+    variables={
+      Object {
+        "count": 1000,
+        "cursor": null,
+      }
+    }
   />
 </div>
 `;

@@ -23,8 +23,8 @@ export class FollowingsProposals extends Component<Props, State> {
 
   onUnfollowAll() {
     const { viewer } = this.props;
-    const ids = viewer.followingProposals.map(proposal => {
-      return proposal.id;
+    const ids = viewer.followingProposals.edges.map(edge => {
+      return edge.node.id;
     });
 
     this.setState({ open: !this.state.open }, () => {
