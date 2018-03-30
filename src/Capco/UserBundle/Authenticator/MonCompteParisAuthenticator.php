@@ -52,8 +52,8 @@ class MonCompteParisAuthenticator implements SimplePreAuthenticatorInterface
         try {
             $parisId = $this->openAmCaller->getUid();
             $isAlreadyAuthenticated = true;
-        } catch (\RuntimeException $e) {
-            $this->logger->critical('Failed to get uuid from cookie !', ['cookie' => $cookieValue]);
+        } catch (\Exception $e) {
+            $this->logger->error('Failed to get uuid from cookie: {cookie}', ['cookie' => $cookieValue]);
 
             return null;
         }

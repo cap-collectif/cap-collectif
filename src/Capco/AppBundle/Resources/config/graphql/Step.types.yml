@@ -10,3 +10,6 @@ Step:
               type: "String!"
             title:
               type: "String!"
+            # project:
+            #     type: "Project!"
+            #     description: "The related project"

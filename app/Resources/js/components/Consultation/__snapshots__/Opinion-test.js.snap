@@ -18,8 +18,16 @@ exports[`<Opinion /> renders correcty 1`] = `
           }
         }
       >
-        <Connect(UserAvatar)
+        <UserAvatar
+          anchor={true}
           className="pull-left"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
+          size={45}
+          style={Object {}}
+          user={null}
         />
         <div
           className="opinion__data"
