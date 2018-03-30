@@ -8,6 +8,9 @@ class FormattedValueResponseResolver
 {
     public function __invoke(ValueResponse $response)
     {
+        if (!$response->getValue()) {
+            return null;
+        }
         if (\is_string($response->getValue())) {
             return $response->getValue();
         }

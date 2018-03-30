@@ -260,3 +260,9 @@ services:
         class: Capco\AppBundle\GraphQL\Resolver\FormattedValueResponseResolver
         tags:
           - { name: overblog_graphql.resolver }
+
+    capco.resolver.proposal_reportings:
+        class: Capco\AppBundle\GraphQL\Resolver\ProposalReportingsResolver
+        tags:
+          - { name: overblog_graphql.resolver }
+        arguments: ['@capco.reporting.repository', '@monolog.logger']

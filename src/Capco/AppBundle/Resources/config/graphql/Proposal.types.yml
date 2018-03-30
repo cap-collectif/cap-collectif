@@ -31,6 +31,17 @@ Proposal:
                   orderBy:
                       type: "ProposalNewsOrder"
                       defaultValue: { field: CREATED_AT, direction: DESC }
+            reportings:
+              type: "ReportingConnection!"
+              argsBuilder: "Relay::Connection"
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalReportingsResolver", [value, args])'
+              args:
+                  first:
+                      type: "Int"
+                      defaultValue: 30
+                  orderBy:
+                      type: "ProposalReportingOrder"
+                      defaultValue: { field: CREATED_AT, direction: DESC }
             project:
               type: "Project!"
             status:

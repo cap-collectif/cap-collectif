@@ -14,13 +14,13 @@ describe('<ProposalAdminNewsForm />', () => {
         totalCount: 1,
         edges: [
           {
-            cursor: "curseurdepagination",
+            cursor: 'curseurdepagination',
             node: {
               id: '1',
-              title: 'news-1'
-            }
-          }
-        ]
+              title: 'news-1',
+            },
+          },
+        ],
       },
     },
   };
@@ -30,7 +30,7 @@ describe('<ProposalAdminNewsForm />', () => {
     proposal: {
       news: {
         totalCount: 0,
-        edges: []
+        edges: [],
       },
     },
   };
