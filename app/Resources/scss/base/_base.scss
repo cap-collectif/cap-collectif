@@ -3,217 +3,94 @@
 ================================================================*/
 
 .print {
-    display: none;
+  display: none;
 }
 
 /* ======================== Label ============================*/
 
 @each $label in $basic-colors {
-    $name: nth($label, 1);
-    $color: nth($label, 2);
+  $name: nth($label, 1);
+  $color: nth($label, 2);
 
-    .label-#{$name} {
-        background-color: $color !important; // thanks AdminLTE
+  .label-#{$name} {
+    background-color: $color !important; // thanks AdminLTE
 
-        a, a:hover {
-            color: $white;
-            font-weight: 400;
-        }
+    a, a:hover {
+      color: $white;
+      font-weight: 400;
     }
+  }
 }
 
 /* ======================== Excerpt ============================*/
 
 .excerpt, a.excerpt, .small.excerpt {
-    color: $dark-gray;
-    font-weight: normal;
+  color: $dark-gray;
+  font-weight: normal;
 }
 
 .excerpt_dark {
-    color: $dark
+  color: $dark
 }
 
 .excerpt_private {
-    @extend .excerpt;
-    color: $info-color;
-    margin-top: 25px;
+  @extend .excerpt;
+  color: $info-color;
+  margin-top: 25px;
 }
 
 /* ==================== Private elements ========================*/
 
 .PrivateList {
-    &__box {
-        padding: 30px 25px 0;
-        border: 1px $border-color solid;
-        border-radius: 5px;
-        background-color: $page-bgc;
-    }
+  &__box {
+    padding: 30px 25px 0;
+    border: 1px $border-color solid;
+    border-radius: 5px;
+    background-color: $page-bgc;
+  }
 }
 
 .private-box {
-    border: 1px solid $info-color;
-    padding: 12px 15px 15px;
-    margin-bottom: 15px;
-    border-radius: 5px;
+  border: 1px solid $info-color;
+  padding: 12px 15px 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
 
-    .form-group {
-        margin-bottom: 0;
-    }
+  .form-group {
+    margin-bottom: 0;
+  }
 
-    h2, h3, h4 {
-        margin-top: 0;
-    }
+  h2, h3, h4 {
+    margin-top: 0;
+  }
 }
 
 /* ======================== Avatar =============================*/
 
 svg.avatar {
-    vertical-align: middle;
+  vertical-align: middle;
 }
 
 /* ======================= Ellipsis ============================*/
 
 .ellipsis {
-    @include ellipsis();
+  @include ellipsis();
 }
 
 /* ======================= Storybook ============================*/
 
-.share-button-wrapper div {
-    display: inline-block;
-}
+.storybook-container {
+  hr {
+    margin: 20px 0;
+  }
 
-.tabs__pills ul {
-    border-bottom: 0;
-}
+  a {
+    color: $brand-color-2;
 
-.tabs__pills {
-    border-bottom: 1px solid $border-color;
-
-    .container {
-        padding-top: 0;
-        padding-bottom: 0;
+    &:hover {
+      color: $brand-color-1;
     }
-
-    .tabs__pill {
-        float: none;
-        display: inline-block;
-        text-align: center;
-
-        a {
-            padding-top: 22px;
-            padding-bottom: 22px;
-        }
-
-        &.active .badge {
-            background-color: $dark-gray;
-            color: $white;
-        }
-
-        &.active a,
-        &.active a:hover,
-        &.active a:focus,
-        a:focus,
-        a:hover {
-            background-color: $white;
-            color: $dark;
-            @include border-radius(0);
-            @include box-shadow(0 -3px 0 $brand-primary inset);
-        }
-    }
-}
-
-.tabs__container {
-    > .container {
-        padding-top: 20px;
-    }
-
-    .tabs{
-        margin-bottom: 30px;
-
-        .container {
-            padding-top: 0;
-            padding-bottom: 0;
-
-            .tab {
-
-                a {
-                    padding: 15px 20px;
-                }
-
-                .badge {
-                    margin-left: 10px;
-                }
-            }
-        }
-    }
-}
-
-.PrivateList {
-    &__box {
-        padding: 30px 25px 0;
-        border: 1px $border-color solid;
-        border-radius: 5px;
-        background-color: $page-bgc;
-    }
-}
-
-.well .editor {
-    background-color: $white;
-}
-
-input[type="color"],
-input[type="date"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="email"],
-input[type="month"],
-input[type="number"],
-input[type="password"],
-input[type="search"],
-input[type="tel"],
-input[type="text"],
-input[type="time"],
-input[type="url"],
-input[type="week"],
-select:focus,
-select.form-control,
-textarea {
-    font-size: 16px;
-}
-
-.settings__form label[for=sonata_user_profile_form_profilePageIndexed] {
-    font-weight: normal;
-    color: $dark;
-}
-
-.print {
-    display: none;
-}
-
-.label-default {
-    background-color: $dark-gray;
-}
-
-.label-success {
-    background-color: $success-color;
-}
-
-.label-danger {
-    background-color: $danger-color;
-}
-
-.label-info {
-    background-color: $info-color;
-
-    a, a:hover {
-        color: $white;
-        font-weight: 400;
-    }
-}
-
-.small.excerpt {
-    color: $dark-gray;
+  }
 }
 
 .following-project {

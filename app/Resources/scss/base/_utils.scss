@@ -58,23 +58,6 @@
     padding-bottom: 10px;
 }
 
-.py-0{
-    padding-top: 0;
-    padding-bottom: 0;
-}
-
-/* =====
-  Border
-==== */
-
-.b-none{
-    border:0;
-}
-
-.border-b-1 {
-    border-bottom: solid 1px dimgrey;
-}
-
 /* =====
   Text
 ==== */
@@ -112,7 +95,7 @@
 }
 
 .flex-wrap {
-  flex-wrap: wrap;
+    flex-wrap: wrap;
 }
 
 .d-ib {
