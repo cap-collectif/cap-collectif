@@ -42,10 +42,20 @@
             },'CapcoAppBundle')|raw }}
         {% endif %}
     </span>
+
     <p style="color:#000;">
-        {{ 'you-can-modify-or-delete-your-proposal'|trans({'{modifier}':proposalLink, '{supprimer}': proposalLink},'CapcoAppBundle') }}
-        {{ ' ' ~ 'until-date'|trans({'{date}':endAt|localizeddate('long', 'none', 'fr_FR', timezone)},'CapcoAppBundle') }}.
+        {% if isTimeless %}
+            {{ 'you-can-still-edit-or-delete-your-proposal'|trans({},'CapcoAppBundle')|raw }}
+        {% else %}
+            {{ 'you-can-modify-or-delete-your-proposal'|trans({'{modifier}':proposalLink, '{supprimer}': proposalLink},'CapcoAppBundle') }}
+            {{ ' ' ~ 'until-date'|trans({'{date}':endAt|localizeddate('long', 'none', 'fr_FR', timezone)},'CapcoAppBundle') }}.
+        {% endif %}
     </p>
+        <p style="color:#000; margin-bottom: 8px;">
+            <i>
+                {{ 'published-contribution-email'|trans({},'CapcoAppBundle')|raw }}
+            </i>
+        </p>
 {% endblock %}
 
 {% block footer_mail %}

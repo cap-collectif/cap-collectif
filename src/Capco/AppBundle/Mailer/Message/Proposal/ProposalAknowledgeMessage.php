@@ -63,6 +63,7 @@ final class ProposalAknowledgeMessage extends Message
             'timezone' => $proposal->getCreatedAt()->getTimezone(),
             'business' => 'Cap Collectif',
             'businessUrl' => 'https://cap-collectif.com/',
+            'isTimeless' => $proposal->getStep()->isTimeless(),
         ];
     }
 
