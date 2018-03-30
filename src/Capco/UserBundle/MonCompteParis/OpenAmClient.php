@@ -12,12 +12,10 @@ class OpenAmClient
 
     protected $cookie = null;
     protected $client;
-    protected $logger;
 
-    public function __construct(HttpClient $client, $logger)
+    public function __construct(HttpClient $client)
     {
         $this->client = $client;
-        $this->logger = $logger;
     }
 
     public function setCookie(string $cookie)
@@ -27,19 +25,25 @@ class OpenAmClient
 
     public function getUid(): string
     {
-        $response = $this->client->post(self::API_URL . 'sessions/' . $this->cookie . '?_action=validate', ['content-type' => 'application/json'], '{}');
+        $response = $this->client->post(self::API_URL . 'sessions/' . $this->cookie . '?_action=validate', ['Content-Type: application/json']);
         $json = json_decode((string) $response->getBody(), true);
 
-        if (isset($json['code']) && 500 === $json['code']) {
-            $this->logger->critical('Error returned by moncompte.paris.fr', ['json' => $json]);
-            throw new \RuntimeException('Error returned by moncompte.paris.fr.');
-        }
-
         if (false === $json['valid']) {
-            $this->logger->critical('Token not valid returned by moncompte.paris.fr.');
             throw new \RuntimeException('Token not valid.');
         }
 
         return $json['uid'];
+    }
+
+    // OR http://fr.lutece.paris.fr/fr/wiki/gru-appeldirect-identitystore.html
+    public function getUserInformations(string $uid): array
+    {
+        $response = $this->client->get(self::API_URL . 'users/' . $uid, [self::COOKIE_NAME . ': ' . $this->cookie]);
+        $json = json_decode((string) $response->getBody(), true);
+
+        return [
+          'username' => $json['username'],
+          'mail' => $json['mail'][0],
+        ];
     }
 }
