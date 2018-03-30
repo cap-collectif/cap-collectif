@@ -113,7 +113,7 @@ type FormValues = {|
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const { proposalForm, proposal } = props;
-
+  window.onbeforeunload = null;
   const data = {
     title: values.title,
     summary: values.summary,
@@ -264,6 +264,9 @@ export class ProposalForm extends React.Component<Props, State> {
   }
 
   render() {
+    window.onbeforeunload = function() {
+      return true;
+    };
     const { intl, titleValue, proposalForm, features, themes, error } = this.props;
     const {
       districtIdsFilteredByAddress,

@@ -439,7 +439,7 @@ class Project implements IndexableInterface
         return $this;
     }
 
-    public function getRealSteps(): array
+    public function getRealSteps()
     {
         $steps = [];
         foreach ($this->steps as $qaq) {

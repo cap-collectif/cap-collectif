@@ -33,5 +33,24 @@
 
 {% block javascripts %}
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=***REMOVED***&libraries=places"></script>
+<script>
+    function waitForElementToDisplay(time) {
+        if(document.getElementById("proposal-admin-page-tabs-pane-1")!=null) {
+            jQuery('form').one('change', function () {
+                window.onbeforeunload = function () {
+                    return true;
+                };
+            });
+            return;
+        }
+        else {
+            setTimeout(function() {
+                waitForElementToDisplay(time);
+            }, time);
+        }
+    }
+
+    waitForElementToDisplay(2000);
+</script>
 {{ parent() }}
 {% endblock %}
