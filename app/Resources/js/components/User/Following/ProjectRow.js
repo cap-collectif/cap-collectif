@@ -49,7 +49,7 @@ export class ProjectRow extends Component<Props, State> {
     return (
       <Collapse in={this.state.open} id={`profile-project-collapse-${project.id}`}>
         <Panel
-          className="following-project"
+          className="capco-panel-list"
           header={
             <div id="all-proposals">
               <h3>

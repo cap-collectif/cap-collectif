@@ -73,7 +73,7 @@ Scenario: Logged in user wants to manage his followings and unfollow the first p
   And I visited "manage followings page"
   And I wait 2 seconds
   Then I click the "#profile-project-unfollow-button-project6" element
-  And the "div#profile-project-collapse-project6" element should not contain "class=\"following-project collapse in panel panel-default\""
+  And the "div#profile-project-collapse-project6" element should not contain "class=\"capco-panel-list collapse in panel panel-default\""
   And I wait 2 seconds
   And I reload the page
   Then I should not see an "#profile-project-collapse-project6" element

@@ -14,7 +14,7 @@ exports[`<ProjectRow /> should render the project 1 with his proposal displayed 
   <Panel
     bsClass="panel"
     bsStyle="default"
-    className="following-project"
+    className="capco-panel-list"
     defaultExpanded={false}
     header={
       <div
@@ -99,7 +99,7 @@ exports[`<ProjectRow /> should render the project 2 with his proposal displayed 
   <Panel
     bsClass="panel"
     bsStyle="default"
-    className="following-project"
+    className="capco-panel-list"
     defaultExpanded={false}
     header={
       <div
@@ -172,7 +172,7 @@ exports[`<ProjectRow /> should render without project 1`] = `
   <Panel
     bsClass="panel"
     bsStyle="default"
-    className="following-project"
+    className="capco-panel-list"
     defaultExpanded={false}
     header={
       <div

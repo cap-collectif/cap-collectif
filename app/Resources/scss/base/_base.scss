@@ -93,34 +93,38 @@ svg.avatar {
   }
 }
 
-.following-project {
+.b-none {
+  border: 0;
+}
+
+.capco-panel-list {
   border-bottom: none;
 }
 
-.following-project .panel-body {
+.capco-panel-list .panel-body {
   padding: 0;
 }
 
-.following-project .panel-body .list-group {
+.capco-panel-list .panel-body .list-group {
   margin-bottom: 0;
   padding-left: 0;
   border: none;
 }
 
-.following-project .panel-body .list-group .list-group-item:first-child {
+.capco-panel-list .panel-body .list-group .list-group-item:first-child {
   border-top: none;
   border-left: none;
   border-right: none;
 }
 
-.following-project .panel-body .list-group .list-group-item:last-child {
+.capco-panel-list .panel-body .list-group .list-group-item:last-child {
   border-left: none;
   border-right: none;
   border-bottom: 1px solid rgb(221, 221, 221);
   border-radius: 0;
 }
 
-.following-project .panel-body .list-group .list-group-item {
+.capco-panel-list .panel-body .list-group .list-group-item {
   border-left: none;
   border-right: none;
 }
