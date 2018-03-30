@@ -86,7 +86,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
         <LoginOverlay>
           <span className="mb-0 custom-dropdown">
             <Dropdown
-              className="mb-0 width250 custom-dropdown-bgd capco-dropdown"
+              className="mb-0 width250 custom-dropdown-bgd dropdown-button"
               id={`proposal-follow-btn-${proposal.id}`}
               defaultOpen={isJustFollowed}>
               <Dropdown.Toggle className="custom-dropdown-button">

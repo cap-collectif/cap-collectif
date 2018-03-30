@@ -90,7 +90,7 @@ Scenario: On Proposal Preview, I want to follow a proposal and change the type o
   And I should see proposal followed as "default_and_comments"
   Then I go to a collect step with vote
   And I should see "following"
-  And I click the ".capco-dropdown" element
+  And I click the ".dropdown-button" element
   And I should see a ".dropdown-menu" element
   And I should see proposal followed as "default_and_comments"
   Then I change the type of proposal follow with type "all"
