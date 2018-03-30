@@ -1038,7 +1038,7 @@ type Proposal implements Node {
   progressSteps: [ProgressStep!]!
   evaluers: [Group!]!
   viewerIsAnEvaluer: Boolean!
-  news(after: String, first: Int = 30, before: String, last: Int, orderBy: ProposalNewsOrder = {field: CREATED_AT, direction: DESC}): NewsConnection
+  news(after: String, first: Int = 30, before: String, last: Int, orderBy: ProposalNewsOrder = {field: CREATED_AT, direction: DESC}): NewsConnection!
   project: Project!
   status: Status
   selections: [Selection!]!
@@ -1102,8 +1102,8 @@ type Proposal implements Node {
 
   # Count number of comments for the proposal.
   commentsCount: Int!
-  comments(after: String, first: Int, before: String, last: Int): CommentConnection
-  votes(after: String, first: Int = 30, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}, step: ID!): ProposalVoteConnection
+  comments(after: String, first: Int, before: String, last: Int): CommentConnection!
+  votes(after: String, first: Int = 30, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}, step: ID!): ProposalVoteConnection!
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!

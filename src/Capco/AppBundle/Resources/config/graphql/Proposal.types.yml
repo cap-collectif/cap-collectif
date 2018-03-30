@@ -21,7 +21,7 @@ Proposal:
               type: "Boolean!"
               resolve: "@=resolver('proposal_viewer_is_evaluer', [value, user])"
             news:
-              type: "NewsConnection"
+              type: "NewsConnection!"
               argsBuilder: "Relay::Connection"
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalNewsResolver", [value, args])'
               args:
@@ -114,11 +114,11 @@ Proposal:
               type: "Int!"
               description: "Count number of comments for the proposal."
             comments:
-              type: "CommentConnection"
+              type: "CommentConnection!"
               argsBuilder: "Relay::Connection"
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalCommentsResolver", [value, args])'
             votes:
-              type: "ProposalVoteConnection"
+              type: "ProposalVoteConnection!"
               argsBuilder: "Relay::Connection"
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalVotesResolver", [value, args])'
               args:
