@@ -30,7 +30,7 @@ class ProposalCollectVoteRepository extends EntityRepository
         ->andWhere('pv.expired = false')
         ->leftJoin('pv.proposal', 'proposal')
         ->andWhere('proposal.deletedAt IS NULL')
-        ->andWhere('proposal.collectStep IN (:steps)')
+        ->andWhere('pv.collectStep IN (:steps)')
         ->setParameter('steps', array_map(function ($step) {
             return $step;
         }, $project->getRealSteps()))

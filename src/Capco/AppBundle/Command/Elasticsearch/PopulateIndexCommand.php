@@ -23,12 +23,12 @@ class PopulateIndexCommand extends ContainerAwareCommand
     {
         $indexer = $this->getContainer()->get('capco.elasticsearch.indexer');
 
-        $output->writeln(['Start indexing.', '']);
+        $output->writeln(['Start indexing Elasticsearch.']);
 
         try {
             $indexer->indexAll($output);
             $indexer->finishBulk();
-        } catch (\Exception $e) {
+        } catch (\RuntimeException $e) {
             $output->writeln('<error>' . $e->getMessage() . '</error>');
 
             return 1;

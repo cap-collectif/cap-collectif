@@ -22,7 +22,6 @@ class SourceVoteRepository extends EntityRepository
             return $step;
         }, $project->getRealSteps()))
         ->andWhere('v.user = :author')
-        ->setParameter('project', $project)
         ->setParameter('author', $author)
       ;
 
