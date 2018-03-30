@@ -13,10 +13,10 @@ Scenario: "Cron want to notify followers and open an email"
   And I should see "admin.fields.source.opinion" in mail
   And I should see "Ravalement de la façade de la bibliothèque municipale" in mail
   And I should see "💬 new-comment {&quot;%count%&quot;:14,&quot;%num%&quot;:14}" in mail
-  And I should see "✔️ moving-to-the-step {&quot;{titleStep}&quot;:&quot;S\u00e9lection&quot;,&quot;{statusName}&quot;:&quot;Soumis au vote&quot;}" in mail
+  And I should see "✔️ moving-to-the-step-with-status {&quot;{titleStep}&quot;:&quot;S\u00e9lection&quot;,&quot;{statusName}&quot;:&quot;Soumis au vote&quot;}" in mail
   And I should see "admin.fields.source.opinion" in mail
   And I should see "Rénovation du gymnase" in mail
-  And I should see "✔️ moving-to-the-step {&quot;{titleStep}&quot;:&quot;S\u00e9lection&quot;,&quot;{statusName}&quot;:&quot;Vote gagn\u00e9&quot;}" in mail
+  And I should see "✔️ moving-to-the-step-with-status {&quot;{titleStep}&quot;:&quot;S\u00e9lection&quot;,&quot;{statusName}&quot;:&quot;Vote gagn\u00e9&quot;}" in mail
   And I should see "admin.fields.source.opinion" in mail
   And I should see "admin.fields.highlighted_content.project" in mail
   And I should see "Dépot avec selection vote budget" in mail
