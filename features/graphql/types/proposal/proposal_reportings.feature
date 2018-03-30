@@ -1,7 +1,7 @@
 @proposal_comments
 Feature: Reportings for a proposal
 
-@datanase
+@database
 Scenario: Admin wants to get reportings for a proposal
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
