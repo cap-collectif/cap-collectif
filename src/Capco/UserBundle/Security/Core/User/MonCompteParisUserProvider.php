@@ -23,10 +23,12 @@ class MonCompteParisUserProvider implements UserProviderInterface
         $user = $this->userManager->findUserBy(['parisId' => $id]);
 
         if (null === $user) {
+            $infos = $this->openAmCaller->getUserInformations($id);
+
             $user = $this->userManager->createUser();
             $user->setParisId($id);
             $user->setUsername(null);
-            $user->setEmail($id);
+            $user->setEmail($infos['mail']);
             $user->setPlainPassword('No password is stored locally.');
             $user->setEnabled(true);
             $this->userManager->updateUser($user);

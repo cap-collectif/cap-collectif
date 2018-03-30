@@ -165,8 +165,10 @@ export const ProposalDetailAdvancement = React.createClass({
                         key={i}
                         step={{
                           title: progressStep.title,
-                          startAt: progressStep.startAt,
-                          endAt: progressStep.endAt ? progressStep.endAt : null,
+                          startAt: moment(progressStep.startAt).format('ll'),
+                          endAt: progressStep.endAt
+                            ? moment(progressStep.endAt).format('ll')
+                            : null,
                           progressStep: true,
                         }}
                         status={progressStep.status}

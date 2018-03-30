@@ -1,0 +1,7 @@
+ProposalOrderField:
+    type: enum
+    config:
+        description: "Ordering proposal by datetime."
+        values:
+            CREATED_AT:
+                value: "CREATED_AT"

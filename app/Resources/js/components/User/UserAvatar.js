@@ -1,65 +1,49 @@
-// @flow
 import React from 'react';
-import { connect, type MapStateToProps } from 'react-redux';
 import DefaultAvatar from './DefaultAvatar';
-import type { State } from '../../types';
 
-type Props = {
-  user: Object,
-  size?: number,
-  className?: string,
-  defaultAvatar: ?string,
-  style?: Object,
-  anchor?: boolean,
-  onBlur?: Function,
-  onFocus?: Function,
-  onMouseOver?: Function,
-  onMouseOut?: Function,
-};
+const UserAvatar = React.createClass({
+  displayName: 'UserAvatar',
+  propTypes: {
+    user: React.PropTypes.object,
+    size: React.PropTypes.number,
+    className: React.PropTypes.string,
+    style: React.PropTypes.object,
+    anchor: React.PropTypes.bool,
+    onBlur: React.PropTypes.func,
+    onFocus: React.PropTypes.func,
+    onMouseOver: React.PropTypes.func,
+    onMouseOut: React.PropTypes.func,
+  },
 
-export class UserAvatar extends React.Component<Props> {
-  static DefaultProps = {
-    user: null,
-    size: 45,
-    className: '',
-    style: {},
-    anchor: true,
-    onBlur: () => {},
-    onFocus: () => {},
-    onMouseOver: () => {},
-    onMouseOut: () => {},
-  };
-
-  displayName: 'UserAvatar';
+  getDefaultProps() {
+    return {
+      user: null,
+      size: 45,
+      className: '',
+      style: {},
+      anchor: true,
+      onBlur: () => {},
+      onFocus: () => {},
+      onMouseOver: () => {},
+      onMouseOut: () => {},
+    };
+  },
 
   renderAvatar() {
-    const { user, defaultAvatar, size } = this.props;
-    const mediaSize = size && `${size}px`;
-
+    const { user } = this.props;
+    const size = `${this.props.size}px`;
     if (user && user.media) {
       return (
         <img
           src={user.media.url}
           alt={user.username}
           className="img-circle mr-10"
-          style={{ width: mediaSize, height: mediaSize }}
+          style={{ width: size, height: size }}
         />
       );
     }
-
-    if (user && defaultAvatar !== null) {
-      return (
-        <img
-          src={defaultAvatar}
-          alt={user.username}
-          className="img-circle mr-10"
-          style={{ width: mediaSize, height: mediaSize }}
-        />
-      );
-    }
-
-    return <DefaultAvatar size={size} />;
-  }
+    return <DefaultAvatar size={this.props.size} />;
+  },
 
   render() {
     const { anchor, className, onBlur, onFocus, onMouseOut, onMouseOver, style, user } = this.props;
@@ -83,11 +67,7 @@ export class UserAvatar extends React.Component<Props> {
         {this.renderAvatar()}
       </span>
     );
-  }
-}
-
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  defaultAvatar: state.default.images && state.default.images.avatar,
+  },
 });
 
-export default connect(mapStateToProps)(UserAvatar);
+export default UserAvatar;
