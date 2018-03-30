@@ -1,17 +1,4 @@
 Capco\AppBundle\Entity\Page:
-  page1:
-      title: Charte
-      body: |
-            Retrouvez sur cette page la possibilité de pouvoir afficher la charte du site.
-            <h2>Charte</h2>
-            <p><text(1000)></p>
-            <p><text(350)></p>
-            <h3>En tant que membre de Cap-Collectif</h3>
-            <p><text(350)></p>
-            <p><text(550)></p>
-            <h2>En conséquence, je m’engage :</h2>
-            <h3>En conséquence, je m’engage :</h3>
-            <p><text(350)></p>
   page2:
       title: Comment ça marche ?
       body: |

@@ -4,11 +4,11 @@ Capco\AppBundle\Entity\OpinionVersion:
         id:
             expose: true
             type: string
-            groups: [OpinionVersions, OpinionVersionPreviews, Elasticsearch]
+            groups: [OpinionVersions, OpinionVersionPreviews]
         title:
             expose: true
             type: string
-            groups: [OpinionVersions, OpinionVersionPreviews, Elasticsearch]
+            groups: [OpinionVersions, OpinionVersionPreviews]
         slug:
             expose: true
             type: string
@@ -16,7 +16,7 @@ Capco\AppBundle\Entity\OpinionVersion:
         body:
             expose: true
             type: string
-            groups: [OpinionVersions, Elasticsearch]
+            groups: [OpinionVersions]
         diff:
             expose: true
             type: string
@@ -32,7 +32,7 @@ Capco\AppBundle\Entity\OpinionVersion:
             expose: true
             type: DateTime
             serialized_name: createdAt
-            groups: [OpinionVersions, OpinionVersionPreviews, Elasticsearch]
+            groups: [OpinionVersions, OpinionVersionPreviews]
         answer:
             expose: true
             groups: [OpinionVersions]

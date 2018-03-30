@@ -1,5 +1,5 @@
 Capco\AppBundle\Entity\IdeaVote:
-  ideaVote{1..150}:
+  ideaVote{1..500}:
     idea: '@Idea1'
     user (unique): '@user<current()>'
 

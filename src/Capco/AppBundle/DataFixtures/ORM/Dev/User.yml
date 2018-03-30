@@ -93,7 +93,7 @@ Capco\UserBundle\Entity\User:
         password: $S$DV4UqpdijYQloOE/c6CHQg2SzxEW0K0iHQxOEPLfbv3H/4plvGAU
         confirmationToken: ~
 
-    user{6..200}:
+    user{6..500}:
         id: 'user<current()>'
         username (unique): <username()>
         firstname: <firstname()>

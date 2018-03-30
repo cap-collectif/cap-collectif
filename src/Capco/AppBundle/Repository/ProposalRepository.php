@@ -273,36 +273,6 @@ class ProposalRepository extends EntityRepository
             ->execute();
     }
 
-    public function countByAuthorAndProject(User $author, Project $project): int
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-          ->select('COUNT(DISTINCT proposal)')
-          ->leftJoin('proposal.proposalForm', 'form')
-          ->andWhere('form.step IN (:steps)')
-          ->setParameter('steps', array_map(function ($step) {
-              return $step;
-          }, $project->getRealSteps()))
-          ->andWhere('proposal.author = :author')
-          ->setParameter('author', $author)
-        ;
-
-        return $qb->getQuery()->getSingleScalarResult();
-    }
-
-    public function countByAuthorAndStep(User $author, CollectStep $step): int
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-          ->select('COUNT(DISTINCT proposal)')
-          ->leftJoin('proposal.proposalForm', 'f')
-          ->andWhere('proposal.author = :author')
-          ->andWhere('f.step =:step')
-          ->setParameter('step', $step)
-          ->setParameter('author', $author)
-      ;
-
-        return $qb->getQuery()->getSingleScalarResult();
-    }
-
     public function getTrashedOrUnpublishedByProject(Project $project)
     {
         $qb = $this->createQueryBuilder('p')
