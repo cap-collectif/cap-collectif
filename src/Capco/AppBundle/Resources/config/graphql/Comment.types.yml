@@ -27,8 +27,17 @@ Comment:
               type: "String"
             expired:
               type: "Boolean"
-            reports:
-              type: "[Reporting]"
+            reportings:
+              type: "ReportingConnection!"
+              argsBuilder: "Relay::Connection"
+              args:
+                first:
+                  type: "Int"
+                  defaultValue: 30
+                orderBy:
+                  type: "ReportingOrder"
+                  defaultValue: { field: CREATED_AT, direction: DESC }
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\CommentReportingsResolver", [value, args])'
             isTrashed:
               type: "Boolean!"
             votes:

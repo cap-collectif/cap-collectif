@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Proposal;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -32,5 +33,31 @@ class ReportingRepository extends EntityRepository
             ->setParameter('proposal', $proposal)
             ->getQuery()
             ->getSingleScalarResult();
+    }
+
+    public function countForComment(Comment $comment): int
+    {
+        return (int) $this->createQueryBuilder('r')
+            ->select('COUNT(r.id)')
+            ->where('r.Comment = :comment')
+            ->setParameter('comment', $comment)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function getByComment(Comment $comment, int $offset, int $limit, string $field, string $direction): Paginator
+    {
+        $qb = $this->createQueryBuilder('r');
+
+        $qb->andWhere('r.Comment = :comment')
+            ->setParameter('comment', $comment)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit);
+
+        if ('CREATED_AT' === $field) {
+            $qb->addOrderBy('r.createdAt', $direction);
+        }
+
+        return new Paginator($qb);
     }
 }

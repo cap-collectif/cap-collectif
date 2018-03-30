@@ -1,4 +1,4 @@
-ProposalReportingOrderField:
+ReportingOrderField:
     type: enum
     config:
         description: "Ordering options for reporting."

@@ -266,3 +266,9 @@ services:
         tags:
           - { name: overblog_graphql.resolver }
         arguments: ['@capco.reporting.repository', '@monolog.logger']
+
+    capco.resolver.comment_reportings:
+        class: Capco\AppBundle\GraphQL\Resolver\CommentReportingsResolver
+        tags:
+          - { name: overblog_graphql.resolver }
+        arguments: ['@capco.reporting.repository', '@monolog.logger']

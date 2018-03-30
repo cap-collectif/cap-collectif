@@ -1,10 +1,10 @@
-ProposalReportingOrder:
+ReportingOrder:
     type: input-object
     config:
         description: "Ways in which lists of reportings can be ordered upon return."
         fields:
             field:
-                type: "ProposalReportingOrderField!"
+                type: "ReportingOrderField!"
                 defaultValue: "CREATED_AT"
             direction:
                 type: "OrderDirection!"

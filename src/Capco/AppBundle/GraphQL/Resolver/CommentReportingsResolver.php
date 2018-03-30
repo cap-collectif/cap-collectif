@@ -2,13 +2,13 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
-use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Repository\ReportingRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
-class ProposalReportingsResolver
+class CommentReportingsResolver
 {
     private $repository;
     private $logger;
@@ -19,17 +19,17 @@ class ProposalReportingsResolver
         $this->logger = $logger;
     }
 
-    public function __invoke(Proposal $proposal, Argument $arguments)
+    public function __invoke(Comment $comment, Argument $arguments)
     {
         try {
-            $paginator = new Paginator(function (int $offset, int $limit) use ($proposal, $arguments) {
+            $paginator = new Paginator(function (int $offset, int $limit) use ($comment, $arguments) {
                 $field = $arguments->offsetGet('orderBy')['field'];
                 $direction = $arguments->offsetGet('orderBy')['direction'];
 
-                return $this->repository->getByProposal($proposal, $offset, $limit, $field, $direction)->getIterator()->getArrayCopy();
+                return $this->repository->getByComment($comment, $offset, $limit, $field, $direction)->getIterator()->getArrayCopy();
             });
 
-            $totalCount = $this->repository->countForProposal($proposal);
+            $totalCount = $this->repository->countForComment($comment);
 
             return $paginator->auto($arguments, $totalCount);
         } catch (\RuntimeException $exception) {

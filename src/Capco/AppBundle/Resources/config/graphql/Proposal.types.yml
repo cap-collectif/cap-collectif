@@ -40,7 +40,7 @@ Proposal:
                       type: "Int"
                       defaultValue: 30
                   orderBy:
-                      type: "ProposalReportingOrder"
+                      type: "ReportingOrder"
                       defaultValue: { field: CREATED_AT, direction: DESC }
             project:
               type: "Project!"
@@ -131,6 +131,10 @@ Proposal:
               type: "CommentConnection!"
               argsBuilder: "Relay::Connection"
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalCommentsResolver", [value, args])'
+              args:
+                first:
+                  type: "Int"
+                  defaultValue: 30
             votes:
               type: "ProposalVoteConnection!"
               argsBuilder: "Relay::Connection"
