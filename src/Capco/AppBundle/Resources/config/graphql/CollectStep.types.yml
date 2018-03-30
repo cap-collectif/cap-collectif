@@ -16,3 +16,8 @@ CollectStep:
                 type: "Int"
             project:
                 type: "Project!"
+            contributors:
+                type: "UserConnection!"
+                description: "A list of contributor associated with the consultation."
+                argsBuilder: "Relay::Connection"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\StepContributorResolver", [value, args])'
