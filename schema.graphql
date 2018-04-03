@@ -12,15 +12,13 @@ type AddUsersInGroupPayload {
   clientMutationId: String
 }
 
-scalar Address
-
 # An argument
-type Argument implements Node & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
+type Argument implements Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution {
   # Identifies the date and time when the object was created.
-  createdAt: DateTime!
+  createdAt: String!
 
   # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
+  updatedAt: String!
   url: String!
   expired: Boolean!
   published: Boolean!
@@ -89,9 +87,6 @@ input ChangeProposalContentInput {
   # The proposal id
   id: ID!
 
-  # Pass 'true' to keep your proposal in draft state, otherwise we admit that you want to publish it.
-  draft: Boolean
-
   # The new proposal title
   title: String
 
@@ -114,13 +109,13 @@ input ChangeProposalContentInput {
   district: String
 
   # The address geocoded by google
-  address: Address
+  address: String
 
   # The custom fields responses
   responses: [ResponseInput]
 
-  # Current media id
-  media: ID
+  # Set this to true to delete the current media
+  deleteCurrentMedia: Boolean
   clientMutationId: String
 }
 
@@ -132,9 +127,6 @@ type ChangeProposalContentPayload {
 input ChangeProposalEvaluationInput {
   # The proposal id
   proposalId: ID!
-
-  # The revision number of the evaluation
-  version: Int!
   responses: [ResponseInput!]!
   clientMutationId: String
 }
@@ -144,23 +136,12 @@ type ChangeProposalEvaluationPayload {
   clientMutationId: String
 }
 
-input ChangeProposalEvaluersInput {
-  # The proposal id
-  proposalId: ID!
-  evaluers: [ID!]
-  clientMutationId: String
-}
-
-type ChangeProposalEvaluersPayload {
-  proposal: Proposal!
-  clientMutationId: String
-}
-
 input ChangeProposalNotationInput {
   # The proposal id
   proposalId: ID!
   estimation: Int
   likers: [ID!]
+  evaluers: [ID!]
   clientMutationId: String
 }
 
@@ -209,28 +190,16 @@ type ChangeSelectionStatusPayload {
   clientMutationId: String
 }
 
-input ChangeUserNotificationsConfigurationInput {
-  # The new proposal comment notification value
-  onProposalCommentMail: Boolean!
-  clientMutationId: String
-}
-
-type ChangeUserNotificationsConfigurationPayload {
-  user: User!
-  clientMutationId: String
-}
-
-type CollectStep implements Node & Step {
+type CollectStep implements Step {
   id: ID!
   kind: String!
   title: String!
   statuses: [Status!]!
   voteThreshold: Int
-  project: Project!
 }
 
 # A consultation
-type Consultation implements Node & Step {
+type Consultation implements Step {
   kind: String!
 
   # The id of the consultation.
@@ -344,58 +313,7 @@ type CreateProposalFormPayload {
   clientMutationId: String
 }
 
-input CreateProposalFusionInput {
-  # Proposal ids from which the fusion is created
-  fromProposals: [ID!]!
-  clientMutationId: String
-}
-
-type CreateProposalFusionPayload {
-  proposal: Proposal
-  clientMutationId: String
-}
-
-input CreateProposalInput {
-  # The id of the form form proposal
-  proposalFormId: ID!
-
-  # If true will create a draft proposal, otherwise a published proposal.
-  draft: Boolean
-
-  # The proposal title
-  title: String
-
-  # The proposal body
-  body: HTML
-
-  # The proposal summary
-  summary: String
-
-  # The theme id (feature themes must be enabled)
-  theme: ID
-
-  # The category id
-  category: ID
-
-  # The district id (feature districts must be enabled)
-  district: ID
-
-  # The address geocoded by google
-  address: Address
-
-  # The responses to the form questions
-  responses: [ResponseInput]
-
-  # The media id to illustrate
-  media: ID
-  clientMutationId: String
-}
-
-type CreateProposalPayload {
-  # The created proposal, if everything goes well !
-  proposal: Proposal
-  clientMutationId: String
-}
+scalar CssJSON
 
 scalar DateTime
 
@@ -440,18 +358,15 @@ type District {
   id: ID!
   name: String!
   geojson: GeoJSON
+  geojsonStyle: CssJSON
   displayedOnMap: Boolean!
 }
 
 input DistrictInput {
   name: String!
   geojson: GeoJSON
-<<<<<<< HEAD
-  displayedOnMap: Boolean = false
-=======
   geojsonStyle: CssJSON
   displayedOnMap: Boolean!
->>>>>>> Add CssJSON type in DistrictInput.types
 }
 
 # Ordering options for districts.
@@ -463,7 +378,7 @@ enum DistrictOrderField {
 # A contribution with an author
 interface EditableContribution {
   # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
+  updatedAt: String!
 }
 
 # A Evaluation form (question)
@@ -474,58 +389,15 @@ type EvaluationForm {
   # The title of evaluation form (question)
   title: String!
 
-  # The description of evaluation form
-  description: String
-
   # List of questions in the evaluation form
-  questions: [Question!]!
-}
-
-input FollowProposalInput {
-  # The proposal id
-  proposalId: ID!
-  clientMutationId: String
-}
-
-type FollowProposalPayload {
-  proposal: Proposal
-  follower: User
-  followerEdge: FollowerEdge
-  clientMutationId: String
-}
-
-# A Follower
-type Follower {
-  id: ID!
-  user: User!
-  proposal: Proposal!
-}
-
-# A connection to a list of items.
-type FollowerConnection {
-  totalCount: Int!
-
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # Information to aid in pagination.
-  edges: [FollowerEdge]
-}
-
-# An edge in a connection.
-type FollowerEdge {
-  # The item at the end of the edge.
-  node: User!
-
-  # A cursor for use in pagination.
-  cursor: String!
+  questions: [Question!]
 }
 
 scalar GeoJSON
 
-# A group of User
-type Group implements Node {
-  # The id of the group.
+# A list of groups
+type Group {
+  # The content of the group.
   id: ID!
 
   # Identifies the group name.
@@ -558,10 +430,7 @@ type Media {
   id: ID!
 
   # The url of the media.
-  url(
-    # The format of the media
-    format: String
-  ): String!
+  url: String!
   name: String!
   size: String!
 }
@@ -587,7 +456,7 @@ type MediaResponse implements Response {
   question: Question!
 
   # Medias
-  medias: [Media!]!
+  medias: [Media]!
 }
 
 # A multiple choice question
@@ -599,7 +468,6 @@ type MultipleChoiceQuestion implements Question {
   private: Boolean!
   required: Boolean!
   helpText: String
-  description: String
   kind: String!
   isOtherAllowed: Boolean!
   choices: [QuestionChoice!]
@@ -614,16 +482,9 @@ type MultipleChoiceQuestionValidationRule {
 }
 
 type Mutation {
-  changeUserNotificationsConfiguration(input: ChangeUserNotificationsConfigurationInput!): ChangeUserNotificationsConfigurationPayload
   changeProposalPublicationStatus(input: ChangeProposalPublicationStatusInput!): ChangeProposalPublicationStatusPayload
   changeProposalContent(input: ChangeProposalContentInput!): ChangeProposalContentPayload
-  createProposal(input: CreateProposalInput!): CreateProposalPayload
-  createProposalFusion(input: CreateProposalFusionInput!): CreateProposalFusionPayload
-  updateProposalFusion(input: UpdateProposalFusionInput!): UpdateProposalFusionPayload
   changeProposalNotation(input: ChangeProposalNotationInput!): ChangeProposalNotationPayload
-  changeProposalEvaluers(input: ChangeProposalEvaluersInput!): ChangeProposalEvaluersPayload
-  followProposal(input: FollowProposalInput!): FollowProposalPayload
-  unfollowProposal(input: UnfollowProposalInput!): UnfollowProposalPayload
   selectProposal(input: SelectProposalInput!): SelectProposalPayload
   unselectProposal(input: UnselectProposalInput!): UnselectProposalPayload
   changeSelectionStatus(input: ChangeSelectionStatusInput!): ChangeSelectionStatusPayload
@@ -641,13 +502,6 @@ type Mutation {
   deleteGroup(input: DeleteGroupInput!): DeleteGroupPayload
   deleteUserInGroup(input: DeleteUserInGroupInput!): DeleteUserInGroupPayload
   addUsersInGroup(input: AddUsersInGroupInput!): AddUsersInGroupPayload
-  updateProfile(input: UpdateProfileInput!): UpdateProfilePayload
-}
-
-# Fetches an object given its ID
-interface Node {
-  # The ID of an object
-  id: ID!
 }
 
 # A notifications configuration
@@ -661,12 +515,12 @@ type NotificationsConfiguration {
 }
 
 # A contribution
-type Opinion implements Node & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
+type Opinion implements Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution {
   # Identifies the date and time when the object was created.
-  createdAt: DateTime!
+  createdAt: String!
 
   # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
+  updatedAt: String!
 
   # The HTTP url for this contribution.
   url: URI!
@@ -758,12 +612,12 @@ type Opinion implements Node & Contribution & TrashableContribution & Contributi
 union OpinionOrVersion = Opinion | Version
 
 # A type of opinion
-type OpinionType implements Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
+type OpinionType implements Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution {
   # Identifies the date and time when the object was created.
-  createdAt: DateTime!
+  createdAt: String!
 
   # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
+  updatedAt: String!
 
   # The url of contribution.
   url: String!
@@ -897,23 +751,17 @@ input ProgressStepInput {
   endAt: DateTime
 }
 
-# A participatory project.
-type Project implements Node {
-  id: ID!
+# A budget contribution
+type Project {
   steps: [Step!]!
-  title: String!
 }
 
 # A budget contribution
-type Proposal implements Node {
+type Proposal {
   # The HTTP show url for this contribution.
   show_url: URI!
-
-  # The admin url for this contribution.
-  adminUrl: URI!
   progressSteps: [ProgressStep!]!
   evaluers: [Group!]!
-  viewerIsAnEvaluer: Boolean!
   news: [Post!]!
   project: Project!
   status: Status
@@ -925,7 +773,7 @@ type Proposal implements Node {
   theme: Theme
   category: ProposalCategory
   district: District
-  address: Address
+  address: JSON
 
   # The author of the contribution.
   author: User!
@@ -933,18 +781,12 @@ type Proposal implements Node {
   # The delete date.
   deletedAt: DateTime
 
-  # The updated date.
-  updatedAt: DateTime
-
-  # The update user.
-  updatedBy: User
-
   # The publication status.
   publicationStatus: PublicationStatus!
   trashedReason: String
 
-  # The id of the contribution.
-  id: ID!
+  # The content of the contribution.
+  id: String!
 
   # The unique reference of proposal
   reference: String!
@@ -978,42 +820,6 @@ type Proposal implements Node {
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
-
-  # If the proposal is a fusion, contains the list of merged proposals.
-  mergedFrom: [Proposal!]!
-
-  # If the proposal listed in a fusion, contains the list of fusions.
-  mergedIn: [Proposal!]!
-
-  # Array of users following proposal.
-  followers: [User!]!
-  followerConnection(
-    # Ordering options for followers returning from the connection
-    orderBy: String
-
-    # Returns the elements in the list that come after the specified global ID.
-    after: String
-
-    # Returns the first n elements from the list.
-    first: Int = 32
-
-    # Returns the elements in the list that come before the specified global ID.
-    before: String
-
-    # Returns the last n elements from the list.
-    last: Int
-  ): FollowerConnection!
-
-  # View follow current proposal
-  viewerIsFollowing: Boolean!
-  postsCount: Int!
-  viewerCanSeeEvaluation: Boolean!
-}
-
-# The affiliation of a user to a proposal
-enum ProposalAffiliation {
-  OWNER
-  EVALUER
 }
 
 # A proposal category
@@ -1026,68 +832,29 @@ input ProposalCategoryInput {
   name: String!
 }
 
-# A connection to a list of items.
-type ProposalConnection {
-  totalCount: Int!
-
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # Information to aid in pagination.
-  edges: [ProposalEdge]
-}
-
-# An edge in a connection.
-type ProposalEdge {
-  # The item at the end of the edge.
-  node: Proposal!
-
-  # A cursor for use in pagination.
-  cursor: String!
-}
-
 # An evaluation for a proposal
 type ProposalEvaluation {
   # Identifies the proposal.
   proposal: Proposal!
-
-  # The revision number of the evaluation
-  version: Int!
 
   # List of responses for the evaluation
   responses: [Response]!
 }
 
 # A budget form
-type ProposalForm implements Node {
+type ProposalForm {
   id: ID!
   reference: String!
   description: String
   summaryHelpText: String
   illustrationHelpText: String
   title: String!
-  proposals(
-    affiliations: [ProposalAffiliation]
-
-    # Returns the elements in the list that come after the specified global ID.
-    after: String
-
-    # Returns the first n elements from the list.
-    first: Int = 10
-
-    # Returns the elements in the list that come before the specified global ID.
-    before: String
-
-    # Returns the last n elements from the list.
-    last: Int
-  ): ProposalConnection!
   categories: [ProposalCategory!]!
   usingThemes: Boolean!
   themeMandatory: Boolean!
   themeHelpText: String
   usingDistrict: Boolean!
   commentable: Boolean!
-  costable: Boolean!
   proposalInAZoneRequired: Boolean!
   districts(order: DistrictOrderField = ALPHABETICAL): [District!]!
   districtMandatory: Boolean!
@@ -1113,15 +880,13 @@ type ProposalForm implements Node {
 
   # Identifies the step that use the proposal form.
   step: CollectStep
-  allowAknowledge: Boolean!
 }
 
-input ProposalsConnectionFilter {
-  viewerIsEvaluer: Boolean = false
-}
-
-type PropositionVote implements YesNoPairedVote & Contribution & ContributionWithAuthor {
+type PropositionVote implements YesNoPairedVote, Contribution, ContributionWithAuthor {
   id: ID!
+
+  # The related proposition.
+  related: Contribution
 
   # The author of the contribution.
   author: User!
@@ -1131,16 +896,12 @@ type PropositionVote implements YesNoPairedVote & Contribution & ContributionWit
   expired: Boolean!
 
   # Date of vote.
-  createdAt: DateTime!
-
-  # Return the related contribution if the contribution is related to another.
-  related: Contribution
+  createdAt: String!
 
   # Returns 'vote'.
   kind: String!
 }
 
-# Available statuses
 enum PublicationStatus {
   # Was publicly visible, but has expired.
   EXPIRED
@@ -1165,47 +926,36 @@ enum PublicationStatus {
 }
 
 type Query {
-  # The currently authenticated user.
-  viewer: User!
   users(
     # Remove super admin from export.
-    superAdmin: Boolean = false
-  ): [User!]!
+    superAdmin: Boolean!
+  ): [User]
   consultations(
     # If omitted, returns all consultations. If provided, returns the consultation of the particular id.
     id: ID
   ): [Consultation!]!
   groups: [Group!]!
-  proposalForms: [ProposalForm!]!
 
   # Retrieve availables districts for a given address
   availableDistrictsForLocalisation(proposalFormId: ID!, latitude: Float!, longitude: Float!): [District!]!
-  votesByContribution(contribution: ID!): [PropositionVote!]!
+  votesByContribution(contribution: Int!): [PropositionVote]
   contributions(
     # Returns all contributions of the provided consultation.
     consultation: ID!
-  ): [Opinion!]!
+  ): [Opinion]
   contributionsBySection(
     sectionId: ID!
 
     # Max depth.
     limit: Int!
-  ): [Opinion!]!
+  ): [Opinion]
+  section(id: ID!): Section
+  proposal(id: ID!): Proposal!
+  proposalForm(id: ID!): ProposalForm!
   question(id: Int!): Question!
-  availableQuestionnaires: [Questionnaire!]!
-  draftProposalsForUserInStep(stepId: ID!): [Proposal!]!
-
-  # Fetches an object given its ID
-  node(
-    # The ID of an object
-    id: ID!
-  ): Node
-
-  # Lookup nodes by a list of IDs.
-  nodes(
-    # The list of node IDs.
-    ids: [ID!]!
-  ): [Node]!
+  availableQuestionnaires: [Questionnaire!]
+  draftProposalsForUserInStep(stepId: ID!): [Proposal!]
+  group(id: ID!): Group!
 }
 
 interface Question {
@@ -1232,12 +982,12 @@ type QuestionChoice {
 }
 
 input QuestionInput {
-  # If null, a new question will be created.
+  # Nullable because of editing and to handle creation.
   id: String
   title: String!
   type: QuestionTypeValue!
-  private: Boolean! = false
-  required: Boolean! = false
+  private: Boolean!
+  required: Boolean!
   helpText: String
 }
 
@@ -1254,8 +1004,8 @@ enum QuestionTypeValue {
   button
 }
 
-type Questionnaire implements Node {
-  id: ID!
+type Questionnaire {
+  id: String!
   title: String!
   questions: [Question!]!
 }
@@ -1271,12 +1021,6 @@ input QuestionnaireAbstractQuestionInput {
   position: Int!
 }
 
-type QuestionnaireStep implements Step {
-  id: ID!
-  kind: String!
-  title: String!
-}
-
 type RankingStep implements Step {
   id: ID!
   kind: String!
@@ -1284,9 +1028,9 @@ type RankingStep implements Step {
 }
 
 # A report
-type Reporting implements Contribution & ContributionWithAuthor {
+type Reporting implements Contribution, ContributionWithAuthor {
   # Identifies the date and time when the object was created.
-  createdAt: DateTime!
+  createdAt: String!
 
   # The author of the reporting.
   author: User!
@@ -1323,18 +1067,15 @@ interface Response {
 
 # A response
 input ResponseInput {
-  # If related to a value question
-  value: JSON
+  # The value
+  value: String
 
   # The question id
   question: String!
-
-  # If related to a media question
-  medias: [ID!]
 }
 
 # A section
-type Section implements Node {
+type Section {
   # The id of the section.
   id: ID!
 
@@ -1453,12 +1194,12 @@ type SimpleQuestion implements Question {
 }
 
 # A source
-type Source implements Node & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
+type Source implements Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution {
   # Identifies the date and time when the object was created.
-  createdAt: DateTime!
+  createdAt: String!
 
   # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
+  updatedAt: String!
   expired: Boolean!
   published: Boolean!
   trashed: Boolean!
@@ -1492,7 +1233,6 @@ type Source implements Node & Contribution & TrashableContribution & Contributio
 type Status {
   id: ID!
   name: String!
-  color: String!
 }
 
 # A step in a project
@@ -1527,18 +1267,6 @@ interface TrashableContribution {
 
 scalar URI
 
-input UnfollowProposalInput {
-  # The proposal id
-  proposalId: ID!
-  clientMutationId: String
-}
-
-type UnfollowProposalPayload {
-  proposal: Proposal
-  unfollowerId: ID
-  clientMutationId: String
-}
-
 input UnselectProposalInput {
   # The step where the proposal is selected
   stepId: String!
@@ -1565,17 +1293,6 @@ type UpdateGroupPayload {
   clientMutationId: String
 }
 
-input UpdateProfileInput {
-  username: String
-  clientMutationId: String
-}
-
-type UpdateProfilePayload {
-  # The viewer
-  viewer: User!
-  clientMutationId: String
-}
-
 input UpdateProposalFormInput {
   proposalFormId: ID!
   title: String
@@ -1588,7 +1305,6 @@ input UpdateProposalFormInput {
   usingDistrict: Boolean
   districtMandatory: Boolean
   commentable: Boolean
-  costable: Boolean
   districtHelpText: String
   usingCategories: Boolean
   categoryMandatory: Boolean
@@ -1604,7 +1320,6 @@ input UpdateProposalFormInput {
   categories: [ProposalCategoryInput!]
   districts: [DistrictInput!]
   questions: [QuestionnaireAbstractQuestionInput!]
-  allowAknowledge: Boolean
   clientMutationId: String
 }
 
@@ -1629,26 +1344,8 @@ type UpdateProposalFormPayload {
   clientMutationId: String
 }
 
-input UpdateProposalFusionInput {
-  # The proposal to update.
-  proposalId: ID!
-
-  # Proposal ids that are merged.
-  fromProposals: [ID!]!
-  clientMutationId: String
-}
-
-type UpdateProposalFusionPayload {
-  # The updated proposal
-  proposal: Proposal
-
-  # The proposals that have been removed from the fusion.
-  removedMergedFrom: [Proposal]!
-  clientMutationId: String
-}
-
-# A user is an individual's account.
-type User implements Node {
+# An user
+type User {
   # The id of the user.
   id: ID!
   vip: Boolean!
@@ -1661,13 +1358,13 @@ type User implements Node {
   displayName: String!
 
   # Username of the user.
-  username: String
+  username: String!
 
   # URL to user profile, null if the feature profiles is disabled.
   show_url: URI
 
   # Identifies the date and time when the object was created.
-  createdAt: DateTime!
+  createdAt: String!
 
   # Updated date of the user.
   updatedAt: String
@@ -1677,9 +1374,6 @@ type User implements Node {
 
   # Is user is activated.
   enabled: Boolean!
-
-  # A user notifications preferences
-  notificationsConfiguration: UserNotificationsConfiguration!
   locked: Boolean!
   phoneConfirmed: Boolean!
   expiresAt: String
@@ -1726,12 +1420,6 @@ type User implements Node {
 
   # Is user accepted the external communication during the registration.
   consentExternalCommunication: Boolean!
-
-  # Array of proposals followed by current user.
-  followingProposal: [Proposal!]!
-
-  # Total of contributions count
-  contributionsCount: Int!
 }
 
 # A list of users in groups
@@ -1744,12 +1432,6 @@ type UserGroup {
 
   # Identifies the group
   group: Group!
-}
-
-# A user's notifications configuration
-type UserNotificationsConfiguration {
-  # A boolean representing if the user wants to receive notifications by mail when someone commented his proposal
-  onProposalCommentMail: Boolean!
 }
 
 # A type of person
@@ -1787,12 +1469,12 @@ type ValueResponse implements Response {
 }
 
 # A version of contribution
-type Version implements Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
+type Version implements Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution {
   # Identifies the date and time when the object was created.
-  createdAt: DateTime!
+  createdAt: String!
 
   # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
+  updatedAt: String!
 
   # The url of version.
   url: String!
@@ -1866,7 +1548,7 @@ type Version implements Contribution & TrashableContribution & ContributionWithA
   reportings: [Reporting]
 }
 
-type VersionVote implements YesNoPairedVote & Contribution & ContributionWithAuthor {
+type VersionVote implements YesNoPairedVote, Contribution, ContributionWithAuthor {
   id: ID!
 
   # The author of the contribution.
@@ -1877,7 +1559,7 @@ type VersionVote implements YesNoPairedVote & Contribution & ContributionWithAut
   expired: Boolean!
 
   # Date of vote.
-  createdAt: DateTime!
+  createdAt: String!
 
   # Return the related contribution if the contribution is related to another.
   related: Contribution
@@ -1897,10 +1579,9 @@ interface YesNoPairedVote {
   expired: Boolean!
 
   # Date of vote.
-  createdAt: DateTime!
+  createdAt: String!
 }
 
-# 3 possible values
 enum YesNoPairedVoteValue {
   YES
   NO
