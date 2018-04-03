@@ -228,7 +228,7 @@ type CollectStep implements Node & Step {
   voteThreshold: Int
   project: Project!
 
-  # A list of contributor associated with the consultation.
+  # A list of contributor associated with the step.
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
 }
 
@@ -537,19 +537,7 @@ type Group implements Node {
 
   # Identifies the description of the group.
   description: String
-  usersConnection(
-    # Returns the elements in the list that come after the specified global ID.
-    after: String
-
-    # Returns the first n elements from the list.
-    first: Int = 100
-
-    # Returns the elements in the list that come before the specified global ID.
-    before: String
-
-    # Returns the last n elements from the list.
-    last: Int
-  ): UsersConnection!
+  users(after: String, first: Int, before: String, last: Int): UserConnection!
 }
 
 scalar HTML
@@ -1282,7 +1270,7 @@ type QuestionnaireStep implements Node & Step {
   kind: String!
   title: String!
 
-  # A list of contributor associated with the consultation.
+  # A list of contributor associated with the step.
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
 }
 
@@ -1747,6 +1735,7 @@ type User implements Node {
 
 # A connection to a list of items.
 type UserConnection {
+  # Identifies the total count of items in the connection.
   totalCount: Int!
 
   # Information to aid in pagination.
@@ -1787,26 +1776,6 @@ type UserNotificationsConfiguration {
 type UserType {
   # The name of the type.
   name: String!
-}
-
-# A connection to a list of items.
-type UsersConnection {
-  totalCount: Int!
-
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # Information to aid in pagination.
-  edges: [UsersEdge]
-}
-
-# An edge in a connection.
-type UsersEdge {
-  # The item at the end of the edge.
-  node: User!
-
-  # A cursor for use in pagination.
-  cursor: String!
 }
 
 # A response

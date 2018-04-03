@@ -6,13 +6,13 @@ use Capco\AppBundle\Entity\Project;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class UserContributionByProjectResolver
 {
     private $container;
-    private $logger;
 
-    public function __construct($container)
+    public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
     }

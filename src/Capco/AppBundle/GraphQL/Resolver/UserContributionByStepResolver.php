@@ -10,12 +10,13 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class UserContributionByStepResolver
 {
     private $container;
 
-    public function __construct($container)
+    public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
     }
