@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
@@ -65,6 +66,10 @@ class NodeTypeResolver implements ResolverInterface
         }
         if ($node instanceof Reporting) {
             return $this->typeResolver->resolve('Reporting');
+        }
+
+        if ($node instanceof Comment) {
+            return $this->typeResolver->resolve('Comment');
         }
 
         if ($node instanceof ProposalForm) {

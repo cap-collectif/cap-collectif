@@ -2,6 +2,7 @@ Comment:
     type: object
     config:
         description: "A comment"
+        interfaces: [Node]
         fields:
             id:
               type: "ID!"
