@@ -5,6 +5,9 @@
   },
   'default': {
     'themes': themes_list(),
+    'images': {
+        'avatar': media_public_url(null|capco_default_avatar, 'default_avatar'),
+    },
     'features': features_list(),
     'userTypes': user_type_list()|default([]),
     'parameters': site_parameters_list(),

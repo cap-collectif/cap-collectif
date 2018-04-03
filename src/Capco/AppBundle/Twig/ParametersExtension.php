@@ -4,16 +4,22 @@ namespace Capco\AppBundle\Twig;
 
 use Capco\AppBundle\SiteParameter\Resolver;
 use Capco\AppBundle\Toggle\Manager;
+use Symfony\Component\Routing\Router;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class ParametersExtension extends \Twig_Extension
 {
     protected $manager;
     protected $siteParameterResolver;
+    protected $translator;
+    protected $router;
 
-    public function __construct(Manager $manager, Resolver $siteParameterResolver)
+    public function __construct(Manager $manager, Resolver $siteParameterResolver, TranslatorInterface $translator, Router $router)
     {
         $this->manager = $manager;
         $this->siteParameterResolver = $siteParameterResolver;
+        $this->translator = $translator;
+        $this->router = $router;
     }
 
     public function getFunctions(): array
@@ -43,11 +49,10 @@ class ParametersExtension extends \Twig_Extension
 
     public function getSiteParameters()
     {
+        $slug = strtolower($this->translator->trans('charter', [], 'CapcoAppBundle'));
         $keys = [
             'login.text.top',
             'login.text.bottom',
-            'signin.cgu.name',
-            'signin.cgu.link',
             'global.site.organization_name',
         ];
 
@@ -56,6 +61,8 @@ class ParametersExtension extends \Twig_Extension
             $value = $this->siteParameterResolver->getValue($key);
             $exposedParameters[$key] = $value && strlen($value) > 0 ? $value : null;
         }
+        $exposedParameters['signin.cgu.name'] = $this->translator->trans('the-charter', [], 'CapcoAppBundle');
+        $exposedParameters['signin.cgu.link'] = $this->router->generate('app_page_show', ['slug' => $slug]);
 
         return $exposedParameters;
     }

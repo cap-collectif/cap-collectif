@@ -105,6 +105,17 @@ class ProposalSearch extends Search
                 ],
               ];
               break;
+          case 'least-votes':
+              return [
+                'votesCountByStep.count' => [
+                  'order' => 'asc',
+                  'nested_path' => 'votesCountByStep',
+                  'nested_filter' => [
+                      'term' => ['votesCountByStep.step.id' => $stepId],
+                  ],
+                ],
+              ];
+              break;
           case 'comments':
               $sortField = 'commentsCount';
               $sortOrder = 'desc';

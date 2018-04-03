@@ -13,16 +13,8 @@ exports[`<IdeaPageHeader /> it should render a div with provided class name 1`] 
   <div
     className="media"
   >
-    <UserAvatar
-      anchor={true}
+    <Connect(UserAvatar)
       className="pull-left"
-      onBlur={[Function]}
-      onFocus={[Function]}
-      onMouseOut={[Function]}
-      onMouseOver={[Function]}
-      size={45}
-      style={Object {}}
-      user={null}
     />
     <div
       className="media-body"
@@ -53,16 +45,8 @@ exports[`<IdeaPageHeader /> it should render a title, a user avatar and idea inf
   <div
     className="media"
   >
-    <UserAvatar
-      anchor={true}
+    <Connect(UserAvatar)
       className="pull-left"
-      onBlur={[Function]}
-      onFocus={[Function]}
-      onMouseOut={[Function]}
-      onMouseOver={[Function]}
-      size={45}
-      style={Object {}}
-      user={null}
     />
     <div
       className="media-body"
