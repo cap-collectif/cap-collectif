@@ -45,7 +45,7 @@ class ProjectHelper
         foreach ($steps as $step) {
             if (
                 $step instanceof ConsultationStep
-                || ($step instanceof SelectionStep && $step->isVotable() === true)
+                || ($step instanceof SelectionStep && true === $step->isVotable())
             ) {
                 return true;
             }

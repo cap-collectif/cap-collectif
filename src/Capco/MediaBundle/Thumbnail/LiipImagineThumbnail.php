@@ -36,7 +36,7 @@ class LiipImagineThumbnail implements ThumbnailInterface
      */
     public function generatePublicUrl(MediaProviderInterface $provider, MediaInterface $media, $format)
     {
-        if ($format === 'reference') {
+        if ('reference' === $format) {
             $path = $provider->getReferenceImage($media);
         } else {
             $path = $this->router->generate(
@@ -53,7 +53,7 @@ class LiipImagineThumbnail implements ThumbnailInterface
      */
     public function generatePrivateUrl(MediaProviderInterface $provider, MediaInterface $media, $format)
     {
-        if ($format !== 'reference') {
+        if ('reference' !== $format) {
             // This bundle is madness ¯\_(ツ)_/¯
             // throw new \RuntimeException('No private url for LiipImagineThumbnail');
 
@@ -89,7 +89,7 @@ class LiipImagineThumbnail implements ThumbnailInterface
     private function getExtension(MediaInterface $media)
     {
         $ext = $media->getExtension();
-        if (!is_string($ext) || strlen($ext) !== 3) {
+        if (!is_string($ext) || 3 !== strlen($ext)) {
             $ext = 'jpg';
         }
 

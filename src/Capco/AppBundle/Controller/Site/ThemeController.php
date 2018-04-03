@@ -31,7 +31,7 @@ class ThemeController extends Controller
             'method' => 'POST',
         ]);
 
-        if ($request->getMethod() === 'POST') {
+        if ('POST' === $request->getMethod()) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
@@ -52,7 +52,7 @@ class ThemeController extends Controller
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
-        if ($pagination !== null && $pagination !== 0) {
+        if (null !== $pagination && 0 !== $pagination) {
             $nbPage = ceil(count($themes) / $pagination);
         }
 

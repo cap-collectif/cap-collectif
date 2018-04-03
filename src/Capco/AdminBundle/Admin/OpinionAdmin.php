@@ -39,16 +39,16 @@ class OpinionAdmin extends Admin
 
     public function getTemplate($name)
     {
-        if ($name === 'list') {
+        if ('list' === $name) {
             return 'CapcoAdminBundle:Opinion:list.html.twig';
         }
-        if ($name === 'edit') {
+        if ('edit' === $name) {
             return 'CapcoAdminBundle:Opinion:edit.html.twig';
         }
-        if ($name === 'show') {
+        if ('show' === $name) {
             return 'CapcoAdminBundle:Opinion:show.html.twig';
         }
-        if ($name === 'delete') {
+        if ('delete' === $name) {
             return 'CapcoAdminBundle:Opinion:delete.html.twig';
         }
 
