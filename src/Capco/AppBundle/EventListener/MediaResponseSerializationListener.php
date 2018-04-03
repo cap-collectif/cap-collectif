@@ -37,10 +37,6 @@ class MediaResponseSerializationListener extends AbstractSerializationListener
 
     public function onPostResponse(ObjectEvent $event)
     {
-        // We skip the rest if we are serializing for Elasticsearch
-        if (isset($this->getIncludedGroups($event)['Elasticsearch'])) {
-            return;
-        }
         $response = $event->getObject();
 
         $event->getVisitor()->addData('medias', $this->getMediasMetas($response));
