@@ -70,6 +70,11 @@ export class ProposalAdminPage extends React.Component<Props> {
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  dirty: isDirty('proposal-admin-edit')(state),
+  dirty:
+    isDirty('proposal-admin-edit')(state) ||
+    isDirty('proposal-admin-selections')(state) ||
+    isDirty('proposal.admin.news')(state) ||
+    isDirty('proposal-admin-evaluation')(state) ||
+    isDirty('proposal-admin-status')(state),
 });
 export default connect(mapStateToProps)(ProposalAdminPage);
