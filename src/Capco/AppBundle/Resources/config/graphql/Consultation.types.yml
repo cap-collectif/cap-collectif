@@ -10,6 +10,9 @@ Consultation:
             id:
                 type: "ID!"
                 description: "The id of the consultation."
+            project:
+                type: "Project!"
+                description: "The project"
             projectId:
                 type: "String!"
                 description: "The id of the related project."
@@ -28,6 +31,11 @@ Consultation:
                 type: "[Section]"
                 description: "List of sections."
                 resolve: "@=resolver('consultation_sections', [value, args])"
+            contributors:
+                type: "UserConnection!"
+                description: "A list of contributor associated with the consultation."
+                argsBuilder: "Relay::Connection"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\StepContributorResolver", [value, args])'
             contributionConnection:
                 type: "ContributionConnection"
                 args:

@@ -14,6 +14,36 @@ services:
         tags:
             - { name: overblog_graphql.resolver }
 
+    user_contribution_by_step_resolver:
+        class: Capco\AppBundle\GraphQL\Resolver\UserContributionByStepResolver
+        arguments:
+            - "@service_container"
+        tags:
+            - { name: overblog_graphql.resolver }
+
+    user_contribution_by_project_resolver:
+        class: Capco\AppBundle\GraphQL\Resolver\UserContributionByProjectResolver
+        arguments:
+            - "@service_container"
+        tags:
+            - { name: overblog_graphql.resolver }
+
+    Capco\AppBundle\GraphQL\Resolver\StepContributorResolver:
+        class: Capco\AppBundle\GraphQL\Resolver\StepContributorResolver
+        arguments:
+            - "@capco.search.user_search"
+            - "@logger"
+        tags:
+            - { name: overblog_graphql.resolver }
+
+    Capco\AppBundle\GraphQL\Resolver\ProjectContributorResolver:
+        class: Capco\AppBundle\GraphQL\Resolver\ProjectContributorResolver
+        arguments:
+            - "@capco.search.user_search"
+            - "@logger"
+        tags:
+            - { name: overblog_graphql.resolver }
+
     capco.resolver.proposal_form:
         class: Capco\AppBundle\GraphQL\Resolver\ProposalFormResolver
         tags:

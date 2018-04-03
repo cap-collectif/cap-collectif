@@ -2,18 +2,50 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Traits\AnonymousVoteRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
-/**
- * ProposalSelectionVoteRepository.
- */
 class ProposalSelectionVoteRepository extends EntityRepository
 {
     use AnonymousVoteRepositoryTrait;
+
+    public function countByAuthorAndProject(User $author, Project $project): int
+    {
+        return $this->createQueryBuilder('pv')
+        ->select('COUNT(DISTINCT pv)')
+        ->andWhere('pv.user = :author')
+        ->andWhere('pv.expired = false')
+        ->leftJoin('pv.proposal', 'proposal')
+        ->andWhere('proposal.deletedAt IS NULL')
+        ->andWhere('pv.selectionStep IN (:steps)')
+        ->setParameter('steps', array_map(function ($step) {
+            return $step;
+        }, $project->getRealSteps()))
+        ->setParameter('author', $author)
+        ->getQuery()
+        ->getSingleScalarResult()
+      ;
+    }
+
+    public function countByAuthorAndStep(User $author, SelectionStep $step): int
+    {
+        return $this->createQueryBuilder('pv')
+        ->select('COUNT(DISTINCT pv)')
+        ->andWhere('pv.selectionStep = :step')
+        ->andWhere('pv.user = :author')
+        ->andWhere('pv.expired = false')
+        ->leftJoin('pv.proposal', 'proposal')
+        ->andWhere('proposal.deletedAt IS NULL')
+        ->setParameter('author', $author)
+        ->setParameter('step', $step)
+        ->getQuery()
+        ->getSingleScalarResult()
+      ;
+    }
 
     public function getVotesByStepAndUser(SelectionStep $step, User $user)
     {
@@ -106,51 +138,6 @@ class ProposalSelectionVoteRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
-
-    // public function getVotesForUserInProjectGroupedBySteps(User $user, Project $project)
-    // {
-    //     $qb = $this->createQueryBuilder('pv')
-    //         ->addSelect('p', 'pf', 's')
-    //         ->leftJoin('pv.proposal', 'p')
-    //         ->leftJoin('p.proposalForm', 'pf')
-    //         ->leftJoin('pv.selectionStep', 'ss')
-    //         ->leftJoin('pf.step', 's')
-    //         ->leftJoin('s.projectAbstractStep', 'pas')
-    //         ->where('pv.user = :user')
-    //         ->setParameter('user', $user)
-    //         ->andWhere('pas.project = :project')
-    //         ->setParameter('project', $project)
-    //         ->orderBy('pv.createdAt', 'DESC')
-    //         ->groupBy('ss.id')
-    //     ;
-
-    //     return $qb->getQuery()->getResult();
-    // }
-
-    // public function countForUserAndStep(User $user, SelectionStep $step)
-    // {
-    //     $qb = $this->createQueryBuilder('pv')
-    //         ->select('COUNT(pv.id) as votesCount')
-    //         ->where('pv.user = :user')
-    //         ->setParameter('user', $user)
-    //         ->andWhere('pv.selectionStep = :step')
-    //         ->setParameter('step', $step)
-    //     ;
-
-    //     return intval($qb->getQuery()->getSingleScalarResult());
-    // }
-
-    // public function InCollectStep(User $user, SelectionStep $step)
-    // {
-    //     $qb = $this->createQueryBuilder('pv')
-    //         ->where('pv.user = :user')
-    //         ->setParameter('user', $user)
-    //         ->andWhere('pv.selectionStep = :step')
-    //         ->setParameter('step', $step)
-    //     ;
-
-    //     return $qb->getQuery()->getResult();
-    // }
 
     public function getVotesCountForSelectionStep(SelectionStep $step, $themeId = null, $districtId = null, $categoryId = null)
     {

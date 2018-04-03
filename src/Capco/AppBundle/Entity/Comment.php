@@ -179,14 +179,13 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
     {
         return $this->updatedAt;
     }
-    
+
     public function setUpdatedAt(\DateTime $value): self
     {
         $this->updatedAt = $value;
 
         return $this;
     }
-
 
     public function getIsEnabled(): bool
     {

@@ -13,7 +13,7 @@ describe('<GroupAdminUsers />', () => {
     group: {
       id: 'group4',
       title: 'Comité de suvi',
-      usersConnection: {
+      users: {
         edges: [
           {
             // $FlowFixMe $fragmentRefs

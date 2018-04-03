@@ -12,7 +12,7 @@ const mutation = graphql`
     deleteUserInGroup(input: $input) {
       group {
         id
-        usersConnection {
+        users {
           edges {
             node {
               id

@@ -25,12 +25,6 @@ Scenario: Anonymous can not access synthesis edition
   # Lists
 
 @javascript
-Scenario: Admin wants to see new elements list
-  Given I am logged in as admin
-  And I go to a synthesis edition page
-  Then I should see the new synthesis elements
-
-@javascript
 Scenario: Admin wants to see archived elements list
   Given I am logged in as admin
   And I go to a synthesis edition page
