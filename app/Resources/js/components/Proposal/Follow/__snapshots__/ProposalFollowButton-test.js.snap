@@ -75,7 +75,7 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
           header={
             <span>
               <FormattedMessage
-                id="to-be-notified-of-new-of"
+                id="to-be-notified-by-email"
                 values={Object {}}
               />
               <OverlayTrigger

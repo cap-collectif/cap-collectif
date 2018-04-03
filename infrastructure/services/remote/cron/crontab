@@ -31,5 +31,3 @@
 
 # Send activities email to follower, every day at 9 AM
 * 9 * * * /usr/bin/timeout 50m php -d memory_limit=512M /var/www/bin/console capco:follower-proposal-notifier --env=prod
-# WIP for test
-*/10 * * * * /usr/bin/timeout 50m php -d memory_limit=512M /var/www/bin/console capco:follower-proposal-notifier --env=prod

@@ -97,7 +97,7 @@ export class ProposalFollowButton extends React.Component<Props, State> {
                   className="mb-0 b-none width250"
                   header={
                     <span>
-                      <FormattedMessage id="to-be-notified-of-new-of" />
+                      <FormattedMessage id="to-be-notified-by-email" />
                       <OverlayTrigger
                         placement="top"
                         overlay={
