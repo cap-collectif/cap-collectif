@@ -111,9 +111,8 @@ type FormValues = {|
 //   });
 // };
 
-const onUnload = event => {
-  // the method that will be used for both add and remove event
-  event.returnValue = true;
+const onUnload = (event: SyntheticEvent<>) => {
+  event.preventDefault();
 };
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {

@@ -12,7 +12,7 @@ import type { State } from '../../../types';
 
 type Props = { proposalId: number, dirty: boolean };
 
-const onUnload = event => {
+const onUnload = (event: SyntheticEvent<>) => {
   event.preventDefault();
 };
 
