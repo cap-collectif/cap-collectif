@@ -118,9 +118,9 @@ class ProposalCollectVoteRepository extends EntityRepository
         return $userVotes;
     }
 
-    public function countVotesByStepAndUser(CollectStep $step, User $user)
+    public function countVotesByStepAndUser(CollectStep $step, User $user): int
     {
-        return $this->createQueryBuilder('pv')
+        return (int) $this->createQueryBuilder('pv')
             ->select('COUNT(pv.id)')
             ->andWhere('pv.expired = 0')
             ->andWhere('pv.collectStep = :collectStep')

@@ -9,9 +9,10 @@ PropositionVote:
                 type: "User!"
                 description: "The author of the contribution."
                 resolve: "@=resolver('proposition_vote_author', [value])"
-            private:
+            anonymous:
                 type: "Boolean"
-                description: "Is the vote private ?"
+                description: "Is the vote anonymous ?"
+                resolve: "@=value.isPrivate()"
             value:
                 type: "YesNoPairedVoteValue!"
             expired:

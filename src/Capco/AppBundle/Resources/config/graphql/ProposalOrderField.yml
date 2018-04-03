@@ -5,3 +5,7 @@ ProposalOrderField:
         values:
             CREATED_AT:
                 value: "CREATED_AT"
+            UPDATED_AT:
+                value: "UPDATED_AT"
+            PUBLISHED_AT:
+                value: "PUBLISHED_AT"

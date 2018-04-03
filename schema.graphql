@@ -182,7 +182,7 @@ type ChangeProposalProgressStepsPayload {
 
 input ChangeProposalPublicationStatusInput {
   # The new publication status
-  publicationStatus: PublicationStatus!
+  publicationStatus: ProposalPublicationStatus!
 
   # Added if you set publicationStatus to TRASHED
   trashedReason: String
@@ -233,22 +233,20 @@ type CollectStep implements Node & Step {
 }
 
 # A comment
-type Comment {
+type Comment implements Node {
   id: ID!
   body: String
   createdAt: DateTime!
-  editedAt: DateTime
-  isEnabled: Boolean!
+  updatedAt: DateTime
   author: User
   parent: Comment
   answers: [Comment]
   authorName: String
   authorEmail: String
-  authorIp: String
-  expired: Boolean
-  reports: [Reporting]
-  isTrashed: Boolean!
-  votes(after: String, first: Int = 30, before: String, last: Int, orderBy: CommentVoteOrder = {field: CREATED_AT, direction: DESC}): CommentVoteConnection
+  authorIp: IP
+  publicationStatus: CommentPublicationStatus!
+  reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
+  votes(after: String, first: Int = 30, before: String, last: Int, orderBy: VoteOrder = {field: CREATED_AT, direction: DESC}): CommentVoteConnection!
   trashedReason: String
 }
 
@@ -272,10 +270,32 @@ type CommentEdge {
   cursor: String!
 }
 
-# Ways in which lists of comment votes can be ordered upon return.
-input CommentNewsOrder {
-  field: CommentVoteOrderField! = CREATED_AT
+# Ways in which lists of comments can be ordered upon return.
+input CommentOrder {
+  field: CommentOrderField! = CREATED_AT
   direction: OrderDirection! = DESC
+}
+
+# Ordering options for comments.
+enum CommentOrderField {
+  CREATED_AT
+  UPDATED_AT
+  POPULARITY
+}
+
+# Available statuses
+enum CommentPublicationStatus {
+  # Was publicly visible, but has expired.
+  EXPIRED
+
+  # Normal status, Publicly visible
+  PUBLISHED
+
+  # Publicly visible in the trash bin
+  TRASHED
+
+  # In the trash bin, content not visible
+  TRASHED_NOT_VISIBLE
 }
 
 type CommentVote {
@@ -312,19 +332,6 @@ type CommentVoteEdge {
 
   # A cursor for use in pagination.
   cursor: String!
-}
-
-# Ways in which lists of comment votes can be ordered upon return.
-input CommentVoteOrder {
-  field: CommentVoteOrderField! = CREATED_AT
-  direction: OrderDirection! = DESC
-}
-
-# Ordering options for votes.
-enum CommentVoteOrderField {
-  CREATED_AT
-  UPDATED_AT
-  POPULARITY
 }
 
 # A consultation
@@ -640,6 +647,8 @@ type Group implements Node {
 }
 
 scalar HTML
+
+scalar IP
 
 scalar JSON
 
@@ -993,7 +1002,7 @@ enum PickFollowTypeValue {
 type Post {
   id: String!
   title: String!
-  comments(after: String, first: Int = 30, before: String, last: Int, orderBy: CommentNewsOrder = {field: CREATED_AT, direction: DESC}): CommentConnection
+  comments(after: String, first: Int = 30, before: String, last: Int, orderBy: CommentOrder = {field: CREATED_AT, direction: DESC}): CommentConnection!
   abstract: String!
 }
 
@@ -1038,7 +1047,8 @@ type Proposal implements Node {
   progressSteps: [ProgressStep!]!
   evaluers: [Group!]!
   viewerIsAnEvaluer: Boolean!
-  news(after: String, first: Int = 30, before: String, last: Int, orderBy: ProposalNewsOrder = {field: CREATED_AT, direction: DESC}): NewsConnection!
+  news(after: String, first: Int = 30, before: String, last: Int, orderBy: ProposalOrder = {field: CREATED_AT, direction: DESC}): NewsConnection!
+  reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
   project: Project!
   status: Status
   selections: [Selection!]!
@@ -1064,8 +1074,8 @@ type Proposal implements Node {
   # The update user.
   updatedBy: User
 
-  # The publication status.
-  publicationStatus: PublicationStatus!
+  # The publication status for this proposal.
+  publicationStatus: ProposalPublicationStatus!
   trashedReason: String
   trashed: Boolean
   trashedAt: DateTime
@@ -1103,7 +1113,7 @@ type Proposal implements Node {
 
   # Count number of comments for the proposal.
   commentsCount: Int!
-  comments(after: String, first: Int, before: String, last: Int): CommentConnection!
+  comments(after: String, first: Int = 30, before: String, last: Int, orderBy: CommentOrder = {field: CREATED_AT, direction: DESC}): CommentConnection!
   votes(after: String, first: Int = 30, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}, step: ID!): ProposalVoteConnection!
 
   # Identifies the date and time when the object was created.
@@ -1279,6 +1289,32 @@ input ProposalOrder {
 enum ProposalOrderField {
   # Allows ordering a list of proposals by when they were created.
   CREATED_AT
+  UPDATED_AT
+  PUBLISHED_AT
+}
+
+# Available statuses
+enum ProposalPublicationStatus {
+  # Was publicly visible, but has expired.
+  EXPIRED
+
+  # Normal status, Publicly visible
+  PUBLISHED
+
+  # Publicly visible in the trash bin
+  TRASHED
+
+  # In the trash bin, content not visible
+  TRASHED_NOT_VISIBLE
+
+  # Not publicly visible, deleted by author
+  DELETED
+
+  # Draft, not publicly visible, only showed for his author.
+  DRAFT
+
+  # Visible only by the author, he is not yet confirmed !
+  NOT_ACCOUNTED
 }
 
 # A connection to a list of items.
@@ -1328,8 +1364,8 @@ type PropositionVote implements YesNoPairedVote & Contribution & ContributionWit
   # The author of the contribution.
   author: User!
 
-  # Is the vote private ?
-  private: Boolean
+  # Is the vote anonymous ?
+  anonymous: Boolean
   value: YesNoPairedVoteValue!
 
   # If vote is expired, it exists but doesn't count.
@@ -1343,30 +1379,6 @@ type PropositionVote implements YesNoPairedVote & Contribution & ContributionWit
 
   # Returns 'vote'.
   kind: String!
-}
-
-# Available statuses
-enum PublicationStatus {
-  # Was publicly visible, but has expired.
-  EXPIRED
-
-  # Normal status, Publicly visible
-  PUBLISHED
-
-  # Publicly visible in the trash bin
-  TRASHED
-
-  # In the trash bin, content not visible
-  TRASHED_NOT_VISIBLE
-
-  # Not publicly visible, deleted by author
-  DELETED
-
-  # Draft, not publicly visible, only showed for his author.
-  DRAFT
-
-  # Visible only by the author, he is not yet confirmed !
-  NOT_ACCOUNTED
 }
 
 type Query {
@@ -1515,6 +1527,37 @@ type Reporting implements Contribution & ContributionWithAuthor {
   kind: String!
 }
 
+# A connection to a list of items.
+type ReportingConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [ReportingEdge]
+}
+
+# An edge in a connection.
+type ReportingEdge {
+  # The item at the end of the edge.
+  node: Reporting!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# Ways in which lists of reportings can be ordered upon return.
+input ReportingOrder {
+  field: ReportingOrderField! = CREATED_AT
+  direction: OrderDirection! = DESC
+}
+
+# Ordering options for reporting.
+enum ReportingOrderField {
+  CREATED_AT
+}
+
 # Type of reporting
 enum ReportingType {
   SEX
@@ -1522,6 +1565,26 @@ enum ReportingType {
   SPAM
   ERROR
   OFF_TOPIC
+}
+
+# A connection to a list of items.
+type ReportsConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [ReportsEdge]
+}
+
+# An edge in a connection.
+type ReportsEdge {
+  # The item at the end of the edge.
+  node: Reporting!
+
+  # A cursor for use in pagination.
+  cursor: String!
 }
 
 # A contribution with an author
@@ -2149,9 +2212,17 @@ type VersionVote implements YesNoPairedVote & Contribution & ContributionWithAut
   kind: String!
 }
 
+# Ways in which lists of votes can be ordered upon return.
+input VoteOrder {
+  field: VoteOrderField! = CREATED_AT
+  direction: OrderDirection! = DESC
+}
+
 # Ordering options for votes.
 enum VoteOrderField {
   CREATED_AT
+  UPDATED_AT
+  POPULARITY
 }
 
 interface YesNoPairedVote {

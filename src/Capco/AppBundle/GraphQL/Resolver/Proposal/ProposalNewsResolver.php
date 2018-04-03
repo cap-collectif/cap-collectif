@@ -1,36 +1,36 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver;
+namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
-use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Repository\CommentVoteRepository;
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Repository\PostRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
-class CommentVotesResolver
+class ProposalNewsResolver
 {
     private $logger;
     private $repository;
 
-    public function __construct(CommentVoteRepository $repository, LoggerInterface $logger)
+    public function __construct(PostRepository $repository, LoggerInterface $logger)
     {
         $this->logger = $logger;
         $this->repository = $repository;
     }
 
-    public function __invoke(Comment $comment, Argument $args): Connection
+    public function __invoke(Proposal $proposal, Argument $args): Connection
     {
         try {
-            $paginator = new Paginator(function (int $offset, int $limit) use ($comment, $args) {
+            $paginator = new Paginator(function (int $offset, int $limit) use ($proposal, $args) {
                 $field = $args->offsetGet('orderBy')['field'];
                 $direction = $args->offsetGet('orderBy')['direction'];
 
-                return $this->repository->getAllByComment($comment, $offset, $limit, $field, $direction)->getIterator()->getArrayCopy();
+                return $this->repository->getOrderedPublishedPostsByProposal($proposal, $offset, $field, $limit, $direction)->getIterator()->getArrayCopy();
             });
 
-            $totalCount = $this->repository->countAllByComment($comment);
+            $totalCount = $this->repository->countPublishedPostsByProposal($proposal);
 
             return $paginator->auto($args, $totalCount);
         } catch (\RuntimeException $exception) {

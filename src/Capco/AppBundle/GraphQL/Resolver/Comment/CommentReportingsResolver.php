@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver;
+namespace Capco\AppBundle\GraphQL\Resolver\Comment;
 
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Repository\ReportingRepository;

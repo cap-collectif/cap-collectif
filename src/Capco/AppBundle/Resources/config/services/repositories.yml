@@ -108,6 +108,7 @@ services:
       class: Capco\AppBundle\Repository\CommentVoteRepository
       factory: ['@doctrine.orm.entity_manager', getRepository]
       arguments: ['CapcoAppBundle:CommentVote']
+
   capco.proposal.repository:
     class: Capco\AppBundle\Repository\ProposalRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]

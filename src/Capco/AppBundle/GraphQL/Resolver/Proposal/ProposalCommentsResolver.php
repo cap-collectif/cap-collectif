@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver;
+namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Repository\ProposalCommentRepository;
@@ -23,8 +23,10 @@ class ProposalCommentsResolver
     public function __invoke(Proposal $proposal, Argument $args): Connection
     {
         try {
-            $paginator = new Paginator(function (int $offset, int $limit) use ($proposal) {
-                return $this->commentRepository->getEnabledByProposal($proposal, $offset, $limit)->getIterator()->getArrayCopy();
+            $paginator = new Paginator(function (int $offset, int $limit) use ($proposal, $args) {
+                [$field, $direction] = [$args->offsetGet('orderBy')['field'], $args->offsetGet('orderBy')['direction']];
+
+                return $this->commentRepository->getByProposal($proposal, $offset, $limit, $field, $direction)->getIterator()->getArrayCopy();
             });
 
             $totalCount = $this->commentRepository->countCommentsAndAnswersEnabledByProposal($proposal);

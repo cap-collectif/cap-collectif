@@ -1,10 +1,10 @@
-CommentVoteOrder:
+VoteOrder:
     type: input-object
     config:
-        description: "Ways in which lists of comment votes can be ordered upon return."
+        description: "Ways in which lists of votes can be ordered upon return."
         fields:
             field:
-                type: "CommentVoteOrderField!"
+                type: "VoteOrderField!"
                 defaultValue: "CREATED_AT"
             direction:
                 type: "OrderDirection!"

@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver;
+namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\CollectStep;

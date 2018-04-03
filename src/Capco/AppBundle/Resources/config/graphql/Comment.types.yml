@@ -10,10 +10,8 @@ Comment:
               type: "String"
             createdAt:
               type: "DateTime!"
-            editedAt:
+            updatedAt:
               type: "DateTime"
-            isEnabled:
-              type: "Boolean!"
             author:
               type: "User"
             parent:
@@ -25,9 +23,10 @@ Comment:
             authorEmail:
               type: "String"
             authorIp:
-              type: "String"
-            expired:
-              type: "Boolean"
+              type: "IP"
+            publicationStatus:
+              type: "CommentPublicationStatus!"
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentPublicationStatusResolver", [value])'
             reportings:
               type: "ReportingConnection!"
               argsBuilder: "Relay::Connection"
@@ -38,20 +37,18 @@ Comment:
                 orderBy:
                   type: "ReportingOrder"
                   defaultValue: { field: CREATED_AT, direction: DESC }
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\CommentReportingsResolver", [value, args])'
-            isTrashed:
-              type: "Boolean!"
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentReportingsResolver", [value, args])'
             votes:
-              type: "CommentVoteConnection"
+              type: "CommentVoteConnection!"
               argsBuilder: "Relay::Connection"
               args:
                 first:
                   type: "Int"
                   defaultValue: 30
                 orderBy:
-                  type: "CommentVoteOrder"
+                  type: "VoteOrder"
                   defaultValue: { field: CREATED_AT, direction: DESC }
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\CommentVotesResolver", [value, args])'
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentVotesResolver", [value, args])'
             trashedReason:
               type: "String"
 

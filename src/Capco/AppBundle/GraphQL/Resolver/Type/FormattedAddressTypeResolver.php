@@ -1,10 +1,10 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver;
+namespace Capco\AppBundle\GraphQL\Resolver\Type;
 
 use Capco\AppBundle\Entity\Proposal;
 
-class FormattedAddressResolver
+class FormattedAddressTypeResolver
 {
     public function __invoke(Proposal $proposal): string
     {

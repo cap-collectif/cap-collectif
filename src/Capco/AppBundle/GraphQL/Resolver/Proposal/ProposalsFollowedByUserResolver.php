@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver;
+namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\UserBundle\Entity\User;

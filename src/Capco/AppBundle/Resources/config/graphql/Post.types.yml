@@ -7,7 +7,7 @@ Post:
             title:
                type: "String!"
             comments:
-                type: "CommentConnection"
+                type: "CommentConnection!"
                 argsBuilder: "Relay::Connection"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\PostCommentsResolver", [value, args])'
                 args:
@@ -15,7 +15,7 @@ Post:
                         type: "Int"
                         defaultValue: 30
                     orderBy:
-                        type: "CommentNewsOrder"
+                        type: "CommentOrder"
                         defaultValue: { field: CREATED_AT, direction: DESC }
             abstract:
                type: "String!"

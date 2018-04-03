@@ -1,10 +1,10 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver;
+namespace Capco\AppBundle\GraphQL\Resolver\Type;
 
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 
-class FormattedValueResponseResolver
+class FormattedValueResponseTypeResolver
 {
     public function __invoke(ValueResponse $response): ?string
     {
