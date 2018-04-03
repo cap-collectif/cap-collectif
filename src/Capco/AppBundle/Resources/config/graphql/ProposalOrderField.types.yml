@@ -1,8 +1,11 @@
 ProposalOrderField:
     type: enum
     config:
-        description: "Properties by which proposal connections can be ordered"
+        description: "Ordering options for proposals connections."
         values:
             CREATED_AT:
                 value: "CREATED_AT"
-                description: "Allows ordering a list of proposals by when they were created."
+            UPDATED_AT:
+                value: "UPDATED_AT"
+            PUBLISHED_AT:
+                value: "PUBLISHED_AT"
