@@ -1,14 +1,20 @@
 // @flow
-import React, { Component } from 'react';
+import * as React from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
+import { connect } from 'react-redux';
+import type { MapStateToProps } from 'react-redux';
+import { isDirty } from 'redux-form';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import ProposalAdminPageTabs from './ProposalAdminPageTabs';
 import { PROPOSAL_FOLLOWERS_TO_SHOW } from '../../../constants/ProposalConstants';
 import Loader from '../../Ui/Loader';
+import type { State } from '../../../types';
 
-type DefaultProps = void;
-type Props = { proposalId: number };
-type State = void;
+type Props = { proposalId: number, dirty: boolean };
+
+const onUnload = event => {
+  event.preventDefault();
+};
 
 const component = ({ error, props }: { error: ?Error, props: any }) => {
   if (error) {
@@ -25,8 +31,20 @@ const component = ({ error, props }: { error: ?Error, props: any }) => {
   return <Loader />;
 };
 
-export class ProposalAdminPage extends Component<Props, State> {
-  static defaultProps: DefaultProps;
+export class ProposalAdminPage extends React.Component<Props> {
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps.dirty === false && this.props.dirty === true) {
+      window.addEventListener('beforeunload', onUnload);
+    }
+
+    if (this.props.dirty === false) {
+      window.removeEventListener('beforeunload', onUnload);
+    }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('beforeunload', onUnload);
+  }
   render() {
     return (
       <div className="admin_proposal_form">
@@ -51,4 +69,7 @@ export class ProposalAdminPage extends Component<Props, State> {
   }
 }
 
-export default ProposalAdminPage;
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+  dirty: isDirty('proposal-admin-edit')(state),
+});
+export default connect(mapStateToProps)(ProposalAdminPage);

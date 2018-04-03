@@ -111,9 +111,13 @@ type FormValues = {|
 //   });
 // };
 
+const onUnload = event => {
+  // the method that will be used for both add and remove event
+  event.returnValue = true;
+};
+
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const { proposalForm, proposal } = props;
-  window.onbeforeunload = null;
   const data = {
     title: values.title,
     summary: values.summary,
@@ -143,6 +147,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
         if (updatedProposal.publicationStatus !== 'DRAFT' && proposalForm.step) {
           addProposalInRandomResultsByStep(updatedProposal, proposalForm.step.id);
         }
+        window.removeEventListener('beforeunload', onUnload);
         dispatch(closeEditProposalModal());
         location.reload();
       })
@@ -164,6 +169,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
       if (createdProposal.publicationStatus !== 'DRAFT' && proposalForm.step) {
         addProposalInRandomResultsByStep(createdProposal, proposalForm.step.id);
       }
+      window.removeEventListener('beforeunload', onUnload);
       window.location.href = createdProposal.show_url;
       dispatch(closeCreateModal());
     })
@@ -208,6 +214,10 @@ export class ProposalForm extends React.Component<Props, State> {
     };
   }
 
+  componentDidMount() {
+    window.addEventListener('beforeunload', onUnload);
+  }
+
   componentWillReceiveProps({ titleValue, addressValue, proposalForm }: Props) {
     if (this.props.titleValue !== titleValue) {
       this.setState({ titleSuggestions: [] });
@@ -220,6 +230,10 @@ export class ProposalForm extends React.Component<Props, State> {
         this.retrieveDistrictForLocation(JSON.parse(addressValue)[0].geometry.location);
       }
     }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('beforeunload', onUnload);
   }
 
   loadTitleSuggestions = debounce((title: string) => {
@@ -264,9 +278,6 @@ export class ProposalForm extends React.Component<Props, State> {
   }
 
   render() {
-    window.onbeforeunload = function() {
-      return true;
-    };
     const { intl, titleValue, proposalForm, features, themes, error } = this.props;
     const {
       districtIdsFilteredByAddress,
