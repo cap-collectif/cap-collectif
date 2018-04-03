@@ -1,0 +1,58 @@
+div.geosearch form{
+  border-radius: 4px;
+  border-left: none;
+  background-color: #fafafa;
+  background-clip: padding-box;
+  z-index: -1;
+  height: auto;
+  margin: 0;
+  padding: 0 8px;
+}
+
+div.geosearch a.reset{
+  color: black;
+  position: absolute;
+  padding: 0 8px;
+  right: 1px;
+  top: 0;
+  cursor: pointer;
+  border: none;
+  background-color: #fafafa;
+  line-height: 26px;
+}
+
+div.geosearch a.reset:hover {
+  background-color: $border-color;
+  border-color: #c6c6c6;
+  cursor: pointer;
+}
+
+div.geosearch input.glass {
+  min-width: 200px;
+  width: 100%;
+  border: none;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  height: 30px;
+  border-radius: 0 4px 4px 0;
+  text-indent: 8px;
+}
+
+div.geosearch a.search{
+  display: none;
+}
+
+div.geosearch div.results.active {
+  top: 30px;
+  background-color: #fafafa;
+  padding: 8px 0;
+  border-top: 1px solid #c6c6c6;
+}
+
+div.geosearch div.results > :hover {
+  background-color: $border-color;
+  border-color: #c6c6c6;
+  cursor: pointer;
+}
