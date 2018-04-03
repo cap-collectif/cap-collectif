@@ -7,7 +7,7 @@ def generate(migrate='false'):
     "Generate database"
     env.service_command('rm -rf web/media/*', 'application')
     env.service_command('curl -sS -XDELETE http://elasticsearch:9200/_all', 'application')
-    env.service_command('php bin/console capco:reinit --force ' + ('', ' --migrate')[migrate == 'true'], 'application', env.www_app)
+    env.service_command('php -d memory_limit=-1 bin/console capco:reinit --force ' + ('', ' --migrate')[migrate == 'true'], 'application', env.www_app)
 
 
 @task(environments=['local'])

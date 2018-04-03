@@ -4,13 +4,12 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-/**
- * OpinionVersionRepository.
- */
 class OpinionVersionRepository extends EntityRepository
 {
     public function getAllIds()
@@ -112,23 +111,23 @@ class OpinionVersionRepository extends EntityRepository
             ->setParameter('trashed', $trashed)
         ;
 
-        if ($filter === 'last') {
+        if ('last' === $filter) {
             $qb->orderBy('o.updatedAt', 'DESC');
             $qb->addOrderBy('o.votesCountOk', 'DESC');
-        } elseif ($filter === 'old') {
+        } elseif ('old' === $filter) {
             $qb->orderBy('o.updatedAt', 'ASC');
             $qb->addOrderBy('o.votesCountOk', 'DESC');
-        } elseif ($filter === 'favorable') {
+        } elseif ('favorable' === $filter) {
             $qb->orderBy('o.votesCountOk', 'DESC');
             $qb->addOrderBy('o.votesCountNok', 'ASC');
             $qb->addOrderBy('o.updatedAt', 'DESC');
-        } elseif ($filter === 'votes') {
+        } elseif ('votes' === $filter) {
             $qb->orderBy('vnb', 'DESC');
             $qb->addOrderBy('o.updatedAt', 'DESC');
-        } elseif ($filter === 'comments') {
+        } elseif ('comments' === $filter) {
             $qb->orderBy('o.argumentsCount', 'DESC');
             $qb->addOrderBy('o.updatedAt', 'DESC');
-        } elseif ($filter === 'random') {
+        } elseif ('random' === $filter) {
             $qb->addSelect('RAND() as HIDDEN rand')
                 ->addOrderBy('rand')
             ;
@@ -185,6 +184,36 @@ class OpinionVersionRepository extends EntityRepository
         return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
     }
 
+    public function countByAuthorAndProject(User $author, Project $project): int
+    {
+        $qb = $this->getIsEnabledQueryBuilder('version')
+          ->select('count(DISTINCT version)')
+          ->leftJoin('version.parent', 'opinion')
+          ->andWhere('version.author = :author')
+          ->andWhere('opinion.step IN (:steps)')
+          ->setParameter('steps', array_map(function ($step) {
+              return $step;
+          }, $project->getRealSteps()))
+          ->setParameter('author', $author)
+      ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function countByAuthorAndStep(User $author, ConsultationStep $step): int
+    {
+        $qb = $this->getIsEnabledQueryBuilder('version')
+          ->select('count(DISTINCT version)')
+          ->leftJoin('version.parent', 'opinion')
+          ->andWhere('opinion.step = :step')
+          ->andWhere('version.author = :author')
+          ->setParameter('step', $step)
+          ->setParameter('author', $author)
+      ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
     /**
      * Get all versions in a project.
      *
@@ -212,7 +241,7 @@ class OpinionVersionRepository extends EntityRepository
             ->setParameter('trashed', false)
         ;
 
-        if ($excludedAuthor !== null) {
+        if (null !== $excludedAuthor) {
             $qb
                 ->andWhere('aut.id != :author')
                 ->setParameter('author', $excludedAuthor)
@@ -230,7 +259,7 @@ class OpinionVersionRepository extends EntityRepository
 
         $qb->addOrderBy('ov.updatedAt', 'DESC');
 
-        if ($limit !== null && is_int($limit) && 0 < $limit) {
+        if (null !== $limit && is_int($limit) && 0 < $limit) {
             $query = $qb->getQuery()
                 ->setFirstResult(($page - 1) * $limit)
                 ->setMaxResults($limit)
@@ -263,7 +292,7 @@ class OpinionVersionRepository extends EntityRepository
             ->setParameter('project', $project)
         ;
 
-        if ($excludedAuthor !== null) {
+        if (null !== $excludedAuthor) {
             $qb
                 ->innerJoin('ov.author', 'a')
                 ->andWhere('a.id != :author')

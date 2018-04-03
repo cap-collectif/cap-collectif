@@ -14,9 +14,15 @@ exports[`<NavbarRight /> should render correctly 1`] = `
     id="navbar-username"
     title={
       <span>
-        <Connect(UserAvatar)
+        <UserAvatar
           anchor={false}
+          className=""
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onMouseOut={[Function]}
+          onMouseOver={[Function]}
           size={34}
+          style={Object {}}
           user={Object {}}
         />
         <span
