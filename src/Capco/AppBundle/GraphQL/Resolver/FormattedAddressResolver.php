@@ -6,8 +6,8 @@ use Capco\AppBundle\Entity\Proposal;
 
 class FormattedAddressResolver
 {
-    public function __invoke(Proposal $proposal)
+    public function __invoke(Proposal $proposal): string
     {
-        return $proposal->getAddress() ? json_decode($proposal->getAddress(), true)[0]['formatted_address'] : '';
+        return $proposal->getAddress() ? \GuzzleHttp\json_decode($proposal->getAddress(), true)[0]['formatted_address'] : '';
     }
 }

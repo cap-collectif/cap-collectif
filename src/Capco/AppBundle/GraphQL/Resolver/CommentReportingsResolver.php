@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Repository\ReportingRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
@@ -19,7 +20,7 @@ class CommentReportingsResolver
         $this->logger = $logger;
     }
 
-    public function __invoke(Comment $comment, Argument $arguments)
+    public function __invoke(Comment $comment, Argument $arguments): Connection
     {
         try {
             $paginator = new Paginator(function (int $offset, int $limit) use ($comment, $arguments) {

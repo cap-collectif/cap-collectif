@@ -24,5 +24,3 @@ PublicationStatus:
             NOT_ACCOUNTED: ## TODO MAKE THIS WORK
                 value: "NOT_ACCOUNTED"
                 description: "Visible only by the author, he is not yet confirmed !"
-
-

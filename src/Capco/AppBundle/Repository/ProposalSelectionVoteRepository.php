@@ -17,38 +17,38 @@ class ProposalSelectionVoteRepository extends EntityRepository
     public function countByAuthorAndProject(User $author, Project $project): int
     {
         return $this->createQueryBuilder('pv')
-        ->select('COUNT(DISTINCT pv)')
-        ->andWhere('pv.user = :author')
-        ->andWhere('pv.expired = false')
-        ->leftJoin('pv.proposal', 'proposal')
-        ->andWhere('proposal.deletedAt IS NULL')
-        ->andWhere('pv.selectionStep IN (:steps)')
-        ->setParameter('steps', array_map(function ($step) {
-            return $step;
-        }, $project->getRealSteps()))
-        ->setParameter('author', $author)
-        ->getQuery()
-        ->getSingleScalarResult()
-      ;
+            ->select('COUNT(DISTINCT pv)')
+            ->andWhere('pv.user = :author')
+            ->andWhere('pv.expired = false')
+            ->leftJoin('pv.proposal', 'proposal')
+            ->andWhere('proposal.deletedAt IS NULL')
+            ->andWhere('pv.selectionStep IN (:steps)')
+            ->setParameter('steps', array_map(function ($step) {
+                return $step;
+            }, $project->getRealSteps()))
+            ->setParameter('author', $author)
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
     }
 
     public function countByAuthorAndStep(User $author, SelectionStep $step): int
     {
         return $this->createQueryBuilder('pv')
-        ->select('COUNT(DISTINCT pv)')
-        ->andWhere('pv.selectionStep = :step')
-        ->andWhere('pv.user = :author')
-        ->andWhere('pv.expired = false')
-        ->leftJoin('pv.proposal', 'proposal')
-        ->andWhere('proposal.deletedAt IS NULL')
-        ->setParameter('author', $author)
-        ->setParameter('step', $step)
-        ->getQuery()
-        ->getSingleScalarResult()
-      ;
+            ->select('COUNT(DISTINCT pv)')
+            ->andWhere('pv.selectionStep = :step')
+            ->andWhere('pv.user = :author')
+            ->andWhere('pv.expired = false')
+            ->leftJoin('pv.proposal', 'proposal')
+            ->andWhere('proposal.deletedAt IS NULL')
+            ->setParameter('author', $author)
+            ->setParameter('step', $step)
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
     }
 
-    public function getVotesByStepAndUser(SelectionStep $step, User $user)
+    public function getVotesByStepAndUser(SelectionStep $step, User $user): array
     {
         return $this->createQueryBuilder('pv')
           ->select('pv', 'proposal')
@@ -179,7 +179,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
-    public function getVotesForProposalByStepId(Proposal $proposal, string $stepId, $limit = null, $offset = 0)
+    public function getVotesForProposalByStepId(Proposal $proposal, string $stepId, $limit = null, $offset = 0): array
     {
         $qb = $this->createQueryBuilder('pv')
             ->leftJoin('pv.selectionStep', 'ss')

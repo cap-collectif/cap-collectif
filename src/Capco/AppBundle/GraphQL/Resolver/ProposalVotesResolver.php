@@ -8,6 +8,7 @@ use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
@@ -29,7 +30,7 @@ class ProposalVotesResolver
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
     }
 
-    public function __invoke(Proposal $proposal, Argument $args)
+    public function __invoke(Proposal $proposal, Argument $args): Connection
     {
         try {
             $step = $this->abstractStepRepository->find($args['step']);

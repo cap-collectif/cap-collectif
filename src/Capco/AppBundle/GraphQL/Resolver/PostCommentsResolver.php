@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Repository\PostCommentRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
@@ -19,7 +20,7 @@ class PostCommentsResolver
         $this->commentRepository = $repository;
     }
 
-    public function __invoke(Post $post, Argument $args)
+    public function __invoke(Post $post, Argument $args): Connection
     {
         try {
             $paginator = new Paginator(function (int $offset, int $limit) use ($post, $args) {

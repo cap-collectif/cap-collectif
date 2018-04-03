@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Repository\ReportingRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
@@ -19,7 +20,7 @@ class ProposalReportingsResolver
         $this->logger = $logger;
     }
 
-    public function __invoke(Proposal $proposal, Argument $arguments)
+    public function __invoke(Proposal $proposal, Argument $arguments): Connection
     {
         try {
             $paginator = new Paginator(function (int $offset, int $limit) use ($proposal, $arguments) {

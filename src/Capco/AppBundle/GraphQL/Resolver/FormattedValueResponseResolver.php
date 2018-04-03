@@ -6,7 +6,7 @@ use Capco\AppBundle\Entity\Responses\ValueResponse;
 
 class FormattedValueResponseResolver
 {
-    public function __invoke(ValueResponse $response)
+    public function __invoke(ValueResponse $response): ?string
     {
         if (!$response->getValue()) {
             return null;

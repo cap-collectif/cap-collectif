@@ -73,7 +73,7 @@ class ProposalCollectVoteRepository extends EntityRepository
       ;
     }
 
-    public function getVotesByStepAndUser(CollectStep $step, User $user)
+    public function getVotesByStepAndUser(CollectStep $step, User $user): array
     {
         return $this->createQueryBuilder('pv')
             ->select('pv', 'proposal')
@@ -143,17 +143,17 @@ class ProposalCollectVoteRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
-    public function getCountsByProposalGroupedByStepsId(Proposal $proposal)
+    public function getCountsByProposalGroupedByStepsId(Proposal $proposal): array
     {
         return $this->getCountsByProposalGroupedBySteps($proposal);
     }
 
-    public function getCountsByProposalGroupedByStepsTitle(Proposal $proposal)
+    public function getCountsByProposalGroupedByStepsTitle(Proposal $proposal): array
     {
         return $this->getCountsByProposalGroupedBySteps($proposal, true);
     }
 
-    public function getVotesForProposalByStepId(Proposal $proposal, string $stepId, $limit = null, $offset = 0)
+    public function getVotesForProposalByStepId(Proposal $proposal, string $stepId, $limit = null, $offset = 0): array
     {
         $qb = $this->createQueryBuilder('pv')
             ->leftJoin('pv.collectStep', 'cs')
@@ -172,7 +172,7 @@ class ProposalCollectVoteRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getVotesCountForCollectStep(CollectStep $step, $themeId = null, $districtId = null)
+    public function getVotesCountForCollectStep(CollectStep $step, $themeId = null, $districtId = null): int
     {
         $qb = $this->createQueryBuilder('pv')
             ->select('COUNT(pv.id)')
