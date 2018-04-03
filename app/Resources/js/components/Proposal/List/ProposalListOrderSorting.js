@@ -35,9 +35,9 @@ export class ProposalListOrderSorting extends React.Component<Props, ComponentSt
 
     this.state = {
       // eslint-disable-next-line react/prop-types
-      displayedOrders: PROPOSAL_AVAILABLE_ORDERS.concat(props.orderByVotes ? ['votes'] : [])
-        .concat(props.orderByComments ? ['comments'] : [])
-        .concat(props.orderByCost ? ['expensive', 'cheap'] : []),
+      displayedOrders: PROPOSAL_AVAILABLE_ORDERS.concat(props.orderByComments ? ['comments'] : [])
+        .concat(props.orderByCost ? ['expensive', 'cheap'] : [])
+        .concat(props.orderByVotes ? ['votes', 'least-votes'] : []),
     };
   }
 

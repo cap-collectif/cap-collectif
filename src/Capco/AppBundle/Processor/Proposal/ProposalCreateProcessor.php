@@ -23,9 +23,11 @@ class ProposalCreateProcessor implements ProcessorInterface
         $json = json_decode($message->getBody(), true);
         $proposal = $this->proposalRepository->find($json['proposalId']);
 
-        if ($proposal->getProposalForm()->isNotifyingOnCreate()) {
-            $this->notifier->onCreate($proposal);
+        if (null === $proposal) {
+            throw new \RuntimeException('Unable to find proposal with id : ' . $json['proposalId']);
         }
+
+        $this->notifier->onCreate($proposal);
 
         return true;
     }
