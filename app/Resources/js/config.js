@@ -7,8 +7,9 @@ export default {
   graphql: `${baseUrl}/graphql/`,
   api: `${baseUrl}/api`,
   mapsAPIKey: '***REMOVED***',
+  mapsServerKey:'***REMOVED***',
   mapboxApiKey:
     '***REMOVED***',
   // https://github.com/elementalui/elemental/blob/master/src/constants.js
-  canUseDOM: !!(typeof window !== 'undefined' && window.document && window.document.createElement),
+    canUseDOM: !!(typeof window !== 'undefined' && window.document && window.document.createElement),
 };

@@ -1,13 +1,14 @@
 // @flow
-import { GeoSearchControl, GoogleProvider } from 'leaflet-geosearch';
-import {MapControl} from "react-leaflet";
+import { GeoSearchControl, GoogleProvider } from "leaflet-geosearch";
+import { MapControl } from "react-leaflet";
+import config from '../../../config';
 
 export class LeafletSearch extends MapControl {
 
     createLeafletElement() {
         const googleProvider = new GoogleProvider({
             params: {
-                key: '***REMOVED***',
+                key: config.mapsServerKey,
             },
         });
 
@@ -18,7 +19,7 @@ export class LeafletSearch extends MapControl {
             showMarker: false,
             showPopup: false,
             autoClose: false,
-            keepResult: true,
+            keepResult: false,
             searchLabel: 'search',
             retainZoomLevel: false,
             animateZoom: true,
