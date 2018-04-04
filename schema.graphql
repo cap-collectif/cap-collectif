@@ -595,6 +595,10 @@ type EvaluationForm {
 }
 
 type Event implements Node {
+<<<<<<< HEAD
+=======
+  # This is likely to be an uuid soon.
+>>>>>>> Add API for event participants
   id: ID!
   title: String!
 
@@ -797,7 +801,11 @@ interface Node {
 }
 
 # A user without account.
+<<<<<<< HEAD
 type NotRegistered {
+=======
+type NotRegistred {
+>>>>>>> Add API for event participants
   # Email of the user.
   email: String
 
@@ -1046,8 +1054,13 @@ type PageInfo {
   endCursor: String
 }
 
+<<<<<<< HEAD
 # User and NotRegistered
 union Participant = User | NotRegistered
+=======
+# User and NotRegistred
+union Participant = User | NotRegistred
+>>>>>>> Add API for event participants
 
 # A connection to a list of items.
 type ParticipantConnection {
@@ -1063,9 +1076,12 @@ type ParticipantConnection {
 
 # An edge in a connection.
 type ParticipantEdge {
+<<<<<<< HEAD
   registeredAt: DateTime!
   registeredAnonymously: Boolean!
 
+=======
+>>>>>>> Add API for event participants
   # The item at the end of the edge.
   node: Participant!
 
