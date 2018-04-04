@@ -19,7 +19,7 @@ class FixedIdsProcessor implements ProcessorInterface
 
     public function preProcess($object)
     {
-        if (!($object instanceof Context) && method_exists($object, 'getId') && $object->getId()) {
+        if (!($object instanceof Context) && $object->getId()) {
             $metadata = $this->em->getClassMetadata(get_class($object));
             $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
             $metadata->setIdGenerator(new AssignedGenerator());

@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { type FormProps, reduxForm, Field } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -13,7 +13,7 @@ import type { ProposalAdminEvaluersForm_proposal } from './__generated__/Proposa
 import type { Dispatch, State } from '../../../types';
 
 type FormValues = { evaluers: Array<{ value: string }> };
-type RelayProps = { proposal: ProposalAdminEvaluersForm_proposal, intl: IntlShape };
+type RelayProps = { proposal: ProposalAdminEvaluersForm_proposal };
 type Props = RelayProps & FormProps & FormValues;
 
 const formName = 'proposal-admin-evaluers';
@@ -37,7 +37,6 @@ export class ProposalAdminEvaluersForm extends React.Component<Props> {
       pristine,
       handleSubmit,
       submitting,
-      intl,
     } = this.props;
     return (
       <div>
@@ -62,7 +61,7 @@ export class ProposalAdminEvaluersForm extends React.Component<Props> {
               labelClassName="control-label"
               inputClassName="fake-inputClassName"
               multi
-              placeholder={intl.formatMessage({ id: 'proposal.analysts.form.placeholder' })}
+              placeholder="proposal.analysts.form.placeholder"
               component={select}
               clearable={false}
               loadOptions={() =>
@@ -122,7 +121,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayPro
   },
 });
 
-const container = connect(mapStateToProps)(injectIntl(form));
+const container = connect(mapStateToProps)(form);
 
 export default createFragmentContainer(
   container,

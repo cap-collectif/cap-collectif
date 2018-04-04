@@ -5,28 +5,20 @@ import DefaultAvatar from './DefaultAvatar';
 import type { State } from '../../types';
 
 type Props = {
-  user: ?{
-    +username: string,
-    +media: ?{
-      +url: string,
-    },
-    +_links: {
-      +profile?: string,
-    },
-  },
+  user: Object,
   size?: number,
   className?: string,
   defaultAvatar: ?string,
-  style?: any,
+  style?: Object,
   anchor?: boolean,
-  onBlur?: () => {},
-  onFocus?: () => {},
-  onMouseOver?: () => {},
-  onMouseOut?: () => {},
+  onBlur?: Function,
+  onFocus?: Function,
+  onMouseOver?: Function,
+  onMouseOut?: Function,
 };
 
 export class UserAvatar extends React.Component<Props> {
-  static defaultProps = {
+  static DefaultProps = {
     user: null,
     size: 45,
     className: '',
@@ -37,6 +29,8 @@ export class UserAvatar extends React.Component<Props> {
     onMouseOver: () => {},
     onMouseOut: () => {},
   };
+
+  displayName: 'UserAvatar';
 
   renderAvatar() {
     const { user, defaultAvatar, size } = this.props;

@@ -12,7 +12,7 @@
 0 * * * * /usr/bin/timeout 50m php -d memory_limit=512M /var/www/bin/console capco:expire-users --env=prod
 
 # Reindex Elasticsearch every hour
-0 * * * * /usr/bin/timeout 5m php -d memory_limit=512M /var/www/bin/console capco:es:populate --env=prod
+0 * * * * /usr/bin/timeout 50m php -d memory_limit=512M /var/www/bin/console capco:es:populate --env=prod
 
 # Recalculate the counters from scratch
 0 4 * * * /usr/bin/timeout 5m php -d memory_limit=512M /var/www/bin/console capco:compute:users-counters --force --env=prod

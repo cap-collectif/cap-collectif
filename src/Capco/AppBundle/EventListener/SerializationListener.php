@@ -35,11 +35,6 @@ class SerializationListener extends AbstractSerializationListener
 
     public function onPostMediaSerialize(ObjectEvent $event)
     {
-        // We skip the rest if we are serializing for Elasticsearch
-        if (isset($this->getIncludedGroups($event)['Elasticsearch'])) {
-            return;
-        }
-
         try {
             $event->getVisitor()->addData(
                 'url',
@@ -52,10 +47,6 @@ class SerializationListener extends AbstractSerializationListener
 
     public function onPostLogSerialize(ObjectEvent $event)
     {
-        // We skip the rest if we are serializing for Elasticsearch
-        if (isset($this->getIncludedGroups($event)['Elasticsearch'])) {
-            return;
-        }
         $context = $event->getContext();
         $context->attributes->get('groups')->map(
                 function (array $groups) use ($event) {
@@ -72,10 +63,6 @@ class SerializationListener extends AbstractSerializationListener
 
     public function onPostElementSerialize(ObjectEvent $event)
     {
-        // We skip the rest if we are serializing for Elasticsearch
-        if (isset($this->getIncludedGroups($event)['Elasticsearch'])) {
-            return;
-        }
         $context = $event->getContext();
         $context->attributes->get('groups')->map(
                 function (array $groups) use ($event) {

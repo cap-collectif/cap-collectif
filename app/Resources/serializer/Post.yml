@@ -28,7 +28,7 @@ Capco\AppBundle\Entity\Post:
             groups: [Posts, PostDetails, Elasticsearch]
         Authors:
             expose: true
-            groups: [Posts, PostDetails]
+            groups: [Posts, PostDetails, Elasticsearch]
             serialized_name: authors
         themes:
             expose: true
