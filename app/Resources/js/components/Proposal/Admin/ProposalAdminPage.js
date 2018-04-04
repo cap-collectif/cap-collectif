@@ -1,20 +1,14 @@
 // @flow
-import * as React from 'react';
+import React, { Component } from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
-import { connect } from 'react-redux';
-import type { MapStateToProps } from 'react-redux';
-import { isDirty } from 'redux-form';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import ProposalAdminPageTabs from './ProposalAdminPageTabs';
 import { PROPOSAL_FOLLOWERS_TO_SHOW } from '../../../constants/ProposalConstants';
 import Loader from '../../Ui/Loader';
-import type { State } from '../../../types';
 
-type Props = { proposalId: number, dirty: boolean };
-
-const onUnload = (event: SyntheticEvent<>) => {
-  event.preventDefault();
-};
+type DefaultProps = void;
+type Props = { proposalId: number };
+type State = void;
 
 const component = ({ error, props }: { error: ?Error, props: any }) => {
   if (error) {
@@ -31,20 +25,8 @@ const component = ({ error, props }: { error: ?Error, props: any }) => {
   return <Loader />;
 };
 
-export class ProposalAdminPage extends React.Component<Props> {
-  componentDidUpdate(prevProps: Props) {
-    if (prevProps.dirty === false && this.props.dirty === true) {
-      window.addEventListener('beforeunload', onUnload);
-    }
-
-    if (this.props.dirty === false) {
-      window.removeEventListener('beforeunload', onUnload);
-    }
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('beforeunload', onUnload);
-  }
+export class ProposalAdminPage extends Component<Props, State> {
+  static defaultProps: DefaultProps;
   render() {
     return (
       <div className="admin_proposal_form">
@@ -69,11 +51,4 @@ export class ProposalAdminPage extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  dirty:
-    isDirty('proposal-admin-edit')(state) ||
-    isDirty('proposal-admin-selections')(state) ||
-    isDirty('proposal-admin-evaluation')(state) ||
-    isDirty('proposal-admin-status')(state),
-});
-export default connect(mapStateToProps)(ProposalAdminPage);
+export default ProposalAdminPage;
