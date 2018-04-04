@@ -5,7 +5,7 @@ Scenario: GraphQL client want to get a node of all available types
   Given I send a GraphQL POST request:
   """
   {
-    "query": "query node ($opinionId: ID!, $proposalId: ID!, $projectId: ID!, $groupId: ID!, $proposalFormId: ID!, $questionnaireId: ID!){
+    "query": "query node ($opinionId: ID!, $proposalId: ID!, $projectId: ID!, $groupId: ID!, $proposalFormId: ID!, $questionnaireId: ID!, $eventId: ID!){
       opinion: node(id: $opinionId) {
         ... on Opinion {
           title
@@ -35,6 +35,11 @@ Scenario: GraphQL client want to get a node of all available types
         ... on Questionnaire {
           title
         }
+      },
+      event: node(id: $eventId) {
+        ... on Event {
+          title
+        }
       }
     }",
     "variables": {
@@ -43,7 +48,8 @@ Scenario: GraphQL client want to get a node of all available types
       "projectId": "project1",
       "groupId": "group1",
       "proposalFormId": "proposalForm1",
-      "questionnaireId": "questionnaire1"
+      "questionnaireId": "questionnaire1",
+      "eventId": 1
     }
   }
   """
@@ -68,6 +74,9 @@ Scenario: GraphQL client want to get a node of all available types
       },
       "questionnaire": {
         "title": "Votre avis sur les JO 2024 à Paris"
+      },
+      "event": {
+        "title": "Event with registrations"
       }
     }
   }

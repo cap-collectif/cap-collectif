@@ -590,6 +590,15 @@ type EvaluationForm {
   questions: [Question!]!
 }
 
+type Event implements Node {
+  # This is likely to be an uuid soon.
+  id: ID!
+  title: String!
+
+  # A list of Users that are participating to the event.
+  participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
+}
+
 input FollowProposalInput {
   # The proposal id
   proposalId: ID!
@@ -772,6 +781,15 @@ type NewsEdge {
 interface Node {
   # The ID of an object
   id: ID!
+}
+
+# A user without account.
+type NotRegistred {
+  # Email of the user.
+  email: String
+
+  # Username of the user.
+  username: String
 }
 
 # A notifications configuration
@@ -1013,6 +1031,30 @@ type PageInfo {
 
   # When paginating forwards, the cursor to continue.
   endCursor: String
+}
+
+# User and NotRegistred
+union Participant = User | NotRegistred
+
+# A connection to a list of items.
+type ParticipantConnection {
+  # Identifies the total count of items in the connection.
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [ParticipantEdge]
+}
+
+# An edge in a connection.
+type ParticipantEdge {
+  # The item at the end of the edge.
+  node: Participant!
+
+  # A cursor for use in pagination.
+  cursor: String!
 }
 
 # 3 possible values

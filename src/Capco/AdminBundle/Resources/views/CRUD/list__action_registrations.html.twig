@@ -1,3 +1,7 @@
-{% if object.registrations | length > 0 %}
-    <a class="btn btn-sm btn-default view_link" href="{{ path('admin_capco_app_eventregistration_list', {'filter[event][value]': object.id }) }}">Inscriptions</a>
-{% endif %}
+<a
+  class="btn btn-sm btn-default view_link"
+  href="{{ path('app_export_event_participants', {'eventId': object.id }) }}"
+  target="_blank"
+>
+  {{ 'admin.label.export.members'|trans({}, 'CapcoAppBundle') }}
+</a>
