@@ -397,8 +397,6 @@ type CreateProposalPayload {
   clientMutationId: String
 }
 
-scalar CssJSON
-
 scalar DateTime
 
 input DeleteGroupInput {
@@ -442,14 +440,12 @@ type District {
   id: ID!
   name: String!
   geojson: GeoJSON
-  geojsonStyle: CssJSON
   displayedOnMap: Boolean!
 }
 
 input DistrictInput {
   name: String!
   geojson: GeoJSON
-  geojsonStyle: CssJSON
   displayedOnMap: Boolean = false
 }
 
@@ -1066,8 +1062,6 @@ type ProposalForm implements Node {
   illustrationHelpText: String
   title: String!
   proposals(
-    # Order for connection.
-    orderBy: ProposalOrder = {field: CREATED_AT, direction: ASC}
     affiliations: [ProposalAffiliation]
 
     # Returns the elements in the list that come after the specified global ID.
@@ -1115,21 +1109,6 @@ type ProposalForm implements Node {
   # Identifies the step that use the proposal form.
   step: CollectStep
   allowAknowledge: Boolean!
-}
-
-# Ways in which proposal connections can be ordered.
-input ProposalOrder {
-  # The field in which to order nodes by.
-  field: ProposalOrderField!
-
-  # The direction in which to order nodes.
-  direction: OrderDirection! = ASC
-}
-
-# Properties by which proposal connections can be ordered
-enum ProposalOrderField {
-  # Allows ordering a list of proposals by when they were created.
-  CREATED_AT
 }
 
 input ProposalsConnectionFilter {
