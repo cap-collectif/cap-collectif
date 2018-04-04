@@ -20,17 +20,15 @@ class ContributionResolver
     }
 
     // Code may looks ugly but in fact it's highly optimized !
-    // Nope TODO https://github.com/cap-collectif/platform/issues/5296
     public function getProjectContributorsOrdered(Project $project, $excludePrivate = false, $pagination = 16, $page = 1)
     {
         // Fetch contributors
         $sourcesContributors = $this->repository->findProjectSourceContributorsWithCount($project);
         $argumentsContributors = $this->repository->findProjectArgumentContributorsWithCount($project);
         $opinionsContributors = $this->repository->findProjectOpinionContributorsWithCount($project);
-        $versionsContributors = $this->repository->findProjectVersionContributorsWithCount($project);
-
         $proposalsContributors = $this->repository->findProjectProposalContributorsWithCount($project);
         $repliesContributors = $this->repository->findProjectReplyContributorsWithCount($project, $excludePrivate);
+        $versionsContributors = $this->repository->findProjectVersionContributorsWithCount($project);
 
         // Fetch voters
         $opinionsVoters = $this->repository->findProjectOpinionVotersWithCount($project);

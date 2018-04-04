@@ -30,6 +30,9 @@ export type DefaultAction =
 export type State = {
   +showNewFieldModal: boolean,
   +themes: Array<Object>,
+  +images: ?{
+    +avatar: string,
+  },
   +features: Exact<FeatureToggles>,
   +userTypes: Array<Object>,
   +parameters: Object,
@@ -72,6 +75,7 @@ export const features = {
 
 const initialState: State = {
   themes: [],
+  images: null,
   showNewFieldModal: false,
   features,
   userTypes: [],

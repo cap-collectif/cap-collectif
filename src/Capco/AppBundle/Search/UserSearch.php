@@ -2,13 +2,9 @@
 
 namespace Capco\AppBundle\Search;
 
-use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\UserBundle\Entity\User;
 use Elastica\Index;
 use Elastica\Query;
-use Elastica\Query\Range;
-use Elastica\Query\Term;
 use Elastica\Result;
 
 class UserSearch extends Search
@@ -44,76 +40,6 @@ class UserSearch extends Search
             'users' => $this->getHydratedResults($resultSet->getResults()),
             'count' => $resultSet->getTotalHits(),
         ];
-    }
-
-    public function getContributorByProject(Project $project, int $offset, int $limit): array
-    {
-        $nestedQuery = new Query\Nested();
-        $nestedQuery->setPath('contributionsCountByProject');
-
-        $boolQuery = new Query\BoolQuery();
-        $boolQuery->addMust(new Term(['contributionsCountByProject.project.id' => $project->getId()]));
-        $boolQuery->addMust(new Range('contributionsCountByProject.count', ['gt' => 0]));
-
-        $nestedQuery->setQuery($boolQuery);
-
-        $query = new Query($nestedQuery);
-        $query->setSort([
-        'contributionsCountByProject.count' => [
-          'order' => 'desc',
-          'nested_filter' => [
-            'term' => ['contributionsCountByProject.project.id' => $project->getId()],
-          ],
-        ],
-      ]);
-
-        $query
-          ->setSource(['id'])
-          ->setFrom($offset)
-          ->setSize($limit)
-      ;
-
-        $resultSet = $this->index->getType('user')->search($query);
-
-        return [
-          'results' => $this->getHydratedResults($resultSet->getResults()),
-          'totalCount' => $resultSet->getTotalHits(),
-      ];
-    }
-
-    public function getContributorByStep(AbstractStep $step, int $offset, int $limit): array
-    {
-        $nestedQuery = new Query\Nested();
-        $nestedQuery->setPath('contributionsCountByStep');
-
-        $boolQuery = new Query\BoolQuery();
-        $boolQuery->addMust(new Term(['contributionsCountByStep.step.id' => $step->getId()]));
-        $boolQuery->addMust(new Range('contributionsCountByStep.count', ['gt' => 0]));
-
-        $nestedQuery->setQuery($boolQuery);
-
-        $query = new Query($nestedQuery);
-        $query->setSort([
-        'contributionsCountByStep.count' => [
-          'order' => 'desc',
-          'nested_filter' => [
-            'term' => ['contributionsCountByStep.step.id' => $step->getId()],
-          ],
-        ],
-      ]);
-
-        $query
-          ->setSource(['id'])
-          ->setFrom($offset)
-          ->setSize($limit)
-      ;
-
-        $resultSet = $this->index->getType('user')->search($query);
-
-        return [
-          'results' => $this->getHydratedResults($resultSet->getResults()),
-          'totalCount' => $resultSet->getTotalHits(),
-      ];
     }
 
     private function getHydratedResults(array $results): array

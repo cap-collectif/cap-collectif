@@ -227,9 +227,6 @@ type CollectStep implements Node & Step {
   statuses: [Status!]!
   voteThreshold: Int
   project: Project!
-
-  # A list of contributor associated with the step.
-  contributors(after: String, first: Int, before: String, last: Int): UserConnection!
 }
 
 # A consultation
@@ -238,9 +235,6 @@ type Consultation implements Node & Step {
 
   # The id of the consultation.
   id: ID!
-
-  # The project
-  project: Project!
 
   # The id of the related project.
   projectId: String!
@@ -256,9 +250,6 @@ type Consultation implements Node & Step {
 
   # List of sections.
   sections: [Section]
-
-  # A list of contributor associated with the consultation.
-  contributors(after: String, first: Int, before: String, last: Int): UserConnection!
   contributionConnection(
     # Ordering options for contributions returned from the connection.
     orderBy: ContributionOrder
@@ -406,6 +397,8 @@ type CreateProposalPayload {
   clientMutationId: String
 }
 
+scalar CssJSON
+
 scalar DateTime
 
 input DeleteGroupInput {
@@ -449,12 +442,14 @@ type District {
   id: ID!
   name: String!
   geojson: GeoJSON
+  geojsonStyle: CssJSON
   displayedOnMap: Boolean!
 }
 
 input DistrictInput {
   name: String!
   geojson: GeoJSON
+  geojsonStyle: CssJSON
   displayedOnMap: Boolean = false
 }
 
@@ -537,7 +532,19 @@ type Group implements Node {
 
   # Identifies the description of the group.
   description: String
-  users(after: String, first: Int, before: String, last: Int): UserConnection!
+  usersConnection(
+    # Returns the elements in the list that come after the specified global ID.
+    after: String
+
+    # Returns the first n elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified global ID.
+    before: String
+
+    # Returns the last n elements from the list.
+    last: Int
+  ): UsersConnection!
 }
 
 scalar HTML
@@ -894,9 +901,6 @@ type Project implements Node {
   id: ID!
   steps: [Step!]!
   title: String!
-
-  # A list of contributor associated with the project.
-  contributors(after: String, first: Int, before: String, last: Int): UserConnection!
 }
 
 # A budget contribution
@@ -1062,6 +1066,8 @@ type ProposalForm implements Node {
   illustrationHelpText: String
   title: String!
   proposals(
+    # Order for connection.
+    orderBy: ProposalOrder = {field: CREATED_AT, direction: ASC}
     affiliations: [ProposalAffiliation]
 
     # Returns the elements in the list that come after the specified global ID.
@@ -1108,6 +1114,22 @@ type ProposalForm implements Node {
 
   # Identifies the step that use the proposal form.
   step: CollectStep
+  allowAknowledge: Boolean!
+}
+
+# Ways in which proposal connections can be ordered.
+input ProposalOrder {
+  # The field in which to order nodes by.
+  field: ProposalOrderField!
+
+  # The direction in which to order nodes.
+  direction: OrderDirection! = ASC
+}
+
+# Properties by which proposal connections can be ordered
+enum ProposalOrderField {
+  # Allows ordering a list of proposals by when they were created.
+  CREATED_AT
 }
 
 input ProposalsConnectionFilter {
@@ -1265,13 +1287,10 @@ input QuestionnaireAbstractQuestionInput {
   position: Int!
 }
 
-type QuestionnaireStep implements Node & Step {
+type QuestionnaireStep implements Step {
   id: ID!
   kind: String!
   title: String!
-
-  # A list of contributor associated with the step.
-  contributors(after: String, first: Int, before: String, last: Int): UserConnection!
 }
 
 type RankingStep implements Step {
@@ -1411,7 +1430,7 @@ type Selection {
 }
 
 # A budget contribution
-type SelectionStep implements Step & Node {
+type SelectionStep implements Step {
   id: ID!
   kind: String!
   title: String!
@@ -1420,9 +1439,6 @@ type SelectionStep implements Step & Node {
   # Only one selection step inside a project can have realisation steps, true if this one
   allowingProgressSteps: Boolean!
   voteThreshold: Int
-
-  # A list of contributor associated with the consultation.
-  contributors(after: String, first: Int, before: String, last: Int): UserConnection!
 }
 
 input SetEvaluationFormInProposalFormInput {
@@ -1604,6 +1620,7 @@ input UpdateProposalFormInput {
   categories: [ProposalCategoryInput!]
   districts: [DistrictInput!]
   questions: [QuestionnaireAbstractQuestionInput!]
+  allowAknowledge: Boolean
   clientMutationId: String
 }
 
@@ -1733,27 +1750,6 @@ type User implements Node {
   contributionsCount: Int!
 }
 
-# A connection to a list of items.
-type UserConnection {
-  # Identifies the total count of items in the connection.
-  totalCount: Int!
-
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # Information to aid in pagination.
-  edges: [UserEdge]
-}
-
-# An edge in a connection.
-type UserEdge {
-  # The item at the end of the edge.
-  node: User!
-
-  # A cursor for use in pagination.
-  cursor: String!
-}
-
 # A list of users in groups
 type UserGroup {
   # The identifier of the group
@@ -1776,6 +1772,26 @@ type UserNotificationsConfiguration {
 type UserType {
   # The name of the type.
   name: String!
+}
+
+# A connection to a list of items.
+type UsersConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [UsersEdge]
+}
+
+# An edge in a connection.
+type UsersEdge {
+  # The item at the end of the edge.
+  node: User!
+
+  # A cursor for use in pagination.
+  cursor: String!
 }
 
 # A response

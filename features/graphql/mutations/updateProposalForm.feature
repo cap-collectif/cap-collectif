@@ -13,6 +13,7 @@ Scenario: GraphQL client wants to update a proposal form
           id
           title
           titleHelpText
+          allowAknowledge
           description
           descriptionHelpText
           summaryHelpText
@@ -41,6 +42,9 @@ Scenario: GraphQL client wants to update a proposal form
           districts {
             id
             name
+            geojson
+            geojsonStyle
+            displayedOnMap
           }
           questions {
             id
@@ -67,6 +71,7 @@ Scenario: GraphQL client wants to update a proposal form
         "themeMandatory": true,
         "themeHelpText": "Theme Help",
         "usingDistrict": true,
+        "allowAknowledge": true,
         "districtMandatory": true,
         "districtHelpText": "District Help",
         "usingCategories": true,
@@ -80,8 +85,7 @@ Scenario: GraphQL client wants to update a proposal form
         "zoomMap": 0,
         "commentable": true,
         "costable": true,
-        "categories": [
-          {
+        "categories": [{
             "name": "Aménagement"
           },
           {
@@ -91,16 +95,17 @@ Scenario: GraphQL client wants to update a proposal form
             "name": "New category"
           }
         ],
-        "districts": [
-          {
+        "districts": [{
             "name": "Beauregard",
             "displayedOnMap": false,
-            "geojson": ""
+            "geojson": "",
+            "geojsonStyle": ""
           },
           {
             "name": "Other district",
             "displayedOnMap": true,
-            "geojson": ""
+            "geojson": "",
+            "geojsonStyle": ""
           }
         ],
         "questions": []
@@ -122,6 +127,7 @@ Scenario: GraphQL client wants to update a proposal form
           "summaryHelpText": "Summary Help",
           "illustrationHelpText": "Illustration Help",
           "usingThemes": true,
+          "allowAknowledge": true,
           "themeMandatory": true,
           "themeHelpText": "Theme Help",
           "usingDistrict": true,

@@ -13,7 +13,7 @@ describe('<GroupAdminModalAddUsers />', () => {
     group: {
       id: 'group4',
       title: 'Comité de suvi',
-      users: [],
+      usersConnection: [],
     },
     intl: intlMock,
   };

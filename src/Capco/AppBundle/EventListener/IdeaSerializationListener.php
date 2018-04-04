@@ -37,11 +37,6 @@ class IdeaSerializationListener extends AbstractSerializationListener
 
     public function onPostIdea(ObjectEvent $event)
     {
-        // We skip if we are serializing for Elasticsearch
-        if (isset($this->getIncludedGroups($event)['Elasticsearch'])) {
-            return;
-        }
-
         $idea = $event->getObject();
         $token = $this->tokenStorage->getToken();
         $user = $token ? $token->getUser() : 'anon.';
@@ -66,11 +61,11 @@ class IdeaSerializationListener extends AbstractSerializationListener
         }
 
         $event->getVisitor()->addData(
-            'userHasVote', 'anon.' === $user ? false : $this->ideaHelper->hasUserVoted($idea, $user)
+            'userHasVote', $user === 'anon.' ? false : $this->ideaHelper->hasUserVoted($idea, $user)
         );
 
         $event->getVisitor()->addData(
-            'userHasReport', 'anon.' === $user ? false : $this->ideaHelper->hasUserReported($idea, $user)
+            'userHasReport', $user === 'anon.' ? false : $this->ideaHelper->hasUserReported($idea, $user)
         );
     }
 }
