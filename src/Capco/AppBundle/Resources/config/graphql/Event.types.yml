@@ -5,6 +5,8 @@ Event:
         fields:
             id:
               type: "ID!"
+              resolve: "@=value.id"
+              description: "This is likely to be an uuid soon."
             title:
                type: "String!"
             participants:

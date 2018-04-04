@@ -626,6 +626,7 @@ type EvaluationForm {
 }
 
 type Event implements Node {
+  # This is likely to be an uuid soon.
   id: ID!
   title: String!
 
