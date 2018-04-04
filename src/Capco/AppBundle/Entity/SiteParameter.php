@@ -103,13 +103,6 @@ class SiteParameter
     private $category = 'settings.global';
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="help_text", type="text", nullable=true)
-     */
-    private $helpText = '';
-
-    /**
      * Constructor.
      */
     public function __construct()
@@ -276,18 +269,6 @@ class SiteParameter
     public function setIsSocialNetworkDescription(bool $isSocialNetworkDescription)
     {
         $this->isSocialNetworkDescription = $isSocialNetworkDescription;
-
-        return $this;
-    }
-
-    public function getHelpText(): ?string
-    {
-        return $this->helpText;
-    }
-
-    public function setHelpText(?string $helpText = null): self
-    {
-        $this->helpText = $helpText;
 
         return $this;
     }

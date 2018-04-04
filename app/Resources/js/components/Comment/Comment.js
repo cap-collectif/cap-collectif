@@ -10,7 +10,7 @@ import CommentReportButton from './CommentReportButton';
 import CommentEdit from './CommentEdit';
 import CommentAnswers from './CommentAnswers';
 import CommentForm from './CommentForm';
-// import CommentActions from '../../actions/CommentActions';
+import CommentActions from '../../actions/CommentActions';
 
 const Comment = React.createClass({
   propTypes: {
@@ -42,11 +42,11 @@ const Comment = React.createClass({
     });
   },
 
-  // comment(data) {
-  //   const { comment, object, uri } = this.props;
-  //   data.parent = comment.id;
-  //   return CommentActions.create(uri, object, data);
-  // },
+  comment(data) {
+    const { comment, object, uri } = this.props;
+    data.parent = comment.id;
+    return CommentActions.create(uri, object, data);
+  },
 
   render() {
     const { onVote, root } = this.props;
@@ -89,7 +89,7 @@ const Comment = React.createClass({
           <div className="comment-answers-block">
             {root ? <CommentAnswers onVote={onVote} comments={comment.answers} /> : null}
             {this.state.answerFormShown ? (
-              <CommentForm focus={this.state.answerFormFocus} isAnswer />
+              <CommentForm comment={this.comment} focus={this.state.answerFormFocus} isAnswer />
             ) : null}
           </div>
         </div>

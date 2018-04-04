@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
-use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\ArgumentVote;
 use Capco\AppBundle\Entity\Opinion;
@@ -156,7 +155,7 @@ class ArgumentsController extends FOSRestController
         $em->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
 
-        $this->get('swarrot.publisher')->publish(CapcoAppBundleMessagesTypes::ARGUMENT_CREATE, new Message(
+        $this->get('swarrot.publisher')->publish('argument.create', new Message(
             json_encode([
                 'argumentId' => $argument->getId(),
             ])
@@ -217,7 +216,7 @@ class ArgumentsController extends FOSRestController
         $em->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
 
-        $this->get('swarrot.publisher')->publish(CapcoAppBundleMessagesTypes::ARGUMENT_CREATE, new Message(
+        $this->get('swarrot.publisher')->publish('argument.create', new Message(
             json_encode([
                 'argumentId' => $argument->getId(),
             ])
@@ -261,7 +260,7 @@ class ArgumentsController extends FOSRestController
         $em->persist($argument);
         $em->flush();
 
-        $this->get('swarrot.publisher')->publish(CapcoAppBundleMessagesTypes::ARGUMENT_UPDATE, new Message(
+        $this->get('swarrot.publisher')->publish('argument.update', new Message(
             json_encode([
                 'argumentId' => $argument->getId(),
             ])
@@ -310,7 +309,7 @@ class ArgumentsController extends FOSRestController
         $em->persist($argument);
         $em->flush();
 
-        $this->get('swarrot.publisher')->publish(CapcoAppBundleMessagesTypes::ARGUMENT_UPDATE, new Message(
+        $this->get('swarrot.publisher')->publish('argument.update', new Message(
             json_encode([
                 'argumentId' => $argument->getId(),
             ])

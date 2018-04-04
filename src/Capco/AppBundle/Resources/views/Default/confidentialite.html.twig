@@ -11,24 +11,19 @@
 {% endblock %}
 
 {% block title %}
-        {{ parent() }} - {{ 'cookies' | trans({}, 'CapcoAppBundle') }}
+        {{ parent() }} - {{ 'confidentialite.title' | trans({}, 'CapcoAppBundle') }}
 {% endblock %}
 
 {% block jumbotron %}
     <div class="jumbotron  jumbotron--custom  jumbotron--bg-1  text-center">
         <div class="container">
-            <h1>{{ 'cookies' | trans({}, 'CapcoAppBundle') }}</h1>
+            <h1>{{ 'confidentialite.title' | trans({}, 'CapcoAppBundle') }}</h1>
         </div>
     </div>
 {% endblock %}
 
 {% block body %}
-<div class="container container--custom" style="max-width: 660px">
+<div class="container  container--custom">
     {{ 'confidentialite.content' | trans({}, 'CapcoAppBundle')|raw }}
-    <div class="row" style="margin-top: 10px">
-        <div class="col-xs-12 col-sm-8 col-md-12">
-            {{ react_render_component('CookieApp') }}
-        </div>
-    </div> <!-- row -->
 </div>
 {% endblock %}

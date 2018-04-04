@@ -1,9 +1,0 @@
-DeleteAccountPayload:
-    type: relay-mutation-payload
-    config:
-        fields:
-            userId:
-                type: "ID!"
-                description: "user id"
-
-

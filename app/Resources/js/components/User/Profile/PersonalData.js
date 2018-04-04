@@ -5,7 +5,7 @@ import {
   Alert,
   Well,
   Panel,
-  ButtonGroup,
+  ButtonToolbar,
   Button,
   Popover,
   OverlayTrigger,
@@ -29,7 +29,6 @@ import UpdateProfilePersonalDataMutation from '../../../mutations/UpdateProfileP
 import component from '../../Form/Field';
 import DateDropdownPicker from '../../Form/DateDropdownPicker';
 import config from '../../../config';
-import UserArchiveRequestButton from './UserArchiveRequestButton';
 
 type RelayProps = { personalDataForm: PersonalData_viewer };
 type Props = FormProps &
@@ -557,7 +556,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                 )}
                 <div className="horizontal_field_with_border_top">
                   <div className="col-sm-3" />
-                  <ButtonGroup className="col-sm-4 pl-0">
+                  <ButtonToolbar className="col-sm-4 pl-0">
                     <Button
                       disabled={invalid || submitting}
                       type="submit"
@@ -575,32 +574,11 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                       submitFailed={submitFailed}
                       submitting={submitting}
                     />
-                  </ButtonGroup>
+                  </ButtonToolbar>
                 </div>
               </form>
             </div>
           )}
-        </Panel>
-        <Panel>
-          <h2 className="page-header">
-            <FormattedMessage id="data-export" />
-          </h2>
-          <div className="horizontal_field_with_border_top">
-            <label className="col-sm-3 control-label">
-              <FormattedMessage id="your-data" />
-            </label>
-            <div className="col-sm-9">
-              <UserArchiveRequestButton viewer={viewer} />
-              {viewer.isArchiveReady && (
-                <p className="excerpt">
-                  <FormattedMessage id="help-text-data-download-button" />
-                </p>
-              )}
-              <p className="excerpt">
-                <FormattedMessage id="data-copy-help-text" />
-              </p>
-            </div>
-          </div>
         </Panel>
       </div>
     );
@@ -659,8 +637,6 @@ export default createFragmentContainer(
       city
       gender
       phoneConfirmed
-      isArchiveReady
-      ...UserArchiveRequestButton_viewer
     }
   `,
 );

@@ -168,5 +168,3 @@ services:
   curl.http_adapter:
     class: Ivory\HttpAdapter\CurlHttpAdapter
 
-  capco.canonicalizer:
-    class: Capco\AppBundle\Utils\Canonicalizer

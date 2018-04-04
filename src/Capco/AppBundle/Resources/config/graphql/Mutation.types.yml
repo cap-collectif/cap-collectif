@@ -10,15 +10,7 @@ Mutation:
                     inputType: ChangeUserNotificationsConfigurationInput
                     payloadType: ChangeUserNotificationsConfigurationPayload
                     mutateAndGetPayload: "@=mutation('changeUserNotificationsConfiguration', [value, user])"
-        # User
-          requestUserArchive:
-                access: "@=hasRole('ROLE_USER')"
-                builder: "Relay::Mutation"
-                builderConfig:
-                    inputType: RequestUserArchiveInput
-                    payloadType: RequestUserArchivePayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\RequestUserArchiveMutation", [value, user])'
-         # Proposal
+        # Proposal
           changeProposalPublicationStatus:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: "Relay::Mutation"
@@ -240,11 +232,3 @@ Mutation:
               inputType: UpdateProfilePublicDataInput
               payloadType: UpdateProfilePublicDataPayload
               mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProfilePublicDataMutation", [value, user])'
-        # Contributions
-          deleteAccount:
-            access: "@=hasRole('ROLE_USER')"
-            builder: "Relay::Mutation"
-            builderConfig:
-              inputType: DeleteAccountInput
-              payloadType: DeleteAccountPayload
-              mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteAccountMutation", [request, value, user])'

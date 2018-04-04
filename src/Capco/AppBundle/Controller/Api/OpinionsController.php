@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
-use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionVersion;
@@ -129,7 +128,7 @@ class OpinionsController extends FOSRestController
         $em->persist($opinion);
         $em->flush();
 
-        $this->get('swarrot.publisher')->publish(CapcoAppBundleMessagesTypes::OPINION_CREATE, new Message(
+        $this->get('swarrot.publisher')->publish('opinion.create', new Message(
             json_encode([
                 'opinionId' => $opinion->getId(),
             ])
@@ -169,7 +168,7 @@ class OpinionsController extends FOSRestController
         $opinion->setValidated(false);
         $this->getDoctrine()->getManager()->flush();
 
-        $this->get('swarrot.publisher')->publish(CapcoAppBundleMessagesTypes::OPINION_UPDATE, new Message(
+        $this->get('swarrot.publisher')->publish('opinion.update', new Message(
             json_encode([
                 'opinionId' => $opinion->getId(),
             ])

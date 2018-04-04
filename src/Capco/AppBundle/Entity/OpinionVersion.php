@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Model\HasDiffInterface;
 use Capco\AppBundle\Traits\AnswerableTrait;
 use Capco\AppBundle\Traits\DiffableTrait;
@@ -118,11 +117,6 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
     public function getProject()
     {
         return $this->getParent()->getStep()->getProject();
-    }
-
-    public function getStep(): ?AbstractStep
-    {
-        return $this->getParent()->getStep();
     }
 
     public function getRelated()

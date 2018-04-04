@@ -64,15 +64,6 @@ services:
           - "@logger"
       tags:
           - { name: overblog_graphql.mutation }
-  Capco\AppBundle\GraphQL\Mutation\RequestUserArchiveMutation:
-      # only for sf < 3.3
-      class: Capco\AppBundle\GraphQL\Mutation\RequestUserArchiveMutation
-      arguments:
-          - "@doctrine.orm.default_entity_manager"
-          - "@swarrot.publisher"
-      tags:
-          - { name: overblog_graphql.mutation }
-
 
   Capco\AppBundle\GraphQL\Mutation\UpdateProfilePasswordMutation:
       # only for sf < 3.3
@@ -150,11 +141,3 @@ services:
     class: Capco\AppBundle\GraphQL\Mutation\ProposalEvaluationMutation
     tags:
       - { name: overblog_graphql.mutation, alias: "changeProposalEvaluation", method: "changeProposalEvaluation" }
-      
-  capco.mutation.delete_account:
-    class: Capco\AppBundle\GraphQL\Mutation\DeleteAccountMutation
-    arguments:
-        - "@doctrine.orm.entity_manager"
-        - "@translator"
-    tags:
-      - { name: overblog_graphql.mutation }

@@ -94,14 +94,6 @@ class UserResolver implements ContainerAwareInterface
             ['token' => $user->getNotificationsConfiguration()->getUnsubscribeToken()], UrlGeneratorInterface::ABSOLUTE_URL);
     }
 
-    public function resolveLoginAndShowDataUrl(User $user): string
-    {
-        $router = $this->container->get('router');
-
-        return $router->generate('capco_profile_data_login',
-            ['token' => $user->getNotificationsConfiguration()->getUnsubscribeToken()], UrlGeneratorInterface::ABSOLUTE_URL);
-    }
-
     public function resolveShowUrlBySlug(string $slug)
     {
         $router = $this->container->get('router');
@@ -141,13 +133,5 @@ class UserResolver implements ContainerAwareInterface
         }, $object->getRoles());
 
         return implode('|', $convertedRoles);
-    }
-
-    public function contributionsToDeleteCount($object): int
-    {
-        $deleteAction = $this->container->get('capco.mutation.delete_account');
-        $count = $deleteAction->hardDeleteUserContributionsInActiveSteps($object, true);
-
-        return $count;
     }
 }

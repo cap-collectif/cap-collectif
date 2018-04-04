@@ -183,11 +183,6 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
         return $this->getParent();
     }
 
-    public function getStep()
-    {
-        return $this->getRelated()->getStep();
-    }
-
     /**
      * Get title.
      *

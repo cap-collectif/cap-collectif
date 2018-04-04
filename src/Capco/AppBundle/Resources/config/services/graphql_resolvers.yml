@@ -151,7 +151,6 @@ services:
           - { name: overblog_graphql.resolver, alias: "user_dateOfBirth", method: "resolveDateOfBirth" }
           - { name: overblog_graphql.resolver, alias: "user_gender", method: "resolveGender" }
           - { name: overblog_graphql.resolver, alias: "user_rolesText", method: "resolveRolesText" }
-          - { name: overblog_graphql.resolver, alias: "user_contributionsToDeleteCount", method: "contributionsToDeleteCount" }
 
     Capco\AppBundle\GraphQL\Resolver\UsersFollowingProposalResolver:
         class: Capco\AppBundle\GraphQL\Resolver\UsersFollowingProposalResolver
@@ -329,7 +328,7 @@ services:
         tags:
             - { name: overblog_graphql.resolver }
 
-    Capco\AppBundle\GraphQL\Resolver\ParticipantConnectionEdgeRegisteredAnonymouslyResolver:
+    Capco\AppBundle\GraphQL\Resolver\ParticipantConnectionEdgeRegistredAnonymouslyResolver:
         class: Capco\AppBundle\GraphQL\Resolver\ParticipantConnectionEdgeRegistredAnonymouslyResolver
         arguments:
             - "@capco.event_registration.repository"

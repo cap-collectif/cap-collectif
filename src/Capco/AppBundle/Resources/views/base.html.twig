@@ -1,6 +1,7 @@
 {% extends '@CapcoApp/layout.html.twig' %}
 
 {% block mainContent %}
+
     {# Header  #}
     {% include '@CapcoApp/Default/header.html.twig' %}
 
@@ -26,21 +27,12 @@
     </div>
 
     {# Footer #}
-    <div id="cookie-banner" class="cookie-banner ">
-        <div class="col-sm-10">{{ 'performance-cookies-alert'|trans({}, 'CapcoAppBundle') }}</div>
-        <div class="col-sm-2 d-flex flex-end">
-            <a id="cookie-more-button" name="cookie-more" href="{{ url('app_confidentialite') }}">{{ 'cookies-setting'|trans({}, 'CapcoAppBundle') }}</a>
-            <a href="#" onclick="return false;"><i id="cookie-consent" class="cap cap-ios-close-outline"></i></a>
-        </div>
-    </div>
-
     {{ render(controller('CapcoAppBundle:Site/Default:footer')) }}
 
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    {% set analytic_js = capco_site_parameter_value('global.site.embed_analytic') %}
     <script type="text/javascript">
         require('Resources/js/modernizr');
         {# remove when Piechart is rendered by VotePiechart component everywhere #}
@@ -48,21 +40,8 @@
         require('Resources/js/googleCharts');
         window.locale = "{{ intl_locale() }}";
 
+        var cookieChoices = require('Resources/js/cookiechoices').default;
         var App = require('Resources/js/app').default;
-
-        var cookieMonster = require('Resources/js/cookieMonster').default;
-        window.executeAnalyticScript = function(){
-            {% if null != analytic_js %}
-              var script = document.createElement("script");
-              script.innerHTML = '{{ analytic_js|e("js") }}';
-              document.body.appendChild(script);
-            {% endif %}
-        };
-
-        document.addEventListener('DOMContentLoaded', function(event) {
-          cookieMonster.processCookieConsent();
-        });
-
         if (!Modernizr.intl) {
             require('Resources/js/browserUpdate');
         }
@@ -74,7 +53,16 @@
         $(function () {
           $('[data-toggle="tooltip"]').tooltip();
         });
-
+        document.addEventListener('DOMContentLoaded', function(event) {
+            cookieChoices.showCookieConsentBar(
+              "{{ 'cnil.message' | trans({}, 'CapcoAppBundle') | raw }}",
+              "{{ 'cnil.close' | trans({}, 'CapcoAppBundle') | raw }}",
+              "{{ 'cnil.learn' | trans({}, 'CapcoAppBundle') | raw }}",
+              "{{ url('app_confidentialite') }}",
+              "{{ 'cnil.learn.link.title' | trans({}, 'CapcoAppBundle') | raw }}",
+              "{{ 'cnil.close.title' | trans({}, 'CapcoAppBundle') | raw }}"
+            );
+        });
         App.customModal('.modal--custom');
         App.video('.fancybox');
     </script>

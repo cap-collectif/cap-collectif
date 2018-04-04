@@ -27,10 +27,7 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
 
     public function onLogoutSuccess(Request $request)
     {
-        /* @var Session $session */
-        $deleteType = $request->get('deleteType');
-        $returnTo = 'SOFT' === $deleteType || 'HARD' === $deleteType ? $this->router->generate('app_homepage', ['deleteType' => $deleteType]) : $request->headers->get('referer', '/');
-
+        $returnTo = $request->headers->get('referer', '/');
         $request->getSession()->invalidate();
 
         if ($this->toggleManager->isActive('login_saml')) {

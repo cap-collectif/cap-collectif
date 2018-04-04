@@ -1,0 +1,6 @@
+{% if admin.isGranted('DELETE', object) and admin.hasRoute('delete') and ( is_granted('ROLE_SUPER_ADMIN') or 'ROLE_SUPER_ADMIN' not in object.roles ) %}
+    <a href="{{ admin.generateObjectUrl('delete', object) }}" class="btn btn-sm btn-danger delete_link" title="{{ 'action_delete'|trans({}, 'CapcoAppBundle') }}">
+        <i class="glyphicon glyphicon-remove"></i>
+        {{ 'action_delete'|trans({}, 'CapcoAppBundle') }}
+    </a>
+{% endif %}

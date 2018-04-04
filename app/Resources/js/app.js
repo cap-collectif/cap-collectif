@@ -6,7 +6,6 @@ if (!global._babelPolyfill) {
 }
 require('./registration');
 const config = require('./config');
-global.Cookies = require('js-cookie');
 
 require('fancybox')($);
 

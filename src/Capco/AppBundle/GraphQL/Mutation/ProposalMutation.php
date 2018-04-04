@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
 use Capco\AppBundle\Entity\Proposal;
@@ -41,7 +40,7 @@ class ProposalMutation implements ContainerAwareInterface
 
         $this->container->get('redis_storage.helper')->recomputeUserCounters($author);
 
-        $this->container->get('swarrot.publisher')->publish(CapcoAppBundleMessagesTypes::PROPOSAL_DELETE, new Message(
+        $this->container->get('swarrot.publisher')->publish('proposal.delete', new Message(
             json_encode([
                 'proposalId' => $proposal->getId(),
             ])
@@ -381,7 +380,7 @@ class ProposalMutation implements ContainerAwareInterface
         $indexer->index(get_class($proposal), $proposal->getId());
         $indexer->finishBulk();
 
-        $this->container->get('swarrot.publisher')->publish(CapcoAppBundleMessagesTypes::PROPOSAL_CREATE, new Message(
+        $this->container->get('swarrot.publisher')->publish('proposal.create', new Message(
             json_encode([
                 'proposalId' => $proposal->getId(),
             ])
@@ -459,7 +458,7 @@ class ProposalMutation implements ContainerAwareInterface
         $proposal->setUpdateAuthor($user);
         $em->flush();
 
-        $this->container->get('swarrot.publisher')->publish(CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE, new Message(
+        $this->container->get('swarrot.publisher')->publish('proposal.update', new Message(
             json_encode([
                 'proposalId' => $proposal->getId(),
             ])

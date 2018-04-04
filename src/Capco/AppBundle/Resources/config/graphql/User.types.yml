@@ -71,21 +71,6 @@ User:
                 type: "String"
                 resolve: "@=resolver('user_rolesText', [value])"
                 description: "Array of roles converted and translated to string."
-            isArchiveDeleted:
-                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
-                type: "Boolean!"
-                description: "Is the personal archive of the user has been deleted"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserArchiveDeletedResolver", [user])'
-            isArchiveReady:
-                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
-                type: "Boolean!"
-                description: "Is the personal archive of the user is ready?"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserArchiveReadyResolver", [user])'
-            firstArchive:
-                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
-                type: "Boolean!"
-                description: "Is the personal archive of the user is being asked for the first time?"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserArchiveFirstResolver", [user])'
             website:
                 type: "String"
             biography:
@@ -127,12 +112,6 @@ User:
                 type: "Int!"
             commentVotesCount:
                 type: "Int!"
-            votesCount:
-                type: "Int!"
-            contributionsToDeleteCount:
-                type: "Int!"
-                description: "Previsionnal number of contributions who will be totally deleted if the user chose to delete his account."
-                resolve: "@=resolver('user_contributionsToDeleteCount', [value])"
             sourcesCount:
                 type: "Int!"
             repliesCount:
@@ -190,5 +169,3 @@ User:
             neighborhood:
                 type: "String"
                 description: "Your localisation"
-            deletedAccountAt:
-                type: "DateTime"

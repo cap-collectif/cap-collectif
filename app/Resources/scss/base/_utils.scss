@@ -65,17 +65,7 @@
 .text-center {
     text-align: center;
 }
-.color-green {
-    color: $success-color;
-}
 
-.color-red {
-    color: $danger-color;
-}
-
-.color-dark-gray {
-    color: $dark-gray;
-}
 /* =====
   Position
 ==== */
@@ -114,8 +104,4 @@
 
 .font-weight-normal {
     font-weight: normal;
-}
-
-.flex-end {
-    justify-content: flex-end;
 }

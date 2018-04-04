@@ -14,21 +14,6 @@ type AddUsersInGroupPayload {
 
 scalar Address
 
-# A user personnal archive.
-type Archive {
-  # The id of the archive.
-  id: ID!
-
-  # When did the user requested his archive?
-  requestedAt: DateTime!
-
-  # Has the archive been generated?
-  ready: Boolean!
-
-  # When the archive has been deleted?
-  deletedAt: DateTime
-}
-
 # An argument
 type Argument implements Node & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
   # Identifies the date and time when the object was created.
@@ -530,27 +515,6 @@ scalar CssJSON
 
 scalar DateTime
 
-input DeleteAccountInput {
-  # You must chose a strategy to delete your account
-  type: DeleteAccountType!
-  clientMutationId: String
-}
-
-type DeleteAccountPayload {
-  # user id
-  userId: ID!
-  clientMutationId: String
-}
-
-# Differents strategies to delete an account
-enum DeleteAccountType {
-  # Anonymize the user and delete his content only on active steps
-  SOFT
-
-  # Anonymize the user and delete his content
-  HARD
-}
-
 input DeleteGroupInput {
   # The group id
   groupId: ID!
@@ -631,6 +595,10 @@ type EvaluationForm {
 }
 
 type Event implements Node {
+<<<<<<< HEAD
+=======
+  # This is likely to be an uuid soon.
+>>>>>>> Add API for event participants
   id: ID!
   title: String!
 
@@ -773,7 +741,6 @@ type MultipleChoiceQuestionValidationRule {
 
 type Mutation {
   changeUserNotificationsConfiguration(input: ChangeUserNotificationsConfigurationInput!): ChangeUserNotificationsConfigurationPayload
-  requestUserArchive(input: RequestUserArchiveInput!): RequestUserArchivePayload
   changeProposalPublicationStatus(input: ChangeProposalPublicationStatusInput!): ChangeProposalPublicationStatusPayload
   changeProposalContent(input: ChangeProposalContentInput!): ChangeProposalContentPayload
   createProposal(input: CreateProposalInput!): CreateProposalPayload
@@ -805,7 +772,6 @@ type Mutation {
   updateProfilePassword(input: UpdateProfilePasswordInput!): UpdateProfilePasswordPayload
   updateProfilePersonalData(input: UpdateProfilePersonalDataInput!): UpdateProfilePersonalDataPayload
   updateProfilePublicData(input: UpdateProfilePublicDataInput!): UpdateProfilePublicDataPayload
-  deleteAccount(input: DeleteAccountInput!): DeleteAccountPayload
 }
 
 # A connection to a list of items.
@@ -835,7 +801,11 @@ interface Node {
 }
 
 # A user without account.
+<<<<<<< HEAD
 type NotRegistered {
+=======
+type NotRegistred {
+>>>>>>> Add API for event participants
   # Email of the user.
   email: String
 
@@ -1084,8 +1054,13 @@ type PageInfo {
   endCursor: String
 }
 
+<<<<<<< HEAD
 # User and NotRegistered
 union Participant = User | NotRegistered
+=======
+# User and NotRegistred
+union Participant = User | NotRegistred
+>>>>>>> Add API for event participants
 
 # A connection to a list of items.
 type ParticipantConnection {
@@ -1101,9 +1076,12 @@ type ParticipantConnection {
 
 # An edge in a connection.
 type ParticipantEdge {
+<<<<<<< HEAD
   registeredAt: DateTime!
   registeredAnonymously: Boolean!
 
+=======
+>>>>>>> Add API for event participants
   # The item at the end of the edge.
   node: Participant!
 
@@ -1736,15 +1714,6 @@ type ReportsEdge {
   cursor: String!
 }
 
-input RequestUserArchiveInput {
-  clientMutationId: String
-}
-
-type RequestUserArchivePayload {
-  viewer: User!
-  clientMutationId: String
-}
-
 # A contribution with an author
 interface Response {
   question: Question!
@@ -2252,15 +2221,6 @@ type User implements Node {
 
   # Array of roles converted and translated to string.
   rolesText: String
-
-  # Is the personal archive of the user has been deleted
-  isArchiveDeleted: Boolean!
-
-  # Is the personal archive of the user is ready?
-  isArchiveReady: Boolean!
-
-  # Is the personal archive of the user is being asked for the first time?
-  firstArchive: Boolean!
   website: String
   biography: String
   address: String
@@ -2279,10 +2239,6 @@ type User implements Node {
   proposalsCount: Int!
   proposalVotesCount: Int!
   commentVotesCount: Int!
-  votesCount: Int!
-
-  # Previsionnal number of contributions who will be totally deleted if the user chose to delete his account.
-  contributionsToDeleteCount: Int!
   sourcesCount: Int!
   repliesCount: Int!
   postCommentsCount: Int!
@@ -2331,7 +2287,6 @@ type User implements Node {
 
   # Your localisation
   neighborhood: String
-  deletedAccountAt: DateTime
 }
 
 # A connection to a list of items.

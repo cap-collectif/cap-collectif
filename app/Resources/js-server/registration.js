@@ -38,7 +38,6 @@ import appStore from '../js/stores/AppStore';
 import AccountProfileFollowingsApp from "../js/startup/AccountProfileFollowingsApp";
 import ParisUserNotValidApp from "../js/startup/ParisUserNotValidApp";
 import EditProfileApp from "../js/startup/EditProfileApp";
-import CookieApp from "../js/startup/CookieApp";
 
 const emptyFunction = () => {};
 
@@ -86,5 +85,4 @@ ReactOnRails.register({
   GroupAdminPageApp,
   ParisUserNotValidApp,
   EditProfileApp,
-  CookieApp,
 });

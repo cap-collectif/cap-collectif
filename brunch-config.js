@@ -69,6 +69,7 @@ exports.config = {
           'app/Resources/js/jsapi.js',
           'app/Resources/js/googleCharts.js',
 
+          'app/Resources/js/cookiechoices.js',
           'app/Resources/js/browserUpdate.js',
           'app/Resources/js/modernizr.js',
         ],

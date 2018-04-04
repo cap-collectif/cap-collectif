@@ -6,12 +6,12 @@ use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface;
-use Capco\AppBundle\Entity\UserArchive;
 use Capco\AppBundle\Entity\UserGroup;
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Capco\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Util\Canonicalizer;
 use Sonata\UserBundle\Entity\BaseUser;
 use Sonata\UserBundle\Model\UserInterface;
@@ -183,11 +183,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
      */
     protected $eventCommentsCount = 0;
 
-    /**
-     * @var int
-     */
-    protected $proposalCommentsCount = 0;
-
     // Votes
 
     /**
@@ -229,8 +224,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     protected $emailConfirmationSentAt = null;
 
-    protected $deletedAccountAt = null;
-
     protected $smsConfirmationSentAt = null;
     protected $smsConfirmationCode = null;
     protected $phoneConfirmed = false;
@@ -239,9 +232,12 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     protected $followingProposals;
 
-    protected $notificationsConfiguration;
-
-    protected $archives;
+    /**
+     * @var UserNotificationsConfiguration
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\UserNotificationsConfiguration", inversedBy="user", cascade={"remove", "persist"})
+     * @ORM\JoinColumn(name="notifications_configuration_id", referencedColumnName="id")
+     */
+    private $notificationsConfiguration;
 
     /**
      * @var string
@@ -274,7 +270,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         $this->userGroups = new ArrayCollection();
         $this->followingProposals = new ArrayCollection();
         $this->notificationsConfiguration = new UserNotificationsConfiguration();
-        $this->archives = new ArrayCollection();
     }
 
     public function setSamlAttributes(string $idp, array $attributes)
@@ -311,11 +306,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return $this;
     }
 
-    public function clearLastLogin()
-    {
-        $this->lastLogin = null;
-    }
-
     public function getSamlId()
     {
         return $this->samlId;
@@ -341,11 +331,9 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         }
     }
 
-    /*  http://symfony.com/doc/2.8/security/entity_provider.html#understanding-serialize-and-how-a-user-is-saved-in-the-session  */
-    /*  We check the account is not deleted in case of the user has multiple accounts sessions and just deleted his account */
     public function isEqualTo(RealUserInterface $user)
     {
-        return $user instanceof self && $this->id === $user->getId() && null === $user->getDeletedAccountAt();
+        return $user instanceof self && $this->id === $user->getId();
     }
 
     public function addResponse(AbstractResponse $response): self
@@ -963,22 +951,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     /**
      * @return int
      */
-    public function getProposalCommentsCount(): int
-    {
-        return $this->proposalCommentsCount;
-    }
-
-    /**
-     * @param int $proposalCommentsCount
-     */
-    public function setProposalCommentsCount($proposalCommentsCount)
-    {
-        $this->proposalCommentsCount = $proposalCommentsCount;
-    }
-
-    /**
-     * @return int
-     */
     public function getCommentVotesCount()
     {
         return $this->commentVotesCount;
@@ -1127,18 +1099,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return $this;
     }
 
-    public function getDeletedAccountAt(): ?\DateTime
-    {
-        return $this->deletedAccountAt;
-    }
-
-    public function setDeletedAccountAt(\DateTime $date): self
-    {
-        $this->deletedAccountAt = $date;
-
-        return $this;
-    }
-
     public function getSmsConfirmationSentAt()
     {
         return $this->smsConfirmationSentAt;
@@ -1241,7 +1201,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     public function getCommentsCount()
     {
-        return $this->postCommentsCount + $this->eventCommentsCount + $this->proposalCommentsCount;
+        return $this->postCommentsCount + $this->eventCommentsCount;
     }
 
     public function getUsername(): ?string
@@ -1390,35 +1350,5 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public static function getElasticsearchSerializationGroups(): array
     {
         return ['Elasticsearch'];
-    }
-
-    public function addArchive(UserArchive $archive): self
-    {
-        if (!$this->archives->contains($archive)) {
-            $this->archives->add($archive);
-        }
-
-        $archive->setUser($this);
-
-        return $this;
-    }
-
-    public function getArchives(): Collection
-    {
-        return $this->archives;
-    }
-
-    public function setArchives(Collection $archives): self
-    {
-        $this->archives = $archives;
-
-        return $this;
-    }
-
-    public function removeArchive(UserArchive $archive): self
-    {
-        $this->archives->removeElement($archive);
-
-        return $this;
     }
 }
