@@ -1,0 +1,15 @@
+Event:
+    type: object
+    config:
+        fields:
+            id:
+              type: "ID!"
+              resolve: "@='event'.value->getId()"
+              description: "This is likely to be an uuid soon."
+            title:
+               type: "String!"
+            participants:
+                type: "UserConnection!"
+                description: "A list of Users that are participating to the event."
+                argsBuilder: "Relay::Connection"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\EventParticipantsResolver", [value, args])'
