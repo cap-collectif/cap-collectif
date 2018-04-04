@@ -143,7 +143,7 @@ class ProposalCollectVoteRepository extends EntityRepository
         return (int) ($qb->getQuery()->getSingleScalarResult());
     }
 
-    private function getCountsByProposalGroupedBySteps(Proposal $proposal, $asTitle = false): array
+    private function getCountsByProposalGroupedBySteps(Proposal $proposal, bool $asTitle = false): array
     {
         if (!$proposal->getProposalForm()->getStep()) {
             return [];
