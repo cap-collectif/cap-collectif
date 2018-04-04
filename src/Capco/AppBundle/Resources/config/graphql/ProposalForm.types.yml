@@ -19,7 +19,12 @@ ProposalForm:
                 type: "String!"
             proposals:
                 type: "ProposalConnection!"
+                resolve: "@=resolver('proposal_form_proposals', [value, args, user])"
                 args:
+                  orderBy:
+                    type: "ProposalOrder"
+                    description: "Order for connection."
+                    defaultValue: { field: "CREATED_AT", direction: "ASC" }
                   affiliations:
                     type: "[ProposalAffiliation]"
                   after:
@@ -35,7 +40,6 @@ ProposalForm:
                   last:
                     type: "Int"
                     description: "Returns the last n elements from the list."
-                resolve: "@=resolver('proposal_form_proposals', [value, args, user])"
             categories:
                 type: "[ProposalCategory!]!"
                 resolve: "@=resolver('proposal_form_categories', [value])"
@@ -99,3 +103,5 @@ ProposalForm:
             step:
                 type: "CollectStep"
                 description: "Identifies the step that use the proposal form."
+            allowAknowledge:
+                type: "Boolean!"

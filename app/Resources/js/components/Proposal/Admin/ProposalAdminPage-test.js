@@ -5,7 +5,7 @@ import { shallow } from 'enzyme';
 import { ProposalAdminPage } from './ProposalAdminPage';
 
 describe('<ProposalAdminPage />', () => {
-  const props = { proposalId: 1 };
+  const props = { proposalId: 1, dirty: false };
 
   it('render correctly', () => {
     const wrapper = shallow(<ProposalAdminPage {...props} />);
