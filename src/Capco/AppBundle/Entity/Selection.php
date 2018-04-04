@@ -37,17 +37,12 @@ class Selection
      */
     protected $status;
 
-    public function getId() // for elasticsearch
-    {
-        return sprintf('%s#%s', $this->selectionStep->getId(), $this->proposal->getId());
-    }
-
     public function getStep(): SelectionStep
     {
         return $this->selectionStep;
     }
 
-    public function getSelectionStep()
+    public function getSelectionStep(): SelectionStep
     {
         return $this->selectionStep;
     }
@@ -59,10 +54,7 @@ class Selection
         return $this;
     }
 
-    /**
-     * @return null|Proposal
-     */
-    public function getProposal()
+    public function getProposal(): ?Proposal
     {
         return $this->proposal;
     }
@@ -74,12 +66,12 @@ class Selection
         return $this;
     }
 
-    public function getStatus()
+    public function getStatus(): ?Status
     {
         return $this->status;
     }
 
-    public function setStatus(Status $status = null)
+    public function setStatus(Status $status = null): self
     {
         $this->status = $status;
 
