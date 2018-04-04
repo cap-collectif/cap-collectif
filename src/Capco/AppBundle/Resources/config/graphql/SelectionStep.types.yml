@@ -1,7 +1,7 @@
 SelectionStep:
     type: object
     config:
-        interfaces: [Step]
+        interfaces: [Step, Node]
         description: "A budget contribution"
         fields:
             id:
@@ -18,3 +18,8 @@ SelectionStep:
                 description: "Only one selection step inside a project can have realisation steps, true if this one"
             voteThreshold:
                 type: "Int"
+            contributors:
+                type: "UserConnection!"
+                description: "A list of contributor associated with the consultation."
+                argsBuilder: "Relay::Connection"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\StepContributorResolver", [value, args])'

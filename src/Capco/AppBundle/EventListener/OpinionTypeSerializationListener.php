@@ -31,6 +31,10 @@ class OpinionTypeSerializationListener extends AbstractSerializationListener
 
     public function onPostOpinionType(ObjectEvent $event)
     {
+        // We skip the rest if we are serializing for Elasticsearch
+        if (isset($this->getIncludedGroups($event)['Elasticsearch'])) {
+            return;
+        }
         if (isset($this->getIncludedGroups($event)['OpinionTypeLinks'])) {
             $opinionType = $event->getObject();
             $availableTypes = $this->resolver->getAvailableLinkTypesForConsultationStepType(

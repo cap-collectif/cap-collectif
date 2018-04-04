@@ -1,7 +1,8 @@
-UsersConnection:
+UserConnection:
     type: relay-connection
     config:
         nodeType: User!
         connectionFields:
             totalCount:
                 type: Int!
+                description: Identifies the total count of items in the connection.

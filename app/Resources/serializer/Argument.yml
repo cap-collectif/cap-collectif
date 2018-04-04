@@ -31,7 +31,7 @@ Capco\AppBundle\Entity\Argument:
             expose: true
             type: Capco\UserBundle\Entity\User
             serialized_name: author
-            groups: [Opinions, OpinionVersions, UserMedias, Elasticsearch]
+            groups: [Opinions, OpinionVersions, UserMedias]
         isTrashed:
             expose: true
             type: boolean
