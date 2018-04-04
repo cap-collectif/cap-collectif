@@ -69,10 +69,7 @@ class ProposalFormUpdateType extends AbstractType
                 'allow_delete' => true,
                 'entry_type' => QuestionnaireAbstractQuestionType::class,
                 'by_reference' => false,
-            ])
-
-            ->add('allowAknowledge', CheckboxType::class)
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

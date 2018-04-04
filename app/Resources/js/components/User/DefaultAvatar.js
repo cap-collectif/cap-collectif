@@ -1,17 +1,6 @@
-// @flow
-import * as React from 'react';
+import React from 'react';
 
-type Props = {
-  className: string,
-  size: number,
-};
-
-export default class DefaultAvatar extends React.Component<Props> {
-  static defaultProps = {
-    className: 'img-circle avatar mr-10',
-    size: 45,
-  };
-
+export default class DefaultAvatar extends React.Component {
   render() {
     const { className, size } = this.props;
     return (
@@ -40,3 +29,13 @@ export default class DefaultAvatar extends React.Component<Props> {
     );
   }
 }
+
+DefaultAvatar.propTypes = {
+  className: React.PropTypes.string,
+  size: React.PropTypes.number,
+};
+
+DefaultAvatar.defaultProps = {
+  className: 'img-circle avatar mr-10',
+  size: 45,
+};

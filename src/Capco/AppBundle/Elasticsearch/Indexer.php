@@ -10,6 +10,8 @@ use Elastica\Document;
 use Elastica\Index;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerInterface;
+use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Handle indexation of entities.
@@ -58,8 +60,10 @@ class Indexer
 
     /**
      * Fetch ALL the indexable entities and send them to bulks.
+     *
+     * @param null|mixed $output
      */
-    public function indexAll()
+    public function indexAll(OutputInterface $output = null)
     {
         $classes = $this->getClassesToIndex();
 
@@ -68,6 +72,13 @@ class Indexer
 
             $query = $repository->createQueryBuilder('a')->getQuery();
             $iterableResult = $query->iterate();
+
+            if ($output) {
+                $count = $repository->createQueryBuilder('a')->select('count(a)')->getQuery()->getSingleScalarResult();
+                $output->writeln(PHP_EOL . '<info>' . 'Indexing ' . $count . ' ' . $class . '</info>');
+                $progress = new ProgressBar($output, $count);
+                $progress->start();
+            }
 
             foreach ($iterableResult as $row) {
                 /** @var IndexableInterface $object */
@@ -81,7 +92,13 @@ class Indexer
                     $this->addToBulk(new Document($object->getId(), [], $object->getElasticsearchTypeName()));
                 }
 
+                if (isset($progress)) {
+                    $progress->advance();
+                }
                 $this->em->detach($row[0]);
+            }
+            if (isset($progress)) {
+                $progress->finish();
             }
         }
     }

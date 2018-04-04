@@ -44,7 +44,7 @@ services:
 
   capco.twig.parameters:
     class: Capco\AppBundle\Twig\ParametersExtension
-    arguments: ["@capco.toggle.manager", "@capco.site_parameter.resolver", "@translator", '@router']
+    arguments: ["@capco.toggle.manager", "@capco.site_parameter.resolver"]
     tags:
       - { name: twig.extension }
 

@@ -31,8 +31,15 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none 1`]
   <div
     className="media mb-15"
   >
-    <Connect(UserAvatar)
+    <UserAvatar
+      anchor={true}
       className="pull-left"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      onMouseOut={[Function]}
+      onMouseOver={[Function]}
+      size={45}
+      style={Object {}}
       user={
         Object {
           "displayName": "userAdmin",
@@ -171,8 +178,15 @@ exports[`<ProposalPageHeader /> should render a proposal header 1`] = `
   <div
     className="media mb-15"
   >
-    <Connect(UserAvatar)
+    <UserAvatar
+      anchor={true}
       className="pull-left"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      onMouseOut={[Function]}
+      onMouseOver={[Function]}
+      size={45}
+      style={Object {}}
       user={
         Object {
           "displayName": "userAdmin",

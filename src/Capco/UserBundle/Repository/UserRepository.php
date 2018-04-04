@@ -785,8 +785,8 @@ class UserRepository extends EntityRepository
 
     protected function getIsEnabledQueryBuilder(): QueryBuilder
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.enabled = :enabled')
-            ->setParameter('enabled', true);
+        return $this
+            ->createQueryBuilder('u')
+            ->andWhere('u.enabled = true');
     }
 }

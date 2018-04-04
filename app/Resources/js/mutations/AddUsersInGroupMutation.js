@@ -12,7 +12,7 @@ const mutation = graphql`
     addUsersInGroup(input: $input) {
       group {
         id
-        usersConnection {
+        users {
           edges {
             node {
               ...GroupAdminUsersListGroupItem_user

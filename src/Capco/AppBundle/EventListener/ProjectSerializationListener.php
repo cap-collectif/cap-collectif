@@ -47,6 +47,11 @@ class ProjectSerializationListener extends AbstractSerializationListener
 
     public function onPostProject(ObjectEvent $event)
     {
+        // We skip if we are serializing for Elasticsearch
+        if (isset($this->getIncludedGroups($event)['Elasticsearch'])) {
+            return;
+        }
+
         $project = $event->getObject();
         $links = [
           'show' => $this->stepResolver->getFirstStepLinkForProject($project),
