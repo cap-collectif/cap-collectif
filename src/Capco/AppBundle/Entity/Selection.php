@@ -44,11 +44,6 @@ class Selection
      */
     protected $createdAt;
 
-    public function getId() // for elasticsearch
-        return sprintf('%s#%s', $this->selectionStep->getId(), $this->proposal->getId());
-    {
-
-    }
     public function getStep(): SelectionStep
     {
         return $this->selectionStep;
