@@ -111,8 +111,8 @@ type FormValues = {|
 //   });
 // };
 
-const onUnload = event => {
-  return (event.returnValue = true);
+const onUnload = (event: SyntheticEvent<>) => {
+  event.preventDefault();
 };
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
