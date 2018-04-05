@@ -2,15 +2,15 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
+use Box\Spout\Common\Type;
+use Box\Spout\Writer\WriterFactory;
 use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\GraphQL\GraphQLToCsv;
-use League\Csv\Writer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ExportController extends Controller
 {
@@ -21,20 +21,28 @@ class ExportController extends Controller
      */
     public function downloadEventParticipantsAction(Event $event, Request $request)
     {
-        // $csvGenerator = new GraphQLToCsv($this->get('logger'));
         $requestString = '
 query {
   node(id: "' . $event->getId() . '") {
     ... on Event {
       participants(first: 1000) {
         edges {
+          registredAt
+          registredAnonymously
           node {
             ... on User {
               id
+              email
+              username
+              userType {
+                name
+              }
+              createdAt
+              updatedAt
             }
             ... on NotRegistred {
               username
-              email
+              notRegistredEmail: email
             }
           }
         }
@@ -43,40 +51,57 @@ query {
   }
 }';
 
-        $writer = Writer::createFromStream(fopen('php://temp', 'r+'));
-        // $writer->setDelimiter(',');
-        // $writer->setNewline("\r\n");
-        // $writer->setOutputBOM(Writer::BOM_UTF8);
-        // $csvGenerator->generate(
-        //     $requestString,
-        //     $this->get('overblog_graphql.request_executor'),
-        //     $writer
-        // );
+        // expired
+        // lastLogin
+        // rolesText
+        // consentExternalCommunication
+        // enabled
+        // locked
+        // phoneConfirmed
+        // phoneConfirmationSentAt
+        // gender
+        // firstName
+        // lastName
+        // dateOfBirth
+        // websiteUrl
+        // biography
+        // address
+        // zipCode
+        // city
+        // phone
+        // profileUrl
+        $executor = $this->get('overblog_graphql.request_executor');
 
-        // if (TYPE::XLSX === $_format) {
-        //     $contentType = 'application/vnd.ms-excel';
-        // }
+        $data = $executor->execute([
+          'query' => $requestString,
+          'variables' => [],
+        ])->toArray();
 
-        $request->headers->set('X-Sendfile-Type', 'X-Accel-Redirect');
+        if (!isset($data['data'])) {
+            $this->get('logger')->error('GraphQL Query Error: ' . $data['error']);
+            $this->get('logger')->info('GraphQL query: ' . json_encode($data));
+        }
 
-        // {date de l'export}-registeredAttendees-{nom de l'évènement}
-        $fileName = (new \DateTime())->format('ll') . '-registeredAttendees-' . $event->getTitle() . '.csv';
+        $fileName = (new \DateTime())->format('Y-m-d H:i:s') . '-registeredAttendees-' . $event->getSlug() . '.csv';
 
-        return $this->createResponse($writer, $fileName);
-    }
+        $writer = WriterFactory::create(Type::CSV);
 
-    private function createResponse($writer, $fileName, $contentType = 'text/csv')
-    {
-        $response = new Response($writer->getContent());
-        $disposition = $response->headers->makeDisposition(
-          ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-          $filename
-      );
+        $response = new StreamedResponse(function () use ($writer, $data) {
+            $writer->openToFile('php://output');
+            $writer->addRow(['user_id', 'user_email', 'user_userName', 'user_TypeName', 'event_RegisteredOn', 'event_privateRegistration', 'user_createdAt', 'user_updatedAt']);
+            foreach ($data['data']['node']['participants']['edges'] as $edge) {
+                $participant = $edge['node'];
+                if (isset($participant['id'])) {
+                    $writer->addRow([$participant['id'], $participant['email'], $participant['username'], $participant['userType'] ? $participant['userType']['name'] : null, $edge['registredAt'], $edge['registredAnonymously'], $participant['createdAt'], $participant['updatedAt']]);
+                } else {
+                    $writer->addRow([null, $participant['notRegistredEmail'], $participant['username'], null, $edge['registredAt'], $edge['registredAnonymously'], null, null]);
+                }
+            }
+            $writer->close();
+        });
 
-        $response->headers->set('Content-Disposition', $disposition);
-        $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
-        $response->headers->set('Pragma', 'public');
-        $response->headers->set('Cache-Control', 'maxage=1');
+        $response->headers->set('Content-Type', 'text/csv');
+        $response->headers->set('Content-Disposition', 'attachment; filename="' . $fileName . '"');
 
         return $response;
     }

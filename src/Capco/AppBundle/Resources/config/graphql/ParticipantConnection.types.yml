@@ -6,3 +6,10 @@ ParticipantConnection:
             totalCount:
                 type: Int!
                 description: Identifies the total count of items in the connection.
+        edgeFields:
+            registredAt:
+                type: DateTime!
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ParticipantConnectionEdgeRegistredAtResolver", [value])'
+            registredAnonymously:
+                type: Boolean!
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ParticipantConnectionEdgeRegistredAnonymouslyResolver", [value])'

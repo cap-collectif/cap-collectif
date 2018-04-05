@@ -26,6 +26,9 @@ class EventParticipantsResolver
     public function __invoke(Event $event, Arg $args): Connection
     {
         $registred = $this->userRepository->getRegistredParticipantsInEvent($event);
+        foreach ($registred as &$user) {
+            $user->registredEvent = $event;
+        }
         $notRegistred = $this->eventRegistrationRepository->getNotRegistredParticipantsInEvent($event);
 
         $participants = $registred + $notRegistred;
