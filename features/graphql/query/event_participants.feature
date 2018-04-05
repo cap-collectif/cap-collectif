@@ -12,7 +12,6 @@ Scenario: GraphQL client want to get the list of participants of an event
             totalCount
             pageInfo {
               hasNextPage
-              endCursor
             }
             edges {
               node {
@@ -40,14 +39,13 @@ Scenario: GraphQL client want to get the list of participants of an event
     "data": {
       "event": {
         "participants": {
-          "totalCount": 28,
+          "totalCount": 50,
           "pageInfo": {
-            "hasNextPage": true,
-            "endCursor": "YXJyYXljb25uZWN0aW9uOjQ="
+            "hasNextPage": true
           },
           "edges": [
             { "node": { "id":"user1" } },
-            { "node": { "id":"user3" } },
+            { "node": { "username": @string@, "email": @string@ }},
             { "node": { "username": @string@, "email": @string@ }},
             { "node": { "username": @string@, "email": @string@ }},
             { "node": { "username": @string@, "email": @string@ }}
