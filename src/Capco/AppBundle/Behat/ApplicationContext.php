@@ -2,8 +2,6 @@
 
 namespace Capco\AppBundle\Behat;
 
-use Behat\Behat\Hook\Scope\AfterScenarioScope;
-use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\ExpectationException;
@@ -48,19 +46,18 @@ class ApplicationContext extends UserContext
 
     /**
      * @BeforeScenario
+     *
+     * @param mixed $scope
      */
-    public function reset(BeforeScenarioScope $scope)
+    public function reset($scope)
     {
-        // We reset everything
-        $jobs = [
+        $jobs = [ // Let's stick with the old way for now
             new Process('curl -sS -XDELETE \'http://elasticsearch:9200/_all\''),
             new Process('curl -sS -XBAN http://capco.test/'),
             new Process('redis-cli -h redis FLUSHALL'),
         ];
 
         $scenario = $scope->getScenario();
-
-        // This tag make sure queues are empty at the begining of a test
         if ($scenario->hasTag('rabbitmq')) {
             $messagesTypes = $this->getParameter('swarrot.messages_types');
             foreach ($messagesTypes as $messageType) {
@@ -69,12 +66,10 @@ class ApplicationContext extends UserContext
             $jobs[] = new Process('php bin/rabbit vhost:mapping:create --password=' . $this->getParameter('rabbitmq_password') . ' --erase-vhost app/config/rabbitmq.yml');
             $this->purgeRabbitMqQueues();
         }
-
-        // This tag make sure indexed data is isolated and the same for every test
         if ($scenario->hasTag('elasticsearch')) {
-            $jobs[] = new Process('php bin/console capco:es:create --env=test -n');
-            $jobs[] = new Process('php bin/console capco:es:populate --env=test -n');
-            // There is some delay before the index is live
+            $jobs[] = new Process('php bin/console capco:es:create -e test -n');
+            $jobs[] = new Process('php bin/console capco:es:populate -e test -n');
+            // It can take some time for the new index to be live…
             $jobs[] = new Process('sleep 2');
         }
 
@@ -86,7 +81,7 @@ class ApplicationContext extends UserContext
             $jobs[] = new Process('php -d memory_limit=-1 bin/console capco:reinit --force --env=test');
         }
         foreach ($jobs as $job) {
-            echo $job->getCommandLine() . PHP_EOL;
+            echo 'Running ' . $job->getCommandLine();
             $job->mustRun();
         }
     }
@@ -101,14 +96,14 @@ class ApplicationContext extends UserContext
 
     /**
      * @AfterScenario
+     *
+     * @param mixed $scope
      */
-    public function resetDatabase(AfterScenarioScope $scope)
+    public function resetDatabase($scope)
     {
         $scenario = $scope->getScenario();
         if ($scenario->hasTag('database')) {
-            $job = new Process('mysql -h database -u root symfony < var/db.backup');
-            echo $job->getCommandLine() . PHP_EOL;
-            $job->mustRun();
+            (new Process('mysql -h database -u root symfony < var/db.backup'))->mustRun();
         }
     }
 

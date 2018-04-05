@@ -14,12 +14,12 @@ trait TextableTrait
 
     public function getBody()
     {
-        return $this->body;
+        return html_entity_decode($this->body);
     }
 
     public function getBodyText()
     {
-        return strip_tags($this->body);
+        return Text::htmlToString($this->body);
     }
 
     public function setBody(string $body = null): self

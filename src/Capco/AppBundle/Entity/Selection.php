@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -38,18 +37,17 @@ class Selection
      */
     protected $status;
 
-    /**
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="created_at",type="datetime", nullable=false)
-     */
-    protected $createdAt;
+    public function getId() // for elasticsearch
+    {
+        return sprintf('%s#%s', $this->selectionStep->getId(), $this->proposal->getId());
+    }
 
     public function getStep(): SelectionStep
     {
         return $this->selectionStep;
     }
 
-    public function getSelectionStep(): SelectionStep
+    public function getSelectionStep()
     {
         return $this->selectionStep;
     }
@@ -61,7 +59,10 @@ class Selection
         return $this;
     }
 
-    public function getProposal(): ?Proposal
+    /**
+     * @return null|Proposal
+     */
+    public function getProposal()
     {
         return $this->proposal;
     }
@@ -73,12 +74,12 @@ class Selection
         return $this;
     }
 
-    public function getStatus(): ?Status
+    public function getStatus()
     {
         return $this->status;
     }
 
-    public function setStatus(Status $status = null): self
+    public function setStatus(Status $status = null)
     {
         $this->status = $status;
 
@@ -95,23 +96,5 @@ class Selection
         if ($this->getProposal()) {
             $this->getProposal()->removeSelection($this);
         }
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCreatedAt(): \DateTime
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @param mixed $createdAt
-     */
-    public function setCreatedAt(\DateTime $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
     }
 }

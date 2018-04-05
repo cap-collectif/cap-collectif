@@ -11,8 +11,8 @@
 # Expire users
 0 * * * * /usr/bin/timeout 50m php -d memory_limit=512M /var/www/bin/console capco:expire-users --env=prod
 
-# Reindex Elasticsearch from scratch
-0 7 * * * /usr/bin/timeout 50m php -d memory_limit=512M /var/www/bin/console capco:es:populate --env=prod
+# Reindex Elasticsearch every hour
+0 * * * * /usr/bin/timeout 5m php -d memory_limit=512M /var/www/bin/console capco:es:populate --env=prod
 
 # Recalculate the counters from scratch
 0 4 * * * /usr/bin/timeout 5m php -d memory_limit=512M /var/www/bin/console capco:compute:users-counters --force --env=prod
@@ -28,6 +28,3 @@
 0 * * * * /usr/bin/timeout 50m php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:questionnaire --env=prod
 0 * * * * /usr/bin/timeout 50m php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:collect --withoutVote --env=prod
 0 * * * * /usr/bin/timeout 50m php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:users --env=prod
-
-# Send activities email to follower, every day at 9 AM
-0 9 * * * /usr/bin/timeout 50m php -d memory_limit=512M /var/www/bin/console capco:follower-proposal-notifier --env=prod

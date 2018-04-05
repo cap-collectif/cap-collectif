@@ -9,22 +9,11 @@ describe('<ProposalFollowButton />', () => {
   const proposalViewIsFollowing = {
     id: 'proposal1',
     viewerIsFollowing: true,
-    followerConfiguration: {
-      notifiedOf: 'DEFAULT',
-    },
   };
   // $FlowFixMe $refType
   const proposalViewIsNotFollowing = {
     id: 'proposal1',
     viewerIsFollowing: false,
-    followerConfiguration: null,
-  };
-
-  // $FlowFixMe $refType
-  const proposalViewIsNotConnected = {
-    id: 'proposal1',
-    viewerIsFollowing: false,
-    followerConfiguration: null,
   };
   // $FlowFixMe $refType
   const props = {
@@ -35,22 +24,13 @@ describe('<ProposalFollowButton />', () => {
 
   it('should render a button to follow a proposal', () => {
     const wrapper = shallow(
-      <ProposalFollowButton proposal={proposalViewIsNotFollowing} isAuthenticated {...props} />,
+      <ProposalFollowButton proposal={proposalViewIsNotFollowing} {...props} />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render a button to unfollow a proposal', () => {
-    const wrapper = shallow(
-      <ProposalFollowButton proposal={proposalViewIsFollowing} isAuthenticated {...props} />,
-    );
-    expect(wrapper).toMatchSnapshot();
-  });
-  it('should render a button to follow a proposal and user is not connected', () => {
-    const wrapper = shallow(
-      // $FlowFixMe $refType isAuthenticated false
-      <ProposalFollowButton proposal={proposalViewIsNotConnected} {...props} />,
-    );
+    const wrapper = shallow(<ProposalFollowButton proposal={proposalViewIsFollowing} {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

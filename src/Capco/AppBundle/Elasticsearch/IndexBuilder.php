@@ -56,7 +56,7 @@ class IndexBuilder
         $indexes = $indexes->getData();
 
         foreach ($indexes as $indexName => &$data) {
-            if (0 !== strpos($indexName, 'capco_')) {
+            if (strpos($indexName, 'capco_') !== 0) {
                 unset($indexes[$indexName]);
 
                 continue;

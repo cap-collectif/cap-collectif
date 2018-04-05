@@ -184,7 +184,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
 
         foreach ($em->getRepository('CapcoAppBundle:SocialNetwork')->findAll() as $sn) {
             $sn->setIsEnabled(true);
-            if ('Twitter' === $sn->getTitle()) {
+            if ($sn->getTitle() === 'Twitter') {
                 $sn->setLink('https://twitter.com/axellelemaire');
             } else {
                 $sn->setIsEnabled(false);
@@ -193,7 +193,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
 
         foreach ($em->getRepository('CapcoAppBundle:Section')->findAll() as $section) {
             $section->setEnabled(false);
-            if ('Introduction' === $section->getTitle()) {
+            if ($section->getTitle() === 'Introduction') {
                 $section->setEnabled(true);
                 $section->setTitle('Construisons ensemble la République Numérique');
                 $section->setBody('Le numérique et ses usages sont au cœur d’un vaste mouvement de transformation de notre économie, de redéfinition de nos espaces publics et privés, et de construction du lien social. Les conséquences de ces évolutions sont dès à présent globales, et dessinent l’avenir de l’ensemble de notre société. La République du 21e siècle sera nécessairement numérique : elle doit anticiper les changements à l’œuvre, en saisir pleinement les opportunités, et dessiner une société conforme à ses principes de liberté, d’égalité et de fraternité.');
@@ -394,7 +394,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
                 throw new \InvalidArgumentException('Unknown title: ' . $row['opinion'], 1);
             }
 
-            if (0 === count($opinion->getAppendices())) {
+            if (count($opinion->getAppendices()) === 0) {
                 $motif = new OpinionAppendix();
                 $motif->setAppendixType($exposayDayMotif);
                 $motif->setBody('<p>' . $row['motif'] . '</p>');

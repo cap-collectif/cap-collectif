@@ -3,45 +3,21 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
+/**
+ * OpinionVoteRepository.
+ */
 class OpinionVoteRepository extends EntityRepository
 {
-    public function countByAuthorAndProject(User $author, Project $project): int
-    {
-        $qb = $this->getQueryBuilder()
-          ->select('COUNT (DISTINCT v)')
-          ->leftJoin('v.opinion', 'o')
-          ->andWhere('o.step IN (:steps)')
-          ->andWhere('o.isEnabled = 1')
-          ->andWhere('v.user = :author')
-          ->setParameter('steps', array_map(function ($step) {
-              return $step;
-          }, $project->getRealSteps()))
-          ->setParameter('author', $author)
-        ;
-
-        return $qb->getQuery()->getSingleScalarResult();
-    }
-
-    public function countByAuthorAndStep(User $author, ConsultationStep $step): int
-    {
-        $qb = $this->getQueryBuilder()
-          ->select('COUNT (DISTINCT v)')
-          ->leftJoin('v.opinion', 'o')
-          ->andWhere('o.step = :step')
-          ->andWhere('o.isEnabled = 1')
-          ->andWhere('v.user = :author')
-          ->setParameter('step', $step)
-          ->setParameter('author', $author)
-      ;
-
-        return $qb->getQuery()->getSingleScalarResult();
-    }
-
+    /**
+     * Get enabled by consultation step.
+     *
+     * @param $step
+     *
+     * @return mixed
+     */
     public function getEnabledByConsultationStep(ConsultationStep $step)
     {
         $qb = $this->getQueryBuilder()

@@ -112,25 +112,8 @@ Proposal:
                 description: "If the proposal listed in a fusion, contains the list of fusions."
                 resolve: "@=value.getParentConnections()"
             followers:
-                type: "UserConnection!"
-                args:
-                    orderBy:
-                      type: "String"
-                      description: "Ordering options for followers returning from the connection"
-                    after:
-                      type: "String"
-                      description: "Returns the elements in the list that come after the specified global ID."
-                    first:
-                      type: "Int"
-                      defaultValue: 32
-                      description: "Returns the first n elements from the list."
-                    before:
-                      type: "String"
-                      description: "Returns the elements in the list that come before the specified global ID."
-                    last:
-                      type: "Int"
-                      description: "Returns the last n elements from the list."
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\UsersFollowingProposalResolver", [value, args])'
+                type: "[User!]!"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\UserFollowingProposalResolver", [value])'
                 description: "Array of users following proposal."
             followerConnection:
                 type: "FollowerConnection!"
@@ -153,14 +136,8 @@ Proposal:
                       description: "Returns the last n elements from the list."
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalFollowerConnection", [value, args])'
             viewerIsFollowing:
-                access: "@=isAuthenticated()"
                 type: "Boolean!"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowProposalResolver", [value, user])'
-                description: "View follow current proposal"
-            followerConfiguration:
-                access: "@=isAuthenticated()"
-                type: "Follower"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowerProposalResolver", [value, user])'
                 description: "View follow current proposal"
             postsCount:
                 type: "Int!"

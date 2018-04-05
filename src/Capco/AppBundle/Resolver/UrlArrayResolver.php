@@ -22,15 +22,15 @@ class UrlArrayResolver
 
         $this->referenceType = $referenceType;
 
-        if ('opinion' === $array['entity_type']) {
+        if ($array['entity_type'] === 'opinion') {
             return $this->getOpinionRoute($array);
         }
 
-        if ('opinionVersion' === $array['entity_type']) {
+        if ($array['entity_type'] === 'opinionVersion') {
             return $this->getOpinionVersionRoute($array);
         }
 
-        if ('proposal' === $array['entity_type']) {
+        if ($array['entity_type'] === 'proposal') {
             return $this->getProposalRoute($array);
         }
     }

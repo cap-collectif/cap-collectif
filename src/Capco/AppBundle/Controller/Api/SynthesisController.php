@@ -216,7 +216,7 @@ class SynthesisController extends FOSRestController
         $offset = $paramFetcher->get('offset');
         $limit = $paramFetcher->get('limit');
 
-        if (('published' !== $type || !$synthesis->isEnabled()) && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if (($type !== 'published' || !$synthesis->isEnabled()) && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             throw new AccessDeniedException();
         }
 
@@ -248,7 +248,7 @@ class SynthesisController extends FOSRestController
         $type = $paramFetcher->get('type');
         $parent = $paramFetcher->get('parent');
 
-        $isVisibleOnlyByAdmin = 'published' !== $type || !$synthesis->isEnabled();
+        $isVisibleOnlyByAdmin = $type !== 'published' || !$synthesis->isEnabled();
         if ($isVisibleOnlyByAdmin && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             $this->createAccessDeniedException();
         }
@@ -281,7 +281,7 @@ class SynthesisController extends FOSRestController
     public function countSynthesisElementsAction(ParamFetcherInterface $paramFetcher, Synthesis $synthesis)
     {
         $type = $paramFetcher->get('type');
-        if (('published' !== $type || !$synthesis->isEnabled()) && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if (($type !== 'published' || !$synthesis->isEnabled()) && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             throw new AccessDeniedException();
         }
 

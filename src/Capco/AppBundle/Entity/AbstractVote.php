@@ -6,10 +6,9 @@ use Capco\AppBundle\Model\HasAuthorInterface;
 use Capco\AppBundle\Model\VoteContribution;
 use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\IdTrait;
-use Capco\AppBundle\Traits\TimestampableTrait;
-use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\UniqueConstraint;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(
@@ -67,7 +66,14 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  */
 abstract class AbstractVote implements VoteContribution, HasAuthorInterface
 {
-    use ExpirableTrait, TimestampableTrait, IdTrait;
+    use ExpirableTrait;
+    use IdTrait;
+
+    /**
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $createdAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="votes")
@@ -85,29 +91,42 @@ abstract class AbstractVote implements VoteContribution, HasAuthorInterface
         return null;
     }
 
-    public function isIndexable(): bool
+    /**
+     * Get createdAt.
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
     {
-        return !$this->isExpired();
+        return $this->createdAt;
     }
 
-    public function getUser(): ?User
+    /**
+     * @return mixed
+     */
+    public function getUser()
     {
         return $this->user;
     }
 
-    public function setUser(?User $user): self
+    /**
+     * @param $user
+     *
+     * @return $this
+     */
+    public function setUser($user)
     {
         $this->user = $user;
 
         return $this;
     }
 
-    public function getAuthor(): ?User
+    public function getAuthor()
     {
         return $this->user;
     }
 
-    public function hasUser(): bool
+    public function hasUser()
     {
         return (bool) $this->getUser();
     }
