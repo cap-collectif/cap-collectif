@@ -12,7 +12,6 @@ class EventRegistrationRepository extends EntityRepository
         $qb = $this->createQueryBuilder('registration');
 
         return $qb
-            // ->select('registration.username', 'registration.email')
             ->andWhere('registration.user IS NULL')
             ->andWhere('registration.confirmed = true')
             ->andWhere('registration.event = :event')
