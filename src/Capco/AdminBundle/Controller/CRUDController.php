@@ -25,11 +25,11 @@ class CRUDController extends Controller
         $admin->setRequest($request);
         $context = $request->get('_context', '');
 
-        if ('filter' === $context && false === $admin->isGranted('LIST')) {
+        if ($context === 'filter' && false === $admin->isGranted('LIST')) {
             throw $this->createAccessDeniedException();
         }
 
-        if ('filter' !== $context
+        if ($context !== 'filter'
             && false === $admin->isGranted('CREATE')
             && false === $admin->isGranted('EDIT')
         ) {
@@ -39,7 +39,7 @@ class CRUDController extends Controller
         // subject will be empty to avoid unnecessary database requests and keep autocomplete function fast
         $admin->setSubject($admin->getNewInstance());
 
-        if ('filter' === $context) {
+        if ($context === 'filter') {
             // filter
             $fieldDescription = $this->retrieveFilterFieldDescription($admin, $request->get('field'));
             $filterAutocomplete = $admin->getDatagrid()->getFilter($fieldDescription->getName());
@@ -83,7 +83,7 @@ class CRUDController extends Controller
         $targetAdmin->setPersistFilters(false);
         $datagrid = $targetAdmin->getDatagrid();
 
-        if (null !== $callback) {
+        if ($callback !== null) {
             if (!is_callable($callback)) {
                 throw new \RuntimeException('Callback does not contain callable function.');
             }
@@ -129,7 +129,7 @@ class CRUDController extends Controller
         $results = $pager->getResults();
 
         foreach ($results as $entity) {
-            if (null !== $toStringCallback) {
+            if ($toStringCallback !== null) {
                 if (!is_callable($toStringCallback)) {
                     throw new \RuntimeException('Option "to_string_callback" does not contain callable function.');
                 }
@@ -170,7 +170,7 @@ class CRUDController extends Controller
             throw new \RuntimeException(sprintf('The field "%s" does not exist.', $field));
         }
 
-        if ('sonata_type_model_autocomplete' !== $fieldDescription->getType()) {
+        if ($fieldDescription->getType() !== 'sonata_type_model_autocomplete') {
             throw new \RuntimeException(sprintf('Unsupported form type "%s" for field "%s".', $fieldDescription->getType(), $field));
         }
 

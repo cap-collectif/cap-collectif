@@ -3,12 +3,11 @@
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Proposal;
-use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Psr\Log\LoggerInterface;
 
-class ViewerFollowProposalResolver implements ResolverInterface
+class UserFollowingProposalResolver implements ResolverInterface
 {
     private $userRepository;
     private $logger;
@@ -19,17 +18,15 @@ class ViewerFollowProposalResolver implements ResolverInterface
         $this->logger = $logger;
     }
 
-    public function __invoke(Proposal $proposal, $viewer): bool
+    public function __invoke(Proposal $proposal): array
     {
-        if (!$viewer instanceof User) {
-            return false;
-        }
-
         try {
-            return $this->userRepository->isViewerFollowingProposal($proposal, $viewer);
+            $users = $this->userRepository->findUsersFollowingAProposal($proposal);
         } catch (\RuntimeException $exception) {
             $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
             throw new \RuntimeException('Find following proposal by user failed');
         }
+
+        return $users;
     }
 }

@@ -25,7 +25,7 @@ class SynthesisElementHandler
 
     public function getElementsFromSynthesisByType($synthesis, $type = null, $term = null, $offset = 0, $limit = null)
     {
-        if (null === $type || !in_array($type, self::$types, true)) {
+        if ($type === null || !in_array($type, self::$types, true)) {
             throw new NotFoundHttpException();
         }
 
@@ -48,7 +48,7 @@ class SynthesisElementHandler
 
     public function getElementsTreeFromSynthesisByType($synthesis, $type = null, $parentId = null, $depth = null)
     {
-        if (null === $type || !in_array($type, self::$types, true)) {
+        if ($type === null || !in_array($type, self::$types, true)) {
             throw new NotFoundHttpException();
         }
 
@@ -61,7 +61,7 @@ class SynthesisElementHandler
 
     public function countElementsFromSynthesisByType($synthesis, $type = null): int
     {
-        if (null === $type || !in_array($type, self::$types, true)) {
+        if ($type === null || !in_array($type, self::$types, true)) {
             throw new NotFoundHttpException();
         }
 

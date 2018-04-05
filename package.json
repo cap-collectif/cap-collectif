@@ -63,7 +63,7 @@
     },
     {
       "path": "./web/css/style-admin.css",
-      "maxSize": "50 kB"
+      "maxSize": "46 kB"
     },
     {
       "path": "./web/js/app.js",
@@ -125,7 +125,6 @@
     "exports-loader": "^0.6.3",
     "fancybox": "^3.0.0",
     "flux": "^3.1.2",
-    "gherkin-lint": "^2.8.0",
     "ignore-loader": "^0.1.2",
     "imports-loader": "^0.7.0",
     "jquery": "^3.1.0",
@@ -191,11 +190,11 @@
     "babel-jest": "^22.0.4",
     "bundlesize": "^0.15.3",
     "enzyme": "^2.8.2",
-    "eslint": "^3.19.0",
+    "eslint": "3.x",
     "eslint-brunch": "^3.12.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-config-prettier": "^2.4.0",
-    "eslint-plugin-flowtype": "^2.46.1",
+    "eslint-plugin-flowtype": "^2.35.1",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jest": "^21.0.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",

@@ -49,7 +49,7 @@ Scenario: GraphQL client wants to list consultations
 Scenario: GraphQL client wants to list consultations
   When I send a GraphQL request:
   """
-  query OpinionListQuery {
+query OpinionListQuery {
       contributionsBySection(sectionId: "opinionType12", limit: 5) {
           ...Opinion_opinion
           id
@@ -132,27 +132,27 @@ Scenario: GraphQL client wants to list consultations
 Scenario: GraphQL client wants to list contributions in a consultation
   When I send a GraphQL request:
   """
-  query {
+query {
   consultations(id: "cstep5") {
-        id
-        title
-      contributionConnection(first: 5, orderBy: { field: VOTE_COUNT, direction: DESC }) {
-        totalCount
+    	id
+    	title
+  	  contributionConnection(first: 5, orderBy: { field: VOTE_COUNT, direction: DESC }) {
+      	totalCount
         edges {
           cursor
-                    node {
+					node {
             title
             pinned
             votesCount
         }
       }
-    }
+  	}
   }
-  }
+}
   """
   Then the JSON response should match:
   """
-  {
+{
   "data": {
     "consultations": [
       {
@@ -175,13 +175,13 @@ Scenario: GraphQL client wants to list contributions in a consultation
       }
     ]
   }
-  }
+}
   """
 
 Scenario: GraphQL client wants to list contributions in a section
   When I send a GraphQL request:
   """
-  query {
+query {
   section: node(id: "opinionType5") {
       ... on Section {
         contributionConnection(first: 5, orderBy: { field: VOTE_COUNT, direction: DESC }) {
@@ -195,11 +195,11 @@ Scenario: GraphQL client wants to list contributions in a section
       }
     }
   }
-  }
+}
   """
   Then the JSON response should match:
   """
-  {
+{
   "data": {
     "section": {
       "contributionConnection": {
@@ -216,5 +216,5 @@ Scenario: GraphQL client wants to list contributions in a section
       }
     }
   }
-  }
+}
   """

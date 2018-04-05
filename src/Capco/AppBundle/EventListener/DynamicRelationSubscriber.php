@@ -4,12 +4,7 @@ namespace Capco\AppBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LoadClassMetadataEventArgs;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
-/**
- * @see http://blog.theodo.fr/2013/11/dynamic-mapping-in-doctrine-and-symfony-how-to-extend-entities/
- * @see http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/php-mapping.html
- */
 class DynamicRelationSubscriber implements EventSubscriber
 {
     private $traits;
@@ -34,7 +29,6 @@ class DynamicRelationSubscriber implements EventSubscriber
      */
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
-        /** @var ClassMetadataInfo $metadata */
         $metadata = $eventArgs->getClassMetadata();
 
         foreach ($this->traits as $trait => $params) {

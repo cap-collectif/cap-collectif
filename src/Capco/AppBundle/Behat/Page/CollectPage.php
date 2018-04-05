@@ -24,8 +24,6 @@ class CollectPage extends Page
         'proposal form submit draft button' => '#confirm-proposal-create-as-draft',
         'sorting select' => 'select#proposal-sorting',
         'selected sorting option' => '#proposal-sorting option[selected]',
-        'follow proposal button' => '.proposal__button__follow',
-        'type of follow proposal' => '.proposal__follow',
     ];
 
     public function sortByDate()
@@ -71,25 +69,6 @@ class CollectPage extends Page
     public function submitProposalForm()
     {
         $this->getElement('proposal form submit button')->click();
-    }
-
-    public function clickFollowProposalButton()
-    {
-        return $this->getElement('follow proposal button')->click();
-    }
-
-    public function isFollowedAs($type)
-    {
-        $element = $this->elements['type of follow proposal'] . "__$type";
-
-        return $this->find('css', $element)->isChecked();
-    }
-
-    public function changeTypeOfProposalFollow($type)
-    {
-        $element = $this->elements['type of follow proposal'] . "__$type";
-
-        return $this->find('css', $element)->click();
     }
 
     protected function verifyUrl(array $urlParameters = [])

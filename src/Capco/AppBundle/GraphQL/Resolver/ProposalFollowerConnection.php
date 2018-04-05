@@ -40,7 +40,7 @@ class ProposalFollowerConnection implements ResolverInterface
             return $followers;
         });
 
-        $totalCount = $this->userRepository->countFollowerForProposal($proposal);
+        $totalCount = $this->userRepository->countFollower($proposal);
 
         return $paginator->auto($args, $totalCount);
     }

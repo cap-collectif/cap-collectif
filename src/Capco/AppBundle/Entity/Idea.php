@@ -485,6 +485,6 @@ class Idea implements Contribution, CommentableInterface, VotableInterface, HasA
 
     public static function getElasticsearchSerializationGroups(): array
     {
-        return ['Elasticsearch'];
+        return ['Ideas', 'ThemeDetails'];
     }
 }

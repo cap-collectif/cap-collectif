@@ -1,33 +1,27 @@
-// @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Col } from 'react-bootstrap';
 import ProposalPreviewHeader from './ProposalPreviewHeader';
 import ProposalPreviewBody from './ProposalPreviewBody';
 import ProposalPreviewFooter from './ProposalPreviewFooter';
 import ProposalStatus from './ProposalStatus';
 import { VOTE_TYPE_DISABLED, VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
-import type { Proposal } from '../../../redux/modules/proposal';
-import type { Uuid } from '../../../types';
 import { CardContainer } from '../../Ui/Card/CardContainer';
 
-type Step = {
-  id: Uuid,
-  voteType: number,
-  voteThreshold: number,
-};
+const ProposalPreview = React.createClass({
+  propTypes: {
+    proposal: PropTypes.object.isRequired,
+    step: PropTypes.object.isRequired,
+    showThemes: PropTypes.bool,
+    showComments: PropTypes.bool,
+  },
 
-type Props = {
-  proposal: Proposal,
-  step: Step,
-  showThemes: boolean,
-  showComments: boolean,
-};
+  getDefaultProps() {
+    return {
+      showThemes: false,
+      showComments: false,
+    };
+  },
 
-export class ProposalPreview extends React.Component<Props> {
-  static defaultProps = {
-    showComments: false,
-    showThemes: false,
-  };
   render() {
     const { proposal, step, showThemes, showComments } = this.props;
     const voteType = step.voteType;
@@ -43,8 +37,8 @@ export class ProposalPreview extends React.Component<Props> {
           <ProposalPreviewBody
             proposal={proposal}
             showNullEstimation={voteType === VOTE_TYPE_BUDGET}
-            step={step}
             showThemes={showThemes}
+            step={step}
           />
           <ProposalPreviewFooter
             proposal={proposal}
@@ -56,7 +50,7 @@ export class ProposalPreview extends React.Component<Props> {
         </CardContainer>
       </Col>
     );
-  }
-}
+  },
+});
 
 export default ProposalPreview;

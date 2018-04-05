@@ -30,7 +30,7 @@ class OpinionTypeController extends Controller
             $url = $this->admin->generateUrl('create', $params);
         }
 
-        if ($request && 'DELETE' === $this->getRestMethod($request)) {
+        if ($request && $this->getRestMethod($request) === 'DELETE') {
             $consultationStepTypeId = $request->get('consultation_step_type_id');
             $url = $this->generateUrl('admin_capco_app_steps_consultationsteptype_edit', ['id' => $consultationStepTypeId]);
         }
