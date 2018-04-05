@@ -1,0 +1,28 @@
+ProposalVote:
+    type: object
+    config:
+        interfaces: [Contribution, ContributionWithAuthor]
+        fields:
+            id:
+              type: "ID!"
+            author:
+                type: "User"
+                description: "The author of the contribution. If null, account has been deleted."
+                resolve: "@=value.getUser()"
+            anonymous:
+                type: "Boolean!"
+                description: "Is the vote anonymous ?"
+                resolve: "@=value.isPrivate()"
+            expired:
+                type: "Boolean!"
+                description: "If vote is expired, it exists but doesn't count."
+            createdAt:
+                type: "DateTime!"
+                description: "Date of vote."
+            related:
+                type: "Contribution"
+                description: "Return the related contribution if the contribution is related to another."
+            kind:
+                type: "String!"
+                description: "Returns 'proposalVote'."
+                resolve: "proposalVote"

@@ -51,4 +51,7 @@ Comment:
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentVotesResolver", [value, args])'
             trashedReason:
               type: "String"
+            kind:
+              type: "String!"
+              resolve: "@=value.getKind()"
 

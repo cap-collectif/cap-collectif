@@ -1,4 +1,4 @@
-PropositionVote:
+OpinionVote:
     type: object
     config:
         interfaces: [YesNoPairedVote, Contribution, ContributionWithAuthor]
@@ -9,10 +9,6 @@ PropositionVote:
                 type: "User"
                 description: "The author of the contribution. If null, account has been deleted."
                 resolve: "@=resolver('proposition_vote_author', [value])"
-            anonymous:
-                type: "Boolean"
-                description: "Is the vote anonymous ?"
-                resolve: "@=value.isPrivate()"
             value:
                 type: "YesNoPairedVoteValue!"
             expired:
@@ -26,4 +22,5 @@ PropositionVote:
                 description: "Return the related contribution if the contribution is related to another."
             kind:
                 type: "String!"
-                description: "Returns 'vote'."
+                description: "Returns 'opinionVote'."
+                resolve: "opinionVote"

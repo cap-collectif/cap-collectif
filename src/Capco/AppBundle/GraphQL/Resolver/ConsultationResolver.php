@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
-use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
@@ -234,9 +233,9 @@ class ConsultationResolver implements ContainerAwareInterface
         return $proposition->getOpinionType();
     }
 
-    public function resolvePropositionVoteAuthor(AbstractVote $vote)
+    public function resolvePropositionVoteAuthor(array $vote)
     {
-        return $vote->getUser();
+        return $vote['user'];
     }
 
     public function resolvePropositionVoteProposition(array $vote)

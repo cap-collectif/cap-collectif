@@ -248,6 +248,7 @@ type Comment implements Node {
   reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
   votes(after: String, first: Int = 30, before: String, last: Int, orderBy: VoteOrder = {field: CREATED_AT, direction: DESC}): CommentVoteConnection!
   trashedReason: String
+  kind: String!
 }
 
 # A connection to a list of items.
@@ -427,7 +428,7 @@ enum ContributionOrderField {
 # A contribution with an author
 interface ContributionWithAuthor {
   # The author of the contribution.
-  author: User!
+  author: User
 }
 
 input CreateGroupInput {
@@ -839,7 +840,7 @@ type Opinion implements Node & Contribution & TrashableContribution & Contributi
 
   # Number of sources.
   sourcesCount: Int!
-  votes(first: Int): [PropositionVote]
+  votes(first: Int): [OpinionVote]
 
   # The content of the contribution.
   id: ID!
@@ -928,7 +929,7 @@ type OpinionType implements Contribution & TrashableContribution & ContributionW
 
   # Number of sources.
   sourcesCount: Int!
-  votes(first: Int): [PropositionVote]
+  votes(first: Int): [ProposalVote]
 
   # The content of the contribution.
   id: ID!
@@ -960,6 +961,26 @@ type OpinionType implements Contribution & TrashableContribution & ContributionW
   # Where the proposition has been placed.
   section: Section!
   reportings: [Reporting]
+}
+
+type OpinionVote implements YesNoPairedVote & Contribution & ContributionWithAuthor {
+  id: ID!
+
+  # The author of the contribution. If null, account has been deleted.
+  author: User
+  value: YesNoPairedVoteValue!
+
+  # If vote is expired, it exists but doesn't count.
+  expired: Boolean!
+
+  # Date of vote.
+  createdAt: DateTime!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
+
+  # Returns 'opinionVote'.
+  kind: String!
 }
 
 # Possible directions in which to order a list of items when provided an orderBy argument.
@@ -1317,6 +1338,28 @@ enum ProposalPublicationStatus {
   NOT_ACCOUNTED
 }
 
+type ProposalVote implements Contribution & ContributionWithAuthor {
+  id: ID!
+
+  # The author of the contribution. If null, account has been deleted.
+  author: User
+
+  # Is the vote anonymous ?
+  anonymous: Boolean!
+
+  # If vote is expired, it exists but doesn't count.
+  expired: Boolean!
+
+  # Date of vote.
+  createdAt: DateTime!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
+
+  # Returns 'proposalVote'.
+  kind: String!
+}
+
 # A connection to a list of items.
 type ProposalVoteConnection {
   totalCount: Int!
@@ -1331,7 +1374,7 @@ type ProposalVoteConnection {
 # An edge in a connection.
 type ProposalVoteEdge {
   # The item at the end of the edge.
-  node: PropositionVote!
+  node: ProposalVote!
 
   # A cursor for use in pagination.
   cursor: String!
@@ -1358,29 +1401,6 @@ input ProposalsConnectionFilter {
   viewerIsEvaluer: Boolean = false
 }
 
-type PropositionVote implements YesNoPairedVote & Contribution & ContributionWithAuthor {
-  id: ID!
-
-  # The author of the contribution.
-  author: User!
-
-  # Is the vote anonymous ?
-  anonymous: Boolean
-  value: YesNoPairedVoteValue!
-
-  # If vote is expired, it exists but doesn't count.
-  expired: Boolean!
-
-  # Date of vote.
-  createdAt: DateTime!
-
-  # Return the related contribution if the contribution is related to another.
-  related: Contribution
-
-  # Returns 'vote'.
-  kind: String!
-}
-
 type Query {
   # The currently authenticated user.
   viewer: User!
@@ -1397,7 +1417,7 @@ type Query {
 
   # Retrieve availables districts for a given address
   availableDistrictsForLocalisation(proposalFormId: ID!, latitude: Float!, longitude: Float!): [District!]!
-  votesByContribution(contribution: ID!): [PropositionVote!]!
+  votesByContribution(contribution: ID!): [ProposalVote!]!
   contributions(
     # Returns all contributions of the provided consultation.
     consultation: ID!
@@ -1694,9 +1714,6 @@ type SelectionStep implements Step & Node {
   # Only one selection step inside a project can have realisation steps, true if this one
   allowingProgressSteps: Boolean!
   voteThreshold: Int
-
-  # A list of contributor associated with the consultation.
-  contributors(after: String, first: Int, before: String, last: Int): UserConnection!
   proposals(
     # Returns the elements in the list that come after the specified global ID.
     after: String
@@ -1713,6 +1730,9 @@ type SelectionStep implements Step & Node {
     # Ordering options for proposals returning from the connection
     orderBy: ProposalOrder = {field: CREATED_AT, direction: DESC}
   ): ProposalConnection
+
+  # A list of contributor associated with the consultation.
+  contributors(after: String, first: Int, before: String, last: Int): UserConnection!
 }
 
 input SetEvaluationFormInProposalFormInput {
@@ -2229,7 +2249,7 @@ interface YesNoPairedVote {
   id: ID!
 
   # The author of the contribution.
-  author: User!
+  author: User
   value: YesNoPairedVoteValue!
 
   # If vote is expired, it exists but doesn't count.
