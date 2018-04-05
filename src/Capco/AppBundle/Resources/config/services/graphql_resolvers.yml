@@ -228,8 +228,8 @@ services:
           - { name: overblog_graphql.resolver }
         arguments: ['@capco.proposal_comment.repository','@logger']
 
-    Capco\AppBundle\GraphQL\Resolver\PostCommentsResolver:
-        class: Capco\AppBundle\GraphQL\Resolver\PostCommentsResolver
+    Capco\AppBundle\GraphQL\Resolver\Post\PostCommentsResolver:
+        class: Capco\AppBundle\GraphQL\Resolver\Post\PostCommentsResolver
         tags:
           - { name: overblog_graphql.resolver }
         arguments: ['@capco.post_comment.repository', '@monolog.logger']
@@ -278,3 +278,14 @@ services:
         class: Capco\AppBundle\GraphQL\Resolver\Comment\CommentPublicationStatusResolver
         tags:
           - { name: overblog_graphql.resolver }
+
+    Capco\AppBundle\GraphQL\Resolver\Post\PostPublicationStatusResolver:
+        class: Capco\AppBundle\GraphQL\Resolver\Post\PostPublicationStatusResolver
+        tags:
+          - { name: overblog_graphql.resolver }
+
+    Capco\AppBundle\GraphQL\Resolver\Comment\CommentShowUrlResolver:
+        class: Capco\AppBundle\GraphQL\Resolver\Comment\CommentShowUrlResolver
+        tags:
+          - { name: overblog_graphql.resolver }
+        arguments: ['@capco.url.resolver']

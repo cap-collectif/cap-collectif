@@ -15,4 +15,4 @@ CommentVote:
                 description: "The author of the contribution."
             kind:
                 type: "String!"
-                description: "Returns 'vote'."
+                description: "Returns 'commentVote'."

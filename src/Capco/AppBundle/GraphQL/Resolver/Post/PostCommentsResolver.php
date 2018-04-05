@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver;
+namespace Capco\AppBundle\GraphQL\Resolver\Post;
 
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Repository\PostCommentRepository;
