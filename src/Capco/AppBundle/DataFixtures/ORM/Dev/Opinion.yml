@@ -65,7 +65,7 @@ Capco\AppBundle\Entity\Opinion:
         isEnabled: <boolean()>
         isTrashed: false
         pinned: <boolean()>
-        Author: '@user<numberBetween(1, 50)>'
+        Author: '@user<current()>'
         OpinionType: '@opinionType<numberBetween(9, 10)>'
     opinion{41..50}:
         id: 'opinion<current()>'

@@ -3,95 +3,124 @@ Capco\AppBundle\Entity\Follower:
     proposal: '@proposal1'
     user: '@user1'
     followedAt: <dateTimeBetween('-50 days', 'now')>
+    notifiedOf: 2
   follower2:
     proposal: '@proposal1'
     user: '@user2'
     followedAt: <dateTimeBetween('-50 days', 'now')>
+    notifiedOf: 3
   follower4:
     proposal: '@proposal1'
     user: '@user4'
     followedAt: <dateTimeBetween('-50 days', 'now')>
+    notifiedOf: 1
   follower5:
     proposal: '@proposal1'
     user: '@user5'
     followedAt: <dateTimeBetween('-50 days', 'now')>
+    notifiedOf: 1
   follower7:
     proposal: '@proposal1'
     user: '@user6'
     followedAt: <dateTimeBetween('-50 days', 'now')>
+    notifiedOf: 2
   follower9:
     proposal: '@proposal1'
     user: '@user7'
     followedAt: <dateTimeBetween('-50 days', 'now')>
+    notifiedOf: 2
   follower11:
      proposal: '@proposal1'
      user: '@user8'
      followedAt: <dateTimeBetween('-50 days', 'now')>
+     notifiedOf: 3
   follower12:
      proposal: '@proposal1'
      user: '@user9'
      followedAt: <dateTimeBetween('-50 days', 'now')>
+     notifiedOf: 3
   follower13:
      proposal: '@proposal1'
      user: '@user10'
      followedAt: <dateTimeBetween('-50 days', 'now')>
+     notifiedOf: 3
   follower15:
      proposal: '@proposal2'
      user: '@user1'
      followedAt: <dateTimeBetween('-50 days', 'now')>
+     notifiedOf: 3
   follower16:
      proposal: '@proposal2'
      user: '@user2'
      followedAt: <dateTimeBetween('-50 days', 'now')>
+     notifiedOf: 1
   follower17:
      proposal: '@proposal2'
      user: '@user4'
      followedAt: <dateTimeBetween('-50 days', 'now')>
+     notifiedOf: 2
   follower18:
      proposal: '@proposal2'
      user: '@user6'
      followedAt: <dateTimeBetween('-50 days', 'now')>
+     notifiedOf: 3
   follower19:
      proposal: '@proposal2'
      user: '@user7'
      followedAt: <dateTimeBetween('-50 days', 'now')>
+     notifiedOf: 1
   follower20:
      proposal: '@proposal2'
      user: '@user8'
      followedAt: <dateTimeBetween('-50 days', 'now')>
+     notifiedOf: 1
   follower21:
      proposal: '@proposal2'
      user: '@user9'
      followedAt: <dateTimeBetween('-50 days', 'now')>
+     notifiedOf: 2
   follower22:
      proposal: '@proposal2'
      user: '@user10'
      followedAt: <dateTimeBetween('-50 days', 'now')>
+     notifiedOf: 3
   follower23:
      proposal: '@proposal2'
      user: '@user11'
      followedAt: <dateTimeBetween('-50 days', 'now')>
-  follower{24..200}:
+     notifiedOf: 3
+  follower{24..80}:
     proposal: '@proposal1'
     user: '@user<current()>'
     followedAt: <dateTimeBetween('-50 days', 'now')>
+    notifiedOf: 3 
   follower201:
     proposal: '@proposal3'
     user: '@user5'
     followedAt: <dateTimeBetween('-50 days', 'now')>
+    notifiedOf: 3 
   follower213:
     proposal: '@proposal10'
     user: '@user1'
     followedAt: <dateTimeBetween('-50 days', 'now')>
+    notifiedOf: 3 
   follower214:
     proposal: '@proposal10'
     user: '@user2'
     followedAt: <dateTimeBetween('-50 days', 'now')>
+    notifiedOf: 3 
   follower215:
     proposal: '@proposal8'
     user: '@user1'
     followedAt: <dateTimeBetween('-50 days', 'now')>
+    notifiedOf: 3 
   follower217:
     proposal: '@proposal8'
     user: '@user5'
-    followedAt: <dateTimeBetween('-50 days', 'now')>    
+    followedAt: <dateTimeBetween('-50 days', 'now')>
+    notifiedOf: 3
+  follower219:
+    proposal: '@proposal9'
+    user: '@user1'
+    followedAt: <dateTimeBetween('-50 days', 'now')>
+    notifiedOf: 1

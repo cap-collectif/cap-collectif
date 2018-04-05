@@ -16,6 +16,7 @@ class MailerService
     protected $translator;
     protected $siteParams;
     protected $router;
+    protected $failedRecipients;
 
     public function __construct(\Swift_Mailer $mailer, EngineInterface $templating, TranslatorInterface $translator, Resolver $siteParams, Router $router)
     {
@@ -24,6 +25,7 @@ class MailerService
         $this->translator = $translator;
         $this->siteParams = $siteParams;
         $this->router = $router;
+        $this->failedRecipients = [];
     }
 
     public function sendMessage(Message $message): bool
@@ -62,17 +64,24 @@ class MailerService
                 $body .= $this->translator->trans($message->getFooterTemplate(), $message->getFooterVars(), 'CapcoAppBundle');
             }
         }
+        $swiftMessage = (new \Swift_Message())
+            ->setSubject($subject)
+            ->setContentType('text/html')
+            ->setBody($body)
+            ->setFrom([
+                $message->getSenderEmail() => $message->getSenderName(),
+            ]);
+
+        if (!empty($message->getBcc())) {
+            $swiftMessage->setBcc($message->getBcc());
+        }
+        if (!empty($message->getCC())) {
+            $swiftMessage->setCc($message->getCC());
+        }
         //  try {
         foreach ($message->getRecipients() as $recipient) {
-            $swiftMessage = (new \Swift_Message())
-                ->setTo([$recipient->getEmailAddress() => $recipient->getFullName()])
-                ->setSubject($subject)
-                ->setContentType('text/html')
-                ->setBody($body)
-                ->setFrom([
-                    $message->getSenderEmail() => $message->getSenderName(),
-                ]);
-            $this->mailer->send($swiftMessage);
+            $swiftMessage->setTo([$recipient->getEmailAddress() => $recipient->getFullName()]);
+            $this->mailer->send($swiftMessage, $this->failedRecipients);
             // See https://github.com/mustafaileri/swiftmailer/commit/d289295235488cdc79473260e04e3dabd2dac3ef
             if ($this->mailer->getTransport()->isStarted()) {
                 $this->mailer->getTransport()->stop();
@@ -83,5 +92,10 @@ class MailerService
         //}
 
         return $delivered;
+    }
+
+    public function getFailedRecipients()
+    {
+        return $this->failedRecipients;
     }
 }

@@ -375,10 +375,10 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
 
     // **************************** Custom methods *******************************
 
-    public function getProjectId()
+    public function getProjectId(): ?string
     {
         if (!$this->projectAbstractStep) {
-            return;
+            return null;
         }
 
         return $this->projectAbstractStep

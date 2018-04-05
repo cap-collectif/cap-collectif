@@ -111,3 +111,8 @@ services:
   capco.follower.resolver:
     class: Capco\AppBundle\Resolver\ProposalResolver
     arguments: ['@doctrine.orm.entity_manager', '%kernel.root_dir%','@capco.resolvers.users', '@monolog.logger']
+
+  capco.following.activities.resolver:
+    class: Capco\AppBundle\Following\ActivitiesResolver
+    arguments: ['@capco.follower.repository','@capco.proposal.repository' ,'@capco.proposal_form.repository','@capco.project.repository','@logger', '@router']
+

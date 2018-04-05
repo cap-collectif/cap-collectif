@@ -1,0 +1,11 @@
+PickFollowTypeValue:
+    type: enum
+    config:
+        description: "3 possible values"
+        values:
+            DEFAULT:
+                value: "1"
+            DEFAULT_AND_COMMENTS:
+                value: "2"
+            ALL:
+                value: "3"

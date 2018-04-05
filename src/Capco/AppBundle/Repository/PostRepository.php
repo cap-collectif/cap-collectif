@@ -69,13 +69,13 @@ class PostRepository extends EntityRepository
             ->orderBy('p.publishedAt', 'DESC')
         ;
 
-        if ($themeSlug !== null && $themeSlug !== Theme::FILTER_ALL) {
+        if (null !== $themeSlug && Theme::FILTER_ALL !== $themeSlug) {
             $qb->andWhere('t.slug = :theme')
                 ->setParameter('theme', $themeSlug)
             ;
         }
 
-        if ($projectSlug !== null && $projectSlug !== Project::FILTER_ALL) {
+        if (null !== $projectSlug && Project::FILTER_ALL !== $projectSlug) {
             $qb->andWhere('c.slug = :project')
                 ->setParameter('project', $projectSlug)
             ;
@@ -106,14 +106,14 @@ class PostRepository extends EntityRepository
             ->select('COUNT(p.id)')
         ;
 
-        if ($themeSlug !== null && $themeSlug !== Theme::FILTER_ALL) {
+        if (null !== $themeSlug && Theme::FILTER_ALL !== $themeSlug) {
             $qb->innerJoin('p.themes', 't', 'WITH', 't.isEnabled = true')
                 ->andWhere('t.slug = :theme')
                 ->setParameter('theme', $themeSlug)
             ;
         }
 
-        if ($projectSlug !== null && $projectSlug !== Project::FILTER_ALL) {
+        if (null !== $projectSlug && Project::FILTER_ALL !== $projectSlug) {
             $qb->innerJoin('p.projects', 'c', 'WITH', 'c.isEnabled = true')
                 ->andWhere('c.slug = :project')
                 ->setParameter('project', $projectSlug)

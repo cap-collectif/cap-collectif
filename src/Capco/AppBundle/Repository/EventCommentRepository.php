@@ -29,15 +29,15 @@ class EventCommentRepository extends EntityRepository
             ->orderBy('c.pinned', 'DESC')
         ;
 
-        if ($filter === 'old') {
+        if ('old' === $filter) {
             $qb->addOrderBy('c.createdAt', 'ASC');
         }
 
-        if ($filter === 'last') {
+        if ('last' === $filter) {
             $qb->addOrderBy('c.createdAt', 'DESC');
         }
 
-        if ($filter === 'popular') {
+        if ('popular' === $filter) {
             $qb->addOrderBy('c.votesCount', 'DESC');
         }
 

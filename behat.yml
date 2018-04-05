@@ -65,7 +65,7 @@ commands:
     formatters:
         pretty:
             verbose:  true
-            paths:    true
+            paths:    false
             snippets: true
     extensions:
         Tonic\Behat\ParallelScenarioExtension: ~

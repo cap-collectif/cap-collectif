@@ -50,7 +50,7 @@ export class ProposalVoteButton extends React.Component<Props, State> {
             dispatch(openVoteModal(proposal.id));
           };
     let buttonText = '';
-    let style = 'btn btn-primary';
+    let style = 'btn btn-success';
     if (userHasVote && this.state.isHovering) {
       buttonText = 'proposal.vote.delete';
       style = 'btn btn-danger';

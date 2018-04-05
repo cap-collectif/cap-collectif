@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class SiteParameterRepository extends EntityRepository
 {
-    public function getValuesIfEnabled()
+    public function getValuesIfEnabled(): array
     {
         return $this->getEntityManager()->createQueryBuilder()
             ->from($this->getClassName(), 'p', 'p.keyname')

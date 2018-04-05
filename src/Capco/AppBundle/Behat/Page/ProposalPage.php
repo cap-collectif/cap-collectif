@@ -34,6 +34,9 @@ class ProposalPage extends Page
         'votes tab' => '#proposal-page-tabs-tab-votes',
         'followers tab' => '#proposal-page-tabs-tab-followers',
         'comments tab' => '#proposal-page-tabs-tab-comments',
+        'proposal follow default' => '#proposal-follow-btn-default',
+        'proposal follow advancement and comment' => '#proposal-follow-btn-default_and_comments',
+        'proposal follow all' => '#proposal-follow-btn-all',
     ];
 
     public function getDeleteButtonSelector()
@@ -178,22 +181,45 @@ class ProposalPage extends Page
         $this->getElement('comments tab')->click();
     }
 
-    public function getFollowButton()
+    public function followAdvancementIsChecked(string $proposalId)
     {
-        return $this->getElement('proposal follow button');
+        $element = $this->elements['proposal follow default'] . "-$proposalId";
+
+        return $this->find('css', $element)->isChecked();
     }
 
-    public function getUnfollowButton()
+    public function followAdvancementAndCommentIsChecked(string $proposalId)
     {
-        return $this->getElement('proposal unfollow button');
+        $element = $this->elements['proposal follow advancement and comment'] . "-$proposalId";
+
+        return $this->find('css', $element)->isChecked();
     }
 
-    public function clickFollowButton(bool $follow = true)
+    public function followAllIsChecked(string $proposalId)
     {
-        if ($follow) {
-            $this->getFollowButton()->click();
-        } else {
-            $this->getUnfollowButton()->click();
-        }
+        $element = $this->elements['proposal follow all'] . "-$proposalId";
+
+        return $this->find('css', $element)->isChecked();
+    }
+
+    public function clickFollowChoice(string $choice, $proposalId)
+    {
+        $element = $this->elements[$choice] . "-$proposalId";
+
+        return $this->find('css', $element)->click();
+    }
+
+    public function clickFollowButton(string $proposalId)
+    {
+        $element = $this->elements['proposal follow button'] . "-$proposalId";
+
+        return $this->find('css', $element)->click();
+    }
+
+    public function clickUnfollowButton(string $proposalId)
+    {
+        $element = $this->elements['proposal unfollow button'] . "-$proposalId";
+
+        return $this->find('css', $element)->click();
     }
 }

@@ -1,4 +1,4 @@
-@proposal_follow
+@proposal_follow @proposal_follow_graphql
 Feature: Proposals
 
 @database
@@ -7,17 +7,24 @@ Scenario: GraphQL client wants to get list of users who following a proposal
   And I send a GraphQL POST request:
   """
   {
-    "query": "query getFollowers ($proposalId: ID!){
+    "query": "query getFollowers ($proposalId: ID!,$count: Int, $cursor: String){
       proposal: node(id: $proposalId) {
         ... on Proposal {
-          followers {
-            id
+          followers(first: $count, after: $cursor) {
+            edges {
+              cursor
+              node {
+                id
+              }
+            }
           }
         }
       }
     }",
     "variables": {
-      "proposalId": "proposal10"
+      "proposalId": "proposal10",
+      "count": 32,
+      "cursor": null
     }
   }
   """
@@ -26,14 +33,21 @@ Scenario: GraphQL client wants to get list of users who following a proposal
   {
     "data": {
       "proposal": {
-        "followers": [
-          {
-            "id": "user1"
-          },
-          {
-            "id": "user2"
-          }
-        ]
+        "followers": {
+          "edges": [
+            {
+              "cursor": @string@,
+              "node": {
+                "id": "user1"
+              }
+            },{
+              "cursor": @string@,
+              "node": {
+                "id": "user2"
+              }
+            }
+          ]
+        }
       }
     }
   }
@@ -45,13 +59,22 @@ Scenario: GraphQL client wants to get list of proposals followed by the current 
   And I send a GraphQL POST request:
   """
   {
-    "query": "query getFollowingProposal {
+    "query": "query getFollowingProposal($count: Int, $cursor: String) {
       viewer {
-        followingProposal {
-          id
+        followingProposals(first: $count, after: $cursor) {
+          edges {
+            cursor
+            node {
+              id
+            }
+          }
         }
       }
-    }"
+    }",
+    "variables": {
+      "count": 32,
+      "cursor": null
+    }
   }
   """
   Then the JSON response should match:
@@ -59,14 +82,22 @@ Scenario: GraphQL client wants to get list of proposals followed by the current 
   {
     "data": {
       "viewer": {
-        "followingProposal": [
-          {
-            "id": "proposal1"
-          },
-          {
-            "id": "proposal2"
-          }
-        ]
+        "followingProposals": {
+          "edges": [
+            {
+              "cursor": @string@,
+              "node": {
+                "id": "proposal1"
+              }
+            },
+            {
+              "cursor": @string@,
+              "node": {
+                "id": "proposal2"
+              }
+            }
+          ]
+        }
       }
     }
   }
@@ -125,7 +156,7 @@ Scenario: I'm on a proposal and GraphQL want to know the total number of proposa
             "hasNextPage": true,
             "endCursor": @string@
           },
-          "totalCount": 186
+          "totalCount": 66
         }
       }
     }
@@ -185,7 +216,7 @@ Scenario: I'm on qqa proposal and I want to load 32 followers from a cursor
             "hasNextPage": true,
             "endCursor": @string@
           },
-          "totalCount": 186
+          "totalCount": 66
         }
       }
     }
