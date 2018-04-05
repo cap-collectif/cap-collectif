@@ -512,12 +512,6 @@ export function* fetchProposals(action: Object): Generator<*, *, *> {
 
   const result = yield call(Fetcher.postToJson, url, body);
 
-  // Save results to localStorage if selected order is random
-  if (result.order === PROPOSAL_ORDER_RANDOM || !result.order) {
-    lastProposals[step.id] = result.proposals.map(proposal => proposal.id);
-    LocalStorageService.set('proposal.randomResultsByStep', lastProposals);
-  }
-
   yield put({
     type: 'proposal/FETCH_SUCCEEDED',
     proposals: result.proposals,

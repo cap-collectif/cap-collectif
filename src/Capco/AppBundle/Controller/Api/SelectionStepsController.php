@@ -61,12 +61,15 @@ class SelectionStepsController extends FOSRestController
         $filters = $request->request->has('filters') ? $request->request->get('filters') : [];
         $filters['selectionStep'] = $selectionStep->getId();
 
+        $seed = $this->getUser() ? $this->getUser()->getId() : $this->get('request')->getClientIp();
+
         $results = $this->get('capco.search.proposal_search')->searchProposals(
             $page,
             $pagination,
             $order,
             $terms,
-            $filters
+            $filters,
+            $seed
         );
 
         return $results;
