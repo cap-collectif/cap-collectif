@@ -11,6 +11,7 @@ export class LeafletSearch extends MapControl {
     const googleProvider = new GoogleProvider({
       params: {
         key: config.mapsServerKey,
+        components: 'country:FR',
       },
     });
 
