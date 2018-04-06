@@ -182,7 +182,7 @@ type ChangeProposalProgressStepsPayload {
 
 input ChangeProposalPublicationStatusInput {
   # The new publication status
-  publicationStatus: ProposalPublicationStatus!
+  publicationStatus: PublicationStatus!
 
   # Added if you set publicationStatus to TRASHED
   trashedReason: String
@@ -230,109 +230,6 @@ type CollectStep implements Node & Step {
 
   # A list of contributor associated with the step.
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
-}
-
-# A comment
-type Comment implements Node {
-  id: ID!
-  body: String
-  createdAt: DateTime!
-  updatedAt: DateTime
-  author: User
-  parent: Comment
-  answers: [Comment]
-  authorName: String
-  authorEmail: String
-  authorIp: IP
-  publicationStatus: CommentPublicationStatus!
-  reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
-  votes(after: String, first: Int = 30, before: String, last: Int, orderBy: VoteOrder = {field: CREATED_AT, direction: DESC}): CommentVoteConnection!
-  trashedReason: String
-  kind: String!
-}
-
-# A connection to a list of items.
-type CommentConnection {
-  totalCount: Int!
-
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # Information to aid in pagination.
-  edges: [CommentEdge]
-}
-
-# An edge in a connection.
-type CommentEdge {
-  # The item at the end of the edge.
-  node: Comment!
-
-  # A cursor for use in pagination.
-  cursor: String!
-}
-
-# Ways in which lists of comments can be ordered upon return.
-input CommentOrder {
-  field: CommentOrderField! = CREATED_AT
-  direction: OrderDirection! = DESC
-}
-
-# Ordering options for comments.
-enum CommentOrderField {
-  CREATED_AT
-  UPDATED_AT
-  POPULARITY
-}
-
-# Available statuses
-enum CommentPublicationStatus {
-  # Was publicly visible, but has expired.
-  EXPIRED
-
-  # Normal status, Publicly visible
-  PUBLISHED
-
-  # Publicly visible in the trash bin
-  TRASHED
-
-  # In the trash bin, content not visible
-  TRASHED_NOT_VISIBLE
-}
-
-type CommentVote {
-  id: ID!
-
-  # Date of vote.
-  createdAt: DateTime
-
-  # If vote is expired, it exists but doesn't count.
-  expired: Boolean!
-
-  # The author of the contribution.
-  author: User!
-
-  # Returns 'vote'.
-  kind: String!
-}
-
-# A connection to a list of items.
-type CommentVoteConnection {
-  totalCount: Int!
-
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # Information to aid in pagination.
-  edges: [CommentVoteEdge]
-}
-
-# An edge in a connection.
-type CommentVoteEdge {
-  # The item at the end of the edge.
-  node: CommentVote!
-
-  # A cursor for use in pagination.
-  cursor: String!
 }
 
 # A consultation
@@ -428,7 +325,7 @@ enum ContributionOrderField {
 # A contribution with an author
 interface ContributionWithAuthor {
   # The author of the contribution.
-  author: User
+  author: User!
 }
 
 input CreateGroupInput {
@@ -649,8 +546,6 @@ type Group implements Node {
 
 scalar HTML
 
-scalar IP
-
 scalar JSON
 
 # A media
@@ -746,26 +641,6 @@ type Mutation {
   updateProfile(input: UpdateProfileInput!): UpdateProfilePayload
 }
 
-# A connection to a list of items.
-type NewsConnection {
-  totalCount: Int!
-
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # Information to aid in pagination.
-  edges: [NewsEdge]
-}
-
-# An edge in a connection.
-type NewsEdge {
-  # The item at the end of the edge.
-  node: Post!
-
-  # A cursor for use in pagination.
-  cursor: String!
-}
-
 # Fetches an object given its ID
 interface Node {
   # The ID of an object
@@ -840,7 +715,7 @@ type Opinion implements Node & Contribution & TrashableContribution & Contributi
 
   # Number of sources.
   sourcesCount: Int!
-  votes(first: Int): [OpinionVote]
+  votes(first: Int): [PropositionVote]
 
   # The content of the contribution.
   id: ID!
@@ -929,7 +804,7 @@ type OpinionType implements Contribution & TrashableContribution & ContributionW
 
   # Number of sources.
   sourcesCount: Int!
-  votes(first: Int): [ProposalVote]
+  votes(first: Int): [PropositionVote]
 
   # The content of the contribution.
   id: ID!
@@ -961,26 +836,6 @@ type OpinionType implements Contribution & TrashableContribution & ContributionW
   # Where the proposition has been placed.
   section: Section!
   reportings: [Reporting]
-}
-
-type OpinionVote implements YesNoPairedVote & Contribution & ContributionWithAuthor {
-  id: ID!
-
-  # The author of the contribution. If null, account has been deleted.
-  author: User
-  value: YesNoPairedVoteValue!
-
-  # If vote is expired, it exists but doesn't count.
-  expired: Boolean!
-
-  # Date of vote.
-  createdAt: DateTime!
-
-  # Return the related contribution if the contribution is related to another.
-  related: Contribution
-
-  # Returns 'opinionVote'.
-  kind: String!
 }
 
 # Possible directions in which to order a list of items when provided an orderBy argument.
@@ -1023,7 +878,6 @@ enum PickFollowTypeValue {
 type Post {
   id: String!
   title: String!
-  comments(after: String, first: Int = 30, before: String, last: Int, orderBy: CommentOrder = {field: CREATED_AT, direction: DESC}): CommentConnection!
   abstract: String!
 }
 
@@ -1068,8 +922,7 @@ type Proposal implements Node {
   progressSteps: [ProgressStep!]!
   evaluers: [Group!]!
   viewerIsAnEvaluer: Boolean!
-  news(after: String, first: Int = 30, before: String, last: Int, orderBy: ProposalOrder = {field: CREATED_AT, direction: DESC}): NewsConnection!
-  reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
+  news: [Post!]!
   project: Project!
   status: Status
   selections: [Selection!]!
@@ -1081,7 +934,6 @@ type Proposal implements Node {
   category: ProposalCategory
   district: District
   address: Address
-  formattedAddress: String
 
   # The author of the contribution.
   author: User!
@@ -1095,12 +947,9 @@ type Proposal implements Node {
   # The update user.
   updatedBy: User
 
-  # The publication status for this proposal.
-  publicationStatus: ProposalPublicationStatus!
+  # The publication status.
+  publicationStatus: PublicationStatus!
   trashedReason: String
-  trashed: Boolean
-  trashedAt: DateTime
-  expired: Boolean
 
   # The id of the contribution.
   id: ID!
@@ -1134,8 +983,6 @@ type Proposal implements Node {
 
   # Count number of comments for the proposal.
   commentsCount: Int!
-  comments(after: String, first: Int = 30, before: String, last: Int, orderBy: CommentOrder = {field: CREATED_AT, direction: DESC}): CommentConnection!
-  votes(after: String, first: Int = 30, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}, step: ID!): ProposalVoteConnection!
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
@@ -1310,12 +1157,34 @@ input ProposalOrder {
 enum ProposalOrderField {
   # Allows ordering a list of proposals by when they were created.
   CREATED_AT
-  UPDATED_AT
-  PUBLISHED_AT
+}
+
+input ProposalsConnectionFilter {
+  viewerIsEvaluer: Boolean = false
+}
+
+type PropositionVote implements YesNoPairedVote & Contribution & ContributionWithAuthor {
+  id: ID!
+
+  # The author of the contribution.
+  author: User!
+  value: YesNoPairedVoteValue!
+
+  # If vote is expired, it exists but doesn't count.
+  expired: Boolean!
+
+  # Date of vote.
+  createdAt: DateTime!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
+
+  # Returns 'vote'.
+  kind: String!
 }
 
 # Available statuses
-enum ProposalPublicationStatus {
+enum PublicationStatus {
   # Was publicly visible, but has expired.
   EXPIRED
 
@@ -1338,69 +1207,6 @@ enum ProposalPublicationStatus {
   NOT_ACCOUNTED
 }
 
-type ProposalVote implements Contribution & ContributionWithAuthor {
-  id: ID!
-
-  # The author of the contribution. If null, account has been deleted.
-  author: User
-
-  # Is the vote anonymous ?
-  anonymous: Boolean!
-
-  # If vote is expired, it exists but doesn't count.
-  expired: Boolean!
-
-  # Date of vote.
-  createdAt: DateTime!
-
-  # Return the related contribution if the contribution is related to another.
-  related: Contribution
-
-  # Returns 'proposalVote'.
-  kind: String!
-}
-
-# A connection to a list of items.
-type ProposalVoteConnection {
-  totalCount: Int!
-
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # Information to aid in pagination.
-  edges: [ProposalVoteEdge]
-}
-
-# An edge in a connection.
-type ProposalVoteEdge {
-  # The item at the end of the edge.
-  node: ProposalVote!
-
-  # A cursor for use in pagination.
-  cursor: String!
-}
-
-# Ways in which lists of proposal votes can be ordered upon return.
-input ProposalVoteOrder {
-  field: ProposalVoteOrderField! = CREATED_AT
-  direction: OrderDirection! = DESC
-}
-
-# Ordering options for proposals votes connections.
-enum ProposalVoteOrderField {
-  CREATED_AT
-}
-
-# Ways in which lists of votes can be ordered upon return.
-input ProposalVotesOrder {
-  field: VoteOrderField! = CREATED_AT
-  direction: OrderDirection! = DESC
-}
-
-input ProposalsConnectionFilter {
-  viewerIsEvaluer: Boolean = false
-}
-
 type Query {
   # The currently authenticated user.
   viewer: User!
@@ -1417,7 +1223,7 @@ type Query {
 
   # Retrieve availables districts for a given address
   availableDistrictsForLocalisation(proposalFormId: ID!, latitude: Float!, longitude: Float!): [District!]!
-  votesByContribution(contribution: ID!): [ProposalVote!]!
+  votesByContribution(contribution: ID!): [PropositionVote!]!
   contributions(
     # Returns all contributions of the provided consultation.
     consultation: ID!
@@ -1547,37 +1353,6 @@ type Reporting implements Contribution & ContributionWithAuthor {
   kind: String!
 }
 
-# A connection to a list of items.
-type ReportingConnection {
-  totalCount: Int!
-
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # Information to aid in pagination.
-  edges: [ReportingEdge]
-}
-
-# An edge in a connection.
-type ReportingEdge {
-  # The item at the end of the edge.
-  node: Reporting!
-
-  # A cursor for use in pagination.
-  cursor: String!
-}
-
-# Ways in which lists of reportings can be ordered upon return.
-input ReportingOrder {
-  field: ReportingOrderField! = CREATED_AT
-  direction: OrderDirection! = DESC
-}
-
-# Ordering options for reporting.
-enum ReportingOrderField {
-  CREATED_AT
-}
-
 # Type of reporting
 enum ReportingType {
   SEX
@@ -1585,26 +1360,6 @@ enum ReportingType {
   SPAM
   ERROR
   OFF_TOPIC
-}
-
-# A connection to a list of items.
-type ReportsConnection {
-  totalCount: Int!
-
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # Information to aid in pagination.
-  edges: [ReportsEdge]
-}
-
-# An edge in a connection.
-type ReportsEdge {
-  # The item at the end of the edge.
-  node: Reporting!
-
-  # A cursor for use in pagination.
-  cursor: String!
 }
 
 # A contribution with an author
@@ -1714,22 +1469,6 @@ type SelectionStep implements Step & Node {
   # Only one selection step inside a project can have realisation steps, true if this one
   allowingProgressSteps: Boolean!
   voteThreshold: Int
-  proposals(
-    # Returns the elements in the list that come after the specified global ID.
-    after: String
-
-    # Returns the first n elements from the list.
-    first: Int = 50
-
-    # Returns the elements in the list that come before the specified global ID.
-    before: String
-
-    # Returns the last n elements from the list.
-    last: Int
-
-    # Ordering options for proposals returning from the connection
-    orderBy: ProposalOrder = {field: CREATED_AT, direction: DESC}
-  ): ProposalConnection
 
   # A list of contributor associated with the consultation.
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
@@ -2117,8 +1856,6 @@ type UserNotificationsConfiguration {
 
 # A type of person
 type UserType {
-  id: ID!
-
   # The name of the type.
   name: String!
 }
@@ -2129,7 +1866,6 @@ type ValueResponse implements Response {
 
   # The value
   value: String
-  formattedValue: String
 }
 
 # A version of contribution
@@ -2232,24 +1968,11 @@ type VersionVote implements YesNoPairedVote & Contribution & ContributionWithAut
   kind: String!
 }
 
-# Ways in which lists of votes can be ordered upon return.
-input VoteOrder {
-  field: VoteOrderField! = CREATED_AT
-  direction: OrderDirection! = DESC
-}
-
-# Ordering options for votes.
-enum VoteOrderField {
-  CREATED_AT
-  UPDATED_AT
-  POPULARITY
-}
-
 interface YesNoPairedVote {
   id: ID!
 
   # The author of the contribution.
-  author: User
+  author: User!
   value: YesNoPairedVoteValue!
 
   # If vote is expired, it exists but doesn't count.

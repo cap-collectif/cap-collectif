@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Notifier;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\EventListener\CommentSubscriber;
-use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalResolver;
+use Capco\AppBundle\GraphQL\Resolver\ProposalResolver;
 use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Comment\CommentCreateAdminAnonymousMessage;

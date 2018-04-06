@@ -94,21 +94,6 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Comment']
 
-  capco.post_comment.repository:
-      class: Capco\AppBundle\Repository\PostCommentRepository
-      factory: ['@doctrine.orm.entity_manager', getRepository]
-      arguments: ['CapcoAppBundle:PostComment']
-
-  capco.proposal_comment.repository:
-    class: Capco\AppBundle\Repository\ProposalCommentRepository
-    factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:ProposalComment']
-
-  capco.comment_vote.repository:
-      class: Capco\AppBundle\Repository\CommentVoteRepository
-      factory: ['@doctrine.orm.entity_manager', getRepository]
-      arguments: ['CapcoAppBundle:CommentVote']
-
   capco.proposal.repository:
     class: Capco\AppBundle\Repository\ProposalRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]

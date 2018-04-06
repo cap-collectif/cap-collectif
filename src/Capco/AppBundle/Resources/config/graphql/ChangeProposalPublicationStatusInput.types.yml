@@ -4,7 +4,7 @@ ChangeProposalPublicationStatusInput:
         description: ""
         fields:
             publicationStatus:
-                type: "ProposalPublicationStatus!"
+                type: "PublicationStatus!"
                 description: "The new publication status"
             trashedReason:
                 type: "String"

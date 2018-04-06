@@ -18,28 +18,6 @@ SelectionStep:
                 description: "Only one selection step inside a project can have realisation steps, true if this one"
             voteThreshold:
                 type: "Int"
-            proposals:
-                type: "ProposalConnection"
-                argsBuilder: "Relay::Connection"
-                args:
-                    orderBy:
-                        type: "ProposalOrder"
-                        description: "Ordering options for proposals returning from the connection"
-                        defaultValue: { field: CREATED_AT, direction: DESC }
-                    after:
-                        type: "String"
-                        description: "Returns the elements in the list that come after the specified global ID."
-                    first:
-                        type: "Int"
-                        defaultValue: 50
-                        description: "Returns the first n elements from the list."
-                    before:
-                        type: "String"
-                        description: "Returns the elements in the list that come before the specified global ID."
-                    last:
-                        type: "Int"
-                        description: "Returns the last n elements from the list."
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\SelectionStepProposalResolver", [value, args])'
             contributors:
                 type: "UserConnection!"
                 description: "A list of contributor associated with the consultation."

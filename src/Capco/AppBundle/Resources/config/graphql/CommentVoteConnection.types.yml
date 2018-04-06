@@ -1,7 +1,0 @@
-CommentVoteConnection:
-    type: relay-connection
-    config:
-        nodeType: CommentVote!
-        connectionFields:
-            totalCount:
-                type: Int!

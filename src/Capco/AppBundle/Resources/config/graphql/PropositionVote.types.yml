@@ -1,4 +1,4 @@
-OpinionVote:
+PropositionVote:
     type: object
     config:
         interfaces: [YesNoPairedVote, Contribution, ContributionWithAuthor]
@@ -6,8 +6,8 @@ OpinionVote:
             id:
               type: "ID!"
             author:
-                type: "User"
-                description: "The author of the contribution. If null, account has been deleted."
+                type: "User!"
+                description: "The author of the contribution."
                 resolve: "@=resolver('proposition_vote_author', [value])"
             value:
                 type: "YesNoPairedVoteValue!"
@@ -22,5 +22,4 @@ OpinionVote:
                 description: "Return the related contribution if the contribution is related to another."
             kind:
                 type: "String!"
-                description: "Returns 'opinionVote'."
-                resolve: "opinionVote"
+                description: "Returns 'vote'."

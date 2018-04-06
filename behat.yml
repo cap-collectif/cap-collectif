@@ -110,6 +110,7 @@ graphql:
         graphql:
             paths:
                 - '%paths.base%/features/graphql'
+                - '%paths.base%/features/graphql/mutations'
             contexts:
                 - Capco\AppBundle\Behat\ApplicationContext
                 - Capco\AppBundle\Behat\NavigationContext

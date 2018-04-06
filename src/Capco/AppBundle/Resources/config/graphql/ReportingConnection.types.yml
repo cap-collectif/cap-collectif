@@ -1,7 +1,0 @@
-ReportingConnection:
-    type: relay-connection
-    config:
-        nodeType: Reporting!
-        connectionFields:
-            totalCount:
-                type: Int!

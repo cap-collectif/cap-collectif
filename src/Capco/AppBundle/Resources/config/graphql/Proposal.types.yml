@@ -21,27 +21,8 @@ Proposal:
               type: "Boolean!"
               resolve: "@=resolver('proposal_viewer_is_evaluer', [value, user])"
             news:
-              type: "NewsConnection!"
-              argsBuilder: "Relay::Connection"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalNewsResolver", [value, args])'
-              args:
-                  first:
-                      type: "Int"
-                      defaultValue: 30
-                  orderBy:
-                      type: "ProposalOrder"
-                      defaultValue: { field: CREATED_AT, direction: DESC }
-            reportings:
-              type: "ReportingConnection!"
-              argsBuilder: "Relay::Connection"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalReportingsResolver", [value, args])'
-              args:
-                  first:
-                      type: "Int"
-                      defaultValue: 30
-                  orderBy:
-                      type: "ReportingOrder"
-                      defaultValue: { field: CREATED_AT, direction: DESC }
+              type: "[Post!]!"
+              resolve: "@=resolver('proposal_news', [value])"
             project:
               type: "Project!"
             status:
@@ -64,9 +45,6 @@ Proposal:
                 type: "District"
             address:
                 type: "Address"
-            formattedAddress:
-                type: "String"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Type\\FormattedAddressTypeResolver", [value])'
             author:
                 type: "User!"
                 description: "The author of the contribution."
@@ -81,17 +59,11 @@ Proposal:
                 description: "The update user."
                 resolve: "@=value.getUpdateAuthor()"
             publicationStatus:
-                type: "ProposalPublicationStatus!"
-                description: "The publication status for this proposal."
+                type: "PublicationStatus!"
+                description: "The publication status."
                 resolve: "@=resolver('proposal_publicationStatus', [value])"
             trashedReason:
                 type: "String"
-            trashed:
-                type: "Boolean"
-            trashedAt:
-                type: "DateTime"
-            expired:
-                type: "Boolean"
             id:
                 type: "ID!"
                 description: "The id of the contribution."
@@ -127,30 +99,6 @@ Proposal:
             commentsCount:
               type: "Int!"
               description: "Count number of comments for the proposal."
-            comments:
-              type: "CommentConnection!"
-              argsBuilder: "Relay::Connection"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalCommentsResolver", [value, args])'
-              args:
-                first:
-                  type: "Int"
-                  defaultValue: 30
-                orderBy:
-                    type: "CommentOrder"
-                    defaultValue: { field: CREATED_AT, direction: DESC }
-            votes:
-              type: "ProposalVoteConnection!"
-              argsBuilder: "Relay::Connection"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalVotesResolver", [value, args])'
-              args:
-                first:
-                  type: "Int"
-                  defaultValue: 30
-                orderBy:
-                  type: "ProposalVotesOrder"
-                  defaultValue: { field: CREATED_AT, direction: DESC }
-                step:
-                  type: "ID!"
             createdAt:
               type: "DateTime!"
               description: "Identifies the date and time when the object was created."
@@ -203,7 +151,7 @@ Proposal:
                     last:
                       type: "Int"
                       description: "Returns the last n elements from the list."
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalFollowerConnection", [value, args])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalFollowerConnection", [value, args])'
             viewerIsFollowing:
                 access: "@=isAuthenticated()"
                 type: "Boolean!"

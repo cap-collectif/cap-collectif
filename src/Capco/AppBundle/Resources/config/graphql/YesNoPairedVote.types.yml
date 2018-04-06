@@ -6,7 +6,7 @@ YesNoPairedVote:
             id:
               type: "ID!"
             author:
-                type: "User"
+                type: "User!"
                 description: "The author of the contribution."
             value:
                 type: "YesNoPairedVoteValue!"

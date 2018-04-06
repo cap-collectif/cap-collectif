@@ -128,7 +128,7 @@ User:
                 description: "Is user accepted the external communication during the registration."
             followingProposals:
                 type: "ProposalConnection!"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalsFollowedByUserResolver", [value, args])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalsFollowedByUserResolver", [value, args])'
                 description: "Array of proposals followed by current user."
                 args:
                     orderBy:
