@@ -4,14 +4,13 @@ namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Utils\Text;
-use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\Collection;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\HttpFoundation\Request;
 
 class ProposalFormResolver implements ContainerAwareInterface
 {
@@ -50,41 +49,44 @@ class ProposalFormResolver implements ContainerAwareInterface
         return $districts;
     }
 
-    public function resolveProposals(ProposalForm $form, Arg $args, User $user): Connection
+    public function resolveProposals(ProposalForm $form, Arg $args, $user, Request $request): Connection
     {
         $repo = $this->container->get('capco.proposal.repository');
 
-        $paginator = new Paginator(function (int $offset, int $limit) use ($form, $args, $user) {
+        $paginator = new Paginator(function (int $offset, int $limit) use ($repo,$form, $args, $user, $request) {
             if ($args->offsetExists('affiliations')) {
                 $affiliations = $args->offsetGet('affiliations');
-
                 if (in_array('EVALUER', $affiliations, true)) {
                     $direction = $args->offsetGet('orderBy')['direction'];
                     $field = $args->offsetGet('orderBy')['field'];
 
-                    $order = $this->findOrderFromFieldAndDirection($field, $direction);
-
-                    $filters['proposalForm'] = $form->getId();
-                    $filters['collectStep'] = $form->getStep()->getType();
-
-                    $seed = $user ? $user->getId() : $this->container->get('request')->getClientIp();
-
-                    $results = $this->container->get('capco.search.proposal_search')->searchProposals(
-                        $offset,
-                        $limit,
-                        $order,
-                        null,
-                        $filters,
-                        $seed
-                    );
-
-                    return $results;
+                    return $repo->getProposalsByFormAndEvaluer($form, $user, $offset, $limit, $field, $direction)->getIterator()->getArrayCopy();
                 }
+            } else {
+                $direction = $args->offsetGet('orderBy')['direction'];
+                $field = $args->offsetGet('orderBy')['field'];
+
+                $order = $this->findOrderFromFieldAndDirection($field, $direction);
+
+                $filters['proposalForm'] = $form->getId();
+                $filters['collectStep'] = $form->getStep()->getType();
+
+                $seed = method_exists($user, 'getId') ? $user->getId() : $request->getClientIp();
+
+                $results = $this->container->get('capco.search.proposal_search')->searchProposals(
+                    $offset,
+                    $limit,
+                    $order,
+                    null,
+                    $filters,
+                    $seed
+                );
+
+                return $results['proposals'];
             }
-            throw new UserError('Not implemented');
         });
 
-        $totalCount = $repo->countProposalsByFormAndEvaluer($form, $user);
+        $totalCount = 'anon.' !== $user ? $repo->countProposalsByFormAndEvaluer($form, $user) : 0;
 
         return $paginator->auto($args, $totalCount);
     }
