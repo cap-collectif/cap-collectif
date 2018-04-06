@@ -692,15 +692,17 @@ class UserRepository extends EntityRepository
         return $query->getQuery()->getResult();
     }
 
-    public function findUsersFollowingAProposal(Proposal $proposal): array
+    public function findUsersFollowingAProposal(Proposal $proposal, $first = 0, $offset = 100): Paginator
     {
         $query = $this->createQueryBuilder('u')
             ->join('u.followingProposals', 'f')
             ->join('f.proposal', 'p')
-            ->where('p.id = :proposalId')
-            ->setParameter('proposalId', $proposal->getId());
+            ->where('f.proposal = :propsoal')
+            ->setParameter('propsoal', $proposal)
+            ->setMaxResults($offset)
+            ->setFirstResult($first);
 
-        return $query->getQuery()->getResult();
+        return new Paginator($query);
     }
 
     public function findFollowersToExport(string $proposalId): array
@@ -723,7 +725,7 @@ class UserRepository extends EntityRepository
 
     public function isViewerFollowingProposal(Proposal $proposal, User $viewer): bool
     {
-        return $this->countFollower($proposal, $viewer) > 0;
+        return $this->countFollowerForProposalAndUser($proposal, $viewer) > 0;
     }
 
     public function getByCriteriaOrdered(array $criteria, array $orderBy, $limit = 32, $offset = 0): Paginator
@@ -766,27 +768,64 @@ class UserRepository extends EntityRepository
         return new Paginator($query);
     }
 
-    public function countFollower(Proposal $proposal, User $user = null): int
+    public function countFollowerForProposal(Proposal $proposal): int
+    {
+        $query = $this->createQueryBuilder('u')
+            ->select('count(u.id)')
+            ->join('u.followingProposals', 'f')
+            ->andWhere('f.proposal = :proposal')
+            ->setParameter('proposal', $proposal);
+
+        return (int) $query->getQuery()->getSingleScalarResult();
+    }
+
+    public function countFollowerForProposalAndUser(Proposal $proposal, User $user): int
     {
         $query = $this->createQueryBuilder('u')
             ->select('count(u.id)')
             ->join('u.followingProposals', 'f')
             ->join('f.proposal', 'p')
             ->andWhere('p.id = :proposalId')
-            ->setParameter('proposalId', $proposal->getId());
-
-        if (null !== $user) {
-            $query->andWhere('u.id = :userId')
-                ->setParameter('userId', $user->getId());
-        }
+            ->andWhere('u.id = :userId')
+            ->setParameter('proposalId', $proposal->getId())
+            ->setParameter('userId', $user->getId());
 
         return $query->getQuery()->getSingleScalarResult();
     }
 
+    public function findUsersFollowingProposal()
+    {
+        $followerQuery = $this->getEntityManager()->getRepository('CapcoAppBundle:Follower');
+        $followerQuery = $followerQuery->createQueryBuilder('f2')->select('f2.user');
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->select('u, p, f1')
+            ->join('u.followingProposals', 'f1')
+            ->join('f1.proposal', 'p');
+        $qb->where($qb->expr()->in(
+            'u.id', $followerQuery->getDQL()
+        ));
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function countProposalsFollowed(User $user): int
+    {
+        $query = $this->createQueryBuilder('u')
+            ->select('count(f.id)')
+            ->join('u.followingProposals', 'f')
+            ->andWhere('f.user = :user')
+            ->setParameter('user', $user);
+
+        return $query->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @return \Doctrine\ORM\QueryBuilder
+     */
     protected function getIsEnabledQueryBuilder(): QueryBuilder
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.enabled = :enabled')
-            ->setParameter('enabled', true);
+        return $this
+            ->createQueryBuilder('u')
+            ->andWhere('u.enabled = true');
     }
 }

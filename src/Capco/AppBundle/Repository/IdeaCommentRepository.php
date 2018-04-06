@@ -29,15 +29,15 @@ class IdeaCommentRepository extends EntityRepository
             ->orderBy('c.pinned', 'DESC')
         ;
 
-        if ($filter === 'old') {
+        if ('old' === $filter) {
             $qb->addOrderBy('c.updatedAt', 'ASC');
         }
 
-        if ($filter === 'last') {
+        if ('last' === $filter) {
             $qb->addOrderBy('c.updatedAt', 'DESC');
         }
 
-        if ($filter === 'popular') {
+        if ('popular' === $filter) {
             $qb->addOrderBy('c.votesCount', 'DESC');
         }
 

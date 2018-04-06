@@ -96,7 +96,7 @@ Scenario: API client wants to find popular comments of an idea
   And the comments should be ordered by popularity
 
 ## Create Comments
-  ### Anonymous
+### Anonymous
 @database
 Scenario: Anonymous API client wants to add a comment
   When I send a POST request to "/api/ideas/2/comments" with json:
@@ -132,7 +132,7 @@ Scenario: Anonymous API client wants to add a comment without user informations
   """
   Then the JSON response status code should be 400
 
-  ### Logged
+### Logged
 
 @database
 Scenario: logged in API client wants to add a comment

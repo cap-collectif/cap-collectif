@@ -5,9 +5,17 @@ Project:
         description: "A participatory project."
         fields:
             id:
-              type: "ID!"
+                type: "ID!"
             steps:
-              type: "[Step!]!"
-              resolve: "@=resolver('project_steps', [value])"
+                type: "[Step!]!"
+                resolve: "@=resolver('project_steps', [value])"
             title:
-              type: "String!"
+                type: "String!"
+            contributors:
+                type: "UserConnection!"
+                description: "A list of contributor associated with the project."
+                argsBuilder: "Relay::Connection"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProjectContributorResolver", [value, args])'
+            url:
+              type: "String"
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProjectUrlResolver", [value])'

@@ -32,7 +32,7 @@ class QuestionChoiceSerializationListener extends AbstractSerializationListener
         $questionChoice = $event->getObject();
 
         if ($questionChoice->getImage()) {
-            $format = $questionChoice->getQuestion()->getInputType() === 'radio' ? 'form_radio' : 'form';
+            $format = 'radio' === $questionChoice->getQuestion()->getInputType() ? 'form_radio' : 'form';
             try {
                 $event->getVisitor()->addData(
                     'image', [

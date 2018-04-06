@@ -1,4 +1,4 @@
-@proposal_follow
+@proposal_follow @proposal_follow_graphql
 Feature: Unfollow Proposals
 
 @database
@@ -36,13 +36,22 @@ Scenario: GraphQL client wants to unfollow a proposal with current user and chec
   And I send a GraphQL POST request:
   """
   {
-    "query": "query getFollowingProposal {
+    "query": "query getFollowingProposal($count: Int, $cursor: String) {
       viewer {
-        followingProposal {
-          id
+        followingProposals(first: $count, after: $cursor) {
+          edges {
+            cursor
+            node {
+              id
+            }
+          }
         }
       }
-    }"
+    }",
+    "variables": {
+      "count": 32,
+      "cursor": null
+    }
   }
   """
   Then the JSON response should match:
@@ -50,11 +59,16 @@ Scenario: GraphQL client wants to unfollow a proposal with current user and chec
   {
     "data": {
       "viewer": {
-        "followingProposal": [
-          {
-            "id": "proposal2"
-          }
-        ]
+        "followingProposals": {
+          "edges": [
+            {
+              "cursor": @string@,
+              "node": {
+                "id": "proposal2"
+              }
+            }
+          ]
+        }
       }
     }
   }

@@ -31,7 +31,17 @@ class Version20180328092156 extends AbstractMigration
     public function postUp(Schema $schema)
     {
         $request = $this->connection->fetchAll("SELECT body FROM page WHERE slug = 'charte' LIMIT 1", ['']);
-        $this->siteParamer['value'] = $request[0]['body'] ?: 'Charte blabla' ;
+        $menuItemChart = $this->connection->fetchAll("SELECT * FROM menu_item WHERE link = 'pages/charte' LIMIT 1", ['']);
+
+        if(!empty($menuItemChart[0])) {
+            $this->connection->delete('menu_item', ['link' => 'pages/charte']);
+        }
+
+        if(!empty($request[0])) {
+            $this->siteParamer['value'] = $request[0]['body'];
+        } else {
+            $this->siteParamer['value'] = 'Charte blabla';
+        }
 
         $this->connection->insert('site_parameter', $this->siteParamer);
         $this->write('-> new site parameter');

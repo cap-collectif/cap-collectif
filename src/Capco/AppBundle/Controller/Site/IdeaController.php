@@ -37,7 +37,7 @@ class IdeaController extends Controller
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
-        if ($pagination !== null && $pagination !== 0) {
+        if (null !== $pagination && 0 !== $pagination) {
             $nbPage = ceil($trashedIdeasNb / $pagination);
         }
 

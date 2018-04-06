@@ -60,7 +60,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
         Object {
           "id": "group4",
           "title": "Comité de suvi",
-          "usersConnection": Object {
+          "users": Object {
             "edges": Array [
               Object {
                 "node": Object {
@@ -149,7 +149,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
         Object {
           "id": "group4",
           "title": "Comité de suvi",
-          "usersConnection": Object {
+          "users": Object {
             "edges": Array [
               Object {
                 "node": Object {
@@ -240,7 +240,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
         Object {
           "id": "group4",
           "title": "Comité de suvi",
-          "usersConnection": Object {
+          "users": Object {
             "edges": Array [
               Object {
                 "node": Object {
@@ -331,7 +331,7 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
         Object {
           "id": "group4",
           "title": "Comité de suvi",
-          "usersConnection": Object {
+          "users": Object {
             "edges": Array [
               Object {
                 "node": Object {

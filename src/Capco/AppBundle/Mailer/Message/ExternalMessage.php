@@ -12,9 +12,9 @@ class ExternalMessage extends Message
     public function getFooterVars(): array
     {
         return [
-            '%to%' => $this->getRecipient(0) ? self::escape($this->getRecipient(0)->getEmailAddress()) : '',
-            '%sitename%' => $this->getSitename(),
-            '%siteUrl%' => $this->getSiteUrl(),
+            '{to}' => $this->getRecipient(0) ? self::escape($this->getRecipient(0)->getEmailAddress()) : '',
+            '{sitename}' => $this->getSitename(),
+            '{siteUrl}' => $this->getSiteUrl(),
         ];
     }
 }

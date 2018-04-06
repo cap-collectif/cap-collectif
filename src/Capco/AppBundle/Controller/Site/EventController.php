@@ -39,7 +39,7 @@ class EventController extends Controller
             'method' => 'POST',
         ]);
 
-        if ($request->getMethod() === 'POST') {
+        if ('POST' === $request->getMethod()) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
@@ -90,7 +90,7 @@ class EventController extends Controller
             'method' => 'POST',
         ]);
 
-        if ($request->getMethod() === 'POST') {
+        if ('POST' === $request->getMethod()) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
@@ -145,7 +145,7 @@ class EventController extends Controller
         $registration = $eventHelper->findUserRegistrationOrCreate($event, $user);
         $form = $this->createForm(new EventRegistrationType($user, $registration->isConfirmed()), $registration);
 
-        if ($request->getMethod() === 'POST') {
+        if ('POST' === $request->getMethod()) {
             $registration->setIpAddress($request->getClientIp());
             $registration->setUser($user);
             $form->handleRequest($request);

@@ -22,7 +22,7 @@ class EnvHelper
     {
         $value = getenv($key);
 
-        if ($value === false) {
+        if (false === $value) {
             return $value instanceof Closure ? $value() : $value;
         }
 
@@ -59,7 +59,7 @@ class EnvHelper
     private static function startsWith(string $haystack, $needles): bool
     {
         foreach ((array) $needles as $needle) {
-            if ($needle !== '' && substr($haystack, 0, strlen($needle)) === (string) $needle) {
+            if ('' !== $needle && substr($haystack, 0, strlen($needle)) === (string) $needle) {
                 return true;
             }
         }

@@ -50,7 +50,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
             ->leftJoin('a.Media', 'am')
         ;
 
-        if ($term !== null) {
+        if (null !== $term) {
             $qb
                 ->andWhere('se.title LIKE :term')
                 ->setParameter('term', '%' . $term . '%')
@@ -174,7 +174,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
                     --$l;
                 }
                 // Stack is empty (we are inspecting the root)
-                if ($l === 0) {
+                if (0 === $l) {
                     // Assigning the root child
                     $i = count($nestedTree);
                     $nestedTree[$i] = $item;
@@ -254,7 +254,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
             )
             ->leftJoin('se.children', 'c', 'WITH', $this->getOnClauseForChildren($type))
         ;
-        if ($type === 'published') {
+        if ('published' === $type) {
             $qb->addSelect(
                 'se.votes',
                 'se.linkedDataUrl',
@@ -388,7 +388,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
     protected function addAndQueryCondition($qb, $field, $value)
     {
         if (in_array($field, self::$allowedFields, true)) {
-            if ($value === null) {
+            if (null === $value) {
                 return $qb
                     ->andWhere('se.' . $field . ' IS NULL');
             }

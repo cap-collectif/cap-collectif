@@ -3,7 +3,10 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 
@@ -321,12 +324,42 @@ class ArgumentRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
+    public function countByAuthorAndProject(User $author, Project $project): int
+    {
+        return $this->getIsEnabledQueryBuilder()
+          ->select('COUNT(DISTINCT a)')
+          ->leftJoin('a.opinion', 'o')
+          ->leftJoin('a.opinionVersion', 'ov')
+          ->leftJoin('ov.parent', 'ovo')
+          ->andWhere('o.step IN (:steps) OR ovo.step IN (:steps)')
+          ->andWhere('a.Author = :author')
+          ->setParameter('steps', array_map(function ($step) {
+              return $step;
+          }, $project->getRealSteps()))
+          ->setParameter('author', $author)
+          ->getQuery()
+          ->getSingleScalarResult();
+    }
+
+    public function countByAuthorAndStep(User $author, ConsultationStep $step): int
+    {
+        return $this->getIsEnabledQueryBuilder()
+          ->select('COUNT(DISTINCT a)')
+          ->leftJoin('a.opinion', 'o')
+          ->leftJoin('a.opinionVersion', 'ov')
+          ->leftJoin('ov.parent', 'ovo')
+          ->andWhere('o.step = :step OR ovo.step = :step')
+          ->andWhere('a.Author = :author')
+          ->setParameter('step', $step)
+          ->setParameter('author', $author)
+          ->getQuery()
+          ->getSingleScalarResult();
+    }
+
     /**
      * Get all arguments by user.
      *
-     * @param $user
-     *
-     * @return mixed
+     * @param mixed $user
      */
     public function getByUser($user)
     {

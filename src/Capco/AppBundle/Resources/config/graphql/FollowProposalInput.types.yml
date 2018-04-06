@@ -5,3 +5,6 @@ FollowProposalInput:
             proposalId:
                 type: "ID!"
                 description: "The proposal id"
+            notifiedOf:
+                type: "PickFollowTypeValue"
+                description: "The type of notification"

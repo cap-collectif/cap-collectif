@@ -42,9 +42,6 @@ Scenario: GraphQL client wants to update a proposal form
           districts {
             id
             name
-            geojson
-            geojsonStyle
-            displayedOnMap
           }
           questions {
             id
@@ -85,7 +82,8 @@ Scenario: GraphQL client wants to update a proposal form
         "zoomMap": 0,
         "commentable": true,
         "costable": true,
-        "categories": [{
+        "categories": [
+          {
             "name": "Aménagement"
           },
           {
@@ -95,17 +93,16 @@ Scenario: GraphQL client wants to update a proposal form
             "name": "New category"
           }
         ],
-        "districts": [{
+        "districts": [
+          {
             "name": "Beauregard",
             "displayedOnMap": false,
-            "geojson": "",
-            "geojsonStyle": ""
+            "geojson": ""
           },
           {
             "name": "Other district",
             "displayedOnMap": true,
-            "geojson": "",
-            "geojsonStyle": ""
+            "geojson": ""
           }
         ],
         "questions": []

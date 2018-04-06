@@ -439,7 +439,7 @@ class Project implements IndexableInterface
         return $this;
     }
 
-    public function getRealSteps()
+    public function getRealSteps(): array
     {
         $steps = [];
         foreach ($this->steps as $qaq) {
@@ -822,10 +822,7 @@ class Project implements IndexableInterface
         return $count;
     }
 
-    /**
-     * @return AbstractStep|null
-     */
-    public function getFirstStep()
+    public function getFirstStep(): ?AbstractStep
     {
         $first = null;
         if (!empty($this->steps)) {

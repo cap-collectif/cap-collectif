@@ -276,6 +276,36 @@ class ProposalRepository extends EntityRepository
             ->execute();
     }
 
+    public function countByAuthorAndProject(User $author, Project $project): int
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+          ->select('COUNT(DISTINCT proposal)')
+          ->leftJoin('proposal.proposalForm', 'form')
+          ->andWhere('form.step IN (:steps)')
+          ->setParameter('steps', array_map(function ($step) {
+              return $step;
+          }, $project->getRealSteps()))
+          ->andWhere('proposal.author = :author')
+          ->setParameter('author', $author)
+        ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function countByAuthorAndStep(User $author, CollectStep $step): int
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+          ->select('COUNT(DISTINCT proposal)')
+          ->leftJoin('proposal.proposalForm', 'f')
+          ->andWhere('proposal.author = :author')
+          ->andWhere('f.step =:step')
+          ->setParameter('step', $step)
+          ->setParameter('author', $author)
+      ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
     public function getTrashedOrUnpublishedByProject(Project $project)
     {
         $qb = $this->createQueryBuilder('p')
@@ -457,15 +487,115 @@ class ProposalRepository extends EntityRepository
             ->andWhere($alias . '.address IS NOT NULL');
     }
 
-    public function findFollowingProposalByUser($userid)
+    public function findFollowingProposalByUser(User $user, $first = 0, $offset = 100): Paginator
     {
         $query = $this->createQueryBuilder('p')
             ->leftJoin('p.followers', 'f')
-            ->leftJoin('f.user', 'u')
-            ->where('u.id = :userId')
-            ->setParameter('userId', $userid);
+            ->where('f.user = :user')
+            ->setParameter('user', $user)
+            ->setMaxResults($offset)
+            ->setFirstResult($first);
 
-        return $query->getQuery()->getResult();
+        return new Paginator($query);
+    }
+
+    public function countFollowingProposalByUser(User $user): int
+    {
+        $query = $this->createQueryBuilder('p');
+        $query->select('COUNT(p.id)')
+            ->leftJoin('p.followers', 'f')
+            ->where('f.user = :user')
+            ->setParameter('user', $user);
+
+        return (int) $query->getQuery()->getSingleScalarResult();
+    }
+
+    public function countProposalVotesCreatedBetween(\DateTime $from, \DateTime $to, string $proposalId): array
+    {
+        $qb = $this->createQueryBuilder('proposal');
+        $qb->select('proposal.id')
+        ->addSelect('COUNT(selectionVotes.id) as sVotes,COUNT(collectVotes.id) as cVotes')
+        ->leftJoin('proposal.collectVotes', 'collectVotes')
+        ->leftJoin('proposal.selectionVotes', 'selectionVotes')
+        ->andWhere(
+            $qb->expr()->between(
+                'selectionVotes.createdAt',
+                ':from',
+                ':to'
+            ))
+            ->orWhere(
+                $qb->expr()->between(
+                    'collectVotes.createdAt',
+                    ':from',
+                    ':to'
+                ))
+            ->andWhere(
+                $qb->expr()->eq(
+                    'proposal.id',
+                    ':id'
+                ))
+            ->setParameters([
+                'from' => $from,
+                'to' => $to,
+                'id' => $proposalId,
+            ]);
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
+    public function countProposalCommentsCreatedBetween(\DateTime $from, \DateTime $to, string $proposalId): array
+    {
+        $qb = $this->createQueryBuilder('proposal');
+        $qb->select('proposal.id');
+        $qb->addSelect('COUNT(comments.id) as countComment')
+            ->leftJoin('proposal.comments', 'comments')
+            ->andWhere(
+                $qb->expr()->between(
+                    'comments.createdAt',
+                    ':from',
+                    ':to'
+                ))
+            ->andWhere(
+                $qb->expr()->eq(
+                    'proposal.id',
+                    ':id'
+                ))
+            ->setParameters([
+                'from' => $from,
+                'to' => $to,
+                'id' => $proposalId,
+            ]);
+
+        return $qb->getQuery()->getArrayResult();
+    }
+
+    public function proposalStepChangedBetween(\DateTime $from, \DateTime $to, string $proposalId): array
+    {
+        $qb = $this->createQueryBuilder('proposal');
+        $qb->select('proposal.id')
+            ->addSelect('sStep.title as titleStep', 'selections.createdAt', 'status.name as sName')
+            ->leftJoin('proposal.selections', 'selections')
+            ->leftJoin('selections.selectionStep', 'sStep')
+            ->leftJoin('selections.status', 'status')
+            ->andWhere(
+                $qb->expr()->between(
+                    'selections.createdAt',
+                    ':from',
+                    ':to'
+                ))
+            ->andWhere(
+                $qb->expr()->eq(
+                    'proposal.id',
+                    ':id'
+                ))
+            ->orderBy('selections.createdAt', 'DESC')
+            ->setParameters([
+                'from' => $from,
+                'to' => $to,
+                'id' => $proposalId,
+            ]);
+
+        return $qb->getQuery()->getArrayResult();
     }
 
     protected function getIsEnabledQueryBuilder(string $alias = 'proposal'): QueryBuilder
@@ -478,7 +608,7 @@ class ProposalRepository extends EntityRepository
             ->andWhere($alias . '.enabled = true');
     }
 
-    private function qbProposalsByFormAndEvaluer(ProposalForm $form, User $user)
+    private function qbProposalsByFormAndEvaluer(ProposalForm $form, User $user): QueryBuilder
     {
         return $this->createQueryBuilder('proposal')
             ->leftJoin('proposal.evaluers', 'group')
