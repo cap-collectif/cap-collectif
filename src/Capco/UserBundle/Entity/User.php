@@ -34,7 +34,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     ];
 
     // Hack for ParticipantEdge
-    public $registredEvent;
+    public $registeredEvent;
 
     protected $samlId;
     protected $parisId;

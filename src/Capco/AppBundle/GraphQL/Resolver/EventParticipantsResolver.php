@@ -25,13 +25,13 @@ class EventParticipantsResolver
 
     public function __invoke(Event $event, Arg $args): Connection
     {
-        $registred = $this->userRepository->getRegisteredParticipantsInEvent($event);
-        foreach ($registred as &$user) {
-            $user->registredEvent = $event;
+        $registered = $this->userRepository->getRegisteredParticipantsInEvent($event);
+        foreach ($registered as &$user) {
+            $user->registeredEvent = $event;
         }
         $notRegistered = $this->eventRegistrationRepository->getNotRegisteredParticipantsInEvent($event);
 
-        $participants = $registred + $notRegistered;
+        $participants = $registered + $notRegistered;
         $totalCount = count($participants);
 
         $paginator = new Paginator(function (int $offset, int $limit) use ($participants) {

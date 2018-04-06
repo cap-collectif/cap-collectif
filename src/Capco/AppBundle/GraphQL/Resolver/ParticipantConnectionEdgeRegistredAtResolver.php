@@ -22,7 +22,7 @@ class ParticipantConnectionEdgeRegistredAtResolver
             return $edge->node->getCreatedAt();
         }
         if ($edge->node instanceof User) {
-            $registration = $this->eventRegistrationRepository->getOneByUserAndEvent($edge->node, $edge->node->registredEvent);
+            $registration = $this->eventRegistrationRepository->getOneByUserAndEvent($edge->node, $edge->node->registeredEvent);
 
             return $registration->getCreatedAt();
         }

@@ -82,7 +82,7 @@ query {
       participants(first: 1000) {
         edges {
           registeredAt
-          registredAnonymously
+          registeredAnonymously
           node {
             ... on User {
               ' . USER_FRAGMENT . '
@@ -150,7 +150,7 @@ query {
                       $participant['username'],
                       $participant['userType'] ? $participant['userType']['name'] : null,
                       $edge['registeredAt'],
-                      $edge['registredAnonymously'] ? 'yes' : 'no',
+                      $edge['registeredAnonymously'] ? 'yes' : 'no',
                       $participant['createdAt'],
                       $participant['updatedAt'],
                       $participant['expired'],
@@ -177,7 +177,7 @@ query {
                       $participant['username'],
                       null,
                       $edge['registeredAt'],
-                      $edge['registredAnonymously'] ? 'yes' : 'no',
+                      $edge['registeredAnonymously'] ? 'yes' : 'no',
                       null,
                       null,
                       null,

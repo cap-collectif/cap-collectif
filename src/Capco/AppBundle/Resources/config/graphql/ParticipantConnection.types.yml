@@ -10,6 +10,6 @@ ParticipantConnection:
             registeredAt:
                 type: DateTime!
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ParticipantConnectionEdgeRegisteredAtResolver", [value])'
-            registredAnonymously:
+            registeredAnonymously:
                 type: Boolean!
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ParticipantConnectionEdgeRegisteredAnonymouslyResolver", [value])'

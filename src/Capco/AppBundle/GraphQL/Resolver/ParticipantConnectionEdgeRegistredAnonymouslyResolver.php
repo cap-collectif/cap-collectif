@@ -22,7 +22,7 @@ class ParticipantConnectionEdgeRegistredAnonymouslyResolver
             return $edge->node->isPrivate();
         }
         if ($edge->node instanceof User) {
-            $registration = $this->eventRegistrationRepository->getOneByUserAndEvent($edge->node, $edge->node->registredEvent);
+            $registration = $this->eventRegistrationRepository->getOneByUserAndEvent($edge->node, $edge->node->registeredEvent);
 
             return $registration->isPrivate();
         }

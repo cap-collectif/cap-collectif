@@ -1051,7 +1051,7 @@ type ParticipantConnection {
 # An edge in a connection.
 type ParticipantEdge {
   registeredAt: DateTime!
-  registredAnonymously: Boolean!
+  registeredAnonymously: Boolean!
 
   # The item at the end of the edge.
   node: Participant!
