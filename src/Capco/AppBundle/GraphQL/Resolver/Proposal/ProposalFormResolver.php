@@ -53,14 +53,32 @@ class ProposalFormResolver implements ContainerAwareInterface
     public function resolveProposals(ProposalForm $form, Arg $args, User $user): Connection
     {
         $repo = $this->container->get('capco.proposal.repository');
-        $paginator = new Paginator(function (int $offset, int $limit) use ($repo, $form, $args, $user) {
+
+        $paginator = new Paginator(function (int $offset, int $limit) use ($form, $args, $user) {
             if ($args->offsetExists('affiliations')) {
                 $affiliations = $args->offsetGet('affiliations');
+
                 if (in_array('EVALUER', $affiliations, true)) {
                     $direction = $args->offsetGet('orderBy')['direction'];
                     $field = $args->offsetGet('orderBy')['field'];
 
-                    return $repo->getProposalsByFormAndEvaluer($form, $user, $offset, $limit, $field, $direction)->getIterator()->getArrayCopy();
+                    $order = $this->findOrderFromFieldAndDirection($field, $direction);
+
+                    $filters['proposalForm'] = $form->getId();
+                    $filters['collectStep'] = $form->getStep()->getType();
+
+                    $seed = $user ? $user->getId() : $this->container->get('request')->getClientIp();
+
+                    $results = $this->container->get('capco.search.proposal_search')->searchProposals(
+                        $offset,
+                        $limit,
+                        $order,
+                        null,
+                        $filters,
+                        $seed
+                    );
+
+                    return $results;
                 }
             }
             throw new UserError('Not implemented');
@@ -101,5 +119,39 @@ class ProposalFormResolver implements ContainerAwareInterface
                 'projectSlug' => $project->getSlug(),
                 'stepSlug' => $step->getSlug(),
             ], true);
+    }
+
+    public function findOrderFromFieldAndDirection(string $field, string $direction): string
+    {
+        $order = 'random';
+
+        switch ($field) {
+            case 'VOTES':
+                if ('ASC' === $direction) {
+                    $order = 'least-votes';
+                } else {
+                    $order = 'votes';
+                }
+                break;
+            case 'CREATED_AT':
+                if ('ASC' === $direction) {
+                    $order = 'old';
+                } else {
+                    $order = 'last';
+                }
+                break;
+            case 'COMMENTS':
+                $order = 'comments';
+                break;
+            case 'COST':
+                if ('ASC' === $direction) {
+                    $order = 'cheap';
+                } else {
+                    $order = 'expensive';
+                }
+                break;
+        }
+
+        return $order;
     }
 }

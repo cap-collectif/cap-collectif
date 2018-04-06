@@ -61,9 +61,12 @@ class CollectStepsController extends FOSRestController
 
         $seed = $this->getUser() ? $this->getUser()->getId() : $this->get('request')->getClientIp();
 
+        $limit = $pagination ?? 10;
+        $offset = ($page - 1) * $pagination;
+
         $results = $this->get('capco.search.proposal_search')->searchProposals(
-            $page,
-            $pagination,
+            $offset,
+            $limit,
             $order,
             $terms,
             $filters,
