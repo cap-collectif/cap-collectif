@@ -698,6 +698,7 @@ class UserRepository extends EntityRepository
             ->join('u.followingProposals', 'f')
             ->join('f.proposal', 'p')
             ->where('f.proposal = :propsoal')
+            ->andWhere('p.deletedAt IS NULL')
             ->setParameter('propsoal', $proposal)
             ->setMaxResults($offset)
             ->setFirstResult($first);
@@ -717,6 +718,7 @@ class UserRepository extends EntityRepository
             ->join('f.proposal', 'p')
             ->join('u.userType', 'ut')
             ->where('p.id = :proposalId')
+            ->andWhere('p.deletedAt IS NULL')
             ->orderBy('f.followedAt', 'ASC')
             ->setParameter('proposalId', $proposalId);
 
@@ -732,7 +734,8 @@ class UserRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->join('u.followingProposals', 'f')
-            ->join('f.proposal', 'p');
+            ->join('f.proposal', 'p')
+            ->andWhere('p.deletedAt IS NULL');
 
         if (isset($criteria['proposal'])) {
             $qb
@@ -774,6 +777,7 @@ class UserRepository extends EntityRepository
             ->select('count(u.id)')
             ->join('u.followingProposals', 'f')
             ->andWhere('f.proposal = :proposal')
+            ->andWhere('p.deletedAt IS NULL')
             ->setParameter('proposal', $proposal);
 
         return (int) $query->getQuery()->getSingleScalarResult();
@@ -786,6 +790,7 @@ class UserRepository extends EntityRepository
             ->join('u.followingProposals', 'f')
             ->join('f.proposal', 'p')
             ->andWhere('p.id = :proposalId')
+            ->andWhere('p.deletedAt IS NULL')
             ->andWhere('u.id = :userId')
             ->setParameter('proposalId', $proposal->getId())
             ->setParameter('userId', $user->getId());
@@ -800,7 +805,8 @@ class UserRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('u, p, f1')
             ->join('u.followingProposals', 'f1')
-            ->join('f1.proposal', 'p');
+            ->join('f1.proposal', 'p')
+            ->andWhere('p.deletedAt IS NULL');
         $qb->where($qb->expr()->in(
             'u.id', $followerQuery->getDQL()
         ));
@@ -813,8 +819,11 @@ class UserRepository extends EntityRepository
         $query = $this->createQueryBuilder('u')
             ->select('count(f.id)')
             ->join('u.followingProposals', 'f')
+            ->join('f.proposal', 'p')
             ->andWhere('f.user = :user')
-            ->setParameter('user', $user);
+            ->andWhere('p.deletedAt IS NULL')
+
+        ->setParameter('user', $user);
 
         return $query->getQuery()->getSingleScalarResult();
     }

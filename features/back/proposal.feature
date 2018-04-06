@@ -67,6 +67,18 @@ Scenario: Logged in admin, wants to change the proposal's status
   And I wait 2 seconds
   Then I should see "global.saved"
 
+@database @elasticsearch @dev
+Scenario: Logged in admin, wants to delete a proposal and check if follower are not present
+  Given I am logged in as admin
+  And I go to the admin proposal page with proposalid "proposal10"
+  Then I go to the admin proposal status tab
+  And I delete the proposal
+  And I confirm the admin proposal deletion
+  And I should see status DELETED
+  Then I reload the page
+  And I go to the admin proposal followers tab
+  And I should not see an ".proposal__follower" element
+
 @database @elasticsearch
 Scenario: Logged in admin, wants to delete a proposal and re published it
   Given I am logged in as admin
