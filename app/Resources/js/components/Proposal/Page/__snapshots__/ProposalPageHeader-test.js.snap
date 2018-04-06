@@ -119,7 +119,6 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none 1`]
   />
   <Relay(ProposalFollowButton)
     className="pull-right btn-lg"
-    isAuthenticated={true}
     proposal={
       Object {
         "author": Object {
@@ -260,7 +259,6 @@ exports[`<ProposalPageHeader /> should render a proposal header 1`] = `
   />
   <Relay(ProposalFollowButton)
     className="pull-right btn-lg"
-    isAuthenticated={true}
     proposal={
       Object {
         "author": Object {

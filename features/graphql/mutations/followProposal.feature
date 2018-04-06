@@ -11,16 +11,12 @@ Scenario: GraphQL client wants to follow a proposal with current user and check 
       followProposal(input: $input) {
         proposal {
           id
-          followerConfiguration{
-            notifiedOf
-          }
         }
       }
     }",
     "variables": {
       "input": {
-        "proposalId": "proposal8",
-        "notifiedOf": "DEFAULT"
+        "proposalId": "proposal8"
       }
     }
   }
@@ -31,10 +27,7 @@ Scenario: GraphQL client wants to follow a proposal with current user and check 
     "data": {
       "followProposal": {
         "proposal": {
-          "id": "proposal8",
-          "followerConfiguration":{
-            "notifiedOf":"DEFAULT"
-          }
+          "id": "proposal8"
         }
       }
     }
@@ -43,22 +36,13 @@ Scenario: GraphQL client wants to follow a proposal with current user and check 
   And I send a GraphQL POST request:
   """
   {
-    "query": "query getFollowingProposal($count: Int, $cursor: String) {
+    "query": "query getFollowingProposal {
       viewer {
-        followingProposals(first: $count, after: $cursor) {
-          edges {
-            cursor
-            node {
-              id
-            }
-          }
+        followingProposal {
+          id
         }
       }
-    }",
-    "variables": {
-      "count": 32,
-      "cursor": null
-    }
+    }"
   }
   """
   Then the JSON response should match:
@@ -66,17 +50,17 @@ Scenario: GraphQL client wants to follow a proposal with current user and check 
   {
     "data": {
       "viewer": {
-        "followingProposals": {
-          "edges": [
-            {
-              "cursor": @string@,
-              "node": {
-                "id": @string@
-              }
-            },
-            @...@
-          ]
-        }
+        "followingProposal": [
+          {
+            "id": "proposal1"
+          },
+          {
+            "id": "proposal2"
+          },
+          {
+            "id": "proposal8"
+          }
+        ]
       }
     }
   }
@@ -97,8 +81,7 @@ Scenario: GraphQL client wants to follow then unfollow a proposal with current u
     }",
     "variables": {
       "input": {
-        "proposalId": "proposal8",
-        "notifiedOf": "DEFAULT"
+        "proposalId": "proposal8"
       }
     }
   }
@@ -118,22 +101,13 @@ Scenario: GraphQL client wants to follow then unfollow a proposal with current u
   And I send a GraphQL POST request:
   """
   {
-    "query": "query getFollowingProposal($count: Int, $cursor: String) {
+    "query": "query getFollowingProposal {
       viewer {
-        followingProposals(first: $count, after: $cursor) {
-          edges {
-            cursor
-            node {
-              id
-            }
-          }
+        followingProposal {
+          id
         }
       }
-    }",
-    "variables": {
-      "count": 32,
-      "cursor": null
-    }
+    }"
   }
   """
   Then the JSON response should match:
@@ -141,28 +115,17 @@ Scenario: GraphQL client wants to follow then unfollow a proposal with current u
   {
     "data": {
       "viewer": {
-        "followingProposals": {
-          "edges": [
-            {
-              "cursor": @string@,
-              "node": {
-                "id": "proposal1"
-              }
-            },
-            {
-              "cursor": @string@,
-              "node": {
-                "id": "proposal2"
-              }
-            },
-            {
-              "cursor": @string@,
-              "node": {
-                "id": "proposal8"
-              }
-            }
-          ]
-        }
+        "followingProposal": [
+          {
+            "id": "proposal1"
+          },
+          {
+            "id": "proposal2"
+          },
+          {
+            "id": "proposal8"
+          }
+        ]
       }
     }
   }
@@ -199,22 +162,13 @@ Scenario: GraphQL client wants to follow then unfollow a proposal with current u
   And I send a GraphQL POST request:
   """
   {
-    "query": "query getFollowingProposal($count: Int, $cursor: String) {
+    "query": "query getFollowingProposal {
       viewer {
-        followingProposals(first: $count, after: $cursor) {
-          edges {
-            cursor
-            node {
-              id
-            }
-          }
+        followingProposal {
+          id
         }
       }
-    }",
-    "variables": {
-      "count": 32,
-      "cursor": null
-    }
+    }"
   }
   """
   Then the JSON response should match:
@@ -222,22 +176,14 @@ Scenario: GraphQL client wants to follow then unfollow a proposal with current u
   {
     "data": {
       "viewer": {
-        "followingProposals": {
-          "edges": [
-            {
-              "cursor": @string@,
-              "node": {
-                "id": "proposal1"
-              }
-            },
-            {
-              "cursor": @string@,
-              "node": {
-                "id": "proposal2"
-              }
-            }
-          ]
-        }
+        "followingProposal": [
+          {
+            "id": "proposal1"
+          },
+          {
+            "id": "proposal2"
+          }
+        ]
       }
     }
   }

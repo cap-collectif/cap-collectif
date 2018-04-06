@@ -16,6 +16,7 @@ class ProposalDistrictType extends AbstractType
         $builder->add('name', TextType::class);
         $builder->add('displayedOnMap', CheckboxType::class);
         $builder->add('geojson', TextType::class);
+        $builder->add('geojsonStyle', TextType::class, ['required' => false]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

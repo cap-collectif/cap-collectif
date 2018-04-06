@@ -72,7 +72,7 @@ class SynthesisHandler
 
     public function createOrUpdateElementsFromSource(Synthesis $synthesis)
     {
-        if ('consultation_step' === $synthesis->getSourceType()) {
+        if ($synthesis->getSourceType() === 'consultation_step') {
             return $this->consultationStepExtractor->createOrUpdateElementsFromConsultationStep($synthesis, $synthesis->getConsultationStep());
         }
 

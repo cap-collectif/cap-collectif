@@ -52,7 +52,7 @@ exports[`<GroupAdminModalAddUsers /> render correctly 1`] = `
         Object {
           "id": "group4",
           "title": "Comité de suvi",
-          "users": Array [],
+          "usersConnection": Array [],
         }
       }
       onClose={[MockFunction]}

@@ -126,27 +126,10 @@ User:
             consentExternalCommunication:
                 type: "Boolean!"
                 description: "Is user accepted the external communication during the registration."
-            followingProposals:
-                type: "ProposalConnection!"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalsFollowedByUserResolver", [value, args])'
+            followingProposal:
+                type: "[Proposal!]!"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalsFollowedByUserResolver", [value])'
                 description: "Array of proposals followed by current user."
-                args:
-                    orderBy:
-                      type: "String"
-                      description: "Ordering options for followers returning from the connection"
-                    after:
-                      type: "String"
-                      description: "Returns the elements in the list that come after the specified global ID."
-                    first:
-                      type: "Int"
-                      defaultValue: 32
-                      description: "Returns the first n elements from the list."
-                    before:
-                      type: "String"
-                      description: "Returns the elements in the list that come before the specified global ID."
-                    last:
-                      type: "Int"
-                      description: "Returns the last n elements from the list."
             contributionsCount:
                 type: "Int!"
                 description: "Total of contributions count"

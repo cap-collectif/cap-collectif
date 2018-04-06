@@ -3,128 +3,92 @@
 ================================================================*/
 
 .print {
-  display: none;
+    display: none;
 }
 
 /* ======================== Label ============================*/
 
 @each $label in $basic-colors {
-  $name: nth($label, 1);
-  $color: nth($label, 2);
+    $name: nth($label, 1);
+    $color: nth($label, 2);
 
-  .label-#{$name} {
-    background-color: $color !important; // thanks AdminLTE
+    .label-#{$name} {
+        background-color: $color !important; // thanks AdminLTE
 
-    a, a:hover {
-      color: $white;
-      font-weight: 400;
+        a, a:hover {
+            color: $white;
+            font-weight: 400;
+        }
     }
-  }
 }
 
 /* ======================== Excerpt ============================*/
 
 .excerpt, a.excerpt, .small.excerpt {
-  color: $dark-gray;
-  font-weight: normal;
+    color: $dark-gray;
+    font-weight: normal;
 }
 
 .excerpt_dark {
-  color: $dark
+    color: $dark
 }
 
 .excerpt_private {
-  @extend .excerpt;
-  color: $info-color;
-  margin-top: 25px;
+    @extend .excerpt;
+    color: $info-color;
+    margin-top: 25px;
 }
 
 /* ==================== Private elements ========================*/
 
 .PrivateList {
-  &__box {
-    padding: 30px 25px 0;
-    border: 1px $border-color solid;
-    border-radius: 5px;
-    background-color: $page-bgc;
-  }
+    &__box {
+        padding: 30px 25px 0;
+        border: 1px $border-color solid;
+        border-radius: 5px;
+        background-color: $page-bgc;
+    }
 }
 
 .private-box {
-  border: 1px solid $info-color;
-  padding: 12px 15px 15px;
-  margin-bottom: 15px;
-  border-radius: 5px;
+    border: 1px solid $info-color;
+    padding: 12px 15px 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
 
-  .form-group {
-    margin-bottom: 0;
-  }
+    .form-group {
+        margin-bottom: 0;
+    }
 
-  h2, h3, h4 {
-    margin-top: 0;
-  }
+    h2, h3, h4 {
+        margin-top: 0;
+    }
 }
 
 /* ======================== Avatar =============================*/
 
 svg.avatar {
-  vertical-align: middle;
+    vertical-align: middle;
 }
 
 /* ======================= Ellipsis ============================*/
 
 .ellipsis {
-  @include ellipsis();
+    @include ellipsis();
 }
 
 /* ======================= Storybook ============================*/
 
 .storybook-container {
-  hr {
-    margin: 20px 0;
-  }
-
-  a {
-    color: $brand-color-2;
-
-    &:hover {
-      color: $brand-color-1;
+    hr {
+        margin: 20px 0;
     }
-  }
-}
 
-.b-none {
-  border: 0;
-}
+    a {
+        color: $brand-color-2;
 
-.capco-panel-list {
-  border-bottom: none;
-}
-
-.capco-panel-list .panel-body {
-  padding: 0;
-}
-
-.capco-panel-list .panel-body .list-group {
-  margin-bottom: 0;
-  padding-left: 0;
-  border: none;
-}
-
-.capco-panel-list .panel-body .list-group .list-group-item:first-child {
-  border-top: none;
-  border-left: none;
-  border-right: none;
-}
-
-.capco-panel-list .panel-body .list-group .list-group-item:last-child {
-  border-left: none;
-  border-right: none;
-  border-bottom: 1px solid rgb(221, 221, 221);
-  border-radius: 0;
-}
-
-.capco-panel-list .panel-body .list-group .list-group-item {
-  border-left: none;
-  border-right: none;
+        &:hover {
+            color: $brand-color-1;
+        }
+    }
 }

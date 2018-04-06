@@ -82,7 +82,7 @@ Capco\AppBundle\Entity\Opinion:
             expose: true
             type: Capco\UserBundle\Entity\User
             serialized_name: author
-            groups: [Opinions, UserMedias, OpinionLinkPreviews]
+            groups: [Opinions, UserMedias, OpinionLinkPreviews, Elasticsearch]
         answer:
             expose: true
             groups: [Opinions]
