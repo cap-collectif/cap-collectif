@@ -240,7 +240,9 @@ type Comment implements Node {
   updatedAt: DateTime
   author: User
   parent: Comment
-  answers: [Comment]
+  pinned: Boolean!
+  show_url: String!
+  answers: [Comment]!
   authorName: String
   authorEmail: String
   authorIp: IP
@@ -311,7 +313,7 @@ type CommentVote {
   # The author of the contribution.
   author: User!
 
-  # Returns 'vote'.
+  # Returns 'commentVote'.
   kind: String!
 }
 
@@ -929,7 +931,7 @@ type OpinionType implements Contribution & TrashableContribution & ContributionW
 
   # Number of sources.
   sourcesCount: Int!
-  votes(first: Int): [ProposalVote]
+  votes(first: Int): [OpinionVote]
 
   # The content of the contribution.
   id: ID!
@@ -1023,9 +1025,31 @@ enum PickFollowTypeValue {
 type Post {
   id: String!
   title: String!
+  relatedContent: [PostRelatedContent]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  publishedAt: DateTime
+  authors: [User!]!
+
+  # The publication status for this post.
+  publicationStatus: PostPublicationStatus!
+  commentable: Boolean!
+  displayedOnBlog: Boolean!
   comments(after: String, first: Int = 30, before: String, last: Int, orderBy: CommentOrder = {field: CREATED_AT, direction: DESC}): CommentConnection!
   abstract: String!
 }
+
+# Available statuses
+enum PostPublicationStatus {
+  # Normal status, publicly visible
+  PUBLISHED
+
+  # Not publicly visible
+  NOT_PUBLISHED
+}
+
+# A related content for a post
+union PostRelatedContent = Theme | Proposal | Project
 
 type PresentationStep implements Step {
   id: ID!
@@ -1098,7 +1122,6 @@ type Proposal implements Node {
   # The publication status for this proposal.
   publicationStatus: ProposalPublicationStatus!
   trashedReason: String
-  trashed: Boolean
   trashedAt: DateTime
   expired: Boolean
 
@@ -1297,18 +1320,14 @@ type ProposalForm implements Node {
   allowAknowledge: Boolean!
 }
 
-# Ways in which proposal connections can be ordered.
+# Ways in which lists of proposals can be ordered upon return.
 input ProposalOrder {
-  # The field in which to order nodes by.
-  field: ProposalOrderField!
-
-  # The direction in which to order nodes.
-  direction: OrderDirection! = ASC
+  field: ProposalOrderField! = CREATED_AT
+  direction: OrderDirection! = DESC
 }
 
-# Properties by which proposal connections can be ordered
+# Ordering options for proposals connections.
 enum ProposalOrderField {
-  # Allows ordering a list of proposals by when they were created.
   CREATED_AT
   UPDATED_AT
   PUBLISHED_AT
@@ -2117,7 +2136,7 @@ type UserNotificationsConfiguration {
 
 # A type of person
 type UserType {
-  id: ID!
+  id: Int!
 
   # The name of the type.
   name: String!

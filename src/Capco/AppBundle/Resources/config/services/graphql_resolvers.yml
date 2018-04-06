@@ -289,3 +289,14 @@ services:
         tags:
           - { name: overblog_graphql.resolver }
         arguments: ['@capco.url.resolver']
+
+    Capco\AppBundle\GraphQL\Resolver\Post\PostRelatedContentTypeResolver:
+        class: Capco\AppBundle\GraphQL\Resolver\Post\PostRelatedContentTypeResolver
+        tags:
+          - { name: overblog_graphql.resolver }
+        arguments: ['@overblog_graphql.type_resolver']
+
+    Capco\AppBundle\GraphQL\Resolver\Post\PostRelatedContentResolver:
+        class: Capco\AppBundle\GraphQL\Resolver\Post\PostRelatedContentResolver
+        tags:
+          - { name: overblog_graphql.resolver }

@@ -6,12 +6,9 @@ Post:
               type: "String!"
             title:
               type: "String!"
-            themes:
-              type: "[Theme]"
-            projects:
-              type: "[Project]"
-            proposals:
-              type: "[Proposal]"
+            relatedContent:
+              type: "[PostRelatedContent]"
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostRelatedContentResolver", [value])'
             createdAt:
               type: "DateTime!"
             updatedAt:
@@ -26,6 +23,7 @@ Post:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostPublicationStatusResolver", [value])'
             commentable:
                 type: "Boolean!"
+                resolve: "@=value.getIsCommentable()"
             displayedOnBlog:
                 type: "Boolean!"
             comments:
