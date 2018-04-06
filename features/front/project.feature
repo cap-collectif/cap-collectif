@@ -121,11 +121,11 @@ Scenario: Project header should display correct number of contributions
   Given I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
-  Then I should see 'project.show.meta.total_count {"%count%":163}'
+  Then I should see 'project.show.meta.total_count {"%count%":171}'
   And I hover over the "#contributions-counter-pill" element
   And I wait 1 seconds
-  And I should see 'project.show.meta.opinionsCount {"%count%":35}'
-  #And I should see 'project.show.meta.argumentsCount {"%count%":107}'
+  And I should see 'project.show.meta.opinionsCount {"%count%":34}'
+  #And I should see 'project.show.meta.argumentsCount {"%count%":95}'
   And I should see 'project.show.meta.sourcesCount {"%count%":32}'
 
 @javascript
@@ -133,7 +133,7 @@ Scenario: Project header should display correct number of participants
   Given I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
-  Then I should see "26 project.show.meta.contributors_count"
+  Then I should see "17 project.show.meta.contributors_count"
 
 Scenario: Can not have access to download if export is disabled
   Given I visited "consultation page" with:

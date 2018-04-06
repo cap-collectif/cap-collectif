@@ -2,57 +2,23 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
+/**
+ * ArgumentVoteRepository.
+ */
 class ArgumentVoteRepository extends EntityRepository
 {
-    public function countByAuthorAndProject(User $author, Project $project): int
-    {
-        $qb = $this->getQueryBuilder()
-        ->select('COUNT (DISTINCT v)')
-        ->leftJoin('v.argument', 'argument')
-        ->leftJoin('argument.opinion', 'o')
-        ->leftJoin('argument.opinionVersion', 'ov')
-        ->leftJoin('ov.parent', 'ovo')
-        ->andWhere('o.step IN (:steps) OR ovo.step IN (:steps)')
-        ->setParameter('steps', array_map(function ($step) {
-            return $step;
-        }, $project->getRealSteps()))
-        ->andWhere('v.user = :author')
-        ->setParameter('author', $author)
-      ;
-
-        return $qb->getQuery()->getSingleScalarResult();
-    }
-
-    public function countByAuthorAndStep(User $author, ConsultationStep $step): int
-    {
-        $qb = $this->getQueryBuilder()
-        ->select('COUNT (DISTINCT v)')
-        ->leftJoin('v.argument', 'argument')
-        ->leftJoin('argument.opinion', 'o')
-        ->leftJoin('argument.opinionVersion', 'ov')
-        ->leftJoin('ov.parent', 'ovo')
-        ->andWhere('
-            (argument.opinion IS NOT NULL AND o.step = :step AND o.isEnabled = 1)
-            OR
-            (argument.opinionVersion IS NOT NULL AND ovo.step = :step AND ov.enabled = 1 AND ovo.isEnabled = 1)'
-        )
-        ->andWhere('v.user = :author')
-        ->setParameter('step', $step)
-        ->setParameter('author', $author)
-        ;
-
-        return $qb->getQuery()->getSingleScalarResult();
-    }
-
     /**
      * Get enabled by consultation step.
+     *
+     * @param $step
+     * @param $asArray
+     *
+     * @return mixed
      */
-    public function getEnabledByConsultationStep(ConsultationStep $step, bool $asArray = false)
+    public function getEnabledByConsultationStep(ConsultationStep $step, $asArray = false)
     {
         $qb = $this->getQueryBuilder()
             ->addSelect('u', 'ut')
@@ -75,8 +41,13 @@ class ArgumentVoteRepository extends EntityRepository
 
     /**
      * Get all by argument.
+     *
+     * @param $version
+     * @param mixed $asArray
+     *
+     * @return mixed
      */
-    public function getAllByArgument(string $argumentId, bool $asArray = false)
+    public function getAllByArgument(string $argumentId, $asArray = false)
     {
         $qb = $this->getQueryBuilder()
             ->addSelect('u', 'ut')

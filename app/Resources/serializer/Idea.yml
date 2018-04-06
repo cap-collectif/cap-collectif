@@ -9,7 +9,7 @@ Capco\AppBundle\Entity\Idea:
     body:
       expose: true
       type: string
-      groups: [Ideas, Elasticsearch]
+      groups: [Ideas]
     comments:
       expose: true
       groups: [Ideas]
@@ -26,7 +26,7 @@ Capco\AppBundle\Entity\Idea:
     id:
       expose: true
       type: integer
-      groups: [Ideas, Elasticsearch]
+      groups: [Ideas]
     isCommentable:
       expose: true
       groups: [Ideas]
@@ -42,7 +42,7 @@ Capco\AppBundle\Entity\Idea:
     object:
       expose: true
       type: string
-      groups: [Ideas, Elasticsearch]
+      groups: [Ideas]
     slug:
       expose: true
       type: string
@@ -53,7 +53,7 @@ Capco\AppBundle\Entity\Idea:
     title:
       expose: true
       type: string
-      groups: [Ideas, Elasticsearch]
+      groups: [Ideas]
     trashedAt:
       expose: true
       type: DateTime

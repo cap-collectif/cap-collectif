@@ -1,17 +1,12 @@
 import * as React from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
 import Truncate from 'react-truncate';
-import { QueryRenderer, graphql } from 'react-relay';
-import ProposalPreviewVote from './ProposalPreviewVote';
 import ProposalDetailEstimation from '../Detail/ProposalDetailEstimation';
+import ProposalPreviewVote from './ProposalPreviewVote';
 import ProposalDetailLikers from '../Detail/ProposalDetailLikers';
 import ProposalVoteThresholdProgressBar from '../Vote/ProposalVoteThresholdProgressBar';
 import TagsList from '../../Ui/List/TagsList';
 import { type State } from '../../../types';
-import ProposalFollowButton from '../Follow/ProposalFollowButton';
-import type ProposalPreviewFollowerButtonQueryResponse from '../Preview/__generated__/ProposalPreviewBodyFollowerButtonQuery.graphql';
-import environment, { graphqlError } from '../../../createRelayEnvironment';
-import Loader from '../../Ui/Loader';
 
 type Props = {
   proposal: Object,
@@ -19,7 +14,6 @@ type Props = {
   showThemes: boolean,
   features: Object,
   step: Object,
-  isAuthenticated: boolean,
 };
 
 export class ProposalPreviewBody extends React.Component<Props> {
@@ -61,47 +55,9 @@ export class ProposalPreviewBody extends React.Component<Props> {
             <ProposalDetailLikers proposal={proposal} />
           </TagsList>
         </div>
-        <div className="proposal__buttons">
-          {step.id === proposal.votableStepId && <ProposalPreviewVote proposal={proposal} />}
-          <QueryRenderer
-            environment={environment}
-            query={graphql`
-              query ProposalPreviewBodyFollowerButtonQuery(
-                $proposalId: ID!
-                $isAuthenticated: Boolean!
-              ) {
-                proposal: node(id: $proposalId) {
-                  ...ProposalFollowButton_proposal @arguments(isAuthenticated: $isAuthenticated)
-                }
-              }
-            `}
-            variables={{ proposalId: proposal.id, isAuthenticated: this.props.isAuthenticated }}
-            render={({
-              error,
-              props,
-            }: {
-              error: ?Error,
-              props?: ProposalPreviewFollowerButtonQueryResponse,
-            }) => {
-              if (error) {
-                console.warn(error); // eslint-disable-line no-console
-                return graphqlError;
-              }
-              if (props) {
-                // eslint-disable-next-line react/prop-types
-                if (props.proposal) {
-                  return <ProposalFollowButton proposal={props.proposal} />;
-                }
-                return graphqlError;
-              }
-              return <Loader />;
-            }}
-          />
-        </div>
+        {step.id === proposal.votableStepId && <ProposalPreviewVote proposal={proposal} />}
         {step.voteThreshold > 0 && (
-          <div style={{ marginTop: '20px' }}>
-            <ProposalVoteThresholdProgressBar proposal={proposal} step={step} />
-          </div>
+          <ProposalVoteThresholdProgressBar proposal={proposal} step={step} />
         )}
       </div>
     );
@@ -111,7 +67,6 @@ export class ProposalPreviewBody extends React.Component<Props> {
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
   return {
     features: state.default.features,
-    isAuthenticated: state.user.user !== null,
   };
 };
 

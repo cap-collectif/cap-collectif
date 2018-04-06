@@ -10,7 +10,6 @@ describe('<ProposalAdminNotationForm />', () => {
     ...formMock,
     intl: intlMock,
     disabled: false,
-    dirty: false,
     responses: [],
     // $FlowFixMe $refType
     proposal: {

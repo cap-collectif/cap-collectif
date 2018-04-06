@@ -49,7 +49,7 @@ class OpinionVersionVote extends AbstractVote
      * @Gedmo\Timestampable(on="update", field={"value"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
-    protected $updatedAt;
+    private $updatedAt;
 
     /**
      * @ORM\Column(name="value", type="integer")
@@ -75,6 +75,11 @@ class OpinionVersionVote extends AbstractVote
     public function getValue()
     {
         return $this->value;
+    }
+
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 
     public function setValue($value): self

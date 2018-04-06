@@ -57,24 +57,6 @@ mappings:
                 properties:
                     id:
                         type: long
-            contributionsCountByProject:
-                type: nested
-                properties:
-                    project:
-                        type: object
-                        properties:
-                            id: { type: keyword }
-                    count:
-                        type: long
-            contributionsCountByStep:
-                type: nested
-                properties:
-                    step:
-                        type: object
-                        properties:
-                            id: { type: keyword }
-                    count:
-                        type: long
     argument:
         properties:
             id: { type: keyword }

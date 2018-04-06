@@ -9,7 +9,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class FollowerRepository extends EntityRepository
 {
-    public function countFollowersOfProposal(Proposal $proposal): int
+    public function countProposalFollower(Proposal $proposal, User $user = null): int
     {
         $query = $this->createQueryBuilder('f')
             ->select('count(f.id)')
@@ -17,6 +17,11 @@ class FollowerRepository extends EntityRepository
             ->join('f.user', 'u')
             ->andWhere('p.id = :proposalId')
             ->setParameter('proposalId', $proposal->getId());
+
+        if (null !== $user) {
+            $query->andWhere('u.id = :userId')
+                ->setParameter('userId', $user->getId());
+        }
 
         return $query->getQuery()->getSingleScalarResult();
     }

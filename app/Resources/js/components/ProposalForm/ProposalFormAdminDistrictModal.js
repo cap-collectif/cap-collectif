@@ -40,27 +40,28 @@ export const ProposalFormAdminDistrictModal = React.createClass({
             component={component}
           />
           <Field
-            label="Zone"
-            help="Au format GeoJSON"
+            label={<FormattedMessage id="admin.fields.proposal.map.zone" />}
+            help={<FormattedMessage id="admin.fields.proposal.map.helpFormatGeojson" />}
             id={`${member}.geojson`}
             name={`${member}.geojson`}
             type="textarea"
             component={component}
           />
-          {/* <LeafletMap
-            geoJsons={[geosjon]}
-            // defaultMapOptions={{
-            //   center: { lat: form.latMap, lng: form.lngMap },
-            //   zoom: form.zoomMap,
-            // }}
-          /> */}
           <p>Options</p>
           <Field
-            children="Afficher la zone sur la carte"
+            children={<FormattedMessage id="admin.fields.proposal.map.displayZones" />}
             id={`${member}.displayedOnMap`}
             name={`${member}.displayedOnMap`}
             type="checkbox"
             normalize={val => !!val}
+            component={component}
+          />
+          <Field
+            label={<FormattedMessage id="admin.fields.proposal.map.style" />}
+            help={<FormattedMessage id="admin.fields.proposal.map.helpFormatCSS" />}
+            id={`${member}.geojsonStyle`}
+            name={`${member}.geojsonStyle`}
+            type="textarea"
             component={component}
           />
         </Modal.Body>

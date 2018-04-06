@@ -61,7 +61,7 @@ trait VoteTypeTrait
 
     public function isNumberOfVotesLimitted(): bool
     {
-        return null !== $this->votesLimit;
+        return $this->votesLimit !== null;
     }
 
     public function getVotesLimit()
@@ -90,12 +90,12 @@ trait VoteTypeTrait
 
     public function isVotable(): bool
     {
-        return self::$VOTE_TYPE_DISABLED !== $this->voteType;
+        return $this->voteType !== self::$VOTE_TYPE_DISABLED;
     }
 
     public function isBudgetVotable(): bool
     {
-        return self::$VOTE_TYPE_BUDGET === $this->voteType;
+        return $this->voteType === self::$VOTE_TYPE_BUDGET;
     }
 
     public function getVotesCount(): int

@@ -18,9 +18,6 @@ abstract class Message
     protected $senderName;
 
     protected $cc;
-
-    /** Specifies the addresses of recipients who the message will be blind-copied to. Other recipients will not be aware of these copies. */
-    protected $bcc;
     protected $replyTo;
     protected $sitename;
     protected $siteUrl;
@@ -42,9 +39,7 @@ abstract class Message
         $this->templateVars = $templateVars;
 
         $this->replyTo = $replyTo;
-
         $this->cc = [];
-        $this->bcc = [];
         $this->recipients = [];
 
         $this->senderEmail = $senderEmail;
@@ -145,30 +140,6 @@ abstract class Message
     public function addCC(string $cc)//: void
     {
         $this->cc[] = $cc;
-    }
-
-    public function setCC(array $cc): self
-    {
-        $this->cc = $cc;
-
-        return $this;
-    }
-
-    public function getBcc(): array
-    {
-        return $this->bcc;
-    }
-
-    public function addBcc(string $bcc)//: void
-    {
-        $this->bcc[] = $bcc;
-    }
-
-    public function setBcc(array $bcc): self
-    {
-        $this->bcc = $bcc;
-
-        return $this;
     }
 
     public function setReplyTo(string $replyTo): self

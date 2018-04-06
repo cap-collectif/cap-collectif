@@ -34,7 +34,7 @@ class MembersController extends Controller
             'method' => 'POST',
         ]);
 
-        if ('POST' === $request->getMethod()) {
+        if ($request->getMethod() === 'POST') {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
@@ -55,12 +55,12 @@ class MembersController extends Controller
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('members.pagination.size');
 
-        $sort = null === $sort ? 'activity' : $sort;
+        $sort = $sort === null ? 'activity' : $sort;
         $members = $em->getRepository('CapcoUserBundle:User')->getSearchResults($pagination, $page, $sort, $userType);
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
-        if (null !== $pagination && 0 !== $pagination) {
+        if ($pagination !== null && $pagination !== 0) {
             $nbPage = ceil(count($members) / $pagination);
         }
 

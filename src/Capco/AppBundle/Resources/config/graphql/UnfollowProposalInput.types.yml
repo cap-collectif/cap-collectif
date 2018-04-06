@@ -3,8 +3,5 @@ UnfollowProposalInput:
     config:
         fields:
             proposalId:
-                type: "ID"
+                type: "ID!"
                 description: "The proposal id"
-            ids:
-                type: "[ID!]"
-                description: "Array of proposal id"

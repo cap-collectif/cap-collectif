@@ -40,7 +40,7 @@ class PurifiedTextareaType extends AbstractType
 
     public function updateValue(FormEvent $event)
     {
-        if ('' === $event->getData()) {
+        if ($event->getData() === '') {
             $event->setData(null);
         }
     }

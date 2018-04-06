@@ -24,7 +24,7 @@ final class Map
 
         $content = json_decode($res->getBody()->getContents(), true);
 
-        if ('OK' === $content['status']) {
+        if ($content['status'] === 'OK') {
             $updatedAddress = json_encode([$content['results'][0]]);
         }
 

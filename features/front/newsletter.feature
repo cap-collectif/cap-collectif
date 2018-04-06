@@ -1,11 +1,11 @@
 @newsletter
 Feature: Newsletter
 
-Background:
-  Given feature "newsletter" is enabled
+  Background:
+    Given feature "newsletter" is enabled
 
-@database @javascript
-Scenario: Can subscribe to the Newsletter
+  @database @javascript
+  Scenario: Can subscribe to the Newsletter
   Given I visited "home page"
   When I fill in the following:
     | newsletter_subscription_email  | iwantsomenews@gmail.com  |

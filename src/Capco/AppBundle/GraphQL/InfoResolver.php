@@ -18,7 +18,7 @@ class InfoResolver
             foreach ($array as $key => $value) {
                 $newString = is_int($key)
                   ? $string
-                  : ('' !== $string ? $string . '_' : '') . $key
+                  : ($string !== '' ? $string . '_' : '') . $key
                 ;
                 $this->appendString($newString, $value, $result);
             }
