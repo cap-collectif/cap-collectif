@@ -23,7 +23,7 @@ class ParticipantTypeResolver implements ResolverInterface
     public function __invoke($node)
     {
         if ($node instanceof EventRegistration) {
-            return $this->typeResolver->resolve('NotRegistred');
+            return $this->typeResolver->resolve('NotRegistered');
         }
         if ($node instanceof User) {
             return $this->typeResolver->resolve('User');

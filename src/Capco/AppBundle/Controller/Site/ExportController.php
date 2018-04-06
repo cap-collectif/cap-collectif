@@ -15,31 +15,56 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 const USER_FRAGMENT = '
-id
-email
-username
-userType {
-  name
-}
-createdAt
-updatedAt
-expired
-lastLogin
-rolesText
-consentExternalCommunication
-enabled
-locked
-phoneConfirmed
-gender
-dateOfBirth
-website
-biography
-address
-zipCode
-city
-phone
-show_url
+  id
+  email
+  username
+  userType {
+    name
+  }
+  createdAt
+  updatedAt
+  expired
+  lastLogin
+  rolesText
+  consentExternalCommunication
+  enabled
+  locked
+  phoneConfirmed
+  gender
+  dateOfBirth
+  website
+  biography
+  address
+  zipCode
+  city
+  phone
+  show_url
 ';
+
+const USER_HEADERS = [
+  'user_id',
+  'user_email',
+  'user_userName',
+  'user_TypeName',
+  'user_createdAt',
+  'user_updatedAt',
+  'user_expired',
+  'user_lastLogin',
+  'user_rolesText',
+  'user_consentExternalCommunication',
+  'user_enabled',
+  'user_locked',
+  'user_phoneConfirmed',
+  'user_gender',
+  'user_dateOfBirth',
+  'user_websiteUrl',
+  'user_biography',
+  'user_address',
+  'user_zipCode',
+  'user_city',
+  'user_phone',
+  'user_profileUrl',
+];
 
 class ExportController extends Controller
 {
@@ -48,7 +73,7 @@ class ExportController extends Controller
      * @ParamConverter("event", options={"mapping": {"eventId": "id"}})
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function downloadEventParticipantsAction(Event $event, Request $request)
+    public function downloadEventParticipantsAction(Event $event, Request $request): StreamedResponse
     {
         $requestString = '
 query {
@@ -56,15 +81,15 @@ query {
     ... on Event {
       participants(first: 1000) {
         edges {
-          registredAt
+          registeredAt
           registredAnonymously
           node {
             ... on User {
               ' . USER_FRAGMENT . '
             }
-            ... on NotRegistred {
+            ... on NotRegistered {
               username
-              notRegistredEmail: email
+              notRegisteredEmail: email
             }
           }
         }
@@ -124,7 +149,7 @@ query {
                       $participant['email'],
                       $participant['username'],
                       $participant['userType'] ? $participant['userType']['name'] : null,
-                      $edge['registredAt'],
+                      $edge['registeredAt'],
                       $edge['registredAnonymously'] ? 'yes' : 'no',
                       $participant['createdAt'],
                       $participant['updatedAt'],
@@ -148,10 +173,10 @@ query {
                 } else {
                     $writer->addRow([
                       null,
-                      $participant['notRegistredEmail'],
+                      $participant['notRegisteredEmail'],
                       $participant['username'],
                       null,
-                      $edge['registredAt'],
+                      $edge['registeredAt'],
                       $edge['registredAnonymously'] ? 'yes' : 'no',
                       null,
                       null,
@@ -188,7 +213,7 @@ query {
      * @ParamConverter("project", options={"mapping": {"projectId": "id"}})
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function downloadProjectContributorsAction(Project $project, Request $request)
+    public function downloadProjectContributorsAction(Project $project, Request $request): StreamedResponse
     {
         $requestString = '
 query {
@@ -221,30 +246,7 @@ query {
 
         $response = new StreamedResponse(function () use ($writer, $data) {
             $writer->openToFile('php://output');
-            $writer->addRow([
-              'user_id',
-              'user_email',
-              'user_userName',
-              'user_TypeName',
-              'user_createdAt',
-              'user_updatedAt',
-              'user_expired',
-              'user_lastLogin',
-              'user_rolesText',
-              'user_consentExternalCommunication',
-              'user_enabled',
-              'user_locked',
-              'user_phoneConfirmed',
-              'user_gender',
-              'user_dateOfBirth',
-              'user_websiteUrl',
-              'user_biography',
-              'user_address',
-              'user_zipCode',
-              'user_city',
-              'user_phone',
-              'user_profileUrl',
-            ]);
+            $writer->addRow(USER_HEADERS);
             foreach ($data['data']['node']['contributors']['edges'] as $edge) {
                 $contributor = $edge['node'];
                 $writer->addRow([
@@ -286,7 +288,7 @@ query {
      * @ParamConverter("step", options={"mapping": {"stepId": "id"}})
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function downloadStepContributorsAction(AbstractStep $step, Request $request)
+    public function downloadStepContributorsAction(AbstractStep $step, Request $request): StreamedResponse
     {
         $requestString = '
 query {
@@ -346,30 +348,7 @@ query {
 
         $response = new StreamedResponse(function () use ($writer, $data) {
             $writer->openToFile('php://output');
-            $writer->addRow([
-              'user_id',
-              'user_email',
-              'user_userName',
-              'user_TypeName',
-              'user_createdAt',
-              'user_updatedAt',
-              'user_expired',
-              'user_lastLogin',
-              'user_rolesText',
-              'user_consentExternalCommunication',
-              'user_enabled',
-              'user_locked',
-              'user_phoneConfirmed',
-              'user_gender',
-              'user_dateOfBirth',
-              'user_websiteUrl',
-              'user_biography',
-              'user_address',
-              'user_zipCode',
-              'user_city',
-              'user_phone',
-              'user_profileUrl',
-            ]);
+            $writer->addRow(USER_HEADERS);
             foreach ($data['data']['node']['contributors']['edges'] as $edge) {
                 $contributor = $edge['node'];
                 $writer->addRow([

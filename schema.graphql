@@ -784,7 +784,7 @@ interface Node {
 }
 
 # A user without account.
-type NotRegistred {
+type NotRegistered {
   # Email of the user.
   email: String
 
@@ -1033,8 +1033,8 @@ type PageInfo {
   endCursor: String
 }
 
-# User and NotRegistred
-union Participant = User | NotRegistred
+# User and NotRegistered
+union Participant = User | NotRegistered
 
 # A connection to a list of items.
 type ParticipantConnection {
@@ -1050,7 +1050,7 @@ type ParticipantConnection {
 
 # An edge in a connection.
 type ParticipantEdge {
-  registredAt: DateTime!
+  registeredAt: DateTime!
   registredAnonymously: Boolean!
 
   # The item at the end of the edge.

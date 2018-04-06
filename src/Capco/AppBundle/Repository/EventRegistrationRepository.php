@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityRepository;
 
 class EventRegistrationRepository extends EntityRepository
 {
-    public function getNotRegistredParticipantsInEvent(Event $event)
+    public function getNotRegisteredParticipantsInEvent(Event $event): array
     {
         $qb = $this->createQueryBuilder('registration');
 

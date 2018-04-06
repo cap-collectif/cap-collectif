@@ -18,7 +18,7 @@ Scenario: GraphQL client want to get the list of participants of an event
                 ... on User {
                   id
                 }
-                ... on NotRegistred {
+                ... on NotRegistered {
                   username
                   email
                 }

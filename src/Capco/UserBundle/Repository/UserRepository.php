@@ -43,7 +43,7 @@ class UserRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getRegistredParticipantsInEvent(Event $event): array
+    public function getRegisteredParticipantsInEvent(Event $event): array
     {
         $qb = $this->createQueryBuilder('u');
 
