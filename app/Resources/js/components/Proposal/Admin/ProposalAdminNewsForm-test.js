@@ -10,14 +10,28 @@ describe('<ProposalAdminNewsForm />', () => {
     intl: intlMock,
     // $FlowFixMe $refType
     proposal: {
-      news: [{ id: '1', title: 'news-1' }],
+      news: {
+        totalCount: 1,
+        edges: [
+          {
+            cursor: 'curseurdepagination',
+            node: {
+              id: '1',
+              title: 'news-1',
+            },
+          },
+        ],
+      },
     },
   };
   const props2 = {
     intl: intlMock,
     // $FlowFixMe $refType
     proposal: {
-      news: [],
+      news: {
+        totalCount: 0,
+        edges: [],
+      },
     },
   };
 

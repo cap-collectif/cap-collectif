@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalPreviewVote /> should render a proposal preview vote 1`] = `
+<span>
+  <Connect(ProposalVoteButtonWrapper)
+    className="proposal__preview__vote"
+    id="proposal-vote-btn-proposal1"
+    proposal={
+      Object {
+        "commentsCount": 5,
+        "id": "proposal1",
+        "referer": "http://capco.test",
+        "selections": Array [],
+        "viewerCanSeeEvaluation": true,
+        "votableStepId": "step3",
+        "votesByStepId": Object {
+          "collectstep1": Array [],
+          "selectionstep1": Array [],
+        },
+        "votesCountByStepId": Object {
+          "2": 0,
+        },
+      }
+    }
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+  />
+  <Connect(ProposalVoteModal)
+    proposal={
+      Object {
+        "commentsCount": 5,
+        "id": "proposal1",
+        "referer": "http://capco.test",
+        "selections": Array [],
+        "viewerCanSeeEvaluation": true,
+        "votableStepId": "step3",
+        "votesByStepId": Object {
+          "collectstep1": Array [],
+          "selectionstep1": Array [],
+        },
+        "votesCountByStepId": Object {
+          "2": 0,
+        },
+      }
+    }
+  />
+</span>
+`;

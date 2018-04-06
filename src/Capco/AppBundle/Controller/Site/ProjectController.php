@@ -270,6 +270,7 @@ class ProjectController extends Controller
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('contributors.pagination');
 
         $contributors = $this->get('capco.contribution.resolver')->getProjectContributorsOrdered($project, true, $pagination, $page);
+
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
         if (null !== $pagination && 0 !== $pagination) {

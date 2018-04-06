@@ -5,7 +5,40 @@ Post:
             id:
               type: "String!"
             title:
-               type: "String!"
+              type: "String!"
+            themes:
+              type: "[Theme]"
+            projects:
+              type: "[Project]"
+            proposals:
+              type: "[Proposal]"
+            createdAt:
+              type: "DateTime!"
+            updatedAt:
+              type: "DateTime!"
+            publishedAt:
+              type: "DateTime"
+            authors:
+              type: "[User!]!"
+            publicationStatus:
+                type: "PostPublicationStatus!"
+                description: "The publication status for this post."
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostPublicationStatusResolver", [value])'
+            commentable:
+                type: "Boolean!"
+            displayedOnBlog:
+                type: "Boolean!"
+            comments:
+                type: "CommentConnection!"
+                argsBuilder: "Relay::Connection"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostCommentsResolver", [value, args])'
+                args:
+                    first:
+                        type: "Int"
+                        defaultValue: 30
+                    orderBy:
+                        type: "CommentOrder"
+                        defaultValue: { field: CREATED_AT, direction: DESC }
             abstract:
                type: "String!"
-               resolve: "@resolver('post_abstract', '[value]')"
+               resolve: "@=resolver('post_abstract', [value])"

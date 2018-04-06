@@ -49,6 +49,7 @@ import GroupAdminPageApp from './startup/GroupAdminPageApp';
 import GroupCreateButtonApp from './startup/GroupCreateButtonApp';
 import EvaluationsIndexPageApp from './startup/EvaluationsIndexPageApp';
 import ChooseAUsernameApp from './startup/ChooseAUsernameApp';
+import AccountProfileFollowingsApp from './startup/AccountProfileFollowingsApp';
 
 import appStore from '../js/stores/AppStore';
 
@@ -71,6 +72,7 @@ window.__SERVER__ = false;
 ReactOnRails.registerStore({ appStore });
 
 ReactOnRails.register({
+  AccountProfileFollowingsApp,
   AccountProfileNotificationsApp,
   AdminModalsApp,
   RegistrationAdminApp,

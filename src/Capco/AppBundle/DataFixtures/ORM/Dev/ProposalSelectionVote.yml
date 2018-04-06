@@ -21,11 +21,24 @@ Capco\AppBundle\Entity\ProposalSelectionVote:
     proposal: '@proposal7'
     selectionStep: '@selectionstep4'
     user: '@user4'
+    createdAt: <(new \DateTime('yesterday'))>
   proposalSelectionVote52:
     proposal: '@proposal11'
     selectionStep: '@selectionstep3'
     user: '@user4'
+    createdAt: <(new \DateTime('yesterday'))>
   proposalSelectionVote53:
     proposal: '@proposal17'
     selectionStep: '@selectionstep8'
     user: '@user5'
+    createdAt: <(new \DateTime('yesterday'))>
+  proposalSelectionVote54:
+    proposal: '@proposal1'
+    selectionStep: '@selectionstep8'
+    user: '@user2'
+    createdAt: <(new \DateTime('yesterday'))>
+  proposalSelectionVote55:
+    proposal: '@proposal1'
+    selectionStep: '@selectionstep8'
+    user: '@user1'
+    createdAt: <(new \DateTime('yesterday'))>

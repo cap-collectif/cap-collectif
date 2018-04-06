@@ -71,4 +71,9 @@ class ProposalSelectionVote extends AbstractVote
     {
         $this->proposal->removeSelectionVote($this);
     }
+
+    public function getKind(): string
+    {
+        return 'proposalSelectionVote';
+    }
 }

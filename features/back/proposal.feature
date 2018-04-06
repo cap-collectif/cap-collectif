@@ -50,7 +50,9 @@ Scenario: Logged in admin wants to evaluate a proposal
   And I fill the element "proposal evaluation evaluate more information" with value "C'est génial cette appli, les gens sont investit l'évaluation marche super bien !"
   And I evaluate the proposal presentation to "Au top"
   And I check "Incohérente" in the proposal definition evaluation
+  And I wait 1 seconds
   And I check "Je dis oui" in the proposal definition resume
+  And I wait 1 seconds
   And I save the custom evaluation
   And I wait 2 seconds
   Then I should see "global.saved"

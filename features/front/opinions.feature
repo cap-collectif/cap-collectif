@@ -97,27 +97,6 @@ Scenario: Anonymous wants to see opinion appendix
   And I wait 1 seconds
   Then I should see "Impacts 1"
 
-@javascript @database
-Scenario: Logged in user wants to create a linked opinion
-  Given I am logged in as user
-  And I go to an opinion with versions
-  Then I should see 'global.links {"num":0}'
-  When I go on the connections tab
-  And I press "link-form__add"
-  And I wait 1 seconds
-  And I select "Section 1" from "opinionType"
-  And I wait 2 seconds
-  And I fill in the following:
-    | opinion_title      | Titre                           |
-    | opinion_body       | Description de ma proposition   |
-    | opinion_appendix-2 | Exposay                         |
-  And I press "confirm-opinion-link-create"
-  Then I should be redirected to "/projects/projet-de-loi-renseignement/consultation/elaboration-de-la-loi/opinions/titre-ier-la-circulation-des-donnees-et-du-savoir/chapitre-ier-economie-de-la-donnee/section-1-ouverture-des-donnees-publiques/titre"
-  And I wait 1 seconds
-  Then I should see 'global.links {"num":1}'
-  And I go on the connections tab
-  And I should see "Article 1" in the "#links-list" element
-
 @javascript
 Scenario: Anonymous user wants to see all votes of an opinion
   Given I go to an opinion with loads of votes

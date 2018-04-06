@@ -33,7 +33,7 @@ class ComputeDiffCommand extends ContainerAwareCommand
 
         foreach ($versions as $versionId) {
             $version = $repo->find($versionId);
-            if ($version->getDiff() === '' || $input->getOption('force')) {
+            if ('' === $version->getDiff() || $input->getOption('force')) {
                 $container->get('capco.diff.generator')->generate($version);
                 $em->flush();
             }

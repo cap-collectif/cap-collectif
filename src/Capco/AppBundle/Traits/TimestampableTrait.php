@@ -14,51 +14,66 @@ trait TimestampableTrait
      */
     protected $createdAt;
 
-    /**
-     * Sets createdAt.
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return $this
-     */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    /**
-     * Returns createdAt.
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * Sets updatedAt.
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return $this
-     */
     public function setUpdatedAt(\DateTime $updatedAt): self
     {
-        $this->updatedAt = $updatedAt;
+        if (property_exists($this, 'updatedAt')) {
+            $this->updatedAt = $updatedAt;
+        }
 
         return $this;
     }
 
-    /**
-     * Returns updatedAt.
-     *
-     * @return \DateTime
-     */
     public function getUpdatedAt()
     {
-        return $this->updatedAt;
+        if (property_exists($this, 'updatedAt')) {
+            return $this->updatedAt;
+        }
+    }
+
+    public function isCreatedInLastInterval(\DateTime $to, \DateInterval $interval): bool
+    {
+        if (property_exists($this, 'updatedAt')) {
+            $diff = $this->createdAt->diff($to);
+
+            return $diff < $interval;
+        }
+
+        return false;
+    }
+
+    public function isUpdatedInLastInterval(\DateTime $to, \DateInterval $interval): bool
+    {
+        if (property_exists($this, 'updatedAt')) {
+            $diff = $this->updatedAt->diff($to);
+
+            return $diff < $interval;
+        }
+
+        return false;
+    }
+
+    public function isDeletedInLastInterval(\DateTime $to, \DateInterval $interval): bool
+    {
+        if (method_exists($this, 'isDeleted')) {
+            if ($this->isDeleted() && isset($this->deletedAt)) {
+                $diff = $this->deletedAt->diff($to);
+
+                return $diff < $interval;
+            }
+        }
+
+        return false;
     }
 }

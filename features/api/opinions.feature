@@ -37,7 +37,7 @@ Scenario: Anonymous API client wants to retrieve an opinion
         "position": @integer@,
         "timeless": @boolean@,
         "counters": {
-          "remainingDays": @integer@,
+          "remainingHours": @integer@,
           "contributions": @integer@,
           "contributors": @integer@,
           "votes": @integer@

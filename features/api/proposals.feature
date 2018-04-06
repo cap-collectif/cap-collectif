@@ -806,10 +806,8 @@ Scenario: Anonymous API client wants to get some proposals from a collect step
               "show": @string@,
               "index": @string@
           },
-          "votesCountByStepId": {
-              "selectionstep1": @integer@,
-              "collectstep1": @integer@
-          },
+        "votesCountByStepId": @wildcard@,
+
           "votesByStepId": {
               "selectionstep1": @array@,
               "collectstep1": @array@

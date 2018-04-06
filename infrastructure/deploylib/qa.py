@@ -76,7 +76,10 @@ def behat(fast_failure='true', profile=False, tags='false', feature='false', par
 
 @task(environments=['local'])
 def view():
-    local('echo "secret" | open vnc://`docker-machine ip dinghy`')
+    if env.dinghy:
+        local('echo "secret" | open vnc://`docker-machine ip dinghy`')
+    else:
+        local('echo "secret" | nohup vncviewer localhost:5900 &')
 
 
 @task(environments=['local'])

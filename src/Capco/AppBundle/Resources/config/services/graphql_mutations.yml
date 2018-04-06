@@ -37,6 +37,14 @@ services:
           - "@capco.follower.repository"
       tags:
           - { name: overblog_graphql.mutation }
+  Capco\AppBundle\GraphQL\Mutation\UpdateFollowProposalMutation:
+      class: Capco\AppBundle\GraphQL\Mutation\UpdateFollowProposalMutation
+      arguments:
+          - "@doctrine.orm.entity_manager"
+          - "@capco.proposal.repository"
+          - "@capco.follower.repository"
+      tags:
+          - { name: overblog_graphql.mutation }
   Capco\AppBundle\GraphQL\Mutation\UnfollowProposalMutation:
       # only for sf < 3.3
       class: Capco\AppBundle\GraphQL\Mutation\UnfollowProposalMutation
