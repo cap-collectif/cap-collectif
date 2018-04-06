@@ -26,5 +26,7 @@ class ParticipantConnectionEdgeRegistredAnonymouslyResolver
 
             return $registration->isPrivate();
         }
+
+        return false;
     }
 }

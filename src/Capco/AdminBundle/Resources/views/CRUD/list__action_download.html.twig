@@ -1,25 +1,31 @@
 {% set steps = object.exportableSteps %}
-{% if steps | length > 0 %}
-
-    {% if steps | length == 1 %}
-        <a href="{{ path('app_project_download', {'stepSlug': steps[0].step.slug, 'projectSlug': object.slug}) }}" class="btn btn-default btn-sm view_link" >
-            <i class="cap cap-download-2"></i> {{ 'project.download.button' | trans({}, 'CapcoAppBundle') }}
-        </a>
-    {% else %}
-        <div style="position:relative; float:left;">
-            <a class="btn btn-sm btn-default view_link sonata-ba-action dropdown-toggle" type="button" data-toggle="dropdown" style="border-radius:0;margin-left:-1px;">
-                <i class="cap cap-download-2"></i> {{ 'project.download.button' | trans({}, 'CapcoAppBundle') }} <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" role="menu" style="position: absolute; top: 100%;">
-                {% for pas in steps %}
-                    <li class="small">
-                        <a href="{{ path('app_project_download', {'stepSlug': pas.step.slug, 'projectSlug': object.slug}) }}" >
-                            {{ 'project.download.step' | trans({'%position%': pas.position, '%title%': pas.step.title}, 'CapcoAppBundle') }}
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
-
-{% endif %}
+<button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <i class="cap cap-download-2"></i> {{ 'project.download.button' | trans({}, 'CapcoAppBundle') }}
+  <span class="caret"></span>
+</button>
+<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+  <li><a href="{{ path('app_export_project_contributors', {'projectId': object.id }) }}">
+    <strong>{{ 'admin.fields.recent_contributions.project'|trans({}, 'CapcoAppBundle') }}</strong>
+    - {{ 'event_registration.listing.title_all'|trans({}, 'CapcoAppBundle') }}
+  </a></li>
+  {% for pas in steps %}
+  <li>
+      <a href="{{ path('app_project_download', {'stepSlug': pas.step.slug, 'projectSlug': object.slug}) }}" >
+          <strong>{{ 'admin.label.step'| trans({}, 'CapcoAppBundle') }}
+          {{ pas.position }}
+          {{ pas.step.title }}
+          </strong>
+          - {{ (pas.step.isQuestionnaireStep() ? 'list-of-answers' : 'list-of-contributions')| trans({}, 'CapcoAppBundle') }}
+      </a>
+  </li>
+  <li>
+      <a href="{{ path('app_export_step_contributors', {'stepId': pas.step.id}) }}" >
+          <strong>{{ 'admin.label.step'| trans({}, 'CapcoAppBundle') }}
+          {{ pas.position }}
+          {{ pas.step.title }}
+          </strong>
+          - {{ 'event_registration.listing.title_all'|trans({}, 'CapcoAppBundle') }}
+      </a>
+  </li>
+  {% endfor %}
+</ul>

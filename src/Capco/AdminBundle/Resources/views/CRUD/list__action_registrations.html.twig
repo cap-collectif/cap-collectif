@@ -1,7 +1,9 @@
-<a
-  class="btn btn-sm btn-default view_link"
-  href="{{ path('app_export_event_participants', {'eventId': object.id }) }}"
-  target="_blank"
->
-  {{ 'admin.label.export.members'|trans({}, 'CapcoAppBundle') }}
-</a>
+{% if object.registrations | length > 0 %}
+<button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+  <i class="cap cap-download-2"></i> {{ 'project.download.button' | trans({}, 'CapcoAppBundle') }}
+  <span class="caret"></span>
+</button>
+<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+  <li><a href="{{ path('app_export_event_participants', {'eventId': object.id }) }}">{{ 'admin.label.export.members'|trans({}, 'CapcoAppBundle') }}</a></li>
+</ul>
+{% endif %}
