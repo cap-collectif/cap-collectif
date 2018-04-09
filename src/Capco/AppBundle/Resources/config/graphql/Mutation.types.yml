@@ -11,6 +11,27 @@ Mutation:
                     payloadType: ChangeUserNotificationsConfigurationPayload
                     mutateAndGetPayload: "@=mutation('changeUserNotificationsConfiguration', [value, user])"
         # Proposal
+          addProposalVote:
+               access: "@=hasRole('ROLE_USER')"
+               builder: "Relay::Mutation"
+               builderConfig:
+                   inputType: AddProposalVoteInput
+                   payloadType: AddProposalVotePayload
+                   mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddProposalVoteMutation", [value, user])'
+          removeProposalVote:
+               access: "@=hasRole('ROLE_USER')"
+               builder: "Relay::Mutation"
+               builderConfig:
+                   inputType: RemoveProposalVoteInput
+                   payloadType: RemoveProposalVotePayload
+                   mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\RemoveProposalVoteMutation", [value, user])'
+          reorderProposalVote:
+               access: "@=hasRole('ROLE_USER')"
+               builder: "Relay::Mutation"
+               builderConfig:
+                   inputType: ReorderProposalVoteInput
+                   payloadType: ReorderProposalVotePayload
+                   mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ReorderProposalVoteMutation", [value, user])'
           changeProposalPublicationStatus:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: "Relay::Mutation"

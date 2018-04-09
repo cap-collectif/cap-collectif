@@ -1,3 +1,20 @@
+input AddProposalVoteInput {
+  # The Node ID of the proposal to vote.
+  proposalId: ID!
+
+  # The Node ID of the step.
+  stepId: ID!
+
+  # The vote will be anonymous.
+  anonymously: Boolean
+  clientMutationId: String
+}
+
+type AddProposalVotePayload {
+  proposal: Proposal!
+  clientMutationId: String
+}
+
 input AddUsersInGroupInput {
   # Users that will be added to the group.
   users: [ID!]!
@@ -741,6 +758,9 @@ type MultipleChoiceQuestionValidationRule {
 
 type Mutation {
   changeUserNotificationsConfiguration(input: ChangeUserNotificationsConfigurationInput!): ChangeUserNotificationsConfigurationPayload
+  addProposalVote(input: AddProposalVoteInput!): AddProposalVotePayload
+  removeProposalVote(input: RemoveProposalVoteInput!): RemoveProposalVotePayload
+  reorderProposalVote(input: ReorderProposalVoteInput!): ReorderProposalVotePayload
   changeProposalPublicationStatus(input: ChangeProposalPublicationStatusInput!): ChangeProposalPublicationStatusPayload
   changeProposalContent(input: ChangeProposalContentInput!): ChangeProposalContentPayload
   createProposal(input: CreateProposalInput!): CreateProposalPayload
@@ -1628,6 +1648,34 @@ type RankingStep implements Step {
   id: ID!
   kind: String!
   title: String!
+}
+
+input RemoveProposalVoteInput {
+  # The Node ID of the proposal to unvote.
+  proposalId: ID!
+
+  # The Node ID of the contribuable step.
+  stepId: ID!
+  clientMutationId: String
+}
+
+type RemoveProposalVotePayload {
+  proposal: Proposal!
+  clientMutationId: String
+}
+
+input ReorderProposalVoteInput {
+  # Place the vote after the vote with this id. Pass null to place it at the top.
+  afterVoteId: ID
+
+  # The id of the vote to move.
+  voteId: ID!
+  clientMutationId: String
+}
+
+type ReorderProposalVotePayload {
+  proposal: Proposal!
+  clientMutationId: String
 }
 
 # A report
