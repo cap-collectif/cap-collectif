@@ -67,7 +67,7 @@ Scenario: Logged in admin, wants to change the proposal's status
   And I wait 2 seconds
   Then I should see "global.saved"
 
-@database @elasticsearch @dev
+@database @elasticsearch
 Scenario: Logged in admin, wants to delete a proposal and check if follower are not present
   Given I am logged in as admin
   And I go to the admin proposal page with proposalid "proposal10"

@@ -776,6 +776,7 @@ class UserRepository extends EntityRepository
         $query = $this->createQueryBuilder('u')
             ->select('count(u.id)')
             ->join('u.followingProposals', 'f')
+            ->join('f.proposal', 'p')
             ->andWhere('f.proposal = :proposal')
             ->andWhere('p.deletedAt IS NULL')
             ->setParameter('proposal', $proposal);
