@@ -1,7 +1,7 @@
-div.geosearch form{
+div.geosearch form {
   border-radius: 4px;
   border-left: none;
-  background-color: #fafafa;
+  background-color: $form-bgc;
   background-clip: padding-box;
   z-index: -1;
   height: auto;
@@ -10,21 +10,21 @@ div.geosearch form{
   max-width: 270px;
 }
 
-div.geosearch a.reset{
+div.geosearch a.reset {
   color: black;
   position: absolute;
   padding: 0 8px;
-  right: 1px;
+  right: 0;
   top: 0;
   cursor: pointer;
   border: none;
-  background-color: #fafafa;
+  background-color: $form-bgc;
   line-height: 26px;
 }
 
 div.geosearch a.reset:hover {
   background-color: $border-color;
-  border-color: #c6c6c6;
+  border-color: $dark-gray;
   cursor: pointer;
 }
 
@@ -40,21 +40,26 @@ div.geosearch input.glass {
   text-indent: 8px;
 }
 
-div.geosearch a.search{
+div.geosearch a.search {
   display: none;
 }
 
 div.geosearch div.results.active {
   top: 30px;
-  background-color: #fafafa;
+  background-color: $form-bgc;
   padding: 8px 0;
-  border-top: 1px solid #c6c6c6;
+  border-top: 1px solid $dark-gray;
+}
+
+div.geosearch div.results div {
+  padding: 2px;
 }
 
 div.geosearch div.results > :hover {
   background-color: $border-color;
-  border-color: #c6c6c6;
+  border-color: $dark-gray;
   cursor: pointer;
+  padding: 2px;
 }
 
 .geoseach {

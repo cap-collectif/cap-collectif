@@ -1,10 +1,14 @@
 // @flow
 import { GeoSearchControl, GoogleProvider } from 'leaflet-geosearch';
 import { MapControl } from 'react-leaflet';
-import { intlShape, injectIntl } from 'react-intl';
+import { injectIntl, type IntlShape } from 'react-intl';
 import config from '../../../config';
 
-export class LeafletSearch extends MapControl {
+type Props = {
+  intl: IntlShape,
+};
+
+export class LeafletSearch extends MapControl<Props> {
   createLeafletElement() {
     const { intl } = this.props;
 
@@ -25,7 +29,6 @@ export class LeafletSearch extends MapControl {
       keepResult: false,
       searchLabel: intl.formatMessage({
         id: 'search_placeholder',
-        values: {},
       }),
       retainZoomLevel: false,
       animateZoom: true,
@@ -48,9 +51,5 @@ export class LeafletSearch extends MapControl {
     });
   }
 }
-
-LeafletSearch.propTypes = {
-  intl: intlShape.isRequired,
-};
 
 export default injectIntl(LeafletSearch);
