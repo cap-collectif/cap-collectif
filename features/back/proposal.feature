@@ -68,7 +68,7 @@ Scenario: Logged in admin, wants to change the proposal's status
   Then I should see "global.saved"
 
 @database @elasticsearch
-Scenario: Logged in admin, wants to delete a proposal and check if follower are not present
+Scenario: Logged in admin, wants to delete a proposal and check if followers are not present
   Given I am logged in as admin
   And I go to the admin proposal page with proposalid "proposal10"
   Then I go to the admin proposal status tab
