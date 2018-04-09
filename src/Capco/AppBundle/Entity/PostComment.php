@@ -37,11 +37,6 @@ class PostComment extends Comment
         return $this->getPost();
     }
 
-    public function getKind(): string
-    {
-        return 'newsComment';
-    }
-
     public function setRelatedObject($object)
     {
         return $this->setPost($object);

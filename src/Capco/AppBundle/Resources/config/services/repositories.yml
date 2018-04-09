@@ -9,11 +9,6 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Argument']
 
-  capco.reply.repository:
-    class: Capco\AppBundle\Repository\ReplyRepository
-    factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:Reply']
-
   capco.argument_vote.repository:
     class: Capco\AppBundle\Repository\ArgumentVoteRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
@@ -93,21 +88,6 @@ services:
     class: Capco\AppBundle\Repository\CommentRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Comment']
-
-  capco.post_comment.repository:
-      class: Capco\AppBundle\Repository\PostCommentRepository
-      factory: ['@doctrine.orm.entity_manager', getRepository]
-      arguments: ['CapcoAppBundle:PostComment']
-
-  capco.proposal_comment.repository:
-    class: Capco\AppBundle\Repository\ProposalCommentRepository
-    factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:ProposalComment']
-
-  capco.comment_vote.repository:
-      class: Capco\AppBundle\Repository\CommentVoteRepository
-      factory: ['@doctrine.orm.entity_manager', getRepository]
-      arguments: ['CapcoAppBundle:CommentVote']
 
   capco.proposal.repository:
     class: Capco\AppBundle\Repository\ProposalRepository
@@ -263,13 +243,3 @@ services:
     class: Capco\AppBundle\Repository\FollowerRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Follower']
-
-  capco.source_vote.repository:
-    class: Capco\AppBundle\Repository\SourceVoteRepository
-    factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:SourceVote']
-
-  capco.opinion_version_vote.repository:
-    class: Capco\AppBundle\Repository\OpinionVersionVoteRepository
-    factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:OpinionVersionVote']

@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Follower;
-use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Selection;
@@ -34,6 +33,7 @@ class ProposalMutation implements ContainerAwareInterface
         }
 
         $author = $proposal->getAuthor();
+        $proposalForm = $proposal->getProposalForm();
 
         $em->remove($proposal); // softdeleted
         $em->flush();
@@ -151,6 +151,8 @@ class ProposalMutation implements ContainerAwareInterface
         $proposal->setStatus($status);
         $em->flush();
 
+        $this->container->get('capco.proposal_notifier')->onStatusChangeInCollect($proposal);
+
         // Synchronously index
         $indexer = $this->container->get('capco.elasticsearch.indexer');
         $indexer->index(get_class($proposal), $proposal->getId());
@@ -179,6 +181,8 @@ class ProposalMutation implements ContainerAwareInterface
 
         $selection->setStatus($status);
         $em->flush();
+
+        $this->container->get('capco.proposal_notifier')->onStatusChangeInSelection($selection);
 
         $proposal = $this->getProposal($proposalId);
 
@@ -342,7 +346,6 @@ class ProposalMutation implements ContainerAwareInterface
         $follower = new Follower();
         $follower->setUser($user);
         $follower->setProposal($proposal);
-        $follower->setNotifiedOf(FollowerNotifiedOfInterface::ALL);
 
         $proposal
             ->setDraft($draft)

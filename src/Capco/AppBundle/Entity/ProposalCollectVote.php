@@ -63,11 +63,6 @@ class ProposalCollectVote extends AbstractVote
         return $this->proposal;
     }
 
-    public function getKind(): string
-    {
-        return 'proposalCollectVote';
-    }
-
     /**
      * @ORM\PreRemove
      */

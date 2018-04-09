@@ -2,53 +2,20 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Traits\AnonymousVoteRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 
+/**
+ * ProposalSelectionVoteRepository.
+ */
 class ProposalSelectionVoteRepository extends EntityRepository
 {
     use AnonymousVoteRepositoryTrait;
 
-    public function countByAuthorAndProject(User $author, Project $project): int
-    {
-        return $this->createQueryBuilder('pv')
-            ->select('COUNT(DISTINCT pv)')
-            ->andWhere('pv.user = :author')
-            ->andWhere('pv.expired = false')
-            ->leftJoin('pv.proposal', 'proposal')
-            ->andWhere('proposal.deletedAt IS NULL')
-            ->andWhere('pv.selectionStep IN (:steps)')
-            ->setParameter('steps', array_map(function ($step) {
-                return $step;
-            }, $project->getRealSteps()))
-            ->setParameter('author', $author)
-            ->getQuery()
-            ->getSingleScalarResult()
-            ;
-    }
-
-    public function countByAuthorAndStep(User $author, SelectionStep $step): int
-    {
-        return $this->createQueryBuilder('pv')
-            ->select('COUNT(DISTINCT pv)')
-            ->andWhere('pv.selectionStep = :step')
-            ->andWhere('pv.user = :author')
-            ->andWhere('pv.expired = false')
-            ->leftJoin('pv.proposal', 'proposal')
-            ->andWhere('proposal.deletedAt IS NULL')
-            ->setParameter('author', $author)
-            ->setParameter('step', $step)
-            ->getQuery()
-            ->getSingleScalarResult()
-            ;
-    }
-
-    public function getVotesByStepAndUser(SelectionStep $step, User $user): array
+    public function getVotesByStepAndUser(SelectionStep $step, User $user)
     {
         return $this->createQueryBuilder('pv')
           ->select('pv', 'proposal')
@@ -120,66 +87,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
         return $this->getCountsByProposalGroupedBySteps($proposal, true);
     }
 
-    public function getVotesForProposal(Proposal $proposal, ?int $limit = null, string $field, int $offset = 0, string $direction = 'ASC'): Paginator
-    {
-        $query = $this->createQueryBuilder('pv')
-            ->andWhere('pv.proposal = :proposal')
-            ->setParameter('proposal', $proposal)
-        ;
-
-        if ('CREATED_AT' === $field) {
-            $query->addOrderBy('pv.createdAt', $direction);
-        }
-
-        if ($limit) {
-            $query->setMaxResults($limit);
-            $query->setFirstResult($offset);
-        }
-
-        return new Paginator($query);
-    }
-
-    public function countVotesForProposal(Proposal $proposal): int
-    {
-        return (int) $this->createQueryBuilder('pv')
-            ->select('COUNT(pv.id)')
-            ->andWhere('pv.proposal = :proposal')
-            ->setParameter('proposal', $proposal)
-            ->getQuery()->getSingleScalarResult()
-        ;
-    }
-
-    public function getByProposalAndStep(Proposal $proposal, SelectionStep $step, int $litmit, int $offset, string $field, string $direction): Paginator
-    {
-        $qb = $this->createQueryBuilder('pv')
-            ->andWhere('pv.selectionStep = :step')
-            ->andWhere('pv.proposal = :proposal')
-            ->setParameter('step', $step)
-            ->setParameter('proposal', $proposal);
-
-        if ('CREATED_AT' === $field) {
-            $qb->addOrderBy('pv.createdAt', $direction);
-        }
-
-        $qb->setMaxResults($litmit)
-            ->setFirstResult($offset);
-
-        return new Paginator($qb);
-    }
-
-    public function countVotesByProposalAndStep(Proposal $proposal, SelectionStep $step): int
-    {
-        return (int) $this->createQueryBuilder('pv')
-            ->select('COUNT(pv)')
-            ->andWhere('pv.selectionStep = :step')
-            ->andWhere('pv.proposal = :proposal')
-            ->setParameter('proposal', $proposal)
-            ->setParameter('step', $step)
-            ->getQuery()
-            ->getSingleScalarResult();
-    }
-
-    public function getVotesForProposalByStepId(Proposal $proposal, string $stepId, $limit = null, $offset = 0): array
+    public function getVotesForProposalByStepId(Proposal $proposal, string $stepId, $limit = null, $offset = 0)
     {
         $qb = $this->createQueryBuilder('pv')
             ->leftJoin('pv.selectionStep', 'ss')
@@ -198,6 +106,51 @@ class ProposalSelectionVoteRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    // public function getVotesForUserInProjectGroupedBySteps(User $user, Project $project)
+    // {
+    //     $qb = $this->createQueryBuilder('pv')
+    //         ->addSelect('p', 'pf', 's')
+    //         ->leftJoin('pv.proposal', 'p')
+    //         ->leftJoin('p.proposalForm', 'pf')
+    //         ->leftJoin('pv.selectionStep', 'ss')
+    //         ->leftJoin('pf.step', 's')
+    //         ->leftJoin('s.projectAbstractStep', 'pas')
+    //         ->where('pv.user = :user')
+    //         ->setParameter('user', $user)
+    //         ->andWhere('pas.project = :project')
+    //         ->setParameter('project', $project)
+    //         ->orderBy('pv.createdAt', 'DESC')
+    //         ->groupBy('ss.id')
+    //     ;
+
+    //     return $qb->getQuery()->getResult();
+    // }
+
+    // public function countForUserAndStep(User $user, SelectionStep $step)
+    // {
+    //     $qb = $this->createQueryBuilder('pv')
+    //         ->select('COUNT(pv.id) as votesCount')
+    //         ->where('pv.user = :user')
+    //         ->setParameter('user', $user)
+    //         ->andWhere('pv.selectionStep = :step')
+    //         ->setParameter('step', $step)
+    //     ;
+
+    //     return intval($qb->getQuery()->getSingleScalarResult());
+    // }
+
+    // public function InCollectStep(User $user, SelectionStep $step)
+    // {
+    //     $qb = $this->createQueryBuilder('pv')
+    //         ->where('pv.user = :user')
+    //         ->setParameter('user', $user)
+    //         ->andWhere('pv.selectionStep = :step')
+    //         ->setParameter('step', $step)
+    //     ;
+
+    //     return $qb->getQuery()->getResult();
+    // }
 
     public function getVotesCountForSelectionStep(SelectionStep $step, $themeId = null, $districtId = null, $categoryId = null)
     {

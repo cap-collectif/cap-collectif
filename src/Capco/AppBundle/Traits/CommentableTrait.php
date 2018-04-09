@@ -86,9 +86,9 @@ trait CommentableTrait
     /**
      * @return bool
      */
-    public function getIsCommentable(): bool
+    public function getIsCommentable()
     {
-        return $this->isCommentable ?? false;
+        return $this->isCommentable;
     }
 
     /**

@@ -88,26 +88,26 @@ trait VotableOkNokMitigeTrait
 
     public function incrementVotesCountByType($value)
     {
-        if (OpinionVote::VOTE_OK === $value) {
+        if ($value === OpinionVote::VOTE_OK) {
             ++$this->votesCountOk;
         }
-        if (OpinionVote::VOTE_NOK === $value) {
+        if ($value === OpinionVote::VOTE_NOK) {
             ++$this->votesCountNok;
         }
-        if (OpinionVote::VOTE_MITIGE === $value) {
+        if ($value === OpinionVote::VOTE_MITIGE) {
             ++$this->votesCountMitige;
         }
     }
 
     public function decrementVotesCountByType($value)
     {
-        if (OpinionVote::VOTE_OK === $value) {
+        if ($value === OpinionVote::VOTE_OK) {
             --$this->votesCountOk;
         }
-        if (OpinionVote::VOTE_NOK === $value) {
+        if ($value === OpinionVote::VOTE_NOK) {
             --$this->votesCountNok;
         }
-        if (OpinionVote::VOTE_MITIGE === $value) {
+        if ($value === OpinionVote::VOTE_MITIGE) {
             --$this->votesCountMitige;
         }
     }

@@ -19,51 +19,24 @@ class PostRepository extends EntityRepository
     public function getPublishedPostsByProposal(Proposal $proposal)
     {
         return $this->createPublishedPostsByProposalQB($proposal)
-            ->addSelect('a', 'm', 't')
-            ->leftJoin('p.Authors', 'a')
-            ->leftJoin('p.Media', 'm')
-            ->leftJoin('p.themes', 't')
-            ->addOrderBy('p.publishedAt', 'DESC')
-            ->setParameter('id', $proposal->getId())
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function getOrderedPublishedPostsByProposal(Proposal $proposal, ?int $limit = null, string $field, int $offset = 0, string $direction = 'ASC'): Paginator
-    {
-        $query = $this->createPublishedPostsByProposalQB($proposal)
-            ->addSelect('a', 'm', 't')
-            ->leftJoin('p.Authors', 'a')
-            ->leftJoin('p.Media', 'm')
-            ->leftJoin('p.themes', 't')
-            ->setParameter('id', $proposal->getId());
-
-        if ('CREATED_AT' === $field) {
-            $query->orderBy('p.createdAt', $direction);
-        }
-
-        if ('UPDATED_AT' === $field) {
-            $query->orderBy('p.updatedAt', $direction);
-        }
-
-        if ('PUBLISHED_AT' === $field) {
-            $query->orderBy('p.publishedAt', $direction);
-        }
-
-        if ($limit) {
-            $query->setMaxResults($limit);
-            $query->setFirstResult($offset);
-        }
-
-        return new Paginator($query);
+          ->addSelect('a', 'm', 't')
+          ->leftJoin('p.Authors', 'a')
+          ->leftJoin('p.Media', 'm')
+          ->leftJoin('p.themes', 't')
+          ->addOrderBy('p.publishedAt', 'DESC')
+          ->setParameter('id', $proposal->getId())
+          ->getQuery()
+          ->getResult()
+        ;
     }
 
     public function countPublishedPostsByProposal(Proposal $proposal): int
     {
         return (int) $this->createPublishedPostsByProposalQB($proposal)
-            ->select('count(p.id)')
-            ->getQuery()
-            ->getSingleScalarResult();
+          ->select('count(p.id)')
+          ->getQuery()
+          ->getSingleScalarResult()
+        ;
     }
 
     /**
@@ -93,16 +66,19 @@ class PostRepository extends EntityRepository
             ->leftJoin('p.projects', 'c', 'WITH', 'c.isEnabled = true')
             ->leftJoin('p.proposals', 'proposal')
             ->andWhere('p.displayedOnBlog = true')
-            ->orderBy('p.publishedAt', 'DESC');
+            ->orderBy('p.publishedAt', 'DESC')
+        ;
 
-        if (null !== $themeSlug && Theme::FILTER_ALL !== $themeSlug) {
+        if ($themeSlug !== null && $themeSlug !== Theme::FILTER_ALL) {
             $qb->andWhere('t.slug = :theme')
-                ->setParameter('theme', $themeSlug);
+                ->setParameter('theme', $themeSlug)
+            ;
         }
 
-        if (null !== $projectSlug && Project::FILTER_ALL !== $projectSlug) {
+        if ($projectSlug !== null && $projectSlug !== Project::FILTER_ALL) {
             $qb->andWhere('c.slug = :project')
-                ->setParameter('project', $projectSlug);
+                ->setParameter('project', $projectSlug)
+            ;
         }
 
         $query = $qb->getQuery();
@@ -127,23 +103,27 @@ class PostRepository extends EntityRepository
     public function countSearchResults($themeSlug = null, $projectSlug = null)
     {
         $qb = $this->getIsPublishedQueryBuilder('p')
-            ->select('COUNT(p.id)');
+            ->select('COUNT(p.id)')
+        ;
 
-        if (null !== $themeSlug && Theme::FILTER_ALL !== $themeSlug) {
+        if ($themeSlug !== null && $themeSlug !== Theme::FILTER_ALL) {
             $qb->innerJoin('p.themes', 't', 'WITH', 't.isEnabled = true')
                 ->andWhere('t.slug = :theme')
-                ->setParameter('theme', $themeSlug);
+                ->setParameter('theme', $themeSlug)
+            ;
         }
 
-        if (null !== $projectSlug && Project::FILTER_ALL !== $projectSlug) {
+        if ($projectSlug !== null && $projectSlug !== Project::FILTER_ALL) {
             $qb->innerJoin('p.projects', 'c', 'WITH', 'c.isEnabled = true')
                 ->andWhere('c.slug = :project')
-                ->setParameter('project', $projectSlug);
+                ->setParameter('project', $projectSlug)
+            ;
         }
 
         return $qb
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult()
+        ;
     }
 
     /**
@@ -163,7 +143,8 @@ class PostRepository extends EntityRepository
             ->leftJoin('p.projects', 'c')
             ->leftJoin('p.themes', 't')
             ->andWhere('p.displayedOnBlog = true')
-            ->addOrderBy('p.publishedAt', 'DESC');
+            ->addOrderBy('p.publishedAt', 'DESC')
+        ;
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -195,7 +176,8 @@ class PostRepository extends EntityRepository
             ->leftJoin('p.themes', 't')
             ->andWhere('c.slug = :project')
             ->setParameter('project', $projectSlug)
-            ->addOrderBy('p.publishedAt', 'DESC');
+            ->addOrderBy('p.publishedAt', 'DESC')
+        ;
 
         if ($limit) {
             $qb->setMaxResults($limit);
@@ -226,7 +208,8 @@ class PostRepository extends EntityRepository
             ->leftJoin('p.projects', 'c', 'WITH', 'c.isEnabled = true')
             ->andWhere('p.slug = :slug')
             ->setParameter('slug', $slug)
-            ->orderBy('p.publishedAt', 'DESC');
+            ->orderBy('p.publishedAt', 'DESC')
+        ;
 
         return $qb->getQuery()->getOneOrNullResult();
     }
@@ -262,8 +245,9 @@ class PostRepository extends EntityRepository
     private function createPublishedPostsByProposalQB(Proposal $proposal)
     {
         return $this->getIsPublishedQueryBuilder()
-            ->leftJoin('p.proposals', 'proposal')
-            ->andWhere('proposal.id = :id')
-            ->setParameter('id', $proposal->getId());
+          ->leftJoin('p.proposals', 'proposal')
+          ->andWhere('proposal.id = :id')
+          ->setParameter('id', $proposal->getId())
+        ;
     }
 }

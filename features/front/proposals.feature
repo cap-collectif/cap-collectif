@@ -118,7 +118,7 @@ Scenario: Anonymous user wants to see proposals likers
 # CRUD
 
 @database @javascript @elasticsearch
-Scenario: Logged in user wants to create/then delete a proposal and check if I follow/unfollow my proposal
+Scenario: Logged in user wants to create a proposal
   Given feature "districts" is enabled
   And I am logged in as user
   And I go to an open collect step
@@ -130,17 +130,6 @@ Scenario: Logged in user wants to create/then delete a proposal and check if I f
   And I wait 3 seconds
   And I submit the create proposal form
   And I should see my new proposal
-  And I should see "following"
-  Then I visited "manage followings page"
-  And I wait 1 seconds
-  And I should see "Nouvelle proposition créée"
-  Then I follow "Nouvelle proposition créée"
-  And I wait 1 seconds
-  And I click the delete proposal button
-  And I confirm proposal deletion
-  Then I visited "manage followings page"
-  And I wait 1 seconds
-  And I should not see "Nouvelle proposition créée"
 
 @database @javascript @elasticsearch
 Scenario: Logged in user wants to create a proposal with theme

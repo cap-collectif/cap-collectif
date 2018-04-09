@@ -50,9 +50,7 @@ Scenario: Logged in admin wants to evaluate a proposal
   And I fill the element "proposal evaluation evaluate more information" with value "C'est génial cette appli, les gens sont investit l'évaluation marche super bien !"
   And I evaluate the proposal presentation to "Au top"
   And I check "Incohérente" in the proposal definition evaluation
-  And I wait 1 seconds
   And I check "Je dis oui" in the proposal definition resume
-  And I wait 1 seconds
   And I save the custom evaluation
   And I wait 2 seconds
   Then I should see "global.saved"
@@ -66,18 +64,6 @@ Scenario: Logged in admin, wants to change the proposal's status
   And I save the proposal's status
   And I wait 2 seconds
   Then I should see "global.saved"
-
-@database @elasticsearch
-Scenario: Logged in admin, wants to delete a proposal and check if followers are not present
-  Given I am logged in as admin
-  And I go to the admin proposal page with proposalid "proposal10"
-  Then I go to the admin proposal status tab
-  And I delete the proposal
-  And I confirm the admin proposal deletion
-  And I should see status DELETED
-  Then I reload the page
-  And I go to the admin proposal followers tab
-  And I should not see an ".proposal__follower" element
 
 @database @elasticsearch
 Scenario: Logged in admin, wants to delete a proposal and re published it

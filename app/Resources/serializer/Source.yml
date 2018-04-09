@@ -40,7 +40,7 @@ Capco\AppBundle\Entity\Source:
             expose: true
             type: Capco\UserBundle\Entity\User
             serialized_name: author
-            groups: [Opinions, OpinionVersions, UsersInfos]
+            groups: [Opinions, OpinionVersions, UsersInfos, Elasticsearch]
     virtual_properties:
         canContribute:
             serialized_name: isContribuable

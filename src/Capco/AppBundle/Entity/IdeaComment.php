@@ -54,11 +54,6 @@ class IdeaComment extends Comment
         return $this->getIdea();
     }
 
-    public function getKind(): string
-    {
-        return 'ideaComment';
-    }
-
     /**
      * @param $object
      *

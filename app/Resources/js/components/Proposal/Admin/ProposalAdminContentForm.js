@@ -487,7 +487,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (
     address: proposal.form.usingAddress ? proposal.address : undefined,
     media: proposal.media ? proposal.media : null,
     responses: formatInitialResponsesValues(proposal.form.questions, proposal.responses),
-    addressText: proposal.formattedAddress,
+    addressText: proposal.address && JSON.parse(proposal.address)[0].formatted_address,
   },
 });
 
@@ -528,7 +528,6 @@ export default createFragmentContainer(
       body
       summary
       address
-      formattedAddress
       publicationStatus
       responses {
         question {

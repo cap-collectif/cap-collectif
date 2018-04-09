@@ -1,7 +1,0 @@
-IP:
-    type: custom-scalar
-    config:
-        # description: "A string containing an IP address."
-        serialize: ["Capco\\AppBundle\\GraphQL\\Type\\IPType", "serialize"]
-        parseValue: ["Capco\\AppBundle\\GraphQL\\Type\\IPType", "parseValue"]
-        parseLiteral: ["Capco\\AppBundle\\GraphQL\\Type\\IPType", "parseLiteral"]

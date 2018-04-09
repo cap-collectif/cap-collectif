@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Notifier;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Selection;
-use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalResolver;
+use Capco\AppBundle\GraphQL\Resolver\ProposalResolver;
 use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Proposal\ProposalAknowledgeMessage;

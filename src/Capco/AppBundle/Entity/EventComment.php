@@ -54,11 +54,6 @@ class EventComment extends Comment
         return $this->getEvent();
     }
 
-    public function getKind(): string
-    {
-        return 'eventComment';
-    }
-
     /**
      * @param $object
      *

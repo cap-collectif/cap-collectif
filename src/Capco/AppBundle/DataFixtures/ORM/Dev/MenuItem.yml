@@ -62,6 +62,15 @@ Capco\AppBundle\Entity\MenuItem:
     parent: '@MenuItem5'
     menu: 1
 
+  MenuItem8:
+    title: Charte
+    isEnabled: 1
+    isDeletable: 0
+    position: 6
+    parent: null
+    menu: 1
+    link: pages/charte
+
   MenuItem9:
     title: FAQ
     link: pages/faq
