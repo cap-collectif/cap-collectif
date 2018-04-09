@@ -3,11 +3,8 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Type;
 
 use Capco\AppBundle\Entity\Argument;
-<<<<<<< HEAD:src/Capco/AppBundle/GraphQL/Resolver/Type/NodeTypeResolver.php
 use Capco\AppBundle\Entity\Comment;
-=======
 use Capco\AppBundle\Entity\Event;
->>>>>>> Add API for event participants:src/Capco/AppBundle/GraphQL/Resolver/NodeTypeResolver.php
 use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
