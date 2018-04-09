@@ -214,7 +214,6 @@ class ProjectDownloadResolver
     public function getQuestionnaireStepData(QuestionnaireStep $questionnaireStep): array
     {
         $this->data = [];
-
         $replies = [];
 
         if ($questionnaireStep->getQuestionnaire()) {
@@ -227,6 +226,12 @@ class ProjectDownloadResolver
         }
 
         $this->getRepliesData($replies);
+
+        foreach ($this->data as &$answers) {
+            foreach ($answers as $key => $value) {
+                $answers[$key] = $this->formatText($value);
+            }
+        }
 
         return $this->data;
     }
@@ -469,7 +474,6 @@ class ProjectDownloadResolver
             $currentColumn = $startColumn;
             for ($i = 0; $i < $nbCols; ++$i) {
                 $headerKey = \is_array($headers[$i]) ? $headers[$i]['label'] : $headers[$i];
-
                 $sheet->setCellValue($currentColumn . $currentRow, $row[$headerKey]);
                 ++$currentColumn;
             }

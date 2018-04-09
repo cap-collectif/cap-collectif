@@ -80,8 +80,8 @@ RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 199369E5404BD
 	  } > /etc/apt/preferences.d/mariadb && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install \
-        mariadb-server=10.1.31+maria-1~jessie \
-        mariadb-client=10.1.31+maria-1~jessie \
+        mariadb-server=10.1.32+maria-1~jessie \
+        mariadb-client=10.1.32+maria-1~jessie \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
