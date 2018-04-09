@@ -17,7 +17,7 @@ Mutation:
                builderConfig:
                    inputType: AddProposalVoteInput
                    payloadType: AddProposalVotePayload
-                   mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddProposalVoteMutation", [value, user])'
+                   mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddProposalVoteMutation", [value, user, request])'
           removeProposalVote:
                access: "@=hasRole('ROLE_USER')"
                builder: "Relay::Mutation"
@@ -25,13 +25,13 @@ Mutation:
                    inputType: RemoveProposalVoteInput
                    payloadType: RemoveProposalVotePayload
                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\RemoveProposalVoteMutation", [value, user])'
-          reorderProposalVote:
-               access: "@=hasRole('ROLE_USER')"
-               builder: "Relay::Mutation"
-               builderConfig:
-                   inputType: ReorderProposalVoteInput
-                   payloadType: ReorderProposalVotePayload
-                   mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ReorderProposalVoteMutation", [value, user])'
+          # reorderProposalVote:
+          #      access: "@=hasRole('ROLE_USER')"
+          #      builder: "Relay::Mutation"
+          #      builderConfig:
+          #          inputType: ReorderProposalVoteInput
+          #          payloadType: ReorderProposalVotePayload
+          #          mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ReorderProposalVoteMutation", [value, user])'
           changeProposalPublicationStatus:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: "Relay::Mutation"
