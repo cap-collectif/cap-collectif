@@ -1687,6 +1687,20 @@ type RemoveProposalVotePayload {
   clientMutationId: String
 }
 
+input ReorderProposalVoteInput {
+  # Place the vote after the vote with this id. Pass null to place it at the top.
+  afterVoteId: ID
+
+  # The id of the vote to move.
+  voteId: ID!
+  clientMutationId: String
+}
+
+type ReorderProposalVotePayload {
+  proposal: Proposal!
+  clientMutationId: String
+}
+
 # A report
 type Reporting implements Contribution & ContributionWithAuthor {
   # Identifies the date and time when the object was created.
