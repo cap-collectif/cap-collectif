@@ -2,98 +2,131 @@
    $Carousel
 ================================================================*/
 
-.vertical .carousel-inner {
-    height: 100%;
-}
+.carousel__desktop {
+    display: flex;
+    margin-bottom: 45px;
 
-.carousel.vertical .item {
-    -webkit-transition: 0.6s ease-in-out top;
-    -moz-transition: 0.6s ease-in-out top;
-    -ms-transition: 0.6s ease-in-out top;
-    -o-transition: 0.6s ease-in-out top;
-    transition: 0.6s ease-in-out top;
-}
+    .carousel__navigation {
+        width: 30%;
 
-.carousel.vertical .active {
-    top: 0;
-}
+        ul {
+            padding: 0;
 
-.carousel.vertical .next {
-    top: 400px;
-}
+            li {
+                padding: 25px 53px;
+                list-style-type: none;
 
-.carousel.vertical .prev {
-    top: -400px;
-}
+                b {
+                    font-size: 18px;
+                }
+                
+                &.active {
+                    background-color: #e2e3e5;
+                }
+            }
+        }
 
-.carousel.vertical .next.left,
-.carousel.vertical .prev.right {
-    top: 0;
-}
+    }
 
-.carousel.vertical .active.left {
-    top: -400px;
-}
-
-.carousel.vertical .active.right {
-    top: 400px;
-}
-
-.carousel.vertical .item {
-    left: 0;
-}
-
-.carousel .bg__wrapper {
-    height: 300px;
-}
-
-@media (max-width: $screen-xs-max) {
-    .carousel .bg__wrapper {
-        height: 100px;
+    .carousel__content {
+        width: 70%;
     }
 }
 
-// sidebar
-@media (min-width: $screen-xs-min) {
-    .carousel-sidebar {
-        padding-left: 20px;
-    }
-}
 
-.carousel-sidebar {
-    min-height: 380px;
-}
-
-.carousel .img-responsive,
-.carousel .bg__wrapper {
-    margin-bottom: 15px;
-}
-
-.carousel-sidebar .nav > li > a {
-    border-left: 2px solid $border-color;
-}
-
-.carousel-sidebar .nav > li > a:hover {
-    background-color: transparent;
-}
-
-.carousel-sidebar .nav > li.active > a,
-.carousel-sidebar .nav > li.active:focus > a {
-    background: transparent;
-    border-left-color: $brand-color-2;
-}
-
-.carousel-sidebar .nav .nav > .active > a,
-.carousel-sidebar .nav .nav > .active:hover > a,
-.carousel-sidebar .nav .nav > .active:focus > a {
-    padding-left: 28px;
-}
-
-.carousel-sidebar .nav > .active > ul {
-    display: block;
-}
-
-.carousel-inner .item img,
-.carousel-inner .item span.bg__wrapper {
-    border: 1px solid $border-color;
-}
+//
+//.vertical .carousel-inner {
+//    height: 100%;
+//}
+//
+//.carousel.vertical .item {
+//    -webkit-transition: 0.6s ease-in-out top;
+//    -moz-transition: 0.6s ease-in-out top;
+//    -ms-transition: 0.6s ease-in-out top;
+//    -o-transition: 0.6s ease-in-out top;
+//    transition: 0.6s ease-in-out top;
+//}
+//
+//.carousel.vertical .active {
+//    top: 0;
+//}
+//
+//.carousel.vertical .next {
+//    top: 400px;
+//}
+//
+//.carousel.vertical .prev {
+//    top: -400px;
+//}
+//
+//.carousel.vertical .next.left,
+//.carousel.vertical .prev.right {
+//    top: 0;
+//}
+//
+//.carousel.vertical .active.left {
+//    top: -400px;
+//}
+//
+//.carousel.vertical .active.right {
+//    top: 400px;
+//}
+//
+//.carousel.vertical .item {
+//    left: 0;
+//}
+//
+//.carousel .bg__wrapper {
+//    height: 300px;
+//}
+//
+//@media (max-width: $screen-xs-max) {
+//    .carousel .bg__wrapper {
+//        height: 100px;
+//    }
+//}
+//
+//// sidebar
+//@media (min-width: $screen-xs-min) {
+//    .carousel-sidebar {
+//        padding-left: 20px;
+//    }
+//}
+//
+//.carousel-sidebar {
+//    min-height: 380px;
+//}
+//
+//.carousel .img-responsive,
+//.carousel .bg__wrapper {
+//    margin-bottom: 15px;
+//}
+//
+//.carousel-sidebar .nav > li > a {
+//    border-left: 2px solid $border-color;
+//}
+//
+//.carousel-sidebar .nav > li > a:hover {
+//    background-color: transparent;
+//}
+//
+//.carousel-sidebar .nav > li.active > a,
+//.carousel-sidebar .nav > li.active:focus > a {
+//    background: transparent;
+//    border-left-color: $brand-color-2;
+//}
+//
+//.carousel-sidebar .nav .nav > .active > a,
+//.carousel-sidebar .nav .nav > .active:hover > a,
+//.carousel-sidebar .nav .nav > .active:focus > a {
+//    padding-left: 28px;
+//}
+//
+//.carousel-sidebar .nav > .active > ul {
+//    display: block;
+//}
+//
+//.carousel-inner .item img,
+//.carousel-inner .item span.bg__wrapper {
+//    border: 1px solid $border-color;
+//}
