@@ -1,11 +1,13 @@
-import React, { PropTypes } from 'react';
+// @flow
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { Alert } from 'react-bootstrap';
 import { reduxForm, formValueSelector, Field } from 'redux-form';
 import { vote } from '../../../redux/modules/proposal';
 import { isEmail } from '../../../services/Validator';
 import renderComponent from '../../Form/Field';
+import type { State } from '../../../types';
 
 const form = 'proposalVote';
 const validate = (values, { anonymous }) => {
@@ -25,20 +27,19 @@ const validate = (values, { anonymous }) => {
   return errors;
 };
 
-const ProposalVoteForm = React.createClass({
-  propTypes: {
-    proposal: PropTypes.object.isRequired,
-    step: PropTypes.object.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
-    isPrivate: PropTypes.bool.isRequired,
-    anonymous: PropTypes.bool.isRequired,
-    comment: PropTypes.string.isRequired,
-    error: PropTypes.string,
-    voteWithoutAccount: PropTypes.bool.isRequired,
-  },
+type Props = {
+  proposal: Object,
+  step: Object,
+  handleSubmit: () => void,
+  isPrivate: boolean,
+  anonymous: boolean,
+  error: string,
+  voteWithoutAccount: boolean,
+};
 
+class ProposalVoteForm extends React.Component<Props> {
   render() {
-    const { error, handleSubmit, comment, isPrivate, anonymous, voteWithoutAccount } = this.props;
+    const { error, handleSubmit, anonymous, voteWithoutAccount } = this.props;
     return (
       <form onSubmit={handleSubmit}>
         {error && (
@@ -66,7 +67,7 @@ const ProposalVoteForm = React.createClass({
               label={<FormattedMessage id="proposal.vote.form.email" />}
             />
           )}
-        {comment.length > 0 && (voteWithoutAccount || !anonymous) ? null : (
+        {voteWithoutAccount || !anonymous ? null : (
           <Field
             type="checkbox"
             component={renderComponent}
@@ -76,32 +77,12 @@ const ProposalVoteForm = React.createClass({
             children={<FormattedMessage id="proposal.vote.form.private" />}
           />
         )}
-        {!isPrivate &&
-          (!voteWithoutAccount || anonymous) && (
-            <Field
-              type="textarea"
-              component={renderComponent}
-              name="comment"
-              id="proposal-vote__comment"
-              label={
-                <span style={{ fontWeight: 'normal' }}>
-                  <FormattedMessage id="proposal.vote.form.comment" />
-                  <span className="excerpt">
-                    {' '}
-                    <FormattedMessage id="global.form.optional" />
-                  </span>
-                </span>
-              }
-              placeholder="proposal.vote.form.comment_placeholder"
-            />
-          )}
       </form>
     );
-  },
-});
+  }
+}
 
-const mapStateToProps = state => ({
-  comment: formValueSelector(form)(state, 'comment') || '',
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   isPrivate: formValueSelector(form)(state, 'private') || false,
   anonymous: state.user.user === null,
   voteWithoutAccount: state.default.features.vote_without_account,

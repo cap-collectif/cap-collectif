@@ -1,12 +1,12 @@
 // @flow
 import { takeEvery, select, call, put } from 'redux-saga/effects';
-import { SubmissionError } from 'redux-form';
 import LocalStorageService from '../../services/LocalStorageService';
-import Fetcher, { json } from '../../services/Fetcher';
+import Fetcher from '../../services/Fetcher';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
-import { CREATE_COMMENT_SUCCESS } from '../../constants/CommentConstants';
 import { PROPOSAL_PAGINATION, PROPOSAL_ORDER_RANDOM } from '../../constants/ProposalConstants';
+import addVote from '../../mutations/AddProposalVoteMutation';
+import removeVote from '../../mutations/RemoveProposalVoteMutation';
 import type { Exact, State as GlobalState, Dispatch, Uuid, Action } from '../../types';
 
 type Status = { name: string, id: number, color: string };
@@ -54,7 +54,6 @@ type VoteSuccessAction = {
   proposalId: Uuid,
   stepId: Uuid,
   vote: Object,
-  comment: Object,
 };
 type RequestLoadVotesAction = {
   type: 'proposal/VOTES_FETCH_REQUESTED',
@@ -190,17 +189,11 @@ export const closeVotesModal = (stepId: Uuid): CloseVotesModalActionAction => ({
   type: 'proposal/CLOSE_VOTES_MODAL',
   stepId,
 });
-export const voteSuccess = (
-  proposalId: Uuid,
-  stepId: Uuid,
-  vote: Object,
-  comment: Object,
-): VoteSuccessAction => ({
+export const voteSuccess = (proposalId: Uuid, stepId: Uuid, vote: Object): VoteSuccessAction => ({
   type: 'proposal/VOTE_SUCCEEDED',
   proposalId,
   stepId,
   vote,
-  comment,
 });
 export const loadVotes = (stepId: Uuid, proposalId: Uuid): RequestLoadVotesAction => ({
   type: 'proposal/VOTES_FETCH_REQUESTED',
@@ -335,42 +328,19 @@ export const addProposalInRandomResultsByStep = (
 };
 
 export const vote = (dispatch: Dispatch, step: Object, proposal: Object, data: Object) => {
-  let url = '';
-  switch (step.type) {
-    case 'selection':
-      url = `/selection_steps/${step.id}/proposals/${proposal.id}/votes`;
-      break;
-    case 'collect':
-      url = `/collect_steps/${step.id}/proposals/${proposal.id}/votes`;
-      break;
-    default:
-      console.log('unknown step'); // eslint-disable-line no-console
-      return false;
-  }
   dispatch(startVoting());
-  return Fetcher.postToJson(url, data)
-    .then(newVote => {
-      dispatch(voteSuccess(proposal.id, step.id, newVote, data.comment));
-      if (data.comment) {
-        FluxDispatcher.dispatch({
-          actionType: CREATE_COMMENT_SUCCESS,
-          message: null,
-        });
-      }
+  return addVote
+    .commit({ input: { proposalId: proposal.id, stepId: step.id, anonymously: data.private } })
+    .then(() => {
+      // newVote
+      // dispatch(voteSuccess(proposal.id, step.id, newVote));
       FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,
         alert: { bsStyle: 'success', content: 'proposal.request.vote.success' },
       });
     })
-    .catch(({ response }) => {
-      if (response.message === 'Validation Failed') {
-        dispatch(stopVoting());
-        if (typeof response.errors.children.email === 'object') {
-          throw new SubmissionError({
-            _error: response.errors.children.email.errors[0],
-          });
-        }
-      }
+    .catch(e => {
+      console.error(e);
       dispatch(closeVoteModal());
       FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,
@@ -381,22 +351,10 @@ export const vote = (dispatch: Dispatch, step: Object, proposal: Object, data: O
 
 export const deleteVote = (dispatch: Dispatch, step: Object, proposal: Object) => {
   dispatch(deleteVoteRequested(proposal.id));
-  let url = '';
-  switch (step.type) {
-    case 'selection':
-      url = `/selection_steps/${step.id}/proposals/${proposal.id}/votes`;
-      break;
-    case 'collect':
-      url = `/collect_steps/${step.id}/proposals/${proposal.id}/votes`;
-      break;
-    default:
-      console.log('unknown step'); // eslint-disable-line no-console
-      return;
-  }
-  return Fetcher.delete(url)
-    .then(json)
-    .then(v => {
-      dispatch(deleteVoteSucceeded(step.id, proposal.id, v));
+  return removeVote
+    .commit({ input: { proposalId: proposal.id, stepId: step.id } })
+    .then(() => {
+      // dispatch(deleteVoteSucceeded(step.id, proposal.id, v));
       FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,
         alert: {
@@ -626,10 +584,6 @@ const voteReducer = (state: State, action): Exact<State> => {
   votesByStepId[action.stepId].unshift(action.vote);
   const votesCountByStepId = proposal.votesCountByStepId;
   votesCountByStepId[action.stepId]++;
-  let commentsCount = proposal.commentsCount;
-  if (action.comment) {
-    commentsCount++;
-  }
   const proposalsById = state.proposalsById;
   const userVotesByStepId = state.userVotesByStepId;
   userVotesByStepId[action.stepId].push(proposal.id);
@@ -637,7 +591,6 @@ const voteReducer = (state: State, action): Exact<State> => {
     ...proposal,
     votesCountByStepId,
     votesByStepId,
-    commentsCount,
   };
   const creditsLeftByStepId = state.creditsLeftByStepId;
   creditsLeftByStepId[action.stepId] -= proposal.estimation || 0;

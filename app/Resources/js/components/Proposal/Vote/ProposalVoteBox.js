@@ -1,35 +1,35 @@
-import React, { PropTypes } from 'react';
+// @flow
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Row, Col } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import ProposalVoteForm from './ProposalVoteForm';
 import LoginButton from '../../User/Login/LoginButton';
 import ProposalVoteBoxMessage from './ProposalVoteBoxMessage';
 import { VOTE_TYPE_SIMPLE } from '../../../constants/ProposalConstants';
 import RegistrationButton from '../../User/Registration/RegistrationButton';
+import type { State } from '../../../types';
 
-const ProposalVoteBox = React.createClass({
-  propTypes: {
-    proposal: PropTypes.object.isRequired,
-    step: PropTypes.object.isRequired,
-    creditsLeft: PropTypes.number,
-    className: PropTypes.string,
-    formWrapperClassName: PropTypes.string,
-    isSubmitting: PropTypes.bool.isRequired,
-    user: PropTypes.object,
-    features: PropTypes.object.isRequired,
-  },
+type Props = {
+  proposal: Object,
+  step: Object,
+  creditsLeft: number,
+  className: string,
+  formWrapperClassName: string,
+  isSubmitting: boolean,
+  user: ?Object,
+  features: Object,
+};
 
-  getDefaultProps() {
-    return {
-      creditsLeft: null,
-      className: '',
-      formWrapperClassName: '',
-      user: null,
-    };
-  },
+class ProposalVoteBox extends React.Component<Props> {
+  static defaultProps = {
+    creditsLeft: null,
+    className: '',
+    formWrapperClassName: '',
+    user: null,
+  };
 
-  userHasEnoughCredits() {
+  userHasEnoughCredits = () => {
     const {
       creditsLeft,
       proposal,
@@ -40,12 +40,12 @@ const ProposalVoteBox = React.createClass({
       return creditsLeft >= proposal.estimation;
     }
     return true;
-  },
+  };
 
-  displayForm() {
+  displayForm = () => {
     const { step, user } = this.props;
     return step.voteType === VOTE_TYPE_SIMPLE || (user && this.userHasEnoughCredits());
-  },
+  };
 
   render() {
     const {
@@ -107,9 +107,11 @@ const ProposalVoteBox = React.createClass({
         </div>
       </div>
     );
-  },
-});
+  }
+}
 
-const mapStateToProps = state => ({ features: state.default.features });
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+  features: state.default.features,
+});
 
 export default connect(mapStateToProps)(ProposalVoteBox);
