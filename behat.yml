@@ -65,7 +65,7 @@ commands:
     formatters:
         pretty:
             verbose:  true
-            paths:    true
+            paths:    false
             snippets: true
     extensions:
         Tonic\Behat\ParallelScenarioExtension: ~
@@ -110,7 +110,6 @@ graphql:
         graphql:
             paths:
                 - '%paths.base%/features/graphql'
-                - '%paths.base%/features/graphql/mutations'
             contexts:
                 - Capco\AppBundle\Behat\ApplicationContext
                 - Capco\AppBundle\Behat\NavigationContext

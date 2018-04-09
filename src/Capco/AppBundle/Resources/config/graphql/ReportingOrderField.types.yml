@@ -1,0 +1,7 @@
+ReportingOrderField:
+    type: enum
+    config:
+        description: "Ordering options for reporting."
+        values:
+            CREATED_AT:
+                value: "CREATED_AT"

@@ -72,7 +72,7 @@ Opinion:
                 type: "Int!"
                 description: "Number of sources."
             votes:
-                type: "[PropositionVote]"
+                type: "[OpinionVote]"
                 args:
                     first:
                         type: "Int"

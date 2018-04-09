@@ -1,0 +1,10 @@
+UpdateFollowProposalPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            follower:
+                type: "Follower"
+            followerEdge:
+                type: "FollowerEdge"
+            proposal:
+                type: "Proposal"

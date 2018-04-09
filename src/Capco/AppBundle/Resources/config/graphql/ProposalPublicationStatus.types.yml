@@ -1,0 +1,26 @@
+ProposalPublicationStatus:
+    type: enum
+    config:
+        description: "Available statuses"
+        values:
+            EXPIRED: # TODO KILL THIS
+                value: "EXPIRED"
+                description: "Was publicly visible, but has expired."
+            PUBLISHED:
+                value: "PUBLISHED"
+                description: "Normal status, Publicly visible"
+            TRASHED:
+                value: "TRASHED"
+                description: "Publicly visible in the trash bin"
+            TRASHED_NOT_VISIBLE:
+                value: "TRASHED_NOT_VISIBLE"
+                description: "In the trash bin, content not visible"
+            DELETED:
+                value: "DELETED"
+                description: "Not publicly visible, deleted by author"
+            DRAFT:
+                value: "DRAFT"
+                description: "Draft, not publicly visible, only showed for his author."
+            NOT_ACCOUNTED: ## TODO MAKE THIS WORK
+                value: "NOT_ACCOUNTED"
+                description: "Visible only by the author, he is not yet confirmed !"

@@ -17,7 +17,7 @@ class ReplyAdmin extends Admin
         $responses = new ArrayCollection();
         foreach ($object->getResponses() as $response) {
             $decodedValue = json_decode($response->getValue());
-            if (json_last_error() === JSON_ERROR_NONE) {
+            if (JSON_ERROR_NONE === json_last_error()) {
                 $response->setValue($decodedValue);
             }
             $responses->add($response);

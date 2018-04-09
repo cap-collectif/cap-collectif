@@ -1,115 +1,210 @@
 // @flow
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { Button } from 'react-bootstrap';
+import {
+  Dropdown,
+  MenuItem,
+  Panel,
+  ListGroup,
+  ListGroupItem,
+  Radio,
+  Button,
+  Popover,
+  OverlayTrigger,
+} from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import FollowProposalMutation from '../../../mutations/FollowProposalMutation';
+import UpdateFollowProposalMutation from '../../../mutations/UpdateFollowProposalMutation';
 import type { ProposalFollowButton_proposal } from './__generated__/ProposalFollowButton_proposal.graphql';
 import UnfollowProposalMutation from '../../../mutations/UnfollowProposalMutation';
 import LoginOverlay from '../../Utils/LoginOverlay';
-import AppDispatcher from '../../../dispatchers/AppDispatcher';
-import { UPDATE_ALERT } from '../../../constants/AlertConstants';
 
 type Props = {
   proposal: ProposalFollowButton_proposal,
+  isAuthenticated: boolean,
 };
+
 type State = {
-  isHovering: boolean,
+  isJustFollowed: boolean,
 };
 
 export class ProposalFollowButton extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      isHovering: false,
-    };
+  state = {
+    isJustFollowed: false,
+  };
+  componentWillReceiveProps(nextProps: Props) {
+    if (this.props !== nextProps) {
+      this.setState({
+        isJustFollowed: !!nextProps.proposal.viewerIsFollowing,
+      });
+    }
+  }
+  changeFollowType(proposal: ProposalFollowButton_proposal, type: string) {
+    if (
+      proposal.viewerIsFollowing &&
+      proposal.followerConfiguration !== null &&
+      typeof proposal.followerConfiguration !== 'undefined'
+    ) {
+      return UpdateFollowProposalMutation.commit({
+        input: {
+          proposalId: proposal.id,
+          notifiedOf: type,
+        },
+      });
+    }
   }
 
   render() {
     const { proposal } = this.props;
-    const { isHovering } = this.state;
-    const buttonFollowId = proposal.viewerIsFollowing
-      ? 'proposal-unfollow-btn'
-      : 'proposal-follow-btn';
-    let style = '';
-    let bsStyle = '';
-    let buttonText = '';
+    const { isJustFollowed } = this.state;
     if (!proposal.viewerIsFollowing) {
-      buttonText = 'follow';
-      bsStyle = 'default';
-    }
-    if (proposal.viewerIsFollowing && isHovering) {
-      buttonText = 'unfollow';
-      bsStyle = 'danger';
-    }
-    if (proposal.viewerIsFollowing && !isHovering) {
-      buttonText = 'following';
-      style = 'btn-default_focus';
-      bsStyle = 'default';
-    }
-
-    return (
-      <LoginOverlay>
-        <Button
-          className={`${style}`}
-          bsStyle={`${bsStyle}`}
-          onMouseOver={() => {
-            if (proposal.viewerIsFollowing) {
-              this.setState({
-                isHovering: true,
-              });
-            }
-          }}
-          onMouseOut={() => {
-            if (proposal.viewerIsFollowing) {
-              this.setState({
-                isHovering: false,
-              });
-            }
-          }}
-          onClick={() => {
-            if (proposal.viewerIsFollowing) {
-              return UnfollowProposalMutation.commit({ input: { proposalId: proposal.id } }).then(
-                () => {
-                  AppDispatcher.dispatch({
-                    actionType: UPDATE_ALERT,
-                    alert: {
-                      bsStyle: 'success',
-                      content: 'flash-message-unfollow',
-                    },
-                  });
-                  return true;
-                },
-              );
-            }
-            return FollowProposalMutation.commit({ input: { proposalId: proposal.id } }).then(
-              () => {
-                AppDispatcher.dispatch({
-                  actionType: UPDATE_ALERT,
-                  alert: {
-                    bsStyle: 'success',
-                    content: 'flash-message-following',
-                  },
+      return (
+        <LoginOverlay>
+          <Button
+            className="btn btn-default proposal__button__follow"
+            onClick={() => {
+              return FollowProposalMutation.commit({
+                input: { proposalId: proposal.id, notifiedOf: 'DEFAULT' },
+              }).then(() => {
+                this.setState({
+                  isJustFollowed: true,
                 });
-
                 return true;
-              },
-            );
-          }}
-          id={buttonFollowId}>
-          <FormattedMessage id={buttonText} />
-        </Button>
-      </LoginOverlay>
-    );
+              });
+            }}
+            id={`proposal-follow-btn-${proposal.id}`}>
+            <FormattedMessage id="follow" />
+          </Button>
+        </LoginOverlay>
+      );
+    }
+    if (
+      proposal.followerConfiguration !== null &&
+      typeof proposal.followerConfiguration !== 'undefined'
+    ) {
+      return (
+        <LoginOverlay>
+          <span className="mb-0 custom-dropdown">
+            <Dropdown
+              className="mb-0 width250 custom-dropdown-bgd dropdown-button"
+              id={`proposal-follow-btn-${proposal.id}`}
+              defaultOpen={isJustFollowed}>
+              <Dropdown.Toggle className="custom-dropdown-button">
+                <FormattedMessage id="following" />
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Panel
+                  className="mb-0 b-none width250"
+                  header={
+                    <span>
+                      <FormattedMessage id="to-be-notified-by-email" />
+                      <OverlayTrigger
+                        placement="top"
+                        overlay={
+                          <Popover placement="top" className="in" id="pinned-label">
+                            <FormattedMessage id="you-will-receive-a-summary-of-your-notifications-once-a-day" />
+                          </Popover>
+                        }>
+                        <span className="cap-information ml-30" />
+                      </OverlayTrigger>
+                    </span>
+                  }>
+                  <div className="b-none mb-0" id={`proposal-follow-btn-${proposal.id}`}>
+                    <ListGroup className="mb-0">
+                      <ListGroupItem>
+                        <Radio
+                          id={`proposal-follow-btn-default-${proposal.id}`}
+                          name="default"
+                          className="proposal__follow__advancement"
+                          checked={
+                            proposal.followerConfiguration.notifiedOf === 'DEFAULT' ? 'checked' : ''
+                          }
+                          inline
+                          onClick={() => {
+                            return this.changeFollowType(proposal, 'DEFAULT');
+                          }}>
+                          <b>
+                            <FormattedMessage id="the-progress" />
+                          </b>{' '}
+                          <br />
+                          <FormattedMessage id="list-of-progress-notifications" />
+                        </Radio>
+                      </ListGroupItem>
+                      <ListGroupItem>
+                        <Radio
+                          name="default_and_comments"
+                          id={`proposal-follow-btn-default_and_comments-${proposal.id}`}
+                          className="proposal__follow__default_and_comments"
+                          checked={
+                            proposal.followerConfiguration.notifiedOf === 'DEFAULT_AND_COMMENTS'
+                              ? 'checked'
+                              : ''
+                          }
+                          onClick={() => {
+                            return this.changeFollowType(proposal, 'DEFAULT_AND_COMMENTS');
+                          }}>
+                          <b>
+                            <FormattedMessage id="progress-and-comments" />
+                          </b>
+                        </Radio>
+                      </ListGroupItem>
+                      <ListGroupItem>
+                        <Radio
+                          name="all"
+                          id={`proposal-follow-btn-all-${proposal.id}`}
+                          className="proposal__follow__all"
+                          checked={
+                            proposal.followerConfiguration.notifiedOf === 'ALL' ? 'checked' : ''
+                          }
+                          onClick={() => {
+                            return this.changeFollowType(proposal, 'ALL');
+                          }}>
+                          <b>
+                            <FormattedMessage id="all-activities" />
+                          </b>
+                          <br />
+                          <FormattedMessage id="list-of-activity-notifications" />
+                        </Radio>
+                      </ListGroupItem>
+                    </ListGroup>
+                  </div>
+                </Panel>
+                <MenuItem
+                  eventKey="1"
+                  className="proposal__unfollow"
+                  id={`proposal-unfollow-btn-${proposal.id}`}
+                  onClick={() => {
+                    if (proposal.viewerIsFollowing) {
+                      return UnfollowProposalMutation.commit({
+                        input: { proposalId: proposal.id },
+                      }).then(() => {
+                        this.setState({
+                          isJustFollowed: false,
+                        });
+                      });
+                    }
+                  }}>
+                  <FormattedMessage id="unfollow" />
+                </MenuItem>
+              </Dropdown.Menu>
+            </Dropdown>
+          </span>
+        </LoginOverlay>
+      );
+    }
   }
 }
 
 export default createFragmentContainer(
   ProposalFollowButton,
   graphql`
-    fragment ProposalFollowButton_proposal on Proposal {
+    fragment ProposalFollowButton_proposal on Proposal
+      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
       id
-      viewerIsFollowing
+      viewerIsFollowing @include(if: $isAuthenticated)
+      followerConfiguration @include(if: $isAuthenticated) {
+        notifiedOf
+      }
     }
   `,
 );

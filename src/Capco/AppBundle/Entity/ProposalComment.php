@@ -44,6 +44,11 @@ class ProposalComment extends Comment
         }
     }
 
+    public function getKind(): string
+    {
+        return 'proposalComment';
+    }
+
     public function getRelatedObject()
     {
         return $this->proposal;

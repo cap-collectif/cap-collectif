@@ -3,10 +3,12 @@ Capco\AppBundle\Entity\Selection:
     proposal: '@proposal1'
     selectionStep: '@selectionstep1'
     status: '@status4'
+    createdAt: <(new \DateTime('yesterday'))>
   selection2:
     proposal: '@proposal2'
     selectionStep: '@selectionstep1'
     status: '@status5'
+    createdAt: <(new \DateTime('yesterday'))>
   selection3:
     proposal: '@proposal2'
     selectionStep: '@selectionstep2'
@@ -19,6 +21,7 @@ Capco\AppBundle\Entity\Selection:
   selection7:
     proposal: '@proposal8'
     selectionStep: '@selectionstep4'
+    createdAt: <(new \DateTime('yesterday'))>
   selection9:
     proposal: '@proposal9'
     selectionStep: '@selectionstep4'

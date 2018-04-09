@@ -115,7 +115,6 @@ export class ProposalAdminSelections extends Component<Props> {
   render() {
     const {
       intl,
-      initialValues,
       selectionValues,
       proposal,
       handleSubmit,
@@ -193,13 +192,6 @@ export class ProposalAdminSelections extends Component<Props> {
                   {selectionValues[index] &&
                     selectionValues[index].selected && (
                       <div>
-                        {initialValues.selections[index].status !==
-                          selectionValues[index].status && (
-                          <p className="text-info">
-                            <i className="fa fa-exclamation-triangle" /> L'auteur de la proposition
-                            sera notifié du changement de statut
-                          </p>
-                        )}@
                         <Field
                           type="select"
                           label="Statut"

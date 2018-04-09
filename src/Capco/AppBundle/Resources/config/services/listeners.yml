@@ -105,7 +105,12 @@ services:
 
   capco.user.serialization_listener:
     class: Capco\AppBundle\EventListener\UserSerializationListener
-    arguments: ["@router", "@capco.toggle.manager"]
+    arguments:
+      - "@router"
+      - "@capco.toggle.manager"
+      - "@user_contribution_by_project_resolver"
+      - "@user_contribution_by_step_resolver"
+      - "@capco.project.repository"
     tags:
       - { name: "jms_serializer.event_subscriber" }
 

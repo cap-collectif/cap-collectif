@@ -8,7 +8,7 @@ Capco\AppBundle\Entity\PostComment:
         isTrashed: false
     pComment{6..50}:
         id: 'postComment<current()>'
-        post: '@post<numberBetween(1, 2)>'
+        post: '@post1'
         Author: '@user<numberBetween(1, 3)>'
         body: <text(300)>
         isEnabled: <boolean()>

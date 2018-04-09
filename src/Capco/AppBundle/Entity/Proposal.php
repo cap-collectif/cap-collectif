@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
+use Capco\AppBundle\Entity\Steps\CollectStep as StepsCollectStep;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\CommentableTrait;
@@ -410,7 +411,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         return $this;
     }
 
-    public function getStep()
+    public function getStep(): ?StepsCollectStep
     {
         return $this->proposalForm ? $this->proposalForm->getStep() : null;
     }
@@ -1038,5 +1039,15 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     public static function getElasticsearchSerializationGroups(): array
     {
         return ['Elasticsearch'];
+    }
+
+    public function hasFollowers(): bool
+    {
+        return count($this->followers) > 0;
+    }
+
+    public function countFollowers(): int
+    {
+        return count($this->followers);
     }
 }

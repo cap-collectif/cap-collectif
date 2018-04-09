@@ -57,7 +57,7 @@ class ThemeRepository extends EntityRepository
             ->addOrderBy('t.updatedAt', 'DESC')
         ;
 
-        if ($term !== null) {
+        if (null !== $term) {
             $qb->andWhere('t.title LIKE :term')
                 ->setParameter('term', '%' . $term . '%')
             ;

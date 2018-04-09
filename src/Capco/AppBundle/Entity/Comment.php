@@ -8,6 +8,7 @@ use Capco\AppBundle\Model\HasAuthorInterface;
 use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\PinnableTrait;
 use Capco\AppBundle\Traits\TextableTrait;
+use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Traits\ValidableTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
@@ -34,19 +35,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 abstract class Comment implements Contribution, VotableInterface, HasAuthorInterface
 {
-    use ValidableTrait, VotableOkTrait, PinnableTrait, ExpirableTrait, UuidTrait, TextableTrait;
+    use ValidableTrait, VotableOkTrait, PinnableTrait, ExpirableTrait, UuidTrait, TextableTrait, TimestampableTrait;
 
     public static $sortCriterias = [
         'date' => 'argument.sort.date',
         'popularity' => 'argument.sort.popularity',
     ];
-
-    /**
-     * @var \DateTime
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(name="created_at", type="datetime")
-     */
-    protected $createdAt;
 
     /**
      * @var \DateTime
@@ -179,14 +173,13 @@ abstract class Comment implements Contribution, VotableInterface, HasAuthorInter
     {
         return $this->updatedAt;
     }
-    
+
     public function setUpdatedAt(\DateTime $value): self
     {
         $this->updatedAt = $value;
 
         return $this;
     }
-
 
     public function getIsEnabled(): bool
     {

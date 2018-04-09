@@ -42,7 +42,7 @@ Query:
                         type: "Float!"
                 resolve: "@=resolver('query_available_districts_for_location', [args['proposalFormId'], args['latitude'], args['longitude']])"
             votesByContribution:
-                type: "[PropositionVote!]!"
+                type: "[ProposalVote!]!"
                 args:
                     contribution:
                         type: "ID!"

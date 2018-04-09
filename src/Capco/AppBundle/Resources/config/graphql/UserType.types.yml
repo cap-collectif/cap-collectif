@@ -3,6 +3,8 @@ UserType:
     config:
         description: "A type of person"
         fields:
+            id:
+                type: "Int!"
             name:
                 type: "String!"
                 description: "The name of the type."

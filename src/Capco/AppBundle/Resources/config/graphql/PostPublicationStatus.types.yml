@@ -1,0 +1,11 @@
+PostPublicationStatus:
+    type: enum
+    config:
+        description: "Available statuses"
+        values:
+            PUBLISHED:
+                value: "PUBLISHED"
+                description: "Normal status, publicly visible"
+            NOT_PUBLISHED:
+                value: "NOT_PUBLISHED"
+                description: "Not publicly visible"

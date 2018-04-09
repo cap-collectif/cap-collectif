@@ -28,7 +28,7 @@ class FollowProposalMutation
     /**
      * @throws UserError
      */
-    public function __invoke(string $proposalId, User $user): array
+    public function __invoke(string $proposalId, string $notifiedOf, User $user): array
     {
         /** @var Proposal $proposal */
         $proposal = $this->proposalRepository->find($proposalId);
@@ -40,10 +40,11 @@ class FollowProposalMutation
         $follower = new Follower();
         $follower->setUser($user);
         $follower->setProposal($proposal);
+        $follower->setNotifiedOf($notifiedOf);
 
         $this->em->flush();
 
-        $totalCount = $this->followerRepository->countProposalFollower($proposal);
+        $totalCount = $this->followerRepository->countFollowersOfProposal($proposal);
 
         $edge = new Edge(ConnectionBuilder::offsetToCursor($totalCount), $user);
 

@@ -19,12 +19,8 @@ class ViewerFollowProposalResolver implements ResolverInterface
         $this->logger = $logger;
     }
 
-    public function __invoke(Proposal $proposal, $viewer): bool
+    public function __invoke(Proposal $proposal, User $viewer): bool
     {
-        if (!$viewer instanceof User) {
-            return false;
-        }
-
         try {
             return $this->userRepository->isViewerFollowingProposal($proposal, $viewer);
         } catch (\RuntimeException $exception) {

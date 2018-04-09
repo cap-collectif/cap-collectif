@@ -1,21 +1,28 @@
-import React, { PropTypes } from 'react';
+// @flow
+import React from 'react';
 import ProposalVoteModal from '../Vote/ProposalVoteModal';
 import ProposalVoteButtonWrapper from '../Vote/ProposalVoteButtonWrapper';
+import type { Proposal } from '../../../redux/modules/proposal';
 
-const ProposalPreviewVote = React.createClass({
-  propTypes: {
-    proposal: PropTypes.object.isRequired,
-  },
+type Props = {
+  proposal: Proposal,
+};
 
+export class ProposalPreviewVote extends React.Component<Props> {
   render() {
     const { proposal } = this.props;
     return (
-      <div>
-        <ProposalVoteButtonWrapper proposal={proposal} id={`proposal-vote-btn-${proposal.id}`} />
+      <span>
+        <ProposalVoteButtonWrapper
+          proposal={proposal}
+          style={{ width: '100%' }}
+          id={`proposal-vote-btn-${proposal.id}`}
+          className="proposal__preview__vote"
+        />
         <ProposalVoteModal proposal={proposal} />
-      </div>
+      </span>
     );
-  },
-});
+  }
+}
 
 export default ProposalPreviewVote;

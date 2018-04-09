@@ -39,13 +39,13 @@ class EventRepository extends EntityRepository
             $qb = $this->whereIsArchived($archived, $qb);
         }
 
-        if ($themeSlug && $themeSlug !== Theme::FILTER_ALL) {
+        if ($themeSlug && Theme::FILTER_ALL !== $themeSlug) {
             $qb->andWhere('t.slug = :theme')
                 ->setParameter('theme', $themeSlug)
             ;
         }
 
-        if ($projectSlug !== null && $projectSlug !== Project::FILTER_ALL) {
+        if (null !== $projectSlug && Project::FILTER_ALL !== $projectSlug) {
             $qb->andWhere('c.slug = :project')
                 ->setParameter('project', $projectSlug)
             ;
@@ -88,7 +88,7 @@ class EventRepository extends EntityRepository
             $qb = $this->whereIsArchived($archived, $qb);
         }
 
-        if ($themeSlug !== null && $themeSlug !== Theme::FILTER_ALL) {
+        if (null !== $themeSlug && Theme::FILTER_ALL !== $themeSlug) {
             $qb->innerJoin('e.themes', 't', 'WITH', 't.isEnabled = :tEnabled')
                 ->andWhere('t.slug = :theme')
                 ->setParameter('tEnabled', true)
@@ -96,7 +96,7 @@ class EventRepository extends EntityRepository
             ;
         }
 
-        if ($projectSlug !== null && $projectSlug !== Project::FILTER_ALL) {
+        if (null !== $projectSlug && Project::FILTER_ALL !== $projectSlug) {
             $qb->innerJoin('e.projects', 'c', 'WITH', 'c.isEnabled = :cEnabled')
                 ->andWhere('c.slug = :project')
                 ->setParameter('cEnabled', true)
@@ -104,7 +104,7 @@ class EventRepository extends EntityRepository
             ;
         }
 
-        if ($term !== null) {
+        if (null !== $term) {
             $qb->andWhere('e.title LIKE :term')
                 ->setParameter('term', '%' . $term . '%')
             ;

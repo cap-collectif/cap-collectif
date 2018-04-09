@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity\Steps;
 
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Traits\DateHelperTrait;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
@@ -148,7 +147,7 @@ abstract class AbstractStep
         $this->label = '';
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         if ($this->getId()) {
             if ($this->getProject()) {
@@ -163,163 +162,94 @@ abstract class AbstractStep
 
     abstract public function getType();
 
-    /**
-     * Get title.
-     *
-     * @return string
-     */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    /**
-     * Set title.
-     *
-     * @param string $title
-     *
-     * @return AbstractStep
-     */
-    public function setTitle($title)
+    public function setTitle(string $title): self
     {
         $this->title = $title;
 
         return $this;
     }
 
-    /**
-     * Get slug.
-     *
-     * @return string
-     */
-    public function getSlug()
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    /**
-     * Set slug.
-     *
-     * @param string $slug
-     *
-     * @return AbstractStep
-     */
-    public function setSlug($slug)
+    public function setSlug(string $slug): self
     {
         $this->slug = $slug;
 
         return $this;
     }
 
-    /**
-     * Get isEnabled.
-     *
-     * @return bool
-     */
-    public function getIsEnabled()
+    public function getIsEnabled(): bool
     {
         return $this->isEnabled;
     }
 
-    /**
-     * Set isEnabled.
-     *
-     * @param bool $isEnabled
-     *
-     * @return AbstractStep
-     */
-    public function setIsEnabled($isEnabled)
+    public function setIsEnabled(bool $isEnabled): self
     {
         $this->isEnabled = $isEnabled;
 
         return $this;
     }
 
-    /**
-     * Get startAt.
-     *
-     * @return \DateTime
-     */
-    public function getStartAt()
+    public function getStartAt(): ?\DateTime
     {
         return $this->startAt;
     }
 
-    /**
-     * Set startAt.
-     *
-     * @param \DateTime $startAt
-     */
-    public function setStartAt($startAt): self
+    public function setStartAt(?\DateTime $startAt): self
     {
         $this->startAt = $startAt;
 
         return $this;
     }
 
-    /**
-     * Get endAt.
-     *
-     * @return \DateTime
-     */
-    public function getEndAt()
+    public function getEndAt(): ?\DateTime
     {
         return $this->endAt;
     }
 
-    /**
-     * Set endAt.
-     *
-     * @param \DateTime $endAt
-     */
-    public function setEndAt($endAt): self
+    public function setEndAt(?\DateTime $endAt): self
     {
         $this->endAt = $endAt;
 
         return $this;
     }
 
-    /**
-     * @return ProjectAbstractStep|null
-     */
-    public function getProjectAbstractStep()
+    public function getProjectAbstractStep(): ?ProjectAbstractStep
     {
         return $this->projectAbstractStep;
     }
 
-    /**
-     * @param mixed $projectAbstractStep
-     */
-    public function setProjectAbstractStep($projectAbstractStep)
+    public function setProjectAbstractStep(?ProjectAbstractStep $projectAbstractStep): self
     {
         $this->projectAbstractStep = $projectAbstractStep;
+
+        return $this;
     }
 
-    /**
-     * @return \DateTime
-     */
-    public function getCreatedAt()
+    public function getCreatedAt(): \DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): \DateTime
     {
         return $this->updatedAt;
     }
 
-    /**
-     * @return ArrayCollection
-     */
     public function getStatuses()
     {
         return $this->statuses;
     }
 
-    public function addStatus(Status $status)
+    public function addStatus(Status $status): self
     {
         if (!$this->statuses->contains($status)) {
             $this->statuses->add($status);
@@ -329,25 +259,19 @@ abstract class AbstractStep
         return $this;
     }
 
-    public function removeStatus(Status $status)
+    public function removeStatus(Status $status): self
     {
         $this->statuses->removeElement($status);
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getLabel(): string
+    public function getLabel(): ?string
     {
         return $this->label;
     }
 
-    /**
-     * @param string $label
-     */
-    public function setLabel(string $label): self
+    public function setLabel(?string $label): self
     {
         $this->label = $label;
 
@@ -356,9 +280,6 @@ abstract class AbstractStep
 
     // ************************* Custom methods *********************
 
-    /**
-     * @return Project
-     */
     public function getProject()
     {
         if ($this->projectAbstractStep) {
@@ -366,24 +287,21 @@ abstract class AbstractStep
         }
     }
 
-    public function getProjectId()
+    public function getProjectId(): ?string
     {
         $project = $this->getProject();
 
         return $project ? $project->getId() : null;
     }
 
-    public function getPosition()
+    public function getPosition(): ?int
     {
         if ($this->projectAbstractStep) {
             return $this->projectAbstractStep->getPosition();
         }
     }
 
-    /**
-     * @return bool
-     */
-    public function canDisplay()
+    public function canDisplay(): bool
     {
         return $this->isEnabled && $this->getProject()->canDisplay();
     }
@@ -466,7 +384,7 @@ abstract class AbstractStep
         return false;
     }
 
-    public function isOpen()
+    public function isOpen(): ?bool
     {
         $now = new \DateTime();
 
@@ -481,7 +399,7 @@ abstract class AbstractStep
         return false;
     }
 
-    public function isClosed()
+    public function isClosed(): ?bool
     {
         $now = new \DateTime();
 
@@ -500,7 +418,7 @@ abstract class AbstractStep
         return false;
     }
 
-    public function isFuture()
+    public function isFuture(): ?bool
     {
         $now = new \DateTime();
 
@@ -514,7 +432,7 @@ abstract class AbstractStep
         return false;
     }
 
-    public function isTimeless()
+    public function isTimeless(): ?bool
     {
         if (!property_exists($this, 'timeless')) {
             return false;
@@ -523,7 +441,7 @@ abstract class AbstractStep
         return $this->timeless;
     }
 
-    public function isParticipative()
+    public function isParticipative(): bool
     {
         return false;
     }
