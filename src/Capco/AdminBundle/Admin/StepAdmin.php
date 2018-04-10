@@ -438,14 +438,11 @@ class StepAdmin extends Admin
 
         return $this->getConfigurationPool()
             ->getContainer()
-            ->get('doctrine')
-            ->getManager()
-            ->getRepository('CapcoAppBundle:Steps\ConsultationStepType')
+            ->get('capco.consultation_step.repository')
             ->createQueryBuilder('f')
             ->where('f.step IS NULL OR f.step = :step')
             ->setParameter('step', $subject)
-            ->getQuery()
-            ;
+            ->getQuery();
     }
 
     private function createQueryForProposalForms()
@@ -453,13 +450,10 @@ class StepAdmin extends Admin
         $subject = $this->getSubject()->getId() ? $this->getSubject() : null;
         $qb = $this->getConfigurationPool()
             ->getContainer()
-            ->get('doctrine')
-            ->getManager()
-            ->getRepository('CapcoAppBundle:ProposalForm')
+            ->get('capco.proposal_form.repository')
             ->createQueryBuilder('f')
             ->where('f.step IS NULL OR f.step = :step')
-            ->setParameter('step', $subject)
-        ;
+            ->setParameter('step', $subject);
 
         return $qb->getQuery();
     }
@@ -469,9 +463,7 @@ class StepAdmin extends Admin
         $subject = $this->getSubject()->getId() ? $this->getSubject() : null;
         $qb = $this->getConfigurationPool()
             ->getContainer()
-            ->get('doctrine')
-            ->getManager()
-            ->getRepository('CapcoAppBundle:Questionnaire')
+            ->get('capco.questionnaire.repository')
             ->createQueryBuilder('q')
             ->where('q.step IS NULL OR q.step = :step')
             ->setParameter('step', $subject)
@@ -485,9 +477,7 @@ class StepAdmin extends Admin
         $subject = $this->getSubject()->getId() ? $this->getSubject() : null;
         $qb = $this->getConfigurationPool()
             ->getContainer()
-            ->get('doctrine')
-            ->getManager()
-            ->getRepository('CapcoAppBundle:Status')
+            ->get('capco.status.repository')
             ->createQueryBuilder('s')
             ->where('s.step = :step')
             ->setParameter('step', $subject)
