@@ -4,7 +4,10 @@ import { QueryRenderer, graphql } from 'react-relay';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import ProposalVotes from './ProposalVotes';
 import Loader from '../../Ui/Loader';
-import type { ProposalVotesByStepQueryResponse, ProposalVotesByStepQueryVariables } from './__generated__/ProposalVotesByStepQuery.graphql';
+import type {
+  ProposalVotesByStepQueryResponse,
+  ProposalVotesByStepQueryVariables,
+} from './__generated__/ProposalVotesByStepQuery.graphql';
 
 type Props = {
   proposal: { id: string },
@@ -12,27 +15,31 @@ type Props = {
 };
 
 export class ProposalVotesByStep extends React.Component<Props> {
-
   render() {
     const { proposal, stepId } = this.props;
     return (
       <QueryRenderer
         environment={environment}
         query={graphql`
-          query ProposalVotesByStepQuery(
-            $proposalId: ID!
-            $step: ID!
-          ) {
+          query ProposalVotesByStepQuery($proposalId: ID!, $step: ID!) {
             proposal: node(id: $proposalId) {
               ...ProposalVotes_proposal @arguments(step: $step)
             }
           }
         `}
-        variables={({
-          proposalId: proposal.id,
-          step: stepId,
-        }: ProposalVotesByStepQueryVariables)}
-        render={({ error, props }: { error: ?Error, props?: ?ProposalVotesByStepQueryResponse }) => {
+        variables={
+          ({
+            proposalId: proposal.id,
+            step: stepId,
+          }: ProposalVotesByStepQueryVariables)
+        }
+        render={({
+          error,
+          props,
+        }: {
+          error: ?Error,
+          props?: ?ProposalVotesByStepQueryResponse,
+        }) => {
           if (error) {
             console.log(error); // eslint-disable-line no-console
             return graphqlError;
@@ -41,6 +48,7 @@ export class ProposalVotesByStep extends React.Component<Props> {
             // eslint-disable-next-line react/prop-types
             if (props.proposal) {
               return (
+                // $FlowFixMe
                 <ProposalVotes proposal={props.proposal} stepId={stepId} />
               );
             }
@@ -52,6 +60,6 @@ export class ProposalVotesByStep extends React.Component<Props> {
       />
     );
   }
-};
+}
 
 export default ProposalVotesByStep;

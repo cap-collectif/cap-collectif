@@ -1,6 +1,6 @@
 /* eslint-env jest */
 import { call, put } from 'redux-saga/effects';
-import { reducer, deleteVoteSucceeded, fetchPosts } from './proposal';
+import { reducer, fetchPosts } from './proposal';
 import Fetcher from '../../services/Fetcher';
 
 describe('Proposal Reducer', () => {
@@ -23,15 +23,6 @@ describe('Proposal Reducer', () => {
         },
       },
     });
-  });
-
-  it('Should handle deleteVoteSucceeded', () => {
-    const initialState = {
-      userVotesByStepId: { step6: ['proposal2', 'proposal3'] },
-      proposalsById: {},
-    };
-    const newState = reducer(initialState, deleteVoteSucceeded('step6', 'proposal2', {}));
-    expect(newState).toMatchSnapshot();
   });
 });
 

@@ -21,19 +21,17 @@ export class ProposalVotes extends React.Component<Props> {
         <br />
         {proposal.votes.edges && proposal.votes.edges.length !== 0 ? (
           <div className={classNames({ proposal__votes: true })}>
-          <Row>
-            {proposal.votes.edges
-              .filter(Boolean)
-              .map((edge, key) => (
+            <Row>
+              {proposal.votes.edges.filter(Boolean).map((edge, key) => (
                 <UserBox
                   key={key}
                   user={edge.node.author}
                   // username={vote.username} Anonymous
                   className="proposal__vote"
-                 />
+                />
               ))}
-          </Row>
-        </div>
+            </Row>
+          </div>
         ) : (
           <div className="well well-lg text-center">
             <FormattedMessage id="proposal.vote.none" />
@@ -60,9 +58,9 @@ export default createPaginationContainer(
   graphql`
     fragment ProposalVotes_proposal on Proposal
       @argumentDefinitions(
-        count: {type: "Int", defaultValue: 50},
-        cursor: {type: "String", defaultValue: null},
-        step: {type: "ID!", nonNull: true},
+        count: { type: "Int", defaultValue: 50 }
+        cursor: { type: "String", defaultValue: null }
+        step: { type: "ID!", nonNull: true }
       ) {
       id
       votes(first: $count, after: $cursor, step: $step)
@@ -114,7 +112,7 @@ export default createPaginationContainer(
     query: graphql`
       query ProposalVotesQuery($proposalId: ID!, $count: Int!, $cursor: String, $step: ID!) {
         proposal: node(id: $proposalId) {
-          ...ProposalVotes_proposal  @arguments(step: $step, count: $count, after: $cursor)
+          ...ProposalVotes_proposal @arguments(step: $step, count: $count, after: $cursor)
         }
       }
     `,
