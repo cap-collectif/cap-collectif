@@ -8,17 +8,11 @@ import type {
 } from './__generated__/RemoveProposalVoteMutation.graphql';
 
 const mutation = graphql`
-  mutation RemoveProposalVoteMutation($input: RemoveProposalVoteInput!) {
+  mutation RemoveProposalVoteMutation($input: RemoveProposalVoteInput!, $step: ID!) {
     removeProposalVote(input: $input) {
       proposal {
         id
-        # users {
-        #   edges {
-        #     node {
-        #       ...GroupAdminUsersListGroupItem_user
-        #     }
-        #   }
-        # }
+        ...ProposalVotes_proposal @arguments(step: $step)
       }
     }
   }
