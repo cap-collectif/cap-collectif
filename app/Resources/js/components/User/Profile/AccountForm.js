@@ -1,5 +1,5 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { Alert } from 'react-bootstrap';
@@ -11,7 +11,7 @@ import {
 } from '../../../redux/modules/user';
 import { isEmail } from '../../../services/Validator';
 import renderComponent from '../../Form/Field';
-import type { State } from '../../../types';
+import type { State, Dispatch } from '../../../types';
 
 export const form = 'account';
 const validate = (
@@ -29,17 +29,15 @@ const validate = (
   }
   return errors;
 };
-
-export const AccountForm = React.createClass({
-  propTypes: {
-    newEmailToConfirm: PropTypes.string,
-    error: PropTypes.string,
-    initialValues: PropTypes.object.isRequired,
-    confirmationEmailResent: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
-  },
-
+type Props = {
+    newEmailToConfirm: string,
+    error: string,
+    initialValues: Object,
+    confirmationEmailResent: boolean,
+    dispatch: Dispatch,
+    handleSubmit: () => void,
+};
+export class AccountForm extends Component<Props>{
   render() {
     const {
       initialValues,
@@ -96,8 +94,8 @@ export const AccountForm = React.createClass({
         )}
       </form>
     );
-  },
-});
+  };
+}
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   newEmailToConfirm: state.user.user && state.user.user.newEmailToConfirm,
