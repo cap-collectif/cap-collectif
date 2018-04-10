@@ -114,7 +114,7 @@ export default createPaginationContainer(
     query: graphql`
       query ProposalVotesQuery($proposalId: ID!, $count: Int!, $cursor: String, $step: ID!) {
         proposal: node(id: $proposalId) {
-          ...ProposalVotes_proposal @arguments(step: $step, count: $count, after: $cursor)
+          ...ProposalVotes_proposal  @arguments(step: $step, count: $count, after: $cursor)
         }
       }
     `,
