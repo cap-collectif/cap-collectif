@@ -2,25 +2,70 @@
    $Carousel
 ================================================================*/
 
+@mixin aspect-ratio($width, $height) {
+    position: relative;
+
+    &:before{
+        display: block;
+        content: " ";
+        width: 100%;
+        padding-top: ($height / $width) * 100%;
+    }
+
+    > .content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #e2e3e5;
+    }
+
+
+}
+
+.sixteen-nine {
+    @include aspect-ratio(16,9);
+}
+
 .carousel__desktop {
     display: flex;
-    margin-bottom: 45px;
 
     .carousel__navigation {
-        width: 30%;
+        width: 25%;
+        display: flex;
 
         ul {
             padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
 
             li {
-                padding: 25px 53px;
+                padding-left: 25px;
+                padding-right: 25px;
                 list-style-type: none;
+                font-size: 14px;
+                flex: 1 0 auto;
+                display: flex;
+                background-color: $page-bgc;
+                cursor: pointer;
 
-                b {
-                    font-size: 18px;
+                p {
+                    align-self: center;
+                    line-height: 20px;
+                }
+
+                .carousel-type {
+                    font-weight: 500;
+                }
+
+                .carousel-title {
+                    font-size: 16px;
+                    font-weight: bold;
                 }
                 
-                &.active {
+                &.active, &:hover {
                     background-color: #e2e3e5;
                 }
             }
@@ -29,104 +74,34 @@
     }
 
     .carousel__content {
-        width: 70%;
+        width: 75%;
+        height: 100%;
+
+        .carousel-inner {
+            height: 100%;
+        }
+    }
+}
+
+@media (max-width: $screen-md-max) {
+    .carousel__desktop {
+        .carousel__navigation {
+            width: 30%;
+
+            ul li {
+                padding-left: 20px;
+                padding-right: 20px;
+
+                .carousel-title {
+                    font-size: 15px;
+                }
+            }
+        }
+
+        .carousel__content {
+            width: 70%;
+        }
     }
 }
 
 
-//
-//.vertical .carousel-inner {
-//    height: 100%;
-//}
-//
-//.carousel.vertical .item {
-//    -webkit-transition: 0.6s ease-in-out top;
-//    -moz-transition: 0.6s ease-in-out top;
-//    -ms-transition: 0.6s ease-in-out top;
-//    -o-transition: 0.6s ease-in-out top;
-//    transition: 0.6s ease-in-out top;
-//}
-//
-//.carousel.vertical .active {
-//    top: 0;
-//}
-//
-//.carousel.vertical .next {
-//    top: 400px;
-//}
-//
-//.carousel.vertical .prev {
-//    top: -400px;
-//}
-//
-//.carousel.vertical .next.left,
-//.carousel.vertical .prev.right {
-//    top: 0;
-//}
-//
-//.carousel.vertical .active.left {
-//    top: -400px;
-//}
-//
-//.carousel.vertical .active.right {
-//    top: 400px;
-//}
-//
-//.carousel.vertical .item {
-//    left: 0;
-//}
-//
-//.carousel .bg__wrapper {
-//    height: 300px;
-//}
-//
-//@media (max-width: $screen-xs-max) {
-//    .carousel .bg__wrapper {
-//        height: 100px;
-//    }
-//}
-//
-//// sidebar
-//@media (min-width: $screen-xs-min) {
-//    .carousel-sidebar {
-//        padding-left: 20px;
-//    }
-//}
-//
-//.carousel-sidebar {
-//    min-height: 380px;
-//}
-//
-//.carousel .img-responsive,
-//.carousel .bg__wrapper {
-//    margin-bottom: 15px;
-//}
-//
-//.carousel-sidebar .nav > li > a {
-//    border-left: 2px solid $border-color;
-//}
-//
-//.carousel-sidebar .nav > li > a:hover {
-//    background-color: transparent;
-//}
-//
-//.carousel-sidebar .nav > li.active > a,
-//.carousel-sidebar .nav > li.active:focus > a {
-//    background: transparent;
-//    border-left-color: $brand-color-2;
-//}
-//
-//.carousel-sidebar .nav .nav > .active > a,
-//.carousel-sidebar .nav .nav > .active:hover > a,
-//.carousel-sidebar .nav .nav > .active:focus > a {
-//    padding-left: 28px;
-//}
-//
-//.carousel-sidebar .nav > .active > ul {
-//    display: block;
-//}
-//
-//.carousel-inner .item img,
-//.carousel-inner .item span.bg__wrapper {
-//    border: 1px solid $border-color;
-//}

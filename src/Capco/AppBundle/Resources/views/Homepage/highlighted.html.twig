@@ -2,15 +2,14 @@
     <div id="highlights" class="container--custom">
         <div class="container">
             {% if null != section.title %}
-                <h2 class="h2 mb-0">{{ section.title }}</h2>
+                <h2 class="h2">{{ section.title }}</h2>
             {% else %}
-                <h2 class="h2 mb-0">{{ 'homepage.section.highlighted' | trans({}, 'CapcoAppBundle') }}</h2>
+                <h2 class="h2">{{ 'homepage.section.highlighted' | trans({}, 'CapcoAppBundle') }}</h2>
             {% endif %}
-        </div>
-        <div>
-            {#{{ dump(highlighteds) }}#}
+
             {{ react_render_component('CarouselApp')}}
         </div>
+        {#{{ dump(highlighteds) }}#}
         {#<div class="row">#}
             {#<div class="col-md-8">#}
                 {#<div id="carousel-highlighted" class="carousel vertical slide" data-ride="carousel" data-interval="false">#}
