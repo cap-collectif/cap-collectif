@@ -7,7 +7,7 @@ import type { ProposalPageTabs_proposal } from './__generated__/ProposalPageTabs
 import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 import ProposalPageContent from './ProposalPageContent';
 import ProposalPageLastNews from './ProposalPageLastNews';
-import ProposalPageVotes from './ProposalPageVotes';
+import ProposalVotesByStep from './ProposalVotesByStep';
 import ProposalPageFollowers from './ProposalPageFollowers';
 import ProposalPageBlog from './ProposalPageBlog';
 import ProposalPageEvaluation from './ProposalPageEvaluation';
@@ -156,7 +156,7 @@ export class ProposalPageTabs extends React.Component<Props> {
                       <Tab.Content animation={false}>
                         {votableSteps.map((step, index) => (
                           <Tab.Pane key={index} eventKey={index}>
-                            <ProposalPageVotes stepId={step.id} proposal={oldProposal} />
+                            <ProposalVotesByStep stepId={step.id} proposal={oldProposal} />
                           </Tab.Pane>
                         ))}
                       </Tab.Content>

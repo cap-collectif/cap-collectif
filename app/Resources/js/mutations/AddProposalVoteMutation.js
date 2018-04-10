@@ -8,17 +8,11 @@ import type {
 } from './__generated__/AddProposalVoteMutation.graphql';
 
 const mutation = graphql`
-  mutation AddProposalVoteMutation($input: AddProposalVoteInput!) {
+  mutation AddProposalVoteMutation($input: AddProposalVoteInput!, $step: ID!) {
     addProposalVote(input: $input) {
       proposal {
         id
-        # users {
-        #   edges {
-        #     node {
-        #       ...GroupAdminUsersListGroupItem_user
-        #     }
-        #   }
-        # }
+        ...ProposalVotes_proposal @arguments(step: $step)
       }
     }
   }

@@ -122,13 +122,6 @@ class ProposalSerializationListener extends AbstractSerializationListener
             );
         }
 
-        $votesByStepId = [];
-        foreach ($proposal->getSelectionStepsIds() as $value) {
-            $votesByStepId[$value] = [];
-        }
-        $votesByStepId[$proposal->getProposalForm()->getStep()->getId()] = [];
-        $event->getVisitor()->addData('votesByStepId', $votesByStepId);
-
         $userIsAuthorOrAdmin = 'anon.' !== $user && ($user->getId() === $proposal->getAuthor()->getId() || $user->isAdmin());
         $responses = $this
             ->responseRepository
