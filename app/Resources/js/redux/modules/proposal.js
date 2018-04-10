@@ -41,6 +41,12 @@ type CloseCreateFusionModalAction = {
 type OpenCreateFusionModalAction = {
   type: 'proposal/OPEN_CREATE_FUSION_MODAL',
 };
+type VoteSuccessAction = {
+  type: 'proposal/VOTE_SUCCEEDED',
+  proposalId: Uuid,
+  stepId: Uuid,
+  vote: Object,
+};
 type CloseEditProposalModalAction = { type: 'proposal/CLOSE_EDIT_MODAL' };
 type OpenEditProposalModalAction = { type: 'proposal/OPEN_EDIT_MODAL' };
 type CloseDeleteProposalModalAction = { type: 'proposal/CLOSE_DELETE_MODAL' };
@@ -262,11 +268,7 @@ export const addProposalInRandomResultsByStep = (
 export const vote = (dispatch: Dispatch, step: Object, proposal: Object, data: Object) => {
   dispatch(startVoting());
   return addVote
-    .commit({
-      step: step.id,
-      withVotes: true,
-      input: { proposalId: proposal.id, stepId: step.id, anonymously: data.private },
-    })
+    .commit({ step: step.id, input: { proposalId: proposal.id, stepId: step.id, anonymously: data.private } })
     .then(() => {
       dispatch(closeVoteModal());
       FluxDispatcher.dispatch({
@@ -286,10 +288,8 @@ export const vote = (dispatch: Dispatch, step: Object, proposal: Object, data: O
 
 export const deleteVote = (dispatch: Dispatch, step: Object, proposal: Object) => {
   return removeVote
-    .commit({ withVotes: true, step: step.id, input: { proposalId: proposal.id, stepId: step.id } })
+    .commit({ step: step.id, input: { proposalId: proposal.id, stepId: step.id } })
     .then(() => {
-      // Uselesss but force rerender of ProposalPreview
-      dispatch(closeVoteModal());
       FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,
         alert: {
