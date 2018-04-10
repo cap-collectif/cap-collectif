@@ -34,7 +34,7 @@ class ProposalSearch extends Search
         $this->type = 'proposal';
     }
 
-    public function searchProposals(int $page, int $pagination = null, string $order = null, $terms, array $providedFilters): array
+    public function searchProposals(int $offset, int $limit, string $order = null, $terms, array $providedFilters, string $seed): array
     {
         $boolQuery = new Query\BoolQuery();
         $boolQuery = $this->searchTermsInMultipleFields($boolQuery, self::SEARCH_FIELDS, $terms, 'phrase_prefix');
@@ -48,21 +48,17 @@ class ProposalSearch extends Search
         $boolQuery->addMust(new Exists('id'));
 
         if ('random' === $order) {
-            $query = $this->getRandomSortedQuery($boolQuery);
+            $query = $this->getRandomSortedQuery($boolQuery, $seed);
         } else {
             $query = new Query($boolQuery);
             if ($order) {
                 $query->setSort($this->getSort($order, $providedFilters['collectStep'] ?? $providedFilters['selectionStep']));
             }
         }
-
-        $pagination = $pagination ?? self::RESULTS_PER_PAGE;
-        $from = ($page - 1) * $pagination;
-
         $query
             ->setSource(['id'])
-            ->setFrom($from)
-            ->setSize($pagination)
+            ->setFrom($offset)
+            ->setSize($limit)
         ;
 
         $resultSet = $this->index->getType($this->type)->search($query);

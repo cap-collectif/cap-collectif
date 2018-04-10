@@ -60,7 +60,7 @@ export const ProposalStepPage = React.createClass({
     } = this.props;
     const total = queryCount || count;
     const nbPages = Math.ceil(total / PROPOSAL_PAGINATION);
-    const showPagination = nbPages > 1 && !randomOrder;
+    const showPagination = nbPages > 1;
 
     let geoJsons = [];
     try {
