@@ -35,21 +35,38 @@
         width: 25%;
         display: flex;
 
-        ul {
+        ul.carousel-indicators {
+            position: relative;
             padding: 0;
             margin: 0;
             display: flex;
             flex-direction: column;
+
+            width: 100%;
+            bottom: inherit;
+            left: inherit;
+            text-shadow: none;
+
+            li, .empty-item {
+                flex: 1 0 0;
+            }
 
             li {
                 padding-left: 25px;
                 padding-right: 25px;
                 list-style-type: none;
                 font-size: 14px;
-                flex: 1 0 auto;
+                width: 100%;
                 display: flex;
                 background-color: $page-bgc;
                 cursor: pointer;
+
+                border: none;
+                border-radius: 0;
+                text-align: left;
+                text-indent: 0;
+                height: auto;
+                margin: 0;
 
                 p {
                     align-self: center;
@@ -62,7 +79,7 @@
 
                 .carousel-title {
                     font-size: 16px;
-                    font-weight: bold;
+                    font-weight: 500;
                 }
                 
                 &.active, &:hover {
@@ -79,6 +96,53 @@
 
         .carousel-inner {
             height: 100%;
+
+            .item {
+                height: 100%;
+            }
+        }
+
+        .carousel-caption {
+            width: 100%;
+            margin: 0;
+            left: 0;
+            bottom: 0;
+            padding: 30px;
+            background: linear-gradient(to top, #000, rgba(0,0,0,0));
+
+            p {
+                @extend .ellipsis;
+            }
+
+            .carousel-type {
+                font-size: 17px;
+            }
+
+            .carousel-title {
+                font-weight: 500;
+                font-size: 24px;
+                line-height: 36px;
+            }
+
+            .carousel-date {
+                font-size: 16px;
+                font-style: italic;
+                font-weight: 300;
+            }
+        }
+
+        .carousel-control {
+            &.left, &.right {
+                background-image: none;
+                display: flex;
+                text-shadow: none;
+
+                i {
+                    opacity: 1;
+                    font-size: 25px;
+                    margin: auto;
+                }
+            }
         }
     }
 }
