@@ -41,12 +41,6 @@ type CloseCreateFusionModalAction = {
 type OpenCreateFusionModalAction = {
   type: 'proposal/OPEN_CREATE_FUSION_MODAL',
 };
-type VoteSuccessAction = {
-  type: 'proposal/VOTE_SUCCEEDED',
-  proposalId: Uuid,
-  stepId: Uuid,
-  vote: Object,
-};
 type CloseEditProposalModalAction = { type: 'proposal/CLOSE_EDIT_MODAL' };
 type OpenEditProposalModalAction = { type: 'proposal/OPEN_EDIT_MODAL' };
 type CloseDeleteProposalModalAction = { type: 'proposal/CLOSE_DELETE_MODAL' };
@@ -55,6 +49,8 @@ type OpenCreateModalAction = { type: 'proposal/OPEN_CREATE_MODAL' };
 type CloseCreateModalAction = { type: 'proposal/CLOSE_CREATE_MODAL' };
 type ChangePageAction = { type: 'proposal/CHANGE_PAGE', page: number };
 type ChangeTermAction = { type: 'proposal/CHANGE_TERMS', terms: string };
+type OpenVoteModalAction = { type: 'proposal/OPEN_VOTE_MODAL', id: Uuid };
+type CloseVoteModalAction = { type: 'proposal/CLOSE_VOTE_MODAL' };
 type RequestLoadProposalsAction = {
   type: 'proposal/FETCH_REQUESTED',
   step: ?Uuid,
@@ -269,7 +265,10 @@ export const addProposalInRandomResultsByStep = (
 export const vote = (dispatch: Dispatch, step: Object, proposal: Object, data: Object) => {
   dispatch(startVoting());
   return addVote
-    .commit({ step: step.id, input: { proposalId: proposal.id, stepId: step.id, anonymously: data.private } })
+    .commit({
+      step: step.id,
+      input: { proposalId: proposal.id, stepId: step.id, anonymously: data.private },
+    })
     .then(() => {
       dispatch(closeVoteModal());
       FluxDispatcher.dispatch({
@@ -288,7 +287,6 @@ export const vote = (dispatch: Dispatch, step: Object, proposal: Object, data: O
 };
 
 export const deleteVote = (dispatch: Dispatch, step: Object, proposal: Object) => {
-  dispatch(deleteVoteRequested(proposal.id));
   return removeVote
     .commit({ step: step.id, input: { proposalId: proposal.id, stepId: step.id } })
     .then(() => {
@@ -442,12 +440,9 @@ export type ProposalAction =
   | OpenVoteModalAction
   | OpenDeleteProposalModalAction
   | RequestFetchProposalPostsAction
-  | DeleteVoteSucceededAction
   | LoadSelectionsAction
   | CloseEditProposalModalAction
-  | RequestDeleteProposalVoteAction
   | CloseVoteModalAction
-  | VoteSuccessAction
   | CloseDeleteProposalModalAction
   | RequestDeleteAction
   | ChangeProposalListViewAction
@@ -530,8 +525,6 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
       return { ...state, isVoting: true };
     case 'proposal/VOTE_FAILED':
       return { ...state, isVoting: false };
-    case 'proposal/DELETE_VOTE_REQUESTED':
-      return { ...state, currentDeletingVote: action.proposalId };
     case 'proposal/DELETE_REQUEST':
       return { ...state, isDeleting: true };
     case 'proposal/FETCH_REQUESTED':
