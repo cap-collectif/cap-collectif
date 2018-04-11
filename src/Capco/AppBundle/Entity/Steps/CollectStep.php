@@ -35,7 +35,7 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", mappedBy="step", cascade={"persist"})
      */
-    private $proposalForm = null;
+    private $proposalForm;
 
     /**
      * @ORM\Column(name="proposals_count", type="integer", nullable=false)
@@ -51,7 +51,7 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Status", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="default_status_id", nullable=true)
      */
-    private $defaultStatus = null;
+    private $defaultStatus;
 
     /**
      * @ORM\Column(name="private", type="boolean", nullable=false)
@@ -100,10 +100,7 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
         return $this;
     }
 
-    /**
-     * @return null|ProposalForm
-     */
-    public function getProposalForm()
+    public function getProposalForm(): ?ProposalForm
     {
         return $this->proposalForm;
     }
@@ -149,7 +146,7 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
 
     // **************************** Custom methods *******************************
 
-    public function getType()
+    public function getType(): string
     {
         return 'collect';
     }
