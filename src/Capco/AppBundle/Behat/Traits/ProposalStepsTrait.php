@@ -257,7 +257,7 @@ trait ProposalStepsTrait
      */
     public function thereShouldBeNbProposals(int $nb)
     {
-        $this->assertPageMatchesText('/(proposal.count_with_total {"num":' . $nb . '|proposal.count {"num":' . $nb . '})/');
+        $this->assertPageMatchesText('/(proposal.count_with_total {"num":' . $nb . ' | proposal.count {"num":' . $nb . '})/');
         $proposalSelector = $this->getCurrentPage()->getProposalSelector();
         $this->assertNumElements($nb, $proposalSelector);
     }

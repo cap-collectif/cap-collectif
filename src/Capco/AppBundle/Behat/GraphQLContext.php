@@ -15,6 +15,8 @@ class GraphQLContext implements Context
     public $response;
     public $token;
 
+    public $resultChecker = '';
+
     /**
      * @BeforeScenario
      */
@@ -80,6 +82,25 @@ class GraphQLContext implements Context
         PHPUnit::assertSame(200, (int) $response->getStatusCode());
         $this->response = (string) $response->getBody();
         PHPUnit::assertFalse(array_key_exists('errors', json_decode($this->response, true)), $this->response);
+    }
+
+    /**
+     * @Given I store the result
+     */
+    public function iStoreTheResult()
+    {
+        $this->resultChecker = $this->response;
+    }
+
+    /**
+     * @Then the current result should not math with the stored result
+     */
+    public function compareWithStoredResult()
+    {
+        $body = $this->response;
+        $factory = new SimpleFactory();
+        $matcher = $factory->createMatcher();
+        PHPUnit::assertNotTrue($matcher->match($body, $this->resultChecker), $matcher->getError());
     }
 
     /**
