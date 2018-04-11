@@ -1,17 +1,20 @@
 // @flow
-import React, { Component } from 'react';
-import { graphql, createFragmentContainer} from 'react-relay';
-import { FormattedMessage } from 'react-intl';
-import { Row, Col, Tab, Nav, NavItem, Panel, ListGroup, ListGroupItem } from 'react-bootstrap';
+import React, {Component} from 'react';
+import {graphql, createFragmentContainer} from 'react-relay';
+import {FormattedMessage} from 'react-intl';
+import {Row, Col, Tab, Nav, NavItem, Panel, ListGroup, ListGroupItem} from 'react-bootstrap';
 import AccountBox from './AccountBox';
 import type {FeatureToggles} from "../../../types";
 import NotificationsForm from "./NotificationsForm";
 import FollowingsProposals from "../Following/FollowingsProposals";
-import type EditProfileTabs_viewer from './__generated__/EditProfileBoxQuery.graphql';
+import type EditProfileTabs_viewer from './__generated__/EditProfileTabs_viewer.graphql';
+import UserAvatar from "../UserAvatar";
+import UserLink from "../UserLink";
+import CardUser from '../../Ui/Card/CardUser';
 
 type Props = {
     features: FeatureToggles,
-    viewer: EditProfileTabs_viewer
+    viewer: EditProfileTabs_viewer,
 };
 
 export class EditProfileTabs extends Component<Props> {
@@ -41,57 +44,63 @@ export class EditProfileTabs extends Component<Props> {
         }
         return 'account';
     }
-    render(){
-        const { viewer, features } = this.props;
+
+    render() {
+        const {viewer, features } = this.props;
 
         return (
             <Tab.Container
                 id="account-tabs"
                 defaultActiveKey={this.getDefaultKey()}
-                >
+            >
                 <Row className="clearfix">
                     <Col sm={4} md={3}>
-                        <Panel id="panel-account" header={"Dupont"}>
+                        <Panel id="panel-account" header={
+                            <CardUser>
+                                <UserAvatar className="pull-left" user={viewer} />
+                                <UserLink user={viewer} />
+                            </CardUser>
+                        }>
                             <ListGroup>
-                            <Nav bsStyle="pills" stacked>
-                                <NavItem eventKey="account" >
-                                    <ListGroupItem>
-                                        <span className="icon cap-setting-gear"></span>
-                                        <FormattedMessage id="user.profile.edit.profile" />
-                                    </ListGroupItem>
-                                </NavItem>
-                                <NavItem eventKey="personal-data" >
-                                    <ListGroupItem >
-                                        <span className="icon cap-id-1"></span>
-                                        <FormattedMessage id="personal-data" />
-                                    </ListGroupItem>
-                                </NavItem>
-                                <NavItem eventKey="password" >
-                                    <ListGroupItem>
-                                        <span className="icon cap-key-1"></span>
-                                        <FormattedMessage id="user.profile.edit.password" />
-                                    </ListGroupItem>
-                                </NavItem>
-                                <NavItem eventKey="notifications" className="tab">
-                                    <ListGroupItem>
-                                        <span className="icon cap-bell"></span>
-                                        <FormattedMessage id="user.profile.notifications.title" />
-                                    </ListGroupItem>
-                                </NavItem>
-                                <NavItem eventKey="followings" className="tab">
-                                    <ListGroupItem>
-                                        <span className="icon cap-rss-2"></span>
-                                        <FormattedMessage id="followings" />
-                                    </ListGroupItem>
-                                </NavItem>
-                            </Nav>
+                                <Nav bsStyle="pills" stacked>
+                                    <NavItem eventKey="account">
+                                        <ListGroupItem>
+                                            <span className="icon cap-setting-gear"></span>
+                                            <FormattedMessage id="user.profile.edit.profile"/>
+                                        </ListGroupItem>
+                                    </NavItem>
+                                    <NavItem eventKey="personal-data">
+                                        <ListGroupItem>
+                                            <span className="icon cap-id-1"></span>
+                                            <FormattedMessage id="personal-data"/>
+                                        </ListGroupItem>
+                                    </NavItem>
+                                    <NavItem eventKey="password">
+                                        <ListGroupItem>
+                                            <span className="icon cap-key-1"></span>
+                                            <FormattedMessage id="user.profile.edit.password"/>
+                                        </ListGroupItem>
+                                    </NavItem>
+                                    <NavItem eventKey="notifications" className="tab">
+                                        <ListGroupItem>
+                                            <span className="icon cap-bell"></span>
+                                            <FormattedMessage id="user.profile.notifications.title"/>
+                                        </ListGroupItem>
+                                    </NavItem>
+                                    <NavItem eventKey="followings" className="tab">
+                                        <ListGroupItem>
+                                            <span className="icon cap-rss-2"></span>
+                                            <FormattedMessage id="followings"/>
+                                        </ListGroupItem>
+                                    </NavItem>
+                                </Nav>
                             </ListGroup>
                         </Panel>
                     </Col>
                     <Col xs={12} sm={8} md={9}>
                         <Tab.Content animation>
                             <Tab.Pane eventKey="account">
-                                <AccountBox />
+                                <AccountBox/>
                             </Tab.Pane>
                             <Tab.Pane eventKey="personal-data">
                                 Personal data
@@ -100,7 +109,7 @@ export class EditProfileTabs extends Component<Props> {
                                 Password
                             </Tab.Pane>
                             <Tab.Pane eventKey="notifications">
-                                <Panel header={<FormattedMessage id="profile.account.notifications.title" />}>
+                                <Panel header={<FormattedMessage id="profile.account.notifications.title"/>}>
                                     <NotificationsForm viewer={viewer}/>
                                 </Panel>
                             </Tab.Pane>
@@ -121,6 +130,12 @@ export default createFragmentContainer(
         fragment EditProfileTabs_viewer on User {
             ...FollowingsProposals_viewer
             ...NotificationsForm_viewer
+            username
+            displayName
+            media {
+              url
+            }
+            show_url
         }
     `
 );
