@@ -65,7 +65,7 @@ class ProposalSearch extends Search
 
         return [
             'proposals' => $this->getHydratedResults(array_map(function (Result $result) { return $result->getData()['id']; }, $resultSet->getResults())),
-            'count' => $resultSet->getTotalHits(),
+            'count' => \count($resultSet->getResults()),
             'order' => $order,
         ];
     }
