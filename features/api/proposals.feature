@@ -655,6 +655,287 @@ Scenario: Anonymous API client wants to get proposals from a collect step with f
   }
   """
 
+Scenario: Anonymous API client wants to get some proposals from a collect step
+  When I send a POST request to "/api/collect_steps/collectstep1/proposals/search-in" with json:
+  """
+  {
+    "ids": [
+      "proposal10", "proposal1"
+    ]
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "proposals": [
+      {
+          "summaryOrBodyExcerpt": @string@,
+          "reference": @string@,
+          "updatedAt": "@string@.isDateTime()",
+          "isDraft": @boolean@,
+          "address": @null@,
+          "summary": @null@,
+          "estimation": @null@,
+          "author": {
+              "username": @string@,
+              "displayName": @string@,
+              "uniqueId": @string@,
+              "isAdmin": @boolean@,
+              "userType": {
+                  "name": @string@,
+                  "slug": @string@,
+                  "id": @integer@
+              },
+              "media": @null@,
+              "vip": @boolean@,
+              "_links": {
+                  "settings": @string@
+              }
+          },
+          "proposalForm": {
+              "id": @string@
+          },
+          "likers": @array@,
+          "category": @null@,
+          "theme": {
+              "title": @string@,
+              "enabled": @boolean@,
+              "id": @string@,
+              "_links": {
+                  "show": @string@
+              }
+          },
+          "district": {
+              "name": @string@,
+              "id": @string@
+          },
+          "status": {
+              "name": @string@,
+              "id": @string@,
+              "color": @string@
+          },
+          "comments": @array@,
+          "selections": @array@,
+          "estimation": @integer@,
+          "trashedReason": @null@,
+          "progressSteps": @array@,
+          "id": "proposal10",
+          "commentsCount": @integer@,
+          "createdAt": "@string@.isDateTime()",
+          "enabled": @boolean@,
+          "isTrashed": @boolean@,
+          "title": @string@,
+          "body": @string@,
+          "_links": {
+              "show": @string@,
+              "index": @string@
+          },
+          "votesCountByStepId": {
+              "selectionstep6": @integer@,
+              "collectstep1": @integer@
+          },
+          "votesByStepId": {
+              "selectionstep6": @array@,
+              "collectstep1": @array@
+          },
+          "responses": @array@,
+          "votableStepId": @string@,
+          "reference": "@string@"
+      },
+      {
+          "summaryOrBodyExcerpt": @string@,
+          "estimation": @null@,
+          "summary": @null@,
+          "address": @null@,
+          "reference": @string@,
+          "isDraft": @boolean@,
+          "updatedAt": "@string@.isDateTime()",
+          "author": {
+              "username": @string@,
+              "displayName": @string@,
+              "uniqueId": @string@,
+              "isAdmin": @boolean@,
+              "media": {
+                  "url": @string@
+              },
+              "userType": {
+                  "name": @string@,
+                  "slug": @string@,
+                  "id": @integer@
+              },
+              "vip": @boolean@,
+              "_links": {
+                  "settings": @string@
+              }
+          },
+          "proposalForm": {
+              "id": @string@
+          },
+          "likers": @array@,
+          "address": @string@,
+          "theme": {
+              "title": @string@,
+              "enabled": @boolean@,
+              "id": @string@,
+              "_links": {
+                  "show": @string@
+              }
+          },
+          "district": {
+              "name": @string@,
+              "id": @string@
+          },
+          "status": {
+              "name": @string@,
+              "id": @string@,
+              "color": @string@
+          },
+          "category": @wildcard@,
+          "comments": @array@,
+          "selections": @array@,
+          "progressSteps": @array@,
+          "id": "proposal1",
+          "commentsCount": @integer@,
+          "createdAt": "@string@.isDateTime()",
+          "enabled": @boolean@,
+          "isTrashed": @boolean@,
+          "trashedReason": @null@,
+          "title": @string@,
+          "body": @string@,
+          "_links": {
+              "show": @string@,
+              "index": @string@
+          },
+        "votesCountByStepId": @wildcard@,
+
+          "votesByStepId": {
+              "selectionstep1": @array@,
+              "collectstep1": @array@
+          },
+          "responses": @array@,
+          "votableStepId": @string@,
+          "reference": "@string@"
+      }
+    ],
+    "count": 2
+  }
+  """
+
+@security
+Scenario: Anonymous API client wants to get some proposals from a collect step without define ids
+  When I send a POST request to "/api/collect_steps/collectstep1/proposals/search-in" with json:
+  """
+  {
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "code": 400,
+    "message": "Bad Request",
+    "errors": null
+  }
+  """
+
+Scenario: Anonymous API client wants to get some selection proposals from a collect step
+  When I send a POST request to "/api/selection_steps/selectionstep1/proposals/search-in" with json:
+  """
+  {
+    "ids": [
+      "proposal3", "proposal2"
+    ]
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "proposals": [
+      {
+        "summaryOrBodyExcerpt": @string@,
+        "reference": @string@,
+        "updatedAt": "@string@.isDateTime()",
+        "author": @wildcard@,
+        "estimation": @...@,
+        "summary": @null@,
+        "proposalForm": @wildcard@,
+        "likers": @array@,
+        "address": @string@,
+        "theme": @wildcard@,
+        "district": @wildcard@,
+        "status": @wildcard@,
+        "category": @wildcard@,
+        "comments": @array@,
+        "selections": @array@,
+        "progressSteps": @array@,
+        "id": "proposal3",
+        "commentsCount": @integer@,
+        "createdAt": "@string@.isDateTime()",
+        "enabled": @boolean@,
+        "isTrashed": @boolean@,
+        "title": @string@,
+        "body": @string@,
+        "summary": @string@,
+        "isDraft": @boolean@,
+        "trashedReason": @null@,
+        "_links": @wildcard@,
+        "votesCountByStepId": @wildcard@,
+        "votesByStepId": @wildcard@,
+        "responses": @array@,
+        "votableStepId": @string@
+      },
+      {
+        "summaryOrBodyExcerpt": @string@,
+        "reference": @string@,
+        "summary": @null@,
+        "estimation": @wildcard@,
+        "updatedAt": "@string@.isDateTime()",
+        "author": @wildcard@,
+        "proposalForm": @wildcard@,
+        "likers": @array@,
+        "address": @string@,
+        "theme": @wildcard@,
+        "district": @wildcard@,
+        "status": @wildcard@,
+        "category": @wildcard@,
+        "comments": @array@,
+        "selections": @array@,
+        "progressSteps": @array@,
+        "id": "proposal2",
+        "commentsCount": @integer@,
+        "createdAt": "@string@.isDateTime()",
+        "enabled": @boolean@,
+        "isTrashed": @boolean@,
+        "trashedReason": @null@,
+        "title": @string@,
+        "body": @string@,
+        "isDraft": @boolean@,
+        "_links": @wildcard@,
+        "votesCountByStepId": @wildcard@,
+        "votesByStepId": @wildcard@,
+        "responses": @array@,
+        "votableStepId": @string@
+      }
+    ],
+    "count": 2
+  }
+  """
+
+@security
+Scenario: Anonymous API client wants to get some proposals from a selection step without define ids
+  When I send a POST request to "/api/selection_steps/selectionstep1/proposals/search-in" with json:
+  """
+  {
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "code": 400,
+    "message": "Bad Request",
+    "errors": null
+  }
+  """
+
 @database
 Scenario: logged in API client wants to remove a proposal
   Given I am logged in to api as user

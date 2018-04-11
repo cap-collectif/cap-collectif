@@ -19,7 +19,7 @@ ProposalForm:
                 type: "String!"
             proposals:
                 type: "ProposalConnection!"
-                resolve: "@=resolver('proposal_form_proposals', [value, args, user, request])"
+                resolve: "@=resolver('proposal_form_proposals', [value, args, user])"
                 args:
                   orderBy:
                     type: "ProposalOrder"
