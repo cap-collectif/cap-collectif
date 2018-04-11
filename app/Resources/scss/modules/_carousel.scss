@@ -164,6 +164,11 @@
 .carousel__mobile {
     display: flex;
     white-space: nowrap;
+    overflow: scroll;
+
+    &.active {
+        // transform: scale(0.9);
+    }
 
     img {
         width: 100%;

@@ -4,27 +4,36 @@ type Props = {}
 
 export class CarouselMobile extends PureComponent<Props> {
 
-  ComponentDidMount() {
+  componentDidMount() {
     const carousel = document.querySelector('.carousel__mobile');
     let isDown = false;
     let startX;
     let scrollLeft;
 
-    carousel.addEventListener('mousedown', () => {
+    carousel.addEventListener('mousedown', (e) => {
       isDown = true;
+      carousel.classList.add('active');
+      startX = e.pageX - carousel.offsetLeft;
+      scrollLeft = carousel.scrollLeft;
+      console.warn(startX);
     });
 
     carousel.addEventListener('mouseleave', () => {
       isDown = false;
+      carousel.classList.remove('active');
     });
 
     carousel.addEventListener('mouseup', () => {
       isDown = false;
+      carousel.classList.remove('active');
     });
 
-    carousel.addEventListener('mousemove', () => {
-      console.log(isDown);
-      console.log('Do work')
+    carousel.addEventListener('mousemove', (e) => {
+      if(!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - carousel.offsetLeft;
+      const walk = (x - startX) *3;
+      carousel.scrollLeft = scrollLeft - walk;
     });
   }
 
