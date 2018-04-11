@@ -118,6 +118,7 @@ fragment sourceInfos on Source {
       title
     }
     title
+    body
     bodyText
     createdAt
     updatedAt
@@ -148,6 +149,7 @@ fragment sourceInfos on Source {
       id
   		...authorInfos
       title
+      body
       bodyText
       comment
       createdAt
