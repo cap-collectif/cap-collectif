@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Panel, Button } from 'react-bootstrap';
 import { connect, type MapStateToProps } from 'react-redux';
-import {isInvalid, isSubmitting} from 'redux-form';
+import { isInvalid } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import AccountForm from './AccountForm';
 import ConfirmPasswordModal from '../ConfirmPasswordModal';

@@ -46,6 +46,7 @@ import EvaluationsIndexPageApp from './startup/EvaluationsIndexPageApp';
 import ChooseAUsernameApp from './startup/ChooseAUsernameApp';
 import ParisUserNotValidApp from './startup/ParisUserNotValidApp';
 import AccountProfileFollowingsApp from './startup/AccountProfileFollowingsApp';
+import EditProfileApp from './startup/EditProfileApp';
 
 import appStore from '../js/stores/AppStore';
 
@@ -105,4 +106,5 @@ ReactOnRails.register({
   ProposalFormAdminPageApp,
   GroupAdminPageApp,
   GroupCreateButtonApp,
+  EditProfileApp
 });

@@ -29,58 +29,10 @@ class ProfileController extends BaseController
      */
     public function editProfileAction()
     {
-        $user = $this->getUser();
-        if (!is_object($user) || !$user instanceof UserInterface) {
-            throw $this->createAccessDeniedException('This user does not have access to this section.');
-        }
-
-        $form = $this->get('sonata.user.profile.form');
-        $form->remove('email');
-        $formHandler = $this->get('sonata.user.profile.form.handler');
-
-        $process = $formHandler->process($user);
-        if ($process) {
-            $this->setFlash('sonata_user_success', 'profile.flash.updated');
-        }
-
-        return [
-          'form' => $form->createView(),
-      ];
-    }
-
-    /**
-     * @Route("/edit-mobile", name="capco_profile_edit_mobile")
-     * @Template("CapcoUserBundle:Profile:edit_mobile.html.twig")
-     * @Security("has_role('ROLE_USER')")
-     */
-    public function editProfileMobileAction()
-    {
-    }
-
-    /**
-     * @Route("/edit-account", name="capco_profile_edit_account")
-     * @Template("CapcoUserBundle:Profile:edit_account.html.twig")
-     * @Security("has_role('ROLE_USER')")
-     */
-    public function editAccountAction(Request $request)
-    {
-        $user = $this->getUser();
-        if (!is_object($user) || !$user instanceof UserInterface) {
-            throw $this->createAccessDeniedException('This user does not have access to this section.');
-        }
-
         return [];
     }
 
-    /**
-     * @Route("/followings", name="capco_profile_edit_followings")
-     * @Template("CapcoUserBundle:Profile:edit_followings.html.twig")
-     * @Security("has_role('ROLE_USER')")
-     */
-    public function editFollowingsAction(Request $request)
-    {
-        return [];
-    }
+
 
     /**
      * @Route("/followings/{token}", name="capco_profile_followings_login")
@@ -96,16 +48,6 @@ class ProfileController extends BaseController
         }
 
         return $this->redirectToRoute('capco_profile_edit_followings');
-    }
-
-    /**
-     * @Route("/notifications", name="capco_profile_notifications_edit_account")
-     * @Template("@CapcoUser/Profile/edit_notifications.twig")
-     * @Security("has_role('ROLE_USER')")
-     */
-    public function showNotificationsOptionsAction(Request $request)
-    {
-        return [];
     }
 
     /**
