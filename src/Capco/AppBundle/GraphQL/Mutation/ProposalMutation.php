@@ -35,11 +35,6 @@ class ProposalMutation implements ContainerAwareInterface
 
         $author = $proposal->getAuthor();
 
-        // Synchronous indexation
-        $indexer = $this->container->get('capco.elasticsearch.indexer');
-        $indexer->remove(get_class($proposal), $proposal->getId());
-        $indexer->finishBulk();
-
         $em->remove($proposal); // softdeleted
         $em->flush();
 
@@ -50,6 +45,11 @@ class ProposalMutation implements ContainerAwareInterface
                 'proposalId' => $proposal->getId(),
             ])
         ));
+
+        // Synchronous indexation
+        $indexer = $this->container->get('capco.elasticsearch.indexer');
+        $indexer->index(get_class($proposal), $proposal->getId());
+        $indexer->finishBulk();
 
         return ['proposal' => $proposal];
     }
