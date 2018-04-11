@@ -212,7 +212,7 @@ Scenario: Author of a proposal wants to delete it
   And I wait 2 seconds
   And I should not see my proposal anymore
   Then there should be 5 proposals
-
+  
 @javascript @database
 Scenario: Admin should not be notified when an user deletes his proposal on an non notifiable proposal
   Given I am logged in as user

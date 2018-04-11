@@ -43,7 +43,7 @@ exports[`<ProposalFusionList /> should render a list of proposal of merged in ot
     defaultExpanded={false}
     header={
       <FormattedMessage
-        id="proposal.fusionnedFrom"
+        id="proposal.mergedFrom"
         values={
           Object {
             "num": 2,
