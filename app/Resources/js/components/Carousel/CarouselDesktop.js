@@ -2,39 +2,70 @@ import React, { PureComponent } from 'react';
 
 type Props = {}
 
-type State = {
-  dataItem: number,
-}
-
-export class CarouselDesktop extends PureComponent<Props, State> {
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      dataItem: 0
-    };
-  };
+export class CarouselDesktop extends PureComponent<Props> {
 
   componentDidMount() {
-    const innerCarousel = document.getElementById('carousel-inner');
-    const activeItem =  innerCarousel.getElementsByClassName('active');
+    $('#carousel').on('slid.bs.carousel', () => {
+      const lastSlide = 3;
+      const firstSlide = 0;
+      const innerCarousel = document.getElementById('carousel-inner');
+      const activeContent = innerCarousel.getElementsByClassName('active');
+      const dataOfContent = parseInt(activeContent[0].dataset.item, 10);
+      const leftArrow = document.getElementById('left-arrow');
+      const rightArrow = document.getElementById('right-arrow');
 
-    console.error(activeItem[0].dataset.item);
+      console.log(dataOfContent === lastSlide);
 
-    // this.setState({
-    //   dataItem: activeItem[0].dataset.item,
-    // })
-    console.log("yolo");
+      if(dataOfContent === lastSlide) {
+        rightArrow.classList.add('disabled');
+      }
+
+      if(dataOfContent === firstSlide) {
+        leftArrow.classList.add('disabled');
+      }
+
+      if(dataOfContent !== lastSlide) {
+        rightArrow.classList.remove('disabled');
+      }
+
+      if(dataOfContent !== firstSlide) {
+        leftArrow.classList.remove('disabled');
+      }
+    });
+
+    // navCarousel.addEventListener('mousedown', (ev) => {
+    //   const activeItem =  navCarousel.getElementsByClassName('active');
+    //   const activeItemTop = activeItem[0].getBoundingClientRect();
+    //
+    //   if(activeItemTop) { // mouse top < activeitemTop
+    //     // add top-transition
+    //   }
+    //
+    //   // remove top-transition
+    // });
+
+    // leftArrow[0].addEventListener('click', () => {
+    //   // add top-transition
+    // });
   }
 
+  getCarouselContent = () => {
+
+  };
+
+  getEmptyNavItem = () => {
+    // for(i = 0, i < (4 - project.lenght), i++) { return ( <div className="empty-item" /> )}
+  };
+
+  getCarouselNavigation = () => {
+    // map project
+    // {project.lenght < 4 && this.getEmptyNavItem()}
+  };
+
   render() {
-
-    // const activeNav = document.getElementsByClassName('carousel-nav-item');
-    // console.log(activeNav);
-
     return(
-      <div className="carousel__desktop carousel slide" id="carousel" data-ride="carousel" data-pause="hover" data-wrap="false">
-        <div className="carousel__navigation">
+      <div className="carousel__desktop carousel slide" id="carousel" data-ride="carousel" data-pause="hover" data-wrap="false" data-keyboard="true">
+        <div className="carousel__navigation" id="carousel-navigation">
           <ul className="carousel-indicators">
             <li className="carousel-nav-item active" data-target="#carousel" data-slide-to="0">
               <p>
@@ -114,11 +145,11 @@ export class CarouselDesktop extends PureComponent<Props, State> {
                 </div>
               </div>
 
-              <a className="left carousel-control" href="#carousel" role="button" data-slide="prev">
+              <a className="left carousel-control disabled" id="left-arrow" href="#carousel" role="button" data-slide="prev">
                 <i className="cap-arrow-37" />
                 <span className="sr-only">Previous</span>
               </a>
-              <a className="right carousel-control" href="#carousel" role="button" data-slide="next">
+              <a className="right carousel-control" id="right-arrow" href="#carousel" role="button" data-slide="next">
                 <i className="cap-arrow-38" />
                 <span className="sr-only">Next</span>
               </a>

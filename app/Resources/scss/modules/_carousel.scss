@@ -4,6 +4,7 @@
 
 @mixin aspect-ratio($width, $height) {
     position: relative;
+    overflow: hidden;
 
     &:before{
         display: block;
@@ -35,7 +36,7 @@
         width: 25%;
         display: flex;
 
-        ul.carousel-indicators {
+        .carousel-indicators {
             position: relative;
             padding: 0;
             margin: 0;
@@ -82,8 +83,9 @@
                     font-weight: 500;
                 }
                 
-                &.active, &:hover {
+                &.active {
                     background-color: #e2e3e5;
+                    transition: 0.5s ease-in-out;
                 }
             }
         }
@@ -132,17 +134,63 @@
         }
 
         .carousel-control {
+            opacity: 1;
+
             &.left, &.right {
                 background-image: none;
                 display: flex;
                 text-shadow: none;
 
                 i {
-                    opacity: 1;
+                    transition: 0.1s ease;
                     font-size: 25px;
                     margin: auto;
                 }
             }
+
+            &.disabled {
+                cursor: initial;
+
+                i {
+                    opacity: 0.5;
+                    transition: 0.1s ease-out;
+                    cursor: not-allowed;
+                }
+            }
+        }
+    }
+}
+
+.carousel__mobile {
+    display: flex;
+    white-space: nowrap;
+
+    img {
+        width: 100%;
+    }
+
+    .item {
+        width: 100%;
+        margin-right: 5px;
+    }
+
+    .carousel__content {
+        color: #333333;
+        padding: 10px 0;
+        line-height: 20px;
+
+        .carousel-type {
+            font-size: 14px;
+            color: $dark-gray;
+        }
+
+        .carousel-title {
+            font-weight: 500;
+        }
+
+        .carousel-date {
+            font-style: italic;
+            font-size: 14px;
         }
     }
 }
@@ -152,9 +200,17 @@
         .carousel__navigation {
             width: 30%;
 
-            ul li {
+            .carousel-indicators li {
                 padding-left: 20px;
                 padding-right: 20px;
+
+                p {
+                    line-height: 19px;
+                }
+
+                .carousel-type, .carousel-date {
+                    font-weight: 400;
+                }
 
                 .carousel-title {
                     font-size: 15px;
