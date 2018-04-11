@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { graphql, createFragmentContainer} from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import { Row, Col, Tab, Nav, NavItem, Panel, ListGroup } from 'react-bootstrap';
+import { Row, Col, Tab, Nav, NavItem, Panel, ListGroup, ListGroupItem } from 'react-bootstrap';
 import AccountBox from './AccountBox';
 import type {FeatureToggles} from "../../../types";
 import NotificationsForm from "./NotificationsForm";
@@ -46,36 +46,51 @@ export class EditProfileTabs extends Component<Props> {
 
         return (
             <Tab.Container
-                id="left-tabs-example"
+                id="account-tabs"
                 defaultActiveKey={this.getDefaultKey()}
                 >
                 <Row className="clearfix">
                     <Col sm={4} md={3}>
-                        <Nav bsStyle="pills" stacked>
-                            <NavItem eventKey="account" >
-                                <FormattedMessage id="user.profile.edit.profile" />
-                            </NavItem>
-                            <NavItem eventKey="personnal-data" >
-                                <FormattedMessage id="personnal-data" />
-                            </NavItem>
-                            <NavItem eventKey="password" >
-                                <FormattedMessage id="user.profile.edit.password" />
-                            </NavItem>
-                            <NavItem eventKey="notifications" className="tab">
-                                <FormattedMessage id="user.profile.notifications.title" />
-                            </NavItem>
-                            <NavItem eventKey="followings" className="tab">
-                                <FormattedMessage id="followings" />
-                            </NavItem>
-                        </Nav>
+                        <Panel id="panel-account" header={"Dupont"}>
+                            <ListGroup>
+                            <Nav bsStyle="pills" stacked>
+                                <NavItem eventKey="account" >
+                                    <ListGroupItem>
+                                        <span className="icon cap-setting-gear-1"></span>
+                                        <FormattedMessage id="user.profile.edit.profile" />
+                                    </ListGroupItem>
+                                </NavItem>
+                                <NavItem eventKey="personal-data" >
+                                    <ListGroupItem >
+                                    <FormattedMessage id="personal-data" />
+                                    </ListGroupItem>
+                                </NavItem>
+                                <NavItem eventKey="password" >
+                                    <ListGroupItem>
+                                    <FormattedMessage id="user.profile.edit.password" />
+                                    </ListGroupItem>
+                                </NavItem>
+                                <NavItem eventKey="notifications" className="tab">
+                                    <ListGroupItem>
+                                    <FormattedMessage id="user.profile.notifications.title" />
+                                    </ListGroupItem>
+                                </NavItem>
+                                <NavItem eventKey="followings" className="tab">
+                                    <ListGroupItem>
+                                    <FormattedMessage id="followings" />
+                                    </ListGroupItem>
+                                </NavItem>
+                            </Nav>
+                            </ListGroup>
+                        </Panel>
                     </Col>
                     <Col xs={12} sm={8} md={9}>
                         <Tab.Content animation>
                             <Tab.Pane eventKey="account">
                                 <AccountBox />
                             </Tab.Pane>
-                            <Tab.Pane eventKey="personnal-data">
-                                Personnal data
+                            <Tab.Pane eventKey="personal-data">
+                                Personal data
                             </Tab.Pane>
                             <Tab.Pane eventKey="password">
                                 Password
