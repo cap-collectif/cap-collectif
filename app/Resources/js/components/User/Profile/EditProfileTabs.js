@@ -56,28 +56,32 @@ export class EditProfileTabs extends Component<Props> {
                             <Nav bsStyle="pills" stacked>
                                 <NavItem eventKey="account" >
                                     <ListGroupItem>
-                                        <span className="icon cap-setting-gear-1"></span>
+                                        <span className="icon cap-setting-gear"></span>
                                         <FormattedMessage id="user.profile.edit.profile" />
                                     </ListGroupItem>
                                 </NavItem>
                                 <NavItem eventKey="personal-data" >
                                     <ListGroupItem >
-                                    <FormattedMessage id="personal-data" />
+                                        <span className="icon cap-id-1"></span>
+                                        <FormattedMessage id="personal-data" />
                                     </ListGroupItem>
                                 </NavItem>
                                 <NavItem eventKey="password" >
                                     <ListGroupItem>
-                                    <FormattedMessage id="user.profile.edit.password" />
+                                        <span className="icon cap-key-1"></span>
+                                        <FormattedMessage id="user.profile.edit.password" />
                                     </ListGroupItem>
                                 </NavItem>
                                 <NavItem eventKey="notifications" className="tab">
                                     <ListGroupItem>
-                                    <FormattedMessage id="user.profile.notifications.title" />
+                                        <span className="icon cap-bell"></span>
+                                        <FormattedMessage id="user.profile.notifications.title" />
                                     </ListGroupItem>
                                 </NavItem>
                                 <NavItem eventKey="followings" className="tab">
                                     <ListGroupItem>
-                                    <FormattedMessage id="followings" />
+                                        <span className="icon cap-rss-2"></span>
+                                        <FormattedMessage id="followings" />
                                     </ListGroupItem>
                                 </NavItem>
                             </Nav>
