@@ -1,29 +1,24 @@
 import React, { PureComponent } from 'react';
-import CarouselMobile from "./CarouselMobile";
-import CarouselDesktop from "./CarouselDesktop";
+import CarouselMobile from './CarouselMobile';
+import CarouselDesktop from './CarouselDesktop';
 
-type Props = {}
+type Props = {
+  highlighteds: Object,
+};
 
 export class CarouselContainer extends PureComponent<Props> {
   getCarousel = () => {
-    if(window.innerWidth < 992 ) {
-      return (
-        <CarouselMobile />
-      )
+    const { highlighteds } = this.props;
+
+    if (window.innerWidth < 992) {
+      return <CarouselMobile highlighteds={highlighteds} />;
     }
 
-    return (
-      <CarouselDesktop />
-    )
+    return <CarouselDesktop highlighteds={highlighteds} />;
   };
 
   render() {
-
-    return(
-      <div>
-        {this.getCarousel()}
-      </div>
-    )
+    return <div>{this.getCarousel()}</div>;
   }
 }
 

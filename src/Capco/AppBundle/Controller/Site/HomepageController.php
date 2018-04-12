@@ -81,10 +81,14 @@ class HomepageController extends Controller
     {
         $max = $max ?? 4;
         $offset = $offset ?? 0;
+        $serializer = $this->get('jms_serializer');
         $highlighteds = $this->getDoctrine()->getRepository('CapcoAppBundle:HighlightedContent')->getAllOrderedByPosition(5);
+        $props = $serializer->serialize([
+            'highlighteds' => $highlighteds,
+        ], 'json');
 
         return [
-            'highlighteds' => $highlighteds,
+            'props' => $props,
             'section' => $section,
         ];
     }
