@@ -5,3 +5,7 @@ ProposalVoteConnection:
         connectionFields:
             totalCount:
                 type: Int!
+            creditsLeft:
+                type: Int
+            creditsSpent:
+                type: Int

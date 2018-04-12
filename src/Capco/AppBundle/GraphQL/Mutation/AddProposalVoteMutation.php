@@ -90,6 +90,6 @@ class AddProposalVoteMutation
         $this->em->persist($vote);
         $this->em->flush();
 
-        return ['proposal' => $proposal];
+        return ['proposal' => $proposal, 'viewer' => $user];
     }
 }

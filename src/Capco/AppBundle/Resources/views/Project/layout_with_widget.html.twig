@@ -12,6 +12,7 @@
     {% if showVotesWidget %}
       {{ react_render_component('ProposalVoteBasketWidgetApp', {
           'props': {
+            'projectId': project.id,
             'image': media_public_url(capco_site_image_media('image.votes_bar'), 'default_small'),
             'votesPageUrl': path('app_project_show_user_votes', {'projectSlug': project.slug}),
           },

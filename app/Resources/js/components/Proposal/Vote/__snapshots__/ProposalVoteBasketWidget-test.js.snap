@@ -281,7 +281,7 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
         <span
           className="widget__counter__value"
         >
-          12
+          0
         </span>
       </li>
     </Nav>

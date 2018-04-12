@@ -270,7 +270,32 @@ services:
         class: Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalVotesResolver
         tags:
           - { name: overblog_graphql.resolver }
-        arguments: ['@capco.abstract_step.repository','@capco.proposal_collect_vote.repository', '@capco.proposal_selection_vote.repository', '@monolog.logger']
+        arguments:
+          - '@capco.abstract_step.repository'
+          - '@capco.proposal_collect_vote.repository'
+          - '@capco.proposal_selection_vote.repository'
+          - '@monolog.logger'
+
+    Capco\AppBundle\GraphQL\Resolver\User\ProposalVotesResolver:
+        class: Capco\AppBundle\GraphQL\Resolver\User\ProposalVotesResolver
+        tags:
+          - { name: overblog_graphql.resolver }
+        arguments:
+          - '@capco.abstract_step.repository'
+          - '@capco.proposal_collect_vote.repository'
+          - '@capco.proposal_selection_vote.repository'
+          - '@monolog.logger'
+          - '@capco.proposal_votes.resolver'
+
+    Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalViewerHasVoteResolver:
+        class: Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalViewerHasVoteResolver
+        tags:
+          - { name: overblog_graphql.resolver }
+        arguments:
+          - '@capco.abstract_step.repository'
+          - '@capco.proposal_collect_vote.repository'
+          - '@capco.proposal_selection_vote.repository'
+          - '@monolog.logger'
 
     Capco\AppBundle\GraphQL\Resolver\Type\FormattedAddressTypeResolver:
         class: Capco\AppBundle\GraphQL\Resolver\Type\FormattedAddressTypeResolver
@@ -338,3 +363,11 @@ services:
     Capco\AppBundle\GraphQL\Resolver\UserIsGrantedResolver:
         class: Capco\AppBundle\GraphQL\Resolver\UserIsGrantedResolver
         arguments: ["@security.token_storage", "@logger"]
+
+    Capco\AppBundle\GraphQL\Resolver\Project\ProjectVotableStepsResolver:
+        class: Capco\AppBundle\GraphQL\Resolver\Project\ProjectVotableStepsResolver
+        arguments:
+            - '@capco.selection_step.repository'
+            - '@capco.collect_step.repository'
+        tags:
+            - { name: overblog_graphql.resolver }

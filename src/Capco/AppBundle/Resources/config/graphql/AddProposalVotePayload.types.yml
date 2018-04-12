@@ -4,3 +4,6 @@ AddProposalVotePayload:
         fields:
             proposal:
                 type: "Proposal!"
+            viewer:
+                type: "User!"
+              

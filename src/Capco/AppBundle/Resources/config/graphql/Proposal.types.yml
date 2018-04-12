@@ -218,3 +218,11 @@ Proposal:
             viewerCanSeeEvaluation:
                 type: "Boolean!"
                 resolve: "@=resolver('proposal_viewer_can_see_evaluation', [value, user])"
+            viewerHasVote:
+                access: "@=hasRole('ROLE_USER')"
+                type: "Boolean!"
+                args:
+                    step:
+                        type: "ID!"
+                        description: "The concerned step."
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalViewerHasVoteResolver", [value, args, user])'

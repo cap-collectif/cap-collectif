@@ -55,7 +55,6 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
         $toggleManager->deactivate('shield_mode');
         $toggleManager->deactivate('login_saml');
         $toggleManager->deactivate('login_paris');
-        $toggleManager->deactivate('vote_without_account');
         $toggleManager->deactivate('restrict_registration_via_email_domain');
         $toggleManager->activate('indexation');
 

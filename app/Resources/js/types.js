@@ -43,7 +43,6 @@ export type FeatureToggles = {
   export: boolean,
   server_side_rendering: boolean,
   zipcode_at_register: boolean,
-  vote_without_account: boolean,
 };
 export type FeatureToggle =
   | 'blog'
@@ -72,8 +71,7 @@ export type FeatureToggle =
   | 'votes_evolution'
   | 'export'
   | 'server_side_rendering'
-  | 'zipcode_at_register'
-  | 'vote_without_account';
+  | 'zipcode_at_register';
 
 export type Action =
   | ProposalAction

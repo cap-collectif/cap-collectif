@@ -1,10 +1,14 @@
 CollectStep:
     type: object
+    # inherits: [Step]
     config:
         interfaces: [Node, Step]
         fields:
             id:
               type: "ID!"
+            show_url:
+              type: "String!"
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\StepUrlResolver", [value])'
             kind:
                type: "String!"
                resolve: "collect"
@@ -12,7 +16,15 @@ CollectStep:
                type: "String!"
             statuses:
                 type: "[Status!]!"
+            voteType:
+                type: "ProposalStepVoteType!"
             voteThreshold:
+                type: "Int"
+            votesLimit:
+                type: "Int"
+            votesHelpText:
+                type: "String"
+            budget:
                 type: "Int"
             project:
                 type: "Project!"

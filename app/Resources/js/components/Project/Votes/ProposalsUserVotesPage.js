@@ -1,19 +1,18 @@
 // @flow
-import React, { PropTypes } from 'react';
-import { Row } from 'react-bootstrap';
-import { connect, type MapStateToProps } from 'react-redux';
+import * as React from 'react';
+// import { Row } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import ProposalUserVoteItem from './ProposalUserVoteItem';
-import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
+// import ProposalUserVoteItem from './ProposalUserVoteItem';
+import { graphql, createFragmentContainer, type RelayRefetchProp } from 'react-relay';
 
-const ProposalsUserVotesPage = React.createClass({
-  propTypes: {
-    userVotesByStepId: PropTypes.object.isRequired,
-    votableSteps: PropTypes.array.isRequired,
-  },
+type Props = {
+  project: Object,
+  relay: RelayRefetchProp,
+};
 
+class ProposalsUserVotesPage extends React.Component<Props> {
   render() {
-    const { votableSteps, userVotesByStepId } = this.props;
+    const { project } = this.props;
 
     return (
       <div>
@@ -21,20 +20,23 @@ const ProposalsUserVotesPage = React.createClass({
           <h1 style={{ marginBottom: '0' }}>{<FormattedMessage id="project.votes.title" />}</h1>
         </div>
         <div className="container container--custom">
-          {votableSteps.length > 0 ? (
-            votableSteps.map((step, index) => (
+          {project.votableSteps.length > 0 ? (
+            project.votableSteps.map((step, index) => (
               <div key={index} className="block">
-                {votableSteps.length > 1 ? (
+                {project.votableSteps.length > 1 ? (
                   <h2>
                     <a
                       className="pull-left btn btn-default"
-                      href={step._links.show}
+                      href={step.show_url}
                       style={{ marginRight: '15px' }}>
                       <i className="cap cap-arrow-1-1" />
-                      <span> {<FormattedMessage id="project.votes.back" />}</span>
+                      <span>
+                        {' '}
+                        <FormattedMessage id="project.votes.back" />
+                      </span>
                     </a>
                     {`${step.title} `}
-                    {step.voteType === VOTE_TYPE_BUDGET ? (
+                    {step.voteType === 'BUDGET' ? (
                       <FormattedMessage id="project.votes.type.budget" />
                     ) : (
                       <FormattedMessage id="project.votes.type.simple" />
@@ -42,16 +44,19 @@ const ProposalsUserVotesPage = React.createClass({
                   </h2>
                 ) : (
                   <p>
-                    <a className="btn btn-default" href={step._links.show}>
+                    <a className="btn btn-default" href={step.show_url}>
                       <i className="cap cap-arrow-1-1" />
-                      <span> {<FormattedMessage id="project.votes.back" />}</span>
+                      <span>
+                        {' '}
+                        <FormattedMessage id="project.votes.back" />
+                      </span>
                     </a>
                   </p>
                 )}
                 {step.votesHelpText && (
                   <div dangerouslySetInnerHTML={{ __html: step.votesHelpText }} />
                 )}
-                <h3>
+                {/* <h3>
                   <FormattedMessage
                     id="project.votes.nb"
                     values={{
@@ -63,37 +68,66 @@ const ProposalsUserVotesPage = React.createClass({
                   {userVotesByStepId[step.id].map((proposal, index2) => (
                     <ProposalUserVoteItem key={index2} proposal={proposal} step={step} />
                   ))}
-                </Row>
+                </Row> */}
               </div>
             ))
           ) : (
-            <p>{<FormattedMessage id="project.votes.no_active_step" />}</p>
+            <p>
+              <FormattedMessage id="project.votes.no_active_step" />
+            </p>
           )}
         </div>
       </div>
     );
-  },
-});
-
-const mapStateToProps: MapStateToProps<*, *, *> = (state, props) => {
-  const currentUserVotesByStepId = state.proposal.userVotesByStepId;
-  const userVotesByStepId = {};
-  for (const stepId in props.userVotesByStepId) {
-    if (stepId && Object.prototype.hasOwnProperty.call(props.userVotesByStepId, stepId)) {
-      userVotesByStepId[stepId] = [];
-      for (const voteId of currentUserVotesByStepId[stepId]) {
-        const vote = props.userVotesByStepId[stepId].find(v => v.id === voteId);
-        userVotesByStepId[stepId].push(vote);
-      }
-    }
   }
-  return {
-    votableSteps: state.project.projectsById[state.project.currentProjectById].steps.filter(
-      step => step.votable,
-    ),
-    currentUserVotesByStepId: undefined,
-    userVotesByStepId,
-  };
-};
+}
 
-export default connect(mapStateToProps)(ProposalsUserVotesPage);
+export default createFragmentContainer(
+  ProposalsUserVotesPage,
+  {
+    project: graphql`
+      fragment ProposalsUserVotesPage_project on Project {
+        id
+        votableSteps {
+          ... on CollectStep {
+            id
+            title
+            voteType
+            votesHelpText
+            show_url
+          }
+          ... on SelectionStep {
+            id
+            title
+            voteType
+            votesHelpText
+            show_url
+          }
+        }
+      }
+    `,
+  },
+  // viewer: graphql`
+  //   fragment ProposalsUserVotesPage_viewer on User
+  //     @argumentDefinitions(
+  //       step: { type: "ID", nonNull: false },
+  //       withVotes: {type: "Boolean!", defaultValue: false}
+  //     )
+  //   {
+  //     id
+  //     proposalVotes(step: $step) @include(if: $withVotes) {
+  //       totalCount
+  //       creditsLeft
+  //       creditsSpent
+  //     }
+  //   }
+  // `}
+  // ,
+  // graphql`
+  //    query ProposalsUserVotesPageQuery($step: ID!, $withVotes: Boolean!) {
+  //      viewer {
+  //        ...ProposalsUserVotesPage_viewer @arguments(step: $step, withVotes: $withVotes)
+  //      }
+  //    }
+  //  `
+);
