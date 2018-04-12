@@ -13,18 +13,23 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AddProposalVoteMutation
 {
     private $em;
+    private $validator;
     private $proposalRepo;
     private $stepRepo;
+    private $logger;
 
-    public function __construct(EntityManagerInterface $em, ProposalRepository $proposalRepo, AbstractStepRepository $stepRepo)
+    public function __construct(EntityManagerInterface $em, ValidatorInterface $validator, ProposalRepository $proposalRepo, AbstractStepRepository $stepRepo, $logger)
     {
         $this->em = $em;
+        $this->validator = $validator;
         $this->stepRepo = $stepRepo;
         $this->proposalRepo = $proposalRepo;
+        $this->logger = $logger;
     }
 
     public function __invoke(Argument $input, User $user, $request)
@@ -39,8 +44,6 @@ class AddProposalVoteMutation
             throw new UserError('Unknown step with id: ' . $input->offsetGet('stepId'));
         }
 
-        $vote = null;
-        $countUserVotes = 0;
         if ($step instanceof CollectStep) {
             // Check if proposal is in step
             if ($step !== $proposal->getProposalForm()->getStep()) {
@@ -53,6 +56,9 @@ class AddProposalVoteMutation
             $vote = (new ProposalCollectVote())
               ->setCollectStep($step);
         } elseif ($step instanceof SelectionStep) {
+            if (!in_array($step, $proposal->getSelectionSteps(), true)) {
+                throw new UserError('This proposal is not associated to this selection step.');
+            }
             $countUserVotes = $this->em
               ->getRepository('CapcoAppBundle:ProposalSelectionVote')
               ->countVotesByStepAndUser($step, $user)
@@ -87,8 +93,19 @@ class AddProposalVoteMutation
             ->setProposal($proposal)
         ;
 
+        $errors = $this->validator->validate($vote);
+        foreach ($errors as $error) {
+            $this->logger->error((string) $error->getMessage());
+            throw new UserError((string) $error->getMessage());
+        }
+
         $this->em->persist($vote);
-        $this->em->flush();
+
+        try {
+            $this->em->flush();
+        } catch (\Exception $e) {
+            throw new UserError('Sorry, please retry later.');
+        }
 
         return ['proposal' => $proposal, 'viewer' => $user];
     }

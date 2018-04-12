@@ -64,6 +64,11 @@ class RemoveProposalVoteMutation
             throw new UserError('You have not voted for this proposal in this step.');
         }
 
+        // Check if step is contributable
+        if (!$step->canContribute()) {
+            throw new UserError('This step is no longer contributable.');
+        }
+
         $this->em->remove($vote);
         $this->em->flush();
 
