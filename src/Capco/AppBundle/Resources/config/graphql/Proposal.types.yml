@@ -203,15 +203,15 @@ Proposal:
                       description: "Returns the last n elements from the list."
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalFollowerConnection", [value, args])'
             viewerIsFollowing:
-                access: "@=isAuthenticated()"
+                access: "@=hasRole('ROLE_USER')"
                 type: "Boolean!"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowProposalResolver", [value, user])'
                 description: "View follow current proposal"
             followerConfiguration:
-                access: "@=isAuthenticated()"
+                access: "@=hasRole('ROLE_USER')"
                 type: "Follower"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowerProposalResolver", [value, user])'
-                description: "View follow current proposal"
+                description: "Kind of follow"
             postsCount:
                 type: "Int!"
                 resolve: "@=resolver('proposal_posts_count', [value])"
