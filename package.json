@@ -132,7 +132,6 @@
     "json-brunch": "^1.5.4",
     "json-loader": "^0.5.7",
     "leaflet": "^1.1.0",
-    "leaflet-geosearch": "^2.6.0",
     "leaflet.locatecontrol": "^0.62.0",
     "leaflet.markercluster": "^1.0.6",
     "lodash": "^4.17.4",

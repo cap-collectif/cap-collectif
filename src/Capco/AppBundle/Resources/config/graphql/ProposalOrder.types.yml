@@ -1,11 +1,13 @@
 ProposalOrder:
     type: input-object
     config:
-        description: "Ways in which lists of proposals can be ordered upon return."
+        description: "Ways in which proposal connections can be ordered."
         fields:
             field:
                 type: "ProposalOrderField!"
-                defaultValue: "CREATED_AT"
+                description: "The field in which to order nodes by."
             direction:
                 type: "OrderDirection!"
-                defaultValue: "DESC"
+                defaultValue: "ASC"
+                description: "The direction in which to order nodes."
+

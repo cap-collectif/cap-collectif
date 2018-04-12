@@ -60,7 +60,7 @@ export const ProposalStepPage = React.createClass({
     } = this.props;
     const total = queryCount || count;
     const nbPages = Math.ceil(total / PROPOSAL_PAGINATION);
-    const showPagination = nbPages > 1 && !randomOrder;
+    const showPagination = nbPages > 1;
 
     let geoJsons = [];
     try {
@@ -125,22 +125,24 @@ export const ProposalStepPage = React.createClass({
                   />
                 </VisibilityBox>
               )}
-              {showPagination &&
-                selectedViewByStep === 'mosaic' && (
-                  <Pagination
-                    current={currentPage}
-                    nbPages={nbPages}
-                    onChange={newPage => {
-                      dispatch(changePage(newPage));
-                      dispatch(loadProposals());
-                    }}
-                  />
-                )}
-              {randomOrder &&
-                proposals.length > 3 &&
-                selectedViewByStep === 'mosaic' && (
-                  <ProposalListRandomRow orderByVotes={step.voteType !== VOTE_TYPE_DISABLED} />
-                )}
+              <div id="proposal-list-pagination-footer">
+                {showPagination &&
+                  selectedViewByStep === 'mosaic' && (
+                    <Pagination
+                      current={currentPage}
+                      nbPages={nbPages}
+                      onChange={newPage => {
+                        dispatch(changePage(newPage));
+                        dispatch(loadProposals());
+                      }}
+                    />
+                  )}
+                {randomOrder &&
+                  proposals.length > 3 &&
+                  selectedViewByStep === 'mosaic' && (
+                    <ProposalListRandomRow orderByVotes={step.voteType !== VOTE_TYPE_DISABLED} />
+                  )}
+              </div>
             </div>
           )}
         </Loader>

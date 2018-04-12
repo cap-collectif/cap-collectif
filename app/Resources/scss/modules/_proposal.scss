@@ -453,6 +453,15 @@
     margin-top: 0;
 }
 
+#proposal-list-pagination-footer {
+    position: relative;
+}
+
+#proposal-list-pagination-select-footer{
+    position: absolute;
+    top: 0;
+}
+
 #proposal-page-tabs-pane-content {
     .block + .proposal__content {
         .block:first-child > h3 {

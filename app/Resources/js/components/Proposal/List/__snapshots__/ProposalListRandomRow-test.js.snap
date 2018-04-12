@@ -1,29 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProposalListRandomRow /> should render the random row on the list 1`] = `
-<div>
-  <Row
-    bsClass="row"
-    componentClass="div"
-  >
-    <Col
-      bsClass="col"
-      componentClass="div"
-      md={4}
-      xs={4}
-    >
-      <Connect(InjectIntl(ProposalListOrderSorting))
-        orderByVotes={true}
-      />
-    </Col>
-    <Col
-      bsClass="col"
-      componentClass="div"
-      md={8}
-      xs={8}
-    >
-      <Connect(ProposalListRandomMessage) />
-    </Col>
-  </Row>
-</div>
+<Col
+  bsClass="col"
+  componentClass="div"
+  id="proposal-list-pagination-select-footer"
+  md={4}
+  xs={4}
+>
+  <Connect(InjectIntl(ProposalListOrderSorting))
+    orderByVotes={true}
+  />
+</Col>
 `;

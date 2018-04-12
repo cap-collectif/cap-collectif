@@ -445,7 +445,6 @@ export function* fetchVotesByStep(action: FetchVotesRequestedAction): Generator<
 
 export function* fetchProposals(action: Object): Generator<*, *, *> {
   let { step } = action;
-  const { regenerateRandomOrder } = action;
 
   const globalState: GlobalState = yield select();
   if (globalState.project.currentProjectById) {
@@ -458,65 +457,33 @@ export function* fetchProposals(action: Object): Generator<*, *, *> {
   const state = globalState.proposal;
   let url = '';
   let body = {};
-  let lastProposals = {};
 
-  if (LocalStorageService.isValid('proposal.randomResultsByStep')) {
-    lastProposals = LocalStorageService.get('proposal.randomResultsByStep');
+  switch (step.type) {
+    case 'collect':
+      url = `/collect_steps/${step.id}/proposals/search`;
+      break;
+    case 'selection':
+      url = `/selection_steps/${step.id}/proposals/search`;
+      break;
+    default:
+      console.log('Unknown step type'); // eslint-disable-line no-console
+      return false;
   }
 
-  // If order is random & proposals are stored in Local Storage -> get last results
-  if (
-    (!state.order || state.order === PROPOSAL_ORDER_RANDOM) &&
-    !regenerateRandomOrder &&
-    lastProposals[step.id]
-  ) {
-    switch (step.type) {
-      case 'collect':
-        url = `/collect_steps/${step.id}/proposals/search-in`;
-        break;
-      case 'selection':
-        url = `/selection_steps/${step.id}/proposals/search-in`;
-        break;
-      default:
-        console.log('Unknown step type'); // eslint-disable-line no-console
-        return false;
-    }
-
-    body = { ids: lastProposals[step.id] };
-  } else {
-    switch (step.type) {
-      case 'collect':
-        url = `/collect_steps/${step.id}/proposals/search`;
-        break;
-      case 'selection':
-        url = `/selection_steps/${step.id}/proposals/search`;
-        break;
-      default:
-        console.log('Unknown step type'); // eslint-disable-line no-console
-        return false;
-    }
-
-    const filters = {};
-    if (state.filters) {
-      Object.keys(state.filters).forEach(key => {
-        if (state.filters[key] && state.filters[key] !== '0') {
-          filters[key] = state.filters[key];
-        }
-      });
-    }
-
-    const order = state.order ? state.order : PROPOSAL_ORDER_RANDOM;
-    url += `?page=${state.currentPaginationPage}&pagination=${PROPOSAL_PAGINATION}&order=${order}`;
-    body = { terms: state.terms, filters };
+  const filters = {};
+  if (state.filters) {
+    Object.keys(state.filters).forEach(key => {
+      if (state.filters[key] && state.filters[key] !== '0') {
+        filters[key] = state.filters[key];
+      }
+    });
   }
+
+  const order = state.order ? state.order : PROPOSAL_ORDER_RANDOM;
+  url += `?page=${state.currentPaginationPage}&pagination=${PROPOSAL_PAGINATION}&order=${order}`;
+  body = { terms: state.terms, filters };
 
   const result = yield call(Fetcher.postToJson, url, body);
-
-  // Save results to localStorage if selected order is random
-  if (result.order === PROPOSAL_ORDER_RANDOM || !result.order) {
-    lastProposals[step.id] = result.proposals.map(proposal => proposal.id);
-    LocalStorageService.set('proposal.randomResultsByStep', lastProposals);
-  }
 
   yield put({
     type: 'proposal/FETCH_SUCCEEDED',
