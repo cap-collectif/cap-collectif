@@ -46,15 +46,15 @@ class OpinionVote extends AbstractVote
     ];
 
     /**
-     * @ORM\Column(name="value", type="integer")
-     */
-    private $value;
-
-    /**
      * @Gedmo\Timestampable(on="update", field={"value"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
-    private $updatedAt;
+    protected $updatedAt;
+
+    /**
+     * @ORM\Column(name="value", type="integer")
+     */
+    private $value;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="votes", cascade={"persist"})
