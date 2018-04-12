@@ -1,5 +1,5 @@
 @proposals_votes
-Feature: Proposal Votes GraphQL Api
+Feature: mutation addProposalVote
 
 @security
 Scenario: Logged in API client wants to vote for a proposal in a step with vote limited but has already reached vote limit
@@ -17,7 +17,7 @@ Scenario: Logged in API client wants to vote for a proposal in a step with vote 
     "variables": {
       "input": {
         "stepId": "selectionstep8",
-        "proposalId": "proposal1"
+        "proposalId": "proposal17"
       }
     }
   }
@@ -25,6 +25,13 @@ Scenario: Logged in API client wants to vote for a proposal in a step with vote 
   Then the JSON response should match:
   """
   {
+    "errors": [
+      {
+        "message": "You have reached the limit of votes.",
+        "locations": [{"line":1,"column":47}],
+        "path":["addProposalVote"]
+      }
+    ],
     "data": {
       "addProposalVote": null
     }
@@ -89,6 +96,13 @@ Scenario: Logged in API client wants to vote several times for a proposal in a s
   Then the JSON response should match:
   """
   {
+    "errors": [
+      {
+        "message": "proposal.vote.already_voted",
+        "locations": [{"line":1,"column":47}],
+        "path": ["addProposalVote"]
+      }
+    ],
     "data": {
       "addProposalVote": null
     }
@@ -119,12 +133,18 @@ Scenario: Logged in API client wants to vote for a proposal in a wrong selection
   Then the JSON response should match:
   """
   {
+    "errors": [
+      {
+        "message": "This proposal is not associated to this selection step.",
+        "locations": [{"line":1,"column":47}],
+        "path": ["addProposalVote"]
+      }
+    ],
     "data": {
       "addProposalVote": null
     }
   }
   """
-  # "This proposal is not associated to this selection step."
 
 @security
 Scenario: Logged in API client wants to vote for a proposal in a not votable selection step
@@ -150,12 +170,18 @@ Scenario: Logged in API client wants to vote for a proposal in a not votable sel
   Then the JSON response should match:
   """
   {
+    "errors": [
+      {
+        "message": "This step is not votable.",
+        "locations": [{"line":1,"column":47}],
+        "path": ["addProposalVote"]
+      }
+    ],
     "data": {
       "addProposalVote": null
     }
   }
   """
-    # "message": "This selection step is not votable.",
 
 @security
 Scenario: Logged in API client wants to vote for a proposal in a not votable selection step
@@ -181,16 +207,22 @@ Scenario: Logged in API client wants to vote for a proposal in a not votable sel
   Then the JSON response should match:
   """
   {
+    "errors": [
+      {
+        "message": "This step is no longer contributable.",
+        "locations": [{"line":1,"column":47}],
+        "path": ["addProposalVote"]
+      }
+    ],
     "data": {
       "addProposalVote": null
     }
   }
   """
-    # "message": "This selection step is no longer contributable.",
 
 @security
 Scenario: Logged in API client wants to vote for a proposal in a not votable selection step
-  Given I am logged in to graphql as user
+  Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
   """
   {
@@ -212,9 +244,15 @@ Scenario: Logged in API client wants to vote for a proposal in a not votable sel
   Then the JSON response should match:
   """
   {
+    "errors": [
+      {
+        "message": "proposal.vote.not_enough_credits",
+        "locations": [{"line":1,"column":47}],
+        "path": ["addProposalVote"]
+      }
+    ],
     "data": {
       "addProposalVote": null
     }
   }
   """
-  # "errors": ["proposal.vote.not_enough_credits"],

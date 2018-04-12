@@ -4,6 +4,7 @@ services:
       class: Capco\AppBundle\GraphQL\Mutation\AddProposalVoteMutation
       arguments:
           - "@doctrine.orm.default_entity_manager"
+          - "@validator"
           - "@capco.proposal.repository"
           - "@capco.abstract_step.repository"
           - "@logger"
