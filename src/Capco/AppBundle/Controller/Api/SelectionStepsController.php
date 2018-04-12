@@ -22,7 +22,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class SelectionStepsController extends FOSRestController
@@ -61,38 +60,21 @@ class SelectionStepsController extends FOSRestController
         $filters = $request->request->has('filters') ? $request->request->get('filters') : [];
         $filters['selectionStep'] = $selectionStep->getId();
 
+        $seed = $this->getUser() ? $this->getUser()->getId() : $this->get('request')->getClientIp();
+
+        $limit = $pagination ?? 10;
+        $offset = ($page - 1) * $pagination;
+
         $results = $this->get('capco.search.proposal_search')->searchProposals(
-            $page,
-            $pagination,
+            $offset,
+            $limit,
             $order,
             $terms,
-            $filters
+            $filters,
+            $seed
         );
 
         return $results;
-    }
-
-    /**
-     * TODO remove this.
-     *
-     * @Post("/selection_steps/{selectionStepId}/proposals/search-in")
-     * @ParamConverter("selectionStep", options={"mapping": {"selectionStepId": "id"}})
-     * @View(statusCode=200, serializerGroups={"Proposals", "ThemeDetails", "UsersInfos", "UserMedias"})
-     */
-    public function postSelectProposalsByCollectStepAction(Request $request, SelectionStep $selectionStep): array
-    {
-        $selectedIds = $request->request->get('ids');
-
-        if (null === $selectedIds || !is_array($selectedIds)) {
-            throw new HttpException(400, 'ids are not setted');
-        }
-
-        $proposals = $this->get('capco.search.proposal_search')->getHydratedResults($selectedIds);
-
-        return [
-          'proposals' => $proposals,
-          'count' => count($proposals),
-        ];
     }
 
     /**

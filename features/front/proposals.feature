@@ -67,14 +67,6 @@ Scenario: Anonymous user wants to search a proposal with the random filter
   Then I should not see random row
 
 @javascript @elasticsearch
-Scenario: Anonymous user wants to see other random proposals
-  Given I go to an open collect step
-  Then proposals should be ordered randomly
-  When I save current proposals
-  Then I click the 'a[href="#proposals-list"]' element
-  When I should see other proposals
-
-@javascript @elasticsearch
 Scenario: Anonymous user wants to see proposals in a collect step and search by term
   Given I go to an open collect step
   Then there should be 6 proposals
@@ -212,7 +204,7 @@ Scenario: Author of a proposal wants to delete it
   And I wait 2 seconds
   And I should not see my proposal anymore
   Then there should be 5 proposals
-
+  
 @javascript @database
 Scenario: Admin should not be notified when an user deletes his proposal on an non notifiable proposal
   Given I am logged in as user
