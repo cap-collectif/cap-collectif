@@ -6,7 +6,7 @@ export const baseUrl = `${typeof window !== 'undefined' ? window.location.protoc
 export default {
   graphql: `${baseUrl}/graphql/`,
   api: `${baseUrl}/api`,
-  mapsAPIKey: '***REMOVED***',
+  mapsServerKey: '***REMOVED***',
   mapboxApiKey:
     '***REMOVED***',
   // https://github.com/elementalui/elemental/blob/master/src/constants.js
