@@ -40,7 +40,7 @@ Capco\AppBundle\Entity\Project:
     updatedAt:
       expose: true
       type: DateTime
-      groups: [Projects]
+      groups: [Default]
       serialized_name: updatedAt
     enabled:
       expose: true
@@ -61,3 +61,9 @@ Capco\AppBundle\Entity\Project:
       type: boolean
       groups: [Projects]
       serialized_name: hasParticipativeStep
+    getStartAt:
+      expose: true
+      type: DateTime
+      groups: [Projects]
+      serialized_name: startAt
+

@@ -63,6 +63,16 @@ Capco\AppBundle\Entity\Event:
             type: DateTime
             groups: [Events]
             serialized_name: updatedAt
+        startAt:
+            expose: true
+            type: DateTime
+            groups: [Default]
+            serialized_name: startAt
+        endAt:
+            expose: true
+            type: DateTime
+            groups: [Default]
+            serialized_name: endAt
         comments:
             expose: true
             groups: [Events]

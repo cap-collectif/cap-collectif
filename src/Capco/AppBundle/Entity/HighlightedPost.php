@@ -60,4 +60,14 @@ class HighlightedPost extends HighlightedContent
     {
         return $this->post->getMedia();
     }
+
+//    public function getStartAt()
+//    {
+//        return $this->post->getStartAt();
+//    }
+//
+//    public function getEndAt()
+//    {
+//        return $this->post->getEndAt();
+//    }
 }

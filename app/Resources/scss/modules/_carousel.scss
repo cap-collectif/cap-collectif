@@ -2,6 +2,11 @@
    $Carousel
 ================================================================*/
 
+#highlights .container {
+    padding-bottom: 0;
+}
+
+// to remove from here
 @mixin aspect-ratio($width, $height) {
     position: relative;
     overflow: hidden;
@@ -229,6 +234,7 @@
         }
 
         .carousel-title {
+            color: #333333;
             font-weight: 500;
         }
 
@@ -264,6 +270,7 @@
             }
 
             .carousel-title {
+                color: $white;
                 font-size: 23px;
             }
 

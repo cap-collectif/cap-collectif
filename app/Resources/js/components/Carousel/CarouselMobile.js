@@ -1,4 +1,6 @@
 import React, { PureComponent } from 'react';
+import {FormattedDate, FormattedMessage} from "react-intl";
+import {DatesInterval} from "../Utils/DatesInterval";
 
 type Props = {
   highlighteds: Object,
@@ -34,20 +36,8 @@ export class CarouselMobile extends PureComponent<Props> {
     });
   }
 
-  getCarouselItem = () => {
-    const { highlighteds } = this.props;
-
-    highlighteds.map((highlighted, index) => {
-      return (
-        <li key={index}>coucou</li>
-      )
-    })
-  };
-
   render() {
     const { highlighteds } = this.props;
-
-    // console.log(highlighteds);
 
     return (
       <div className="carousel__mobile">
@@ -55,31 +45,45 @@ export class CarouselMobile extends PureComponent<Props> {
           {highlighteds.map((highlighted, index) => {
             const highlightedType = highlighted.object_type;
 
-            console.warn(highlighted[highlightedType]);
-
             return (
               <div className="item" key={index}>
                 <div className="sixteen-nine">
                   <div className="content">
-                    <img
-                      src="https://images.unsplash.com/photo-1505728068082-c4e7a2a3a46d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=eec4bf8bd0cde39ebd993ff9d89398dd&dpr=1&auto=format&fit=crop&q=80&cs=tinysrgb"
-                      alt="..."
-                    />
+                    {highlighted[highlightedType].media ?
+                      (<img
+                          src={highlighted[highlightedType].media.url}
+                          alt={highlighted[highlightedType].title}
+                        />)
+                      :
+                      (<div className="bg--default bg--project" />)
+                    }
+
                   </div>
                 </div>
                 <div className="carousel__content">
                   <p>
-                    <span className="carousel-type">{highlighted.object_type}</span>
-                    <br />
-                    <span className="carousel-title">
-                       {highlighted.object_type === 'post' ? (
-                         highlighted.media
-                       ) : (
-                         highlighted[highlightedType].title
-                       )}
+                    <span className="carousel-type">
+                      <FormattedMessage id={`type-${highlighted.object_type}`} />
                     </span>
                     <br />
-                    <span className="carousel-date">18 janvier 2018</span>
+                    <a className="carousel-title" href={highlighted[highlightedType]._links ? highlighted[highlightedType]._links.show : '#'}>
+                      {highlighted[highlightedType].title}
+                    </a>
+                    <br />
+                    <span className="carousel-date">
+                      { highlightedType === 'event' &&
+                        <DatesInterval startAt={highlighted[highlightedType].startAt} endAt={highlighted[highlightedType].endAt} />
+                      }
+                      { highlightedType === 'project' &&
+                        <FormattedDate value={highlighted[highlightedType].startAt} day="numeric" month="long" year="numeric" />
+                      }
+                      { highlightedType === 'idea' &&
+                        <FormattedDate value={highlighted[highlightedType].createdAt} day="numeric" month="long" year="numeric" />
+                      }
+                      { highlightedType === 'post' &&
+                        <FormattedDate value={highlighted[highlightedType].publishedAt} day="numeric" month="long" year="numeric" />
+                      }
+                    </span>
                   </p>
                 </div>
               </div>

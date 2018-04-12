@@ -85,7 +85,8 @@ class HomepageController extends Controller
         $highlighteds = $this->getDoctrine()->getRepository('CapcoAppBundle:HighlightedContent')->getAllOrderedByPosition(5);
         $props = $serializer->serialize([
             'highlighteds' => $highlighteds,
-        ], 'json');
+        ], 'json', SerializationContext::create()
+            ->setSerializeNull(true));
 
         return [
             'props' => $props,

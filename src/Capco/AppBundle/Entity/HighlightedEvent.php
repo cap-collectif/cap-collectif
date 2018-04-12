@@ -60,4 +60,14 @@ class HighlightedEvent extends HighlightedContent
     {
         return $this->event->getMedia();
     }
+
+//    public function getStartAt()
+//    {
+//        return $this->event->getStartAt();
+//    }
+//
+//    public function getEndAt()
+//    {
+//        return $this->event->getEndAt();
+//    }
 }
