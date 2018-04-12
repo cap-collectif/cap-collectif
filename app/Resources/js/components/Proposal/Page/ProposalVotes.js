@@ -22,14 +22,16 @@ export class ProposalVotes extends React.Component<Props> {
         {proposal.votes.edges && proposal.votes.edges.length !== 0 ? (
           <div className={classNames({ proposal__votes: true })}>
             <Row>
-              {proposal.votes.edges.filter(Boolean).map((edge, key) => (
-                <UserBox
-                  key={key}
-                  user={edge.node.author}
-                  // username={vote.username} Anonymous
-                  className="proposal__vote"
-                />
-              ))}
+              {proposal.votes.edges
+                .filter(Boolean)
+                .map((edge, key) => (
+                  <UserBox
+                    key={key}
+                    user={edge.node.author}
+                    username={edge.node.author ? edge.node.author.displayName : 'ANONYMOUS'}
+                    className="proposal__vote"
+                  />
+                ))}
             </Row>
           </div>
         ) : (
