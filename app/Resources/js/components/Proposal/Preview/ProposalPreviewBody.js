@@ -1,3 +1,4 @@
+// @flow
 import * as React from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
 import Truncate from 'react-truncate';

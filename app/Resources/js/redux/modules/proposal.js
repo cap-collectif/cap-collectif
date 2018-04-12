@@ -78,9 +78,7 @@ export type State = {
   +queryCount: ?number,
   +currentProposalId: ?Uuid,
   +proposalShowedId: Array<Uuid>,
-  +creditsLeftByStepId: Object,
   +proposalsById: ProposalMap,
-  +userVotesByStepId: Object,
   +currentVoteModal: ?Uuid,
   +currentDeletingVote: ?Uuid,
   +showCreateModal: boolean,
@@ -107,7 +105,6 @@ export const initialState: State = {
   currentProposalId: null,
   proposalShowedId: [],
   queryCount: undefined,
-  creditsLeftByStepId: {},
   proposalsById: {},
   lastEditedStepId: null,
   userVotesByStepId: {},
@@ -267,6 +264,7 @@ export const vote = (dispatch: Dispatch, step: Object, proposal: Object, data: O
   return addVote
     .commit({
       step: step.id,
+      withVotes: true,
       input: { proposalId: proposal.id, stepId: step.id, anonymously: data.private },
     })
     .then(() => {
@@ -288,7 +286,7 @@ export const vote = (dispatch: Dispatch, step: Object, proposal: Object, data: O
 
 export const deleteVote = (dispatch: Dispatch, step: Object, proposal: Object) => {
   return removeVote
-    .commit({ step: step.id, input: { proposalId: proposal.id, stepId: step.id } })
+    .commit({ withVotes: true, step: step.id, input: { proposalId: proposal.id, stepId: step.id } })
     .then(() => {
       FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,

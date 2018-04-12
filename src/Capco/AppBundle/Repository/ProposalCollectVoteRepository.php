@@ -21,6 +21,19 @@ class ProposalCollectVoteRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
+    public function getByProposalAndStepAndUser(Proposal $proposal, CollectStep $step, User $author): array
+    {
+        return $this->createQueryBuilder('pv')
+          ->andWhere('pv.user = :author')
+          ->andWhere('pv.collectStep = :step')
+          ->andWhere('pv.proposal = :proposal')
+          ->setParameter('author', $author)
+          ->setParameter('step', $step)
+          ->setParameter('proposal', $proposal)
+          ->getQuery()
+          ->getResult();
+    }
+
     public function getByProposalAndStep(Proposal $proposal, CollectStep $step, int $litmit, int $offset, string $field, string $direction): Paginator
     {
         $qb = $this->createQueryBuilder('pv')
@@ -73,6 +86,30 @@ class ProposalCollectVoteRepository extends EntityRepository
       ;
     }
 
+    public function getByAuthorAndStep(User $author, CollectStep $step, int $limit, int $offset, string $field, string $direction): Paginator
+    {
+        $qb = $this->createQueryBuilder('pv')
+          ->andWhere('pv.collectStep = :step')
+          ->andWhere('pv.user = :author')
+          ->andWhere('pv.expired = false')
+          ->leftJoin('pv.proposal', 'proposal')
+          ->andWhere('proposal.id IS NOT NULL')
+          ->andWhere('proposal.deletedAt IS NULL')
+          ->setParameter('step', $step)
+          ->setParameter('author', $author);
+
+        if ('CREATED_AT' === $field) {
+            $qb->addOrderBy('pv.createdAt', $direction);
+        }
+
+        $qb
+        ->setMaxResults($limit)
+        ->setFirstResult($offset);
+
+        return new Paginator($qb);
+    }
+
+    // TODO remove this duplicate
     public function getVotesByStepAndUser(CollectStep $step, User $user): array
     {
         return $this->createQueryBuilder('pv')

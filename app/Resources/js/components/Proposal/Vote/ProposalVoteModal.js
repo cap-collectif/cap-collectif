@@ -1,65 +1,29 @@
-import React, { PropTypes } from 'react';
+// @flow
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Modal } from 'react-bootstrap';
 import { submit, isValid } from 'redux-form';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import ProposalVoteBox from './ProposalVoteBox';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
-import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 import { closeVoteModal } from '../../../redux/modules/proposal';
+import type { State, Dispatch } from '../../../types';
 
-const ProposalVoteModal = React.createClass({
-  displayName: 'ProposalVoteModal',
+type ParentProps = {
+  proposal: Object,
+};
 
-  propTypes: {
-    proposal: PropTypes.object.isRequired,
-    step: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    showModal: PropTypes.bool.isRequired,
-    isSubmitting: PropTypes.bool.isRequired,
-    valid: PropTypes.bool.isRequired,
-    creditsLeft: PropTypes.number,
-    user: PropTypes.object,
-    voteWithoutAccount: PropTypes.bool.isRequired,
-  },
-
-  getDefaultProps() {
-    return {
-      user: null,
-      creditsLeft: null,
-    };
-  },
-
-  userHasEnoughCredits() {
-    const { creditsLeft, proposal, user } = this.props;
-    if (user && creditsLeft !== null && proposal.estimation !== null) {
-      return creditsLeft >= proposal.estimation;
-    }
-    return true;
-  },
-
-  disableSubmitButton() {
-    const { step, user } = this.props;
-    return (
-      !step ||
-      !step.open ||
-      (user && step.voteType === VOTE_TYPE_BUDGET && !this.userHasEnoughCredits())
-    );
-  },
-
+type Props = ParentProps & {
+  step: ?Object,
+  dispatch: Dispatch,
+  showModal: boolean,
+  isSubmitting: boolean,
+  valid: boolean,
+};
+class ProposalVoteModal extends React.Component<Props> {
   render() {
-    const {
-      dispatch,
-      showModal,
-      proposal,
-      step,
-      creditsLeft,
-      isSubmitting,
-      valid,
-      user,
-      voteWithoutAccount,
-    } = this.props;
+    const { dispatch, showModal, proposal, step, isSubmitting, valid } = this.props;
     return (
       <Modal
         animation={false}
@@ -71,17 +35,11 @@ const ProposalVoteModal = React.createClass({
         aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
-            {<FormattedMessage id="proposal.vote.modal.title" />}
+            <FormattedMessage id="proposal.vote.modal.title" />
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <ProposalVoteBox
-            isSubmitting={isSubmitting}
-            proposal={proposal}
-            step={step}
-            creditsLeft={creditsLeft}
-            user={user}
-          />
+          <ProposalVoteBox proposal={proposal} step={step} />
         </Modal.Body>
         <Modal.Footer>
           <CloseButton
@@ -90,41 +48,35 @@ const ProposalVoteModal = React.createClass({
               dispatch(closeVoteModal());
             }}
           />
-          {(voteWithoutAccount || user) && (
-            <SubmitButton
-              id="confirm-proposal-vote"
-              onSubmit={() => {
-                dispatch(submit('proposalVote'));
-              }}
-              label="proposal.vote.confirm"
-              isSubmitting={valid && isSubmitting}
-              bsStyle={!proposal.userHasVote || isSubmitting ? 'success' : 'danger'}
-              style={{ marginLeft: '10px' }}
-              disabled={this.disableSubmitButton()}
-              loginOverlay={step && step.voteType === VOTE_TYPE_BUDGET}
-            />
-          )}
+          <SubmitButton
+            id="confirm-proposal-vote"
+            onSubmit={() => {
+              dispatch(submit('proposalVote'));
+            }}
+            label="proposal.vote.confirm"
+            isSubmitting={valid && isSubmitting}
+            bsStyle={!proposal.userHasVote || isSubmitting ? 'success' : 'danger'}
+            style={{ marginLeft: '10px' }}
+          />
         </Modal.Footer>
       </Modal>
     );
-  },
-});
+  }
+}
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: ParentProps) => {
   const steps = state.project.currentProjectById
     ? state.project.projectsById[state.project.currentProjectById].steps.filter(
         s => s.id === props.proposal.votableStepId,
       )
     : [];
   return {
-    user: state.user.user,
     showModal: !!(
       state.proposal.currentVoteModal && state.proposal.currentVoteModal === props.proposal.id
     ),
     isSubmitting: !!state.proposal.isVoting,
     valid: isValid('proposalVote')(state),
     step: steps.length === 1 ? steps[0] : null,
-    voteWithoutAccount: state.default.features.vote_without_account,
   };
 };
 

@@ -1,16 +1,28 @@
 SelectionStep:
     type: object
+    # inherits: [Step]
     config:
         interfaces: [Step, Node]
         description: "A budget contribution"
         fields:
             id:
               type: "ID!"
+            show_url:
+              type: "String!"
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\StepUrlResolver", [value])'
             kind:
                type: "String!"
                resolve: "selection"
+            votesLimit:
+               type: "Int"
+            voteType:
+               type: "ProposalStepVoteType!"
+            budget:
+               type: "Int"
             title:
                type: "String!"
+            votesHelpText:
+               type: "String"
             statuses:
                 type: "[Status!]!"
             allowingProgressSteps:

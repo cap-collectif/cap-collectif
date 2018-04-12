@@ -1,105 +1,115 @@
-import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import ProposalVoteButton from './ProposalVoteButton';
-import VoteButtonOverlay from './VoteButtonOverlay';
-import { VOTE_TYPE_SIMPLE } from '../../../constants/ProposalConstants';
+// @flow
+import * as React from 'react';
+import { connect, type MapStateToProps } from 'react-redux';
+import { QueryRenderer, graphql } from 'react-relay';
+import ProposalVoteButtonWrapperFragment from './ProposalVoteButtonWrapperFragment';
+import environment, { graphqlError } from '../../../createRelayEnvironment';
+import Loader from '../../Ui/Loader';
+import type { State } from '../../../types';
+import type {
+  ProposalVoteButtonWrapperQueryResponse,
+  ProposalVoteButtonWrapperQueryVariables,
+} from './__generated__/ProposalVoteButtonWrapperQuery.graphql';
 
-export const ProposalVoteButtonWrapper = React.createClass({
-  displayName: 'ProposalVoteButtonWrapper',
-  propTypes: {
-    proposal: PropTypes.object.isRequired,
-    userHasVote: PropTypes.bool.isRequired,
-    step: PropTypes.object,
-    id: PropTypes.string,
-    creditsLeft: PropTypes.number,
-    userVotesCount: PropTypes.number.isRequired,
-    user: PropTypes.object,
-    style: PropTypes.object,
-    className: PropTypes.string,
-  },
+type ParentProps = {
+  proposal: { id: string },
+};
 
-  getDefaultProps() {
-    return {
-      id: undefined,
-      style: {},
-      className: '',
-    };
-  },
+type Props = ParentProps & {
+  step: ?Object,
+  isAuthenticated: boolean,
+  id: string,
+  style: Object,
+  className: string,
+};
 
-  userHasEnoughCredits() {
-    const { creditsLeft, proposal } = this.props;
-    if (creditsLeft !== null && proposal.estimation) {
-      return creditsLeft >= proposal.estimation;
-    }
-    return true;
-  },
+export class ProposalVoteButtonWrapper extends React.Component<Props> {
+  static defaultProps = {
+    id: undefined,
+    style: {},
+    className: '',
+  };
 
   render() {
-    const { id, user, step, proposal, style, className, userHasVote, userVotesCount } = this.props;
+    const { step } = this.props;
     if (!step || !step.open) {
-      return <span />;
+      return null;
     }
-    if (!user) {
-      return (
-        <ProposalVoteButton
-          id={id}
-          proposal={proposal}
-          step={step}
-          user={user}
-          style={style}
-          className={className}
-        />
-      );
-    }
-    if (step.voteType === VOTE_TYPE_SIMPLE) {
-      return (
-        <VoteButtonOverlay
-          popoverId={`vote-tooltip-proposal-${proposal.id}`}
-          userHasVote={userHasVote}
-          limit={step.votesLimit}
-          hasReachedLimit={
-            !userHasVote && step.votesLimit && step.votesLimit - userVotesCount <= 0
-          }>
-          <ProposalVoteButton id={id} proposal={proposal} step={step} user={user} />
-        </VoteButtonOverlay>
-      );
-    }
-
     return (
-      <VoteButtonOverlay
-        popoverId={`vote-tooltip-proposal-${proposal.id}`}
-        userHasVote={userHasVote}
-        limit={step.votesLimit}
-        hasReachedLimit={step.votesLimit && step.votesLimit - userVotesCount <= 0}
-        hasUserEnoughCredits={this.userHasEnoughCredits()}>
-        <ProposalVoteButton
-          id={id}
-          proposal={proposal}
-          step={step}
-          user={user}
-          className={`${className}`}
-          disabled={!userHasVote && !this.userHasEnoughCredits()}
-        />
-      </VoteButtonOverlay>
+      <QueryRenderer
+        environment={environment}
+        query={graphql`
+          query ProposalVoteButtonWrapperQuery(
+            $proposal: ID!
+            $step: ID!
+            $isAuthenticated: Boolean!
+          ) {
+            proposal: node(id: $proposal) {
+              ...ProposalVoteButtonWrapperFragment_proposal
+                @arguments(step: $step, isAuthenticated: $isAuthenticated)
+            }
+            step: node(id: $step) {
+              ...ProposalVoteButtonWrapperFragment_step
+            }
+            viewer @include(if: $isAuthenticated) {
+              ...ProposalVoteButtonWrapperFragment_viewer @arguments(step: $step)
+            }
+          }
+        `}
+        variables={
+          ({
+            proposal: this.props.proposal.id,
+            step: step.id,
+            isAuthenticated: this.props.isAuthenticated,
+          }: ProposalVoteButtonWrapperQueryVariables)
+        }
+        render={({
+          error,
+          props,
+        }: {
+          error: ?Error,
+          props?: ?ProposalVoteButtonWrapperQueryResponse,
+        }) => {
+          if (error) {
+            console.warn(error); // eslint-disable-line no-console
+            return graphqlError;
+          }
+          if (props) {
+            // eslint-disable-next-line react/prop-types
+            if (props.proposal && props.step) {
+              return (
+                <span>
+                  {/* $FlowFixMe */}
+                  <ProposalVoteButtonWrapperFragment
+                    proposal={props.proposal}
+                    step={props.step}
+                    viewer={props.viewer || null}
+                    className={this.props.className}
+                    id={this.props.id}
+                    style={this.props.style}
+                  />
+                </span>
+              );
+            }
+            return graphqlError;
+          }
+          return <Loader />;
+        }}
+      />
     );
-  },
-});
+  }
+}
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: ParentProps) => {
   const step =
     state.project.currentProjectById && props.proposal.votableStepId
       ? state.project.projectsById[state.project.currentProjectById].stepsById[
           props.proposal.votableStepId
         ]
       : null;
-  const user = state.user.user;
   return {
-    user,
-    userVotesCount: (user && step && state.proposal.userVotesByStepId[step.id].length) || 0,
-    userHasVote:
-      user && step && state.proposal.userVotesByStepId[step.id].includes(props.proposal.id),
-    creditsLeft: step ? state.proposal.creditsLeftByStepId[step.id] : null,
     step,
+    isAuthenticated: state.user.user !== null,
   };
 };
 

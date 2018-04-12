@@ -12,6 +12,7 @@ input AddProposalVoteInput {
 
 type AddProposalVotePayload {
   proposal: Proposal!
+  viewer: User!
   clientMutationId: String
 }
 
@@ -239,10 +240,15 @@ type ChangeUserNotificationsConfigurationPayload {
 
 type CollectStep implements Node & Step {
   id: ID!
+  show_url: String!
   kind: String!
   title: String!
   statuses: [Status!]!
+  voteType: ProposalStepVoteType!
   voteThreshold: Int
+  votesLimit: Int
+  votesHelpText: String
+  budget: Int
   project: Project!
 
   # A list of contributor associated with the step.
@@ -357,6 +363,7 @@ type CommentVoteEdge {
 # A consultation
 type Consultation implements Node & Step {
   kind: String!
+  show_url: String!
 
   # The id of the consultation.
   id: ID!
@@ -612,10 +619,6 @@ type EvaluationForm {
 }
 
 type Event implements Node {
-<<<<<<< HEAD
-=======
-  # This is likely to be an uuid soon.
->>>>>>> Add API for event participants
   id: ID!
   title: String!
 
@@ -820,11 +823,7 @@ interface Node {
 }
 
 # A user without account.
-<<<<<<< HEAD
 type NotRegistered {
-=======
-type NotRegistred {
->>>>>>> Add API for event participants
   # Email of the user.
   email: String
 
@@ -1054,6 +1053,7 @@ enum OrderDirection {
 
 type OtherStep implements Step {
   id: ID!
+  show_url: String!
   kind: String!
   title: String!
 }
@@ -1073,13 +1073,8 @@ type PageInfo {
   endCursor: String
 }
 
-<<<<<<< HEAD
 # User and NotRegistered
 union Participant = User | NotRegistered
-=======
-# User and NotRegistred
-union Participant = User | NotRegistred
->>>>>>> Add API for event participants
 
 # A connection to a list of items.
 type ParticipantConnection {
@@ -1095,12 +1090,9 @@ type ParticipantConnection {
 
 # An edge in a connection.
 type ParticipantEdge {
-<<<<<<< HEAD
   registeredAt: DateTime!
   registeredAnonymously: Boolean!
 
-=======
->>>>>>> Add API for event participants
   # The item at the end of the edge.
   node: Participant!
 
@@ -1148,6 +1140,7 @@ type PresentationStep implements Step {
   id: ID!
   kind: String!
   title: String!
+  show_url: String!
 }
 
 # A budget contribution
@@ -1173,6 +1166,7 @@ type Project implements Node {
   # A list of contributor associated with the project.
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
   url: String
+  votableSteps: [ProposalVotableStep!]!
 }
 
 # A budget contribution
@@ -1303,6 +1297,10 @@ type Proposal implements Node {
   followerConfiguration: Follower
   postsCount: Int!
   viewerCanSeeEvaluation: Boolean!
+  viewerHasVote(
+    # The concerned step.
+    step: ID!
+  ): Boolean!
 }
 
 # The affiliation of a user to a proposal
@@ -1464,6 +1462,15 @@ enum ProposalPublicationStatus {
   NOT_ACCOUNTED
 }
 
+# Type of vote.
+enum ProposalStepVoteType {
+  DISABLED
+  SIMPLE
+  BUDGET
+}
+
+union ProposalVotableStep = CollectStep | SelectionStep
+
 type ProposalVote implements Contribution & ContributionWithAuthor {
   id: ID!
 
@@ -1489,6 +1496,8 @@ type ProposalVote implements Contribution & ContributionWithAuthor {
 # A connection to a list of items.
 type ProposalVoteConnection {
   totalCount: Int!
+  creditsLeft: Int
+  creditsSpent: Int
 
   # Information to aid in pagination.
   pageInfo: PageInfo!
@@ -1641,12 +1650,14 @@ type QuestionnaireStep implements Node & Step {
 
   # A list of contributor associated with the step.
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
+  show_url: String!
 }
 
 type RankingStep implements Step {
   id: ID!
   kind: String!
   title: String!
+  show_url: String!
 }
 
 input RemoveProposalVoteInput {
@@ -1660,6 +1671,7 @@ input RemoveProposalVoteInput {
 
 type RemoveProposalVotePayload {
   proposal: Proposal!
+  viewer: User!
   clientMutationId: String
 }
 
@@ -1861,8 +1873,13 @@ type Selection {
 # A budget contribution
 type SelectionStep implements Step & Node {
   id: ID!
+  show_url: String!
   kind: String!
+  votesLimit: Int
+  voteType: ProposalStepVoteType!
+  budget: Int
   title: String!
+  votesHelpText: String
   statuses: [Status!]!
 
   # Only one selection step inside a project can have realisation steps, true if this one
@@ -1964,12 +1981,14 @@ interface Step {
   id: ID!
   kind: String!
   title: String!
+  show_url: String!
 }
 
 type SynthesisStep implements Step {
   id: ID!
   kind: String!
   title: String!
+  show_url: String!
 }
 
 # A theme
@@ -2334,6 +2353,7 @@ type User implements Node {
 
   # Your localisation
   neighborhood: String
+  proposalVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}, step: ID): ProposalVoteConnection!
 }
 
 # A connection to a list of items.

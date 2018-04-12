@@ -5,7 +5,7 @@ exports[`<ProposalList /> should not render list if proposal is not provided 1`]
   className="p--centered"
   style={
     Object {
-      "margin-bottom": "40px",
+      "marginBottom": "40px",
     }
   }
 >

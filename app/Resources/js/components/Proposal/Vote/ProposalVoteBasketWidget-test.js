@@ -1,53 +1,89 @@
+// @flow
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalVoteBasketWidget } from './ProposalVoteBasketWidget';
+import { relayRefetchMock as relay, mockRefType as $refType } from '../../../mocks';
 
 describe('<ProposalVoteBasketWidget />', () => {
   const simpleWithoutLimitProps = {
-    projectId: '1',
-    votableSteps: [
-      {
-        id: '1',
-        voteType: 1,
-        budget: null,
+    project: {
+      id: '1',
+      $refType,
+      votableSteps: [
+        {
+          id: '1',
+          voteType: 'SIMPLE',
+          budget: null,
+        },
+      ],
+    },
+    viewer: {
+      id: '1',
+      $refType,
+      proposalVotes: {
+        totalCount: 0,
+        creditsLeft: null,
+        creditsSpent: null,
       },
-    ],
+    },
     votesPageUrl: 'http//capco.dev/votes',
-    userVotesCountByStepId: { '1': 12 },
-    creditsLeftByStepId: {},
     image: 'http://capco.dev/images.png',
+    relay,
   };
 
   const simpleWithLimitProps = {
-    projectId: '1',
-    votableSteps: [
-      {
-        id: '1',
-        voteType: 1,
-        budget: null,
-        votesLimit: 2,
-      },
-    ],
+    project: {
+      id: '1',
+      $refType,
+      votableSteps: [
+        {
+          id: '1',
+          voteType: 'SIMPLE',
+          budget: null,
+          votesLimit: 2,
+        },
+      ],
+    },
     votesPageUrl: 'http//capco.dev/votes',
-    userVotesCountByStepId: { '1': 1 },
-    creditsLeftByStepId: {},
+    viewer: {
+      id: '1',
+      $refType,
+      proposalVotes: {
+        totalCount: 1,
+        creditsLeft: null,
+        creditsSpent: null,
+      },
+    },
     image: 'http://capco.dev/images.png',
+    relay,
+    $refType,
   };
 
   const budgetProps = {
-    projectId: '1',
-    votableSteps: [
-      {
-        id: '1',
-        voteType: 1,
-        budget: 350000,
-      },
-    ],
+    project: {
+      id: '1',
+      $refType,
+      votableSteps: [
+        {
+          id: '1',
+          voteType: 'SIMPLE',
+          budget: 350000,
+        },
+      ],
+    },
     votesPageUrl: 'http//capco.dev/votes',
-    userVotesCountByStepId: { '1': 12 },
-    creditsLeftByStepId: { '1': 120000 },
+    viewer: {
+      id: '1',
+      $refType,
+      proposalVotes: {
+        totalCount: 12,
+        creditsLeft: 120000,
+        creditsSpent: null,
+      },
+    },
     image: 'http://capco.dev/images.png',
+    relay,
   };
 
   it('should render a vote widget for a simple vote without limit', () => {
