@@ -4,6 +4,7 @@ import { Map, TileLayer, GeoJSON } from 'react-leaflet-universal';
 import { connect, type MapStateToProps, type Connector } from 'react-redux';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import LocateControl from './LocateControl';
+import LeafletSearch from './LeafletSearch';
 import { loadMarkers } from '../../../redux/modules/proposal';
 import config from '../../../config';
 import type { Dispatch, State } from '../../../types';
@@ -134,6 +135,7 @@ export class LeafletMap extends Component<Props, ComponentState> {
         />
         {geoJsons && geoJsons.map((json, key) => <GeoJSON key={key} data={json} />)}
         <LocateControl />
+        <LeafletSearch />
       </Map>
     );
   }

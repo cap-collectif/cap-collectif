@@ -19,7 +19,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 
 class StepController extends Controller
 {
@@ -244,7 +243,7 @@ class StepController extends Controller
      * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Step:collect.html.twig")
      */
-    public function showCollectStepAction(Request $request, Project $project, CollectStep $step)
+    public function showCollectStepAction(Project $project, CollectStep $step)
     {
         if (!$step->canDisplay()) {
             throw $this->createNotFoundException();
@@ -256,17 +255,18 @@ class StepController extends Controller
         $proposalForm = $step->getProposalForm();
         $searchResults = ['proposals' => [], 'count' => 0];
         $countFusions = 0;
-        $seed = $this->getUser() ? $this->getUser()->getId() : $request->getClientIp();
 
         if ($proposalForm) {
             $filters = ['proposalForm' => $proposalForm->getId(), 'collectStep' => $step->getId()];
 
             if ($step->isPrivate() && $this->getUser()) {
                 $providedFilters['authorUniqueId'] = $this->getUser()->getId();
+                $searchResults = $this->get('capco.search.proposal_search')
+                    ->searchProposals(1, 51, 'last', null, $filters);
+            } else {
+                $searchResults = $this->get('capco.search.proposal_search')
+                    ->searchProposals(1, 51, 'last', null, $filters);
             }
-
-            $searchResults = $this->get('capco.search.proposal_search')
-                ->searchProposals(0, 50, 'last', null, $filters, $seed);
             $countFusions = $em
               ->getRepository('CapcoAppBundle:Proposal')
               ->countFusionsByProposalForm($proposalForm)
@@ -359,14 +359,13 @@ class StepController extends Controller
      * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Step:selection.html.twig")
      */
-    public function showSelectionStepAction(Request $request, Project $project, SelectionStep $step)
+    public function showSelectionStepAction(Project $project, SelectionStep $step)
     {
         if (!$step->canDisplay()) {
             throw $this->createNotFoundException();
         }
 
         $serializer = $this->get('serializer');
-        $seed = $this->getUser() ? $this->getUser()->getId() : $request->getClientIp();
 
         $searchResults = $this
             ->get('capco.search.proposal_search')
@@ -375,8 +374,7 @@ class StepController extends Controller
                 51,
                 $step->getDefaultSort(),
                 null,
-                ['selectionStep' => $step->canShowProposals() ? $step->getId() : 0],
-                $seed
+                ['selectionStep' => $step->canShowProposals() ? $step->getId() : 0]
             );
 
         $form = $step->getProposalForm();

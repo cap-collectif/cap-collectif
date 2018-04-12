@@ -1320,31 +1320,17 @@ type ProposalForm implements Node {
   allowAknowledge: Boolean!
 }
 
-# Ways in which proposal connections can be ordered.
+# Ways in which lists of proposals can be ordered upon return.
 input ProposalOrder {
-  # The field in which to order nodes by.
-  field: ProposalOrderField!
-
-  # The direction in which to order nodes.
-  direction: OrderDirection! = ASC
+  field: ProposalOrderField! = CREATED_AT
+  direction: OrderDirection! = DESC
 }
 
-# Properties by which proposal connections can be ordered
+# Ordering options for proposals connections.
 enum ProposalOrderField {
-  # Allows ordering a list of proposals by when they were created.
   CREATED_AT
-
-  # Allows ordering a list of proposals by the number of votes it have.
-  VOTES
-
-  # Allows ordering a list of proposals by the number of comments it have.
-  COMMENTS
-
-  # Allows randomizing a list of proposals.
-  RANDOM
-
-  # Allows ordering a list of proposals by the cost it have been estimated.
-  COST
+  UPDATED_AT
+  PUBLISHED_AT
 }
 
 # Available statuses
