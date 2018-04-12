@@ -758,6 +758,7 @@ type Mutation {
   deleteUserInGroup(input: DeleteUserInGroupInput!): DeleteUserInGroupPayload
   addUsersInGroup(input: AddUsersInGroupInput!): AddUsersInGroupPayload
   updateProfile(input: UpdateProfileInput!): UpdateProfilePayload
+  updateProfilePassword(input: UpdateProfilePasswordInput!): UpdateProfilePasswordPayload
 }
 
 # A connection to a list of items.
@@ -1975,6 +1976,21 @@ type UpdateGroupPayload {
 
 input UpdateProfileInput {
   username: String
+  clientMutationId: String
+}
+
+input UpdateProfilePasswordInput {
+  # The current password
+  current_password: String
+
+  # The new password
+  new: String
+  clientMutationId: String
+}
+
+type UpdateProfilePasswordPayload {
+  # The viewer
+  viewer: User!
   clientMutationId: String
 }
 

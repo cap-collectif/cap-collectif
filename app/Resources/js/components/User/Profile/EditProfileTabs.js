@@ -11,6 +11,7 @@ import type EditProfileTabs_viewer from './__generated__/EditProfileTabs_viewer.
 import UserAvatar from "../UserAvatar";
 import UserLink from "../UserLink";
 import CardUser from '../../Ui/Card/CardUser';
+import ChangePasswordForm from "./ChangePasswordForm";
 
 type Props = {
     features: FeatureToggles,
@@ -63,31 +64,31 @@ export class EditProfileTabs extends Component<Props> {
                         }>
                             <ListGroup>
                                 <Nav bsStyle="pills" stacked>
-                                    <NavItem eventKey="account">
+                                    <NavItem eventKey="account" href="#account">
                                         <ListGroupItem>
                                             <span className="icon cap-setting-gear"></span>
                                             <FormattedMessage id="user.profile.edit.profile"/>
                                         </ListGroupItem>
                                     </NavItem>
-                                    <NavItem eventKey="personal-data">
+                                    <NavItem eventKey="personal-data" href="#personal-data">
                                         <ListGroupItem>
                                             <span className="icon cap-id-1"></span>
                                             <FormattedMessage id="personal-data"/>
                                         </ListGroupItem>
                                     </NavItem>
-                                    <NavItem eventKey="password">
+                                    <NavItem eventKey="password" href="#password">
                                         <ListGroupItem>
                                             <span className="icon cap-key-1"></span>
                                             <FormattedMessage id="user.profile.edit.password"/>
                                         </ListGroupItem>
                                     </NavItem>
-                                    <NavItem eventKey="notifications" className="tab">
+                                    <NavItem href="#notifications" eventKey="notifications" className="tab">
                                         <ListGroupItem>
                                             <span className="icon cap-bell"></span>
                                             <FormattedMessage id="user.profile.notifications.title"/>
                                         </ListGroupItem>
                                     </NavItem>
-                                    <NavItem eventKey="followings" className="tab">
+                                    <NavItem eventKey="followings" href="#followings" className="tab">
                                         <ListGroupItem>
                                             <span className="icon cap-rss-2"></span>
                                             <FormattedMessage id="followings"/>
@@ -106,7 +107,7 @@ export class EditProfileTabs extends Component<Props> {
                                 Personal data
                             </Tab.Pane>
                             <Tab.Pane eventKey="password">
-                                Password
+                                <ChangePasswordForm/>
                             </Tab.Pane>
                             <Tab.Pane eventKey="notifications">
                                 <Panel header={<FormattedMessage id="profile.account.notifications.title"/>}>

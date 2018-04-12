@@ -28,7 +28,6 @@ class ChangePasswordFormType extends AbstractType
             'type' => 'password',
             'options' => ['translation_domain' => 'CapcoAppBundle'],
             'first_options' => ['label' => 'form.new_password'],
-            'second_options' => ['label' => 'form.new_password_confirmation'],
             'invalid_message' => 'fos_user.password.mismatch',
         ]);
     }
