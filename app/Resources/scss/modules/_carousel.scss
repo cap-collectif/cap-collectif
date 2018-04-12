@@ -161,45 +161,6 @@
     }
 }
 
-.carousel__mobile {
-    display: flex;
-    white-space: nowrap;
-    overflow: scroll;
-
-    &.active {
-        // transform: scale(0.9);
-    }
-
-    img {
-        width: 100%;
-    }
-
-    .item {
-        width: 100%;
-        margin-right: 5px;
-    }
-
-    .carousel__content {
-        color: #333333;
-        padding: 10px 0;
-        line-height: 20px;
-
-        .carousel-type {
-            font-size: 14px;
-            color: $dark-gray;
-        }
-
-        .carousel-title {
-            font-weight: 500;
-        }
-
-        .carousel-date {
-            font-style: italic;
-            font-size: 14px;
-        }
-    }
-}
-
 @media (max-width: $screen-md-max) {
     .carousel__desktop {
         .carousel__navigation {
@@ -225,6 +186,90 @@
 
         .carousel__content {
             width: 70%;
+        }
+    }
+}
+
+.carousel__mobile {
+    display: flex;
+    overflow: scroll;
+    margin-bottom: 40px;
+
+    .mobile__content {
+        display: flex;
+        margin: 0 15px;
+        width: 90%;
+    }
+
+    img {
+        width: 100%;
+    }
+
+    .item {
+        // padding-right: 15px;
+        margin-right: 10px;
+        flex: 0 0 100%;
+
+        &:first-child {
+            // margin-left: 15px;
+        }
+
+        &:last-child {
+            // margin-right: 15px;
+        }
+    }
+
+    .carousel__content {
+        color: #333333;
+        padding: 10px 0;
+
+        .carousel-type {
+            font-size: 14px;
+            color: $dark-gray;
+        }
+
+        .carousel-title {
+            font-weight: 500;
+        }
+
+        .carousel-date {
+            font-style: italic;
+            font-size: 14px;
+        }
+    }
+}
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+    .carousel__mobile {
+        .item {
+            position: relative;
+        }
+
+        .carousel__content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px 30px;
+            color: $white;
+            text-align: center;
+            background: linear-gradient(to top, #000, rgba(0,0,0,0));
+
+            .carousel-type, .carousel-date {
+                font-size: 16px;
+            }
+
+            .carousel-type {
+                color: $white;
+            }
+
+            .carousel-title {
+                font-size: 23px;
+            }
+
+            .carousel-date {
+                font-weight: 300;
+            }
         }
     }
 }

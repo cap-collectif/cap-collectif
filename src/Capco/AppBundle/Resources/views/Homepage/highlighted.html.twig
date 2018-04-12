@@ -6,9 +6,8 @@
             {% else %}
                 <h2 class="h2">{{ 'homepage.section.highlighted' | trans({}, 'CapcoAppBundle') }}</h2>
             {% endif %}
-
-            {{ react_render_component('CarouselApp')}}
         </div>
+        {{ react_render_component('CarouselApp')}}
         {#{{ dump(highlighteds) }}#}
         {#<div class="row">#}
             {#<div class="col-md-8">#}
