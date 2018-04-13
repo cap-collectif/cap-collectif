@@ -62,9 +62,6 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
     <ProposalDetailEstimation
       proposal={
         Object {
-          "_links": Object {
-            "show": "http://capco.test/proposal",
-          },
           "author": Object {
             "displayName": "user",
             "id": 1,
@@ -73,6 +70,7 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
             "name": "district",
           },
           "id": 1,
+          "show_url": "http://capco.test/proposal",
           "title": "proposal",
         }
       }

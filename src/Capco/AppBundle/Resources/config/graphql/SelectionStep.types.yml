@@ -57,3 +57,16 @@ SelectionStep:
                 description: "A list of contributor associated with the consultation."
                 argsBuilder: "Relay::Connection"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\StepContributorResolver", [value, args])'
+            viewerVotes:
+                # access: ""
+                type: "ProposalVoteConnection!"
+                description: "A list of viewer votes associated with the step."
+                argsBuilder: "Relay::Connection"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerStepVotesResolver", [value, user, args])'
+                args:
+                    first:
+                      type: "Int"
+                      defaultValue: 100000
+                    orderBy:
+                      type: "ProposalVotesOrder"
+                      defaultValue: { field: CREATED_AT, direction: DESC }

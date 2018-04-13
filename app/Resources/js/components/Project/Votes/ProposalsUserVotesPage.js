@@ -1,9 +1,9 @@
 // @flow
 import * as React from 'react';
-// import { Row } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-// import ProposalUserVoteItem from './ProposalUserVoteItem';
 import { graphql, createFragmentContainer, type RelayRefetchProp } from 'react-relay';
+import ProposalUserVoteItem from './ProposalUserVoteItem';
 
 type Props = {
   project: Object,
@@ -56,19 +56,19 @@ class ProposalsUserVotesPage extends React.Component<Props> {
                 {step.votesHelpText && (
                   <div dangerouslySetInnerHTML={{ __html: step.votesHelpText }} />
                 )}
-                {/* <h3>
+                <h3>
                   <FormattedMessage
                     id="project.votes.nb"
                     values={{
-                      num: userVotesByStepId[step.id].length,
+                      num: step.viewerVotes.totalCount,
                     }}
                   />
                 </h3>
                 <Row className="proposals-user-votes__table">
-                  {userVotesByStepId[step.id].map((proposal, index2) => (
-                    <ProposalUserVoteItem key={index2} proposal={proposal} step={step} />
+                  {step.viewerVotes.edges.map((edge, index2) => (
+                    <ProposalUserVoteItem key={index2} proposal={edge.node.proposal} step={step} />
                   ))}
-                </Row> */}
+                </Row>
               </div>
             ))
           ) : (
@@ -82,52 +82,67 @@ class ProposalsUserVotesPage extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(
-  ProposalsUserVotesPage,
-  {
-    project: graphql`
-      fragment ProposalsUserVotesPage_project on Project {
-        id
-        votableSteps {
-          ... on CollectStep {
-            id
-            title
-            voteType
-            votesHelpText
-            show_url
+export default createFragmentContainer(ProposalsUserVotesPage, {
+  project: graphql`
+    fragment ProposalsUserVotesPage_project on Project {
+      id
+      votableSteps {
+        ... on CollectStep {
+          id
+          title
+          voteType
+          votesHelpText
+          open
+          show_url
+          viewerVotes {
+            totalCount
+            edges {
+              node {
+                proposal {
+                  id
+                  title
+                  show_url
+                  district {
+                    name
+                  }
+                  author {
+                    id
+                    displayName
+                    show_url
+                  }
+                }
+              }
+            }
           }
-          ... on SelectionStep {
-            id
-            title
-            voteType
-            votesHelpText
-            show_url
+        }
+        ... on SelectionStep {
+          id
+          title
+          voteType
+          votesHelpText
+          show_url
+          viewerVotes {
+            totalCount
+            edges {
+              node {
+                proposal {
+                  id
+                  title
+                  show_url
+                  district {
+                    name
+                  }
+                  author {
+                    id
+                    displayName
+                    show_url
+                  }
+                }
+              }
+            }
           }
         }
       }
-    `,
-  },
-  // viewer: graphql`
-  //   fragment ProposalsUserVotesPage_viewer on User
-  //     @argumentDefinitions(
-  //       step: { type: "ID", nonNull: false },
-  //       withVotes: {type: "Boolean!", defaultValue: false}
-  //     )
-  //   {
-  //     id
-  //     proposalVotes(step: $step) @include(if: $withVotes) {
-  //       totalCount
-  //       creditsLeft
-  //       creditsSpent
-  //     }
-  //   }
-  // `}
-  // ,
-  // graphql`
-  //    query ProposalsUserVotesPageQuery($step: ID!, $withVotes: Boolean!) {
-  //      viewer {
-  //        ...ProposalsUserVotesPage_viewer @arguments(step: $step, withVotes: $withVotes)
-  //      }
-  //    }
-  //  `
-);
+    }
+  `,
+});
