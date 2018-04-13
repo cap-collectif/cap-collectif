@@ -371,3 +371,11 @@ services:
             - '@capco.collect_step.repository'
         tags:
             - { name: overblog_graphql.resolver }
+
+    Capco\AppBundle\GraphQL\Resolver\ViewerStepVotesResolver:
+        class: Capco\AppBundle\GraphQL\Resolver\ViewerStepVotesResolver
+        arguments:
+            - '@Capco\AppBundle\GraphQL\Resolver\User\ProposalVotesResolver'
+            - '@logger'
+        tags:
+            - { name: overblog_graphql.resolver }

@@ -19,6 +19,9 @@ ProposalVote:
             createdAt:
                 type: "DateTime!"
                 description: "Date of vote."
+            proposal:
+                type: "Proposal!"
+                description: "Return the proposal."
             related:
                 type: "Contribution"
                 description: "Return the related contribution if the contribution is related to another."

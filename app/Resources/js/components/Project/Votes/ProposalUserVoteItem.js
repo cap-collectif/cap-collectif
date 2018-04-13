@@ -26,7 +26,7 @@ export const ProposalUserVoteItem = React.createClass({
           className="proposals-user-votes__col"
           md={colWidth === 3 ? colWidth + 1 : colWidth + 2}
           xs={12}>
-          <a href={proposal._links.show}>{proposal.title}</a>
+          <a href={proposal.show_url}>{proposal.title}</a>
         </Col>
         <Col className="proposals-user-votes__col" md={colWidth} xs={12}>
           <i className="cap cap-user-2" />
@@ -51,7 +51,7 @@ export const ProposalUserVoteItem = React.createClass({
             }}
             className="proposal-vote__delete"
             disabled={!step.open}>
-            {<FormattedMessage id="project.votes.delete" />}
+            <FormattedMessage id="project.votes.delete" />
           </Button>
         </Col>
       </Row>

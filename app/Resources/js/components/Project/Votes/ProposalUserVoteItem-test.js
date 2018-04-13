@@ -12,9 +12,7 @@ describe('<ProposalUserVoteItem />', () => {
       district: {
         name: 'district',
       },
-      _links: {
-        show: 'http://capco.test/proposal',
-      },
+      show_url: 'http://capco.test/proposal',
       author: {
         id: 1,
         displayName: 'user',

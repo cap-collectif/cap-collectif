@@ -250,9 +250,13 @@ type CollectStep implements Node & Step {
   votesHelpText: String
   budget: Int
   project: Project!
+  open: Boolean!
 
   # A list of contributor associated with the step.
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
+
+  # A list of viewer votes associated with the step.
+  viewerVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}): ProposalVoteConnection!
 }
 
 # A comment
@@ -1486,6 +1490,9 @@ type ProposalVote implements Contribution & ContributionWithAuthor {
   # Date of vote.
   createdAt: DateTime!
 
+  # Return the proposal.
+  proposal: Proposal!
+
   # Return the related contribution if the contribution is related to another.
   related: Contribution
 
@@ -1904,6 +1911,9 @@ type SelectionStep implements Step & Node {
 
   # A list of contributor associated with the consultation.
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
+
+  # A list of viewer votes associated with the step.
+  viewerVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}): ProposalVoteConnection!
 }
 
 input SetEvaluationFormInProposalFormInput {
