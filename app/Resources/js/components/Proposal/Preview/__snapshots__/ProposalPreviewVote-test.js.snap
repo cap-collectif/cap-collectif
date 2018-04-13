@@ -22,11 +22,6 @@ exports[`<ProposalPreviewVote /> should render a proposal preview vote 1`] = `
         },
       }
     }
-    style={
-      Object {
-        "width": "100%",
-      }
-    }
   />
   <Connect(ProposalVoteModal)
     proposal={

@@ -4,7 +4,7 @@ import { connect, type MapStateToProps } from 'react-redux';
 import { QueryRenderer, graphql } from 'react-relay';
 import ProposalVoteButtonWrapperFragment from './ProposalVoteButtonWrapperFragment';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
-import Loader from '../../Ui/Loader';
+// import Loader from '../../Ui/Loader';
 import type { State } from '../../../types';
 import type {
   ProposalVoteButtonWrapperQueryResponse,
@@ -93,7 +93,7 @@ export class ProposalVoteButtonWrapper extends React.Component<Props> {
             }
             return graphqlError;
           }
-          return <Loader />;
+          return null;
         }}
       />
     );

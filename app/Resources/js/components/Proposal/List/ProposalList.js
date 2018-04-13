@@ -32,7 +32,7 @@ export const ProposalList = React.createClass({
     if (proposals.length === 0) {
       return (
         <p className={classNames({ 'p--centered': true })} style={{ marginBottom: '40px' }}>
-          {<FormattedMessage id="proposal.private.empty" />}
+          <FormattedMessage id="proposal.private.empty" />
         </p>
       );
     }

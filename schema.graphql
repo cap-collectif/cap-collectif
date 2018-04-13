@@ -242,6 +242,9 @@ type CollectStep implements Node & Step {
   id: ID!
   show_url: String!
   kind: String!
+
+  # If enabled, allow voters to order their votes by preferences.
+  votesRanking: Boolean!
   title: String!
   statuses: [Status!]!
   voteType: ProposalStepVoteType!
@@ -767,6 +770,7 @@ type Mutation {
   changeUserNotificationsConfiguration(input: ChangeUserNotificationsConfigurationInput!): ChangeUserNotificationsConfigurationPayload
   addProposalVote(input: AddProposalVoteInput!): AddProposalVotePayload
   removeProposalVote(input: RemoveProposalVoteInput!): RemoveProposalVotePayload
+  updateProposalVotes(input: UpdateProposalVotesInput!): UpdateProposalVotesPayload
   changeProposalPublicationStatus(input: ChangeProposalPublicationStatusInput!): ChangeProposalPublicationStatusPayload
   changeProposalContent(input: ChangeProposalContentInput!): ChangeProposalContentPayload
   createProposal(input: CreateProposalInput!): CreateProposalPayload
@@ -1682,20 +1686,6 @@ type RemoveProposalVotePayload {
   clientMutationId: String
 }
 
-input ReorderProposalVoteInput {
-  # Place the vote after the vote with this id. Pass null to place it at the top.
-  afterVoteId: ID
-
-  # The id of the vote to move.
-  voteId: ID!
-  clientMutationId: String
-}
-
-type ReorderProposalVotePayload {
-  proposal: Proposal!
-  clientMutationId: String
-}
-
 # A report
 type Reporting implements Contribution & ContributionWithAuthor {
   # Identifies the date and time when the object was created.
@@ -1882,6 +1872,9 @@ type SelectionStep implements Step & Node {
   id: ID!
   show_url: String!
   kind: String!
+
+  # If enabled, allow voters to order their votes by preferences.
+  votesRanking: Boolean!
   votesLimit: Int
   voteType: ProposalStepVoteType!
   budget: Int
@@ -2250,6 +2243,20 @@ type UpdateProposalFusionPayload {
   clientMutationId: String
 }
 
+input UpdateProposalVotesInput {
+  # The step.
+  step: ID!
+
+  # The votes.
+  votes: [VoteInput!]!
+  clientMutationId: String
+}
+
+type UpdateProposalVotesPayload {
+  step: Step!
+  clientMutationId: String
+}
+
 # A user is an individual's account.
 type User implements Node {
   # The id of the user.
@@ -2525,6 +2532,15 @@ type VersionVote implements YesNoPairedVote & Contribution & ContributionWithAut
   kind: String!
 }
 
+# A vote
+input VoteInput {
+  # The vote id.
+  id: ID!
+
+  # Update the vote privacy.
+  anonymous: Boolean!
+}
+
 # Ways in which lists of votes can be ordered upon return.
 input VoteOrder {
   field: VoteOrderField! = CREATED_AT
@@ -2534,8 +2550,7 @@ input VoteOrder {
 # Ordering options for votes.
 enum VoteOrderField {
   CREATED_AT
-  UPDATED_AT
-  POPULARITY
+  POSITION
 }
 
 interface YesNoPairedVote {
