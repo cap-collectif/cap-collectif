@@ -140,12 +140,6 @@ class ProjectDownloadResolver
         $title = $step->getProject() ? $step->getProject()->getTitle() . '_' : '';
         $title .= $step->getTitle();
 
-        foreach ($data as &$d) {
-            foreach ($d as $key => $value) {
-                $d[$key] = $this->formatText($value);
-            }
-        }
-
         return $this->getWriterFromData($data, $this->headers, $title);
     }
 
