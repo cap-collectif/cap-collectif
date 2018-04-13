@@ -69,8 +69,8 @@ services:
       # only for sf < 3.3
       class: Capco\AppBundle\GraphQL\Mutation\UpdateProfilePasswordMutation
       arguments:
-          - "@doctrine.orm.default_entity_manager"
           - "@form.factory"
+          - "@fos_user.user_manager.default"
           - "@logger"
       tags:
           - { name: overblog_graphql.mutation }

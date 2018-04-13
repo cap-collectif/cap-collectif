@@ -4,8 +4,10 @@ import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
 import type {
   UpdateProfilePasswordMutationVariables,
-  UpdateProfilePasswordMutationResponse,
+  UpdateProfilePasswordMutationResponse as Response,
 } from './__generated__/UpdateProfilePasswordMutation.graphql';
+
+export type UpdateProfilePasswordMutationResponse = Response;
 
 const mutation = graphql`
   mutation UpdateProfilePasswordMutation($input: UpdateProfilePasswordInput!) {
@@ -20,7 +22,7 @@ const mutation = graphql`
 
 const commit = (
   variables: UpdateProfilePasswordMutationVariables,
-): Promise<UpdateProfilePasswordMutationResponse> =>
+): Promise<Response> =>
   commitMutation(environment, {
     mutation,
     variables,

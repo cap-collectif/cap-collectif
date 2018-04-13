@@ -32,11 +32,8 @@ class ChangePasswordFormType extends AbstractType
         ]);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function getParent()
     {
-        $resolver->setDefaults([
-            'data_class' => 'FOS\UserBundle\Form\Model\ChangePassword',
-            'intention' => 'change_password',
-        ]);
+        return 'fos_user_change_password';
     }
 }
