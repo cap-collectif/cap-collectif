@@ -1,3 +1,4 @@
+// @flow
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
@@ -5,7 +6,7 @@ import { ProposalUserVoteItem } from './ProposalUserVoteItem';
 
 describe('<ProposalUserVoteItem />', () => {
   const props = {
-    dispatch: () => {},
+    dispatch: jest.fn(),
     proposal: {
       id: 1,
       title: 'proposal',

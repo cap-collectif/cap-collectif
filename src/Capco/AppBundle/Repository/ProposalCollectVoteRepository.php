@@ -86,7 +86,7 @@ class ProposalCollectVoteRepository extends EntityRepository
       ;
     }
 
-    public function getByAuthorAndStep(User $author, CollectStep $step, int $limit, int $offset, string $field, string $direction): Paginator
+    public function getByAuthorAndStep(User $author, CollectStep $step, int $limit, int $offset, string $field = null, string $direction = null): Paginator
     {
         $qb = $this->createQueryBuilder('pv')
           ->andWhere('pv.collectStep = :step')
@@ -98,13 +98,20 @@ class ProposalCollectVoteRepository extends EntityRepository
           ->setParameter('step', $step)
           ->setParameter('author', $author);
 
-        if ('CREATED_AT' === $field) {
-            $qb->addOrderBy('pv.createdAt', $direction);
+        if ($field && $direction) {
+            if ('CREATED_AT' === $field) {
+                $qb->addOrderBy('pv.createdAt', $direction);
+            }
+            if ('POSITION' === $field) {
+                $qb->addOrderBy('pv.position', $direction);
+            }
         }
 
-        $qb
-        ->setMaxResults($limit)
-        ->setFirstResult($offset);
+        if ($limit > 0) {
+            $qb
+          ->setMaxResults($limit);
+        }
+        $qb->setFirstResult($offset);
 
         return new Paginator($qb);
     }

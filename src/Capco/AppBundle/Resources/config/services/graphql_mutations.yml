@@ -20,6 +20,17 @@ services:
           - "@logger"
       tags:
           - { name: overblog_graphql.mutation }
+  Capco\AppBundle\GraphQL\Mutation\UpdateProposalVotesMutation:
+        # only for sf < 3.3
+        class: Capco\AppBundle\GraphQL\Mutation\UpdateProposalVotesMutation
+        arguments:
+            - "@doctrine.orm.default_entity_manager"
+            - "@capco.proposal_collect_vote.repository"
+            - "@capco.proposal_selection_vote.repository"
+            - "@capco.abstract_step.repository"
+            - "@logger"
+        tags:
+            - { name: overblog_graphql.mutation }
   Capco\AppBundle\GraphQL\Mutation\CreateProposalFusionMutation:
       # only for sf < 3.3
       class: Capco\AppBundle\GraphQL\Mutation\CreateProposalFusionMutation

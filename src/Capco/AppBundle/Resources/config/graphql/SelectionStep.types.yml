@@ -13,6 +13,9 @@ SelectionStep:
             kind:
                type: "String!"
                resolve: "selection"
+            votesRanking:
+               type: "Boolean!"
+               description: "If enabled, allow voters to order their votes by preferences."
             votesLimit:
                type: "Int"
             voteType:
@@ -58,7 +61,7 @@ SelectionStep:
                 argsBuilder: "Relay::Connection"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\StepContributorResolver", [value, args])'
             viewerVotes:
-                # access: ""
+                access: "@=hasRole('ROLE_USER')"
                 type: "ProposalVoteConnection!"
                 description: "A list of viewer votes associated with the step."
                 argsBuilder: "Relay::Connection"

@@ -65,8 +65,8 @@ class ProposalsUserVotesPage extends React.Component<Props> {
                   />
                 </h3>
                 <Row className="proposals-user-votes__table">
-                  {step.viewerVotes.edges.map((edge, index2) => (
-                    <ProposalUserVoteItem key={index2} proposal={edge.node.proposal} step={step} />
+                  {step.viewerVotes.edges.map((edge, key) => (
+                    <ProposalUserVoteItem key={key} proposal={edge.node.proposal} step={step} />
                   ))}
                 </Row>
               </div>
@@ -102,6 +102,7 @@ export default createFragmentContainer(ProposalsUserVotesPage, {
                   id
                   title
                   show_url
+                  estimation
                   district {
                     name
                   }
@@ -128,6 +129,7 @@ export default createFragmentContainer(ProposalsUserVotesPage, {
                 proposal {
                   id
                   title
+                  estimation
                   show_url
                   district {
                     name

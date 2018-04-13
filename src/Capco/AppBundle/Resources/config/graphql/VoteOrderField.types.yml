@@ -5,7 +5,5 @@ VoteOrderField:
         values:
             CREATED_AT:
                 value: "CREATED_AT"
-            UPDATED_AT:
-                value: "UPDATED_AT"
-            POPULARITY:
-                value: "POPULARITY"
+            POSITION:
+                value: "POSITION"
