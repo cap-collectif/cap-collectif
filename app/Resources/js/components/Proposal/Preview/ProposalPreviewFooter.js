@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
+import { store } from '../../../createRelayEnvironment';
 
 type Props = {
   proposal: Object,
@@ -18,7 +19,20 @@ export class ProposalPreviewFooter extends React.Component<Props> {
 
   render() {
     const { proposal, stepId, showVotes, showComments } = this.props;
-    const votesCount = proposal.votesCountByStepId[stepId];
+    let votesCount = proposal.votesCountByStepId[stepId];
+
+    console.log('render');
+    // Hack to update votesCount while waiting GraphQL rewrite
+    try {
+      if (store && store._index > 0) {
+        const key = `client:${proposal.id}:votes(first:50,step:"${stepId}")`;
+        if (key in store._recordSource._records) {
+          votesCount = store._recordSource._records[key].totalCount;
+        }
+      }
+    } catch (e) {
+      // console.log(e);
+    }
 
     if (!showVotes && !showComments) {
       return null;

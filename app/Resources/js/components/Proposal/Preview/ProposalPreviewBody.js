@@ -12,7 +12,6 @@ import { type State } from '../../../types';
 import ProposalFollowButton from '../Follow/ProposalFollowButton';
 import type ProposalPreviewFollowerButtonQueryResponse from '../Preview/__generated__/ProposalPreviewBodyFollowerButtonQuery.graphql';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
-import Loader from '../../Ui/Loader';
 
 type Props = {
   proposal: Object,
@@ -95,7 +94,7 @@ export class ProposalPreviewBody extends React.Component<Props> {
                 }
                 return graphqlError;
               }
-              return <Loader />;
+              return null;
             }}
           />
         </div>

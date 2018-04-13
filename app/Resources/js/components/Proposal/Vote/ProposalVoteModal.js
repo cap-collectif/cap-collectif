@@ -11,11 +11,11 @@ import { closeVoteModal } from '../../../redux/modules/proposal';
 import type { State, Dispatch } from '../../../types';
 
 type ParentProps = {
-  proposal: Object,
+  proposal: { id: string, userHasVote: boolean, votableStepId: string },
 };
 
 type Props = ParentProps & {
-  step: ?Object,
+  step: ?{ id: string },
   dispatch: Dispatch,
   showModal: boolean,
   isSubmitting: boolean,
@@ -24,6 +24,9 @@ type Props = ParentProps & {
 class ProposalVoteModal extends React.Component<Props> {
   render() {
     const { dispatch, showModal, proposal, step, isSubmitting, valid } = this.props;
+    if (!step) {
+      return null;
+    }
     return (
       <Modal
         animation={false}

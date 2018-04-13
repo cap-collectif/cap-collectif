@@ -16,6 +16,9 @@ const mutation = graphql`
     addProposalVote(input: $input) {
       proposal {
         id
+        tmpVotes: votes(step: $step) {
+          totalCount
+        }
         ...ProposalVotes_proposal @arguments(step: $step)
         ...ProposalVoteButtonWrapperFragment_proposal @arguments(step: $step)
       }

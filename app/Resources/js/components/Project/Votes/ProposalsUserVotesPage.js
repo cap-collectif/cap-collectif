@@ -94,7 +94,7 @@ export default createFragmentContainer(ProposalsUserVotesPage, {
           votesHelpText
           open
           show_url
-          viewerVotes {
+          viewerVotes(orderBy: { field: POSITION, direction: ASC }) {
             totalCount
             edges {
               node {
@@ -122,7 +122,7 @@ export default createFragmentContainer(ProposalsUserVotesPage, {
           voteType
           votesHelpText
           show_url
-          viewerVotes {
+          viewerVotes(orderBy: { field: POSITION, direction: ASC }) {
             totalCount
             edges {
               node {

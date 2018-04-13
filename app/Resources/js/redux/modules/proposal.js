@@ -288,6 +288,8 @@ export const deleteVote = (dispatch: Dispatch, step: Object, proposal: Object) =
   return removeVote
     .commit({ withVotes: true, step: step.id, input: { proposalId: proposal.id, stepId: step.id } })
     .then(() => {
+      // Uselesss but force rerender of ProposalPreview
+      dispatch(closeVoteModal());
       FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,
         alert: {
