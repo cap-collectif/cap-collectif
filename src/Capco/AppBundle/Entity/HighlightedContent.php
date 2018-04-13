@@ -28,12 +28,6 @@ abstract class HighlightedContent
 
     abstract public function getMedia();
 
-    public function getStartAt() {
-        return new \DateTime();
-    }
-//
-//    abstract public function getEndAt();
-
     abstract public function getType();
 
     abstract public function getAssociatedFeatures();

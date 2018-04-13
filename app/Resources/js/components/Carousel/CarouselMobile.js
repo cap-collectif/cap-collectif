@@ -45,6 +45,12 @@ export class CarouselMobile extends PureComponent<Props> {
           {highlighteds.map((highlighted, index) => {
             const highlightedType = highlighted.object_type;
 
+            const itemTitle = highlighted[highlightedType].title;
+            const maxItemLength = 55;
+            const trimmedString = itemTitle.length > maxItemLength ?
+              itemTitle.substring(0, maxItemLength) + "..." :
+              itemTitle;
+
             return (
               <div className="item" key={index}>
                 <div className="sixteen-nine">
@@ -57,7 +63,6 @@ export class CarouselMobile extends PureComponent<Props> {
                       :
                       (<div className="bg--default bg--project" />)
                     }
-
                   </div>
                 </div>
                 <div className="carousel__content">
@@ -67,7 +72,7 @@ export class CarouselMobile extends PureComponent<Props> {
                     </span>
                     <br />
                     <a className="carousel-title" href={highlighted[highlightedType]._links ? highlighted[highlightedType]._links.show : '#'}>
-                      {highlighted[highlightedType].title}
+                      {trimmedString}
                     </a>
                     <br />
                     <span className="carousel-date">

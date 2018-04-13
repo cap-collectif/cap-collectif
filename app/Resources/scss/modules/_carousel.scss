@@ -6,36 +6,9 @@
     padding-bottom: 0;
 }
 
-// to remove from here
-@mixin aspect-ratio($width, $height) {
-    position: relative;
-    overflow: hidden;
-
-    &:before{
-        display: block;
-        content: " ";
-        width: 100%;
-        padding-top: ($height / $width) * 100%;
-    }
-
-    > .content {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #e2e3e5;
-    }
-
-
-}
-
-.sixteen-nine {
-    @include aspect-ratio(16,9);
-}
-
 .carousel__desktop {
     display: flex;
+    margin: 30px 0 45px;
 
     .carousel__navigation {
         width: 25%;
@@ -77,19 +50,30 @@
                 p {
                     align-self: center;
                     line-height: 20px;
+                    width: 100%;
+                    word-wrap: break-word;
                 }
 
                 .carousel-type {
-                    font-weight: 500;
+                    // font-weight: 500;
                 }
 
                 .carousel-title {
                     font-size: 16px;
                     font-weight: 500;
                 }
+
+                .carousel-date {
+                    font-weight: 300;
+                    font-style: italic;
+                }
+
+                &:hover {
+                    background-color: $border-color;
+                }
                 
                 &.active {
-                    background-color: #e2e3e5;
+                    // background-color: #e2e3e5;
                     transition: 0.5s ease-in-out;
                 }
             }
@@ -107,6 +91,15 @@
             .item {
                 height: 100%;
             }
+
+            .carousel__media_darken {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background: linear-gradient(to top, #000, rgba(0,0,0,0));
+            }
         }
 
         .carousel-caption {
@@ -115,7 +108,7 @@
             left: 0;
             bottom: 0;
             padding: 30px;
-            background: linear-gradient(to top, #000, rgba(0,0,0,0));
+            // background: linear-gradient(to top, #000, rgba(0,0,0,0));
 
             p {
                 @extend .ellipsis;
@@ -126,6 +119,7 @@
             }
 
             .carousel-title {
+                color: $white;
                 font-weight: 500;
                 font-size: 24px;
                 line-height: 36px;
@@ -260,6 +254,12 @@
             color: $white;
             text-align: center;
             background: linear-gradient(to top, #000, rgba(0,0,0,0));
+
+            p {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
 
             .carousel-type, .carousel-date {
                 font-size: 16px;

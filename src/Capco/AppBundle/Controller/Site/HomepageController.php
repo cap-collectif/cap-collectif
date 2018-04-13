@@ -77,12 +77,10 @@ class HomepageController extends Controller
     /**
      * @Template("CapcoAppBundle:Homepage:highlighted.html.twig")
      */
-    public function highlightedContentAction(int $max = null, int $offset = null, Section $section = null)
+    public function highlightedContentAction(Section $section = null)
     {
-        $max = $max ?? 4;
-        $offset = $offset ?? 0;
         $serializer = $this->get('jms_serializer');
-        $highlighteds = $this->getDoctrine()->getRepository('CapcoAppBundle:HighlightedContent')->getAllOrderedByPosition(5);
+        $highlighteds = $this->getDoctrine()->getRepository('CapcoAppBundle:HighlightedContent')->getAllOrderedByPosition(4);
         $props = $serializer->serialize([
             'highlighteds' => $highlighteds,
         ], 'json', SerializationContext::create()

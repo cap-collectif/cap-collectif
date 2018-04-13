@@ -9,6 +9,8 @@
 {% if null == btnPrimary %}{% set btnPrimary = '#1abc9c' %}{% endif %}
 {% set btnPrimaryText = capco_site_color_value('color.btn.primary.text') %}
 {% if null == btnPrimaryText %}{% set btnPrimaryText = '#FFF' %}{% endif %}
+{% set bgPrimary = capco_site_color_value('color.bg.primary') %}
+{% if null == bgPrimary %}{% set bgPrimary = '#e3e3e3' %}{% endif %}
 
 {% set btnGhostBase = capco_site_color_value('color.btn.ghost.base') %}
 {% if null == btnGhostBase %}{% set btnGhostBase = '#1abc9c' %}{% endif %}
@@ -182,6 +184,10 @@
 
     .nb--highlighted {
         color: {{ btnPrimary | raw }};
+    }
+
+    #highlights .carousel-indicators li.active {
+        background-color: {{ bgPrimary | raw }};
     }
 
     .counters-nav li .value {

@@ -60,14 +60,4 @@ class HighlightedTheme extends HighlightedContent
     {
         return $this->theme->getMedia();
     }
-
-//    public function getStartAt()
-//    {
-//        return $this->theme->getStartAt();
-//    }
-//
-//    public function getEndAt()
-//    {
-//        return $this->theme->getEndAt();
-//    }
 }
