@@ -9,9 +9,9 @@ type Props = {
 };
 
 export const Container = styled.div`
-  background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0)), url(${props => props.url});
-  background-size:cover;
-  background-repeat:no-repeat;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0)), url(${props => props.url});
+  background-size: cover;
+  background-repeat: no-repeat;
   width: ${props => props.width};
   height: ${props => props.height};
 `;

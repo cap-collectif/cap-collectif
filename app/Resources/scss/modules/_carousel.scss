@@ -28,6 +28,19 @@
 
             li, .empty-item {
                 flex: 1 0 0;
+                z-index: 2;
+                background-color: transparent;
+            }
+
+            #active-bg-item {
+                background-color: red;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 30px;
+                z-index: 1;
+                transition: 0.2s ease-in;
             }
 
             li {
@@ -37,7 +50,7 @@
                 font-size: 14px;
                 width: 100%;
                 display: flex;
-                background-color: $page-bgc;
+                // background-color: $page-bgc;
                 cursor: pointer;
 
                 border: none;
@@ -122,7 +135,7 @@
                 color: $white;
                 font-weight: 500;
                 font-size: 24px;
-                line-height: 36px;
+                line-height: 45px;
             }
 
             .carousel-date {
@@ -253,7 +266,7 @@
             padding: 10px 30px;
             color: $white;
             text-align: center;
-            background: linear-gradient(to top, #000, rgba(0,0,0,0));
+            // background: linear-gradient(to top, #000, rgba(0,0,0,0));
 
             p {
                 white-space: nowrap;

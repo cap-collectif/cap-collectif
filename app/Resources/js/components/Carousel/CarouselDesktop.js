@@ -11,6 +11,13 @@ export class CarouselDesktop extends PureComponent<Props> {
   componentDidMount() {
     const { highlighteds } = this.props;
 
+    const carouselNavItem = document.getElementsByClassName('carousel-nav-item');
+
+    const activeBg2 = document.getElementById('active-bg-item');
+    if(activeBg2) {
+      activeBg2.style.height = `${carouselNavItem.style.height}px`;
+    }
+
     $('#carousel').on('slid.bs.carousel', () => {
       const lastSlide = highlighteds.length - 1;
       const firstSlide = 0;
@@ -19,6 +26,19 @@ export class CarouselDesktop extends PureComponent<Props> {
       const dataOfContent = parseInt(activeContent[0].dataset.item, 10);
       const leftArrow = document.getElementById('left-arrow');
       const rightArrow = document.getElementById('right-arrow');
+
+      const indicatorsCarousel = document.getElementsByClassName('carousel-indicators');
+      const getBoundingindicatorsCarousel = indicatorsCarousel[0].getBoundingClientRect();
+      const indicatorsCarouselTop = getBoundingindicatorsCarousel.top;
+
+      const navigationCarousel = document.getElementById('carousel-navigation');
+      const activeItem = navigationCarousel.getElementsByClassName('active');
+      const getBoundingActiveItem = activeItem[0].getBoundingClientRect();
+      const activeItemTop = getBoundingActiveItem.top;
+
+      const activeBg = document.getElementById('active-bg-item');
+
+      console.log(activeItemTop, indicatorsCarouselTop);
 
       if (dataOfContent === lastSlide) {
         rightArrow.classList.add('disabled');
@@ -35,25 +55,11 @@ export class CarouselDesktop extends PureComponent<Props> {
       if (dataOfContent !== firstSlide) {
         leftArrow.classList.remove('disabled');
       }
+
+      activeBg.style.top = `${activeItemTop - indicatorsCarouselTop}px`;
+
     });
-
-    // navCarousel.addEventListener('mousedown', (ev) => {
-    //   const activeItem =  navCarousel.getElementsByClassName('active');
-    //   const activeItemTop = activeItem[0].getBoundingClientRect();
-    //
-    //   if(activeItemTop) { // mouse top < activeitemTop
-    //     // add top-transition
-    //   }
-    //
-    //   // remove top-transition
-    // });
-
-    // leftArrow[0].addEventListener('click', () => {
-    //   // add top-transition
-    // });
   }
-
-  getCarouselContent = () => {};
 
   getEmptyNavItem = () => {
     const { highlighteds } = this.props;
@@ -118,6 +124,7 @@ export class CarouselDesktop extends PureComponent<Props> {
               )
             })}
             {this.getEmptyNavItem()}
+            <div id="active-bg-item" />
           </ul>
         </div>
         <div className="carousel__content">
@@ -128,22 +135,37 @@ export class CarouselDesktop extends PureComponent<Props> {
                   const highlightedType = highlighted.object_type;
                   const activeItem = index === 0 ? 'item active' : 'item';
 
-                  console.log(highlighted[highlightedType]);
+                  const getMedia = () => {
+                    if(highlighted[highlightedType].media) {
+                      return (
+                        <DarkenGradientMedia
+                          width="100%"
+                          height="100%"
+                          url={highlighted[highlightedType].media.url}
+                          title={highlighted[highlightedType].title}
+                        />
+                      )
+                    }
+
+                    if(highlighted[highlightedType].cover) {
+                      return (
+                        <DarkenGradientMedia
+                          width="100%"
+                          height="100%"
+                          url={highlighted[highlightedType].cover.url}
+                          title={highlighted[highlightedType].title}
+                        />
+                      )
+                    }
+
+                    return (
+                      <div className="bg--default bg--project" />
+                    )
+                  };
 
                   return (
                     <div key={index} className={activeItem} data-item={index}>
-                      {highlighted[highlightedType].media ?
-                        (
-                          <DarkenGradientMedia
-                            width="100%"
-                            height="100%"
-                            url={highlighted[highlightedType].media.url}
-                            title={highlighted[highlightedType].title}
-                          />
-                        )
-                        :
-                        (<div className="bg--default bg--project" />)
-                      }
+                      {getMedia()}
                       <div className="carousel-caption">
                         <p>
                           <span className="carousel-type">
