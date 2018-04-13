@@ -6,18 +6,18 @@ Feature: Proposal votes
 Scenario: Logged in user wants to vote and unvote for a proposal in a selection step
   Given I am logged in as user
   And I go to a selection step with simple vote enabled
-  And the proposal has 3 votes
+  And the proposal has 1 votes
   When I click the proposal vote button
   And I submit the proposal vote form
   And I should see "proposal.request.vote.success" in the "#global-alert-box" element
-  Then the proposal should have 4 votes
+  Then the proposal should have 2 votes
   And I reload the page
-  Then the proposal should have 4 votes
+  Then the proposal should have 2 votes
   Then I click the proposal unvote button
   And I should see "proposal.request.delete_vote.success" in the "#global-alert-box" element
-  Then the proposal should have 3 votes
+  Then the proposal should have 1 votes
   And I reload the page
-  Then the proposal should have 3 votes
+  Then the proposal should have 1 votes
 
 @javascript @security @elasticsearch @votes_from_selection_step
 Scenario: Logged in user wants to vote when he has not enough credits left in a selection step
@@ -47,28 +47,28 @@ Scenario: Logged in user wants to vote when he has reached limit in a selection 
 Scenario: Logged in user wants to vote and unvote for a proposal
   Given I am logged in as user
   And I go to a proposal
-  And the proposal has 3 votes
+  And the proposal has 1 votes
   And I click the proposal vote button
   And I submit the proposal vote form
   And I should see "proposal.request.vote.success" in the "#global-alert-box" element
-  And the proposal should have 4 votes
+  And the proposal should have 2 votes
   And I go to the proposal votes tab
   And I should see my vote in the proposal votes list
   When I click the proposal unvote button
   And I should see "proposal.request.delete_vote.success" in the "#global-alert-box" element
-  And the proposal should have 3 votes
+  And the proposal should have 1 votes
   And I should not see my vote in the proposal votes list
 
 @javascript @database @votes_from_proposal
 Scenario: Logged in user wants to vote for a proposal anonymously
   Given I am logged in as user
   And I go to a proposal
-  And the proposal has 3 votes
+  And the proposal has 1 votes
   When I click the proposal vote button
   And I check the proposal vote private checkbox
   And I submit the proposal vote form
   And I should see "proposal.request.vote.success" in the "#global-alert-box" element
-  And the proposal should have 4 votes
+  And the proposal should have 2 votes
   And I go to the proposal votes tab
   And I should see my anonymous vote in the proposal votes list
 
