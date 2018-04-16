@@ -2,25 +2,20 @@
 
 namespace Capco\AdminBundle\Resolver;
 
-use Capco\AppBundle\Toggle\Manager;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 
 class RecentReportingResolver
 {
-    protected $em;
-    protected $toggleManager;
+    protected $reportingRepository;
 
-    public function __construct(EntityManager $em, Manager $toggleManager)
+    public function __construct(EntityRepository $reportingRepository)
     {
-        $this->em = $em;
-        $this->toggleManager = $toggleManager;
+        $this->reportingRepository = $reportingRepository;
     }
 
-    public function getRecentReports()
+    public function getRecentReports(): array
     {
-        $reports = $this->em
-            ->getRepository('CapcoAppBundle:Reporting')
-            ->getRecentOrdered();
+        $reports = $this->reportingRepository->getRecentOrdered();
 
         return $reports;
     }
