@@ -6,15 +6,11 @@ use Capco\AppBundle\Entity\Reporting;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Datagrid\Pager;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 class ReportingAdmin extends Admin
 {
-    protected $maxPerPage = 16;
-    protected $perPageOptions = [16];
-
     protected $datagridValues = [
         '_sort_order' => 'ASC',
         '_sort_by' => 'isArchived',
@@ -25,11 +21,6 @@ class ReportingAdmin extends Admin
         return [
             'reporting',
         ];
-    }
-
-    public function setPagerType($pagerType)
-    {
-        $this->pagerType = Pager::TYPE_SIMPLE;
     }
 
     public function getTemplate($name)

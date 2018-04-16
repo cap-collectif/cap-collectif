@@ -12,13 +12,21 @@ use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 use Gedmo\Mapping\Annotation as Gedmo;
-use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="proposal_form")
+ * @ORM\Table(
+ *     name="proposal_form",
+ *     uniqueConstraints={
+ *        @UniqueConstraint(
+ *            name="reference_unique",
+ *            columns={"reference"}
+ *        )
+ *    }
+ * )
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalFormRepository")
  * @UniqueEntity(
  *   fields={"reference"},
@@ -41,7 +49,7 @@ class ProposalForm
     /**
      * @ORM\Column(name="description", type="text", nullable=true)
      */
-    private $description = null;
+    private $description;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\CollectStep", inversedBy="proposalForm", cascade={"persist"})

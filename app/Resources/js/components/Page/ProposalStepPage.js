@@ -4,7 +4,6 @@ import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { VOTE_TYPE_DISABLED, PROPOSAL_PAGINATION } from '../../constants/ProposalConstants';
 import ProposalListFilters from '../Proposal/List/ProposalListFilters';
-import ProposalListRandomRow from '../Proposal/List/ProposalListRandomRow';
 import ProposalList from '../Proposal/List/ProposalList';
 import DraftProposalList from '../Proposal/List/DraftProposalList';
 import Loader from '../Ui/Loader';
@@ -29,7 +28,6 @@ export const ProposalStepPage = React.createClass({
     categories: PropTypes.array.isRequired,
     proposals: PropTypes.array.isRequired,
     currentPage: PropTypes.number.isRequired,
-    randomOrder: PropTypes.bool.isRequired,
     isLogged: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
@@ -55,7 +53,6 @@ export const ProposalStepPage = React.createClass({
       dispatch,
       isLoading,
       isLogged,
-      randomOrder,
       selectedViewByStep,
     } = this.props;
     const total = queryCount || count;
@@ -125,22 +122,19 @@ export const ProposalStepPage = React.createClass({
                   />
                 </VisibilityBox>
               )}
-              {showPagination &&
-                selectedViewByStep === 'mosaic' && (
-                  <Pagination
-                    current={currentPage}
-                    nbPages={nbPages}
-                    onChange={newPage => {
-                      dispatch(changePage(newPage));
-                      dispatch(loadProposals());
-                    }}
-                  />
-                )}
-              {randomOrder &&
-                proposals.length > 3 &&
-                selectedViewByStep === 'mosaic' && (
-                  <ProposalListRandomRow orderByVotes={step.voteType !== VOTE_TYPE_DISABLED} />
-                )}
+              <div id="proposal-list-pagination-footer">
+                {showPagination &&
+                  selectedViewByStep === 'mosaic' && (
+                    <Pagination
+                      current={currentPage}
+                      nbPages={nbPages}
+                      onChange={newPage => {
+                        dispatch(changePage(newPage));
+                        dispatch(loadProposals());
+                      }}
+                    />
+                  )}
+              </div>
             </div>
           )}
         </Loader>
@@ -160,7 +154,6 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Object) 
   ),
   queryCount: state.proposal.queryCount,
   currentPage: state.proposal.currentPaginationPage,
-  randomOrder: state.proposal.order === 'random',
   isLoading: state.proposal.isLoading,
   selectedViewByStep: state.proposal.selectedViewByStep || 'mosaic',
 });

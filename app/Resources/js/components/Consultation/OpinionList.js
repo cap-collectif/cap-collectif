@@ -44,12 +44,12 @@ export const OpinionList = React.createClass({
       <div id={`opinions--test17${section.slug}`} className="anchor-offset block  block--bordered">
         <div className={`opinion  opinion--${section.color} opinion--default`}>
           <div className="opinion__header  opinion__header--mobile-centered">
-            <h2 className="pull-left  h4  opinion__header__title">
+            <div className="pull-left opinion__header__title">
               <FormattedMessage
                 id="global.opinionsCount"
                 values={{ num: section.contributionsCount }}
               />
-            </h2>
+            </div>
             <div className="pull-right  opinion__header__filter">
               {section.contributionsCount > 1 && (
                 <select

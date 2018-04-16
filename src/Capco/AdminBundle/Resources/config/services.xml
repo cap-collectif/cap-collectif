@@ -37,11 +37,6 @@
             <argument type="service" id="capco.toggle.manager" />
         </service>
 
-        <service id="capco_admin.recent_reports_resolver" class="Capco\AdminBundle\Resolver\RecentReportingResolver">
-            <argument type="service" id="doctrine.orm.entity_manager" />
-            <argument type="service" id="capco.toggle.manager" />
-        </service>
-
         <service id="capco_admin.block.recent_contributions" class="Capco\AdminBundle\Block\RecentContributionsBlockService">
             <argument>capco_admin.block.recent_contributions</argument>
             <argument type="service" id="templating" />
