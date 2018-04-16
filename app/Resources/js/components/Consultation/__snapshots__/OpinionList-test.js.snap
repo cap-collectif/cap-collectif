@@ -11,8 +11,8 @@ exports[`<OpinionList /> renders correcty 1`] = `
     <div
       className="opinion__header  opinion__header--mobile-centered"
     >
-      <h2
-        className="pull-left  h4  opinion__header__title"
+      <div
+        className="pull-left opinion__header__title"
       >
         <FormattedMessage
           id="global.opinionsCount"
@@ -22,7 +22,7 @@ exports[`<OpinionList /> renders correcty 1`] = `
             }
           }
         />
-      </h2>
+      </div>
       <div
         className="pull-right  opinion__header__filter"
       />

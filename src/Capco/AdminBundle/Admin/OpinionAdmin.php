@@ -55,6 +55,19 @@ class OpinionAdmin extends Admin
         return parent::getTemplate($name);
     }
 
+    // public function prePersist($opinion)
+    // {
+    //     if (!$opinion->getOpinionType()) {
+    //         $opinionType = $this->getConfigurationPool()
+    //             ->getContainer()
+    //             ->get('doctrine')
+    //             ->getManager()
+    //             ->getRepository('CapcoAppBundle:OpinionType')
+    //             ->find($this->getPersistentParameters('opinion_type'));
+    //         $opinion->setOpinionType($opinionType);
+    //     }
+    // }
+
     public function getBatchActions()
     {
     }

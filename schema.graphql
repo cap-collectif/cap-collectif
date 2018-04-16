@@ -1206,7 +1206,7 @@ type Proposal implements Node {
   # View follow current proposal
   viewerIsFollowing: Boolean!
 
-  # View follow current proposal
+  # Kind of follow
   followerConfiguration: Follower
   postsCount: Int!
   viewerCanSeeEvaluation: Boolean!
