@@ -12,6 +12,7 @@ import UserAvatar from "../UserAvatar";
 import UserLink from "../UserLink";
 import CardUser from '../../Ui/Card/CardUser';
 import ChangePasswordForm from "./ChangePasswordForm";
+import {PersonalData} from "./PersonalData";
 
 type Props = {
     features: FeatureToggles,
@@ -23,8 +24,8 @@ export class EditProfileTabs extends Component<Props> {
         if (hash.indexOf('account') !== -1) {
             return 'account';
         }
-        if (hash.indexOf('personnal-data') !== -1) {
-            return 'personnal-data';
+        if (hash.indexOf('personal-data') !== -1) {
+            return 'personal-data';
         }
         if (hash.indexOf('password') !== -1) {
             return 'password';
@@ -104,7 +105,7 @@ export class EditProfileTabs extends Component<Props> {
                                 <AccountBox/>
                             </Tab.Pane>
                             <Tab.Pane eventKey="personal-data">
-                                Personal data
+                                <PersonalData user={viewer}/>
                             </Tab.Pane>
                             <Tab.Pane eventKey="password">
                                 <ChangePasswordForm/>
@@ -131,6 +132,7 @@ export default createFragmentContainer(
         fragment EditProfileTabs_viewer on User {
             ...FollowingsProposals_viewer
             ...NotificationsForm_viewer
+            ...PersonalData_user
             username
             displayName
             media {

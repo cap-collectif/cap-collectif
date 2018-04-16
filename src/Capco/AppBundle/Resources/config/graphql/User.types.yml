@@ -56,6 +56,7 @@ User:
                 resolve: "@=resolver('user_gender', [value])"
             firstname:
                 type: "String"
+                access: "@=hasRole('ROLE_ADMIN') or hasRole('ROLE_USER') && getUser"
             lastname:
                 type: "String"
             dateOfBirth:
