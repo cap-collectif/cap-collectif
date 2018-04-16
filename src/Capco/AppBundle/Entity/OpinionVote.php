@@ -79,7 +79,7 @@ class OpinionVote extends AbstractVote
         return $this;
     }
 
-    public function getOpinion(): Opinion
+    public function getOpinion(): ?Opinion
     {
         return $this->opinion;
     }
