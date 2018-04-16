@@ -219,7 +219,7 @@ class Event implements CommentableInterface, IndexableInterface
         return $this->projects;
     }
 
-    public function addProject(Project $project): iterable
+    public function addProject(Project $project): self
     {
         if (!$this->projects->contains($project)) {
             $this->projects->add($project);
@@ -229,7 +229,7 @@ class Event implements CommentableInterface, IndexableInterface
         return $this;
     }
 
-    public function removeProject(Project $project): iterable
+    public function removeProject(Project $project): self
     {
         $this->projects->removeElement($project);
         $project->removeEvent($this);
