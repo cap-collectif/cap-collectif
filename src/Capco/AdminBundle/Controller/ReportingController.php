@@ -30,10 +30,7 @@ class ReportingController extends Controller
 
         $this->addFlash('sonata_flash_success', 'admin.action.reporting.disable.success');
 
-        return new RedirectResponse($this->admin->generateUrl(
-            'list',
-            ['filter' => $this->admin->getFilterParameters()]
-        ));
+        return new RedirectResponse($this->generateUrl('capco_admin_reporting_index'));
     }
 
     public function trashAction()
@@ -59,10 +56,7 @@ class ReportingController extends Controller
 
         $this->addFlash('sonata_flash_success', 'admin.action.reporting.trash.success');
 
-        return new RedirectResponse($this->admin->generateUrl(
-            'list',
-            ['filter' => $this->admin->getFilterParameters()]
-        ));
+        return new RedirectResponse($this->generateUrl('capco_admin_reporting_index'));
     }
 
     public function archiveAction()
@@ -79,9 +73,6 @@ class ReportingController extends Controller
 
         $this->addFlash('sonata_flash_success', 'admin.action.reporting.archive.success');
 
-        return new RedirectResponse($this->admin->generateUrl(
-            'list',
-            ['filter' => $this->admin->getFilterParameters()]
-        ));
+        return new RedirectResponse($this->generateUrl('capco_admin_reporting_index'));
     }
 }

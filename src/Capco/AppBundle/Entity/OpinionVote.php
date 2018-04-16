@@ -46,15 +46,15 @@ class OpinionVote extends AbstractVote
     ];
 
     /**
-     * @Gedmo\Timestampable(on="update", field={"value"})
-     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
-     */
-    protected $updatedAt;
-
-    /**
      * @ORM\Column(name="value", type="integer")
      */
     private $value;
+
+    /**
+     * @Gedmo\Timestampable(on="update", field={"value"})
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="votes", cascade={"persist"})
@@ -62,29 +62,34 @@ class OpinionVote extends AbstractVote
      */
     private $opinion;
 
+    public function __construct()
+    {
+        $this->updatedAt = new \Datetime();
+    }
+
     public function getRelated()
     {
         return $this->opinion;
     }
 
-    public function getValue(): int
+    public function getValue()
     {
         return $this->value;
     }
 
-    public function setValue(int $value): self
+    public function setValue($value): self
     {
         $this->value = $value;
 
         return $this;
     }
 
-    public function getOpinion(): ?Opinion
+    public function getOpinion()
     {
         return $this->opinion;
     }
 
-    public function setOpinion(Opinion $opinion): self
+    public function setOpinion($opinion)
     {
         $this->opinion = $opinion;
         $this->opinion->addVote($this);

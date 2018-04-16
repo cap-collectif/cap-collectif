@@ -4,7 +4,7 @@ Mutation:
         fields:
         # User notifications
           changeUserNotificationsConfiguration:
-                access: "@=hasRole('ROLE_USER')"
+                access: "@=isAuthenticated()"
                 builder: "Relay::Mutation"
                 builderConfig:
                     inputType: ChangeUserNotificationsConfigurationInput
@@ -61,21 +61,21 @@ Mutation:
                     payloadType: ChangeProposalEvaluersPayload
                     mutateAndGetPayload: "@=mutation('changeProposalEvaluers', [value])"
           followProposal:
-                access: "@=hasRole('ROLE_USER')"
+                access: "@=isAuthenticated()"
                 builder: "Relay::Mutation"
                 builderConfig:
                     inputType: FollowProposalInput
                     payloadType: FollowProposalPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\FollowProposalMutation", [value["proposalId"], value["notifiedOf"], user])'
           updateFollowProposal:
-                access: "@=hasRole('ROLE_USER')"
+                access: "@=isAuthenticated()"
                 builder: "Relay::Mutation"
                 builderConfig:
                     inputType: UpdateFollowProposalInput
                     payloadType: UpdateFollowProposalPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateFollowProposalMutation", [value["proposalId"], value["notifiedOf"], user])'
           unfollowProposal:
-                access: "@=hasRole('ROLE_USER')"
+                access: "@=isAuthenticated()"
                 builder: "Relay::Mutation"
                 builderConfig:
                     inputType: UnfollowProposalInput
@@ -205,7 +205,7 @@ Mutation:
               payloadType: AddUsersInGroupPayload
               mutateAndGetPayload: "@=mutation('addUsersInGroup', [value['users'], value['groupId']])"
           updateProfile:
-            access: "@=hasRole('ROLE_USER')"
+            access: "@=isAuthenticated()"
             builder: "Relay::Mutation"
             builderConfig:
               inputType: UpdateProfileInput
