@@ -50,7 +50,7 @@
                 font-size: 14px;
                 width: 100%;
                 display: flex;
-                // background-color: $page-bgc;
+                background-color: $page-bgc;
                 cursor: pointer;
 
                 border: none;
@@ -65,10 +65,6 @@
                     line-height: 20px;
                     width: 100%;
                     word-wrap: break-word;
-                }
-
-                .carousel-type {
-                    // font-weight: 500;
                 }
 
                 .carousel-title {
@@ -86,7 +82,6 @@
                 }
                 
                 &.active {
-                    // background-color: #e2e3e5;
                     transition: 0.5s ease-in-out;
                 }
             }
@@ -111,7 +106,6 @@
                 position: absolute;
                 top: 0;
                 left: 0;
-                background: linear-gradient(to top, #000, rgba(0,0,0,0));
             }
         }
 
@@ -121,7 +115,6 @@
             left: 0;
             bottom: 0;
             padding: 30px;
-            // background: linear-gradient(to top, #000, rgba(0,0,0,0));
 
             p {
                 @extend .ellipsis;
@@ -204,13 +197,10 @@
 
 .carousel__mobile {
     display: flex;
-    // overflow: scroll;
     margin-bottom: 40px;
 
     .mobile__content {
         display: flex;
-        // margin: 0 15px;
-        // display: inline-block;
         flex-wrap: nowrap;
         width: 100%;
     }
@@ -220,17 +210,8 @@
     }
 
     .item {
-        // padding-right: 15px;
         padding-right: 10px;
         flex: 0 0 100%;
-
-        &:first-child {
-            // margin-left: 15px;
-        }
-
-        &:last-child {
-            // margin-right: 15px;
-        }
     }
 
     .carousel__content {
@@ -268,7 +249,6 @@
             padding: 10px 30px;
             color: $white;
             text-align: center;
-            // background: linear-gradient(to top, #000, rgba(0,0,0,0));
 
             p {
                 white-space: nowrap;

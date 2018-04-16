@@ -1,3 +1,4 @@
+// @flow
 import React, { PureComponent } from 'react';
 import { FormattedDate, FormattedMessage } from 'react-intl';
 import { DatesInterval } from '../Utils/DatesInterval';
@@ -5,74 +6,114 @@ import DarkenGradientMedia from '../Ui/DarkenGradientMedia';
 
 type Props = {
   highlighteds: Object,
-  translateX: number,
 };
 
-export class CarouselMobile extends PureComponent<Props> {
+type State = {
+  translateX: number,
+  windowWidth: number,
+};
+
+export class CarouselMobile extends PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
 
     this.state = {
       translateX: 0,
+      windowWidth: window.innerWidth,
     };
   }
 
   componentDidMount() {
-    const { highlighteds } = this.props;
     const carousel = document.querySelector('.carousel__mobile');
 
     let isDown = false;
     let startX;
 
-    carousel.addEventListener('touchstart', e => {
-      isDown = true;
-      startX = e.touches[0].pageX - carousel.offsetLeft;
-    });
+    if(carousel) {
+      // touch
+      carousel.addEventListener('touchstart', e => {
+        isDown = true;
+        startX = e.touches[0].pageX - carousel.offsetLeft;
+      });
 
-    carousel.addEventListener('touchleave', () => {
-      isDown = false;
-    });
+      // mouse
+      carousel.addEventListener('mousedown', e => {
+        isDown = true;
+        startX = e.pageX - carousel.offsetLeft;
+      });
 
-    carousel.addEventListener('touchend', () => {
-      isDown = false;
-    });
+      carousel.addEventListener('touchleave', () => {
+        isDown = false;
+      });
 
-    carousel.addEventListener('touchmove', e => {
-      const { translateX } = this.state;
-      const carouselItem = carousel.getElementsByClassName('item');
-      const carouselTotalWidth =
-        carouselItem[0].offsetWidth * // carousel item width
-          (highlighteds.length - 1) - // number of item without visible item
-        10; // remove padding for last item
+      carousel.addEventListener('mouseleave', () => {
+        isDown = false;
+      });
 
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.touches[0].pageX - carousel.offsetLeft;
-      const walk = (x - startX) / 5;
+      carousel.addEventListener('touchend', () => {
+        isDown = false;
+      });
 
-      if (walk + translateX <= 0 && walk + translateX >= -carouselTotalWidth) {
-        this.setState({
-          translateX: walk + translateX,
-        });
-      }
+      carousel.addEventListener('mouseup', () => {
+        isDown = false;
+      });
 
-      if (walk + translateX > 0) {
-        this.setState({
-          translateX: 0,
-        });
-      }
+      carousel.addEventListener('touchmove', e => {
+        const x = e.touches[0].pageX - carousel.offsetLeft;
 
-      if (walk + translateX < -carouselTotalWidth) {
-        this.setState({
-          translateX: -carouselTotalWidth,
-        });
-      }
+        this.getTranslateOnMove(x, e, isDown, startX, carousel);
+      });
+
+      carousel.addEventListener('mousemove', e => {
+        const x = e.pageX - carousel.offsetLeft;
+
+        this.getTranslateOnMove(x, e, isDown, startX, carousel);
+      });
+    }
+
+    window.addEventListener('resize', () => {
+      this.setState({
+        windowWidth: window.innerWidth,
+      });
     });
   }
 
-  render() {
+  getTranslateOnMove = (x: number, e: object, isDown: boolean, startX: number, carousel: object) => {
     const { highlighteds } = this.props;
     const { translateX } = this.state;
+
+    const carouselItem = carousel && carousel.getElementsByClassName('item');
+    const carouselTotalWidth =
+      carouselItem[0].offsetWidth * // carousel item width
+      (highlighteds.length - 1) - // number of item without visible item
+      10; // remove padding for last item
+
+    if (!isDown) return;
+    e.preventDefault();
+    const walk = (x - startX) / 5;
+
+    if (walk + translateX <= 0 && walk + translateX >= -(carouselTotalWidth)) {
+      this.setState({
+        translateX: walk + translateX,
+      });
+    }
+
+    if (walk + translateX > 0) {
+      this.setState({
+        translateX: 0,
+      });
+    }
+
+    if (walk + translateX < -(carouselTotalWidth)) {
+      this.setState({
+        translateX: -(carouselTotalWidth),
+      });
+    }
+  };
+
+  render() {
+    const { highlighteds } = this.props;
+    const { translateX, windowWidth } = this.state;
 
     const translation = `translateX(${translateX}px)`;
 
@@ -88,6 +129,9 @@ export class CarouselMobile extends PureComponent<Props> {
               itemTitle.length > maxItemLength
                 ? `${itemTitle.substring(0, maxItemLength)}...`
                 : itemTitle;
+            const hadLinearGradient = windowWidth >= 768;
+
+            console.log(highlighted[highlightedType]);
 
             const getMedia = () => {
               if (highlighted[highlightedType].media) {
@@ -95,6 +139,7 @@ export class CarouselMobile extends PureComponent<Props> {
                   <DarkenGradientMedia
                     width="100%"
                     height="100%"
+                    linearGradient={hadLinearGradient}
                     url={highlighted[highlightedType].media.url}
                     title={highlighted[highlightedType].title}
                   />
@@ -106,6 +151,7 @@ export class CarouselMobile extends PureComponent<Props> {
                   <DarkenGradientMedia
                     width="100%"
                     height="100%"
+                    linearGradient={hadLinearGradient}
                     url={highlighted[highlightedType].cover.url}
                     title={highlighted[highlightedType].title}
                   />
@@ -143,7 +189,8 @@ export class CarouselMobile extends PureComponent<Props> {
                           endAt={highlighted[highlightedType].endAt}
                         />
                       )}
-                      {highlightedType === 'project' && (
+                      {highlightedType === 'project' &&
+                      highlighted[highlightedType].startAt && (
                         <FormattedDate
                           value={highlighted[highlightedType].startAt}
                           day="numeric"

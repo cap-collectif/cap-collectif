@@ -30,7 +30,7 @@ export class CarouselContainer extends PureComponent<Props, State> {
     });
 
     if (windowWidth < 992) {
-      return <CarouselMobile highlighteds={highlighteds} />;
+      return <CarouselMobile highlighteds={highlighteds}  />;
     }
 
     return <CarouselDesktop highlighteds={highlighteds} />;

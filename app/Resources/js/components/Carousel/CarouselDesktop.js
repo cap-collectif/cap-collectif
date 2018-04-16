@@ -1,3 +1,4 @@
+// @flow
 import React, { PureComponent } from 'react';
 import { FormattedDate, FormattedMessage } from 'react-intl';
 import { DatesInterval } from '../Utils/DatesInterval';
@@ -23,13 +24,6 @@ export class CarouselDesktop extends PureComponent<Props, State> {
   componentDidMount() {
     const { highlighteds } = this.props;
 
-    // const carouselNavItem = document.getElementsByClassName('carousel-nav-item');
-
-    // const activeBg2 = document.getElementById('active-bg-item');
-    // if(activeBg2) {
-    //   activeBg2.style.height = `${carouselNavItem.style.height}px`;
-    // }
-
     $('#carousel').on('slid.bs.carousel', () => {
       const lastSlide = highlighteds.length - 1;
       const firstSlide = 0;
@@ -38,19 +32,6 @@ export class CarouselDesktop extends PureComponent<Props, State> {
       const dataOfContent = parseInt(activeContent[0].dataset.item, 10);
       const leftArrow = document.getElementById('left-arrow');
       const rightArrow = document.getElementById('right-arrow');
-
-      const indicatorsCarousel = document.getElementsByClassName('carousel-indicators');
-      const getBoundingindicatorsCarousel = indicatorsCarousel[0].getBoundingClientRect();
-      const indicatorsCarouselTop = getBoundingindicatorsCarousel.top;
-
-      const navigationCarousel = document.getElementById('carousel-navigation');
-      const activeItem = navigationCarousel.getElementsByClassName('active');
-      const getBoundingActiveItem = activeItem[0].getBoundingClientRect();
-      const activeItemTop = getBoundingActiveItem.top;
-
-      const activeBg = document.getElementById('active-bg-item');
-
-      // console.log(activeItemTop, indicatorsCarouselTop);
 
       if (dataOfContent === lastSlide) {
         rightArrow.classList.add('disabled');
@@ -68,7 +49,6 @@ export class CarouselDesktop extends PureComponent<Props, State> {
         leftArrow.classList.remove('disabled');
       }
 
-      activeBg.style.top = `${activeItemTop - indicatorsCarouselTop}px`;
     });
   }
 
@@ -103,6 +83,8 @@ export class CarouselDesktop extends PureComponent<Props, State> {
                 itemTitle.length > maxItemLength
                   ? `${itemTitle.substring(0, maxItemLength)}...`
                   : itemTitle;
+
+              console.log(highlighted[highlightedType]);
 
               return (
                 <li
