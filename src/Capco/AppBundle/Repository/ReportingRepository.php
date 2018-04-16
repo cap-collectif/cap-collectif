@@ -61,7 +61,7 @@ class ReportingRepository extends EntityRepository
         return new Paginator($qb);
     }
 
-    public function getRecentOrdered()
+    public function getRecentOrdered(): array
     {
         $qb = $this->createQueryBuilder('r')
             ->select('r, u, o, ov, s, a, i, c, p')
