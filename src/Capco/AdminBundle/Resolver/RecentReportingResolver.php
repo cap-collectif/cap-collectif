@@ -2,13 +2,13 @@
 
 namespace Capco\AdminBundle\Resolver;
 
-use Doctrine\ORM\EntityRepository;
+use Capco\AppBundle\Repository\ReportingRepository;
 
 class RecentReportingResolver
 {
     protected $reportingRepository;
 
-    public function __construct(EntityRepository $reportingRepository)
+    public function __construct(ReportingRepository $reportingRepository)
     {
         $this->reportingRepository = $reportingRepository;
     }
