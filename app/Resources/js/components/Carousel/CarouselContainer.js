@@ -6,11 +6,30 @@ type Props = {
   highlighteds: Object,
 };
 
-export class CarouselContainer extends PureComponent<Props> {
+type State = {
+  windowWidth: number,
+};
+
+export class CarouselContainer extends PureComponent<Props, State> {
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      windowWidth: window.innerWidth,
+    };
+  }
+
   getCarousel = () => {
     const { highlighteds } = this.props;
+    const { windowWidth } = this.state;
 
-    if (window.innerWidth < 992) {
+    window.addEventListener('resize', () => {
+      this.setState({
+        windowWidth: window.innerWidth,
+      });
+    });
+
+    if (windowWidth < 992) {
       return <CarouselMobile highlighteds={highlighteds} />;
     }
 

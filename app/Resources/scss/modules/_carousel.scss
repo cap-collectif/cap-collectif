@@ -204,13 +204,15 @@
 
 .carousel__mobile {
     display: flex;
-    overflow: scroll;
+    // overflow: scroll;
     margin-bottom: 40px;
 
     .mobile__content {
         display: flex;
-        margin: 0 15px;
-        width: 90%;
+        // margin: 0 15px;
+        // display: inline-block;
+        flex-wrap: nowrap;
+        width: 100%;
     }
 
     img {
@@ -219,7 +221,7 @@
 
     .item {
         // padding-right: 15px;
-        margin-right: 10px;
+        padding-right: 10px;
         flex: 0 0 100%;
 
         &:first-child {
