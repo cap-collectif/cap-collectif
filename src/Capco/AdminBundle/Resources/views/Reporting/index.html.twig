@@ -99,7 +99,7 @@
                                         </a>
                                     </td>
                                     <td class="sonata-ba-list-field sonata-ba-list-field-text">
-                                        {{ report.createdAt | format_date }}
+                                        {{ report.createdAt | date('d M. Y H:i:s') }}
                                     </td>
                                     <td class="sonata-ba-list-field sonata-ba-list-field-text">
                                         <a href="{{ path('admin_capco_app_reporting_show', {'id': report.id }) }}" class="btn btn-sm btn-default view_link" title="{{ 'link_action_show' | trans({}, 'CapcoAppBundle') }}">
