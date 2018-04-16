@@ -136,6 +136,7 @@
                         <ul class="treeview-menu{% if active %} active{% endif %}">
 
                             {% include 'CapcoAdminBundle:RecentContributions:list_items.html.twig' %}
+                            {% include 'CapcoAdminBundle:RecentReporting:list_items.html.twig' %}
 
                             {% for admin in group.items %}
                                 {% if admin.hasroute('list') and admin.isGranted('LIST') and is_admin_enabled(admin) %}
