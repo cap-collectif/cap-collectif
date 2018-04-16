@@ -1,4 +1,3 @@
-{% set steps = object.exportableSteps %}
 <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
   <i class="cap cap-download-2"></i> {{ 'project.download.button' | trans({}, 'CapcoAppBundle') }}
   <span class="caret"></span>
@@ -8,7 +7,8 @@
     <strong>{{ 'admin.fields.recent_contributions.project'|trans({}, 'CapcoAppBundle') }}</strong>
     - {{ 'event_registration.listing.title_all'|trans({}, 'CapcoAppBundle') }}
   </a></li>
-  {% for pas in steps %}
+  {% for pas in object.exportableSteps %}
+  {% if pas.step.isSelectionStep() == false %}
   <li>
       <a href="{{ path('app_project_download', {'stepSlug': pas.step.slug, 'projectSlug': object.slug}) }}" >
           <strong>{{ 'admin.label.step'| trans({}, 'CapcoAppBundle') }}
@@ -18,6 +18,7 @@
           - {{ (pas.step.isQuestionnaireStep() ? 'list-of-answers' : 'list-of-contributions')| trans({}, 'CapcoAppBundle') }}
       </a>
   </li>
+  {% endif %}
   <li>
       <a href="{{ path('app_export_step_contributors', {'stepId': pas.step.id}) }}" >
           <strong>{{ 'admin.label.step'| trans({}, 'CapcoAppBundle') }}
