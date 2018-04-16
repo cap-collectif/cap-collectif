@@ -1,5 +1,6 @@
 Capco\AppBundle\Entity\Event:
   event1:
+    id: event1
     title: Event with registrations
     isEnabled: true
     body: |
@@ -21,6 +22,7 @@ Capco\AppBundle\Entity\Event:
     projects: ['@p1']
     themes: ['@theme1', '@theme2']
   event2:
+    id: event2
     title: PHPTour2014
     isEnabled: true
     body: |
@@ -41,6 +43,7 @@ Capco\AppBundle\Entity\Event:
     projects: ['@p1']
     themes: ['@theme1', '@theme2']
   event3:
+    id: event3
     title: Event without registrations
     isEnabled: true
     body: |
@@ -57,10 +60,11 @@ Capco\AppBundle\Entity\Event:
     Author: '@user<numberBetween(1, 5)>'
     address: 457 Rue de Picardie
     city: Bordeaux
-    Media: @MediaProject3
+    Media: '@MediaProject3'
     registrationEnable: true
     projects: ['@p1']
   event4:
+    id: event4
     title: EventOnOneDay
     isEnabled: true
     body: |
@@ -76,8 +80,9 @@ Capco\AppBundle\Entity\Event:
     endAt: <dateTimeBetween('+12 days', '+30 days')>
     Author: '@user<numberBetween(1, 5)>'
     link: http://www.symfonyLive2015.fr
-    Media: @MediaIdea1
+    Media: '@MediaIdea1'
   event5:
+    id: event5
     title: ParisWeb2014
     isEnabled: true
     body: |
@@ -94,6 +99,7 @@ Capco\AppBundle\Entity\Event:
     Author: '@user<numberBetween(1, 5)>'
     link: http://www.parisweb2014.fr
   event6:
+    id: event6
     title: ParisWeb2015
     isEnabled: true
     body: |
@@ -110,6 +116,7 @@ Capco\AppBundle\Entity\Event:
     Author: '@user<numberBetween(1, 5)>'
     link: http://www.parisweb2014.fr
   event{7..10}:
+    id: 'event<current()>'
     title: <text(30)>
     isEnabled: true
     body: <text(1000)>
@@ -117,6 +124,7 @@ Capco\AppBundle\Entity\Event:
     endAt: <dateTimeBetween('+1 days', '+40 days')>
     Author: '@user<numberBetween(1, 5)>'
   event11:
+    id: event11
     title: ParisWeb2016
     isEnabled: false
     body: |
