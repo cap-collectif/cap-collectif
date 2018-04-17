@@ -4,6 +4,7 @@ import { Row } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer, type RelayRefetchProp } from 'react-relay';
 import ProposalUserVoteItem from './ProposalUserVoteItem';
+import DragAndDrop from "./DragAndDrop";
 
 type Props = {
   project: Object,
@@ -20,6 +21,8 @@ class ProposalsUserVotesPage extends React.Component<Props> {
           <h1 style={{ marginBottom: '0' }}>{<FormattedMessage id="project.votes.title" />}</h1>
         </div>
         <div className="container container--custom">
+          <DragAndDrop />
+
           {project.votableSteps.length > 0 ? (
             project.votableSteps.map((step, index) => (
               <div key={index} className="block">
