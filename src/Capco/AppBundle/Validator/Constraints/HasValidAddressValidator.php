@@ -2,19 +2,21 @@
 
 namespace Capco\AppBundle\Validator\Constraints;
 
+use Geocoder\Exception\NoResult;
 use Geocoder\Provider\GoogleMaps;
-use Ivory\HttpAdapter\CurlHttpAdapter;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 class HasValidAddressValidator extends ConstraintValidator
 {
-    private $container;
+    private $geocoder;
+    private $logger;
 
-    public function __construct(ContainerInterface $container)
+    public function __construct(GoogleMaps $geocoder, LoggerInterface $logger)
     {
-        $this->container = $container;
+        $this->geocoder = $geocoder;
+        $this->logger = $logger;
     }
 
     public function validate($object, Constraint $constraint): bool
@@ -24,14 +26,12 @@ class HasValidAddressValidator extends ConstraintValidator
             $object->setLng(null);
         }
 
-        $apiKey = $this->container->getParameter('google_maps_key_server');
-        $curl = new CurlHttpAdapter();
-        $geocoder = new GoogleMaps($curl, null, null, true, $apiKey);
-
         $address = $object->getAddress() . ', ' . $object->getZipCode() . ' ' . $object->getCity() . ', ' . $object->getCountry();
+
         try {
-            $coordinates = $geocoder->geocode($address)->first()->getCoordinates();
-        } catch (\RuntimeException $e) {
+            $coordinates = $this->geocoder->geocode($address)->first()->getCoordinates();
+        } catch (NoResult $e) {
+            $this->logger->error($e->getMessage());
             $coordinates = false;
         }
 

@@ -155,3 +155,16 @@ services:
     class: Capco\AppBundle\DataFixtures\Processor\FixedIdsProcessor
     tags: [ { name: hautelook_alice.alice.processor } ]
     arguments: ["@doctrine.orm.entity_manager"]
+
+  geocoder.google_map:
+    class: Geocoder\Provider\GoogleMaps
+    arguments:
+      - "@curl.http_adapter"
+      - ~
+      - ~
+      - true
+      - "%google_maps_key_server%"
+
+  curl.http_adapter:
+    class: Ivory\HttpAdapter\CurlHttpAdapter
+
