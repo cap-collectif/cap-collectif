@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityRepository;
 
 class QuestionnaireAbstractQuestionRepository extends EntityRepository
 {
-    public function getCurrentMaxPositionForQuestionnaire(string $id): ?int
+    public function getCurrentMaxPositionForQuestionnaire(string $id): int
     {
         $qb = $this->createQueryBuilder('n');
         $qb->select('MAX(n.position)')
@@ -17,6 +17,6 @@ class QuestionnaireAbstractQuestionRepository extends EntityRepository
         $query->useQueryCache(false);
         $query->useResultCache(false);
 
-        return $query->getSingleScalarResult();
+        return $query->getSingleScalarResult() ?: 1;
     }
 }
