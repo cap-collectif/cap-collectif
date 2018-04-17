@@ -101,8 +101,7 @@ Capco\UserBundle\Entity\User:
          - 'ROLE_USER'
         confirmationToken: ~
         phoneConfirmed: true
-        phone: '+33135492871'
-        mobilePhone: '+33613374269'
+        phone: '+33635492871'
 
     user_drupal:
         id: 'user_drupal'

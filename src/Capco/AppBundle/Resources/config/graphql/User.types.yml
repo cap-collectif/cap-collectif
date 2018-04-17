@@ -90,9 +90,6 @@ User:
             phone:
                 type: "String"
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(value, user)'
-            mobilePhone:
-                type: "String"
-                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(value, user)'
             googleId:
                 type: "String"
             facebookId:

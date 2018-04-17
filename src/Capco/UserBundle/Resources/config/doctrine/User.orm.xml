@@ -152,8 +152,6 @@
         <field name="smsConfirmationSentAt" column="phone_confirmation_sent_at" type="datetime" nullable="true" />
         <field name="phoneConfirmed" column="phone_confirmed" type="boolean" nullable="false" />
         <field name="consentExternalCommunication" column="consent_external_communication" type="boolean" nullable="false" />
-        <field name="mobilePhone" type="string" column="mobile_phone" length="64" nullable="true" />
-
     </entity>
 
 </doctrine-mapping>

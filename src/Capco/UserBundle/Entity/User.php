@@ -252,8 +252,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     private $userGroups;
 
-    private $mobilePhone;
-
     public function __construct($encoder = null)
     {
         parent::__construct();
@@ -330,9 +328,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     {
         if ($this->phone) {
             $this->phone = '+' . preg_replace('/\D/', '', $this->phone);
-        }
-        if ($this->mobilePhone) {
-            $this->mobilePhone = '+' . preg_replace('/\D/', '', $this->mobilePhone);
         }
     }
 
@@ -1359,15 +1354,5 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public static function getElasticsearchSerializationGroups(): array
     {
         return ['Elasticsearch'];
-    }
-
-    public function getMobilePhone(): ?string
-    {
-        return $this->mobilePhone;
-    }
-
-    public function setMobilePhone(?string $mobilePhone)
-    {
-        $this->mobilePhone = $mobilePhone;
     }
 }
