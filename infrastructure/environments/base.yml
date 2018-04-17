@@ -61,8 +61,9 @@ kibana:
 seleniumhub:
   build: ../services/seleniumhub
   environment:
-    GRID_TIMEOUT: 0
-    GRID_BROWSER_TIMEOUT: 100000
+    # https://github.com/SeleniumHQ/selenium/wiki/Grid2
+    GRID_TIMEOUT: 600 # (300 is default)
+    GRID_BROWSER_TIMEOUT: 300 # (60 is default)
   ports:
     - "4444:4444"
 
