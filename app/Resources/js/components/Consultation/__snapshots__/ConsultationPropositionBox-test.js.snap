@@ -21,6 +21,17 @@ exports[`<ConsultationPropositionBox /> renders correcty 1`] = `
         startAt="2014-08-14T00:00:00+0200"
       />
     </div>
+    <div
+      className="mr-15 d-ib"
+    >
+      <i
+        className="cap cap-hourglass-1"
+      />
+       
+      <RemainingTime
+        endAt="2014-09-27T00:00:00+0200"
+      />
+    </div>
   </div>
   <StepInfos
     step={
@@ -28,6 +39,7 @@ exports[`<ConsultationPropositionBox /> renders correcty 1`] = `
         "endAt": "2014-09-27T00:00:00+0200",
         "id": "stepId",
         "startAt": "2014-08-14T00:00:00+0200",
+        "status": "open",
         "timeless": false,
         "title": "stepTitle",
       }

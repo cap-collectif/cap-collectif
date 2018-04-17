@@ -310,7 +310,7 @@ export const submitAccountForm = (values: Object, dispatch: Dispatch): Promise<*
       ({
         response: { message, errors },
       }: {
-        response: { message: string, errors: Array<Object> },
+        response: { message: string, errors: { children?: ?Object } },
       }): void => {
         dispatch(stopSubmittingAccountForm());
         if (message === 'You must specify your password to update your email.') {
