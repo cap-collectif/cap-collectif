@@ -92,11 +92,17 @@ Capco\UserBundle\Entity\User:
         userType: '@UserType1'
         Media: null
         plainPassword: user
+        dateOfBirth: <(new \DateTime('1996-03-01'))>
+        address: '12 rue des boulets'
+        address2: '2ieme etages'
+        zip_code: '75012'
+        city: 'Paris'
         roles:
          - 'ROLE_USER'
         confirmationToken: ~
         phoneConfirmed: true
         phone: '+33135492871'
+        mobilePhone: '+33613374269'
 
     user_drupal:
         id: 'user_drupal'

@@ -56,14 +56,14 @@ User:
                 resolve: "@=resolver('user_gender', [value])"
             firstname:
                 type: "String"
-                access: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver", [value, user])'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(value, user)'
             lastname:
                 type: "String"
-                access: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver", [value, user])'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(value, user)'
             dateOfBirth:
                 type: "String"
                 resolve: "@=resolver('user_dateOfBirth', [value])"
-                access: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver", [value, user])'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(value, user)'
             roles:
                 type: "[String]"
                 description: "Unattended roles as array."
@@ -77,19 +77,22 @@ User:
                 type: "String"
             address:
                 type: "String"
-                access: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver", [value, user])'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(value, user)'
             address2:
                 type: "String"
-                access: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver", [value, user])'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(value, user)'
             zipCode:
                 type: "String"
-                access: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver", [value, user])'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(value, user)'
             city:
                 type: "String"
-                access: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver", [value, user])'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(value, user)'
             phone:
                 type: "String"
-                access: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver", [value, user])'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(value, user)'
+            mobilePhone:
+                type: "String"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(value, user)'
             googleId:
                 type: "String"
             facebookId:

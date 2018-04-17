@@ -16,6 +16,7 @@ Scenario: GraphQL client want to get the personal data of user authenticate as u
         zipCode
         city
         phone
+        mobilePhone
       }
     }"
   }
@@ -32,7 +33,8 @@ Scenario: GraphQL client want to get the personal data of user authenticate as u
         "address2": "2ieme etages",
         "zipCode": "75012",
         "city": "Paris",
-        "phone": "+33135492871"
+        "phone": "+33135492871",
+        "mobilePhone": "+33613374269"
       }
     }
   }
@@ -115,6 +117,7 @@ Scenario: GraphQL client want to get the personal data of user authenticate as a
             zipCode
             city
             phone
+            mobilePhone
         }
       }
     }",
@@ -135,7 +138,8 @@ Scenario: GraphQL client want to get the personal data of user authenticate as a
         "address2": "2ieme etages",
         "zipCode": "75012",
         "city": "Paris",
-        "phone": "+33135492871"
+        "phone": "+33135492871",
+        "mobilePhone": "+33613374269"
       }
     }
   }
@@ -157,6 +161,7 @@ Scenario: GraphQL client want to get the personal data of user authenticated as 
             zipCode
             city
             phone
+            mobilePhone
         }
       }
     }",
@@ -177,7 +182,8 @@ Scenario: GraphQL client want to get the personal data of user authenticated as 
         "address2": null,
         "zipCode": null,
         "city": null,
-        "phone": null
+        "phone": null,
+        "mobilePhone": null
       }
     },
     "extensions": {
