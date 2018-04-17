@@ -2,10 +2,6 @@
 
 start=$SECONDS
 
-echo "Configuring New Relic..."
-sed -i 's/newrelic.appname = "PHP Application"/newrelic.appname = '"$NR_INSTALL_NAME"'/' /etc/php/7.1/*/conf.d/newrelic.ini
-sed -i 's/newrelic.license = "REPLACE_WITH_REAL_KEY"/newrelic.license = '"$NR_INSTALL_KEY"'/' /etc/php/7.1/*/conf.d/newrelic.ini
-
 cd /var/www
 
 for directory in var/cache var/logs web/bundles web/media/default web/media/sonata_category; do
@@ -26,36 +22,31 @@ echo "Clearing cache after $(( SECONDS - start )) seconds..."
 rm -rf var/cache/prod
 
 echo "Checking if mysql is booted after $(( SECONDS - start )) seconds..."
-while ! mysql --host=127.0.0.1 > /dev/null 2>&1;
+while ! (mysqladmin ping --host=127.0.0.1)
   do sleep 0.1
 done
 echo "Mysql is ready after $(( SECONDS - start )) seconds!"
 
 echo "Warming up cache and install bundle assets after $(( SECONDS - start )) seconds..."
-su capco <<'EOF'
-php bin/console cache:warmup --no-debug --env=prod --no-interaction
-php bin/console assets:install --symlink --env=prod --no-interaction
-chmod -R 777 var
-EOF
+gosu capco php bin/console cache:warmup --no-debug --env=prod --no-interaction
+gosu capco php bin/console assets:install --symlink --env=prod --no-interaction
+gosu capco chmod -R 777 var
 echo "Cache and assets are ready after $(( SECONDS - start )) seconds..."
 
 VERSIONS=`php bin/console doctrine:migrations:status --show-versions --env=prod --no-interaction 2>&1`
 database=`echo "$VERSIONS" | grep -o "Unknown database" | wc -l`
 if [ "$database" != "0" ]; then
     echo "Creating a new database with production data..."
-    su capco <<'EOF'
-php bin/console doctrine:database:create --env=prod --no-interaction
-php bin/console doctrine:schema:create --env=prod --no-interaction
-php bin/console doctrine:migrations:version --add --all --env=prod --no-interaction
-php bin/console capco:load-prod-data --force --env=prod --no-interaction
-EOF
+    gosu capco php bin/console doctrine:database:create --env=prod --no-interaction
+    gosu capco php bin/console doctrine:schema:create --env=prod --no-interaction
+    gosu capco php bin/console doctrine:migrations:version --add --all --env=prod --no-interaction
+    gosu capco php bin/console capco:load-prod-data --force --env=prod --no-interaction
 else
   migrations=`echo "$VERSIONS" | grep -o "not migrated" | wc -l`
   if [ "$migrations" == "0" ]; then
       echo "No migrations to execute."
   else
-    echo "Migrating an existing database..."
-    su capco -c "php -d memory_limit=-1 bin/console doctrine:migrations:migrate --env=prod --no-interaction"
+    gosu capco php -d memory_limit=-1 bin/console doctrine:migrations:migrate --env=prod --no-interaction
     if [ $? -eq 1 ]; then
       echo "Database migration failed... Exiting" >&2
       exit 1
@@ -74,14 +65,11 @@ while ! curl http://127.0.0.1:6379 > /dev/null 2>&1;
   echo "Waiting for redis to boot..."
 done
 
-echo "Clearing doctrine cache..."
-su capco <<'EOF'
-php bin/console doctrine:cache:clear-query --env=prod --no-interaction
-php bin/console doctrine:cache:clear-result --env=prod --no-interaction
-EOF
-
 echo "Updating rabbitmq vhost to match schema..."
-su capco -c "php bin/rabbit vhost:mapping:create --password=guest app/config/rabbitmq.yml"
+gosu capco php bin/rabbit vhost:mapping:create --password=guest app/config/rabbitmq.yml
+
+# Because of SF 2.8 and our GraphQLBundle's fork we rewarm cache
+gosu capco php bin/console cache:warmup --no-debug --env=prod --no-interaction
 
 echo "Starting daemon to populate elasticsearch..."
 /etc/service/php-fpm/populate_elasticsearch_index &

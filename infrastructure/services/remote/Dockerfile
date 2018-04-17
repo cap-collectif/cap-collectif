@@ -1,18 +1,21 @@
-FROM debian:jessie
+FROM node:8-slim AS node
 
-MAINTAINER Aurélien David <adavid@jolicode.com>
+FROM debian:jessie AS base
 
-RUN sed -i 's/httpredir.debian.org/debian.mirrors.ovh.net/g' /etc/apt/sources.list
+LABEL maintainer "Cap collectif <tech@cap-collectif.com>"
 
 # Install basic
-RUN apt-get update && \
-    apt-get install -y -qq --fix-missing \
+RUN set -x \
+    && DEBIAN_FRONTEND=noninteractive apt-get update && \
+    apt-get install -y -qq --fix-missing --no-install-recommends \
         adduser \
+        ca-certificates \
         apt-transport-https \
         build-essential \
         bzip2 \
         cron \
         curl \
+        git \
         imagemagick \
         libmagickwand-dev \
         locales \
@@ -21,6 +24,7 @@ RUN apt-get update && \
         wget \
         libicu-dev \
         sqlite \
+        software-properties-common \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -28,7 +32,7 @@ RUN apt-get update && \
 # Install php7
 RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
     echo "deb https://packages.sury.org/php/ jessie main" > /etc/apt/sources.list.d/php.list && \
-    apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get install -y -qq \
         php7.1-apcu \
         php7.1-apc \
@@ -50,45 +54,43 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
         php7.1-xml \
         php7.1-xsl \
         php7.1-zip \
+        php-amqp \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Install nodejs and deps for npm install
-ENV NPM_CONFIG_LOGLEVEL warn
-ENV NODE_VERSION 6.11.0
-RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
-  && tar -xJf "node-v$NODE_VERSION-linux-x64.tar.xz" -C /usr/local --strip-components=1 \
-  && rm "node-v$NODE_VERSION-linux-x64.tar.xz" \
-  && ln -s /usr/local/bin/node /usr/local/bin/nodejs
+# Install gosu binary (needs wget and ca-certificates).
+ENV GOSU_VERSION 1.9
+RUN set -x \
+    && dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
+    && wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch" \
+    && wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch.asc" \
+    && export GNUPGHOME="$(mktemp -d)" \
+    && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
+    && gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
+    && rm -r "$GNUPGHOME" /usr/local/bin/gosu.asc \
+    && chmod +x /usr/local/bin/gosu \
+    && gosu nobody true
 
-# Install rabbitmq lib and php-amqp
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y php-amqp && \
-    apt-get clean all
+# Install fake user 1000
+RUN addgroup --gid=1000 capco && \
+    adduser --system --uid=1000 --home /home/capco --shell /bin/bash capco
 
-# Install mariadb
-RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 199369E5404BD5FC7D2FE43BCBCB082A1BB943DB && \
-    apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 430BDF5C56E7C94E848EE60C1C4CBDCDCD2EFD2A && \
-    apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 4D1BB29D63D98E422B2113B19334A25F8507EFA5 && \
-    echo "deb http://ftp.osuosl.org/pub/mariadb/repo/10.1/debian jessie main" >> /etc/apt/sources.list \
-    && { \
-		    echo 'Package: *'; \
-		    echo 'Pin: release o=MariaDB'; \
-		    echo 'Pin-Priority: 999'; \
-	  } > /etc/apt/preferences.d/mariadb && \
-    apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get -y install \
-        mariadb-server=10.1.32+maria-1~jessie \
-        mariadb-client=10.1.32+maria-1~jessie \
-    && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+# Install composer
+RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
+    && curl -o /tmp/composer-setup.sig https://composer.github.io/installer.sig \
+    && php -r "if (hash('SHA384', file_get_contents('/tmp/composer-setup.php')) !== trim(file_get_contents('/tmp/composer-setup.sig'))) { unlink('/tmp/composer-setup.php'); echo 'Invalid installer' . PHP_EOL; exit(1); }" \
+    && php /tmp/composer-setup.php --no-ansi --install-dir=/usr/local/bin --filename=composer --snapshot \
+    && rm -f /tmp/composer-setup.*
+
+# Parallel composer install
+RUN gosu capco composer global require "hirak/prestissimo:^0.3" --prefer-dist --no-progress --no-suggest --classmap-authoritative
 
 # Install nginx
-RUN apt-get update && \
-    apt-get install -y -qq \
+RUN wget -O- https://nginx.org/keys/nginx_signing.key | apt-key add - && \
+    echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" > /etc/apt/sources.list.d/nginx.list && \
+    apt-get update && \
+    apt-get install -y -qq --no-install-recommends \
         nginx \
     && \
     apt-get clean && \
@@ -99,7 +101,7 @@ RUN echo "deb http://packages.dotdeb.org jessie all" > /etc/apt/sources.list.d/d
     echo "deb-src http://packages.dotdeb.org jessie all" >> /etc/apt/sources.list.d/dotdeb.list && \
     wget http://www.dotdeb.org/dotdeb.gpg -O- -q | apt-key add - && \
     apt-get update && \
-    apt-get install -y -qq \
+    apt-get install -y -qq --no-install-recommends \
         redis-server \
     && \
     apt-get clean && \
@@ -128,71 +130,112 @@ RUN /etc/elasticsearch/bin/elasticsearch-plugin install --batch analysis-icu
 RUN echo 'deb http://www.rabbitmq.com/debian/ testing main' >> /etc/apt/sources.list.d/rabbitmq.list && \
     wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc | apt-key add - && \
     apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y rabbitmq-server && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y rabbitmq-server --no-install-recommends && \
     rm -rf /var/lib/apt/lists/* && \
     rabbitmq-plugins enable rabbitmq_management
 
-# Install New Relic Agent
-RUN echo "deb http://apt.newrelic.com/debian/ newrelic non-free" >> /etc/apt/sources.list.d/newrelic.list && \
-    wget -O - https://download.newrelic.com/548C16BF.gpg | apt-key add - && \
-    apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y newrelic-php5 && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/apt/sources.list.d/* && \
-    newrelic-install install
+# Install mariadb
+RUN set -x \
+    && apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db \
+    && add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://mariadb.mirrors.ovh.net/MariaDB/repo/10.1/debian jessie main' \
+    && apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install mariadb-server -y -qq \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install varnish
 RUN apt-get update && \
-    apt-get install -y varnish && \
+    apt-get install -y varnish --no-install-recommends && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install Supervisor
 RUN apt-get update && \
-    apt-get install -y supervisor && \
+    apt-get install -y supervisor --no-install-recommends && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# Install fake user 1000
-RUN addgroup --gid=1000 capco && \
-    adduser --system --uid=1000 --home /home/capco --shell /bin/bash capco
 
 # Move mysql elsewhere because /var/lib/mysql will be a volume after build (see mysql/run)
 RUN mv /var/lib/mysql /var/lib/mysql_save
 
 # Service
-COPY mysql/run                  /etc/service/mysql/run
-COPY nginx/run                  /etc/service/nginx/run
-COPY php-fpm/run                /etc/service/php-fpm/run
-COPY redis/run                  /etc/service/redis/run
-COPY cron/run                   /etc/service/cron/run
-COPY elasticsearch/run          /etc/service/elasticsearch/run
-COPY varnish/run                /etc/service/varnish/run
-COPY rabbitmq/run               /etc/service/rabbitmq/run
-COPY nodejs/run                 /etc/service/nodejs/run
-COPY supervisord/run            /etc/service/supervisord/run
+COPY infrastructure/services/remote/mysql/run                  /etc/service/mysql/run
+COPY infrastructure/services/remote/nginx/run                  /etc/service/nginx/run
+COPY infrastructure/services/remote/redis/run                  /etc/service/redis/run
+COPY infrastructure/services/remote/cron/run                   /etc/service/cron/run
+COPY infrastructure/services/remote/elasticsearch/run          /etc/service/elasticsearch/run
+COPY infrastructure/services/remote/varnish/run                /etc/service/varnish/run
+COPY infrastructure/services/remote/rabbitmq/run               /etc/service/rabbitmq/run
+COPY infrastructure/services/remote/nodejs/run                 /etc/service/nodejs/run
+COPY infrastructure/services/remote/supervisord/run            /etc/service/supervisord/run
+COPY infrastructure/services/remote/php-fpm/run                /etc/service/php-fpm/run
 
 # Configuration
-COPY mysql/capco.cnf                /etc/mysql/conf.d/capco.cnf
-COPY nginx/nginx.conf               /etc/nginx/nginx.conf
-COPY php-fpm/fpm.conf               /etc/service/php-fpm/fpm.conf
-COPY php-fpm/capco.ini              /etc/php/7.1/fpm/conf.d/capco.ini
-COPY php-fpm/capco.ini              /etc/php/7.1/cli/conf.d/capco.ini
-COPY cron/crontab                   /etc/cron.d/crontab
-COPY elasticsearch/capco.yml        /etc/elasticsearch/config/elasticsearch.yml
-COPY varnish/capco.vcl              /etc/varnish/capco.vcl
-COPY rabbitmq/rabbitmq.config       /etc/rabbitmq/rabbitmq.config
-COPY logrotate/mysql-slow-logs      /etc/logrotate.d/mysql-slow-logs
-COPY supervisord/                   /etc/supervisord
+COPY infrastructure/services/remote/mysql/capco.cnf                /etc/mysql/conf.d/capco.cnf
+COPY infrastructure/services/remote/nginx/nginx.conf               /etc/nginx/nginx.conf
+COPY infrastructure/services/remote/php-fpm/capco.ini              /etc/php/7.1/fpm/conf.d/capco.ini
+COPY infrastructure/services/remote/php-fpm/capco.ini              /etc/php/7.1/cli/conf.d/capco.ini
+COPY infrastructure/services/remote/php-fpm/fpm.conf               /etc/service/php-fpm/fpm.conf
+COPY infrastructure/services/remote/cron/crontab                   /etc/cron.d/crontab
+COPY infrastructure/services/remote/elasticsearch/capco.yml        /etc/elasticsearch/config/elasticsearch.yml
+COPY infrastructure/services/remote/varnish/capco.vcl              /etc/varnish/capco.vcl
+COPY infrastructure/services/remote/rabbitmq/rabbitmq.config       /etc/rabbitmq/rabbitmq.config
+COPY infrastructure/services/remote/logrotate/mysql-slow-logs      /etc/logrotate.d/mysql-slow-logs
+COPY infrastructure/services/remote/supervisord/                   /etc/supervisord
 
 # Binaries
-COPY rabbitmq/rabbitmqadmin     /usr/local/bin/rabbitmqadmin
+COPY infrastructure/services/remote/rabbitmq/rabbitmqadmin     /usr/local/bin/rabbitmqadmin
 
 # Daemons
-COPY php-fpm/populate_elasticsearch_index /etc/service/php-fpm/populate_elasticsearch_index
+COPY infrastructure/services/remote/php-fpm/populate_elasticsearch_index /etc/service/php-fpm/populate_elasticsearch_index
 
+ENV SYMFONY_ENVIRONMENT prod
+ENV SYMFONY_DEBUG false
+
+# Create Working dir with good rights
+RUN mkdir -p /var/www \
+    && chown capco:capco /var/www \
+    && find /etc/service/ -name "run" -exec chmod +x {} \;
+    
 WORKDIR /var/www
-USER root
 
-# Default command
+# NodeJS and Yarn
+COPY --from=node /usr/local/bin/node /usr/local/bin/node
+COPY --from=node /usr/local/include/node /usr/local/include/node
+COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
+COPY --from=node /opt/yarn-v1.5.1 /opt/yarn
+RUN ln -s /usr/local/bin/node /usr/local/bin/nodejs && \
+    ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm && \
+    ln -s /opt/yarn/bin/yarn /usr/local/bin/yarn
+
+# Download PHP dependencies
+COPY composer.json composer.lock /var/www/
+RUN gosu capco composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader --ignore-platform-reqs --no-progress
+
+# Then add source code, build autoloader and initialize Symfony (including creating bootstrap.php.cache).
+COPY . /var/www
+RUN chown -R capco:capco . \
+    && mkdir -p var/cache/prod \
+    && chown -R capco:capco var \
+    && chmod -R 777 var \
+    && gosu capco composer dump-autoload --no-dev --optimize \
+    && gosu capco php vendor/sensio/distribution-bundle/Resources/bin/build_bootstrap.php var \
+    && rm -rf vendor/simplesamlphp/simplesamlphp/config/* \
+    && rm -rf vendor/simplesamlphp/simplesamlphp/metadata/* \
+    && rm -rf vendor/simplesamlphp/simplesamlphp/cert \
+    && cp -r app/config/simplesamlphp /var/www/vendor/simplesamlphp \
+    && gosu capco php -d memory_limit=-1 bin/console cache:warmup --env=$SYMFONY_ENVIRONMENT --no-interaction \
+    && gosu capco php bin/console assets:install --symlink --env=${SYMFONY_ENVIRONMENT} --no-interaction
+
+# Build JS
+RUN yarn global add bower@1.8.0 babel-cli \
+    && gosu capco yarn install --pure-lockfile \
+    && gosu capco bower install --config.interactive=false \
+    && gosu capco npm rebuild node-sass > /dev/null \
+    && gosu capco php bin/console translation:download --env=prod \
+    && gosu capco yarn run update-js-translation \
+    && gosu capco yarn run build:prod \
+    && gosu capco yarn run build-server-bundle:prod \
+    && rm -rf node_modules bower_components
+
 CMD ["/usr/bin/runsvdir", "-P", "/etc/service"]

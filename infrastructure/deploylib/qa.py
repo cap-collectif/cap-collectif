@@ -13,32 +13,32 @@ capcobot = {
 @task(environments=['local', 'ci'])
 def check_dependencies():
     "Check dependencies"
-    env.compose_run('composer validate', 'builder', '.', no_deps=True)
+    env.compose_run('composer validate', 'qarunner', '.', no_deps=True)
     env.service_command('bin/console security:check', 'application', env.www_app)
 
 
 @task(environments=['local', 'ci'])
 def check_codestyle():
     "Check code style"
-    env.compose_run('yarn run checkcs', 'builder', '.', no_deps=True)
-    env.compose_run('pycodestyle infrastructure/deploylib --ignore=E501', 'builder', '.', no_deps=True)
+    env.compose_run('yarn run checkcs', 'qarunner', '.', no_deps=True)
+    env.compose_run('pycodestyle infrastructure/deploylib --ignore=E501', 'qarunner', '.', no_deps=True)
     env.service_command('php bin/console lint:twig app src', 'application', env.www_app)
-    env.compose_run('php-cs-fixer fix --config=.php_cs -v --dry-run --stop-on-violation', 'builder', '.', no_deps=True)
+    env.compose_run('php-cs-fixer fix --config=.php_cs -v --dry-run --stop-on-violation', 'qarunner', '.', no_deps=True)
 
 
 @task(environments=['local'])
 def lint():
     "Lint all files"
-    env.compose_run('yarn run lint', 'builder', '.', no_deps=True)
-    env.compose_run('php-cs-fixer fix --config=.php_cs -v || echo true', 'builder', '.', no_deps=True)
-    env.compose_run('pycodestyle infrastructure/deploylib --ignore=E501', 'builder', '.', no_deps=True)
+    env.compose_run('yarn run lint', 'qarunner', '.', no_deps=True)
+    env.compose_run('php-cs-fixer fix --config=.php_cs -v || echo true', 'qarunner', '.', no_deps=True)
+    env.compose_run('pycodestyle infrastructure/deploylib --ignore=E501', 'qarunner', '.', no_deps=True)
 
 
 @task(environments=['local', 'ci'])
 def static_analysis():
     "Run static analysis tools"
-    env.compose_run('yarn run typecheck', 'builder', '.', no_deps=True)
-    env.compose_run('yarn run typecheck:coverage', 'builder', '.', no_deps=True)
+    env.compose_run('yarn run typecheck', 'qarunner', '.', no_deps=True)
+    env.compose_run('yarn run typecheck:coverage', 'qarunner', '.', no_deps=True)
     env.service_command('php -d memory_limit=-1 bin/phpstan analyse src -l 2 -c phpstan.neon', 'application', env.www_app)
 
 
@@ -51,13 +51,13 @@ def phpspec():
 @task(environments=['local', 'ci'])
 def jest():
     "Run JS Unit Tests"
-    env.compose('run -e CI=true builder yarn test:ci')
+    env.compose('run -e CI=true qarunner yarn test:ci')
 
 
 @task(environments=['ci'])
 def perf():
     "Run perf Tests"
-    env.compose('run -e CI=true -e CIRCLECI -e CIRCLE_PROJECT_USERNAME -e CIRCLE_PROJECT_REPONAME -e CIRCLE_SHA1 -e CIRCLE_BRANCH builder yarn run bundlesize')
+    env.compose('run -e CI=true -e CIRCLECI -e CIRCLE_PROJECT_USERNAME -e CIRCLE_PROJECT_REPONAME -e CIRCLE_SHA1 -e CIRCLE_BRANCH qarunner yarn run bundlesize')
 
 
 @task(environments=['local', 'ci'])

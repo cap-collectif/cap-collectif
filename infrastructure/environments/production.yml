@@ -1,10 +1,6 @@
-# Only the builder is used by the platform
 # The real docker-compose file is auto-generated, see (https://github.com/jolicode/CapCollectif-DeploymentTools/blob/master/api/app/Resources/views/docker-compose.yml.twig)
 
-builder:
-    build: ../services/builder
+application:
+    build: ../services/remote
     volumes:
         - ../../:/var/www
-        - ~/.composer:/home/capco/.composer
-        - ~/.cache/yarn:/home/capco/.cache/yarn
-    command: echo "Use 'docker-compose run builder build' to build deps"

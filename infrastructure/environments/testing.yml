@@ -11,8 +11,6 @@ application:
         - /etc/localtime:/etc/localtime:ro
 
 builder:
-    environment:
-      BUNDLESIZE_GITHUB_TOKEN: feca92cec5b5d9f99cdfae51b7ebd086ead41e48
     build: ../services/builder
     volumes:
         - ../../:/var/www
@@ -20,3 +18,10 @@ builder:
         - ~/.cache/yarn:/home/capco/.cache/yarn
         - ~/.cache/bower:/home/capco/.cache/bower
     command: echo "Use 'docker-compose run builder build' to build deps"
+
+qarunner:
+  build: ../services/qa-runner
+  environment:
+    BUNDLESIZE_GITHUB_TOKEN: feca92cec5b5d9f99cdfae51b7ebd086ead41e48
+  volumes:
+    - ../../:/var/www

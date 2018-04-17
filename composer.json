@@ -144,7 +144,6 @@
         "alexandresalome/mailcatcher": "dev-master#e5bff236a6560d5314ea9bba32bcea6e3588b40d",
         "lookyman/phpstan-symfony": "^0.4.1"
     },
-    "scripts": {},
     "config": {
         "bin-dir": "bin",
         "github-oauth": {"github.com": "***REMOVED***"}
