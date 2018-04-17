@@ -12,7 +12,7 @@ import UserAvatar from "../UserAvatar";
 import UserLink from "../UserLink";
 import CardUser from '../../Ui/Card/CardUser';
 import ChangePasswordForm from "./ChangePasswordForm";
-import {PersonalData} from "./PersonalData";
+import PersonalData from "./PersonalData";
 
 type Props = {
     features: FeatureToggles,

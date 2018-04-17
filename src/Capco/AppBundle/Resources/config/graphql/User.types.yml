@@ -56,12 +56,14 @@ User:
                 resolve: "@=resolver('user_gender', [value])"
             firstname:
                 type: "String"
-                access: "@=hasRole('ROLE_ADMIN') or hasRole('ROLE_USER') && getUser"
+                access: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver", [value, user])'
             lastname:
                 type: "String"
+                access: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver", [value, user])'
             dateOfBirth:
                 type: "String"
                 resolve: "@=resolver('user_dateOfBirth', [value])"
+                access: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver", [value, user])'
             roles:
                 type: "[String]"
                 description: "Unattended roles as array."
@@ -75,14 +77,19 @@ User:
                 type: "String"
             address:
                 type: "String"
+                access: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver", [value, user])'
             address2:
                 type: "String"
+                access: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver", [value, user])'
             zipCode:
                 type: "String"
+                access: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver", [value, user])'
             city:
                 type: "String"
+                access: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver", [value, user])'
             phone:
                 type: "String"
+                access: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver", [value, user])'
             googleId:
                 type: "String"
             facebookId:

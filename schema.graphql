@@ -2125,6 +2125,7 @@ type User implements Node {
   zipCode: String
   city: String
   phone: String
+  mobilePhone: String
   googleId: String
   facebookId: String
   samlId: String
