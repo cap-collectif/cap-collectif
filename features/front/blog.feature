@@ -8,7 +8,7 @@ Scenario: Anonymous wants to list published posts
   And I visited "blog page"
   Then I should see 10 ".media--news" elements
 
-@javascript @elasticsearch
+@javascript
 Scenario: Posts can be filtered by projects
   And I visited "blog page"
   And I select "Croissance, innovation, disruption" from "post_search_project"
@@ -16,7 +16,7 @@ Scenario: Posts can be filtered by projects
   And I should see "Post 5"
   And I should not see "Post 8"
 
-@javascript @elasticsearch
+@javascript
 Scenario: Post can be filtered by theme
   And feature "themes" is enabled
   And I visited "blog page"
