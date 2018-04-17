@@ -1,7 +1,6 @@
 // @flow
 import { takeEvery, call, put } from 'redux-saga/effects';
 import type { IOEffect } from 'redux-saga/effects';
-// $FlowFixMe
 import { find, findLast } from 'lodash';
 import Fetcher from '../../services/Fetcher';
 import type { Exact, Action } from '../../types';
