@@ -5,7 +5,7 @@ import { DatesInterval } from '../Utils/DatesInterval';
 import DarkenGradientMedia from '../Ui/DarkenGradientMedia';
 
 type Props = {
-  highlighteds: Object,
+  highlighteds: Array<Object>,
 };
 
 type State = {
@@ -29,15 +29,17 @@ export class CarouselMobile extends PureComponent<Props, State> {
     let isDown = false;
     let startX;
 
-    if(carousel) {
+    if (carousel) {
       // touch
-      carousel.addEventListener('touchstart', e => {
+      carousel.addEventListener('touchstart', (e: TouchEvent) => {
         isDown = true;
-        startX = e.touches[0].pageX - carousel.offsetLeft;
+        // $FlowFixMe
+        const touchPosition = e.touches && e.touches[0].pageX;
+        startX = touchPosition - carousel.offsetLeft;
       });
 
       // mouse
-      carousel.addEventListener('mousedown', e => {
+      carousel.addEventListener('mousedown', (e: MouseEvent) => {
         isDown = true;
         startX = e.pageX - carousel.offsetLeft;
       });
@@ -58,13 +60,14 @@ export class CarouselMobile extends PureComponent<Props, State> {
         isDown = false;
       });
 
-      carousel.addEventListener('touchmove', e => {
+      carousel.addEventListener('touchmove', (e: TouchEvent) => {
+        // $FlowFixMe
         const x = e.touches[0].pageX - carousel.offsetLeft;
 
         this.getTranslateOnMove(x, e, isDown, startX, carousel);
       });
 
-      carousel.addEventListener('mousemove', e => {
+      carousel.addEventListener('mousemove', (e: MouseEvent) => {
         const x = e.pageX - carousel.offsetLeft;
 
         this.getTranslateOnMove(x, e, isDown, startX, carousel);
@@ -78,21 +81,21 @@ export class CarouselMobile extends PureComponent<Props, State> {
     });
   }
 
-  getTranslateOnMove = (x: number, e: object, isDown: boolean, startX: number, carousel: object) => {
+  getTranslateOnMove = (x: number, e: Event, isDown: boolean, startX: number, carousel: Object) => {
     const { highlighteds } = this.props;
     const { translateX } = this.state;
 
     const carouselItem = carousel && carousel.getElementsByClassName('item');
     const carouselTotalWidth =
       carouselItem[0].offsetWidth * // carousel item width
-      (highlighteds.length - 1) - // number of item without visible item
+        (highlighteds.length - 1) - // number of item without visible item
       10; // remove padding for last item
 
     if (!isDown) return;
     e.preventDefault();
     const walk = (x - startX) / 5;
 
-    if (walk + translateX <= 0 && walk + translateX >= -(carouselTotalWidth)) {
+    if (walk + translateX <= 0 && walk + translateX >= -carouselTotalWidth) {
       this.setState({
         translateX: walk + translateX,
       });
@@ -104,9 +107,9 @@ export class CarouselMobile extends PureComponent<Props, State> {
       });
     }
 
-    if (walk + translateX < -(carouselTotalWidth)) {
+    if (walk + translateX < -carouselTotalWidth) {
       this.setState({
-        translateX: -(carouselTotalWidth),
+        translateX: -carouselTotalWidth,
       });
     }
   };
@@ -119,7 +122,7 @@ export class CarouselMobile extends PureComponent<Props, State> {
 
     return (
       <div className="carousel__mobile">
-        <div className="mobile__content" style={{ transform: translation }}>
+        <div className="mobile__content" id="mobile-content" style={{ transform: translation }}>
           {highlighteds.map((highlighted, index) => {
             const highlightedType = highlighted.object_type;
 
@@ -131,7 +134,7 @@ export class CarouselMobile extends PureComponent<Props, State> {
                 : itemTitle;
             const hadLinearGradient = windowWidth >= 768;
 
-            console.log(highlighted[highlightedType]);
+            // console.log(highlighted[highlightedType]);
 
             const getMedia = () => {
               if (highlighted[highlightedType].media) {
@@ -168,12 +171,12 @@ export class CarouselMobile extends PureComponent<Props, State> {
                 </div>
                 <div className="carousel__content">
                   <p>
-                    <span className="carousel-type">
+                    <span className="carousel__type">
                       <FormattedMessage id={`type-${highlighted.object_type}`} />
                     </span>
                     <br />
                     <a
-                      className="carousel-title"
+                      className="carousel__title"
                       href={
                         highlighted[highlightedType]._links
                           ? highlighted[highlightedType]._links.show
@@ -182,38 +185,42 @@ export class CarouselMobile extends PureComponent<Props, State> {
                       {trimmedString}
                     </a>
                     <br />
-                    <span className="carousel-date">
-                      {highlightedType === 'event' && (
-                        <DatesInterval
-                          startAt={highlighted[highlightedType].startAt}
-                          endAt={highlighted[highlightedType].endAt}
-                        />
-                      )}
+                    <span className="carousel__date">
+                      {highlightedType === 'event' &&
+                        highlighted[highlightedType].startAt &&
+                        highlighted[highlightedType].endAt && (
+                          <DatesInterval
+                            startAt={highlighted[highlightedType].startAt}
+                            endAt={highlighted[highlightedType].endAt}
+                          />
+                        )}
                       {highlightedType === 'project' &&
-                      highlighted[highlightedType].startAt && (
-                        <FormattedDate
-                          value={highlighted[highlightedType].startAt}
-                          day="numeric"
-                          month="long"
-                          year="numeric"
-                        />
-                      )}
-                      {highlightedType === 'idea' && (
-                        <FormattedDate
-                          value={highlighted[highlightedType].createdAt}
-                          day="numeric"
-                          month="long"
-                          year="numeric"
-                        />
-                      )}
-                      {highlightedType === 'post' && (
-                        <FormattedDate
-                          value={highlighted[highlightedType].publishedAt}
-                          day="numeric"
-                          month="long"
-                          year="numeric"
-                        />
-                      )}
+                        highlighted[highlightedType].startAt && (
+                          <FormattedDate
+                            value={highlighted[highlightedType].startAt}
+                            day="numeric"
+                            month="long"
+                            year="numeric"
+                          />
+                        )}
+                      {highlightedType === 'idea' &&
+                        highlighted[highlightedType].createdAt && (
+                          <FormattedDate
+                            value={highlighted[highlightedType].createdAt}
+                            day="numeric"
+                            month="long"
+                            year="numeric"
+                          />
+                        )}
+                      {highlightedType === 'post' &&
+                        highlighted[highlightedType].publishedAt && (
+                          <FormattedDate
+                            value={highlighted[highlightedType].publishedAt}
+                            day="numeric"
+                            month="long"
+                            year="numeric"
+                          />
+                        )}
                     </span>
                   </p>
                 </div>

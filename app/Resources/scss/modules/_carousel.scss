@@ -6,21 +6,26 @@
     padding-bottom: 0;
 }
 
+/* =====
+  Desktop
+==== */
+
 .carousel__desktop {
     display: flex;
     margin: 30px 0 45px;
 
-    .carousel__navigation {
-        width: 25%;
-        display: flex;
+    .carousel {
+        &__navigation {
+            width: 25%;
+            display: flex;
+        }
 
-        .carousel-indicators {
+        &-indicators {
             position: relative;
             padding: 0;
             margin: 0;
             display: flex;
             flex-direction: column;
-
             width: 100%;
             bottom: inherit;
             left: inherit;
@@ -32,17 +37,6 @@
                 background-color: transparent;
             }
 
-            #active-bg-item {
-                background-color: red;
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 30px;
-                z-index: 1;
-                transition: 0.2s ease-in;
-            }
-
             li {
                 padding-left: 25px;
                 padding-right: 25px;
@@ -52,7 +46,6 @@
                 display: flex;
                 background-color: $page-bgc;
                 cursor: pointer;
-
                 border: none;
                 border-radius: 0;
                 text-align: left;
@@ -60,56 +53,47 @@
                 height: auto;
                 margin: 0;
 
+                &:hover {
+                    background-color: $border-color;
+                }
+
+                &.active {
+                    transition: 0.5s ease-in-out;
+                }
+
                 p {
                     align-self: center;
                     line-height: 20px;
                     width: 100%;
                     word-wrap: break-word;
                 }
+            }
 
-                .carousel-title {
-                    font-size: 16px;
-                    font-weight: 500;
-                }
+            .carousel__title {
+                font-size: 16px;
+                font-weight: 500;
+            }
 
-                .carousel-date {
-                    font-weight: 300;
-                    font-style: italic;
-                }
-
-                &:hover {
-                    background-color: $border-color;
-                }
-                
-                &.active {
-                    transition: 0.5s ease-in-out;
-                }
+            .carousel__date {
+                font-weight: 300;
+                font-style: italic;
             }
         }
 
-    }
+        &__content {
+            width: 75%;
+            height: 100%;
+        }
 
-    .carousel__content {
-        width: 75%;
-        height: 100%;
-
-        .carousel-inner {
+        &-inner {
             height: 100%;
 
             .item {
                 height: 100%;
             }
-
-            .carousel__media_darken {
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                top: 0;
-                left: 0;
-            }
         }
 
-        .carousel-caption {
+        &-caption {
             width: 100%;
             margin: 0;
             left: 0;
@@ -120,25 +104,25 @@
                 @extend .ellipsis;
             }
 
-            .carousel-type {
+            .carousel__type {
                 font-size: 17px;
             }
 
-            .carousel-title {
+            .carousel__title {
                 color: $white;
                 font-weight: 500;
                 font-size: 24px;
                 line-height: 45px;
             }
 
-            .carousel-date {
+            .carousel__date {
                 font-size: 16px;
                 font-style: italic;
                 font-weight: 300;
             }
         }
 
-        .carousel-control {
+        &-control {
             opacity: 1;
 
             &.left, &.right {
@@ -164,14 +148,14 @@
             }
         }
     }
-}
 
-@media (max-width: $screen-md-max) {
-    .carousel__desktop {
-        .carousel__navigation {
-            width: 30%;
+    @media (max-width: $screen-md-max) {
+        .carousel {
+            &__navigation {
+                width: 30%;
+            }
 
-            .carousel-indicators li {
+            &-indicators li {
                 padding-left: 20px;
                 padding-right: 20px;
 
@@ -179,21 +163,25 @@
                     line-height: 19px;
                 }
 
-                .carousel-type, .carousel-date {
+                .carousel__type, .carousel__date {
                     font-weight: 400;
                 }
 
-                .carousel-title {
+                .carousel__title {
                     font-size: 15px;
                 }
             }
-        }
 
-        .carousel__content {
-            width: 70%;
+            &__content {
+                width: 70%;
+            }
         }
     }
 }
+
+/* =====
+  Mobile
+==== */
 
 .carousel__mobile {
     display: flex;
@@ -214,62 +202,64 @@
         flex: 0 0 100%;
     }
 
-    .carousel__content {
-        color: #333333;
-        padding: 10px 0;
+    .carousel {
+        &__content {
+            color: $dark-text;
+            padding: 10px 0;
+        }
 
-        .carousel-type {
+        &__type {
             font-size: 14px;
             color: $dark-gray;
         }
 
-        .carousel-title {
-            color: #333333;
+        &__title {
+            color: $dark-text;
             font-weight: 500;
         }
 
-        .carousel-date {
+        &__date {
             font-style: italic;
             font-size: 14px;
         }
     }
-}
 
-@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
-    .carousel__mobile {
+    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
         .item {
             position: relative;
         }
 
-        .carousel__content {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 10px 30px;
-            color: $white;
-            text-align: center;
+        .carousel {
+            &__content {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                padding: 10px 30px;
+                color: $white;
+                text-align: center;
 
-            p {
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
+                p {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
             }
 
-            .carousel-type, .carousel-date {
+            &__type, &__date {
                 font-size: 16px;
             }
 
-            .carousel-type {
+            &__type {
                 color: $white;
             }
 
-            .carousel-title {
+            &__title {
                 color: $white;
                 font-size: 23px;
             }
 
-            .carousel-date {
+            &__date {
                 font-weight: 300;
             }
         }

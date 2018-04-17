@@ -5,7 +5,7 @@ import { DatesInterval } from '../Utils/DatesInterval';
 import DarkenGradientMedia from '../Ui/DarkenGradientMedia';
 
 type Props = {
-  highlighteds: Object,
+  highlighteds: Array<Object>,
 };
 
 type State = {
@@ -28,36 +28,38 @@ export class CarouselDesktop extends PureComponent<Props, State> {
       const lastSlide = highlighteds.length - 1;
       const firstSlide = 0;
       const innerCarousel = document.getElementById('carousel-inner');
-      const activeContent = innerCarousel.getElementsByClassName('active');
-      const dataOfContent = parseInt(activeContent[0].dataset.item, 10);
+      const activeContent = innerCarousel && innerCarousel.getElementsByClassName('active');
+      const dataOfContent = activeContent && parseInt(activeContent[0].dataset.item, 10);
       const leftArrow = document.getElementById('left-arrow');
       const rightArrow = document.getElementById('right-arrow');
 
-      if (dataOfContent === lastSlide) {
+      if (dataOfContent === lastSlide && rightArrow) {
         rightArrow.classList.add('disabled');
       }
 
-      if (dataOfContent === firstSlide) {
+      if (dataOfContent === firstSlide && leftArrow) {
         leftArrow.classList.add('disabled');
       }
 
-      if (dataOfContent !== lastSlide) {
+      if (dataOfContent !== lastSlide && rightArrow) {
         rightArrow.classList.remove('disabled');
       }
 
-      if (dataOfContent !== firstSlide) {
+      if (dataOfContent !== firstSlide && leftArrow) {
         leftArrow.classList.remove('disabled');
       }
-
     });
   }
 
   getEmptyNavItem = () => {
     const { highlighteds } = this.props;
+    const emptyItem = [];
 
     for (let i = 0; i < 4 - highlighteds.length; i++) {
-      return <div className="empty-item" />;
+      emptyItem.push(<div key={i} className="empty-item" />);
     }
+
+    return emptyItem;
   };
 
   render() {
@@ -84,8 +86,6 @@ export class CarouselDesktop extends PureComponent<Props, State> {
                   ? `${itemTitle.substring(0, maxItemLength)}...`
                   : itemTitle;
 
-              console.log(highlighted[highlightedType]);
-
               return (
                 <li
                   key={index}
@@ -93,43 +93,48 @@ export class CarouselDesktop extends PureComponent<Props, State> {
                   data-target="#carousel"
                   data-slide-to={index}>
                   <p>
-                    <span className="carousel-type">
+                    <span className="carousel__type">
                       <FormattedMessage id={`type-${highlighted.object_type}`} />
                     </span>
                     <br />
-                    <span className="carousel-title">{trimmedString}</span>
+                    <span className="carousel__title">{trimmedString}</span>
                     <br />
-                    <span className="carousel-date">
-                      {highlightedType === 'event' && (
-                        <DatesInterval
-                          startAt={highlighted[highlightedType].startAt}
-                          endAt={highlighted[highlightedType].endAt}
-                        />
-                      )}
-                      {highlightedType === 'project' && (
-                        <FormattedDate
-                          value={highlighted[highlightedType].startAt}
-                          day="numeric"
-                          month="long"
-                          year="numeric"
-                        />
-                      )}
-                      {highlightedType === 'idea' && (
-                        <FormattedDate
-                          value={highlighted[highlightedType].createdAt}
-                          day="numeric"
-                          month="long"
-                          year="numeric"
-                        />
-                      )}
-                      {highlightedType === 'post' && (
-                        <FormattedDate
-                          value={highlighted[highlightedType].publishedAt}
-                          day="numeric"
-                          month="long"
-                          year="numeric"
-                        />
-                      )}
+                    <span className="carousel__date">
+                      {highlightedType === 'event' &&
+                        highlighted[highlightedType].startAt &&
+                        highlighted[highlightedType].endAt && (
+                          <DatesInterval
+                            startAt={highlighted[highlightedType].startAt}
+                            endAt={highlighted[highlightedType].endAt}
+                          />
+                        )}
+                      {highlightedType === 'project' &&
+                        highlighted[highlightedType].startAt && (
+                          <FormattedDate
+                            value={highlighted[highlightedType].startAt}
+                            day="numeric"
+                            month="long"
+                            year="numeric"
+                          />
+                        )}
+                      {highlightedType === 'idea' &&
+                        highlighted[highlightedType].createdAt && (
+                          <FormattedDate
+                            value={highlighted[highlightedType].createdAt}
+                            day="numeric"
+                            month="long"
+                            year="numeric"
+                          />
+                        )}
+                      {highlightedType === 'post' &&
+                        highlighted[highlightedType].publishedAt && (
+                          <FormattedDate
+                            value={highlighted[highlightedType].publishedAt}
+                            day="numeric"
+                            month="long"
+                            year="numeric"
+                          />
+                        )}
                     </span>
                   </p>
                 </li>
@@ -178,12 +183,12 @@ export class CarouselDesktop extends PureComponent<Props, State> {
                       {getMedia()}
                       <div className="carousel-caption">
                         <p>
-                          <span className="carousel-type">
+                          <span className="carousel__type">
                             <FormattedMessage id={`type-${highlighted.object_type}`} />
                           </span>
                           <br />
                           <a
-                            className="carousel-title"
+                            className="carousel__title"
                             href={
                               highlighted[highlightedType]._links
                                 ? highlighted[highlightedType]._links.show
@@ -192,7 +197,7 @@ export class CarouselDesktop extends PureComponent<Props, State> {
                             {highlighted[highlightedType].title}
                           </a>
                           <br />
-                          <span className="carousel-date">
+                          <span className="carousel__date">
                             {highlightedType === 'event' && (
                               <DatesInterval
                                 startAt={highlighted[highlightedType].startAt}

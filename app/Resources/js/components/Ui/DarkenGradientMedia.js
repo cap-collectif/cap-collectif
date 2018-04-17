@@ -10,12 +10,11 @@ type Props = {
 };
 
 export const Container = styled.div`
-  background: ${props => props.linearGradient ? (
-  `linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0)),
+  background: ${props =>
+    props.linearGradient
+      ? `linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0)),
   url(${props.url})`
-  ) : (
-  `url(${props.url})`
-  )};
+      : `url(${props.url})`};
   background-size: cover;
   background-repeat: no-repeat;
   width: ${props => props.width};
