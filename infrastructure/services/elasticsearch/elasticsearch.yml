@@ -12,5 +12,3 @@ xpack.security.enabled: false
 xpack.ml.enabled: false
 xpack.monitoring.enabled: false
 xpack.watcher.enabled: false
-
-path.repo: ["var"]

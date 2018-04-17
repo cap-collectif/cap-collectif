@@ -68,6 +68,12 @@ services:
     tags:
       - { name: validator.constraint_validator, alias: has_category_if_mandatory.validator }
 
+  capco.has_valid_address.validator:
+    class: Capco\AppBundle\Validator\Constraints\HasValidAddressValidator
+    arguments: ['@service_container']
+    tags:
+      - { name: validator.constraint_validator, alias: has_valid_address.validator }
+
   capco.has_only_one_selection_step_allowing_progress_step.validator:
     class: Capco\AppBundle\Validator\Constraints\HasOnlyOneSelectionStepAllowingProgressStepsValidator
     tags:

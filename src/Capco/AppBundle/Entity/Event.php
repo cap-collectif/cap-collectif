@@ -20,6 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\EventRepository")
  * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\EndAfterStart()
+ * @CapcoAssert\HasValidAddress()
  */
 class Event implements CommentableInterface, IndexableInterface
 {
