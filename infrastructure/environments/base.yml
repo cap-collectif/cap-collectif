@@ -63,7 +63,7 @@ seleniumhub:
   # environment:
     # https://github.com/SeleniumHQ/selenium/wiki/Grid2
     # GRID_TIMEOUT: 600 # (300 is default)
-    # GRID_BROWSER_TIMEOUT: 300 # (60 is default)
+    # GRID_BROWSER_TIMEOUT: 300
   ports:
     - "4444:4444"
 
