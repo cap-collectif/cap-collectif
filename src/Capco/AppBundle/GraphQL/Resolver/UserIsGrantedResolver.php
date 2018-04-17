@@ -16,12 +16,6 @@ class UserIsGrantedResolver
         $this->tokenStorage = $tokenStorage;
     }
 
-//    public function __invoke(User $userRequest, $user): bool
-//    {
-//        return $this->isGranted($userRequest, $user);
-//    }
-
-
     public function isGranted(User $userRequest, $user)
     {
         if(!$user instanceof User) {
