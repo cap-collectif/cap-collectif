@@ -168,19 +168,14 @@
         .well {
             margin-top: 20px;
         }
-        .form-group {
-            margin: 10px 0;
+        margin: 0;
+        padding: 10px 0;
+        label.control-label {
+            text-align: right;
+            float: right;
         }
-        div {
-            display: flex;
-            label {
-                width: 30%;
-                text-align: right;
-                margin-right: 3%;
-            }
-            input {
-
-            }
+        div.col-sm-12 {
+            padding: 10px 0;
         }
 
     }

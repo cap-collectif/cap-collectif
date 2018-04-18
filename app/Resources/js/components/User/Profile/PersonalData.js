@@ -1,7 +1,7 @@
 // @flow
 import React, {Component} from 'react';
 import {graphql, createFragmentContainer} from 'react-relay';
-import {Alert, Well, Panel, Col, Row} from 'react-bootstrap';
+import {Alert, Well, Panel, Col, Row, Form, FormGroup, FormControl, ControlLabel, ButtonToolbar, Button } from 'react-bootstrap';
 import {connect, type MapStateToProps} from "react-redux";
 import {reduxForm, Field, SubmissionError, type FormProps} from 'redux-form';
 import {FormattedMessage, FormattedDate, injectIntl, IntlShape} from 'react-intl';
@@ -13,7 +13,8 @@ import type {Dispatch, State} from "../../../types";
 type RelayProps = { proposalForm: PersonalData_user };
 type Props = FormProps & {
   user: PersonalData_user,
-  intl: IntlShape
+  intl: IntlShape,
+  proposalForm: PersonalData_user
 };
 
 const formName = 'personalDataForm';
@@ -40,6 +41,19 @@ export class PersonalData extends Component<Props> {
       !user.zipCode &&
       !user.city &&
       user.gender !== 'u'
+    ) {
+      return false;
+    }
+
+    return true;
+  }
+
+  hasAddressData(user: PersonalData_user) {
+    if (
+      !user.address &&
+      !user.address2 &&
+      !user.zipCode &&
+      !user.city
     ) {
       return false;
     }
@@ -82,87 +96,143 @@ export class PersonalData extends Component<Props> {
           )}
           {this.hasData(user) && (
             <div>
-              <form onSubmit={handleSubmit}>
+              <Form horizontal onSubmit={handleSubmit}>
                 {user.firstname && (
-                  <Row>
-                    <Col sm={12} md={12} xs={12}>
-                      <Field
-                        type="text"
-                        name="firstname"
-                        divClassName="personal_data_field"
-                        component={component}
-                        label={<FormattedMessage id="form.label_firstname"/>}
-                      />
+                  <FormGroup controlId="formHorizontalFirstname" className="personal_data_field">
+                    <Col sm={2}>
+                      <ControlLabel componentClass={ControlLabel}>
+                        <FormattedMessage id="form.label_firstname"/>
+                      </ControlLabel>
                     </Col>
-                  </Row>
+                    <Col sm={8}>
+                      <FormControl type="text" value={user.firstname}/>
+                    </Col>
+                  </FormGroup>
                 )}
                 {user.lastname && (
-                  <Row>
-                    <Col sm={12} md={12} xs={12}>
-                      <Field
-                        type="text"
-                        name="lastname"
-                        divClassName="personal_data_field"
-                        component={component}
-                        label={<FormattedMessage id="form.label_lastname"/>}
-                      />
+                  <FormGroup controlId="formHorizontalLastname" className="personal_data_field">
+                    <Col sm={2}>
+                      <ControlLabel componentClass={ControlLabel}>
+                        <FormattedMessage id="form.label_lastname"/>
+                      </ControlLabel>
                     </Col>
-                  </Row>
+                    <Col sm={8}>
+                      <FormControl type="text" value={user.lastname}/>
+                    </Col>
+                  </FormGroup>
                 )}
                 {user.gender && (
-                  <Row>
-                    <Col sm={12} md={12} xs={12}>
-                      <Field
-                        type="text"
-                        name="gender"
-                        divClassName="personal_data_field"
-                        component={component}
-                        label={<FormattedMessage id="form.label_gender"/>}
-                      />
+                  <FormGroup controlId="formHorizontalGender" className="personal_data_field">
+                    <Col sm={2}>
+                      <ControlLabel componentClass={ControlLabel}>
+                        <FormattedMessage id="form.label_gender"/>
+                      </ControlLabel>
                     </Col>
-                  </Row>
-                )}
-                {user.firstname && (
-                  <Row>
-                    <Col sm={12} md={12} xs={12}>
-                      <Field
-                        type="text"
-                        name="firstname"
-                        divClassName="personal_data_field"
-                        component={component}
-                        label={<FormattedMessage id="form.label_firstname"/>}
-                      />
+                    <Col sm={8}>
+                      <FormControl type="text" value={user.gender}/>
                     </Col>
-                  </Row>
+                  </FormGroup>
                 )}
-                {user.firstname && (
-                  <Row>
-                    <Col sm={12} md={12} xs={12}>
-                      <Field
-                        type="text"
-                        name="firstname"
-                        divClassName="personal_data_field"
-                        component={component}
-                        label={<FormattedMessage id="form.label_firstname"/>}
-                      />
+                {user.dateOfBirth && (
+                  <FormGroup controlId="formHorizontaldateOfBirth" className="personal_data_field">
+                    <Col sm={2}>
+                      <ControlLabel componentClass={ControlLabel}>
+                        <FormattedMessage id="form.label_date_of_birth"/>
+                      </ControlLabel>
                     </Col>
-                  </Row>
-                )}
-                {user.firstname && (
-                  <Row>
-                    <Col sm={12} md={12} xs={12}>
-                      <Field
-                        type="text"
-                        name="firstname"
-                        divClassName="personal_data_field"
-                        component={component}
-                        label={<FormattedMessage id="form.label_firstname"/>}
-                      />
+                    <Col sm={8}>
+                      <FormControl type="date" value={user.dateOfBirth}/>
+                      <FormControl type="datetime" value={user.dateOfBirth}/>
+                      <FormControl type="month" value={user.dateOfBirth}/>
+                      <FormControl type="datetime-local" value={user.dateOfBirth}/>
+                      <FormControl type="number" value={user.dateOfBirth}/>
                     </Col>
-                  </Row>
+                  </FormGroup>
                 )}
+                {this.hasAddressData(user) && (
+                  <FormGroup controlId="formHorizontalAdress" className="personal_data_field">
+                    {user.address && (
+                      <Col sm={12}>
+                        <Col sm={2}>
+                          <ControlLabel componentClass={ControlLabel}>
+                            <FormattedMessage id="form.label_address"/>
+                          </ControlLabel>
+                        </Col>
+                        <Col sm={8}>
+                          <FormControl type="text" value={user.address}/>
+                        </Col>
+                      </Col>
+                    )}
+                    {user.address2 && (
+                      <Col sm={12}>
+                        <Col sm={2}>
+                          <ControlLabel componentClass={ControlLabel}>
+                            <FormattedMessage id="form.label_address2"/>
+                          </ControlLabel>
+                        </Col>
+                        <Col sm={8}>
+                          <FormControl type="text" value={user.address2}/>
+                        </Col>
+                      </Col>
+                    )}
+                    {user.city && (
+                      <Col sm={12}>
+                        <Col sm={2}>
+                          <ControlLabel componentClass={ControlLabel}>
+                            <FormattedMessage id="form.label_city"/>
+                          </ControlLabel>
+                        </Col>
+                        <Col sm={8}>
+                          <FormControl type="text" value={user.city}/>
+                        </Col>
+                      </Col>
+                    )}
+                    {user.zipCode && (
+                      <Col sm={12}>
+                        <Col sm={2}>
+                          <ControlLabel componentClass={ControlLabel}>
+                            <FormattedMessage id="form.label_zip_code"/>
+                          </ControlLabel>
+                        </Col>
+                        <Col sm={4} md={4}>
+                          <FormControl type="text" value={user.zipCode}/>
+                        </Col>
 
-              </form>
+                      </Col>
+                    )}
+                  </FormGroup>
+                )}
+                {user.phone && (
+                  <FormGroup controlId="formHorizontalPhone" className="personal_data_field">
+                    <Col sm={2}>
+                      <ControlLabel componentClass={ControlLabel}>
+                        <FormattedMessage id="global.phone"/>
+                      </ControlLabel>
+                    </Col>
+                    <Col sm={8}>
+                      <FormControl type="text" value={user.phone}/>
+                    </Col>
+                  </FormGroup>
+                )}
+                  <FormGroup controlId="formHorizontalPhone" className="personal_data_field">
+                    <ButtonToolbar className="box-content__toolbar">
+                      <Button
+                        disabled={invalid || pristine || submitting}
+                        type="submit"
+                        bsStyle="primary"
+                        id="proposal-form-admin-content-save">
+                        <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
+                      </Button>
+                      <AlertForm
+                        valid={valid}
+                        invalid={invalid}
+                        submitSucceeded={submitSucceeded}
+                        submitFailed={submitFailed}
+                        submitting={submitting}
+                      />
+                    </ButtonToolbar>
+                  </FormGroup>
+              </Form>
             </div>
           )}
 
@@ -183,10 +253,11 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayPro
   initialValues: props.proposalForm,
 });
 
-const container = connect(mapStateToProps)(injectIntl(form));
+const container = connect(mapStateToProps)(form);
+const intlContainer = injectIntl(container);
 
 export default createFragmentContainer(
-  container,
+  intlContainer,
   graphql`
     fragment PersonalData_user on User {
       username
