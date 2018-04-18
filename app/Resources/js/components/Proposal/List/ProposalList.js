@@ -1,35 +1,38 @@
-import React, { PropTypes } from 'react';
+// @flow
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { graphql, createFragmentContainer } from 'react-relay';
 import classNames from 'classnames';
 import { Row } from 'react-bootstrap';
 import ProposalPreview from '../Preview/ProposalPreview';
 import VisibilityBox from '../../Utils/VisibilityBox';
+import type { ProposalList_step } from './__generated__/ProposalList_step.graphql';
 
-export const ProposalList = React.createClass({
-  propTypes: {
-    proposals: PropTypes.array.isRequired,
-    step: PropTypes.object.isRequired,
-    showThemes: PropTypes.bool,
-    showComments: PropTypes.bool,
-  },
+type Props = {
+  step: ProposalList_step,
+};
 
-  getDefaultProps() {
-    return {
-      showThemes: false,
-      showComments: false,
-    };
-  },
+const renderProposals = (proposals, step) => (
+  <div>
+    {proposals.edges.map((edge, key) => (
+      <ProposalPreview
+        key={key}
+        proposal={edge.node}
+        step={step}
+        // showThemes={showThemes}
+        // showComments={showComments}
+      />
+    ))}
+  </div>
+)
+
+export class ProposalList extends React.Component<Props> {
 
   render() {
-    const { step, showThemes, showComments } = this.props;
+    const { step } = this.props;
+    const proposals = step.proposals || step.form.proposals;
 
-    let { proposals } = this.props;
-
-    if (!Array.isArray(proposals)) {
-      proposals = Object.keys(proposals).map(k => proposals[k]);
-    }
-
-    if (proposals.length === 0) {
+    if (proposals.totalCount === 0) {
       return (
         <p className={classNames({ 'p--centered': true })} style={{ marginBottom: '40px' }}>
           <FormattedMessage id="proposal.private.empty" />
@@ -43,47 +46,57 @@ export const ProposalList = React.createClass({
       opinion__list: true,
     });
 
-    let privateProposals = [];
-    let publicProposals = proposals;
-
-    if (typeof proposals[0].visible !== 'undefined') {
-      privateProposals = proposals.filter(proposal => !proposal.visible);
-      publicProposals = proposals.filter(proposal => proposal.visible);
-    }
+    const proposalsVisibleOnlyByViewer = [];
+    const proposalsVisiblePublicly = proposals;
 
     return (
       <Row>
-        {publicProposals.length > 0 && (
+        {proposalsVisiblePublicly.edges.length && (
           <ul className={classes}>
-            {publicProposals.map(proposal => (
-              <ProposalPreview
-                key={proposal.id}
-                proposal={proposal}
-                step={step}
-                showThemes={showThemes}
-                showComments={showComments}
-              />
-            ))}
+            {renderProposals(proposalsVisiblePublicly, step)}
           </ul>
         )}
-        {privateProposals.length > 0 && (
+        {proposalsVisibleOnlyByViewer.edges.length && (
           <VisibilityBox enabled>
             <ul className={classes}>
-              {privateProposals.map(proposal => (
-                <ProposalPreview
-                  key={proposal.id}
-                  proposal={proposal}
-                  step={step}
-                  showThemes={showThemes}
-                  showComments={showComments}
-                />
-              ))}
+              {renderProposals(proposalsVisibleOnlyByViewer, step)}
             </ul>
           </VisibilityBox>
         )}
       </Row>
     );
-  },
-});
+  }
+};
 
-export default ProposalList;
+export default createFragmentContainer(
+  ProposalList,
+  {
+    step: graphql`
+      fragment ProposalList_step on Step {
+        id
+        ... on CollectStep {
+          form {
+            proposals {
+              totalCount
+              edges {
+                node {
+                  id
+                }
+              }
+            }
+          }
+        }
+        ... on SelectionStep {
+          proposals {
+            totalCount
+            edges {
+              node {
+                id
+              }
+            }
+          }
+        }
+      }
+    `,
+  }
+);

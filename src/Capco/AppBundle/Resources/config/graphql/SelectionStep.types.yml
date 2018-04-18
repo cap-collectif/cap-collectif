@@ -33,6 +33,8 @@ SelectionStep:
                 description: "Only one selection step inside a project can have realisation steps, true if this one"
             voteThreshold:
                 type: "Int"
+            private:
+                type: "Boolean!"
             proposals:
                 type: "ProposalConnection"
                 argsBuilder: "Relay::Connection"

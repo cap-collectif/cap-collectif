@@ -254,6 +254,8 @@ type CollectStep implements Node & Step {
   budget: Int
   project: Project!
   open: Boolean!
+  private: Boolean!
+  form: ProposalForm!
 
   # A list of contributor associated with the step.
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
@@ -1886,6 +1888,7 @@ type SelectionStep implements Step & Node {
   # Only one selection step inside a project can have realisation steps, true if this one
   allowingProgressSteps: Boolean!
   voteThreshold: Int
+  private: Boolean!
   proposals(
     # Returns the elements in the list that come after the specified global ID.
     after: String

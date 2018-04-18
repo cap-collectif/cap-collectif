@@ -33,6 +33,11 @@ CollectStep:
                 type: "Project!"
             open:
                 type: "Boolean!"
+            private:
+                type: "Boolean!"
+            form:
+                type: "ProposalForm!"
+                resolve: "@value.proposalForm"
             contributors:
                 type: "UserConnection!"
                 description: "A list of contributor associated with the step."
