@@ -145,7 +145,7 @@
     "quill": "^0.20.1",
     "react-addons-shallow-compare": "^15.4.2",
     "react-async-script": "^0.9.1",
-    "react-beautiful-dnd": "^7.0.2",
+    "react-beautiful-dnd": "6.0.2",
     "react-bootstrap": "^0.31.2",
     "react-checkbox-group": "https://github.com/cap-collectif/react-checkbox-group/tarball/296721a62a682c5e441bdd449704550b69257af9",
     "react-datetime": "^2.9.0",

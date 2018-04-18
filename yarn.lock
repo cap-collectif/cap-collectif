@@ -8332,11 +8332,12 @@ react-async-script@^0.9.1:
   dependencies:
     prop-types ">=15.5.0"
 
-react-beautiful-dnd@^7.0.2:
-  version "7.0.2"
-  resolved "https://registry.yarnpkg.com/react-beautiful-dnd/-/react-beautiful-dnd-7.0.2.tgz#a04986f7b395398ce7dff9b49dd2f31c169d01dd"
+react-beautiful-dnd@6.0.2:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/react-beautiful-dnd/-/react-beautiful-dnd-6.0.2.tgz#2e2deec247cc92727fb290ba08cee4db70b0b439"
   dependencies:
     babel-runtime "^6.26.0"
+    invariant "^2.2.2"
     memoize-one "^3.1.1"
     prop-types "^15.6.0"
     raf-schd "^2.1.1"
@@ -8345,7 +8346,6 @@ react-beautiful-dnd@^7.0.2:
     redux "^3.7.2"
     redux-thunk "^2.2.0"
     reselect "^3.0.1"
-    tiny-invariant "^0.0.3"
 
 react-bootstrap@^0.31.2:
   version "0.31.5"
@@ -10135,10 +10135,6 @@ timers-browserify@~1.4.2:
   resolved "https://registry.yarnpkg.com/timers-browserify/-/timers-browserify-1.4.2.tgz#c9c58b575be8407375cb5e2462dacee74359f41d"
   dependencies:
     process "~0.11.0"
-
-tiny-invariant@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/tiny-invariant/-/tiny-invariant-0.0.3.tgz#4c7283c950e290889e9e94f64d3586ec9156cf44"
 
 tlds@^1.57.0:
   version "1.199.0"

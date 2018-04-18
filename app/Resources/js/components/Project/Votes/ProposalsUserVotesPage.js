@@ -4,7 +4,7 @@ import { Row } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer, type RelayRefetchProp } from 'react-relay';
 import ProposalUserVoteItem from './ProposalUserVoteItem';
-import DragAndDrop from "./DragAndDrop";
+import DragAndDrop from './DragAndDrop';
 
 type Props = {
   project: Object,
@@ -18,10 +18,10 @@ class ProposalsUserVotesPage extends React.Component<Props> {
     return (
       <div>
         <div className="container container--custom text-center">
-          <h1 style={{ marginBottom: '0' }}>{<FormattedMessage id="project.votes.title" />}</h1>
+          <h1 className="mb-0">{<FormattedMessage id="project.votes.title" />}</h1>
         </div>
         <div className="container container--custom">
-          <DragAndDrop />
+          {/*<DragAndDrop />*/}
 
           {project.votableSteps.length > 0 ? (
             project.votableSteps.map((step, index) => (
@@ -56,17 +56,34 @@ class ProposalsUserVotesPage extends React.Component<Props> {
                     </a>
                   </p>
                 )}
-                {step.votesHelpText && (
-                  <div dangerouslySetInnerHTML={{ __html: step.votesHelpText }} />
-                )}
-                <h3>
+                <div className="well mb-0 mt-10">
+                  <p>
+                    <b>
+                      <FormattedMessage
+                        id="admin.fields.step.votesHelpText"
+                      />
+                    </b>
+                  </p>
+                  <p>
+                    <FormattedMessage
+                      id="modal-vote-ranking-explanations"
+                    />
+                  </p>
+                </div>
+
+                <h3 className="d-ib mr-10 mb-10">
+                  <FormattedMessage
+                    id="modal-ranking"
+                  />
+                </h3>
+                <h4 className="excerpt d-ib">
                   <FormattedMessage
                     id="project.votes.nb"
                     values={{
                       num: step.viewerVotes.totalCount,
                     }}
                   />
-                </h3>
+                </h4>
                 <Row className="proposals-user-votes__table">
                   {step.viewerVotes.edges.map((edge, key) => (
                     <ProposalUserVoteItem key={key} proposal={edge.node.proposal} step={step} />
@@ -94,6 +111,7 @@ export default createFragmentContainer(ProposalsUserVotesPage, {
           id
           title
           voteType
+          votesRanking
           votesHelpText
           open
           show_url
@@ -123,6 +141,7 @@ export default createFragmentContainer(ProposalsUserVotesPage, {
           id
           title
           voteType
+          votesRanking
           votesHelpText
           show_url
           viewerVotes(orderBy: { field: POSITION, direction: ASC }) {

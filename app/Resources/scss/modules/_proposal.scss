@@ -237,6 +237,7 @@
 .proposals-user-votes__table {
     border: 1px solid $border-color;
     margin-bottom: 5px;
+    border-radius: 5px;
 }
 
 .proposals-user-votes__row {
@@ -248,7 +249,37 @@
 }
 
 .proposals-user-votes__col {
-    padding-bottom: 5px;
+    display: flex;
+
+    .badge {
+        padding: 3px 14px;
+    }
+
+    .cap {
+        font-size: 24px;
+        display: flex;
+        top: 0;
+    }
+
+    .cap-android-menu {
+        color: $icon-gray-color;
+    }
+
+    .cap-ios-close {
+        // font-size: 24px;
+        color: $danger-color;
+    }
+
+    .proposal-vote__delete {
+        margin: auto 0 auto auto;
+    }
+}
+
+.proposals-user-votes__content {
+    justify-content: space-between;
+    display: flex;
+    margin: auto 0;
+    width: 100%;
 }
 
 .proposals-user-votes__table.row {
