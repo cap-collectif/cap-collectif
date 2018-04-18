@@ -54,6 +54,7 @@ User:
             gender:
                 type: "String"
                 resolve: "@=resolver('user_gender', [value])"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(value, user)'
             firstname:
                 type: "String"
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(value, user)'

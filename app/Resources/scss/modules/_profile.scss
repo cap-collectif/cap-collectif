@@ -148,3 +148,40 @@
 .profile__contribution__date {
     margin-top: 0;
 }
+
+#personal-data {
+    .alert-info{
+        display: flex;
+         .cap-information {
+            font-size: 26px;
+        }
+    }
+    #project-participation-collected-data {
+        display: flex;
+    }
+}
+
+#personal-data-form {
+    color: black;
+    .personal_data_field {
+        border-top: solid 0.5px $table-border-color;
+        .well {
+            margin-top: 20px;
+        }
+        .form-group {
+            margin: 10px 0;
+        }
+        div {
+            display: flex;
+            label {
+                width: 30%;
+                text-align: right;
+                margin-right: 3%;
+            }
+            input {
+
+            }
+        }
+
+    }
+}
