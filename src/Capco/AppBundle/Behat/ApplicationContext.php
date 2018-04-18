@@ -28,8 +28,8 @@ use Joli\JoliNotif\NotifierFactory;
 use Symfony\Component\Process\Process;
 use WebDriver\Exception\ElementNotVisible;
 
-const REPOSITORY_NAME = 'repository_2';
-const SNAPSHOT_NAME = 'snap_2';
+const REPOSITORY_NAME = 'repository_qa';
+const SNAPSHOT_NAME = 'snap_qa';
 
 class ApplicationContext extends UserContext
 {
@@ -49,7 +49,6 @@ class ApplicationContext extends UserContext
     protected $dbContainer;
     protected $currentPage = 'home page';
     protected $queues = [];
-    protected $isFirst = true;
 
     /**
      * @BeforeScenario
@@ -86,8 +85,7 @@ class ApplicationContext extends UserContext
             $job->mustRun();
         }
 
-        $esClient = $this->getService('capco.elasticsearch.client');
-        $this->snapshot = new Snapshot($esClient);
+        $this->snapshot = new Snapshot($this->getService('capco.elasticsearch.client'));
         $this->snapshot->registerRepository(REPOSITORY_NAME, 'fs', ['location' => 'var']);
 
         $this->indexManager = $this->getService('capco.elasticsearch.index_builder');
@@ -95,9 +93,9 @@ class ApplicationContext extends UserContext
         try {
             $this->snapshot->deleteSnapshot(REPOSITORY_NAME, SNAPSHOT_NAME);
         } catch (\Elastica\Exception\ResponseException $e) {
-            echo 'No ES snapshot detected.' . PHP_EOL;
+            echo 'No ElasticSearch snapshot detected.' . PHP_EOL;
         }
-        echo 'Writing ES snapshot.' . PHP_EOL;
+        echo 'Writing ElasticSearch snapshot.' . PHP_EOL;
         $this->snapshot->createSnapshot(REPOSITORY_NAME, SNAPSHOT_NAME, [
           'indices' => $this->indexManager->getLiveSearchIndexName(),
         ], true);
