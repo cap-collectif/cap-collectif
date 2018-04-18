@@ -17,11 +17,6 @@ type ChangeFilterAction = {
 };
 type ChangeOrderAction = { type: 'proposal/CHANGE_ORDER', order: string };
 
-type FetchVotesRequestedAction = {
-  type: 'proposal/VOTES_FETCH_REQUESTED',
-  stepId: Uuid,
-  proposalId: Uuid,
-};
 type LoadSelectionsAction = {
   type: 'proposal/LOAD_SELECTIONS_REQUEST',
   proposalId: Uuid,
@@ -57,11 +52,6 @@ type ChangePageAction = { type: 'proposal/CHANGE_PAGE', page: number };
 type ChangeTermAction = { type: 'proposal/CHANGE_TERMS', terms: string };
 type OpenVoteModalAction = { type: 'proposal/OPEN_VOTE_MODAL', id: Uuid };
 type CloseVoteModalAction = { type: 'proposal/CLOSE_VOTE_MODAL' };
-type RequestLoadProposalsAction = {
-  type: 'proposal/FETCH_REQUESTED',
-  step: ?Uuid,
-  regenerateRandomOrder: ?boolean,
-};
 type RequestVotingAction = { type: 'proposal/VOTE_REQUESTED' };
 type VoteFailedAction = { type: 'proposal/VOTE_FAILED' };
 type ChangeProposalListViewAction = {
@@ -83,7 +73,6 @@ type ProposalMap = { [id: Uuid]: Proposal };
 export type State = {
   +queryCount: ?number,
   +currentProposalId: ?Uuid,
-  +proposalShowedId: Array<Uuid>,
   +proposalsById: ProposalMap,
   +currentVoteModal: ?Uuid,
   +currentDeletingVote: ?Uuid,
@@ -109,11 +98,9 @@ export type State = {
 
 export const initialState: State = {
   currentProposalId: null,
-  proposalShowedId: [],
   queryCount: undefined,
   proposalsById: {},
   lastEditedStepId: null,
-  userVotesByStepId: {},
   currentVoteModal: null,
   currentDeletingVote: null,
   showCreateModal: false,
@@ -204,14 +191,7 @@ type RequestDeleteAction = { type: 'proposal/DELETE_REQUEST' };
 const deleteRequest = (): RequestDeleteAction => ({
   type: 'proposal/DELETE_REQUEST',
 });
-export const loadProposals = (
-  step: ?Uuid,
-  regenerateRandomOrder: ?boolean,
-): RequestLoadProposalsAction => ({
-  type: 'proposal/FETCH_REQUESTED',
-  step,
-  regenerateRandomOrder,
-});
+
 export const deleteProposal = (form: Uuid, proposal: Object, dispatch: Dispatch): void => {
   dispatch(deleteRequest());
   Fetcher.delete(`/proposal_forms/${form}/proposals/${proposal.id}`)
@@ -427,11 +407,9 @@ export function* storeOrderInLocalStorage(action: ChangeOrderAction): Generator<
 
 export type ProposalAction =
   | OpenCreateModalAction
-  | FetchVotesRequestedAction
   | ChangeFilterAction
   | VoteFailedAction
   | RequestVotingAction
-  | RequestLoadProposalsAction
   | ChangeTermAction
   | ChangeOrderAction
   | OpenDeleteProposalModalAction
@@ -474,21 +452,6 @@ export function* saga(): Generator<*, *, *> {
   ];
 }
 
-const fetchSucceededReducer = (state: State, action): Exact<State> => {
-  const proposalsById = action.proposals.reduce((map, obj) => {
-    map[obj.id] = obj;
-    return map;
-  }, {});
-  const proposalShowedId = action.proposals.map(proposal => proposal.id);
-  return {
-    ...state,
-    proposalsById,
-    proposalShowedId,
-    isLoading: false,
-    queryCount: action.count,
-  };
-};
-
 export const reducer = (state: State = initialState, action: Action): Exact<State> => {
   switch (action.type) {
     case 'proposal/CHANGE_FILTER': {
@@ -527,10 +490,6 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
       return { ...state, isVoting: false };
     case 'proposal/DELETE_REQUEST':
       return { ...state, isDeleting: true };
-    case 'proposal/FETCH_REQUESTED':
-      return { ...state, isLoading: true };
-    case 'proposal/FETCH_SUCCEEDED':
-      return fetchSucceededReducer(state, action);
     case 'proposal/LOAD_MARKERS_SUCCEEDED': {
       return { ...state, markers: action.markers };
     }

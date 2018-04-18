@@ -1,14 +1,18 @@
-import React, { PropTypes } from 'react';
+// @flow
+import * as React from 'react';
 import { FormattedNumber } from 'react-intl';
+import { graphql, createFragmentContainer } from 'react-relay';
+import type { ProposalDetailEstimation_proposal } from './__generated__/ProposalDetailEstimation_proposal.graphql';
 
-const ProposalDetailEstimation = React.createClass({
-  propTypes: {
-    proposal: PropTypes.object.isRequired,
-    showNullEstimation: PropTypes.bool.isRequired,
-  },
+type Props = {
+    proposal: ProposalDetailEstimation_proposal,
+};
+
+export class ProposalDetailEstimation extends React.Component<Props> {
 
   render() {
-    const { showNullEstimation, proposal } = this.props;
+    const { proposal } = this.props;
+    const showNullEstimation = true;
     const estimation = !proposal.estimation && showNullEstimation ? 0 : proposal.estimation;
 
     return estimation !== null && typeof estimation !== 'undefined' ? (
@@ -22,7 +26,16 @@ const ProposalDetailEstimation = React.createClass({
         />
       </div>
     ) : null;
-  },
-});
+  }
+};
 
-export default ProposalDetailEstimation;
+export default createFragmentContainer(
+  ProposalDetailEstimation,
+  {
+    proposal: graphql`
+      fragment ProposalDetailEstimation_proposal on Proposal {
+        estimation
+      }
+    `,
+  }
+);

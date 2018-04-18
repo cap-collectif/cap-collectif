@@ -4,7 +4,7 @@ import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import Input from '../../Form/Input';
 import LocalStorage from '../../../services/LocalStorageService';
-import { changeOrder, loadProposals } from '../../../redux/modules/proposal';
+import { changeOrder /*, loadProposals*/ } from '../../../redux/modules/proposal';
 import { PROPOSAL_AVAILABLE_ORDERS } from '../../../constants/ProposalConstants';
 import type { Dispatch, State } from '../../../types';
 
@@ -47,7 +47,7 @@ export class ProposalListOrderSorting extends React.Component<Props, ComponentSt
     if (!savedSort || !Object.prototype.hasOwnProperty.call(savedSort, stepId)) {
       if (defaultSort) {
         dispatch(changeOrder(defaultSort));
-        dispatch(loadProposals());
+        // dispatch(loadProposals());
       }
     }
   }
@@ -65,7 +65,7 @@ export class ProposalListOrderSorting extends React.Component<Props, ComponentSt
           aria-label={intl.formatMessage({ id: 'global.filter' })}
           onChange={e => {
             dispatch(changeOrder(e.target.value));
-            dispatch(loadProposals());
+            // dispatch(loadProposals());
           }}
           value={order}>
           {displayedOrders.map(choice => (

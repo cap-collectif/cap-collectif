@@ -1,34 +1,36 @@
-import React, { PropTypes } from 'react';
+// @flow
+import * as React from 'react';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import Truncate from 'react-truncate';
+import type { ProposalDetailLikersTooltipLabel_proposal } from './__generated__/ProposalDetailLikersTooltipLabel_proposal.graphql';
 
-const ProposalDetailLikersTooltipLabel = React.createClass({
-  propTypes: {
-    likers: PropTypes.array.isRequired,
-  },
+type Props = { proposal: ProposalDetailLikersTooltipLabel_proposal };
+
+export class ProposalDetailLikersTooltipLabel extends React.Component<Props> {
 
   render() {
-    const { likers } = this.props;
-    if (likers.length === 1) {
+    const { proposal } = this.props;
+    if (proposal.likers.length === 1) {
       return (
         <Truncate>
           <FormattedMessage
             id="proposal.likers.label"
             values={{
-              user: likers[0].displayName,
+              user: proposal.likers[0].displayName,
             }}
           />
         </Truncate>
       );
     }
-    if (likers.length > 1) {
-      const message = likers.map(liker => liker.displayName).join('<br/>');
+    if (proposal.likers.length > 1) {
+      const message = proposal.likers.map(liker => liker.displayName).join('<br/>');
       return (
         <span>
           <FormattedMessage
             id="proposal.likers.count"
             values={{
-              num: likers.length,
+              num: proposal.likers.length,
             }}
           />
           <br />
@@ -39,7 +41,20 @@ const ProposalDetailLikersTooltipLabel = React.createClass({
       );
     }
     return null;
-  },
-});
+  }
+};
 
-export default ProposalDetailLikersTooltipLabel;
+export default createFragmentContainer(
+  ProposalDetailLikersTooltipLabel,
+  {
+    proposal: graphql`
+      fragment ProposalDetailLikersTooltipLabel_proposal on Proposal {
+        id
+        likers {
+          displayName
+          id
+        }
+      }
+    `,
+  }
+);

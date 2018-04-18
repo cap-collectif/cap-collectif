@@ -1,35 +1,24 @@
 // @flow
 import React from 'react';
 import { Col } from 'react-bootstrap';
+import { graphql, createFragmentContainer } from 'react-relay';
 import ProposalPreviewHeader from './ProposalPreviewHeader';
 import ProposalPreviewBody from './ProposalPreviewBody';
 import ProposalPreviewFooter from './ProposalPreviewFooter';
 import ProposalStatus from './ProposalStatus';
-import { VOTE_TYPE_DISABLED, VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
-import type { Proposal } from '../../../redux/modules/proposal';
-import type { Uuid } from '../../../types';
 import { CardContainer } from '../../Ui/Card/CardContainer';
-
-type Step = {
-  id: Uuid,
-  voteType: number,
-  voteThreshold: number,
-};
+import type { ProposalPreview_proposal } from './__generated__/ProposalPreview_proposal.graphql'
+import type { ProposalPreview_step } from './__generated__/ProposalPreview_step.graphql'
 
 type Props = {
-  proposal: Proposal,
-  step: Step,
-  showThemes: boolean,
-  showComments: boolean,
+  proposal: ProposalPreview_proposal,
+  step: ProposalPreview_step,
 };
 
 export class ProposalPreview extends React.Component<Props> {
-  static defaultProps = {
-    showComments: false,
-    showThemes: false,
-  };
+
   render() {
-    const { proposal, step, showThemes, showComments } = this.props;
+    const { proposal, step } = this.props;
     const voteType = step.voteType;
 
     return (
@@ -42,15 +31,13 @@ export class ProposalPreview extends React.Component<Props> {
           <ProposalPreviewHeader proposal={proposal} />
           <ProposalPreviewBody
             proposal={proposal}
-            showNullEstimation={voteType === VOTE_TYPE_BUDGET}
+            showNullEstimation={voteType === "BUDGET"}
             step={step}
-            showThemes={showThemes}
           />
           <ProposalPreviewFooter
             proposal={proposal}
-            showVotes={voteType !== VOTE_TYPE_DISABLED}
-            showComments={showComments}
-            stepId={step.id}
+            showVotes={voteType !== "DISABLED"}
+            step={step}
           />
           <ProposalStatus proposal={proposal} stepId={step.id} />
         </CardContainer>
@@ -59,4 +46,27 @@ export class ProposalPreview extends React.Component<Props> {
   }
 }
 
-export default ProposalPreview;
+export default createFragmentContainer(
+  ProposalPreview,
+  {
+    step: graphql`
+      fragment ProposalPreview_step on Step {
+        ... on CollectStep {
+          voteType
+        }
+        ... on SelectionStep {
+          voteType
+        }
+      }
+    `,
+    proposal: graphql`
+      fragment ProposalPreview_proposal on Proposal {
+        id
+        author {
+          vip
+        }
+        ...ProposalPreviewFooter_proposal
+      }
+    `,
+  }
+);

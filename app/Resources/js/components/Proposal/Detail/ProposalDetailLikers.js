@@ -1,21 +1,20 @@
-import React, { PropTypes } from 'react';
+// @flow
+import * as React from 'react';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import ProposalDetailLikersLabel from './ProposalDetailLikersLabel';
 import ProposalDetailLikersTooltipLabel from './ProposalDetailLikersTooltipLabel';
+import type { ProposalDetailLikers_proposal } from './__generated__/ProposalDetailLikers_proposal.graphql';
 
-const ProposalDetailLikers = React.createClass({
-  displayName: 'ProposalDetailLikers',
+type Props = {
+  proposal: ProposalDetailLikers_proposal,
+  componentClass: string,
+};
 
-  propTypes: {
-    proposal: PropTypes.object.isRequired,
-    componentClass: PropTypes.oneOf(['div', 'span']),
-  },
-
-  getDefaultProps() {
-    return {
+export class ProposalDetailLikers extends React.Component<Props> {
+  static defaultProps = {
       componentClass: 'span',
-    };
-  },
+  };
 
   renderContent() {
     const { proposal } = this.props;
@@ -30,7 +29,7 @@ const ProposalDetailLikers = React.createClass({
         <ProposalDetailLikersLabel likers={proposal.likers} />
       </OverlayTrigger>
     );
-  },
+  }
 
   render() {
     const { proposal, componentClass } = this.props;
@@ -40,7 +39,21 @@ const ProposalDetailLikers = React.createClass({
     }
 
     return null;
-  },
-});
+  }
+};
 
-export default ProposalDetailLikers;
+export default createFragmentContainer(
+  ProposalDetailLikers,
+  {
+    proposal: graphql`
+      fragment ProposalDetailLikers_proposal on Proposal {
+        id
+        likers {
+          id
+        }
+        ...ProposalDetailLikersLabel_proposal
+        ...ProposalDetailLikersTooltipLabel_proposal
+      }
+    `,
+  }
+);

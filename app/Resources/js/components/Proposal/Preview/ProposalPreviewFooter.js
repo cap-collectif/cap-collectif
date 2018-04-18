@@ -1,38 +1,21 @@
 // @flow
 import * as React from 'react';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import { store } from '../../../createRelayEnvironment';
+import type { ProposalPreviewFooter_proposal } from './__generated__/ProposalPreviewFooter_proposal.graphql'
 
 type Props = {
-  proposal: Object,
-  stepId: string,
-  showVotes?: boolean,
-  showComments?: boolean,
+  proposal: ProposalPreviewFooter_proposal,
 };
 
 export class ProposalPreviewFooter extends React.Component<Props> {
-  static defaultProps = {
-    showVotes: false,
-    showComments: false,
-  };
 
   render() {
-    const { proposal, stepId, showVotes, showComments } = this.props;
-    let votesCount = proposal.votesCountByStepId[stepId];
+    const { proposal } = this.props;
 
-    console.log('render');
-    // Hack to update votesCount while waiting GraphQL rewrite
-    try {
-      if (store && store._index > 0) {
-        const key = `client:${proposal.id}:votes(first:50,step:"${stepId}")`;
-        if (key in store._recordSource._records) {
-          votesCount = store._recordSource._records[key].totalCount;
-        }
-      }
-    } catch (e) {
-      // console.log(e);
-    }
+    const showComments= true;
+    const showVotes = true;
 
     if (!showVotes && !showComments) {
       return null;
@@ -61,12 +44,12 @@ export class ProposalPreviewFooter extends React.Component<Props> {
         )}
         {showVotes && (
           <div className="card__counter card__counter-votes">
-            <div className="card__counter__value">{votesCount}</div>
+            <div className="card__counter__value">{proposal.votes.totalCount}</div>
             <div>
               <FormattedMessage
                 id="proposal.vote.count_no_nb"
                 values={{
-                  count: votesCount,
+                  count: proposal.votes.totalCount,
                 }}
               />
             </div>
@@ -77,4 +60,15 @@ export class ProposalPreviewFooter extends React.Component<Props> {
   }
 }
 
-export default ProposalPreviewFooter;
+export default createFragmentContainer(
+  ProposalPreviewFooter,
+  {
+    proposal: graphql`
+      fragment ProposalPreviewFooter_proposal on Proposal {
+        id
+        commentsCount
+        #votesCount
+      }
+    `,
+  }
+);
