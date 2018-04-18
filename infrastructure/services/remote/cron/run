@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function test_phpfpm {
-  ps ax | grep -v grep | grep php-fpm > /dev/null
+  /etc/init.d/php7.1-fpm status > /dev/null
 }
 
 function test_mysqldatabase {
@@ -11,6 +11,7 @@ function test_mysqldatabase {
 # Wait till mysql and php-fpm are ready
 until ( test_phpfpm && test_mysqldatabase )
 do
+  echo "Cron is waiting for PHP-FPM and Database..."
   sleep 0.1
 done
 
