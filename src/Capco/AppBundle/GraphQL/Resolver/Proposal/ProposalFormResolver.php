@@ -55,6 +55,20 @@ class ProposalFormResolver implements ContainerAwareInterface
         $totalCount = 0;
 
         $paginator = new Paginator(function (int $offset, int $limit) use ($repo,$form, $args, $user, $request, &$totalCount) {
+            $filters = [];
+            if ($args->offsetExists('district')) {
+                $filters['districts'] = $args->offsetGet('district');
+            }
+            if ($args->offsetExists('theme')) {
+                $filters['themes'] = $args->offsetGet('theme');
+            }
+            if ($args->offsetExists('userType')) {
+                $filters['types'] = $args->offsetGet('userType');
+            }
+            if ($args->offsetExists('category')) {
+                $filters['categories'] = $args->offsetGet('category');
+            }
+
             if ($args->offsetExists('affiliations')) {
                 $affiliations = $args->offsetGet('affiliations');
                 if (in_array('EVALUER', $affiliations, true)) {

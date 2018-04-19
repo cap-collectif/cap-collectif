@@ -9,10 +9,12 @@ import ProposalStatus from './ProposalStatus';
 import { CardContainer } from '../../Ui/Card/CardContainer';
 import type { ProposalPreview_proposal } from './__generated__/ProposalPreview_proposal.graphql'
 import type { ProposalPreview_step } from './__generated__/ProposalPreview_step.graphql'
+import type { ProposalPreview_viewer } from './__generated__/ProposalPreview_viewer.graphql'
 
 type Props = {
   proposal: ProposalPreview_proposal,
   step: ProposalPreview_step,
+  viewer: ?ProposalPreview_viewer,
 };
 
 export class ProposalPreview extends React.Component<Props> {
@@ -27,15 +29,18 @@ export class ProposalPreview extends React.Component<Props> {
           className={
             proposal.author && proposal.author.vip ? 'bg-vip proposal-preview' : 'proposal-preview'
           }>
+          {/* $FlowFixMe */}
           <ProposalPreviewHeader proposal={proposal} />
           <ProposalPreviewBody
             proposal={proposal}
             step={step}
             viewer={viewer}
           />
+          {/* $FlowFixMe */}
           <ProposalPreviewFooter
             proposal={proposal}
           />
+          {/* $FlowFixMe */}
           <ProposalStatus proposal={proposal} />
         </CardContainer>
       </Col>

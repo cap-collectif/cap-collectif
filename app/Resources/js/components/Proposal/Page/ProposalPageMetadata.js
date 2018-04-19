@@ -47,10 +47,12 @@ export class ProposalPageMetadata extends React.Component<Props> {
                     {proposal.district.name}
                   </div>
                 )}
+              {/* $FlowFixMe */}
               <ProposalDetailEstimation
                 proposal={proposal}
                 showNullEstimation={showNullEstimation}
               />
+              {/* $FlowFixMe */}
               <ProposalDetailLikers proposal={proposal} componentClass="div" />
               <div className="proposal__info proposal__info--reference ellipsis">
                 <i className="cap cap-tag-1-1 icon--blue" />

@@ -57,18 +57,23 @@ export class ProposalPreviewBody extends React.Component<Props> {
                   {proposal.district.name}
                 </div>
               )}
+              {/* $FlowFixMe */}
             <ProposalDetailEstimation proposal={proposal} />
+            {/* $FlowFixMe */}
             <ProposalDetailLikers proposal={proposal} />
           </TagsList>
         </div>
         <div className="proposal__buttons">
           {
+            /* $FlowFixMe */
             proposal.currentVotableStep && step.id === proposal.currentVotableStep.id && <ProposalPreviewVote step={step} viewer={viewer} proposal={proposal} />
           }
+          {/* $FlowFixMe */}
           <ProposalFollowButton proposal={proposal} />
         </div>
-        {step.voteThreshold > 0 && (
+        {step.voteThreshold !== null && typeof step.voteThreshold !== "undefined" && step.voteThreshold > 0 && (
           <div style={{ marginTop: '20px' }}>
+            {/* $FlowFixMe */}
             <ProposalVoteThresholdProgressBar proposal={proposal} step={step} />
           </div>
         )}

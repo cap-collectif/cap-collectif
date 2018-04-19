@@ -1375,6 +1375,13 @@ type ProposalForm implements Node {
   illustrationHelpText: String
   title: String!
   proposals(
+    district: ID
+    userType: ID
+    category: ID
+    status: ID
+    theme: ID
+    term: String
+
     # Order for connection.
     orderBy: ProposalOrder = {field: CREATED_AT, direction: ASC}
     affiliations: [ProposalAffiliation]
@@ -1905,6 +1912,12 @@ type SelectionStep implements Step & Node {
 
     # Returns the last n elements from the list.
     last: Int
+    district: ID
+    userType: ID
+    category: ID
+    status: ID
+    theme: ID
+    term: String
 
     # Ordering options for proposals returning from the connection
     orderBy: ProposalOrder = {field: CREATED_AT, direction: DESC}

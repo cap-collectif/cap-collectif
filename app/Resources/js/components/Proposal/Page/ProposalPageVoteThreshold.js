@@ -15,8 +15,12 @@ export class ProposalPageVoteThreshold extends React.Component<Props> {
   render() {
     const { proposal, step } = this.props;
     const votesCount = proposal.votesCountByStepId[step.id];
-    const votesRemaining = step.voteThreshold - votesCount;
-    const votesPercentage = Math.ceil(votesCount * 100 / step.voteThreshold);
+    const voteThreshold = step.voteThreshold;
+    if (voteThreshold === null || typeof voteThreshold === "undefined") {
+      return null;
+    }
+    const votesRemaining = voteThreshold - votesCount;
+    const votesPercentage = Math.ceil(votesCount * 100 / voteThreshold);
     return (
       <div className="proposal__page__vote_threshold">
         <div className="proposal__infos" style={{ marginTop: '-15px' }}>
@@ -49,7 +53,7 @@ export class ProposalPageVoteThreshold extends React.Component<Props> {
                 id="proposal.vote.threshold.progress_reached"
                 values={{
                   num: votesCount,
-                  max: step.voteThreshold,
+                  max: voteThreshold,
                 }}
               />
             )}
@@ -58,7 +62,7 @@ export class ProposalPageVoteThreshold extends React.Component<Props> {
                 id="proposal.vote.threshold.progress"
                 values={{
                   num: votesRemaining,
-                  max: step.voteThreshold,
+                  max: voteThreshold,
                 }}
               />
             )}
