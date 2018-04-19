@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { Row } from 'react-bootstrap';
 import { QueryRenderer, graphql } from 'react-relay';
-import { VOTE_TYPE_DISABLED, PROPOSAL_PAGINATION } from '../../constants/ProposalConstants';
+import { VOTE_TYPE_DISABLED } from '../../constants/ProposalConstants';
 import ProposalListFilters from '../Proposal/List/ProposalListFilters';
 import ProposalList from '../Proposal/List/ProposalList';
 import DraftProposalList from '../Proposal/List/DraftProposalList';
@@ -16,9 +16,11 @@ import StepPageHeader from '../Steps/Page/StepPageHeader';
 import VisibilityBox from '../Utils/VisibilityBox';
 import LeafletMap from '../Proposal/Map/LeafletMap';
 import environment, { graphqlError } from '../../createRelayEnvironment';
-// import { loadProposals, changePage } from '../../redux/modules/proposal';
+import { changePage } from '../../redux/modules/proposal';
 import type { State, Dispatch } from '../../types';
 import type { ProposalStepPageQueryResponse, ProposalStepPageQueryVariables } from './__generated__/ProposalStepPageQuery.graphql';
+
+const PROPOSAL_PAGINATION = 51;
 
 type Props = {
   step: Object,
@@ -50,7 +52,7 @@ export class ProposalStepPage extends React.Component<Props> {
       queryCount,
       countFusions,
       currentPage,
-      // dispatch,
+      dispatch,
       isLogged,
       selectedViewByStep,
     } = this.props;
@@ -98,21 +100,55 @@ export class ProposalStepPage extends React.Component<Props> {
         <QueryRenderer
           environment={environment}
           query={graphql`
-            query ProposalStepPageQuery($id: ID!) {
-              step: node(id: $id) {
+            query ProposalStepPageQuery($stepId: ID!, $isAuthenticated: Boolean!) {
+              viewer @include(if: $isAuthenticated) {
+                ...ProposalList_viewer
+              },
+              step: node(id: $stepId) {
+                ...ProposalList_step# @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
                 ... on CollectStep {
                   id
                   private
+                  form {
+                    proposals {
+                      edges {
+                        node {
+                          id
+                        }
+                      }
+                    }
+                  }
                 }
                 ... on SelectionStep {
                   id
                   private
+                  proposals {
+                    edges {
+                      node {
+                        id
+                      }
+                    }
+                  }
                 }
               }
             }
           `}
           variables={({
-            id: this.props.step.id,
+            stepId: this.props.step.id,
+            isAuthenticated: this.props.isLogged,
+            count: PROPOSAL_PAGINATION,
+            // const filters = {};
+            // if (state.filters) {
+            //   Object.keys(state.filters).forEach(key => {
+            //     if (state.filters[key] && state.filters[key] !== '0') {
+            //       filters[key] = state.filters[key];
+            //     }
+            //   });
+            // }
+            //
+            // const order = state.order ? state.order : PROPOSAL_ORDER_RANDOM;
+            // url += `?page=${state.currentPaginationPage}&pagination=${PROPOSAL_PAGINATION}&order=${order}`;
+            // body = { terms: state.terms, filters };
           }: ProposalStepPageQueryVariables)}
           render={({
             error,
@@ -130,7 +166,7 @@ export class ProposalStepPage extends React.Component<Props> {
               if (!props.step) {
                 return null;
               }
-
+              const proposals = props.step.proposals || props.step.form.proposals;
               return (
                 <div>
                   <LeafletMap
@@ -139,18 +175,18 @@ export class ProposalStepPage extends React.Component<Props> {
                       center: { lat: form.latMap, lng: form.lngMap },
                       zoom: form.zoomMap,
                     }}
-                    visible={selectedViewByStep === 'map' && !step.private}
+                    visible={selectedViewByStep === 'map' && !props.step.private}
                   />
                   {selectedViewByStep === 'mosaic' && (
                     <div>
-                      {step.proposals.edges.length === 0 && !step.private ? (
+                      {proposals.edges.length === 0 && !props.step.private ? (
                         <p className={{ 'p--centered': true }} style={{ marginBottom: '40px' }}>
                           <FormattedMessage id="proposal.empty" />
                         </p>
                       ) : (
-                        <VisibilityBox enabled={step.private}>
+                        <VisibilityBox enabled={props.step.private}>
                           <ProposalList
-                            step={step}
+                            step={props.step}
                             showThemes={form.usingThemes}
                             showComments={form.commentable}
                             id="proposals-list"
@@ -164,8 +200,7 @@ export class ProposalStepPage extends React.Component<Props> {
                               current={currentPage}
                               nbPages={nbPages}
                               onChange={(newPage: number) => {
-                                // dispatch(changePage(newPage));
-                                // dispatch(loadProposals());
+                                dispatch(changePage(newPage));
                               }}
                             />
                           )}

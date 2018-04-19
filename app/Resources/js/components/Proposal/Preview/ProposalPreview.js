@@ -18,7 +18,7 @@ type Props = {
 export class ProposalPreview extends React.Component<Props> {
 
   render() {
-    const { proposal, step } = this.props;
+    const { proposal, step, viewer } = this.props;
 
     return (
       <Col componentClass="li" xs={12} sm={6} md={4} lg={3}>
@@ -31,12 +31,12 @@ export class ProposalPreview extends React.Component<Props> {
           <ProposalPreviewBody
             proposal={proposal}
             step={step}
+            viewer={viewer}
           />
           <ProposalPreviewFooter
             proposal={proposal}
-            step={step}
           />
-          <ProposalStatus proposal={proposal} stepId={step.id} />
+          <ProposalStatus proposal={proposal} />
         </CardContainer>
       </Col>
     );
@@ -46,14 +46,14 @@ export class ProposalPreview extends React.Component<Props> {
 export default createFragmentContainer(
   ProposalPreview,
   {
+    viewer: graphql`
+      fragment ProposalPreview_viewer on User {
+        ...ProposalPreviewBody_viewer
+      }
+    `,
     step: graphql`
       fragment ProposalPreview_step on Step {
-        ... on CollectStep {
-          voteType
-        }
-        ... on SelectionStep {
-          voteType
-        }
+        ...ProposalPreviewBody_step
       }
     `,
     proposal: graphql`
@@ -63,8 +63,9 @@ export default createFragmentContainer(
           vip
         }
         ...ProposalPreviewHeader_proposal
-        ...ProposalPreviewFooter_proposal
+        ...ProposalPreviewFooter_proposal @arguments(stepId: $stepId)
         ...ProposalPreviewBody_proposal
+        ...ProposalStatus_proposal @arguments(stepId: $stepId)
       }
     `,
   }

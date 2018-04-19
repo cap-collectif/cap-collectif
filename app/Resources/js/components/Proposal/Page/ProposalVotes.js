@@ -62,11 +62,11 @@ export default createPaginationContainer(
       @argumentDefinitions(
         count: { type: "Int", defaultValue: 50 }
         cursor: { type: "String", defaultValue: null }
-        step: { type: "ID!", nonNull: true }
+        stepId: { type: "ID!", nonNull: true }
       ) {
       id
-      votes(first: $count, after: $cursor, step: $step)
-        @connection(key: "ProposalVotes_votes", filters: ["step"]) {
+      votes(first: $count, after: $cursor, stepId: $stepId)
+        @connection(key: "ProposalVotes_votes", filters: ["stepId"]) {
         edges {
           cursor
           node {
@@ -108,13 +108,13 @@ export default createPaginationContainer(
         count,
         cursor,
         proposalId: props.proposal.id,
-        step: props.stepId,
+        stepId: props.stepId,
       };
     },
     query: graphql`
-      query ProposalVotesQuery($proposalId: ID!, $count: Int!, $cursor: String, $step: ID!) {
+      query ProposalVotesQuery($proposalId: ID!, $count: Int!, $cursor: String, $stepId: ID!) {
         proposal: node(id: $proposalId) {
-          ...ProposalVotes_proposal  @arguments(step: $step, count: $count, after: $cursor)
+          ...ProposalVotes_proposal @arguments(stepId: $stepId, count: $count, after: $cursor)
         }
       }
     `,

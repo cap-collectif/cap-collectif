@@ -38,7 +38,7 @@ class ProposalVotesResolver
     public function __invoke(User $user, Argument $args): Connection
     {
         try {
-            $step = $this->abstractStepRepository->find($args['step']);
+            $step = $this->abstractStepRepository->find($args['stepId']);
 
             return $this->getConnectionForStepAndUser($step, $user, $args);
         } catch (\RuntimeException $exception) {

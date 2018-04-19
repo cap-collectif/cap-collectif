@@ -1,21 +1,25 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { Modal } from 'react-bootstrap';
 import { submit, isValid } from 'redux-form';
 import { connect, type MapStateToProps } from 'react-redux';
-import ProposalVoteBox from './ProposalVoteBox';
+// import ProposalVoteBox from './ProposalVoteBox';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import { closeVoteModal } from '../../../redux/modules/proposal';
+import ProposalVoteForm from './ProposalVoteForm';
 import type { State, Dispatch } from '../../../types';
+import type { ProposalVoteModal_proposal } from './__generated__/ProposalVoteModal_proposal.graphql';
+import type { ProposalVoteModal_step } from './__generated__/ProposalVoteModal_step.graphql';
 
 type ParentProps = {
-  proposal: { id: string, userHasVote: boolean, votableStepId: string },
+  proposal: ProposalVoteModal_proposal,
+  step: ProposalVoteModal_step,
 };
 
 type Props = ParentProps & {
-  step: ?{ id: string },
   dispatch: Dispatch,
   showModal: boolean,
   isSubmitting: boolean,
@@ -24,9 +28,6 @@ type Props = ParentProps & {
 class ProposalVoteModal extends React.Component<Props> {
   render() {
     const { dispatch, showModal, proposal, step, isSubmitting, valid } = this.props;
-    if (!step) {
-      return null;
-    }
     return (
       <Modal
         animation={false}
@@ -42,7 +43,9 @@ class ProposalVoteModal extends React.Component<Props> {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <ProposalVoteBox proposal={proposal} step={step} />
+          <div id="proposal-vote-box">
+              <ProposalVoteForm proposal={proposal} step={step} />
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <CloseButton
@@ -58,7 +61,7 @@ class ProposalVoteModal extends React.Component<Props> {
             }}
             label="proposal.vote.confirm"
             isSubmitting={valid && isSubmitting}
-            bsStyle={!proposal.userHasVote || isSubmitting ? 'success' : 'danger'}
+            bsStyle={!proposal.viewerHasVote || isSubmitting ? 'success' : 'danger'}
             style={{ marginLeft: '10px' }}
           />
         </Modal.Footer>
@@ -68,19 +71,33 @@ class ProposalVoteModal extends React.Component<Props> {
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: ParentProps) => {
-  const steps = state.project.currentProjectById
-    ? state.project.projectsById[state.project.currentProjectById].steps.filter(
-        s => s.id === props.proposal.votableStepId,
-      )
-    : [];
   return {
     showModal: !!(
       state.proposal.currentVoteModal && state.proposal.currentVoteModal === props.proposal.id
     ),
     isSubmitting: !!state.proposal.isVoting,
     valid: isValid('proposalVote')(state),
-    step: steps.length === 1 ? steps[0] : null,
   };
 };
 
-export default connect(mapStateToProps)(ProposalVoteModal);
+const container = connect(mapStateToProps)(ProposalVoteModal);
+
+export default createFragmentContainer(
+  container,
+  {
+    proposal: graphql`
+      fragment ProposalVoteModal_proposal on Proposal
+      @argumentDefinitions(stepId: { type: "ID!", nonNull: true })
+      {
+        id
+        viewerHasVote(step: $stepId)
+      }
+    `,
+    step: graphql`
+      fragment ProposalVoteModal_step on Step
+      {
+        id
+      }
+    `,
+  }
+);

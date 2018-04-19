@@ -8,21 +8,24 @@ import ProposalDetailEstimation from '../Detail/ProposalDetailEstimation';
 import ProposalDetailLikers from '../Detail/ProposalDetailLikers';
 import ProposalVoteThresholdProgressBar from '../Vote/ProposalVoteThresholdProgressBar';
 import TagsList from '../../Ui/List/TagsList';
-import { type State } from '../../../types';
+import type { State, FeatureToggles } from '../../../types';
 import ProposalFollowButton from '../Follow/ProposalFollowButton';
+import type { ProposalPreviewBody_proposal } from './__generated__/ProposalPreviewBody_proposal.graphql';
+import type { ProposalPreviewBody_step } from './__generated__/ProposalPreviewBody_step.graphql';
+import type { ProposalPreviewBody_viewer } from './__generated__/ProposalPreviewBody_viewer.graphql';
 
 type Props = {
-  proposal: Object,
-  features: Object,
-  step: Object,
+  proposal: ProposalPreviewBody_proposal,
+  features: FeatureToggles,
+  step: ProposalPreviewBody_step,
+  viewer: ProposalPreviewBody_viewer,
 };
 
 export class ProposalPreviewBody extends React.Component<Props> {
   render() {
-    const { proposal, features, step } = this.props;
+    const { proposal, features, step, viewer } = this.props;
 
     const showThemes = true;
-    const showNullEstimation = true;
     return (
       <div className="card__body">
         <div className="card__body__infos">
@@ -54,13 +57,13 @@ export class ProposalPreviewBody extends React.Component<Props> {
                   {proposal.district.name}
                 </div>
               )}
-            <ProposalDetailEstimation proposal={proposal} showNullEstimation={showNullEstimation} />
+            <ProposalDetailEstimation proposal={proposal} />
             <ProposalDetailLikers proposal={proposal} />
           </TagsList>
         </div>
         <div className="proposal__buttons">
           {
-            step.id === proposal.votableStepId && <ProposalPreviewVote proposal={proposal} />
+            proposal.currentVotableStep && step.id === proposal.currentVotableStep.id && <ProposalPreviewVote step={step} viewer={viewer} proposal={proposal} />
           }
           <ProposalFollowButton proposal={proposal} />
         </div>
@@ -74,18 +77,20 @@ export class ProposalPreviewBody extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
-  return {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
     features: state.default.features,
-    // isAuthenticated: state.user.user !== null,
-  };
-};
+});
 
 const container = connect(mapStateToProps)(ProposalPreviewBody);
 
 export default createFragmentContainer(
   container,
   {
+    viewer: graphql`
+      fragment ProposalPreviewBody_viewer on User {
+        ...ProposalPreviewVote_viewer
+      }
+    `,
     proposal: graphql`
       fragment ProposalPreviewBody_proposal on Proposal {
         id
@@ -102,19 +107,25 @@ export default createFragmentContainer(
         category {
           name
         }
+        ...ProposalPreviewVote_proposal
         ...ProposalDetailEstimation_proposal
-        #votableStepId
-        #...ProposalFollowButton_proposal @arguments(isAuthenticated: $isAuthenticated)
+        ...ProposalDetailLikers_proposal
+        ...ProposalVoteThresholdProgressBar_proposal
+        currentVotableStep {
+          id
+        }
+        ...ProposalFollowButton_proposal @arguments(isAuthenticated: $isAuthenticated)
       }
     `,
     step: graphql`
       fragment ProposalPreviewBody_step on Step {
+        id
+        ...ProposalPreviewVote_step
+        ...ProposalVoteThresholdProgressBar_step
         ... on CollectStep {
-          id
           voteThreshold
         }
         ... on SelectionStep {
-          id
           voteThreshold
         }
       }

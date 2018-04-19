@@ -41,25 +41,25 @@ export class ProposalVoteButtonWrapper extends React.Component<Props> {
         query={graphql`
           query ProposalVoteButtonWrapperQuery(
             $proposal: ID!
-            $step: ID!
+            $stepId: ID!
             $isAuthenticated: Boolean!
           ) {
             proposal: node(id: $proposal) {
               ...ProposalVoteButtonWrapperFragment_proposal
-                @arguments(step: $step, isAuthenticated: $isAuthenticated)
+                @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
             }
-            step: node(id: $step) {
+            step: node(id: $stepId) {
               ...ProposalVoteButtonWrapperFragment_step
             }
             viewer @include(if: $isAuthenticated) {
-              ...ProposalVoteButtonWrapperFragment_viewer @arguments(step: $step)
+              ...ProposalVoteButtonWrapperFragment_viewer @arguments(stepId: $stepId)
             }
           }
         `}
         variables={
           ({
             proposal: this.props.proposal.id,
-            step: step.id,
+            stepId: step.id,
             isAuthenticated: this.props.isAuthenticated,
           }: ProposalVoteButtonWrapperQueryVariables)
         }

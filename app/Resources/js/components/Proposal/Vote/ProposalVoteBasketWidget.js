@@ -257,11 +257,11 @@ export default createRefetchContainer(
     viewer: graphql`
       fragment ProposalVoteBasketWidget_viewer on User
         @argumentDefinitions(
-          step: { type: "ID", nonNull: false }
+          stepId: { type: "ID", nonNull: false }
           withVotes: { type: "Boolean!", defaultValue: false }
         ) {
         id
-        proposalVotes(step: $step) @include(if: $withVotes) {
+        proposalVotes(stepId: $stepId) @include(if: $withVotes) {
           totalCount
           creditsLeft
           creditsSpent
@@ -270,9 +270,9 @@ export default createRefetchContainer(
     `,
   },
   graphql`
-    query ProposalVoteBasketWidgetQuery($step: ID!, $withVotes: Boolean!) {
+    query ProposalVoteBasketWidgetQuery($stepId: ID!, $withVotes: Boolean!) {
       viewer {
-        ...ProposalVoteBasketWidget_viewer @arguments(step: $step, withVotes: $withVotes)
+        ...ProposalVoteBasketWidget_viewer @arguments(stepId: $stepId, withVotes: $withVotes)
       }
     }
   `,

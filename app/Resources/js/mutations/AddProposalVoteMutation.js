@@ -8,16 +8,20 @@ import type {
 } from './__generated__/AddProposalVoteMutation.graphql';
 
 const mutation = graphql`
-  mutation AddProposalVoteMutation($input: AddProposalVoteInput!, $step: ID!) {
+  mutation AddProposalVoteMutation(
+    $input: AddProposalVoteInput!
+    $stepId: ID!
+    $withVotes: Boolean!
+  ) {
     addProposalVote(input: $input) {
       proposal {
         id
-        ...ProposalVotes_proposal @arguments(step: $step)
-        ...ProposalVoteButtonWrapperFragment_proposal @arguments(step: $step)
+        ...ProposalVotes_proposal @arguments(stepId: $stepId)
+        ...ProposalVoteButtonWrapperFragment_proposal @arguments(stepId: $stepId)
       }
       viewer {
-        ...ProposalVoteButtonWrapperFragment_viewer @arguments(step: $step)
-        #...ProposalVoteBasketWidget_viewer @arguments(step: $step, withVotes: $withVotes)
+        ...ProposalVoteButtonWrapperFragment_viewer @arguments(stepId: $stepId)
+        ...ProposalVoteBasketWidget_viewer @arguments(stepId: $stepId, withVotes: $withVotes)
       }
     }
   }

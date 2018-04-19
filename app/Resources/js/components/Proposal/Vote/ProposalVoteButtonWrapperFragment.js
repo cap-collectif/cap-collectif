@@ -98,18 +98,18 @@ export default createFragmentContainer(ProposalVoteButtonWrapperFragment, {
     fragment ProposalVoteButtonWrapperFragment_proposal on Proposal
       @argumentDefinitions(
         isAuthenticated: { type: "Boolean", defaultValue: true }
-        step: { type: "ID!", nonNull: true }
+        stepId: { type: "ID!", nonNull: true }
       ) {
       id
       estimation
-      viewerHasVote(step: $step) @include(if: $isAuthenticated)
+      viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
     }
   `,
   viewer: graphql`
     fragment ProposalVoteButtonWrapperFragment_viewer on User
-      @argumentDefinitions(step: { type: "ID!", nonNull: true }) {
+      @argumentDefinitions(stepId: { type: "ID!", nonNull: true }) {
       id
-      proposalVotes(step: $step) {
+      proposalVotes(stepId: $stepId) {
         totalCount
         creditsLeft
       }
