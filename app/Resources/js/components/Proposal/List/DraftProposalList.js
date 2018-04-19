@@ -9,8 +9,9 @@ import DraftBox from '../../Utils/DraftBox';
 import Loader from '../../Ui/Loader';
 
 type Props = {
-  step: Object,
+  step: {id: string},
 };
+
 const renderDraftProposals = ({
   error,
   props,

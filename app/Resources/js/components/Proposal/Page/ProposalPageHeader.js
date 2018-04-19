@@ -9,15 +9,13 @@ import UserAvatar from '../../User/UserAvatar';
 import UserLink from '../../User/UserLink';
 import ProposalVoteButtonWrapper from '../Vote/ProposalVoteButtonWrapper';
 import ProposalFollowButton from '../Follow/ProposalFollowButton';
-import type { Proposal } from '../../../redux/modules/proposal';
 import type { ProposalPageHeader_proposal } from './__generated__/ProposalPageHeader_proposal.graphql';
-import { type State } from '../../../types';
+import type { State } from '../../../types';
 
 type Props = {
   proposal: ProposalPageHeader_proposal,
   className: string,
   referer: string,
-  oldProposal: Proposal,
   isAuthenticated: boolean,
 };
 
@@ -27,7 +25,7 @@ export class ProposalPageHeader extends React.Component<Props> {
   };
 
   render() {
-    const { proposal, oldProposal, className, referer, isAuthenticated } = this.props;
+    const { proposal, className, referer, isAuthenticated } = this.props;
     const createdDate = (
       <FormattedDate
         value={moment(proposal.createdAt)}
@@ -59,7 +57,7 @@ export class ProposalPageHeader extends React.Component<Props> {
         <div>
           <a style={{ textDecoration: 'none' }} href={referer || proposal.show_url}>
             <i className="cap cap-arrow-65-1 icon--black" />{' '}
-            {<FormattedMessage id="proposal.back" />}
+            <FormattedMessage id="proposal.back" />
           </a>
         </div>
         <h1 className="consultation__header__title h1">{proposal.title}</h1>
@@ -91,7 +89,7 @@ export class ProposalPageHeader extends React.Component<Props> {
         {proposal.publicationStatus !== 'DRAFT' && (
           <ProposalVoteButtonWrapper
             id="proposal-vote-btn"
-            proposal={oldProposal}
+            proposal={proposal}
             className="pull-right btn-lg"
           />
         )}
@@ -121,10 +119,20 @@ export default createFragmentContainer(
   container,
   graphql`
     fragment ProposalPageHeader_proposal on Proposal {
+      id
       ...ProposalFollowButton_proposal @arguments(isAuthenticated: $isAuthenticated)
       title
       theme {
         title
+      }
+      currentVotableStep {
+        id
+        ... on CollectStep {
+          open
+        }
+        ... on SelectionStep {
+          open
+        }
       }
       author {
         username

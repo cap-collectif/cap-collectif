@@ -121,7 +121,6 @@ export class ProposalStepPage extends React.Component<Props> {
                 }
                 ... on SelectionStep {
                   id
-                  private
                   proposals {
                     edges {
                       node {
@@ -187,6 +186,7 @@ export class ProposalStepPage extends React.Component<Props> {
                         <VisibilityBox enabled={props.step.private}>
                           <ProposalList
                             step={props.step}
+                            viewer={props.viewer || null}
                             showThemes={form.usingThemes}
                             showComments={form.commentable}
                             id="proposals-list"

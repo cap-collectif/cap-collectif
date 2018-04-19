@@ -1885,6 +1885,7 @@ type SelectionStep implements Step & Node {
   votesLimit: Int
   voteType: ProposalStepVoteType!
   budget: Int
+  open: Boolean!
   title: String!
   votesHelpText: String
   statuses: [Status!]!
@@ -1892,7 +1893,6 @@ type SelectionStep implements Step & Node {
   # Only one selection step inside a project can have realisation steps, true if this one
   allowingProgressSteps: Boolean!
   voteThreshold: Int
-  private: Boolean!
   proposals(
     # Returns the elements in the list that come after the specified global ID.
     after: String

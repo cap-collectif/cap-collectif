@@ -33,7 +33,7 @@ class ProposalVotesResolver
     public function __invoke(Proposal $proposal, Argument $args): Connection
     {
         try {
-            $step = $this->abstractStepRepository->find($args['step']);
+            $step = $this->abstractStepRepository->find($args->offsetGet('stepId'));
             $field = $args->offsetGet('orderBy')['field'];
             $direction = $args->offsetGet('orderBy')['direction'];
             if ($step instanceof CollectStep) {
