@@ -4,7 +4,6 @@ import { connect, type MapStateToProps } from 'react-redux';
 import { QueryRenderer, graphql } from 'react-relay';
 import ProposalVoteButtonWrapperFragment from './ProposalVoteButtonWrapperFragment';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
-// import Loader from '../../Ui/Loader';
 import type { State } from '../../../types';
 import type {
   ProposalVoteButtonWrapperQueryResponse,
@@ -12,11 +11,10 @@ import type {
 } from './__generated__/ProposalVoteButtonWrapperQuery.graphql';
 
 type ParentProps = {
-  proposal: { id: string },
+  proposal: Object,
 };
 
 type Props = ParentProps & {
-  step: ?Object,
   isAuthenticated: boolean,
   id: string,
   style: Object,
@@ -31,7 +29,7 @@ export class ProposalVoteButtonWrapper extends React.Component<Props> {
   };
 
   render() {
-    const { step } = this.props;
+    const step = this.props.proposal.currentVotableStep;
     if (!step || !step.open) {
       return null;
     }
@@ -100,17 +98,8 @@ export class ProposalVoteButtonWrapper extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: ParentProps) => {
-  const step =
-    state.project.currentProjectById && props.proposal.votableStepId
-      ? state.project.projectsById[state.project.currentProjectById].stepsById[
-          props.proposal.votableStepId
-        ]
-      : null;
-  return {
-    step,
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
     isAuthenticated: state.user.user !== null,
-  };
-};
+});
 
 export default connect(mapStateToProps)(ProposalVoteButtonWrapper);

@@ -5,7 +5,6 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { Modal } from 'react-bootstrap';
 import { submit, isValid } from 'redux-form';
 import { connect, type MapStateToProps } from 'react-redux';
-// import ProposalVoteBox from './ProposalVoteBox';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import { closeVoteModal } from '../../../redux/modules/proposal';
@@ -87,10 +86,13 @@ export default createFragmentContainer(
   {
     proposal: graphql`
       fragment ProposalVoteModal_proposal on Proposal
-      @argumentDefinitions(stepId: { type: "ID!", nonNull: true })
+      @argumentDefinitions(
+        stepId: { type: "ID!", nonNull: true },
+        isAuthenticated: { type: "Boolean!", nonNull: true },
+      )
       {
         id
-        viewerHasVote(step: $stepId)
+        viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
       }
     `,
     step: graphql`

@@ -33,7 +33,7 @@ class ProposalViewerHasVoteResolver
     public function __invoke(Proposal $proposal, Arg $args, User $user): bool
     {
         try {
-            $step = $this->abstractStepRepository->find($args['step']);
+            $step = $this->abstractStepRepository->find($args->offsetGet('step'));
 
             if ($step instanceof CollectStep) {
                 return count($this->proposalCollectVoteRepository->getByProposalAndStepAndUser($proposal, $step, $user)) > 0;

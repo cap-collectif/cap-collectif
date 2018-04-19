@@ -45,7 +45,7 @@ export default createFragmentContainer(
       fragment ProposalPreviewVote_proposal on Proposal
       {
         id
-        ...ProposalVoteModal_proposal @arguments(stepId: $stepId)
+        ...ProposalVoteModal_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
         ...ProposalVoteButtonWrapperFragment_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
       }
     `,
