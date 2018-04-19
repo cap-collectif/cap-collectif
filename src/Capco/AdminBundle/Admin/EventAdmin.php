@@ -3,7 +3,9 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Event;
+use Geocoder\Provider\GoogleMaps;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Ivory\HttpAdapter\CurlHttpAdapter;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -29,11 +31,13 @@ class EventAdmin extends Admin
 
     public function prePersist($event)
     {
+        $this->setCoord($event);
         $this->checkRegistration($event);
     }
 
     public function preUpdate($event)
     {
+        $this->setCoord($event);
         $this->checkRegistration($event);
     }
 
@@ -361,5 +365,26 @@ class EventAdmin extends Admin
         if ($event->getLink()) {
             $event->setRegistrationEnable(false);
         }
+    }
+
+    private function setCoord(Event $event)
+    {
+        if (!$event->getAddress() || !$event->getCity()) {
+            $event->setLat(null);
+            $event->setLng(null);
+
+            return;
+        }
+
+        $apiKey = $this->getConfigurationPool()->getContainer()->getParameter('google_maps_key_server');
+        $curl = new CurlHttpAdapter();
+        $geocoder = new GoogleMaps($curl, null, null, true, $apiKey);
+
+        $address = $event->getAddress() . ', ' . $event->getZipCode() . ' ' . $event->getCity() . ', ' . $event->getCountry();
+
+        $coord = $geocoder->geocode($address)->first()->getCoordinates();
+
+        $event->setLat($coord->getLatitude());
+        $event->setLng($coord->getLongitude());
     }
 }
