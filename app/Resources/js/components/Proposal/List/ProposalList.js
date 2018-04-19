@@ -16,10 +16,12 @@ type Props = {
 
 const renderProposals = (proposals, step, viewer) => (
   <div>
-    {proposals.edges.map((edge, key) => (
+    {proposals.edges && proposals.edges.filter(Boolean).map(edge => edge.node).filter(Boolean).map((node, key) => (
+      // $FlowFixMe
       <ProposalPreview
         key={key}
-        proposal={edge.node}
+        // $FlowFixMe
+        proposal={node}
         step={step}
         viewer={viewer}
       />
@@ -31,6 +33,7 @@ export class ProposalList extends React.Component<Props> {
 
   render() {
     const { step, viewer } = this.props;
+    // $FlowFixMe
     const proposals = step.proposals || step.form.proposals;
 
     if (proposals.totalCount === 0) {
@@ -52,12 +55,12 @@ export class ProposalList extends React.Component<Props> {
 
     return (
       <Row>
-        {proposalsVisiblePublicly.edges.length && (
+        {proposalsVisiblePublicly.edges && proposalsVisiblePublicly.edges.length && (
           <ul className={classes}>
             {renderProposals(proposalsVisiblePublicly, step, viewer)}
           </ul>
         )}
-        {proposalsVisibleOnlyByViewer.edges.length && (
+        {proposalsVisibleOnlyByViewer.edges && proposalsVisibleOnlyByViewer.edges.length && (
           <VisibilityBox enabled>
             <ul className={classes}>
               {renderProposals(proposalsVisibleOnlyByViewer, step, viewer)}
@@ -83,24 +86,24 @@ export default createFragmentContainer(
         ...ProposalPreview_step
         ... on CollectStep {
           form {
-            proposals {
+            proposals(first: $count, orderBy: $orderBy, term: $term, district: $district, theme: $theme, status: $status, userType: $userType) {
               totalCount
               edges {
                 node {
                   id
-                  ...ProposalPreview_proposal# @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
+                  ...ProposalPreview_proposal
                 }
               }
             }
           }
         }
         ... on SelectionStep {
-          proposals {
+          proposals(first: $count, orderBy: $orderBy, term: $term, district: $district, theme: $theme, status: $status, userType: $userType) {
             totalCount
             edges {
               node {
                 id
-                ...ProposalPreview_proposal# @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
+                ...ProposalPreview_proposal
               }
             }
           }

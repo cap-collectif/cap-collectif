@@ -39,6 +39,18 @@ SelectionStep:
                 type: "ProposalConnection"
                 argsBuilder: "Relay::Connection"
                 args:
+                    district:
+                      type: "ID"
+                    userType:
+                      type: "ID"
+                    category:
+                      type: "ID"
+                    status:
+                      type: "ID"
+                    theme:
+                      type: "ID"
+                    term:
+                      type: "String"
                     orderBy:
                         type: "ProposalOrder"
                         description: "Ordering options for proposals returning from the connection"

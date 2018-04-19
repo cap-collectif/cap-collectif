@@ -15,8 +15,12 @@ export class ProposalVoteThresholdProgressBar extends React.Component<Props> {
 
   render() {
     const { proposal, step } = this.props;
-    const votesCount = proposal.votesCount;
+    const votesCount = proposal.votes.totalCount;
     const voteThreshold = step.voteThreshold;
+    if (voteThreshold === null || typeof voteThreshold === "undefined") {
+      return null;
+    }
+
     return (
       <div className="card__threshold" style={{ fontSize: '85%', marginTop: '15px' }}>
         <p>
@@ -55,7 +59,9 @@ export default createFragmentContainer(
     proposal: graphql`
       fragment ProposalVoteThresholdProgressBar_proposal on Proposal {
         id
-        #votesCount #by step
+        votes(stepId: $stepId) {
+          totalCount
+        }
       }
     `,
     step: graphql`

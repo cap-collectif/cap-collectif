@@ -29,6 +29,8 @@ type Props = {
   countFusions: ?number,
   defaultSort: ?string,
   form: Object,
+  filters: Object,
+  terms: ?string,
   statuses: Array<Object>,
   categories: Array<Object>,
   proposals: Array<Object>,
@@ -47,6 +49,8 @@ export class ProposalStepPage extends React.Component<Props> {
       form,
       statuses,
       step,
+      filters,
+      terms,
       count,
       defaultSort,
       queryCount,
@@ -100,17 +104,17 @@ export class ProposalStepPage extends React.Component<Props> {
         <QueryRenderer
           environment={environment}
           query={graphql`
-            query ProposalStepPageQuery($stepId: ID!, $isAuthenticated: Boolean!) {
+            query ProposalStepPageQuery($stepId: ID!, $orderBy: ProposalOrder, $isAuthenticated: Boolean!, $count: Int, $term: String, $district: ID, $status: ID, $theme: ID, $userType: ID) {
               viewer @include(if: $isAuthenticated) {
                 ...ProposalList_viewer
               },
               step: node(id: $stepId) {
-                ...ProposalList_step# @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
+                ...ProposalList_step
                 ... on CollectStep {
                   id
                   private
                   form {
-                    proposals {
+                    proposals(first: $count, orderBy: $orderBy, term: $term, district: $district, theme: $theme, status: $status, userType: $userType) {
                       edges {
                         node {
                           id
@@ -121,7 +125,7 @@ export class ProposalStepPage extends React.Component<Props> {
                 }
                 ... on SelectionStep {
                   id
-                  proposals {
+                  proposals(first: $count, orderBy: $orderBy, term: $term, district: $district, theme: $theme, status: $status, userType: $userType) {
                     edges {
                       node {
                         id
@@ -136,18 +140,12 @@ export class ProposalStepPage extends React.Component<Props> {
             stepId: this.props.step.id,
             isAuthenticated: this.props.isLogged,
             count: PROPOSAL_PAGINATION,
-            // const filters = {};
-            // if (state.filters) {
-            //   Object.keys(state.filters).forEach(key => {
-            //     if (state.filters[key] && state.filters[key] !== '0') {
-            //       filters[key] = state.filters[key];
-            //     }
-            //   });
-            // }
-            //
-            // const order = state.order ? state.order : PROPOSAL_ORDER_RANDOM;
-            // url += `?page=${state.currentPaginationPage}&pagination=${PROPOSAL_PAGINATION}&order=${order}`;
-            // body = { terms: state.terms, filters };
+            orderBy: { field: 'RANDOM', direction: 'ASC' },
+            term: terms,
+            district: filters.district ? filters.district : undefined,
+            theme: filters.theme ? filters.theme : undefined,
+            status: filters.status ? filters.status : undefined,
+            userType: filters.userType ? filters.userType : undefined,
           }: ProposalStepPageQueryVariables)}
           render={({
             error,
@@ -165,6 +163,7 @@ export class ProposalStepPage extends React.Component<Props> {
               if (!props.step) {
                 return null;
               }
+              // $FlowFixMe
               const proposals = props.step.proposals || props.step.form.proposals;
               return (
                 <div>
@@ -178,12 +177,13 @@ export class ProposalStepPage extends React.Component<Props> {
                   />
                   {selectedViewByStep === 'mosaic' && (
                     <div>
-                      {proposals.edges.length === 0 && !props.step.private ? (
+                      {proposals.edges && proposals.edges.length === 0 && !props.step.private ? (
                         <p className={{ 'p--centered': true }} style={{ marginBottom: '40px' }}>
                           <FormattedMessage id="proposal.empty" />
                         </p>
                       ) : (
                         <VisibilityBox enabled={props.step.private}>
+                          {/* $FlowFixMe */}
                           <ProposalList
                             step={props.step}
                             viewer={props.viewer || null}
@@ -225,6 +225,8 @@ export class ProposalStepPage extends React.Component<Props> {
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Object) => ({
   stepId: undefined,
   isLogged: state.user.user !== null,
+  filters: state.proposal.filters || {},
+  terms: state.proposal.terms,
   step:
     state.project.currentProjectById &&
     state.project.projectsById[state.project.currentProjectById].stepsById[props.stepId],

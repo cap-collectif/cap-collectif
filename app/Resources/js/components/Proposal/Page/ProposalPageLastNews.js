@@ -15,10 +15,14 @@ export class ProposalPageLastNews extends React.Component<{
 
   render() {
     const { proposal, className } = this.props;
-    if (proposal.news.totalCount === 0) {
+    if (proposal.news.totalCount === 0 || !proposal.news.edges) {
       return null;
     }
-    const post = proposal.news.edges[0].node;
+    const edge = proposal.news.edges[0];
+    if (!edge || typeof edge === "undefined") {
+      return null;
+    }
+    const post = edge.node;
     const classes = {
       'bg-vip': post.authors[0] && post.authors[0].vip,
       block: true,

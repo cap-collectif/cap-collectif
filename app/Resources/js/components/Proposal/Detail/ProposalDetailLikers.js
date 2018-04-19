@@ -23,9 +23,11 @@ export class ProposalDetailLikers extends React.Component<Props> {
         placement="top"
         overlay={
           <Tooltip id={`proposal-${proposal.id}-likers-tooltip-`}>
+            {/* $FlowFixMe */}
             <ProposalDetailLikersTooltipLabel proposal={proposal} />
           </Tooltip>
         }>
+        {/* $FlowFixMe */}
         <ProposalDetailLikersLabel proposal={proposal} />
       </OverlayTrigger>
     );

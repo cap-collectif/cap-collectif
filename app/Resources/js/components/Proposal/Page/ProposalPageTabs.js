@@ -108,6 +108,7 @@ export class ProposalPageTabs extends React.Component<Props> {
                   <Col xs={12} sm={8}>
                     {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
                     <ProposalFusionList proposal={proposal} />
+                    {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
                     <ProposalPageLastNews proposal={proposal} />
                     <ProposalPageContent
                       proposal={oldProposal}
@@ -116,6 +117,7 @@ export class ProposalPageTabs extends React.Component<Props> {
                     />
                   </Col>
                   <Col xs={12} sm={4}>
+                    {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
                     <ProposalPageMetadata
                       proposal={proposal}
                       showDistricts={features.districts}
@@ -126,9 +128,13 @@ export class ProposalPageTabs extends React.Component<Props> {
                       showThemes={features.themes && form.usingThemes}
                     />
                     <br />
-                    {currentVotableStep &&
+                    {currentVotableStep !== null &&
+                      typeof currentVotableStep !== "undefined" &&
+                      currentVotableStep.voteThreshold !== null &&
+                      typeof currentVotableStep.voteThreshold !== "undefined" &&
                       currentVotableStep.voteThreshold > 0 && (
                         <span>
+                          {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
                           <ProposalPageVoteThreshold
                             proposal={oldProposal}
                             step={currentVotableStep}
@@ -164,7 +170,8 @@ export class ProposalPageTabs extends React.Component<Props> {
                 </Tab.Pane>
               )}
               <Tab.Pane eventKey="blog">
-                <ProposalPageBlog />
+                {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
+                <ProposalPageBlog proposal={proposal} />
               </Tab.Pane>
               <Tab.Pane eventKey="evaluation">
                 {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
@@ -193,6 +200,7 @@ export default createFragmentContainer(
       ...ProposalFusionList_proposal
       ...ProposalPageMetadata_proposal
       ...ProposalPageLastNews_proposal
+      ...ProposalPageBlog_proposal
       postsCount
       currentVotableStep {
         id

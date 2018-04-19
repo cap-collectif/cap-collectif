@@ -1,24 +1,17 @@
-import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
+// @flow
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { graphql, createFragmentContainer } from 'react-relay';
 import Post from '../../Blog/Post';
-import { fetchProposalPosts } from '../../../redux/modules/proposal';
+import type { ProposalPageBlog_proposal } from './__generated__/ProposalPageBlog_proposal.graphql';
 
-export const ProposalPageBlog = React.createClass({
-  propTypes: {
-    proposal: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
-  },
+type Props = { proposal: ProposalPageBlog_proposal };
 
-  componentDidMount() {
-    const { dispatch, proposal } = this.props;
-    dispatch(fetchProposalPosts(proposal.id));
-  },
+export class ProposalPageBlog extends React.Component<Props> {
 
   render() {
     const { proposal } = this.props;
-    const { posts } = proposal;
-    if (!posts || posts.length === 0) {
+    if (proposal.news.totalCount === 0) {
       return (
         <p>
           <FormattedMessage id="proposal.no_posts" />
@@ -26,15 +19,33 @@ export const ProposalPageBlog = React.createClass({
       );
     }
     return (
-      <ul className="media-list">{posts.map((post, index) => <Post post={post} key={index} />)}</ul>
+      <ul className="media-list">
+        {
+          proposal.news.edges && proposal.news.edges.map((post, index) => <Post post={post} key={index} />)
+        }
+      </ul>
     );
-  },
-});
-
-const mapStateToProps = state => {
-  return {
-    proposal: state.proposal.proposalsById[state.proposal.currentProposalId],
-  };
+  }
 };
 
-export default connect(mapStateToProps)(ProposalPageBlog);
+export default createFragmentContainer(
+  ProposalPageBlog,
+  graphql`
+    fragment ProposalPageBlog_proposal on Proposal {
+      news {
+        totalCount
+        edges {
+          node {
+            title
+            createdAt
+            authors {
+              id
+              vip
+              displayName
+            }
+          }
+        }
+      }
+    }
+  `,
+);
