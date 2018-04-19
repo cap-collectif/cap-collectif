@@ -121,7 +121,6 @@ export class LeafletMap extends Component<Props, ComponentState> {
           height: '50vw',
         }}>
         <TileLayer
-          attribution="&copy; <a href&quot;https://www.mapbox.com/about/maps/&quot;>Mapbox</a> &copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> <a href&quot;https://www.mapbox.com/map-feedback/#/-74.5/40/10&quot;>Improve this map</a>"
           url={`https://api.mapbox.com/styles/v1/capcollectif/cj4zmeym20uhr2smcmgbf49cz/tiles/256/{z}/{x}/{y}?access_token=${token}`}
         />
         <MarkerClusterGroup
