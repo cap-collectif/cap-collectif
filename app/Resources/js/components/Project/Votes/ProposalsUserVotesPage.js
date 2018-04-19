@@ -2,16 +2,17 @@
 import * as React from 'react';
 import { Row } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { graphql, createFragmentContainer, type RelayRefetchProp } from 'react-relay';
 import ProposalUserVoteItem from './ProposalUserVoteItem';
-import DragAndDrop from './DragAndDrop';
+import ProposalsUserVotesTable from "./ProposalsUserVotesTable";
 
 type Props = {
   project: Object,
   relay: RelayRefetchProp,
 };
 
-class ProposalsUserVotesPage extends React.Component<Props> {
+class ProposalsUserVotesPage extends React.Component<Props, State> {
   render() {
     const { project } = this.props;
 
@@ -21,10 +22,9 @@ class ProposalsUserVotesPage extends React.Component<Props> {
           <h1 className="mb-0">{<FormattedMessage id="project.votes.title" />}</h1>
         </div>
         <div className="container container--custom">
-          {/*<DragAndDrop />*/}
-
           {project.votableSteps.length > 0 ? (
             project.votableSteps.map((step, index) => (
+              // faire un composant ici
               <div key={index} className="block">
                 {project.votableSteps.length > 1 ? (
                   <h2>
@@ -84,11 +84,7 @@ class ProposalsUserVotesPage extends React.Component<Props> {
                     }}
                   />
                 </h4>
-                <Row className="proposals-user-votes__table">
-                  {step.viewerVotes.edges.map((edge, key) => (
-                    <ProposalUserVoteItem key={key} proposal={edge.node.proposal} step={step} />
-                  ))}
-                </Row>
+                <ProposalsUserVotesTable step={step} />
               </div>
             ))
           ) : (

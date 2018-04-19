@@ -14,10 +14,11 @@ export const ProposalUserVoteItem = React.createClass({
     dispatch: PropTypes.func.isRequired,
     proposal: PropTypes.object.isRequired,
     step: PropTypes.object.isRequired,
+    classment: PropTypes.number.isRequired,
   },
 
   render() {
-    const { step, proposal, dispatch } = this.props;
+    const { step, proposal, dispatch, classment } = this.props;
 
 
     const colWidth = () => {
@@ -36,16 +37,17 @@ export const ProposalUserVoteItem = React.createClass({
       return 9;
     };
 
-    console.log(step);
-    console.warn(proposal);
+    // console.log(step);
+    // console.warn(proposal);
+    // console.error(classment);
 
     return (
       <Row className="proposals-user-votes__row d-flex" id={`vote-step${step.id}-proposal${proposal.id}`}>
         <Col md={1} xs={12} className="proposals-user-votes__col" >
-          <div className="proposals-user-votes__content">
+          <div className="proposals-user-votes__content justify-content-between">
             <i className="cap cap-android-menu excerpt" />
             <div className="d-flex">
-              <span className="badge label-primary m-auto">4</span>
+              <span className="badge label-primary m-auto">{classment + 1}</span>
             </div>
           </div>
         </Col>
@@ -58,7 +60,7 @@ export const ProposalUserVoteItem = React.createClass({
           </div>
         </Col>
         <Col className="proposals-user-votes__col" md={2} xs={12}>
-          <div className="proposals-user-votes__content">
+          <div className="proposals-user-votes__content justify-content-end">
             <div className="d-flex">
               <FormattedMessage id="public" />
               <Toggle
@@ -80,7 +82,7 @@ export const ProposalUserVoteItem = React.createClass({
         {/*</Col>*/}
         {step.voteType === VOTE_TYPE_BUDGET &&
           <Col className="proposals-user-votes__col" md={2} xs={12}>
-            <div className="proposals-user-votes__content">
+            <div className="proposals-user-votes__content justify-content-center">
               <ProposalDetailsEstimation
                 proposal={proposal}
                 showNullEstimation={step.voteType === VOTE_TYPE_BUDGET}
