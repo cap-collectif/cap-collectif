@@ -23,6 +23,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 {
     const SORT_ORDER_CREATED_AT = 0;
     const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;
+    const GENDER_OTHER = 'o';
 
     public static $sortOrder = [
         'activity' => self::SORT_ORDER_CONTRIBUTIONS_COUNT,
@@ -39,6 +40,8 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     protected $samlId;
     protected $parisId;
     protected $id;
+
+    protected $gender = null;
 
     /**
      * @var int
@@ -1167,7 +1170,8 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return [
             UserInterface::GENDER_UNKNOWN => 'gender.unknown',
             UserInterface::GENDER_FEMALE => 'gender.female',
-            UserInterface::GENDER_MALE => 'gender.male',
+            UserInterface::GENDER_FEMALE => 'gender.female',
+            self::GENDER_OTHER => 'gender.other',
         ];
     }
 

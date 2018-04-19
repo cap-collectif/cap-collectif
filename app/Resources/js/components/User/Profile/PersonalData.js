@@ -33,6 +33,8 @@ const validate = () => {
   const errors = {};
   return errors;
 };
+const locale = window.locale;
+console.log(locale);
 
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
 };
@@ -176,7 +178,11 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                       </ControlLabel>
                     </Col>
                     <Col sm={8}>
-                      <FormControl type="text" value={user.gender}/>
+                      <FormControl componentClass="select" placeholder="select">
+                        <option selected={user.gender === 'm' ? 'selected' : ''} value="m"><FormattedMessage id="gender.male" /></option>
+                        <option selected={user.gender === 'f' ? 'selected' : ''} value="f"><FormattedMessage id="gender.female" /></option>
+                        <option selected={user.gender === 'o' ? 'selected' : ''} value="o"><FormattedMessage id="gender.other" /></option>
+                      </FormControl>
                     </Col>
                   </FormGroup>
                 )}
@@ -211,7 +217,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           onChange={(month) => {
                             this.setState({month});
                           }}
-                          geocode={'FR'}
+                          geocode={locale.substr(3,5)}
                           id={'month'}
                           name={'month'}
                           classes={'form-control'}
