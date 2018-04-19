@@ -65,7 +65,6 @@ export class ProposalPage extends React.Component<Props> {
                     <ProposalPageHeader
                       proposal={props.proposal}
                       isAuthenticated={this.props.isAuthenticated}
-                      oldProposal={proposal}
                       className="container container--custom"
                     />
                     <ProposalPageTabs

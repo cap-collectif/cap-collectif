@@ -293,28 +293,6 @@ export const deleteVote = (dispatch: Dispatch, step: Object, proposal: Object) =
     });
 };
 
-type RequestFetchProposalPostsAction = {
-  type: 'proposal/POSTS_FETCH_REQUESTED',
-  proposalId: Uuid,
-};
-export const fetchProposalPosts = (proposalId: Uuid): RequestFetchProposalPostsAction => ({
-  type: 'proposal/POSTS_FETCH_REQUESTED',
-  proposalId,
-});
-
-export function* fetchPosts(action: RequestFetchProposalPostsAction): Generator<*, *, *> {
-  try {
-    const result = yield call(Fetcher.get, `/proposals/${action.proposalId}/posts`);
-    yield put({
-      type: 'proposal/POSTS_FETCH_SUCCEEDED',
-      posts: result.posts,
-      proposalId: action.proposalId,
-    });
-  } catch (e) {
-    yield put({ type: 'proposal/POSTS_FETCH_FAILED', error: e });
-  }
-}
-
 export function* fetchMarkers(action: LoadMarkersAction): Generator<*, *, *> {
   try {
     const markers = yield call(Fetcher.get, `/${action.stepType}_step/${action.stepId}/markers`);
@@ -371,7 +349,6 @@ export type ProposalAction =
   | CloseCreateModalAction
   | OpenVoteModalAction
   | OpenDeleteProposalModalAction
-  | RequestFetchProposalPostsAction
   | LoadSelectionsAction
   | CloseEditProposalModalAction
   | CloseVoteModalAction
@@ -397,7 +374,6 @@ export type ProposalAction =
 
 export function* saga(): Generator<*, *, *> {
   yield [
-    takeEvery('proposal/POSTS_FETCH_REQUESTED', fetchPosts),
     takeEvery('proposal/LOAD_MARKERS_REQUEST', fetchMarkers),
     takeEvery('proposal/CHANGE_FILTER', storeFiltersInLocalStorage),
     takeEvery('proposal/CHANGE_TERMS', storeTermsInLocalStorage),
@@ -445,19 +421,6 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
       return { ...state, isDeleting: true };
     case 'proposal/LOAD_MARKERS_SUCCEEDED': {
       return { ...state, markers: action.markers };
-    }
-    case 'proposal/POSTS_FETCH_SUCCEEDED': {
-      const posts = action.posts;
-      const proposalsById = state.proposalsById;
-      proposalsById[action.proposalId] = {
-        ...state.proposalsById[action.proposalId],
-        posts,
-      };
-      return { ...state, proposalsById };
-    }
-    case 'proposal/POSTS_FETCH_FAILED': {
-      console.log('proposal/POSTS_FETCH_FAILED', action.error); // eslint-disable-line no-console
-      return state;
     }
     case 'proposal/CHANGE_PROPOSAL_LIST_VIEW': {
       return { ...state, selectedViewByStep: action.mode };

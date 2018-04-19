@@ -1,12 +1,16 @@
-import React, { PropTypes } from 'react';
+// @flow
+import * as React from 'react';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { ProgressBar } from 'react-bootstrap';
+import type { ProposalPageVoteThreshold_step } from './__generated__/ProposalPageVoteThreshold_step.graphql';
 
-const ProposalPageVoteThreshold = React.createClass({
-  propTypes: {
-    proposal: PropTypes.object.isRequired,
-    step: PropTypes.object.isRequired,
-  },
+type Props = {
+  proposal: Object,
+  step: ProposalPageVoteThreshold_step,
+};
+
+export class ProposalPageVoteThreshold extends React.Component<Props> {
 
   render() {
     const { proposal, step } = this.props;
@@ -62,7 +66,22 @@ const ProposalPageVoteThreshold = React.createClass({
         </div>
       </div>
     );
-  },
-});
+  }
+};
 
-export default ProposalPageVoteThreshold;
+export default createFragmentContainer(
+  ProposalPageVoteThreshold,
+  {
+    step: graphql`
+      fragment ProposalPageVoteThreshold_step on Step {
+        id
+        ... on CollectStep {
+          voteThreshold
+        }
+        ... on SelectionStep {
+          voteThreshold
+        }
+      }
+    `,
+  }
+);
