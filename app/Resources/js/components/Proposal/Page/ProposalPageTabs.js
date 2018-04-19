@@ -4,7 +4,6 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { Row, Col, Tab, Nav, NavItem } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import type { ProposalPageTabs_proposal } from './__generated__/ProposalPageTabs_proposal.graphql';
-import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 import ProposalPageContent from './ProposalPageContent';
 import ProposalPageLastNews from './ProposalPageLastNews';
 import ProposalVotesByStep from './ProposalVotesByStep';
@@ -57,14 +56,14 @@ export class ProposalPageTabs extends React.Component<Props> {
   }
   render() {
     const { proposal, oldProposal, form, steps, features, categories } = this.props;
-    const currentVotableStep = oldProposal.votableStepId
-      ? steps.filter(s => s.id === oldProposal.votableStepId)[0]
-      : null;
+    const currentVotableStep = proposal.currentVotableStep;
+
     // $FlowFixMe
     const votesCount = Object.values(oldProposal.votesCountByStepId).reduce(
       (a, b) => parseInt(a, 10) + parseInt(b, 10),
       0,
     );
+
     const showVotesTab = votesCount > 0 || currentVotableStep !== null;
     const votableSteps = steps.filter(step => step.votable);
     const isPageAdmin = false;
@@ -109,7 +108,7 @@ export class ProposalPageTabs extends React.Component<Props> {
                   <Col xs={12} sm={8}>
                     {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
                     <ProposalFusionList proposal={proposal} />
-                    <ProposalPageLastNews proposal={oldProposal} />
+                    <ProposalPageLastNews proposal={proposal} />
                     <ProposalPageContent
                       proposal={oldProposal}
                       form={form}
@@ -118,11 +117,11 @@ export class ProposalPageTabs extends React.Component<Props> {
                   </Col>
                   <Col xs={12} sm={4}>
                     <ProposalPageMetadata
-                      proposal={oldProposal}
+                      proposal={proposal}
                       showDistricts={features.districts}
                       showCategories={form.usingCategories}
                       showNullEstimation={
-                        !!(currentVotableStep && currentVotableStep.voteType === VOTE_TYPE_BUDGET)
+                        !!(currentVotableStep && currentVotableStep.voteType === 'BUDGET')
                       }
                       showThemes={features.themes && form.usingThemes}
                     />
@@ -178,7 +177,7 @@ export class ProposalPageTabs extends React.Component<Props> {
             </Tab.Content>
           </div>
           {!oldProposal.isDraft &&
-            currentVotableStep && <ProposalVoteModal proposal={oldProposal} />}
+            currentVotableStep && <ProposalVoteModal proposal={proposal} step={currentVotableStep} />}
         </div>
       </Tab.Container>
     );
@@ -192,7 +191,21 @@ export default createFragmentContainer(
       ...ProposalPageFollowers_proposal
       ...ProposalPageEvaluation_proposal
       ...ProposalFusionList_proposal
+      ...ProposalPageMetadata_proposal
+      ...ProposalPageLastNews_proposal
       postsCount
+      currentVotableStep {
+        id
+        ... on CollectStep {
+          voteThreshold
+          voteType
+        }
+        ... on SelectionStep {
+          voteThreshold
+          voteType
+        }
+        ...ProposalPageVoteThreshold_step
+      }
       viewerCanSeeEvaluation
       followerConnection(first: $count, after: $cursor) {
         totalCount

@@ -1,17 +1,19 @@
-import React, { PropTypes } from 'react';
+// @flow
+import * as React from 'react';
+import { graphql, createFragmentContainer } from 'react-relay';
 import ProposalDetailEstimation from '../Detail/ProposalDetailEstimation';
 import ProposalDetailLikers from '../Detail/ProposalDetailLikers';
+import type { ProposalPageMetadata_proposal } from './__generated__/ProposalPageMetadata_proposal.graphql';
 
-export const ProposalPageMetadata = React.createClass({
-  displayName: 'ProposalPageMetadata',
+type Props = {
+  proposal: ProposalPageMetadata_proposal,
+  showCategories: boolean,
+  showDistricts: boolean,
+  showNullEstimation: boolean,
+  showThemes: boolean,
+};
 
-  propTypes: {
-    proposal: PropTypes.object.isRequired,
-    showDistricts: PropTypes.bool.isRequired,
-    showCategories: PropTypes.bool.isRequired,
-    showNullEstimation: PropTypes.bool.isRequired,
-    showThemes: PropTypes.bool.isRequired,
-  },
+export class ProposalPageMetadata extends React.Component<Props> {
 
   render() {
     const { proposal, showCategories, showDistricts, showNullEstimation, showThemes } = this.props;
@@ -59,7 +61,33 @@ export const ProposalPageMetadata = React.createClass({
         )}
       </div>
     );
-  },
-});
+  }
+};
 
-export default ProposalPageMetadata;
+export default createFragmentContainer(
+  ProposalPageMetadata,
+  {
+    proposal: graphql`
+      fragment ProposalPageMetadata_proposal on Proposal
+      {
+        ...ProposalDetailEstimation_proposal
+        ...ProposalDetailLikers_proposal
+        id
+        theme {
+          title
+        }
+        estimation
+        likers {
+          id
+        }
+        category {
+          name
+        }
+        district {
+          name
+        }
+        reference
+      }
+    `,
+  }
+);
