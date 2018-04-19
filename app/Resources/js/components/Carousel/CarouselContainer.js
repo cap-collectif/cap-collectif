@@ -1,9 +1,10 @@
+// @flow
 import React, { PureComponent } from 'react';
 import CarouselMobile from './CarouselMobile';
 import CarouselDesktop from './CarouselDesktop';
 
 type Props = {
-  highlighteds: Object,
+  highlighteds: Array<Object>,
 };
 
 type State = {

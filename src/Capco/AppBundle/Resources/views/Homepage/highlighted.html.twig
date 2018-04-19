@@ -1,12 +1,13 @@
 {% if props | length > 0 %}
     <div id="highlights" class="container--custom">
         <div class="container">
-            {% if null != section.title %}
-                <h2 class="h2">{{ section.title }}</h2>
-            {% else %}
-                <h2 class="h2">{{ 'homepage.section.highlighted' | trans({}, 'CapcoAppBundle') }}</h2>
-            {% endif %}
-
+            <h2 class="h2">
+                {% if null != section.title %}
+                    {{ section.title }}
+                {% else %}
+                    {{ 'homepage.section.highlighted' | trans({}, 'CapcoAppBundle') }}
+                {% endif %}
+            </h2>
             {{ react_render_component('CarouselApp', {
                 'props': props,
             }) }}

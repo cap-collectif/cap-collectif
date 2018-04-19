@@ -134,8 +134,6 @@ export class CarouselMobile extends PureComponent<Props, State> {
                 : itemTitle;
             const hadLinearGradient = windowWidth >= 768;
 
-            // console.log(highlighted[highlightedType]);
-
             const getMedia = () => {
               if (highlighted[highlightedType].media) {
                 return (
