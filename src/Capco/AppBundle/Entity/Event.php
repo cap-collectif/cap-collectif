@@ -6,10 +6,11 @@ use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\DateHelperTrait;
-use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 use Capco\AppBundle\Traits\TextableTrait;
+use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -25,7 +26,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Event implements CommentableInterface, IndexableInterface
 {
-    use DateHelperTrait, CommentableTrait, IdTrait, TextableTrait, MetaDescriptionCustomCodeTrait;
+    use DateHelperTrait, CommentableTrait, UuidTrait, TextableTrait, MetaDescriptionCustomCodeTrait;
 
     /**
      * @ORM\Column(name="title", type="string", length=255)
@@ -158,57 +159,28 @@ class Event implements CommentableInterface, IndexableInterface
         return $this->getId() ? $this->getTitle() : 'New event';
     }
 
-    /**
-     * Set title.
-     *
-     * @param string $title
-     *
-     * @return Event
-     */
-    public function setTitle($title)
+    public function setTitle(string $title): self
     {
         $this->title = $title;
 
         return $this;
     }
 
-    /**
-     * Get title.
-     *
-     * @return string
-     */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    /**
-     * Get createdAt.
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * Get updatedAt.
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?\DateTime
     {
         return $this->updatedAt;
     }
 
-    /**
-     * Set media.
-     *
-     * @param string $media
-     *
-     * @return Event
-     */
     public function setMedia($media)
     {
         $this->Media = $media;
@@ -216,34 +188,17 @@ class Event implements CommentableInterface, IndexableInterface
         return $this;
     }
 
-    /**
-     * Get media.
-     *
-     * @return string
-     */
     public function getMedia()
     {
         return $this->Media;
     }
 
-    /**
-     * Get themes.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getThemes()
+    public function getThemes(): iterable
     {
         return $this->themes;
     }
 
-    /**
-     * Add theme.
-     *
-     * @param \Capco\AppBundle\Entity\Theme $theme
-     *
-     * @return $this
-     */
-    public function addTheme(Theme $theme)
+    public function addTheme(Theme $theme): self
     {
         if (!$this->themes->contains($theme)) {
             $this->themes->add($theme);
@@ -253,14 +208,7 @@ class Event implements CommentableInterface, IndexableInterface
         return $this;
     }
 
-    /**
-     * Remove theme.
-     *
-     * @param \Capco\AppBundle\Entity\Theme $theme
-     *
-     * @return $this
-     */
-    public function removeTheme(Theme $theme)
+    public function removeTheme(Theme $theme): self
     {
         $this->themes->removeElement($theme);
         $theme->removeEvent($this);
@@ -268,24 +216,12 @@ class Event implements CommentableInterface, IndexableInterface
         return $this;
     }
 
-    /**
-     * Get projects.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getProjects()
+    public function getProjects(): iterable
     {
         return $this->projects;
     }
 
-    /**
-     * Add project.
-     *
-     * @param \Capco\AppBundle\Entity\Project $project
-     *
-     * @return $this
-     */
-    public function addProject(Project $project)
+    public function addProject(Project $project): self
     {
         if (!$this->projects->contains($project)) {
             $this->projects->add($project);
@@ -295,14 +231,7 @@ class Event implements CommentableInterface, IndexableInterface
         return $this;
     }
 
-    /**
-     * Remove project.
-     *
-     * @param \Capco\AppBundle\Entity\Project $project
-     *
-     * @return $this
-     */
-    public function removeProject(Project $project)
+    public function removeProject(Project $project): self
     {
         $this->projects->removeElement($project);
         $project->removeEvent($this);
@@ -310,114 +239,60 @@ class Event implements CommentableInterface, IndexableInterface
         return $this;
     }
 
-    /**
-     * Set author.
-     *
-     * @param string $author
-     *
-     * @return Event
-     */
-    public function setAuthor($author)
+    public function setAuthor(User $author): self
     {
         $this->Author = $author;
 
         return $this;
     }
 
-    /**
-     * Get author.
-     *
-     * @return string
-     */
-    public function getAuthor()
+    public function getAuthor(): ?User
     {
         return $this->Author;
     }
 
-    /**
-     * Set zipCode.
-     *
-     * @param int $zipCode
-     *
-     * @return Event
-     */
-    public function setZipCode($zipCode)
+    public function setZipCode(int $zipCode): self
     {
         $this->zipCode = $zipCode;
 
         return $this;
     }
 
-    /**
-     * Get zipCode.
-     *
-     * @return int
-     */
-    public function getZipCode()
+    public function getZipCode(): ?int
     {
         return $this->zipCode;
     }
 
-    /**
-     * Set address.
-     *
-     * @param string $address
-     *
-     * @return Event
-     */
-    public function setAddress($address)
+    public function setAddress(string $address = null): self
     {
         $this->address = $address;
 
         return $this;
     }
 
-    /**
-     * Get address.
-     *
-     * @return string
-     */
-    public function getAddress()
+    public function getAddress(): ?string
     {
         return $this->address;
     }
 
-    /**
-     * Set city.
-     *
-     * @param string $city
-     *
-     * @return Event
-     */
-    public function setCity($city)
+    public function setCity(string $city = null): self
     {
         $this->city = $city;
 
         return $this;
     }
 
-    /**
-     * Get city.
-     *
-     * @return string
-     */
-    public function getCity()
+    public function getCity(): ?string
     {
         return $this->city;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCountry()
+    public function getCountry(): ?string
     {
         return $this->country;
     }
 
-    /**
-     * @param mixed $country
-     */
-    public function setCountry($country)
+    public function setCountry(string $country = null)
     {
         $this->country = $country;
     }
@@ -484,74 +359,42 @@ class Event implements CommentableInterface, IndexableInterface
         return $this->link;
     }
 
-    /**
-     * @return bool
-     */
-    public function getIsEnabled()
+    public function getIsEnabled(): bool
     {
         return $this->isEnabled;
     }
 
-    /**
-     * @param bool $isEnabled
-     */
-    public function setIsEnabled($isEnabled)
+    public function setIsEnabled(bool $isEnabled)
     {
         $this->isEnabled = $isEnabled;
     }
 
-    /**
-     * Get startAt.
-     *
-     * @return \DateTime
-     */
-    public function getStartAt()
+    public function getStartAt(): ?\DateTime
     {
         return $this->startAt;
     }
 
-    /**
-     * Set startAt.
-     *
-     * @param \DateTime $startAt
-     */
-    public function setStartAt($startAt)
+    public function setStartAt(\DateTime $startAt = null)
     {
         $this->startAt = $startAt;
     }
 
-    /**
-     * Get endAt.
-     *
-     * @return \DateTime
-     */
-    public function getEndAt()
+    public function getEndAt(): ?\DateTime
     {
         return $this->endAt;
     }
 
-    /**
-     * Set endAt.
-     *
-     * @param \DateTime $endAt
-     */
-    public function setEndAt($endAt)
+    public function setEndAt(\DateTime $endAt = null)
     {
         $this->endAt = $endAt;
     }
 
-    /**
-     * @return string
-     */
-    public function getSlug()
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    /**
-     * @param string $slug
-     */
-    public function setSlug($slug)
+    public function setSlug(string $slug)
     {
         $this->slug = $slug;
     }
@@ -561,26 +404,14 @@ class Event implements CommentableInterface, IndexableInterface
         return $this->registrations;
     }
 
-    /**
-     * Set registrationEnable.
-     *
-     * @param bool $registrationEnable
-     *
-     * @return Event
-     */
-    public function setRegistrationEnable($registrationEnable)
+    public function setRegistrationEnable(bool $registrationEnable): self
     {
         $this->registrationEnable = $registrationEnable;
 
         return $this;
     }
 
-    /**
-     * Is registrationEnable.
-     *
-     * @return bool
-     */
-    public function isRegistrationEnable()
+    public function isRegistrationEnable(): bool
     {
         return $this->registrationEnable;
     }
@@ -592,18 +423,12 @@ class Event implements CommentableInterface, IndexableInterface
         return 'Event';
     }
 
-    /**
-     * @return bool
-     */
-    public function canDisplay()
+    public function canDisplay(): bool
     {
         return $this->isEnabled;
     }
 
-    /**
-     * @return bool
-     */
-    public function canContribute()
+    public function canContribute(): bool
     {
         return $this->isEnabled;
     }
@@ -627,7 +452,7 @@ class Event implements CommentableInterface, IndexableInterface
         return $this->getMonth($this->startAt);
     }
 
-    public function isOpen()
+    public function isOpen(): bool
     {
         $now = new \DateTime();
 
@@ -638,7 +463,7 @@ class Event implements CommentableInterface, IndexableInterface
         return $this->startAt < $now && $this->endAt > $now;
     }
 
-    public function isClosed()
+    public function isClosed(): bool
     {
         $now = new \DateTime();
 
@@ -649,7 +474,7 @@ class Event implements CommentableInterface, IndexableInterface
         return $this->endAt < $now;
     }
 
-    public function isFuture()
+    public function isFuture(): bool
     {
         return $this->startAt > new \DateTime();
     }
