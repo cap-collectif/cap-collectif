@@ -22,10 +22,14 @@ use Capco\AppBundle\Behat\Traits\ReportingStepsTrait;
 use Capco\AppBundle\Behat\Traits\SharingStepsTrait;
 use Capco\AppBundle\Behat\Traits\SynthesisStepsTrait;
 use Capco\AppBundle\Behat\Traits\ThemeStepsTrait;
+use Elastica\Snapshot;
 use Joli\JoliNotif\Notification;
 use Joli\JoliNotif\NotifierFactory;
 use Symfony\Component\Process\Process;
 use WebDriver\Exception\ElementNotVisible;
+
+const REPOSITORY_NAME = 'repository_qa';
+const SNAPSHOT_NAME = 'snap_qa';
 
 class ApplicationContext extends UserContext
 {
@@ -49,11 +53,10 @@ class ApplicationContext extends UserContext
     /**
      * @BeforeScenario
      */
-    public function reset(BeforeScenarioScope $scope)
+    public function resetScenario(BeforeScenarioScope $scope)
     {
         // We reset everything
         $jobs = [
-            new Process('curl -sS -XDELETE \'http://elasticsearch:9200/_all\''),
             new Process('curl -sS -XBAN http://capco.test/'),
             new Process('redis-cli -h redis FLUSHALL'),
         ];
@@ -70,14 +73,6 @@ class ApplicationContext extends UserContext
             $this->purgeRabbitMqQueues();
         }
 
-        // This tag make sure indexed data is isolated and the same for every test
-        if ($scenario->hasTag('elasticsearch')) {
-            $jobs[] = new Process('php bin/console capco:es:create --env=test -n');
-            $jobs[] = new Process('php bin/console capco:es:populate --env=test -n');
-            // There is some delay before the index is live
-            $jobs[] = new Process('sleep 2');
-        }
-
         // This tag is useful when you analyze the medias folder (e.g: counting number of files)
         // Indeed, we have no way to only copy paste medias because of SonataMediaBundle's workflow.
         // It launch a complete reinit. Use it carefully !
@@ -89,6 +84,21 @@ class ApplicationContext extends UserContext
             echo $job->getCommandLine() . PHP_EOL;
             $job->mustRun();
         }
+
+        $this->snapshot = new Snapshot($this->getService('capco.elasticsearch.client'));
+        $this->snapshot->registerRepository(REPOSITORY_NAME, 'fs', ['location' => 'var']);
+
+        $this->indexManager = $this->getService('capco.elasticsearch.index_builder');
+
+        try {
+            $this->snapshot->deleteSnapshot(REPOSITORY_NAME, SNAPSHOT_NAME);
+        } catch (\Elastica\Exception\ResponseException $e) {
+            echo 'No ElasticSearch snapshot detected.' . PHP_EOL;
+        }
+        echo 'Writing ElasticSearch snapshot.' . PHP_EOL;
+        $this->snapshot->createSnapshot(REPOSITORY_NAME, SNAPSHOT_NAME, [
+          'indices' => $this->indexManager->getLiveSearchIndexName(),
+        ], true);
     }
 
     /**
@@ -110,6 +120,13 @@ class ApplicationContext extends UserContext
             echo $job->getCommandLine() . PHP_EOL;
             $job->mustRun();
         }
+
+        echo 'Restoring ElasticSearch snapshot.' . PHP_EOL;
+        $indexManager = $this->getService('capco.elasticsearch.index_builder');
+        $indexManager->getLiveSearchIndex()->close();
+        $this->snapshot->restoreSnapshot(REPOSITORY_NAME, SNAPSHOT_NAME, [], true);
+        $indexManager->getLiveSearchIndex()->open();
+        $indexManager->markAsLive($indexManager->getLiveSearchIndex());
     }
 
     // public function resetUsingDocker()
