@@ -7,20 +7,21 @@ import { Row } from 'react-bootstrap';
 import ProposalPreview from '../Preview/ProposalPreview';
 import VisibilityBox from '../../Utils/VisibilityBox';
 import type { ProposalList_step } from './__generated__/ProposalList_step.graphql';
+import type { ProposalList_viewer } from './__generated__/ProposalList_viewer.graphql';
 
 type Props = {
   step: ProposalList_step,
+  viewer: ProposalList_viewer,
 };
 
-const renderProposals = (proposals, step) => (
+const renderProposals = (proposals, step, viewer) => (
   <div>
     {proposals.edges.map((edge, key) => (
       <ProposalPreview
         key={key}
         proposal={edge.node}
         step={step}
-        // showThemes={showThemes}
-        // showComments={showComments}
+        viewer={viewer}
       />
     ))}
   </div>
@@ -29,7 +30,7 @@ const renderProposals = (proposals, step) => (
 export class ProposalList extends React.Component<Props> {
 
   render() {
-    const { step } = this.props;
+    const { step, viewer } = this.props;
     const proposals = step.proposals || step.form.proposals;
 
     if (proposals.totalCount === 0) {
@@ -46,20 +47,20 @@ export class ProposalList extends React.Component<Props> {
       opinion__list: true,
     });
 
-    const proposalsVisibleOnlyByViewer = [];
+    const proposalsVisibleOnlyByViewer = { edges: [] };
     const proposalsVisiblePublicly = proposals;
 
     return (
       <Row>
         {proposalsVisiblePublicly.edges.length && (
           <ul className={classes}>
-            {renderProposals(proposalsVisiblePublicly, step)}
+            {renderProposals(proposalsVisiblePublicly, step, viewer)}
           </ul>
         )}
         {proposalsVisibleOnlyByViewer.edges.length && (
           <VisibilityBox enabled>
             <ul className={classes}>
-              {renderProposals(proposalsVisibleOnlyByViewer, step)}
+              {renderProposals(proposalsVisibleOnlyByViewer, step, viewer)}
             </ul>
           </VisibilityBox>
         )}
@@ -71,9 +72,15 @@ export class ProposalList extends React.Component<Props> {
 export default createFragmentContainer(
   ProposalList,
   {
+    viewer: graphql`
+      fragment ProposalList_viewer on User {
+        ...ProposalPreview_viewer
+      }
+    `,
     step: graphql`
       fragment ProposalList_step on Step {
         id
+        ...ProposalPreview_step
         ... on CollectStep {
           form {
             proposals {
@@ -81,6 +88,7 @@ export default createFragmentContainer(
               edges {
                 node {
                   id
+                  ...ProposalPreview_proposal# @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
                 }
               }
             }
@@ -92,6 +100,7 @@ export default createFragmentContainer(
             edges {
               node {
                 id
+                ...ProposalPreview_proposal# @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
               }
             }
           }

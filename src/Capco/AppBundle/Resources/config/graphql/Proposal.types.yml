@@ -17,6 +17,9 @@ Proposal:
               type: "[ProgressStep!]!"
             evaluers:
               type: "[Group!]!"
+            currentVotableStep:
+              type: "Step"
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalCurrentVotableStepResolver", [value])'
             viewerIsAnEvaluer:
               type: "Boolean!"
               resolve: "@=resolver('proposal_viewer_is_evaluer', [value, user])"
@@ -46,6 +49,10 @@ Proposal:
               type: "Project!"
             status:
               type: "Status"
+              args:
+                  step:
+                      type: "ID"
+                      description: "Status on step."
             selections:
               type: "[Selection!]!"
             likers:
@@ -147,7 +154,7 @@ Proposal:
                 orderBy:
                   type: "ProposalVotesOrder"
                   defaultValue: { field: CREATED_AT, direction: DESC }
-                step:
+                stepId:
                   type: "ID!"
             createdAt:
               type: "DateTime!"

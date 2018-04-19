@@ -1189,11 +1189,15 @@ type Proposal implements Node {
   adminUrl: URI!
   progressSteps: [ProgressStep!]!
   evaluers: [Group!]!
+  currentVotableStep: Step
   viewerIsAnEvaluer: Boolean!
   news(after: String, first: Int = 30, before: String, last: Int, orderBy: ProposalOrder = {field: CREATED_AT, direction: DESC}): NewsConnection!
   reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
   project: Project!
-  status: Status
+  status(
+    # Status on step.
+    step: ID
+  ): Status
   selections: [Selection!]!
   likers: [User!]!
   estimation: Int
@@ -1256,7 +1260,7 @@ type Proposal implements Node {
   # Count number of comments for the proposal.
   commentsCount: Int!
   comments(after: String, first: Int = 30, before: String, last: Int, orderBy: CommentOrder = {field: CREATED_AT, direction: DESC}): CommentConnection!
-  votes(after: String, first: Int = 30, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}, step: ID!): ProposalVoteConnection!
+  votes(after: String, first: Int = 30, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}, stepId: ID!): ProposalVoteConnection!
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
@@ -2374,7 +2378,7 @@ type User implements Node {
 
   # Your localisation
   neighborhood: String
-  proposalVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}, step: ID): ProposalVoteConnection!
+  proposalVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}, stepId: ID): ProposalVoteConnection!
 }
 
 # A connection to a list of items.

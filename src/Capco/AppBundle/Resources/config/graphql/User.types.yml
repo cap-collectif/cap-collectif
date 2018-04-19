@@ -180,5 +180,5 @@ User:
                 orderBy:
                   type: "ProposalVotesOrder"
                   defaultValue: { field: CREATED_AT, direction: DESC }
-                step:
+                stepId:
                   type: "ID"

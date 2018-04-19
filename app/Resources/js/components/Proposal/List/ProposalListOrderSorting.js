@@ -4,7 +4,7 @@ import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import Input from '../../Form/Input';
 import LocalStorage from '../../../services/LocalStorageService';
-import { changeOrder /*, loadProposals*/ } from '../../../redux/modules/proposal';
+import { changeOrder } from '../../../redux/modules/proposal';
 import { PROPOSAL_AVAILABLE_ORDERS } from '../../../constants/ProposalConstants';
 import type { Dispatch, State } from '../../../types';
 

@@ -4,7 +4,6 @@ import LocalStorageService from '../../services/LocalStorageService';
 import Fetcher from '../../services/Fetcher';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
-import { PROPOSAL_PAGINATION, PROPOSAL_ORDER_RANDOM } from '../../constants/ProposalConstants';
 import addVote from '../../mutations/AddProposalVoteMutation';
 import removeVote from '../../mutations/RemoveProposalVoteMutation';
 import type { Exact, State as GlobalState, Dispatch, Uuid, Action } from '../../types';
@@ -248,7 +247,11 @@ export const addProposalInRandomResultsByStep = (
 export const vote = (dispatch: Dispatch, step: Object, proposal: Object, data: Object) => {
   dispatch(startVoting());
   return addVote
-    .commit({ step: step.id, input: { proposalId: proposal.id, stepId: step.id, anonymously: data.private } })
+    .commit({
+      stepId: step.id,
+      withVotes: true,
+      input: { proposalId: proposal.id, stepId: step.id, anonymously: data.private },
+    })
     .then(() => {
       dispatch(closeVoteModal());
       FluxDispatcher.dispatch({
@@ -268,7 +271,7 @@ export const vote = (dispatch: Dispatch, step: Object, proposal: Object, data: O
 
 export const deleteVote = (dispatch: Dispatch, step: Object, proposal: Object) => {
   return removeVote
-    .commit({ step: step.id, input: { proposalId: proposal.id, stepId: step.id } })
+    .commit({ withVotes: true, stepId: step.id, input: { proposalId: proposal.id, stepId: step.id } })
     .then(() => {
       FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,
@@ -289,55 +292,6 @@ export const deleteVote = (dispatch: Dispatch, step: Object, proposal: Object) =
       });
     });
 };
-
-export function* fetchProposals(action: Object): Generator<*, *, *> {
-  let { step } = action;
-
-  const globalState: GlobalState = yield select();
-  if (globalState.project.currentProjectById) {
-    step =
-      step ||
-      globalState.project.projectsById[globalState.project.currentProjectById].stepsById[
-        globalState.project.currentProjectStepById
-      ];
-  }
-  const state = globalState.proposal;
-  let url = '';
-  let body = {};
-
-  switch (step.type) {
-    case 'collect':
-      url = `/collect_steps/${step.id}/proposals/search`;
-      break;
-    case 'selection':
-      url = `/selection_steps/${step.id}/proposals/search`;
-      break;
-    default:
-      console.log('Unknown step type'); // eslint-disable-line no-console
-      return false;
-  }
-
-  const filters = {};
-  if (state.filters) {
-    Object.keys(state.filters).forEach(key => {
-      if (state.filters[key] && state.filters[key] !== '0') {
-        filters[key] = state.filters[key];
-      }
-    });
-  }
-
-  const order = state.order ? state.order : PROPOSAL_ORDER_RANDOM;
-  url += `?page=${state.currentPaginationPage}&pagination=${PROPOSAL_PAGINATION}&order=${order}`;
-  body = { terms: state.terms, filters };
-
-  const result = yield call(Fetcher.postToJson, url, body);
-
-  yield put({
-    type: 'proposal/FETCH_SUCCEEDED',
-    proposals: result.proposals,
-    count: result.count,
-  });
-}
 
 type RequestFetchProposalPostsAction = {
   type: 'proposal/POSTS_FETCH_REQUESTED',
@@ -444,7 +398,6 @@ export type ProposalAction =
 export function* saga(): Generator<*, *, *> {
   yield [
     takeEvery('proposal/POSTS_FETCH_REQUESTED', fetchPosts),
-    takeEvery('proposal/FETCH_REQUESTED', fetchProposals),
     takeEvery('proposal/LOAD_MARKERS_REQUEST', fetchMarkers),
     takeEvery('proposal/CHANGE_FILTER', storeFiltersInLocalStorage),
     takeEvery('proposal/CHANGE_TERMS', storeTermsInLocalStorage),

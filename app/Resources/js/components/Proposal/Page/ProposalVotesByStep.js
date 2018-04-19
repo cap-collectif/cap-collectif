@@ -19,19 +19,16 @@ export class ProposalVotesByStep extends React.Component<Props> {
       <QueryRenderer
         environment={environment}
         query={graphql`
-          query ProposalVotesByStepQuery(
-            $proposalId: ID!
-            $step: ID!
-          ) {
+          query ProposalVotesByStepQuery($proposalId: ID!, $stepId: ID!) {
             proposal: node(id: $proposalId) {
-              ...ProposalVotes_proposal @arguments(step: $step)
+              ...ProposalVotes_proposal @arguments(stepId: $stepId)
             }
           }
         `}
         variables={
           ({
             proposalId: proposal.id,
-            step: stepId,
+            stepId: stepId,
           }: ProposalVotesByStepQueryVariables)
         }
         render={({

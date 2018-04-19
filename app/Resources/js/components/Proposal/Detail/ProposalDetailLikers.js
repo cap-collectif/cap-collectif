@@ -23,10 +23,10 @@ export class ProposalDetailLikers extends React.Component<Props> {
         placement="top"
         overlay={
           <Tooltip id={`proposal-${proposal.id}-likers-tooltip-`}>
-            <ProposalDetailLikersTooltipLabel likers={proposal.likers} />
+            <ProposalDetailLikersTooltipLabel proposal={proposal} />
           </Tooltip>
         }>
-        <ProposalDetailLikersLabel likers={proposal.likers} />
+        <ProposalDetailLikersLabel proposal={proposal} />
       </OverlayTrigger>
     );
   }

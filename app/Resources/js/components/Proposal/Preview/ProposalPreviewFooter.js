@@ -64,10 +64,14 @@ export default createFragmentContainer(
   ProposalPreviewFooter,
   {
     proposal: graphql`
-      fragment ProposalPreviewFooter_proposal on Proposal {
+      fragment ProposalPreviewFooter_proposal on Proposal
+      @argumentDefinitions(stepId: { type: "ID!", nonNull: true })
+      {
         id
         commentsCount
-        #votesCount
+        votes(stepId: $stepId) {
+          totalCount
+        }
       }
     `,
   }
