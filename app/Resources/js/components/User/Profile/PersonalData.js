@@ -34,7 +34,6 @@ const validate = () => {
   return errors;
 };
 const locale = window.locale;
-console.log(locale);
 
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
 };
@@ -217,7 +216,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           onChange={(month) => {
                             this.setState({month});
                           }}
-                          geocode={locale.substr(3,5)}
+                          locale={locale.substr(3,5)}
                           id={'month'}
                           name={'month'}
                           classes={'form-control'}
