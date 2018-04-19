@@ -2,7 +2,7 @@
 import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { Button, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import Toggle from 'react-toggle';
 // import UserLink from '../../User/UserLink';
 import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
@@ -42,7 +42,7 @@ export const ProposalUserVoteItem = React.createClass({
     // console.error(classment);
 
     return (
-      <Row className="proposals-user-votes__row d-flex" id={`vote-step${step.id}-proposal${proposal.id}`}>
+      <Row className="proposals-user-votes__row d-flex flex-wrap" id={`vote-step${step.id}-proposal${proposal.id}`}>
         <Col md={1} xs={12} className="proposals-user-votes__col" >
           <div className="proposals-user-votes__content justify-content-between">
             <i className="cap cap-android-menu excerpt" />
@@ -57,6 +57,7 @@ export const ProposalUserVoteItem = React.createClass({
           xs={12}>
           <div className="proposals-user-votes__content">
             <a href={proposal.show_url}>{proposal.title}</a>
+            <p></p>
           </div>
         </Col>
         <Col className="proposals-user-votes__col" md={2} xs={12}>

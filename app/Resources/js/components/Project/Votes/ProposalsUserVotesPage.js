@@ -24,7 +24,6 @@ class ProposalsUserVotesPage extends React.Component<Props, State> {
         <div className="container container--custom">
           {project.votableSteps.length > 0 ? (
             project.votableSteps.map((step, index) => (
-              // faire un composant ici
               <div key={index} className="block">
                 {project.votableSteps.length > 1 ? (
                   <h2>
