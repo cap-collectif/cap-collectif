@@ -8399,6 +8399,12 @@ react-dom@^15.3.2:
     object-assign "^4.1.0"
     prop-types "^15.5.10"
 
+"react-dropdown-date@https://github.com/cap-collectif/react-dropdown-date/tarball/d85e8b6d8083efd4ab3d2d59fcc5c982a3a5a588":
+  version "0.0.13"
+  resolved "https://github.com/cap-collectif/react-dropdown-date/tarball/d85e8b6d8083efd4ab3d2d59fcc5c982a3a5a588#6615d4b25e7e8b0974297bab6150d9f28768588b"
+  dependencies:
+    react "^16.3.1"
+
 react-dropzone@^3.3.4:
   version "3.13.4"
   resolved "https://registry.yarnpkg.com/react-dropzone/-/react-dropzone-3.13.4.tgz#84da26815c40339691c49b4544c2ef7a16912ccc"
@@ -8690,6 +8696,15 @@ react@^15.3.2, react@^15.6.1:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
     prop-types "^15.5.10"
+
+react@^16.3.1:
+  version "16.3.2"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.3.2.tgz#fdc8420398533a1e58872f59091b272ce2f91ea9"
+  dependencies:
+    fbjs "^0.8.16"
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.0"
 
 read-components@~0.7:
   version "0.7.0"
