@@ -19,7 +19,6 @@ export class ProposalPreview extends React.Component<Props> {
 
   render() {
     const { proposal, step } = this.props;
-    const voteType = step.voteType;
 
     return (
       <Col componentClass="li" xs={12} sm={6} md={4} lg={3}>
@@ -31,12 +30,10 @@ export class ProposalPreview extends React.Component<Props> {
           <ProposalPreviewHeader proposal={proposal} />
           <ProposalPreviewBody
             proposal={proposal}
-            showNullEstimation={voteType === "BUDGET"}
             step={step}
           />
           <ProposalPreviewFooter
             proposal={proposal}
-            showVotes={voteType !== "DISABLED"}
             step={step}
           />
           <ProposalStatus proposal={proposal} stepId={step.id} />
@@ -65,7 +62,9 @@ export default createFragmentContainer(
         author {
           vip
         }
+        ...ProposalPreviewHeader_proposal
         ...ProposalPreviewFooter_proposal
+        ...ProposalPreviewBody_proposal
       }
     `,
   }
