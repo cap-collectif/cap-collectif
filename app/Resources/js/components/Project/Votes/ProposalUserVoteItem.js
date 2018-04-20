@@ -1,6 +1,6 @@
 // @flow
 import React, { PropTypes } from 'react';
-import { FormattedMessage } from 'react-intl';
+import {FormattedDate, FormattedMessage, FormattedTime} from 'react-intl';
 import { connect } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
 import Toggle from 'react-toggle';
@@ -20,6 +20,11 @@ export const ProposalUserVoteItem = React.createClass({
   render() {
     const { step, proposal, dispatch, classment } = this.props;
 
+    const voteDay = (
+      <FormattedDate value={proposal.createdAt} day="numeric" month="long" year="numeric" />
+    );
+    const voteTime = <FormattedTime value={proposal.createdAt} hour="numeric" minute="numeric" />;
+
 
     const colWidth = () => {
       if(step.votesRanking === true && step.voteType === VOTE_TYPE_BUDGET) {
@@ -37,7 +42,7 @@ export const ProposalUserVoteItem = React.createClass({
       return 9;
     };
 
-    // console.log(step);
+    console.log(step);
     // console.warn(proposal);
     // console.error(classment);
 
@@ -56,8 +61,16 @@ export const ProposalUserVoteItem = React.createClass({
           md={colWidth()}
           xs={12}>
           <div className="proposals-user-votes__content">
-            <a href={proposal.show_url}>{proposal.title}</a>
-            <p></p>
+            <a href={proposal.show_url}>{proposal.title}</a><br/>
+            {proposal.createdAt &&
+              <FormattedMessage
+                id="voted-on-date-at-time"
+                values={{
+                  date: voteDay,
+                  time: voteTime,
+                }}
+              />
+            }
           </div>
         </Col>
         <Col className="proposals-user-votes__col" md={2} xs={12}>
@@ -72,15 +85,6 @@ export const ProposalUserVoteItem = React.createClass({
             </div>
           </div>
         </Col>
-        {/*<Col className="proposals-user-votes__col" md={2} xs={12}>*/}
-          {/*<div className="proposals-user-votes__content">*/}
-            {/*<div>*/}
-              {/*<span className="label label-primary">*/}
-                {/*Soumis au vote*/}
-              {/*</span>*/}
-            {/*</div>*/}
-          {/*</div>*/}
-        {/*</Col>*/}
         {step.voteType === VOTE_TYPE_BUDGET &&
           <Col className="proposals-user-votes__col" md={2} xs={12}>
             <div className="proposals-user-votes__content justify-content-center">

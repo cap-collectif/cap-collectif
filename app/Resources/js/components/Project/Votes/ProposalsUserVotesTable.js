@@ -70,6 +70,7 @@ class ProposalsUserVotesTable extends React.Component<Props, State> {
                           key={key}
                           classment={key}
                           proposal={node.proposal}
+
                           step={step}
                         />
                       </div>

@@ -114,9 +114,12 @@ export default createFragmentContainer(ProposalsUserVotesPage, {
             totalCount
             edges {
               node {
+                createdAt
+                anonymous
                 proposal {
                   id
                   title
+                  createdAt
                   show_url
                   estimation
                   district {
@@ -143,6 +146,8 @@ export default createFragmentContainer(ProposalsUserVotesPage, {
             totalCount
             edges {
               node {
+                createdAt
+                anonymous
                 proposal {
                   id
                   title
