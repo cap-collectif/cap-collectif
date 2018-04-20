@@ -4,9 +4,9 @@
 {% set items = (opinions is defined) ? opinions : proposals %}
 <div class="opinion  opinion--{{ color }} opinion--default">
     <div class="opinion__header  opinion__header--mobile-centered">
-        <h2 class="pull-left  h4  opinion__header__title">
+        <div class="pull-left opinion__header__title">
             {{ label | transchoice(items | length, {}, 'CapcoAppBundle')  }}
-        </h2>
+        </div>
         {% if filter is not defined or filter == true %}
             <div class="pull-right  opinion__header__filter">
                 {% if opinions_count > 1 %}
