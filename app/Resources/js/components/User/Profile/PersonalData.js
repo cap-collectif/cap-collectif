@@ -1,34 +1,35 @@
 // @flow
-import React, { Component } from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
+import React, {Component} from 'react';
+import {graphql, createFragmentContainer} from 'react-relay';
 import {
   Alert,
   Well,
   Panel,
   Col,
-  Form,
   FormGroup,
   FormControl,
   ControlLabel,
   ButtonToolbar,
   Button,
 } from 'react-bootstrap';
-import { connect, type MapStateToProps } from 'react-redux';
-import { YearPicker, MonthPicker, DayPicker } from 'react-dropdown-date';
-import { reduxForm, type FormProps, SubmissionError } from 'redux-form';
-import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
+import {connect, type MapStateToProps} from 'react-redux';
+import {YearPicker, MonthPicker, DayPicker} from 'react-dropdown-date';
+import {reduxForm, type FormProps, Field, SubmissionError} from 'redux-form';
+import {FormattedMessage, injectIntl, type IntlShape} from 'react-intl';
 import type PersonalData_user from './__generated__/PersonalData_user.graphql';
 import AlertForm from '../../Alert/AlertForm';
-import type { Dispatch, State } from '../../../types';
+import type {Dispatch, State} from '../../../types';
 import UpdateProfilePersonalDataMutation from '../../../mutations/UpdateProfilePersonalDataMutation';
+import component from "../../Form/Field";
 
 type RelayProps = { personalDataForm: PersonalData_user };
 type Props = FormProps &
   RelayProps & {
-    user: PersonalData_user,
-    personalDataForm: PersonalData_user,
-    intl: IntlShape,
-  };
+  user: PersonalData_user,
+  personalDataForm: PersonalData_user,
+  intl: IntlShape,
+  initialValues: Object,
+};
 
 const formName = 'profilePersonalData';
 
@@ -98,7 +99,7 @@ const validate = (values: Object, props: Props) => {
 const locale = window.locale;
 
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
-  const { intl } = props;
+  const {intl} = props;
   const input = {
     ...values,
     id: undefined,
@@ -107,7 +108,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
 
   console.log(input);
 
-  return UpdateProfilePersonalDataMutation.commit({ input })
+  return UpdateProfilePersonalDataMutation.commit({input})
     .then(response => {
       if (!response.updateProfilePersonalData || !response.updateProfilePersonalData.viewer) {
         throw new Error('Mutation "updateProfilePersonalData" failed.');
@@ -120,7 +121,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
         });
       } else {
         throw new SubmissionError({
-          _error: intl.formatMessage({ id: 'global.error.server.form' }),
+          _error: intl.formatMessage({id: 'global.error.server.form'}),
         });
       }
     });
@@ -200,7 +201,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
       <div id="personal-data">
         {!this.hasData(user) && (
           <Alert bsStyle="info">
-            <span className="cap-information col-sm-1 col-md-1" />
+            <span className="cap-information col-sm-1 col-md-1"/>
             <FormattedMessage
               id="participation-personal-data-identity-verification"
               className="col-sm-7 col-md-7"
@@ -209,7 +210,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
         )}
         {this.hasData(user) && (
           <Alert bsStyle="info" id="project-participation-collected-data">
-            <span className="cap-information col-sm-1 col-md-1" />
+            <span className="cap-information col-sm-1 col-md-1"/>
             <FormattedMessage
               id="project-participation-collected-data"
               className="col-sm-11 col-md-11"
@@ -218,71 +219,81 @@ export class PersonalData extends Component<Props, PersonalDataState> {
         )}
         <Panel id="personal-data-form">
           <h2>
-            <FormattedMessage id="personal-data" />
+            <FormattedMessage id="personal-data"/>
           </h2>
           {!this.hasData(user) && (
             <div className="personal_data_field">
               <Well>
-                <FormattedMessage id="no-data" />
+                <FormattedMessage id="no-data"/>
               </Well>
             </div>
           )}
           {this.hasData(user) && (
             <div>
-              <Form horizontal onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} horizontal className="form-horizontal">
                 {user.firstname && (
-                  <FormGroup controlId="formHorizontalFirstname" className="personal_data_field">
-                    <Col sm={2}>
-                      <ControlLabel componentClass={ControlLabel}>
-                        <FormattedMessage id="form.label_firstname" />
-                      </ControlLabel>
-                    </Col>
-                    <Col sm={8}>
-                      <FormControl type="text" defaultValue={user.firstname} />
-                    </Col>
-                  </FormGroup>
+                  <div className="personal_data_field">
+                    <label className="col-sm-3 control-label">
+                      <FormattedMessage id="form.label_firstname"/>
+                    </label>
+                    <div>
+                      <Field
+                        name="firstname"
+                        component={component}
+                        type="text"
+                        id="personal-data-form-firstname"
+                        divClassName="col-sm-7"
+                      />
+                    </div>
+                  </div>
                 )}
                 {user.lastname && (
-                  <FormGroup controlId="formHorizontalLastname" className="personal_data_field">
-                    <Col sm={2}>
-                      <ControlLabel componentClass={ControlLabel}>
-                        <FormattedMessage id="form.label_lastname" />
-                      </ControlLabel>
-                    </Col>
-                    <Col sm={8}>
-                      <FormControl type="text" defaultValue={user.lastname} />
-                    </Col>
-                  </FormGroup>
+                  <div className="personal_data_field">
+                    <label className="col-sm-3 control-label">
+                      <FormattedMessage id="form.label_lastname"/>
+                    </label>
+                    <div>
+                      <Field
+                        name="lastname"
+                        component={component}
+                        type="text"
+                        id="personal-data-form-lastname"
+                        divClassName="col-sm-7"
+                      />
+                    </div>
+                  </div>
                 )}
                 {user.gender && (
-                  <FormGroup controlId="formHorizontalGender" className="personal_data_field">
-                    <Col sm={2}>
-                      <ControlLabel componentClass={ControlLabel}>
-                        <FormattedMessage id="form.label_gender" />
-                      </ControlLabel>
-                    </Col>
-                    <Col sm={8}>
-                      <FormControl componentClass="select" placeholder="select">
+                  <div className="personal_data_field">
+                    <label className="col-sm-3 control-label">
+                      <FormattedMessage id="form.label_gender"/>
+                    </label>
+                    <div>
+                      <Field
+                        name="gender"
+                        component={component}
+                        type="select"
+                        id="personal-data-form-gender"
+                        divClassName="col-sm-7"
+                      >
                         <option selected={user.gender === 'm' ? 'selected' : ''} value="m">
-                          <FormattedMessage id="gender.male" />
+                          <FormattedMessage id="gender.male"/>
                         </option>
                         <option selected={user.gender === 'f' ? 'selected' : ''} value="f">
-                          <FormattedMessage id="gender.female" />
+                          <FormattedMessage id="gender.female"/>
                         </option>
                         <option selected={user.gender === 'o' ? 'selected' : ''} value="o">
-                          <FormattedMessage id="gender.other" />
+                          <FormattedMessage id="gender.other"/>
                         </option>
-                      </FormControl>
-                    </Col>
-                  </FormGroup>
+                      </Field>
+                    </div>
+                  </div>
                 )}
                 {user.dateOfBirth && (
-                  <FormGroup controlId="formHorizontalDateOfBirth" className="personal_data_field">
-                    <Col sm={2}>
-                      <ControlLabel componentClass={ControlLabel}>
-                        <FormattedMessage id="form.label_date_of_birth" />
-                      </ControlLabel>
-                    </Col>
+                  <div className="personal_data_field">
+                    <label className="col-sm-3 control-label">
+                      <FormattedMessage id="form.label_date_of_birth"/>
+                    </label>
                     <Col sm={8} id="personal-data-date-of-birth">
                       <Col sm={3} md={3} id="personal-data-date-of-birth-day">
                         <DayPicker
@@ -291,7 +302,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           month={this.state.month}
                           value={this.state.day}
                           onChange={day => {
-                            this.setState({ day });
+                            this.setState({day});
                           }}
                           id={'day'}
                           name={'day'}
@@ -305,7 +316,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           year={this.state.year}
                           value={this.state.month}
                           onChange={month => {
-                            this.setState({ month });
+                            this.setState({month});
                           }}
                           locale={locale.substr(3, 5)}
                           id={'month'}
@@ -319,7 +330,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           defaultValue={'Année'}
                           value={this.state.year}
                           onChange={year => {
-                            this.setState({ year });
+                            this.setState({year});
                           }}
                           id={'year'}
                           name={'year'}
@@ -328,80 +339,100 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                         />
                       </Col>
                     </Col>
-                  </FormGroup>
+                  </div>
                 )}
                 {hasAddressData(user) && (
-                  <FormGroup controlId="formHorizontalAdress" className="personal_data_field">
+                  <div className="personal_data_field">
                     {user.address && (
-                      <Col sm={12}>
-                        <Col sm={2}>
-                          <ControlLabel componentClass={ControlLabel}>
-                            <FormattedMessage id="form.label_address" />
-                          </ControlLabel>
-                        </Col>
-                        <Col sm={8}>
-                          <FormControl type="text" defaulValue={user.address} />
-                        </Col>
-                      </Col>
+                      <div className="personal-data-address">
+                        <label className="col-sm-3 control-label">
+                          <FormattedMessage id="form.label_address"/>
+                        </label>
+                        <div>
+                          <Field
+                            name="address"
+                            component={component}
+                            type="text"
+                            id="personal-data-form-address"
+                            divClassName="col-sm-7"
+                          />
+                        </div>
+                      </div>
                     )}
                     {user.address2 && (
-                      <Col sm={12}>
-                        <Col sm={2}>
-                          <ControlLabel componentClass={ControlLabel}>
-                            <FormattedMessage id="form.label_address2" />
-                          </ControlLabel>
-                        </Col>
-                        <Col sm={8}>
-                          <FormControl type="text" defaulValue={user.address2} />
-                        </Col>
-                      </Col>
+                      <div className="personal-data-address">
+                        <label className="col-sm-3 control-label">
+                          <FormattedMessage id="form.label_address2"/>
+                        </label>
+                        <div>
+                          <Field
+                            name="address2"
+                            component={component}
+                            type="text"
+                            id="personal-data-form-address2"
+                            divClassName="col-sm-7"
+                          />
+                        </div>
+                      </div>
                     )}
                     {user.city && (
-                      <Col sm={12}>
-                        <Col sm={2}>
-                          <ControlLabel componentClass={ControlLabel}>
-                            <FormattedMessage id="form.label_city" />
-                          </ControlLabel>
-                        </Col>
-                        <Col sm={8}>
-                          <FormControl type="text" value={user.city} />
-                        </Col>
-                      </Col>
+                      <div className="personal-data-address">
+                        <label className="col-sm-3 control-label">
+                          <FormattedMessage id="form.label_city"/>
+                        </label>
+                        <div>
+                          <Field
+                            name="city"
+                            component={component}
+                            type="text"
+                            id="personal-data-form-city"
+                            divClassName="col-sm-7"
+                          />
+                        </div>
+                      </div>
                     )}
                     {user.zipCode && (
-                      <Col sm={12}>
-                        <Col sm={2}>
-                          <ControlLabel componentClass={ControlLabel}>
-                            <FormattedMessage id="form.label_zip_code" />
-                          </ControlLabel>
-                        </Col>
-                        <Col sm={4} md={4}>
-                          <FormControl type="text" defaultValue={user.zipCode} />
-                        </Col>
-                      </Col>
+                      <div className="personal-data-address">
+                        <label className="col-sm-3 control-label">
+                          <FormattedMessage id="form.label_zip_code"/>
+                        </label>
+                        <div>
+                          <Field
+                            name="zipCode"
+                            component={component}
+                            type="text"
+                            id="personal-data-form-zip-code"
+                            divClassName="col-sm-7"
+                          />
+                        </div>
+                      </div>
                     )}
-                  </FormGroup>
+                  </div>
                 )}
                 {user.phone && (
-                  <FormGroup controlId="formHorizontalPhone" className="personal_data_field">
-                    <Col sm={2}>
-                      <ControlLabel componentClass={ControlLabel}>
-                        <FormattedMessage id="global.phone" />
-                      </ControlLabel>
-                    </Col>
-                    <Col sm={8}>
-                      <FormControl type="text" defaultValue={user.phone} />
-                    </Col>
-                  </FormGroup>
+                  <div className="personal_data_field">
+                    <label className="col-sm-3 control-label">
+                      <FormattedMessage id="form.label_phone"/>
+                    </label>
+                    <div>
+                      <Field
+                        name="phone"
+                        component={component}
+                        type="text"
+                        id="personal-data-form-phone"
+                        divClassName="col-sm-7"
+                      />
+                    </div>
+                  </div>
                 )}
-                <FormGroup controlId="formHorizontalPhone" className="personal_data_field">
+                <div className="personal_data_field">
                   <ButtonToolbar className="box-content__toolbar">
                     <Button
                       disabled={invalid || dirty || submitting}
                       type="submit"
                       bsStyle="primary"
                       id="proposal-form-admin-content-save">
-                      <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
+                      <FormattedMessage id={submitting ? 'global.loading' : 'global.save'}/>
                     </Button>
                     <AlertForm
                       valid={dirty ? true : valid}
@@ -412,8 +443,8 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                       submitting={submitting}
                     />
                   </ButtonToolbar>
-                </FormGroup>
-              </Form>
+                </div>
+              </form>
             </div>
           )}
         </Panel>
@@ -429,8 +460,16 @@ const form = reduxForm({
   form: formName,
 })(PersonalData);
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
-  initialValues: props.personalDataForm,
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) => ({
+  initialValues: {
+    firstname: props.user.firstname ? props.user.firstname : '',
+    lastname: props.user.lastname ? props.user.lastname : '',
+    address: props.user.address ? props.user.address : '',
+    address2: props.user.address2 ? props.user.address2 : '',
+    city: props.user.city ? props.user.city : '',
+    zipCode: props.user.zipCode ? props.user.zipCode : '',
+    phone: props.user.phone ? props.user.phone : '',
+  },
 });
 
 const container = connect(mapStateToProps)(injectIntl(form));

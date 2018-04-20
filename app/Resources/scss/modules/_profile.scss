@@ -164,6 +164,7 @@
 #personal-data-form {
     color: black;
     .personal_data_field {
+        clear:both;
         border-top: solid 0.5px $table-border-color;
         .well {
             margin-top: 20px;
@@ -172,12 +173,14 @@
         padding: 10px 0;
         label.control-label {
             text-align: right;
-            float: right;
+            float: left;
         }
         div.col-sm-12 {
             padding: 10px 0;
         }
-
+        div.personal-data-address{
+            clear: both;
+        }
     }
 }
 
