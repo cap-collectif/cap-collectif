@@ -183,7 +183,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
         return new Paginator($query);
     }
 
-    public function countVotesForProposal(Proposal $proposal): int
+    public function countVotesByProposal(Proposal $proposal): int
     {
         return (int) $this->createQueryBuilder('pv')
             ->select('COUNT(pv.id)')

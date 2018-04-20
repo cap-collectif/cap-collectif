@@ -65,12 +65,10 @@ type Step = {
 type Selection = { step: Step, status: ?Status };
 export type Proposal = {
   selections: Array<Selection>,
-  votesCountByStepId: { [id: Uuid]: number },
   viewerCanSeeEvaluation: boolean,
 } & Object;
 type ProposalMap = { [id: Uuid]: Proposal };
 export type State = {
-  +queryCount: ?number,
   +currentProposalId: ?Uuid,
   +proposalsById: ProposalMap,
   +currentVoteModal: ?Uuid,
@@ -97,7 +95,6 @@ export type State = {
 
 export const initialState: State = {
   currentProposalId: null,
-  queryCount: undefined,
   proposalsById: {},
   lastEditedStepId: null,
   currentVoteModal: null,

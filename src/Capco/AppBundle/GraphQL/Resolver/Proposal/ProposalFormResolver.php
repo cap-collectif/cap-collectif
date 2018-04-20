@@ -81,7 +81,7 @@ class ProposalFormResolver implements ContainerAwareInterface
                 $direction = $args->offsetGet('orderBy')['direction'];
                 $field = $args->offsetGet('orderBy')['field'];
 
-                $order = $this->findOrderFromFieldAndDirection($field, $direction);
+                $order = self::findOrderFromFieldAndDirection($field, $direction);
 
                 $filters['proposalForm'] = $form->getId();
                 $filters['collectStep'] = $form->getStep()->getType();
@@ -107,6 +107,7 @@ class ProposalFormResolver implements ContainerAwareInterface
 
         $connection = $paginator->auto($args, $totalCount);
         $connection->totalCount = $totalCount;
+        $connection->fusionCount = 0;
 
         return $connection;
     }
@@ -143,7 +144,7 @@ class ProposalFormResolver implements ContainerAwareInterface
             ], true);
     }
 
-    public function findOrderFromFieldAndDirection(string $field, string $direction): string
+    public static function findOrderFromFieldAndDirection(string $field, string $direction): string
     {
         $order = 'random';
 

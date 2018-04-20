@@ -8,15 +8,11 @@ use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Patch;
 use FOS\RestBundle\Controller\Annotations\Post;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Request\ParamFetcherInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class SelectionStepsController extends FOSRestController
 {
@@ -28,47 +24,6 @@ class SelectionStepsController extends FOSRestController
     public function getBySelectionStepAction(SelectionStep $selectionStep)
     {
         return $selectionStep;
-    }
-
-    /**
-     * @Post("/selection_steps/{selectionStepId}/proposals/search")
-     * @ParamConverter("selectionStep", options={"mapping": {"selectionStepId": "id"}})
-     * @QueryParam(name="page", requirements="[0-9.]+", default="1")
-     * @QueryParam(name="pagination", requirements="[0-9.]+", default="100")
-     * @QueryParam(name="order", requirements="(old|last|votes|least-votes|comments|random|expensive|cheap)", nullable=true)
-     * @View(statusCode=200, serializerGroups={"Proposals", "ThemeDetails", "UsersInfos", "UserMedias"})
-     */
-    public function postProposalsBySelectionStepAction(Request $request, SelectionStep $selectionStep, ParamFetcherInterface $paramFetcher)
-    {
-        $page = (int) $paramFetcher->get('page');
-        $pagination = (int) $paramFetcher->get('pagination');
-        $order = $paramFetcher->get('order') ?: $selectionStep->getDefaultSort();
-
-        if ('votes' === $order && !$selectionStep->isVotable()) {
-            $order = 'last';
-        }
-
-        $terms = $request->request->has('terms') ? $request->request->get('terms') : null;
-
-        // Filters
-        $filters = $request->request->has('filters') ? $request->request->get('filters') : [];
-        $filters['selectionStep'] = $selectionStep->getId();
-
-        $seed = $this->getUser() ? $this->getUser()->getId() : $this->get('request')->getClientIp();
-
-        $limit = $pagination ?? 10;
-        $offset = ($page - 1) * $pagination;
-
-        $results = $this->get('capco.search.proposal_search')->searchProposals(
-            $offset,
-            $limit,
-            $order,
-            $terms,
-            $filters,
-            $seed
-        );
-
-        return $results;
     }
 
     /**

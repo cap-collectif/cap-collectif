@@ -47,7 +47,6 @@ export class ProposalListOrderSorting extends React.Component<Props, ComponentSt
     if (!savedSort || !Object.prototype.hasOwnProperty.call(savedSort, stepId)) {
       if (defaultSort) {
         dispatch(changeOrder(defaultSort));
-        // dispatch(loadProposals());
       }
     }
   }
@@ -65,7 +64,6 @@ export class ProposalListOrderSorting extends React.Component<Props, ComponentSt
           aria-label={intl.formatMessage({ id: 'global.filter' })}
           onChange={e => {
             dispatch(changeOrder(e.target.value));
-            // dispatch(loadProposals());
           }}
           value={order}>
           {displayedOrders.map(choice => (

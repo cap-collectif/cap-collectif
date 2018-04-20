@@ -4,19 +4,29 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalPageTabs } from './ProposalPageTabs';
 import { features } from '../../../redux/modules/default';
+import { $refType, $fragmentRefs } from '../../../mocks';
 
 describe('<ProposalPageTabs />', () => {
-  // $FlowFixMe $refType
   const proposal = {
+    $refType,
+    $fragmentRefs,
+    id: '1',
     followerConnection: {
       totalCount: 169,
     },
-    postsCount: 1,
+    currentVotableStep: null,
+    votes: {
+      totalCount: 1,
+    },
+    news: {
+      totalCount: 1,
+    },
     viewerCanSeeEvaluation: true,
   };
-  // $FlowFixMe $refType
+
   const props = {
     form: {
+      $refType,
       usingThemes: true,
       usingCategories: true,
     },
@@ -46,7 +56,6 @@ describe('<ProposalPageTabs />', () => {
       districts: true,
       themes: true,
     },
-    votesCount: 150,
   };
 
   it('should render Tabs with correct DOM structure', () => {

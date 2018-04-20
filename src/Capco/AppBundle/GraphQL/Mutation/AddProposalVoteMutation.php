@@ -49,10 +49,12 @@ class AddProposalVoteMutation
             if ($step !== $proposal->getProposalForm()->getStep()) {
                 throw new UserError('This proposal is not associated to this collect step.');
             }
+
             $countUserVotes = $this->em
               ->getRepository('CapcoAppBundle:ProposalCollectVote')
               ->countVotesByStepAndUser($step, $user)
-          ;
+            ;
+
             $vote = (new ProposalCollectVote())
               ->setCollectStep($step);
         } elseif ($step instanceof SelectionStep) {

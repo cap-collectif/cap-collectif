@@ -24,68 +24,32 @@ exports[`<ProposalList /> should render a collectStep proposal list 1`] = `
   <ul
     className="media-list proposal-preview-list opinion__list"
   >
-    <div>
-      <Relay(ProposalPreview)
-        proposal={
-          Object {
-            "id": "1",
-          }
+    <Relay(ProposalPreview)
+      proposal={
+        Object {
+          "id": "1",
         }
-        step={
-          Object {
-            "form": Object {
-              "proposals": Object {
-                "edges": Array [
-                  Object {
-                    "node": Object {
-                      "id": "1",
-                    },
-                  },
-                  Object {
-                    "node": Object {
-                      "id": "2",
-                    },
-                  },
-                ],
-                "totalCount": 2,
-              },
-            },
-            "id": "1",
-          }
+      }
+      step={
+        Object {
+          "id": "1",
         }
-        viewer={null}
-      />
-      <Relay(ProposalPreview)
-        proposal={
-          Object {
-            "id": "2",
-          }
+      }
+      viewer={null}
+    />
+    <Relay(ProposalPreview)
+      proposal={
+        Object {
+          "id": "2",
         }
-        step={
-          Object {
-            "form": Object {
-              "proposals": Object {
-                "edges": Array [
-                  Object {
-                    "node": Object {
-                      "id": "1",
-                    },
-                  },
-                  Object {
-                    "node": Object {
-                      "id": "2",
-                    },
-                  },
-                ],
-                "totalCount": 2,
-              },
-            },
-            "id": "1",
-          }
+      }
+      step={
+        Object {
+          "id": "1",
         }
-        viewer={null}
-      />
-    </div>
+      }
+      viewer={null}
+    />
   </ul>
   0
 </Row>
@@ -99,64 +63,32 @@ exports[`<ProposalList /> should render a selectionStep proposal list 1`] = `
   <ul
     className="media-list proposal-preview-list opinion__list"
   >
-    <div>
-      <Relay(ProposalPreview)
-        proposal={
-          Object {
-            "id": "1",
-          }
+    <Relay(ProposalPreview)
+      proposal={
+        Object {
+          "id": "1",
         }
-        step={
-          Object {
-            "id": "1",
-            "proposals": Object {
-              "edges": Array [
-                Object {
-                  "node": Object {
-                    "id": "1",
-                  },
-                },
-                Object {
-                  "node": Object {
-                    "id": "2",
-                  },
-                },
-              ],
-              "totalCount": 2,
-            },
-          }
+      }
+      step={
+        Object {
+          "id": "1",
         }
-        viewer={null}
-      />
-      <Relay(ProposalPreview)
-        proposal={
-          Object {
-            "id": "2",
-          }
+      }
+      viewer={null}
+    />
+    <Relay(ProposalPreview)
+      proposal={
+        Object {
+          "id": "2",
         }
-        step={
-          Object {
-            "id": "1",
-            "proposals": Object {
-              "edges": Array [
-                Object {
-                  "node": Object {
-                    "id": "1",
-                  },
-                },
-                Object {
-                  "node": Object {
-                    "id": "2",
-                  },
-                },
-              ],
-              "totalCount": 2,
-            },
-          }
+      }
+      step={
+        Object {
+          "id": "1",
         }
-        viewer={null}
-      />
-    </div>
+      }
+      viewer={null}
+    />
   </ul>
   0
 </Row>

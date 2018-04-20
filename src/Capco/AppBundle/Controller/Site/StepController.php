@@ -286,6 +286,8 @@ class StepController extends Controller
           ->countFusionsByProposalForm($proposalForm)
         ;
 
+        $serializer = $this->get('serializer');
+
         $props = $serializer->serialize([
             'statuses' => $step->getStatuses(),
             'form' => $proposalForm,
@@ -383,6 +385,8 @@ class StepController extends Controller
         $form = $step->getProposalForm();
         $showThemes = $form->isUsingThemes();
         $categories = $form->getCategories();
+
+        $serializer = $this->get('serializer');
 
         $props = $serializer->serialize([
             'stepId' => $step->getId(),

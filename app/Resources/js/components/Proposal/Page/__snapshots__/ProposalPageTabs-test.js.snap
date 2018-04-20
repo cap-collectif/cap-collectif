@@ -72,7 +72,7 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
             <span
               className="badge"
             >
-              0
+              1
             </span>
           </NavItem>
           <NavItem
@@ -121,22 +121,40 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
               <Relay(ProposalFusionList)
                 proposal={
                   Object {
+                    "$fragmentRefs": null,
+                    "$refType": null,
+                    "currentVotableStep": null,
                     "followerConnection": Object {
                       "totalCount": 169,
                     },
-                    "postsCount": 1,
+                    "id": "1",
+                    "news": Object {
+                      "totalCount": 1,
+                    },
                     "viewerCanSeeEvaluation": true,
+                    "votes": Object {
+                      "totalCount": 1,
+                    },
                   }
                 }
               />
               <Relay(ProposalPageLastNews)
                 proposal={
                   Object {
+                    "$fragmentRefs": null,
+                    "$refType": null,
+                    "currentVotableStep": null,
                     "followerConnection": Object {
                       "totalCount": 169,
                     },
-                    "postsCount": 1,
+                    "id": "1",
+                    "news": Object {
+                      "totalCount": 1,
+                    },
                     "viewerCanSeeEvaluation": true,
+                    "votes": Object {
+                      "totalCount": 1,
+                    },
                   }
                 }
               />
@@ -144,6 +162,7 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                 categories={Array []}
                 form={
                   Object {
+                    "$refType": null,
                     "usingCategories": true,
                     "usingThemes": true,
                   }
@@ -175,11 +194,20 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
               <Relay(ProposalPageMetadata)
                 proposal={
                   Object {
+                    "$fragmentRefs": null,
+                    "$refType": null,
+                    "currentVotableStep": null,
                     "followerConnection": Object {
                       "totalCount": 169,
                     },
-                    "postsCount": 1,
+                    "id": "1",
+                    "news": Object {
+                      "totalCount": 1,
+                    },
                     "viewerCanSeeEvaluation": true,
+                    "votes": Object {
+                      "totalCount": 1,
+                    },
                   }
                 }
                 showCategories={true}
@@ -247,11 +275,20 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
           <Relay(ProposalPageBlog)
             proposal={
               Object {
+                "$fragmentRefs": null,
+                "$refType": null,
+                "currentVotableStep": null,
                 "followerConnection": Object {
                   "totalCount": 169,
                 },
-                "postsCount": 1,
+                "id": "1",
+                "news": Object {
+                  "totalCount": 1,
+                },
                 "viewerCanSeeEvaluation": true,
+                "votes": Object {
+                  "totalCount": 1,
+                },
               }
             }
           />
@@ -263,11 +300,20 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
           <Relay(Connect(InjectIntl(ReduxForm)))
             proposal={
               Object {
+                "$fragmentRefs": null,
+                "$refType": null,
+                "currentVotableStep": null,
                 "followerConnection": Object {
                   "totalCount": 169,
                 },
-                "postsCount": 1,
+                "id": "1",
+                "news": Object {
+                  "totalCount": 1,
+                },
                 "viewerCanSeeEvaluation": true,
+                "votes": Object {
+                  "totalCount": 1,
+                },
               }
             }
           />
@@ -280,11 +326,20 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
             pageAdmin={false}
             proposal={
               Object {
+                "$fragmentRefs": null,
+                "$refType": null,
+                "currentVotableStep": null,
                 "followerConnection": Object {
                   "totalCount": 169,
                 },
-                "postsCount": 1,
+                "id": "1",
+                "news": Object {
+                  "totalCount": 1,
+                },
                 "viewerCanSeeEvaluation": true,
+                "votes": Object {
+                  "totalCount": 1,
+                },
               }
             }
           />

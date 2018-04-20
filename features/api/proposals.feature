@@ -119,7 +119,6 @@ Scenario: Anonymous API client wants to get one proposal from a ProposalForm and
       "isTrashed": @boolean@,
       "trashedReason": @...@,
       "title": @string@,
-      "votesCountByStepId": @...@,
       "hasUserReported": @boolean@,
       "likers": @array@,
       "_links": {
@@ -268,10 +267,6 @@ Scenario: Admin wants to get one proposal from a ProposalForm and should see pri
         "collectstep1": []
       },
       "votableStepId": "selectionstep1",
-      "votesCountByStepId": {
-        "selectionstep1": 0,
-        "collectstep1": 0
-      },
       "hasUserReported": @boolean@,
       "likers": @array@,
       "_links": {
@@ -415,7 +410,6 @@ Scenario: User wants to get his proposal from a ProposalForm and should see priv
       "isTrashed": @boolean@,
       "trashedReason": @...@,
       "title": @string@,
-      "votesCountByStepId": @...@,
       "hasUserReported": @boolean@,
       "likers": @array@,
       "_links": {
@@ -473,7 +467,6 @@ Scenario: Anonymous API client wants to get all proposals from a collect step
         "enabled": @boolean@,
         "isTrashed": @boolean@,
         "title": @string@,
-        "votesCountByStepId": @...@,
         "likers": @array@,
         "_links": @...@
       },
@@ -525,7 +518,6 @@ Scenario: Logged in API client wants to get all proposals from a private collect
         "enabled": @boolean@,
         "isTrashed": @boolean@,
         "title": @string@,
-        "votesCountByStepId": @...@,
         "likers": @array@,
         "_links": @...@
       },
@@ -603,7 +595,6 @@ Scenario: Anonymous API client wants to get proposals from a collect step with f
         "estimation": @wildcard@,
         "isTrashed": @boolean@,
         "title": @string@,
-        "votesCountByStepId": @...@,
         "likers": @array@,
         "_links": @...@
       },
@@ -645,7 +636,6 @@ Scenario: Anonymous API client wants to get proposals from a collect step with f
         "enabled": @boolean@,
         "isTrashed": @boolean@,
         "title": @string@,
-        "votesCountByStepId": @...@,
         "likers": @array@,
         "_links": @...@
       }

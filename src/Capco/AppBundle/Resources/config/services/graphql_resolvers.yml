@@ -240,7 +240,7 @@ services:
         class: Capco\AppBundle\GraphQL\Resolver\SelectionStepProposalResolver
         tags:
           - { name: overblog_graphql.resolver }
-        arguments: ['@capco.proposal.repository','@logger']
+        arguments: ['@capco.search.proposal_search','@logger']
 
     Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalCommentsResolver:
         class: Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalCommentsResolver
