@@ -266,7 +266,7 @@ class StepController extends Controller
             }
 
             $searchResults = $this->get('capco.search.proposal_search')
-                ->searchProposals(0, 50, 'last', null, $filters, $seed);
+                ->searchProposals(0, 10, 'last', null, $filters, $seed);
             $countFusions = $em
               ->getRepository('CapcoAppBundle:Proposal')
               ->countFusionsByProposalForm($proposalForm)
@@ -371,8 +371,8 @@ class StepController extends Controller
         $searchResults = $this
             ->get('capco.search.proposal_search')
             ->searchProposals(
-                1,
-                51,
+                0,
+                10,
                 $step->getDefaultSort(),
                 null,
                 ['selectionStep' => $step->canShowProposals() ? $step->getId() : 0],
