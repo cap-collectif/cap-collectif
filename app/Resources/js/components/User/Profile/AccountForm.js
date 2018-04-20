@@ -30,14 +30,14 @@ const validate = (
   return errors;
 };
 type Props = {
-    newEmailToConfirm: string,
-    error: string,
-    initialValues: Object,
-    confirmationEmailResent: boolean,
-    dispatch: Dispatch,
-    handleSubmit: () => void,
+  newEmailToConfirm: string,
+  error: string,
+  initialValues: Object,
+  confirmationEmailResent: boolean,
+  dispatch: Dispatch,
+  handleSubmit: () => void,
 };
-export class AccountForm extends Component<Props>{
+export class AccountForm extends Component<Props> {
   render() {
     const {
       initialValues,
@@ -94,7 +94,7 @@ export class AccountForm extends Component<Props>{
         )}
       </form>
     );
-  };
+  }
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({

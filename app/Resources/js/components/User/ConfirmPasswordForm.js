@@ -8,7 +8,7 @@ import renderComponent from '../Form/Field';
 export const form = 'password';
 
 type Props = {
-    handleSubmit: () => void
+  handleSubmit: () => void,
 };
 
 export class ConfirmPasswordForm extends Component<Props> {
@@ -25,7 +25,7 @@ export class ConfirmPasswordForm extends Component<Props> {
         />
       </form>
     );
-  };
+  }
 }
 
 export default reduxForm({ form, onSubmit })(ConfirmPasswordForm);

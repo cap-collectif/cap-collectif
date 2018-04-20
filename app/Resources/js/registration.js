@@ -106,5 +106,5 @@ ReactOnRails.register({
   ProposalFormAdminPageApp,
   GroupAdminPageApp,
   GroupCreateButtonApp,
-  EditProfileApp
+  EditProfileApp,
 });

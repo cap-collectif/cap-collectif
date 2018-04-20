@@ -7,13 +7,13 @@ import { FormattedMessage } from 'react-intl';
 import AccountForm from './AccountForm';
 import ConfirmPasswordModal from '../ConfirmPasswordModal';
 import { confirmPassword } from '../../../redux/modules/user';
-import type {Dispatch, State} from '../../../types';
+import type { Dispatch, State } from '../../../types';
 
 type Props = {
-    user: Object,
-    submitting: boolean,
-    invalid: boolean,
-    dispatch: Dispatch,
+  user: Object,
+  submitting: boolean,
+  invalid: boolean,
+  dispatch: Dispatch,
 };
 
 export class AccountBox extends Component<Props> {
@@ -39,7 +39,7 @@ export class AccountBox extends Component<Props> {
         <ConfirmPasswordModal />
       </Panel>
     );
-  };
+  }
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
