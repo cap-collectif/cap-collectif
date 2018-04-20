@@ -52,7 +52,7 @@ User:
                 type: "String"
                 resolve: "@=resolver('user_phoneConfirmationSentAt', [value])"
             gender:
-                type: "String"
+                type: "PickUserGenderValue"
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(value, user)'
             firstname:
                 type: "String"

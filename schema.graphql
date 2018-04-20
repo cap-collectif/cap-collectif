@@ -759,6 +759,7 @@ type Mutation {
   addUsersInGroup(input: AddUsersInGroupInput!): AddUsersInGroupPayload
   updateProfile(input: UpdateProfileInput!): UpdateProfilePayload
   updateProfilePassword(input: UpdateProfilePasswordInput!): UpdateProfilePasswordPayload
+  updateProfilePersonalData(input: UpdateProfilePersonalDataInput!): UpdateProfilePersonalDataPayload
 }
 
 # A connection to a list of items.
@@ -1069,6 +1070,13 @@ enum PickFollowTypeValue {
   DEFAULT
   DEFAULT_AND_COMMENTS
   ALL
+}
+
+# 3 possible values
+enum PickUserGenderValue {
+  MAN
+  FEMALE
+  OTHER
 }
 
 type Post {
@@ -2000,6 +2008,42 @@ type UpdateProfilePayload {
   clientMutationId: String
 }
 
+input UpdateProfilePersonalDataInput {
+  # Your firstname
+  firstname: String
+
+  # Your lastname
+  lastname: String
+
+  # Your gender
+  gender: PickUserGenderValue
+
+  # Your phone number
+  phone: String
+
+  # Your address
+  address: String
+
+  # Your complementary address
+  address2: String
+
+  # Your city
+  city: String
+
+  # Your zipcode
+  ZipCode: String
+
+  # Your date of birth
+  dateOthBirth: String
+  clientMutationId: String
+}
+
+type UpdateProfilePersonalDataPayload {
+  # The viewer
+  viewer: User!
+  clientMutationId: String
+}
+
 input UpdateProposalFormInput {
   proposalFormId: ID!
   title: String
@@ -2108,7 +2152,7 @@ type User implements Node {
   phoneConfirmed: Boolean!
   expiresAt: String
   phoneConfirmationSentAt: String
-  gender: String
+  gender: PickUserGenderValue
   firstname: String
   lastname: String
   dateOfBirth: String

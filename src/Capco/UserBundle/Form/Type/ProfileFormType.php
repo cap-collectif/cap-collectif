@@ -40,26 +40,6 @@ class ProfileFormType extends AbstractType
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => true,
             ])
-            ->add('address', null, [
-                'label' => 'user.profile.edit.address',
-                'translation_domain' => 'CapcoAppBundle',
-                'required' => false,
-            ])
-            ->add('address2', null, [
-                'label' => 'user.profile.edit.address2',
-                'translation_domain' => 'CapcoAppBundle',
-                'required' => false,
-            ])
-            ->add('zipCode', null, [
-                'label' => 'user.profile.edit.zip_code',
-                'translation_domain' => 'CapcoAppBundle',
-                'required' => false,
-            ])
-            ->add('city', null, [
-                'label' => 'user.profile.edit.city',
-                'translation_domain' => 'CapcoAppBundle',
-                'required' => false,
-            ])
             ->add('neighborhood', null, [
                 'label' => 'user.profile.edit.neighborhood',
                 'translation_domain' => 'CapcoAppBundle',
@@ -75,16 +55,6 @@ class ProfileFormType extends AbstractType
             ->remove('lastname')
             ->remove('firstname')
             ->remove('phone')
-            ->add('gender', 'sonata_user_gender', [
-                'required' => true,
-                'translation_domain' => 'CapcoAppBundle',
-            ])
-            ->add('dateOfBirth',
-                BirthdayType::class, [
-                'required' => false,
-                'label' => 'user.profile.edit.birthday',
-                'translation_domain' => 'CapcoAppBundle',
-            ])
             ->add('profilePageIndexed', CheckboxType::class, [
                 'required' => false,
                 'label' => 'user.profile.edit.profilePageIndexed',

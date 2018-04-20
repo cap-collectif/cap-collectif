@@ -1,0 +1,11 @@
+PickUserGenderValue:
+    type: enum
+    config:
+        description: "3 possible values"
+        values:
+            MAN:
+                value: "m"
+            FEMALE:
+                value: "f"
+            OTHER:
+                value: "o"

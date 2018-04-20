@@ -1,0 +1,33 @@
+UpdateProfilePersonalDataInput:
+    type: relay-mutation-input
+    config:
+        description: "Update your personal data"
+        fields:
+            firstname:
+                type: "String"
+                description: "Your firstname"
+            lastname:
+                type: "String"
+                description: "Your lastname"
+            gender:
+                type: "PickUserGenderValue"
+                description: "Your gender"
+            phone:
+                type: "String"
+                description: "Your phone number"
+            address:
+                type: "String"
+                description: "Your address"
+            address2:
+                type: "String"
+                description: "Your complementary address"
+            city:
+                type: "String"
+                description: "Your city"
+            ZipCode:
+                type: "String"
+                description: "Your zipcode"
+            dateOthBirth:
+                type: "String"
+                description: "Your date of birth"
+
