@@ -3,7 +3,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalVoteBasketWidget } from './ProposalVoteBasketWidget';
-import { relayRefetchMock as relay, mockRefType as $refType } from '../../../mocks';
+import { relayRefetchMock as relay, $refType } from '../../../mocks';
 
 describe('<ProposalVoteBasketWidget />', () => {
   const simpleWithoutLimitProps = {

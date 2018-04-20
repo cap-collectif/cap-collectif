@@ -14,7 +14,6 @@ type Props = {
 };
 
 export class ProposalPageMetadata extends React.Component<Props> {
-
   render() {
     const { proposal, showCategories, showDistricts, showNullEstimation, showThemes } = this.props;
     return (
@@ -64,32 +63,28 @@ export class ProposalPageMetadata extends React.Component<Props> {
       </div>
     );
   }
-};
+}
 
-export default createFragmentContainer(
-  ProposalPageMetadata,
-  {
-    proposal: graphql`
-      fragment ProposalPageMetadata_proposal on Proposal
-      {
-        ...ProposalDetailEstimation_proposal
-        ...ProposalDetailLikers_proposal
-        id
-        theme {
-          title
-        }
-        estimation
-        likers {
-          id
-        }
-        category {
-          name
-        }
-        district {
-          name
-        }
-        reference
+export default createFragmentContainer(ProposalPageMetadata, {
+  proposal: graphql`
+    fragment ProposalPageMetadata_proposal on Proposal {
+      ...ProposalDetailEstimation_proposal
+      ...ProposalDetailLikers_proposal
+      id
+      theme {
+        title
       }
-    `,
-  }
-);
+      estimation
+      likers {
+        id
+      }
+      category {
+        name
+      }
+      district {
+        name
+      }
+      reference
+    }
+  `,
+});

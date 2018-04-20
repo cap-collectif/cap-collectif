@@ -3,10 +3,9 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalPreview } from './ProposalPreview';
-import { mockRefType as $refType } from '../../../mocks';
+import { $refType } from '../../../mocks';
 
 describe('<ProposalPreview />', () => {
-
   const proposal = {
     $refType,
     id: '1',
@@ -24,7 +23,7 @@ describe('<ProposalPreview />', () => {
   };
 
   const step = {
-    $refType
+    $refType,
   };
 
   it('should render a proposal preview', () => {

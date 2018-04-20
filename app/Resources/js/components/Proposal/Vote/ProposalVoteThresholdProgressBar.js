@@ -12,12 +12,11 @@ type Props = {
 };
 
 export class ProposalVoteThresholdProgressBar extends React.Component<Props> {
-
   render() {
     const { proposal, step } = this.props;
     const votesCount = proposal.votes.totalCount;
     const voteThreshold = step.voteThreshold;
-    if (voteThreshold === null || typeof voteThreshold === "undefined") {
+    if (voteThreshold === null || typeof voteThreshold === 'undefined') {
       return null;
     }
 
@@ -51,29 +50,26 @@ export class ProposalVoteThresholdProgressBar extends React.Component<Props> {
       </div>
     );
   }
-};
+}
 
-export default createFragmentContainer(
-  ProposalVoteThresholdProgressBar,
-  {
-    proposal: graphql`
-      fragment ProposalVoteThresholdProgressBar_proposal on Proposal {
-        id
-        votes(stepId: $stepId) {
-          totalCount
-        }
+export default createFragmentContainer(ProposalVoteThresholdProgressBar, {
+  proposal: graphql`
+    fragment ProposalVoteThresholdProgressBar_proposal on Proposal {
+      id
+      votes(stepId: $stepId) {
+        totalCount
       }
-    `,
-    step: graphql`
-      fragment ProposalVoteThresholdProgressBar_step on Step {
-        id
-        ... on CollectStep {
-          voteThreshold
-        }
-        ... on SelectionStep {
-          voteThreshold
-        }
+    }
+  `,
+  step: graphql`
+    fragment ProposalVoteThresholdProgressBar_step on Step {
+      id
+      ... on CollectStep {
+        voteThreshold
       }
-    `,
-  }
-);
+      ... on SelectionStep {
+        voteThreshold
+      }
+    }
+  `,
+});

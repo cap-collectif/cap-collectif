@@ -57,83 +57,84 @@ export class ProposalPreviewBody extends React.Component<Props> {
                   {proposal.district.name}
                 </div>
               )}
-              {/* $FlowFixMe */}
+            {/* $FlowFixMe */}
             <ProposalDetailEstimation proposal={proposal} />
             {/* $FlowFixMe */}
             <ProposalDetailLikers proposal={proposal} />
           </TagsList>
         </div>
         <div className="proposal__buttons">
-          {
-            /* $FlowFixMe */
-            proposal.currentVotableStep && step.id === proposal.currentVotableStep.id && <ProposalPreviewVote step={step} viewer={viewer} proposal={proposal} />
-          }
+          {/* $FlowFixMe */
+          proposal.currentVotableStep &&
+            step.id === proposal.currentVotableStep.id && (
+              /* $FlowFixMe */
+              <ProposalPreviewVote step={step} viewer={viewer} proposal={proposal} />
+            )}
           {/* $FlowFixMe */}
           <ProposalFollowButton proposal={proposal} />
         </div>
-        {step.voteThreshold !== null && typeof step.voteThreshold !== "undefined" && step.voteThreshold > 0 && (
-          <div style={{ marginTop: '20px' }}>
-            {/* $FlowFixMe */}
-            <ProposalVoteThresholdProgressBar proposal={proposal} step={step} />
-          </div>
-        )}
+        {step.voteThreshold !== null &&
+          typeof step.voteThreshold !== 'undefined' &&
+          step.voteThreshold > 0 && (
+            <div style={{ marginTop: '20px' }}>
+              {/* $FlowFixMe */}
+              <ProposalVoteThresholdProgressBar proposal={proposal} step={step} />
+            </div>
+          )}
       </div>
     );
   }
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-    features: state.default.features,
+  features: state.default.features,
 });
 
 const container = connect(mapStateToProps)(ProposalPreviewBody);
 
-export default createFragmentContainer(
-  container,
-  {
-    viewer: graphql`
-      fragment ProposalPreviewBody_viewer on User {
-        ...ProposalPreviewVote_viewer
+export default createFragmentContainer(container, {
+  viewer: graphql`
+    fragment ProposalPreviewBody_viewer on User {
+      ...ProposalPreviewVote_viewer
+    }
+  `,
+  proposal: graphql`
+    fragment ProposalPreviewBody_proposal on Proposal {
+      id
+      title
+      show_url
+      summaryOrBodyExcerpt
+      commentsCount
+      district {
+        name
       }
-    `,
-    proposal: graphql`
-      fragment ProposalPreviewBody_proposal on Proposal {
-        id
+      theme {
         title
-        show_url
-        summaryOrBodyExcerpt
-        commentsCount
-        district {
-          name
-        }
-        theme {
-          title
-        }
-        category {
-          name
-        }
-        ...ProposalPreviewVote_proposal
-        ...ProposalDetailEstimation_proposal
-        ...ProposalDetailLikers_proposal
-        ...ProposalVoteThresholdProgressBar_proposal
-        currentVotableStep {
-          id
-        }
-        ...ProposalFollowButton_proposal @arguments(isAuthenticated: $isAuthenticated)
       }
-    `,
-    step: graphql`
-      fragment ProposalPreviewBody_step on Step {
+      category {
+        name
+      }
+      ...ProposalPreviewVote_proposal
+      ...ProposalDetailEstimation_proposal
+      ...ProposalDetailLikers_proposal
+      ...ProposalVoteThresholdProgressBar_proposal
+      currentVotableStep {
         id
-        ...ProposalPreviewVote_step
-        ...ProposalVoteThresholdProgressBar_step
-        ... on CollectStep {
-          voteThreshold
-        }
-        ... on SelectionStep {
-          voteThreshold
-        }
       }
-    `,
-  }
-);
+      ...ProposalFollowButton_proposal @arguments(isAuthenticated: $isAuthenticated)
+    }
+  `,
+  step: graphql`
+    fragment ProposalPreviewBody_step on Step {
+      id
+      ...ProposalPreviewVote_step
+      ...ProposalVoteThresholdProgressBar_step
+      ... on CollectStep {
+        voteThreshold
+      }
+      ... on SelectionStep {
+        voteThreshold
+      }
+    }
+  `,
+});

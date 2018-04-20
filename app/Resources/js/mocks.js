@@ -4,7 +4,8 @@ import { type FormProps } from 'redux-form';
 import { type IntlShape } from 'react-intl';
 import type { RelayPaginationProp, RelayRefetchProp } from 'react-relay';
 
-export const mockRefType: any = null;
+export const $refType: any = null;
+export const $fragmentRefs: any = null;
 
 export const intlMock: IntlShape = {
   locale: 'fr-FR',

@@ -16,7 +16,7 @@ exports[`<ProposalList /> should not render list if proposal is not provided 1`]
 </p>
 `;
 
-exports[`<ProposalList /> should render a proposal list 1`] = `
+exports[`<ProposalList /> should render a collectStep proposal list 1`] = `
 <Row
   bsClass="row"
   componentClass="div"
@@ -24,40 +24,140 @@ exports[`<ProposalList /> should render a proposal list 1`] = `
   <ul
     className="media-list proposal-preview-list opinion__list"
   >
-    <ProposalPreview
-      proposal={
-        Object {
-          "body": "test1",
-          "id": 1,
+    <div>
+      <Relay(ProposalPreview)
+        proposal={
+          Object {
+            "id": "1",
+          }
         }
-      }
-      showComments={false}
-      showThemes={false}
-      step={
-        Object {
-          "id": 1,
-          "open": "false",
-          "title": "Step 1",
+        step={
+          Object {
+            "form": Object {
+              "proposals": Object {
+                "edges": Array [
+                  Object {
+                    "node": Object {
+                      "id": "1",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "2",
+                    },
+                  },
+                ],
+                "totalCount": 2,
+              },
+            },
+            "id": "1",
+          }
         }
-      }
-    />
-    <ProposalPreview
-      proposal={
-        Object {
-          "body": "test2",
-          "id": 2,
+        viewer={null}
+      />
+      <Relay(ProposalPreview)
+        proposal={
+          Object {
+            "id": "2",
+          }
         }
-      }
-      showComments={false}
-      showThemes={false}
-      step={
-        Object {
-          "id": 1,
-          "open": "false",
-          "title": "Step 1",
+        step={
+          Object {
+            "form": Object {
+              "proposals": Object {
+                "edges": Array [
+                  Object {
+                    "node": Object {
+                      "id": "1",
+                    },
+                  },
+                  Object {
+                    "node": Object {
+                      "id": "2",
+                    },
+                  },
+                ],
+                "totalCount": 2,
+              },
+            },
+            "id": "1",
+          }
         }
-      }
-    />
+        viewer={null}
+      />
+    </div>
   </ul>
+  0
+</Row>
+`;
+
+exports[`<ProposalList /> should render a selectionStep proposal list 1`] = `
+<Row
+  bsClass="row"
+  componentClass="div"
+>
+  <ul
+    className="media-list proposal-preview-list opinion__list"
+  >
+    <div>
+      <Relay(ProposalPreview)
+        proposal={
+          Object {
+            "id": "1",
+          }
+        }
+        step={
+          Object {
+            "id": "1",
+            "proposals": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "id": "1",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "id": "2",
+                  },
+                },
+              ],
+              "totalCount": 2,
+            },
+          }
+        }
+        viewer={null}
+      />
+      <Relay(ProposalPreview)
+        proposal={
+          Object {
+            "id": "2",
+          }
+        }
+        step={
+          Object {
+            "id": "1",
+            "proposals": Object {
+              "edges": Array [
+                Object {
+                  "node": Object {
+                    "id": "1",
+                  },
+                },
+                Object {
+                  "node": Object {
+                    "id": "2",
+                  },
+                },
+              ],
+              "totalCount": 2,
+            },
+          }
+        }
+        viewer={null}
+      />
+    </div>
+  </ul>
+  0
 </Row>
 `;

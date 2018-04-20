@@ -7,9 +7,9 @@ import ProposalPreviewBody from './ProposalPreviewBody';
 import ProposalPreviewFooter from './ProposalPreviewFooter';
 import ProposalStatus from './ProposalStatus';
 import { CardContainer } from '../../Ui/Card/CardContainer';
-import type { ProposalPreview_proposal } from './__generated__/ProposalPreview_proposal.graphql'
-import type { ProposalPreview_step } from './__generated__/ProposalPreview_step.graphql'
-import type { ProposalPreview_viewer } from './__generated__/ProposalPreview_viewer.graphql'
+import type { ProposalPreview_proposal } from './__generated__/ProposalPreview_proposal.graphql';
+import type { ProposalPreview_step } from './__generated__/ProposalPreview_step.graphql';
+import type { ProposalPreview_viewer } from './__generated__/ProposalPreview_viewer.graphql';
 
 type Props = {
   proposal: ProposalPreview_proposal,
@@ -18,7 +18,6 @@ type Props = {
 };
 
 export class ProposalPreview extends React.Component<Props> {
-
   render() {
     const { proposal, step, viewer } = this.props;
 
@@ -31,15 +30,9 @@ export class ProposalPreview extends React.Component<Props> {
           }>
           {/* $FlowFixMe */}
           <ProposalPreviewHeader proposal={proposal} />
-          <ProposalPreviewBody
-            proposal={proposal}
-            step={step}
-            viewer={viewer}
-          />
+          <ProposalPreviewBody proposal={proposal} step={step} viewer={viewer} />
           {/* $FlowFixMe */}
-          <ProposalPreviewFooter
-            proposal={proposal}
-          />
+          <ProposalPreviewFooter proposal={proposal} />
           {/* $FlowFixMe */}
           <ProposalStatus proposal={proposal} />
         </CardContainer>
@@ -48,30 +41,27 @@ export class ProposalPreview extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(
-  ProposalPreview,
-  {
-    viewer: graphql`
-      fragment ProposalPreview_viewer on User {
-        ...ProposalPreviewBody_viewer
+export default createFragmentContainer(ProposalPreview, {
+  viewer: graphql`
+    fragment ProposalPreview_viewer on User {
+      ...ProposalPreviewBody_viewer
+    }
+  `,
+  step: graphql`
+    fragment ProposalPreview_step on Step {
+      ...ProposalPreviewBody_step
+    }
+  `,
+  proposal: graphql`
+    fragment ProposalPreview_proposal on Proposal {
+      id
+      author {
+        vip
       }
-    `,
-    step: graphql`
-      fragment ProposalPreview_step on Step {
-        ...ProposalPreviewBody_step
-      }
-    `,
-    proposal: graphql`
-      fragment ProposalPreview_proposal on Proposal {
-        id
-        author {
-          vip
-        }
-        ...ProposalPreviewHeader_proposal
-        ...ProposalPreviewFooter_proposal @arguments(stepId: $stepId)
-        ...ProposalPreviewBody_proposal
-        ...ProposalStatus_proposal @arguments(stepId: $stepId)
-      }
-    `,
-  }
-);
+      ...ProposalPreviewHeader_proposal
+      ...ProposalPreviewFooter_proposal @arguments(stepId: $stepId)
+      ...ProposalPreviewBody_proposal
+      ...ProposalStatus_proposal @arguments(stepId: $stepId)
+    }
+  `,
+});

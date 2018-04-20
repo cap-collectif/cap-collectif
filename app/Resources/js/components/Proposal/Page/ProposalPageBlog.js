@@ -8,7 +8,6 @@ import type { ProposalPageBlog_proposal } from './__generated__/ProposalPageBlog
 type Props = { proposal: ProposalPageBlog_proposal };
 
 export class ProposalPageBlog extends React.Component<Props> {
-
   render() {
     const { proposal } = this.props;
     if (proposal.news.totalCount === 0) {
@@ -20,13 +19,12 @@ export class ProposalPageBlog extends React.Component<Props> {
     }
     return (
       <ul className="media-list">
-        {
-          proposal.news.edges && proposal.news.edges.map((post, index) => <Post post={post} key={index} />)
-        }
+        {proposal.news.edges &&
+          proposal.news.edges.map((post, index) => <Post post={post} key={index} />)}
       </ul>
     );
   }
-};
+}
 
 export default createFragmentContainer(
   ProposalPageBlog,

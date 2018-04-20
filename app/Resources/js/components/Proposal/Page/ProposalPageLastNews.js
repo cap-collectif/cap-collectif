@@ -19,7 +19,7 @@ export class ProposalPageLastNews extends React.Component<{
       return null;
     }
     const edge = proposal.news.edges[0];
-    if (!edge || typeof edge === "undefined") {
+    if (!edge || typeof edge === 'undefined') {
       return null;
     }
     const post = edge.node;

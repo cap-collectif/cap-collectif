@@ -43,7 +43,7 @@ class ProposalVoteModal extends React.Component<Props> {
         </Modal.Header>
         <Modal.Body>
           <div id="proposal-vote-box">
-              <ProposalVoteForm proposal={proposal} step={step} />
+            <ProposalVoteForm proposal={proposal} step={step} />
           </div>
         </Modal.Body>
         <Modal.Footer>
@@ -81,25 +81,20 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: ParentPr
 
 const container = connect(mapStateToProps)(ProposalVoteModal);
 
-export default createFragmentContainer(
-  container,
-  {
-    proposal: graphql`
-      fragment ProposalVoteModal_proposal on Proposal
+export default createFragmentContainer(container, {
+  proposal: graphql`
+    fragment ProposalVoteModal_proposal on Proposal
       @argumentDefinitions(
-        stepId: { type: "ID!", nonNull: true },
-        isAuthenticated: { type: "Boolean!", nonNull: true },
-      )
-      {
-        id
-        viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
-      }
-    `,
-    step: graphql`
-      fragment ProposalVoteModal_step on Step
-      {
-        id
-      }
-    `,
-  }
-);
+        stepId: { type: "ID!", nonNull: true }
+        isAuthenticated: { type: "Boolean!", nonNull: true }
+      ) {
+      id
+      viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
+    }
+  `,
+  step: graphql`
+    fragment ProposalVoteModal_step on Step {
+      id
+    }
+  `,
+});

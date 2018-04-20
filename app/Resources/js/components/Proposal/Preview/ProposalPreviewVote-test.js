@@ -3,10 +3,9 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalPreviewVote } from './ProposalPreviewVote';
-import {mockRefType as $refType} from '../../../mocks';
+import { $refType } from '../../../mocks';
 
 describe('<ProposalPreviewVote />', () => {
-
   const props = {
     proposal: { $refType, id: '1' },
     step: { $refType },

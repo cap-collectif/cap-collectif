@@ -3,7 +3,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalPageMetadata } from './ProposalPageMetadata';
-import { mockRefType as $refType } from '../../../mocks';
+import { $refType } from '../../../mocks';
 
 const proposal = {
   $refType,
@@ -30,7 +30,7 @@ describe('<ProposalPageMetadata />', () => {
         showDistricts
         showNullEstimation
         showThemes
-      />
+      />,
     );
     expect(wrapper).toMatchSnapshot();
   });

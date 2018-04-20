@@ -1,22 +1,22 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import ProposalPageVoteThreshold from './ProposalPageVoteThreshold';
+import { ProposalPageVoteThreshold } from './ProposalPageVoteThreshold';
 
 describe('<ProposalPageVoteThreshold />', () => {
   const proposal = {
     votesCountByStepId: {
-      42: 30,
+      '42': 30,
     },
   };
 
   const stepWithVoteThreshold = {
-    id: 42,
+    id: '42',
     voteThreshold: 100,
   };
 
   const stepWithVoteThresholdReached = {
-    id: 42,
+    id: '42',
     voteThreshold: 20,
   };
 

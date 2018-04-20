@@ -99,7 +99,7 @@ export class ProposalVoteButtonWrapper extends React.Component<Props> {
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-    isAuthenticated: state.user.user !== null,
+  isAuthenticated: state.user.user !== null,
 });
 
 export default connect(mapStateToProps)(ProposalVoteButtonWrapper);
