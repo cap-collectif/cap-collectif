@@ -9,7 +9,7 @@ import DraftBox from '../../Utils/DraftBox';
 import Loader from '../../Ui/Loader';
 
 type Props = {
-  step: {id: string},
+  step: { id: string },
 };
 
 const renderDraftProposals = ({

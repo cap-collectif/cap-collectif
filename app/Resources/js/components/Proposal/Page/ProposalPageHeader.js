@@ -56,8 +56,7 @@ export class ProposalPageHeader extends React.Component<Props> {
       <div className={classNames(classes)}>
         <div>
           <a style={{ textDecoration: 'none' }} href={referer || proposal.show_url}>
-            <i className="cap cap-arrow-65-1 icon--black" />{' '}
-            <FormattedMessage id="proposal.back" />
+            <i className="cap cap-arrow-65-1 icon--black" /> <FormattedMessage id="proposal.back" />
           </a>
         </div>
         <h1 className="consultation__header__title h1">{proposal.title}</h1>

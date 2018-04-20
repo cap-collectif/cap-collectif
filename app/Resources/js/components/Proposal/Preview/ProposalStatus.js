@@ -10,7 +10,6 @@ type Props = {
 };
 
 export class ProposalStatus extends React.Component<Props> {
-
   render() {
     const status = this.props.proposal.status;
     const statusClasses = {};
@@ -20,21 +19,16 @@ export class ProposalStatus extends React.Component<Props> {
 
     return <CardStatus className={classNames(statusClasses)}>{status && status.name}</CardStatus>;
   }
-};
+}
 
-export default createFragmentContainer(
-  ProposalStatus,
-  {
-    proposal: graphql`
-      fragment ProposalStatus_proposal on Proposal
-      @argumentDefinitions(stepId: { type: "ID" })
-      {
-        id
-        status(step: $stepId) {
-          name
-          color
-        }
+export default createFragmentContainer(ProposalStatus, {
+  proposal: graphql`
+    fragment ProposalStatus_proposal on Proposal @argumentDefinitions(stepId: { type: "ID" }) {
+      id
+      status(step: $stepId) {
+        name
+        color
       }
-    `,
-  }
-);
+    }
+  `,
+});

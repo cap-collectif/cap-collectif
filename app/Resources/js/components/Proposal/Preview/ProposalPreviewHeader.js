@@ -11,7 +11,6 @@ import type { ProposalPreviewHeader_proposal } from './__generated__/ProposalPre
 type Props = { proposal: ProposalPreviewHeader_proposal };
 
 export class ProposalPreviewHeader extends React.Component<Props> {
-
   render() {
     const proposal = this.props.proposal;
     return (
@@ -34,19 +33,16 @@ export class ProposalPreviewHeader extends React.Component<Props> {
       </CardUser>
     );
   }
-};
+}
 
-export default createFragmentContainer(
-  ProposalPreviewHeader,
-  {
-    proposal: graphql`
-      fragment ProposalPreviewHeader_proposal on Proposal {
-        createdAt
-        author {
-          id
-          displayName
-        }
+export default createFragmentContainer(ProposalPreviewHeader, {
+  proposal: graphql`
+    fragment ProposalPreviewHeader_proposal on Proposal {
+      createdAt
+      author {
+        id
+        displayName
       }
-    `,
-  }
-);
+    }
+  `,
+});

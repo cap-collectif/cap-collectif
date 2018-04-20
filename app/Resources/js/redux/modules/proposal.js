@@ -271,7 +271,11 @@ export const vote = (dispatch: Dispatch, step: Object, proposal: Object, data: O
 
 export const deleteVote = (dispatch: Dispatch, step: Object, proposal: Object) => {
   return removeVote
-    .commit({ withVotes: true, stepId: step.id, input: { proposalId: proposal.id, stepId: step.id } })
+    .commit({
+      withVotes: true,
+      stepId: step.id,
+      input: { proposalId: proposal.id, stepId: step.id },
+    })
     .then(() => {
       FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,

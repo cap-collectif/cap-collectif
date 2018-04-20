@@ -11,12 +11,11 @@ type Props = {
 };
 
 export class ProposalPageVoteThreshold extends React.Component<Props> {
-
   render() {
     const { proposal, step } = this.props;
     const votesCount = proposal.votesCountByStepId[step.id];
     const voteThreshold = step.voteThreshold;
-    if (voteThreshold === null || typeof voteThreshold === "undefined") {
+    if (voteThreshold === null || typeof voteThreshold === 'undefined') {
       return null;
     }
     const votesRemaining = voteThreshold - votesCount;
@@ -71,21 +70,18 @@ export class ProposalPageVoteThreshold extends React.Component<Props> {
       </div>
     );
   }
-};
+}
 
-export default createFragmentContainer(
-  ProposalPageVoteThreshold,
-  {
-    step: graphql`
-      fragment ProposalPageVoteThreshold_step on Step {
-        id
-        ... on CollectStep {
-          voteThreshold
-        }
-        ... on SelectionStep {
-          voteThreshold
-        }
+export default createFragmentContainer(ProposalPageVoteThreshold, {
+  step: graphql`
+    fragment ProposalPageVoteThreshold_step on Step {
+      id
+      ... on CollectStep {
+        voteThreshold
       }
-    `,
-  }
-);
+      ... on SelectionStep {
+        voteThreshold
+      }
+    }
+  `,
+});

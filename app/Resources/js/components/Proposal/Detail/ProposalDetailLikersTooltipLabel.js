@@ -8,7 +8,6 @@ import type { ProposalDetailLikersTooltipLabel_proposal } from './__generated__/
 type Props = { proposal: ProposalDetailLikersTooltipLabel_proposal };
 
 export class ProposalDetailLikersTooltipLabel extends React.Component<Props> {
-
   render() {
     const { proposal } = this.props;
     if (proposal.likers.length === 1) {
@@ -42,19 +41,16 @@ export class ProposalDetailLikersTooltipLabel extends React.Component<Props> {
     }
     return null;
   }
-};
+}
 
-export default createFragmentContainer(
-  ProposalDetailLikersTooltipLabel,
-  {
-    proposal: graphql`
-      fragment ProposalDetailLikersTooltipLabel_proposal on Proposal {
+export default createFragmentContainer(ProposalDetailLikersTooltipLabel, {
+  proposal: graphql`
+    fragment ProposalDetailLikersTooltipLabel_proposal on Proposal {
+      id
+      likers {
+        displayName
         id
-        likers {
-          displayName
-          id
-        }
       }
-    `,
-  }
-);
+    }
+  `,
+});

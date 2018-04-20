@@ -2,43 +2,37 @@
 
 exports[`<ProposalPreviewVote /> should render a proposal preview vote 1`] = `
 <span>
-  <Connect(ProposalVoteButtonWrapper)
+  <Relay(ProposalVoteButtonWrapperFragment)
     className="proposal__preview__vote"
-    id="proposal-vote-btn-proposal1"
+    id="proposal-vote-btn-1"
     proposal={
       Object {
-        "commentsCount": 5,
-        "id": "proposal1",
-        "referer": "http://capco.test",
-        "selections": Array [],
-        "viewerCanSeeEvaluation": true,
-        "votableStepId": "step3",
-        "votesByStepId": Object {
-          "collectstep1": Array [],
-          "selectionstep1": Array [],
-        },
-        "votesCountByStepId": Object {
-          "2": 0,
-        },
+        "$refType": null,
+        "id": "1",
       }
     }
+    step={
+      Object {
+        "$refType": null,
+      }
+    }
+    style={
+      Object {
+        "width": "100%",
+      }
+    }
+    viewer={null}
   />
-  <Connect(ProposalVoteModal)
+  <Relay(Connect(ProposalVoteModal))
     proposal={
       Object {
-        "commentsCount": 5,
-        "id": "proposal1",
-        "referer": "http://capco.test",
-        "selections": Array [],
-        "viewerCanSeeEvaluation": true,
-        "votableStepId": "step3",
-        "votesByStepId": Object {
-          "collectstep1": Array [],
-          "selectionstep1": Array [],
-        },
-        "votesCountByStepId": Object {
-          "2": 0,
-        },
+        "$refType": null,
+        "id": "1",
+      }
+    }
+    step={
+      Object {
+        "$refType": null,
       }
     }
   />

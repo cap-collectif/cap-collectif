@@ -5,10 +5,26 @@ exports[`<ProposalPageBlog /> should render a list of posts 1`] = `
   className="media-list"
 >
   <Connect(Post)
-    post={Object {}}
+    post={
+      Object {
+        "node": Object {
+          "authors": Array [],
+          "createdAt": null,
+          "title": "1",
+        },
+      }
+    }
   />
   <Connect(Post)
-    post={Object {}}
+    post={
+      Object {
+        "node": Object {
+          "authors": Array [],
+          "createdAt": null,
+          "title": "2",
+        },
+      }
+    }
   />
 </ul>
 `;

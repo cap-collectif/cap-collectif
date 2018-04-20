@@ -2,22 +2,8 @@
 
 exports[`<ProposalStatus /> should render a status 1`] = `
 <CardStatus
-  className=""
-/>
-`;
-
-exports[`<ProposalStatus /> should render a status with correct color 1`] = `
-<CardStatus
   className="status--success"
 >
   Coucou
-</CardStatus>
-`;
-
-exports[`<ProposalStatus /> should render the selection step status when specified 1`] = `
-<CardStatus
-  className="status--danger"
->
-  Hello
 </CardStatus>
 `;

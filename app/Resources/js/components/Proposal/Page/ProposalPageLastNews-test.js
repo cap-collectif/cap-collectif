@@ -3,16 +3,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalPageLastNews } from './ProposalPageLastNews';
-import { mockRefType as $refType} from '../../../mocks';
+import { $refType } from '../../../mocks';
 
 describe('<ProposalPageLastNews />', () => {
   const proposal = {
     $refType,
     news: {
       totalCount: 1,
-      edges: [
-        { node: { authors: [{}] } }
-      ]
+      edges: [{ node: { authors: [{}] } }],
     },
   };
 

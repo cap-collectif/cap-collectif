@@ -129,21 +129,14 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                   }
                 }
               />
-              <Connect(ProposalPageLastNews)
+              <Relay(ProposalPageLastNews)
                 proposal={
                   Object {
-                    "isDraft": false,
-                    "selections": Array [],
+                    "followerConnection": Object {
+                      "totalCount": 169,
+                    },
+                    "postsCount": 1,
                     "viewerCanSeeEvaluation": true,
-                    "votableStepId": "selectionstep1",
-                    "votesByStepId": Object {
-                      "collectstep1": Array [],
-                      "selectionstep1": Array [],
-                    },
-                    "votesCountByStepId": Object {
-                      "collectstep1": 0,
-                      "selectionstep1": 0,
-                    },
                   }
                 }
               />
@@ -179,21 +172,14 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
               sm={4}
               xs={12}
             >
-              <ProposalPageMetadata
+              <Relay(ProposalPageMetadata)
                 proposal={
                   Object {
-                    "isDraft": false,
-                    "selections": Array [],
+                    "followerConnection": Object {
+                      "totalCount": 169,
+                    },
+                    "postsCount": 1,
                     "viewerCanSeeEvaluation": true,
-                    "votableStepId": "selectionstep1",
-                    "votesByStepId": Object {
-                      "collectstep1": Array [],
-                      "selectionstep1": Array [],
-                    },
-                    "votesCountByStepId": Object {
-                      "collectstep1": 0,
-                      "selectionstep1": 0,
-                    },
                   }
                 }
                 showCategories={true}
@@ -258,7 +244,17 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
           bsClass="tab-pane"
           eventKey="blog"
         >
-          <Connect(ProposalPageBlog) />
+          <Relay(ProposalPageBlog)
+            proposal={
+              Object {
+                "followerConnection": Object {
+                  "totalCount": 169,
+                },
+                "postsCount": 1,
+                "viewerCanSeeEvaluation": true,
+              }
+            }
+          />
         </TabPane>
         <TabPane
           bsClass="tab-pane"

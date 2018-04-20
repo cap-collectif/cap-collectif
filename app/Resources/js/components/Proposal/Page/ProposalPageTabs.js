@@ -129,9 +129,9 @@ export class ProposalPageTabs extends React.Component<Props> {
                     />
                     <br />
                     {currentVotableStep !== null &&
-                      typeof currentVotableStep !== "undefined" &&
+                      typeof currentVotableStep !== 'undefined' &&
                       currentVotableStep.voteThreshold !== null &&
-                      typeof currentVotableStep.voteThreshold !== "undefined" &&
+                      typeof currentVotableStep.voteThreshold !== 'undefined' &&
                       currentVotableStep.voteThreshold > 0 && (
                         <span>
                           {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
@@ -184,7 +184,9 @@ export class ProposalPageTabs extends React.Component<Props> {
             </Tab.Content>
           </div>
           {!oldProposal.isDraft &&
-            currentVotableStep && <ProposalVoteModal proposal={proposal} step={currentVotableStep} />}
+            currentVotableStep && (
+              <ProposalVoteModal proposal={proposal} step={currentVotableStep} />
+            )}
         </div>
       </Tab.Container>
     );

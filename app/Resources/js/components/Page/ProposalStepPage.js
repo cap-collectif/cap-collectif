@@ -18,7 +18,10 @@ import LeafletMap from '../Proposal/Map/LeafletMap';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import { changePage } from '../../redux/modules/proposal';
 import type { State, Dispatch } from '../../types';
-import type { ProposalStepPageQueryResponse, ProposalStepPageQueryVariables } from './__generated__/ProposalStepPageQuery.graphql';
+import type {
+  ProposalStepPageQueryResponse,
+  ProposalStepPageQueryVariables,
+} from './__generated__/ProposalStepPageQuery.graphql';
 
 const PROPOSAL_PAGINATION = 51;
 
@@ -42,7 +45,6 @@ type Props = {
 };
 
 export class ProposalStepPage extends React.Component<Props> {
-
   render() {
     const {
       categories,
@@ -104,17 +106,35 @@ export class ProposalStepPage extends React.Component<Props> {
         <QueryRenderer
           environment={environment}
           query={graphql`
-            query ProposalStepPageQuery($stepId: ID!, $orderBy: ProposalOrder, $isAuthenticated: Boolean!, $count: Int, $term: String, $district: ID, $status: ID, $theme: ID, $userType: ID) {
+            query ProposalStepPageQuery(
+              $stepId: ID!
+              $orderBy: ProposalOrder
+              $isAuthenticated: Boolean!
+              $count: Int
+              $term: String
+              $district: ID
+              $status: ID
+              $theme: ID
+              $userType: ID
+            ) {
               viewer @include(if: $isAuthenticated) {
                 ...ProposalList_viewer
-              },
+              }
               step: node(id: $stepId) {
                 ...ProposalList_step
                 ... on CollectStep {
                   id
                   private
                   form {
-                    proposals(first: $count, orderBy: $orderBy, term: $term, district: $district, theme: $theme, status: $status, userType: $userType) {
+                    proposals(
+                      first: $count
+                      orderBy: $orderBy
+                      term: $term
+                      district: $district
+                      theme: $theme
+                      status: $status
+                      userType: $userType
+                    ) {
                       edges {
                         node {
                           id
@@ -125,7 +145,15 @@ export class ProposalStepPage extends React.Component<Props> {
                 }
                 ... on SelectionStep {
                   id
-                  proposals(first: $count, orderBy: $orderBy, term: $term, district: $district, theme: $theme, status: $status, userType: $userType) {
+                  proposals(
+                    first: $count
+                    orderBy: $orderBy
+                    term: $term
+                    district: $district
+                    theme: $theme
+                    status: $status
+                    userType: $userType
+                  ) {
                     edges {
                       node {
                         id
@@ -136,24 +164,20 @@ export class ProposalStepPage extends React.Component<Props> {
               }
             }
           `}
-          variables={({
-            stepId: this.props.step.id,
-            isAuthenticated: this.props.isLogged,
-            count: PROPOSAL_PAGINATION,
-            orderBy: { field: 'RANDOM', direction: 'ASC' },
-            term: terms,
-            district: filters.district ? filters.district : undefined,
-            theme: filters.theme ? filters.theme : undefined,
-            status: filters.status ? filters.status : undefined,
-            userType: filters.userType ? filters.userType : undefined,
-          }: ProposalStepPageQueryVariables)}
-          render={({
-            error,
-            props,
-          }: {
-            error: ?Error,
-            props: ?ProposalStepPageQueryResponse,
-          }) => {
+          variables={
+            ({
+              stepId: this.props.step.id,
+              isAuthenticated: this.props.isLogged,
+              count: PROPOSAL_PAGINATION,
+              orderBy: { field: 'RANDOM', direction: 'ASC' },
+              term: terms,
+              district: filters.district ? filters.district : undefined,
+              theme: filters.theme ? filters.theme : undefined,
+              status: filters.status ? filters.status : undefined,
+              userType: filters.userType ? filters.userType : undefined,
+            }: ProposalStepPageQueryVariables)
+          }
+          render={({ error, props }: { error: ?Error, props: ?ProposalStepPageQueryResponse }) => {
             if (error) {
               return graphqlError;
             }
@@ -220,7 +244,7 @@ export class ProposalStepPage extends React.Component<Props> {
       </div>
     );
   }
-};
+}
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Object) => ({
   stepId: undefined,

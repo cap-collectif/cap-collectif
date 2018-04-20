@@ -11,26 +11,30 @@ import type { ProposalList_viewer } from './__generated__/ProposalList_viewer.gr
 
 type Props = {
   step: ProposalList_step,
-  viewer: ProposalList_viewer,
+  viewer: ?ProposalList_viewer,
 };
 
 const renderProposals = (proposals, step, viewer) => (
   <div>
-    {proposals.edges && proposals.edges.filter(Boolean).map(edge => edge.node).filter(Boolean).map((node, key) => (
-      // $FlowFixMe
-      <ProposalPreview
-        key={key}
-        // $FlowFixMe
-        proposal={node}
-        step={step}
-        viewer={viewer}
-      />
-    ))}
+    {proposals.edges &&
+      proposals.edges
+        .filter(Boolean)
+        .map(edge => edge.node)
+        .filter(Boolean)
+        .map((node, key) => (
+          // $FlowFixMe
+          <ProposalPreview
+            key={key}
+            // $FlowFixMe
+            proposal={node}
+            step={step}
+            viewer={viewer}
+          />
+        ))}
   </div>
-)
+);
 
 export class ProposalList extends React.Component<Props> {
-
   render() {
     const { step, viewer } = this.props;
     // $FlowFixMe
@@ -55,50 +59,44 @@ export class ProposalList extends React.Component<Props> {
 
     return (
       <Row>
-        {proposalsVisiblePublicly.edges && proposalsVisiblePublicly.edges.length && (
-          <ul className={classes}>
-            {renderProposals(proposalsVisiblePublicly, step, viewer)}
-          </ul>
-        )}
-        {proposalsVisibleOnlyByViewer.edges && proposalsVisibleOnlyByViewer.edges.length && (
-          <VisibilityBox enabled>
-            <ul className={classes}>
-              {renderProposals(proposalsVisibleOnlyByViewer, step, viewer)}
-            </ul>
-          </VisibilityBox>
-        )}
+        {proposalsVisiblePublicly.edges &&
+          proposalsVisiblePublicly.edges.length && (
+            <ul className={classes}>{renderProposals(proposalsVisiblePublicly, step, viewer)}</ul>
+          )}
+        {proposalsVisibleOnlyByViewer.edges &&
+          proposalsVisibleOnlyByViewer.edges.length && (
+            <VisibilityBox enabled>
+              <ul className={classes}>
+                {renderProposals(proposalsVisibleOnlyByViewer, step, viewer)}
+              </ul>
+            </VisibilityBox>
+          )}
       </Row>
     );
   }
-};
+}
 
-export default createFragmentContainer(
-  ProposalList,
-  {
-    viewer: graphql`
-      fragment ProposalList_viewer on User {
-        ...ProposalPreview_viewer
-      }
-    `,
-    step: graphql`
-      fragment ProposalList_step on Step {
-        id
-        ...ProposalPreview_step
-        ... on CollectStep {
-          form {
-            proposals(first: $count, orderBy: $orderBy, term: $term, district: $district, theme: $theme, status: $status, userType: $userType) {
-              totalCount
-              edges {
-                node {
-                  id
-                  ...ProposalPreview_proposal
-                }
-              }
-            }
-          }
-        }
-        ... on SelectionStep {
-          proposals(first: $count, orderBy: $orderBy, term: $term, district: $district, theme: $theme, status: $status, userType: $userType) {
+export default createFragmentContainer(ProposalList, {
+  viewer: graphql`
+    fragment ProposalList_viewer on User {
+      ...ProposalPreview_viewer
+    }
+  `,
+  step: graphql`
+    fragment ProposalList_step on Step {
+      id
+      ...ProposalPreview_step
+      ... on CollectStep {
+        form {
+          proposals(
+            first: $count
+            orderBy: $orderBy
+            term: $term
+            district: $district
+            theme: $theme
+            status: $status
+            userType: $userType
+          ) {
             totalCount
             edges {
               node {
@@ -109,6 +107,25 @@ export default createFragmentContainer(
           }
         }
       }
-    `,
-  }
-);
+      ... on SelectionStep {
+        proposals(
+          first: $count
+          orderBy: $orderBy
+          term: $term
+          district: $district
+          theme: $theme
+          status: $status
+          userType: $userType
+        ) {
+          totalCount
+          edges {
+            node {
+              id
+              ...ProposalPreview_proposal
+            }
+          }
+        }
+      }
+    }
+  `,
+});

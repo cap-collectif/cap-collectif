@@ -13,7 +13,7 @@ type Props = {
 
 export class ProposalDetailLikers extends React.Component<Props> {
   static defaultProps = {
-      componentClass: 'span',
+    componentClass: 'span',
   };
 
   renderContent() {
@@ -42,20 +42,17 @@ export class ProposalDetailLikers extends React.Component<Props> {
 
     return null;
   }
-};
+}
 
-export default createFragmentContainer(
-  ProposalDetailLikers,
-  {
-    proposal: graphql`
-      fragment ProposalDetailLikers_proposal on Proposal {
+export default createFragmentContainer(ProposalDetailLikers, {
+  proposal: graphql`
+    fragment ProposalDetailLikers_proposal on Proposal {
+      id
+      likers {
         id
-        likers {
-          id
-        }
-        ...ProposalDetailLikersLabel_proposal
-        ...ProposalDetailLikersTooltipLabel_proposal
       }
-    `,
-  }
-);
+      ...ProposalDetailLikersLabel_proposal
+      ...ProposalDetailLikersTooltipLabel_proposal
+    }
+  `,
+});

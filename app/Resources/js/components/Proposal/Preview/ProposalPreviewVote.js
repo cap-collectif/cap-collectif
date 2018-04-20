@@ -33,29 +33,24 @@ export class ProposalPreviewVote extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(
-  ProposalPreviewVote,
-  {
-    viewer: graphql`
-      fragment ProposalPreviewVote_viewer on User
-      {
-        ...ProposalVoteButtonWrapperFragment_viewer @arguments(stepId: $stepId)
-      }
-    `,
-    proposal: graphql`
-      fragment ProposalPreviewVote_proposal on Proposal
-      {
-        id
-        ...ProposalVoteModal_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
-        ...ProposalVoteButtonWrapperFragment_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
-      }
-    `,
-    step: graphql`
-      fragment ProposalPreviewVote_step on Step
-      {
-        ...ProposalVoteModal_step
-        ...ProposalVoteButtonWrapperFragment_step
-      }
-    `,
-  }
-);
+export default createFragmentContainer(ProposalPreviewVote, {
+  viewer: graphql`
+    fragment ProposalPreviewVote_viewer on User {
+      ...ProposalVoteButtonWrapperFragment_viewer @arguments(stepId: $stepId)
+    }
+  `,
+  proposal: graphql`
+    fragment ProposalPreviewVote_proposal on Proposal {
+      id
+      ...ProposalVoteModal_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
+      ...ProposalVoteButtonWrapperFragment_proposal
+        @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
+    }
+  `,
+  step: graphql`
+    fragment ProposalPreviewVote_step on Step {
+      ...ProposalVoteModal_step
+      ...ProposalVoteButtonWrapperFragment_step
+    }
+  `,
+});

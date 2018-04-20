@@ -3,18 +3,17 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import type { ProposalPreviewFooter_proposal } from './__generated__/ProposalPreviewFooter_proposal.graphql'
+import type { ProposalPreviewFooter_proposal } from './__generated__/ProposalPreviewFooter_proposal.graphql';
 
 type Props = {
   proposal: ProposalPreviewFooter_proposal,
 };
 
 export class ProposalPreviewFooter extends React.Component<Props> {
-
   render() {
     const { proposal } = this.props;
 
-    const showComments= true;
+    const showComments = true;
     const showVotes = true;
 
     if (!showVotes && !showComments) {
@@ -60,19 +59,15 @@ export class ProposalPreviewFooter extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(
-  ProposalPreviewFooter,
-  {
-    proposal: graphql`
-      fragment ProposalPreviewFooter_proposal on Proposal
-      @argumentDefinitions(stepId: { type: "ID!", nonNull: true })
-      {
-        id
-        commentsCount
-        votes(stepId: $stepId) {
-          totalCount
-        }
+export default createFragmentContainer(ProposalPreviewFooter, {
+  proposal: graphql`
+    fragment ProposalPreviewFooter_proposal on Proposal
+      @argumentDefinitions(stepId: { type: "ID!", nonNull: true }) {
+      id
+      commentsCount
+      votes(stepId: $stepId) {
+        totalCount
       }
-    `,
-  }
-);
+    }
+  `,
+});
