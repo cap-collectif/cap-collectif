@@ -3,27 +3,34 @@ import React, { PropTypes } from 'react';
 import {FormattedDate, FormattedMessage, FormattedTime} from 'react-intl';
 import { connect } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
+import {Field} from "redux-form";
 import Toggle from 'react-toggle';
 // import UserLink from '../../User/UserLink';
 import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
+import toggle from '../../Form/Toggle';
 import ProposalDetailsEstimation from '../../Proposal/Detail/ProposalDetailEstimation';
 import { deleteVote } from '../../../redux/modules/proposal';
 
 export const ProposalUserVoteItem = React.createClass({
   propTypes: {
     dispatch: PropTypes.func.isRequired,
-    proposal: PropTypes.object.isRequired,
+    node: PropTypes.object.isRequired,
     step: PropTypes.object.isRequired,
     classment: PropTypes.number.isRequired,
   },
 
   render() {
-    const { step, proposal, dispatch, classment } = this.props;
+    const { step, node, dispatch, classment } = this.props;
+    const proposal = node.proposal;
+    const anonymous = node.anonymous;
+    const voteAt = node.createdAt;
+
+    console.log(anonymous);
 
     const voteDay = (
-      <FormattedDate value={proposal.createdAt} day="numeric" month="long" year="numeric" />
+      <FormattedDate value={voteAt} day="numeric" month="long" year="numeric" />
     );
-    const voteTime = <FormattedTime value={proposal.createdAt} hour="numeric" minute="numeric" />;
+    const voteTime = <FormattedTime value={voteAt} hour="numeric" minute="numeric" />;
 
 
     const colWidth = () => {
@@ -42,10 +49,6 @@ export const ProposalUserVoteItem = React.createClass({
       return 9;
     };
 
-    console.log(step);
-    // console.warn(proposal);
-    // console.error(classment);
-
     return (
       <Row className="proposals-user-votes__row d-flex flex-wrap" id={`vote-step${step.id}-proposal${proposal.id}`}>
         <Col md={1} xs={12} className="proposals-user-votes__col" >
@@ -61,8 +64,15 @@ export const ProposalUserVoteItem = React.createClass({
           md={colWidth()}
           xs={12}>
           <div className="proposals-user-votes__content">
-            <a href={proposal.show_url}>{proposal.title}</a><br/>
-            {proposal.createdAt &&
+            <div>
+              <a
+                href={proposal.show_url}
+                className="proposals-user-votes__title"
+              >
+                {proposal.title}
+              </a>
+              <br />
+              {voteAt &&
               <FormattedMessage
                 id="voted-on-date-at-time"
                 values={{
@@ -70,16 +80,18 @@ export const ProposalUserVoteItem = React.createClass({
                   time: voteTime,
                 }}
               />
-            }
+              }
+            </div>
           </div>
         </Col>
         <Col className="proposals-user-votes__col" md={2} xs={12}>
           <div className="proposals-user-votes__content justify-content-end">
             <div className="d-flex">
               <FormattedMessage id="public" />
-              <Toggle
+              <Field component={toggle}
                 className="ml-10"
-                // checked={proposal}
+                name="anonymous"
+                checked={!anonymous}
                 // onChange={() => {}}
               />
             </div>

@@ -266,7 +266,6 @@
     }
 
     .cap-ios-close {
-        // font-size: 24px;
         color: $danger-color;
     }
 
@@ -276,10 +275,17 @@
 }
 
 .proposals-user-votes__content {
-    // justify-content: space-between;
     display: flex;
     margin: auto 0;
     width: 100%;
+}
+
+.proposals-user-votes__title {
+    &, &:hover {
+        color: $dark-text;
+        font-size: 17px;
+        font-weight: 500;
+    }
 }
 
 .proposals-user-votes__table.row {
