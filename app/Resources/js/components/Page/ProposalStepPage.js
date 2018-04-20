@@ -1,70 +1,58 @@
 // @flow
 import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { Row } from 'react-bootstrap';
 import { QueryRenderer, graphql } from 'react-relay';
-import { VOTE_TYPE_DISABLED } from '../../constants/ProposalConstants';
 import ProposalListFilters from '../Proposal/List/ProposalListFilters';
-import ProposalList from '../Proposal/List/ProposalList';
 import DraftProposalList from '../Proposal/List/DraftProposalList';
 import Loader from '../Ui/Loader';
-import Pagination from '../Utils/Pagination';
-import CollectStepPageHeader from './CollectStepPageHeader';
-import SelectionStepPageHeader from './SelectionStepPageHeader';
+import ProposalStepPageHeader from './ProposalStepPageHeader';
 import StepPageHeader from '../Steps/Page/StepPageHeader';
-import VisibilityBox from '../Utils/VisibilityBox';
 import LeafletMap from '../Proposal/Map/LeafletMap';
 import environment, { graphqlError } from '../../createRelayEnvironment';
-import { changePage } from '../../redux/modules/proposal';
+import ProposalListView, { queryVariables } from '../Proposal/List/ProposalListView';
 import type { State, Dispatch } from '../../types';
 import type {
   ProposalStepPageQueryResponse,
   ProposalStepPageQueryVariables,
 } from './__generated__/ProposalStepPageQuery.graphql';
 
-const PROPOSAL_PAGINATION = 51;
-
 type Props = {
   step: Object,
-  count: number,
-  queryCount: ?number,
-  countFusions: ?number,
   defaultSort: ?string,
   form: Object,
   filters: Object,
+  order: ?string,
   terms: ?string,
   statuses: Array<Object>,
   categories: Array<Object>,
-  proposals: Array<Object>,
   currentPage: number,
   isLogged: boolean,
-  isLoading: boolean,
   dispatch: Dispatch,
   selectedViewByStep: string,
 };
 
-export class ProposalStepPage extends React.Component<Props> {
+export class ProposalStepPage extends React.Component<Props, Object> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      initialRenderVars: {
+        term: props.terms,
+        ...queryVariables(props.filters, props.order),
+      },
+    };
+  }
+
   render() {
     const {
       categories,
       form,
       statuses,
       step,
-      filters,
-      terms,
-      count,
       defaultSort,
-      queryCount,
-      countFusions,
-      currentPage,
-      dispatch,
       isLogged,
       selectedViewByStep,
     } = this.props;
-    const total = queryCount || count;
-    const nbPages = Math.ceil(total / PROPOSAL_PAGINATION);
-    const showPagination = nbPages > 1;
 
     let geoJsons = [];
     try {
@@ -79,30 +67,6 @@ export class ProposalStepPage extends React.Component<Props> {
     return (
       <div className="proposal__step-page">
         <StepPageHeader step={step} />
-        {isLogged && <DraftProposalList step={step} />}
-        {step.type === 'collect' ? (
-          <CollectStepPageHeader
-            total={count}
-            countFusions={countFusions}
-            form={form}
-            categories={categories}
-          />
-        ) : (
-          <SelectionStepPageHeader total={count} />
-        )}
-        <ProposalListFilters
-          statuses={statuses}
-          categories={categories}
-          districts={form.districts}
-          defaultSort={defaultSort}
-          orderByVotes={step.voteType !== VOTE_TYPE_DISABLED}
-          orderByComments={form.commentable}
-          orderByCost={form.costable}
-          showThemes={form.usingThemes}
-          showDistrictFilter={form.usingDistrict}
-          showCategoriesFilter={form.usingCategories}
-          showToggleMapButton={form.usingAddress && !step.isPrivate}
-        />
         <QueryRenderer
           environment={environment}
           query={graphql`
@@ -113,68 +77,35 @@ export class ProposalStepPage extends React.Component<Props> {
               $count: Int
               $term: String
               $district: ID
+              $category: ID
               $status: ID
               $theme: ID
               $userType: ID
             ) {
               viewer @include(if: $isAuthenticated) {
-                ...ProposalList_viewer
+                ...ProposalListView_viewer
               }
               step: node(id: $stepId) {
-                ...ProposalList_step
+                id
+                ...ProposalListView_step
+                ...ProposalStepPageHeader_step
                 ... on CollectStep {
-                  id
                   private
-                  form {
-                    proposals(
-                      first: $count
-                      orderBy: $orderBy
-                      term: $term
-                      district: $district
-                      theme: $theme
-                      status: $status
-                      userType: $userType
-                    ) {
-                      edges {
-                        node {
-                          id
-                        }
-                      }
-                    }
-                  }
+                  voteType
                 }
                 ... on SelectionStep {
-                  id
-                  proposals(
-                    first: $count
-                    orderBy: $orderBy
-                    term: $term
-                    district: $district
-                    theme: $theme
-                    status: $status
-                    userType: $userType
-                  ) {
-                    edges {
-                      node {
-                        id
-                      }
-                    }
-                  }
+                  voteType
                 }
               }
             }
           `}
           variables={
+            // $FlowFixMe
             ({
               stepId: this.props.step.id,
               isAuthenticated: this.props.isLogged,
-              count: PROPOSAL_PAGINATION,
-              orderBy: { field: 'RANDOM', direction: 'ASC' },
-              term: terms,
-              district: filters.district ? filters.district : undefined,
-              theme: filters.theme ? filters.theme : undefined,
-              status: filters.status ? filters.status : undefined,
-              userType: filters.userType ? filters.userType : undefined,
+              count: 2,
+              ...this.state.initialRenderVars,
             }: ProposalStepPageQueryVariables)
           }
           render={({ error, props }: { error: ?Error, props: ?ProposalStepPageQueryResponse }) => {
@@ -183,54 +114,42 @@ export class ProposalStepPage extends React.Component<Props> {
             }
 
             if (props) {
-              // eslint-disable-next-line react/prop-types
               if (!props.step) {
-                return null;
+                return graphqlError;
               }
-              // $FlowFixMe
-              const proposals = props.step.proposals || props.step.form.proposals;
               return (
                 <div>
+                  {/* $FlowFixMe */}
+                  {isLogged && <DraftProposalList step={props.step} />}
+                  {/* $FlowFixMe */}
+                  <ProposalStepPageHeader step={props.step} />
+                  <ProposalListFilters
+                    statuses={statuses}
+                    categories={categories}
+                    districts={form.districts}
+                    defaultSort={defaultSort}
+                    orderByVotes={props.step.voteType !== 'DISABLED'}
+                    orderByComments={form.commentable}
+                    orderByCost={form.costable}
+                    showThemes={form.usingThemes}
+                    showDistrictFilter={form.usingDistrict}
+                    showCategoriesFilter={form.usingCategories}
+                    showToggleMapButton={form.usingAddress && !props.step.private}
+                  />
                   <LeafletMap
                     geoJsons={geoJsons}
                     defaultMapOptions={{
                       center: { lat: form.latMap, lng: form.lngMap },
                       zoom: form.zoomMap,
                     }}
-                    visible={selectedViewByStep === 'map' && !props.step.private}
+                    visible={selectedViewByStep === 'map' && !step.isPrivate}
                   />
-                  {selectedViewByStep === 'mosaic' && (
-                    <div>
-                      {proposals.edges && proposals.edges.length === 0 && !props.step.private ? (
-                        <p className={{ 'p--centered': true }} style={{ marginBottom: '40px' }}>
-                          <FormattedMessage id="proposal.empty" />
-                        </p>
-                      ) : (
-                        <VisibilityBox enabled={props.step.private}>
-                          {/* $FlowFixMe */}
-                          <ProposalList
-                            step={props.step}
-                            viewer={props.viewer || null}
-                            showThemes={form.usingThemes}
-                            showComments={form.commentable}
-                            id="proposals-list"
-                          />
-                        </VisibilityBox>
-                      )}
-                      <div id="proposal-list-pagination-footer">
-                        {showPagination &&
-                          selectedViewByStep === 'mosaic' && (
-                            <Pagination
-                              current={currentPage}
-                              nbPages={nbPages}
-                              onChange={(newPage: number) => {
-                                dispatch(changePage(newPage));
-                              }}
-                            />
-                          )}
-                      </div>
-                    </div>
-                  )}
+                  {/* $FlowFixMe */}
+                  <ProposalListView
+                    step={props.step}
+                    viewer={props.viewer || null}
+                    visible={selectedViewByStep === 'mosaic'}
+                  />
                 </div>
               );
             }
@@ -251,12 +170,11 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Object) 
   isLogged: state.user.user !== null,
   filters: state.proposal.filters || {},
   terms: state.proposal.terms,
+  order: state.proposal.order,
   step:
     state.project.currentProjectById &&
     state.project.projectsById[state.project.currentProjectById].stepsById[props.stepId],
-  queryCount: state.proposal.queryCount,
   currentPage: state.proposal.currentPaginationPage,
-  isLoading: state.proposal.isLoading,
   selectedViewByStep: state.proposal.selectedViewByStep || 'mosaic',
 });
 export default connect(mapStateToProps)(ProposalStepPage);

@@ -4,6 +4,7 @@ import { connect, type MapStateToProps } from 'react-redux';
 import { QueryRenderer, graphql } from 'react-relay';
 import ProposalVoteButtonWrapperFragment from './ProposalVoteButtonWrapperFragment';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
+import ProposalVoteModal from './ProposalVoteModal';
 import type { State } from '../../../types';
 import type {
   ProposalVoteButtonWrapperQueryResponse,
@@ -45,9 +46,12 @@ export class ProposalVoteButtonWrapper extends React.Component<Props> {
             proposal: node(id: $proposal) {
               ...ProposalVoteButtonWrapperFragment_proposal
                 @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
+              ...ProposalVoteModal_proposal
+                @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
             }
             step: node(id: $stepId) {
               ...ProposalVoteButtonWrapperFragment_step
+              ...ProposalVoteModal_step
             }
             viewer @include(if: $isAuthenticated) {
               ...ProposalVoteButtonWrapperFragment_viewer @arguments(stepId: $stepId)
@@ -86,6 +90,7 @@ export class ProposalVoteButtonWrapper extends React.Component<Props> {
                     id={this.props.id}
                     style={this.props.style}
                   />
+                  <ProposalVoteModal proposal={props.proposal} step={props.step} />
                 </span>
               );
             }

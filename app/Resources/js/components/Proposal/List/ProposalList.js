@@ -8,14 +8,22 @@ import ProposalPreview from '../Preview/ProposalPreview';
 import VisibilityBox from '../../Utils/VisibilityBox';
 import type { ProposalList_step } from './__generated__/ProposalList_step.graphql';
 import type { ProposalList_viewer } from './__generated__/ProposalList_viewer.graphql';
+import type { ProposalList_proposals } from './__generated__/ProposalList_proposals.graphql';
 
 type Props = {
   step: ProposalList_step,
+  proposals: ProposalList_proposals,
   viewer: ?ProposalList_viewer,
 };
 
+const classes = classNames({
+  'media-list': true,
+  'proposal-preview-list': true,
+  opinion__list: true,
+});
+
 const renderProposals = (proposals, step, viewer) => (
-  <div>
+  <ul className={classes}>
     {proposals.edges &&
       proposals.edges
         .filter(Boolean)
@@ -31,14 +39,12 @@ const renderProposals = (proposals, step, viewer) => (
             viewer={viewer}
           />
         ))}
-  </div>
+  </ul>
 );
 
 export class ProposalList extends React.Component<Props> {
   render() {
-    const { step, viewer } = this.props;
-    // $FlowFixMe
-    const proposals = step.proposals || step.form.proposals;
+    const { step, proposals, viewer } = this.props;
 
     if (proposals.totalCount === 0) {
       return (
@@ -48,27 +54,18 @@ export class ProposalList extends React.Component<Props> {
       );
     }
 
-    const classes = classNames({
-      'media-list': true,
-      'proposal-preview-list': true,
-      opinion__list: true,
-    });
-
     const proposalsVisibleOnlyByViewer = { edges: [] };
     const proposalsVisiblePublicly = proposals;
 
     return (
       <Row>
         {proposalsVisiblePublicly.edges &&
-          proposalsVisiblePublicly.edges.length && (
-            <ul className={classes}>{renderProposals(proposalsVisiblePublicly, step, viewer)}</ul>
-          )}
+          proposalsVisiblePublicly.edges.length &&
+          renderProposals(proposalsVisiblePublicly, step, viewer)}
         {proposalsVisibleOnlyByViewer.edges &&
           proposalsVisibleOnlyByViewer.edges.length && (
             <VisibilityBox enabled>
-              <ul className={classes}>
-                {renderProposals(proposalsVisibleOnlyByViewer, step, viewer)}
-              </ul>
+              {renderProposals(proposalsVisibleOnlyByViewer, step, viewer)}
             </VisibilityBox>
           )}
       </Row>
@@ -83,47 +80,18 @@ export default createFragmentContainer(ProposalList, {
     }
   `,
   step: graphql`
-    fragment ProposalList_step on Step {
+    fragment ProposalList_step on ProposalStep {
       id
       ...ProposalPreview_step
-      ... on CollectStep {
-        form {
-          proposals(
-            first: $count
-            orderBy: $orderBy
-            term: $term
-            district: $district
-            theme: $theme
-            status: $status
-            userType: $userType
-          ) {
-            totalCount
-            edges {
-              node {
-                id
-                ...ProposalPreview_proposal
-              }
-            }
-          }
-        }
-      }
-      ... on SelectionStep {
-        proposals(
-          first: $count
-          orderBy: $orderBy
-          term: $term
-          district: $district
-          theme: $theme
-          status: $status
-          userType: $userType
-        ) {
-          totalCount
-          edges {
-            node {
-              id
-              ...ProposalPreview_proposal
-            }
-          }
+    }
+  `,
+  proposals: graphql`
+    fragment ProposalList_proposals on ProposalConnection {
+      totalCount
+      edges {
+        node {
+          id
+          ...ProposalPreview_proposal
         }
       }
     }

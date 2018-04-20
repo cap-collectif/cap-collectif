@@ -10,9 +10,8 @@ import ProposalVotesByStep from './ProposalVotesByStep';
 import ProposalPageFollowers from './ProposalPageFollowers';
 import ProposalPageBlog from './ProposalPageBlog';
 import ProposalPageEvaluation from './ProposalPageEvaluation';
-import ProposalVoteModal from '../Vote/ProposalVoteModal';
 import ProposalPageMetadata from './ProposalPageMetadata';
-import ProposalPageVoteThreshold from './ProposalPageVoteThreshold';
+// import ProposalPageVoteThreshold from './ProposalPageVoteThreshold';
 import ProposalPageAdvancement from './ProposalPageAdvancement';
 import ProposalFusionList from './ProposalFusionList';
 import type { FeatureToggles } from '../../../types';
@@ -54,19 +53,17 @@ export class ProposalPageTabs extends React.Component<Props> {
     }
     return 'content';
   }
+
   render() {
     const { proposal, oldProposal, form, steps, features, categories } = this.props;
     const currentVotableStep = proposal.currentVotableStep;
 
-    // $FlowFixMe
-    const votesCount = Object.values(oldProposal.votesCountByStepId).reduce(
-      (a, b) => parseInt(a, 10) + parseInt(b, 10),
-      0,
-    );
-
+    const votesCount = proposal.votes.totalCount;
     const showVotesTab = votesCount > 0 || currentVotableStep !== null;
+
     const votableSteps = steps.filter(step => step.votable);
     const isPageAdmin = false;
+
     return (
       <Tab.Container
         id="proposal-page-tabs"
@@ -81,7 +78,7 @@ export class ProposalPageTabs extends React.Component<Props> {
                 </NavItem>
                 <NavItem eventKey="blog" className="tab">
                   <FormattedMessage id="proposal.tabs.blog" />
-                  <span className="badge">{proposal.postsCount}</span>
+                  <span className="badge">{proposal.news.totalCount}</span>
                 </NavItem>
                 {proposal.viewerCanSeeEvaluation && (
                   <NavItem eventKey="evaluation" className="tab">
@@ -128,20 +125,19 @@ export class ProposalPageTabs extends React.Component<Props> {
                       showThemes={features.themes && form.usingThemes}
                     />
                     <br />
-                    {currentVotableStep !== null &&
+                    {/* {currentVotableStep !== null &&
                       typeof currentVotableStep !== 'undefined' &&
                       currentVotableStep.voteThreshold !== null &&
                       typeof currentVotableStep.voteThreshold !== 'undefined' &&
                       currentVotableStep.voteThreshold > 0 && (
                         <span>
-                          {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
                           <ProposalPageVoteThreshold
                             proposal={oldProposal}
                             step={currentVotableStep}
                           />
                           <br />
                         </span>
-                      )}
+                      )} */}
                     <ProposalPageAdvancement proposal={oldProposal} />
                   </Col>
                 </Row>
@@ -154,14 +150,14 @@ export class ProposalPageTabs extends React.Component<Props> {
                         {votableSteps.map((step, index) => (
                           <NavItem key={index} eventKey={index}>
                             {step.title}{' '}
-                            <span className="badge">{oldProposal.votesCountByStepId[step.id]}</span>
+                            {/* <span className="badge">{oldProposal.votesCountByStepId[step.id]}</span> */}
                           </NavItem>
                         ))}
                       </Nav>
                       <Tab.Content animation={false}>
                         {votableSteps.map((step, index) => (
                           <Tab.Pane key={index} eventKey={index}>
-                            <ProposalVotesByStep stepId={step.id} proposal={oldProposal} />
+                            <ProposalVotesByStep stepId={step.id} proposal={proposal} />
                           </Tab.Pane>
                         ))}
                       </Tab.Content>
@@ -183,10 +179,6 @@ export class ProposalPageTabs extends React.Component<Props> {
               </Tab.Pane>
             </Tab.Content>
           </div>
-          {!oldProposal.isDraft &&
-            currentVotableStep && (
-              <ProposalVoteModal proposal={proposal} step={currentVotableStep} />
-            )}
         </div>
       </Tab.Container>
     );
@@ -197,13 +189,19 @@ export default createFragmentContainer(
   ProposalPageTabs,
   graphql`
     fragment ProposalPageTabs_proposal on Proposal {
+      id
       ...ProposalPageFollowers_proposal
       ...ProposalPageEvaluation_proposal
       ...ProposalFusionList_proposal
       ...ProposalPageMetadata_proposal
       ...ProposalPageLastNews_proposal
       ...ProposalPageBlog_proposal
-      postsCount
+      votes {
+        totalCount
+      }
+      news {
+        totalCount
+      }
       currentVotableStep {
         id
         ... on CollectStep {
@@ -214,7 +212,6 @@ export default createFragmentContainer(
           voteThreshold
           voteType
         }
-        ...ProposalPageVoteThreshold_step
       }
       viewerCanSeeEvaluation
       followerConnection(first: $count, after: $cursor) {

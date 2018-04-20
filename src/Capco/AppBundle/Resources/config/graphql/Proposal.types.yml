@@ -155,7 +155,8 @@ Proposal:
                   type: "ProposalVotesOrder"
                   defaultValue: { field: CREATED_AT, direction: DESC }
                 stepId:
-                  type: "ID!"
+                  type: "ID"
+                  description: "If provided, retrieve only in this step."
             createdAt:
               type: "DateTime!"
               description: "Identifies the date and time when the object was created."

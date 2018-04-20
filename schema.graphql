@@ -238,7 +238,7 @@ type ChangeUserNotificationsConfigurationPayload {
   clientMutationId: String
 }
 
-type CollectStep implements Node & Step {
+type CollectStep implements Node & Step & ProposalStep {
   id: ID!
   show_url: String!
   kind: String!
@@ -262,6 +262,30 @@ type CollectStep implements Node & Step {
 
   # A list of viewer votes associated with the step.
   viewerVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}): ProposalVoteConnection!
+  proposals(
+    district: ID
+    userType: ID
+    category: ID
+    status: ID
+    theme: ID
+    term: String
+
+    # Order for connection.
+    orderBy: ProposalOrder = {field: CREATED_AT, direction: ASC}
+    affiliations: [ProposalAffiliation]
+
+    # Returns the elements in the list that come after the specified global ID.
+    after: String
+
+    # Returns the first n elements from the list.
+    first: Int = 10
+
+    # Returns the elements in the list that come before the specified global ID.
+    before: String
+
+    # Returns the last n elements from the list.
+    last: Int
+  ): ProposalConnection!
 }
 
 # A comment
@@ -1260,7 +1284,16 @@ type Proposal implements Node {
   # Count number of comments for the proposal.
   commentsCount: Int!
   comments(after: String, first: Int = 30, before: String, last: Int, orderBy: CommentOrder = {field: CREATED_AT, direction: DESC}): CommentConnection!
-  votes(after: String, first: Int = 30, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}, stepId: ID!): ProposalVoteConnection!
+  votes(
+    after: String
+    first: Int = 30
+    before: String
+    last: Int
+    orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}
+
+    # If provided, retrieve only in this step.
+    stepId: ID
+  ): ProposalVoteConnection!
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
@@ -1337,6 +1370,7 @@ input ProposalCategoryInput {
 # A connection to a list of items.
 type ProposalConnection {
   totalCount: Int!
+  fusionCount: Int!
 
   # Information to aid in pagination.
   pageInfo: PageInfo!
@@ -1400,6 +1434,7 @@ type ProposalForm implements Node {
   ): ProposalConnection!
   categories: [ProposalCategory!]!
   usingThemes: Boolean!
+  contribuable: Boolean!
   themeMandatory: Boolean!
   themeHelpText: String
   usingDistrict: Boolean!
@@ -1482,6 +1517,38 @@ enum ProposalPublicationStatus {
 
   # Visible only by the author, he is not yet confirmed !
   NOT_ACCOUNTED
+}
+
+# A proposal step
+interface ProposalStep {
+  id: ID!
+  kind: String!
+  title: String!
+  show_url: String!
+  proposals(
+    district: ID
+    userType: ID
+    category: ID
+    status: ID
+    theme: ID
+    term: String
+
+    # Order for connection.
+    orderBy: ProposalOrder = {field: CREATED_AT, direction: ASC}
+    affiliations: [ProposalAffiliation]
+
+    # Returns the elements in the list that come after the specified global ID.
+    after: String
+
+    # Returns the first n elements from the list.
+    first: Int = 10
+
+    # Returns the elements in the list that come before the specified global ID.
+    before: String
+
+    # Returns the last n elements from the list.
+    last: Int
+  ): ProposalConnection!
 }
 
 # Type of vote.
@@ -1882,7 +1949,7 @@ type Selection {
 }
 
 # A budget contribution
-type SelectionStep implements Step & Node {
+type SelectionStep implements Step & Node & ProposalStep {
   id: ID!
   show_url: String!
   kind: String!
@@ -1901,17 +1968,6 @@ type SelectionStep implements Step & Node {
   allowingProgressSteps: Boolean!
   voteThreshold: Int
   proposals(
-    # Returns the elements in the list that come after the specified global ID.
-    after: String
-
-    # Returns the first n elements from the list.
-    first: Int = 50
-
-    # Returns the elements in the list that come before the specified global ID.
-    before: String
-
-    # Returns the last n elements from the list.
-    last: Int
     district: ID
     userType: ID
     category: ID
@@ -1919,9 +1975,22 @@ type SelectionStep implements Step & Node {
     theme: ID
     term: String
 
-    # Ordering options for proposals returning from the connection
-    orderBy: ProposalOrder = {field: CREATED_AT, direction: DESC}
-  ): ProposalConnection
+    # Order for connection.
+    orderBy: ProposalOrder = {field: CREATED_AT, direction: ASC}
+    affiliations: [ProposalAffiliation]
+
+    # Returns the elements in the list that come after the specified global ID.
+    after: String
+
+    # Returns the first n elements from the list.
+    first: Int = 10
+
+    # Returns the elements in the list that come before the specified global ID.
+    before: String
+
+    # Returns the last n elements from the list.
+    last: Int
+  ): ProposalConnection!
 
   # A list of contributor associated with the consultation.
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!

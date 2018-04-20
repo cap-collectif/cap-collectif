@@ -60,14 +60,14 @@ class ProposalSerializationListener extends AbstractSerializationListener
     {
         $proposal = $event->getObject();
 
-        $selectionVotesCount = $this->proposalSelectionVoteRepository
-          ->getCountsByProposalGroupedByStepsId($proposal);
-
-        $collectVotesCount = $this->proposalCollectVoteRepository
-          ->getCountsByProposalGroupedByStepsId($proposal);
-
         // We skip the rest if we are serializing for Elasticsearch
         if (isset($this->getIncludedGroups($event)['Elasticsearch'])) {
+            $selectionVotesCount = $this->proposalSelectionVoteRepository
+            ->getCountsByProposalGroupedByStepsId($proposal);
+
+            $collectVotesCount = $this->proposalCollectVoteRepository
+            ->getCountsByProposalGroupedByStepsId($proposal);
+
             $data = [];
             foreach ($collectVotesCount as $stepId => $value) {
                 $data[] = [
@@ -85,8 +85,6 @@ class ProposalSerializationListener extends AbstractSerializationListener
 
             return;
         }
-
-        $event->getVisitor()->addData('votesCountByStepId', $selectionVotesCount + $collectVotesCount);
 
         $step = $proposal->getStep();
         $project = $step->getProject();

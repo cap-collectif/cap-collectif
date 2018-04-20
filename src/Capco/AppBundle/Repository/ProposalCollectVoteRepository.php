@@ -187,6 +187,16 @@ class ProposalCollectVoteRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
+    public function countVotesByProposal(Proposal $proposal): int
+    {
+        return (int) $this->createQueryBuilder('pv')
+            ->select('COUNT(pv)')
+            ->andWhere('pv.proposal = :proposal')
+            ->setParameter('proposal', $proposal)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     public function getCountsByProposalGroupedByStepsId(Proposal $proposal): array
     {
         return $this->getCountsByProposalGroupedBySteps($proposal);
@@ -257,27 +267,6 @@ class ProposalCollectVoteRepository extends EntityRepository
         }
 
         return new Paginator($query);
-    }
-
-    public function countVotesForProposal(Proposal $proposal): int
-    {
-        return (int) $this->createQueryBuilder('pv')
-            ->select('COUNT(pv.id)')
-            ->andWhere('pv.proposal = :proposal')
-            ->setParameter('proposal', $proposal)
-            ->getQuery()->getSingleScalarResult();
-    }
-
-    public function getAnonymousVotesCountByStep(CollectStep $collectStep): int
-    {
-        $qb = $this->createQueryBuilder('pv')
-            ->select('COUNT(pv.id)')
-            ->andWhere('pv.private = true')
-            ->andWhere('pv.collectStep = :collectStep')
-            ->setParameter('collectStep', $collectStep)
-        ;
-
-        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     private function getCountsByProposalGroupedBySteps(Proposal $proposal, bool $asTitle = false): array

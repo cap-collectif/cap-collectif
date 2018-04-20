@@ -57,6 +57,8 @@ ProposalForm:
                 resolve: "@=resolver('proposal_form_categories', [value])"
             usingThemes:
                 type: "Boolean!"
+            contribuable:
+                type: "Boolean!"
             themeMandatory:
                 type: "Boolean!"
             themeHelpText:

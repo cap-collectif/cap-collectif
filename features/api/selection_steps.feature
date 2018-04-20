@@ -87,7 +87,6 @@ Scenario: Logged in API client wants to get all proposals from a selection step
         "enabled": @boolean@,
         "isTrashed": @boolean@,
         "title": @string@,
-        "votesCountByStepId": @...@,
         "_links": @...@
       },
       @...@
@@ -145,7 +144,6 @@ Scenario: Anonymous API client wants to get all proposals from a selection step
         "enabled": @boolean@,
         "isTrashed": @boolean@,
         "title": @string@,
-        "votesCountByStepId": @...@,
         "_links": @...@
       },
       @...@
@@ -207,7 +205,6 @@ Scenario: Anonymous API client wants to get all proposals in a theme from a sele
         "isTrashed": @boolean@,
         "title": @string@,
         "reference": @string@,
-        "votesCountByStepId": @...@,
         "_links": @...@
       },
       @...@

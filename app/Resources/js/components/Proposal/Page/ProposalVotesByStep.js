@@ -7,7 +7,7 @@ import Loader from '../../Ui/Loader';
 import type { ProposalVotesByStepQueryResponse, ProposalVotesByStepQueryVariables } from './__generated__/ProposalVotesByStepQuery.graphql';
 
 type Props = {
-  proposal: { id: string },
+  proposal: { +id: string },
   stepId: string,
 };
 
@@ -28,7 +28,7 @@ export class ProposalVotesByStep extends React.Component<Props> {
         variables={
           ({
             proposalId: proposal.id,
-            stepId: stepId,
+            stepId,
           }: ProposalVotesByStepQueryVariables)
         }
         render={({

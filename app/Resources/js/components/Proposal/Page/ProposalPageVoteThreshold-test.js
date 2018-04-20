@@ -5,9 +5,7 @@ import { ProposalPageVoteThreshold } from './ProposalPageVoteThreshold';
 
 describe('<ProposalPageVoteThreshold />', () => {
   const proposal = {
-    votesCountByStepId: {
-      '42': 30,
-    },
+    votesCount: 30,
   };
 
   const stepWithVoteThreshold = {

@@ -12,8 +12,8 @@ type Props = {
 
 export class ProposalPageVoteThreshold extends React.Component<Props> {
   render() {
-    const { proposal, step } = this.props;
-    const votesCount = proposal.votesCountByStepId[step.id];
+    const { step } = this.props;
+    const votesCount = 0; // proposal.votesCountByStepId[step.id];
     const voteThreshold = step.voteThreshold;
     if (voteThreshold === null || typeof voteThreshold === 'undefined') {
       return null;

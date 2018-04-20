@@ -331,6 +331,11 @@ class ProposalForm
         return $this->getStep()->canDisplay();
     }
 
+    public function isContribuable(): bool
+    {
+        return $this->canContribute();
+    }
+
     public function canContribute(): bool
     {
         return $this->getStep() && $this->getStep()->canContribute();
