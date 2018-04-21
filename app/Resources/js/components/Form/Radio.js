@@ -4,7 +4,6 @@ import RadioGroup from 'react-radio';
 import classNames from 'classnames';
 import Input from './Input';
 import Other from './Other';
-import ButtonBody from '../Reply/Form/ButtonBody';
 
 const Radio = React.createClass({
   propTypes: {
@@ -23,7 +22,7 @@ const Radio = React.createClass({
   getDefaultProps() {
     return {
       disabled: false,
-      labelClassName: 'h5',
+      labelClassName: '',
       isReduxForm: false,
     };
   },
@@ -89,11 +88,6 @@ const Radio = React.createClass({
         <label htmlFor={id} className={classNames(labelClasses)}>
           {label}
         </label>
-        {field.description && (
-          <div style={{ paddingTop: 15, paddingBottom: 25 }}>
-            <ButtonBody body={field.description || ''} />
-          </div>
-        )}
         <span className="help-block">{field.helpText}</span>
         <RadioGroup
           value={checkedValue}

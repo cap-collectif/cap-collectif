@@ -4,7 +4,6 @@ import CheckboxGroup from 'react-checkbox-group';
 import classNames from 'classnames';
 import Input from './Input';
 import Other from './Other';
-import ButtonBody from '../Reply/Form/ButtonBody';
 
 const Checkbox = React.createClass({
   propTypes: {
@@ -27,7 +26,7 @@ const Checkbox = React.createClass({
   getDefaultProps() {
     return {
       disabled: false,
-      labelClassName: 'h5',
+      labelClassName: '',
       isReduxForm: false,
       value: {},
     };
@@ -150,11 +149,6 @@ const Checkbox = React.createClass({
           <label htmlFor={fieldName} className={classNames(labelClasses)}>
             {label}
           </label>
-        )}
-        {field.description && (
-          <div style={{ paddingTop: 15, paddingBottom: 25 }}>
-            <ButtonBody body={field.description || ''} />
-          </div>
         )}
         {field.helpText && <span className="help-block">{field.helpText}</span>}
         <CheckboxGroup id={fieldName} ref={'choices'} name={fieldName} className="input-choices">

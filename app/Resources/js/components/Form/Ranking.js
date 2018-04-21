@@ -1,7 +1,5 @@
 import React, { PropTypes } from 'react';
-import classNames from 'classnames';
 import RankingBlock from './RankingBlock';
-import ButtonBody from '../Reply/Form/ButtonBody';
 
 const Ranking = React.createClass({
   displayName: 'Ranking',
@@ -22,7 +20,7 @@ const Ranking = React.createClass({
   getDefaultProps() {
     return {
       disabled: false,
-      labelClassName: 'h5',
+      labelClassName: '',
       isReduxForm: false,
     };
   },
@@ -50,30 +48,10 @@ const Ranking = React.createClass({
   },
 
   render() {
-    const {
-      field,
-      id,
-      getGroupStyle,
-      disabled,
-      label,
-      labelClassName,
-      renderFormErrors,
-    } = this.props;
-    const labelClasses = {
-      'control-label': true,
-    };
-    labelClasses[labelClassName] = true;
+    const { field, id, getGroupStyle, disabled, renderFormErrors } = this.props;
 
     return (
       <div className={`form-group ${getGroupStyle(field.id)}`} id={id}>
-        <label htmlFor={id} className={classNames(labelClasses)}>
-          {label}
-        </label>
-        {field.description && (
-          <div style={{ paddingTop: 15, paddingBottom: 25 }}>
-            <ButtonBody body={field.description || ''} />
-          </div>
-        )}{' '}
         {field.helpText ? <span className="help-block">{field.helpText}</span> : null}
         <RankingBlock
           ref={c => (this.rankingBlock = c)}

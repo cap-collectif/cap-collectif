@@ -5,13 +5,6 @@ exports[`<Ranking /> should render correctly 1`] = `
   className="form-group undefined"
   id="ranking"
 >
-  <label
-    className="control-label label-class"
-    htmlFor="ranking"
-  >
-    label
-  </label>
-   
   <span
     className="help-block"
   >
