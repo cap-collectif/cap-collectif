@@ -4,6 +4,6 @@ Theme:
         description: "A theme"
         fields:
             id:
-                type: "String!"
+                type: "ID!"
             title:
                 type: "String!"

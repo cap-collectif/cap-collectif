@@ -37,7 +37,6 @@ Scenario: Anonymous API client wants to get one proposal form
       "name": @string@,
       "id": @string@,
       "geojson": @wildcard@,
-      "geojsonStyle": @wildcard@,
       "displayedOnMap": @boolean@
     },
      @...@
