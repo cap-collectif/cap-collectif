@@ -40,9 +40,9 @@
         {% set opinionsLabel = project.opinionTerm == 0 ? 'project.ranking.opinions' : 'project.ranking.articles' %}
         <div class="opinion opinion--default">
             <div class="opinion__header  opinion__header--mobile-centered">
-                <h2 class="pull-left  h4  opinion__header__title">
+                <div class="pull-left opinion__header__title">
                     {{ opinionsLabel | transchoice(opinions | length, {}, 'CapcoAppBundle')  }}
-                </h2>
+                </div>
             </div>
         </div>
 
@@ -72,9 +72,9 @@
 
             <div class="opinion opinion--default">
                 <div class="opinion__header  opinion__header--mobile-centered">
-                    <h2 class="pull-left  h4  opinion__header__title">
+                    <div class="pull-left opinion__header__title">
                         {{ 'project.ranking.versions' | transchoice(versions | length, {}, 'CapcoAppBundle')  }}
-                    </h2>
+                    </div>
                 </div>
             </div>
 
