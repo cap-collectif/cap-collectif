@@ -591,7 +591,6 @@ type EvaluationForm {
 }
 
 type Event implements Node {
-  # This is likely to be an uuid soon.
   id: ID!
   title: String!
 
@@ -2152,6 +2151,7 @@ type User implements Node {
 
   # Total of contributions count
   contributionsCount: Int!
+  expired: Boolean!
 }
 
 # A connection to a list of items.
