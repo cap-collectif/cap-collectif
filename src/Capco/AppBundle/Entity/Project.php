@@ -886,7 +886,7 @@ class Project implements IndexableInterface
 
         foreach ($this->steps as $pas) {
             $step = $pas->getStep();
-            if ($step->isConsultationStep() || $step->isCollectStep() || $step->isSelectionStep() || $step->isQuestionnaireStep()) {
+            if ($step->isConsultationStep() || $step->isCollectStep() || $step->isQuestionnaireStep()) {
                 $steps[] = $pas;
             }
         }

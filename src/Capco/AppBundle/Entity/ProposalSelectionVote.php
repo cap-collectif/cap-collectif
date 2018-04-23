@@ -13,13 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\HasAnonymousOrUser()
  * @CapcoAssert\EmailDoesNotBelongToUser(message="proposal.vote.email_belongs_to_user")
+ * @CapcoAssert\DidNotAlreadyVote(message="proposal.vote.already_voted", repositoryPath="CapcoAppBundle:ProposalSelectionVote", objectPath="proposal")
  * @CapcoAssert\HasEnoughCreditsToVote()
  */
 class ProposalSelectionVote extends AbstractVote
 {
-    // Deleted because for users we have a unique constraint in db
-    // * @CapcoAssert\DidNotAlreadyVote(message="proposal.vote.already_voted", repositoryPath="CapcoAppBundle:ProposalSelectionVote", objectPath="proposal")
-
     use AnonymousableTrait, PrivatableTrait;
 
     const ANONYMOUS = 'ANONYMOUS';

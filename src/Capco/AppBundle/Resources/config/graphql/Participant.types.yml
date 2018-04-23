@@ -1,6 +1,0 @@
-Participant:
-    type: union
-    config:
-        types: [User, NotRegistered]
-        description: User and NotRegistered
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ParticipantTypeResolver", [value])'

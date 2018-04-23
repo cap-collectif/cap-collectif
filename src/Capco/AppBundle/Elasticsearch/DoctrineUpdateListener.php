@@ -4,8 +4,6 @@ namespace Capco\AppBundle\Elasticsearch;
 
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Model\Contribution;
-use Capco\AppBundle\Model\HasAuthorInterface;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Swarrot\Broker\Message;
@@ -49,11 +47,6 @@ class DoctrineUpdateListener implements EventSubscriber
         if ($entity instanceof IndexableInterface) {
             $this->publisher->publish('elasticsearch.indexation', new Message(
               json_encode(['class' => get_class($entity), 'id' => $entity->getId()])
-          ));
-        }
-        if (($entity instanceof HasAuthorInterface || ($entity instanceof Contribution && method_exists($entity, 'getAuthor'))) && $entity->getAuthor()) {
-            $this->publisher->publish('elasticsearch.indexation', new Message(
-              json_encode(['class' => get_class($entity->getAuthor()), 'id' => $entity->getAuthor()->getId()])
           ));
         }
         if ($entity instanceof Comment && $entity->getRelatedObject()) {
