@@ -4,7 +4,10 @@ import { QueryRenderer, graphql } from 'react-relay';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import ProposalVotes from './ProposalVotes';
 import Loader from '../../Ui/Loader';
-import type { ProposalVotesByStepQueryResponse, ProposalVotesByStepQueryVariables } from './__generated__/ProposalVotesByStepQuery.graphql';
+import type {
+  ProposalVotesByStepQueryResponse,
+  ProposalVotesByStepQueryVariables,
+} from './__generated__/ProposalVotesByStepQuery.graphql';
 
 type Props = {
   proposal: { +id: string },
@@ -12,7 +15,6 @@ type Props = {
 };
 
 export class ProposalVotesByStep extends React.Component<Props> {
-
   render() {
     const { proposal, stepId } = this.props;
     return (
@@ -43,9 +45,9 @@ export class ProposalVotesByStep extends React.Component<Props> {
             return graphqlError;
           }
           if (props) {
-            // eslint-disable-next-line react/prop-types
             if (props.proposal) {
               return (
+                // $FlowFixMe
                 <ProposalVotes proposal={props.proposal} stepId={stepId} />
               );
             }
@@ -57,6 +59,6 @@ export class ProposalVotesByStep extends React.Component<Props> {
       />
     );
   }
-};
+}
 
 export default ProposalVotesByStep;

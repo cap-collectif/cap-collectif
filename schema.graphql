@@ -1201,7 +1201,7 @@ type Project implements Node {
   # A list of contributor associated with the project.
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
   url: String
-  votableSteps: [ProposalVotableStep!]!
+  votableSteps: [ProposalStep!]!
 }
 
 # A budget contribution
@@ -1219,7 +1219,7 @@ type Proposal implements Node {
   reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
   project: Project!
   status(
-    # Status on step.
+    # Status on a selection step.
     step: ID
   ): Status
   selections: [Selection!]!
@@ -1524,7 +1524,14 @@ interface ProposalStep {
   id: ID!
   kind: String!
   title: String!
+  voteType: ProposalStepVoteType!
+  votesHelpText: String
+  open: Boolean!
+  votesRanking: Boolean!
   show_url: String!
+
+  # A list of viewer votes associated with the step.
+  viewerVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}): ProposalVoteConnection!
   proposals(
     district: ID
     userType: ID
@@ -2343,7 +2350,7 @@ input UpdateProposalVotesInput {
 }
 
 type UpdateProposalVotesPayload {
-  step: Step!
+  step: ProposalStep!
   clientMutationId: String
 }
 

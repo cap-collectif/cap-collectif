@@ -3,13 +3,17 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalList } from './ProposalList';
+import { $refType, $fragmentRefs } from '../../../mocks';
 
 describe('<ProposalList />', () => {
   const emptyStep = {
     id: '1',
+    $refType,
+    $fragmentRefs,
   };
 
   const proposals = {
+    $refType,
     totalCount: 0,
     edges: [],
   };
@@ -23,11 +27,14 @@ describe('<ProposalList />', () => {
 
   const collectStep = {
     id: '1',
+    $refType,
+    $fragmentRefs,
   };
 
   const proposalsList = {
     totalCount: 2,
-    edges: [{ node: { id: '1' } }, { node: { id: '2' } }],
+    $refType,
+    edges: [{ node: { id: '1', $fragmentRefs } }, { node: { id: '2', $fragmentRefs } }],
   };
 
   it('should render a collectStep proposal list', () => {
@@ -39,6 +46,8 @@ describe('<ProposalList />', () => {
   });
 
   const selectionStep = {
+    $refType,
+    $fragmentRefs,
     id: '1',
   };
 

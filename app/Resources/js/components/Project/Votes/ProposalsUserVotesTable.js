@@ -2,45 +2,39 @@
 import * as React from 'react';
 import { Row } from 'react-bootstrap';
 import { reduxForm } from 'redux-form';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { connect } from 'react-redux';
 import ProposalUserVoteItem from './ProposalUserVoteItem';
-import UpdateProposalVoteMutation from '../../../mutations/UpdateProposalVoteMutation';
-
+// import UpdateProposalVotesMutation from '../../../mutations/UpdateProposalVotesMutation';
+import type { ProposalsUserVotesTable_step } from './__generated__/ProposalsUserVotesTable_step.graphql';
+import type { ProposalsUserVotesTable_votes } from './__generated__/ProposalsUserVotesTable_votes.graphql';
 
 type Props = {
-  step: Object,
+  step: ProposalsUserVotesTable_step,
+  votes: ProposalsUserVotesTable_votes,
 };
 
 type State = {
-  items: Object
+  items: Array<Object>,
 };
 
-
 // a little function to help us with reordering the result
-const reorder = (list, startIndex, endIndex) => { //
+const reorder = (list, startIndex, endIndex) => {
+  //
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
   result.splice(endIndex, 0, removed);
   return result;
 };
 
-const onSubmit = (values, dispatch, props) => {
+const onSubmit = () => {
   // const { step } = props;
-  const { items } = this.state;
-
-  console.log(items);
-
-  const data = {
-    // step: step,
-    // votes: items
-  };
-
-  if(items) {
-    return UpdateProposalVoteMutation.commit({
-      input: { ...data },
-    })
-  }
+  // const { items } = this.state;
+  // if(items) {
+  //   return UpdateProposalVotesMutation.commit({
+  //     input: { ...data },
+  //   })
+  // }
 };
 
 export const formName = 'proposal-user-vote-form';
@@ -49,21 +43,17 @@ class ProposalsUserVotesTable extends React.Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
-      items: props.step.viewerVotes.edges.map(edge => edge.node),
+      items: props.votes.edges.filter(Boolean).map(edge => edge.node),
     };
   }
 
-  onDragEnd = (result) => { // result
+  onDragEnd = result => {
     // dropped outside the list
     if (!result.destination) {
       return;
     }
 
-    const items = reorder(
-      this.state.items,
-      result.source.index,
-      result.destination.index
-    );
+    const items = reorder(this.state.items, result.source.index, result.destination.index);
 
     this.setState({
       items,
@@ -71,7 +61,22 @@ class ProposalsUserVotesTable extends React.Component<Props, State> {
   };
 
   render() {
-    const { step } = this.props;
+    const { step, votes } = this.props;
+
+    if (!step.votesRanking) {
+      return (
+        <form id="proposal-user-vote-form">
+          <Row className="proposals-user-votes__table">
+            {votes.edges &&
+              votes.edges.filter(Boolean).map((edge, key) => (
+                // $FlowFixMe
+                <ProposalUserVoteItem key={key} vote={edge.node} step={step} />
+              ))}
+          </Row>
+        </form>
+      );
+    }
+
     const { items } = this.state;
 
     return (
@@ -79,24 +84,17 @@ class ProposalsUserVotesTable extends React.Component<Props, State> {
         <Row className="proposals-user-votes__table">
           <DragDropContext onDragEnd={this.onDragEnd}>
             <Droppable droppableId="droppable">
-              {(provided, snapshot) => (
-                <div
-                  ref={provided.innerRef}
-                >
-                  {items.map((node, key) => (
-                    <Draggable key={node.proposal.id} draggableId={node.proposal.id} index={key}>
-                      {(provided, snapshot) => (
+              {provided => (
+                <div ref={provided.innerRef}>
+                  {items.map((vote, key) => (
+                    <Draggable key={vote.proposal.id} draggableId={vote.proposal.id} index={key}>
+                      {provided2 => (
                         <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                        >
-                          <ProposalUserVoteItem
-                            key={key}
-                            classment={key}
-                            node={node}
-                            step={step}
-                          />
+                          ref={provided2.innerRef}
+                          {...provided2.draggableProps}
+                          {...provided2.dragHandleProps}>
+                          {/* $FlowFixMe */}
+                          <ProposalUserVoteItem key={key} ranking={key} vote={vote} step={step} />
                         </div>
                       )}
                     </Draggable>
@@ -107,15 +105,35 @@ class ProposalsUserVotesTable extends React.Component<Props, State> {
             </Droppable>
           </DragDropContext>
         </Row>
-        <button type="submit">
-          Valider
-        </button>
+        <button type="submit">Valider</button>
       </form>
     );
   }
 }
 
-export default reduxForm({
-    onSubmit,
-    form: formName,
+const form = reduxForm({
+  onSubmit,
+  form: formName,
 })(ProposalsUserVotesTable);
+
+export default createFragmentContainer(form, {
+  votes: graphql`
+    fragment ProposalsUserVotesTable_votes on ProposalVoteConnection {
+      edges {
+        node {
+          ...ProposalUserVoteItem_vote
+          proposal {
+            id
+          }
+        }
+      }
+    }
+  `,
+  step: graphql`
+    fragment ProposalsUserVotesTable_step on ProposalStep {
+      id
+      votesRanking
+      ...ProposalUserVoteItem_step
+    }
+  `,
+});

@@ -139,7 +139,7 @@ export default createRefetchContainer(
       }
     `,
     step: graphql`
-      fragment ProposalListView_step on ProposalStep {
+      fragment ProposalListView_step on ProposalStep @argumentDefinitions(count: { type: "Int" }) {
         id
         ...ProposalListViewPaginated_step
       }

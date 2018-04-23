@@ -47,7 +47,7 @@ export class ProposalVoteButton extends React.Component<Props, State> {
       ? null
       : userHasVote
         ? () => {
-            deleteVote(dispatch, step, proposal);
+            deleteVote(step, proposal);
           }
         : () => {
             dispatch(openVoteModal(proposal.id));

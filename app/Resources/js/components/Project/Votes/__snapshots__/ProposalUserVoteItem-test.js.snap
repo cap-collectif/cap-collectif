@@ -3,7 +3,7 @@
 exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
 <Row
   bsClass="row"
-  className="proposals-user-votes__row"
+  className="proposals-user-votes__row d-flex flex-wrap"
   componentClass="div"
   id="vote-step1-proposal1"
 >
@@ -11,93 +11,83 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
     bsClass="col"
     className="proposals-user-votes__col"
     componentClass="div"
-    md={4}
+    md={9}
+    xs={12}
+  >
+    <div
+      className="proposals-user-votes__content"
+    >
+      <div>
+        <a
+          className="proposals-user-votes__title"
+          href="http://capco.test/proposal"
+        >
+          proposal
+        </a>
+        <br />
+        <FormattedMessage
+          id="voted-on-date-at-time"
+          values={
+            Object {
+              "date": <FormattedDate
+                day="numeric"
+                month="long"
+                value="2015-01-01 00:00:00"
+                year="numeric"
+              />,
+              "time": <FormattedTime
+                hour="numeric"
+                minute="numeric"
+                value="2015-01-01 00:00:00"
+              />,
+            }
+          }
+        />
+      </div>
+    </div>
+  </Col>
+  <Col
+    bsClass="col"
+    className="proposals-user-votes__col"
+    componentClass="div"
+    md={2}
+    xs={12}
+  >
+    <div
+      className="proposals-user-votes__content justify-content-end"
+    >
+      <div
+        className="d-flex"
+      >
+        <FormattedMessage
+          id="public"
+          values={Object {}}
+        />
+        <Field
+          checked={false}
+          className="ml-10"
+          component={[Function]}
+          name="anonymous"
+        />
+      </div>
+    </div>
+  </Col>
+  <Col
+    bsClass="col"
+    className="proposals-user-votes__col"
+    componentClass="div"
+    md={1}
     xs={12}
   >
     <a
-      href="http://capco.test/proposal"
-    >
-      proposal
-    </a>
-  </Col>
-  <Col
-    bsClass="col"
-    className="proposals-user-votes__col"
-    componentClass="div"
-    md={2}
-    xs={12}
-  >
-    <i
-      className="cap cap-user-2"
-    />
-    <UserLink
-      className=""
-      user={
-        Object {
-          "displayName": "user",
-          "id": 1,
-        }
-      }
-    />
-  </Col>
-  <Col
-    bsClass="col"
-    className="proposals-user-votes__col"
-    componentClass="div"
-    md={2}
-    xs={12}
-  >
-    <i
-      className="cap cap-marker-1"
-    />
-    district
-  </Col>
-  <Col
-    bsClass="col"
-    className="proposals-user-votes__col"
-    componentClass="div"
-    md={2}
-    xs={12}
-  >
-    <Relay(ProposalDetailEstimation)
-      proposal={
-        Object {
-          "author": Object {
-            "displayName": "user",
-            "id": 1,
-          },
-          "district": Object {
-            "name": "district",
-          },
-          "id": 1,
-          "show_url": "http://capco.test/proposal",
-          "title": "proposal",
-        }
-      }
-      showNullEstimation={true}
-    />
-  </Col>
-  <Col
-    bsClass="col"
-    className="proposals-user-votes__col"
-    componentClass="div"
-    md={2}
-    xs={12}
-  >
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="default"
       className="proposal-vote__delete"
       disabled={false}
       onClick={[Function]}
     >
-      <FormattedMessage
-        id="project.votes.delete"
-        values={Object {}}
+      <i
+        className="cap cap-ios-close"
       />
-    </Button>
+    </a>
   </Col>
 </Row>
 `;

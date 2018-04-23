@@ -27,11 +27,14 @@ exports[`<ProposalList /> should render a collectStep proposal list 1`] = `
     <Relay(ProposalPreview)
       proposal={
         Object {
+          "$fragmentRefs": null,
           "id": "1",
         }
       }
       step={
         Object {
+          "$fragmentRefs": null,
+          "$refType": null,
           "id": "1",
         }
       }
@@ -40,18 +43,20 @@ exports[`<ProposalList /> should render a collectStep proposal list 1`] = `
     <Relay(ProposalPreview)
       proposal={
         Object {
+          "$fragmentRefs": null,
           "id": "2",
         }
       }
       step={
         Object {
+          "$fragmentRefs": null,
+          "$refType": null,
           "id": "1",
         }
       }
       viewer={null}
     />
   </ul>
-  0
 </Row>
 `;
 
@@ -66,11 +71,14 @@ exports[`<ProposalList /> should render a selectionStep proposal list 1`] = `
     <Relay(ProposalPreview)
       proposal={
         Object {
+          "$fragmentRefs": null,
           "id": "1",
         }
       }
       step={
         Object {
+          "$fragmentRefs": null,
+          "$refType": null,
           "id": "1",
         }
       }
@@ -79,17 +87,19 @@ exports[`<ProposalList /> should render a selectionStep proposal list 1`] = `
     <Relay(ProposalPreview)
       proposal={
         Object {
+          "$fragmentRefs": null,
           "id": "2",
         }
       }
       step={
         Object {
+          "$fragmentRefs": null,
+          "$refType": null,
           "id": "1",
         }
       }
       viewer={null}
     />
   </ul>
-  0
 </Row>
 `;

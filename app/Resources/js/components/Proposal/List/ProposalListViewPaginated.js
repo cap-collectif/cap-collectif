@@ -18,30 +18,33 @@ type Props = {
 export class ProposalListViewPaginated extends React.Component<Props> {
   render() {
     const { step, viewer, relay } = this.props;
-
-    // $FlowFixMe
-    const proposals = step.proposals || step.form.proposals;
-
     return (
       <div>
         <VisibilityBox enabled={step.private || false}>
           {/* $FlowFixMe */}
-          <ProposalList step={step} proposals={proposals} viewer={viewer} id="proposals-list" />
+          <ProposalList
+            step={step}
+            proposals={step.proposals}
+            viewer={viewer}
+            id="proposals-list"
+          />
         </VisibilityBox>
         <div id="proposal-list-pagination-footer">
-          <Button
-            onClick={() => {
-              relay.loadMore(30);
-            }}>
-            Load More
-          </Button>
+          {relay.hasMore() && (
+            <Button
+              disabled={relay.isLoading()}
+              onClick={() => {
+                relay.loadMore(30);
+              }}>
+              Load More
+            </Button>
+          )}
         </div>
       </div>
     );
   }
 }
 
-// TODO refacto to have only one @connection for collect and selection
 export default createPaginationContainer(
   ProposalListViewPaginated,
   {
@@ -53,29 +56,10 @@ export default createPaginationContainer(
     step: graphql`
       fragment ProposalListViewPaginated_step on ProposalStep {
         id
+        ... on CollectStep {
+          private
+        }
         ...ProposalList_step
-        # ... on CollectStep {
-        #   private
-        #   form {
-        #     proposals(
-        #       first: $count
-        #       orderBy: $orderBy
-        #       term: $term
-        #       district: $district
-        #       theme: $theme
-        #       category: $category
-        #       status: $status
-        #       userType: $userType
-        #     ) @connection(key: "ProposalListViewPaginated_proposals") {
-        #       ...ProposalList_proposals
-        #       edges {
-        #         node {
-        #           id
-        #         }
-        #       }
-        #     }
-        #   }
-        # }
         proposals(
           first: $count
           orderBy: $orderBy
@@ -86,6 +70,7 @@ export default createPaginationContainer(
           status: $status
           userType: $userType
         ) @connection(key: "ProposalListViewPaginated_proposals") {
+          totalCount
           ...ProposalList_proposals
           edges {
             node {
@@ -136,6 +121,7 @@ export default createPaginationContainer(
       ) {
         step: node(id: $stepId) {
           ...ProposalListViewPaginated_step
+          ...ProposalStepPageHeader_step
         }
       }
     `,

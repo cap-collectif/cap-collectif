@@ -32,14 +32,13 @@ type Props = {
   selectedViewByStep: string,
 };
 
-export class ProposalStepPage extends React.Component<Props, Object> {
+export class ProposalStepPage extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
-    this.state = {
-      initialRenderVars: {
-        term: props.terms,
-        ...queryVariables(props.filters, props.order),
-      },
+    // $FlowFixMe
+    this.initialRenderVars = {
+      term: props.terms,
+      ...queryVariables(props.filters, props.order),
     };
   }
 
@@ -87,7 +86,7 @@ export class ProposalStepPage extends React.Component<Props, Object> {
               }
               step: node(id: $stepId) {
                 id
-                ...ProposalListView_step
+                ...ProposalListView_step @arguments(count: $count)
                 ...ProposalStepPageHeader_step
                 ... on CollectStep {
                   private
@@ -105,7 +104,8 @@ export class ProposalStepPage extends React.Component<Props, Object> {
               stepId: this.props.step.id,
               isAuthenticated: this.props.isLogged,
               count: 2,
-              ...this.state.initialRenderVars,
+              // $FlowFixMe
+              ...this.initialRenderVars,
             }: ProposalStepPageQueryVariables)
           }
           render={({ error, props }: { error: ?Error, props: ?ProposalStepPageQueryResponse }) => {
