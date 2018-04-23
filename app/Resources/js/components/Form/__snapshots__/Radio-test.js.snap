@@ -6,7 +6,7 @@ exports[`<Radio /> should render correctly 1`] = `
   id="reply-1"
 >
   <label
-    className="control-label "
+    className="control-label h5"
     htmlFor="reply-1"
   >
     label
@@ -80,7 +80,7 @@ exports[`<Radio /> should render correctly with other allowed 1`] = `
   id="reply-1"
 >
   <label
-    className="control-label "
+    className="control-label h5"
     htmlFor="reply-1"
   >
     label

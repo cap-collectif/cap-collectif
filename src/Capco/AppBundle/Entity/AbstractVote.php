@@ -9,16 +9,12 @@ use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\Index;
 use Doctrine\ORM\Mapping\UniqueConstraint;
 
 /**
  * @ORM\Table(
  *   name="votes",
- *   indexes={
- *        @Index(name="selectionstep_voter_idx", columns={"voter_id", "selection_step_id"}),
- *        @Index(name="proposal_selectionstep_idx", columns={"proposal_id", "selection_step_id"}),
- *   },
+ *   indexes={},
  *   uniqueConstraints={
  *        @UniqueConstraint(
  *            name="opinion_vote_unique",

@@ -8,7 +8,6 @@ use Capco\AppBundle\Mailer\Message\AdminMessage;
 final class ProposalCreateAdminMessage extends AdminMessage
 {
     public static function create(Proposal $proposal,
-                                  string $proposalSummary,
                                   string $recipentEmail,
                                   string $proposalUrl,
                                   string $proposalAdminUrl,
@@ -30,8 +29,7 @@ final class ProposalCreateAdminMessage extends AdminMessage
                 $proposal->getTitle(),
                 $proposal->getCreatedAt()->format('d/m/Y'),
                 $proposal->getCreatedAt()->format('H:i:s'),
-                $proposalSummary,
-                $proposal->getBodyTextExcerpt(140),
+                $proposal->getSummaryOrBodyExcerpt(),
                 $proposalUrl,
                 $proposalAdminUrl,
                 $proposal->getProposalForm()->getStep()->getProject()->getTitle()
@@ -45,8 +43,7 @@ final class ProposalCreateAdminMessage extends AdminMessage
         string $proposalTitle,
         string $date,
         string $time,
-        string $proposalSummary,
-        string $proposalDescription,
+        string $proposalExcerpt,
         string $proposalUrl,
         string $proposalAdminUrl,
         string $projectTitle
@@ -57,8 +54,7 @@ final class ProposalCreateAdminMessage extends AdminMessage
             '%proposal%' => self::escape($proposalTitle),
             '%date%' => $date,
             '%time%' => $time,
-            '%proposalSummary%' => $proposalSummary,
-            '%proposalDescription%' => $proposalDescription,
+            '%proposalExcerpt%' => self::escape($proposalExcerpt),
             '%proposalUrl%' => $proposalUrl,
             '%proposalUrlBack%' => $proposalAdminUrl,
             '%project%' => self::escape($projectTitle),

@@ -328,7 +328,7 @@ const ReplyForm = React.createClass({
             case 'button':
               return (
                 <div className="form-group" id={`reply-${field.id}`}>
-                  <label htmlFor={`reply-${field.id}`} className="control-label">
+                  <label htmlFor={`reply-${field.id}`} className="control-label h5">
                     {label}
                   </label>
                   {field.helpText && (

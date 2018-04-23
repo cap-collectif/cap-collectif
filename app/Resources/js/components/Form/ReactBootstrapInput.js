@@ -365,8 +365,8 @@ class ReactBootstrapInput extends React.Component<Props> {
           <ControlLabel bsClass={cx('control-label', labelClassName)}>{label}</ControlLabel>
         )}
         {props.help && <HelpBlock>{props.help}</HelpBlock>}
-        {this.renderInputGroup(props)}
         {props.description && <HelpBlock>{props.description}</HelpBlock>}
+        {this.renderInputGroup(props)}
         {props.errors && <span className="error-block">{props.errors}</span>}
       </FormGroup>
     );
