@@ -9,6 +9,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 class UserIsGrantedResolver
 {
     protected $tokenStorage;
+    protected $logger;
 
     public function __construct(TokenStorage $tokenStorage, LoggerInterface $logger)
     {
@@ -16,25 +17,30 @@ class UserIsGrantedResolver
         $this->tokenStorage = $tokenStorage;
     }
 
-    public function isGranted(User $userRequest, $user)
+    public function isGranted($userRequest, $user)
     {
-        if(!$user instanceof User) {
+
+        if (!$user instanceof User) {
             return false;
         }
 
-        if(!$this->tokenStorage->getToken()){
+
+        if (!$this->tokenStorage->getToken()) {
             return false;
         }
 
-        if($user->hasRole('ROLE_ADMIN')){
+        if ($user->hasRole('ROLE_ADMIN')) {
             return true;
         }
 
-        if($user->hasRole('ROLE_USER') && $user->getId() == $userRequest->getId()) {
+        if ($user->hasRole('ROLE_USER') && $user->getId() == $userRequest->getId()) {
             return true;
         }
 
-        $this->logger->warning(__METHOD__ . ' : User with id' . $user->getId() .' try to get informations about user with id  '. $userRequest->getId());
+        $this->logger->warning(
+            __METHOD__.' : User with id '.$user->getId(
+            ).' try to get informations about user with id '.$userRequest->getId()
+        );
 
         return false;
     }

@@ -3,6 +3,9 @@ UpdateProfilePersonalDataInput:
     config:
         description: "Update your personal data"
         fields:
+            userId:
+                type: "ID!"
+                description: "user id"
             firstname:
                 type: "String"
                 description: "Your firstname"
@@ -24,10 +27,9 @@ UpdateProfilePersonalDataInput:
             city:
                 type: "String"
                 description: "Your city"
-            ZipCode:
+            zipCode:
                 type: "String"
                 description: "Your zipcode"
             dateOthBirth:
                 type: "String"
                 description: "Your date of birth"
-

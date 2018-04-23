@@ -8,63 +8,101 @@ use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProfilePersonalDataFormType extends AbstractType
 {
-    private $class;
-
-    public function __construct(String $class)
-    {
-        $this->class = $class;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('address', null, [
-                'label' => 'user.profile.edit.address',
-                'translation_domain' => 'CapcoAppBundle',
-                'required' => false,
-            ])
-            ->add('address2', null, [
-                'label' => 'user.profile.edit.address2',
-                'translation_domain' => 'CapcoAppBundle',
-                'required' => false,
-            ])
-            ->add('zipCode', null, [
-                'label' => 'user.profile.edit.zip_code',
-                'translation_domain' => 'CapcoAppBundle',
-                'required' => false,
-            ])
-            ->add('city', null, [
-                'label' => 'user.profile.edit.city',
-                'translation_domain' => 'CapcoAppBundle',
-                'required' => false,
-            ])
-            ->add('gender', 'sonata_user_gender', [
-                'required' => true,
-                'translation_domain' => 'CapcoAppBundle',
-            ])
-            ->add('dateOfBirth',
-                BirthdayType::class, [
+            ->add(
+                'firstname',
+                null,
+                [
+                    'label' => 'user.profile.edit.firstname',
+                    'translation_domain' => 'CapcoAppBundle',
+                    'required' => false,
+                ]
+            )
+            ->add(
+                'lastname',
+                null,
+                [
+                    'label' => 'user.profile.edit.lastname',
+                    'translation_domain' => 'CapcoAppBundle',
+                    'required' => false,
+                ]
+            )
+            ->add(
+                'address',
+                null,
+                [
+                    'label' => 'user.profile.edit.address',
+                    'translation_domain' => 'CapcoAppBundle',
+                    'required' => false,
+                ]
+            )
+            ->add(
+                'address2',
+                null,
+                [
+                    'label' => 'user.profile.edit.address2',
+                    'translation_domain' => 'CapcoAppBundle',
+                    'required' => false,
+                ]
+            )
+            ->add(
+                'zipCode',
+                null,
+                [
+                    'label' => 'user.profile.edit.zip_code',
+                    'translation_domain' => 'CapcoAppBundle',
+                    'required' => false,
+                ]
+            )
+            ->add(
+                'city',
+                null,
+                [
+                    'label' => 'user.profile.edit.city',
+                    'translation_domain' => 'CapcoAppBundle',
+                    'required' => false,
+                ]
+            )
+            ->add(
+                'phone',
+                null,
+                array(
+                    'label' => 'form.label_phone',
+                    'translation_domain' => 'CapcoAppBundle',
+                    'required' => false,
+                )
+            )
+            ->add(
+                'dateOfBirth',
+                BirthdayType::class,
+                [
                     'required' => false,
                     'label' => 'user.profile.edit.birthday',
                     'translation_domain' => 'CapcoAppBundle',
-                ])
-            ->add('gender', 'sonata_user_gender', array(
-                'label'              => 'form.label_gender',
-                'required'           => false,
-                'translation_domain' => 'SonataUserBundle',
-                'choices'            => array(
-                    UserInterface::GENDER_FEMALE => 'gender_female',
-                    UserInterface::GENDER_MALE   => 'gender_male',
-                    User::GENDER_OTHER   => 'gender_other',
-                ),
-            ))
-        ;
-
+                ]
+            )
+            ->add(
+                'gender',
+                ChoiceType::class,
+                array(
+                    'label' => 'form.label_gender',
+                    'required' => false,
+                    'translation_domain' => 'CapcoAppBundle',
+                    'choices' => array(
+                        UserInterface::GENDER_FEMALE => 'FEMALE',
+                        UserInterface::GENDER_MALE => 'MALE',
+                        User::GENDER_OTHER => 'OTHER',
+                    ),
+                )
+            );
     }
 
     /**
@@ -72,9 +110,11 @@ class ProfilePersonalDataFormType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => $this->class,
-        ));
+        $resolver->setDefaults(
+            array(
+                'data_class' => User::class,
+            )
+        );
     }
 
     /**

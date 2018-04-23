@@ -1074,7 +1074,7 @@ enum PickFollowTypeValue {
 
 # 3 possible values
 enum PickUserGenderValue {
-  MAN
+  MALE
   FEMALE
   OTHER
 }
@@ -2009,6 +2009,9 @@ type UpdateProfilePayload {
 }
 
 input UpdateProfilePersonalDataInput {
+  # user id
+  userId: ID!
+
   # Your firstname
   firstname: String
 
@@ -2031,7 +2034,7 @@ input UpdateProfilePersonalDataInput {
   city: String
 
   # Your zipcode
-  ZipCode: String
+  zipCode: String
 
   # Your date of birth
   dateOthBirth: String

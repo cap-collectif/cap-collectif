@@ -3,7 +3,7 @@ PickUserGenderValue:
     config:
         description: "3 possible values"
         values:
-            MAN:
+            MALE:
                 value: "m"
             FEMALE:
                 value: "f"

@@ -6,9 +6,6 @@ import {
   Well,
   Panel,
   Col,
-  FormGroup,
-  FormControl,
-  ControlLabel,
   ButtonToolbar,
   Button,
 } from 'react-bootstrap';
@@ -102,10 +99,8 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const {intl} = props;
   const input = {
     ...values,
-    id: undefined,
-    proposalFormId: props.proposalForm.id,
+    userId: props.user.id
   };
-
   console.log(input);
 
   return UpdateProfilePersonalDataMutation.commit({input})
@@ -191,12 +186,10 @@ export class PersonalData extends Component<Props, PersonalDataState> {
       valid,
       submitSucceeded,
       submitFailed,
-      dirty,
       handleSubmit,
       submitting,
       error,
     } = this.props;
-
     return (
       <div id="personal-data">
         {!this.hasData(user) && (
@@ -230,7 +223,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
           )}
           {this.hasData(user) && (
             <div>
-              <form onSubmit={handleSubmit} horizontal className="form-horizontal">
+              <form onSubmit={handleSubmit} className="form-horizontal">
                 {user.firstname && (
                   <div className="personal_data_field">
                     <label className="col-sm-3 control-label">
@@ -276,13 +269,13 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                         id="personal-data-form-gender"
                         divClassName="col-sm-7"
                       >
-                        <option selected={user.gender === 'm' ? 'selected' : ''} value="m">
+                        <option value="MALE">
                           <FormattedMessage id="gender.male"/>
                         </option>
-                        <option selected={user.gender === 'f' ? 'selected' : ''} value="f">
+                        <option value="FEMALE">
                           <FormattedMessage id="gender.female"/>
                         </option>
-                        <option selected={user.gender === 'o' ? 'selected' : ''} value="o">
+                        <option value="OTHER">
                           <FormattedMessage id="gender.other"/>
                         </option>
                       </Field>
@@ -428,15 +421,15 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                 <div className="personal_data_field">
                   <ButtonToolbar className="box-content__toolbar">
                     <Button
-                      disabled={invalid || dirty || submitting}
+                      disabled={invalid || submitting}
                       type="submit"
                       bsStyle="primary"
                       id="proposal-form-admin-content-save">
                       <FormattedMessage id={submitting ? 'global.loading' : 'global.save'}/>
                     </Button>
                     <AlertForm
-                      valid={dirty ? true : valid}
-                      invalid={dirty ? false : invalid}
+                      valid={valid}
+                      invalid={invalid}
                       errorMessage={error}
                       submitSucceeded={submitSucceeded}
                       submitFailed={submitFailed}
@@ -469,6 +462,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) =
     city: props.user.city ? props.user.city : '',
     zipCode: props.user.zipCode ? props.user.zipCode : '',
     phone: props.user.phone ? props.user.phone : '',
+    gender: props.user.gender ? props.user.gender : '',
   },
 });
 
@@ -478,7 +472,7 @@ export default createFragmentContainer(
   container,
   graphql`
     fragment PersonalData_user on User {
-      username
+      id
       firstname
       lastname
       dateOfBirth

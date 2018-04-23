@@ -219,7 +219,7 @@ Mutation:
               payloadType: UpdateProfilePasswordPayload
               mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProfilePasswordMutation", [value, user])'
           updateProfilePersonalData:
-            access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(value, user)'
+            access: '@=hasRole("ROLE_USER") and service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user, user)'
             builder: "Relay::Mutation"
             builderConfig:
               inputType: UpdateProfilePersonalDataInput
