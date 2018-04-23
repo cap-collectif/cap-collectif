@@ -9,5 +9,7 @@ District:
                 type: "String!"
             geojson:
                 type: "GeoJSON"
+            geojsonStyle:
+                type: "CssJSON"
             displayedOnMap:
                 type: "Boolean!"

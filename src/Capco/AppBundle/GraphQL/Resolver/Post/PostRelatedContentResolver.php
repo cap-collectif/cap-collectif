@@ -6,12 +6,12 @@ use Capco\AppBundle\Entity\Post;
 
 class PostRelatedContentResolver
 {
-    public function __invoke(Post $post): iterable
+    public function __invoke(Post $post)
     {
-        return array_merge(
-            $post->getThemes()->toArray(),
-            $post->getProposals()->toArray(),
-            $post->getProjects()->toArray()
-        );
+        $results = $post->getThemes();
+        $results[] = $post->getProjects();
+        $results[] = $post->getThemes();
+
+        return $results;
     }
 }

@@ -18,19 +18,28 @@ use Capco\AppBundle\Resolver\UrlResolver;
 use Capco\AppBundle\SiteParameter\Resolver;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Router;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class ProposalNotifier extends BaseNotifier
 {
     protected $proposalResolver;
     protected $urlResolver;
     protected $router;
+    private $translator;
 
-    public function __construct(MailerService $mailer, Resolver $siteParams, UserResolver $userResolver, ProposalResolver $proposalResolver, UrlResolver $urlResolver, Router $router)
+    public function __construct(MailerService $mailer,
+                                Resolver $siteParams,
+                                UserResolver $userResolver,
+                                ProposalResolver $proposalResolver,
+                                UrlResolver $urlResolver,
+                                Router $router,
+                                TranslatorInterface $translator)
     {
         parent::__construct($mailer, $siteParams, $userResolver);
         $this->proposalResolver = $proposalResolver;
         $this->urlResolver = $urlResolver;
         $this->router = $router;
+        $this->translator = $translator;
     }
 
     public function onCreate(Proposal $proposal)
@@ -38,6 +47,7 @@ class ProposalNotifier extends BaseNotifier
         if ($proposal->getProposalForm()->isNotifyingOnCreate()) {
             $this->mailer->sendMessage(ProposalCreateAdminMessage::create(
                 $proposal,
+                $proposal->getSummary() ?? $this->translator->trans('project.votes.widget.no_value'),
                 $this->siteParams->getValue('admin.mail.notifications.receive_address'),
                 $this->proposalResolver->resolveShowUrl($proposal),
                 $this->proposalResolver->resolveAdminUrl($proposal),

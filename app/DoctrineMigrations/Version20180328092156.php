@@ -31,6 +31,7 @@ class Version20180328092156 extends AbstractMigration
     public function postUp(Schema $schema)
     {
         $request = $this->connection->fetchAll("SELECT body FROM page WHERE slug = 'charte' LIMIT 1", ['']);
+
         $menuItemChart = $this->connection->fetchAll("SELECT * FROM menu_item WHERE link = 'pages/charte' LIMIT 1", ['']);
 
         if(!empty($menuItemChart[0])) {
