@@ -33,6 +33,7 @@ const Other = React.createClass({
       input.addEventListener(
         'blur',
         (event: FocusEvent) => {
+          // $FlowFixMe
           if (event.target.value === '') {
             this.setState({
               checked: false,

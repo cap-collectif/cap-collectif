@@ -1,3 +1,5 @@
-declare class Modernizr {
-   intl: boolean,
-}
+declare class ModernizrStatic {
+  intl: boolean,
+};
+
+declare var Modernizr: ModernizrStatic;
