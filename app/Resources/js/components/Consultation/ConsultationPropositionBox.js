@@ -18,6 +18,7 @@ type Step = {
   startAt: ?string,
   endAt: ?string,
   timeless: boolean,
+  status: string,
 };
 
 type Props = {

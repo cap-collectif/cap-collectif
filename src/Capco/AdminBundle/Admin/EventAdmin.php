@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Model\Metadata;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -42,9 +43,6 @@ class EventAdmin extends Admin
         return parent::getObjectMetadata($object);
     }
 
-    /**
-     * @param DatagridMapper $datagridMapper
-     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -133,9 +131,7 @@ class EventAdmin extends Admin
             ->add('_action', 'actions', [
                 'actions' => [
                     'registrations' => ['template' => 'CapcoAdminBundle:CRUD:list__action_registrations.html.twig'],
-                    'show' => [],
-                    'edit' => [],
-                    'delete' => [],
+                    'delete' => ['template' => 'CapcoAdminBundle:CRUD:list__action_delete.html.twig'],
                 ],
             ])
         ;
@@ -271,9 +267,6 @@ class EventAdmin extends Admin
         ;
     }
 
-    /**
-     * @param ShowMapper $showMapper
-     */
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
@@ -343,5 +336,10 @@ class EventAdmin extends Admin
                 'label' => 'admin.fields.event.lng',
             ])
         ;
+    }
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->clearExcept(['batch', 'list', 'create', 'edit', 'delete']);
     }
 }

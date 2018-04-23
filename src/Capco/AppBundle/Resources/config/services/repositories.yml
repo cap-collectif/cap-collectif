@@ -59,6 +59,11 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Event']
 
+  capco.event_registration.repository:
+    class: Capco\AppBundle\Repository\EventRegistrationRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:EventRegistration']
+
   capco.highlighted.repository:
     class: Capco\AppBundle\Repository\HighlightedContentRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]

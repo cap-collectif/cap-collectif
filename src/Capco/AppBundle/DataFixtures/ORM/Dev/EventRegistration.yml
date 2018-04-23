@@ -1,17 +1,17 @@
 Capco\AppBundle\Entity\EventRegistration:
     eventRegistration{1..50}:
-        event: '@event<numberBetween(1,2)>'
+        event: '@event1'
         username: <username()>
         email: <email()>
         private: false
         confirmed: true
     eventRegistration51:
-        event: '@event<numberBetween(1,2)>'
+        event: '@event1'
         user: '@user1'
         private: false
         confirmed: true
     eventRegistration52:
-        event: '@event<numberBetween(1,2)>'
+        event: '@event2'
         user: '@user3'
         private: false
         confirmed: true

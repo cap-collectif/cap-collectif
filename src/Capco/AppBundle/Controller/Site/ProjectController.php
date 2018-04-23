@@ -154,9 +154,6 @@ class ProjectController extends Controller
     public function downloadAction(Request $request, Project $project, AbstractStep $step)
     {
         $trans = $this->get('translator');
-        if (!$project || !$step) {
-            throw $this->createNotFoundException($trans->trans('project.error.not_found', [], 'CapcoAppBundle'));
-        }
 
         if (!$project->isExportable() && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             throw $this->createAccessDeniedException($trans->trans('project.error.not_exportable', [], 'CapcoAppBundle'));
@@ -201,10 +198,6 @@ class ProjectController extends Controller
      * @Route("/consultations/{projectSlug}/events", name="app_consultation_show_events", defaults={"_feature_flags" = "calendar"})
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @Template("CapcoAppBundle:Project:show_events.html.twig")
-     *
-     * @param $project
-     *
-     * @return array
      */
     public function showEventsAction(Project $project)
     {

@@ -13,6 +13,11 @@ Capco\AppBundle\Entity\District:
             expose: true
             type: string
             groups: [DistrictDetails]
+        geojsonStyle:
+            expose: true
+            type: string
+            groups: [DistrictDetails]
+            serialized_name: geojsonStyle
         displayedOnMap:
             expose: true
             type: boolean

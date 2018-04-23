@@ -81,6 +81,10 @@ class GlobalIdResolver
         }
 
         if (!$node) {
+            $node = $this->container->get('capco.event.repository')->find($uuid);
+        }
+
+        if (!$node) {
             $this->container->get('logger')->warn('Unknown id: ' . $uuid);
             throw new UserError('Not found');
         }

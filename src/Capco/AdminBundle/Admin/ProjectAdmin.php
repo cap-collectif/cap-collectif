@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Model\Metadata;
 
@@ -131,12 +132,10 @@ class ProjectAdmin extends Admin
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show' => [],
                     'download' => [
-                        'template' => 'CapcoAdminBundle:CRUD:list__action_download.html.twig',
+                      'template' => 'CapcoAdminBundle:CRUD:list__action_download.html.twig',
                     ],
-                    'edit' => [],
-                    'delete' => [],
+                    'delete' => ['template' => 'CapcoAdminBundle:CRUD:list__action_delete.html.twig'],
                 ],
             ])
         ;
@@ -352,5 +351,10 @@ class ProjectAdmin extends Admin
             ])
             ->end()
         ;
+    }
+
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->clearExcept(['batch', 'list', 'create', 'edit', 'delete']);
     }
 }

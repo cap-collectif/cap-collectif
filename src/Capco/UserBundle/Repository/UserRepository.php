@@ -2,6 +2,8 @@
 
 namespace Capco\UserBundle\Repository;
 
+use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\EventRegistration;
 use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
@@ -39,6 +41,18 @@ class UserRepository extends EntityRepository
             ->setParameter('group', $group);
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function getRegisteredParticipantsInEvent(Event $event): array
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        return $qb
+            ->innerJoin(EventRegistration::class, 'registration', 'WITH', 'registration.user = u.id')
+            ->andWhere('registration.event = :event')
+            ->setParameter('event', $event)
+            ->getQuery()
+            ->getResult();
     }
 
     public function getRegisteredContributorCount(): int

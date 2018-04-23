@@ -582,6 +582,7 @@ export default createFragmentContainer(
         name
         displayedOnMap
         geojson
+        geojsonStyle
       }
       categories {
         id

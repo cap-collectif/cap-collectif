@@ -61,9 +61,9 @@ export const ProposalStepPage = React.createClass({
 
     let geoJsons = [];
     try {
-      geoJsons = form.districts
-        .filter(d => d.geojson && d.displayedOnMap)
-        .map(d => JSON.parse(d.geojson));
+      geoJsons = form.districts.filter(d => d.geojson && d.displayedOnMap).map(d => {
+        return { district: JSON.parse(d.geojson), style: d.geojsonStyle };
+      });
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error("Can't parse your geojsons !", e);

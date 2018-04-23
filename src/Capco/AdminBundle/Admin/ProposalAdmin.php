@@ -137,6 +137,6 @@ class ProposalAdmin extends Admin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(['list', 'edit']);
+        $collection->clearExcept(['batch', 'list', 'edit']);
     }
 }

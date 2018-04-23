@@ -15,6 +15,7 @@ class DistrictAdminType extends AbstractType
         $builder
             ->add('name', PurifiedTextType::class)
             ->add('geojson')
+            ->add('geojsonStyle')
             ->add('displayedOnMap', CheckboxType::class)
         ;
     }
