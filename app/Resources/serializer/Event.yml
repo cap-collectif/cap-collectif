@@ -3,7 +3,6 @@ Capco\AppBundle\Entity\Event:
     properties:
         id:
             expose: true
-            type: integer
             groups: [Events, Elasticsearch]
         title:
             expose: true

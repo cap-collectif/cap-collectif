@@ -174,12 +174,10 @@ class EventController extends Controller
 
     /**
      * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
-     *
-     * @param $max
-     * @param $offset
-     *
-     * @return array
      * @Template("CapcoAppBundle:Event:lastEvents.html.twig")
+     *
+     * @param mixed $max
+     * @param mixed $offset
      */
     public function lastEventsAction($max = 3, $offset = 0)
     {

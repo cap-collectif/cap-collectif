@@ -67,14 +67,6 @@ Scenario: Anonymous user wants to search a proposal with the random filter
   Then I should not see random row
 
 @javascript @elasticsearch
-Scenario: Anonymous user wants to see other random proposals
-  Given I go to an open collect step
-  Then proposals should be ordered randomly
-  When I save current proposals
-  Then I click the 'a[href="#proposals-list"]' element
-  When I should see other proposals
-
-@javascript @elasticsearch
 Scenario: Anonymous user wants to see proposals in a collect step and search by term
   Given I go to an open collect step
   Then there should be 6 proposals
@@ -118,7 +110,7 @@ Scenario: Anonymous user wants to see proposals likers
 # CRUD
 
 @database @javascript @elasticsearch
-Scenario: Logged in user wants to create a proposal
+Scenario: Logged in user wants to create/then delete a proposal and check if I follow/unfollow my proposal
   Given feature "districts" is enabled
   And I am logged in as user
   And I go to an open collect step
@@ -130,6 +122,17 @@ Scenario: Logged in user wants to create a proposal
   And I wait 3 seconds
   And I submit the create proposal form
   And I should see my new proposal
+  And I should see "following"
+  Then I visited "manage followings page"
+  And I wait 1 seconds
+  And I should see "Nouvelle proposition créée"
+  Then I follow "Nouvelle proposition créée"
+  And I wait 1 seconds
+  And I click the delete proposal button
+  And I confirm proposal deletion
+  Then I visited "manage followings page"
+  And I wait 1 seconds
+  And I should not see "Nouvelle proposition créée"
 
 @database @javascript @elasticsearch
 Scenario: Logged in user wants to create a proposal with theme
@@ -201,7 +204,7 @@ Scenario: Author of a proposal wants to delete it
   And I wait 2 seconds
   And I should not see my proposal anymore
   Then there should be 5 proposals
-
+  
 @javascript @database
 Scenario: Admin should not be notified when an user deletes his proposal on an non notifiable proposal
   Given I am logged in as user

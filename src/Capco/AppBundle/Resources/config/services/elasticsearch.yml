@@ -29,6 +29,7 @@ services:
         arguments:
             - '@doctrine'
             - '@capco.elasticsearch.indexer'
+            - '@logger'
         calls:
             - ['setPropertyAccessor', ['@property_accessor']]
 

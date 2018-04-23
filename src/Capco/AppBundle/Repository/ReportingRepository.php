@@ -60,4 +60,24 @@ class ReportingRepository extends EntityRepository
 
         return new Paginator($qb);
     }
+
+    public function getRecentOrdered(): array
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->select('r, u, o, ov, s, a, i, c, p')
+            ->leftJoin('r.Reporter', 'u')
+            ->leftJoin('r.Opinion', 'o')
+            ->leftJoin('r.opinionVersion', 'ov')
+            ->leftJoin('r.Source', 's')
+            ->leftJoin('r.Argument', 'a')
+            ->leftJoin('r.Idea', 'i')
+            ->leftJoin('r.Comment', 'c')
+            ->leftJoin('r.proposal', 'p')
+            ->addOrderBy('r.createdAt', 'DESC')
+        ;
+
+        return $qb->getQuery()
+            ->execute()
+            ;
+    }
 }

@@ -9,7 +9,7 @@ import os
 def deploy(environment='dev', user='capco'):
     "Deploy"
     if os.environ.get('CI') == 'true':
-        env.compose('run -u root builder chown capco:capco -R /var/www/web /home/capco/.composer /home/capco/.cache/yarn /home/capco/.cache/bower')
+        env.compose('run -u root qarunner chown capco:capco -R /var/www/web')
         local('sudo chmod -R 777 .')
     env.compose('run' + ('', ' -e PRODUCTION=true')[environment == 'prod'] + ('', ' -e CI=true')[os.environ.get('CI') == 'true'] + ' builder build')
     env.service_command('php vendor/sensio/distribution-bundle/Resources/bin/build_bootstrap.php var', 'application', env.www_app)
@@ -18,6 +18,18 @@ def deploy(environment='dev', user='capco'):
     env.service_command('php bin/console simplesamlphp:config --no-interaction --env=' + environment, 'application', env.www_app)
     env.service_command('php bin/console cache:warmup --no-optional-warmers --env=' + environment, 'application', env.www_app)
     env.service_command('php bin/console assets:install --symlink', 'application', env.www_app)
+
+
+@task(environments=['ci'])
+def build(environment='prod', user='capco'):
+    "Build"
+    if os.environ.get('CI') == 'true':
+        local('sudo chmod -R 777 .')
+    env.compose('run' + ('', ' -e PRODUCTION=true')[environment == 'prod'] + ('', ' -e CI=true')[os.environ.get('CI') == 'true'] + ' builder build')
+    env.service_command('php vendor/sensio/distribution-bundle/Resources/bin/build_bootstrap.php var', 'application', env.www_app)
+    env.service_command('rm -rf var/cache/dev var/cache/prod var/cache/test', 'application', env.www_app, 'root')
+    env.service_command('php bin/console cache:warmup --no-optional-warmers --env=' + environment, 'application', env.www_app)
+    env.service_command('php bin/console assets:install --symlink --env=' + environment, 'application', env.www_app)
 
 
 @task(environments=['local'])

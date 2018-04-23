@@ -8,7 +8,7 @@ exports[`<ProposalFusionList /> should render a list of proposal merged from oth
     defaultExpanded={false}
     header={
       <FormattedMessage
-        id="proposal.mergedIn"
+        id="proposal.fusionnedInto"
         values={
           Object {
             "num": 2,
@@ -43,7 +43,7 @@ exports[`<ProposalFusionList /> should render a list of proposal of merged in ot
     defaultExpanded={false}
     header={
       <FormattedMessage
-        id="proposal.mergedFrom"
+        id="proposal.fusionnedFrom"
         values={
           Object {
             "num": 2,

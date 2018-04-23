@@ -65,6 +65,7 @@ export default createPaginationContainer(
       id
       contributionConnection(first: $count, after: $cursor)
         @connection(key: "ContributionPaginatedList_contributionConnection") {
+        totalCount
         edges {
           cursor
           node {

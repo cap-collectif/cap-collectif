@@ -11,11 +11,6 @@ use Sonata\AdminBundle\Show\ShowMapper;
 
 class ReportingAdmin extends Admin
 {
-    protected $datagridValues = [
-        '_sort_order' => 'ASC',
-        '_sort_by' => 'isArchived',
-    ];
-
     public function getFeatures()
     {
         return [
@@ -156,6 +151,7 @@ class ReportingAdmin extends Admin
         $collection->remove('create');
         $collection->remove('edit');
         $collection->remove('delete');
+        $collection->remove('list');
         $collection->add('archive', $this->getRouterIdParameter() . '/archive');
         $collection->add('disable', $this->getRouterIdParameter() . '/disable');
         $collection->add('trash', $this->getRouterIdParameter() . '/trash');

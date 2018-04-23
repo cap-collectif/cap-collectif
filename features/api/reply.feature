@@ -2,7 +2,6 @@
 Feature: Reply Restful Api
   As an API client
 
-@elasticsearch
 Scenario: Logged in API client wants to get one of his replies
   Given I am logged in to api as admin
   When I send a GET request to "/api/questionnaires/questionnaire1/replies/2"
@@ -51,18 +50,17 @@ Scenario: Logged in API client wants to get one of his replies
   }
   """
 
-@elasticsearch @security
+@security
 Scenario: Anonymous API client wants to get one reply
   When I send a GET request to "/api/questionnaires/questionnaire1/replies/2"
   Then the JSON response status code should be 401
 
-@elasticsearch @security
+@security
 Scenario: Logged in API client wants to get one reply when he's not the author
   Given I am logged in to api as user
   When I send a GET request to "/api/questionnaires/questionnaire1/replies/2"
   Then the JSON response status code should be 403
 
-@elasticsearch
 Scenario: Logged in API client wants to get his replies
   Given I am logged in to api as admin
   When I send a GET request to "/api/questionnaires/questionnaire1/replies"
@@ -115,7 +113,7 @@ Scenario: Logged in API client wants to get his replies
   }
   """
 
-@security @elasticsearch
+@security
 Scenario: Logged in API client wants to add a reply
   Given I am logged in to api as user_with_phone_not_phone_confirmed
   When I send a POST request to "/api/questionnaires/questionnaire1/replies" with json:
@@ -143,7 +141,7 @@ Scenario: Logged in API client wants to add a reply
   }
   """
 
-@database @elasticsearch
+@database
 Scenario: Logged in API client wants to add a reply
   Given I am logged in to api as user
   When I send a POST request to "/api/questionnaires/questionnaire1/replies" with json:
@@ -168,7 +166,7 @@ Scenario: Logged in API client wants to add a reply
   And I open mail with subject "reply.acknowledgement.subject"
   Then I should see "reply.acknowledgement.replies" in mail
 
-@database @elasticsearch
+@database
 Scenario: Logged in API client wants to add an anonymous reply
   Given I am logged in to api as user
   When I send a POST request to "/api/questionnaires/questionnaire1/replies" with json:
@@ -191,7 +189,7 @@ Scenario: Logged in API client wants to add an anonymous reply
   """
   Then the JSON response status code should be 201
 
-@security @elasticsearch
+@security
 Scenario: Anonymous API client wants to add a reply
   Given I send a POST request to "/api/questionnaires/questionnaire1/replies" with json:
   """
@@ -212,7 +210,7 @@ Scenario: Anonymous API client wants to add a reply
   """
   Then the JSON response status code should be 401
 
-@security @elasticsearch
+@security
 Scenario: Logged in API client wants to add a reply without a required response
   Given I am logged in to api as user
   When I send a POST request to "/api/questionnaires/questionnaire1/replies" with json:
@@ -241,7 +239,7 @@ Scenario: Logged in API client wants to add a reply without a required response
   }
   """
 
-@security @elasticsearch
+@security
 Scenario: Logged in API client wants to add a reply with not enough choices for required field with validation rules
   Given I am logged in to api as user
   When I send a POST request to "/api/questionnaires/questionnaire1/replies" with json:
@@ -288,7 +286,7 @@ Scenario: Logged in API client wants to add a reply with not enough choices for 
   }
   """
 
-@security @elasticsearch
+@security
 Scenario: Logged in API client wants to add a reply with not enough choices for optional field with validation rules
   Given I am logged in to api as user
   When I send a POST request to "/api/questionnaires/questionnaire1/replies" with json:
@@ -342,7 +340,7 @@ Scenario: Logged in API client wants to add a reply with not enough choices for 
   }
   """
 
-@security @elasticsearch
+@security
 Scenario: Logged in API client wants to add a reply to closed questionnaire step
   Given I am logged in to api as user
   And I send a POST request to "/api/questionnaires/questionnaire3/replies" with json:
@@ -372,7 +370,7 @@ Scenario: Logged in API client wants to add a reply to closed questionnaire step
   }
   """
 
-@database @elasticsearch
+@database
 Scenario: Logged in API client wants to add another reply when multiple replies is allowed
   Given I am logged in to api as admin
   When I send a POST request to "/api/questionnaires/questionnaire1/replies" with json:
@@ -394,7 +392,7 @@ Scenario: Logged in API client wants to add another reply when multiple replies 
   """
   Then the JSON response status code should be 201
 
-@security @elasticsearch
+@security
 Scenario: Logged in API client wants to add another reply when multiple replies is not allowed
   Given I am logged in to api as admin
   Given I send a POST request to "/api/questionnaires/questionnaire2/replies" with json:
@@ -424,7 +422,7 @@ Scenario: Logged in API client wants to add another reply when multiple replies 
   }
   """
 
-@database @elasticsearch
+@database
 Scenario: logged in API client wants to edit a reply
   Given I am logged in to api as admin
   When I send a PUT request to "api/questionnaires/questionnaire1/replies/2" with json:
@@ -446,7 +444,7 @@ Scenario: logged in API client wants to edit a reply
   """
   Then the JSON response status code should be 200
 
-@security @elasticsearch
+@security
 Scenario: logged in API client wants to edit a reply when he is not the author
   Given I am logged in to api as user
   When I send a PUT request to "api/questionnaires/questionnaire1/replies/2" with json:
@@ -468,7 +466,7 @@ Scenario: logged in API client wants to edit a reply when he is not the author
   """
   Then the JSON response status code should be 403
 
-@security @elasticsearch
+@security
 Scenario: Logged in API client wants to edit a reply in a closed questionnaire step
   Given I am logged in to api as admin
   And I send a PUT request to "/api/questionnaires/questionnaire3/replies/3" with json:
@@ -498,19 +496,19 @@ Scenario: Logged in API client wants to edit a reply in a closed questionnaire s
   }
   """
 
-@database @elasticsearch
+@database
 Scenario: Logged in API client wants to remove a reply
   Given I am logged in to api as admin
   When I send a DELETE request to "api/questionnaires/questionnaire1/replies/2"
   Then the JSON response status code should be 204
 
-@security @elasticsearch
+@security
 Scenario: Logged in API client wants to remove a reply when he is not the author
   Given I am logged in to api as user
   When I send a DELETE request to "api/questionnaires/questionnaire1/replies/2"
   Then the JSON response status code should be 403
 
-@security @elasticsearch
+@security
 Scenario: Logged in API client wants to remove a reply in a closed questionnaire step
   Given I am logged in to api as admin
   And I send a DELETE request to "/api/questionnaires/questionnaire3/replies/3"

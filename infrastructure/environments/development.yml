@@ -30,6 +30,11 @@ builder:
         - ~/Library/Caches/Bower:/home/capco/.cache/bower
     command: echo "Use 'docker-compose run builder build' to build deps"
 
+qarunner:
+  build: ../services/qa-runner
+  volumes:
+    - ../../:/var/www
+
 database:
     ports:
         - "3306:3306"

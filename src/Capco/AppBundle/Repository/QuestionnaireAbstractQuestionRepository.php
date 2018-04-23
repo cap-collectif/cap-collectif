@@ -9,7 +9,7 @@ class QuestionnaireAbstractQuestionRepository extends EntityRepository
     public function getCurrentMaxPositionForQuestionnaire(string $id): int
     {
         $qb = $this->createQueryBuilder('n');
-        $qb->select('MAX(n.position)')
+        $qb->select('COALESCE(MAX(n.position),0)')
        ->where('n.questionnaire = :questionnaire')
        ->setParameter('questionnaire', $id)
     ;
