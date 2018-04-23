@@ -80,7 +80,7 @@ class HomepageController extends Controller
     public function highlightedContentAction(Section $section = null)
     {
         $serializer = $this->get('jms_serializer');
-        $highlighteds = $this->getDoctrine()->getRepository('CapcoAppBundle:HighlightedContent')->getAllOrderedByPosition(4);
+        $highlighteds = $this->get('capco.highlighted.repository')->getAllOrderedByPosition(4);
         $props = $serializer->serialize([
             'highlighteds' => $highlighteds,
         ], 'json', SerializationContext::create()
