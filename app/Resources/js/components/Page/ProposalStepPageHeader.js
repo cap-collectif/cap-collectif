@@ -12,11 +12,10 @@ type Props = {
 export class ProposalStepPageHeader extends React.Component<Props> {
   render() {
     const { step } = this.props;
-    // $FlowFixMe
-    const proposals = step.proposals || step.form.proposals;
 
+    const proposals = step.proposals;
     const queryCount = proposals.edges ? proposals.edges.length : 0;
-    const total = proposals.totalCount || 0;
+    const total = proposals.totalCount;
 
     return (
       <h3 className="h3" style={{ marginBottom: '15px' }}>
@@ -61,54 +60,36 @@ export class ProposalStepPageHeader extends React.Component<Props> {
 
 export default createFragmentContainer(ProposalStepPageHeader, {
   step: graphql`
-    fragment ProposalStepPageHeader_step on Step {
+    fragment ProposalStepPageHeader_step on ProposalStep {
       id
+      proposals(
+        first: $count
+        orderBy: $orderBy
+        term: $term
+        district: $district
+        theme: $theme
+        category: $category
+        status: $status
+        userType: $userType
+      ) @connection(key: "ProposalStepPageHeader_proposals") {
+        totalCount
+        fusionCount
+        edges {
+          node {
+            id
+          }
+        }
+      }
       ... on CollectStep {
         kind
         form {
           id
           contribuable
-          proposals(
-            first: $count
-            orderBy: $orderBy
-            term: $term
-            district: $district
-            theme: $theme
-            category: $category
-            status: $status
-            userType: $userType
-          ) @connection(key: "ProposalStepPageHeader_proposals", filters: ["stepId"]) {
-            totalCount
-            fusionCount
-            edges {
-              node {
-                id
-              }
-            }
-          }
         }
         voteThreshold
       }
       ... on SelectionStep {
         kind
-        proposals(
-          first: $count
-          orderBy: $orderBy
-          term: $term
-          district: $district
-          theme: $theme
-          category: $category
-          status: $status
-          userType: $userType
-        ) @connection(key: "ProposalStepPageHeader_proposals", filters: ["stepId"]) {
-          totalCount
-          fusionCount
-          edges {
-            node {
-              id
-            }
-          }
-        }
       }
     }
   `,

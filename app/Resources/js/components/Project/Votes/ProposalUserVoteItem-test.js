@@ -3,31 +3,30 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalUserVoteItem } from './ProposalUserVoteItem';
+import { $refType, $fragmentRefs } from '../../../mocks';
 
 describe('<ProposalUserVoteItem />', () => {
-  const props = {
-    dispatch: jest.fn(),
+  const vote = {
+    $refType,
+    anonymous: true,
+    createdAt: '2015-01-01 00:00:00',
     proposal: {
-      id: 1,
+      id: '1',
+      $fragmentRefs,
       title: 'proposal',
-      district: {
-        name: 'district',
-      },
       show_url: 'http://capco.test/proposal',
-      author: {
-        id: 1,
-        displayName: 'user',
-      },
     },
-    step: {
-      id: 1,
-      voteType: 2,
-      open: true,
-    },
+  };
+  const step = {
+    id: '1',
+    open: true,
+    votesRanking: false,
+    voteType: 'SIMPLE',
+    $refType,
   };
 
   it('should render a vote item', () => {
-    const wrapper = shallow(<ProposalUserVoteItem {...props} />);
+    const wrapper = shallow(<ProposalUserVoteItem step={step} vote={vote} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

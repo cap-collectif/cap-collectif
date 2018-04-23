@@ -60,10 +60,10 @@ export class ProposalList extends React.Component<Props> {
     return (
       <Row>
         {proposalsVisiblePublicly.edges &&
-          proposalsVisiblePublicly.edges.length &&
+          proposalsVisiblePublicly.edges.length > 0 &&
           renderProposals(proposalsVisiblePublicly, step, viewer)}
         {proposalsVisibleOnlyByViewer.edges &&
-          proposalsVisibleOnlyByViewer.edges.length && (
+          proposalsVisibleOnlyByViewer.edges.length > 0 && (
             <VisibilityBox enabled>
               {renderProposals(proposalsVisibleOnlyByViewer, step, viewer)}
             </VisibilityBox>

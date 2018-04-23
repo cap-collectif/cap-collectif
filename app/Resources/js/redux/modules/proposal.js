@@ -35,12 +35,6 @@ type CloseCreateFusionModalAction = {
 type OpenCreateFusionModalAction = {
   type: 'proposal/OPEN_CREATE_FUSION_MODAL',
 };
-type VoteSuccessAction = {
-  type: 'proposal/VOTE_SUCCEEDED',
-  proposalId: Uuid,
-  stepId: Uuid,
-  vote: Object,
-};
 type CloseEditProposalModalAction = { type: 'proposal/CLOSE_EDIT_MODAL' };
 type OpenEditProposalModalAction = { type: 'proposal/OPEN_EDIT_MODAL' };
 type CloseDeleteProposalModalAction = { type: 'proposal/CLOSE_DELETE_MODAL' };
@@ -257,7 +251,7 @@ export const vote = (dispatch: Dispatch, step: Object, proposal: Object, data: O
       });
     })
     .catch(e => {
-      console.error(e);
+      console.log(e); // eslint-disable-line no-console
       dispatch(closeVoteModal());
       FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,
@@ -266,7 +260,7 @@ export const vote = (dispatch: Dispatch, step: Object, proposal: Object, data: O
     });
 };
 
-export const deleteVote = (dispatch: Dispatch, step: Object, proposal: Object) => {
+export const deleteVote = (step: Object, proposal: Object) => {
   return removeVote
     .commit({
       withVotes: true,

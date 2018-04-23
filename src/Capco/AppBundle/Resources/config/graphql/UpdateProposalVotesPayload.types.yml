@@ -3,4 +3,4 @@ UpdateProposalVotesPayload:
     config:
         fields:
             step:
-                type: "Step!"
+                type: "ProposalStep!"

@@ -21,7 +21,7 @@ class ProposalSelectionVote extends AbstractVote
     // Deleted because for users we have a unique constraint in db
     // * @CapcoAssert\DidNotAlreadyVote(message="proposal.vote.already_voted", repositoryPath="CapcoAppBundle:ProposalSelectionVote", objectPath="proposal")
 
-    use AnonymousableTrait, PrivatableTrait;
+    use AnonymousableTrait, PrivatableTrait, PositionableTrait;
 
     const ANONYMOUS = 'ANONYMOUS';
 

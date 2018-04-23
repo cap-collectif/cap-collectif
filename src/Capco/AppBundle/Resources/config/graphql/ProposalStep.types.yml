@@ -10,9 +10,30 @@ ProposalStep:
               type: "String!"
             title:
               type: "String!"
+            voteType:
+              type: "ProposalStepVoteType!"
+            votesHelpText:
+              type: "String"
+            open:
+              type: "Boolean!"
+            votesRanking:
+              type: "Boolean!"
             show_url:
               type: "String!"
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\StepUrlResolver", [value])'
+            viewerVotes:
+              access: "@=hasRole('ROLE_USER')"
+              type: "ProposalVoteConnection!"
+              description: "A list of viewer votes associated with the step."
+              argsBuilder: "Relay::Connection"
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerStepVotesResolver", [value, user, args])'
+              args:
+                  first:
+                      type: "Int"
+                      defaultValue: 100000
+                  orderBy:
+                      type: "ProposalVotesOrder"
+                      defaultValue: { field: CREATED_AT, direction: DESC }
             proposals:
                 type: "ProposalConnection!"
                 resolve: "@=resolver('proposal_form_proposals', [value, args, user, request])"
