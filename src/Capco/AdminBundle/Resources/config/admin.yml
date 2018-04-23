@@ -291,14 +291,6 @@ services:
     calls:
       - [ setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.event_registrations:
-    class: Capco\AdminBundle\Admin\EventRegistrationAdmin
-    arguments: [~, Capco\AppBundle\Entity\EventRegistration, SonataAdminBundle:CRUD]
-    tags:
-      - {name: sonata.admin, manager_type: orm, label: admin.label.event_registrations}
-    calls:
-      - [ setTranslationDomain, [CapcoAppBundle]]
-
   capco_admin.admin.video:
     class: Capco\AdminBundle\Admin\VideoAdmin
     arguments: [~, Capco\AppBundle\Entity\Video, SonataAdminBundle:CRUD]

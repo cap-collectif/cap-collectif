@@ -21,10 +21,6 @@ class ProposalController extends Controller
      *         "_format": "csv|xlsx",
      *     }, name="capco_admin_proposal_download_followers")
      * @ParamConverter("proposal", options={"mapping": {"proposalId": "id"}})
-     *
-     * @param Request $request
-     *
-     * @return Response
      */
     public function downloadFollowerOfProposalAction(Request $request, Proposal $proposal, string $_format): Response
     {

@@ -12,6 +12,7 @@ describe('<ConsultationPropositionBox />', () => {
       startAt: '2014-08-14T00:00:00+0200',
       endAt: '2014-09-27T00:00:00+0200',
       timeless: false,
+      status: 'open',
     },
   };
 

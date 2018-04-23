@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Type;
 
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
@@ -103,6 +104,9 @@ class NodeTypeResolver implements ResolverInterface
         }
         if ($node instanceof RankingStep) {
             return $this->typeResolver->resolve('RankingStep');
+        }
+        if ($node instanceof Event) {
+            return $this->typeResolver->resolve('Event');
         }
 
         throw new UserError('Could not resolve type of Node.');

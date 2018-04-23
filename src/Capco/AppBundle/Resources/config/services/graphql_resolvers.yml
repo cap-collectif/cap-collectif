@@ -11,7 +11,15 @@ services:
         class: Capco\AppBundle\GraphQL\Resolver\Type\NodeTypeResolver
         arguments:
             - "@overblog_graphql.type_resolver"
-            - '@monolog.logger_prototype'
+            - "@logger"
+        tags:
+            - { name: overblog_graphql.resolver }
+
+    Capco\AppBundle\GraphQL\Resolver\ParticipantTypeResolver:
+        class: Capco\AppBundle\GraphQL\Resolver\ParticipantTypeResolver
+        arguments:
+            - "@overblog_graphql.type_resolver"
+            - "@logger"
         tags:
             - { name: overblog_graphql.resolver }
 
@@ -181,7 +189,16 @@ services:
         tags:
             - { name: overblog_graphql.resolver }
 
-    Capco\AppBundle\GraphQL\Resolver\GroupResolver:
+    Capco\AppBundle\GraphQL\Resolver\EventParticipantsResolver:
+        class: Capco\AppBundle\GraphQL\Resolver\EventParticipantsResolver
+        arguments:
+            - "@capco.user.repository"
+            - "@capco.event_registration.repository"
+            - "@logger"
+        tags:
+            - { name: overblog_graphql.resolver }
+
+    capco.resolvers.groups:
         class: Capco\AppBundle\GraphQL\Resolver\GroupResolver
         tags:
             - { name: overblog_graphql.resolver, alias: "groups", method: "resolveAll" }
@@ -300,3 +317,17 @@ services:
         class: Capco\AppBundle\GraphQL\Resolver\Post\PostRelatedContentResolver
         tags:
           - { name: overblog_graphql.resolver }
+
+    Capco\AppBundle\GraphQL\Resolver\ParticipantConnectionEdgeRegistredAtResolver:
+        class: Capco\AppBundle\GraphQL\Resolver\ParticipantConnectionEdgeRegisteredAtResolver
+        arguments:
+            - "@capco.event_registration.repository"
+        tags:
+            - { name: overblog_graphql.resolver }
+
+    Capco\AppBundle\GraphQL\Resolver\ParticipantConnectionEdgeRegisteredAnonymouslyResolver:
+        class: Capco\AppBundle\GraphQL\Resolver\ParticipantConnectionEdgeRegisteredAnonymouslyResolver
+        arguments:
+            - "@capco.event_registration.repository"
+        tags:
+            - { name: overblog_graphql.resolver }

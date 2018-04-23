@@ -120,3 +120,8 @@ svg.avatar {
         }
     }
 }
+
+// Fix for export button on list view
+.table-responsive {
+  overflow: visible;
+}

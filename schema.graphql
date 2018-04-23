@@ -511,6 +511,8 @@ type CreateProposalPayload {
   clientMutationId: String
 }
 
+scalar CssJSON
+
 scalar DateTime
 
 input DeleteGroupInput {
@@ -554,12 +556,14 @@ type District {
   id: ID!
   name: String!
   geojson: GeoJSON
+  geojsonStyle: CssJSON
   displayedOnMap: Boolean!
 }
 
 input DistrictInput {
   name: String!
   geojson: GeoJSON
+  geojsonStyle: CssJSON
   displayedOnMap: Boolean = false
 }
 
@@ -588,6 +592,14 @@ type EvaluationForm {
 
   # List of questions in the evaluation form
   questions: [Question!]!
+}
+
+type Event implements Node {
+  id: ID!
+  title: String!
+
+  # A list of Users that are participating to the event.
+  participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
 }
 
 input FollowProposalInput {
@@ -772,6 +784,15 @@ type NewsEdge {
 interface Node {
   # The ID of an object
   id: ID!
+}
+
+# A user without account.
+type NotRegistered {
+  # Email of the user.
+  email: String
+
+  # Username of the user.
+  username: String
 }
 
 # A notifications configuration
@@ -1013,6 +1034,33 @@ type PageInfo {
 
   # When paginating forwards, the cursor to continue.
   endCursor: String
+}
+
+# User and NotRegistered
+union Participant = User | NotRegistered
+
+# A connection to a list of items.
+type ParticipantConnection {
+  # Identifies the total count of items in the connection.
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [ParticipantEdge]
+}
+
+# An edge in a connection.
+type ParticipantEdge {
+  registeredAt: DateTime!
+  registeredAnonymously: Boolean!
+
+  # The item at the end of the edge.
+  node: Participant!
+
+  # A cursor for use in pagination.
+  cursor: String!
 }
 
 # 3 possible values
@@ -2107,6 +2155,7 @@ type User implements Node {
 
   # Total of contributions count
   contributionsCount: Int!
+  expired: Boolean!
 }
 
 # A connection to a list of items.
