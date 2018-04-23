@@ -27,6 +27,7 @@ import Captcha from './Captcha';
 import EmailInput from './EmailInput';
 import AutosizedTextarea from './AutosizedTextarea';
 import Address from './Address';
+import ButtonBody from '../Reply/Form/ButtonBody';
 
 const acceptedMimeTypes = [
   'image/*',
@@ -123,6 +124,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     buttonBefore,
     buttonAfter,
     help,
+    description,
     hasFeedback,
     popover,
     children,
@@ -365,8 +367,12 @@ class ReactBootstrapInput extends React.Component<Props> {
           <ControlLabel bsClass={cx('control-label', labelClassName)}>{label}</ControlLabel>
         )}
         {props.help && <HelpBlock>{props.help}</HelpBlock>}
+        {props.description && (
+          <div style={{ paddingTop: 15, paddingBottom: 25 }}>
+            <ButtonBody body={props.description || ''} />
+          </div>
+        )}
         {this.renderInputGroup(props)}
-        {props.description && <HelpBlock>{props.description}</HelpBlock>}
         {props.errors && <span className="error-block">{props.errors}</span>}
       </FormGroup>
     );
