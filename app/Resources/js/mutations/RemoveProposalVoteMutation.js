@@ -13,6 +13,11 @@ const mutation = graphql`
       proposal {
         id
         ...ProposalVotes_proposal @arguments(step: $step)
+        ...ProposalVoteButtonWrapperFragment_proposal @arguments(step: $step)
+      }
+      viewer {
+        ...ProposalVoteButtonWrapperFragment_viewer @arguments(step: $step)
+        #...ProposalVoteBasketWidget_viewer @arguments(step: $step)
       }
     }
   }
