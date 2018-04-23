@@ -58,11 +58,11 @@ abstract class Search
         return $query;
     }
 
-    protected function getRandomSortedQuery(Query\AbstractQuery $query, string $seed = 'abc'): Query
+    protected function getRandomSortedQuery(Query\AbstractQuery $query): Query
     {
         $functionScore = new Query\FunctionScore();
         $functionScore->setQuery($query);
-        $functionScore->setRandomScore($seed);
+        $functionScore->setRandomScore();
 
         return new Query($functionScore);
     }

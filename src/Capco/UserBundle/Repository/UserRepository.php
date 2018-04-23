@@ -2,8 +2,6 @@
 
 namespace Capco\UserBundle\Repository;
 
-use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Entity\EventRegistration;
 use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
@@ -41,18 +39,6 @@ class UserRepository extends EntityRepository
             ->setParameter('group', $group);
 
         return $qb->getQuery()->getResult();
-    }
-
-    public function getRegisteredParticipantsInEvent(Event $event): array
-    {
-        $qb = $this->createQueryBuilder('u');
-
-        return $qb
-            ->innerJoin(EventRegistration::class, 'registration', 'WITH', 'registration.user = u.id')
-            ->andWhere('registration.event = :event')
-            ->setParameter('event', $event)
-            ->getQuery()
-            ->getResult();
     }
 
     public function getRegisteredContributorCount(): int
@@ -712,7 +698,6 @@ class UserRepository extends EntityRepository
             ->join('u.followingProposals', 'f')
             ->join('f.proposal', 'p')
             ->where('f.proposal = :propsoal')
-            ->andWhere('p.deletedAt IS NULL')
             ->setParameter('propsoal', $proposal)
             ->setMaxResults($offset)
             ->setFirstResult($first);
@@ -732,7 +717,6 @@ class UserRepository extends EntityRepository
             ->join('f.proposal', 'p')
             ->join('u.userType', 'ut')
             ->where('p.id = :proposalId')
-            ->andWhere('p.deletedAt IS NULL')
             ->orderBy('f.followedAt', 'ASC')
             ->setParameter('proposalId', $proposalId);
 
@@ -748,8 +732,7 @@ class UserRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->join('u.followingProposals', 'f')
-            ->join('f.proposal', 'p')
-            ->andWhere('p.deletedAt IS NULL');
+            ->join('f.proposal', 'p');
 
         if (isset($criteria['proposal'])) {
             $qb
@@ -790,9 +773,7 @@ class UserRepository extends EntityRepository
         $query = $this->createQueryBuilder('u')
             ->select('count(u.id)')
             ->join('u.followingProposals', 'f')
-            ->join('f.proposal', 'p')
             ->andWhere('f.proposal = :proposal')
-            ->andWhere('p.deletedAt IS NULL')
             ->setParameter('proposal', $proposal);
 
         return (int) $query->getQuery()->getSingleScalarResult();
@@ -805,7 +786,6 @@ class UserRepository extends EntityRepository
             ->join('u.followingProposals', 'f')
             ->join('f.proposal', 'p')
             ->andWhere('p.id = :proposalId')
-            ->andWhere('p.deletedAt IS NULL')
             ->andWhere('u.id = :userId')
             ->setParameter('proposalId', $proposal->getId())
             ->setParameter('userId', $user->getId());
@@ -820,8 +800,7 @@ class UserRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('u, p, f1')
             ->join('u.followingProposals', 'f1')
-            ->join('f1.proposal', 'p')
-            ->andWhere('p.deletedAt IS NULL');
+            ->join('f1.proposal', 'p');
         $qb->where($qb->expr()->in(
             'u.id', $followerQuery->getDQL()
         ));
@@ -834,11 +813,8 @@ class UserRepository extends EntityRepository
         $query = $this->createQueryBuilder('u')
             ->select('count(f.id)')
             ->join('u.followingProposals', 'f')
-            ->join('f.proposal', 'p')
             ->andWhere('f.user = :user')
-            ->andWhere('p.deletedAt IS NULL')
-
-        ->setParameter('user', $user);
+            ->setParameter('user', $user);
 
         return $query->getQuery()->getSingleScalarResult();
     }

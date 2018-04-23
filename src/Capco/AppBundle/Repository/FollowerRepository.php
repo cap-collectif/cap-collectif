@@ -60,13 +60,4 @@ class FollowerRepository extends EntityRepository
 
         return new Paginator($query);
     }
-
-    public function findAllWhereProposalDeleteAtIsNull(): array
-    {
-        $qb = $this->createQueryBuilder('f')
-            ->leftJoin('f.proposal', 'p')
-            ->andWhere('p.deletedAt IS NULL');
-
-        return $qb->getQuery()->getResult();
-    }
 }

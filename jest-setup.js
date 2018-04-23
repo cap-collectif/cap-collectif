@@ -9,7 +9,6 @@ import 'moment/locale/fr';
 moment.locale('fr');
 moment.tz.setDefault("Europe/Paris");
 
-// $FlowFixMe
 global.$ = require('jquery')(window);
 
 global.window.__SERVER__ = false;

@@ -511,6 +511,8 @@ type CreateProposalPayload {
   clientMutationId: String
 }
 
+scalar CssJSON
+
 scalar DateTime
 
 input DeleteGroupInput {
@@ -554,12 +556,14 @@ type District {
   id: ID!
   name: String!
   geojson: GeoJSON
+  geojsonStyle: CssJSON
   displayedOnMap: Boolean!
 }
 
 input DistrictInput {
   name: String!
   geojson: GeoJSON
+  geojsonStyle: CssJSON
   displayedOnMap: Boolean = false
 }
 
@@ -588,14 +592,6 @@ type EvaluationForm {
 
   # List of questions in the evaluation form
   questions: [Question!]!
-}
-
-type Event implements Node {
-  id: ID!
-  title: String!
-
-  # A list of Users that are participating to the event.
-  participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
 }
 
 input FollowProposalInput {
@@ -780,15 +776,6 @@ type NewsEdge {
 interface Node {
   # The ID of an object
   id: ID!
-}
-
-# A user without account.
-type NotRegistered {
-  # Email of the user.
-  email: String
-
-  # Username of the user.
-  username: String
 }
 
 # A notifications configuration
@@ -1032,33 +1019,6 @@ type PageInfo {
   endCursor: String
 }
 
-# User and NotRegistered
-union Participant = User | NotRegistered
-
-# A connection to a list of items.
-type ParticipantConnection {
-  # Identifies the total count of items in the connection.
-  totalCount: Int!
-
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # Information to aid in pagination.
-  edges: [ParticipantEdge]
-}
-
-# An edge in a connection.
-type ParticipantEdge {
-  registeredAt: DateTime!
-  registeredAnonymously: Boolean!
-
-  # The item at the end of the edge.
-  node: Participant!
-
-  # A cursor for use in pagination.
-  cursor: String!
-}
-
 # 3 possible values
 enum PickFollowTypeValue {
   DEFAULT
@@ -1250,7 +1210,7 @@ type Proposal implements Node {
   # View follow current proposal
   viewerIsFollowing: Boolean!
 
-  # Kind of follow
+  # View follow current proposal
   followerConfiguration: Follower
   postsCount: Int!
   viewerCanSeeEvaluation: Boolean!
@@ -1364,31 +1324,17 @@ type ProposalForm implements Node {
   allowAknowledge: Boolean!
 }
 
-# Ways in which proposal connections can be ordered.
+# Ways in which lists of proposals can be ordered upon return.
 input ProposalOrder {
-  # The field in which to order nodes by.
-  field: ProposalOrderField!
-
-  # The direction in which to order nodes.
-  direction: OrderDirection! = ASC
+  field: ProposalOrderField! = CREATED_AT
+  direction: OrderDirection! = DESC
 }
 
-# Properties by which proposal connections can be ordered
+# Ordering options for proposals connections.
 enum ProposalOrderField {
-  # Allows ordering a list of proposals by when they were created.
   CREATED_AT
-
-  # Allows ordering a list of proposals by the number of votes it have.
-  VOTES
-
-  # Allows ordering a list of proposals by the number of comments it have.
-  COMMENTS
-
-  # Allows randomizing a list of proposals.
-  RANDOM
-
-  # Allows ordering a list of proposals by the cost it have been estimated.
-  COST
+  UPDATED_AT
+  PUBLISHED_AT
 }
 
 # Available statuses
@@ -2151,7 +2097,6 @@ type User implements Node {
 
   # Total of contributions count
   contributionsCount: Int!
-  expired: Boolean!
 }
 
 # A connection to a list of items.

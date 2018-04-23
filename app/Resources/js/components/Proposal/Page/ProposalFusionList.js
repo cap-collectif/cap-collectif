@@ -18,7 +18,7 @@ export class ProposalFusionList extends React.Component<Props> {
           <Panel
             header={
               <FormattedMessage
-                id={`proposal.fusionnedFrom`}
+                id={`proposal.mergedFrom`}
                 values={{ num: proposal.mergedFrom.length }}
               />
             }>
@@ -33,7 +33,7 @@ export class ProposalFusionList extends React.Component<Props> {
           <Panel
             header={
               <FormattedMessage
-                id={`proposal.fusionnedInto`}
+                id={`proposal.mergedIn`}
                 values={{ num: proposal.mergedIn.length }}
               />
             }>

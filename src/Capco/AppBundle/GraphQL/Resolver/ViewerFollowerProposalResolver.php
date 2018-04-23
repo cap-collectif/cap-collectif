@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
-use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Repository\FollowerRepository;
 use Capco\UserBundle\Entity\User;
@@ -20,7 +19,7 @@ class ViewerFollowerProposalResolver implements ResolverInterface
         $this->logger = $logger;
     }
 
-    public function __invoke(Proposal $proposal, User $viewer): ?Follower
+    public function __invoke(Proposal $proposal, User $viewer)
     {
         try {
             $follower = $this->followerRepository->findOneBy(['proposal' => $proposal, 'user' => $viewer]);

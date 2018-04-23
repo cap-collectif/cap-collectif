@@ -1,56 +1,88 @@
-FROM node:8-slim AS node
+FROM debian:jessie
 
-FROM composer:latest AS composer
+MAINTAINER Aurélien David <adavid@jolicode.com>
 
-FROM php:7.1-cli AS php
+RUN sed -i 's/httpredir.debian.org/debian.mirrors.ovh.net/g' /etc/apt/sources.list
+RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys E871F18B51E0147C77796AC81196BA81F6B0FC61 \
+	|| apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys E871F18B51E0147C77796AC81196BA81F6B0FC61
 
-LABEL maintainer "Cap Collectif <tech@cap-collectif.com>"
-
-ENV COMPOSER_ALLOW_SUPERUSER 1
-
-COPY --from=composer /usr/bin/composer /usr/bin/composer
-COPY --from=node /usr/local/bin/node /usr/local/bin/node
-COPY --from=node /usr/local/include/node /usr/local/include/node
-COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
-COPY --from=node /opt/yarn-v1.5.1 /opt/yarn
-RUN ln -s /usr/local/bin/node /usr/local/bin/nodejs && \
-    ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm && \
-    ln -s /opt/yarn/bin/yarn /usr/local/bin/yarn
-
+# Install basic
 RUN apt-get update && \
-    apt-get install -y libcurl4-openssl-dev \
-      libmcrypt-dev \
-      libmcrypt4 \
-      zlib1g-dev \
-      libicu-dev \
-      libpcre3-dev \
-      libfreetype6-dev \
-      libpcre3-dev \
-      libxml2-dev \
-      libxslt-dev \
-      libpng-dev \
-      libmagickwand-dev \
-      zip unzip git vim ssmtp wget && \
-    pecl install redis-3.1.6 && \
-    docker-php-ext-enable redis && \
-    pecl install imagick && \
-    docker-php-ext-enable imagick && \
-    pecl install apcu && \
-    docker-php-ext-enable apcu && \
-    docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/ && \
-	docker-php-ext-configure intl && \
-    docker-php-ext-install -j$(nproc) curl mbstring intl mysqli dom zip gd xsl && \
-    rm -r /var/lib/apt/lists/*
+    apt-get install -y --force-yes -qq --fix-missing \
+        wget \
+        curl \
+        apt-transport-https \
+        git \
+        locales \
+        libpng-dev \
+        python-all \
+        python-pip \
+        build-essential \
+        rlwrap \
+    && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Install bower and babel-cli
-RUN yarn global add bower@1.8.0 babel-cli
+# Install php7.1
+RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
+    echo "deb https://packages.sury.org/php/ jessie main" > /etc/apt/sources.list.d/php.list && \
+    apt-get update && \
+    apt-get install -y -qq \
+        php7.1-cli \
+        php7.1-curl \
+        php7.1-apcu \
+        php7.1-apc \
+        php7.1-gd \
+        php7.1-imagick \
+        php7.1-intl \
+        php7.1-mysql \
+        php7.1-zip \
+        php7.1-xml \
+        php7.1-mbstring \
+    && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-COPY capco.ini /usr/local/etc/php/conf.d/capco.ini
-COPY build.sh /usr/local/bin/build
+# Install nodejs and deps for npm install
+ENV NPM_CONFIG_LOGLEVEL warn
+ENV NODE_VERSION 8.9.0
+RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
+  && tar -xJf "node-v$NODE_VERSION-linux-x64.tar.xz" -C /usr/local --strip-components=1 \
+  && ln -s /usr/local/bin/node /usr/local/bin/nodejs
 
-RUN composer global require "hirak/prestissimo:^0.3" --prefer-dist --no-progress --no-suggest --classmap-authoritative
+# Install fake user 1000
+RUN mkdir -m 777 -p /home/capco
+RUN groupadd --gid=1000 capco && \
+    /usr/sbin/useradd --system --uid=1000 --home /home/capco --shell /bin/bash -g capco capco
+RUN chown -R capco /usr/local /usr/bin /usr/lib
 
-RUN chmod +x /usr/local/bin/build
+# Install yarn
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+		echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+		apt-get update && \
+		apt-get install yarn
+
+USER capco
+
+# Install bower
+RUN npm install --global bower@1.8.0
+
+RUN npm install --global babel-cli
+
+# Install pycodestyle
+RUN pip install pycodestyle
+
+# Install composer & php-cs-fixer
+RUN wget --quiet https://getcomposer.org/composer.phar -O- >> /usr/bin/composer && \
+    wget --quiet https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.4.0/php-cs-fixer.phar -O /usr/bin/php-cs-fixer && \
+    chmod +x /usr/bin/composer && \
+    chmod +x /usr/bin/php-cs-fixer
+
+COPY capco.ini /etc/php/7.1/cli/conf.d/capco.ini
+COPY build.sh /usr/bin/build
+
+# Add composer global binaries to $PATH
+ENV PATH $PATH:/home/capco/.composer/vendor/bin/
 
 WORKDIR /var/www
 

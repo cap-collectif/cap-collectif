@@ -3,12 +3,13 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Event;
+use Geocoder\Provider\GoogleMaps;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Ivory\HttpAdapter\CurlHttpAdapter;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Model\Metadata;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -28,6 +29,18 @@ class EventAdmin extends Admin
         ];
     }
 
+    public function prePersist($event)
+    {
+        $this->setCoord($event);
+        $this->checkRegistration($event);
+    }
+
+    public function preUpdate($event)
+    {
+        $this->setCoord($event);
+        $this->checkRegistration($event);
+    }
+
     // For mosaic view
     public function getObjectMetadata($object)
     {
@@ -43,6 +56,9 @@ class EventAdmin extends Admin
         return parent::getObjectMetadata($object);
     }
 
+    /**
+     * @param DatagridMapper $datagridMapper
+     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -131,7 +147,9 @@ class EventAdmin extends Admin
             ->add('_action', 'actions', [
                 'actions' => [
                     'registrations' => ['template' => 'CapcoAdminBundle:CRUD:list__action_registrations.html.twig'],
-                    'delete' => ['template' => 'CapcoAdminBundle:CRUD:list__action_delete.html.twig'],
+                    'show' => [],
+                    'edit' => [],
+                    'delete' => [],
                 ],
             ])
         ;
@@ -267,6 +285,9 @@ class EventAdmin extends Admin
         ;
     }
 
+    /**
+     * @param ShowMapper $showMapper
+     */
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper
@@ -335,11 +356,35 @@ class EventAdmin extends Admin
             ->add('lng', null, [
                 'label' => 'admin.fields.event.lng',
             ])
+
         ;
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    private function checkRegistration($event)
     {
-        $collection->clearExcept(['batch', 'list', 'create', 'edit', 'delete']);
+        if ($event->getLink()) {
+            $event->setRegistrationEnable(false);
+        }
+    }
+
+    private function setCoord(Event $event)
+    {
+        if (!$event->getAddress() || !$event->getCity()) {
+            $event->setLat(null);
+            $event->setLng(null);
+
+            return;
+        }
+
+        $apiKey = $this->getConfigurationPool()->getContainer()->getParameter('google_maps_key_server');
+        $curl = new CurlHttpAdapter();
+        $geocoder = new GoogleMaps($curl, null, null, true, $apiKey);
+
+        $address = $event->getAddress() . ', ' . $event->getZipCode() . ' ' . $event->getCity() . ', ' . $event->getCountry();
+
+        $coord = $geocoder->geocode($address)->first()->getCoordinates();
+
+        $event->setLat($coord->getLatitude());
+        $event->setLng($coord->getLongitude());
     }
 }

@@ -30,10 +30,8 @@
                 {% else %}
                     {{ 'votes.type.propositionVote' | trans({}, 'CapcoAppBundle') }}
                 {% endif %}
-                {% set voteDate = vote.updatedAt is defined and vote.updatedAt is not null ? vote.updatedAt : vote.createdAt %}
-                <span class="excerpt  opinion__date">
-                  {{ voteDate | localizeddate('long', 'short', app.request.locale) }}
-                </span>
+
+                <span class="excerpt  opinion__date">{{ (vote.updatedAt is defined ? vote.updatedAt : vote.createdAt) | localizeddate('long', 'short', app.request.locale) }}</span>
             </p>
             <p>
                 <a href="{{ capco_vote_object_url(vote) }}">{{ capco_vote_object(vote) }}</a>

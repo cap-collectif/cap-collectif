@@ -33,9 +33,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         'date' => 'user.index.sort.date',
     ];
 
-    // Hack for ParticipantEdge
-    public $registeredEvent;
-
     protected $samlId;
     protected $parisId;
     protected $id;

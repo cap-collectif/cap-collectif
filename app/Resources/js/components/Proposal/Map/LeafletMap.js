@@ -4,7 +4,6 @@ import { Map, TileLayer, GeoJSON } from 'react-leaflet-universal';
 import { connect, type MapStateToProps, type Connector } from 'react-redux';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import LocateControl from './LocateControl';
-import LeafletSearch from './LeafletSearch';
 import { loadMarkers } from '../../../redux/modules/proposal';
 import config from '../../../config';
 import type { Dispatch, State } from '../../../types';
@@ -23,9 +22,14 @@ type ComponentState = {
   loaded: boolean,
 };
 
+type GeoJson = {
+  style: string,
+  district: string,
+};
+
 type Props = {
   markers: ?Object,
-  geoJsons?: Array<string>,
+  geoJsons?: Array<GeoJson>,
   defaultMapOptions: MapOptions,
   visible: boolean,
   stepId: string,
@@ -94,6 +98,12 @@ export class LeafletMap extends Component<Props, ComponentState> {
 
     const token = config.mapboxApiKey;
 
+    const defaultDistrictStyle = {
+      color: '#ff0000',
+      weight: 1,
+      opacity: 0.3,
+    };
+
     const markersList =
       markers && markers.length > 0
         ? markers.map(mark => ({
@@ -121,7 +131,6 @@ export class LeafletMap extends Component<Props, ComponentState> {
           height: '50vw',
         }}>
         <TileLayer
-          attribution="&copy; <a href&quot;https://www.mapbox.com/about/maps/&quot;>Mapbox</a> &copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> <a href&quot;https://www.mapbox.com/map-feedback/#/-74.5/40/10&quot;>Improve this map</a>"
           url={`https://api.mapbox.com/styles/v1/capcollectif/cj4zmeym20uhr2smcmgbf49cz/tiles/256/{z}/{x}/{y}?access_token=${token}`}
         />
         <MarkerClusterGroup
@@ -134,9 +143,15 @@ export class LeafletMap extends Component<Props, ComponentState> {
           }}
           markers={markersList}
         />
-        {geoJsons && geoJsons.map((json, key) => <GeoJSON key={key} data={json} />)}
+        {geoJsons &&
+          geoJsons.map((geoJson, key) => (
+            <GeoJSON
+              style={geoJson.style ? JSON.parse(geoJson.style) : defaultDistrictStyle}
+              key={key}
+              data={geoJson.district}
+            />
+          ))}
         <LocateControl />
-        <LeafletSearch />
       </Map>
     );
   }

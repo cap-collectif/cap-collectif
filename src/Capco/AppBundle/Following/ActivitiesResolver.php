@@ -47,7 +47,7 @@ class ActivitiesResolver
 
     public function getFollowedProposalsByUserId(): array
     {
-        $followers = $this->followerRepository->findAllWhereProposalDeleteAtIsNull();
+        $followers = $this->followerRepository->findAll();
         $followersWithActivities = [];
 
         /** @var Follower $follower */
@@ -57,7 +57,7 @@ class ActivitiesResolver
                 $user = $follower->getUser();
                 $userId = $user->getId();
             } catch (EntityNotFoundException $e) {
-                $this->logger->addError(__METHOD__ . ' ' . $e->getMessage());
+                $this->logger->addError(__METHOD__ . $e->getMessage());
                 continue;
             }
             if (!filter_var($user->getEmailCanonical(), FILTER_VALIDATE_EMAIL)) {

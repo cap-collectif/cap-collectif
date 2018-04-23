@@ -70,7 +70,7 @@ abstract class AbstractStep
     /**
      * @ORM\Column(name="body", type="text", nullable=true)
      */
-    private $body;
+    private $body = null;
 
     /**
      * @var string
@@ -98,14 +98,14 @@ abstract class AbstractStep
      *
      * @ORM\Column(name="start_at", type="datetime", nullable=true)
      */
-    private $startAt;
+    private $startAt = null;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="end_at", type="datetime", nullable=true)
      */
-    private $endAt;
+    private $endAt = null;
 
     /**
      * @var \DateTime
@@ -144,6 +144,7 @@ abstract class AbstractStep
     {
         $this->updatedAt = new \Datetime();
         $this->statuses = new ArrayCollection();
+        $this->label = '';
     }
 
     public function __toString(): string

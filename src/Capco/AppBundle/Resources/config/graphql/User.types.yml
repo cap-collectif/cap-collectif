@@ -150,5 +150,3 @@ User:
             contributionsCount:
                 type: "Int!"
                 description: "Total of contributions count"
-            expired:
-                type: "Boolean!"

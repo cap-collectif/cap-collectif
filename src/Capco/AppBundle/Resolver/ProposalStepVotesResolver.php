@@ -189,17 +189,11 @@ class ProposalStepVotesResolver
         switch (true) {
             case $vote instanceof ProposalSelectionVote:
                 $step = $vote->getSelectionStep();
-                if (!$step->isBudgetVotable()) {
-                    return true;
-                }
                 $connected = $this->proposalSelectionVoteRepository->findBy(['selectionStep' => $step, 'user' => $vote->getUser()]);
                 $anonymous = $this->proposalSelectionVoteRepository->findBy(['selectionStep' => $step, 'email' => $vote->getEmail()]);
                 break;
             case $vote instanceof ProposalCollectVote:
                 $step = $vote->getCollectStep();
-                if (!$step->isBudgetVotable()) {
-                    return true;
-                }
                 $connected = $this->proposalCollectVoteRepository->findBy(['collectStep' => $step, 'user' => $vote->getUser()]);
                 $anonymous = $this->proposalCollectVoteRepository->findBy(['collectStep' => $step, 'email' => $vote->getEmail()]);
                 break;

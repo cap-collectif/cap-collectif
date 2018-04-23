@@ -6,7 +6,6 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Elastica\Result;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 /**
@@ -19,9 +18,12 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
  */
 class ElasticaToDoctrineTransformer
 {
-    public const ENTITY_ALIAS = 'o';
+    const ENTITY_ALIAS = 'o';
 
-    protected $registry;
+    /**
+     * @var ManagerRegistry
+     */
+    protected $registry = null;
 
     /**
      * Optional parameters.
@@ -30,7 +32,7 @@ class ElasticaToDoctrineTransformer
         'hints' => [],
         'hydrate' => true,
         'identifier' => 'id',
-        'ignore_missing' => true,
+        'ignore_missing' => false,
         'query_builder_method' => 'createQueryBuilder',
     ];
 
@@ -44,13 +46,10 @@ class ElasticaToDoctrineTransformer
      */
     private $indexer;
 
-    private $logger;
-
-    public function __construct(ManagerRegistry $registry, Indexer $indexer, LoggerInterface $logger)
+    public function __construct(ManagerRegistry $registry, Indexer $indexer)
     {
         $this->registry = $registry;
         $this->indexer = $indexer;
-        $this->logger = $logger;
     }
 
     /**
@@ -68,25 +67,15 @@ class ElasticaToDoctrineTransformer
             $toFetchByType[$elasticaObject->getType()][] = $elasticaObject->getId();
         }
 
-        $objects = [];
-
         foreach ($toFetchByType as $type => $toFetchIds) {
             $objectClass = $this->getObjectClassFromType($type);
-            $objects[] = $this->findByIdentifiers($toFetchIds, $this->options['hydrate'], $objectClass);
+            $objects = array_merge($objects, $this->findByIdentifiers($toFetchIds, $this->options['hydrate'], $objectClass));
         }
 
-        $objects = array_merge(...$objects);
-
-        $objectsCnt = \count($objects);
-        $elasticaObjectsCnt = \count($elasticaObjects);
-        if ($objectsCnt < $elasticaObjectsCnt) {
-            $error = sprintf('Cannot find corresponding Doctrine objects (%d) for all Elastica results (%d). IDs: %s', $objectsCnt, $elasticaObjectsCnt, implode(', ', $ids));
-
-            if (!$this->options['ignore_missing']) {
-                throw new \RuntimeException($error);
-            }
-
-            $this->logger->error($error);
+        $objectsCnt = count($objects);
+        $elasticaObjectsCnt = count($elasticaObjects);
+        if ($objectsCnt < $elasticaObjectsCnt && !$this->options['ignore_missing']) {
+            throw new \RuntimeException(sprintf('Cannot find corresponding Doctrine objects (%d) for all Elastica results (%d). IDs: %s', $objectsCnt, $elasticaObjectsCnt, implode(', ', $ids)));
         }
 
         $propertyAccessor = $this->propertyAccessor;
@@ -129,7 +118,7 @@ class ElasticaToDoctrineTransformer
         return $result;
     }
 
-    public function setPropertyAccessor(PropertyAccessorInterface $propertyAccessor): void
+    public function setPropertyAccessor(PropertyAccessorInterface $propertyAccessor)
     {
         $this->propertyAccessor = $propertyAccessor;
     }

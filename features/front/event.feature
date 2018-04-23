@@ -20,17 +20,17 @@ Scenario: Anonymous wants to list archived events
 Scenario: Events can be filtered by projects
   Given I visited "events page"
   And I select "Croissance, innovation, disruption" from "event_search_project"
-  And I wait 2 seconds
+  And I wait 1 seconds
   Then I should see 2 ".event" elements
   And I should see "Event with registrations"
-  # And I should see "Event without registrations"
+  And I should see "Event without registrations"
 
 @javascript
 Scenario: Archived events can be filtered by projects
   Given I visited "events page"
   And I follow "event.see_archived"
   And I select "Croissance, innovation, disruption" from "event_search_project"
-  And I wait 2 seconds
+  And I wait 1 seconds
   Then I should see 1 ".event" elements
   And I should see "PHPTour2014"
   And I should not see "ParisWeb2014"
@@ -102,6 +102,10 @@ Scenario: Logged in user wants to comment an event
   And I fill in the following:
     | body        | J'ai un truc à dire |
   And I should not see "comment.with_my_account"
+  And I should not see "comment.without_account"
+#   When I press "comment.submit"
+#   And I wait 2 seconds
+#   Then I should see "J'ai un truc à dire" in the ".opinion__list" element
 
 @javascript
 Scenario: Anonymous wants to comment an event without email

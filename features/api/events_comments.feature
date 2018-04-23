@@ -5,7 +5,7 @@ Feature: Events comments
 
 @parallel-scenario
 Scenario: API client wants to list comments of an event
-  When I send a GET request to "/api/events/event1/comments"
+  When I send a GET request to "/api/events/1/comments"
   Then the JSON response should match:
   """
   {
@@ -50,7 +50,7 @@ Scenario: API client wants to list comments of an event
 
 @parallel-scenario
 Scenario: API client wants to find the first comment of an event
-  When I send a GET request to "/api/events/event1/comments?limit=1"
+  When I send a GET request to "/api/events/1/comments?limit=1"
   Then the JSON response should match:
   """
   {
@@ -81,7 +81,7 @@ Scenario: API client wants to find the first comment of an event
 
 @parallel-scenario
 Scenario: API client wants to find popular comments of an event
-  When I send a GET request to "/api/events/event1/comments?filter=popular"
+  When I send a GET request to "/api/events/1/comments?filter=popular"
   Then the JSON response should match:
   """
   {
@@ -101,7 +101,7 @@ Scenario: API client wants to find popular comments of an event
 
 @database
 Scenario: Anonymous API client wants to add a comment
-  When I send a POST request to "/api/events/event1/comments" with json:
+  When I send a POST request to "/api/events/1/comments" with json:
   """
   {
     "authorName": "Kéké",
@@ -113,7 +113,7 @@ Scenario: Anonymous API client wants to add a comment
 
 @database
 Scenario: Anonymous API client wants to add an answer to a comment
-  When I send a POST request to "/api/events/event2/comments" with json:
+  When I send a POST request to "/api/events/2/comments" with json:
   """
   {
     "parent": "eventComment1",
@@ -126,7 +126,7 @@ Scenario: Anonymous API client wants to add an answer to a comment
 
 @security
 Scenario: Anonymous API client wants to add a comment without user informations
-  When I send a POST request to "/api/events/event1/comments" with json:
+  When I send a POST request to "/api/events/1/comments" with json:
   """
   {
     "body": "Vive moi qui suis plus fort que www.google.fr !"
@@ -156,7 +156,7 @@ Scenario: Anonymous API client wants to add a comment without user informations
 @database
 Scenario: logged in API client wants to add a comment
   Given I am logged in to api as user
-  When I send a POST request to "/api/events/event1/comments" with json:
+  When I send a POST request to "/api/events/1/comments" with json:
   """
   {
     "body": "Vive moi user ! Réponds à ça si tu l'oses."
@@ -167,7 +167,7 @@ Scenario: logged in API client wants to add a comment
 @database
 Scenario: logged in API client wants to add an answer to a comment
   Given I am logged in to api as user
-  When I send a POST request to "/api/events/event2/comments" with json:
+  When I send a POST request to "/api/events/2/comments" with json:
   """
   {
     "parent": "eventComment1",
@@ -179,7 +179,7 @@ Scenario: logged in API client wants to add an answer to a comment
 @security
 Scenario: logged in API client wants to add a comment by hacking
   Given I am logged in to api as user
-  When I send a POST request to "/api/events/event2/comments" with json:
+  When I send a POST request to "/api/events/2/comments" with json:
   """
   {
     "parent": "ideaComment1",

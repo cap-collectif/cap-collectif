@@ -19,7 +19,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class Indexer
 {
-    public const BULK_SIZE = 100;
+    const BULK_SIZE = 100;
 
     /**
      * @var Index
@@ -60,8 +60,10 @@ class Indexer
 
     /**
      * Fetch ALL the indexable entities and send them to bulks.
+     *
+     * @param null|mixed $output
      */
-    public function indexAll(OutputInterface $output = null): void
+    public function indexAll(OutputInterface $output = null)
     {
         $classes = $this->getClassesToIndex();
 
@@ -107,7 +109,7 @@ class Indexer
      *
      * @param mixed $identifier
      */
-    public function index(string $entityFQN, $identifier): void
+    public function index(string $entityFQN, $identifier)
     {
         $repository = $this->em->getRepository($entityFQN);
         $object = $repository->findOneBy(['id' => $identifier]);
@@ -126,7 +128,7 @@ class Indexer
      *
      * @param mixed $identifier
      */
-    public function remove(string $entityFQN, $identifier): void
+    public function remove(string $entityFQN, $identifier)
     {
         $classes = $this->getClassesToIndex();
         $type = array_search($entityFQN, $classes, true);
@@ -139,9 +141,9 @@ class Indexer
      * We do two different calls because we ignore 404 for DELETE operations,
      * but zero tolerance for error on UPSERT.
      */
-    public function finishBulk(): void
+    public function finishBulk()
     {
-        if (\count($this->currentInsertBulk) > 0) {
+        if (count($this->currentInsertBulk) > 0) {
             $bulk = new Bulk($this->client);
             $bulk->addDocuments($this->currentInsertBulk);
             $response = $bulk->send();
@@ -150,7 +152,7 @@ class Indexer
             }
         }
 
-        if (\count($this->currentDeleteBulk) > 0) {
+        if (count($this->currentDeleteBulk) > 0) {
             $bulk = new Bulk($this->client);
             $bulk->addDocuments($this->currentDeleteBulk, Bulk\Action::OP_TYPE_DELETE);
             $response = $bulk->send();
@@ -176,8 +178,8 @@ class Indexer
         $metas = $this->em->getMetadataFactory()->getAllMetadata();
         foreach ($metas as $meta) {
             $interfaces = class_implements($meta->getName());
-            if ($interfaces && \in_array(IndexableInterface::class, $interfaces, true)) {
-                $type = \call_user_func($meta->getName() . '::getElasticsearchTypeName');
+            if ($interfaces && in_array(IndexableInterface::class, $interfaces, true)) {
+                $type = call_user_func($meta->getName() . '::getElasticsearchTypeName');
                 $this->classes[$type] = $meta->getName();
             }
         }
@@ -200,7 +202,7 @@ class Indexer
      * Add a Document to the current bulk.
      * This does not send the bulk! /!\ (only if the threshold is hit).
      */
-    private function addToBulk(Document $document): void
+    private function addToBulk(Document $document)
     {
         $document->setIndex($this->index);
 
@@ -210,7 +212,7 @@ class Indexer
             $this->currentDeleteBulk[] = $document;
         }
 
-        if (\count($this->currentInsertBulk) >= self::BULK_SIZE || \count($this->currentDeleteBulk) >= self::BULK_SIZE) {
+        if (count($this->currentInsertBulk) >= self::BULK_SIZE || count($this->currentDeleteBulk) >= self::BULK_SIZE) {
             $this->finishBulk();
         }
     }

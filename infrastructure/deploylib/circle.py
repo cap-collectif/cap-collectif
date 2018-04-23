@@ -42,7 +42,6 @@ def get_images():
         'application': ['application'],
         'applicationdata': ['applicationdata'],
         'builder': ['builder'],
-        'qarunner': ['qarunner'],
         'elasticsearch': ['elasticsearch'],
         'redis': ['redis'],
         'seleniumhub': ['seleniumhub'],

@@ -52,7 +52,6 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         rolesText
         enabled
         locked
-        expired
         phoneConfirmed
         phoneConfirmationSentAt
         userType { name }
