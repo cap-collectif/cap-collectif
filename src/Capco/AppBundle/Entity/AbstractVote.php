@@ -47,10 +47,6 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  *        @UniqueConstraint(
  *            name="comment_vote_unique",
  *            columns={"voter_id", "comment_id"}
- *        ),
- *        @UniqueConstraint(
- *            name="idea_vote_unique",
- *            columns={"voter_id", "idea_id"}
  *        )
  *    }
  * )
@@ -59,7 +55,6 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name = "voteType", type = "string")
  * @ORM\DiscriminatorMap({
- *      "idea"              = "IdeaVote",
  *      "comment"           = "CommentVote",
  *      "opinion"           = "OpinionVote",
  *      "opinionVersion"    = "OpinionVersionVote",

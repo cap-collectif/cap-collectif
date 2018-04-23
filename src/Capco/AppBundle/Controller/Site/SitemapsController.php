@@ -96,23 +96,6 @@ class SitemapsController extends Controller
             }
         }
 
-        // Ideas
-        if ($toggleManager->isActive('ideas')) {
-            $urls[] = [
-                'loc' => $this->get('router')->generate('app_idea'),
-                'changefreq' => 'daily',
-                'priority' => '1.0',
-            ];
-            foreach ($em->getRepository('CapcoAppBundle:Idea')->findBy(['isEnabled' => true]) as $idea) {
-                $urls[] = [
-                    'loc' => $this->get('router')->generate('app_idea_show', ['slug' => $idea->getSlug()]),
-                    'lastmod' => $idea->getUpdatedAt()->format(\DateTime::W3C),
-                    'changefreq' => 'daily',
-                    'priority' => '1.0',
-                ];
-            }
-        }
-
         // Projects
         $urls[] = [
             'loc' => $this->get('router')->generate('app_project'),

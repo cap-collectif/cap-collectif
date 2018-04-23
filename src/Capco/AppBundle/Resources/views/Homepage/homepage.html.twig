@@ -70,8 +70,6 @@
             {{ render(controller('CapcoAppBundle:Site/Homepage:lastProjects', {'max': section.nbObjects, 'offset': 0, 'section': section})) }}
         {% elseif section.type == 'themes' %}
             {{ render(controller('CapcoAppBundle:Site/Homepage:lastThemes', {'max': section.nbObjects, 'offset': 0, 'section': section})) }}
-        {% elseif section.type == 'ideas' %}
-            {{ render(controller('CapcoAppBundle:Site/Homepage:popularIdeas', {'max': section.nbObjects, 'offset': 0, 'section': section})) }}
         {% elseif section.type == 'news' %}
             {{ render(controller('CapcoAppBundle:Site/Homepage:lastPosts', {'max': section.nbObjects, 'offset': 0, 'section': section})) }}
         {% elseif section.type == 'events' %}

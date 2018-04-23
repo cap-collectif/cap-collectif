@@ -183,14 +183,6 @@ class ProfileController extends BaseController
         $opinionTypesWithUserOpinions = $doctrine->getRepository('CapcoAppBundle:OpinionType')->getByUser($user);
         $versions = $doctrine->getRepository('CapcoAppBundle:OpinionVersion')->getByUser($user);
         $arguments = $doctrine->getRepository('CapcoAppBundle:Argument')->getByUser($user);
-        $ideasRaw = $doctrine
-            ->getRepository('CapcoAppBundle:Idea')
-            ->getByUser($user)
-        ;
-        $ideas = $serializer->serialize([
-            'ideas' => $ideasRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Ideas', 'UsersInfos', 'ThemeDetails']));
-        $ideasCount = count($ideasRaw);
 
         $replies = $this
             ->getDoctrine()
@@ -212,8 +204,6 @@ class ProfileController extends BaseController
             'opinionTypesWithUserOpinions' => $opinionTypesWithUserOpinions,
             'versions' => $versions,
             'arguments' => $arguments,
-            'ideasProps' => $ideas,
-            'ideasCount' => $ideasCount,
             'replies' => $replies,
             'sources' => $sources,
             'comments' => $comments,

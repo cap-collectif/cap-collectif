@@ -5,11 +5,9 @@ namespace Capco\AdminBundle\Admin;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\HighlightedContent;
 use Capco\AppBundle\Entity\HighlightedEvent;
-use Capco\AppBundle\Entity\HighlightedIdea;
 use Capco\AppBundle\Entity\HighlightedPost;
 use Capco\AppBundle\Entity\HighlightedProject;
 use Capco\AppBundle\Entity\HighlightedTheme;
-use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Theme;
@@ -85,14 +83,6 @@ class HighlightedContentAdmin extends Admin
                 ->add('project', 'sonata_type_model', [
                     'label' => 'admin.fields.highlighted_content.project',
                     'class' => Project::class,
-                    'choices_as_values' => true,
-                ])
-            ;
-        } elseif ($subject instanceof HighlightedIdea) {
-            $formMapper
-                ->add('idea', 'sonata_type_model', [
-                    'label' => 'admin.fields.highlighted_content.idea',
-                    'class' => Idea::class,
                     'choices_as_values' => true,
                 ])
             ;
