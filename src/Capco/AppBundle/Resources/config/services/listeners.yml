@@ -182,17 +182,6 @@ services:
     tags:
       - { name: "jms_serializer.event_subscriber" }
 
-  capco.idea.serialization_listener:
-     class: Capco\AppBundle\EventListener\IdeaSerializationListener
-     arguments: ["@router", "@security.token_storage", "@sonata.media.twig.extension", "@capco.idea.helper"]
-     tags:
-       - { name: "jms_serializer.event_subscriber" }
-
-  capco.idea_vote.serialization_listener:
-    class: Capco\AppBundle\EventListener\IdeaVoteSerializationListener
-    tags:
-      - { name: "jms_serializer.event_subscriber" }
-
   capco.listener.reference:
     class: Capco\AppBundle\EventListener\ReferenceEventListener
     tags:

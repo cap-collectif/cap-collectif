@@ -61,9 +61,6 @@ class ThemeAdmin extends Admin
             ->add('projects', null, [
                 'label' => 'admin.fields.theme.projects',
             ])
-            ->add('ideas', null, [
-                'label' => 'admin.fields.theme.ideas',
-            ])
             ->add('events', null, [
                 'label' => 'admin.fields.theme.events',
             ])
@@ -103,10 +100,6 @@ class ThemeAdmin extends Admin
             ])
             ->add('position', null, [
                 'label' => 'admin.fields.theme.position',
-            ])
-            ->add('ideasCount', null, [
-                'label' => 'admin.fields.theme.ideas_count',
-                'template' => 'CapcoAdminBundle:Theme:ideas_count_list_field.html.twig',
             ])
             ->add('projectsCount', null, [
                 'label' => 'admin.fields.theme.projects_count',
@@ -231,9 +224,6 @@ class ThemeAdmin extends Admin
             ])
             ->add('projects', null, [
                 'label' => 'admin.fields.theme.projects',
-            ])
-            ->add('ideas', null, [
-                'label' => 'admin.fields.theme.ideas',
             ])
             ->add('events', null, [
                 'label' => 'admin.fields.theme.events',

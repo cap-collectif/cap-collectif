@@ -108,12 +108,6 @@ User:
                 type: "Int!"
             repliesCount:
                 type: "Int!"
-            ideasCount:
-                type: "Int!"
-            ideaVotesCount:
-                type: "Int!"
-            ideaCommentsCount:
-                type: "Int!"
             postCommentsCount:
                 type: "Int!"
             eventCommentsCount:

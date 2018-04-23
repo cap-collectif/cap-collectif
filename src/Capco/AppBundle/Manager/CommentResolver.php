@@ -5,8 +5,6 @@ namespace Capco\AppBundle\Manager;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventComment;
-use Capco\AppBundle\Entity\Idea;
-use Capco\AppBundle\Entity\IdeaComment;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\PostComment;
 use Capco\AppBundle\Resolver\UrlResolver;
@@ -31,9 +29,7 @@ class CommentResolver
     public function createCommentForType($objectType)
     {
         $comment = null;
-        if ('Idea' === $objectType) {
-            $comment = new IdeaComment();
-        } elseif ('Event' === $objectType) {
+        if ('Event' === $objectType) {
             $comment = new EventComment();
         } elseif ('Post' === $objectType) {
             $comment = new PostComment();
@@ -45,9 +41,7 @@ class CommentResolver
     public function getObjectByTypeAndId($objectType, $objectId)
     {
         $object = null;
-        if ('Idea' === $objectType) {
-            $object = $this->em->getRepository('CapcoAppBundle:Idea')->find($objectId);
-        } elseif ('Event' === $objectType) {
+        if ('Event' === $objectType) {
             $object = $this->em->getRepository('CapcoAppBundle:Event')->find($objectId);
         } elseif ('Post' === $objectType) {
             $object = $this->em->getRepository('CapcoAppBundle:Post')->find($objectId);
@@ -58,10 +52,6 @@ class CommentResolver
 
     public function getCommentsByObject($object)
     {
-        if ($object instanceof Idea) {
-            return $this->em->getRepository('CapcoAppBundle:IdeaComment')->getEnabledByIdea($object);
-        }
-
         if ($object instanceof Event) {
             return $this->em->getRepository('CapcoAppBundle:EventComment')->getEnabledByEvent($object);
         }

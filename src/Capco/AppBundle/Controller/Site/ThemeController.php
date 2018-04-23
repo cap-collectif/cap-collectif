@@ -96,28 +96,4 @@ class ThemeController extends Controller
             'ideaCreationProps' => $ideaCreationProps,
         ];
     }
-
-    /**
-     * @Template("CapcoAppBundle:Theme:lastIdeas.html.twig")
-     *
-     * @param mixed $theme
-     * @param mixed $max
-     * @param mixed $offset
-     */
-    public function lastIdeasAction($theme, $max = 8, $offset = 0)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $serializer = $this->get('jms_serializer');
-        $ideasRaw = $em->getRepository('CapcoAppBundle:Idea')->getLastByTheme($theme->getId(), $max, $offset);
-        $props = $serializer->serialize([
-            'ideas' => $ideasRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Ideas', 'ThemeDetails', 'UsersInfos']));
-
-        return [
-            'props' => $props,
-            'theme' => $theme,
-            'max' => $max,
-            'nbIdeas' => count($ideasRaw),
-        ];
-    }
 }

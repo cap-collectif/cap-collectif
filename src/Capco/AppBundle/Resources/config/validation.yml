@@ -14,11 +14,6 @@ Capco\AppBundle\Entity\Event:
     body:
       - NotBlank: ~
 
-Capco\AppBundle\Entity\Idea:
-  properties:
-    body:
-      - NotBlank: ~
-
 Capco\AppBundle\Entity\Opinion:
   properties:
     body:

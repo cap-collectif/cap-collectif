@@ -26,7 +26,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name = "objectType", type = "string")
  * @ORM\DiscriminatorMap({
- *      "idea"     = "IdeaComment",
  *      "event"    = "EventComment",
  *      "post"     = "PostComment",
  *      "proposal" = "ProposalComment"

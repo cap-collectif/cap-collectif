@@ -96,48 +96,6 @@ class HomepageController extends Controller
 
     /**
      * @Cache(smaxage="60", public=true)
-     * @Template("CapcoAppBundle:Homepage:lastIdeas.html.twig")
-     */
-    public function popularIdeasAction(int $max = null, int $offset = null, Section $section = null)
-    {
-        $max = $max ?? 4;
-        $offset = $offset ?? 0;
-        $serializer = $this->get('jms_serializer');
-        $ideasRaw = $this->getDoctrine()->getManager()->getRepository('CapcoAppBundle:Idea')->getPopular($max, $offset);
-        $props = $serializer->serialize([
-            'ideas' => $ideasRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Ideas', 'ThemeDetails', 'UsersInfos']));
-
-        return [
-            'props' => $props,
-            'nbIdeas' => count($ideasRaw),
-            'section' => $section,
-        ];
-    }
-
-    /**
-     * @Cache(smaxage="60", public=true)
-     * @Template("CapcoAppBundle:Homepage:lastIdeas.html.twig")
-     */
-    public function lastIdeasAction(int $max = null, int $offset = null, Section $section = null)
-    {
-        $max = $max ?? 4;
-        $offset = $offset ?? 0;
-        $serializer = $this->get('jms_serializer');
-        $ideasRaw = $this->getDoctrine()->getManager()->getRepository('CapcoAppBundle:Idea')->getLast($max, $offset);
-        $props = $serializer->serialize([
-            'ideas' => $ideasRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Ideas', 'Themes', 'UsersInfos']));
-
-        return [
-            'props' => $props,
-            'nbIdeas' => count($ideasRaw),
-            'section' => $section,
-        ];
-    }
-
-    /**
-     * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Homepage:lastProposals.html.twig")
      */
     public function lastProposalsAction(int $max = null, int $offset = null, Section $section = null)
