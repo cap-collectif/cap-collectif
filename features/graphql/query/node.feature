@@ -49,7 +49,7 @@ Scenario: GraphQL client want to get a node of all available types
       "groupId": "group1",
       "proposalFormId": "proposalForm1",
       "questionnaireId": "questionnaire1",
-      "eventId": 1
+      "eventId": "event1"
     }
   }
   """

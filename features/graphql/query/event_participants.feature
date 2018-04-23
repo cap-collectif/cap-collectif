@@ -29,7 +29,7 @@ Scenario: GraphQL client want to get the list of participants of an event
       }
     }",
     "variables": {
-      "event": 1
+      "event": "event1"
     }
   }
   """
