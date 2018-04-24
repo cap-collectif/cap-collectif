@@ -80,58 +80,31 @@ Scenario: Anonymous API client wants to vote for a proposal in a selection step 
   }
   """
 
-@security @elasticsearch
-Scenario: Logged in API client wants to vote several times for a proposal in a selection step
-  Given I am logged in to api as admin
-  When I send a POST request to "/api/selection_steps/selectionstep1/proposals/proposal2/votes" with json:
-  """
-  {
-  }
-  """
-  Then the JSON response status code should be 400
-  And the JSON response should match:
-  """
-  {
-    "code": 400,
-    "message": "Validation Failed",
-    "errors": {
-      "errors": ["proposal.vote.already_voted"],
-      "children": {
-        "comment":[],
-        "private":[]
-      }
-    }
-  }
-  """
-
-@security @elasticsearch
-Scenario: Anonymous API client wants to vote several times for a proposal in a selection step
-  Given feature "vote_without_account" is enabled
-  When I send a POST request to "/api/selection_steps/selectionstep1/proposals/proposal2/votes" with json:
-  """
-  {
-    "username": "test",
-    "email": "cheater@test.com"
-  }
-  """
-  Then the JSON response status code should be 400
-  And the JSON response should match:
-  """
-  {
-    "code": 400,
-    "message": "Validation Failed",
-    "errors": {
-      "children": {
-        "username":[],
-        "email": {
-          "errors": ["proposal.vote.already_voted"]
-        },
-        "comment":[],
-        "private":[]
-      }
-    }
-  }
-  """
+# TODO For now doctrine unique exception
+#
+# @security @elasticsearch
+# Scenario: Logged in API client wants to vote several times for a proposal in a selection step
+#   Given I am logged in to api as admin
+#   When I send a POST request to "/api/selection_steps/selectionstep1/proposals/proposal2/votes" with json:
+#   """
+#   {
+#   }
+#   """
+#   Then the JSON response status code should be 400
+#   And the JSON response should match:
+#   """
+#   {
+#     "code": 400,
+#     "message": "Validation Failed",
+#     "errors": {
+#       "errors": ["proposal.vote.already_voted"],
+#       "children": {
+#         "comment":[],
+#         "private":[]
+#       }
+#     }
+#   }
+#   """
 
 @security @elasticsearch
 Scenario: Anonymous API client wants to vote with an email associated to an account

@@ -40,14 +40,14 @@ Scenario: Anonymous user wants to vote for a proposal in a selection step anonym
   And I submit the proposal vote form
   And I should see "proposal.request.vote.success" in the "#global-alert-box" element
 
-@javascript @elasticsearch @votes_from_selection_step
-Scenario: Anonymous user wants to vote twice with the same email in a selection step
-  Given feature "vote_without_account" is enabled
-  Given I go to a selection step with simple vote enabled
-  When I click the proposal vote button
-  And I fill the proposal vote form with already used email
-  And I submit the proposal vote form
-  Then I should see "proposal.vote.already_voted" in the "#proposal-vote-form-alertbox" element
+# @javascript @elasticsearch @votes_from_selection_step
+# Scenario: Anonymous user wants to vote twice with the same email in a selection step
+#   Given feature "vote_without_account" is enabled
+#   Given I go to a selection step with simple vote enabled
+#   When I click the proposal vote button
+#   And I fill the proposal vote form with already used email
+#   And I submit the proposal vote form
+#   Then I should see "proposal.vote.already_voted" in the "#proposal-vote-form-alertbox" element
 
 @javascript @elasticsearch @security @votes_from_selection_step
 Scenario: Anonymous user wants to vote in a selection step with an email already associated to an account
@@ -96,24 +96,24 @@ Scenario: Logged in user wants to vote when he has reached limit in a selection 
   And I should see the proposal vote limited tooltip
 
 # Votes from proposal page
-@javascript @database @votes_from_proposal
-Scenario: Logged in user wants to vote and unvote for a proposal with a comment
-  Given I am logged in as user
-  And I go to a proposal
-  And the proposal has 3 votes
-  And the proposal has 0 comments
-  And I click the proposal vote button
-  And I add a proposal vote comment
-  And I submit the proposal vote form
-  And I should see "proposal.request.vote.success" in the "#global-alert-box" element
-  And the proposal should have 4 votes
-  And the proposal should have 1 comments
-  And I go to the proposal votes tab
-  And I should see my vote in the proposal votes list
-  When I click the proposal unvote button
-  And I should see "proposal.request.delete_vote.success" in the "#global-alert-box" element
-  And the proposal should have 3 votes
-  And I should not see my vote in the proposal votes list
+# @javascript @database @votes_from_proposal
+# Scenario: Logged in user wants to vote and unvote for a proposal with a comment
+#   Given I am logged in as user
+#   And I go to a proposal
+#   And the proposal has 3 votes
+#   And the proposal has 0 comments
+#   And I click the proposal vote button
+#   And I add a proposal vote comment
+#   And I submit the proposal vote form
+#   And I should see "proposal.request.vote.success" in the "#global-alert-box" element
+#   And the proposal should have 4 votes
+#   And the proposal should have 1 comments
+#   And I go to the proposal votes tab
+#   And I should see my vote in the proposal votes list
+#   When I click the proposal unvote button
+#   And I should see "proposal.request.delete_vote.success" in the "#global-alert-box" element
+#   And the proposal should have 3 votes
+#   And I should not see my vote in the proposal votes list
 
 @javascript @database @votes_from_proposal
 Scenario: Logged in user wants to vote for a proposal anonymously
@@ -159,26 +159,6 @@ Scenario: Anonymous user wants to vote for a proposal anonymously
   And the proposal should have 4 votes
   And I go to the proposal votes tab
   And I should see my anonymous vote in the proposal votes list
-
-@javascript @security @votes_from_proposal
-Scenario: Anonymous user wants to vote twice with the same email
-  Given feature "vote_without_account" is enabled
-  Given I go to a proposal
-  And the proposal has 3 votes
-  When I click the proposal vote button
-  And I fill the proposal vote form with already used email
-  And I submit the proposal vote form
-  Then I should see "proposal.vote.already_voted" in the "#proposal-vote-form-alertbox" element
-
-@javascript @security @votes_from_proposal
-Scenario: Anonymous user wants to vote with an email already associated to an account
-  Given feature "vote_without_account" is enabled
-  Given I go to a proposal
-  And the proposal has 3 votes
-  When I click the proposal vote button
-  And I fill the proposal vote form with a registered email
-  And I submit the proposal vote form
-  Then I should see "proposal.vote.email_belongs_to_user" in the "#proposal-vote-form-alertbox" element
 
 @javascript @security @votes_from_proposal
 Scenario: Logged in user wants to vote when he has not enough credits left

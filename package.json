@@ -49,7 +49,7 @@
       "php -d memory_limit=-1 bin/phpstan analyse -l 2 -c phpstan.neon"
     ],
     "*.py": [
-      "pycodestyle --ignore=E501",
+      "pycodestyle --ignore=E501,W605",
       "git add"
     ],
     "*.twig": [

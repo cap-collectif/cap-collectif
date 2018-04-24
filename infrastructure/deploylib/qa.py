@@ -21,7 +21,7 @@ def check_dependencies():
 def check_codestyle():
     "Check code style"
     env.compose_run('yarn run checkcs', 'qarunner', '.', no_deps=True)
-    env.compose_run('pycodestyle infrastructure/deploylib --ignore=E501', 'qarunner', '.', no_deps=True)
+    env.compose_run('pycodestyle infrastructure/deploylib --ignore=E501,W605', 'qarunner', '.', no_deps=True)
     env.service_command('php bin/console lint:twig app src', 'application', env.www_app)
     env.compose_run('php-cs-fixer fix --config=.php_cs -v --dry-run --stop-on-violation', 'qarunner', '.', no_deps=True)
 
@@ -31,7 +31,7 @@ def lint():
     "Lint all files"
     env.compose_run('yarn run lint', 'qarunner', '.', no_deps=True)
     env.compose_run('php-cs-fixer fix --config=.php_cs -v || echo true', 'qarunner', '.', no_deps=True)
-    env.compose_run('pycodestyle infrastructure/deploylib --ignore=E501', 'qarunner', '.', no_deps=True)
+    env.compose_run('pycodestyle infrastructure/deploylib --ignore=E501,W605', 'qarunner', '.', no_deps=True)
 
 
 @task(environments=['local', 'ci'])
