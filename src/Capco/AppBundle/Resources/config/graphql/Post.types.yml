@@ -7,7 +7,7 @@ Post:
             title:
               type: "String!"
             relatedContent:
-              type: "[PostRelatedContent]"
+              type: "[PostRelatedContent!]!"
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostRelatedContentResolver", [value])'
             createdAt:
               type: "DateTime!"
