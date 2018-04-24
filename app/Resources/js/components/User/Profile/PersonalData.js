@@ -39,10 +39,16 @@ type Props = FormProps &
 
 const formName = 'profilePersonalData';
 
-const hasAddressData = (user: PersonalData_user) => {
+const hasAddressData = (user: PersonalData_user, value: ?Object) => {
   if (!user.address && !user.zipCode && !user.city) {
     return false;
   }
+  if (value) {
+    if (!value.address && !value.zipCode && !value.city) {
+      return false;
+    }
+  }
+
 
   return true;
 };
@@ -168,8 +174,9 @@ export class PersonalData extends Component<Props, PersonalDataState> {
 
     return parseInt(year, 10);
   }
+
   setDate() {
-    if(!this.state.year || this.state.month || this.state.day){
+    if (!this.state.year || this.state.month || this.state.day) {
       return;
     }
     const month = parseInt(this.state.month, 10) + 1;
@@ -182,6 +189,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
       )
     );
   }
+
   deleteField(e: Event): void {
     // $FlowFixMe
     const target = e.currentTarget.target;
@@ -196,7 +204,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
     this.props.dispatch(change(formName, target, null));
   }
 
-  hasData(user: PersonalData_user): boolean {
+  hasData(user: PersonalData_user, formValue: ?Object): boolean {
     if (
       !user.firstname &&
       !user.lastname &&
@@ -207,6 +215,20 @@ export class PersonalData extends Component<Props, PersonalDataState> {
       !user.zipCode &&
       !user.city &&
       !user.gender
+    ) {
+      return false;
+    }
+
+    if (formValue &&
+      !formValue.firstname &&
+      !formValue.lastname &&
+      !formValue.dateOfBirth &&
+      !formValue.phone &&
+      !formValue.address &&
+      !formValue.address2 &&
+      !formValue.zipCode &&
+      !formValue.city &&
+      !formValue.gender
     ) {
       return false;
     }
@@ -228,7 +250,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
     } = this.props;
     return (
       <div id="personal-data">
-        {!this.hasData(user) && (
+        {!this.hasData(user, hasValue) && (
           <Alert bsStyle="info">
             <span className="cap-information col-sm-1 col-md-1"/>
             <FormattedMessage
@@ -237,7 +259,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
             />
           </Alert>
         )}
-        {this.hasData(user) && (
+        {this.hasData(user, hasValue) && (
           <Alert bsStyle="info" id="project-participation-collected-data">
             <span className="cap-information col-sm-1 col-md-1"/>
             <FormattedMessage
@@ -250,263 +272,266 @@ export class PersonalData extends Component<Props, PersonalDataState> {
           <h2>
             <FormattedMessage id="personal-data"/>
           </h2>
-          {!this.hasData(user) && (
+          {!this.hasData(user, hasValue) && (
             <div className="personal_data_field">
               <Well>
                 <FormattedMessage id="no-data"/>
               </Well>
             </div>
           )}
-          {this.hasData(user) && (
+          {this.hasData(user, null) && (
             <div>
               <form onSubmit={handleSubmit} className="form-horizontal">
-                {hasValue.firstname && (
-                  <div className="personal_data_field">
-                    <label className="col-sm-3 control-label">
-                      <FormattedMessage id="form.label_firstname"/>
-                    </label>
-                    <div>
-                      <Field
-                        name="firstname"
-                        component={component}
-                        type="text"
-                        id="personal-data-form-firstname"
-                        divClassName="col-sm-5"
-                      />
-                    </div>
-                    <div className="col-sm-2">
-                      <a className="personal-data-delete-field" onClick={(e) => {
-                        this.deleteField(e);
-                      }} target="firstname"
-                         id="personal-data-firstname">
-                        <i className="icon cap-ios-close"></i>
-                      </a>
-                    </div>
-                  </div>
-                )}
-                {hasValue.lastname && (
-                  <div className="personal_data_field">
-                    <label className="col-sm-3 control-label">
-                      <FormattedMessage id="form.label_lastname"/>
-                    </label>
-                    <div>
-                      <Field
-                        name="lastname"
-                        component={component}
-                        type="text"
-                        id="personal-data-form-lastname"
-                        divClassName="col-sm-7"
-                      />
-                    </div>
-                    <div className="col-sm-2">
-                      <a className="personal-data-delete-field" onClick={(e) => {
-                        this.deleteField(e);
-                      }} target="lastname"
-                         id="personal-data-lastname">
-                        <i className="icon cap-ios-close"></i>
-                      </a>
-                    </div>
-                  </div>
-
-                )}
-                {hasValue.gender && (
-                  <div className="personal_data_field">
-                    <label className="col-sm-3 control-label">
-                      <FormattedMessage id="form.label_gender"/>
-                    </label>
-                    <div>
-                      <Field
-                        name="gender"
-                        component={component}
-                        type="select"
-                        id="personal-data-form-gender"
-                        divClassName="col-sm-7"
-                      >
-                        <option value="MALE">
-                          <FormattedMessage id="gender.male"/>
-                        </option>
-                        <option value="FEMALE">
-                          <FormattedMessage id="gender.female"/>
-                        </option>
-                        <option value="OTHER">
-                          <FormattedMessage id="gender.other"/>
-                        </option>
-                      </Field>
-                    </div>
-                    <div className="col-sm-2">
-                      <a className="personal-data-delete-field" onClick={(e) => {
-                        this.deleteField(e);
-                      }} target="gender"
-                         id="personal-data-gender">
-                        <i className="icon cap-ios-close"></i>
-                      </a>
-                    </div>
-                  </div>
-                )}
-                {hasValue.dateOfBirth && (
-                  <div className="personal_data_field">
-                    <label className="col-sm-3 control-label">
-                      <FormattedMessage id="form.label_date_of_birth"/>
-                    </label>
-                    <div className="col-sm-8" id="personal-data-date-of-birth">
-                      <Col sm={3} md={3} id="personal-data-date-of-birth-day">
-                        <DayPicker
-                          defaultValue={'Jour'}
-                          year={this.state.year}
-                          month={this.state.month}
-                          value={this.state.day}
-                          onChange={day => {
-                            this.state.day = day;
-                            this.setDate();
-                            this.setState({day});
-                          }}
-                          id={'day'}
-                          name={'day'}
-                          classes={'form-control'}
-                          optionClasses={'option classes'}
-                        />
-                      </Col>
-                      <Col sm={3} md={3}>
-                        <MonthPicker
-                          defaultValue={'Mois'}
-                          year={this.state.year}
-                          value={this.state.month}
-                          onChange={month => {
-                            this.state.month = month;
-                            this.setDate();
-                            this.setState({month});
-                          }}
-                          locale={locale.substr(3, 5)}
-                          id={'month'}
-                          name={'month'}
-                          classes={'form-control'}
-                          optionClasses={'option classes'}
-                        />
-                      </Col>
-                      <Col sm={3} md={3}>
-                        <YearPicker
-                          defaultValue={'Année'}
-                          value={this.state.year}
-                          onChange={year => {
-                            this.state.year = year;
-                            this.setDate();
-                            this.setState({year});
-                          }}
-                          id={'year'}
-                          name={'year'}
-                          classes={'form-control'}
-                          optionClasses={'option classes'}
-                        />
-                      </Col>
-                      <div className="col-sm-2">
-                        <a className="personal-data-delete-field" onClick={(e) => {
-                          this.deleteField(e);
-                        }} target="dateOfBirth"
-                           id="personal-data-dateOfBirth">
-                          <i className="icon cap-ios-close"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                )}
-                {hasAddressData(user) && (
-                  <div className="personal_data_field">
-                    <div className="col-sm-2" style={{float: 'right'}}>
-                      <a className="personal-data-delete-field" onClick={(e) => {
-                        this.deleteField(e);
-                      }} target="address-address2-city-zipCode"
-                         id="personal-data-address-address2-city-zipCode">
-                        <i className="icon cap-ios-close"></i>
-                      </a>
-                    </div>
-                    {hasValue.address && (
-                      <div className="personal-data-address">
+                {this.hasData(user, hasValue) && (
+                  <div>
+                    {hasValue.firstname && (
+                      <div className="personal_data_field">
                         <label className="col-sm-3 control-label">
-                          <FormattedMessage id="form.label_address"/>
+                          <FormattedMessage id="form.label_firstname"/>
                         </label>
                         <div>
                           <Field
-                            name="address"
+                            name="firstname"
                             component={component}
                             type="text"
-                            id="personal-data-form-address"
-                            divClassName="col-sm-7"
+                            id="personal-data-form-firstname"
+                            divClassName="col-sm-5"
                           />
+                        </div>
+                        <div className="col-sm-2">
+                          <a className="personal-data-delete-field" onClick={(e) => {
+                            this.deleteField(e);
+                          }} target="firstname"
+                             id="personal-data-firstname">
+                            <i className="icon cap-ios-close"></i>
+                          </a>
                         </div>
                       </div>
                     )}
-                    {hasValue.address2 && (
-                      <div className="personal-data-address">
+                    {hasValue.lastname && (
+                      <div className="personal_data_field">
                         <label className="col-sm-3 control-label">
-                          <FormattedMessage id="form.label_address2"/>
+                          <FormattedMessage id="form.label_lastname"/>
                         </label>
                         <div>
                           <Field
-                            name="address2"
+                            name="lastname"
                             component={component}
                             type="text"
-                            id="personal-data-form-address2"
+                            id="personal-data-form-lastname"
                             divClassName="col-sm-7"
                           />
                         </div>
+                        <div className="col-sm-2">
+                          <a className="personal-data-delete-field" onClick={(e) => {
+                            this.deleteField(e);
+                          }} target="lastname"
+                             id="personal-data-lastname">
+                            <i className="icon cap-ios-close"></i>
+                          </a>
+                        </div>
                       </div>
                     )}
-                    {hasValue.city && (
-                      <div className="personal-data-address">
+                    {hasValue.gender && (
+                      <div className="personal_data_field">
                         <label className="col-sm-3 control-label">
-                          <FormattedMessage id="form.label_city"/>
+                          <FormattedMessage id="form.label_gender"/>
                         </label>
                         <div>
                           <Field
-                            name="city"
+                            name="gender"
                             component={component}
-                            type="text"
-                            id="personal-data-form-city"
+                            type="select"
+                            id="personal-data-form-gender"
                             divClassName="col-sm-7"
-                          />
+                          >
+                            <option value="MALE">
+                              <FormattedMessage id="gender.male"/>
+                            </option>
+                            <option value="FEMALE">
+                              <FormattedMessage id="gender.female"/>
+                            </option>
+                            <option value="OTHER">
+                              <FormattedMessage id="gender.other"/>
+                            </option>
+                          </Field>
+                        </div>
+                        <div className="col-sm-2">
+                          <a className="personal-data-delete-field" onClick={(e) => {
+                            this.deleteField(e);
+                          }} target="gender"
+                             id="personal-data-gender">
+                            <i className="icon cap-ios-close"></i>
+                          </a>
                         </div>
                       </div>
                     )}
-                    {hasValue.zipCode && (
-                      <div className="personal-data-address">
+                    {hasValue.dateOfBirth && (
+                      <div className="personal_data_field">
                         <label className="col-sm-3 control-label">
-                          <FormattedMessage id="form.label_zip_code"/>
+                          <FormattedMessage id="form.label_date_of_birth"/>
+                        </label>
+                        <div className="col-sm-8" id="personal-data-date-of-birth">
+                          <Col sm={3} md={3} id="personal-data-date-of-birth-day">
+                            <DayPicker
+                              defaultValue={'Jour'}
+                              year={this.state.year}
+                              month={this.state.month}
+                              value={this.state.day}
+                              onChange={day => {
+                                this.state.day = day;
+                                this.setDate();
+                                this.setState({day});
+                              }}
+                              id={'day'}
+                              name={'day'}
+                              classes={'form-control'}
+                              optionClasses={'option classes'}
+                            />
+                          </Col>
+                          <Col sm={3} md={3}>
+                            <MonthPicker
+                              defaultValue={'Mois'}
+                              year={this.state.year}
+                              value={this.state.month}
+                              onChange={month => {
+                                this.state.month = month;
+                                this.setDate();
+                                this.setState({month});
+                              }}
+                              locale={locale.substr(3, 5)}
+                              id={'month'}
+                              name={'month'}
+                              classes={'form-control'}
+                              optionClasses={'option classes'}
+                            />
+                          </Col>
+                          <Col sm={3} md={3}>
+                            <YearPicker
+                              defaultValue={'Année'}
+                              value={this.state.year}
+                              onChange={year => {
+                                this.state.year = year;
+                                this.setDate();
+                                this.setState({year});
+                              }}
+                              id={'year'}
+                              name={'year'}
+                              classes={'form-control'}
+                              optionClasses={'option classes'}
+                            />
+                          </Col>
+                          <div className="col-sm-2">
+                            <a className="personal-data-delete-field" onClick={(e) => {
+                              this.deleteField(e);
+                            }} target="dateOfBirth"
+                               id="personal-data-dateOfBirth">
+                              <i className="icon cap-ios-close"></i>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    {hasAddressData(user, hasValue) && (
+                      <div className="personal_data_field">
+                        <div className="col-sm-2" style={{float: 'right'}}>
+                          <a className="personal-data-delete-field" onClick={(e) => {
+                            this.deleteField(e);
+                          }} target="address-address2-city-zipCode"
+                             id="personal-data-address-address2-city-zipCode">
+                            <i className="icon cap-ios-close"></i>
+                          </a>
+                        </div>
+                        {hasValue.address && (
+                          <div className="personal-data-address">
+                            <label className="col-sm-3 control-label">
+                              <FormattedMessage id="form.label_address"/>
+                            </label>
+                            <div>
+                              <Field
+                                name="address"
+                                component={component}
+                                type="text"
+                                id="personal-data-form-address"
+                                divClassName="col-sm-7"
+                              />
+                            </div>
+                          </div>
+                        )}
+                        {hasValue.address2 && (
+                          <div className="personal-data-address">
+                            <label className="col-sm-3 control-label">
+                              <FormattedMessage id="form.label_address2"/>
+                            </label>
+                            <div>
+                              <Field
+                                name="address2"
+                                component={component}
+                                type="text"
+                                id="personal-data-form-address2"
+                                divClassName="col-sm-7"
+                              />
+                            </div>
+                          </div>
+                        )}
+                        {hasValue.city && (
+                          <div className="personal-data-address">
+                            <label className="col-sm-3 control-label">
+                              <FormattedMessage id="form.label_city"/>
+                            </label>
+                            <div>
+                              <Field
+                                name="city"
+                                component={component}
+                                type="text"
+                                id="personal-data-form-city"
+                                divClassName="col-sm-7"
+                              />
+                            </div>
+                          </div>
+                        )}
+                        {hasValue.zipCode && (
+                          <div className="personal-data-address">
+                            <label className="col-sm-3 control-label">
+                              <FormattedMessage id="form.label_zip_code"/>
+                            </label>
+                            <div>
+                              <Field
+                                name="zipCode"
+                                component={component}
+                                type="text"
+                                id="personal-data-form-zip-code"
+                                divClassName="col-sm-7"
+                              />
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                    {hasValue.phone && (
+                      <div className="personal_data_field">
+                        <label className="col-sm-3 control-label">
+                          <FormattedMessage id="form.label_phone"/>
                         </label>
                         <div>
                           <Field
-                            name="zipCode"
+                            name="phone"
                             component={component}
                             type="text"
-                            id="personal-data-form-zip-code"
+                            id="personal-data-form-phone"
                             divClassName="col-sm-7"
                           />
                         </div>
+                        <div className="col-sm-2">
+                          <a className="personal-data-delete-field" onClick={(e) => {
+                            this.deleteField(e);
+                          }} target="phone"
+                             id="personal-data-phone">
+                            <i className="icon cap-ios-close"></i>
+                          </a>
+                        </div>
                       </div>
                     )}
-                  </div>
-                )}
-                {hasValue.phone && (
-                  <div className="personal_data_field">
-                    <label className="col-sm-3 control-label">
-                      <FormattedMessage id="form.label_phone"/>
-                    </label>
-                    <div>
-                      <Field
-                        name="phone"
-                        component={component}
-                        type="text"
-                        id="personal-data-form-phone"
-                        divClassName="col-sm-7"
-                      />
-                    </div>
-                    <div className="col-sm-2">
-                      <a className="personal-data-delete-field" onClick={(e) => {
-                        this.deleteField(e);
-                      }} target="phone"
-                         id="personal-data-phone">
-                        <i className="icon cap-ios-close"></i>
-                      </a>
-                    </div>
                   </div>
                 )}
                 <div className="personal_data_field">
@@ -548,15 +573,15 @@ const form = reduxForm({
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) => ({
   initialValues: {
-    firstname: props.user.firstname ? props.user.firstname : '',
-    lastname: props.user.lastname ? props.user.lastname : '',
-    address: props.user.address ? props.user.address : '',
-    address2: props.user.address2 ? props.user.address2 : '',
-    city: props.user.city ? props.user.city : '',
-    zipCode: props.user.zipCode ? props.user.zipCode : '',
-    phone: props.user.phone ? props.user.phone : '',
-    gender: props.user.gender ? props.user.gender : '',
-    dateOfBirth: props.user.dateOfBirth ? props.user.dateOfBirth : '',
+    firstname: props.user.firstname ? props.user.firstname : null,
+    lastname: props.user.lastname ? props.user.lastname : null,
+    address: props.user.address ? props.user.address : null,
+    address2: props.user.address2 ? props.user.address2 : null,
+    city: props.user.city ? props.user.city : null,
+    zipCode: props.user.zipCode ? props.user.zipCode : null,
+    phone: props.user.phone ? props.user.phone : null,
+    gender: props.user.gender ? props.user.gender : null,
+    dateOfBirth: props.user.dateOfBirth ? props.user.dateOfBirth : null,
   },
   hasValue: selector(state, 'firstname', 'lastname', 'gender', 'dateOfBirth', 'address', 'address2', 'city', 'zipCode', 'phone')
 });
