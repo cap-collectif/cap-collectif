@@ -11,7 +11,15 @@ import {
 } from 'react-bootstrap';
 import {connect, type MapStateToProps} from 'react-redux';
 import {YearPicker, MonthPicker, DayPicker} from 'react-dropdown-date';
-import {reduxForm, type FormProps, Field, SubmissionError} from 'redux-form';
+import {
+  reduxForm,
+  type FormProps,
+  Field,
+  SubmissionError,
+  unregisterField,
+  change,
+  formValueSelector
+} from 'redux-form';
 import {FormattedMessage, injectIntl, type IntlShape} from 'react-intl';
 import type PersonalData_user from './__generated__/PersonalData_user.graphql';
 import AlertForm from '../../Alert/AlertForm';
@@ -26,6 +34,7 @@ type Props = FormProps &
   personalDataForm: PersonalData_user,
   intl: IntlShape,
   initialValues: Object,
+  hasValue: Object,
 };
 
 const formName = 'profilePersonalData';
@@ -101,7 +110,6 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
     ...values,
     userId: props.user.id
   };
-  console.log(input);
 
   return UpdateProfilePersonalDataMutation.commit({input})
     .then(response => {
@@ -160,6 +168,33 @@ export class PersonalData extends Component<Props, PersonalDataState> {
 
     return parseInt(year, 10);
   }
+  setDate() {
+    if(!this.state.year || this.state.month || this.state.day){
+      return;
+    }
+    const month = parseInt(this.state.month, 10) + 1;
+    this.props.dispatch(
+      change(
+        formName,
+        'dateOfBirth',
+        // $FlowFixMe
+        `${this.state.year}-${month}-${this.state.day}`
+      )
+    );
+  }
+  deleteField(e: Event): void {
+    // $FlowFixMe
+    const target = e.currentTarget.target;
+    if (target.split('-').length > 1) {
+      target.split('-').forEach(index => {
+        this.props.dispatch(unregisterField(formName, index, false));
+        this.props.dispatch(change(formName, index, null));
+      });
+      return;
+    }
+    this.props.dispatch(unregisterField(formName, target, false));
+    this.props.dispatch(change(formName, target, null));
+  }
 
   hasData(user: PersonalData_user): boolean {
     if (
@@ -189,6 +224,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
       handleSubmit,
       submitting,
       error,
+      hasValue
     } = this.props;
     return (
       <div id="personal-data">
@@ -224,7 +260,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
           {this.hasData(user) && (
             <div>
               <form onSubmit={handleSubmit} className="form-horizontal">
-                {user.firstname && (
+                {hasValue.firstname && (
                   <div className="personal_data_field">
                     <label className="col-sm-3 control-label">
                       <FormattedMessage id="form.label_firstname"/>
@@ -235,12 +271,20 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                         component={component}
                         type="text"
                         id="personal-data-form-firstname"
-                        divClassName="col-sm-7"
+                        divClassName="col-sm-5"
                       />
+                    </div>
+                    <div className="col-sm-2">
+                      <a className="personal-data-delete-field" onClick={(e) => {
+                        this.deleteField(e);
+                      }} target="firstname"
+                         id="personal-data-firstname">
+                        <i className="icon cap-ios-close"></i>
+                      </a>
                     </div>
                   </div>
                 )}
-                {user.lastname && (
+                {hasValue.lastname && (
                   <div className="personal_data_field">
                     <label className="col-sm-3 control-label">
                       <FormattedMessage id="form.label_lastname"/>
@@ -254,9 +298,18 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                         divClassName="col-sm-7"
                       />
                     </div>
+                    <div className="col-sm-2">
+                      <a className="personal-data-delete-field" onClick={(e) => {
+                        this.deleteField(e);
+                      }} target="lastname"
+                         id="personal-data-lastname">
+                        <i className="icon cap-ios-close"></i>
+                      </a>
+                    </div>
                   </div>
+
                 )}
-                {user.gender && (
+                {hasValue.gender && (
                   <div className="personal_data_field">
                     <label className="col-sm-3 control-label">
                       <FormattedMessage id="form.label_gender"/>
@@ -280,14 +333,22 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                         </option>
                       </Field>
                     </div>
+                    <div className="col-sm-2">
+                      <a className="personal-data-delete-field" onClick={(e) => {
+                        this.deleteField(e);
+                      }} target="gender"
+                         id="personal-data-gender">
+                        <i className="icon cap-ios-close"></i>
+                      </a>
+                    </div>
                   </div>
                 )}
-                {user.dateOfBirth && (
+                {hasValue.dateOfBirth && (
                   <div className="personal_data_field">
                     <label className="col-sm-3 control-label">
                       <FormattedMessage id="form.label_date_of_birth"/>
                     </label>
-                    <Col sm={8} id="personal-data-date-of-birth">
+                    <div className="col-sm-8" id="personal-data-date-of-birth">
                       <Col sm={3} md={3} id="personal-data-date-of-birth-day">
                         <DayPicker
                           defaultValue={'Jour'}
@@ -295,6 +356,8 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           month={this.state.month}
                           value={this.state.day}
                           onChange={day => {
+                            this.state.day = day;
+                            this.setDate();
                             this.setState({day});
                           }}
                           id={'day'}
@@ -309,6 +372,8 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           year={this.state.year}
                           value={this.state.month}
                           onChange={month => {
+                            this.state.month = month;
+                            this.setDate();
                             this.setState({month});
                           }}
                           locale={locale.substr(3, 5)}
@@ -323,6 +388,8 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           defaultValue={'Année'}
                           value={this.state.year}
                           onChange={year => {
+                            this.state.year = year;
+                            this.setDate();
                             this.setState({year});
                           }}
                           id={'year'}
@@ -331,12 +398,28 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           optionClasses={'option classes'}
                         />
                       </Col>
-                    </Col>
+                      <div className="col-sm-2">
+                        <a className="personal-data-delete-field" onClick={(e) => {
+                          this.deleteField(e);
+                        }} target="dateOfBirth"
+                           id="personal-data-dateOfBirth">
+                          <i className="icon cap-ios-close"></i>
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 )}
                 {hasAddressData(user) && (
                   <div className="personal_data_field">
-                    {user.address && (
+                    <div className="col-sm-2" style={{float: 'right'}}>
+                      <a className="personal-data-delete-field" onClick={(e) => {
+                        this.deleteField(e);
+                      }} target="address-address2-city-zipCode"
+                         id="personal-data-address-address2-city-zipCode">
+                        <i className="icon cap-ios-close"></i>
+                      </a>
+                    </div>
+                    {hasValue.address && (
                       <div className="personal-data-address">
                         <label className="col-sm-3 control-label">
                           <FormattedMessage id="form.label_address"/>
@@ -352,7 +435,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                         </div>
                       </div>
                     )}
-                    {user.address2 && (
+                    {hasValue.address2 && (
                       <div className="personal-data-address">
                         <label className="col-sm-3 control-label">
                           <FormattedMessage id="form.label_address2"/>
@@ -368,7 +451,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                         </div>
                       </div>
                     )}
-                    {user.city && (
+                    {hasValue.city && (
                       <div className="personal-data-address">
                         <label className="col-sm-3 control-label">
                           <FormattedMessage id="form.label_city"/>
@@ -384,7 +467,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                         </div>
                       </div>
                     )}
-                    {user.zipCode && (
+                    {hasValue.zipCode && (
                       <div className="personal-data-address">
                         <label className="col-sm-3 control-label">
                           <FormattedMessage id="form.label_zip_code"/>
@@ -402,7 +485,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                     )}
                   </div>
                 )}
-                {user.phone && (
+                {hasValue.phone && (
                   <div className="personal_data_field">
                     <label className="col-sm-3 control-label">
                       <FormattedMessage id="form.label_phone"/>
@@ -415,6 +498,14 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                         id="personal-data-form-phone"
                         divClassName="col-sm-7"
                       />
+                    </div>
+                    <div className="col-sm-2">
+                      <a className="personal-data-delete-field" onClick={(e) => {
+                        this.deleteField(e);
+                      }} target="phone"
+                         id="personal-data-phone">
+                        <i className="icon cap-ios-close"></i>
+                      </a>
                     </div>
                   </div>
                 )}
@@ -446,6 +537,8 @@ export class PersonalData extends Component<Props, PersonalDataState> {
   }
 }
 
+const selector = formValueSelector(formName);
+
 const form = reduxForm({
   onSubmit,
   validate,
@@ -463,7 +556,9 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) =
     zipCode: props.user.zipCode ? props.user.zipCode : '',
     phone: props.user.phone ? props.user.phone : '',
     gender: props.user.gender ? props.user.gender : '',
+    dateOfBirth: props.user.dateOfBirth ? props.user.dateOfBirth : '',
   },
+  hasValue: selector(state, 'firstname', 'lastname', 'gender', 'dateOfBirth', 'address', 'address2', 'city', 'zipCode', 'phone')
 });
 
 const container = connect(mapStateToProps)(injectIntl(form));

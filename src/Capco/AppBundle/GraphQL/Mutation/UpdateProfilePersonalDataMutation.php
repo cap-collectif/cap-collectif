@@ -35,10 +35,16 @@ class UpdateProfilePersonalDataMutation
             throw new UserError('Can\'t update !');
         }
         unset($arguments['userId']);
+//        if($arguments['dateOfBirth'] && !$arguments['dateOfBirth'] instanceof \DateTime){
+//            $arguments['dateOfBirth'] = new \DateTime($arguments['dateOfBirth']);
+//        }
 
         $form = $this->formFactory->create(ProfilePersonalDataFormType::class, $user, ['csrf_protection' => false]);
-
-        $form->submit($arguments, false);
+        try {
+            $form->submit($arguments, false);
+        } catch (\LogicException $e) {
+            $this->logger->error(__METHOD__.' : '.$e->getMessage());
+        }
 
         if (!$form->isValid()) {
             $this->logger->error(__METHOD__.' : '.(string)$form->getErrors(true, false));

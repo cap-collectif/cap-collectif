@@ -9,8 +9,10 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class ProfilePersonalDataFormType extends AbstractType
 {
@@ -82,11 +84,11 @@ class ProfilePersonalDataFormType extends AbstractType
             )
             ->add(
                 'dateOfBirth',
-                BirthdayType::class,
+                DateTimeType::class,
                 [
+                    'widget' => 'single_text',
+                    'format' => 'Y-MM-dd',
                     'required' => false,
-                    'label' => 'user.profile.edit.birthday',
-                    'translation_domain' => 'CapcoAppBundle',
                 ]
             )
             ->add(

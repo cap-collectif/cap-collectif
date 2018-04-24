@@ -30,6 +30,6 @@ UpdateProfilePersonalDataInput:
             zipCode:
                 type: "String"
                 description: "Your zipcode"
-            dateOthBirth:
+            dateOfBirth:
                 type: "String"
                 description: "Your date of birth"
