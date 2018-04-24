@@ -40,7 +40,9 @@ class ProposalEditModal extends React.Component<Props> {
               proposal: node(id: $proposalId) {
                 ...ProposalForm_proposal
                 ...ProposalDraftAlert_proposal
-                publicationStatus
+                ... on Proposal {
+                  publicationStatus
+                }
               }
             }
           `}

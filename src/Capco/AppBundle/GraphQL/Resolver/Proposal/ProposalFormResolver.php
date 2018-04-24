@@ -4,9 +4,11 @@ namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Utils\Text;
+use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\Collection;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
@@ -53,9 +55,22 @@ class ProposalFormResolver implements ContainerAwareInterface
     {
         $repo = $this->container->get('capco.proposal.repository');
         $totalCount = 0;
+        $filters = [];
 
-        $paginator = new Paginator(function (int $offset, int $limit) use ($repo,$form, $args, $user, $request, &$totalCount) {
-            $filters = [];
+        if ($form->getStep()->isPrivate()) {
+            if (!$user instanceof User) {
+                $connection = ConnectionBuilder::connectionFromArray([], $args);
+                $connection->totalCount = 0;
+                $connection->{'fusionCount'} = 0;
+
+                return $connection;
+            }
+            if (!$user->isAdmin()) {
+                // When the step is private, only an author or an admin can see proposals
+                $filters['author'] = $user->getId();
+            }
+        }
+        $paginator = new Paginator(function (int $offset, int $limit) use ($repo, $form, $args, $user, $request, &$totalCount, $filters) {
             if ($args->offsetExists('district')) {
                 $filters['districts'] = $args->offsetGet('district');
             }
@@ -75,6 +90,8 @@ class ProposalFormResolver implements ContainerAwareInterface
                     $direction = $args->offsetGet('orderBy')['direction'];
                     $field = $args->offsetGet('orderBy')['field'];
 
+                    $totalCount = $user instanceof User ? $repo->countProposalsByFormAndEvaluer($form, $user) : $totalCount;
+
                     return $repo->getProposalsByFormAndEvaluer($form, $user, $offset, $limit, $field, $direction)->getIterator()->getArrayCopy();
                 }
             } else {
@@ -86,7 +103,7 @@ class ProposalFormResolver implements ContainerAwareInterface
                 $filters['proposalForm'] = $form->getId();
                 $filters['collectStep'] = $form->getStep()->getType();
 
-                $seed = method_exists($user, 'getId') ? $user->getId() : $request->getClientIp();
+                $seed = $user instanceof User ? $user->getId() : $request->getClientIp();
 
                 $results = $this->container->get('capco.search.proposal_search')->searchProposals(
                     $offset,
@@ -103,11 +120,11 @@ class ProposalFormResolver implements ContainerAwareInterface
             }
         });
 
-        $totalCount = 'anon.' !== $user ? $repo->countProposalsByFormAndEvaluer($form, $user) : $totalCount;
-
         $connection = $paginator->auto($args, $totalCount);
         $connection->totalCount = $totalCount;
-        $connection->fusionCount = 0;
+
+        $countFusions = $repo->countFusionsByProposalForm($form);
+        $connection->{'fusionCount'} = $countFusions;
 
         return $connection;
     }
