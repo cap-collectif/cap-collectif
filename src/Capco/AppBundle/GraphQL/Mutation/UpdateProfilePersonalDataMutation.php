@@ -35,9 +35,6 @@ class UpdateProfilePersonalDataMutation
             throw new UserError('Can\'t update !');
         }
         unset($arguments['userId']);
-//        if($arguments['dateOfBirth'] && !$arguments['dateOfBirth'] instanceof \DateTime){
-//            $arguments['dateOfBirth'] = new \DateTime($arguments['dateOfBirth']);
-//        }
 
         $form = $this->formFactory->create(ProfilePersonalDataFormType::class, $user, ['csrf_protection' => false]);
         try {
