@@ -2037,7 +2037,7 @@ input UpdateProfilePersonalDataInput {
   zipCode: String
 
   # Your date of birth
-  dateOthBirth: String
+  dateOfBirth: String
   clientMutationId: String
 }
 

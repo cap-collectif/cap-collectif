@@ -150,7 +150,7 @@
     "react-datetime": "^2.9.0",
     "react-dnd": "^2.4.0",
     "react-dnd-html5-backend": "^2.4.1",
-    "react-dropdown-date": "https://github.com/cap-collectif/react-dropdown-date/tarball/8b2c37cc0c8d09016360efedf53c6f1dd3ba761d",
+    "react-dropdown-date": "https://github.com/cap-collectif/react-dropdown-date/tarball/8b2c37c",
     "react-dropzone": "^3.3.4",
     "react-google-charts": "^1.0.2",
     "react-google-recaptcha": "^0.9.6",
