@@ -26,30 +26,30 @@ type Props = {
   features: FeatureToggles,
 };
 
-export class ProposalPageTabs extends React.Component<Props> {
-  getHashKey(hash: string) {
-    if (hash.indexOf('content') !== -1) {
-      return 'content';
-    }
-    if (hash.indexOf('evaluation') !== -1) {
-      return 'evaluation';
-    }
-    if (hash.indexOf('comments') !== -1) {
-      return 'comments';
-    }
-    if (hash.indexOf('votes') !== -1) {
-      return 'votes';
-    }
-    if (hash.indexOf('followers') !== -1) {
-      return 'followers';
-    }
+const getHashKey = (hash: string) => {
+  if (hash.indexOf('content') !== -1) {
     return 'content';
   }
+  if (hash.indexOf('evaluation') !== -1) {
+    return 'evaluation';
+  }
+  if (hash.indexOf('comments') !== -1) {
+    return 'comments';
+  }
+  if (hash.indexOf('votes') !== -1) {
+    return 'votes';
+  }
+  if (hash.indexOf('followers') !== -1) {
+    return 'followers';
+  }
+  return 'content';
+};
 
+export class ProposalPageTabs extends React.Component<Props> {
   getDefaultKey() {
     const hash = typeof window !== 'undefined' ? window.location.hash : null;
     if (hash) {
-      return this.getHashKey(hash);
+      return getHashKey(hash);
     }
     return 'content';
   }
@@ -204,14 +204,8 @@ export default createFragmentContainer(
       }
       currentVotableStep {
         id
-        ... on CollectStep {
-          voteThreshold
-          voteType
-        }
-        ... on SelectionStep {
-          voteThreshold
-          voteType
-        }
+        voteThreshold
+        voteType
       }
       viewerCanSeeEvaluation
       followerConnection(first: $count, after: $cursor) {

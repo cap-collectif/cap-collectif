@@ -25,12 +25,8 @@ type Props = {
 export class ProposalPage extends React.Component<Props> {
   render() {
     const { proposal, steps, features, categories, form } = this.props;
-    // $FlowFixMe
     return (
       <div>
-        <ProposalDraftAlert proposal={proposal} />
-        <ProposalPageAlert proposal={proposal} />
-
         <QueryRenderer
           environment={environment}
           query={graphql`
@@ -41,6 +37,7 @@ export class ProposalPage extends React.Component<Props> {
               $isAuthenticated: Boolean!
             ) {
               proposal: node(id: $proposalId) {
+                ...ProposalDraftAlert_proposal
                 ...ProposalPageTabs_proposal
                 ...ProposalPageHeader_proposal
               }
@@ -62,6 +59,8 @@ export class ProposalPage extends React.Component<Props> {
               if (props.proposal) {
                 return (
                   <div>
+                    <ProposalDraftAlert proposal={proposal} />
+                    <ProposalPageAlert proposal={proposal} />
                     <ProposalPageHeader
                       proposal={props.proposal}
                       isAuthenticated={this.props.isAuthenticated}

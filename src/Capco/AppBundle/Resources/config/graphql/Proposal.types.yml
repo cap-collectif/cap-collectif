@@ -18,7 +18,7 @@ Proposal:
             evaluers:
               type: "[Group!]!"
             currentVotableStep:
-              type: "Step"
+              type: "ProposalStep"
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalCurrentVotableStepResolver", [value])'
             viewerIsAnEvaluer:
               type: "Boolean!"
