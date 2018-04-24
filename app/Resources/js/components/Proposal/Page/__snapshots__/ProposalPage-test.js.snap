@@ -2,44 +2,6 @@
 
 exports[`<ProposalPage /> should render a proposal page 1`] = `
 <div>
-  <ProposalDraftAlert
-    proposal={
-      Object {
-        "commentsCount": 5,
-        "id": 41,
-        "referer": "http://capco.test",
-        "selections": Array [],
-        "viewerCanSeeEvaluation": true,
-        "votableStepId": "2",
-        "votesByStepId": Object {
-          "collectstep1": Array [],
-          "selectionstep1": Array [],
-        },
-        "votesCountByStepId": Object {
-          "2": 0,
-        },
-      }
-    }
-  />
-  <ProposalPageAlert
-    proposal={
-      Object {
-        "commentsCount": 5,
-        "id": 41,
-        "referer": "http://capco.test",
-        "selections": Array [],
-        "viewerCanSeeEvaluation": true,
-        "votableStepId": "2",
-        "votesByStepId": Object {
-          "collectstep1": Array [],
-          "selectionstep1": Array [],
-        },
-        "votesCountByStepId": Object {
-          "2": 0,
-        },
-      }
-    }
-  />
   <ReactRelayQueryRenderer
     environment={
       RelayModernEnvironment {
@@ -106,44 +68,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
 
 exports[`<ProposalPage /> should render a proposal page with evaluation tab 1`] = `
 <div>
-  <ProposalDraftAlert
-    proposal={
-      Object {
-        "commentsCount": 5,
-        "id": 41,
-        "referer": "http://capco.test",
-        "selections": Array [],
-        "viewerCanSeeEvaluation": true,
-        "votableStepId": "2",
-        "votesByStepId": Object {
-          "collectstep1": Array [],
-          "selectionstep1": Array [],
-        },
-        "votesCountByStepId": Object {
-          "2": 0,
-        },
-      }
-    }
-  />
-  <ProposalPageAlert
-    proposal={
-      Object {
-        "commentsCount": 5,
-        "id": 41,
-        "referer": "http://capco.test",
-        "selections": Array [],
-        "viewerCanSeeEvaluation": true,
-        "votableStepId": "2",
-        "votesByStepId": Object {
-          "collectstep1": Array [],
-          "selectionstep1": Array [],
-        },
-        "votesCountByStepId": Object {
-          "2": 0,
-        },
-      }
-    }
-  />
   <ReactRelayQueryRenderer
     environment={
       RelayModernEnvironment {
@@ -210,42 +134,6 @@ exports[`<ProposalPage /> should render a proposal page with evaluation tab 1`] 
 
 exports[`<ProposalPage /> should render a vote tab and a vote modal if votable step is specified 1`] = `
 <div>
-  <ProposalDraftAlert
-    proposal={
-      Object {
-        "id": 42,
-        "referer": "http://capco.test",
-        "selections": Array [],
-        "viewerCanSeeEvaluation": true,
-        "votableStepId": "2",
-        "votesByStepId": Object {
-          "collectstep1": Array [],
-          "selectionstep1": Array [],
-        },
-        "votesCountByStepId": Object {
-          "2": 5,
-        },
-      }
-    }
-  />
-  <ProposalPageAlert
-    proposal={
-      Object {
-        "id": 42,
-        "referer": "http://capco.test",
-        "selections": Array [],
-        "viewerCanSeeEvaluation": true,
-        "votableStepId": "2",
-        "votesByStepId": Object {
-          "collectstep1": Array [],
-          "selectionstep1": Array [],
-        },
-        "votesCountByStepId": Object {
-          "2": 5,
-        },
-      }
-    }
-  />
   <ReactRelayQueryRenderer
     environment={
       RelayModernEnvironment {

@@ -1213,7 +1213,7 @@ type Proposal implements Node {
   adminUrl: URI!
   progressSteps: [ProgressStep!]!
   evaluers: [Group!]!
-  currentVotableStep: Step
+  currentVotableStep: ProposalStep
   viewerIsAnEvaluer: Boolean!
   news(after: String, first: Int = 30, before: String, last: Int, orderBy: ProposalOrder = {field: CREATED_AT, direction: DESC}): NewsConnection!
   reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
@@ -1526,6 +1526,7 @@ interface ProposalStep {
   title: String!
   voteType: ProposalStepVoteType!
   votesHelpText: String
+  voteThreshold: Int
   open: Boolean!
   votesRanking: Boolean!
   show_url: String!

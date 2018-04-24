@@ -2,15 +2,17 @@
 import React from 'react';
 import { Alert } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
+import { graphql, createFragmentContainer } from 'react-relay';
+import type { ProposalDraftAlert_proposal } from './__generated__/ProposalDraftAlert_proposal.graphql';
 
 type Props = {
-  proposal: { isDraft: boolean },
+  proposal: ProposalDraftAlert_proposal,
 };
 
-export default class ProposalDraftAlert extends React.Component<Props> {
+export class ProposalDraftAlert extends React.Component<Props> {
   render() {
     const proposal = this.props.proposal;
-    if (proposal.isDraft) {
+    if (proposal.publicationStatus === 'DRAFT') {
       return (
         <Alert bsStyle="warning" style={{ marginBottom: '0', textAlign: 'center' }}>
           <strong>
@@ -27,3 +29,11 @@ export default class ProposalDraftAlert extends React.Component<Props> {
     return null;
   }
 }
+
+export default createFragmentContainer(ProposalDraftAlert, {
+  proposal: graphql`
+    fragment ProposalDraftAlert_proposal on Proposal {
+      publicationStatus
+    }
+  `,
+});
