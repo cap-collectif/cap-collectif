@@ -2122,7 +2122,8 @@ type User implements Node {
   commentVotesCount: Int!
   sourcesCount: Int!
   repliesCount: Int!
-
+  ideasCount: Int!
+  ideaVotesCount: Int!
   ideaCommentsCount: Int!
   postCommentsCount: Int!
   eventCommentsCount: Int!

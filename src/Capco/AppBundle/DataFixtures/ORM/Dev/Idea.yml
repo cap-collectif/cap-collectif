@@ -1,0 +1,101 @@
+Capco\AppBundle\Entity\Idea:
+  Idea1:
+    id: 1
+    title: ideaNotCommentable
+    body: |
+          <p><text(100)></p>
+          <h3>mon titre numéro 3</h3>
+          <p><text(500)></p>
+          <h3>mon titre numéro 2</h3>
+          <p><text(300)></p>
+    object: <p><text(300)></p>
+    Theme: '@theme1'
+    Author: '@user1'
+    isTrashed: false
+    media: '@MediaIdea1'
+    isCommentable: false
+
+  Idea2:
+    id: 2
+    title: ideaCommentable
+    body: |
+        <p><text(100)></p>
+        <h3>mon titre numéro 3</h3>
+        <p><text(500)></p>
+        <h3>mon titre numéro 2</h3>
+        <p><text(300)></p>
+    object: <p><text(300)></p>
+    Theme: '@theme2'
+    Author: '@user5'
+    isTrashed: false
+    media: '@MediaIdea2'
+
+  Idea3:
+    id: 3
+    title: Troisième idée
+    body: |
+        <p><text(100)></p>
+        <h2>Un beau titre</h2>
+        <p><text(500)></p>
+        <h3>mon titre</h3>
+        <p><text(300)></p>
+    object: <p><text(300)></p>
+    Theme: '@theme3'
+    Author: '@user3'
+    createdAt: <(new \DateTime('2016-08-21'))>
+    isTrashed: false
+
+  Idea4:
+    id: 4
+    title: Idée avec un titre très très long pour voir comment ça rend dans la preview
+    body: |
+          <p><text(100)></p>
+          <h2>Mon titre</h2>
+          <p><text(500)></p>
+          <h3>Un autre titre</h3>
+          <p><text(300)></p>
+    Theme: '@theme1'
+    Author: '@user5'
+    isTrashed: false
+
+  Idea{5..20}:
+    id: <current()>
+    title: <text(38)>
+    body: |
+          <p><text(100)></p>
+          <h2><text(10)></h2>
+          <p><text(500)></p>
+          <h3><text(10)></h3>
+          <p><text(300)></p>
+    object: <p><text(300)></p>
+    Theme: '@theme3'
+    Author: '@user*'
+    isTrashed: false
+
+  Idea21:
+    id: 21
+    title: Dernière idée
+    body: |
+          <p><text(100)></p>
+          <h2>Mon titre</h2>
+          <p><text(500)></p>
+          <h3>Un autre titre</h3>
+          <p><text(300)></p>
+    object: <p>Objet</p>
+    Theme: '@theme1'
+    Author: '@user5'
+    isTrashed: false
+
+  Idea22:
+    id: 22
+    title: Idée à la corbeille
+    body: |
+          <p><text(100)></p>
+          <h2>Mon titre</h2>
+          <p><text(500)></p>
+          <h3>Un autre titre</h3>
+          <p><text(300)></p>
+    object: <p>Objet</p>
+    Theme: '@theme1'
+    Author: '@user1'
+    isTrashed: true

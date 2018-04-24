@@ -23,6 +23,7 @@ sonata_admin:
                     - capco_admin.admin.opinion_version
                     - capco_admin.admin.argument
                     - capco_admin.admin.source
+                    - capco_admin.admin.idea
                     - capco_admin.admin.comment
             admin.group.content:
                 items:

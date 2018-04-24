@@ -48,6 +48,12 @@ services:
     tags:
       - { name: twig.extension }
 
+  capco.twig.idea_helper:
+    class: Capco\AppBundle\Twig\IdeaExtension
+    arguments: ["@capco.idea.helper"]
+    tags:
+      - { name: twig.extension }
+
   capco.twig.menu_url:
     class: Capco\AppBundle\Twig\MenuLinkExtension
     arguments: [ "@capco.menu_item.resolver" ]

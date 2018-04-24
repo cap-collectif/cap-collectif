@@ -99,6 +99,11 @@ class Theme implements IndexableInterface
     private $projects;
 
     /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Idea", mappedBy="theme", cascade={"persist"})
+     */
+    private $ideas;
+
+    /**
      * @ORM\OneToMany(
      *   targetEntity="Capco\AppBundle\Entity\Proposal",
      *   mappedBy="theme",
@@ -130,6 +135,7 @@ class Theme implements IndexableInterface
     public function __construct()
     {
         $this->projects = new ArrayCollection();
+        $this->ideas = new ArrayCollection();
         $this->events = new ArrayCollection();
         $this->posts = new ArrayCollection();
         $this->proposals = new ArrayCollection();
@@ -336,6 +342,42 @@ class Theme implements IndexableInterface
     }
 
     /**
+     * Get ideas.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getIdeas()
+    {
+        return $this->ideas;
+    }
+
+    /**
+     * Add idea.
+     *
+     * @param Idea $idea
+     *
+     * @return Theme
+     */
+    public function addIdea(Idea $idea)
+    {
+        if (!$this->ideas->contains($idea)) {
+            $this->ideas[] = $idea;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove idea.
+     *
+     * @param Idea $idea
+     */
+    public function removeIdea(Idea $idea)
+    {
+        $this->ideas->removeElement($idea);
+    }
+
+    /**
      * Get proposals.
      *
      * @return \Doctrine\Common\Collections\Collection
@@ -494,6 +536,18 @@ class Theme implements IndexableInterface
         $count = 0;
         foreach ($this->projects as $project) {
             if ($project->getIsEnabled()) {
+                ++$count;
+            }
+        }
+
+        return $count;
+    }
+
+    public function countEnabledIdeas()
+    {
+        $count = 0;
+        foreach ($this->ideas as $idea) {
+            if ($idea->getIsEnabled()) {
                 ++$count;
             }
         }

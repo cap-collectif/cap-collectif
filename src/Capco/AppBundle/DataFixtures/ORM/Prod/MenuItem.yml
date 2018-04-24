@@ -31,6 +31,17 @@ Capco\AppBundle\Entity\MenuItem:
     parent: null
     menu: 1
 
+  MenuItem4:
+    title: Boîte à idées
+    link: ideas
+    isEnabled: 1
+    isDeletable: 0
+    isFullyModifiable: 0
+    position: 4
+    parent: null
+    menu: 1
+    associatedFeatures: [ideas]
+
   MenuItem5:
     title: À propos
     link: ""
@@ -48,7 +59,7 @@ Capco\AppBundle\Entity\MenuItem:
     isDeletable: 0
     isFullyModifiable: 0
     position: 1
-    parent: '@MenuItem5'
+    parent: @MenuItem5
     menu: 1
 
   MenuItem8:
@@ -56,7 +67,7 @@ Capco\AppBundle\Entity\MenuItem:
     isEnabled: 1
     isDeletable: 0
     position: 6
-    parent: '@MenuItem5'
+    parent: @MenuItem5
     menu: 1
     link: pages/charte
 
@@ -110,4 +121,4 @@ Capco\AppBundle\Entity\MenuItem:
     associatedFeatures: [members_list]
     position: 2
     menu: 1
-    parent: '@MenuItem5'
+    parent: @MenuItem5

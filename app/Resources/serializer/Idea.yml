@@ -1,0 +1,88 @@
+Capco\AppBundle\Entity\Idea:
+  exclusion_policy: ALL
+  properties:
+    Author:
+      expose: true
+      type: Capco\UserBundle\Entity\User
+      serialized_name: author
+      groups: [Ideas]
+    body:
+      expose: true
+      type: string
+      groups: [Ideas, Elasticsearch]
+    comments:
+      expose: true
+      groups: [Ideas]
+    commentsCount:
+      expose: true
+      type: integer
+      groups: [Ideas]
+      serialized_name: commentsCount
+    createdAt:
+      expose: true
+      type: DateTime
+      groups: [Ideas]
+      serialized_name: createdAt
+    id:
+      expose: true
+      type: integer
+      groups: [Ideas, Elasticsearch]
+    isCommentable:
+      expose: true
+      groups: [Ideas]
+      serialized_name: commentable
+    isEnabled:
+      expose: true
+      groups: [Ideas]
+      serialized_name: enabled
+    isTrashed:
+      expose: true
+      groups: [Ideas]
+      serialized_name: trashed
+    object:
+      expose: true
+      type: string
+      groups: [Ideas, Elasticsearch]
+    slug:
+      expose: true
+      type: string
+      groups: [Ideas]
+    theme:
+      expose: true
+      groups: [Ideas]
+    title:
+      expose: true
+      type: string
+      groups: [Ideas, Elasticsearch]
+    trashedAt:
+      expose: true
+      type: DateTime
+      groups: [Ideas]
+      serialized_name: trashedAt
+    trashedReason:
+      expose: true
+      type: string
+      groups: [Ideas]
+      serialized_name: trashedReason
+    updatedAt:
+      expose: true
+      type: DateTime
+      groups: [Ideas]
+      serialized_name: updatedAt
+    url:
+      expose: true
+      type: string
+      groups: [Ideas]
+    votes:
+      expose: true
+      groups: [Ideas]
+    votesCount:
+      expose: true
+      groups: [Ideas]
+      serialized_name: votesCount
+  virtual_properties:
+    canContribute:
+      expose: true
+      type: boolean
+      groups: [Ideas]
+      serialized_name: canContribute

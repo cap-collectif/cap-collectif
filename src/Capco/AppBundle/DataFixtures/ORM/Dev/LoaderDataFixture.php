@@ -31,6 +31,10 @@ class LoaderDataFixture extends AbstractLoader
 
             __DIR__ . '/Theme.yml',
 
+            __DIR__ . '/Idea.yml',
+            __DIR__ . '/IdeaComment.yml',
+            __DIR__ . '/IdeaVote.yml',
+
             __DIR__ . '/OpinionType.yml',
             __DIR__ . '/AppendixType.yml',
             __DIR__ . '/OpinionTypeAppendixType.yml',

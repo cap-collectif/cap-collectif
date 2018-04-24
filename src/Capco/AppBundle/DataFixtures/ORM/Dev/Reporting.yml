@@ -44,6 +44,15 @@ Capco\AppBundle\Entity\Reporting:
         Argument: '@argument1'
         status: 2
         isArchived: false
+    reporting6:
+        id: 6
+        body: |
+             <p><text(100)></p>
+             <p><text(300)></p>
+        Reporter: '@user100'
+        Idea: '@Idea1'
+        status: 2
+        isArchived: false
     reporting7:
         id: 7
         body: |

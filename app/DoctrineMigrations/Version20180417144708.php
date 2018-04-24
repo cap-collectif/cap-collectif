@@ -33,7 +33,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20180418140000 extends AbstractMigration implements ContainerAwareInterface
+class Version20180417144708 extends AbstractMigration implements ContainerAwareInterface
 {
     private $container;
 
@@ -205,7 +205,7 @@ class Version20180418140000 extends AbstractMigration implements ContainerAwareI
                     ;
 
                     $proposalComment->addVote($commentVote);
-                    $em->remove($ideaCommentVote);
+                    //$em->remove($ideaCommentVote);
                 }
 
                 //$em->remove($ideaComment);
@@ -213,7 +213,7 @@ class Version20180418140000 extends AbstractMigration implements ContainerAwareI
             }
 
             $em->persist($proposal);
-            $em->remove($idea);
+            //$em->remove($idea);
 
             $progress->advance();
         }

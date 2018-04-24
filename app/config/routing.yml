@@ -29,6 +29,13 @@ capco_api_synthesis:
   defaults:
     _format: json
 
+capco_api_ideas:
+  resource: "@CapcoAppBundle/Controller/Api/IdeasController.php"
+  type: annotation
+  prefix: /api
+  defaults:
+    _format: json
+
 capco_api_projects:
   resource: "@CapcoAppBundle/Controller/Api/ProjectsController.php"
   type: annotation
@@ -101,6 +108,13 @@ capco_api_opinion_links:
 
 capco_api_opinion_types:
   resource: "@CapcoAppBundle/Controller/Api/OpinionTypesController.php"
+  type: annotation
+  prefix: /api
+  defaults:
+    _format: json
+
+capco_api_projects:
+  resource: "@CapcoAppBundle/Controller/Api/ProjectsController.php"
   type: annotation
   prefix: /api
   defaults:

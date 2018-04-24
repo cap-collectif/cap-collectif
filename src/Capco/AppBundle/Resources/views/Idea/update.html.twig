@@ -1,0 +1,50 @@
+{% extends '@CapcoApp/base.html.twig' %}
+
+{% block canonical_link %}{{ url('app_idea_update', {'slug': idea.slug}) }}{% endblock %}
+
+{% block title %}
+    {{ parent() }} - {{ 'idea.update.page_title'|trans({'%title%': idea.title}, 'CapcoAppBundle') }}
+{% endblock %}
+
+{% block jumbotron %}{% endblock %}
+
+{% block body %}
+    <div class="container  container--custom">
+        <div class="row">
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                <div class="dialog  dialog--light-gray  block--bordered">
+                    <div class="dialog__header  box">
+                        <h1 class="h4  dialog__title">{{ 'idea.update.title'|trans({}, 'CapcoAppBundle') }}</h1>
+                    </div>
+                    <form method="post" {{ form_enctype(form) }}>
+                        <div class="dialog__body  box">
+                            <div class="media">
+                                {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': idea.Author, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
+                                <div class="media-body">
+                                    {% if form.confirm %}
+                                        {{ form_errors(form.confirm) }}
+                                        <div class="alert alert-warning  edit-confirm-alert">
+                                            <div class="checkbox form-group">
+                                                {{ form_widget(form.confirm) }}
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    {{ form_rest(form) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dialog__footer  box">
+                            <div class="pull-left">
+                                <a href="{{ path('app_idea_delete', {'slug': idea.slug}) }}" class="btn btn-danger">{{ 'idea.update.delete'|trans({}, 'CapcoAppBundle') }}</a>
+                            </div>
+                            <div class="pull-right">
+                                <a href="{{ path('app_idea_show', {'slug': idea.slug}) }}" class="btn  btn-default">{{ 'idea.create.cancel'|trans({}, 'CapcoAppBundle') }}</a>
+                                <button type="submit" class="btn  btn-warning">{{ 'idea.update.submit'|trans({}, 'CapcoAppBundle') }}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

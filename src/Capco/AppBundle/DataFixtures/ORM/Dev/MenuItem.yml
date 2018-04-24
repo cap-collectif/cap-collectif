@@ -31,6 +31,17 @@ Capco\AppBundle\Entity\MenuItem:
     parent: null
     menu: 1
 
+  MenuItem4:
+    title: Boîte à idées
+    link: ideas
+    isEnabled: 1
+    isDeletable: 0
+    isFullyModifiable: 0
+    position: 4
+    parent: null
+    menu: 1
+    associatedFeatures: [ideas]
+
   MenuItem5:
     title: À propos
     link: ""
