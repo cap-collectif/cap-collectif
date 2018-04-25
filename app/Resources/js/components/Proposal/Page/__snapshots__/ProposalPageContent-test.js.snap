@@ -29,9 +29,8 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
       <Connect(ShareButtonDropdown)
         id="proposal-share-button"
         title="Titre proposition"
-        url="http://capco.test"
       />
-      <Connect(ProposalReportButton)
+      <Relay(Connect(ProposalReportButton))
         proposal={
           Object {
             "_links": Object {

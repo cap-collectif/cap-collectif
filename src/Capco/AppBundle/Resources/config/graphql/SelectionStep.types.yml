@@ -18,6 +18,8 @@ SelectionStep:
                description: "If enabled, allow voters to order their votes by preferences."
             votesLimit:
                type: "Int"
+            position:
+               type: "Int!"
             voteType:
                type: "ProposalStepVoteType!"
             budget:

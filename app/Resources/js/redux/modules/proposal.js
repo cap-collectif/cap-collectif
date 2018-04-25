@@ -61,10 +61,7 @@ export type Proposal = {
   selections: Array<Selection>,
   viewerCanSeeEvaluation: boolean,
 } & Object;
-type ProposalMap = { [id: Uuid]: Proposal };
 export type State = {
-  +currentProposalId: ?Uuid,
-  +proposalsById: ProposalMap,
   +currentVoteModal: ?Uuid,
   +currentDeletingVote: ?Uuid,
   +showCreateModal: boolean,
@@ -88,8 +85,6 @@ export type State = {
 };
 
 export const initialState: State = {
-  currentProposalId: null,
-  proposalsById: {},
   lastEditedStepId: null,
   currentVoteModal: null,
   currentDeletingVote: null,

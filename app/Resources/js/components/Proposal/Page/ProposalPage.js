@@ -8,14 +8,13 @@ import ProposalPageAlert from './ProposalPageAlert';
 import ProposalDraftAlert from './ProposalDraftAlert';
 import ProposalPageTabs from './ProposalPageTabs';
 import Loader from '../../Ui/Loader';
-import type { FeatureToggles, State } from '../../../types';
-import type { Proposal } from '../../../redux/modules/proposal';
+import type { Uuid, FeatureToggles, State } from '../../../types';
 import { PROPOSAL_FOLLOWERS_TO_SHOW } from '../../../constants/ProposalConstants';
 import type ProposalPageQueryResponse from './__generated__/ProposalPageQuery.graphql';
 
 type Props = {
   form: Object,
-  proposal: Proposal,
+  proposalId: Uuid,
   categories: Array<Object>,
   steps: Array<Object>,
   features: FeatureToggles,
@@ -24,7 +23,7 @@ type Props = {
 
 export class ProposalPage extends React.Component<Props> {
   render() {
-    const { proposal, steps, features, categories, form } = this.props;
+    const { proposalId, steps, features, categories, form } = this.props;
     return (
       <div>
         <QueryRenderer
@@ -36,6 +35,9 @@ export class ProposalPage extends React.Component<Props> {
               $cursor: String
               $isAuthenticated: Boolean!
             ) {
+              viewer @include(if: $isAuthenticated) {
+                ...ProposalPageTabs_viewer
+              }
               proposal: node(id: $proposalId) {
                 ...ProposalDraftAlert_proposal
                 ...ProposalPageTabs_proposal
@@ -44,7 +46,7 @@ export class ProposalPage extends React.Component<Props> {
             }
           `}
           variables={{
-            proposalId: proposal.id,
+            proposalId,
             count: PROPOSAL_FOLLOWERS_TO_SHOW,
             cursor: null,
             isAuthenticated: this.props.isAuthenticated,
@@ -59,16 +61,16 @@ export class ProposalPage extends React.Component<Props> {
               if (props.proposal) {
                 return (
                   <div>
-                    <ProposalDraftAlert proposal={proposal} />
-                    <ProposalPageAlert proposal={proposal} />
+                    <ProposalDraftAlert proposal={props.proposal} />
+                    <ProposalPageAlert proposal={props.proposal} />
                     <ProposalPageHeader
                       proposal={props.proposal}
-                      isAuthenticated={this.props.isAuthenticated}
+                      isAuthenticated={!!props.viewer}
                       className="container container--custom"
                     />
                     <ProposalPageTabs
                       proposal={props.proposal}
-                      oldProposal={proposal}
+                      viewer={props.viewer || null}
                       steps={steps}
                       features={features}
                       categories={categories}
@@ -92,9 +94,6 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
   return {
     isAuthenticated: state.user.user !== null,
     features: state.default.features,
-    proposal:
-      state.proposal.currentProposalId &&
-      state.proposal.proposalsById[state.proposal.currentProposalId],
     steps:
       state.project.currentProjectById &&
       state.project.projectsById[state.project.currentProjectById].steps,

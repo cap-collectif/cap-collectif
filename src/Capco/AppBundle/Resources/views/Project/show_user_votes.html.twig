@@ -9,12 +9,7 @@
 {% block jumbotron %}{% endblock %}
 
 {% block reduxStore %}
-  {% set initialState = {
-    'proposal': {
-      'proposalsById': [],
-    }
-  } %}
-  {% include '@CapcoApp/redux_store.html.twig' with {'data' : initialState} %}
+  {% include '@CapcoApp/redux_store.html.twig' %}
 {% endblock %}
 
 {% block body %}

@@ -30,20 +30,6 @@ describe('<ProposalPageTabs />', () => {
       usingThemes: true,
       usingCategories: true,
     },
-    oldProposal: {
-      selections: [],
-      votesByStepId: {
-        selectionstep1: [],
-        collectstep1: [],
-      },
-      votableStepId: 'selectionstep1',
-      votesCountByStepId: {
-        selectionstep1: 0,
-        collectstep1: 0,
-      },
-      isDraft: false,
-      viewerCanSeeEvaluation: true,
-    },
     categories: [],
     steps: [
       {
@@ -56,6 +42,7 @@ describe('<ProposalPageTabs />', () => {
       districts: true,
       themes: true,
     },
+    viewer: null,
   };
 
   it('should render Tabs with correct DOM structure', () => {

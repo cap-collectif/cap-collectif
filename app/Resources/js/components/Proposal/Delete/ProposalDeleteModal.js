@@ -29,7 +29,7 @@ const ProposalDeleteModal = React.createClass({
           aria-labelledby="contained-modal-title-lg">
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
-              {<FormattedMessage id="global.removeMessage" />}
+              <FormattedMessage id="global.removeMessage" />
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>

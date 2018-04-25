@@ -33,7 +33,6 @@ class ProposalController extends Controller
         }
 
         $serializer = $this->get('serializer');
-
         $urlResolver = $this->get('capco.url.resolver');
 
         $stepUrls = $project->getSteps()->map(function (ProjectAbstractStep $step) use ($urlResolver) {
@@ -47,6 +46,7 @@ class ProposalController extends Controller
 
         $proposalForm = $currentStep->getProposalForm();
         $props = $serializer->serialize([
+            'proposalId' => $proposal->getId(),
             'form' => $proposalForm,
             'categories' => $proposalForm ? $proposalForm->getCategories() : [],
         ], 'json', SerializationContext::create()
@@ -65,33 +65,11 @@ class ProposalController extends Controller
             ]))
         ;
 
-        $proposalSerialized = $serializer->serialize($proposal, 'json',
-          SerializationContext::create()
-            ->setSerializeNull(true)
-            ->setGroups([
-                'ProposalFusions',
-                'ProposalSelectionVotes',
-                'ProposalCollectVotes',
-                'UsersInfos',
-                'UserMedias',
-                'Proposals',
-                'ProposalCategories',
-                'ThemeDetails',
-                'ProposalUserData',
-                'VoteThreshold',
-            ]))
-        ;
-
-        $proposalSerializedAsArray = json_decode($proposalSerialized, true);
-        $proposalSerializedAsArray['postsCount'] = $this->get('capco.blog.post.repository')->countPublishedPostsByProposal($proposal);
-        $proposalSerializedAsArray['viewerCanSeeEvaluation'] = $this->get('capco.resolver.proposals')->resolveViewerCanSeeEvaluation($proposal, $this->getUser());
-
         return $this->render('CapcoAppBundle:Proposal:show.html.twig', [
             'project' => $project,
             'currentStep' => $currentStep,
             'props' => $props,
             'proposal' => $proposal,
-            'proposalSerialized' => $proposalSerializedAsArray,
             'referer' => $refererUri,
         ]);
     }

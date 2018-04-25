@@ -12,7 +12,7 @@ import type {
 } from './__generated__/ProposalVoteButtonWrapperQuery.graphql';
 
 type ParentProps = {
-  proposal: Object,
+  proposal: { +id: string, +currentVotableStep: { +open: boolean, +id: string } },
 };
 
 type Props = ParentProps & {

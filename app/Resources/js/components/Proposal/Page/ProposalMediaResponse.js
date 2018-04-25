@@ -1,9 +1,11 @@
 // @flow
 import * as React from 'react';
 import { Row, Col } from 'react-bootstrap';
+import { graphql, createFragmentContainer } from 'react-relay';
+import type { ProposalMediaResponse_medias } from './__generated__/ProposalMediaResponse_medias.graphql';
 
 type Props = {
-  medias: Array<Object>,
+  medias: ProposalMediaResponse_medias,
 };
 
 export class ProposalMediaResponse extends React.PureComponent<Props> {
@@ -29,4 +31,14 @@ export class ProposalMediaResponse extends React.PureComponent<Props> {
   }
 }
 
-export default ProposalMediaResponse;
+export default createFragmentContainer(
+  ProposalMediaResponse,
+  graphql`
+    fragment ProposalMediaResponse_medias on Media @relay(plural: true) {
+      id
+      name
+      size
+      url
+    }
+  `,
+);
