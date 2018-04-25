@@ -141,7 +141,7 @@ export class ProposalStepPage extends React.Component<Props> {
                       center: { lat: form.latMap, lng: form.lngMap },
                       zoom: form.zoomMap,
                     }}
-                    visible={selectedViewByStep === 'map' && !step.isPrivate}
+                    visible={selectedViewByStep === 'map' && !props.step.private}
                   />
                   {/* $FlowFixMe */}
                   <ProposalListView

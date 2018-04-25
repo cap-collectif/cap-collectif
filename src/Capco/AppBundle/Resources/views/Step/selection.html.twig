@@ -22,15 +22,6 @@
 {% block jumbotron %}
 {% endblock %}
 
-{% block reduxStore %}
-  {% set initialState = {
-    'proposal': {
-      'proposalsById': [],
-    }
-  } %}
-  {% include '@CapcoApp/redux_store.html.twig' with {'data' : initialState} %}
-{% endblock %}
-
 {% block details %}
     {% if currentStep.isClosed and currentStep.isVotable %}
         <div class="alert alert-info alert-dismissible  block" role="alert">
