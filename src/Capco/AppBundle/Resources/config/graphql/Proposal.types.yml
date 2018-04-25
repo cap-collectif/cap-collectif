@@ -241,3 +241,6 @@ Proposal:
                 access: "@=hasRole('ROLE_USER')"
                 type: "Boolean!"
                 resolve: '@=value.userHasReport(user)'
+            votableSteps:
+              type: "[ProposalStep!]!"
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalVotableStepsResolver", [value])'

@@ -7,3 +7,6 @@ Theme:
                 type: "ID!"
             title:
                 type: "String!"
+            url:
+                type: "String!"
+                resolve: "url"

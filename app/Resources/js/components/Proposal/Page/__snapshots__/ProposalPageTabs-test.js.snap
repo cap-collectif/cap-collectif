@@ -132,6 +132,7 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                       "totalCount": 1,
                     },
                     "viewerCanSeeEvaluation": true,
+                    "votableSteps": Array [],
                     "votes": Object {
                       "totalCount": 1,
                     },
@@ -152,6 +153,7 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                       "totalCount": 1,
                     },
                     "viewerCanSeeEvaluation": true,
+                    "votableSteps": Array [],
                     "votes": Object {
                       "totalCount": 1,
                     },
@@ -180,6 +182,7 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                       "totalCount": 1,
                     },
                     "viewerCanSeeEvaluation": true,
+                    "votableSteps": Array [],
                     "votes": Object {
                       "totalCount": 1,
                     },
@@ -208,6 +211,7 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                       "totalCount": 1,
                     },
                     "viewerCanSeeEvaluation": true,
+                    "votableSteps": Array [],
                     "votes": Object {
                       "totalCount": 1,
                     },
@@ -233,6 +237,7 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                       "totalCount": 1,
                     },
                     "viewerCanSeeEvaluation": true,
+                    "votableSteps": Array [],
                     "votes": Object {
                       "totalCount": 1,
                     },
@@ -291,6 +296,7 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                   "totalCount": 1,
                 },
                 "viewerCanSeeEvaluation": true,
+                "votableSteps": Array [],
                 "votes": Object {
                   "totalCount": 1,
                 },
@@ -316,6 +322,7 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                   "totalCount": 1,
                 },
                 "viewerCanSeeEvaluation": true,
+                "votableSteps": Array [],
                 "votes": Object {
                   "totalCount": 1,
                 },
@@ -342,6 +349,7 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                   "totalCount": 1,
                 },
                 "viewerCanSeeEvaluation": true,
+                "votableSteps": Array [],
                 "votes": Object {
                   "totalCount": 1,
                 },

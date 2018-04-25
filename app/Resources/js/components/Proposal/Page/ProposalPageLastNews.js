@@ -48,6 +48,7 @@ export default createFragmentContainer(
         totalCount
         edges {
           node {
+            url
             title
             createdAt
             authors {

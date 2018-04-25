@@ -27,7 +27,7 @@ type Props = {
   statuses: Array<Object>,
   categories: Array<Object>,
   currentPage: number,
-  isLogged: boolean,
+  isAuthenticated: boolean,
   dispatch: Dispatch,
   selectedViewByStep: string,
 };
@@ -49,7 +49,7 @@ export class ProposalStepPage extends React.Component<Props> {
       statuses,
       step,
       defaultSort,
-      isLogged,
+      isAuthenticated,
       selectedViewByStep,
     } = this.props;
 
@@ -90,9 +90,8 @@ export class ProposalStepPage extends React.Component<Props> {
                 ...ProposalStepPageHeader_step
                 ... on CollectStep {
                   private
-                  voteType
                 }
-                ... on SelectionStep {
+                ... on ProposalStep {
                   voteType
                 }
               }
@@ -102,7 +101,7 @@ export class ProposalStepPage extends React.Component<Props> {
             // $FlowFixMe
             ({
               stepId: this.props.step.id,
-              isAuthenticated: this.props.isLogged,
+              isAuthenticated: this.props.isAuthenticated,
               count: 2,
               // $FlowFixMe
               ...this.initialRenderVars,
@@ -120,7 +119,7 @@ export class ProposalStepPage extends React.Component<Props> {
               return (
                 <div>
                   {/* $FlowFixMe */}
-                  {isLogged && <DraftProposalList step={props.step} />}
+                  {isAuthenticated && <DraftProposalList step={props.step} />}
                   {/* $FlowFixMe */}
                   <ProposalStepPageHeader step={props.step} />
                   <ProposalListFilters
@@ -167,7 +166,7 @@ export class ProposalStepPage extends React.Component<Props> {
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Object) => ({
   stepId: undefined,
-  isLogged: state.user.user !== null,
+  isAuthenticated: state.user.user !== null,
   filters: state.proposal.filters || {},
   terms: state.proposal.terms,
   order: state.proposal.order,

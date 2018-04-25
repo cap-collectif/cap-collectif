@@ -7,16 +7,13 @@ import { relayRefetchMock as relay, $refType } from '../../../mocks';
 
 describe('<ProposalVoteBasketWidget />', () => {
   const simpleWithoutLimitProps = {
-    project: {
-      id: '1',
+    step: {
       $refType,
-      votableSteps: [
-        {
-          id: '1',
-          voteType: 'SIMPLE',
-          budget: null,
-        },
-      ],
+      id: '1',
+      title: 'step title',
+      votesLimit: null,
+      voteType: 'SIMPLE',
+      budget: null,
     },
     viewer: {
       id: '1',
@@ -33,17 +30,13 @@ describe('<ProposalVoteBasketWidget />', () => {
   };
 
   const simpleWithLimitProps = {
-    project: {
-      id: '1',
+    step: {
       $refType,
-      votableSteps: [
-        {
-          id: '1',
-          voteType: 'SIMPLE',
-          budget: null,
-          votesLimit: 2,
-        },
-      ],
+      id: '1',
+      title: 'step title',
+      voteType: 'SIMPLE',
+      budget: null,
+      votesLimit: 2,
     },
     votesPageUrl: 'http//capco.dev/votes',
     viewer: {
@@ -61,16 +54,13 @@ describe('<ProposalVoteBasketWidget />', () => {
   };
 
   const budgetProps = {
-    project: {
-      id: '1',
+    step: {
       $refType,
-      votableSteps: [
-        {
-          id: '1',
-          voteType: 'SIMPLE',
-          budget: 350000,
-        },
-      ],
+      id: '1',
+      title: 'step title',
+      voteType: 'SIMPLE',
+      budget: 350000,
+      votesLimit: null,
     },
     votesPageUrl: 'http//capco.dev/votes',
     viewer: {
@@ -88,19 +78,16 @@ describe('<ProposalVoteBasketWidget />', () => {
 
   it('should render a vote widget for a simple vote without limit', () => {
     const wrapper = shallow(<ProposalVoteBasketWidget {...simpleWithoutLimitProps} />);
-    wrapper.setState({ selectedStepId: '1' });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render a vote widget for a simple vote with limit', () => {
     const wrapper = shallow(<ProposalVoteBasketWidget {...simpleWithLimitProps} />);
-    wrapper.setState({ selectedStepId: '1' });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render a vote widget for a budget vote', () => {
     const wrapper = shallow(<ProposalVoteBasketWidget {...budgetProps} />);
-    wrapper.setState({ selectedStepId: '1' });
     expect(wrapper).toMatchSnapshot();
   });
 });

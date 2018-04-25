@@ -15,6 +15,7 @@ describe('<ProposalPageTabs />', () => {
       totalCount: 169,
     },
     currentVotableStep: null,
+    votableSteps: [],
     votes: {
       totalCount: 1,
     },

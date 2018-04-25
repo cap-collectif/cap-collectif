@@ -21,9 +21,7 @@ type Props = {
   viewer: ?ProposalPageTabs_viewer,
   proposal: ProposalPageTabs_proposal,
   form: Object,
-
   categories: Array<Object>,
-  steps: Array<Object>,
   features: FeatureToggles,
 };
 
@@ -56,13 +54,11 @@ export class ProposalPageTabs extends React.Component<Props> {
   }
 
   render() {
-    const { viewer, proposal, form, steps, features, categories } = this.props;
+    const { viewer, proposal, form, features, categories } = this.props;
     const currentVotableStep = proposal.currentVotableStep;
-
     const votesCount = proposal.votes.totalCount;
     const showVotesTab = votesCount > 0 || currentVotableStep !== null;
 
-    const votableSteps = steps.filter(step => step.votable);
     const isPageAdmin = false;
 
     return (
@@ -152,14 +148,14 @@ export class ProposalPageTabs extends React.Component<Props> {
                   <Tab.Container id="tab-votesByStep" defaultActiveKey={0}>
                     <Row className="clearfix">
                       <Nav bsStyle="pills">
-                        {votableSteps.map((step, index) => (
+                        {proposal.votableSteps.map((step, index) => (
                           <NavItem key={index} eventKey={index}>
                             {step.title}{' '}
                           </NavItem>
                         ))}
                       </Nav>
                       <Tab.Content animation={false}>
-                        {votableSteps.map((step, index) => (
+                        {proposal.votableSteps.map((step, index) => (
                           <Tab.Pane key={index} eventKey={index}>
                             <ProposalVotesByStep stepId={step.id} proposal={proposal} />
                           </Tab.Pane>
@@ -218,6 +214,10 @@ export default createFragmentContainer(ProposalPageTabs, {
         id
         voteThreshold
         voteType
+      }
+      votableSteps {
+        id
+        title
       }
       viewerCanSeeEvaluation
       followerConnection(first: $count, after: $cursor) {

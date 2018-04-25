@@ -3,13 +3,16 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Project;
 
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Repository\CollectStepRepository;
+use Capco\AppBundle\Repository\SelectionStepRepository;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
-class ProjectVotableStepsResolver
+class ProjectVotableStepsResolver implements ResolverInterface
 {
     protected $selectionStepRepository;
     protected $collectStepRepository;
 
-    public function __construct($selectionStepRepository, $collectStepRepository)
+    public function __construct(SelectionStepRepository $selectionStepRepository, CollectStepRepository $collectStepRepository)
     {
         $this->selectionStepRepository = $selectionStepRepository;
         $this->collectStepRepository = $collectStepRepository;
