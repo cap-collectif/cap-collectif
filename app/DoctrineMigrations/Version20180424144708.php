@@ -105,6 +105,9 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
             /* -----------------********************************------------------- */
             $this->write('-> import ideas into proposals');
             $this->importIdeas($em, $proposalForm);
+
+        } else {
+            $this->write('-> Skipping migration, no ideas to import...');
         }
 
 
