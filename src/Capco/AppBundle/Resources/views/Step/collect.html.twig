@@ -16,12 +16,7 @@
 {% endblock %}
 
 {% block reduxStore %}
-  {% set initialState = {
-    'proposal': {
-      'proposalsById': [],
-    }
-  } %}
-  {% include '@CapcoApp/redux_store.html.twig' with {'data' : initialState, 'project': project} %}
+  {% include '@CapcoApp/redux_store.html.twig' with {'project': project} %}
 {% endblock %}
 
 {% block title %}
