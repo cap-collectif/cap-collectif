@@ -41,74 +41,84 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
     public function postUp(Schema $schema)
     {
         $em = $this->container->get('doctrine.orm.entity_manager');
+        $ideas = $this->connection->fetchAll("SELECT * FROM idea", ['']);
 
-        /* ------********************************************************------ */
-        /* ------* create anonymous users from ideas for proposal votes *------ */
-        /* ------********************************************************------ */
-        $this->write('-> searching votes where user is not set then create if not exist');
+        if(!empty($ideas)) {
 
-        $votesWithoutUser = $this->connection->fetchAll("SELECT * FROM votes WHERE voteType = 'idea' AND voter_id IS NULL", ['']);
-        $this->createUserFromAnonymous($em, $votesWithoutUser);
+            /* ------********************************************************------ */
+            /* ------* create anonymous users from ideas for proposal votes *------ */
+            /* ------********************************************************------ */
+            $this->write('-> searching votes where user is not set then create if not exist');
 
-        /* --------------------*************************-------------------- */
-        /* --------------------* create project & step *-------------------- */
-        /* --------------------*************************-------------------- */
-        $this->write('-> create project boite à idées');
+            $votesWithoutUser = $this->connection->fetchAll(
+                "SELECT * FROM votes WHERE voteType = 'idea' AND voter_id IS NULL",
+                ['']
+            );
+            $this->createUserFromAnonymous($em, $votesWithoutUser);
 
-        $collectStep = (new CollectStep())
-            ->setTitle('Dépôt')
-            ->setLabel('Dépôt')
-            ->setStartAt(new \DateTime('now'))
-            ->setVoteType(VoteTypeTrait::$VOTE_TYPE_SIMPLE);
-        $project = (new Project())
-            ->setTitle('Boîte à idées')
-            ->setIsEnabled(true)
-            ->setAuthor($em->getRepository(User::class)->findOneBy(['email' => 'admin@cap-collectif.com']))
-            ->setCreatedAt(new \DateTime('now'))
-            ->setPublishedAt(new \DateTime('now'))
-            ->setUpdatedAt(new \DateTime('now'));
-        $project->addStep(
-            (new ProjectAbstractStep())
-                ->setProject($project)
-                ->setStep($collectStep)
-                ->setPosition(1)
-        );
-        $em->persist($project);
+            /* --------------------*************************-------------------- */
+            /* --------------------* create project & step *-------------------- */
+            /* --------------------*************************-------------------- */
+            $this->write('-> create project boite à idées');
 
-        /* --------------------*************************--------------------- */
-        /* --------------------*  create proposalForm  *--------------------- */
-        /* --------------------*************************--------------------- */
-        $this->write('-> create proposalForm');
+            $collectStep = (new CollectStep())
+                ->setTitle('Dépôt')
+                ->setLabel('Dépôt')
+                ->setTimeless(true)
+                ->setVoteType(VoteTypeTrait::$VOTE_TYPE_SIMPLE);
 
-        $question = (new SimpleQuestion())
-            ->setTitle('Objectif')
-            ->setType(AbstractQuestion::QUESTION_TYPE_MULTILINE_TEXT);
-        $questionnaireQuestion = (new QuestionnaireAbstractQuestion())
-            ->setPosition(0)
-            ->setQuestion($question);
-        $proposalForm = (new ProposalForm())
-            ->setTitle('Boîte à idées')
-            ->setDescription('Partagez vos idées !')
-            ->addQuestion($questionnaireQuestion)
-            ->setStep($project->getSteps()[0]->getStep());
-        $em->persist($proposalForm);
+            $project = (new Project())
+                ->setTitle('Boîte à idées')
+                ->setIsEnabled(true)
+                ->setAuthor($em->getRepository(User::class)->findOneBy(['email' => 'admin@cap-collectif.com']))
+                ->setCreatedAt(new \DateTime('now'))
+                ->setPublishedAt(new \DateTime('now'))
+                ->setUpdatedAt(new \DateTime('now'));
+            $project->addStep(
+                (new ProjectAbstractStep())
+                    ->setProject($project)
+                    ->setStep($collectStep)
+                    ->setPosition(1)
+            );
+            $em->persist($project);
 
-        /* -----------------********************************------------------- */
-        /* -----------------* import ideas into proposals  *------------------- */
-        /* -----------------********************************------------------- */
-        $this->write('-> import ideas into proposals');
-        $this->importIdeas($em,$proposalForm);
+            /* --------------------*************************--------------------- */
+            /* --------------------*  create proposalForm  *--------------------- */
+            /* --------------------*************************--------------------- */
+            $this->write('-> create proposalForm');
+
+            $question = (new SimpleQuestion())
+                ->setTitle('Objectif')
+                ->setType(AbstractQuestion::QUESTION_TYPE_MULTILINE_TEXT);
+            $questionnaireQuestion = (new QuestionnaireAbstractQuestion())
+                ->setPosition(0)
+                ->setQuestion($question);
+            $proposalForm = (new ProposalForm())
+                ->setTitle('Boîte à idées')
+                ->setDescription('Partagez vos idées !')
+                ->addQuestion($questionnaireQuestion)
+                ->setStep($project->getSteps()[0]->getStep());
+            $em->persist($proposalForm);
+
+            /* -----------------********************************------------------- */
+            /* -----------------* import ideas into proposals  *------------------- */
+            /* -----------------********************************------------------- */
+            $this->write('-> import ideas into proposals');
+            $this->importIdeas($em, $proposalForm);
+        }
+
 
     }
 
-    public function importIdeas(EntityManager $em, ProposalForm $proposalForm ) {
+    public function importIdeas(EntityManager $em, ProposalForm $proposalForm)
+    {
 
         $output = new ConsoleOutput();
-        $ideas =  $this->connection->fetchAll("SELECT * FROM idea", ['']);
+        $ideas = $this->connection->fetchAll("SELECT * FROM idea", ['']);
         $progress = new ProgressBar($output, \count($ideas));
         $questions = $proposalForm->getRealQuestions()->first();
 
-        foreach($ideas as $idea) {
+        foreach ($ideas as $idea) {
             $response = (new ValueResponse())
                 ->setValue($idea['object'])
                 ->setQuestion($questions);
@@ -116,18 +126,18 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
             $proposal = (new Proposal())
                 ->setProposalForm($proposalForm)
                 ->setTitle($idea['title'])
-                ->setAuthor($em->getRepository(User::class)->findOneBy(array('id' => $idea['author_id'])))
+                ->setAuthor($em->getRepository(User::class)->findOneBy(['id' => $idea['author_id']]))
                 ->setEnabled($idea['is_enabled'])
                 ->setIsTrashed($idea['is_trashed'])
                 ->setBody($idea['body'])
-                ->setTheme($em->getRepository(Theme::class)->findOneBy(array('id' => $idea['theme_id'])))
+                ->setTheme($em->getRepository(Theme::class)->findOneBy(['id' => $idea['theme_id']]))
                 ->setCreatedAt(new \DateTime($idea['created_at']))
                 ->addResponse($response)
                 ->setUpdatedAt(new \DateTime($idea['updated_at']));
 
 
-            if($idea['media_id']){
-                $proposal->setMedia($em->getRepository(Theme::class)->findOneBy(array('id' => $idea['media_id'])));
+            if ($idea['media_id']) {
+                $proposal->setMedia($em->getRepository(Theme::class)->findOneBy(['id' => $idea['media_id']]));
             }
 
             /* -----------------**************************************************---------------- */
@@ -140,22 +150,24 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
                     ->setProposal($proposal)
                     ->setCollectStep($proposal->getStep())
                     ->setCreatedAt(new \DateTime($ideaVote['created_at']))
-                    ->setUser($em->getRepository(User::class)->findOneBy(array('id' => $ideaVote['voter_id'])))
+                    ->setUser($em->getRepository(User::class)->findOneBy(['id' => $ideaVote['voter_id']]))
                     ->setUsername($ideaVote['username'])
                     ->setEmail($ideaVote['email'])
-                    ->setIpAddress($ideaVote['ip_address'])
-                ;
+                    ->setIpAddress($ideaVote['ip_address']);
 
-                    $proposal->addCollectVote($vote);
+                $proposal->addCollectVote($vote);
             }
 
             /* -----------------***************************************------------------- */
             /* -----------------* import ideas comments into proposal *------------------- */
             /* -----------------***************************************------------------- */
-            $ideaComments = $this->connection->fetchAll("SELECT * FROM comment WHERE objectType = 'idea' AND idea_id = :id AND parent_id IS NULL", ['id' => $idea['id']]);
+            $ideaComments = $this->connection->fetchAll(
+                "SELECT * FROM comment WHERE objectType = 'idea' AND idea_id = :id AND parent_id IS NULL",
+                ['id' => $idea['id']]
+            );
             foreach ($ideaComments as $ideaComment) {
                 $proposalComment = (new ProposalComment())
-                    ->setAuthor($em->getRepository(User::class)->findOneBy(array('id' => $ideaComment['author_id'])))
+                    ->setAuthor($em->getRepository(User::class)->findOneBy(['id' => $ideaComment['author_id']]))
                     ->setAuthorName($ideaComment['author_name'])
                     ->setAuthorEmail($ideaComment['author_email'])
                     ->setAuthorIp($ideaComment['author_ip'])
@@ -168,11 +180,16 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
                     ->setUpdatedAt(new \DateTime($ideaComment['updated_at']))
                     ->setBody($ideaComment['body']);
 
-                $ideaCommentAnswers = $this->connection->fetchAll("SELECT * FROM comment WHERE parent_id = :id", ['id' => $ideaComment['id']]);
-                if(!empty($ideaCommentAnswers)) {
+                $ideaCommentAnswers = $this->connection->fetchAll(
+                    "SELECT * FROM comment WHERE parent_id = :id",
+                    ['id' => $ideaComment['id']]
+                );
+                if (!empty($ideaCommentAnswers)) {
                     foreach ($ideaCommentAnswers as $ideaAnswer) {
                         $answer = (new ProposalComment())
-                            ->setAuthor($em->getRepository(User::class)->findOneBy(array('id' => $ideaAnswer['author_id'])))
+                            ->setAuthor(
+                                $em->getRepository(User::class)->findOneBy(['id' => $ideaAnswer['author_id']])
+                            )
                             ->setAuthorName($ideaAnswer['author_name'])
                             ->setAuthorEmail($ideaAnswer['author_email'])
                             ->setAuthorIp($ideaAnswer['author_ip'])
@@ -193,13 +210,17 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
                 /* -----------------********************************-------------------- */
                 /* -----------------*     import comments votes    *-------------------- */
                 /* -----------------********************************-------------------- */
-                $ideaCommentsVotes = $this->connection->fetchAll("SELECT * FROM votes WHERE voteType = 'comment' AND comment_id = :id", ['id' => $proposalComment->getId()]);
+                $ideaCommentsVotes = $this->connection->fetchAll(
+                    "SELECT * FROM votes WHERE voteType = 'comment' AND comment_id = :id",
+                    ['id' => $proposalComment->getId()]
+                );
                 foreach ($ideaCommentsVotes as $ideaCommentVote) {
                     $commentVote = (new CommentVote())
                         ->setComment($proposalComment)
                         ->setCreatedAt(new \DateTime($ideaCommentVote['updated_at']))
-                        ->setUser($em->getRepository(User::class)->findOneBy(array('id' => $ideaCommentVote['voter_id'])))
-                    ;
+                        ->setUser(
+                            $em->getRepository(User::class)->findOneBy(['id' => $ideaCommentVote['voter_id']])
+                        );
 
                     $proposalComment->addVote($commentVote);
                 }
@@ -214,36 +235,40 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
         $em->flush();
     }
 
-    public function createUserFromAnonymous(EntityManager $em, array $votesWithoutUser) {
+    public function createUserFromAnonymous(EntityManager $em, array $votesWithoutUser)
+    {
 
         $output = new ConsoleOutput();
         $progress = new ProgressBar($output, \count($votesWithoutUser));
         $users = [];
         $cheaterCount = 0;
 
-        foreach($votesWithoutUser as $anonymous) {
+        foreach ($votesWithoutUser as $anonymous) {
             $email = trim(strtolower($anonymous['email']));
-            $emailAlreadyUsed = $em->getRepository(User::class)->findOneBy([
-                'email' => $email
-            ]);
+            $emailAlreadyUsed = $em->getRepository(User::class)->findOneBy(
+                [
+                    'email' => $email,
+                ]
+            );
 
-            if(!$emailAlreadyUsed && !$anonymous['voter_id'] && $email && !isset($users[$email])){
+            if (!$emailAlreadyUsed && !$anonymous['voter_id'] && $email && !isset($users[$email])) {
 
                 $users[$email]['object'] = (new User())
                     ->setEmail($email)
-                    ->setPassword('')
-                ;
+                    ->setPassword('');
 
                 $users[$email]['vote'][] = $anonymous['id'];
                 $em->persist($users[$email]['object']);
 
-            } elseif(isset($users[$email])) {
+            } elseif (isset($users[$email])) {
                 $users[$email]['vote'][] = $anonymous['id'];
 
-            } elseif($emailAlreadyUsed) {
-                $haveVotedBeforeSignUp = $em->getRepository(AbstractVote::class)->findOneBy(array('user' => $emailAlreadyUsed));
+            } elseif ($emailAlreadyUsed) {
+                $haveVotedBeforeSignUp = $em->getRepository(AbstractVote::class)->findOneBy(
+                    ['user' => $emailAlreadyUsed]
+                );
 
-                if(!$haveVotedBeforeSignUp) {
+                if (!$haveVotedBeforeSignUp) {
                     $users[$email]['object'] = $emailAlreadyUsed;
                     $users[$email]['vote'][] = $anonymous['id'];
                 } else {
@@ -256,7 +281,7 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
 
         $em->flush();
         $progress->finish();
-        $this->write('  -> ' . \count($users) . ' users created');
+        $this->write('  -> '.\count($users).' users created');
 
         $progress = new ProgressBar($output, \count($votesWithoutUser));
         $count = 0;
@@ -270,7 +295,9 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
         }
 
         $progress->finish();
-        $this->write('  -> ' . $count . ' votes without user now have one ! '. $cheaterCount . ' are double vote (one signed in, one anonymous)');
+        $this->write(
+            '  -> '.$count.' votes without user now have one ! '.$cheaterCount.' are double vote (one signed in, one anonymous)'
+        );
 
     }
 
