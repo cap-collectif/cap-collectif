@@ -8,6 +8,9 @@ import {
   Col,
   ButtonToolbar,
   Button,
+  Popover,
+  OverlayTrigger,
+  Tooltip
 } from 'react-bootstrap';
 import {connect, type MapStateToProps} from 'react-redux';
 import {YearPicker, MonthPicker, DayPicker} from 'react-dropdown-date';
@@ -192,6 +195,7 @@ type PersonalDataState = {
   month: ?number,
   day: ?number,
   showPhoneModal: boolean,
+  showDeleteModal: boolean,
 };
 
 export class PersonalData extends Component<Props, PersonalDataState> {
@@ -199,6 +203,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
     super(props);
     this.state = {
       showPhoneModal: false,
+      showDeleteModal: false,
     };
     if (props.user && props.user.dateOfBirth) {
       this.state = {
@@ -232,10 +237,16 @@ export class PersonalData extends Component<Props, PersonalDataState> {
   closePhoneModal = () => {
     this.setState({showPhoneModal: false});
   };
+  openDeleteModal = () => {
+    this.setState({showDeleteModal: true});
+  };
 
-  deleteField = (e: Event): void => {
+  closeDeleteModal = () => {
+    this.setState({showDeleteModal: false}, () => {
+    });
+  };
+  deleteField = (target: string): void => {
     // $FlowFixMe
-    const target = e.currentTarget.target;
     if (target.split('-').length > 1) {
       target.split('-').forEach(index => {
         this.props.dispatch(unregisterField(formName, index, false));
@@ -245,6 +256,31 @@ export class PersonalData extends Component<Props, PersonalDataState> {
     }
     this.props.dispatch(unregisterField(formName, target, false));
     this.props.dispatch(change(formName, target, null));
+  };
+
+  popover = (target: string) => {
+    return (
+      <Popover
+        placement="top"
+        className="in"
+        id="delete-field"
+        title={
+          <FormattedMessage id="are-you-sure-you-want-to-delete-this-field"/>
+        }>
+        <Button onClick={() => {
+          this.deleteField(target);
+        }} bsStyle="danger" className="right-bloc btn-block">
+          {<FormattedMessage id="btn_delete"/>}
+        </Button>
+        <Button onClick={() => {
+          this.closeDeleteModal();
+          this.refs[target].hide();
+        }}
+                bsStyle="default" className="right-block btn-block">
+          {<FormattedMessage id="global.no"/>}
+        </Button>
+      </Popover>
+    );
   };
 
   render() {
@@ -260,13 +296,19 @@ export class PersonalData extends Component<Props, PersonalDataState> {
       error,
       hasValue
     } = this.props;
+
+    const tooltipDelete = (
+      <Tooltip id="tooltip"><FormattedMessage id="global.delete"/></Tooltip>
+    );
+
     return (
+
       <div id="personal-data">
         {!hasData(user, hasValue) && (
           <Alert bsStyle="info">
             <span className="cap-information col-sm-1 col-md-1"/>
             <FormattedMessage
-              id="participation-personal-data-identity-verification"
+              id="participation-personal-data-idetedMessage id=tion"
               className="col-sm-7 col-md-7"
             />
           </Alert>
@@ -311,12 +353,20 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           />
                         </div>
                         <div className="col-sm-2">
-                          <a className="personal-data-delete-field" onClick={(e) => {
-                            this.deleteField(e);
-                          }} target="firstname"
-                             id="personal-data-firstname">
-                            <i className="icon cap-ios-close"></i>
-                          </a>
+                          <OverlayTrigger
+                            trigger="click"
+                            placement="top"
+                            rootClose
+                            ref="firstname"
+                            show={this.state.showDeleteModal}
+                            onHide={this.closeDeleteModal}
+                            overlay={this.popover('firstname')}>
+                            <OverlayTrigger placement="top" overlay={tooltipDelete}>
+                              <a className="personal-data-delete-field" id="personal-data-firstname">
+                                <i className="icon cap-ios-close"></i>
+                              </a>
+                            </OverlayTrigger>
+                          </OverlayTrigger>
                         </div>
                       </div>
                     )}
@@ -335,12 +385,18 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           />
                         </div>
                         <div className="col-sm-2">
-                          <a className="personal-data-delete-field" onClick={(e) => {
-                            this.deleteField(e);
-                          }} target="lastname"
-                             id="personal-data-lastname">
-                            <i className="icon cap-ios-close"></i>
-                          </a>
+                          <OverlayTrigger
+                            trigger="click"
+                            placement="top"
+                            ref="lastname"
+                            overlay={this.popover('lastname')}>
+                            <OverlayTrigger placement="top" overlay={tooltipDelete}>
+                              <a className="personal-data-delete-field"
+                                 id="personal-data-lastname">
+                                <i className="icon cap-ios-close"></i>
+                              </a>
+                            </OverlayTrigger>
+                          </OverlayTrigger>
                         </div>
                       </div>
                     )}
@@ -369,12 +425,18 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           </Field>
                         </div>
                         <div className="col-sm-2">
-                          <a className="personal-data-delete-field" onClick={(e) => {
-                            this.deleteField(e);
-                          }} target="gender"
-                             id="personal-data-gender">
-                            <i className="icon cap-ios-close"></i>
-                          </a>
+                          <OverlayTrigger
+                            trigger="click"
+                            placement="top"
+                            rootClose
+                            ref="gender"
+                            overlay={this.popover('gender')}>
+                            <OverlayTrigger placement="top" overlay={tooltipDelete}>
+                              <a className="personal-data-delete-field" id="personal-data-gender">
+                                <i className="icon cap-ios-close"></i>
+                              </a>
+                            </OverlayTrigger>
+                          </OverlayTrigger>
                         </div>
                       </div>
                     )}
@@ -435,12 +497,18 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             />
                           </Col>
                           <div className="col-sm-2">
-                            <a className="personal-data-delete-field" onClick={(e) => {
-                              this.deleteField(e);
-                            }} target="dateOfBirth"
-                               id="personal-data-dateOfBirth">
-                              <i className="icon cap-ios-close"></i>
-                            </a>
+                            <OverlayTrigger
+                              trigger="click"
+                              placement="top"
+                              rootClose
+                              ref="dateOfBirth"
+                              overlay={this.popover('dateOfBirth')}>
+                              <OverlayTrigger placement="top" overlay={tooltipDelete}>
+                                <a className="personal-data-delete-field" id="personal-data-dateOfBirth">
+                                  <i className="icon cap-ios-close"></i>
+                                </a>
+                              </OverlayTrigger>
+                            </OverlayTrigger>
                           </div>
                         </div>
                       </div>
@@ -448,12 +516,19 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                     {hasAddressData(user, hasValue) && (
                       <div className="personal_data_field">
                         <div className="col-sm-2" style={{float: 'right'}}>
-                          <a className="personal-data-delete-field" onClick={(e) => {
-                            this.deleteField(e);
-                          }} target="address-address2-city-zipCode"
-                             id="personal-data-address-address2-city-zipCode">
-                            <i className="icon cap-ios-close"></i>
-                          </a>
+                          <OverlayTrigger
+                            trigger="click"
+                            placement="top"
+                            rootClose
+                            ref="address-address2-city-zipCode"
+                            overlay={this.popover('address-address2-city-zipCode')}>
+                            <OverlayTrigger placement="top" overlay={tooltipDelete}>
+                              <a className="personal-data-delete-field"
+                                 id="personal-data-address-address2-city-zipCode">
+                                <i className="icon cap-ios-close"></i>
+                              </a>
+                            </OverlayTrigger>
+                          </OverlayTrigger>
                         </div>
                         {hasValue.address && (
                           <div className="personal-data-address">
@@ -545,6 +620,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                                     <FormattedMessage id="phone.checked"/>
                                   </Button>
                                 </span>
+                                <span>Numéro de téléphone confirmé</span>
                                 <PhoneModal pristine={pristine} show={this.state.showPhoneModal} onClose={() => {
                                   this.closePhoneModal();
                                 }}/>
@@ -552,12 +628,18 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             )}
                           </div>
                           <div className="col-sm-2">
-                            <a className="personal-data-delete-field" onClick={(e) => {
-                              this.deleteField(e);
-                            }} target="phone"
-                               id="personal-data-phone">
-                              <i className="icon cap-ios-close"></i>
-                            </a>
+                            <OverlayTrigger
+                              trigger="click"
+                              placement="top"
+                              rootClose
+                              ref="phone"
+                              overlay={this.popover('phone')}>
+                              <OverlayTrigger placement="top" overlay={tooltipDelete}>
+                                <a className="personal-data-delete-field" id="phone">
+                                  <i className="icon cap-ios-close"></i>
+                                </a>
+                              </OverlayTrigger>
+                            </OverlayTrigger>
                           </div>
 
                         </div>
