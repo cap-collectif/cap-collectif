@@ -26,6 +26,9 @@ import AlertForm from '../../Alert/AlertForm';
 import type {Dispatch, State} from '../../../types';
 import UpdateProfilePersonalDataMutation from '../../../mutations/UpdateProfilePersonalDataMutation';
 import component from "../../Form/Field";
+import PhoneForm from "../Phone/PhoneForm";
+import SmsCodeForm from "../Phone/SmsCodeForm";
+import PhoneModal from "../Phone/PhoneModal";
 
 type RelayProps = { personalDataForm: PersonalData_user };
 type Props = FormProps &
@@ -112,6 +115,7 @@ const locale = window.locale;
 
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const {intl} = props;
+  console.log(values);
   const input = {
     ...values,
     userId: props.user.id
@@ -140,13 +144,18 @@ type PersonalDataState = {
   year: ?number,
   month: ?number,
   day: ?number,
+  showPhoneModal: boolean
 };
 
 export class PersonalData extends Component<Props, PersonalDataState> {
   constructor(props: Props) {
     super(props);
+    this.state = {
+      showPhoneModal: false,
+    };
     if (props.user && props.user.dateOfBirth) {
       this.state = {
+        ...this.state,
         year: this.getYear(props.user.dateOfBirth),
         month: this.getMonth(props.user.dateOfBirth),
         day: this.getDay(props.user.dateOfBirth),
@@ -154,29 +163,29 @@ export class PersonalData extends Component<Props, PersonalDataState> {
     }
   }
 
-  getDay(date: string): number {
+  getDay= (date: string): number => {
     let day = date.substr(8, 2);
     day = day[0] === 0 ? day[1] : day;
 
     return parseInt(day, 10);
-  }
+  };
 
-  getMonth(date: string): number {
+  getMonth= (date: string): number =>{
     let month = date.substr(5, 2);
     month = month[0] === 0 ? month[1] : month;
     month = parseInt(month, 10);
 
     return month - 1;
-  }
+  };
 
-  getYear(date: string): number {
+  getYear=(date: string): number =>{
     const year = date.substr(0, 4);
 
     return parseInt(year, 10);
-  }
+  };
 
-  setDate() {
-    if (!this.state.year || this.state.month || this.state.day) {
+  setDate = () => {
+    if (!this.state.year || !this.state.month || !this.state.day) {
       return;
     }
     const month = parseInt(this.state.month, 10) + 1;
@@ -188,9 +197,17 @@ export class PersonalData extends Component<Props, PersonalDataState> {
         `${this.state.year}-${month}-${this.state.day}`
       )
     );
-  }
+  };
 
-  deleteField(e: Event): void {
+  openPhoneModal = () =>{
+    this.setState({showPhoneModal: true}) ;
+  };
+
+  closePhoneModal = () =>{
+    this.setState({showPhoneModal: false}) ;
+  };
+
+  deleteField=(e: Event): void =>{
     // $FlowFixMe
     const target = e.currentTarget.target;
     if (target.split('-').length > 1) {
@@ -202,9 +219,9 @@ export class PersonalData extends Component<Props, PersonalDataState> {
     }
     this.props.dispatch(unregisterField(formName, target, false));
     this.props.dispatch(change(formName, target, null));
-  }
+  };
 
-  hasData(user: PersonalData_user, formValue: ?Object): boolean {
+  hasData=(user: PersonalData_user, formValue: ?Object): boolean =>{
     if (
       !user.firstname &&
       !user.lastname &&
@@ -234,11 +251,12 @@ export class PersonalData extends Component<Props, PersonalDataState> {
     }
 
     return true;
-  }
+  };
 
   render() {
     const {
       user,
+      pristine,
       invalid,
       valid,
       submitSucceeded,
@@ -379,9 +397,9 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               month={this.state.month}
                               value={this.state.day}
                               onChange={day => {
-                                this.state.day = day;
-                                this.setDate();
-                                this.setState({day});
+                                this.setState({day}, () => {
+                                  this.setDate()
+                                });
                               }}
                               id={'day'}
                               name={'day'}
@@ -395,9 +413,9 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               year={this.state.year}
                               value={this.state.month}
                               onChange={month => {
-                                this.state.month = month;
-                                this.setDate();
-                                this.setState({month});
+                                this.setState({month}, () => {
+                                  this.setDate()
+                                });
                               }}
                               locale={locale.substr(3, 5)}
                               id={'month'}
@@ -411,9 +429,10 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               defaultValue={'Année'}
                               value={this.state.year}
                               onChange={year => {
-                                this.state.year = year;
-                                this.setDate();
-                                this.setState({year});
+                                this.setState({year}, () => {
+                                  this.setDate()
+                                });
+
                               }}
                               id={'year'}
                               name={'year'}
@@ -509,28 +528,54 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                       </div>
                     )}
                     {hasValue.phone && (
-                      <div className="personal_data_field">
-                        <label className="col-sm-3 control-label">
-                          <FormattedMessage id="form.label_phone"/>
-                        </label>
-                        <div>
-                          <Field
-                            name="phone"
-                            component={component}
-                            type="text"
-                            id="personal-data-form-phone"
-                            divClassName="col-sm-7"
-                          />
+                      <div>
+                        <div className="personal_data_field">
+                          <label className="col-sm-3 control-label">
+                            <FormattedMessage id="form.label_phone"/>
+                          </label>
+                          <div>
+                            <Field
+                              name="phone"
+                              component={component}
+                              type="text"
+                              id="personal-data-form-phone"
+                              divClassName="col-sm-7"
+                              addonBefore="France +33"
+                            />
+                            {user.phoneConfirmed && (
+                              <div>
+                                <span style={{marginLeft: '10px'}}>
+                                  <Button onClick={() => {
+                                    this.openPhoneModal();
+                                  }}>
+                                    <FormattedMessage id="phone.checked"/>
+                                  </Button>
+                                </span>
+                                <PhoneModal pristine={pristine} show={this.state.showPhoneModal} onClose={() => {
+                                this.closePhoneModal();
+                              }}/>
+                              </div>
+                            )}
+                          </div>
+                          <div className="col-sm-2">
+                            <a className="personal-data-delete-field" onClick={(e) => {
+                              this.deleteField(e);
+                            }} target="phone"
+                               id="personal-data-phone">
+                              <i className="icon cap-ios-close"></i>
+                            </a>
+                          </div>
+
                         </div>
-                        <div className="col-sm-2">
-                          <a className="personal-data-delete-field" onClick={(e) => {
-                            this.deleteField(e);
-                          }} target="phone"
-                             id="personal-data-phone">
-                            <i className="icon cap-ios-close"></i>
-                          </a>
-                        </div>
+                        {user.phoneConfirmed && (
+                          <div>
+                            <strong>
+                              <FormattedMessage id="phone.verified"/>
+                            </strong>
+                          </div>
+                        )}
                       </div>
+
                     )}
                   </div>
                 )}
@@ -602,6 +647,7 @@ export default createFragmentContainer(
       zipCode
       city
       gender
+      phoneConfirmed
     }
   `,
 );

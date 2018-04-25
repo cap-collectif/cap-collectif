@@ -1,5 +1,5 @@
-// flow to add
-import * as React from 'react';
+// @flow
+import React, {Component} from 'react';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { reduxForm, Field, SubmissionError } from 'redux-form';
 import { Button, Panel, Alert } from 'react-bootstrap';
@@ -29,7 +29,7 @@ const onSubmit = (values: { phone: string }, dispatch: Dispatch, state: State, p
     .then(() => {
       UserActions.sendConfirmSms()
         .then(() => {
-          onSubmitSuccess(values); // à remplacer pas un dispatch(() => {smsSentToNumberAction})
+          onSubmitSuccess(values); // à remplacer pas un dispatch(() => {smsSentToNumberAction})_
         })
         .catch(error => {
           if (error.response.message === 'sms_failed_to_send') {
@@ -66,19 +66,28 @@ const validate = ({ phone }: Object) => {
   return errors;
 };
 
-const normalizePhone = (values: { phone: string }) => {
-  const onlyNums = values.replace(/[^\d]/g, '');
-
-  if (values.length > 9) {
-    return onlyNums.slice(0, 9);
-  }
-
-  return onlyNums;
-};
-
 export const formName = 'PhoneForm';
 
-export class PhoneForm extends React.Component<Props> {
+type PhoneState={
+  alert: ?object
+};
+
+export class PhoneForm extends Component<Props, PhoneState> {
+
+  state = {
+    alert: null
+  };
+
+  normalizePhone = (values: string) => {
+    const onlyNums = values.replace(/[^\d]/g, '');
+
+    if (values.length > 9) {
+      return onlyNums.slice(0, 9);
+    }
+
+    return onlyNums;
+  };
+
   resendSmsCode(e) {
     e.preventDefault();
     UserActions.sendConfirmSms()
@@ -105,7 +114,7 @@ export class PhoneForm extends React.Component<Props> {
       });
   }
 
-  deletePhone(e) {
+  deletePhone = (e) => {
     e.preventDefault();
     UserActions.update({ phone: null }).then(() => {
       AppDispatcher.dispatch({
@@ -116,13 +125,12 @@ export class PhoneForm extends React.Component<Props> {
     // this.setState({ isUpdating: true });
   }
 
-  handleAlertDismiss() {
+  handleAlertDismiss= () => {
     this.setState({ alert: null });
   }
 
   render() {
     const { handleSubmit, submitting, pristine, user } = this.props;
-    const { alert } = this.state;
 
     const header = user.isPhoneConfirm ? (
       <FormattedMessage id="phone.confirm.check_your_phone" />
@@ -169,9 +177,9 @@ export class PhoneForm extends React.Component<Props> {
 
     return (
       <Panel header={header} footer={footer}>
-        {alert && (
-          <Alert bsStyle={alert.type} onDismiss={this.handleAlertDismiss} dismissAfter={2000}>
-            {alert.message}
+        {this.state.alert && (
+          <Alert bsStyle={this.state.alert.type} onDismiss={this.handleAlertDismiss} dismissAfter={2000}>
+            {this.state.alert.message}
           </Alert>
         )}
         {!user.phone && <FormattedHTMLMessage id="phone.confirm.infos" />}
@@ -183,7 +191,7 @@ export class PhoneForm extends React.Component<Props> {
             autoFocus
             name="phone"
             id="_phone"
-            normalize={normalizePhone}
+            normalize={this.normalizePhone}
             props={{ disabled: !!pristine }}
             label={<FormattedMessage id="global.phone" />}
           />
@@ -206,7 +214,8 @@ const mapStateToProps = (state, props: Props) => ({
   initialValues: {
     phone: props.initialValue,
   },
-  // smsSentToNumber: state.yolo.smsSentToNumber,
+  user: state.user.user,
+  // smsSentToNumber: state.smsSentToNumber,
 });
 
 export default connect(mapStateToProps)(
