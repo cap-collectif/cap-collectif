@@ -2,7 +2,7 @@ AddProposalVotePayload:
     type: relay-mutation-payload
     config:
         fields:
-            proposal:
-                type: "Proposal!"
+            vote:
+                type: "ProposalVote!"
             viewer:
                 type: "User!"

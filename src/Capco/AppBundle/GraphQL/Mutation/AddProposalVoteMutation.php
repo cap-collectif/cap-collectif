@@ -92,6 +92,7 @@ class AddProposalVoteMutation
         $vote
             ->setIpAddress($request->getClientIp())
             ->setUser($user)
+            ->setPrivate($input->offsetGet('anonymously'))
             ->setProposal($proposal)
         ;
 
@@ -109,6 +110,6 @@ class AddProposalVoteMutation
             throw new UserError('Sorry, please retry later.');
         }
 
-        return ['proposal' => $proposal, 'viewer' => $user];
+        return ['vote' => $vote, 'viewer' => $user];
     }
 }
