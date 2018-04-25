@@ -319,30 +319,6 @@ class ProfileController extends BaseController
     }
 
     /**
-     * @Route("/{slug}/ideas", name="capco_user_profile_show_ideas", defaults={"_feature_flags" = "ideas,profiles"})
-     * @Template("CapcoUserBundle:Profile:showUserIdeas.html.twig")
-     */
-    public function showIdeasAction(User $user)
-    {
-        $em = $this->get('doctrine.orm.entity_manager');
-        $serializer = $this->get('jms_serializer');
-        $ideasRaw = $em
-            ->getRepository('CapcoAppBundle:Idea')
-            ->getByUser($user)
-        ;
-        $ideas = $serializer->serialize([
-            'ideas' => $ideasRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Ideas', 'UsersInfos', 'ThemeDetails']));
-        $ideasCount = count($ideasRaw);
-
-        return [
-            'user' => $user,
-            'ideasProps' => $ideas,
-            'ideasCount' => $ideasCount,
-        ];
-    }
-
-    /**
      * @Route("/{slug}/sources", name="capco_user_profile_show_sources", defaults={"_feature_flags" = "profiles"})
      * @Template("CapcoUserBundle:Profile:showUserSources.html.twig")
      */
