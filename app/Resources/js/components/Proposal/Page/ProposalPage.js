@@ -16,14 +16,13 @@ type Props = {
   form: Object,
   proposalId: Uuid,
   categories: Array<Object>,
-  steps: Array<Object>,
   features: FeatureToggles,
   isAuthenticated: boolean,
 };
 
 export class ProposalPage extends React.Component<Props> {
   render() {
-    const { proposalId, steps, features, categories, form } = this.props;
+    const { proposalId, features, categories, form } = this.props;
     return (
       <div>
         <QueryRenderer
@@ -40,6 +39,7 @@ export class ProposalPage extends React.Component<Props> {
               }
               proposal: node(id: $proposalId) {
                 ...ProposalDraftAlert_proposal
+                ...ProposalPageAlert_proposal
                 ...ProposalPageTabs_proposal
                 ...ProposalPageHeader_proposal
               }
@@ -71,7 +71,6 @@ export class ProposalPage extends React.Component<Props> {
                     <ProposalPageTabs
                       proposal={props.proposal}
                       viewer={props.viewer || null}
-                      steps={steps}
                       features={features}
                       categories={categories}
                       form={form}
@@ -94,9 +93,6 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
   return {
     isAuthenticated: state.user.user !== null,
     features: state.default.features,
-    steps:
-      state.project.currentProjectById &&
-      state.project.projectsById[state.project.currentProjectById].steps,
   };
 };
 

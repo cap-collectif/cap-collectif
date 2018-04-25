@@ -12,7 +12,7 @@ import type {
 } from './__generated__/ProposalVoteBasketWidgetAppQuery.graphql';
 
 type Props = {
-  projectId: string,
+  stepId: string,
   votesPageUrl: string,
   image: string,
 };
@@ -23,18 +23,17 @@ export default (data: Props) => (
       <QueryRenderer
         variables={
           ({
-            project: data.projectId,
-            withVotes: false,
+            stepId: data.stepId,
           }: ProposalVoteBasketWidgetAppQueryVariables)
         }
         environment={environment}
         query={graphql`
-          query ProposalVoteBasketWidgetAppQuery($project: ID!, $withVotes: Boolean!) {
-            project: node(id: $project) {
-              ...ProposalVoteBasketWidget_project
+          query ProposalVoteBasketWidgetAppQuery($stepId: ID!) {
+            step: node(id: $stepId) {
+              ...ProposalVoteBasketWidget_step
             }
             viewer {
-              ...ProposalVoteBasketWidget_viewer @arguments(withVotes: $withVotes)
+              ...ProposalVoteBasketWidget_viewer @arguments(stepId: $stepId)
             }
           }
         `}
@@ -46,11 +45,11 @@ export default (data: Props) => (
             return graphqlError;
           }
           if (props) {
-            if (props.project) {
+            if (props.step) {
               return (
                 // $FlowFixMe
                 <ProposalVoteBasketWidget
-                  project={props.project}
+                  step={props.step}
                   viewer={props.viewer}
                   image={data.image}
                   votesPageUrl={data.votesPageUrl}

@@ -3,17 +3,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalPageBlog } from './ProposalPageBlog';
-import { $refType } from '../../../mocks';
+import { $refType, $fragmentRefs } from '../../../mocks';
 
 describe('<ProposalPageBlog />', () => {
   const proposal = {
     $refType,
     news: {
       totalCount: 2,
-      edges: [
-        { node: { title: '1', createdAt: null, authors: [] } },
-        { node: { title: '2', createdAt: null, authors: [] } },
-      ],
+      edges: [{ node: { $fragmentRefs } }, { node: { $fragmentRefs } }],
     },
   };
 

@@ -20,7 +20,9 @@ export class ProposalPageBlog extends React.Component<Props> {
     return (
       <ul className="media-list">
         {proposal.news.edges &&
-          proposal.news.edges.map((post, index) => <Post post={post} key={index} />)}
+          proposal.news.edges
+            .filter(Boolean)
+            .map((edge, index) => <Post post={edge.node} key={index} />)}
       </ul>
     );
   }
@@ -34,13 +36,7 @@ export default createFragmentContainer(
         totalCount
         edges {
           node {
-            title
-            createdAt
-            authors {
-              id
-              vip
-              displayName
-            }
+            ...Post_post
           }
         }
       }

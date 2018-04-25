@@ -102,6 +102,8 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none 1`]
     id="proposal-vote-btn"
     proposal={
       Object {
+        "$fragmentRefs": null,
+        "$refType": null,
         "author": Object {
           "displayName": "userAdmin",
           "media": Object {
@@ -110,6 +112,11 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none 1`]
           "username": "userAdmin",
         },
         "createdAt": "2015-01-01 00:00:00",
+        "currentVotableStep": Object {
+          "id": "step1",
+          "open": true,
+        },
+        "id": "1",
         "publicationStatus": "PUBLISHED",
         "show_url": "true",
         "theme": null,
@@ -123,6 +130,8 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none 1`]
     isAuthenticated={true}
     proposal={
       Object {
+        "$fragmentRefs": null,
+        "$refType": null,
         "author": Object {
           "displayName": "userAdmin",
           "media": Object {
@@ -131,6 +140,11 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none 1`]
           "username": "userAdmin",
         },
         "createdAt": "2015-01-01 00:00:00",
+        "currentVotableStep": Object {
+          "id": "step1",
+          "open": true,
+        },
+        "id": "1",
         "publicationStatus": "PUBLISHED",
         "show_url": "true",
         "theme": null,
@@ -244,6 +258,8 @@ exports[`<ProposalPageHeader /> should render a proposal header 1`] = `
     id="proposal-vote-btn"
     proposal={
       Object {
+        "$fragmentRefs": null,
+        "$refType": null,
         "author": Object {
           "displayName": "userAdmin",
           "media": Object {
@@ -252,6 +268,11 @@ exports[`<ProposalPageHeader /> should render a proposal header 1`] = `
           "username": "userAdmin",
         },
         "createdAt": "2015-01-01 00:00:00",
+        "currentVotableStep": Object {
+          "id": "step1",
+          "open": true,
+        },
+        "id": "1",
         "publicationStatus": "PUBLISHED",
         "show_url": "true",
         "theme": Object {
@@ -267,6 +288,8 @@ exports[`<ProposalPageHeader /> should render a proposal header 1`] = `
     isAuthenticated={true}
     proposal={
       Object {
+        "$fragmentRefs": null,
+        "$refType": null,
         "author": Object {
           "displayName": "userAdmin",
           "media": Object {
@@ -275,6 +298,11 @@ exports[`<ProposalPageHeader /> should render a proposal header 1`] = `
           "username": "userAdmin",
         },
         "createdAt": "2015-01-01 00:00:00",
+        "currentVotableStep": Object {
+          "id": "step1",
+          "open": true,
+        },
+        "id": "1",
         "publicationStatus": "PUBLISHED",
         "show_url": "true",
         "theme": Object {

@@ -40,3 +40,10 @@ Post:
             abstract:
                type: "String!"
                resolve: "@=resolver('post_abstract', [value])"
+            url:
+               type: "String!"
+               resolve: "url"
+            media:
+              type: "Media"
+            themes:
+              type: "[Theme!]!"

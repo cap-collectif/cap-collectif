@@ -17,8 +17,10 @@ use Capco\AppBundle\Repository\SelectionStepRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
-class ProposalStepVotesResolver
+class ProposalStepVotesResolver extends AbstractExtension
 {
     protected $proposalSelectionVoteRepository;
     protected $selectionStepRepository;
@@ -38,6 +40,13 @@ class ProposalStepVotesResolver
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->collectStepRepository = $collectStepRepository;
         $this->proposalRepository = $proposalRepository;
+    }
+
+    public function getFilters()
+    {
+        return [
+            new TwigFilter('current_votable_step', [$this, 'getFirstVotableStepForProposal']),
+        ];
     }
 
     public function voteIsPossible($vote)
@@ -121,7 +130,7 @@ class ProposalStepVotesResolver
         return $steps;
     }
 
-    public function getFirstVotableStepForProposal(Proposal $proposal)
+    public function getFirstVotableStepForProposal(Proposal $proposal): ?AbstractStep
     {
         $votableSteps = $this->getVotableStepsForProposal($proposal);
         $firstVotableStep = null;

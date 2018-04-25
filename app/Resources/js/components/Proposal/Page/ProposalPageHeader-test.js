@@ -3,11 +3,18 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalPageHeader } from './ProposalPageHeader';
+import { $refType, $fragmentRefs } from '../../../mocks';
 
 describe('<ProposalPageHeader />', () => {
-  // $FlowFixMe $refType
   const proposal = {
+    $refType,
+    $fragmentRefs,
+    id: '1',
     title: 'titre',
+    currentVotableStep: {
+      id: 'step1',
+      open: true,
+    },
     theme: {
       title: 'titre du theme',
     },
@@ -23,10 +30,17 @@ describe('<ProposalPageHeader />', () => {
     publicationStatus: 'PUBLISHED',
     show_url: 'true',
   };
-  // $FlowFixMe $refType
+
   const proposalWithoutTheme = {
+    $refType,
+    $fragmentRefs,
+    id: '1',
     title: 'titre',
     theme: null,
+    currentVotableStep: {
+      id: 'step1',
+      open: true,
+    },
     author: {
       username: 'userAdmin',
       displayName: 'userAdmin',
