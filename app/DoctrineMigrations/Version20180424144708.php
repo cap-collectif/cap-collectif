@@ -1,7 +1,5 @@
 <?php
-
 namespace Application\Migrations;
-
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\CommentVote;
 use Capco\AppBundle\Entity\Project;
@@ -25,48 +23,39 @@ use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
 class Version20180424144708 extends AbstractMigration implements ContainerAwareInterface
 {
     private $container;
-
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
     }
-
     public function postUp(Schema $schema)
     {
         $em = $this->container->get('doctrine.orm.entity_manager');
         $ideas = $this->connection->fetchAll("SELECT * FROM idea", ['']);
-
         if(!empty($ideas)) {
-
             /* ------********************************************************------ */
             /* ------* create anonymous users from ideas for proposal votes *------ */
             /* ------********************************************************------ */
             $this->write('-> searching votes where user is not set then create if not exist');
-
             $votesWithoutUser = $this->connection->fetchAll(
                 "SELECT * FROM votes WHERE voteType = 'idea' AND voter_id IS NULL",
                 ['']
             );
             $this->createUserFromAnonymous($em, $votesWithoutUser);
-
             /* --------------------*************************-------------------- */
             /* --------------------* create project & step *-------------------- */
             /* --------------------*************************-------------------- */
             $this->write('-> create project boite à idées');
-
             $collectStep = (new CollectStep())
                 ->setTitle('Dépôt')
                 ->setLabel('Dépôt')
                 ->setTimeless(true)
                 ->setVoteType(VoteTypeTrait::$VOTE_TYPE_SIMPLE);
-
             $project = (new Project())
                 ->setTitle('Boîte à idées')
                 ->setIsEnabled(true)
@@ -81,12 +70,10 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
                     ->setPosition(1)
             );
             $em->persist($project);
-
             /* --------------------*************************--------------------- */
             /* --------------------*  create proposalForm  *--------------------- */
             /* --------------------*************************--------------------- */
             $this->write('-> create proposalForm');
-
             $question = (new SimpleQuestion())
                 ->setTitle('Objectif')
                 ->setType(AbstractQuestion::QUESTION_TYPE_MULTILINE_TEXT);
@@ -99,33 +86,27 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
                 ->addQuestion($questionnaireQuestion)
                 ->setStep($project->getSteps()[0]->getStep());
             $em->persist($proposalForm);
-
             /* -----------------********************************------------------- */
             /* -----------------* import ideas into proposals  *------------------- */
             /* -----------------********************************------------------- */
             $this->write('-> import ideas into proposals');
             $this->importIdeas($em, $proposalForm);
 
-        } else {
-            $this->write('-> Skipping migration, no ideas to import...');
         }
 
+        $this->abortIf(empty($ideas) , 'Skipping migration, no ideas to import...');
 
     }
-
     public function importIdeas(EntityManager $em, ProposalForm $proposalForm)
     {
-
         $output = new ConsoleOutput();
         $ideas = $this->connection->fetchAll("SELECT * FROM idea", ['']);
         $progress = new ProgressBar($output, \count($ideas));
         $questions = $proposalForm->getRealQuestions()->first();
-
         foreach ($ideas as $idea) {
             $response = (new ValueResponse())
                 ->setValue($idea['object'])
                 ->setQuestion($questions);
-
             $proposal = (new Proposal())
                 ->setProposalForm($proposalForm)
                 ->setTitle($idea['title'])
@@ -137,16 +118,12 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
                 ->setCreatedAt(new \DateTime($idea['created_at']))
                 ->addResponse($response)
                 ->setUpdatedAt(new \DateTime($idea['updated_at']));
-
-
             if ($idea['media_id']) {
                 $proposal->setMedia($em->getRepository(Theme::class)->findOneBy(['id' => $idea['media_id']]));
             }
-
             /* -----------------**************************************************---------------- */
             /* -----------------* import ideas votes & create user if no account *---------------- */
             /* -----------------**************************************************---------------- */
-
             $ideaVotes = $this->connection->fetchAll("SELECT * FROM votes WHERE idea_id = :id", ['id' => $idea['id']]);
             foreach ($ideaVotes as $ideaVote) {
                 $vote = (new ProposalCollectVote())
@@ -157,10 +134,8 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
                     ->setUsername($ideaVote['username'])
                     ->setEmail($ideaVote['email'])
                     ->setIpAddress($ideaVote['ip_address']);
-
                 $proposal->addCollectVote($vote);
             }
-
             /* -----------------***************************************------------------- */
             /* -----------------* import ideas comments into proposal *------------------- */
             /* -----------------***************************************------------------- */
@@ -182,7 +157,6 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
                     ->setCreatedAt(new \DateTime($ideaComment['created_at']))
                     ->setUpdatedAt(new \DateTime($ideaComment['updated_at']))
                     ->setBody($ideaComment['body']);
-
                 $ideaCommentAnswers = $this->connection->fetchAll(
                     "SELECT * FROM comment WHERE parent_id = :id",
                     ['id' => $ideaComment['id']]
@@ -205,11 +179,9 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
                             ->setUpdatedAt(new \DateTime($ideaComment['updated_at']))
                             ->setParent($proposalComment)
                             ->setBody($ideaComment['body']);
-
                         $proposalComment->addAnswer($answer);
                     }
                 }
-
                 /* -----------------********************************-------------------- */
                 /* -----------------*     import comments votes    *-------------------- */
                 /* -----------------********************************-------------------- */
@@ -224,28 +196,21 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
                         ->setUser(
                             $em->getRepository(User::class)->findOneBy(['id' => $ideaCommentVote['voter_id']])
                         );
-
                     $proposalComment->addVote($commentVote);
                 }
-
                 $proposal->addComment($proposalComment);
             }
-
             $em->persist($proposal);
             $progress->advance();
         }
-
         $em->flush();
     }
-
     public function createUserFromAnonymous(EntityManager $em, array $votesWithoutUser)
     {
-
         $output = new ConsoleOutput();
         $progress = new ProgressBar($output, \count($votesWithoutUser));
         $users = [];
         $cheaterCount = 0;
-
         foreach ($votesWithoutUser as $anonymous) {
             $email = trim(strtolower($anonymous['email']));
             $emailAlreadyUsed = $em->getRepository(User::class)->findOneBy(
@@ -253,24 +218,20 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
                     'email' => $email,
                 ]
             );
-
             if (!$emailAlreadyUsed && !$anonymous['voter_id'] && $email && !isset($users[$email])) {
-
                 $users[$email]['object'] = (new User())
                     ->setEmail($email)
                     ->setPassword('');
-
                 $users[$email]['vote'][] = $anonymous['id'];
                 $em->persist($users[$email]['object']);
-
             } elseif (isset($users[$email])) {
                 $users[$email]['vote'][] = $anonymous['id'];
-
             } elseif ($emailAlreadyUsed) {
-                $haveVotedBeforeSignUp = $em->getRepository(AbstractVote::class)->findOneBy(
-                    ['user' => $emailAlreadyUsed]
+                $haveVotedBeforeSignUp = $this->connection->fetchAll(
+                    "SELECT * FROM votes WHERE voteType = 'idea' AND email = :email",
+                    ['email' => $emailAlreadyUsed->getEmail()]
                 );
-
+                
                 if (!$haveVotedBeforeSignUp) {
                     $users[$email]['object'] = $emailAlreadyUsed;
                     $users[$email]['vote'][] = $anonymous['id'];
@@ -278,17 +239,13 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
                     $cheaterCount++;
                 }
             }
-
             $progress->advance();
         }
-
         $em->flush();
         $progress->finish();
         $this->write('  -> '.\count($users).' users created');
-
         $progress = new ProgressBar($output, \count($votesWithoutUser));
         $count = 0;
-
         foreach ($users as $user) {
             foreach ($user['vote'] as $vote) {
                 $this->connection->update('votes', ['voter_id' => $user['object']->getId()], ['id' => $vote]);
@@ -296,33 +253,38 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
                 $progress->advance();
             }
         }
-
         $progress->finish();
         $this->write(
             '  -> '.$count.' votes without user now have one ! '.$cheaterCount.' are double vote (one signed in, one anonymous)'
         );
+    }
 
+    public function removeIdeas(EntityManager $em)
+    {
+        $this->connection->delete('comment', [
+            'objectType' => 'idea'
+        ]);
+
+        $this->connection->delete('vote', [
+            'voteType' => 'idea'
+        ]);
     }
 
     public function postDown(Schema $schema)
     {
     }
-
     /**
      * @param Schema $schema
      */
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-
     }
-
     /**
      * @param Schema $schema
      */
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-
     }
 }
