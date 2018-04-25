@@ -6,7 +6,6 @@ import ProposalStepPageApp from '../js/startup/ProposalStepPageApp';
 import NavbarApp from '../js/startup/NavbarAppClient';
 import EmailNotConfirmedApp from '../js/startup/EmailNotConfirmedAppClient';
 import NewOpinionApp from '../js/startup/NewOpinionAppClient';
-import NewIdeaApp from '../js/startup/NewIdeaAppClient';
 import PhoneProfileApp from '../js/startup/PhoneProfileApp';
 import AccountProfileApp from '../js/startup/AccountProfileApp';
 import ProjectTrashButtonApp from '../js/startup/ProjectTrashButtonApp';
@@ -23,10 +22,6 @@ import AlertBoxApp from '../js/startup/AlertBoxApp';
 import ConsultationPageApp from '../js/startup/ConsultationPageApp';
 import ProposalListApp from '../js/startup/ProposalListApp';
 import ProposalsUserVotesPageApp from '../js/startup/ProposalsUserVotesPageApp';
-import IdeasIndexPageApp from '../js/startup/IdeasIndexPageApp';
-import IdeaPageApp from '../js/startup/IdeaPageApp';
-import IdeasListApp from '../js/startup/IdeasListApp';
-import IdeaCreateApp from '../js/startup/IdeaCreateApp';
 import ShareButtonDropdownApp from '../js/startup/ShareButtonDropdownApp';
 import ProposalCreateFusionButtonApp from '../js/startup/ProposalCreateFusionButtonApp';
 import ProposalFormCreateButtonApp from '../js/startup/ProposalFormCreateButtonApp';
@@ -66,7 +61,6 @@ ReactOnRails.register({
   NavbarApp,
   EmailNotConfirmedApp,
   NewOpinionApp,
-  NewIdeaApp,
   ProjectTrashButtonApp,
   OpinionPageApp,
   CommentSectionApp,
@@ -82,10 +76,6 @@ ReactOnRails.register({
   ProposalsUserVotesPageApp,
   PhoneProfileApp,
   AccountProfileApp,
-  IdeasIndexPageApp,
-  IdeasListApp,
-  IdeaPageApp,
-  IdeaCreateApp,
   ShareButtonDropdownApp,
   ProposalFormAdminPageApp,
   GroupAdminPageApp,

@@ -92,6 +92,8 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
             $this->write('-> import ideas into proposals');
             $this->importIdeas($em, $proposalForm);
 
+            $this->removeIdeas();
+
         }
 
         $this->abortIf(empty($ideas) , 'Skipping migration, no ideas to import...');
@@ -128,12 +130,14 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
             foreach ($ideaVotes as $ideaVote) {
                 $vote = (new ProposalCollectVote())
                     ->setProposal($proposal)
+                    ->setPrivate($ideaVote['private'])
                     ->setCollectStep($proposal->getStep())
                     ->setCreatedAt(new \DateTime($ideaVote['created_at']))
                     ->setUser($em->getRepository(User::class)->findOneBy(['id' => $ideaVote['voter_id']]))
                     ->setUsername($ideaVote['username'])
                     ->setEmail($ideaVote['email'])
                     ->setIpAddress($ideaVote['ip_address']);
+
                 $proposal->addCollectVote($vote);
             }
             /* -----------------***************************************------------------- */
@@ -259,15 +263,10 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
         );
     }
 
-    public function removeIdeas(EntityManager $em)
+    public function removeIdeas()
     {
-        $this->connection->delete('comment', [
-            'objectType' => 'idea'
-        ]);
-
-        $this->connection->delete('vote', [
-            'voteType' => 'idea'
-        ]);
+        $this->connection->executeQuery("DELETE FROM comment WHERE objectType='idea'");
+        $this->connection->executeQuery("DELETE FROM votes WHERE voteType='idea'");
     }
 
     public function postDown(Schema $schema)

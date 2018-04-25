@@ -79,10 +79,6 @@ const submitReport = (
   });
 };
 
-export const submitIdeaReport = (idea: number, data: Object, dispatch: Dispatch) => {
-  return submitReport(`/ideas/${idea}/reports`, data, dispatch, 'alert.success.report.idea');
-};
-
 export const submitSourceReport = (
   opinion: Object,
   sourceId: Uuid,
