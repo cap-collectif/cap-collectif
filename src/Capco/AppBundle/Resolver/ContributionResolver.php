@@ -21,7 +21,7 @@ class ContributionResolver
 
     // Code may looks ugly but in fact it's highly optimized !
     // Nope TODO https://github.com/cap-collectif/platform/issues/5296
-    public function getProjectContributorsOrdered(Project $project, $excludePrivate = false, $pagination = 16, $page = 1): array
+    public function getProjectContributorsOrdered(Project $project, $excludePrivate = false, $pagination = 16, $page = 1)
     {
         // Fetch contributors
         $sourcesContributors = $this->repository->findProjectSourceContributorsWithCount($project);
@@ -86,17 +86,17 @@ class ContributionResolver
         }
 
         foreach ($contributors as &$contributor) {
-            $contributor['contributions'] = $contributor['sources'] ?? 0;
-            $contributor['contributions'] += $contributor['arguments'] ?? 0;
-            $contributor['contributions'] += $contributor['opinions'] ?? 0;
-            $contributor['contributions'] += $contributor['proposals'] ?? 0;
-            $contributor['contributions'] += $contributor['replies'] ?? 0;
-            $contributor['contributions'] += $contributor['versions'] ?? 0;
-            $contributor['votes'] = $contributor['opinions_votes'] ?? 0;
-            $contributor['votes'] += $contributor['versions_votes'] ?? 0;
-            $contributor['votes'] += $contributor['arguments_votes'] ?? 0;
-            $contributor['votes'] += $contributor['sources_votes'] ?? 0;
-            $contributor['votes'] += $contributor['proposals_votes'] ?? 0;
+            $contributor['contributions'] = isset($contributor['sources']) ? $contributor['sources'] : 0;
+            $contributor['contributions'] += isset($contributor['arguments']) ? $contributor['arguments'] : 0;
+            $contributor['contributions'] += isset($contributor['opinions']) ? $contributor['opinions'] : 0;
+            $contributor['contributions'] += isset($contributor['proposals']) ? $contributor['proposals'] : 0;
+            $contributor['contributions'] += isset($contributor['replies']) ? $contributor['replies'] : 0;
+            $contributor['contributions'] += isset($contributor['versions']) ? $contributor['versions'] : 0;
+            $contributor['votes'] = isset($contributor['opinions_votes']) ? $contributor['opinions_votes'] : 0;
+            $contributor['votes'] += isset($contributor['versions_votes']) ? $contributor['versions_votes'] : 0;
+            $contributor['votes'] += isset($contributor['arguments_votes']) ? $contributor['arguments_votes'] : 0;
+            $contributor['votes'] += isset($contributor['sources_votes']) ? $contributor['sources_votes'] : 0;
+            $contributor['votes'] += isset($contributor['proposals_votes']) ? $contributor['proposals_votes'] : 0;
         }
 
         uasort($contributors, function ($a, $b) {
@@ -104,7 +104,7 @@ class ContributionResolver
         });
 
         if ($pagination && $page) {
-            $contributorsPage = \array_slice($contributors, $pagination * $page - $pagination, $pagination, true);
+            $contributorsPage = array_slice($contributors, $pagination * $page - $pagination, $pagination, true);
 
             $users = $this->repository->findWithMediaByIds(array_keys($contributorsPage));
 
@@ -116,13 +116,13 @@ class ContributionResolver
         return $contributors;
     }
 
-    public function countProjectContributors(Project $project): int
+    public function countProjectContributors(Project $project)
     {
-        return \count($this->getProjectContributorsOrdered($project));
+        return count($this->getProjectContributorsOrdered($project));
     }
 
     // Code may looks ugly but in fact it's highly optimized !
-    public function getStepContributorsOrdered(AbstractStep $step): array
+    public function getStepContributorsOrdered(AbstractStep $step)
     {
         $contributors = [];
 
@@ -180,16 +180,16 @@ class ContributionResolver
         }
 
         foreach ($contributors as &$contributor) {
-            $contributor['contributions'] = $contributor['sources'] ?? 0;
-            $contributor['contributions'] += $contributor['arguments'] ?? 0;
-            $contributor['contributions'] += $contributor['opinions'] ?? 0;
-            $contributor['contributions'] += $contributor['proposals'] ?? 0;
-            $contributor['contributions'] += $contributor['versions'] ?? 0;
-            $contributor['votes'] = $contributor['opinions_votes'] ?? 0;
-            $contributor['votes'] += $contributor['versions_votes'] ?? 0;
-            $contributor['votes'] += $contributor['arguments_votes'] ?? 0;
-            $contributor['votes'] += $contributor['sources_votes'] ?? 0;
-            $contributor['votes'] += $contributor['proposals_votes'] ?? 0;
+            $contributor['contributions'] = isset($contributor['sources']) ? $contributor['sources'] : 0;
+            $contributor['contributions'] += isset($contributor['arguments']) ? $contributor['arguments'] : 0;
+            $contributor['contributions'] += isset($contributor['opinions']) ? $contributor['opinions'] : 0;
+            $contributor['contributions'] += isset($contributor['proposals']) ? $contributor['proposals'] : 0;
+            $contributor['contributions'] += isset($contributor['versions']) ? $contributor['versions'] : 0;
+            $contributor['votes'] = isset($contributor['opinions_votes']) ? $contributor['opinions_votes'] : 0;
+            $contributor['votes'] += isset($contributor['versions_votes']) ? $contributor['versions_votes'] : 0;
+            $contributor['votes'] += isset($contributor['arguments_votes']) ? $contributor['arguments_votes'] : 0;
+            $contributor['votes'] += isset($contributor['sources_votes']) ? $contributor['sources_votes'] : 0;
+            $contributor['votes'] += isset($contributor['proposals_votes']) ? $contributor['proposals_votes'] : 0;
         }
 
         uasort($contributors, function ($a, $b) {
@@ -199,12 +199,12 @@ class ContributionResolver
         return $contributors;
     }
 
-    public function countStepContributors(AbstractStep $step): int
+    public function countStepContributors(AbstractStep $step)
     {
-        return \count($this->getStepContributorsOrdered($step));
+        return count($this->getStepContributorsOrdered($step));
     }
 
-    public function countProjectContributions(Project $project): int
+    public function countProjectContributions(Project $project)
     {
         $count = 0;
         foreach ($project->getSteps() as $step) {
@@ -251,7 +251,7 @@ class ContributionResolver
         return $count;
     }
 
-    public function countProjectVotes(Project $project): int
+    public function countProjectVotes(Project $project)
     {
         $count = 0;
         foreach ($project->getSteps() as $pas) {

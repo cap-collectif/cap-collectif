@@ -24,6 +24,10 @@ type Props = FormProps & FormValues & RelayProps & { intl: IntlShape };
 
 const formName = 'proposal-evaluation';
 
+const onUnload = (event: SyntheticEvent<>) => {
+  event.preventDefault();
+};
+
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   if (props.proposal.form.evaluationForm) {
     return ChangeProposalEvaluationMutation.commit({
@@ -40,6 +44,20 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 };
 
 export class ProposalPageEvaluation extends React.Component<Props> {
+  componentDidUpdate(prevProps: Props) {
+    if (prevProps.dirty === false && this.props.dirty === true) {
+      window.addEventListener('beforeunload', onUnload);
+    }
+
+    if (this.props.dirty === false) {
+      window.removeEventListener('beforeunload', onUnload);
+    }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('beforeunload', onUnload);
+  }
+
   render() {
     const {
       error,
