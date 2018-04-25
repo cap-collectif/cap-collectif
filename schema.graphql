@@ -1349,6 +1349,7 @@ type Proposal implements Node {
     # The concerned step.
     step: ID!
   ): Boolean!
+  viewerHasReported: Boolean!
 }
 
 # The affiliation of a user to a proposal
@@ -1965,6 +1966,7 @@ type SelectionStep implements Step & Node & ProposalStep {
   # If enabled, allow voters to order their votes by preferences.
   votesRanking: Boolean!
   votesLimit: Int
+  position: Int!
   voteType: ProposalStepVoteType!
   budget: Int
   open: Boolean!

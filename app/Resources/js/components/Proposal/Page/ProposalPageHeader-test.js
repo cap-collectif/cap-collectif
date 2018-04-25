@@ -43,20 +43,6 @@ describe('<ProposalPageHeader />', () => {
   const props = {
     className: '',
     referer: 'http://capco.test',
-    oldProposal: {
-      selections: [],
-      votesByStepId: {
-        selectionstep1: [],
-        collectstep1: [],
-      },
-      votableStepId: 'selectionstep1',
-      votesCountByStepId: {
-        selectionstep1: 0,
-        collectstep1: 0,
-      },
-      isDraft: false,
-      viewerCanSeeEvaluation: true,
-    },
   };
 
   it('should render a proposal header', () => {

@@ -158,7 +158,7 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                   }
                 }
               />
-              <Connect(ProposalPageContent)
+              <Relay(ProposalPageContent)
                 categories={Array []}
                 form={
                   Object {
@@ -169,20 +169,23 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                 }
                 proposal={
                   Object {
-                    "isDraft": false,
-                    "selections": Array [],
-                    "viewerCanSeeEvaluation": true,
-                    "votableStepId": "selectionstep1",
-                    "votesByStepId": Object {
-                      "collectstep1": Array [],
-                      "selectionstep1": Array [],
+                    "$fragmentRefs": null,
+                    "$refType": null,
+                    "currentVotableStep": null,
+                    "followerConnection": Object {
+                      "totalCount": 169,
                     },
-                    "votesCountByStepId": Object {
-                      "collectstep1": 0,
-                      "selectionstep1": 0,
+                    "id": "1",
+                    "news": Object {
+                      "totalCount": 1,
+                    },
+                    "viewerCanSeeEvaluation": true,
+                    "votes": Object {
+                      "totalCount": 1,
                     },
                   }
                 }
+                viewer={null}
               />
             </Col>
             <Col
@@ -216,20 +219,22 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                 showThemes={true}
               />
               <br />
-              <ProposalPageAdvancement
+              <Relay(ProposalPageAdvancement)
                 proposal={
                   Object {
-                    "isDraft": false,
-                    "selections": Array [],
-                    "viewerCanSeeEvaluation": true,
-                    "votableStepId": "selectionstep1",
-                    "votesByStepId": Object {
-                      "collectstep1": Array [],
-                      "selectionstep1": Array [],
+                    "$fragmentRefs": null,
+                    "$refType": null,
+                    "currentVotableStep": null,
+                    "followerConnection": Object {
+                      "totalCount": 169,
                     },
-                    "votesCountByStepId": Object {
-                      "collectstep1": 0,
-                      "selectionstep1": 0,
+                    "id": "1",
+                    "news": Object {
+                      "totalCount": 1,
+                    },
+                    "viewerCanSeeEvaluation": true,
+                    "votes": Object {
+                      "totalCount": 1,
                     },
                   }
                 }

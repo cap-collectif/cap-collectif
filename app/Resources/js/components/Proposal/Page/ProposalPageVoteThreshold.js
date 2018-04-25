@@ -4,16 +4,18 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { ProgressBar } from 'react-bootstrap';
 import type { ProposalPageVoteThreshold_step } from './__generated__/ProposalPageVoteThreshold_step.graphql';
+import type { ProposalPageVoteThreshold_proposal } from './__generated__/ProposalPageVoteThreshold_proposal.graphql';
 
 type Props = {
-  proposal: Object,
+  proposal: ProposalPageVoteThreshold_proposal,
   step: ProposalPageVoteThreshold_step,
 };
 
 export class ProposalPageVoteThreshold extends React.Component<Props> {
   render() {
-    const { step } = this.props;
-    const votesCount = 0; // proposal.votesCountByStepId[step.id];
+    const { step, proposal } = this.props;
+    // We should use a new query render to fetch votes only from the step
+    const votesCount = proposal.votes.totalCount;
     const voteThreshold = step.voteThreshold;
     if (voteThreshold === null || typeof voteThreshold === 'undefined') {
       return null;
@@ -73,6 +75,14 @@ export class ProposalPageVoteThreshold extends React.Component<Props> {
 }
 
 export default createFragmentContainer(ProposalPageVoteThreshold, {
+  proposal: graphql`
+    fragment ProposalPageVoteThreshold_proposal on Proposal {
+      id
+      votes {
+        totalCount
+      }
+    }
+  `,
   step: graphql`
     fragment ProposalPageVoteThreshold_step on Step {
       id

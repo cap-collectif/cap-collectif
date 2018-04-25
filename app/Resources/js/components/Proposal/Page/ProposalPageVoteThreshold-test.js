@@ -1,3 +1,4 @@
+// @flow
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
@@ -5,7 +6,9 @@ import { ProposalPageVoteThreshold } from './ProposalPageVoteThreshold';
 
 describe('<ProposalPageVoteThreshold />', () => {
   const proposal = {
-    votesCount: 30,
+    votes: {
+      totalCount: 30,
+    },
   };
 
   const stepWithVoteThreshold = {

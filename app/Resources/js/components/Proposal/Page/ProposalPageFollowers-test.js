@@ -75,7 +75,6 @@ describe('<ProposalPageFollowers />', () => {
   const props = {
     className: '',
     referer: 'http://capco.test',
-    oldProposal: {},
     relay: relayPaginationMock,
   };
 

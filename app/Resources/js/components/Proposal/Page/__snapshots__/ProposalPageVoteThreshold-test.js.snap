@@ -29,7 +29,7 @@ exports[`<ProposalPageVoteThreshold /> should render proposal page vote threshol
         id="proposal.vote.count"
         values={
           Object {
-            "num": 0,
+            "num": 30,
           }
         }
       />
@@ -39,10 +39,10 @@ exports[`<ProposalPageVoteThreshold /> should render proposal page vote threshol
       bsClass="progress-bar"
       bsStyle="success"
       isChild={false}
-      label="0%"
+      label="30%"
       max={100}
       min={0}
-      now={0}
+      now={30}
       srOnly={false}
       striped={false}
     />
@@ -52,7 +52,7 @@ exports[`<ProposalPageVoteThreshold /> should render proposal page vote threshol
         values={
           Object {
             "max": 100,
-            "num": 100,
+            "num": 70,
           }
         }
       />
@@ -75,7 +75,7 @@ exports[`<ProposalPageVoteThreshold /> should render proposal page vote threshol
   >
     <h4>
       <FormattedMessage
-        id="proposal.vote.threshold.title"
+        id="proposal.vote.threshold.reached"
         values={Object {}}
       />
     </h4>
@@ -90,7 +90,7 @@ exports[`<ProposalPageVoteThreshold /> should render proposal page vote threshol
         id="proposal.vote.count"
         values={
           Object {
-            "num": 0,
+            "num": 30,
           }
         }
       />
@@ -100,20 +100,20 @@ exports[`<ProposalPageVoteThreshold /> should render proposal page vote threshol
       bsClass="progress-bar"
       bsStyle="success"
       isChild={false}
-      label="0%"
-      max={100}
+      label="150%"
+      max={150}
       min={0}
-      now={0}
+      now={150}
       srOnly={false}
       striped={false}
     />
     <div>
       <FormattedMessage
-        id="proposal.vote.threshold.progress"
+        id="proposal.vote.threshold.progress_reached"
         values={
           Object {
             "max": 20,
-            "num": 20,
+            "num": 30,
           }
         }
       />

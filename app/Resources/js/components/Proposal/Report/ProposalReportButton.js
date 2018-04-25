@@ -1,18 +1,21 @@
-import React, { PropTypes } from 'react';
+// @flow
+import * as React from 'react';
 import { connect } from 'react-redux';
+import { graphql, createFragmentContainer } from 'react-relay';
 import ReportBox from '../../Report/ReportBox';
 import { submitProposalReport } from '../../../redux/modules/report';
+import type { ProposalReportButton_proposal } from './__generated__/ProposalReportButton_proposal.graphql';
 
-const ProposalReportButton = React.createClass({
-  propTypes: {
-    dispatch: PropTypes.func.isRequired,
-    proposal: PropTypes.object.isRequired,
-  },
+type Props = {
+  proposal: ProposalReportButton_proposal,
+  dispatch: Function,
+};
 
-  handleReport(data) {
+export class ProposalReportButton extends React.Component<Props> {
+  handleReport = (data: Object) => {
     const { proposal, dispatch } = this.props;
     return submitProposalReport(proposal, data, dispatch);
-  },
+  };
 
   render() {
     const { proposal } = this.props;
@@ -20,13 +23,26 @@ const ProposalReportButton = React.createClass({
       <ReportBox
         id={`proposal-${proposal.id}`}
         buttonStyle={{ marginLeft: '15px' }}
-        reported={proposal.hasUserReported}
+        reported={proposal.viewerHasReported || false}
         onReport={this.handleReport}
         author={proposal.author}
         buttonClassName="proposal__btn--report"
       />
     );
-  },
-});
+  }
+}
 
-export default connect()(ProposalReportButton);
+const container = connect()(ProposalReportButton);
+
+export default createFragmentContainer(
+  container,
+  graphql`
+    fragment ProposalReportButton_proposal on Proposal {
+      id
+      author {
+        id
+      }
+      viewerHasReported @include(if: $isAuthenticated)
+    }
+  `,
+);

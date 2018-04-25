@@ -22,10 +22,6 @@
 {% block reduxStore %}
   {% set initialState = {
     'proposal': {
-      'currentProposalId': proposal.id,
-      'proposalsById': {
-        (proposal.id) : proposalSerialized
-      },
       'referer': referer,
     }
   } %}

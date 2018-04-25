@@ -1,6 +1,7 @@
-import React, { PropTypes } from 'react';
+// @flow
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { graphql, createFragmentContainer } from 'react-relay';
 import classNames from 'classnames';
 import { Map, Marker, TileLayer } from 'react-leaflet-universal';
 import ShareButtonDropdown from '../../Utils/ShareButtonDropdown';
@@ -14,28 +15,27 @@ import ProposalResponse from './ProposalResponse';
 import ProposalVoteButtonWrapper from '../Vote/ProposalVoteButtonWrapper';
 import { openDeleteProposalModal, openEditProposalModal } from '../../../redux/modules/proposal';
 import config from '../../../config';
+import type { ProposalPageContent_proposal } from './__generated__/ProposalPageContent_proposal.graphql';
+import type { ProposalPageContent_viewer } from './__generated__/ProposalPageContent_viewer.graphql';
 
 let L;
 
-export const ProposalPageContent = React.createClass({
-  displayName: 'ProposalPageContent',
+type Props = {
+  viewer: ?ProposalPageContent_viewer,
+  proposal: ProposalPageContent_proposal,
+  form: Object,
+  categories: Array<Object>,
+  className: string,
+  dispatch: Function,
+};
 
-  propTypes: {
-    proposal: PropTypes.object.isRequired,
-    form: PropTypes.object.isRequired,
-    categories: PropTypes.array.isRequired,
-    className: PropTypes.string,
-    dispatch: PropTypes.func.isRequired,
-  },
-
-  getDefaultProps() {
-    return {
-      className: '',
-    };
-  },
+export class ProposalPageContent extends React.Component<Props> {
+  static defaultProps = {
+    className: '',
+  };
 
   render() {
-    const { proposal, className, form, categories, dispatch, user } = this.props;
+    const { proposal, className, form, categories, dispatch, viewer } = this.props;
     const classes = {
       proposal__content: true,
       [className]: true,
@@ -49,8 +49,8 @@ export const ProposalPageContent = React.createClass({
     return (
       <div className={classNames(classes)}>
         <div className="block">
-          {user &&
-            user.uniqueId === proposal.author.uniqueId && (
+          {viewer &&
+            viewer.id === proposal.author.id && (
               <div className="actions">
                 <EditButton
                   id="proposal-edit-button"
@@ -127,33 +127,64 @@ export const ProposalPageContent = React.createClass({
             </div>
           )}
         {proposal.responses.map((response, index) => (
+          /* $FlowFixMe */
           <ProposalResponse key={index} response={response} />
         ))}
         <div className="block proposal__buttons">
-          {!proposal.isDraft && (
+          {proposal.publicationStatus !== 'DRAFT' && (
             <div>
               <ProposalVoteButtonWrapper className="mr-15" proposal={proposal} />
               <ShareButtonDropdown
                 id="proposal-share-button"
-                url={proposal._links.show}
+                url={proposal.show_url}
                 title={proposal.title}
               />
+              {/* $FlowFixMe */}
               <ProposalReportButton proposal={proposal} />
             </div>
           )}
         </div>
+        {/* $FlowFixMe */}
         <ProposalEditModal proposal={proposal} form={form} categories={categories} />
+        {/* $FlowFixMe */}
         <ProposalDeleteModal proposal={proposal} form={form} />
-        {!proposal.isDraft && <ProposalPageComments id={proposal.id} form={form} />}
+        {proposal.publicationStatus !== 'DRAFT' && (
+          <ProposalPageComments id={proposal.id} form={form} />
+        )}
       </div>
     );
-  },
+  }
+}
+
+export default createFragmentContainer(ProposalPageContent, {
+  viewer: graphql`
+    fragment ProposalPageContent_viewer on User {
+      id
+    }
+  `,
+  proposal: graphql`
+    fragment ProposalPageContent_proposal on Proposal {
+      id
+      author {
+        id
+      }
+      address
+      body
+      summary
+      media {
+        url
+      }
+      ...ProposalReportButton_proposal
+      publicationStatus
+      title
+      show_url
+      currentVotableStep {
+        id
+        open
+      }
+      responses {
+        ...ProposalResponse_response
+      }
+    }
+  `,
 });
-
-const mapStateToProps = state => {
-  return {
-    user: state.user.user,
-  };
-};
-
-export default connect(mapStateToProps)(ProposalPageContent);

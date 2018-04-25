@@ -1,14 +1,17 @@
-import React, { PropTypes } from 'react';
+// @flow
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { graphql, createFragmentContainer } from 'react-relay';
 import moment from 'moment-timezone';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import ProposalDetailAdvancementStep from './ProposalDetailAdvancementStep';
 import { bootstrapToHex } from '../../../utils/bootstrapToHexColor';
+import type { ProposalDetailAdvancement_proposal } from './__generated__/ProposalDetailAdvancement_proposal.graphql';
 
 const grey = '#d9d9d9';
 const green = '#5cb85c';
 
-const consideredCurrentProgressStep = progressSteps => {
+const consideredCurrentProgressStep = (progressSteps: $ReadOnlyArray<Object>) => {
   let lastStarting = null;
   for (const step of progressSteps) {
     if (moment(step.startAt) < moment()) {
@@ -29,7 +32,7 @@ const consideredCurrentProgressStep = progressSteps => {
   }
   return progressSteps[progressSteps.length - 1];
 };
-const generateProgressStepsWithColorAndStatus = progressSteps => {
+const generateProgressStepsWithColorAndStatus = (progressSteps: $ReadOnlyArray<Object>) => {
   if (progressSteps.length < 1) {
     return [];
   }
@@ -38,7 +41,7 @@ const generateProgressStepsWithColorAndStatus = progressSteps => {
   const steps = [];
   let isPastCurrent = false;
   for (const progressStep of progressSteps) {
-    const props = {
+    const data = {
       roundColor: isPastCurrent ? grey : green,
       borderColor: isPastCurrent ? grey : green,
       status: null,
@@ -53,49 +56,48 @@ const generateProgressStepsWithColorAndStatus = progressSteps => {
         moment(progressStep.startAt) <= currentTime &&
         moment(progressStep.endAt) >= currentTime
       ) {
-        props.status = { name: 'En cours', color: 'warning' };
-        props.roundColor = bootstrapToHex('warning');
-        props.borderColor = grey;
+        // $FlowFixMe
+        data.status = { name: 'En cours', color: 'warning' };
+        data.roundColor = bootstrapToHex('warning');
+        data.borderColor = grey;
       }
 
       if (!progressStep.endAt && moment(progressStep.startAt) <= currentTime) {
-        props.status = { name: 'Terminé', color: 'success' };
-        props.roundColor = bootstrapToHex('success');
+        // $FlowFixMe
+        data.status = { name: 'Terminé', color: 'success' };
+        data.roundColor = bootstrapToHex('success');
       }
 
       if (!progressStep.endAt && moment(progressStep.startAt) > currentTime) {
-        props.status = { name: 'A venir', color: 'info' };
-        props.roundColor = bootstrapToHex('info');
+        // $FlowFixMe
+        data.status = { name: 'A venir', color: 'info' };
+        data.roundColor = bootstrapToHex('info');
       }
 
       if (progressStep.endAt && moment(progressStep.endAt) < currentTime) {
-        props.status = { name: 'Terminé', color: 'success' };
-        props.roundColor = bootstrapToHex('success');
+        // $FlowFixMe
+        data.status = { name: 'Terminé', color: 'success' };
+        data.roundColor = bootstrapToHex('success');
       }
 
       isPastCurrent = true;
     }
 
-    steps.push({ ...progressStep, ...props });
+    steps.push({ ...progressStep, ...data });
   }
 
   return steps;
 };
 
-export const ProposalDetailAdvancement = React.createClass({
-  displayName: 'ProposalDetailAdvancement',
+type Props = { proposal: ProposalDetailAdvancement_proposal, project: Object };
 
-  propTypes: {
-    proposal: PropTypes.object.isRequired,
-    project: PropTypes.object.isRequired,
-  },
-
-  getStatus(step) {
+export class ProposalDetailAdvancement extends React.Component<Props> {
+  getStatus = (step: Object) => {
     const { proposal } = this.props;
     return step.type === 'collect' ? proposal.status || null : this.getSelectionStatus(step);
-  },
+  };
 
-  getSelectionStatus(step) {
+  getSelectionStatus = (step: Object) => {
     const { proposal } = this.props;
     for (const selection of proposal.selections) {
       if (step.id === selection.step.id) {
@@ -103,12 +105,13 @@ export const ProposalDetailAdvancement = React.createClass({
       }
     }
     return null;
-  },
+  };
 
   render() {
     const { proposal, project } = this.props;
     const progressSteps = generateProgressStepsWithColorAndStatus(proposal.progressSteps);
     const steps = project.steps.sort((a, b) => a.position - b.position);
+    // $FlowFixMe
     const selections = proposal.selections.sort((a, b) => a.step.position - b.step.position);
     for (const step of steps) {
       step.isSelected =
@@ -128,12 +131,15 @@ export const ProposalDetailAdvancement = React.createClass({
     const displayedSteps = steps.filter(step => step.isSelected || step.isFuture);
     return (
       <div style={{ marginLeft: '10px', marginTop: '-15px' }}>
-        <h4>{<FormattedMessage id="proposal.detail.advancement" />}</h4>
+        <h4>
+          <FormattedMessage id="proposal.detail.advancement" />
+        </h4>
         <br />
         {displayedSteps.map((step, index) => {
           let roundColor = grey;
           if (step.isCurrent) {
-            roundColor = this.getStatus(step) ? bootstrapToHex(this.getStatus(step).color) : green;
+            const status = this.getStatus(step);
+            roundColor = status ? bootstrapToHex(status.color) : green;
           } else if (step.isPast) {
             roundColor = green;
           }
@@ -184,13 +190,40 @@ export const ProposalDetailAdvancement = React.createClass({
         })}
       </div>
     );
-  },
-});
+  }
+}
 
-const mapStateToProps = state => {
+const mapStateToProps: MapStateToProps<*, *, *> = state => {
   return {
     project: state.project.projectsById[state.project.currentProjectById],
   };
 };
 
-export default connect(mapStateToProps)(ProposalDetailAdvancement);
+const container = connect(mapStateToProps)(ProposalDetailAdvancement);
+
+export default createFragmentContainer(container, {
+  proposal: graphql`
+    fragment ProposalDetailAdvancement_proposal on Proposal {
+      id
+      status {
+        name
+        color
+      }
+      selections {
+        step {
+          id
+          position
+        }
+        status {
+          name
+          color
+        }
+      }
+      progressSteps {
+        title
+        startAt
+        endAt
+      }
+    }
+  `,
+});
