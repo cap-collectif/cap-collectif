@@ -6,12 +6,12 @@ input AddProposalVoteInput {
   stepId: ID!
 
   # The vote will be anonymous.
-  anonymously: Boolean
+  anonymously: Boolean = false
   clientMutationId: String
 }
 
 type AddProposalVotePayload {
-  proposal: Proposal!
+  vote: ProposalVote!
   viewer: User!
   clientMutationId: String
 }
@@ -1578,7 +1578,7 @@ union ProposalVotableStep = CollectStep | SelectionStep
 type ProposalVote implements Contribution & ContributionWithAuthor {
   id: ID!
 
-  # The author of the contribution. If null, account has been deleted.
+  # The author of the contribution. If null, the vote is anonymous.
   author: User
 
   # Is the vote anonymous ?

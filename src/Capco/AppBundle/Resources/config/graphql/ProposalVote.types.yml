@@ -7,7 +7,7 @@ ProposalVote:
               type: "ID!"
             author:
                 type: "User"
-                description: "The author of the contribution. If null, account has been deleted."
+                description: "The author of the contribution. If null, the vote is anonymous."
                 resolve: "@=value.isPrivate() ? null : value.getUser()"
             anonymous:
                 type: "Boolean!"

@@ -14,10 +14,12 @@ const mutation = graphql`
     $withVotes: Boolean!
   ) {
     addProposalVote(input: $input) {
-      proposal {
-        id
-        ...ProposalVotes_proposal @arguments(stepId: $stepId)
-        ...ProposalVoteButtonWrapperFragment_proposal @arguments(stepId: $stepId)
+      vote {
+        proposal {
+          id
+          ...ProposalVotes_proposal @arguments(stepId: $stepId)
+          ...ProposalVoteButtonWrapperFragment_proposal @arguments(stepId: $stepId)
+        }
       }
       viewer {
         ...ProposalVoteButtonWrapperFragment_viewer @arguments(stepId: $stepId)

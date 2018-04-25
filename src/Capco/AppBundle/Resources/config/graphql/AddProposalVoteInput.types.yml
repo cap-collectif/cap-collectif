@@ -4,11 +4,12 @@ AddProposalVoteInput:
         description: "Add a vote for a proposal in a contribuable step."
         fields:
             proposalId:
-              type: "ID!"
-              description: "The Node ID of the proposal to vote."
+                type: "ID!"
+                description: "The Node ID of the proposal to vote."
             stepId:
-              type: "ID!"
-              description: "The Node ID of the step."
+                type: "ID!"
+                description: "The Node ID of the step."
             anonymously:
                 type: "Boolean"
+                defaultValue: false
                 description: "The vote will be anonymous."

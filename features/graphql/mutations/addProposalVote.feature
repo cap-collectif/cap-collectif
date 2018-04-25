@@ -9,7 +9,7 @@ Scenario: Logged in API client wants to vote for a proposal in a step with vote 
   {
     "query": "mutation ($input: AddProposalVoteInput!) {
       addProposalVote(input: $input) {
-        proposal {
+        vote {
           id
         }
       }
@@ -46,8 +46,14 @@ Scenario: Logged in API client wants to vote for a proposal
   {
     "query": "mutation ($input: AddProposalVoteInput!) {
       addProposalVote(input: $input) {
-        proposal {
+        vote {
           id
+          proposal {
+            id
+          }
+          author {
+            id
+          }
         }
       }
     }",
@@ -64,8 +70,59 @@ Scenario: Logged in API client wants to vote for a proposal
   {
     "data": {
       "addProposalVote": {
-        "proposal": {
-          "id": "proposal2"
+        "vote": {
+          "id": @string@,
+          "proposal": {
+            "id": "proposal2"
+          },
+          "author": {
+            "id": "user5"
+          }
+        }
+      }
+    }
+  }
+  """
+
+@database
+Scenario: Logged in API client wants to vote for a proposal anonymously
+  Given I am logged in to graphql as user
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: AddProposalVoteInput!) {
+      addProposalVote(input: $input) {
+        vote {
+          id
+          proposal {
+            id
+          }
+          author {
+            id
+          }
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "anonymously": true,
+        "stepId": "selectionstep1",
+        "proposalId": "proposal2"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "addProposalVote": {
+        "vote": {
+          "id": @string@,
+          "proposal": {
+            "id": "proposal2"
+          },
+          "author": null
         }
       }
     }
@@ -80,7 +137,7 @@ Scenario: Logged in API client wants to vote several times for a proposal in a s
   {
     "query": "mutation ($input: AddProposalVoteInput!) {
       addProposalVote(input: $input) {
-        proposal {
+        vote {
           id
         }
       }
@@ -117,7 +174,7 @@ Scenario: Logged in API client wants to vote for a proposal in a wrong selection
   {
     "query": "mutation ($input: AddProposalVoteInput!) {
       addProposalVote(input: $input) {
-        proposal {
+        vote {
           id
         }
       }
@@ -154,7 +211,7 @@ Scenario: Logged in API client wants to vote for a proposal in a not votable sel
   {
     "query": "mutation ($input: AddProposalVoteInput!) {
       addProposalVote(input: $input) {
-        proposal {
+        vote {
           id
         }
       }
@@ -191,7 +248,7 @@ Scenario: Logged in API client wants to vote for a proposal in a not votable sel
   {
     "query": "mutation ($input: AddProposalVoteInput!) {
       addProposalVote(input: $input) {
-        proposal {
+        vote {
           id
         }
       }
@@ -228,7 +285,7 @@ Scenario: Logged in API client wants to vote for a proposal in a not votable sel
   {
     "query": "mutation ($input: AddProposalVoteInput!) {
       addProposalVote(input: $input) {
-        proposal {
+        vote {
           id
         }
       }
