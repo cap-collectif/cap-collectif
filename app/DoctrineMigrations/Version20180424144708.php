@@ -59,7 +59,6 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
             ->setTitle('Dépôt')
             ->setLabel('Dépôt')
             ->setStartAt(new \DateTime('now'))
-            ->setEndAt(new \DateTime('+ 30 days'))
             ->setVoteType(VoteTypeTrait::$VOTE_TYPE_SIMPLE);
         $project = (new Project())
             ->setTitle('Boîte à idées')
