@@ -4,6 +4,7 @@ namespace Capco\AdminBundle\Resolver;
 
 use Capco\AppBundle\Helper\EnvHelper;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\UserBundle\Entity\User;
 
 class FeaturesCategoryResolver
 {
@@ -70,7 +71,7 @@ class FeaturesCategoryResolver
         ],
         'settings.modules' => [
             'conditions' => [],
-            'features' => ['blog', 'calendar', 'ideas', 'versions', 'themes', 'districts', 'members_list', 'profiles', 'reporting', 'newsletter', 'share_buttons', 'search', 'votes_evolution', 'phone_confirmation', 'server_side_rendering', 'export'],
+            'features' => ['blog', 'calendar', 'ideas', 'versions', 'themes', 'districts', 'members_list', 'profiles', 'reporting', 'newsletter', 'share_buttons', 'search', 'votes_evolution', 'phone_confirmation', 'server_side_rendering', 'export', 'indexation'],
         ],
         'settings.notifications' => [
             'conditions' => [],
@@ -89,7 +90,7 @@ class FeaturesCategoryResolver
         $this->manager = $manager;
     }
 
-    public function isCategoryEnabled($category)
+    public function isCategoryEnabled(string $category): bool
     {
         if (!array_key_exists($category, self::$categories)) {
             return false;
@@ -98,7 +99,10 @@ class FeaturesCategoryResolver
         return $this->manager->hasOneActive(self::$categories[$category]['conditions']);
     }
 
-    public function isAdminEnabled($admin)
+    /**
+     * @param User $admin
+     */
+    public function isAdminEnabled($admin): bool
     {
         if (method_exists($admin, 'getFeatures')) {
             return $this->manager->hasOneActive($admin->getFeatures());
@@ -107,7 +111,7 @@ class FeaturesCategoryResolver
         return true;
     }
 
-    public function getTogglesByCategory($category)
+    public function getTogglesByCategory(string $category): array
     {
         $toggles = [];
         if (array_key_exists($category, self::$categories)) {
@@ -127,16 +131,16 @@ class FeaturesCategoryResolver
         return $toggles;
     }
 
-    public function findCategoryForToggle($toggle)
+    public function findCategoryForToggle(string $toggle): ?string
     {
         foreach (self::$categories as $name => $category) {
-            if (in_array($toggle, $category['features'], true)) {
+            if (\in_array($toggle, $category['features'], true)) {
                 return $name;
             }
         }
     }
 
-    public function getEnabledPagesCategories()
+    public function getEnabledPagesCategories(): array
     {
         $categories = [];
         foreach (self::$categories as $name => $cat) {
@@ -148,7 +152,7 @@ class FeaturesCategoryResolver
         return $categories;
     }
 
-    public function getEnabledSettingsCategories()
+    public function getEnabledSettingsCategories(): array
     {
         $categories = [];
         foreach (self::$categories as $name => $cat) {
@@ -160,7 +164,7 @@ class FeaturesCategoryResolver
         return $categories;
     }
 
-    public function getGroupNameForCategory($category)
+    public function getGroupNameForCategory(string $category): ?string
     {
         if (0 === strrpos($category, 'settings.')) {
             return 'admin.group.parameters';
