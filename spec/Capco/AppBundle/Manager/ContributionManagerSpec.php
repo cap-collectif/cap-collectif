@@ -8,7 +8,6 @@ use Capco\AppBundle\Entity\OpinionVote;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
-use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Source;
@@ -27,13 +26,12 @@ class ContributionManagerSpec extends ObjectBehavior
         $this->shouldHaveType('Capco\AppBundle\Manager\ContributionManager');
     }
 
-    function it_can_depublish_contributions_of_a_user(EntityManager $em, User $user, OpinionVote $vote, Proposal $proposal, Opinion $opinion, OpinionVersion $version, Idea $idea, Comment $comment, Argument $argument, Source $source, Reply $reply)
+    function it_can_depublish_contributions_of_a_user(EntityManager $em, User $user, OpinionVote $vote, Proposal $proposal, Opinion $opinion, OpinionVersion $version, Comment $comment, Argument $argument, Source $source, Reply $reply)
     {
         $this->beConstructedWith($em);
         $proposal->setExpired(true)->willReturn($proposal);
         $opinion->setExpired(true)->willReturn($opinion);
         $version->setExpired(true)->willReturn($version);
-        $idea->setExpired(true)->willReturn($idea);
         $comment->setExpired(true)->willReturn($comment);
         $argument->setExpired(true)->willReturn($argument);
         $source->setExpired(true)->willReturn($source);
@@ -44,7 +42,6 @@ class ContributionManagerSpec extends ObjectBehavior
         $proposal,
         $opinion,
         $version,
-        $idea,
         $comment,
         $argument,
         $source,
@@ -62,13 +59,12 @@ class ContributionManagerSpec extends ObjectBehavior
         $this->depublishContributions($user)->shouldReturn(false);
     }
 
-    function it_can_republish_contributions_of_a_user(EntityManager $em, User $user, OpinionVote $vote, Proposal $proposal, Opinion $opinion, OpinionVersion $version, Idea $idea, Comment $comment, Argument $argument, Source $source, Reply $reply)
+    function it_can_republish_contributions_of_a_user(EntityManager $em, User $user, OpinionVote $vote, Proposal $proposal, Opinion $opinion, OpinionVersion $version, Comment $comment, Argument $argument, Source $source, Reply $reply)
     {
         $this->beConstructedWith($em);
         $proposal->setExpired(false)->willReturn($proposal);
         $opinion->setExpired(false)->willReturn($opinion);
         $version->setExpired(false)->willReturn($version);
-        $idea->setExpired(false)->willReturn($idea);
         $comment->setExpired(false)->willReturn($comment);
         $argument->setExpired(false)->willReturn($argument);
         $source->setExpired(false)->willReturn($source);
@@ -79,7 +75,6 @@ class ContributionManagerSpec extends ObjectBehavior
         $proposal,
         $opinion,
         $version,
-        $idea,
         $comment,
         $argument,
         $source,

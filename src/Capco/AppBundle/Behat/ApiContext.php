@@ -217,45 +217,6 @@ EOF;
     }
 
     /**
-     * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid idea json$/
-     *
-     * @param mixed $method
-     * @param mixed $url
-     */
-    public function iSendIdeaRequest($method, $url)
-    {
-        $json = <<< 'EOF'
-        {
-            "title": "Ma nouvelle idée",
-            "object": "Tester",
-            "body": "Coucou, je suis une idée !",
-            "url": "http://www.google.fr"
-        }
-EOF;
-
-        $this->iSendARequestWithJson($method, $url, $json);
-    }
-
-    /**
-     * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid idea update json$/
-     *
-     * @param mixed $method
-     * @param mixed $url
-     */
-    public function iSendUpdateIdeaRequest($method, $url)
-    {
-        $json = <<< 'EOF'
-        {
-            "title": "Nouveau titre de l'idée.",
-            "object": "Tester",
-            "body": "Coucou, je suis une idée !"
-        }
-EOF;
-
-        $this->iSendARequestWithJson($method, $url, $json);
-    }
-
-    /**
      * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)"$/
      *
      * @param mixed $method
