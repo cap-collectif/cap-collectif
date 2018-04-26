@@ -23,7 +23,7 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
         if (!$input->getOption('force')) {
             $output->writeln('Please set the --force option to run this command');
 
-            return 1;
+            return;
         }
 
         $output->writeln('');
@@ -60,7 +60,6 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
         $toggleManager->deactivate('login_paris');
         $toggleManager->deactivate('vote_without_account');
         $toggleManager->deactivate('restrict_registration_via_email_domain');
-        $toggleManager->activate('indexation');
 
         $output->writeln('Feature flags reseted');
     }

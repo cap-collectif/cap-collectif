@@ -42,7 +42,6 @@ class Manager
         'server_side_rendering',
         'zipcode_at_register',
         'vote_without_account',
-        'indexation',
     ];
 
     protected $context;
@@ -57,22 +56,22 @@ class Manager
 
     public function exists(string $name): bool
     {
-        return \in_array($name, self::$toggles, true);
+        return in_array($name, self::$toggles, true);
     }
 
-    public function activate(string $name): void
+    public function activate($name)
     {
         $this->toggleManager->add($this->createToggle($name, Toggle::ALWAYS_ACTIVE));
     }
 
-    public function activateAll(): void
+    public function activateAll()
     {
         foreach (self::$toggles as $name) {
             $this->activate($name);
         }
     }
 
-    public function all(?bool $state = null): array
+    public function all($state = null)
     {
         // features are disabled by default
         $return = [];
@@ -86,12 +85,12 @@ class Manager
         return $return;
     }
 
-    public function deactivate(string $name): void
+    public function deactivate($name)
     {
         $this->toggleManager->add($this->createToggle($name, Toggle::INACTIVE));
     }
 
-    public function deactivateAll(): void
+    public function deactivateAll()
     {
         foreach (self::$toggles as $name) {
             $this->deactivate($name);
@@ -107,9 +106,9 @@ class Manager
         return $this->knownValues[$name];
     }
 
-    public function hasOneActive(array $names): bool
+    public function hasOneActive($names)
     {
-        if (0 === \count($names)) {
+        if (0 === count($names)) {
             return true;
         }
 
@@ -122,7 +121,7 @@ class Manager
         return false;
     }
 
-    public function switchValue(string $name): bool
+    public function switchValue($name)
     {
         $value = $this->isActive($name);
 
@@ -135,7 +134,12 @@ class Manager
         return !$value;
     }
 
-    public function containsEnabledFeature(array $features): bool
+    /**
+     * @param $features
+     *
+     * @return bool
+     */
+    public function containsEnabledFeature($features)
     {
         if (empty($features)) {
             return true;
@@ -150,7 +154,7 @@ class Manager
         return false;
     }
 
-    private function createToggle(string $name, int $status, array $conditions = []): Toggle
+    private function createToggle($name, $status, array $conditions = [])
     {
         $toggle = new Toggle($name, $conditions);
 
