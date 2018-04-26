@@ -93,12 +93,12 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
             $this->importIdeas($em, $proposalForm);
 
             $this->removeIdeas();
-
+            return 0;
         }
 
-        $this->abortIf(empty($ideas) , 'Skipping migration, no ideas to import...');
-
+        $this->write('Skipping migration, no ideas to import...');
     }
+    
     public function importIdeas(EntityManager $em, ProposalForm $proposalForm)
     {
         $output = new ConsoleOutput();
