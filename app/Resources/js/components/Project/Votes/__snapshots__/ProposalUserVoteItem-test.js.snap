@@ -59,35 +59,15 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
       <div
         className="d-flex"
       >
-        <FormattedMessage
-          id="public"
-          values={Object {}}
-        />
         <Field
           checked={false}
-          className="ml-10"
           component={[Function]}
-          name="anonymous"
+          label="anonymous-voting"
+          name="votes.1.anonymous"
+          normalize={[Function]}
         />
       </div>
     </div>
-  </Col>
-  <Col
-    bsClass="col"
-    className="proposals-user-votes__col"
-    componentClass="div"
-    md={1}
-    xs={12}
-  >
-    <a
-      className="proposal-vote__delete"
-      disabled={false}
-      onClick={[Function]}
-    >
-      <i
-        className="cap cap-ios-close"
-      />
-    </a>
   </Col>
 </Row>
 `;

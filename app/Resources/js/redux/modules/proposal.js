@@ -230,20 +230,20 @@ export const addProposalInRandomResultsByStep = (
   }
 };
 
-export const vote = (dispatch: Dispatch, step: Object, proposal: Object, data: Object) => {
+export const vote = (dispatch: Dispatch, stepId: Uuid, proposalId: Uuid, anonymously: boolean) => {
   dispatch(startVoting());
   return addVote
     .commit({
-      stepId: step.id,
-      withVotes: true,
-      input: { proposalId: proposal.id, stepId: step.id, anonymously: data.private },
+      stepId,
+      input: { proposalId, stepId, anonymously },
     })
-    .then(() => {
+    .then(response => {
       dispatch(closeVoteModal());
       FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,
         alert: { bsStyle: 'success', content: 'proposal.request.vote.success' },
       });
+      return response;
     })
     .catch(e => {
       console.log(e); // eslint-disable-line no-console
@@ -258,7 +258,6 @@ export const vote = (dispatch: Dispatch, step: Object, proposal: Object, data: O
 export const deleteVote = (step: Object, proposal: Object) => {
   return removeVote
     .commit({
-      withVotes: true,
       stepId: step.id,
       input: { proposalId: proposal.id, stepId: step.id },
     })

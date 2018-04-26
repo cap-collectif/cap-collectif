@@ -6,7 +6,7 @@ import { Row, Col } from 'react-bootstrap';
 import { Field } from 'redux-form';
 import toggle from '../../Form/Toggle';
 import ProposalDetailEstimation from '../../Proposal/Detail/ProposalDetailEstimation';
-import { deleteVote } from '../../../redux/modules/proposal';
+// import { deleteVote } from '../../../redux/modules/proposal';
 import type { ProposalUserVoteItem_vote } from './__generated__/ProposalUserVoteItem_vote.graphql';
 import type { ProposalUserVoteItem_step } from './__generated__/ProposalUserVoteItem_step.graphql';
 
@@ -14,19 +14,18 @@ type Props = {
   vote: ProposalUserVoteItem_vote,
   step: ProposalUserVoteItem_step,
   ranking?: number,
+  onDelete?: ?() => void,
+  member: string,
 };
 
 export class ProposalUserVoteItem extends React.Component<Props> {
   render() {
-    const { step, vote, ranking } = this.props;
+    const { onDelete, member, step, vote, ranking } = this.props;
     const proposal = vote.proposal;
     const anonymous = vote.anonymous;
     const voteAt = vote.createdAt;
 
-    const voteDay = <FormattedDate value={voteAt} day="numeric" month="long" year="numeric" />;
-    const voteTime = <FormattedTime value={voteAt} hour="numeric" minute="numeric" />;
-
-    const colWidth = () => {
+    const colTitleWidth = () => {
       if (step.votesRanking === true && step.voteType === 'BUDGET') {
         return 6;
       }
@@ -56,21 +55,25 @@ export class ProposalUserVoteItem extends React.Component<Props> {
             </div>
           </Col>
         )}
-        <Col className="proposals-user-votes__col" md={colWidth()} xs={12}>
+        <Col className="proposals-user-votes__col" md={colTitleWidth()} xs={12}>
           <div className="proposals-user-votes__content">
             <div>
               <a href={proposal.show_url} className="proposals-user-votes__title">
                 {proposal.title}
               </a>
               <br />
-              {voteAt && (
+              {voteAt ? (
                 <FormattedMessage
                   id="voted-on-date-at-time"
                   values={{
-                    date: voteDay,
-                    time: voteTime,
+                    date: (
+                      <FormattedDate value={voteAt} day="numeric" month="long" year="numeric" />
+                    ),
+                    time: <FormattedTime value={voteAt} hour="numeric" minute="numeric" />,
                   }}
                 />
+              ) : (
+                <FormattedMessage id="notification-subject-new-vote" />
               )}
             </div>
           </div>
@@ -78,13 +81,13 @@ export class ProposalUserVoteItem extends React.Component<Props> {
         <Col className="proposals-user-votes__col" md={2} xs={12}>
           <div className="proposals-user-votes__content justify-content-end">
             <div className="d-flex">
-              <FormattedMessage id="public" />
               <Field
                 component={toggle}
-                className="ml-10"
-                name="anonymous"
+                // className="ml-10"
                 checked={!anonymous}
-                // onChange={() => {}}
+                label="anonymous-voting"
+                name={`${member}.anonymous`}
+                normalize={val => !!val}
               />
             </div>
           </div>
@@ -97,16 +100,19 @@ export class ProposalUserVoteItem extends React.Component<Props> {
             </div>
           </Col>
         )}
-        <Col className="proposals-user-votes__col" md={1} xs={12}>
-          <a
-            onClick={() => {
-              deleteVote(step, proposal);
-            }}
-            className="proposal-vote__delete"
-            disabled={!step.open}>
-            <i className="cap cap-ios-close" />
-          </a>
-        </Col>
+        {onDelete && (
+          <Col className="proposals-user-votes__col" md={1} xs={12}>
+            <a
+              onClick={() => {
+                onDelete();
+                // deleteVote(step, proposal);
+              }}
+              className="proposal-vote__delete"
+              disabled={!step.open}>
+              <i className="cap cap-ios-close" />
+            </a>
+          </Col>
+        )}
       </Row>
     );
   }

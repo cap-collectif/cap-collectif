@@ -1,6 +1,6 @@
 {% extends '@CapcoApp/base.html.twig' %}
 
-{% set showVotesWidget = (currentStep is defined and currentStep.id and currentStep.isVotable()) or (proposal is defined and proposal|current_votable_step) %}
+{% set showVotesWidget = (currentStep is defined and currentStep.slug is defined and currentStep.isVotable()) or (proposal is defined and proposal|current_votable_step) %}
 {% set page_class = showVotesWidget ? "has-vote-widget" : "" %}
 
 {% block reduxStore %}

@@ -22,6 +22,9 @@ ProposalVote:
             proposal:
                 type: "Proposal!"
                 description: "Return the proposal."
+            step:
+                type: "ProposalStep!"
+                description: "Return the step."
             related:
                 type: "Contribution"
                 description: "Return the related contribution if the contribution is related to another."

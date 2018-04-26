@@ -12,6 +12,7 @@ const mutation = graphql`
     updateProposalVotes(input: $input) {
       step {
         id
+        ...ProposalVoteModal_step
       }
     }
   }

@@ -2,6 +2,8 @@ RemoveProposalVotePayload:
     type: relay-mutation-payload
     config:
         fields:
+            step:
+                type: "ProposalStep!"
             proposal:
                 type: "Proposal!"
             viewer:

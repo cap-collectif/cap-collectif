@@ -23,7 +23,7 @@ class ProjectVotableStepsResolver implements ResolverInterface
         $collection = $this
           ->selectionStepRepository
           ->getVotableStepsForProject($project)
-      ;
+        ;
         $collectSteps = $this->collectStepRepository->getCollectStepsForProject($project);
         if (count($collectSteps) > 0) {
             $step = $collectSteps[0];

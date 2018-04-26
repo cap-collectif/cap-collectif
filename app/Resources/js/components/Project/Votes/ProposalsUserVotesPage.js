@@ -1,17 +1,21 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { submit } from 'redux-form';
+import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 import ProposalsUserVotesTable from './ProposalsUserVotesTable';
+import SubmitButton from '../../Form/SubmitButton';
 import type { ProposalsUserVotesPage_project } from './__generated__/ProposalsUserVotesPage_project.graphql';
 
 type Props = {
   project: ProposalsUserVotesPage_project,
+  dispatch: Function,
 };
 
 class ProposalsUserVotesPage extends React.Component<Props> {
   render() {
-    const { project } = this.props;
+    const { project, dispatch } = this.props;
 
     return (
       <div>
@@ -77,6 +81,15 @@ class ProposalsUserVotesPage extends React.Component<Props> {
                   />
                 </h4>
                 <ProposalsUserVotesTable step={step} votes={step.viewerVotes} />
+                <SubmitButton
+                  id="confirm-update-votes"
+                  onSubmit={() => {
+                    dispatch(submit(`proposal-user-vote-form-step-${step.id}`));
+                  }}
+                  label="global.save"
+                  isSubmitting={false}
+                  bsStyle="success"
+                />
               </div>
             ))
           ) : (
@@ -90,7 +103,9 @@ class ProposalsUserVotesPage extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(ProposalsUserVotesPage, {
+const container = connect()(ProposalsUserVotesPage);
+
+export default createFragmentContainer(container, {
   project: graphql`
     fragment ProposalsUserVotesPage_project on Project {
       id
