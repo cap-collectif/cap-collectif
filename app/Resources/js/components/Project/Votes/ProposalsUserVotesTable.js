@@ -1,17 +1,21 @@
 // @flow
 import * as React from 'react';
 import { Row } from 'react-bootstrap';
-import { reduxForm } from 'redux-form';
+import { reduxForm, FieldArray } from 'redux-form';
+import { connect, type MapStateToProps } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import ProposalUserVoteItem from './ProposalUserVoteItem';
-// import UpdateProposalVotesMutation from '../../../mutations/UpdateProposalVotesMutation';
 import type { ProposalsUserVotesTable_step } from './__generated__/ProposalsUserVotesTable_step.graphql';
 import type { ProposalsUserVotesTable_votes } from './__generated__/ProposalsUserVotesTable_votes.graphql';
 
-type Props = {
+type RelayProps = {
   step: ProposalsUserVotesTable_step,
   votes: ProposalsUserVotesTable_votes,
+};
+type Props = RelayProps & {
+  onSubmit: Function,
+  deletable: boolean,
 };
 
 type State = {
@@ -27,17 +31,21 @@ const reorder = (list, startIndex, endIndex) => {
   return result;
 };
 
-const onSubmit = () => {
-  // const { step } = props;
-  // const { items } = this.state;
-  // if(items) {
-  //   return UpdateProposalVotesMutation.commit({
-  //     input: { ...data },
-  //   })
-  // }
+const renderMembers = ({ fields, votes, step, deletable }: Object) => {
+  return (
+    <div>
+      {fields.map((member, index) => (
+        <ProposalUserVoteItem
+          key={index}
+          member={member}
+          vote={votes.edges[index].node}
+          step={step}
+          onDelete={deletable ? () => fields.remove(index) : null}
+        />
+      ))}
+    </div>
+  );
 };
-
-export const formName = 'proposal-user-vote-form';
 
 class ProposalsUserVotesTable extends React.Component<Props, State> {
   constructor(props) {
@@ -61,19 +69,19 @@ class ProposalsUserVotesTable extends React.Component<Props, State> {
   };
 
   render() {
-    const { step, votes } = this.props;
+    const { step, votes, deletable } = this.props;
 
     if (!step.votesRanking) {
       return (
-        <form id="proposal-user-vote-form">
-          <Row className="proposals-user-votes__table">
-            {votes.edges &&
-              votes.edges.filter(Boolean).map((edge, key) => (
-                // $FlowFixMe
-                <ProposalUserVoteItem key={key} vote={edge.node} step={step} />
-              ))}
-          </Row>
-        </form>
+        <Row className="proposals-user-votes__table">
+          <FieldArray
+            step={step}
+            votes={votes}
+            deletable={deletable}
+            name="votes"
+            component={renderMembers}
+          />
+        </Row>
       );
     }
 
@@ -112,16 +120,29 @@ class ProposalsUserVotesTable extends React.Component<Props, State> {
 }
 
 const form = reduxForm({
-  onSubmit,
-  form: formName,
+  enableReinitialize: true,
 })(ProposalsUserVotesTable);
 
-export default createFragmentContainer(form, {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
+  form: `proposal-user-vote-form-step-${props.step.id}`,
+  initialValues: {
+    votes:
+      props.votes.edges &&
+      props.votes.edges
+        .filter(Boolean)
+        .map(edge => ({ id: edge.node.id, anonymous: edge.node.anonymous })),
+  },
+});
+const container = connect(mapStateToProps)(form);
+
+export default createFragmentContainer(container, {
   votes: graphql`
     fragment ProposalsUserVotesTable_votes on ProposalVoteConnection {
       edges {
         node {
+          id
           ...ProposalUserVoteItem_vote
+          anonymous
           proposal {
             id
           }

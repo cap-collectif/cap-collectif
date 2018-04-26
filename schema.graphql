@@ -1593,6 +1593,9 @@ type ProposalVote implements Contribution & ContributionWithAuthor {
   # Return the proposal.
   proposal: Proposal!
 
+  # Return the step.
+  step: ProposalStep!
+
   # Return the related contribution if the contribution is related to another.
   related: Contribution
 
@@ -1777,6 +1780,7 @@ input RemoveProposalVoteInput {
 }
 
 type RemoveProposalVotePayload {
+  step: ProposalStep!
   proposal: Proposal!
   viewer: User!
   clientMutationId: String
