@@ -1073,7 +1073,7 @@ enum PickFollowTypeValue {
 type Post {
   id: String!
   title: String!
-  relatedContent: [PostRelatedContent]
+  relatedContent: [PostRelatedContent!]!
   createdAt: DateTime!
   updatedAt: DateTime!
   publishedAt: DateTime
@@ -1901,7 +1901,7 @@ type SynthesisStep implements Step {
 
 # A theme
 type Theme {
-  id: String!
+  id: ID!
   title: String!
 }
 
@@ -2162,6 +2162,9 @@ type User implements Node {
 type UserConnection {
   # Identifies the total count of items in the connection.
   totalCount: Int!
+
+  # Identifies the total count of anonymous items in the connection. (Not fetched from connection)
+  anonymousCount: Int!
 
   # Information to aid in pagination.
   pageInfo: PageInfo!

@@ -21,7 +21,14 @@ class PopulateIndexCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $indexer = $this->getContainer()->get('capco.elasticsearch.indexer');
+        $container = $this->getContainer();
+        if (!$container->get('capco.toggle.manager')->isActive('indexation')) {
+            $output->writeln('<error>Please enable "indexation" feature to run this command</error>');
+
+            return 1;
+        }
+
+        $indexer = $container->get('capco.elasticsearch.indexer');
 
         $output->writeln(['Start indexing Elasticsearch.']);
 

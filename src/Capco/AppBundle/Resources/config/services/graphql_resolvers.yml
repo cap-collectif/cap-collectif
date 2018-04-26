@@ -42,6 +42,8 @@ services:
         arguments:
             - "@capco.search.user_search"
             - "@logger"
+            - "@capco.proposal_selection_vote.repository"
+            - "@capco.proposal_collect_vote.repository"
         tags:
             - { name: overblog_graphql.resolver }
 
@@ -50,6 +52,8 @@ services:
         arguments:
             - "@capco.search.user_search"
             - "@logger"
+            - "@capco.proposal_selection_vote.repository"
+            - "@capco.proposal_collect_vote.repository"
         tags:
             - { name: overblog_graphql.resolver }
 

@@ -65,7 +65,6 @@
         <h2 class="h2">{{ 'step.presentation.contributors.title'|trans({}, 'CapcoAppBundle') }}
             <span class="small excerpt">
                 {{ project.participantsCount }}
-                {%  set anonymousCount = project.participantsCount - (contributors | length) %}
                 {% if anonymousCount > 0 %}
                     {% transchoice anonymousCount with {'%count%': anonymousCount} from 'CapcoAppBundle' %}
                     project.show.contributors.anonymous

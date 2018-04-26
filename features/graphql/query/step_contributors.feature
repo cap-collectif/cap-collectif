@@ -63,6 +63,7 @@ Scenario: GraphQL client want to get the list of contributors of a collectStep
         ... on CollectStep {
           contributors(first: 5) {
             totalCount
+            anonymousCount
             pageInfo {
               hasNextPage
               endCursor
@@ -88,6 +89,7 @@ Scenario: GraphQL client want to get the list of contributors of a collectStep
       "collectStep": {
         "contributors": {
           "totalCount": 4,
+          "anonymousCount": 0,
           "pageInfo": {
             "hasNextPage": false,
             "endCursor": "YXJyYXljb25uZWN0aW9uOjM="

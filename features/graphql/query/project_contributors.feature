@@ -11,6 +11,7 @@ Scenario: GraphQL client want to get the list of contributors
         ... on Project {
           contributors(first: 5) {
             totalCount
+            anonymousCount
             pageInfo {
               hasNextPage
               endCursor
@@ -36,6 +37,7 @@ Scenario: GraphQL client want to get the list of contributors
       "project": {
         "contributors": {
           "totalCount": 26,
+          "anonymousCount": 0,
           "pageInfo": {
             "hasNextPage": true,
             "endCursor": "YXJyYXljb25uZWN0aW9uOjQ="
