@@ -1168,7 +1168,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public static function getGenderList()
     {
         return [
-            UserInterface::GENDER_UNKNOWN => 'gender.unknown',
             UserInterface::GENDER_FEMALE => 'gender.female',
             UserInterface::GENDER_MALE  => 'gender.male',
             self::GENDER_OTHER => 'gender.other',

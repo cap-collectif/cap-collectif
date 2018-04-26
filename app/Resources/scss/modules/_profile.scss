@@ -183,7 +183,18 @@
         }
     }
 }
-
-#personal-data-date-of-birth-day {
+#personal-data-date-of-birth {
     padding-left:0;
+    #personal-data-date-of-birth-day {
+        padding-left:0;
+        padding-right:2px;
+    }
+    #personal-data-date-of-birth-month {
+        padding-left:2px;
+        padding-right:2px;
+    }
+    #personal-data-date-of-birth-year {
+        padding-left:2px;
+        padding-right:2px;
+    }
 }

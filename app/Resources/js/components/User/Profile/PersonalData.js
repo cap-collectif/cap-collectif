@@ -29,7 +29,6 @@ import AlertForm from '../../Alert/AlertForm';
 import type {Dispatch, State} from '../../../types';
 import UpdateProfilePersonalDataMutation from '../../../mutations/UpdateProfilePersonalDataMutation';
 import component from "../../Form/Field";
-import PhoneModal from "../Phone/PhoneModal";
 
 type RelayProps = { personalDataForm: PersonalData_user };
 type Props = FormProps &
@@ -194,7 +193,6 @@ type PersonalDataState = {
   year: ?number,
   month: ?number,
   day: ?number,
-  showPhoneModal: boolean,
   showDeleteModal: boolean,
 };
 
@@ -202,7 +200,6 @@ export class PersonalData extends Component<Props, PersonalDataState> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      showPhoneModal: false,
       showDeleteModal: false,
     };
     if (props.user && props.user.dateOfBirth) {
@@ -230,13 +227,6 @@ export class PersonalData extends Component<Props, PersonalDataState> {
     );
   };
 
-  openPhoneModal = () => {
-    this.setState({showPhoneModal: true});
-  };
-
-  closePhoneModal = () => {
-    this.setState({showPhoneModal: false});
-  };
   openDeleteModal = () => {
     this.setState({showDeleteModal: true});
   };
@@ -286,7 +276,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
   render() {
     const {
       user,
-      pristine,
+      intl,
       invalid,
       valid,
       submitSucceeded,
@@ -349,10 +339,10 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             component={component}
                             type="text"
                             id="personal-data-form-firstname"
-                            divClassName="col-sm-5"
+                            divClassName="col-sm-4"
                           />
                         </div>
-                        <div className="col-sm-2">
+                        <div className="col-sm-4">
                           <OverlayTrigger
                             trigger="click"
                             placement="top"
@@ -381,10 +371,10 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             component={component}
                             type="text"
                             id="personal-data-form-lastname"
-                            divClassName="col-sm-7"
+                            divClassName="col-sm-4"
                           />
                         </div>
-                        <div className="col-sm-2">
+                        <div className="col-sm-4">
                           <OverlayTrigger
                             trigger="click"
                             placement="top"
@@ -411,7 +401,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             component={component}
                             type="select"
                             id="personal-data-form-gender"
-                            divClassName="col-sm-7"
+                            divClassName="col-sm-4"
                           >
                             <option value="MALE">
                               <FormattedMessage id="gender.male"/>
@@ -445,8 +435,8 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                         <label className="col-sm-3 control-label">
                           <FormattedMessage id="form.label_date_of_birth"/>
                         </label>
-                        <div className="col-sm-8" id="personal-data-date-of-birth">
-                          <Col sm={3} md={3} id="personal-data-date-of-birth-day">
+                        <div className="col-sm-6" id="personal-data-date-of-birth">
+                          <Col sm={2} md={2} id="personal-data-date-of-birth-day">
                             <DayPicker
                               defaultValue={'Jour'}
                               year={this.state.year}
@@ -463,7 +453,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               optionClasses={'option classes'}
                             />
                           </Col>
-                          <Col sm={3} md={3}>
+                          <Col sm={3} md={3} id="personal-data-date-of-birth-month">
                             <MonthPicker
                               defaultValue={'Mois'}
                               year={this.state.year}
@@ -480,7 +470,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               optionClasses={'option classes'}
                             />
                           </Col>
-                          <Col sm={3} md={3}>
+                          <Col sm={3} md={3} id="personal-data-date-of-birth-year">
                             <YearPicker
                               defaultValue={'Année'}
                               value={this.state.year}
@@ -488,7 +478,6 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                                 this.setState({year}, () => {
                                   this.setDate()
                                 });
-
                               }}
                               id={'year'}
                               name={'year'}
@@ -589,7 +578,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                                 component={component}
                                 type="text"
                                 id="personal-data-form-zip-code"
-                                divClassName="col-sm-7"
+                                divClassName="col-sm-4"
                               />
                             </div>
                           </div>
@@ -608,26 +597,11 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               component={component}
                               type="text"
                               id="personal-data-form-phone"
-                              divClassName="col-sm-7"
+                              divClassName="col-sm-4"
                               addonBefore="France +33"
                             />
-                            {user.phoneConfirmed && (
-                              <div>
-                                <span style={{marginLeft: '10px'}}>
-                                  <Button onClick={() => {
-                                    this.openPhoneModal();
-                                  }}>
-                                    <FormattedMessage id="phone.checked"/>
-                                  </Button>
-                                </span>
-                                <span>Numéro de téléphone confirmé</span>
-                                <PhoneModal pristine={pristine} show={this.state.showPhoneModal} onClose={() => {
-                                  this.closePhoneModal();
-                                }}/>
-                              </div>
-                            )}
                           </div>
-                          <div className="col-sm-2">
+                          <div className="col-sm-4">
                             <OverlayTrigger
                               trigger="click"
                               placement="top"
@@ -641,15 +615,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               </OverlayTrigger>
                             </OverlayTrigger>
                           </div>
-
                         </div>
-                        {user.phoneConfirmed && (
-                          <div>
-                            <strong>
-                              <FormattedMessage id="phone.verified"/>
-                            </strong>
-                          </div>
-                        )}
                       </div>
 
                     )}
@@ -661,8 +627,9 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                       disabled={invalid || submitting}
                       type="submit"
                       bsStyle="primary"
-                      id="proposal-form-admin-content-save">
-                      <FormattedMessage id={submitting ? 'global.loading' : 'global.save'}/>
+                      id="personal-data-form-save"
+                    >
+                      <FormattedMessage id={submitting ? 'global.loading' : 'global.save_modifications'}/>
                     </Button>
                     <AlertForm
                       valid={valid}
