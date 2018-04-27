@@ -9,7 +9,7 @@
 
 {% block mainContent %}
 
-    {% if showVotesWidget %}
+    {% if app.user and showVotesWidget %}
       {% set votableStep = proposal is defined ? proposal|current_votable_step : currentStep %}
       {{ react_render_component('ProposalVoteBasketWidgetApp', {
           'props': {
