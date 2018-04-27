@@ -45,6 +45,9 @@ class ReportingAdmin extends Admin
             ->add('Argument', null, [
                 'label' => 'admin.fields.reporting.argument',
             ])
+            ->add('Idea', null, [
+                'label' => 'admin.fields.reporting.idea',
+            ])
             ->add('Comment', null, [
                 'label' => 'admin.fields.reporting.comment',
             ])

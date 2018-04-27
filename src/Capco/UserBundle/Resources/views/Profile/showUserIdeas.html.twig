@@ -1,0 +1,47 @@
+{% set page_class = "profile-page" %}
+{% extends "CapcoUserBundle::layout.html.twig" %}
+
+{% block canonical_link %}{{ url('capco_user_profile_show_ideas', {'slug': user.slug}) }}{% endblock %}
+
+{% block metaTags %}
+    {# OpenGraph doesn't support svg as image so no default avatar :'( #}
+    {% set userMedia %}{% if user.Media %}{% path user.Media, 'avatar' %}{% endif %}{% endset %}
+        {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+        'title':       'user.profile.show.title'|trans({'%name%': user.username }, 'CapcoAppBundle')~' - '~'user.profile.show.propositions.ideas.title'|trans({}, 'CapcoAppBundle'),
+        'description': user.biography,
+        'url':         url('capco_user_profile_show_ideas', {'slug': user.slug}),
+        'type':        'profile',
+        'image':       userMedia
+    } only %}
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} - {{ 'user.profile.show.title'|trans({'%name%': user.username }, 'CapcoAppBundle') }} - {{ 'user.profile.show.propositions.ideas.title'|trans({}, 'CapcoAppBundle') }}
+{% endblock %}
+
+{% block jumbotron %}{% endblock %}
+
+{% block fos_user_content %}
+    {% include '@CapcoUser/Profile/showProfile.html.twig' %}
+    <div class="container  container--custom">
+        <div class="row">
+            <div class="col-xs-12  col-sm-12  col-md-12 col-lg-12" id="details">
+                {% include '@CapcoUser/Profile/ideas.html.twig' %}
+            </div>
+        </div>
+    </div>
+{% endblock fos_user_content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(window).on('load', function() {
+            App.equalheight('.media--macro');
+        });
+
+        $(window).on('resize', function() {
+            App.resized('.media--macro');
+        });
+
+    </script>
+{% endblock %}

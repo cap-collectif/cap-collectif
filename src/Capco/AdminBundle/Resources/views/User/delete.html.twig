@@ -10,7 +10,7 @@
             <div class="box-body">
                 {{ 'user.delete.confirmation'|trans({'%object%': admin.toString(object)}, 'CapcoAppBundle')|raw }}
 
-                {% if object.opinions|length  > 0 or
+                {% if object.opinions|length  > 0 or object.ideas|length > 0 or
                       object.sources|length   > 0 or object.comments|length > 0 or
                       object.arguments|length > 0 or object.votes|length > 0
                 %}
@@ -26,6 +26,19 @@
                     <ul>
                         {% for opinion in object.opinions %}
                             <li><a href="{{ path('admin_capco_app_opinion_edit', {id: opinion.id}) }}">{{ opinion.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                {% if object.ideas|length > 0 %}
+                    <h4>
+                        {% transchoice object.ideas|length with {'%count%': object.ideas|length} from 'CapcoAppBundle' %}
+                            user.delete.ideas
+                        {% endtranschoice %}
+                    </h4>
+                    <ul>
+                        {% for idea in object.ideas %}
+                            <li><a href="{{ path('admin_capco_app_idea_edit', {id: idea.id}) }}">{{ idea.title }}</a></li>
                         {% endfor %}
                     </ul>
                 {% endif %}

@@ -14,6 +14,7 @@ class HomePage extends Page
         'Registration button' => '.btn.btn--registration',
         'Logged user dropdown' => '#navbar-username',
         'Logout button' => '.nav #logout-button',
+        'idea' => '#idea-preview',
     ];
 
     /**
@@ -36,5 +37,10 @@ class HomePage extends Page
     {
         $this->openUserDropdown();
         $this->getElement('Logout button')->click();
+    }
+
+    public function getIdeaSelector()
+    {
+        return $this->getSelector('idea');
     }
 }

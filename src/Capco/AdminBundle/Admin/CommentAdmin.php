@@ -4,6 +4,8 @@ namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventComment;
+use Capco\AppBundle\Entity\Idea;
+use Capco\AppBundle\Entity\IdeaComment;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\PostComment;
 use Sonata\AdminBundle\Admin\Admin;
@@ -122,7 +124,14 @@ class CommentAdmin extends Admin
     {
         $subject = $this->getSubject();
 
-        if ($subject instanceof EventComment) {
+        if ($subject instanceof IdeaComment) {
+            $showMapper
+                ->add('idea', 'sonata_type_model', [
+                    'label' => 'admin.fields.comment.idea',
+                    'class' => 'Capco\AppBundle\Entity\Idea',
+                ])
+            ;
+        } elseif ($subject instanceof EventComment) {
             $showMapper
                 ->add('event', 'sonata_type_model', [
                     'label' => 'admin.fields.comment.idea',
@@ -202,7 +211,14 @@ class CommentAdmin extends Admin
         $subject = $this->getSubject();
         $currentUser = $this->getConfigurationPool()->getContainer()->get('security.token_storage')->getToken()->getUser();
 
-        if ($subject instanceof EventComment) {
+        if ($subject instanceof IdeaComment) {
+            $formMapper
+                ->add('idea', 'sonata_type_model', [
+                    'label' => 'admin.fields.comment.idea',
+                    'class' => Idea::class,
+                ])
+            ;
+        } elseif ($subject instanceof EventComment) {
             $formMapper
                 ->add('event', 'sonata_type_model', [
                     'label' => 'admin.fields.comment.idea',

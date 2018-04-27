@@ -12,12 +12,8 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
-use Capco\AppBundle\GraphQL\Resolver\ProjectContributorResolver;
-use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use JMS\Serializer\SerializationContext;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -66,37 +62,17 @@ class StepController extends Controller
             throw $this->createNotFoundException();
         }
 
-        $project = $this->get('capco.project.repository')->getOne($projectSlug);
-
+        $em = $this->getDoctrine()->getManager();
+        $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
         if (!$project) {
             throw $this->createNotFoundException();
         }
-
         $events = $this->get('capco.event.resolver')->getLastByProject($projectSlug, 2);
         $posts = $this->get('capco.blog.post.repository')->getLastPublishedByProject($projectSlug, 2);
         $nbEvents = $this->get('capco.event.resolver')->countEvents(null, null, $projectSlug, null);
-        $nbPosts = $this->get('capco.blog.post.repository')->countSearchResults(null, $projectSlug);
+        $nbPosts = $em->getRepository('CapcoAppBundle:Post')->countSearchResults(null, $projectSlug);
 
-        $projectContributorResolver = $this->get(ProjectContributorResolver::class);
-
-        $contributorsConnection = $projectContributorResolver($project, new Argument(['first' => 10]));
-
-        $contributorsList = $contributorsConnection->totalCount > 0
-         ? array_merge(
-            ...array_map(function (Edge $edge) {
-                /** @var User $user */
-                $user = $edge->node;
-
-                return [$user->getId() => [
-                    'user' => $user,
-                    'sources' => $user->getSourcesCount(),
-                    'arguments' => $user->getArgumentsCount(),
-                    'opinions' => $user->getOpinionsCount(),
-                    'contributions' => $user->getContributionsCount(),
-                    'votes' => $user->getVotesCount(),
-                ]];
-            }, $contributorsConnection->edges)
-        ) : [];
+        $contributors = $this->get('capco.contribution.resolver')->getProjectContributorsOrdered($project, true, 10, 1);
 
         $showVotes = $this->get('capco.project.helper')->hasStepWithVotes($project);
 
@@ -107,9 +83,8 @@ class StepController extends Controller
             'posts' => $posts,
             'nbEvents' => $nbEvents,
             'nbPosts' => $nbPosts,
-            'contributors' => $contributorsList,
+            'contributors' => $contributors,
             'showVotes' => $showVotes,
-            'anonymousCount' => $contributorsConnection->anonymousCount,
         ];
     }
 

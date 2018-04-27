@@ -11,6 +11,7 @@ use Behat\Testwork\Hook\Scope\AfterSuiteScope;
 use Behat\Testwork\Tester\Result\TestResult;
 use Capco\AppBundle\Behat\Traits\AdminTrait;
 use Capco\AppBundle\Behat\Traits\CommentStepsTrait;
+use Capco\AppBundle\Behat\Traits\IdeaStepsTrait;
 use Capco\AppBundle\Behat\Traits\NotificationsStepTrait;
 use Capco\AppBundle\Behat\Traits\OpinionStepsTrait;
 use Capco\AppBundle\Behat\Traits\ProjectStepsTrait;
@@ -33,6 +34,7 @@ const SNAPSHOT_NAME = 'snap_qa';
 class ApplicationContext extends UserContext
 {
     use CommentStepsTrait;
+    use IdeaStepsTrait;
     use NotificationsStepTrait;
     use OpinionStepsTrait;
     use ProjectStepsTrait;
@@ -169,6 +171,14 @@ class ApplicationContext extends UserContext
             $this->getSession()->setCookie('displayCookieConsent', 'y');
         }
         $this->navigationContext->iVisitedPage($pageName);
+    }
+
+    /**
+     * @When I confirm the popup message
+     */
+    public function iConfirmThePopup()
+    {
+        $this->getSession()->getDriver()->getWebDriverSession()->accept_alert();
     }
 
     /**

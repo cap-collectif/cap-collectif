@@ -18,10 +18,27 @@ class NavigationContext extends PageObjectContext
     }
 
     /**
+     * @When I vote for the first comment
+     */
+    public function iVoteForTheFirstComment()
+    {
+        $this->getPage('idea page')
+             ->voteForFirstComment();
+    }
+
+    /**
      * @Then The first source vote counter should be :value
      */
     public function theFirstSourceVoteCounterShouldBe(int $value)
     {
         expect($this->getPage('opinion page')->getFirstSourceVoteCounter())->toBe($value);
+    }
+
+    /**
+     * @Then The first comment vote counter should be :value
+     */
+    public function theFirstCommentVoteCounterShouldBe(string $value)
+    {
+        expect($this->getPage('idea page')->getFirstCommentVoteCounter())->toBe($value);
     }
 }

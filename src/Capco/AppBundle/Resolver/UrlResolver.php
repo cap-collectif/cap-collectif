@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Resolver;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\Idea;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Post;
@@ -155,6 +156,10 @@ class UrlResolver
 
     public function getObjectUrl($object, $absolute = false)
     {
+        if ($object instanceof Idea && $object->getSlug()) {
+            return $this->router->generate('app_idea_show', ['slug' => $object->getSlug()], $absolute);
+        }
+
         if ($object instanceof Post && $object->getSlug()) {
             return $this->router->generate('app_blog_show', ['slug' => $object->getSlug()], $absolute);
         }
@@ -202,6 +207,10 @@ class UrlResolver
 
     public function getTrashedObjectUrl($object, $absolute = false)
     {
+        if ($object instanceof Idea && $object->getSlug()) {
+            return $this->router->generate('app_idea_show', ['slug' => $object->getSlug()], $absolute);
+        }
+
         if (($object instanceof Argument || $object instanceof Source) && $object->getLinkedOpinion()) {
             return $this->router
                 ->generate(
@@ -220,6 +229,10 @@ class UrlResolver
 
     public function getAdminObjectUrl($object, $absolute = false)
     {
+        if ($object instanceof Idea) {
+            return $this->router->generate('admin_capco_app_idea_show', ['id' => $object->getId()], $absolute);
+        }
+
         if ($object instanceof Source) {
             return $this->router->generate('admin_capco_app_source_show', ['id' => $object->getId()], $absolute);
         }

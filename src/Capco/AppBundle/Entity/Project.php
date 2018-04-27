@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
-use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
@@ -949,16 +948,5 @@ class Project implements IndexableInterface
     public static function getElasticsearchSerializationGroups(): array
     {
         return ['Elasticsearch'];
-    }
-
-    public function hasVotableStep(): bool
-    {
-        foreach ($this->steps as $step) {
-            if ($step->getStep() instanceof VotableInterface) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

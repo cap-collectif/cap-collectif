@@ -7,10 +7,12 @@ trait AnonymousVoteRepositoryTrait
     public function getAnonymousCount(): int
     {
         $qb = $this->createQueryBuilder('v')
-            ->select('count(DISTINCT v.email)')
-            ->where('v.user IS NULL');
+      ->select('count(DISTINCT v.email)')
+      ->where('v.user IS NULL')
+  ;
 
         return $qb->getQuery()
-            ->getSingleScalarResult();
+      ->getSingleScalarResult()
+      ;
     }
 }

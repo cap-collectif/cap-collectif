@@ -31,6 +31,10 @@ class LoaderDataFixture extends AbstractLoader
 
             __DIR__ . '/Theme.yml',
 
+            __DIR__ . '/Idea.yml',
+            __DIR__ . '/IdeaComment.yml',
+            __DIR__ . '/IdeaVote.yml',
+
             __DIR__ . '/OpinionType.yml',
             __DIR__ . '/AppendixType.yml',
             __DIR__ . '/OpinionTypeAppendixType.yml',
@@ -90,6 +94,8 @@ class LoaderDataFixture extends AbstractLoader
             __DIR__ . '/ProposalCollectVote.yml',
             __DIR__ . '/ProposalComment.yml',
 
+            __DIR__ . '/Reporting.yml',
+
             __DIR__ . '/Post.yml',
             __DIR__ . '/PostComment.yml',
             __DIR__ . '/Event.yml',
@@ -105,7 +111,6 @@ class LoaderDataFixture extends AbstractLoader
             __DIR__ . '/Group.yml',
             __DIR__ . '/UserGroup.yml',
             __DIR__ . '/Follower.yml',
-            __DIR__ . '/Reporting.yml',
         ];
     }
 }

@@ -20,6 +20,14 @@ class FeaturesCategoryResolver
             'conditions' => ['calendar'],
             'features' => [],
         ],
+        'pages.ideas' => [
+            'conditions' => ['ideas'],
+            'features' => ['idea_creation'],
+        ],
+        'pages.ideas_trash' => [
+            'conditions' => ['ideas'],
+            'features' => ['idea_trash'],
+        ],
         'pages.themes' => [
             'conditions' => ['themes'],
             'features' => [],
@@ -62,7 +70,7 @@ class FeaturesCategoryResolver
         ],
         'settings.modules' => [
             'conditions' => [],
-            'features' => ['blog', 'calendar', 'versions', 'themes', 'districts', 'members_list', 'profiles', 'reporting', 'newsletter', 'share_buttons', 'search', 'votes_evolution', 'phone_confirmation', 'server_side_rendering', 'export', 'indexation'],
+            'features' => ['blog', 'calendar', 'ideas', 'versions', 'themes', 'districts', 'members_list', 'profiles', 'reporting', 'newsletter', 'share_buttons', 'search', 'votes_evolution', 'phone_confirmation', 'server_side_rendering', 'export'],
         ],
         'settings.notifications' => [
             'conditions' => [],
@@ -81,7 +89,7 @@ class FeaturesCategoryResolver
         $this->manager = $manager;
     }
 
-    public function isCategoryEnabled(string $category): bool
+    public function isCategoryEnabled($category)
     {
         if (!array_key_exists($category, self::$categories)) {
             return false;
@@ -90,10 +98,7 @@ class FeaturesCategoryResolver
         return $this->manager->hasOneActive(self::$categories[$category]['conditions']);
     }
 
-    /**
-     * @param User $admin
-     */
-    public function isAdminEnabled($admin): bool
+    public function isAdminEnabled($admin)
     {
         if (method_exists($admin, 'getFeatures')) {
             return $this->manager->hasOneActive($admin->getFeatures());
@@ -102,7 +107,7 @@ class FeaturesCategoryResolver
         return true;
     }
 
-    public function getTogglesByCategory(string $category): array
+    public function getTogglesByCategory($category)
     {
         $toggles = [];
         if (array_key_exists($category, self::$categories)) {
@@ -122,16 +127,16 @@ class FeaturesCategoryResolver
         return $toggles;
     }
 
-    public function findCategoryForToggle(string $toggle): ?string
+    public function findCategoryForToggle($toggle)
     {
         foreach (self::$categories as $name => $category) {
-            if (\in_array($toggle, $category['features'], true)) {
+            if (in_array($toggle, $category['features'], true)) {
                 return $name;
             }
         }
     }
 
-    public function getEnabledPagesCategories(): array
+    public function getEnabledPagesCategories()
     {
         $categories = [];
         foreach (self::$categories as $name => $cat) {
@@ -143,7 +148,7 @@ class FeaturesCategoryResolver
         return $categories;
     }
 
-    public function getEnabledSettingsCategories(): array
+    public function getEnabledSettingsCategories()
     {
         $categories = [];
         foreach (self::$categories as $name => $cat) {
@@ -155,7 +160,7 @@ class FeaturesCategoryResolver
         return $categories;
     }
 
-    public function getGroupNameForCategory(string $category): ?string
+    public function getGroupNameForCategory($category)
     {
         if (0 === strrpos($category, 'settings.')) {
             return 'admin.group.parameters';

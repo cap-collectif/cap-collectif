@@ -1,0 +1,11 @@
+<div class="row">
+    {% if limit is defined %}
+        {% for vote in votes|slice(0, limit) %}
+            {% include 'CapcoAppBundle:Default:user_thumbnail.html.twig' with {'user': vote.user, 'username': vote.username, 'private': vote.private, 'col': 4} only %}
+        {% endfor %}
+    {% else %}
+        {% for vote in votes %}
+            {% include 'CapcoAppBundle:Default:user_thumbnail.html.twig' with {'user': vote.user, 'username': vote.username, 'private': vote.private, 'col': 6} only %}
+        {% endfor %}
+    {% endif %}
+</div>

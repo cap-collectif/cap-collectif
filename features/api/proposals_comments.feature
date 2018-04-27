@@ -157,7 +157,7 @@ Scenario: logged in API client wants to add a comment by hacking
   When I send a POST request to "/api/proposal_forms/proposalForm1/proposals/proposal1/comments" with json:
   """
   {
-    "parent": "eventComment1",
+    "parent": "ideaComment1",
     "body": "Pr0 Hacker"
   }
   """
@@ -177,7 +177,7 @@ Scenario: logged in API client wants to add a comment to the wrong proposal
   When I send a POST request to "/api/proposal_forms/proposalForm1/proposals/proposal1/comments" with json:
   """
   {
-    "parent": "eventComment1",
+    "parent": "ideaComment1",
     "body": "Pr0 Hacker"
   }
   """

@@ -235,18 +235,6 @@ class ProposalSelectionVoteRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function getAnonymousVotesCountByStep(SelectionStep $selectionStep): int
-    {
-        $qb = $this->createQueryBuilder('pv')
-            ->select('COUNT(pv.id)')
-            ->andWhere('pv.private = true')
-            ->andWhere('pv.selectionStep = :selectionStep')
-            ->setParameter('selectionStep', $selectionStep)
-        ;
-
-        return (int) $qb->getQuery()->getSingleScalarResult();
-    }
-
     private function getCountsByProposalGroupedBySteps(Proposal $proposal, $asTitle = false): array
     {
         $items = array_map(function ($value) use ($asTitle) {

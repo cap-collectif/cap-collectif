@@ -70,6 +70,7 @@ class ReportingRepository extends EntityRepository
             ->leftJoin('r.opinionVersion', 'ov')
             ->leftJoin('r.Source', 's')
             ->leftJoin('r.Argument', 'a')
+            ->leftJoin('r.Idea', 'i')
             ->leftJoin('r.Comment', 'c')
             ->leftJoin('r.proposal', 'p')
             ->addOrderBy('r.createdAt', 'DESC')
