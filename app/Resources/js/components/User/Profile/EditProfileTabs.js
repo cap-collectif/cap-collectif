@@ -15,6 +15,7 @@ import UserLink from '../UserLink';
 import CardUser from '../../Ui/Card/CardUser';
 import ChangePasswordForm from './ChangePasswordForm';
 import PersonalData from './PersonalData';
+import Profile from "./Profile";
 
 type Props = {
   features: FeatureToggles,
@@ -117,6 +118,11 @@ export class EditProfileTabs extends Component<Props> {
           </Col>
           <Col xs={12} sm={8} md={9}>
             <Tab.Content animation>
+              <Tab.Pane eventKey="profile">
+                {features.profiles && (
+                  <Profile viewer={viewer}/>
+                )}
+              </Tab.Pane>
               <Tab.Pane eventKey="account">
                 {!features.login_paris && (
                   <AccountBox/>
@@ -159,6 +165,7 @@ export default createFragmentContainer(
       ...FollowingsProposals_viewer
       ...NotificationsForm_viewer
       ...PersonalData_viewer
+      ...Profile_viewer
       username
       displayName
       media {
