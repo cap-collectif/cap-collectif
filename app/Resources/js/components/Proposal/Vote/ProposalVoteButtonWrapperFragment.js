@@ -49,12 +49,14 @@ export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
         </LoginOverlay>
       );
     }
+    const popoverId = `vote-tooltip-proposal-${proposal.id}`;
     if (step.voteType === 'SIMPLE') {
       return (
+        /* $FlowFixMe */
         <VoteButtonOverlay
-          popoverId={`vote-tooltip-proposal-${proposal.id}`}
-          userHasVote={proposal.viewerHasVote}
-          limit={step.votesLimit}
+          popoverId={popoverId}
+          step={step}
+          userHasVote={proposal.viewerHasVote || false}
           hasReachedLimit={
             !proposal.viewerHasVote &&
             step.votesLimit &&
@@ -73,10 +75,11 @@ export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
     }
 
     return (
+      /* $FlowFixMe */
       <VoteButtonOverlay
-        popoverId={`vote-tooltip-proposal-${proposal.id}`}
+        popoverId={popoverId}
+        step={step}
         userHasVote={proposal.viewerHasVote}
-        limit={step.votesLimit}
         hasReachedLimit={step.votesLimit && step.votesLimit - viewer.proposalVotes.totalCount <= 0}
         hasUserEnoughCredits={this.userHasEnoughCredits()}>
         <ProposalVoteButton
@@ -116,17 +119,12 @@ export default createFragmentContainer(ProposalVoteButtonWrapperFragment, {
     }
   `,
   step: graphql`
-    fragment ProposalVoteButtonWrapperFragment_step on Step {
+    fragment ProposalVoteButtonWrapperFragment_step on ProposalStep {
       id
       title
-      ... on CollectStep {
-        votesLimit
-        voteType
-      }
-      ... on SelectionStep {
-        votesLimit
-        voteType
-      }
+      votesLimit
+      voteType
+      ...VoteButtonOverlay_step
     }
   `,
 });

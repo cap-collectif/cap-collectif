@@ -6,7 +6,6 @@ import { Row, Col } from 'react-bootstrap';
 import { Field } from 'redux-form';
 import toggle from '../../Form/Toggle';
 import ProposalDetailEstimation from '../../Proposal/Detail/ProposalDetailEstimation';
-// import { deleteVote } from '../../../redux/modules/proposal';
 import type { ProposalUserVoteItem_vote } from './__generated__/ProposalUserVoteItem_vote.graphql';
 import type { ProposalUserVoteItem_step } from './__generated__/ProposalUserVoteItem_step.graphql';
 
@@ -22,8 +21,6 @@ export class ProposalUserVoteItem extends React.Component<Props> {
   render() {
     const { onDelete, member, step, vote, ranking } = this.props;
     const proposal = vote.proposal;
-    const anonymous = vote.anonymous;
-    const voteAt = vote.createdAt;
 
     const colTitleWidth = () => {
       if (step.votesRanking === true && step.voteType === 'BUDGET') {
@@ -62,14 +59,19 @@ export class ProposalUserVoteItem extends React.Component<Props> {
                 {proposal.title}
               </a>
               <br />
-              {voteAt ? (
+              {vote.createdAt ? (
                 <FormattedMessage
                   id="voted-on-date-at-time"
                   values={{
                     date: (
-                      <FormattedDate value={voteAt} day="numeric" month="long" year="numeric" />
+                      <FormattedDate
+                        value={vote.createdAt}
+                        day="numeric"
+                        month="long"
+                        year="numeric"
+                      />
                     ),
-                    time: <FormattedTime value={voteAt} hour="numeric" minute="numeric" />,
+                    time: <FormattedTime value={vote.createdAt} hour="numeric" minute="numeric" />,
                   }}
                 />
               ) : (
@@ -83,8 +85,6 @@ export class ProposalUserVoteItem extends React.Component<Props> {
             <div className="d-flex">
               <Field
                 component={toggle}
-                // className="ml-10"
-                checked={!anonymous}
                 label="anonymous-voting"
                 name={`${member}.anonymous`}
                 normalize={val => !!val}
@@ -105,7 +105,6 @@ export class ProposalUserVoteItem extends React.Component<Props> {
             <a
               onClick={() => {
                 onDelete();
-                // deleteVote(step, proposal);
               }}
               className="proposal-vote__delete"
               disabled={!step.open}>
@@ -122,7 +121,6 @@ export default createFragmentContainer(ProposalUserVoteItem, {
   vote: graphql`
     fragment ProposalUserVoteItem_vote on ProposalVote {
       createdAt
-      anonymous
       proposal {
         id
         title
