@@ -64,23 +64,6 @@ Capco\UserBundle\Entity\User:
         phoneConfirmed: true
         phone: '+33675492871'
 
-    user666:
-        id: 'adminCapco'
-        username: adminpro
-        firstname: Administrateur
-        lastname: authentifier
-        email: admin@cap-collectif.com
-        enabled: true
-        userType: '@UserType1'
-        plainPassword: admin
-        Media: null
-        roles:
-         - 'ROLE_ADMIN'
-        vip: true
-        confirmationToken: ~
-        phoneConfirmed: true
-        phone: '+33675492871'
-
     user5:
         id: 'user5'
         username: user
@@ -392,7 +375,6 @@ Capco\UserBundle\Entity\User:
          phone: '+3300000000'
          confirmationToken: ~
          phoneConfirmed: true
-
     user518:
      id: 'user518'
      username: null

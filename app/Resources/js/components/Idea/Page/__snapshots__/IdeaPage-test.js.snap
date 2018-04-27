@@ -1,0 +1,171 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<IdeaPage /> it should not show the sidebar when idea is not contribuable 1`] = `
+<div>
+  <div
+    className=""
+    id="sidebar-container"
+  >
+    <Row
+      bsClass="row"
+      componentClass="div"
+    >
+      <Col
+        bsClass="col"
+        componentClass="div"
+        sm={12}
+        xs={12}
+      >
+        <IdeaPageHeader
+          className="container container--thinner container--custom"
+          idea={
+            Object {
+              "canContribute": false,
+              "id": "1",
+            }
+          }
+        />
+        <IdeaPageBody
+          className="container container--thinner container--custom"
+          idea={
+            Object {
+              "canContribute": false,
+              "id": "1",
+            }
+          }
+        />
+        <Connect(IdeaPageVotes)
+          className="container container--thinner container--custom"
+          idea={
+            Object {
+              "canContribute": false,
+              "id": "1",
+            }
+          }
+        />
+        <IdeaPageComments
+          className="container container--thinner container--custom"
+          id="1"
+        />
+      </Col>
+    </Row>
+  </div>
+</div>
+`;
+
+exports[`<IdeaPage /> it should render the idea page with header, body, and votes and comments sections 1`] = `
+<div>
+  <div
+    className=""
+    id="sidebar-container"
+  >
+    <Row
+      bsClass="row"
+      componentClass="div"
+    >
+      <Col
+        bsClass="col"
+        componentClass="div"
+        sm={12}
+        xs={12}
+      >
+        <IdeaPageHeader
+          className="container container--thinner container--custom"
+          idea={
+            Object {
+              "id": "1",
+            }
+          }
+        />
+        <IdeaPageBody
+          className="container container--thinner container--custom"
+          idea={
+            Object {
+              "id": "1",
+            }
+          }
+        />
+        <Connect(IdeaPageVotes)
+          className="container container--thinner container--custom"
+          idea={
+            Object {
+              "id": "1",
+            }
+          }
+        />
+        <IdeaPageComments
+          className="container container--thinner container--custom"
+          id="1"
+        />
+      </Col>
+    </Row>
+  </div>
+</div>
+`;
+
+exports[`<IdeaPage /> it should show the sidebar when idea is contribuable 1`] = `
+<div>
+  <div
+    className="container sidebar__container"
+    id="sidebar-container"
+  >
+    <Row
+      bsClass="row"
+      componentClass="div"
+    >
+      <Col
+        bsClass="col"
+        componentClass="div"
+        sm={9}
+        xs={12}
+      >
+        <IdeaPageHeader
+          className="container--custom container--with-sidebar"
+          idea={
+            Object {
+              "canContribute": true,
+              "id": "1",
+            }
+          }
+        />
+        <IdeaPageBody
+          className="container--custom container--with-sidebar"
+          idea={
+            Object {
+              "canContribute": true,
+              "id": "1",
+            }
+          }
+        />
+        <Connect(IdeaPageVotes)
+          className="container--custom container--with-sidebar"
+          idea={
+            Object {
+              "canContribute": true,
+              "id": "1",
+            }
+          }
+        />
+        <IdeaPageComments
+          className="container--custom container--with-sidebar"
+          id="1"
+        />
+      </Col>
+      <div
+        className=""
+        id="sidebar-overlay"
+      />
+      <IdeaSidebar
+        expanded={false}
+        idea={
+          Object {
+            "canContribute": true,
+            "id": "1",
+          }
+        }
+        onToggleExpand={[Function]}
+      />
+    </Row>
+  </div>
+</div>
+`;

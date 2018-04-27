@@ -1,0 +1,17 @@
+{% if nbIdeas > 0 %}
+    <div id="ideas" class="container  container--custom">
+        {% if null != section.title %}
+            <h2 class="h2">{{ section.title }}</h2>
+        {% else %}
+            <h2 class="h2">{{ 'homepage.ideas.title' | trans({}, 'CapcoAppBundle') }}</h2>
+        {% endif %}
+        {% if null != section.teaser %}
+            <p class="block">{{ section.teaser }}</p>
+        {% endif %}
+        {% if null != section.body %}
+            <p>{{ section.body | raw }}</p>
+        {% endif %}
+        {{ react_render_component('IdeasListApp', {'props': props}) }}
+        <a href="{{ path('app_idea') }}" class="btn  btn-primary  btn--outline">{{ 'idea.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+    </div>
+{% endif %}

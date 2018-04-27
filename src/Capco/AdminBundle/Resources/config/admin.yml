@@ -162,6 +162,22 @@ services:
     calls:
       - [ setTranslationDomain, [CapcoAppBundle]]
 
+  capco_admin.admin.idea:
+    class: Capco\AdminBundle\Admin\IdeaAdmin
+    arguments: [~, Capco\AppBundle\Entity\Idea, CapcoAdminBundle:Idea]
+    tags:
+      - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.idea}
+    calls:
+      - [ setTranslationDomain, [CapcoAppBundle]]
+
+  capco_admin.admin.idea_vote:
+    class: Capco\AdminBundle\Admin\IdeaVoteAdmin
+    arguments: [~, Capco\AppBundle\Entity\IdeaVote, SonataAdminBundle:CRUD]
+    tags:
+      - {name: sonata.admin, manager_type: orm, label: admin.label.idea_vote}
+    calls:
+      - [ setTranslationDomain, [CapcoAppBundle]]
+
   capco_admin.admin.newsletter_subscription:
     class: Capco\AdminBundle\Admin\NewsletterSubscriptionAdmin
     arguments: [~, Capco\AppBundle\Entity\NewsletterSubscription, SonataAdminBundle:CRUD]
@@ -290,7 +306,7 @@ services:
       - {name: sonata.admin, manager_type: orm, group: admin.group.moderation, label: admin.label.comment}
     calls:
       - [ setTranslationDomain, [CapcoAppBundle]]
-      - [setSubClasses, [{event_comment: Capco\AppBundle\Entity\EventComment, post_comment: Capco\AppBundle\Entity\PostComment, proposal_comment: Capco\AppBundle\Entity\ProposalComment}]]
+      - [setSubClasses, [{idea_comment: Capco\AppBundle\Entity\IdeaComment, event_comment: Capco\AppBundle\Entity\EventComment, post_comment: Capco\AppBundle\Entity\PostComment, proposal_comment: Capco\AppBundle\Entity\ProposalComment}]]
 
   capco_admin.admin.comment_vote:
     class: Capco\AdminBundle\Admin\CommentVoteAdmin
@@ -332,7 +348,7 @@ services:
     calls:
       - [ setTranslationDomain, [CapcoAppBundle]]
       - [ setTemplate, [list, CapcoAdminBundle:HighlightedContent:list.html.twig]]
-      - [ setSubClasses, [{highlighted_post: Capco\AppBundle\Entity\HighlightedPost, highlighted_theme: Capco\AppBundle\Entity\HighlightedTheme, highlighted_event: Capco\AppBundle\Entity\HighlightedEvent, highlighted_project: Capco\AppBundle\Entity\HighlightedProject}]]
+      - [ setSubClasses, [{highlighted_post: Capco\AppBundle\Entity\HighlightedPost, highlighted_idea: Capco\AppBundle\Entity\HighlightedIdea, highlighted_theme: Capco\AppBundle\Entity\HighlightedTheme, highlighted_event: Capco\AppBundle\Entity\HighlightedEvent, highlighted_project: Capco\AppBundle\Entity\HighlightedProject}]]
 
   capco_admin.admin.project_abstractstep:
     class: Capco\AdminBundle\Admin\ProjectAbstractStepAdmin

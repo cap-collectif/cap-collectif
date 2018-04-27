@@ -125,6 +125,8 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         $toggleManager->deactivate('blog');
         $toggleManager->deactivate('calendar');
         $toggleManager->deactivate('newsletter');
+        $toggleManager->deactivate('ideas');
+        $toggleManager->deactivate('idea_creation');
         $toggleManager->deactivate('themes');
         $toggleManager->activate('registration');
         $toggleManager->activate('login_facebook');
@@ -135,6 +137,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         $toggleManager->deactivate('projects_form');
         $toggleManager->activate('share_buttons');
         $toggleManager->activate('project_trash');
+        $toggleManager->deactivate('idea_trash');
         $toggleManager->activate('reporting');
         $toggleManager->deactivate('shield_mode');
     }

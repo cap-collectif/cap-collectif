@@ -34,7 +34,9 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
         $toggleManager->activate('calendar');
         $toggleManager->activate('newsletter');
         $toggleManager->activate('captcha');
+        $toggleManager->activate('ideas');
         $toggleManager->activate('versions');
+        $toggleManager->activate('idea_creation');
         $toggleManager->activate('themes');
         $toggleManager->activate('registration');
         $toggleManager->activate('login_facebook');
@@ -44,6 +46,7 @@ class ResetFeatureFlagsCommand extends ContainerAwareCommand
         $toggleManager->activate('projects_form');
         $toggleManager->activate('share_buttons');
         $toggleManager->activate('project_trash');
+        $toggleManager->activate('idea_trash');
         $toggleManager->activate('reporting');
         $toggleManager->activate('search');
         $toggleManager->activate('districts');

@@ -1,0 +1,8 @@
+{% if nbIdeas > 0 %}
+    {{ react_render_component('IdeasListApp', {'props': props}) }}
+    {% if nbIdeas > max %}
+        <a href="{{ path('app_idea_search', {'theme': theme.slug}) }}" class="btn  btn-primary  btn--outline">{{ 'idea.see_all'|trans({}, 'CapcoAppBundle') }}</a>
+    {% endif %}
+{% else %}
+    <p>{{ 'idea.none_in_theme'|trans({}, 'CapcoAppBundle') }}</p>
+{% endif %}

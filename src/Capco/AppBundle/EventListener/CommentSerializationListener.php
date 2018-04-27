@@ -20,6 +20,7 @@ class CommentSerializationListener extends AbstractSerializationListener
     public static function getSubscribedEvents(): array
     {
         return [
+            ['event' => 'serializer.post_serialize', 'class' => 'Capco\AppBundle\Entity\IdeaComment', 'method' => 'onPostCommentSerialize'],
             ['event' => 'serializer.post_serialize', 'class' => 'Capco\AppBundle\Entity\PostComment', 'method' => 'onPostCommentSerialize'],
             ['event' => 'serializer.post_serialize', 'class' => 'Capco\AppBundle\Entity\EventComment', 'method' => 'onPostCommentSerialize'],
             ['event' => 'serializer.post_serialize', 'class' => 'Capco\AppBundle\Entity\ProposalComment', 'method' => 'onPostCommentSerialize'],

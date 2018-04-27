@@ -70,6 +70,12 @@ class Reporting implements CreatableInterface
     private $Argument;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Idea", inversedBy="Reports")
+     * @ORM\JoinColumn(name="idea_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $Idea;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionVersion", inversedBy="reports")
      * @ORM\JoinColumn(name="opinion_version_id", referencedColumnName="id", onDelete="CASCADE")
      */
@@ -194,6 +200,25 @@ class Reporting implements CreatableInterface
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getIdea()
+    {
+        return $this->Idea;
+    }
+
+    /**
+     * @param mixed $Idea
+     */
+    public function setIdea($Idea)
+    {
+        $this->Idea = $Idea;
+        $this->Idea->addReport($this);
+
+        return $this;
+    }
+
     public function getOpinionVersion()
     {
         return $this->opinionVersion;
@@ -260,6 +285,8 @@ class Reporting implements CreatableInterface
             return $this->Source;
         } elseif (null !== $this->Argument) {
             return $this->Argument;
+        } elseif (null !== $this->Idea) {
+            return $this->Idea;
         } elseif (null !== $this->Comment) {
             return $this->Comment;
         } elseif (null !== $this->opinionVersion) {
@@ -286,6 +313,10 @@ class Reporting implements CreatableInterface
 
         if (null !== $this->Argument) {
             $this->Argument->removeReport($this);
+        }
+
+        if (null !== $this->Idea) {
+            $this->Idea->removeReport($this);
         }
 
         if (null !== $this->Comment) {

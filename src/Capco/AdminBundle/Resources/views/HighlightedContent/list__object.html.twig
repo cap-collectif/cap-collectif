@@ -7,6 +7,8 @@
         {{ object.event.title }}
     {% elseif object.theme is defined %}
         {{ object.theme.title }}
+    {% elseif object.idea is defined %}
+        {{ object.idea.title }}
     {% elseif object.project is defined %}
         {{ object.project.title }}
     {% endif %}

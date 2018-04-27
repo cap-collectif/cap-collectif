@@ -1,0 +1,181 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<IdeasListFilters /> it should render a row containing sorting input and ideas search but no themes nor create button 1`] = `
+<Row
+  bsClass="row"
+  className="filter"
+  componentClass="div"
+>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    sm={3}
+    xs={12}
+  >
+    <InjectIntl(ReactBootstrapInput)
+      id="idea-sorting"
+      onChange={[Function]}
+      type="select"
+      value="last"
+    >
+      <FormattedMessage
+        id="global.filter_f_last"
+        values={Object {}}
+      />
+      <FormattedMessage
+        id="global.filter_f_old"
+        values={Object {}}
+      />
+      <FormattedMessage
+        id="global.filter_f_comments"
+        values={Object {}}
+      />
+      <FormattedMessage
+        id="global.filter_f_popular"
+        values={Object {}}
+      />
+    </InjectIntl(ReactBootstrapInput)>
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    lg={4}
+    sm={3}
+    xs={12}
+  >
+    <IdeasListSearch
+      onChange={[Function]}
+    />
+  </Col>
+</Row>
+`;
+
+exports[`<IdeasListFilters /> it should render the idea create when feature is enabled 1`] = `
+<Row
+  bsClass="row"
+  className="filter"
+  componentClass="div"
+>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    lg={2}
+    sm={3}
+    xs={12}
+  >
+    <Connect(IdeaCreate)
+      className="form-group"
+      themes={Array []}
+    />
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    sm={3}
+    xs={12}
+  >
+    <InjectIntl(ReactBootstrapInput)
+      id="idea-sorting"
+      onChange={[Function]}
+      type="select"
+      value="last"
+    >
+      <FormattedMessage
+        id="global.filter_f_last"
+        values={Object {}}
+      />
+      <FormattedMessage
+        id="global.filter_f_old"
+        values={Object {}}
+      />
+      <FormattedMessage
+        id="global.filter_f_comments"
+        values={Object {}}
+      />
+      <FormattedMessage
+        id="global.filter_f_popular"
+        values={Object {}}
+      />
+    </InjectIntl(ReactBootstrapInput)>
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    lg={4}
+    sm={3}
+    xs={12}
+  >
+    <IdeasListSearch
+      onChange={[Function]}
+    />
+  </Col>
+</Row>
+`;
+
+exports[`<IdeasListFilters /> it should render the themes filter when feature is enabled 1`] = `
+<Row
+  bsClass="row"
+  className="filter"
+  componentClass="div"
+>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    sm={3}
+    xs={12}
+  >
+    <InjectIntl(ReactBootstrapInput)
+      id="idea-filter-theme"
+      onChange={[Function]}
+      type="select"
+      value="0"
+    >
+      <FormattedMessage
+        id="global.select_themes"
+        values={Object {}}
+      />
+    </InjectIntl(ReactBootstrapInput)>
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    sm={3}
+    xs={12}
+  >
+    <InjectIntl(ReactBootstrapInput)
+      id="idea-sorting"
+      onChange={[Function]}
+      type="select"
+      value="last"
+    >
+      <FormattedMessage
+        id="global.filter_f_last"
+        values={Object {}}
+      />
+      <FormattedMessage
+        id="global.filter_f_old"
+        values={Object {}}
+      />
+      <FormattedMessage
+        id="global.filter_f_comments"
+        values={Object {}}
+      />
+      <FormattedMessage
+        id="global.filter_f_popular"
+        values={Object {}}
+      />
+    </InjectIntl(ReactBootstrapInput)>
+  </Col>
+  <Col
+    bsClass="col"
+    componentClass="div"
+    lg={4}
+    sm={3}
+    xs={12}
+  >
+    <IdeasListSearch
+      onChange={[Function]}
+    />
+  </Col>
+</Row>
+`;

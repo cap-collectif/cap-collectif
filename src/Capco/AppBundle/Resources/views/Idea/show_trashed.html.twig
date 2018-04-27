@@ -1,0 +1,69 @@
+{% extends '@CapcoApp/base.html.twig' %}
+
+{% block canonical_link %}{{ url('app_idea_trashed') }}{% endblock %}
+
+{% set jumbotron_title = capco_site_parameter_value('ideas.trashed.jumbotron.title') %}
+{% set meta_description = capco_site_parameter_value('ideas_trash.metadescription') %}
+{% set content_body = capco_site_parameter_value('ideas.trashed.content.body') %}
+{% set picto = capco_site_image_media('ideas_trash.picto') %}
+
+
+{% block metaTags %}
+    {% set image %}{% if picto %}{% path picto, 'blockHeader' %}{% endif %}{% endset %}
+    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+        'title':       (jumbotron_title ?: 'idea.trashed.jumbotron.title'|trans({}, 'CapcoAppBundle')),
+        'description': (meta_description|striptags ?: content_body|striptags|truncate(250, true)),
+        'image':       image,
+        'url':         url('app_idea_trashed')
+    } only %}
+{% endblock %}
+
+{% block title %}
+    {% if null != title %}
+        {{ parent() }} - {{ title }}
+    {% else %}
+        {{ parent() }} - {{ 'idea.trashed.jumbotron.title'|trans({}, 'CapcoAppBundle') }}
+    {% endif %}
+{% endblock %}
+
+{% block jumbotron %}
+    <div class="jumbotron  jumbotron--custom  jumbotron--bg-1 text-center">
+        <div class="container">
+            {% if null != title %}
+                <h1>{{ title }}</h1>
+            {% else %}
+                <h1>{{ 'idea.trashed.jumbotron.title'|trans({}, 'CapcoAppBundle') }}</h1>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+
+    <div class="container  container--custom">
+        {% if null != content_body %}
+            {{ content_body|raw }}
+        {% endif %}
+    </div>
+
+    <div class="container">
+
+        {% if trashedIdeasNb > 0 %}
+            {{ react_render_component('IdeasListApp', {'props': props}) }}
+        {% else %}
+            <p>
+                {{ 'idea.trashed.none'|trans({}, 'CapcoAppBundle') }}
+            </p>
+        {% endif %}
+
+        {% set route, params = 'app_idea_trashed', {} %}
+        {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}
+
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% set customCode = capco_site_parameter_value('ideas_trash.customcode') %}
+    {% if customCode is defined and customCode != '' %}{{ customCode | raw }}{% endif %}
+{% endblock %}

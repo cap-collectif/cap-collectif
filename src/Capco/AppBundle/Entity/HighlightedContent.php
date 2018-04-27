@@ -14,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  *  "post"    = "HighlightedPost",
  *  "theme"   = "HighlightedTheme",
  *  "project" = "HighlightedProject",
+ *  "idea"    = "HighlightedIdea",
  *  "event"   = "HighlightedEvent"
  * })
  */

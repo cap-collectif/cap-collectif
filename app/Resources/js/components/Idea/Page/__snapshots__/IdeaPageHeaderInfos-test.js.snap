@@ -1,0 +1,245 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<IdeaPageHeaderInfos /> it should not render a theme when idea has one and feature is disabled 1`] = `
+<p
+  className="media--aligned excerpt"
+>
+  <FormattedMessage
+    id="idea.header.infos_no_theme"
+    values={
+      Object {
+        "created": <FormattedDate
+          day="numeric"
+          hour="numeric"
+          minute="numeric"
+          month="long"
+          value={"2017-07-10T16:53:58.000Z"}
+          year="numeric"
+        />,
+        "user": <UserLink
+          className=""
+          user={Object {}}
+        />,
+      }
+    }
+  />
+  <span>
+     | 
+    <a
+      href="#votes"
+      id="idea-votes-nb"
+    >
+      <FormattedMessage
+        id="idea.header.votes"
+        values={
+          Object {
+            "num": undefined,
+          }
+        }
+      />
+    </a>
+  </span>
+</p>
+`;
+
+exports[`<IdeaPageHeaderInfos /> it should render a paragraph with formatted messages for user and votes 1`] = `
+<p
+  className="media--aligned excerpt"
+>
+  <FormattedMessage
+    id="idea.header.infos_no_theme"
+    values={
+      Object {
+        "created": <FormattedDate
+          day="numeric"
+          hour="numeric"
+          minute="numeric"
+          month="long"
+          value={"2017-07-10T16:53:58.000Z"}
+          year="numeric"
+        />,
+        "user": <UserLink
+          className=""
+          user={Object {}}
+        />,
+      }
+    }
+  />
+  <span>
+     | 
+    <a
+      href="#votes"
+      id="idea-votes-nb"
+    >
+      <FormattedMessage
+        id="idea.header.votes"
+        values={
+          Object {
+            "num": 5,
+          }
+        }
+      />
+    </a>
+  </span>
+</p>
+`;
+
+exports[`<IdeaPageHeaderInfos /> it should render a theme when idea has one and feature is activated 1`] = `
+<p
+  className="media--aligned excerpt"
+>
+  <FormattedMessage
+    id="idea.header.infos"
+    values={
+      Object {
+        "created": <FormattedDate
+          day="numeric"
+          hour="numeric"
+          minute="numeric"
+          month="long"
+          value={"2017-07-10T16:53:58.000Z"}
+          year="numeric"
+        />,
+        "theme": <a
+          href=""
+        >
+          Theme
+        </a>,
+        "user": <UserLink
+          className=""
+          user={Object {}}
+        />,
+      }
+    }
+  />
+  <span>
+     | 
+    <a
+      href="#votes"
+      id="idea-votes-nb"
+    >
+      <FormattedMessage
+        id="idea.header.votes"
+        values={
+          Object {
+            "num": undefined,
+          }
+        }
+      />
+    </a>
+  </span>
+</p>
+`;
+
+exports[`<IdeaPageHeaderInfos /> it should render comments number when idea is commentable 1`] = `
+<p
+  className="media--aligned excerpt"
+>
+  <FormattedMessage
+    id="idea.header.infos_no_theme"
+    values={
+      Object {
+        "created": <FormattedDate
+          day="numeric"
+          hour="numeric"
+          minute="numeric"
+          month="long"
+          value={"2017-07-10T16:53:58.000Z"}
+          year="numeric"
+        />,
+        "user": <UserLink
+          className=""
+          user={Object {}}
+        />,
+      }
+    }
+  />
+  <span>
+     | 
+    <a
+      href="#comments"
+      id="idea-comments-nb"
+    >
+      <FormattedMessage
+        id="idea.header.comments"
+        values={
+          Object {
+            "num": 10,
+          }
+        }
+      />
+    </a>
+  </span>
+  <span>
+     | 
+    <a
+      href="#votes"
+      id="idea-votes-nb"
+    >
+      <FormattedMessage
+        id="idea.header.votes"
+        values={
+          Object {
+            "num": undefined,
+          }
+        }
+      />
+    </a>
+  </span>
+</p>
+`;
+
+exports[`<IdeaPageHeaderInfos /> it should render trashed label when idea is trashed 1`] = `
+<p
+  className="media--aligned excerpt"
+>
+  <FormattedMessage
+    id="idea.header.infos_no_theme"
+    values={
+      Object {
+        "created": <FormattedDate
+          day="numeric"
+          hour="numeric"
+          minute="numeric"
+          month="long"
+          value={"2017-07-10T16:53:58.000Z"}
+          year="numeric"
+        />,
+        "user": <UserLink
+          className=""
+          user={Object {}}
+        />,
+      }
+    }
+  />
+  <span>
+     | 
+    <a
+      href="#votes"
+      id="idea-votes-nb"
+    >
+      <FormattedMessage
+        id="idea.header.votes"
+        values={
+          Object {
+            "num": undefined,
+          }
+        }
+      />
+    </a>
+  </span>
+  <span
+    className="label label-default"
+    style={
+      Object {
+        "marginLeft": "5px",
+      }
+    }
+  >
+    <FormattedMessage
+      id="idea.header.trashed"
+      values={Object {}}
+    />
+  </span>
+</p>
+`;

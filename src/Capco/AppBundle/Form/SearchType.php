@@ -75,6 +75,10 @@ class SearchType extends AbstractType
         if ($this->toggleManager->isActive('versions')) {
             $choices['opinionVersion'] = 'search.form.types.versions';
         }
+
+        if ($this->toggleManager->isActive('ideas')) {
+            $choices['idea'] = 'search.form.types.ideas';
+        }
         if ($this->toggleManager->isActive('blog')) {
             $choices['post'] = 'search.form.types.posts';
         }

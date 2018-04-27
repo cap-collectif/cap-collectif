@@ -32,6 +32,9 @@ class RecentContributionsResolver
             case 'source':
                 $result = $this->em->getRepository('CapcoAppBundle:Source')->find($id);
                 break;
+            case 'idea':
+                $result = $this->em->getRepository('CapcoAppBundle:Idea')->find($id);
+                break;
             case 'comment':
                 $result = $this->em->getRepository('CapcoAppBundle:Comment')->find($id);
                 break;
@@ -58,6 +61,9 @@ class RecentContributionsResolver
                 break;
             case 'source':
                 $result = $this->em->getRepository('CapcoAppBundle:Source')->getArrayById($id);
+                break;
+            case 'idea':
+                $result = $this->em->getRepository('CapcoAppBundle:Idea')->getArrayById($id);
                 break;
             case 'comment':
                 $result = $this->em->getRepository('CapcoAppBundle:Comment')->getArrayById($id);
@@ -107,6 +113,14 @@ class RecentContributionsResolver
             $sources[$key]['type'] = 'source';
         }
 
+        $ideas = $this->em
+            ->getRepository('CapcoAppBundle:Idea')
+            ->getRecentOrdered()
+        ;
+        foreach ($ideas as $key => $idea) {
+            $ideas[$key]['type'] = 'idea';
+        }
+
         $comments = $this->em
             ->getRepository('CapcoAppBundle:Comment')
             ->getRecentOrdered()
@@ -116,7 +130,7 @@ class RecentContributionsResolver
             $comments[$key]['type'] = 'comment';
         }
 
-        $contributions = array_merge($opinions, $arguments, $versions, $sources, $comments);
+        $contributions = array_merge($opinions, $arguments, $versions, $sources, $ideas, $comments);
 
         usort($contributions, function ($a, $b) {
             if ($a['updatedAt'] === $b['updatedAt']) {

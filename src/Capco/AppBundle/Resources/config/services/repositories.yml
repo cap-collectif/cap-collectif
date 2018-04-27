@@ -119,6 +119,11 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Proposal']
 
+  capco.idea_vote.repository:
+    class: Capco\AppBundle\Repository\IdeaVoteRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:IdeaVote']
+
   capco.proposal_selection_vote.repository:
     class: Capco\AppBundle\Repository\ProposalSelectionVoteRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]

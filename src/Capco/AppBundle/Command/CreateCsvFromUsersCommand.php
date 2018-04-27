@@ -82,6 +82,9 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         commentVotesCount
         sourcesCount
         repliesCount
+        ideasCount
+        ideaVotesCount
+        ideaCommentsCount
         postCommentsCount
         eventCommentsCount
         projectsCount

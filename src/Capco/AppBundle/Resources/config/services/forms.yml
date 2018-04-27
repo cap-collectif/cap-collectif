@@ -92,6 +92,18 @@ services:
       tags:
         - { name: form.type }
 
+  capco.form.idea:
+    class: Capco\AppBundle\Form\IdeaType
+    arguments: ["@capco.toggle.manager"]
+    tags:
+      - { name: form.type }
+
+  capco.form.idea_vote:
+    class: Capco\AppBundle\Form\IdeaVoteType
+    arguments: ["@security.token_storage"]
+    tags:
+      - { name: form.type }
+
   capco.form.project_search:
     class: Capco\AppBundle\Form\ProjectSearchType
     arguments: ["@capco.toggle.manager"]

@@ -1,0 +1,55 @@
+/* ===================
+   Idea
+ =================== */
+.idea__preview {
+    &:hover {
+        background-color: $page-bgc;
+
+        .idea__title:after {
+            background: linear-gradient(to right, rgba(255, 255, 255, 0), $page-bgc 50%);
+        }
+    }
+
+    .idea__avatar {
+        margin-right: 10px;
+    }
+
+    .idea__author {
+        overflow: hidden;
+        height: 50px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        & > a {
+            color: $dark;
+        }
+    }
+
+    .idea__author .idea__date {
+        margin-bottom: 0;
+    }
+
+    .idea__preview__body {
+        clear: both;
+        height: 7.2em;
+        padding-top: 10px;
+        line-height: 1.2em;
+    }
+
+    .idea__title {
+        margin: 0 auto;
+    }
+
+    .idea__label {
+        margin-top: 1.2em;
+        height: 1.2em;
+    }
+}
+
+.idea {
+    .idea__date {
+        margin-bottom: 0;
+        color: $dark-gray;
+        font-size: 80%;
+    }
+}

@@ -124,6 +124,8 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     protected $opinionVersions;
 
+    protected $ideas;
+
     protected $comments;
 
     protected $arguments;
@@ -154,6 +156,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     /**
      * @var int
      */
+    protected $ideasCount = 0;
+
+    /**
+     * @var int
+     */
     protected $proposalsCount = 0;
 
     /**
@@ -176,6 +183,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     /**
      * @var int
      */
+    protected $ideaCommentsCount = 0;
+
+    /**
+     * @var int
+     */
     protected $postCommentsCount = 0;
 
     /**
@@ -184,6 +196,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     protected $eventCommentsCount = 0;
 
     // Votes
+
+    /**
+     * @var int
+     */
+    protected $ideaVotesCount = 0;
 
     /**
      * @var int
@@ -261,6 +278,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         $this->opinions = new ArrayCollection();
         $this->opinionVersions = new ArrayCollection();
         $this->responses = new ArrayCollection();
+        $this->ideas = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->arguments = new ArrayCollection();
         $this->votes = new ArrayCollection();
@@ -670,6 +688,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return $this->opinionVersions;
     }
 
+    public function getIdeas()
+    {
+        return $this->ideas;
+    }
+
     public function getComments()
     {
         return $this->comments;
@@ -731,6 +754,16 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     }
 
     /**
+     * Gets the value of ideasCount.
+     *
+     * @return int
+     */
+    public function getIdeasCount()
+    {
+        return $this->ideasCount;
+    }
+
+    /**
      * Gets the value of opinionsCount.
      *
      * @return int
@@ -768,6 +801,20 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public function setOpinionVersionsCount($opinionVersionsCount)
     {
         $this->opinionVersionsCount = $opinionVersionsCount;
+    }
+
+    /**
+     * Sets the value of ideasCount.
+     *
+     * @param int $ideasCount the ideas count
+     *
+     * @return self
+     */
+    public function setIdeasCount($ideasCount)
+    {
+        $this->ideasCount = $ideasCount;
+
+        return $this;
     }
 
     /**
@@ -875,6 +922,22 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     /**
      * @return int
      */
+    public function getIdeaCommentsCount()
+    {
+        return $this->ideaCommentsCount;
+    }
+
+    /**
+     * @param int $ideaCommentsCount
+     */
+    public function setIdeaCommentsCount($ideaCommentsCount)
+    {
+        $this->ideaCommentsCount = $ideaCommentsCount;
+    }
+
+    /**
+     * @return int
+     */
     public function getPostCommentsCount()
     {
         return $this->postCommentsCount;
@@ -886,6 +949,22 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public function setPostCommentsCount($postCommentsCount)
     {
         $this->postCommentsCount = $postCommentsCount;
+    }
+
+    /**
+     * @return int
+     */
+    public function getIdeaVotesCount()
+    {
+        return $this->ideaVotesCount;
+    }
+
+    /**
+     * @param int $ideaVotesCount
+     */
+    public function setIdeaVotesCount($ideaVotesCount)
+    {
+        $this->ideaVotesCount = $ideaVotesCount;
     }
 
     /**
@@ -1015,6 +1094,13 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public function setOpinionVersions($versions)
     {
         $this->opinionVersions = $versions;
+
+        return $this;
+    }
+
+    public function setIdeas($ideas)
+    {
+        $this->ideas = $ideas;
 
         return $this;
     }
@@ -1178,6 +1264,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         $this->getOpinionVersions(),
         $this->getVotes(),
         $this->getComments(),
+        $this->getIdeas(),
         $this->getArguments(),
         $this->getSources(),
         $this->getProposals(),
@@ -1195,17 +1282,17 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     public function getContributionsCount()
     {
-        return $this->sourcesCount + $this->argumentsCount + $this->opinionsCount + $this->opinionVersionsCount + $this->getCommentsCount() + $this->proposalsCount;
+        return $this->sourcesCount + $this->ideasCount + $this->argumentsCount + $this->opinionsCount + $this->opinionVersionsCount + $this->getCommentsCount() + $this->proposalsCount;
     }
 
     public function getVotesCount()
     {
-        return $this->commentVotesCount + $this->opinionVotesCount + $this->opinionVersionVotesCount + $this->argumentVotesCount + $this->sourceVotesCount + $this->proposalVotesCount;
+        return $this->ideaVotesCount + $this->commentVotesCount + $this->opinionVotesCount + $this->opinionVersionVotesCount + $this->argumentVotesCount + $this->sourceVotesCount + $this->proposalVotesCount;
     }
 
     public function getCommentsCount()
     {
-        return $this->postCommentsCount + $this->eventCommentsCount;
+        return $this->ideaCommentsCount + $this->postCommentsCount + $this->eventCommentsCount;
     }
 
     public function getUsername(): ?string
