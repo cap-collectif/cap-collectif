@@ -7,16 +7,20 @@ import moment from 'moment';
 import { createFragmentContainer, graphql } from 'react-relay';
 import UserAvatar from '../../User/UserAvatar';
 import UserLink from '../../User/UserLink';
-import ProposalVoteButtonWrapper from '../Vote/ProposalVoteButtonWrapper';
+import ProposalVoteModal from '../Vote/ProposalVoteModal';
+import ProposalVoteButtonWrapperFragment from '../Vote/ProposalVoteButtonWrapperFragment';
 import ProposalFollowButton from '../Follow/ProposalFollowButton';
 import type { ProposalPageHeader_proposal } from './__generated__/ProposalPageHeader_proposal.graphql';
+import type { ProposalPageHeader_step } from './__generated__/ProposalPageHeader_step.graphql';
+import type { ProposalPageHeader_viewer } from './__generated__/ProposalPageHeader_viewer.graphql';
 import type { State } from '../../../types';
 
 type Props = {
   proposal: ProposalPageHeader_proposal,
+  viewer: ?ProposalPageHeader_viewer,
+  step: ?ProposalPageHeader_step,
   className: string,
   referer: string,
-  isAuthenticated: boolean,
 };
 
 export class ProposalPageHeader extends React.Component<Props> {
@@ -25,7 +29,7 @@ export class ProposalPageHeader extends React.Component<Props> {
   };
 
   render() {
-    const { proposal, className, referer, isAuthenticated } = this.props;
+    const { step, viewer, proposal, className, referer } = this.props;
     const createdDate = (
       <FormattedDate
         value={moment(proposal.createdAt)}
@@ -86,20 +90,28 @@ export class ProposalPageHeader extends React.Component<Props> {
           </div>
         </div>
         {proposal.publicationStatus !== 'DRAFT' && (
-          <ProposalVoteButtonWrapper
-            id="proposal-vote-btn"
-            proposal={proposal}
-            className="pull-right btn-lg"
-          />
+          <div className="proposal__buttons">
+            {step && (
+              // $FlowFixMe
+              <ProposalVoteButtonWrapperFragment
+                proposal={proposal}
+                step={step}
+                viewer={viewer}
+                // className="pull-right btn-lg"
+                id="proposal-vote-btn"
+                // style={this.props.style}
+              />
+            )}
+            {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
+            <ProposalFollowButton
+              proposal={proposal}
+              isAuthenticated={!!viewer}
+              // className="pull-right btn-lg"
+            />
+          </div>
         )}
-        {proposal.publicationStatus !== 'DRAFT' && (
-          /* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */
-          <ProposalFollowButton
-            proposal={proposal}
-            isAuthenticated={isAuthenticated}
-            className="pull-right btn-lg"
-          />
-        )}
+        {proposal.publicationStatus !== 'DRAFT' &&
+          step && <ProposalVoteModal proposal={proposal} step={step} />}
       </div>
     );
   }
@@ -108,30 +120,33 @@ export class ProposalPageHeader extends React.Component<Props> {
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
   return {
     referer: state.proposal.referer,
-    isAuthenticated: state.user.user !== null,
   };
 };
 
 const container = connect(mapStateToProps)(ProposalPageHeader);
 
-export default createFragmentContainer(
-  container,
-  graphql`
+export default createFragmentContainer(container, {
+  viewer: graphql`
+    fragment ProposalPageHeader_viewer on User {
+      ...ProposalVoteButtonWrapperFragment_viewer @arguments(stepId: $stepId)
+    }
+  `,
+  step: graphql`
+    fragment ProposalPageHeader_step on ProposalStep {
+      ...ProposalVoteButtonWrapperFragment_step
+      ...ProposalVoteModal_step
+    }
+  `,
+  proposal: graphql`
     fragment ProposalPageHeader_proposal on Proposal {
       id
+      ...ProposalVoteButtonWrapperFragment_proposal
+        @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
+      ...ProposalVoteModal_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
       ...ProposalFollowButton_proposal @arguments(isAuthenticated: $isAuthenticated)
       title
       theme {
         title
-      }
-      currentVotableStep {
-        id
-        ... on CollectStep {
-          open
-        }
-        ... on SelectionStep {
-          open
-        }
       }
       author {
         username
@@ -146,4 +161,4 @@ export default createFragmentContainer(
       show_url
     }
   `,
-);
+});

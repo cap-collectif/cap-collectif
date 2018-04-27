@@ -56,6 +56,10 @@ class ProposalFormResolver implements ContainerAwareInterface
         $repo = $this->container->get('capco.proposal.repository');
         $totalCount = 0;
         $filters = [];
+        $term = null;
+        if ($args->offsetExists('term')) {
+            $term = $args->offsetGet('term');
+        }
 
         if ($form->getStep()->isPrivate()) {
             if (!$user instanceof User) {
@@ -70,7 +74,7 @@ class ProposalFormResolver implements ContainerAwareInterface
                 $filters['author'] = $user->getId();
             }
         }
-        $paginator = new Paginator(function (int $offset, int $limit) use ($repo, $form, $args, $user, $request, &$totalCount, $filters) {
+        $paginator = new Paginator(function (int $offset, int $limit) use ($repo, $form, $args, $user, $term, $request, &$totalCount, $filters) {
             if ($args->offsetExists('district')) {
                 $filters['districts'] = $args->offsetGet('district');
             }
@@ -109,7 +113,7 @@ class ProposalFormResolver implements ContainerAwareInterface
                     $offset,
                     $limit,
                     $order,
-                    null,
+                    $term,
                     $filters,
                     $seed
                 );

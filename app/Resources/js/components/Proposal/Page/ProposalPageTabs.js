@@ -5,6 +5,7 @@ import { Row, Col, Tab, Nav, NavItem } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import type { ProposalPageTabs_proposal } from './__generated__/ProposalPageTabs_proposal.graphql';
 import type { ProposalPageTabs_viewer } from './__generated__/ProposalPageTabs_viewer.graphql';
+import type { ProposalPageTabs_step } from './__generated__/ProposalPageTabs_step.graphql';
 import ProposalPageContent from './ProposalPageContent';
 import ProposalPageLastNews from './ProposalPageLastNews';
 import ProposalVotesByStep from './ProposalVotesByStep';
@@ -19,6 +20,7 @@ import type { FeatureToggles } from '../../../types';
 
 type Props = {
   viewer: ?ProposalPageTabs_viewer,
+  step: ?ProposalPageTabs_step,
   proposal: ProposalPageTabs_proposal,
   form: Object,
   categories: Array<Object>,
@@ -54,12 +56,10 @@ export class ProposalPageTabs extends React.Component<Props> {
   }
 
   render() {
-    const { viewer, proposal, form, features, categories } = this.props;
+    const { viewer, proposal, step, form, features, categories } = this.props;
     const currentVotableStep = proposal.currentVotableStep;
     const votesCount = proposal.votes.totalCount;
     const showVotesTab = votesCount > 0 || currentVotableStep !== null;
-
-    const isPageAdmin = false;
 
     return (
       <Tab.Container
@@ -107,6 +107,7 @@ export class ProposalPageTabs extends React.Component<Props> {
                     {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
                     <ProposalPageContent
                       proposal={proposal}
+                      step={step}
                       form={form}
                       viewer={viewer}
                       categories={categories}
@@ -148,16 +149,16 @@ export class ProposalPageTabs extends React.Component<Props> {
                   <Tab.Container id="tab-votesByStep" defaultActiveKey={0}>
                     <Row className="clearfix">
                       <Nav bsStyle="pills">
-                        {proposal.votableSteps.map((step, index) => (
+                        {proposal.votableSteps.map((votableStep, index) => (
                           <NavItem key={index} eventKey={index}>
-                            {step.title}{' '}
+                            {votableStep.title}{' '}
                           </NavItem>
                         ))}
                       </Nav>
                       <Tab.Content animation={false}>
-                        {proposal.votableSteps.map((step, index) => (
+                        {proposal.votableSteps.map((votableStep, index) => (
                           <Tab.Pane key={index} eventKey={index}>
-                            <ProposalVotesByStep stepId={step.id} proposal={proposal} />
+                            <ProposalVotesByStep stepId={votableStep.id} proposal={proposal} />
                           </Tab.Pane>
                         ))}
                       </Tab.Content>
@@ -175,7 +176,7 @@ export class ProposalPageTabs extends React.Component<Props> {
               </Tab.Pane>
               <Tab.Pane eventKey="followers">
                 {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
-                <ProposalPageFollowers proposal={proposal} pageAdmin={isPageAdmin} />
+                <ProposalPageFollowers proposal={proposal} pageAdmin={false} />
               </Tab.Pane>
             </Tab.Content>
           </div>
@@ -186,6 +187,11 @@ export class ProposalPageTabs extends React.Component<Props> {
 }
 
 export default createFragmentContainer(ProposalPageTabs, {
+  step: graphql`
+    fragment ProposalPageTabs_step on ProposalStep {
+      ...ProposalPageContent_step
+    }
+  `,
   viewer: graphql`
     fragment ProposalPageTabs_viewer on User {
       ...ProposalPageContent_viewer

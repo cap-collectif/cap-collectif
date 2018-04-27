@@ -45,8 +45,10 @@ class ProposalController extends Controller
                 : $urlResolver->getStepUrl($currentStep, UrlGeneratorInterface::ABSOLUTE_URL);
 
         $proposalForm = $currentStep->getProposalForm();
+        $votableStep = $this->get('capco\appbundle\graphql\resolver\proposal\proposalcurrentvotablestepresolver')->__invoke($proposal);
         $props = $serializer->serialize([
             'proposalId' => $proposal->getId(),
+            'currentVotableStepId' => $votableStep ? $votableStep->getId() : null,
             'form' => $proposalForm,
             'categories' => $proposalForm ? $proposalForm->getCategories() : [],
         ], 'json', SerializationContext::create()

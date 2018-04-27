@@ -58,8 +58,10 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
       Object {
         "count": 32,
         "cursor": null,
+        "hasVotableStep": false,
         "isAuthenticated": true,
         "proposalId": "41",
+        "stepId": "",
       }
     }
   />
