@@ -19,7 +19,6 @@ class UserSpec extends ObjectBehavior
         $this->setProposals(new ArrayCollection());
         $this->setOpinions(new ArrayCollection([$opinion]));
         $this->setOpinionVersions(new ArrayCollection());
-        $this->setIdeas(new ArrayCollection());
         $this->setComments(new ArrayCollection());
         $this->setArguments(new ArrayCollection());
         $this->setSources(new ArrayCollection());

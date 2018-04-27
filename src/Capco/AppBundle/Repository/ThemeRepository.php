@@ -16,7 +16,6 @@ class ThemeRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('c', 'i')
             ->leftJoin('t.projects', 'c')
-            ->leftJoin('t.ideas', 'i')
             ->addOrderBy('t.position', 'ASC')
             ->addOrderBy('t.updatedAt', 'DESC')
         ;
@@ -46,7 +45,6 @@ class ThemeRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder();
         $qb->addSelect('c, i')
             ->leftJoin('t.projects', 'c')
-            ->leftJoin('t.ideas', 'i')
             ->leftJoin('t.events', 'events')
             ->leftJoin('t.posts', 'posts')
             ->addOrderBy('t.position', 'ASC')
@@ -86,7 +84,6 @@ class ThemeRepository extends EntityRepository
             ->leftJoin('a.Media', 'am')
             ->leftJoin('t.Media', 'm')
             ->leftJoin('t.projects', 'p', 'WITH', 'p.isEnabled = :enabled')
-            ->leftJoin('t.ideas', 'i', 'WITH', 'i.isEnabled = :enabled')
             ->leftJoin('t.posts', 'post', 'WITH', 'post.isPublished = :enabled')
             ->leftJoin('t.events', 'e', 'WITH', 'e.isEnabled = :enabled')
             ->andWhere('t.slug = :slug')

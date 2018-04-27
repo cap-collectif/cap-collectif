@@ -68,14 +68,7 @@
         </div>
     {% endif %}
 
-    {% if is_feature_enabled('ideas') and ideasCount > 0 %}
-        <div class="container container--custom">
-            <h2>{{ 'user.profile.show.ideas' | trans({}, 'CapcoAppBundle') }}</h2>
-            {% include '@CapcoUser/Profile/ideas.html.twig' %}
-        </div>
-    {% endif %}
-
-    {% if (is_feature_enabled('ideas') or is_feature_enabled('calendar') or is_feature_enabled('blog')) and comments|length > 0 %}
+    {% if (is_feature_enabled('calendar') or is_feature_enabled('blog')) and comments|length > 0 %}
         <div class="container container--custom">
             <h2>{{ 'user.profile.show.comments' | trans({}, 'CapcoAppBundle') }}</h2>
             {% include '@CapcoUser/Profile/comments.html.twig' %}

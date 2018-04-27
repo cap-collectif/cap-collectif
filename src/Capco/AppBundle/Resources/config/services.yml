@@ -80,9 +80,6 @@ services:
     class: Capco\AppBundle\Generator\DiffGenerator
     arguments: ["@caxy.html_diff"]
 
-  capco.idea.helper:
-    class: Capco\AppBundle\Helper\IdeaHelper
-
   redis_storage.helper:
     class: Capco\AppBundle\Helper\RedisStorageHelper
     arguments: ["@snc_redis.default"]

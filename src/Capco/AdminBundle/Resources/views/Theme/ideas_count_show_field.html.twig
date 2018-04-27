@@ -1,7 +1,0 @@
-{% extends 'SonataAdminBundle:CRUD:base_show_field.html.twig' %}
-
-{% block field %}
-    {%  if object is not null %}
-        {{ object.ideas | length  }}
-    {%  endif %}
-{% endblock %}

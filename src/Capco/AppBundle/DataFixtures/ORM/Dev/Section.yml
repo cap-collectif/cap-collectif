@@ -44,15 +44,6 @@ Capco\AppBundle\Entity\Section:
         nbObjects: 4
         enabled: true
         associatedFeatures: [themes]
-    SectionIdeas:
-        type: ideas
-        title: Idées
-        position: 6
-        teaser: <text(150)>
-        body: null
-        nbObjects: 4
-        enabled: true
-        associatedFeatures: [ideas]
     SectionNews:
         type: news
         title: Actualités

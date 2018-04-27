@@ -183,14 +183,6 @@ class ProfileController extends BaseController
         $opinionTypesWithUserOpinions = $doctrine->getRepository('CapcoAppBundle:OpinionType')->getByUser($user);
         $versions = $doctrine->getRepository('CapcoAppBundle:OpinionVersion')->getByUser($user);
         $arguments = $doctrine->getRepository('CapcoAppBundle:Argument')->getByUser($user);
-        $ideasRaw = $doctrine
-            ->getRepository('CapcoAppBundle:Idea')
-            ->getByUser($user)
-        ;
-        $ideas = $serializer->serialize([
-            'ideas' => $ideasRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Ideas', 'UsersInfos', 'ThemeDetails']));
-        $ideasCount = count($ideasRaw);
 
         $replies = $this
             ->getDoctrine()
@@ -212,8 +204,6 @@ class ProfileController extends BaseController
             'opinionTypesWithUserOpinions' => $opinionTypesWithUserOpinions,
             'versions' => $versions,
             'arguments' => $arguments,
-            'ideasProps' => $ideas,
-            'ideasCount' => $ideasCount,
             'replies' => $replies,
             'sources' => $sources,
             'comments' => $comments,
@@ -325,30 +315,6 @@ class ProfileController extends BaseController
             'user' => $user,
             'arguments' => $arguments,
             'argumentsLabels' => Argument::$argumentTypesLabels,
-        ];
-    }
-
-    /**
-     * @Route("/{slug}/ideas", name="capco_user_profile_show_ideas", defaults={"_feature_flags" = "ideas,profiles"})
-     * @Template("CapcoUserBundle:Profile:showUserIdeas.html.twig")
-     */
-    public function showIdeasAction(User $user)
-    {
-        $em = $this->get('doctrine.orm.entity_manager');
-        $serializer = $this->get('jms_serializer');
-        $ideasRaw = $em
-            ->getRepository('CapcoAppBundle:Idea')
-            ->getByUser($user)
-        ;
-        $ideas = $serializer->serialize([
-            'ideas' => $ideasRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Ideas', 'UsersInfos', 'ThemeDetails']));
-        $ideasCount = count($ideasRaw);
-
-        return [
-            'user' => $user,
-            'ideasProps' => $ideas,
-            'ideasCount' => $ideasCount,
         ];
     }
 

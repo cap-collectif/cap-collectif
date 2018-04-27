@@ -3,6 +3,10 @@
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
+use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Search\UserSearch;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
@@ -13,11 +17,15 @@ class StepContributorResolver
 {
     private $userSearch;
     private $logger;
+    private $proposalSelectionVoteRepository;
+    private $proposalCollectVoteRepository;
 
-    public function __construct(UserSearch $userSearch, LoggerInterface $logger)
+    public function __construct(UserSearch $userSearch, LoggerInterface $logger, ProposalSelectionVoteRepository $proposalSelectionVoteRepository, ProposalCollectVoteRepository $proposalCollectVoteRepository)
     {
         $this->userSearch = $userSearch;
         $this->logger = $logger;
+        $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
+        $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
     }
 
     public function __invoke(AbstractStep $step, Arg $args): Connection
@@ -39,6 +47,19 @@ class StepContributorResolver
         $connection = $paginator->auto($args, $totalCount);
         $connection->totalCount = $totalCount;
 
+        $connection->{'anonymousCount'} = $this->getAnonymousVote($step);
+
         return $connection;
+    }
+
+    private function getAnonymousVote(AbstractStep $step): int
+    {
+        if (!$step instanceof CollectStep && !$step instanceof SelectionStep) {
+            return 0;
+        }
+
+        return $step instanceof CollectStep
+            ? $this->proposalCollectVoteRepository->getAnonymousVotesCountByStep($step)
+            : $this->proposalSelectionVoteRepository->getAnonymousVotesCountByStep($step);
     }
 }

@@ -49,12 +49,6 @@ class Section
             'body' => false,
             'nbObjects' => true,
         ],
-        'ideas' => [
-            'title' => true,
-            'teaser' => true,
-            'body' => false,
-            'nbObjects' => true,
-        ],
         'news' => [
             'title' => true,
             'teaser' => true,

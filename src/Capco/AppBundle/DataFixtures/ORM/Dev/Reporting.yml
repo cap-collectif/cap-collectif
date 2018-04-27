@@ -1,13 +1,4 @@
 Capco\AppBundle\Entity\Reporting:
-    reporting1:
-        id: 1
-        body: |
-             <p><text(100)></p>
-             <p><text(300)></p>
-        Reporter: '@user100'
-        Opinion: '@opinion1'
-        status: 2
-        isArchived: false
     reporting2:
         id: 2
         body: |
@@ -50,15 +41,6 @@ Capco\AppBundle\Entity\Reporting:
              <p><text(100)></p>
              <p><text(300)></p>
         Reporter: '@user100'
-        Idea: '@Idea1'
-        status: 2
-        isArchived: false
-    reporting7:
-        id: 7
-        body: |
-             <p><text(100)></p>
-             <p><text(300)></p>
-        Reporter: '@user100'
-        Comment: '@iComment1'
+        Comment: '@evComment1'
         status: 2
         isArchived: false

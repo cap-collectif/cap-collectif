@@ -60,22 +60,6 @@
         {% endif %}
     </div>
 
-    {% if is_feature_enabled('ideas') %}
-        <div class="container  container--custom">
-            <h2 class="h2">{{ 'theme.show.ideas.title'|trans({}, 'CapcoAppBundle') }}
-                {% if is_feature_enabled('idea_creation') %}
-                    <div
-                        style="display: inline-block"
-                        class="pull-right"
-                    >
-                        {{ react_render_component('IdeaCreateApp', {'props': ideaCreationProps}) }}
-                    </div>
-                {% endif %}
-            </h2>
-            {{ render(controller('CapcoAppBundle:Site/Theme:lastIdeas', {'theme': theme})) }}
-        </div>
-    {% endif %}
-
     {% include 'CapcoAppBundle:Theme:appendices.html.twig' %}
 
 {% endblock %}

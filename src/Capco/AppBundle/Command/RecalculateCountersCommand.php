@@ -132,12 +132,6 @@ class RecalculateCountersCommand extends ContainerAwareCommand
           where sv.source = s AND sv.expired = 0 group by sv.source
         )')->execute();
 
-        $em->createQuery('UPDATE CapcoAppBundle:Idea i set i.votesCount = (
-          select count(DISTINCT iv.id)
-          from CapcoAppBundle:IdeaVote iv
-          where iv.idea = i AND iv.expired = 0 group by iv.idea
-        )')->execute();
-
         $em->createQuery('UPDATE CapcoAppBundle:Comment c set c.votesCount = (
           select count(DISTINCT cv.id)
           from CapcoAppBundle:CommentVote cv
@@ -145,12 +139,6 @@ class RecalculateCountersCommand extends ContainerAwareCommand
         )')->execute();
 
         // **************************************** Comments counters ***************************************
-
-        $em->createQuery('UPDATE CapcoAppBundle:Idea i set i.commentsCount = (
-          select count(DISTINCT ic.id)
-          from CapcoAppBundle:IdeaComment ic
-          where ic.Idea = i AND ic.isEnabled = 1 AND ic.isTrashed = 0 AND ic.expired = 0 GROUP BY ic.Idea
-        )')->execute();
 
         $em->createQuery('UPDATE CapcoAppBundle:Post p set p.commentsCount = (
           select count(DISTINCT pc.id)
