@@ -36,7 +36,7 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
     public function postUp(Schema $schema)
     {
         $em = $this->container->get('doctrine.orm.entity_manager');
-        $ideas = $this->connection->fetchAll("SELECT id FROM idea", ['']);
+        $ideas = $this->connection->fetchAll("SELECT id,object,title,author_id,is_enabled,is_trashed,body,theme_id,created_at,updated_at,media_id FROM idea", ['']);
         if(!empty($ideas)) {
             /* ------********************************************************------ */
             /* ------* create anonymous users from ideas for proposal votes *------ */
@@ -90,7 +90,7 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
             /* -----------------* import ideas into proposals  *------------------- */
             /* -----------------********************************------------------- */
             $this->write('-> import ideas into proposals');
-            $this->importIdeas($em, $proposalForm);
+            $this->importIdeas($em, $proposalForm, $ideas);
 
             $this->removeIdeas();
             return 0;
@@ -99,10 +99,9 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
         $this->write('Skipping migration, no ideas to import...');
     }
     
-    public function importIdeas(EntityManager $em, ProposalForm $proposalForm)
+    public function importIdeas(EntityManager $em, ProposalForm $proposalForm, array $ideas)
     {
         $output = new ConsoleOutput();
-        $ideas = $this->connection->fetchAll("SELECT id,object,title,author_id,is_enabled,is_trashed,body,theme_id,created_at,updated_at,media_id FROM idea", ['']);
         $progress = new ProgressBar($output, \count($ideas));
         $questions = $proposalForm->getRealQuestions()->first();
         foreach ($ideas as $idea) {
