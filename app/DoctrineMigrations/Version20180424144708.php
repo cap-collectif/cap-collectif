@@ -36,7 +36,7 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
     public function postUp(Schema $schema)
     {
         $em = $this->container->get('doctrine.orm.entity_manager');
-        $ideas = $this->connection->fetchAll("SELECT * FROM idea", ['']);
+        $ideas = $this->connection->fetchAll("SELECT id FROM idea", ['']);
         if(!empty($ideas)) {
             /* ------********************************************************------ */
             /* ------* create anonymous users from ideas for proposal votes *------ */
