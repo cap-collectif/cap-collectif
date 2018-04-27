@@ -28,8 +28,8 @@
                     {% if user.getTwitterUrl %}
                         <li><i class="cap cap-twitter"></i> <a class="external-link" href="{{ user.getTwitterUrl }}">{{ 'user.profile.show.twitter' | trans({}, 'CapcoAppBundle')}}</a></li>
                     {% endif %}
-                    {% if user.getGoogleUrl %}
-                        <li><i class="cap cap-gplus"></i> <a class="external-link" href="{{ user.getGoogleUrl }}">{{ 'user.profile.show.gplus' | trans({}, 'CapcoAppBundle')}}</a></li>
+                    {% if user.getLinkedInUrl %}
+                        <li><i class="cap cap-gplus"></i> <a class="external-link" href="{{ user.getLinkedInUrl }}">{{ 'user.profile.show.linkedin' | trans({}, 'CapcoAppBundle')}}</a></li>
                     {% endif %}
                 </ul>
                 {{

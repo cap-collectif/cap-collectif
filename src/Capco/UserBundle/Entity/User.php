@@ -68,10 +68,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
      */
     protected $google_access_token;
 
-    /**
-     * @var int
-     */
-    protected $googleUrl;
+    protected $linkedInUrl;
 
     /**
      * @var string
@@ -529,20 +526,16 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         $this->facebookUrl = $facebookUrl;
     }
 
-    /**
-     * @return int
-     */
-    public function getGoogleUrl()
+    public function getLinkedInUrl(): ?string
     {
-        return $this->googleUrl;
+        return $this->linkedInUrl;
     }
 
-    /**
-     * @param int $googleUrl
-     */
-    public function setGoogleUrl($googleUrl)
+    public function setLinkedInUrl(?string $linkedInUrl):self
     {
-        $this->googleUrl = $googleUrl;
+        $this->linkedInUrl = $linkedInUrl;
+
+        return $this;
     }
 
     /**

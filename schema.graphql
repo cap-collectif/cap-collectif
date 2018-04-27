@@ -2218,6 +2218,18 @@ type User implements Node {
   # Total of contributions count
   contributionsCount: Int!
   expired: Boolean!
+
+  # Your facebook url
+  facebookUrl: String
+
+  # Your twitter url
+  twitterUrl: String
+
+  # Your linkedIn url
+  linkedInUrl: String
+
+  # Is your profile indexed or not
+  profilePageIndexed: Boolean
 }
 
 # A connection to a list of items.

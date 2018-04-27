@@ -154,3 +154,15 @@ User:
                 description: "Total of contributions count"
             expired:
                 type: "Boolean!"
+            facebookUrl:
+                type: "String"
+                description: "Your facebook url"
+            twitterUrl:
+                type: "String"
+                description: "Your twitter url"
+            linkedInUrl:
+                type: "String"
+                description: "Your linkedIn url"
+            profilePageIndexed:
+                type: "Boolean"
+                description: "Is your profile indexed or not"
