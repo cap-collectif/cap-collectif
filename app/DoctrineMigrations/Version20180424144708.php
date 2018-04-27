@@ -43,7 +43,7 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
             /* ------********************************************************------ */
             $this->write('-> searching votes where user is not set then create if not exist');
             $votesWithoutUser = $this->connection->fetchAll(
-                "SELECT * FROM votes WHERE voteType = 'idea' AND voter_id IS NULL",
+                "SELECT id,email,voter_id FROM votes WHERE voteType = 'idea' AND voter_id IS NULL",
                 ['']
             );
             $this->createUserFromAnonymous($em, $votesWithoutUser);
@@ -102,7 +102,7 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
     public function importIdeas(EntityManager $em, ProposalForm $proposalForm)
     {
         $output = new ConsoleOutput();
-        $ideas = $this->connection->fetchAll("SELECT * FROM idea", ['']);
+        $ideas = $this->connection->fetchAll("SELECT id,object,title,author_id,is_enabled,is_trashed,body,theme_id,created_at,updated_at,media_id FROM idea", ['']);
         $progress = new ProgressBar($output, \count($ideas));
         $questions = $proposalForm->getRealQuestions()->first();
         foreach ($ideas as $idea) {
