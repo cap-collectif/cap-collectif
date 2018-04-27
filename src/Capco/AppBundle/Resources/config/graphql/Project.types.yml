@@ -17,8 +17,11 @@ Project:
                 argsBuilder: "Relay::Connection"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProjectContributorResolver", [value, args])'
             url:
-              type: "String"
+              type: "URI"
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProjectUrlResolver", [value])'
             votableSteps:
               type: "[ProposalStep!]!"
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectVotableStepsResolver", [value])'
+            votesUrl:
+              type: "URI"
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProjectUrlResolver", [value])'

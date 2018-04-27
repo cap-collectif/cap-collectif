@@ -1203,8 +1203,9 @@ type Project implements Node {
 
   # A list of contributor associated with the project.
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
-  url: String
+  url: URI
   votableSteps: [ProposalStep!]!
+  votesUrl: URI
 }
 
 # A budget contribution
@@ -1529,6 +1530,7 @@ interface ProposalStep {
   id: ID!
   kind: String!
   title: String!
+  project: Project!
   votesLimit: Int
   budget: Int
   voteType: ProposalStepVoteType!
@@ -1983,6 +1985,7 @@ type SelectionStep implements Step & Node & ProposalStep {
   title: String!
   votesHelpText: String
   statuses: [Status!]!
+  project: Project!
 
   # Only one selection step inside a project can have realisation steps, true if this one
   allowingProgressSteps: Boolean!

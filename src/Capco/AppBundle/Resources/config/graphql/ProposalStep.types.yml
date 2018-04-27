@@ -10,6 +10,8 @@ ProposalStep:
               type: "String!"
             title:
               type: "String!"
+            project:
+              type: "Project!"
             votesLimit:
               type: "Int"
             budget:

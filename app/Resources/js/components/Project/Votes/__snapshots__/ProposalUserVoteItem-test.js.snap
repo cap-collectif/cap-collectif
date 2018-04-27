@@ -60,7 +60,6 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
         className="d-flex"
       >
         <Field
-          checked={false}
           component={[Function]}
           label="anonymous-voting"
           name="votes.1.anonymous"
