@@ -11,7 +11,6 @@ use Behat\Testwork\Hook\Scope\AfterSuiteScope;
 use Behat\Testwork\Tester\Result\TestResult;
 use Capco\AppBundle\Behat\Traits\AdminTrait;
 use Capco\AppBundle\Behat\Traits\CommentStepsTrait;
-use Capco\AppBundle\Behat\Traits\IdeaStepsTrait;
 use Capco\AppBundle\Behat\Traits\NotificationsStepTrait;
 use Capco\AppBundle\Behat\Traits\OpinionStepsTrait;
 use Capco\AppBundle\Behat\Traits\ProjectStepsTrait;
@@ -34,7 +33,6 @@ const SNAPSHOT_NAME = 'snap_qa';
 class ApplicationContext extends UserContext
 {
     use CommentStepsTrait;
-    use IdeaStepsTrait;
     use NotificationsStepTrait;
     use OpinionStepsTrait;
     use ProjectStepsTrait;

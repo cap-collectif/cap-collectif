@@ -5,7 +5,6 @@ import type { State as ProposalState, ProposalAction } from './redux/modules/pro
 import type { State as OpinionState, OpinionAction } from './redux/modules/opinion';
 import type { State as UserState, UserAction } from './redux/modules/user';
 import type { State as ProjectState, ProjectAction } from './redux/modules/project';
-import type { State as IdeaState, IdeaAction } from './redux/modules/idea';
 import type { State as ReportState, ReportAction } from './redux/modules/report';
 import type { State as DefaultState, DefaultAction } from './redux/modules/default';
 
@@ -21,9 +20,6 @@ export type FeatureToggles = {
   calendar: boolean,
   captcha: boolean,
   consent_external_communication: boolean,
-  ideas: boolean,
-  idea_creation: boolean,
-  idea_trash: boolean,
   login_facebook: boolean,
   login_gplus: boolean,
   login_saml: boolean,
@@ -54,10 +50,7 @@ export type FeatureToggle =
   | 'calendar'
   | 'captcha'
   | 'consent_external_communication'
-  | 'ideas'
   | 'restrict_registration_via_email_domain'
-  | 'idea_creation'
-  | 'idea_trash'
   | 'login_facebook'
   | 'login_gplus'
   | 'login_saml'
@@ -87,7 +80,6 @@ export type Action =
   | OpinionAction
   | UserAction
   | ProjectAction
-  | IdeaAction
   | ReportAction
   | DefaultAction
   | ReduxFormAction
@@ -96,7 +88,6 @@ export type Action =
 export type GlobalState = {
   form: Object,
   default: DefaultState,
-  idea: IdeaState,
   proposal: ProposalState,
   project: ProjectState,
   report: ReportState,

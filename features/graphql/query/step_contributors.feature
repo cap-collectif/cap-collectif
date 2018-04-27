@@ -35,17 +35,17 @@ Scenario: GraphQL client want to get the list of contributors of a consultation
     "data": {
       "consultation": {
         "contributors": {
-          "totalCount": 26,
+          "totalCount": 28,
           "pageInfo": {
             "hasNextPage": true,
             "endCursor": "YXJyYXljb25uZWN0aW9uOjQ="
           },
           "edges": [
-            { "node": { "id": "user1" } },
-            { "node": { "id": "user10" } },
-            { "node": { "id": "user13" } },
-            { "node": { "id": "user17" } },
-            { "node": { "id": "user18" } }
+            {"node":{"id":"user1"}},
+            {"node":{"id":"user11"}},
+            {"node":{"id":"user12"}},
+            {"node":{"id":"user13"}},
+            {"node":{"id":"user15"}}
           ]
         }
       }

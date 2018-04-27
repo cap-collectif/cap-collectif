@@ -20,11 +20,6 @@
             <p><a href="{{ path('admin_capco_app_argument_show', {'id': object.Argument.id}) }}">
                 {{ object.Argument.body }}
             </a></p>
-        {% elseif (object.Idea is not null) %}
-            <p><a href="{{ path('admin_capco_app_idea_show', {'id': object.Idea.id}) }}">
-                {{ object.Idea.title }}
-            </a></p>
-            {{ object.Idea.body | raw }}
         {% elseif (object.Comment is not null) %}
             <a href="{{ path('admin_capco_app_comment_show', {'id': object.Comment.id}) }}">
                 {{ object.Comment.body }}

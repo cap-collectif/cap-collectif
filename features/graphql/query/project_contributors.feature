@@ -36,7 +36,7 @@ Scenario: GraphQL client want to get the list of contributors
     "data": {
       "project": {
         "contributors": {
-          "totalCount": 26,
+          "totalCount": 28,
           "anonymousCount": 0,
           "pageInfo": {
             "hasNextPage": true,
@@ -44,10 +44,10 @@ Scenario: GraphQL client want to get the list of contributors
           },
           "edges": [
             {"node":{"id":"user1"}},
-            {"node":{"id":"user10"}},
+            {"node":{"id":"user11"}},
+            {"node":{"id":"user12"}},
             {"node":{"id":"user13"}},
-            {"node":{"id":"user17"}},
-            {"node":{"id":"user18"}}
+            {"node":{"id":"user15"}}
           ]
         }
       }

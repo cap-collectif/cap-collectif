@@ -85,7 +85,6 @@
 
         <one-to-many field="opinions" target-entity="Capco\AppBundle\Entity\Opinion" mapped-by="Author" />
         <one-to-many field="opinionVersions" target-entity="Capco\AppBundle\Entity\OpinionVersion" mapped-by="author" />
-        <one-to-many field="ideas" target-entity="Capco\AppBundle\Entity\Idea" mapped-by="Author" />
         <one-to-many field="comments" target-entity="Capco\AppBundle\Entity\Comment" mapped-by="Author" />
         <one-to-many field="arguments" target-entity="Capco\AppBundle\Entity\Argument" mapped-by="Author" />
         <one-to-many field="sources" target-entity="Capco\AppBundle\Entity\Source" mapped-by="Author" />
@@ -94,11 +93,10 @@
           <cascade><cascade-persist /></cascade>
         </one-to-many>
 
-        <field name="ideaCommentsCount" column="idea_comments_count" type="integer" nullable="false" />
         <field name="postCommentsCount" column="post_comments_count" type="integer" nullable="false" />
         <field name="eventCommentsCount" column="event_comments_count" type="integer" nullable="false" />
 
-        <field name="ideaVotesCount" column="idea_votes_count" type="integer" nullable="false" />
+
         <field name="commentVotesCount" column="comment_votes_count" type="integer" nullable="false" />
         <field name="proposalVotesCount" column="proposal_votes_count" type="integer" nullable="false" />
         <field name="opinionVotesCount" column="opinion_votes_count" type="integer" nullable="false" />
@@ -107,7 +105,6 @@
         <field name="argumentVotesCount" column="argument_votes_count" type="integer" nullable="false" />
 
         <field name="projectsCount" column="projects_count" type="integer" nullable="false" />
-        <field name="ideasCount" column="ideas_count" type="integer" nullable="false" />
         <field name="proposalsCount" column="proposals_count" type="integer" nullable="false" />
         <field name="repliesCount" column="replies_count" type="integer" nullable="false" />
         <field name="argumentsCount" column="arguments_count" type="integer" nullable="false" />

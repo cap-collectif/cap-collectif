@@ -19,7 +19,6 @@
         <div class="box">
             <h2 class="theme__title  h3"><a href="{{ path('app_theme_show', {'slug': theme.slug}) }}">{{ theme.title }}</a></h2>
             {% set nbProjects = theme.countEnabledProjects() %}
-            {% set nbIdeas = theme.countEnabledIdeas() %}
             {% set nbPosts = theme.countEnabledPosts() %}
             {% set nbEvents = theme.countEnabledEvents() %}
             <div class="excerpt theme__counters">
@@ -42,13 +41,6 @@
                     <li class="theme__counters__list--counter">
                         {% transchoice nbEvents with {'%count%': nbEvents} from 'CapcoAppBundle' %}
                             theme.index.events
-                        {% endtranschoice %}
-                    </li>
-                {% endif %}
-                {% if is_feature_enabled('ideas') and nbIdeas > 0 %}
-                    <li class="theme__counters__list--counter">
-                        {% transchoice nbIdeas with {'%count%': nbIdeas} from 'CapcoAppBundle' %}
-                            theme.index.ideas
                         {% endtranschoice %}
                     </li>
                 {% endif %}

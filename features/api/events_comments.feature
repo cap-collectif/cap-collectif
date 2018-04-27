@@ -182,7 +182,7 @@ Scenario: logged in API client wants to add a comment by hacking
   When I send a POST request to "/api/events/event2/comments" with json:
   """
   {
-    "parent": "ideaComment1",
+    "parent": "proposalComment5",
     "body": "Pr0 Hacker"
   }
   """

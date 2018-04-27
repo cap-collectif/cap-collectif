@@ -2,18 +2,6 @@ Capco\AppBundle\Entity\CommentVote:
   evCommentVote{1..150}:
     comment: '@evComment<numberBetween(1, 50)>'
     user: '@user<current()>'
-  iCommentVote{2..50}:
-    comment: '@iComment<current()>'
-    user: '@user1'
-  iCommentVote51:
-    comment: '@iComment2'
-    user: '@user2'
-  iCommentVote52:
-    comment: '@iComment2'
-    user: '@user3'
-  iCommentVote{53..55}:
-      comment: '@iComment151'
-      user (unique): '@user<current()>'
   pCommentVote{1..150}:
     comment: '@pComment<numberBetween(1, 50)>'
     user: '@user<current()>'

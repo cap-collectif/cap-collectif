@@ -83,16 +83,7 @@ class UserRepository extends EntityRepository
         $qbReply = $this->createQueryBuilder('userReply');
         $qbReply->select('userReply.id')->innerJoin('userReply.replies', 'reply', 'WITH', 'reply.enabled = 1 AND reply.expired = 0');
 
-        $qbIdea = $this->createQueryBuilder('userIdea');
-        $qbIdea->select('userIdea.id')->innerJoin('userIdea.ideas', 'idea', 'WITH', 'idea.expired = 0');
-
         $qb->select('count(DISTINCT u.id)')
-            ->orWhere(
-                $qb->expr()->in(
-                    'u.id',
-                    $qbIdea->getDQL()
-                )
-            )
             ->orWhere(
                 $qb->expr()->in(
                     'u.id',
@@ -693,7 +684,7 @@ class UserRepository extends EntityRepository
 
     public function orderByContributionsCount(QueryBuilder $qb, $order = 'DESC'): QueryBuilder
     {
-        return $qb->addSelect('(u.opinionsCount + u.opinionVersionsCount + u.argumentsCount + u.sourcesCount + u.ideasCount + u.ideaCommentsCount + u.postCommentsCount + u.eventCommentsCount) AS HIDDEN contributionsCount')
+        return $qb->addSelect('(u.opinionsCount + u.opinionVersionsCount + u.argumentsCount + u.sourcesCount + u.postCommentsCount + u.eventCommentsCount) AS HIDDEN contributionsCount')
             ->orderBy('contributionsCount', $order);
     }
 

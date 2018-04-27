@@ -119,17 +119,6 @@ mappings:
             endAt: { type: date }
             Author: *Author
 
-    idea:
-        properties:
-            id: { type: keyword }
-            title: *text_analysis_highlighted
-            slug: { type: keyword }
-            body: *text_analysis_highlighted
-            object: *text_analysis_highlighted
-            createdAt: { type: date }
-            updatedAt: { type: date }
-            Author: *Author
-
     proposal:
         properties:
             id: { type: keyword }

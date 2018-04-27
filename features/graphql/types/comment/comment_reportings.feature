@@ -1,7 +1,7 @@
 @proposal_comments
 Feature: Reportings for a comment
 
-@datanase
+@database
 Scenario: Admin wants to get reportings for a comment
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
@@ -24,7 +24,7 @@ Scenario: Admin wants to get reportings for a comment
       }
     }",
     "variables": {
-      "commentId": "ideaComment1"
+      "commentId": "eventComment1"
     }
   }
   """
@@ -33,13 +33,13 @@ Scenario: Admin wants to get reportings for a comment
   {
     "data": {
         "comment": {
-            "id": "ideaComment1",
+            "id": "eventComment1",
             "reportings": {
                 "totalCount": 1,
                 "edges": [
                     {
                         "node": {
-                            "id": "7",
+                            "id": "6",
                             "type": "SPAM"
                         }
                     },
