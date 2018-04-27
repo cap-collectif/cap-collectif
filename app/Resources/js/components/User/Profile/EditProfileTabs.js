@@ -1,9 +1,8 @@
 // @flow
 import React, {Component} from 'react';
 import {graphql, createFragmentContainer} from 'react-relay';
-import {FormattedMessage, injectIntl} from 'react-intl';
+import {FormattedMessage} from 'react-intl';
 import {connect} from 'react-redux';
-import type {Connector} from 'react-redux';
 import {Row, Col, Tab, Nav, NavItem, Panel, ListGroup, ListGroupItem} from 'react-bootstrap';
 import AccountBox from './AccountBox';
 import type {State, FeatureToggles} from '../../../types';

@@ -2185,8 +2185,6 @@ type User implements Node {
   commentVotesCount: Int!
   sourcesCount: Int!
   repliesCount: Int!
-
-  ideaCommentsCount: Int!
   postCommentsCount: Int!
   eventCommentsCount: Int!
   projectsCount: Int!
@@ -2230,6 +2228,9 @@ type User implements Node {
 
   # Is your profile indexed or not
   profilePageIndexed: Boolean
+
+  # Your localisation
+  neighborhood: String
 }
 
 # A connection to a list of items.
@@ -2276,7 +2277,7 @@ type UserNotificationsConfiguration {
 
 # A type of person
 type UserType {
-  id: Int!
+  id: ID!
 
   # The name of the type.
   name: String!

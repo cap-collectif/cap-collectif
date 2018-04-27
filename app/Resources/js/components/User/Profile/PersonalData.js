@@ -311,12 +311,12 @@ export class PersonalData extends Component<Props, PersonalDataState> {
             />
           </Alert>
         )}
-        <Panel id="personal-data-form">
+        <Panel id="capco_horizontal_form">
           <h2>
             <FormattedMessage id="personal-data"/>
           </h2>
           {!hasData(viewer, hasValue) && (
-            <div className="personal_data_field">
+            <div className="capco_horizontal_field_with_border_top">
               <Well>
                 <FormattedMessage id="no-data"/>
               </Well>
@@ -328,7 +328,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                 {hasData(viewer, hasValue) && (
                   <div>
                     {hasValue.firstname && (
-                      <div className="personal_data_field">
+                      <div className="capco_horizontal_field_with_border_top">
                         <label className="col-sm-3 control-label">
                           <FormattedMessage id="form.label_firstname"/>
                         </label>
@@ -360,7 +360,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                       </div>
                     )}
                     {hasValue.lastname && (
-                      <div className="personal_data_field">
+                      <div className="capco_horizontal_field_with_border_top">
                         <label className="col-sm-3 control-label">
                           <FormattedMessage id="form.label_lastname"/>
                         </label>
@@ -390,7 +390,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                       </div>
                     )}
                     {hasValue.gender && (
-                      <div className="personal_data_field">
+                      <div className="capco_horizontal_field_with_border_top">
                         <label className="col-sm-3 control-label">
                           <FormattedMessage id="form.label_gender"/>
                         </label>
@@ -430,7 +430,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                       </div>
                     )}
                     {hasValue.dateOfBirth && (
-                      <div className="personal_data_field">
+                      <div className="capco_horizontal_field_with_border_top">
                         <label className="col-sm-3 control-label">
                           <FormattedMessage id="form.label_date_of_birth"/>
                         </label>
@@ -502,7 +502,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                       </div>
                     )}
                     {hasAddressData(viewer, hasValue) && (
-                      <div className="personal_data_field">
+                      <div className="capco_horizontal_field_with_border_top">
                         <div className="col-sm-2" style={{float: 'right'}}>
                           <OverlayTrigger
                             trigger="click"
@@ -586,7 +586,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                     )}
                     {hasValue.phone && (
                       <div>
-                        <div className="personal_data_field">
+                        <div className="capco_horizontal_field_with_border_top">
                           <label className="col-sm-3 control-label">
                             <FormattedMessage id="form.label_phone"/>
                           </label>
@@ -620,7 +620,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                     )}
                   </div>
                 )}
-                <div className="personal_data_field">
+                <div className="capco_horizontal_field_with_border_top">
                   <ButtonToolbar className="box-content__toolbar">
                     <Button
                       disabled={invalid || submitting}

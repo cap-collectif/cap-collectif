@@ -166,3 +166,6 @@ User:
             profilePageIndexed:
                 type: "Boolean"
                 description: "Is your profile indexed or not"
+            neighborhood:
+                type: "String"
+                description: "Your localisation"

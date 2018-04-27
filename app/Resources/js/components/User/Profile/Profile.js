@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 import {graphql, createFragmentContainer} from 'react-relay';
 import {
   Panel,
-  Col,
   ButtonToolbar,
   Button,
 } from 'react-bootstrap';
@@ -22,6 +21,7 @@ import type Profile_viewer from './__generated__/Profile_viewer.graphql';
 import type {Dispatch, State} from '../../../types';
 import component from "../../Form/Field";
 import AlertForm from "../../Alert/AlertForm";
+import UserAvatar from "../UserAvatar";
 
 type RelayProps = { profileForm: Profile_viewer };
 type Props = FormProps &
@@ -30,6 +30,7 @@ type Props = FormProps &
   intl: IntlShape,
   initialValues: Object,
   hasValue: Object,
+  userTypes: Array<Object>,
 };
 
 const formName = 'viewerProfileForm';
@@ -81,17 +82,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   //   });
 };
 
-type ProfileState = {
-  showDeleteModal: boolean,
-};
-
-export class Profile extends Component<Props, ProfileState> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      showDeleteModal: false,
-    };
-  }
+export class Profile extends Component<Props> {
 
   render() {
     const {
@@ -102,29 +93,35 @@ export class Profile extends Component<Props, ProfileState> {
       submitFailed,
       handleSubmit,
       submitting,
+      userTypes,
       error,
       hasValue
     } = this.props;
 
     return (
-      <Panel id="profile-form">
+      <Panel id="capco_horizontal_form">
         <h2>
           <FormattedMessage id="user.edition"/>
         </h2>
         <form onSubmit={handleSubmit} className="form-horizontal">
-          <div className="">
-            <label className="col-sm-3 control-label">
+          <div className="capco_horizontal_field_with_border_top" style={{border: 0}}>
+            <label className="col-sm-3 control-label" htmlFor="profile_avatar">
               <FormattedMessage id="form.label_media"/>
             </label>
+            <UserAvatar className="col-sm-1" user={viewer}/>
+            <a href="" title=""><FormattedMessage id="global.delete"/></a>
+            <div className="clearfix"></div>
+            <div className="col-sm-3"></div>
             <Field
-              id="proposal_media"
+              id="profile_avatar"
               name="media"
               component={component}
               type="image"
+              divClassName="col-sm-6"
             />
           </div>
-          <div className="">
-            <label className="col-sm-3 control-label">
+          <div className="capco_horizontal_field_with_border_top" style={{border: 0}}>
+            <label className="col-sm-3 control-label" htmlFor="profile-form-username">
               <FormattedMessage id="form.label_username"/>
             </label>
             <div>
@@ -132,14 +129,40 @@ export class Profile extends Component<Props, ProfileState> {
                 name="username"
                 component={component}
                 type="text"
-                id="personal-data-form-username"
-                divClassName="col-sm-4"
+                id="profile-form-username"
+                divClassName="col-sm-6"
               />
             </div>
           </div>
-          <div className="">
+          <div className="capco_horizontal_field_with_border_top" style={{border: 0}}>
             <label className="col-sm-3 control-label">
-              <FormattedMessage id="form.label_username"/>
+              <FormattedMessage id="registration.type"/>{' '}
+              <span className="excerpt">
+                <FormattedMessage id="global.form.optional"/>
+              </span>
+            </label>
+            <div>
+              <Field
+                id="user_type"
+                name="userType"
+                component={component}
+                type="select"
+                divClassName="col-sm-6"
+              >
+                <FormattedMessage id="registration.select.type">
+                  {message => <option value="">{message}</option>}
+                </FormattedMessage>
+                {userTypes.map((type, i) => (
+                  <option key={i + 1} value={type.id}>
+                    {type.name}
+                  </option>
+                ))}
+              </Field>
+            </div>
+          </div>
+          <div className="capco_horizontal_field_with_border_top" style={{border: 0}}>
+            <label className="col-sm-3 control-label">
+              <FormattedMessage id="form.label_biography"/>
             </label>
             <div>
               <Field
@@ -147,11 +170,25 @@ export class Profile extends Component<Props, ProfileState> {
                 component={component}
                 type="textarea"
                 id="personal-data-form-biography"
-                divClassName="col-sm-4"
+                divClassName="col-sm-6"
               />
             </div>
           </div>
-          <div className="">
+          <div className="capco_horizontal_field_with_border_top" style={{border: 0}}>
+            <label className="col-sm-3 control-label">
+              <FormattedMessage id="form.label_neighborhood"/>
+            </label>
+            <div>
+              <Field
+                name="neighborhood"
+                component={component}
+                type="text"
+                id="personal-data-form-neighborhood"
+                divClassName="col-sm-6"
+              />
+            </div>
+          </div>
+          <div className="capco_horizontal_field_with_border_top" style={{border: 0}}>
             <label className="col-sm-3 control-label">
               <FormattedMessage id="form.label_website"/>
             </label>
@@ -161,28 +198,60 @@ export class Profile extends Component<Props, ProfileState> {
                 component={component}
                 type="text"
                 id="personal-data-form-website"
-                divClassName="col-sm-4"
+                divClassName="col-sm-6"
               />
             </div>
           </div>
+          <div className="clearfix"></div>
           <h2>
-            <FormattedMessage id="admin.label.social network"/>
+            <FormattedMessage id="social-medias"/>
           </h2>
-          <div className="">
+          <div className="capco_horizontal_field_with_border_top" style={{border: 0}}>
             <label className="col-sm-3 control-label">
               <FormattedMessage id="user.profile.edit.facebook"/>
             </label>
             <div>
               <Field
-                name="username"
+                placeholder="https://"
+                name="facebook"
                 component={component}
                 type="text"
                 id="personal-data-form-username"
-                divClassName="col-sm-4"
+                divClassName="col-sm-6"
               />
             </div>
           </div>
-          <div className="personal_data_field">
+          <div className="capco_horizontal_field_with_border_top" style={{border: 0}}>
+            <label className="col-sm-3 control-label">
+              <FormattedMessage id="user.profile.edit.twitter"/>
+            </label>
+            <div>
+              <Field
+                placeholder="https://"
+                name="twitter"
+                component={component}
+                type="text"
+                id="personal-data-form-twitter"
+                divClassName="col-sm-6"
+              />
+            </div>
+          </div>
+          <div className="capco_horizontal_field_with_border_top" style={{border: 0}}>
+            <label className="col-sm-3 control-label">
+              <FormattedMessage id="show.label_linkedin_url"/>
+            </label>
+            <div>
+              <Field
+                placeholder="https://"
+                name="linkedIn"
+                component={component}
+                type="text"
+                id="personal-data-form-linkedIn"
+                divClassName="col-sm-6"
+              />
+            </div>
+          </div>
+          <div className="capco_horizontal_field_with_border_top">
             <ButtonToolbar className="box-content__toolbar">
               <Button
                 disabled={invalid || submitting}
@@ -218,7 +287,17 @@ const form = reduxForm({
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) => ({
   initialValues: {
     username: props.viewer.username ? props.viewer.username : null,
+    biography: props.viewer.biography ? props.viewer.biography : null,
+    website: props.viewer.website ? props.viewer.website : null,
+    facebook: props.viewer.facebookUrl ? props.viewer.facebookUrl : null,
+    linkedIn: props.viewer.linkedInUrl ? props.viewer.linkedInUrl : null,
+    twitter: props.viewer.twitterUrl ? props.viewer.twitterUrl : null,
+    isIndexProfilePage: props.viewer.profilePageIndexed ? props.viewer.profilePageIndexed : null,
+    media: props.viewer.media ? props.viewer.media.url : null,
+    userType: props.viewer.userType ? props.viewer.userType.id : null,
+    neighborhood: props.viewer.neighborhood ? props.viewer.neighborhood : null,
   },
+  userTypes: state.default.userTypes,
 });
 
 const container = connect(mapStateToProps)(injectIntl(form));
@@ -231,6 +310,7 @@ export default createFragmentContainer(
       media {
         url
       }
+      show_url
       username
       biography
       website
@@ -238,6 +318,10 @@ export default createFragmentContainer(
       linkedInUrl
       twitterUrl
       profilePageIndexed
+      userType {
+        id
+      }
+      neighborhood
     }
   `,
 );
