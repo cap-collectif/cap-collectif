@@ -101,9 +101,14 @@ export class ProposalListView extends React.Component<Props, State> {
       term: this.props.term || null,
     });
 
-    this.props.relay.refetch(refetchVariables, null, () => {
-      this.setState({ isRefetching: false });
-    });
+    this.props.relay.refetch(
+      refetchVariables,
+      null,
+      () => {
+        this.setState({ isRefetching: false });
+      },
+      { force: true },
+    );
   };
 
   render() {
@@ -159,7 +164,9 @@ export default createRefetchContainer(
       $userType: ID
     ) {
       step: node(id: $stepId) {
+        id
         ...ProposalListView_step
+        ...ProposalStepPageHeader_step
       }
     }
   `,

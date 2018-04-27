@@ -13,9 +13,10 @@ export class ProposalStepPageHeader extends React.Component<Props> {
   render() {
     const { step } = this.props;
 
-    const proposals = step.proposals;
-    const queryCount = proposals.edges ? proposals.edges.length : 0;
-    const total = proposals.totalCount;
+    const queryCount = step.proposals.totalCount;
+
+    const total = step.allProposals.totalCount;
+    const fusionCount = step.allProposals.fusionCount;
 
     return (
       <h3 className="h3" style={{ marginBottom: '15px' }}>
@@ -38,12 +39,12 @@ export class ProposalStepPageHeader extends React.Component<Props> {
         {step.form &&
           step.kind === 'collect' && (
             <span>
-              {proposals.fusionCount > 0 && (
+              {fusionCount > 0 && (
                 <span style={{ color: '#999', fontWeight: 300 }}>
                   <FormattedMessage
                     id="proposal.count_fusions"
                     values={{
-                      num: proposals.fusionCount,
+                      num: fusionCount,
                     }}
                   />
                 </span>
@@ -62,6 +63,10 @@ export default createFragmentContainer(ProposalStepPageHeader, {
   step: graphql`
     fragment ProposalStepPageHeader_step on ProposalStep {
       id
+      allProposals: proposals(first: 0) {
+        totalCount
+        fusionCount
+      }
       proposals(
         first: $count
         orderBy: $orderBy
@@ -71,9 +76,8 @@ export default createFragmentContainer(ProposalStepPageHeader, {
         category: $category
         status: $status
         userType: $userType
-      ) @connection(key: "ProposalStepPageHeader_proposals") {
+      ) @connection(key: "ProposalStepPageHeader_proposals", filters: []) {
         totalCount
-        fusionCount
         edges {
           node {
             id
