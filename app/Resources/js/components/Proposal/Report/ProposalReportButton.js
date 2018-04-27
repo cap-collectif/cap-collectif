@@ -37,7 +37,8 @@ const container = connect()(ProposalReportButton);
 export default createFragmentContainer(
   container,
   graphql`
-    fragment ProposalReportButton_proposal on Proposal {
+    fragment ProposalReportButton_proposal on Proposal
+      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
       id
       author {
         id
