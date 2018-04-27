@@ -12,8 +12,8 @@ import type { State } from '../../../types';
 
 type Props = { proposalId: number, dirty: boolean };
 
-const onUnload = (event: SyntheticEvent<>) => {
-  event.preventDefault();
+const onUnload = e => {
+  e.returnValue = true;
 };
 
 const component = ({ error, props }: { error: ?Error, props: any }) => {

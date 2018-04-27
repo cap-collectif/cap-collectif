@@ -172,6 +172,14 @@ class ApplicationContext extends UserContext
     }
 
     /**
+     * @When I confirm the popup message
+     */
+    public function iConfirmThePopup()
+    {
+        $this->getSession()->getDriver()->getWebDriverSession()->accept_alert();
+    }
+
+    /**
      * @Given I should see the shield
      */
     public function iShouldSeeTheShield()

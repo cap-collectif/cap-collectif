@@ -24,8 +24,8 @@ type Props = FormProps & FormValues & RelayProps & { intl: IntlShape };
 
 const formName = 'proposal-evaluation';
 
-const onUnload = (event: SyntheticEvent<>) => {
-  event.preventDefault();
+const onUnload = e => {
+  e.returnValue = true;
 };
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
