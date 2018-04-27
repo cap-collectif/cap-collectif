@@ -88,33 +88,30 @@ class ProposalsUserVotesTable extends React.Component<Props, State> {
     const { items } = this.state;
 
     return (
-      <form id="proposal-user-vote-form">
-        <Row className="proposals-user-votes__table">
-          <DragDropContext onDragEnd={this.onDragEnd}>
-            <Droppable droppableId="droppable">
-              {provided => (
-                <div ref={provided.innerRef}>
-                  {items.map((vote, key) => (
-                    <Draggable key={vote.proposal.id} draggableId={vote.proposal.id} index={key}>
-                      {provided2 => (
-                        <div
-                          ref={provided2.innerRef}
-                          {...provided2.draggableProps}
-                          {...provided2.dragHandleProps}>
-                          {/* $FlowFixMe */}
-                          <ProposalUserVoteItem key={key} ranking={key} vote={vote} step={step} />
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
-        </Row>
-        <button type="submit">Valider</button>
-      </form>
+      <Row className="proposals-user-votes__table">
+        <DragDropContext onDragEnd={this.onDragEnd}>
+          <Droppable droppableId="droppable">
+            {provided => (
+              <div ref={provided.innerRef}>
+                {items.map((vote, key) => (
+                  <Draggable key={vote.proposal.id} draggableId={vote.proposal.id} index={key}>
+                    {provided2 => (
+                      <div
+                        ref={provided2.innerRef}
+                        {...provided2.draggableProps}
+                        {...provided2.dragHandleProps}>
+                        {/* $FlowFixMe */}
+                        <ProposalUserVoteItem key={key} ranking={key} vote={vote} step={step} />
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+      </Row>
     );
   }
 }

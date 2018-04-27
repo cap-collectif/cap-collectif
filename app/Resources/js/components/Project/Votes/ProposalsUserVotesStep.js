@@ -72,7 +72,7 @@ export class ProposalsUserVotesStep extends React.Component<Props> {
             }}
           />
         </h4>
-        <ProposalsUserVotesTable step={step} votes={step.viewerVotes} />
+        <ProposalsUserVotesTable deletable step={step} votes={step.viewerVotes} />
         <SubmitButton
           id="confirm-update-votes"
           disabled={!dirty}
