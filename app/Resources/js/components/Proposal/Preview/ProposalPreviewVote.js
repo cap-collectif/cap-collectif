@@ -23,9 +23,8 @@ export class ProposalPreviewVote extends React.Component<Props> {
           proposal={proposal}
           step={step}
           viewer={viewer}
-          style={{ width: '100%' }}
           id={`proposal-vote-btn-${proposal.id}`}
-          className="proposal__preview__vote"
+          className="proposal__preview__vote mr-15"
         />
         <ProposalVoteModal proposal={proposal} step={step} />
       </span>

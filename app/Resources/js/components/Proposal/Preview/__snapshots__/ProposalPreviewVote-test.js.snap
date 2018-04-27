@@ -3,7 +3,7 @@
 exports[`<ProposalPreviewVote /> should render a proposal preview vote 1`] = `
 <span>
   <Relay(ProposalVoteButtonWrapperFragment)
-    className="proposal__preview__vote"
+    className="proposal__preview__vote mr-15"
     id="proposal-vote-btn-1"
     proposal={
       Object {
@@ -14,11 +14,6 @@ exports[`<ProposalPreviewVote /> should render a proposal preview vote 1`] = `
     step={
       Object {
         "$refType": null,
-      }
-    }
-    style={
-      Object {
-        "width": "100%",
       }
     }
     viewer={null}
