@@ -4,16 +4,6 @@ Capco\AppBundle\Entity\ProposalSelectionVote:
     proposal: '@proposal2'
     selectionStep: '@selectionstep1'
     user: '@user4'
-  # proposalSelectionVote2:
-  #   proposal: '@proposal2'
-  #   selectionStep: '@selectionstep1'
-  #   username: coucou
-  #   email: cheater@test.com
-  # proposalSelectionVote3:
-  #   proposal: '@proposal2'
-  #   selectionStep: '@selectionstep1'
-  #   username: coucou
-  #   email: voter@test.com
   proposalSelectionVote{4...50}:
     id (unique): '<numberBetween(1001, 1050)>'
     proposal: '@proposal3'
