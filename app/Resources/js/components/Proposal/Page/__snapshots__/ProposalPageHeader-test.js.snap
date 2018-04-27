@@ -97,62 +97,33 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none 1`]
       </p>
     </div>
   </div>
-  <Connect(ProposalVoteButtonWrapper)
-    className="pull-right btn-lg"
-    id="proposal-vote-btn"
-    proposal={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "author": Object {
-          "displayName": "userAdmin",
-          "media": Object {
-            "url": "http://media.url",
+  <div
+    className="proposal__buttons"
+  >
+    <Relay(ProposalFollowButton)
+      isAuthenticated={false}
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "author": Object {
+            "displayName": "userAdmin",
+            "media": Object {
+              "url": "http://media.url",
+            },
+            "username": "userAdmin",
           },
-          "username": "userAdmin",
-        },
-        "createdAt": "2015-01-01 00:00:00",
-        "currentVotableStep": Object {
-          "id": "step1",
-          "open": true,
-        },
-        "id": "1",
-        "publicationStatus": "PUBLISHED",
-        "show_url": "true",
-        "theme": null,
-        "title": "titre",
-        "updatedAt": "2015-01-05 00:00:00",
+          "createdAt": "2015-01-01 00:00:00",
+          "id": "1",
+          "publicationStatus": "PUBLISHED",
+          "show_url": "true",
+          "theme": null,
+          "title": "titre",
+          "updatedAt": "2015-01-05 00:00:00",
+        }
       }
-    }
-  />
-  <Relay(ProposalFollowButton)
-    className="pull-right btn-lg"
-    isAuthenticated={true}
-    proposal={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "author": Object {
-          "displayName": "userAdmin",
-          "media": Object {
-            "url": "http://media.url",
-          },
-          "username": "userAdmin",
-        },
-        "createdAt": "2015-01-01 00:00:00",
-        "currentVotableStep": Object {
-          "id": "step1",
-          "open": true,
-        },
-        "id": "1",
-        "publicationStatus": "PUBLISHED",
-        "show_url": "true",
-        "theme": null,
-        "title": "titre",
-        "updatedAt": "2015-01-05 00:00:00",
-      }
-    }
-  />
+    />
+  </div>
 </div>
 `;
 
@@ -253,65 +224,34 @@ exports[`<ProposalPageHeader /> should render a proposal header 1`] = `
       </p>
     </div>
   </div>
-  <Connect(ProposalVoteButtonWrapper)
-    className="pull-right btn-lg"
-    id="proposal-vote-btn"
-    proposal={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "author": Object {
-          "displayName": "userAdmin",
-          "media": Object {
-            "url": "http://media.url",
+  <div
+    className="proposal__buttons"
+  >
+    <Relay(ProposalFollowButton)
+      isAuthenticated={false}
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "author": Object {
+            "displayName": "userAdmin",
+            "media": Object {
+              "url": "http://media.url",
+            },
+            "username": "userAdmin",
           },
-          "username": "userAdmin",
-        },
-        "createdAt": "2015-01-01 00:00:00",
-        "currentVotableStep": Object {
-          "id": "step1",
-          "open": true,
-        },
-        "id": "1",
-        "publicationStatus": "PUBLISHED",
-        "show_url": "true",
-        "theme": Object {
-          "title": "titre du theme",
-        },
-        "title": "titre",
-        "updatedAt": "2015-01-05 00:00:00",
-      }
-    }
-  />
-  <Relay(ProposalFollowButton)
-    className="pull-right btn-lg"
-    isAuthenticated={true}
-    proposal={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "author": Object {
-          "displayName": "userAdmin",
-          "media": Object {
-            "url": "http://media.url",
+          "createdAt": "2015-01-01 00:00:00",
+          "id": "1",
+          "publicationStatus": "PUBLISHED",
+          "show_url": "true",
+          "theme": Object {
+            "title": "titre du theme",
           },
-          "username": "userAdmin",
-        },
-        "createdAt": "2015-01-01 00:00:00",
-        "currentVotableStep": Object {
-          "id": "step1",
-          "open": true,
-        },
-        "id": "1",
-        "publicationStatus": "PUBLISHED",
-        "show_url": "true",
-        "theme": Object {
-          "title": "titre du theme",
-        },
-        "title": "titre",
-        "updatedAt": "2015-01-05 00:00:00",
+          "title": "titre",
+          "updatedAt": "2015-01-05 00:00:00",
+        }
       }
-    }
-  />
+    />
+  </div>
 </div>
 `;

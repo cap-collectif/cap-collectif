@@ -188,6 +188,7 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                     },
                   }
                 }
+                step={null}
                 viewer={null}
               />
             </Col>

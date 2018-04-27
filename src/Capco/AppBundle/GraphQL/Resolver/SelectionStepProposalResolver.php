@@ -24,8 +24,12 @@ class SelectionStepProposalResolver
     public function __invoke(SelectionStep $selectionStep, Argument $args, $user, $request): Connection
     {
         $totalCount = 0;
+        $term = null;
+        if ($args->offsetExists('term')) {
+            $term = $args->offsetGet('term');
+        }
         try {
-            $paginator = new Paginator(function (int $offset, int $limit) use ($selectionStep, $args, $user, $request, &$totalCount) {
+            $paginator = new Paginator(function (int $offset, int $limit) use ($selectionStep, $args, $term, $user, $request, &$totalCount) {
                 $field = $args->offsetGet('orderBy')['field'];
                 $direction = $args->offsetGet('orderBy')['direction'];
                 $filters = [];
@@ -54,7 +58,7 @@ class SelectionStepProposalResolver
                     $offset,
                     $limit,
                     $order,
-                    null,
+                    $term,
                     $filters,
                     $seed
                 );
@@ -66,7 +70,7 @@ class SelectionStepProposalResolver
 
             $connection = $paginator->auto($args, $totalCount);
             $connection->totalCount = $totalCount;
-            $connection->fusionCount = 0;
+            $connection->{'fusionCount'} = 0;
 
             return $connection;
         } catch (\RuntimeException $exception) {

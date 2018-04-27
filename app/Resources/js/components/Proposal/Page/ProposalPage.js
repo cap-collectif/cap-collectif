@@ -15,6 +15,7 @@ import type ProposalPageQueryResponse from './__generated__/ProposalPageQuery.gr
 type Props = {
   form: Object,
   proposalId: Uuid,
+  currentVotableStepId: ?Uuid,
   categories: Array<Object>,
   features: FeatureToggles,
   isAuthenticated: boolean,
@@ -30,12 +31,19 @@ export class ProposalPage extends React.Component<Props> {
           query={graphql`
             query ProposalPageQuery(
               $proposalId: ID!
+              $hasVotableStep: Boolean!
+              $stepId: ID!
               $count: Int!
               $cursor: String
               $isAuthenticated: Boolean!
             ) {
               viewer @include(if: $isAuthenticated) {
                 ...ProposalPageTabs_viewer
+                ...ProposalPageHeader_viewer
+              }
+              step: node(id: $stepId) @include(if: $hasVotableStep) {
+                ...ProposalPageHeader_step
+                ...ProposalPageTabs_step
               }
               proposal: node(id: $proposalId) {
                 ...ProposalDraftAlert_proposal
@@ -47,6 +55,8 @@ export class ProposalPage extends React.Component<Props> {
           `}
           variables={{
             proposalId,
+            hasVotableStep: !!this.props.currentVotableStepId,
+            stepId: this.props.currentVotableStepId || '',
             count: PROPOSAL_FOLLOWERS_TO_SHOW,
             cursor: null,
             isAuthenticated: this.props.isAuthenticated,
@@ -65,11 +75,14 @@ export class ProposalPage extends React.Component<Props> {
                     <ProposalPageAlert proposal={props.proposal} />
                     <ProposalPageHeader
                       proposal={props.proposal}
+                      step={props.step}
+                      viewer={props.viewer || null}
                       isAuthenticated={!!props.viewer}
                       className="container container--custom"
                     />
                     <ProposalPageTabs
                       proposal={props.proposal}
+                      step={props.step}
                       viewer={props.viewer || null}
                       features={features}
                       categories={categories}

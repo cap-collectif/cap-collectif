@@ -6,6 +6,7 @@ import { connect, type MapStateToProps } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 import ProposalsUserVotesTable from './ProposalsUserVotesTable';
 import SubmitButton from '../../Form/SubmitButton';
+import UpdateProposalVotesMutation from '../../../mutations/UpdateProposalVotesMutation';
 import type { ProposalsUserVotesStep_step } from './__generated__/ProposalsUserVotesStep_step.graphql';
 
 type RelayProps = {
@@ -18,11 +19,20 @@ type Props = RelayProps & {
 };
 
 export class ProposalsUserVotesStep extends React.Component<Props> {
+  onSubmit = (values: { votes: Array<{ anonymous: boolean, id: string }> }) => {
+    return UpdateProposalVotesMutation.commit({
+      input: {
+        step: this.props.step.id,
+        votes: values.votes,
+      },
+    });
+  };
+
   render() {
     const { step, dirty, submitting, dispatch } = this.props;
 
     return (
-      <div>
+      <div className="block">
         <h2>
           <a
             className="pull-left btn btn-default"
@@ -41,15 +51,6 @@ export class ProposalsUserVotesStep extends React.Component<Props> {
             <FormattedMessage id="project.votes.type.simple" />
           )}
         </h2>
-        <p>
-          <a className="btn btn-default" href={step.show_url}>
-            <i className="cap cap-arrow-1-1" />
-            <span>
-              {' '}
-              <FormattedMessage id="project.votes.back" />
-            </span>
-          </a>
-        </p>
         <div className="well mb-0 mt-10">
           <p>
             <b>
@@ -60,7 +61,6 @@ export class ProposalsUserVotesStep extends React.Component<Props> {
             <FormattedMessage id="modal-vote-ranking-explanations" />
           </p>
         </div>
-
         <h3 className="d-ib mr-10 mb-10">
           <FormattedMessage id="modal-ranking" />
         </h3>
@@ -72,17 +72,26 @@ export class ProposalsUserVotesStep extends React.Component<Props> {
             }}
           />
         </h4>
-        <ProposalsUserVotesTable deletable step={step} votes={step.viewerVotes} />
-        <SubmitButton
-          id="confirm-update-votes"
-          disabled={!dirty}
-          onSubmit={() => {
-            dispatch(submit(`proposal-user-vote-form-step-${step.id}`));
-          }}
-          label="global.save"
-          isSubmitting={submitting}
-          bsStyle="success"
-        />
+        {step.viewerVotes.totalCount > 0 && (
+          <div>
+            <ProposalsUserVotesTable
+              onSubmit={this.onSubmit}
+              deletable
+              step={step}
+              votes={step.viewerVotes}
+            />
+            <SubmitButton
+              id="confirm-update-votes"
+              disabled={!dirty}
+              onSubmit={() => {
+                dispatch(submit(`proposal-user-vote-form-step-${step.id}`));
+              }}
+              label="global.save"
+              isSubmitting={submitting}
+              bsStyle="success"
+            />
+          </div>
+        )}
       </div>
     );
   }

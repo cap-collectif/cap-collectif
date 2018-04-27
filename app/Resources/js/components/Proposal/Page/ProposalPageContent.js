@@ -12,16 +12,18 @@ import DeleteButton from '../../Form/DeleteButton';
 import ProposalReportButton from '../Report/ProposalReportButton';
 import ProposalPageComments from './ProposalPageComments';
 import ProposalResponse from './ProposalResponse';
-import ProposalVoteButtonWrapper from '../Vote/ProposalVoteButtonWrapper';
+import ProposalVoteButtonWrapperFragment from '../Vote/ProposalVoteButtonWrapperFragment';
 import { openDeleteProposalModal, openEditProposalModal } from '../../../redux/modules/proposal';
 import config from '../../../config';
 import type { ProposalPageContent_proposal } from './__generated__/ProposalPageContent_proposal.graphql';
 import type { ProposalPageContent_viewer } from './__generated__/ProposalPageContent_viewer.graphql';
+import type { ProposalPageContent_step } from './__generated__/ProposalPageContent_step.graphql';
 
 let L;
 
 type Props = {
   viewer: ?ProposalPageContent_viewer,
+  step: ?ProposalPageContent_step,
   proposal: ProposalPageContent_proposal,
   form: Object,
   categories: Array<Object>,
@@ -35,7 +37,7 @@ export class ProposalPageContent extends React.Component<Props> {
   };
 
   render() {
-    const { proposal, className, form, categories, dispatch, viewer } = this.props;
+    const { proposal, step, className, form, categories, dispatch, viewer } = this.props;
     const classes = {
       proposal__content: true,
       [className]: true,
@@ -133,7 +135,15 @@ export class ProposalPageContent extends React.Component<Props> {
         <div className="block proposal__buttons">
           {proposal.publicationStatus !== 'DRAFT' && (
             <div>
-              <ProposalVoteButtonWrapper className="mr-15" proposal={proposal} />
+              {step && (
+                /* $FlowFixMe */
+                <ProposalVoteButtonWrapperFragment
+                  viewer={viewer}
+                  step={step}
+                  className="mr-15"
+                  proposal={proposal}
+                />
+              )}
               <ShareButtonDropdown
                 id="proposal-share-button"
                 url={proposal.show_url}
@@ -157,6 +167,12 @@ export class ProposalPageContent extends React.Component<Props> {
 }
 
 export default createFragmentContainer(ProposalPageContent, {
+  step: graphql`
+    fragment ProposalPageContent_step on ProposalStep {
+      id
+      ...ProposalVoteButtonWrapperFragment_step
+    }
+  `,
   viewer: graphql`
     fragment ProposalPageContent_viewer on User {
       id
@@ -165,6 +181,8 @@ export default createFragmentContainer(ProposalPageContent, {
   proposal: graphql`
     fragment ProposalPageContent_proposal on Proposal {
       id
+      ...ProposalVoteButtonWrapperFragment_proposal
+        @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
       author {
         id
       }

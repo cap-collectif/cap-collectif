@@ -13,6 +13,7 @@ const mutation = graphql`
       step {
         id
         ...ProposalVoteModal_step
+        ...ProposalsUserVotesStep_step
       }
     }
   }

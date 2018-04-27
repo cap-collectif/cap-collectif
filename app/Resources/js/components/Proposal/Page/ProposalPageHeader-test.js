@@ -11,10 +11,6 @@ describe('<ProposalPageHeader />', () => {
     $fragmentRefs,
     id: '1',
     title: 'titre',
-    currentVotableStep: {
-      id: 'step1',
-      open: true,
-    },
     theme: {
       title: 'titre du theme',
     },
@@ -37,10 +33,6 @@ describe('<ProposalPageHeader />', () => {
     id: '1',
     title: 'titre',
     theme: null,
-    currentVotableStep: {
-      id: 'step1',
-      open: true,
-    },
     author: {
       username: 'userAdmin',
       displayName: 'userAdmin',
@@ -60,13 +52,15 @@ describe('<ProposalPageHeader />', () => {
   };
 
   it('should render a proposal header', () => {
-    const wrapper = shallow(<ProposalPageHeader proposal={proposal} isAuthenticated {...props} />);
+    const wrapper = shallow(
+      <ProposalPageHeader step={null} proposal={proposal} viewer={null} {...props} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should not render theme if proposal has none', () => {
     const wrapper = shallow(
-      <ProposalPageHeader proposal={proposalWithoutTheme} isAuthenticated {...props} />,
+      <ProposalPageHeader proposal={proposalWithoutTheme} step={null} viewer={null} {...props} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

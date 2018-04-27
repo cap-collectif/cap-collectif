@@ -47,7 +47,7 @@ describe('<ProposalPageTabs />', () => {
   };
 
   it('should render Tabs with correct DOM structure', () => {
-    const wrapper = shallow(<ProposalPageTabs proposal={proposal} {...props} />);
+    const wrapper = shallow(<ProposalPageTabs step={null} proposal={proposal} {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });
