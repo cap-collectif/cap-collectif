@@ -163,7 +163,8 @@ export default createFragmentContainer(container, {
     }
   `,
   step: graphql`
-    fragment ProposalVoteModal_step on ProposalStep {
+    fragment ProposalVoteModal_step on ProposalStep
+      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
       id
       ...ProposalsUserVotesTable_step
       viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {

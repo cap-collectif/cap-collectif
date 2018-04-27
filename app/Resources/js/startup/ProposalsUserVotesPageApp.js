@@ -21,11 +21,12 @@ const mainNode = (data: { projectId: string }) => {
           variables={
             ({
               project: data.projectId,
+              isAuthenticated: true,
             }: ProposalsUserVotesPageAppQueryVariables)
           }
           environment={environment}
           query={graphql`
-            query ProposalsUserVotesPageAppQuery($project: ID!) {
+            query ProposalsUserVotesPageAppQuery($project: ID!, $isAuthenticated: Boolean!) {
               project: node(id: $project) {
                 ...ProposalsUserVotesPage_project
               }

@@ -108,7 +108,8 @@ const container = connect(mapStateToProps)(ProposalsUserVotesStep);
 
 export default createFragmentContainer(container, {
   step: graphql`
-    fragment ProposalsUserVotesStep_step on ProposalStep {
+    fragment ProposalsUserVotesStep_step on ProposalStep
+      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
       ...ProposalsUserVotesTable_step
       id
       title
