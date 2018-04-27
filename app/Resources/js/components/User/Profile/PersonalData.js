@@ -24,16 +24,16 @@ import {
   formValueSelector
 } from 'redux-form';
 import {FormattedMessage, injectIntl, type IntlShape} from 'react-intl';
-import type PersonalData_user from './__generated__/PersonalData_user.graphql';
+import type PersonalData_viewer from './__generated__/PersonalData_viewer.graphql';
 import AlertForm from '../../Alert/AlertForm';
 import type {Dispatch, State} from '../../../types';
 import UpdateProfilePersonalDataMutation from '../../../mutations/UpdateProfilePersonalDataMutation';
 import component from "../../Form/Field";
 
-type RelayProps = { personalDataForm: PersonalData_user };
+type RelayProps = { personalDataForm: PersonalData_viewer };
 type Props = FormProps &
   RelayProps & {
-  user: PersonalData_user,
+  viewer: PersonalData_viewer,
   intl: IntlShape,
   initialValues: Object,
   hasValue: Object,
@@ -41,8 +41,8 @@ type Props = FormProps &
 
 const formName = 'profilePersonalData';
 
-const hasAddressData = (user: PersonalData_user, value: ?Object) => {
-  if (!user.address && !user.zipCode && !user.city) {
+const hasAddressData = (viewer: PersonalData_viewer, value: ?Object) => {
+  if (!viewer.address && !viewer.zipCode && !viewer.city) {
     return false;
   }
   if (value) {
@@ -56,7 +56,7 @@ const hasAddressData = (user: PersonalData_user, value: ?Object) => {
 
 const validate = (values: Object, props: Props) => {
   const errors = {};
-  if (props.user.firstname) {
+  if (props.viewer.firstname) {
     if (!values.firstname || values.firstname.length === 0) {
       errors.firstname = 'fill-or-delete-field';
     }
@@ -67,7 +67,7 @@ const validate = (values: Object, props: Props) => {
       errors.firstname = '256-characters-maximum-required';
     }
   }
-  if (props.user.lastname) {
+  if (props.viewer.lastname) {
     if (!values.lastname || values.lastname.length === 0) {
       errors.lastname = 'fill-or-delete-field';
     }
@@ -78,7 +78,7 @@ const validate = (values: Object, props: Props) => {
       errors.lastname = '256-characters-maximum-required';
     }
   }
-  if (props.user.phone) {
+  if (props.viewer.phone) {
     if (!values.phone || values.lastname.length === 0) {
       errors.phone = 'fill-or-delete-field';
     }
@@ -90,7 +90,7 @@ const validate = (values: Object, props: Props) => {
     }
   }
 
-  if (hasAddressData(props.user)) {
+  if (hasAddressData(props.viewer)) {
     const addressFields = ['address', 'address2', 'city', 'zipCode'];
     addressFields.forEach(value => {
       if (value !== 'address2') {
@@ -115,7 +115,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const {intl} = props;
   const input = {
     ...values,
-    userId: props.user.id
+    userId: props.viewer.id
   };
 
   return UpdateProfilePersonalDataMutation.commit({input})
@@ -136,17 +136,17 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
       }
     });
 };
-const hasData = (user: PersonalData_user, formValue: ?Object): boolean => {
+const hasData = (viewer: PersonalData_viewer, formValue: ?Object): boolean => {
   if (
-    !user.firstname &&
-    !user.lastname &&
-    !user.dateOfBirth &&
-    !user.phone &&
-    !user.address &&
-    !user.address2 &&
-    !user.zipCode &&
-    !user.city &&
-    !user.gender
+    !viewer.firstname &&
+    !viewer.lastname &&
+    !viewer.dateOfBirth &&
+    !viewer.phone &&
+    !viewer.address &&
+    !viewer.address2 &&
+    !viewer.zipCode &&
+    !viewer.city &&
+    !viewer.gender
   ) {
     return false;
   }
@@ -202,12 +202,12 @@ export class PersonalData extends Component<Props, PersonalDataState> {
     this.state = {
       showDeleteModal: false,
     };
-    if (props.user && props.user.dateOfBirth) {
+    if (props.viewer && props.viewer.dateOfBirth) {
       this.state = {
         ...this.state,
-        year: getYear(props.user.dateOfBirth),
-        month: getMonth(props.user.dateOfBirth),
-        day: getDay(props.user.dateOfBirth),
+        year: getYear(props.viewer.dateOfBirth),
+        month: getMonth(props.viewer.dateOfBirth),
+        day: getDay(props.viewer.dateOfBirth),
       };
     }
   }
@@ -275,8 +275,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
 
   render() {
     const {
-      user,
-      intl,
+      viewer,
       invalid,
       valid,
       submitSucceeded,
@@ -294,7 +293,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
     return (
 
       <div id="personal-data">
-        {!hasData(user, hasValue) && (
+        {!hasData(viewer, hasValue) && (
           <Alert bsStyle="info">
             <span className="cap-information col-sm-1 col-md-1"/>
             <FormattedMessage
@@ -303,7 +302,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
             />
           </Alert>
         )}
-        {hasData(user, hasValue) && (
+        {hasData(viewer, hasValue) && (
           <Alert bsStyle="info" id="project-participation-collected-data">
             <span className="cap-information col-sm-1 col-md-1"/>
             <FormattedMessage
@@ -316,17 +315,17 @@ export class PersonalData extends Component<Props, PersonalDataState> {
           <h2>
             <FormattedMessage id="personal-data"/>
           </h2>
-          {!hasData(user, hasValue) && (
+          {!hasData(viewer, hasValue) && (
             <div className="personal_data_field">
               <Well>
                 <FormattedMessage id="no-data"/>
               </Well>
             </div>
           )}
-          {hasData(user, null) && (
+          {hasData(viewer, null) && (
             <div>
               <form onSubmit={handleSubmit} className="form-horizontal">
-                {hasData(user, hasValue) && (
+                {hasData(viewer, hasValue) && (
                   <div>
                     {hasValue.firstname && (
                       <div className="personal_data_field">
@@ -502,7 +501,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                         </div>
                       </div>
                     )}
-                    {hasAddressData(user, hasValue) && (
+                    {hasAddressData(viewer, hasValue) && (
                       <div className="personal_data_field">
                         <div className="col-sm-2" style={{float: 'right'}}>
                           <OverlayTrigger
@@ -661,15 +660,15 @@ const form = reduxForm({
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) => ({
   initialValues: {
-    firstname: props.user.firstname ? props.user.firstname : null,
-    lastname: props.user.lastname ? props.user.lastname : null,
-    address: props.user.address ? props.user.address : null,
-    address2: props.user.address2 ? props.user.address2 : null,
-    city: props.user.city ? props.user.city : null,
-    zipCode: props.user.zipCode ? props.user.zipCode : null,
-    phone: props.user.phone ? props.user.phone : null,
-    gender: props.user.gender ? props.user.gender : null,
-    dateOfBirth: props.user.dateOfBirth ? props.user.dateOfBirth : null,
+    firstname: props.viewer.firstname ? props.viewer.firstname : null,
+    lastname: props.viewer.lastname ? props.viewer.lastname : null,
+    address: props.viewer.address ? props.viewer.address : null,
+    address2: props.viewer.address2 ? props.viewer.address2 : null,
+    city: props.viewer.city ? props.viewer.city : null,
+    zipCode: props.viewer.zipCode ? props.viewer.zipCode : null,
+    phone: props.viewer.phone ? props.viewer.phone : null,
+    gender: props.viewer.gender ? props.viewer.gender : null,
+    dateOfBirth: props.viewer.dateOfBirth ? props.viewer.dateOfBirth : null,
   },
   hasValue: selector(state, 'firstname', 'lastname', 'gender', 'dateOfBirth', 'address', 'address2', 'city', 'zipCode', 'phone')
 });
@@ -679,7 +678,7 @@ const container = connect(mapStateToProps)(injectIntl(form));
 export default createFragmentContainer(
   container,
   graphql`
-    fragment PersonalData_user on User {
+    fragment PersonalData_viewer on User {
       id
       firstname
       lastname

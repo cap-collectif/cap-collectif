@@ -1,10 +1,12 @@
 // @flow
-import React, { Component } from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
-import { FormattedMessage } from 'react-intl';
-import { Row, Col, Tab, Nav, NavItem, Panel, ListGroup, ListGroupItem } from 'react-bootstrap';
+import React, {Component} from 'react';
+import {graphql, createFragmentContainer} from 'react-relay';
+import {FormattedMessage, injectIntl} from 'react-intl';
+import {connect} from 'react-redux';
+import type {Connector} from 'react-redux';
+import {Row, Col, Tab, Nav, NavItem, Panel, ListGroup, ListGroupItem} from 'react-bootstrap';
 import AccountBox from './AccountBox';
-import type { FeatureToggles } from '../../../types';
+import type {State, FeatureToggles} from '../../../types';
 import NotificationsForm from './NotificationsForm';
 import FollowingsProposals from '../Following/FollowingsProposals';
 import type EditProfileTabs_viewer from './__generated__/EditProfileTabs_viewer.graphql';
@@ -21,6 +23,9 @@ type Props = {
 
 export class EditProfileTabs extends Component<Props> {
   getHashKey(hash: string) {
+    if (hash.indexOf('profile') !== -1) {
+      return 'profile';
+    }
     if (hash.indexOf('account') !== -1) {
       return 'account';
     }
@@ -48,7 +53,7 @@ export class EditProfileTabs extends Component<Props> {
   }
 
   render() {
-    const { viewer, features } = this.props;
+    const {viewer, features} = this.props;
 
     return (
       <Tab.Container id="account-tabs" defaultActiveKey={this.getDefaultKey()}>
@@ -58,40 +63,52 @@ export class EditProfileTabs extends Component<Props> {
               id="panel-account"
               header={
                 <CardUser>
-                  <UserAvatar className="pull-left" user={viewer} />
-                  <UserLink user={viewer} />
+                  <UserAvatar className="pull-left" user={viewer}/>
+                  <UserLink user={viewer}/>
                 </CardUser>
               }>
               <ListGroup>
                 <Nav bsStyle="pills" stacked>
-                  <NavItem eventKey="account" href="#account">
-                    <ListGroupItem>
-                      <span className="icon cap-setting-gear" />
-                      <FormattedMessage id="user.profile.edit.profile" />
-                    </ListGroupItem>
-                  </NavItem>
+                  {features.profiles && (
+                    <NavItem eventKey="profile" href="#profile">
+                      <ListGroupItem>
+                        <span className="icon cap-id-8"/>
+                        <FormattedMessage id="user.profile.title"/>
+                      </ListGroupItem>
+                    </NavItem>
+                  )}
+                  {!features.login_paris && (
+                    <NavItem eventKey="account" href="#account">
+                      <ListGroupItem>
+                        <span className="icon cap-setting-gear"/>
+                        <FormattedMessage id="user.profile.edit.account"/>
+                      </ListGroupItem>
+                    </NavItem>
+                  )}
                   <NavItem eventKey="personal-data" href="#personal-data">
                     <ListGroupItem>
-                      <span className="icon cap-id-1" />
-                      <FormattedMessage id="personal-data" />
+                      <span className="icon cap-id-1"/>
+                      <FormattedMessage id="personal-data"/>
                     </ListGroupItem>
                   </NavItem>
-                  <NavItem eventKey="password" href="#password">
-                    <ListGroupItem>
-                      <span className="icon cap-key-1" />
-                      <FormattedMessage id="user.profile.edit.password" />
-                    </ListGroupItem>
-                  </NavItem>
+                  {!features.login_paris && (
+                    <NavItem eventKey="password" href="#password">
+                      <ListGroupItem>
+                        <span className="icon cap-key-1"/>
+                        <FormattedMessage id="user.profile.edit.password"/>
+                      </ListGroupItem>
+                    </NavItem>
+                  )}
                   <NavItem href="#notifications" eventKey="notifications" className="tab">
                     <ListGroupItem>
-                      <span className="icon cap-bell" />
-                      <FormattedMessage id="user.profile.notifications.title" />
+                      <span className="icon cap-bell"/>
+                      <FormattedMessage id="user.profile.notifications.title"/>
                     </ListGroupItem>
                   </NavItem>
                   <NavItem eventKey="followings" href="#followings" className="tab">
                     <ListGroupItem>
-                      <span className="icon cap-rss-2" />
-                      <FormattedMessage id="followings" />
+                      <span className="icon cap-rss-2"/>
+                      <FormattedMessage id="followings"/>
                     </ListGroupItem>
                   </NavItem>
                 </Nav>
@@ -101,21 +118,25 @@ export class EditProfileTabs extends Component<Props> {
           <Col xs={12} sm={8} md={9}>
             <Tab.Content animation>
               <Tab.Pane eventKey="account">
-                <AccountBox />
+                {!features.login_paris && (
+                  <AccountBox/>
+                )}
               </Tab.Pane>
               <Tab.Pane eventKey="personal-data">
-                <PersonalData user={viewer} />
+                <PersonalData viewer={viewer}/>
               </Tab.Pane>
               <Tab.Pane eventKey="password">
-                <ChangePasswordForm />
+                {!features.login_paris && (
+                  <ChangePasswordForm/>
+                )}
               </Tab.Pane>
               <Tab.Pane eventKey="notifications">
-                <Panel header={<FormattedMessage id="profile.account.notifications.title" />}>
-                  <NotificationsForm viewer={viewer} />
+                <Panel header={<FormattedMessage id="profile.account.notifications.title"/>}>
+                  <NotificationsForm viewer={viewer}/>
                 </Panel>
               </Tab.Pane>
               <Tab.Pane eventKey="followings">
-                <FollowingsProposals viewer={viewer} />
+                <FollowingsProposals viewer={viewer}/>
               </Tab.Pane>
             </Tab.Content>
           </Col>
@@ -125,13 +146,19 @@ export class EditProfileTabs extends Component<Props> {
   }
 }
 
+const mapStateToProps = (state: State) => ({
+  features: state.default.features,
+});
+
+const container = connect(mapStateToProps)(EditProfileTabs);
+
 export default createFragmentContainer(
-  EditProfileTabs,
+  container,
   graphql`
     fragment EditProfileTabs_viewer on User {
       ...FollowingsProposals_viewer
       ...NotificationsForm_viewer
-      ...PersonalData_user
+      ...PersonalData_viewer
       username
       displayName
       media {
