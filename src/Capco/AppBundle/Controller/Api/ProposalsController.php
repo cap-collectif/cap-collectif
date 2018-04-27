@@ -4,14 +4,9 @@ namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\CapcoAppBundleEvents;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Reporting;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Event\CommentChangedEvent;
 use Capco\AppBundle\Form\CommentType;
 use Capco\AppBundle\Form\ReportingType;
@@ -23,35 +18,20 @@ use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProposalsController extends FOSRestController
 {
     /**
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Get a proposal",
-     *  statusCodes={
-     *    200 = "Returned when successful",
-     *    404 = "Returned when opinion is not found",
-     *  }
-     * )
-     *
      * @Get("/proposal_forms/{proposal_form_id}/proposals/{proposal_id}")
-     * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}, "repository_method": "find", "map_method_signature": true})
-     * @View(statusCode=200, serializerGroups={"Proposals", "ProposalFusions", "UsersInfos", "UserMedias", "ThemeDetails", "ProposalUserData", "Steps"})
      */
-    public function getProposalAction(Proposal $proposal)
+    public function getProposalAction()
     {
-        return [
-            'proposal' => $proposal,
-        ];
+        throw new BadRequestHttpException('Not supported anymore, use GraphQL API instead.');
     }
 
     /**
@@ -159,46 +139,6 @@ class ProposalsController extends FOSRestController
             CapcoAppBundleEvents::COMMENT_CHANGED,
             new CommentChangedEvent($comment, 'add')
         );
-    }
-
-    /**
-     * @Get("/steps/{step}/proposals/{proposal}/votes")
-     * @ParamConverter("step", options={"mapping": {"step": "id"}})
-     * @ParamConverter("proposal", options={"mapping": {"proposal": "id"}})
-     * @View(serializerGroups={"ProposalSelectionVotes", "UsersInfos", "UserMedias", "ProposalCollectVotes"})
-     */
-    public function getAllProposalVotesAction(AbstractStep $step, Proposal $proposal)
-    {
-        switch (true) {
-            case $step instanceof CollectStep:
-                $votes = $this->getDoctrine()->getRepository(ProposalCollectVote::class)->getVotesForProposalByStepId($proposal, $step->getId());
-                break;
-            case $step instanceof SelectionStep:
-                $votes = $this->getDoctrine()->getRepository(ProposalSelectionVote::class)->getVotesForProposalByStepId($proposal, $step->getId());
-                break;
-            default:
-                throw new NotFoundHttpException();
-        }
-
-        return [
-            'votes' => $votes,
-            'count' => count($votes),
-        ];
-    }
-
-    /**
-     * @Get("/proposals/{proposal}/posts")
-     * @ParamConverter("proposal", options={"mapping": {"proposal": "id"}})
-     * @View(serializerGroups={"Posts", "PostDetails", "UsersInfos", "UserMedias", "Themes"})
-     * @Cache(smaxage="60", public=true)
-     */
-    public function getProposalPostsAction(Proposal $proposal)
-    {
-        $posts = $this->get('capco.blog.post.repository')->getPublishedPostsByProposal($proposal);
-
-        return [
-            'posts' => $posts,
-        ];
     }
 
     /**
