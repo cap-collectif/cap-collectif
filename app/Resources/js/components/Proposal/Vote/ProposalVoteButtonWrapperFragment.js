@@ -15,14 +15,12 @@ type Props = {
   viewer: ProposalVoteButtonWrapperFragment_viewer,
   step: ProposalVoteButtonWrapperFragment_step,
   id: string,
-  style: ?Object,
   className: string,
 };
 
 export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
   static defaultProps = {
     id: undefined,
-    style: {},
     className: '',
   };
 
@@ -36,14 +34,11 @@ export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
   };
 
   render() {
-    const { id, viewer, step, proposal, style, className } = this.props;
+    const { id, viewer, step, proposal, className } = this.props;
     if (!viewer) {
       return (
         <LoginOverlay>
-          <Button
-            id={id}
-            style={style}
-            className={`mr-15 proposal__button__vote btn btn-success ${className}`}>
+          <Button id={id} bsStyle="success" className={className}>
             <FormattedMessage id="proposal.vote.add" />
           </Button>
         </LoginOverlay>
@@ -88,7 +83,7 @@ export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
           userHasVote={proposal.viewerHasVote}
           step={step}
           user={viewer}
-          className={`${className}`}
+          className={className}
           disabled={!proposal.viewerHasVote && !this.userHasEnoughCredits()}
         />
       </VoteButtonOverlay>
