@@ -30,6 +30,9 @@ export class ProposalsUserVotesStep extends React.Component<Props> {
 
   render() {
     const { step, dirty, submitting, dispatch } = this.props;
+    if (!step.viewerVotes) {
+      return;
+    }
 
     return (
       <div className="block">
@@ -113,7 +116,7 @@ export default createFragmentContainer(container, {
       votesHelpText
       open
       show_url
-      viewerVotes(orderBy: { field: POSITION, direction: ASC }) {
+      viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
         totalCount
         ...ProposalsUserVotesTable_votes
       }

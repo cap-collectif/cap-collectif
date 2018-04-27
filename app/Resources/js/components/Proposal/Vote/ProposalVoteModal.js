@@ -166,7 +166,7 @@ export default createFragmentContainer(container, {
     fragment ProposalVoteModal_step on ProposalStep {
       id
       ...ProposalsUserVotesTable_step
-      viewerVotes(orderBy: { field: POSITION, direction: ASC }) {
+      viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
         ...ProposalsUserVotesTable_votes
         edges {
           node {

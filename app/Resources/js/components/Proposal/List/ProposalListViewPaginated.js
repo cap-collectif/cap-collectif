@@ -34,9 +34,9 @@ export class ProposalListViewPaginated extends React.Component<Props> {
             <Button
               disabled={relay.isLoading()}
               onClick={() => {
-                relay.loadMore(30);
+                relay.loadMore(50);
               }}>
-              Load More
+              Charger plus
             </Button>
           )}
         </div>
@@ -69,7 +69,7 @@ export default createPaginationContainer(
           category: $category
           status: $status
           userType: $userType
-        ) @connection(key: "ProposalListViewPaginated_proposals") {
+        ) @connection(key: "ProposalListViewPaginated_proposals", filters: []) {
           totalCount
           ...ProposalList_proposals
           edges {

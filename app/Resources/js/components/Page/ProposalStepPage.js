@@ -102,7 +102,7 @@ export class ProposalStepPage extends React.Component<Props> {
             ({
               stepId: this.props.step.id,
               isAuthenticated: this.props.isAuthenticated,
-              count: 2,
+              count: 50,
               // $FlowFixMe
               ...this.initialRenderVars,
             }: ProposalStepPageQueryVariables)
