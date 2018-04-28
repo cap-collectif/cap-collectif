@@ -88,8 +88,12 @@ export class ProposalStepPage extends React.Component<Props> {
                 id
                 ...ProposalListView_step @arguments(count: $count)
                 ...ProposalStepPageHeader_step
+                ... on Step {
+                  kind
+                }
                 ... on CollectStep {
                   private
+                  ...DraftProposalList_step
                 }
                 ... on ProposalStep {
                   voteType
@@ -118,8 +122,9 @@ export class ProposalStepPage extends React.Component<Props> {
               }
               return (
                 <div>
-                  {/* $FlowFixMe */}
-                  {isAuthenticated && <DraftProposalList step={props.step} />}
+                  {isAuthenticated &&
+                    // $FlowFixMe
+                    step.kind === 'collect' && <DraftProposalList step={props.step} />}
                   {/* $FlowFixMe */}
                   <ProposalStepPageHeader step={props.step} />
                   <ProposalListFilters
