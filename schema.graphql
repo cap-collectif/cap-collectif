@@ -259,6 +259,7 @@ type CollectStep implements Node & Step & ProposalStep {
 
   # A list of contributor associated with the step.
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
+  viewerProposalDrafts: [Proposal!]!
 
   # A list of viewer votes associated with the step.
   viewerVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}): ProposalVoteConnection!
@@ -1677,7 +1678,6 @@ type Query {
   ): [Opinion!]!
   question(id: Int!): Question!
   availableQuestionnaires: [Questionnaire!]!
-  draftProposalsForUserInStep(stepId: ID!): [Proposal!]!
 
   # Fetches an object given its ID
   node(
