@@ -45,6 +45,10 @@ class GlobalIdResolver
         }
 
         if (!$node) {
+            $node = $this->container->get('capco.user.repository')->find($uuid);
+        }
+
+        if (!$node) {
             $node = $this->container->get('capco.questionnaire.repository')->find($uuid);
         }
 

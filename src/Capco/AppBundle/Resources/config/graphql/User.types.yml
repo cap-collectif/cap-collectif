@@ -169,16 +169,3 @@ User:
             neighborhood:
                 type: "String"
                 description: "Your localisation"
-            proposalVotes:
-              type: "ProposalVoteConnection!"
-              argsBuilder: "Relay::Connection"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ProposalVotesResolver", [value, args])'
-              args:
-                first:
-                  type: "Int"
-                  defaultValue: 100000
-                orderBy:
-                  type: "ProposalVotesOrder"
-                  defaultValue: { field: CREATED_AT, direction: DESC }
-                stepId:
-                  type: "ID"

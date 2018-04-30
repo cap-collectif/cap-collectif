@@ -1,20 +1,21 @@
-// @flow
-import * as React from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
+import React, { PropTypes } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import ProposalDetailLikersLabel from './ProposalDetailLikersLabel';
 import ProposalDetailLikersTooltipLabel from './ProposalDetailLikersTooltipLabel';
-import type { ProposalDetailLikers_proposal } from './__generated__/ProposalDetailLikers_proposal.graphql';
 
-type Props = {
-  proposal: ProposalDetailLikers_proposal,
-  componentClass: string,
-};
+const ProposalDetailLikers = React.createClass({
+  displayName: 'ProposalDetailLikers',
 
-export class ProposalDetailLikers extends React.Component<Props> {
-  static defaultProps = {
-    componentClass: 'span',
-  };
+  propTypes: {
+    proposal: PropTypes.object.isRequired,
+    componentClass: PropTypes.oneOf(['div', 'span']),
+  },
+
+  getDefaultProps() {
+    return {
+      componentClass: 'span',
+    };
+  },
 
   renderContent() {
     const { proposal } = this.props;
@@ -23,15 +24,13 @@ export class ProposalDetailLikers extends React.Component<Props> {
         placement="top"
         overlay={
           <Tooltip id={`proposal-${proposal.id}-likers-tooltip-`}>
-            {/* $FlowFixMe */}
-            <ProposalDetailLikersTooltipLabel proposal={proposal} />
+            <ProposalDetailLikersTooltipLabel likers={proposal.likers} />
           </Tooltip>
         }>
-        {/* $FlowFixMe */}
-        <ProposalDetailLikersLabel proposal={proposal} />
+        <ProposalDetailLikersLabel likers={proposal.likers} />
       </OverlayTrigger>
     );
-  }
+  },
 
   render() {
     const { proposal, componentClass } = this.props;
@@ -41,18 +40,7 @@ export class ProposalDetailLikers extends React.Component<Props> {
     }
 
     return null;
-  }
-}
-
-export default createFragmentContainer(ProposalDetailLikers, {
-  proposal: graphql`
-    fragment ProposalDetailLikers_proposal on Proposal {
-      id
-      likers {
-        id
-      }
-      ...ProposalDetailLikersLabel_proposal
-      ...ProposalDetailLikersTooltipLabel_proposal
-    }
-  `,
+  },
 });
+
+export default ProposalDetailLikers;

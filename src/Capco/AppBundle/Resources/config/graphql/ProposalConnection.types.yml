@@ -5,5 +5,3 @@ ProposalConnection:
         connectionFields:
             totalCount:
                 type: Int!
-            fusionCount:
-                type: Int!

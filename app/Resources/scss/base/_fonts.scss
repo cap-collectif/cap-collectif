@@ -45,13 +45,13 @@
 
 [data-icon]:before {
     font-family: "cap-collectif" !important;
-    content: attr(data-icon);
     font-style: normal !important;
-    font-weight: normal !important;
     font-variant: normal !important;
+    font-weight: normal !important;
+    line-height: 1;
+    content: attr(data-icon);
     text-transform: none !important;
     speak: none;
-    line-height: 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -593,22 +593,4 @@
 }
 .cap-id-8:before {
     content: "\e04f";
-}
-.cap-download-12:before {
-    content: "\e050";
-}
-.cap-attention:before {
-    content: "\e051";
-}
-.cap-setting-gears-1:before {
-    content: "\e053";
-}
-.cap-setting-adjustment:before {
-    content: "\e054";
-}
-.cap-android-options:before {
-    content: "\e055";
-}
-.cap-power-1:before {
-    content: "\e056";
 }

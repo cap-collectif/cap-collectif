@@ -45,9 +45,7 @@ export const LoginOverlay = React.createClass({
 
     const popover = (
       <Popover id="login-popover" title={<FormattedMessage id="vote.popover.title" />}>
-        <p>
-          <FormattedMessage id="vote.popover.body" />
-        </p>
+        <p>{<FormattedMessage id="vote.popover.body" />}</p>
         {showRegistrationButton &&
           !loginWithMonCompteParis && (
             <p>

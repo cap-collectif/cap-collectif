@@ -11,12 +11,20 @@ trait PrivatableTrait
      */
     private $private = false;
 
-    public function isPrivate(): bool
+    /**
+     * @return mixed
+     */
+    public function isPrivate()
     {
-        return $this->private ?? false;
+        return $this->private;
     }
 
-    public function setPrivate(bool $private)
+    /**
+     * @param mixed $private
+     *
+     * @return $this
+     */
+    public function setPrivate($private)
     {
         $this->private = $private;
 

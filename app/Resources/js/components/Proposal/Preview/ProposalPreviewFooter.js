@@ -1,20 +1,24 @@
 // @flow
 import * as React from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import type { ProposalPreviewFooter_proposal } from './__generated__/ProposalPreviewFooter_proposal.graphql';
 
 type Props = {
-  proposal: ProposalPreviewFooter_proposal,
+  proposal: Object,
+  stepId: string,
+  showVotes?: boolean,
+  showComments?: boolean,
 };
 
 export class ProposalPreviewFooter extends React.Component<Props> {
-  render() {
-    const { proposal } = this.props;
+  static defaultProps = {
+    showVotes: false,
+    showComments: false,
+  };
 
-    const showComments = proposal.form.commentable;
-    const showVotes = proposal.allVotesOnStep !== null;
+  render() {
+    const { proposal, stepId, showVotes, showComments } = this.props;
+    const votesCount = proposal.votesCountByStepId[stepId];
 
     if (!showVotes && !showComments) {
       return null;
@@ -41,14 +45,14 @@ export class ProposalPreviewFooter extends React.Component<Props> {
             </div>
           </div>
         )}
-        {proposal.allVotesOnStep && (
+        {showVotes && (
           <div className="card__counter card__counter-votes">
-            <div className="card__counter__value">{proposal.allVotesOnStep.totalCount}</div>
+            <div className="card__counter__value">{votesCount}</div>
             <div>
               <FormattedMessage
                 id="proposal.vote.count_no_nb"
                 values={{
-                  count: proposal.allVotesOnStep.totalCount,
+                  count: votesCount,
                 }}
               />
             </div>
@@ -59,21 +63,4 @@ export class ProposalPreviewFooter extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(ProposalPreviewFooter, {
-  proposal: graphql`
-    fragment ProposalPreviewFooter_proposal on Proposal
-      @argumentDefinitions(
-        stepId: { type: "ID!", nonNull: true }
-        isProfileView: { type: "Boolean", defaultValue: false }
-      ) {
-      id
-      form {
-        commentable
-      }
-      commentsCount
-      allVotesOnStep: votes(stepId: $stepId, first: 0) @skip(if: $isProfileView) {
-        totalCount
-      }
-    }
-  `,
-});
+export default ProposalPreviewFooter;

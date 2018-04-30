@@ -32,6 +32,13 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a budget v
       pullLeft={false}
       pullRight={false}
       stacked={false}
+    />
+    <Nav
+      bsClass="nav"
+      justified={false}
+      pullLeft={false}
+      pullRight={false}
+      stacked={false}
     >
       <li
         className="navbar-text widget__counter"
@@ -111,6 +118,13 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
     </li>
   </NavbarHeader>
   <NavbarCollapse>
+    <Nav
+      bsClass="nav"
+      justified={false}
+      pullLeft={false}
+      pullRight={false}
+      stacked={false}
+    />
     <Nav
       bsClass="nav"
       justified={false}
@@ -245,6 +259,13 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
       pullLeft={false}
       pullRight={false}
       stacked={false}
+    />
+    <Nav
+      bsClass="nav"
+      justified={false}
+      pullLeft={false}
+      pullRight={false}
+      stacked={false}
     >
       <li
         className="navbar-text widget__counter"
@@ -260,7 +281,7 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
         <span
           className="widget__counter__value"
         >
-          0
+          12
         </span>
       </li>
     </Nav>

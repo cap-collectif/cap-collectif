@@ -1,49 +1,99 @@
 // @flow
-import * as React from 'react';
+import React, { PropTypes } from 'react';
+import { Row } from 'react-bootstrap';
+import { connect, type MapStateToProps } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { graphql, createFragmentContainer } from 'react-relay';
-import ProposalsUserVotesStep from './ProposalsUserVotesStep';
-import type { ProposalsUserVotesPage_project } from './__generated__/ProposalsUserVotesPage_project.graphql';
+import ProposalUserVoteItem from './ProposalUserVoteItem';
+import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 
-type Props = {
-  project: ProposalsUserVotesPage_project,
-};
+const ProposalsUserVotesPage = React.createClass({
+  propTypes: {
+    userVotesByStepId: PropTypes.object.isRequired,
+    votableSteps: PropTypes.array.isRequired,
+  },
 
-class ProposalsUserVotesPage extends React.Component<Props> {
   render() {
-    const { project } = this.props;
+    const { votableSteps, userVotesByStepId } = this.props;
 
     return (
       <div>
         <div className="container container--custom text-center">
-          <h1 className="mb-0">
-            <FormattedMessage id="project.votes.title" />
-          </h1>
+          <h1 style={{ marginBottom: '0' }}>{<FormattedMessage id="project.votes.title" />}</h1>
         </div>
         <div className="container container--custom">
-          {project.votableSteps.length > 0 ? (
-            project.votableSteps
-              .filter(step => !!step.id)
-              .map((step, index) => <ProposalsUserVotesStep key={index} step={step} />)
+          {votableSteps.length > 0 ? (
+            votableSteps.map((step, index) => (
+              <div key={index} className="block">
+                {votableSteps.length > 1 ? (
+                  <h2>
+                    <a
+                      className="pull-left btn btn-default"
+                      href={step._links.show}
+                      style={{ marginRight: '15px' }}>
+                      <i className="cap cap-arrow-1-1" />
+                      <span> {<FormattedMessage id="project.votes.back" />}</span>
+                    </a>
+                    {`${step.title} `}
+                    {step.voteType === VOTE_TYPE_BUDGET ? (
+                      <FormattedMessage id="project.votes.type.budget" />
+                    ) : (
+                      <FormattedMessage id="project.votes.type.simple" />
+                    )}
+                  </h2>
+                ) : (
+                  <p>
+                    <a className="btn btn-default" href={step._links.show}>
+                      <i className="cap cap-arrow-1-1" />
+                      <span> {<FormattedMessage id="project.votes.back" />}</span>
+                    </a>
+                  </p>
+                )}
+                {step.votesHelpText && (
+                  <div dangerouslySetInnerHTML={{ __html: step.votesHelpText }} />
+                )}
+                <h3>
+                  <FormattedMessage
+                    id="project.votes.nb"
+                    values={{
+                      num: userVotesByStepId[step.id].length,
+                    }}
+                  />
+                </h3>
+                <Row className="proposals-user-votes__table">
+                  {userVotesByStepId[step.id].map((proposal, index2) => (
+                    <ProposalUserVoteItem key={index2} proposal={proposal} step={step} />
+                  ))}
+                </Row>
+              </div>
+            ))
           ) : (
-            <p>
-              <FormattedMessage id="project.votes.no_active_step" />
-            </p>
+            <p>{<FormattedMessage id="project.votes.no_active_step" />}</p>
           )}
         </div>
       </div>
     );
-  }
-}
+  },
+});
 
-export default createFragmentContainer(ProposalsUserVotesPage, {
-  project: graphql`
-    fragment ProposalsUserVotesPage_project on Project {
-      id
-      votableSteps {
-        id
-        ...ProposalsUserVotesStep_step @arguments(isAuthenticated: $isAuthenticated)
+const mapStateToProps: MapStateToProps<*, *, *> = (state, props) => {
+  const currentUserVotesByStepId = state.proposal.userVotesByStepId;
+  const userVotesByStepId = {};
+  for (const stepId in props.userVotesByStepId) {
+    if (stepId && Object.prototype.hasOwnProperty.call(props.userVotesByStepId, stepId)) {
+      userVotesByStepId[stepId] = [];
+      for (const voteId of currentUserVotesByStepId[stepId]) {
+        const vote = props.userVotesByStepId[stepId].find(v => v.id === voteId);
+        userVotesByStepId[stepId].push(vote);
       }
     }
-  `,
-});
+  }
+  return {
+    votableSteps: state.project.projectsById[state.project.currentProjectById].steps.filter(
+      step => step.votable,
+    ),
+    currentUserVotesByStepId: undefined,
+    userVotesByStepId,
+  };
+};
+
+export default connect(mapStateToProps)(ProposalsUserVotesPage);

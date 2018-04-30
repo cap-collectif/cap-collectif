@@ -3,18 +3,31 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalPreviewVote } from './ProposalPreviewVote';
-import { $refType } from '../../../mocks';
 
 describe('<ProposalPreviewVote />', () => {
+  const proposal = {
+    id: 'proposal1',
+    votableStepId: 'step3',
+    referer: 'http://capco.test',
+    votesCountByStepId: {
+      '2': 0,
+    },
+    commentsCount: 5,
+    selections: [],
+    votesByStepId: {
+      selectionstep1: [],
+      collectstep1: [],
+    },
+    viewerCanSeeEvaluation: true,
+  };
+
   const props = {
-    proposal: { $refType, id: '1' },
-    step: { $refType },
-    viewer: null,
+    className: '',
+    referer: 'http://capco.test',
   };
 
   it('should render a proposal preview vote', () => {
-    // $FlowFixMe
-    const wrapper = shallow(<ProposalPreviewVote {...props} />);
+    const wrapper = shallow(<ProposalPreviewVote proposal={proposal} {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

@@ -2,18 +2,15 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { ProposalDraftAlert } from './ProposalDraftAlert';
-import { $refType } from '../../../mocks';
+import ProposalDraftAlert from './ProposalDraftAlert';
 
 describe('<ProposalDraftAlert />', () => {
   const proposal = {
-    publicationStatus: 'DRAFT',
-    $refType,
+    isDraft: true,
   };
 
   const proposalNotInDraft = {
-    publicationStatus: 'PUBLISHED',
-    $refType,
+    isDraft: false,
   };
 
   it('should render draft alert', () => {

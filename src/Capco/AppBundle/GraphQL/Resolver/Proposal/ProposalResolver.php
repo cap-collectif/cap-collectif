@@ -162,16 +162,20 @@ class ProposalResolver implements ContainerAwareInterface
         return $proposal->getProposalEvaluation();
     }
 
-    public function resolveDraftProposalsForUserInStep(CollectStep $step, User $user): array
+    public function resolveDraftProposalsForUserInStep(string $stepId, $user): array
     {
+        if (!$user instanceof User) {
+            return [];
+        }
+
         $proposalRep = $this->container->get('capco.proposal.repository');
 
         $proposalForm = $this->container->get('capco.proposal_form.repository')->findOneBy([
-            'step' => $step->getId(),
+            'step' => $stepId,
         ]);
 
         if (!$proposalForm) {
-            throw new UserError(sprintf('Unknown proposal form for step "%d"', $step->getId()));
+            throw new UserError(sprintf('Unknown proposal form for step "%d"', $stepId));
         }
 
         $proposals = $proposalRep->findBy([

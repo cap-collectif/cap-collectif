@@ -3,13 +3,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalPageHeader } from './ProposalPageHeader';
-import { $refType, $fragmentRefs } from '../../../mocks';
 
 describe('<ProposalPageHeader />', () => {
+  // $FlowFixMe $refType
   const proposal = {
-    $refType,
-    $fragmentRefs,
-    id: '1',
     title: 'titre',
     theme: {
       title: 'titre du theme',
@@ -26,11 +23,8 @@ describe('<ProposalPageHeader />', () => {
     publicationStatus: 'PUBLISHED',
     show_url: 'true',
   };
-
+  // $FlowFixMe $refType
   const proposalWithoutTheme = {
-    $refType,
-    $fragmentRefs,
-    id: '1',
     title: 'titre',
     theme: null,
     author: {
@@ -49,18 +43,30 @@ describe('<ProposalPageHeader />', () => {
   const props = {
     className: '',
     referer: 'http://capco.test',
+    oldProposal: {
+      selections: [],
+      votesByStepId: {
+        selectionstep1: [],
+        collectstep1: [],
+      },
+      votableStepId: 'selectionstep1',
+      votesCountByStepId: {
+        selectionstep1: 0,
+        collectstep1: 0,
+      },
+      isDraft: false,
+      viewerCanSeeEvaluation: true,
+    },
   };
 
   it('should render a proposal header', () => {
-    const wrapper = shallow(
-      <ProposalPageHeader step={null} proposal={proposal} viewer={null} {...props} />,
-    );
+    const wrapper = shallow(<ProposalPageHeader proposal={proposal} isAuthenticated {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should not render theme if proposal has none', () => {
     const wrapper = shallow(
-      <ProposalPageHeader proposal={proposalWithoutTheme} step={null} viewer={null} {...props} />,
+      <ProposalPageHeader proposal={proposalWithoutTheme} isAuthenticated {...props} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

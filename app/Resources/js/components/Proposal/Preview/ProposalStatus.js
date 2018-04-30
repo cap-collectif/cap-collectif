@@ -1,39 +1,41 @@
-// @flow
-import * as React from 'react';
+import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-import { graphql, createFragmentContainer } from 'react-relay';
 import CardStatus from '../../Ui/Card/CardStatus';
-import type { ProposalStatus_proposal } from './__generated__/ProposalStatus_proposal.graphql';
 
-type Props = {
-  proposal: ProposalStatus_proposal,
-};
+const ProposalStatus = React.createClass({
+  propTypes: {
+    proposal: PropTypes.object.isRequired,
+    stepId: PropTypes.string,
+  },
 
-export class ProposalStatus extends React.Component<Props> {
-  render() {
-    const status = this.props.proposal.status;
-    if (!status) {
-      return null;
-    }
-    const statusClasses = {};
-    statusClasses[`status--${status.color}`] = true;
+  getDefaultProps() {
+    return {
+      stepId: null,
+    };
+  },
 
-    return <CardStatus className={classNames(statusClasses)}>{status && status.name}</CardStatus>;
-  }
-}
-
-export default createFragmentContainer(ProposalStatus, {
-  proposal: graphql`
-    fragment ProposalStatus_proposal on Proposal
-      @argumentDefinitions(
-        stepId: { type: "ID", nonNull: true }
-        isProfileView: { type: "Boolean", defaultValue: false }
-      ) {
-      id
-      status(step: $stepId) @skip(if: $isProfileView) {
-        name
-        color
+  getStatus() {
+    const { proposal, stepId } = this.props;
+    if (stepId) {
+      const selection = proposal.selections.filter(sel => {
+        return sel.step.id === stepId;
+      });
+      if (selection.length > 0) {
+        return selection[0].status;
       }
     }
-  `,
+    return proposal.status;
+  },
+
+  render() {
+    const status = this.getStatus();
+    const statusClasses = {};
+    if (status) {
+      statusClasses[`status--${status.color}`] = true;
+    }
+
+    return <CardStatus className={classNames(statusClasses)}>{status && status.name}</CardStatus>;
+  },
 });
+
+export default ProposalStatus;
