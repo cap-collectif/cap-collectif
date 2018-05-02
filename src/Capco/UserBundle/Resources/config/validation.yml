@@ -23,7 +23,7 @@ Capco\UserBundle\Entity\User:
     facebookUrl:
       - Url: { groups: [profile] }
       - Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrl: { social_network: facebook, groups: [profile] }
-    googleUrl:
+    linkedInUrl:
       - Url: { groups: [profile] }
       - Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrl: { social_network: gplus, groups: [profile] }
     Media:

@@ -30,7 +30,7 @@ class ProfileFormType extends AbstractType
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => false,
             ])
-            ->add('googleUrl', null, [
+            ->add('linkedInUrl', null, [
                 'label' => 'user.profile.edit.gplus',
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => false,

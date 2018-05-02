@@ -161,7 +161,7 @@ class UserAdmin extends BaseAdmin
             ->add('facebookUrl', 'url')
             ->add('facebook_id')
             ->add('facebook_access_token')
-            ->add('googleUrl', 'url')
+            ->add('linkedInUrl', 'url')
             ->add('google_id')
             ->add('google_access_token')
             ->add('twitterUrl', 'url')
@@ -255,7 +255,7 @@ class UserAdmin extends BaseAdmin
             ->end()
             ->with('Social')
             ->add('facebookUrl', null, ['required' => false])
-            ->add('googleUrl', null, ['required' => false])
+            ->add('linkedInUrl', null, ['required' => false])
             ->add('twitterUrl', null, ['required' => false])
             ->end()
         ;
