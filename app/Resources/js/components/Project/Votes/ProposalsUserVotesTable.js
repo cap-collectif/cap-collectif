@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Row } from 'react-bootstrap';
+import styled from 'styled-components';
 import { reduxForm, FieldArray, arrayMove, type FieldArrayProps, type FormProps } from 'redux-form';
 import { connect, type MapStateToProps } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
@@ -11,6 +12,8 @@ import {
   type DropResult,
   type DraggableProvided,
   type DroppableProvided,
+  type DraggableStateSnapshot,
+  type DroppableStateSnapshot,
 } from 'react-beautiful-dnd';
 import ProposalUserVoteItem from './ProposalUserVoteItem';
 import type { ProposalsUserVotesTable_step } from './__generated__/ProposalsUserVotesTable_step.graphql';
@@ -31,6 +34,22 @@ type VotesProps = FieldArrayProps &
   RelayProps & {
     deletable: boolean,
   };
+
+const Wrapper = styled.div`
+    #background-color: ${({ isDraggingOver }) => (isDraggingOver ? 'blue' : 'grey')};
+    display: flex;
+    flex-direction: column;
+    #opacity: ${({ isDropDisabled }) => (isDropDisabled ? 0.5 : 'inherit')};
+    transition: background-color 0.1s ease, opacity 0.1s ease;
+    user-select: none;
+`;
+
+const DraggableItem = styled.div`
+  #background-color: ${({ isDragging }) => (isDragging ? 'green' : 'white')};
+  #box-shadow: ${({ isDragging }) => (isDragging ? `2px 2px 1px rgba(0,0,0,0.2)` : 'none')};
+  user-select: none;
+  transition: background-color 0.1s ease;
+`;
 
 const renderMembers = ({ fields, votes, step, deletable }: VotesProps) => {
   return (
@@ -55,29 +74,40 @@ const renderDraggableMembers = ({ fields, votes, step, deletable }: VotesProps) 
   }
   return (
     <div>
-      {fields.map((member, key) => {
-        const voteId = fields.get(key).id;
+      {fields.map((member, index) => {
+        const voteId = fields.get(index).id;
         const voteEdge =
           votes.edges &&
           votes.edges.filter(Boolean).filter(edge => edge.node && edge.node.id === voteId)[0];
         if (!voteEdge) return null;
         const vote = voteEdge.node;
         return (
-          <Draggable key={key} draggableId={vote.proposal.id} index={key}>
-            {(provided: DraggableProvided) => (
-              <div
-                ref={provided.innerRef}
-                {...provided.draggableProps}
-                {...provided.dragHandleProps}>
-                {/* $FlowFixMe */}
-                <ProposalUserVoteItem
-                  member={member}
-                  vote={vote}
-                  step={step}
-                  onDelete={deletable ? () => fields.remove(key) : null}
-                />
-              </div>
-            )}
+          <Draggable key={vote.proposal.id} draggableId={vote.proposal.id} index={index}>
+            {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => {
+              const child = (
+                <div>
+                  <DraggableItem
+                    innerRef={provided.innerRef}
+                    isDragging={snapshot.isDragging}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}>
+                    {/* $FlowFixMe */}
+                    <ProposalUserVoteItem
+                      member={member}
+                      vote={vote}
+                      step={step}
+                      onDelete={deletable ? () => fields.remove(index) : null}
+                    />
+                  </DraggableItem>
+                  {provided.placeholder}
+                </div>
+              );
+              // Use portal here https://github.com/atlassian/react-beautiful-dnd/blob/master/stories/src/portal/portal-app.jsx
+              // This will fix position in the modal
+              // TODO @Amelie52
+              // https://github.com/atlassian/react-beautiful-dnd#warning-position-fixed
+              return child;
+            }}
           </Draggable>
         );
       })}
@@ -85,13 +115,24 @@ const renderDraggableMembers = ({ fields, votes, step, deletable }: VotesProps) 
   );
 };
 
-class ProposalsUserVotesTable extends React.Component<Props> {
+export class ProposalsUserVotesTable extends React.Component<Props> {
+  onDragStart = () => {
+    // Add a little vibration if the browser supports it.
+    // Add's a nice little physical feedback
+    if (window.navigator.vibrate) {
+      window.navigator.vibrate(100);
+    }
+  };
+
   onDragEnd = (result: DropResult) => {
     // dropped outside the list
     if (!result.destination) {
       return;
     }
-
+    // no movement
+    if (result.destination.index === result.source.index) {
+      return;
+    }
     this.props.dispatch(
       arrayMove(this.props.form, 'votes', result.source.index, result.destination.index),
     );
@@ -115,21 +156,26 @@ class ProposalsUserVotesTable extends React.Component<Props> {
     }
 
     return (
-      <Row className="proposals-user-votes__table">
-        <DragDropContext onDragEnd={this.onDragEnd}>
+      <Row className="proposals-user-votes__table" style={{ boxSizing: 'border-box' }}>
+        <DragDropContext onDragEnd={this.onDragEnd} onDragStart={this.onDragStart}>
           <Droppable droppableId={`droppable${form}`}>
-            {(provided: DroppableProvided) => (
-              <div ref={provided.innerRef}>
-                <FieldArray
-                  step={step}
-                  votes={votes}
-                  deletable={deletable}
-                  name="votes"
-                  component={renderDraggableMembers}
-                />
-                {provided.placeholder}
-              </div>
-            )}
+            {(provided: DroppableProvided, snapshot: DroppableStateSnapshot) => {
+              return (
+                <Wrapper
+                  isDraggingOver={snapshot.isDraggingOver}
+                  innerRef={provided.innerRef}
+                  {...provided.droppableProps}>
+                  <FieldArray
+                    step={step}
+                    votes={votes}
+                    deletable={deletable}
+                    name="votes"
+                    component={renderDraggableMembers}
+                  />
+                  {provided.placeholder}
+                </Wrapper>
+              );
+            }}
           </Droppable>
         </DragDropContext>
       </Row>
