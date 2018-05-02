@@ -41,3 +41,8 @@ services:
   comment_delete.processor:
     class: Capco\AppBundle\Processor\Comment\CommentDeleteProcessor
     arguments: ["@capco.comment_notifier"]
+  user_archive_request.processor:
+    class: Capco\AppBundle\Processor\UserArchive\UserArchiveRequestProcessor
+    arguments:
+      - '@capco.user_archive.repository'
+      - '@capco.user_archive_notifier'

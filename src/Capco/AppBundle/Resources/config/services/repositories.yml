@@ -278,3 +278,8 @@ services:
     class: Capco\AppBundle\Repository\NewsletterSubscriptionRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:NewsletterSubscription']
+
+  capco.user_archive.repository:
+    class: Capco\AppBundle\Repository\UserArchiveRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:UserArchive']
