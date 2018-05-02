@@ -341,7 +341,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             divClassName="col-sm-4"
                           />
                         </div>
-                        <div className="col-sm-4">
+                        <div className="col-sm-4 btn--delete">
                           <OverlayTrigger
                             trigger="click"
                             placement="top"
@@ -373,7 +373,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             divClassName="col-sm-4"
                           />
                         </div>
-                        <div className="col-sm-4">
+                        <div className="col-sm-4 btn--delete">
                           <OverlayTrigger
                             trigger="click"
                             placement="top"
@@ -413,7 +413,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             </option>
                           </Field>
                         </div>
-                        <div className="col-sm-2">
+                        <div className="col-sm-4 btn--delete">
                           <OverlayTrigger
                             trigger="click"
                             placement="top"
@@ -484,26 +484,26 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               optionClasses={'option classes'}
                             />
                           </Col>
-                          <div className="col-sm-2">
-                            <OverlayTrigger
-                              trigger="click"
-                              placement="top"
-                              rootClose
-                              ref="dateOfBirth"
-                              overlay={this.popover('dateOfBirth')}>
-                              <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                                <a className="personal-data-delete-field" id="personal-data-dateOfBirth">
-                                  <i className="icon cap-ios-close"></i>
-                                </a>
-                              </OverlayTrigger>
+                        </div>
+                        <div className="col-sm-2 btn--delete">
+                          <OverlayTrigger
+                            trigger="click"
+                            placement="top"
+                            rootClose
+                            ref="dateOfBirth"
+                            overlay={this.popover('dateOfBirth')}>
+                            <OverlayTrigger placement="top" overlay={tooltipDelete}>
+                              <a className="personal-data-delete-field" id="personal-data-dateOfBirth">
+                                <i className="icon cap-ios-close"></i>
+                              </a>
                             </OverlayTrigger>
-                          </div>
+                          </OverlayTrigger>
                         </div>
                       </div>
                     )}
                     {hasAddressData(viewer, hasValue) && (
                       <div className="capco_horizontal_field_with_border_top">
-                        <div className="col-sm-2" style={{float: 'right'}}>
+                        <div className="col-sm-11 btn--delete">
                           <OverlayTrigger
                             trigger="click"
                             placement="top"
@@ -600,7 +600,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               addonBefore="France +33"
                             />
                           </div>
-                          <div className="col-sm-4">
+                          <div className="col-sm-4 btn--delete">
                             <OverlayTrigger
                               trigger="click"
                               placement="top"
