@@ -1,0 +1,8 @@
+DeleteUserContributionsInputPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            userId:
+                type: "String!"
+                description: "user id"
+

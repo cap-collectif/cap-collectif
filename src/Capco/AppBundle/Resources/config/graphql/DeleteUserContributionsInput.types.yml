@@ -1,0 +1,11 @@
+DeleteUserContributionsInput:
+    type: relay-mutation-input
+    config:
+        description: ""
+        fields:
+            removal:
+              type: "String!"
+              description: "Define if this is an Hard or Soft account removal"
+            userId:
+              type: "String!"
+              description: "The user who will be removed "

@@ -14,7 +14,7 @@ class ContributionManager
         $this->em = $em;
     }
 
-    public function republishContributions(User $user)
+    public function republishContributions(User $user): bool
     {
         $republishedCount = 0;
         foreach ($user->getContributions() as $contribution) {
@@ -25,7 +25,7 @@ class ContributionManager
         return $republishedCount > 0;
     }
 
-    public function depublishContributions(User $user)
+    public function depublishContributions(User $user): bool
     {
         $expiredCount = 0;
         foreach ($user->getContributions() as $contribution) {
@@ -34,5 +34,9 @@ class ContributionManager
         }
 
         return $expiredCount > 0;
+    }
+
+    public function deleteContributions(User $user): bool
+    {
     }
 }

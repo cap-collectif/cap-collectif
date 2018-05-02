@@ -112,6 +112,7 @@
         <field name="sourcesCount" column="sources_count" type="integer" nullable="false" />
         <field name="opinionsCount" column="opinions_count" type="integer" nullable="false" />
         <field name="opinionVersionsCount" column="opinion_versions_count" type="integer" nullable="false" />
+        <field name="deletedAt" column="deleted_at" type="datetime" nullable="true" />
 
         <field name="alertExpirationSent" column="alert_expiration_sent" type="boolean" nullable="false" />
 

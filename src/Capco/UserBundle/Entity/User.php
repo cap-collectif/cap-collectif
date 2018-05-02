@@ -224,6 +224,8 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     protected $emailConfirmationSentAt = null;
 
+    protected $deletedAt = null;
+
     protected $smsConfirmationSentAt = null;
     protected $smsConfirmationCode = null;
     protected $phoneConfirmed = false;
@@ -1093,6 +1095,18 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public function setEmailConfirmationSentAt(\DateTime $date = null)
     {
         $this->emailConfirmationSentAt = $date;
+
+        return $this;
+    }
+
+    public function getDeletedAt()
+    {
+        return $this->deletedAt;
+    }
+
+    public function setDeletedAt(\DateTime $date = null)
+    {
+        $this->deletedAt = $date;
 
         return $this;
     }
