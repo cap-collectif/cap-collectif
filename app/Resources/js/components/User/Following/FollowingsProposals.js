@@ -42,7 +42,7 @@ export class FollowingsProposals extends Component<Props, State> {
     });
     return (
       <div>
-        <h2>
+        <h2 className="page-header">
           <FormattedMessage id="followings" />
           {Object.keys(projectsById).length > 0 ? (
             <Collapse style={{ float: 'right' }} in={this.state.open}>

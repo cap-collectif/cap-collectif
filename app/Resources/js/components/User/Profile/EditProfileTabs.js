@@ -49,7 +49,7 @@ export class EditProfileTabs extends Component<Props> {
     if (hash) {
       return this.getHashKey(hash);
     }
-    return 'account';
+    return 'profile';
   }
 
   render() {
@@ -136,9 +136,7 @@ export class EditProfileTabs extends Component<Props> {
                 )}
               </Tab.Pane>
               <Tab.Pane eventKey="notifications">
-                <Panel header={<FormattedMessage id="profile.account.notifications.title"/>}>
-                  <NotificationsForm viewer={viewer}/>
-                </Panel>
+                <NotificationsForm viewer={viewer}/>
               </Tab.Pane>
               <Tab.Pane eventKey="followings">
                 <FollowingsProposals viewer={viewer}/>

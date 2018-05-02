@@ -86,7 +86,6 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
 };
 
 export class Profile extends Component<Props> {
-
   render() {
     const {
       viewer,
@@ -102,11 +101,11 @@ export class Profile extends Component<Props> {
 
     return (
       <Panel id="capco_horizontal_form">
-        <h2>
+        <h2 className="page-header">
           <FormattedMessage id="user.edition"/>
         </h2>
         <form onSubmit={handleSubmit} className="form-horizontal">
-          <div className="capco_horizontal_field_with_border_top">
+          <div className="capco_horizontal_field_with_border_top" style={{border: 0}}>
             <label className="col-sm-3 control-label" htmlFor="profile_avatar">
               <FormattedMessage id="form.label_media"/>
             </label>
@@ -171,7 +170,7 @@ export class Profile extends Component<Props> {
                 name="biography"
                 component={component}
                 type="textarea"
-                id="personal-data-form-biography"
+                id="public-data-form-biography"
                 divClassName="col-sm-6"
               />
             </div>
@@ -185,7 +184,7 @@ export class Profile extends Component<Props> {
                 name="neighborhood"
                 component={component}
                 type="text"
-                id="personal-data-form-neighborhood"
+                id="public-data-form-neighborhood"
                 divClassName="col-sm-6"
               />
             </div>
@@ -199,7 +198,7 @@ export class Profile extends Component<Props> {
                 name="website"
                 component={component}
                 type="text"
-                id="personal-data-form-website"
+                id="public-data-form-website"
                 divClassName="col-sm-6"
               />
             </div>
@@ -218,7 +217,7 @@ export class Profile extends Component<Props> {
                 name="facebookUrl"
                 component={component}
                 type="text"
-                id="personal-data-form-username"
+                id="public-data-form-username"
                 divClassName="col-sm-6"
               />
             </div>
@@ -233,7 +232,7 @@ export class Profile extends Component<Props> {
                 name="twitterUrl"
                 component={component}
                 type="text"
-                id="personal-data-form-twitter"
+                id="public-data-form-twitter"
                 divClassName="col-sm-6"
               />
             </div>
@@ -248,7 +247,7 @@ export class Profile extends Component<Props> {
                 name="linkedInUrl"
                 component={component}
                 type="text"
-                id="personal-data-form-linkedIn"
+                id="public-data-form-linkedIn"
                 divClassName="col-sm-6"
               />
             </div>
@@ -258,7 +257,7 @@ export class Profile extends Component<Props> {
             <FormattedMessage id="confidentialite.title"/>
           </h2>
           <div className="capco_horizontal_field_with_border_top">
-            <div className="col-sm-2"></div>
+            <div className="col-sm-3"></div>
             <Field
               id="profilePageIndexed"
               name="profilePageIndexed"
@@ -274,7 +273,8 @@ export class Profile extends Component<Props> {
             />
           </div>
           <div className="capco_horizontal_field_with_border_top">
-            <ButtonToolbar className="box-content__toolbar btn-center">
+            <div className="col-sm-3"></div>
+            <ButtonToolbar className="col-sm-6 pl-0">
               <Button
                 disabled={invalid || submitting}
                 type="submit"

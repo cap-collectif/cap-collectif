@@ -30,7 +30,6 @@ import ProposalListApp from './startup/ProposalListApp';
 import ProposalsUserVotesPageApp from './startup/ProposalsUserVotesPageApp';
 import PhoneProfileApp from './startup/PhoneProfileApp';
 import AccountProfileApp from './startup/AccountProfileApp';
-import AccountProfileNotificationsApp from './startup/AccountProfileNotificationsApp';
 import ShareButtonDropdownApp from './startup/ShareButtonDropdownApp';
 import ProposalCreateFusionButtonApp from './startup/ProposalCreateFusionButtonApp';
 import ProposalFormCreateButtonApp from './startup/ProposalFormCreateButtonApp';
@@ -70,7 +69,6 @@ ReactOnRails.registerStore({ appStore });
 
 ReactOnRails.register({
   AccountProfileFollowingsApp,
-  AccountProfileNotificationsApp,
   AdminModalsApp,
   RegistrationAdminApp,
   ChooseAUsernameApp,

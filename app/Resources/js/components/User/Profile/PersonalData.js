@@ -201,10 +201,13 @@ export class PersonalData extends Component<Props, PersonalDataState> {
     super(props);
     this.state = {
       showDeleteModal: false,
+      year: null,
+      month: null,
+      day: null,
     };
     if (props.viewer && props.viewer.dateOfBirth) {
       this.state = {
-        ...this.state,
+        showDeleteModal: false,
         year: getYear(props.viewer.dateOfBirth),
         month: getMonth(props.viewer.dateOfBirth),
         day: getDay(props.viewer.dateOfBirth),
@@ -312,8 +315,8 @@ export class PersonalData extends Component<Props, PersonalDataState> {
           </Alert>
         )}
         <Panel id="capco_horizontal_form">
-          <h2>
-            <FormattedMessage id="personal-data"/>
+          <h2 className="page-header">
+          <FormattedMessage id="personal-data"/>
           </h2>
           {!hasData(viewer, hasValue) && (
             <div className="capco_horizontal_field_with_border_top">
@@ -328,7 +331,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                 {hasData(viewer, hasValue) && (
                   <div>
                     {hasValue.firstname && (
-                      <div className="capco_horizontal_field_with_border_top">
+                      <div className="capco_horizontal_field_with_border_top" style={{border: 0}}>
                         <label className="col-sm-3 control-label">
                           <FormattedMessage id="form.label_firstname"/>
                         </label>
@@ -621,7 +624,8 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                   </div>
                 )}
                 <div className="capco_horizontal_field_with_border_top">
-                  <ButtonToolbar className="box-content__toolbar btn-center">
+                  <div className="col-sm-3"></div>
+                  <ButtonToolbar className="col-sm-4 pl-0">
                     <Button
                       disabled={invalid || submitting}
                       type="submit"
