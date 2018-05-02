@@ -123,6 +123,15 @@ class ProposalVoteModal extends React.Component<Props> {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <h2>
+            <FormattedMessage
+              id={step.votesRanking ? 'modal-ranking' : 'proposal.vote.modal.title'}
+            />
+            <FormattedMessage
+              id="global.opinionsCount"
+              values={{num: step.viewerVotes.totalCount}}
+            />
+          </h2>
           <ProposalsUserVotesTable onSubmit={this.onSubmit} step={step} votes={step.viewerVotes} />
           {step.votesHelpText && (
             <div className="well mb-0 mt-10">
@@ -184,6 +193,7 @@ export default createFragmentContainer(container, {
       ...ProposalsUserVotesTable_step
       viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
         ...ProposalsUserVotesTable_votes
+        totalCount
         edges {
           node {
             id
