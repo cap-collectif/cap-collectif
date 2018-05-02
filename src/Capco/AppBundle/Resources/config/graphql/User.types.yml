@@ -71,6 +71,8 @@ User:
                 type: "String"
                 resolve: "@=resolver('user_rolesText', [value])"
                 description: "Array of roles converted and translated to string."
+            archives:
+                type: "[Archive!]!"
             website:
                 type: "String"
             biography:
