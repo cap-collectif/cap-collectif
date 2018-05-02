@@ -17,7 +17,10 @@ export class DraftProposalList extends React.Component<Props> {
       'mb-40': true,
     });
 
-    if (this.props.step.viewerProposalDrafts.length === 0) {
+    if (
+      !this.props.step.viewerProposalDrafts ||
+      this.props.step.viewerProposalDrafts.length === 0
+    ) {
       return null;
     }
 
@@ -37,7 +40,7 @@ export default createFragmentContainer(
   DraftProposalList,
   graphql`
     fragment DraftProposalList_step on CollectStep {
-      viewerProposalDrafts {
+      viewerProposalDrafts @include(if: $isAuthenticated) {
         title
         show_url
       }

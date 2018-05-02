@@ -42,7 +42,7 @@ export default createFragmentContainer(ProposalsUserVotesPage, {
       id
       votableSteps {
         id
-        ...ProposalsUserVotesStep_step
+        ...ProposalsUserVotesStep_step @arguments(isAuthenticated: $isAuthenticated)
       }
     }
   `,

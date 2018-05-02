@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import Truncate from 'react-truncate';
 import { submit, isDirty, isSubmitting } from 'redux-form';
 import { connect, type MapStateToProps } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
@@ -54,16 +55,16 @@ export class ProposalsUserVotesStep extends React.Component<Props> {
             <FormattedMessage id="project.votes.type.simple" />
           )}
         </h2>
-        <div className="well mb-0 mt-10">
-          <p>
-            <b>
-              <FormattedMessage id="admin.fields.step.votesHelpText" />
-            </b>
-          </p>
-          <p>
-            <FormattedMessage id="modal-vote-ranking-explanations" />
-          </p>
-        </div>
+        {step.votesHelpText && (
+          <div className="well mb-0 mt-10">
+            <p>
+              <b>
+                <FormattedMessage id="admin.fields.step.votesHelpText" />
+              </b>
+            </p>
+            <Truncate lines={3}>{step.votesHelpText}</Truncate>
+          </div>
+        )}
         <h3 className="d-ib mr-10 mb-10">
           <FormattedMessage id="modal-ranking" />
         </h3>
@@ -89,7 +90,7 @@ export class ProposalsUserVotesStep extends React.Component<Props> {
               onSubmit={() => {
                 dispatch(submit(`proposal-user-vote-form-step-${step.id}`));
               }}
-              label="global.save"
+              label="global.save_modifications"
               isSubmitting={submitting}
               bsStyle="success"
             />

@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer, commitLocalUpdate } from 'react-relay';
 import { ConnectionHandler } from 'relay-runtime';
 import { Modal } from 'react-bootstrap';
+import Truncate from 'react-truncate';
 import { submit } from 'redux-form';
 import { connect, type MapStateToProps } from 'react-redux';
 import CloseButton from '../../Form/CloseButton';
@@ -116,11 +117,23 @@ class ProposalVoteModal extends React.Component<Props> {
         aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
-            <FormattedMessage id="proposal.vote.modal.title" />
+            <FormattedMessage
+              id={step.votesRanking ? 'vote-modal-title' : 'proposal.vote.modal.title'}
+            />
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <ProposalsUserVotesTable onSubmit={this.onSubmit} step={step} votes={step.viewerVotes} />
+          {step.votesHelpText && (
+            <div className="well mb-0 mt-10">
+              <p>
+                <b>
+                  <FormattedMessage id="admin.fields.step.votesHelpText" />
+                </b>
+              </p>
+              <Truncate lines={3}>{step.votesHelpText}</Truncate>
+            </div>
+          )}
         </Modal.Body>
         <Modal.Footer>
           <CloseButton className="pull-right" onClose={this.onHide} />
@@ -129,7 +142,7 @@ class ProposalVoteModal extends React.Component<Props> {
             onSubmit={() => {
               dispatch(submit(`proposal-user-vote-form-step-${step.id}`));
             }}
-            label="proposal.vote.confirm"
+            label="global.validate"
             isSubmitting={isSubmitting}
             bsStyle={!proposal.viewerHasVote || isSubmitting ? 'success' : 'danger'}
             style={{ marginLeft: '10px' }}
@@ -166,6 +179,8 @@ export default createFragmentContainer(container, {
     fragment ProposalVoteModal_step on ProposalStep
       @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
       id
+      votesRanking
+      votesHelpText
       ...ProposalsUserVotesTable_step
       viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
         ...ProposalsUserVotesTable_votes

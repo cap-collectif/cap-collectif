@@ -48,7 +48,7 @@ export default createFragmentContainer(ProposalPreviewVote, {
   `,
   step: graphql`
     fragment ProposalPreviewVote_step on Step {
-      ...ProposalVoteModal_step
+      ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated)
       ...ProposalVoteButtonWrapperFragment_step
     }
   `,
