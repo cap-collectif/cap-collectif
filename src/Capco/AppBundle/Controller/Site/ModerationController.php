@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
+use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
@@ -58,7 +59,7 @@ class ModerationController extends Controller
 
         $trashedMessage = '';
         if ($contribution instanceof Opinion) {
-            $this->get('swarrot.publisher')->publish('opinion.trash', new Message(
+            $this->get('swarrot.publisher')->publish(CapcoAppBundleMessagesTypes::OPINION_TRASH, new Message(
               json_encode([
                   'opinionId' => $contribution->getId(),
                 ])
@@ -67,7 +68,7 @@ class ModerationController extends Controller
         }
 
         if ($contribution instanceof Argument) {
-            $this->get('swarrot.publisher')->publish('argument.trash', new Message(
+            $this->get('swarrot.publisher')->publish(CapcoAppBundleMessagesTypes::ARGUMENT_TRASH, new Message(
                 json_encode([
                     'argumentId' => $contribution->getId(),
                   ])
