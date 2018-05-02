@@ -55,4 +55,5 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   isSubmitting: state.user.isSubmittingAccountForm,
 });
 
-export default connect(mapStateToProps)(ConfirmPasswordModal);
+export default
+connect(mapStateToProps)(ConfirmPasswordModal);

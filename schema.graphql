@@ -2274,6 +2274,12 @@ type User implements Node {
 
   # Your localisation
   neighborhood: String
+
+  # Your locale
+  locale: String
+
+  # Your timezone
+  timezone: String
 }
 
 # A connection to a list of items.
