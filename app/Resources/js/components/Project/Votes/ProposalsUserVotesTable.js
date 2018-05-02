@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Row } from 'react-bootstrap';
-import { reduxForm, FieldArray, arrayMove, type FormProps } from 'redux-form';
+import { reduxForm, FieldArray, arrayMove, type FieldArrayProps, type FormProps } from 'redux-form';
 import { connect, type MapStateToProps } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 import {
@@ -27,14 +27,20 @@ type Props = FormProps &
     deletable: boolean,
   };
 
-const renderMembers = ({ fields, votes, step, deletable }: Object) => {
+type VotesProps = FieldArrayProps &
+  RelayProps & {
+    deletable: boolean,
+  };
+
+const renderMembers = ({ fields, votes, step, deletable }: VotesProps) => {
   return (
     <div>
       {fields.map((member, index) => (
+        /* $FlowFixMe */
         <ProposalUserVoteItem
           key={index}
           member={member}
-          vote={votes.edges[index].node}
+          vote={votes.edges && votes.edges[index].node}
           step={step}
           onDelete={deletable ? () => fields.remove(index) : null}
         />
@@ -43,12 +49,19 @@ const renderMembers = ({ fields, votes, step, deletable }: Object) => {
   );
 };
 
-const renderDraggableMembers = ({ fields, votes, step, deletable }: Object) => {
+const renderDraggableMembers = ({ fields, votes, step, deletable }: VotesProps) => {
+  if (!votes.edges) {
+    return null;
+  }
   return (
     <div>
       {fields.map((member, key) => {
         const voteId = fields.get(key).id;
-        const vote = votes.edges.filter(edge => edge.node.id === voteId)[0].node;
+        const voteEdge =
+          votes.edges &&
+          votes.edges.filter(Boolean).filter(edge => edge.node && edge.node.id === voteId)[0];
+        if (!voteEdge) return null;
+        const vote = voteEdge.node;
         return (
           <Draggable key={key} draggableId={vote.proposal.id} index={key}>
             {(provided: DraggableProvided) => (
