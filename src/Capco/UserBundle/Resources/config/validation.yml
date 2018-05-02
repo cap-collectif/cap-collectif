@@ -25,8 +25,8 @@ Capco\UserBundle\Entity\User:
       - Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrl: { social_network: facebook, groups: [profile] }
     linkedInUrl:
       - Url: { groups: [profile] }
-      - Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrl: { social_network: gplus, groups: [profile] }
-    Media:
+      - Capco\AppBundle\Validator\Constraints\IsSocialNetworkUrl: { social_network: linkedIn, groups: [profile] }
+    media:
       - Valid: ~
     website:
       - Url: { groups: [profile] }

@@ -88,7 +88,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     /**
      * @var
      */
-    protected $Media;
+    protected $media;
 
     /**
      * @var string
@@ -563,7 +563,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
      */
     public function setMedia(Media $media = null)
     {
-        $this->Media = $media;
+        $this->media = $media;
 
         return $this;
     }
@@ -575,7 +575,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
      */
     public function getMedia()
     {
-        return $this->Media;
+        return $this->media;
     }
 
     /**
