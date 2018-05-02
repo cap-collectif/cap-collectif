@@ -72,9 +72,6 @@ gosu capco php bin/rabbit vhost:mapping:create --password=guest app/config/rabbi
 # Because of SF 2.8 and our GraphQLBundle's fork we rewarm cache
 gosu capco php bin/console cache:warmup --no-debug --env=prod --no-interaction
 
-# Ensure permissions on var
-chmod -R 777 var/
-
 echo "Starting daemon to populate elasticsearch..."
 /etc/service/php-fpm/populate_elasticsearch_index &
 

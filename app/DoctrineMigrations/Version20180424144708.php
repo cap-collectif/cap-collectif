@@ -44,7 +44,7 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
             /* ------********************************************************------ */
             $this->write('-> searching votes where user is not set then create if not exist');
             $votesWithoutUser = $this->connection->fetchAll(
-                "SELECT id,email,voter_id FROM votes WHERE voteType = 'idea' AND voter_id IS NULL",
+                "SELECT id,email,voter_id,username FROM votes WHERE voteType = 'idea' AND voter_id IS NULL",
                 ['']
             );
             $this->createUserFromAnonymous($em, $votesWithoutUser);
@@ -217,6 +217,7 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
         $cheaterCount = 0;
         foreach ($votesWithoutUser as $anonymous) {
             $email = trim(strtolower($anonymous['email']));
+            $username = trim(strtolower($anonymous['username']));
             $emailAlreadyUsed = $em->getRepository(User::class)->findOneBy(
                 [
                     'email' => $email,
@@ -225,6 +226,7 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
             if (!$emailAlreadyUsed && !$anonymous['voter_id'] && $email && !isset($users[$email])) {
                 $users[$email]['object'] = (new User())
                     ->setEmail($email)
+                    ->setUsername($username)
                     ->setPassword('');
                 $users[$email]['vote'][] = $anonymous['id'];
                 $em->persist($users[$email]['object']);
