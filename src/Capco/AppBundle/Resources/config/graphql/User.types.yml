@@ -169,9 +169,3 @@ User:
             neighborhood:
                 type: "String"
                 description: "Your localisation"
-            locale:
-                type: "String"
-                description: "Your locale"
-            timezone:
-                type: "String"
-                description: "Your timezone"
