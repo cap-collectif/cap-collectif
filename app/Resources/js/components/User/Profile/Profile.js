@@ -33,7 +33,7 @@ type Props = FormProps &
 
 const formName = 'viewerProfileForm';
 
-const validate = (values: Object, props: Props) => {
+const validate = (values: Object) => {
   const errors = {};
 
   const fields = ['biography', 'website', 'neighborhood', 'linkedIn', 'twitter', 'facebook', 'username'];
@@ -62,7 +62,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   delete values.media;
   const input = {
     ...values,
-    media: media,
+    media,
     userId: props.viewer.id
   };
 
