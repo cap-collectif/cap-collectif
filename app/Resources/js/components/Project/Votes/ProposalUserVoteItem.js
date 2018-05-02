@@ -22,6 +22,9 @@ export class ProposalUserVoteItem extends React.Component<Props> {
     const { onDelete, member, step, vote, ranking } = this.props;
     const proposal = vote.proposal;
 
+    // TODO use a value selector to update the label
+    const isAnonymous = true;
+
     const colTitleWidth = () => {
       if (step.votesRanking === true && step.voteType === 'BUDGET') {
         return 6;
@@ -85,7 +88,7 @@ export class ProposalUserVoteItem extends React.Component<Props> {
             <div className="d-flex">
               <Field
                 component={toggle}
-                label="anonymous-voting"
+                label={isAnonymous ? "public" : "admin.fields.idea_vote.private"}
                 name={`${member}.anonymous`}
                 normalize={val => !!val}
               />
