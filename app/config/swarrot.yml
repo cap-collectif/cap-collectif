@@ -54,6 +54,9 @@ swarrot:
         comment.delete:
             exchange: capco_direct_exchange
             routing_key: comment_delete
+        user_archive.request:
+            exchange: capco_direct_exchange
+            routing_key: user_archive_request
     consumers:
         elasticsearch_indexation:
             processor: elasticsearch_indexation.processor
