@@ -11,7 +11,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class ThemeRepository extends EntityRepository
 {
-    public function getLast($limit = 1, $offset = 0)
+    public function getLast(int $limit = 1, int $offset = 0): Paginator
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('c')
@@ -33,7 +33,7 @@ class ThemeRepository extends EntityRepository
         return new Paginator($query);
     }
 
-    public function getSearchResultsWithCounters($nbByPage = 8, $page = 1, $term = null)
+    public function getSearchResultsWithCounters(int $nbByPage = 8, int $page = 1, ?string $term = null): Paginator
     {
         if ($page < 1) {
             throw new \InvalidArgumentException(sprintf(
