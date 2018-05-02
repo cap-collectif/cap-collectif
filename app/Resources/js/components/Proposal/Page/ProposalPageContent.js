@@ -192,7 +192,7 @@ export default createFragmentContainer(ProposalPageContent, {
       media {
         url
       }
-      ...ProposalReportButton_proposal
+      ...ProposalReportButton_proposal @arguments(isAuthenticated: $isAuthenticated)
       publicationStatus
       title
       show_url
