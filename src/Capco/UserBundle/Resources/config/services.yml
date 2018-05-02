@@ -39,6 +39,12 @@ services:
     tags:
       - { name: form.type }
 
+  capco_user.public_data.form.type:
+    class: Capco\UserBundle\Form\Type\PublicDataType
+    arguments: ["@capco.toggle.manager"]
+    tags:
+      - { name: form.type }
+
   capco_user_notifications.listener:
     class: Capco\UserBundle\Listener\UserNotificationsListener
     tags:

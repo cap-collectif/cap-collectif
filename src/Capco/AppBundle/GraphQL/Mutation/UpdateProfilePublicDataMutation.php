@@ -2,15 +2,15 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\Form\Type\PersonalDataFormType;
+use Capco\UserBundle\Form\Type\PublicDataType;
 use Doctrine\ORM\EntityManagerInterface;
+use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Error\UserError;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactory;
+use Capco\UserBundle\Entity\User;
 
-class UpdateProfilePersonalDataMutation
+class UpdateProfilePublicDataMutation
 {
     private $em;
     private $formFactory;
@@ -36,7 +36,7 @@ class UpdateProfilePersonalDataMutation
         }
         unset($arguments['userId']);
 
-        $form = $this->formFactory->create(PersonalDataFormType::class, $user, ['csrf_protection' => false]);
+        $form = $this->formFactory->create(PublicDataType::class, $user, ['csrf_protection' => false]);
         try {
             $form->submit($arguments, false);
         } catch (\LogicException $e) {

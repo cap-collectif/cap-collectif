@@ -1,0 +1,38 @@
+UpdateProfilePublicDataInput:
+    type: relay-mutation-input
+    config:
+        description: "Update your public data"
+        fields:
+            userId:
+                type: "ID!"
+                description: "user id"
+            username:
+                type: "String!"
+                description: "Your username"
+            userType:
+                type: "String"
+                description: "Your user type"
+            biography:
+                type: "String"
+                description: "Your biography"
+            neighborhood:
+                type: "String"
+                description: "Your neighborhood"
+            website:
+                type: "String"
+                description: "Your website"
+            linkedInUrl:
+                type: "String"
+                description: "Your linkedIn"
+            facebookUrl:
+                type: "String"
+                description: "Your facebook"
+            twitterUrl:
+                type: "String"
+                description: "Your twitter"
+            profilePageIndexed:
+                type: "Boolean"
+                description: "Do you want to be indexed in web search engine ?"
+            media:
+                type: "ID"
+                description: "Current media id"

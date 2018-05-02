@@ -12,9 +12,6 @@ import {
   type FormProps,
   Field,
   SubmissionError,
-  unregisterField,
-  change,
-  formValueSelector
 } from 'redux-form';
 import {FormattedMessage, injectIntl, type IntlShape} from 'react-intl';
 import type Profile_viewer from './__generated__/Profile_viewer.graphql';
@@ -22,6 +19,7 @@ import type {Dispatch, State} from '../../../types';
 import component from "../../Form/Field";
 import AlertForm from "../../Alert/AlertForm";
 import UserAvatar from "../UserAvatar";
+import UpdateProfilePublicDataMutation from "../../../mutations/UpdateProfilePublicDataMutation";
 
 type RelayProps = { profileForm: Profile_viewer };
 type Props = FormProps &
@@ -38,48 +36,53 @@ const formName = 'viewerProfileForm';
 const validate = (values: Object, props: Props) => {
   const errors = {};
 
-  // const addressFields = ['address', 'address2', 'city', 'zipCode'];
-  // addressFields.forEach(value => {
-  //   if (value !== 'address2') {
-  //     if (!values[value] || values[value].length === 0) {
-  //       errors[value] = 'fill-or-delete-field';
-  //     }
-  //   }
-  //   if (values[value] && values[value].length <= 2) {
-  //     errors[value] = 'two-characters-minimum-required';
-  //   }
-  //   if (values[value] && values[value].length > 256) {
-  //     errors[value] = '256-characters-maximum-required';
-  //   }
-  // });
+  const fields = ['biography', 'website', 'neighborhood', 'linkedIn', 'twitter', 'facebook', 'username'];
+  fields.forEach(value => {
+    if (value === 'username') {
+      if (!values[value] || values[value].length === 0) {
+        errors[value] = 'fill-field';
+      }
+    }
+    if (values[value] && values[value].length <= 2) {
+      errors[value] = 'two-characters-minimum-required';
+    }
+    if (value !== 'biography') {
+      if (values[value] && values[value].length > 256) {
+        errors[value] = '256-characters-maximum-required';
+      }
+    }
+  });
 
   return errors;
 };
 
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const {intl} = props;
+  const media = typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null;
+  delete values.media;
   const input = {
     ...values,
+    media: media,
     userId: props.viewer.id
   };
 
-  // return UpdateProfilePersonalDataMutation.commit({input})
-  //   .then(response => {
-  //     if (!response.updateProfilePersonalData || !response.updateProfilePersonalData.viewer) {
-  //       throw new Error('Mutation "updateProfilePersonalData" failed.');
-  //     }
-  //   })
-  //   .catch(response => {
-  //     if (response.response.message) {
-  //       throw new SubmissionError({
-  //         _error: response.response.message,
-  //       });
-  //     } else {
-  //       throw new SubmissionError({
-  //         _error: intl.formatMessage({id: 'global.error.server.form'}),
-  //       });
-  //     }
-  //   });
+  return UpdateProfilePublicDataMutation.commit({input})
+    .then(response => {
+      if (!response.updateProfilePublicData || !response.updateProfilePublicData.viewer) {
+        throw new Error('Mutation "updateProfilePublicData" failed.');
+      }
+    })
+    .catch(response => {
+      if (response.response.message) {
+        throw new SubmissionError({
+          _error: response.response.message,
+        });
+      } else {
+        throw new SubmissionError({
+          _error: intl.formatMessage({id: 'global.error.server.form'}),
+        });
+      }
+    });
 };
 
 export class Profile extends Component<Props> {
@@ -95,7 +98,6 @@ export class Profile extends Component<Props> {
       submitting,
       userTypes,
       error,
-      hasValue
     } = this.props;
 
     return (
@@ -104,12 +106,11 @@ export class Profile extends Component<Props> {
           <FormattedMessage id="user.edition"/>
         </h2>
         <form onSubmit={handleSubmit} className="form-horizontal">
-          <div className="capco_horizontal_field_with_border_top" style={{border: 0}}>
+          <div className="capco_horizontal_field_with_border_top">
             <label className="col-sm-3 control-label" htmlFor="profile_avatar">
               <FormattedMessage id="form.label_media"/>
             </label>
             <UserAvatar className="col-sm-1" user={viewer}/>
-            <a href="" title=""><FormattedMessage id="global.delete"/></a>
             <div className="clearfix"></div>
             <div className="col-sm-3"></div>
             <Field
@@ -128,6 +129,7 @@ export class Profile extends Component<Props> {
               <Field
                 name="username"
                 component={component}
+                required
                 type="text"
                 id="profile-form-username"
                 divClassName="col-sm-6"
@@ -194,7 +196,7 @@ export class Profile extends Component<Props> {
             </label>
             <div>
               <Field
-                name="username"
+                name="website"
                 component={component}
                 type="text"
                 id="personal-data-form-website"
@@ -213,7 +215,7 @@ export class Profile extends Component<Props> {
             <div>
               <Field
                 placeholder="https://"
-                name="facebook"
+                name="facebookUrl"
                 component={component}
                 type="text"
                 id="personal-data-form-username"
@@ -228,7 +230,7 @@ export class Profile extends Component<Props> {
             <div>
               <Field
                 placeholder="https://"
-                name="twitter"
+                name="twitterUrl"
                 component={component}
                 type="text"
                 id="personal-data-form-twitter"
@@ -243,13 +245,33 @@ export class Profile extends Component<Props> {
             <div>
               <Field
                 placeholder="https://"
-                name="linkedIn"
+                name="linkedInUrl"
                 component={component}
                 type="text"
                 id="personal-data-form-linkedIn"
                 divClassName="col-sm-6"
               />
             </div>
+          </div>
+          <div className="clearfix"></div>
+          <h2>
+            <FormattedMessage id="confidentialite.title"/>
+          </h2>
+          <div className="capco_horizontal_field_with_border_top">
+            <div className="col-sm-2"></div>
+            <Field
+              id="profilePageIndexed"
+              name="profilePageIndexed"
+              component={component}
+              type="checkbox"
+              labelClassName="font-weight-normal"
+              children={
+                <FormattedMessage
+                  id="user.profile.edit.profilePageIndexed"
+                />
+              }
+              divClassName="col-sm-8"
+            />
           </div>
           <div className="capco_horizontal_field_with_border_top">
             <ButtonToolbar className="box-content__toolbar">
@@ -289,13 +311,14 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) =
     username: props.viewer.username ? props.viewer.username : null,
     biography: props.viewer.biography ? props.viewer.biography : null,
     website: props.viewer.website ? props.viewer.website : null,
-    facebook: props.viewer.facebookUrl ? props.viewer.facebookUrl : null,
-    linkedIn: props.viewer.linkedInUrl ? props.viewer.linkedInUrl : null,
-    twitter: props.viewer.twitterUrl ? props.viewer.twitterUrl : null,
-    isIndexProfilePage: props.viewer.profilePageIndexed ? props.viewer.profilePageIndexed : null,
-    media: props.viewer.media ? props.viewer.media.url : null,
+    facebookUrl: props.viewer.facebookUrl ? props.viewer.facebookUrl : null,
+    linkedInUrl: props.viewer.linkedInUrl ? props.viewer.linkedInUrl : null,
+    twitterUrl: props.viewer.twitterUrl ? props.viewer.twitterUrl : null,
+    profilePageIndexed: props.viewer.profilePageIndexed ? props.viewer.profilePageIndexed : null,
     userType: props.viewer.userType ? props.viewer.userType.id : null,
     neighborhood: props.viewer.neighborhood ? props.viewer.neighborhood : null,
+    media: props.viewer ? props.viewer.media : undefined,
+
   },
   userTypes: state.default.userTypes,
 });
@@ -308,6 +331,9 @@ export default createFragmentContainer(
     fragment Profile_viewer on User {
       id
       media {
+        id
+        name
+        size
         url
       }
       show_url

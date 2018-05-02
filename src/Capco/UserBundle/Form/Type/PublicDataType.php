@@ -4,13 +4,12 @@ namespace Capco\UserBundle\Form\Type;
 
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
-use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ProfileFormType extends AbstractType
+class PublicDataType extends AbstractType
 {
     private $toggleManager;
 
@@ -33,7 +32,7 @@ class ProfileFormType extends AbstractType
                 'required' => false,
             ])
             ->add('linkedInUrl', null, [
-                'label' => 'user.profile.edit.gplus',
+                'label' => 'user.profile.edit.linkedIn',
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => false,
             ])
@@ -47,22 +46,21 @@ class ProfileFormType extends AbstractType
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => false,
             ])
-            ->add('media', 'sonata_media_type', [
-                'provider' => 'sonata.media.provider.image',
-                'context' => 'default',
-                'required' => false,
-                'label' => 'user.profile.edit.media',
-                'translation_domain' => 'CapcoAppBundle',
-            ])
-            ->remove('lastname')
-            ->remove('firstname')
-            ->remove('phone')
+            ->add('media')
             ->add('profilePageIndexed', CheckboxType::class, [
                 'required' => false,
                 'label' => 'user.profile.edit.profilePageIndexed',
                 'label_attr' => ['style' => 'font-weight: normal; color: #000000'],
                 'translation_domain' => 'CapcoAppBundle',
             ])
+            ->add('website', 'url', array(
+                'label'    => 'form.label_website',
+                'required' => false,
+            ))
+            ->add('biography', 'textarea', array(
+                'label'    => 'form.label_biography',
+                'required' => false,
+            ))
         ;
 
         if ($this->toggleManager->isActive('user_type')) {
@@ -75,8 +73,15 @@ class ProfileFormType extends AbstractType
         }
     }
 
-    public function getParent()
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
     {
-        return 'sonata_user_profile';
+        $resolver->setDefaults(
+            array(
+                'data_class' => User::class,
+            )
+        );
     }
 }
