@@ -274,7 +274,7 @@ export class Profile extends Component<Props> {
             />
           </div>
           <div className="capco_horizontal_field_with_border_top">
-            <ButtonToolbar className="box-content__toolbar">
+            <ButtonToolbar className="box-content__toolbar btn-center">
               <Button
                 disabled={invalid || submitting}
                 type="submit"

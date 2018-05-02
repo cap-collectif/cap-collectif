@@ -102,7 +102,7 @@ export class ChangePasswordForm extends Component<Props> {
             name="new_password_confirmation"
             label={<FormattedMessage id="form.new_password_confirmation" />}
           />
-          <ButtonToolbar className="box-content__toolbar">
+          <ButtonToolbar className="box-content__toolbar btn-center">
             <Button
               disabled={invalid || pristine || submitting}
               type="submit"
