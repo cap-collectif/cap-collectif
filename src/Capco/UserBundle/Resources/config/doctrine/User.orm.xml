@@ -131,6 +131,13 @@
             <join-column name="notifications_configuration_id" referenced-column-name="id"/>
         </one-to-one>
 
+        <one-to-many target-entity="Capco\AppBundle\Entity\UserArchive" mapped-by="user" field="archives" orphan-removal="true">
+            <cascade>
+                <cascade-persist/>
+                <cascade-remove/>
+            </cascade>
+        </one-to-many>
+
         <one-to-many target-entity="Capco\AppBundle\Entity\Proposal" mapped-by="author" field="proposals">
 
         </one-to-many>

@@ -6,12 +6,12 @@ use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface;
+use Capco\AppBundle\Entity\UserArchive;
 use Capco\AppBundle\Entity\UserGroup;
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
 use Capco\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Util\Canonicalizer;
 use Sonata\UserBundle\Entity\BaseUser;
 use Sonata\UserBundle\Model\UserInterface;
@@ -232,12 +232,9 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     protected $followingProposals;
 
-    /**
-     * @var UserNotificationsConfiguration
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\UserNotificationsConfiguration", inversedBy="user", cascade={"remove", "persist"})
-     * @ORM\JoinColumn(name="notifications_configuration_id", referencedColumnName="id")
-     */
-    private $notificationsConfiguration;
+    protected $notificationsConfiguration;
+
+    protected $archives;
 
     /**
      * @var string
@@ -270,6 +267,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         $this->userGroups = new ArrayCollection();
         $this->followingProposals = new ArrayCollection();
         $this->notificationsConfiguration = new UserNotificationsConfiguration();
+        $this->archives = new ArrayCollection();
     }
 
     public function setSamlAttributes(string $idp, array $attributes)
@@ -1350,5 +1348,42 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public static function getElasticsearchSerializationGroups(): array
     {
         return ['Elasticsearch'];
+    }
+
+    public function addArchive(UserArchive $archive): self
+    {
+        if (!$this->archives->contains($archive)) {
+            $this->archives->add($archive);
+        }
+
+        $archive->setUser($this);
+
+        return $this;
+    }
+
+    public function getArchives(): Collection
+    {
+        return $this->archives;
+    }
+
+    public function setArchives(Collection $archives): self
+    {
+        $this->archives = $archives;
+
+        return $this;
+    }
+
+    public function removeArchive(UserArchive $archive): self
+    {
+        $this->archives->removeElement($archive);
+
+        return $this;
+    }
+
+    public function clearArchives(): self
+    {
+        $this->archives->clear();
+
+        return $this;
     }
 }
