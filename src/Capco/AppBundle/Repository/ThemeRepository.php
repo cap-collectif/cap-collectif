@@ -14,7 +14,7 @@ class ThemeRepository extends EntityRepository
     public function getLast($limit = 1, $offset = 0)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('c', 'i')
+            ->addSelect('c')
             ->leftJoin('t.projects', 'c')
             ->addOrderBy('t.position', 'ASC')
             ->addOrderBy('t.updatedAt', 'DESC')
@@ -43,7 +43,7 @@ class ThemeRepository extends EntityRepository
         }
 
         $qb = $this->getIsEnabledQueryBuilder();
-        $qb->addSelect('c, i')
+        $qb->addSelect('c')
             ->leftJoin('t.projects', 'c')
             ->leftJoin('t.events', 'events')
             ->leftJoin('t.posts', 'posts')
@@ -79,7 +79,7 @@ class ThemeRepository extends EntityRepository
     public function getOneBySlug($slug)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('a', 'am', 'm', 'p', 'i', 'post', 'e')
+            ->addSelect('a', 'am', 'm', 'p', 'post', 'e')
             ->leftJoin('t.Author', 'a')
             ->leftJoin('a.Media', 'am')
             ->leftJoin('t.Media', 'm')
