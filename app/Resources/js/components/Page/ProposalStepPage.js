@@ -93,7 +93,7 @@ export class ProposalStepPage extends React.Component<Props> {
                 }
                 ... on CollectStep {
                   private
-                  ...DraftProposalList_step
+                  ...DraftProposalList_step @arguments(isAuthenticated: $isAuthenticated)
                 }
                 ... on ProposalStep {
                   voteType
