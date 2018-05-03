@@ -1,7 +1,7 @@
 UpdateProfilePersonalDataInput:
     type: relay-mutation-input
     config:
-        description: "Update your personal data"
+        description: "Your personal data"
         fields:
             userId:
                 type: "ID!"

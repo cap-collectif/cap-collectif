@@ -16,6 +16,7 @@ Scenario: GraphQL client want to get the personal data of user authenticate as u
         zipCode
         city
         phone
+        gender
       }
     }"
   }
@@ -32,7 +33,8 @@ Scenario: GraphQL client want to get the personal data of user authenticate as u
         "address2": "2ieme etages",
         "zipCode": "75012",
         "city": "Paris",
-        "phone": "+33135492871"
+        "phone": "+33635492871",
+        "gender": "FEMALE"
       }
     }
   }
@@ -133,12 +135,13 @@ Scenario: GraphQL client want to get the personal data of user authenticate as a
         "address2": "2ieme etages",
         "zipCode": "75012",
         "city": "Paris",
-        "phone": "+33135492871"
+        "phone": "+33635492871"
       }
     }
   }
   """
 
+@security
 Scenario: GraphQL client want to get the personal data of user authenticated as pierre (other user)
   Given I am logged in to graphql as pierre
   And I send a GraphQL POST request:

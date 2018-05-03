@@ -27,13 +27,6 @@ class UpdateProfilePersonalDataMutation
     {
         $arguments = $input->getRawArguments();
 
-        if ($arguments['userId'] != $user->getId()) {
-            $this->logger->error(
-                __METHOD__.' : User with id '.$user->getId(
-                ).' try to get informations about user with id  '.$arguments['userId']
-            );
-            throw new UserError('Can\'t update !');
-        }
         unset($arguments['userId']);
 
         $form = $this->formFactory->create(PersonalDataFormType::class, $user, ['csrf_protection' => false]);

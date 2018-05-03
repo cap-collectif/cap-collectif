@@ -21,33 +21,34 @@ type Props = {
   viewer: EditProfileTabs_viewer,
 };
 
-export class EditProfileTabs extends Component<Props> {
-  getHashKey(hash: string) {
-    if (hash.indexOf('profile') !== -1) {
-      return 'profile';
-    }
-    if (hash.indexOf('account') !== -1) {
-      return 'account';
-    }
-    if (hash.indexOf('personal-data') !== -1) {
-      return 'personal-data';
-    }
-    if (hash.indexOf('password') !== -1) {
-      return 'password';
-    }
-    if (hash.indexOf('notifications') !== -1) {
-      return 'notifications';
-    }
-    if (hash.indexOf('followings') !== -1) {
-      return 'followings';
-    }
+const getHashKey = ((hash: string) => {
+  if (hash.indexOf('profile') !== -1) {
+    return 'profile';
+  }
+  if (hash.indexOf('account') !== -1) {
     return 'account';
   }
+  if (hash.indexOf('personal-data') !== -1) {
+    return 'personal-data';
+  }
+  if (hash.indexOf('password') !== -1) {
+    return 'password';
+  }
+  if (hash.indexOf('notifications') !== -1) {
+    return 'notifications';
+  }
+  if (hash.indexOf('followings') !== -1) {
+    return 'followings';
+  }
+  return 'account';
+});
+
+export class EditProfileTabs extends Component<Props> {
 
   getDefaultKey() {
     const hash = typeof window !== 'undefined' ? window.location.hash : null;
     if (hash) {
-      return this.getHashKey(hash);
+      return getHashKey(hash);
     }
     return 'profile';
   }
