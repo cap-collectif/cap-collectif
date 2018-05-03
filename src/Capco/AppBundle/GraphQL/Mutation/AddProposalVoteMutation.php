@@ -107,7 +107,8 @@ class AddProposalVoteMutation
         try {
             $this->em->flush();
         } catch (\Exception $e) {
-            throw new UserError('Sorry, please retry later.');
+            // Let's assume it's a Unique Exception
+            throw new UserError('proposal.vote.already_voted');
         }
 
         return ['vote' => $vote, 'viewer' => $user];
