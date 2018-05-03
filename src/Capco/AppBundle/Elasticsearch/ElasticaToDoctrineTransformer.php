@@ -68,14 +68,10 @@ class ElasticaToDoctrineTransformer
             $toFetchByType[$elasticaObject->getType()][] = $elasticaObject->getId();
         }
 
-        $objects = [];
-
         foreach ($toFetchByType as $type => $toFetchIds) {
             $objectClass = $this->getObjectClassFromType($type);
-            $objects[] = $this->findByIdentifiers($toFetchIds, $this->options['hydrate'], $objectClass);
+            $objects = array_merge($objects, $this->findByIdentifiers($toFetchIds, $this->options['hydrate'], $objectClass));
         }
-
-        $objects = array_merge(...$objects);
 
         $objectsCnt = \count($objects);
         $elasticaObjectsCnt = \count($elasticaObjects);
