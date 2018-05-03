@@ -2,8 +2,12 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Reporting;
+use Capco\AppBundle\Entity\Source;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -27,14 +31,12 @@ class DeleteUserContributionsMutation implements ContainerAwareInterface
     public function __invoke(Argument $input): array
     {
         $removalType = $input['removal'];
-        $user = $this->em->getRepository(User::class)->find($input['userId']);
-
-        $proposals = $this->em->getRepository(Proposal::class)->findBy(['user' => $user]);
-        $comments = $this->em->getRepository(Comment::class)->findBy(['user' => $user]);
+        $user = $this->em->getRepository(User::class)->find(['id' => $input['userId']]);
+        $contributions = $user->getContributions();
 
         if ('hard' === $removalType && $user) {
             $this->anonymizeUser($user);
-            $this->deleteProposalsAndCommentsContent($user, $proposals, $comments);
+            $this->deleteProposalsAndCommentsContent($user, $contributions);
         } elseif ('soft' === $removalType && $user) {
             $this->anonymizeUser($user);
         } elseif (!$user) {
@@ -50,9 +52,10 @@ class DeleteUserContributionsMutation implements ContainerAwareInterface
     {
         $usernameDeleted = $this->translator->trans('deleted-user', [], 'CapcoAppBundle');
 
-        $user->setEmail('');
         $user->setUsername($usernameDeleted);
-        $user->setDeletedAt(new \DateTime());
+        $user->setEmail(time() . '@deleted.com');
+        $user->setDeletedAccountAt(new \DateTime());
+        $user->setPlainPassword('');
 
         $user->setFacebookId(null);
         $user->setFacebookUrl(null);
@@ -77,14 +80,9 @@ class DeleteUserContributionsMutation implements ContainerAwareInterface
         $user->setAddress2(null);
         $user->setZipCode(null);
         $user->setNeighborhood(null);
-
-        $user->setAddress2(null);
-        $user->setZipCode(null);
-        $user->setNeighborhood(null);
         $user->setPhone(null);
         $user->setCity(null);
         $user->setBiography(null);
-        $user->setFollowingProposals(null);
         $user->setDateOfBirth(null);
         $user->setFirstname(null);
         $user->setLastname(null);
@@ -92,27 +90,64 @@ class DeleteUserContributionsMutation implements ContainerAwareInterface
         $user->setGender(null);
         $user->setLocale(null);
         $user->setTimezone(null);
-        $user->setTimezone(null);
         $user->setMedia(null);
+
+        $this->em->flush();
     }
 
-    public function deleteProposalsAndCommentsContent(User $user, array $proposals, array $comments)
+    public function deleteProposalsAndCommentsContent(User $user, array $contributions)
     {
         $deletedBodyText = $this->translator->trans('deleted-content-by-author', [], 'CapcoAppBundle');
         $deletedTitleText = $this->translator->trans('deleted-title', [], 'CapcoAppBundle');
 
-        foreach ($proposals as $proposal) {
-            $proposal->setTitle($deletedTitleText);
-            $proposal->setBody($deletedBodyText);
-            $proposal->setSummary(null);
-            $proposal->setMedia(null);
+        $reports = $this->em->getRepository(Reporting::class)->findBy(['Reporter' => $user]);
+        $events = $this->em->getRepository(Event::class)->findBy(['Author' => $user]);
+        $projects = $this->em->getRepository(Project::class)->findBy(['Author' => $user]);
+        //$blogPosts = $this->em->getRepository(Post::class)->findBy(['Authors' => $user]);
+
+        foreach ($contributions as $contribution) {
+            if ($contribution instanceof Comment
+            || $contribution instanceof Source
+            || $contribution instanceof AbstractVote
+            || $contribution instanceof \Capco\AppBundle\Entity\Argument) {
+                if (method_exists($contribution, 'getStep') && $contribution->getStep()->getEndAt() > new \DateTime()) {
+                    $this->em->remove($contribution);
+                }
+            }
+
+            if (method_exists($contribution, 'setTitle')) {
+                $contribution->setTitle($deletedTitleText);
+            }
+            if (method_exists($contribution, 'setBody')) {
+                $contribution->setBody($deletedBodyText);
+            }
+            if (method_exists($contribution, 'setSummary')) {
+                $contribution->setSummary(null);
+            }
+            if (method_exists($contribution, 'setMedia')) {
+                $contribution->setMedia(null);
+            }
         }
 
-        foreach ($comments as $comment) {
-            $comment->setTitle($deletedTitleText);
-            $comment->setBody($deletedBodyText);
-            $comment->setSummary(null);
-            $comment->setMedia(null);
+        foreach ($reports as $report) {
+            $report->setBody($deletedBodyText);
+            $report->setTitle($deletedTitleText);
+            $report->setSummary(null);
+            $report->setMedia(null);
         }
+
+        foreach ($events as $event) {
+            $this->em->remove($event);
+        }
+
+        foreach ($projects as $project) {
+            $project->setTitle($deletedTitleText);
+        }
+
+        /*foreach ($blogPosts as $blogPost) {
+            $this->em->remove($blogPost);
+        }*/
+
+        $this->em->flush();
     }
 }

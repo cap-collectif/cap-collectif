@@ -224,7 +224,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     protected $emailConfirmationSentAt = null;
 
-    protected $deletedAt = null;
+    protected $deletedAccountAt = null;
 
     protected $smsConfirmationSentAt = null;
     protected $smsConfirmationCode = null;
@@ -1099,14 +1099,14 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return $this;
     }
 
-    public function getDeletedAt()
+    public function getDeletedAccountAt()
     {
-        return $this->deletedAt;
+        return $this->deletedAccountAt;
     }
 
-    public function setDeletedAt(\DateTime $date = null)
+    public function setDeletedAccountAt(\DateTime $date = null): self
     {
-        $this->deletedAt = $date;
+        $this->deletedAccountAt = $date;
 
         return $this;
     }

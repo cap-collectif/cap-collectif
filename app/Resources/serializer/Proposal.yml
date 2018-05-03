@@ -17,11 +17,6 @@ Capco\AppBundle\Entity\Proposal:
       expose: true
       type: string
       groups: [Proposals, Elasticsearch]
-    author:
-      expose: true
-      type: Capco\UserBundle\Entity\User
-      serialized_name: author
-      groups: [Proposals, Elasticsearch]
     commentsCount:
       expose: true
       type: integer
