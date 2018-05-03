@@ -111,8 +111,7 @@ export class ProposalDetailAdvancement extends React.Component<Props> {
     const { proposal, project } = this.props;
     const progressSteps = generateProgressStepsWithColorAndStatus(proposal.progressSteps);
     const steps = project.steps.sort((a, b) => a.position - b.position);
-    // $FlowFixMe
-    const selections = proposal.selections.sort((a, b) => a.step.position - b.step.position);
+    const selections = proposal.selections;
     for (const step of steps) {
       step.isSelected =
         step.type === 'collect' || selections.map(selection => selection.step.id).includes(step.id);
