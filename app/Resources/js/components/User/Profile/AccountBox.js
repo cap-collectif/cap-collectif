@@ -2,18 +2,17 @@
 import React, { Component } from 'react';
 import { Panel, Button } from 'react-bootstrap';
 import { connect, type MapStateToProps } from 'react-redux';
-import {
-  type FormProps,
-  isInvalid,
-} from 'redux-form';
+import { isInvalid } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import AccountForm from './AccountForm';
 import ConfirmPasswordModal from '../ConfirmPasswordModal';
 import { confirmPassword } from '../../../redux/modules/user';
-import type { State } from '../../../types';
+import type { State, Dispatch } from '../../../types';
 
-type Props = FormProps & {
-  user: Object,
+type Props = {
+  dispatch: Dispatch,
+  invalid: boolean,
+  submitting: boolean,
 };
 
 export class AccountBox extends Component<Props> {
@@ -44,7 +43,6 @@ export class AccountBox extends Component<Props> {
 }
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  user: state.user.user,
   submitting: state.user.isSubmittingAccountForm,
   invalid: isInvalid('account')(state),
 });

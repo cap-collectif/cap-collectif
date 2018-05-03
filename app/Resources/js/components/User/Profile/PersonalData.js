@@ -1,6 +1,6 @@
 // @flow
-import React, {Component} from 'react';
-import {graphql, createFragmentContainer} from 'react-relay';
+import React, { Component } from 'react';
+import { graphql, createFragmentContainer } from 'react-relay';
 import {
   Alert,
   Well,
@@ -10,10 +10,10 @@ import {
   Button,
   Popover,
   OverlayTrigger,
-  Tooltip
+  Tooltip,
 } from 'react-bootstrap';
-import {connect, type MapStateToProps} from 'react-redux';
-import {YearPicker, MonthPicker, DayPicker} from 'react-dropdown-date';
+import { connect, type MapStateToProps } from 'react-redux';
+import { YearPicker, MonthPicker, DayPicker } from 'react-dropdown-date';
 import {
   reduxForm,
   type FormProps,
@@ -21,23 +21,23 @@ import {
   SubmissionError,
   unregisterField,
   change,
-  formValueSelector
+  formValueSelector,
 } from 'redux-form';
-import {FormattedMessage, injectIntl, type IntlShape} from 'react-intl';
+import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import type PersonalData_viewer from './__generated__/PersonalData_viewer.graphql';
 import AlertForm from '../../Alert/AlertForm';
-import type {Dispatch, State} from '../../../types';
+import type { Dispatch, State } from '../../../types';
 import UpdateProfilePersonalDataMutation from '../../../mutations/UpdateProfilePersonalDataMutation';
-import component from "../../Form/Field";
+import component from '../../Form/Field';
 
 type RelayProps = { personalDataForm: PersonalData_viewer };
 type Props = FormProps &
   RelayProps & {
-  viewer: PersonalData_viewer,
-  intl: IntlShape,
-  initialValues: Object,
-  hasValue: Object,
-};
+    viewer: PersonalData_viewer,
+    intl: IntlShape,
+    initialValues: Object,
+    hasValue: Object,
+  };
 
 const formName = 'profilePersonalData';
 
@@ -112,13 +112,13 @@ const validate = (values: Object, props: Props) => {
 const locale = window.locale;
 
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
-  const {intl} = props;
+  const { intl } = props;
   const input = {
     ...values,
-    userId: props.viewer.id
+    userId: props.viewer.id,
   };
 
-  return UpdateProfilePersonalDataMutation.commit({input})
+  return UpdateProfilePersonalDataMutation.commit({ input })
     .then(response => {
       if (!response.updateProfilePersonalData || !response.updateProfilePersonalData.viewer) {
         throw new Error('Mutation "updateProfilePersonalData" failed.');
@@ -131,7 +131,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
         });
       } else {
         throw new SubmissionError({
-          _error: intl.formatMessage({id: 'global.error.server.form'}),
+          _error: intl.formatMessage({ id: 'global.error.server.form' }),
         });
       }
     });
@@ -151,7 +151,8 @@ const hasData = (viewer: PersonalData_viewer, formValue: ?Object): boolean => {
     return false;
   }
 
-  if (formValue &&
+  if (
+    formValue &&
     !formValue.firstname &&
     !formValue.lastname &&
     !formValue.dateOfBirth &&
@@ -225,18 +226,17 @@ export class PersonalData extends Component<Props, PersonalDataState> {
         formName,
         'dateOfBirth',
         // $FlowFixMe
-        `${this.state.year}-${month}-${this.state.day}`
-      )
+        `${this.state.year}-${month}-${this.state.day}`,
+      ),
     );
   };
 
   openDeleteModal = () => {
-    this.setState({showDeleteModal: true});
+    this.setState({ showDeleteModal: true });
   };
 
   closeDeleteModal = () => {
-    this.setState({showDeleteModal: false}, () => {
-    });
+    this.setState({ showDeleteModal: false }, () => {});
   };
   deleteField = (target: string): void => {
     // $FlowFixMe
@@ -257,20 +257,23 @@ export class PersonalData extends Component<Props, PersonalDataState> {
         placement="top"
         className="in"
         id="delete-field"
-        title={
-          <FormattedMessage id="are-you-sure-you-want-to-delete-this-field"/>
-        }>
-        <Button onClick={() => {
-          this.deleteField(target);
-        }} bsStyle="danger" className="right-bloc btn-block">
-          {<FormattedMessage id="btn_delete"/>}
+        title={<FormattedMessage id="are-you-sure-you-want-to-delete-this-field" />}>
+        <Button
+          onClick={() => {
+            this.deleteField(target);
+          }}
+          bsStyle="danger"
+          className="right-bloc btn-block">
+          {<FormattedMessage id="btn_delete" />}
         </Button>
-        <Button onClick={() => {
-          this.closeDeleteModal();
-          this.refs[target].hide();
-        }}
-                bsStyle="default" className="right-block btn-block">
-          {<FormattedMessage id="global.no"/>}
+        <Button
+          onClick={() => {
+            this.closeDeleteModal();
+            this.refs[target].hide();
+          }}
+          bsStyle="default"
+          className="right-block btn-block">
+          {<FormattedMessage id="global.no" />}
         </Button>
       </Popover>
     );
@@ -286,19 +289,20 @@ export class PersonalData extends Component<Props, PersonalDataState> {
       handleSubmit,
       submitting,
       error,
-      hasValue
+      hasValue,
     } = this.props;
 
     const tooltipDelete = (
-      <Tooltip id="tooltip"><FormattedMessage id="global.delete"/></Tooltip>
+      <Tooltip id="tooltip">
+        <FormattedMessage id="global.delete" />
+      </Tooltip>
     );
 
     return (
-
       <div id="personal-data">
         {!hasData(viewer, hasValue) && (
           <Alert bsStyle="info">
-            <span className="cap-information col-sm-1 col-md-1"/>
+            <span className="cap-information col-sm-1 col-md-1" />
             <FormattedMessage
               id="participation-personal-data-idetedMessage id=tion"
               className="col-sm-7 col-md-7"
@@ -307,7 +311,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
         )}
         {hasData(viewer, hasValue) && (
           <Alert bsStyle="info" id="project-participation-collected-data">
-            <span className="cap-information col-sm-1 col-md-1"/>
+            <span className="cap-information col-sm-1 col-md-1" />
             <FormattedMessage
               id="project-participation-collected-data"
               className="col-sm-11 col-md-11"
@@ -316,12 +320,12 @@ export class PersonalData extends Component<Props, PersonalDataState> {
         )}
         <Panel id="capco_horizontal_form">
           <h2 className="page-header">
-          <FormattedMessage id="personal-data"/>
+            <FormattedMessage id="personal-data" />
           </h2>
           {!hasData(viewer, hasValue) && (
             <div className="capco_horizontal_field_with_border_top">
               <Well>
-                <FormattedMessage id="no-data"/>
+                <FormattedMessage id="no-data" />
               </Well>
             </div>
           )}
@@ -331,9 +335,9 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                 {hasData(viewer, hasValue) && (
                   <div>
                     {hasValue.firstname && (
-                      <div className="capco_horizontal_field_with_border_top" style={{border: 0}}>
+                      <div className="capco_horizontal_field_with_border_top" style={{ border: 0 }}>
                         <label className="col-sm-3 control-label">
-                          <FormattedMessage id="form.label_firstname"/>
+                          <FormattedMessage id="form.label_firstname" />
                         </label>
                         <div>
                           <Field
@@ -354,8 +358,10 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             onHide={this.closeDeleteModal}
                             overlay={this.popover('firstname')}>
                             <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                              <a className="personal-data-delete-field" id="personal-data-firstname">
-                                <i className="icon cap-ios-close"></i>
+                              <a
+                                className="personal-data-delete-field"
+                                id="personal-data-firstname">
+                                <i className="icon cap-ios-close" />
                               </a>
                             </OverlayTrigger>
                           </OverlayTrigger>
@@ -365,7 +371,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                     {hasValue.lastname && (
                       <div className="capco_horizontal_field_with_border_top">
                         <label className="col-sm-3 control-label">
-                          <FormattedMessage id="form.label_lastname"/>
+                          <FormattedMessage id="form.label_lastname" />
                         </label>
                         <div>
                           <Field
@@ -383,9 +389,8 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             ref="lastname"
                             overlay={this.popover('lastname')}>
                             <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                              <a className="personal-data-delete-field"
-                                 id="personal-data-lastname">
-                                <i className="icon cap-ios-close"></i>
+                              <a className="personal-data-delete-field" id="personal-data-lastname">
+                                <i className="icon cap-ios-close" />
                               </a>
                             </OverlayTrigger>
                           </OverlayTrigger>
@@ -395,7 +400,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                     {hasValue.gender && (
                       <div className="capco_horizontal_field_with_border_top">
                         <label className="col-sm-3 control-label">
-                          <FormattedMessage id="form.label_gender"/>
+                          <FormattedMessage id="form.label_gender" />
                         </label>
                         <div>
                           <Field
@@ -403,16 +408,15 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             component={component}
                             type="select"
                             id="personal-data-form-gender"
-                            divClassName="col-sm-4"
-                          >
+                            divClassName="col-sm-4">
                             <option value="MALE">
-                              <FormattedMessage id="gender.male"/>
+                              <FormattedMessage id="gender.male" />
                             </option>
                             <option value="FEMALE">
-                              <FormattedMessage id="gender.female"/>
+                              <FormattedMessage id="gender.female" />
                             </option>
                             <option value="OTHER">
-                              <FormattedMessage id="gender.other"/>
+                              <FormattedMessage id="gender.other" />
                             </option>
                           </Field>
                         </div>
@@ -425,7 +429,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             overlay={this.popover('gender')}>
                             <OverlayTrigger placement="top" overlay={tooltipDelete}>
                               <a className="personal-data-delete-field" id="personal-data-gender">
-                                <i className="icon cap-ios-close"></i>
+                                <i className="icon cap-ios-close" />
                               </a>
                             </OverlayTrigger>
                           </OverlayTrigger>
@@ -435,7 +439,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                     {hasValue.dateOfBirth && (
                       <div className="capco_horizontal_field_with_border_top">
                         <label className="col-sm-3 control-label">
-                          <FormattedMessage id="form.label_date_of_birth"/>
+                          <FormattedMessage id="form.label_date_of_birth" />
                         </label>
                         <div className="col-sm-6" id="personal-data-date-of-birth">
                           <Col sm={2} md={2} id="personal-data-date-of-birth-day">
@@ -445,8 +449,8 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               month={this.state.month}
                               value={this.state.day}
                               onChange={day => {
-                                this.setState({day}, () => {
-                                  this.setDate()
+                                this.setState({ day }, () => {
+                                  this.setDate();
                                 });
                               }}
                               id={'day'}
@@ -461,8 +465,8 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               year={this.state.year}
                               value={this.state.month}
                               onChange={month => {
-                                this.setState({month}, () => {
-                                  this.setDate()
+                                this.setState({ month }, () => {
+                                  this.setDate();
                                 });
                               }}
                               locale={locale.substr(3, 5)}
@@ -477,8 +481,8 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               defaultValue={'Année'}
                               value={this.state.year}
                               onChange={year => {
-                                this.setState({year}, () => {
-                                  this.setDate()
+                                this.setState({ year }, () => {
+                                  this.setDate();
                                 });
                               }}
                               id={'year'}
@@ -496,8 +500,10 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             ref="dateOfBirth"
                             overlay={this.popover('dateOfBirth')}>
                             <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                              <a className="personal-data-delete-field" id="personal-data-dateOfBirth">
-                                <i className="icon cap-ios-close"></i>
+                              <a
+                                className="personal-data-delete-field"
+                                id="personal-data-dateOfBirth">
+                                <i className="icon cap-ios-close" />
                               </a>
                             </OverlayTrigger>
                           </OverlayTrigger>
@@ -514,9 +520,10 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             ref="address-address2-city-zipCode"
                             overlay={this.popover('address-address2-city-zipCode')}>
                             <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                              <a className="personal-data-delete-field"
-                                 id="personal-data-address-address2-city-zipCode">
-                                <i className="icon cap-ios-close"></i>
+                              <a
+                                className="personal-data-delete-field"
+                                id="personal-data-address-address2-city-zipCode">
+                                <i className="icon cap-ios-close" />
                               </a>
                             </OverlayTrigger>
                           </OverlayTrigger>
@@ -524,7 +531,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                         {hasValue.address && (
                           <div className="personal-data-address">
                             <label className="col-sm-3 control-label">
-                              <FormattedMessage id="form.label_address"/>
+                              <FormattedMessage id="form.label_address" />
                             </label>
                             <div>
                               <Field
@@ -540,7 +547,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                         {hasValue.address2 && (
                           <div className="personal-data-address">
                             <label className="col-sm-3 control-label">
-                              <FormattedMessage id="form.label_address2"/>
+                              <FormattedMessage id="form.label_address2" />
                             </label>
                             <div>
                               <Field
@@ -556,7 +563,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                         {hasValue.city && (
                           <div className="personal-data-address">
                             <label className="col-sm-3 control-label">
-                              <FormattedMessage id="form.label_city"/>
+                              <FormattedMessage id="form.label_city" />
                             </label>
                             <div>
                               <Field
@@ -572,7 +579,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                         {hasValue.zipCode && (
                           <div className="personal-data-address">
                             <label className="col-sm-3 control-label">
-                              <FormattedMessage id="form.label_zip_code"/>
+                              <FormattedMessage id="form.label_zip_code" />
                             </label>
                             <div>
                               <Field
@@ -591,7 +598,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                       <div>
                         <div className="capco_horizontal_field_with_border_top">
                           <label className="col-sm-3 control-label">
-                            <FormattedMessage id="form.label_phone"/>
+                            <FormattedMessage id="form.label_phone" />
                           </label>
                           <div>
                             <Field
@@ -612,27 +619,27 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               overlay={this.popover('phone')}>
                               <OverlayTrigger placement="top" overlay={tooltipDelete}>
                                 <a className="personal-data-delete-field" id="phone">
-                                  <i className="icon cap-ios-close"></i>
+                                  <i className="icon cap-ios-close" />
                                 </a>
                               </OverlayTrigger>
                             </OverlayTrigger>
                           </div>
                         </div>
                       </div>
-
                     )}
                   </div>
                 )}
                 <div className="capco_horizontal_field_with_border_top">
-                  <div className="col-sm-3"></div>
+                  <div className="col-sm-3" />
                   <ButtonToolbar className="col-sm-4 pl-0">
                     <Button
                       disabled={invalid || submitting}
                       type="submit"
                       bsStyle="primary"
-                      id="personal-data-form-save"
-                    >
-                      <FormattedMessage id={submitting ? 'global.loading' : 'global.save_modifications'}/>
+                      id="personal-data-form-save">
+                      <FormattedMessage
+                        id={submitting ? 'global.loading' : 'global.save_modifications'}
+                      />
                     </Button>
                     <AlertForm
                       valid={valid}
@@ -674,7 +681,18 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) =
     gender: props.viewer.gender ? props.viewer.gender : null,
     dateOfBirth: props.viewer.dateOfBirth ? props.viewer.dateOfBirth : null,
   },
-  hasValue: selector(state, 'firstname', 'lastname', 'gender', 'dateOfBirth', 'address', 'address2', 'city', 'zipCode', 'phone')
+  hasValue: selector(
+    state,
+    'firstname',
+    'lastname',
+    'gender',
+    'dateOfBirth',
+    'address',
+    'address2',
+    'city',
+    'zipCode',
+    'phone',
+  ),
 });
 
 const container = connect(mapStateToProps)(injectIntl(form));

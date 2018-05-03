@@ -1,5 +1,5 @@
 // @flow
-import {graphql} from 'react-relay';
+import { graphql } from 'react-relay';
 import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
 import type {
@@ -14,24 +14,24 @@ const mutation = graphql`
     updateProfilePublicData(input: $input) {
       viewer {
         id
-      media {
-        id
-        name
-        size
-        url
-      }
-      show_url
-      username
-      biography
-      website
-      facebookUrl
-      linkedInUrl
-      twitterUrl
-      profilePageIndexed
-      userType {
-        id
-      }
-      neighborhood
+        media {
+          id
+          name
+          size
+          url
+        }
+        show_url
+        username
+        biography
+        website
+        facebookUrl
+        linkedInUrl
+        twitterUrl
+        profilePageIndexed
+        userType {
+          id
+        }
+        neighborhood
       }
     }
   }
@@ -43,4 +43,4 @@ const commit = (variables: UpdateProfilePublicDataMutationVariables): Promise<Re
     variables,
   });
 
-export default {commit};
+export default { commit };

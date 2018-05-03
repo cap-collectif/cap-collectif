@@ -1,24 +1,24 @@
 /**
  * @flow
  */
-import React, {Component} from 'react';
-import {FormattedMessage, injectIntl, type IntlShape} from 'react-intl';
-import {reduxForm, Field, SubmissionError, type FormProps} from 'redux-form';
-import {Panel, ButtonToolbar, Button} from 'react-bootstrap';
+import React, { Component } from 'react';
+import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
+import { reduxForm, Field, SubmissionError, type FormProps } from 'redux-form';
+import { Panel, ButtonToolbar, Button } from 'react-bootstrap';
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import UpdateProfilePasswordMutation from '../../../mutations/UpdateProfilePasswordMutation';
-import type {Dispatch} from '../../../types';
+import type { Dispatch } from '../../../types';
 
 type Props = FormProps & { intl: IntlShape };
 
 const formName = 'profileChangePassword';
 
 const validate = ({
-                    current_password,
-                    new_password,
-                    new_password_confirmation,
-                  }: {
+  current_password,
+  new_password,
+  new_password_confirmation,
+}: {
   current_password: ?string,
   new_password: ?string,
   new_password_confirmation: ?string,
@@ -43,13 +43,13 @@ const validate = ({
 };
 
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
-  const {intl} = props;
+  const { intl } = props;
 
   const input = {
     current_password: values.current_password,
     new: values.new_password,
   };
-  return UpdateProfilePasswordMutation.commit({input})
+  return UpdateProfilePasswordMutation.commit({ input })
     .then(response => {
       if (!response.updateProfilePassword || !response.updateProfilePassword.viewer) {
         throw new Error('Mutation "updateProfilePassword" failed.');
@@ -62,7 +62,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
         });
       } else {
         throw new SubmissionError({
-          _error: intl.formatMessage({id: 'global.error.server.form'}),
+          _error: intl.formatMessage({ id: 'global.error.server.form' }),
         });
       }
     });
@@ -84,13 +84,13 @@ export class ChangePasswordForm extends Component<Props> {
     return (
       <Panel id="capco_horizontal_form">
         <h2 className="page-header">
-          <FormattedMessage id="form.new_password"/>
+          <FormattedMessage id="form.new_password" />
         </h2>
         <form onSubmit={handleSubmit} className="form-horizontal">
           <div>
-            <div className="capco_horizontal_field_with_border_top" style={{border: 0}}>
+            <div className="capco_horizontal_field_with_border_top" style={{ border: 0 }}>
               <label className="col-sm-3 control-label">
-                <FormattedMessage id="form.current_password"/>
+                <FormattedMessage id="form.current_password" />
               </label>
               <div>
                 <Field
@@ -102,10 +102,10 @@ export class ChangePasswordForm extends Component<Props> {
                 />
               </div>
             </div>
-            <div className="clearfix"></div>
-            <div className="capco_horizontal_field_with_border_top" style={{border: 0}}>
+            <div className="clearfix" />
+            <div className="capco_horizontal_field_with_border_top" style={{ border: 0 }}>
               <label className="col-sm-3 control-label">
-                <FormattedMessage id="form.new_password"/>
+                <FormattedMessage id="form.new_password" />
               </label>
               <div>
                 <Field
@@ -117,10 +117,10 @@ export class ChangePasswordForm extends Component<Props> {
                 />
               </div>
             </div>
-            <div className="clearfix"></div>
-            <div className="capco_horizontal_field_with_border_top" style={{border: 0}}>
+            <div className="clearfix" />
+            <div className="capco_horizontal_field_with_border_top" style={{ border: 0 }}>
               <label className="col-sm-3 control-label">
-                <FormattedMessage id="form.new_password_confirmation"/>
+                <FormattedMessage id="form.new_password_confirmation" />
               </label>
               <div>
                 <Field
@@ -132,16 +132,18 @@ export class ChangePasswordForm extends Component<Props> {
                 />
               </div>
             </div>
-            <div className="clearfix"></div>
+            <div className="clearfix" />
             <div className="capco_horizontal_field_with_border_top">
-              <div className="col-sm-3"></div>
+              <div className="col-sm-3" />
               <ButtonToolbar className="col-sm-6 pl-0">
                 <Button
                   disabled={invalid || pristine || submitting}
                   type="submit"
                   bsStyle="primary"
                   id="proposal-form-admin-content-save">
-                  <FormattedMessage id={submitting ? 'global.loading' : 'global.save_modifications'}/>
+                  <FormattedMessage
+                    id={submitting ? 'global.loading' : 'global.save_modifications'}
+                  />
                 </Button>
                 <AlertForm
                   valid={pristine ? true : valid}

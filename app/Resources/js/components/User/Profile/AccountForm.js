@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { Alert } from 'react-bootstrap';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm, Field, type FormProps } from 'redux-form';
 import {
   submitAccountForm as onSubmit,
   resendConfirmation,
@@ -29,13 +29,11 @@ const validate = (
   }
   return errors;
 };
-type Props = {
+type Props = FormProps & {
   newEmailToConfirm: string,
-  error: string,
   initialValues: Object,
   confirmationEmailResent: boolean,
   dispatch: Dispatch,
-  handleSubmit: () => void,
 };
 export class AccountForm extends Component<Props> {
   render() {

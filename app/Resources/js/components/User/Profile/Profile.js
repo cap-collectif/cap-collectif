@@ -1,42 +1,41 @@
 // @flow
-import React, {Component} from 'react';
-import {graphql, createFragmentContainer} from 'react-relay';
-import {
-  Panel,
-  ButtonToolbar,
-  Button,
-} from 'react-bootstrap';
-import {connect, type MapStateToProps} from 'react-redux';
-import {
-  reduxForm,
-  type FormProps,
-  Field,
-  SubmissionError,
-} from 'redux-form';
-import {FormattedMessage, injectIntl, type IntlShape} from 'react-intl';
+import React, { Component } from 'react';
+import { graphql, createFragmentContainer } from 'react-relay';
+import { Panel, ButtonToolbar, Button } from 'react-bootstrap';
+import { connect, type MapStateToProps } from 'react-redux';
+import { reduxForm, type FormProps, Field, SubmissionError } from 'redux-form';
+import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import type Profile_viewer from './__generated__/Profile_viewer.graphql';
-import type {Dispatch, State} from '../../../types';
-import component from "../../Form/Field";
-import AlertForm from "../../Alert/AlertForm";
-import UserAvatar from "../UserAvatar";
-import UpdateProfilePublicDataMutation from "../../../mutations/UpdateProfilePublicDataMutation";
+import type { Dispatch, State } from '../../../types';
+import component from '../../Form/Field';
+import AlertForm from '../../Alert/AlertForm';
+import UserAvatar from '../UserAvatar';
+import UpdateProfilePublicDataMutation from '../../../mutations/UpdateProfilePublicDataMutation';
 
 type RelayProps = { profileForm: Profile_viewer };
 type Props = FormProps &
   RelayProps & {
-  viewer: Profile_viewer,
-  intl: IntlShape,
-  initialValues: Object,
-  hasValue: Object,
-  userTypes: Array<Object>,
-};
+    viewer: Profile_viewer,
+    intl: IntlShape,
+    initialValues: Object,
+    hasValue: Object,
+    userTypes: Array<Object>,
+  };
 
 const formName = 'viewerProfileForm';
 
 const validate = (values: Object) => {
   const errors = {};
 
-  const fields = ['biography', 'website', 'neighborhood', 'linkedIn', 'twitter', 'facebook', 'username'];
+  const fields = [
+    'biography',
+    'website',
+    'neighborhood',
+    'linkedIn',
+    'twitter',
+    'facebook',
+    'username',
+  ];
   fields.forEach(value => {
     if (value === 'username') {
       if (!values[value] || values[value].length === 0) {
@@ -57,16 +56,17 @@ const validate = (values: Object) => {
 };
 
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
-  const {intl} = props;
-  const media = typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null;
+  const { intl } = props;
+  const media =
+    typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null;
   delete values.media;
   const input = {
     ...values,
     media,
-    userId: props.viewer.id
+    userId: props.viewer.id,
   };
 
-  return UpdateProfilePublicDataMutation.commit({input})
+  return UpdateProfilePublicDataMutation.commit({ input })
     .then(response => {
       if (!response.updateProfilePublicData || !response.updateProfilePublicData.viewer) {
         throw new Error('Mutation "updateProfilePublicData" failed.');
@@ -79,7 +79,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
         });
       } else {
         throw new SubmissionError({
-          _error: intl.formatMessage({id: 'global.error.server.form'}),
+          _error: intl.formatMessage({ id: 'global.error.server.form' }),
         });
       }
     });
@@ -102,16 +102,16 @@ export class Profile extends Component<Props> {
     return (
       <Panel id="capco_horizontal_form">
         <h2 className="page-header">
-          <FormattedMessage id="user.edition"/>
+          <FormattedMessage id="user.edition" />
         </h2>
         <form onSubmit={handleSubmit} className="form-horizontal">
-          <div className="capco_horizontal_field_with_border_top" style={{border: 0}}>
+          <div className="capco_horizontal_field_with_border_top" style={{ border: 0 }}>
             <label className="col-sm-3 control-label" htmlFor="profile_avatar">
-              <FormattedMessage id="form.label_media"/>
+              <FormattedMessage id="form.label_media" />
             </label>
-            <UserAvatar className="col-sm-1" user={viewer}/>
-            <div className="clearfix"></div>
-            <div className="col-sm-3"></div>
+            <UserAvatar className="col-sm-1" user={viewer} />
+            <div className="clearfix" />
+            <div className="col-sm-3" />
             <Field
               id="profile_avatar"
               name="media"
@@ -120,9 +120,9 @@ export class Profile extends Component<Props> {
               divClassName="col-sm-6"
             />
           </div>
-          <div className="capco_horizontal_field_with_border_top" style={{border: 0}}>
+          <div className="capco_horizontal_field_with_border_top" style={{ border: 0 }}>
             <label className="col-sm-3 control-label" htmlFor="profile-form-username">
-              <FormattedMessage id="form.label_username"/>
+              <FormattedMessage id="form.label_username" />
             </label>
             <div>
               <Field
@@ -135,11 +135,11 @@ export class Profile extends Component<Props> {
               />
             </div>
           </div>
-          <div className="capco_horizontal_field_with_border_top" style={{border: 0}}>
+          <div className="capco_horizontal_field_with_border_top" style={{ border: 0 }}>
             <label className="col-sm-3 control-label">
-              <FormattedMessage id="registration.type"/>{' '}
+              <FormattedMessage id="registration.type" />{' '}
               <span className="excerpt">
-                <FormattedMessage id="global.form.optional"/>
+                <FormattedMessage id="global.form.optional" />
               </span>
             </label>
             <div>
@@ -148,8 +148,7 @@ export class Profile extends Component<Props> {
                 name="userType"
                 component={component}
                 type="select"
-                divClassName="col-sm-6"
-              >
+                divClassName="col-sm-6">
                 <FormattedMessage id="registration.select.type">
                   {message => <option value="">{message}</option>}
                 </FormattedMessage>
@@ -161,9 +160,9 @@ export class Profile extends Component<Props> {
               </Field>
             </div>
           </div>
-          <div className="capco_horizontal_field_with_border_top" style={{border: 0}}>
+          <div className="capco_horizontal_field_with_border_top" style={{ border: 0 }}>
             <label className="col-sm-3 control-label">
-              <FormattedMessage id="form.label_biography"/>
+              <FormattedMessage id="form.label_biography" />
             </label>
             <div>
               <Field
@@ -175,9 +174,9 @@ export class Profile extends Component<Props> {
               />
             </div>
           </div>
-          <div className="capco_horizontal_field_with_border_top" style={{border: 0}}>
+          <div className="capco_horizontal_field_with_border_top" style={{ border: 0 }}>
             <label className="col-sm-3 control-label">
-              <FormattedMessage id="form.label_neighborhood"/>
+              <FormattedMessage id="form.label_neighborhood" />
             </label>
             <div>
               <Field
@@ -189,9 +188,9 @@ export class Profile extends Component<Props> {
               />
             </div>
           </div>
-          <div className="capco_horizontal_field_with_border_top" style={{border: 0}}>
+          <div className="capco_horizontal_field_with_border_top" style={{ border: 0 }}>
             <label className="col-sm-3 control-label">
-              <FormattedMessage id="form.label_website"/>
+              <FormattedMessage id="form.label_website" />
             </label>
             <div>
               <Field
@@ -203,13 +202,13 @@ export class Profile extends Component<Props> {
               />
             </div>
           </div>
-          <div className="clearfix"></div>
+          <div className="clearfix" />
           <h2>
-            <FormattedMessage id="social-medias"/>
+            <FormattedMessage id="social-medias" />
           </h2>
-          <div className="capco_horizontal_field_with_border_top" style={{border: 0}}>
+          <div className="capco_horizontal_field_with_border_top" style={{ border: 0 }}>
             <label className="col-sm-3 control-label">
-              <FormattedMessage id="user.profile.edit.facebook"/>
+              <FormattedMessage id="user.profile.edit.facebook" />
             </label>
             <div>
               <Field
@@ -222,9 +221,9 @@ export class Profile extends Component<Props> {
               />
             </div>
           </div>
-          <div className="capco_horizontal_field_with_border_top" style={{border: 0}}>
+          <div className="capco_horizontal_field_with_border_top" style={{ border: 0 }}>
             <label className="col-sm-3 control-label">
-              <FormattedMessage id="user.profile.edit.twitter"/>
+              <FormattedMessage id="user.profile.edit.twitter" />
             </label>
             <div>
               <Field
@@ -237,9 +236,9 @@ export class Profile extends Component<Props> {
               />
             </div>
           </div>
-          <div className="capco_horizontal_field_with_border_top" style={{border: 0}}>
+          <div className="capco_horizontal_field_with_border_top" style={{ border: 0 }}>
             <label className="col-sm-3 control-label">
-              <FormattedMessage id="show.label_linkedin_url"/>
+              <FormattedMessage id="show.label_linkedin_url" />
             </label>
             <div>
               <Field
@@ -252,36 +251,33 @@ export class Profile extends Component<Props> {
               />
             </div>
           </div>
-          <div className="clearfix"></div>
+          <div className="clearfix" />
           <h2>
-            <FormattedMessage id="confidentialite.title"/>
+            <FormattedMessage id="confidentialite.title" />
           </h2>
           <div className="capco_horizontal_field_with_border_top">
-            <div className="col-sm-3"></div>
+            <div className="col-sm-3" />
             <Field
               id="profilePageIndexed"
               name="profilePageIndexed"
               component={component}
               type="checkbox"
               labelClassName="font-weight-normal"
-              children={
-                <FormattedMessage
-                  id="user.profile.edit.profilePageIndexed"
-                />
-              }
+              children={<FormattedMessage id="user.profile.edit.profilePageIndexed" />}
               divClassName="col-sm-8"
             />
           </div>
           <div className="capco_horizontal_field_with_border_top">
-            <div className="col-sm-3"></div>
+            <div className="col-sm-3" />
             <ButtonToolbar className="col-sm-6 pl-0">
               <Button
                 disabled={invalid || submitting}
                 type="submit"
                 bsStyle="primary"
-                id="profile-form-save"
-              >
-                <FormattedMessage id={submitting ? 'global.loading' : 'global.save_modifications'}/>
+                id="profile-form-save">
+                <FormattedMessage
+                  id={submitting ? 'global.loading' : 'global.save_modifications'}
+                />
               </Button>
               <AlertForm
                 valid={valid}
@@ -318,7 +314,6 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) =
     userType: props.viewer.userType ? props.viewer.userType.id : null,
     neighborhood: props.viewer.neighborhood ? props.viewer.neighborhood : null,
     media: props.viewer ? props.viewer.media : undefined,
-
   },
   userTypes: state.default.userTypes,
 });

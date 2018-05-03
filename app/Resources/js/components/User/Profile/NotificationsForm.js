@@ -85,7 +85,7 @@ export class NotificationsForm extends Component<Props> {
               </tr>
             </tbody>
           </Table>
-          <div className="divider"></div>
+          <div className="divider" />
           <div className="notifications-form-controls">
             <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
               <FormattedMessage id={submitting ? 'global.loading' : 'global.save_modifications'} />

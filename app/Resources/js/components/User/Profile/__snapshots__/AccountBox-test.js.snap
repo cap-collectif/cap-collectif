@@ -5,32 +5,32 @@ exports[`<AccountBox /> should render a disabled button when the form is invalid
   bsClass="panel"
   bsStyle="default"
   defaultExpanded={false}
-  footer={
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="primary"
-      className="col-sm-offset-4"
-      disabled={true}
-      id="edit-account-profile-button"
-      onClick={[Function]}
-    >
-      <FormattedMessage
-        id="global.save_modifications"
-        values={Object {}}
-      />
-    </Button>
-  }
-  header={
+>
+  <h2
+    className="page-header"
+  >
     <FormattedMessage
       id="profile.account.title"
       values={Object {}}
     />
-  }
->
+  </h2>
   <Connect(ReduxForm) />
   <Connect(ConfirmPasswordModal) />
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="primary"
+    className="col-sm-offset-4"
+    disabled={true}
+    id="edit-account-profile-button"
+    onClick={[Function]}
+  >
+    <FormattedMessage
+      id="global.save_modifications"
+      values={Object {}}
+    />
+  </Button>
 </Panel>
 `;
 
@@ -39,32 +39,32 @@ exports[`<AccountBox /> should render a disabled button when the form is submitt
   bsClass="panel"
   bsStyle="default"
   defaultExpanded={false}
-  footer={
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="primary"
-      className="col-sm-offset-4"
-      disabled={true}
-      id="edit-account-profile-button"
-      onClick={[Function]}
-    >
-      <FormattedMessage
-        id="global.loading"
-        values={Object {}}
-      />
-    </Button>
-  }
-  header={
+>
+  <h2
+    className="page-header"
+  >
     <FormattedMessage
       id="profile.account.title"
       values={Object {}}
     />
-  }
->
+  </h2>
   <Connect(ReduxForm) />
   <Connect(ConfirmPasswordModal) />
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="primary"
+    className="col-sm-offset-4"
+    disabled={true}
+    id="edit-account-profile-button"
+    onClick={[Function]}
+  >
+    <FormattedMessage
+      id="global.loading"
+      values={Object {}}
+    />
+  </Button>
 </Panel>
 `;
 
@@ -73,31 +73,31 @@ exports[`<AccountBox /> should render and enabled button when the form is valid 
   bsClass="panel"
   bsStyle="default"
   defaultExpanded={false}
-  footer={
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="primary"
-      className="col-sm-offset-4"
-      disabled={false}
-      id="edit-account-profile-button"
-      onClick={[Function]}
-    >
-      <FormattedMessage
-        id="global.save_modifications"
-        values={Object {}}
-      />
-    </Button>
-  }
-  header={
+>
+  <h2
+    className="page-header"
+  >
     <FormattedMessage
       id="profile.account.title"
       values={Object {}}
     />
-  }
->
+  </h2>
   <Connect(ReduxForm) />
   <Connect(ConfirmPasswordModal) />
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="primary"
+    className="col-sm-offset-4"
+    disabled={false}
+    id="edit-account-profile-button"
+    onClick={[Function]}
+  >
+    <FormattedMessage
+      id="global.save_modifications"
+      values={Object {}}
+    />
+  </Button>
 </Panel>
 `;

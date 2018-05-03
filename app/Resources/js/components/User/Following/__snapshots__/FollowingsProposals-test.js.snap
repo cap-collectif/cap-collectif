@@ -2,7 +2,9 @@
 
 exports[`<FollowingsProposals /> should render following proposal close 1`] = `
 <div>
-  <h2>
+  <h2
+    className="page-header"
+  >
     <FormattedMessage
       id="followings"
       values={Object {}}
@@ -166,7 +168,9 @@ exports[`<FollowingsProposals /> should render following proposal close 1`] = `
 
 exports[`<FollowingsProposals /> should render following proposal open 1`] = `
 <div>
-  <h2>
+  <h2
+    className="page-header"
+  >
     <FormattedMessage
       id="followings"
       values={Object {}}
