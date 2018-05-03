@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class QuestionnaireAdmin extends Admin
 {
@@ -62,20 +63,27 @@ class QuestionnaireAdmin extends Admin
         ;
 
         $formMapper
-            ->with('admin.fields.questionnaire.group_options')
-                ->add('multipleRepliesAllowed', null, [
-                    'label' => 'admin.fields.questionnaire.multiple_replies_allowed',
-                    'required' => false,
-                ])
-                ->add('anonymousAllowed', null, [
+            ->with('user.profile.notifications.title')
+            ->add('acknowledgeReplies', CheckboxType::class, [
+                'label' => 'admin.fields.questionnaire.acknowledge_replies',
+                'required' => false,
+            ])
+            ->end()
+            ->with('proposal_form.admin.settings.options')
+                ->add('anonymousAllowed', CheckboxType::class, [
                     'label' => 'admin.fields.questionnaire.anonymous_allowed',
                     'required' => false,
                 ])
-                ->add('acknowledgeReplies', null, [
-                    'label' => 'admin.fields.questionnaire.acknowledge_replies',
-                    'required' => false,
-                ])
+            ->add('multipleRepliesAllowed', CheckboxType::class, [
+                'label' => 'admin.fields.questionnaire.multiple_replies_allowed',
+                'required' => false,
+            ])
             ->end()
+            ->with('requirements')
+            ->add('phoneConfirmation', CheckboxType::class, [
+                'label' => 'phone-number-verified-by-sms',
+                'required' => false,
+            ])
         ;
     }
 
