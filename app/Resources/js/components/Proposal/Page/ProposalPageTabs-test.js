@@ -11,7 +11,7 @@ describe('<ProposalPageTabs />', () => {
     $refType,
     $fragmentRefs,
     id: '1',
-    followerConnection: {
+    allFollowers: {
       totalCount: 169,
     },
     currentVotableStep: null,

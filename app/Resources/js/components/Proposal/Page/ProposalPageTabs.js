@@ -90,7 +90,7 @@ export class ProposalPageTabs extends React.Component<Props> {
                 )}
                 <NavItem eventKey="followers" className="tab">
                   <FormattedMessage id="proposal.tabs.followers" />
-                  <span className="badge">{proposal.followerConnection.totalCount}</span>
+                  <span className="badge">{proposal.allFollowers.totalCount}</span>
                 </NavItem>
               </Nav>
             </div>
@@ -226,7 +226,7 @@ export default createFragmentContainer(ProposalPageTabs, {
         title
       }
       viewerCanSeeEvaluation
-      followerConnection(first: $count, after: $cursor) {
+      allFollowers: followerConnection(first: 0) {
         totalCount
       }
     }
