@@ -71,11 +71,11 @@ class QuestionnaireAdmin extends Admin
             ->end()
             ->with('proposal_form.admin.settings.options')
                 ->add('anonymousAllowed', CheckboxType::class, [
-                    'label' => 'admin.fields.questionnaire.anonymous_allowed',
+                    'label' => 'reply-anonymously',
                     'required' => false,
                 ])
             ->add('multipleRepliesAllowed', CheckboxType::class, [
-                'label' => 'admin.fields.questionnaire.multiple_replies_allowed',
+                'label' => 'answer-several-times',
                 'required' => false,
             ])
             ->end()
