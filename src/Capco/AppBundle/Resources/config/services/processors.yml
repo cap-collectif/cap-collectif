@@ -46,3 +46,5 @@ services:
     arguments:
       - '@capco.user_archive.repository'
       - '@capco.user_archive_notifier'
+      - '@overblog_graphql.request_executor'
+      - '%kernel.root_dir%'

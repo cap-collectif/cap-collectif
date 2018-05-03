@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Notifier;
 
+use Capco\AppBundle\Entity\UserArchive;
 use Capco\AppBundle\GraphQL\Resolver\UserResolver;
 use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\SiteParameter\Resolver;
@@ -13,7 +14,7 @@ final class UserArchiveNotifier extends BaseNotifier
         parent::__construct($mailer, $siteParams, $userResolver);
     }
 
-    public function onUserArchiveRequested(): void
+    public function onUserArchiveRequested(UserArchive $archive): void
     {
     }
 }

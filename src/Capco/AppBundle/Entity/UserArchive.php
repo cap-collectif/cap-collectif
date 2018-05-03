@@ -28,6 +28,11 @@ class UserArchive
     protected $isGenerated = false;
 
     /**
+     * @ORM\Column(name="deleted_at", type="datetime", nullable=true)
+     */
+    protected $deletedAt;
+
+    /**
      * @ORM\Column(name="path", type="text", nullable=true)
      */
     protected $path;
@@ -82,6 +87,18 @@ class UserArchive
     public function setPath(string $path): self
     {
         $this->path = $path;
+
+        return $this;
+    }
+
+    public function getDeletedAt(): ?\DateTime
+    {
+        return $this->deletedAt;
+    }
+
+    public function setDeletedAt(\DateTime $deletedAt): self
+    {
+        $this->deletedAt = $deletedAt;
 
         return $this;
     }
