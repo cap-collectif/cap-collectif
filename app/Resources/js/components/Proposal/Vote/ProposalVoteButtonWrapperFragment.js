@@ -12,7 +12,7 @@ import type { ProposalVoteButtonWrapperFragment_viewer } from './__generated__/P
 
 type Props = {
   proposal: ProposalVoteButtonWrapperFragment_proposal,
-  viewer: ProposalVoteButtonWrapperFragment_viewer,
+  viewer: ?ProposalVoteButtonWrapperFragment_viewer,
   step: ProposalVoteButtonWrapperFragment_step,
   id: string,
   className: string,
@@ -26,6 +26,9 @@ export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
 
   userHasEnoughCredits = () => {
     const { viewer, proposal } = this.props;
+    if (!viewer) {
+      return true;
+    }
     const creditsLeft = viewer.proposalVotes.creditsLeft;
     if (creditsLeft !== null && typeof creditsLeft !== 'undefined' && proposal.estimation) {
       return creditsLeft >= proposal.estimation;

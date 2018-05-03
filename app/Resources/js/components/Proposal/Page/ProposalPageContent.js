@@ -176,6 +176,7 @@ export default createFragmentContainer(ProposalPageContent, {
   viewer: graphql`
     fragment ProposalPageContent_viewer on User {
       id
+      ...ProposalVoteButtonWrapperFragment_viewer @arguments(stepId: $stepId)
     }
   `,
   proposal: graphql`

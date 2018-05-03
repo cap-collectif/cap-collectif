@@ -10,7 +10,7 @@ import type { ProposalPreviewVote_viewer } from './__generated__/ProposalPreview
 type Props = {
   proposal: ProposalPreviewVote_proposal,
   step: ProposalPreviewVote_step,
-  viewer: ProposalPreviewVote_viewer,
+  viewer: ?ProposalPreviewVote_viewer,
 };
 
 export class ProposalPreviewVote extends React.Component<Props> {
