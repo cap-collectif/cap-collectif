@@ -114,7 +114,7 @@ export default createFragmentContainer(container, {
       category {
         name
       }
-      ...ProposalPreviewVote_proposal
+      ...ProposalPreviewVote_proposal @arguments(isAuthenticated: $isAuthenticated)
       ...ProposalDetailEstimation_proposal
       ...ProposalDetailLikers_proposal
       ...ProposalVoteThresholdProgressBar_proposal
@@ -127,7 +127,7 @@ export default createFragmentContainer(container, {
   step: graphql`
     fragment ProposalPreviewBody_step on Step {
       id
-      ...ProposalPreviewVote_step
+      ...ProposalPreviewVote_step @arguments(isAuthenticated: $isAuthenticated)
       ...ProposalVoteThresholdProgressBar_step
       ... on CollectStep {
         voteThreshold

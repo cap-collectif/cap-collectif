@@ -18,18 +18,5 @@ exports[`<ProposalPreviewVote /> should render a proposal preview vote 1`] = `
     }
     viewer={null}
   />
-  <Relay(Connect(ProposalVoteModal))
-    proposal={
-      Object {
-        "$refType": null,
-        "id": "1",
-      }
-    }
-    step={
-      Object {
-        "$refType": null,
-      }
-    }
-  />
 </span>
 `;

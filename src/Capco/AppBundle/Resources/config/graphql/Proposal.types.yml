@@ -49,13 +49,11 @@ Proposal:
               type: "Project!"
             status:
               type: "Status"
-              resolve: '@=value.getStatus()'
-              #resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalStatusResolver", [value, args])'
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalStatusResolver", [value, args])'
               args:
                   step:
                       type: "ID"
-                      description: "Status on a selection step."
-
+                      description: "Used to get the status on a selection step."
             selections:
               type: "[Selection!]!"
             likers:

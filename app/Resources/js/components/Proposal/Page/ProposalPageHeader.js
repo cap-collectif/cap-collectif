@@ -97,20 +97,15 @@ export class ProposalPageHeader extends React.Component<Props> {
                 proposal={proposal}
                 step={step}
                 viewer={viewer}
-                // className="pull-right btn-lg"
                 id="proposal-vote-btn"
-                // style={this.props.style}
               />
             )}
             {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
-            <ProposalFollowButton
-              proposal={proposal}
-              isAuthenticated={!!viewer}
-              // className="pull-right btn-lg"
-            />
+            <ProposalFollowButton proposal={proposal} isAuthenticated={!!viewer} />
           </div>
         )}
-        {proposal.publicationStatus !== 'DRAFT' &&
+        {viewer &&
+          proposal.publicationStatus !== 'DRAFT' &&
           step && <ProposalVoteModal proposal={proposal} step={step} />}
       </div>
     );
@@ -132,17 +127,19 @@ export default createFragmentContainer(container, {
     }
   `,
   step: graphql`
-    fragment ProposalPageHeader_step on ProposalStep {
+    fragment ProposalPageHeader_step on ProposalStep
+      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
       ...ProposalVoteButtonWrapperFragment_step
-      ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated)
+      ...ProposalVoteModal_step @include(if: $isAuthenticated)
     }
   `,
   proposal: graphql`
-    fragment ProposalPageHeader_proposal on Proposal {
+    fragment ProposalPageHeader_proposal on Proposal
+      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
       id
       ...ProposalVoteButtonWrapperFragment_proposal
         @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
-      ...ProposalVoteModal_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
+      ...ProposalVoteModal_proposal @arguments(stepId: $stepId) @include(if: $isAuthenticated)
       ...ProposalFollowButton_proposal @arguments(isAuthenticated: $isAuthenticated)
       title
       theme {

@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import Truncate from 'react-truncate';
 import { submit, isDirty, isSubmitting } from 'redux-form';
 import { connect, type MapStateToProps } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
@@ -62,7 +61,7 @@ export class ProposalsUserVotesStep extends React.Component<Props> {
                 <FormattedMessage id="admin.fields.step.votesHelpText" />
               </b>
             </p>
-            <Truncate lines={3}>{step.votesHelpText}</Truncate>
+            <div dangerouslySetInnerHTML={{ __html: step.votesHelpText }} />
           </div>
         )}
         <h3 className="d-ib mr-10 mb-10">

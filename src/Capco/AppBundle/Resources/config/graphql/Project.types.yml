@@ -22,6 +22,3 @@ Project:
             votableSteps:
               type: "[ProposalStep!]!"
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectVotableStepsResolver", [value])'
-            votesUrl:
-              type: "URI"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProjectUrlResolver", [value])'

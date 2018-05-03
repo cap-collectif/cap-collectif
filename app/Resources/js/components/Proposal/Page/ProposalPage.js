@@ -42,14 +42,14 @@ export class ProposalPage extends React.Component<Props> {
                 ...ProposalPageHeader_viewer
               }
               step: node(id: $stepId) @include(if: $hasVotableStep) {
-                ...ProposalPageHeader_step
+                ...ProposalPageHeader_step @arguments(isAuthenticated: $isAuthenticated)
                 ...ProposalPageTabs_step
               }
               proposal: node(id: $proposalId) {
                 ...ProposalDraftAlert_proposal
                 ...ProposalPageAlert_proposal
                 ...ProposalPageTabs_proposal
-                ...ProposalPageHeader_proposal
+                ...ProposalPageHeader_proposal @arguments(isAuthenticated: $isAuthenticated)
               }
             }
           `}

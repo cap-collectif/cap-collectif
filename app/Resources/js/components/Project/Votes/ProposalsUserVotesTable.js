@@ -94,8 +94,10 @@ const renderDraggableMembers = ({ fields, votes, step, deletable }: VotesProps) 
                     {/* $FlowFixMe */}
                     <ProposalUserVoteItem
                       member={member}
+                      ranking={index + 1}
                       vote={vote}
                       step={step}
+                      showDraggableIcon={fields.length > 1}
                       onDelete={deletable ? () => fields.remove(index) : null}
                     />
                   </DraggableItem>

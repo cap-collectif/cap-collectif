@@ -67,9 +67,6 @@ export class VoteButtonOverlay extends React.Component<Props> {
       help = (
         <span>
           <FormattedMessage id="proposal.vote.popover.limit_reached_help" />
-          <a href={step.project.votesUrl}>
-            <FormattedMessage id="check-my-votes" />
-          </a>
         </span>
       );
     }
@@ -82,7 +79,7 @@ export class VoteButtonOverlay extends React.Component<Props> {
       </Popover>
     );
     return (
-      <OverlayTrigger placement="top" overlay={overlay}>
+      <OverlayTrigger placement="top" overlay={overlay} rootClose>
         <span style={{ cursor: 'not-allowed' }}>
           {/* $FlowFixMe */
           React.cloneElement(children, {
@@ -100,9 +97,6 @@ export default createFragmentContainer(VoteButtonOverlay, {
   step: graphql`
     fragment VoteButtonOverlay_step on ProposalStep {
       id
-      project {
-        votesUrl
-      }
       votesLimit
     }
   `,
