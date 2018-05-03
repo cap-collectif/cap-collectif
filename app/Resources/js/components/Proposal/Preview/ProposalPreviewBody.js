@@ -18,7 +18,7 @@ type Props = {
   proposal: ProposalPreviewBody_proposal,
   features: FeatureToggles,
   step: ProposalPreviewBody_step,
-  viewer: ProposalPreviewBody_viewer,
+  viewer: ?ProposalPreviewBody_viewer,
 };
 
 export class ProposalPreviewBody extends React.Component<Props> {
