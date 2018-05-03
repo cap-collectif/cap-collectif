@@ -15,7 +15,7 @@ class EventCommentRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('aut', 'm', 'v', 'e', 'r', 'ans')
             ->leftJoin('c.Author', 'aut')
-            ->leftJoin('aut.Media', 'm')
+            ->leftJoin('aut.media', 'm')
             ->leftJoin('c.votes', 'v')
             ->leftJoin('c.Reports', 'r')
             ->leftJoin('c.Event', 'e')

@@ -71,7 +71,7 @@ class CommentRepository extends EntityRepository
         return $this->getIsEnabledQueryBuilder()
             ->addSelect('aut', 'm', 'v', 'r')
             ->leftJoin('c.Author', 'aut')
-            ->leftJoin('aut.Media', 'm')
+            ->leftJoin('aut.media', 'm')
             ->leftJoin('c.votes', 'v')
             ->leftJoin('c.Reports', 'r')
             ->andWhere('c.id = :comment')
