@@ -1206,7 +1206,6 @@ type Project implements Node {
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
   url: URI
   votableSteps: [ProposalStep!]!
-  votesUrl: URI
 }
 
 # A budget contribution
@@ -1224,7 +1223,7 @@ type Proposal implements Node {
   reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
   project: Project!
   status(
-    # Status on a selection step.
+    # Used to get the status on a selection step.
     step: ID
   ): Status
   selections: [Selection!]!

@@ -61,7 +61,8 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
       >
         <Field
           component={[Function]}
-          label="anonymous-voting"
+          label="public"
+          labelSide="RIGHT"
           name="votes.1.anonymous"
           normalize={[Function]}
         />

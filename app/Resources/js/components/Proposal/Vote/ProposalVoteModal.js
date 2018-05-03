@@ -4,7 +4,6 @@ import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer, commitLocalUpdate } from 'react-relay';
 import { ConnectionHandler } from 'relay-runtime';
 import { Modal } from 'react-bootstrap';
-import Truncate from 'react-truncate';
 import { submit } from 'redux-form';
 import { connect, type MapStateToProps } from 'react-redux';
 import CloseButton from '../../Form/CloseButton';
@@ -123,15 +122,19 @@ class ProposalVoteModal extends React.Component<Props> {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h2>
+          <h3 className="d-ib mr-10 mb-10">
             <FormattedMessage
               id={step.votesRanking ? 'modal-ranking' : 'proposal.vote.modal.title'}
             />
+          </h3>
+          <h4 className="excerpt d-ib">
             <FormattedMessage
-              id="global.opinionsCount"
-              values={{num: step.viewerVotes.totalCount}}
+              id="project.votes.nb"
+              values={{
+                num: step.viewerVotes.totalCount,
+              }}
             />
-          </h2>
+          </h4>
           <ProposalsUserVotesTable onSubmit={this.onSubmit} step={step} votes={step.viewerVotes} />
           {step.votesHelpText && (
             <div className="well mb-0 mt-10">
@@ -140,7 +143,7 @@ class ProposalVoteModal extends React.Component<Props> {
                   <FormattedMessage id="admin.fields.step.votesHelpText" />
                 </b>
               </p>
-              <Truncate lines={3}>{step.votesHelpText}</Truncate>
+              <div dangerouslySetInnerHTML={{ __html: step.votesHelpText }} />
             </div>
           )}
         </Modal.Body>
@@ -176,22 +179,18 @@ const container = connect(mapStateToProps)(ProposalVoteModal);
 export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalVoteModal_proposal on Proposal
-      @argumentDefinitions(
-        stepId: { type: "ID!", nonNull: true }
-        isAuthenticated: { type: "Boolean!", nonNull: true }
-      ) {
+      @argumentDefinitions(stepId: { type: "ID!", nonNull: true }) {
       id
-      viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
+      viewerHasVote(step: $stepId)
     }
   `,
   step: graphql`
-    fragment ProposalVoteModal_step on ProposalStep
-      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
+    fragment ProposalVoteModal_step on ProposalStep {
       id
       votesRanking
       votesHelpText
       ...ProposalsUserVotesTable_step
-      viewerVotes(orderBy: { field: POSITION, direction: ASC }) @include(if: $isAuthenticated) {
+      viewerVotes(orderBy: { field: POSITION, direction: ASC }) {
         ...ProposalsUserVotesTable_votes
         totalCount
         edges {

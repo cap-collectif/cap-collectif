@@ -26,7 +26,7 @@ export class ProposalPreviewVote extends React.Component<Props> {
           id={`proposal-vote-btn-${proposal.id}`}
           className="proposal__preview__vote mr-15"
         />
-        <ProposalVoteModal proposal={proposal} step={step} />
+        {viewer && <ProposalVoteModal proposal={proposal} step={step} />}
       </span>
     );
   }
@@ -39,16 +39,18 @@ export default createFragmentContainer(ProposalPreviewVote, {
     }
   `,
   proposal: graphql`
-    fragment ProposalPreviewVote_proposal on Proposal {
+    fragment ProposalPreviewVote_proposal on Proposal
+      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
       id
-      ...ProposalVoteModal_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
+      ...ProposalVoteModal_proposal @arguments(stepId: $stepId) @include(if: $isAuthenticated)
       ...ProposalVoteButtonWrapperFragment_proposal
         @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
     }
   `,
   step: graphql`
-    fragment ProposalPreviewVote_step on Step {
-      ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated)
+    fragment ProposalPreviewVote_step on Step
+      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
+      ...ProposalVoteModal_step @include(if: $isAuthenticated)
       ...ProposalVoteButtonWrapperFragment_step
     }
   `,

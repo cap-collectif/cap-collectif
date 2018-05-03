@@ -15,11 +15,16 @@ type Props = {
   ranking?: number,
   onDelete?: ?() => void,
   member: string,
+  showDraggableIcon: boolean,
 };
 
 export class ProposalUserVoteItem extends React.Component<Props> {
+  static defaultProps = {
+    showDraggableIcon: false,
+  };
+
   render() {
-    const { onDelete, member, step, vote, ranking } = this.props;
+    const { onDelete, member, showDraggableIcon, step, vote, ranking } = this.props;
     const proposal = vote.proposal;
 
     // TODO use a value selector to update the label
@@ -48,9 +53,9 @@ export class ProposalUserVoteItem extends React.Component<Props> {
         {ranking && (
           <Col md={1} xs={12} className="proposals-user-votes__col">
             <div className="proposals-user-votes__content justify-content-between">
-              <i className="cap cap-android-menu excerpt" />
+              {showDraggableIcon && <i className="cap cap-android-menu excerpt mr-5" />}
               <div className="d-flex">
-                <span className="badge label-primary m-auto">{ranking + 1}</span>
+                <span className="badge label-primary m-auto">{ranking}</span>
               </div>
             </div>
           </Col>
@@ -87,8 +92,9 @@ export class ProposalUserVoteItem extends React.Component<Props> {
           <div className="proposals-user-votes__content justify-content-end">
             <div className="d-flex">
               <Field
+                labelSide="RIGHT"
                 component={toggle}
-                label={isAnonymous ? "public" : "admin.fields.idea_vote.private"}
+                label={isAnonymous ? 'public' : 'admin.fields.idea_vote.private'}
                 name={`${member}.anonymous`}
                 normalize={val => !!val}
               />
