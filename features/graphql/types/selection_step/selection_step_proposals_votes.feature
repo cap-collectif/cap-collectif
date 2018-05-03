@@ -49,7 +49,7 @@ Scenario: Admin wants to get votes for a proposal in a selection step
                         "node": {
                             "id": @string@,
                             "votes": {
-                                "totalCount": 46,
+                                "totalCount": @integer@,
                                 "edges": [
                                     {
                                         "node": {

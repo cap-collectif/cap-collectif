@@ -45,11 +45,11 @@ CollectStep:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\StepContributorResolver", [value, args])'
             viewerProposalDrafts:
                 type: "[Proposal!]!"
-                access: "@=hasRole('ROLE_USER')"
+                access: "@=isAuthenticated() and hasRole('ROLE_USER')"
                 resolve: "@=resolver('query_get_draft_proposals_for_user_in_step', [value, user])"
             viewerVotes:
-                access: "@=hasRole('ROLE_USER')"
                 type: "ProposalVoteConnection!"
+                access: "@=hasRole('ROLE_USER')"
                 description: "A list of viewer votes associated with the step."
                 argsBuilder: "Relay::Connection"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerStepVotesResolver", [value, user, args])'
