@@ -14,16 +14,13 @@ type Props = {
 export class ProposalAdminFollowers extends React.Component<Props> {
   render() {
     const { proposal, intl } = this.props;
-    const totalCount = proposal.followerConnection.totalCount;
+    const totalCount = proposal.allFollowers.totalCount;
     const isAdmin = true;
     return (
       <div className="box box-primary container-fluid">
         <div className="box-header">
           <h3 className="box-title">
-            <FormattedMessage
-              id="proposal.follower.count"
-              values={{ num: proposal.followerConnection.totalCount }}
-            />
+            <FormattedMessage id="proposal.follower.count" values={{ num: totalCount }} />
           </h3>
           <a
             className="pull-right link"
@@ -91,9 +88,9 @@ export default createFragmentContainer(
   container,
   graphql`
     fragment ProposalAdminFollowers_proposal on Proposal {
-      ...ProposalPageFollowers_proposal
+      ...ProposalPageFollowers_proposal @arguments(count: $count, cursor: $cursor)
       id
-      followerConnection(first: $count, after: $cursor) {
+      allFollowers: followerConnection(first: 0) {
         totalCount
       }
     }
