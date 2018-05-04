@@ -34,7 +34,7 @@ class UserArchiveRequestProcessor implements ProcessorInterface
         $this->em = $em;
     }
 
-    public function process(Message $message, array $options)
+    public function process(Message $message, array $options): ?bool
     {
         $json = json_decode($message->getBody(), true);
         $id = $json['userArchiveId'];
@@ -56,6 +56,8 @@ class UserArchiveRequestProcessor implements ProcessorInterface
         $archive->setPath($this->getZipFilenameForUser($user));
 
         $this->em->flush();
+
+        $this->userArchiveNotifier->onUserArchiveGenerated($archive);
 
         return true;
     }

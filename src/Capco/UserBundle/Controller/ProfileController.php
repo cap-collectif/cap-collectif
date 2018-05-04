@@ -96,6 +96,23 @@ class ProfileController extends BaseController
     }
 
     /**
+     * @Route("/download_archive/{token}", name="capco_profile_data_login")
+     */
+    public function loginAndShowDataAction(Request $request, string $token)
+    {
+        $userNotificationsConfiguration = $this->get('capco.user_notifications_configuration.repository')->findOneBy(['unsubscribeToken' => $token]);
+        if (!$userNotificationsConfiguration) {
+            throw new NotFoundHttpException();
+        }
+        if (!$this->getUser()) {
+            $this->loginWithToken($request, $userNotificationsConfiguration);
+        }
+
+        // TODO: Replace url with real route when @mauriau has done his pr
+        return $this->redirectToRoute('capco_profile_notifications_edit_account');
+    }
+
+    /**
      * @Route("/notifications/{token}", name="capco_profile_notifications_login")
      */
     public function loginAndShowNotificationsOptionsAction(Request $request, string $token)

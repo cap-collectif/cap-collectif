@@ -90,3 +90,4 @@ services:
       - '@mailer_service'
       - '@capco.site_parameter.resolver'
       - '@capco.resolvers.users'
+      - '@router'

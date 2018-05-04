@@ -94,6 +94,14 @@ class UserResolver implements ContainerAwareInterface
             ['token' => $user->getNotificationsConfiguration()->getUnsubscribeToken()], UrlGeneratorInterface::ABSOLUTE_URL);
     }
 
+    public function resolveLoginAndShowDataUrl(User $user): string
+    {
+        $router = $this->container->get('router');
+
+        return $router->generate('capco_profile_data_login',
+            ['token' => $user->getNotificationsConfiguration()->getUnsubscribeToken()], UrlGeneratorInterface::ABSOLUTE_URL);
+    }
+
     public function resolveShowUrlBySlug(string $slug)
     {
         $router = $this->container->get('router');
