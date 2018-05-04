@@ -7,6 +7,7 @@ exports[`<ProposalPageLastNews /> should render correctly 1`] = `
   <AnswerBody
     answer={
       Object {
+        "author": Object {},
         "authors": Array [
           Object {},
         ],
