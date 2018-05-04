@@ -58,7 +58,7 @@ export class ProposalPageTabs extends React.Component<Props> {
   render() {
     const { viewer, proposal, step, form, features, categories } = this.props;
     const currentVotableStep = proposal.currentVotableStep;
-    const votesCount = proposal.votes.totalCount;
+    const votesCount = proposal.allVotes.totalCount;
     const showVotesTab = votesCount > 0 || currentVotableStep !== null;
 
     return (
@@ -151,7 +151,7 @@ export class ProposalPageTabs extends React.Component<Props> {
                       <Nav bsStyle="pills">
                         {proposal.votableSteps.map((votableStep, index) => (
                           <NavItem key={index} eventKey={index}>
-                            {votableStep.title}{' '}
+                            {votableStep.title}
                           </NavItem>
                         ))}
                       </Nav>
@@ -209,7 +209,7 @@ export default createFragmentContainer(ProposalPageTabs, {
       ...ProposalPageContent_proposal
       ...ProposalPageAdvancement_proposal
       ...ProposalPageVoteThreshold_proposal
-      votes {
+      allVotes: votes(first: 0) {
         totalCount
       }
       news {

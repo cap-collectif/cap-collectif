@@ -10,7 +10,7 @@ describe('<ProposalPreviewFooter />', () => {
     $refType,
     id: '1',
     commentsCount: 3,
-    votes: {
+    allVotesOnStep: {
       totalCount: 42,
     },
   };

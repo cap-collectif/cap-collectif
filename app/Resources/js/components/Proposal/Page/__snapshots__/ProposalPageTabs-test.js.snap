@@ -126,6 +126,9 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                     "allFollowers": Object {
                       "totalCount": 169,
                     },
+                    "allVotes": Object {
+                      "totalCount": 1,
+                    },
                     "currentVotableStep": null,
                     "id": "1",
                     "news": Object {
@@ -133,9 +136,6 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                     },
                     "viewerCanSeeEvaluation": true,
                     "votableSteps": Array [],
-                    "votes": Object {
-                      "totalCount": 1,
-                    },
                   }
                 }
               />
@@ -147,6 +147,9 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                     "allFollowers": Object {
                       "totalCount": 169,
                     },
+                    "allVotes": Object {
+                      "totalCount": 1,
+                    },
                     "currentVotableStep": null,
                     "id": "1",
                     "news": Object {
@@ -154,9 +157,6 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                     },
                     "viewerCanSeeEvaluation": true,
                     "votableSteps": Array [],
-                    "votes": Object {
-                      "totalCount": 1,
-                    },
                   }
                 }
               />
@@ -176,6 +176,9 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                     "allFollowers": Object {
                       "totalCount": 169,
                     },
+                    "allVotes": Object {
+                      "totalCount": 1,
+                    },
                     "currentVotableStep": null,
                     "id": "1",
                     "news": Object {
@@ -183,9 +186,6 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                     },
                     "viewerCanSeeEvaluation": true,
                     "votableSteps": Array [],
-                    "votes": Object {
-                      "totalCount": 1,
-                    },
                   }
                 }
                 step={null}
@@ -206,6 +206,9 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                     "allFollowers": Object {
                       "totalCount": 169,
                     },
+                    "allVotes": Object {
+                      "totalCount": 1,
+                    },
                     "currentVotableStep": null,
                     "id": "1",
                     "news": Object {
@@ -213,9 +216,6 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                     },
                     "viewerCanSeeEvaluation": true,
                     "votableSteps": Array [],
-                    "votes": Object {
-                      "totalCount": 1,
-                    },
                   }
                 }
                 showCategories={true}
@@ -232,6 +232,9 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                     "allFollowers": Object {
                       "totalCount": 169,
                     },
+                    "allVotes": Object {
+                      "totalCount": 1,
+                    },
                     "currentVotableStep": null,
                     "id": "1",
                     "news": Object {
@@ -239,9 +242,6 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                     },
                     "viewerCanSeeEvaluation": true,
                     "votableSteps": Array [],
-                    "votes": Object {
-                      "totalCount": 1,
-                    },
                   }
                 }
               />
@@ -291,6 +291,9 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                 "allFollowers": Object {
                   "totalCount": 169,
                 },
+                "allVotes": Object {
+                  "totalCount": 1,
+                },
                 "currentVotableStep": null,
                 "id": "1",
                 "news": Object {
@@ -298,9 +301,6 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                 },
                 "viewerCanSeeEvaluation": true,
                 "votableSteps": Array [],
-                "votes": Object {
-                  "totalCount": 1,
-                },
               }
             }
           />
@@ -317,6 +317,9 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                 "allFollowers": Object {
                   "totalCount": 169,
                 },
+                "allVotes": Object {
+                  "totalCount": 1,
+                },
                 "currentVotableStep": null,
                 "id": "1",
                 "news": Object {
@@ -324,9 +327,6 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                 },
                 "viewerCanSeeEvaluation": true,
                 "votableSteps": Array [],
-                "votes": Object {
-                  "totalCount": 1,
-                },
               }
             }
           />
@@ -344,6 +344,9 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                 "allFollowers": Object {
                   "totalCount": 169,
                 },
+                "allVotes": Object {
+                  "totalCount": 1,
+                },
                 "currentVotableStep": null,
                 "id": "1",
                 "news": Object {
@@ -351,9 +354,6 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                 },
                 "viewerCanSeeEvaluation": true,
                 "votableSteps": Array [],
-                "votes": Object {
-                  "totalCount": 1,
-                },
               }
             }
           />
