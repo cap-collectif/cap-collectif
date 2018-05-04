@@ -5,7 +5,6 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Source;
 use Capco\UserBundle\Entity\User;
@@ -28,15 +27,17 @@ class DeleteUserContributionsMutation implements ContainerAwareInterface
         $this->translator = $translator;
     }
 
-    public function __invoke(Argument $input): array
+    public function __invoke(Argument $input, User $user): array
     {
         $removalType = $input['removal'];
-        $user = $this->em->getRepository(User::class)->find(['id' => $input['userId']]);
         $contributions = $user->getContributions();
+
+        $count['contributionsRemoved'] = 0;
+        $count['contributionsContentDeleted'] = 0;
 
         if ('hard' === $removalType && $user) {
             $this->anonymizeUser($user);
-            $this->deleteProposalsAndCommentsContent($user, $contributions);
+            $count = $this->deleteUserContents($user, $contributions, $count);
         } elseif ('soft' === $removalType && $user) {
             $this->anonymizeUser($user);
         } elseif (!$user) {
@@ -45,7 +46,12 @@ class DeleteUserContributionsMutation implements ContainerAwareInterface
             throw new \RuntimeException("this type of remove user account don't exist");
         }
 
-        return  ['userId' => $user->getId()];
+        return [
+            'userId' => $user->getId(),
+            'username' => $user->getUsername(),
+            'contributionsRemoved' => $count['contributionsRemoved'],
+            'contributionsContentDeleted' => $count['contributionsContentDeleted'],
+        ];
     }
 
     public function anonymizeUser(User $user): void
@@ -95,15 +101,13 @@ class DeleteUserContributionsMutation implements ContainerAwareInterface
         $this->em->flush();
     }
 
-    public function deleteProposalsAndCommentsContent(User $user, array $contributions)
+    public function deleteUserContents(User $user, array $contributions, array $count): array
     {
         $deletedBodyText = $this->translator->trans('deleted-content-by-author', [], 'CapcoAppBundle');
         $deletedTitleText = $this->translator->trans('deleted-title', [], 'CapcoAppBundle');
 
         $reports = $this->em->getRepository(Reporting::class)->findBy(['Reporter' => $user]);
         $events = $this->em->getRepository(Event::class)->findBy(['Author' => $user]);
-        $projects = $this->em->getRepository(Project::class)->findBy(['Author' => $user]);
-        //$blogPosts = $this->em->getRepository(Post::class)->findBy(['Authors' => $user]);
 
         foreach ($contributions as $contribution) {
             if ($contribution instanceof Comment
@@ -112,11 +116,13 @@ class DeleteUserContributionsMutation implements ContainerAwareInterface
             || $contribution instanceof \Capco\AppBundle\Entity\Argument) {
                 if (method_exists($contribution, 'getStep') && $contribution->getStep()->getEndAt() > new \DateTime()) {
                     $this->em->remove($contribution);
+                    ++$count['contributionsRemoved'];
                 }
             }
 
             if (method_exists($contribution, 'setTitle')) {
                 $contribution->setTitle($deletedTitleText);
+                ++$count['contributionsContentDeleted'];
             }
             if (method_exists($contribution, 'setBody')) {
                 $contribution->setBody($deletedBodyText);
@@ -140,14 +146,14 @@ class DeleteUserContributionsMutation implements ContainerAwareInterface
             $this->em->remove($event);
         }
 
-        foreach ($projects as $project) {
-            $project->setTitle($deletedTitleText);
-        }
+        $this->container->get('redis_storage.helper')->recomputeUserCounters($user);
 
         /*foreach ($blogPosts as $blogPost) {
             $this->em->remove($blogPost);
         }*/
 
         $this->em->flush();
+
+        return $count;
     }
 }

@@ -5,4 +5,14 @@ DeleteUserContributionsInputPayload:
             userId:
                 type: "String!"
                 description: "user id"
+            username:
+                type: "String!"
+                description: "username after delete"
+            contributionsRemoved:
+                type: "Int!"
+                description: "number of contributions removed"
+            contributionsContentDeleted:
+                type: "Int!"
+                description: "number of contributions content who have been changed"
+
 
