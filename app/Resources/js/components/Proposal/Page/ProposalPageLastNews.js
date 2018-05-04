@@ -7,7 +7,7 @@ import type { ProposalPageLastNews_proposal } from './__generated__/ProposalPage
 
 export class ProposalPageLastNews extends React.Component<{
   proposal: ProposalPageLastNews_proposal,
-  className?: string,
+  className: string,
 }> {
   static defaultProps = {
     className: '',
@@ -22,7 +22,8 @@ export class ProposalPageLastNews extends React.Component<{
     if (!edge || typeof edge === 'undefined') {
       return null;
     }
-    const post = edge.node;
+    const post = JSON.parse(JSON.stringify(edge.node));
+    post.author = post.authors[0] && post.authors[0];
     const classes = {
       'bg-vip': post.authors[0] && post.authors[0].vip,
       block: true,
@@ -51,6 +52,7 @@ export default createFragmentContainer(
             url
             title
             createdAt
+            body
             authors {
               id
               vip

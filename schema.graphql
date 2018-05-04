@@ -1161,6 +1161,7 @@ type Post {
   url: String!
   media: Media
   themes: [Theme!]!
+  body: String!
 }
 
 # Available statuses
