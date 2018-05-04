@@ -220,7 +220,7 @@ class PostRepository extends EntityRepository
         $qb = $this->getIsPublishedQueryBuilder('p')
             ->addSelect('a', 'am', 'm', 'c', 't')
             ->leftJoin('p.Authors', 'a')
-            ->leftJoin('a.Media', 'am')
+            ->leftJoin('a.media', 'am')
             ->leftJoin('p.Media', 'm')
             ->leftJoin('p.themes', 't', 'WITH', 't.isEnabled = true')
             ->leftJoin('p.projects', 'c', 'WITH', 'c.isEnabled = true')

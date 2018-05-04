@@ -168,7 +168,7 @@ class SourceRepository extends EntityRepository
             ->leftJoin('s.Author', 'a')
             ->leftJoin('s.Media', 'media')
             ->leftJoin('s.Category', 'cat')
-            ->leftJoin('a.Media', 'm')
+            ->leftJoin('a.media', 'm')
             ->leftJoin('s.votes', 'v')
             ->leftJoin('s.Opinion', 'o')
             ->andWhere('s.slug = :slug')

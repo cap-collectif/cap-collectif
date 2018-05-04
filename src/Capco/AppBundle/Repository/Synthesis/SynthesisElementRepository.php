@@ -47,7 +47,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
         $qb = $this->createQueryBuilder('se')
             ->addSelect('a', 'am')
             ->leftJoin('se.author', 'a')
-            ->leftJoin('a.Media', 'am')
+            ->leftJoin('a.media', 'am')
         ;
 
         if (null !== $term) {
@@ -80,7 +80,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
         $qb = $this->createQueryBuilder('se')
             ->addSelect('a', 'am', 'parent', 'children', 'cauts', 'cautms', 'div', 'odiv')
             ->leftJoin('se.author', 'a')
-            ->leftJoin('a.Media', 'am')
+            ->leftJoin('a.media', 'am')
             ->leftJoin('se.parent', 'parent')
             ->leftJoin('se.children', 'children')
             ->leftJoin('children.author', 'cauts')

@@ -28,7 +28,7 @@ class EventRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('a', 'm', 't', 'c')
             ->leftJoin('e.Author', 'a')
-            ->leftJoin('a.Media', 'm')
+            ->leftJoin('a.media', 'm')
             ->leftJoin('e.themes', 't', 'WITH', 't.isEnabled = :enabled')
             ->leftJoin('e.projects', 'c', 'WITH', 'c.isEnabled = :enabled')
             ->setParameter('enabled', true)

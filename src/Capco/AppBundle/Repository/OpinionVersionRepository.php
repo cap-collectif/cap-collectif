@@ -29,7 +29,7 @@ class OpinionVersionRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder('o')
             ->addSelect('a', 'm', 'argument', 'source')
             ->leftJoin('o.author', 'a')
-            ->leftJoin('a.Media', 'm')
+            ->leftJoin('a.media', 'm')
             ->leftJoin('o.arguments', 'argument', 'WITH', 'argument.isTrashed = false')
             ->leftJoin('o.sources', 'source', 'WITH', 'source.isTrashed = false')
             ->andWhere('o.id = :id')

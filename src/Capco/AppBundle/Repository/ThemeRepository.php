@@ -81,7 +81,7 @@ class ThemeRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('a', 'am', 'm', 'p', 'post', 'e')
             ->leftJoin('t.Author', 'a')
-            ->leftJoin('a.Media', 'am')
+            ->leftJoin('a.media', 'am')
             ->leftJoin('t.Media', 'm')
             ->leftJoin('t.projects', 'p', 'WITH', 'p.isEnabled = :enabled')
             ->leftJoin('t.posts', 'post', 'WITH', 'post.isPublished = :enabled')

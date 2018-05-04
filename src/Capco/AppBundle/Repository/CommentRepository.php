@@ -110,7 +110,7 @@ class CommentRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('a', 'm')
             ->leftJoin('c.Author', 'a')
-            ->leftJoin('a.Media', 'm')
+            ->leftJoin('a.media', 'm')
             ->andWhere('c.Author = :user')
             ->setParameter('user', $user)
             ->orderBy('c.updatedAt', 'ASC');
