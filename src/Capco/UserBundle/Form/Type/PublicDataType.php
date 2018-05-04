@@ -53,14 +53,14 @@ class PublicDataType extends AbstractType
                 'label_attr' => ['style' => 'font-weight: normal; color: #000000'],
                 'translation_domain' => 'CapcoAppBundle',
             ])
-            ->add('website', 'url', array(
-                'label'    => 'form.label_website',
+            ->add('website', 'url', [
+                'label' => 'form.label_website',
                 'required' => false,
-            ))
-            ->add('biography', 'textarea', array(
-                'label'    => 'form.label_biography',
+            ])
+            ->add('biography', 'textarea', [
+                'label' => 'form.label_biography',
                 'required' => false,
-            ))
+            ])
         ;
 
         if ($this->toggleManager->isActive('user_type')) {
@@ -79,9 +79,9 @@ class PublicDataType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
+            [
                 'data_class' => User::class,
-            )
+            ]
         );
     }
 }

@@ -45,10 +45,8 @@ const hasAddressData = (viewer: PersonalData_viewer, value: ?Object) => {
   if (!viewer.address && !viewer.zipCode && !viewer.city) {
     return false;
   }
-  if (value) {
-    if (!value.address && !value.zipCode && !value.city) {
-      return false;
-    }
+  if (value && !value.address && !value.zipCode && !value.city) {
+    return false;
   }
 
   return true;

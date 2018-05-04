@@ -3,7 +3,6 @@
 namespace Capco\UserBundle\Form\Type;
 
 use Capco\UserBundle\Entity\User;
-use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -72,11 +71,11 @@ class PersonalDataFormType extends AbstractType
             ->add(
                 'phone',
                 null,
-                array(
+                [
                     'label' => 'form.label_phone',
                     'translation_domain' => 'CapcoAppBundle',
                     'required' => false,
-                )
+                ]
             )
             ->add(
                 'dateOfBirth',
@@ -90,16 +89,12 @@ class PersonalDataFormType extends AbstractType
             ->add(
                 'gender',
                 ChoiceType::class,
-                array(
+                [
                     'label' => 'form.label_gender',
                     'required' => false,
                     'translation_domain' => 'CapcoAppBundle',
-                    'choices' => array(
-                        UserInterface::GENDER_FEMALE => 'FEMALE',
-                        UserInterface::GENDER_MALE => 'MALE',
-                        User::GENDER_OTHER => 'OTHER',
-                    ),
-                )
+                    'choices' => User::getGenderList(),
+                ]
             );
     }
 
@@ -109,25 +104,9 @@ class PersonalDataFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
+            [
                 'data_class' => User::class,
-            )
+            ]
         );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'capco_user_personal_data';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 }
