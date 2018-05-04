@@ -27,7 +27,10 @@ class FOSNotifier extends BaseNotifier implements MailerInterface
         $this->mailer->sendMessage(UserRegistrationConfirmationMessage::create(
             $user,
             $user->getEmail(),
-            $this->userResolver->resolveRegistrationConfirmationUrl($user)
+            $this->userResolver->resolveRegistrationConfirmationUrl($user),
+            $this->siteParams->getValue('global.site.fullname'),
+            'Cap Collectif',
+            $this->userResolver->resolveShowUrl($user)
         ));
     }
 
