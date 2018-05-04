@@ -11,7 +11,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sonata\UserBundle\Controller\ProfileFOSUser1Controller as BaseController;
+use Sonata\UserBundle\Model\UserInterface;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
@@ -66,6 +69,30 @@ class ProfileController extends BaseController
     public function showNotificationsOptionsAction(Request $request)
     {
         return [];
+    }
+
+    /**
+     * @Route("/download_archive", name="capco_profile_download_archive")
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function downloadArchiveAction(Request $request)
+    {
+        $archive = $this->get('capco.user_archive.repository')->getLastForUser($this->getUser());
+
+        if (!$archive) {
+            throw new NotFoundHttpException('Archive not found');
+        }
+
+        $file = $this->get('kernel')->getRootDir() . '/../web/export/' . $archive->getPath();
+
+        if (!file_exists($file)) {
+            throw new NotFoundHttpException('Export not found');
+        }
+
+        $response = (new BinaryFileResponse($file))
+            ->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, 'export.zip');
+
+        return $response;
     }
 
     /**

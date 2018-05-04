@@ -6,6 +6,7 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Button } from 'react-bootstrap';
 import type { UserArchiveRequestButton_viewer } from './__generated__/UserArchiveRequestButton_viewer.graphql';
+import { baseUrl } from '../../../config';
 import RequestUserArchiveMutation from '../../../mutations/RequestUserArchiveMutation';
 
 type Props = {
@@ -24,7 +25,7 @@ export class UserArchiveRequestButton extends Component<Props, State> {
   handleButtonClick = async () => {
     const { viewer: { isArchiveReady, isArchiveDeleted } } = this.props;
     if ((isArchiveReady && !isArchiveDeleted) || isArchiveDeleted) {
-      // console.log('user action');
+      window.open(`${baseUrl}/profile/download_archive`, '_blank');
     } else {
       this.setState({ loading: true });
       await RequestUserArchiveMutation.commit({});

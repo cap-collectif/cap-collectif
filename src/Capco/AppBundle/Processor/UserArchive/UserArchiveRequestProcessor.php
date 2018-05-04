@@ -53,6 +53,7 @@ class UserArchiveRequestProcessor implements ProcessorInterface
         ]);
 
         $archive->setIsGenerated(true);
+        $archive->setPath($this->getZipFilenameForUser($user));
 
         $this->em->flush();
 
@@ -119,9 +120,14 @@ class UserArchiveRequestProcessor implements ProcessorInterface
         return $this->rootDir . '/../web/export/' . $user->getId() . '_data.csv';
     }
 
+    protected function getZipFilenameForUser(User $user): string
+    {
+        return $user->getId() . '.zip';
+    }
+
     protected function getZipPathForUser(User $user): string
     {
-        return $this->rootDir . '/../web/export/' . $user->getId() . '.zip';
+        return $this->rootDir . '/../web/export/' . $this->getZipFilenameForUser($user);
     }
 
     protected function getUserGraphQLQuery(string $userId): string
