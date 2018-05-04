@@ -10,7 +10,7 @@ exports[`<ProposalList /> should not render list if proposal is not provided 1`]
   }
 >
   <FormattedMessage
-    id="proposal.private.empty"
+    id="proposal.empty"
     values={Object {}}
   />
 </p>

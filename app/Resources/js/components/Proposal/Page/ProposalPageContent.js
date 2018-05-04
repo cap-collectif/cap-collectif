@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 import classNames from 'classnames';
 import { Map, Marker, TileLayer } from 'react-leaflet-universal';
@@ -56,7 +57,7 @@ export class ProposalPageContent extends React.Component<Props> {
               <div className="actions">
                 <EditButton
                   id="proposal-edit-button"
-                  author={proposal.author}
+                  author={{ uniqueId: proposal.author.displayName }}
                   onClick={() => {
                     dispatch(openEditProposalModal());
                   }}
@@ -64,7 +65,7 @@ export class ProposalPageContent extends React.Component<Props> {
                 />
                 <DeleteButton
                   id="proposal-delete-button"
-                  author={proposal.author}
+                  author={{ uniqueId: proposal.author.displayName }}
                   onClick={() => {
                     dispatch(openDeleteProposalModal());
                   }}
@@ -166,7 +167,9 @@ export class ProposalPageContent extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(ProposalPageContent, {
+const container = connect()(ProposalPageContent);
+
+export default createFragmentContainer(container, {
   step: graphql`
     fragment ProposalPageContent_step on ProposalStep {
       id
@@ -174,9 +177,12 @@ export default createFragmentContainer(ProposalPageContent, {
     }
   `,
   viewer: graphql`
-    fragment ProposalPageContent_viewer on User {
+    fragment ProposalPageContent_viewer on User
+      @argumentDefinitions(hasVotableStep: { type: "Boolean", defaultValue: true }) {
       id
-      ...ProposalVoteButtonWrapperFragment_viewer @arguments(stepId: $stepId)
+      ...ProposalVoteButtonWrapperFragment_viewer
+        @arguments(stepId: $stepId)
+        @include(if: $hasVotableStep)
     }
   `,
   proposal: graphql`
@@ -186,6 +192,7 @@ export default createFragmentContainer(ProposalPageContent, {
         @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
       author {
         id
+        displayName
       }
       address
       body

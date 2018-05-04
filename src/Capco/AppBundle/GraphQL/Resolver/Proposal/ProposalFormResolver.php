@@ -87,6 +87,9 @@ class ProposalFormResolver implements ContainerAwareInterface
             if ($args->offsetExists('category')) {
                 $filters['categories'] = $args->offsetGet('category');
             }
+            if ($args->offsetExists('status')) {
+                $filters['statuses'] = $args->offsetGet('status');
+            }
 
             if ($args->offsetExists('affiliations')) {
                 $affiliations = $args->offsetGet('affiliations');

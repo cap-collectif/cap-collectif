@@ -122,8 +122,11 @@ const container = connect(mapStateToProps)(ProposalPageHeader);
 
 export default createFragmentContainer(container, {
   viewer: graphql`
-    fragment ProposalPageHeader_viewer on User {
-      ...ProposalVoteButtonWrapperFragment_viewer @arguments(stepId: $stepId)
+    fragment ProposalPageHeader_viewer on User
+      @argumentDefinitions(hasVotableStep: { type: "Boolean", defaultValue: true }) {
+      ...ProposalVoteButtonWrapperFragment_viewer
+        @arguments(stepId: $stepId)
+        @include(if: $hasVotableStep)
     }
   `,
   step: graphql`
