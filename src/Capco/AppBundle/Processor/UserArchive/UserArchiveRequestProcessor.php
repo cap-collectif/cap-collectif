@@ -10,6 +10,7 @@ use Capco\AppBundle\Notifier\UserArchiveNotifier;
 use Capco\AppBundle\Repository\UserArchiveRepository;
 use Capco\AppBundle\Utils\Arr;
 use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Request\Executor;
 use Swarrot\Broker\Message;
 use Swarrot\Processor\ProcessorInterface;
@@ -22,13 +23,15 @@ class UserArchiveRequestProcessor implements ProcessorInterface
     protected $userArchiveNotifier;
     protected $rootDir;
     protected $executor;
+    protected $em;
 
-    public function __construct(UserArchiveRepository $userArchiveRepository, UserArchiveNotifier $userArchiveNotifier, Executor $executor, string $rootDir)
+    public function __construct(UserArchiveRepository $userArchiveRepository, EntityManagerInterface $em, UserArchiveNotifier $userArchiveNotifier, Executor $executor, string $rootDir)
     {
         $this->userArchiveRepository = $userArchiveRepository;
         $this->userArchiveNotifier = $userArchiveNotifier;
         $this->rootDir = $rootDir;
         $this->executor = $executor;
+        $this->em = $em;
     }
 
     public function process(Message $message, array $options)
@@ -48,6 +51,10 @@ class UserArchiveRequestProcessor implements ProcessorInterface
         $this->createZipArchive($this->getZipPathForUser($user), [
             ['data.csv' => $userDataPath],
         ]);
+
+        $archive->setIsGenerated(true);
+
+        $this->em->flush();
 
         return true;
     }

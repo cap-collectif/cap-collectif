@@ -14,6 +14,21 @@ type AddUsersInGroupPayload {
 
 scalar Address
 
+# A user personnal archive.
+type Archive {
+  # The id of the archive.
+  id: ID!
+
+  # When did the user requested his archive?
+  requestedAt: DateTime!
+
+  # Has the archive been generated?
+  isGenerated: Boolean!
+
+  # When the archive has been deleted?
+  deletedAt: DateTime
+}
+
 # An argument
 type Argument implements Node & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
   # Identifies the date and time when the object was created.
@@ -737,6 +752,7 @@ type MultipleChoiceQuestionValidationRule {
 
 type Mutation {
   changeUserNotificationsConfiguration(input: ChangeUserNotificationsConfigurationInput!): ChangeUserNotificationsConfigurationPayload
+  requestUserArchive(input: RequestUserArchiveInput!): RequestUserArchivePayload
   changeProposalPublicationStatus(input: ChangeProposalPublicationStatusInput!): ChangeProposalPublicationStatusPayload
   changeProposalContent(input: ChangeProposalContentInput!): ChangeProposalContentPayload
   createProposal(input: CreateProposalInput!): CreateProposalPayload
@@ -1698,6 +1714,15 @@ type ReportsEdge {
   cursor: String!
 }
 
+input RequestUserArchiveInput {
+  clientMutationId: String
+}
+
+type RequestUserArchivePayload {
+  viewer: User!
+  clientMutationId: String
+}
+
 # A contribution with an author
 interface Response {
   question: Question!
@@ -2205,6 +2230,15 @@ type User implements Node {
 
   # Array of roles converted and translated to string.
   rolesText: String
+
+  # Is the personal archive of the user has been deleted
+  isArchiveDeleted: Boolean!
+
+  # Is the personal archive of the user is ready?
+  isArchiveReady: Boolean!
+
+  # Is the personal archive of the user is being asked for the first time?
+  firstArchive: Boolean!
   website: String
   biography: String
   address: String

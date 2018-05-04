@@ -45,6 +45,7 @@ services:
     class: Capco\AppBundle\Processor\UserArchive\UserArchiveRequestProcessor
     arguments:
       - '@capco.user_archive.repository'
+      - '@doctrine.orm.default_entity_manager'
       - '@capco.user_archive_notifier'
       - '@overblog_graphql.request_executor'
       - '%kernel.root_dir%'

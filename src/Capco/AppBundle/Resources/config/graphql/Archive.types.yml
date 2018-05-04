@@ -12,3 +12,6 @@ Archive:
             isGenerated:
                 type: "Boolean!"
                 description: "Has the archive been generated?"
+            deletedAt:
+                type: "DateTime"
+                description: "When the archive has been deleted?"
