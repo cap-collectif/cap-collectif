@@ -260,6 +260,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
           onClick={() => {
             this.deleteField(target);
           }}
+          id="btn-confirm-delete-field"
           bsStyle="danger"
           className="right-bloc btn-block">
           {<FormattedMessage id="btn_delete" />}
@@ -269,6 +270,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
             this.closeDeleteModal();
             this.refs[target].hide();
           }}
+          id="btn-cancel-delete-field"
           bsStyle="default"
           className="right-block btn-block">
           {<FormattedMessage id="global.no" />}
@@ -332,9 +334,11 @@ export class PersonalData extends Component<Props, PersonalDataState> {
               <form onSubmit={handleSubmit} className="form-horizontal">
                 {hasData(viewer, hasValue) && (
                   <div>
-                    {hasValue.firstname && (
+                    {hasValue.firstname !== null && (
                       <div className="capco_horizontal_field_with_border_top" style={{ border: 0 }}>
-                        <label className="col-sm-3 control-label">
+                        <label
+                          className="col-sm-3 control-label"
+                          htmlFor="personal-data-form-firstname">
                           <FormattedMessage id="form.label_firstname" />
                         </label>
                         <div>
@@ -366,9 +370,11 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                         </div>
                       </div>
                     )}
-                    {hasValue.lastname && (
+                    {hasValue.lastname !== null && (
                       <div className="capco_horizontal_field_with_border_top">
-                        <label className="col-sm-3 control-label">
+                        <label
+                          className="col-sm-3 control-label"
+                          htmlFor="personal-data-form-lastname">
                           <FormattedMessage id="form.label_lastname" />
                         </label>
                         <div>
@@ -395,9 +401,11 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                         </div>
                       </div>
                     )}
-                    {hasValue.gender && (
+                    {hasValue.gender !== null && (
                       <div className="capco_horizontal_field_with_border_top">
-                        <label className="col-sm-3 control-label">
+                        <label
+                          className="col-sm-3 control-label"
+                          htmlFor="personal-data-form-gender">
                           <FormattedMessage id="form.label_gender" />
                         </label>
                         <div>
@@ -434,7 +442,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                         </div>
                       </div>
                     )}
-                    {hasValue.dateOfBirth && (
+                    {hasValue.dateOfBirth !== null && (
                       <div className="capco_horizontal_field_with_border_top">
                         <label className="col-sm-3 control-label">
                           <FormattedMessage id="form.label_date_of_birth" />
@@ -526,9 +534,11 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             </OverlayTrigger>
                           </OverlayTrigger>
                         </div>
-                        {hasValue.address && (
+                        {hasValue.address !== null && (
                           <div className="personal-data-address">
-                            <label className="col-sm-3 control-label">
+                            <label
+                              className="col-sm-3 control-label"
+                              htmlFor="personal-data-form-address">
                               <FormattedMessage id="form.label_address" />
                             </label>
                             <div>
@@ -542,9 +552,11 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             </div>
                           </div>
                         )}
-                        {hasValue.address2 && (
+                        {hasValue.address2 !== null && (
                           <div className="personal-data-address">
-                            <label className="col-sm-3 control-label">
+                            <label
+                              className="col-sm-3 control-label"
+                              htmlFor="personal-data-form-address2">
                               <FormattedMessage id="form.label_address2" />
                             </label>
                             <div>
@@ -558,9 +570,11 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             </div>
                           </div>
                         )}
-                        {hasValue.city && (
+                        {hasValue.city !== null && (
                           <div className="personal-data-address">
-                            <label className="col-sm-3 control-label">
+                            <label
+                              className="col-sm-3 control-label"
+                              htmlFor="personal-data-form-city">
                               <FormattedMessage id="form.label_city" />
                             </label>
                             <div>
@@ -574,9 +588,11 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             </div>
                           </div>
                         )}
-                        {hasValue.zipCode && (
+                        {hasValue.zipCode !== null && (
                           <div className="personal-data-address">
-                            <label className="col-sm-3 control-label">
+                            <label
+                              className="col-sm-3 control-label"
+                              htmlFor="personal-data-form-zipCode">
                               <FormattedMessage id="form.label_zip_code" />
                             </label>
                             <div>
@@ -592,7 +608,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                         )}
                       </div>
                     )}
-                    {hasValue.phone && (
+                    {hasValue.phone !== null && (
                       <div>
                         <div className="capco_horizontal_field_with_border_top">
                           <label className="col-sm-3 control-label">
