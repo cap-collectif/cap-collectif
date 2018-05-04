@@ -73,7 +73,7 @@ gosu capco php bin/rabbit vhost:mapping:create --password=guest app/config/rabbi
 gosu capco php bin/console cache:warmup --no-debug --env=prod --no-interaction
 
 # Ensure permissions on var
-chmod -R 777 var/
+chmod -R 777 var/ && chown -R capco:capco var/
 
 echo "Starting daemon to populate elasticsearch..."
 /etc/service/php-fpm/populate_elasticsearch_index &

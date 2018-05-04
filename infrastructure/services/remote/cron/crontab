@@ -1,33 +1,33 @@
 # /etc/cron.d/crontab
 
 # Recalculate counters that have changed every 2 minutes
-*/2 * * * * /usr/bin/timeout 1m php -d memory_limit=512M /var/www/bin/console capco:compute:users-counters --env=prod
-1-59/2 * * * * /usr/bin/timeout 1m php -d memory_limit=512M /var/www/bin/console capco:compute:counters --env=prod
-1-59/2 * * * * /usr/bin/timeout 1m php -d memory_limit=512M /var/www/bin/console capco:compute:projects-counters --env=prod
+*/2 * * * * /usr/bin/timeout 1m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:compute:users-counters --env=prod
+1-59/2 * * * * /usr/bin/timeout 1m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:compute:counters --env=prod
+1-59/2 * * * * /usr/bin/timeout 1m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:compute:projects-counters --env=prod
 
 # Recalculate rankings
-*/5 * * * * /usr/bin/timeout 4m php -d memory_limit=512M /var/www/bin/console capco:compute:rankings --env=prod
+*/5 * * * * /usr/bin/timeout 4m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:compute:rankings --env=prod
 
 # Expire users
-0 * * * * /usr/bin/timeout 50m php -d memory_limit=512M /var/www/bin/console capco:expire-users --env=prod
+0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:expire-users --env=prod
 
 # Reindex Elasticsearch from scratch
-0 7 * * * /usr/bin/timeout 50m php -d memory_limit=512M /var/www/bin/console capco:es:populate --env=prod
+0 7 * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:es:populate --env=prod
 
 # Recalculate the counters from scratch
-0 4 * * * /usr/bin/timeout 5m php -d memory_limit=512M /var/www/bin/console capco:compute:users-counters --force --env=prod
-0 5 * * * /usr/bin/timeout 1m php -d memory_limit=512M /var/www/bin/console capco:compute:counters --force --env=prod
-0 6 * * * /usr/bin/timeout 1m php -d memory_limit=512M /var/www/bin/console capco:compute:projects-counters --force --env=prod
+0 4 * * * /usr/bin/timeout 5m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:compute:users-counters --force --env=prod
+0 5 * * * /usr/bin/timeout 1m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:compute:counters --force --env=prod
+0 6 * * * /usr/bin/timeout 1m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:compute:projects-counters --force --env=prod
 
 # Update synthesis data (disabled for now)
-#0 4 * * * /usr/bin/timeout 2h php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:syntheses:update --env=prod
-#0 3 * * * /usr/bin/timeout 2h php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:syntheses:counters --env=prod
+#0 4 * * * /usr/bin/timeout 2h /usr/local/bin/gosu capco php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:syntheses:update --env=prod
+#0 3 * * * /usr/bin/timeout 2h /usr/local/bin/gosu capco php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:syntheses:counters --env=prod
 
 # Generate exports every hour
-0 * * * * /usr/bin/timeout 50m php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:consultation --env=prod
-0 * * * * /usr/bin/timeout 50m php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:questionnaire --env=prod
-0 * * * * /usr/bin/timeout 50m php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:collect --withoutVote --env=prod
-0 * * * * /usr/bin/timeout 50m php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:users --env=prod
+0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:consultation --env=prod
+0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:questionnaire --env=prod
+0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:collect --withoutVote --env=prod
+0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:users --env=prod
 
 # Send activities email to follower, every day at 9 AM
-0 9 * * * /usr/bin/timeout 50m php -d memory_limit=512M /var/www/bin/console capco:follower-proposal-notifier --env=prod
+0 9 * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:follower-proposal-notifier --env=prod

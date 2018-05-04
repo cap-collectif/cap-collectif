@@ -10,9 +10,6 @@ final class UserRegistrationConfirmationMessage extends ExternalMessage
     public static function create(UserInterface $user,
                                   string $recipentEmail,
                                   string $confirmationUrl,
-                                  string $sitename,
-                                  string $businessName,
-                                  string $profileUrl,
                                   string $recipientName = null): self
     {
         return new self(
@@ -25,26 +22,17 @@ final class UserRegistrationConfirmationMessage extends ExternalMessage
             'email-content-registration-confirmation',
             static::getMyTemplateVars(
                 $user->getUsername(),
-                $confirmationUrl,
-                $sitename,
-                $businessName,
-                $profileUrl
+                $confirmationUrl
             )
         );
     }
 
     private static function getMyTemplateVars(
         string $username,
-        string $confirmationUrl,
-        string $sitename,
-        string $businessName,
-        string $profileUrl
+        string $confirmationUrl
     ): array {
         return [
             '{username}' => $username,
-            '{sitename}' => $sitename,
-            '{businessName}' => $businessName,
-            '{profileUrl}' => $profileUrl,
             '{confirmationUrl}' => $confirmationUrl,
         ];
     }
