@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class UserIsGrantedResolverSpec extends ObjectBehavior
 {
-    function let(User $userA, User $userB, TokenStorage $tokenStorage, LoggerInterface $logger, TokenInterface $token)
+    function let(User $viewer, User $userInToken, TokenStorage $tokenStorage, LoggerInterface $logger, TokenInterface $token)
     {
         $this->beConstructedWith($tokenStorage, $logger);
     }
@@ -28,60 +28,66 @@ class UserIsGrantedResolverSpec extends ObjectBehavior
         $this->isGranted('anon.')->shouldReturn(false);
     }
 
-    function it_is_granted_as_viewer(User $userA, User $userB, TokenStorage $tokenStorage, LoggerInterface $logger, TokenInterface $token)
+    function it_is_granted_as_viewer(User $viewer, User $userRequest, TokenStorage $tokenStorage, LoggerInterface $logger, TokenInterface $token)
     {
-        $userA->getRoles()->willReturn(['ROLE_USER']);
-        $userB->getRoles()->willReturn(['ROLE_USER']);
+        $viewer->getRoles()->willReturn(['ROLE_USER']);
+        $userRequest->getRoles()->willReturn(['ROLE_USER']);
 
-        $userA->hasRole('ROLE_USER')->willReturn(true);
-        $userA->hasRole('ROLE_ADMIN')->willReturn(false);
-        $userB->hasRole('ROLE_ADMIN')->willReturn(false);
-        $userB->hasRole('ROLE_USER')->willReturn(true);
+        $viewer->hasRole('ROLE_USER')->willReturn(true);
+        $viewer->hasRole('ROLE_ADMIN')->willReturn(false);
 
-        $userA->getId()->willReturn('1');
-        $userB->getId()->willReturn('1');
+        $viewer->getId()->willReturn('1');
+        $userRequest->getId()->willReturn('1');
 
         $tokenStorage->getToken()->willReturn($token);
-        $token->getUser()->willReturn($userB);
 
         $this->beConstructedWith($tokenStorage, $logger);
-        $this->isGranted($userA)->shouldReturn(true);
+        $this->isGranted($viewer, $userRequest)->shouldReturn(true);
     }
 
-    function it_is_granted_as_admin(User $userA, User $userB, TokenStorage $tokenStorage, LoggerInterface $logger, TokenInterface $token)
+    function it_is_granted_as_admin(User $viewer, TokenStorage $tokenStorage, LoggerInterface $logger, TokenInterface $token)
     {
-        $userA->getRoles()->willReturn(['ROLE_ADMIN']);
-        $userB->getRoles()->willReturn(['ROLE_USER']);
-
-        $userA->hasRole('ROLE_USER')->willReturn(false);
-        $userA->hasRole('ROLE_ADMIN')->willReturn(true);
-        $userB->hasRole('ROLE_ADMIN')->willReturn(false);
-        $userB->hasRole('ROLE_USER')->willReturn(true);
-
-        $userA->getId()->willReturn('1');
-        $userB->getId()->willReturn('2');
+        $viewer->getRoles()->willReturn(['ROLE_ADMIN']);
+        $viewer->hasRole('ROLE_USER')->willReturn(true);
+        $viewer->hasRole('ROLE_ADMIN')->willReturn(true);
+        $viewer->getId()->willReturn('1');
 
         $tokenStorage->getToken()->willReturn($token);
-        $token->getUser()->willReturn($userB);
 
         $this->beConstructedWith($tokenStorage, $logger);
-        $this->isGranted($userA)->shouldReturn(true);
+        $this->isGranted($viewer, null)->shouldReturn(true);
     }
 
-    function it_is_not_granted_as_other_user(User $userA, User $userB, TokenStorage $tokenStorage, LoggerInterface $logger, TokenInterface $token)
+    function it_is_not_granted_as_other_user(User $viewer, User $userRequest, TokenStorage $tokenStorage, LoggerInterface $logger, TokenInterface $token)
     {
-        $userA->hasRole('ROLE_USER')->willReturn(true);
-        $userA->getId()->willReturn('1');
-        $userB->getId()->willReturn('2');
+        $viewer->hasRole('ROLE_USER')->willReturn(true);
+        $viewer->getId()->willReturn('1');
+        $userRequest->getId()->willReturn('3');
 
-        $userA->hasRole('ROLE_USER')->willReturn(true);
-        $userA->hasRole('ROLE_ADMIN')->willReturn(false);
-        $userB->hasRole('ROLE_ADMIN')->willReturn(false);
-        $userB->hasRole('ROLE_USER')->willReturn(true);
+        $viewer->hasRole('ROLE_ADMIN')->willReturn(false);
 
         $tokenStorage->getToken()->willReturn($token);
-        $token->getUser()->willReturn($userB);
+
         $this->beConstructedWith($tokenStorage, $logger);
-        $this->isGranted($userA)->shouldReturn(false);
+        $this->isGranted($viewer, $userRequest)->shouldReturn(false);
+    }
+
+    function it_is_not_granted_as_other_user_than_user_connected(User $viewer, User $userInToken, User $userRequest, TokenStorage $tokenStorage, LoggerInterface $logger, TokenInterface $token)
+    {
+        $viewer->hasRole('ROLE_USER')->willReturn(true);
+        $viewer->hasRole('ROLE_ADMIN')->willReturn(false);
+
+        $userInToken->hasRole('ROLE_USER')->willReturn(true);
+        $userInToken->getRoles()->willReturn(['ROLE_USER']);
+
+        $viewer->getId()->willReturn('1');
+        $userInToken->getId()->willReturn('2');
+        $userRequest->getId()->willReturn('3');
+
+        $token->getUser()->willReturn($userInToken);
+        $tokenStorage->getToken()->willReturn($token);
+
+        $this->beConstructedWith($tokenStorage, $logger);
+        $this->isGranted($viewer, null)->shouldReturn(false);
     }
 }
