@@ -31,13 +31,13 @@ const validate = ({
     errors.new_password = 'fos_user.password.mismatch';
   }
   if (new_password && new_password.length < 8) {
-    errors.new_password = 'fos_user.password.mismatch';
+    errors.new_password = 'fos_user.new_password.short';
   }
   if (!new_password_confirmation) {
     errors.new_password_confirmation = 'fos_user.password.mismatch';
   }
-  if (new_password !== new_password_confirmation) {
-    errors.mismatch = 'fos_user.password.mismatch';
+  if (new_password && new_password_confirmation && new_password_confirmation !== new_password) {
+    errors.new_password_confirmation = 'fos_user.password.mismatch';
   }
   return errors;
 };
@@ -89,7 +89,7 @@ export class ChangePasswordForm extends Component<Props> {
         <form onSubmit={handleSubmit} className="form-horizontal">
           <div>
             <div className="capco_horizontal_field_with_border_top" style={{ border: 0 }}>
-              <label className="col-sm-3 control-label">
+              <label className="col-sm-3 control-label" htmlFor="password-form-current">
                 <FormattedMessage id="form.current_password" />
               </label>
               <div>
@@ -104,7 +104,7 @@ export class ChangePasswordForm extends Component<Props> {
             </div>
             <div className="clearfix" />
             <div className="capco_horizontal_field_with_border_top" style={{ border: 0 }}>
-              <label className="col-sm-3 control-label">
+              <label className="col-sm-3 control-label" htmlFor="password-form-new">
                 <FormattedMessage id="form.new_password" />
               </label>
               <div>
@@ -119,7 +119,7 @@ export class ChangePasswordForm extends Component<Props> {
             </div>
             <div className="clearfix" />
             <div className="capco_horizontal_field_with_border_top" style={{ border: 0 }}>
-              <label className="col-sm-3 control-label">
+              <label className="col-sm-3 control-label" htmlFor="password-form-confirmation">
                 <FormattedMessage id="form.new_password_confirmation" />
               </label>
               <div>
@@ -140,7 +140,7 @@ export class ChangePasswordForm extends Component<Props> {
                   disabled={invalid || pristine || submitting}
                   type="submit"
                   bsStyle="primary"
-                  id="proposal-form-admin-content-save">
+                  id="profile-password-save">
                   <FormattedMessage
                     id={submitting ? 'global.loading' : 'global.save_modifications'}
                   />

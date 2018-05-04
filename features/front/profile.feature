@@ -6,55 +6,63 @@ Background:
 
 @javascript @database
 Scenario: Logged in user wants to change his username
+  Given feature "user_type" is enabled
   Given I am logged in as user
   And I visited "edit profile page"
+  And I wait 1 seconds
   And I fill in the following:
-    | sonata_user_profile_form_username | user3 |
-  And I press "user.profile.edit.submit"
-  Then I should see "profile.flash.updated" in the "#symfony-flash-messages" element
+    | profile-form-username | user3 |
+  And I press "profile-form-save"
+  And I wait 1 seconds
+  Then I should see "global.saved"
 
 @javascript @database
 Scenario: Logged in user wants to change his user type
   Given feature "user_type" is enabled
   And I am logged in as user
   And I visited "edit profile page"
-  And I select "Organisation à but non lucratif" from "sonata_user_profile_form_userType"
-  And I press "user.profile.edit.submit"
-  Then I should see "profile.flash.updated" in the "#symfony-flash-messages" element
+  And I wait 1 seconds
+  And I select "Organisation à but non lucratif" from "profile-form-userType"
+  And I press "profile-form-save"
+  And I wait 1 seconds
+  Then I should see "global.saved"
 
 @javascript @database
 Scenario: Logged in user wants to change his password with a wrong current password
   Given I am logged in as user
   And I visited "change password page"
+  And I wait 1 seconds
   And I fill in the following:
-    | fos_user_change_password_form_current_password | toto         |
-    | fos_user_change_password_form_new_first        | tototototo   |
-    | fos_user_change_password_form_new_second       | tatatatata   |
-  And I press "user.profile.edit.submit"
-  Then I should see "fos_user.password.not_current" in the "#main" element
-  And I should see "fos_user.password.mismatch" in the "#main" element
+    | password-form-current      | toto         |
+    | password-form-new          | tototototo   |
+    | password-form-confirmation | tatatatata   |
+  And I should see "fos_user.password.mismatch"
+  And I should see "global.invalid.form"
 
 @javascript @database
 Scenario: Logged in user wants to change his password to a too short password
   Given I am logged in as user
   And I visited "change password page"
+  And I wait 1 seconds
   And I fill in the following:
-    | fos_user_change_password_form_current_password | user |
-    | fos_user_change_password_form_new_first        | 1234 |
-    | fos_user_change_password_form_new_second       | 1234 |
-  And I press "user.profile.edit.submit"
-  And I should see "fos_user.new_password.short" in the "#main" element
+    | password-form-current      | user   |
+    | password-form-new          | 1234   |
+    | password-form-confirmation | 1234   |
+  And I should see "fos_user.new_password.short"
+  And I should see "global.invalid.form"
 
 @javascript @database
 Scenario: Logged in user wants to change his password
   Given I am logged in as user
   And I visited "change password page"
+  And I wait 1 seconds
   And I fill in the following:
-    | fos_user_change_password_form_current_password | user        |
-    | fos_user_change_password_form_new_first        | toto12345   |
-    | fos_user_change_password_form_new_second       | toto12345   |
-  And I press "user.profile.edit.submit"
-  Then I should see "change_password.flash.success" in the "#symfony-flash-messages" element
+    | password-form-current      | user        |
+    | password-form-new          | toto12345   |
+    | password-form-confirmation | toto12345   |
+  And I press "profile-password-save"
+  And I wait 2 seconds
+  Then I should see "global.saved"
 
 @javascript @database
 Scenario: Logged in user wants to manage his followings and unfollow all and stay unfollow after refresh

@@ -136,7 +136,7 @@ export class Profile extends Component<Props> {
             </div>
           </div>
           <div className="capco_horizontal_field_with_border_top" style={{ border: 0 }}>
-            <label className="col-sm-3 control-label">
+            <label className="col-sm-3 control-label" htmlFor="profile-form-userType">
               <FormattedMessage id="registration.type" />{' '}
               <span className="excerpt">
                 <FormattedMessage id="global.form.optional" />
@@ -144,7 +144,7 @@ export class Profile extends Component<Props> {
             </label>
             <div>
               <Field
-                id="user_type"
+                id="profile-form-userType"
                 name="userType"
                 component={component}
                 type="select"
@@ -161,7 +161,7 @@ export class Profile extends Component<Props> {
             </div>
           </div>
           <div className="capco_horizontal_field_with_border_top" style={{ border: 0 }}>
-            <label className="col-sm-3 control-label">
+            <label className="col-sm-3 control-label" htmlFor="public-data-form-biography">
               <FormattedMessage id="form.label_biography" />
             </label>
             <div>
@@ -175,7 +175,7 @@ export class Profile extends Component<Props> {
             </div>
           </div>
           <div className="capco_horizontal_field_with_border_top" style={{ border: 0 }}>
-            <label className="col-sm-3 control-label">
+            <label className="col-sm-3 control-label" htmlFor="public-data-form-neighborhood">
               <FormattedMessage id="form.label_neighborhood" />
             </label>
             <div>
@@ -189,7 +189,7 @@ export class Profile extends Component<Props> {
             </div>
           </div>
           <div className="capco_horizontal_field_with_border_top" style={{ border: 0 }}>
-            <label className="col-sm-3 control-label">
+            <label className="col-sm-3 control-label" htmlFor="public-data-form-website">
               <FormattedMessage id="form.label_website" />
             </label>
             <div>
@@ -207,7 +207,7 @@ export class Profile extends Component<Props> {
             <FormattedMessage id="social-medias" />
           </h2>
           <div className="capco_horizontal_field_with_border_top" style={{ border: 0 }}>
-            <label className="col-sm-3 control-label">
+            <label className="col-sm-3 control-label" htmlFor="public-data-form-facebook">
               <FormattedMessage id="user.profile.edit.facebook" />
             </label>
             <div>
@@ -216,13 +216,13 @@ export class Profile extends Component<Props> {
                 name="facebookUrl"
                 component={component}
                 type="text"
-                id="public-data-form-username"
+                id="public-data-form-facebook"
                 divClassName="col-sm-6"
               />
             </div>
           </div>
           <div className="capco_horizontal_field_with_border_top" style={{ border: 0 }}>
-            <label className="col-sm-3 control-label">
+            <label className="col-sm-3 control-label" htmlFor="public-data-form-twitter">
               <FormattedMessage id="user.profile.edit.twitter" />
             </label>
             <div>
@@ -237,7 +237,7 @@ export class Profile extends Component<Props> {
             </div>
           </div>
           <div className="capco_horizontal_field_with_border_top" style={{ border: 0 }}>
-            <label className="col-sm-3 control-label">
+            <label className="col-sm-3 control-label" htmlFor="public-data-form-linkedIn">
               <FormattedMessage id="show.label_linkedin_url" />
             </label>
             <div>
