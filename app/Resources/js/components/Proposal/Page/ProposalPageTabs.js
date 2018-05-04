@@ -194,7 +194,7 @@ export default createFragmentContainer(ProposalPageTabs, {
   `,
   viewer: graphql`
     fragment ProposalPageTabs_viewer on User {
-      ...ProposalPageContent_viewer
+      ...ProposalPageContent_viewer @arguments(hasVotableStep: $hasVotableStep)
     }
   `,
   proposal: graphql`

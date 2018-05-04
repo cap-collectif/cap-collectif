@@ -39,7 +39,7 @@ export class ProposalPage extends React.Component<Props> {
             ) {
               viewer @include(if: $isAuthenticated) {
                 ...ProposalPageTabs_viewer
-                ...ProposalPageHeader_viewer
+                ...ProposalPageHeader_viewer @arguments(hasVotableStep: $hasVotableStep)
               }
               step: node(id: $stepId) @include(if: $hasVotableStep) {
                 ...ProposalPageHeader_step @arguments(isAuthenticated: $isAuthenticated)
@@ -75,14 +75,14 @@ export class ProposalPage extends React.Component<Props> {
                     <ProposalPageAlert proposal={props.proposal} />
                     <ProposalPageHeader
                       proposal={props.proposal}
-                      step={props.step}
+                      step={props.step || null}
                       viewer={props.viewer || null}
                       isAuthenticated={!!props.viewer}
                       className="container container--custom"
                     />
                     <ProposalPageTabs
                       proposal={props.proposal}
-                      step={props.step}
+                      step={props.step || null}
                       viewer={props.viewer || null}
                       features={features}
                       categories={categories}

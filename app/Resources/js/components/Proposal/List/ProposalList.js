@@ -49,7 +49,7 @@ export class ProposalList extends React.Component<Props> {
     if (proposals.totalCount === 0) {
       return (
         <p className={classNames({ 'p--centered': true })} style={{ marginBottom: '40px' }}>
-          <FormattedMessage id="proposal.private.empty" />
+          <FormattedMessage id="proposal.empty" />
         </p>
       );
     }
