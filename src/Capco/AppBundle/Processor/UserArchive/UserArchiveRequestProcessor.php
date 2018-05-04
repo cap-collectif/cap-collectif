@@ -2,36 +2,32 @@
 
 namespace Capco\AppBundle\Processor\UserArchive;
 
-use Box\Spout\Common\Type;
-use Box\Spout\Writer\WriterFactory;
 use Capco\AppBundle\Entity\UserArchive;
-use Capco\AppBundle\GraphQL\InfoResolver;
 use Capco\AppBundle\Notifier\UserArchiveNotifier;
 use Capco\AppBundle\Repository\UserArchiveRepository;
-use Capco\AppBundle\Utils\Arr;
-use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Request\Executor;
 use Swarrot\Broker\Message;
 use Swarrot\Processor\ProcessorInterface;
-
-error_reporting(E_ALL);
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\BufferedOutput;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class UserArchiveRequestProcessor implements ProcessorInterface
 {
     protected $userArchiveRepository;
     protected $userArchiveNotifier;
     protected $rootDir;
-    protected $executor;
     protected $em;
+    protected $kernel;
 
-    public function __construct(UserArchiveRepository $userArchiveRepository, EntityManagerInterface $em, UserArchiveNotifier $userArchiveNotifier, Executor $executor, string $rootDir)
+    public function __construct(UserArchiveRepository $userArchiveRepository, EntityManagerInterface $em, UserArchiveNotifier $userArchiveNotifier, KernelInterface $kernel, string $rootDir)
     {
         $this->userArchiveRepository = $userArchiveRepository;
         $this->userArchiveNotifier = $userArchiveNotifier;
         $this->rootDir = $rootDir;
-        $this->executor = $executor;
         $this->em = $em;
+        $this->kernel = $kernel;
     }
 
     public function process(Message $message, array $options): ?bool
@@ -46,145 +42,27 @@ class UserArchiveRequestProcessor implements ProcessorInterface
         }
 
         $user = $archive->getUser();
-        $userDataPath = $this->createUserDataFile($user);
 
-        $this->createZipArchive($this->getZipPathForUser($user), [
-            ['data.csv' => $userDataPath],
+        $app = new Application($this->kernel);
+        $command = $app->find('capco:export:user');
+        $input = new ArrayInput([
+            'userId' => $user->getId(),
         ]);
 
-        $archive->setIsGenerated(true);
-        $archive->setPath($this->getZipFilenameForUser($user));
+        $output = new BufferedOutput();
 
-        $this->em->flush();
+        if (0 === $command->run($input, $output)) {
+            $archive->setIsGenerated(true);
 
-        $this->userArchiveNotifier->onUserArchiveGenerated($archive);
+            $archive->setPath(trim($output->fetch()));
 
-        return true;
-    }
+            $this->em->flush();
 
-    protected function createZipArchive(string $zipName, array $files, bool $removeFilesAfter = true): void
-    {
-        $zip = new \ZipArchive();
-        $zip->open($zipName, \ZipArchive::CREATE);
-        foreach ($files as $file) {
-            foreach ($file as $localName => $path) {
-                $zip->addFile($path, $localName);
-            }
+            $this->userArchiveNotifier->onUserArchiveGenerated($archive);
+
+            return true;
         }
 
-        $zip->close();
-
-        if ($removeFilesAfter) {
-            foreach ($files as $file) {
-                foreach ($file as $localName => $path) {
-                    unlink($path);
-                }
-            }
-        }
-    }
-
-    protected function createUserDataFile(User $user): string
-    {
-        $infoResolver = new InfoResolver();
-        $writer = WriterFactory::create(Type::CSV);
-        $path = $this->getUserDataPathForUser($user);
-        $writer->openToFile($path);
-
-        $data = $this->executor->disabledDebugInfo()->execute([
-            'query' => $this->getUserGraphQLQuery($user->getId()),
-            'variables' => [],
-        ])->toArray();
-
-        $header = array_map(function ($item) {
-            $item = str_replace('data_node_', '', $item);
-            if ('show_url' !== $item) {
-                $item = str_replace('_', '.', $item);
-            }
-
-            return $item;
-        }, $infoResolver->guessHeadersFromFields($data));
-
-        $writer->addRow($header);
-
-        $row = [];
-        foreach ($header as $value) {
-            $row[] = Arr::path($data, "data.node.$value") ?? '';
-        }
-        $writer->addRow($row);
-
-        $writer->close();
-
-        return $path;
-    }
-
-    protected function getUserDataPathForUser(User $user): string
-    {
-        return $this->rootDir . '/../web/export/' . $user->getId() . '_data.csv';
-    }
-
-    protected function getZipFilenameForUser(User $user): string
-    {
-        return $user->getId() . '.zip';
-    }
-
-    protected function getZipPathForUser(User $user): string
-    {
-        return $this->rootDir . '/../web/export/' . $this->getZipFilenameForUser($user);
-    }
-
-    protected function getUserGraphQLQuery(string $userId): string
-    {
-        return <<<EOF
-{
-  node(id: "${userId}") {
-    ... on User {
-      id
-      email
-      username
-      userType {
-        name
-      }
-      createdAt
-      updatedAt
-      expired
-      lastLogin
-      rolesText
-      consentExternalCommunication
-      enabled
-      locked
-      phoneConfirmed
-      phoneConfirmationSentAt
-      gender
-      firstname
-      lastname
-      dateOfBirth
-      website
-      biography
-      address
-      address2
-      zipCode
-      city
-      phone
-      show_url
-      googleId
-      facebookId
-      samlId
-      opinionsCount
-      opinionVotesCount
-      opinionVersionsCount
-      argumentsCount
-      argumentVotesCount
-      proposalsCount
-      proposalVotesCount
-      commentVotesCount
-      sourcesCount
-      repliesCount
-      postCommentsCount
-      eventCommentsCount
-      projectsCount
-    }
-  }
-}
-EOF;
+        return false;
     }
 }

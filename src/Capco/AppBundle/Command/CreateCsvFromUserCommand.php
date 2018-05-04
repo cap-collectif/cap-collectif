@@ -53,7 +53,47 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
 
         $writer->close();
 
-        $output->writeln("<info>Successfully exported data for user $userId</info>");
+        $this->createZipArchive($this->getZipPathForUser($userId), [
+            ['data.csv' => $this->getPath()],
+        ]);
+
+        $output->writeln($this->getZipFilenameForUser($userId));
+    }
+
+    protected function getUserDataPathForUser(string $userId): string
+    {
+        return $this->getContainer()->getParameter('kernel.root_dir') . '/../web/export/' . $userId . '_data.csv';
+    }
+
+    protected function getZipFilenameForUser(string $userId): string
+    {
+        return $userId . '.zip';
+    }
+
+    protected function getZipPathForUser(string $userId): string
+    {
+        return $this->getContainer()->getParameter('kernel.root_dir') . '/../web/export/' . $this->getZipFilenameForUser($userId);
+    }
+
+    protected function createZipArchive(string $zipName, array $files, bool $removeFilesAfter = true): void
+    {
+        $zip = new \ZipArchive();
+        $zip->open($zipName, \ZipArchive::CREATE);
+        foreach ($files as $file) {
+            foreach ($file as $localName => $path) {
+                $zip->addFile($path, $localName);
+            }
+        }
+
+        $zip->close();
+
+        if ($removeFilesAfter) {
+            foreach ($files as $file) {
+                foreach ($file as $localName => $path) {
+                    unlink($path);
+                }
+            }
+        }
     }
 
     protected function getFilename(): string
