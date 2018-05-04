@@ -877,7 +877,7 @@ trait ProposalStepsTrait
      */
     public function iCheckTheProposalVotePrivateCheckbox()
     {
-        $this->checkOption('proposal-vote__private');
+        $this->getSession()->getPage()->find('css', '#proposal2-proposal-vote__private .form-group .react-toggle')->click();
     }
 
     /**

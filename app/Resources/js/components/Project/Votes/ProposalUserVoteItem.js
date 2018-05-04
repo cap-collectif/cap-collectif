@@ -88,7 +88,11 @@ export class ProposalUserVoteItem extends React.Component<Props> {
             </div>
           </div>
         </Col>
-        <Col className="proposals-user-votes__col" md={2} xs={12}>
+        <Col
+          id={`${proposal.id}-proposal-vote__private`}
+          className="proposals-user-votes__col"
+          md={2}
+          xs={12}>
           <div className="proposals-user-votes__content justify-content-end">
             <div className="d-flex">
               <Field

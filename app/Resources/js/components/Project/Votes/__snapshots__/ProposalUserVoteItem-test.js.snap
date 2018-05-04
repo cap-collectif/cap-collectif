@@ -50,6 +50,7 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
     bsClass="col"
     className="proposals-user-votes__col"
     componentClass="div"
+    id="1-proposal-vote__private"
     md={2}
     xs={12}
   >

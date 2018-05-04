@@ -16,6 +16,10 @@ const mutation = graphql`
           id
           ...ProposalVotes_proposal @arguments(stepId: $stepId)
           ...ProposalVoteButtonWrapperFragment_proposal @arguments(stepId: $stepId)
+          ...ProposalPreviewFooter_proposal @arguments(stepId: $stepId)
+          allVotes: votes(first: 0) {
+            totalCount
+          }
         }
       }
       viewer {
