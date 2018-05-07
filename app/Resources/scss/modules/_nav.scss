@@ -8,19 +8,19 @@
   }
   .nav-pills {
     li {
-      background-color: #ffffff;
-      color: #000;
+      background-color: $white;
+      color: $black;
       margin: 0;
       a {
         padding: 0;
         .list-group-item {
-          color: #1986C8;
+          color: $primary-color;
           border-radius: 0;
           border: 0;
-          border-bottom: 1px solid #ddd;
+          border-bottom: 1px solid $border-dropdown-color;
           .icon {
             margin-right: 10px;
-            color: #989898;
+            color: $border-color;
           }
         }
       }
@@ -28,11 +28,11 @@
     li.active {
       a {
         .list-group-item {
-          color: #000;
+          color: $black;
           font-weight: bold;
-          border-left: #000 solid 3px;
+          border-left: $black solid 3px;
           .icon {
-            color:#000000;
+            color: $black;
           }
         }
       }

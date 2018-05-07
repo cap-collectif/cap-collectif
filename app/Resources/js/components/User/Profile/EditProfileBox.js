@@ -26,7 +26,6 @@ export class EditProfileBox extends Component<Props> {
     const { features } = this.props;
     const renderEditProfile = ({ props, error }) => {
       if (error) {
-        console.log(error); // eslint-disable-line no-console
         return graphqlError;
       }
       if (props) {
