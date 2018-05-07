@@ -552,6 +552,27 @@ type DeleteProposalPayload {
   clientMutationId: String
 }
 
+input DeleteUserContributionsInput {
+  # Define if this is an Hard or Soft account removal
+  removal: String!
+  clientMutationId: String
+}
+
+type DeleteUserContributionsInputPayload {
+  # user id
+  userId: String!
+
+  # username after delete
+  username: String!
+
+  # number of contributions removed
+  contributionsRemoved: Int!
+
+  # number of contributions content who have been changed
+  contributionsContentDeleted: Int!
+  clientMutationId: String
+}
+
 input DeleteUserInGroupInput {
   # The user id
   userId: ID!

@@ -30,6 +30,7 @@ export type State = {
   +isSubmittingAccountForm: boolean,
   +showConfirmPasswordModal: boolean,
   +confirmationEmailResent: boolean,
+  +showDeleteAccountModal: boolean,
   +registration_form: {
     +bottomTextDisplayed: boolean,
     +topTextDisplayed: boolean,
@@ -66,6 +67,8 @@ type UpdateRegistrationFieldAction = {
 };
 type CloseRegistrationModalAction = { type: 'CLOSE_REGISTRATION_MODAL' };
 type ShowRegistrationModalAction = { type: 'SHOW_REGISTRATION_MODAL' };
+type ShowDeleteAccountModalAction = { type: 'SHOW_DELETE_ACCOUNT_MODAL' };
+type CloseDeleteAccountModalAction = { type: 'CLOSE_DELETE_ACCOUNT_MODAL' };
 type CloseLoginModalAction = { type: 'CLOSE_LOGIN_MODAL' };
 type ShowLoginModalAction = { type: 'SHOW_LOGIN_MODAL' };
 type UserRequestEmailChangeAction = { type: 'USER_REQUEST_EMAIL_CHANGE', email: string };
@@ -96,6 +99,8 @@ type GroupAdminUsersUserDeletionResetAction = {
 export type UserAction =
   | UpdateRegistrationFieldAction
   | ShowRegistrationModalAction
+  | ShowDeleteAccountModalAction
+  | CloseDeleteAccountModalAction
   | CloseRegistrationModalAction
   | ShowLoginModalAction
   | CloseLoginModalAction
@@ -119,6 +124,7 @@ const initialState: State = {
   isSubmittingAccountForm: false,
   confirmationEmailResent: false,
   showConfirmPasswordModal: false,
+  showDeleteAccountModal: false,
   user: null,
   registration_form: {
     bottomText: '',
@@ -153,6 +159,12 @@ export const closeLoginModal = (): CloseLoginModalAction => ({ type: 'CLOSE_LOGI
 export const showLoginModal = (): ShowLoginModalAction => ({ type: 'SHOW_LOGIN_MODAL' });
 export const confirmPassword = (): ConfirmPasswordAction => ({
   type: 'SHOW_CONFIRM_PASSWORD_MODAL',
+});
+export const showDeleteAccountModal = (): ShowDeleteAccountModalAction => ({
+  type: 'SHOW_DELETE_ACCOUNT_MODAL',
+});
+export const closeDeleteAccountModal = (): CloseDeleteAccountModalAction => ({
+  type: 'CLOSE_DELETE_ACCOUNT_MODAL',
 });
 export const closeConfirmPasswordModal = (): CloseConfirmPasswordModalAction => ({
   type: 'CLOSE_CONFIRM_PASSWORD_MODAL',
@@ -410,6 +422,10 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
       return { ...state, showRegistrationModal: true };
     case 'CLOSE_REGISTRATION_MODAL':
       return { ...state, showRegistrationModal: false };
+    case 'SHOW_DELETE_ACCOUNT_MODAL':
+      return { ...state, showDeleteAccountModal: true };
+    case 'CLOSE_DELETE_ACCOUNT_MODAL':
+      return { ...state, showDeleteAccountModal: false };
     case 'SHOW_LOGIN_MODAL':
       return { ...state, showLoginModal: true };
     case 'CLOSE_LOGIN_MODAL':
