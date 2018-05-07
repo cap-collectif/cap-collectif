@@ -112,3 +112,52 @@ Scenario: Logged in user wants to manage his followings and click on a project
   And I wait 2 seconds
   When I click the "#profile-project-link-project6" element
   Then I should be redirected to "/project/budget-participatif-rennes/collect/collecte-des-propositions"
+
+@javascript @database
+Scenario: Logged in user wants, want to delete my firstname but I cancel it
+  Given I am logged in as user
+  And I visited "manage personal data page"
+  And I wait 2 seconds
+  And I should see "form.label_firstname"
+  When I click the "#personal-data-firstname" element
+  And I wait 1 seconds
+  And I should see "are-you-sure-you-want-to-delete-this-field"
+  Then I click on button "#btn-cancel-delete-field"
+  And I should see "form.label_firstname"
+
+@javascript @database
+Scenario: Logged in user wants, want to delete my firstname
+  Given I am logged in as user
+  And I visited "manage personal data page"
+  And I wait 2 seconds
+  And I should see "form.label_firstname"
+  When I click the "#personal-data-firstname" element
+  And I wait 1 seconds
+  And I should see "are-you-sure-you-want-to-delete-this-field"
+  Then I click on button "#btn-confirm-delete-field"
+  And I should not see "form.label_firstname"
+
+@javascript @database
+Scenario: Logged in user wants, want to update my firstname
+  Given I am logged in as user
+  And I visited "manage personal data page"
+  And I wait 2 seconds
+  And I should see "form.label_firstname"
+  When I fill the element "#personal-data-form-firstname" with empty value
+  Then I should see "fill-or-delete-field"
+  And I wait 1 seconds
+  And the button "personal-data-form-save" should be disabled
+  And I should see "global.invalid.form"
+  When I fill the element "#personal-data-form-firstname" with value "us"
+  Then I should see "two-characters-minimum-required"
+  And the button "personal-data-form-save" should be disabled
+  And I should see "global.invalid.form"
+  Then I fill the element "#personal-data-form-firstname" with value "myNewFirstname"
+  And I should not see "global.invalid.form"
+  And the button "personal-data-form-save" should not be disabled
+  Then I click on button "#personal-data-form-save"
+  And I wait 1 seconds
+  And I should see "global.saved"
+  Then I reload the page
+  And I wait 2 seconds
+  And the "firstname" field should contain "myNewFirstname"
