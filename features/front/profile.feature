@@ -161,3 +161,34 @@ Scenario: Logged in user wants, want to update my firstname
   Then I reload the page
   And I wait 2 seconds
   And the "firstname" field should contain "myNewFirstname"
+
+@javascript @database
+Scenario: Logged in user wants, want to delete address
+  Given I am logged in as user
+  And I visited "manage personal data page"
+  And I wait 2 seconds
+  And I should see "form.label_address"
+  And I should see "form.label_address2"
+  And I should see "form.label_city"
+  And I should see "form.label_zip_code"
+  When I fill the element "#personal-data-form-address" with empty value
+  Then I should see "fill-or-delete-field"
+  And the button "personal-data-form-save" should be disabled
+  Then I click the "#personal-data-address-address2-city-zipCode" element
+  And I wait 1 seconds
+  And I should see "are-you-sure-you-want-to-delete-this-field"
+  Then I click on button "#btn-confirm-delete-field"
+  And I should not see "form.label_address"
+  And I should not see "form.label_address2"
+  And I should not see "form.label_city"
+  And I should not see "form.label_zip_code"
+  And the button "personal-data-form-save" should not be disabled
+  Then I click on button "#personal-data-form-save"
+  And I wait 1 seconds
+  And I should see "global.saved"
+  Then I reload the page
+  And I wait 2 seconds
+  And I should not see "form.label_address"
+  And I should not see "form.label_address2"
+  And I should not see "form.label_city"
+  And I should not see "form.label_zip_code"
