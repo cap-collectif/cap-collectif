@@ -64,7 +64,7 @@ class ReportingRepository extends EntityRepository
     public function getRecentOrdered(): array
     {
         $qb = $this->createQueryBuilder('r')
-            ->select('r, u, o, ov, s, a, i, c, p')
+            ->select('r, u, o, ov, s, a, c, p')
             ->leftJoin('r.Reporter', 'u')
             ->leftJoin('r.Opinion', 'o')
             ->leftJoin('r.opinionVersion', 'ov')
