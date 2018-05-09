@@ -10,7 +10,7 @@ Capco\UserBundle\Entity\User:
         plainPassword: toto
         roles:
          - 'ROLE_SUPER_ADMIN'
-        Media: '@MediaUser2'
+        media: '@MediaUser2'
         confirmationToken: ~
 
     user2:
@@ -24,7 +24,7 @@ Capco\UserBundle\Entity\User:
         plainPassword: toto
         roles:
          - 'ROLE_SUPER_ADMIN'
-        Media: '@MediaUser1'
+        media: '@MediaUser1'
         city: Antony
         website: http://www.sfavot.fr
         biography: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum earum fuga quaerat expedita minima labore vitae voluptate, repellendus perspiciatis consequuntur cum, dignissimos quas temporibus consequatur tempora est repellat. Architecto, quia.
@@ -44,7 +44,7 @@ Capco\UserBundle\Entity\User:
         plainPassword: toto
         roles:
          - 'ROLE_SUPER_ADMIN'
-        Media: '@MediaUser3'
+        media: '@MediaUser3'
         confirmationToken: ~
 
     user4:
@@ -56,7 +56,7 @@ Capco\UserBundle\Entity\User:
         enabled: true
         userType: '@UserType1'
         plainPassword: admin
-        Media: null
+        media: null
         roles:
          - 'ROLE_ADMIN'
         vip: true
@@ -73,7 +73,7 @@ Capco\UserBundle\Entity\User:
         enabled: true
         userType: '@UserType1'
         plainPassword: admin
-        Media: null
+        media: null
         roles:
          - 'ROLE_ADMIN'
         vip: true
@@ -90,7 +90,7 @@ Capco\UserBundle\Entity\User:
         enabled: true
         notificationsConfiguration: '@allDisabledUserNotifications'
         userType: '@UserType1'
-        Media: null
+        media: null
         plainPassword: user
         dateOfBirth: <(new \DateTime('1996-03-01'))>
         address: '12 rue des boulets'
@@ -140,7 +140,7 @@ Capco\UserBundle\Entity\User:
         plainPassword: toto
         roles:
          - 'ROLE_SUPER_ADMIN'
-        Media: '@MediaUser4'
+        media: '@MediaUser4'
         vip: true
         confirmationToken: ~
 
@@ -155,7 +155,7 @@ Capco\UserBundle\Entity\User:
         plainPassword: capco
         roles:
          - 'ROLE_SUPER_ADMIN'
-        Media: '@MediaUser5'
+        media: '@MediaUser5'
         vip: true
         confirmationToken: ~
 
@@ -170,7 +170,7 @@ Capco\UserBundle\Entity\User:
         plainPassword: disabled
         roles:
          - 'ROLE_USER'
-        Media: '@MediaUser1'
+        media: '@MediaUser1'
         vip: false
         confirmationToken: ~
 
@@ -185,7 +185,7 @@ Capco\UserBundle\Entity\User:
         plainPassword: monsupermotdepassetropsafe
         roles:
          - 'ROLE_USER'
-        Media: null
+        media: null
         vip: true
         confirmationToken: ~
 
@@ -200,7 +200,7 @@ Capco\UserBundle\Entity\User:
         plainPassword: toto
         roles:
          - 'ROLE_USER'
-        Media: '@MediaUser5'
+        media: '@MediaUser5'
         vip: true
         confirmationToken: ~
 
@@ -215,7 +215,7 @@ Capco\UserBundle\Entity\User:
         plainPassword: user_not_confirmed
         roles:
          - 'ROLE_USER'
-        Media: null
+        media: null
         confirmationToken: azertyuiop
 
     user_not_confirmed_to_be_expired:
@@ -231,7 +231,7 @@ Capco\UserBundle\Entity\User:
         plainPassword: user_not_confirmed_to_be_expired
         roles:
          - 'ROLE_USER'
-        Media: null
+        media: null
         confirmationToken: qsdfghjklm
 
     user_not_confirmed_with_contributions_to_be_expired:
@@ -247,7 +247,7 @@ Capco\UserBundle\Entity\User:
         plainPassword: user_not_confirmed_with_contributions_to_be_expired
         roles:
          - 'ROLE_USER'
-        Media: null
+        media: null
         confirmationToken: oklmoklm
 
     user_not_confirmed_to_be_expired_in_24_hours:
@@ -263,7 +263,7 @@ Capco\UserBundle\Entity\User:
         plainPassword: user_not_confirmed_to_be_expired_in_24_hours
         roles:
          - 'ROLE_USER'
-        Media: null
+        media: null
         confirmationToken: qsdfgsqdqsdsqdsqdhjkldsqdsqdsqdqsdm
 
     user_expired:
@@ -279,7 +279,7 @@ Capco\UserBundle\Entity\User:
         plainPassword: user_expired
         roles:
          - 'ROLE_USER'
-        Media: null
+        media: null
         confirmationToken: wxcvbn
 
     user_without_phone:
@@ -295,7 +295,7 @@ Capco\UserBundle\Entity\User:
         plainPassword: user_without_phone
         roles:
          - 'ROLE_USER'
-        Media: null
+        media: null
         confirmationToken: ~
 
     user_with_phone_not_phone_confirmed:
@@ -311,7 +311,7 @@ Capco\UserBundle\Entity\User:
         plainPassword: user_with_phone_not_phone_confirmed
         roles:
          - 'ROLE_USER'
-        Media: null
+        media: null
         confirmationToken: ~
         phone: '+33628353289'
 
@@ -328,7 +328,7 @@ Capco\UserBundle\Entity\User:
         plainPassword: user_with_code_not_phone_confirmed
         roles:
          - 'ROLE_USER'
-        Media: null
+        media: null
         confirmationToken: ~
         phone: '+33628232323'
         smsConfirmationCode: 123456
@@ -345,7 +345,7 @@ Capco\UserBundle\Entity\User:
         userType: '@UserType1'
         roles:
          - 'ROLE_ADMIN'
-        Media: null
+        media: null
         confirmationToken: check-my-email-token
 
     user_updating_email:
@@ -360,7 +360,7 @@ Capco\UserBundle\Entity\User:
         userType: '@UserType1'
         roles:
          - 'ROLE_USER'
-        Media: null
+        media: null
         newEmailToConfirm: new-email-to-confirm@test.com
         newEmailConfirmationToken: check-my-new-email-token
 
@@ -375,7 +375,7 @@ Capco\UserBundle\Entity\User:
         plainPassword: toto
         roles:
          - 'ROLE_SUPER_ADMIN'
-        Media: '@MediaUser5'
+        media: '@MediaUser5'
         vip: true
         confirmationToken: ~
 
@@ -390,7 +390,7 @@ Capco\UserBundle\Entity\User:
          plainPassword: azerty
          roles:
           - 'ROLE_SUPER_ADMIN'
-         Media: '@MediaUser1'
+         media: '@MediaUser1'
          city: Antony
          website: http://www.sfavot.fr
          biography: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum earum fuga quaerat expedita minima labore vitae voluptate, repellendus perspiciatis consequuntur cum, dignissimos quas temporibus consequatur tempora est repellat. Architecto, quia.

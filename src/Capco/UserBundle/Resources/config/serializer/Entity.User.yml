@@ -9,7 +9,7 @@ Capco\UserBundle\Entity\User:
         expose: true
         type: string
         groups: [Default, Elasticsearch]
-      Media:
+      media:
         expose: true
         serialized_name: media
         groups: [UsersInfos, UserDetails]
