@@ -77,7 +77,7 @@ const validate = (values: Object, props: Props) => {
     }
   }
   if (props.viewer.phone) {
-    if (!values.phone || values.lastname.length === 0) {
+    if (!values.phone || values.phone.length === 0) {
       errors.phone = 'fill-or-delete-field';
     }
     if (values.phone && values.phone.length <= 2) {
@@ -107,7 +107,7 @@ const validate = (values: Object, props: Props) => {
 
   return errors;
 };
-const locale = window.locale;
+const wLocale = window.locale ? window.locale : 'fr_FR';
 
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const { intl } = props;
@@ -192,21 +192,18 @@ type PersonalDataState = {
   year: ?number,
   month: ?number,
   day: ?number,
-  showDeleteModal: boolean,
 };
 
 export class PersonalData extends Component<Props, PersonalDataState> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      showDeleteModal: false,
       year: null,
       month: null,
       day: null,
     };
     if (props.viewer && props.viewer.dateOfBirth) {
       this.state = {
-        showDeleteModal: false,
         year: getYear(props.viewer.dateOfBirth),
         month: getMonth(props.viewer.dateOfBirth),
         day: getDay(props.viewer.dateOfBirth),
@@ -229,13 +226,6 @@ export class PersonalData extends Component<Props, PersonalDataState> {
     );
   };
 
-  openDeleteModal = () => {
-    this.setState({ showDeleteModal: true });
-  };
-
-  closeDeleteModal = () => {
-    this.setState({ showDeleteModal: false }, () => {});
-  };
   deleteField = (target: string): void => {
     // $FlowFixMe
     if (target.split('-').length > 1) {
@@ -267,7 +257,6 @@ export class PersonalData extends Component<Props, PersonalDataState> {
         </Button>
         <Button
           onClick={() => {
-            this.closeDeleteModal();
             this.refs[target].hide();
           }}
           id="btn-cancel-delete-field"
@@ -356,8 +345,6 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             placement="top"
                             rootClose
                             ref="firstname"
-                            show={this.state.showDeleteModal}
-                            onHide={this.closeDeleteModal}
                             overlay={this.popover('firstname')}>
                             <OverlayTrigger placement="top" overlay={tooltipDelete}>
                               <a
@@ -475,7 +462,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                                   this.setDate();
                                 });
                               }}
-                              locale={locale.substr(3, 5)}
+                              locale={wLocale.substr(3, 5)}
                               id={'month'}
                               name={'month'}
                               classes={'form-control'}
