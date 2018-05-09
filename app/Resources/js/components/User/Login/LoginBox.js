@@ -1,17 +1,17 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
 import { Alert } from 'react-bootstrap';
 import LoginSocialButtons from './LoginSocialButtons';
 import LoginForm from './LoginForm';
 import type { State } from '../../../types';
 
-export const LoginBox = React.createClass({
-  propTypes: {
-    textTop: PropTypes.string,
-    textBottom: PropTypes.string,
-  },
+type Props = {
+  textTop: string,
+  textBottom: string,
+};
 
+export class LoginBox extends Component<Props> {
   render() {
     const { textTop, textBottom } = this.props;
     return (
@@ -32,8 +32,8 @@ export const LoginBox = React.createClass({
         )}
       </div>
     );
-  },
-});
+  }
+}
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   textTop: state.default.parameters['login.text.top'],

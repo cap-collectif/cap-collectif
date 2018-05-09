@@ -5,7 +5,7 @@ import { shallow } from 'enzyme';
 import { LoginBox } from './LoginBox';
 
 describe('<LoginBox />', () => {
-  const props = {};
+  const props = { textTop: '', textBottom: '' };
 
   const texts = {
     textTop: 'Texte du haut',

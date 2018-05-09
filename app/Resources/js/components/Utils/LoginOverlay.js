@@ -3,8 +3,9 @@ import React, { PropTypes, cloneElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
-import { showLoginModal, showRegistrationModal } from '../../redux/modules/user';
+import { showRegistrationModal } from '../../redux/modules/user';
 import type { State, Dispatch } from '../../types';
+import LoginButton from '../User/Login/LoginButton';
 
 export const LoginOverlay = React.createClass({
   displayName: 'LoginOverlay',
@@ -15,8 +16,8 @@ export const LoginOverlay = React.createClass({
     enabled: PropTypes.bool,
     isLoginOrRegistrationModalOpen: PropTypes.bool.isRequired,
     showRegistrationButton: PropTypes.bool.isRequired,
-    openLoginModal: PropTypes.func.isRequired,
     openRegistrationModal: PropTypes.func.isRequired,
+    loginWithMonCompteParis: PropTypes.bool,
   },
 
   getDefaultProps() {
@@ -35,7 +36,7 @@ export const LoginOverlay = React.createClass({
       showRegistrationButton,
       isLoginOrRegistrationModalOpen,
       openRegistrationModal,
-      openLoginModal,
+      loginWithMonCompteParis,
     } = this.props;
 
     if (!enabled || user) {
@@ -45,17 +46,16 @@ export const LoginOverlay = React.createClass({
     const popover = (
       <Popover id="login-popover" title={<FormattedMessage id="vote.popover.title" />}>
         <p>{<FormattedMessage id="vote.popover.body" />}</p>
-        {showRegistrationButton && (
-          <p>
-            <Button onClick={openRegistrationModal} className="center-block btn-block">
-              {<FormattedMessage id="global.registration" />}
-            </Button>
-          </p>
-        )}
+        {showRegistrationButton &&
+          !loginWithMonCompteParis && (
+            <p>
+              <Button onClick={openRegistrationModal} className="center-block btn-block">
+                {<FormattedMessage id="global.registration" />}
+              </Button>
+            </p>
+          )}
         <p>
-          <Button onClick={openLoginModal} bsStyle="success" className="center-block btn-block">
-            {<FormattedMessage id="global.login" />}
-          </Button>
+          <LoginButton bsStyle="success" className="center-block btn-block" />
         </p>
       </Popover>
     );
@@ -79,11 +79,9 @@ const mapStateToProps = (state: State) => ({
   showRegistrationButton: state.default.features.registration,
   isLoginOrRegistrationModalOpen:
     state.user.showLoginModal || state.user.showRegistrationModal || false,
+  loginWithMonCompteParis: state.default.features.login_paris,
 });
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  openLoginModal: () => {
-    dispatch(showLoginModal());
-  },
   openRegistrationModal: () => {
     dispatch(showRegistrationModal());
   },
