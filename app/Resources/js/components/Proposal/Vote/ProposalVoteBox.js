@@ -69,14 +69,20 @@ const ProposalVoteBox = React.createClass({
                   <FormattedMessage id="proposal.vote.please_authenticate" />
                 )}
               </p>
-              <Row>
-                <Col xs={12} sm={6}>
-                  <RegistrationButton className="btn-block" buttonStyle={{ margin: '0' }} />
-                </Col>
-                <Col xs={12} sm={6}>
+              {!features.login_paris ? (
+                <Row>
+                  <Col xs={12} sm={6}>
+                    <RegistrationButton className="btn-block" buttonStyle={{ margin: '0' }} />
+                  </Col>
+                  <Col xs={12} sm={6}>
+                    <LoginButton className="btn-darkest-gray btn-block btn--connection" />
+                  </Col>
+                </Row>
+              ) : (
+                <p>
                   <LoginButton className="btn-darkest-gray btn-block btn--connection" />
-                </Col>
-              </Row>
+                </p>
+              )}
               {features.vote_without_account && (
                 <p className="excerpt p--lined">
                   <span>{<FormattedMessage id="global.or" />}</span>
