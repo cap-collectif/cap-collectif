@@ -570,6 +570,9 @@ type DeleteUserContributionsInputPayload {
 
   # number of contributions content who have been changed
   contributionsContentDeleted: Int!
+
+  # url to home with params for flashbag
+  deleteUrl: URI!
   clientMutationId: String
 }
 

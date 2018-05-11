@@ -156,5 +156,6 @@ services:
     arguments:
         - "@doctrine.orm.entity_manager"
         - "@translator"
+        - "@router"
     tags:
       - { name: overblog_graphql.mutation }

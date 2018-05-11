@@ -12,6 +12,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\Router;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class DeleteUserContributionsMutation implements ContainerAwareInterface
@@ -20,11 +22,13 @@ class DeleteUserContributionsMutation implements ContainerAwareInterface
 
     private $em;
     private $translator;
+    private $router;
 
-    public function __construct(EntityManagerInterface $em, TranslatorInterface $translator)
+    public function __construct(EntityManagerInterface $em, TranslatorInterface $translator, Router $router)
     {
         $this->em = $em;
         $this->translator = $translator;
+        $this->router = $router;
     }
 
     public function __invoke(Argument $input, User $user): array
@@ -51,6 +55,7 @@ class DeleteUserContributionsMutation implements ContainerAwareInterface
             'username' => $user->getUsername(),
             'contributionsRemoved' => $count['contributionsRemoved'],
             'contributionsContentDeleted' => $count['contributionsContentDeleted'],
+            'deleteUrl' => $this->router->generate('capco_delete_user', ['removalType' => $removalType], UrlGeneratorInterface::ABSOLUTE_URL),
         ];
     }
 

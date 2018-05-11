@@ -14,5 +14,8 @@ DeleteUserContributionsInputPayload:
             contributionsContentDeleted:
                 type: "Int!"
                 description: "number of contributions content who have been changed"
+            deleteUrl:
+                type: "URI!"
+                description: "url to redirect home and disconnect user"
 
 
