@@ -293,7 +293,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
           <Alert bsStyle="info">
             <span className="cap-information col-sm-1 col-md-1" />
             <FormattedMessage
-              id="participation-personal-data-idetedMessage id=tion"
+              id="participation-personal-data-identity-verification"
               className="col-sm-7 col-md-7"
             />
           </Alert>
@@ -312,7 +312,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
             <FormattedMessage id="personal-data" />
           </h2>
           {!hasData(viewer, hasValue) && (
-            <div className="capco_horizontal_field_with_border_top">
+            <div className="capco_horizontal_field_with_border_top" style={{ border: 0 }}>
               <Well>
                 <FormattedMessage id="no-data" />
               </Well>
