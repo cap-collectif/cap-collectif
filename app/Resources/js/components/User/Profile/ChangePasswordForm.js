@@ -42,9 +42,7 @@ const validate = ({
   return errors;
 };
 
-const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
-  const { intl } = props;
-
+const onSubmit = (values: Object, dispatch: Dispatch, { reset, intl }) => {
   const input = {
     current_password: values.current_password,
     new: values.new_password,
@@ -54,6 +52,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
       if (!response.updateProfilePassword || !response.updateProfilePassword.viewer) {
         throw new Error('Mutation "updateProfilePassword" failed.');
       }
+      reset();
     })
     .catch(response => {
       if (response.response.message) {
