@@ -1,4 +1,5 @@
 /* eslint-env jest */
+/* @flow */
 import React from 'react';
 import { shallow } from 'enzyme';
 import { EditProfileTabs } from './EditProfileTabs';

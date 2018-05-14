@@ -63,7 +63,6 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const input = {
     ...values,
     media,
-    userId: props.viewer.id,
   };
 
   return UpdateProfilePublicDataMutation.commit({ input })

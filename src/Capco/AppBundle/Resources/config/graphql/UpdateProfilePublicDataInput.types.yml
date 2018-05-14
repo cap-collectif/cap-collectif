@@ -3,14 +3,11 @@ UpdateProfilePublicDataInput:
     config:
         description: "Update your public data"
         fields:
-            userId:
-                type: "ID!"
-                description: "user id"
             username:
                 type: "String!"
                 description: "Your username"
             userType:
-                type: "String"
+                type: "ID"
                 description: "Your user type"
             biography:
                 type: "String"

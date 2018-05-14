@@ -14,24 +14,7 @@ const mutation = graphql`
     updateProfilePublicData(input: $input) {
       viewer {
         id
-        media {
-          id
-          name
-          size
-          url
-        }
-        show_url
-        username
-        biography
-        website
-        facebookUrl
-        linkedInUrl
-        twitterUrl
-        profilePageIndexed
-        userType {
-          id
-        }
-        neighborhood
+        ...Profile_viewer
       }
     }
   }

@@ -27,17 +27,15 @@ class UpdateProfilePersonalDataMutation
     {
         $arguments = $input->getRawArguments();
 
-        unset($arguments['userId']);
-
         $form = $this->formFactory->create(PersonalDataFormType::class, $user, ['csrf_protection' => false]);
         try {
             $form->submit($arguments, false);
         } catch (\LogicException $e) {
-            $this->logger->error(__METHOD__.' : '.$e->getMessage());
+            $this->logger->error(__METHOD__ . ' : ' . $e->getMessage());
         }
 
         if (!$form->isValid()) {
-            $this->logger->error(__METHOD__.' : '.(string)$form->getErrors(true, false));
+            $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
             throw new UserError('Can\'t update !');
         }
 

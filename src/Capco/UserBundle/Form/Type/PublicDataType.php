@@ -21,54 +21,25 @@ class PublicDataType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('twitterUrl', null, [
-                'label' => 'user.profile.edit.twitter',
-                'translation_domain' => 'CapcoAppBundle',
-                'required' => false,
-            ])
-            ->add('facebookUrl', null, [
-                'label' => 'user.profile.edit.facebook',
-                'translation_domain' => 'CapcoAppBundle',
-                'required' => false,
-            ])
-            ->add('linkedInUrl', null, [
-                'label' => 'user.profile.edit.linkedIn',
-                'translation_domain' => 'CapcoAppBundle',
-                'required' => false,
-            ])
+            ->add('twitterUrl')
+            ->add('facebookUrl')
+            ->add('linkedInUrl')
             ->add('username', null, [
-                'label' => 'user.profile.edit.username',
-                'translation_domain' => 'CapcoAppBundle',
                 'required' => true,
             ])
-            ->add('neighborhood', null, [
-                'label' => 'user.profile.edit.neighborhood',
-                'translation_domain' => 'CapcoAppBundle',
-                'required' => false,
-            ])
+            ->add('neighborhood')
             ->add('media')
             ->add('profilePageIndexed', CheckboxType::class, [
                 'required' => false,
-                'label' => 'user.profile.edit.profilePageIndexed',
                 'label_attr' => ['style' => 'font-weight: normal; color: #000000'],
-                'translation_domain' => 'CapcoAppBundle',
             ])
-            ->add('website', 'url', [
-                'label' => 'form.label_website',
-                'required' => false,
-            ])
-            ->add('biography', 'textarea', [
-                'label' => 'form.label_biography',
-                'required' => false,
-            ])
+            ->add('website', 'url')
+            ->add('biography', 'textarea')
         ;
 
         if ($this->toggleManager->isActive('user_type')) {
             $builder->add('userType', null, [
-                'required' => false,
                 'empty_value' => 'user.profile.edit.no_user_type',
-                'label' => 'user.profile.edit.user_type',
-                'translation_domain' => 'CapcoAppBundle',
             ]);
         }
     }

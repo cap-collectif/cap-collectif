@@ -1,4 +1,5 @@
 /* eslint-env jest */
+/* @flow */
 import React from 'react';
 import { shallow } from 'enzyme';
 import { PersonalData } from './PersonalData';
@@ -22,6 +23,7 @@ describe('<PersonalData />', () => {
   const props1 = {
     ...formMock,
     intl: intlMock,
+    personalDataForm: {},
     initialValues: {
       firstname: 'Utilisateur',
       lastname: 'Super',
@@ -49,6 +51,7 @@ describe('<PersonalData />', () => {
   const props2 = {
     ...formMock,
     intl: intlMock,
+    personalDataForm: {},
     initialValues: {
       firstname: 'Utilisateur',
       lastname: 'Super',
@@ -86,6 +89,7 @@ describe('<PersonalData />', () => {
   const props3 = {
     ...formMock,
     intl: intlMock,
+    personalDataForm: {},
     initialValues: {
       firstname: 'Utilisateur',
       lastname: null,

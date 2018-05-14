@@ -2,13 +2,13 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\PublicDataType;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactory;
-use Capco\UserBundle\Entity\User;
 
 class UpdateProfilePublicDataMutation
 {
@@ -27,24 +27,15 @@ class UpdateProfilePublicDataMutation
     {
         $arguments = $input->getRawArguments();
 
-        if ($arguments['userId'] != $user->getId()) {
-            $this->logger->error(
-                __METHOD__.' : User with id '.$user->getId(
-                ).' try to get informations about user with id  '.$arguments['userId']
-            );
-            throw new UserError('Can\'t update !');
-        }
-        unset($arguments['userId']);
-
         $form = $this->formFactory->create(PublicDataType::class, $user, ['csrf_protection' => false]);
         try {
             $form->submit($arguments, false);
         } catch (\LogicException $e) {
-            $this->logger->error(__METHOD__.' : '.$e->getMessage());
+            $this->logger->error(__METHOD__ . ' : ' . $e->getMessage());
         }
 
         if (!$form->isValid()) {
-            $this->logger->error(__METHOD__.' : '.(string)$form->getErrors(true, false));
+            $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
             throw new UserError('Can\'t update !');
         }
 

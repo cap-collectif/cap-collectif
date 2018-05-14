@@ -1,10 +1,16 @@
 /* eslint-env jest */
+/* @flow */
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Profile } from './Profile';
+import { intlMock, formMock } from '../../../mocks';
 
 describe('<Profile />', () => {
   const props = {
+    ...formMock,
+    intl: intlMock,
+    hasValue: {},
+    profileForm: {},
     initialValues: {
       media: {
         id: 'media1',

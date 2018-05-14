@@ -1990,10 +1990,10 @@ input UpdateProfileInput {
 
 input UpdateProfilePasswordInput {
   # The current password
-  current_password: String
+  current_password: String!
 
   # The new password
-  new: String
+  new: String!
   clientMutationId: String
 }
 
@@ -2010,9 +2010,6 @@ type UpdateProfilePayload {
 }
 
 input UpdateProfilePersonalDataInput {
-  # user id
-  userId: ID!
-
   # Your firstname
   firstname: String
 
@@ -2049,14 +2046,11 @@ type UpdateProfilePersonalDataPayload {
 }
 
 input UpdateProfilePublicDataInput {
-  # user id
-  userId: ID!
-
   # Your username
   username: String!
 
   # Your user type
-  userType: String
+  userType: ID
 
   # Your biography
   biography: String

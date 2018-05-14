@@ -14,7 +14,7 @@ const mutation = graphql`
     updateProfilePersonalData(input: $input) {
       viewer {
         id
-        username
+        ...PersonalData_viewer
       }
     }
   }
