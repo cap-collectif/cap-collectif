@@ -4,9 +4,14 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\CommentVote;
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\EventComment;
+use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Source;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -40,14 +45,15 @@ class DeleteUserContributionsMutation implements ContainerAwareInterface
         $count['contributionsContentDeleted'] = 0;
 
         if ('hard' === $removalType && $user) {
+            $count = $this->hardDelete($user, $contributions, $count);
             $this->anonymizeUser($user);
-            $count = $this->deleteUserContents($user, $contributions, $count);
         } elseif ('soft' === $removalType && $user) {
+            $count = $this->deleteIfStepActive($user, $contributions, $count);
             $this->anonymizeUser($user);
         } elseif (!$user) {
             throw new \RuntimeException('User not find');
         } else {
-            throw new \RuntimeException("this type of remove user account don't exist");
+            throw new \RuntimeException("This type of removing user account doesn't exist");
         }
 
         return [
@@ -101,12 +107,70 @@ class DeleteUserContributionsMutation implements ContainerAwareInterface
         $user->setGender(null);
         $user->setLocale(null);
         $user->setTimezone(null);
-        $user->setMedia(null);
+
+        if ($user->getMedia()) {
+            $media = $this->em->getRepository('CapcoMediaBundle:Media')->find($user->getMedia()->getId());
+            $this->removeMedia($media);
+            $user->setMedia(null);
+        }
 
         $this->em->flush();
     }
 
-    public function deleteUserContents(User $user, array $contributions, array $count): array
+    public function deleteIfStepActive(User $user, array $contributions, array $count): array
+    {
+        $now = (new \DateTime())->format('Y-m-d H:i:s');
+
+        foreach ($contributions as $contribution) {
+            if ($contribution instanceof AbstractVote) {
+                if (!$contribution instanceof CommentVote) {
+                    if (method_exists($contribution->getRelatedEntity(), 'getStep') && $this->checkIfStepActive($contribution->getRelatedEntity()->getStep())) {
+                        $this->em->remove($contribution);
+                    }
+                } else {
+                    if ($contribution->getComment() instanceof ProposalComment) {
+                        if (method_exists($contribution->getComment()->getRelatedObject()->getProposalForm(), 'getStep') && $this->checkIfStepActive($contribution->getComment()->getRelatedObject()->getProposalForm()->getStep())) {
+                            $this->em->remove($contribution);
+                        }
+                    } elseif ($contribution->getComment() instanceof EventComment) {
+                        if ($contribution->getComment()->getEvent()->getEndAt() > $now) {
+                            $this->em->remove($contribution);
+                        }
+                    }
+                }
+            }
+
+            if ($contribution instanceof Comment) {
+                if ($contribution instanceof ProposalComment) {
+                    if (method_exists($contribution->getRelatedObject()->getProposalForm(), 'getStep') && $this->checkIfStepActive($contribution->getRelatedObject()->getProposalForm()->getStep())) {
+                        $this->em->remove($contribution);
+                    }
+                } elseif ($contribution instanceof EventComment) {
+                    if ($contribution->getEvent()->getEndAt() > $now) {
+                        $this->em->remove($contribution);
+                    }
+                }
+            }
+
+            if ($contribution instanceof Source || $contribution instanceof \Capco\AppBundle\Entity\Argument) {
+                if (method_exists($contribution->getOpinion(), 'getStep') && $this->checkIfStepActive($contribution->getOpinion()->getStep())) {
+                    $this->em->remove($contribution);
+                }
+            }
+
+            if (method_exists($contribution, 'getMedia') && $contribution->getMedia()) {
+                $media = $this->em->getRepository('CapcoMediaBundle:Media')->find($contribution->getMedia()->getId());
+                $this->removeMedia($media);
+                $contribution->setMedia(null);
+            }
+        }
+
+        $this->container->get('redis_storage.helper')->recomputeUserCounters($user);
+
+        return $count;
+    }
+
+    public function hardDelete(User $user, array $contributions, array $count): array
     {
         $deletedBodyText = $this->translator->trans('deleted-content-by-author', [], 'CapcoAppBundle');
         $deletedTitleText = $this->translator->trans('deleted-title', [], 'CapcoAppBundle');
@@ -114,20 +178,11 @@ class DeleteUserContributionsMutation implements ContainerAwareInterface
         $reports = $this->em->getRepository(Reporting::class)->findBy(['Reporter' => $user]);
         $events = $this->em->getRepository(Event::class)->findBy(['Author' => $user]);
 
-        foreach ($contributions as $contribution) {
-            if ($contribution instanceof Comment
-            || $contribution instanceof Source
-            || $contribution instanceof AbstractVote
-            || $contribution instanceof \Capco\AppBundle\Entity\Argument) {
-                if (method_exists($contribution, 'getStep') && $contribution->getStep()->getEndAt() > new \DateTime()) {
-                    $this->em->remove($contribution);
-                    ++$count['contributionsRemoved'];
-                }
-            }
+        $this->deleteIfStepActive($user, $contributions, $count);
 
+        foreach ($contributions as $contribution) {
             if (method_exists($contribution, 'setTitle')) {
                 $contribution->setTitle($deletedTitleText);
-                ++$count['contributionsContentDeleted'];
             }
             if (method_exists($contribution, 'setBody')) {
                 $contribution->setBody($deletedBodyText);
@@ -135,8 +190,18 @@ class DeleteUserContributionsMutation implements ContainerAwareInterface
             if (method_exists($contribution, 'setSummary')) {
                 $contribution->setSummary(null);
             }
-            if (method_exists($contribution, 'setMedia')) {
+            if (method_exists($contribution, 'getMedia') && $contribution->getMedia()) {
+                $media = $this->em->getRepository('CapcoMediaBundle:Media')->find($contribution->getMedia()->getId());
+                $this->removeMedia($media);
                 $contribution->setMedia(null);
+            }
+
+            if (method_exists($contribution, 'setTitle') ||
+                method_exists($contribution, 'setBody') ||
+                method_exists($contribution, 'setSummary') ||
+                method_exists($contribution, 'getMedia')
+            ) {
+                ++$count['contributionsContentDeleted'];
             }
         }
 
@@ -153,12 +218,22 @@ class DeleteUserContributionsMutation implements ContainerAwareInterface
 
         $this->container->get('redis_storage.helper')->recomputeUserCounters($user);
 
-        /*foreach ($blogPosts as $blogPost) {
-            $this->em->remove($blogPost);
-        }*/
-
         $this->em->flush();
 
         return $count;
+    }
+
+    public function checkIfStepActive(AbstractStep $step)
+    {
+        return $step->isTimeless() || $step->getEndAt() > (new \DateTime())->format('Y-m-d H:i:s');
+    }
+
+    public function removeMedia(Media $media): void
+    {
+        if ($media) {
+            $provider = $this->container->get($media->getProviderName());
+            $provider->removeThumbnails($media);
+            $this->em->remove($media);
+        }
     }
 }
