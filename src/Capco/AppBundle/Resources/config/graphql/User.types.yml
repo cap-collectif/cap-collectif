@@ -127,6 +127,8 @@ User:
                 type: "Int!"
             commentVotesCount:
                 type: "Int!"
+            votesCount:
+                type: "Int!"
             sourcesCount:
                 type: "Int!"
             repliesCount:

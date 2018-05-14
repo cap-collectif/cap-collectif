@@ -4,27 +4,42 @@ import { Panel, Button } from 'react-bootstrap';
 import { connect, type MapStateToProps } from 'react-redux';
 import { isInvalid } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
+import { QueryRenderer, graphql } from 'react-relay';
+import Loader from '../../Ui/Loader';
 import AccountForm from './AccountForm';
 import ConfirmPasswordModal from '../ConfirmPasswordModal';
 import DeleteAccountModal from '../DeleteAccountModal';
 import { confirmPassword, showDeleteAccountModal } from '../../../redux/modules/user';
 import type { State, Dispatch } from '../../../types';
+import environment, { graphqlError } from '../../../createRelayEnvironment';
+
+const query = graphql`
+  query AccountBoxQuery {
+    viewer {
+      ...DeleteAccountModal_viewer
+    }
+  }
+`;
 
 type Props = {
   dispatch: Dispatch,
   invalid: boolean,
   submitting: boolean,
-};
-type Props = {
-  user: Object,
-  submitting: boolean,
-  invalid: boolean,
-  dispatch: Dispatch,
 };
 
 export class AccountBox extends Component<Props, State> {
   render() {
     const { invalid, submitting, dispatch } = this.props;
+    const renderDeleteAccountModal = ({ props, error }) => {
+      if (error) {
+        console.log(error);
+        return graphqlError;
+      }
+      if (props) {
+        return <DeleteAccountModal viewer={props.viewer} show />;
+      }
+      return <Loader />;
+    };
     return (
       <Panel>
         <h2 className="page-header">
@@ -56,6 +71,12 @@ export class AccountBox extends Component<Props, State> {
           </Button>
         </div>
         <DeleteAccountModal show />
+        <QueryRenderer
+          variables={{}}
+          environment={environment}
+          query={query}
+          render={renderDeleteAccountModal}
+        />
       </Panel>
     );
   }

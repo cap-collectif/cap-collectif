@@ -571,7 +571,7 @@ type DeleteUserContributionsInputPayload {
   # number of contributions content who have been changed
   contributionsContentDeleted: Int!
 
-  # url to home with params for flashbag
+  # url to redirect home and disconnect user
   deleteUrl: URI!
   clientMutationId: String
 }
@@ -2281,6 +2281,7 @@ type User implements Node {
   proposalsCount: Int!
   proposalVotesCount: Int!
   commentVotesCount: Int!
+  votesCount: Int!
   sourcesCount: Int!
   repliesCount: Int!
   postCommentsCount: Int!

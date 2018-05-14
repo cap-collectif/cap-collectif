@@ -4,8 +4,10 @@ import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Modal, Button, Radio } from 'react-bootstrap';
 import type { MapStateToProps } from 'react-redux';
-import CloseButton from '../Form/CloseButton';
+import { createFragmentContainer, graphql } from 'react-relay';
+import type { DeleteAccountModal_viewer } from './__generated__/DeleteAccountModal_viewer.graphql';
 import DefaultAvatar from './DefaultAvatar';
+import CloseButton from '../Form/CloseButton';
 import DeleteAccountMutation from '../../mutations/DeleteAccountMutation';
 import type { Dispatch, State } from '../../types';
 import { closeDeleteAccountModal } from '../../redux/modules/user';
@@ -13,9 +15,11 @@ import type { DeleteAccountResponse } from '../../mutations/__generated__/Delete
 
 const formName = 'delete-user';
 
-// type FormValues = Object;
+type RelayProps = {
+  viewer: DeleteAccountModal_viewer,
+};
 
-type Props = {
+type Props = RelayProps & {
   show: boolean,
   dispatch: Dispatch,
 };
@@ -53,7 +57,7 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
       this.state.removalType === 'soft' ? 'panel-primary delete__panel__checked' : 'panel-default';
     const hardPanelChecked =
       this.state.removalType === 'hard' ? 'panel-primary delete__panel__checked' : 'panel-default';
-    const { show, dispatch } = this.props;
+    const { show, dispatch, viewer } = this.props;
     const removalName = 'type-of-removal';
     return (
       <div>
@@ -80,16 +84,26 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
               </p>
               <div className="row">
                 <div className="col-sm-1">
-                  <i className="cap cap-id-8 profile__contribution__icon primary" />
+                  <i className="cap cap-id-8 delete__modal__icon primary" />
                 </div>
                 <p className="col-sm-11">
-                  <FormattedMessage id="alias-name-information" />
+                  <FormattedHTMLMessage
+                    id="alias-name-information"
+                    values={{ profileLink: '/profile/edit-profile' }}
+                  />
                 </p>
                 <div className="col-sm-1">
-                  <i className="cap cap-download-12 profile__contribution__icon primary" />
+                  <i className="cap cap-download-12 delete__modal__icon primary" />
                 </div>
                 <p className="col-sm-11">
-                  <FormattedMessage id="data-amount-contributions-votes" />
+                  <FormattedHTMLMessage
+                    id="data-amount-contributions-votes"
+                    values={{
+                      contributionsNumber: viewer.contributionsCount,
+                      votesNumber: viewer.votesCount,
+                      datePage: '',
+                    }}
+                  />
                 </p>
               </div>
               <hr style={{ margin: '5px 0 15px 0' }} />
@@ -115,7 +129,11 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                         <p className="delete__content__choice">
                           <FormattedHTMLMessage
                             id="anonymizing-contributions-and-votes"
-                            values={{ nbContributions: 436, nbVotes: 42 }}
+                            values={{
+                              nbContributions: viewer.contributionsCount,
+                              nbVotes: viewer.votesCount,
+                              nbContributionsToDelete: 40,
+                            }}
                           />
                         </p>
                       </div>
@@ -158,7 +176,10 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                         <p className="delete__content__choice">
                           <FormattedHTMLMessage
                             id="global-deleting-contributions-and-votes"
-                            values={{ nbContributions: 436, nbVotes: 42 }}
+                            values={{
+                              nbContributions: viewer.contributionsCount,
+                              nbVotes: viewer.votesCount,
+                            }}
                           />
                         </p>
                       </div>
@@ -203,7 +224,8 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                 this.delete();
               }}
               bsStyle="danger">
-              {<FormattedMessage id="global.removeDefinitively" />}
+              <i className="cap cap-attention" style={{ padding: '0 5px 0 0' }} />
+              <FormattedMessage id="global.removeDefinitively" />
             </Button>
           </Modal.Footer>
         </Modal>
@@ -218,4 +240,14 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
   };
 };
 
-export default connect(mapStateToProps)(DeleteAccountModal);
+const container = connect(mapStateToProps)(DeleteAccountModal);
+
+export default createFragmentContainer(
+  container,
+  graphql`
+    fragment DeleteAccountModal_viewer on User {
+      contributionsCount
+      votesCount
+    }
+  `,
+);
