@@ -16,21 +16,29 @@ exports[`<AccountBox /> should render a disabled button when the form is invalid
   </h2>
   <Connect(ReduxForm) />
   <Connect(ConfirmPasswordModal) />
-  <Button
-    active={false}
-    block={false}
-    bsClass="btn"
-    bsStyle="primary"
-    className="col-sm-offset-4"
-    disabled={true}
-    id="edit-account-profile-button"
-    onClick={[Function]}
+  <div
+    style={
+      Object {
+        "paddingLeft": 15,
+      }
+    }
   >
-    <FormattedMessage
-      id="global.save_modifications"
-      values={Object {}}
-    />
-  </Button>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="primary"
+      className="col-sm-offset-3"
+      disabled={true}
+      id="edit-account-profile-button"
+      onClick={[Function]}
+    >
+      <FormattedMessage
+        id="global.save_modifications"
+        values={Object {}}
+      />
+    </Button>
+  </div>
 </Panel>
 `;
 
@@ -50,21 +58,29 @@ exports[`<AccountBox /> should render a disabled button when the form is submitt
   </h2>
   <Connect(ReduxForm) />
   <Connect(ConfirmPasswordModal) />
-  <Button
-    active={false}
-    block={false}
-    bsClass="btn"
-    bsStyle="primary"
-    className="col-sm-offset-4"
-    disabled={true}
-    id="edit-account-profile-button"
-    onClick={[Function]}
+  <div
+    style={
+      Object {
+        "paddingLeft": 15,
+      }
+    }
   >
-    <FormattedMessage
-      id="global.loading"
-      values={Object {}}
-    />
-  </Button>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="primary"
+      className="col-sm-offset-3"
+      disabled={true}
+      id="edit-account-profile-button"
+      onClick={[Function]}
+    >
+      <FormattedMessage
+        id="global.loading"
+        values={Object {}}
+      />
+    </Button>
+  </div>
 </Panel>
 `;
 
@@ -84,20 +100,28 @@ exports[`<AccountBox /> should render and enabled button when the form is valid 
   </h2>
   <Connect(ReduxForm) />
   <Connect(ConfirmPasswordModal) />
-  <Button
-    active={false}
-    block={false}
-    bsClass="btn"
-    bsStyle="primary"
-    className="col-sm-offset-4"
-    disabled={false}
-    id="edit-account-profile-button"
-    onClick={[Function]}
+  <div
+    style={
+      Object {
+        "paddingLeft": 15,
+      }
+    }
   >
-    <FormattedMessage
-      id="global.save_modifications"
-      values={Object {}}
-    />
-  </Button>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="primary"
+      className="col-sm-offset-3"
+      disabled={false}
+      id="edit-account-profile-button"
+      onClick={[Function]}
+    >
+      <FormattedMessage
+        id="global.save_modifications"
+        values={Object {}}
+      />
+    </Button>
+  </div>
 </Panel>
 `;

@@ -88,9 +88,18 @@ exports[`<Profile /> should render my profile 1`] = `
         htmlFor="profile-form-username"
       >
         <FormattedMessage
-          id="form.label_username"
+          id="registration.username"
           values={Object {}}
         />
+        <br />
+        <span
+          className="excerpt"
+        >
+          <FormattedMessage
+            id="global.mandatory"
+            values={Object {}}
+          />
+        </span>
       </label>
       <div>
         <Field
@@ -120,14 +129,6 @@ exports[`<Profile /> should render my profile 1`] = `
           values={Object {}}
         />
          
-        <span
-          className="excerpt"
-        >
-          <FormattedMessage
-            id="global.form.optional"
-            values={Object {}}
-          />
-        </span>
       </label>
       <div>
         <Field

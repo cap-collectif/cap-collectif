@@ -122,7 +122,11 @@ export class Profile extends Component<Props> {
           </div>
           <div className="capco_horizontal_field_with_border_top" style={{ border: 0 }}>
             <label className="col-sm-3 control-label" htmlFor="profile-form-username">
-              <FormattedMessage id="form.label_username" />
+              <FormattedMessage id="registration.username" />
+              <br />
+              <span className="excerpt">
+                <FormattedMessage id="global.mandatory" />
+              </span>
             </label>
             <div>
               <Field
@@ -138,9 +142,6 @@ export class Profile extends Component<Props> {
           <div className="capco_horizontal_field_with_border_top" style={{ border: 0 }}>
             <label className="col-sm-3 control-label" htmlFor="profile-form-userType">
               <FormattedMessage id="registration.type" />{' '}
-              <span className="excerpt">
-                <FormattedMessage id="global.form.optional" />
-              </span>
             </label>
             <div>
               <Field
