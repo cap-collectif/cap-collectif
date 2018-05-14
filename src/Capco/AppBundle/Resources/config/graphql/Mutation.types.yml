@@ -138,12 +138,12 @@ Mutation:
                   payloadType: ChangeProposalProgressStepsPayload
                   mutateAndGetPayload: "@=mutation('changeProgressSteps', [value])"
           deleteProposal:
-              access: "@=hasRole('ROLE_SUPER_ADMIN') or service('capco.proposal.helper').isAuthor(args['input']['proposalId'], user)"
+              access: "@=hasRole('ROLE_SUPER_ADMIN') or (hasRole('ROLE_USER') and service('capco.proposal.helper').isAuthor(args['input']['proposalId'], user))"
               builder: "Relay::Mutation"
               builderConfig:
                   inputType: DeleteProposalInput
                   payloadType: DeleteProposalPayload
-                  mutateAndGetPayload: "@=mutation('deleteProposal', [value['proposalId']])"
+                  mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteProposalMutation", [value["proposalId"], user])'
 
           # Proposal Form
           createProposalForm:

@@ -150,15 +150,13 @@ export class ProposalPageContent extends React.Component<Props> {
                 url={proposal.show_url}
                 title={proposal.title}
               />
-              {/* $FlowFixMe */}
               <ProposalReportButton proposal={proposal} />
             </div>
           )}
         </div>
         {/* $FlowFixMe */}
         <ProposalEditModal proposal={proposal} form={form} categories={categories} />
-        {/* $FlowFixMe */}
-        <ProposalDeleteModal proposal={proposal} form={form} />
+        <ProposalDeleteModal proposal={proposal} />
         {proposal.publicationStatus !== 'DRAFT' && (
           <ProposalPageComments id={proposal.id} form={form} />
         )}

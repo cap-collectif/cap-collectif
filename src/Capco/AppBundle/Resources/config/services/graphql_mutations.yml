@@ -1,4 +1,15 @@
 services:
+  Capco\AppBundle\GraphQL\Mutation\DeleteProposalMutation:
+      # only for sf < 3.3
+      class: Capco\AppBundle\GraphQL\Mutation\DeleteProposalMutation
+      arguments:
+          - "@doctrine.orm.default_entity_manager"
+          - "@capco.proposal.repository"
+          - "@redis_storage.helper"
+          - "@swarrot.publisher"
+          - "@capco.elasticsearch.indexer"
+      tags:
+          - { name: overblog_graphql.mutation }
   Capco\AppBundle\GraphQL\Mutation\AddProposalVoteMutation:
       # only for sf < 3.3
       class: Capco\AppBundle\GraphQL\Mutation\AddProposalVoteMutation
@@ -139,7 +150,6 @@ services:
   capco.mutation.proposal:
         class: Capco\AppBundle\GraphQL\Mutation\ProposalMutation
         tags:
-            - { name: overblog_graphql.mutation, alias: "deleteProposal", method: "delete" }
             - { name: overblog_graphql.mutation, alias: "changeProposalNotation", method: "changeNotation" }
             - { name: overblog_graphql.mutation, alias: "changeProposalEvaluers", method: "changeEvaluers" }
             - { name: overblog_graphql.mutation, alias: "changeProgressSteps", method: "changeProgressSteps" }

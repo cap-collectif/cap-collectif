@@ -1,19 +1,6 @@
 @proposals
 Feature: Proposal Restful Api
 
-@database
-Scenario: logged in API client wants to remove a proposal
-  Given I am logged in to api as user
-  When I send a DELETE request to "api/proposal_forms/proposalForm1/proposals/proposal2"
-  Then the JSON response status code should be 204
-
-@database
-Scenario: logged in API client wants to remove a proposal and ensure that its proposal was disabled
-  Given I am logged in to api as user
-  When I send a DELETE request to "api/proposal_forms/proposalForm4/proposals/proposal12"
-  Then the JSON response status code should be 204
-  And proposal with id "proposal12" should be deleted
-
 # Report
 @database
 Scenario: Anonymous API client wants to report a proposal
