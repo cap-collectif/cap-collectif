@@ -26,18 +26,18 @@ export class AccountBox extends Component<Props> {
         <AccountForm />
         <ConfirmPasswordModal />
         <div style={{ paddingLeft: 15 }}>
-        <Button
-          id="edit-account-profile-button"
-          onClick={() => dispatch(confirmPassword())}
-          disabled={invalid || submitting}
-          bsStyle="primary"
-          className="col-sm-offset-3">
-          {submitting ? (
-            <FormattedMessage id="global.loading" />
-          ) : (
-            <FormattedMessage id="global.save_modifications" />
-          )}
-        </Button>
+          <Button
+            id="edit-account-profile-button"
+            onClick={() => dispatch(confirmPassword())}
+            disabled={invalid || submitting}
+            bsStyle="primary"
+            className="col-sm-offset-3">
+            {submitting ? (
+              <FormattedMessage id="global.loading" />
+            ) : (
+              <FormattedMessage id="global.save_modifications" />
+            )}
+          </Button>
         </div>
       </Panel>
     );

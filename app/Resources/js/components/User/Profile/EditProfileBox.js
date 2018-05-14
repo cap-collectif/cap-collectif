@@ -9,7 +9,7 @@ import type { FeatureToggles, State } from '../../../types';
 import type EditProfileTabs_viewer from './__generated__/EditProfileBoxQuery.graphql';
 
 const query = graphql`
-  query EditProfileBoxQuery($count: Int, $cursor: String) {
+  query EditProfileBoxQuery {
     viewer {
       ...EditProfileTabs_viewer
     }
@@ -38,10 +38,7 @@ export class EditProfileBox extends Component<Props> {
     return (
       <div>
         <QueryRenderer
-          variables={{
-            count: 1000,
-            cursor: null,
-          }}
+          variables={{}}
           environment={environment}
           query={query}
           render={renderEditProfile}

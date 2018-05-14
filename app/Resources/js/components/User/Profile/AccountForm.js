@@ -76,9 +76,7 @@ export class AccountForm extends Component<Props> {
               divClassName="col-sm-6"
               style={{ marginLeft: 15 }}
             />
-            <span
-              className="small excerpt col-sm-6 col-sm-offset-3"
-              style={{ paddingBottom: 10 }}>
+            <span className="small excerpt col-sm-6 col-sm-offset-3" style={{ paddingBottom: 10 }}>
               <i className="icon cap-lock-2" />
               <FormattedMessage id="account.your_email_is_not_public" />
             </span>
