@@ -10,14 +10,12 @@ use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Event\CommentChangedEvent;
 use Capco\AppBundle\Form\CommentType;
 use Capco\AppBundle\Form\ReportingType;
-use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcherInterface;
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\Form;
@@ -151,35 +149,6 @@ class ProposalsController extends FOSRestController
     public function putProposalAction(Request $request, ProposalForm $proposalForm, Proposal $proposal)
     {
         throw new BadRequestHttpException('Not supported anymore, use GraphQL mutation "changeProposalContent" instead.');
-    }
-
-    /**
-     * Delete a proposal.
-     *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Delete a proposal",
-     *  statusCodes={
-     *    200 = "Returned when successful",
-     *    404 = "Returned when proposal is not found",
-     *  }
-     * )
-     *
-     * @Security("has_role('ROLE_USER')")
-     * @Delete("/proposal_forms/{proposal_form_id}/proposals/{proposal_id}")
-     * @ParamConverter("proposalForm", options={"mapping": {"proposal_form_id": "id"}, "repository_method": "getOne", "map_method_signature": true})
-     * @ParamConverter("proposal", options={"mapping": {"proposal_id": "id"}, "repository_method": "find", "map_method_signature": true})
-     * @View(statusCode=204)
-     */
-    public function deleteProposalAction(ProposalForm $proposalForm, Proposal $proposal)
-    {
-        if ($this->getUser() !== $proposal->getAuthor()) {
-            throw new BadRequestHttpException('You are not the author of this proposal');
-        }
-
-        $this->get('capco.mutation.proposal')->delete($proposal->getId());
-
-        return [];
     }
 
     /**

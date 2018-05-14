@@ -62,6 +62,7 @@ Proposal:
                 type: "Int"
             responses:
                 type: "[Response]!"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalResponsesResolver", [value, user])'
             media:
                 type: "Media"
             theme:

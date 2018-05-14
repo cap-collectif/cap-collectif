@@ -16,7 +16,7 @@ const ProposalDeleteModal = React.createClass({
   },
 
   render() {
-    const { proposal, form, show, isDeleting, dispatch } = this.props;
+    const { proposal, show, isDeleting, dispatch } = this.props;
     return (
       <div>
         <Modal
@@ -52,7 +52,7 @@ const ProposalDeleteModal = React.createClass({
               id="confirm-proposal-delete"
               isSubmitting={isDeleting}
               onSubmit={() => {
-                deleteProposal(form.id, proposal, dispatch);
+                deleteProposal(proposal.id, dispatch);
               }}
               label="global.removeDefinitively"
               bsStyle="danger"

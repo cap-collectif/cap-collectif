@@ -53,12 +53,6 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
     }
   />
   <Connect(ProposalDeleteModal)
-    form={
-      Object {
-        "usingCategories": false,
-        "usingThemes": true,
-      }
-    }
     proposal={
       Object {
         "_links": Object {

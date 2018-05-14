@@ -592,6 +592,7 @@ input DeleteProposalInput {
 
 type DeleteProposalPayload {
   proposal: Proposal!
+  step: CollectStep!
   clientMutationId: String
 }
 

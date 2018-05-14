@@ -6,6 +6,7 @@ import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import { UPDATE_ALERT } from '../../constants/AlertConstants';
 import addVote from '../../mutations/AddProposalVoteMutation';
 import removeVote from '../../mutations/RemoveProposalVoteMutation';
+import DeleteProposalMutation from '../../mutations/DeleteProposalMutation';
 import type { Exact, State as GlobalState, Dispatch, Uuid, Action } from '../../types';
 
 type Status = { name: string, id: number, color: string };
@@ -177,12 +178,14 @@ const deleteRequest = (): RequestDeleteAction => ({
   type: 'proposal/DELETE_REQUEST',
 });
 
-export const deleteProposal = (form: Uuid, proposal: Object, dispatch: Dispatch): void => {
+export const deleteProposal = (proposalId: string, dispatch: Dispatch): void => {
   dispatch(deleteRequest());
-  Fetcher.delete(`/proposal_forms/${form}/proposals/${proposal.id}`)
-    .then(() => {
+  DeleteProposalMutation.commit({ input: { proposalId } })
+    .then(response => {
       dispatch(closeDeleteProposalModal());
-      window.location.href = proposal._links.index;
+      if (response.deleteProposal) {
+        window.location.href = response.deleteProposal.step.show_url;
+      }
       FluxDispatcher.dispatch({
         actionType: UPDATE_ALERT,
         alert: {

@@ -50,14 +50,7 @@ Scenario: Admin wants to get votes for a proposal in a selection step
                             "id": @string@,
                             "votes": {
                                 "totalCount": @integer@,
-                                "edges": [
-                                    {
-                                        "node": {
-                                            "id": @string@
-                                        }
-                                    },
-                                    @...@
-                                ]
+                                "edges": @array@
                             }
                         }
                     },
