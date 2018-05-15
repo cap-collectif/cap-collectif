@@ -3,6 +3,7 @@
 exports[`<AccountForm /> should render a form 1`] = `
 <form
   className="form-horizontal"
+  id="profile-account"
   onSubmit={[Function]}
 >
   <div
@@ -65,6 +66,7 @@ exports[`<AccountForm /> should render a form 1`] = `
 exports[`<AccountForm /> should render a form with an alert if submitted password is wrong 1`] = `
 <form
   className="form-horizontal"
+  id="profile-account"
   onSubmit={[Function]}
 >
   <div
@@ -129,6 +131,7 @@ exports[`<AccountForm /> should render a form with an alert if submitted passwor
 exports[`<AccountForm /> should render a form with an info if a confirmation email has been resent 1`] = `
 <form
   className="form-horizontal"
+  id="profile-account"
   onSubmit={[Function]}
 >
   <Alert
@@ -240,6 +243,7 @@ exports[`<AccountForm /> should render a form with an info if a confirmation ema
 exports[`<AccountForm /> should render a form with information about new email 1`] = `
 <form
   className="form-horizontal"
+  id="profile-account"
   onSubmit={[Function]}
 >
   <div

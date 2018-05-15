@@ -57,7 +57,7 @@ export class AccountForm extends Component<Props> {
       submitting,
     } = this.props;
     return (
-      <form onSubmit={handleSubmit} className="form-horizontal">
+      <form onSubmit={handleSubmit} className="form-horizontal" id="profile-account">
         {confirmationEmailResent && (
           <Alert bsStyle="warning">
             <FormattedMessage id="account.email_confirmation_sent" />

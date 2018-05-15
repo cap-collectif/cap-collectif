@@ -145,8 +145,8 @@ export class ChangePasswordForm extends Component<Props> {
                   />
                 </Button>
                 <AlertForm
-                  valid={pristine ? true : valid}
-                  invalid={pristine ? false : invalid}
+                  valid={valid}
+                  invalid={invalid}
                   errorMessage={error}
                   submitSucceeded={submitSucceeded}
                   submitFailed={submitFailed}
