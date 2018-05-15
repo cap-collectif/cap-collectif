@@ -128,9 +128,6 @@ describe('<PersonalData />', () => {
     const wrapper = shallow(<PersonalData {...props1} viewer={viewer1} />);
     wrapper.setState({
       showDeleteModal: false,
-      year: null,
-      month: null,
-      day: null,
     });
 
     expect(wrapper).toMatchSnapshot();
@@ -139,9 +136,6 @@ describe('<PersonalData />', () => {
     const wrapper = shallow(<PersonalData {...props2} viewer={viewer2} />);
     wrapper.setState({
       showDeleteModal: false,
-      year: null,
-      month: null,
-      day: null,
     });
 
     expect(wrapper).toMatchSnapshot();
@@ -150,9 +144,6 @@ describe('<PersonalData />', () => {
     const wrapper = shallow(<PersonalData {...props3} viewer={viewer3} />);
     wrapper.setState({
       showDeleteModal: false,
-      year: null,
-      month: null,
-      day: null,
     });
 
     expect(wrapper).toMatchSnapshot();

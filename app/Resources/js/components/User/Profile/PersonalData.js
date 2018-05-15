@@ -5,7 +5,6 @@ import {
   Alert,
   Well,
   Panel,
-  Col,
   ButtonToolbar,
   Button,
   Popover,
@@ -13,7 +12,6 @@ import {
   Tooltip,
 } from 'react-bootstrap';
 import { connect, type MapStateToProps } from 'react-redux';
-import { YearPicker, MonthPicker, DayPicker } from 'react-dropdown-date';
 import {
   reduxForm,
   type FormProps,
@@ -29,6 +27,7 @@ import AlertForm from '../../Alert/AlertForm';
 import type { Dispatch, State } from '../../../types';
 import UpdateProfilePersonalDataMutation from '../../../mutations/UpdateProfilePersonalDataMutation';
 import component from '../../Form/Field';
+import DateDropdownPicker from '../../Form/DateDropdownPicker';
 
 type RelayProps = { personalDataForm: PersonalData_viewer };
 type Props = FormProps &
@@ -166,27 +165,6 @@ const hasData = (viewer: PersonalData_viewer, formValue: ?Object): boolean => {
   return true;
 };
 
-const getDay = (date: string): number => {
-  let day = date.substr(8, 2);
-  day = day[0] === 0 ? day[1] : day;
-
-  return parseInt(day, 10);
-};
-
-const getMonth = (date: string): number => {
-  let month = date.substr(5, 2);
-  month = month[0] === 0 ? month[1] : month;
-  month = parseInt(month, 10);
-
-  return month - 1;
-};
-
-const getYear = (date: string): number => {
-  const year = date.substr(0, 4);
-
-  return parseInt(year, 10);
-};
-
 type PersonalDataState = {
   year: ?number,
   month: ?number,
@@ -194,37 +172,6 @@ type PersonalDataState = {
 };
 
 export class PersonalData extends Component<Props, PersonalDataState> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      year: null,
-      month: null,
-      day: null,
-    };
-    if (props.viewer && props.viewer.dateOfBirth) {
-      this.state = {
-        year: getYear(props.viewer.dateOfBirth),
-        month: getMonth(props.viewer.dateOfBirth),
-        day: getDay(props.viewer.dateOfBirth),
-      };
-    }
-  }
-
-  setDate = () => {
-    if (!this.state.year || !this.state.month || !this.state.day) {
-      return;
-    }
-    const month = parseInt(this.state.month, 10) + 1;
-    this.props.dispatch(
-      change(
-        formName,
-        'dateOfBirth',
-        // $FlowFixMe
-        `${this.state.year}-${month}-${this.state.day}`,
-      ),
-    );
-  };
-
   deleteField = (target: string): void => {
     // $FlowFixMe
     if (target.split('-').length > 1) {
@@ -429,62 +376,26 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                       </div>
                     )}
                     {hasValue.dateOfBirth !== null && (
-                      <div className="capco_horizontal_field_with_border_top">
-                        <label className="col-sm-3 control-label">
-                          <FormattedMessage id="form.label_date_of_birth" />
-                        </label>
-                        <div className="col-sm-6" id="personal-data-date-of-birth">
-                          <Col sm={2} md={2} id="personal-data-date-of-birth-day">
-                            <DayPicker
-                              defaultValue={'Jour'}
-                              year={this.state.year}
-                              month={this.state.month}
-                              value={this.state.day}
-                              onChange={day => {
-                                this.setState({ day }, () => {
-                                  this.setDate();
-                                });
-                              }}
-                              id={'day'}
-                              name={'day'}
-                              classes={'form-control'}
-                              optionClasses={'option classes'}
-                            />
-                          </Col>
-                          <Col sm={3} md={3} id="personal-data-date-of-birth-month">
-                            <MonthPicker
-                              defaultValue={'Mois'}
-                              year={this.state.year}
-                              value={this.state.month}
-                              onChange={month => {
-                                this.setState({ month }, () => {
-                                  this.setDate();
-                                });
-                              }}
-                              locale={wLocale.substr(3, 5)}
-                              id={'month'}
-                              name={'month'}
-                              classes={'form-control'}
-                              optionClasses={'option classes'}
-                            />
-                          </Col>
-                          <Col sm={3} md={3} id="personal-data-date-of-birth-year">
-                            <YearPicker
-                              defaultValue={'Année'}
-                              value={this.state.year}
-                              onChange={year => {
-                                this.setState({ year }, () => {
-                                  this.setDate();
-                                });
-                              }}
-                              id={'year'}
-                              name={'year'}
-                              classes={'form-control'}
-                              optionClasses={'option classes'}
-                            />
-                          </Col>
+                      <div>
+                        <div className="capco_horizontal_field_with_border_top">
+                          <Field
+                            name={`dateOfBirth`}
+                            id="dateOfBirth"
+                            component={DateDropdownPicker}
+                            locale={wLocale}
+                            dayDefaultValue="Jour"
+                            monthDefaultValue="Mois"
+                            yearDefaultValue="Année"
+                            dayId="personal-data-date-of-birth-day"
+                            monthId="personal-data-date-of-birth-month"
+                            yearId="personal-data-date-of-birth-year"
+                            label="form.label_date_of_birth"
+                            componentId="personal-data-date-of-birth"
+                            labelClassName="col-sm-3 control-label"
+                            divClassName="col-sm-6"
+                          />
                         </div>
-                        <div className="col-sm-2 btn--delete">
+                        <div className="col-sm-2 btn--delete" style={{ marginBottom: 15 }}>
                           <OverlayTrigger
                             trigger="click"
                             placement="top"

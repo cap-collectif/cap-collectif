@@ -395,79 +395,34 @@ exports[`<PersonalData /> should render user withou address 1`] = `
               </OverlayTrigger>
             </div>
           </div>
-          <div
-            className="capco_horizontal_field_with_border_top"
-          >
-            <label
-              className="col-sm-3 control-label"
-            >
-              <FormattedMessage
-                id="form.label_date_of_birth"
-                values={Object {}}
-              />
-            </label>
+          <div>
             <div
-              className="col-sm-6"
-              id="personal-data-date-of-birth"
+              className="capco_horizontal_field_with_border_top"
             >
-              <Col
-                bsClass="col"
-                componentClass="div"
-                id="personal-data-date-of-birth-day"
-                md={2}
-                sm={2}
-              >
-                <DayPicker
-                  classes="form-control"
-                  defaultValue="Jour"
-                  id="day"
-                  month={null}
-                  name="day"
-                  onChange={[Function]}
-                  optionClasses="option classes"
-                  value={null}
-                  year={null}
-                />
-              </Col>
-              <Col
-                bsClass="col"
-                componentClass="div"
-                id="personal-data-date-of-birth-month"
-                md={3}
-                sm={3}
-              >
-                <MonthPicker
-                  classes="form-control"
-                  defaultValue="Mois"
-                  id="month"
-                  locale="FR"
-                  name="month"
-                  onChange={[Function]}
-                  optionClasses="option classes"
-                  value={null}
-                  year={null}
-                />
-              </Col>
-              <Col
-                bsClass="col"
-                componentClass="div"
-                id="personal-data-date-of-birth-year"
-                md={3}
-                sm={3}
-              >
-                <YearPicker
-                  classes="form-control"
-                  defaultValue="Année"
-                  id="year"
-                  name="year"
-                  onChange={[Function]}
-                  optionClasses="option classes"
-                  value={null}
-                />
-              </Col>
+              <Field
+                component={[Function]}
+                componentId="personal-data-date-of-birth"
+                dayDefaultValue="Jour"
+                dayId="personal-data-date-of-birth-day"
+                divClassName="col-sm-6"
+                id="dateOfBirth"
+                label="form.label_date_of_birth"
+                labelClassName="col-sm-3 control-label"
+                locale="fr_FR"
+                monthDefaultValue="Mois"
+                monthId="personal-data-date-of-birth-month"
+                name="dateOfBirth"
+                yearDefaultValue="Année"
+                yearId="personal-data-date-of-birth-year"
+              />
             </div>
             <div
               className="col-sm-2 btn--delete"
+              style={
+                Object {
+                  "marginBottom": 15,
+                }
+              }
             >
               <OverlayTrigger
                 defaultOverlayShown={false}
@@ -1585,79 +1540,34 @@ exports[`<PersonalData /> should render with full user 1`] = `
               </OverlayTrigger>
             </div>
           </div>
-          <div
-            className="capco_horizontal_field_with_border_top"
-          >
-            <label
-              className="col-sm-3 control-label"
-            >
-              <FormattedMessage
-                id="form.label_date_of_birth"
-                values={Object {}}
-              />
-            </label>
+          <div>
             <div
-              className="col-sm-6"
-              id="personal-data-date-of-birth"
+              className="capco_horizontal_field_with_border_top"
             >
-              <Col
-                bsClass="col"
-                componentClass="div"
-                id="personal-data-date-of-birth-day"
-                md={2}
-                sm={2}
-              >
-                <DayPicker
-                  classes="form-control"
-                  defaultValue="Jour"
-                  id="day"
-                  month={null}
-                  name="day"
-                  onChange={[Function]}
-                  optionClasses="option classes"
-                  value={null}
-                  year={null}
-                />
-              </Col>
-              <Col
-                bsClass="col"
-                componentClass="div"
-                id="personal-data-date-of-birth-month"
-                md={3}
-                sm={3}
-              >
-                <MonthPicker
-                  classes="form-control"
-                  defaultValue="Mois"
-                  id="month"
-                  locale="FR"
-                  name="month"
-                  onChange={[Function]}
-                  optionClasses="option classes"
-                  value={null}
-                  year={null}
-                />
-              </Col>
-              <Col
-                bsClass="col"
-                componentClass="div"
-                id="personal-data-date-of-birth-year"
-                md={3}
-                sm={3}
-              >
-                <YearPicker
-                  classes="form-control"
-                  defaultValue="Année"
-                  id="year"
-                  name="year"
-                  onChange={[Function]}
-                  optionClasses="option classes"
-                  value={null}
-                />
-              </Col>
+              <Field
+                component={[Function]}
+                componentId="personal-data-date-of-birth"
+                dayDefaultValue="Jour"
+                dayId="personal-data-date-of-birth-day"
+                divClassName="col-sm-6"
+                id="dateOfBirth"
+                label="form.label_date_of_birth"
+                labelClassName="col-sm-3 control-label"
+                locale="fr_FR"
+                monthDefaultValue="Mois"
+                monthId="personal-data-date-of-birth-month"
+                name="dateOfBirth"
+                yearDefaultValue="Année"
+                yearId="personal-data-date-of-birth-year"
+              />
             </div>
             <div
               className="col-sm-2 btn--delete"
+              style={
+                Object {
+                  "marginBottom": 15,
+                }
+              }
             >
               <OverlayTrigger
                 defaultOverlayShown={false}
