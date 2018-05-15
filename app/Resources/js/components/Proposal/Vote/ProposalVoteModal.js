@@ -30,7 +30,7 @@ class ProposalVoteModal extends React.Component<Props> {
   componentDidUpdate(prevProps: Props) {
     if (!prevProps.showModal && this.props.showModal) {
       this.createTmpVote();
-    } else if (!this.props.showModal) {
+    } else if (!this.props.showModal && prevProps.showModal) {
       this.deleteTmpVote();
     }
   }
@@ -48,7 +48,7 @@ class ProposalVoteModal extends React.Component<Props> {
         typeof data.addProposalVote.vote === 'undefined' ||
         data.addProposalVote.vote === null
       ) {
-        console.error(data);
+        console.error(data); // eslint-disable-line no-console
         return;
       }
       tmpVote.id = data.addProposalVote.vote.id;
@@ -90,6 +90,7 @@ class ProposalVoteModal extends React.Component<Props> {
         orderBy: { field: 'POSITION', direction: 'ASC' },
       });
       ConnectionHandler.insertEdgeAfter(connection, newEdge);
+      connection.setValue(connection.getValue('totalCount') + 1, 'totalCount');
     });
   };
 
@@ -101,6 +102,7 @@ class ProposalVoteModal extends React.Component<Props> {
         orderBy: { field: 'POSITION', direction: 'ASC' },
       });
       ConnectionHandler.deleteNode(connection, dataID);
+      connection.setValue(connection.getValue('totalCount') - 1, 'totalCount');
       store.delete(dataID);
     });
   };
