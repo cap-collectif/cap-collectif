@@ -1,7 +1,7 @@
 @personal_data
 Feature: Personal Data RGPD
 
-Scenario: GraphQL client want to get the personal data of user authenticate as user
+Scenario: GraphQL client want to get the personal data of authenticate user
   Given I am logged in to graphql as user
   And I send a GraphQL POST request:
   """
@@ -21,7 +21,7 @@ Scenario: GraphQL client want to get the personal data of user authenticate as u
     }"
   }
   """
-    Then the JSON response should match:
+  Then the JSON response should match:
   """
   {
     "data": {
@@ -40,7 +40,7 @@ Scenario: GraphQL client want to get the personal data of user authenticate as u
   }
   """
 
-Scenario: GraphQL client want to get the personal data of user not authenticated (anonymous)
+Scenario: Anonymous GraphQL client want to get the personal data of a user
   Given I send a GraphQL POST request:
   """
   {
@@ -99,7 +99,7 @@ Scenario: GraphQL client want to get the personal data of user not authenticated
   }
   """
 
-Scenario: GraphQL client want to get the personal data of user authenticate as admin
+Scenario: Admin GraphQL client want to get the personal data of a user
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
   """

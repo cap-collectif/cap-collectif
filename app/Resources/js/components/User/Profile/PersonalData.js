@@ -35,7 +35,7 @@ type Props = FormProps &
     viewer: PersonalData_viewer,
     intl: IntlShape,
     initialValues: Object,
-    hasValue: Object,
+    currentValues: Object,
   };
 
 const formName = 'profilePersonalData';
@@ -224,7 +224,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
       handleSubmit,
       submitting,
       error,
-      hasValue,
+      currentValues,
     } = this.props;
 
     const tooltipDelete = (
@@ -235,7 +235,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
 
     return (
       <div id="personal-data">
-        {!hasData(viewer, hasValue) && (
+        {!hasData(viewer, currentValues) && (
           <Alert bsStyle="info">
             <span className="cap-information col-sm-1 col-md-1" />
             <FormattedMessage
@@ -244,7 +244,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
             />
           </Alert>
         )}
-        {hasData(viewer, hasValue) && (
+        {hasData(viewer, currentValues) && (
           <Alert bsStyle="info" id="project-participation-collected-data">
             <span className="cap-information col-sm-1 col-md-1" />
             <FormattedMessage
@@ -257,7 +257,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
           <h2 className="page-header">
             <FormattedMessage id="personal-data" />
           </h2>
-          {!hasData(viewer, hasValue) && (
+          {!hasData(viewer, currentValues) && (
             <div className="capco_horizontal_field_with_border_top" style={{ border: 0 }}>
               <Well>
                 <FormattedMessage id="no-data" />
@@ -267,9 +267,9 @@ export class PersonalData extends Component<Props, PersonalDataState> {
           {hasData(viewer, null) && (
             <div>
               <form onSubmit={handleSubmit} className="form-horizontal">
-                {hasData(viewer, hasValue) && (
+                {hasData(viewer, currentValues) && (
                   <div>
-                    {hasValue.firstname !== null && (
+                    {currentValues.firstname !== null && (
                       <div className="capco_horizontal_field_with_border_top" style={{ border: 0 }}>
                         <label
                           className="col-sm-3 control-label"
@@ -303,7 +303,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                         </div>
                       </div>
                     )}
-                    {hasValue.lastname !== null && (
+                    {currentValues.lastname !== null && (
                       <div className="capco_horizontal_field_with_border_top">
                         <label
                           className="col-sm-3 control-label"
@@ -334,7 +334,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                         </div>
                       </div>
                     )}
-                    {hasValue.gender !== null && (
+                    {currentValues.gender !== null && (
                       <div className="capco_horizontal_field_with_border_top">
                         <label
                           className="col-sm-3 control-label"
@@ -375,7 +375,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                         </div>
                       </div>
                     )}
-                    {hasValue.dateOfBirth !== null && (
+                    {currentValues.dateOfBirth !== null && (
                       <div>
                         <div className="capco_horizontal_field_with_border_top">
                           <Field
@@ -413,7 +413,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                         </div>
                       </div>
                     )}
-                    {hasAddressData(viewer, hasValue) && (
+                    {hasAddressData(viewer, currentValues) && (
                       <div className="capco_horizontal_field_with_border_top">
                         <div className="col-sm-11 btn--delete">
                           <OverlayTrigger
@@ -431,7 +431,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             </OverlayTrigger>
                           </OverlayTrigger>
                         </div>
-                        {hasValue.address !== null && (
+                        {currentValues.address !== null && (
                           <div className="personal-data-address">
                             <label
                               className="col-sm-3 control-label"
@@ -449,7 +449,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             </div>
                           </div>
                         )}
-                        {hasValue.address2 !== null && (
+                        {currentValues.address2 !== null && (
                           <div className="personal-data-address">
                             <label
                               className="col-sm-3 control-label"
@@ -467,7 +467,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             </div>
                           </div>
                         )}
-                        {hasValue.city !== null && (
+                        {currentValues.city !== null && (
                           <div className="personal-data-address">
                             <label
                               className="col-sm-3 control-label"
@@ -485,7 +485,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             </div>
                           </div>
                         )}
-                        {hasValue.zipCode !== null && (
+                        {currentValues.zipCode !== null && (
                           <div className="personal-data-address">
                             <label
                               className="col-sm-3 control-label"
@@ -505,7 +505,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                         )}
                       </div>
                     )}
-                    {hasValue.phone !== null && (
+                    {currentValues.phone !== null && (
                       <div>
                         <div className="capco_horizontal_field_with_border_top">
                           <label className="col-sm-3 control-label">
@@ -592,7 +592,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) =
     gender: props.viewer.gender ? props.viewer.gender : null,
     dateOfBirth: props.viewer.dateOfBirth ? props.viewer.dateOfBirth : null,
   },
-  hasValue: selector(
+  currentValues: selector(
     state,
     'firstname',
     'lastname',

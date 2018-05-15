@@ -36,7 +36,7 @@ describe('<PersonalData />', () => {
       gender: 'MALE',
       phoneConfirmed: true,
     },
-    hasValue: {
+    currentValues: {
       firstname: 'Utilisateur',
       lastname: 'Super',
       dateOfBirth: '29-02-1990',
@@ -64,7 +64,7 @@ describe('<PersonalData />', () => {
       gender: 'MALE',
       phoneConfirmed: true,
     },
-    hasValue: {
+    currentValues: {
       firstname: 'Utilisateur',
       lastname: 'Super',
       dateOfBirth: '29-02-1990',
@@ -102,7 +102,7 @@ describe('<PersonalData />', () => {
       gender: null,
       phoneConfirmed: true,
     },
-    hasValue: {
+    currentValues: {
       firstname: 'Utilisateur',
       lastname: null,
       dateOfBirth: null,

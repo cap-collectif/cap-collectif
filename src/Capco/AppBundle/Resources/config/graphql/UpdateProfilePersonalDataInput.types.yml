@@ -10,7 +10,7 @@ UpdateProfilePersonalDataInput:
                 type: "String"
                 description: "Your lastname"
             gender:
-                type: "PickUserGenderValue"
+                type: "GenderValue"
                 description: "Your gender"
             phone:
                 type: "String"

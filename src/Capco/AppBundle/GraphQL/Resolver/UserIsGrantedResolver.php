@@ -17,11 +17,8 @@ class UserIsGrantedResolver
         $this->tokenStorage = $tokenStorage;
     }
 
-    public function isGranted($user, $userRequest = null)
+    public function isGranted(User $user, $userRequest = null)
     {
-        if (!$user instanceof User) {
-            return false;
-        }
         $token = $this->tokenStorage->getToken();
         if (!$token) {
             return false;
@@ -32,19 +29,19 @@ class UserIsGrantedResolver
         }
 
         if ($userRequest) {
-            if ($user->hasRole('ROLE_USER') && $user->getId() == $userRequest->getId()) {
+            if ($user->hasRole('ROLE_USER') && $user->getId() === $userRequest->getId()) {
                 return true;
             }
 
             return false;
         }
 
-        if ($user->hasRole('ROLE_USER') && $user->getId() == $token->getUser()->getId()) {
+        if ($user->hasRole('ROLE_USER') && $user->getId() === $token->getUser()->getId()) {
             return true;
         }
 
         $this->logger->warning(
-            __METHOD__.' : User with id '.$user->getId().' try to get informations about user with id '.$token->getUser(
+            __METHOD__ . ' : User with id ' . $user->getId() . ' try to get informations about user with id ' . $token->getUser(
             )->getId()
         );
 

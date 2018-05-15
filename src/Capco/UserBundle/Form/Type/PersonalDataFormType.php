@@ -25,12 +25,10 @@ class PersonalDataFormType extends AbstractType
                 [
                     'widget' => 'single_text',
                     'format' => 'Y-MM-dd',
-                    'required' => false,
                 ]
             )
             ->add('gender', ChoiceType::class,
                 [
-                    'required' => false,
                     'choices' => User::getGenderList(),
                 ]
             );

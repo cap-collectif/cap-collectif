@@ -3,5 +3,5 @@ UpdateProfilePublicDataPayload:
     config:
         fields:
             viewer:
-                type: "User"
+                type: "User!"
                 description: "current user"

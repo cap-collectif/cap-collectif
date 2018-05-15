@@ -646,6 +646,13 @@ type FollowerEdge {
   cursor: String!
 }
 
+# 3 possible values
+enum GenderValue {
+  MALE
+  FEMALE
+  OTHER
+}
+
 scalar GeoJSON
 
 # A group of User
@@ -1071,13 +1078,6 @@ enum PickFollowTypeValue {
   DEFAULT
   DEFAULT_AND_COMMENTS
   ALL
-}
-
-# 3 possible values
-enum PickUserGenderValue {
-  MALE
-  FEMALE
-  OTHER
 }
 
 type Post {
@@ -2017,7 +2017,7 @@ input UpdateProfilePersonalDataInput {
   lastname: String
 
   # Your gender
-  gender: PickUserGenderValue
+  gender: GenderValue
 
   # Your phone number
   phone: String
@@ -2080,7 +2080,7 @@ input UpdateProfilePublicDataInput {
 
 type UpdateProfilePublicDataPayload {
   # current user
-  viewer: User
+  viewer: User!
   clientMutationId: String
 }
 
@@ -2192,7 +2192,7 @@ type User implements Node {
   phoneConfirmed: Boolean!
   expiresAt: String
   phoneConfirmationSentAt: String
-  gender: PickUserGenderValue
+  gender: GenderValue
   firstname: String
   lastname: String
   dateOfBirth: String

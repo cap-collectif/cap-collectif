@@ -1,4 +1,4 @@
-PickUserGenderValue:
+GenderValue:
     type: enum
     config:
         description: "3 possible values"

@@ -114,7 +114,7 @@ Scenario: Logged in user wants to manage his followings and click on a project
   Then I should be redirected to "/project/budget-participatif-rennes/collect/collecte-des-propositions"
 
 @javascript @database
-Scenario: Logged in user wants, want to delete my firstname but I cancel it
+Scenario: Logged as user, I want to delete my firstname, but I cancel it
   Given I am logged in as user
   And I visited "manage personal data page"
   And I wait 2 seconds
@@ -126,7 +126,7 @@ Scenario: Logged in user wants, want to delete my firstname but I cancel it
   And I should see "form.label_firstname"
 
 @javascript @database
-Scenario: Logged in user wants, want to delete my firstname
+Scenario: Logged as user, I want to delete my firstname
   Given I am logged in as user
   And I visited "manage personal data page"
   And I wait 2 seconds
@@ -138,7 +138,7 @@ Scenario: Logged in user wants, want to delete my firstname
   And I should not see "form.label_firstname"
 
 @javascript @database
-Scenario: Logged in user wants, want to update my firstname
+Scenario: Logged as user, I want to update my firstname
   Given I am logged in as user
   And I visited "manage personal data page"
   And I wait 2 seconds
@@ -163,7 +163,7 @@ Scenario: Logged in user wants, want to update my firstname
   And the "firstname" field should contain "myNewFirstname"
 
 @javascript @database
-Scenario: Logged in user wants, want to delete address
+Scenario: Logged as user, I want to delete my address
   Given I am logged in as user
   And I visited "manage personal data page"
   And I wait 2 seconds

@@ -30,7 +30,6 @@ class PublicDataType extends AbstractType
             ->add('neighborhood')
             ->add('media')
             ->add('profilePageIndexed', CheckboxType::class, [
-                'required' => false,
                 'label_attr' => ['style' => 'font-weight: normal; color: #000000'],
             ])
             ->add('website', 'url')
