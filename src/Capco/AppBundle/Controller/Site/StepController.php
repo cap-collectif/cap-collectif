@@ -281,8 +281,7 @@ class StepController extends Controller
         $proposalForm = $step->getProposalForm();
         $searchResults = ['proposals' => [], 'count' => 0];
 
-        $countFusions = $em
-          ->getRepository('CapcoAppBundle:Proposal')
+        $countFusions = $this->get('capco.proposal.repository')
           ->countFusionsByProposalForm($proposalForm)
         ;
 

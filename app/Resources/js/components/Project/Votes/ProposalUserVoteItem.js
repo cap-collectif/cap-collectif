@@ -13,6 +13,7 @@ type Props = {
   vote: ProposalUserVoteItem_vote,
   step: ProposalUserVoteItem_step,
   ranking?: number,
+  anonymousValue: boolean,
   onDelete?: ?() => void,
   member: string,
   showDraggableIcon: boolean,
@@ -24,11 +25,8 @@ export class ProposalUserVoteItem extends React.Component<Props> {
   };
 
   render() {
-    const { onDelete, member, showDraggableIcon, step, vote, ranking } = this.props;
+    const { anonymousValue, onDelete, member, showDraggableIcon, step, vote, ranking } = this.props;
     const proposal = vote.proposal;
-
-    // TODO use a value selector to update the label
-    const isAnonymous = true;
 
     const colTitleWidth = () => {
       if (step.votesRanking === true && step.voteType === 'BUDGET') {
@@ -98,7 +96,7 @@ export class ProposalUserVoteItem extends React.Component<Props> {
               <Field
                 labelSide="RIGHT"
                 component={toggle}
-                label={isAnonymous ? 'public' : 'admin.fields.idea_vote.private'}
+                label={!anonymousValue ? 'public' : 'admin.fields.idea_vote.private'}
                 name={`${member}.anonymous`}
                 normalize={val => !!val}
               />

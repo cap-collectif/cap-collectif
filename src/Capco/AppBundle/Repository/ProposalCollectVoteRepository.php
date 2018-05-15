@@ -178,7 +178,7 @@ class ProposalCollectVoteRepository extends EntityRepository
     public function countVotesByProposalAndStep(Proposal $proposal, CollectStep $step): int
     {
         return (int) $this->createQueryBuilder('pv')
-            ->select('COUNT(pv)')
+            ->select('COUNT(pv.id)')
             ->andWhere('pv.collectStep = :step')
             ->andWhere('pv.proposal = :proposal')
             ->setParameter('proposal', $proposal)
@@ -190,7 +190,7 @@ class ProposalCollectVoteRepository extends EntityRepository
     public function countVotesByProposal(Proposal $proposal): int
     {
         return (int) $this->createQueryBuilder('pv')
-            ->select('COUNT(pv)')
+            ->select('COUNT(pv.id)')
             ->andWhere('pv.proposal = :proposal')
             ->setParameter('proposal', $proposal)
             ->getQuery()

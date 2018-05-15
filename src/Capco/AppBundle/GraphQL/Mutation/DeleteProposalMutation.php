@@ -34,7 +34,7 @@ class DeleteProposalMutation
         $this->indexer = $indexer;
     }
 
-    public function __invoke(string $proposalId, User $user)
+    public function __invoke(string $proposalId, User $user): array
     {
         $proposal = $this->proposalRepo->find($proposalId);
         if (!$proposal) {
