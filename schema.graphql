@@ -654,7 +654,6 @@ type EvaluationForm {
 }
 
 type Event implements Node {
-  # This is likely to be an uuid soon.
   id: ID!
   title: String!
 
@@ -1159,7 +1158,7 @@ type Post {
   displayedOnBlog: Boolean!
   comments(after: String, first: Int = 30, before: String, last: Int, orderBy: CommentOrder = {field: CREATED_AT, direction: DESC}): CommentConnection!
   abstract: String!
-  url: String!
+  url: URI!
   media: Media
   themes: [Theme!]!
   body: String!
@@ -2112,7 +2111,7 @@ type SynthesisStep implements Step {
 type Theme {
   id: ID!
   title: String!
-  url: String!
+  url: URI!
 }
 
 # A trashable contribution

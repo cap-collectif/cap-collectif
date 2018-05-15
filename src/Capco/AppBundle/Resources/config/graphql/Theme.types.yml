@@ -8,5 +8,5 @@ Theme:
             title:
                 type: "String!"
             url:
-                type: "String!"
-                resolve: "url"
+                type: "URI!"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Theme\\ThemeUrlResolver", [value])'

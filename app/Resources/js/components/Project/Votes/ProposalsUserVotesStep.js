@@ -47,12 +47,7 @@ export class ProposalsUserVotesStep extends React.Component<Props> {
               <FormattedMessage id="project.votes.back" />
             </span>
           </a>
-          {`${step.title} `}
-          {step.voteType === 'BUDGET' ? (
-            <FormattedMessage id="project.votes.type.budget" />
-          ) : (
-            <FormattedMessage id="project.votes.type.simple" />
-          )}
+          {step.title}
         </h2>
         {step.votesHelpText && (
           <div className="well mb-0 mt-10">

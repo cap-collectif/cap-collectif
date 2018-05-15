@@ -41,7 +41,7 @@ Post:
                type: "String!"
                resolve: "@=resolver('post_abstract', [value])"
             url:
-               type: "String!"
+               type: "URI!"
                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostUrlResolver", [value])'
             media:
               type: "Media"

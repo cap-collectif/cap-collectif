@@ -59,6 +59,7 @@ const renderMembers = ({ fields, votes, step, deletable }: VotesProps) => {
         <ProposalUserVoteItem
           key={index}
           member={member}
+          anonymousValue={fields.get(index)}
           vote={votes.edges && votes.edges[index].node}
           step={step}
           onDelete={deletable ? () => fields.remove(index) : null}
