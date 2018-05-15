@@ -1,4 +1,4 @@
-@delete_user_contributions
+@delete_account
 Feature: Delete user contributions
 
 @database
@@ -7,8 +7,8 @@ Scenario: User who decide to soft delete his account should have his contents an
   And I send a GraphQL POST request:
   """
   {
-    "query": "mutation ($input: DeleteUserContributionsInput!) {
-      deleteUserContributions(input: $input) {
+    "query": "mutation ($input: DeleteAccountInput!) {
+      deleteAccount(input: $input) {
         userId
         username
         contributionsRemoved
@@ -26,7 +26,7 @@ Scenario: User who decide to soft delete his account should have his contents an
   """
   {
     "data": {
-      "deleteUserContributions": {
+      "deleteAccount": {
          "userId": "user5",
          "username": "deleted-user",
          "contributionsRemoved": 0,
@@ -42,8 +42,8 @@ Scenario: User who decide to hard delete his account should have his contents an
   And I send a GraphQL POST request:
   """
   {
-    "query": "mutation ($input: DeleteUserContributionsInput!) {
-      deleteUserContributions(input: $input) {
+    "query": "mutation ($input: DeleteAccountInput!) {
+      deleteAccount(input: $input) {
         userId
         username
         contributionsRemoved
@@ -61,7 +61,7 @@ Scenario: User who decide to hard delete his account should have his contents an
   """
   {
     "data": {
-      "deleteUserContributions": {
+      "deleteAccount": {
          "userId": "user5",
          "username": "deleted-user",
          "contributionsRemoved": 39,

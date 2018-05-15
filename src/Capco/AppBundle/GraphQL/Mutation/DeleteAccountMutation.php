@@ -17,11 +17,12 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class DeleteUserContributionsMutation implements ContainerAwareInterface
+class DeleteAccountMutation implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
@@ -36,18 +37,18 @@ class DeleteUserContributionsMutation implements ContainerAwareInterface
         $this->router = $router;
     }
 
-    public function __invoke(Argument $input, User $user): array
+    public function __invoke(Request $request, Argument $input, User $user): array
     {
-        $removalType = $input['removal'];
+        $deleteType = $input['type'];
         $contributions = $user->getContributions();
 
         $count['contributionsRemoved'] = 0;
         $count['contributionsContentDeleted'] = 0;
 
-        if ('hard' === $removalType && $user) {
+        if ('HARD' === $deleteType && $user) {
             $count = $this->hardDelete($user, $contributions, $count);
             $this->anonymizeUser($user);
-        } elseif ('soft' === $removalType && $user) {
+        } elseif ('SOFT' === $deleteType && $user) {
             $count = $this->deleteIfStepActive($user, $contributions, $count);
             $this->anonymizeUser($user);
         } elseif (!$user) {
@@ -61,7 +62,7 @@ class DeleteUserContributionsMutation implements ContainerAwareInterface
             'username' => $user->getUsername(),
             'contributionsRemoved' => $count['contributionsRemoved'],
             'contributionsContentDeleted' => $count['contributionsContentDeleted'],
-            'deleteUrl' => $this->router->generate('capco_delete_user', ['removalType' => $removalType], UrlGeneratorInterface::ABSOLUTE_URL),
+            'deleteUrl' => $this->router->generate('capco_delete_user', ['deleteType' => $deleteType], UrlGeneratorInterface::ABSOLUTE_URL),
         ];
     }
 
@@ -223,7 +224,7 @@ class DeleteUserContributionsMutation implements ContainerAwareInterface
         return $count;
     }
 
-    public function checkIfStepActive(AbstractStep $step)
+    public function checkIfStepActive(AbstractStep $step): bool
     {
         return $step->isTimeless() || $step->getEndAt() > (new \DateTime())->format('Y-m-d H:i:s');
     }
@@ -233,7 +234,7 @@ class DeleteUserContributionsMutation implements ContainerAwareInterface
         if ($media) {
             $provider = $this->container->get($media->getProviderName());
             $provider->removeThumbnails($media);
-            $this->em->remove($media);
+            //$this->em->remove($media);
         }
     }
 }

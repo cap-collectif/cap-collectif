@@ -32,10 +32,8 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      removalType: 'soft',
+      removalType: 'SOFT',
     };
-    this.onPanelClick = this.onPanelClick.bind(this);
-    this.delete = this.delete.bind(this);
   }
 
   onPanelClick = (removal: string) => {
@@ -45,18 +43,21 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
   };
 
   delete = () => {
-    DeleteAccountMutation.commit({ input: { removal: this.state.removalType } }).then(
+    DeleteAccountMutation.commit({ input: { type: this.state.removalType } }).then(
       (res: DeleteAccountResponse) => {
-        window.location = res.deleteUserContributions.deleteUrl;
+        console.log(res);
+        setTimeout(() => {
+          window.location = res.deleteAccount.deleteUrl;
+        }, 3000);
       },
     );
   };
 
   render() {
     const softPanelChecked =
-      this.state.removalType === 'soft' ? 'panel-primary delete__panel__checked' : 'panel-default';
+      this.state.removalType === 'SOFT' ? 'panel-primary delete__panel__checked' : 'panel-default';
     const hardPanelChecked =
-      this.state.removalType === 'hard' ? 'panel-primary delete__panel__checked' : 'panel-default';
+      this.state.removalType === 'HARD' ? 'panel-primary delete__panel__checked' : 'panel-default';
     const { show, dispatch, viewer } = this.props;
     const removalName = 'type-of-removal';
     return (
@@ -115,15 +116,15 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
               <div>
                 <div
                   className={`panel ${softPanelChecked}`}
-                  onClick={() => this.onPanelClick('soft')}>
+                  onClick={() => this.onPanelClick('SOFT')}>
                   <div className="panel-body">
                     <div className="row">
                       <div className="col-sm-7">
                         <Radio
                           value="soft"
                           name={removalName}
-                          onClick={() => this.onPanelClick('soft')}
-                          checked={this.state.removalType === 'soft'}>
+                          onClick={() => this.onPanelClick('SOFT')}
+                          checked={this.state.removalType === 'SOFT'}>
                           <FormattedMessage id="delete-account-and-anonymize-contents" />
                         </Radio>
                         <p className="delete__content__choice">
@@ -162,15 +163,15 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                 </div>
                 <div
                   className={`panel ${hardPanelChecked}`}
-                  onClick={() => this.onPanelClick('hard')}>
+                  onClick={() => this.onPanelClick('HARD')}>
                   <div className="panel-body">
                     <div className="row">
                       <div className="col-sm-7">
                         <Radio
                           value="hard"
                           name={removalName}
-                          onClick={() => this.onPanelClick('hard')}
-                          checked={this.state.removalType === 'hard'}>
+                          onClick={() => this.onPanelClick('HARD')}
+                          checked={this.state.removalType === 'HARD'}>
                           <FormattedMessage id="delete-account-and-contents" />
                         </Radio>
                         <p className="delete__content__choice">

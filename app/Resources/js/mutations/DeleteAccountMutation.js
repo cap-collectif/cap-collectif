@@ -8,8 +8,8 @@ import type {
 } from './__generated__/DeleteAccountMutation.graphql';
 
 const mutation = graphql`
-  mutation DeleteAccountMutation($input: DeleteUserContributionsInput!) {
-    deleteUserContributions(input: $input) {
+  mutation DeleteAccountMutation($input: DeleteAccountInput!) {
+    deleteAccount(input: $input) {
       userId
       deleteUrl
     }

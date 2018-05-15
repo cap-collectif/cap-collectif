@@ -35,8 +35,4 @@ class ContributionManager
 
         return $expiredCount > 0;
     }
-
-    public function deleteContributions(User $user): bool
-    {
-    }
 }

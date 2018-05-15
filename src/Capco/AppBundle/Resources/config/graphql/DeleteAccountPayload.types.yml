@@ -1,4 +1,4 @@
-DeleteUserContributionsInputPayload:
+DeleteAccountPayload:
     type: relay-mutation-payload
     config:
         fields:

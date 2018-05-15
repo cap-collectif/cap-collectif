@@ -67,6 +67,7 @@ services:
   capco.logout_handler:
       class: Capco\UserBundle\Security\Http\Logout\LogoutSuccessHandler
       arguments: ["@simplesamlphp.auth", "@router", "@capco.toggle.manager", "@capco.paris.opem_am_client"]
+      arguments: ["@simplesamlphp.auth", "@router", "@capco.toggle.manager", "@translator", "@session"]
 
   # Custom authentications
   capco.simple_preauth.authenticator:

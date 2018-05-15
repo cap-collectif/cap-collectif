@@ -23,7 +23,6 @@ class HomepageController extends Controller
     {
         $sections = $this->get('capco.section.resolver')->getDisplayableEnabledOrdered();
         $newsletterActive = $this->get('capco.toggle.manager')->isActive('newsletter');
-        $isDeleted = $request->get('isDeleted');
 
         $flashBag = $this->get('session')->getFlashBag();
         $translator = $this->get('translator');

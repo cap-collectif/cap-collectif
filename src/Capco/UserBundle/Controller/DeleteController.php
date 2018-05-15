@@ -19,9 +19,9 @@ class DeleteController extends Controller
             $flashBag = $this->get('session')->getFlashBag();
             $translator = $this->get('translator');
 
-            if ('soft' === $removalType) {
+            if ('SOFT' === $removalType) {
                 $flashBag->add('success', $translator->trans('account-and-contents-anonymized'));
-            } elseif ('hard' === $removalType) {
+            } elseif ('HARD' === $removalType) {
                 $flashBag->add('success', $translator->trans('account-and-contents-deleted'));
             }
         }

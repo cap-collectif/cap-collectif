@@ -530,6 +530,39 @@ scalar CssJSON
 
 scalar DateTime
 
+input DeleteAccountInput {
+  # You must chose a strategy to delete your account
+  type: DeleteAccountType!
+  clientMutationId: String
+}
+
+type DeleteAccountPayload {
+  # user id
+  userId: String!
+
+  # username after delete
+  username: String!
+
+  # number of contributions removed
+  contributionsRemoved: Int!
+
+  # number of contributions content who have been changed
+  contributionsContentDeleted: Int!
+
+  # url to redirect home and disconnect user
+  deleteUrl: URI!
+  clientMutationId: String
+}
+
+# Differents strategies to delete an account
+enum DeleteAccountType {
+  # Anonymize the user and delete his content only on active steps
+  SOFT
+
+  # Anonymize the user and delete his content
+  HARD
+}
+
 input DeleteGroupInput {
   # The group id
   groupId: ID!
@@ -549,30 +582,6 @@ input DeleteProposalInput {
 
 type DeleteProposalPayload {
   proposal: Proposal!
-  clientMutationId: String
-}
-
-input DeleteUserContributionsInput {
-  # Define if this is an Hard or Soft account removal
-  removal: String!
-  clientMutationId: String
-}
-
-type DeleteUserContributionsInputPayload {
-  # user id
-  userId: String!
-
-  # username after delete
-  username: String!
-
-  # number of contributions removed
-  contributionsRemoved: Int!
-
-  # number of contributions content who have been changed
-  contributionsContentDeleted: Int!
-
-  # url to redirect home and disconnect user
-  deleteUrl: URI!
   clientMutationId: String
 }
 

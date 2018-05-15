@@ -151,8 +151,8 @@ services:
     tags:
       - { name: overblog_graphql.mutation, alias: "changeProposalEvaluation", method: "changeProposalEvaluation" }
       
-  capco.mutation.delete_user_contributions:
-    class: Capco\AppBundle\GraphQL\Mutation\DeleteUserContributionsMutation
+  capco.mutation.delete_account:
+    class: Capco\AppBundle\GraphQL\Mutation\DeleteAccountMutation
     arguments:
         - "@doctrine.orm.entity_manager"
         - "@translator"
