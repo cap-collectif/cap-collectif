@@ -11,7 +11,6 @@ import CloseButton from '../Form/CloseButton';
 import DeleteAccountMutation from '../../mutations/DeleteAccountMutation';
 import type { Dispatch, State } from '../../types';
 import { closeDeleteAccountModal } from '../../redux/modules/user';
-import type { DeleteAccountResponse } from '../../mutations/__generated__/DeleteAccountMutation.graphql';
 
 const formName = 'delete-user';
 
@@ -43,13 +42,11 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
   };
 
   delete = () => {
-    DeleteAccountMutation.commit({ input: { type: this.state.removalType } }).then(
-      (res: DeleteAccountResponse) => {
-        setTimeout(() => {
-          window.location = res.deleteAccount.deleteUrl;
-        }, 3000);
-      },
-    );
+    DeleteAccountMutation.commit({ input: { type: this.state.removalType } }).then(() => {
+      setTimeout(() => {
+        window.location = `/logout?deleteType=${this.state.removalType}`;
+      }, 1000);
+    });
   };
 
   render() {

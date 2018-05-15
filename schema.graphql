@@ -538,19 +538,7 @@ input DeleteAccountInput {
 
 type DeleteAccountPayload {
   # user id
-  userId: String!
-
-  # username after delete
-  username: String!
-
-  # number of contributions removed
-  contributionsRemoved: Int!
-
-  # number of contributions content who have been changed
-  contributionsContentDeleted: Int!
-
-  # url to redirect home and disconnect user
-  deleteUrl: URI!
+  userId: ID
   clientMutationId: String
 }
 

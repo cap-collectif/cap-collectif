@@ -18,7 +18,6 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -42,14 +41,11 @@ class DeleteAccountMutation implements ContainerAwareInterface
         $deleteType = $input['type'];
         $contributions = $user->getContributions();
 
-        $count['contributionsRemoved'] = 0;
-        $count['contributionsContentDeleted'] = 0;
-
         if ('HARD' === $deleteType && $user) {
-            $count = $this->hardDelete($user, $contributions, $count);
+            $this->hardDelete($user, $contributions);
             $this->anonymizeUser($user);
         } elseif ('SOFT' === $deleteType && $user) {
-            $count = $this->deleteIfStepActive($user, $contributions, $count);
+            $this->deleteIfStepActive($user, $contributions);
             $this->anonymizeUser($user);
         } elseif (!$user) {
             throw new \RuntimeException('User not find');
@@ -59,11 +55,7 @@ class DeleteAccountMutation implements ContainerAwareInterface
 
         return [
             'userId' => $user->getId(),
-            'username' => $user->getUsername(),
-            'contributionsRemoved' => $count['contributionsRemoved'],
-            'contributionsContentDeleted' => $count['contributionsContentDeleted'],
-            'deleteUrl' => $this->router->generate('fos_user_security_logout', ['deleteType' => $deleteType], UrlGeneratorInterface::ABSOLUTE_URL),
-        ];
+            ];
     }
 
     public function anonymizeUser(User $user): void
@@ -118,7 +110,7 @@ class DeleteAccountMutation implements ContainerAwareInterface
         $this->em->flush();
     }
 
-    public function deleteIfStepActive(User $user, array $contributions, array $count): array
+    public function deleteIfStepActive(User $user, array $contributions): void
     {
         $now = (new \DateTime())->format('Y-m-d H:i:s');
 
@@ -167,11 +159,9 @@ class DeleteAccountMutation implements ContainerAwareInterface
         }
 
         $this->container->get('redis_storage.helper')->recomputeUserCounters($user);
-
-        return $count;
     }
 
-    public function hardDelete(User $user, array $contributions, array $count): array
+    public function hardDelete(User $user, array $contributions): void
     {
         $deletedBodyText = $this->translator->trans('deleted-content-by-author', [], 'CapcoAppBundle');
         $deletedTitleText = $this->translator->trans('deleted-title', [], 'CapcoAppBundle');
@@ -179,7 +169,7 @@ class DeleteAccountMutation implements ContainerAwareInterface
         $reports = $this->em->getRepository(Reporting::class)->findBy(['Reporter' => $user]);
         $events = $this->em->getRepository(Event::class)->findBy(['Author' => $user]);
 
-        $this->deleteIfStepActive($user, $contributions, $count);
+        $this->deleteIfStepActive($user, $contributions);
 
         foreach ($contributions as $contribution) {
             if (method_exists($contribution, 'setTitle')) {
@@ -195,14 +185,6 @@ class DeleteAccountMutation implements ContainerAwareInterface
                 $media = $this->em->getRepository('CapcoMediaBundle:Media')->find($contribution->getMedia()->getId());
                 $this->removeMedia($media);
                 $contribution->setMedia(null);
-            }
-
-            if (method_exists($contribution, 'setTitle') ||
-                method_exists($contribution, 'setBody') ||
-                method_exists($contribution, 'setSummary') ||
-                method_exists($contribution, 'getMedia')
-            ) {
-                ++$count['contributionsContentDeleted'];
             }
         }
 
@@ -220,8 +202,6 @@ class DeleteAccountMutation implements ContainerAwareInterface
         $this->container->get('redis_storage.helper')->recomputeUserCounters($user);
 
         $this->em->flush();
-
-        return $count;
     }
 
     public function checkIfStepActive(AbstractStep $step): bool
@@ -231,10 +211,8 @@ class DeleteAccountMutation implements ContainerAwareInterface
 
     public function removeMedia(Media $media): void
     {
-        if ($media) {
-            $provider = $this->container->get($media->getProviderName());
-            $provider->removeThumbnails($media);
-            //$this->em->remove($media);
-        }
+        $provider = $this->container->get($media->getProviderName());
+        $provider->removeThumbnails($media);
+        $this->em->remove($media);
     }
 }

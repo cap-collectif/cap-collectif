@@ -11,7 +11,6 @@ const mutation = graphql`
   mutation DeleteAccountMutation($input: DeleteAccountInput!) {
     deleteAccount(input: $input) {
       userId
-      deleteUrl
     }
   }
 `;

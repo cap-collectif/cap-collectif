@@ -10,14 +10,11 @@ Scenario: User who decide to soft delete his account should have his contents an
     "query": "mutation ($input: DeleteAccountInput!) {
       deleteAccount(input: $input) {
         userId
-        username
-        contributionsRemoved
-        contributionsContentDeleted
       }
     }",
     "variables": {
       "input": {
-        "removal": "soft"
+        "type": "SOFT"
       }
     }
   }
@@ -27,10 +24,7 @@ Scenario: User who decide to soft delete his account should have his contents an
   {
     "data": {
       "deleteAccount": {
-         "userId": "user5",
-         "username": "deleted-user",
-         "contributionsRemoved": 0,
-         "contributionsContentDeleted": 0
+         "userId": "user5"
       }
     }
   }
@@ -45,14 +39,11 @@ Scenario: User who decide to hard delete his account should have his contents an
     "query": "mutation ($input: DeleteAccountInput!) {
       deleteAccount(input: $input) {
         userId
-        username
-        contributionsRemoved
-        contributionsContentDeleted
       }
     }",
     "variables": {
       "input": {
-        "removal": "hard"
+        "type": "HARD"
       }
     }
   }
@@ -62,10 +53,7 @@ Scenario: User who decide to hard delete his account should have his contents an
   {
     "data": {
       "deleteAccount": {
-         "userId": "user5",
-         "username": "deleted-user",
-         "contributionsRemoved": 39,
-         "contributionsContentDeleted": 14
+         "userId": "user5"
       }
     }
   }

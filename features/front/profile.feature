@@ -120,7 +120,7 @@ Scenario: Logged in user wants to soft delete his account
   And I wait 2 seconds
   And I click the "#delete-account-profile-button" element
   When I click the "#confirm-delete-form-submit" element
-  And I wait 8 seconds
+  And I wait 5 seconds
   Then I should be redirected to "/"
   Then I should see "account-and-contents-anonymized" in the "#symfony-flash-messages" element
 
