@@ -28,27 +28,29 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
         $this->toggleManager = $toggleManager;
         $this->client = $client;
         $this->translator = $translator;
-        $this->session = $session;
     }
 
     public function onLogoutSuccess(Request $request)
     {
+        /* @var Session $session */
+        $session = $request->getSession();
         $deleteType = $request->get('deleteType');
         $returnTo = $request->headers->get('referer', '/');
-        $this->session->invalidate();
-
-        if ($this->toggleManager->isActive('login_saml')) {
-            $this->samlAuth->logout($returnTo);
-        }
 
         if ($deleteType) {
-            $flashBag = $this->session->getFlashBag();
-
+            $flashBag = $session->getFlashBag();
             if ('SOFT' === $deleteType) {
                 $flashBag->add('success', $this->translator->trans('account-and-contents-anonymized'));
             } elseif ('HARD' === $deleteType) {
                 $flashBag->add('success', $this->translator->trans('account-and-contents-deleted'));
             }
+            $this->tokenStorage->setToken(null);
+        } else {
+            $request->getSession()->invalidate();
+        }
+
+        if ($this->toggleManager->isActive('login_saml')) {
+            $this->samlAuth->logout($returnTo);
         }
 
         $response = new RedirectResponse($returnTo);

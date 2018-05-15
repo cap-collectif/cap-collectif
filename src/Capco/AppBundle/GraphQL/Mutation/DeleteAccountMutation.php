@@ -62,7 +62,7 @@ class DeleteAccountMutation implements ContainerAwareInterface
             'username' => $user->getUsername(),
             'contributionsRemoved' => $count['contributionsRemoved'],
             'contributionsContentDeleted' => $count['contributionsContentDeleted'],
-            'deleteUrl' => $this->router->generate('capco_delete_user', ['deleteType' => $deleteType], UrlGeneratorInterface::ABSOLUTE_URL),
+            'deleteUrl' => $this->router->generate('fos_user_security_logout', ['deleteType' => $deleteType], UrlGeneratorInterface::ABSOLUTE_URL),
         ];
     }
 

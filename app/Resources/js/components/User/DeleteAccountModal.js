@@ -45,7 +45,6 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
   delete = () => {
     DeleteAccountMutation.commit({ input: { type: this.state.removalType } }).then(
       (res: DeleteAccountResponse) => {
-        console.log(res);
         setTimeout(() => {
           window.location = res.deleteAccount.deleteUrl;
         }, 3000);
