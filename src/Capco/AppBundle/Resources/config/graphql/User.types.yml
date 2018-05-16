@@ -129,6 +129,10 @@ User:
                 type: "Int!"
             votesCount:
                 type: "Int!"
+            contributionsToDeleteCount:
+                type: "Int!"
+                description: "Previsionnal number of contributions who will be totally deleted if the user chose to delete his account."
+                resolve: "@=resolver('user_contributionsToDeleteCount', [value])"
             sourcesCount:
                 type: "Int!"
             repliesCount:

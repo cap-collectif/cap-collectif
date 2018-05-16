@@ -129,7 +129,7 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                             values={{
                               nbContributions: viewer.contributionsCount,
                               nbVotes: viewer.votesCount,
-                              nbContributionsToDelete: 40,
+                              nbContributionsToDelete: viewer.contributionsToDeleteCount,
                             }}
                           />
                         </p>
@@ -245,6 +245,7 @@ export default createFragmentContainer(
     fragment DeleteAccountModal_viewer on User {
       contributionsCount
       votesCount
+      contributionsToDeleteCount
     }
   `,
 );

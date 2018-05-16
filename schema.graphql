@@ -2279,6 +2279,9 @@ type User implements Node {
   proposalVotesCount: Int!
   commentVotesCount: Int!
   votesCount: Int!
+
+  # Previsionnal number of contributions who will be totally deleted if the user chose to delete his account.
+  contributionsToDeleteCount: Int!
   sourcesCount: Int!
   repliesCount: Int!
   postCommentsCount: Int!
