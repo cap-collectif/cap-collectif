@@ -33,7 +33,6 @@ const validate = ({
   if (new_password && new_password_confirmation && new_password_confirmation !== new_password) {
     errors.new_password_confirmation = 'fos_user.password.mismatch';
   }
-
   return errors;
 };
 
