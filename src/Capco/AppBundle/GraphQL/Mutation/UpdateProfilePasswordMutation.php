@@ -7,7 +7,6 @@ use Capco\UserBundle\Form\Type\ChangePasswordFormType;
 use FOS\UserBundle\Form\Model\ChangePassword;
 use FOS\UserBundle\Model\UserManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Error\UserError;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactory;
 
@@ -30,8 +29,9 @@ class UpdateProfilePasswordMutation
         $form = $this->formFactory->create(ChangePasswordFormType::class, new ChangePassword(), ['csrf_protection' => false]);
         $form->submit($arguments, false);
         if (!$form->isValid()) {
-            $this->logger->error(__METHOD__.' : '.(string)$form->getErrors(true, false));
-            throw new \RuntimeException($form->getErrors(true, true));
+            $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
+
+            return ['viewer' => $user, 'error' => 'fos_user.password.not_current'];
         }
 
         $user->setPlainPassword($arguments['new']);

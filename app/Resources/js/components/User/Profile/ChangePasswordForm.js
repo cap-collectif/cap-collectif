@@ -24,21 +24,16 @@ const validate = ({
   new_password_confirmation: ?string,
 }) => {
   const errors = {};
-  if (!current_password) {
+  if (current_password && current_password.length < 1) {
     errors.current_password = 'fos_user.password.not_current';
-  }
-  if (!new_password) {
-    errors.new_password = 'fos_user.password.mismatch';
   }
   if (new_password && new_password.length < 8) {
     errors.new_password = 'fos_user.new_password.short';
   }
-  if (!new_password_confirmation) {
-    errors.new_password_confirmation = 'fos_user.password.mismatch';
-  }
   if (new_password && new_password_confirmation && new_password_confirmation !== new_password) {
     errors.new_password_confirmation = 'fos_user.password.mismatch';
   }
+
   return errors;
 };
 
@@ -47,24 +42,24 @@ const onSubmit = (values: Object, dispatch: Dispatch, { reset, intl }) => {
     current_password: values.current_password,
     new: values.new_password,
   };
-  return UpdateProfilePasswordMutation.commit({ input })
-    .then(response => {
-      if (!response.updateProfilePassword || !response.updateProfilePassword.viewer) {
-        throw new Error('Mutation "updateProfilePassword" failed.');
-      }
-      reset();
-    })
-    .catch(response => {
-      if (response.response.message) {
+  return UpdateProfilePasswordMutation.commit({ input }).then(response => {
+    if (
+      !response.updateProfilePassword ||
+      !response.updateProfilePassword.viewer ||
+      response.updateProfilePassword.error
+    ) {
+      if (response.updateProfilePassword && response.updateProfilePassword.error) {
         throw new SubmissionError({
-          _error: response.response.message,
+          current_password: response.updateProfilePassword.error,
         });
       } else {
         throw new SubmissionError({
           _error: intl.formatMessage({ id: 'global.error.server.form' }),
         });
       }
-    });
+    }
+    reset();
+  });
 };
 
 export class ChangePasswordForm extends Component<Props> {
@@ -74,7 +69,6 @@ export class ChangePasswordForm extends Component<Props> {
       valid,
       submitSucceeded,
       submitFailed,
-      pristine,
       handleSubmit,
       submitting,
       error,
@@ -136,7 +130,7 @@ export class ChangePasswordForm extends Component<Props> {
               <div className="col-sm-3" />
               <ButtonToolbar className="col-sm-6 pl-0">
                 <Button
-                  disabled={invalid || pristine || submitting}
+                  disabled={invalid || submitting}
                   type="submit"
                   bsStyle="primary"
                   id="profile-password-save">

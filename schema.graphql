@@ -2000,6 +2000,9 @@ input UpdateProfilePasswordInput {
 type UpdateProfilePasswordPayload {
   # The viewer
   viewer: User!
+
+  # The error
+  error: String
   clientMutationId: String
 }
 
