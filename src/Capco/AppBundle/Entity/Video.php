@@ -61,7 +61,7 @@ class Video
     /**
      * @var \DateTime
      *
-     * @Gedmo\Timestampable(on="change", field={"title", "body", "Author", "Media", "link"})
+     * @Gedmo\Timestampable(on="change", field={"title", "body", "Author", "media", "link"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
@@ -99,7 +99,7 @@ class Video
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @Assert\Valid()
      */
-    private $Media;
+    private $media;
 
     /**
      * Constructor.
@@ -227,7 +227,7 @@ class Video
      */
     public function getMedia()
     {
-        return $this->Media;
+        return $this->media;
     }
 
     /**
@@ -235,7 +235,7 @@ class Video
      */
     public function setMedia($media)
     {
-        $this->Media = $media;
+        $this->media = $media;
     }
 
     /**

@@ -127,7 +127,7 @@ class EventRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('a', 't', 'media', 'registration', 'c')
             ->leftJoin('e.Author', 'a')
-            ->leftJoin('e.Media', 'media')
+            ->leftJoin('e.media', 'media')
             ->leftJoin('e.themes', 't', 'WITH', 't.isEnabled = :tEnabled')
             ->leftJoin('e.projects', 'c', 'WITH', 'c.isEnabled = :cEnabled')
             ->leftJoin('e.registrations', 'registration', 'WITH', 'registration.confirmed = true')
@@ -157,7 +157,7 @@ class EventRepository extends EntityRepository
             ->leftJoin('e.Author', 'a')
             ->leftJoin('e.themes', 't')
             ->leftJoin('e.projects', 'c')
-            ->leftJoin('e.Media', 'media')
+            ->leftJoin('e.media', 'media')
             ->orderBy('e.startAt', 'ASC');
 
         $qb = $this->whereIsFuture($qb);
@@ -188,7 +188,7 @@ class EventRepository extends EntityRepository
             ->leftJoin('e.themes', 't')
             ->leftJoin('e.projects', 'c')
             ->leftJoin('e.Author', 'a')
-            ->leftJoin('e.Media', 'media')
+            ->leftJoin('e.media', 'media')
             ->andWhere('t.id = :theme')
             ->setParameter('theme', $theme)
             ->orderBy('e.startAt', 'ASC');

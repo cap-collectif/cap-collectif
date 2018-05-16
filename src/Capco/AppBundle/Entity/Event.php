@@ -47,7 +47,7 @@ class Event implements CommentableInterface, IndexableInterface
     private $createdAt;
 
     /**
-     * @Gedmo\Timestampable(on="change", field={"title", "body", "startAt", "endAt", "zipCode", "address", "nbAddress", "link", "Media", "Theme"})
+     * @Gedmo\Timestampable(on="change", field={"title", "body", "startAt", "endAt", "zipCode", "address", "nbAddress", "link", "media", "Theme"})
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
@@ -108,7 +108,7 @@ class Event implements CommentableInterface, IndexableInterface
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @Assert\Valid()
      */
-    private $Media;
+    private $media;
 
     /**
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="events", cascade={"persist"})
@@ -183,14 +183,14 @@ class Event implements CommentableInterface, IndexableInterface
 
     public function setMedia($media)
     {
-        $this->Media = $media;
+        $this->media = $media;
 
         return $this;
     }
 
     public function getMedia()
     {
-        return $this->Media;
+        return $this->media;
     }
 
     public function getThemes(): iterable

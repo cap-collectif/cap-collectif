@@ -76,7 +76,7 @@ class Post implements CommentableInterface, IndexableInterface
      * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    private $Media;
+    private $media;
 
     /**
      * @var
@@ -370,7 +370,7 @@ class Post implements CommentableInterface, IndexableInterface
      */
     public function setMedia(\Capco\MediaBundle\Entity\Media $media = null)
     {
-        $this->Media = $media;
+        $this->media = $media;
 
         return $this;
     }
@@ -382,7 +382,7 @@ class Post implements CommentableInterface, IndexableInterface
      */
     public function getMedia()
     {
-        return $this->Media;
+        return $this->media;
     }
 
     /**

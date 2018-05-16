@@ -82,7 +82,7 @@ class ThemeRepository extends EntityRepository
             ->addSelect('a', 'am', 'm', 'p', 'post', 'e')
             ->leftJoin('t.Author', 'a')
             ->leftJoin('a.media', 'am')
-            ->leftJoin('t.Media', 'm')
+            ->leftJoin('t.media', 'm')
             ->leftJoin('t.projects', 'p', 'WITH', 'p.isEnabled = :enabled')
             ->leftJoin('t.posts', 'post', 'WITH', 'post.isPublished = :enabled')
             ->leftJoin('t.events', 'e', 'WITH', 'e.isEnabled = :enabled')

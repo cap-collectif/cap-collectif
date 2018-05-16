@@ -84,7 +84,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
             ->leftJoin('se.parent', 'parent')
             ->leftJoin('se.children', 'children')
             ->leftJoin('children.author', 'cauts')
-            ->leftJoin('cauts.Media', 'cautms')
+            ->leftJoin('cauts.media', 'cautms')
             ->leftJoin('se.division', 'div')
             ->leftJoin('se.originalDivision', 'odiv')
             ->where('se.id = :id')

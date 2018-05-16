@@ -5,7 +5,7 @@ Capco\AppBundle\Entity\Video:
         isEnabled: true
         position: 2
         Author: '@user1'
-        Media: '@MediaProject1'
+        media: '@MediaProject1'
         link: 'https://www.youtube.com/embed/gwuLVLwMjuA?autoplay=1'
         color: black
     video2:
@@ -14,12 +14,12 @@ Capco\AppBundle\Entity\Video:
         isEnabled: true
         position: 3
         Author: '@user2'
-        Media: '@MediaProjectImageVideo'
+        media: '@MediaProjectImageVideo'
         link: 'https://www.youtube.com/embed/A3PDXmYoF5U?autoplay=1'
         color: white
     video3:
         isEnabled: true
         position: 1
         Author: '@user3'
-        Media: '@MediaProject3'
+        media: '@MediaProject3'
         link: 'https://www.youtube.com/embed/A3PDXmYoF5U?autoplay=1'
