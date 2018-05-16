@@ -11,7 +11,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sonata\UserBundle\Controller\ProfileFOSUser1Controller as BaseController;
-use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -32,8 +31,6 @@ class ProfileController extends BaseController
         return [];
     }
 
-
-
     /**
      * @Route("/followings/{token}", name="capco_profile_followings_login")
      */
@@ -48,6 +45,16 @@ class ProfileController extends BaseController
         }
 
         return $this->redirectToRoute('capco_profile_edit_followings');
+    }
+
+    /**
+     * @Route("/notifications", name="capco_profile_notifications_edit_account")
+     * @Template("@CapcoUser/Profile/edit_notifications.twig")
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function showNotificationsOptionsAction(Request $request)
+    {
+        return [];
     }
 
     /**
