@@ -17,7 +17,7 @@ import type { ProposalPreviewBody_viewer } from './__generated__/ProposalPreview
 type Props = {
   proposal: ProposalPreviewBody_proposal,
   features: FeatureToggles,
-  step: ProposalPreviewBody_step,
+  step: ?ProposalPreviewBody_step,
   viewer: ?ProposalPreviewBody_viewer,
 };
 
@@ -65,7 +65,8 @@ export class ProposalPreviewBody extends React.Component<Props> {
         </div>
         <div className="proposal__buttons">
           {/* $FlowFixMe */
-          proposal.currentVotableStep &&
+          step &&
+            proposal.currentVotableStep &&
             step.id === proposal.currentVotableStep.id && (
               /* $FlowFixMe */
               <ProposalPreviewVote step={step} viewer={viewer} proposal={proposal} />
@@ -73,7 +74,8 @@ export class ProposalPreviewBody extends React.Component<Props> {
           {/* $FlowFixMe */}
           <ProposalFollowButton proposal={proposal} />
         </div>
-        {step.voteThreshold !== null &&
+        {step &&
+          step.voteThreshold !== null &&
           typeof step.voteThreshold !== 'undefined' &&
           step.voteThreshold > 0 && (
             <div style={{ marginTop: '20px' }}>
@@ -99,7 +101,11 @@ export default createFragmentContainer(container, {
     }
   `,
   proposal: graphql`
-    fragment ProposalPreviewBody_proposal on Proposal {
+    fragment ProposalPreviewBody_proposal on Proposal
+      @argumentDefinitions(
+        isAuthenticated: { type: "Boolean", defaultValue: true }
+        isProfileView: { type: "Boolean", defaultValue: false }
+      ) {
       id
       title
       show_url
@@ -114,11 +120,13 @@ export default createFragmentContainer(container, {
       category {
         name
       }
-      ...ProposalPreviewVote_proposal @arguments(isAuthenticated: $isAuthenticated)
+      ...ProposalPreviewVote_proposal
+        @arguments(isAuthenticated: $isAuthenticated)
+        @skip(if: $isProfileView)
       ...ProposalDetailEstimation_proposal
       ...ProposalDetailLikers_proposal
-      ...ProposalVoteThresholdProgressBar_proposal
-      currentVotableStep {
+      ...ProposalVoteThresholdProgressBar_proposal @skip(if: $isProfileView)
+      currentVotableStep @skip(if: $isProfileView) {
         id
       }
       ...ProposalFollowButton_proposal @arguments(isAuthenticated: $isAuthenticated)

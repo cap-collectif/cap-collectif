@@ -12,10 +12,11 @@ type Props = {
 export class ProposalStatus extends React.Component<Props> {
   render() {
     const status = this.props.proposal.status;
-    const statusClasses = {};
-    if (status) {
-      statusClasses[`status--${status.color}`] = true;
+    if (!status) {
+      return null;
     }
+    const statusClasses = {};
+    statusClasses[`status--${status.color}`] = true;
 
     return <CardStatus className={classNames(statusClasses)}>{status && status.name}</CardStatus>;
   }
@@ -23,9 +24,13 @@ export class ProposalStatus extends React.Component<Props> {
 
 export default createFragmentContainer(ProposalStatus, {
   proposal: graphql`
-    fragment ProposalStatus_proposal on Proposal @argumentDefinitions(stepId: { type: "ID" }) {
+    fragment ProposalStatus_proposal on Proposal
+      @argumentDefinitions(
+        stepId: { type: "ID", nonNull: true }
+        isProfileView: { type: "Boolean", defaultValue: false }
+      ) {
       id
-      status(step: $stepId) {
+      status(step: $stepId) @skip(if: $isProfileView) {
         name
         color
       }

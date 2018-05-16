@@ -101,18 +101,23 @@ class ProposalFormResolver implements ContainerAwareInterface
 
                     return $repo->getProposalsByFormAndEvaluer($form, $user, $offset, $limit, $field, $direction)->getIterator()->getArrayCopy();
                 }
-            } else {
-                $direction = $args->offsetGet('orderBy')['direction'];
-                $field = $args->offsetGet('orderBy')['field'];
 
-                $order = self::findOrderFromFieldAndDirection($field, $direction);
+                if (in_array('OWNER', $affiliations, true)) {
+                    $filters['author'] = $user->getId();
+                }
+            }
 
-                $filters['proposalForm'] = $form->getId();
-                $filters['collectStep'] = $form->getStep()->getType();
+            $direction = $args->offsetGet('orderBy')['direction'];
+            $field = $args->offsetGet('orderBy')['field'];
 
-                $seed = $user instanceof User ? $user->getId() : $request->getClientIp();
+            $order = self::findOrderFromFieldAndDirection($field, $direction);
 
-                $results = $this->container->get('capco.search.proposal_search')->searchProposals(
+            $filters['proposalForm'] = $form->getId();
+            $filters['collectStep'] = $form->getStep()->getType();
+
+            $seed = $user instanceof User ? $user->getId() : $request->getClientIp();
+
+            $results = $this->container->get('capco.search.proposal_search')->searchProposals(
                     $offset,
                     $limit,
                     $order,
@@ -121,10 +126,9 @@ class ProposalFormResolver implements ContainerAwareInterface
                     $seed
                 );
 
-                $totalCount = $results['count'];
+            $totalCount = $results['count'];
 
-                return $results['proposals'];
-            }
+            return $results['proposals'];
         });
 
         $connection = $paginator->auto($args, $totalCount);
