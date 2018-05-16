@@ -66,6 +66,11 @@ class AdminProposalPage extends Page
         $this->getElement('proposal evaluation analysts groupes save')->click();
     }
 
+    public function fillElementWithValue(string $element, string $value)
+    {
+        $this->getElement($element)->setValue($value);
+    }
+
     public function saveCustomEvaluation()
     {
         $this->getElement('proposal evaluation custom save')->click();

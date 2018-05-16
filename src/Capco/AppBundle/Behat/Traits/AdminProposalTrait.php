@@ -109,6 +109,14 @@ trait AdminProposalTrait
     }
 
     /**
+     * @When I fill the proposal element :element with value :value
+     **/
+    public function iFillTheProposalElementWithValue(string $element, string $value)
+    {
+        $this->getCurrentPage()->fillElementWithValue($element, $value);
+    }
+
+    /**
      * @When I check :value in the proposal definition evaluation
      */
     public function iCheckTheProposalDefinitionEvaluationWithValue(string $value)
