@@ -13,7 +13,7 @@ import type { ProposalPreview_viewer } from './__generated__/ProposalPreview_vie
 
 type Props = {
   proposal: ProposalPreview_proposal,
-  step: ProposalPreview_step,
+  step: ?ProposalPreview_step,
   viewer: ?ProposalPreview_viewer,
 };
 
@@ -31,8 +31,7 @@ export class ProposalPreview extends React.Component<Props> {
           {/* $FlowFixMe */}
           <ProposalPreviewHeader proposal={proposal} />
           <ProposalPreviewBody proposal={proposal} step={step} viewer={viewer} />
-          {/* $FlowFixMe */}
-          <ProposalPreviewFooter proposal={proposal} />
+          {step /* $FlowFixMe */ && <ProposalPreviewFooter proposal={proposal} />}
           {/* $FlowFixMe */}
           <ProposalStatus proposal={proposal} />
         </CardContainer>
@@ -53,15 +52,21 @@ export default createFragmentContainer(ProposalPreview, {
     }
   `,
   proposal: graphql`
-    fragment ProposalPreview_proposal on Proposal {
+    fragment ProposalPreview_proposal on Proposal
+      @argumentDefinitions(
+        stepId: { type: "ID", nonNull: false }
+        isAuthenticated: { type: "Boolean", defaultValue: true }
+        isProfileView: { type: "Boolean", defaultValue: false }
+      ) {
       id
       author {
         vip
       }
       ...ProposalPreviewHeader_proposal
-      ...ProposalPreviewFooter_proposal @arguments(stepId: $stepId)
+      ...ProposalPreviewFooter_proposal @arguments(stepId: $stepId, isProfileView: $isProfileView)
       ...ProposalPreviewBody_proposal
-      ...ProposalStatus_proposal @arguments(stepId: $stepId)
+        @arguments(isAuthenticated: $isAuthenticated, isProfileView: $isProfileView)
+      ...ProposalStatus_proposal @arguments(stepId: $stepId, isProfileView: $isProfileView)
     }
   `,
 });

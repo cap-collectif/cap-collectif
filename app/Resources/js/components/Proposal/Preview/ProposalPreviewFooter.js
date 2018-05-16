@@ -13,8 +13,8 @@ export class ProposalPreviewFooter extends React.Component<Props> {
   render() {
     const { proposal } = this.props;
 
-    const showComments = true;
-    const showVotes = true;
+    const showComments = proposal.form.commentable;
+    const showVotes = proposal.allVotesOnStep !== null;
 
     if (!showVotes && !showComments) {
       return null;
@@ -41,7 +41,7 @@ export class ProposalPreviewFooter extends React.Component<Props> {
             </div>
           </div>
         )}
-        {showVotes && (
+        {proposal.allVotesOnStep && (
           <div className="card__counter card__counter-votes">
             <div className="card__counter__value">{proposal.allVotesOnStep.totalCount}</div>
             <div>
@@ -62,10 +62,16 @@ export class ProposalPreviewFooter extends React.Component<Props> {
 export default createFragmentContainer(ProposalPreviewFooter, {
   proposal: graphql`
     fragment ProposalPreviewFooter_proposal on Proposal
-      @argumentDefinitions(stepId: { type: "ID!", nonNull: true }) {
+      @argumentDefinitions(
+        stepId: { type: "ID!", nonNull: true }
+        isProfileView: { type: "Boolean", defaultValue: false }
+      ) {
       id
+      form {
+        commentable
+      }
       commentsCount
-      allVotesOnStep: votes(stepId: $stepId, first: 0) {
+      allVotesOnStep: votes(stepId: $stepId, first: 0) @skip(if: $isProfileView) {
         totalCount
       }
     }

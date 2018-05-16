@@ -11,6 +11,7 @@ use Capco\AppBundle\Resolver\ProposalStepVotesResolver;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
@@ -39,6 +40,13 @@ class ProposalVotesResolver
     {
         try {
             $step = $this->abstractStepRepository->find($args->offsetGet('stepId'));
+
+            if (!$step) {
+                $connection = ConnectionBuilder::connectionFromArray([], $args);
+                $connection->totalCount = 0;
+
+                return $connection;
+            }
 
             return $this->getConnectionForStepAndUser($step, $user, $args);
         } catch (\RuntimeException $exception) {

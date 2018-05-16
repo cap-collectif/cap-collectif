@@ -11,7 +11,7 @@ import type { ProposalList_viewer } from './__generated__/ProposalList_viewer.gr
 import type { ProposalList_proposals } from './__generated__/ProposalList_proposals.graphql';
 
 type Props = {
-  step: ProposalList_step,
+  step: ?ProposalList_step,
   proposals: ProposalList_proposals,
   viewer: ?ProposalList_viewer,
 };
@@ -91,7 +91,7 @@ export default createFragmentContainer(ProposalList, {
       edges {
         node {
           id
-          ...ProposalPreview_proposal
+          ...ProposalPreview_proposal @arguments(stepId: $stepId)
         }
       }
     }
