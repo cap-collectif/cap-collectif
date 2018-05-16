@@ -1,7 +1,7 @@
 <li class="media  media--news  block  block--bordered  box">
-    {%  if post.Media %}
+    {%  if post.media %}
         <a href="{{ path('app_blog_show', {'slug': post.slug}) }}" class="pull-left" alt="{{ post.title }}">
-            {% thumbnail post.Media, 'post' with {'title': post.Media.name, 'alt': post.Media.name, 'class': 'media-object'} %}
+            {% thumbnail post.media, 'post' with {'title': post.media.name, 'alt': post.media.name, 'class': 'media-object'} %}
         </a>
     {% else %}
         <a href="{{ path('app_blog_show', {'slug': post.slug}) }}" class="pull-left" alt="{{ post.title }}">

@@ -15,7 +15,7 @@
             {% for socialNetwork in socialNetworks %}
                 <li>
                     <a href="{{ socialNetwork.link }}" class="external-link">
-                        {% thumbnail socialNetwork.Media, 'socialIcon' with {'title': socialNetwork.title, 'alt': '', 'class': 'social__icon'} %}
+                        {% thumbnail socialNetwork.media, 'socialIcon' with {'title': socialNetwork.title, 'alt': '', 'class': 'social__icon'} %}
                         <p>{{ socialNetwork.title }}</p>
                     </a>
                 </li>

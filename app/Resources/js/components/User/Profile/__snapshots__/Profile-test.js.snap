@@ -310,7 +310,7 @@ exports[`<Profile /> should render my profile 1`] = `
         htmlFor="public-data-form-linkedIn"
       >
         <FormattedMessage
-          id="show.label_linkedin_url"
+          id="show.label_linked_in_url"
           values={Object {}}
         />
       </label>

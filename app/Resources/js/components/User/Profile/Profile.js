@@ -238,7 +238,7 @@ export class Profile extends Component<Props> {
           </div>
           <div className="capco_horizontal_field_with_border_top" style={{ border: 0 }}>
             <label className="col-sm-3 control-label" htmlFor="public-data-form-linkedIn">
-              <FormattedMessage id="show.label_linkedin_url" />
+              <FormattedMessage id="show.label_linked_in_url" />
             </label>
             <div>
               <Field
