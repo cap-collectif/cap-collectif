@@ -9,6 +9,9 @@ describe('<ProposalPreviewFooter />', () => {
   const proposal = {
     $refType,
     id: '1',
+    form: {
+      commentable: true,
+    },
     commentsCount: 3,
     allVotesOnStep: {
       totalCount: 42,

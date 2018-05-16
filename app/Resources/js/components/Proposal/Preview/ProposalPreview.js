@@ -31,7 +31,8 @@ export class ProposalPreview extends React.Component<Props> {
           {/* $FlowFixMe */}
           <ProposalPreviewHeader proposal={proposal} />
           <ProposalPreviewBody proposal={proposal} step={step} viewer={viewer} />
-          {step /* $FlowFixMe */ && <ProposalPreviewFooter proposal={proposal} />}
+          {/* $FlowFixMe */}
+          {step && <ProposalPreviewFooter proposal={proposal} />}
           {/* $FlowFixMe */}
           <ProposalStatus proposal={proposal} />
         </CardContainer>
