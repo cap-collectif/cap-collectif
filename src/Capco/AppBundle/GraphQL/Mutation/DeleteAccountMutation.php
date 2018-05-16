@@ -7,10 +7,12 @@ use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\CommentVote;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventComment;
+use Capco\AppBundle\Entity\NewsletterSubscription;
 use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\UserGroup;
 use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -61,6 +63,18 @@ class DeleteAccountMutation implements ContainerAwareInterface
     public function anonymizeUser(User $user): void
     {
         $usernameDeleted = $this->translator->trans('deleted-user', [], 'CapcoAppBundle');
+        $newsletter = $this->em->getRepository(NewsletterSubscription::class)->findOneBy(['email' => $user->getEmail()]);
+        $userGroups = $this->em->getRepository(UserGroup::class)->findBy(['user' => $user]);
+
+        if ($newsletter) {
+            $this->em->remove($newsletter);
+        }
+
+        if ($userGroups) {
+            foreach ($userGroups as $userGroup) {
+                $this->em->remove($userGroup);
+            }
+        }
 
         $user->setUsername($usernameDeleted);
         $user->setEmail(time() . '@deleted.com');
