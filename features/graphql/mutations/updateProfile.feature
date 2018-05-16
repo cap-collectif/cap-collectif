@@ -163,7 +163,7 @@ Scenario: User should be able to update his public data, but username is missing
   }
   """
 
-@database 
+@database
 Scenario: User should be able to update his password
   Given I am logged in to graphql as user
   And I send a GraphQL POST request:
@@ -175,6 +175,7 @@ Scenario: User should be able to update his password
           id
           username
         }
+        error
       }
     }",
     "variables": {
@@ -193,13 +194,14 @@ Scenario: User should be able to update his password
         "viewer": {
           "id": "user5",
           "username": "user"
-        }
+        },
+        "error": null
       }
     }
   }
   """
 
-@database 
+@database
 Scenario: User should be able to update his password, but give a bad current password
   Given I am logged in to graphql as user
   And I send a GraphQL POST request:
@@ -210,7 +212,8 @@ Scenario: User should be able to update his password, but give a bad current pas
         viewer {
           id
           username
-        }
+        },
+        error
       }
     }",
     "variables": {
@@ -224,6 +227,15 @@ Scenario: User should be able to update his password, but give a bad current pas
   Then the JSON response should match:
   """
   {
-  "errors":[{"message":"Internal server Error","locations":[{"line":1,"column":82}],"path":["updateProfilePassword"]}],"data":{"updateProfilePassword":null}
+    "data":{
+      "updateProfilePassword":{
+        "viewer":{
+          "id":"user5",
+          "username":"user"
+        },
+        "error":"fos_user.password.not_current"
+      }
+    }
   }
+
   """

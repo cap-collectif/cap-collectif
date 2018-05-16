@@ -17,8 +17,17 @@ class UserIsGrantedResolver
         $this->tokenStorage = $tokenStorage;
     }
 
-    public function isGranted(User $user, $userRequest = null)
+    /**
+     * if $user is tped, I receive an error 500. But I want a graphql error, so I need to check the instance of $user.
+     *
+     * @param mixed      $user
+     * @param null|mixed $userRequest
+     */
+    public function isGranted($user, $userRequest = null)
     {
+        if (!$user instanceof User) {
+            return false;
+        }
         $token = $this->tokenStorage->getToken();
         if (!$token) {
             return false;
