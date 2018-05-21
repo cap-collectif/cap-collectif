@@ -10,6 +10,7 @@ use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Theme;
+use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Entity\UserType;
 use Doctrine\ORM\EntityRepository;
@@ -18,6 +19,8 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class ProposalRepository extends EntityRepository
 {
+    use ContributionRepositoryTrait;
+
     public function getProposalsGroupedByCollectSteps(User $user, bool $onlyVisible = false): array
     {
         $qb = $this->getIsEnabledQueryBuilder()

@@ -5,11 +5,14 @@ namespace Capco\AppBundle\Repository;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
 class ReplyRepository extends EntityRepository
 {
+    use ContributionRepositoryTrait;
+
     public function countPublishedForQuestionnaire(Questionnaire $questionnaire)
     {
         $qb = $this

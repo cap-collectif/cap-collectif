@@ -273,3 +273,8 @@ services:
     class: Capco\AppBundle\Repository\OpinionVersionVoteRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:OpinionVersionVote']
+
+  capco.newsletter_subscription.repository:
+    class: Capco\AppBundle\Repository\NewsletterSubscriptionRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:NewsletterSubscription']

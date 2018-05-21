@@ -28,4 +28,26 @@ trait ContributionRepositoryTrait
 
         return $qb->getQuery()->getArrayResult();
     }
+
+    public function count(): int
+    {
+        $qb = $this->createQueryBuilder('o');
+        $qb->select('count(DISTINCT o.id)')
+          ->andWhere('o.expired = false')
+        ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    // Only for trashable contribution
+    public function countTrashed($name = 'trashed'): int
+    {
+        $qb = $this->createQueryBuilder('o');
+        $qb->select('count(DISTINCT o.id)')
+          ->andWhere('o.expired = false')
+          ->andWhere('o.' . $name . ' = true')
+        ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
 }

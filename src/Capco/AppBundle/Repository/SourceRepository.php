@@ -6,12 +6,15 @@ use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 
 class SourceRepository extends EntityRepository
 {
+    use ContributionRepositoryTrait;
+
     public function getRecentOrdered()
     {
         $qb = $this->createQueryBuilder('s')

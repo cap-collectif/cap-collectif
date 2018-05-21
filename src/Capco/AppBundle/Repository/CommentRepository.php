@@ -5,11 +5,18 @@ namespace Capco\AppBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 
-/**
- * CommentRepository.
- */
 class CommentRepository extends EntityRepository
 {
+    public function countNotExpired(): int
+    {
+        $qb = $this->createQueryBuilder('c')
+        ->select('count(DISTINCT c.id)')
+        ->where('c.expired = false')
+    ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
     public function getAnonymousCount(): int
     {
         $qb = $this->createQueryBuilder('c')

@@ -7,6 +7,16 @@ use Doctrine\ORM\EntityRepository;
 
 class AbstractVoteRepository extends EntityRepository
 {
+    public function countNotExpired(): int
+    {
+        return $this->createQueryBuilder('v')
+          ->select('COUNT(DISTINCT v.id)')
+          ->andWhere('v.expired = false')
+          ->getQuery()
+          ->getSingleScalarResult()
+          ;
+    }
+
     /**
      * Gets the history of votes for a certain related item.
      *

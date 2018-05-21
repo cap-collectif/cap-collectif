@@ -55,6 +55,17 @@ class UserRepository extends EntityRepository
             ->getResult();
     }
 
+    public function getRegisteredCount(): int
+    {
+        $qb = $this->createQueryBuilder('u');
+        $qb->select('count(DISTINCT u.id)');
+
+        return $qb
+            ->getQuery()
+            ->useQueryCache(true)
+            ->getSingleScalarResult();
+    }
+
     public function getRegisteredContributorCount(): int
     {
         $qb = $this->createQueryBuilder('u');

@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Repository;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
@@ -12,6 +13,8 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class OpinionVersionRepository extends EntityRepository
 {
+    use ContributionRepositoryTrait;
+
     public function getAllIds()
     {
         $qb = $this->createQueryBuilder('o')
