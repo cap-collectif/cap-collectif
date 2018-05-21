@@ -203,9 +203,10 @@ WORKDIR /var/www
 COPY --from=node /usr/local/bin/node /usr/local/bin/node
 COPY --from=node /usr/local/include/node /usr/local/include/node
 COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
-COPY --from=node /usr/local/bin/yarn /usr/local/bin/yarn
+COPY --from=node /opt/yarn-v1.6.0 /opt/yarn
 RUN ln -s /usr/local/bin/node /usr/local/bin/nodejs && \
-    ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
+    ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm && \
+    ln -s /opt/yarn/bin/yarn /usr/local/bin/yarn
 
 # Download PHP dependencies
 COPY composer.json composer.lock /var/www/

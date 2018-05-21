@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\Adapter\RedisAdapter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,7 +15,10 @@ class MetricsController extends Controller
      */
     public function metricsAction(): Response
     {
-        $registry = new CollectorRegistry(new RedisAdapter($this->get('snc_redis.default')));
+        $registry = $this->get(CollectorRegistry::class);
+        $metric = $registry->getCounter('requests');
+        $metric->inc();
+        $formatter = new TextFormatter();
 
         $registeredContributorCount = $this->get('capco.user.repository')->getRegisteredContributorCount();
         $registeredCount = $this->get('capco.user.repository')->getRegisteredCount();
@@ -100,8 +102,6 @@ class MetricsController extends Controller
         $registry->getGauge('reportArchivedCount')->set($reportArchivedCount);
         $registry->getGauge('followerCount')->set($followerCount);
         $registry->getGauge('contributionTrashedCount')->set($contributionTrashedCount);
-
-        $formatter = new TextFormatter();
 
         return new Response($formatter->format($registry->collect()), 200, [
             'Content-Type' => $formatter->getMimeType(),

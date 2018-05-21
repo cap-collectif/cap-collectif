@@ -173,6 +173,13 @@ stof_doctrine_extensions:
             loggable: true
             tree: true
 
+tweede_golf_prometheus:
+    storage_adapter_service: 'redis_adapter'
+    collectors:
+        requests:
+            counter:
+                help: Number of requests
+
 hautelook_alice:
     locale: "%locale%"
     loading_limit: 1

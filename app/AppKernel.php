@@ -56,6 +56,9 @@ class AppKernel extends Kernel
             new Sonata\ClassificationBundle\SonataClassificationBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
 
+            # Prometheus
+            new TweedeGolf\PrometheusBundle\TweedeGolfPrometheusBundle(),
+
             // project bundles
             new Capco\AppBundle\CapcoAppBundle(),
             new Capco\AdminBundle\CapcoAdminBundle(),

@@ -2,7 +2,8 @@ includes:
   - vendor/phpstan/phpstan-doctrine/extension.neon
 parameters:
     excludes_analyse:
-        - %currentWorkingDirectory%/spec/*
+        - %currentWorkingDirectory%/app/AppKernel.php
+        - %currentWorkingDirectory%/app/DoctrineMigrations/*
         - %currentWorkingDirectory%/app/DoctrineMigrations/*
         - %currentWorkingDirectory%/src/Capco/UserBundle/Security/DrupalEncoder.php
         - %currentWorkingDirectory%/src/Capco/AppBundle/DataFixtures/ORM/*

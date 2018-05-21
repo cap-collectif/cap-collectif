@@ -27,6 +27,9 @@ services:
   import.csvtoarray:
     class: Capco\AppBundle\Helper\ConvertCsvToArray
 
+  redis_adapter:
+    class: Capco\AppBundle\Adapter\RedisAdapter
+    arguments: ['@snc_redis.default']
 
   mailer_service:
     class: Capco\AppBundle\Mailer\MailerService

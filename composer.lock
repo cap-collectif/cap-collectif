@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "531ef2b6bb0db598d5fa0b0f63fba142",
+    "content-hash": "6f33fb24a6b889cb71456ed652bf68a7",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -9787,6 +9787,48 @@
             "time": "2014-10-09T19:04:51+00:00"
         },
         {
+            "name": "tweedegolf/prometheus-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cap-collectif/prometheus-bundle.git",
+                "reference": "6fd3fff0bb3d641b1d3ebbc7ca0ee44474492deb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cap-collectif/prometheus-bundle/zipball/6fd3fff0bb3d641b1d3ebbc7ca0ee44474492deb",
+                "reference": "6fd3fff0bb3d641b1d3ebbc7ca0ee44474492deb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0",
+                "symfony/config": "~2.7|~3.0",
+                "symfony/dependency-injection": "~2.7|~3.0",
+                "symfony/http-kernel": "~2.7|~3.0",
+                "tweedegolf/prometheus-client": "^0.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "TweedeGolf\\PrometheusBundle\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ruben Nijveld",
+                    "email": "ruben@tweedegolf.com"
+                }
+            ],
+            "description": "Symfony bundle for Prometheus client",
+            "support": {
+                "source": "https://github.com/cap-collectif/prometheus-bundle/tree/master"
+            },
+            "time": "2018-05-21T11:09:02+00:00"
+        },
+        {
             "name": "tweedegolf/prometheus-client",
             "version": "v0.2.3",
             "source": {
@@ -14083,6 +14125,7 @@
         "phayes/geophp": 20,
         "webonyx/graphql-php": 20,
         "overblog/graphql-php-generator": 20,
+        "tweedegolf/prometheus-bundle": 20,
         "tonicforhealth/behat-parallel-scenario": 20,
         "sensiolabs/behat-page-object-extension": 20,
         "alexandresalome/mailcatcher": 20
