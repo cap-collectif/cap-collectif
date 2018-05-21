@@ -196,14 +196,14 @@ ENV SYMFONY_DEBUG false
 RUN mkdir -p /var/www \
     && chown capco:capco /var/www \
     && find /etc/service/ -name "run" -exec chmod +x {} \;
-    
+
 WORKDIR /var/www
 
 # NodeJS and Yarn
 COPY --from=node /usr/local/bin/node /usr/local/bin/node
 COPY --from=node /usr/local/include/node /usr/local/include/node
 COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
-COPY --from=node /opt/yarn-v1.5.1 /opt/yarn
+COPY --from=node /opt/yarn-v1.6.0 /opt/yarn
 RUN ln -s /usr/local/bin/node /usr/local/bin/nodejs && \
     ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm && \
     ln -s /opt/yarn/bin/yarn /usr/local/bin/yarn
