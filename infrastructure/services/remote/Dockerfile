@@ -200,6 +200,7 @@ RUN mkdir -p /var/www \
 WORKDIR /var/www
 
 # NodeJS and Yarn
+ENV YARN_VERSION 1.6.0
 COPY --from=node /usr/local/bin/node /usr/local/bin/node
 COPY --from=node /usr/local/include/node /usr/local/include/node
 COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules

@@ -8,6 +8,7 @@ LABEL maintainer "Cap Collectif <tech@cap-collectif.com>"
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
+ENV YARN_VERSION 1.6.0
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 COPY --from=node /usr/local/bin/node /usr/local/bin/node
 COPY --from=node /usr/local/include/node /usr/local/include/node
