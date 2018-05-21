@@ -16,7 +16,6 @@ class ShieldListener
       'app_get_api_token',
       'sonata_media_view',
       'sonata_media_download',
-      'capco_metrics',
       '_wdt',
 
       // Login

@@ -36,6 +36,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/cap-collectif/mailcatcher"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/cap-collectif/prometheus-bundle"
         }
     ],
     "require": {
@@ -121,7 +125,8 @@
         "symfony/polyfill-apcu": "^1.7",
         "webfactory/icu-translation-bundle": "^0.6.1",
         "ruflin/elastica": "~5",
-        "tweedegolf/prometheus-client": "^0.2.3"
+        "tweedegolf/prometheus-client": "^0.2.3",
+        "tweedegolf/prometheus-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

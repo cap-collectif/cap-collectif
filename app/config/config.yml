@@ -173,6 +173,62 @@ stof_doctrine_extensions:
             loggable: true
             tree: true
 
+tweede_golf_prometheus:
+    storage_adapter_service: 'redis_adapter'
+    register_defaults: false
+    collectors:
+        registered:
+            gauge:
+                help: Number of registrations
+        registeredContributors:
+            gauge:
+                help: Number of registered contributors
+        projectCount:
+            gauge:
+                help: Number of projects
+        contribuableStepsCount:
+            gauge:
+                help: Number of contribuable steps
+        voteCount:
+            gauge:
+                help: Number of votes
+        commentCount:
+            gauge:
+                help: Number of comments
+        contributionCount:
+            gauge:
+                help: Number of contributions
+        opinionCount:
+            gauge:
+                help: Number of opinions
+        versionCount:
+            gauge:
+                help: Number of versions
+        argumentCount:
+            gauge:
+                help: Number of arguments
+        sourceCount:
+            gauge:
+                help: Number of sources
+        proposalCount:
+            gauge:
+                help: Number of proposals
+        replyCount:
+            gauge:
+                help: Number of replies
+        reportCount:
+            gauge:
+                help: Number of reports
+        reportArchivedCount:
+            gauge:
+                help: Number of reports archived
+        followerCount:
+            gauge:
+                help: Number of followers
+        contributionTrashedCount:
+            gauge:
+                help: Number of contributions which has been trashed
+
 hautelook_alice:
     locale: "%locale%"
     loading_limit: 1

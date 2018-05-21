@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\Adapter\RedisAdapter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,7 +15,8 @@ class MetricsController extends Controller
      */
     public function metricsAction(): Response
     {
-        $registry = new CollectorRegistry(new RedisAdapter($this->get('snc_redis.default')));
+        $registry = $this->get(CollectorRegistry::class);
+        $formatter = new TextFormatter();
 
         $registeredContributorCount = $this->get('capco.user.repository')->getRegisteredContributorCount();
         $registeredCount = $this->get('capco.user.repository')->getRegisteredCount();
@@ -65,24 +65,6 @@ class MetricsController extends Controller
         // Group ?
         // District ?
 
-        $registry->createGauge('registered', [], null, null, CollectorRegistry::DEFAULT_STORAGE, true);
-        $registry->createGauge('registeredContributors', [], null, null, CollectorRegistry::DEFAULT_STORAGE, true);
-        $registry->createGauge('projectCount', [], null, null, CollectorRegistry::DEFAULT_STORAGE, true);
-        $registry->createGauge('contribuableStepsCount', [], null, null, CollectorRegistry::DEFAULT_STORAGE, true);
-        $registry->createGauge('voteCount', [], null, null, CollectorRegistry::DEFAULT_STORAGE, true);
-        $registry->createGauge('commentCount', [], null, null, CollectorRegistry::DEFAULT_STORAGE, true);
-        $registry->createGauge('contributionCount', [], null, null, CollectorRegistry::DEFAULT_STORAGE, true);
-        $registry->createGauge('opinionCount', [], null, null, CollectorRegistry::DEFAULT_STORAGE, true);
-        $registry->createGauge('versionCount', [], null, null, CollectorRegistry::DEFAULT_STORAGE, true);
-        $registry->createGauge('argumentCount', [], null, null, CollectorRegistry::DEFAULT_STORAGE, true);
-        $registry->createGauge('sourceCount', [], null, null, CollectorRegistry::DEFAULT_STORAGE, true);
-        $registry->createGauge('proposalCount', [], null, null, CollectorRegistry::DEFAULT_STORAGE, true);
-        $registry->createGauge('replyCount', [], null, null, CollectorRegistry::DEFAULT_STORAGE, true);
-        $registry->createGauge('reportCount', [], null, null, CollectorRegistry::DEFAULT_STORAGE, true);
-        $registry->createGauge('reportArchivedCount', [], null, null, CollectorRegistry::DEFAULT_STORAGE, true);
-        $registry->createGauge('followerCount', [], null, null, CollectorRegistry::DEFAULT_STORAGE, true);
-        $registry->createGauge('contributionTrashedCount', [], null, null, CollectorRegistry::DEFAULT_STORAGE, true);
-
         $registry->getGauge('registered')->set($registeredCount);
         $registry->getGauge('registeredContributors')->set($registeredContributorCount);
         $registry->getGauge('projectCount')->set($projectCount);
@@ -100,8 +82,6 @@ class MetricsController extends Controller
         $registry->getGauge('reportArchivedCount')->set($reportArchivedCount);
         $registry->getGauge('followerCount')->set($followerCount);
         $registry->getGauge('contributionTrashedCount')->set($contributionTrashedCount);
-
-        $formatter = new TextFormatter();
 
         return new Response($formatter->format($registry->collect()), 200, [
             'Content-Type' => $formatter->getMimeType(),
