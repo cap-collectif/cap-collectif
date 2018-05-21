@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0630f82c09ce765b03d62c0f05f42cd9",
+    "content-hash": "531ef2b6bb0db598d5fa0b0f63fba142",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -9785,6 +9785,42 @@
                 "upload"
             ],
             "time": "2014-10-09T19:04:51+00:00"
+        },
+        {
+            "name": "tweedegolf/prometheus-client",
+            "version": "v0.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tweedegolf/prometheus-client.git",
+                "reference": "8d1f3be5b9fcd393ac65ef5b28fa19a3f65e08b6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tweedegolf/prometheus-client/zipball/8d1f3be5b9fcd393ac65ef5b28fa19a3f65e08b6",
+                "reference": "8d1f3be5b9fcd393ac65ef5b28fa19a3f65e08b6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "TweedeGolf\\PrometheusClient\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ruben Nijveld",
+                    "email": "ruben@tweedegolf.com"
+                }
+            ],
+            "description": "A PHP Prometheus client library",
+            "time": "2018-02-20T11:14:55+00:00"
         },
         {
             "name": "twig/extensions",

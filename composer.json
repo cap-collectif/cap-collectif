@@ -120,7 +120,8 @@
         "overblog/graphql-bundle": "0.9.3",
         "symfony/polyfill-apcu": "^1.7",
         "webfactory/icu-translation-bundle": "^0.6.1",
-        "ruflin/elastica": "~5"
+        "ruflin/elastica": "~5",
+        "tweedegolf/prometheus-client": "^0.2.3"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
