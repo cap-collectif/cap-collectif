@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\AbstractVote;
-use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\CommentVote;
 use Capco\AppBundle\Entity\EventComment;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
@@ -186,16 +186,8 @@ class UserResolver implements ContainerAwareInterface
                 }
             }
 
-            if ($contribution instanceof Comment) {
-                if ($contribution instanceof ProposalComment) {
-                    if (method_exists($contribution->getRelatedObject()->getProposalForm(), 'getStep') && $this->checkIfStepActive($contribution->getRelatedObject()->getProposalForm()->getStep())) {
-                        ++$count;
-                    }
-                } elseif ($contribution instanceof EventComment) {
-                    if ($contribution->getEvent()->getEndAt() > $now) {
-                        ++$count;
-                    }
-                }
+            if ($contribution instanceof Proposal && $this->checkIfStepActive($contribution->getStep())) {
+                ++$count;
             }
 
             if ($contribution instanceof Source || $contribution instanceof \Capco\AppBundle\Entity\Argument) {
@@ -210,6 +202,6 @@ class UserResolver implements ContainerAwareInterface
 
     public function checkIfStepActive(AbstractStep $step): bool
     {
-        return $step->isTimeless() || $step->getEndAt() > (new \DateTime())->format('Y-m-d H:i:s');
+        return $step->isTimeless() ?: $step->getEndAt() > (new \DateTime())->format('Y-m-d H:i:s');
     }
 }

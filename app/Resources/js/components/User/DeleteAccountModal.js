@@ -142,7 +142,7 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                                 <DefaultAvatar size={35} />
                               </div>
                               <div className="col-sm-8 delete__example">
-                                <FormattedMessage id="deleted-user-account" />
+                                <FormattedMessage id="deleted-user" />
                                 <br />
                                 <strong>
                                   <FormattedMessage id="modal-example-contribution-title" />
@@ -188,7 +188,7 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                                 <DefaultAvatar size={35} />
                               </div>
                               <div className="col-sm-8 delete__example">
-                                <FormattedMessage id="deleted-user-account" />
+                                <FormattedMessage id="deleted-user" />
                                 <br />
                                 <strong>
                                   <FormattedMessage id="deleted-title" />

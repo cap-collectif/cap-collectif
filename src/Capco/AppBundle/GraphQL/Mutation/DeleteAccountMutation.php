@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\CommentVote;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventComment;
 use Capco\AppBundle\Entity\NewsletterSubscription;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Source;
@@ -114,6 +115,7 @@ class DeleteAccountMutation implements ContainerAwareInterface
         $user->setGender(null);
         $user->setLocale(null);
         $user->setTimezone(null);
+        $user->setLocked(true);
 
         if ($user->getMedia()) {
             $media = $this->em->getRepository('CapcoMediaBundle:Media')->find($user->getMedia()->getId());
@@ -126,6 +128,8 @@ class DeleteAccountMutation implements ContainerAwareInterface
 
     public function deleteIfStepActive(User $user, array $contributions): void
     {
+        $deletedBodyText = $this->translator->trans('deleted-content-by-author', [], 'CapcoAppBundle');
+
         $now = (new \DateTime())->format('Y-m-d H:i:s');
 
         foreach ($contributions as $contribution) {
@@ -150,13 +154,17 @@ class DeleteAccountMutation implements ContainerAwareInterface
             if ($contribution instanceof Comment) {
                 if ($contribution instanceof ProposalComment) {
                     if (method_exists($contribution->getRelatedObject()->getProposalForm(), 'getStep') && $this->checkIfStepActive($contribution->getRelatedObject()->getProposalForm()->getStep())) {
-                        $this->em->remove($contribution);
+                        $contribution->setBody($deletedBodyText);
                     }
                 } elseif ($contribution instanceof EventComment) {
                     if ($contribution->getEvent()->getEndAt() > $now) {
-                        $this->em->remove($contribution);
+                        $contribution->setBody($deletedBodyText);
                     }
                 }
+            }
+
+            if ($contribution instanceof Proposal && $this->checkIfStepActive($contribution->getStep())) {
+                $this->em->remove($contribution);
             }
 
             if ($contribution instanceof Source || $contribution instanceof \Capco\AppBundle\Entity\Argument) {
@@ -214,13 +222,11 @@ class DeleteAccountMutation implements ContainerAwareInterface
         }
 
         $this->container->get('redis_storage.helper')->recomputeUserCounters($user);
-
-        $this->em->flush();
     }
 
     public function checkIfStepActive(AbstractStep $step): bool
     {
-        return $step->isTimeless() || $step->getEndAt() > (new \DateTime())->format('Y-m-d H:i:s');
+        return $step->isTimeless() ?: $step->getEndAt() > (new \DateTime())->format('Y-m-d H:i:s');
     }
 
     public function removeMedia(Media $media): void
