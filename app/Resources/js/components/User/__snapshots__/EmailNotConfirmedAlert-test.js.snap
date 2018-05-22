@@ -57,7 +57,7 @@ exports[`<EmailNotConfirmedAlert /> renders a button to resend confirmation & an
         bsClass="btn"
         bsStyle="default"
         disabled={false}
-        href="about:///profile/edit-account"
+        href="about:///profile/edit-profile#account"
         style={
           Object {
             "marginBottom": 5,
@@ -131,7 +131,7 @@ exports[`<EmailNotConfirmedAlert /> renders a disabled button when resending 1`]
         bsClass="btn"
         bsStyle="default"
         disabled={false}
-        href="about:///profile/edit-account"
+        href="about:///profile/edit-profile#account"
         style={
           Object {
             "marginBottom": 5,
@@ -204,7 +204,7 @@ exports[`<EmailNotConfirmedAlert /> renders a disabled button when resending is 
         bsClass="btn"
         bsStyle="default"
         disabled={false}
-        href="about:///profile/edit-account"
+        href="about:///profile/edit-profile#account"
         style={
           Object {
             "marginBottom": 5,

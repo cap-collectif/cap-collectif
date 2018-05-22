@@ -116,7 +116,7 @@ trait QuestionnaireStepsTrait
         foreach ($textareas as $textarea) {
             \PHPUnit_Framework_TestCase::assertTrue($textarea->hasAttribute('disabled'));
         }
-        $this->elementHasAttribute($this->getCurrentPage()->getSubmitReplyButtonSelector(), 'disabled');
+        $this->theElementHasAttribute($this->getCurrentPage()->getSubmitReplyButtonSelector(), 'disabled');
     }
 
     /**

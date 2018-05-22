@@ -46,6 +46,7 @@ export class AccountForm extends Component<Props> {
     const {
       initialValues,
       dispatch,
+      pristine,
       handleSubmit,
       confirmationEmailResent,
       error,
@@ -103,8 +104,8 @@ export class AccountForm extends Component<Props> {
         )}
         <div className="col-sm-6 col-sm-offset-3" id="profile-alert-form">
           <AlertForm
-            valid={valid}
-            invalid={invalid}
+            valid={pristine ? true : valid}
+            invalid={pristine ? false : invalid}
             errorMessage={error}
             submitSucceeded={submitSucceeded}
             submitFailed={submitFailed}

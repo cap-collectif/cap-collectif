@@ -141,14 +141,14 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                     ]
                   }
                 >
-                  <a
+                  <span
                     className="personal-data-delete-field"
                     id="personal-data-firstname"
                   >
                     <i
                       className="icon cap-ios-close"
                     />
-                  </a>
+                  </span>
                 </OverlayTrigger>
               </OverlayTrigger>
             </div>
@@ -249,14 +249,14 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                     ]
                   }
                 >
-                  <a
+                  <span
                     className="personal-data-delete-field"
                     id="personal-data-lastname"
                   >
                     <i
                       className="icon cap-ios-close"
                     />
-                  </a>
+                  </span>
                 </OverlayTrigger>
               </OverlayTrigger>
             </div>
@@ -383,14 +383,14 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                     ]
                   }
                 >
-                  <a
+                  <span
                     className="personal-data-delete-field"
                     id="personal-data-gender"
                   >
                     <i
                       className="icon cap-ios-close"
                     />
-                  </a>
+                  </span>
                 </OverlayTrigger>
               </OverlayTrigger>
             </div>
@@ -497,14 +497,14 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                     ]
                   }
                 >
-                  <a
+                  <span
                     className="personal-data-delete-field"
                     id="personal-data-dateOfBirth"
                   >
                     <i
                       className="icon cap-ios-close"
                     />
-                  </a>
+                  </span>
                 </OverlayTrigger>
               </OverlayTrigger>
             </div>
@@ -515,6 +515,7 @@ exports[`<PersonalData /> should render user withou address 1`] = `
             >
               <label
                 className="col-sm-3 control-label"
+                htmlFor="personal-data-form-phone"
               >
                 <FormattedMessage
                   id="form.label_phone"
@@ -525,7 +526,7 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                 <Field
                   addonBefore="France +33"
                   component={[Function]}
-                  divClassName="col-sm-4"
+                  divClassName="col-sm-4 col-xs-4"
                   id="personal-data-form-phone"
                   name="phone"
                   type="text"
@@ -607,14 +608,14 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                       ]
                     }
                   >
-                    <a
+                    <span
                       className="personal-data-delete-field"
                       id="phone"
                     >
                       <i
                         className="icon cap-ios-close"
                       />
-                    </a>
+                    </span>
                   </OverlayTrigger>
                 </OverlayTrigger>
               </div>
@@ -802,14 +803,14 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
                     ]
                   }
                 >
-                  <a
+                  <span
                     className="personal-data-delete-field"
                     id="personal-data-firstname"
                   >
                     <i
                       className="icon cap-ios-close"
                     />
-                  </a>
+                  </span>
                 </OverlayTrigger>
               </OverlayTrigger>
             </div>
@@ -893,14 +894,14 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
                     ]
                   }
                 >
-                  <a
+                  <span
                     className="personal-data-delete-field"
                     id="personal-data-address-address2-city-zipCode"
                   >
                     <i
                       className="icon cap-ios-close"
                     />
-                  </a>
+                  </span>
                 </OverlayTrigger>
               </OverlayTrigger>
             </div>
@@ -975,7 +976,7 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
             >
               <label
                 className="col-sm-3 control-label"
-                htmlFor="personal-data-form-zipCode"
+                htmlFor="personal-data-form-zip-code"
               >
                 <FormattedMessage
                   id="form.label_zip_code"
@@ -999,6 +1000,7 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
             >
               <label
                 className="col-sm-3 control-label"
+                htmlFor="personal-data-form-phone"
               >
                 <FormattedMessage
                   id="form.label_phone"
@@ -1009,7 +1011,7 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
                 <Field
                   addonBefore="France +33"
                   component={[Function]}
-                  divClassName="col-sm-4"
+                  divClassName="col-sm-4 col-xs-4"
                   id="personal-data-form-phone"
                   name="phone"
                   type="text"
@@ -1091,14 +1093,14 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
                       ]
                     }
                   >
-                    <a
+                    <span
                       className="personal-data-delete-field"
                       id="phone"
                     >
                       <i
                         className="icon cap-ios-close"
                       />
-                    </a>
+                    </span>
                   </OverlayTrigger>
                 </OverlayTrigger>
               </div>
@@ -1286,14 +1288,14 @@ exports[`<PersonalData /> should render with full user 1`] = `
                     ]
                   }
                 >
-                  <a
+                  <span
                     className="personal-data-delete-field"
                     id="personal-data-firstname"
                   >
                     <i
                       className="icon cap-ios-close"
                     />
-                  </a>
+                  </span>
                 </OverlayTrigger>
               </OverlayTrigger>
             </div>
@@ -1394,14 +1396,14 @@ exports[`<PersonalData /> should render with full user 1`] = `
                     ]
                   }
                 >
-                  <a
+                  <span
                     className="personal-data-delete-field"
                     id="personal-data-lastname"
                   >
                     <i
                       className="icon cap-ios-close"
                     />
-                  </a>
+                  </span>
                 </OverlayTrigger>
               </OverlayTrigger>
             </div>
@@ -1528,14 +1530,14 @@ exports[`<PersonalData /> should render with full user 1`] = `
                     ]
                   }
                 >
-                  <a
+                  <span
                     className="personal-data-delete-field"
                     id="personal-data-gender"
                   >
                     <i
                       className="icon cap-ios-close"
                     />
-                  </a>
+                  </span>
                 </OverlayTrigger>
               </OverlayTrigger>
             </div>
@@ -1642,14 +1644,14 @@ exports[`<PersonalData /> should render with full user 1`] = `
                     ]
                   }
                 >
-                  <a
+                  <span
                     className="personal-data-delete-field"
                     id="personal-data-dateOfBirth"
                   >
                     <i
                       className="icon cap-ios-close"
                     />
-                  </a>
+                  </span>
                 </OverlayTrigger>
               </OverlayTrigger>
             </div>
@@ -1733,14 +1735,14 @@ exports[`<PersonalData /> should render with full user 1`] = `
                     ]
                   }
                 >
-                  <a
+                  <span
                     className="personal-data-delete-field"
                     id="personal-data-address-address2-city-zipCode"
                   >
                     <i
                       className="icon cap-ios-close"
                     />
-                  </a>
+                  </span>
                 </OverlayTrigger>
               </OverlayTrigger>
             </div>
@@ -1815,7 +1817,7 @@ exports[`<PersonalData /> should render with full user 1`] = `
             >
               <label
                 className="col-sm-3 control-label"
-                htmlFor="personal-data-form-zipCode"
+                htmlFor="personal-data-form-zip-code"
               >
                 <FormattedMessage
                   id="form.label_zip_code"
@@ -1839,6 +1841,7 @@ exports[`<PersonalData /> should render with full user 1`] = `
             >
               <label
                 className="col-sm-3 control-label"
+                htmlFor="personal-data-form-phone"
               >
                 <FormattedMessage
                   id="form.label_phone"
@@ -1849,7 +1852,7 @@ exports[`<PersonalData /> should render with full user 1`] = `
                 <Field
                   addonBefore="France +33"
                   component={[Function]}
-                  divClassName="col-sm-4"
+                  divClassName="col-sm-4 col-xs-4"
                   id="personal-data-form-phone"
                   name="phone"
                   type="text"
@@ -1931,14 +1934,14 @@ exports[`<PersonalData /> should render with full user 1`] = `
                       ]
                     }
                   >
-                    <a
+                    <span
                       className="personal-data-delete-field"
                       id="phone"
                     >
                       <i
                         className="icon cap-ios-close"
                       />
-                    </a>
+                    </span>
                   </OverlayTrigger>
                 </OverlayTrigger>
               </div>

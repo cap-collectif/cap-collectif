@@ -293,11 +293,11 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             ref="firstname"
                             overlay={this.popover('firstname')}>
                             <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                              <a
+                              <span
                                 className="personal-data-delete-field"
                                 id="personal-data-firstname">
                                 <i className="icon cap-ios-close" />
-                              </a>
+                              </span>
                             </OverlayTrigger>
                           </OverlayTrigger>
                         </div>
@@ -326,9 +326,11 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             ref="lastname"
                             overlay={this.popover('lastname')}>
                             <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                              <a className="personal-data-delete-field" id="personal-data-lastname">
+                              <span
+                                className="personal-data-delete-field"
+                                id="personal-data-lastname">
                                 <i className="icon cap-ios-close" />
-                              </a>
+                              </span>
                             </OverlayTrigger>
                           </OverlayTrigger>
                         </div>
@@ -367,9 +369,11 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             ref="gender"
                             overlay={this.popover('gender')}>
                             <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                              <a className="personal-data-delete-field" id="personal-data-gender">
+                              <span
+                                className="personal-data-delete-field"
+                                id="personal-data-gender">
                                 <i className="icon cap-ios-close" />
-                              </a>
+                              </span>
                             </OverlayTrigger>
                           </OverlayTrigger>
                         </div>
@@ -403,11 +407,11 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             ref="dateOfBirth"
                             overlay={this.popover('dateOfBirth')}>
                             <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                              <a
+                              <span
                                 className="personal-data-delete-field"
                                 id="personal-data-dateOfBirth">
                                 <i className="icon cap-ios-close" />
-                              </a>
+                              </span>
                             </OverlayTrigger>
                           </OverlayTrigger>
                         </div>
@@ -423,11 +427,11 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                             ref="address-address2-city-zipCode"
                             overlay={this.popover('address-address2-city-zipCode')}>
                             <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                              <a
+                              <span
                                 className="personal-data-delete-field"
                                 id="personal-data-address-address2-city-zipCode">
                                 <i className="icon cap-ios-close" />
-                              </a>
+                              </span>
                             </OverlayTrigger>
                           </OverlayTrigger>
                         </div>
@@ -489,7 +493,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                           <div className="personal-data-address">
                             <label
                               className="col-sm-3 control-label"
-                              htmlFor="personal-data-form-zipCode">
+                              htmlFor="personal-data-form-zip-code">
                               <FormattedMessage id="form.label_zip_code" />
                             </label>
                             <div>
@@ -508,7 +512,9 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                     {currentValues.phone !== null && (
                       <div>
                         <div className="capco_horizontal_field_with_border_top">
-                          <label className="col-sm-3 control-label">
+                          <label
+                            className="col-sm-3 control-label"
+                            htmlFor="personal-data-form-phone">
                             <FormattedMessage id="form.label_phone" />
                           </label>
                           <div>
@@ -517,7 +523,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               component={component}
                               type="text"
                               id="personal-data-form-phone"
-                              divClassName="col-sm-4"
+                              divClassName="col-sm-4 col-xs-4"
                               addonBefore="France +33"
                             />
                           </div>
@@ -529,9 +535,9 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               ref="phone"
                               overlay={this.popover('phone')}>
                               <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                                <a className="personal-data-delete-field" id="phone">
+                                <span className="personal-data-delete-field" id="phone">
                                   <i className="icon cap-ios-close" />
-                                </a>
+                                </span>
                               </OverlayTrigger>
                             </OverlayTrigger>
                           </div>
