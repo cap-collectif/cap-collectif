@@ -35,13 +35,13 @@ class ProposalVoteModal extends React.Component<Props> {
     }
   }
 
-  onSubmit = (values: { votes: Array<{ anonymous: boolean, id: string }> }) => {
+  onSubmit = (values: { votes: Array<{ public: boolean, id: string }> }) => {
     const { dispatch, step, proposal } = this.props;
 
     const tmpVote = values.votes.filter(v => v.id === null)[0];
 
     // First we add the vote, then we update/reorder
-    return vote(dispatch, step.id, proposal.id, tmpVote.anonymous).then(data => {
+    return vote(dispatch, step.id, proposal.id, !tmpVote.public).then(data => {
       if (
         !data ||
         !data.addProposalVote ||
@@ -55,7 +55,7 @@ class ProposalVoteModal extends React.Component<Props> {
       return UpdateProposalVotesMutation.commit({
         input: {
           step: step.id,
-          votes: values.votes,
+          votes: values.votes.map(v => ({ id: v.id, anonymous: !v.public })),
         },
       });
     });

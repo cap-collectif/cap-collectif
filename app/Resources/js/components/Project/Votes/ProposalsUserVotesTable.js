@@ -59,7 +59,7 @@ const renderMembers = ({ fields, votes, step, deletable }: VotesProps) => {
         <ProposalUserVoteItem
           key={index}
           member={member}
-          anonymousValue={fields.get(index)}
+          isVoteVisibilityPublic={fields.get(index).public}
           vote={votes.edges && votes.edges[index].node}
           step={step}
           onDelete={deletable ? () => fields.remove(index) : null}
@@ -197,7 +197,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayPro
       props.votes.edges &&
       props.votes.edges
         .filter(Boolean)
-        .map(edge => ({ id: edge.node.id, anonymous: edge.node.anonymous })),
+        .map(edge => ({ id: edge.node.id, public: !edge.node.anonymous })),
   },
 });
 const container = connect(mapStateToProps)(form);
