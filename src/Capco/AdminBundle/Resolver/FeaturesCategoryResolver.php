@@ -122,7 +122,7 @@ class FeaturesCategoryResolver
         return $toggles;
     }
 
-    public function findCategoryForToggle(string $toggle): ?string
+    public function findCategoryForToggle(string $toggle)
     {
         foreach (self::$categories as $name => $category) {
             if (\in_array($toggle, $category['features'], true)) {
