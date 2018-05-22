@@ -526,7 +526,7 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                 <Field
                   addonBefore="France +33"
                   component={[Function]}
-                  divClassName="col-sm-4 col-xs-4"
+                  divClassName="col-sm-4 col-xs-12"
                   id="personal-data-form-phone"
                   name="phone"
                   type="text"
@@ -1011,7 +1011,7 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
                 <Field
                   addonBefore="France +33"
                   component={[Function]}
-                  divClassName="col-sm-4 col-xs-4"
+                  divClassName="col-sm-4 col-xs-12"
                   id="personal-data-form-phone"
                   name="phone"
                   type="text"
@@ -1852,7 +1852,7 @@ exports[`<PersonalData /> should render with full user 1`] = `
                 <Field
                   addonBefore="France +33"
                   component={[Function]}
-                  divClassName="col-sm-4 col-xs-4"
+                  divClassName="col-sm-4 col-xs-12"
                   id="personal-data-form-phone"
                   name="phone"
                   type="text"

@@ -523,7 +523,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                               component={component}
                               type="text"
                               id="personal-data-form-phone"
-                              divClassName="col-sm-4 col-xs-4"
+                              divClassName="col-sm-4 col-xs-12"
                               addonBefore="France +33"
                             />
                           </div>
