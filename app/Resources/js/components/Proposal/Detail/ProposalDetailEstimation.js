@@ -6,12 +6,12 @@ import type { ProposalDetailEstimation_proposal } from './__generated__/Proposal
 
 type Props = {
   proposal: ProposalDetailEstimation_proposal,
+  showNullEstimation: boolean,
 };
 
 export class ProposalDetailEstimation extends React.Component<Props> {
   render() {
-    const { proposal } = this.props;
-    const showNullEstimation = true;
+    const { proposal, showNullEstimation } = this.props;
     const estimation = !proposal.estimation && showNullEstimation ? 0 : proposal.estimation;
 
     return estimation !== null && typeof estimation !== 'undefined' ? (

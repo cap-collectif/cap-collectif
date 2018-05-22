@@ -56,7 +56,7 @@ export default createFragmentContainer(ProposalPreview, {
     fragment ProposalPreview_proposal on Proposal
       @argumentDefinitions(
         stepId: { type: "ID", nonNull: false }
-        isAuthenticated: { type: "Boolean", defaultValue: true }
+        isAuthenticated: { type: "Boolean!" }
         isProfileView: { type: "Boolean", defaultValue: false }
       ) {
       id

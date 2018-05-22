@@ -231,7 +231,7 @@ Scenario: Author of a proposal should not be notified when someone comment if he
   Then the queue associated to "comment_create" producer has messages below:
   | 0 | {"commentId": "@string@"} |
 
-@javascript 
+@javascript
 Scenario: Non author of a proposal wants to delete it
   Given I am logged in as admin
   And I go to a proposal

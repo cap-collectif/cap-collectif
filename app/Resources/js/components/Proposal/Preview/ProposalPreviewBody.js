@@ -58,7 +58,10 @@ export class ProposalPreviewBody extends React.Component<Props> {
                 </div>
               )}
             {/* $FlowFixMe */}
-            <ProposalDetailEstimation proposal={proposal} />
+            <ProposalDetailEstimation
+              showNullEstimation={step && step.voteType === 'BUDGET'}
+              proposal={proposal}
+            />
             {/* $FlowFixMe */}
             <ProposalDetailLikers proposal={proposal} />
           </TagsList>
@@ -133,16 +136,12 @@ export default createFragmentContainer(container, {
     }
   `,
   step: graphql`
-    fragment ProposalPreviewBody_step on Step {
+    fragment ProposalPreviewBody_step on ProposalStep {
       id
       ...ProposalPreviewVote_step @arguments(isAuthenticated: $isAuthenticated)
       ...ProposalVoteThresholdProgressBar_step
-      ... on CollectStep {
-        voteThreshold
-      }
-      ... on SelectionStep {
-        voteThreshold
-      }
+      voteThreshold
+      voteType
     }
   `,
 });
