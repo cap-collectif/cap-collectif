@@ -3,7 +3,7 @@ import React from 'react';
 import { QueryRenderer, graphql } from 'react-relay';
 import ReplyForm from './ReplyForm';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
-import Loader from '../../Utils/Loader';
+import Loader from '../../Ui/Loader';
 import type { ReplyCreateFormQueryResponse } from './__generated__/ReplyCreateFormQuery.graphql';
 
 const component = ({ error, props }: { error: ?Error, props: ?ReplyCreateFormQueryResponse }) => {

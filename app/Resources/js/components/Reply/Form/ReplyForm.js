@@ -23,6 +23,7 @@ import {
 import renderComponent from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import AddReplyMutation from '../../../mutations/AddReplyMutation';
+import AppDispatcher from '../../../dispatchers/AppDispatcher';
 
 type Props = FormProps & {
   +questionnaire: ReplyForm_questionnaire,
@@ -33,6 +34,7 @@ type Props = FormProps & {
 
 type FormValues = {|
   responses: ResponsesInReduxForm,
+  private: boolean,
 |};
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
@@ -45,13 +47,17 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   data.responses = formatSubmitResponses(values.responses, questionnaire.questions);
 
   if (questionnaire.anonymousAllowed) {
-    data.private = values.private && values.private;
+    data.private = values.private;
   }
 
   return AddReplyMutation.commit({ input: data })
     .then(() => {
+      AppDispatcher.dispatch({
+        actionType: 'UPDATE_ALERT',
+        alert: { bsStyle: 'success', content: 'reply.request.create.success' },
+      });
       if (questionnaire.multipleRepliesAllowed) {
-        // reset();
+        props.reset();
       }
     })
     .catch(() => {
@@ -143,7 +149,7 @@ export class ReplyForm extends React.Component<Props> {
     const { questionnaire, user } = this.props;
 
     return (
-      !questionnaire.open ||
+      !questionnaire.contribuable ||
       !user ||
       (questionnaire.phoneConfirmationRequired && !user.isPhoneConfirmed) ||
       (questionnaire.viewerReplies.length > 0 && !questionnaire.multipleRepliesAllowed)
@@ -220,6 +226,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) =
   responses: formValueSelector(formName)(state, 'responses'),
   initialValues: {
     responses: formatInitialResponsesValues(props.questionnaire.questions, []),
+    private: false,
   },
   user: state.user.user,
 });
@@ -239,7 +246,7 @@ export default createFragmentContainer(container, {
       description
       multipleRepliesAllowed
       phoneConfirmationRequired
-      open
+      contribuable
       viewerReplies {
         id
       }

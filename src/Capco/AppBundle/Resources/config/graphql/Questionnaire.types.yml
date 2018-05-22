@@ -13,7 +13,7 @@ Questionnaire:
                 type: "String!"
             multipleRepliesAllowed:
                 type: "Boolean!"
-            open:
+            contribuable:
                 type: "Boolean!"
                 resolve: "@=value.canContribute()"
                 description: "accept answers or not"

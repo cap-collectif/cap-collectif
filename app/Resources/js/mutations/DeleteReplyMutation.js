@@ -12,6 +12,7 @@ const mutation = graphql`
     deleteReply(input: $input) {
       questionnaire {
         id
+        ...UserReplies_questionnaire
       }
     }
   }

@@ -9,7 +9,7 @@ import ReplyCreateFormWrapper from '../Reply/Form/ReplyCreateFormWrapper';
 import UserReplies from '../Reply/UserReplies';
 import { type GlobalState } from '../../types';
 import { type QuestionnaireStepPageQueryResponse } from './__generated__/QuestionnaireStepPageQuery.graphql';
-import { Loader } from '../Utils/Loader';
+import { Loader } from '../Ui/Loader';
 
 type Props = {
   step: Object,
@@ -57,7 +57,8 @@ export class QuestionnaireStepPage extends React.Component<Props> {
             query QuestionnaireStepPageQuery($id: ID!, $isAuthenticated: Boolean!) {
               questionnaire: node(id: $id) {
                 ...ReplyCreateFormWrapper_questionnaire
-                ...UserReplies_questionnaire
+                  @arguments(isAuthenticated: $isAuthenticated)
+                ...UserReplies_questionnaire @arguments(isAuthenticated: $isAuthenticated)
               }
             }
           `}

@@ -26,7 +26,7 @@ export class ReplyDeleteModal extends React.Component<Props, State> {
     isSubmitting: false,
   };
 
-  handleSubmit() {
+  handleSubmit = () => {
     const { onDelete, reply } = this.props;
 
     this.setState({ isSubmitting: true });
@@ -46,17 +46,17 @@ export class ReplyDeleteModal extends React.Component<Props, State> {
           alert: { bsStyle: 'warning', content: 'reply.request.delete.failure' },
         });
       });
-  }
+  };
 
-  close() {
+  close = () => {
     const { onToggleModal } = this.props;
     onToggleModal(false);
-  }
+  };
 
-  show() {
+  show = () => {
     const { onToggleModal } = this.props;
     onToggleModal(true);
-  }
+  };
 
   render() {
     const { reply, show } = this.props;

@@ -1865,7 +1865,7 @@ type Questionnaire implements Node {
   multipleRepliesAllowed: Boolean!
 
   # accept answers or not
-  open: Boolean!
+  contribuable: Boolean!
   phoneConfirmationRequired: Boolean!
   questions: [Question!]!
   viewerReplies: [Reply!]!

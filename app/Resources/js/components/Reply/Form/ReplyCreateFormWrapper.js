@@ -37,7 +37,7 @@ export class ReplyCreateFormWrapper extends React.Component<Props, State> {
   formIsDisabled() {
     const { questionnaire, user } = this.props;
     return (
-      !questionnaire.open ||
+      !questionnaire.contribuable ||
       !user ||
       (questionnaire.phoneConfirmationRequired && !user.isPhoneConfirmed) ||
       (questionnaire.viewerReplies &&
@@ -104,12 +104,13 @@ const container = connect(mapStateToProps)(ReplyCreateFormWrapper);
 
 export default createFragmentContainer(container, {
   questionnaire: graphql`
-    fragment ReplyCreateFormWrapper_questionnaire on Questionnaire {
+    fragment ReplyCreateFormWrapper_questionnaire on Questionnaire
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
       anonymousAllowed
       description
       multipleRepliesAllowed
       phoneConfirmationRequired
-      open
+      contribuable
       viewerReplies @include(if: $isAuthenticated) {
         id
       }

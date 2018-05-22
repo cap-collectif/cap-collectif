@@ -16,10 +16,10 @@ type Props = {
 };
 
 export class ShowReplyModal extends React.Component<Props> {
-  onChange() {
+  onChange = () => {
     const { onClose } = this.props;
     onClose();
-  }
+  };
 
   render() {
     const { reply, show, onClose } = this.props;

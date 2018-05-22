@@ -38,7 +38,7 @@ class DeleteReplyMutation
             throw new UserError('You are not the author of this reply');
         }
 
-        $questionnaire = $reply->getQuestionnare();
+        $questionnaire = $reply->getQuestionnaire();
 
         if (!$questionnaire->canContribute()) {
             throw new UserError('This reply is no longer deletable.');

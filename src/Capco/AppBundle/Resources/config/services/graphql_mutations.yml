@@ -222,7 +222,6 @@ services:
           - "@capco.reply.repository"
           - "@capco.questionnaire.repository"
           - "@redis_storage.helper"
-          # - "@capco.notify_manager"
           - "@responses.formatter"
           - "@logger"
       tags:

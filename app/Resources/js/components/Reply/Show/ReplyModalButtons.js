@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Button } from 'react-bootstrap';
+import { FormattedMessage } from 'react-intl';
 import { type ReplyModalButtons_reply } from './__generated__/ReplyModalButtons_reply.graphql';
 import ReplyDeleteModal from '../Delete/ReplyDeleteModal';
 
@@ -21,9 +22,9 @@ export class ReplyModalButtons extends React.Component<Props, State> {
     showDeleteModal: false,
   };
 
-  toggleDeleteModal(value: boolean) {
+  toggleDeleteModal = (value: boolean) => {
     this.setState({ showDeleteModal: value });
-  }
+  };
 
   render() {
     const { reply, onChange } = this.props;
@@ -37,8 +38,10 @@ export class ReplyModalButtons extends React.Component<Props, State> {
               onClick={() => {
                 this.toggleDeleteModal(true);
               }}
-              style={{ marginLeft: '15px' }}
-            />
+              style={{ marginLeft: '15px' }}>
+              <i className="cap cap-bin-2" />
+              <FormattedMessage id="global.remove" />
+            </Button>
             {/* $FlowFixMe $refType */}
             <ReplyDeleteModal
               reply={reply}
