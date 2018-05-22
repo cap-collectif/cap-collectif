@@ -44,6 +44,17 @@ class OpenAmClient
         return $json['uid'];
     }
 
+    public function logoutUser(): void
+    {
+        $response = $this->client->post(self::API_URL . 'sessions/?_action=logout', ['content-type' => 'application/json', 'mcpAuth' => $this->cookie], '{}');
+        $json = json_decode((string) $response->getBody(), true);
+
+        if (isset($json['code']) && (400 >= $json['code'] && 500 <= $json['code'])) {
+            $this->logger->critical('Error returned by moncompte.paris.fr', ['json' => $json]);
+            throw new \RuntimeException('Error returned by moncompte.paris.fr.');
+        }
+    }
+
     public function getUserInformations(): array
     {
         $response = $this->client->get(self::API_INFORMATIONS_URL, ['Cookie' => self::COOKIE_NAME . '=' . $this->cookie]);
