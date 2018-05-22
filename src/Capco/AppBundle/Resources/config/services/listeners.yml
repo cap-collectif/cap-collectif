@@ -13,8 +13,8 @@ services:
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
-  capco.listener.exceptions:
-    class: Capco\AppBundle\EventListener\ExceptionsListener
+  capco.listener.paris_authentication_exception:
+    class: Capco\AppBundle\EventListener\ParisAuthenticationExceptionListener
     tags:
       - { name: kernel.event_listener, event: kernel.exception }
     arguments: ['@logger', '@templating']

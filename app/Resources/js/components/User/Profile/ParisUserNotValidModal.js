@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { baseUrl } from '../../../config';
 
 type Props = {
@@ -40,4 +40,4 @@ const ParisUserNotValidModal = ({ emailAddress }: Props) => {
   );
 };
 
-export default injectIntl(ParisUserNotValidModal);
+export default ParisUserNotValidModal;

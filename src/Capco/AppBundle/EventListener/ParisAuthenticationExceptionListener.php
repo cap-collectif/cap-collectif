@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\Templating\EngineInterface;
 
-class ExceptionsListener
+class ParisAuthenticationExceptionListener
 {
     protected $logger;
     /**
