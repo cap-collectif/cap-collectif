@@ -36,6 +36,7 @@ import EvaluationsIndexPageApp from '../js/startup/EvaluationsIndexPageApp';
 import ChooseAUsernameApp from '../js/startup/ChooseAUsernameApp';
 import appStore from '../js/stores/AppStore';
 import AccountProfileFollowingsApp from "../js/startup/AccountProfileFollowingsApp";
+import ParisUserNotValidApp from "../js/startup/ParisUserNotValidApp";
 
 moment.locale('fr');
 
@@ -79,4 +80,5 @@ ReactOnRails.register({
   ShareButtonDropdownApp,
   ProposalFormAdminPageApp,
   GroupAdminPageApp,
+  ParisUserNotValidApp
 });

@@ -13,6 +13,12 @@ services:
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
+  capco.listener.exceptions:
+    class: Capco\AppBundle\EventListener\ExceptionsListener
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception }
+    arguments: ['@logger', '@templating']
+
   capco.listener.locale:
     class: Capco\AppBundle\EventListener\LocaleListener
     arguments:

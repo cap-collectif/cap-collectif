@@ -44,6 +44,7 @@ import GroupAdminPageApp from './startup/GroupAdminPageApp';
 import GroupCreateButtonApp from './startup/GroupCreateButtonApp';
 import EvaluationsIndexPageApp from './startup/EvaluationsIndexPageApp';
 import ChooseAUsernameApp from './startup/ChooseAUsernameApp';
+import ParisUserNotValidApp from './startup/ParisUserNotValidApp';
 import AccountProfileFollowingsApp from './startup/AccountProfileFollowingsApp';
 
 import appStore from '../js/stores/AppStore';
@@ -72,6 +73,7 @@ ReactOnRails.register({
   AdminModalsApp,
   RegistrationAdminApp,
   ChooseAUsernameApp,
+  ParisUserNotValidApp,
   ShieldApp,
   ProjectListPageApp,
   ProposalFormCreateButtonApp,

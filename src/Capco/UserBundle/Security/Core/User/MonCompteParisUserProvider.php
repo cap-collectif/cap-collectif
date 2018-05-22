@@ -2,6 +2,7 @@
 
 namespace Capco\UserBundle\Security\Core\User;
 
+use Capco\AppBundle\Exception\ParisAuthenticationException;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\MonCompteParis\OpenAmClient;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -21,10 +22,16 @@ class MonCompteParisUserProvider implements UserProviderInterface
     public function loadUserByUsername($id)
     {
         $user = $this->userManager->findUserBy(['parisId' => $id]);
-
         if (null === $user) {
+            $informations = $this->openAmCaller->getUserInformations();
+            if (false === filter_var($informations['validated'], FILTER_VALIDATE_BOOLEAN)) {
+                throw new ParisAuthenticationException($id, 'Please validate your account from Mon Compte Paris');
+            }
+
             $user = $this->userManager->createUser();
             $user->setParisId($id);
+            $user->setFirstname('' !== $informations['firstname'] ? $informations['firstname'] : null);
+            $user->setLastname('' !== $informations['lastname'] ? $informations['lastname'] : null);
             $user->setUsername(null);
             $user->setEmail($id);
             $user->setPlainPassword('No password is stored locally.');
