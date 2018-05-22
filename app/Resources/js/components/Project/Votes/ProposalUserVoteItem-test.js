@@ -26,7 +26,7 @@ describe('<ProposalUserVoteItem />', () => {
 
   it('should render a vote item', () => {
     const wrapper = shallow(
-      <ProposalUserVoteItem anonymousValue={false} member="votes.1" step={step} vote={vote} />,
+      <ProposalUserVoteItem isVoteVisibilityPublic member="votes.1" step={step} vote={vote} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

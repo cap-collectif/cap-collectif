@@ -64,7 +64,7 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
           component={[Function]}
           label="public"
           labelSide="RIGHT"
-          name="votes.1.anonymous"
+          name="votes.1.public"
           normalize={[Function]}
         />
       </div>

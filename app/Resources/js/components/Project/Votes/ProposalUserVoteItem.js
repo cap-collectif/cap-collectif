@@ -13,7 +13,7 @@ type Props = {
   vote: ProposalUserVoteItem_vote,
   step: ProposalUserVoteItem_step,
   ranking?: number,
-  anonymousValue: boolean,
+  isVoteVisibilityPublic: boolean,
   onDelete?: ?() => void,
   member: string,
   showDraggableIcon: boolean,
@@ -25,7 +25,15 @@ export class ProposalUserVoteItem extends React.Component<Props> {
   };
 
   render() {
-    const { anonymousValue, onDelete, member, showDraggableIcon, step, vote, ranking } = this.props;
+    const {
+      isVoteVisibilityPublic,
+      onDelete,
+      member,
+      showDraggableIcon,
+      step,
+      vote,
+      ranking,
+    } = this.props;
     const proposal = vote.proposal;
 
     const colTitleWidth = () => {
@@ -96,8 +104,8 @@ export class ProposalUserVoteItem extends React.Component<Props> {
               <Field
                 labelSide="RIGHT"
                 component={toggle}
-                label={!anonymousValue ? 'public' : 'admin.fields.idea_vote.private'}
-                name={`${member}.anonymous`}
+                label={isVoteVisibilityPublic ? 'public' : 'admin.fields.idea_vote.private'}
+                name={`${member}.public`}
                 normalize={val => !!val}
               />
             </div>
