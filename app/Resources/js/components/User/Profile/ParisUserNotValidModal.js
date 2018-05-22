@@ -30,6 +30,7 @@ const ParisUserNotValidModal = ({ emailAddress }: Props) => {
       </Modal.Body>
       <Modal.Footer>
         <Button
+          bsStyle="primary"
           onClick={() => {
             window.location.replace(baseUrl);
           }}>
