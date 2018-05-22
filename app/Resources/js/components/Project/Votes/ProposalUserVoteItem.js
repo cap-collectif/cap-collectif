@@ -97,10 +97,10 @@ export class ProposalUserVoteItem extends React.Component<Props> {
         <Col
           id={`${proposal.id}-proposal-vote__private`}
           className="proposals-user-votes__col"
-          md={2}
+          md={onDelete ? 2 : 3}
           xs={12}>
           <div className="proposals-user-votes__content justify-content-end">
-            <div className="d-flex">
+            <div>
               <Field
                 labelSide="RIGHT"
                 component={toggle}
