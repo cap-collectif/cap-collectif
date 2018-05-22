@@ -271,6 +271,11 @@
 
     .proposal-vote__delete {
         margin: auto 0 auto auto;
+
+        &:hover {
+            text-decoration: none;
+            cursor: pointer;
+        }
     }
 }
 
@@ -278,6 +283,10 @@
     display: flex;
     margin: auto 0;
     width: 100%;
+
+    .form-group, label {
+        margin-bottom: 0;
+    }
 }
 
 .proposals-user-votes__title {

@@ -36,21 +36,16 @@ export class ProposalsUserVotesStep extends React.Component<Props> {
 
     return (
       <div className="block">
-        <h2>
-          <a
-            className="pull-left btn btn-default"
-            href={step.show_url}
-            style={{ marginRight: '15px' }}>
-            <i className="cap cap-arrow-1-1" />
-            <span>
-              {' '}
-              <FormattedMessage id="project.votes.back" />
-            </span>
-          </a>
-          {step.title}
-        </h2>
+        <h2>{step.title}</h2>
+        <a className="btn btn-default" href={step.show_url}>
+          <i className="cap cap-arrow-1-1" />
+          <span>
+            {' '}
+            <FormattedMessage id="project.votes.back" />
+          </span>
+        </a>
         {step.votesHelpText && (
-          <div className="well mb-0 mt-10">
+          <div className="well mb-0 mt-25">
             <p>
               <b>
                 <FormattedMessage id="admin.fields.step.votesHelpText" />
@@ -59,17 +54,19 @@ export class ProposalsUserVotesStep extends React.Component<Props> {
             <div dangerouslySetInnerHTML={{ __html: step.votesHelpText }} />
           </div>
         )}
-        <h3 className="d-ib mr-10 mb-10">
-          <FormattedMessage id="modal-ranking" />
-        </h3>
-        <h4 className="excerpt d-ib">
-          <FormattedMessage
-            id="project.votes.nb"
-            values={{
-              num: step.viewerVotes.totalCount,
-            }}
-          />
-        </h4>
+        <div>
+          <h3 className="d-ib mr-10 mb-10">
+            <FormattedMessage id="modal-ranking" />
+          </h3>
+          <h4 className="excerpt d-ib">
+            <FormattedMessage
+              id="project.votes.nb"
+              values={{
+                num: step.viewerVotes.totalCount,
+              }}
+            />
+          </h4>
+        </div>
         {step.viewerVotes.totalCount > 0 && (
           <div>
             <ProposalsUserVotesTable
@@ -87,6 +84,7 @@ export class ProposalsUserVotesStep extends React.Component<Props> {
               label="global.save_modifications"
               isSubmitting={submitting}
               bsStyle="success"
+              className="mt-10"
             />
           </div>
         )}

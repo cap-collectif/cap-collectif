@@ -124,12 +124,12 @@ class ProposalVoteModal extends React.Component<Props> {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h3 className="d-ib mr-10 mb-10">
+          <h3 className="d-ib mt-0 mr-10 mb-10">
             <FormattedMessage
               id={step.votesRanking ? 'modal-ranking' : 'proposal.vote.modal.title'}
             />
           </h3>
-          <h4 className="excerpt d-ib">
+          <h4 className="excerpt d-ib mt-15">
             <FormattedMessage
               id="project.votes.nb"
               values={{
@@ -139,7 +139,7 @@ class ProposalVoteModal extends React.Component<Props> {
           </h4>
           <ProposalsUserVotesTable onSubmit={this.onSubmit} step={step} votes={step.viewerVotes} />
           {step.votesHelpText && (
-            <div className="well mb-0 mt-10">
+            <div className="well mb-0 mt-15">
               <p>
                 <b>
                   <FormattedMessage id="admin.fields.step.votesHelpText" />
