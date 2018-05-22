@@ -91,7 +91,7 @@ export default createFragmentContainer(ProposalList, {
       edges {
         node {
           id
-          ...ProposalPreview_proposal @arguments(stepId: $stepId)
+          ...ProposalPreview_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
         }
       }
     }

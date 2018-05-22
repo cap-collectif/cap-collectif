@@ -138,7 +138,7 @@ export default createFragmentContainer(container, {
   `,
   proposal: graphql`
     fragment ProposalPageHeader_proposal on Proposal
-      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       ...ProposalVoteButtonWrapperFragment_proposal
         @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
