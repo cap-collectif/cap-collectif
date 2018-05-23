@@ -805,6 +805,7 @@ type Mutation {
   updateProfilePassword(input: UpdateProfilePasswordInput!): UpdateProfilePasswordPayload
   updateProfilePersonalData(input: UpdateProfilePersonalDataInput!): UpdateProfilePersonalDataPayload
   updateProfilePublicData(input: UpdateProfilePublicDataInput!): UpdateProfilePublicDataPayload
+  deleteAccount(input: DeleteAccountInput!): DeleteAccountPayload
 }
 
 # A connection to a list of items.
@@ -2330,6 +2331,7 @@ type User implements Node {
 
   # Your localisation
   neighborhood: String
+  deletedAccountAt: DateTime
 }
 
 # A connection to a list of items.

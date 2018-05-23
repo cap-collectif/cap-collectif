@@ -28,7 +28,7 @@ exports[`<AccountBox /> should render a disabled button when the form is invalid
       block={false}
       bsClass="btn"
       bsStyle="primary"
-      className="col-sm-offset-3"
+      className="col-sm-offset-5"
       disabled={true}
       id="edit-account-profile-button"
       onClick={[Function]}
@@ -38,7 +38,80 @@ exports[`<AccountBox /> should render a disabled button when the form is invalid
         values={Object {}}
       />
     </Button>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="danger"
+      disabled={false}
+      id="delete-account-profile-button"
+      onClick={[Function]}
+      style={
+        Object {
+          "marginLeft": 15,
+        }
+      }
+    >
+      <FormattedMessage
+        id="delete-account"
+        values={Object {}}
+      />
+    </Button>
   </div>
+  <ReactRelayQueryRenderer
+    environment={
+      RelayModernEnvironment {
+        "__setNet": [Function],
+        "_deferrableSelections": Array [],
+        "_network": Object {
+          "execute": [Function],
+        },
+        "_publishQueue": RelayPublishQueue {
+          "_appliedOptimisticUpdates": Array [],
+          "_backup": Object {},
+          "_handlerProvider": [Function],
+          "_pendingBackupRebase": false,
+          "_pendingData": Array [],
+          "_pendingOptimisticUpdates": Array [],
+          "_pendingUpdaters": Array [],
+          "_store": RelayMarkSweepStore {
+            "_gcEnabled": true,
+            "_hasScheduledGC": false,
+            "_index": 0,
+            "_recordSource": Object {},
+            "_roots": Array [],
+            "_subscriptions": Array [],
+            "_updatedRecordIDs": Object {},
+          },
+        },
+        "_store": RelayMarkSweepStore {
+          "_gcEnabled": true,
+          "_hasScheduledGC": false,
+          "_index": 0,
+          "_recordSource": Object {},
+          "_roots": Array [],
+          "_subscriptions": Array [],
+          "_updatedRecordIDs": Object {},
+        },
+        "configName": undefined,
+        "unstable_internal": Object {
+          "areEqualSelectors": [Function],
+          "createFragmentSpecResolver": [Function],
+          "createOperationSelector": [Function],
+          "getDataIDsFromObject": [Function],
+          "getFragment": [Function],
+          "getRequest": [Function],
+          "getSelector": [Function],
+          "getSelectorList": [Function],
+          "getSelectorsFromObject": [Function],
+          "getVariablesFromObject": [Function],
+        },
+      }
+    }
+    query={[Function]}
+    render={[Function]}
+    variables={Object {}}
+  />
 </Panel>
 `;
 
@@ -70,7 +143,7 @@ exports[`<AccountBox /> should render a disabled button when the form is submitt
       block={false}
       bsClass="btn"
       bsStyle="primary"
-      className="col-sm-offset-3"
+      className="col-sm-offset-5"
       disabled={true}
       id="edit-account-profile-button"
       onClick={[Function]}
@@ -80,7 +153,80 @@ exports[`<AccountBox /> should render a disabled button when the form is submitt
         values={Object {}}
       />
     </Button>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="danger"
+      disabled={false}
+      id="delete-account-profile-button"
+      onClick={[Function]}
+      style={
+        Object {
+          "marginLeft": 15,
+        }
+      }
+    >
+      <FormattedMessage
+        id="delete-account"
+        values={Object {}}
+      />
+    </Button>
   </div>
+  <ReactRelayQueryRenderer
+    environment={
+      RelayModernEnvironment {
+        "__setNet": [Function],
+        "_deferrableSelections": Array [],
+        "_network": Object {
+          "execute": [Function],
+        },
+        "_publishQueue": RelayPublishQueue {
+          "_appliedOptimisticUpdates": Array [],
+          "_backup": Object {},
+          "_handlerProvider": [Function],
+          "_pendingBackupRebase": false,
+          "_pendingData": Array [],
+          "_pendingOptimisticUpdates": Array [],
+          "_pendingUpdaters": Array [],
+          "_store": RelayMarkSweepStore {
+            "_gcEnabled": true,
+            "_hasScheduledGC": false,
+            "_index": 0,
+            "_recordSource": Object {},
+            "_roots": Array [],
+            "_subscriptions": Array [],
+            "_updatedRecordIDs": Object {},
+          },
+        },
+        "_store": RelayMarkSweepStore {
+          "_gcEnabled": true,
+          "_hasScheduledGC": false,
+          "_index": 0,
+          "_recordSource": Object {},
+          "_roots": Array [],
+          "_subscriptions": Array [],
+          "_updatedRecordIDs": Object {},
+        },
+        "configName": undefined,
+        "unstable_internal": Object {
+          "areEqualSelectors": [Function],
+          "createFragmentSpecResolver": [Function],
+          "createOperationSelector": [Function],
+          "getDataIDsFromObject": [Function],
+          "getFragment": [Function],
+          "getRequest": [Function],
+          "getSelector": [Function],
+          "getSelectorList": [Function],
+          "getSelectorsFromObject": [Function],
+          "getVariablesFromObject": [Function],
+        },
+      }
+    }
+    query={[Function]}
+    render={[Function]}
+    variables={Object {}}
+  />
 </Panel>
 `;
 
@@ -112,7 +258,7 @@ exports[`<AccountBox /> should render and enabled button when the form is valid 
       block={false}
       bsClass="btn"
       bsStyle="primary"
-      className="col-sm-offset-3"
+      className="col-sm-offset-5"
       disabled={false}
       id="edit-account-profile-button"
       onClick={[Function]}
@@ -122,6 +268,79 @@ exports[`<AccountBox /> should render and enabled button when the form is valid 
         values={Object {}}
       />
     </Button>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="danger"
+      disabled={false}
+      id="delete-account-profile-button"
+      onClick={[Function]}
+      style={
+        Object {
+          "marginLeft": 15,
+        }
+      }
+    >
+      <FormattedMessage
+        id="delete-account"
+        values={Object {}}
+      />
+    </Button>
   </div>
+  <ReactRelayQueryRenderer
+    environment={
+      RelayModernEnvironment {
+        "__setNet": [Function],
+        "_deferrableSelections": Array [],
+        "_network": Object {
+          "execute": [Function],
+        },
+        "_publishQueue": RelayPublishQueue {
+          "_appliedOptimisticUpdates": Array [],
+          "_backup": Object {},
+          "_handlerProvider": [Function],
+          "_pendingBackupRebase": false,
+          "_pendingData": Array [],
+          "_pendingOptimisticUpdates": Array [],
+          "_pendingUpdaters": Array [],
+          "_store": RelayMarkSweepStore {
+            "_gcEnabled": true,
+            "_hasScheduledGC": false,
+            "_index": 0,
+            "_recordSource": Object {},
+            "_roots": Array [],
+            "_subscriptions": Array [],
+            "_updatedRecordIDs": Object {},
+          },
+        },
+        "_store": RelayMarkSweepStore {
+          "_gcEnabled": true,
+          "_hasScheduledGC": false,
+          "_index": 0,
+          "_recordSource": Object {},
+          "_roots": Array [],
+          "_subscriptions": Array [],
+          "_updatedRecordIDs": Object {},
+        },
+        "configName": undefined,
+        "unstable_internal": Object {
+          "areEqualSelectors": [Function],
+          "createFragmentSpecResolver": [Function],
+          "createOperationSelector": [Function],
+          "getDataIDsFromObject": [Function],
+          "getFragment": [Function],
+          "getRequest": [Function],
+          "getSelector": [Function],
+          "getSelectorList": [Function],
+          "getSelectorsFromObject": [Function],
+          "getVariablesFromObject": [Function],
+        },
+      }
+    }
+    query={[Function]}
+    render={[Function]}
+    variables={Object {}}
+  />
 </Panel>
 `;

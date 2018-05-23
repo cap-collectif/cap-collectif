@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
 {
@@ -25,6 +26,7 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
         $this->samlAuth = $samlAuth;
         $this->router = $router;
         $this->toggleManager = $toggleManager;
+        $this->session = $session;
         $this->client = $client;
         $this->translator = $translator;
     }

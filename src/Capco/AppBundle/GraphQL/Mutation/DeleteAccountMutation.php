@@ -87,7 +87,6 @@ class DeleteAccountMutation implements ContainerAwareInterface
         $user->setTwitterAccessToken(null);
 
         $user->setGoogleId(null);
-        $user->setGoogleUrl(null);
         $user->setGplusData(null);
         $user->setGplusName(null);
         $user->setGoogleAccessToken(null);

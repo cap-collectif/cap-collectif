@@ -13,6 +13,12 @@ import { confirmPassword, showDeleteAccountModal } from '../../../redux/modules/
 import type { State, Dispatch } from '../../../types';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 
+type Props = {
+  dispatch: Dispatch,
+  invalid: boolean,
+  submitting: boolean,
+};
+
 const query = graphql`
   query AccountBoxQuery {
     viewer {
@@ -20,12 +26,6 @@ const query = graphql`
     }
   }
 `;
-
-type Props = {
-  dispatch: Dispatch,
-  invalid: boolean,
-  submitting: boolean,
-};
 
 export class AccountBox extends Component<Props, State> {
   render() {
@@ -53,7 +53,7 @@ export class AccountBox extends Component<Props, State> {
             onClick={() => dispatch(confirmPassword())}
             disabled={invalid || submitting}
             bsStyle="primary"
-            className="col-sm-offset-3">
+            className="col-sm-offset-5">
             {submitting ? (
               <FormattedMessage id="global.loading" />
             ) : (
@@ -66,11 +66,10 @@ export class AccountBox extends Component<Props, State> {
             onClick={() => {
               dispatch(showDeleteAccountModal());
             }}
-            className="col-sm-offset-4">
+            style={{ marginLeft: 15 }}>
             <FormattedMessage id="delete-account" />
           </Button>
         </div>
-        <DeleteAccountModal show />
         <QueryRenderer
           variables={{}}
           environment={environment}
