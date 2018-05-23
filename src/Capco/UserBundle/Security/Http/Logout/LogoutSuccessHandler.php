@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
 {
@@ -33,21 +32,10 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
     public function onLogoutSuccess(Request $request)
     {
         /* @var Session $session */
-        $session = $request->getSession();
         $deleteType = $request->get('deleteType');
-        $returnTo = $request->headers->get('referer', '/');
+        $returnTo = 'SOFT' === $deleteType || 'HARD' === $deleteType ? $this->router->generate('app_homepage', ['deleteType' => $deleteType]) : $request->headers->get('referer', '/');
 
-        if ($deleteType) {
-            $flashBag = $session->getFlashBag();
-            if ('SOFT' === $deleteType) {
-                $flashBag->add('success', $this->translator->trans('account-and-contents-anonymized'));
-            } elseif ('HARD' === $deleteType) {
-                $flashBag->add('success', $this->translator->trans('account-and-contents-deleted'));
-            }
-            $this->tokenStorage->setToken(null);
-        } else {
-            $request->getSession()->invalidate();
-        }
+        $request->getSession()->invalidate();
 
         if ($this->toggleManager->isActive('login_saml')) {
             $this->samlAuth->logout($returnTo);

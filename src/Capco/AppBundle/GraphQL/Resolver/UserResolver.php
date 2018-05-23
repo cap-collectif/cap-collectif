@@ -2,12 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
-use Capco\AppBundle\Entity\AbstractVote;
-use Capco\AppBundle\Entity\CommentVote;
-use Capco\AppBundle\Entity\EventComment;
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\ProposalComment;
-use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\UserBundle\Entity\User;
 use FOS\UserBundle\Model\UserInterface;
@@ -164,38 +158,8 @@ class UserResolver implements ContainerAwareInterface
 
     public function contributionsToDeleteCount($object): int
     {
-        $now = (new \DateTime())->format('Y-m-d H:i:s');
-        $count = 0;
-
-        foreach ($object->getContributions() as $contribution) {
-            if ($contribution instanceof AbstractVote) {
-                if (!$contribution instanceof CommentVote) {
-                    if (method_exists($contribution->getRelatedEntity(), 'getStep') && $this->checkIfStepActive($contribution->getRelatedEntity()->getStep())) {
-                        ++$count;
-                    }
-                } else {
-                    if ($contribution->getComment() instanceof ProposalComment) {
-                        if (method_exists($contribution->getComment()->getRelatedObject()->getProposalForm(), 'getStep') && $this->checkIfStepActive($contribution->getComment()->getRelatedObject()->getProposalForm()->getStep())) {
-                            ++$count;
-                        }
-                    } elseif ($contribution->getComment() instanceof EventComment) {
-                        if ($contribution->getComment()->getEvent()->getEndAt() > $now) {
-                            ++$count;
-                        }
-                    }
-                }
-            }
-
-            if ($contribution instanceof Proposal && $this->checkIfStepActive($contribution->getStep())) {
-                ++$count;
-            }
-
-            if ($contribution instanceof Source || $contribution instanceof \Capco\AppBundle\Entity\Argument) {
-                if (method_exists($contribution->getOpinion(), 'getStep') && $this->checkIfStepActive($contribution->getOpinion()->getStep())) {
-                    ++$count;
-                }
-            }
-        }
+        $deleteAction = $this->container->get('capco.mutation.delete_account');
+        $count = $deleteAction->deleteIfStepActive($object, $object->getContributions(), true);
 
         return $count;
     }

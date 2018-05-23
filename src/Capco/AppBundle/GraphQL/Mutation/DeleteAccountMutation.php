@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\CommentVote;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventComment;
 use Capco\AppBundle\Entity\NewsletterSubscription;
+use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Entity\Reporting;
@@ -21,7 +22,6 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Router;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class DeleteAccountMutation implements ContainerAwareInterface
@@ -30,30 +30,22 @@ class DeleteAccountMutation implements ContainerAwareInterface
 
     private $em;
     private $translator;
-    private $router;
 
-    public function __construct(EntityManagerInterface $em, TranslatorInterface $translator, Router $router)
+    public function __construct(EntityManagerInterface $em, TranslatorInterface $translator)
     {
         $this->em = $em;
         $this->translator = $translator;
-        $this->router = $router;
     }
 
     public function __invoke(Request $request, Argument $input, User $user): array
     {
         $deleteType = $input['type'];
         $contributions = $user->getContributions();
+        $this->deleteIfStepActive($user, $contributions);
+        $this->anonymizeUser($user);
 
         if ('HARD' === $deleteType && $user) {
             $this->hardDelete($user, $contributions);
-            $this->anonymizeUser($user);
-        } elseif ('SOFT' === $deleteType && $user) {
-            $this->deleteIfStepActive($user, $contributions);
-            $this->anonymizeUser($user);
-        } elseif (!$user) {
-            throw new \RuntimeException('User not find');
-        } else {
-            throw new \RuntimeException("This type of removing user account doesn't exist");
         }
 
         return [
@@ -126,26 +118,27 @@ class DeleteAccountMutation implements ContainerAwareInterface
         $this->em->flush();
     }
 
-    public function deleteIfStepActive(User $user, array $contributions): void
+    public function deleteIfStepActive(User $user, array $contributions, bool $dryRun = false)
     {
         $deletedBodyText = $this->translator->trans('deleted-content-by-author', [], 'CapcoAppBundle');
-
+        $toDeleteList = [];
         $now = (new \DateTime())->format('Y-m-d H:i:s');
+        $count = 0;
 
         foreach ($contributions as $contribution) {
             if ($contribution instanceof AbstractVote) {
                 if (!$contribution instanceof CommentVote) {
                     if (method_exists($contribution->getRelatedEntity(), 'getStep') && $this->checkIfStepActive($contribution->getRelatedEntity()->getStep())) {
-                        $this->em->remove($contribution);
+                        $toDeleteList[] = $contribution;
                     }
                 } else {
                     if ($contribution->getComment() instanceof ProposalComment) {
                         if (method_exists($contribution->getComment()->getRelatedObject()->getProposalForm(), 'getStep') && $this->checkIfStepActive($contribution->getComment()->getRelatedObject()->getProposalForm()->getStep())) {
-                            $this->em->remove($contribution);
+                            $toDeleteList[] = $contribution;
                         }
                     } elseif ($contribution->getComment() instanceof EventComment) {
                         if ($contribution->getComment()->getEvent()->getEndAt() > $now) {
-                            $this->em->remove($contribution);
+                            $toDeleteList[] = $contribution;
                         }
                     }
                 }
@@ -154,33 +147,55 @@ class DeleteAccountMutation implements ContainerAwareInterface
             if ($contribution instanceof Comment) {
                 if ($contribution instanceof ProposalComment) {
                     if (method_exists($contribution->getRelatedObject()->getProposalForm(), 'getStep') && $this->checkIfStepActive($contribution->getRelatedObject()->getProposalForm()->getStep())) {
-                        $contribution->setBody($deletedBodyText);
+                        $hasChild = $this->em->getRepository('CapcoAppBundle:ProposalComment')->findOneBy(['parent' => $contribution->getId()]);
+                        if ($hasChild) {
+                            $contribution->setBody($deletedBodyText);
+                        } else {
+                            $toDeleteList[] = $contribution;
+                        }
                     }
                 } elseif ($contribution instanceof EventComment) {
                     if ($contribution->getEvent()->getEndAt() > $now) {
-                        $contribution->setBody($deletedBodyText);
+                        $hasChild = $this->em->getRepository('CapcoAppBundle:EventComment')->findOneBy(['parent' => $contribution->getId()]);
+                        if ($hasChild) {
+                            $contribution->setBody($deletedBodyText);
+                        } else {
+                            $toDeleteList[] = $contribution;
+                        }
                     }
                 }
             }
 
-            if ($contribution instanceof Proposal && $this->checkIfStepActive($contribution->getStep())) {
-                $this->em->remove($contribution);
+            if (($contribution instanceof Proposal || $contribution instanceof Opinion) && $this->checkIfStepActive($contribution->getStep())) {
+                ++$count;
+                if (!$dryRun) {
+                    $this->em->remove($contribution);
+                    //$this->container->get('capco.mutation.proposal')->delete($contribution->getId());
+                }
             }
 
             if ($contribution instanceof Source || $contribution instanceof \Capco\AppBundle\Entity\Argument) {
                 if (method_exists($contribution->getOpinion(), 'getStep') && $this->checkIfStepActive($contribution->getOpinion()->getStep())) {
-                    $this->em->remove($contribution);
+                    $toDeleteList[] = $contribution;
                 }
             }
 
-            if (method_exists($contribution, 'getMedia') && $contribution->getMedia()) {
-                $media = $this->em->getRepository('CapcoMediaBundle:Media')->find($contribution->getMedia()->getId());
-                $this->removeMedia($media);
-                $contribution->setMedia(null);
+            if (!$dryRun) {
+                foreach ($toDeleteList as $toDelete) {
+                    $this->em->remove($toDelete);
+                }
+
+                if (method_exists($contribution, 'getMedia') && $contribution->getMedia()) {
+                    $media = $this->em->getRepository('CapcoMediaBundle:Media')->find($contribution->getMedia()->getId());
+                    $this->removeMedia($media);
+                    $contribution->setMedia(null);
+                }
             }
         }
 
         $this->container->get('redis_storage.helper')->recomputeUserCounters($user);
+
+        return $count + \count($toDeleteList);
     }
 
     public function hardDelete(User $user, array $contributions): void
@@ -190,8 +205,6 @@ class DeleteAccountMutation implements ContainerAwareInterface
 
         $reports = $this->em->getRepository(Reporting::class)->findBy(['Reporter' => $user]);
         $events = $this->em->getRepository(Event::class)->findBy(['Author' => $user]);
-
-        $this->deleteIfStepActive($user, $contributions);
 
         foreach ($contributions as $contribution) {
             if (method_exists($contribution, 'setTitle')) {

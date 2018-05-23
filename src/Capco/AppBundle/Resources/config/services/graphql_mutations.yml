@@ -156,7 +156,5 @@ services:
     arguments:
         - "@doctrine.orm.entity_manager"
         - "@translator"
-        - "@router"
-        - "redis_storage.helper"
     tags:
       - { name: overblog_graphql.mutation }

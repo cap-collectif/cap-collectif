@@ -190,3 +190,5 @@ User:
             neighborhood:
                 type: "String"
                 description: "Your localisation"
+            deletedAccountAt:
+                type: "DateTime"

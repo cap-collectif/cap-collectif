@@ -26,8 +26,17 @@ class HomepageController extends Controller
 
         $flashBag = $this->get('session')->getFlashBag();
         $translator = $this->get('translator');
+        $deleteType = $request->get('deleteType');
 
         $form = null;
+
+        if ($deleteType) {
+            if ('SOFT' === $deleteType) {
+                $flashBag->add('success', $translator->trans('account-and-contents-anonymized'));
+            } elseif ('HARD' === $deleteType) {
+                $flashBag->add('success', $translator->trans('account-and-contents-deleted'));
+            }
+        }
 
         // Subscription to newsletter
         if ($newsletterActive) {
