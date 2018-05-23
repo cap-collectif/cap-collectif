@@ -80,10 +80,10 @@ const validate = (values: FormValues, props: Props) => {
     if (question.required) {
       if (question.type === 'medias') {
         if (!response || (Array.isArray(response.value) && response.value.length === 0)) {
-          responsesError[index] = { value: 'proposal.constraints.field_mandatory' };
+          responsesError[index] = { value: 'reply.constraints.field_mandatory' };
         }
       } else if (!response || !response.value) {
-        responsesError[index] = { value: 'proposal.constraints.field_mandatory' };
+        responsesError[index] = { value: 'reply.constraints.field_mandatory' };
       }
     }
 
@@ -152,7 +152,9 @@ export class ReplyForm extends React.Component<Props> {
       !questionnaire.contribuable ||
       !user ||
       (questionnaire.phoneConfirmationRequired && !user.isPhoneConfirmed) ||
-      (questionnaire.viewerReplies.length > 0 && !questionnaire.multipleRepliesAllowed)
+      (questionnaire.viewerReplies &&
+        questionnaire.viewerReplies.length > 0 &&
+        !questionnaire.multipleRepliesAllowed)
     );
   }
 
@@ -194,6 +196,7 @@ export class ReplyForm extends React.Component<Props> {
               <Field
                 type="checkbox"
                 name="private"
+                id="reply-private"
                 component={renderComponent}
                 children={<FormattedMessage id="reply.form.private" />}
                 disabled={disabled}
@@ -202,7 +205,7 @@ export class ReplyForm extends React.Component<Props> {
           )}
           <Button
             type="submit"
-            id="proposal_admin_content_save"
+            id="submit-create-reply"
             bsStyle="primary"
             disabled={pristine || invalid || submitting || disabled}>
             <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
@@ -241,13 +244,14 @@ const container = connect(mapStateToProps)(injectIntl(form));
 
 export default createFragmentContainer(container, {
   questionnaire: graphql`
-    fragment ReplyForm_questionnaire on Questionnaire {
+    fragment ReplyForm_questionnaire on Questionnaire
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
       anonymousAllowed
       description
       multipleRepliesAllowed
       phoneConfirmationRequired
       contribuable
-      viewerReplies {
+      viewerReplies @include(if: $isAuthenticated) {
         id
       }
       title

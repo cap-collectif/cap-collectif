@@ -118,7 +118,7 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
       bsClass="btn"
       bsStyle="primary"
       disabled={true}
-      id="proposal_admin_content_save"
+      id="submit-create-reply"
       type="submit"
     >
       <FormattedMessage
@@ -226,7 +226,7 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
       bsClass="btn"
       bsStyle="primary"
       disabled={true}
-      id="proposal_admin_content_save"
+      id="submit-create-reply"
       type="submit"
     >
       <FormattedMessage
@@ -383,7 +383,7 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
       bsClass="btn"
       bsStyle="primary"
       disabled={true}
-      id="proposal_admin_content_save"
+      id="submit-create-reply"
       type="submit"
     >
       <FormattedMessage
@@ -505,7 +505,7 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
       bsClass="btn"
       bsStyle="primary"
       disabled={true}
-      id="proposal_admin_content_save"
+      id="submit-create-reply"
       type="submit"
     >
       <FormattedMessage
@@ -591,7 +591,7 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
       bsClass="btn"
       bsStyle="primary"
       disabled={true}
-      id="proposal_admin_content_save"
+      id="submit-create-reply"
       type="submit"
     >
       <FormattedMessage

@@ -115,7 +115,7 @@ export default createFragmentContainer(container, {
         id
       }
       id
-      ...ReplyForm_questionnaire
+      ...ReplyForm_questionnaire @arguments(isAuthenticated: $isAuthenticated)
     }
   `,
 });
