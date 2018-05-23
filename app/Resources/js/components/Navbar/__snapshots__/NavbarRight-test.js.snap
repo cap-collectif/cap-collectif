@@ -31,7 +31,7 @@ exports[`<NavbarRight /> should render correctly 1`] = `
       divider={false}
       eventKey={3.4}
       header={false}
-      href="/profile/edit-profile#account"
+      href="/profile/edit-account"
     >
       <FormattedMessage
         id="navbar.user_settings"

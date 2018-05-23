@@ -31,7 +31,6 @@ class EventController extends Controller
      */
     public function indexAction(Request $request, $theme = null, $project = null, $term = null)
     {
-        $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_event');
 
         $form = $this->createForm(new EventSearchType($this->get('capco.toggle.manager')), null, [
@@ -53,8 +52,8 @@ class EventController extends Controller
             }
         } else {
             $form->setData([
-                'theme' => $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme),
-                'project' => $em->getRepository('CapcoAppBundle:Project')->findOneBySlug($project),
+                'theme' => $this->get('capco.theme.repository')->findOneBySlug($theme),
+                'project' => $this->get('capco.project.repository')->findOneBySlug($project),
                 'term' => $term,
             ]);
         }
@@ -82,7 +81,6 @@ class EventController extends Controller
      */
     public function showArchivedAction(Request $request, $theme = null, $project = null, $term = null)
     {
-        $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_event_archived');
 
         $form = $this->createForm(new EventSearchType($this->get('capco.toggle.manager')), null, [
@@ -104,8 +102,8 @@ class EventController extends Controller
             }
         } else {
             $form->setData([
-                'theme' => $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme),
-                'project' => $em->getRepository('CapcoAppBundle:Project')->findOneBySlug($project),
+                'theme' => $this->get('capco.theme.repository')->findOneBySlug($theme),
+                'project' => $this->get('capco.project.repository')->findOneBySlug($project),
                 'term' => $term,
             ]);
         }
@@ -175,11 +173,8 @@ class EventController extends Controller
     /**
      * @Cache(expires="+1 minutes", maxage="60", smaxage="60", public="true")
      * @Template("CapcoAppBundle:Event:lastEvents.html.twig")
-     *
-     * @param mixed $max
-     * @param mixed $offset
      */
-    public function lastEventsAction($max = 3, $offset = 0)
+    public function lastEventsAction(int $max = 3, int $offset = 0)
     {
         $events = $this->get('capco.event.repository')->getLast($max, $offset);
 

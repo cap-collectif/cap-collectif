@@ -36,7 +36,7 @@ class ProjectRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('a', 'm', 't')
             ->leftJoin('p.Author', 'a')
-            ->leftJoin('a.media', 'm')
+            ->leftJoin('a.Media', 'm')
             ->leftJoin('p.projectType', 't')
             ->andWhere('p.Author = :user')
             ->setParameter('user', $user)

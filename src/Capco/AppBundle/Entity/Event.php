@@ -47,7 +47,7 @@ class Event implements CommentableInterface, IndexableInterface
     private $createdAt;
 
     /**
-     * @Gedmo\Timestampable(on="change", field={"title", "body", "startAt", "endAt", "zipCode", "address", "nbAddress", "link", "media", "Theme"})
+     * @Gedmo\Timestampable(on="change", field={"title", "body", "startAt", "endAt", "zipCode", "address", "nbAddress", "link", "Media", "Theme"})
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
@@ -108,7 +108,7 @@ class Event implements CommentableInterface, IndexableInterface
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @Assert\Valid()
      */
-    private $media;
+    private $Media;
 
     /**
      * @ORM\ManyToMany(targetEntity="Capco\AppBundle\Entity\Theme", inversedBy="events", cascade={"persist"})
@@ -183,14 +183,14 @@ class Event implements CommentableInterface, IndexableInterface
 
     public function setMedia($media)
     {
-        $this->media = $media;
+        $this->Media = $media;
 
         return $this;
     }
 
     public function getMedia()
     {
-        return $this->media;
+        return $this->Media;
     }
 
     public function getThemes(): iterable
@@ -308,31 +308,30 @@ class Event implements CommentableInterface, IndexableInterface
     /**
      * @param mixed $lat
      */
-    public function setLat($lat)
+    public function setLat($lat): self
     {
-        if (is_string($lat)) {
+        if (\is_string($lat)) {
             $lat = (float) $lat;
         }
+
         $this->lat = $lat;
+
+        return $this;
     }
 
-    /**
-     * @return float
-     */
-    public function getLng()
+    public function getLng(): float
     {
         return $this->lng;
     }
 
-    /**
-     * @param float $lng
-     */
-    public function setLng($lng)
+    public function setLng($lng): self
     {
-        if (is_string($lng)) {
+        if (\is_string($lng)) {
             $lng = (float) $lng;
         }
         $this->lng = $lng;
+
+        return $this;
     }
 
     /**

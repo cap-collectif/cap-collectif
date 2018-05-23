@@ -60,7 +60,7 @@ Capco\AppBundle\Entity\Event:
     Author: '@user<numberBetween(1, 5)>'
     address: 457 Rue de Picardie
     city: Bordeaux
-    media: '@MediaProject3'
+    Media: '@MediaProject3'
     registrationEnable: true
     projects: ['@p1']
   event4:
@@ -80,7 +80,7 @@ Capco\AppBundle\Entity\Event:
     endAt: <dateTimeBetween('+12 days', '+30 days')>
     Author: '@user<numberBetween(1, 5)>'
     link: http://www.symfonyLive2015.fr
-    media: '@MediaIdea1'
+    Media: '@MediaIdea1'
   event5:
     id: event5
     title: ParisWeb2014

@@ -1,17 +1,16 @@
 // @flow
-import React, { Component } from 'react';
+import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { reduxForm, Field } from 'redux-form';
 import { submitConfirmPasswordForm as onSubmit } from '../../redux/modules/user';
 import renderComponent from '../Form/Field';
 
 export const form = 'password';
+export const ConfirmPasswordForm = React.createClass({
+  propTypes: {
+    handleSubmit: PropTypes.func.isRequired,
+  },
 
-type Props = {
-  handleSubmit: () => void,
-};
-
-export class ConfirmPasswordForm extends Component<Props> {
   render() {
     const { handleSubmit } = this.props;
     return (
@@ -25,7 +24,7 @@ export class ConfirmPasswordForm extends Component<Props> {
         />
       </form>
     );
-  }
-}
+  },
+});
 
 export default reduxForm({ form, onSubmit })(ConfirmPasswordForm);

@@ -1,20 +1,20 @@
 // @flow
-import React, { Component } from 'react';
+import React, { PropTypes } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { submit } from 'redux-form';
-import type { Dispatch, State } from '../../types';
+import type { State } from '../../types';
 import CloseButton from '../Form/CloseButton';
 import ConfirmPasswordForm from './ConfirmPasswordForm';
 import { closeConfirmPasswordModal } from '../../redux/modules/user';
 
-type Props = {
-  show: boolean,
-  dispatch: Dispatch,
-};
+export const ConfirmPasswordModal = React.createClass({
+  propTypes: {
+    show: PropTypes.bool.isRequired,
+    dispatch: PropTypes.func.isRequired,
+  },
 
-export class ConfirmPasswordModal extends Component<Props> {
   render() {
     const { show, dispatch } = this.props;
     return (
@@ -47,8 +47,8 @@ export class ConfirmPasswordModal extends Component<Props> {
         </Modal.Footer>
       </Modal>
     );
-  }
-}
+  },
+});
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   show: state.user.showConfirmPasswordModal,

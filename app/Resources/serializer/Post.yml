@@ -5,7 +5,7 @@ Capco\AppBundle\Entity\Post:
             expose: true
             type: integer
             groups: [Posts, PostDetails, Elasticsearch]
-        media:
+        Media:
             expose: true
             groups: [Posts, PostDetails]
             serialized_name: media

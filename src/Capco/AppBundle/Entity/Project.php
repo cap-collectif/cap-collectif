@@ -111,7 +111,7 @@ class Project implements IndexableInterface
 
     /**
      * @var \DateTime
-     * @Gedmo\Timestampable(on="change", field={"title", "Author", "themes", "steps", "media"})
+     * @Gedmo\Timestampable(on="change", field={"title", "Author", "themes", "steps", "Media"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;

@@ -3,7 +3,7 @@
 {% block canonical_link %}{{ url('app_theme_show', {'slug': theme.slug}) }}{% endblock %}
 
 {% block metaTags %}
-    {% set themeMedia %}{% if theme.media %}{% path theme.media, 'idea' %}{% endif %}{% endset %}
+    {% set themeMedia %}{% if theme.Media %}{% path theme.Media, 'idea' %}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':       theme.title,
         'description': theme.metaDescription|striptags ?: theme.body|striptags|truncate(250, true),

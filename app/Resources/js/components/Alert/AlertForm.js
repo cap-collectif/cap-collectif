@@ -24,19 +24,15 @@ export class AlertForm extends React.Component<Props> {
       );
     }
 
-    if (invalid) {
-      return (
-        <div className="d-ib">
+    return (
+      <div className="d-ib">
+        {valid && submitSucceeded && !submitting && <AlertFormSucceededMessage />}
+        {invalid && (
           <div className="alert__form_invalid-field">
             <i className="cap cap-ios-close-outline" />{' '}
             <FormattedMessage id="global.invalid.form" />
           </div>
-        </div>
-      );
-    }
-    return (
-      <div className="d-ib">
-        {valid && submitSucceeded && !submitting && <AlertFormSucceededMessage />}
+        )}
         {submitFailed && (
           <div className="alert__form_server-failed-message">
             <i className="cap cap-ios-close-outline" />{' '}

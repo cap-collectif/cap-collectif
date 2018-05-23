@@ -23,11 +23,7 @@
 
 @font-face {
     font-family: "cap-collectif";
-    src:url("../fonts/cap-collectif.eot");
-    src:url("../fonts/cap-collectif.eot?#iefix") format("embedded-opentype"),
-    url("../fonts/cap-collectif.woff") format("woff"),
-    url("../fonts/cap-collectif.ttf") format("truetype"),
-    url("../fonts/cap-collectif.svg#cap-collectif") format("svg");
+    src: url("../fonts/cap-collectif.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }
@@ -55,11 +51,11 @@
 [class*=" cap-"]:before {
     font-family: "cap-collectif" !important;
     font-style: normal !important;
-    font-weight: normal !important;
     font-variant: normal !important;
+    font-weight: normal !important;
+    line-height: 1;
     text-transform: none !important;
     speak: none;
-    line-height: 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -559,33 +555,20 @@
 .cap-delete-2:before {
     content: "\2d";
 }
-.cap-map-target-1:before {
-    content: "\e049";
-}
 .cap-download-1:before {
     content: "\6a";
 }
-.cap-android-settings:before {
-    content: "\6b";
-}
-.cap-id-1:before {
+.cap-android-checkmark-circle:before {
     content: "\6c";
 }
-.cap-android-menu:before {
+.cap-ios-close-outline:before {
     content: "\e04a";
 }
-.cap-ios-close-outline:before {
-    content: "\e04c";
-}
-.cap-android-checkmark-circle:before {
-    content: "\e04b";
-}
 .cap-youtube:before {
-    content: "\e04e";
+    content: "\6b";
 }
-.cap-ios-close:before {
-    content: "\e04d";
-}
-.cap-id-8:before {
-    content: "\e04f";
+.cap-map-target-1:before {
+    content: "\e049";
+    font-size: 16px;
+    line-height: 32px;
 }

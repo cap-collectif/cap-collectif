@@ -143,6 +143,7 @@ services:
         class: Capco\AppBundle\GraphQL\Resolver\UserResolver
         tags:
           - { name: overblog_graphql.resolver, alias: "user", method: "resolve" }
+          - { name: overblog_graphql.resolver, alias: "current_user", method: "resolveCurrentUser" }
           - { name: overblog_graphql.resolver, alias: "user_email", method: "resolveEmail" }
           - { name: overblog_graphql.resolver, alias: "user_show_url", method: "resolveShowUrl" }
           - { name: overblog_graphql.resolver, alias: "user_updatedAt", method: "resolveUpdatedAt" }
@@ -322,19 +323,15 @@ services:
           - { name: overblog_graphql.resolver }
 
     Capco\AppBundle\GraphQL\Resolver\ParticipantConnectionEdgeRegistredAtResolver:
-        class: Capco\AppBundle\GraphQL\Resolver\ParticipantConnectionEdgeRegistredAtResolver
+        class: Capco\AppBundle\GraphQL\Resolver\ParticipantConnectionEdgeRegisteredAtResolver
         arguments:
             - "@capco.event_registration.repository"
         tags:
             - { name: overblog_graphql.resolver }
 
-    Capco\AppBundle\GraphQL\Resolver\ParticipantConnectionEdgeRegistredAnonymouslyResolver:
-        class: Capco\AppBundle\GraphQL\Resolver\ParticipantConnectionEdgeRegistredAnonymouslyResolver
+    Capco\AppBundle\GraphQL\Resolver\ParticipantConnectionEdgeRegisteredAnonymouslyResolver:
+        class: Capco\AppBundle\GraphQL\Resolver\ParticipantConnectionEdgeRegisteredAnonymouslyResolver
         arguments:
             - "@capco.event_registration.repository"
         tags:
             - { name: overblog_graphql.resolver }
-
-    Capco\AppBundle\GraphQL\Resolver\UserIsGrantedResolver:
-        class: Capco\AppBundle\GraphQL\Resolver\UserIsGrantedResolver
-        arguments: ["@security.token_storage", "@logger"]

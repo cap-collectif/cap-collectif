@@ -22,9 +22,142 @@
 {% block fos_user_content %}
     <div class="container  container--custom">
         <div class="row">
-            <div class="col-xs-12 col-sm-8 col-md-12">
-                {{ react_render_component('EditProfileApp') }}
-            </div>
+
+            {% include '@CapcoUser/Profile/action.html.twig' %}
+
+            <div class="col-xs-12 col-sm-8 col-md-9">
+                <div class="block--bordered  block--first-mobile">
+                    <div class="box">
+                        <h4 class="h4">{{ "user.profile.title" | trans({}, 'CapcoAppBundle')}}</h4>
+                    </div>
+                    <hr class="hr--no-margin"/>
+                    <form action="{{ path('capco_profile_edit') }}" method="POST" enctype="multipart/form-data" class="form-horizontal settings__form" role="form">
+                        <div class="box">
+                            {{ form_errors(form) }}
+                            <div class="form-group">
+                                {{ form_errors(form.profilePageIndexed) }}
+                                <div class="col-sm-12">{{ form_widget(form.profilePageIndexed) }}</div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_errors(form.username) }}
+                                {{ form_label(form.username, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                                <div class="col-sm-9">{{ form_widget(form.username) }}</div>
+                            </div>
+
+                            {% if is_feature_enabled("user_type") %}
+                                <div class="form-group">
+                                    {{ form_errors(form.userType) }}
+                                    {{ form_label(form.userType, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                                    <div class="col-sm-9">{{ form_widget(form.userType) }}</div>
+                                </div>
+                            {% endif %}
+
+                            <div class="form-group">
+                                {{ form_errors(form.website) }}
+                                {{ form_label(form.website, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                                <div class="col-sm-9">{{ form_widget(form.website, {'default_protocol': 'http'}) }}</div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_errors(form.gender) }}
+                                {{ form_label(form.gender, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                                <div class="col-sm-9">{{ form_widget(form.gender) }}</div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_errors(form.dateOfBirth) }}
+                                {{ form_label(form.dateOfBirth, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                                <div class="col-sm-9">{{ form_widget(form.dateOfBirth) }}</div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_errors(form.address) }}
+                                {{ form_label(form.address, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                                <div class="col-sm-9">{{ form_widget(form.address) }}</div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_errors(form.address2) }}
+                                {{ form_label(form.address2, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                                <div class="col-sm-9">{{ form_widget(form.address2) }}</div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_errors(form.zipCode) }}
+                                {{ form_label(form.zipCode, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                                <div class="col-sm-9">{{ form_widget(form.zipCode) }}</div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_errors(form.city) }}
+                                {{ form_label(form.city, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                                <div class="col-sm-9">{{ form_widget(form.city) }}</div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_errors(form.neighborhood) }}
+                                {{ form_label(form.neighborhood, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                                <div class="col-sm-9">{{ form_widget(form.neighborhood) }}</div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_errors(form.biography) }}
+                                {{ form_label(form.biography, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                                <div class="col-sm-9">{{ form_widget(form.biography, {'attr':  {'rows': '4', 'cols': '30', 'style':'height:350px'} }) }}</div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_errors(form.locale) }}
+                                {{ form_label(form.locale, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                                <div class="col-sm-9">{{ form_widget(form.locale) }}</div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_errors(form.timezone) }}
+                                {{ form_label(form.timezone, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                                <div class="col-sm-9">{{ form_widget(form.timezone) }}</div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_errors(form.twitterUrl) }}
+                                {{ form_label(form.twitterUrl, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                                <div class="col-sm-9">{{ form_widget(form.twitterUrl, {'attr':  {'placeholder': 'https://'} }) }}</div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_errors(form.googleUrl) }}
+                                {{ form_label(form.googleUrl, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                                <div class="col-sm-9">{{ form_widget(form.googleUrl, {'attr':  {'placeholder': 'https://'} }) }}</div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_errors(form.facebookUrl) }}
+                                {{ form_label(form.facebookUrl, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                                <div class="col-sm-9">{{ form_widget(form.facebookUrl, {'attr':  {'placeholder': 'https://'} }) }}</div>
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_errors(form.media) }}
+                                {{ form_label(form.media, null, {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+                                <div class="col-sm-9">{{ form_widget(form.media) }}</div>
+                            </div>
+
+                            {{ form_widget(form._token) }}
+                        </div>
+
+                        <hr class="hr--no-margin"/>
+
+                        <div class="box">
+                            <div class="row form-actions">
+                                <div class="col-sm-offset-6 col-sm-6">
+                                    <button type="submit" name="submit"  class="btn btn-primary pull-right">{{ 'user.profile.edit.submit' | trans({}, 'CapcoAppBundle') }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div> <!-- col-xs-12 col-sm-8 col-md-9 -->
         </div> <!-- row -->
     </div> <!-- container -->
 {% endblock fos_user_content %}

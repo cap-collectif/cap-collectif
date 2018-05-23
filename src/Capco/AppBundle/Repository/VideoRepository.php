@@ -19,7 +19,7 @@ class VideoRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('a, m')
             ->leftJoin('v.Author', 'a')
-            ->leftJoin('v.media', 'm')
+            ->leftJoin('v.Media', 'm')
             ->orderBy('v.position', 'ASC')
         ;
 
@@ -39,7 +39,7 @@ class VideoRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('a, m')
             ->leftJoin('v.Author', 'a')
-            ->leftJoin('v.media', 'm')
+            ->leftJoin('v.Media', 'm')
             ->orderBy('v.position', 'ASC')
         ;
 

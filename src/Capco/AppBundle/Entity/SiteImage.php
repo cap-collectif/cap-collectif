@@ -35,7 +35,7 @@ class SiteImage
      * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
      * @ORM\JoinColumn(name="Media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    private $media;
+    private $Media;
 
     /**
      * @var \DateTime
@@ -46,7 +46,7 @@ class SiteImage
 
     /**
      * @var \DateTime
-     * @Gedmo\Timestampable(on="change", field={"media"})
+     * @Gedmo\Timestampable(on="change", field={"Media"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
@@ -115,7 +115,7 @@ class SiteImage
      */
     public function getMedia()
     {
-        return $this->media;
+        return $this->Media;
     }
 
     /**
@@ -125,7 +125,7 @@ class SiteImage
      */
     public function setMedia($media)
     {
-        $this->media = $media;
+        $this->Media = $media;
     }
 
     /**

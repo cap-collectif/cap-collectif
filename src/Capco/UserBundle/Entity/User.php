@@ -23,7 +23,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 {
     const SORT_ORDER_CREATED_AT = 0;
     const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;
-    const GENDER_OTHER = 'o';
 
     public static $sortOrder = [
         'activity' => self::SORT_ORDER_CONTRIBUTIONS_COUNT,
@@ -40,8 +39,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     protected $samlId;
     protected $parisId;
     protected $id;
-
-    protected $gender = null;
 
     /**
      * @var int
@@ -68,7 +65,10 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
      */
     protected $google_access_token;
 
-    protected $linkedInUrl;
+    /**
+     * @var int
+     */
+    protected $googleUrl;
 
     /**
      * @var string
@@ -88,7 +88,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     /**
      * @var
      */
-    protected $media;
+    protected $Media;
 
     /**
      * @var string
@@ -526,16 +526,20 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         $this->facebookUrl = $facebookUrl;
     }
 
-    public function getLinkedInUrl(): ?string
+    /**
+     * @return int
+     */
+    public function getGoogleUrl()
     {
-        return $this->linkedInUrl;
+        return $this->googleUrl;
     }
 
-    public function setLinkedInUrl(?string $linkedInUrl):self
+    /**
+     * @param int $googleUrl
+     */
+    public function setGoogleUrl($googleUrl)
     {
-        $this->linkedInUrl = $linkedInUrl;
-
-        return $this;
+        $this->googleUrl = $googleUrl;
     }
 
     /**
@@ -563,7 +567,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
      */
     public function setMedia(Media $media = null)
     {
-        $this->media = $media;
+        $this->Media = $media;
 
         return $this;
     }
@@ -575,7 +579,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
      */
     public function getMedia()
     {
-        return $this->media;
+        return $this->Media;
     }
 
     /**
@@ -1161,9 +1165,9 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public static function getGenderList()
     {
         return [
+            UserInterface::GENDER_UNKNOWN => 'gender.unknown',
             UserInterface::GENDER_FEMALE => 'gender.female',
-            UserInterface::GENDER_MALE  => 'gender.male',
-            self::GENDER_OTHER => 'gender.other',
+            UserInterface::GENDER_MALE => 'gender.male',
         ];
     }
 

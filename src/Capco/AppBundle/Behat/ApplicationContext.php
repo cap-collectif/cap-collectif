@@ -406,40 +406,6 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * @When I focus the :selector element
-     */
-    public function iFocusTheElement(string $selector)
-    {
-        $element = $this->getSession()->getPage()->find('css', $selector);
-
-        if (null === $element) {
-            throw new ElementNotFoundException($this->getSession(), 'element', 'css', $selector);
-        }
-
-        $element->focus();
-    }
-
-    /**
-     * @When I fill the element :element with empty value
-     **/
-    public function ifillElementWithEmptyValue(string $element)
-    {
-        $element = $this->getSession()->getPage()->find('css', $element);
-
-        $element->setValue('');
-    }
-
-    /**
-     * @When I fill the element :element with value :value
-     **/
-    public function ifillElementWithValue(string $element, string $value)
-    {
-        $element = $this->getSession()->getPage()->find('css', $element);
-
-        $element->setValue($value);
-    }
-
-    /**
      * Fills in form field with specified id|name|label|value.
      * Overrided to fill wysiwyg fields as well.
      *
@@ -571,29 +537,14 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * @Then /^the button "([^"]*)" should not be disabled$/
-     */
-    public function buttonShouldNotBeDisabled(string $locator)
-    {
-        $locator = $this->fixStepArgument($locator);
-        $button = $this->getSession()->getPage()->findButton($locator);
-
-        if (null === $button) {
-            throw new ElementNotFoundException($this->getSession(), 'button', 'id|name|title|alt|value', $locator);
-        }
-
-        \PHPUnit_Framework_TestCase::assertFalse($button->hasAttribute('disabled'));
-    }
-
-    /**
      * Checks that an element has an attribute.
      *
-     * @Then /^The element "([^"]*)" should have attribute :attribute $/
+     * @Then /^the element "([^"]*)" should have attribute :attribute $/
      *
      * @param mixed $selector
      * @param mixed $attribute
      */
-    public function theElementHasAttribute($selector, $attribute)
+    public function elementHasAttribute($selector, $attribute)
     {
         $element = $this->getSession()->getPage()->find('css', $selector);
 

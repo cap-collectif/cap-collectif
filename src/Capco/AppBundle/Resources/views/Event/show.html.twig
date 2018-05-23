@@ -3,7 +3,7 @@
 {% block canonical_link %}{{ url('app_event_show', {'slug': event.slug}) }}{% endblock %}
 
 {% block metaTags %}
-    {% set eventMedia %}{% if event.media %}{% path event.media, 'idea' %}{% endif %}{% endset %}
+    {% set eventMedia %}{% if event.Media %}{% path event.Media, 'idea' %}{% endif %}{% endset %}
     {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':       event.title,
         'description': event.metaDescription|striptags ?: event.body|striptags|truncate(250, true),
@@ -20,6 +20,7 @@
 
 {% block stylesheets %}
    {{ parent() }}
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.css' rel='stylesheet' />
     <link href="{{ asset('js/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
 {% endblock %}
 
@@ -77,8 +78,8 @@
                         {% endif %}
                     </ul>
 
-                    {% if event.media %}
-                        {% thumbnail event.media, 'idea' with {'class': 'block  img-responsive'} %}
+                    {% if event.Media %}
+                        {% thumbnail event.Media, 'idea' with {'class': 'block  img-responsive'} %}
                     {% endif %}
 
                     <div class="block">
@@ -86,7 +87,10 @@
                     </div>
 
                     {% if event.lat and event.lng %}
-                        <div class="event__map  map-canvas  block" data-lat="{{ event.lat }}" data-lng="{{ event.lng }}"></div>
+                        <div id="event_map" class="event__map block"
+                             data-lat="{{ event.lat }}"
+                             data-lng="{{ event.lng }}"
+                        ></div>
                     {% endif %}
 
                     {% if event.projects | length > 0 %}
@@ -206,10 +210,10 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_key }}"></script>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.js'></script>
     <script type="text/javascript">
         $(window).on('load', function() {
-            App.showMap('.map-canvas');
+            App.showMap('event_map');
             {% if event | capco_event_registration_possible %}
                 App.makeSidebar({
                     sidebar: '#sidebar',

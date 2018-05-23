@@ -69,7 +69,7 @@ export const NavbarRight = React.createClass({
             <MenuItem
               key={3.4}
               eventKey={3.4}
-              href={`/profile/${features.profiles ? 'edit-profile' : 'edit-profile#account'}`}>
+              href={`/profile/${features.profiles ? 'edit-profile' : 'edit-account'}`}>
               {<FormattedMessage id="navbar.user_settings" />}
             </MenuItem>
             <MenuItem key={3.5} divider />

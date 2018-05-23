@@ -173,7 +173,7 @@ class PostAdmin extends Admin
                 'label' => 'admin.fields.blog_post.body',
                 'config_name' => 'admin_editor',
             ])
-            ->add('media', 'sonata_type_model_list', ['required' => false], [
+            ->add('Media', 'sonata_type_model_list', ['required' => false], [
                 'link_parameters' => [
                     'context' => 'default',
                     'hide_context' => true,
@@ -283,7 +283,7 @@ class PostAdmin extends Admin
                 'label' => 'admin.fields.blog_post.body',
                 'config_name' => 'admin_editor',
             ])
-            ->add('media', 'sonata_media_type', [
+            ->add('Media', 'sonata_media_type', [
                 'template' => 'CapcoAdminBundle:Post:media_show_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
                 'label' => 'admin.fields.blog_post.media',

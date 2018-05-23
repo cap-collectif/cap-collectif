@@ -419,7 +419,7 @@ class UserRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('u');
         $qb->addSelect('m')
-            ->leftJoin('u.media', 'm')
+            ->leftJoin('u.Media', 'm')
             ->where('u.id IN (:ids)')
             ->setParameter('ids', $ids);
 
@@ -671,7 +671,7 @@ class UserRepository extends EntityRepository
 
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('m', 'ut')
-            ->leftJoin('u.media', 'm')
+            ->leftJoin('u.Media', 'm')
             ->leftJoin('u.userType', 'ut');
 
         if (null !== $type && UserType::FILTER_ALL !== $type) {

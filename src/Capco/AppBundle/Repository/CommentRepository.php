@@ -71,7 +71,7 @@ class CommentRepository extends EntityRepository
         return $this->getIsEnabledQueryBuilder()
             ->addSelect('aut', 'm', 'v', 'r')
             ->leftJoin('c.Author', 'aut')
-            ->leftJoin('aut.media', 'm')
+            ->leftJoin('aut.Media', 'm')
             ->leftJoin('c.votes', 'v')
             ->leftJoin('c.Reports', 'r')
             ->andWhere('c.id = :comment')
@@ -110,7 +110,7 @@ class CommentRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('a', 'm')
             ->leftJoin('c.Author', 'a')
-            ->leftJoin('a.media', 'm')
+            ->leftJoin('a.Media', 'm')
             ->andWhere('c.Author = :user')
             ->setParameter('user', $user)
             ->orderBy('c.updatedAt', 'ASC');

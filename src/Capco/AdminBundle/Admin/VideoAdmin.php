@@ -132,7 +132,7 @@ class VideoAdmin extends Admin
                 'choices' => Video::$colorButtonPlay,
                 'translation_domain' => 'CapcoAppBundle',
             ])
-            ->add('media', 'sonata_type_model_list', [
+            ->add('Media', 'sonata_type_model_list', [
                 'label' => 'admin.fields.video.media',
                 'required' => false,
                 'help' => 'admin.help.video.media',
@@ -165,7 +165,7 @@ class VideoAdmin extends Admin
             ->add('Author', null, [
                 'label' => 'admin.fields.video.author',
             ])
-            ->add('media', 'sonata_media_type', [
+            ->add('Media', 'sonata_media_type', [
                 'template' => 'CapcoAdminBundle:Event:media_show_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
                 'label' => 'admin.fields.video.media',

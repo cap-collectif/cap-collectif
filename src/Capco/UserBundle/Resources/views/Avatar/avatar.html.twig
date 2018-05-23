@@ -1,7 +1,7 @@
 {% if private is not defined %}
     {% set private = false %}
 {% endif %}
-{%  set avatar = (user is not null and not private) ? user.media|capco_default_avatar : null %}
+{%  set avatar = (user is not null and not private) ? user.Media|capco_default_avatar : null %}
 {% set format = (format is defined) ? format : 'avatar' %}
 {% if format == 'avatar' %}
     {% set width = '45' %}

@@ -42,7 +42,7 @@ export class FollowingsProposals extends Component<Props, State> {
     });
     return (
       <div>
-        <h2 className="page-header">
+        <h2>
           <FormattedMessage id="followings" />
           {Object.keys(projectsById).length > 0 ? (
             <Collapse style={{ float: 'right' }} in={this.state.open}>
@@ -88,11 +88,7 @@ export class FollowingsProposals extends Component<Props, State> {
 export default createFragmentContainer(
   FollowingsProposals,
   graphql`
-    fragment FollowingsProposals_viewer on User
-      @argumentDefinitions(
-        count: { type: "Int", defaultValue: 1000 }
-        cursor: { type: "String", defaultValue: null }
-      ) {
+    fragment FollowingsProposals_viewer on User {
       followingProposals(first: $count, after: $cursor) {
         totalCount
         edges {

@@ -109,7 +109,7 @@ trait AdminProposalTrait
     }
 
     /**
-     * @When I fill the proposal element :element with value :value
+     * @When I fill the element :element with value :value
      **/
     public function iFillTheProposalElementWithValue(string $element, string $value)
     {

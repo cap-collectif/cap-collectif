@@ -6,5 +6,5 @@ use SensioLabs\Behat\PageObjectExtension\PageObject\Page;
 
 class ManageFollowingsPage extends Page
 {
-    protected $path = '/profile/edit-profile#followings';
+    protected $path = '/profile/followings';
 }

@@ -88,7 +88,7 @@ class Theme implements IndexableInterface
     private $createdAt;
 
     /**
-     * @Gedmo\Timestampable(on="change", field={"title", "teaser", "position", "status", "body", "media"})
+     * @Gedmo\Timestampable(on="change", field={"title", "teaser", "position", "status", "body", "Media"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
@@ -125,7 +125,7 @@ class Theme implements IndexableInterface
      * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    private $media;
+    private $Media;
 
     public function __construct()
     {
@@ -450,7 +450,7 @@ class Theme implements IndexableInterface
      */
     public function getMedia()
     {
-        return $this->media;
+        return $this->Media;
     }
 
     /**
@@ -458,7 +458,7 @@ class Theme implements IndexableInterface
      */
     public function setMedia($media)
     {
-        $this->media = $media;
+        $this->Media = $media;
     }
 
     // ********************** custom methods ****************************

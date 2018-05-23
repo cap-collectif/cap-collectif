@@ -37,7 +37,6 @@ import ChooseAUsernameApp from '../js/startup/ChooseAUsernameApp';
 import appStore from '../js/stores/AppStore';
 import AccountProfileFollowingsApp from "../js/startup/AccountProfileFollowingsApp";
 import ParisUserNotValidApp from "../js/startup/ParisUserNotValidApp";
-import EditProfileApp from "../js/startup/EditProfileApp";
 
 moment.locale('fr');
 
@@ -82,5 +81,4 @@ ReactOnRails.register({
   ProposalFormAdminPageApp,
   GroupAdminPageApp,
   ParisUserNotValidApp
-  EditProfileApp,
 });

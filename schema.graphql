@@ -646,13 +646,6 @@ type FollowerEdge {
   cursor: String!
 }
 
-# 3 possible values
-enum GenderValue {
-  MALE
-  FEMALE
-  OTHER
-}
-
 scalar GeoJSON
 
 # A group of User
@@ -765,9 +758,6 @@ type Mutation {
   deleteUserInGroup(input: DeleteUserInGroupInput!): DeleteUserInGroupPayload
   addUsersInGroup(input: AddUsersInGroupInput!): AddUsersInGroupPayload
   updateProfile(input: UpdateProfileInput!): UpdateProfilePayload
-  updateProfilePassword(input: UpdateProfilePasswordInput!): UpdateProfilePasswordPayload
-  updateProfilePersonalData(input: UpdateProfilePersonalDataInput!): UpdateProfilePersonalDataPayload
-  updateProfilePublicData(input: UpdateProfilePublicDataInput!): UpdateProfilePublicDataPayload
 }
 
 # A connection to a list of items.
@@ -1988,101 +1978,8 @@ input UpdateProfileInput {
   clientMutationId: String
 }
 
-input UpdateProfilePasswordInput {
-  # The current password
-  current_password: String!
-
-  # The new password
-  new: String!
-  clientMutationId: String
-}
-
-type UpdateProfilePasswordPayload {
-  # The viewer
-  viewer: User!
-
-  # The error
-  error: String
-  clientMutationId: String
-}
-
 type UpdateProfilePayload {
   # The viewer
-  viewer: User!
-  clientMutationId: String
-}
-
-input UpdateProfilePersonalDataInput {
-  # Your firstname
-  firstname: String
-
-  # Your lastname
-  lastname: String
-
-  # Your gender
-  gender: GenderValue
-
-  # Your phone number
-  phone: String
-
-  # Your address
-  address: String
-
-  # Your complementary address
-  address2: String
-
-  # Your city
-  city: String
-
-  # Your zipcode
-  zipCode: String
-
-  # Your date of birth
-  dateOfBirth: String
-  clientMutationId: String
-}
-
-type UpdateProfilePersonalDataPayload {
-  # The viewer
-  viewer: User!
-  clientMutationId: String
-}
-
-input UpdateProfilePublicDataInput {
-  # Your username
-  username: String!
-
-  # Your user type
-  userType: ID
-
-  # Your biography
-  biography: String
-
-  # Your neighborhood
-  neighborhood: String
-
-  # Your website
-  website: String
-
-  # Your linkedIn
-  linkedInUrl: String
-
-  # Your facebook
-  facebookUrl: String
-
-  # Your twitter
-  twitterUrl: String
-
-  # Do you want to be indexed in web search engine ?
-  profilePageIndexed: Boolean
-
-  # Current media id
-  media: ID
-  clientMutationId: String
-}
-
-type UpdateProfilePublicDataPayload {
-  # current user
   viewer: User!
   clientMutationId: String
 }
@@ -2195,7 +2092,7 @@ type User implements Node {
   phoneConfirmed: Boolean!
   expiresAt: String
   phoneConfirmationSentAt: String
-  gender: GenderValue
+  gender: String
   firstname: String
   lastname: String
   dateOfBirth: String
@@ -2225,6 +2122,8 @@ type User implements Node {
   commentVotesCount: Int!
   sourcesCount: Int!
   repliesCount: Int!
+
+  ideaCommentsCount: Int!
   postCommentsCount: Int!
   eventCommentsCount: Int!
   projectsCount: Int!
@@ -2256,21 +2155,6 @@ type User implements Node {
   # Total of contributions count
   contributionsCount: Int!
   expired: Boolean!
-
-  # Your facebook url
-  facebookUrl: String
-
-  # Your twitter url
-  twitterUrl: String
-
-  # Your linkedIn url
-  linkedInUrl: String
-
-  # Is your profile indexed or not
-  profilePageIndexed: Boolean
-
-  # Your localisation
-  neighborhood: String
 }
 
 # A connection to a list of items.
@@ -2317,7 +2201,7 @@ type UserNotificationsConfiguration {
 
 # A type of person
 type UserType {
-  id: ID!
+  id: Int!
 
   # The name of the type.
   name: String!

@@ -79,16 +79,14 @@ class GlobalIdResolver
         if (!$node) {
             $node = $this->container->get('capco.argument.repository')->find($uuid);
         }
-        if (!$node) {
-            $node = $this->container->get('capco.user.repository')->find($uuid);
-        }
 
         if (!$node) {
             $node = $this->container->get('capco.event.repository')->find($uuid);
         }
+
         if (!$node) {
-            $this->container->get('logger')->warn(__METHOD__ . ' : Could not resolve node with id: ' . $uuid);
-            throw new UserError('Could not resolve node with id '.$uuid);
+            $this->container->get('logger')->warn('Unknown id: ' . $uuid);
+            throw new UserError('Not found');
         }
 
         return $node;
@@ -107,7 +105,7 @@ class GlobalIdResolver
         }
 
         if (!$node) {
-            $this->container->get('logger')->warn(__METHOD__ . ' : Unknown moderation_token: ' . $token);
+            $this->container->get('logger')->warn('Unknown moderation_token: ' . $token);
             throw new NotFoundHttpException();
         }
 

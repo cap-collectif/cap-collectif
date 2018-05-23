@@ -1,9 +1,9 @@
 <div class="col-lg-3  col-md-4  col-sm-6  col-xs-12">
     <div class="theme  block  block--bordered">
 
-        {%  if theme.media %}
+        {%  if theme.Media %}
             <a href="{{ path('app_theme_show', {'slug': theme.slug}) }}" alt="{{ theme.title }}">
-                {% thumbnail theme.media, 'theme' with {'title': theme.media.name, 'alt': theme.media.name, 'class': 'img-responsive'} %}
+                {% thumbnail theme.Media, 'theme' with {'title': theme.Media.name, 'alt': theme.Media.name, 'class': 'img-responsive'} %}
             </a>
         {% else %}
             <a class="bg__wrapper" href="{{ path('app_theme_show', {'slug': theme.slug}) }}" alt="{{ theme.title }}">

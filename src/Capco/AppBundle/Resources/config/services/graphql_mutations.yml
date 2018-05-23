@@ -65,36 +65,6 @@ services:
       tags:
           - { name: overblog_graphql.mutation }
 
-  Capco\AppBundle\GraphQL\Mutation\UpdateProfilePasswordMutation:
-      # only for sf < 3.3
-      class: Capco\AppBundle\GraphQL\Mutation\UpdateProfilePasswordMutation
-      arguments:
-          - "@form.factory"
-          - "@fos_user.user_manager.default"
-          - "@logger"
-      tags:
-          - { name: overblog_graphql.mutation }
-
-  Capco\AppBundle\GraphQL\Mutation\UpdateProfilePersonalDataMutation:
-      # only for sf < 3.3
-      class: Capco\AppBundle\GraphQL\Mutation\UpdateProfilePersonalDataMutation
-      arguments:
-          - "@doctrine.orm.default_entity_manager"
-          - "@form.factory"
-          - "@logger"
-      tags:
-          - { name: overblog_graphql.mutation }
-
-  Capco\AppBundle\GraphQL\Mutation\UpdateProfilePublicDataMutation:
-      # only for sf < 3.3
-      class: Capco\AppBundle\GraphQL\Mutation\UpdateProfilePublicDataMutation
-      arguments:
-          - "@doctrine.orm.default_entity_manager"
-          - "@form.factory"
-          - "@logger"
-      tags:
-          - { name: overblog_graphql.mutation }
-
   capco.mutation.user_notifications:
         class: Capco\AppBundle\GraphQL\Mutation\UserNotificationsConfigurationMutation
         tags:

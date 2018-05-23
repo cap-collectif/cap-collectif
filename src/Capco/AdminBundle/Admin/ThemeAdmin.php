@@ -167,7 +167,7 @@ class ThemeAdmin extends Admin
                 'required' => false,
                 'placeholder' => 'admin.fields.theme.no_status',
             ])
-            ->add('media', 'sonata_type_model_list', [
+            ->add('Media', 'sonata_type_model_list', [
                 'required' => false,
                 'label' => 'admin.fields.theme.media',
             ], [
@@ -231,7 +231,7 @@ class ThemeAdmin extends Admin
             ->add('posts', null, [
                 'label' => 'admin.fields.theme.posts',
             ])
-            ->add('media', null, [
+            ->add('Media', null, [
                 'template' => 'CapcoAdminBundle:Theme:media_show_field.html.twig',
                 'label' => 'admin.fields.theme.media',
             ])

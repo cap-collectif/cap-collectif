@@ -2,220 +2,149 @@
    $Profile
 ================================================================*/
 .profile .container {
-  padding-top: 30px;
-  padding-bottom: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 .profile__values .container {
-  padding-top: 0;
-  padding-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .profile {
-  .share-button-dropdown {
-    margin-top: 15px;
-  }
-
-  position: relative;
-
-  .profile__picture img {
-    box-sizing: border-box;
-    width: auto;
-    max-width: 100%;
-    height: auto;
-  }
-
-  .profile__name {
-    margin-top: 0;
-    padding-top: 0;
-    margin-bottom: 15px;
-    color: $dark;
-  }
-
-  .profile__infos {
-    list-style-type: none;
-    padding-left: 0;
-    margin-bottom: 0;
-
-    & > li {
-      line-height: 1.5;
+    .share-button-dropdown {
+        margin-top: 15px;
     }
-  }
 
-  .profile__values {
-    background-color: $white;
-    border-bottom: 1px solid $border-color;
-  }
+    position: relative;
 
-  .profile__value {
-    float: none;
-    display: inline-block;
-    text-align: center;
-
-    &.active a,
-    &.active a:hover,
-    a:hover {
-      background-color: $white;
-      color: $dark;
-      @include border-radius(0);
-      @include box-shadow(0 -3px 0 $primary-color inset);
-    }
-  }
-
-  .profile__value__number {
-    font-size: 20px;
-  }
-
-  .profile__value__label {
-    text-transform: uppercase;
-    font-size: 12px;
-  }
-
-  .profile__value__number,
-  .profile__value__label {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-
-  @media (max-width: $screen-xs-max) {
-
-    .profile__picture {
-      padding-bottom: 0;
-      text-align: center;
-
-      img {
-        margin-left: auto;
-        margin-right: auto;
-      }
+    .profile__picture img {
+        box-sizing: border-box;
+        width: auto;
+        max-width: 100%;
+        height: auto;
     }
 
     .profile__name {
-      text-align: center;
+        margin-top: 0;
+        padding-top: 0;
+        margin-bottom: 15px;
+        color: $dark;
     }
 
-    .profile__values--mobile {
-      padding-top: 15px;
-
-      .form-group {
+    .profile__infos {
+        list-style-type: none;
+        padding-left: 0;
         margin-bottom: 0;
-      }
+
+        & > li {
+            line-height: 1.5;
+        }
     }
-  }
+
+    .profile__values {
+        background-color: $white;
+        border-bottom: 1px solid $border-color;
+    }
+
+    .profile__value {
+        float: none;
+        display: inline-block;
+        text-align: center;
+
+        &.active a,
+        &.active a:hover,
+        a:hover {
+            background-color: $white;
+            color: $dark;
+            @include border-radius(0);
+            @include box-shadow(0 -3px 0 $primary-color inset);
+        }
+    }
+
+    .profile__value__number {
+        font-size: 20px;
+    }
+
+    .profile__value__label {
+        text-transform: uppercase;
+        font-size: 12px;
+    }
+
+    .profile__value__number,
+    .profile__value__label {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    @media (max-width: $screen-xs-max) {
+
+        .profile__picture {
+            padding-bottom: 0;
+            text-align: center;
+
+            img {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        .profile__name {
+            text-align: center;
+        }
+
+        .profile__values--mobile {
+            padding-top: 15px;
+
+            .form-group {
+                margin-bottom: 0;
+            }
+        }
+    }
 }
 
 .profile__contribution {
-  padding: 15px;
+    padding: 15px;
 
-  .opinion__header {
-    border-bottom: 1px solid $border-color;
-  }
+    .opinion__header {
+        border-bottom: 1px solid $border-color;
+    }
 }
 
 .profile__contribution__list {
-  list-style-type: none;
-  margin-bottom: 0;
-  padding-left: 0;
+    list-style-type: none;
+    margin-bottom: 0;
+    padding-left: 0;
 
-  .opinion {
-    border-bottom: 1px solid $border-color;
-    border-left: 1px solid $border-color;
-    border-right: 1px solid $border-color;
-  }
-
-  .opinion:first-child {
-    border-top: 1px solid $border-color;
-  }
-
-  .opinion--argument {
-    .opinion__header__title {
-      margin-top: 0;
+    .opinion {
+        border-bottom: 1px solid $border-color;
+        border-left: 1px solid $border-color;
+        border-right: 1px solid $border-color;
     }
 
-    .opinion__text {
-      padding-top: 0 !important;
+    .opinion:first-child {
+        border-top: 1px solid $border-color;
     }
-  }
+
+    .opinion--argument {
+        .opinion__header__title {
+            margin-top: 0;
+        }
+
+        .opinion__text {
+            padding-top: 0 !important;
+        }
+    }
 }
 
 .profile__contribution__icon {
-  font-size: 30px;
+    font-size: 30px;
 }
 
 .profile__contribution__title {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .profile__contribution__date {
-  margin-top: 0;
-}
-
-#personal-data {
-  .alert-info {
-    display: flex;
-    .cap-information {
-      font-size: 26px;
-    }
-  }
-  #project-participation-collected-data {
-    display: flex;
-  }
-}
-
-#capco_horizontal_form {
-  color: black;
-  .capco_horizontal_field_with_border_top {
-    clear: both;
-    border-top: solid 0.5px $table-border-color;
-    .well {
-      margin-top: 20px;
-    }
-    margin: 0;
-    padding: 10px 0;
-    label.control-label {
-      text-align: right;
-      float: left;
-    }
-    div.col-sm-12 {
-      padding: 10px 0;
-    }
-    div.personal-data-address {
-      clear: both;
-    }
-  }
-}
-
-#personal-data-date-of-birth {
-  padding-left: 0;
-  #personal-data-date-of-birth-day {
-    padding-left: 0;
-    padding-right: 2px;
-  }
-  #personal-data-date-of-birth-month {
-    padding-left: 2px;
-    padding-right: 2px;
-  }
-  #personal-data-date-of-birth-year {
-    padding-left: 2px;
-    padding-right: 2px;
-  }
-}
-
-#profile-alert-form {
-  .alert__form {
-    &_succeeded-message, &_invalid-field, &_server-failed-message {
-      padding: 6px 12px;
-      margin-left: 0;
-      padding-left: 0;
-    }
-  }
-}
-
-#profile-account {
-  .error-block {
-    margin-left: 15px;
-  }
-}
-
-.personal-data-delete-field {
-  color: $primary-color;
+    margin-top: 0;
 }

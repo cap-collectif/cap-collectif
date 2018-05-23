@@ -4,7 +4,7 @@
 import React, { Component } from 'react';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { Button, Table, Panel } from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
 import { reduxForm, Field } from 'redux-form';
 import { connect, type MapStateToProps } from 'react-redux';
 import component from '../../Form/Field';
@@ -50,10 +50,7 @@ export class NotificationsForm extends Component<Props> {
       submitFailed,
     } = this.props;
     return (
-      <Panel id="capco_horizontal_form">
-        <h2 className="page-header">
-          <FormattedMessage id="profile.account.notifications.title" />
-        </h2>
+      <div>
         <p className="notifications-app-title">
           <FormattedMessage id="profile.account.notifications.app.collectstep" />
         </p>
@@ -85,10 +82,9 @@ export class NotificationsForm extends Component<Props> {
               </tr>
             </tbody>
           </Table>
-          <div className="divider" />
           <div className="notifications-form-controls">
             <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
-              <FormattedMessage id={submitting ? 'global.loading' : 'global.save_modifications'} />
+              <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
             </Button>
             <AlertForm
               valid={valid}
@@ -99,7 +95,7 @@ export class NotificationsForm extends Component<Props> {
             />
           </div>
         </form>
-      </Panel>
+      </div>
     );
   }
 }

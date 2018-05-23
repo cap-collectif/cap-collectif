@@ -14,7 +14,7 @@ class SiteImageRepository extends EntityRepository
         return $this->getEntityManager()->createQueryBuilder()
             ->select('p', 'm')
             ->from($this->getClassName(), 'p', 'p.keyname')
-            ->leftJoin('p.media', 'm')
+            ->leftJoin('p.Media', 'm')
             ->andWhere('p.isEnabled = :enabled')
             ->setParameter('enabled', true)
             ->groupBy('p.keyname')

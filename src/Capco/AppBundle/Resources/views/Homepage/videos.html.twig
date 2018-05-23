@@ -15,9 +15,9 @@
             {% for video in videos %}
                 <div class="col-xs-12  col-sm-6  col-md-4  col-lg-4">
                     <div class="video">
-                        {%  if video.media %}
+                        {%  if video.Media %}
                             <a href="{{ video.link }}" class="play {% if video.color == "black" %} play--black {% endif %}fancybox" data-type="iframe">
-                                {% thumbnail video.media, 'homepageVideo' with {'title': video.media.name, 'alt': video.media.name, 'class': 'img-responsive'} %}
+                                {% thumbnail video.Media, 'homepageVideo' with {'title': video.Media.name, 'alt': video.Media.name, 'class': 'img-responsive'} %}
                             </a>
                         {% else %}
                             <a href="{{ video.link }}" class="play {% if video.color == "black" %} play--black {% endif %} fancybox" data-type="iframe">

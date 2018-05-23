@@ -134,4 +134,16 @@ class UserResolver implements ContainerAwareInterface
 
         return implode('|', $convertedRoles);
     }
+
+    public function resolveGender($object): string
+    {
+        if ('u' === $object->getGender()) {
+            return 'Non communiqué';
+        }
+        if ('m' === $object->getGender()) {
+            return 'Homme';
+        }
+
+        return 'Femme';
+    }
 }
