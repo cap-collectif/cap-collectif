@@ -12,6 +12,7 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
     className="proposals-user-votes__col"
     componentClass="div"
     md={9}
+    sm={12}
     xs={12}
   >
     <div
@@ -52,6 +53,7 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
     componentClass="div"
     id="1-proposal-vote__private"
     md={3}
+    sm={12}
     xs={12}
   >
     <div
@@ -60,7 +62,12 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
       <div>
         <Field
           component={[Function]}
-          label="public"
+          label={
+            <FormattedMessage
+              id="public"
+              values={Object {}}
+            />
+          }
           labelSide="RIGHT"
           name="votes.1.public"
           normalize={[Function]}

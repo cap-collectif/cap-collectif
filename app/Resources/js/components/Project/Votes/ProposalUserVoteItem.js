@@ -52,12 +52,27 @@ export class ProposalUserVoteItem extends React.Component<Props> {
       return 9;
     };
 
+    const getTitle = title => {
+      const maxItemLength = 85;
+      const trimmedString =
+        title.length > maxItemLength ? `${title.substring(0, maxItemLength)}...` : title;
+      return trimmedString;
+    };
+
+    const getToggleLabel = () => {
+      if (isVoteVisibilityPublic) {
+        return <FormattedMessage id="public" />;
+      }
+
+      return <FormattedMessage id="admin.fields.idea_vote.private" />;
+    };
+
     return (
       <Row
         className="proposals-user-votes__row d-flex flex-wrap"
         id={`vote-step${step.id}-proposal${proposal.id}`}>
         {ranking && (
-          <Col md={1} xs={12} className="proposals-user-votes__col">
+          <Col md={1} sm={12} xs={12} className="proposals-user-votes__col">
             <div className="proposals-user-votes__content justify-content-between">
               {showDraggableIcon && <i className="cap cap-android-menu excerpt mr-5" />}
               <div className="d-flex">
@@ -66,11 +81,11 @@ export class ProposalUserVoteItem extends React.Component<Props> {
             </div>
           </Col>
         )}
-        <Col className="proposals-user-votes__col" md={colTitleWidth()} xs={12}>
+        <Col className="proposals-user-votes__col" md={colTitleWidth()} sm={12} xs={12}>
           <div className="proposals-user-votes__content">
             <div>
               <a href={proposal.show_url} className="proposals-user-votes__title">
-                {proposal.title}
+                {getTitle(proposal.title)}
               </a>
               <br />
               {vote.createdAt ? (
@@ -98,13 +113,14 @@ export class ProposalUserVoteItem extends React.Component<Props> {
           id={`${proposal.id}-proposal-vote__private`}
           className="proposals-user-votes__col"
           md={onDelete ? 2 : 3}
+          sm={12}
           xs={12}>
           <div className="proposals-user-votes__content justify-content-end">
             <div>
               <Field
                 labelSide="RIGHT"
                 component={toggle}
-                label={isVoteVisibilityPublic ? 'public' : 'admin.fields.idea_vote.private'}
+                label={getToggleLabel()}
                 name={`${member}.public`}
                 normalize={val => !!val}
               />
@@ -112,7 +128,7 @@ export class ProposalUserVoteItem extends React.Component<Props> {
           </div>
         </Col>
         {step.voteType === 'BUDGET' && (
-          <Col className="proposals-user-votes__col" md={2} xs={12}>
+          <Col className="proposals-user-votes__col" md={2} sm={12} xs={12}>
             <div className="proposals-user-votes__content justify-content-center">
               {/* $FlowFixMe */}
               <ProposalDetailEstimation proposal={proposal} showNullEstimation />
@@ -120,7 +136,7 @@ export class ProposalUserVoteItem extends React.Component<Props> {
           </Col>
         )}
         {onDelete && (
-          <Col className="proposals-user-votes__col" md={1} xs={12}>
+          <Col className="proposals-user-votes__col proposal-vote-col__delete" md={1}>
             <a
               onClick={() => {
                 onDelete();
