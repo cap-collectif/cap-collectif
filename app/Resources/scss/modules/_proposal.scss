@@ -246,6 +246,16 @@
     text-align: left;
     margin-left: 0;
     margin-right: 0;
+
+    .react-toggle .react-toggle-track,
+    .react-toggle .react-toggle-thumb {
+        background-color: $danger-color;
+    }
+
+    .react-toggle--checked .react-toggle-track,
+    .react-toggle--checked .react-toggle-thumb {
+        background-color: $success-color;
+    }
 }
 
 .proposals-user-votes__col {
