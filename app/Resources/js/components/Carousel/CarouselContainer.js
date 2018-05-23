@@ -1,5 +1,6 @@
 // @flow
 import React, { PureComponent } from 'react';
+import { FormattedMessage } from 'react-intl';
 import CarouselMobile from './CarouselMobile';
 import CarouselDesktop from './CarouselDesktop';
 
@@ -30,11 +31,19 @@ export class CarouselContainer extends PureComponent<Props, State> {
       });
     });
 
-    if (windowWidth < 992) {
+    if (highlighteds.length !== 0 && windowWidth < 992) {
       return <CarouselMobile highlighteds={highlighteds} />;
     }
 
-    return <CarouselDesktop highlighteds={highlighteds} />;
+    if (highlighteds.length !== 0) {
+      return <CarouselDesktop highlighteds={highlighteds} />;
+    }
+
+    return (
+      <div className="well mb-45">
+        <FormattedMessage id="highlighted.empty" />
+      </div>
+    );
   };
 
   render() {

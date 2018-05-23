@@ -5,6 +5,7 @@ exports[`<CarouselDesktop /> should render correctly 1`] = `
   className="carousel__desktop carousel slide"
   data-keyboard="true"
   data-pause="hover"
+  data-ride="carousel"
   data-wrap="false"
   id="carousel"
 >
