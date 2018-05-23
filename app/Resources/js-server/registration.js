@@ -39,12 +39,14 @@ import AccountProfileFollowingsApp from "../js/startup/AccountProfileFollowingsA
 import ParisUserNotValidApp from "../js/startup/ParisUserNotValidApp";
 import EditProfileApp from "../js/startup/EditProfileApp";
 
-moment.locale('fr');
-
 const emptyFunction = () => {};
+
 global.clearTimeout = global.clearTimeout || emptyFunction;
 global.setTimeout = global.setTimeout || emptyFunction;
 global.setInterval = global.setInterval || emptyFunction;
+global.locale = global.locale || 'fr-FR';
+
+moment.locale(global.locale);
 
 ReactOnRails.registerStore({ appStore });
 ReactOnRails.register({

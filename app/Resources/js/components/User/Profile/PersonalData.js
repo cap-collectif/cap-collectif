@@ -28,6 +28,7 @@ import type { Dispatch, State } from '../../../types';
 import UpdateProfilePersonalDataMutation from '../../../mutations/UpdateProfilePersonalDataMutation';
 import component from '../../Form/Field';
 import DateDropdownPicker from '../../Form/DateDropdownPicker';
+import config from '../../../config';
 
 type RelayProps = { personalDataForm: PersonalData_viewer };
 type Props = FormProps &
@@ -106,7 +107,14 @@ const validate = (values: Object, props: Props) => {
 
   return errors;
 };
-const wLocale = window.locale ? window.locale : 'fr_FR';
+
+let wLocale = 'fr-FR';
+
+if (config.canUseDOM && window.locale) {
+  wLocale = window.locale;
+} else if (!config.canUseDOM) {
+  wLocale = global.locale;
+}
 
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const { intl } = props;
