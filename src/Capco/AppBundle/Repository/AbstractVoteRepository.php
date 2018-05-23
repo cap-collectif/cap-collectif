@@ -75,7 +75,7 @@ class AbstractVoteRepository extends EntityRepository
         return $this->getQueryBuilder()
             ->addSelect('aut', 'm', 'v', 'r')
             ->leftJoin('v.user', 'aut')
-            ->leftJoin('aut.Media', 'm')
+            ->leftJoin('aut.media', 'm')
             ->andWhere('v.id = :id')
             ->setParameter('id', $id)
             ->getQuery()
@@ -95,7 +95,7 @@ class AbstractVoteRepository extends EntityRepository
         $qb = $this->getQueryBuilder()
             ->addSelect('u', 'm')
             ->leftJoin('v.user', 'u')
-            ->leftJoin('u.Media', 'm')
+            ->leftJoin('u.media', 'm')
             ->andWhere('v.user = :user')
             ->setParameter('user', $user)
             ->orderBy('v.createdAt', 'ASC');

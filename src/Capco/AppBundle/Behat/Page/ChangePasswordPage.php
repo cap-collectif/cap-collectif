@@ -12,5 +12,5 @@ class ChangePasswordPage extends Page
     /**
      * @var string
      */
-    protected $path = '/profile/change-password';
+    protected $path = '/profile/edit-profile#password';
 }

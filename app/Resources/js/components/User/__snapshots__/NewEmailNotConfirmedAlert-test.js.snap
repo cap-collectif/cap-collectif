@@ -55,7 +55,7 @@ exports[`<NewEmailNotConfirmedAlert /> should render an alert if there is a newE
         bsClass="btn"
         bsStyle="link"
         disabled={false}
-        href="about:///profile/edit-account"
+        href="about:///profile/edit-profile#account"
         style={
           Object {
             "marginBottom": 5,

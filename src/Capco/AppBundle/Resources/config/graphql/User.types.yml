@@ -52,15 +52,18 @@ User:
                 type: "String"
                 resolve: "@=resolver('user_phoneConfirmationSentAt', [value])"
             gender:
-                type: "String"
-                resolve: "@=resolver('user_gender', [value])"
+                type: "GenderValue"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             firstname:
                 type: "String"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             lastname:
                 type: "String"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             dateOfBirth:
                 type: "String"
                 resolve: "@=resolver('user_dateOfBirth', [value])"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             roles:
                 type: "[String]"
                 description: "Unattended roles as array."
@@ -74,14 +77,19 @@ User:
                 type: "String"
             address:
                 type: "String"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             address2:
                 type: "String"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             zipCode:
                 type: "String"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             city:
                 type: "String"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             phone:
                 type: "String"
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             googleId:
                 type: "String"
             facebookId:
@@ -146,3 +154,18 @@ User:
                 description: "Total of contributions count"
             expired:
                 type: "Boolean!"
+            facebookUrl:
+                type: "String"
+                description: "Your facebook url"
+            twitterUrl:
+                type: "String"
+                description: "Your twitter url"
+            linkedInUrl:
+                type: "String"
+                description: "Your linkedIn url"
+            profilePageIndexed:
+                type: "Boolean"
+                description: "Is your profile indexed or not"
+            neighborhood:
+                type: "String"
+                description: "Your localisation"

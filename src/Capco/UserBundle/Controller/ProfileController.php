@@ -11,7 +11,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sonata\UserBundle\Controller\ProfileFOSUser1Controller as BaseController;
-use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -29,57 +28,16 @@ class ProfileController extends BaseController
      */
     public function editProfileAction()
     {
-        $user = $this->getUser();
-        if (!is_object($user) || !$user instanceof UserInterface) {
-            throw $this->createAccessDeniedException('This user does not have access to this section.');
-        }
-
-        $form = $this->get('sonata.user.profile.form');
-        $form->remove('email');
-        $formHandler = $this->get('sonata.user.profile.form.handler');
-
-        $process = $formHandler->process($user);
-        if ($process) {
-            $this->setFlash('sonata_user_success', 'profile.flash.updated');
-        }
-
-        return [
-          'form' => $form->createView(),
-      ];
-    }
-
-    /**
-     * @Route("/edit-mobile", name="capco_profile_edit_mobile")
-     * @Template("CapcoUserBundle:Profile:edit_mobile.html.twig")
-     * @Security("has_role('ROLE_USER')")
-     */
-    public function editProfileMobileAction()
-    {
+        return [];
     }
 
     /**
      * @Route("/edit-account", name="capco_profile_edit_account")
-     * @Template("CapcoUserBundle:Profile:edit_account.html.twig")
      * @Security("has_role('ROLE_USER')")
      */
-    public function editAccountAction(Request $request)
+    public function editAccountAction()
     {
-        $user = $this->getUser();
-        if (!is_object($user) || !$user instanceof UserInterface) {
-            throw $this->createAccessDeniedException('This user does not have access to this section.');
-        }
-
-        return [];
-    }
-
-    /**
-     * @Route("/followings", name="capco_profile_edit_followings")
-     * @Template("CapcoUserBundle:Profile:edit_followings.html.twig")
-     * @Security("has_role('ROLE_USER')")
-     */
-    public function editFollowingsAction(Request $request)
-    {
-        return [];
+        return $this->redirectToRoute('capco_profile_edit');
     }
 
     /**
@@ -87,7 +45,9 @@ class ProfileController extends BaseController
      */
     public function loginAndShowEditFollowingsAction(Request $request, string $token)
     {
-        $userNotificationsConfiguration = $this->get('capco.user_notifications_configuration.repository')->findOneBy(['unsubscribeToken' => $token]);
+        $userNotificationsConfiguration = $this->get('capco.user_notifications_configuration.repository')->findOneBy(
+            ['unsubscribeToken' => $token]
+        );
         if (!$userNotificationsConfiguration) {
             throw new NotFoundHttpException();
         }
@@ -95,7 +55,7 @@ class ProfileController extends BaseController
             $this->loginWithToken($request, $userNotificationsConfiguration);
         }
 
-        return $this->redirectToRoute('capco_profile_edit_followings');
+        return $this->redirectToRoute('capco_profile_edit', ['#' => 'followings']);
     }
 
     /**
@@ -113,7 +73,9 @@ class ProfileController extends BaseController
      */
     public function loginAndShowNotificationsOptionsAction(Request $request, string $token)
     {
-        $userNotificationsConfiguration = $this->get('capco.user_notifications_configuration.repository')->findOneBy(['unsubscribeToken' => $token]);
+        $userNotificationsConfiguration = $this->get('capco.user_notifications_configuration.repository')->findOneBy(
+            ['unsubscribeToken' => $token]
+        );
         if (!$userNotificationsConfiguration) {
             throw new NotFoundHttpException();
         }
@@ -133,7 +95,9 @@ class ProfileController extends BaseController
     public function disableNotificationsAction(Request $request, string $token)
     {
         /** @var UserNotificationsConfiguration $userNotificationsConfiguration */
-        $userNotificationsConfiguration = $this->get('capco.user_notifications_configuration.repository')->findOneBy(['unsubscribeToken' => $token]);
+        $userNotificationsConfiguration = $this->get('capco.user_notifications_configuration.repository')->findOneBy(
+            ['unsubscribeToken' => $token]
+        );
         if (!$userNotificationsConfiguration) {
             throw new NotFoundHttpException();
         }
@@ -142,7 +106,10 @@ class ProfileController extends BaseController
         }
         $userNotificationsConfiguration->disableAllNotifications();
         $this->get('doctrine.orm.default_entity_manager')->flush($userNotificationsConfiguration);
-        $this->addFlash('sonata_flash_success', $this->get('translator')->trans('resetting.notifications.flash.success', [], 'CapcoAppBundle'));
+        $this->addFlash(
+            'sonata_flash_success',
+            $this->get('translator')->trans('resetting.notifications.flash.success', [], 'CapcoAppBundle')
+        );
 
         return $this->redirectToRoute('capco_profile_notifications_edit_account');
     }
@@ -161,9 +128,8 @@ class ProfileController extends BaseController
         $doctrine = $this->getDoctrine();
 
         $user = $slug
-          ? $doctrine->getRepository('CapcoUserBundle:User')->findOneBySlug($slug)
-          : $this->get('security.token_storage')->getToken()->getUser()
-        ;
+            ? $doctrine->getRepository('CapcoUserBundle:User')->findOneBySlug($slug)
+            : $this->get('security.token_storage')->getToken()->getUser();
 
         if (!$user) {
             throw $this->createNotFoundException();
@@ -175,9 +141,15 @@ class ProfileController extends BaseController
             ->getRepository('CapcoAppBundle:Project')
             ->getByUser($user);
 
-        $projectsProps = $serializer->serialize([
-            'projects' => $projectsRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Projects', 'UserDetails', 'Steps', 'ThemeDetails', 'ProjectType']));
+        $projectsProps = $serializer->serialize(
+            [
+                'projects' => $projectsRaw,
+            ],
+            'json',
+            SerializationContext::create()->setGroups(
+                ['Projects', 'UserDetails', 'Steps', 'ThemeDetails', 'ProjectType']
+            )
+        );
         $projectsCount = count($projectsRaw);
 
         $opinionTypesWithUserOpinions = $doctrine->getRepository('CapcoAppBundle:OpinionType')->getByUser($user);
@@ -188,28 +160,33 @@ class ProfileController extends BaseController
             ->getDoctrine()
             ->getManager()
             ->getRepository('CapcoAppBundle:Reply')
-            ->findBy([
-                'author' => $user,
-                'private' => false,
-            ]);
+            ->findBy(
+                [
+                    'author' => $user,
+                    'private' => false,
+                ]
+            );
 
         $sources = $doctrine->getRepository('CapcoAppBundle:Source')->getByUser($user);
         $comments = $doctrine->getRepository('CapcoAppBundle:Comment')->getByUser($user);
         $votes = $doctrine->getRepository('CapcoAppBundle:AbstractVote')->getPublicVotesByUser($user);
 
-        return array_merge([
-            'user' => $user,
-            'projectsProps' => $projectsProps,
-            'projectsCount' => $projectsCount,
-            'opinionTypesWithUserOpinions' => $opinionTypesWithUserOpinions,
-            'versions' => $versions,
-            'arguments' => $arguments,
-            'replies' => $replies,
-            'sources' => $sources,
-            'comments' => $comments,
-            'votes' => $votes,
-            'argumentsLabels' => Argument::$argumentTypesLabels,
-        ], $this->getProposalsProps($user));
+        return array_merge(
+            [
+                'user' => $user,
+                'projectsProps' => $projectsProps,
+                'projectsCount' => $projectsCount,
+                'opinionTypesWithUserOpinions' => $opinionTypesWithUserOpinions,
+                'versions' => $versions,
+                'arguments' => $arguments,
+                'replies' => $replies,
+                'sources' => $sources,
+                'comments' => $comments,
+                'votes' => $votes,
+                'argumentsLabels' => Argument::$argumentTypesLabels,
+            ],
+            $this->getProposalsProps($user)
+        );
     }
 
     /**
@@ -222,11 +199,14 @@ class ProfileController extends BaseController
         $projectsRaw = $this
             ->get('doctrine.orm.entity_manager')
             ->getRepository('CapcoAppBundle:Project')
-            ->getByUser($user)
-        ;
-        $projectsProps = $serializer->serialize([
-            'projects' => $projectsRaw,
-        ], 'json', SerializationContext::create()->setGroups(['Projects', 'Steps', 'ThemeDetails']));
+            ->getByUser($user);
+        $projectsProps = $serializer->serialize(
+            [
+                'projects' => $projectsRaw,
+            ],
+            'json',
+            SerializationContext::create()->setGroups(['Projects', 'Steps', 'ThemeDetails'])
+        );
         $projectsCount = count($projectsRaw);
 
         return [
@@ -246,7 +226,9 @@ class ProfileController extends BaseController
      */
     public function showOpinionsAction(User $user)
     {
-        $opinionTypesWithUserOpinions = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->getByUser($user);
+        $opinionTypesWithUserOpinions = $this->getDoctrine()->getRepository('CapcoAppBundle:OpinionType')->getByUser(
+            $user
+        );
 
         return [
             'user' => $user,
@@ -274,9 +256,12 @@ class ProfileController extends BaseController
      */
     public function showProposalsAction(User $user)
     {
-        return array_merge([
-            'user' => $user,
-        ], $this->getProposalsProps($user));
+        return array_merge(
+            [
+                'user' => $user,
+            ],
+            $this->getProposalsProps($user)
+        );
     }
 
     /**
@@ -292,10 +277,12 @@ class ProfileController extends BaseController
         $replies = $this
             ->get('doctrine.orm.entity_manager')
             ->getRepository('CapcoAppBundle:Reply')
-            ->findBy([
-                'author' => $user,
-                'private' => false,
-            ]);
+            ->findBy(
+                [
+                    'author' => $user,
+                    'private' => false,
+                ]
+            );
 
         return [
             'user' => $user,
@@ -363,29 +350,45 @@ class ProfileController extends BaseController
     private function getProposalsProps(User $user)
     {
         $proposalsWithStep = $this
-          ->getDoctrine()->getRepository('CapcoAppBundle:Proposal')
-          ->getProposalsGroupedByCollectSteps($user, $this->getUser() !== $user)
-      ;
-        $proposalsCount = array_reduce($proposalsWithStep, function ($sum, $item) {
-            $sum += count($item['proposals']);
+            ->getDoctrine()->getRepository('CapcoAppBundle:Proposal')
+            ->getProposalsGroupedByCollectSteps($user, $this->getUser() !== $user);
+        $proposalsCount = array_reduce(
+            $proposalsWithStep,
+            function ($sum, $item) {
+                $sum += count($item['proposals']);
 
-            return $sum;
-        });
+                return $sum;
+            }
+        );
         $proposalsPropsBySteps = [];
         foreach ($proposalsWithStep as $key => $value) {
-            $proposalsPropsBySteps[$key] = json_decode($this->get('jms_serializer')->serialize($value, 'json', SerializationContext::create()->setGroups(['Steps', 'Proposals', 'PrivateProposals', 'ProposalResponses', 'UsersInfos', 'UserMedias'])), true);
+            $proposalsPropsBySteps[$key] = json_decode(
+                $this->get('jms_serializer')->serialize(
+                    $value,
+                    'json',
+                    SerializationContext::create()->setGroups(
+                        ['Steps', 'Proposals', 'PrivateProposals', 'ProposalResponses', 'UsersInfos', 'UserMedias']
+                    )
+                ),
+                true
+            );
         }
 
         return [
-        'proposalsPropsBySteps' => $proposalsPropsBySteps,
-        'proposalsCount' => $proposalsCount,
-      ];
+            'proposalsPropsBySteps' => $proposalsPropsBySteps,
+            'proposalsCount' => $proposalsCount,
+        ];
     }
 
     private function loginWithToken(Request $request, UserNotificationsConfiguration $userNotificationsConfiguration)
     {
         $user = $userNotificationsConfiguration->getUser();
-        $userToken = new UsernamePasswordToken($user, null, $this->container->getParameter('fos_user.firewall_name'), $user->getRoles());
+        $userToken = new UsernamePasswordToken(
+            $user,
+            null,
+            $this->container->getParameter('fos_user.firewall_name'),
+            $user->getRoles()
+        );
         $this->get('security.token_storage')->setToken($userToken);
         $logInEvent = new InteractiveLoginEvent($request, $userToken);
         $this->get('event_dispatcher')->dispatch('security.interactive_login', $logInEvent);

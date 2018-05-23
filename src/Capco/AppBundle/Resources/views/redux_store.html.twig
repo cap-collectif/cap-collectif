@@ -25,9 +25,9 @@
         'isEvaluer': app.user.isEvaluer,
         'email': app.user.email,
         'newEmailToConfirm': app.user.newEmailToConfirm,
-        'media': app.user.Media
+        'media': app.user.media
         ? {
-            'url': media_public_url(app.user.Media, 'default_avatar')
+            'url': media_public_url(app.user.media, 'default_avatar')
           }
         : null,
         'displayName': app.user.username,

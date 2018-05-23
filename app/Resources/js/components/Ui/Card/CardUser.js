@@ -27,3 +27,5 @@ export const CardUser = styled.div`
     }
   }
 `;
+
+export default CardUser;

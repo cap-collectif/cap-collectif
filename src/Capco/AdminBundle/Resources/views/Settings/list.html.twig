@@ -124,8 +124,8 @@
                                 </td>
                                 <td>
                                     <div>
-                                        {% if image is not null and image.Media is not null %}
-                                            {% thumbnail image.Media, 'logo' with {'title': image.Media.name, 'alt': image.Media.name} %}
+                                        {% if image is not null and image.media is not null %}
+                                            {% thumbnail image.media, 'logo' with {'title': image.media.name, 'alt': image.media.name} %}
                                         {% endif %}
                                     </div>
                                 </td>

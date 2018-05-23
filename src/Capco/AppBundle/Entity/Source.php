@@ -68,7 +68,7 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
 
     /**
      * @var \DateTime
-     * @Gedmo\Timestampable(on="change", field={"title", "link", "body", "Author", "Opinion", "Category", "Media", "type"})
+     * @Gedmo\Timestampable(on="change", field={"title", "link", "body", "Author", "Opinion", "Category", "media", "type"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
@@ -119,7 +119,7 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
      * @Assert\NotBlank(groups={"file"})
      * @Assert\Valid()
      */
-    private $Media;
+    private $media;
 
     /**
      * @var int
@@ -374,15 +374,15 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
      */
     public function getMedia()
     {
-        return $this->Media;
+        return $this->media;
     }
 
     /**
-     * @param mixed $Media
+     * @param mixed $media
      */
-    public function setMedia($Media)
+    public function setMedia($media)
     {
-        $this->Media = $Media;
+        $this->media = $media;
 
         return $this;
     }

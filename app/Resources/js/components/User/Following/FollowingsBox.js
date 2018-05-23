@@ -8,7 +8,7 @@ import environment, { graphqlError } from '../../../createRelayEnvironment';
 import FollowingsProposals from './FollowingsProposals';
 
 const query = graphql`
-  query FollowingsBoxQuery($count: Int, $cursor: String) {
+  query FollowingsBoxQuery {
     viewer {
       ...FollowingsProposals_viewer
     }
@@ -32,10 +32,7 @@ export class FollowingsBox extends Component<Props> {
     return (
       <div>
         <QueryRenderer
-          variables={{
-            count: 1000,
-            cursor: null,
-          }}
+          variables={{}}
           environment={environment}
           query={query}
           render={renderFollowingProjectProposal}

@@ -3,8 +3,8 @@
     {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': source.Author, 'link_classes': 'pull-left media-middle', format: 'avatar_source'} only %}
     <div class="media-body">
         <h4 class="media-heading h4" id="source{{ source.id }}"><span class="label label-info">{{ source.Category.title }}</span>
-            {% if source.Media %}
-                <a href="{{ path('sonata_media_download', {'id': source.Media|sonata_urlsafeid }) }}">{{ source.title }}</a>
+            {% if source.media %}
+                <a href="{{ path('sonata_media_download', {'id': source.media|sonata_urlsafeid }) }}">{{ source.title }}</a>
             {% endif %}
             {% if source.link %}
                 <a rel="nofollow" href="{{ source.link }}" class="external-link">{{ source.title }}</a>

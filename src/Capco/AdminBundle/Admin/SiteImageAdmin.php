@@ -52,7 +52,7 @@ class SiteImageAdmin extends Admin
                 'label' => 'admin.fields.site_image.is_enabled',
                 'required' => false,
             ])
-            ->add('Media', 'sonata_type_model_list', [
+            ->add('media', 'sonata_type_model_list', [
                 'required' => false,
                 'label' => 'admin.fields.site_image.media',
             ], [

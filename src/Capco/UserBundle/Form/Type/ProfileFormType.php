@@ -3,8 +3,8 @@
 namespace Capco\UserBundle\Form\Type;
 
 use Capco\AppBundle\Toggle\Manager;
+use Capco\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -22,83 +22,32 @@ class ProfileFormType extends AbstractType
         $builder
             ->add('twitterUrl', null, [
                 'label' => 'user.profile.edit.twitter',
-                'translation_domain' => 'CapcoAppBundle',
-                'required' => false,
             ])
             ->add('facebookUrl', null, [
                 'label' => 'user.profile.edit.facebook',
-                'translation_domain' => 'CapcoAppBundle',
-                'required' => false,
             ])
-            ->add('googleUrl', null, [
-                'label' => 'user.profile.edit.gplus',
-                'translation_domain' => 'CapcoAppBundle',
-                'required' => false,
+            ->add('linkedInUrl', null, [
             ])
             ->add('username', null, [
-                'label' => 'user.profile.edit.username',
-                'translation_domain' => 'CapcoAppBundle',
                 'required' => true,
             ])
-            ->add('address', null, [
-                'label' => 'user.profile.edit.address',
-                'translation_domain' => 'CapcoAppBundle',
-                'required' => false,
-            ])
-            ->add('address2', null, [
-                'label' => 'user.profile.edit.address2',
-                'translation_domain' => 'CapcoAppBundle',
-                'required' => false,
-            ])
-            ->add('zipCode', null, [
-                'label' => 'user.profile.edit.zip_code',
-                'translation_domain' => 'CapcoAppBundle',
-                'required' => false,
-            ])
-            ->add('city', null, [
-                'label' => 'user.profile.edit.city',
-                'translation_domain' => 'CapcoAppBundle',
-                'required' => false,
-            ])
             ->add('neighborhood', null, [
-                'label' => 'user.profile.edit.neighborhood',
-                'translation_domain' => 'CapcoAppBundle',
-                'required' => false,
             ])
             ->add('media', 'sonata_media_type', [
                 'provider' => 'sonata.media.provider.image',
                 'context' => 'default',
-                'required' => false,
-                'label' => 'user.profile.edit.media',
-                'translation_domain' => 'CapcoAppBundle',
             ])
             ->remove('lastname')
             ->remove('firstname')
             ->remove('phone')
-            ->add('gender', 'sonata_user_gender', [
-                'required' => true,
-                'translation_domain' => 'CapcoAppBundle',
-            ])
-            ->add('dateOfBirth',
-                BirthdayType::class, [
-                'required' => false,
-                'label' => 'user.profile.edit.birthday',
-                'translation_domain' => 'CapcoAppBundle',
-            ])
             ->add('profilePageIndexed', CheckboxType::class, [
-                'required' => false,
-                'label' => 'user.profile.edit.profilePageIndexed',
                 'label_attr' => ['style' => 'font-weight: normal; color: #000000'],
-                'translation_domain' => 'CapcoAppBundle',
             ])
         ;
 
         if ($this->toggleManager->isActive('user_type')) {
             $builder->add('userType', null, [
-                'required' => false,
                 'empty_value' => 'user.profile.edit.no_user_type',
-                'label' => 'user.profile.edit.user_type',
-                'translation_domain' => 'CapcoAppBundle',
             ]);
         }
     }

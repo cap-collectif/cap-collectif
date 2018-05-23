@@ -192,7 +192,7 @@ class EventAdmin extends Admin
                     'placeholder' => 'http://',
                 ],
             ])
-            ->add('Media', 'sonata_type_model_list', [
+            ->add('media', 'sonata_type_model_list', [
                 'label' => 'admin.fields.event.media',
                 'required' => false,
             ], [
@@ -297,7 +297,7 @@ class EventAdmin extends Admin
             ->add('Author', null, [
                 'label' => 'admin.fields.event.author',
             ])
-            ->add('Media', 'sonata_media_type', [
+            ->add('media', 'sonata_media_type', [
                 'template' => 'CapcoAdminBundle:Event:media_show_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
                 'label' => 'admin.fields.event.media',

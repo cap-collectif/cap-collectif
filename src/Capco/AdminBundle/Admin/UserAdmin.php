@@ -131,7 +131,7 @@ class UserAdmin extends BaseAdmin
             ->add('updatedAt')
             ->end()
             ->with('Profile')
-            ->add('Media', 'sonata_media_type', [
+            ->add('media', 'sonata_media_type', [
                 'template' => 'CapcoAdminBundle:User:media_show_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
             ])
@@ -161,7 +161,7 @@ class UserAdmin extends BaseAdmin
             ->add('facebookUrl', 'url')
             ->add('facebook_id')
             ->add('facebook_access_token')
-            ->add('googleUrl', 'url')
+            ->add('linkedInUrl', 'url')
             ->add('google_id')
             ->add('google_access_token')
             ->add('twitterUrl', 'url')
@@ -214,7 +214,7 @@ class UserAdmin extends BaseAdmin
             ])
             ->end()
             ->with('Profile')
-            ->add('Media', 'sonata_type_model_list', [
+            ->add('media', 'sonata_type_model_list', [
                 'required' => false,
             ], [
                 'link_parameters' => [
@@ -227,8 +227,8 @@ class UserAdmin extends BaseAdmin
                 'dp_max_date' => $now->format('c'),
                 'required' => false,
             ])
-            ->add('firstname', null, ['required' => false])
-            ->add('lastname', null, ['required' => false])
+            ->add('firstname')
+            ->add('lastname')
         ;
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('user_type')) {
@@ -240,23 +240,23 @@ class UserAdmin extends BaseAdmin
         $formMapper
             ->add('website', 'url', ['required' => false])
             ->add('biography', 'text', ['required' => false])
-            ->add('address', null, ['required' => false])
-            ->add('address2', null, ['required' => false])
-            ->add('zipCode', null, ['required' => false])
-            ->add('city', null, ['required' => false])
-            ->add('neighborhood', null, ['required' => false])
+            ->add('address')
+            ->add('address2')
+            ->add('zipCode')
+            ->add('city')
+            ->add('neighborhood')
             ->add('gender', 'sonata_user_gender', [
                 'required' => true,
                 'translation_domain' => 'CapcoAppBundle',
             ])
             ->add('locale', 'locale', ['required' => false])
             ->add('timezone', 'timezone', ['required' => false])
-            ->add('phone', null, ['required' => false])
+            ->add('phone')
             ->end()
             ->with('Social')
-            ->add('facebookUrl', null, ['required' => false])
-            ->add('googleUrl', null, ['required' => false])
-            ->add('twitterUrl', null, ['required' => false])
+            ->add('facebookUrl')
+            ->add('linkedInUrl')
+            ->add('twitterUrl')
             ->end()
         ;
         $formMapper->with('Confidentialité')
@@ -269,13 +269,13 @@ class UserAdmin extends BaseAdmin
             $formMapper
                 ->tab('Security')
                 ->with('Status')
-                ->add('locked', null, ['required' => false])
-                ->add('expired', null, ['required' => false])
+                ->add('locked')
+                ->add('expired')
                 ->add('expiresAt', 'sonata_type_datetime_picker', [
                     'required' => false,
                 ])
-                ->add('enabled', null, ['required' => false])
-                ->add('confirmationToken', null, ['required' => false])
+                ->add('enabled')
+                ->add('confirmationToken')
             ;
 
             if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('phone_confirmation')) {
@@ -313,8 +313,8 @@ class UserAdmin extends BaseAdmin
                 ->end()
 
                 /* ->with('Keys')
-                ->add('token', null, ['required' => false])
-                ->add('twoStepVerificationCode', null, ['required' => false])
+                ->add('token')
+                ->add('twoStepVerificationCode')
                 ->end() */
             ;
         }

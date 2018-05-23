@@ -16,7 +16,7 @@ class ProposalCommentRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('aut', 'm', 'v', 'i', 'r', 'ans')
             ->leftJoin('c.Author', 'aut')
-            ->leftJoin('aut.Media', 'm')
+            ->leftJoin('aut.media', 'm')
             ->leftJoin('c.votes', 'v')
             ->leftJoin('c.Reports', 'r')
             ->leftJoin('c.proposal', 'i')
@@ -54,7 +54,7 @@ class ProposalCommentRepository extends EntityRepository
         $qb = $this->createQueryBuilder('c');
         $qb->addSelect('aut', 'm', 'v', 'i', 'r', 'ans')
             ->leftJoin('c.Author', 'aut')
-            ->leftJoin('aut.Media', 'm')
+            ->leftJoin('aut.media', 'm')
             ->leftJoin('c.votes', 'v')
             ->leftJoin('c.Reports', 'r')
             ->leftJoin('c.proposal', 'i')

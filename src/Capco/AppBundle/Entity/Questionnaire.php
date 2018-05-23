@@ -30,6 +30,12 @@ class Questionnaire
     protected $updatedAt;
 
     /**
+     * @var bool
+     * @ORM\Column(name="phone_confirmation", type="boolean", nullable=false)
+     */
+    protected $phoneConfirmation = false;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="description", type="text", nullable=true)
@@ -414,6 +420,18 @@ class Questionnaire
     public function setProposalForm(ProposalForm $proposalForm): self
     {
         $this->proposalForm = $proposalForm;
+
+        return $this;
+    }
+
+    public function isPhoneConfirmation(): bool
+    {
+        return $this->phoneConfirmation;
+    }
+
+    public function setPhoneConfirmation(bool $phoneConfirmation): self
+    {
+        $this->phoneConfirmation = $phoneConfirmation;
 
         return $this;
     }

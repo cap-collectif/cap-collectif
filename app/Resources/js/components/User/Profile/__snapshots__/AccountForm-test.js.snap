@@ -3,78 +3,135 @@
 exports[`<AccountForm /> should render a form 1`] = `
 <form
   className="form-horizontal"
+  id="profile-account"
   onSubmit={[Function]}
 >
-  <Field
-    component={[Function]}
-    id="account__email"
-    label={
+  <div
+    className="horizontal_field_with_border_top"
+    style={
+      Object {
+        "border": 0,
+      }
+    }
+  >
+    <label
+      className="col-sm-3 control-label"
+      htmlFor="account__email"
+    >
       <FormattedMessage
         id="proposal.vote.form.email"
         values={Object {}}
       />
-    }
-    labelClassName="col-sm-4"
-    name="email"
-    type="email"
-    wrapperClassName="col-sm-6"
-  />
-  <p
-    className="small excerpt col-sm-6 col-sm-offset-4"
+    </label>
+    <div>
+      <Field
+        component={[Function]}
+        divClassName="col-sm-6"
+        id="account__email"
+        name="email"
+        style={
+          Object {
+            "marginLeft": 15,
+          }
+        }
+        type="email"
+      />
+      <span
+        className="small excerpt col-sm-6 col-sm-offset-3"
+        style={
+          Object {
+            "paddingBottom": 10,
+          }
+        }
+      >
+        <i
+          className="icon cap-lock-2"
+        />
+        <FormattedMessage
+          id="account.your_email_is_not_public"
+          values={Object {}}
+        />
+      </span>
+    </div>
+  </div>
+  <div
+    className="col-sm-6 col-sm-offset-3"
+    id="profile-alert-form"
   >
-    <FormattedMessage
-      id="account.your_email_is_not_public"
-      values={Object {}}
-    />
-  </p>
+    <AlertForm />
+  </div>
 </form>
 `;
 
 exports[`<AccountForm /> should render a form with an alert if submitted password is wrong 1`] = `
 <form
   className="form-horizontal"
+  id="profile-account"
   onSubmit={[Function]}
 >
-  <Alert
-    bsClass="alert"
-    bsStyle="danger"
-    closeLabel="Close alert"
+  <div
+    className="horizontal_field_with_border_top"
+    style={
+      Object {
+        "border": 0,
+      }
+    }
   >
-    <p>
-      <FormattedHTMLMessage
-        id="user.confirm.wrong_password"
-        values={Object {}}
-      />
-    </p>
-  </Alert>
-  <Field
-    component={[Function]}
-    id="account__email"
-    label={
+    <label
+      className="col-sm-3 control-label"
+      htmlFor="account__email"
+    >
       <FormattedMessage
         id="proposal.vote.form.email"
         values={Object {}}
       />
-    }
-    labelClassName="col-sm-4"
-    name="email"
-    type="email"
-    wrapperClassName="col-sm-6"
-  />
-  <p
-    className="small excerpt col-sm-6 col-sm-offset-4"
+    </label>
+    <div>
+      <Field
+        component={[Function]}
+        divClassName="col-sm-6"
+        id="account__email"
+        name="email"
+        style={
+          Object {
+            "marginLeft": 15,
+          }
+        }
+        type="email"
+      />
+      <span
+        className="small excerpt col-sm-6 col-sm-offset-3"
+        style={
+          Object {
+            "paddingBottom": 10,
+          }
+        }
+      >
+        <i
+          className="icon cap-lock-2"
+        />
+        <FormattedMessage
+          id="account.your_email_is_not_public"
+          values={Object {}}
+        />
+      </span>
+    </div>
+  </div>
+  <div
+    className="col-sm-6 col-sm-offset-3"
+    id="profile-alert-form"
   >
-    <FormattedMessage
-      id="account.your_email_is_not_public"
-      values={Object {}}
+    <AlertForm
+      errorMessage="user.confirm.wrong_password"
     />
-  </p>
+  </div>
 </form>
 `;
 
 exports[`<AccountForm /> should render a form with an info if a confirmation email has been resent 1`] = `
 <form
   className="form-horizontal"
+  id="profile-account"
   onSubmit={[Function]}
 >
   <Alert
@@ -87,30 +144,56 @@ exports[`<AccountForm /> should render a form with an info if a confirmation ema
       values={Object {}}
     />
   </Alert>
-  <Field
-    component={[Function]}
-    id="account__email"
-    label={
+  <div
+    className="horizontal_field_with_border_top"
+    style={
+      Object {
+        "border": 0,
+      }
+    }
+  >
+    <label
+      className="col-sm-3 control-label"
+      htmlFor="account__email"
+    >
       <FormattedMessage
         id="proposal.vote.form.email"
         values={Object {}}
       />
-    }
-    labelClassName="col-sm-4"
-    name="email"
-    type="email"
-    wrapperClassName="col-sm-6"
-  />
-  <p
-    className="small excerpt col-sm-6 col-sm-offset-4"
-  >
-    <FormattedMessage
-      id="account.your_email_is_not_public"
-      values={Object {}}
-    />
-  </p>
+    </label>
+    <div>
+      <Field
+        component={[Function]}
+        divClassName="col-sm-6"
+        id="account__email"
+        name="email"
+        style={
+          Object {
+            "marginLeft": 15,
+          }
+        }
+        type="email"
+      />
+      <span
+        className="small excerpt col-sm-6 col-sm-offset-3"
+        style={
+          Object {
+            "paddingBottom": 10,
+          }
+        }
+      >
+        <i
+          className="icon cap-lock-2"
+        />
+        <FormattedMessage
+          id="account.your_email_is_not_public"
+          values={Object {}}
+        />
+      </span>
+    </div>
+  </div>
   <div
-    className="col-sm-6 col-sm-offset-4"
+    className="col-sm-6 col-sm-offset-3"
   >
     <p
       className="small excerpt"
@@ -125,7 +208,7 @@ exports[`<AccountForm /> should render a form with an info if a confirmation ema
       />
     </p>
     <p
-      className="small excerpt"
+      className="small excerpt col-sm-6 col-sm-offset-3"
     >
       <a
         href="#resend"
@@ -148,38 +231,71 @@ exports[`<AccountForm /> should render a form with an info if a confirmation ema
       </a>
     </p>
   </div>
+  <div
+    className="col-sm-6 col-sm-offset-3"
+    id="profile-alert-form"
+  >
+    <AlertForm />
+  </div>
 </form>
 `;
 
 exports[`<AccountForm /> should render a form with information about new email 1`] = `
 <form
   className="form-horizontal"
+  id="profile-account"
   onSubmit={[Function]}
 >
-  <Field
-    component={[Function]}
-    id="account__email"
-    label={
+  <div
+    className="horizontal_field_with_border_top"
+    style={
+      Object {
+        "border": 0,
+      }
+    }
+  >
+    <label
+      className="col-sm-3 control-label"
+      htmlFor="account__email"
+    >
       <FormattedMessage
         id="proposal.vote.form.email"
         values={Object {}}
       />
-    }
-    labelClassName="col-sm-4"
-    name="email"
-    type="email"
-    wrapperClassName="col-sm-6"
-  />
-  <p
-    className="small excerpt col-sm-6 col-sm-offset-4"
-  >
-    <FormattedMessage
-      id="account.your_email_is_not_public"
-      values={Object {}}
-    />
-  </p>
+    </label>
+    <div>
+      <Field
+        component={[Function]}
+        divClassName="col-sm-6"
+        id="account__email"
+        name="email"
+        style={
+          Object {
+            "marginLeft": 15,
+          }
+        }
+        type="email"
+      />
+      <span
+        className="small excerpt col-sm-6 col-sm-offset-3"
+        style={
+          Object {
+            "paddingBottom": 10,
+          }
+        }
+      >
+        <i
+          className="icon cap-lock-2"
+        />
+        <FormattedMessage
+          id="account.your_email_is_not_public"
+          values={Object {}}
+        />
+      </span>
+    </div>
+  </div>
   <div
-    className="col-sm-6 col-sm-offset-4"
+    className="col-sm-6 col-sm-offset-3"
   >
     <p
       className="small excerpt"
@@ -194,7 +310,7 @@ exports[`<AccountForm /> should render a form with information about new email 1
       />
     </p>
     <p
-      className="small excerpt"
+      className="small excerpt col-sm-6 col-sm-offset-3"
     >
       <a
         href="#resend"
@@ -216,6 +332,12 @@ exports[`<AccountForm /> should render a form with information about new email 1
         />
       </a>
     </p>
+  </div>
+  <div
+    className="col-sm-6 col-sm-offset-3"
+    id="profile-alert-form"
+  >
+    <AlertForm />
   </div>
 </form>
 `;

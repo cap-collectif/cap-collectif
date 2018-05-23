@@ -46,8 +46,8 @@ Scenario: Logged in admin wants to evaluate a proposal
   Given I am logged in as admin
   And I go to the admin proposal page with proposalid "proposal10"
   Then I go to the admin proposal evaluation tab
-  And I fill the element "proposal evaluation evaluate" with value "Bonne"
-  And I fill the element "proposal evaluation evaluate more information" with value "C'est génial cette appli, les gens sont investit l'évaluation marche super bien !"
+  And I fill the proposal element "proposal evaluation evaluate" with value "Bonne"
+  And I fill the proposal element "proposal evaluation evaluate more information" with value "C'est génial cette appli, les gens sont investit l'évaluation marche super bien !"
   And I evaluate the proposal presentation to "Au top"
   And I check "Incohérente" in the proposal definition evaluation
   And I wait 1 seconds

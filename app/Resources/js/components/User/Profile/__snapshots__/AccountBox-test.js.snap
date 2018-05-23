@@ -5,13 +5,30 @@ exports[`<AccountBox /> should render a disabled button when the form is invalid
   bsClass="panel"
   bsStyle="default"
   defaultExpanded={false}
-  footer={
+>
+  <h2
+    className="page-header"
+  >
+    <FormattedMessage
+      id="profile.account.title"
+      values={Object {}}
+    />
+  </h2>
+  <Connect(ReduxForm) />
+  <Connect(ConfirmPasswordModal) />
+  <div
+    style={
+      Object {
+        "paddingLeft": 15,
+      }
+    }
+  >
     <Button
       active={false}
       block={false}
       bsClass="btn"
       bsStyle="primary"
-      className="col-sm-offset-4"
+      className="col-sm-offset-3"
       disabled={true}
       id="edit-account-profile-button"
       onClick={[Function]}
@@ -21,16 +38,7 @@ exports[`<AccountBox /> should render a disabled button when the form is invalid
         values={Object {}}
       />
     </Button>
-  }
-  header={
-    <FormattedMessage
-      id="profile.account.title"
-      values={Object {}}
-    />
-  }
->
-  <Connect(ReduxForm) />
-  <Connect(ConfirmPasswordModal) />
+  </div>
 </Panel>
 `;
 
@@ -39,13 +47,30 @@ exports[`<AccountBox /> should render a disabled button when the form is submitt
   bsClass="panel"
   bsStyle="default"
   defaultExpanded={false}
-  footer={
+>
+  <h2
+    className="page-header"
+  >
+    <FormattedMessage
+      id="profile.account.title"
+      values={Object {}}
+    />
+  </h2>
+  <Connect(ReduxForm) />
+  <Connect(ConfirmPasswordModal) />
+  <div
+    style={
+      Object {
+        "paddingLeft": 15,
+      }
+    }
+  >
     <Button
       active={false}
       block={false}
       bsClass="btn"
       bsStyle="primary"
-      className="col-sm-offset-4"
+      className="col-sm-offset-3"
       disabled={true}
       id="edit-account-profile-button"
       onClick={[Function]}
@@ -55,16 +80,7 @@ exports[`<AccountBox /> should render a disabled button when the form is submitt
         values={Object {}}
       />
     </Button>
-  }
-  header={
-    <FormattedMessage
-      id="profile.account.title"
-      values={Object {}}
-    />
-  }
->
-  <Connect(ReduxForm) />
-  <Connect(ConfirmPasswordModal) />
+  </div>
 </Panel>
 `;
 
@@ -73,13 +89,30 @@ exports[`<AccountBox /> should render and enabled button when the form is valid 
   bsClass="panel"
   bsStyle="default"
   defaultExpanded={false}
-  footer={
+>
+  <h2
+    className="page-header"
+  >
+    <FormattedMessage
+      id="profile.account.title"
+      values={Object {}}
+    />
+  </h2>
+  <Connect(ReduxForm) />
+  <Connect(ConfirmPasswordModal) />
+  <div
+    style={
+      Object {
+        "paddingLeft": 15,
+      }
+    }
+  >
     <Button
       active={false}
       block={false}
       bsClass="btn"
       bsStyle="primary"
-      className="col-sm-offset-4"
+      className="col-sm-offset-3"
       disabled={false}
       id="edit-account-profile-button"
       onClick={[Function]}
@@ -89,15 +122,6 @@ exports[`<AccountBox /> should render and enabled button when the form is valid 
         values={Object {}}
       />
     </Button>
-  }
-  header={
-    <FormattedMessage
-      id="profile.account.title"
-      values={Object {}}
-    />
-  }
->
-  <Connect(ReduxForm) />
-  <Connect(ConfirmPasswordModal) />
+  </div>
 </Panel>
 `;

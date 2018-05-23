@@ -5,7 +5,7 @@
 
 {% block metaTags %}
     {# OpenGraph doesn't support svg as image so no default avatar :'( #}
-    {% set userMedia %}{% if user.Media %}{% path user.Media, 'avatar' %}{% endif %}{% endset %}
+    {% set userMedia %}{% if user.media %}{% path user.media, 'avatar' %}{% endif %}{% endset %}
         {% include 'CapcoAppBundle:Default:meta.html.twig' with {
         'title':       'user.profile.show.title'|trans({'%name%': user.username }, 'CapcoAppBundle')~' - '~'user.profile.show.proposals'|trans({}, 'CapcoAppBundle'),
         'description': user.biography,

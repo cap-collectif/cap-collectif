@@ -19,7 +19,7 @@ export const NewEmailNotConfirmedAlert = React.createClass({
     }
     const editEmailUrl = `${window.location.protocol}//${
       window.location.host
-    }/profile/edit-account`;
+    }/profile/edit-profile#account`;
     return (
       <Alert bsStyle="warning" id="alert-new-email-not-confirmed">
         <div className="container">

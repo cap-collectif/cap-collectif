@@ -1,0 +1,147 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DateDropdownPicker /> should render in english with date 1`] = `
+<div>
+  <label
+    className="sm-3"
+  >
+    <FormattedMessage
+      id="my-label-id"
+      values={Object {}}
+    />
+  </label>
+  <div
+    className="className"
+    id="myId"
+  >
+    <Col
+      bsClass="col"
+      componentClass="div"
+      id="day"
+      md={2}
+      sm={2}
+    >
+      <DayPicker
+        classes="form-control"
+        defaultValue="Day"
+        id="day"
+        month="04"
+        name="day"
+        onChange={[Function]}
+        optionClasses="option classes"
+        value="25"
+        year="1990"
+      />
+    </Col>
+    <Col
+      bsClass="col"
+      componentClass="div"
+      id="month"
+      md={3}
+      sm={3}
+    >
+      <MonthPicker
+        classes="form-control"
+        defaultValue="month"
+        id="month"
+        locale=""
+        name="month"
+        onChange={[Function]}
+        optionClasses="option classes"
+        value="04"
+        year="1990"
+      />
+    </Col>
+    <Col
+      bsClass="col"
+      componentClass="div"
+      id="year"
+      md={3}
+      sm={3}
+    >
+      <YearPicker
+        classes="form-control"
+        defaultValue="year"
+        id="year"
+        name="year"
+        onChange={[Function]}
+        optionClasses="option classes"
+        value="1990"
+      />
+    </Col>
+  </div>
+</div>
+`;
+
+exports[`<DateDropdownPicker /> should render in english without date 1`] = `
+<div>
+  <label
+    className="sm-3"
+  >
+    <FormattedMessage
+      id="my-label-id"
+      values={Object {}}
+    />
+  </label>
+  <div
+    className="className"
+    id="myId"
+  >
+    <Col
+      bsClass="col"
+      componentClass="div"
+      id="day"
+      md={2}
+      sm={2}
+    >
+      <DayPicker
+        classes="form-control"
+        defaultValue="Day"
+        id="day"
+        month={null}
+        name="day"
+        onChange={[Function]}
+        optionClasses="option classes"
+        value={null}
+        year={null}
+      />
+    </Col>
+    <Col
+      bsClass="col"
+      componentClass="div"
+      id="month"
+      md={3}
+      sm={3}
+    >
+      <MonthPicker
+        classes="form-control"
+        defaultValue="month"
+        id="month"
+        locale=""
+        name="month"
+        onChange={[Function]}
+        optionClasses="option classes"
+        value={null}
+        year={null}
+      />
+    </Col>
+    <Col
+      bsClass="col"
+      componentClass="div"
+      id="year"
+      md={3}
+      sm={3}
+    >
+      <YearPicker
+        classes="form-control"
+        defaultValue="year"
+        id="year"
+        name="year"
+        onChange={[Function]}
+        optionClasses="option classes"
+        value={null}
+      />
+    </Col>
+  </div>
+</div>
+`;

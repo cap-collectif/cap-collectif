@@ -23,6 +23,7 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
+use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Resolver\TypeResolver;
@@ -107,6 +108,9 @@ class NodeTypeResolver implements ResolverInterface
         }
         if ($node instanceof Event) {
             return $this->typeResolver->resolve('Event');
+        }
+        if ($node instanceof User) {
+            return $this->typeResolver->resolve('User');
         }
 
         throw new UserError('Could not resolve type of Node.');
