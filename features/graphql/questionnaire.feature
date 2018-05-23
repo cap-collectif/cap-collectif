@@ -40,17 +40,19 @@ Scenario: GraphQL client wants to retrieve replies
   """
   {
       questionnaire: node(id: "questionnaire1") {
-        viewerReplies {
-          id
-          responses {
-            question {
-              id
+        ... on Questionnaire {
+          viewerReplies {
+            id
+            responses {
+              question {
+                id
+              }
+              ... on ValueResponse {
+                value
+              }
             }
-            ... on ValueResponse {
-              value
-            }
-          }
-       }
+         }
+        }
     }
   }
   """

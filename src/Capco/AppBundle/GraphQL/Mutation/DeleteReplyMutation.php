@@ -34,15 +34,11 @@ class DeleteReplyMutation
             throw new UserError('Reply not found');
         }
 
-        if ($user !== $reply->getAuthor()) {
+        if ($user->getId() !== $reply->getAuthor()->getId()) {
             throw new UserError('You are not the author of this reply');
         }
 
         $questionnaire = $reply->getQuestionnaire();
-
-        if (!$questionnaire->canContribute()) {
-            throw new UserError('This reply is no longer deletable.');
-        }
 
         $this->em->remove($reply);
         $this->em->flush();
