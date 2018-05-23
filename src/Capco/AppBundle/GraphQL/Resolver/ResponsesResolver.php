@@ -7,7 +7,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class ResponsesResolver implements ResolverInterface
 {
-    public function __invoke(Reply $reply)
+    public function __invoke(Reply $reply): iterable
     {
         return $reply->getResponses();
     }

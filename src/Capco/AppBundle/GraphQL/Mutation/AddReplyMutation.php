@@ -87,9 +87,9 @@ class AddReplyMutation
         $this->em->flush();
         $this->redisStorageHelper->recomputeUserCounters($user);
 
-        if ($questionnaire->isAcknowledgeReplies()) {
-            // ?
-        }
+        // if ($questionnaire->isAcknowledgeReplies()) {
+        //     // Send an mail
+        // }
 
         return ['questionnaire' => $questionnaire, 'reply' => $reply];
     }

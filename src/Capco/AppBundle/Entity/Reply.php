@@ -78,11 +78,6 @@ class Reply implements VoteContribution
         return null;
     }
 
-    public function isIndexable()
-    {
-        return false;
-    }
-
     public function getAuthor()
     {
         return $this->author;

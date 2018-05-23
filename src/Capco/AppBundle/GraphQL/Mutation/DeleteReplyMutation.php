@@ -26,7 +26,7 @@ class DeleteReplyMutation
         $this->redisStorageHelper = $redisStorageHelper;
     }
 
-    public function __invoke(string $id, User $user)
+    public function __invoke(string $id, User $user): array
     {
         $reply = $this->replyRepo->find($id);
 
