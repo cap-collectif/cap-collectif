@@ -69,7 +69,6 @@ export class CarouselDesktop extends PureComponent<Props, State> {
       <div
         className="carousel__desktop carousel slide"
         id="carousel"
-        data-ride="carousel"
         data-pause="hover"
         data-wrap="false"
         data-keyboard="true">
