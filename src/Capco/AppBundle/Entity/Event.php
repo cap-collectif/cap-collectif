@@ -308,31 +308,30 @@ class Event implements CommentableInterface, IndexableInterface
     /**
      * @param mixed $lat
      */
-    public function setLat($lat)
+    public function setLat($lat): self
     {
-        if (is_string($lat)) {
+        if (\is_string($lat)) {
             $lat = (float) $lat;
         }
+
         $this->lat = $lat;
+
+        return $this;
     }
 
-    /**
-     * @return float
-     */
-    public function getLng()
+    public function getLng(): float
     {
         return $this->lng;
     }
 
-    /**
-     * @param float $lng
-     */
-    public function setLng($lng)
+    public function setLng($lng): self
     {
-        if (is_string($lng)) {
+        if (\is_string($lng)) {
             $lng = (float) $lng;
         }
         $this->lng = $lng;
+
+        return $this;
     }
 
     /**
