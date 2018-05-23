@@ -39,7 +39,7 @@ Scenario: GraphQL client wants to retrieve replies
   When I send a GraphQL request:
   """
   {
-      questionnaire(id: 1) {
+      questionnaire: node(id: "questionnaire1") {
         viewerReplies {
           id
           responses {

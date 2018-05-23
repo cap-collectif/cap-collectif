@@ -1,5 +1,5 @@
-@changeProposalEvaluation
-Feature: Proposal Evaluation
+@addReply
+Feature: Add Reply
 
 @database
 Scenario: User wants to add a reply
@@ -24,7 +24,7 @@ Scenario: User wants to add a reply
     }",
     "variables": {
       "input": {
-        "questionnaireId": 1,
+        "questionnaireId": "questionnaire1",
         "responses": [
             {
               "question": "2",

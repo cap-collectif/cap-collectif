@@ -52,21 +52,13 @@ Scenario: Logged in API client wants to get one of his replies
 
 @security
 Scenario: Anonymous API client wants to get one reply
-<<<<<<< HEAD
-  When I send a GET request to "/api/questionnaires/questionnaire1/replies/2"
-=======
-  When I send a GET request to "/api/questionnaires/1/replies/reply2"
->>>>>>> Fix id
+  When I send a GET request to "/api/questionnaires/questionnaire1/replies/reply2"
   Then the JSON response status code should be 401
 
 @security
 Scenario: Logged in API client wants to get one reply when he's not the author
   Given I am logged in to api as user
-<<<<<<< HEAD
-  When I send a GET request to "/api/questionnaires/questionnaire1/replies/2"
-=======
-  When I send a GET request to "/api/questionnaires/1/replies/reply2"
->>>>>>> Fix id
+  When I send a GET request to "/api/questionnaires/questionnaire1/replies/reply2"
   Then the JSON response status code should be 403
 
 Scenario: Logged in API client wants to get his replies
