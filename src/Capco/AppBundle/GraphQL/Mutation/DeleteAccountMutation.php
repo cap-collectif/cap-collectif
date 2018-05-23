@@ -40,12 +40,11 @@ class DeleteAccountMutation implements ContainerAwareInterface
     public function __invoke(Request $request, Argument $input, User $user): array
     {
         $deleteType = $input['type'];
-        $contributions = $user->getContributions();
-        $this->deleteIfStepActive($user, $contributions);
+        $this->deleteIfStepActive($user);
         $this->anonymizeUser($user);
 
         if ('HARD' === $deleteType && $user) {
-            $this->hardDelete($user, $contributions);
+            $this->hardDelete($user);
         }
 
         return [
@@ -70,7 +69,7 @@ class DeleteAccountMutation implements ContainerAwareInterface
         }
 
         $user->setUsername($usernameDeleted);
-        $user->setEmail(time() . '@deleted.com');
+        $user->setEmail(null);
         $user->setDeletedAccountAt(new \DateTime());
         $user->setPlainPassword('');
 
@@ -117,12 +116,12 @@ class DeleteAccountMutation implements ContainerAwareInterface
         $this->em->flush();
     }
 
-    public function deleteIfStepActive(User $user, array $contributions, bool $dryRun = false)
+    public function deleteIfStepActive(User $user, bool $dryRun = false): int
     {
         $deletedBodyText = $this->translator->trans('deleted-content-by-author', [], 'CapcoAppBundle');
+        $contributions = $user->getContributions();
         $toDeleteList = [];
         $now = (new \DateTime())->format('Y-m-d H:i:s');
-        $count = 0;
 
         foreach ($contributions as $contribution) {
             if ($contribution instanceof AbstractVote) {
@@ -166,11 +165,7 @@ class DeleteAccountMutation implements ContainerAwareInterface
             }
 
             if (($contribution instanceof Proposal || $contribution instanceof Opinion) && $this->checkIfStepActive($contribution->getStep())) {
-                ++$count;
-                if (!$dryRun) {
-                    $this->em->remove($contribution);
-                    //$this->container->get('capco.mutation.proposal')->delete($contribution->getId());
-                }
+                $toDeleteList[] = $contribution;
             }
 
             if ($contribution instanceof Source || $contribution instanceof \Capco\AppBundle\Entity\Argument) {
@@ -194,11 +189,12 @@ class DeleteAccountMutation implements ContainerAwareInterface
 
         $this->container->get('redis_storage.helper')->recomputeUserCounters($user);
 
-        return $count + \count($toDeleteList);
+        return \count($toDeleteList);
     }
 
-    public function hardDelete(User $user, array $contributions): void
+    public function hardDelete(User $user): void
     {
+        $contributions = $user->getContributions();
         $deletedBodyText = $this->translator->trans('deleted-content-by-author', [], 'CapcoAppBundle');
         $deletedTitleText = $this->translator->trans('deleted-title', [], 'CapcoAppBundle');
 

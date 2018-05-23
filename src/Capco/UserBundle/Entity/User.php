@@ -1099,12 +1099,12 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return $this;
     }
 
-    public function getDeletedAccountAt()
+    public function getDeletedAccountAt(): ?\DateTime
     {
         return $this->deletedAccountAt;
     }
 
-    public function setDeletedAccountAt(\DateTime $date = null): self
+    public function setDeletedAccountAt(\DateTime $date): self
     {
         $this->deletedAccountAt = $date;
 

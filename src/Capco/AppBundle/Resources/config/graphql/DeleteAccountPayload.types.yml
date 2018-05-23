@@ -3,7 +3,7 @@ DeleteAccountPayload:
     config:
         fields:
             userId:
-                type: "ID"
+                type: "ID!"
                 description: "user id"
 
 

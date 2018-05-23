@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver;
 
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\UserBundle\Entity\User;
 use FOS\UserBundle\Model\UserInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -159,13 +158,8 @@ class UserResolver implements ContainerAwareInterface
     public function contributionsToDeleteCount($object): int
     {
         $deleteAction = $this->container->get('capco.mutation.delete_account');
-        $count = $deleteAction->deleteIfStepActive($object, $object->getContributions(), true);
+        $count = $deleteAction->deleteIfStepActive($object, true);
 
         return $count;
-    }
-
-    public function checkIfStepActive(AbstractStep $step): bool
-    {
-        return $step->isTimeless() ?: $step->getEndAt() > (new \DateTime())->format('Y-m-d H:i:s');
     }
 }
