@@ -73,6 +73,7 @@ const renderDraggableMembers = ({ fields, votes, step, deletable }: VotesProps) 
   if (!votes.edges) {
     return null;
   }
+
   return (
     <div>
       {fields.map((member, index) => {
@@ -86,7 +87,7 @@ const renderDraggableMembers = ({ fields, votes, step, deletable }: VotesProps) 
           <Draggable key={vote.proposal.id} draggableId={vote.proposal.id} index={index}>
             {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => {
               const child = (
-                <div>
+                <div className="proposals-user-votes__draggable-item">
                   <DraggableItem
                     innerRef={provided.innerRef}
                     isDragging={snapshot.isDragging}

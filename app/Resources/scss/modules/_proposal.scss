@@ -240,6 +240,10 @@
     border-radius: 5px;
 }
 
+.proposals-user-votes__draggable-item > div {
+    background-color: $white;
+}
+
 .proposals-user-votes__row {
     padding: 15px 0 15px;
     border-bottom: 1px solid $border-color;
@@ -247,14 +251,39 @@
     margin-left: 0;
     margin-right: 0;
 
-    .react-toggle .react-toggle-track,
-    .react-toggle .react-toggle-thumb {
-        background-color: $danger-color;
+    .react-toggle {
+        .react-toggle-track {
+            width: 40px;
+            height: 20px;
+
+            svg {
+                display: none;
+            }
+        }
+
+        .react-toggle-thumb {
+            width: 18px;
+            height: 18px;
+        }
+
+        .react-toggle-track, &:hover .react-toggle-track {
+            background-color: $danger-color;
+        }
+
+        .react-toggle-thumb {
+            border-color: $danger-color;
+        }
     }
 
-    .react-toggle--checked .react-toggle-track,
-    .react-toggle--checked .react-toggle-thumb {
-        background-color: $success-color;
+    .react-toggle--checked {
+        .react-toggle-track, &:hover .react-toggle-track {
+            background-color: $success-color;
+        }
+
+        .react-toggle-thumb {
+            border-color: $success-color;
+            left: 21px;
+        }
     }
 }
 
@@ -262,7 +291,7 @@
     display: flex;
 
     .badge {
-        padding: 3px 14px;
+        padding: 3px 11px;
     }
 
     .cap {
@@ -429,6 +458,27 @@
             margin-left: 0;
             width: 100%;
         }
+    }
+    
+
+}
+
+@media (max-width: $screen-sm-max) {
+    .proposals-user-votes__row {
+        position: relative;
+    }
+
+    .proposals-user-votes__col:not(.proposal-vote-col__delete) {
+        padding-left: 50px;
+    }
+
+    .proposals-user-votes__content {
+        justify-content: flex-start;
+    }
+
+    .proposal-vote-col__delete {
+        position: absolute;
+        top: 42%;
     }
 }
 
