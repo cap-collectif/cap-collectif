@@ -12,10 +12,16 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 COPY --from=node /usr/local/bin/node /usr/local/bin/node
 COPY --from=node /usr/local/include/node /usr/local/include/node
 COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
-COPY --from=node /opt/yarn-v1.5.1 /opt/yarn
+
 RUN ln -s /usr/local/bin/node /usr/local/bin/nodejs && \
-    ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm && \
-    ln -s /opt/yarn/bin/yarn /usr/local/bin/yarn
+    ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
+
+ENV YARN_VERSION 1.5.1
+RUN curl -fSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz" \
+    && tar -xzf yarn-v$YARN_VERSION.tar.gz -C /opt/ \
+    && ln -snf /opt/yarn-v$YARN_VERSION/bin/yarn /usr/local/bin/yarn \
+    && ln -snf /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg \
+    && rm yarn-v$YARN_VERSION.tar.gz
 
 RUN apt-get update && \
     apt-get install -y libcurl4-openssl-dev \
