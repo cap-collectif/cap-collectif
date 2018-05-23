@@ -1,0 +1,10 @@
+CheckboxRequirement:
+    type: object
+    config:
+        implements: [Requirement]
+        description: "Requires a phone"
+        fields:
+          id:
+            type: "ID!"
+          label:
+            type: "String!"

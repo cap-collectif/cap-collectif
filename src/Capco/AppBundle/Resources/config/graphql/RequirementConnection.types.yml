@@ -1,0 +1,15 @@
+RequirementConnection:
+    type: relay-connection
+    config:
+        nodeType: Requirement!
+        connectionFields:
+            totalCount:
+                type: "Int!"
+            viewerMeetsTheRequirements:
+                type: "Boolean!"
+                access: "@hasRole=('ROLE_USER')"
+                resolve: "@=false"
+                description: "Does the viewer meets all the requirements ?"
+            reason:
+                type: "String"
+                description: "Reason for collection."

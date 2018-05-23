@@ -1,0 +1,5 @@
+FirstnameRequirement:
+    type: object
+    config:
+        implements: [Requirement]
+        description: "Require a firstname"

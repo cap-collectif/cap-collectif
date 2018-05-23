@@ -1,0 +1,5 @@
+LastnameRequirement:
+    type: object
+    config:
+        implements: [Requirement]
+        description: "Requires a lastname"

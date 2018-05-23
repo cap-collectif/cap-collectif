@@ -1,0 +1,5 @@
+PhoneRequirement:
+    type: object
+    config:
+        implements: [Requirement]
+        description: "Requires a phone"

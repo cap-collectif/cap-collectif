@@ -4,6 +4,9 @@ ProposalStep:
         description: "A proposal step"
         resolveType: "@=resolver('step_type', [value])"
         fields:
+            voteRequirements:
+              type: "RequirementConnection!"
+              description: "The requirements to vote."
             id:
               type: "ID!"
             kind:

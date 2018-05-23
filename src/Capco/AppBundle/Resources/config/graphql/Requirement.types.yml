@@ -1,0 +1,11 @@
+Requirement:
+    type: interface
+    config:
+        description: "A requirement"
+        # resolveType: "@=resolver('requirement_type', [value])"
+        fields:
+            viewerMeetsTheRequirement:
+                type: "Boolean!"
+                access: "@hasRole=('ROLE_USER')"
+                resolve: "@=false"
+                description: "Does the viewer meets the requirement ?"
