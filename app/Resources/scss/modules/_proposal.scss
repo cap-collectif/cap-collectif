@@ -251,39 +251,8 @@
     margin-left: 0;
     margin-right: 0;
 
-    .react-toggle {
-        .react-toggle-track {
-            width: 40px;
-            height: 20px;
-
-            svg {
-                display: none;
-            }
-        }
-
-        .react-toggle-thumb {
-            width: 18px;
-            height: 18px;
-        }
-
-        .react-toggle-track, &:hover .react-toggle-track {
-            background-color: $danger-color;
-        }
-
-        .react-toggle-thumb {
-            border-color: $danger-color;
-        }
-    }
-
-    .react-toggle--checked {
-        .react-toggle-track, &:hover .react-toggle-track {
-            background-color: $success-color;
-        }
-
-        .react-toggle-thumb {
-            border-color: $success-color;
-            left: 21px;
-        }
+    .draggable-icon__mobile {
+        display: none;
     }
 }
 
@@ -466,10 +435,23 @@
 @media (max-width: $screen-sm-max) {
     .proposals-user-votes__row {
         position: relative;
+
+        .draggable-icon__mobile {
+            display: block;
+            position: absolute;
+            right: 0;
+            top: 40%;
+            padding-right: 15px;
+            font-size: 22px;
+        }
     }
 
     .proposals-user-votes__col:not(.proposal-vote-col__delete) {
-        padding-left: 50px;
+        padding: 0 50px;
+    }
+
+    .modal-body .proposals-user-votes__col {
+        padding-left: 15px;
     }
 
     .proposals-user-votes__content {
@@ -479,6 +461,10 @@
     .proposal-vote-col__delete {
         position: absolute;
         top: 42%;
+    }
+
+    .proposals-user-votes__content .cap-android-menu {
+        display: none;
     }
 }
 

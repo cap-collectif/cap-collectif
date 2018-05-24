@@ -264,6 +264,7 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
               <Nav
                 bsClass="nav"
                 bsStyle="pills"
+                className="mb-20"
                 justified={false}
                 pullLeft={false}
                 pullRight={false}
