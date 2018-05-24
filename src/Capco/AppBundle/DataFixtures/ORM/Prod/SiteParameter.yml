@@ -406,3 +406,9 @@ Capco\AppBundle\Entity\SiteParameter:
                <p><text(350)></p>
         position: 1
         type: 1
+    SiteParameterScriptAnalytic:
+        keyname: global.site.embed_analytic
+        category: settings.global
+        value: ''
+        position: 3
+        type: 3

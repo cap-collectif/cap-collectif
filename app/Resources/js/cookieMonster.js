@@ -21,7 +21,7 @@ var cookieMonster = function() {
     '_pk_hsr',
   ];
 
-  function getDoNotTrack() {
+  function isDoNotTrackActive() {
     const doNotTrack = navigator.doNotTrack || navigator.msDoNotTrack;
     return doNotTrack === 'yes' || doNotTrack === '1';
   }
@@ -43,8 +43,8 @@ var cookieMonster = function() {
     }
 
     // we dont have a consent cookie so, we show the banner
-    if (getDoNotTrack()) {
-      if (analyticConsent) {
+    if (isDoNotTrackActive()) {
+      if (typeof analyticConsent === 'undefined') {
         Cookies.set('analyticConsentValue', false, { expires: 395 });
       }
       if (consentCookie) {
@@ -65,7 +65,7 @@ var cookieMonster = function() {
 
     if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
       event.preventDefault();
-      if (getDoNotTrack()) {
+      if (isDoNotTrackActive()) {
         hideBanner();
         return;
       }
@@ -88,7 +88,7 @@ var cookieMonster = function() {
       return;
     }
     event.preventDefault();
-    if (getDoNotTrack()) {
+    if (isDoNotTrackActive()) {
       hideBanner();
       return;
     }
