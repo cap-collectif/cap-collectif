@@ -1,5 +1,6 @@
-import React, { PropTypes } from 'react';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
+import { reduxForm, Field } from 'redux-form';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import autosize from 'autosize';
@@ -9,95 +10,109 @@ import RegistrationButton from '../User/Registration/RegistrationButton';
 import LoginButton from '../User/Login/LoginButton';
 import UserAvatar from '../User/UserAvatar';
 import FlashMessages from '../Utils/FlashMessages';
-import FormMixin from '../../utils/FormMixin';
-import DeepLinkStateMixin from '../../utils/DeepLinkStateMixin';
 import Input from '../Form/Input';
 
-const CommentForm = React.createClass({
-  propTypes: {
-    isAnswer: PropTypes.bool,
-    focus: PropTypes.bool,
-    comment: PropTypes.func,
-    user: PropTypes.object,
-    intl: PropTypes.object,
-  },
+type Props = {
+  isAnswer?: boolean,
+  focus?: boolean,
+  comment?: Function,
+  user?: Object,
+  intl: intlMock,
+}
 
-  mixins: [DeepLinkStateMixin, FormMixin],
+// const onSubmit = (values, dispatch, props) => {
+//   const { synthesis } = props;
+//
+//   return Fetcher.put(`/syntheses/${synthesis.id}/display`, {
+//     rules: { level: values.level },
+//   }).then(() => {
+//     return SynthesisActions.load(synthesis.id);
+//   });
+// };
+//
+// const validate = ({ level }: Object) => {
+//   const errors = {};
+//   if (level < 0 || level > 5) {
+//     errors.level = 'synthesis.settings.display.level_constraints';
+//   }
+//
+//   return errors;
+// };
 
-  getDefaultProps() {
-    return {
-      isAnswer: false,
-      user: null,
-    };
-  },
+export const formName = 'CommentForm';
 
-  getInitialState() {
-    return {
-      form: {
-        body: '',
-        authorName: '',
-        authorEmail: '',
-      },
-      errors: {
-        body: [],
-        authorName: [],
-        authorEmail: [],
-      },
-      expanded: false,
-      isSubmitting: false,
-    };
-  },
+export class CommentForm extends React.Component<Props> {
+  // mixins: [DeepLinkStateMixin, FormMixin],
+  static defaultProps = {
+    isAnswer: false,
+    user: null,
+  };
 
-  componentDidMount() {
-    const { focus, user } = this.props;
-    if (focus) {
-      ReactDOM.findDOMNode(this.refs.body).focus();
-    }
-    this.updateConstraints(!user);
-  },
+  // check https://github.com/cap-collectif/platform/pull/4583/files?utf8=%E2%9C%93&diff=split
 
-  componentWillReceiveProps(nextProps) {
-    const { user } = this.props;
-    if (nextProps.focus) {
-      ReactDOM.findDOMNode(this.refs.body).focus();
-      this.setState({ expanded: true });
-    }
-    if (nextProps.user !== user) {
-      this.updateConstraints(!nextProps.user);
-    }
-  },
+  // state = {
+  //   form: {
+  //     body: '',
+  //     authorName: '',
+  //     authorEmail: '',
+  //   },
+  //   errors: {
+  //     body: [],
+  //     authorName: [],
+  //     authorEmail: [],
+  //   },
+  //   expanded: false,
+  //   isSubmitting: false,
+  // };
 
-  componentDidUpdate() {
-    autosize(ReactDOM.findDOMNode(this.refs.body));
-  },
-
-  getFormClasses() {
-    const { isAnswer } = this.props;
-    return classNames({
-      'comment-answer-form': isAnswer,
-    });
-  },
-
-  formValidationRules: {},
-
-  updateConstraints(anonymous) {
-    this.formValidationRules = {
-      body: {
-        notBlank: { message: 'comment.constraints.body' },
-        min: { value: 2, message: 'comment.constraints.body' },
-      },
-    };
-    if (anonymous) {
-      this.formValidationRules.authorEmail = {
-        notBlank: { message: 'comment.constraints.author_email' },
-        isEmail: { message: 'comment.constraints.author_email' },
-      };
-      this.formValidationRules.authorName = {
-        notBlank: { message: 'comment.constraints.author_name' },
-        min: { value: 2, message: 'comment.constraints.author_name' },
-      };
-    }
-  },
+  // componentDidMount() {
+  //   const { focus, user } = this.props;
+  //   if (focus) {
+  //     ReactDOM.findDOMNode(this.refs.body).focus();
+  //   }
+  //   this.updateConstraints(!user);
+  // }
+  //
+  // componentWillReceiveProps(nextProps) {
+  //   const { user } = this.props;
+  //   if (nextProps.focus) {
+  //     ReactDOM.findDOMNode(this.refs.body).focus();
+  //     this.setState({ expanded: true });
+  //   }
+  //   if (nextProps.user !== user) {
+  //     this.updateConstraints(!nextProps.user);
+  //   }
+  // }
+  //
+  // componentDidUpdate() {
+  //   autosize(ReactDOM.findDOMNode(this.refs.body));
+  // }
+  //
+  // getFormClasses() {
+  //   const { isAnswer } = this.props;
+  //   return classNames({
+  //     'comment-answer-form': isAnswer,
+  //   });
+  // }
+  //
+  // updateConstraints(anonymous) {
+  //   this.formValidationRules = {
+  //     body: {
+  //       notBlank: { message: 'comment.constraints.body' },
+  //       min: { value: 2, message: 'comment.constraints.body' },
+  //     },
+  //   };
+  //   if (anonymous) {
+  //     this.formValidationRules.authorEmail = {
+  //       notBlank: { message: 'comment.constraints.author_email' },
+  //       isEmail: { message: 'comment.constraints.author_email' },
+  //     };
+  //     this.formValidationRules.authorName = {
+  //       notBlank: { message: 'comment.constraints.author_name' },
+  //       min: { value: 2, message: 'comment.constraints.author_name' },
+  //     };
+  //   }
+  // }
 
   expand(newState) {
     if (!newState) {
@@ -118,7 +133,7 @@ const CommentForm = React.createClass({
       }
     }
     this.setState({ expanded: newState });
-  },
+  }
 
   create() {
     const { comment, user } = this.props;
@@ -143,7 +158,7 @@ const CommentForm = React.createClass({
           this.setState({ isSubmitting: false, submitted: false });
         });
     });
-  },
+  }
 
   renderFormErrors(field) {
     const errors = this.getErrorsMessages(field);
@@ -151,7 +166,7 @@ const CommentForm = React.createClass({
       return <FlashMessages errors={errors} form />;
     }
     return null;
-  },
+  }
 
   renderAnonymous() {
     const { user } = this.props;
@@ -211,7 +226,7 @@ const CommentForm = React.createClass({
         </div>
       );
     }
-  },
+  }
 
   renderCommentButton() {
     const { user } = this.props;
@@ -264,8 +279,8 @@ const CommentForm = React.createClass({
         </div>
       </div>
     );
-  },
-});
+  }
+}
 
 const mapStateToProps = state => {
   return { user: state.user.user };
