@@ -8,8 +8,8 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import AccountForm from './AccountForm';
 import ConfirmPasswordModal from '../ConfirmPasswordModal';
 import DeleteAccountModal from '../DeleteAccountModal';
-import { confirmPassword, showDeleteAccountModal } from '../../../redux/modules/user';
-import type { State, Dispatch } from '../../../types';
+import { confirmPassword } from '../../../redux/modules/user';
+import type { GlobalState, Dispatch } from '../../../types';
 import type { AccountBox_viewer } from './__generated__/AccountBox_viewer.graphql';
 
 type Props = {
@@ -19,7 +19,12 @@ type Props = {
   submitting: boolean,
 };
 
+type State = {
+  showDeleteAccountModal: boolean,
+};
+
 export class AccountBox extends Component<Props, State> {
+  state = { showDeleteAccountModal: false };
   render() {
     const { invalid, submitting, dispatch, viewer } = this.props;
     return (
@@ -46,19 +51,26 @@ export class AccountBox extends Component<Props, State> {
             id="delete-account-profile-button"
             bsStyle="danger"
             onClick={() => {
-              dispatch(showDeleteAccountModal());
+              this.setState({ showDeleteAccountModal: true });
             }}
             style={{ marginLeft: 15 }}>
             <FormattedMessage id="delete-account" />
           </Button>
         </div>
-        <DeleteAccountModal viewer={viewer} />
+        {/* $FlowFixMe */}
+        <DeleteAccountModal
+          viewer={viewer}
+          show={this.state.showDeleteAccountModal}
+          handleClose={() => {
+            this.setState({ showDeleteAccountModal: false });
+          }}
+        />
       </Panel>
     );
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
   submitting: state.user.isSubmittingAccountForm,
   invalid: isInvalid('account')(state),
 });

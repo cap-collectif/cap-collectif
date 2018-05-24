@@ -15,12 +15,12 @@ describe('<DeleteAccountModal />', () => {
   };
 
   it('should render an visible modal', () => {
-    const wrapper = shallow(<DeleteAccountModal show viewer={viewer} dispatch={jest.fn()} />);
+    const wrapper = shallow(<DeleteAccountModal show viewer={viewer} handleClose={() => {}} />);
     expect(wrapper).toMatchSnapshot();
   });
   it('should render an hidden modal', () => {
     const wrapper = shallow(
-      <DeleteAccountModal show={false} viewer={viewer} dispatch={jest.fn()} />,
+      <DeleteAccountModal show={false} viewer={viewer} handleClose={() => {}} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

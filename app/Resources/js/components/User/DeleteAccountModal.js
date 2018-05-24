@@ -1,16 +1,12 @@
 // @flow
 import React, { Component } from 'react';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
-import { connect } from 'react-redux';
 import { Modal, Button, Radio } from 'react-bootstrap';
-import type { MapStateToProps } from 'react-redux';
 import { createFragmentContainer, graphql } from 'react-relay';
 import type { DeleteAccountModal_viewer } from './__generated__/DeleteAccountModal_viewer.graphql';
 import DefaultAvatar from './DefaultAvatar';
 import CloseButton from '../Form/CloseButton';
 import DeleteAccountMutation from '../../mutations/DeleteAccountMutation';
-import type { Dispatch, State } from '../../types';
-import { closeDeleteAccountModal } from '../../redux/modules/user';
 
 const formName = 'delete-user';
 
@@ -20,7 +16,7 @@ type RelayProps = {
 
 type Props = RelayProps & {
   show: boolean,
-  dispatch: Dispatch,
+  handleClose: () => void,
 };
 
 type ModalState = {
@@ -54,7 +50,7 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
       this.state.removalType === 'SOFT' ? 'panel-primary delete__panel__checked' : 'panel-default';
     const hardPanelChecked =
       this.state.removalType === 'HARD' ? 'panel-primary delete__panel__checked' : 'panel-default';
-    const { show, dispatch, viewer } = this.props;
+    const { show, viewer } = this.props;
     const removalName = 'type-of-removal';
     return (
       <div>
@@ -62,7 +58,7 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
           animation={false}
           show={show}
           onHide={() => {
-            dispatch(closeDeleteAccountModal());
+            this.props.handleClose();
           }}
           aria-labelledby="contained-modal-title-lg">
           <Modal.Header closeButton>
@@ -211,7 +207,7 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
           <Modal.Footer>
             <CloseButton
               onClose={() => {
-                dispatch(closeDeleteAccountModal());
+                this.props.handleClose();
               }}
             />
             <Button
@@ -231,16 +227,8 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
-  return {
-    show: state.user.showDeleteAccountModal || false,
-  };
-};
-
-const container = connect(mapStateToProps)(DeleteAccountModal);
-
 export default createFragmentContainer(
-  container,
+  DeleteAccountModal,
   graphql`
     fragment DeleteAccountModal_viewer on User {
       contributionsCount

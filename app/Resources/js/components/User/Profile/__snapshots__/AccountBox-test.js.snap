@@ -58,7 +58,10 @@ exports[`<AccountBox /> should render a disabled button when the form is invalid
       />
     </Button>
   </div>
-  <Relay(Connect(DeleteAccountModal)) />
+  <Relay(DeleteAccountModal)
+    handleClose={[Function]}
+    show={false}
+  />
 </Panel>
 `;
 
@@ -120,7 +123,10 @@ exports[`<AccountBox /> should render a disabled button when the form is submitt
       />
     </Button>
   </div>
-  <Relay(Connect(DeleteAccountModal)) />
+  <Relay(DeleteAccountModal)
+    handleClose={[Function]}
+    show={false}
+  />
 </Panel>
 `;
 
@@ -182,6 +188,9 @@ exports[`<AccountBox /> should render and enabled button when the form is valid 
       />
     </Button>
   </div>
-  <Relay(Connect(DeleteAccountModal)) />
+  <Relay(DeleteAccountModal)
+    handleClose={[Function]}
+    show={false}
+  />
 </Panel>
 `;
