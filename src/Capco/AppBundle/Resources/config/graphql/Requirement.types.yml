@@ -7,5 +7,4 @@ Requirement:
             viewerMeetsTheRequirement:
                 type: "Boolean!"
                 access: "@hasRole=('ROLE_USER')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\ViewerMeetsTheRequirementResolver", [value, user])'
                 description: "Does the viewer meets the requirement ?"

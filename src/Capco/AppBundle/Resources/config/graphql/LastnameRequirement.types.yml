@@ -1,5 +1,16 @@
 LastnameRequirement:
     type: object
     config:
-        implements: [Requirement]
+        interfaces: [Node, Requirement]
         description: "Requires a lastname"
+        fields:
+            id:
+                type: "ID!"
+            viewerMeetsTheRequirement:
+                type: "Boolean!"
+                access: "@hasRole=('ROLE_USER')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\ViewerMeetsTheRequirementResolver", [value, user])'
+                description: "Does the viewer meets the requirement ?"
+            viewerValue:
+                type: "String"
+                access: "@hasRole('ROLE_USER')"

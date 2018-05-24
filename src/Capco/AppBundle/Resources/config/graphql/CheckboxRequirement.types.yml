@@ -1,10 +1,15 @@
 CheckboxRequirement:
     type: object
     config:
-        implements: [Requirement]
-        description: "Requires a phone"
+        interfaces: [Node, Requirement]
+        description: "Requires the viewer to check a box"
         fields:
           id:
-            type: "ID!"
+              type: "ID!"
           label:
-            type: "String!"
+              type: "String!"
+          viewerMeetsTheRequirement:
+              type: "Boolean!"
+              access: "@hasRole=('ROLE_USER')"
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\ViewerMeetsTheRequirementResolver", [value, user])'
+              description: "Does the viewer meets the requirement ?"

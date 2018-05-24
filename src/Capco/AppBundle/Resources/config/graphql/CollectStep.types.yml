@@ -6,6 +6,10 @@ CollectStep:
         fields:
             id:
               type: "ID!"
+            requirements:
+              type: "RequirementConnection!"
+              description: "The requirements to collect or vote."
+              resolve: '@resolver=("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\StepRequirementsResolver", [value, user, args])'
             show_url:
               type: "String!"
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\StepUrlResolver", [value])'

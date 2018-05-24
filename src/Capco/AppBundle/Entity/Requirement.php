@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Traits\PositionableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -12,15 +14,15 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Requirement
 {
-    use UuidTrait;
+    use UuidTrait, PositionableTrait;
 
-    const CHECKBOX = 0;
-    const FIRSTNAME = 1;
-    const LASTNAME = 2;
-    const PHONE = 3;
+    const CHECKBOX = 'CHECKBOX';
+    const FIRSTNAME = 'FIRSTNAME';
+    const LASTNAME = 'LASTNAME';
+    const PHONE = 'PHONE';
 
     /**
-     * @ORM\Column(name="type", type="integer")
+     * @ORM\Column(name="type", type="string")
      * @Assert\NotNull()
      */
     private $type = self::FIRSTNAME;
@@ -30,14 +32,32 @@ class Requirement
      */
     private $label = null;
 
-    public function getType(): int
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\AbstractStep")
+     * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=false)
+     */
+    private $step;
+
+    public function getType(): string
     {
         return $this->type;
     }
 
-    public function setType(int $type): self
+    public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getStep(): AbstractStep
+    {
+        return $this->step;
+    }
+
+    public function setStep(AbstractStep $step): self
+    {
+        $this->step = $step;
 
         return $this;
     }
