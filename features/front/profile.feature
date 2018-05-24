@@ -116,8 +116,10 @@ Scenario: Logged in user wants to manage his followings and click on a project
 @javascript @database
 Scenario: Logged in user wants to soft delete his account
   Given I am logged in as user
-  And I visited "edit account page"
+  And I visited "edit profile page"
   And I wait 2 seconds
+  And I click the "#account-tabs-tab-account" element
+  And I wait 1 seconds
   And I click the "#delete-account-profile-button" element
   When I click the "#confirm-delete-form-submit" element
   And I wait 5 seconds
