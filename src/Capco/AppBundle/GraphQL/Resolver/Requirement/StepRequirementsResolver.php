@@ -17,7 +17,7 @@ class StepRequirementsResolver implements ResolverInterface
     private $repository;
     private $viewerMeetsTheRequirementResolver;
 
-    public function __contruct(RequirementRepository $repository, ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver)
+    public function __construct(RequirementRepository $repository, ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver)
     {
         $this->repository = $repository;
         $this->viewerMeetsTheRequirementResolver = $viewerMeetsTheRequirementResolver;

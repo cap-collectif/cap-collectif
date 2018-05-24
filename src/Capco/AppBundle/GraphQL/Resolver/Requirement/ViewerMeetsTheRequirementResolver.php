@@ -10,7 +10,7 @@ class ViewerMeetsTheRequirementResolver implements ResolverInterface
 {
     private $resolver;
 
-    public function __contruct(RequirementViewerValueResolver $resolver)
+    public function __construct(RequirementViewerValueResolver $resolver)
     {
         $this->resolver = $resolver;
     }
