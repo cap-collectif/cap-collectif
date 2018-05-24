@@ -218,7 +218,18 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
           bsClass="tab-pane"
           eventKey="account"
         >
-          <Connect(AccountBox) />
+          <Relay(Connect(AccountBox))
+            viewer={
+              Object {
+                "displayName": "iAmAUser",
+                "media": Object {
+                  "url": "http://monimage.com/image1.jpg",
+                },
+                "show_url": "http://monprofil/profil",
+                "username": "user",
+              }
+            }
+          />
         </TabPane>
         <TabPane
           bsClass="tab-pane"

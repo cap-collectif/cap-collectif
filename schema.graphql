@@ -538,7 +538,7 @@ input DeleteAccountInput {
 
 type DeleteAccountPayload {
   # user id
-  userId: ID
+  userId: ID!
   clientMutationId: String
 }
 

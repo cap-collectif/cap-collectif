@@ -4,42 +4,24 @@ import { Panel, Button } from 'react-bootstrap';
 import { connect, type MapStateToProps } from 'react-redux';
 import { isInvalid } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
-import { QueryRenderer, graphql } from 'react-relay';
-import Loader from '../../Ui/Loader';
+import { graphql, createFragmentContainer } from 'react-relay';
 import AccountForm from './AccountForm';
 import ConfirmPasswordModal from '../ConfirmPasswordModal';
 import DeleteAccountModal from '../DeleteAccountModal';
 import { confirmPassword, showDeleteAccountModal } from '../../../redux/modules/user';
 import type { State, Dispatch } from '../../../types';
-import environment, { graphqlError } from '../../../createRelayEnvironment';
+import type { AccountBox_viewer } from './__generated__/AccountBox_viewer.graphql';
 
 type Props = {
+  viewer: AccountBox_viewer,
   dispatch: Dispatch,
   invalid: boolean,
   submitting: boolean,
 };
 
-const query = graphql`
-  query AccountBoxQuery {
-    viewer {
-      ...DeleteAccountModal_viewer
-    }
-  }
-`;
-
 export class AccountBox extends Component<Props, State> {
   render() {
-    const { invalid, submitting, dispatch } = this.props;
-    const renderDeleteAccountModal = ({ props, error }) => {
-      if (error) {
-        console.log(error);
-        return graphqlError;
-      }
-      if (props) {
-        return <DeleteAccountModal viewer={props.viewer} show />;
-      }
-      return <Loader />;
-    };
+    const { invalid, submitting, dispatch, viewer } = this.props;
     return (
       <Panel>
         <h2 className="page-header">
@@ -70,12 +52,7 @@ export class AccountBox extends Component<Props, State> {
             <FormattedMessage id="delete-account" />
           </Button>
         </div>
-        <QueryRenderer
-          variables={{}}
-          environment={environment}
-          query={query}
-          render={renderDeleteAccountModal}
-        />
+        <DeleteAccountModal viewer={viewer} />
       </Panel>
     );
   }
@@ -86,4 +63,13 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   invalid: isInvalid('account')(state),
 });
 
-export default connect(mapStateToProps)(AccountBox);
+const container = connect(mapStateToProps)(AccountBox);
+
+export default createFragmentContainer(
+  container,
+  graphql`
+    fragment AccountBox_viewer on User {
+      ...DeleteAccountModal_viewer
+    }
+  `,
+);

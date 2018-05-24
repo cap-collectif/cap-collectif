@@ -120,7 +120,9 @@ export class EditProfileTabs extends Component<Props> {
               <Tab.Pane eventKey="profile">
                 {features.profiles && <Profile viewer={viewer} />}
               </Tab.Pane>
-              <Tab.Pane eventKey="account">{!features.login_paris && <AccountBox />}</Tab.Pane>
+              <Tab.Pane eventKey="account">
+                {!features.login_paris && <AccountBox viewer={viewer} />}
+              </Tab.Pane>
               <Tab.Pane eventKey="personal-data">
                 <PersonalData viewer={viewer} />
               </Tab.Pane>
@@ -155,6 +157,7 @@ export default createFragmentContainer(
       ...NotificationsForm_viewer
       ...PersonalData_viewer
       ...Profile_viewer
+      ...AccountBox_viewer
       username
       displayName
       media {
