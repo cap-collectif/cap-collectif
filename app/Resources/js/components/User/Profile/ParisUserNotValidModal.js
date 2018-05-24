@@ -22,11 +22,14 @@ const ParisUserNotValidModal = ({ emailAddress }: Props) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <FormattedMessage id="please-confirm-your-email-address-to-participate" /> <br />
-        <FormattedMessage
-          id="you-have-received-an-email-on-your-email-address"
-          values={{ emailAddress }}
-        />
+        <p>
+          <strong>
+            <FormattedMessage id="please-confirm-your-email-address-to-participate" />
+          </strong>
+        </p>
+        <p>
+          <FormattedMessage id="please-click-on-the-link-in-the-email" values={{ emailAddress }} />
+        </p>
       </Modal.Body>
       <Modal.Footer>
         <Button
