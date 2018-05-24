@@ -224,6 +224,7 @@ services:
           - "@redis_storage.helper"
           - "@responses.formatter"
           - "@logger"
+          - "@capco.user_notifier"
       tags:
           - { name: overblog_graphql.mutation }
 

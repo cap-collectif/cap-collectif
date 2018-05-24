@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Form\ReplyType;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Helper\ResponsesFormatter;
+use Capco\AppBundle\Notifier\UserNotifier;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\UserBundle\Entity\User;
@@ -27,6 +28,7 @@ class AddReplyMutation
     private $responsesFormatter;
     private $logger;
     private $replyRepo;
+    private $userNotifier;
 
     public function __construct(
       EntityManagerInterface $em,
@@ -35,7 +37,8 @@ class AddReplyMutation
       QuestionnaireRepository $questionnaireRepo,
       RedisStorageHelper $redisStorageHelper,
       ResponsesFormatter $responsesFormatter,
-      LoggerInterface $logger
+      LoggerInterface $logger,
+      UserNotifier $userNotifier
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -44,6 +47,7 @@ class AddReplyMutation
         $this->redisStorageHelper = $redisStorageHelper;
         $this->responsesFormatter = $responsesFormatter;
         $this->logger = $logger;
+        $this->userNotifier = $userNotifier;
     }
 
     public function __invoke(Argument $input, User $user)
@@ -87,9 +91,9 @@ class AddReplyMutation
         $this->em->flush();
         $this->redisStorageHelper->recomputeUserCounters($user);
 
-        // if ($questionnaire->isAcknowledgeReplies()) {
-        //     // Send an mail
-        // }
+        if ($questionnaire->isAcknowledgeReplies()) {
+            $this->userNotifier->acknowledgeReply($questionnaire->getStep()->getProject(), $reply);
+        }
 
         return ['questionnaire' => $questionnaire, 'reply' => $reply];
     }
