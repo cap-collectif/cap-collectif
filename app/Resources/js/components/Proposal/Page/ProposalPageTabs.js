@@ -148,7 +148,7 @@ export class ProposalPageTabs extends React.Component<Props> {
                 <Tab.Pane eventKey="votes">
                   <Tab.Container id="tab-votesByStep" defaultActiveKey={0}>
                     <Row className="clearfix">
-                      <Nav bsStyle="pills">
+                      <Nav bsStyle="pills" className="mb-20">
                         {proposal.votableSteps.map((votableStep, index) => (
                           <NavItem key={index} eventKey={index}>
                             {votableStep.title}

@@ -97,6 +97,7 @@ const renderDraggableMembers = ({ fields, votes, step, deletable }: VotesProps) 
                     <ProposalUserVoteItem
                       member={member}
                       ranking={index + 1}
+                      isVoteVisibilityPublic={fields.get(index).public}
                       vote={vote}
                       step={step}
                       showDraggableIcon={fields.length > 1}

@@ -59,7 +59,9 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
     <div
       className="proposals-user-votes__content justify-content-end"
     >
-      <div>
+      <div
+        className="toggle-group"
+      >
         <Field
           component={[Function]}
           label={

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { FormattedDate, FormattedMessage, FormattedTime } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Popover, OverlayTrigger } from 'react-bootstrap';
 import { Field } from 'redux-form';
 import toggle from '../../Form/Toggle';
 import ProposalDetailEstimation from '../../Proposal/Detail/ProposalDetailEstimation';
@@ -53,10 +53,17 @@ export class ProposalUserVoteItem extends React.Component<Props> {
     };
 
     const getTitle = title => {
-      const maxItemLength = 85;
-      const trimmedString =
-        title.length > maxItemLength ? `${title.substring(0, maxItemLength)}...` : title;
-      return trimmedString;
+      const windowWidth = window.innerWidth;
+
+      let maxItemLength;
+
+      if (windowWidth > 400) {
+        maxItemLength = 85;
+      } else {
+        maxItemLength = 60;
+      }
+
+      return title.length > maxItemLength ? `${title.substring(0, maxItemLength)}...` : title;
     };
 
     const getToggleLabel = () => {
@@ -66,6 +73,32 @@ export class ProposalUserVoteItem extends React.Component<Props> {
 
       return <FormattedMessage id="admin.fields.idea_vote.private" />;
     };
+
+    const popoverConfirmDelete = (
+      <Popover id="popover-positioned-right">
+        <i className="cap cap-attention icon--red" />
+        <FormattedMessage id="are-you-sure-you-want-to-delete-this-vote" />
+        <div className="mt-10 d-flex justify-content-end">
+          <button
+            onClick={() => {
+              this.refs.popover.hide();
+            }}
+            className="btn btn-default mr-10">
+            <FormattedMessage id="global.no" />
+          </button>
+          {onDelete && (
+            <button
+              onClick={() => {
+                onDelete();
+              }}
+              className="proposal-vote__delete btn btn-danger"
+              disabled={!step.open}>
+              <FormattedMessage id="btn-delete" />
+            </button>
+          )}
+        </div>
+      </Popover>
+    );
 
     return (
       <Row
@@ -116,7 +149,7 @@ export class ProposalUserVoteItem extends React.Component<Props> {
           sm={12}
           xs={12}>
           <div className="proposals-user-votes__content justify-content-end">
-            <div>
+            <div className="toggle-group">
               <Field
                 labelSide="RIGHT"
                 component={toggle}
@@ -137,15 +170,21 @@ export class ProposalUserVoteItem extends React.Component<Props> {
         )}
         {onDelete && (
           <Col className="proposals-user-votes__col proposal-vote-col__delete" md={1}>
-            <a
-              onClick={() => {
-                onDelete();
-              }}
-              className="proposal-vote__delete"
-              disabled={!step.open}>
-              <i className="cap cap-ios-close" />
-            </a>
+            <OverlayTrigger
+              trigger="click"
+              placement="bottom"
+              overlay={popoverConfirmDelete}
+              ref="popover">
+              <a className="proposal-vote__delete" disabled={!step.open}>
+                <i className="cap cap-ios-close" />
+              </a>
+            </OverlayTrigger>
           </Col>
+        )}
+        {showDraggableIcon && (
+          <div className="draggable-icon__mobile">
+            <i className="cap cap-android-menu excerpt" />
+          </div>
         )}
       </Row>
     );

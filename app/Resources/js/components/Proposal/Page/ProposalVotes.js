@@ -16,11 +16,28 @@ type Props = {
 export class ProposalVotes extends React.Component<Props> {
   render() {
     const { proposal, relay } = this.props;
+    const votesCount = proposal.votes.edges && proposal.votes.edges.length;
+
+    if (proposal.votes.edges && votesCount === 0) {
+      return (
+        <p>
+          <FormattedMessage id="proposal.vote.none" />
+        </p>
+      );
+    }
+
     return (
       <div>
-        <br />
-        {proposal.votes.edges && proposal.votes.edges.length !== 0 ? (
+        {proposal.votes.edges && votesCount !== 0 ? (
           <div className={classNames({ proposal__votes: true })}>
+            <h2>
+              <FormattedMessage
+                id="proposal.vote.count"
+                values={{
+                  num: votesCount,
+                }}
+              />
+            </h2>
             <Row>
               {proposal.votes.edges
                 .filter(Boolean)
