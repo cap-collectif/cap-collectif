@@ -2,18 +2,67 @@
    CNIL
 ================================================================*/
 
+// Le bandeau cookie
+.cookie-banner, #cookieChoiceInfo {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    background-color: $dark;
+    color: $white;
+    z-index: 9999;
+    &.active {
+        display: block;
+    }
+
+  #cookie-more-button {
+    background-color: $dark;
+    color: $white;
+    text-decoration: underline;
+  }
+  #cookie-consent {
+    background-color: $dark;
+    color: $white;
+    text-decoration: none;
+  }
+}
+
+.cookie-inform-and-ask {
+    background-color: transparentize($page-bgc, 0.2);
+    display: none;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 9999;
+
+    &.active {
+        display: block;
+    }
+
+    .cookie-dialog {
+        left: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 70%;
+    }
+}
+
 #cookieChoiceInfo {
-    background-color: $white;
-    color: $dark-gray;
-    font-size: 14px;
-    border-bottom: 1px solid $border-color;
+  background-color: $white;
+  color: $dark-gray;
+  font-size: 14px;
+  border-bottom: 1px solid $border-color;
 }
 
 #cookieChoiceInfo span,
 #cookieChoiceInfo a:not(.btn) {
-    color: $dark-gray;
+  color: $dark-gray;
 }
 
 #cookieChoiceInfo a:not(.btn) {
-    text-decoration: underline;
+  text-decoration: underline;
 }
