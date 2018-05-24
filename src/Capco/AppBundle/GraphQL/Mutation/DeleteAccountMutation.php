@@ -13,7 +13,6 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Source;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\UserGroup;
 use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
@@ -126,12 +125,12 @@ class DeleteAccountMutation implements ContainerAwareInterface
         foreach ($contributions as $contribution) {
             if ($contribution instanceof AbstractVote) {
                 if (!$contribution instanceof CommentVote) {
-                    if (method_exists($contribution->getRelatedEntity(), 'getStep') && $this->checkIfStepActive($contribution->getRelatedEntity()->getStep())) {
+                    if (method_exists($contribution->getRelatedEntity(), 'getStep') && $contribution->getRelatedEntity()->getStep()->canContribute()) {
                         $toDeleteList[] = $contribution;
                     }
                 } else {
                     if ($contribution->getComment() instanceof ProposalComment) {
-                        if (method_exists($contribution->getComment()->getRelatedObject()->getProposalForm(), 'getStep') && $this->checkIfStepActive($contribution->getComment()->getRelatedObject()->getProposalForm()->getStep())) {
+                        if (method_exists($contribution->getComment()->getRelatedObject()->getProposalForm(), 'getStep') && $contribution->getComment()->getRelatedObject()->getProposalForm()->getStep()->canContribute()) {
                             $toDeleteList[] = $contribution;
                         }
                     } elseif ($contribution->getComment() instanceof EventComment) {
@@ -144,7 +143,7 @@ class DeleteAccountMutation implements ContainerAwareInterface
 
             if ($contribution instanceof Comment) {
                 if ($contribution instanceof ProposalComment) {
-                    if (method_exists($contribution->getRelatedObject()->getProposalForm(), 'getStep') && $this->checkIfStepActive($contribution->getRelatedObject()->getProposalForm()->getStep())) {
+                    if (method_exists($contribution->getRelatedObject()->getProposalForm(), 'getStep') && $contribution->getRelatedObject()->getProposalForm()->getStep()->canContribute()) {
                         $hasChild = $this->em->getRepository('CapcoAppBundle:ProposalComment')->findOneBy(['parent' => $contribution->getId()]);
                         if ($hasChild) {
                             $contribution->setBody($deletedBodyText);
@@ -164,12 +163,12 @@ class DeleteAccountMutation implements ContainerAwareInterface
                 }
             }
 
-            if (($contribution instanceof Proposal || $contribution instanceof Opinion) && $this->checkIfStepActive($contribution->getStep())) {
+            if (($contribution instanceof Proposal || $contribution instanceof Opinion) && $contribution->getStep()->canContribute()) {
                 $toDeleteList[] = $contribution;
             }
 
             if ($contribution instanceof Source || $contribution instanceof \Capco\AppBundle\Entity\Argument) {
-                if (method_exists($contribution->getOpinion(), 'getStep') && $this->checkIfStepActive($contribution->getOpinion()->getStep())) {
+                if (method_exists($contribution->getOpinion(), 'getStep') && $contribution->getOpinion()->getStep()->canContribute()) {
                     $toDeleteList[] = $contribution;
                 }
             }
@@ -230,11 +229,6 @@ class DeleteAccountMutation implements ContainerAwareInterface
         }
 
         $this->container->get('redis_storage.helper')->recomputeUserCounters($user);
-    }
-
-    public function checkIfStepActive(AbstractStep $step): bool
-    {
-        return $step->isTimeless() ?: $step->getEndAt() > (new \DateTime())->format('Y-m-d H:i:s');
     }
 
     public function removeMedia(Media $media): void

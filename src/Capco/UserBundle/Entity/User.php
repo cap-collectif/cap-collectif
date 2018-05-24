@@ -183,6 +183,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
      */
     protected $eventCommentsCount = 0;
 
+    /**
+     * @var int
+     */
+    protected $proposalCommentsCount = 0;
+
     // Votes
 
     /**
@@ -951,6 +956,22 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     /**
      * @return int
      */
+    public function getProposalCommentsCount()
+    {
+        return $this->proposalCommentsCount;
+    }
+
+    /**
+     * @param int $proposalCommentsCount
+     */
+    public function setProposalCommentsCount($proposalCommentsCount)
+    {
+        $this->proposalCommentsCount = $proposalCommentsCount;
+    }
+
+    /**
+     * @return int
+     */
     public function getCommentVotesCount()
     {
         return $this->commentVotesCount;
@@ -1213,7 +1234,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     public function getCommentsCount()
     {
-        return $this->postCommentsCount + $this->eventCommentsCount;
+        return $this->postCommentsCount + $this->eventCommentsCount + $this->proposalCommentsCount;
     }
 
     public function getUsername(): ?string
