@@ -628,9 +628,12 @@ exports[`<PersonalData /> should render user withou address 1`] = `
           <div
             className="col-sm-3"
           />
-          <ButtonToolbar
-            bsClass="btn-toolbar"
+          <ButtonGroup
+            block={false}
+            bsClass="btn-group"
             className="col-sm-4 pl-0"
+            justified={false}
+            vertical={false}
           >
             <Button
               active={false}
@@ -654,9 +657,60 @@ exports[`<PersonalData /> should render user withou address 1`] = `
               submitting={false}
               valid={true}
             />
-          </ButtonToolbar>
+          </ButtonGroup>
         </div>
       </form>
+    </div>
+  </Panel>
+  <Panel
+    bsClass="panel"
+    bsStyle="default"
+    defaultExpanded={false}
+  >
+    <h2
+      className="page-header"
+    >
+      <FormattedMessage
+        id="data-export"
+        values={Object {}}
+      />
+    </h2>
+    <div
+      className="horizontal_field_with_border_top"
+    >
+      <label
+        className="col-sm-3 control-label"
+      >
+        <FormattedMessage
+          id="your-data"
+          values={Object {}}
+        />
+      </label>
+      <div
+        className="col-sm-9"
+      >
+        <Relay(UserArchiveRequestButton)
+          viewer={
+            Object {
+              "dateOfBirth": "29-02-1990",
+              "firstname": "Utilisateur",
+              "gender": "MALE",
+              "id": "user",
+              "lastname": "Super",
+              "phone": "0123456789",
+              "phoneConfirmed": true,
+            }
+          }
+        />
+        <p
+          className="excerpt"
+        >
+          <FormattedMessage
+            id="data-copy-help-text"
+            values={Object {}}
+          />
+        </p>
+      </div>
     </div>
   </Panel>
 </div>
@@ -1113,9 +1167,12 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
           <div
             className="col-sm-3"
           />
-          <ButtonToolbar
-            bsClass="btn-toolbar"
+          <ButtonGroup
+            block={false}
+            bsClass="btn-group"
             className="col-sm-4 pl-0"
+            justified={false}
+            vertical={false}
           >
             <Button
               active={false}
@@ -1139,9 +1196,60 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
               submitting={false}
               valid={true}
             />
-          </ButtonToolbar>
+          </ButtonGroup>
         </div>
       </form>
+    </div>
+  </Panel>
+  <Panel
+    bsClass="panel"
+    bsStyle="default"
+    defaultExpanded={false}
+  >
+    <h2
+      className="page-header"
+    >
+      <FormattedMessage
+        id="data-export"
+        values={Object {}}
+      />
+    </h2>
+    <div
+      className="horizontal_field_with_border_top"
+    >
+      <label
+        className="col-sm-3 control-label"
+      >
+        <FormattedMessage
+          id="your-data"
+          values={Object {}}
+        />
+      </label>
+      <div
+        className="col-sm-9"
+      >
+        <Relay(UserArchiveRequestButton)
+          viewer={
+            Object {
+              "address": "12 rue des boulets",
+              "address2": "2ième etage",
+              "city": "Paris",
+              "firstname": "Utilisateur",
+              "id": "user",
+              "phone": "0123456789",
+              "zipCode": "75012",
+            }
+          }
+        />
+        <p
+          className="excerpt"
+        >
+          <FormattedMessage
+            id="data-copy-help-text"
+            values={Object {}}
+          />
+        </p>
+      </div>
     </div>
   </Panel>
 </div>
@@ -1954,9 +2062,12 @@ exports[`<PersonalData /> should render with full user 1`] = `
           <div
             className="col-sm-3"
           />
-          <ButtonToolbar
-            bsClass="btn-toolbar"
+          <ButtonGroup
+            block={false}
+            bsClass="btn-group"
             className="col-sm-4 pl-0"
+            justified={false}
+            vertical={false}
           >
             <Button
               active={false}
@@ -1980,9 +2091,64 @@ exports[`<PersonalData /> should render with full user 1`] = `
               submitting={false}
               valid={true}
             />
-          </ButtonToolbar>
+          </ButtonGroup>
         </div>
       </form>
+    </div>
+  </Panel>
+  <Panel
+    bsClass="panel"
+    bsStyle="default"
+    defaultExpanded={false}
+  >
+    <h2
+      className="page-header"
+    >
+      <FormattedMessage
+        id="data-export"
+        values={Object {}}
+      />
+    </h2>
+    <div
+      className="horizontal_field_with_border_top"
+    >
+      <label
+        className="col-sm-3 control-label"
+      >
+        <FormattedMessage
+          id="your-data"
+          values={Object {}}
+        />
+      </label>
+      <div
+        className="col-sm-9"
+      >
+        <Relay(UserArchiveRequestButton)
+          viewer={
+            Object {
+              "address": "12 rue des boulets",
+              "address2": "2ième etage",
+              "city": "Paris",
+              "dateOfBirth": "29-02-1990",
+              "firstname": "Utilisateur",
+              "gender": "MALE",
+              "id": "user",
+              "lastname": "Super",
+              "phone": "0123456789",
+              "phoneConfirmed": true,
+              "zipCode": "75012",
+            }
+          }
+        />
+        <p
+          className="excerpt"
+        >
+          <FormattedMessage
+            id="data-copy-help-text"
+            values={Object {}}
+          />
+        </p>
+      </div>
     </div>
   </Panel>
 </div>

@@ -239,6 +239,8 @@ fos_user:
     user_class:     Capco\UserBundle\Entity\User
     service:
         user_manager: sonata.user.orm.user_manager
+        email_canonicalizer: capco.canonicalizer
+        username_canonicalizer: capco.canonicalizer
         mailer: capco.fos_notifier
     registration:
         confirmation:

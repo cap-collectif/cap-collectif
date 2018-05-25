@@ -61,6 +61,9 @@
             <attribute-override name="email">
                 <field column="email" type="string" length="255" nullable="true" />
             </attribute-override>
+            <attribute-override name="emailCanonical">
+                <field column="email_canonical" type="string" length="255" nullable="true" unique="true"/>
+            </attribute-override>
             <attribute-override name="password">
                 <field column="password" type="string" length="255" nullable="true" />
             </attribute-override>
@@ -96,7 +99,7 @@
 
         <field name="postCommentsCount" column="post_comments_count" type="integer" nullable="false" />
         <field name="eventCommentsCount" column="event_comments_count" type="integer" nullable="false" />
-
+        <field name="proposalCommentsCount" column="proposal_comments_count" type="integer" nullable="false" />
 
         <field name="commentVotesCount" column="comment_votes_count" type="integer" nullable="false" />
         <field name="proposalVotesCount" column="proposal_votes_count" type="integer" nullable="false" />
@@ -112,6 +115,7 @@
         <field name="sourcesCount" column="sources_count" type="integer" nullable="false" />
         <field name="opinionsCount" column="opinions_count" type="integer" nullable="false" />
         <field name="opinionVersionsCount" column="opinion_versions_count" type="integer" nullable="false" />
+        <field name="deletedAccountAt" column="deleted_account_at" type="datetime" nullable="true" />
 
         <field name="alertExpirationSent" column="alert_expiration_sent" type="boolean" nullable="false" />
 
@@ -130,6 +134,13 @@
             </cascade>
             <join-column name="notifications_configuration_id" referenced-column-name="id"/>
         </one-to-one>
+
+        <one-to-many target-entity="Capco\AppBundle\Entity\UserArchive" mapped-by="user" field="archives" orphan-removal="true">
+            <cascade>
+                <cascade-persist/>
+                <cascade-remove/>
+            </cascade>
+        </one-to-many>
 
         <one-to-many target-entity="Capco\AppBundle\Entity\Proposal" mapped-by="author" field="proposals">
 

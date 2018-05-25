@@ -4,32 +4,35 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalPageTabs } from './ProposalPageTabs';
 import { features } from '../../../redux/modules/default';
-import { $refType, $fragmentRefs } from '../../../mocks';
 
 describe('<ProposalPageTabs />', () => {
+  // $FlowFixMe $refType
   const proposal = {
-    $refType,
-    $fragmentRefs,
-    id: '1',
-    allFollowers: {
+    followerConnection: {
       totalCount: 169,
     },
-    currentVotableStep: null,
-    votableSteps: [],
-    allVotes: {
-      totalCount: 1,
-    },
-    news: {
-      totalCount: 1,
-    },
+    postsCount: 1,
     viewerCanSeeEvaluation: true,
   };
-
+  // $FlowFixMe $refType
   const props = {
     form: {
-      $refType,
       usingThemes: true,
       usingCategories: true,
+    },
+    oldProposal: {
+      selections: [],
+      votesByStepId: {
+        selectionstep1: [],
+        collectstep1: [],
+      },
+      votableStepId: 'selectionstep1',
+      votesCountByStepId: {
+        selectionstep1: 0,
+        collectstep1: 0,
+      },
+      isDraft: false,
+      viewerCanSeeEvaluation: true,
     },
     categories: [],
     steps: [
@@ -43,11 +46,11 @@ describe('<ProposalPageTabs />', () => {
       districts: true,
       themes: true,
     },
-    viewer: null,
+    votesCount: 150,
   };
 
   it('should render Tabs with correct DOM structure', () => {
-    const wrapper = shallow(<ProposalPageTabs step={null} proposal={proposal} {...props} />);
+    const wrapper = shallow(<ProposalPageTabs proposal={proposal} {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

@@ -28,7 +28,7 @@ exports[`<AccountBox /> should render a disabled button when the form is invalid
       block={false}
       bsClass="btn"
       bsStyle="primary"
-      className="col-sm-offset-3"
+      className="col-sm-offset-5"
       disabled={true}
       id="edit-account-profile-button"
       onClick={[Function]}
@@ -38,7 +38,30 @@ exports[`<AccountBox /> should render a disabled button when the form is invalid
         values={Object {}}
       />
     </Button>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="danger"
+      disabled={false}
+      id="delete-account-profile-button"
+      onClick={[Function]}
+      style={
+        Object {
+          "marginLeft": 15,
+        }
+      }
+    >
+      <FormattedMessage
+        id="delete-account"
+        values={Object {}}
+      />
+    </Button>
   </div>
+  <Relay(DeleteAccountModal)
+    handleClose={[Function]}
+    show={false}
+  />
 </Panel>
 `;
 
@@ -70,7 +93,7 @@ exports[`<AccountBox /> should render a disabled button when the form is submitt
       block={false}
       bsClass="btn"
       bsStyle="primary"
-      className="col-sm-offset-3"
+      className="col-sm-offset-5"
       disabled={true}
       id="edit-account-profile-button"
       onClick={[Function]}
@@ -80,7 +103,30 @@ exports[`<AccountBox /> should render a disabled button when the form is submitt
         values={Object {}}
       />
     </Button>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="danger"
+      disabled={false}
+      id="delete-account-profile-button"
+      onClick={[Function]}
+      style={
+        Object {
+          "marginLeft": 15,
+        }
+      }
+    >
+      <FormattedMessage
+        id="delete-account"
+        values={Object {}}
+      />
+    </Button>
   </div>
+  <Relay(DeleteAccountModal)
+    handleClose={[Function]}
+    show={false}
+  />
 </Panel>
 `;
 
@@ -112,7 +158,7 @@ exports[`<AccountBox /> should render and enabled button when the form is valid 
       block={false}
       bsClass="btn"
       bsStyle="primary"
-      className="col-sm-offset-3"
+      className="col-sm-offset-5"
       disabled={false}
       id="edit-account-profile-button"
       onClick={[Function]}
@@ -122,6 +168,29 @@ exports[`<AccountBox /> should render and enabled button when the form is valid 
         values={Object {}}
       />
     </Button>
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="danger"
+      disabled={false}
+      id="delete-account-profile-button"
+      onClick={[Function]}
+      style={
+        Object {
+          "marginLeft": 15,
+        }
+      }
+    >
+      <FormattedMessage
+        id="delete-account"
+        values={Object {}}
+      />
+    </Button>
   </div>
+  <Relay(DeleteAccountModal)
+    handleClose={[Function]}
+    show={false}
+  />
 </Panel>
 `;

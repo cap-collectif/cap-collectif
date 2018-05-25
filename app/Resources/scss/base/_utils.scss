@@ -41,10 +41,6 @@
     margin-left: 0;
 }
 
-.m-auto {
-    margin: auto;
-}
-
 /* =====
   Padding
 ==== */
@@ -69,7 +65,17 @@
 .text-center {
     text-align: center;
 }
+.color-green {
+    color: $success-color;
+}
 
+.color-red {
+    color: $danger-color;
+}
+
+.color-dark-gray {
+    color: $dark-gray;
+}
 /* =====
   Position
 ==== */
@@ -110,15 +116,6 @@
     font-weight: normal;
 }
 
-.justify-content-between {
-   justify-content: space-between;
-}
-
-.justify-content-end {
-   justify-content: flex-end;
-}
-
-
-.justify-content-center {
-   justify-content: center;
+.flex-end {
+    justify-content: flex-end;
 }

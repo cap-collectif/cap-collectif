@@ -93,15 +93,3 @@ Capco\AppBundle\Entity\ProposalForm:
     usingCategories: true
     themeMandatory: false
     reference: 666
-  proposalFormVoteClassement:
-    id: proposalFormVoteClassement
-    title: Collecte des propositions à classer
-    description: En haut, en bas, à droite, à gauche…
-    step: "@collectstepVoteClassement"
-    notificationsConfiguration: "@proposalFormNotificationConfiguration10"
-    usingThemes: false
-    usingDistrict: false
-    districtMandatory: false
-    usingCategories: false
-    themeMandatory: false
-    reference: 1337

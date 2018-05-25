@@ -19,6 +19,7 @@ class LoaderDataFixture extends AbstractLoader
             __DIR__ . '/UserNotificationsConfiguration.yml',
             __DIR__ . '/UserType.yml',
             __DIR__ . '/User.yml',
+            __DIR__ . '/UserArchive.yml',
 
             __DIR__ . '/MenuItem.yml',
             __DIR__ . '/SiteParameter.yml',

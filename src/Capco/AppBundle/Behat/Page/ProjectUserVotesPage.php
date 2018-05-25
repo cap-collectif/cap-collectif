@@ -22,7 +22,7 @@ class ProjectUserVotesPage extends Page
 
     public function countVotes()
     {
-        return count($this->getElement('vote table')->findAll('css', '.proposal-vote__delete'));
+        return count($this->getElement('vote table')->findAll('css', 'button'));
     }
 
     public function removeFirstVote()

@@ -76,8 +76,14 @@ services:
   capco.proposal.serialization_listener:
     class: Capco\AppBundle\EventListener\ProposalSerializationListener
     arguments:
+      - "@router"
+      - "@security.token_storage"
       - "@capco.proposal_selection_vote.repository"
+      - "@capco.response.repository"
+      - "@sonata.media.twig.extension"
+      - "@jms_serializer"
       - "@capco.proposal_collect_vote.repository"
+      - "@capco.proposal_votes.resolver"
     tags:
       - { name: "jms_serializer.event_subscriber" }
 

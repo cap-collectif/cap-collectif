@@ -11,7 +11,7 @@ export default class DraftProposalPreview extends React.Component<Props> {
 
     return (
       <li className="list-group-item">
-        <a href={proposal.show_url}>{proposal.title}</a>
+        <a href={proposal.show_url ? proposal.show_url : proposal._links.show}>{proposal.title}</a>
       </li>
     );
   }

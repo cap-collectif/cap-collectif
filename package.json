@@ -67,7 +67,7 @@
     },
     {
       "path": "./web/js/app.js",
-      "maxSize": "400 kB"
+      "maxSize": "350 kB"
     },
     {
       "path": "./web/js/vendor.js",
@@ -129,6 +129,7 @@
     "ignore-loader": "^0.1.2",
     "imports-loader": "^0.7.0",
     "jquery": "^3.1.0",
+    "js-cookie": "^2.2.0",
     "json-brunch": "^1.5.4",
     "json-loader": "^0.5.7",
     "leaflet": "^1.1.0",
@@ -145,7 +146,6 @@
     "quill": "^0.20.1",
     "react-addons-shallow-compare": "^15.4.2",
     "react-async-script": "^0.9.1",
-    "react-beautiful-dnd": "6.0.2",
     "react-bootstrap": "^0.31.2",
     "react-checkbox-group": "https://github.com/cap-collectif/react-checkbox-group/tarball/296721a62a682c5e441bdd449704550b69257af9",
     "react-datetime": "^2.9.0",

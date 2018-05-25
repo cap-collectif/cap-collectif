@@ -158,6 +158,17 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
             ;
         }
 
+        if ($this->force || $this->em->createQuery('SELECT COUNT(comment.id) FROM CapcoAppBundle:ProposalComment comment')->getSingleScalarResult() > 0) {
+            $this->em
+              ->createQuery('UPDATE CapcoUserBundle:User u set u.proposalCommentsCount = (
+                SELECT count(pc.id) from CapcoAppBundle:ProposalComment pc
+                INNER JOIN CapcoAppBundle:Proposal p WITH pc.proposal = p
+                WHERE pc.Author = u AND pc.isEnabled = 1 GROUP BY pc.Author
+              )')
+              ->execute()
+            ;
+        }
+
         if ($this->force || $this->em->createQuery('SELECT COUNT(vote.id) FROM CapcoAppBundle:CommentVote vote')->getSingleScalarResult() > 0) {
             $this->em
               ->createQuery('UPDATE CapcoUserBundle:User u set u.commentVotesCount = (

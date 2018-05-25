@@ -3,50 +3,88 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalPreview } from './ProposalPreview';
-import { $refType } from '../../../mocks';
+import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
 
 describe('<ProposalPreview />', () => {
-  const proposal = {
-    $refType,
-    id: '1',
-    author: {
-      vip: false,
-    },
-  };
-
-  const proposalVip = {
-    $refType,
-    id: '1',
+  const proposalVotable = {
+    votableStepId: 'step2',
+    category: {},
     author: {
       vip: true,
     },
+    referer: 'http://capco.test',
+    votesCountByStepId: {
+      '2': 0,
+    },
+    commentsCount: 5,
+    selections: [],
+    votesByStepId: {
+      selectionstep1: [],
+      collectstep1: [],
+    },
+    viewerCanSeeEvaluation: true,
   };
 
-  const step = {
-    $refType,
+  const proposalWithDifferentStepId = {
+    votableStepId: 'step3',
+    category: {},
+    author: {
+      vip: false,
+    },
+    referer: 'http://capco.test',
+    votesCountByStepId: {
+      '2': 0,
+    },
+    commentsCount: 5,
+    selections: [],
+    votesByStepId: {
+      selectionstep1: [],
+      collectstep1: [],
+    },
+    viewerCanSeeEvaluation: true,
   };
 
-  it('should render a proposal preview', () => {
+  const props = {
+    className: '',
+    referer: 'http://capco.test',
+    showThemes: true,
+    showComments: true,
+    isAuthenticated: true,
+  };
+
+  const step2 = {
+    id: 'step2',
+    voteThreshold: 0,
+    voteType: VOTE_TYPE_BUDGET,
+  };
+
+  const step3 = {
+    id: 'step3',
+    voteThreshold: 0,
+    voteType: VOTE_TYPE_BUDGET,
+  };
+
+  it('should render a proposal preview votable', () => {
     const wrapper = shallow(
       <ProposalPreview
-        // $FlowFixMe
-        proposal={proposal}
-        // $FlowFixMe
-        step={step}
-        viewer={null}
+        proposal={proposalVotable}
+        showThemes
+        showComments
+        step={step2}
+        {...props}
       />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render a proposal preview vip', () => {
+  it('should render a proposal preview with different step id and vip false', () => {
     const wrapper = shallow(
       <ProposalPreview
-        // $FlowFixMe
-        proposal={proposalVip}
-        // $FlowFixMe
-        step={step}
-        viewer={null}
+        proposal={proposalWithDifferentStepId}
+        showThemes
+        showComments
+        step={step3}
+        {...props}
       />,
     );
     expect(wrapper).toMatchSnapshot();

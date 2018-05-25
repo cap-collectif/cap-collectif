@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "05ccacf9314138121c1e9dde0d49fd4f",
+    "content-hash": "e1d6281787e99d5b9aa1fdeddc438786",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -5260,16 +5260,16 @@
         },
         {
             "name": "overblog/graphql-bundle",
-            "version": "v0.9.3",
+            "version": "v0.9.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overblog/GraphQLBundle.git",
-                "reference": "352700bbb806176461d22db2c1f587e706cba6d2"
+                "reference": "a570a93d2296394a4a604f5b57eca403a95c619b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/overblog/GraphQLBundle/zipball/352700bbb806176461d22db2c1f587e706cba6d2",
-                "reference": "352700bbb806176461d22db2c1f587e706cba6d2",
+                "url": "https://api.github.com/repos/overblog/GraphQLBundle/zipball/a570a93d2296394a4a604f5b57eca403a95c619b",
+                "reference": "a570a93d2296394a4a604f5b57eca403a95c619b",
                 "shasum": ""
             },
             "require": {
@@ -5334,7 +5334,7 @@
                 "Relay",
                 "graphql"
             ],
-            "time": "2017-10-28T16:57:46+00:00"
+            "time": "2018-01-26T16:09:29+00:00"
         },
         {
             "name": "overblog/graphql-php-generator",

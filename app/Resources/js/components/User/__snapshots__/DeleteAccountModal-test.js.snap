@@ -1,0 +1,683 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DeleteAccountModal /> should render an hidden modal 1`] = `
+<div>
+  <Modal
+    animation={false}
+    aria-labelledby="contained-modal-title-lg"
+    autoFocus={true}
+    backdrop={true}
+    bsClass="modal"
+    dialogComponentClass={[Function]}
+    enforceFocus={true}
+    keyboard={true}
+    manager={
+      ModalManager {
+        "add": [Function],
+        "containers": Array [],
+        "data": Array [],
+        "handleContainerOverflow": true,
+        "hideSiblingNodes": true,
+        "isTopModal": [Function],
+        "modals": Array [],
+        "remove": [Function],
+      }
+    }
+    onHide={[Function]}
+    renderBackdrop={[Function]}
+    restoreFocus={true}
+    show={false}
+  >
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
+    >
+      <ModalTitle
+        bsClass="modal-title"
+        componentClass="h4"
+        id="contained-modal-title-lg"
+      >
+        <b>
+          <FormattedMessage
+            id="account-delete-confirmation"
+            values={Object {}}
+          />
+        </b>
+      </ModalTitle>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <form
+        name="delete-user"
+      >
+        <p>
+          <b>
+            <FormattedMessage
+              id="account-delete-warning"
+              values={Object {}}
+            />
+          </b>
+        </p>
+        <div
+          className="row"
+        >
+          <div
+            className="col-sm-1"
+          >
+            <i
+              className="cap cap-id-8 delete__modal__icon primary"
+            />
+          </div>
+          <p
+            className="col-sm-11"
+          >
+            <FormattedHTMLMessage
+              id="alias-name-information"
+              values={
+                Object {
+                  "profileLink": "/profile/edit-profile",
+                }
+              }
+            />
+          </p>
+          <div
+            className="col-sm-1"
+          >
+            <i
+              className="cap cap-download-12 delete__modal__icon primary"
+            />
+          </div>
+          <p
+            className="col-sm-11"
+          >
+            <FormattedHTMLMessage
+              id="data-amount-contributions-votes"
+              values={
+                Object {
+                  "contributionsNumber": 20,
+                  "datePage": "",
+                  "votesNumber": 10,
+                }
+              }
+            />
+          </p>
+        </div>
+        <hr
+          style={
+            Object {
+              "margin": "5px 0 15px 0",
+            }
+          }
+        />
+        <p>
+          <b>
+            <FormattedMessage
+              id="deleting-options"
+              values={Object {}}
+            />
+          </b>
+        </p>
+        <div>
+          <div
+            className="panel panel-primary delete__panel__checked"
+            onClick={[Function]}
+          >
+            <div
+              className="panel-body"
+            >
+              <div
+                className="row"
+              >
+                <div
+                  className="col-sm-7"
+                >
+                  <Radio
+                    bsClass="radio"
+                    checked={true}
+                    disabled={false}
+                    inline={false}
+                    name="type-of-removal"
+                    onClick={[Function]}
+                    title=""
+                    value="soft"
+                  >
+                    <FormattedMessage
+                      id="delete-account-and-anonymize-contents"
+                      values={Object {}}
+                    />
+                  </Radio>
+                  <p
+                    className="delete__content__choice"
+                  >
+                    <FormattedHTMLMessage
+                      id="anonymizing-contributions-and-votes"
+                      values={
+                        Object {
+                          "nbContributions": 20,
+                          "nbContributionsToDelete": 5,
+                          "nbVotes": 10,
+                        }
+                      }
+                    />
+                  </p>
+                </div>
+                <div
+                  className="col-sm-5"
+                >
+                  <div
+                    className="panel panel-default inception__panel"
+                  >
+                    <div
+                      className="panel-body"
+                    >
+                      <div
+                        className="row"
+                      >
+                        <div
+                          className="col-sm-4 delete__inception__avatar"
+                        >
+                          <DefaultAvatar
+                            className="img-circle avatar mr-10"
+                            size={35}
+                          />
+                        </div>
+                        <div
+                          className="col-sm-8 delete__example"
+                        >
+                          <FormattedMessage
+                            id="deleted-user"
+                            values={Object {}}
+                          />
+                          <br />
+                          <strong>
+                            <FormattedMessage
+                              id="modal-example-contribution-title"
+                              values={Object {}}
+                            />
+                          </strong>
+                          <br />
+                          <FormattedMessage
+                            id="modal-example-contribution-content"
+                            values={Object {}}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="panel panel-default"
+            onClick={[Function]}
+          >
+            <div
+              className="panel-body"
+            >
+              <div
+                className="row"
+              >
+                <div
+                  className="col-sm-7"
+                >
+                  <Radio
+                    bsClass="radio"
+                    checked={false}
+                    disabled={false}
+                    inline={false}
+                    name="type-of-removal"
+                    onClick={[Function]}
+                    title=""
+                    value="hard"
+                  >
+                    <FormattedMessage
+                      id="delete-account-and-contents"
+                      values={Object {}}
+                    />
+                  </Radio>
+                  <p
+                    className="delete__content__choice"
+                  >
+                    <FormattedHTMLMessage
+                      id="global-deleting-contributions-and-votes"
+                      values={
+                        Object {
+                          "nbContributions": 20,
+                          "nbVotes": 10,
+                        }
+                      }
+                    />
+                  </p>
+                </div>
+                <div
+                  className="col-sm-5"
+                >
+                  <div
+                    className="panel panel-default inception__panel"
+                  >
+                    <div
+                      className="panel-body"
+                    >
+                      <div
+                        className="row"
+                      >
+                        <div
+                          className="col-sm-4 delete__inception__avatar"
+                        >
+                          <DefaultAvatar
+                            className="img-circle avatar mr-10"
+                            size={35}
+                          />
+                        </div>
+                        <div
+                          className="col-sm-8 delete__example"
+                        >
+                          <FormattedMessage
+                            id="deleted-user"
+                            values={Object {}}
+                          />
+                          <br />
+                          <strong>
+                            <FormattedMessage
+                              id="deleted-title"
+                              values={Object {}}
+                            />
+                          </strong>
+                          <br />
+                          <i>
+                            <FormattedMessage
+                              id="deleted-content-by-author"
+                              values={Object {}}
+                            />
+                          </i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </ModalBody>
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
+    >
+      <CloseButton
+        label="global.cancel"
+        onClose={[Function]}
+      />
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="danger"
+        disabled={false}
+        id="confirm-delete-form-submit"
+        onClick={[Function]}
+        type="submit"
+      >
+        <i
+          className="cap cap-attention"
+          style={
+            Object {
+              "padding": "0 5px 0 0",
+            }
+          }
+        />
+        <FormattedMessage
+          id="global.removeDefinitively"
+          values={Object {}}
+        />
+      </Button>
+    </ModalFooter>
+  </Modal>
+</div>
+`;
+
+exports[`<DeleteAccountModal /> should render an visible modal 1`] = `
+<div>
+  <Modal
+    animation={false}
+    aria-labelledby="contained-modal-title-lg"
+    autoFocus={true}
+    backdrop={true}
+    bsClass="modal"
+    dialogComponentClass={[Function]}
+    enforceFocus={true}
+    keyboard={true}
+    manager={
+      ModalManager {
+        "add": [Function],
+        "containers": Array [],
+        "data": Array [],
+        "handleContainerOverflow": true,
+        "hideSiblingNodes": true,
+        "isTopModal": [Function],
+        "modals": Array [],
+        "remove": [Function],
+      }
+    }
+    onHide={[Function]}
+    renderBackdrop={[Function]}
+    restoreFocus={true}
+    show={true}
+  >
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
+    >
+      <ModalTitle
+        bsClass="modal-title"
+        componentClass="h4"
+        id="contained-modal-title-lg"
+      >
+        <b>
+          <FormattedMessage
+            id="account-delete-confirmation"
+            values={Object {}}
+          />
+        </b>
+      </ModalTitle>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <form
+        name="delete-user"
+      >
+        <p>
+          <b>
+            <FormattedMessage
+              id="account-delete-warning"
+              values={Object {}}
+            />
+          </b>
+        </p>
+        <div
+          className="row"
+        >
+          <div
+            className="col-sm-1"
+          >
+            <i
+              className="cap cap-id-8 delete__modal__icon primary"
+            />
+          </div>
+          <p
+            className="col-sm-11"
+          >
+            <FormattedHTMLMessage
+              id="alias-name-information"
+              values={
+                Object {
+                  "profileLink": "/profile/edit-profile",
+                }
+              }
+            />
+          </p>
+          <div
+            className="col-sm-1"
+          >
+            <i
+              className="cap cap-download-12 delete__modal__icon primary"
+            />
+          </div>
+          <p
+            className="col-sm-11"
+          >
+            <FormattedHTMLMessage
+              id="data-amount-contributions-votes"
+              values={
+                Object {
+                  "contributionsNumber": 20,
+                  "datePage": "",
+                  "votesNumber": 10,
+                }
+              }
+            />
+          </p>
+        </div>
+        <hr
+          style={
+            Object {
+              "margin": "5px 0 15px 0",
+            }
+          }
+        />
+        <p>
+          <b>
+            <FormattedMessage
+              id="deleting-options"
+              values={Object {}}
+            />
+          </b>
+        </p>
+        <div>
+          <div
+            className="panel panel-primary delete__panel__checked"
+            onClick={[Function]}
+          >
+            <div
+              className="panel-body"
+            >
+              <div
+                className="row"
+              >
+                <div
+                  className="col-sm-7"
+                >
+                  <Radio
+                    bsClass="radio"
+                    checked={true}
+                    disabled={false}
+                    inline={false}
+                    name="type-of-removal"
+                    onClick={[Function]}
+                    title=""
+                    value="soft"
+                  >
+                    <FormattedMessage
+                      id="delete-account-and-anonymize-contents"
+                      values={Object {}}
+                    />
+                  </Radio>
+                  <p
+                    className="delete__content__choice"
+                  >
+                    <FormattedHTMLMessage
+                      id="anonymizing-contributions-and-votes"
+                      values={
+                        Object {
+                          "nbContributions": 20,
+                          "nbContributionsToDelete": 5,
+                          "nbVotes": 10,
+                        }
+                      }
+                    />
+                  </p>
+                </div>
+                <div
+                  className="col-sm-5"
+                >
+                  <div
+                    className="panel panel-default inception__panel"
+                  >
+                    <div
+                      className="panel-body"
+                    >
+                      <div
+                        className="row"
+                      >
+                        <div
+                          className="col-sm-4 delete__inception__avatar"
+                        >
+                          <DefaultAvatar
+                            className="img-circle avatar mr-10"
+                            size={35}
+                          />
+                        </div>
+                        <div
+                          className="col-sm-8 delete__example"
+                        >
+                          <FormattedMessage
+                            id="deleted-user"
+                            values={Object {}}
+                          />
+                          <br />
+                          <strong>
+                            <FormattedMessage
+                              id="modal-example-contribution-title"
+                              values={Object {}}
+                            />
+                          </strong>
+                          <br />
+                          <FormattedMessage
+                            id="modal-example-contribution-content"
+                            values={Object {}}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="panel panel-default"
+            onClick={[Function]}
+          >
+            <div
+              className="panel-body"
+            >
+              <div
+                className="row"
+              >
+                <div
+                  className="col-sm-7"
+                >
+                  <Radio
+                    bsClass="radio"
+                    checked={false}
+                    disabled={false}
+                    inline={false}
+                    name="type-of-removal"
+                    onClick={[Function]}
+                    title=""
+                    value="hard"
+                  >
+                    <FormattedMessage
+                      id="delete-account-and-contents"
+                      values={Object {}}
+                    />
+                  </Radio>
+                  <p
+                    className="delete__content__choice"
+                  >
+                    <FormattedHTMLMessage
+                      id="global-deleting-contributions-and-votes"
+                      values={
+                        Object {
+                          "nbContributions": 20,
+                          "nbVotes": 10,
+                        }
+                      }
+                    />
+                  </p>
+                </div>
+                <div
+                  className="col-sm-5"
+                >
+                  <div
+                    className="panel panel-default inception__panel"
+                  >
+                    <div
+                      className="panel-body"
+                    >
+                      <div
+                        className="row"
+                      >
+                        <div
+                          className="col-sm-4 delete__inception__avatar"
+                        >
+                          <DefaultAvatar
+                            className="img-circle avatar mr-10"
+                            size={35}
+                          />
+                        </div>
+                        <div
+                          className="col-sm-8 delete__example"
+                        >
+                          <FormattedMessage
+                            id="deleted-user"
+                            values={Object {}}
+                          />
+                          <br />
+                          <strong>
+                            <FormattedMessage
+                              id="deleted-title"
+                              values={Object {}}
+                            />
+                          </strong>
+                          <br />
+                          <i>
+                            <FormattedMessage
+                              id="deleted-content-by-author"
+                              values={Object {}}
+                            />
+                          </i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </ModalBody>
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
+    >
+      <CloseButton
+        label="global.cancel"
+        onClose={[Function]}
+      />
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="danger"
+        disabled={false}
+        id="confirm-delete-form-submit"
+        onClick={[Function]}
+        type="submit"
+      >
+        <i
+          className="cap cap-attention"
+          style={
+            Object {
+              "padding": "0 5px 0 0",
+            }
+          }
+        />
+        <FormattedMessage
+          id="global.removeDefinitively"
+          values={Object {}}
+        />
+      </Button>
+    </ModalFooter>
+  </Modal>
+</div>
+`;

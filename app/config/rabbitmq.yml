@@ -110,3 +110,10 @@
                -
                    exchange: capco_direct_exchange
                    routing_key: comment_delete
+        user_archive_request:
+           durable: true
+           retries: [25, 125, 625]
+           bindings:
+               -
+                   exchange: capco_direct_exchange
+                   routing_key: user_archive_request

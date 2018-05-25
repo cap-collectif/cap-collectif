@@ -47,7 +47,7 @@ Scenario: GraphQL client want to get the list of contributors
             {"node":{"id":"user11"}},
             {"node":{"id":"user12"}},
             {"node":{"id":"user13"}},
-            {"node":{"id":"user16"}}
+            {"node":{"id":"user15"}}
           ]
         }
       }

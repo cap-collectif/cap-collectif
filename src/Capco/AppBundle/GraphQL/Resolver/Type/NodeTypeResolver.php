@@ -69,6 +69,9 @@ class NodeTypeResolver implements ResolverInterface
         if ($node instanceof Reporting) {
             return $this->typeResolver->resolve('Reporting');
         }
+        if ($node instanceof User) {
+            return $this->typeResolver->resolve('User');
+        }
 
         if ($node instanceof Comment) {
             return $this->typeResolver->resolve('Comment');

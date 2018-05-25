@@ -38,6 +38,7 @@ class Manager
         'votes_evolution',
         'server_side_rendering',
         'zipcode_at_register',
+        'vote_without_account',
         'indexation',
     ];
 

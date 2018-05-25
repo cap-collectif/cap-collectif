@@ -33,9 +33,7 @@ export const graphqlError = (
   <p className="text-danger">Désolé une erreur s'est produite… Réessayez plus tard.</p>
 );
 
-export const store = new Store(new RecordSource());
-
 export default new Environment({
   network: Network.create(fetchQuery),
-  store,
+  store: new Store(new RecordSource()),
 });

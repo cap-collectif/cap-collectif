@@ -86,15 +86,15 @@ class UserAdmin extends BaseAdmin
                 'editable' => true,
             ])
             ->add('updatedAt')
+            ->add('deletedAccountAt', null, [
+                'label' => 'admin.fields.proposal.deleted_at',
+                ])
             ->add('_action', 'actions', [
                 'actions' => [
                     'edit' => [
                         'template' => 'CapcoAdminBundle:User:list__action_edit.html.twig',
                     ],
                     'show' => [],
-                    'delete' => [
-                        'template' => 'CapcoAdminBundle:User:list__action_delete.html.twig',
-                    ],
                 ],
             ])
         ;

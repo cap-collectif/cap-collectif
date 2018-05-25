@@ -1,0 +1,4 @@
+RequestUserArchiveInput:
+    type: relay-mutation-input
+    config:
+        description: ""

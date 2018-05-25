@@ -85,6 +85,7 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         postCommentsCount
         eventCommentsCount
         projectsCount
+        deletedAccountAt
     }
 }
         ';

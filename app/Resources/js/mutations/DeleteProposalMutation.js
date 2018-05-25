@@ -13,9 +13,6 @@ const mutation = graphql`
       proposal {
         ...ProposalAdminStatusForm_proposal
       }
-      step {
-        show_url
-      }
     }
   }
 `;
@@ -26,7 +23,6 @@ const commit = (
   commitMutation(environment, {
     mutation,
     variables,
-    // updater to delete from connection
   });
 
 export default { commit };

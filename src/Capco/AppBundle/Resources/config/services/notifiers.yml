@@ -84,3 +84,10 @@ services:
       - '@capco.url.resolver'
       - '@logger'
 
+  capco.user_archive_notifier:
+    class: Capco\AppBundle\Notifier\UserArchiveNotifier
+    arguments:
+      - '@mailer_service'
+      - '@capco.site_parameter.resolver'
+      - '@capco.resolvers.users'
+      - '@router'

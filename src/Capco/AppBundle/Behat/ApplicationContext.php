@@ -110,6 +110,19 @@ class ApplicationContext extends UserContext
     /**
      * @AfterScenario
      */
+    public function resetExports(AfterScenarioScope $scope)
+    {
+        if ($scope->getScenario()->hasTag('export')) {
+            $job = new Process('rm -rf web/export/*');
+            echo $job->getCommandLine() . PHP_EOL;
+            echo 'Clearing exports...' . PHP_EOL;
+            $job->mustRun();
+        }
+    }
+
+    /**
+     * @AfterScenario
+     */
     public function resetDatabase(AfterScenarioScope $scope)
     {
         $scenario = $scope->getScenario();
@@ -169,6 +182,17 @@ class ApplicationContext extends UserContext
             $this->getSession()->setCookie('displayCookieConsent', 'y');
         }
         $this->navigationContext->iVisitedPage($pageName);
+    }
+
+    /**
+     * @Then I should see :filename file in :directory directory
+     */
+    public function iShouldSeeFileInDirectory(string $filename, string $directory)
+    {
+        // Make sure we are not using virtual file system, because here we want to see real files in path
+        $directory = str_replace('vfs://', '', rtrim($directory, '/\\'));
+        $filename = str_replace('vfs://', '', $filename);
+        \PHPUnit_Framework_Assert::assertFileExists("$directory/$filename");
     }
 
     /**

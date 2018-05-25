@@ -1,15 +1,10 @@
-// @flow
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { ProposalDetailLikers } from './ProposalDetailLikers';
-import { $refType, $fragmentRefs } from '../../../mocks';
+import ProposalDetailLikers from './ProposalDetailLikers';
 
 describe('<ProposalDetailLikers />', () => {
   const proposalWithoutLikers = {
-    $refType,
-    $fragmentRefs,
-    id: '1',
     likers: [],
   };
 
@@ -19,12 +14,10 @@ describe('<ProposalDetailLikers />', () => {
   });
 
   const proposalWithLikers = {
-    $refType,
-    $fragmentRefs,
-    id: '1',
+    id: 1,
     likers: [
       {
-        id: '1',
+        displayName: 'user',
       },
     ],
   };

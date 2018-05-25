@@ -5,18 +5,18 @@ exports[`<ProposalList /> should not render list if proposal is not provided 1`]
   className="p--centered"
   style={
     Object {
-      "marginBottom": "40px",
+      "margin-bottom": "40px",
     }
   }
 >
   <FormattedMessage
-    id="proposal.empty"
+    id="proposal.private.empty"
     values={Object {}}
   />
 </p>
 `;
 
-exports[`<ProposalList /> should render a collectStep proposal list 1`] = `
+exports[`<ProposalList /> should render a proposal list 1`] = `
 <Row
   bsClass="row"
   componentClass="div"
@@ -24,81 +24,39 @@ exports[`<ProposalList /> should render a collectStep proposal list 1`] = `
   <ul
     className="media-list proposal-preview-list opinion__list"
   >
-    <Relay(ProposalPreview)
+    <ProposalPreview
       proposal={
         Object {
-          "$fragmentRefs": null,
-          "id": "1",
+          "body": "test1",
+          "id": 1,
         }
       }
+      showComments={false}
+      showThemes={false}
       step={
         Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "id": "1",
+          "id": 1,
+          "open": "false",
+          "title": "Step 1",
         }
       }
-      viewer={null}
     />
-    <Relay(ProposalPreview)
+    <ProposalPreview
       proposal={
         Object {
-          "$fragmentRefs": null,
-          "id": "2",
+          "body": "test2",
+          "id": 2,
         }
       }
+      showComments={false}
+      showThemes={false}
       step={
         Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "id": "1",
+          "id": 1,
+          "open": "false",
+          "title": "Step 1",
         }
       }
-      viewer={null}
-    />
-  </ul>
-</Row>
-`;
-
-exports[`<ProposalList /> should render a selectionStep proposal list 1`] = `
-<Row
-  bsClass="row"
-  componentClass="div"
->
-  <ul
-    className="media-list proposal-preview-list opinion__list"
-  >
-    <Relay(ProposalPreview)
-      proposal={
-        Object {
-          "$fragmentRefs": null,
-          "id": "1",
-        }
-      }
-      step={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "id": "1",
-        }
-      }
-      viewer={null}
-    />
-    <Relay(ProposalPreview)
-      proposal={
-        Object {
-          "$fragmentRefs": null,
-          "id": "2",
-        }
-      }
-      step={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "id": "1",
-        }
-      }
-      viewer={null}
     />
   </ul>
 </Row>

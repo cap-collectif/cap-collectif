@@ -114,6 +114,19 @@ Scenario: Logged in user wants to manage his followings and click on a project
   Then I should be redirected to "/project/budget-participatif-rennes/collect/collecte-des-propositions"
 
 @javascript @database
+Scenario: Logged in user wants to soft delete his account
+  Given I am logged in as user
+  And I visited "edit profile page"
+  And I wait 2 seconds
+  And I click the "#account-tabs-tab-account" element
+  And I wait 1 seconds
+  And I click the "#delete-account-profile-button" element
+  When I click the "#confirm-delete-form-submit" element
+  And I wait 5 seconds
+  Then I should be redirected to "/"
+  Then I should see "account-and-contents-anonymized" in the "#symfony-flash-messages" element
+
+@javascript @database
 Scenario: Logged as user, I want to delete my firstname, but I cancel it
   Given I am logged in as user
   And I visited "manage personal data page"

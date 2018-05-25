@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
 use Capco\AppBundle\Entity\Proposal;
@@ -24,6 +25,35 @@ use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 class ProposalMutation implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
+
+    public function delete(string $proposalId): array
+    {
+        $em = $this->container->get('doctrine.orm.default_entity_manager');
+        $proposal = $this->getProposal($proposalId);
+        if (!$proposal) {
+            throw new UserError(sprintf('Unknown proposal with id "%s"', $proposalId));
+        }
+
+        $author = $proposal->getAuthor();
+
+        $em->remove($proposal); // softdeleted
+        $em->flush();
+
+        $this->container->get('redis_storage.helper')->recomputeUserCounters($author);
+
+        $this->container->get('swarrot.publisher')->publish(CapcoAppBundleMessagesTypes::PROPOSAL_DELETE, new Message(
+            json_encode([
+                'proposalId' => $proposal->getId(),
+            ])
+        ));
+
+        // Synchronous indexation
+        $indexer = $this->container->get('capco.elasticsearch.indexer');
+        $indexer->index(get_class($proposal), $proposal->getId());
+        $indexer->finishBulk();
+
+        return ['proposal' => $proposal];
+    }
 
     public function changeNotation(Argument $input)
     {
@@ -351,7 +381,7 @@ class ProposalMutation implements ContainerAwareInterface
         $indexer->index(get_class($proposal), $proposal->getId());
         $indexer->finishBulk();
 
-        $this->container->get('swarrot.publisher')->publish('proposal.create', new Message(
+        $this->container->get('swarrot.publisher')->publish(CapcoAppBundleMessagesTypes::PROPOSAL_CREATE, new Message(
             json_encode([
                 'proposalId' => $proposal->getId(),
             ])
@@ -429,7 +459,7 @@ class ProposalMutation implements ContainerAwareInterface
         $proposal->setUpdateAuthor($user);
         $em->flush();
 
-        $this->container->get('swarrot.publisher')->publish('proposal.update', new Message(
+        $this->container->get('swarrot.publisher')->publish(CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE, new Message(
             json_encode([
                 'proposalId' => $proposal->getId(),
             ])
