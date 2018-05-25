@@ -407,14 +407,17 @@ Capco\AppBundle\Entity\SiteParameter:
         position: 1
         type: 1
     SiteParameterScriptAnalytic:
-        keyname: analytical-tracking-scripts-on-all-pages
+        keyname: snalytical-tracking-scripts-on-all-pages
         category: settings.global
         value: ''
         position: 3
         type: 3
+        helpText: for-analytical-scripts-only  script-desactivatable-by-user
+
     SiteParameterScriptAdvertising:
         keyname: ad-scripts-on-all-pages
         category: settings.global
         value: ''
         position: 3
         type: 3
+        helpText: reserved-for-ad-scripts  script-desactivatable-by-user

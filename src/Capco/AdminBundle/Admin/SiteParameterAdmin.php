@@ -34,6 +34,22 @@ class SiteParameterAdmin extends Admin
         return parent::toString($object);
     }
 
+    protected function getHelpText($text)
+    {
+        $txt = '';
+        $translator = $this->getConfigurationPool()->getContainer()->get('translator');
+        $texts = explode(' ', $text);
+        if (\count($texts) > 1) {
+            foreach ($texts as $text) {
+                $txt .= ' ' . $translator->trans($text, [], 'CapcoAppBundle');
+            }
+
+            return $txt;
+        }
+
+        return $translator->trans($text, [], 'CapcoAppBundle');
+    }
+
     /**
      * @param FormMapper $formMapper
      */
@@ -53,6 +69,7 @@ class SiteParameterAdmin extends Admin
             $options = [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
+                'help' => $this->getHelpText($subject->getHelpText()),
             ];
             if ($subject->isSocialNetworkDescription()) {
                 $options['help'] = 'admin.help.metadescription';
@@ -64,17 +81,19 @@ class SiteParameterAdmin extends Admin
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
                 'config_name' => 'admin_editor',
+                'help' => $this->getHelpText($subject->getHelpText()),
             ]);
         } elseif ($subject->getType() === $types['integer']) {
             $formMapper->add('value', IntegerType::class, [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
+                'help' => $this->getHelpText($subject->getHelpText()),
             ]);
         } elseif ($subject->getType() === $types['javascript']) {
             $formMapper->add('value', TextareaType::class, [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
-                'help' => 'global.site.embed_js' === $subject->getKeyname() ? 'admin.help.site_parameter.js' : 'admin.help.customcode',
+                'help' => $this->getHelpText($subject->getHelpText()),
                 'attr' => ['rows' => 10, 'placeholder' => '<script type="text/javascript"> </script>'],
             ]);
         } elseif ($subject->getType() === $types['email']) {
@@ -82,27 +101,32 @@ class SiteParameterAdmin extends Admin
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
                 'attr' => ['placeholder' => 'hello@exemple.com'],
+                'help' => $this->getHelpText($subject->getHelpText()),
             ]);
         } elseif ($subject->getType() === $types['intern_url']) {
             $formMapper->add('value', null, [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
+                'help' => $this->getHelpText($subject->getHelpText()),
             ]);
         } elseif ($subject->getType() === $types['url']) {
             $formMapper->add('value', UrlType::class, [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
+                'help' => $this->getHelpText($subject->getHelpText()),
             ]);
         } elseif ($subject->getType() === $types['tel']) {
             $formMapper->add('value', null, [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
+                'help' => $this->getHelpText($subject->getHelpText()),
             ]);
         } elseif ($subject->getType() === $types['boolean']) {
             $formMapper->add('value', ChoiceType::class, [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
                 'choices' => ['1' => 'Activé', '0' => 'Désactivé'],
+                'help' => $this->getHelpText($subject->getHelpText()),
             ]);
         } elseif ('homepage.jumbotron.margin' === $subject->getKeyname() && $subject->getType() === $types['select']) {
             $formMapper->add('value', ChoiceType::class, [
@@ -115,6 +139,7 @@ class SiteParameterAdmin extends Admin
                     150 => 'Grandes marges (150px)',
                     200 => 'Marges importantes (200px)',
                 ],
+                'help' => $this->getHelpText($subject->getHelpText()),
             ]);
         } elseif ('global.locale' === $subject->getKeyname()) {
             $formMapper->add('value', ChoiceType::class, [
@@ -124,11 +149,13 @@ class SiteParameterAdmin extends Admin
                     'fr-FR' => 'Français',
                     'en-GB' => 'English',
                 ],
+                'help' => $this->getHelpText($subject->getHelpText()),
             ]);
         } else {
             $formMapper->add('value', null, [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
+                'help' => $this->getHelpText($subject->getHelpText()),
             ]);
         }
     }
