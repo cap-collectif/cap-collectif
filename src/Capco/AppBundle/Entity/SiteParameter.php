@@ -280,12 +280,12 @@ class SiteParameter
         return $this;
     }
 
-    public function getHelpText(): string
+    public function getHelpText(): ?string
     {
         return $this->helpText;
     }
 
-    public function setHelpText(string $helpText): self
+    public function setHelpText(?string $helpText = null): self
     {
         $this->helpText = $helpText;
 

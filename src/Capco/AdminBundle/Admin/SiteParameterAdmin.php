@@ -34,7 +34,7 @@ class SiteParameterAdmin extends Admin
         return parent::toString($object);
     }
 
-    protected function getHelpText($text)
+    protected function getHelpText(?string $text = null): ?string
     {
         $txt = '';
         $translator = $this->getConfigurationPool()->getContainer()->get('translator');
@@ -62,6 +62,7 @@ class SiteParameterAdmin extends Admin
             ])
         ;
 
+        /** @var SiteParameter $subject */
         $subject = $this->getSubject();
         $types = SiteParameter::$types;
 
