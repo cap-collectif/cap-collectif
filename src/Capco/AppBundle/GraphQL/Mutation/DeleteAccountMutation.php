@@ -38,7 +38,7 @@ class DeleteAccountMutation implements ContainerAwareInterface
     public function __invoke(Request $request, Arg $input, User $user): array
     {
         $deleteType = $input['type'];
-        $this->deleteIfStepActive($user);
+        $this->hardDeleteUserContributionsInActiveSteps($user);
         $this->anonymizeUser($user);
 
         if ('HARD' === $deleteType && $user) {
@@ -114,7 +114,7 @@ class DeleteAccountMutation implements ContainerAwareInterface
         $this->em->flush();
     }
 
-    public function deleteIfStepActive(User $user, bool $dryRun = false): int
+    public function hardDeleteUserContributionsInActiveSteps(User $user, bool $dryRun = false): int
     {
         $deletedBodyText = $this->translator->trans('deleted-content-by-author', [], 'CapcoAppBundle');
         $contributions = $user->getContributions();

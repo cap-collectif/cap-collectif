@@ -158,7 +158,7 @@ class UserResolver implements ContainerAwareInterface
     public function contributionsToDeleteCount($object): int
     {
         $deleteAction = $this->container->get('capco.mutation.delete_account');
-        $count = $deleteAction->deleteIfStepActive($object, true);
+        $count = $deleteAction->hardDeleteUserContributionsInActiveSteps($object, true);
 
         return $count;
     }

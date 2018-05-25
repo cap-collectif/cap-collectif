@@ -16,8 +16,6 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
     protected $samlAuth;
     protected $router;
     protected $toggleManager;
-    protected $translator;
-    protected $session;
     protected $client;
 
     public function __construct(Simple $samlAuth, Router $router, Manager $toggleManager, OpenAmClient $client)
