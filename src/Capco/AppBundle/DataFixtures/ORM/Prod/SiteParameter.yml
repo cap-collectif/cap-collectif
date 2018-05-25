@@ -407,7 +407,13 @@ Capco\AppBundle\Entity\SiteParameter:
         position: 1
         type: 1
     SiteParameterScriptAnalytic:
-        keyname: global.site.embed_analytic
+        keyname: analytical-tracking-scripts-on-all-pages
+        category: settings.global
+        value: ''
+        position: 3
+        type: 3
+    SiteParameterScriptAdvertising:
+        keyname: ad-scripts-on-all-pages
         category: settings.global
         value: ''
         position: 3

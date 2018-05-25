@@ -21,10 +21,10 @@ var cookieMonster = function() {
     '_pk_hsr',
   ];
 
-  function isDoNotTrackActive() {
+  var isDoNotTrackActive = function() {
     const doNotTrack = navigator.doNotTrack || navigator.msDoNotTrack;
     return doNotTrack === 'yes' || doNotTrack === '1';
-  }
+  };
 
   var processCookieConsent = function() {
     const consentCookie = Cookies.getJSON('hasFullConsent');
@@ -151,6 +151,7 @@ var cookieMonster = function() {
     processCookieConsent,
     toggleAnalyticCookies,
     analyticCookieValue,
+    isDoNotTrackActive,
   };
 };
 
