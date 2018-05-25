@@ -163,7 +163,7 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
               ->createQuery('UPDATE CapcoUserBundle:User u set u.proposalCommentsCount = (
                 SELECT count(pc.id) from CapcoAppBundle:ProposalComment pc
                 INNER JOIN CapcoAppBundle:Proposal p WITH pc.proposal = p
-                WHERE pc.Author = u AND pc.isEnabled = 1 AND p.isEnabled = 1 GROUP BY pc.Author
+                WHERE pc.Author = u AND pc.isEnabled = 1 GROUP BY pc.Author
               )')
               ->execute()
             ;
