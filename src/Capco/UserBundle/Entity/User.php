@@ -1379,11 +1379,4 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
         return $this;
     }
-
-    public function clearArchives(): self
-    {
-        $this->archives->clear();
-
-        return $this;
-    }
 }
