@@ -39,15 +39,14 @@ class DeleteAccountMutation implements ContainerAwareInterface
     {
         $deleteType = $input['type'];
         $this->hardDeleteUserContributionsInActiveSteps($user);
-        $this->anonymizeUser($user);
-
         if ('HARD' === $deleteType && $user) {
             $this->hardDelete($user);
         }
+        $this->anonymizeUser($user);
 
         return [
             'userId' => $user->getId(),
-            ];
+        ];
     }
 
     public function anonymizeUser(User $user): void
@@ -160,6 +159,7 @@ class DeleteAccountMutation implements ContainerAwareInterface
             foreach ($toDeleteList as $toDelete) {
                 $this->em->remove($toDelete);
             }
+            $this->em->flush();
         }
 
         $this->container->get('redis_storage.helper')->recomputeUserCounters($user);
@@ -204,6 +204,7 @@ class DeleteAccountMutation implements ContainerAwareInterface
             $this->em->remove($event);
         }
 
+        $this->em->flush();
         $this->container->get('redis_storage.helper')->recomputeUserCounters($user);
     }
 
