@@ -61,6 +61,9 @@
             <attribute-override name="email">
                 <field column="email" type="string" length="255" nullable="true" />
             </attribute-override>
+            <attribute-override name="emailCanonical">
+                <field column="email_canonical" type="string" length="255" nullable="true" unique="true"/>
+            </attribute-override>
             <attribute-override name="password">
                 <field column="password" type="string" length="255" nullable="true" />
             </attribute-override>

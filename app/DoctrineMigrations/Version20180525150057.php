@@ -18,6 +18,7 @@ class Version20180525150057 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
+        $this->addSql('ALTER TABLE fos_user CHANGE email_canonical email_canonical VARCHAR(255) DEFAULT NULL');
         $this->addSql('ALTER TABLE fos_user ADD deleted_account_at DATETIME DEFAULT NULL');
         $this->addSql('ALTER TABLE fos_user ADD proposal_comments_count INT NOT NULL');
     }
@@ -30,6 +31,7 @@ class Version20180525150057 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
+        $this->addSql('ALTER TABLE fos_user CHANGE email_canonical email_canonical VARCHAR(255) NOT NULL COLLATE utf8_unicode_ci');
         $this->addSql('ALTER TABLE fos_user DROP deleted_account_at');
         $this->addSql('ALTER TABLE fos_user DROP proposal_comments_count');
 

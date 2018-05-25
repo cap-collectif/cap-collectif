@@ -44,6 +44,8 @@ class DeleteAccountMutation implements ContainerAwareInterface
         }
         $this->anonymizeUser($user);
 
+        $this->em->flush();
+
         return [
             'userId' => $user->getId(),
         ];
@@ -54,6 +56,7 @@ class DeleteAccountMutation implements ContainerAwareInterface
         $usernameDeleted = $this->translator->trans('deleted-user', [], 'CapcoAppBundle');
         $newsletter = $this->em->getRepository(NewsletterSubscription::class)->findOneBy(['email' => $user->getEmail()]);
         $userGroups = $this->em->getRepository(UserGroup::class)->findBy(['user' => $user]);
+        $userManager = $this->container->get('fos_user.user_manager');
 
         if ($newsletter) {
             $this->em->remove($newsletter);
@@ -66,9 +69,9 @@ class DeleteAccountMutation implements ContainerAwareInterface
         }
 
         $user->setUsername($usernameDeleted);
-        $user->setEmail(null);
         $user->setDeletedAccountAt(new \DateTime());
-        $user->setPlainPassword('');
+        $user->setPlainPassword(null);
+        $user->setLastLogin(null);
 
         $user->setFacebookId(null);
         $user->setFacebookUrl(null);
@@ -110,7 +113,10 @@ class DeleteAccountMutation implements ContainerAwareInterface
             $user->setMedia(null);
         }
 
-        $this->em->flush();
+        $userManager->updateUser($user);
+
+        $user->setEmail(null);
+        $user->setEmailCanonical(null);
     }
 
     public function hardDeleteUserContributionsInActiveSteps(User $user, bool $dryRun = false): int
@@ -159,7 +165,6 @@ class DeleteAccountMutation implements ContainerAwareInterface
             foreach ($toDeleteList as $toDelete) {
                 $this->em->remove($toDelete);
             }
-            $this->em->flush();
         }
 
         $this->container->get('redis_storage.helper')->recomputeUserCounters($user);
@@ -204,7 +209,6 @@ class DeleteAccountMutation implements ContainerAwareInterface
             $this->em->remove($event);
         }
 
-        $this->em->flush();
         $this->container->get('redis_storage.helper')->recomputeUserCounters($user);
     }
 
