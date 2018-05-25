@@ -68,10 +68,12 @@ class DeleteAccountMutation implements ContainerAwareInterface
             }
         }
 
+        $user->setEmail(null);
+        $user->setEmailCanonical(null);
         $user->setUsername($usernameDeleted);
         $user->setDeletedAccountAt(new \DateTime());
         $user->setPlainPassword(null);
-        $user->setLastLogin(null);
+        $user->clearLastLogin();
 
         $user->setFacebookId(null);
         $user->setFacebookUrl(null);
@@ -114,9 +116,6 @@ class DeleteAccountMutation implements ContainerAwareInterface
         }
 
         $userManager->updateUser($user);
-
-        $user->setEmail(null);
-        $user->setEmailCanonical(null);
     }
 
     public function hardDeleteUserContributionsInActiveSteps(User $user, bool $dryRun = false): int

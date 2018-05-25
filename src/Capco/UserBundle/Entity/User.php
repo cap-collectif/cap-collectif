@@ -311,6 +311,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return $this;
     }
 
+    public function clearLastLogin()
+    {
+        $this->lastLogin = null;
+    }
+
     public function getSamlId()
     {
         return $this->samlId;
@@ -336,9 +341,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         }
     }
 
+    /*  http://symfony.com/doc/2.8/security/entity_provider.html#understanding-serialize-and-how-a-user-is-saved-in-the-session  */
+    /*  We check the account is not deleted in case of the user has multiple accounts sessions and just deleted his account */
     public function isEqualTo(RealUserInterface $user)
     {
-        return $user instanceof self && $this->id === $user->getId();
+        return $user instanceof self && $this->id === $user->getId() && null === $user->getDeletedAccountAt();
     }
 
     public function addResponse(AbstractResponse $response): self
