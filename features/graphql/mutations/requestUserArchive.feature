@@ -11,11 +11,9 @@ Scenario: GraphQL client wants to request his personal archive
       requestUserArchive(input: {}) {
         viewer {
           id
-          archives {
-            id
-            requestedAt
-            ready
-          }
+          isArchiveDeleted
+          isArchiveReady
+          firstArchive
         }
       }
     }"
@@ -28,14 +26,9 @@ Scenario: GraphQL client wants to request his personal archive
       "requestUserArchive": {
         "viewer": {
           "id": "userAdmin",
-          "archives": [
-            {
-              "id": @string@,
-              "requestedAt": "@string@.isDateTime()",
-              "ready": false
-            },
-            @...@
-          ]
+          "isArchiveDeleted": false,
+          "isArchiveReady": false,
+          "firstArchive": true
         }
       }
     }
