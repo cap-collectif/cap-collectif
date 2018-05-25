@@ -963,7 +963,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     /**
      * @return int
      */
-    public function getProposalCommentsCount()
+    public function getProposalCommentsCount(): int
     {
         return $this->proposalCommentsCount;
     }

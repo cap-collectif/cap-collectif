@@ -7,7 +7,6 @@ use Capco\UserBundle\MonCompteParis\OpenAmClient;
 use SimpleSAML\Auth\Simple;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
 
