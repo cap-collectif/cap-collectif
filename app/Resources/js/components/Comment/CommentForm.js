@@ -1,69 +1,74 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm, Field, formValueSelector } from 'redux-form';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import classNames from 'classnames';
 import autosize from 'autosize';
 import { Row, Col, Button } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
+import renderComponent from '../Form/Field';
 import RegistrationButton from '../User/Registration/RegistrationButton';
 import LoginButton from '../User/Login/LoginButton';
 import UserAvatar from '../User/UserAvatar';
-import FlashMessages from '../Utils/FlashMessages';
-import Input from '../Form/Input';
+import type { GlobalState } from '../../types';
+// import { intlMock } from '../../mocks';
+import CommentActions from '../../actions/CommentActions';
+
 
 type Props = {
   isAnswer?: boolean,
   focus?: boolean,
-  comment?: Function,
+  comment: ?string,
   user?: Object,
-  intl: intlMock,
+  // intl: intlMock,
+  intl: Object,
+  submitting: boolean,
+  handleSubmit?: Function,
 }
 
-// const onSubmit = (values, dispatch, props) => {
-//   const { synthesis } = props;
-//
-//   return Fetcher.put(`/syntheses/${synthesis.id}/display`, {
-//     rules: { level: values.level },
-//   }).then(() => {
-//     return SynthesisActions.load(synthesis.id);
-//   });
-// };
-//
-// const validate = ({ level }: Object) => {
-//   const errors = {};
-//   if (level < 0 || level > 5) {
-//     errors.level = 'synthesis.settings.display.level_constraints';
-//   }
-//
-//   return errors;
-// };
+type State = {
+  expanded: boolean,
+}
+
+const onSubmit = (values, dispatch, props) => {
+  const { user } = props;
+
+  // const { comment, object, uri } = this.props;
+  //   data.parent = comment.id;
+  // return CommentActions.create(uri, object, data);
+};
+
+const validate = ({ body, authorEmail, authorName }: Object) => {
+  const errors = {};
+  if (body.length <= 1) {
+    errors.body = 'comment.constraints.body';
+  }
+
+  if (authorEmail.length === 0) {
+    errors.authorEmail = 'comment.constraints.author_email';
+  }
+
+  if (authorName.length <= 2) {
+    errors.authorName = 'comment.constraints.author_name';
+  }
+
+  return errors;
+};
 
 export const formName = 'CommentForm';
 
-export class CommentForm extends React.Component<Props> {
-  // mixins: [DeepLinkStateMixin, FormMixin],
+export class CommentForm extends React.Component<Props, State> {
   static defaultProps = {
     isAnswer: false,
     user: null,
+    comment: 0,
   };
 
   // check https://github.com/cap-collectif/platform/pull/4583/files?utf8=%E2%9C%93&diff=split
 
-  // state = {
-  //   form: {
-  //     body: '',
-  //     authorName: '',
-  //     authorEmail: '',
-  //   },
-  //   errors: {
-  //     body: [],
-  //     authorName: [],
-  //     authorEmail: [],
-  //   },
-  //   expanded: false,
-  //   isSubmitting: false,
-  // };
+  state = {
+    expanded: false,
+  };
 
   // componentDidMount() {
   //   const { focus, user } = this.props;
@@ -84,9 +89,9 @@ export class CommentForm extends React.Component<Props> {
   //   }
   // }
   //
-  // componentDidUpdate() {
-  //   autosize(ReactDOM.findDOMNode(this.refs.body));
-  // }
+  componentDidUpdate() {
+    autosize(ReactDOM.findDOMNode(this.refs.body));
+  }
   //
   // getFormClasses() {
   //   const { isAnswer } = this.props;
@@ -94,128 +99,106 @@ export class CommentForm extends React.Component<Props> {
   //     'comment-answer-form': isAnswer,
   //   });
   // }
+
+  // expand(newState) {
+  //   const { comment } = this.props;
   //
-  // updateConstraints(anonymous) {
-  //   this.formValidationRules = {
-  //     body: {
-  //       notBlank: { message: 'comment.constraints.body' },
-  //       min: { value: 2, message: 'comment.constraints.body' },
-  //     },
-  //   };
-  //   if (anonymous) {
-  //     this.formValidationRules.authorEmail = {
-  //       notBlank: { message: 'comment.constraints.author_email' },
-  //       isEmail: { message: 'comment.constraints.author_email' },
-  //     };
-  //     this.formValidationRules.authorName = {
-  //       notBlank: { message: 'comment.constraints.author_name' },
-  //       min: { value: 2, message: 'comment.constraints.author_name' },
-  //     };
+  //   if (!newState) {
+  //     const $block = $(ReactDOM.findDOMNode(this.refs.commentBlock));
+  //     if (
+  //       // eslint-disable-next-line no-undef
+  //       event.relatedTarget &&
+  //       // eslint-disable-next-line no-undef
+  //       ($(event.relatedTarget).is($block) ||
+  //         // eslint-disable-next-line no-undef
+  //         $block.has($(event.relatedTarget)).length)
+  //     ) {
+  //       return; // clicked on an element inside comment block
+  //     }
+  //     if (comment && comment.length === 0) {
+  //       this.setState({ expanded: false });
+  //       return;
+  //     }
   //   }
+  //   this.setState({ expanded: newState });
   // }
 
-  expand(newState) {
-    if (!newState) {
-      const $block = $(ReactDOM.findDOMNode(this.refs.commentBlock));
-      if (
-        // eslint-disable-next-line no-undef
-        event.relatedTarget &&
-        // eslint-disable-next-line no-undef
-        ($(event.relatedTarget).is($block) ||
-          // eslint-disable-next-line no-undef
-          $block.has($(event.relatedTarget)).length)
-      ) {
-        return; // clicked on an element inside comment block
-      }
-      if (this.state.form.body.length === 0) {
-        this.setState({ expanded: false, submitted: false });
-        return;
-      }
+  expand () {
+    const { comment } = this.props;
+
+    if (comment && comment.length <= 1 && this.state.expanded === true) {
+      this.setState({ expanded: false });
     }
-    this.setState({ expanded: newState });
+
+    if(comment && comment.length >= 2 && this.state.expanded === false )
+    this.setState({ expanded: true });
   }
 
-  create() {
-    const { comment, user } = this.props;
-    this.setState({ submitted: true }, () => {
-      if (!this.isValid()) {
-        return;
-      }
-
-      this.setState({ isSubmitting: true });
-      const data = this.state.form;
-      if (user) {
-        delete data.authorName;
-        delete data.authorEmail;
-      }
-
-      comment(data)
-        .then(() => {
-          this.setState(this.getInitialState());
-          autosize.destroy(ReactDOM.findDOMNode(this.refs.body));
-        })
-        .catch(() => {
-          this.setState({ isSubmitting: false, submitted: false });
-        });
-    });
-  }
-
-  renderFormErrors(field) {
-    const errors = this.getErrorsMessages(field);
-    if (errors.length > 0) {
-      return <FlashMessages errors={errors} form />;
-    }
-    return null;
-  }
+  // create() {
+  //   const { comment, user } = this.props;
+  //   this.setState({ submitted: true }, () => {
+  //     if (!this.isValid()) {
+  //       return;
+  //     }
+  //
+  //     this.setState({ isSubmitting: true });
+  //     const data = this.state.form;
+  //     if (user) {
+  //       delete data.authorName;
+  //       delete data.authorEmail;
+  //     }
+  //
+  //     comment(data)
+  //       .then(() => {
+  //         this.setState(this.getInitialState());
+  //         autosize.destroy(ReactDOM.findDOMNode(this.refs.body));
+  //       })
+  //       .catch(() => {
+  //         this.setState({ isSubmitting: false, submitted: false });
+  //       });
+  //   });
+  // }
 
   renderAnonymous() {
-    const { user } = this.props;
+    const { user, submitting } = this.props;
     if (!user) {
       return (
         <div>
           <Row>
             <Col sm={12} md={6}>
-              <p>{<FormattedMessage id="comment.with_my_account" />}</p>
+              <p><FormattedMessage id="comment.with_my_account" /></p>
               <RegistrationButton />{' '}
               <LoginButton className="btn-darkest-gray navbar-btn btn--connection" />
-              <h5>{<FormattedMessage id="comment.why_create_account" />}</h5>
+              <h5><FormattedMessage id="comment.why_create_account" /></h5>
               <ul className="excerpt small">
-                <li>{<FormattedMessage id="comment.create_account_reason_1" />}</li>
-                <li>{<FormattedMessage id="comment.create_account_reason_2" />}</li>
-                <li>{<FormattedMessage id="comment.create_account_reason_3" />}</li>
+                <li><FormattedMessage id="comment.create_account_reason_1" /></li>
+                <li><FormattedMessage id="comment.create_account_reason_2" /></li>
+                <li><FormattedMessage id="comment.create_account_reason_3" /></li>
               </ul>
             </Col>
             <Col sm={12} md={6}>
-              <p>{<FormattedMessage id="comment.without_account" />}</p>
-              <Input
+              <p><FormattedMessage id="comment.without_account" /></p>
+              <Field
                 type="text"
-                ref="authorName"
-                id="authorName"
                 name="authorName"
-                valueLink={this.linkState('form.authorName')}
+                component={renderComponent}
                 label={<FormattedMessage id="global.fullname" />}
                 help={<FormattedMessage id="comment.public_name" />}
-                groupClassName={this.getGroupStyle('authorName')}
-                errors={this.renderFormErrors('authorName')}
               />
-              <Input
+              <Field
                 type="email"
-                ref="authorEmail"
-                id="authorEmail"
                 name="authorEmail"
-                valueLink={this.linkState('form.authorEmail')}
+                component={renderComponent}
                 label={<FormattedMessage id="global.hidden_email" />}
                 help={<FormattedMessage id="comment.email_info" />}
-                groupClassName={this.getGroupStyle('authorEmail')}
-                errors={this.renderFormErrors('authorEmail')}
               />
               <Button
-                ref="anonymousComment"
-                disabled={this.state.isSubmitting}
-                onClick={this.state.isSubmitting ? null : this.create}
+                // ref="anonymousComment"
+                disabled={submitting}
+                onClick={submitting ? null : this.create}
                 bsStyle="primary"
                 className="btn--comment">
-                {this.state.isSubmitting ? (
+                {submitting ? (
                   <FormattedMessage id="global.loading" />
                 ) : (
                   <FormattedMessage id="comment.submit" />
@@ -229,17 +212,18 @@ export class CommentForm extends React.Component<Props> {
   }
 
   renderCommentButton() {
-    const { user } = this.props;
-    if (this.state.expanded || this.state.form.body.length >= 1) {
+    const { user, submitting } = this.props;
+
+    if (this.state.expanded) {
       if (user) {
         return (
           <Button
             ref="loggedInComment"
-            disabled={this.state.isSubmitting}
-            onClick={this.state.isSubmitting ? null : this.create}
+            disabled={submitting}
             bsStyle="primary"
+            type="submit"
             className="btn--comment">
-            {this.state.isSubmitting ? (
+            {submitting ? (
               <FormattedMessage id="global.loading" />
             ) : (
               <FormattedMessage id="comment.submit" />
@@ -250,29 +234,27 @@ export class CommentForm extends React.Component<Props> {
 
       return <div>{this.renderAnonymous()}</div>;
     }
-  },
+  }
 
   render() {
-    const { isAnswer, user, intl } = this.props;
+    const { isAnswer, user, intl, handleSubmit } = this.props;
     const classes = classNames({
       'comment-answer-form': isAnswer,
     });
+
     return (
       <div className={classes} style={{ padding: '5px' }}>
         <UserAvatar user={user} className="pull-left" />
         <div className="opinion__data" ref="commentBlock">
-          <form ref={c => (this.form = c)}>
-            <Input
+          <form form onSubmit={handleSubmit}>
+            <Field
               type="textarea"
               name="body"
-              ref="body"
+              component={renderComponent}
               aria-label={intl.formatMessage({ id: 'comment.write' })}
-              valueLink={this.linkState('form.body')}
               rows="2"
-              onFocus={this.expand.bind(this, true)}
+              onChange={this.expand()}
               placeholder="comment.write"
-              groupClassName={this.getGroupStyle('body')}
-              errors={this.renderFormErrors('body')}
             />
             {this.renderCommentButton()}
           </form>
@@ -282,10 +264,17 @@ export class CommentForm extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = state => {
-  return { user: state.user.user };
-};
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
+  comment: formValueSelector(formName)(state, 'body'),
+  user: state.user.user,
+});
 
 const container = injectIntl(CommentForm);
 
-export default connect(mapStateToProps)(container);
+export default connect(mapStateToProps)(
+  reduxForm({
+    validate,
+    onSubmit,
+    form: formName,
+  })(container),
+);
