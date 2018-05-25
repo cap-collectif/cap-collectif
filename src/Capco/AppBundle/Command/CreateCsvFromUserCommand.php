@@ -68,7 +68,7 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
 
     protected function getZipFilenameForUser(string $userId): string
     {
-        return $userId . '.zip';
+        return "$userId.zip";
     }
 
     protected function getZipPathForUser(string $userId): string
