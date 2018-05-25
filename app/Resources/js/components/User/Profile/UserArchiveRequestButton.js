@@ -72,7 +72,7 @@ export class UserArchiveRequestButton extends Component<Props, State> {
           <Modal.Body>
             <FormattedHTMLMessage
               id="data-copy-request-modal-text"
-              values={{ emailAdress: email }}
+              values={{ emailAddress: email }}
             />
           </Modal.Body>
           <Modal.Footer>
