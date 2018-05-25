@@ -33,6 +33,7 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
             'query' => $this->getUserGraphQLQuery($userId),
             'variables' => [],
         ])->toArray();
+        unset($data['extensions']);
 
         $header = array_map(function ($item) {
             $item = str_replace('data_node_', '', $item);
