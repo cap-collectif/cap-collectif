@@ -2,7 +2,6 @@
    CNIL
 ================================================================*/
 
-// Le bandeau cookie
 .cookie-banner, #cookieChoiceInfo {
     display: none;
     position: fixed;
@@ -12,6 +11,7 @@
     background-color: $dark;
     color: $white;
     z-index: 9999;
+
     &.active {
         display: block;
     }
@@ -21,6 +21,7 @@
     color: $white;
     text-decoration: underline;
   }
+
   #cookie-consent {
     background-color: $dark;
     color: $white;

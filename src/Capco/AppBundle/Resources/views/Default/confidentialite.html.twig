@@ -25,8 +25,7 @@
 {% block body %}
 <div class="container  custom-pae" style="max-width: 660px">
     {{ 'confidentialite.content' | trans({}, 'CapcoAppBundle')|raw }}
-    <br/>
-    <div class="row">
+    <div class="row" style="margin-top: 10px">
         <div class="col-xs-12 col-sm-8 col-md-12">
             {{ react_render_component('CookieApp') }}
         </div>

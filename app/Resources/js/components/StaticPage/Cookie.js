@@ -8,16 +8,16 @@ import cookieMonster from '../../cookieMonster';
 type Props = {};
 
 type State = {
-  isAnalyticEnable: boolean,
-  isAdvertisingEnable: boolean,
+  isAnalyticEnabled: boolean,
+  isAdvertisingEnabled: boolean,
 };
 
 export class Cookie extends React.Component<Props, State> {
   constructor() {
     super();
     this.state = {
-      isAdvertisingEnable: !cookieMonster.isDoNotTrackActive(),
-      isAnalyticEnable:
+      isAdvertisingEnabled: !cookieMonster.isDoNotTrackActive(),
+      isAnalyticEnabled:
         typeof cookieMonster.analyticCookieValue() === 'undefined'
           ? true
           : cookieMonster.analyticCookieValue(),
@@ -27,18 +27,17 @@ export class Cookie extends React.Component<Props, State> {
   toggleAnalyticCookies = (value: boolean): void => {
     cookieMonster.toggleAnalyticCookies(value);
     this.setState({
-      isAnalyticEnable: value,
+      isAnalyticEnabled: value,
     });
   };
   toggleAdvertisingCookies = (value: boolean): void => {
     this.setState({
-      isAdvertisingEnable: value,
+      isAdvertisingEnabled: value,
     });
   };
 
   render() {
-    const { isAnalyticEnable, isAdvertisingEnable } = this.state;
-
+    const { isAnalyticEnabled, isAdvertisingEnabled } = this.state;
     return (
       <div>
         <div>
@@ -67,7 +66,7 @@ export class Cookie extends React.Component<Props, State> {
                 <FormattedMessage id="always-on" />
               </Col>
             </div>
-            <Col sm={12} className="color-grey-light">
+            <Col sm={12} className="color-dark-gray">
               <FormattedMessage id="help-text-essential-option" />
             </Col>
           </div>
@@ -82,19 +81,19 @@ export class Cookie extends React.Component<Props, State> {
               </Col>
               <Col sm={4} className="d-flex flex-end">
                 <div
-                  className={isAnalyticEnable ? 'color-green' : 'color-red'}
+                  className={isAnalyticEnabled ? 'color-green' : 'color-red'}
                   style={{ marginRight: 10 }}>
                   <FormattedMessage
-                    id={isAnalyticEnable ? 'list.label_enabled' : 'step.vote_type.disabled'}
+                    id={isAnalyticEnabled ? 'list.label_enabled' : 'step.vote_type.disabled'}
                   />
                 </div>
                 <Toggle
-                  checked={isAnalyticEnable}
-                  onChange={() => this.toggleAnalyticCookies(!isAnalyticEnable)}
+                  checked={isAnalyticEnabled}
+                  onChange={() => this.toggleAnalyticCookies(!isAnalyticEnabled)}
                 />
               </Col>
             </div>
-            <Col sm={12} className="color-grey-light">
+            <Col sm={12} className="color-dark-gray">
               <FormattedMessage id="help-text-performance-option" />
             </Col>
           </div>
@@ -109,19 +108,19 @@ export class Cookie extends React.Component<Props, State> {
               </Col>
               <Col sm={4} className="d-flex flex-end">
                 <div
-                  className={isAdvertisingEnable ? 'color-green' : 'color-red'}
+                  className={isAdvertisingEnabled ? 'color-green' : 'color-red'}
                   style={{ marginRight: 10 }}>
                   <FormattedMessage
-                    id={isAdvertisingEnable ? 'list.label_enabled' : 'step.vote_type.disabled'}
+                    id={isAdvertisingEnabled ? 'list.label_enabled' : 'step.vote_type.disabled'}
                   />
                 </div>
                 <Toggle
-                  checked={isAdvertisingEnable}
-                  onChange={() => this.toggleAdvertisingCookies(!isAdvertisingEnable)}
+                  checked={isAdvertisingEnabled}
+                  onChange={() => this.toggleAdvertisingCookies(!isAdvertisingEnabled)}
                 />
               </Col>
             </div>
-            <Col sm={12} className="color-grey-light">
+            <Col sm={12} className="color-dark-gray">
               <FormattedMessage id="help-text-advertising-option" />
             </Col>
           </div>

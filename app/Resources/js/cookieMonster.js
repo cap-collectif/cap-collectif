@@ -64,7 +64,6 @@ var cookieMonster = function() {
     }
 
     if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
-      event.preventDefault();
       if (isDoNotTrackActive()) {
         hideBanner();
         return;
@@ -87,7 +86,6 @@ var cookieMonster = function() {
     ) {
       return;
     }
-    event.preventDefault();
     if (isDoNotTrackActive()) {
       hideBanner();
       return;
@@ -98,7 +96,7 @@ var cookieMonster = function() {
       considerFullConsent();
       return;
     }
-    if (window.location.pathname === '/confidentialite') {
+    if (window.location.pathname === '/confidentialite' && target.id !== 'main-navbar') {
       return;
     }
 
@@ -136,7 +134,6 @@ var cookieMonster = function() {
   };
 
   function removeCookieConsent(event) {
-    event.preventDefault();
     var cookieChoiceElement = document.getElementById(cookieConsent);
     if (cookieChoiceElement != null) {
       cookieChoiceElement.parentNode.removeChild(cookieChoiceElement);
