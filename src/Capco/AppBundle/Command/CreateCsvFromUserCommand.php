@@ -29,10 +29,16 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
         $writer = WriterFactory::create(Type::CSV);
         $writer->openToFile($this->getPath());
 
+        // TODO disable ACL or give admin rights (to disable access)
         $data = $executor->disabledDebugInfo()->execute([
             'query' => $this->getUserGraphQLQuery($userId),
             'variables' => [],
         ])->toArray();
+
+        if (isset($data['errors'])) {
+            var_dump($data['errors']);
+            throw new \RuntimeException('Failed to query GraphQL to export userId ' . $userId);
+        }
         unset($data['extensions']);
 
         $header = array_map(function ($item) {
@@ -137,13 +143,17 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
       biography
       address
       address2
+      neighborhood
       zipCode
       city
       phone
       show_url
+      samlId
       googleId
       facebookId
-      samlId
+      facebookUrl
+      twitterUrl
+      linkedInUrl
       opinionsCount
       opinionVotesCount
       opinionVersionsCount
