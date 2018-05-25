@@ -5,7 +5,7 @@ import {
   Alert,
   Well,
   Panel,
-  ButtonToolbar,
+  ButtonGroup,
   Button,
   Popover,
   OverlayTrigger,
@@ -557,7 +557,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                 )}
                 <div className="horizontal_field_with_border_top">
                   <div className="col-sm-3" />
-                  <ButtonToolbar className="col-sm-4 pl-0">
+                  <ButtonGroup className="col-sm-4 pl-0">
                     <Button
                       disabled={invalid || submitting}
                       type="submit"
@@ -575,12 +575,28 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                       submitFailed={submitFailed}
                       submitting={submitting}
                     />
-                  </ButtonToolbar>
+                  </ButtonGroup>
                 </div>
               </form>
             </div>
           )}
-          <UserArchiveRequestButton viewer={viewer} />
+        </Panel>
+        <Panel>
+          <h2 className="page-header">
+            <FormattedMessage id="data-export" />
+          </h2>
+          <div className="horizontal_field_with_border_top">
+            <label className="col-sm-3 control-label">
+              <FormattedMessage id="your-data" />
+            </label>
+            <div className="col-sm-9">
+              <UserArchiveRequestButton viewer={viewer} />
+              <p className="excerpt">
+                {viewer.isArchiveReady && <FormattedMessage id="help-text-data-download-button" />}
+                <FormattedMessage id="data-copy-help-text" />
+              </p>
+            </div>
+          </div>
         </Panel>
       </div>
     );
@@ -639,6 +655,7 @@ export default createFragmentContainer(
       city
       gender
       phoneConfirmed
+      isArchiveReady
       ...UserArchiveRequestButton_viewer
     }
   `,

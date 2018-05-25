@@ -23,6 +23,6 @@ class UserArchiveReadyResolver implements ResolverInterface
             return false;
         }
 
-        return $lastArchive->getIsGenerated();
+        return $lastArchive->isReady();
     }
 }
