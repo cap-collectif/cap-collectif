@@ -591,8 +591,12 @@ export class PersonalData extends Component<Props, PersonalDataState> {
             </label>
             <div className="col-sm-9">
               <UserArchiveRequestButton viewer={viewer} />
+              {viewer.isArchiveReady && (
+                <p className="excerpt">
+                  <FormattedMessage id="help-text-data-download-button" />
+                </p>
+              )}
               <p className="excerpt">
-                {viewer.isArchiveReady && <FormattedMessage id="help-text-data-download-button" />}
                 <FormattedMessage id="data-copy-help-text" />
               </p>
             </div>
