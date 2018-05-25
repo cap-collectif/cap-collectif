@@ -29,6 +29,7 @@ import UpdateProfilePersonalDataMutation from '../../../mutations/UpdateProfileP
 import component from '../../Form/Field';
 import DateDropdownPicker from '../../Form/DateDropdownPicker';
 import config from '../../../config';
+import UserArchiveRequestButton from './UserArchiveRequestButton';
 
 type RelayProps = { personalDataForm: PersonalData_viewer };
 type Props = FormProps &
@@ -579,6 +580,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
               </form>
             </div>
           )}
+          <UserArchiveRequestButton viewer={viewer} />
         </Panel>
       </div>
     );
@@ -637,6 +639,7 @@ export default createFragmentContainer(
       city
       gender
       phoneConfirmed
+      ...UserArchiveRequestButton_viewer
     }
   `,
 );

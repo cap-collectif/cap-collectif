@@ -658,6 +658,19 @@ exports[`<PersonalData /> should render user withou address 1`] = `
         </div>
       </form>
     </div>
+    <Relay(InjectIntl(UserArchiveRequestButton))
+      viewer={
+        Object {
+          "dateOfBirth": "29-02-1990",
+          "firstname": "Utilisateur",
+          "gender": "MALE",
+          "id": "user",
+          "lastname": "Super",
+          "phone": "0123456789",
+          "phoneConfirmed": true,
+        }
+      }
+    />
   </Panel>
 </div>
 `;
@@ -1143,6 +1156,19 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
         </div>
       </form>
     </div>
+    <Relay(InjectIntl(UserArchiveRequestButton))
+      viewer={
+        Object {
+          "address": "12 rue des boulets",
+          "address2": "2ième etage",
+          "city": "Paris",
+          "firstname": "Utilisateur",
+          "id": "user",
+          "phone": "0123456789",
+          "zipCode": "75012",
+        }
+      }
+    />
   </Panel>
 </div>
 `;
@@ -1984,6 +2010,23 @@ exports[`<PersonalData /> should render with full user 1`] = `
         </div>
       </form>
     </div>
+    <Relay(InjectIntl(UserArchiveRequestButton))
+      viewer={
+        Object {
+          "address": "12 rue des boulets",
+          "address2": "2ième etage",
+          "city": "Paris",
+          "dateOfBirth": "29-02-1990",
+          "firstname": "Utilisateur",
+          "gender": "MALE",
+          "id": "user",
+          "lastname": "Super",
+          "phone": "0123456789",
+          "phoneConfirmed": true,
+          "zipCode": "75012",
+        }
+      }
+    />
   </Panel>
 </div>
 `;
