@@ -14,7 +14,7 @@ Scenario: GraphQL client wants to request his personal archive
           archives {
             id
             requestedAt
-            isGenerated
+            ready
           }
         }
       }
@@ -32,7 +32,7 @@ Scenario: GraphQL client wants to request his personal archive
             {
               "id": @string@,
               "requestedAt": "@string@.isDateTime()",
-              "isGenerated": false
+              "ready": false
             },
             @...@
           ]

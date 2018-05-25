@@ -2,5 +2,5 @@ Capco\AppBundle\Entity\UserArchive:
   userArchive1:
     id: userArchive1
     requestedAt: <(new \DateTime('now'))>
-    isGenerated: false
+    ready: false
     user: '@user1'
