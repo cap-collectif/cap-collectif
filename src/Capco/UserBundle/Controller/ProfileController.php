@@ -11,7 +11,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sonata\UserBundle\Controller\ProfileFOSUser1Controller as BaseController;
-use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
@@ -108,8 +107,7 @@ class ProfileController extends BaseController
             $this->loginWithToken($request, $userNotificationsConfiguration);
         }
 
-        // TODO: Replace url with real route when @mauriau has done his pr
-        return $this->redirectToRoute('capco_profile_notifications_edit_account');
+        return $this->redirectToRoute('capco_profile_edit', ['#' => 'export']);
     }
 
     /**
