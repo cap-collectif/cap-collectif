@@ -24,13 +24,12 @@ class HomepageController extends Controller
         $sections = $this->get('capco.section.resolver')->getDisplayableEnabledOrdered();
         $newsletterActive = $this->get('capco.toggle.manager')->isActive('newsletter');
 
-        $flashBag = $this->get('session')->getFlashBag();
         $translator = $this->get('translator');
         $deleteType = $request->get('deleteType');
-
         $form = null;
 
         if ($deleteType) {
+            $flashBag = $this->get('session')->getFlashBag();
             if ('SOFT' === $deleteType) {
                 $flashBag->add('success', $translator->trans('account-and-contents-anonymized'));
             } elseif ('HARD' === $deleteType) {
@@ -41,6 +40,7 @@ class HomepageController extends Controller
         // Subscription to newsletter
         if ($newsletterActive) {
             $subscription = new NewsletterSubscription();
+            $flashBag = $this->get('session')->getFlashBag();
 
             $form = $this->createForm(NewsletterSubscriptionType::class, $subscription);
             $form->handleRequest($request);

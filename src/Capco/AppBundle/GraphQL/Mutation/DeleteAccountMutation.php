@@ -3,21 +3,20 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\AbstractVote;
+use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\CommentVote;
 use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Entity\EventComment;
 use Capco\AppBundle\Entity\NewsletterSubscription;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\ProposalComment;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\UserGroup;
 use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,7 +35,7 @@ class DeleteAccountMutation implements ContainerAwareInterface
         $this->translator = $translator;
     }
 
-    public function __invoke(Request $request, Argument $input, User $user): array
+    public function __invoke(Request $request, Arg $input, User $user): array
     {
         $deleteType = $input['type'];
         $this->deleteIfStepActive($user);
@@ -120,75 +119,52 @@ class DeleteAccountMutation implements ContainerAwareInterface
         $deletedBodyText = $this->translator->trans('deleted-content-by-author', [], 'CapcoAppBundle');
         $contributions = $user->getContributions();
         $toDeleteList = [];
-        $now = (new \DateTime())->format('Y-m-d H:i:s');
 
         foreach ($contributions as $contribution) {
             if ($contribution instanceof AbstractVote) {
-                if (!$contribution instanceof CommentVote) {
+                if ($contribution instanceof CommentVote) {
+                    $toDeleteList[] = $contribution;
+                } else {
                     if (method_exists($contribution->getRelatedEntity(), 'getStep') && $contribution->getRelatedEntity()->getStep()->canContribute()) {
                         $toDeleteList[] = $contribution;
-                    }
-                } else {
-                    if ($contribution->getComment() instanceof ProposalComment) {
-                        if (method_exists($contribution->getComment()->getRelatedObject()->getProposalForm(), 'getStep') && $contribution->getComment()->getRelatedObject()->getProposalForm()->getStep()->canContribute()) {
-                            $toDeleteList[] = $contribution;
-                        }
-                    } elseif ($contribution->getComment() instanceof EventComment) {
-                        if ($contribution->getComment()->getEvent()->getEndAt() > $now) {
-                            $toDeleteList[] = $contribution;
-                        }
                     }
                 }
             }
 
             if ($contribution instanceof Comment) {
-                if ($contribution instanceof ProposalComment) {
-                    if (method_exists($contribution->getRelatedObject()->getProposalForm(), 'getStep') && $contribution->getRelatedObject()->getProposalForm()->getStep()->canContribute()) {
-                        $hasChild = $this->em->getRepository('CapcoAppBundle:ProposalComment')->findOneBy(['parent' => $contribution->getId()]);
-                        if ($hasChild) {
-                            $contribution->setBody($deletedBodyText);
-                        } else {
-                            $toDeleteList[] = $contribution;
-                        }
-                    }
-                } elseif ($contribution instanceof EventComment) {
-                    if ($contribution->getEvent()->getEndAt() > $now) {
-                        $hasChild = $this->em->getRepository('CapcoAppBundle:EventComment')->findOneBy(['parent' => $contribution->getId()]);
-                        if ($hasChild) {
-                            $contribution->setBody($deletedBodyText);
-                        } else {
-                            $toDeleteList[] = $contribution;
-                        }
-                    }
-                }
-            }
-
-            if (($contribution instanceof Proposal || $contribution instanceof Opinion) && $contribution->getStep()->canContribute()) {
-                $toDeleteList[] = $contribution;
-            }
-
-            if ($contribution instanceof Source || $contribution instanceof \Capco\AppBundle\Entity\Argument) {
-                if (method_exists($contribution->getOpinion(), 'getStep') && $contribution->getOpinion()->getStep()->canContribute()) {
+                $hasChild = $this->em->getRepository('CapcoAppBundle:Comment')->findOneBy(['parent' => $contribution->getId()]);
+                if ($hasChild) {
+                    $contribution->setBody($deletedBodyText);
+                } else {
                     $toDeleteList[] = $contribution;
                 }
             }
 
-            if (!$dryRun) {
-                foreach ($toDeleteList as $toDelete) {
-                    $this->em->remove($toDelete);
-                }
+            if (($contribution instanceof Proposal || $contribution instanceof Opinion || $contribution instanceof Source || $contribution instanceof Argument) && $contribution->getStep()->canContribute()) {
+                $toDeleteList[] = $contribution;
+            }
 
+            if (!$dryRun) {
                 if (method_exists($contribution, 'getMedia') && $contribution->getMedia()) {
-                    $media = $this->em->getRepository('CapcoMediaBundle:Media')->find($contribution->getMedia()->getId());
+                    $media = $this->em->getRepository('CapcoMediaBundle:Media')->find(
+                        $contribution->getMedia()->getId()
+                    );
                     $this->removeMedia($media);
                     $contribution->setMedia(null);
                 }
             }
         }
 
+        $count = \count($toDeleteList);
+        if (!$dryRun) {
+            foreach ($toDeleteList as $toDelete) {
+                $this->em->remove($toDelete);
+            }
+        }
+
         $this->container->get('redis_storage.helper')->recomputeUserCounters($user);
 
-        return \count($toDeleteList);
+        return $count;
     }
 
     public function hardDelete(User $user): void
