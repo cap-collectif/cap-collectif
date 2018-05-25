@@ -25,7 +25,7 @@ class UserArchive
     /**
      * @ORM\Column(name="is_generated", type="boolean", nullable=false)
      */
-    protected $isGenerated = false;
+    protected $ready = false;
 
     /**
      * @ORM\Column(name="deleted_at", type="datetime", nullable=true)
@@ -60,21 +60,21 @@ class UserArchive
         return $this->user;
     }
 
-    public function setUser(User $user)
+    public function setUser(User $user): self
     {
         $this->user = $user;
 
         return $this;
     }
 
-    public function getIsGenerated(): bool
+    public function isReady(): bool
     {
-        return $this->isGenerated;
+        return $this->ready;
     }
 
-    public function setIsGenerated(bool $isGenerated): self
+    public function setReady(bool $ready): self
     {
-        $this->isGenerated = $isGenerated;
+        $this->ready = $ready;
 
         return $this;
     }

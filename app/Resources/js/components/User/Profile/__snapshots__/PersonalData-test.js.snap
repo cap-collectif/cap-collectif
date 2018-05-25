@@ -658,7 +658,7 @@ exports[`<PersonalData /> should render user withou address 1`] = `
         </div>
       </form>
     </div>
-    <Relay(InjectIntl(UserArchiveRequestButton))
+    <Relay(UserArchiveRequestButton)
       viewer={
         Object {
           "dateOfBirth": "29-02-1990",
@@ -1156,7 +1156,7 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
         </div>
       </form>
     </div>
-    <Relay(InjectIntl(UserArchiveRequestButton))
+    <Relay(UserArchiveRequestButton)
       viewer={
         Object {
           "address": "12 rue des boulets",
@@ -2010,7 +2010,7 @@ exports[`<PersonalData /> should render with full user 1`] = `
         </div>
       </form>
     </div>
-    <Relay(InjectIntl(UserArchiveRequestButton))
+    <Relay(UserArchiveRequestButton)
       viewer={
         Object {
           "address": "12 rue des boulets",

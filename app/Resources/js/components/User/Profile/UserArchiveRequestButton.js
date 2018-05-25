@@ -2,7 +2,7 @@
  * @flow
  */
 import React, { Component } from 'react';
-import { injectIntl, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Button } from 'react-bootstrap';
 import type { UserArchiveRequestButton_viewer } from './__generated__/UserArchiveRequestButton_viewer.graphql';
@@ -11,7 +11,6 @@ import RequestUserArchiveMutation from '../../../mutations/RequestUserArchiveMut
 
 type Props = {
   viewer: UserArchiveRequestButton_viewer,
-  intl: $npm$ReactIntl$IntlShape,
 };
 
 type State = {
@@ -58,10 +57,8 @@ export class UserArchiveRequestButton extends Component<Props, State> {
   }
 }
 
-const container = injectIntl(UserArchiveRequestButton);
-
 export default createFragmentContainer(
-  container,
+  UserArchiveRequestButton,
   graphql`
     fragment UserArchiveRequestButton_viewer on User {
       isArchiveReady

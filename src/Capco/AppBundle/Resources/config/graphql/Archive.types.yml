@@ -9,7 +9,7 @@ Archive:
             requestedAt:
                 type: "DateTime!"
                 description: "When did the user requested his archive?"
-            isGenerated:
+            ready:
                 type: "Boolean!"
                 description: "Has the archive been generated?"
             deletedAt:

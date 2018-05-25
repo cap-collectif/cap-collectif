@@ -23,7 +23,7 @@ type Archive {
   requestedAt: DateTime!
 
   # Has the archive been generated?
-  isGenerated: Boolean!
+  ready: Boolean!
 
   # When the archive has been deleted?
   deletedAt: DateTime
@@ -248,7 +248,7 @@ type CollectStep implements Node & Step {
 }
 
 # A comment
-type Comment implements Node & Contribution {
+type Comment implements Node {
   id: ID!
   body: String
   createdAt: DateTime!
@@ -266,9 +266,6 @@ type Comment implements Node & Contribution {
   votes(after: String, first: Int = 30, before: String, last: Int, orderBy: VoteOrder = {field: CREATED_AT, direction: DESC}): CommentVoteConnection!
   trashedReason: String
   kind: String!
-
-  # Return the related contribution if the contribution is related to another.
-  related: Contribution
 }
 
 # A connection to a list of items.
@@ -1160,7 +1157,7 @@ type Project implements Node {
 }
 
 # A budget contribution
-type Proposal implements Node & Contribution {
+type Proposal implements Node {
   # The HTTP show url for this contribution.
   show_url: URI!
 
@@ -1287,10 +1284,6 @@ type Proposal implements Node & Contribution {
   followerConfiguration: Follower
   postsCount: Int!
   viewerCanSeeEvaluation: Boolean!
-  kind: String!
-
-  # Return the related contribution if the contribution is related to another.
-  related: Contribution
 }
 
 # The affiliation of a user to a proposal
@@ -1528,7 +1521,6 @@ type Query {
   ): [Consultation!]!
   groups: [Group!]!
   proposalForms: [ProposalForm!]!
-  proposal: [Proposal!]!
 
   # Retrieve availables districts for a given address
   availableDistrictsForLocalisation(proposalFormId: ID!, latitude: Float!, longitude: Float!): [District!]!
@@ -2313,12 +2305,6 @@ type User implements Node {
 
   # Your localisation
   neighborhood: String
-
-  # Return the user's contributions of the type requested.
-  contributions(
-    # Type of contribustion requested
-    contributionType: String
-  ): [Contribution]!
 }
 
 # A connection to a list of items.
