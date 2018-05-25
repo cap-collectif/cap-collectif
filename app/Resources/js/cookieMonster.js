@@ -1,9 +1,12 @@
 /* eslint-disable */
 // not flow cause of global Cookies
 
-var document = window.document;
-
 var cookieMonster = function() {
+  if (!!(typeof window !== 'undefined' && window.document && window.document.createElement)) {
+    var document = window.document;
+  } else {
+    return;
+  }
   const cookieBanner = document.getElementById('cookie-banner');
   const cookieConsent = document.getElementById('cookie-consent');
   const GA_COOKIE_NAMES = [

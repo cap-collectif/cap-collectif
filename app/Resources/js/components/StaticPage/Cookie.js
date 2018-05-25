@@ -3,6 +3,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Col, Alert } from 'react-bootstrap';
 import Toggle from 'react-toggle';
+import config from '../../config';
 import cookieMonster from '../../cookieMonster';
 
 type Props = {};
@@ -16,11 +17,12 @@ export class Cookie extends React.Component<Props, State> {
   constructor() {
     super();
     this.state = {
-      isAdvertisingEnabled: !cookieMonster.isDoNotTrackActive(),
+      isAdvertisingEnabled: config.canUseDOM && !cookieMonster.isDoNotTrackActive(),
       isAnalyticEnabled:
-        typeof cookieMonster.analyticCookieValue() === 'undefined'
+        config.canUseDOM &&
+        (typeof cookieMonster.analyticCookieValue() === 'undefined'
           ? true
-          : cookieMonster.analyticCookieValue(),
+          : cookieMonster.analyticCookieValue()),
     };
   }
 
@@ -41,18 +43,19 @@ export class Cookie extends React.Component<Props, State> {
     return (
       <div>
         <div>
-          {cookieMonster.isDoNotTrackActive() && (
-            <Alert bsStyle="info" className="row">
-              <Col sm={1}>
-                <div style={{ fontSize: 30, verticalAlign: 'top' }}>
-                  <i className="cap cap-information-1" />
-                </div>
-              </Col>
-              <Col sm={11}>
-                <FormattedMessage id="cookies-are-disabled-by-default" />
-              </Col>
-            </Alert>
-          )}
+          {config.canUseDOM &&
+            cookieMonster.isDoNotTrackActive() && (
+              <Alert bsStyle="info" className="row">
+                <Col sm={1}>
+                  <div style={{ fontSize: 30, verticalAlign: 'top' }}>
+                    <i className="cap cap-information-1" />
+                  </div>
+                </Col>
+                <Col sm={11}>
+                  <FormattedMessage id="cookies-are-disabled-by-default" />
+                </Col>
+              </Alert>
+            )}
         </div>
         <div>
           <div className="row" style={{ padding: '10px 0' }}>
