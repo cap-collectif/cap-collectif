@@ -97,33 +97,47 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none 1`]
       </p>
     </div>
   </div>
-  <div
-    className="proposal__buttons"
-  >
-    <Relay(ProposalFollowButton)
-      isAuthenticated={false}
-      proposal={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "author": Object {
-            "displayName": "userAdmin",
-            "media": Object {
-              "url": "http://media.url",
-            },
-            "username": "userAdmin",
-          },
-          "createdAt": "2015-01-01 00:00:00",
-          "id": "1",
-          "publicationStatus": "PUBLISHED",
-          "show_url": "true",
-          "theme": null,
-          "title": "titre",
-          "updatedAt": "2015-01-05 00:00:00",
-        }
+  <Connect(ProposalVoteButtonWrapper)
+    className="pull-right btn-lg"
+    id="proposal-vote-btn"
+    proposal={
+      Object {
+        "isDraft": false,
+        "selections": Array [],
+        "viewerCanSeeEvaluation": true,
+        "votableStepId": "selectionstep1",
+        "votesByStepId": Object {
+          "collectstep1": Array [],
+          "selectionstep1": Array [],
+        },
+        "votesCountByStepId": Object {
+          "collectstep1": 0,
+          "selectionstep1": 0,
+        },
       }
-    />
-  </div>
+    }
+  />
+  <Relay(ProposalFollowButton)
+    className="pull-right btn-lg"
+    isAuthenticated={true}
+    proposal={
+      Object {
+        "author": Object {
+          "displayName": "userAdmin",
+          "media": Object {
+            "url": "http://media.url",
+          },
+          "username": "userAdmin",
+        },
+        "createdAt": "2015-01-01 00:00:00",
+        "publicationStatus": "PUBLISHED",
+        "show_url": "true",
+        "theme": null,
+        "title": "titre",
+        "updatedAt": "2015-01-05 00:00:00",
+      }
+    }
+  />
 </div>
 `;
 
@@ -224,34 +238,48 @@ exports[`<ProposalPageHeader /> should render a proposal header 1`] = `
       </p>
     </div>
   </div>
-  <div
-    className="proposal__buttons"
-  >
-    <Relay(ProposalFollowButton)
-      isAuthenticated={false}
-      proposal={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "author": Object {
-            "displayName": "userAdmin",
-            "media": Object {
-              "url": "http://media.url",
-            },
-            "username": "userAdmin",
-          },
-          "createdAt": "2015-01-01 00:00:00",
-          "id": "1",
-          "publicationStatus": "PUBLISHED",
-          "show_url": "true",
-          "theme": Object {
-            "title": "titre du theme",
-          },
-          "title": "titre",
-          "updatedAt": "2015-01-05 00:00:00",
-        }
+  <Connect(ProposalVoteButtonWrapper)
+    className="pull-right btn-lg"
+    id="proposal-vote-btn"
+    proposal={
+      Object {
+        "isDraft": false,
+        "selections": Array [],
+        "viewerCanSeeEvaluation": true,
+        "votableStepId": "selectionstep1",
+        "votesByStepId": Object {
+          "collectstep1": Array [],
+          "selectionstep1": Array [],
+        },
+        "votesCountByStepId": Object {
+          "collectstep1": 0,
+          "selectionstep1": 0,
+        },
       }
-    />
-  </div>
+    }
+  />
+  <Relay(ProposalFollowButton)
+    className="pull-right btn-lg"
+    isAuthenticated={true}
+    proposal={
+      Object {
+        "author": Object {
+          "displayName": "userAdmin",
+          "media": Object {
+            "url": "http://media.url",
+          },
+          "username": "userAdmin",
+        },
+        "createdAt": "2015-01-01 00:00:00",
+        "publicationStatus": "PUBLISHED",
+        "show_url": "true",
+        "theme": Object {
+          "title": "titre du theme",
+        },
+        "title": "titre",
+        "updatedAt": "2015-01-05 00:00:00",
+      }
+    }
+  />
 </div>
 `;

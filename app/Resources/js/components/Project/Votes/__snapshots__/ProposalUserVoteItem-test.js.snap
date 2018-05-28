@@ -3,7 +3,7 @@
 exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
 <Row
   bsClass="row"
-  className="proposals-user-votes__row d-flex flex-wrap"
+  className="proposals-user-votes__row"
   componentClass="div"
   id="vote-step1-proposal1"
 >
@@ -11,71 +11,95 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
     bsClass="col"
     className="proposals-user-votes__col"
     componentClass="div"
-    md={9}
-    sm={12}
+    md={4}
     xs={12}
   >
-    <div
-      className="proposals-user-votes__content"
+    <a
+      href="http://capco.test/proposal"
     >
-      <div>
-        <a
-          className="proposals-user-votes__title"
-          href="http://capco.test/proposal"
-        >
-          proposal
-        </a>
-        <br />
-        <FormattedMessage
-          id="voted-on-date-at-time"
-          values={
-            Object {
-              "date": <FormattedDate
-                day="numeric"
-                month="long"
-                value="2015-01-01 00:00:00"
-                year="numeric"
-              />,
-              "time": <FormattedTime
-                hour="numeric"
-                minute="numeric"
-                value="2015-01-01 00:00:00"
-              />,
-            }
-          }
-        />
-      </div>
-    </div>
+      proposal
+    </a>
   </Col>
   <Col
     bsClass="col"
     className="proposals-user-votes__col"
     componentClass="div"
-    id="1-proposal-vote__private"
-    md={3}
-    sm={12}
+    md={2}
     xs={12}
   >
-    <div
-      className="proposals-user-votes__content justify-content-end"
+    <i
+      className="cap cap-user-2"
+    />
+    <UserLink
+      className=""
+      user={
+        Object {
+          "displayName": "user",
+          "id": 1,
+        }
+      }
+    />
+  </Col>
+  <Col
+    bsClass="col"
+    className="proposals-user-votes__col"
+    componentClass="div"
+    md={2}
+    xs={12}
+  >
+    <i
+      className="cap cap-marker-1"
+    />
+    district
+  </Col>
+  <Col
+    bsClass="col"
+    className="proposals-user-votes__col"
+    componentClass="div"
+    md={2}
+    xs={12}
+  >
+    <ProposalDetailEstimation
+      proposal={
+        Object {
+          "_links": Object {
+            "show": "http://capco.test/proposal",
+          },
+          "author": Object {
+            "displayName": "user",
+            "id": 1,
+          },
+          "district": Object {
+            "name": "district",
+          },
+          "id": 1,
+          "title": "proposal",
+        }
+      }
+      showNullEstimation={true}
+    />
+  </Col>
+  <Col
+    bsClass="col"
+    className="proposals-user-votes__col"
+    componentClass="div"
+    md={2}
+    xs={12}
+  >
+    <Button
+      active={false}
+      block={false}
+      bsClass="btn"
+      bsStyle="default"
+      className="proposal-vote__delete"
+      disabled={false}
+      onClick={[Function]}
     >
-      <div
-        className="toggle-group"
-      >
-        <Field
-          component={[Function]}
-          label={
-            <FormattedMessage
-              id="public"
-              values={Object {}}
-            />
-          }
-          labelSide="RIGHT"
-          name="votes.1.public"
-          normalize={[Function]}
-        />
-      </div>
-    </div>
+      <FormattedMessage
+        id="project.votes.delete"
+        values={Object {}}
+      />
+    </Button>
   </Col>
 </Row>
 `;

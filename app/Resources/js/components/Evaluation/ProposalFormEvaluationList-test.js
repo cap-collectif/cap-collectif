@@ -3,14 +3,13 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalFormEvaluationList } from './ProposalFormEvaluationList';
-import { $refType, $fragmentRefs, relayPaginationMock } from '../../mocks';
+import { relayPaginationMock } from '../../mocks';
 
 describe('<ProposalFormEvaluationList />', () => {
   const propsWithEvaluations = {
     relay: relayPaginationMock,
+    // $FlowFixMe $refType
     proposalForm: {
-      $refType,
-      id: '1',
       step: {
         title: 'My form title',
         project: {
@@ -25,7 +24,12 @@ describe('<ProposalFormEvaluationList />', () => {
           hasPreviousPage: false,
           startCursor: null,
         },
-        edges: [{ node: { id: '1', $fragmentRefs } }, { node: { id: '2', $fragmentRefs } }],
+        edges: [
+          // $FlowFixMe
+          { node: { id: '1' } },
+          // $FlowFixMe
+          { node: { id: '2' } },
+        ],
       },
     },
   };
@@ -37,9 +41,8 @@ describe('<ProposalFormEvaluationList />', () => {
 
   const propsWithoutEvaluations = {
     relay: relayPaginationMock,
+    // $FlowFixMe $refType
     proposalForm: {
-      $refType,
-      id: '1',
       step: {
         title: 'My form title',
         project: {

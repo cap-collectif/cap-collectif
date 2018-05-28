@@ -62,10 +62,3 @@ Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfig
         onCommentCreate: true
         onCommentUpdate: true
         onCommentDelete: true
-    proposalFormNotificationConfiguration10:
-        onCreate: false
-        onUpdate: false
-        onDelete: false
-        onCommentCreate: false
-        onCommentUpdate: false
-        onCommentDelete: false

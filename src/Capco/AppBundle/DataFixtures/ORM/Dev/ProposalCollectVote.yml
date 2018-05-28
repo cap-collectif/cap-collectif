@@ -1,24 +1,5 @@
 Capco\AppBundle\Entity\ProposalCollectVote:
   proposalCollectVote{1...50}:
-    id (unique): '<numberBetween(2000, 2050)>'
     proposal: '@proposal14'
     collectStep: '@collectstep5'
     user (unique): '@user<current()>'
-  proposalCollectVote51:
-    id: 2051
-    proposal: '@proposal24'
-    collectStep: '@collectstepVoteClassement'
-    user: '@user5'
-    position: 3
-  proposalCollectVote52:
-    id: 2052
-    proposal: '@proposal25'
-    collectStep: '@collectstepVoteClassement'
-    user: '@user5'
-    position: 2
-  proposalCollectVote53:
-    id: 2053
-    proposal: '@proposal26'
-    collectStep: '@collectstepVoteClassement'
-    user: '@user5'
-    position: 1

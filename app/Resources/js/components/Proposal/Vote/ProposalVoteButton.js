@@ -1,29 +1,29 @@
 // @flow
-import * as React from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import type { MapStateToProps } from 'react-redux';
 import { openVoteModal, deleteVote } from '../../../redux/modules/proposal';
+import type { Proposal } from '../../../redux/modules/proposal';
 import type { Uuid, Dispatch, GlobalState } from '../../../types';
+import type { User } from '../../../redux/modules/user';
 
 type Step = {
-  +id: Uuid,
+  id: Uuid,
+  type: string,
 };
 
-type ParentProps = {
-  proposal: { +id: string },
-  step: Step,
-  userHasVote: ?boolean,
-  user: { +id: string },
-  id: string,
-};
-
-type Props = ParentProps & {
-  dispatch: Dispatch,
-  isDeleting: boolean,
+type Props = {
   disabled: boolean,
+  proposal: Proposal,
+  step: Step,
+  user: User,
+  dispatch: Dispatch,
+  id: string,
+  userHasVote: boolean,
+  isDeleting: boolean,
 };
 
 type State = {
@@ -32,22 +32,19 @@ type State = {
 
 // Should only be used via ProposalVoteButtonWrapper
 export class ProposalVoteButton extends React.Component<Props, State> {
-  static defaultProps = {
-    disabled: false,
-    userHasVote: false,
-  };
-  state = {
-    isHovering: false,
-  };
-
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      isHovering: false,
+    };
+  }
   render() {
     const { dispatch, step, user, proposal, disabled, userHasVote, isDeleting, id } = this.props;
     const classes = classNames({ disabled });
-    const action = !user
-      ? null
-      : userHasVote
+    const action =
+      user && userHasVote
         ? () => {
-            deleteVote(step, proposal);
+            deleteVote(dispatch, step, proposal);
           }
         : () => {
             dispatch(openVoteModal(proposal.id));
@@ -96,8 +93,10 @@ export class ProposalVoteButton extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: ParentProps) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Props) => ({
   isDeleting: state.proposal.currentDeletingVote === props.proposal.id,
+  userHasVote:
+    props.step && state.proposal.userVotesByStepId[props.step.id].includes(props.proposal.id),
 });
 
 export default connect(mapStateToProps)(ProposalVoteButton);

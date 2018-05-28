@@ -1,12 +1,13 @@
-// @flow
-import * as React from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
+import React, { PropTypes } from 'react';
 import ProposalDetailAdvancement from '../Detail/ProposalDetailAdvancement';
-import type { ProposalPageAdvancement_proposal } from './__generated__/ProposalPageAdvancement_proposal.graphql';
 
-type Props = { proposal: ProposalPageAdvancement_proposal };
+const ProposalPageAdvancement = React.createClass({
+  displayName: 'ProposalPageAdvancement',
 
-export class ProposalPageAdvancement extends React.Component<Props> {
+  propTypes: {
+    proposal: PropTypes.object.isRequired,
+  },
+
   render() {
     const { proposal } = this.props;
     return (
@@ -16,13 +17,7 @@ export class ProposalPageAdvancement extends React.Component<Props> {
         </div>
       </div>
     );
-  }
-}
-
-export default createFragmentContainer(ProposalPageAdvancement, {
-  proposal: graphql`
-    fragment ProposalPageAdvancement_proposal on Proposal {
-      ...ProposalDetailAdvancement_proposal
-    }
-  `,
+  },
 });
+
+export default ProposalPageAdvancement;

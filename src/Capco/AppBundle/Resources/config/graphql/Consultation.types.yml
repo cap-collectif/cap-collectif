@@ -7,9 +7,6 @@ Consultation:
             kind:
                 type: "String!"
                 resolve: "consultation"
-            show_url:
-                type: "String!"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\StepUrlResolver", [value])'
             id:
                 type: "ID!"
                 description: "The id of the consultation."

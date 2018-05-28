@@ -7,7 +7,7 @@ use Capco\AppBundle\Repository\EventRegistrationRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 
-class ParticipantConnectionEdgeRegisteredAnonymouslyResolver
+class ParticipantConnectionEdgeRegistredAnonymouslyResolver
 {
     private $eventRegistrationRepository;
 

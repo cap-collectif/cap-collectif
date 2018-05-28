@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
-import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
+import { injectIntl, FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import ProposalAdminSelections from './ProposalAdminSelections';
 import ProposalAdminStatusForm from './ProposalAdminStatusForm';
@@ -9,11 +9,13 @@ import ProposalAdminContentForm from './ProposalAdminContentForm';
 import ProposalAdminNotationForm from './ProposalAdminNotationForm';
 import ProposalAdminNewsForm from './ProposalAdminNewsForm';
 import ProposalAdminFollowers from './ProposalAdminFollowers';
-import type { ProposalAdminPageTabs_proposal } from './__generated__/ProposalAdminPageTabs_proposal.graphql';
 
-type Props = { proposal: ProposalAdminPageTabs_proposal, intl: IntlShape };
+type DefaultProps = void;
+type Props = { proposal: any, intl: Object };
+type State = void;
 
-export class ProposalAdminPageTabs extends Component<Props> {
+export class ProposalAdminPageTabs extends Component<Props, State> {
+  static defaultProps: DefaultProps;
   render() {
     const { intl, proposal } = this.props;
 
@@ -38,7 +40,7 @@ export class ProposalAdminPageTabs extends Component<Props> {
             title={
               <div>
                 <FormattedMessage id="proposal.tabs.followers" />
-                <span className="badge ml-10">{proposal.allFollowers.totalCount}</span>
+                <span className="badge ml-10">{proposal.followerConnection.totalCount}</span>
               </div>
             }>
             <ProposalAdminFollowers proposal={proposal} />
@@ -69,7 +71,7 @@ export default createFragmentContainer(
       ...ProposalAdminNotationForm_proposal
       ...ProposalAdminNewsForm_proposal
       ...ProposalAdminFollowers_proposal
-      allFollowers: followerConnection(first: 0) {
+      followerConnection(first: $count, after: $cursor) {
         totalCount
       }
     }

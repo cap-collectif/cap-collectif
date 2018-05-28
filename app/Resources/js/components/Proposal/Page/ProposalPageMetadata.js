@@ -1,19 +1,18 @@
-// @flow
-import * as React from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
+import React, { PropTypes } from 'react';
 import ProposalDetailEstimation from '../Detail/ProposalDetailEstimation';
 import ProposalDetailLikers from '../Detail/ProposalDetailLikers';
-import type { ProposalPageMetadata_proposal } from './__generated__/ProposalPageMetadata_proposal.graphql';
 
-type Props = {
-  proposal: ProposalPageMetadata_proposal,
-  showCategories: boolean,
-  showDistricts: boolean,
-  showNullEstimation: boolean,
-  showThemes: boolean,
-};
+export const ProposalPageMetadata = React.createClass({
+  displayName: 'ProposalPageMetadata',
 
-export class ProposalPageMetadata extends React.Component<Props> {
+  propTypes: {
+    proposal: PropTypes.object.isRequired,
+    showDistricts: PropTypes.bool.isRequired,
+    showCategories: PropTypes.bool.isRequired,
+    showNullEstimation: PropTypes.bool.isRequired,
+    showThemes: PropTypes.bool.isRequired,
+  },
+
   render() {
     const { proposal, showCategories, showDistricts, showNullEstimation, showThemes } = this.props;
     return (
@@ -46,12 +45,10 @@ export class ProposalPageMetadata extends React.Component<Props> {
                     {proposal.district.name}
                   </div>
                 )}
-              {/* $FlowFixMe */}
               <ProposalDetailEstimation
                 proposal={proposal}
                 showNullEstimation={showNullEstimation}
               />
-              {/* $FlowFixMe */}
               <ProposalDetailLikers proposal={proposal} componentClass="div" />
               <div className="proposal__info proposal__info--reference ellipsis">
                 <i className="cap cap-tag-1-1 icon--blue" />
@@ -62,29 +59,7 @@ export class ProposalPageMetadata extends React.Component<Props> {
         )}
       </div>
     );
-  }
-}
-
-export default createFragmentContainer(ProposalPageMetadata, {
-  proposal: graphql`
-    fragment ProposalPageMetadata_proposal on Proposal {
-      ...ProposalDetailEstimation_proposal
-      ...ProposalDetailLikers_proposal
-      id
-      theme {
-        title
-      }
-      estimation
-      likers {
-        id
-      }
-      category {
-        name
-      }
-      district {
-        name
-      }
-      reference
-    }
-  `,
+  },
 });
+
+export default ProposalPageMetadata;

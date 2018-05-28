@@ -1,6 +1,6 @@
 {% extends '@CapcoApp/base.html.twig' %}
 
-{% set showVotesWidget = app.user and ((currentStep is defined and currentStep.slug is defined and currentStep.isVotable()) or (proposal is defined and proposal|current_votable_step)) %}
+{% set showVotesWidget = currentStep.slug is defined and not currentStep.isPresentationStep() and capco_has_votable_step_not_future(project) and is_granted('ROLE_USER') %}
 {% set page_class = showVotesWidget ? "has-vote-widget" : "" %}
 
 {% block reduxStore %}
@@ -10,10 +10,8 @@
 {% block mainContent %}
 
     {% if showVotesWidget %}
-      {% set votableStep = proposal is defined ? proposal|current_votable_step : currentStep %}
       {{ react_render_component('ProposalVoteBasketWidgetApp', {
           'props': {
-            'stepId': votableStep.id,
             'image': media_public_url(capco_site_image_media('image.votes_bar'), 'default_small'),
             'votesPageUrl': path('app_project_show_user_votes', {'projectSlug': project.slug}),
           },
