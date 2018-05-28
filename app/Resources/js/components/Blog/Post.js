@@ -1,23 +1,20 @@
-// @flow
-import * as React from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
-import { connect, type MapStateToProps } from 'react-redux';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { FormattedMessage, FormattedDate } from 'react-intl';
 import moment from 'moment';
-import type { Post_post } from './__generated__/Post_post.graphql';
 
-type Props = {
-  post: Post_post,
-  features: Object,
-};
+export const Post = React.createClass({
+  propTypes: {
+    post: PropTypes.object.isRequired,
+    features: PropTypes.object.isRequired,
+  },
 
-export class Post extends React.Component<Props> {
   render() {
     const { post, features } = this.props;
 
     return (
       <li className="media media--news block block--bordered box">
-        <a href={post.url} className="pull-left" alt="Post 8">
+        <a href={post._links.show} className="pull-left" alt="Post 8">
           {post.media ? (
             <img src={post.media.url} alt="" className="media-object" />
           ) : (
@@ -177,14 +174,14 @@ export class Post extends React.Component<Props> {
         </a>
         <div className="media-body">
           <h3 className="media-title h3">
-            <a href={post.url} alt={post.title}>
+            <a href={post._links.show} alt={post.title}>
               {post.title}
             </a>
           </h3>
           <p className="excerpt  media--news__meta">
             {post.themes.map((theme, i) => (
               <span key={i}>
-                <a key={i} href={theme.url}>
+                <a key={i} href={theme._links.show}>
                   <span className="label label-default">{theme.title}</span>
                 </a>
                 {post.themes.length > i && ' '}
@@ -212,7 +209,7 @@ export class Post extends React.Component<Props> {
                       {post.authors.map((author, i) => (
                         <span key={i}>
                           {features.profiles ? (
-                            <a href={author.show_url}>{author.displayName}</a>
+                            <a href={author._links.profile}>{author.displayName}</a>
                           ) : (
                             author.displayName
                           )}
@@ -229,39 +226,13 @@ export class Post extends React.Component<Props> {
         </div>
       </li>
     );
-  }
-}
+  },
+});
 
-const mapStateToProps: MapStateToProps<*, *, *> = state => {
+const mapStateToProps = state => {
   return {
     features: state.default.features,
   };
 };
 
-const container = connect(mapStateToProps)(Post);
-
-export default createFragmentContainer(
-  container,
-  graphql`
-    fragment Post_post on Post {
-      abstract
-      url
-      media {
-        url
-      }
-      publishedAt
-      title
-      createdAt
-      themes {
-        title
-        url
-      }
-      authors {
-        id
-        show_url
-        vip
-        displayName
-      }
-    }
-  `,
-);
+export default connect(mapStateToProps)(Post);

@@ -40,12 +40,3 @@ Post:
             abstract:
                type: "String!"
                resolve: "@=resolver('post_abstract', [value])"
-            url:
-               type: "URI!"
-               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostUrlResolver", [value])'
-            media:
-              type: "Media"
-            themes:
-              type: "[Theme!]!"
-            body:
-               type: "String!"

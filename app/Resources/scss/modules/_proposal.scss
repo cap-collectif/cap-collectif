@@ -237,11 +237,6 @@
 .proposals-user-votes__table {
     border: 1px solid $border-color;
     margin-bottom: 5px;
-    border-radius: 5px;
-}
-
-.proposals-user-votes__draggable-item > div {
-    background-color: $white;
 }
 
 .proposals-user-votes__row {
@@ -250,59 +245,10 @@
     text-align: left;
     margin-left: 0;
     margin-right: 0;
-
-    .draggable-icon__mobile {
-        display: none;
-    }
 }
 
 .proposals-user-votes__col {
-    display: flex;
-
-    .badge {
-        padding: 3px 11px;
-    }
-
-    .cap {
-        font-size: 24px;
-        display: flex;
-        top: 0;
-    }
-
-    .cap-android-menu {
-        color: $icon-gray-color;
-    }
-
-    .cap-ios-close {
-        color: $danger-color;
-    }
-
-    .proposal-vote__delete {
-        margin: auto 0 auto auto;
-
-        &:hover {
-            text-decoration: none;
-            cursor: pointer;
-        }
-    }
-}
-
-.proposals-user-votes__content {
-    display: flex;
-    margin: auto 0;
-    width: 100%;
-
-    .form-group, label {
-        margin-bottom: 0;
-    }
-}
-
-.proposals-user-votes__title {
-    &, &:hover {
-        color: $dark-text;
-        font-size: 17px;
-        font-weight: 500;
-    }
+    padding-bottom: 5px;
 }
 
 .proposals-user-votes__table.row {
@@ -427,44 +373,6 @@
             margin-left: 0;
             width: 100%;
         }
-    }
-    
-
-}
-
-@media (max-width: $screen-sm-max) {
-    .proposals-user-votes__row {
-        position: relative;
-
-        .draggable-icon__mobile {
-            display: block;
-            position: absolute;
-            right: 0;
-            top: 40%;
-            padding-right: 15px;
-            font-size: 22px;
-        }
-    }
-
-    .proposals-user-votes__col:not(.proposal-vote-col__delete) {
-        padding: 0 50px;
-    }
-
-    .modal-body .proposals-user-votes__col {
-        padding-left: 15px;
-    }
-
-    .proposals-user-votes__content {
-        justify-content: flex-start;
-    }
-
-    .proposal-vote-col__delete {
-        position: absolute;
-        top: 42%;
-    }
-
-    .proposals-user-votes__content .cap-android-menu {
-        display: none;
     }
 }
 

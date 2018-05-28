@@ -1,61 +1,34 @@
-// @flow
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalList } from './ProposalList';
-import { $refType, $fragmentRefs } from '../../../mocks';
 
 describe('<ProposalList />', () => {
-  const emptyStep = {
-    id: '1',
-    $refType,
-    $fragmentRefs,
-  };
+  const proposals = [
+    {
+      id: 1,
+      body: 'test1',
+    },
+    {
+      id: 2,
+      body: 'test2',
+    },
+  ];
 
-  const proposals = {
-    $refType,
-    totalCount: 0,
-    edges: [],
+  const step = {
+    id: 1,
+    title: 'Step 1',
+    open: 'false',
   };
 
   it('should not render list if proposal is not provided', () => {
-    // $FlowFixMe
-    const wrapper = shallow(<ProposalList proposals={proposals} step={emptyStep} viewer={null} />);
+    const wrapper = shallow(<ProposalList step={step} proposals={[]} />);
     expect(wrapper.children()).toHaveLength(1);
     expect(wrapper).toMatchSnapshot();
   });
 
-  const collectStep = {
-    id: '1',
-    $refType,
-    $fragmentRefs,
-  };
-
-  const proposalsList = {
-    totalCount: 2,
-    $refType,
-    edges: [{ node: { id: '1', $fragmentRefs } }, { node: { id: '2', $fragmentRefs } }],
-  };
-
-  it('should render a collectStep proposal list', () => {
-    // $FlowFixMe
-    const wrapper = shallow(
-      <ProposalList proposals={proposalsList} step={collectStep} viewer={null} />,
-    );
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  const selectionStep = {
-    $refType,
-    $fragmentRefs,
-    id: '1',
-  };
-
-  it('should render a selectionStep proposal list', () => {
-    // $FlowFixMe
-    const wrapper = shallow(
-      <ProposalList proposals={proposalsList} step={selectionStep} viewer={null} />,
-    );
+  it('should render a proposal list', () => {
+    const wrapper = shallow(<ProposalList step={step} proposals={proposals} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

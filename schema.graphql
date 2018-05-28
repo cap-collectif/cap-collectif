@@ -1,21 +1,3 @@
-input AddProposalVoteInput {
-  # The Node ID of the proposal to vote.
-  proposalId: ID!
-
-  # The Node ID of the step.
-  stepId: ID!
-
-  # The vote will be anonymous.
-  anonymously: Boolean = false
-  clientMutationId: String
-}
-
-type AddProposalVotePayload {
-  vote: ProposalVote!
-  viewer: User!
-  clientMutationId: String
-}
-
 input AddUsersInGroupInput {
   # Users that will be added to the group.
   users: [ID!]!
@@ -253,55 +235,16 @@ type ChangeUserNotificationsConfigurationPayload {
   clientMutationId: String
 }
 
-type CollectStep implements Node & Step & ProposalStep {
+type CollectStep implements Node & Step {
   id: ID!
-  show_url: String!
   kind: String!
-
-  # If enabled, allow voters to order their votes by preferences.
-  votesRanking: Boolean!
   title: String!
   statuses: [Status!]!
-  voteType: ProposalStepVoteType!
   voteThreshold: Int
-  votesLimit: Int
-  votesHelpText: String
-  budget: Int
   project: Project!
-  open: Boolean!
-  private: Boolean!
-  form: ProposalForm!
 
   # A list of contributor associated with the step.
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
-  viewerProposalDrafts: [Proposal!]!
-
-  # A list of viewer votes associated with the step.
-  viewerVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}): ProposalVoteConnection!
-  proposals(
-    district: ID
-    userType: ID
-    category: ID
-    status: ID
-    theme: ID
-    term: String
-
-    # Order for connection.
-    orderBy: ProposalOrder = {field: CREATED_AT, direction: ASC}
-    affiliations: [ProposalAffiliation]
-
-    # Returns the elements in the list that come after the specified global ID.
-    after: String
-
-    # Returns the first n elements from the list.
-    first: Int = 10
-
-    # Returns the elements in the list that come before the specified global ID.
-    before: String
-
-    # Returns the last n elements from the list.
-    last: Int
-  ): ProposalConnection!
 }
 
 # A comment
@@ -412,7 +355,6 @@ type CommentVoteEdge {
 # A consultation
 type Consultation implements Node & Step {
   kind: String!
-  show_url: String!
 
   # The id of the consultation.
   id: ID!
@@ -628,7 +570,6 @@ input DeleteProposalInput {
 
 type DeleteProposalPayload {
   proposal: Proposal!
-  step: CollectStep!
   clientMutationId: String
 }
 
@@ -832,9 +773,6 @@ type MultipleChoiceQuestionValidationRule {
 
 type Mutation {
   changeUserNotificationsConfiguration(input: ChangeUserNotificationsConfigurationInput!): ChangeUserNotificationsConfigurationPayload
-  addProposalVote(input: AddProposalVoteInput!): AddProposalVotePayload
-  removeProposalVote(input: RemoveProposalVoteInput!): RemoveProposalVotePayload
-  updateProposalVotes(input: UpdateProposalVotesInput!): UpdateProposalVotesPayload
   requestUserArchive(input: RequestUserArchiveInput!): RequestUserArchivePayload
   changeProposalPublicationStatus(input: ChangeProposalPublicationStatusInput!): ChangeProposalPublicationStatusPayload
   changeProposalContent(input: ChangeProposalContentInput!): ChangeProposalContentPayload
@@ -1127,7 +1065,6 @@ enum OrderDirection {
 
 type OtherStep implements Step {
   id: ID!
-  show_url: String!
   kind: String!
   title: String!
 }
@@ -1196,10 +1133,6 @@ type Post {
   displayedOnBlog: Boolean!
   comments(after: String, first: Int = 30, before: String, last: Int, orderBy: CommentOrder = {field: CREATED_AT, direction: DESC}): CommentConnection!
   abstract: String!
-  url: URI!
-  media: Media
-  themes: [Theme!]!
-  body: String!
 }
 
 # Available statuses
@@ -1218,7 +1151,6 @@ type PresentationStep implements Step {
   id: ID!
   kind: String!
   title: String!
-  show_url: String!
 }
 
 # A budget contribution
@@ -1243,8 +1175,7 @@ type Project implements Node {
 
   # A list of contributor associated with the project.
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
-  url: URI
-  votableSteps: [ProposalStep!]!
+  url: String
 }
 
 # A budget contribution
@@ -1256,15 +1187,11 @@ type Proposal implements Node {
   adminUrl: URI!
   progressSteps: [ProgressStep!]!
   evaluers: [Group!]!
-  currentVotableStep: ProposalStep
   viewerIsAnEvaluer: Boolean!
   news(after: String, first: Int = 30, before: String, last: Int, orderBy: ProposalOrder = {field: CREATED_AT, direction: DESC}): NewsConnection!
   reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
   project: Project!
-  status(
-    # Used to get the status on a selection step.
-    step: ID
-  ): Status
+  status: Status
   selections: [Selection!]!
   likers: [User!]!
   estimation: Int
@@ -1327,16 +1254,7 @@ type Proposal implements Node {
   # Count number of comments for the proposal.
   commentsCount: Int!
   comments(after: String, first: Int = 30, before: String, last: Int, orderBy: CommentOrder = {field: CREATED_AT, direction: DESC}): CommentConnection!
-  votes(
-    after: String
-    first: Int = 30
-    before: String
-    last: Int
-    orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}
-
-    # If provided, retrieve only in this step.
-    stepId: ID
-  ): ProposalVoteConnection!
+  votes(after: String, first: Int = 30, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}, step: ID!): ProposalVoteConnection!
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
@@ -1388,12 +1306,6 @@ type Proposal implements Node {
   followerConfiguration: Follower
   postsCount: Int!
   viewerCanSeeEvaluation: Boolean!
-  viewerHasVote(
-    # The concerned step.
-    step: ID!
-  ): Boolean!
-  viewerHasReported: Boolean!
-  votableSteps: [ProposalStep!]!
 }
 
 # The affiliation of a user to a proposal
@@ -1415,7 +1327,6 @@ input ProposalCategoryInput {
 # A connection to a list of items.
 type ProposalConnection {
   totalCount: Int!
-  fusionCount: Int!
 
   # Information to aid in pagination.
   pageInfo: PageInfo!
@@ -1454,13 +1365,6 @@ type ProposalForm implements Node {
   illustrationHelpText: String
   title: String!
   proposals(
-    district: ID
-    userType: ID
-    category: ID
-    status: ID
-    theme: ID
-    term: String
-
     # Order for connection.
     orderBy: ProposalOrder = {field: CREATED_AT, direction: ASC}
     affiliations: [ProposalAffiliation]
@@ -1479,7 +1383,6 @@ type ProposalForm implements Node {
   ): ProposalConnection!
   categories: [ProposalCategory!]!
   usingThemes: Boolean!
-  contribuable: Boolean!
   themeMandatory: Boolean!
   themeHelpText: String
   usingDistrict: Boolean!
@@ -1564,62 +1467,10 @@ enum ProposalPublicationStatus {
   NOT_ACCOUNTED
 }
 
-# A proposal step
-interface ProposalStep {
-  id: ID!
-  kind: String!
-  title: String!
-  project: Project!
-  votesLimit: Int
-  budget: Int
-  voteType: ProposalStepVoteType!
-  votesHelpText: String
-  voteThreshold: Int
-  open: Boolean!
-  votesRanking: Boolean!
-  show_url: String!
-
-  # A list of viewer votes associated with the step.
-  viewerVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}): ProposalVoteConnection!
-  proposals(
-    district: ID
-    userType: ID
-    category: ID
-    status: ID
-    theme: ID
-    term: String
-
-    # Order for connection.
-    orderBy: ProposalOrder = {field: CREATED_AT, direction: ASC}
-    affiliations: [ProposalAffiliation]
-
-    # Returns the elements in the list that come after the specified global ID.
-    after: String
-
-    # Returns the first n elements from the list.
-    first: Int = 10
-
-    # Returns the elements in the list that come before the specified global ID.
-    before: String
-
-    # Returns the last n elements from the list.
-    last: Int
-  ): ProposalConnection!
-}
-
-# Type of vote.
-enum ProposalStepVoteType {
-  DISABLED
-  SIMPLE
-  BUDGET
-}
-
-union ProposalVotableStep = CollectStep | SelectionStep
-
 type ProposalVote implements Contribution & ContributionWithAuthor {
   id: ID!
 
-  # The author of the contribution. If null, the vote is anonymous.
+  # The author of the contribution. If null, account has been deleted.
   author: User
 
   # Is the vote anonymous ?
@@ -1631,12 +1482,6 @@ type ProposalVote implements Contribution & ContributionWithAuthor {
   # Date of vote.
   createdAt: DateTime!
 
-  # Return the proposal.
-  proposal: Proposal!
-
-  # Return the step.
-  step: ProposalStep!
-
   # Return the related contribution if the contribution is related to another.
   related: Contribution
 
@@ -1647,8 +1492,6 @@ type ProposalVote implements Contribution & ContributionWithAuthor {
 # A connection to a list of items.
 type ProposalVoteConnection {
   totalCount: Int!
-  creditsLeft: Int
-  creditsSpent: Int
 
   # Information to aid in pagination.
   pageInfo: PageInfo!
@@ -1716,6 +1559,7 @@ type Query {
   ): [Opinion!]!
   question(id: Int!): Question!
   availableQuestionnaires: [Questionnaire!]!
+  draftProposalsForUserInStep(stepId: ID!): [Proposal!]!
 
   # Fetches an object given its ID
   node(
@@ -1800,30 +1644,12 @@ type QuestionnaireStep implements Node & Step {
 
   # A list of contributor associated with the step.
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
-  show_url: String!
 }
 
 type RankingStep implements Step {
   id: ID!
   kind: String!
   title: String!
-  show_url: String!
-}
-
-input RemoveProposalVoteInput {
-  # The Node ID of the proposal to unvote.
-  proposalId: ID!
-
-  # The Node ID of the contribuable step.
-  stepId: ID!
-  clientMutationId: String
-}
-
-type RemoveProposalVotePayload {
-  step: ProposalStep!
-  proposal: Proposal!
-  viewer: User!
-  clientMutationId: String
 }
 
 # A report
@@ -2017,56 +1843,34 @@ type Selection {
 }
 
 # A budget contribution
-type SelectionStep implements Step & Node & ProposalStep {
+type SelectionStep implements Step & Node {
   id: ID!
-  show_url: String!
   kind: String!
-
-  # If enabled, allow voters to order their votes by preferences.
-  votesRanking: Boolean!
-  votesLimit: Int
-  position: Int!
-  voteType: ProposalStepVoteType!
-  budget: Int
-  open: Boolean!
   title: String!
-  votesHelpText: String
   statuses: [Status!]!
-  project: Project!
 
   # Only one selection step inside a project can have realisation steps, true if this one
   allowingProgressSteps: Boolean!
   voteThreshold: Int
   proposals(
-    district: ID
-    userType: ID
-    category: ID
-    status: ID
-    theme: ID
-    term: String
-
-    # Order for connection.
-    orderBy: ProposalOrder = {field: CREATED_AT, direction: ASC}
-    affiliations: [ProposalAffiliation]
-
     # Returns the elements in the list that come after the specified global ID.
     after: String
 
     # Returns the first n elements from the list.
-    first: Int = 10
+    first: Int = 50
 
     # Returns the elements in the list that come before the specified global ID.
     before: String
 
     # Returns the last n elements from the list.
     last: Int
-  ): ProposalConnection!
+
+    # Ordering options for proposals returning from the connection
+    orderBy: ProposalOrder = {field: CREATED_AT, direction: DESC}
+  ): ProposalConnection
 
   # A list of contributor associated with the consultation.
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
-
-  # A list of viewer votes associated with the step.
-  viewerVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}): ProposalVoteConnection!
 }
 
 input SetEvaluationFormInProposalFormInput {
@@ -2144,21 +1948,18 @@ interface Step {
   id: ID!
   kind: String!
   title: String!
-  show_url: String!
 }
 
 type SynthesisStep implements Step {
   id: ID!
   kind: String!
   title: String!
-  show_url: String!
 }
 
 # A theme
 type Theme {
   id: ID!
   title: String!
-  url: URI!
 }
 
 # A trashable contribution
@@ -2404,20 +2205,6 @@ type UpdateProposalFusionPayload {
   clientMutationId: String
 }
 
-input UpdateProposalVotesInput {
-  # The step.
-  step: ID!
-
-  # The votes.
-  votes: [VoteInput!]!
-  clientMutationId: String
-}
-
-type UpdateProposalVotesPayload {
-  step: ProposalStep!
-  clientMutationId: String
-}
-
 # A user is an individual's account.
 type User implements Node {
   # The id of the user.
@@ -2544,7 +2331,6 @@ type User implements Node {
 
   # Your localisation
   neighborhood: String
-  proposalVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}, stepId: ID): ProposalVoteConnection!
   deletedAccountAt: DateTime
 }
 
@@ -2707,15 +2493,6 @@ type VersionVote implements YesNoPairedVote & Contribution & ContributionWithAut
   kind: String!
 }
 
-# A vote
-input VoteInput {
-  # The vote id.
-  id: ID!
-
-  # Update the vote privacy.
-  anonymous: Boolean!
-}
-
 # Ways in which lists of votes can be ordered upon return.
 input VoteOrder {
   field: VoteOrderField! = CREATED_AT
@@ -2725,7 +2502,8 @@ input VoteOrder {
 # Ordering options for votes.
 enum VoteOrderField {
   CREATED_AT
-  POSITION
+  UPDATED_AT
+  POPULARITY
 }
 
 interface YesNoPairedVote {

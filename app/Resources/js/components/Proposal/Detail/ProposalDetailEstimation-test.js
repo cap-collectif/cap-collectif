@@ -1,17 +1,13 @@
-// @flow
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { ProposalDetailEstimation } from './ProposalDetailEstimation';
-import { $refType } from '../../../mocks';
+import ProposalDetailEstimation from './ProposalDetailEstimation';
 
 describe('<ProposalDetailEstimation />', () => {
   const proposal = {
-    $refType,
     estimation: 100,
   };
   const proposalWithNullEstimation = {
-    $refType,
     estimation: null,
   };
 

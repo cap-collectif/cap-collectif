@@ -72,7 +72,7 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
             <span
               className="badge"
             >
-              1
+              0
             </span>
           </NavItem>
           <NavItem
@@ -121,75 +121,56 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
               <Relay(ProposalFusionList)
                 proposal={
                   Object {
-                    "$fragmentRefs": null,
-                    "$refType": null,
-                    "allFollowers": Object {
+                    "followerConnection": Object {
                       "totalCount": 169,
                     },
-                    "allVotes": Object {
-                      "totalCount": 1,
-                    },
-                    "currentVotableStep": null,
-                    "id": "1",
-                    "news": Object {
-                      "totalCount": 1,
-                    },
+                    "postsCount": 1,
                     "viewerCanSeeEvaluation": true,
-                    "votableSteps": Array [],
                   }
                 }
               />
-              <Relay(ProposalPageLastNews)
+              <Connect(ProposalPageLastNews)
                 proposal={
                   Object {
-                    "$fragmentRefs": null,
-                    "$refType": null,
-                    "allFollowers": Object {
-                      "totalCount": 169,
-                    },
-                    "allVotes": Object {
-                      "totalCount": 1,
-                    },
-                    "currentVotableStep": null,
-                    "id": "1",
-                    "news": Object {
-                      "totalCount": 1,
-                    },
+                    "isDraft": false,
+                    "selections": Array [],
                     "viewerCanSeeEvaluation": true,
-                    "votableSteps": Array [],
+                    "votableStepId": "selectionstep1",
+                    "votesByStepId": Object {
+                      "collectstep1": Array [],
+                      "selectionstep1": Array [],
+                    },
+                    "votesCountByStepId": Object {
+                      "collectstep1": 0,
+                      "selectionstep1": 0,
+                    },
                   }
                 }
               />
-              <Relay(Connect(ProposalPageContent))
+              <Connect(ProposalPageContent)
                 categories={Array []}
                 form={
                   Object {
-                    "$refType": null,
                     "usingCategories": true,
                     "usingThemes": true,
                   }
                 }
                 proposal={
                   Object {
-                    "$fragmentRefs": null,
-                    "$refType": null,
-                    "allFollowers": Object {
-                      "totalCount": 169,
-                    },
-                    "allVotes": Object {
-                      "totalCount": 1,
-                    },
-                    "currentVotableStep": null,
-                    "id": "1",
-                    "news": Object {
-                      "totalCount": 1,
-                    },
+                    "isDraft": false,
+                    "selections": Array [],
                     "viewerCanSeeEvaluation": true,
-                    "votableSteps": Array [],
+                    "votableStepId": "selectionstep1",
+                    "votesByStepId": Object {
+                      "collectstep1": Array [],
+                      "selectionstep1": Array [],
+                    },
+                    "votesCountByStepId": Object {
+                      "collectstep1": 0,
+                      "selectionstep1": 0,
+                    },
                   }
                 }
-                step={null}
-                viewer={null}
               />
             </Col>
             <Col
@@ -198,24 +179,21 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
               sm={4}
               xs={12}
             >
-              <Relay(ProposalPageMetadata)
+              <ProposalPageMetadata
                 proposal={
                   Object {
-                    "$fragmentRefs": null,
-                    "$refType": null,
-                    "allFollowers": Object {
-                      "totalCount": 169,
-                    },
-                    "allVotes": Object {
-                      "totalCount": 1,
-                    },
-                    "currentVotableStep": null,
-                    "id": "1",
-                    "news": Object {
-                      "totalCount": 1,
-                    },
+                    "isDraft": false,
+                    "selections": Array [],
                     "viewerCanSeeEvaluation": true,
-                    "votableSteps": Array [],
+                    "votableStepId": "selectionstep1",
+                    "votesByStepId": Object {
+                      "collectstep1": Array [],
+                      "selectionstep1": Array [],
+                    },
+                    "votesCountByStepId": Object {
+                      "collectstep1": 0,
+                      "selectionstep1": 0,
+                    },
                   }
                 }
                 showCategories={true}
@@ -224,24 +202,21 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                 showThemes={true}
               />
               <br />
-              <Relay(ProposalPageAdvancement)
+              <ProposalPageAdvancement
                 proposal={
                   Object {
-                    "$fragmentRefs": null,
-                    "$refType": null,
-                    "allFollowers": Object {
-                      "totalCount": 169,
-                    },
-                    "allVotes": Object {
-                      "totalCount": 1,
-                    },
-                    "currentVotableStep": null,
-                    "id": "1",
-                    "news": Object {
-                      "totalCount": 1,
-                    },
+                    "isDraft": false,
+                    "selections": Array [],
                     "viewerCanSeeEvaluation": true,
-                    "votableSteps": Array [],
+                    "votableStepId": "selectionstep1",
+                    "votesByStepId": Object {
+                      "collectstep1": Array [],
+                      "selectionstep1": Array [],
+                    },
+                    "votesCountByStepId": Object {
+                      "collectstep1": 0,
+                      "selectionstep1": 0,
+                    },
                   }
                 }
               />
@@ -264,7 +239,6 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
               <Nav
                 bsClass="nav"
                 bsStyle="pills"
-                className="mb-20"
                 justified={false}
                 pullLeft={false}
                 pullRight={false}
@@ -284,27 +258,7 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
           bsClass="tab-pane"
           eventKey="blog"
         >
-          <Relay(ProposalPageBlog)
-            proposal={
-              Object {
-                "$fragmentRefs": null,
-                "$refType": null,
-                "allFollowers": Object {
-                  "totalCount": 169,
-                },
-                "allVotes": Object {
-                  "totalCount": 1,
-                },
-                "currentVotableStep": null,
-                "id": "1",
-                "news": Object {
-                  "totalCount": 1,
-                },
-                "viewerCanSeeEvaluation": true,
-                "votableSteps": Array [],
-              }
-            }
-          />
+          <Connect(ProposalPageBlog) />
         </TabPane>
         <TabPane
           bsClass="tab-pane"
@@ -313,21 +267,11 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
           <Relay(Connect(InjectIntl(ReduxForm)))
             proposal={
               Object {
-                "$fragmentRefs": null,
-                "$refType": null,
-                "allFollowers": Object {
+                "followerConnection": Object {
                   "totalCount": 169,
                 },
-                "allVotes": Object {
-                  "totalCount": 1,
-                },
-                "currentVotableStep": null,
-                "id": "1",
-                "news": Object {
-                  "totalCount": 1,
-                },
+                "postsCount": 1,
                 "viewerCanSeeEvaluation": true,
-                "votableSteps": Array [],
               }
             }
           />
@@ -340,21 +284,11 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
             pageAdmin={false}
             proposal={
               Object {
-                "$fragmentRefs": null,
-                "$refType": null,
-                "allFollowers": Object {
+                "followerConnection": Object {
                   "totalCount": 169,
                 },
-                "allVotes": Object {
-                  "totalCount": 1,
-                },
-                "currentVotableStep": null,
-                "id": "1",
-                "news": Object {
-                  "totalCount": 1,
-                },
+                "postsCount": 1,
                 "viewerCanSeeEvaluation": true,
-                "votableSteps": Array [],
               }
             }
           />

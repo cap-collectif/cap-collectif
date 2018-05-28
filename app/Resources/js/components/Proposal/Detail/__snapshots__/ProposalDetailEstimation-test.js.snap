@@ -6,6 +6,9 @@ exports[`<ProposalDetailEstimation /> should render a div when estimation is not
 <div
   className="tags-list__tag ellipsis"
 >
+  <i
+    className="cap cap-coins-2-1 icon--blue"
+  />
   <FormattedNumber
     currency="EUR"
     minimumFractionDigits={0}
@@ -19,6 +22,9 @@ exports[`<ProposalDetailEstimation /> should render a div when estimation is nul
 <div
   className="tags-list__tag ellipsis"
 >
+  <i
+    className="cap cap-coins-2-1 icon--blue"
+  />
   <FormattedNumber
     currency="EUR"
     minimumFractionDigits={0}

@@ -38,11 +38,6 @@ trait VoteTypeTrait
      */
     private $votesLimit = null;
 
-    /**
-     * @ORM\Column(name="votes_ranking", type="boolean", nullable=false, options={"default": false})
-     */
-    private $votesRanking = false;
-
     public static function getVoteTypeLabels()
     {
         return [
@@ -50,18 +45,6 @@ trait VoteTypeTrait
             self::$VOTE_TYPE_SIMPLE => 'step.vote_type.simple',
             self::$VOTE_TYPE_BUDGET => 'step.vote_type.budget',
         ];
-    }
-
-    public function isVotesRanking(): bool
-    {
-        return $this->votesRanking;
-    }
-
-    public function setVotesRanking(bool $value)
-    {
-        $this->votesRanking = $value;
-
-        return $this;
     }
 
     public function getBudget()

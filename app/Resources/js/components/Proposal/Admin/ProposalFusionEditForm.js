@@ -1,11 +1,10 @@
 // @flow
 import * as React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { fetchQuery } from 'relay-runtime';
 import { Field, SubmissionError, reduxForm } from 'redux-form';
 import { injectIntl, type IntlShape } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
-import environment from '../../../createRelayEnvironment';
+import Fetcher from '../../../services/Fetcher';
 import select from '../../Form/Select';
 import UpdateProposalFusionMutation from '../../../mutations/UpdateProposalFusionMutation';
 import type { Dispatch, Uuid, State } from '../../../types';
@@ -31,23 +30,6 @@ const validate = (values: FormValues, props: Props) => {
   }
   return errors;
 };
-
-const query = graphql`
-  query ProposalFusionEditFormAutocompleteQuery($stepId: ID!, $term: String) {
-    step: node(id: $stepId) {
-      ... on CollectStep {
-        proposals(first: 10, term: $term) {
-          edges {
-            node {
-              id
-              title
-            }
-          }
-        }
-      }
-    }
-  }
-`;
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const { intl } = props;
@@ -90,22 +72,21 @@ export class ProposalFusionEditForm extends React.Component<Props> {
           component={select}
           clearable={false}
           loadOptions={(input: string) =>
-            fetchQuery(environment, query, { term: input, stepId }).then(res => {
-              return {
-                options: res.step.proposals.edges
-                  .map(edge => ({
-                    value: edge.node.id,
-                    label: edge.node.title,
-                    stepId,
-                  }))
-                  .concat(
-                    proposal.mergedFrom.map(p => ({
-                      value: p.id,
-                      label: p.title,
-                    })),
-                  ),
-              };
-            })
+            Fetcher.postToJson(`/collect_steps/${stepId}/proposals/search`, {
+              terms: input,
+            }).then(res => ({
+              options: res.proposals
+                .map(p => ({
+                  value: p.id,
+                  label: p.title,
+                }))
+                .concat(
+                  proposal.mergedFrom.map(p => ({
+                    value: p.id,
+                    label: p.title,
+                  })),
+                ),
+            }))
           }
         />
       </form>

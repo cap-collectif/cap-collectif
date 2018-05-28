@@ -26,6 +26,35 @@ class ProposalMutation implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
+    public function delete(string $proposalId): array
+    {
+        $em = $this->container->get('doctrine.orm.default_entity_manager');
+        $proposal = $this->getProposal($proposalId);
+        if (!$proposal) {
+            throw new UserError(sprintf('Unknown proposal with id "%s"', $proposalId));
+        }
+
+        $author = $proposal->getAuthor();
+
+        $em->remove($proposal); // softdeleted
+        $em->flush();
+
+        $this->container->get('redis_storage.helper')->recomputeUserCounters($author);
+
+        $this->container->get('swarrot.publisher')->publish(CapcoAppBundleMessagesTypes::PROPOSAL_DELETE, new Message(
+            json_encode([
+                'proposalId' => $proposal->getId(),
+            ])
+        ));
+
+        // Synchronous indexation
+        $indexer = $this->container->get('capco.elasticsearch.indexer');
+        $indexer->index(get_class($proposal), $proposal->getId());
+        $indexer->finishBulk();
+
+        return ['proposal' => $proposal];
+    }
+
     public function changeNotation(Argument $input)
     {
         $em = $this->container->get('doctrine.orm.default_entity_manager');

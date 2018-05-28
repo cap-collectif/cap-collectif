@@ -3,9 +3,6 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Traits\AnonymousableTrait;
-use Capco\AppBundle\Traits\PositionableTrait;
-use Capco\AppBundle\Traits\PrivatableTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -19,9 +16,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ProposalCollectVote extends AbstractVote
 {
-    use AnonymousableTrait;
-    use PrivatableTrait;
-    use PositionableTrait;
+    use \Capco\AppBundle\Traits\AnonymousableTrait;
+    use \Capco\AppBundle\Traits\PrivatableTrait;
 
     const ANONYMOUS = 'ANONYMOUS';
 

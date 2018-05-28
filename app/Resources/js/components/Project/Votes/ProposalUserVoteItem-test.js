@@ -1,33 +1,34 @@
-// @flow
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalUserVoteItem } from './ProposalUserVoteItem';
-import { $refType, $fragmentRefs } from '../../../mocks';
 
 describe('<ProposalUserVoteItem />', () => {
-  const vote = {
-    $refType,
-    createdAt: '2015-01-01 00:00:00',
+  const props = {
+    dispatch: () => {},
     proposal: {
-      id: '1',
-      $fragmentRefs,
+      id: 1,
       title: 'proposal',
-      show_url: 'http://capco.test/proposal',
+      district: {
+        name: 'district',
+      },
+      _links: {
+        show: 'http://capco.test/proposal',
+      },
+      author: {
+        id: 1,
+        displayName: 'user',
+      },
     },
-  };
-  const step = {
-    id: '1',
-    open: true,
-    votesRanking: false,
-    voteType: 'SIMPLE',
-    $refType,
+    step: {
+      id: 1,
+      voteType: 2,
+      open: true,
+    },
   };
 
   it('should render a vote item', () => {
-    const wrapper = shallow(
-      <ProposalUserVoteItem isVoteVisibilityPublic member="votes.1" step={step} vote={vote} />,
-    );
+    const wrapper = shallow(<ProposalUserVoteItem {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });
