@@ -16,7 +16,7 @@ const ProposalDeleteModal = React.createClass({
   },
 
   render() {
-    const { proposal, form, show, isDeleting, dispatch } = this.props;
+    const { proposal, show, isDeleting, dispatch } = this.props;
     return (
       <div>
         <Modal
@@ -29,7 +29,7 @@ const ProposalDeleteModal = React.createClass({
           aria-labelledby="contained-modal-title-lg">
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
-              {<FormattedMessage id="global.removeMessage" />}
+              <FormattedMessage id="global.removeMessage" />
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -52,7 +52,7 @@ const ProposalDeleteModal = React.createClass({
               id="confirm-proposal-delete"
               isSubmitting={isDeleting}
               onSubmit={() => {
-                deleteProposal(form.id, proposal, dispatch);
+                deleteProposal(proposal.id, dispatch);
               }}
               label="global.removeDefinitively"
               bsStyle="danger"

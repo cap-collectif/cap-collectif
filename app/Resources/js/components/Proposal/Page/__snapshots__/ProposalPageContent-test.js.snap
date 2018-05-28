@@ -11,27 +11,11 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
     className="block proposal__buttons"
   >
     <div>
-      <Connect(ProposalVoteButtonWrapper)
-        className="mr-15"
-        proposal={
-          Object {
-            "_links": Object {
-              "show": "http://capco.test",
-            },
-            "author": Object {},
-            "id": "proposal3",
-            "referer": "http://capco.test",
-            "responses": Array [],
-            "title": "Titre proposition",
-          }
-        }
-      />
       <Connect(ShareButtonDropdown)
         id="proposal-share-button"
         title="Titre proposition"
-        url="http://capco.test"
       />
-      <Connect(ProposalReportButton)
+      <Relay(Connect(ProposalReportButton))
         proposal={
           Object {
             "_links": Object {
@@ -69,12 +53,6 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
     }
   />
   <Connect(ProposalDeleteModal)
-    form={
-      Object {
-        "usingCategories": false,
-        "usingThemes": true,
-      }
-    }
     proposal={
       Object {
         "_links": Object {

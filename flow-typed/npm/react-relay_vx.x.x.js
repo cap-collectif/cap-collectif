@@ -302,6 +302,11 @@ declare module "react-relay" {
 
   declare export type GeneratedNodeMap = { [key: string]: GraphQLTaggedNode };
 
+  declare export function commitLocalUpdate<TEnvironment>(
+    environment: TEnvironment,
+    proxy: any
+  ): any;
+
   declare export function createFragmentContainer<
     TBase: React$ComponentType<*>
   >(

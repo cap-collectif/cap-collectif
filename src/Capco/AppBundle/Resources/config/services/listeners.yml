@@ -17,7 +17,7 @@ services:
     class: Capco\AppBundle\EventListener\ParisAuthenticationExceptionListener
     tags:
       - { name: kernel.event_listener, event: kernel.exception }
-    arguments: ['@logger', '@templating', '@capco.paris.opem_am_client']
+    arguments: ['@logger', '@templating']
 
   capco.listener.locale:
     class: Capco\AppBundle\EventListener\LocaleListener
@@ -76,14 +76,8 @@ services:
   capco.proposal.serialization_listener:
     class: Capco\AppBundle\EventListener\ProposalSerializationListener
     arguments:
-      - "@router"
-      - "@security.token_storage"
       - "@capco.proposal_selection_vote.repository"
-      - "@capco.response.repository"
-      - "@sonata.media.twig.extension"
-      - "@jms_serializer"
       - "@capco.proposal_collect_vote.repository"
-      - "@capco.proposal_votes.resolver"
     tags:
       - { name: "jms_serializer.event_subscriber" }
 

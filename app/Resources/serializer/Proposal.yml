@@ -8,7 +8,7 @@ Capco\AppBundle\Entity\Proposal:
     title:
       expose: true
       type: string
-      groups: [Proposals, ProposalFusions, Elasticsearch]
+      groups: [Proposals, Elasticsearch]
     summary:
       expose: true
       type: string

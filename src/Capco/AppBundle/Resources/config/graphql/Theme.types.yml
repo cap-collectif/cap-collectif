@@ -7,3 +7,6 @@ Theme:
                 type: "ID!"
             title:
                 type: "String!"
+            url:
+                type: "URI!"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Theme\\ThemeUrlResolver", [value])'

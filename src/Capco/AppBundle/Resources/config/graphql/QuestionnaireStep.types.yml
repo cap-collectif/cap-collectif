@@ -15,3 +15,6 @@ QuestionnaireStep:
                 description: "A list of contributor associated with the step."
                 argsBuilder: "Relay::Connection"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\StepContributorResolver", [value, args])'
+            show_url:
+                type: "String!"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\StepUrlResolver", [value])'

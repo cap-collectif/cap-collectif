@@ -394,30 +394,6 @@ class ProposalRepository extends EntityRepository
         return $qb->getQuery()->getArrayResult();
     }
 
-    public function getOrderedProposalsForSelectionStep(SelectionStep $step, string $field, string $direction,
-                                                        int $limit = null, int $offset = null): Paginator
-    {
-        $query = $this->getIsEnabledQueryBuilder()
-            ->leftJoin('proposal.selections', 'selections')
-            ->leftJoin('selections.selectionStep', 'selectionStep')
-            ->andWhere('selectionStep.id = :stepId')
-            ->setParameter('stepId', $step->getId());
-
-        if ($offset) {
-            $query->setFirstResult($offset);
-        }
-
-        if ($limit) {
-            $query->setMaxResults($limit);
-        }
-
-        if ('CREATED_AT' === $field) {
-            $query->addOrderBy('proposal.createdAt', $direction);
-        }
-
-        return new Paginator($query);
-    }
-
     public function getProposalsWithVotesCountForSelectionStep(SelectionStep $step, $limit = null, $themeId = null, $districtId = null, $categoryId = null): array
     {
         $qb = $this->getIsEnabledQueryBuilder()

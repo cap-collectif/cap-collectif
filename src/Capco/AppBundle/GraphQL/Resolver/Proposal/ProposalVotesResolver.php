@@ -32,28 +32,40 @@ class ProposalVotesResolver
 
     public function __invoke(Proposal $proposal, Argument $args): Connection
     {
-        try {
-            $step = $this->abstractStepRepository->find($args['step']);
-            $field = $args->offsetGet('orderBy')['field'];
-            $direction = $args->offsetGet('orderBy')['direction'];
-            if ($step instanceof CollectStep) {
-                $paginator = new Paginator(function (int $offset, int $limit) use ($proposal, $step, $field, $direction) {
-                    return $this->proposalCollectVoteRepository->getByProposalAndStep($proposal, $step, $limit, $offset, $field, $direction)->getIterator()->getArrayCopy();
-                });
+        if ($args->offsetExists('stepId')) {
+            try {
+                $step = $this->abstractStepRepository->find($args->offsetGet('stepId'));
+                $field = $args->offsetGet('orderBy')['field'];
+                $direction = $args->offsetGet('orderBy')['direction'];
+                if ($step instanceof CollectStep) {
+                    $paginator = new Paginator(function (int $offset, int $limit) use ($proposal, $step, $field, $direction) {
+                        return $this->proposalCollectVoteRepository->getByProposalAndStep($proposal, $step, $limit, $offset, $field, $direction)->getIterator()->getArrayCopy();
+                    });
 
-                $totalCount = $this->proposalCollectVoteRepository->countVotesByProposalAndStep($proposal, $step);
-            } else {
-                $paginator = new Paginator(function (int $offset, int $limit) use ($proposal, $step, $field, $direction) {
-                    return $this->proposalSelectionVoteRepository->getByProposalAndStep($proposal, $step, $limit, $offset, $field, $direction)->getIterator()->getArrayCopy();
-                });
+                    $totalCount = $this->proposalCollectVoteRepository->countVotesByProposalAndStep($proposal, $step);
+                } else {
+                    $paginator = new Paginator(function (int $offset, int $limit) use ($proposal, $step, $field, $direction) {
+                        return $this->proposalSelectionVoteRepository->getByProposalAndStep($proposal, $step, $limit, $offset, $field, $direction)->getIterator()->getArrayCopy();
+                    });
 
-                $totalCount = $this->proposalSelectionVoteRepository->countVotesByProposalAndStep($proposal, $step);
+                    $totalCount = $this->proposalSelectionVoteRepository->countVotesByProposalAndStep($proposal, $step);
+                }
+
+                return $paginator->auto($args, $totalCount);
+            } catch (\RuntimeException $exception) {
+                $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
+                throw new \RuntimeException($exception->getMessage());
             }
-
-            return $paginator->auto($args, $totalCount);
-        } catch (\RuntimeException $exception) {
-            $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
-            throw new \RuntimeException($exception->getMessage());
         }
+
+        $paginator = new Paginator(function (int $offset, int $limit) {
+            return [];
+        });
+
+        $totalCount = 0;
+        $totalCount += $this->proposalCollectVoteRepository->countVotesByProposal($proposal);
+        $totalCount += $this->proposalSelectionVoteRepository->countVotesByProposal($proposal);
+
+        return $paginator->auto($args, $totalCount);
     }
 }

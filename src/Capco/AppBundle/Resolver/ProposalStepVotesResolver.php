@@ -17,8 +17,10 @@ use Capco\AppBundle\Repository\SelectionStepRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
-class ProposalStepVotesResolver
+class ProposalStepVotesResolver extends AbstractExtension
 {
     protected $proposalSelectionVoteRepository;
     protected $selectionStepRepository;
@@ -40,32 +42,11 @@ class ProposalStepVotesResolver
         $this->proposalRepository = $proposalRepository;
     }
 
-    public function getUserVotesByStepIdForProject(Project $project, User $user = null)
+    public function getFilters()
     {
-        $steps = $project->getSteps()->map(function ($step) {
-            return $step->getStep();
-        });
-
-        $userVotesOnSelectionSteps = $this->proposalSelectionVoteRepository
-          ->getUserVotesGroupedByStepIds(
-          $steps->filter(function ($step) {
-              return $step->isSelectionStep();
-          })->map(function ($step) {
-              return $step->getId();
-          })->toArray(),
-          $user
-        );
-        $userHasVoteOnCollectSteps = $this->proposalCollectVoteRepository
-          ->getUserVotesGroupedByStepIds(
-          $steps->filter(function ($step) {
-              return $step->isCollectStep();
-          })->map(function ($step) {
-              return $step->getId();
-          })->toArray(),
-          $user
-        );
-
-        return $userVotesOnSelectionSteps + $userHasVoteOnCollectSteps;
+        return [
+            new TwigFilter('current_votable_step', [$this, 'getFirstVotableStepForProposal']),
+        ];
     }
 
     public function voteIsPossible($vote)
@@ -73,7 +54,7 @@ class ProposalStepVotesResolver
         return $this->checkIntanceOfProposalVote($vote);
     }
 
-    public function getAmountSpentForVotes($votes): int
+    public function getAmountSpentForVotes(iterable $votes): int
     {
         $spent = 0;
         foreach ($votes as $vote) {
@@ -83,7 +64,7 @@ class ProposalStepVotesResolver
         return $spent;
     }
 
-    public function getCreditsLeftByStepIdForProjectAndUser(Project $project, User $user = null)
+    public function getCreditsLeftByStepIdForProjectAndUser(Project $project, User $user)
     {
         $steps = $project->getSteps()->map(function ($step) {
             return $step->getStep();
@@ -123,9 +104,9 @@ class ProposalStepVotesResolver
     public function getVotableStepsForProject(Project $project)
     {
         $collection = $this
-            ->selectionStepRepository
-            ->getVotableStepsForProject($project)
-        ;
+        ->selectionStepRepository
+        ->getVotableStepsForProject($project)
+    ;
         $collectSteps = $this->collectStepRepository->getCollectStepsForProject($project);
         if (count($collectSteps) > 0) {
             $step = $collectSteps[0];
@@ -149,7 +130,7 @@ class ProposalStepVotesResolver
         return $steps;
     }
 
-    public function getFirstVotableStepForProposal(Proposal $proposal)
+    public function getFirstVotableStepForProposal(Proposal $proposal): ?AbstractStep
     {
         $votableSteps = $this->getVotableStepsForProposal($proposal);
         $firstVotableStep = null;
@@ -182,6 +163,26 @@ class ProposalStepVotesResolver
     public function hasVotableStepNotFuture(Project $project): bool
     {
         return count($this->getVotableStepsNotFutureForProject($project)) > 0;
+    }
+
+    public function getSpentCreditsForUser(User $user, AbstractStep $step)
+    {
+        $votes = [];
+
+        if ($step instanceof SelectionStep) {
+            $votes = $this
+              ->proposalSelectionVoteRepository
+              ->getVotesByStepAndUser($step, $user)
+          ;
+        }
+        if ($step instanceof CollectStep) {
+            $votes = $this
+              ->proposalCollectVoteRepository
+              ->getVotesByStepAndUser($step, $user)
+          ;
+        }
+
+        return $this->getAmountSpentForVotes($votes);
     }
 
     private function checkIntanceOfProposalVote($vote)
@@ -228,25 +229,5 @@ class ProposalStepVotesResolver
         }
 
         return true;
-    }
-
-    private function getSpentCreditsForUser(User $user, AbstractStep $step)
-    {
-        $votes = [];
-
-        if ($step instanceof SelectionStep) {
-            $votes = $this
-              ->proposalSelectionVoteRepository
-              ->getVotesByStepAndUser($step, $user)
-          ;
-        }
-        if ($step instanceof CollectStep) {
-            $votes = $this
-              ->proposalCollectVoteRepository
-              ->getVotesByStepAndUser($step, $user)
-          ;
-        }
-
-        return $this->getAmountSpentForVotes($votes);
     }
 }

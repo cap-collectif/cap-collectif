@@ -5,22 +5,7 @@
 
 {% block form %}
 {% include '@CapcoApp/redux_store.html.twig' with {
-  'project': admin.subject.proposalForm.step.getProject(),
-  'data' : {
-    'proposal': {
-      'proposalsById': {
-        (admin.subject.id) : {
-          'selections': [],
-          'status': admin.subject.status
-          ? {
-              'id': admin.subject.status.id,
-              'name': admin.subject.status.name
-            }
-         : null
-        }
-      },
-    }
-  }
+  'project': admin.subject.proposalForm.step.getProject()
 }
 %}
 {{ react_render_component('ProposalAdminPageApp', {

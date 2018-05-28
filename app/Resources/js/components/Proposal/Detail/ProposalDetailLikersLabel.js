@@ -1,53 +1,41 @@
-import React, { PropTypes } from 'react';
+// @flow
+import * as React from 'react';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import Truncate from 'react-truncate';
+import type { ProposalDetailLikersLabel_proposal } from './__generated__/ProposalDetailLikersLabel_proposal.graphql';
 
-const ProposalDetailLikersLabel = React.createClass({
-  propTypes: {
-    likers: PropTypes.array.isRequired,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
-    onMouseOver: PropTypes.func,
-    onMouseOut: PropTypes.func,
-  },
+type Props = { proposal: ProposalDetailLikersLabel_proposal };
 
-  getDefaultProps() {
-    return {
-      onFocus: () => {},
-      onBlur: () => {},
-      onMouseOver: () => {},
-      onMouseOut: () => {},
-    };
-  },
-
-  getLabelText() {
-    const { likers } = this.props;
-    if (likers.length === 1) {
-      return likers[0].displayName;
+export class ProposalDetailLikersLabel extends React.Component<Props> {
+  getLabelText = () => {
+    const { proposal } = this.props;
+    if (proposal.likers.length === 1) {
+      return proposal.likers[0].displayName;
     }
-    if (likers.length > 1) {
+    if (proposal.likers.length > 1) {
       return (
         <FormattedMessage
           id="proposal.likers.count"
           values={{
-            num: likers.length,
+            num: proposal.likers.length,
           }}
         />
       );
     }
     return null;
-  },
+  };
 
   render() {
-    const { likers, onBlur, onFocus, onMouseOut, onMouseOver } = this.props;
+    const { proposal } = this.props;
     const funcProps = {
-      onFocus,
-      onBlur,
-      onMouseOver,
-      onMouseOut,
+      onFocus: () => {},
+      onBlur: () => {},
+      onMouseOver: () => {},
+      onMouseOut: () => {},
     };
 
-    if (likers.length > 0) {
+    if (proposal.likers.length > 0) {
       return (
         <span {...funcProps}>
           <i className="cap cap-heart-1 icon--red" />
@@ -56,7 +44,17 @@ const ProposalDetailLikersLabel = React.createClass({
       );
     }
     return null;
-  },
-});
+  }
+}
 
-export default ProposalDetailLikersLabel;
+export default createFragmentContainer(ProposalDetailLikersLabel, {
+  proposal: graphql`
+    fragment ProposalDetailLikersLabel_proposal on Proposal {
+      id
+      likers {
+        id
+        displayName
+      }
+    }
+  `,
+});

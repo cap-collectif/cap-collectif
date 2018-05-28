@@ -271,7 +271,7 @@ class StepController extends Controller
      */
     public function showCollectStepAction(Request $request, Project $project, CollectStep $step)
     {
-        if (!$step->canDisplay()) {
+        if (!$step->canDisplay() || !$step->getProposalForm()) {
             throw $this->createNotFoundException();
         }
 
@@ -280,23 +280,12 @@ class StepController extends Controller
 
         $proposalForm = $step->getProposalForm();
         $searchResults = ['proposals' => [], 'count' => 0];
-        $countFusions = 0;
-        $seed = $this->getUser() ? $this->getUser()->getId() : $request->getClientIp();
 
-        if ($proposalForm) {
-            $filters = ['proposalForm' => $proposalForm->getId(), 'collectStep' => $step->getId()];
+        $countFusions = $this->get('capco.proposal.repository')
+          ->countFusionsByProposalForm($proposalForm)
+        ;
 
-            if ($step->isPrivate() && $this->getUser()) {
-                $providedFilters['authorUniqueId'] = $this->getUser()->getId();
-            }
-
-            $searchResults = $this->get('capco.search.proposal_search')
-                ->searchProposals(0, 10, 'last', null, $filters, $seed);
-            $countFusions = $em
-              ->getRepository('CapcoAppBundle:Proposal')
-              ->countFusionsByProposalForm($proposalForm)
-            ;
-        }
+        $serializer = $this->get('serializer');
 
         $props = $serializer->serialize([
             'statuses' => $step->getStatuses(),
@@ -390,29 +379,18 @@ class StepController extends Controller
             throw $this->createNotFoundException();
         }
 
-        $serializer = $this->get('serializer');
-        $seed = $this->getUser() ? $this->getUser()->getId() : $request->getClientIp();
-
-        $searchResults = $this
-            ->get('capco.search.proposal_search')
-            ->searchProposals(
-                0,
-                10,
-                $step->getDefaultSort(),
-                null,
-                ['selectionStep' => $step->canShowProposals() ? $step->getId() : 0],
-                $seed
-            );
+        $searchResults = ['proposals' => [], 'count' => 0];
 
         $form = $step->getProposalForm();
         $showThemes = $form->isUsingThemes();
         $categories = $form->getCategories();
 
+        $serializer = $this->get('serializer');
+
         $props = $serializer->serialize([
             'stepId' => $step->getId(),
             'statuses' => $step->getStatuses(),
             'categories' => $categories,
-            'proposals' => $searchResults['proposals'],
             'count' => $searchResults['count'],
             'defaultSort' => $step->getDefaultSort() ?: null,
             'form' => $form,

@@ -1,10 +1,11 @@
 // @flow
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { fetchQuery, graphql } from 'relay-runtime';
 import { injectIntl, type IntlShape } from 'react-intl';
 import { Field, SubmissionError, reduxForm, formValueSelector, change } from 'redux-form';
-import Fetcher from '../../../services/Fetcher';
 import select from '../../Form/Select';
+import environment from '../../../createRelayEnvironment';
 import CreateProposalFusionMutation, {
   type CreateProposalFusionMutationResponse,
 } from '../../../mutations/CreateProposalFusionMutation';
@@ -12,6 +13,23 @@ import { closeCreateFusionModal } from '../../../redux/modules/proposal';
 import type { State, Dispatch, Uuid } from '../../../types';
 
 export const formName = 'create-proposal-fusion';
+
+const query = graphql`
+  query ProposalFusionFormAutocompleteQuery($stepId: ID!, $term: String) {
+    step: node(id: $stepId) {
+      ... on CollectStep {
+        proposals(first: 10, term: $term) {
+          edges {
+            node {
+              id
+              title
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 
 type FormValues = {
   project: ?Uuid,
@@ -89,15 +107,17 @@ export class ProposalFusionForm extends React.Component<Props> {
                 .filter(o => !currentValues.includes(o))
             }
             loadOptions={input =>
-              Fetcher.postToJson(`/collect_steps/${currentCollectStep.id}/proposals/search`, {
-                terms: input,
-              }).then(res => ({
-                options: res.proposals.map(p => ({
-                  value: p.id,
-                  label: p.title,
-                  stepId: currentCollectStep.id,
-                })),
-              }))
+              fetchQuery(environment, query, { term: input, stepId: currentCollectStep.id }).then(
+                res => {
+                  return {
+                    options: res.step.proposals.edges.map(edge => ({
+                      value: edge.node.id,
+                      label: edge.node.title,
+                      stepId: currentCollectStep.id,
+                    })),
+                  };
+                },
+              )
             }
           />
         )}

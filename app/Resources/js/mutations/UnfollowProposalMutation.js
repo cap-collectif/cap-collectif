@@ -11,10 +11,9 @@ const mutation = graphql`
   mutation UnfollowProposalMutation($input: UnfollowProposalInput!) {
     unfollowProposal(input: $input) {
       proposal {
+        id
         ...ProposalFollowButton_proposal
-        followerConnection {
-          totalCount
-        }
+        ...ProposalPageFollowers_proposal
       }
       unfollowerId
     }

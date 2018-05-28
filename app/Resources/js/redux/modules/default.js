@@ -67,7 +67,6 @@ export const features = {
   export: false,
   server_side_rendering: false,
   zipcode_at_register: false,
-  vote_without_account: false,
 };
 
 const initialState: State = {

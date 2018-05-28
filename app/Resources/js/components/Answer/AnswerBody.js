@@ -1,14 +1,15 @@
-import React, { PropTypes } from 'react';
+// @flow
+import * as React from 'react';
 import { FormattedDate } from 'react-intl';
 import moment from 'moment';
 import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
 
-const AnswerBody = React.createClass({
-  propTypes: {
-    answer: PropTypes.object.isRequired,
-  },
+type Props = {
+  answer: Object,
+};
 
+export class AnswerBody extends React.Component<Props> {
   render() {
     const answer = this.props.answer;
     return (
@@ -38,7 +39,7 @@ const AnswerBody = React.createClass({
         <div dangerouslySetInnerHTML={{ __html: answer.body }} />
       </div>
     );
-  },
-});
+  }
+}
 
 export default AnswerBody;

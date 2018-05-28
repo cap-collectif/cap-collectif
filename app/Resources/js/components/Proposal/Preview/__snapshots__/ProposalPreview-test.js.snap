@@ -1,124 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProposalPreview /> should render a proposal preview votable 1`] = `
-<Col
-  bsClass="col"
-  componentClass="li"
-  lg={3}
-  md={4}
-  sm={6}
-  xs={12}
->
-  <CardContainer
-    className="bg-vip proposal-preview"
-    id="proposal-undefined"
-  >
-    <ProposalPreviewHeader
-      proposal={
-        Object {
-          "author": Object {
-            "vip": true,
-          },
-          "category": Object {},
-          "commentsCount": 5,
-          "referer": "http://capco.test",
-          "selections": Array [],
-          "viewerCanSeeEvaluation": true,
-          "votableStepId": "step2",
-          "votesByStepId": Object {
-            "collectstep1": Array [],
-            "selectionstep1": Array [],
-          },
-          "votesCountByStepId": Object {
-            "2": 0,
-          },
-        }
-      }
-    />
-    <Connect(ProposalPreviewBody)
-      proposal={
-        Object {
-          "author": Object {
-            "vip": true,
-          },
-          "category": Object {},
-          "commentsCount": 5,
-          "referer": "http://capco.test",
-          "selections": Array [],
-          "viewerCanSeeEvaluation": true,
-          "votableStepId": "step2",
-          "votesByStepId": Object {
-            "collectstep1": Array [],
-            "selectionstep1": Array [],
-          },
-          "votesCountByStepId": Object {
-            "2": 0,
-          },
-        }
-      }
-      showNullEstimation={true}
-      showThemes={true}
-      step={
-        Object {
-          "id": "step2",
-          "voteThreshold": 0,
-          "voteType": 2,
-        }
-      }
-    />
-    <ProposalPreviewFooter
-      proposal={
-        Object {
-          "author": Object {
-            "vip": true,
-          },
-          "category": Object {},
-          "commentsCount": 5,
-          "referer": "http://capco.test",
-          "selections": Array [],
-          "viewerCanSeeEvaluation": true,
-          "votableStepId": "step2",
-          "votesByStepId": Object {
-            "collectstep1": Array [],
-            "selectionstep1": Array [],
-          },
-          "votesCountByStepId": Object {
-            "2": 0,
-          },
-        }
-      }
-      showComments={true}
-      showVotes={true}
-      stepId="step2"
-    />
-    <ProposalStatus
-      proposal={
-        Object {
-          "author": Object {
-            "vip": true,
-          },
-          "category": Object {},
-          "commentsCount": 5,
-          "referer": "http://capco.test",
-          "selections": Array [],
-          "viewerCanSeeEvaluation": true,
-          "votableStepId": "step2",
-          "votesByStepId": Object {
-            "collectstep1": Array [],
-            "selectionstep1": Array [],
-          },
-          "votesCountByStepId": Object {
-            "2": 0,
-          },
-        }
-      }
-      stepId="step2"
-    />
-  </CardContainer>
-</Col>
-`;
-
-exports[`<ProposalPreview /> should render a proposal preview with different step id and vip false 1`] = `
+exports[`<ProposalPreview /> should render a proposal preview 1`] = `
 <Col
   bsClass="col"
   componentClass="li"
@@ -129,108 +11,124 @@ exports[`<ProposalPreview /> should render a proposal preview with different ste
 >
   <CardContainer
     className="proposal-preview"
-    id="proposal-undefined"
+    id="proposal-1"
   >
-    <ProposalPreviewHeader
+    <Relay(ProposalPreviewHeader)
       proposal={
         Object {
+          "$refType": null,
           "author": Object {
             "vip": false,
           },
-          "category": Object {},
-          "commentsCount": 5,
-          "referer": "http://capco.test",
-          "selections": Array [],
-          "viewerCanSeeEvaluation": true,
-          "votableStepId": "step3",
-          "votesByStepId": Object {
-            "collectstep1": Array [],
-            "selectionstep1": Array [],
-          },
-          "votesCountByStepId": Object {
-            "2": 0,
-          },
+          "id": "1",
         }
       }
     />
-    <Connect(ProposalPreviewBody)
+    <Relay(Connect(ProposalPreviewBody))
       proposal={
         Object {
+          "$refType": null,
           "author": Object {
             "vip": false,
           },
-          "category": Object {},
-          "commentsCount": 5,
-          "referer": "http://capco.test",
-          "selections": Array [],
-          "viewerCanSeeEvaluation": true,
-          "votableStepId": "step3",
-          "votesByStepId": Object {
-            "collectstep1": Array [],
-            "selectionstep1": Array [],
-          },
-          "votesCountByStepId": Object {
-            "2": 0,
-          },
+          "id": "1",
         }
       }
-      showNullEstimation={true}
-      showThemes={true}
       step={
         Object {
-          "id": "step3",
-          "voteThreshold": 0,
-          "voteType": 2,
+          "$refType": null,
         }
       }
+      viewer={null}
     />
-    <ProposalPreviewFooter
+    <Relay(ProposalPreviewFooter)
       proposal={
         Object {
+          "$refType": null,
           "author": Object {
             "vip": false,
           },
-          "category": Object {},
-          "commentsCount": 5,
-          "referer": "http://capco.test",
-          "selections": Array [],
-          "viewerCanSeeEvaluation": true,
-          "votableStepId": "step3",
-          "votesByStepId": Object {
-            "collectstep1": Array [],
-            "selectionstep1": Array [],
-          },
-          "votesCountByStepId": Object {
-            "2": 0,
-          },
+          "id": "1",
         }
       }
-      showComments={true}
-      showVotes={true}
-      stepId="step3"
     />
-    <ProposalStatus
+    <Relay(ProposalStatus)
       proposal={
         Object {
+          "$refType": null,
           "author": Object {
             "vip": false,
           },
-          "category": Object {},
-          "commentsCount": 5,
-          "referer": "http://capco.test",
-          "selections": Array [],
-          "viewerCanSeeEvaluation": true,
-          "votableStepId": "step3",
-          "votesByStepId": Object {
-            "collectstep1": Array [],
-            "selectionstep1": Array [],
-          },
-          "votesCountByStepId": Object {
-            "2": 0,
-          },
+          "id": "1",
         }
       }
-      stepId="step3"
+    />
+  </CardContainer>
+</Col>
+`;
+
+exports[`<ProposalPreview /> should render a proposal preview vip 1`] = `
+<Col
+  bsClass="col"
+  componentClass="li"
+  lg={3}
+  md={4}
+  sm={6}
+  xs={12}
+>
+  <CardContainer
+    className="bg-vip proposal-preview"
+    id="proposal-1"
+  >
+    <Relay(ProposalPreviewHeader)
+      proposal={
+        Object {
+          "$refType": null,
+          "author": Object {
+            "vip": true,
+          },
+          "id": "1",
+        }
+      }
+    />
+    <Relay(Connect(ProposalPreviewBody))
+      proposal={
+        Object {
+          "$refType": null,
+          "author": Object {
+            "vip": true,
+          },
+          "id": "1",
+        }
+      }
+      step={
+        Object {
+          "$refType": null,
+        }
+      }
+      viewer={null}
+    />
+    <Relay(ProposalPreviewFooter)
+      proposal={
+        Object {
+          "$refType": null,
+          "author": Object {
+            "vip": true,
+          },
+          "id": "1",
+        }
+      }
+    />
+    <Relay(ProposalStatus)
+      proposal={
+        Object {
+          "$refType": null,
+          "author": Object {
+            "vip": true,
+          },
+          "id": "1",
+        }
+      }
     />
   </CardContainer>
 </Col>

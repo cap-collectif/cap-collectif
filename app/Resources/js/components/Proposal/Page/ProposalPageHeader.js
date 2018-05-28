@@ -7,18 +7,20 @@ import moment from 'moment';
 import { createFragmentContainer, graphql } from 'react-relay';
 import UserAvatar from '../../User/UserAvatar';
 import UserLink from '../../User/UserLink';
-import ProposalVoteButtonWrapper from '../Vote/ProposalVoteButtonWrapper';
+import ProposalVoteModal from '../Vote/ProposalVoteModal';
+import ProposalVoteButtonWrapperFragment from '../Vote/ProposalVoteButtonWrapperFragment';
 import ProposalFollowButton from '../Follow/ProposalFollowButton';
-import type { Proposal } from '../../../redux/modules/proposal';
 import type { ProposalPageHeader_proposal } from './__generated__/ProposalPageHeader_proposal.graphql';
-import { type State } from '../../../types';
+import type { ProposalPageHeader_step } from './__generated__/ProposalPageHeader_step.graphql';
+import type { ProposalPageHeader_viewer } from './__generated__/ProposalPageHeader_viewer.graphql';
+import type { State } from '../../../types';
 
 type Props = {
   proposal: ProposalPageHeader_proposal,
+  viewer: ?ProposalPageHeader_viewer,
+  step: ?ProposalPageHeader_step,
   className: string,
   referer: string,
-  oldProposal: Proposal,
-  isAuthenticated: boolean,
 };
 
 export class ProposalPageHeader extends React.Component<Props> {
@@ -27,7 +29,7 @@ export class ProposalPageHeader extends React.Component<Props> {
   };
 
   render() {
-    const { proposal, oldProposal, className, referer, isAuthenticated } = this.props;
+    const { step, viewer, proposal, className, referer } = this.props;
     const createdDate = (
       <FormattedDate
         value={moment(proposal.createdAt)}
@@ -58,8 +60,7 @@ export class ProposalPageHeader extends React.Component<Props> {
       <div className={classNames(classes)}>
         <div>
           <a style={{ textDecoration: 'none' }} href={referer || proposal.show_url}>
-            <i className="cap cap-arrow-65-1 icon--black" />{' '}
-            {<FormattedMessage id="proposal.back" />}
+            <i className="cap cap-arrow-65-1 icon--black" /> <FormattedMessage id="proposal.back" />
           </a>
         </div>
         <h1 className="consultation__header__title h1">{proposal.title}</h1>
@@ -89,20 +90,23 @@ export class ProposalPageHeader extends React.Component<Props> {
           </div>
         </div>
         {proposal.publicationStatus !== 'DRAFT' && (
-          <ProposalVoteButtonWrapper
-            id="proposal-vote-btn"
-            proposal={oldProposal}
-            className="pull-right btn-lg"
-          />
+          <div className="proposal__buttons">
+            {step && (
+              // $FlowFixMe
+              <ProposalVoteButtonWrapperFragment
+                proposal={proposal}
+                step={step}
+                viewer={viewer}
+                id="proposal-vote-btn"
+              />
+            )}
+            {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
+            <ProposalFollowButton proposal={proposal} isAuthenticated={!!viewer} />
+          </div>
         )}
-        {proposal.publicationStatus !== 'DRAFT' && (
-          /* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */
-          <ProposalFollowButton
-            proposal={proposal}
-            isAuthenticated={isAuthenticated}
-            className="pull-right btn-lg"
-          />
-        )}
+        {viewer &&
+          proposal.publicationStatus !== 'DRAFT' &&
+          step && <ProposalVoteModal proposal={proposal} step={step} />}
       </div>
     );
   }
@@ -111,16 +115,34 @@ export class ProposalPageHeader extends React.Component<Props> {
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
   return {
     referer: state.proposal.referer,
-    isAuthenticated: state.user.user !== null,
   };
 };
 
 const container = connect(mapStateToProps)(ProposalPageHeader);
 
-export default createFragmentContainer(
-  container,
-  graphql`
-    fragment ProposalPageHeader_proposal on Proposal {
+export default createFragmentContainer(container, {
+  viewer: graphql`
+    fragment ProposalPageHeader_viewer on User
+      @argumentDefinitions(hasVotableStep: { type: "Boolean", defaultValue: true }) {
+      ...ProposalVoteButtonWrapperFragment_viewer
+        @arguments(stepId: $stepId)
+        @include(if: $hasVotableStep)
+    }
+  `,
+  step: graphql`
+    fragment ProposalPageHeader_step on ProposalStep
+      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
+      ...ProposalVoteButtonWrapperFragment_step
+      ...ProposalVoteModal_step @include(if: $isAuthenticated)
+    }
+  `,
+  proposal: graphql`
+    fragment ProposalPageHeader_proposal on Proposal
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+      id
+      ...ProposalVoteButtonWrapperFragment_proposal
+        @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
+      ...ProposalVoteModal_proposal @arguments(stepId: $stepId) @include(if: $isAuthenticated)
       ...ProposalFollowButton_proposal @arguments(isAuthenticated: $isAuthenticated)
       title
       theme {
@@ -139,4 +161,4 @@ export default createFragmentContainer(
       show_url
     }
   `,
-);
+});

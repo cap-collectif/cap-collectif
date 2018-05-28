@@ -4,70 +4,63 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { Row, Col, Tab, Nav, NavItem } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import type { ProposalPageTabs_proposal } from './__generated__/ProposalPageTabs_proposal.graphql';
-import { VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
+import type { ProposalPageTabs_viewer } from './__generated__/ProposalPageTabs_viewer.graphql';
+import type { ProposalPageTabs_step } from './__generated__/ProposalPageTabs_step.graphql';
 import ProposalPageContent from './ProposalPageContent';
 import ProposalPageLastNews from './ProposalPageLastNews';
-import ProposalPageVotes from './ProposalPageVotes';
+import ProposalVotesByStep from './ProposalVotesByStep';
 import ProposalPageFollowers from './ProposalPageFollowers';
 import ProposalPageBlog from './ProposalPageBlog';
 import ProposalPageEvaluation from './ProposalPageEvaluation';
-import ProposalVoteModal from '../Vote/ProposalVoteModal';
 import ProposalPageMetadata from './ProposalPageMetadata';
 import ProposalPageVoteThreshold from './ProposalPageVoteThreshold';
 import ProposalPageAdvancement from './ProposalPageAdvancement';
 import ProposalFusionList from './ProposalFusionList';
 import type { FeatureToggles } from '../../../types';
-import type { Proposal } from '../../../redux/modules/proposal';
 
 type Props = {
+  viewer: ?ProposalPageTabs_viewer,
+  step: ?ProposalPageTabs_step,
   proposal: ProposalPageTabs_proposal,
   form: Object,
-  oldProposal: Proposal,
   categories: Array<Object>,
-  steps: Array<Object>,
   features: FeatureToggles,
 };
 
+const getHashKey = (hash: string) => {
+  if (hash.indexOf('content') !== -1) {
+    return 'content';
+  }
+  if (hash.indexOf('evaluation') !== -1) {
+    return 'evaluation';
+  }
+  if (hash.indexOf('comments') !== -1) {
+    return 'comments';
+  }
+  if (hash.indexOf('votes') !== -1) {
+    return 'votes';
+  }
+  if (hash.indexOf('followers') !== -1) {
+    return 'followers';
+  }
+  return 'content';
+};
+
 export class ProposalPageTabs extends React.Component<Props> {
-  getHashKey(hash: string) {
-    if (hash.indexOf('content') !== -1) {
-      return 'content';
-    }
-    if (hash.indexOf('evaluation') !== -1) {
-      return 'evaluation';
-    }
-    if (hash.indexOf('comments') !== -1) {
-      return 'comments';
-    }
-    if (hash.indexOf('votes') !== -1) {
-      return 'votes';
-    }
-    if (hash.indexOf('followers') !== -1) {
-      return 'followers';
+  getDefaultKey() {
+    const hash = typeof window !== 'undefined' ? window.location.hash : null;
+    if (hash) {
+      return getHashKey(hash);
     }
     return 'content';
   }
 
-  getDefaultKey() {
-    const hash = typeof window !== 'undefined' ? window.location.hash : null;
-    if (hash) {
-      return this.getHashKey(hash);
-    }
-    return 'content';
-  }
   render() {
-    const { proposal, oldProposal, form, steps, features, categories } = this.props;
-    const currentVotableStep = oldProposal.votableStepId
-      ? steps.filter(s => s.id === oldProposal.votableStepId)[0]
-      : null;
-    // $FlowFixMe
-    const votesCount = Object.values(oldProposal.votesCountByStepId).reduce(
-      (a, b) => parseInt(a, 10) + parseInt(b, 10),
-      0,
-    );
+    const { viewer, proposal, step, form, features, categories } = this.props;
+    const currentVotableStep = proposal.currentVotableStep;
+    const votesCount = proposal.allVotes.totalCount;
     const showVotesTab = votesCount > 0 || currentVotableStep !== null;
-    const votableSteps = steps.filter(step => step.votable);
-    const isPageAdmin = false;
+
     return (
       <Tab.Container
         id="proposal-page-tabs"
@@ -82,7 +75,7 @@ export class ProposalPageTabs extends React.Component<Props> {
                 </NavItem>
                 <NavItem eventKey="blog" className="tab">
                   <FormattedMessage id="proposal.tabs.blog" />
-                  <span className="badge">{proposal.postsCount}</span>
+                  <span className="badge">{proposal.news.totalCount}</span>
                 </NavItem>
                 {proposal.viewerCanSeeEvaluation && (
                   <NavItem eventKey="evaluation" className="tab">
@@ -97,7 +90,7 @@ export class ProposalPageTabs extends React.Component<Props> {
                 )}
                 <NavItem eventKey="followers" className="tab">
                   <FormattedMessage id="proposal.tabs.followers" />
-                  <span className="badge">{proposal.followerConnection.totalCount}</span>
+                  <span className="badge">{proposal.allFollowers.totalCount}</span>
                 </NavItem>
               </Nav>
             </div>
@@ -109,35 +102,45 @@ export class ProposalPageTabs extends React.Component<Props> {
                   <Col xs={12} sm={8}>
                     {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
                     <ProposalFusionList proposal={proposal} />
-                    <ProposalPageLastNews proposal={oldProposal} />
+                    {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
+                    <ProposalPageLastNews proposal={proposal} />
+                    {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
                     <ProposalPageContent
-                      proposal={oldProposal}
+                      proposal={proposal}
+                      step={step}
                       form={form}
+                      viewer={viewer}
                       categories={categories}
                     />
                   </Col>
                   <Col xs={12} sm={4}>
+                    {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
                     <ProposalPageMetadata
-                      proposal={oldProposal}
+                      proposal={proposal}
                       showDistricts={features.districts}
                       showCategories={form.usingCategories}
                       showNullEstimation={
-                        !!(currentVotableStep && currentVotableStep.voteType === VOTE_TYPE_BUDGET)
+                        !!(currentVotableStep && currentVotableStep.voteType === 'BUDGET')
                       }
                       showThemes={features.themes && form.usingThemes}
                     />
                     <br />
-                    {currentVotableStep &&
+                    {currentVotableStep !== null &&
+                      typeof currentVotableStep !== 'undefined' &&
+                      currentVotableStep.voteThreshold !== null &&
+                      typeof currentVotableStep.voteThreshold !== 'undefined' &&
                       currentVotableStep.voteThreshold > 0 && (
                         <span>
+                          {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
                           <ProposalPageVoteThreshold
-                            proposal={oldProposal}
+                            proposal={proposal}
                             step={currentVotableStep}
                           />
                           <br />
                         </span>
                       )}
-                    <ProposalPageAdvancement proposal={oldProposal} />
+                    {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
+                    <ProposalPageAdvancement proposal={proposal} />
                   </Col>
                 </Row>
               </Tab.Pane>
@@ -145,18 +148,17 @@ export class ProposalPageTabs extends React.Component<Props> {
                 <Tab.Pane eventKey="votes">
                   <Tab.Container id="tab-votesByStep" defaultActiveKey={0}>
                     <Row className="clearfix">
-                      <Nav bsStyle="pills">
-                        {votableSteps.map((step, index) => (
+                      <Nav bsStyle="pills" className="mb-20">
+                        {proposal.votableSteps.map((votableStep, index) => (
                           <NavItem key={index} eventKey={index}>
-                            {step.title}{' '}
-                            <span className="badge">{oldProposal.votesCountByStepId[step.id]}</span>
+                            {votableStep.title}
                           </NavItem>
                         ))}
                       </Nav>
                       <Tab.Content animation={false}>
-                        {votableSteps.map((step, index) => (
+                        {proposal.votableSteps.map((votableStep, index) => (
                           <Tab.Pane key={index} eventKey={index}>
-                            <ProposalPageVotes stepId={step.id} proposal={oldProposal} />
+                            <ProposalVotesByStep stepId={votableStep.id} proposal={proposal} />
                           </Tab.Pane>
                         ))}
                       </Tab.Content>
@@ -165,7 +167,8 @@ export class ProposalPageTabs extends React.Component<Props> {
                 </Tab.Pane>
               )}
               <Tab.Pane eventKey="blog">
-                <ProposalPageBlog />
+                {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
+                <ProposalPageBlog proposal={proposal} />
               </Tab.Pane>
               <Tab.Pane eventKey="evaluation">
                 {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
@@ -173,30 +176,59 @@ export class ProposalPageTabs extends React.Component<Props> {
               </Tab.Pane>
               <Tab.Pane eventKey="followers">
                 {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
-                <ProposalPageFollowers proposal={proposal} pageAdmin={isPageAdmin} />
+                <ProposalPageFollowers proposal={proposal} pageAdmin={false} />
               </Tab.Pane>
             </Tab.Content>
           </div>
-          {!oldProposal.isDraft &&
-            currentVotableStep && <ProposalVoteModal proposal={oldProposal} />}
         </div>
       </Tab.Container>
     );
   }
 }
 
-export default createFragmentContainer(
-  ProposalPageTabs,
-  graphql`
+export default createFragmentContainer(ProposalPageTabs, {
+  step: graphql`
+    fragment ProposalPageTabs_step on ProposalStep {
+      ...ProposalPageContent_step
+    }
+  `,
+  viewer: graphql`
+    fragment ProposalPageTabs_viewer on User {
+      ...ProposalPageContent_viewer @arguments(hasVotableStep: $hasVotableStep)
+    }
+  `,
+  proposal: graphql`
     fragment ProposalPageTabs_proposal on Proposal {
+      id
       ...ProposalPageFollowers_proposal
       ...ProposalPageEvaluation_proposal
       ...ProposalFusionList_proposal
-      postsCount
+      ...ProposalPageMetadata_proposal
+      ...ProposalPageLastNews_proposal
+      ...ProposalPageBlog_proposal
+      ...ProposalPageContent_proposal
+      ...ProposalPageAdvancement_proposal
+      ...ProposalPageVoteThreshold_proposal
+      allVotes: votes(first: 0) {
+        totalCount
+      }
+      news {
+        totalCount
+      }
+      currentVotableStep {
+        ...ProposalPageVoteThreshold_step
+        id
+        voteThreshold
+        voteType
+      }
+      votableSteps {
+        id
+        title
+      }
       viewerCanSeeEvaluation
-      followerConnection(first: $count, after: $cursor) {
+      allFollowers: followerConnection(first: 0) {
         totalCount
       }
     }
   `,
-);
+});

@@ -4,3 +4,5 @@ DeleteProposalPayload:
         fields:
             proposal:
                 type: "Proposal!"
+            step:
+                type: "CollectStep!"

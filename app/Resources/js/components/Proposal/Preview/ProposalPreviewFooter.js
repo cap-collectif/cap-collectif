@@ -1,24 +1,20 @@
 // @flow
 import * as React from 'react';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
+import type { ProposalPreviewFooter_proposal } from './__generated__/ProposalPreviewFooter_proposal.graphql';
 
 type Props = {
-  proposal: Object,
-  stepId: string,
-  showVotes?: boolean,
-  showComments?: boolean,
+  proposal: ProposalPreviewFooter_proposal,
 };
 
 export class ProposalPreviewFooter extends React.Component<Props> {
-  static defaultProps = {
-    showVotes: false,
-    showComments: false,
-  };
-
   render() {
-    const { proposal, stepId, showVotes, showComments } = this.props;
-    const votesCount = proposal.votesCountByStepId[stepId];
+    const { proposal } = this.props;
+
+    const showComments = proposal.form.commentable;
+    const showVotes = proposal.allVotesOnStep !== null;
 
     if (!showVotes && !showComments) {
       return null;
@@ -45,14 +41,14 @@ export class ProposalPreviewFooter extends React.Component<Props> {
             </div>
           </div>
         )}
-        {showVotes && (
+        {proposal.allVotesOnStep && (
           <div className="card__counter card__counter-votes">
-            <div className="card__counter__value">{votesCount}</div>
+            <div className="card__counter__value">{proposal.allVotesOnStep.totalCount}</div>
             <div>
               <FormattedMessage
                 id="proposal.vote.count_no_nb"
                 values={{
-                  count: votesCount,
+                  count: proposal.allVotesOnStep.totalCount,
                 }}
               />
             </div>
@@ -63,4 +59,21 @@ export class ProposalPreviewFooter extends React.Component<Props> {
   }
 }
 
-export default ProposalPreviewFooter;
+export default createFragmentContainer(ProposalPreviewFooter, {
+  proposal: graphql`
+    fragment ProposalPreviewFooter_proposal on Proposal
+      @argumentDefinitions(
+        stepId: { type: "ID!", nonNull: true }
+        isProfileView: { type: "Boolean", defaultValue: false }
+      ) {
+      id
+      form {
+        commentable
+      }
+      commentsCount
+      allVotesOnStep: votes(stepId: $stepId, first: 0) @skip(if: $isProfileView) {
+        totalCount
+      }
+    }
+  `,
+});

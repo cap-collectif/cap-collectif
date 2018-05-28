@@ -9,16 +9,9 @@
 {% block jumbotron %}{% endblock %}
 
 {% block reduxStore %}
-  {% set initialState = {
-    'proposal': {
-      'userVotesByStepId': project|proposal_votes_list(app.user),
-      'creditsLeftByStepId': project|credits_list_list(app.user),
-      'proposalsById': [],
-    }
-  } %}
-  {% include '@CapcoApp/redux_store.html.twig' with {'data' : initialState} %}
+  {% include '@CapcoApp/redux_store.html.twig' %}
 {% endblock %}
 
 {% block body %}
-    {{ react_render_component('ProposalsUserVotesPageApp', {'props': props }) }}
+    {{ react_render_component('ProposalsUserVotesPageApp', {'props': { 'projectId': project.id } }) }}
 {% endblock %}
