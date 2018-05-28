@@ -59,6 +59,56 @@ form {
     }
 }
 
+/* ======================== Toggle =========================*/
+
+.toggle-group {
+    label {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    @media (max-width: $screen-sm-max) {
+        label {
+            min-width: 123px;
+            justify-content: space-between;
+        }
+    }
+
+    .react-toggle {
+        .react-toggle-track {
+            width: 40px;
+            height: 20px;
+
+            svg {
+                display: none;
+            }
+        }
+
+        .react-toggle-thumb {
+            width: 18px;
+            height: 18px;
+        }
+
+        .react-toggle-track, &:hover .react-toggle-track {
+            background-color: $danger-color;
+        }
+
+        .react-toggle-thumb {
+            border-color: $danger-color;
+        }
+    }
+
+    .react-toggle--checked {
+        .react-toggle-track, &:hover .react-toggle-track {
+            background-color: $success-color;
+        }
+
+        .react-toggle-thumb {
+            border-color: $success-color;
+            left: 21px;
+        }
+    }
+}
 
 /* ======================== Feedbacks =========================*/
 

@@ -3,13 +3,17 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalAdminPageTabs } from './ProposalAdminPageTabs';
-import { intlMock } from '../../../mocks';
+import { intlMock, $refType, $fragmentRefs } from '../../../mocks';
 
 describe('<ProposalAdminPageTabs />', () => {
   const props = {
     intl: intlMock,
     proposal: {
-      followerConnection: {
+      $refType,
+      $fragmentRefs,
+      reference: '1-1',
+      show_url: '',
+      allFollowers: {
         totalCount: 169,
       },
     },

@@ -106,9 +106,3 @@ services:
       arguments: ["@capco.project_stats.resolver"]
       tags:
         - { name: twig.extension }
-
-  capco.twig.proposals:
-      class: Capco\AppBundle\Twig\ProposalExtension
-      arguments: ["@capco.proposal_votes.resolver"]
-      tags:
-        - { name: twig.extension }

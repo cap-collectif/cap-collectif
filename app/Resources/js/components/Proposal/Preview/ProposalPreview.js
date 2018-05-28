@@ -1,36 +1,25 @@
 // @flow
 import React from 'react';
 import { Col } from 'react-bootstrap';
+import { graphql, createFragmentContainer } from 'react-relay';
 import ProposalPreviewHeader from './ProposalPreviewHeader';
 import ProposalPreviewBody from './ProposalPreviewBody';
 import ProposalPreviewFooter from './ProposalPreviewFooter';
 import ProposalStatus from './ProposalStatus';
-import { VOTE_TYPE_DISABLED, VOTE_TYPE_BUDGET } from '../../../constants/ProposalConstants';
-import type { Proposal } from '../../../redux/modules/proposal';
-import type { Uuid } from '../../../types';
 import { CardContainer } from '../../Ui/Card/CardContainer';
-
-type Step = {
-  id: Uuid,
-  voteType: number,
-  voteThreshold: number,
-};
+import type { ProposalPreview_proposal } from './__generated__/ProposalPreview_proposal.graphql';
+import type { ProposalPreview_step } from './__generated__/ProposalPreview_step.graphql';
+import type { ProposalPreview_viewer } from './__generated__/ProposalPreview_viewer.graphql';
 
 type Props = {
-  proposal: Proposal,
-  step: Step,
-  showThemes: boolean,
-  showComments: boolean,
+  proposal: ProposalPreview_proposal,
+  step: ?ProposalPreview_step,
+  viewer: ?ProposalPreview_viewer,
 };
 
 export class ProposalPreview extends React.Component<Props> {
-  static defaultProps = {
-    showComments: false,
-    showThemes: false,
-  };
   render() {
-    const { proposal, step, showThemes, showComments } = this.props;
-    const voteType = step.voteType;
+    const { proposal, step, viewer } = this.props;
 
     return (
       <Col componentClass="li" xs={12} sm={6} md={4} lg={3}>
@@ -39,24 +28,46 @@ export class ProposalPreview extends React.Component<Props> {
           className={
             proposal.author && proposal.author.vip ? 'bg-vip proposal-preview' : 'proposal-preview'
           }>
+          {/* $FlowFixMe */}
           <ProposalPreviewHeader proposal={proposal} />
-          <ProposalPreviewBody
-            proposal={proposal}
-            showNullEstimation={voteType === VOTE_TYPE_BUDGET}
-            step={step}
-            showThemes={showThemes}
-          />
-          <ProposalPreviewFooter
-            proposal={proposal}
-            showVotes={voteType !== VOTE_TYPE_DISABLED}
-            showComments={showComments}
-            stepId={step.id}
-          />
-          <ProposalStatus proposal={proposal} stepId={step.id} />
+          <ProposalPreviewBody proposal={proposal} step={step} viewer={viewer} />
+          {/* $FlowFixMe */}
+          {step && <ProposalPreviewFooter proposal={proposal} />}
+          {/* $FlowFixMe */}
+          <ProposalStatus proposal={proposal} />
         </CardContainer>
       </Col>
     );
   }
 }
 
-export default ProposalPreview;
+export default createFragmentContainer(ProposalPreview, {
+  viewer: graphql`
+    fragment ProposalPreview_viewer on User {
+      ...ProposalPreviewBody_viewer
+    }
+  `,
+  step: graphql`
+    fragment ProposalPreview_step on Step {
+      ...ProposalPreviewBody_step
+    }
+  `,
+  proposal: graphql`
+    fragment ProposalPreview_proposal on Proposal
+      @argumentDefinitions(
+        stepId: { type: "ID", nonNull: false }
+        isAuthenticated: { type: "Boolean!" }
+        isProfileView: { type: "Boolean", defaultValue: false }
+      ) {
+      id
+      author {
+        vip
+      }
+      ...ProposalPreviewHeader_proposal
+      ...ProposalPreviewFooter_proposal @arguments(stepId: $stepId, isProfileView: $isProfileView)
+      ...ProposalPreviewBody_proposal
+        @arguments(isAuthenticated: $isAuthenticated, isProfileView: $isProfileView)
+      ...ProposalStatus_proposal @arguments(stepId: $stepId, isProfileView: $isProfileView)
+    }
+  `,
+});

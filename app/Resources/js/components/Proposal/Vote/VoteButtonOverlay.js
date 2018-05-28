@@ -1,32 +1,33 @@
-import React, { PropTypes, cloneElement } from 'react';
+// @flow
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
+import type { VoteButtonOverlay_step } from './__generated__/VoteButtonOverlay_step.graphql';
 
-const VoteButtonOverlay = React.createClass({
-  propTypes: {
-    children: PropTypes.element.isRequired,
-    userHasVote: PropTypes.bool.isRequired,
-    popoverId: PropTypes.string.isRequired,
-    hasReachedLimit: PropTypes.bool,
-    hasUserEnoughCredits: PropTypes.bool,
-    limit: PropTypes.number,
-  },
+type Props = {
+  children: React.Node,
+  userHasVote: boolean,
+  popoverId: string,
+  hasReachedLimit: boolean,
+  hasUserEnoughCredits: boolean,
+  step: VoteButtonOverlay_step,
+};
 
-  getDefaultProps() {
-    return {
-      hasReachedLimit: false,
-      hasUserEnoughCredits: true,
-    };
-  },
+export class VoteButtonOverlay extends React.Component<Props> {
+  static defaultProps = {
+    hasReachedLimit: false,
+    hasUserEnoughCredits: true,
+  };
 
   render() {
     const {
       children,
+      step,
       popoverId,
       userHasVote,
       hasReachedLimit,
       hasUserEnoughCredits,
-      limit,
     } = this.props;
     if (userHasVote || (hasUserEnoughCredits && !hasReachedLimit)) {
       return children;
@@ -42,7 +43,7 @@ const VoteButtonOverlay = React.createClass({
         <FormattedMessage
           id="proposal.vote.popover.limit_reached_and_not_enough_credits_text"
           values={{
-            num: limit,
+            num: step.votesLimit,
           }}
         />
       );
@@ -59,11 +60,15 @@ const VoteButtonOverlay = React.createClass({
         <FormattedMessage
           id="proposal.vote.popover.limit_reached_text"
           values={{
-            num: limit,
+            num: step.votesLimit,
           }}
         />
       );
-      help = <FormattedMessage id="proposal.vote.popover.limit_reached_help" />;
+      help = (
+        <span>
+          <FormattedMessage id="proposal.vote.popover.limit_reached_help" />
+        </span>
+      );
     }
     const overlay = (
       <Popover id={popoverId} title={title}>
@@ -74,16 +79,25 @@ const VoteButtonOverlay = React.createClass({
       </Popover>
     );
     return (
-      <OverlayTrigger placement="top" overlay={overlay}>
+      <OverlayTrigger placement="top" overlay={overlay} rootClose>
         <span style={{ cursor: 'not-allowed' }}>
-          {cloneElement(children, {
+          {/* $FlowFixMe */
+          React.cloneElement(children, {
             disabled: true,
+            /* $FlowFixMe */
             style: { ...children.props.style, pointerEvents: 'none' },
           })}
         </span>
       </OverlayTrigger>
     );
-  },
-});
+  }
+}
 
-export default VoteButtonOverlay;
+export default createFragmentContainer(VoteButtonOverlay, {
+  step: graphql`
+    fragment VoteButtonOverlay_step on ProposalStep {
+      id
+      votesLimit
+    }
+  `,
+});

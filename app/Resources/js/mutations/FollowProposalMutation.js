@@ -13,9 +13,7 @@ const mutation = graphql`
       proposal {
         id
         ...ProposalFollowButton_proposal
-        followerConnection {
-          totalCount
-        }
+        ...ProposalPageFollowers_proposal
       }
       followerEdge {
         node {

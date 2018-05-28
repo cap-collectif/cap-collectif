@@ -3,23 +3,27 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalAdminFollowers } from './ProposalAdminFollowers';
-import { intlMock } from '../../../mocks';
+import { intlMock, $fragmentRefs, $refType } from '../../../mocks';
 
 describe('<ProposalAdminFollowers />', () => {
-  // $FlowFixMe $refType
   const proposalWithUsers = {
+    $refType,
+    $fragmentRefs,
     id: 'proposal1',
-    followerConnection: {
+    allFollowers: {
       totalCount: 3,
     },
   };
-  // $FlowFixMe $refType
+
   const proposalWithoutUsers = {
+    $refType,
+    $fragmentRefs,
     id: 'proposal1',
-    followerConnection: {
+    allFollowers: {
       totalCount: 0,
     },
   };
+
   const props = {
     intl: intlMock,
   };

@@ -30,7 +30,6 @@ describe('<ProposalFollowButton />', () => {
   const props = {
     className: '',
     referer: 'http://capco.test',
-    oldProposal: {},
   };
 
   it('should render a button to follow a proposal', () => {

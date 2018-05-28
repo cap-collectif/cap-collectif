@@ -127,3 +127,21 @@ Capco\AppBundle\Entity\Project:
     themes: ['@theme1']
     exportable: true
     publishedAt: <dateTimeBetween('-50 days', 'now')>
+  p15:
+    id: 'project15'
+    title: BP avec vote classement
+    projectType: '@projectType4'
+    Author: '@user4'
+    isEnabled: true
+    themes: []
+    exportable: true
+    publishedAt: <dateTimeBetween('-50 days', 'now')>
+  p16:
+    id: 'project16'
+    title: Le P16 un projet à base de riz
+    projectType: '@projectType4'
+    Author: '@user4'
+    isEnabled: true
+    themes: ['@theme3']
+    exportable: true
+    publishedAt: <dateTimeBetween('-50 days', 'now')>

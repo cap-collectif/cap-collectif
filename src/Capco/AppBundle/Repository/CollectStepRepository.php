@@ -6,9 +6,6 @@ use Capco\AppBundle\Entity\Project;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-/**
- * CollectStepRepository.
- */
 class CollectStepRepository extends EntityRepository
 {
     /**
@@ -33,14 +30,7 @@ class CollectStepRepository extends EntityRepository
         return new Paginator($qb, $fetchJoin = true);
     }
 
-    /**
-     * Get all collect steps for project.
-     *
-     * @param Project $project
-     *
-     * @return array
-     */
-    public function getCollectStepsForProject(Project $project)
+    public function getCollectStepsForProject(Project $project): array
     {
         $qb = $this
             ->getIsEnabledQueryBuilder()

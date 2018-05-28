@@ -33,7 +33,6 @@ class ProposalController extends Controller
         }
 
         $serializer = $this->get('serializer');
-
         $urlResolver = $this->get('capco.url.resolver');
 
         $stepUrls = $project->getSteps()->map(function (ProjectAbstractStep $step) use ($urlResolver) {
@@ -46,7 +45,10 @@ class ProposalController extends Controller
                 : $urlResolver->getStepUrl($currentStep, UrlGeneratorInterface::ABSOLUTE_URL);
 
         $proposalForm = $currentStep->getProposalForm();
+        $votableStep = $this->get('capco\appbundle\graphql\resolver\proposal\proposalcurrentvotablestepresolver')->__invoke($proposal);
         $props = $serializer->serialize([
+            'proposalId' => $proposal->getId(),
+            'currentVotableStepId' => $votableStep ? $votableStep->getId() : null,
             'form' => $proposalForm,
             'categories' => $proposalForm ? $proposalForm->getCategories() : [],
         ], 'json', SerializationContext::create()
@@ -65,33 +67,11 @@ class ProposalController extends Controller
             ]))
         ;
 
-        $proposalSerialized = $serializer->serialize($proposal, 'json',
-          SerializationContext::create()
-            ->setSerializeNull(true)
-            ->setGroups([
-                'ProposalFusions',
-                'ProposalSelectionVotes',
-                'ProposalCollectVotes',
-                'UsersInfos',
-                'UserMedias',
-                'Proposals',
-                'ProposalCategories',
-                'ThemeDetails',
-                'ProposalUserData',
-                'VoteThreshold',
-            ]))
-        ;
-
-        $proposalSerializedAsArray = json_decode($proposalSerialized, true);
-        $proposalSerializedAsArray['postsCount'] = $this->get('capco.blog.post.repository')->countPublishedPostsByProposal($proposal);
-        $proposalSerializedAsArray['viewerCanSeeEvaluation'] = $this->get('capco.resolver.proposals')->resolveViewerCanSeeEvaluation($proposal, $this->getUser());
-
         return $this->render('CapcoAppBundle:Proposal:show.html.twig', [
             'project' => $project,
             'currentStep' => $currentStep,
             'props' => $props,
             'proposal' => $proposal,
-            'proposalSerialized' => $proposalSerializedAsArray,
             'referer' => $refererUri,
         ]);
     }

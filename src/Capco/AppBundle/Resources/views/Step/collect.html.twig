@@ -16,15 +16,7 @@
 {% endblock %}
 
 {% block reduxStore %}
-  {% set initialState = {
-    'proposal': {
-      'userVotesByStepId': project|proposal_votes_list(app.user),
-      'creditsLeftByStepId': project|credits_list_list(app.user),
-      'proposalsById': [],
-      'proposalShowedId': [],
-    }
-  } %}
-  {% include '@CapcoApp/redux_store.html.twig' with {'data' : initialState, 'project': project} %}
+  {% include '@CapcoApp/redux_store.html.twig' with {'project': project} %}
 {% endblock %}
 
 {% block title %}

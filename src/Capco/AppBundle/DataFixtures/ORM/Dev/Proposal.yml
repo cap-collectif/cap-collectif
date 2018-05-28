@@ -332,12 +332,30 @@ Capco\AppBundle\Entity\Proposal:
     author: '@user4'
     proposalForm: '@proposalFormVote'
     reference: 667
-  proposal{669..770}:
-    id: proposal<current()>
-    title: Proposition vraiment intéressante <current()>
+  proposal24:
+    id: proposal24
+    title: Proposition 1
     body: <p><text(100)></p>
     enabled: true
     isTrashed: false
-    author: '@user4'
-    proposalForm: '@proposalFormVote'
-    reference: <current()>
+    author: '@user1'
+    proposalForm: '@proposalFormVoteClassement'
+    reference: 1
+  proposal25:
+    id: proposal25
+    title: Proposition 2
+    body: <p><text(100)></p>
+    enabled: true
+    isTrashed: false
+    author: '@user1'
+    proposalForm: '@proposalFormVoteClassement'
+    reference: 2
+  proposal26:
+    id: proposal26
+    title: Proposition 3
+    body: <p><text(100)></p>
+    enabled: true
+    isTrashed: false
+    author: '@user1'
+    proposalForm: '@proposalFormVoteClassement'
+    reference: 3

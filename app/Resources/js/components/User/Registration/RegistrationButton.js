@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+// @flow
+import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
@@ -6,26 +7,24 @@ import RegistrationModal from './RegistrationModal';
 import { showRegistrationModal } from '../../../redux/modules/user';
 import type { State, Dispatch } from '../../../types';
 
-export const RegistrationButton = React.createClass({
-  propTypes: {
-    features: PropTypes.object.isRequired,
-    style: PropTypes.object,
-    user: PropTypes.object,
-    className: PropTypes.string,
-    bsStyle: PropTypes.string,
-    buttonStyle: PropTypes.object,
-    openRegistrationModal: PropTypes.func.isRequired,
-  },
+type Props = {
+  features: Object,
+  style: ?Object,
+  user: ?Object,
+  className: string,
+  bsStyle: ?string,
+  buttonStyle: ?Object,
+  openRegistrationModal: () => void,
+};
 
-  getDefaultProps() {
-    return {
-      style: {},
-      buttonStyle: {},
-      user: null,
-      className: '',
-      bsStyle: 'primary',
-    };
-  },
+export class RegistrationButton extends React.Component<Props> {
+  static defaultProps = {
+    style: {},
+    buttonStyle: {},
+    user: null,
+    className: '',
+    bsStyle: 'primary',
+  };
 
   render() {
     const {
@@ -52,8 +51,8 @@ export const RegistrationButton = React.createClass({
         <RegistrationModal />
       </span>
     );
-  },
-});
+  }
+}
 
 const mapStateToProps = (state: State) => ({
   features: state.default.features,

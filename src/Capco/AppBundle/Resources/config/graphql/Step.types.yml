@@ -10,3 +10,6 @@ Step:
               type: "String!"
             title:
               type: "String!"
+            show_url:
+              type: "String!"
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\StepUrlResolver", [value])'

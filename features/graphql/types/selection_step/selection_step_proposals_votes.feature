@@ -16,7 +16,7 @@ Scenario: Admin wants to get votes for a proposal in a selection step
                   edges {
                       node {
                           id
-                          votes(first: $count, step: $selectionStepId, orderBy: $orderBy) {
+                          votes(first: $count, stepId: $selectionStepId, orderBy: $orderBy) {
                               totalCount
                               edges {
                                 node {
@@ -49,15 +49,8 @@ Scenario: Admin wants to get votes for a proposal in a selection step
                         "node": {
                             "id": @string@,
                             "votes": {
-                                "totalCount": 46,
-                                "edges": [
-                                    {
-                                        "node": {
-                                            "id": @string@
-                                        }
-                                    },
-                                    @...@
-                                ]
+                                "totalCount": @integer@,
+                                "edges": @array@
                             }
                         }
                     },
