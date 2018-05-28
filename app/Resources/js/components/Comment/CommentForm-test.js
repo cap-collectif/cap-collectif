@@ -26,11 +26,13 @@ const userProps = {
 describe('<CommentForm />', () => {
   it('should render correctly', () => {
     const wrapper = shallow(<CommentForm {...props} user={false} />);
+    wrapper.setState({ expanded: true });
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render correctly with user', () => {
     const wrapper = shallow(<CommentForm {...props} {...userProps} />);
+    wrapper.setState({ expanded: true });
     expect(wrapper).toMatchSnapshot();
   });
 });

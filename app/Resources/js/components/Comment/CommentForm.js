@@ -79,16 +79,16 @@ export class CommentForm extends React.Component<Props, State> {
     autosize(ReactDOM.findDOMNode(this.refs.body));
   }
 
-  expand() {
+  expand = () => {
     const { comment } = this.props;
 
-    if (comment && comment.length <= 1 && this.state.expanded === true) {
+    if (comment && comment.length === 0 && this.state.expanded === true) {
       this.setState({ expanded: false });
     }
 
-    if (comment && comment.length >= 2 && this.state.expanded === false)
+    if (comment && comment.length >= 1 && this.state.expanded === false)
       this.setState({ expanded: true });
-  }
+  };
 
   renderAnonymous() {
     const { user, submitting, pristine, invalid } = this.props;
@@ -196,7 +196,7 @@ export class CommentForm extends React.Component<Props, State> {
               component={renderComponent}
               aria-label={intl.formatMessage({ id: 'comment.write' })}
               rows="2"
-              onChange={this.expand()}
+              onChange={this.expand}
               placeholder="comment.write"
             />
             {this.renderCommentButton()}
