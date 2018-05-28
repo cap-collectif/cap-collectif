@@ -10,4 +10,3 @@ Requirement:
                 type: "Boolean!"
                 access: "@hasRole=('ROLE_USER')"
                 description: "Does the viewer meets the requirement ?"
-                
