@@ -41,10 +41,7 @@ var cookieMonster = function() {
     if (consentCookie === false) {
       if (analyticConsent === true) {
         executeAnalyticScript();
-        return;
       }
-      // so do Not Track Is Activated
-      hideBanner();
       return;
     }
 
@@ -72,15 +69,9 @@ var cookieMonster = function() {
     if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
       if (isDoNotTrackActive()) {
         hideBanner();
-        document.removeEventListener('click', onDocumentClick, false);
-        document.removeEventListener('scroll', onDocumentClick, false);
-        Cookies.set('hasFullConsent', false, { expires: 395 });
-
         return;
       }
-      if (!Cookies.getJSON('hasFullConsent')) {
-        considerFullConsent();
-      }
+      considerFullConsent();
     }
   }
 
@@ -99,7 +90,6 @@ var cookieMonster = function() {
       return;
     }
     if (isDoNotTrackActive()) {
-      Cookies.set('hasFullConsent', false, { expires: 395 });
       hideBanner();
       return;
     }
