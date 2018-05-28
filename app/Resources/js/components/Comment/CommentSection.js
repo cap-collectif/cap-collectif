@@ -83,11 +83,6 @@ const CommentSection = React.createClass({
     );
   },
 
-  comment(data) {
-    const { object, uri } = this.props;
-    return CommentActions.create(uri, object, data);
-  },
-
   updateSelectedValue() {
     this.setState({
       filter: $(ReactDOM.findDOMNode(this.refs.filter)).val(),
@@ -171,6 +166,8 @@ const CommentSection = React.createClass({
   },
 
   render() {
+    const { uri, object } = this.props;
+
     return (
       <div className="comments__section">
         <FlashMessages errors={this.state.messages.errors} success={this.state.messages.success} />
@@ -189,7 +186,7 @@ const CommentSection = React.createClass({
           {this.renderFilter()}
         </Row>
         <Loader show={this.state.isLoading} />
-        <CommentForm comment={this.comment} focus={false} />
+        <CommentForm uri={uri} object={object} />
         <CommentList
           {...this.props}
           comments={this.state.comments}

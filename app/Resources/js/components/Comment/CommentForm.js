@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { reduxForm, Field, formValueSelector } from 'redux-form';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
 import classNames from 'classnames';
 import autosize from 'autosize';
 import { Row, Col, Button } from 'react-bootstrap';
@@ -11,18 +11,18 @@ import RegistrationButton from '../User/Registration/RegistrationButton';
 import LoginButton from '../User/Login/LoginButton';
 import UserAvatar from '../User/UserAvatar';
 import type { GlobalState, Dispatch } from '../../types';
-// import { intlMock } from '../../mocks';
 import CommentActions from '../../actions/CommentActions';
 
 type Props = {
   isAnswer?: boolean,
-  focus?: boolean,
   comment: ?string,
-  object?: string,
-  uri?: string,
+  object: string,
+  uri: string,
   user?: Object,
-  intl: Object,
+  intl: IntlShape,
   submitting: boolean,
+  pristine: boolean,
+  invalid: boolean,
   handleSubmit?: Function,
 };
 
@@ -36,7 +36,6 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   if (user) {
     delete values.authorName;
     delete values.authorEmail;
-    return;
   }
 
   return CommentActions.create(uri, object, values);
@@ -89,7 +88,8 @@ export class CommentForm extends React.Component<Props, State> {
   }
 
   renderAnonymous() {
-    const { user, submitting } = this.props;
+    const { user, submitting, pristine, invalid } = this.props;
+
     if (!user) {
       return (
         <div>
@@ -134,7 +134,7 @@ export class CommentForm extends React.Component<Props, State> {
                 help={<FormattedMessage id="comment.email_info" />}
               />
               <Button
-                disabled={submitting}
+                disabled={pristine || invalid || submitting}
                 type="submit"
                 bsStyle="primary"
                 className="btn--comment">
@@ -152,14 +152,14 @@ export class CommentForm extends React.Component<Props, State> {
   }
 
   renderCommentButton() {
-    const { user, submitting } = this.props;
+    const { user, submitting, pristine, invalid } = this.props;
 
     if (this.state.expanded) {
       if (user) {
         return (
           <Button
             ref="loggedInComment"
-            disabled={submitting}
+            disabled={pristine || invalid || submitting}
             bsStyle="primary"
             type="submit"
             className="btn--comment">
@@ -181,8 +181,6 @@ export class CommentForm extends React.Component<Props, State> {
     const classes = classNames({
       'comment-answer-form': isAnswer,
     });
-
-    // console.warn(this.props.object, this.props.uri, "yolo");
 
     return (
       <div className={classes} style={{ padding: '5px' }}>

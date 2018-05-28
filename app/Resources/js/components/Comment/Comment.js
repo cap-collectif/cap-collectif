@@ -42,12 +42,6 @@ const Comment = React.createClass({
     });
   },
 
-  // comment(data) {
-  //   const { comment, object, uri } = this.props;
-  //   data.parent = comment.id;
-  //   return CommentActions.create(uri, object, data);
-  // },
-
   render() {
     const { onVote, root, uri, object } = this.props;
     const comment = this.props.comment;
@@ -88,9 +82,7 @@ const Comment = React.createClass({
           </div>
           <div className="comment-answers-block">
             {root ? <CommentAnswers onVote={onVote} comments={comment.answers} /> : null}
-            {this.state.answerFormShown ? (
-              <CommentForm focus={this.state.answerFormFocus} object={object} uri={uri} isAnswer />
-            ) : null}
+            {this.state.answerFormShown ? <CommentForm object={object} uri={uri} isAnswer /> : null}
           </div>
         </div>
       </li>
