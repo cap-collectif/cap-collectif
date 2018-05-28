@@ -185,6 +185,7 @@ const CommentSection = React.createClass({
           </Col>
           {this.renderFilter()}
         </Row>
+
         <Loader show={this.state.isLoading} />
         <CommentForm uri={uri} object={object} />
         <CommentList

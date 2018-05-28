@@ -23,6 +23,7 @@ type Props = {
   submitting: boolean,
   pristine: boolean,
   invalid: boolean,
+  reset?: Function,
   handleSubmit?: Function,
 };
 
@@ -31,14 +32,16 @@ type State = {
 };
 
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
-  const { object, uri, user } = props;
+  const { object, uri, user, reset } = props;
 
   if (user) {
     delete values.authorName;
     delete values.authorEmail;
   }
 
-  return CommentActions.create(uri, object, values);
+  return CommentActions.create(uri, object, values).then(() => {
+    reset();
+  });
 };
 
 const validate = ({ body, authorEmail, authorName }) => {

@@ -10,7 +10,6 @@ import CommentReportButton from './CommentReportButton';
 import CommentEdit from './CommentEdit';
 import CommentAnswers from './CommentAnswers';
 import CommentForm from './CommentForm';
-// import CommentActions from '../../actions/CommentActions';
 
 const Comment = React.createClass({
   propTypes: {
