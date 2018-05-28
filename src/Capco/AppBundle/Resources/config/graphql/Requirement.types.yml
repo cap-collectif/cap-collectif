@@ -4,7 +4,10 @@ Requirement:
         description: "A requirement"
         resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementTypeResolver", [value])'
         fields:
+            id:
+              type: "ID!"
             viewerMeetsTheRequirement:
                 type: "Boolean!"
                 access: "@hasRole=('ROLE_USER')"
                 description: "Does the viewer meets the requirement ?"
+                

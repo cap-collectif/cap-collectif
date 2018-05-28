@@ -1962,6 +1962,8 @@ type RequestUserArchivePayload {
 
 # A requirement
 interface Requirement {
+  id: ID!
+
   # Does the viewer meets the requirement ?
   viewerMeetsTheRequirement: Boolean!
 }

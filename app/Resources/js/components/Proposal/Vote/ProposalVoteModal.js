@@ -3,7 +3,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer, commitLocalUpdate } from 'react-relay';
 import { ConnectionHandler } from 'relay-runtime';
-import { Modal } from 'react-bootstrap';
+import { Modal, Panel } from 'react-bootstrap';
 import { submit } from 'redux-form';
 import { connect, type MapStateToProps } from 'react-redux';
 import CloseButton from '../../Form/CloseButton';
@@ -12,6 +12,7 @@ import { closeVoteModal, vote } from '../../../redux/modules/proposal';
 import ProposalsUserVotesTable from '../../Project/Votes/ProposalsUserVotesTable';
 import environment from '../../../createRelayEnvironment';
 import type { State, Dispatch } from '../../../types';
+import RequirementsForm from '../../Requirements/RequirementsForm';
 import UpdateProposalVotesMutation from '../../../mutations/UpdateProposalVotesMutation';
 import type { ProposalVoteModal_proposal } from './__generated__/ProposalVoteModal_proposal.graphql';
 import type { ProposalVoteModal_step } from './__generated__/ProposalVoteModal_step.graphql';
@@ -124,7 +125,21 @@ class ProposalVoteModal extends React.Component<Props> {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h3 className="d-ib mt-0 mr-10 mb-10">
+          {step.requirements.totalCount > 0 && (
+            <Panel id="required-conditions" defaultExpanded>
+              <Panel.Heading>
+                <Panel.Title>Conditions requises</Panel.Title>
+                <Panel.Toggle componentClass="a">Arrow</Panel.Toggle>
+              </Panel.Heading>
+              <Panel.Collapse>
+                <Panel.Body>
+                  {step.requirements.reason}
+                  <RequirementsForm step={step} />
+                </Panel.Body>
+              </Panel.Collapse>
+            </Panel>
+          )}
+          <h3 className="d-ib mr-10 mb-10">
             <FormattedMessage
               id={step.votesRanking ? 'modal-ranking' : 'proposal.vote.modal.title'}
             />
@@ -191,6 +206,11 @@ export default createFragmentContainer(container, {
       id
       votesRanking
       votesHelpText
+      requirements {
+        reason
+        totalCount
+      }
+      ...RequirementsForm_step
       ...ProposalsUserVotesTable_step
       viewerVotes(orderBy: { field: POSITION, direction: ASC }) {
         ...ProposalsUserVotesTable_votes

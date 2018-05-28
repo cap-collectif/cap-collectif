@@ -8,7 +8,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class RequirementViewerValueResolver implements ResolverInterface
 {
-    public function __invoke(Requirement $requirement, User $user)// : mixed
+    public function __invoke(Requirement $requirement, User $user)// : ?string|bool
     {
         if (Requirement::FIRSTNAME === $requirement->getType()) {
             return $user->getFirstname();

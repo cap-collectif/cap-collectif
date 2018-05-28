@@ -14,3 +14,4 @@ PhoneRequirement:
             viewerValue:
                 type: "String"
                 access: "@hasRole('ROLE_USER')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementViewerValueResolver", [value, user])'

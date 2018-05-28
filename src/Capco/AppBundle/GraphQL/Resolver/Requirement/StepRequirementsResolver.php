@@ -23,7 +23,7 @@ class StepRequirementsResolver implements ResolverInterface
         $this->viewerMeetsTheRequirementResolver = $viewerMeetsTheRequirementResolver;
     }
 
-    public function __invoke(AbstractStep $step, $user, Argument $args): Connection
+    public function __invoke(AbstractStep $step, /* User|string */ $user, Argument $args): Connection
     {
         $requirements = $this->repository->getByStep($step);
 

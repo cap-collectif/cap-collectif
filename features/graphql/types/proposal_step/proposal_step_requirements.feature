@@ -17,6 +17,19 @@ Scenario: User wants to see requirements to vote in a proposal step
               edges {
                 node {
                   viewerMeetsTheRequirement
+                  ... on FirstnameRequirement {
+                    viewerValue
+                  }
+                  ... on LastnameRequirement {
+                    viewerValue
+                  }
+                  ... on PhoneRequirement {
+                    viewerValue
+                  }
+                  ... on CheckboxRequirement {
+                    id
+                    label
+                  }
                 }
               }
             }
@@ -24,7 +37,7 @@ Scenario: User wants to see requirements to vote in a proposal step
       }
     }",
     "variables": {
-      "proposalStepId": "selectionstep1"
+      "proposalStepId": "collectstepVoteClassement"
     }
   }
   """
@@ -40,32 +53,41 @@ Scenario: User wants to see requirements to vote in a proposal step
                 "edges": [
                     {
                         "node": {
-                            "viewerMeetsTheRequirement": false
+                            "viewerMeetsTheRequirement": true,
+                            "viewerValue": "Utilisateur"
                         }
                     },
                     {
                         "node": {
-                            "viewerMeetsTheRequirement": false
+                            "viewerMeetsTheRequirement": true,
+                            "viewerValue": "authentifier"
                         }
                     },
                     {
                         "node": {
-                            "viewerMeetsTheRequirement": false
+                            "viewerMeetsTheRequirement": true,
+                            "viewerValue": "+33135492871"
                         }
                     },
                     {
                         "node": {
-                            "viewerMeetsTheRequirement": false
+                            "viewerMeetsTheRequirement": false,
+                            "id": "requirement1",
+                            "label": @string@
                         }
                     },
                     {
                         "node": {
-                            "viewerMeetsTheRequirement": false
+                            "viewerMeetsTheRequirement": false,
+                            "id": "requirement2",
+                            "label": @string@
                         }
                     },
                     {
                         "node": {
-                            "viewerMeetsTheRequirement": false
+                            "viewerMeetsTheRequirement": false,
+                            "id": "requirement3",
+                            "label": @string@
                         }
                     }
                 ]
