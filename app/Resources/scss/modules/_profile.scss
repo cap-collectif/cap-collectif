@@ -244,6 +244,7 @@
 }
 
 #profile-account {
+  min-height: 90px;
   .error-block {
     margin-left: 15px;
   }
@@ -273,4 +274,13 @@
 .delete__modal__icon {
     font-size: 25px;
     padding-left: 8px;
+}
+
+.profile-header {
+    border-bottom: 1px solid #eeeeee;
+    padding-left: 0;
+    padding-bottom: 0;
+    h1 {
+        margin-bottom: 10px;
+    }
 }

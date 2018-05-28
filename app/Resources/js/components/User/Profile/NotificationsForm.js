@@ -49,8 +49,25 @@ export class NotificationsForm extends Component<Props> {
       submitSucceeded,
       submitFailed,
     } = this.props;
+
+    const header = (
+      <div className="panel-heading profile-header">
+        <h1>
+          <FormattedMessage id="profile.account.notifications.title" />
+        </h1>
+      </div>
+    );
+
+    const footer = (
+      <div className="col-sm-offset-4">
+        <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
+          <FormattedMessage id={submitting ? 'global.loading' : 'global.save_modifications'} />
+        </Button>
+      </div>
+    );
+
     return (
-      <Panel id="capco_horizontal_form">
+      <Panel id="capco_horizontal_form" header={header} footer={footer}>
         <h2 className="page-header">
           <FormattedMessage id="profile.account.notifications.title" />
         </h2>
@@ -87,9 +104,6 @@ export class NotificationsForm extends Component<Props> {
           </Table>
           <div className="divider" />
           <div className="notifications-form-controls">
-            <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
-              <FormattedMessage id={submitting ? 'global.loading' : 'global.save_modifications'} />
-            </Button>
             <AlertForm
               valid={valid}
               invalid={invalid}

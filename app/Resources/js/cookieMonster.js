@@ -15,7 +15,7 @@ const GA_COOKIE_NAMES = [
   '_pk_ses',
   '_pk_hsr',
 ];
-const SCROLL_VALUE_TO_CONSENT = 400;
+const SCROLL_VALUE_TO_CONSENT = 2000;
 
 class CookieMonster {
   cookieBanner: any;

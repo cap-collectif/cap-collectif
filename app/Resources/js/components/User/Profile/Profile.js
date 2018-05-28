@@ -100,8 +100,28 @@ export class Profile extends Component<Props> {
       error,
     } = this.props;
 
+    const header = (
+      <div className="panel-heading profile-header">
+        <h1>
+          <FormattedMessage id="user.profile.title" />
+        </h1>
+      </div>
+    );
+
+    const footer = (
+      <div className="col-sm-offset-4">
+        <Button
+          disabled={invalid || submitting}
+          type="submit"
+          bsStyle="primary"
+          id="profile-form-save">
+          <FormattedMessage id={submitting ? 'global.loading' : 'global.save_modifications'} />
+        </Button>
+      </div>
+    );
+
     return (
-      <Panel id="capco_horizontal_form">
+      <Panel id="capco_horizontal_form" footer={footer} header={header}>
         <h2 className="page-header">
           <FormattedMessage id="user.edition" />
         </h2>
@@ -274,15 +294,6 @@ export class Profile extends Component<Props> {
           <div className="horizontal_field_with_border_top">
             <div className="col-sm-3" />
             <ButtonToolbar className="col-sm-6 pl-0">
-              <Button
-                disabled={invalid || submitting}
-                type="submit"
-                bsStyle="primary"
-                id="profile-form-save">
-                <FormattedMessage
-                  id={submitting ? 'global.loading' : 'global.save_modifications'}
-                />
-              </Button>
               <AlertForm
                 valid={valid}
                 invalid={invalid}

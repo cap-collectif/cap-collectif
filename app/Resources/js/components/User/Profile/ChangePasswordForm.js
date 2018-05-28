@@ -73,8 +73,28 @@ export class ChangePasswordForm extends Component<Props> {
       error,
     } = this.props;
 
+    const header = (
+      <div className="panel-heading profile-header">
+        <h1>
+          <FormattedMessage id="user.profile.edit.password" />
+        </h1>
+      </div>
+    );
+
+    const footer = (
+      <div className="col-sm-offset-4">
+        <Button
+          disabled={invalid || submitting}
+          type="submit"
+          bsStyle="primary"
+          id="profile-password-save">
+          <FormattedMessage id={submitting ? 'global.loading' : 'global.save_modifications'} />
+        </Button>
+      </div>
+    );
+
     return (
-      <Panel id="capco_horizontal_form">
+      <Panel id="capco_horizontal_form" header={header} footer={footer}>
         <h2 className="page-header">
           <FormattedMessage id="form.new_password" />
         </h2>
@@ -128,15 +148,6 @@ export class ChangePasswordForm extends Component<Props> {
             <div className="horizontal_field_with_border_top">
               <div className="col-sm-3" />
               <ButtonToolbar className="col-sm-6 pl-0">
-                <Button
-                  disabled={invalid || submitting}
-                  type="submit"
-                  bsStyle="primary"
-                  id="profile-password-save">
-                  <FormattedMessage
-                    id={submitting ? 'global.loading' : 'global.save_modifications'}
-                  />
-                </Button>
                 <AlertForm
                   valid={valid}
                   invalid={invalid}

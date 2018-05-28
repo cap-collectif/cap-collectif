@@ -53,11 +53,13 @@ export const NavbarRight = React.createClass({
             id="navbar-username">
             {user.isAdmin && (
               <MenuItem key={3.1} eventKey={3.1} href="/admin">
+                <i className="cap-setting-gears-1" style={{ marginRight: 10 }} />
                 {<FormattedMessage id="navbar.admin" />}
               </MenuItem>
             )}
             {features.profiles && (
               <MenuItem key={3.2} eventKey={3.2} href={`/profile/${user.uniqueId}`}>
+                <i className="cap cap-id-8" style={{ marginRight: 10 }} />
                 {<FormattedMessage id="navbar.profile" />}
               </MenuItem>
             )}
@@ -70,10 +72,12 @@ export const NavbarRight = React.createClass({
               key={3.4}
               eventKey={3.4}
               href={`/profile/${features.profiles ? 'edit-profile' : 'edit-profile#account'}`}>
+              <i className="cap cap-setting-adjustment" style={{ marginRight: 10 }} />
               {<FormattedMessage id="navbar.user_settings" />}
             </MenuItem>
             <MenuItem key={3.5} divider />
             <MenuItem key={3.6} eventKey={3.6} id="logout-button" onClick={this.logout}>
+              <i className="cap cap-power-1" style={{ marginRight: 10 }} />
               {<FormattedMessage id="global.logout" />}
             </MenuItem>
           </NavDropdown>

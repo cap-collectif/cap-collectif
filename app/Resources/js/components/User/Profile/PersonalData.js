@@ -242,6 +242,26 @@ export class PersonalData extends Component<Props, PersonalDataState> {
       </Tooltip>
     );
 
+    const header = (
+      <div className="panel-heading profile-header">
+        <h1>
+          <FormattedMessage id="data" />
+        </h1>
+      </div>
+    );
+
+    const footer = (
+      <div className="col-sm-offset-4">
+        <Button
+          disabled={invalid || submitting}
+          type="submit"
+          bsStyle="primary"
+          id="personal-data-form-save">
+          <FormattedMessage id={submitting ? 'global.loading' : 'global.save_modifications'} />
+        </Button>
+      </div>
+    );
+
     return (
       <div id="personal-data">
         {!hasData(viewer, currentValues) && (
@@ -262,7 +282,7 @@ export class PersonalData extends Component<Props, PersonalDataState> {
             />
           </Alert>
         )}
-        <Panel id="capco_horizontal_form">
+        <Panel id="capco_horizontal_form" header={header} footer={footer}>
           <h2 className="page-header">
             <FormattedMessage id="personal-data" />
           </h2>
@@ -558,15 +578,6 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                 <div className="horizontal_field_with_border_top">
                   <div className="col-sm-3" />
                   <ButtonGroup className="col-sm-4 pl-0">
-                    <Button
-                      disabled={invalid || submitting}
-                      type="submit"
-                      bsStyle="primary"
-                      id="personal-data-form-save">
-                      <FormattedMessage
-                        id={submitting ? 'global.loading' : 'global.save_modifications'}
-                      />
-                    </Button>
                     <AlertForm
                       valid={valid}
                       invalid={invalid}

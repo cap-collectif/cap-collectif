@@ -5,6 +5,38 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
   bsClass="panel"
   bsStyle="default"
   defaultExpanded={false}
+  footer={
+    <div
+      className="col-sm-offset-4"
+    >
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="primary"
+        disabled={false}
+        id="profile-form-save"
+        type="submit"
+      >
+        <FormattedMessage
+          id="global.save_modifications"
+          values={Object {}}
+        />
+      </Button>
+    </div>
+  }
+  header={
+    <div
+      className="panel-heading profile-header"
+    >
+      <h1>
+        <FormattedMessage
+          id="user.profile.title"
+          values={Object {}}
+        />
+      </h1>
+    </div>
+  }
   id="capco_horizontal_form"
 >
   <h2
@@ -364,20 +396,6 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
         bsClass="btn-toolbar"
         className="col-sm-6 pl-0"
       >
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="primary"
-          disabled={false}
-          id="profile-form-save"
-          type="submit"
-        >
-          <FormattedMessage
-            id="global.save_modifications"
-            values={Object {}}
-          />
-        </Button>
         <AlertForm
           errorMessage={null}
           invalid={false}
