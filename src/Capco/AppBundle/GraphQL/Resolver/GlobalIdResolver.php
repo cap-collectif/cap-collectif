@@ -91,8 +91,12 @@ class GlobalIdResolver
             $node = $this->container->get('capco.event.repository')->find($uuid);
         }
         if (!$node) {
-            $this->container->get('logger')->warn(__METHOD__ . ' : Could not resolve node with id: ' . $uuid);
-            throw new UserError('Could not resolve node with id ' . $uuid);
+            $node = $this->container->get('capco.requirement.repository')->find($uuid);
+        }
+
+        if (!$node) {
+            $this->container->get('logger')->warn('Unknown id: ' . $uuid);
+            throw new UserError('Not found');
         }
 
         return $node;

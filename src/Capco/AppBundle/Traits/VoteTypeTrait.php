@@ -12,6 +12,11 @@ trait VoteTypeTrait
     public static $VOTE_TYPE_BUDGET = 2;
 
     /**
+     * @ORM\Column(name="requirements_reason", type="string", nullable=true)
+     */
+    private $requirementsReason = null;
+
+    /**
      * @ORM\Column(name="votes_help_text", type="string", nullable=true)
      */
     private $votesHelpText = null;
@@ -42,6 +47,18 @@ trait VoteTypeTrait
      * @ORM\Column(name="votes_ranking", type="boolean", nullable=false, options={"default": false})
      */
     private $votesRanking = false;
+
+    public function getRequirementsReason(): ?string
+    {
+        return $this->requirementsReason;
+    }
+
+    public function setRequirementsReason(string $requirementsReason = null): self
+    {
+        $this->requirementsReason = $requirementsReason;
+
+        return $this;
+    }
 
     public static function getVoteTypeLabels()
     {
