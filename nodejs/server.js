@@ -2,6 +2,10 @@ const net = require('net');
 const fs = require('fs');
 var exec = require( "child_process" ).exec;
 
+if (process.env.NODE_ENV === "production") {
+  console.log = function(){};
+}
+
 const socket = 'node_ssr.sock';
 const bundlePath = '/var/www/web/js/';
 
@@ -28,7 +32,7 @@ Handler.prototype.handle = function (connection) {
     const evalCode = function() {
       tries = tries + 1;
       if (tries > 20) {
-        console.log('[SSR] Failed request #'+ i);
+        console.error('[SSR] Failed request #'+ i);
         connection.write('');
         connection.end();
         return;
