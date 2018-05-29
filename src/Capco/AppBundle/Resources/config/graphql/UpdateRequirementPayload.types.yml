@@ -1,8 +1,0 @@
-UpdateRequirementPayload:
-    type: relay-mutation-payload
-    config:
-        fields:
-            viewer:
-                type: "User"
-            requirement:
-                type: "Requirement"
