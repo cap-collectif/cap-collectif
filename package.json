@@ -59,7 +59,7 @@
   "bundlesize": [
     {
       "path": "./web/css/style.css",
-      "maxSize": "65 kB"
+      "maxSize": "67 kB"
     },
     {
       "path": "./web/css/style-admin.css",

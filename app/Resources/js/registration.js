@@ -16,6 +16,7 @@ import EmailNotConfirmedApp from './startup/EmailNotConfirmedAppClient';
 import NewOpinionApp from './startup/NewOpinionAppClient';
 import ProjectTrashButtonApp from './startup/ProjectTrashButtonApp';
 import ProjectStepTabsApp from './startup/ProjectStepTabsApp';
+import CarouselApp from './startup/CarouselApp';
 import OpinionPageApp from './startup/OpinionPageApp';
 import CommentSectionApp from './startup/CommentSectionApp';
 import SynthesisViewBoxApp from './startup/SynthesisViewBoxApp';
@@ -87,6 +88,7 @@ ReactOnRails.register({
   AccountProfileApp,
   ProjectTrashButtonApp,
   ProjectStepTabsApp,
+  CarouselApp,
   EvaluationsIndexPageApp,
   OpinionPageApp,
   CommentSectionApp,

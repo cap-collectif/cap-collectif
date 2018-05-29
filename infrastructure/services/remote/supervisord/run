@@ -2,8 +2,7 @@
 
 while [ ! -f /var/run/php7.1-fpm.pid ] > /dev/null 2>&1;
   do sleep 1
-  echo "Supervisor is waiting for php-fpm to be running..."
 done
 
 echo "Starting Supervisor..."
-exec supervisord --configuration=/etc/supervisord/supervisord.conf
+exec supervisord --configuration=/etc/supervisord/supervisord.conf --loglevel=warn

@@ -14,7 +14,6 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Reporting;
-use Capco\AppBundle\Entity\Requirement;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
@@ -24,7 +23,6 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
-use Capco\AppBundle\GraphQL\Resolver\Requirement\RequirementTypeResolver;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;
@@ -34,13 +32,11 @@ use Psr\Log\LoggerInterface;
 class NodeTypeResolver implements ResolverInterface
 {
     private $typeResolver;
-    private $requirementTypeResolver;
     private $logger;
 
-    public function __construct(TypeResolver $typeResolver, RequirementTypeResolver $requirementTypeResolver, LoggerInterface $logger)
+    public function __construct(TypeResolver $typeResolver, LoggerInterface $logger)
     {
         $this->typeResolver = $typeResolver;
-        $this->requirementTypeResolver = $requirementTypeResolver;
         $this->logger = $logger;
     }
 
@@ -118,9 +114,6 @@ class NodeTypeResolver implements ResolverInterface
         }
         if ($node instanceof User) {
             return $this->typeResolver->resolve('User');
-        }
-        if ($node instanceof Requirement) {
-            return $this->requirementTypeResolver->__invoke($node);
         }
 
         throw new UserError('Could not resolve type of Node.');
