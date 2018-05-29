@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\UserBundle\Form\Type;
 
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -22,6 +23,8 @@ class ApiAdminRegistrationFormType extends ApiRegistrationFormType
     public function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
-        $resolver->setDefaults(['validation_groups' => ['registrationAdmin']]);
+        $resolver->setDefaults([
+            'validation_groups' => ['registrationAdmin'],
+        ]);
     }
 }

@@ -19,6 +19,7 @@ coverage/
 !/bin/console
 !/bin/symfony_requirements
 /bin/
+/app/config/parameters.yml
 
 # infra
 infrastructure/environments/current.yml

@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\UserBundle\Security\Core\User;
 
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
@@ -22,14 +23,14 @@ class OauthUserProvider extends FOSUBUserProvider
 
         //we "disconnect" previously connected users
         if (null !== $previousUser = $this->userManager->findUserByEmail($email)) {
-            $previousUser->{$setter_id}(null);
-            $previousUser->{$setter_token}(null);
+            $previousUser->$setter_id(null);
+            $previousUser->$setter_token(null);
             $this->userManager->updateUser($previousUser);
         }
 
         //we connect current user
-        $user->{$setter_id}($response->getUsername());
-        $user->{$setter_token}($response->getAccessToken());
+        $user->$setter_id($response->getUsername());
+        $user->$setter_token($response->getAccessToken());
         $this->userManager->updateUser($user);
     }
 
@@ -39,8 +40,7 @@ class OauthUserProvider extends FOSUBUserProvider
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
         $email = $response->getEmail() ?: 'twitter_' . $response->getUsername();
-        $username = $response->getNickname()
-            ?: $response->getFirstName() . ' ' . $response->getLastName();
+        $username = $response->getNickname() ?: $response->getFirstName() . ' ' . $response->getLastName();
         $user = $this->userManager->findUserByEmail($email);
 
         if (null === $user) {
@@ -55,8 +55,8 @@ class OauthUserProvider extends FOSUBUserProvider
         $setter = 'set' . ucfirst($service);
         $setter_id = $setter . 'Id';
         $setter_token = $setter . 'AccessToken';
-        $user->{$setter_id}($response->getUsername());
-        $user->{$setter_token}($response->getAccessToken());
+        $user->$setter_id($response->getUsername());
+        $user->$setter_token($response->getAccessToken());
 
         $this->userManager->updateUser($user);
 
