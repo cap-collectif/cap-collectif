@@ -31,6 +31,8 @@ const validate = (values, props: Props) => {
   return errors;
 };
 
+let timeout = null;
+
 const onChange = (values, dispatch, props, previousValues) => {
   Object.keys(values).forEach(element => {
     if (previousValues[element] !== values[element]) {
@@ -47,7 +49,6 @@ const onChange = (values, dispatch, props, previousValues) => {
         }).then(() => {});
       }
       const input = {};
-      console.log(requirement);
       if (requirement.__typename === 'FirstnameRequirement') {
         input.firstname = newValue;
       }
@@ -57,7 +58,11 @@ const onChange = (values, dispatch, props, previousValues) => {
       if (requirement.__typename === 'PhoneRequirement') {
         input.phone = newValue;
       }
-      UpdateProfilePersonalDataMutation.commit({ input }).then(() => {});
+      // $FlowFixMe
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        UpdateProfilePersonalDataMutation.commit({ input }).then(() => {});
+      }, 1500);
     }
   });
 
