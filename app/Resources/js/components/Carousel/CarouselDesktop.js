@@ -200,36 +200,41 @@ export class CarouselDesktop extends PureComponent<Props, State> {
                           </a>
                           <br />
                           <span className="carousel__date">
-                            {highlightedType === 'event' && (
-                              <DatesInterval
-                                startAt={highlighted[highlightedType].startAt}
-                                endAt={highlighted[highlightedType].endAt}
-                              />
-                            )}
-                            {highlightedType === 'project' && (
-                              <FormattedDate
-                                value={highlighted[highlightedType].startAt}
-                                day="numeric"
-                                month="long"
-                                year="numeric"
-                              />
-                            )}
-                            {highlightedType === 'idea' && (
-                              <FormattedDate
-                                value={highlighted[highlightedType].createdAt}
-                                day="numeric"
-                                month="long"
-                                year="numeric"
-                              />
-                            )}
-                            {highlightedType === 'post' && (
-                              <FormattedDate
-                                value={highlighted[highlightedType].publishedAt}
-                                day="numeric"
-                                month="long"
-                                year="numeric"
-                              />
-                            )}
+                            {highlightedType === 'event' &&
+                              highlighted[highlightedType].startAt &&
+                              highlighted[highlightedType].endAt && (
+                                <DatesInterval
+                                  startAt={highlighted[highlightedType].startAt}
+                                  endAt={highlighted[highlightedType].endAt}
+                                />
+                              )}
+                            {highlightedType === 'project' &&
+                              highlighted[highlightedType].startAt && (
+                                <FormattedDate
+                                  value={highlighted[highlightedType].startAt}
+                                  day="numeric"
+                                  month="long"
+                                  year="numeric"
+                                />
+                              )}
+                            {highlightedType === 'idea' &&
+                              highlighted[highlightedType].createdAt && (
+                                <FormattedDate
+                                  value={highlighted[highlightedType].createdAt}
+                                  day="numeric"
+                                  month="long"
+                                  year="numeric"
+                                />
+                              )}
+                            {highlightedType === 'post' &&
+                              highlighted[highlightedType].publishedAt && (
+                                <FormattedDate
+                                  value={highlighted[highlightedType].publishedAt}
+                                  day="numeric"
+                                  month="long"
+                                  year="numeric"
+                                />
+                              )}
                           </span>
                         </p>
                       </div>
