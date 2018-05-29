@@ -80,6 +80,13 @@ services:
       - "@capco.proposal_collect_vote.repository"
     tags:
       - { name: "jms_serializer.event_subscriber" }
+  capco.event.serialization_listener:
+    class: Capco\AppBundle\EventListener\EventSerializationListener
+    arguments:
+      - "@router"
+      - "@jms_serializer"
+    tags:
+      - { name: "jms_serializer.event_subscriber" }
 
   capco.media_response.serialization_listener:
     class: Capco\AppBundle\EventListener\MediaResponseSerializationListener
