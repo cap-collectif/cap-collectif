@@ -22,7 +22,7 @@ class SelectionStepRepository extends AbstractStepRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getVotableStepsForProject(Project $project, bool $asArray = false)
+    public function getVotableStepsForProject(Project $project, bool $asArray = false): iterable
     {
         $qb = $this->getEnabledQueryBuilder();
         $expr = $qb->expr();

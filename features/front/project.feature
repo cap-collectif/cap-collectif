@@ -28,10 +28,10 @@ Scenario: Project can be filtered by theme
   And feature "projects_form" is enabled
   And I visited "projects page"
   And I wait 1 seconds
-  Then I should see 13 "#project-preview" elements
+  Then I should see 15 "#project-preview" elements
   And I select "Transport" from "project-theme"
   And I wait 1 seconds
-  Then I should see 7 "#project-preview" elements
+  Then I should see 8 "#project-preview" elements
   And I should see "Projet vide"
   And I should see "Dépot avec selection vote budget"
   And I should not see "Croissance, innovation, disruption"
@@ -45,7 +45,7 @@ Scenario: Project can be filtered by theme and sorted by contributions number at
   And I wait 1 seconds
   And I select "global.filter_f_popular" from "project-sorting"
   And I wait 1 seconds
-  Then I should see 7 "#project-preview" elements
+  Then I should see 8 "#project-preview" elements
   And I should see "Projet de loi Renseignement"
   And I should see "Budget Participatif Rennes"
   And I should not see "Croissance, innovation, disruption"
@@ -121,11 +121,11 @@ Scenario: Project header should display correct number of contributions
   Given I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
-  Then I should see 'project.show.meta.total_count {"%count%":182}'
+  Then I should see 'project.show.meta.total_count {"%count%":171}'
   And I hover over the "#contributions-counter-pill" element
   And I wait 1 seconds
-  And I should see 'project.show.meta.opinionsCount {"%count%":37}'
-  #And I should see 'project.show.meta.argumentsCount {"%count%":107}'
+  And I should see 'project.show.meta.opinionsCount {"%count%":35}'
+  #And I should see 'project.show.meta.argumentsCount {"%count%":104}'
   And I should see 'project.show.meta.sourcesCount {"%count%":32}'
 
 @javascript

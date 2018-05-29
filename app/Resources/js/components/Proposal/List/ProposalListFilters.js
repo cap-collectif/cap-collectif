@@ -7,11 +7,7 @@ import ProposalListSearch from '../List/ProposalListSearch';
 import Input from '../../Form/Input';
 import ProposalListOrderSorting from './ProposalListOrderSorting';
 
-import {
-  changeFilter,
-  loadProposals,
-  changeProposalListView,
-} from '../../../redux/modules/proposal';
+import { changeFilter, changeProposalListView } from '../../../redux/modules/proposal';
 import ToggleMapButton from './../Map/ToggleMapButton';
 
 export const ProposalListFilters = React.createClass({
@@ -113,7 +109,6 @@ export const ProposalListFilters = React.createClass({
                 id={`proposal-filter-${filterName}`}
                 onChange={e => {
                   dispatch(changeFilter(filterName, e.target.value));
-                  dispatch(loadProposals(null, true));
                 }}
                 value={filters[filterName] || 0}>
                 <FormattedMessage id={`global.select_${filterName}`}>

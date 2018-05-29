@@ -1,0 +1,11 @@
+ProposalStepVoteType:
+    type: enum
+    config:
+        description: "Type of vote."
+        values:
+            DISABLED:
+                value: 0
+            SIMPLE:
+                value: 1
+            BUDGET:
+                value: 2

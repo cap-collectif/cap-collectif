@@ -107,7 +107,9 @@ exports[`<ProposalAdminFollowers /> should render a proposal page follower with 
       pageAdmin={true}
       proposal={
         Object {
-          "followerConnection": Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "allFollowers": Object {
             "totalCount": 3,
           },
           "id": "proposal1",
@@ -185,7 +187,9 @@ exports[`<ProposalAdminFollowers /> should render a proposal page follower witho
       pageAdmin={true}
       proposal={
         Object {
-          "followerConnection": Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "allFollowers": Object {
             "totalCount": 0,
           },
           "id": "proposal1",

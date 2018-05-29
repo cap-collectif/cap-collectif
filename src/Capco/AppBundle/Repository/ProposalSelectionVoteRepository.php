@@ -32,6 +32,19 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ;
     }
 
+    public function getByProposalAndStepAndUser(Proposal $proposal, SelectionStep $step, User $author): array
+    {
+        return $this->createQueryBuilder('pv')
+          ->andWhere('pv.user = :author')
+          ->andWhere('pv.selectionStep = :step')
+          ->andWhere('pv.proposal = :proposal')
+          ->setParameter('author', $author)
+          ->setParameter('step', $step)
+          ->setParameter('proposal', $proposal)
+          ->getQuery()
+          ->getResult();
+    }
+
     public function countByAuthorAndStep(User $author, SelectionStep $step): int
     {
         return $this->createQueryBuilder('pv')
@@ -48,6 +61,37 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ;
     }
 
+    public function getByAuthorAndStep(User $author, SelectionStep $step, int $limit, int $offset, string $field = null, string $direction = null): Paginator
+    {
+        $qb = $this->createQueryBuilder('pv')
+          ->andWhere('pv.selectionStep = :step')
+          ->andWhere('pv.user = :author')
+          ->andWhere('pv.expired = false')
+          ->leftJoin('pv.proposal', 'proposal')
+          ->andWhere('proposal.id IS NOT NULL')
+          ->andWhere('proposal.deletedAt IS NULL')
+          ->setParameter('step', $step)
+          ->setParameter('author', $author);
+
+        if ($field && $direction) {
+            if ('CREATED_AT' === $field) {
+                $qb->addOrderBy('pv.createdAt', $direction);
+            }
+            if ('POSITION' === $field) {
+                $qb->addOrderBy('pv.position', $direction);
+            }
+        }
+
+        if ($limit > 0) {
+            $qb
+          ->setMaxResults($limit);
+        }
+        $qb->setFirstResult($offset);
+
+        return new Paginator($qb);
+    }
+
+    // TODO remove this duplicate
     public function getVotesByStepAndUser(SelectionStep $step, User $user): array
     {
         return $this->createQueryBuilder('pv')
@@ -139,7 +183,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
         return new Paginator($query);
     }
 
-    public function countVotesForProposal(Proposal $proposal): int
+    public function countVotesByProposal(Proposal $proposal): int
     {
         return (int) $this->createQueryBuilder('pv')
             ->select('COUNT(pv.id)')

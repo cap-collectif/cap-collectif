@@ -14,13 +14,18 @@ exports[`<ProposalDetailLikers /> should render a <OverlayTrigger /> with <Toolt
         id="proposal-1-likers-tooltip-"
         placement="right"
       >
-        <ProposalDetailLikersTooltipLabel
-          likers={
-            Array [
-              Object {
-                "displayName": "user",
-              },
-            ]
+        <Relay(ProposalDetailLikersTooltipLabel)
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "id": "1",
+              "likers": Array [
+                Object {
+                  "id": "1",
+                },
+              ],
+            }
           }
         />
       </Tooltip>
@@ -33,18 +38,19 @@ exports[`<ProposalDetailLikers /> should render a <OverlayTrigger /> with <Toolt
       ]
     }
   >
-    <ProposalDetailLikersLabel
-      likers={
-        Array [
-          Object {
-            "displayName": "user",
-          },
-        ]
+    <Relay(ProposalDetailLikersLabel)
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "id": "1",
+          "likers": Array [
+            Object {
+              "id": "1",
+            },
+          ],
+        }
       }
-      onBlur={[Function]}
-      onFocus={[Function]}
-      onMouseOut={[Function]}
-      onMouseOver={[Function]}
     />
   </OverlayTrigger>
 </span>
@@ -62,13 +68,18 @@ exports[`<ProposalDetailLikers /> should render a div when specified 1`] = `
         id="proposal-1-likers-tooltip-"
         placement="right"
       >
-        <ProposalDetailLikersTooltipLabel
-          likers={
-            Array [
-              Object {
-                "displayName": "user",
-              },
-            ]
+        <Relay(ProposalDetailLikersTooltipLabel)
+          proposal={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "id": "1",
+              "likers": Array [
+                Object {
+                  "id": "1",
+                },
+              ],
+            }
           }
         />
       </Tooltip>
@@ -81,18 +92,19 @@ exports[`<ProposalDetailLikers /> should render a div when specified 1`] = `
       ]
     }
   >
-    <ProposalDetailLikersLabel
-      likers={
-        Array [
-          Object {
-            "displayName": "user",
-          },
-        ]
+    <Relay(ProposalDetailLikersLabel)
+      proposal={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "id": "1",
+          "likers": Array [
+            Object {
+              "id": "1",
+            },
+          ],
+        }
       }
-      onBlur={[Function]}
-      onFocus={[Function]}
-      onMouseOut={[Function]}
-      onMouseOver={[Function]}
     />
   </OverlayTrigger>
 </div>

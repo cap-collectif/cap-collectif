@@ -1,35 +1,35 @@
+// @flow
 import * as React from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
 import Truncate from 'react-truncate';
-import { QueryRenderer, graphql } from 'react-relay';
+import { graphql, createFragmentContainer } from 'react-relay';
 import ProposalPreviewVote from './ProposalPreviewVote';
 import ProposalDetailEstimation from '../Detail/ProposalDetailEstimation';
 import ProposalDetailLikers from '../Detail/ProposalDetailLikers';
 import ProposalVoteThresholdProgressBar from '../Vote/ProposalVoteThresholdProgressBar';
 import TagsList from '../../Ui/List/TagsList';
-import { type State } from '../../../types';
+import type { State, FeatureToggles } from '../../../types';
 import ProposalFollowButton from '../Follow/ProposalFollowButton';
-import type ProposalPreviewFollowerButtonQueryResponse from '../Preview/__generated__/ProposalPreviewBodyFollowerButtonQuery.graphql';
-import environment, { graphqlError } from '../../../createRelayEnvironment';
-import Loader from '../../Ui/Loader';
+import type { ProposalPreviewBody_proposal } from './__generated__/ProposalPreviewBody_proposal.graphql';
+import type { ProposalPreviewBody_step } from './__generated__/ProposalPreviewBody_step.graphql';
+import type { ProposalPreviewBody_viewer } from './__generated__/ProposalPreviewBody_viewer.graphql';
 
 type Props = {
-  proposal: Object,
-  showNullEstimation: boolean,
-  showThemes: boolean,
-  features: Object,
-  step: Object,
-  isAuthenticated: boolean,
+  proposal: ProposalPreviewBody_proposal,
+  features: FeatureToggles,
+  step: ?ProposalPreviewBody_step,
+  viewer: ?ProposalPreviewBody_viewer,
 };
 
 export class ProposalPreviewBody extends React.Component<Props> {
   render() {
-    const { proposal, showThemes, showNullEstimation, features, step } = this.props;
+    const { proposal, features, step, viewer } = this.props;
 
+    const showThemes = true;
     return (
       <div className="card__body">
         <div className="card__body__infos">
-          <a href={proposal.show_url ? proposal.show_url : proposal._links.show}>
+          <a href={proposal.show_url}>
             <h2 className="card__title">
               <Truncate lines={3}>{proposal.title}</Truncate>
             </h2>
@@ -57,62 +57,91 @@ export class ProposalPreviewBody extends React.Component<Props> {
                   {proposal.district.name}
                 </div>
               )}
-            <ProposalDetailEstimation proposal={proposal} showNullEstimation={showNullEstimation} />
+            {/* $FlowFixMe */}
+            <ProposalDetailEstimation
+              showNullEstimation={step && step.voteType === 'BUDGET'}
+              proposal={proposal}
+            />
+            {/* $FlowFixMe */}
             <ProposalDetailLikers proposal={proposal} />
           </TagsList>
         </div>
         <div className="proposal__buttons">
-          {step.id === proposal.votableStepId && <ProposalPreviewVote proposal={proposal} />}
-          <QueryRenderer
-            environment={environment}
-            query={graphql`
-              query ProposalPreviewBodyFollowerButtonQuery(
-                $proposalId: ID!
-                $isAuthenticated: Boolean!
-              ) {
-                proposal: node(id: $proposalId) {
-                  ...ProposalFollowButton_proposal @arguments(isAuthenticated: $isAuthenticated)
-                }
-              }
-            `}
-            variables={{ proposalId: proposal.id, isAuthenticated: this.props.isAuthenticated }}
-            render={({
-              error,
-              props,
-            }: {
-              error: ?Error,
-              props?: ProposalPreviewFollowerButtonQueryResponse,
-            }) => {
-              if (error) {
-                console.warn(error); // eslint-disable-line no-console
-                return graphqlError;
-              }
-              if (props) {
-                // eslint-disable-next-line react/prop-types
-                if (props.proposal) {
-                  return <ProposalFollowButton proposal={props.proposal} />;
-                }
-                return graphqlError;
-              }
-              return <Loader />;
-            }}
-          />
+          {/* $FlowFixMe */
+          step &&
+            proposal.currentVotableStep &&
+            step.id === proposal.currentVotableStep.id && (
+              /* $FlowFixMe */
+              <ProposalPreviewVote step={step} viewer={viewer} proposal={proposal} />
+            )}
+          {/* $FlowFixMe */}
+          <ProposalFollowButton proposal={proposal} />
         </div>
-        {step.voteThreshold > 0 && (
-          <div style={{ marginTop: '20px' }}>
-            <ProposalVoteThresholdProgressBar proposal={proposal} step={step} />
-          </div>
-        )}
+        {step &&
+          step.voteThreshold !== null &&
+          typeof step.voteThreshold !== 'undefined' &&
+          step.voteThreshold > 0 && (
+            <div style={{ marginTop: '20px' }}>
+              {/* $FlowFixMe */}
+              <ProposalVoteThresholdProgressBar proposal={proposal} step={step} />
+            </div>
+          )}
       </div>
     );
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
-  return {
-    features: state.default.features,
-    isAuthenticated: state.user.user !== null,
-  };
-};
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+  features: state.default.features,
+});
 
-export default connect(mapStateToProps)(ProposalPreviewBody);
+const container = connect(mapStateToProps)(ProposalPreviewBody);
+
+export default createFragmentContainer(container, {
+  viewer: graphql`
+    fragment ProposalPreviewBody_viewer on User {
+      ...ProposalPreviewVote_viewer
+    }
+  `,
+  proposal: graphql`
+    fragment ProposalPreviewBody_proposal on Proposal
+      @argumentDefinitions(
+        isAuthenticated: { type: "Boolean", defaultValue: true }
+        isProfileView: { type: "Boolean", defaultValue: false }
+      ) {
+      id
+      title
+      show_url
+      summaryOrBodyExcerpt
+      commentsCount
+      district {
+        name
+      }
+      theme {
+        title
+      }
+      category {
+        name
+      }
+      ...ProposalPreviewVote_proposal
+        @arguments(isAuthenticated: $isAuthenticated)
+        @skip(if: $isProfileView)
+      ...ProposalDetailEstimation_proposal
+      ...ProposalDetailLikers_proposal
+      ...ProposalVoteThresholdProgressBar_proposal @skip(if: $isProfileView)
+      currentVotableStep @skip(if: $isProfileView) {
+        id
+      }
+      ...ProposalFollowButton_proposal @arguments(isAuthenticated: $isAuthenticated)
+    }
+  `,
+  step: graphql`
+    fragment ProposalPreviewBody_step on ProposalStep {
+      id
+      ...ProposalPreviewVote_step @arguments(isAuthenticated: $isAuthenticated)
+      ...ProposalVoteThresholdProgressBar_step
+      voteThreshold
+      voteType
+    }
+  `,
+});

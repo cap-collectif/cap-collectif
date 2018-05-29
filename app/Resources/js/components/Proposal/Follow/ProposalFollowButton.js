@@ -21,7 +21,6 @@ import LoginOverlay from '../../Utils/LoginOverlay';
 
 type Props = {
   proposal: ProposalFollowButton_proposal,
-  isAuthenticated: boolean,
 };
 
 type State = {

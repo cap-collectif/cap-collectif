@@ -26,7 +26,7 @@ const render = ({ props, error }: ReadyState & { props: ?ProposalCreateQueryResp
 
 type Props = {
   intl: IntlShape,
-  form: { isContribuable: boolean, id: Uuid },
+  form: { +contribuable: boolean, +id: Uuid },
   showModal: boolean,
   submitting: boolean,
   pristine: boolean,
@@ -39,7 +39,7 @@ export class ProposalCreate extends React.Component<Props> {
     return (
       <div>
         <ProposalCreateButton
-          disabled={!form.isContribuable}
+          disabled={!form.contribuable}
           handleClick={() => dispatch(openCreateModal())}
         />
         <Modal

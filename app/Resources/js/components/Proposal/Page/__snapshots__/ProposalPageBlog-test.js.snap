@@ -4,11 +4,19 @@ exports[`<ProposalPageBlog /> should render a list of posts 1`] = `
 <ul
   className="media-list"
 >
-  <Connect(Post)
-    post={Object {}}
+  <Relay(Connect(Post))
+    post={
+      Object {
+        "$fragmentRefs": null,
+      }
+    }
   />
-  <Connect(Post)
-    post={Object {}}
+  <Relay(Connect(Post))
+    post={
+      Object {
+        "$fragmentRefs": null,
+      }
+    }
   />
 </ul>
 `;
