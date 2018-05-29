@@ -1,31 +1,40 @@
 Reply:
     type: object
     config:
-        description: "A reply contribution"
-        interfaces: [Node]
+        description: "A Reply"
+        interfaces: [Node, Contribution]
         fields:
+            id:
+                type: "ID!"
+            author:
+                type: "User"
             enabled:
                 type: "Boolean!"
             private:
                 type: "Boolean!"
-            responses:
-                type: "[Response]!"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ResponsesResolver", [value])'
-            author:
-                type: "User!"
-                description: "The author of the contribution."
+            createdAt:
+                type: "DateTime!"
             updatedAt:
                 type: "DateTime"
                 description: "The updated date."
-            id:
-                type: "ID!"
-                description: "The id of the contribution."
+            updatedAt:
+                type: "DateTime"
+            expired:
+                type: "Boolean!"
+            anonymous:
+                type: "Boolean!"
             questionnaire:
                 type: "Questionnaire!"
                 description: "Identifies the form where the contribution was submitted."
-            createdAt:
-              type: "DateTime!"
-              description: "Identifies the date and time when the object was created."
+            responses:
+                type: "[Response]!"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ResponsesResolver", [value])'
+            kind:
+                type: "String!"
+                resolve: "@=value.getKind()"
+            related:
+                type: "Contribution"
+                description: "Return the related contribution if the contribution is related to another."
             viewerCanDelete:
               type: "Boolean!"
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ReplyViewerCanDeleteResolver", [value, user])'

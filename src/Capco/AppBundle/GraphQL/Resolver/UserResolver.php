@@ -150,4 +150,9 @@ class UserResolver implements ContainerAwareInterface
 
         return $count;
     }
+
+    public function getContributions(User $object, $value)
+    {
+        return $object->getContributions($value['contributionType']);
+    }
 }

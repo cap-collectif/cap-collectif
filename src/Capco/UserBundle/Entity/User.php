@@ -1207,23 +1207,53 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         ];
     }
 
-    public function getContributions()
+    public function getContributions(string $requestedType = null)
     {
-        $types = [
-        $this->getOpinions(),
-        $this->getOpinionVersions(),
-        $this->getVotes(),
-        $this->getComments(),
-        $this->getArguments(),
-        $this->getSources(),
-        $this->getProposals(),
-        $this->getReplies(),
-      ];
-        $contributions = [];
-        foreach ($types as $type) {
-            foreach ($type as $contribution) {
-                $contributions[] = $contribution;
-            }
+        switch ($requestedType) {
+            case 'Opinions':
+                return $this->getOpinions();
+                break;
+            case 'OpinionVersions':
+                return $this->getOpinionVersions();
+                break;
+            case 'Votes':
+                return $this->getVotes();
+                break;
+            case 'Comments':
+                return $this->getComments();
+                break;
+            case 'Arguments':
+                return $this->getArguments();
+                break;
+            case 'Sources':
+                return $this->getSources();
+                break;
+            case 'Proposals':
+                return $this->getProposals();
+                break;
+            case 'Replies':
+                return $this->getReplies();
+                break;
+            default:
+                $types = [
+                    $this->getOpinions(),
+                    $this->getOpinionVersions(),
+                    $this->getVotes(),
+                    $this->getComments(),
+                    $this->getArguments(),
+                    $this->getSources(),
+                    $this->getProposals(),
+                    $this->getReplies(),
+                ];
+
+                $contributions = [];
+                foreach ($types as $type) {
+                    foreach ($type as $contribution) {
+                        $contributions[] = $contribution;
+                    }
+                }
+
+                break;
         }
 
         return $contributions;

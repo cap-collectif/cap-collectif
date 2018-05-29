@@ -337,7 +337,7 @@ type CollectStep implements Node & Step & ProposalStep {
 }
 
 # A comment
-type Comment implements Node {
+type Comment implements Node & Contribution {
   id: ID!
   body: String
   createdAt: DateTime!
@@ -355,6 +355,9 @@ type Comment implements Node {
   votes(after: String, first: Int = 30, before: String, last: Int, orderBy: VoteOrder = {field: CREATED_AT, direction: DESC}): CommentVoteConnection!
   trashedReason: String
   kind: String!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
 }
 
 # A connection to a list of items.
@@ -1328,7 +1331,7 @@ type Project implements Node {
 }
 
 # A budget contribution
-type Proposal implements Node {
+type Proposal implements Node & Contribution {
   # The HTTP show url for this contribution.
   show_url: URI!
 
@@ -1781,6 +1784,7 @@ type Query {
   ): [Consultation!]!
   groups: [Group!]!
   proposalForms: [ProposalForm!]!
+  proposal: [Proposal!]!
 
   # Retrieve availables districts for a given address
   availableDistrictsForLocalisation(proposalFormId: ID!, latitude: Float!, longitude: Float!): [District!]!
@@ -2717,6 +2721,12 @@ type User implements Node {
   neighborhood: String
   proposalVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}, stepId: ID): ProposalVoteConnection!
   deletedAccountAt: DateTime
+
+  # Return the user's contributions of the type requested.
+  contributions(
+    # Type of contribustion requested
+    contributionType: String
+  ): [Contribution]!
 }
 
 # A connection to a list of items.

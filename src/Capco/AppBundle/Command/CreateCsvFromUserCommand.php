@@ -102,6 +102,10 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
         }
     }
 
+    protected function createCsv(string $name)
+    {
+    }
+
     protected function getFilename(): string
     {
         return 'data.csv';
@@ -166,6 +170,224 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
       postCommentsCount
       eventCommentsCount
       projectsCount
+    }
+  }
+}
+EOF;
+    }
+
+    protected function getOpinionGraphQLQuery(string $userId): string
+    {
+        return <<<EOF
+{
+  node(id: "${userId}") {
+    ... on User {
+      contributions(contributionType: "Opinion") {
+        ... on Opinion {
+          id
+          author {
+            id
+          }
+          section {
+            title
+          }
+          title
+          body
+          bodyText
+          createdAt
+          updatedAt
+          url
+          expired
+          published
+          trashed
+          trashedAt
+          trashedReason
+          votesCount
+          votesCountOk
+          votesCountMitige
+          votesCountNok
+          argumentsCount
+          argumentsCountFor
+          argumentsCountAgainst
+          sourcesCount
+          versionsCount
+        }
+      }
+    }
+  }
+}
+EOF;
+    }
+
+    protected function getOpinionVersionGraphQLQuery(string $userId): string
+    {
+        return <<<EOF
+{
+  node(id: "${userId}") {
+    ... on User {
+      contributions(contributionType: "OpinionVersion") {
+        ... on Version {
+          related {
+            id
+            kind
+          }
+          id
+          author {
+            id
+          }
+          title
+          body
+          bodyText
+          comment
+          createdAt
+          updatedAt
+          url
+          expired
+          published
+          trashed
+          trashedAt
+          trashedReason
+          votesCount
+          votesCountOk
+          votesCountMitige
+          votesCountNok
+          argumentsCount
+          argumentsCountFor
+          argumentsCountAgainst
+          sourcesCount
+        }
+      }
+    }
+  }
+}
+EOF;
+    }
+
+    protected function getArgumentGraphQLQuery(string $userId): string
+    {
+        return <<<EOF
+{
+  node(id: "${userId}") {
+    ... on User {
+      contributions(contributionType: "Argument") {
+        ... on Argument {
+          related {
+            id
+            kind
+          }
+          id
+          author {
+            id
+          }
+          type
+          body
+          createdAt
+          updatedAt
+          url
+          expired
+          published
+          trashed
+          trashedAt
+          trashedReason
+          votesCount
+        }
+      }
+    }
+  }
+}
+EOF;
+    }
+
+    protected function getSourceGraphQLQuery(string $userId): string
+    {
+        return <<<EOF
+{
+  node(id: "${userId}") {
+    ... on User {
+      contributions(contributionType: "Source") {
+        ... on Source {
+          related {
+            id
+            kind
+          }
+          id
+          author {
+            id
+          }
+          body
+          createdAt
+          updatedAt
+          expired
+          published
+          trashed
+          trashedAt
+          trashedReason
+          votesCount
+        }
+      }
+    }
+  }
+}
+EOF;
+    }
+
+    protected function getVoteGraphQLQuery(string $userId, string $type): string
+    {
+        return <<<EOF
+{
+  node(id: "${userId}") {
+    ... on User {
+      contributions(contributionType: "Vote") {
+        ... on ${$type}Vote {
+					id
+          author {
+            id
+          }
+          value
+          createdAt
+          expired
+        }
+      }
+    }
+  }
+}
+EOF;
+    }
+
+    protected function getRepliesGraphQLQuery(string $userId): string
+    {
+        return <<<EOF
+{
+  node(id: "${userId}") {
+    ... on User {
+      contributions(contributionType: "Replies") {
+        ... on Reply {
+          questionnaire {
+            title
+          }
+          id
+          author {
+            id
+            email
+          }
+          updatedAt
+          expired
+          anonymous
+          responses {
+            question {
+              title
+            }
+            ... on ValueResponse {
+              value
+            }
+            ... on MediaResponse {
+              medias {
+                url
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

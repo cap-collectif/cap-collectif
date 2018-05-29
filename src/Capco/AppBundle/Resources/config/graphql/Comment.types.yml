@@ -2,7 +2,7 @@ Comment:
     type: object
     config:
         description: "A comment"
-        interfaces: [Node]
+        interfaces: [Node, Contribution]
         fields:
             id:
               type: "ID!"
@@ -59,4 +59,6 @@ Comment:
             kind:
               type: "String!"
               resolve: "@=value.getKind()"
-
+            related:
+                type: "Contribution"
+                description: "Return the related contribution if the contribution is related to another."
