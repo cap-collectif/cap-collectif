@@ -123,25 +123,16 @@ RUN cd / && \
     wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-$ES_VERSION.tar.gz && \
     tar -xzf elasticsearch-$ES_VERSION.tar.gz && \
     rm -f elasticsearch-$ES_VERSION.tar.gz && \
-    mv /elasticsearch-$ES_VERSION /etc/elasticsearch 
+    mv /elasticsearch-$ES_VERSION /etc/elasticsearch
 RUN /etc/elasticsearch/bin/elasticsearch-plugin install --batch analysis-icu
 
-# install erlang for RabbitMQ
-RUN echo 'deb https://packages.erlang-solutions.com/debian jessie contrib' >> /etc/apt/sources.list.d/erlang.list && \
-    wget -O- https://packages.erlang-solutions.com/debian/erlang_solutions.asc | apt-key add - && \
-    apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y erlang --no-install-recommends && \
-    rm -rf /var/lib/apt/lists/*
-
 # Install rabbitmq
-RUN echo 'deb https://dl.bintray.com/rabbitmq/debian jessie main' >> /etc/apt/sources.list.d/rabbitmq.list && \
-    wget -O- https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc | apt-key add - && \
+RUN echo 'deb http://www.rabbitmq.com/debian/ testing main' >> /etc/apt/sources.list.d/rabbitmq.list && \
+    wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc | apt-key add - && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y rabbitmq-server --no-install-recommends && \
     rm -rf /var/lib/apt/lists/* && \
-    rabbitmq-plugins enable rabbitmq_management && \
-    chown rabbitmq:rabbitmq /var/lib/rabbitmq/.erlang.cookie && \
-    chmod 600 /var/lib/rabbitmq/.erlang.cookie
+    rabbitmq-plugins enable rabbitmq_management
 
 # Install mariadb
 RUN set -x \
@@ -160,8 +151,7 @@ RUN apt-get update && \
 
 # Install Supervisor
 RUN apt-get update && \
-    apt-get install -y python-pip python-setuptools --no-install-recommends && \
-    easy_install supervisor && \
+    apt-get install -y supervisor --no-install-recommends && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -189,7 +179,7 @@ COPY infrastructure/services/remote/php-fpm/fpm.conf               /etc/service/
 COPY infrastructure/services/remote/cron/crontab                   /etc/cron.d/crontab
 COPY infrastructure/services/remote/elasticsearch/capco.yml        /etc/elasticsearch/config/elasticsearch.yml
 COPY infrastructure/services/remote/varnish/capco.vcl              /etc/varnish/capco.vcl
-COPY infrastructure/services/remote/rabbitmq/rabbitmq.conf         /etc/rabbitmq/rabbitmq.conf
+COPY infrastructure/services/remote/rabbitmq/rabbitmq.config       /etc/rabbitmq/rabbitmq.config
 COPY infrastructure/services/remote/logrotate/mysql-slow-logs      /etc/logrotate.d/mysql-slow-logs
 COPY infrastructure/services/remote/supervisord/                   /etc/supervisord
 

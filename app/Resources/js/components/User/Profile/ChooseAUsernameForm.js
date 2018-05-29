@@ -32,11 +32,6 @@ export class ChooseAUsernameForm extends React.Component<FormProps> {
           component={component}
           name="username"
           id="account__username"
-          help={
-            <span>
-              <FormattedMessage id="name-under-which-you-will-appear-on-the-site" />
-            </span>
-          }
           label={<FormattedMessage id="global.fullname" />}
         />
       </form>
