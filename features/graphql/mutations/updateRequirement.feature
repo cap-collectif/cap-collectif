@@ -17,7 +17,7 @@ Scenario: Logged in API client wants to accept a requirement
     }",
     "variables": {
       "input": {
-        "id": "requirement3",
+        "requirement": "requirement3",
         "value": true
       }
     }
@@ -53,7 +53,7 @@ Scenario: Logged in API client wants to decline a requirement
     }",
     "variables": {
       "input": {
-        "id": "requirement3",
+        "requirement": "requirement3",
         "value": false
       }
     }
