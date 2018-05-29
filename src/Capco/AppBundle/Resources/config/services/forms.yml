@@ -14,12 +14,12 @@ services:
   capco.help_extension:
     class: Capco\AppBundle\Form\Extension\HelpExtension
     tags:
-      - { name: form.type_extension }
+      - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
 
   capco.form.type_extension.media:
     class: Capco\AppBundle\Form\Extension\MediaTypeExtension
     tags:
-      - { name: form.type_extension, extended-type: sonata_media_type }
+      - { name: form.type_extension, extended_type: Sonata\MediaBundle\Form\Type\MediaType }
 
   capco.form.opinion:
     class: Capco\AppBundle\Form\OpinionForm

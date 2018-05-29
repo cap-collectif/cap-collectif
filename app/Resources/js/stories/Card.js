@@ -1,10 +1,14 @@
 // @flow
 import * as React from 'react';
+import { ProgressBar } from 'react-bootstrap';
 import { CardContainer } from '../components/Ui/Card/CardContainer';
 import CardType from '../components/Ui/Card/CardType';
+import { Progress } from '../components/Ui/Progress';
 import CardCover from '../components/Ui/Card/CardCover';
-import CardStatus from '../components/Ui/Card/CardStatus';
-import { CardUser } from '../components/Ui/Card/CardUser';
+import TagsList from '../components/Ui/List/TagsList';
+import InlineList from '../components/Ui/List/InlineList';
+import CardStatus from "../components/Ui/Card/CardStatus";
+import {CardUser} from "../components/Ui/Card/CardUser";
 
 type Props = {
   project: Object,

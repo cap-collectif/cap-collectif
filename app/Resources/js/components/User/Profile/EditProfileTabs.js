@@ -59,13 +59,14 @@ export class EditProfileTabs extends Component<Props> {
       <Tab.Container id="account-tabs" defaultActiveKey={this.getDefaultKey()}>
         <Row className="clearfix">
           <Col sm={4} md={3}>
-            <Panel id="panel-account">
-              <Panel.Heading>
+            <Panel
+              id="panel-account"
+              header={
                 <CardUser>
                   <UserAvatar className="pull-left" user={viewer} />
                   <UserLink user={viewer} />
                 </CardUser>
-              </Panel.Heading>
+              }>
               <ListGroup>
                 <Nav bsStyle="pills" stacked>
                   {features.profiles && (

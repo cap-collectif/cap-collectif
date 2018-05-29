@@ -37,57 +37,52 @@ exports[`<ProposalForm /> should render a create form 1`] = `
     type="text"
   />
   <Collapse
-    appear={false}
     dimension="height"
     getDimensionValue={[Function]}
     in={false}
     mountOnEnter={false}
     timeout={300}
+    transitionAppear={false}
     unmountOnExit={false}
   >
-    <Uncontrolled(Panel)>
-      <PanelHeading
-        bsClass="panel"
-        componentClass="div"
-      >
-        <PanelTitle
-          bsClass="panel"
-          componentClass="div"
-        >
-          <FormattedMessage
-            id="proposal.suggest_header"
-            values={
-              Object {
-                "matches": 0,
-                "terms": 2,
-              }
+    <Panel
+      bsClass="panel"
+      bsStyle="default"
+      defaultExpanded={false}
+      header={
+        <FormattedMessage
+          id="proposal.suggest_header"
+          values={
+            Object {
+              "matches": 0,
+              "terms": 2,
             }
-          />
-          <Button
-            active={false}
-            block={false}
-            bsClass="btn"
-            bsStyle="default"
-            className="pull-right"
-            disabled={false}
-            onClick={[Function]}
-            style={
-              Object {
-                "marginTop": -5,
-              }
-            }
-          >
-            <FormattedMessage
-              id="global.close"
-              values={Object {}}
-            />
-          </Button>
-        </PanelTitle>
-      </PanelHeading>
-      <ListGroup
-        bsClass="list-group"
+          }
+        />
+      }
+    >
+      <ul
+        style={
+          Object {
+            "listStyleType": "none",
+            "padding": 0,
+          }
+        }
       />
-    </Uncontrolled(Panel)>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="default"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          id="global.close"
+          values={Object {}}
+        />
+      </Button>
+    </Panel>
   </Collapse>
   <Field
     autoComplete="off"
@@ -333,57 +328,52 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
     type="text"
   />
   <Collapse
-    appear={false}
     dimension="height"
     getDimensionValue={[Function]}
     in={false}
     mountOnEnter={false}
     timeout={300}
+    transitionAppear={false}
     unmountOnExit={false}
   >
-    <Uncontrolled(Panel)>
-      <PanelHeading
-        bsClass="panel"
-        componentClass="div"
-      >
-        <PanelTitle
-          bsClass="panel"
-          componentClass="div"
-        >
-          <FormattedMessage
-            id="proposal.suggest_header"
-            values={
-              Object {
-                "matches": 0,
-                "terms": 2,
-              }
+    <Panel
+      bsClass="panel"
+      bsStyle="default"
+      defaultExpanded={false}
+      header={
+        <FormattedMessage
+          id="proposal.suggest_header"
+          values={
+            Object {
+              "matches": 0,
+              "terms": 2,
             }
-          />
-          <Button
-            active={false}
-            block={false}
-            bsClass="btn"
-            bsStyle="default"
-            className="pull-right"
-            disabled={false}
-            onClick={[Function]}
-            style={
-              Object {
-                "marginTop": -5,
-              }
-            }
-          >
-            <FormattedMessage
-              id="global.close"
-              values={Object {}}
-            />
-          </Button>
-        </PanelTitle>
-      </PanelHeading>
-      <ListGroup
-        bsClass="list-group"
+          }
+        />
+      }
+    >
+      <ul
+        style={
+          Object {
+            "listStyleType": "none",
+            "padding": 0,
+          }
+        }
       />
-    </Uncontrolled(Panel)>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="default"
+        disabled={false}
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          id="global.close"
+          values={Object {}}
+        />
+      </Button>
+    </Panel>
   </Collapse>
   <Field
     autoComplete="off"

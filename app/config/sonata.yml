@@ -193,13 +193,7 @@ sonata_user:
     security_acl: true
     manager_type: orm
     class:
-        group: Capco\UserBundle\Entity\Group
         user: Capco\UserBundle\Entity\User
-    profile:
-        form:
-            type: Capco\UserBundle\Form\Type\ProfileFormType
-            validation_groups:
-                - profile
     admin:
         user:
             class: Capco\AdminBundle\Admin\UserAdmin

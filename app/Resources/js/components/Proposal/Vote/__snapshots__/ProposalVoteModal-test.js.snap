@@ -48,52 +48,48 @@ exports[`<ProposalVoteModal /> should render correctly 1`] = `
     bsClass="modal-body"
     componentClass="div"
   >
-    <Uncontrolled(Panel)
+    <Panel
+      bsClass="panel"
       bsStyle="primary"
+      defaultExpanded={false}
+      header={
+        <span>
+          <FormattedMessage
+            id="requirements"
+            values={Object {}}
+          />
+           
+        </span>
+      }
       id="required-conditions"
     >
-      <PanelHeading
-        bsClass="panel"
-        componentClass="div"
-      >
-        <FormattedMessage
-          id="requirements"
-          values={Object {}}
-        />
-         
-      </PanelHeading>
-      <PanelBody
-        bsClass="panel"
-        collapsible={false}
-      >
-        <div>
-          <p>
-            We need to collect
-          </p>
-          <Relay(Connect(ReduxForm))
-            step={
-              Object {
+      <div>
+        <p>
+          We need to collect
+        </p>
+        <Relay(Connect(ReduxForm))
+          step={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "id": "step1",
+              "requirements": Object {
+                "reason": "We need to collect",
+                "totalCount": 3,
+                "viewerMeetsTheRequirements": false,
+              },
+              "viewerVotes": Object {
                 "$fragmentRefs": null,
-                "$refType": null,
-                "id": "step1",
-                "requirements": Object {
-                  "reason": "We need to collect",
-                  "totalCount": 3,
-                  "viewerMeetsTheRequirements": false,
-                },
-                "viewerVotes": Object {
-                  "$fragmentRefs": null,
-                  "edges": Array [],
-                  "totalCount": 0,
-                },
-                "votesHelpText": "Help",
-                "votesRanking": false,
-              }
+                "edges": Array [],
+                "totalCount": 0,
+              },
+              "votesHelpText": "Help",
+              "votesRanking": false,
             }
-          />
-        </div>
-      </PanelBody>
-    </Uncontrolled(Panel)>
+          }
+        />
+      </div>
+    </Panel>
     <h3
       className="d-ib mr-10 mb-10"
     >

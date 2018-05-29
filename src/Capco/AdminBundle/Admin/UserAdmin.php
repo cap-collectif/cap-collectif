@@ -59,7 +59,7 @@ class UserAdmin extends BaseAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $listMapper): void
     {
         unset($this->listModes['mosaic']);
 
@@ -115,7 +115,7 @@ class UserAdmin extends BaseAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureDatagridFilters(DatagridMapper $filterMapper)
+    protected function configureDatagridFilters(DatagridMapper $filterMapper): void
     {
         $filterMapper
             ->add('id')

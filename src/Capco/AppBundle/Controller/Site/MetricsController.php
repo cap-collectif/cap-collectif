@@ -26,12 +26,12 @@ class MetricsController extends Controller
         $commentCount = $this->get('capco.comment.repository')->countNotExpired();
         $voteCount = $this->get('capco.abstract_vote.repository')->countNotExpired();
 
-        $opinionCount = $this->get('capco.opinion.repository')->count();
-        $versionCount = $this->get('capco.opinion_version.repository')->count();
-        $argumentCount = $this->get('capco.argument.repository')->count();
-        $sourceCount = $this->get('capco.source.repository')->count();
-        $proposalCount = $this->get('capco.proposal.repository')->count();
-        $replyCount = $this->get('capco.reply.repository')->count();
+        $opinionCount = $this->get('capco.opinion.repository')->getCount();
+        $versionCount = $this->get('capco.opinion_version.repository')->getCount();
+        $argumentCount = $this->get('capco.argument.repository')->getCount();
+        $sourceCount = $this->get('capco.source.repository')->getCount();
+        $proposalCount = $this->get('capco.proposal.repository')->getCount();
+        $replyCount = $this->get('capco.reply.repository')->getCount();
 
         $contributionCount = $opinionCount + $versionCount + $argumentCount + $sourceCount + $proposalCount + $replyCount;
 

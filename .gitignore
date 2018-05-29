@@ -29,7 +29,6 @@ infrastructure/services/databasefixtures/dump.sql
 
 # Configuration files
 app/config/parameters.ini
-app/config/parameters.yml
 app/config/parameters/*
 
 # Node / grunt / bower

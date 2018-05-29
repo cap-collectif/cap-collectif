@@ -118,8 +118,11 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
     }
     show={false}
   />
-  <Uncontrolled(Panel)
+  <Panel
+    bsClass="panel"
+    bsStyle="default"
     className="mt-30 mb-0 panel_flex"
+    defaultExpanded={false}
     header={
       <div>
         <FormattedMessage
@@ -186,7 +189,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
         </a>
       </ListGroupItem>
     </ListGroup>
-  </Uncontrolled(Panel)>
+  </Panel>
   <form
     onSubmit={[MockFunction]}
   >
