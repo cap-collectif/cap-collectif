@@ -93,7 +93,7 @@ export class CarouselMobile extends PureComponent<Props, State> {
 
     if (!isDown) return;
     e.preventDefault();
-    const walk = (x - startX) / 12;
+    const walk = (x - startX) / 10;
 
     if (walk + translateX <= 0 && walk + translateX >= -carouselTotalWidth) {
       this.setState({
