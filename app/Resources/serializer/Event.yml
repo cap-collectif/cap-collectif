@@ -73,7 +73,7 @@ Capco\AppBundle\Entity\Event:
             type: DateTime
             groups: [Default]
             serialized_name: endAt
-        Media:
+        media:
             expose: true
             groups: [Default]
             serialized_name: media
