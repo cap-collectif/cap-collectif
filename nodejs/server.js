@@ -7,7 +7,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 const socket = 'node_ssr.sock';
-const bundlePath = '/var/www/web/js/';
+const bundlePath = process.env.NODE_ENV === 'testing' ? '/home/circleci/capco/web/js/' : '/var/www/web/js/';
 
 let user = 'capco';
 let bundleFileName = 'server-bundle.js';
@@ -127,6 +127,9 @@ unixServer.listen(socket, () => {
   console.log(`[SSR] Giving access to socket for "${user}".`)
   exec("chown "+ user +":"+ user +" "+ sock);
   console.log(`[SSR] Listening socket: unix://${sock}`);
+  if (process.env.NODE_ENV === "testing") {
+    process.exit(0);
+  }
 });
 
 process.on('SIGINT', () => {
