@@ -5,6 +5,7 @@ namespace Capco\AdminBundle\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Model\Metadata;
 use Sonata\UserBundle\Admin\Model\UserAdmin as BaseAdmin;
@@ -13,9 +14,10 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 class UserAdmin extends BaseAdmin
 {
     protected $datagridValues = [
-        '_sort_order' => 'ASC',
-        '_sort_by' => 'username',
+        '_sort_order' => 'DESC',
+        '_sort_by' => 'updatedAt',
     ];
+
     private $rolesLabels = [
         'ROLE_USER' => 'roles.user',
         'ROLE_ADMIN' => 'roles.admin',
@@ -77,23 +79,24 @@ class UserAdmin extends BaseAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('email')
-            ->add('username')
+            ->addIdentifier('username', null, [
+                'label' => 'registration.username',
+            ])
+            ->add('email')
             ->add('enabled', null, [
                 'editable' => true,
             ])
             ->add('locked', null, [
                 'editable' => true,
             ])
-            ->add('updatedAt')
+            ->add('updatedAt', null, [
+                'label' => 'admin.fields.group.created_at',
+            ])
             ->add('deletedAccountAt', null, [
                 'label' => 'admin.fields.proposal.deleted_at',
                 ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'edit' => [
-                        'template' => 'CapcoAdminBundle:User:list__action_edit.html.twig',
-                    ],
                     'show' => [],
                 ],
             ])
@@ -318,5 +321,9 @@ class UserAdmin extends BaseAdmin
                 ->end() */
             ;
         }
+    }
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->clearExcept(['list', 'edit', 'show', 'delete']);
     }
 }

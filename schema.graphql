@@ -634,6 +634,30 @@ type CreateProposalPayload {
   clientMutationId: String
 }
 
+input CreateUserInput {
+  # The user's username
+  username: String!
+
+  # The user's username
+  email: String!
+
+  # The user's password
+  plainPassword: String
+
+  # Unattended roles as array.
+  roles: [String]
+  locked: Boolean
+  vip: Boolean
+  enabled: Boolean
+  clientMutationId: String
+}
+
+type CreateUserPayload {
+  # The created user, if everything goes well !
+  user: User
+  clientMutationId: String
+}
+
 scalar CssJSON
 
 scalar DateTime
@@ -1038,6 +1062,7 @@ type Mutation {
   updateProfilePublicData(input: UpdateProfilePublicDataInput!): UpdateProfilePublicDataPayload
   deleteAccount(input: DeleteAccountInput!): DeleteAccountPayload
   updateRequirement(input: UpdateRequirementInput!): UpdateRequirementPayload
+  createUser(input: CreateUserInput!): CreateUserPayload
 }
 
 # A connection to a list of items.

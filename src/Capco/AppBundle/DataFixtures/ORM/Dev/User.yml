@@ -58,7 +58,7 @@ Capco\UserBundle\Entity\User:
         plainPassword: admin
         media: null
         roles:
-         - 'ROLE_ADMIN'
+         - 'ROLE_SUPER_ADMIN'
         vip: true
         confirmationToken: ~
         phoneConfirmed: true
