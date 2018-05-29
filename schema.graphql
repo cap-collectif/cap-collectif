@@ -253,20 +253,8 @@ type ChangeUserNotificationsConfigurationPayload {
   clientMutationId: String
 }
 
-# Requires the viewer to check a box
-type CheckboxRequirement implements Node & Requirement {
-  id: ID!
-  label: String!
-
-  # Does the viewer meets the requirement ?
-  viewerMeetsTheRequirement: Boolean!
-}
-
 type CollectStep implements Node & Step & ProposalStep {
   id: ID!
-
-  # The requirements to collect or vote.
-  requirements: RequirementConnection!
   show_url: String!
   kind: String!
 
@@ -709,15 +697,6 @@ type Event implements Node {
   participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
 }
 
-# Require a firstname
-type FirstnameRequirement implements Node & Requirement {
-  id: ID!
-
-  # Does the viewer meets the requirement ?
-  viewerMeetsTheRequirement: Boolean!
-  viewerValue: String
-}
-
 input FollowProposalInput {
   # The proposal id
   proposalId: ID!
@@ -789,15 +768,6 @@ scalar HTML
 scalar IP
 
 scalar JSON
-
-# Requires a lastname
-type LastnameRequirement implements Node & Requirement {
-  id: ID!
-
-  # Does the viewer meets the requirement ?
-  viewerMeetsTheRequirement: Boolean!
-  viewerValue: String
-}
 
 # A media
 type Media {
@@ -1204,15 +1174,6 @@ type ParticipantEdge {
   cursor: String!
 }
 
-# Requires a phone
-type PhoneRequirement implements Node & Requirement {
-  id: ID!
-
-  # Does the viewer meets the requirement ?
-  viewerMeetsTheRequirement: Boolean!
-  viewerValue: String
-}
-
 # 3 possible values
 enum PickFollowTypeValue {
   DEFAULT
@@ -1605,8 +1566,6 @@ enum ProposalPublicationStatus {
 
 # A proposal step
 interface ProposalStep {
-  # The requirements to collect or vote.
-  requirements: RequirementConnection!
   id: ID!
   kind: String!
   title: String!
@@ -1960,41 +1919,6 @@ type RequestUserArchivePayload {
   clientMutationId: String
 }
 
-# A requirement
-interface Requirement {
-  id: ID!
-
-  # Does the viewer meets the requirement ?
-  viewerMeetsTheRequirement: Boolean!
-}
-
-# A connection to a list of items.
-type RequirementConnection {
-  # Identifies the total count of items in the connection.
-  totalCount: Int!
-
-  # Does the viewer meets all the requirements ?
-  viewerMeetsTheRequirements: Boolean!
-
-  # The reason for requirements.
-  reason: String
-
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # Information to aid in pagination.
-  edges: [RequirementEdge]
-}
-
-# An edge in a connection.
-type RequirementEdge {
-  # The item at the end of the edge.
-  node: Requirement!
-
-  # A cursor for use in pagination.
-  cursor: String!
-}
-
 # A contribution with an author
 interface Response {
   question: Question!
@@ -2095,9 +2019,6 @@ type Selection {
 # A budget contribution
 type SelectionStep implements Step & Node & ProposalStep {
   id: ID!
-
-  # The requirements to collect or vote.
-  requirements: RequirementConnection!
   show_url: String!
   kind: String!
 
