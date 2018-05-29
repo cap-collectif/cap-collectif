@@ -192,11 +192,20 @@ services:
     class: Capco\AppBundle\GraphQL\Mutation\ProposalEvaluationMutation
     tags:
       - { name: overblog_graphql.mutation, alias: "changeProposalEvaluation", method: "changeProposalEvaluation" }
-      
+
   capco.mutation.delete_account:
     class: Capco\AppBundle\GraphQL\Mutation\DeleteAccountMutation
     arguments:
         - "@doctrine.orm.entity_manager"
         - "@translator"
+    tags:
+      - { name: overblog_graphql.mutation }
+
+  capco.mutation.update_requirement:
+    class: Capco\AppBundle\GraphQL\Mutation\UpdateRequirementMutation
+    arguments:
+        - "@doctrine.orm.entity_manager"
+        - "@capco.requirement.repository"
+        - "@logger"
     tags:
       - { name: overblog_graphql.mutation }
