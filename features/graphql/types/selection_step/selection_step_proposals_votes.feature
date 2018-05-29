@@ -1,7 +1,7 @@
 @proposal_comments
 Feature: Selection step proposal votes connection
 
-@datanase
+@database
 Scenario: Admin wants to get votes for a proposal in a selection step
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:

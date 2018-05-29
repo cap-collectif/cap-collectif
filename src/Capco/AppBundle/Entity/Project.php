@@ -838,11 +838,6 @@ class Project implements IndexableInterface
         return null !== $first ? $first->getStep() : null;
     }
 
-    public function getStartAt(): ?\DateTime
-    {
-       return $this->getCurrentStep() ? $this->getCurrentStep()->getStartAt(): null;
-    }
-
     public function getCurrentStep()
     {
         foreach ($this->steps as $step) {
