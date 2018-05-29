@@ -1063,6 +1063,7 @@ type Mutation {
   deleteAccount(input: DeleteAccountInput!): DeleteAccountPayload
   updateRequirement(input: UpdateRequirementInput!): UpdateRequirementPayload
   createUser(input: CreateUserInput!): CreateUserPayload
+  updateUserAccount(input: UpdateUserAccountInput!): UpdateUserAccountPayload
 }
 
 # A connection to a list of items.
@@ -2754,6 +2755,26 @@ input UpdateRequirementInput {
 type UpdateRequirementPayload {
   viewer: User
   requirement: Requirement
+  clientMutationId: String
+}
+
+input UpdateUserAccountInput {
+  # The user's username
+  email: String!
+
+  # The user's password
+  plainPassword: String
+
+  # Unattended roles as array.
+  roles: [String]
+  locked: Boolean
+  vip: Boolean
+  enabled: Boolean
+  clientMutationId: String
+}
+
+type UpdateUserAccountPayload {
+  user: User!
   clientMutationId: String
 }
 

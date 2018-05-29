@@ -158,6 +158,15 @@ services:
           - "@form.factory"
           - "@logger"
 
+  Capco\AppBundle\GraphQL\Mutation\UpdateUserAccountMutation:
+      # only for sf < 3.3
+      class: Capco\AppBundle\GraphQL\Mutation\UpdateUserAccountMutation
+      arguments:
+          - "@doctrine.orm.default_entity_manager"
+          - "@form.factory"
+          - "@capco.user.repository"
+          - "@logger"
+
   capco.mutation.user_notifications:
         class: Capco\AppBundle\GraphQL\Mutation\UserNotificationsConfigurationMutation
         tags:

@@ -39,6 +39,7 @@ import UserAdminCreateButtonApp from "../js/startup/UserAdminCreateButtonApp";
 import ParisUserNotValidApp from "../js/startup/ParisUserNotValidApp";
 import EditProfileApp from "../js/startup/EditProfileApp";
 import CookieApp from "../js/startup/CookieApp";
+import UserAdminPageApp from '../js/startup/UserAdminPageApp';
 
 const emptyFunction = () => {};
 

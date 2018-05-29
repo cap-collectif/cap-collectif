@@ -48,6 +48,7 @@ import AccountProfileFollowingsApp from './startup/AccountProfileFollowingsApp';
 import UserAdminCreateButtonApp from './startup/UserAdminCreateButtonApp';
 import EditProfileApp from './startup/EditProfileApp';
 import CookieApp from '../js/startup/CookieApp';
+import UserAdminPageApp from '../js/startup/UserAdminPageApp';
 
 import appStore from '../js/stores/AppStore';
 

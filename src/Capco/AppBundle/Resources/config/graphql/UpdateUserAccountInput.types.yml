@@ -1,0 +1,20 @@
+UpdateUserAccountInput:
+    type: relay-mutation-input
+    config:
+        description: "Update a user"
+        fields:
+            email:
+                type: "String!"
+                description: "The user's username"
+            plainPassword:
+                type: "String"
+                description: "The user's password"
+            roles:
+                type: "[String]"
+                description: "Unattended roles as array."
+            locked:
+                type: "Boolean"
+            vip:
+                type: "Boolean"
+            enabled:
+                type: "Boolean"
