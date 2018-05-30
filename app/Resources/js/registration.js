@@ -29,7 +29,6 @@ import AlertBoxApp from './startup/AlertBoxApp';
 import ConsultationPageApp from './startup/ConsultationPageApp';
 import ProposalListApp from './startup/ProposalListApp';
 import ProposalsUserVotesPageApp from './startup/ProposalsUserVotesPageApp';
-import PhoneProfileApp from './startup/PhoneProfileApp';
 import AccountProfileApp from './startup/AccountProfileApp';
 import ShareButtonDropdownApp from './startup/ShareButtonDropdownApp';
 import ProposalCreateFusionButtonApp from './startup/ProposalCreateFusionButtonApp';
@@ -102,7 +101,6 @@ ReactOnRails.register({
   ConsultationPageApp,
   ProposalListApp,
   ProposalsUserVotesPageApp,
-  PhoneProfileApp,
   ShareButtonDropdownApp,
   ProposalFormAdminPageApp,
   GroupAdminPageApp,
