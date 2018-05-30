@@ -25,50 +25,41 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
     {
         $userId = $input->getArgument('userId');
         $executor = $this->getContainer()->get('overblog_graphql.request_executor');
-        $infoResolver = new InfoResolver();
-        $writer = WriterFactory::create(Type::CSV);
-        $writer->openToFile($this->getPath());
 
-        $data = $executor->disabledDebugInfo()->execute([
-            'query' => $this->getUserGraphQLQuery($userId),
-            'variables' => [],
-        ], ['disable_acl' => true])->toArray();
+        // TODO disable ACL or give admin rights (to disable access)
+        $datas['user'] = $executor->disabledDebugInfo()->execute(
+            [
+                'query' => $this->getUserGraphQLQuery($userId),
+                'variables' => [],
+            ]
+        )->toArray();
 
-        if (isset($data['errors'])) {
-            var_dump($data['errors']);
-            throw new \RuntimeException('Failed to query GraphQL to export userId ' . $userId);
+        $datas['questions'] = $executor->disabledDebugInfo()->execute(
+            [
+                'query' => $this->getRepliesGraphQLQuery($userId),
+                'variables' => [],
+            ]
+        )->toArray();
+
+        $datas['medias'] = $executor->disabledDebugInfo()->execute(
+            [
+                'query' => $this->getMediasGraphQLQuery($userId),
+                'variables' => [],
+            ]
+        )->toArray();
+
+        $datas['groups'] = $executor->disabledDebugInfo()->execute(
+            [
+                'query' => $this->getGroupsGraphQLQuery($userId),
+                'variables' => [],
+            ]
+        )->toArray();
+
+        foreach ($datas as $key => $value) {
+            $this->createCsv($userId, $value, $key);
         }
-        unset($data['extensions']);
-
-        $header = array_map(function ($item) {
-            $item = str_replace('data_node_', '', $item);
-            if ('show_url' !== $item) {
-                $item = str_replace('_', '.', $item);
-            }
-
-            return $item;
-        }, $infoResolver->guessHeadersFromFields($data));
-
-        $writer->addRow($header);
-
-        $row = [];
-        foreach ($header as $value) {
-            $row[] = Arr::path($data, "data.node.$value") ?? '';
-        }
-        $writer->addRow($row);
-
-        $writer->close();
-
-        $this->createZipArchive($this->getZipPathForUser($userId), [
-            ['data.csv' => $this->getPath()],
-        ]);
 
         $output->writeln($this->getZipFilenameForUser($userId));
-    }
-
-    protected function getUserDataPathForUser(string $userId): string
-    {
-        return $this->getContainer()->getParameter('kernel.root_dir') . '/../web/export/' . $userId . '_data.csv';
     }
 
     protected function getZipFilenameForUser(string $userId): string
@@ -78,7 +69,9 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
 
     protected function getZipPathForUser(string $userId): string
     {
-        return $this->getContainer()->getParameter('kernel.root_dir') . '/../web/export/' . $this->getZipFilenameForUser($userId);
+        return $this->getContainer()->getParameter('kernel.root_dir') . '/../web/export/' . $this->getZipFilenameForUser(
+                $userId
+            );
     }
 
     protected function createZipArchive(string $zipName, array $files, bool $removeFilesAfter = true): void
@@ -102,8 +95,86 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
         }
     }
 
-    protected function createCsv(string $name)
+    protected function createCsv(string $userId, array $data, string $type)
     {
+        $infoResolver = new InfoResolver();
+        $writer = WriterFactory::create(Type::CSV);
+        $writer->openToFile($this->getPath());
+
+        if (isset($data['errors'])) {
+            var_dump($data['errors']);
+            throw new \RuntimeException('Failed to query GraphQL to export userId ' . $userId);
+        }
+        unset($data['extensions']);
+
+        $header = array_map(
+            function ($item) use ($type) {
+                $item = str_replace('data_node_', '', $item);
+                if ('show_url' !== $item) {
+                    $item = str_replace('_', '.', $item);
+                }
+                if ('questions' === $type) {
+                    $item = str_replace('contributions.', '', $item);
+                }
+                if ('medias' === $type) {
+                    $item = str_replace('medias.', '', $item);
+                }
+                if ('groups' === $type) {
+                    $item = str_replace('groups.', '', $item);
+                }
+
+                return $item;
+            },
+            $infoResolver->guessHeadersFromFields($data)
+        );
+
+        $writer->addRow($header);
+
+        $row = [];
+        if ($contributions = Arr::path($data, 'data.node.contributions')) {
+            $row = $this->resolveContribution($contributions, $header);
+        } elseif ($medias = Arr::path($data, 'data.node.medias')) {
+            $row = $this->resolveContribution($medias, $header);
+        } elseif ($groups = Arr::path($data, 'data.node.groups')) {
+            $row = $this->resolveContribution($groups, $header);
+        } else {
+            foreach ($header as $value) {
+                $value = Arr::path($data, "data.node.$value") ?? '';
+                $row[] = $value;
+            }
+        }
+        if (!empty($row) && \is_array($row[0])) {
+            $writer->addRows($row);
+        } else {
+            $writer->addRow($row);
+        }
+        $writer->close();
+
+        $this->createZipArchive(
+            $this->getZipPathForUser($userId),
+            [
+                ["$type.csv" => $this->getPath()],
+            ]
+        );
+    }
+
+    protected function resolveContribution(array $contributions, array $header)
+    {
+        $row = [];
+        $i = 0;
+        foreach ($contributions as $contribution) {
+            foreach ($header as $value) {
+                if (false === Arr::path($contribution, $value)) {
+                    $value = 0;
+                } else {
+                    $value = Arr::path($contribution, $value);
+                }
+                $row[$i][] = $value;
+            }
+            ++$i;
+        }
+
+        return $row;
     }
 
     protected function getFilename(): string
@@ -387,6 +458,46 @@ EOF;
             }
           }
         }
+      }
+    }
+  }
+}
+EOF;
+    }
+
+    protected function getMediasGraphQLQuery(string $userId): string
+    {
+        return <<<EOF
+{
+  node(id: "${userId}") {
+    ... on User {
+      medias {
+        id
+        name
+        enabled
+        authorName
+        description
+        contentType
+        size 
+      }
+    }
+  }
+}
+EOF;
+    }
+
+    protected function getGroupsGraphQLQuery(string $userId): string
+    {
+        return <<<EOF
+{
+  node(id: "${userId}") {
+    ... on User {
+      groups {
+        title
+        description
+        usersCount
+        createdAt
+        updatedAt
       }
     }
   }

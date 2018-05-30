@@ -1207,7 +1207,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         ];
     }
 
-    public function getContributions(string $requestedType = null)
+    public function getContributionsByType(string $requestedType = null)
     {
         switch ($requestedType) {
             case 'Opinions':
@@ -1235,25 +1235,29 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
                 return $this->getReplies();
                 break;
             default:
-                $types = [
-                    $this->getOpinions(),
-                    $this->getOpinionVersions(),
-                    $this->getVotes(),
-                    $this->getComments(),
-                    $this->getArguments(),
-                    $this->getSources(),
-                    $this->getProposals(),
-                    $this->getReplies(),
-                ];
-
-                $contributions = [];
-                foreach ($types as $type) {
-                    foreach ($type as $contribution) {
-                        $contributions[] = $contribution;
-                    }
-                }
-
+                return $this->getContributions();
                 break;
+        }
+    }
+
+    public function getContributions()
+    {
+        $types = [
+            $this->getOpinions(),
+            $this->getOpinionVersions(),
+            $this->getVotes(),
+            $this->getComments(),
+            $this->getArguments(),
+            $this->getSources(),
+            $this->getProposals(),
+            $this->getReplies(),
+        ];
+
+        $contributions = [];
+        foreach ($types as $type) {
+            foreach ($type as $contribution) {
+                $contributions[] = $contribution;
+            }
         }
 
         return $contributions;

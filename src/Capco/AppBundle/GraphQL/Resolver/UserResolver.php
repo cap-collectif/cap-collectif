@@ -153,6 +153,37 @@ class UserResolver implements ContainerAwareInterface
 
     public function getContributions(User $object, $value)
     {
-        return $object->getContributions($value['contributionType']);
+        return $object->getContributionsByType($value['contributionType']);
+    }
+
+    public function getMedias(User $object): array
+    {
+        $medias = [];
+        if (null !== $object->getMedia()) {
+            $medias[] = $object->getMedia();
+        }
+
+        $proposal = $this->container->get('capco.proposal.repository');
+        $proposals = $proposal->findBy(['author' => $object]);
+
+        foreach ($proposals as $proposal) {
+            if (null !== $proposal->getMedia()) {
+                $medias[] = $proposal->getMedia();
+            }
+        }
+
+        return $medias;
+    }
+
+    public function getGroups(User $object): array
+    {
+        $userGroup = $this->container->get('capco.user_group.repository');
+        $groups = [];
+
+        foreach ($userGroup->findBy(['user' => $object]) as $result) {
+            $groups[] = $result->getGroup();
+        }
+
+        return $groups;
     }
 }

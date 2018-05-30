@@ -17,3 +17,10 @@ Group:
                 type: "UserConnection!"
                 argsBuilder: "Relay::Connection"
                 resolve: "@=resolver('group_users_connection', [value, args])"
+            createdAt:
+                type: "DateTime!"
+            updatedAt:
+                type: "DateTime!"
+            usersCount:
+                type: "Int!"
+                resolve: "@=resolver('group_usersCount', [value])"

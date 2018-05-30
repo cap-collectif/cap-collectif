@@ -222,6 +222,14 @@ User:
                   type: "ID"
             deletedAccountAt:
                 type: "DateTime"
+            medias:
+                type: "[Media!]!"
+                description: "Get all user medias"
+                resolve: "@=resolver('user_getMedias', [value])"
+            groups:
+                type: "[Group!]"
+                description: "Get all groups where the user is"
+                resolve: "@=resolver('user_getGroups', [value])"
             contributions:
                 type: "[Contribution]!"
                 args:

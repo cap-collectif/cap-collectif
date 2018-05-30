@@ -153,6 +153,8 @@ services:
           - { name: overblog_graphql.resolver, alias: "user_rolesText", method: "resolveRolesText" }
           - { name: overblog_graphql.resolver, alias: "user_contributionsToDeleteCount", method: "contributionsToDeleteCount" }
           - { name: overblog_graphql.resolver, alias: "user_getContributions", method: "getContributions" }
+          - { name: overblog_graphql.resolver, alias: "user_getMedias", method: "getMedias" }
+          - { name: overblog_graphql.resolver, alias: "user_getGroups", method: "getGroups" }
 
     Capco\AppBundle\GraphQL\Resolver\UsersFollowingProposalResolver:
         class: Capco\AppBundle\GraphQL\Resolver\UsersFollowingProposalResolver
@@ -209,6 +211,7 @@ services:
             - { name: overblog_graphql.resolver, alias: "groups", method: "resolveAll" }
             - { name: overblog_graphql.resolver, alias: "group", method: "resolve" }
             - { name: overblog_graphql.resolver, alias: "group_users_connection", method: "resolveUsersConnection" }
+            - { name: overblog_graphql.resolver, alias: "group_usersCount", method: "usersCount" }
 
     Capco\AppBundle\GraphQL\Resolver\EvaluationFormResolver:
         class: Capco\AppBundle\GraphQL\Resolver\EvaluationFormResolver
