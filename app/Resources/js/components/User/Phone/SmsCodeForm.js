@@ -1,78 +1,97 @@
-// @flow
-import * as React from 'react';
+import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { reduxForm, Field, SubmissionError } from 'redux-form';
 import { Button } from 'react-bootstrap';
-import type { Dispatch } from '../../../types';
-import renderComponent from '../../Form/Field';
 import UserActions from '../../../actions/UserActions';
+import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
+import Input from '../../Form/Input';
+import FormMixin from '../../../utils/FormMixin';
+import FlashMessages from '../../Utils/FlashMessages';
 
-type Props = {
-  onSubmitSuccess: () => void,
-  submitting: boolean,
-  handleSubmit: () => void,
-};
+const SmsCodeForm = React.createClass({
+  propTypes: {
+    onSubmitSuccess: PropTypes.func.isRequired,
+  },
 
-const onSubmit = (values: { code: string }, dispatch: Dispatch, props: Props) => {
-  const { onSubmitSuccess } = props;
+  mixins: [DeepLinkStateMixin, FormMixin],
 
-  return UserActions.sendSmsCode(values)
-    .then(() => {
-      onSubmitSuccess();
-    })
-    .catch(error => {
-      if (error && error.response && error.response.message === 'sms_code_invalid') {
-        throw new SubmissionError({ code: 'phone.confirm.code_invalid' });
-      }
-    });
-};
+  getInitialState() {
+    return {
+      isSubmitting: false,
+      form: {
+        code: '',
+      },
+      errors: {
+        code: [],
+      },
+    };
+  },
 
-const validate = ({ code }: Object) => {
-  const errors = {};
+  formValidationRules: {
+    code: {
+      min: { value: 6, message: 'phone.confirm.constraints.code' },
+      max: { value: 6, message: 'phone.confirm.constraints.code' },
+      notBlank: { message: 'phone.confirm.constraints.code' },
+    },
+  },
 
-  if (!code || code.length !== 6) {
-    errors.code = 'phone.confirm.constraints.code';
-  }
+  handleSubmit(e) {
+    const { onSubmitSuccess } = this.props;
+    e.preventDefault();
+    if (this.isValid()) {
+      const form = JSON.parse(JSON.stringify(this.state.form));
+      this.setState({ isSubmitting: true });
+      UserActions.sendSmsCode(form)
+        .then(() => {
+          this.setState(this.getInitialState());
+          onSubmitSuccess();
+        })
+        .catch(error => {
+          const response = error.response;
+          const errors = this.state.errors;
+          if (response.message === 'sms_code_invalid') {
+            errors.code = ['phone.confirm.code_invalid'];
+            this.setState({ errors, isSubmitting: false });
+          }
+        });
+    }
+  },
 
-  return errors;
-};
+  renderFormErrors(field) {
+    const errors = this.getErrorsMessages(field);
+    if (errors.length === 0) {
+      return null;
+    }
+    return <FlashMessages errors={errors} form />;
+  },
 
-export const formName = 'SmsCodeForm';
-
-export class SmsCodeForm extends React.Component<Props> {
   render() {
-    const { submitting, handleSubmit } = this.props;
-
     return (
-      <form onSubmit={handleSubmit} className="phone__confirm-code__form">
-        <Field
+      <form onSubmit={this.handleSubmit} style={{ maxWidth: '350px' }}>
+        <Input
           type="text"
-          name="code"
+          buttonAfter={
+            <Button
+              type="submit"
+              bsStyle="primary"
+              style={{ padding: '6px 12px 7px' }}
+              disabled={this.state.isSubmitting}>
+              {this.state.isSubmitting ? (
+                <FormattedMessage id="global.loading" />
+              ) : (
+                <FormattedMessage id="phone.confirm.validate" />
+              )}
+            </Button>
+          }
           autoFocus
-          label={<FormattedMessage id="phone.confirm.code" />}
+          valueLink={this.linkState('form.code')}
           id="_code"
-          component={renderComponent}
+          label={<FormattedMessage id="phone.confirm.code" />}
+          groupClassName={`${this.getGroupStyle('code')} form-group--no-margin`}
+          errors={this.renderFormErrors('code')}
         />
-        <div className="phone__confirm-code__btn">
-          <Button
-            type="submit"
-            bsStyle="primary"
-            style={{ padding: '6px 12px 7px' }}
-            disabled={submitting}>
-            {submitting ? (
-              <FormattedMessage id="global.loading" />
-            ) : (
-              <FormattedMessage id="phone.confirm.validate" />
-            )}
-          </Button>
-        </div>
       </form>
     );
-  }
-}
+  },
+});
 
-export default reduxForm({
-  validate,
-  onSubmit,
-  form: formName,
-})(SmsCodeForm);
+export default SmsCodeForm;

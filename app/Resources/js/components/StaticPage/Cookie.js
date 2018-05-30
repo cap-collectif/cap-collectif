@@ -17,7 +17,11 @@ export class Cookie extends React.Component<Props, State> {
   constructor() {
     super();
     this.state = {
-      isAdvertisingEnabled: config.canUseDOM && !cookieMonster.isDoNotTrackActive(),
+      isAdvertisingEnabled:
+        config.canUseDOM &&
+        (typeof cookieMonster.adCookieConsentValue() === 'undefined'
+          ? true
+          : cookieMonster.adCookieConsentValue()),
       isAnalyticEnabled:
         config.canUseDOM &&
         (typeof cookieMonster.analyticCookieValue() === 'undefined'
@@ -27,12 +31,13 @@ export class Cookie extends React.Component<Props, State> {
   }
 
   toggleAnalyticCookies = (value: boolean): void => {
-    cookieMonster.toggleAnalyticCookies(value);
+    cookieMonster.toggleCookie(value, 'analyticConsentValue');
     this.setState({
       isAnalyticEnabled: value,
     });
   };
   toggleAdvertisingCookies = (value: boolean): void => {
+    cookieMonster.toggleCookie(value, 'adCookieConsentValue');
     this.setState({
       isAdvertisingEnabled: value,
     });
