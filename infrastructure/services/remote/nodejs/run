@@ -2,7 +2,7 @@
 
 echo "Starting nodejs..."
 
-rm -f /var/node_ssr.sock || true
+rm /var/node_ssr.sock || true
 cd /var
 
-exec env NODE_ENV=production node /var/www/nodejs/server.js
+exec node /var/www/nodejs/server.js

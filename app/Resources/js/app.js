@@ -5,7 +5,7 @@ if (!global._babelPolyfill) {
   require('babel-polyfill');
 }
 require('./registration');
-const config = require('./config').default;
+const config = require('./config');
 global.Cookies = require('js-cookie');
 
 require('fancybox')($);

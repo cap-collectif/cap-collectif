@@ -1,0 +1,34 @@
+Capco\AppBundle\Entity\Requirement:
+    requirement1:
+        id: requirement1
+        type: CHECKBOX
+        label: "J'atteste avoir plus de 16 ans"
+        position: 4
+        step: '@collectstepVoteClassement'
+    requirement2:
+        id: requirement2
+        type: CHECKBOX
+        label: "J'atteste résider sur l'une des communes de la Métropole grenobloise"
+        position: 5
+        step: '@collectstepVoteClassement'
+    requirement3:
+        id: requirement3
+        type: CHECKBOX
+        label: "J'accepte d'être recontacté par les services métropolitains pour vérifier la confirmité de ma signature aux conditions requises"
+        position: 6
+        step: '@collectstepVoteClassement'
+    requirement4:
+        id: requirement4
+        type: FIRSTNAME
+        position: 1
+        step: '@collectstepVoteClassement'
+    requirement5:
+        id: requirement5
+        type: LASTNAME
+        position: 2
+        step: '@collectstepVoteClassement'
+    requirement6:
+        id: requirement6
+        type: PHONE
+        position: 3
+        step: '@collectstepVoteClassement'

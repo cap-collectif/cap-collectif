@@ -1,0 +1,11 @@
+UpdateRequirementInput:
+    type: relay-mutation-input
+    config:
+        description: "Input type of UpdateRequirement."
+        fields:
+            requirement:
+              type: "ID!"
+              description: "The Node ID of the requirement to modify."
+            value:
+              type: "Boolean!"
+              description: "The updated value of the requirement."

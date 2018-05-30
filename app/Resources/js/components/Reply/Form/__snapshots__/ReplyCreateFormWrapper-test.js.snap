@@ -10,6 +10,10 @@ exports[`<ReplyCreateFormWrapper /> should no alert an a disabled form when form
       }
     }
   />
+  <PhoneModal
+    onClose={[Function]}
+    show={false}
+  />
 </div>
 `;
 
@@ -41,6 +45,10 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
         "multipleRepliesAllowed": false,
       }
     }
+  />
+  <PhoneModal
+    onClose={[Function]}
+    show={false}
   />
 </div>
 `;
@@ -84,6 +92,10 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
       }
     }
   />
+  <PhoneModal
+    onClose={[Function]}
+    show={false}
+  />
 </div>
 `;
 
@@ -97,6 +109,10 @@ exports[`<ReplyCreateFormWrapper /> should render no alert an an enabled form 1`
         "multipleRepliesAllowed": true,
       }
     }
+  />
+  <PhoneModal
+    onClose={[Function]}
+    show={false}
   />
 </div>
 `;

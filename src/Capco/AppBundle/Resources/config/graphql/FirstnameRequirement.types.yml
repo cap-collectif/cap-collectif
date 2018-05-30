@@ -1,0 +1,18 @@
+FirstnameRequirement:
+    type: object
+    config:
+        interfaces: [Node, Requirement]
+        description: "Require a firstname"
+        fields:
+            id:
+                type: "ID!"
+            viewerMeetsTheRequirement:
+                type: "Boolean!"
+                access: "@hasRole=('ROLE_USER')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\ViewerMeetsTheRequirementResolver", [value, user])'
+                description: "Does the viewer meets the requirement ?"
+            viewerValue:
+                type: "String"
+                access: "@hasRole('ROLE_USER')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementViewerValueResolver", [value, user])'
+                description: "The firstname of the viewer."
