@@ -6,6 +6,7 @@ import ProposalStepPageApp from '../js/startup/ProposalStepPageApp';
 import NavbarApp from '../js/startup/NavbarAppClient';
 import EmailNotConfirmedApp from '../js/startup/EmailNotConfirmedAppClient';
 import NewOpinionApp from '../js/startup/NewOpinionAppClient';
+import PhoneProfileApp from '../js/startup/PhoneProfileApp';
 import AccountProfileApp from '../js/startup/AccountProfileApp';
 import ProjectTrashButtonApp from '../js/startup/ProjectTrashButtonApp';
 import OpinionPageApp from '../js/startup/OpinionPageApp';
@@ -78,6 +79,7 @@ ReactOnRails.register({
   ConsultationPageApp,
   ProposalListApp,
   ProposalsUserVotesPageApp,
+  PhoneProfileApp,
   AccountProfileApp,
   ShareButtonDropdownApp,
   ProposalFormAdminPageApp,

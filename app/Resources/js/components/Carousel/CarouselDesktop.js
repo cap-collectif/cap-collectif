@@ -86,8 +86,6 @@ export class CarouselDesktop extends PureComponent<Props, State> {
                   ? `${itemTitle.substring(0, maxItemLength)}...`
                   : itemTitle;
 
-              console.log(highlighted[highlightedType]);
-
               return (
                 <li
                   key={index}
