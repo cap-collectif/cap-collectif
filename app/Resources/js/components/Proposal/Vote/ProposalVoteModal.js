@@ -133,7 +133,7 @@ export class ProposalVoteModal extends React.Component<Props> {
               bsStyle="primary"
               header={
                 <span>
-                  Conditions requises{' '}
+                  <FormattedMessage id="requirements" />{' '}
                   {step.requirements.viewerMeetsTheRequirements && (
                     <Label bsStyle="primary">
                       <FormattedMessage id="filled" />

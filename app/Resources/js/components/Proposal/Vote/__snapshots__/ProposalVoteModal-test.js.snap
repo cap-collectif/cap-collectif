@@ -54,7 +54,10 @@ exports[`<ProposalVoteModal /> should render correctly 1`] = `
       defaultExpanded={false}
       header={
         <span>
-          Conditions requises
+          <FormattedMessage
+            id="requirements"
+            values={Object {}}
+          />
            
         </span>
       }

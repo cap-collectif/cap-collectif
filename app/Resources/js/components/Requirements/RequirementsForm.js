@@ -3,7 +3,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { reduxForm, Field, type FormProps } from 'redux-form';
+import { reduxForm, Field, startSubmit, stopSubmit, type FormProps } from 'redux-form';
 import component from '../Form/Field';
 import type { RequirementsForm_step } from './__generated__/RequirementsForm_step.graphql';
 import UpdateRequirementMutation from '../../mutations/UpdateRequirementMutation';
@@ -18,7 +18,7 @@ type Requirement = {|
   +viewerValue?: ?string,
   +label?: string,
 |};
-type FormValues = { [key: string]: string | boolean };
+type FormValues = { [key: string]: ?string | boolean };
 type Props = FormProps & {
   step: RequirementsForm_step,
 };
@@ -47,8 +47,7 @@ const validate = (values: FormValues, props: Props) => {
   return errors;
 };
 
-let timeout = null;
-
+const callApiTimeout: { [key: string]: TimeoutID } = {};
 const onChange = (
   values: FormValues,
   dispatch: Dispatch,
@@ -66,14 +65,27 @@ const onChange = (
         return;
       }
       const requirement = requirementEdge.node;
+
+      // Check that the new phone value is valid
+      if (
+        requirement.__typename === 'PhoneRequirement' &&
+        typeof validate(values, props)[requirement.id] !== 'undefined'
+      ) {
+        return;
+      }
+
+      dispatch(startSubmit(formName));
       const newValue = values[element];
       if (requirement.__typename === 'CheckboxRequirement' && typeof newValue === 'boolean') {
+        // The user just (un-)checked a box, so we can call our API directly
         return UpdateRequirementMutation.commit({
           input: {
             requirement: requirement.id,
             value: newValue,
           },
-        }).then(() => {});
+        }).then(() => {
+          dispatch(stopSubmit(formName));
+        });
       }
       if (typeof newValue !== 'string') {
         return;
@@ -88,12 +100,19 @@ const onChange = (
       if (requirement.__typename === 'PhoneRequirement') {
         input.phone = `+33${newValue.charAt(0) === '0' ? newValue.substring(1) : newValue}`;
       }
+
+      // To handle realtime updates
+      // we call the api after 1 second inactivity
+      // on each updated field, using timeout
+      const timeout = callApiTimeout[requirement.id];
       if (timeout) {
         clearTimeout(timeout);
       }
-      timeout = setTimeout(() => {
-        UpdateProfilePersonalDataMutation.commit({ input }).then(() => {});
-      }, 1500);
+      callApiTimeout[requirement.id] = setTimeout(() => {
+        UpdateProfilePersonalDataMutation.commit({ input }).then(() => {
+          dispatch(stopSubmit(formName));
+        });
+      }, 1000);
     }
   });
 };
@@ -120,9 +139,25 @@ const getType = (requirement: Requirement) => {
 
 export class RequirementsForm extends React.Component<Props> {
   render() {
-    const { step } = this.props;
+    const { step, submitting, submitSucceeded } = this.props;
     return (
       <form>
+        <div className="col-sm-12 col-xs-12 alert__form_succeeded-message">
+          {submitting ? (
+            <div>
+              <i
+                className="cap cap-spinner"
+                style={{ display: 'inline-block', animation: 'spin 1s linear infinite' }}
+              />{' '}
+              <FormattedMessage id="current-registration" />
+            </div>
+          ) : submitSucceeded ? (
+            <div>
+              <i className="cap cap-android-checkmark-circle" />{' '}
+              <FormattedMessage id="global.saved" />
+            </div>
+          ) : null}
+        </div>
         {step.requirements.edges &&
           step.requirements.edges
             .filter(Boolean)
@@ -134,7 +169,7 @@ export class RequirementsForm extends React.Component<Props> {
                 }
                 divClassName={
                   requirement.__typename !== 'CheckboxRequirement'
-                    ? 'col-sm-6 col-xs-12'
+                    ? 'col-sm-12 col-xs-12'
                     : 'col-sm-12 col-xs-12'
                 }
                 key={requirement.id}

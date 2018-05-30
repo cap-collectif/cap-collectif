@@ -2,10 +2,13 @@
 
 exports[`<RequirementsForm /> should render a vote widget for a simple vote without limit 1`] = `
 <form>
+  <div
+    className="col-sm-12 col-xs-12 alert__form_succeeded-message"
+  />
   <Field
     addonBefore="France +33"
     component={[Function]}
-    divClassName="col-sm-6 col-xs-12"
+    divClassName="col-sm-12 col-xs-12"
     label={
       <FormattedMessage
         id="mobile-phone"
