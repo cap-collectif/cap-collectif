@@ -8,12 +8,14 @@ function test_mysqldatabase {
   mysql --host=127.0.0.1 -uroot symfony > /dev/null
 }
 
+echo "Cron is waiting for PHP-FPM and Database..."
 # Wait till mysql and php-fpm are ready
 until ( test_phpfpm && test_mysqldatabase )
 do
   sleep 0.1
 done
 
+echo "Installing crontab..."
 crontab /etc/cron.d/crontab
 
 exec cron -f

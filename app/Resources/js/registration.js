@@ -16,7 +16,6 @@ import EmailNotConfirmedApp from './startup/EmailNotConfirmedAppClient';
 import NewOpinionApp from './startup/NewOpinionAppClient';
 import ProjectTrashButtonApp from './startup/ProjectTrashButtonApp';
 import ProjectStepTabsApp from './startup/ProjectStepTabsApp';
-import CarouselApp from './startup/CarouselApp';
 import OpinionPageApp from './startup/OpinionPageApp';
 import CommentSectionApp from './startup/CommentSectionApp';
 import SynthesisViewBoxApp from './startup/SynthesisViewBoxApp';
@@ -29,6 +28,7 @@ import AlertBoxApp from './startup/AlertBoxApp';
 import ConsultationPageApp from './startup/ConsultationPageApp';
 import ProposalListApp from './startup/ProposalListApp';
 import ProposalsUserVotesPageApp from './startup/ProposalsUserVotesPageApp';
+import PhoneProfileApp from './startup/PhoneProfileApp';
 import AccountProfileApp from './startup/AccountProfileApp';
 import ShareButtonDropdownApp from './startup/ShareButtonDropdownApp';
 import ProposalCreateFusionButtonApp from './startup/ProposalCreateFusionButtonApp';
@@ -87,7 +87,6 @@ ReactOnRails.register({
   AccountProfileApp,
   ProjectTrashButtonApp,
   ProjectStepTabsApp,
-  CarouselApp,
   EvaluationsIndexPageApp,
   OpinionPageApp,
   CommentSectionApp,
@@ -101,6 +100,7 @@ ReactOnRails.register({
   ConsultationPageApp,
   ProposalListApp,
   ProposalsUserVotesPageApp,
+  PhoneProfileApp,
   ShareButtonDropdownApp,
   ProposalFormAdminPageApp,
   GroupAdminPageApp,

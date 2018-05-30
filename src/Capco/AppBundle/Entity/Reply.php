@@ -65,6 +65,11 @@ class Reply implements VoteContribution
         $this->responses = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->id;
+    }
+
     public function getKind(): string
     {
         return 'reply';

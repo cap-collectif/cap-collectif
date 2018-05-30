@@ -159,6 +159,6 @@ liip_imagine:
             quality: 70
             controller_action: 'SonataMediaBundle:Media:liipImagineFilter'
             filters:
-                upscale: { min: [800, 500] }
-                thumbnail: { size: [800, 500], mode: outbound }
-                crop: { start: [0, 0], size: [800, 500] }
+                upscale: { min: [750, 300] }
+                thumbnail: { size: [750, 300], mode: outbound }
+                crop: { start: [0, 0], size: [750, 300] }
