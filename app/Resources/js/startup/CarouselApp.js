@@ -2,12 +2,12 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
 import { IntlProvider } from 'react-intl-redux';
-import ProfileBox from '../components/User/Phone/ProfileBox';
+import CarouselContainer from '../components/Carousel/CarouselContainer';
 
 export default props => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
-      <ProfileBox {...props} />
+      <CarouselContainer {...props} />
     </IntlProvider>
   </Provider>
 );

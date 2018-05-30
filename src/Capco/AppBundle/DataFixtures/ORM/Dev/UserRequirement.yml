@@ -1,3 +1,0 @@
-Capco\AppBundle\Entity\UserRequirement:
-    userRequirement1:
-        __construct: ['@user5', '@requirement1', true]

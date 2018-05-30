@@ -7,15 +7,12 @@ use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Monolog\Logger;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AddProposalVoteMutation
@@ -25,19 +22,17 @@ class AddProposalVoteMutation
     private $proposalRepo;
     private $stepRepo;
     private $logger;
-    private $resolver;
 
-    public function __construct(EntityManagerInterface $em, ValidatorInterface $validator, ProposalRepository $proposalRepo, AbstractStepRepository $stepRepo, Logger $logger, StepRequirementsResolver $resolver)
+    public function __construct(EntityManagerInterface $em, ValidatorInterface $validator, ProposalRepository $proposalRepo, AbstractStepRepository $stepRepo, $logger)
     {
         $this->em = $em;
         $this->validator = $validator;
         $this->stepRepo = $stepRepo;
         $this->proposalRepo = $proposalRepo;
         $this->logger = $logger;
-        $this->resolver = $resolver;
     }
 
-    public function __invoke(Argument $input, User $user, Request $request)
+    public function __invoke(Argument $input, User $user, $request)
     {
         $proposal = $this->proposalRepo->find($input->offsetGet('proposalId'));
         $step = $this->stepRepo->find($input->offsetGet('stepId'));
@@ -47,10 +42,6 @@ class AddProposalVoteMutation
         }
         if (!$step) {
             throw new UserError('Unknown step with id: ' . $input->offsetGet('stepId'));
-        }
-
-        if (!$this->resolver->viewerMeetsTheRequirementsResolver($user, $step)) {
-            throw new UserError('You dont meets all the requirements.');
         }
 
         if ($step instanceof CollectStep) {

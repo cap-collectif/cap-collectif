@@ -2,8 +2,12 @@ const net = require('net');
 const fs = require('fs');
 var exec = require( "child_process" ).exec;
 
+if (process.env.NODE_ENV === "production") {
+  console.log = function(){};
+}
+
 const socket = 'node_ssr.sock';
-const bundlePath = '/var/www/web/js/';
+const bundlePath = process.env.NODE_ENV === 'testing' ? '/home/circleci/capco/web/js/' : '/var/www/web/js/';
 
 let user = 'capco';
 let bundleFileName = 'server-bundle.js';
@@ -28,7 +32,7 @@ Handler.prototype.handle = function (connection) {
     const evalCode = function() {
       tries = tries + 1;
       if (tries > 20) {
-        console.log('[SSR] Failed request #'+ i);
+        console.error('[SSR] Failed request #'+ i);
         connection.write('');
         connection.end();
         return;
@@ -123,6 +127,9 @@ unixServer.listen(socket, () => {
   console.log(`[SSR] Giving access to socket for "${user}".`)
   exec("chown "+ user +":"+ user +" "+ sock);
   console.log(`[SSR] Listening socket: unix://${sock}`);
+  if (process.env.NODE_ENV === "testing") {
+    process.exit(0);
+  }
 });
 
 process.on('SIGINT', () => {
