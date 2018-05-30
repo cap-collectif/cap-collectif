@@ -38,11 +38,6 @@ export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
 
   render() {
     const { id, viewer, step, proposal, className } = this.props;
-
-    if (!step.open) {
-      return null;
-    }
-
     if (!viewer) {
       return (
         <LoginOverlay>
@@ -127,7 +122,6 @@ export default createFragmentContainer(ProposalVoteButtonWrapperFragment, {
       title
       votesLimit
       voteType
-      open
       ...VoteButtonOverlay_step
     }
   `,

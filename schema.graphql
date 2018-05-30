@@ -256,8 +256,6 @@ type ChangeUserNotificationsConfigurationPayload {
 # Requires the viewer to check a box
 type CheckboxRequirement implements Node & Requirement {
   id: ID!
-
-  # The condition set by the requirement.
   label: String!
 
   # Does the viewer meets the requirement ?
@@ -267,7 +265,7 @@ type CheckboxRequirement implements Node & Requirement {
 type CollectStep implements Node & Step & ProposalStep {
   id: ID!
 
-  # The requirements to vote on this step.
+  # The requirements to collect or vote.
   requirements: RequirementConnection!
   show_url: String!
   kind: String!
@@ -717,8 +715,6 @@ type FirstnameRequirement implements Node & Requirement {
 
   # Does the viewer meets the requirement ?
   viewerMeetsTheRequirement: Boolean!
-
-  # The firstname of the viewer.
   viewerValue: String
 }
 
@@ -800,8 +796,6 @@ type LastnameRequirement implements Node & Requirement {
 
   # Does the viewer meets the requirement ?
   viewerMeetsTheRequirement: Boolean!
-
-  # The lastname of the viewer.
   viewerValue: String
 }
 
@@ -1217,8 +1211,6 @@ type PhoneRequirement implements Node & Requirement {
 
   # Does the viewer meets the requirement ?
   viewerMeetsTheRequirement: Boolean!
-
-  # The phone of the viewer.
   viewerValue: String
 }
 
@@ -1614,6 +1606,7 @@ enum ProposalPublicationStatus {
 
 # A proposal step
 interface ProposalStep {
+  # The requirements to collect or vote.
   requirements: RequirementConnection!
   id: ID!
   kind: String!
@@ -2104,7 +2097,7 @@ type Selection {
 type SelectionStep implements Step & Node & ProposalStep {
   id: ID!
 
-  # The requirements to vote on this step.
+  # The requirements to collect or vote.
   requirements: RequirementConnection!
   show_url: String!
   kind: String!
