@@ -156,6 +156,7 @@ export default createFragmentContainer(
             private
             required
             helpText
+            description
             type
             isOtherAllowed
             validationRule {

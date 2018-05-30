@@ -175,6 +175,8 @@ export class ReplyForm extends React.Component<Props> {
 
     const disabled = this.formIsDisabled();
 
+    // console.log(questionnaire.questions, "questionnaire.questions");
+
     return (
       <div id="create-reply-form">
         <form id="reply-form" ref="form" onSubmit={handleSubmit}>
@@ -262,6 +264,7 @@ export default createFragmentContainer(container, {
         position
         private
         required
+        description
         helpText
         type
         isOtherAllowed

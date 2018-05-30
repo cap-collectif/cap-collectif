@@ -106,7 +106,7 @@ const Checkbox = React.createClass({
         )}
         {field.helpText && <span className="help-block">{field.helpText}</span>}
         {field.description && (
-          <div style={{ paddingTop: 15, paddingBottom: 25 }}>
+          <div style={{ paddingBottom: 15 }}>
             <ButtonBody body={field.description || ''} />
           </div>
         )}

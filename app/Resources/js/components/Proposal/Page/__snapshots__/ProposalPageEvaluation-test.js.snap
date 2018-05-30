@@ -32,6 +32,7 @@ exports[`<ProposalPageEvaluation /> render a disabled form if viewer is not an e
           Array [
             Object {
               "choices": Array [],
+              "description": null,
               "helpText": null,
               "id": "question1",
               "isOtherAllowed": false,
@@ -83,6 +84,7 @@ exports[`<ProposalPageEvaluation /> render a form if viewer is an evaluer 1`] = 
           Array [
             Object {
               "choices": Array [],
+              "description": null,
               "helpText": null,
               "id": "question1",
               "isOtherAllowed": false,

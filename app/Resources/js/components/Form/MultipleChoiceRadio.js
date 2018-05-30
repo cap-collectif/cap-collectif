@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import { FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap';
 import component from './Field';
+import ButtonBody from '../Reply/Form/ButtonBody';
 
 type Props = {
   name: string,
@@ -69,6 +70,11 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
         <FormGroup validationState={validationState}>
           {label && <ControlLabel bsClass="control-label">{label}</ControlLabel>}
           {helpText && <HelpBlock>{helpText}</HelpBlock>}
+          {props.description && (
+            <div style={{ paddingBottom: 15 }}>
+              <ButtonBody body={props.description || ''} />
+            </div>
+          )}
 
           {choices.map((choice, index) => (
             <Field
@@ -119,7 +125,6 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
             </div>
           )}
 
-          {props.description && <HelpBlock>{props.description}</HelpBlock>}
           {props.errors && <span className="error-block">{props.errors}</span>}
         </FormGroup>
       </div>

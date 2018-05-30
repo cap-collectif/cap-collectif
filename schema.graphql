@@ -857,6 +857,7 @@ type MediaQuestion implements Question {
   private: Boolean!
   required: Boolean!
   helpText: String
+  description: String
   kind: String!
   isOtherAllowed: Boolean!
   choices: [QuestionChoice!]
@@ -1819,6 +1820,7 @@ interface Question {
   required: Boolean!
   isOtherAllowed: Boolean!
   helpText: String
+  description: String
   choices: [QuestionChoice!]
   validationRule: MultipleChoiceQuestionValidationRule
   kind: String!
@@ -2239,6 +2241,7 @@ type SimpleQuestion implements Question {
   private: Boolean!
   required: Boolean!
   helpText: String
+  description: String
   kind: String!
   isOtherAllowed: Boolean!
   choices: [QuestionChoice!]

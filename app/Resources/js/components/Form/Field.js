@@ -15,6 +15,7 @@ const Field = React.createClass({
     divClassName: PropTypes.string,
     wrapperClassName: PropTypes.string,
     help: PropTypes.string,
+    description: PropTypes.string,
     formName: PropTypes.string,
     autoComplete: PropTypes.string,
     disableValidation: PropTypes.bool,
@@ -75,6 +76,7 @@ const Field = React.createClass({
       labelClassName,
       disabled,
       help,
+      description,
       formName,
       addonAfter,
       addonBefore,
@@ -103,6 +105,7 @@ const Field = React.createClass({
         type={type}
         name={name}
         help={help}
+        description={description}
         formName={formName}
         disabled={disabled}
         popover={popover}

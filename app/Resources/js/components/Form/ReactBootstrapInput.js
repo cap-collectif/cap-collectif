@@ -123,9 +123,6 @@ class ReactBootstrapInput extends React.Component<Props> {
     addonAfter,
     buttonBefore,
     buttonAfter,
-    help,
-    description,
-    hasFeedback,
     popover,
     children,
     value,
@@ -369,7 +366,7 @@ class ReactBootstrapInput extends React.Component<Props> {
         )}
         {props.help && <HelpBlock>{props.help}</HelpBlock>}
         {props.description && (
-          <div style={{ paddingTop: 15, paddingBottom: 25 }}>
+          <div style={{ paddingBottom: 15 }}>
             <ButtonBody body={props.description || ''} />
           </div>
         )}

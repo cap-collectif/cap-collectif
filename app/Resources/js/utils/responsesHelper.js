@@ -15,6 +15,7 @@ type Questions = $ReadOnlyArray<{|
   +private: boolean,
   +required: boolean,
   +helpText: ?string,
+  +description: ?string,
   +type: QuestionTypeValue,
   +isOtherAllowed: boolean,
   +validationRule: ?{|
@@ -235,6 +236,7 @@ export const renderResponses = ({
                   type="medias"
                   component={component}
                   help={field.helpText}
+                  description={field.description}
                   placeholder="reply.your_response"
                   label={label}
                   disabled={disabled}
@@ -252,6 +254,7 @@ export const renderResponses = ({
                   component={component}
                   help={field.helpText}
                   isOtherAllowed={isOtherAllowed}
+                  description={field.description}
                   placeholder="reply.your_response"
                   label={label}
                   disabled={disabled}>
@@ -288,6 +291,7 @@ export const renderResponses = ({
                       <MultipleChoiceRadio
                         id={member}
                         name={member}
+                        description={field.description}
                         helpText={field.helpText}
                         isOtherAllowed={isOtherAllowed}
                         label={label}
@@ -309,6 +313,7 @@ export const renderResponses = ({
                   id={member}
                   type={inputType}
                   component={component}
+                  description={field.description}
                   help={field.helpText}
                   isOtherAllowed={isOtherAllowed}
                   placeholder="reply.your_response"

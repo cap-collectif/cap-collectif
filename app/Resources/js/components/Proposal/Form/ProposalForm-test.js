@@ -42,6 +42,7 @@ describe('<ProposalForm />', () => {
           id: 'question1',
           title: 'Lol',
           helpText: 'Question 1',
+          description: null,
           type: 'text',
           position: 1,
           private: true,
