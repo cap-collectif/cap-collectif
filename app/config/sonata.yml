@@ -191,7 +191,6 @@ sonata_media:
 
 sonata_user:
     security_acl: true
-    manager_type: orm
     class:
         user: Capco\UserBundle\Entity\User
     admin:

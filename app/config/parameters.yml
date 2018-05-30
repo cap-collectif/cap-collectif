@@ -32,7 +32,7 @@ parameters:
     twilio_token: '%env(SYMFONY_TWILIO_TOKEN)%'
     twilio_number: '%env(SYMFONY_TWILIO_NUMBER)%'
     disable_mail_delivery: '%env(SYMFONY_DISABLE_MAIL_DELIVERY)%'
-    sonata.media.thumbnail.liip_imagine: Capco\MediaBundle\Thumbnail\LiipImagineThumbnail
+#    sonata.media.thumbnail.liip_imagine: Capco\MediaBundle\Thumbnail\LiipImagineThumbnail
     google_maps_key: ***REMOVED***
     loco_key: 5TYY2LOJxU7WgnDpreCQYXkXLAS_hsDII
     locales: ["en-GB", "fr-FR", "es-ES"]
