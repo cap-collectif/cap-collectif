@@ -1,0 +1,183 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProposalVoteModal /> should render correctly 1`] = `
+<Modal
+  animation={false}
+  aria-labelledby="contained-modal-title-lg"
+  autoFocus={true}
+  backdrop={true}
+  bsClass="modal"
+  bsSize="large"
+  dialogComponentClass={[Function]}
+  enforceFocus={true}
+  keyboard={true}
+  manager={
+    ModalManager {
+      "add": [Function],
+      "containers": Array [],
+      "data": Array [],
+      "handleContainerOverflow": true,
+      "hideSiblingNodes": true,
+      "isTopModal": [Function],
+      "modals": Array [],
+      "remove": [Function],
+    }
+  }
+  onHide={[Function]}
+  renderBackdrop={[Function]}
+  restoreFocus={true}
+  show={true}
+>
+  <ModalHeader
+    bsClass="modal-header"
+    closeButton={true}
+    closeLabel="Close"
+  >
+    <ModalTitle
+      bsClass="modal-title"
+      componentClass="h4"
+      id="contained-modal-title-lg"
+    >
+      <FormattedMessage
+        id="proposal.vote.modal.title"
+        values={Object {}}
+      />
+    </ModalTitle>
+  </ModalHeader>
+  <ModalBody
+    bsClass="modal-body"
+    componentClass="div"
+  >
+    <Panel
+      bsClass="panel"
+      bsStyle="primary"
+      defaultExpanded={false}
+      header={
+        <span>
+          Conditions requises
+           
+        </span>
+      }
+      id="required-conditions"
+    >
+      <div>
+        <p>
+          We need to collect
+        </p>
+        <Relay(Connect(ReduxForm))
+          step={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "id": "step1",
+              "requirements": Object {
+                "reason": "We need to collect",
+                "totalCount": 3,
+                "viewerMeetsTheRequirements": false,
+              },
+              "viewerVotes": Object {
+                "$fragmentRefs": null,
+                "edges": Array [],
+                "totalCount": 0,
+              },
+              "votesHelpText": "Help",
+              "votesRanking": false,
+            }
+          }
+        />
+      </div>
+    </Panel>
+    <h3
+      className="d-ib mr-10 mb-10"
+    >
+      <FormattedMessage
+        id="proposal.vote.modal.title"
+        values={Object {}}
+      />
+    </h3>
+    <h4
+      className="excerpt d-ib mt-15"
+    >
+      <FormattedMessage
+        id="project.votes.nb"
+        values={
+          Object {
+            "num": 0,
+          }
+        }
+      />
+    </h4>
+    <Relay(Connect(ReduxForm))
+      onSubmit={[Function]}
+      step={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "id": "step1",
+          "requirements": Object {
+            "reason": "We need to collect",
+            "totalCount": 3,
+            "viewerMeetsTheRequirements": false,
+          },
+          "viewerVotes": Object {
+            "$fragmentRefs": null,
+            "edges": Array [],
+            "totalCount": 0,
+          },
+          "votesHelpText": "Help",
+          "votesRanking": false,
+        }
+      }
+      votes={
+        Object {
+          "$fragmentRefs": null,
+          "edges": Array [],
+          "totalCount": 0,
+        }
+      }
+    />
+    <div
+      className="well mb-0 mt-15"
+    >
+      <p>
+        <b>
+          <FormattedMessage
+            id="admin.fields.step.votesHelpText"
+            values={Object {}}
+          />
+        </b>
+      </p>
+      <div
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "Help",
+          }
+        }
+      />
+    </div>
+  </ModalBody>
+  <ModalFooter
+    bsClass="modal-footer"
+    componentClass="div"
+  >
+    <CloseButton
+      className="pull-right"
+      label="global.cancel"
+      onClose={[Function]}
+    />
+    <Connect(SubmitButton)
+      bsStyle="success"
+      disabled={false}
+      id="confirm-proposal-vote"
+      isSubmitting={false}
+      label="global.validate"
+      onSubmit={[Function]}
+      style={
+        Object {
+          "marginLeft": "10px",
+        }
+      }
+    />
+  </ModalFooter>
+</Modal>
+`;

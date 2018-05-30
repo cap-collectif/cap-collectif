@@ -6,51 +6,51 @@ cd /var/www
 
 for directory in var/cache var/logs web/bundles web/media/default web/media/sonata_category; do
   if [ ! -d "$directory" ]; then
+    echo "Creating '$directory'..."
     mkdir -p -m 777 $directory
     chown capco:capco $directory
   fi
 done
 
-chmod -R 777 web/media && chown -R capco:capco var && rm -rf var/cache/prod
+echo "Checking media permissions after $(( SECONDS - start )) seconds..."
+chmod -R 777 web/media
 
+echo "Checking var permissions after $(( SECONDS - start )) seconds..."
+chown -R capco:capco var
+
+echo "Clearing cache after $(( SECONDS - start )) seconds..."
+rm -rf var/cache/prod
+
+echo "Checking if mysql is booted after $(( SECONDS - start )) seconds..."
 while ! (mysqladmin ping --host=127.0.0.1)
   do sleep 0.1
 done
+echo "Mysql is ready after $(( SECONDS - start )) seconds!"
 
 echo "Warming up cache and install bundle assets after $(( SECONDS - start )) seconds..."
-gosu capco php bin/console cache:warmup --no-debug --env=prod --no-interaction --quiet
-gosu capco php bin/console assets:install --symlink --env=prod --no-interaction --quiet
+gosu capco php bin/console cache:warmup --no-debug --env=prod --no-interaction
+gosu capco php bin/console assets:install --symlink --env=prod --no-interaction
 gosu capco chmod -R 777 var
-
-
-# Retry variables for migrations (max 3)
-retry=0
-maxRetries=3
+echo "Cache and assets are ready after $(( SECONDS - start )) seconds..."
 
 VERSIONS=`php bin/console doctrine:migrations:status --show-versions --env=prod --no-interaction 2>&1`
 database=`echo "$VERSIONS" | grep -o "Unknown database" | wc -l`
 if [ "$database" != "0" ]; then
     echo "Creating a new database with production data..."
-    gosu capco php bin/console doctrine:database:create --env=prod --no-interaction --quiet
-    gosu capco php bin/console doctrine:schema:create --env=prod --no-interaction --quiet
-    gosu capco php bin/console doctrine:migrations:version --add --all --env=prod --no-interaction --quiet
-    gosu capco php bin/console capco:load-prod-data --force --env=prod --no-interaction --quiet
+    gosu capco php bin/console doctrine:database:create --env=prod --no-interaction
+    gosu capco php bin/console doctrine:schema:create --env=prod --no-interaction
+    gosu capco php bin/console doctrine:migrations:version --add --all --env=prod --no-interaction
+    gosu capco php bin/console capco:load-prod-data --force --env=prod --no-interaction
 else
   migrations=`echo "$VERSIONS" | grep -o "not migrated" | wc -l`
   if [ "$migrations" == "0" ]; then
       echo "No migrations to execute."
   else
     echo "Migrating an existing database..."
-    until [ ${retry} -ge ${maxRetries} ]
-    do
-      su capco -c "php -d memory_limit=-1 bin/console doctrine:migrations:migrate --env=prod --no-interaction" && break
+    su capco -c "php -d memory_limit=-1 bin/console doctrine:migrations:migrate --env=prod --no-interaction"
+    if [ $? -eq 1 ]; then
       echo "Database migration failed... Exiting" >&2
-      retry=$[${retry}+1]
-    done
-    if [ ${retry} -ge ${maxRetries} ]; then
-      echo "Failed after ${maxRetries} attempts!"
-      # Kill docker
-      kill -9 1
+      exit 1
     fi
   fi
 fi
@@ -58,17 +58,19 @@ echo "Database is ready after $(( SECONDS - start )) seconds!"
 
 while ! curl http://127.0.0.1:15672 > /dev/null 2>&1;
   do sleep 0.1
+  echo "Waiting for rabbitmq to boot..."
 done
 
 while ! curl http://127.0.0.1:6379 > /dev/null 2>&1;
   do sleep 0.1
+  echo "Waiting for redis to boot..."
 done
 
 echo "Updating rabbitmq vhost to match schema..."
-gosu capco php bin/rabbit vhost:mapping:create --password=guest app/config/rabbitmq.yml --quiet
+gosu capco php bin/rabbit vhost:mapping:create --password=guest app/config/rabbitmq.yml
 
 # Because of SF 2.8 and our GraphQLBundle's fork we rewarm cache
-gosu capco php bin/console cache:warmup --no-debug --env=prod --no-interaction --quiet
+gosu capco php bin/console cache:warmup --no-debug --env=prod --no-interaction
 
 # Ensure permissions on var
 chmod -R 777 var/ && chown -R capco:capco var/

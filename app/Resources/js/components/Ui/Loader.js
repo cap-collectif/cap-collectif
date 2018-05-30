@@ -8,16 +8,12 @@ type Props = {
   children?: ?React.Node,
 };
 
-export const Container = styled.div`
+export const Container = styled.div.attrs({
+  className: 'col-xs-2 col-xs-offset-5',
+})`
   text-align: center;
-  display: flex;
   padding-top: 50px;
   padding-bottom: 30px;
-  width: 100%;
-
-  div {
-    margin: auto;
-  }
 `;
 
 export class Loader extends React.Component<Props> {

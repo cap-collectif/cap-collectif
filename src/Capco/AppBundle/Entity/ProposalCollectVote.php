@@ -37,6 +37,11 @@ class ProposalCollectVote extends AbstractVote
      */
     private $collectStep;
 
+    public function getStep(): CollectStep
+    {
+        return $this->collectStep;
+    }
+
     public function getCollectStep(): CollectStep
     {
         return $this->collectStep;

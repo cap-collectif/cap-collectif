@@ -38,6 +38,43 @@ Scenario: Logged in API client wants to vote for a proposal in a step with vote 
   }
   """
 
+@security
+Scenario: Logged in API client without all requirements wants to vote for a proposal in a step with requirements
+  Given I am logged in to graphql as admin
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: AddProposalVoteInput!) {
+      addProposalVote(input: $input) {
+        vote {
+          id
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "stepId": "collectstepVoteClassement",
+        "proposalId": "proposal24"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "errors": [
+      {
+        "message": "You dont meets all the requirements.",
+        "locations": [{"line":1,"column":47}],
+        "path":["addProposalVote"]
+      }
+    ],
+    "data": {
+      "addProposalVote": null
+    }
+  }
+  """
+
 @database
 Scenario: Logged in API client wants to vote for a proposal
   Given I am logged in to graphql as user

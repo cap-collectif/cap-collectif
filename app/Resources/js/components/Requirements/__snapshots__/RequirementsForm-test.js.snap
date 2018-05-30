@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RequirementsForm /> should render a vote widget for a simple vote without limit 1`] = `
+<form>
+  <Field
+    addonBefore="France +33"
+    component={[Function]}
+    divClassName="col-sm-6 col-xs-12"
+    label={
+      <FormattedMessage
+        id="mobile-phone"
+        values={Object {}}
+      />
+    }
+    name="requirement1"
+    type="text"
+  />
+  <Field
+    component={[Function]}
+    divClassName="col-sm-12 col-xs-12"
+    label={false}
+    name="requirement1"
+    type="checkbox"
+  >
+    Offrir mon âme à Voldemort
+  </Field>
+</form>
+`;
