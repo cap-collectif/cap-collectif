@@ -9,8 +9,12 @@ class ValueResponseResolver
 {
     public function resolveValue(ValueResponse $response)//: ?string
     {
+        $question = $response->getQuestion();
         // Multiple choice question value is encoded in JSON.
-        if ($response->getQuestion() instanceof MultipleChoiceQuestion) {
+        if ($question instanceof MultipleChoiceQuestion) {
+            if ('select' === $question->getInputType()) {
+                return $response->getValue();
+            }
             // encodes characters correctly
             return json_encode($response->getValue(), JSON_UNESCAPED_UNICODE);
         }
