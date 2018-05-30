@@ -40,9 +40,11 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
         $response = new RedirectResponse($returnTo);
 
         if ($this->toggleManager->isActive('login_paris')) {
-            $this->client->setCookie($request->cookies->get(OpenAmClient::COOKIE_NAME));
-            $this->client->logoutUser();
-            $response->headers->clearCookie(OpenAmClient::COOKIE_NAME, '/', OpenAmClient::COOKIE_DOMAIN);
+            if ($request->cookies->has(OpenAmClient::COOKIE_NAME)) {
+                $this->client->setCookie($request->cookies->get(OpenAmClient::COOKIE_NAME));
+                $this->client->logoutUser();
+                $response->headers->clearCookie(OpenAmClient::COOKIE_NAME, '/', OpenAmClient::COOKIE_DOMAIN);
+            }
         }
 
         return $response;

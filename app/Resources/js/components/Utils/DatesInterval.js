@@ -6,7 +6,7 @@ import moment from 'moment';
 type Props = {
   startAt: ?string,
   endAt: ?string,
-  fullDay: ?boolean,
+  fullDay?: boolean,
 };
 
 export class DatesInterval extends React.Component<Props> {

@@ -24,6 +24,12 @@ svg.avatar {
     .nav > li:not(.active) > a:hover {
         background-color: $page-bgc;
     }
+
+    .alert-info-custom {
+        background-color: $alert-info-bg;
+        color: $alert-info-text;
+        border-color: $alert-info-border;
+    }
 }
 
 .sonata-ba-form {

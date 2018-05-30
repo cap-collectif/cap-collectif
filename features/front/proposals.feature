@@ -161,7 +161,8 @@ Scenario: Logged in user wants to create a proposal without providing required r
   And I submit the create proposal form
   Then I should see "proposal.constraints.field_mandatory"
   And I reload the page
-  When I confirm the popup message
+  And I wait 1 seconds
+  Then I confirm the popup message
 
 @javascript @security @elasticsearch
 Scenario: Logged in user wants to create a proposal in closed collect step
