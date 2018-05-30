@@ -23,6 +23,7 @@ var cookieMonster = function() {
     '_pk_ses',
     '_pk_hsr',
   ];
+  const scrollValueToConsent = 400;
 
   var isDoNotTrackActive = function() {
     const doNotTrack = navigator.doNotTrack || navigator.msDoNotTrack;
@@ -32,6 +33,7 @@ var cookieMonster = function() {
   var processCookieConsent = function() {
     const consentCookie = Cookies.getJSON('hasFullConsent');
     const analyticConsent = Cookies.getJSON('analyticConsentValue');
+    const adsConsent = Cookies.getJSON('adCookieConsentValue');
 
     if (consentCookie === true) {
       executeAnalyticScript();
@@ -41,7 +43,10 @@ var cookieMonster = function() {
     if (consentCookie === false) {
       if (analyticConsent === true) {
         executeAnalyticScript();
+        return;
       }
+      // so do Not Track Is Activated
+      hideBanner();
       return;
     }
 
@@ -49,6 +54,7 @@ var cookieMonster = function() {
     if (isDoNotTrackActive()) {
       if (typeof analyticConsent === 'undefined') {
         Cookies.set('analyticConsentValue', false, { expires: 395 });
+        Cookies.set('adCookieConsentValue', false, { expires: 395 });
       }
       if (consentCookie) {
         Cookies.set('hasFullConsent', false, { expires: 395 });
@@ -66,17 +72,26 @@ var cookieMonster = function() {
       return;
     }
 
-    if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
+    if (
+      document.body.scrollTop > scrollValueToConsent ||
+      document.documentElement.scrollTop > scrollValueToConsent
+    ) {
       if (isDoNotTrackActive()) {
         hideBanner();
+        Cookies.set('hasFullConsent', false, { expires: 395 });
+
         return;
       }
-      considerFullConsent();
+      if (!Cookies.getJSON('hasFullConsent')) {
+        considerFullConsent();
+      }
     }
   }
 
   function hideBanner() {
     cookieBanner.className = cookieBanner.className.replace('active', '').trim();
+    document.removeEventListener('click', onDocumentClick, false);
+    document.removeEventListener('scroll', onDocumentClick, false);
   }
 
   function onDocumentClick(event) {
@@ -90,6 +105,7 @@ var cookieMonster = function() {
       return;
     }
     if (isDoNotTrackActive()) {
+      Cookies.set('hasFullConsent', false, { expires: 395 });
       hideBanner();
       return;
     }
@@ -109,31 +125,37 @@ var cookieMonster = function() {
   function considerFullConsent() {
     Cookies.set('hasFullConsent', true, { expires: 395 });
     executeAnalyticScript();
-
     hideBanner();
-
-    document.removeEventListener('click', onDocumentClick, false);
-    document.removeEventListener('scroll', onDocumentClick, false);
   }
 
-  var toggleAnalyticCookies = function(value) {
+  var toggleCookie = function(value, type) {
     Cookies.set('hasFullConsent', false, { expires: 395 });
     hideBanner();
-    Cookies.set('analyticConsentValue', value, { expires: 395 });
-    if (value) {
-      executeAnalyticScript();
-    } else {
-      GA_COOKIE_NAMES.forEach(name => {
-        if (typeof Cookies.get(name) !== 'undefined') {
-          document.cookie =
-            name + '=; expires=' + +new Date() + '; domain=.' + window.location.host + '; path=/';
-        }
-      });
+    Cookies.set(type, value, { expires: 395 });
+    if (type === 'analyticConsentValue') {
+      if (value) {
+        executeAnalyticScript();
+      } else {
+        GA_COOKIE_NAMES.forEach(name => {
+          if (typeof Cookies.get(name) !== 'undefined') {
+            document.cookie =
+              name + '=; expires=' + +new Date() + '; domain=.' + window.location.host + '; path=/';
+          }
+        });
+      }
+    } else if (type === 'adCookieConsentValue') {
+      if (value) {
+        // do something; waiting for instruction
+      }
     }
   };
 
   var analyticCookieValue = function() {
     return Cookies.getJSON('analyticConsentValue');
+  };
+
+  var adCookieConsentValue = function() {
+    return Cookies.getJSON('adCookieConsentValue');
   };
 
   function removeCookieConsent(event) {
@@ -149,8 +171,9 @@ var cookieMonster = function() {
 
   return {
     processCookieConsent,
-    toggleAnalyticCookies,
+    toggleCookie,
     analyticCookieValue,
+    adCookieConsentValue,
     isDoNotTrackActive,
   };
 };
