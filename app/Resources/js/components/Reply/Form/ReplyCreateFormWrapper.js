@@ -5,7 +5,6 @@ import { Alert, Button } from 'react-bootstrap';
 import ReplyCreateForm from './ReplyCreateForm';
 import LoginButton from '../../User/Login/LoginButton';
 import RegistrationButton from '../../User/Registration/RegistrationButton';
-import PhoneModal from '../../User/Phone/PhoneModal';
 
 export const ReplyCreateFormWrapper = React.createClass({
   propTypes: {
@@ -80,7 +79,7 @@ export const ReplyCreateFormWrapper = React.createClass({
             </Alert>
           )}
         <ReplyCreateForm form={form} disabled={this.formIsDisabled()} />
-        <PhoneModal show={this.state.showPhoneModal} onClose={this.closePhoneModal} />
+        {/* <PhoneModal show={this.state.showPhoneModal} onClose={this.closePhoneModal} /> */}
       </div>
     );
   },

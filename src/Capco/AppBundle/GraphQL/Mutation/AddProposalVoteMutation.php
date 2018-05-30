@@ -22,16 +22,14 @@ class AddProposalVoteMutation
     private $proposalRepo;
     private $stepRepo;
     private $logger;
-    private $resolver;
 
-    public function __construct(EntityManagerInterface $em, ValidatorInterface $validator, ProposalRepository $proposalRepo, AbstractStepRepository $stepRepo, $logger, $resolver)
+    public function __construct(EntityManagerInterface $em, ValidatorInterface $validator, ProposalRepository $proposalRepo, AbstractStepRepository $stepRepo, $logger)
     {
         $this->em = $em;
         $this->validator = $validator;
         $this->stepRepo = $stepRepo;
         $this->proposalRepo = $proposalRepo;
         $this->logger = $logger;
-        $this->resolver = $resolver;
     }
 
     public function __invoke(Argument $input, User $user, $request)
@@ -44,10 +42,6 @@ class AddProposalVoteMutation
         }
         if (!$step) {
             throw new UserError('Unknown step with id: ' . $input->offsetGet('stepId'));
-        }
-
-        if (!$this->resolver->viewerMeetsTheRequirementsResolver($user, $step)) {
-            throw new UserError('You dont meets all the requirements.');
         }
 
         if ($step instanceof CollectStep) {

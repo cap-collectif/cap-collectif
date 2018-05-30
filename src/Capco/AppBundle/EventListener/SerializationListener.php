@@ -2,7 +2,10 @@
 
 namespace Capco\AppBundle\EventListener;
 
+use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Post;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Manager\LogManager;
 use Capco\UserBundle\Entity\User;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
@@ -107,6 +110,10 @@ class SerializationListener extends AbstractSerializationListener
         switch (true) {
         case $parent instanceof Post:
           return 'post';
+        case $parent instanceof Project:
+        case $parent instanceof Event:
+        case $parent instanceof Theme:
+            return 'slider';
         case $parent instanceof User:
           return 'avatar';
         default:

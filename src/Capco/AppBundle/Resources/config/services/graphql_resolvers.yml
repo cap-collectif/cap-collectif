@@ -355,7 +355,7 @@ services:
             - { name: overblog_graphql.resolver }
 
     Capco\AppBundle\GraphQL\Resolver\ParticipantConnectionEdgeRegisteredAnonymouslyResolver:
-        class: Capco\AppBundle\GraphQL\Resolver\ParticipantConnectionEdgeRegisteredAnonymouslyResolver
+        class: Capco\AppBundle\GraphQL\Resolver\ParticipantConnectionEdgeRegistredAnonymouslyResolver
         arguments:
             - "@capco.event_registration.repository"
         tags:

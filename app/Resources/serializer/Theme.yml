@@ -9,6 +9,10 @@ Capco\AppBundle\Entity\Theme:
       expose: true
       type: string
       groups: [Themes, ThemeDetails, Elasticsearch]
+    media:
+      expose: true
+      groups: [Default]
+      serialized_name: media
     isEnabled:
       expose: true
       type: boolean
