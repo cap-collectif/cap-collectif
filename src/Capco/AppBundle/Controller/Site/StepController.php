@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\OtherStep;
@@ -14,7 +13,6 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Capco\AppBundle\GraphQL\Resolver\ProjectContributorResolver;
 use Capco\UserBundle\Entity\User;
-use Doctrine\Common\Collections\ArrayCollection;
 use JMS\Serializer\SerializationContext;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
@@ -318,45 +316,12 @@ class StepController extends Controller
             throw $this->createNotFoundException();
         }
 
-        if (!$step->getQuestionnaire()) {
-            return $this->render('CapcoAppBundle:Step:questionnaire.html.twig', [
-                'project' => $project,
-                'currentStep' => $step,
-            ]);
-        }
-
-        foreach ($step->getQuestionnaire()->getRealQuestions() as $question) {
-            if ($question instanceof MultipleChoiceQuestion) {
-                if ($question->isRandomQuestionChoices()) {
-                    $choices = $question->getQuestionChoices()->toArray();
-                    shuffle($choices);
-                    $question->setQuestionChoices(new ArrayCollection($choices));
-                }
-            }
-        }
-
-        $em = $this->getDoctrine()->getManager();
         $serializer = $this->get('serializer');
-
-        $userRepliesRaw = [];
-        if ($this->getUser()) {
-            $userRepliesRaw = $em
-                ->getRepository('CapcoAppBundle:Reply')
-                ->findBy(
-                    [
-                        'questionnaire' => $step->getQuestionnaire(),
-                        'author' => $this->getUser(),
-                    ]
-                )
-            ;
-        }
-
         $props = $serializer->serialize([
             'step' => $step,
             'form' => $step->getQuestionnaire() ?: null,
-            'userReplies' => $userRepliesRaw,
         ], 'json', SerializationContext::create()
-            ->setGroups(['Questionnaires', 'Questions', 'QuestionnaireSteps', 'Steps', 'UserVotes', 'Replies', 'UsersInfos', 'UserMedias']))
+            ->setGroups(['Questionnaires', 'Questions', 'QuestionnaireSteps', 'Steps']))
         ;
 
         return [
