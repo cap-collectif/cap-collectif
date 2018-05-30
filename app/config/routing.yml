@@ -226,15 +226,18 @@ _sonata_admin:
     type: sonata_admin
     prefix: /admin
 
+gallery:
+    resource: '@SonataMediaBundle/Resources/config/routing/gallery.xml'
+    prefix: /media/gallery
+
 # sonata media
 media:
     resource: '@SonataMediaBundle/Resources/config/routing/media.xml'
     prefix: /media
 
 # liip imagine
-_imagine:
-    resource: .
-    type: imagine
+_liip_imagine:
+  resource: "@LiipImagineBundle/Resources/config/routing.yaml"
 
 #HWIOAuthBundle routes
 hwi_oauth:

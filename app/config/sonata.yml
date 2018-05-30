@@ -193,6 +193,7 @@ sonata_user:
     security_acl: true
     class:
         user: Capco\UserBundle\Entity\User
+        group: Capco\UserBundle\Entity\Group
     admin:
         user:
             class: Capco\AdminBundle\Admin\UserAdmin
