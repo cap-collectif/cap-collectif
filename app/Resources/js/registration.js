@@ -110,4 +110,5 @@ ReactOnRails.register({
   UserAdminCreateButtonApp,
   EditProfileApp,
   CookieApp,
+  UserAdminPageApp,
 });

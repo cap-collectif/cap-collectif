@@ -1,7 +1,7 @@
 // @flow
 import React, {Component} from 'react';
-import {FormattedMessage} from 'react-intl';
-import {  ButtonGroup, Button, Modal} from 'react-bootstrap';
+import {FormattedMessage, injectIntl, intlShape} from 'react-intl';
+import {ButtonGroup, Button, Modal} from 'react-bootstrap';
 import {
   reduxForm,
   type FormProps,
@@ -14,9 +14,13 @@ import CreateUserMutation from '../../../mutations/CreateUserMutation';
 import {isEmail} from "../../../services/Validator";
 import {form} from "../Registration/RegistrationForm";
 import AlertForm from '../../Alert/AlertForm';
-
+import type {Dispatch} from "../../../types";
 
 const formName = 'user-admin-create';
+
+type Props = FormProps & {
+  intl: Object,
+};
 
 const validate = (values: Object) => {
   const errors = {};
@@ -32,17 +36,39 @@ const validate = (values: Object) => {
   if (values.plainPassword && values.plainPassword.length > 72) {
     errors.plainPassword = 'registration.constraints.password.max';
   }
+  console.log(values);
 
   return errors;
 };
 
-const onSubmit = (values) => {
-  return CreateUserMutation.commit({input: values}).then(() => {
-    window.location.reload();
-  });
+const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
+  const {intl} = props;
+  console.log(values);
+
+  const input = {
+    ...values,
+    // ...roles
+  };
+
+  return CreateUserMutation.commit({input})
+    .then(response => {
+      if (!response.createUser || !response.createUser.user) {
+        throw new Error('Mutation "createUser" failed.');
+      }
+    })
+    .catch(response => {
+      if (response.response.message) {
+        throw new SubmissionError({
+          _error: response.response.message,
+        });
+      } else {
+        throw new SubmissionError({
+          _error: intl.formatMessage({id: 'global.error.server.form'}),
+        });
+      }
+    });
 };
 
-type Props = FormProps & {};
 
 export class UserAdminCreateButton extends Component<Props> {
   constructor(props) {
@@ -51,6 +77,7 @@ export class UserAdminCreateButton extends Component<Props> {
       showModal: false,
     };
   }
+
 
   render() {
     const {
@@ -61,24 +88,23 @@ export class UserAdminCreateButton extends Component<Props> {
       handleSubmit,
       submitting,
       error,
+      intl
     } = this.props;
     const {showModal} = this.state;
 
+    // TODO w8 for PR refonte du questionnaire, créer une props dans le fichier checkbox pour choisir de renvoyer les id plutôt que les labels
     const userRoles = [
       {
         id: 'ROLE_SUPER_ADMIN',
-        value: 'ROLE_SUPER_ADMIN',
-        label:<FormattedMessage id="roles.super_admin" />,
+        label: intl.formatMessage({id: 'roles.super_admin'}),
       },
       {
         id: 'ROLE_ADMIN',
-        value: 'ROLE_ADMIN',
-        label: <FormattedMessage id="roles.admin" />,
+        label: intl.formatMessage({id: 'roles.admin'}),
       },
       {
         id: 'ROLE_USER',
-        value: 'ROLE_USER',
-        label: <FormattedMessage id="roles.user" />,
+        label: intl.formatMessage({id: 'roles.user'}),
       }
     ];
 
@@ -108,7 +134,7 @@ export class UserAdminCreateButton extends Component<Props> {
           </Modal.Header>
           <Modal.Body>
             <form>
-            <Field
+              <Field
                 name="username"
                 id="username"
                 component={component}
@@ -133,6 +159,7 @@ export class UserAdminCreateButton extends Component<Props> {
                 id="user_roles"
                 name="roles"
                 component={component}
+                isReduxForm
                 type="checkbox"
                 label={
                   <FormattedMessage id="form.label_real_roles"/>
@@ -141,6 +168,7 @@ export class UserAdminCreateButton extends Component<Props> {
               >
               </Field>
               <Field
+                isOtherAllowed
                 id="user_statuses"
                 name="vip"
                 component={component}
@@ -149,15 +177,16 @@ export class UserAdminCreateButton extends Component<Props> {
                   <FormattedMessage id="admin.fields.step.statuses"/>
                 }
                 value="vip"
-                children={<FormattedMessage id="form.label_vip" />}
+                children={<FormattedMessage id="form.label_vip"/>}
               />
               <Field
                 id="user_statuses"
                 name="enabled"
                 component={component}
                 type="checkbox"
+                isOtherAllowed
                 value="enabled"
-                children={<FormattedMessage id="list.label_enabled" />}
+                children={<FormattedMessage id="list.label_enabled"/>}
               />
               <Field
                 id="user_statuses"
@@ -165,12 +194,13 @@ export class UserAdminCreateButton extends Component<Props> {
                 component={component}
                 type="checkbox"
                 value="locked"
-                children={<FormattedMessage id="list.label_locked" />}
+                isOtherAllowed
+                children={<FormattedMessage id="list.label_locked"/>}
               />
-          </form>
-        </Modal.Body>
+            </form>
+          </Modal.Body>
           <Modal.Footer>
-            <ButtonGroup className="col-sm-4 pl-0">
+            <ButtonGroup className="col-sm-4 pl-0 d-flex d-inline-block">
               <CloseButton
                 onClose={() => {
                   this.setState({showModal: false});
@@ -196,15 +226,16 @@ export class UserAdminCreateButton extends Component<Props> {
               />
             </ButtonGroup>
           </Modal.Footer>
-      </Modal>
+        </Modal>
       </div>
     );
   }
 }
 
-export default reduxForm({
+const userForm = reduxForm({
   onSubmit,
   validate,
   enableReinitialize: true,
   form: formName,
 })(UserAdminCreateButton);
+export default injectIntl(userForm);

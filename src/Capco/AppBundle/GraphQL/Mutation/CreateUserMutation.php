@@ -2,14 +2,14 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\UserFormType;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\ORMException;
 use GraphQL\Error\UserError;
-use GraphQL\Language\AST\Argument;
 use Monolog\Logger;
 use Symfony\Component\Form\FormFactory;
+use Overblog\GraphQLBundle\Definition\Argument;
 
 class CreateUserMutation
 {
@@ -24,18 +24,17 @@ class CreateUserMutation
         $this->logger = $logger;
     }
 
-    public function __invoke(Argument $input)
+    public function __invoke(Argument $input): array
     {
         $arguments = $input->getRawArguments();
         $user = (new User())
             ->setUsername($arguments['username'])
             ->setEmail($arguments['email'])
-            ->setPlainPassword($arguments['plainPassword'])
+            ->setPlainPassword(isset($arguments['plainPassword']) ? $arguments['plainPassword'] : '')
             ->setRoles($arguments['roles'])
-            ->setLocked($arguments['locked'])
-            ->setVip($arguments['vip'])
-            ->setEnabled($arguments['enabled']);
-
+            ->setLocked(isset($arguments['locked']) ? $arguments['locked'] : false)
+            ->setVip(isset($arguments['vip']) ? $arguments['vip'] : false)
+            ->setEnabled(isset($arguments['enabled']) ? $arguments['enabled'] : false);
 
         $form = $this->formFactory->create(UserFormType::class, $user, ['csrf_protection' => false]);
         $form->submit($arguments, false);
@@ -45,8 +44,12 @@ class CreateUserMutation
             throw new UserError('Invalid data.');
         }
 
-        $this->em->persist($user);
-        $this->em->flush();
+        try {
+            $this->em->persist($user);
+            $this->em->flush();
+        } catch (\Exception $e) {
+            dump($e);die;
+        }
 
         return ['user' => $user];
     }

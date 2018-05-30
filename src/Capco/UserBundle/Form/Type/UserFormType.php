@@ -4,10 +4,11 @@ namespace Capco\UserBundle\Form\Type;
 
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UserFormType
+class UserFormType extends AbstractType
 {
     private $toggleManager;
 

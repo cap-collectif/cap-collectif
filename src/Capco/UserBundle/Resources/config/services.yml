@@ -63,6 +63,12 @@ services:
       tags:
           - { name: form.type }
 
+  capco_user.create.form.type:
+    class: Capco\UserBundle\Form\Type\UserFormType
+    arguments: ["@capco.toggle.manager"]
+    tags:
+      - { name: form.type }
+
   # Saml
   capco.logout_handler:
       class: Capco\UserBundle\Security\Http\Logout\LogoutSuccessHandler

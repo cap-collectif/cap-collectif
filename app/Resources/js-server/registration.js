@@ -88,4 +88,5 @@ ReactOnRails.register({
   ParisUserNotValidApp,
   EditProfileApp,
   CookieApp,
+  UserAdminPageApp,
 });

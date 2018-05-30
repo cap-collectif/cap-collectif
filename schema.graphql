@@ -645,7 +645,7 @@ input CreateUserInput {
   plainPassword: String
 
   # Unattended roles as array.
-  roles: [String]
+  roles: [Boolean!]!
   locked: Boolean
   vip: Boolean
   enabled: Boolean
