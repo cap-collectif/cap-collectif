@@ -1,6 +1,7 @@
 UpdateRequirementPayload:
     type: relay-mutation-payload
     config:
+        description: "Payload type of UpdateRequirement."
         fields:
             viewer:
                 type: "User"
