@@ -2,4 +2,4 @@
 
 chown -R capco:capco /etc/elasticsearch
 
-exec su capco -c "/etc/elasticsearch/bin/elasticsearch -Elogger.level=WARN"
+exec su capco -c "/etc/elasticsearch/bin/elasticsearch"

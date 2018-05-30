@@ -3,8 +3,8 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createFragmentContainer, commitLocalUpdate } from 'react-relay';
 import { ConnectionHandler } from 'relay-runtime';
-import { Modal } from 'react-bootstrap';
-import { submit } from 'redux-form';
+import { Modal, Panel, Label } from 'react-bootstrap';
+import { submit, isInvalid } from 'redux-form';
 import { connect, type MapStateToProps } from 'react-redux';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
@@ -12,6 +12,7 @@ import { closeVoteModal, vote } from '../../../redux/modules/proposal';
 import ProposalsUserVotesTable from '../../Project/Votes/ProposalsUserVotesTable';
 import environment from '../../../createRelayEnvironment';
 import type { State, Dispatch } from '../../../types';
+import RequirementsForm, { formName } from '../../Requirements/RequirementsForm';
 import UpdateProposalVotesMutation from '../../../mutations/UpdateProposalVotesMutation';
 import type { ProposalVoteModal_proposal } from './__generated__/ProposalVoteModal_proposal.graphql';
 import type { ProposalVoteModal_step } from './__generated__/ProposalVoteModal_step.graphql';
@@ -25,8 +26,10 @@ type Props = ParentProps & {
   dispatch: Dispatch,
   showModal: boolean,
   isSubmitting: boolean,
+  invalid: boolean,
 };
-class ProposalVoteModal extends React.Component<Props> {
+
+export class ProposalVoteModal extends React.Component<Props> {
   componentDidUpdate(prevProps: Props) {
     if (!prevProps.showModal && this.props.showModal) {
       this.createTmpVote();
@@ -108,7 +111,7 @@ class ProposalVoteModal extends React.Component<Props> {
   };
 
   render() {
-    const { dispatch, showModal, proposal, step, isSubmitting } = this.props;
+    const { dispatch, showModal, proposal, step, invalid, isSubmitting } = this.props;
     return (
       <Modal
         animation={false}
@@ -124,7 +127,29 @@ class ProposalVoteModal extends React.Component<Props> {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h3 className="d-ib mt-0 mr-10 mb-10">
+          {step.requirements.totalCount > 0 && (
+            <Panel
+              id="required-conditions"
+              bsStyle="primary"
+              header={
+                <span>
+                  <FormattedMessage id="requirements" />{' '}
+                  {step.requirements.viewerMeetsTheRequirements && (
+                    <Label bsStyle="primary">
+                      <FormattedMessage id="filled" />
+                    </Label>
+                  )}
+                </span>
+              }>
+              {!step.requirements.viewerMeetsTheRequirements && (
+                <div>
+                  <p>{step.requirements.reason}</p>
+                  <RequirementsForm step={step} />
+                </div>
+              )}
+            </Panel>
+          )}
+          <h3 className="d-ib mr-10 mb-10">
             <FormattedMessage
               id={step.votesRanking ? 'modal-ranking' : 'proposal.vote.modal.title'}
             />
@@ -153,6 +178,7 @@ class ProposalVoteModal extends React.Component<Props> {
           <CloseButton className="pull-right" onClose={this.onHide} />
           <SubmitButton
             id="confirm-proposal-vote"
+            disabled={step.requirements.totalCount > 0 ? invalid : false}
             onSubmit={() => {
               dispatch(submit(`proposal-user-vote-form-step-${step.id}`));
             }}
@@ -173,6 +199,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: ParentPr
       state.proposal.currentVoteModal && state.proposal.currentVoteModal === props.proposal.id
     ),
     isSubmitting: !!state.proposal.isVoting,
+    invalid: isInvalid(formName)(state),
   };
 };
 
@@ -191,6 +218,12 @@ export default createFragmentContainer(container, {
       id
       votesRanking
       votesHelpText
+      requirements {
+        viewerMeetsTheRequirements
+        reason
+        totalCount
+      }
+      ...RequirementsForm_step
       ...ProposalsUserVotesTable_step
       viewerVotes(orderBy: { field: POSITION, direction: ASC }) {
         ...ProposalsUserVotesTable_votes

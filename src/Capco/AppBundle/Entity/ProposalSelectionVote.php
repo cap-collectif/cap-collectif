@@ -50,6 +50,11 @@ class ProposalSelectionVote extends AbstractVote
         return $this;
     }
 
+    public function getStep(): SelectionStep
+    {
+        return $this->selectionStep;
+    }
+
     public function getSelectionStep(): SelectionStep
     {
         return $this->selectionStep;

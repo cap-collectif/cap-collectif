@@ -8,16 +8,12 @@ type Props = {
   emailAddress: string,
 };
 
-const onHideModal = () => {
-  window.location.replace(`${baseUrl}/logout`);
-};
-
 const ParisUserNotValidModal = ({ emailAddress }: Props) => {
   return (
     <Modal
       animation={false}
       show
-      onHide={onHideModal}
+      onHide={() => {}}
       bsSize="small"
       aria-labelledby="contained-modal-title-lg">
       <Modal.Header closeButton>
@@ -36,7 +32,11 @@ const ParisUserNotValidModal = ({ emailAddress }: Props) => {
         </p>
       </Modal.Body>
       <Modal.Footer>
-        <Button bsStyle="primary" onClick={onHideModal}>
+        <Button
+          bsStyle="primary"
+          onClick={() => {
+            window.location.replace(baseUrl);
+          }}>
           <FormattedMessage id="global.close" />
         </Button>
       </Modal.Footer>
