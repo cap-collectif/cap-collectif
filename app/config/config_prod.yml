@@ -31,3 +31,7 @@ monolog:
         console:
             type: console
             bubble: false
+        nested:
+            type:  stream
+            path:  "php://stderr"
+            level: warning
