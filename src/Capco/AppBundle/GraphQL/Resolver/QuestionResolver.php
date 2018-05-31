@@ -52,8 +52,13 @@ class QuestionResolver implements ContainerAwareInterface
         return false;
     }
 
-    public function resolveChoices(MultipleChoiceQuestion $question): iterable
+    public function resolveChoices(AbstractQuestion $question): iterable
     {
+        // This resolver should not be called
+        if (!($question instanceof MultipleChoiceQuestion)) {
+            return [];
+        }
+
         if ($question->isRandomQuestionChoices()) {
             $choices = $question->getQuestionChoices()->toArray();
             shuffle($choices);
