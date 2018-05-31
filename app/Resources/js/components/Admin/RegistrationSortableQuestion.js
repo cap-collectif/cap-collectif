@@ -1,5 +1,5 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import type { Connector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
@@ -10,21 +10,14 @@ import type { State, Dispatch } from '../../types';
 import DragHandle from './DragHandle';
 
 type ParentProps = { value: Object };
-type Props = {
+type Props = ParentProps & {
   isSuperAdmin: boolean,
   value: Object,
   deleteField: () => void,
   updateField: () => void,
 };
 
-export const RegistrationSortableQuestion = React.createClass({
-  propTypes: {
-    value: PropTypes.object.isRequired,
-    isSuperAdmin: PropTypes.bool.isRequired,
-    deleteField: PropTypes.func.isRequired,
-    updateField: PropTypes.func.isRequired,
-  },
-
+export class RegistrationSortableQuestion extends React.Component<Props> {
   render() {
     const { value, isSuperAdmin, deleteField, updateField } = this.props;
     return (
@@ -55,8 +48,8 @@ export const RegistrationSortableQuestion = React.createClass({
         </div>
       </ListGroupItem>
     );
-  },
-});
+  }
+}
 
 const mapStateToProps = (state: State) => ({
   isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),

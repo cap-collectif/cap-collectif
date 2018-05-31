@@ -1,5 +1,5 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import type { Connector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
@@ -8,30 +8,21 @@ import Toggle from 'react-toggle';
 import { arrayMove } from 'react-sortable-hoc';
 import { toggleFeature, showNewFieldModal } from '../../redux/modules/default';
 import { reorderRegistrationQuestions } from '../../redux/modules/user';
-import type { State, Dispatch, FeatureToggle, FeatureToggles } from '../../types';
+import type { State, Dispatch, FeatureToggle } from '../../types';
 import RegistrationCommunicationForm from './RegistrationCommunicationForm';
 import RegistrationQuestionSortableList from './RegistrationQuestionSortableList';
 import RegistrationEmailDomainsForm from './RegistrationEmailDomainsForm';
 
 type Props = {
-  features: FeatureToggles,
-  onToggle: (feature: FeatureToggle, value: boolean) => void,
+  features: Object,
+  onToggle: Function,
   addNewField: () => void,
   isSuperAdmin: boolean,
-  reorder: (list: Array<Object>) => void,
+  reorder: Function,
   dynamicFields: Array<Object>,
 };
 
-export const RegistrationAdminPage = React.createClass({
-  propTypes: {
-    isSuperAdmin: PropTypes.bool.isRequired,
-    features: PropTypes.object.isRequired,
-    onToggle: PropTypes.func.isRequired,
-    addNewField: PropTypes.func.isRequired,
-    reorder: PropTypes.func.isRequired,
-    dynamicFields: PropTypes.array.isRequired,
-  },
-
+export class RegistrationAdminPage extends React.Component<Props> {
   render() {
     const { reorder, isSuperAdmin, onToggle, addNewField, features, dynamicFields } = this.props;
     return (
@@ -60,7 +51,7 @@ export const RegistrationAdminPage = React.createClass({
           <Col xs={1}>
             <Toggle
               checked={features.login_gplus}
-              onChange={() => onToggle('login_gplus', !features.login_gplus)}
+              onChange={() => onToggle('login_ƒgplus', !features.login_gplus)}
             />
           </Col>
           <Col xs={11}>Google</Col>
@@ -191,8 +182,8 @@ export const RegistrationAdminPage = React.createClass({
         <RegistrationCommunicationForm />
       </div>
     );
-  },
-});
+  }
+}
 
 const mapStateToProps = (state: State) => ({
   features: state.default.features,

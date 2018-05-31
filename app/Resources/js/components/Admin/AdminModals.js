@@ -3,7 +3,9 @@ import * as React from 'react';
 import AddRegistrationQuestionModal from './AddRegistrationQuestionModal';
 import UpdateRegistrationQuestionModal from './UpdateRegistrationQuestionModal';
 
-const AdminModals = React.createClass({
+type Props = {};
+
+class AdminModals extends React.Component<Props> {
   render() {
     return (
       <div>
@@ -11,7 +13,7 @@ const AdminModals = React.createClass({
         <UpdateRegistrationQuestionModal />
       </div>
     );
-  },
-});
+  }
+}
 
 export default AdminModals;
