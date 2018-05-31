@@ -92,7 +92,7 @@ class EventsController extends FOSRestController
             ->setIsEnabled(true)
         ;
 
-        $form = $this->createForm(new CommentType($user), $comment);
+        $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
         if (!$form->isValid()) {

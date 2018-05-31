@@ -17,6 +17,14 @@ services:
     autowire: true
     autoconfigure: true
 
+  Capco\AppBundle\Form\PostSearchType:
+    autoconfigure: true
+    autowire: true
+
+  Capco\AppBundle\Form\CommentType:
+    autoconfigure: true
+    autowire: true
+
   capco.form.type.purified_textarea:
     class: Capco\AppBundle\Form\Type\PurifiedTextareaType
     arguments: ["@capco.form.transformer.html_purifier"]
