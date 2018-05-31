@@ -10,7 +10,7 @@ Questionnaire:
             anonymousAllowed:
                 type: "Boolean!"
             description:
-                type: "String!"
+                type: "String"
             multipleRepliesAllowed:
                 type: "Boolean!"
             contribuable:
