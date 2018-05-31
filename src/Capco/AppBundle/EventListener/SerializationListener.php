@@ -109,7 +109,6 @@ class SerializationListener extends AbstractSerializationListener
         $parent = $context->getVisitingStack()->top();
         switch (true) {
         case $parent instanceof Post:
-          return 'post';
         case $parent instanceof Project:
         case $parent instanceof Event:
         case $parent instanceof Theme:
