@@ -78,6 +78,10 @@ services:
     arguments:
       - "@capco.abstract_question.repository"
 
+  capco.liip_image_thumbnail:
+    class: Capco\MediaBundle\Thumbnail\LiipImagineThumbnail
+    arguments: ['@router']
+
   twilio.sms_sender:
     class: Capco\AppBundle\Sms\TwilioSmsSender
     arguments: ['%twilio_sid%', '%twilio_token%']

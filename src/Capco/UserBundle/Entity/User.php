@@ -70,6 +70,9 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     protected $linkedInUrl;
 
+    protected $expiresAt;
+    protected $expired;
+
     /**
      * @var string
      */
@@ -1248,6 +1251,18 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public function getUsername(): ?string
     {
         return $this->username;
+    }
+
+    public function getExpired(): bool
+    {
+        return $this->expired;
+    }
+
+    public function setExpired(bool $value): self
+    {
+        $this->expired = $value;
+
+        return $this;
     }
 
     // ********************* Methods for synthesis tool **************************

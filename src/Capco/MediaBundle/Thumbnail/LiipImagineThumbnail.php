@@ -39,10 +39,20 @@ class LiipImagineThumbnail implements ThumbnailInterface
         if ('reference' === $format) {
             $path = $provider->getReferenceImage($media);
         } else {
-            $path = $this->router->generate(
-                sprintf('_imagine_%s', $format),
-                ['path' => sprintf('%s/%s_%s.%s', $provider->generatePath($media), $media->getId(), $format, $this->getExtension($media))]
-            );
+            if ($this->router->getRouteCollection()->get('liip_imagine_filter')) {
+                $path = $this->router->generate(
+                    'liip_imagine_filter',
+                    [
+                        'path' => sprintf('%s/%s_%s.jpg', $provider->generatePath($media), $media->getId(), $format),
+                        'filter' => $format,
+                    ]
+                );
+            } else {
+                $path = $this->router->generate(
+                    sprintf('_imagine_%s', $format),
+                    ['path' => sprintf('%s/%s_%s.jpg', $provider->generatePath($media), $media->getId(), $format)]
+                );
+            }
         }
 
         return $provider->getCdnPath($path, $media->getCdnIsFlushable());
@@ -55,7 +65,7 @@ class LiipImagineThumbnail implements ThumbnailInterface
     {
         if (MediaProviderInterface::FORMAT_REFERENCE !== $format) {
             // This bundle is madness ¯\_(ツ)_/¯
-            // throw new \RuntimeException('No private url for LiipImagineThumbnail');
+//             throw new \RuntimeException('No private url for LiipImagineThumbnail');
 
             return $this->generatePublicUrl($provider, $media, $format);
         }

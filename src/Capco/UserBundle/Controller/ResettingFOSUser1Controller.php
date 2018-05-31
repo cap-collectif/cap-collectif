@@ -3,11 +3,11 @@
 namespace Capco\UserBundle\Controller;
 
 use FOS\UserBundle\Model\UserInterface;
-use Sonata\UserBundle\Controller\ResettingFOSUser1Controller as BaseController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Validator\Constraints\Email as EmailConstraint;
 
-class ResettingFOSUser1Controller extends BaseController
+class ResettingFOSUser1Controller extends Controller
 {
     public function requestAction()
     {

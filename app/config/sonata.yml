@@ -164,14 +164,14 @@ sonata_media:
 
     providers:
         image:
-            thumbnail:  sonata.media.thumbnail.liip_imagine
+            thumbnail: capco.liip_image_thumbnail
             adapter: sonata.media.adapter.image.imagick
         vimeo:
-            thumbnail:  sonata.media.thumbnail.liip_imagine
+            thumbnail: capco.liip_image_thumbnail
         youtube:
-            thumbnail:  sonata.media.thumbnail.liip_imagine
+            thumbnail: capco.liip_image_thumbnail
         dailymotion:
-            thumbnail:  sonata.media.thumbnail.liip_imagine
+            thumbnail: capco.liip_image_thumbnail
         file:
             service:    sonata.media.provider.file
             resizer:    false
