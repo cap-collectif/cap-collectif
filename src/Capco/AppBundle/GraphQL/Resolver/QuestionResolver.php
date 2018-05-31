@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Helper\GeometryHelper;
+use Doctrine\Common\Collections\ArrayCollection;
 use Overblog\GraphQLBundle\Error\UserError;
 use PhpParser\Node\Arg;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -51,13 +52,21 @@ class QuestionResolver implements ContainerAwareInterface
         return false;
     }
 
-    public function resolveChoices(AbstractQuestion $question)
+    public function resolveChoices(AbstractQuestion $question): iterable
     {
-        if ($question instanceof MultipleChoiceQuestion) {
-            return $question->getQuestionChoices();
+        // This resolver should not be called
+        if (!($question instanceof MultipleChoiceQuestion)) {
+            return [];
         }
 
-        return null;
+        if ($question->isRandomQuestionChoices()) {
+            $choices = $question->getQuestionChoices()->toArray();
+            shuffle($choices);
+
+            return new ArrayCollection($choices);
+        }
+
+        return $question->getQuestionChoices();
     }
 
     public function resolveValidationRule(AbstractQuestion $question)
@@ -79,6 +88,16 @@ class QuestionResolver implements ContainerAwareInterface
     public function resolveQuestionnaireQuestions(Questionnaire $questionnaire)
     {
         return $questionnaire->getRealQuestions();
+    }
+
+    public function resolveQuestionnaireOpen(Questionnaire $questionnaire): bool
+    {
+        return $questionnaire->canContribute();
+    }
+
+    public function resolveQuestionnairePhoneConfirmationRequired(Questionnaire $questionnaire): bool
+    {
+        return $questionnaire->isPhoneConfirmationRequired();
     }
 
     public function resolveQuestionType(AbstractQuestion $question): string

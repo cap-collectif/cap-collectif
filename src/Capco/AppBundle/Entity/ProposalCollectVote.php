@@ -3,6 +3,9 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Traits\AnonymousableTrait;
+use Capco\AppBundle\Traits\PositionableTrait;
+use Capco\AppBundle\Traits\PrivatableTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -16,8 +19,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ProposalCollectVote extends AbstractVote
 {
-    use \Capco\AppBundle\Traits\AnonymousableTrait;
-    use \Capco\AppBundle\Traits\PrivatableTrait;
+    use AnonymousableTrait;
+    use PrivatableTrait;
+    use PositionableTrait;
 
     const ANONYMOUS = 'ANONYMOUS';
 
@@ -32,6 +36,11 @@ class ProposalCollectVote extends AbstractVote
      * @ORM\JoinColumn(name="collect_step_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $collectStep;
+
+    public function getStep(): CollectStep
+    {
+        return $this->collectStep;
+    }
 
     public function getCollectStep(): CollectStep
     {

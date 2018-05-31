@@ -17,7 +17,6 @@ const Checkbox = React.createClass({
     renderFormErrors: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
     labelClassName: PropTypes.string,
-    isReduxForm: PropTypes.bool.isRequired,
     value: PropTypes.object.isRequired,
     errors: PropTypes.any,
   },
@@ -27,82 +26,40 @@ const Checkbox = React.createClass({
   getDefaultProps() {
     return {
       disabled: false,
-      labelClassName: 'h5',
-      isReduxForm: false,
+      labelClassName: '',
       value: {},
     };
   },
 
   getInitialState() {
     return {
-      mixinValue: [],
       currentValue: [],
     };
   },
 
   onChange(newValue) {
-    const { isReduxForm, onChange, field, value } = this.props;
-    const otherValue = value.other ? value.other : null;
+    const { onChange, value } = this.props;
+    const otherValue = value.other;
 
-    if (isReduxForm) {
-      if (Array.isArray(newValue)) {
-        onChange({ labels: newValue, other: otherValue });
-
-        this.setState({
-          currentValue: newValue,
-        });
-      } else {
-        onChange(newValue);
-      }
-
-      return;
-    }
-
-    // Without redux form
-
-    let resolveValue;
     if (Array.isArray(newValue)) {
-      resolveValue = newValue;
-    } else {
-      const lastValues = this.state.mixinValue.filter(val => {
-        let find = false;
-        let i = 0;
+      onChange({ labels: newValue, other: otherValue });
 
-        while (i < field.choices.length && !find) {
-          if (val === field.choices[i].label) {
-            find = true;
-          }
-          i++;
-        }
-
-        return find;
+      this.setState({
+        currentValue: newValue,
       });
-
-      resolveValue = [...lastValues, newValue];
+    } else {
+      onChange(newValue);
     }
-
-    this.setState({
-      mixinValue: resolveValue,
-    });
-
-    onChange(field, resolveValue);
   },
 
   onOtherChange(e, changeValue) {
-    const { isReduxForm, value } = this.props;
-    const values = isReduxForm ? value.labels : this.state.mixinValue;
+    const { value } = this.props;
+    const values = value.labels ? value.labels : [];
 
-    if (isReduxForm) {
-      if (changeValue) {
-        this.onChange({ labels: values, other: changeValue });
-      } else {
-        this.onChange({ labels: values, other: null });
-      }
-
-      return;
-    }
-
-    this.onChange(changeValue);
+    this.onChange({
+      labels: values,
+      other: changeValue || null,
+    });
   },
 
   empty() {
@@ -125,21 +82,17 @@ const Checkbox = React.createClass({
       field,
       value,
       onBlur,
-      isReduxForm,
     } = this.props;
-    const { mixinValue, currentValue } = this.state;
 
-    let finalValue = mixinValue;
-    if (isReduxForm) {
-      finalValue = value.labels ? value.labels : currentValue;
-    }
+    const finalValue = value.labels ? value.labels : [];
 
-    const otherValue = isReduxForm ? value.other : undefined;
+    const otherValue = value.other ? value.other : '';
     const fieldName = `choices-for-field-${field.id}`;
 
     const labelClasses = {
       'control-label': true,
     };
+
     if (labelClassName) {
       labelClasses[labelClassName] = true;
     }
@@ -153,7 +106,7 @@ const Checkbox = React.createClass({
         )}
         {field.helpText && <span className="help-block">{field.helpText}</span>}
         {field.description && (
-          <div style={{ paddingTop: 15, paddingBottom: 25 }}>
+          <div style={{ paddingBottom: 15 }}>
             <ButtonBody body={field.description || ''} />
           </div>
         )}
@@ -190,12 +143,11 @@ const Checkbox = React.createClass({
               </div>
             );
           })}
-          {this.props.field.isOtherAllowed ? (
+          {field.isOtherAllowed ? (
             <Other
               ref={c => (this.other = c)}
               value={otherValue}
-              isReduxForm={isReduxForm}
-              field={this.props.field}
+              field={field}
               onChange={this.onOtherChange}
               disabled={disabled}
             />

@@ -45,6 +45,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
           "questions": Array [
             Object {
               "choices": Array [],
+              "description": null,
               "helpText": "Help 1",
               "id": "1",
               "isOtherAllowed": false,
@@ -340,6 +341,7 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
           Array [
             Object {
               "choices": Array [],
+              "description": null,
               "helpText": "Help 1",
               "id": "1",
               "isOtherAllowed": false,

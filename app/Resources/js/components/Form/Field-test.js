@@ -14,6 +14,7 @@ describe('<Field />', () => {
     },
     meta: {
       touched: false,
+      dirty: false,
     },
   };
 
@@ -32,7 +33,7 @@ describe('<Field />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('renders an errored <Input /> element', () => {
+  it('renders an error <Input /> element', () => {
     const wrapper = shallow(
       <Field {...defaultProps} meta={{ touched: true, error: 'global.required' }} />,
     );

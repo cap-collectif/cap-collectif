@@ -1,20 +1,20 @@
-import React from 'react';
+// @flow
+import * as React from 'react';
 import { Alert } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
+import { graphql, createFragmentContainer } from 'react-relay';
+import type { ProposalPageAlert_proposal } from './__generated__/ProposalPageAlert_proposal.graphql';
 
-const ProposalPageAlert = React.createClass({
-  displayName: 'ProposalPageAlert',
-
-  propTypes: {
-    proposal: React.PropTypes.object.isRequired,
-  },
-
+type Props = { proposal: ProposalPageAlert_proposal };
+export class ProposalPageAlert extends React.Component<Props> {
   render() {
     const proposal = this.props.proposal;
-    if (proposal.isTrashed) {
+    if (proposal.publicationStatus === 'TRASHED') {
       return (
         <Alert bsStyle="warning" style={{ marginBottom: '0', textAlign: 'center' }}>
-          <strong>{<FormattedMessage id="proposal.trashed.label" />}</strong>
+          <strong>
+            <FormattedMessage id="proposal.trashed.label" />
+          </strong>
           {proposal.trashedReason && (
             <span>
               {' '}
@@ -30,7 +30,14 @@ const ProposalPageAlert = React.createClass({
       );
     }
     return null;
-  },
-});
+  }
+}
 
-export default ProposalPageAlert;
+export default createFragmentContainer(ProposalPageAlert, {
+  proposal: graphql`
+    fragment ProposalPageAlert_proposal on Proposal {
+      publicationStatus
+      trashedReason
+    }
+  `,
+});

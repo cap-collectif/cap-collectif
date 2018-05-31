@@ -21,6 +21,19 @@ class ProposalCollectVoteRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
+    public function getByProposalAndStepAndUser(Proposal $proposal, CollectStep $step, User $author): array
+    {
+        return $this->createQueryBuilder('pv')
+          ->andWhere('pv.user = :author')
+          ->andWhere('pv.collectStep = :step')
+          ->andWhere('pv.proposal = :proposal')
+          ->setParameter('author', $author)
+          ->setParameter('step', $step)
+          ->setParameter('proposal', $proposal)
+          ->getQuery()
+          ->getResult();
+    }
+
     public function getByProposalAndStep(Proposal $proposal, CollectStep $step, int $litmit, int $offset, string $field, string $direction): Paginator
     {
         $qb = $this->createQueryBuilder('pv')
@@ -73,6 +86,37 @@ class ProposalCollectVoteRepository extends EntityRepository
       ;
     }
 
+    public function getByAuthorAndStep(User $author, CollectStep $step, int $limit, int $offset, string $field = null, string $direction = null): Paginator
+    {
+        $qb = $this->createQueryBuilder('pv')
+          ->andWhere('pv.collectStep = :step')
+          ->andWhere('pv.user = :author')
+          ->andWhere('pv.expired = false')
+          ->leftJoin('pv.proposal', 'proposal')
+          ->andWhere('proposal.id IS NOT NULL')
+          ->andWhere('proposal.deletedAt IS NULL')
+          ->setParameter('step', $step)
+          ->setParameter('author', $author);
+
+        if ($field && $direction) {
+            if ('CREATED_AT' === $field) {
+                $qb->addOrderBy('pv.createdAt', $direction);
+            }
+            if ('POSITION' === $field) {
+                $qb->addOrderBy('pv.position', $direction);
+            }
+        }
+
+        if ($limit > 0) {
+            $qb
+          ->setMaxResults($limit);
+        }
+        $qb->setFirstResult($offset);
+
+        return new Paginator($qb);
+    }
+
+    // TODO remove this duplicate
     public function getVotesByStepAndUser(CollectStep $step, User $user): array
     {
         return $this->createQueryBuilder('pv')
@@ -134,11 +178,21 @@ class ProposalCollectVoteRepository extends EntityRepository
     public function countVotesByProposalAndStep(Proposal $proposal, CollectStep $step): int
     {
         return (int) $this->createQueryBuilder('pv')
-            ->select('COUNT(pv)')
+            ->select('COUNT(pv.id)')
             ->andWhere('pv.collectStep = :step')
             ->andWhere('pv.proposal = :proposal')
             ->setParameter('proposal', $proposal)
             ->setParameter('step', $step)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function countVotesByProposal(Proposal $proposal): int
+    {
+        return (int) $this->createQueryBuilder('pv')
+            ->select('COUNT(pv.id)')
+            ->andWhere('pv.proposal = :proposal')
+            ->setParameter('proposal', $proposal)
             ->getQuery()
             ->getSingleScalarResult();
     }
@@ -213,27 +267,6 @@ class ProposalCollectVoteRepository extends EntityRepository
         }
 
         return new Paginator($query);
-    }
-
-    public function countVotesForProposal(Proposal $proposal): int
-    {
-        return (int) $this->createQueryBuilder('pv')
-            ->select('COUNT(pv.id)')
-            ->andWhere('pv.proposal = :proposal')
-            ->setParameter('proposal', $proposal)
-            ->getQuery()->getSingleScalarResult();
-    }
-
-    public function getAnonymousVotesCountByStep(CollectStep $collectStep): int
-    {
-        $qb = $this->createQueryBuilder('pv')
-            ->select('COUNT(pv.id)')
-            ->andWhere('pv.private = true')
-            ->andWhere('pv.collectStep = :collectStep')
-            ->setParameter('collectStep', $collectStep)
-        ;
-
-        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     private function getCountsByProposalGroupedBySteps(Proposal $proposal, bool $asTitle = false): array

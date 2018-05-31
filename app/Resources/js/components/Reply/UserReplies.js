@@ -1,17 +1,20 @@
-import React from 'react';
+// @flow
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { createFragmentContainer, graphql } from 'react-relay';
 import { ListGroup } from 'react-bootstrap';
 import ReplyModalLink from './Show/ReplyModalLink';
+import { type UserReplies_questionnaire } from './__generated__/UserReplies_questionnaire.graphql';
 
-const UserReplies = React.createClass({
-  propTypes: {
-    replies: React.PropTypes.array.isRequired,
-    form: React.PropTypes.object.isRequired,
-  },
+type Props = {
+  questionnaire: UserReplies_questionnaire,
+};
 
+export class UserReplies extends React.Component<Props> {
   render() {
-    const { replies, form } = this.props;
-    if (replies.length === 0) {
+    const { questionnaire } = this.props;
+
+    if (!questionnaire.viewerReplies || questionnaire.viewerReplies.length === 0) {
       return null;
     }
 
@@ -21,19 +24,30 @@ const UserReplies = React.createClass({
           <FormattedMessage
             id="reply.show.title"
             values={{
-              num: replies.length,
+              num: questionnaire.viewerReplies.length,
             }}
           />
         </h3>
         <ListGroup>
-          {replies.map((reply, index) => {
-            return <ReplyModalLink key={index} reply={reply} form={form} />;
+          {questionnaire.viewerReplies.map((reply, index) => {
+            // $FlowFixMe $refType
+            return <ReplyModalLink key={index} reply={reply} questionnaire={questionnaire} />;
           })}
         </ListGroup>
         <hr />
       </div>
     );
-  },
-});
+  }
+}
 
-export default UserReplies;
+export default createFragmentContainer(UserReplies, {
+  questionnaire: graphql`
+    fragment UserReplies_questionnaire on Questionnaire
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
+      viewerReplies @include(if: $isAuthenticated) {
+        id
+        ...ReplyModalLink_reply
+      }
+    }
+  `,
+});

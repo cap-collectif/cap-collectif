@@ -77,3 +77,14 @@ Capco\AppBundle\Entity\Steps\CollectStep:
     endAt: null
     voteType: 1
     votesLimit: 1
+  collectstepVoteClassement:
+    id: collectstepVoteClassement
+    title: Collecte avec vote classement limité
+    label: Dépôt avec vote classement limité
+    body: <p><text(1000)></p>
+    startAt: <dateTimeBetween('-40 days', '-30 days')>
+    endAt: <dateTimeBetween('+28 days', '+50 days')>
+    voteType: 1
+    votesLimit: 3
+    votesRanking: true
+    requirementsReason: Vous devez être Grenoblois et avoir au minimum 13 ans pour participer. Vos coordonnées de contact seront suceptibles d'être utilisées pour des vérifications aléatoires.

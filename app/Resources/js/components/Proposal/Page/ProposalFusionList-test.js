@@ -42,7 +42,6 @@ describe('<ProposalFusionList />', () => {
   const props = {
     className: '',
     referer: 'http://capco.test',
-    oldProposal: {},
   };
 
   it('should render a list of proposal merged from other proposal', () => {

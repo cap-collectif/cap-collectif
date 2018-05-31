@@ -10,7 +10,7 @@ class Resolver
 {
     protected $repository;
     protected $logger;
-    protected $parameters = null;
+    protected $parameters;
 
     public function __construct(SiteParameterRepository $repository, LoggerInterface $logger)
     {

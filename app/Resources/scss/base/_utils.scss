@@ -9,7 +9,7 @@
   Margin
 ==== */
 
-@for $i from 0 to 8 {
+@for $i from 0 to 9 {
     $m: 5 + ($i * 5);
     .mt-#{$m} {
         margin-top: #{$m}px;
@@ -39,6 +39,10 @@
 
 .ml-0 {
     margin-left: 0;
+}
+
+.m-auto {
+    margin: auto;
 }
 
 /* =====
@@ -118,4 +122,57 @@
 
 .flex-end {
     justify-content: flex-end;
+}
+
+.justify-content-between {
+   justify-content: space-between;
+}
+
+.justify-content-end {
+   justify-content: flex-end;
+}
+
+.justify-content-center {
+   justify-content: center;
+}
+
+.flex-end {
+    justify-content: flex-end;
+}
+
+/* =====
+  16:9 Display
+==== */
+
+@mixin aspect-ratio($width, $height) {
+    position: relative;
+    overflow: hidden;
+
+    &:before{
+        display: block;
+        content: " ";
+        width: 100%;
+        padding-top: ($height / $width) * 100%;
+    }
+
+    > .content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        img {
+            object-fit: cover;
+        }
+
+        img, .bg--default {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+.sixteen-nine {
+    @include aspect-ratio(16,9);
 }

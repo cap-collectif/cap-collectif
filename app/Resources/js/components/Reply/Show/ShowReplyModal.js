@@ -1,28 +1,28 @@
-import React, { PropTypes } from 'react';
+// @flow
+import * as React from 'react';
 import { Modal } from 'react-bootstrap';
 import { FormattedDate, FormattedMessage } from 'react-intl';
 import moment from 'moment';
+import { createFragmentContainer, graphql } from 'react-relay';
 import ResponseValue from './ResponseValue';
+import { type ShowReplyModal_reply } from './__generated__/ShowReplyModal_reply.graphql';
 import ReplyModalButtons from './ReplyModalButtons';
 import CloseButton from '../../Form/CloseButton';
-import ReplyActions from '../../../actions/ReplyActions';
 
-const ShowReplyModal = React.createClass({
-  propTypes: {
-    show: PropTypes.bool.isRequired,
-    reply: PropTypes.object.isRequired,
-    form: PropTypes.object.isRequired,
-    onClose: PropTypes.func.isRequired,
-  },
+type Props = {
+  show: boolean,
+  reply: ShowReplyModal_reply,
+  onClose: () => void,
+};
 
-  onChange() {
-    const { form, onClose } = this.props;
+export class ShowReplyModal extends React.Component<Props> {
+  onChange = () => {
+    const { onClose } = this.props;
     onClose();
-    ReplyActions.loadUserReplies(form.id);
-  },
+  };
 
   render() {
-    const { reply, form, show, onClose } = this.props;
+    const { reply, show, onClose } = this.props;
     return (
       <Modal
         id={`show-reply-modal-${reply.id}`}
@@ -53,22 +53,39 @@ const ShowReplyModal = React.createClass({
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {reply.responses.map((response, index) => {
+          {reply.responses.filter(Boolean).map((response, index) => {
             return (
               <div key={index}>
-                {response.field.question}
+                {response.question.title}
+                {/* $FlowFixMe $refType */}
                 <ResponseValue response={response} />
               </div>
             );
           })}
         </Modal.Body>
         <Modal.Footer>
-          <ReplyModalButtons reply={reply} form={form} onChange={this.onChange} onClose={onClose} />
+          {/* $FlowFixMe $refType */}
+          <ReplyModalButtons reply={reply} onChange={this.onChange} onClose={onClose} />
           <CloseButton onClose={onClose} />
         </Modal.Footer>
       </Modal>
     );
-  },
-});
+  }
+}
 
-export default ShowReplyModal;
+export default createFragmentContainer(ShowReplyModal, {
+  reply: graphql`
+    fragment ShowReplyModal_reply on Reply {
+      id
+      createdAt
+      responses {
+        question {
+          id
+          title
+        }
+        ...ResponseValue_response
+      }
+      ...ReplyModalButtons_reply
+    }
+  `,
+});

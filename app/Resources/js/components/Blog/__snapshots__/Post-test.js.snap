@@ -7,7 +7,6 @@ exports[`<Post /> should render a post 1`] = `
   <a
     alt="Post 8"
     className="pull-left"
-    href=""
   >
     <img
       alt=""
@@ -23,7 +22,6 @@ exports[`<Post /> should render a post 1`] = `
     >
       <a
         alt="title"
-        href=""
       >
         title
       </a>
@@ -32,9 +30,7 @@ exports[`<Post /> should render a post 1`] = `
       className="excerpt  media--news__meta"
     >
       <span>
-        <a
-          href=""
-        >
+        <a>
           <span
             className="label label-default"
           />
@@ -61,9 +57,7 @@ exports[`<Post /> should render a post 1`] = `
           Object {
             "author": <span>
               <span>
-                <a
-                  href=""
-                />
+                <a />
               </span>
             </span>,
           }

@@ -1,27 +1,35 @@
-import React, { PropTypes } from 'react';
+// @flow
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { createFragmentContainer, graphql } from 'react-relay';
+import { type ResponseValue_response } from './__generated__/ResponseValue_response.graphql';
+import { getValueFromResponse } from '../../../utils/responsesHelper';
 
-const ResponseValue = React.createClass({
-  propTypes: {
-    response: PropTypes.object.isRequired,
-  },
+type Props = {
+  response: ResponseValue_response,
+};
 
+export class ResponseValue extends React.Component<Props> {
   render() {
     const { response } = this.props;
-    if (!response.value || (Array.isArray(response.value) && !response.value.length)) {
+    const responseValue = response.value
+      ? getValueFromResponse(response.question.type, response.value)
+      : null;
+
+    if (!responseValue || (Array.isArray(responseValue) && !responseValue.length)) {
       return <p>{<FormattedMessage id="reply.show.response.no_value" />}</p>;
     }
-    if (response.field.type === 'editor') {
+    if (response.question.type === 'editor') {
       return (
         <p>
-          <div dangerouslySetInnerHTML={{ __html: response.value }} />
+          <div dangerouslySetInnerHTML={{ __html: responseValue }} />
         </p>
       );
     }
-    if (response.field.type === 'ranking') {
-      return response.value.labels.length > 0 ? (
+    if (response.question.type === 'ranking') {
+      return Array.isArray(responseValue) && responseValue.length > 0 ? (
         <ol>
-          {response.value.labels.map((label, index) => {
+          {responseValue.map((label, index) => {
             return <li key={index}>{label}</li>;
           })}
         </ol>
@@ -31,19 +39,42 @@ const ResponseValue = React.createClass({
         </p>
       );
     }
-    if (typeof response.value === 'object') {
-      const labels = response.value.labels;
-      if (response.value.other) {
-        labels.push(response.value.other);
+
+    if (
+      responseValue &&
+      (typeof responseValue === 'object' && typeof responseValue.labels !== 'undefined')
+    ) {
+      let labels;
+
+      if (typeof responseValue === 'object') {
+        labels = responseValue.labels;
+        if (labels && responseValue.other) {
+          labels.push(responseValue.other);
+        }
+      } else {
+        labels = responseValue;
       }
-      return labels.length > 0 ? (
+
+      return labels && labels.length > 0 ? (
         <p>{labels.join(', ')}</p>
       ) : (
         <p>{<FormattedMessage id="reply.show.response.no_value" />}</p>
       );
     }
-    return <p>{response.value}</p>;
-  },
-});
+    return <p>{responseValue}</p>;
+  }
+}
 
-export default ResponseValue;
+export default createFragmentContainer(ResponseValue, {
+  response: graphql`
+    fragment ResponseValue_response on Response {
+      question {
+        id
+        type
+      }
+      ... on ValueResponse {
+        value
+      }
+    }
+  `,
+});

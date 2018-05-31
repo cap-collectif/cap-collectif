@@ -1,0 +1,6 @@
+DeleteReplyPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            questionnaire:
+                type: "Questionnaire!"

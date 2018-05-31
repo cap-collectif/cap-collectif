@@ -209,3 +209,8 @@ Capco\AppBundle\Entity\SiteColor:
         category: settings.appearance
         value: '#000000'
         position: 33
+    SiteColor38:
+        keyname: color.bg.primary
+        category: settings.appearance
+        value: '#e3e3e3'
+        position: 34

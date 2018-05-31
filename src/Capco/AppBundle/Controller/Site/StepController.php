@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\OtherStep;
@@ -14,7 +13,6 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Capco\AppBundle\GraphQL\Resolver\ProjectContributorResolver;
 use Capco\UserBundle\Entity\User;
-use Doctrine\Common\Collections\ArrayCollection;
 use JMS\Serializer\SerializationContext;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
@@ -271,7 +269,7 @@ class StepController extends Controller
      */
     public function showCollectStepAction(Request $request, Project $project, CollectStep $step)
     {
-        if (!$step->canDisplay()) {
+        if (!$step->canDisplay() || !$step->getProposalForm()) {
             throw $this->createNotFoundException();
         }
 
@@ -280,23 +278,12 @@ class StepController extends Controller
 
         $proposalForm = $step->getProposalForm();
         $searchResults = ['proposals' => [], 'count' => 0];
-        $countFusions = 0;
-        $seed = $this->getUser() ? $this->getUser()->getId() : $request->getClientIp();
 
-        if ($proposalForm) {
-            $filters = ['proposalForm' => $proposalForm->getId(), 'collectStep' => $step->getId()];
+        $countFusions = $this->get('capco.proposal.repository')
+          ->countFusionsByProposalForm($proposalForm)
+        ;
 
-            if ($step->isPrivate() && $this->getUser()) {
-                $providedFilters['authorUniqueId'] = $this->getUser()->getId();
-            }
-
-            $searchResults = $this->get('capco.search.proposal_search')
-                ->searchProposals(0, 10, 'last', null, $filters, $seed);
-            $countFusions = $em
-              ->getRepository('CapcoAppBundle:Proposal')
-              ->countFusionsByProposalForm($proposalForm)
-            ;
-        }
+        $serializer = $this->get('serializer');
 
         $props = $serializer->serialize([
             'statuses' => $step->getStatuses(),
@@ -329,45 +316,12 @@ class StepController extends Controller
             throw $this->createNotFoundException();
         }
 
-        if (!$step->getQuestionnaire()) {
-            return $this->render('CapcoAppBundle:Step:questionnaire.html.twig', [
-                'project' => $project,
-                'currentStep' => $step,
-            ]);
-        }
-
-        foreach ($step->getQuestionnaire()->getRealQuestions() as $question) {
-            if ($question instanceof MultipleChoiceQuestion) {
-                if ($question->isRandomQuestionChoices()) {
-                    $choices = $question->getQuestionChoices()->toArray();
-                    shuffle($choices);
-                    $question->setQuestionChoices(new ArrayCollection($choices));
-                }
-            }
-        }
-
-        $em = $this->getDoctrine()->getManager();
         $serializer = $this->get('serializer');
-
-        $userRepliesRaw = [];
-        if ($this->getUser()) {
-            $userRepliesRaw = $em
-                ->getRepository('CapcoAppBundle:Reply')
-                ->findBy(
-                    [
-                        'questionnaire' => $step->getQuestionnaire(),
-                        'author' => $this->getUser(),
-                    ]
-                )
-            ;
-        }
-
         $props = $serializer->serialize([
             'step' => $step,
             'form' => $step->getQuestionnaire() ?: null,
-            'userReplies' => $userRepliesRaw,
         ], 'json', SerializationContext::create()
-            ->setGroups(['Questionnaires', 'Questions', 'QuestionnaireSteps', 'Steps', 'UserVotes', 'Replies', 'UsersInfos', 'UserMedias']))
+            ->setGroups(['Questionnaires', 'Questions', 'QuestionnaireSteps', 'Steps']))
         ;
 
         return [
@@ -390,29 +344,18 @@ class StepController extends Controller
             throw $this->createNotFoundException();
         }
 
-        $serializer = $this->get('serializer');
-        $seed = $this->getUser() ? $this->getUser()->getId() : $request->getClientIp();
-
-        $searchResults = $this
-            ->get('capco.search.proposal_search')
-            ->searchProposals(
-                0,
-                10,
-                $step->getDefaultSort(),
-                null,
-                ['selectionStep' => $step->canShowProposals() ? $step->getId() : 0],
-                $seed
-            );
+        $searchResults = ['proposals' => [], 'count' => 0];
 
         $form = $step->getProposalForm();
         $showThemes = $form->isUsingThemes();
         $categories = $form->getCategories();
 
+        $serializer = $this->get('serializer');
+
         $props = $serializer->serialize([
             'stepId' => $step->getId(),
             'statuses' => $step->getStatuses(),
             'categories' => $categories,
-            'proposals' => $searchResults['proposals'],
             'count' => $searchResults['count'],
             'defaultSort' => $step->getDefaultSort() ?: null,
             'form' => $form,

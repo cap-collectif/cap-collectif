@@ -1,0 +1,31 @@
+Reply:
+    type: object
+    config:
+        description: "A reply contribution"
+        interfaces: [Node]
+        fields:
+            enabled:
+                type: "Boolean!"
+            private:
+                type: "Boolean!"
+            responses:
+                type: "[Response]!"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ResponsesResolver", [value])'
+            author:
+                type: "User!"
+                description: "The author of the contribution."
+            updatedAt:
+                type: "DateTime"
+                description: "The updated date."
+            id:
+                type: "ID!"
+                description: "The id of the contribution."
+            questionnaire:
+                type: "Questionnaire!"
+                description: "Identifies the form where the contribution was submitted."
+            createdAt:
+              type: "DateTime!"
+              description: "Identifies the date and time when the object was created."
+            viewerCanDelete:
+              type: "Boolean!"
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ReplyViewerCanDeleteResolver", [value, user])'

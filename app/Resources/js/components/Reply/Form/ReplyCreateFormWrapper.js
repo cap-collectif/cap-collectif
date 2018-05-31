@@ -1,48 +1,57 @@
-import React, { PropTypes } from 'react';
+// @flow
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
+import { createFragmentContainer, graphql } from 'react-relay';
 import { Alert, Button } from 'react-bootstrap';
-import ReplyCreateForm from './ReplyCreateForm';
+import { type ReplyCreateFormWrapper_questionnaire } from './__generated__/ReplyCreateFormWrapper_questionnaire.graphql';
 import LoginButton from '../../User/Login/LoginButton';
 import RegistrationButton from '../../User/Registration/RegistrationButton';
 import PhoneModal from '../../User/Phone/PhoneModal';
+import ReplyForm from './ReplyForm';
+import { type User } from '../../../redux/modules/user';
+import type { GlobalState } from '../../../types';
 
-export const ReplyCreateFormWrapper = React.createClass({
-  propTypes: {
-    form: PropTypes.object.isRequired,
-    userReplies: PropTypes.array.isRequired,
-    user: PropTypes.object,
-  },
+type Props = {
+  questionnaire: ReplyCreateFormWrapper_questionnaire,
+  user: User,
+};
 
-  getInitialState() {
-    return {
-      showPhoneModal: false,
-    };
-  },
+type State = {
+  showPhoneModal: boolean,
+};
+
+export class ReplyCreateFormWrapper extends React.Component<Props, State> {
+  state = {
+    showPhoneModal: false,
+  };
 
   openPhoneModal() {
     this.setState({ showPhoneModal: true });
-  },
+  }
 
   closePhoneModal() {
     this.setState({ showPhoneModal: false });
-  },
+  }
 
   formIsDisabled() {
-    const { form, userReplies, user } = this.props;
+    const { questionnaire, user } = this.props;
     return (
-      !form.contribuable ||
+      !questionnaire.contribuable ||
       !user ||
-      (form.phoneConfirmationRequired && !user.isPhoneConfirmed) ||
-      (userReplies.length > 0 && !form.multipleRepliesAllowed)
+      (questionnaire.phoneConfirmationRequired && !user.isPhoneConfirmed) ||
+      (questionnaire.viewerReplies &&
+        questionnaire.viewerReplies.length > 0 &&
+        !questionnaire.multipleRepliesAllowed)
     );
-  },
+  }
 
   render() {
-    const { form, user, userReplies } = this.props;
+    const { questionnaire, user } = this.props;
+
     return (
       <div>
-        {form.contribuable && !user ? (
+        {questionnaire.contribuable && !user ? (
           <Alert bsStyle="warning" className="text-center">
             <strong>
               <FormattedMessage id="reply.not_logged_in.error" />
@@ -51,9 +60,10 @@ export const ReplyCreateFormWrapper = React.createClass({
             <LoginButton style={{ marginLeft: 5 }} />
           </Alert>
         ) : (
-          form.contribuable &&
-          userReplies.length > 0 &&
-          !form.multipleRepliesAllowed && (
+          questionnaire.contribuable &&
+          questionnaire.viewerReplies &&
+          questionnaire.viewerReplies.length > 0 &&
+          !questionnaire.multipleRepliesAllowed && (
             <Alert bsStyle="warning">
               <strong>
                 <FormattedMessage id="reply.user_has_reply.reason" />
@@ -64,8 +74,8 @@ export const ReplyCreateFormWrapper = React.createClass({
             </Alert>
           )
         )}
-        {form.contribuable &&
-          form.phoneConfirmationRequired &&
+        {questionnaire.contribuable &&
+          questionnaire.phoneConfirmationRequired &&
           user &&
           !user.isPhoneConfirmed && (
             <Alert bsStyle="warning">
@@ -79,17 +89,33 @@ export const ReplyCreateFormWrapper = React.createClass({
               </span>
             </Alert>
           )}
-        <ReplyCreateForm form={form} disabled={this.formIsDisabled()} />
-        <PhoneModal show={this.state.showPhoneModal} onClose={this.closePhoneModal} />
+        <ReplyForm questionnaire={questionnaire} />
+        {/* <PhoneModal show={this.state.showPhoneModal} onClose={this.closePhoneModal} /> */}
       </div>
     );
-  },
+  }
+}
+
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
+  user: state.user.user,
 });
 
-const mapStateToProps = state => {
-  return {
-    user: state.user.user,
-  };
-};
+const container = connect(mapStateToProps)(ReplyCreateFormWrapper);
 
-export default connect(mapStateToProps)(ReplyCreateFormWrapper);
+export default createFragmentContainer(container, {
+  questionnaire: graphql`
+    fragment ReplyCreateFormWrapper_questionnaire on Questionnaire
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
+      anonymousAllowed
+      description
+      multipleRepliesAllowed
+      phoneConfirmationRequired
+      contribuable
+      viewerReplies @include(if: $isAuthenticated) {
+        id
+      }
+      id
+      ...ReplyForm_questionnaire @arguments(isAuthenticated: $isAuthenticated)
+    }
+  `,
+});

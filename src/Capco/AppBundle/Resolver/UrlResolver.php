@@ -87,6 +87,7 @@ class UrlResolver
         return false;
     }
 
+    // TODO rm duplicate
     public function getStepUrl($step, $absolute = false)
     {
         if (!$step->getProject() || !$step->getProject()->getSlug() || !$step->getSlug()) {

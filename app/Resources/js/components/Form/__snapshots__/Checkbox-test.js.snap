@@ -6,7 +6,7 @@ exports[`<Checkbox /> should render correctly 1`] = `
   id="reply-1"
 >
   <label
-    className="control-label h5"
+    className="control-label"
     htmlFor="choices-for-field-11"
   >
     label
@@ -91,7 +91,7 @@ exports[`<Checkbox /> should render with an other field 1`] = `
   id="reply-1"
 >
   <label
-    className="control-label h5"
+    className="control-label"
     htmlFor="choices-for-field-11"
   >
     label
@@ -196,8 +196,8 @@ exports[`<Checkbox /> should render with an other field 1`] = `
           "type": "checkbox",
         }
       }
-      isReduxForm={false}
       onChange={[Function]}
+      value=""
     />
   </CheckboxGroup>
 </div>

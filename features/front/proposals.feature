@@ -161,7 +161,8 @@ Scenario: Logged in user wants to create a proposal without providing required r
   And I submit the create proposal form
   Then I should see "proposal.constraints.field_mandatory"
   And I reload the page
-  When I confirm the popup message
+  And I wait 1 seconds
+  Then I confirm the popup message
 
 @javascript @security @elasticsearch
 Scenario: Logged in user wants to create a proposal in closed collect step
@@ -207,7 +208,7 @@ Scenario: Author of a proposal wants to delete it
   And I wait 2 seconds
   And I should not see my proposal anymore
   Then there should be 5 proposals
-  
+
 @javascript @database
 Scenario: Admin should not be notified when an user deletes his proposal on an non notifiable proposal
   Given I am logged in as user
@@ -231,7 +232,7 @@ Scenario: Author of a proposal should not be notified when someone comment if he
   Then the queue associated to "comment_create" producer has messages below:
   | 0 | {"commentId": "@string@"} |
 
-@javascript 
+@javascript
 Scenario: Non author of a proposal wants to delete it
   Given I am logged in as admin
   And I go to a proposal

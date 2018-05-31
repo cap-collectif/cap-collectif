@@ -7,12 +7,15 @@ const Field = React.createClass({
   propTypes: {
     meta: PropTypes.shape({
       touched: PropTypes.bool.isRequired,
+      dirty: PropTypes.bool,
+      pristine: PropTypes.bool,
       error: PropTypes.any,
     }).isRequired,
     labelClassName: PropTypes.string,
     divClassName: PropTypes.string,
     wrapperClassName: PropTypes.string,
     help: PropTypes.string,
+    description: PropTypes.string,
     formName: PropTypes.string,
     autoComplete: PropTypes.string,
     disableValidation: PropTypes.bool,
@@ -55,9 +58,10 @@ const Field = React.createClass({
       value: PropTypes.any,
     }).isRequired,
     style: PropTypes.object,
+    radioImage: PropTypes.object,
   },
   render() {
-    const { touched, error } = this.props.meta;
+    const { touched, error, dirty } = this.props.meta;
     const {
       popover,
       children,
@@ -72,16 +76,18 @@ const Field = React.createClass({
       labelClassName,
       disabled,
       help,
+      description,
       formName,
       addonAfter,
       addonBefore,
       choices,
       isOtherAllowed,
       style,
+      radioImage,
       radioChecked,
     } = this.props;
     const { autoFocus, name } = this.props.input;
-    const check = touched && !disableValidation;
+    const check = touched || (dirty && !disableValidation);
 
     let errorMessage = null;
 
@@ -99,10 +105,12 @@ const Field = React.createClass({
         type={type}
         name={name}
         help={help}
+        description={description}
         formName={formName}
         disabled={disabled}
         popover={popover}
         addonAfter={addonAfter}
+        image={radioImage ? radioImage.url : null}
         addonBefore={addonBefore}
         isOtherAllowed={isOtherAllowed}
         wrapperClassName={wrapperClassName || ''}

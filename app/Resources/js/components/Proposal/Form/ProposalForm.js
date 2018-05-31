@@ -21,7 +21,6 @@ import query, {
 import type { ProposalForm_proposal } from './__generated__/ProposalForm_proposal.graphql';
 import type { ProposalForm_proposalForm } from './__generated__/ProposalForm_proposalForm.graphql';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
-import { loadSuggestions } from '../../../actions/ProposalActions';
 import Fetcher from '../../../services/Fetcher';
 import CreateProposalMutation from '../../../mutations/CreateProposalMutation';
 import {
@@ -238,12 +237,15 @@ export class ProposalForm extends React.Component<Props, State> {
   loadTitleSuggestions = debounce((title: string) => {
     this.setState({ isLoadingTitleSuggestions: true });
     if (this.props.proposalForm.step && this.props.proposalForm.step.id) {
-      loadSuggestions(this.props.proposalForm.step.id, title).then(res => {
-        this.setState({
-          titleSuggestions: res.proposals,
-          isLoadingTitleSuggestions: false,
-        });
-      });
+      console.log(title);
+      // TODO User a GraphQL query instead :
+      //
+      // loadSuggestions(this.props.proposalForm.step.id, title).then(res => {
+      //   this.setState({
+      //     titleSuggestions: res.proposals,
+      //     isLoadingTitleSuggestions: false,
+      //   });
+      // });
     }
   }, 500);
 
@@ -588,6 +590,7 @@ export default createFragmentContainer(container, {
         private
         required
         helpText
+        description
         type
         isOtherAllowed
         validationRule {
@@ -599,6 +602,9 @@ export default createFragmentContainer(container, {
           title
           description
           color
+          image {
+            url
+          }
         }
       }
       usingDistrict

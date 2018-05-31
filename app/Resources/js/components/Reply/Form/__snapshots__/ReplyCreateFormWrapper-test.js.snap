@@ -2,17 +2,12 @@
 
 exports[`<ReplyCreateFormWrapper /> should no alert an a disabled form when form is not contribuable 1`] = `
 <div>
-  <ReplyCreateForm
-    disabled={true}
-    form={
+  <Relay(Connect(InjectIntl(ReduxForm)))
+    questionnaire={
       Object {
         "contribuable": false,
       }
     }
-  />
-  <PhoneModal
-    onClose={[Function]}
-    show={false}
   />
 </div>
 `;
@@ -37,18 +32,21 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
       />
     </p>
   </Alert>
-  <ReplyCreateForm
-    disabled={true}
-    form={
+  <Relay(Connect(InjectIntl(ReduxForm)))
+    questionnaire={
       Object {
         "contribuable": true,
         "multipleRepliesAllowed": false,
+        "viewerReplies": Array [
+          Object {
+            "id": 326,
+          },
+          Object {
+            "id": 289,
+          },
+        ],
       }
     }
-  />
-  <PhoneModal
-    onClose={[Function]}
-    show={false}
   />
 </div>
 `;
@@ -83,36 +81,36 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
       }
     />
   </Alert>
-  <ReplyCreateForm
-    disabled={true}
-    form={
+  <Relay(Connect(InjectIntl(ReduxForm)))
+    questionnaire={
       Object {
         "contribuable": true,
         "multipleRepliesAllowed": true,
+        "viewerReplies": Array [
+          Object {
+            "id": 289,
+          },
+        ],
       }
     }
-  />
-  <PhoneModal
-    onClose={[Function]}
-    show={false}
   />
 </div>
 `;
 
 exports[`<ReplyCreateFormWrapper /> should render no alert an an enabled form 1`] = `
 <div>
-  <ReplyCreateForm
-    disabled={false}
-    form={
+  <Relay(Connect(InjectIntl(ReduxForm)))
+    questionnaire={
       Object {
         "contribuable": true,
         "multipleRepliesAllowed": true,
+        "viewerReplies": Array [
+          Object {
+            "id": 289,
+          },
+        ],
       }
     }
-  />
-  <PhoneModal
-    onClose={[Function]}
-    show={false}
   />
 </div>
 `;

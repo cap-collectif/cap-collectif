@@ -21,17 +21,4 @@ class EventRegistrationRepository extends EntityRepository
             ->getQuery()
             ->getResult();
     }
-
-    public function getOneByUserAndEvent(User $user, Event $event): ?EventRegistration
-    {
-        $qb = $this->createQueryBuilder('registration');
-
-        return $qb
-            ->andWhere('registration.user = :user')
-            ->andWhere('registration.event = :event')
-            ->setParameter('event', $event)
-            ->setParameter('user', $user)
-            ->getQuery()
-            ->getOneOrNullResult();
-    }
 }

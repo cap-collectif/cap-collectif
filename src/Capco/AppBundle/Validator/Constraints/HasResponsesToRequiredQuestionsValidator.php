@@ -63,7 +63,8 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
                 if ($value instanceof Collection && $value->count() > 0) {
                     return true;
                 }
-                if (\is_array($value) && \count($value)) {
+
+                if (\is_array($value) && \count($value['labels']) > 0) {
                     return true;
                 }
                 if (\is_string($value) && '' !== $value) {

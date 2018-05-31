@@ -25,7 +25,7 @@ export class ChooseAUsernameModal extends React.Component<Props> {
         onHide={() => {}}
         bsSize="small"
         aria-labelledby="contained-modal-title-lg">
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title id="contained-modal-title-lg">
             <FormattedMessage id="complete-your-profile" />
           </Modal.Title>

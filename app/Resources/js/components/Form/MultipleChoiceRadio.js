@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import { FormGroup, ControlLabel, HelpBlock } from 'react-bootstrap';
 import component from './Field';
+import ButtonBody from '../Reply/Form/ButtonBody';
 
 type Props = {
   name: string,
@@ -26,15 +27,12 @@ type State = {
 };
 
 export class MultipleChoiceRadio extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      otherChecked: false,
-    };
-  }
+  state = {
+    otherChecked: false,
+  };
 
   checkOtherRadio = () => {
-    this.props.change(`${this.props.name}.value.labels`, null);
+    this.props.change(`${this.props.name}.value.labels`, []);
     // $FlowFixMe
     ReactDOM.findDOMNode(this.textField)
       .getElementsByTagName('input')[0]
@@ -72,6 +70,11 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
         <FormGroup validationState={validationState}>
           {label && <ControlLabel bsClass="control-label">{label}</ControlLabel>}
           {helpText && <HelpBlock>{helpText}</HelpBlock>}
+          {props.description && (
+            <div style={{ paddingBottom: 15 }}>
+              <ButtonBody body={props.description || ''} />
+            </div>
+          )}
 
           {choices.map((choice, index) => (
             <Field
@@ -84,6 +87,7 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
               radioChecked={finalValue === choice.label}
               onChange={this.uncheckOtherRadio}
               normalize={this.normalize}
+              radioImage={choice.image}
               value={choice.label}>
               {choice.label}
             </Field>
@@ -121,7 +125,6 @@ export class MultipleChoiceRadio extends React.Component<Props, State> {
             </div>
           )}
 
-          {props.description && <HelpBlock>{props.description}</HelpBlock>}
           {props.errors && <span className="error-block">{props.errors}</span>}
         </FormGroup>
       </div>

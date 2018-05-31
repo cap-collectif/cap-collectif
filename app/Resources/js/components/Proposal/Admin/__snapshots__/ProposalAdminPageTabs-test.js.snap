@@ -7,7 +7,9 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
       Permalien : 
     </strong>
      
-    <a />
+    <a
+      href=""
+    />
      |
      
     <b>
@@ -15,6 +17,7 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
        :
     </b>
      
+    1-1
   </p>
   <Uncontrolled(Tabs)
     defaultActiveKey={1}
@@ -27,9 +30,13 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
       <Relay(Connect(InjectIntl(ReduxForm)))
         proposal={
           Object {
-            "followerConnection": Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "allFollowers": Object {
               "totalCount": 169,
             },
+            "reference": "1-1",
+            "show_url": "",
           }
         }
       />
@@ -41,9 +48,13 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
       <Relay(Connect(InjectIntl(ReduxForm)))
         proposal={
           Object {
-            "followerConnection": Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "allFollowers": Object {
               "totalCount": 169,
             },
+            "reference": "1-1",
+            "show_url": "",
           }
         }
       />
@@ -55,9 +66,13 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
       <Relay(InjectIntl(ProposalAdminNewsForm))
         proposal={
           Object {
-            "followerConnection": Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "allFollowers": Object {
               "totalCount": 169,
             },
+            "reference": "1-1",
+            "show_url": "",
           }
         }
       />
@@ -81,9 +96,13 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
       <Relay(InjectIntl(ProposalAdminFollowers))
         proposal={
           Object {
-            "followerConnection": Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "allFollowers": Object {
               "totalCount": 169,
             },
+            "reference": "1-1",
+            "show_url": "",
           }
         }
       />
@@ -95,9 +114,13 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
       <Relay(Connect(InjectIntl(ReduxForm)))
         proposal={
           Object {
-            "followerConnection": Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "allFollowers": Object {
               "totalCount": 169,
             },
+            "reference": "1-1",
+            "show_url": "",
           }
         }
       />
@@ -109,9 +132,13 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
       <Relay(Connect(ReduxForm))
         proposal={
           Object {
-            "followerConnection": Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "allFollowers": Object {
               "totalCount": 169,
             },
+            "reference": "1-1",
+            "show_url": "",
           }
         }
       />

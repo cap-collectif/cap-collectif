@@ -1,77 +1,50 @@
 // @flow
 import React from 'react';
-import { QueryRenderer, graphql } from 'react-relay';
+import { createFragmentContainer, graphql } from 'react-relay';
 import classNames from 'classnames';
-import { Row } from 'react-bootstrap';
 import DraftProposalPreview from '../Preview/DraftProposalPreview';
-import environment, { graphqlError } from '../../../createRelayEnvironment';
 import DraftBox from '../../Utils/DraftBox';
-import Loader from '../../Ui/Loader';
+import type { DraftProposalList_step } from './__generated__/DraftProposalList_step.graphql';
 
 type Props = {
-  step: Object,
+  step: DraftProposalList_step,
 };
-const renderDraftProposals = ({
-  error,
-  props,
-}: {
-  error: ?Error,
-  props: ?{ draftProposalsForUserInStep?: Array<{ title: string, show_url: string }> },
-}) => {
-  if (error) {
-    console.log(error); // eslint-disable-line no-console
-    return graphqlError;
-  }
 
-  if (props) {
+export class DraftProposalList extends React.Component<Props> {
+  render() {
     const classes = classNames({
       'list-group': true,
       'mb-40': true,
     });
 
-    // eslint-disable-next-line react/prop-types
-    if (!props.draftProposalsForUserInStep || props.draftProposalsForUserInStep.length === 0) {
+    if (
+      !this.props.step.viewerProposalDrafts ||
+      this.props.step.viewerProposalDrafts.length === 0
+    ) {
       return null;
     }
 
     return (
       <DraftBox>
         <ul className={classes}>
-          {// eslint-disable-next-line react/prop-types
-          props.draftProposalsForUserInStep.map((proposal, i) => (
+          {this.props.step.viewerProposalDrafts.map((proposal, i) => (
             <DraftProposalPreview key={`draft-proposal-${i}`} proposal={proposal} />
           ))}
         </ul>
       </DraftBox>
     );
   }
-  return (
-    <Row>
-      <Loader />
-    </Row>
-  );
-};
-
-export default class DraftProposalList extends React.Component<Props> {
-  render() {
-    return (
-      <div>
-        <QueryRenderer
-          environment={environment}
-          query={graphql`
-            query DraftProposalListQuery($stepId: ID!) {
-              draftProposalsForUserInStep(stepId: $stepId) {
-                title
-                show_url
-              }
-            }
-          `}
-          variables={{
-            stepId: this.props.step.id,
-          }}
-          render={renderDraftProposals}
-        />
-      </div>
-    );
-  }
 }
+
+export default createFragmentContainer(
+  DraftProposalList,
+  graphql`
+    fragment DraftProposalList_step on CollectStep
+      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
+      viewerProposalDrafts @include(if: $isAuthenticated) {
+        title
+        show_url
+      }
+    }
+  `,
+);

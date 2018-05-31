@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Traits\AnonymousableTrait;
+use Capco\AppBundle\Traits\PositionableTrait;
 use Capco\AppBundle\Traits\PrivatableTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Doctrine\ORM\Mapping as ORM;
@@ -20,7 +21,7 @@ class ProposalSelectionVote extends AbstractVote
     // Deleted because for users we have a unique constraint in db
     // * @CapcoAssert\DidNotAlreadyVote(message="proposal.vote.already_voted", repositoryPath="CapcoAppBundle:ProposalSelectionVote", objectPath="proposal")
 
-    use AnonymousableTrait, PrivatableTrait;
+    use AnonymousableTrait, PrivatableTrait, PositionableTrait;
 
     const ANONYMOUS = 'ANONYMOUS';
 
@@ -47,6 +48,11 @@ class ProposalSelectionVote extends AbstractVote
         $proposal->addSelectionVote($this);
 
         return $this;
+    }
+
+    public function getStep(): SelectionStep
+    {
+        return $this->selectionStep;
     }
 
     public function getSelectionStep(): SelectionStep
