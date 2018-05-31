@@ -299,7 +299,7 @@ Mutation:
               payloadType: CreateUserPayload
               mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateUserMutation", [value])'
           updateUserAccount:
-            access: "@=hasRole('ROLE_SUPER_ADMIN')"
+            access: "@=hasRole('ROLE_ADMIN')"
             builder: "Relay::Mutation"
             builderConfig:
               inputType: UpdateUserAccountInput

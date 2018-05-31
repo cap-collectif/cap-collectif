@@ -2759,11 +2759,7 @@ type UpdateRequirementPayload {
 }
 
 input UpdateUserAccountInput {
-  # The user's username
-  email: String!
-
-  # The user's password
-  plainPassword: String
+  userId: ID!
 
   # Unattended roles as array.
   roles: [String]
@@ -2952,6 +2948,9 @@ type User implements Node {
     # Returns the last n elements from the list.
     last: Int
   ): ContributionConnection!
+  expiredAt: DateTime
+  isSubscribedToNewsLetter: Boolean
+  isSubscribedToNewsLetterAt: DateTime
 }
 
 # A connection to a list of items.

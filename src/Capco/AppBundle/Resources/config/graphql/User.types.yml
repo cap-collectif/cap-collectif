@@ -271,3 +271,12 @@ User:
                      description: "Returns the last n elements from the list."
                 description: "Return the user's contributions of the type requested."
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserContributionResolver", [value, args])'
+
+            expiredAt:
+                type: "DateTime"
+            isSubscribedToNewsLetter:
+                type: "Boolean"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserNewsLetterResolver", [value])'
+            isSubscribedToNewsLetterAt:
+                type: "DateTime"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserNewsLetterResolver", [value, "at"])'

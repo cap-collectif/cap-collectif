@@ -21,7 +21,7 @@ export class UserAdminPageTabs extends Component<Props, State> {
           <b>{intl.formatMessage({ id: 'user.admin.reference' })} :</b> {user.reference}
         </p>
         <Tabs defaultActiveKey={1} id="user-admin-page-tabs">
-          <Tab eventKey={1} title={intl.formatMessage({ id: 'user.admin.account' })}>
+          <Tab eventKey={1} title={intl.formatMessage({ id: 'user.profile.edit.account' })}>
             <UserAdminAccount user={user} />
           </Tab>
           {/*<Tab eventKey={2} title={intl.formatMessage({ id: 'user.admin.profile' })}>*/}

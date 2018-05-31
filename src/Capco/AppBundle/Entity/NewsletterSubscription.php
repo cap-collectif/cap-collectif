@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * NewsletterSubscription.
  *
  * @ORM\Table(name="newsletter_subscription")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\NewsletterSubscriptionRepository")
  */
 class NewsletterSubscription
 {

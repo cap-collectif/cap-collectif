@@ -40,7 +40,7 @@ class UserAdmin extends BaseAdmin
         }
 
         if ('edit' === $name) {
-            return 'CapcoAdminBundle:User:delete.html.twig';
+            return 'CapcoAdminBundle:User:edit.html.twig';
         }
 
         return parent::getTemplate($name);

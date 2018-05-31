@@ -36,14 +36,12 @@ const validate = (values: Object) => {
   if (values.plainPassword && values.plainPassword.length > 72) {
     errors.plainPassword = 'registration.constraints.password.max';
   }
-  console.log(values);
 
   return errors;
 };
 
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const {intl} = props;
-  console.log(values);
 
   const input = {
     ...values,

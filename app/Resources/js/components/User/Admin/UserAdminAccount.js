@@ -8,13 +8,14 @@ import { ListGroup, ListGroupItem, Panel, ButtonToolbar, Button } from 'react-bo
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import type { Uuid, GlobalState, Dispatch, FeatureToggles } from '../../../types';
+import UpdateUserAccountMutation from '../../../mutations/UpdateUserAccountMutation';
+import UserAdminAccount_user from './__generated__/UserAdminAccount_user.graphql';
 
 type RelayProps = {
   +user: UserAdminAccount_user,
 };
 type Props = FormProps &
   RelayProps & {
-    +themes: Array<{ id: Uuid, title: string }>,
     +features: FeatureToggles,
     +intl: IntlShape,
     +isSuperAdmin: boolean,
@@ -22,11 +23,19 @@ type Props = FormProps &
 
 const formName = 'user-admin-edit';
 
-const onSubmit = (values: FormValues, dispatch: Dispatch, { user, isSuperAdmin }: Props) => {
+const onSubmit = (values: FormValues, dispatch: Dispatch, { user }: Props) => {
+
+  delete values.newsletter;
+  delete values.expired;
+
+
   const input = {
     ...values,
-    id: user.id,
+    userId: user.id,
   };
+
+  console.log(input);
+
 
   return UpdateUserAccountMutation.commit({ input })
     .then(response => {
@@ -40,7 +49,6 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { user, isSuperAdmin }
       });
     });
 };
-
 
 const validate = (values: Object, { user }: Props) => {
   const errors ={};
@@ -69,9 +77,28 @@ export class UserAdminAccount extends React.Component<Props, State> {
       handleSubmit,
       intl,
     } = this.props;
+    const userRoles = [
+      {
+        id: 'ROLE_SUPER_ADMIN',
+        label: intl.formatMessage({id: 'roles.super_admin'}),
+      },
+      {
+        id: 'ROLE_ADMIN',
+        label: intl.formatMessage({id: 'roles.admin'}),
+      },
+      {
+        id: 'ROLE_USER',
+        label: intl.formatMessage({id: 'roles.user'}),
+      }
+    ];
     return (
       <div className="box box-primary container-fluid">
         <form onSubmit={handleSubmit}>
+          <div className="box-header">
+            <h2 className="box-title">
+              <FormattedMessage id="user.profile.edit.account" />
+            </h2>
+          </div>
           <div className="box-header">
             <h3 className="box-title">
               <FormattedMessage id="admin.fields.step.statuses" />
@@ -83,21 +110,59 @@ export class UserAdminAccount extends React.Component<Props, State> {
               component={component}
               type="checkbox"
               id="vip"
-              label={<FormattedMessage id="form.label_vip" />}
+              children={<FormattedMessage id="form.label_vip" />}
             />
             <Field
               name="locked"
               component={component}
               type="checkbox"
               id="enabled"
-              label={<FormattedMessage id="form.label_enabled" />}
+              children={<FormattedMessage id="form.label_enabled" />}
             />
             <Field
               name="enabled"
               component={component}
               type="checkbox"
               id="locked"
-              label={<FormattedMessage id="form.label_locked" />}
+              children={<FormattedMessage id="form.label_locked" />}
+            />
+            <Field
+              name="expired"
+              component={component}
+              type="checkbox"
+              disabled
+              id="locked"
+              children={<FormattedMessage id="form.label_expired" /> }
+            />
+            <div className="box-header">
+              <h3 className="box-title">
+                <FormattedMessage id="form.label_real_roles" />
+              </h3>
+            </div>
+            <Field
+              id="user_roles"
+              name="roles"
+              component={component}
+              isReduxForm
+              type="checkbox"
+              label={
+                <FormattedMessage id="form.label_real_roles"/>
+              }
+              choices={userRoles}
+            />
+            <div className="box-header">
+              <h3 className="box-title">
+                <FormattedMessage id="subscription" />
+              </h3>
+            </div>
+            <Field
+              id="newsletter"
+              name="newsletter"
+              component={component}
+              isReduxForm
+              type="checkbox"
+              disabled
+              children={<FormattedMessage id="newsletter" />}
             />
             <ButtonToolbar className="box-content__toolbar">
               <Button
@@ -139,6 +204,9 @@ const mapStateToProps: MapStateToProps<*, *, *> = (
     vip: user.vip,
     enabled: user.enabled,
     locked: user.locked,
+    roles: user.roles,
+    expired: user.expired,
+    newsletter: user.isSubscribedToNewsLetter,
   },
 });
 
@@ -150,9 +218,14 @@ export default createFragmentContainer(
     fragment UserAdminAccount_user on User {
       id
       roles
+      email
       locked
       vip
       enabled
+      expired
+      expiredAt
+      isSubscribedToNewsLetter
+      isSubscribedToNewsLetterAt
     }
   `,
 );

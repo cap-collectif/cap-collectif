@@ -3,12 +3,8 @@ UpdateUserAccountInput:
     config:
         description: "Update a user"
         fields:
-            email:
-                type: "String!"
-                description: "The user's username"
-            plainPassword:
-                type: "String"
-                description: "The user's password"
+            userId:
+                type: "ID!"
             roles:
                 type: "[String]"
                 description: "Unattended roles as array."
