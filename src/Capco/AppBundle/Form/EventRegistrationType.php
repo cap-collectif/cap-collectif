@@ -2,21 +2,19 @@
 
 namespace Capco\AppBundle\Form;
 
-use Capco\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class EventRegistrationType extends AbstractType
 {
     private $user;
-    private $registered;
 
-    public function __construct(User $user = null, $registered)
+    public function __construct(TokenStorageInterface $token)
     {
-        $this->user = $user;
-        $this->registered = $registered;
+        $this->user = $token->getToken() ? $token->getToken()->getUser() : null;
     }
 
     /**
@@ -25,7 +23,7 @@ class EventRegistrationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if ($this->registered) {
+        if ($options['registered']) {
             $builder->add('submit', SubmitType::class, [
               'label' => 'event_registration.unsubscribe',
               'attr' => ['class' => 'btn  btn-danger  btn-block'],
@@ -34,7 +32,7 @@ class EventRegistrationType extends AbstractType
             return;
         }
 
-        if (null !== $this->user) {
+        if (null !== $this->user || !\is_object($this->user)) {
             $builder
               ->add('private', null, [
                   'required' => false,

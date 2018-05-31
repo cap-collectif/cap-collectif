@@ -5,6 +5,18 @@ services:
     tags:
       - { name: form.type }
 
+  Capco\UserBundle\Form\Type\MemberSearchType:
+    autowire: true
+    autoconfigure: true
+
+  Capco\AppBundle\Form\EventSearchType:
+    autowire: true
+    autoconfigure: true
+
+  Capco\AppBundle\Form\EventRegistrationType:
+    autowire: true
+    autoconfigure: true
+
   capco.form.type.purified_textarea:
     class: Capco\AppBundle\Form\Type\PurifiedTextareaType
     arguments: ["@capco.form.transformer.html_purifier"]
