@@ -11,6 +11,9 @@ doctrine:
         query_cache_driver: apcu
         result_cache_driver: apcu
 
+sentry:
+    dsn: "***REMOVED***"
+
 monolog:
     handlers:
         file:
