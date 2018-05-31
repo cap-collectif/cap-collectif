@@ -71,6 +71,7 @@ export class ProposalStepPage extends React.Component<Props> {
           query={graphql`
             query ProposalStepPageQuery(
               $stepId: ID!
+              $cursor: String
               $orderBy: ProposalOrder
               $isAuthenticated: Boolean!
               $count: Int
@@ -107,6 +108,7 @@ export class ProposalStepPage extends React.Component<Props> {
               stepId: this.props.step.id,
               isAuthenticated: this.props.isAuthenticated,
               count: 50,
+              cursor: null,
               // $FlowFixMe
               ...this.initialRenderVars,
             }: ProposalStepPageQueryVariables)

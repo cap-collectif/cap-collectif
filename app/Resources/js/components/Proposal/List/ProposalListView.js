@@ -153,6 +153,7 @@ export default createRefetchContainer(
   graphql`
     query ProposalListViewRefetchQuery(
       $stepId: ID!
+      $cursor: String
       $orderBy: ProposalOrder
       $isAuthenticated: Boolean!
       $count: Int
