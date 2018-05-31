@@ -1028,7 +1028,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
 
     public function isIndexable(): bool
     {
-        return $this->enabled && !$this->expired && !$this->isDraft() && !$this->isDeleted();
+        return $this->enabled && !$this->expired && !$this->isDeleted();
     }
 
     public static function getElasticsearchTypeName(): string

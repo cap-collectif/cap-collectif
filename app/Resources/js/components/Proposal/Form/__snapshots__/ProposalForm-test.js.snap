@@ -245,7 +245,6 @@ exports[`<ProposalForm /> should render a create form 1`] = `
       Array [
         Object {
           "choices": Array [],
-          "description": null,
           "helpText": "Question 1",
           "id": "question1",
           "isOtherAllowed": false,
@@ -531,7 +530,6 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
       Array [
         Object {
           "choices": Array [],
-          "description": null,
           "helpText": "Question 1",
           "id": "question1",
           "isOtherAllowed": false,

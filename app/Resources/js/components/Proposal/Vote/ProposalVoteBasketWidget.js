@@ -1,42 +1,60 @@
-// @flow
-import * as React from 'react';
-import { graphql, createRefetchContainer, type RelayRefetchProp } from 'react-relay';
+import React, { PropTypes } from 'react';
 import { FormattedNumber, FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import { mapValues } from 'lodash';
 import { Nav, Navbar, Button, ProgressBar } from 'react-bootstrap';
-import type { ProposalVoteBasketWidget_step } from './__generated__/ProposalVoteBasketWidget_step.graphql';
-import type { ProposalVoteBasketWidget_viewer } from './__generated__/ProposalVoteBasketWidget_viewer.graphql';
+import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
+import Input from '../../Form/Input';
+import { VOTE_TYPE_BUDGET, VOTE_TYPE_SIMPLE } from '../../../constants/ProposalConstants';
 import { getSpentPercentage } from '../../../services/ProposalVotesHelper';
 
-type Props = {
-  step: ProposalVoteBasketWidget_step,
-  viewer: ?ProposalVoteBasketWidget_viewer,
-  votesPageUrl: string,
-  image: string,
-  relay: RelayRefetchProp,
-};
+export const ProposalVoteBasketWidget = React.createClass({
+  propTypes: {
+    projectId: PropTypes.string.isRequired,
+    votableSteps: PropTypes.array.isRequired,
+    votesPageUrl: PropTypes.string.isRequired,
+    userVotesCountByStepId: PropTypes.object.isRequired,
+    creditsLeftByStepId: PropTypes.object.isRequired,
+    image: PropTypes.string,
+  },
 
-export class ProposalVoteBasketWidget extends React.Component<Props> {
-  static defaultProps = {
-    image: null,
-  };
+  mixins: [DeepLinkStateMixin],
+
+  getDefaultProps() {
+    return {
+      image: null,
+    };
+  },
+
+  getInitialState() {
+    return {
+      selectedStepId: this.props.votableSteps[0].id,
+    };
+  },
 
   render() {
-    const { image, votesPageUrl, step, viewer } = this.props;
-
+    const {
+      image,
+      votesPageUrl,
+      votableSteps,
+      userVotesCountByStepId,
+      creditsLeftByStepId,
+    } = this.props;
+    const selectedStep = votableSteps.filter(step => step.id === this.state.selectedStepId)[0];
+    const budget = selectedStep.budget;
+    const creditsLeft = creditsLeftByStepId[selectedStep.id];
+    const creditsSpent = budget - creditsLeft;
     const showProgressBar =
-      (step.voteType === 'SIMPLE' && step.votesLimit) || step.voteType === 'BUDGET';
-
-    let percentage = 0;
-
-    const votesCount = viewer && viewer.proposalVotes ? viewer.proposalVotes.totalCount : 0;
-    const creditsSpent = viewer && viewer.proposalVotes ? viewer.proposalVotes.creditsSpent : 0;
-    const creditsLeft =
-      viewer && viewer.proposalVotes ? viewer.proposalVotes.creditsLeft : step.budget;
-
-    if (step.voteType === 'BUDGET') {
-      percentage = getSpentPercentage(step.budget, creditsSpent);
+      (selectedStep.voteType === VOTE_TYPE_SIMPLE && selectedStep.votesLimit) ||
+      selectedStep.voteType === VOTE_TYPE_BUDGET;
+    let percentage;
+    if (selectedStep.voteType === VOTE_TYPE_BUDGET) {
+      percentage = getSpentPercentage(budget, creditsSpent);
     } else {
-      percentage = getSpentPercentage(step.votesLimit, votesCount);
+      percentage = getSpentPercentage(
+        selectedStep.votesLimit,
+        userVotesCountByStepId[selectedStep.id],
+      );
     }
     return (
       <Navbar fixedTop className="proposal-vote__widget">
@@ -56,40 +74,67 @@ export class ProposalVoteBasketWidget extends React.Component<Props> {
           </Navbar.Header>
         )}
         <Navbar.Collapse>
-          {step.voteType === 'SIMPLE' &&
-            step.votesLimit && (
+          <Nav>
+            {votableSteps.length > 1 && (
+              <li className="navbar-text widget__counter">
+                <p className="widget__counter__label">
+                  {<FormattedMessage id="project.votes.widget.step" />}
+                </p>
+                <span className="widget__counter__value">
+                  <Input
+                    id="votes_widget_step"
+                    type="select"
+                    className="widget__counter__select"
+                    valueLink={this.linkState('selectedStepId')}
+                    label={false}>
+                    {votableSteps.map(step => (
+                      <option key={step.id} value={step.id}>
+                        {step.title}
+                      </option>
+                    ))}
+                  </Input>
+                </span>
+              </li>
+            )}
+          </Nav>
+          {selectedStep.voteType === VOTE_TYPE_SIMPLE &&
+            selectedStep.votesLimit && (
               <Nav>
                 <li className="navbar-text widget__counter">
                   <p className="widget__counter__label">
                     {<FormattedMessage id="project.votes.widget.votes" />}
                   </p>
-                  <span className="widget__counter__value">{step.votesLimit}</span>
+                  <span className="widget__counter__value">{selectedStep.votesLimit}</span>
                 </li>
                 <li className="navbar-text widget__counter">
                   <p className="widget__counter__label">
                     {<FormattedMessage id="project.votes.widget.votes_left" />}
                   </p>
-                  <span className="widget__counter__value">{step.votesLimit - votesCount}</span>
+                  <span className="widget__counter__value">
+                    {selectedStep.votesLimit - userVotesCountByStepId[selectedStep.id]}
+                  </span>
                 </li>
                 <li className="navbar-text widget__counter">
                   <p className="widget__counter__label">
                     {<FormattedMessage id="project.votes.widget.votes_spent" />}
                   </p>
-                  <span className="widget__counter__value">{votesCount}</span>
+                  <span className="widget__counter__value">
+                    {userVotesCountByStepId[selectedStep.id]}
+                  </span>
                 </li>
               </Nav>
             )}
-          {step.voteType === 'BUDGET' && (
+          {selectedStep.voteType === VOTE_TYPE_BUDGET && (
             <Nav>
               <li className="navbar-text widget__counter">
                 <p className="widget__counter__label">
                   {<FormattedMessage id="project.votes.widget.budget" />}
                 </p>
                 <span className="widget__counter__value">
-                  {step.budget ? (
+                  {budget ? (
                     <FormattedNumber
                       minimumFractionDigits={0}
-                      value={step.budget}
+                      value={budget}
                       style="currency"
                       currency="EUR"
                     />
@@ -105,7 +150,7 @@ export class ProposalVoteBasketWidget extends React.Component<Props> {
                 <span className="widget__counter__value">
                   <FormattedNumber
                     minimumFractionDigits={0}
-                    value={creditsSpent || 0}
+                    value={creditsSpent}
                     style="currency"
                     currency="EUR"
                   />
@@ -118,30 +163,34 @@ export class ProposalVoteBasketWidget extends React.Component<Props> {
                 <span className="widget__counter__value">
                   <FormattedNumber
                     minimumFractionDigits={0}
-                    value={creditsLeft || 0}
+                    value={creditsLeft}
                     style="currency"
                     currency="EUR"
                   />
                 </span>
               </li>
-              {step.votesLimit && (
+              {selectedStep.votesLimit && (
                 <li className="navbar-text widget__counter">
                   <p className="widget__counter__label">
                     {<FormattedMessage id="project.votes.widget.votes_left_budget" />}
                   </p>
-                  <span className="widget__counter__value">{step.votesLimit - votesCount}</span>
+                  <span className="widget__counter__value">
+                    {selectedStep.votesLimit - userVotesCountByStepId[selectedStep.id]}
+                  </span>
                 </li>
               )}
             </Nav>
           )}
-          {step.voteType === 'SIMPLE' &&
-            !step.votesLimit && (
+          {selectedStep.voteType === VOTE_TYPE_SIMPLE &&
+            !selectedStep.votesLimit && (
               <Nav>
                 <li className="navbar-text widget__counter">
                   <p className="widget__counter__label">
                     {<FormattedMessage id="project.votes.widget.votes" />}
                   </p>
-                  <span className="widget__counter__value">{votesCount}</span>
+                  <span className="widget__counter__value">
+                    {userVotesCountByStepId[selectedStep.id]}
+                  </span>
                 </li>
               </Nav>
             )}
@@ -149,7 +198,7 @@ export class ProposalVoteBasketWidget extends React.Component<Props> {
             bsStyle="default"
             className="widget__button navbar-btn pull-right"
             href={votesPageUrl}>
-            <FormattedMessage id="proposal.details" />
+            {<FormattedMessage id="proposal.details" />}
           </Button>
           {showProgressBar && (
             <Nav pullRight className="widget__progress-bar-nav hidden-xs">
@@ -161,38 +210,17 @@ export class ProposalVoteBasketWidget extends React.Component<Props> {
         </Navbar.Collapse>
       </Navbar>
     );
-  }
-}
-
-export default createRefetchContainer(
-  ProposalVoteBasketWidget,
-  {
-    step: graphql`
-      fragment ProposalVoteBasketWidget_step on ProposalStep {
-        id
-        title
-        voteType
-        votesLimit
-        budget
-      }
-    `,
-    viewer: graphql`
-      fragment ProposalVoteBasketWidget_viewer on User
-        @argumentDefinitions(stepId: { type: "ID!", nonNull: true }) {
-        id
-        proposalVotes(stepId: $stepId) {
-          totalCount
-          creditsLeft
-          creditsSpent
-        }
-      }
-    `,
   },
-  graphql`
-    query ProposalVoteBasketWidgetQuery($stepId: ID!) {
-      viewer {
-        ...ProposalVoteBasketWidget_viewer @arguments(stepId: $stepId)
-      }
-    }
-  `,
-);
+});
+
+const mapStateToProps = state => {
+  return {
+    userVotesCountByStepId: mapValues(state.proposal.userVotesByStepId, votes => votes.length),
+    creditsLeftByStepId: state.proposal.creditsLeftByStepId,
+    votableSteps: state.project.projectsById[state.project.currentProjectById].steps.filter(
+      step => step.votable,
+    ),
+    projectId: state.project.currentProjectById,
+  };
+};
+export default connect(mapStateToProps)(ProposalVoteBasketWidget);

@@ -571,7 +571,6 @@ export default createFragmentContainer(
           private
           required
           helpText
-          description
           type
           isOtherAllowed
           validationRule {
@@ -583,9 +582,6 @@ export default createFragmentContainer(
             title
             description
             color
-            image {
-              url
-            }
           }
         }
         usingDistrict

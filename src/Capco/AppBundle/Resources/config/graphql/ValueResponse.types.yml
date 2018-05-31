@@ -8,7 +8,7 @@ ValueResponse:
               type: "Question!"
             value:
               type: "String"
-              description: "The value, can be a JSON"
+              description: "The value"
               resolve: "@=resolver('value_response_value', [value])"
             formattedValue:
               type: "String"

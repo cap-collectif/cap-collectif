@@ -5,9 +5,6 @@ OtherStep:
         fields:
             id:
               type: "ID!"
-            show_url:
-              type: "String!"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\StepUrlResolver", [value])'
             kind:
                type: "String!"
                resolve: "other"

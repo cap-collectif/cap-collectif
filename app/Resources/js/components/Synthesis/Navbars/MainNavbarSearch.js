@@ -1,6 +1,7 @@
 // @flow
 import React, { PropTypes } from 'react';
 import { Navbar, Button } from 'react-bootstrap';
+import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import Input from '../../Form/Input';
 
 const MainNavbarSearch = React.createClass({
@@ -9,6 +10,8 @@ const MainNavbarSearch = React.createClass({
   contextTypes: {
     router: PropTypes.object.isRequired,
   },
+
+  mixins: [DeepLinkStateMixin],
 
   getInitialState() {
     return {
@@ -37,11 +40,7 @@ const MainNavbarSearch = React.createClass({
             type="text"
             placeholder="synthesis.edition.navbar.search"
             buttonAfter={searchButton}
-            onChange={(event: SyntheticInputEvent<>) => {
-              this.setState({
-                searchTerm: event.target.value,
-              });
-            }}
+            valueLink={this.linkState('searchTerm')}
           />
         </form>
       </Navbar.Form>

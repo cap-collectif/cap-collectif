@@ -1,5 +1,229 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<ProposalPageMetadata /> should not render category if proposal has none 1`] = `
+<div>
+  <div
+    className="proposal__page__metadata"
+  >
+    <div
+      className="proposal__infos"
+    >
+      <div
+        className="proposal__info proposal__info--district ellipsis"
+      >
+        <i
+          className="cap cap-marker-1-1 icon--blue"
+        />
+        Nom du quartier
+      </div>
+      <ProposalDetailEstimation
+        proposal={
+          Object {
+            "district": Object {
+              "name": "Nom du quartier",
+            },
+            "reference": "Reference",
+            "title": "Titre",
+          }
+        }
+        showNullEstimation={true}
+      />
+      <ProposalDetailLikers
+        componentClass="div"
+        proposal={
+          Object {
+            "district": Object {
+              "name": "Nom du quartier",
+            },
+            "reference": "Reference",
+            "title": "Titre",
+          }
+        }
+      />
+      <div
+        className="proposal__info proposal__info--reference ellipsis"
+      >
+        <i
+          className="cap cap-tag-1-1 icon--blue"
+        />
+        Reference
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<ProposalPageMetadata /> should not render category if specified not to 1`] = `
+<div>
+  <div
+    className="proposal__page__metadata"
+  >
+    <div
+      className="proposal__infos"
+    >
+      <div
+        className="proposal__info proposal__info--district ellipsis"
+      >
+        <i
+          className="cap cap-marker-1-1 icon--blue"
+        />
+        Nom du quartier
+      </div>
+      <ProposalDetailEstimation
+        proposal={
+          Object {
+            "category": Object {
+              "name": "Nom de la catégorie",
+            },
+            "district": Object {
+              "name": "Nom du quartier",
+            },
+            "reference": "Reference",
+            "title": "Titre",
+          }
+        }
+        showNullEstimation={true}
+      />
+      <ProposalDetailLikers
+        componentClass="div"
+        proposal={
+          Object {
+            "category": Object {
+              "name": "Nom de la catégorie",
+            },
+            "district": Object {
+              "name": "Nom du quartier",
+            },
+            "reference": "Reference",
+            "title": "Titre",
+          }
+        }
+      />
+      <div
+        className="proposal__info proposal__info--reference ellipsis"
+      >
+        <i
+          className="cap cap-tag-1-1 icon--blue"
+        />
+        Reference
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<ProposalPageMetadata /> should not render district if proposal has none 1`] = `
+<div>
+  <div
+    className="proposal__page__metadata"
+  >
+    <div
+      className="proposal__infos"
+    >
+      <div
+        className="proposal__info proposal__info--category ellipsis"
+      >
+        <i
+          className="cap cap-tag-1-1 icon--blue"
+        />
+        Nom de la catégorie
+      </div>
+      <ProposalDetailEstimation
+        proposal={
+          Object {
+            "category": Object {
+              "name": "Nom de la catégorie",
+            },
+            "reference": "Reference",
+            "title": "Titre",
+          }
+        }
+        showNullEstimation={true}
+      />
+      <ProposalDetailLikers
+        componentClass="div"
+        proposal={
+          Object {
+            "category": Object {
+              "name": "Nom de la catégorie",
+            },
+            "reference": "Reference",
+            "title": "Titre",
+          }
+        }
+      />
+      <div
+        className="proposal__info proposal__info--reference ellipsis"
+      >
+        <i
+          className="cap cap-tag-1-1 icon--blue"
+        />
+        Reference
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<ProposalPageMetadata /> should not render district if specified not to 1`] = `
+<div>
+  <div
+    className="proposal__page__metadata"
+  >
+    <div
+      className="proposal__infos"
+    >
+      <div
+        className="proposal__info proposal__info--category ellipsis"
+      >
+        <i
+          className="cap cap-tag-1-1 icon--blue"
+        />
+        Nom de la catégorie
+      </div>
+      <ProposalDetailEstimation
+        proposal={
+          Object {
+            "category": Object {
+              "name": "Nom de la catégorie",
+            },
+            "district": Object {
+              "name": "Nom du quartier",
+            },
+            "reference": "Reference",
+            "title": "Titre",
+          }
+        }
+        showNullEstimation={true}
+      />
+      <ProposalDetailLikers
+        componentClass="div"
+        proposal={
+          Object {
+            "category": Object {
+              "name": "Nom de la catégorie",
+            },
+            "district": Object {
+              "name": "Nom du quartier",
+            },
+            "reference": "Reference",
+            "title": "Titre",
+          }
+        }
+      />
+      <div
+        className="proposal__info proposal__info--reference ellipsis"
+      >
+        <i
+          className="cap cap-tag-1-1 icon--blue"
+        />
+        Reference
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`<ProposalPageMetadata /> should render proposal page metadata 1`] = `
 <div>
   <div
@@ -24,41 +248,33 @@ exports[`<ProposalPageMetadata /> should render proposal page metadata 1`] = `
         />
         Nom du quartier
       </div>
-      <Relay(ProposalDetailEstimation)
+      <ProposalDetailEstimation
         proposal={
           Object {
-            "$refType": null,
             "category": Object {
               "name": "Nom de la catégorie",
             },
             "district": Object {
               "name": "Nom du quartier",
             },
-            "estimation": null,
-            "id": "1",
-            "likers": Array [],
             "reference": "Reference",
-            "theme": null,
+            "title": "Titre",
           }
         }
         showNullEstimation={true}
       />
-      <Relay(ProposalDetailLikers)
+      <ProposalDetailLikers
         componentClass="div"
         proposal={
           Object {
-            "$refType": null,
             "category": Object {
               "name": "Nom de la catégorie",
             },
             "district": Object {
               "name": "Nom du quartier",
             },
-            "estimation": null,
-            "id": "1",
-            "likers": Array [],
             "reference": "Reference",
-            "theme": null,
+            "title": "Titre",
           }
         }
       />

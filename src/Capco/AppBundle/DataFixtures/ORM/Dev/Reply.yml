@@ -1,27 +1,27 @@
 Capco\AppBundle\Entity\Reply:
   reply1:
-    id: 'reply1'
+    id: '1'
     author: '@user502'
     questionnaire: '@questionnaire1'
     createdAt: <(new \DateTime('2016-03-01'))>
     updatedAt: <(new \DateTime('2016-03-01'))>
     enabled: true
   reply2:
-    id: 'reply2'
+    id: '2'
     author: '@user4'
     questionnaire: '@questionnaire1'
     createdAt: <(new \DateTime('2016-03-01'))>
     updatedAt: <(new \DateTime('2016-03-01'))>
     enabled: true
   reply3:
-    id: 'reply3'
+    id: '3'
     author: '@user4'
     questionnaire: '@questionnaire2'
     createdAt: <(new \DateTime('2016-03-01'))>
     updatedAt: <(new \DateTime('2016-03-01'))>
     enabled: true
   reply4:
-    id: 'reply4'
+    id: '4'
     author: '@user4'
     questionnaire: '@questionnaire3'
     createdAt: <(new \DateTime('2016-03-01'))>

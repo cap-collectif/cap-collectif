@@ -8,55 +8,46 @@ import ProposalPageAlert from './ProposalPageAlert';
 import ProposalDraftAlert from './ProposalDraftAlert';
 import ProposalPageTabs from './ProposalPageTabs';
 import Loader from '../../Ui/Loader';
-import type { Uuid, FeatureToggles, State } from '../../../types';
+import type { FeatureToggles, State } from '../../../types';
+import type { Proposal } from '../../../redux/modules/proposal';
 import { PROPOSAL_FOLLOWERS_TO_SHOW } from '../../../constants/ProposalConstants';
 import type ProposalPageQueryResponse from './__generated__/ProposalPageQuery.graphql';
 
 type Props = {
   form: Object,
-  proposalId: Uuid,
-  currentVotableStepId: ?Uuid,
+  proposal: Proposal,
   categories: Array<Object>,
+  steps: Array<Object>,
   features: FeatureToggles,
   isAuthenticated: boolean,
 };
 
 export class ProposalPage extends React.Component<Props> {
   render() {
-    const { proposalId, features, categories, form } = this.props;
+    const { proposal, steps, features, categories, form } = this.props;
+    // $FlowFixMe
     return (
       <div>
+        <ProposalDraftAlert proposal={proposal} />
+        <ProposalPageAlert proposal={proposal} />
+
         <QueryRenderer
           environment={environment}
           query={graphql`
             query ProposalPageQuery(
               $proposalId: ID!
-              $hasVotableStep: Boolean!
-              $stepId: ID!
               $count: Int!
               $cursor: String
               $isAuthenticated: Boolean!
             ) {
-              viewer @include(if: $isAuthenticated) {
-                ...ProposalPageTabs_viewer
-                ...ProposalPageHeader_viewer @arguments(hasVotableStep: $hasVotableStep)
-              }
-              step: node(id: $stepId) @include(if: $hasVotableStep) {
-                ...ProposalPageHeader_step @arguments(isAuthenticated: $isAuthenticated)
-                ...ProposalPageTabs_step
-              }
               proposal: node(id: $proposalId) {
-                ...ProposalDraftAlert_proposal
-                ...ProposalPageAlert_proposal
                 ...ProposalPageTabs_proposal
-                ...ProposalPageHeader_proposal @arguments(isAuthenticated: $isAuthenticated)
+                ...ProposalPageHeader_proposal
               }
             }
           `}
           variables={{
-            proposalId,
-            hasVotableStep: !!this.props.currentVotableStepId,
-            stepId: this.props.currentVotableStepId || '',
+            proposalId: proposal.id,
             count: PROPOSAL_FOLLOWERS_TO_SHOW,
             cursor: null,
             isAuthenticated: this.props.isAuthenticated,
@@ -71,19 +62,16 @@ export class ProposalPage extends React.Component<Props> {
               if (props.proposal) {
                 return (
                   <div>
-                    <ProposalDraftAlert proposal={props.proposal} />
-                    <ProposalPageAlert proposal={props.proposal} />
                     <ProposalPageHeader
                       proposal={props.proposal}
-                      step={props.step || null}
-                      viewer={props.viewer || null}
-                      isAuthenticated={!!props.viewer}
+                      isAuthenticated={this.props.isAuthenticated}
+                      oldProposal={proposal}
                       className="container container--custom"
                     />
                     <ProposalPageTabs
                       proposal={props.proposal}
-                      step={props.step || null}
-                      viewer={props.viewer || null}
+                      oldProposal={proposal}
+                      steps={steps}
                       features={features}
                       categories={categories}
                       form={form}
@@ -106,6 +94,12 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
   return {
     isAuthenticated: state.user.user !== null,
     features: state.default.features,
+    proposal:
+      state.proposal.currentProposalId &&
+      state.proposal.proposalsById[state.proposal.currentProposalId],
+    steps:
+      state.project.currentProjectById &&
+      state.project.projectsById[state.project.currentProjectById].steps,
   };
 };
 

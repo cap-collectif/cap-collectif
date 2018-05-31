@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { type IntlShape, FormattedMessage } from 'react-intl';
+import { type IntlShape } from 'react-intl';
 import { type FieldArrayProps, Field } from 'redux-form';
 import type { QuestionTypeValue } from '../components/Proposal/Page/__generated__/ProposalPageEvaluation_proposal.graphql';
 import ProposalPrivateField from '../components/Proposal/ProposalPrivateField';
@@ -15,19 +15,17 @@ type Questions = $ReadOnlyArray<{|
   +private: boolean,
   +required: boolean,
   +helpText: ?string,
-  +description: ?string,
   +type: QuestionTypeValue,
   +isOtherAllowed: boolean,
   +validationRule: ?{|
     +type: ?string,
-    +number: ?number,
+    +number: ?string,
   |},
   +choices: ?$ReadOnlyArray<{|
     +id: string,
     +title: string,
     +description: ?string,
     +color: ?string,
-    +image: ?Object,
   |}>,
 |}>;
 
@@ -54,11 +52,7 @@ export type ResponsesInReduxForm = $ReadOnlyArray<{|
         +name: string,
         +url: string,
         +size: string,
-      |}>
-    | {|
-        labels: $ReadOnlyArray<string>,
-        other: ?string,
-      |},
+      |}>,
 |}>;
 
 // The real type is
@@ -105,26 +99,6 @@ export const formatSubmitResponses = (
   });
 };
 
-export const getValueFromResponse = (questionType: string, responseValue: string) => {
-  // For some questions type we need to parse the JSON of previous value
-  try {
-    if (questionType === 'button') {
-      return JSON.parse(responseValue).labels[0];
-    }
-    if (questionType === 'radio' || questionType === 'checkbox') {
-      return JSON.parse(responseValue);
-    }
-    if (questionType === 'ranking') {
-      return JSON.parse(responseValue).labels;
-    }
-  } catch (e) {
-    // eslint-disable-next-line no-console
-    console.error(`Failed to parse : ${responseValue}`);
-  }
-
-  return responseValue;
-};
-
 export const formatInitialResponsesValues = (
   questions: Questions,
   responses: ResponsesFromAPI,
@@ -135,21 +109,37 @@ export const formatInitialResponsesValues = (
     // If we have a previous response format it
     if (response) {
       if (typeof response.value !== 'undefined' && response.value !== null) {
+        const questionType = question.type;
+
+        // For some questions type we need to parse the JSON of previous value
+        let responseValue = response.value;
+        try {
+          if (questionType === 'button') {
+            responseValue = JSON.parse(response.value).labels[0];
+          }
+          if (questionType === 'radio' || questionType === 'checkbox') {
+            responseValue = JSON.parse(response.value);
+          }
+          if (questionType === 'ranking') {
+            responseValue = JSON.parse(response.value).labels;
+          }
+        } catch (e) {
+          // eslint-disable-next-line no-console
+          console.error(`Failed to parse : ${response.value}`);
+        }
         return {
           question: question.id,
-          value: getValueFromResponse(question.type, response.value),
+          value: responseValue,
         };
       }
       if (typeof response.medias !== 'undefined') {
         return { question: question.id, value: response.medias };
       }
     }
+
     // Otherwise we create an empty response
     if (question.type === 'medias') {
       return { question: question.id, value: [] };
-    }
-    if (question.type === 'radio' || question.type === 'checkbox') {
-      return { question: question.id, value: { labels: [], other: null } };
     }
     return { question: question.id, value: null };
   });
@@ -162,28 +152,8 @@ const formattedChoicesInField = field => {
       label: choice.title,
       description: choice.description,
       color: choice.color,
-      image: choice.image,
     };
   });
-};
-
-export const getRequiredFieldIndicationStrategy = (fields: Questions) => {
-  const numberOfRequiredFields = fields.reduce((a, b) => a + (b.required ? 1 : 0), 0);
-  const numberOfFields = fields.length;
-  const halfNumberOfFields = numberOfFields / 2;
-  if (numberOfRequiredFields === 0) {
-    return 'no_required';
-  }
-  if (numberOfRequiredFields === numberOfFields) {
-    return 'all_required';
-  }
-  if (numberOfRequiredFields === halfNumberOfFields) {
-    return 'half_required';
-  }
-  if (numberOfRequiredFields > halfNumberOfFields) {
-    return 'majority_required';
-  }
-  return 'minority_required';
 };
 
 export const renderResponses = ({
@@ -199,36 +169,28 @@ export const renderResponses = ({
   change: (field: string, value: any) => void,
   intl: IntlShape,
   disabled: boolean,
-}) => {
-  const strategy = getRequiredFieldIndicationStrategy(questions);
+}) => (
+  <div>
+    {fields.map((member, index) => {
+      const field = questions[index];
+      const inputType = field.type || 'text';
+      const isOtherAllowed = field.isOtherAllowed;
 
-  return (
-    <div>
-      {fields.map((member, index) => {
-        const field = questions[index];
+      let labelMessage = field.title;
+      let intlMessage;
+      if (field.required) {
+        intlMessage = intl.formatMessage({ id: 'global.mandatory' });
+      } else {
+        intlMessage = intl.formatMessage({ id: 'global.optional' });
+      }
 
-        const inputType = field.type || 'text';
-        const isOtherAllowed = field.isOtherAllowed;
+      labelMessage += ` <span class="excerpt"> ${intlMessage}</span>`;
+      const label = <span dangerouslySetInnerHTML={{ __html: labelMessage }} />;
 
-        const labelAppend = field.required
-          ? strategy === 'minority_required'
-            ? ` <span class="warning small"> ${intl.formatMessage({
-                id: 'global.mandatory',
-              })}</span>`
-            : ''
-          : strategy === 'majority_required' || strategy === 'half_required'
-            ? ` <span class="excerpt small"> ${intl.formatMessage({
-                id: 'global.optional',
-              })}</span>`
-            : '';
-
-        const labelMessage = field.title + labelAppend;
-
-        const label = <span dangerouslySetInnerHTML={{ __html: labelMessage }} />;
-
-        switch (inputType) {
-          case 'medias': {
-            return (
+      switch (inputType) {
+        case 'medias': {
+          return (
+            <div>
               <ProposalPrivateField key={field.id} show={field.private}>
                 <Field
                   name={`${member}.value`}
@@ -236,62 +198,36 @@ export const renderResponses = ({
                   type="medias"
                   component={component}
                   help={field.helpText}
-                  description={field.description}
                   placeholder="reply.your_response"
                   label={label}
                   disabled={disabled}
                 />
               </ProposalPrivateField>
-            );
+            </div>
+          );
+        }
+        default: {
+          let response;
+          if (responses) {
+            response = responses[index].value;
           }
-          case 'select': {
-            return (
-              <ProposalPrivateField key={field.id} show={field.private}>
-                <Field
-                  name={`${member}.value`}
-                  id={member}
-                  type={inputType}
-                  component={component}
-                  help={field.helpText}
-                  isOtherAllowed={isOtherAllowed}
-                  description={field.description}
-                  placeholder="reply.your_response"
-                  label={label}
-                  disabled={disabled}>
-                  <option value="" disabled>
-                    {<FormattedMessage id="global.select" />}
-                  </option>
-                  {field.choices.map(choice => (
-                    <option key={choice.id} value={choice.title}>
-                      {choice.title}
-                    </option>
-                  ))}
-                </Field>
-              </ProposalPrivateField>
-            );
-          }
-          default: {
-            let response;
-            if (responses) {
-              response = responses[index].value;
-            }
 
-            let choices = [];
-            if (
-              inputType === 'ranking' ||
-              inputType === 'radio' ||
-              inputType === 'checkbox' ||
-              inputType === 'button'
-            ) {
-              choices = formattedChoicesInField(field);
-              if (inputType === 'radio') {
-                return (
+          let choices = [];
+          if (
+            inputType === 'ranking' ||
+            inputType === 'radio' ||
+            inputType === 'checkbox' ||
+            inputType === 'button'
+          ) {
+            choices = formattedChoicesInField(field);
+            if (inputType === 'radio') {
+              return (
+                <div>
                   <ProposalPrivateField key={field.id} show={field.private}>
                     <div key={`${member}-container`}>
                       <MultipleChoiceRadio
                         id={member}
                         name={member}
-                        description={field.description}
                         helpText={field.helpText}
                         isOtherAllowed={isOtherAllowed}
                         label={label}
@@ -302,18 +238,19 @@ export const renderResponses = ({
                       />
                     </div>
                   </ProposalPrivateField>
-                );
-              }
+                </div>
+              );
             }
+          }
 
-            return (
+          return (
+            <div>
               <ProposalPrivateField key={field.id} show={field.private}>
                 <Field
                   name={`${member}.value`}
                   id={member}
                   type={inputType}
                   component={component}
-                  description={field.description}
                   help={field.helpText}
                   isOtherAllowed={isOtherAllowed}
                   placeholder="reply.your_response"
@@ -322,10 +259,10 @@ export const renderResponses = ({
                   disabled={disabled}
                 />
               </ProposalPrivateField>
-            );
-          }
+            </div>
+          );
         }
-      })}
-    </div>
-  );
-};
+      }
+    })}
+  </div>
+);

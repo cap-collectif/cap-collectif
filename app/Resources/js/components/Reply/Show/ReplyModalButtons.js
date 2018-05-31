@@ -1,50 +1,48 @@
-// @flow
-import * as React from 'react';
-import { createFragmentContainer, graphql } from 'react-relay';
-import { Button } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
-import { type ReplyModalButtons_reply } from './__generated__/ReplyModalButtons_reply.graphql';
+import React, { PropTypes } from 'react';
 import ReplyDeleteModal from '../Delete/ReplyDeleteModal';
+import DeleteButton from '../../Form/DeleteButton';
 
-type Props = {
-  reply: ReplyModalButtons_reply,
-  onChange: () => void,
-};
+const ReplyModalButtons = React.createClass({
+  propTypes: {
+    reply: PropTypes.object.isRequired,
+    form: PropTypes.object.isRequired,
+    onChange: PropTypes.func.isRequired,
+  },
 
-type State = {
-  showEditModal: boolean,
-  showDeleteModal: boolean,
-};
+  getInitialState() {
+    return {
+      showEditModal: false,
+      showDeleteModal: false,
+    };
+  },
 
-export class ReplyModalButtons extends React.Component<Props, State> {
-  state = {
-    showEditModal: false,
-    showDeleteModal: false,
-  };
+  toggleEditModal(value) {
+    this.setState({ showEditModal: value });
+  },
 
-  toggleDeleteModal = (value: boolean) => {
+  toggleDeleteModal(value) {
     this.setState({ showDeleteModal: value });
-  };
+  },
 
   render() {
-    const { reply, onChange } = this.props;
+    const { reply, form, onChange } = this.props;
     return (
       <span className="pull-left reply__buttons">
-        {reply.viewerCanDelete && (
+        {form.contribuable && (
+          <DeleteButton
+            id={`reply-delete-button${reply.id}`}
+            className="reply__delete-btn"
+            author={reply.author}
+            onClick={this.toggleDeleteModal.bind(null, true)}
+            style={{ marginLeft: '15px' }}
+            deletable={form.isContribuable}
+          />
+        )}
+        {form.contribuable && (
           <div>
-            <Button
-              id={`reply-delete-button${reply.id}`}
-              className="reply__delete-btn"
-              onClick={() => {
-                this.toggleDeleteModal(true);
-              }}
-              style={{ marginLeft: '15px' }}>
-              <i className="cap cap-bin-2" />
-              <FormattedMessage id="global.remove" />
-            </Button>
-            {/* $FlowFixMe $refType */}
             <ReplyDeleteModal
               reply={reply}
+              form={form}
               show={this.state.showDeleteModal}
               onToggleModal={this.toggleDeleteModal}
               onDelete={onChange}
@@ -53,15 +51,7 @@ export class ReplyModalButtons extends React.Component<Props, State> {
         )}
       </span>
     );
-  }
-}
-
-export default createFragmentContainer(ReplyModalButtons, {
-  reply: graphql`
-    fragment ReplyModalButtons_reply on Reply {
-      id
-      viewerCanDelete
-      ...ReplyDeleteModal_reply
-    }
-  `,
+  },
 });
+
+export default ReplyModalButtons;

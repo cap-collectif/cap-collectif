@@ -23,8 +23,6 @@ Question:
                 resolve: "@=resolver('question_isOtherAllowed', [value])"
             helpText:
                 type: "String"
-            description:
-                type: "String"
             choices:
                 type: "[QuestionChoice!]"
                 resolve: "@=resolver('question_choices', [value])"

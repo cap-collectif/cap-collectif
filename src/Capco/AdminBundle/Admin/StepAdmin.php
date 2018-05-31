@@ -308,11 +308,6 @@ class StepAdmin extends Admin
                     'label' => 'admin.fields.step.budget',
                     'required' => false,
                 ])
-                ->add('votesRanking', null, [
-                    'label' => 'activate-vote-ranking',
-                    'required' => false,
-                    'help' => 'ranking-votes-help-text',
-                ])
                 ->add('votesHelpText', CKEditorType::class, [
                     'config_name' => 'admin_editor',
                     'label' => 'admin.fields.step.votesHelpText',

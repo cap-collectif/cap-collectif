@@ -17,9 +17,6 @@ Proposal:
               type: "[ProgressStep!]!"
             evaluers:
               type: "[Group!]!"
-            currentVotableStep:
-              type: "ProposalStep"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalCurrentVotableStepResolver", [value])'
             viewerIsAnEvaluer:
               type: "Boolean!"
               resolve: "@=resolver('proposal_viewer_is_evaluer', [value, user])"
@@ -49,11 +46,6 @@ Proposal:
               type: "Project!"
             status:
               type: "Status"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalStatusResolver", [value, args])'
-              args:
-                  step:
-                      type: "ID"
-                      description: "Used to get the status on a selection step."
             selections:
               type: "[Selection!]!"
             likers:
@@ -62,7 +54,6 @@ Proposal:
                 type: "Int"
             responses:
                 type: "[Response]!"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalResponsesResolver", [value, user])'
             media:
                 type: "Media"
             theme:
@@ -156,9 +147,8 @@ Proposal:
                 orderBy:
                   type: "ProposalVotesOrder"
                   defaultValue: { field: CREATED_AT, direction: DESC }
-                stepId:
-                  type: "ID"
-                  description: "If provided, retrieve only in this step."
+                step:
+                  type: "ID!"
             createdAt:
               type: "DateTime!"
               description: "Identifies the date and time when the object was created."
@@ -228,18 +218,3 @@ Proposal:
             viewerCanSeeEvaluation:
                 type: "Boolean!"
                 resolve: "@=resolver('proposal_viewer_can_see_evaluation', [value, user])"
-            viewerHasVote:
-                access: "@=hasRole('ROLE_USER')"
-                type: "Boolean!"
-                args:
-                    step:
-                        type: "ID!"
-                        description: "The concerned step."
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalViewerHasVoteResolver", [value, args, user])'
-            viewerHasReported:
-                access: "@=hasRole('ROLE_USER')"
-                type: "Boolean!"
-                resolve: '@=value.userHasReport(user)'
-            votableSteps:
-              type: "[ProposalStep!]!"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalVotableStepsResolver", [value])'

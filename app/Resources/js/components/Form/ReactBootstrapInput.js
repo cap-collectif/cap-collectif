@@ -123,6 +123,9 @@ class ReactBootstrapInput extends React.Component<Props> {
     addonAfter,
     buttonBefore,
     buttonAfter,
+    help,
+    description,
+    hasFeedback,
     popover,
     children,
     value,
@@ -208,7 +211,6 @@ class ReactBootstrapInput extends React.Component<Props> {
         field.type = type;
         field.isOtherAllowed = props.isOtherAllowed;
         field.choices = props.choices;
-        field.checked = props.checked;
 
         return (
           <MultipleChoiceCheckbox
@@ -217,6 +219,7 @@ class ReactBootstrapInput extends React.Component<Props> {
             label={null}
             renderFormErrors={() => {}}
             getGroupStyle={() => {}}
+            isReduxForm
             errors={errors}
             {...props}
           />
@@ -236,11 +239,10 @@ class ReactBootstrapInput extends React.Component<Props> {
       field.choices = props.choices;
 
       return (
-        <RadioGroup key={props.id} horizontal id={props.id} onChange={props.onChange}>
+        <RadioGroup key={props.id} horizontal id={props.id} onChange={props.onChange} value={value}>
           {field.choices.map(choice => (
             <RadioButton
               key={choice.id}
-              disabled={props.disabled}
               value={choice.label}
               iconSize={20}
               pointColor={choice.color}>
@@ -297,7 +299,7 @@ class ReactBootstrapInput extends React.Component<Props> {
           label={null}
           renderFormErrors={() => {}}
           getGroupStyle={() => {}}
-          labelClassName="h4"
+          isReduxForm
           onBlur={props.onBlur}
           {...props}
         />
@@ -366,7 +368,7 @@ class ReactBootstrapInput extends React.Component<Props> {
         )}
         {props.help && <HelpBlock>{props.help}</HelpBlock>}
         {props.description && (
-          <div style={{ paddingBottom: 15 }}>
+          <div style={{ paddingTop: 15, paddingBottom: 25 }}>
             <ButtonBody body={props.description || ''} />
           </div>
         )}

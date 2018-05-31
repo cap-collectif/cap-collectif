@@ -7,23 +7,7 @@ Questionnaire:
                 type: "ID!"
             title:
                 type: "String!"
-            anonymousAllowed:
-                type: "Boolean!"
-            description:
-                type: "String"
-            multipleRepliesAllowed:
-                type: "Boolean!"
-            contribuable:
-                type: "Boolean!"
-                resolve: "@=value.canContribute()"
-                description: "accept answers or not"
-            phoneConfirmationRequired:
-                type: "Boolean!"
-                resolve: "@=value.isPhoneConfirmationRequired()"
+            # order by position
             questions:
                 type: "[Question!]!"
                 resolve: "@=resolver('questionnaire_questions', [value])"
-            viewerReplies:
-                type: "[Reply!]!"
-                access: "@=isAuthenticated()"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionnaireViewerRepliesResolver", [value, user])'

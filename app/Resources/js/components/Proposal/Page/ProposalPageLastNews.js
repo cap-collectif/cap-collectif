@@ -1,13 +1,13 @@
 // @flow
 import * as React from 'react';
+import { connect, type MapStateToProps } from 'react-redux';
 import classNames from 'classnames';
-import { graphql, createFragmentContainer } from 'react-relay';
 import AnswerBody from '../../Answer/AnswerBody';
-import type { ProposalPageLastNews_proposal } from './__generated__/ProposalPageLastNews_proposal.graphql';
+import type { State } from '../../../types';
 
 export class ProposalPageLastNews extends React.Component<{
-  proposal: ProposalPageLastNews_proposal,
-  className: string,
+  proposal: Object,
+  className?: string,
 }> {
   static defaultProps = {
     className: '',
@@ -15,17 +15,14 @@ export class ProposalPageLastNews extends React.Component<{
 
   render() {
     const { proposal, className } = this.props;
-    if (proposal.news.totalCount === 0 || !proposal.news.edges) {
+    const { posts } = proposal;
+    if (!posts || posts.length === 0) {
       return null;
     }
-    const edge = proposal.news.edges[0];
-    if (!edge || typeof edge === 'undefined') {
-      return null;
-    }
-    const post = JSON.parse(JSON.stringify(edge.node));
-    post.author = post.authors[0] && post.authors[0];
+    const post = posts[0];
+    const answer = { ...post, author: post.authors[0] };
     const classes = {
-      'bg-vip': post.authors[0] && post.authors[0].vip,
+      'bg-vip': answer.author && answer.author.vip,
       block: true,
       className: false,
     };
@@ -35,32 +32,20 @@ export class ProposalPageLastNews extends React.Component<{
 
     return (
       <div className={classNames(classes)}>
-        {post.title && <h3 className="h3 proposal__last__news__title">{post.title}</h3>}
-        <AnswerBody answer={post} />
+        {answer.title && <h3 className="h3 proposal__last__news__title">{answer.title}</h3>}
+        <AnswerBody answer={answer} />
       </div>
     );
   }
 }
-export default createFragmentContainer(
-  ProposalPageLastNews,
-  graphql`
-    fragment ProposalPageLastNews_proposal on Proposal {
-      news {
-        totalCount
-        edges {
-          node {
-            url
-            title
-            createdAt
-            body
-            authors {
-              id
-              vip
-              displayName
-            }
-          }
-        }
-      }
-    }
-  `,
-);
+
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
+  return {
+    proposal:
+      state.proposal.currentProposalId &&
+      state.proposal.proposalsById[state.proposal.currentProposalId],
+  };
+};
+
+// TODO create fragment query proposal news : title
+export default connect(mapStateToProps)(ProposalPageLastNews);

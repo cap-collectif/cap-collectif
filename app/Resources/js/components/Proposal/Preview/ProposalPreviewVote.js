@@ -1,57 +1,28 @@
 // @flow
 import React from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
 import ProposalVoteModal from '../Vote/ProposalVoteModal';
-import ProposalVoteButtonWrapperFragment from '../Vote/ProposalVoteButtonWrapperFragment';
-import type { ProposalPreviewVote_proposal } from './__generated__/ProposalPreviewVote_proposal.graphql';
-import type { ProposalPreviewVote_step } from './__generated__/ProposalPreviewVote_step.graphql';
-import type { ProposalPreviewVote_viewer } from './__generated__/ProposalPreviewVote_viewer.graphql';
+import ProposalVoteButtonWrapper from '../Vote/ProposalVoteButtonWrapper';
+import type { Proposal } from '../../../redux/modules/proposal';
 
 type Props = {
-  proposal: ProposalPreviewVote_proposal,
-  step: ProposalPreviewVote_step,
-  viewer: ?ProposalPreviewVote_viewer,
+  proposal: Proposal,
 };
 
 export class ProposalPreviewVote extends React.Component<Props> {
   render() {
-    const { proposal, step, viewer } = this.props;
+    const { proposal } = this.props;
     return (
       <span>
-        {/* $FlowFixMe */}
-        <ProposalVoteButtonWrapperFragment
+        <ProposalVoteButtonWrapper
           proposal={proposal}
-          step={step}
-          viewer={viewer}
+          style={{ width: '100%' }}
           id={`proposal-vote-btn-${proposal.id}`}
-          className="proposal__preview__vote mr-15"
+          className="proposal__preview__vote"
         />
-        {viewer && <ProposalVoteModal proposal={proposal} step={step} />}
+        <ProposalVoteModal proposal={proposal} />
       </span>
     );
   }
 }
 
-export default createFragmentContainer(ProposalPreviewVote, {
-  viewer: graphql`
-    fragment ProposalPreviewVote_viewer on User {
-      ...ProposalVoteButtonWrapperFragment_viewer @arguments(stepId: $stepId)
-    }
-  `,
-  proposal: graphql`
-    fragment ProposalPreviewVote_proposal on Proposal
-      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
-      id
-      ...ProposalVoteModal_proposal @arguments(stepId: $stepId) @include(if: $isAuthenticated)
-      ...ProposalVoteButtonWrapperFragment_proposal
-        @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
-    }
-  `,
-  step: graphql`
-    fragment ProposalPreviewVote_step on Step
-      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
-      ...ProposalVoteModal_step @include(if: $isAuthenticated)
-      ...ProposalVoteButtonWrapperFragment_step
-    }
-  `,
-});
+export default ProposalPreviewVote;

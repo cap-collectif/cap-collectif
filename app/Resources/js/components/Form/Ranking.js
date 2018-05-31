@@ -16,12 +16,14 @@ const Ranking = React.createClass({
     disabled: PropTypes.bool,
     label: PropTypes.any,
     labelClassName: PropTypes.string,
+    isReduxForm: PropTypes.bool.isRequired,
   },
 
   getDefaultProps() {
     return {
       disabled: false,
-      labelClassName: '',
+      labelClassName: 'h5',
+      isReduxForm: false,
     };
   },
 
@@ -34,11 +36,17 @@ const Ranking = React.createClass({
   },
 
   handleRankingChange(ranking) {
-    const { onChange } = this.props;
+    const { field, onChange, isReduxForm } = this.props;
     const values = [];
     ranking.map(item => values.push(item.label));
 
-    onChange(values);
+    if (isReduxForm) {
+      onChange(values);
+
+      return;
+    }
+
+    onChange(field, values);
   },
 
   render() {
@@ -53,16 +61,14 @@ const Ranking = React.createClass({
     } = this.props;
     const labelClasses = {
       'control-label': true,
-      [labelClassName]: true,
     };
+    labelClasses[labelClassName] = true;
 
     return (
       <div className={`form-group ${getGroupStyle(field.id)}`} id={id}>
-        {label && (
-          <label htmlFor={id} className={classNames(labelClasses)}>
-            {label}
-          </label>
-        )}
+        <label htmlFor={id} className={classNames(labelClasses)}>
+          {label}
+        </label>
         {field.helpText ? <span className="help-block">{field.helpText}</span> : null}
         {field.description && (
           <div style={{ paddingTop: 15, paddingBottom: 25 }}>

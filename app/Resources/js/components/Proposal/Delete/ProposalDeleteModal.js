@@ -1,26 +1,22 @@
-// @flow
-import * as React from 'react';
-import { createFragmentContainer, graphql } from 'react-relay';
+import React, { PropTypes } from 'react';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { Modal } from 'react-bootstrap';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import { deleteProposal, closeDeleteProposalModal } from '../../../redux/modules/proposal';
-import type { State, Dispatch } from '../../../types';
-import type { ProposalDeleteModal_proposal } from './__generated__/ProposalDeleteModal_proposal.graphql';
 
-type Props = {
-  form: Object,
-  proposal: ProposalDeleteModal_proposal,
-  show: boolean,
-  isDeleting: boolean,
-  dispatch: Dispatch,
-};
+const ProposalDeleteModal = React.createClass({
+  propTypes: {
+    form: PropTypes.object.isRequired,
+    proposal: PropTypes.object.isRequired,
+    show: PropTypes.bool.isRequired,
+    isDeleting: PropTypes.bool.isRequired,
+    dispatch: PropTypes.func.isRequired,
+  },
 
-export class ProposalDeleteModal extends React.Component<Props> {
   render() {
-    const { proposal, show, isDeleting, dispatch } = this.props;
+    const { proposal, form, show, isDeleting, dispatch } = this.props;
     return (
       <div>
         <Modal
@@ -33,7 +29,7 @@ export class ProposalDeleteModal extends React.Component<Props> {
           aria-labelledby="contained-modal-title-lg">
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
-              <FormattedMessage id="global.removeMessage" />
+              {<FormattedMessage id="global.removeMessage" />}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -56,7 +52,7 @@ export class ProposalDeleteModal extends React.Component<Props> {
               id="confirm-proposal-delete"
               isSubmitting={isDeleting}
               onSubmit={() => {
-                deleteProposal(proposal.id, dispatch);
+                deleteProposal(form.id, proposal, dispatch);
               }}
               label="global.removeDefinitively"
               bsStyle="danger"
@@ -65,22 +61,13 @@ export class ProposalDeleteModal extends React.Component<Props> {
         </Modal>
       </div>
     );
-  }
-}
+  },
+});
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
+const mapStateToProps = state => {
   return {
     isDeleting: state.proposal.isDeleting,
     show: state.proposal.showDeleteModal,
   };
 };
-const container = connect(mapStateToProps)(ProposalDeleteModal);
-
-export default createFragmentContainer(container, {
-  proposal: graphql`
-    fragment ProposalDeleteModal_proposal on Proposal {
-      id
-      title
-    }
-  `,
-});
+export default connect(mapStateToProps)(ProposalDeleteModal);

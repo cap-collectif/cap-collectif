@@ -37,6 +37,7 @@ class ProjectDownloadResolver
         'status',
         'estimation',
         'likers',
+        'votesCountByStepId',
         'category',
         'theme',
         'address',
@@ -199,6 +200,7 @@ class ProjectDownloadResolver
 
             $proposal['status'] = null !== $entity->lastStatus() ? $entity->lastStatus()->getName() : '';
             $proposal['reference'] = $entity->getFullReference();
+            $proposal['votesCountByStepId'] = $this->formatText($str);
             $proposal['media'] = $entity->getMedia();
 
             $proposal['likers'] = '';
@@ -296,6 +298,7 @@ class ProjectDownloadResolver
             'reference' => $proposal['reference'],
             'title' => $proposal['title'],
             'summary' => $proposal['summary'] ?: '',
+            'votesCountByStepId' => $proposal['votesCountByStepId'],
             'author' => $authorName,
             'author_id' => $authorId,
             'user_type' => $authorType,
@@ -356,6 +359,7 @@ class ProjectDownloadResolver
             'reference' => $vote['id'],
             'title' => $proposal['title'],
             'summary' => $proposal['summary'] ?: '',
+            'votesCountByStepId' => '',
             'content' => $na,
             'category' => $proposal['category'] ? $proposal['category']['name'] : '',
             'link' => $na,

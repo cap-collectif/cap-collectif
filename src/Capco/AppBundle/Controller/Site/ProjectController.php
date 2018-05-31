@@ -51,11 +51,29 @@ class ProjectController extends Controller
      */
     public function showUserVotesAction(Project $project)
     {
+        $userVotesByStepId = $this->get('capco.proposal_votes.resolver')->getUserVotesByStepIdForProject($project, $this->getUser());
+
         $serializer = $this->get('serializer');
         $proposalRepo = $this->getDoctrine()->getManager()->getRepository('CapcoAppBundle:Proposal');
 
+        $userVotesByStepIdSerialized = [];
+        foreach ($userVotesByStepId as $stepId => $proposals) {
+            $userVotesByStepIdSerialized[$stepId] = [];
+            foreach ($proposals as $proposalId) {
+                $userVotesByStepIdSerialized[$stepId][] = json_decode(
+                    $serializer->serialize(
+                        $proposalRepo->find($proposalId),
+                        'json',
+                        SerializationContext::create()->setGroups(['Proposals', 'UsersInfos'])
+                    ),
+                    true
+                );
+            }
+        }
+
         return [
           'project' => $project,
+          'props' => ['userVotesByStepId' => $userVotesByStepIdSerialized],
         ];
     }
 

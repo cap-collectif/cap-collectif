@@ -26,11 +26,6 @@ Capco\AppBundle\Entity\Post:
             expose: true
             type: DateTime
             groups: [Posts, PostDetails, Elasticsearch]
-        publishedAt:
-            expose: true
-            type: DateTime
-            groups: [Default]
-            serialized_name: publishedAt
         Authors:
             expose: true
             groups: [Posts, PostDetails]

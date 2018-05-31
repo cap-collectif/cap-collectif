@@ -162,6 +162,13 @@ capco_api_categories:
   defaults:
     _format: json
 
+capco_api_replies:
+  resource: "@CapcoAppBundle/Controller/Api/RepliesController.php"
+  type: annotation
+  prefix: /api
+  defaults:
+    _format: json
+
 # App
 capco_app:
     resource: "@CapcoAppBundle/Controller/Site"

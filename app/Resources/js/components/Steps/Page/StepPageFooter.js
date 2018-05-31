@@ -1,13 +1,10 @@
-// @flow
-import * as React from 'react';
+import React, { PropTypes } from 'react';
 
-type Props = {
-  step: {
-    footer: ?string,
+const StepPageFooter = React.createClass({
+  propTypes: {
+    step: PropTypes.object.isRequired,
   },
-};
 
-class StepPageFooter extends React.Component<Props> {
   render() {
     const { step } = this.props;
     const footer = step.footer;
@@ -23,7 +20,7 @@ class StepPageFooter extends React.Component<Props> {
         </div>
       </div>
     );
-  }
-}
+  },
+});
 
 export default StepPageFooter;

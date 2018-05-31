@@ -1,27 +1,18 @@
-// @flow
-import * as React from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
+import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { ProgressBar } from 'react-bootstrap';
-import type { ProposalPageVoteThreshold_step } from './__generated__/ProposalPageVoteThreshold_step.graphql';
-import type { ProposalPageVoteThreshold_proposal } from './__generated__/ProposalPageVoteThreshold_proposal.graphql';
 
-type Props = {
-  proposal: ProposalPageVoteThreshold_proposal,
-  step: ProposalPageVoteThreshold_step,
-};
+const ProposalPageVoteThreshold = React.createClass({
+  propTypes: {
+    proposal: PropTypes.object.isRequired,
+    step: PropTypes.object.isRequired,
+  },
 
-export class ProposalPageVoteThreshold extends React.Component<Props> {
   render() {
-    const { step, proposal } = this.props;
-    // We should use a new query render to fetch votes only from the step
-    const votesCount = proposal.votes.totalCount;
-    const voteThreshold = step.voteThreshold;
-    if (voteThreshold === null || typeof voteThreshold === 'undefined') {
-      return null;
-    }
-    const votesRemaining = voteThreshold - votesCount;
-    const votesPercentage = Math.ceil(votesCount * 100 / voteThreshold);
+    const { proposal, step } = this.props;
+    const votesCount = proposal.votesCountByStepId[step.id];
+    const votesRemaining = step.voteThreshold - votesCount;
+    const votesPercentage = Math.ceil(votesCount * 100 / step.voteThreshold);
     return (
       <div className="proposal__page__vote_threshold">
         <div className="proposal__infos" style={{ marginTop: '-15px' }}>
@@ -54,7 +45,7 @@ export class ProposalPageVoteThreshold extends React.Component<Props> {
                 id="proposal.vote.threshold.progress_reached"
                 values={{
                   num: votesCount,
-                  max: voteThreshold,
+                  max: step.voteThreshold,
                 }}
               />
             )}
@@ -63,7 +54,7 @@ export class ProposalPageVoteThreshold extends React.Component<Props> {
                 id="proposal.vote.threshold.progress"
                 values={{
                   num: votesRemaining,
-                  max: voteThreshold,
+                  max: step.voteThreshold,
                 }}
               />
             )}
@@ -71,27 +62,7 @@ export class ProposalPageVoteThreshold extends React.Component<Props> {
         </div>
       </div>
     );
-  }
-}
-
-export default createFragmentContainer(ProposalPageVoteThreshold, {
-  proposal: graphql`
-    fragment ProposalPageVoteThreshold_proposal on Proposal {
-      id
-      votes {
-        totalCount
-      }
-    }
-  `,
-  step: graphql`
-    fragment ProposalPageVoteThreshold_step on Step {
-      id
-      ... on CollectStep {
-        voteThreshold
-      }
-      ... on SelectionStep {
-        voteThreshold
-      }
-    }
-  `,
+  },
 });
+
+export default ProposalPageVoteThreshold;

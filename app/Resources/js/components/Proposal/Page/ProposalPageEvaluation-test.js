@@ -21,7 +21,6 @@ describe('<ProposalPageEvaluation />', () => {
             private: false,
             required: true,
             helpText: null,
-            description: null,
             type: 'text',
             isOtherAllowed: false,
             validationRule: null,

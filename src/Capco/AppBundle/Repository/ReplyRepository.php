@@ -7,8 +7,6 @@ use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 use Capco\UserBundle\Entity\User;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityRepository;
 
 class ReplyRepository extends EntityRepository
@@ -39,19 +37,6 @@ class ReplyRepository extends EntityRepository
         ;
 
         return $qb->getQuery()->getOneOrNullResult();
-    }
-
-    public function getForUserAndQuestionnaire(Questionnaire $questionnaire, User $user): Collection
-    {
-        $qb = $this
-            ->getIsEnabledQueryBuilder()
-            ->andWhere('reply.questionnaire = :questionnaire')
-            ->andWhere('reply.author = :user')
-            ->setParameter('questionnaire', $questionnaire)
-            ->setParameter('user', $user)
-        ;
-
-        return new ArrayCollection($qb->getQuery()->getResult());
     }
 
     public function getEnabledByQuestionnaireAsArray(Questionnaire $questionnaire)

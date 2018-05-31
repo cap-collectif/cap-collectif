@@ -11,5 +11,3 @@ QuestionChoice:
                 type: "String"
             color:
                 type: "String"
-            image:
-                type: "Media"

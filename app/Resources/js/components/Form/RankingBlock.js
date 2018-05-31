@@ -30,7 +30,6 @@ const RankingBlock = React.createClass({
 
   getInitialState() {
     const { field } = this.props;
-
     return {
       items: {
         pickBox: field.choices,

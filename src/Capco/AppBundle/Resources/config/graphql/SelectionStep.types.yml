@@ -1,98 +1,47 @@
 SelectionStep:
     type: object
-    # inherits: [Step]
     config:
-        interfaces: [Step, Node, ProposalStep]
+        interfaces: [Step, Node]
         description: "A budget contribution"
         fields:
             id:
               type: "ID!"
-            requirements:
-              type: "RequirementConnection!"
-              description: "The requirements to vote on this step."
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\StepRequirementsResolver", [value, user, args])'
-            show_url:
-              type: "String!"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\StepUrlResolver", [value])'
             kind:
                type: "String!"
                resolve: "selection"
-            votesRanking:
-               type: "Boolean!"
-               description: "If enabled, allow voters to order their votes by preferences."
-            votesLimit:
-               type: "Int"
-            position:
-               type: "Int!"
-            voteType:
-               type: "ProposalStepVoteType!"
-            budget:
-               type: "Int"
-            open:
-               type: "Boolean!"
             title:
                type: "String!"
-            votesHelpText:
-               type: "String"
             statuses:
                 type: "[Status!]!"
-            project:
-                type: "Project!"
             allowingProgressSteps:
                 type: "Boolean!"
                 description: "Only one selection step inside a project can have realisation steps, true if this one"
             voteThreshold:
                 type: "Int"
             proposals:
-                type: "ProposalConnection!"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\SelectionStepProposalResolver", [value, args, user, request])'
+                type: "ProposalConnection"
+                argsBuilder: "Relay::Connection"
                 args:
-                  district:
-                    type: "ID"
-                  userType:
-                    type: "ID"
-                  category:
-                    type: "ID"
-                  status:
-                    type: "ID"
-                  theme:
-                    type: "ID"
-                  term:
-                    type: "String"
-                  orderBy:
-                    type: "ProposalOrder"
-                    description: "Order for connection."
-                    defaultValue: { field: "CREATED_AT", direction: "ASC" }
-                  affiliations:
-                    type: "[ProposalAffiliation]"
-                  after:
-                    type: "String"
-                    description: "Returns the elements in the list that come after the specified global ID."
-                  first:
-                    type: "Int"
-                    defaultValue: 10
-                    description: "Returns the first n elements from the list."
-                  before:
-                    type: "String"
-                    description: "Returns the elements in the list that come before the specified global ID."
-                  last:
-                    type: "Int"
-                    description: "Returns the last n elements from the list."
+                    orderBy:
+                        type: "ProposalOrder"
+                        description: "Ordering options for proposals returning from the connection"
+                        defaultValue: { field: CREATED_AT, direction: DESC }
+                    after:
+                        type: "String"
+                        description: "Returns the elements in the list that come after the specified global ID."
+                    first:
+                        type: "Int"
+                        defaultValue: 50
+                        description: "Returns the first n elements from the list."
+                    before:
+                        type: "String"
+                        description: "Returns the elements in the list that come before the specified global ID."
+                    last:
+                        type: "Int"
+                        description: "Returns the last n elements from the list."
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\SelectionStepProposalResolver", [value, args])'
             contributors:
                 type: "UserConnection!"
                 description: "A list of contributor associated with the consultation."
                 argsBuilder: "Relay::Connection"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\StepContributorResolver", [value, args])'
-            viewerVotes:
-                access: "@=hasRole('ROLE_USER')"
-                type: "ProposalVoteConnection!"
-                description: "A list of viewer votes associated with the step."
-                argsBuilder: "Relay::Connection"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerStepVotesResolver", [value, user, args])'
-                args:
-                    first:
-                      type: "Int"
-                      defaultValue: 100000
-                    orderBy:
-                      type: "ProposalVotesOrder"
-                      defaultValue: { field: CREATED_AT, direction: DESC }

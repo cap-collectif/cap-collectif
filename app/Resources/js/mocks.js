@@ -2,10 +2,7 @@
 /* eslint-env jest */
 import { type FormProps } from 'redux-form';
 import { type IntlShape } from 'react-intl';
-import type { RelayPaginationProp, RelayRefetchProp } from 'react-relay';
-
-export const $refType: any = null;
-export const $fragmentRefs: any = null;
+import { type RelayPaginationProp } from 'react-relay';
 
 export const intlMock: IntlShape = {
   locale: 'fr-FR',
@@ -78,18 +75,4 @@ export const relayPaginationMock: RelayPaginationProp = {
   isLoading: () => false,
   loadMore: jest.fn(),
   refetchConnection: jest.fn(),
-};
-
-export const relayRefetchMock: RelayRefetchProp = {
-  environment: {
-    applyMutation: jest.fn(),
-    sendMutation: jest.fn(),
-    lookup: jest.fn(),
-    sendQuery: jest.fn(),
-    subscribe: jest.fn(),
-    streamQuery: jest.fn(),
-    retain: jest.fn(),
-    unstable_internal: {},
-  },
-  refetch: jest.fn(),
 };

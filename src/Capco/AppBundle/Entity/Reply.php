@@ -6,14 +6,12 @@ use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Model\VoteContribution;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\ExpirableTrait;
-use Capco\AppBundle\Traits\HasResponsesTrait;
 use Capco\AppBundle\Traits\PrivatableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -30,7 +28,6 @@ class Reply implements VoteContribution
     use EnableTrait;
     use PrivatableTrait;
     use ExpirableTrait;
-    use HasResponsesTrait;
 
     /**
      * @Assert\NotNull()
@@ -68,11 +65,6 @@ class Reply implements VoteContribution
         $this->responses = new ArrayCollection();
     }
 
-    public function __toString()
-    {
-        return $this->id;
-    }
-
     public function getKind(): string
     {
         return 'reply';
@@ -83,6 +75,9 @@ class Reply implements VoteContribution
         return null;
     }
 
+    /**
+     * @return null|User
+     */
     public function getAuthor()
     {
         return $this->author;
@@ -100,22 +95,50 @@ class Reply implements VoteContribution
         return $this->questionnaire;
     }
 
-    public function setQuestionnaire(Questionnaire $questionnaire): self
+    public function setQuestionnaire(Questionnaire $questionnaire)
     {
         $this->questionnaire = $questionnaire;
 
         return $this;
     }
 
-    public function getResponsesQuestions(): Collection
+    public function addResponse(AbstractResponse $response): self
     {
-        $questionnaire = $this->getQuestionnaire();
+        if (!$this->responses->contains($response)) {
+            $this->responses->add($response);
+            $response->setReply($this);
+        }
 
-        return $questionnaire ? $questionnaire->getRealQuestions() : new ArrayCollection();
+        return $this;
     }
 
-    public function setResponseOn(AbstractResponse $response)
+    public function removeResponse(AbstractResponse $response): self
     {
-        $response->setReply($this);
+        $this->responses->removeElement($response);
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getResponses()
+    {
+        return $this->responses;
+    }
+
+    /**
+     * @param ArrayCollection $responses
+     *
+     * @return $this
+     */
+    public function setResponses(ArrayCollection $responses)
+    {
+        $this->responses = $responses;
+        foreach ($responses as $response) {
+            $response->setReply($this);
+        }
+
+        return $this;
     }
 }

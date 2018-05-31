@@ -1,62 +1,47 @@
-// @flow
-import * as React from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { createFragmentContainer, graphql } from 'react-relay';
 import { Modal } from 'react-bootstrap';
-import type { ReplyDeleteModal_reply } from './__generated__/ReplyDeleteModal_reply.graphql';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
-import AppDispatcher from '../../../dispatchers/AppDispatcher';
-import DeleteReplyMutation from '../../../mutations/DeleteReplyMutation';
-import { UPDATE_ALERT } from '../../../constants/AlertConstants';
+import ReplyActions from '../../../actions/ReplyActions';
 
-type Props = {
-  reply: ReplyDeleteModal_reply,
-  show: boolean,
-  onToggleModal: (value: boolean) => void,
-  onDelete: () => void,
-};
+const ReplyDeleteModal = React.createClass({
+  propTypes: {
+    form: React.PropTypes.object.isRequired,
+    reply: React.PropTypes.object.isRequired,
+    show: React.PropTypes.bool.isRequired,
+    onToggleModal: React.PropTypes.func.isRequired,
+    onDelete: React.PropTypes.func.isRequired,
+  },
 
-type State = {
-  isSubmitting: boolean,
-};
+  getInitialState() {
+    return {
+      isSubmitting: false,
+    };
+  },
 
-export class ReplyDeleteModal extends React.Component<Props, State> {
-  state = {
-    isSubmitting: false,
-  };
-
-  handleSubmit = () => {
-    const { onDelete, reply } = this.props;
-
+  handleSubmit() {
+    const { form, onDelete, reply } = this.props;
     this.setState({ isSubmitting: true });
-    DeleteReplyMutation.commit({ input: { id: reply.id } })
+    ReplyActions.delete(form.id, reply.id)
       .then(() => {
         this.close();
-        AppDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'success', content: 'reply.request.delete.success' },
-        });
         onDelete();
       })
       .catch(() => {
         this.setState({ isSubmitting: false });
-        AppDispatcher.dispatch({
-          actionType: UPDATE_ALERT,
-          alert: { bsStyle: 'warning', content: 'reply.request.delete.failure' },
-        });
       });
-  };
+  },
 
-  close = () => {
+  close() {
     const { onToggleModal } = this.props;
     onToggleModal(false);
-  };
+  },
 
-  show = () => {
+  show() {
     const { onToggleModal } = this.props;
     onToggleModal(true);
-  };
+  },
 
   render() {
     const { reply, show } = this.props;
@@ -92,16 +77,7 @@ export class ReplyDeleteModal extends React.Component<Props, State> {
         </Modal>
       </div>
     );
-  }
-}
-
-export default createFragmentContainer(ReplyDeleteModal, {
-  reply: graphql`
-    fragment ReplyDeleteModal_reply on Reply {
-      id
-      questionnaire {
-        id
-      }
-    }
-  `,
+  },
 });
+
+export default ReplyDeleteModal;

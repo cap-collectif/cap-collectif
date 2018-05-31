@@ -429,7 +429,7 @@ trait ProposalStepsTrait
      */
     public function iFillTheProposalForm()
     {
-        $this->fillProposalForm();
+        $this->fillProposalForm(true);
     }
 
     /**
@@ -478,8 +478,7 @@ trait ProposalStepsTrait
     public function iSubmitTheCreateProposalForm()
     {
         $this->navigationContext->getPage('collect page')->submitProposalForm();
-        // We wait for page reloading and new proposal show up
-        $this->getSession()->wait(8000, "document.getElementById('proposal.infos.header')");
+        $this->iWait(8);
     }
 
     /**
@@ -877,7 +876,7 @@ trait ProposalStepsTrait
      */
     public function iCheckTheProposalVotePrivateCheckbox()
     {
-        $this->getSession()->getPage()->find('css', '#proposal2-proposal-vote__private .form-group .react-toggle')->click();
+        $this->checkOption('proposal-vote__private');
     }
 
     /**

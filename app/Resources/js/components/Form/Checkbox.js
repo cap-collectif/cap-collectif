@@ -17,6 +17,7 @@ const Checkbox = React.createClass({
     renderFormErrors: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
     labelClassName: PropTypes.string,
+    isReduxForm: PropTypes.bool.isRequired,
     value: PropTypes.object.isRequired,
     errors: PropTypes.any,
   },
@@ -26,40 +27,82 @@ const Checkbox = React.createClass({
   getDefaultProps() {
     return {
       disabled: false,
-      labelClassName: '',
+      labelClassName: 'h5',
+      isReduxForm: false,
       value: {},
     };
   },
 
   getInitialState() {
     return {
+      mixinValue: [],
       currentValue: [],
     };
   },
 
   onChange(newValue) {
-    const { onChange, value } = this.props;
-    const otherValue = value.other;
+    const { isReduxForm, onChange, field, value } = this.props;
+    const otherValue = value.other ? value.other : null;
 
-    if (Array.isArray(newValue)) {
-      onChange({ labels: newValue, other: otherValue });
+    if (isReduxForm) {
+      if (Array.isArray(newValue)) {
+        onChange({ labels: newValue, other: otherValue });
 
-      this.setState({
-        currentValue: newValue,
-      });
-    } else {
-      onChange(newValue);
+        this.setState({
+          currentValue: newValue,
+        });
+      } else {
+        onChange(newValue);
+      }
+
+      return;
     }
+
+    // Without redux form
+
+    let resolveValue;
+    if (Array.isArray(newValue)) {
+      resolveValue = newValue;
+    } else {
+      const lastValues = this.state.mixinValue.filter(val => {
+        let find = false;
+        let i = 0;
+
+        while (i < field.choices.length && !find) {
+          if (val === field.choices[i].label) {
+            find = true;
+          }
+          i++;
+        }
+
+        return find;
+      });
+
+      resolveValue = [...lastValues, newValue];
+    }
+
+    this.setState({
+      mixinValue: resolveValue,
+    });
+
+    onChange(field, resolveValue);
   },
 
   onOtherChange(e, changeValue) {
-    const { value } = this.props;
-    const values = value.labels ? value.labels : [];
+    const { isReduxForm, value } = this.props;
+    const values = isReduxForm ? value.labels : this.state.mixinValue;
 
-    this.onChange({
-      labels: values,
-      other: changeValue || null,
-    });
+    if (isReduxForm) {
+      if (changeValue) {
+        this.onChange({ labels: values, other: changeValue });
+      } else {
+        this.onChange({ labels: values, other: null });
+      }
+
+      return;
+    }
+
+    this.onChange(changeValue);
   },
 
   empty() {
@@ -82,17 +125,21 @@ const Checkbox = React.createClass({
       field,
       value,
       onBlur,
+      isReduxForm,
     } = this.props;
+    const { mixinValue, currentValue } = this.state;
 
-    const finalValue = value.labels ? value.labels : [];
+    let finalValue = mixinValue;
+    if (isReduxForm) {
+      finalValue = value.labels ? value.labels : currentValue;
+    }
 
-    const otherValue = value.other ? value.other : '';
+    const otherValue = isReduxForm ? value.other : undefined;
     const fieldName = `choices-for-field-${field.id}`;
 
     const labelClasses = {
       'control-label': true,
     };
-
     if (labelClassName) {
       labelClasses[labelClassName] = true;
     }
@@ -106,7 +153,7 @@ const Checkbox = React.createClass({
         )}
         {field.helpText && <span className="help-block">{field.helpText}</span>}
         {field.description && (
-          <div style={{ paddingBottom: 15 }}>
+          <div style={{ paddingTop: 15, paddingBottom: 25 }}>
             <ButtonBody body={field.description || ''} />
           </div>
         )}
@@ -143,11 +190,12 @@ const Checkbox = React.createClass({
               </div>
             );
           })}
-          {field.isOtherAllowed ? (
+          {this.props.field.isOtherAllowed ? (
             <Other
               ref={c => (this.other = c)}
               value={otherValue}
-              field={field}
+              isReduxForm={isReduxForm}
+              field={this.props.field}
               onChange={this.onOtherChange}
               disabled={disabled}
             />

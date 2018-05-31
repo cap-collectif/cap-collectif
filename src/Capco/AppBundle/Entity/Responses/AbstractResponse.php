@@ -11,17 +11,18 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(
  *   name="response",
  *   uniqueConstraints={
- *        @ORM\UniqueConstraint(
+ *        @UniqueConstraint(
  *            name="proposal_response_unique",
  *            columns={"proposal_id", "question_id"}
  *        ),
- *        @ORM\UniqueConstraint(
+ *        @UniqueConstraint(
  *            name="evaluation_response_unique",
  *            columns={"evaluation_id", "question_id"}
  *        )
