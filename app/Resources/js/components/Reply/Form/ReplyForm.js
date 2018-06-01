@@ -175,8 +175,6 @@ export class ReplyForm extends React.Component<Props> {
 
     const disabled = this.formIsDisabled();
 
-    // console.log(questionnaire.questions, "questionnaire.questions");
-
     return (
       <div id="create-reply-form">
         <form id="reply-form" ref="form" onSubmit={handleSubmit}>
@@ -212,15 +210,16 @@ export class ReplyForm extends React.Component<Props> {
             disabled={pristine || invalid || submitting || disabled}>
             <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
           </Button>
-          {!disabled && (
-            <AlertForm
-              valid={valid}
-              invalid={invalid}
-              submitSucceeded={submitSucceeded}
-              submitFailed={submitFailed}
-              submitting={submitting}
-            />
-          )}
+          {!disabled &&
+            !pristine && (
+              <AlertForm
+                valid={valid}
+                invalid={invalid}
+                submitSucceeded={submitSucceeded}
+                submitFailed={submitFailed}
+                submitting={submitting}
+              />
+            )}
         </form>
       </div>
     );
