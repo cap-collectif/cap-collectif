@@ -59,9 +59,19 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
       }
     }
   />
-  <ProposalPageComments
-    className=""
-    id="proposal3"
+  <Relay(ProposalPageComments)
+    proposal={
+      Object {
+        "_links": Object {
+          "show": "http://capco.test",
+        },
+        "author": Object {},
+        "id": "proposal3",
+        "referer": "http://capco.test",
+        "responses": Array [],
+        "title": "Titre proposition",
+      }
+    }
   />
 </div>
 `;

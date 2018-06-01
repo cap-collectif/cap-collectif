@@ -1,4 +1,4 @@
-FROM python:2.7.15-jessie AS python
+FROM python:2.7.15-slim-jessie AS python
 FROM node:8-slim AS node
 FROM composer:latest AS composer
 FROM php:7.1-cli AS php
@@ -7,6 +7,7 @@ LABEL maintainer "Cap Collectif <tech@cap-collectif.com>"
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
+COPY --from=python /usr/local/bin/python /usr/bin/python
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 COPY --from=node /usr/local/bin/node /usr/local/bin/node
 COPY --from=node /usr/local/include/node /usr/local/include/node

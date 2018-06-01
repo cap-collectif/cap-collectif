@@ -204,7 +204,7 @@ class ApplicationContext extends UserContext
 
         // https://stackoverflow.com/questions/39646444/how-to-handle-a-javascript-alert-window-using-php-behat-mink-selenium2-chrome-we
         $session = $this->getSession()->getDriver()->getWebDriverSession();
-        var_dump($session->getAlert_text());
+        // See message with $session->getAlert_text()
         $session->accept_alert();
     }
 

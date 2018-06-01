@@ -1,13 +1,12 @@
 // @flow
 import * as React from 'react';
 import classNames from 'classnames';
-import { QueryRenderer, graphql } from 'react-relay';
-import environment from '../../../createRelayEnvironment';
+import { createFragmentContainer, graphql } from 'react-relay';
 import CommentSection from '../../Comment/CommentSection';
+import type { ProposalPageComments_proposal } from './__generated__/ProposalPageComments_proposal.graphql';
 
 type Props = {
-  id: string,
-  form: Object,
+  proposal: ProposalPageComments_proposal,
   className: string,
 };
 
@@ -17,39 +16,33 @@ class ProposalPageComments extends React.Component<Props> {
   };
 
   render() {
-    const { className, form, id } = this.props;
+    const { className, proposal } = this.props;
     const classes = {
       proposal__comments: true,
       [className]: true,
     };
 
-    const component = ({ props }: { props: ?{ proposalForm: { commentable: boolean } } }) => {
-      if (props && props.proposalForm.commentable) {
-        return <CommentSection uri={`proposal_forms/${form.id}/proposals`} object={id} />;
-      }
-      return null;
-    };
     return (
       <div className={classNames(classes)}>
-        <QueryRenderer
-          environment={environment}
-          query={graphql`
-            query ProposalPageCommentsQuery($id: ID!) {
-              proposalForm: node(id: $id) {
-                ... on ProposalForm {
-                  commentable
-                }
-              }
-            }
-          `}
-          variables={{
-            id: form.id,
-          }}
-          render={component}
-        />
+        {proposal.form.commentable && (
+          <CommentSection
+            uri={`proposal_forms/${proposal.form.id}/proposals`}
+            object={proposal.id}
+          />
+        )}
       </div>
     );
   }
 }
 
-export default ProposalPageComments;
+export default createFragmentContainer(ProposalPageComments, {
+  proposal: graphql`
+    fragment ProposalPageComments_proposal on Proposal {
+      id
+      form {
+        id
+        commentable
+      }
+    }
+  `,
+});

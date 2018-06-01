@@ -157,7 +157,8 @@ export class ProposalPageContent extends React.Component<Props> {
         <ProposalEditModal proposal={proposal} />
         <ProposalDeleteModal proposal={proposal} />
         {proposal.publicationStatus !== 'DRAFT' && (
-          <ProposalPageComments id={proposal.id} form={proposalForm} />
+          /* $FlowFixMe */
+          <ProposalPageComments proposal={proposal} />
         )}
       </div>
     );
@@ -194,7 +195,6 @@ export default createFragmentContainer(container, {
         displayName
       }
       form {
-        id
         contribuable
       }
       address
@@ -203,6 +203,7 @@ export default createFragmentContainer(container, {
       media {
         url
       }
+      ...ProposalPageComments_proposal
       ...ProposalReportButton_proposal @arguments(isAuthenticated: $isAuthenticated)
       publicationStatus
       title
