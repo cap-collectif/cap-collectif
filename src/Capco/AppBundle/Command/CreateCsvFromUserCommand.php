@@ -24,6 +24,17 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $userId = $input->getArgument('userId');
+
+        $datas = $this->requestDatas($userId);
+        foreach ($datas as $key => $value) {
+            $this->createCsv($userId, $value, $key);
+        }
+
+        $output->writeln($this->getZipFilenameForUser($userId));
+    }
+
+    protected function requestDatas(string $userId): array
+    {
         $executor = $this->getContainer()->get('overblog_graphql.request_executor');
 
         // TODO disable ACL or give admin rights (to disable access)
@@ -76,11 +87,35 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
             ]
         )->toArray();
 
-        foreach ($datas as $key => $value) {
-            $this->createCsv($userId, $value, $key);
-        }
+        $datas['opinions'] = $executor->disabledDebugInfo()->execute(
+            [
+                'query' => $this->getOpinionGraphQLQuery($userId),
+                'variables' => [],
+            ]
+        )->toArray();
 
-        $output->writeln($this->getZipFilenameForUser($userId));
+        $datas['opinionsVersion'] = $executor->disabledDebugInfo()->execute(
+            [
+                'query' => $this->getOpinionVersionGraphQLQuery($userId),
+                'variables' => [],
+            ]
+        )->toArray();
+
+        $datas['arguments'] = $executor->disabledDebugInfo()->execute(
+            [
+                'query' => $this->getArgumentGraphQLQuery($userId),
+                'variables' => [],
+            ]
+        )->toArray();
+
+        $datas['sources'] = $executor->disabledDebugInfo()->execute(
+            [
+                'query' => $this->getSourceGraphQLQuery($userId),
+                'variables' => [],
+            ]
+        )->toArray();
+
+        return $datas;
     }
 
     protected function getZipFilenameForUser(string $userId): string
@@ -132,7 +167,7 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
         $writer->addRow($header);
 
         $rows = [];
-        if ($contributions = Arr::path($data, 'data.node.contributions.edges.node')) {
+        if ($contributions = Arr::path($data, 'data.node.contributions.edges')) {
             $rows = $this->resolveArray($contributions, $header, true);
         } elseif ($medias = Arr::path($data, 'data.node.medias')) {
             $rows = $this->resolveArray($medias, $header);
@@ -142,14 +177,13 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
             $rows = $this->resolveArray($reports, $header);
         } elseif ($events = Arr::path($data, 'data.node.events')) {
             $rows = $this->resolveArray($events, $header);
-        } elseif ($proposals = Arr::path($data, 'data.node.contributions.edges')) {
-            $rows = $this->resolveArray($proposals, $header, true);
         } else {
             foreach ($header as $value) {
                 $value = Arr::path($data, "data.node.$value") ?? '';
                 $rows[] = $value;
             }
         }
+
         if (!empty($rows) && \is_array($rows[0])) {
             $writer->addRows($rows);
         } else {
@@ -173,6 +207,7 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
         $row = [];
         $i = 0;
         $inserted = 0;
+
         foreach ($contents as $content) {
             foreach ($header as $key => $value) {
                 if ($isNode) {
@@ -218,20 +253,17 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
                 if ('show_url' !== $item) {
                     $item = str_replace('_', '.', $item);
                 }
-                if ('questions' === $type || 'proposals' === $type) {
-                    $item = str_replace('contributions.edges.node.', '', $item);
-                }
+
                 if ('medias' === $type) {
                     $item = str_replace('medias.', '', $item);
-                }
-                if ('groups' === $type) {
+                } elseif ('groups' === $type) {
                     $item = str_replace('groups.', '', $item);
-                }
-                if ('reports' === $type) {
+                } elseif ('reports' === $type) {
                     $item = str_replace('reports.', '', $item);
-                }
-                if ('events' === $type) {
+                } elseif ('events' === $type) {
                     $item = str_replace('events.', '', $item);
+                } else {
+                    $item = str_replace('contributions.edges.node.', '', $item);
                 }
 
                 return $item;
@@ -491,7 +523,7 @@ EOF;
     ... on User {
       contributions(contributionType: VOTE) {
         ... on ${$type}Vote {
-					id
+          id
           author {
             id
           }
