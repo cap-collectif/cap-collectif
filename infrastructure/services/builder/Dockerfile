@@ -17,7 +17,7 @@ RUN ln -s /usr/local/bin/node /usr/local/bin/nodejs && \
     ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
 
 # We need python
-RUN apk --no-cache add g++ gcc libgcc libstdc++ linux-headers make python
+RUN npm config --global set python /usr/bin/python
 
 ENV YARN_VERSION 1.5.1
 RUN curl -fSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz" \
