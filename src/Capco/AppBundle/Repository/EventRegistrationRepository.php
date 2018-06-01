@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Entity\EventRegistration;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
