@@ -36,7 +36,7 @@ Scenario: GraphQL client want to get the list of contributors
     "data": {
       "project": {
         "contributors": {
-          "totalCount": 28,
+          "totalCount": @integer@,
           "anonymousCount": 0,
           "pageInfo": {
             "hasNextPage": true,
