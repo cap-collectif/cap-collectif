@@ -12,8 +12,8 @@ Scenario: API client wants to get all projects
       {
         "id": "4",
         "title": @string@,
-        "startAt": "@string@.isDateTime()",
         "createdAt": "@string@.isDateTime()",
+        "updatedAt": "@string@.isDateTime()",
         "themes": [
           {
               "id": @integer@,
@@ -56,8 +56,8 @@ Scenario: API client wants to get all consultation projects
       {
         "id": "1",
         "title": @string@,
-        "startAt": "@string@.isDateTime()",
         "createdAt": "@string@.isDateTime()",
+        "updatedAt": "@string@.isDateTime()",
         "themes": [
           {
               "id": @integer@,
@@ -101,8 +101,8 @@ Scenario: API client wants to get all projects sorted by popularity
       {
         "id": "4",
         "title": @string@,
-        "startAt": "@string@.isDateTime()",
         "createdAt": "@string@.isDateTime()",
+        "updatedAt": "@string@.isDateTime()",
         "themes": [
           {
               "id": @integer@,

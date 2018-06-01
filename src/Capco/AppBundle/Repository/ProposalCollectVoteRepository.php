@@ -11,16 +11,14 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class ProposalCollectVoteRepository extends EntityRepository
 {
-    public function getAnonymousVotesCountByStep(CollectStep $step): int
+    public function getAnonymousCount(): int
     {
-        $qb = $this->createQueryBuilder('pv')
-            ->select('COUNT(pv.id)')
-            ->andWhere('pv.private = true')
-            ->andWhere('pv.collectStep = :step')
-            ->setParameter('step', $step)
-        ;
+        $qb = $this->createQueryBuilder('v')
+            ->select('count(DISTINCT v.email)')
+            ->where('v.user IS NULL');
 
-        return (int) $qb->getQuery()->getSingleScalarResult();
+        return $qb->getQuery()
+            ->getSingleScalarResult();
     }
 
     public function getByProposalAndStepAndUser(Proposal $proposal, CollectStep $step, User $author): array

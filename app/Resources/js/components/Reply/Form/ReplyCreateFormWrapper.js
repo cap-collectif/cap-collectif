@@ -7,7 +7,7 @@ import { Alert, Button } from 'react-bootstrap';
 import { type ReplyCreateFormWrapper_questionnaire } from './__generated__/ReplyCreateFormWrapper_questionnaire.graphql';
 import LoginButton from '../../User/Login/LoginButton';
 import RegistrationButton from '../../User/Registration/RegistrationButton';
-// import PhoneModal from '../../User/Phone/PhoneModal';
+import PhoneModal from '../../User/Phone/PhoneModal';
 import ReplyForm from './ReplyForm';
 import { type User } from '../../../redux/modules/user';
 import type { GlobalState } from '../../../types';
