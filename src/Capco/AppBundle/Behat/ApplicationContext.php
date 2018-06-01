@@ -177,10 +177,7 @@ class ApplicationContext extends UserContext
      */
     public function iVisitedPage(string $pageName)
     {
-        if ($this->getSession()) {
-            $this->navigationContext->iVisitedPage('HomePage');
-            $this->getSession()->setCookie('hasFullConsent', 'y');
-        }
+        $this->setCookieConsent();
         $this->navigationContext->iVisitedPage($pageName);
     }
 
@@ -231,10 +228,7 @@ class ApplicationContext extends UserContext
      */
     public function iVisitedPageWith($pageName, TableNode $parameters)
     {
-        if ($this->getSession()) {
-            $this->navigationContext->iVisitedPage('HomePage');
-            $this->getSession()->setCookie('hasFullConsent', 'y');
-        }
+        $this->setCookieConsent();
         $this->navigationContext->iVisitedPageWith($pageName, $parameters);
     }
 
@@ -671,6 +665,15 @@ class ApplicationContext extends UserContext
     public function iAmOnHomepage()
     {
         $this->visitPageWithParams('home page');
+    }
+
+    private function setCookieConsent()
+    {
+        // First we go to homepage, to set cookie consent
+        if ($this->getSession()) {
+            $this->navigationContext->iVisitedPage('HomePage');
+            $this->getSession()->setCookie('hasFullConsent', true);
+        }
     }
 
     private function visitPageWithParams($page, $params = [])
