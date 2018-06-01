@@ -69,6 +69,7 @@ export default createFragmentContainer(ProposalStepPageHeader, {
       }
       proposals(
         first: $count
+        after: $cursor
         orderBy: $orderBy
         term: $term
         district: $district

@@ -31,15 +31,11 @@ class UsersController extends FOSRestController
     {
         $registeredContributorCount = $this->get('capco.user.repository')->getRegisteredContributorCount();
         $anonymousComments = $this->get('capco.comment.repository')->getAnonymousCount();
-        $anonymousVoters = $this->get('capco.proposal_collect_vote.repository')->getAnonymousCount()
-        + $this->get('capco.proposal_selection_vote.repository')->getAnonymousCount()
-      ;
 
         return [
           'contributors' => $registeredContributorCount + $anonymousComments + $anonymousVoters,
           'registeredContributors' => $registeredContributorCount,
           'anonymousComments' => $anonymousComments,
-          'anonymousVoters' => $anonymousVoters,
       ];
     }
 

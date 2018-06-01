@@ -187,7 +187,7 @@
     "uglify-js-brunch": "^2.10.0",
     "webpack": "^1.13.2",
     "whatwg-fetch": "^2.0.3",
-    "xml2json": "^0.11.0"
+    "xml2json": "^0.11.2"
   },
   "devDependencies": {
     "@storybook/react": "^3.3.13",

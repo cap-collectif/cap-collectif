@@ -237,7 +237,7 @@ export class ProposalForm extends React.Component<Props, State> {
   loadTitleSuggestions = debounce((title: string) => {
     this.setState({ isLoadingTitleSuggestions: true });
     if (this.props.proposalForm.step && this.props.proposalForm.step.id) {
-      console.log(title);
+      console.log(title); // eslint-disable-line no-console
       // TODO User a GraphQL query instead :
       //
       // loadSuggestions(this.props.proposalForm.step.id, title).then(res => {

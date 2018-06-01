@@ -28,7 +28,7 @@ Scenario: GraphQL client wants to request his personal archive
           "id": "userAdmin",
           "isArchiveDeleted": false,
           "isArchiveReady": false,
-          "firstArchive": true
+          "firstArchive": false
         }
       }
     }
