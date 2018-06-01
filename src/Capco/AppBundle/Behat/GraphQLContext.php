@@ -132,7 +132,6 @@ class GraphQLContext implements Context
     {
         $matcher = (new SimpleFactory())->createMatcher();
 
-        var_dump($this->response);
         PHPUnit::assertTrue($matcher->match($this->response, $pattern->getRaw()), $matcher->getError() . ' ' . $this->response);
     }
 

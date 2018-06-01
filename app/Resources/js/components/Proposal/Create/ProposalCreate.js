@@ -1,32 +1,21 @@
 // @flow
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
-import { type ReadyState, QueryRenderer, graphql } from 'react-relay';
+import { createFragmentContainer, graphql } from 'react-relay';
 import { connect, type MapStateToProps } from 'react-redux';
 import { isSubmitting, change, submit, isPristine } from 'redux-form';
 import { Modal } from 'react-bootstrap';
-import environment, { graphqlError } from '../../../createRelayEnvironment';
 import ProposalCreateButton from './ProposalCreateButton';
 import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import ProposalForm, { formName } from '../Form/ProposalForm';
 import { openCreateModal, closeCreateModal } from '../../../redux/modules/proposal';
-import type { ProposalCreateQueryResponse } from './__generated__/ProposalCreateQuery.graphql';
-import type { Uuid, Dispatch, GlobalState } from '../../../types';
-
-const render = ({ props, error }: ReadyState & { props: ?ProposalCreateQueryResponse }) => {
-  if (error) {
-    return graphqlError;
-  }
-  if (props) {
-    return <ProposalForm proposalForm={props.proposalForm} proposal={null} />;
-  }
-  return null;
-};
+import type { Dispatch, GlobalState } from '../../../types';
+import type { ProposalCreate_proposalForm } from './__generated__/ProposalCreate_proposalForm.graphql';
 
 type Props = {
   intl: IntlShape,
-  form: { +contribuable: boolean, +id: Uuid },
+  proposalForm: ProposalCreate_proposalForm,
   showModal: boolean,
   submitting: boolean,
   pristine: boolean,
@@ -35,11 +24,11 @@ type Props = {
 
 export class ProposalCreate extends React.Component<Props> {
   render() {
-    const { intl, form, showModal, pristine, submitting, dispatch } = this.props;
+    const { intl, proposalForm, showModal, pristine, submitting, dispatch } = this.props;
     return (
       <div>
         <ProposalCreateButton
-          disabled={!form.contribuable}
+          disabled={!proposalForm.contribuable}
           handleClick={() => dispatch(openCreateModal())}
         />
         <Modal
@@ -61,20 +50,7 @@ export class ProposalCreate extends React.Component<Props> {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <QueryRenderer
-              environment={environment}
-              query={graphql`
-                query ProposalCreateQuery($proposalFormId: ID!) {
-                  proposalForm: node(id: $proposalFormId) {
-                    ...ProposalForm_proposalForm
-                  }
-                }
-              `}
-              variables={{
-                proposalFormId: form.id,
-              }}
-              render={render}
-            />
+            <ProposalForm proposalForm={this.props.proposalForm} proposal={null} />
           </Modal.Body>
           <Modal.Footer>
             <CloseButton onClose={() => dispatch(closeCreateModal())} />
@@ -119,4 +95,14 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
   showModal: state.proposal.showCreateModal,
 });
 
-export default connect(mapStateToProps)(injectIntl(ProposalCreate));
+const container = connect(mapStateToProps)(injectIntl(ProposalCreate));
+
+export default createFragmentContainer(container, {
+  proposalForm: graphql`
+    fragment ProposalCreate_proposalForm on ProposalForm {
+      id
+      contribuable
+      ...ProposalForm_proposalForm
+    }
+  `,
+});

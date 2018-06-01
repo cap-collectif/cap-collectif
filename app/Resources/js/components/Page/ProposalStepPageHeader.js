@@ -50,7 +50,7 @@ export class ProposalStepPageHeader extends React.Component<Props> {
                 </span>
               )}
               <span className="pull-right">
-                <ProposalCreate form={step.form} />
+                <ProposalCreate proposalForm={step.form} />
               </span>
             </span>
           )}
@@ -89,7 +89,7 @@ export default createFragmentContainer(ProposalStepPageHeader, {
         kind
         form {
           id
-          contribuable
+          ...ProposalCreate_proposalForm
         }
         voteThreshold
       }

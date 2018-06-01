@@ -123,6 +123,7 @@ trait ProposalStepsTrait
     public function iGoToAnOpenCollectStep()
     {
         $this->visitPageWithParams('collect page', self::$collectStepOpenParams);
+        $this->getSession()->wait(3000, "$('#proposal__step-page-rendered').length > 0");
     }
 
     /**

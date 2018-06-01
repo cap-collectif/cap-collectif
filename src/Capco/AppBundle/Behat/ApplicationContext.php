@@ -196,11 +196,16 @@ class ApplicationContext extends UserContext
     }
 
     /**
-     * @When I confirm the popup message
+     * @When I reload the page, I should see a confirm popup
      */
     public function iConfirmThePopup()
     {
-        $this->getSession()->getDriver()->getWebDriverSession()->accept_alert();
+        $this->getSession()->reload();
+
+        // https://stackoverflow.com/questions/39646444/how-to-handle-a-javascript-alert-window-using-php-behat-mink-selenium2-chrome-we
+        $session = $this->getSession()->getDriver()->getWebDriverSession();
+        var_dump($session->getAlert_text());
+        $session->accept_alert();
     }
 
     /**

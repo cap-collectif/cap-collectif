@@ -123,7 +123,7 @@ export class ProposalStepPage extends React.Component<Props> {
                 return graphqlError;
               }
               return (
-                <div>
+                <div id="proposal__step-page-rendered">
                   {isAuthenticated &&
                     // $FlowFixMe
                     step.kind === 'collect' && <DraftProposalList step={props.step} />}
