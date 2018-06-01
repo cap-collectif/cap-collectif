@@ -102,40 +102,14 @@ Scenario: Anonymous user combine search, filters and sorting on proposals in a c
   Then there should be 2 proposals
   Then proposals should be filtered by theme and terms and sorted by comments
 
-@javascript @elasticsearch
+@javascript
 Scenario: Anonymous user wants to see proposals likers
   Given I go to an open collect step
   Then I should see the proposal likers
 
 # CRUD
 
-@database @javascript @elasticsearch
-Scenario: Logged in user wants to create/then delete a proposal and check if I follow/unfollow my proposal
-  Given feature "districts" is enabled
-  Given feature "profiles" is enabled
-  And I am logged in as user
-  And I go to an open collect step
-  Then there should be 6 proposals
-  When I click the create proposal button
-  And I fill the proposal form
-  And I attach the file "/var/www/features/files/image.jpg" to "proposal_media_field"
-  And I attach the file "/var/www/features/files/document.pdf" to "responses[2]_field"
-  And I wait 3 seconds
-  And I submit the create proposal form
-  And I should see my new proposal
-  And I should see "following"
-  And I visited "manage followings page"
-  And I wait 2 seconds
-  And I should see "Nouvelle proposition créée"
-  Then I follow "Nouvelle proposition créée"
-  And I wait 1 seconds
-  And I click the delete proposal button
-  And I confirm proposal deletion
-  Then I visited "manage followings page"
-  And I wait 1 seconds
-  And I should not see "Nouvelle proposition créée"
-
-@database @javascript @elasticsearch
+@database @javascript
 Scenario: Logged in user wants to create a proposal with theme
   Given features themes, districts are enabled
   And I am logged in as user
@@ -151,7 +125,7 @@ Scenario: Logged in user wants to create a proposal with theme
   And I click the "#proposal-page-tabs-tab-followers" element
   And I should see my subscription as "user" in the proposal followers list
 
-@javascript @security @elasticsearch
+@javascript @security
 Scenario: Logged in user wants to create a proposal without providing required response
   Given feature "districts" is enabled
   And I am logged in as user
@@ -162,7 +136,7 @@ Scenario: Logged in user wants to create a proposal without providing required r
   Then I should see "proposal.constraints.field_mandatory"
   When I reload the page, I should see a confirm popup
 
-@javascript @security @elasticsearch
+@javascript @security
 Scenario: Logged in user wants to create a proposal in closed collect step
   Given I am logged in as user
   And I go to a closed collect step
@@ -170,7 +144,7 @@ Scenario: Logged in user wants to create a proposal in closed collect step
   Then I should see "step.collect.alert.ended.text"
   And the create proposal button should be disabled
 
-@javascript @security @elasticsearch
+@javascript @security
 Scenario: Anonymous user wants to create a proposal
   Given I go to an open collect step
   When I click the create proposal button
@@ -195,7 +169,7 @@ Scenario: Non author of a proposal wants to update it
   And I go to a proposal
   Then I should not see the edit proposal button
 
-@javascript @database @elasticsearch
+@javascript @database
 Scenario: Author of a proposal wants to delete it
   Given I am logged in as user
   And I go to an open collect step
