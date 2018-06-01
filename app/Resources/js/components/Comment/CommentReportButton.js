@@ -1,18 +1,19 @@
-import React, { PropTypes } from 'react';
+// @flow
+import React from 'react';
 import { connect } from 'react-redux';
 import { submitCommentReport } from '../../redux/modules/report';
 import ReportBox from '../Report/ReportBox';
 
-const CommentReportButton = React.createClass({
-  propTypes: {
-    dispatch: PropTypes.func.isRequired,
-    comment: PropTypes.object.isRequired,
-  },
+type Props = {
+  dispatch: Function,
+  comment: Object,
+};
 
-  handleReport(data) {
+class CommentReportButton extends React.Component<Props> {
+  handleReport = data => {
     const { comment, dispatch } = this.props;
     return submitCommentReport(comment, data, dispatch);
-  },
+  };
 
   render() {
     const { comment } = this.props;
@@ -26,7 +27,7 @@ const CommentReportButton = React.createClass({
         buttonClassName="btn btn-sm btn-dark-gray btn--outline"
       />
     );
-  },
-});
+  }
+}
 
 export default connect()(CommentReportButton);

@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+// @flow
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import UserAvatar from '../User/UserAvatar';
@@ -11,36 +12,44 @@ import CommentEdit from './CommentEdit';
 import CommentAnswers from './CommentAnswers';
 import CommentForm from './CommentForm';
 
-const Comment = React.createClass({
-  propTypes: {
-    uri: PropTypes.string,
-    object: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    comment: PropTypes.object,
-    root: PropTypes.bool,
-    onVote: PropTypes.func.isRequired,
-  },
+type Props = {
+  uri?: string,
+  object?: string | number,
+  comment: Object,
+  root?: boolean,
+  onVote: Function,
+};
 
-  getInitialState() {
-    const { comment } = this.props;
+type State = {
+  answerFormShown: boolean,
+  answerFormFocus: boolean,
+};
 
+class Comment extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    const { comment } = props;
     if (comment.answers.length > 0) {
-      return {
+      this.state = {
         answerFormShown: true,
         answerFormFocus: false,
       };
+
+      return;
     }
-    return {
+
+    this.state = {
       answerFormShown: false,
       answerFormFocus: false,
     };
-  },
+  }
 
-  answer() {
+  answer = () => {
     this.setState({
       answerFormShown: true,
       answerFormFocus: true,
     });
-  },
+  };
 
   render() {
     const { onVote, root, uri, object } = this.props;
@@ -89,7 +98,7 @@ const Comment = React.createClass({
         </div>
       </li>
     );
-  },
-});
+  }
+}
 
 export default Comment;

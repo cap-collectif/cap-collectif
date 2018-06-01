@@ -1,3 +1,4 @@
+// @flow
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { reduxForm, Field, formValueSelector } from 'redux-form';
@@ -18,12 +19,12 @@ type Props = {
   comment: ?string,
   object: string,
   uri: string,
-  user?: Object,
+  user?: ?Object,
   intl: IntlShape,
   submitting: boolean,
   pristine: boolean,
   invalid: boolean,
-  reset?: Function,
+  reset: Function,
   handleSubmit?: Function,
 };
 
