@@ -25,6 +25,10 @@ services:
     autoconfigure: true
     autowire: true
 
+  Capco\AppBundle\Form\ProjectSearchType:
+    autoconfigure: true
+    autowire: true
+
   capco.form.type.purified_textarea:
     class: Capco\AppBundle\Form\Type\PurifiedTextareaType
     arguments: ["@capco.form.transformer.html_purifier"]
