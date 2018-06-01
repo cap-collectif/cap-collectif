@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "test": "jest --notify",
-    "test:ci": "jest --coverage --ci --maxWorkers=4",
+    "test:ci": "jest --coverage --ci --runInBand",
     "test:watch": "jest --watchAll",
     "typecheck": "flow check",
     "typecheck:coverage": "flow-coverage-report --threshold 70 -i 'app/Resources/js/**/*.js'",
@@ -67,11 +67,11 @@
     },
     {
       "path": "./web/js/app.js",
-      "maxSize": "400 kB"
+      "maxSize": "410 kB"
     },
     {
       "path": "./web/js/vendor.js",
-      "maxSize": "1.8 MB"
+      "maxSize": "1.7 MB"
     }
   ],
   "prettier": {
