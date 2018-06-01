@@ -840,7 +840,7 @@ class Project implements IndexableInterface
 
     public function getStartAt(): ?\DateTime
     {
-       return $this->getCurrentStep() ? $this->getCurrentStep()->getStartAt(): null;
+        return $this->getCurrentStep() ? $this->getCurrentStep()->getStartAt() : null;
     }
 
     public function getCurrentStep()
