@@ -224,17 +224,38 @@ User:
                 type: "DateTime"
             medias:
                 type: "[Media!]!"
-                description: "Get all user medias"
+                description: "Get all medias the user has published."
                 resolve: "@=resolver('user_getMedias', [value])"
             groups:
-                type: "[Group!]"
-                description: "Get all groups where the user is"
+                type: "[Group!]!"
+                description: "Get all groups where the user is."
                 resolve: "@=resolver('user_getGroups', [value])"
+            reports:
+                type: "[Reporting!]!"
+                description: "Get all reports the user has done."
+                resolve: "@=resolver('user_getReports', [value])"
+            events:
+                type: "[Event!]!"
+                description: "Get all events the user has created."
+                resolve: "@=resolver('user_getEvents', [value])"
             contributions:
-                type: "[Contribution]!"
+                type: "ContributionConnection!"
                 args:
-                    contributionType:
-                      type: "String"
+                    type:
+                      type: "ContributionType"
                       description: "Type of contribustion requested"
+                    after:
+                     type: "String"
+                     description: "Returns the elements in the list that come after the specified global ID."
+                    first:
+                     type: "Int"
+                     defaultValue: 100
+                     description: "Returns the first n elements from the list."
+                    before:
+                     type: "String"
+                     description: "Returns the elements in the list that come before the specified global ID."
+                    last:
+                     type: "Int"
+                     description: "Returns the last n elements from the list."
                 description: "Return the user's contributions of the type requested."
-                resolve: "@=resolver('user_getContributions', [value, args])"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserContributionResolver", [value, args])'

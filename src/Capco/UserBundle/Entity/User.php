@@ -1207,39 +1207,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         ];
     }
 
-    public function getContributionsByType(string $requestedType = null)
-    {
-        switch ($requestedType) {
-            case 'Opinions':
-                return $this->getOpinions();
-                break;
-            case 'OpinionVersions':
-                return $this->getOpinionVersions();
-                break;
-            case 'Votes':
-                return $this->getVotes();
-                break;
-            case 'Comments':
-                return $this->getComments();
-                break;
-            case 'Arguments':
-                return $this->getArguments();
-                break;
-            case 'Sources':
-                return $this->getSources();
-                break;
-            case 'Proposals':
-                return $this->getProposals();
-                break;
-            case 'Replies':
-                return $this->getReplies();
-                break;
-            default:
-                return $this->getContributions();
-                break;
-        }
-    }
-
     public function getContributions()
     {
         $types = [

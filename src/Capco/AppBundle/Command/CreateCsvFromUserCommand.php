@@ -55,6 +55,27 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
             ]
         )->toArray();
 
+        $datas['reports'] = $executor->disabledDebugInfo()->execute(
+            [
+                'query' => $this->getReportsGraphQLQuery($userId),
+                'variables' => [],
+            ]
+        )->toArray();
+
+        $datas['events'] = $executor->disabledDebugInfo()->execute(
+            [
+                'query' => $this->getEventsGraphQLQuery($userId),
+                'variables' => [],
+            ]
+        )->toArray();
+
+        $datas['proposals'] = $executor->disabledDebugInfo()->execute(
+            [
+                'query' => $this->getProposalsGraphQLQuery($userId),
+                'variables' => [],
+            ]
+        )->toArray();
+
         foreach ($datas as $key => $value) {
             $this->createCsv($userId, $value, $key);
         }
@@ -107,14 +128,98 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
         }
         unset($data['extensions']);
 
+        $header = $this->resolveHeaders($data, $type);
+        $writer->addRow($header);
+
+        $rows = [];
+        if ($contributions = Arr::path($data, 'data.node.contributions.edges.node')) {
+            $rows = $this->resolveArray($contributions, $header, true);
+        } elseif ($medias = Arr::path($data, 'data.node.medias')) {
+            $rows = $this->resolveArray($medias, $header);
+        } elseif ($groups = Arr::path($data, 'data.node.groups')) {
+            $rows = $this->resolveArray($groups, $header);
+        } elseif ($reports = Arr::path($data, 'data.node.reports')) {
+            $rows = $this->resolveArray($reports, $header);
+        } elseif ($events = Arr::path($data, 'data.node.events')) {
+            $rows = $this->resolveArray($events, $header);
+        } elseif ($proposals = Arr::path($data, 'data.node.contributions.edges')) {
+            $rows = $this->resolveArray($proposals, $header, true);
+        } else {
+            foreach ($header as $value) {
+                $value = Arr::path($data, "data.node.$value") ?? '';
+                $rows[] = $value;
+            }
+        }
+        if (!empty($rows) && \is_array($rows[0])) {
+            $writer->addRows($rows);
+        } else {
+            $writer->addRow($rows);
+        }
+
+        $writer->close();
+
+        if ($header) {
+            $this->createZipArchive(
+                $this->getZipPathForUser($userId),
+                [
+                    ["$type.csv" => $this->getPath()],
+                ]
+            );
+        }
+    }
+
+    protected function resolveArray(array $contents, array $header, bool $isNode = false)
+    {
+        $row = [];
+        $i = 0;
+        $inserted = 0;
+        foreach ($contents as $content) {
+            foreach ($header as $key => $value) {
+                if ($isNode) {
+                    if (false !== strpos($value, 'responses.') && 0 === $inserted) {
+                        $datas = $this->handleQuestionsResponses($content, $i, $key, $row);
+                        $row = $datas['row'];
+                        $i = $datas['counter'];
+                        $inserted = 1;
+                    }
+                    $value = Arr::path($content['node'], $value);
+                } else {
+                    $value = Arr::path($content, $value);
+                }
+                $row[$i][] = false === $value ? 0 : $value;
+            }
+            ++$i;
+        }
+
+        return $row;
+    }
+
+    // Gange
+    protected function handleQuestionsResponses(array $responses, int $i, int $key, array $row): array
+    {
+        foreach ($responses['node']['responses'] as $response) {
+            if ($response['question']['title'] && $response['formattedValue']) {
+                $row[$i][$key] = $response['question']['title'];
+                $row[$i][$key + 1] = $response['formattedValue'];
+                ++$i;
+                $row[$i] = [null, null, null, null, null, null, null];
+            }
+        }
+
+        return ['row' => $row, 'counter' => $i];
+    }
+
+    protected function resolveHeaders($data, string $type): array
+    {
+        $infoResolver = new InfoResolver();
         $header = array_map(
             function ($item) use ($type) {
                 $item = str_replace('data_node_', '', $item);
                 if ('show_url' !== $item) {
                     $item = str_replace('_', '.', $item);
                 }
-                if ('questions' === $type) {
-                    $item = str_replace('contributions.', '', $item);
+                if ('questions' === $type || 'proposals' === $type) {
+                    $item = str_replace('contributions.edges.node.', '', $item);
                 }
                 if ('medias' === $type) {
                     $item = str_replace('medias.', '', $item);
@@ -122,59 +227,19 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
                 if ('groups' === $type) {
                     $item = str_replace('groups.', '', $item);
                 }
+                if ('reports' === $type) {
+                    $item = str_replace('reports.', '', $item);
+                }
+                if ('events' === $type) {
+                    $item = str_replace('events.', '', $item);
+                }
 
                 return $item;
             },
             $infoResolver->guessHeadersFromFields($data)
         );
 
-        $writer->addRow($header);
-
-        $row = [];
-        if ($contributions = Arr::path($data, 'data.node.contributions')) {
-            $row = $this->resolveContribution($contributions, $header);
-        } elseif ($medias = Arr::path($data, 'data.node.medias')) {
-            $row = $this->resolveContribution($medias, $header);
-        } elseif ($groups = Arr::path($data, 'data.node.groups')) {
-            $row = $this->resolveContribution($groups, $header);
-        } else {
-            foreach ($header as $value) {
-                $value = Arr::path($data, "data.node.$value") ?? '';
-                $row[] = $value;
-            }
-        }
-        if (!empty($row) && \is_array($row[0])) {
-            $writer->addRows($row);
-        } else {
-            $writer->addRow($row);
-        }
-        $writer->close();
-
-        $this->createZipArchive(
-            $this->getZipPathForUser($userId),
-            [
-                ["$type.csv" => $this->getPath()],
-            ]
-        );
-    }
-
-    protected function resolveContribution(array $contributions, array $header)
-    {
-        $row = [];
-        $i = 0;
-        foreach ($contributions as $contribution) {
-            foreach ($header as $value) {
-                if (false === Arr::path($contribution, $value)) {
-                    $value = 0;
-                } else {
-                    $value = Arr::path($contribution, $value);
-                }
-                $row[$i][] = $value;
-            }
-            ++$i;
-        }
-
-        return $row;
+        return $header;
     }
 
     protected function getFilename(): string
@@ -251,37 +316,41 @@ EOF;
     {
         return <<<EOF
 {
-  node(id: "${userId}") {
+  node(id: "$userId") {
     ... on User {
-      contributions(contributionType: "Opinion") {
-        ... on Opinion {
-          id
-          author {
-            id
+      contributions(type: OPINION) {
+        edges {
+          node {
+            ... on Opinion {
+              id
+              author {
+                id
+              }
+              section {
+                title
+              }
+              title
+              body
+              bodyText
+              createdAt
+              updatedAt
+              url
+              expired
+              published
+              trashed
+              trashedAt
+              trashedReason
+              votesCount
+              votesCountOk
+              votesCountMitige
+              votesCountNok
+              argumentsCount
+              argumentsCountFor
+              argumentsCountAgainst
+              sourcesCount
+              versionsCount
+            }
           }
-          section {
-            title
-          }
-          title
-          body
-          bodyText
-          createdAt
-          updatedAt
-          url
-          expired
-          published
-          trashed
-          trashedAt
-          trashedReason
-          votesCount
-          votesCountOk
-          votesCountMitige
-          votesCountNok
-          argumentsCount
-          argumentsCountFor
-          argumentsCountAgainst
-          sourcesCount
-          versionsCount
         }
       }
     }
@@ -296,36 +365,40 @@ EOF;
 {
   node(id: "${userId}") {
     ... on User {
-      contributions(contributionType: "OpinionVersion") {
-        ... on Version {
-          related {
-            id
-            kind
+      contributions(type: OPINIONVERSION) {
+        edges {
+          node {
+            ... on Version {
+              related {
+                id
+                kind
+              }
+              id
+              author {
+                id
+              }
+              title
+              body
+              bodyText
+              comment
+              createdAt
+              updatedAt
+              url
+              expired
+              published
+              trashed
+              trashedAt
+              trashedReason
+              votesCount
+              votesCountOk
+              votesCountMitige
+              votesCountNok
+              argumentsCount
+              argumentsCountFor
+              argumentsCountAgainst
+              sourcesCount
+            }
           }
-          id
-          author {
-            id
-          }
-          title
-          body
-          bodyText
-          comment
-          createdAt
-          updatedAt
-          url
-          expired
-          published
-          trashed
-          trashedAt
-          trashedReason
-          votesCount
-          votesCountOk
-          votesCountMitige
-          votesCountNok
-          argumentsCount
-          argumentsCountFor
-          argumentsCountAgainst
-          sourcesCount
         }
       }
     }
@@ -340,27 +413,31 @@ EOF;
 {
   node(id: "${userId}") {
     ... on User {
-      contributions(contributionType: "Argument") {
-        ... on Argument {
-          related {
-            id
-            kind
+      contributions(type: ARGUMENT) {
+        edges {
+          node {
+            ... on Argument {
+              related {
+                id
+                kind
+              }
+              id
+              author {
+                id
+              }
+              type
+              body
+              createdAt
+              updatedAt
+              url
+              expired
+              published
+              trashed
+              trashedAt
+              trashedReason
+              votesCount
+            }
           }
-          id
-          author {
-            id
-          }
-          type
-          body
-          createdAt
-          updatedAt
-          url
-          expired
-          published
-          trashed
-          trashedAt
-          trashedReason
-          votesCount
         }
       }
     }
@@ -375,25 +452,29 @@ EOF;
 {
   node(id: "${userId}") {
     ... on User {
-      contributions(contributionType: "Source") {
-        ... on Source {
-          related {
-            id
-            kind
+      contributions(type: SOURCE) {
+        edges {
+          node {
+            ... on Source {
+              related {
+                id
+                kind
+              }
+              id
+              author {
+                id
+              }
+              body
+              createdAt
+              updatedAt
+              expired
+              published
+              trashed
+              trashedAt
+              trashedReason
+              votesCount
+            }
           }
-          id
-          author {
-            id
-          }
-          body
-          createdAt
-          updatedAt
-          expired
-          published
-          trashed
-          trashedAt
-          trashedReason
-          votesCount
         }
       }
     }
@@ -408,7 +489,7 @@ EOF;
 {
   node(id: "${userId}") {
     ... on User {
-      contributions(contributionType: "Vote") {
+      contributions(contributionType: VOTE) {
         ... on ${$type}Vote {
 					id
           author {
@@ -431,29 +512,33 @@ EOF;
 {
   node(id: "${userId}") {
     ... on User {
-      contributions(contributionType: "Replies") {
-        ... on Reply {
-          questionnaire {
-            title
-          }
-          id
-          author {
-            id
-            email
-          }
-          updatedAt
-          expired
-          anonymous
-          responses {
-            question {
-              title
-            }
-            ... on ValueResponse {
-              value
-            }
-            ... on MediaResponse {
-              medias {
-                url
+      contributions(type: REPLY) {
+        edges {
+          node {
+            ... on Reply {
+              questionnaire {
+                title
+              }
+              id
+              author {
+                id
+                email
+              }
+              updatedAt
+              expired
+              anonymous
+              responses {
+                question {
+                  title
+                }
+                ... on ValueResponse {
+                  formattedValue
+                }
+                ... on MediaResponse {
+                  medias {
+                    url
+                  }
+                }
               }
             }
           }
@@ -498,6 +583,99 @@ EOF;
         usersCount
         createdAt
         updatedAt
+      }
+    }
+  }
+}
+EOF;
+    }
+
+    protected function getReportsGraphQLQuery(string $userId): string
+    {
+        return <<<EOF
+{
+  node(id: "$userId") {
+    ... on User {
+      reports {
+        related {
+          id
+          kind
+        }
+        id
+        type
+        body
+        createdAt
+      }
+    }
+  }
+}
+EOF;
+    }
+
+    protected function getEventsGraphQLQuery(string $userId): string
+    {
+        return <<<EOF
+{
+  node(id: "$userId") {
+    ... on User {
+    	events {
+        title
+        startAt
+        endAt
+        themes {
+          title
+        }
+        projects {
+          title
+        }
+        author {
+          id
+          email
+        }
+        published
+        commentEnabled
+        createdAt
+        updatedAt
+        body
+        registrationEnabled
+        link
+        address
+        zipCode
+        city
+        country
+      }
+    }
+  }
+}
+EOF;
+    }
+
+    protected function getProposalsGraphQLQuery(string $userId): string
+    {
+        return <<<EOF
+{
+  node(id: "${userId}") {
+    ... on User {
+      contributions(type: PROPOSAL) {
+        edges {
+          node {
+            ... on Proposal {
+              related {
+                id
+                kind
+              }
+              id
+              title
+              createdAt
+              updatedAt
+              expired
+              trashedAt
+              trashedReason
+              formattedAddress
+              bodyText              
+            }
+          }
+        }
       }
     }
   }

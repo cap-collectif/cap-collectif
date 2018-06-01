@@ -151,11 +151,6 @@ class UserResolver implements ContainerAwareInterface
         return $count;
     }
 
-    public function getContributions(User $object, $value)
-    {
-        return $object->getContributionsByType($value['contributionType']);
-    }
-
     public function getMedias(User $object): array
     {
         $medias = [];
@@ -185,5 +180,19 @@ class UserResolver implements ContainerAwareInterface
         }
 
         return $groups;
+    }
+
+    public function getReports(User $object): array
+    {
+        $repo = $this->container->get('capco.reporting.repository');
+
+        return $repo->findBy(['Reporter' => $object]);
+    }
+
+    public function getEvents(User $object): array
+    {
+        $repo = $this->container->get('capco.event.repository');
+
+        return $repo->findBy(['Author' => $object]);
     }
 }

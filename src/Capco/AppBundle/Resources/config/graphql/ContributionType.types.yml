@@ -1,0 +1,21 @@
+ContributionType:
+    type: enum
+    config:
+        description: "Different contribution type"
+        values:
+            OPINION:
+                value: "Opinions"
+            OPINIONVERSION:
+                value: "OpinionVersions"
+            VOTE:
+                value: "Votes"
+            COMMENT:
+                value: "Comments"
+            ARGUMENT:
+                value: "Arguments"
+            SOURCE:
+                value: "Sources"
+            PROPOSAL:
+                value: "Proposals"
+            REPLY:
+                value: "Replies"
