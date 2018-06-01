@@ -132,6 +132,7 @@ trait ProposalStepsTrait
     public function iGoToANotifiableOpenCollectStep()
     {
         $this->visitPageWithParams('collect page', self::$collectStepNotifiable);
+        $this->getSession()->wait(3000, "$('#proposal__step-page-rendered').length > 0");
     }
 
     /**
@@ -140,6 +141,7 @@ trait ProposalStepsTrait
     public function iGoToASelectionStep()
     {
         $this->visitPageWithParams('selection page', self::$selectionStepOpenParams);
+        $this->getSession()->wait(3000, "$('#proposal__step-page-rendered').length > 0");
     }
 
     /**
@@ -148,6 +150,7 @@ trait ProposalStepsTrait
     public function iGoToAPrivateOpenCollectStep()
     {
         $this->visitPageWithParams('collect page', self::$collectStepOpenPrivateParams);
+        $this->getSession()->wait(3000, "$('#proposal__step-page-rendered').length > 0");
     }
 
     /**
@@ -156,6 +159,7 @@ trait ProposalStepsTrait
     public function iGoToAClosedCollectStep()
     {
         $this->visitPageWithParams('collect page', self::$collectStepClosedParams);
+        $this->getSession()->wait(3000, "$('#proposal__step-page-rendered').length > 0");
     }
 
     /**
