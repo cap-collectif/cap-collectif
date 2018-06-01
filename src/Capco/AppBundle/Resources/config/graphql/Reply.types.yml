@@ -17,12 +17,10 @@ Reply:
             updatedAt:
                 type: "DateTime"
                 description: "The updated date."
-            updatedAt:
-                type: "DateTime"
             expired:
                 type: "Boolean!"
             anonymous:
-                type: "Boolean!"
+                type: "Boolean"
             questionnaire:
                 type: "Questionnaire!"
                 description: "Identifies the form where the contribution was submitted."
@@ -36,5 +34,5 @@ Reply:
                 type: "Contribution"
                 description: "Return the related contribution if the contribution is related to another."
             viewerCanDelete:
-              type: "Boolean!"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ReplyViewerCanDeleteResolver", [value, user])'
+                type: "Boolean!"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ReplyViewerCanDeleteResolver", [value, user])'
