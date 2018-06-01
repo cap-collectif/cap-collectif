@@ -1,3 +1,4 @@
+// @flow
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
@@ -17,6 +18,8 @@ describe('<ImageUpload />', () => {
       name: 'image.jpg',
       size: 42,
     },
+    accept: '',
+    onChange: jest.fn(),
   };
 
   it('render correctly', () => {

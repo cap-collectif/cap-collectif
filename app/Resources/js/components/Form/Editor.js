@@ -1,29 +1,27 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import Quill from 'quill';
 import QuillToolbar from './QuillToolbar';
 
-const Editor = React.createClass({
-  propTypes: {
-    intl: intlShape.isRequired,
-    valueLink: PropTypes.object, // deprecated way
-    value: PropTypes.any, // redux-form
-    onChange: PropTypes.func, // redux-form
-    onBlur: PropTypes.func, // redux-form
-    id: PropTypes.string,
-    className: PropTypes.string,
-    disabled: PropTypes.bool,
-  },
+type Props = {
+  intl: intlShape,
+  valueLink?: Object,
+  value?: any,
+  onChange: Function,
+  onBlur: Function,
+  id?: string,
+  className: string,
+  disabled?: boolean,
+};
 
-  getDefaultProps() {
-    return {
-      id: '',
-      className: '',
-      disabled: false,
-    };
-  },
+class Editor extends React.Component<Props> {
+  static defaultProps = {
+    id: '',
+    className: '',
+    disabled: false,
+  };
 
   componentDidMount() {
     const { intl, disabled, onBlur, onChange, value, valueLink } = this.props;
@@ -94,13 +92,13 @@ const Editor = React.createClass({
         });
       }
     }
-  },
+  }
 
   componentWillUnmount() {
     if (this._editor) {
       this._editor.destroy();
     }
-  },
+  }
 
   render() {
     const { className, disabled, id } = this.props;
@@ -118,7 +116,7 @@ const Editor = React.createClass({
         <div ref="editor" style={{ position: 'static' }} />
       </div>
     );
-  },
-});
+  }
+}
 
 export default injectIntl(Editor);

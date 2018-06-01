@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RankingArrows /> should render a button group with disabled ranking arrows when there is no functions associated 1`] = `
+<ButtonGroup
+  block={false}
+  bsClass="btn-group"
+  className="ranking__item__arrows"
+  justified={false}
+  vertical={false}
+>
+  <RankingArrow
+    disabled={false}
+    onClick={[Function]}
+    type="right"
+  />
+  <RankingArrow
+    disabled={false}
+    onClick={[Function]}
+    type="left"
+  />
+</ButtonGroup>
+`;

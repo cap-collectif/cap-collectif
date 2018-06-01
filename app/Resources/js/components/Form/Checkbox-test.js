@@ -22,7 +22,9 @@ describe('<Checkbox />', () => {
   const props = {
     label: 'label',
     id: 'reply-1',
-
+    value: {
+      labels: 'label',
+    },
     disabled: false,
     onChange: jest.fn(),
     onBlur: jest.fn(),

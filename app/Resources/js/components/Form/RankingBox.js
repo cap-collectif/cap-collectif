@@ -1,23 +1,22 @@
-import React, { PropTypes } from 'react';
+// @flow
+import React from 'react';
 import classNames from 'classnames';
 import RankingSpot from './RankingSpot';
 import RankingItem from './RankingItem';
 
-const RankingBox = React.createClass({
-  propTypes: {
-    items: PropTypes.array.isRequired,
-    spotsNb: PropTypes.number.isRequired,
-    listType: PropTypes.oneOf(['pickBox', 'choiceBox']),
-    fieldId: PropTypes.any.isRequired,
-    moveItem: PropTypes.func.isRequired,
-    disabled: PropTypes.bool,
-  },
+type Props = {
+  items: Array<$FlowFixMe>,
+  spotsNb: number,
+  listType?: 'pickBox' | 'choiceBox',
+  fieldId: any,
+  moveItem: Function,
+  disabled?: boolean,
+};
 
-  getDefaultProps() {
-    return {
-      disabled: false,
-    };
-  },
+class RankingBox extends React.Component<Props> {
+  static defaultProps = {
+    disabled: false,
+  };
 
   render() {
     const { spotsNb, items, listType, moveItem, fieldId, disabled } = this.props;
@@ -56,7 +55,7 @@ const RankingBox = React.createClass({
         })}
       </div>
     );
-  },
-});
+  }
+}
 
 export default RankingBox;
