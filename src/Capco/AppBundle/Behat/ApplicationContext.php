@@ -179,7 +179,7 @@ class ApplicationContext extends UserContext
     {
         if ($this->getSession()) {
             $this->navigationContext->iVisitedPage('HomePage');
-            $this->getSession()->setCookie('displayCookieConsent', 'y');
+            $this->getSession()->setCookie('hasFullConsent', 'y');
         }
         $this->navigationContext->iVisitedPage($pageName);
     }
@@ -233,7 +233,7 @@ class ApplicationContext extends UserContext
     {
         if ($this->getSession()) {
             $this->navigationContext->iVisitedPage('HomePage');
-            $this->getSession()->setCookie('displayCookieConsent', 'y');
+            $this->getSession()->setCookie('hasFullConsent', 'y');
         }
         $this->navigationContext->iVisitedPageWith($pageName, $parameters);
     }
