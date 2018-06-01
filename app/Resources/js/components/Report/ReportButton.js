@@ -7,7 +7,7 @@ import LoginOverlay from '../Utils/LoginOverlay';
 import { type State } from '../../types';
 
 type Props = {
-  id: string,
+  id: $FlowFixMe,
   reported: boolean,
   className: ?string,
   onClick: Function,
@@ -47,9 +47,9 @@ export class ReportButton extends React.PureComponent<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, ownProps) => {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props) => {
   return {
-    reported: ownProps.reported || state.report.elements.includes(ownProps.id),
+    reported: props.reported || state.report.elements.includes(props.id),
   };
 };
 
