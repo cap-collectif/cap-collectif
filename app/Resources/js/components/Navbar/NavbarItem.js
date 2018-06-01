@@ -1,23 +1,22 @@
-import React, { PropTypes } from 'react';
+// @flow
+import React from 'react';
 import { NavDropdown, MenuItem, NavItem } from 'react-bootstrap';
 
-const NavbarItem = React.createClass({
-  propTypes: {
-    item: PropTypes.object.isRequired,
-    isChild: PropTypes.bool,
-    refCallback: PropTypes.func,
-    className: PropTypes.string,
-    onKeyDown: PropTypes.func,
-  },
+type Props = {
+  item: Object,
+  isChild?: boolean,
+  refCallback?: Function,
+  className?: string,
+  onKeyDown?: Function,
+};
 
-  getDefaultProps() {
-    return {
-      isChild: false,
-      refCallback: () => {},
-      className: '',
-      onKeyDown: () => {},
-    };
-  },
+class NavbarItem extends React.Component<Props> {
+  static defaultProps = {
+    isChild: false,
+    refCallback: () => {},
+    className: '',
+    onKeyDown: () => {},
+  };
 
   render() {
     const { item, isChild, refCallback, className, onKeyDown } = this.props;
@@ -77,7 +76,7 @@ const NavbarItem = React.createClass({
       );
     }
     return null;
-  },
-});
+  }
+}
 
 export default NavbarItem;
