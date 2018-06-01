@@ -16,14 +16,13 @@ type Props = {
   form: Object,
   proposalId: Uuid,
   currentVotableStepId: ?Uuid,
-  categories: Array<Object>,
   features: FeatureToggles,
   isAuthenticated: boolean,
 };
 
 export class ProposalPage extends React.Component<Props> {
   render() {
-    const { proposalId, features, categories, form } = this.props;
+    const { proposalId, features, form } = this.props;
     return (
       <div>
         <QueryRenderer
@@ -85,7 +84,6 @@ export class ProposalPage extends React.Component<Props> {
                       step={props.step || null}
                       viewer={props.viewer || null}
                       features={features}
-                      categories={categories}
                       form={form}
                     />
                   </div>

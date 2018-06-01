@@ -161,14 +161,6 @@ exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] 
                 }
               />
               <Relay(Connect(ProposalPageContent))
-                categories={Array []}
-                form={
-                  Object {
-                    "$refType": null,
-                    "usingCategories": true,
-                    "usingThemes": true,
-                  }
-                }
                 proposal={
                   Object {
                     "$fragmentRefs": null,

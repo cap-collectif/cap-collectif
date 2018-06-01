@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { type ReadyState, QueryRenderer, createFragmentContainer, graphql } from 'react-relay';
+import { createFragmentContainer, graphql } from 'react-relay';
 import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
 import { isSubmitting, submit, change, isInvalid, isPristine } from 'redux-form';
 import { Modal } from 'react-bootstrap';
@@ -9,15 +9,12 @@ import SubmitButton from '../../Form/SubmitButton';
 import CloseButton from '../../Form/CloseButton';
 import ProposalForm, { formName } from '../Form/ProposalForm';
 import ProposalDraftAlert from '../Page/ProposalDraftAlert';
-import environment, { graphqlError } from '../../../createRelayEnvironment';
-import type { ProposalEditModalQueryResponse } from './__generated__/ProposalEditModalQuery.graphql';
-import type { Uuid, Dispatch, GlobalState } from '../../../types';
+import type { Dispatch, GlobalState } from '../../../types';
 import { closeEditProposalModal } from '../../../redux/modules/proposal';
 import type { ProposalEditModal_proposal } from './__generated__/ProposalEditModal_proposal.graphql';
 
 type Props = {
   intl: IntlShape,
-  form: { id: Uuid },
   proposal: ProposalEditModal_proposal,
   show: boolean,
   submitting: boolean,
@@ -28,94 +25,69 @@ type Props = {
 
 class ProposalEditModal extends React.Component<Props> {
   render() {
-    const { invalid, form, proposal, show, pristine, submitting, dispatch, intl } = this.props;
+    const { invalid, proposal, show, pristine, submitting, dispatch, intl } = this.props;
     return (
-      <div>
-        <QueryRenderer
-          environment={environment}
-          query={graphql`
-            query ProposalEditModalQuery($proposalFormId: ID!) {
-              proposalForm: node(id: $proposalFormId) {
-                ...ProposalForm_proposalForm
-              }
-            }
-          `}
-          variables={{
-            proposalFormId: form.id,
-          }}
-          render={({ props, error }: ReadyState & { props: ?ProposalEditModalQueryResponse }) => {
-            if (error) {
-              return graphqlError;
-            }
-            if (props) {
-              return (
-                <Modal
-                  animation={false}
-                  show={show}
-                  onHide={() => {
-                    if (
-                      // eslint-disable-next-line no-alert
-                      window.confirm(intl.formatMessage({ id: 'proposal.confirm_close_modal' }))
-                    ) {
-                      dispatch(closeEditProposalModal());
-                    }
-                  }}
-                  bsSize="large"
-                  aria-labelledby="contained-modal-title-lg">
-                  <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-lg">
-                      <FormattedMessage id="global.edit" />
-                    </Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    {/* $FlowFixMe */}
-                    <ProposalDraftAlert proposal={proposal} />
-                    <ProposalForm proposalForm={props.proposalForm} proposal={proposal} />
-                  </Modal.Body>
-                  <Modal.Footer>
-                    <CloseButton
-                      onClose={() => {
-                        dispatch(closeEditProposalModal());
-                      }}
-                    />
-                    {proposal.publicationStatus === 'DRAFT' && (
-                      <SubmitButton
-                        id="confirm-proposal-create-as-draft"
-                        isSubmitting={submitting}
-                        disabled={pristine}
-                        onSubmit={() => {
-                          dispatch(change(formName, 'draft', true));
-                          setTimeout(() => {
-                            // TODO find a better way
-                            // We need to wait validation values to be updated with 'draft'
-                            dispatch(submit(formName));
-                          }, 200);
-                        }}
-                        label="global.save_as_draft"
-                      />
-                    )}
-                    <SubmitButton
-                      label="global.submit"
-                      id="confirm-proposal-edit"
-                      isSubmitting={submitting}
-                      disabled={invalid}
-                      onSubmit={() => {
-                        dispatch(change(formName, 'draft', false));
-                        setTimeout(() => {
-                          // TODO find a better way
-                          // We need to wait validation values to be updated with 'draft'
-                          dispatch(submit(formName));
-                        }, 200);
-                      }}
-                    />
-                  </Modal.Footer>
-                </Modal>
-              );
-            }
-            return null;
-          }}
-        />
-      </div>
+      <Modal
+        animation={false}
+        show={show}
+        onHide={() => {
+          if (
+            // eslint-disable-next-line no-alert
+            window.confirm(intl.formatMessage({ id: 'proposal.confirm_close_modal' }))
+          ) {
+            dispatch(closeEditProposalModal());
+          }
+        }}
+        bsSize="large"
+        aria-labelledby="contained-modal-title-lg">
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-lg">
+            <FormattedMessage id="global.edit" />
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {/* $FlowFixMe */}
+          <ProposalDraftAlert proposal={proposal} />
+          <ProposalForm proposalForm={proposal.form} proposal={proposal} />
+        </Modal.Body>
+        <Modal.Footer>
+          <CloseButton
+            onClose={() => {
+              dispatch(closeEditProposalModal());
+            }}
+          />
+          {proposal.publicationStatus === 'DRAFT' && (
+            <SubmitButton
+              id="confirm-proposal-create-as-draft"
+              isSubmitting={submitting}
+              disabled={pristine}
+              onSubmit={() => {
+                dispatch(change(formName, 'draft', true));
+                setTimeout(() => {
+                  // TODO find a better way
+                  // We need to wait validation values to be updated with 'draft'
+                  dispatch(submit(formName));
+                }, 200);
+              }}
+              label="global.save_as_draft"
+            />
+          )}
+          <SubmitButton
+            label="global.submit"
+            id="confirm-proposal-edit"
+            isSubmitting={submitting}
+            disabled={invalid}
+            onSubmit={() => {
+              dispatch(change(formName, 'draft', false));
+              setTimeout(() => {
+                // TODO find a better way
+                // We need to wait validation values to be updated with 'draft'
+                dispatch(submit(formName));
+              }, 200);
+            }}
+          />
+        </Modal.Footer>
+      </Modal>
     );
   }
 }
@@ -133,6 +105,9 @@ export default createFragmentContainer(container, {
   proposal: graphql`
     fragment ProposalEditModal_proposal on Proposal {
       id
+      form {
+        ...ProposalForm_proposalForm
+      }
       publicationStatus
       ...ProposalForm_proposal
       ...ProposalDraftAlert_proposal

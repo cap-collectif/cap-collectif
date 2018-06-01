@@ -26,8 +26,6 @@ type Props = {
   viewer: ?ProposalPageContent_viewer,
   step: ?ProposalPageContent_step,
   proposal: ProposalPageContent_proposal,
-  form: Object,
-  categories: Array<Object>,
   className: string,
   dispatch: Function,
 };
@@ -38,7 +36,7 @@ export class ProposalPageContent extends React.Component<Props> {
   };
 
   render() {
-    const { proposal, step, className, form, categories, dispatch, viewer } = this.props;
+    const { proposal, step, className, dispatch, viewer } = this.props;
     const classes = {
       proposal__content: true,
       [className]: true,
@@ -48,6 +46,7 @@ export class ProposalPageContent extends React.Component<Props> {
     }
 
     const address = proposal.address ? JSON.parse(proposal.address) : null;
+    const proposalForm = proposal.form;
 
     return (
       <div className={classNames(classes)}>
@@ -61,7 +60,7 @@ export class ProposalPageContent extends React.Component<Props> {
                   onClick={() => {
                     dispatch(openEditProposalModal());
                   }}
-                  editable={form.isContribuable}
+                  editable={proposalForm.contribuable}
                 />
                 <DeleteButton
                   id="proposal-delete-button"
@@ -70,7 +69,7 @@ export class ProposalPageContent extends React.Component<Props> {
                     dispatch(openDeleteProposalModal());
                   }}
                   style={{ marginLeft: '15px' }}
-                  deletable={form.isContribuable}
+                  deletable={proposalForm.contribuable}
                 />
               </div>
             )}
@@ -155,10 +154,10 @@ export class ProposalPageContent extends React.Component<Props> {
           )}
         </div>
         {/* $FlowFixMe */}
-        <ProposalEditModal proposal={proposal} form={form} categories={categories} />
+        <ProposalEditModal proposal={proposal} />
         <ProposalDeleteModal proposal={proposal} />
         {proposal.publicationStatus !== 'DRAFT' && (
-          <ProposalPageComments id={proposal.id} form={form} />
+          <ProposalPageComments id={proposal.id} form={proposalForm} />
         )}
       </div>
     );
@@ -193,6 +192,10 @@ export default createFragmentContainer(container, {
       author {
         id
         displayName
+      }
+      form {
+        id
+        contribuable
       }
       address
       body

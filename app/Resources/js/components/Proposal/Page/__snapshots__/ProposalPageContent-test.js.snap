@@ -32,13 +32,6 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
     </div>
   </div>
   <Relay(Connect(InjectIntl(ProposalEditModal)))
-    categories={Array []}
-    form={
-      Object {
-        "usingCategories": false,
-        "usingThemes": true,
-      }
-    }
     proposal={
       Object {
         "_links": Object {
@@ -68,12 +61,6 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
   />
   <ProposalPageComments
     className=""
-    form={
-      Object {
-        "usingCategories": false,
-        "usingThemes": true,
-      }
-    }
     id="proposal3"
   />
 </div>
