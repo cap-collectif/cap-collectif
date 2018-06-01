@@ -13,7 +13,7 @@ User:
                 type: "Media"
                 description: "The profile picture of the user."
             email:
-                type: "String!"
+                type: "String"
                 description: "email."
                 resolve: "@=resolver('user_email', [value])"
             displayName:

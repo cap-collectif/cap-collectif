@@ -58,10 +58,10 @@ class UserResolver implements ContainerAwareInterface
             UrlGeneratorInterface::ABSOLUTE_URL);
     }
 
-    public function resolveEmail($object): string
+    public function resolveEmail($object): ?string
     {
         if (0 === strpos($object->getEmail(), 'twitter_')) {
-            return '';
+            return null;
         }
 
         return $object->getEmail();

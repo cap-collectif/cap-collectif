@@ -2596,7 +2596,7 @@ type User implements Node {
   media: Media
 
   # email.
-  email: String!
+  email: String
   displayName: String!
 
   # Username of the user.
