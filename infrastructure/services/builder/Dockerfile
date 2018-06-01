@@ -1,4 +1,4 @@
-FROM python:2.7.15-slim-jessie AS python
+FROM python:2.7.15-jessie AS python
 FROM node:8-slim AS node
 FROM composer:latest AS composer
 FROM php:7.1-cli AS php
