@@ -43,11 +43,11 @@ Scenario: GraphQL client want to get the list of contributors
             "endCursor": "YXJyYXljb25uZWN0aW9uOjQ="
           },
           "edges": [
-            {"node":{"id":"user1"}},
-            {"node":{"id":"user11"}},
-            {"node":{"id":"user12"}},
-            {"node":{"id":"user13"}},
-            {"node":{"id":"user16"}}
+            {"node":{"id": @string@ }},
+            {"node":{"id": @string@ }},
+            {"node":{"id": @string@ }},
+            {"node":{"id": @string@ }},
+            {"node":{"id": @string@ }}
           ]
         }
       }

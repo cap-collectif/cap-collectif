@@ -205,28 +205,3 @@ Scenario: Logged as user, I want to delete my address
   And I should not see "form.label_address2"
   And I should not see "form.label_city"
   And I should not see "form.label_zip_code"
-
-@javascript @database
-Scenario: Logged as user, I want to update my profile
-  Given feature "user_type" is enabled
-  Given I am logged in as user
-  And I visited "edit profile page"
-  And I wait 2 seconds
-  And I select "Organisation à but non lucratif" from "profile-form-userType"
-  Then I fill the element "#public-data-form-biography" with value "I'm superman"
-  And I press "profile-form-save"
-  And I wait 1 seconds
-  Then I should see "global.saved"
-
-@javascript @database
-Scenario: Logged as user, I want to update my profile
-  Given feature "user_type" is disabled
-  Given I am logged in as user
-  And I visited "edit profile page"
-  And I wait 2 seconds
-  And I should not see an "profile.form.userType" element
-  And I wait 2 seconds
-  Then I fill the element "#public-data-form-biography" with value "I'm superman"
-  And I press "profile-form-save"
-  And I wait 1 seconds
-  Then I should see "global.saved"

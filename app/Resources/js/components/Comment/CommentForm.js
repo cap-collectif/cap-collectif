@@ -14,7 +14,7 @@ import type { GlobalState, Dispatch } from '../../types';
 import CommentActions from '../../actions/CommentActions';
 
 type Props = {
-  answerOf?: ?string,
+  isAnswer?: boolean,
   comment: ?string,
   object: string,
   uri: string,
@@ -32,9 +32,7 @@ type State = {
 };
 
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
-  const { object, uri, user, reset, answerOf } = props;
-
-  values.parent = answerOf;
+  const { object, uri, user, reset } = props;
 
   if (user) {
     delete values.authorName;
@@ -68,7 +66,7 @@ export const formName = 'CommentForm';
 
 export class CommentForm extends React.Component<Props, State> {
   static defaultProps = {
-    answerOf: null,
+    isAnswer: false,
     user: null,
     comment: 0,
   };
@@ -89,9 +87,7 @@ export class CommentForm extends React.Component<Props, State> {
     }
 
     if (comment && comment.length >= 1 && this.state.expanded === false)
-      this.setState({
-        expanded: true,
-      });
+      this.setState({ expanded: true });
   };
 
   renderAnonymous() {
@@ -184,9 +180,9 @@ export class CommentForm extends React.Component<Props, State> {
   }
 
   render() {
-    const { answerOf, user, intl, handleSubmit } = this.props;
+    const { isAnswer, user, intl, handleSubmit } = this.props;
     const classes = classNames({
-      'comment-answer-form': answerOf !== null,
+      'comment-answer-form': isAnswer,
     });
 
     return (
@@ -211,10 +207,9 @@ export class CommentForm extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: Props) => ({
-  comment: formValueSelector(props.answerOf ? formName + props.answerOf : formName)(state, 'body'),
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
+  comment: formValueSelector(formName)(state, 'body'),
   user: state.user.user,
-  form: props.answerOf ? formName + props.answerOf : formName,
 });
 
 const container = injectIntl(CommentForm);
@@ -223,5 +218,6 @@ export default connect(mapStateToProps)(
   reduxForm({
     validate,
     onSubmit,
+    form: formName,
   })(container),
 );
