@@ -63,7 +63,6 @@ export default createPaginationContainer(
         ...ProposalList_step
         proposals(
           first: $count
-          after: $cursor
           orderBy: $orderBy
           term: $term
           district: $district
@@ -111,7 +110,6 @@ export default createPaginationContainer(
     query: graphql`
       query ProposalListViewPaginatedQuery(
         $stepId: ID!
-        $cursor: String
         $orderBy: ProposalOrder
         $isAuthenticated: Boolean!
         $count: Int
