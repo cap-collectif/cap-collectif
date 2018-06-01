@@ -8,6 +8,8 @@ LABEL maintainer "Cap Collectif <tech@cap-collectif.com>"
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
 COPY --from=python /usr/local/bin/python /usr/bin/python
+COPY --from=python /usr/local/lib /usr/lib
+
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 COPY --from=node /usr/local/bin/node /usr/local/bin/node
 COPY --from=node /usr/local/include/node /usr/local/include/node
