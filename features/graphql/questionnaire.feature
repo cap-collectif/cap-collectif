@@ -79,19 +79,19 @@ Scenario: GraphQL client wants to retrieve replies
                 },
                 {
                   "question": {"id": "15"},
-                  "value": "{\"labels\":[],\"other\":null}"
+                  "value": @null@
                 },
                 {
                   "question": {"id": "16"},
-                  "value": "\"{\\\"labels\\\":[],\\\"other\\\":null}\""
+                  "value": "{\"labels\":[],\"other\":null}"
                 },
                 {
                   "question": {"id": "18"},
-                  "value": "\"{\\\"labels\\\":[],\\\"other\\\":null}\""
+                  "value": "{\"labels\":[],\"other\":null}"
                 },
                 {
                   "question": {"id": "19"},
-                  "value": "\"{\\\"labels\\\":[],\\\"other\\\":null}\""
+                  "value": "{\"labels\":[],\"other\":null}"
                 }
             ]
           }
