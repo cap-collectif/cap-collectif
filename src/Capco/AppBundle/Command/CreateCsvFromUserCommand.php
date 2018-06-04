@@ -115,6 +115,13 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
             ]
         )->toArray();
 
+        $datas['votes'] = $executor->disabledDebugInfo()->execute(
+            [
+                'query' => $this->getVotesGraphQLQuery($userId),
+                'variables' => [],
+            ]
+        )->toArray();
+
         return $datas;
     }
 
@@ -354,16 +361,11 @@ EOF;
         edges {
           node {
             ... on Opinion {
-              id
-              author {
-                id
-              }
+              title
+              bodyText
               section {
                 title
               }
-              title
-              body
-              bodyText
               createdAt
               updatedAt
               url
@@ -401,17 +403,12 @@ EOF;
         edges {
           node {
             ... on Version {
-              related {
-                id
-                kind
-              }
-              id
-              author {
-                id
-              }
               title
-              body
               bodyText
+              related {
+                kind
+                url
+              }
               comment
               createdAt
               updatedAt
@@ -449,16 +446,12 @@ EOF;
         edges {
           node {
             ... on Argument {
+              body
               related {
-                id
                 kind
-              }
-              id
-              author {
-                id
+                url
               }
               type
-              body
               createdAt
               updatedAt
               url
@@ -489,13 +482,10 @@ EOF;
           node {
             ... on Source {
               related {
-                id
                 kind
+                url
               }
-              id
-              author {
-                id
-              }
+              url
               body
               createdAt
               updatedAt
@@ -515,26 +505,25 @@ EOF;
 EOF;
     }
 
-    protected function getVoteGraphQLQuery(string $userId, string $type): string
+    protected function getVotesGraphQLQuery(string $userId): string
     {
         return <<<EOF
 {
   node(id: "${userId}") {
     ... on User {
-      contributions(contributionType: VOTE) {
-        ... on ${$type}Vote {
-          id
-          author {
-            id
-          }
-          value
-          createdAt
-          expired
+      votes {
+        kind
+        related {
+          kind
+          url
         }
+        expired
+        createdAt
       }
     }
   }
 }
+
 EOF;
     }
 
@@ -551,11 +540,7 @@ EOF;
               questionnaire {
                 title
               }
-              id
-              author {
-                id
-                email
-              }
+              url
               updatedAt
               expired
               anonymous
@@ -589,7 +574,6 @@ EOF;
   node(id: "${userId}") {
     ... on User {
       medias {
-        id
         name
         enabled
         authorName
@@ -630,10 +614,8 @@ EOF;
     ... on User {
       reports {
         related {
-          id
           kind
         }
-        id
         type
         body
         createdAt
@@ -659,10 +641,6 @@ EOF;
         }
         projects {
           title
-        }
-        author {
-          id
-          email
         }
         published
         commentEnabled
@@ -692,19 +670,15 @@ EOF;
         edges {
           node {
             ... on Proposal {
-              related {
-                id
-                kind
-              }
-              id
+              url
               title
+              bodyText              
+              formattedAddress
               createdAt
               updatedAt
               expired
               trashedAt
-              trashedReason
-              formattedAddress
-              bodyText              
+              trashedReason            
             }
           }
         }

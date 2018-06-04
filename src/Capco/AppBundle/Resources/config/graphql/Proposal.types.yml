@@ -4,7 +4,12 @@ Proposal:
         description: "A budget contribution"
         interfaces: [Node, Contribution]
         fields:
+            #to delete, url taking the lead!
             show_url:
+                type: "URI!"
+                description: "The HTTP show url for this contribution."
+                resolve: "@=resolver('proposal_show_url', [value])"
+            url:
                 type: "URI!"
                 description: "The HTTP show url for this contribution."
                 resolve: "@=resolver('proposal_show_url', [value])"

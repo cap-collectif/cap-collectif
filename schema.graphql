@@ -1,3 +1,20 @@
+type AbstractVote {
+  id: ID!
+
+  # Date of vote.
+  createdAt: DateTime
+
+  # If vote is expired, it exists but doesn't count.
+  expired: Boolean!
+
+  # Returns Type of vote
+  kind: String!
+
+  # The author of the contribution.
+  author: User!
+  related: Contribution!
+}
+
 input AddProposalVoteInput {
   # The Node ID of the proposal to vote.
   proposalId: ID!
@@ -72,7 +89,7 @@ type Argument implements Node & Contribution & TrashableContribution & Contribut
 
   # Identifies the date and time when the object was last updated.
   updatedAt: DateTime
-  url: String!
+  url: URI!
   expired: Boolean!
   published: Boolean!
   trashed: Boolean!
@@ -346,6 +363,7 @@ type Comment implements Node & Contribution {
   parent: Comment
   pinned: Boolean!
   show_url: String!
+  url: URI!
   answers: [Comment]!
   authorName: String
   authorEmail: String
@@ -497,6 +515,9 @@ interface Contribution {
 
   # Related contribution.
   related: Contribution
+
+  # Url of the contribution
+  url: URI!
 }
 
 # A connection to a list of items.
@@ -538,6 +559,13 @@ enum ContributionOrderField {
 # Different contribution type
 enum ContributionType {
   OPINION
+  OPINIONVERSION
+  VOTE
+  COMMENT
+  ARGUMENT
+  SOURCE
+  PROPOSAL
+  REPLY
 }
 
 # A contribution with an author
@@ -840,6 +868,9 @@ type Group implements Node {
   # Identifies the description of the group.
   description: String
   users(after: String, first: Int, before: String, last: Int): UserConnection!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  usersCount: Int!
 }
 
 scalar HTML
@@ -871,6 +902,11 @@ type Media {
   ): String!
   name: String!
   size: String!
+  enabled: Boolean!
+  authorName: String
+  description: String
+  copyright: String
+  contentType: String!
 }
 
 # A media question
@@ -1115,7 +1151,7 @@ type OpinionType implements Contribution & TrashableContribution & ContributionW
   updatedAt: DateTime
 
   # The url of contribution.
-  url: String!
+  url: URI!
 
   # The author of the contribution.
   author: User!
@@ -1190,7 +1226,7 @@ type OpinionType implements Contribution & TrashableContribution & ContributionW
   reportings: [Reporting]
 }
 
-type OpinionVote implements YesNoPairedVote & Contribution & ContributionWithAuthor {
+type OpinionVote implements YesNoPairedVote & ContributionWithAuthor {
   id: ID!
 
   # The author of the contribution. If null, account has been deleted.
@@ -1357,6 +1393,9 @@ type Proposal implements Node & Contribution {
   # The HTTP show url for this contribution.
   show_url: URI!
 
+  # The HTTP show url for this contribution.
+  url: URI!
+
   # The admin url for this contribution.
   adminUrl: URI!
   progressSteps: [ProgressStep!]!
@@ -1493,6 +1532,10 @@ type Proposal implements Node & Contribution {
   followerConfiguration: Follower
   postsCount: Int!
   viewerCanSeeEvaluation: Boolean!
+  kind: String!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
   viewerHasVote(
     # The concerned step.
     step: ID!
@@ -1722,7 +1765,7 @@ enum ProposalStepVoteType {
 
 union ProposalVotableStep = CollectStep | SelectionStep
 
-type ProposalVote implements Contribution & ContributionWithAuthor {
+type ProposalVote implements ContributionWithAuthor {
   id: ID!
 
   # The author of the contribution. If null, the vote is anonymous.
@@ -1943,27 +1986,28 @@ type RemoveProposalVotePayload {
   clientMutationId: String
 }
 
-# A reply contribution
-type Reply implements Node {
+# A Reply
+type Reply implements Node & Contribution {
+  id: ID!
+  author: User
   enabled: Boolean!
   private: Boolean!
-  responses: [Response]!
-
-  # The author of the contribution.
-  author: User!
+  createdAt: DateTime!
 
   # The updated date.
   updatedAt: DateTime
-
-  # The id of the contribution.
-  id: ID!
+  expired: Boolean!
+  anonymous: Boolean
 
   # Identifies the form where the contribution was submitted.
   questionnaire: Questionnaire!
+  responses: [Response]!
+  kind: String!
 
-  # Identifies the date and time when the object was created.
-  createdAt: DateTime!
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
   viewerCanDelete: Boolean!
+  url: URI!
 }
 
 # A report
@@ -1988,6 +2032,7 @@ type Reporting implements Contribution & ContributionWithAuthor {
 
   # Returns 'report'.
   kind: String!
+  url: URI!
 }
 
 # A connection to a list of items.
@@ -2310,6 +2355,7 @@ type Source implements Node & Contribution & TrashableContribution & Contributio
 
   # Returns 'source'.
   kind: String!
+  url: URI!
 }
 
 type Status {
@@ -2744,6 +2790,21 @@ type User implements Node {
   proposalVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}, stepId: ID): ProposalVoteConnection!
   deletedAccountAt: DateTime
 
+  # Get all medias the user has published.
+  medias: [Media!]!
+
+  # Get all groups where the user is.
+  votes: [AbstractVote!]
+
+  # Get all groups where the user is.
+  groups: [Group!]!
+
+  # Get all reports the user has done.
+  reports: [Reporting!]!
+
+  # Get all events the user has created.
+  events: [Event!]!
+
   # Return the user's contributions of the type requested.
   contributions(
     # Type of contribustion requested
@@ -2831,7 +2892,7 @@ type Version implements Contribution & TrashableContribution & ContributionWithA
   updatedAt: DateTime
 
   # The url of version.
-  url: String!
+  url: URI!
 
   # The author of the contribution.
   author: User!
@@ -2902,7 +2963,7 @@ type Version implements Contribution & TrashableContribution & ContributionWithA
   reportings: [Reporting]
 }
 
-type VersionVote implements YesNoPairedVote & Contribution & ContributionWithAuthor {
+type VersionVote implements YesNoPairedVote & ContributionWithAuthor {
   id: ID!
 
   # The author of the contribution.

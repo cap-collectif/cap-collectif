@@ -11,3 +11,6 @@ Contribution:
             related:
                 type: "Contribution"
                 description: "Related contribution."
+            url:
+                type: "URI!"
+                description: "Url of the contribution"

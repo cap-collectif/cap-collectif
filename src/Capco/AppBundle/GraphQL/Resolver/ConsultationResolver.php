@@ -57,9 +57,6 @@ class ConsultationResolver implements ContainerAwareInterface
         if ($data instanceof Reply) {
             return $typeResolver->resolve('Reply');
         }
-        if ($data instanceof Vote) {
-            return $typeResolver->resolve('Reply');
-        }
 
         throw new UserError('Could not resolve type of Contribution.');
     }

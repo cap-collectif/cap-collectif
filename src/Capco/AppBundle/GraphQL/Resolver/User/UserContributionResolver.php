@@ -32,9 +32,6 @@ class UserContributionResolver implements ContainerAwareInterface
             case 'OpinionVersions':
                 return $user->getOpinionVersions()->toArray();
                 break;
-            case 'Votes':
-                return $user->getVotes()->toArray();
-                break;
             case 'Comments':
                 return $user->getComments()->toArray();
                 break;

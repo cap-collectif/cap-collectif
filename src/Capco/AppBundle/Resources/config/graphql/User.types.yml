@@ -226,6 +226,10 @@ User:
                 type: "[Media!]!"
                 description: "Get all medias the user has published."
                 resolve: "@=resolver('user_getMedias', [value])"
+            votes:
+                type: "[AbstractVote!]"
+                description: "Get all groups where the user is."
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserVotesResolver", [value])'
             groups:
                 type: "[Group!]!"
                 description: "Get all groups where the user is."
