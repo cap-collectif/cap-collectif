@@ -11,17 +11,21 @@ import {
   FieldArray,
   formValueSelector,
 } from 'redux-form';
-import { createFragmentContainer, graphql } from 'react-relay';
+import { createFragmentContainer, fetchQuery, graphql } from 'react-relay';
 import { debounce } from 'lodash';
 import { Alert, Collapse, Panel, Glyphicon, Button } from 'react-bootstrap';
 import component from '../../Form/Field';
-import query, {
-  type ProposalFormAvailableDistrictsForLocalisationQueryResponse,
+import type {
+  ProposalFormSearchProposalsQueryResponse,
+  ProposalFormSearchProposalsQueryVariables,
+} from './__generated__/ProposalFormSearchProposalsQuery.graphql';
+import type {
+  ProposalFormAvailableDistrictsForLocalisationQueryResponse,
+  ProposalFormAvailableDistrictsForLocalisationQueryVariables,
 } from './__generated__/ProposalFormAvailableDistrictsForLocalisationQuery.graphql';
 import type { ProposalForm_proposal } from './__generated__/ProposalForm_proposal.graphql';
 import type { ProposalForm_proposalForm } from './__generated__/ProposalForm_proposalForm.graphql';
 import type { GlobalState, Dispatch, FeatureToggles } from '../../../types';
-import Fetcher from '../../../services/Fetcher';
 import CreateProposalMutation from '../../../mutations/CreateProposalMutation';
 import {
   closeCreateModal,
@@ -35,9 +39,9 @@ import {
   renderResponses,
   type ResponsesInReduxForm,
 } from '../../../utils/responsesHelper';
+import environment from '../../../createRelayEnvironment';
 import { validateProposalContent } from '../Admin/ProposalAdminContentForm';
 
-// eslint-disable-next-line
 const getAvailableDistrictsQuery = graphql`
   query ProposalFormAvailableDistrictsForLocalisationQuery(
     $proposalFormId: ID!
@@ -51,6 +55,24 @@ const getAvailableDistrictsQuery = graphql`
     ) {
       id
       name
+    }
+  }
+`;
+
+const searchProposalsQuery = graphql`
+  query ProposalFormSearchProposalsQuery($proposalFormId: ID!, $term: String!) {
+    form: node(id: $proposalFormId) {
+      ... on ProposalForm {
+        proposals(term: $term, first: 5) {
+          edges {
+            node {
+              id
+              title
+              show_url
+            }
+          }
+        }
+      }
     }
   }
 `;
@@ -197,7 +219,11 @@ const validate = (values: FormValues, { proposalForm, features }: Props) => {
 };
 
 type State = {
-  titleSuggestions: Array<Object>,
+  titleSuggestions: Array<{|
+    +id: string,
+    +title: string,
+    +show_url: any,
+  |}>,
   isLoadingTitleSuggestions: boolean,
   districtIdsFilteredByAddress: Array<string>,
 };
@@ -235,31 +261,41 @@ export class ProposalForm extends React.Component<Props, State> {
   }
 
   loadTitleSuggestions = debounce((title: string) => {
+    const currentProposal = this.props.proposal;
     this.setState({ isLoadingTitleSuggestions: true });
-    if (this.props.proposalForm.step && this.props.proposalForm.step.id) {
-      console.log(title); // eslint-disable-line no-console
-      // TODO User a GraphQL query instead :
-      //
-      // loadSuggestions(this.props.proposalForm.step.id, title).then(res => {
-      //   this.setState({
-      //     titleSuggestions: res.proposals,
-      //     isLoadingTitleSuggestions: false,
-      //   });
-      // });
-    }
+    fetchQuery(
+      environment,
+      searchProposalsQuery,
+      ({
+        proposalFormId: this.props.proposalForm.id,
+        term: title,
+      }: ProposalFormSearchProposalsQueryVariables),
+    ).then((data: ProposalFormSearchProposalsQueryResponse) => {
+      let titleSuggestions = [];
+      if (data.form && data.form.proposals && data.form.proposals.edges) {
+        titleSuggestions = data.form.proposals.edges
+          .filter(Boolean)
+          .map(edge => edge.node)
+          .filter(node => !currentProposal || currentProposal.id !== node.id);
+      }
+      this.setState({
+        titleSuggestions,
+        isLoadingTitleSuggestions: false,
+      });
+    });
   }, 500);
 
-  retrieveDistrictForLocation(location: LatLng) {
-    Fetcher.graphql({
-      operationName: 'ProposalFormAvailableDistrictsForLocalisationQuery',
-      query: query.text,
-      variables: {
+  retrieveDistrictForLocation = (location: LatLng) => {
+    fetchQuery(
+      environment,
+      getAvailableDistrictsQuery,
+      ({
         proposalFormId: this.props.proposalForm.id,
         latitude: location.lat,
         longitude: location.lng,
-      },
-    }).then((response: { data: ProposalFormAvailableDistrictsForLocalisationQueryResponse }) => {
-      const districtIdsFilteredByAddress = response.data.availableDistrictsForLocalisation.map(
+      }: ProposalFormAvailableDistrictsForLocalisationQueryVariables),
+    ).then((data: ProposalFormAvailableDistrictsForLocalisationQueryResponse) => {
+      const districtIdsFilteredByAddress = data.availableDistrictsForLocalisation.map(
         district => district.id,
       );
       // Select a district if not editing
@@ -276,7 +312,7 @@ export class ProposalForm extends React.Component<Props, State> {
         districtIdsFilteredByAddress,
       });
     });
-  }
+  };
 
   render() {
     const { intl, titleValue, proposalForm, features, themes, error } = this.props;
@@ -332,7 +368,7 @@ export class ProposalForm extends React.Component<Props, State> {
             <ul style={{ listStyleType: 'none', padding: 0 }}>
               {titleSuggestions.slice(0, 5).map(suggestion => (
                 <li>
-                  <a href={suggestion._links.show} className="external-link">
+                  <a href={suggestion.show_url} className="external-link">
                     {suggestion.title}
                   </a>
                 </li>

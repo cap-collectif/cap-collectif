@@ -2602,6 +2602,9 @@ type User implements Node {
   # Username of the user.
   username: String
 
+  # (unique) slug of the user.
+  slug: String
+
   # URL to user profile, null if the feature profiles is disabled.
   show_url: URI
 
