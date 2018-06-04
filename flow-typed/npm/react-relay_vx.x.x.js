@@ -307,6 +307,8 @@ declare module "react-relay" {
     proxy: any
   ): any;
 
+  declare export function fetchQuery(environment: any, query: any, variables: any): any;
+
   declare export function createFragmentContainer<
     TBase: React$ComponentType<*>
   >(

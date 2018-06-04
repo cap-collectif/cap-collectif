@@ -56,7 +56,7 @@ export class ProposalPageContent extends React.Component<Props> {
               <div className="actions">
                 <EditButton
                   id="proposal-edit-button"
-                  author={{ uniqueId: proposal.author.displayName }}
+                  author={{ uniqueId: proposal.author.slug }}
                   onClick={() => {
                     dispatch(openEditProposalModal());
                   }}
@@ -64,7 +64,7 @@ export class ProposalPageContent extends React.Component<Props> {
                 />
                 <DeleteButton
                   id="proposal-delete-button"
-                  author={{ uniqueId: proposal.author.displayName }}
+                  author={{ uniqueId: proposal.author.slug }}
                   onClick={() => {
                     dispatch(openDeleteProposalModal());
                   }}
@@ -192,7 +192,7 @@ export default createFragmentContainer(container, {
         @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
       author {
         id
-        displayName
+        slug
       }
       form {
         contribuable
