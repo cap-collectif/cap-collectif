@@ -21,9 +21,6 @@ User:
             username:
                 type: "String"
                 description: "Username of the user."
-            slug:
-                type: "String"
-                description: "(unique) slug of the user."
             show_url:
                 type: "URI"
                 description: "URL to user profile, null if the feature profiles is disabled."

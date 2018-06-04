@@ -22,6 +22,7 @@ const Comment = React.createClass({
 
   getInitialState() {
     const { comment } = this.props;
+
     if (comment.answers.length > 0) {
       return {
         answerFormShown: true,
@@ -81,7 +82,9 @@ const Comment = React.createClass({
           </div>
           <div className="comment-answers-block">
             {root ? <CommentAnswers onVote={onVote} comments={comment.answers} /> : null}
-            {this.state.answerFormShown ? <CommentForm object={object} uri={uri} isAnswer /> : null}
+            {this.state.answerFormShown ? (
+              <CommentForm object={object} uri={uri} answerOf={comment.id} />
+            ) : null}
           </div>
         </div>
       </li>

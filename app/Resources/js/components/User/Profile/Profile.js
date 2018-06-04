@@ -20,6 +20,7 @@ type Props = FormProps &
     initialValues: Object,
     hasValue: Object,
     userTypes: Array<Object>,
+    features: Object,
   };
 
 const formName = 'viewerProfileForm';
@@ -95,6 +96,7 @@ export class Profile extends Component<Props> {
       handleSubmit,
       submitting,
       userTypes,
+      features,
       error,
     } = this.props;
 
@@ -138,28 +140,30 @@ export class Profile extends Component<Props> {
               />
             </div>
           </div>
-          <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
-            <label className="col-sm-3 control-label" htmlFor="profile-form-userType">
-              <FormattedMessage id="registration.type" />{' '}
-            </label>
-            <div>
-              <Field
-                id="profile-form-userType"
-                name="userType"
-                component={component}
-                type="select"
-                divClassName="col-sm-6">
-                <FormattedMessage id="registration.select.type">
-                  {message => <option value="">{message}</option>}
-                </FormattedMessage>
-                {userTypes.map((type, i) => (
-                  <option key={i + 1} value={type.id}>
-                    {type.name}
-                  </option>
-                ))}
-              </Field>
+          {features.user_type && (
+            <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
+              <label className="col-sm-3 control-label" htmlFor="profile-form-userType">
+                <FormattedMessage id="registration.type" />{' '}
+              </label>
+              <div>
+                <Field
+                  id="profile-form-userType"
+                  name="userType"
+                  component={component}
+                  type="select"
+                  divClassName="col-sm-6">
+                  <FormattedMessage id="registration.select.type">
+                    {message => <option value="">{message}</option>}
+                  </FormattedMessage>
+                  {userTypes.map((type, i) => (
+                    <option key={i + 1} value={type.id}>
+                      {type.name}
+                    </option>
+                  ))}
+                </Field>
+              </div>
             </div>
-          </div>
+          )}
           <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
             <label className="col-sm-3 control-label" htmlFor="public-data-form-biography">
               <FormattedMessage id="form.label_biography" />
@@ -316,6 +320,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) =
     media: props.viewer ? props.viewer.media : undefined,
   },
   userTypes: state.default.userTypes,
+  features: state.default.features,
 });
 
 const container = connect(mapStateToProps)(injectIntl(form));

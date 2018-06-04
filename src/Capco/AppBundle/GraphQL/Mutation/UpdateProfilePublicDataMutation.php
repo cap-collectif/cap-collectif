@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\PublicDataType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,17 +16,24 @@ class UpdateProfilePublicDataMutation
     private $em;
     private $formFactory;
     private $logger;
+    private $toggleManager;
 
-    public function __construct(EntityManagerInterface $em, FormFactory $formFactory, LoggerInterface $logger)
+    public function __construct(EntityManagerInterface $em, FormFactory $formFactory, Manager $toggleManager, LoggerInterface $logger)
     {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->logger = $logger;
+        $this->toggleManager = $toggleManager;
     }
 
     public function __invoke(Argument $input, User $user): array
     {
         $arguments = $input->getRawArguments();
+
+        if (!$this->toggleManager->isActive('user_type')) {
+            // blocking bug, need to throw an exception and catch it into JS
+            unset($arguments['userType']);
+        }
 
         $form = $this->formFactory->create(PublicDataType::class, $user, ['csrf_protection' => false]);
         try {
