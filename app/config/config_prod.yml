@@ -12,7 +12,9 @@ doctrine:
         result_cache_driver: apcu
 
 sentry:
-    dsn: "***REMOVED***"
+    dsn: "%sentry_dsn%"
+    options:
+        environment: "%kernel.environment%"
 
 monolog:
     handlers:
