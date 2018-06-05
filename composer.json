@@ -126,7 +126,8 @@
         "webfactory/icu-translation-bundle": "^0.6.1",
         "ruflin/elastica": "~5",
         "tweedegolf/prometheus-client": "^0.2.3",
-        "tweedegolf/prometheus-bundle": "dev-master"
+        "tweedegolf/prometheus-bundle": "dev-master",
+        "sentry/sentry-symfony": "^1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
