@@ -1,20 +1,3 @@
-type AbstractVote {
-  id: ID!
-
-  # Date of vote.
-  createdAt: DateTime
-
-  # If vote is expired, it exists but doesn't count.
-  expired: Boolean!
-
-  # Returns Type of vote
-  kind: String!
-
-  # The author of the contribution.
-  author: User!
-  related: Contribution!
-}
-
 input AddProposalVoteInput {
   # The Node ID of the proposal to vote.
   proposalId: ID!
@@ -560,7 +543,6 @@ enum ContributionOrderField {
 enum ContributionType {
   OPINION
   OPINIONVERSION
-  VOTE
   COMMENT
   ARGUMENT
   SOURCE
@@ -780,15 +762,15 @@ type Event implements Node {
   projects: [Project!]!
   author: User!
   published: Boolean
-  commentEnabled: Boolean
+  commentable: Boolean
   updatedAt: DateTime!
   createdAt: DateTime!
   body: String
   registrationEnabled: Boolean
-  link: String
+  link: URI
   media: Media
   address: String
-  zipCode: Int
+  zipCode: String
   city: String
   country: String
 }
@@ -2794,7 +2776,7 @@ type User implements Node {
   medias: [Media!]!
 
   # Get all groups where the user is.
-  votes: [AbstractVote!]
+  votes: [Vote!]
 
   # Get all groups where the user is.
   groups: [Group!]!
@@ -2981,6 +2963,23 @@ type VersionVote implements YesNoPairedVote & ContributionWithAuthor {
 
   # Returns 'vote'.
   kind: String!
+}
+
+type Vote {
+  id: ID!
+
+  # Date of vote.
+  createdAt: DateTime
+
+  # If vote is expired, it exists but doesn't count.
+  expired: Boolean!
+
+  # Returns Type of vote
+  kind: String!
+
+  # The author of the contribution.
+  author: User!
+  related: Contribution
 }
 
 # A vote
