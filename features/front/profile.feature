@@ -9,7 +9,7 @@ Scenario: Logged in user wants to change his username
   Given feature "user_type" is enabled
   Given I am logged in as user
   And I visited "edit profile page"
-  And I wait 1 seconds
+  And I wait 2 seconds
   And I fill in the following:
     | profile-form-username | user3 |
   And I press "profile-form-save"
@@ -130,7 +130,7 @@ Scenario: Logged in user wants to soft delete his account
 Scenario: Logged as user, I want to delete my firstname, but I cancel it
   Given I am logged in as user
   And I visited "manage personal data page"
-  And I wait 2 seconds
+  And I wait 3 seconds
   And I should see "form.label_firstname"
   When I click the "#personal-data-firstname" element
   And I wait 1 seconds
@@ -179,7 +179,7 @@ Scenario: Logged as user, I want to update my firstname
 Scenario: Logged as user, I want to delete my address
   Given I am logged in as user
   And I visited "manage personal data page"
-  And I wait 2 seconds
+  And I wait 3 seconds
   And I should see "form.label_address"
   And I should see "form.label_address2"
   And I should see "form.label_city"
@@ -209,7 +209,7 @@ Scenario: Logged as user, I want to delete my address
 @javascript @database
 Scenario: Logged as user, I want to update my profile
   Given feature "user_type" is enabled
-  Given I am logged in as user
+  And I am logged in as user
   And I visited "edit profile page"
   And I wait 2 seconds
   And I select "Organisation à but non lucratif" from "profile-form-userType"
@@ -218,10 +218,10 @@ Scenario: Logged as user, I want to update my profile
   And I wait 1 seconds
   Then I should see "global.saved"
 
-@javascript @database
+@javascript @database @dev
 Scenario: Logged as user, I want to update my profile
   Given feature "user_type" is disabled
-  Given I am logged in as user
+  And I am logged in as user
   And I visited "edit profile page"
   And I wait 2 seconds
   And I should not see an "profile.form.userType" element

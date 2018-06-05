@@ -1,6 +1,6 @@
 // @flow
 import React, {Component} from 'react';
-import {FormattedMessage, injectIntl, intlShape} from 'react-intl';
+import {FormattedMessage, injectIntl} from 'react-intl';
 import {ButtonGroup, Button, Modal} from 'react-bootstrap';
 import {
   reduxForm,
@@ -67,7 +67,6 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
     });
 };
 
-
 export class UserAdminCreateButton extends Component<Props> {
   constructor(props) {
     super(props);
@@ -75,7 +74,6 @@ export class UserAdminCreateButton extends Component<Props> {
       showModal: false,
     };
   }
-
 
   render() {
     const {
@@ -94,10 +92,12 @@ export class UserAdminCreateButton extends Component<Props> {
     const userRoles = [
       {
         id: 'ROLE_SUPER_ADMIN',
+        value: 'ROLE_SUPER_ADMIN',
         label: intl.formatMessage({id: 'roles.super_admin'}),
       },
       {
         id: 'ROLE_ADMIN',
+        value: 'ROLE_ADMIN',
         label: intl.formatMessage({id: 'roles.admin'}),
       },
       {
@@ -162,6 +162,7 @@ export class UserAdminCreateButton extends Component<Props> {
                 label={
                   <FormattedMessage id="form.label_real_roles"/>
                 }
+                returnValue
                 choices={userRoles}
               >
               </Field>

@@ -17,7 +17,6 @@ class UserFormType extends AbstractType
         $this->toggleManager = $toggleManager;
     }
 
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
@@ -32,7 +31,6 @@ class UserFormType extends AbstractType
             ->add('locked')
             ->add('vip')
             ->add('enabled')
-            ->add('roles')
         ;
     }
 

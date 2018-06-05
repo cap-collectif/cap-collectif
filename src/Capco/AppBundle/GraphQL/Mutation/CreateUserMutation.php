@@ -31,26 +31,41 @@ class CreateUserMutation
             ->setUsername($arguments['username'])
             ->setEmail($arguments['email'])
             ->setPlainPassword(isset($arguments['plainPassword']) ? $arguments['plainPassword'] : '')
-            ->setRoles($arguments['roles'])
             ->setLocked(isset($arguments['locked']) ? $arguments['locked'] : false)
             ->setVip(isset($arguments['vip']) ? $arguments['vip'] : false)
             ->setEnabled(isset($arguments['enabled']) ? $arguments['enabled'] : false);
+        $roles = $arguments['roles'];
+        unset($arguments['roles']);
 
         $form = $this->formFactory->create(UserFormType::class, $user, ['csrf_protection' => false]);
         $form->submit($arguments, false);
         if (!$form->isValid()) {
-            $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
+            $this->logger->error(__METHOD__.' : '.(string)$form->getErrors(true, false));
 
             throw new UserError('Invalid data.');
         }
+        $this->addUserRoles($roles, $user);
 
         try {
-            $this->em->persist($user);
             $this->em->flush();
         } catch (\Exception $e) {
-            dump($e);die;
+            $this->logger->error($e);
+
+            throw new UserError('Saving error');
         }
 
         return ['user' => $user];
+    }
+
+    protected function addUserRoles(array $roles, User $user)
+    {
+        foreach ($roles as $role) {
+            if (is_array($role)) {
+                $this->addUserRoles($role, $user);
+                break;
+            }
+
+            $user->addRole($role);
+        }
     }
 }
