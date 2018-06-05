@@ -30,7 +30,7 @@
 0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:users --env=prod
 
 # Delete user archives every hour
-0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:userArchives:delete --env=prod
+0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:user_archives:delete --env=prod
 
 # Send activities email to follower, every day at 9 AM
 0 9 * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=512M /var/www/bin/console capco:follower-proposal-notifier --env=prod

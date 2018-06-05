@@ -158,8 +158,8 @@ class UserResolver implements ContainerAwareInterface
             $medias[] = $object->getMedia();
         }
 
-        $proposal = $this->container->get('capco.proposal.repository');
-        $proposals = $proposal->findBy(['author' => $object]);
+        $proposalRepository = $this->container->get('capco.proposal.repository');
+        $proposals = $proposalRepository->findBy(['author' => $object]);
 
         foreach ($proposals as $proposal) {
             if (null !== $proposal->getMedia()) {
@@ -172,10 +172,10 @@ class UserResolver implements ContainerAwareInterface
 
     public function getGroups(User $object): array
     {
-        $userGroup = $this->container->get('capco.user_group.repository');
+        $userGroupRepository = $this->container->get('capco.user_group.repository');
         $groups = [];
 
-        foreach ($userGroup->findBy(['user' => $object]) as $result) {
+        foreach ($userGroupRepository->findBy(['user' => $object]) as $result) {
             $groups[] = $result->getGroup();
         }
 

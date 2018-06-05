@@ -14,7 +14,7 @@ class UserVotesResolver
         $this->votesRepo = $votesRepo;
     }
 
-    public function __invoke(User $user)
+    public function __invoke(User $user): array
     {
         return $this->votesRepo->findBy(['user' => $user]);
     }

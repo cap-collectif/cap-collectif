@@ -24,7 +24,7 @@ Event:
                 type: "User!"
             published:
                 type: "Boolean"
-            commentEnabled:
+            commentable:
                 type: "Boolean"
             updatedAt:
                 type: "DateTime!"
@@ -35,13 +35,13 @@ Event:
             registrationEnabled:
                 type: "Boolean"
             link:
-                type: "String"
+                type: "URI"
             media:
                 type: "Media"
             address:
                 type: "String"
             zipCode:
-                type: "Int"
+                type: "String"
             city:
                 type: "String"
             country:

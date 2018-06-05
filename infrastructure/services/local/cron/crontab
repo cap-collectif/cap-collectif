@@ -6,4 +6,3 @@
 #0 * * * * /usr/bin/timeout 50m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:export:questionnaire
 #0 * * * * /usr/bin/timeout 50m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:export:collect
 #* * * * * /usr/bin/timeout 50m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:export:users
-#* * * * * /usr/bin/timeout 50m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:userArchives:delete;

@@ -643,7 +643,7 @@ EOF;
           title
         }
         published
-        commentEnabled
+        commentable
         createdAt
         updatedAt
         body

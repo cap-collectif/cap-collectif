@@ -14,7 +14,7 @@ class DeleteUserArchiveCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('capco:userArchives:delete')
+            ->setName('capco:user_archives:delete')
             ->setDescription('Delete the archive datas requested by a user');
     }
 
@@ -23,7 +23,7 @@ class DeleteUserArchiveCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
         $currDate = new \DateTime();
-        $dateToDelete = $currDate->modify('-7 day');
+        $dateToDelete = $currDate->modify('-7 days');
 
         $output->writeln('Retrieving archives ...');
         $archives = $this->getContainer()->get('capco.user_archive.repository')->getArchivesToDelete($dateToDelete);

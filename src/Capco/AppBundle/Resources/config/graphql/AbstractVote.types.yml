@@ -1,4 +1,4 @@
-AbstractVote:
+Vote:
     type: object
     config:
         fields:

@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
@@ -12,7 +13,7 @@ class UserContributionResolver implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
-    public function __invoke(User $object, Argument $args)
+    public function __invoke(User $object, Argument $args): Connection
     {
         $paginator = new Paginator(function (int $offset, int $limit) use ($object, $args) {
             return $this->getContributionsByType($args->offsetGet('type'), $object);
