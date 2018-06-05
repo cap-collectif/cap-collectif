@@ -1,9 +1,10 @@
 // @flow
 import React, { Component } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
-import { injectIntl, FormattedMessage } from 'react-intl';
+import { injectIntl } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import UserAdminAccount from "./UserAdminAccount";
+import UserAdminProfile from "./UserAdminProfile";
 
 type DefaultProps = void;
 type Props = { user: any, intl: Object };
@@ -24,9 +25,11 @@ export class UserAdminPageTabs extends Component<Props, State> {
           <Tab eventKey={1} title={intl.formatMessage({ id: 'user.profile.edit.account' })}>
             <UserAdminAccount user={user} />
           </Tab>
-          {/*<Tab eventKey={2} title={intl.formatMessage({ id: 'user.admin.profile' })}>*/}
-            {/*<UserAdminProfile user={user} />*/}
-          {/*</Tab>*/}
+          {user.isGranted && (
+          <Tab eventKey={2} title={intl.formatMessage({ id: 'user.admin.profile' })}>
+            <UserAdminProfile user={user} />
+          </Tab>
+          )}
           {/*<Tab eventKey={3} title={intl.formatMessage({ id: 'user.admin.personalData' })}>*/}
             {/*<UserAdminPersonalData user={user} />*/}
           {/*</Tab>*/}
@@ -55,7 +58,9 @@ export default createFragmentContainer(
   graphql`
     fragment UserAdminPageTabs_user on User {
       username
+      isGranted
       ...UserAdminAccount_user
+      ...UserAdminProfile_user
     }
   `,
 );

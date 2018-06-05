@@ -54,6 +54,9 @@ export class UserAdminPage extends React.Component<Props> {
               user: node(id: $id) {
                 ...UserAdminPageTabs_user
               }
+              viewer {
+                isGranted
+              }
             }
           `}
           variables={{

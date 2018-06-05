@@ -2,12 +2,12 @@
 import * as React from 'react';
 import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
-import { type FormProps, SubmissionError, reduxForm, Field, FieldArray } from 'redux-form';
+import { type FormProps, SubmissionError, reduxForm, Field } from 'redux-form';
 import { createFragmentContainer, graphql } from 'react-relay';
-import { ListGroup, ListGroupItem, Panel, ButtonToolbar, Button } from 'react-bootstrap';
+import { ButtonToolbar, Button } from 'react-bootstrap';
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
-import type { Uuid, GlobalState, Dispatch, FeatureToggles } from '../../../types';
+import type { GlobalState, Dispatch } from '../../../types';
 import UpdateUserAccountMutation from '../../../mutations/UpdateUserAccountMutation';
 import UserAdminAccount_user from './__generated__/UserAdminAccount_user.graphql';
 
@@ -16,12 +16,11 @@ type RelayProps = {
 };
 type Props = FormProps &
   RelayProps & {
-    +features: FeatureToggles,
     +intl: IntlShape,
     +isSuperAdmin: boolean,
   };
 
-const formName = 'user-admin-edit';
+const formName = 'user-admin-edit-account';
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, { user }: Props) => {
 
@@ -33,9 +32,6 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { user }: Props) => {
     ...values,
     userId: user.id,
   };
-
-  console.log(input);
-
 
   return UpdateUserAccountMutation.commit({ input })
     .then(response => {
@@ -71,7 +67,6 @@ export class UserAdminAccount extends React.Component<Props, State> {
       submitSucceeded,
       submitFailed,
       user,
-      features,
       submitting,
       isSuperAdmin,
       handleSubmit,
@@ -91,14 +86,18 @@ export class UserAdminAccount extends React.Component<Props, State> {
         label: intl.formatMessage({id: 'roles.user'}),
       }
     ];
+
+    const newsletterAt = user.isSubscribedToNewsLetterAt ? user.isSubscribedToNewsLetterAt.split(' ') : false;
+    const expiredAt = user.expiredAt ? user.expiredAt.split(' ') : false;
+
     return (
       <div className="box box-primary container-fluid">
+        <div className="box-header">
+          <h2 className="box-title">
+            <FormattedMessage id="user.profile.edit.account" />
+          </h2>
+        </div>
         <form onSubmit={handleSubmit}>
-          <div className="box-header">
-            <h2 className="box-title">
-              <FormattedMessage id="user.profile.edit.account" />
-            </h2>
-          </div>
           <div className="box-header">
             <h3 className="box-title">
               <FormattedMessage id="admin.fields.step.statuses" />
@@ -132,7 +131,14 @@ export class UserAdminAccount extends React.Component<Props, State> {
               type="checkbox"
               disabled
               id="locked"
-              children={<FormattedMessage id="form.label_expired" /> }
+              children={
+                <div>
+                  <FormattedMessage id="form.label_expired" />  {expiredAt ? <FormattedMessage id={"global.dates.full_day"} values={{
+                  date: expiredAt[0],
+                  time: expiredAt[1],
+                }}/> : ''}
+                </div>
+              }
             />
             <div className="box-header">
               <h3 className="box-title">
@@ -162,7 +168,14 @@ export class UserAdminAccount extends React.Component<Props, State> {
               isReduxForm
               type="checkbox"
               disabled
-              children={<FormattedMessage id="newsletter" />}
+              children={
+                <div>
+                  <FormattedMessage id="newsletter" />  {newsletterAt ? <FormattedMessage id={"global.dates.full_day"} values={{
+                date: newsletterAt[0],
+                time: newsletterAt[1],
+              }}/> : ''}
+                </div>
+              }
             />
             <ButtonToolbar className="box-content__toolbar">
               <Button
@@ -199,7 +212,6 @@ const mapStateToProps: MapStateToProps<*, *, *> = (
   { user }: RelayProps,
 ) => ({
   isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
-  features: state.default.features,
   initialValues: {
     vip: user.vip,
     enabled: user.enabled,
@@ -218,7 +230,6 @@ export default createFragmentContainer(
     fragment UserAdminAccount_user on User {
       id
       roles
-      email
       locked
       vip
       enabled
