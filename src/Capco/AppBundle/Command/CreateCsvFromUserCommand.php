@@ -158,7 +158,7 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
         }
     }
 
-    protected function createCsv(string $userId, array $data, string $type)
+    protected function createCsv(string $userId, array $data, string $type): void
     {
         $infoResolver = new InfoResolver();
         $writer = WriterFactory::create(Type::CSV);
@@ -209,7 +209,7 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
         }
     }
 
-    protected function resolveArray(array $contents, array $header, bool $isNode = false)
+    protected function resolveArray(array $contents, array $header, bool $isNode = false): array
     {
         $row = [];
         $i = 0;
