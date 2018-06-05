@@ -2,11 +2,7 @@ FROM capco_builder
 
 LABEL maintainer "Cap Collectif <tech@cap-collectif.com>"
 
-RUN apt-get update && \
-    apt-get -y install python-all python-pip \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN pip install pycodestyle
+RUN pip install --no-cache-dir pycodestyle
 
 # Install php-cs-fixer
 RUN wget --quiet https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.10.2/php-cs-fixer.phar -O /usr/local/bin/php-cs-fixer && \

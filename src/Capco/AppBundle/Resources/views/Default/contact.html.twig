@@ -58,14 +58,18 @@
     <div class="container  container--custom">
         <div class="row">
             <div class="col-xs-12 col-md-8">
-                <form method="post" novalidate="novalidate">
+                <form method="post" novalidate="novalidate" class="pb-20">
                     {{ form_errors(form) }}
                     {{ form_rest(form) }}
                     <button type="submit" class="btn btn-primary">{{ 'contact.submit'|trans({}, 'CapcoAppBundle') }}</button>
                 </form>
+                <p class="excerpt">
+                    {{ 'information-for-the-contact-form'|trans({}, 'CapcoAppBundle')|raw }}
+                </p>
             </div>
         </div>
     </div>
+    
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
