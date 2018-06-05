@@ -306,7 +306,7 @@ type CollectStep implements Node & Step & ProposalStep {
 
   # A list of contributor associated with the step.
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
-  viewerProposalDrafts: [Proposal!]!
+  viewerProposalDrafts: ProposalConnection!
 
   # A list of viewer votes associated with the step.
   viewerVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}): ProposalVoteConnection!

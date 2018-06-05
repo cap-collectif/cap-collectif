@@ -145,7 +145,6 @@ services:
       arguments:
           - "@doctrine.orm.default_entity_manager"
           - "@form.factory"
-          - "@capco.toggle.manager"
           - "@logger"
       tags:
           - { name: overblog_graphql.mutation }

@@ -1,3 +1,4 @@
+FROM python:2.7.15-jessie AS python
 FROM node:8-slim AS node
 FROM composer:latest AS composer
 FROM php:7.1-cli AS php
@@ -7,7 +8,6 @@ LABEL maintainer "Cap Collectif <tech@cap-collectif.com>"
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
-
 COPY --from=node /usr/local/bin/node /usr/local/bin/node
 COPY --from=node /usr/local/include/node /usr/local/include/node
 COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
@@ -15,9 +15,8 @@ COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
 RUN ln -s /usr/local/bin/node /usr/local/bin/nodejs && \
     ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
 
-RUN apt-get update \
-    && apt-get install --no-install-recommends -y python python-pip build-essential \
-    && apt-get clean
+# We need python
+RUN npm config --global set python /usr/bin/python
 
 ENV YARN_VERSION 1.5.1
 RUN curl -fSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz" \

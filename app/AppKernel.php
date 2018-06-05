@@ -5,7 +5,7 @@ use Symfony\Component\HttpKernel\Kernel;
 
 class AppKernel extends Kernel
 {
-    public function registerBundles(): array
+    public function registerBundles()
     {
         $bundles = [
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
@@ -124,22 +124,18 @@ class AppKernel extends Kernel
 
         if (in_array($this->getEnvironment(), ['dev', 'prod'], true)) {
                 // ICU translation
-            $bundles[] = new \Webfactory\IcuTranslationBundle\WebfactoryIcuTranslationBundle();
-        }
-
-        if ('prod' === $this->getEnvironment()) {
-            $bundles[] = new Sentry\SentryBundle\SentryBundle();
+            $bundles[] =new \Webfactory\IcuTranslationBundle\WebfactoryIcuTranslationBundle();
         }
 
         return $bundles;
     }
 
-    public function getCacheDir(): string
+    public function getCacheDir()
     {
         return dirname(__DIR__) . '/var/cache/' . $this->environment;
     }
 
-    public function getLogDir(): string
+    public function getLogDir()
     {
         return dirname(__DIR__) . '/var/logs';
     }

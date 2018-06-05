@@ -12,23 +12,27 @@ type Props = {
 
 export class DraftProposalList extends React.Component<Props> {
   render() {
+    const { step } = this.props;
     const classes = classNames({
       'list-group': true,
       'mb-40': true,
     });
 
-    if (
-      !this.props.step.viewerProposalDrafts ||
-      this.props.step.viewerProposalDrafts.length === 0
-    ) {
+    if (!step.viewerProposalDrafts || !step.viewerProposalDrafts.edges) {
+      return null;
+    }
+
+    const proposals = step.viewerProposalDrafts.edges.filter(Boolean);
+    if (proposals.length === 0) {
       return null;
     }
 
     return (
       <DraftBox>
         <ul className={classes}>
-          {this.props.step.viewerProposalDrafts.map((proposal, i) => (
-            <DraftProposalPreview key={`draft-proposal-${i}`} proposal={proposal} />
+          {proposals.map((edge, i) => (
+            // $FlowFixMe
+            <DraftProposalPreview key={`draft-proposal-${i}`} proposal={edge.node} />
           ))}
         </ul>
       </DraftBox>
@@ -42,8 +46,11 @@ export default createFragmentContainer(
     fragment DraftProposalList_step on CollectStep
       @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
       viewerProposalDrafts @include(if: $isAuthenticated) {
-        title
-        show_url
+        edges {
+          node {
+            ...DraftProposalPreview_proposal
+          }
+        }
       }
     }
   `,
