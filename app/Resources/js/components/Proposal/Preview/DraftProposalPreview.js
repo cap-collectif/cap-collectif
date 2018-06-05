@@ -1,11 +1,13 @@
 // @flow
 import * as React from 'react';
+import { createFragmentContainer, graphql } from 'react-relay';
+import type { DraftProposalPreview_proposal } from './__generated__/DraftProposalPreview_proposal.graphql';
 
 type Props = {
-  proposal: Object,
+  proposal: DraftProposalPreview_proposal,
 };
 
-export default class DraftProposalPreview extends React.Component<Props> {
+export class DraftProposalPreview extends React.Component<Props> {
   render() {
     const { proposal } = this.props;
 
@@ -16,3 +18,13 @@ export default class DraftProposalPreview extends React.Component<Props> {
     );
   }
 }
+
+export default createFragmentContainer(
+  DraftProposalPreview,
+  graphql`
+    fragment DraftProposalPreview_proposal on Proposal {
+      title
+      show_url
+    }
+  `,
+);

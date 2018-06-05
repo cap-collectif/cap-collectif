@@ -18,7 +18,10 @@ use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Capco\UserBundle\Entity\User;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -162,10 +165,9 @@ class ProposalResolver implements ContainerAwareInterface
         return $proposal->getProposalEvaluation();
     }
 
-    public function resolveDraftProposalsForUserInStep(CollectStep $step, User $user): array
+    public function resolveDraftProposalsForUserInStep(CollectStep $step, User $user, Argument $args): Connection
     {
         $proposalRep = $this->container->get('capco.proposal.repository');
-
         $proposalForm = $this->container->get('capco.proposal_form.repository')->findOneBy([
             'step' => $step->getId(),
         ]);
@@ -180,7 +182,11 @@ class ProposalResolver implements ContainerAwareInterface
             'proposalForm' => $proposalForm,
         ]);
 
-        return $proposals;
+        $connection = ConnectionBuilder::connectionFromArray($proposals, $args);
+        $connection->totalCount = \count($proposals);
+        $connection->{'fusionCount'} = 0;
+
+        return $connection;
     }
 
     public function resolvePostsCount(Proposal $proposal): int

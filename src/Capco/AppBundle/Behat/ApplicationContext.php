@@ -680,7 +680,6 @@ class ApplicationContext extends UserContext
     {
         $this->currentPage = $page;
         $this->navigationContext->getPage($page)->open($params);
-        $this->setCookieConsent();
         $this->iWait(2);
     }
 
