@@ -1,57 +1,63 @@
 /* eslint-disable */
-// not flow cause of global Cookies
+// @flow
 
-var cookieMonster = function() {
-  if (!!(typeof window !== 'undefined' && window.document && window.document.createElement)) {
-    var document = window.document;
-  } else {
-    return;
+const GA_COOKIE_NAMES = [
+  '__utma',
+  '__utmb',
+  '__utmc',
+  '__utmz',
+  '_ga',
+  '_gat',
+  '_gid',
+  '_pk_ref',
+  '_pk_cvar',
+  '_pk_id',
+  '_pk_ses',
+  '_pk_hsr',
+];
+const SCROLL_VALUE_TO_CONSENT = 400;
+
+class CookieMonster {
+  cookieBanner: any;
+  cookieConsent: any;
+
+  constructor() {
+    if (!!(typeof window !== 'undefined' && window.document && window.document.createElement)) {
+      const document = window.document;
+    } else {
+      return;
+    }
+    this.cookieBanner = document.getElementById('cookie-banner');
+    this.cookieConsent = document.getElementById('cookie-consent');
   }
-  const cookieBanner = document.getElementById('cookie-banner');
-  const cookieConsent = document.getElementById('cookie-consent');
-  const GA_COOKIE_NAMES = [
-    '__utma',
-    '__utmb',
-    '__utmc',
-    '__utmz',
-    '_ga',
-    '_gat',
-    '_gid',
-    '_pk_ref',
-    '_pk_cvar',
-    '_pk_id',
-    '_pk_ses',
-    '_pk_hsr',
-  ];
-  const scrollValueToConsent = 400;
 
-  var isDoNotTrackActive = function() {
-    const doNotTrack = navigator.doNotTrack || navigator.msDoNotTrack;
+  isDoNotTrackActive = () => {
+    const doNotTrack = navigator.doNotTrack;
     return doNotTrack === 'yes' || doNotTrack === '1';
   };
 
-  var processCookieConsent = function() {
+  processCookieConsent = () => {
     const consentCookie = Cookies.getJSON('hasFullConsent');
     const analyticConsent = Cookies.getJSON('analyticConsentValue');
     const adsConsent = Cookies.getJSON('adCookieConsentValue');
 
     if (consentCookie === true) {
-      executeAnalyticScript();
+      this.executeAnalyticScript();
       return;
     }
 
     if (consentCookie === false) {
       if (analyticConsent === true) {
-        executeAnalyticScript();
+        this.executeAnalyticScript();
         return;
       }
       // so do Not Track Is Activated
-      hideBanner();
+      this.hideBanner();
       return;
     }
 
     // we dont have a consent cookie so, we show the banner
-    if (isDoNotTrackActive()) {
+    if (this.isDoNotTrackActive()) {
       if (typeof analyticConsent === 'undefined') {
         Cookies.set('analyticConsentValue', false, { expires: 395 });
         Cookies.set('adCookieConsentValue', false, { expires: 395 });
@@ -61,80 +67,83 @@ var cookieMonster = function() {
       }
     }
 
-    cookieBanner.classList.add('active');
-    cookieConsent.addEventListener('click', removeCookieConsent, false);
-    document.addEventListener('click', onDocumentClick, false);
-    document.addEventListener('scroll', onDocumentScroll, false);
+    this.cookieBanner.classList.add('active');
+    this.cookieConsent.addEventListener('click', this.removeCookieConsent, false);
+    document.addEventListener('click', this.onDocumentClick, false);
+    document.addEventListener('scroll', this.onDocumentScroll, false);
   };
 
-  function onDocumentScroll(event) {
+  onDocumentScroll = (event: Event) => {
     if (window.location.pathname === '/confidentialite') {
       return;
     }
 
     if (
-      document.body.scrollTop > scrollValueToConsent ||
-      document.documentElement.scrollTop > scrollValueToConsent
+      (document.body && document.body.scrollTop > SCROLL_VALUE_TO_CONSENT) ||
+      (document.documentElement && document.documentElement.scrollTop > SCROLL_VALUE_TO_CONSENT)
     ) {
-      if (isDoNotTrackActive()) {
-        hideBanner();
+      if (this.isDoNotTrackActive()) {
+        this.hideBanner();
         Cookies.set('hasFullConsent', false, { expires: 395 });
 
         return;
       }
       if (!Cookies.getJSON('hasFullConsent')) {
-        considerFullConsent();
+        this.considerFullConsent();
       }
     }
-  }
+  };
 
-  function hideBanner() {
-    cookieBanner.className = cookieBanner.className.replace('active', '').trim();
-    document.removeEventListener('click', onDocumentClick, false);
-    document.removeEventListener('scroll', onDocumentClick, false);
-  }
+  hideBanner = () => {
+    this.cookieBanner.className = this.cookieBanner.className.replace('active', '').trim();
+    document.removeEventListener('click', this.onDocumentClick, false);
+    document.removeEventListener('scroll', this.onDocumentClick, false);
+  };
 
-  function onDocumentClick(event) {
+  onDocumentClick = (event: Event) => {
     const target = event.target;
     if (
+      // $FlowFixMe
       target.id === 'cookie-banner' ||
+      // $FlowFixMe
       target.parentNode.id === 'cookie-banner' ||
       target.parentNode.parentNode.id === 'cookie-banner' ||
       target.id === 'cookie-more-button'
     ) {
       return;
     }
-    if (isDoNotTrackActive()) {
+    if (this.isDoNotTrackActive()) {
       Cookies.set('hasFullConsent', false, { expires: 395 });
-      hideBanner();
+      this.hideBanner();
       return;
     }
 
     // user clicked on close cookie banner
+    // $FlowFixMe
     if (target.id === 'cookie-consent') {
-      considerFullConsent();
+      this.considerFullConsent();
       return;
     }
     if (window.location.pathname === '/confidentialite' && target.id !== 'main-navbar') {
       return;
     }
 
-    considerFullConsent();
-  }
+    this.considerFullConsent();
+  };
 
-  function considerFullConsent() {
+  considerFullConsent = () => {
     Cookies.set('hasFullConsent', true, { expires: 395 });
-    executeAnalyticScript();
-    hideBanner();
-  }
+    this.executeAnalyticScript();
+    this.hideBanner();
+  };
 
-  var toggleCookie = function(value, type) {
+  toggleCookie = (value: boolean, type: string) => {
     Cookies.set('hasFullConsent', false, { expires: 395 });
-    hideBanner();
+    this.hideBanner();
     Cookies.set(type, value, { expires: 395 });
     if (type === 'analyticConsentValue') {
       if (value) {
-        executeAnalyticScript();
+        this.executeAnalyticScript();
       } else {
         GA_COOKIE_NAMES.forEach(name => {
           if (typeof Cookies.get(name) !== 'undefined') {
@@ -150,32 +159,24 @@ var cookieMonster = function() {
     }
   };
 
-  var analyticCookieValue = function() {
+  analyticCookieValue = () => {
     return Cookies.getJSON('analyticConsentValue');
   };
 
-  var adCookieConsentValue = function() {
+  adCookieConsentValue = () => {
     return Cookies.getJSON('adCookieConsentValue');
   };
 
-  function removeCookieConsent(event) {
-    var cookieChoiceElement = document.getElementById(cookieConsent);
-    if (cookieChoiceElement != null) {
+  removeCookieConsent = (event: Event) => {
+    var cookieChoiceElement = document.getElementById(this.cookieConsent);
+    if (cookieChoiceElement != null && cookieChoiceElement.parentNode) {
       cookieChoiceElement.parentNode.removeChild(cookieChoiceElement);
     }
-  }
+  };
 
-  function executeAnalyticScript() {
+  executeAnalyticScript() {
     window.executeAnalyticScript();
   }
+}
 
-  return {
-    processCookieConsent,
-    toggleCookie,
-    analyticCookieValue,
-    adCookieConsentValue,
-    isDoNotTrackActive,
-  };
-};
-
-export default new cookieMonster();
+export default new CookieMonster();
