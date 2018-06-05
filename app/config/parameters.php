@@ -73,5 +73,3 @@ $container->setParameter('locales', ["en-GB", "fr-FR", "es-ES"]);
 $container->setParameter('google_maps_key_server', '***REMOVED***');
 
 $container->setParameter('jms_serializer.serialized_name_annotation_strategy.class', 'Capco\AppBundle\Utils\IdenticalUnlessSpecifiedPropertyNamingStrategy');
-
-setOverridableParameter($container, 'sentry_dsn', '', 'SYMFONY_SENTRY_DSN');

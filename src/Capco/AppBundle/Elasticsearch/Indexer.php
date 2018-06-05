@@ -111,11 +111,8 @@ class Indexer
     {
         $repository = $this->em->getRepository($entityFQN);
         $object = $repository->findOneBy(['id' => $identifier]);
-        if (!$object instanceof IndexableInterface) {
-            return;
-        }
 
-        if ($object->isIndexable()) {
+        if ($object instanceof IndexableInterface) {
             $document = $this->buildDocument($object);
             $this->addToBulk($document);
         } else {

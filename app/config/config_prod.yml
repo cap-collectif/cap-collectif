@@ -11,11 +11,6 @@ doctrine:
         query_cache_driver: apcu
         result_cache_driver: apcu
 
-sentry:
-    dsn: "%sentry_dsn%"
-    options:
-        environment: "%kernel.environment%"
-
 monolog:
     handlers:
         file:
@@ -36,7 +31,3 @@ monolog:
         console:
             type: console
             bubble: false
-        nested:
-            type:  stream
-            path:  "php://stderr"
-            level: warning

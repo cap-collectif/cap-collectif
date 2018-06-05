@@ -126,7 +126,7 @@ export class ProposalStepPage extends React.Component<Props> {
                 <div id="proposal__step-page-rendered">
                   {isAuthenticated &&
                     // $FlowFixMe
-                    props.step.kind === 'collect' && <DraftProposalList step={props.step} />}
+                    step.kind === 'collect' && <DraftProposalList step={props.step} />}
                   {/* $FlowFixMe */}
                   <ProposalStepPageHeader step={props.step} />
                   <ProposalListFilters
