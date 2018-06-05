@@ -43,4 +43,4 @@ monolog:
         sentry:
             level: warning
             type: raven
-            dsn: "%sentry.dsn%"
+            dsn: "%sentry_dsn%"
