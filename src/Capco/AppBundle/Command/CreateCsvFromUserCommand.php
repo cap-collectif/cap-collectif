@@ -176,14 +176,14 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
         $rows = [];
         if ($contributions = Arr::path($data, 'data.node.contributions.edges')) {
             $rows = $this->resolveArray($contributions, $header, true);
-        } elseif ($medias = Arr::path($data, 'data.node.medias')) {
-            $rows = $this->resolveArray($medias, $header);
-        } elseif ($groups = Arr::path($data, 'data.node.groups')) {
-            $rows = $this->resolveArray($groups, $header);
-        } elseif ($reports = Arr::path($data, 'data.node.reports')) {
-            $rows = $this->resolveArray($reports, $header);
-        } elseif ($events = Arr::path($data, 'data.node.events')) {
-            $rows = $this->resolveArray($events, $header);
+        } elseif ($medias = Arr::path($data, 'data.node.medias.edges')) {
+            $rows = $this->resolveArray($medias, $header, true);
+        } elseif ($groups = Arr::path($data, 'data.node.groups.edges')) {
+            $rows = $this->resolveArray($groups, $header, true);
+        } elseif ($reports = Arr::path($data, 'data.node.reports.edges')) {
+            $rows = $this->resolveArray($reports, $header, true);
+        } elseif ($events = Arr::path($data, 'data.node.events.edges')) {
+            $rows = $this->resolveArray($events, $header, true);
         } else {
             foreach ($header as $value) {
                 $value = Arr::path($data, "data.node.$value") ?? '';
@@ -262,13 +262,13 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
                 }
 
                 if ('medias' === $type) {
-                    $item = str_replace('medias.', '', $item);
+                    $item = str_replace('medias.edges.node.', '', $item);
                 } elseif ('groups' === $type) {
-                    $item = str_replace('groups.', '', $item);
+                    $item = str_replace('groups.edges.node.', '', $item);
                 } elseif ('reports' === $type) {
-                    $item = str_replace('reports.', '', $item);
+                    $item = str_replace('reports.edges.node.', '', $item);
                 } elseif ('events' === $type) {
-                    $item = str_replace('events.', '', $item);
+                    $item = str_replace('events.edges.node.', '', $item);
                 } else {
                     $item = str_replace('contributions.edges.node.', '', $item);
                 }
@@ -355,7 +355,7 @@ EOF;
     {
         return <<<EOF
 {
-  node(id: "$userId") {
+  node(id: "${userId}") {
     ... on User {
       contributions(type: OPINION) {
         edges {
@@ -512,13 +512,17 @@ EOF;
   node(id: "${userId}") {
     ... on User {
       votes {
-        kind
-        related {
-          kind
-          url
+        edges {
+          node {
+            kind
+            related {
+              kind
+              url
+            }
+            expired
+            createdAt
+          }
         }
-        expired
-        createdAt
       }
     }
   }
@@ -574,16 +578,21 @@ EOF;
   node(id: "${userId}") {
     ... on User {
       medias {
-        name
-        enabled
-        authorName
-        description
-        contentType
-        size 
+        edges {
+          node {
+            name
+            enabled
+            authorName
+            description
+            contentType
+            size
+          }
+        }
       }
     }
   }
 }
+
 EOF;
     }
 
@@ -594,15 +603,20 @@ EOF;
   node(id: "${userId}") {
     ... on User {
       groups {
-        title
-        description
-        usersCount
-        createdAt
-        updatedAt
+        edges {
+          node {
+            title
+            description
+            usersCount
+            createdAt
+            updatedAt
+          }
+        }
       }
     }
   }
 }
+
 EOF;
     }
 
@@ -610,19 +624,24 @@ EOF;
     {
         return <<<EOF
 {
-  node(id: "$userId") {
+  node(id: "${userId}") {
     ... on User {
       reports {
-        related {
-          kind
+        edges {
+          node {
+            related {
+              kind
+            }
+            type
+            body
+            createdAt
+          }
         }
-        type
-        body
-        createdAt
       }
     }
   }
 }
+
 EOF;
     }
 
@@ -630,33 +649,38 @@ EOF;
     {
         return <<<EOF
 {
-  node(id: "$userId") {
+  node(id: "${userId}") {
     ... on User {
-    	events {
-        title
-        startAt
-        endAt
-        themes {
-          title
+      events {
+        edges {
+          node {
+            title
+            startAt
+            endAt
+            themes {
+              title
+            }
+            projects {
+              title
+            }
+            published
+            commentable
+            createdAt
+            updatedAt
+            body
+            registrationEnabled
+            link
+            address
+            zipCode
+            city
+            country
+          }
         }
-        projects {
-          title
-        }
-        published
-        commentable
-        createdAt
-        updatedAt
-        body
-        registrationEnabled
-        link
-        address
-        zipCode
-        city
-        country
       }
     }
   }
 }
+
 EOF;
     }
 

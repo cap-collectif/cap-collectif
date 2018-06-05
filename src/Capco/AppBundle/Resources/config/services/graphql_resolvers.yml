@@ -152,10 +152,6 @@ services:
           - { name: overblog_graphql.resolver, alias: "user_gender", method: "resolveGender" }
           - { name: overblog_graphql.resolver, alias: "user_rolesText", method: "resolveRolesText" }
           - { name: overblog_graphql.resolver, alias: "user_contributionsToDeleteCount", method: "contributionsToDeleteCount" }
-          - { name: overblog_graphql.resolver, alias: "user_getMedias", method: "getMedias" }
-          - { name: overblog_graphql.resolver, alias: "user_getGroups", method: "getGroups" }
-          - { name: overblog_graphql.resolver, alias: "user_getReports", method: "getReports" }
-          - { name: overblog_graphql.resolver, alias: "user_getEvents", method: "getEvents" }
 
     Capco\AppBundle\GraphQL\Resolver\UsersFollowingProposalResolver:
         class: Capco\AppBundle\GraphQL\Resolver\UsersFollowingProposalResolver
@@ -404,6 +400,26 @@ services:
         tags:
           - { name: overblog_graphql.resolver }
         class: Capco\AppBundle\GraphQL\Resolver\User\UserContributionResolver
+
+    Capco\AppBundle\GraphQL\Resolver\User\UserEventsResolver:
+        tags:
+          - { name: overblog_graphql.resolver }
+        class: Capco\AppBundle\GraphQL\Resolver\User\UserEventsResolver
+
+    Capco\AppBundle\GraphQL\Resolver\User\UserMediasResolver:
+        tags:
+          - { name: overblog_graphql.resolver }
+        class: Capco\AppBundle\GraphQL\Resolver\User\UserMediasResolver
+
+    Capco\AppBundle\GraphQL\Resolver\User\UserGroupsResolver:
+        tags:
+          - { name: overblog_graphql.resolver }
+        class: Capco\AppBundle\GraphQL\Resolver\User\UserGroupsResolver
+
+    Capco\AppBundle\GraphQL\Resolver\User\UserReportsResolver:
+        tags:
+          - { name: overblog_graphql.resolver }
+        class: Capco\AppBundle\GraphQL\Resolver\User\UserReportsResolver
 
     Capco\AppBundle\GraphQL\Resolver\User\UserVotesResolver:
         tags:

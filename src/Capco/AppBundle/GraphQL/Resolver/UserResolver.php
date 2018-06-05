@@ -151,48 +151,10 @@ class UserResolver implements ContainerAwareInterface
         return $count;
     }
 
-    public function getMedias(User $object): array
-    {
-        $medias = [];
-        if (null !== $object->getMedia()) {
-            $medias[] = $object->getMedia();
-        }
-
-        $proposalRepository = $this->container->get('capco.proposal.repository');
-        $proposals = $proposalRepository->findBy(['author' => $object]);
-
-        foreach ($proposals as $proposal) {
-            if (null !== $proposal->getMedia()) {
-                $medias[] = $proposal->getMedia();
-            }
-        }
-
-        return $medias;
-    }
-
-    public function getGroups(User $object): array
-    {
-        $userGroupRepository = $this->container->get('capco.user_group.repository');
-        $groups = [];
-
-        foreach ($userGroupRepository->findBy(['user' => $object]) as $result) {
-            $groups[] = $result->getGroup();
-        }
-
-        return $groups;
-    }
-
     public function getReports(User $object): array
     {
         $repo = $this->container->get('capco.reporting.repository');
 
         return $repo->findBy(['Reporter' => $object]);
-    }
-
-    public function getEvents(User $object): array
-    {
-        $repo = $this->container->get('capco.event.repository');
-
-        return $repo->findBy(['Author' => $object]);
     }
 }

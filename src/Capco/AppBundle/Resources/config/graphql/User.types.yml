@@ -223,25 +223,28 @@ User:
             deletedAccountAt:
                 type: "DateTime"
             medias:
-                type: "[Media!]!"
+                type: "MediaConnection!"
                 description: "Get all medias the user has published."
-                resolve: "@=resolver('user_getMedias', [value])"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserMediasResolver", [value, args])'
             votes:
-                type: "[Vote!]"
-                description: "Get all groups where the user is."
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserVotesResolver", [value])'
+                type: "VoteConnection!"
+                argsBuilder: "Relay::Connection"
+                description: "Get all votes of the user."
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserVotesResolver", [value, args])'
             groups:
-                type: "[Group!]!"
+                type: "GroupConnection!"
+                argsBuilder: "Relay::Connection"
                 description: "Get all groups where the user is."
-                resolve: "@=resolver('user_getGroups', [value])"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserGroupsResolver", [value, args])'
             reports:
-                type: "[Reporting!]!"
+                type: "ReportConnection!"
                 description: "Get all reports the user has done."
-                resolve: "@=resolver('user_getReports', [value])"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserReportsResolver", [value, args])'
             events:
-                type: "[Event!]!"
+                type: "EventConnection!"
+                argsBuilder: "Relay::Connection"
                 description: "Get all events the user has created."
-                resolve: "@=resolver('user_getEvents', [value])"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserEventsResolver", [value, args])'
             contributions:
                 type: "ContributionConnection!"
                 args:
