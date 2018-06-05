@@ -19,6 +19,7 @@ type Props = {
   value: Object,
   errors?: any,
   other?: $FlowFixMe,
+  returnValue: bool
 };
 
 type State = {
@@ -41,8 +42,15 @@ class Checkbox extends React.Component<Props, State> {
     const otherValue = value.other;
 
     if (Array.isArray(newValue)) {
-      onChange({ labels: newValue, other: otherValue });
+      const objectToReturn = {other: otherValue};
 
+      if (returnValue) {
+        objectToReturn.value = newValue;
+      } else {
+        objectToReturn.labels = newValue;
+      }
+
+      onChange(objectToReturn);
       this.setState({
         currentValue: newValue,
       });
@@ -52,14 +60,20 @@ class Checkbox extends React.Component<Props, State> {
   };
 
   onOtherChange = (e: Event, changeValue: $FlowFixMe) => {
-    const { value } = this.props;
-    const values = value.labels ? value.labels : [];
+    const { value, returnValue } = this.props;
+    const {value, returnValue} = this.props;
+    let values = value.label ? value.label : [];
+    values = returnValue && value.value ? value.value : values;
+    const objectToReturn = {other: changeValue || null,};
 
-    this.onChange({
-      labels: values,
-      other: changeValue || null,
-    });
-  };
+    if (returnValue) {
+    } else {
+      objectToReturn.value = values;
+      objectToReturn.labels = values;
+    }
+    this.onChange(objectToReturn);
+
+  },
 
   empty = () => {
     // $FlowFixMe
@@ -81,9 +95,11 @@ class Checkbox extends React.Component<Props, State> {
       field,
       value,
       onBlur,
+      returnValue
     } = this.props;
 
-    const finalValue = value.labels ? value.labels : [];
+    let finalValue = value.labels ? value.labels : [];
+    finalValue = returnValue && value.value ? value.value : finalValue;
 
     const otherValue = value.other ? value.other : '';
     const fieldName = `choices-for-field-${field.id}`;
@@ -95,7 +111,6 @@ class Checkbox extends React.Component<Props, State> {
     if (labelClassName) {
       labelClasses[labelClassName] = true;
     }
-
     return (
       <div className={`form-group ${getGroupStyle(field.id)}`} id={id}>
         {label && (
@@ -105,21 +120,22 @@ class Checkbox extends React.Component<Props, State> {
         )}
         {field.helpText && <span className="help-block">{field.helpText}</span>}
         {field.description && (
-          <div style={{ paddingBottom: 15 }}>
-            <ButtonBody body={field.description || ''} />
+          <div style={{paddingBottom: 15}}>
+            <ButtonBody body={field.description || ''}/>
           </div>
         )}
         <CheckboxGroup id={fieldName} ref={'choices'} name={fieldName} className="input-choices">
           {field.choices.map(choice => {
             const choiceKey = `choice-${choice.id}`;
+            const valueToReturn = returnValue && choice.value ? choice.value : choice.label;
             return (
               <div key={choiceKey}>
                 <Input
                   id={`${id}_${choiceKey}`}
                   name={fieldName}
                   type="checkbox"
-                  value={choice.label}
-                  checked={finalValue.indexOf(choice.label) !== -1}
+                  value={valueToReturn}
+                  checked={finalValue.indexOf(valueToReturn) !== -1}
                   description={choice.description}
                   disabled={disabled}
                   onBlur={event => {
@@ -129,11 +145,10 @@ class Checkbox extends React.Component<Props, State> {
                     const newValue = [...finalValue];
 
                     if (event.target.checked) {
-                      newValue.push(choice.label);
+                      newValue.push(valueToReturn);
                     } else {
-                      newValue.splice(newValue.indexOf(choice.label), 1);
+                      newValue.splice(newValue.indexOf(valueToReturn), 1);
                     }
-
                     this.onChange(newValue);
                   }}
                   image={choice.image ? choice.image.url : null}>

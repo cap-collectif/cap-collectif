@@ -94,6 +94,91 @@ exports[`<Checkbox /> should render correctly 1`] = `
 </div>
 `;
 
+exports[`<Checkbox /> should render correctly and checkbox return value 1`] = `
+<div
+  className="form-group undefined"
+  id="reply-1"
+>
+  <label
+    className="control-label"
+    htmlFor="choices-for-field-11"
+  >
+    label
+  </label>
+  <span
+    className="help-block"
+  >
+    Plusieurs choix sont possibles
+  </span>
+  <CheckboxGroup
+    className="input-choices"
+    id="choices-for-field-11"
+    name="choices-for-field-11"
+  >
+    <div>
+      <InjectIntl(ReactBootstrapInput)
+        checked={false}
+        disabled={false}
+        id="reply-1_choice-20"
+        image={null}
+        name="choices-for-field-11"
+        onBlur={[Function]}
+        onChange={[Function]}
+        type="checkbox"
+        value="athletisme"
+      >
+        Athlétisme
+      </InjectIntl(ReactBootstrapInput)>
+    </div>
+    <div>
+      <InjectIntl(ReactBootstrapInput)
+        checked={false}
+        disabled={false}
+        id="reply-1_choice-21"
+        image={null}
+        name="choices-for-field-11"
+        onBlur={[Function]}
+        onChange={[Function]}
+        type="checkbox"
+        value="natation"
+      >
+        Natation
+      </InjectIntl(ReactBootstrapInput)>
+    </div>
+    <div>
+      <InjectIntl(ReactBootstrapInput)
+        checked={false}
+        disabled={false}
+        id="reply-1_choice-22"
+        image={null}
+        name="choices-for-field-11"
+        onBlur={[Function]}
+        onChange={[Function]}
+        type="checkbox"
+        value="sport-co"
+      >
+        Sports collectifs
+      </InjectIntl(ReactBootstrapInput)>
+    </div>
+    <div>
+      <InjectIntl(ReactBootstrapInput)
+        checked={false}
+        disabled={false}
+        id="reply-1_choice-23"
+        image={null}
+        name="choices-for-field-11"
+        onBlur={[Function]}
+        onChange={[Function]}
+        type="checkbox"
+        value="Sports individuels"
+      >
+        Sports individuels
+      </InjectIntl(ReactBootstrapInput)>
+    </div>
+  </CheckboxGroup>
+</div>
+`;
+
 exports[`<Checkbox /> should render with an other field 1`] = `
 <div
   className="form-group undefined"
@@ -192,14 +277,17 @@ exports[`<Checkbox /> should render with an other field 1`] = `
             Object {
               "id": 20,
               "label": "Athlétisme",
+              "value": "athletisme",
             },
             Object {
               "id": 21,
               "label": "Natation",
+              "value": "natation",
             },
             Object {
               "id": 22,
               "label": "Sports collectifs",
+              "value": "sport-co",
             },
             Object {
               "id": 23,

@@ -82,6 +82,7 @@ type Props = {
   radioChecked?: boolean,
   checkedValue?: ?string,
   maxLength?: ?string,
+  returnValue?: ?boolean,
 };
 
 class ReactBootstrapInput extends React.Component<Props> {
@@ -133,6 +134,7 @@ class ReactBootstrapInput extends React.Component<Props> {
     medias,
     intl,
     radioChecked,
+    returnValue,
     ...props
   }: Object) {
     if (typeof props.placeholder === 'string' || props.placeholder instanceof String) {
@@ -209,11 +211,11 @@ class ReactBootstrapInput extends React.Component<Props> {
         field.isOtherAllowed = props.isOtherAllowed;
         field.choices = props.choices;
         field.checked = props.checked;
-
         return (
           <MultipleChoiceCheckbox
             value={value}
             field={field}
+            returnValue={returnValue}
             label={null}
             renderFormErrors={() => {}}
             getGroupStyle={() => {}}
