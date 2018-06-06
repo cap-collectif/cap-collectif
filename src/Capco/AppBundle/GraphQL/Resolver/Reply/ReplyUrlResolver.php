@@ -14,12 +14,12 @@ class ReplyUrlResolver
         $this->urlResolver = $urlResolver;
     }
 
-    public function __invoke(Reply $reply): string
+    public function __invoke(Reply $reply): ?string
     {
         if ($reply->getQuestionnaire() && null !== $reply->getQuestionnaire()->getStep()) {
             return $this->urlResolver->getStepUrl($reply->getQuestionnaire()->getStep(), true);
         }
 
-        return false;
+        return null;
     }
 }

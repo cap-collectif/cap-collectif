@@ -223,7 +223,7 @@ User:
             deletedAccountAt:
                 type: "DateTime"
             medias:
-                type: "MediaConnection!"
+                type: "[Media]!"
                 description: "Get all medias the user has published."
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserMediasResolver", [value, args])'
             votes:

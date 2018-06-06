@@ -208,7 +208,7 @@ services:
             - { name: overblog_graphql.resolver, alias: "groups", method: "resolveAll" }
             - { name: overblog_graphql.resolver, alias: "group", method: "resolve" }
             - { name: overblog_graphql.resolver, alias: "group_users_connection", method: "resolveUsersConnection" }
-            - { name: overblog_graphql.resolver, alias: "group_usersCount", method: "usersCount" }
+            - { name: overblog_graphql.resolver, alias: "group_users_count", method: "usersCount" }
 
     Capco\AppBundle\GraphQL\Resolver\EvaluationFormResolver:
         class: Capco\AppBundle\GraphQL\Resolver\EvaluationFormResolver

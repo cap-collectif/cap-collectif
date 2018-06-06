@@ -176,8 +176,8 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
         $rows = [];
         if ($contributions = Arr::path($data, 'data.node.contributions.edges')) {
             $rows = $this->resolveArray($contributions, $header, true);
-        } elseif ($medias = Arr::path($data, 'data.node.medias.edges')) {
-            $rows = $this->resolveArray($medias, $header, true);
+        } elseif ($medias = Arr::path($data, 'data.node.medias')) {
+            $rows = $this->resolveArray($medias, $header);
         } elseif ($groups = Arr::path($data, 'data.node.groups.edges')) {
             $rows = $this->resolveArray($groups, $header, true);
         } elseif ($reports = Arr::path($data, 'data.node.reports.edges')) {
@@ -262,7 +262,7 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
                 }
 
                 if ('medias' === $type) {
-                    $item = str_replace('medias.edges.node.', '', $item);
+                    $item = str_replace('medias.', '', $item);
                 } elseif ('groups' === $type) {
                     $item = str_replace('groups.edges.node.', '', $item);
                 } elseif ('reports' === $type) {
@@ -578,16 +578,12 @@ EOF;
   node(id: "${userId}") {
     ... on User {
       medias {
-        edges {
-          node {
-            name
-            enabled
-            authorName
-            description
-            contentType
-            size
-          }
-        }
+        name
+        enabled
+        authorName
+        description
+        contentType
+        size 
       }
     }
   }

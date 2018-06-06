@@ -23,4 +23,4 @@ Group:
                 type: "DateTime!"
             usersCount:
                 type: "Int!"
-                resolve: "@=resolver('group_usersCount', [value])"
+                resolve: "@=resolver('group_users_count', [value])"

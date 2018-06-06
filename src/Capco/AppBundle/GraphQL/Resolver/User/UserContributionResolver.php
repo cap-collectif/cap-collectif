@@ -15,41 +15,60 @@ class UserContributionResolver implements ContainerAwareInterface
 
     public function __invoke(User $object, Argument $args): Connection
     {
-        $paginator = new Paginator(function (int $offset, int $limit) use ($object, $args) {
-            return $this->getContributionsByType($args->offsetGet('type'), $object);
+        $query = $this->getContributionsByType($args->offsetGet('type'), $object);
+        $paginator = new Paginator(function (int $offset, int $limit) use ($query) {
+            return $query['values'];
         });
 
-        $totalCount = 0;
-
-        return $paginator->auto($args, $totalCount);
+        return $paginator->auto($args, $query['totalCount']);
     }
 
-    public function getContributionsByType(string $requestedType = null, User $user)
+    public function getContributionsByType(string $requestedType = null, User $user): array
     {
+        $result = [];
+
         switch ($requestedType) {
             case 'Opinions':
-                return $user->getOpinions()->toArray();
+                $result['values'] = $this->container->get('capco.opinion.repository')->findAllByAuthor($user);
+                $result['totalCount'] = $this->container->get('capco.opinion.repository')->countAllByAuthor($user);
+
+                return $result;
                 break;
             case 'OpinionVersions':
-                return $user->getOpinionVersions()->toArray();
+                $result['values'] = $this->container->get('capco.opinion_version.repository')->findAllByAuthor($user);
+                $result['totalCount'] = $this->container->get('capco.opinion_version.repository')->countAllByAuthor($user);
+
+                return $result;
                 break;
             case 'Comments':
-                return $user->getComments()->toArray();
+                $result['values'] = $this->container->get('capco.comment.repository')->findAllByAuthor($user);
+                $result['totalCount'] = $this->container->get('capco.comment.repository')->countAllByAuthor($user);
+
+                return $result;
                 break;
             case 'Arguments':
-                return $user->getArguments()->toArray();
+                $result['values'] = $this->container->get('capco.argument.repository')->findAllByAuthor($user);
+                $result['totalCount'] = $this->container->get('capco.argument.repository')->countAllByAuthor($user);
+
+                return $result;
                 break;
             case 'Sources':
-                return $user->getSources()->toArray();
+                $result['values'] = $this->container->get('capco.source.repository')->findAllByAuthor($user);
+                $result['totalCount'] = $this->container->get('capco.source.repository')->countAllByAuthor($user);
+
+                return $result;
                 break;
             case 'Proposals':
-                return $user->getProposals()->toArray();
+                $result['values'] = $this->container->get('capco.proposal.repository')->findAllByAuthor($user);
+                $result['totalCount'] = $this->container->get('capco.proposal.repository')->countAllByAuthor($user);
+
+                return $result;
                 break;
             case 'Replies':
-                return $user->getReplies()->toArray();
-                break;
-            default:
-                return $user->getContributions();
+                $result['values'] = $this->container->get('capco.reply.repository')->findAllByAuthor($user);
+                $result['totalCount'] = $this->container->get('capco.reply.repository')->countAllByAuthor($user);
+
+                return $result;
                 break;
         }
     }

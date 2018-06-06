@@ -15,12 +15,11 @@ class UserReportsResolver implements ContainerAwareInterface
 
     public function __invoke(User $user, Argument $args): Connection
     {
-        $repo = $this->container->get('capco.reporting.repository');
-        $paginator = new Paginator(function (int $offset, int $limit) use ($repo, $user) {
-            return $repo->findBy(['Reporter' => $user]);
+        $paginator = new Paginator(function (int $offset, int $limit) use ($user) {
+            return $this->container->get('capco.reporting.repository')->findAllByUser($user);
         });
 
-        $totalCount = 0;
+        $totalCount = $this->container->get('capco.reporting.repository')->countAllByUser($user);
 
         return $paginator->auto($args, $totalCount);
     }

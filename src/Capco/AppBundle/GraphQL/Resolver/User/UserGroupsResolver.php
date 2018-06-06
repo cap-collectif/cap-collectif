@@ -15,18 +15,11 @@ class UserGroupsResolver implements ContainerAwareInterface
 
     public function __invoke(User $user, Argument $args): Connection
     {
-        $userGroupRepository = $this->container->get('capco.user_group.repository');
-        $groups = [];
-
-        foreach ($userGroupRepository->findBy(['user' => $user]) as $result) {
-            $groups[] = $result->getGroup();
-        }
-
-        $paginator = new Paginator(function (int $offset, int $limit) use ($groups) {
-            return $groups;
+        $paginator = new Paginator(function (int $offset, int $limit) use ($user) {
+            return  $this->container->get('capco.group.repository')->getGroupsByUser($user);
         });
 
-        $totalCount = 0;
+        $totalCount = $this->container->get('capco.user_group.repository')->countAllByUser($user);
 
         return $paginator->auto($args, $totalCount);
     }

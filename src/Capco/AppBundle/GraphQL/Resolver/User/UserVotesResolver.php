@@ -4,6 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\AppBundle\Repository\AbstractVoteRepository;
 use Capco\UserBundle\Entity\User;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class UserVotesResolver
 {
@@ -14,8 +17,14 @@ class UserVotesResolver
         $this->votesRepo = $votesRepo;
     }
 
-    public function __invoke(User $user): array
+    public function __invoke(User $user, Argument $args): Connection
     {
-        return $this->votesRepo->findBy(['user' => $user]);
+        $paginator = new Paginator(function (int $offset, int $limit) use ($user) {
+            return $this->votesRepo->findAllByAuthor($user);
+        });
+
+        $totalCount = $this->votesRepo->countAllByAuthor($user);
+
+        return $paginator->auto($args, $totalCount);
     }
 }
