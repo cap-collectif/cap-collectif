@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\UserAccountFormType;
 use Capco\UserBundle\Form\Type\UserFormType;
 use Capco\UserBundle\Repository\UserRepository;
@@ -29,17 +30,12 @@ class UpdateUserAccountMutation
     public function __invoke(Argument $input): array
     {
         $arguments = $input->getRawArguments();
+        /** @var User $user */
         $user = $this->userRepository->find($arguments['userId']);
 
         if(!$user) {
             throw new UserError('Invalid user.');
         }
-
-        $user
-            ->setRoles($arguments['roles'])
-            ->setLocked($arguments['locked'])
-            ->setVip($arguments['vip'])
-            ->setEnabled($arguments['enabled']);
 
         unset($arguments['userId']);
 
@@ -51,7 +47,6 @@ class UpdateUserAccountMutation
             throw new UserError('Invalid data.');
         }
 
-        $this->em->persist($user);
         $this->em->flush();
 
         return ['user' => $user];

@@ -12,7 +12,7 @@ const mutation = graphql`
   mutation UpdateUserAccountMutation($input: UpdateUserAccountInput!) {
     updateUserAccount(input: $input) {
       user {
-        id
+        ...UserAdminAccount_user  
       }
     }
   }

@@ -2,6 +2,8 @@
 
 namespace Capco\UserBundle\Form\Type;
 
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
@@ -20,13 +22,15 @@ class UserAccountFormType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
         $builder
             ->add('locked')
             ->add('vip')
             ->add('enabled')
-            ->add('roles')
-        ;
+            ->add(
+                'roles',
+                CollectionType::class,
+                ['entry_type' => TextType::class, 'allow_add' => true, 'allow_delete' => true, 'by_reference' => false]
+            );
     }
 
     /**

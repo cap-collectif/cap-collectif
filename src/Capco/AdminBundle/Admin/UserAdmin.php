@@ -18,20 +18,29 @@ class UserAdmin extends BaseAdmin
         '_sort_by' => 'updatedAt',
     ];
 
-    public function getFormBuilder()
+    /**
+     * empty to override parent
+     */
+    protected function configureFormFields(FormMapper $formMapper)
     {
-        $this->formOptions['data_class'] = $this->getClass();
 
-        $options = $this->formOptions;
-        $options['validation_groups'] = 'Default';
-        $options['translation_domain'] = 'CapcoAppBundle';
-
-        $formBuilder = $this->getFormContractor()->getFormBuilder($this->getUniqid(), $options);
-
-        $this->defineFormBuilder($formBuilder);
-
-        return $formBuilder;
     }
+
+
+//    public function getFormBuilder()
+//    {
+//        $this->formOptions['data_class'] = $this->getClass();
+//
+//        $options = $this->formOptions;
+//        $options['validation_groups'] = 'Default';
+//        $options['translation_domain'] = 'CapcoAppBundle';
+//
+//        $formBuilder = $this->getFormContractor()->getFormBuilder($this->getUniqid(), $options);
+//
+//        $this->defineFormBuilder($formBuilder);
+//
+//        return $formBuilder;
+//    }
 
     public function getTemplate($name)
     {
@@ -72,28 +81,51 @@ class UserAdmin extends BaseAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('username', null, [
-                'label' => 'registration.username',
-            ])
+            ->addIdentifier(
+                'username',
+                null,
+                [
+                    'label' => 'registration.username',
+                ]
+            )
             ->add('email')
-            ->add('enabled', null, [
-                'editable' => true,
-            ])
-            ->add('locked', null, [
-                'editable' => true,
-            ])
-            ->add('updatedAt', null, [
-                'label' => 'admin.fields.group.created_at',
-            ])
-            ->add('deletedAccountAt', null, [
-                'label' => 'admin.fields.proposal.deleted_at',
-                ])
-            ->add('_action', 'actions', [
-                'actions' => [
-                    'show' => [],
-                ],
-            ])
-        ;
+            ->add(
+                'enabled',
+                null,
+                [
+                    'editable' => true,
+                ]
+            )
+            ->add(
+                'locked',
+                null,
+                [
+                    'editable' => true,
+                ]
+            )
+            ->add(
+                'updatedAt',
+                null,
+                [
+                    'label' => 'admin.fields.group.created_at',
+                ]
+            )
+            ->add(
+                'deletedAccountAt',
+                null,
+                [
+                    'label' => 'admin.fields.proposal.deleted_at',
+                ]
+            )
+            ->add(
+                '_action',
+                'actions',
+                [
+                    'actions' => [
+                        'show' => [],
+                    ],
+                ]
+            );
     }
 
     /**
@@ -107,10 +139,13 @@ class UserAdmin extends BaseAdmin
             ->add('email')
             ->add('enabled')
             ->add('locked')
-            ->add('phone', null, [
-                'translation_domain' => 'CapcoAppBundle',
-            ])
-        ;
+            ->add(
+                'phone',
+                null,
+                [
+                    'translation_domain' => 'CapcoAppBundle',
+                ]
+            );
     }
 
     /**
