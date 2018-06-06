@@ -1,9 +1,10 @@
 // @flow
-export const baseUrl = `${typeof window !== 'undefined' ? window.location.protocol : 'http'}//${
-  typeof window !== 'undefined' ? window.location.host : 'capco.test/'
+export const baseUrl = `${typeof window !== 'undefined' ? window.location.protocol : 'https:'}//${
+  typeof window !== 'undefined' ? window.location.host : 'capco.test'
 }`;
 
 export default {
+  isTestEnvironment: baseUrl === 'https://capco.test',
   graphql: `${baseUrl}/graphql/`,
   api: `${baseUrl}/api`,
   mapsServerKey: '***REMOVED***',
