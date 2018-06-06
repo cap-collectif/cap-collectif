@@ -37,7 +37,7 @@ class UrlResolver
     {
         return $this->mediaExtension->getMediaUrl(
           $media,
-          isset($args['format']) ? $args['format'] : 'reference'
+            $args['format'] ?? 'reference'
         );
     }
 
@@ -73,15 +73,17 @@ class UrlResolver
         }
 
         if ($object instanceof Proposal) {
-            return $this->router->generate(
+            return $object->getStep()->getProject()
+                ? $this->router->generate(
                 'app_project_show_proposal',
-                [
-                    'projectSlug' => $object->getStep()->getProject()->getSlug(),
-                    'stepSlug' => $object->getStep()->getSlug(),
-                    'proposalSlug' => $object->getSlug(),
-                ],
-                $absolute
-            );
+                    [
+                            'projectSlug' => $object->getStep()->getProject()->getSlug(),
+                        'stepSlug' => $object->getStep()->getSlug(),
+                        'proposalSlug' => $object->getSlug(),
+                    ],
+                    $absolute
+                )
+                : $this->router->generate('app_homepage');
         }
 
         return false;

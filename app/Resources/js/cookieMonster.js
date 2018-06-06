@@ -1,6 +1,5 @@
 /* eslint-disable */
 // @flow
-import config from './config';
 
 const GA_COOKIE_NAMES = [
   '__utma',
@@ -38,10 +37,6 @@ class CookieMonster {
   };
 
   processCookieConsent = () => {
-    if (config.isTestEnvironment) {
-      console.log('Skipping cookie consent');
-      return;
-    }
     const consentCookie = Cookies.getJSON('hasFullConsent');
     const analyticConsent = Cookies.getJSON('analyticConsentValue');
     const adsConsent = Cookies.getJSON('adCookieConsentValue');

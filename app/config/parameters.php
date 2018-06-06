@@ -48,7 +48,7 @@ setOverridableParameter($container, 'remember_secret', '***REMOVED***', 'SYMFONY
 
 // Used to fix URLs when indexing in ES
 setOverridableParameter($container, 'router.request_context.host', 'capco.dev', 'SYMFONY_ROUTER__REQUEST_CONTEXT__HOST');
-setOverridableParameter($container, 'router.request_context.scheme', 'https', 'SYMFONY_ROUTER__REQUEST_CONTEXT__SCHEME');
+setOverridableParameter($container, 'router.request_context.scheme', 'http', 'SYMFONY_ROUTER__REQUEST_CONTEXT__SCHEME');
 
 // set at every deployment
 setOverridableParameter($container, 'assets_version', 'v1', 'SYMFONY_ASSETS_VERSION');
