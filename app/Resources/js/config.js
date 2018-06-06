@@ -4,7 +4,6 @@ export const baseUrl = `${typeof window !== 'undefined' ? window.location.protoc
 }`;
 
 export default {
-  isTestEnvironment: baseUrl === 'https://capco.test',
   graphql: `${baseUrl}/graphql/`,
   api: `${baseUrl}/api`,
   mapsServerKey: '***REMOVED***',
