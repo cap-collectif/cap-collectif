@@ -21,7 +21,6 @@ class DeleteUserArchiveCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
-
         $currDate = new \DateTime();
         $dateToDelete = $currDate->modify('-7 days');
 
@@ -31,8 +30,10 @@ class DeleteUserArchiveCommand extends ContainerAwareCommand
         $output->writeln(\count($archives) . ' archives to delete.');
         $progress = new ProgressBar($output, \count($archives));
 
+        $deleteDate = new \DateTime();
+
         foreach ($archives as $archive) {
-            $archive->setDeletedAt(new \DateTime());
+            $archive->setDeletedAt($deleteDate);
             $archive->setReady(false);
 
             $this->removeArchiveFile($archive);
@@ -46,7 +47,8 @@ class DeleteUserArchiveCommand extends ContainerAwareCommand
 
     protected function removeArchiveFile(UserArchive $archive)
     {
-        $job = new Process('rm web/export/' . $archive->getPath());
+        $zipFile = $this->getContainer()->getParameter('kernel.root_dir') . '/../web/export/' . $archive->getPath();
+        $job = new Process('rm ' . $zipFile);
         $job->mustRun();
     }
 }
