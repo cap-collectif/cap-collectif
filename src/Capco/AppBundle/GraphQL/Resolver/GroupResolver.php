@@ -30,11 +30,4 @@ class GroupResolver implements ContainerAwareInterface
 
         return $paginator->auto($args, $totalCount);
     }
-
-    public function usersCount(Group $group): int
-    {
-        $userRepo = $this->container->get('capco.user.repository');
-
-        return $userRepo->countUsersInGroup($group);
-    }
 }

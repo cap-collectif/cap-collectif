@@ -30,4 +30,4 @@ Reporting:
                 description: "Returns 'report'."
             url:
                 type: "URI!"
-                resolve: "http://test.com"
+                resolve: ""

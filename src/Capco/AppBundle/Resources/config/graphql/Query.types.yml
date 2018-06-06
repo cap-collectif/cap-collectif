@@ -30,8 +30,6 @@ Query:
                 type: "[ProposalForm!]!"
                 access: "@=hasRole('ROLE_USER')"
                 resolve: "@=resolver('proposalForms')"
-            proposal:
-                type: "[Proposal!]!"
             availableDistrictsForLocalisation:
                 type: "[District!]!"
                 description: "Retrieve availables districts for a given address"

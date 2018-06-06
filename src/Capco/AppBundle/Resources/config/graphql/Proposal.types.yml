@@ -4,7 +4,7 @@ Proposal:
         description: "A budget contribution"
         interfaces: [Node, Contribution]
         fields:
-            #to delete, url taking the lead!
+            #deprecationReason: "user url instead of show_url (depreciated)" 
             show_url:
                 type: "URI!"
                 description: "The HTTP show url for this contribution."

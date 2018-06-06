@@ -7,7 +7,7 @@ Reply:
             id:
                 type: "ID!"
             author:
-                type: "User"
+                type: "User!"
             enabled:
                 type: "Boolean!"
             private:
@@ -19,8 +19,6 @@ Reply:
                 description: "The updated date."
             expired:
                 type: "Boolean!"
-            anonymous:
-                type: "Boolean"
             questionnaire:
                 type: "Questionnaire!"
                 description: "Identifies the form where the contribution was submitted."

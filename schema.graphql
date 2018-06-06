@@ -872,7 +872,6 @@ type Group implements Node {
   users(after: String, first: Int, before: String, last: Int): UserConnection!
   createdAt: DateTime!
   updatedAt: DateTime!
-  usersCount: Int!
 }
 
 # A connection to a list of items.
@@ -1891,7 +1890,6 @@ type Query {
   ): [Consultation!]!
   groups: [Group!]!
   proposalForms: [ProposalForm!]!
-  proposal: [Proposal!]!
 
   # Retrieve availables districts for a given address
   availableDistrictsForLocalisation(proposalFormId: ID!, latitude: Float!, longitude: Float!): [District!]!
@@ -2031,7 +2029,7 @@ type RemoveProposalVotePayload {
 # A Reply
 type Reply implements Node & Contribution {
   id: ID!
-  author: User
+  author: User!
   enabled: Boolean!
   private: Boolean!
   createdAt: DateTime!
@@ -2039,7 +2037,6 @@ type Reply implements Node & Contribution {
   # The updated date.
   updatedAt: DateTime
   expired: Boolean!
-  anonymous: Boolean
 
   # Identifies the form where the contribution was submitted.
   questionnaire: Questionnaire!
@@ -2853,7 +2850,7 @@ type User implements Node {
   deletedAccountAt: DateTime
 
   # Get all medias the user has published.
-  medias: MediaConnection!
+  medias: [Media]!
 
   # Get all votes of the user.
   votes(after: String, first: Int, before: String, last: Int): VoteConnection!
@@ -3049,7 +3046,7 @@ type Vote {
   id: ID!
 
   # Date of vote.
-  createdAt: DateTime
+  createdAt: DateTime!
 
   # If vote is expired, it exists but doesn't count.
   expired: Boolean!

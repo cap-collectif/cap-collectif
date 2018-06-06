@@ -208,7 +208,6 @@ services:
             - { name: overblog_graphql.resolver, alias: "groups", method: "resolveAll" }
             - { name: overblog_graphql.resolver, alias: "group", method: "resolve" }
             - { name: overblog_graphql.resolver, alias: "group_users_connection", method: "resolveUsersConnection" }
-            - { name: overblog_graphql.resolver, alias: "group_users_count", method: "usersCount" }
 
     Capco\AppBundle\GraphQL\Resolver\EvaluationFormResolver:
         class: Capco\AppBundle\GraphQL\Resolver\EvaluationFormResolver
@@ -405,21 +404,30 @@ services:
         tags:
           - { name: overblog_graphql.resolver }
         class: Capco\AppBundle\GraphQL\Resolver\User\UserEventsResolver
+        arguments:
+            - "@capco.event.repository"
 
     Capco\AppBundle\GraphQL\Resolver\User\UserMediasResolver:
         tags:
           - { name: overblog_graphql.resolver }
         class: Capco\AppBundle\GraphQL\Resolver\User\UserMediasResolver
+        arguments:
+            - "@capco.proposal.repository"
 
     Capco\AppBundle\GraphQL\Resolver\User\UserGroupsResolver:
         tags:
           - { name: overblog_graphql.resolver }
         class: Capco\AppBundle\GraphQL\Resolver\User\UserGroupsResolver
+        arguments:
+            - "@capco.user_group.repository"
+            - "@capco.group.repository"
 
     Capco\AppBundle\GraphQL\Resolver\User\UserReportsResolver:
         tags:
           - { name: overblog_graphql.resolver }
         class: Capco\AppBundle\GraphQL\Resolver\User\UserReportsResolver
+        arguments:
+            - "@capco.reporting.repository"
 
     Capco\AppBundle\GraphQL\Resolver\User\UserVotesResolver:
         tags:

@@ -236,7 +236,6 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
         return $row;
     }
 
-    // Gange
     protected function handleQuestionsResponses(array $responses, int $i, int $key, array $row): array
     {
         foreach ($responses['node']['responses'] as $response) {
@@ -547,7 +546,6 @@ EOF;
               url
               updatedAt
               expired
-              anonymous
               responses {
                 question {
                   title
@@ -603,7 +601,9 @@ EOF;
           node {
             title
             description
-            usersCount
+            users {
+              totalCount
+            }
             createdAt
             updatedAt
           }

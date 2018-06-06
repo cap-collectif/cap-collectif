@@ -2,14 +2,18 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
+use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
-class UserMediasResolver implements ContainerAwareInterface
+class UserMediasResolver
 {
-    use ContainerAwareTrait;
+    protected $proposalRepo;
+
+    public function __construct(ProposalRepository $proposalRepo)
+    {
+        $this->proposalRepo = $proposalRepo;
+    }
 
     public function __invoke(User $user, Argument $args): array
     {
@@ -18,8 +22,7 @@ class UserMediasResolver implements ContainerAwareInterface
             $medias[] = $user->getMedia();
         }
 
-        $proposalRepository = $this->container->get('capco.proposal.repository');
-        $proposals = $proposalRepository->findBy(['author' => $user]);
+        $proposals = $this->proposalRepo->findBy(['author' => $user]);
 
         foreach ($proposals as $proposal) {
             if (null !== $proposal->getMedia()) {

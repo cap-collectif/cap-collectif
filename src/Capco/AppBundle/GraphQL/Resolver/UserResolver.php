@@ -150,11 +150,4 @@ class UserResolver implements ContainerAwareInterface
 
         return $count;
     }
-
-    public function getReports(User $object): array
-    {
-        $repo = $this->container->get('capco.reporting.repository');
-
-        return $repo->findBy(['Reporter' => $object]);
-    }
 }

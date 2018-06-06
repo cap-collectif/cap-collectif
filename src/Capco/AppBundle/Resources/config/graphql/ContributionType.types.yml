@@ -4,16 +4,16 @@ ContributionType:
         description: "Different contribution type"
         values:
             OPINION:
-                value: "Opinions"
+                value: "OPINION"
             OPINIONVERSION:
-                value: "OpinionVersions"
+                value: "OPINIONVERSION"
             COMMENT:
-                value: "Comments"
+                value: "COMMENT"
             ARGUMENT:
-                value: "Arguments"
+                value: "ARGUMENT"
             SOURCE:
-                value: "Sources"
+                value: "SOURCE"
             PROPOSAL:
-                value: "Proposals"
+                value: "PROPOSAL"
             REPLY:
-                value: "Replies"
+                value: "REPLY"

@@ -5,7 +5,7 @@ Vote:
             id:
               type: "ID!"
             createdAt:
-              type: "DateTime"
+              type: "DateTime!"
               description: "Date of vote."
             expired:
               type: "Boolean!"

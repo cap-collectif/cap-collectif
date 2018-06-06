@@ -34,7 +34,6 @@ class DeleteUserArchiveCommand extends ContainerAwareCommand
 
         foreach ($archives as $archive) {
             $archive->setDeletedAt($deleteDate);
-            $archive->setReady(false);
 
             $this->removeArchiveFile($archive);
             $progress->advance();
