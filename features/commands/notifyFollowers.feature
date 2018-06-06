@@ -27,4 +27,4 @@ Scenario: "Cron want to notify followers and open an email"
   And I should see "you-receive-this-email-because" in mail
   And I should see "you-follow-these-proposals" in mail
   And I should see 'set-up-my-subscriptions' in mail
-  And I should see 'notification.email.external_footer {"{to}":"lbrunet@jolicode.com","{sitename}":"Cap-Collectif","{business}":"Cap Collectif","{siteUrl}":"https:\/\/capco.dev\/","{businessUrl}":"https:\/\/cap-collectif.com\/"}' in mail
+  And I should see 'notification.email.external_footer {"{to}":"lbrunet@jolicode.com","{sitename}":"Cap-Collectif","{business}":"Cap Collectif","{siteUrl}":"http:\/\/capco.dev\/","{businessUrl}":"https:\/\/cap-collectif.com\/"}' in mail

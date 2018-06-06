@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Command;
 
-use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -11,10 +10,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 class RecalculateUsersCountersCommand extends ContainerAwareCommand
 {
     public $force;
-
-    /**
-     * @var EntityManager
-     */
     public $em;
     public $redis;
     public $ids;
@@ -31,24 +26,26 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
         ;
     }
 
-    protected function compute($dql, $native = false)
+    protected function compute(string $dql, bool $native = false): void
     {
         if ($this->force) {
-            if ($native) {
-                $this->em->getConnection()->executeUpdate($dql);
-            } else {
-                $this->em->createQuery($dql)->execute();
-            }
+            $native ? $this->em->getConnection()->executeUpdate($dql) : $this->em->createQuery($dql)->execute();
         } else {
-            $this->executeOnlyChangesFromLastRun($dql);
+            $this->executeOnlyChangesFromLastRun($dql, $native);
         }
     }
 
-    protected function executeOnlyChangesFromLastRun($dql)
+    protected function executeOnlyChangesFromLastRun(string $dql, bool $native = false): void
     {
-        if ($this->ids && count($this->ids) > 0) {
+        if ($this->ids && \count($this->ids) > 0) {
             $dql .= ' where u.id in (:ids)';
-            $query = $this->em->createQuery($dql)->setParameter('ids', $this->ids);
+
+            if ($native) {
+                $ids = implode(',', $this->ids);
+                $query = $this->em->getConnection()->prepare($dql)->bindParam(':ids', $ids);
+            } else {
+                $query = $this->em->createQuery($dql)->setParameter('ids', $this->ids);
+            }
             $query->execute();
         }
     }
