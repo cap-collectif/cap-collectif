@@ -99,7 +99,7 @@ class ApplicationContext extends UserContext
         $this->snapshot->createSnapshot(REPOSITORY_NAME, SNAPSHOT_NAME, [
           'indices' => $this->indexManager->getLiveSearchIndexName(),
         ], true);
-        $this->cookieConsented = false;
+        $this->cookieConsented = !$scenario->hasTag('javascript');
     }
 
     /**
