@@ -59,19 +59,17 @@ services:
     class: Capco\UserBundle\Security\DrupalEncoder
 
   capco_user.change_password.form.type:
-      class: Capco\UserBundle\Form\Type\ChangePasswordFormType
-      tags:
-          - { name: form.type }
+    class: Capco\UserBundle\Form\Type\ChangePasswordFormType
+    tags:
+        - { name: form.type }
 
   capco_user.create.form.type:
     class: Capco\UserBundle\Form\Type\UserFormType
-    arguments: ["@capco.toggle.manager"]
     tags:
       - { name: form.type }
 
   capco_user.account_update.form.type:
     class: Capco\UserBundle\Form\Type\UserAccountFormType
-    arguments: ["@capco.toggle.manager"]
     tags:
       - { name: form.type }
 

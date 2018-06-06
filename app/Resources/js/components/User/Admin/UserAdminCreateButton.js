@@ -36,16 +36,20 @@ const validate = (values: Object) => {
   if (values.plainPassword && values.plainPassword.length > 72) {
     errors.plainPassword = 'registration.constraints.password.max';
   }
+  if (!values.roles || values.roles.length === 0) {
+    errors.roles = 'please-select-at-least-1-option';
+  }
 
   return errors;
 };
 
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const {intl} = props;
-
+  const roles = values.roles.labels;
+  delete values.roles;
   const input = {
     ...values,
-    // ...roles
+    roles
   };
 
   return CreateUserMutation.commit({input})
@@ -53,6 +57,8 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
       if (!response.createUser || !response.createUser.user) {
         throw new Error('Mutation "createUser" failed.');
       }
+
+      window.location.href = `/admin/capco/user/user/${response.createUser.user.id}/edit`;
     })
     .catch(response => {
       if (response.response.message) {
@@ -79,6 +85,7 @@ export class UserAdminCreateButton extends Component<Props> {
     const {
       invalid,
       valid,
+      pristine,
       submitSucceeded,
       submitFailed,
       handleSubmit,
@@ -87,21 +94,20 @@ export class UserAdminCreateButton extends Component<Props> {
       intl
     } = this.props;
     const {showModal} = this.state;
-
-    // TODO w8 for PR refonte du questionnaire, créer une props dans le fichier checkbox pour choisir de renvoyer les id plutôt que les labels
     const userRoles = [
       {
         id: 'ROLE_SUPER_ADMIN',
-        value: 'ROLE_SUPER_ADMIN',
+        useIdAsValue: true,
         label: intl.formatMessage({id: 'roles.super_admin'}),
       },
       {
         id: 'ROLE_ADMIN',
-        value: 'ROLE_ADMIN',
+        useIdAsValue: true,
         label: intl.formatMessage({id: 'roles.admin'}),
       },
       {
         id: 'ROLE_USER',
+        useIdAsValue: true,
         label: intl.formatMessage({id: 'roles.user'}),
       }
     ];
@@ -157,12 +163,10 @@ export class UserAdminCreateButton extends Component<Props> {
                 id="user_roles"
                 name="roles"
                 component={component}
-                isReduxForm
                 type="checkbox"
                 label={
                   <FormattedMessage id="form.label_real_roles"/>
                 }
-                returnValue
                 choices={userRoles}
               >
               </Field>
@@ -199,7 +203,7 @@ export class UserAdminCreateButton extends Component<Props> {
             </form>
           </Modal.Body>
           <Modal.Footer>
-            <ButtonGroup className="col-sm-4 pl-0 d-flex d-inline-block">
+            <ButtonGroup className="pl-0 d-flex d-inline-block">
               <CloseButton
                 onClose={() => {
                   this.setState({showModal: false});
@@ -216,8 +220,8 @@ export class UserAdminCreateButton extends Component<Props> {
                 />
               </Button>
               <AlertForm
-                valid={valid}
-                invalid={invalid}
+                valid={pristine ? true : valid}
+                invalid={pristine ? false : invalid}
                 errorMessage={error}
                 submitSucceeded={submitSucceeded}
                 submitFailed={submitFailed}

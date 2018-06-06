@@ -5,10 +5,9 @@ import {connect, type MapStateToProps} from 'react-redux';
 import {reduxForm, type FormProps, Field, SubmissionError} from 'redux-form';
 import {createFragmentContainer, graphql} from 'react-relay';
 import {Panel, ButtonToolbar, Button} from 'react-bootstrap';
-import type {Dispatch, State, GlobalState } from '../../../types';
+import type {Dispatch, State, GlobalState} from '../../../types';
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
-import UserAvatar from '../UserAvatar';
 import UpdateProfilePublicDataMutation from '../../../mutations/UpdateProfilePublicDataMutation';
 import UserAdminProfile_user from './__generated__/UserAdminProfile_user.graphql';
 
@@ -20,6 +19,7 @@ type Props = FormProps &
   hasValue: Object,
   userTypes: Array<Object>,
   features: Object,
+  isGranted: boolean,
 };
 
 const formName = 'user-admin-edit-profile';
@@ -97,10 +97,10 @@ export class UserAdminProfile extends React.Component<Props, State> {
       userTypes,
       features,
       error,
+      isGranted,
     } = this.props;
-
     return (
-      <Panel id="capco_horizontal_form">
+      <div className="box box-primary container-fluid">
         <h2 className="page-header">
           <FormattedMessage id="user.edition"/>
         </h2>
@@ -112,6 +112,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
               label={<FormattedMessage id="form.label_media"/>}
               component={component}
               type="image"
+              disabled={!isGranted}
             />
             <Field
               name="username"
@@ -126,6 +127,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
               type="text"
               id="profile-form-username"
               divClassName="col-sm-4"
+              disabled={!isGranted}
             />
             <div className="clearfix"/>
             {features.user_type && (
@@ -134,6 +136,8 @@ export class UserAdminProfile extends React.Component<Props, State> {
                 name="userType"
                 component={component}
                 type="select"
+                divClassName="col-sm-4"
+                disabled={!isGranted}
                 label={<FormattedMessage id="registration.type"/>}
               >
                 <FormattedMessage id="registration.select.type">
@@ -152,6 +156,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
               component={component}
               type="textarea"
               id="public-data-form-biography"
+              disabled={!isGranted}
               label={<FormattedMessage id="form.label_biography"/>}
               divClassName="col-sm-8"
             />
@@ -160,6 +165,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
               name="neighborhood"
               component={component}
               type="text"
+              disabled={!isGranted}
               id="public-data-form-neighborhood"
               label={<FormattedMessage id="form.label_neighborhood"/>}
               divClassName="col-sm-4"
@@ -169,6 +175,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
               name="website"
               component={component}
               type="text"
+              disabled={!isGranted}
               id="public-data-form-website"
               label={<FormattedMessage id="form.label_website"/>}
               divClassName="col-sm-4"
@@ -177,70 +184,75 @@ export class UserAdminProfile extends React.Component<Props, State> {
             <h2>
               <FormattedMessage id="social-medias"/>
             </h2>
-                <Field
-                  placeholder="https://"
-                  name="facebookUrl"
-                  component={component}
-                  type="text"
-                  id="public-data-form-facebook"
-                  label={<FormattedMessage id="user.profile.edit.facebook"/>}
-                  divClassName="col-sm-4"
-                />
+            <Field
+              placeholder="https://"
+              name="facebookUrl"
+              component={component}
+              type="text"
+              disabled={!isGranted}
+              id="public-data-form-facebook"
+              label={<FormattedMessage id="user.profile.edit.facebook"/>}
+              divClassName="col-sm-4"
+            />
             <div className="clearfix"/>
             <Field
-                  placeholder="https://"
-                  name="twitterUrl"
-                  component={component}
-                  type="text"
-                  id="public-data-form-twitter"
-                  divClassName="col-sm-4"
-                  label={<FormattedMessage id="user.profile.edit.twitter"/>}
-                />
+              placeholder="https://"
+              name="twitterUrl"
+              component={component}
+              type="text"
+              disabled={!isGranted}
+              id="public-data-form-twitter"
+              divClassName="col-sm-4"
+              label={<FormattedMessage id="user.profile.edit.twitter"/>}
+            />
             <div className="clearfix"/>
             <Field
-                  placeholder="https://"
-                  name="linkedInUrl"
-                  component={component}
-                  type="text"
-                  id="public-data-form-linkedIn"
-                  divClassName="col-sm-4"
-                  label={<FormattedMessage id="show.label_linked_in_url"/>}
-                />
+              placeholder="https://"
+              name="linkedInUrl"
+              component={component}
+              type="text"
+              disabled={!isGranted}
+              id="public-data-form-linkedIn"
+              divClassName="col-sm-4"
+              label={<FormattedMessage id="show.label_linked_in_url"/>}
+            />
             <div className="clearfix"/>
             <h2 className="page-header">
               <FormattedMessage id="confidentialite.title"/>
             </h2>
-              <Field
-                id="profilePageIndexed"
-                name="profilePageIndexed"
-                component={component}
-                type="checkbox"
-                labelClassName="font-weight-normal"
-                children={<FormattedMessage id="user.profile.edit.profilePageIndexed"/>}
-                divClassName="col-sm-8"
-              />
-              <ButtonToolbar className="box-content__toolbar">
-                <Button
-                  disabled={invalid || submitting}
-                  type="submit"
-                  bsStyle="primary"
-                  id="profile-form-save">
-                  <FormattedMessage
-                    id={submitting ? 'global.loading' : 'global.save_modifications'}
-                  />
-                </Button>
-                <AlertForm
-                  valid={valid}
-                  invalid={invalid}
-                  errorMessage={error}
-                  submitSucceeded={submitSucceeded}
-                  submitFailed={submitFailed}
-                  submitting={submitting}
+            <Field
+              id="profilePageIndexed"
+              name="profilePageIndexed"
+              component={component}
+              type="checkbox"
+              disabled={!isGranted}
+              labelClassName="font-weight-normal"
+              children={<FormattedMessage id="user.profile.edit.profilePageIndexed"/>}
+              divClassName="col-sm-8"
+            />
+            <div className="clearfix"/>
+            <ButtonToolbar className="box-content__toolbar">
+              <Button
+                disabled={invalid || submitting || !isGranted}
+                type="submit"
+                bsStyle="primary"
+                id="profile-form-save">
+                <FormattedMessage
+                  id={submitting ? 'global.loading' : 'global.save_modifications'}
                 />
-              </ButtonToolbar>
+              </Button>
+              <AlertForm
+                valid={valid}
+                invalid={invalid}
+                errorMessage={error}
+                submitSucceeded={submitSucceeded}
+                submitFailed={submitFailed}
+                submitting={submitting}
+              />
+            </ButtonToolbar>
           </div>
         </form>
-      </Panel>
+      </div>
     );
   }
 }

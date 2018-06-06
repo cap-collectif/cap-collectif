@@ -33,7 +33,6 @@ class UserIsGrantedResolver
         if (!$token) {
             return false;
         }
-
         if ($user->hasRole($roleRequest)) {
             return true;
         }
@@ -51,7 +50,7 @@ class UserIsGrantedResolver
         }
 
         $this->logger->warning(
-            __METHOD__ . ' : User with id ' . $user->getId() . ' try to get informations about user with id ' . $token->getUser(
+            __METHOD__.' : User with id '.$user->getId().' try to get informations about user with id '.$token->getUser(
             )->getId()
         );
 

@@ -5,16 +5,16 @@ import { injectIntl } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import UserAdminAccount from "./UserAdminAccount";
 import UserAdminProfile from "./UserAdminProfile";
+import UserAdminPageTabs_user from './__generated__/UserAdminPageTabs_user.graphql';
 
 type DefaultProps = void;
-type Props = { user: any, intl: Object };
+type Props = { user: UserAdminPageTabs_user, intl: Object };
 type State = void;
 
 export class UserAdminPageTabs extends Component<Props, State> {
   static defaultProps: DefaultProps;
   render() {
     const { intl, user } = this.props;
-
     return (
       <div>
         <p>
@@ -25,11 +25,9 @@ export class UserAdminPageTabs extends Component<Props, State> {
           <Tab eventKey={1} title={intl.formatMessage({ id: 'user.profile.edit.account' })}>
             <UserAdminAccount user={user} />
           </Tab>
-          {user.isGranted && (
-          <Tab eventKey={2} title={intl.formatMessage({ id: 'user.admin.profile' })}>
-            <UserAdminProfile user={user} />
+          <Tab eventKey={2} title={intl.formatMessage({ id: 'user.profile.show.jumbotron' })}>
+            <UserAdminProfile user={user} isGranted={user.isUserOrSuperAdmin}/>
           </Tab>
-          )}
           {/*<Tab eventKey={3} title={intl.formatMessage({ id: 'user.admin.personalData' })}>*/}
             {/*<UserAdminPersonalData user={user} />*/}
           {/*</Tab>*/}
@@ -58,7 +56,8 @@ export default createFragmentContainer(
   graphql`
     fragment UserAdminPageTabs_user on User {
       username
-      isGranted
+      isUserOrSuperAdmin
+      show_url
       ...UserAdminAccount_user
       ...UserAdminProfile_user
     }

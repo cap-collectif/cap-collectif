@@ -21,10 +21,7 @@ class UserAdmin extends BaseAdmin
     /**
      * empty to override parent
      */
-    protected function configureFormFields(FormMapper $formMapper)
-    {
-
-    }
+    protected function configureFormFields(FormMapper $formMapper){ }
 
 
 //    public function getFormBuilder()

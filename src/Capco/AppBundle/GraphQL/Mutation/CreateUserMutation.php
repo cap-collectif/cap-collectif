@@ -33,9 +33,8 @@ class CreateUserMutation
             ->setPlainPassword(isset($arguments['plainPassword']) ? $arguments['plainPassword'] : '')
             ->setLocked(isset($arguments['locked']) ? $arguments['locked'] : false)
             ->setVip(isset($arguments['vip']) ? $arguments['vip'] : false)
+            ->setRoles(isset($arguments['roles']) ? $arguments['roles'] : ['ROLE_USER'])
             ->setEnabled(isset($arguments['enabled']) ? $arguments['enabled'] : false);
-        $roles = $arguments['roles'];
-        unset($arguments['roles']);
 
         $form = $this->formFactory->create(UserFormType::class, $user, ['csrf_protection' => false]);
         $form->submit($arguments, false);
@@ -44,9 +43,9 @@ class CreateUserMutation
 
             throw new UserError('Invalid data.');
         }
-        $this->addUserRoles($roles, $user);
 
         try {
+            $this->em->persist($user);
             $this->em->flush();
         } catch (\Exception $e) {
             $this->logger->error($e);
@@ -55,17 +54,5 @@ class CreateUserMutation
         }
 
         return ['user' => $user];
-    }
-
-    protected function addUserRoles(array $roles, User $user)
-    {
-        foreach ($roles as $role) {
-            if (is_array($role)) {
-                $this->addUserRoles($role, $user);
-                break;
-            }
-
-            $user->addRole($role);
-        }
     }
 }

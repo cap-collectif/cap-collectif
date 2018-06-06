@@ -2,6 +2,8 @@
 
 namespace Capco\UserBundle\Form\Type;
 
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
@@ -10,13 +12,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserFormType extends AbstractType
 {
-    private $toggleManager;
-
-    public function __construct(Manager $toggleManager)
-    {
-        $this->toggleManager = $toggleManager;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
@@ -28,6 +23,11 @@ class UserFormType extends AbstractType
                 'required' => true,
             ])
             ->add('plainPassword')
+            ->add(
+                'roles',
+                CollectionType::class,
+                ['entry_type' => TextType::class, 'allow_add' => true, 'allow_delete' => true, 'by_reference' => false]
+            )
             ->add('locked')
             ->add('vip')
             ->add('enabled')

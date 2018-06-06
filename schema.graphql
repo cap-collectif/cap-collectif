@@ -645,7 +645,7 @@ input CreateUserInput {
   plainPassword: String
 
   # Unattended roles as array.
-  roles: [[String]]
+  roles: [String]
   locked: Boolean
   vip: Boolean
   enabled: Boolean
@@ -2951,7 +2951,7 @@ type User implements Node {
   expiredAt: DateTime
   isSubscribedToNewsLetter: Boolean
   isSubscribedToNewsLetterAt: DateTime
-  isGranted: Boolean
+  isUserOrSuperAdmin: Boolean
 }
 
 # A connection to a list of items.

@@ -12,13 +12,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserAccountFormType extends AbstractType
 {
-    private $toggleManager;
-
-    public function __construct(Manager $toggleManager)
-    {
-        $this->toggleManager = $toggleManager;
-    }
-
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

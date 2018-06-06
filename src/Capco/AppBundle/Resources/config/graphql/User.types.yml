@@ -281,6 +281,6 @@ User:
             isSubscribedToNewsLetterAt:
                 type: "DateTime"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserNewsLetterResolver", [value, "at"])'
-            isGranted:
+            isUserOrSuperAdmin:
                 type: "Boolean"
                 resolve: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user, value, "ROLE_SUPER_ADMIN")'
