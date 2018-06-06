@@ -73,7 +73,7 @@ class UrlResolver
         }
 
         if ($object instanceof Proposal) {
-            return $object->getStep()->getProject()
+            return $object->getStep() && $object->getStep()->getProject()
                 ? $this->router->generate(
                 'app_project_show_proposal',
                     [
