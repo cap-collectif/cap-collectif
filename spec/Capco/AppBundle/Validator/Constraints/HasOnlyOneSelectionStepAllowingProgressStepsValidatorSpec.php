@@ -2,6 +2,7 @@
 
 namespace spec\Capco\AppBundle\Validator\Constraints;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
@@ -53,5 +54,17 @@ class HasOnlyOneSelectionStepAllowingProgressStepsValidatorSpec extends ObjectBe
 
         $this->initialize($context);
         $this->validate([$selectionStep, $selectionStepNotAllowing, $randomStep], $constraint)->shouldReturn(true);
+    }
+
+    function  it_should_not_add_violation_if_there_is_no_step_in_a_given_project(
+        HasOnlyOneSelectionStepAllowingProgressSteps $constraint,
+        ExecutionContextInterface $context
+    ) {
+        $context->buildViolation($constraint->message)->shouldNotBeCalled();
+
+        $this->initialize($context);
+        $this->validate([null, null], $constraint)->shouldReturn(true);
+        $this->validate([], $constraint)->shouldReturn(true);
+        $this->validate(new ArrayCollection([null, null]), $constraint)->shouldReturn(true);
     }
 }
