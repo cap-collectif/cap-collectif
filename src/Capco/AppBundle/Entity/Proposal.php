@@ -483,7 +483,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
 
     public function isPrivate(): bool
     {
-        return $this->getProposalForm() ? $this->getProposalForm()->getStep()->isPrivate() : false;
+        return $this->getProposalForm() && $this->getProposalForm()->getStep() ? $this->getProposalForm()->getStep()->isPrivate() : false;
     }
 
     public function isSelected(): bool
