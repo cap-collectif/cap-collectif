@@ -86,7 +86,6 @@ class Field extends React.Component<Props> {
       style,
       radioImage,
       radioChecked,
-      returnValue,
     } = this.props;
     const { autoFocus, name } = this.props.input;
     const check = touched || (dirty && !disableValidation);
@@ -127,7 +126,6 @@ class Field extends React.Component<Props> {
         choices={choices}
         style={style}
         radioChecked={radioChecked}
-        returnValue={returnValue}
         {...this.props.input}>
         {children}
       </Input>

@@ -13,10 +13,10 @@ describe('<Checkbox />', () => {
     required: true,
     isOtherAllowed: false,
     choices: [
-      { id: 20, label: 'Athlétisme', value: 'athletisme' },
-      { id: 21, label: 'Natation', value: 'natation' },
-      { id: 22, label: 'Sports collectifs', value: 'sport-co' },
-      { id: 23, label: 'Sports individuels' },
+      {id: 20, label: 'Athlétisme', useIdAsValue: true},
+      {id: 21, label: 'Natation', useIdAsValue: true},
+      {id: 22, label: 'Sports collectifs',},
+      {id: 23, label: 'Sports individuels'},
     ],
   };
   const props = {
@@ -32,28 +32,14 @@ describe('<Checkbox />', () => {
     getGroupStyle: jest.fn(),
     renderFormErrors: jest.fn(),
   };
-  const props2 = {
-    label: 'label',
-    id: 'reply-1',
-    returnValue: true,
-    disabled: false,
-    onChange: jest.fn(),
-    onBlur: jest.fn(),
-    getGroupStyle: jest.fn(),
-    renderFormErrors: jest.fn(),
-  };
+
   it('should render correctly', () => {
     const wrapper = shallow(<Checkbox field={field} {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render with an other field', () => {
-    const wrapper = shallow(<Checkbox field={{ ...field, isOtherAllowed: true }} {...props} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render correctly and checkbox return value', () => {
-    const wrapper = shallow(<Checkbox field={field} {...props2} />);
+    const wrapper = shallow(<Checkbox field={{...field, isOtherAllowed: true}} {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

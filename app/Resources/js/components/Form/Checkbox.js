@@ -42,13 +42,7 @@ class Checkbox extends React.Component<Props, State> {
     const otherValue = value.other;
 
     if (Array.isArray(newValue)) {
-      const objectToReturn = {other: otherValue};
-
-      if (returnValue) {
-        objectToReturn.value = newValue;
-      } else {
-        objectToReturn.labels = newValue;
-      }
+      const objectToReturn = {other: otherValue, labels: newValue};
 
       onChange(objectToReturn);
       this.setState({
@@ -95,11 +89,9 @@ class Checkbox extends React.Component<Props, State> {
       field,
       value,
       onBlur,
-      returnValue
     } = this.props;
 
-    let finalValue = value.labels ? value.labels : [];
-    finalValue = returnValue && value.value ? value.value : finalValue;
+    const finalValue = value.labels ? value.labels : [];
 
     const otherValue = value.other ? value.other : '';
     const fieldName = `choices-for-field-${field.id}`;
@@ -127,7 +119,7 @@ class Checkbox extends React.Component<Props, State> {
         <CheckboxGroup id={fieldName} ref={'choices'} name={fieldName} className="input-choices">
           {field.choices.map(choice => {
             const choiceKey = `choice-${choice.id}`;
-            const valueToReturn = returnValue && choice.value ? choice.value : choice.label;
+            const valueToReturn = choice.useIdAsValue && choice.id ? choice.id : choice.label;
             return (
               <div key={choiceKey}>
                 <Input
