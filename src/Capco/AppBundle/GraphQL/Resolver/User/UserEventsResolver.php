@@ -15,12 +15,11 @@ class UserEventsResolver implements ContainerAwareInterface
 
     public function __invoke(User $user, Argument $args): Connection
     {
-        $repo = $this->container->get('capco.event.repository');
-        $paginator = new Paginator(function (int $offset, int $limit) use ($user, $repo) {
-            return $repo->findBy(['Author' => $user]);
+        $paginator = new Paginator(function (int $offset, int $limit) use ($user) {
+            return $this->container->get('capco.event.repository')->findAllByUser($user);
         });
 
-        $totalCount = 0;
+        $totalCount = $this->container->get('capco.event.repository')->countAllByUser($user);
 
         return $paginator->auto($args, $totalCount);
     }
