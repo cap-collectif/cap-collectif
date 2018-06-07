@@ -2,7 +2,12 @@
 import * as React from 'react';
 import {type IntlShape, injectIntl, FormattedMessage} from 'react-intl';
 import {connect, type MapStateToProps} from 'react-redux';
-import {reduxForm, type FormProps, Field, SubmissionError} from 'redux-form';
+import {
+  reduxForm,
+  type FormProps,
+  Field,
+  SubmissionError,
+} from 'redux-form';
 import {createFragmentContainer, graphql} from 'react-relay';
 import {ButtonToolbar, Button} from 'react-bootstrap';
 import type {Dispatch, State} from '../../../types';
@@ -46,8 +51,10 @@ if (config.canUseDOM && window.locale) {
 
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const {intl} = props;
+  const userId = props.user.id;
   const input = {
     ...values,
+    userId,
   };
 
   return UpdateProfilePersonalDataMutation.commit({input})
@@ -80,8 +87,6 @@ export class UserAdminPersonalData extends React.Component<Props, PersonalDataSt
     const {
       invalid,
       valid,
-      pristine,
-      dirty,
       submitSucceeded,
       submitFailed,
       handleSubmit,
@@ -92,7 +97,7 @@ export class UserAdminPersonalData extends React.Component<Props, PersonalDataSt
     return (
       <div className="box box-primary container-fluid">
         <h2 className="page-header">
-          <FormattedMessage id="user.PersonalData.show.jumbotron"/>
+          <FormattedMessage id="personal-data" />
         </h2>
         <form onSubmit={handleSubmit}>
           <div className="box-content box-content__content-form">
@@ -102,16 +107,16 @@ export class UserAdminPersonalData extends React.Component<Props, PersonalDataSt
               label={<FormattedMessage id="form.label_email"/>}
               component={component}
               type="text"
-              divClassName="col-sm-10"
+              divClassName="col-sm-4"
               disabled={!user.isUserOrSuperAdmin}
             />
+            <div className="clearfix"/>
             <Field
               name="firstname"
               label={
-                <FormattedMessage id="registration.firstname"/>
+                <FormattedMessage id="form.label_firstname"/>
               }
               component={component}
-              required
               type="text"
               id="personal-data-form-firstname"
               divClassName="col-sm-4"
@@ -125,12 +130,13 @@ export class UserAdminPersonalData extends React.Component<Props, PersonalDataSt
               type="text"
               divClassName="col-sm-4"
               disabled={!user.isUserOrSuperAdmin}
-              label={<FormattedMessage id="registration.lastname"/>}
+              label={<FormattedMessage id="form.label_lastname"/>}
             />
             <div className="clearfix"/>
             <Field
               name="gender"
               component={component}
+              label={<FormattedMessage id="form.label_gender"/>}
               type="select"
               id="personal-data-form-gender"
               divClassName="col-sm-4">
@@ -158,8 +164,7 @@ export class UserAdminPersonalData extends React.Component<Props, PersonalDataSt
               yearId="personal-data-date-of-birth-year"
               label="form.label_date_of_birth"
               componentId="personal-data-date-of-birth"
-              labelClassName="col-sm-3 control-label"
-              divClassName="col-sm-6"
+              globalClassName="col-sm-4 form-group"
             />
             <div className="clearfix"/>
             <Field
@@ -188,39 +193,38 @@ export class UserAdminPersonalData extends React.Component<Props, PersonalDataSt
               component={component}
               type="text"
               disabled={!user.isUserOrSuperAdmin}
-              labelClassName="font-weight-normal"
-              children={<FormattedMessage id="form.label_city"/>}
-              divClassName="col-sm-8"
+              label={<FormattedMessage id="form.label_city"/>}
+              divClassName="col-sm-4"
             />
+            <div className="clearfix"/>
             <Field
               id="zipCode"
               name="zipCode"
               component={component}
               type="text"
               disabled={!user.isUserOrSuperAdmin}
-              labelClassName="font-weight-normal"
-              children={<FormattedMessage id="form.label_zipCode"/>}
-              divClassName="col-sm-8"
+              label={<FormattedMessage id="form.label_zip_code"/>}
+              divClassName="col-sm-4"
             />
+            <div className="clearfix"/>
             <Field
               id="phone"
               name="phone"
               component={component}
               type="text"
               disabled={!user.isUserOrSuperAdmin}
-              labelClassName="font-weight-normal"
-              children={<FormattedMessage id="form.label_phone"/>}
-              divClassName="col-sm-8"
+              label={<FormattedMessage id="form.label_phone"/>}
+              divClassName="col-sm-4"
             />
+            <div className="clearfix"/>
             <Field
               id="phoneConfirmed"
               name="phoneConfirmed"
               component={component}
               type="checkbox"
-              disabled={!user.isUserOrSuperAdmin}
-              labelClassName="font-weight-normal"
-              children={<FormattedMessage id="form.label_phoneConfirmed"/>}
-              divClassName="col-sm-8"
+              disabled
+              children={<FormattedMessage id="form.label_phone_confirmed"/>}
+              divClassName="col-sm-4"
             />
             <div className="clearfix"/>
             <ButtonToolbar className="box-content__toolbar">
@@ -265,7 +269,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, {user}: RelayPr
     dateOfBirth: user.dateOfBirth ? user.dateOfBirth : null,
     address: user.address ? user.address : null,
     address2: user.address2 ? user.address2 : null,
-    city: user.city ? user.city.id : null,
+    city: user.city ? user.city : null,
     zipCode: user.zipCode ? user.zipCode : null,
     phone: user ? user.phone : null,
     phoneConfirmed: user ? user.phoneConfirmed : null,

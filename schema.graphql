@@ -2569,8 +2569,8 @@ input UpdateProfilePasswordInput {
 }
 
 type UpdateProfilePasswordPayload {
-  # The viewer
-  viewer: User!
+  # The user just have been updated
+  user: User!
 
   # The error
   error: String
@@ -2612,6 +2612,12 @@ input UpdateProfilePersonalDataInput {
 
   # Your date of birth
   dateOfBirth: String
+
+  # Is your phone confirmed ?
+  phoneConfirmed: Boolean
+
+  # Your email
+  email: String
   clientMutationId: String
 }
 

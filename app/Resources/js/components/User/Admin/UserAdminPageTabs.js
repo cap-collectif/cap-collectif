@@ -7,6 +7,7 @@ import UserAdminAccount from "./UserAdminAccount";
 import UserAdminProfile from "./UserAdminProfile";
 import UserAdminPageTabs_user from './__generated__/UserAdminPageTabs_user.graphql';
 import UserAdminPersonalData from "./UserAdminPersonalData";
+import UserAdminPassword from "./UserAdminPassword";
 
 type DefaultProps = void;
 type Props = { user: UserAdminPageTabs_user, intl: Object };
@@ -30,6 +31,9 @@ export class UserAdminPageTabs extends Component<Props, State> {
           </Tab>
           <Tab eventKey={3} title={intl.formatMessage({ id: 'user.profile.edit.data' })}>
             <UserAdminPersonalData user={user} />
+          </Tab>
+          <Tab eventKey={4} title={intl.formatMessage({ id: 'user.profile.edit.password' })}>
+            <UserAdminPassword user={user} />
           </Tab>
           {/*<Tab eventKey={4} title={intl.formatMessage({ id: 'user.admin.password' })}>*/}
             {/*<UserAdminPassword user={user} />*/}
@@ -60,6 +64,7 @@ export default createFragmentContainer(
       ...UserAdminAccount_user
       ...UserAdminProfile_user
       ...UserAdminPersonalData_user
+      ...UserAdminPassword_user
     }
   `,
 );

@@ -7,36 +7,35 @@ use Capco\UserBundle\Form\Type\ChangePasswordFormType;
 use FOS\UserBundle\Form\Model\ChangePassword;
 use FOS\UserBundle\Model\UserManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Psr\Log\LoggerInterface;
-use Symfony\Component\Form\FormFactory;
 
-class UpdateProfilePasswordMutation
+class UpdateProfilePasswordMutation extends BaseUpdateProfile
 {
     private $userManager;
-    private $formFactory;
-    private $logger;
-
-    public function __construct(FormFactory $formFactory, UserManagerInterface $userManager, LoggerInterface $logger)
-    {
-        $this->formFactory = $formFactory;
-        $this->userManager = $userManager;
-        $this->logger = $logger;
-    }
 
     public function __invoke(Argument $input, User $user): array
     {
-        $arguments = $input->getRawArguments();
-        $form = $this->formFactory->create(ChangePasswordFormType::class, new ChangePassword(), ['csrf_protection' => false]);
-        $form->submit($arguments, false);
-        if (!$form->isValid()) {
-            $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
+        parent::__invoke($input, $user);
 
-            return ['viewer' => $user, 'error' => 'fos_user.password.not_current'];
+        $form = $this->formFactory->create(
+            ChangePasswordFormType::class,
+            new ChangePassword(),
+            ['csrf_protection' => false]
+        );
+        $form->submit($this->arguments, false);
+        if (!$form->isValid()) {
+            $this->logger->error(__METHOD__.' : '.(string)$form->getErrors(true, false));
+
+            return ['user' => $user, 'error' => 'fos_user.password.not_current'];
         }
 
-        $user->setPlainPassword($arguments['new']);
+        $user->setPlainPassword($this->arguments['new']);
         $this->userManager->updateUser($user);
 
-        return ['viewer' => $user];
+        return ['user' => $user];
+    }
+
+    public function setUserManager(UserManagerInterface $userManager)
+    {
+        $this->userManager = $userManager;
     }
 }

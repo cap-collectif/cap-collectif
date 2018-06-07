@@ -32,3 +32,9 @@ UpdateProfilePersonalDataInput:
             dateOfBirth:
                 type: "String"
                 description: "Your date of birth"
+            phoneConfirmed:
+                type: "Boolean"
+                description: "Is your phone confirmed ?"
+            email:
+                type: "String"
+                description: "Your email"

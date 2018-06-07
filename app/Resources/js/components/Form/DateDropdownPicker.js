@@ -19,6 +19,7 @@ type Props = {
   componentId: string,
   labelClassName: string,
   divClassName: string,
+  globalClassName: string,
 };
 
 const getDay = (date: string): number => {
@@ -93,10 +94,11 @@ export class DateDropdownPicker extends Component<Props, DateState> {
       componentId,
       labelClassName,
       divClassName,
+      globalClassName,
     } = this.props;
 
     return (
-      <div>
+      <div className={globalClassName}>
         <label className={labelClassName}>
           <FormattedMessage id={label} />
         </label>
