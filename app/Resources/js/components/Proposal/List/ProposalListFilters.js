@@ -116,9 +116,8 @@ export const ProposalListFilters = React.createClass({
                   dispatch(changeFilter(filterName, e.target.value));
                 }}
                 value={
-                  filters[filterName] || (isMontreuil && filterName === 'districts')
-                    ? defaultDistrictId
-                    : 0
+                  filters[filterName] ||
+                  (isMontreuil && filterName === 'districts' ? defaultDistrictId : 0)
                 }>
                 <FormattedMessage id={`global.select_${filterName}`}>
                   {message => <option value="0">{message}</option>}
