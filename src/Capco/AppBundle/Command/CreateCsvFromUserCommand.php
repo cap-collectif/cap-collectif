@@ -137,13 +137,24 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
             );
     }
 
-    protected function createZipArchive(string $zipName, array $files, bool $removeFilesAfter = true): void
+    protected function createZipArchive(string $zipName, array $files, bool $removeFilesAfter = true, bool $isMedias = false): void
     {
         $zip = new \ZipArchive();
+
         $zip->open($zipName, \ZipArchive::CREATE);
-        foreach ($files as $file) {
-            foreach ($file as $localName => $path) {
-                $zip->addFile($path, $localName);
+
+        if ($isMedias) {
+            $zip->addEmptyDir('pictures');
+            foreach ($files as $file) {
+                foreach ($file as $localName => $path) {
+                    $zip->addFile($path, '/pictures/' . $localName);
+                }
+            }
+        } else {
+            foreach ($files as $file) {
+                foreach ($file as $localName => $path) {
+                    $zip->addFile($path, $localName);
+                }
             }
         }
 
@@ -179,6 +190,7 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
         if ($contributions = Arr::path($data, 'data.node.contributions.edges')) {
             $rows = $this->getCleanArrayForRowInsert($contributions, $header, true);
         } elseif ($medias = Arr::path($data, 'data.node.medias')) {
+            $this->downloadMedias($medias, $userId);
             $rows = $this->getCleanArrayForRowInsert($medias, $header);
         } elseif ($groups = Arr::path($data, 'data.node.groups.edges')) {
             $rows = $this->getCleanArrayForRowInsert($groups, $header, true);
@@ -257,6 +269,26 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
         }
 
         return ['rows' => $rows, 'counter' => $rowCounter];
+    }
+
+    protected function downloadMedias(array $medias, string $userId)
+    {
+        $mediasPath = $this->getContainer()->getParameter('kernel.root_dir') . '/../web/media/default/0001/01/';
+
+        foreach ($medias as $media) {
+            if (isset($media['providerReference'])) {
+                $fileToCopy = $mediasPath . $media['providerReference'];
+
+                $this->createZipArchive(
+                    $this->getZipPathForUser($userId),
+                    [
+                        [$media['providerReference'] => $fileToCopy],
+                    ],
+                    false,
+                    true
+                );
+            }
+        }
     }
 
     protected function getCleanHeadersName($data, string $type): array
@@ -587,12 +619,15 @@ EOF;
   node(id: "${userId}") {
     ... on User {
       medias {
+        id
         name
         enabled
         authorName
         description
         contentType
         size 
+        url
+        providerReference
       }
     }
   }

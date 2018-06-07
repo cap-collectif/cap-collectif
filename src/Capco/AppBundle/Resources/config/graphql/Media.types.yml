@@ -28,3 +28,5 @@ Media:
               type: "String"
             contentType:
               type: "String!"
+            providerReference:
+              type: "String!"

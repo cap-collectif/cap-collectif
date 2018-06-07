@@ -345,7 +345,7 @@ type Comment implements Node & Contribution {
   author: User
   parent: Comment
   pinned: Boolean!
-  show_url: String!
+  show_url: String! @deprecated(reason: "user url instead of show_url (depreciated)")
   url: URI!
   answers: [Comment]!
   authorName: String
@@ -928,6 +928,7 @@ type Media {
   description: String
   copyright: String
   contentType: String!
+  providerReference: String!
 }
 
 # A connection to a list of items.
@@ -1432,7 +1433,7 @@ type Project implements Node {
 # A budget contribution
 type Proposal implements Node & Contribution {
   # The HTTP show url for this contribution.
-  show_url: URI!
+  show_url: URI! @deprecated(reason: "user url instead of show_url (depreciated)")
 
   # The HTTP show url for this contribution.
   url: URI!
