@@ -15,8 +15,11 @@ type Props = {
   step: ProposalListViewPaginated_step,
   viewer: ?ProposalListViewPaginated_viewer,
 };
+type State = {
+  loading: boolean,
+};
 
-export class ProposalListViewPaginated extends React.Component<Props> {
+export class ProposalListViewPaginated extends React.Component<Props, State> {
   render() {
     const { step, viewer, relay } = this.props;
     return (
@@ -33,9 +36,12 @@ export class ProposalListViewPaginated extends React.Component<Props> {
         <div id="proposal-list-pagination-footer">
           {relay.hasMore() && (
             <Button
-              disabled={relay.isLoading()}
+              disabled={this.state.loading}
               onClick={() => {
-                relay.loadMore(50);
+                this.setState({ loading: true });
+                relay.loadMore(50, () => {
+                  this.setState({ loading: false });
+                });
               }}>
               <FormattedMessage id="see-more-proposals" />
             </Button>
