@@ -4,6 +4,7 @@ import { Modal, Button, ButtonGroup } from 'react-bootstrap';
 import Input from '../../Form/ReactBootstrapInput';
 import ElementsFinder from './../ElementsFinder';
 import SynthesisElementActions from '../../../actions/SynthesisElementActions';
+import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 
 const CreateModal = React.createClass({
   propTypes: {
@@ -14,6 +15,8 @@ const CreateModal = React.createClass({
     toggle: React.PropTypes.func,
     process: React.PropTypes.func,
   },
+
+  mixins: [DeepLinkStateMixin],
 
   getDefaultProps() {
     return {

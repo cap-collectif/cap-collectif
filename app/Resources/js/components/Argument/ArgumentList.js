@@ -6,12 +6,14 @@ import ArgumentStore from '../../stores/ArgumentStore';
 import ArgumentActions from '../../actions/ArgumentActions';
 import ArgumentItem from './ArgumentItem';
 import Loader from '../Ui/Loader';
+import DeepLinkStateMixin from '../../utils/DeepLinkStateMixin';
 
 const ArgumentList = React.createClass({
   propTypes: {
     opinion: React.PropTypes.object.isRequired,
     type: React.PropTypes.string.isRequired,
   },
+  mixins: [DeepLinkStateMixin],
 
   getInitialState() {
     return {

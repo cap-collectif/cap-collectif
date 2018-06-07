@@ -6,6 +6,7 @@ import SynthesisElementActions from '../../../actions/SynthesisElementActions';
 import SynthesisElementStore from '../../../stores/SynthesisElementStore';
 import NotationButtons from './../Edit/NotationButtons';
 import ElementsFinder from './../ElementsFinder';
+import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import Input from '../../Form/ReactBootstrapInput';
 
 const PublishModal = React.createClass({
@@ -16,6 +17,8 @@ const PublishModal = React.createClass({
     toggle: React.PropTypes.func.isRequired,
     process: React.PropTypes.func,
   },
+
+  mixins: [DeepLinkStateMixin],
 
   getDefaultProps() {
     return {
@@ -181,11 +184,7 @@ const PublishModal = React.createClass({
           id="publish_element_title"
           name="publish_element[title]"
           className="publish-element__title"
-          onChange={e => {
-            this.setState({
-              title: e.target.value,
-            });
-          }}
+          valueLink={this.linkState('title')}
         />
       </div>
     );
@@ -273,11 +272,7 @@ const PublishModal = React.createClass({
             id="publish_element_comment"
             name="publish_element[comment]"
             className="publish-element__comment"
-            onChange={e => {
-              this.setState({
-                comment: e.target.value,
-              });
-            }}
+            valueLink={this.linkState('comment')}
           />
         </form>
       </div>
@@ -299,11 +294,7 @@ const PublishModal = React.createClass({
             id="publish_element_description"
             name="publish_element[description]"
             className="publish-element__description"
-            onChange={e => {
-              this.setState({
-                description: e.target.value,
-              });
-            }}
+            valueLink={this.linkState('description')}
           />
         </form>
       </div>

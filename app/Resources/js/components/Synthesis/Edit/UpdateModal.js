@@ -4,6 +4,7 @@ import { Button, Modal } from 'react-bootstrap';
 import SynthesisElementActions from '../../../actions/SynthesisElementActions';
 import SynthesisElementStore from '../../../stores/SynthesisElementStore';
 import ElementsFinder from './../ElementsFinder';
+import DeepLinkStateMixin from '../../../utils/DeepLinkStateMixin';
 import Input from '../../Form/ReactBootstrapInput';
 
 const UpdateModal = React.createClass({
@@ -14,6 +15,8 @@ const UpdateModal = React.createClass({
     toggle: React.PropTypes.func.isRequired,
     process: React.PropTypes.func,
   },
+
+  mixins: [DeepLinkStateMixin],
 
   getDefaultProps() {
     return {
@@ -156,11 +159,7 @@ const UpdateModal = React.createClass({
           id="update_element_title"
           name="update_element[title]"
           className="update-element__title"
-          onChange={e => {
-            this.setState({
-              title: e.target.value,
-            });
-          }}
+          valueLink={this.linkState('title')}
         />
       </div>
     );
@@ -177,11 +176,7 @@ const UpdateModal = React.createClass({
           id="update_element_description"
           name="update_element[description]"
           className="update-element__description"
-          onChange={e => {
-            this.setState({
-              description: e.target.value,
-            });
-          }}
+          valueLink={this.linkState('description')}
         />
       </div>
     );
