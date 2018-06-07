@@ -18,10 +18,10 @@ Comment:
               type: "Comment"
             pinned:
               type: "Boolean!"
-            #deprecationReason: "user url instead of show_url (depreciated)"
             show_url:
               type: "String!"
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentShowUrlResolver", [value])'
+              deprecationReason: "user url instead of show_url (depreciated)"
             url:
               type: "URI!"
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentShowUrlResolver", [value])'

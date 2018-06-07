@@ -4,11 +4,11 @@ Proposal:
         description: "A budget contribution"
         interfaces: [Node, Contribution]
         fields:
-            #deprecationReason: "user url instead of show_url (depreciated)" 
             show_url:
                 type: "URI!"
                 description: "The HTTP show url for this contribution."
                 resolve: "@=resolver('proposal_show_url', [value])"
+                deprecationReason: "user url instead of show_url (depreciated)"
             url:
                 type: "URI!"
                 description: "The HTTP show url for this contribution."

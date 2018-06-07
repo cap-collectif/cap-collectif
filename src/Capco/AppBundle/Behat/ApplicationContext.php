@@ -196,6 +196,17 @@ class ApplicationContext extends UserContext
     }
 
     /**
+     * @Then I should not see :filename file in :directory directory
+     */
+    public function iShouldNotSeeFileInDirectory(string $filename, string $directory)
+    {
+        // Make sure we are not using virtual file system, because here we want to see real files in path
+        $directory = str_replace('vfs://', '', rtrim($directory, '/\\'));
+        $filename = str_replace('vfs://', '', $filename);
+        \PHPUnit_Framework_Assert::assertFileNotExists("$directory/$filename");
+    }
+
+    /**
      * @When I reload the page, I should see a confirm popup
      */
     public function iConfirmThePopup()

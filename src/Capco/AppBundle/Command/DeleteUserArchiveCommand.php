@@ -46,7 +46,7 @@ class DeleteUserArchiveCommand extends ContainerAwareCommand
 
     protected function removeArchiveFile(UserArchive $archive)
     {
-        $fileSystem = new Filesystem();
+        $fileSystem = $this->getContainer()->get('filesystem');
         $zipFile = $this->getContainer()->getParameter('kernel.root_dir') . '/../web/export/' . $archive->getPath();
         if ($fileSystem->exists($zipFile)) {
             $fileSystem->remove($zipFile);
