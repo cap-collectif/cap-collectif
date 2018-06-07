@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Command;
 
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -10,6 +11,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 class RecalculateUsersCountersCommand extends ContainerAwareCommand
 {
     public $force;
+
+    /**
+     * @var EntityManager
+     */
     public $em;
     public $redis;
     public $ids;
@@ -42,7 +47,8 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
 
             if ($native) {
                 $ids = implode(',', $this->ids);
-                $query = $this->em->getConnection()->prepare($dql)->bindParam(':ids', $ids);
+                $query = $this->em->getConnection()->prepare($dql);
+                $query->bindParam(':ids', $ids);
             } else {
                 $query = $this->em->createQuery($dql)->setParameter('ids', $this->ids);
             }
