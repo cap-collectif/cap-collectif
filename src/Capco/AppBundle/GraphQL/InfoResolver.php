@@ -14,9 +14,9 @@ class InfoResolver
 
     private function appendString(string $string, $array, &$result)
     {
-        if (is_array($array)) {
+        if (\is_array($array)) {
             foreach ($array as $key => $value) {
-                $newString = is_int($key)
+                $newString = \is_int($key)
                   ? $string
                   : ('' !== $string ? $string . '_' : '') . $key
                 ;
@@ -25,7 +25,7 @@ class InfoResolver
 
             return;
         }
-        if (!in_array($string, $result, true)) {
+        if (!\in_array($string, $result, true)) {
             $result[] = $string;
         }
     }

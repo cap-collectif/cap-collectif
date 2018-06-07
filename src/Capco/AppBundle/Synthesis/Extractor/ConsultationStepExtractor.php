@@ -93,7 +93,7 @@ class ConsultationStepExtractor
                 'step' => $this->consultationStep,
                 'OpinionType' => $opinionType,
             ]);
-            if (count($opinions) > 0) {
+            if (\count($opinions) > 0) {
                 $this->createElementsFromOpinions($opinions, $elementFromOT);
             }
 
@@ -248,7 +248,7 @@ class ConsultationStepExtractor
     public function createElementFrom($data): SynthesisElement
     {
         $element = new SynthesisElement();
-        $element->setLinkedDataClass(get_class($data));
+        $element->setLinkedDataClass(\get_class($data));
         $element->setLinkedDataId($data->getId());
         $element->setLinkedDataCreation($data->getCreatedAt());
         $element->setLinkedDataLastUpdate($data->getUpdatedAt());
@@ -342,7 +342,7 @@ class ConsultationStepExtractor
             $element->setTitle($opinion->getTitle());
 
             $content = '';
-            if (count($opinion->getAppendices()) > 0) {
+            if (\count($opinion->getAppendices()) > 0) {
                 $content .= '<p>' . $this->translator->trans(self::LABEL_CONTEXT, [], 'CapcoAppBundle') . '</p>';
                 foreach ($opinion->getAppendices() as $app) {
                     $content .= '<p>' . $app->getAppendixType()->getTitle() . '</p>';
@@ -436,7 +436,7 @@ class ConsultationStepExtractor
 
     public function isElementExisting(SynthesisElement $element, $object): bool
     {
-        return $element->getLinkedDataClass() === get_class($object) && (string) $element->getLinkedDataId() === (string) $object->getId();
+        return $element->getLinkedDataClass() === \get_class($object) && (string) $element->getLinkedDataId() === (string) $object->getId();
     }
 
     public function isElementOutdated(SynthesisElement $element, $object): bool

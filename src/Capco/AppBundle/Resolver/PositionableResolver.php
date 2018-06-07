@@ -70,7 +70,7 @@ class PositionableResolver
     public function isFirst($object)
     {
         $objects = $this->getDisplayableOrdered();
-        if (count($objects) > 0) {
+        if (\count($objects) > 0) {
             return $object === $objects[0];
         }
 
@@ -85,8 +85,8 @@ class PositionableResolver
     public function isLast($object)
     {
         $objects = $this->getDisplayableOrdered();
-        if (count($objects) > 0) {
-            return $object === $objects[count($objects) - 1];
+        if (\count($objects) > 0) {
+            return $object === $objects[\count($objects) - 1];
         }
 
         return false;

@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\ProposalForm;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\PreFlushEventArgs;
 
@@ -51,7 +50,7 @@ class ReferenceEventListener
             return;
         }
 
-        $lastEntity = $om->getRepository(get_class($entity))->findOneBy([], ['reference' => 'DESC']);
+        $lastEntity = $om->getRepository(\get_class($entity))->findOneBy([], ['reference' => 'DESC']);
 
         if (null === $lastEntity) {
             $entity->setReference(1);
@@ -62,7 +61,7 @@ class ReferenceEventListener
 
     private function hasTrait(\ReflectionClass $reflectionClass): bool
     {
-        if (in_array(self::REFERENCE_TRAIT, $reflectionClass->getTraitNames(), true)) {
+        if (\in_array(self::REFERENCE_TRAIT, $reflectionClass->getTraitNames(), true)) {
             return true;
         }
 

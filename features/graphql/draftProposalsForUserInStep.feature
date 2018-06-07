@@ -10,12 +10,8 @@ Scenario: GraphQL client wants to get list of draft proposals
       step: node(id: $stepId) {
         ... on CollectStep {
           viewerProposalDrafts {
-            edges {
-              node {
-                title
-                show_url
-              }
-            }
+            title
+            show_url
           }
         }
       }
@@ -30,16 +26,12 @@ Scenario: GraphQL client wants to get list of draft proposals
   {
     "data": {
       "step": {
-        "viewerProposalDrafts": {
-          "edges": [
+        "viewerProposalDrafts": [
           {
-              "node": {
-                "title": "Proposition brouillon 3",
-                "show_url": "https:\/\/capco.test\/projects\/budget-participatif-rennes\/collect\/collecte-des-propositions\/proposals\/proposition-brouillon-3"
-              }
+            "title": "Proposition brouillon 3",
+            "show_url": "https:\/\/capco.test\/projects\/budget-participatif-rennes\/collect\/collecte-des-propositions\/proposals\/proposition-brouillon-3"
           }
         ]
-        }
       }
     }
   }

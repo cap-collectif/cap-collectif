@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Command;
 
-use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionModal;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -41,7 +40,7 @@ class ImportConsultationModalsCommand extends ContainerAwareCommand
                    ->findOneBySlug($input->getArgument('step'))
                 ;
 
-        if (!is_object($step)) {
+        if (!\is_object($step)) {
             throw new \InvalidArgumentException('Unknown step with slug ' . $input->getArgument('step'), 1);
         }
 
@@ -53,7 +52,7 @@ class ImportConsultationModalsCommand extends ContainerAwareCommand
                                 'step' => $step,
                             ]);
 
-            if (!is_object($opinion)) {
+            if (!\is_object($opinion)) {
                 throw new \InvalidArgumentException('Unknown title: ' . $row['opinion'], 1);
             }
 

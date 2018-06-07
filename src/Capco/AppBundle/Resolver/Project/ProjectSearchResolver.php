@@ -31,7 +31,7 @@ class ProjectSearchResolver
 
     protected function getProjects(ProjectSearchParameters $projectSearchParameters): Paginator
     {
-        return call_user_func_array(
+        return \call_user_func_array(
             [$this->projectRepository, 'getSearchResults'],
             $projectSearchParameters->toArray()
         );

@@ -32,7 +32,7 @@ class EventParticipantsResolver
         $notRegistered = $this->eventRegistrationRepository->getNotRegisteredParticipantsInEvent($event);
 
         $participants = $registered + $notRegistered;
-        $totalCount = count($participants);
+        $totalCount = \count($participants);
 
         $paginator = new Paginator(function (int $offset, int $limit) use ($participants) {
             try {

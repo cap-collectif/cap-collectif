@@ -191,7 +191,7 @@ abstract class AbstractQuestion
 
     public function setInputType(string $type = null): self
     {
-        if (in_array($type, self::$questionTypesInputs, true)) {
+        if (\in_array($type, self::$questionTypesInputs, true)) {
             $this->setType(array_search($type, self::$questionTypesInputs, true));
         }
 

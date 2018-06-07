@@ -32,7 +32,7 @@ class ModelTypeExtension extends AbstractTypeExtension
             $roots = $form->getData();
             foreach ($roots as $root) {
                 $children = $this->em
-                    ->getRepository(get_class($root))
+                    ->getRepository(\get_class($root))
                     ->childrenHierarchy($root);
                 $view->vars['hierarchy'][$root->getId()] = $children;
             }

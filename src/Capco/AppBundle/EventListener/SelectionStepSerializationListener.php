@@ -35,7 +35,7 @@ class SelectionStepSerializationListener extends AbstractSerializationListener
 
         if (isset($this->getIncludedGroups($event)['Steps'])) {
             $counters = [];
-            $counters['proposals'] = count($step->getProposals());
+            $counters['proposals'] = \count($step->getProposals());
             if ($step->isVotable()) {
                 $counters['votes'] = $step->getVotesCount();
                 $counters['voters'] = $step->getContributorsCount();

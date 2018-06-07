@@ -93,7 +93,7 @@ class UsersController extends FOSRestController
         }
 
         return [
-            'count' => count($users),
+            'count' => \count($users),
             'users' => $users,
         ];
     }

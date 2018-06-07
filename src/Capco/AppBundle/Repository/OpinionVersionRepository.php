@@ -262,7 +262,7 @@ class OpinionVersionRepository extends EntityRepository
 
         $qb->addOrderBy('ov.updatedAt', 'DESC');
 
-        if (null !== $limit && is_int($limit) && 0 < $limit) {
+        if (null !== $limit && \is_int($limit) && 0 < $limit) {
             $query = $qb->getQuery()
                 ->setFirstResult(($page - 1) * $limit)
                 ->setMaxResults($limit)

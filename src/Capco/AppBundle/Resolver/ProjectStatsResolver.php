@@ -260,6 +260,6 @@ class ProjectStatsResolver
         ;
         $steps = array_merge($collectSteps, $selectionSteps);
 
-        return count($steps) > 0;
+        return \count($steps) > 0;
     }
 }

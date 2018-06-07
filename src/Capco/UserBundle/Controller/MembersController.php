@@ -2,7 +2,6 @@
 
 namespace Capco\UserBundle\Controller;
 
-use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Entity\UserType;
 use Capco\UserBundle\Form\Type\MemberSearchType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
@@ -61,7 +60,7 @@ class MembersController extends Controller
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
         if (null !== $pagination && 0 !== $pagination) {
-            $nbPage = ceil(count($members) / $pagination);
+            $nbPage = ceil(\count($members) / $pagination);
         }
 
         return [

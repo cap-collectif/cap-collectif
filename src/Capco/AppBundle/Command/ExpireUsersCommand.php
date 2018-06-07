@@ -23,7 +23,7 @@ class ExpireUsersCommand extends ContainerAwareCommand
         $notifier = $container->get('capco.user_notifier');
         $manager = $container->get('capco.contribution.manager');
 
-        $users = $em->getRepository('CapcoUserBundle:User')
+        $users = $container->get('capco.user.repository')
                     ->findUsersThatJustExpired();
 
         foreach ($users as $user) {
@@ -31,9 +31,12 @@ class ExpireUsersCommand extends ContainerAwareCommand
             $user->setExpired(true);
             $user->setExpiresAt(null);
             $em->flush();
-            $notifier->expired($user, $contributionDeleted);
+
+            $user->getEmail() && filter_var($user->getEmail(), FILTER_VALIDATE_EMAIL)
+                ? $notifier->expired($user, $contributionDeleted)
+                : $container->get('logger')->warning(__CLASS__ . ": User with id: $user->getId() doesn't have a valid email");
         }
 
-        $output->writeln(count($users) . ' user(s) expired.');
+        $output->writeln(sprintf('%d user(s) expired.', \count($users)));
     }
 }

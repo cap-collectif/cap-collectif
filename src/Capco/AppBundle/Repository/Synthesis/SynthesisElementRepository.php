@@ -131,7 +131,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
         $nestedTree = [];
         $l = 0;
 
-        if (count($nodes) > 0) {
+        if (\count($nodes) > 0) {
             // Node Stack. Used to help building the hierarchy
             $stack = [];
             // Array of ids, used to check if the element's parent is in the tree
@@ -167,7 +167,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
                     $item['body'] = html_entity_decode($item['body'], ENT_QUOTES);
                 }
                 // Number of stack items
-                $l = count($stack);
+                $l = \count($stack);
                 // Check if we're dealing with different levels
                 while ($l > 0 && $stack[$l - 1][$level] >= $item[$level]) {
                     array_pop($stack);
@@ -176,16 +176,16 @@ class SynthesisElementRepository extends MaterializedPathRepository
                 // Stack is empty (we are inspecting the root)
                 if (0 === $l) {
                     // Assigning the root child
-                    $i = count($nestedTree);
+                    $i = \count($nestedTree);
                     $nestedTree[$i] = $item;
                     $stack[] = &$nestedTree[$i];
                     $idsStack[] = $item['id'];
                 } else {
                     // Check if item parent is present in the tree
                     $parentId = $this->extractParentIdFromPath($item['path']);
-                    if (in_array($parentId, $idsStack, true)) {
+                    if (\in_array($parentId, $idsStack, true)) {
                         // Add child to parent
-                        $i = count($stack[$l - 1][$childrenIndex]);
+                        $i = \count($stack[$l - 1][$childrenIndex]);
                         $stack[$l - 1][$childrenIndex][$i] = $item;
                         $stack[] = &$stack[$l - 1][$childrenIndex][$i];
                         $idsStack[] = $item['id'];
@@ -205,11 +205,11 @@ class SynthesisElementRepository extends MaterializedPathRepository
     public function extractParentIdFromPath($path)
     {
         $splitted = explode('|', $path);
-        if (count($splitted) < 2) {
+        if (\count($splitted) < 2) {
             return;
         }
-        $parent = explode('-', $splitted[count($splitted) - 2]);
-        $parent = implode('-', array_splice($parent, count($parent) - 5, count($parent)));
+        $parent = explode('-', $splitted[\count($splitted) - 2]);
+        $parent = implode('-', array_splice($parent, \count($parent) - 5, \count($parent)));
 
         return $parent;
     }
@@ -266,7 +266,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
         $expr = '';
         $includeNodeExpr = '';
 
-        if (is_object($parent) && $parent instanceof $meta->name) {
+        if (\is_object($parent) && $parent instanceof $meta->name) {
             $parent = new EntityWrapper($parent, $this->_em);
             $nodePath = $parent->getPropertyValue($path);
             $expr = $qb->expr()->andX()->add(
@@ -387,7 +387,7 @@ class SynthesisElementRepository extends MaterializedPathRepository
 
     protected function addAndQueryCondition($qb, $field, $value)
     {
-        if (in_array($field, self::$allowedFields, true)) {
+        if (\in_array($field, self::$allowedFields, true)) {
             if (null === $value) {
                 return $qb
                     ->andWhere('se.' . $field . ' IS NULL');

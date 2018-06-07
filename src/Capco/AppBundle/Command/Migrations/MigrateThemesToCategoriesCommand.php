@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Command\Migrations;
 
-use Capco\AppBundle\Entity\Category;
 use Capco\AppBundle\Entity\ProposalCategory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -69,7 +68,7 @@ class MigrateThemesToCategoriesCommand extends ContainerAwareCommand
                     'theme' => $theme,
                 ])
             ;
-            if (count($proposals) > 0) {
+            if (\count($proposals) > 0) {
                 $category = new ProposalCategory();
                 $category->setName($theme->getTitle());
                 $category->setForm($form);

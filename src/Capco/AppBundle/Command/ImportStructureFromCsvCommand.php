@@ -2,8 +2,6 @@
 
 namespace Capco\AppBundle\Command;
 
-use Capco\AppBundle\Entity\AppendixType;
-use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionTypeAppendixType;
 use Capco\AppBundle\Entity\Steps\ConsultationStepType;
@@ -81,7 +79,7 @@ class ImportStructureFromCsvCommand extends ContainerAwareCommand
         $em->flush();
 
         $data = $this->getOpinionTypes();
-        $progress = new ProgressBar($output, count($data));
+        $progress = new ProgressBar($output, \count($data));
         $progress->start();
 
         foreach ($data as $key => $row) {

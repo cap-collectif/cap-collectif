@@ -89,7 +89,7 @@ class LiipImagineThumbnail implements ThumbnailInterface
     private function getExtension(MediaInterface $media)
     {
         $ext = $media->getExtension();
-        if (!is_string($ext) || 3 !== strlen($ext)) {
+        if (!\is_string($ext) || 3 !== \strlen($ext)) {
             $ext = 'jpg';
         }
 

@@ -93,7 +93,7 @@ class ProposalFormResolver implements ContainerAwareInterface
 
             if ($args->offsetExists('affiliations')) {
                 $affiliations = $args->offsetGet('affiliations');
-                if (in_array('EVALUER', $affiliations, true)) {
+                if (\in_array('EVALUER', $affiliations, true)) {
                     $direction = $args->offsetGet('orderBy')['direction'];
                     $field = $args->offsetGet('orderBy')['field'];
 
@@ -102,7 +102,7 @@ class ProposalFormResolver implements ContainerAwareInterface
                     return $repo->getProposalsByFormAndEvaluer($form, $user, $offset, $limit, $field, $direction)->getIterator()->getArrayCopy();
                 }
 
-                if (in_array('OWNER', $affiliations, true)) {
+                if (\in_array('OWNER', $affiliations, true)) {
                     $filters['author'] = $user->getId();
                 }
             }
