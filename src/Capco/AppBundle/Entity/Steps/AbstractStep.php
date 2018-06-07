@@ -302,7 +302,7 @@ abstract class AbstractStep
 
     public function canDisplay(): bool
     {
-        return $this->isEnabled && $this->getProject()->canDisplay();
+        return $this->isEnabled && $this->getProject() && $this->getProject()->canDisplay();
     }
 
     public function canContribute(): bool
