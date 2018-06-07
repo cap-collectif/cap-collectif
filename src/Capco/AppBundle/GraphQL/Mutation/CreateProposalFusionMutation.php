@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Form\ProposalFusionType;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\UserBundle\Entity\User;
@@ -33,7 +32,7 @@ class CreateProposalFusionMutation
         $title = $this->translator->trans('untitled-proposal', [], 'CapcoAppBundle');
         $proposalIds = array_unique($input->getRawArguments()['fromProposals']);
 
-        if (count($proposalIds) < 2) {
+        if (\count($proposalIds) < 2) {
             throw new UserError('You must specify at least 2 proposals to merge.');
         }
 

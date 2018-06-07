@@ -6,7 +6,6 @@ use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
 use Coduo\PHPMatcher\Factory\SimpleFactory;
 use GuzzleHttp\Client;
-use GuzzleHttp\Query;
 use PHPUnit_Framework_Assert as PHPUnit;
 
 class GraphQLContext implements Context

@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
-use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\UserBundle\Entity\User;
@@ -55,7 +54,7 @@ class DeleteProposalMutation
         ));
 
         // Synchronous indexation
-        $this->indexer->remove(get_class($proposal), $proposal->getId());
+        $this->indexer->remove(\get_class($proposal), $proposal->getId());
         $this->indexer->finishBulk();
 
         return ['proposal' => $proposal, 'viewer' => $user, 'step' => $proposal->getStep()];

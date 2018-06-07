@@ -18,11 +18,11 @@ class SynthesisLoggableListener extends LoggableListener
     public function setUsername($user)
     {
         // In case we get JWT Token
-        if (is_object($user) && method_exists($user, 'getUser')) {
+        if (\is_object($user) && method_exists($user, 'getUser')) {
             $user = $user->getUser();
         }
 
-        if (is_object($user) && method_exists($user, 'getSlug')) {
+        if (\is_object($user) && method_exists($user, 'getSlug')) {
             $this->username = (string) $user->getSlug();
         } else {
             throw new \Gedmo\Exception\InvalidArgumentException('User must have a getSlug method or a JWTToken object');

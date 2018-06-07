@@ -32,7 +32,7 @@ class ModerationController extends Controller
           'moderation-guideline-violation',
         ];
 
-        if (!in_array($reason, $visibleReasons, true) && !in_array($reason, $hiddenReasons, true)) {
+        if (!\in_array($reason, $visibleReasons, true) && !\in_array($reason, $hiddenReasons, true)) {
             $this->get('logger')->warn('Unknown trash reason: ' . $reason);
             throw new NotFoundHttpException('This trash reason is not available.');
         }
@@ -48,7 +48,7 @@ class ModerationController extends Controller
 
         $redirectUrl = $this->get('capco.url.resolver')->getObjectUrl($contribution);
 
-        if (in_array($reason, $hiddenReasons, true)) {
+        if (\in_array($reason, $hiddenReasons, true)) {
             $contribution->setEnabled(false);
             $redirectUrl = $this->get('router')->generate('app_project_show_trashed', [
               'projectSlug' => $contribution->getProject()->getSlug(),

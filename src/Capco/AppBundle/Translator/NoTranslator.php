@@ -16,7 +16,7 @@ class NoTranslator implements TranslatorInterface, TranslatorBagInterface
 
     public function trans($id, array $parameters = [], $domain = null, $locale = null)
     {
-        if (0 === count($parameters)) {
+        if (0 === \count($parameters)) {
             return $id;
         }
 

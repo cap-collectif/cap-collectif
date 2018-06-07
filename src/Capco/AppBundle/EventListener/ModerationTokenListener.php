@@ -33,7 +33,7 @@ class ModerationTokenListener
 
     private function hasTrait(\ReflectionClass $reflectionClass): bool
     {
-        if (in_array(self::REFERENCE_TRAIT, $reflectionClass->getTraitNames(), true)) {
+        if (\in_array(self::REFERENCE_TRAIT, $reflectionClass->getTraitNames(), true)) {
             return true;
         }
 

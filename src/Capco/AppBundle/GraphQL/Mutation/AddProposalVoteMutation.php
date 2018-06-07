@@ -67,7 +67,7 @@ class AddProposalVoteMutation
             $vote = (new ProposalCollectVote())
               ->setCollectStep($step);
         } elseif ($step instanceof SelectionStep) {
-            if (!in_array($step, $proposal->getSelectionSteps(), true)) {
+            if (!\in_array($step, $proposal->getSelectionSteps(), true)) {
                 throw new UserError('This proposal is not associated to this selection step.');
             }
             $countUserVotes = $this->em

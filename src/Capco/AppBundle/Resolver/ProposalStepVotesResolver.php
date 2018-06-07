@@ -108,7 +108,7 @@ class ProposalStepVotesResolver extends AbstractExtension
         ->getVotableStepsForProject($project)
     ;
         $collectSteps = $this->collectStepRepository->getCollectStepsForProject($project);
-        if (count($collectSteps) > 0) {
+        if (\count($collectSteps) > 0) {
             $step = $collectSteps[0];
             if ($step->isVotable()) {
                 array_push($collection, $step);
@@ -162,7 +162,7 @@ class ProposalStepVotesResolver extends AbstractExtension
 
     public function hasVotableStepNotFuture(Project $project): bool
     {
-        return count($this->getVotableStepsNotFutureForProject($project)) > 0;
+        return \count($this->getVotableStepsNotFutureForProject($project)) > 0;
     }
 
     public function getSpentCreditsForUser(User $user, AbstractStep $step)

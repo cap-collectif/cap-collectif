@@ -45,7 +45,7 @@ class AddQuestionFieldSubscriber implements EventSubscriberInterface
     public function preSubmit(FormEvent $event)
     {
         // if data has an id, it is considered as a update, so we can skip
-        if ((!$data = $event->getData()) || !is_array($data) || isset($data['question']['id'])) {
+        if ((!$data = $event->getData()) || !\is_array($data) || isset($data['question']['id'])) {
             return;
         }
 

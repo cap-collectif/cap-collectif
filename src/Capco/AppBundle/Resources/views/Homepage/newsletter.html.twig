@@ -17,7 +17,7 @@
        {{ form_widget(form.email, {'attr':{'style': 'width: 250px;', "placeholder": 'homepage.newsletter.enter_email'|trans({}, 'CapcoAppBundle')} }) }}
        <button type="submit" class="btn btn-primary block--first-mobile">{{ 'homepage.newsletter.submit'|trans({}, 'CapcoAppBundle') }}</button>
     {{ form_end(form) }}
-    {% if null != capco_site_parameter_value('global.site.organization_name') %}
+    {% if null != capco_site_parameter_value('global.site.organization_name') or '' != capco_site_parameter_value('global.site.organization_name') %}
     <p class="excerpt">
         <i>{{ 'information-for-the-newsletter-registration-form'|trans({'%organisationName%': capco_site_parameter_value('global.site.organization_name') }, 'CapcoAppBundle')|raw }}</i>
     </p>

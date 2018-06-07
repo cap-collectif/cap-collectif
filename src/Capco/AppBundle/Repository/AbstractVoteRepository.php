@@ -31,7 +31,7 @@ class AbstractVoteRepository extends EntityRepository
             ->addOrderBy('v.createdAt', 'ASC')
         ;
 
-        if (in_array($objectType, ['opinion', 'opinionVersion'], true)) {
+        if (\in_array($objectType, ['opinion', 'opinionVersion'], true)) {
             $qb
                 ->addOrderBy('v.updatedAt', 'ASC')
                 ->addSelect('v.updatedAt', 'v.value')
@@ -123,7 +123,7 @@ class AbstractVoteRepository extends EntityRepository
             ->andWhere('v.expired = false')
         ;
 
-        if (in_array($objectType, ['opinion', 'opinionVersion'], true)) {
+        if (\in_array($objectType, ['opinion', 'opinionVersion'], true)) {
             $qb->addSelect('v.value')
                 ->andWhere(sprintf('v.%s = :object', $objectType))
                 ->andWhere('v.user = :user')

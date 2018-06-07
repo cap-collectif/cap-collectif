@@ -23,6 +23,7 @@ return PhpCsFixer\Config::create()
         'semicolon_after_instruction' => true,
         'combine_consecutive_unsets' => true,
         'concat_space' => array('spacing' => 'one'),
+        'native_function_invocation' => array('include' => array('@compiler_optimized')),
     ))
     ->setFinder(
         PhpCsFixer\Finder::create()

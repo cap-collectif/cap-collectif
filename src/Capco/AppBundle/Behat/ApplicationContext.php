@@ -379,7 +379,7 @@ class ApplicationContext extends UserContext
      */
     public function iShouldSeeNbElementOnPage(int $nb, string $element)
     {
-        expect(count($this->getSession()->getPage()->find('css', $element)))->toBe($nb);
+        expect(\count($this->getSession()->getPage()->find('css', $element)))->toBe($nb);
     }
 
     /**
@@ -396,10 +396,10 @@ class ApplicationContext extends UserContext
             },
             $this->getSession()->getPage()->findAll('css', $cssQuery)
         );
-        if (!in_array($first, $items, true)) {
+        if (!\in_array($first, $items, true)) {
             throw new ElementNotFoundException($this->getSession(), 'Element "' . $first . '"');
         }
-        if (!in_array($second, $items, true)) {
+        if (!\in_array($second, $items, true)) {
             throw new ElementNotFoundException($this->getSession(), 'Element "' . $second . '"');
         }
         \PHPUnit_Framework_TestCase::assertTrue(array_search($first, $items, true) < array_search($second, $items, true));
@@ -544,7 +544,7 @@ class ApplicationContext extends UserContext
      */
     public function iShouldSeeInTheHeader(string $header)
     {
-        assert(in_array($header, $this->headers, true), "Did not see \"$header\" in the headers.");
+        \assert(\in_array($header, $this->headers, true), "Did not see \"$header\" in the headers.");
     }
 
     /**

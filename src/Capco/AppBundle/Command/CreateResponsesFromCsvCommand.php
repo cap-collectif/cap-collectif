@@ -77,6 +77,6 @@ class CreateResponsesFromCsvCommand extends ContainerAwareCommand
             $em->flush();
         }
 
-        $output->writeln(count($responses) . ' responses have been created !');
+        $output->writeln(\count($responses) . ' responses have been created !');
     }
 }

@@ -41,7 +41,7 @@ class EmptyUsernameListener
 
         // Skip if route is allowed
         $routes = array_merge(ShieldListener::AVAILABLE_ROUTES, ['overblog_graphql_endpoint']);
-        if (in_array($route, $routes, true)) {
+        if (\in_array($route, $routes, true)) {
             return;
         }
 

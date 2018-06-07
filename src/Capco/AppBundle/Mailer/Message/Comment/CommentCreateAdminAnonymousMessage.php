@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Mailer\Message\Comment;
 
 use Capco\AppBundle\Entity\Comment;
-use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Mailer\Message\AdminMessage;
 
 final class CommentCreateAdminAnonymousMessage extends AdminMessage

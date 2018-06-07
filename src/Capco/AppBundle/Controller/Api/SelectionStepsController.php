@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Controller\Api;
 
-use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\Get;
@@ -78,7 +77,7 @@ class SelectionStepsController extends FOSRestController
         $router = $this->get('router');
 
         return array_map(function ($proposal) use ($step, $router) {
-            $location = is_array($proposal['address']) ?: \GuzzleHttp\json_decode($proposal['address'], true);
+            $location = \is_array($proposal['address']) ?: \GuzzleHttp\json_decode($proposal['address'], true);
 
             return [
                 'id' => $proposal['id'],

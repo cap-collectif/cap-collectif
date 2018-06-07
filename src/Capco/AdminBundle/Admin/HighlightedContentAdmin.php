@@ -3,7 +3,6 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Entity\HighlightedContent;
 use Capco\AppBundle\Entity\HighlightedEvent;
 use Capco\AppBundle\Entity\HighlightedPost;
 use Capco\AppBundle\Entity\HighlightedProject;

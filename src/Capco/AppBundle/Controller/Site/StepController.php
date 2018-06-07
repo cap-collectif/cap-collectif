@@ -187,7 +187,7 @@ class StepController extends Controller
             'currentStep' => $step,
             'opinions' => $opinions,
             'page' => $page,
-            'nbPage' => ceil(count($opinions) / 10),
+            'nbPage' => ceil(\count($opinions) / 10),
         ];
     }
 
@@ -224,7 +224,7 @@ class StepController extends Controller
             'currentStep' => $step,
             'versions' => $versions,
             'page' => $page,
-            'nbPage' => ceil(count($versions) / 10),
+            'nbPage' => ceil(\count($versions) / 10),
         ];
     }
 

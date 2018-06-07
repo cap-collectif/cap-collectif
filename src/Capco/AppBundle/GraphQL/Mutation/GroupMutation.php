@@ -25,7 +25,7 @@ class GroupMutation implements ContainerAwareInterface
 
         if (!$form->isValid()) {
             $logger = $this->container->get('logger');
-            $logger->error(get_class($this) . ' create: ' . (string) $form->getErrors(true, false));
+            $logger->error(\get_class($this) . ' create: ' . (string) $form->getErrors(true, false));
             throw new UserError('Can\'t create this group.');
         }
 
@@ -53,7 +53,7 @@ class GroupMutation implements ContainerAwareInterface
 
         if (!$form->isValid()) {
             $logger = $this->container->get('logger');
-            $logger->error(get_class($this) . ' update: ' . (string) $form->getErrors(true, false));
+            $logger->error(\get_class($this) . ' update: ' . (string) $form->getErrors(true, false));
             throw new UserError('Can\'t update this group.');
         }
 
@@ -76,7 +76,7 @@ class GroupMutation implements ContainerAwareInterface
             $om->flush();
         } catch (\Exception $e) {
             $logger = $this->container->get('logger');
-            $logger->error(get_class($this) . ' delete: ' . $group->getId());
+            $logger->error(\get_class($this) . ' delete: ' . $group->getId());
             throw new UserError('Can\'t delete this group.');
         }
 
@@ -93,7 +93,7 @@ class GroupMutation implements ContainerAwareInterface
         if (!$userGroup) {
             $error = sprintf('Cannot find the user "%u" in group "%g"', $userId, $groupId);
             $logger = $this->container->get('logger');
-            $logger->error(get_class($this) . ' deleteUserInGroup: ' . $error);
+            $logger->error(\get_class($this) . ' deleteUserInGroup: ' . $error);
             throw new UserError('Can\'t delete this user in group.');
         }
 
@@ -116,7 +116,7 @@ class GroupMutation implements ContainerAwareInterface
 
         if (!$group) {
             $error = sprintf('Cannot find the group "%g"', $groupId);
-            $logger->error(get_class($this) . ' addUsersInGroup: ' . $error);
+            $logger->error(\get_class($this) . ' addUsersInGroup: ' . $error);
             throw new UserError('Can\'t add users in group.');
         }
 
@@ -146,7 +146,7 @@ class GroupMutation implements ContainerAwareInterface
 
             return ['group' => $group];
         } catch (\Exception $e) {
-            $logger->error(get_class($this) . ' addUsersInGroup: ' . sprintf('Cannot add users in group with id "%g"', $groupId));
+            $logger->error(\get_class($this) . ' addUsersInGroup: ' . sprintf('Cannot add users in group with id "%g"', $groupId));
             throw new UserError('Can\'t add users in group.');
         }
     }

@@ -56,15 +56,15 @@ class OpinionsController extends FOSRestController
         $opinionWithSources = $repo->getWithSources($id);
         $opinionWithVotes = $repo->getWithVotes($id, 5);
 
-        if (is_object($opinionWithArguments)) {
+        if (\is_object($opinionWithArguments)) {
             $opinion->setArguments($opinionWithArguments->getArguments());
         }
 
-        if (is_object($opinionWithSources)) {
+        if (\is_object($opinionWithSources)) {
             $opinion->setSources($opinionWithSources->getSources());
         }
 
-        if (is_object($opinionWithVotes)) {
+        if (\is_object($opinionWithVotes)) {
             $opinion->setVotes($opinionWithVotes->getVotes());
         }
 
@@ -107,7 +107,7 @@ class OpinionsController extends FOSRestController
         $author = $this->getUser();
         $repo = $this->get('capco.opinion.repository');
 
-        if (count($repo->findCreatedSinceIntervalByAuthor($author, 'PT1M')) >= 2) {
+        if (\count($repo->findCreatedSinceIntervalByAuthor($author, 'PT1M')) >= 2) {
             throw new BadRequestHttpException('You contributed too many times.');
         }
 
@@ -417,7 +417,7 @@ class OpinionsController extends FOSRestController
             ->getRepository('CapcoAppBundle:OpinionVersion')
             ->getWithVotes($version->getId(), 5);
 
-        if (is_object($votes)) {
+        if (\is_object($votes)) {
             $version->setVotes($votes->getVotes());
         }
 
@@ -592,7 +592,7 @@ class OpinionsController extends FOSRestController
 
         return [
             'sources' => $sources,
-            'count' => count($paginator),
+            'count' => \count($paginator),
         ];
     }
 
@@ -633,7 +633,7 @@ class OpinionsController extends FOSRestController
 
         return [
             'sources' => $sources,
-            'count' => count($paginator),
+            'count' => \count($paginator),
         ];
     }
 

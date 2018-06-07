@@ -518,7 +518,7 @@ class ParisImportCommand extends ContainerAwareCommand
     {
         $result = [];
         foreach ($arr as $i) {
-            $key = call_user_func($key_selector, $i);
+            $key = \call_user_func($key_selector, $i);
             $result[$key][] = $i;
         }
 
@@ -527,12 +527,12 @@ class ParisImportCommand extends ContainerAwareCommand
 
     private function array_unique_nested(array $array, string $uniqueKey): array
     {
-        if (!is_array($array)) {
+        if (!\is_array($array)) {
             return [];
         }
         $uniqueKeys = [];
         foreach ($array as $key => $item) {
-            if (!in_array($item[$uniqueKey], $uniqueKeys, true)) {
+            if (!\in_array($item[$uniqueKey], $uniqueKeys, true)) {
                 $uniqueKeys[$item[$uniqueKey]] = $item;
             }
         }

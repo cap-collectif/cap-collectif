@@ -2,7 +2,6 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Capco\AppBundle\Entity\Steps\CollectStep;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;

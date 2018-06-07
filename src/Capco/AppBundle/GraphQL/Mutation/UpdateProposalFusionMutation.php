@@ -2,8 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Form\ProposalFusionType;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Doctrine\ORM\EntityManagerInterface;

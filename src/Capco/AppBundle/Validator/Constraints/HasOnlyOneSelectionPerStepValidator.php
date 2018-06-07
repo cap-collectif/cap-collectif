@@ -23,7 +23,7 @@ class HasOnlyOneSelectionPerStepValidator extends ConstraintValidator
     {
         $dupe_array = [];
         foreach ($array as $val) {
-            if (in_array($val, $dupe_array, true)) {
+            if (\in_array($val, $dupe_array, true)) {
                 return true;
             }
             $dupe_array[] = $val;
