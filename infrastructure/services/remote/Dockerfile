@@ -25,9 +25,13 @@ RUN set -x \
         libicu-dev \
         sqlite \
         software-properties-common \
+        locales \
     && \
+    localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+ENV LANG en_US.utf8
 
 # Install php7
 RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \

@@ -52,10 +52,10 @@ class DeleteProposalMutation
           json_encode([
               'proposalId' => $proposal->getId(),
           ])
-        ));
+      ));
 
         // Synchronous indexation
-        $this->indexer->remove(get_class($proposal), $proposal->getId());
+        $this->indexer->index(get_class($proposal), $proposal->getId());
         $this->indexer->finishBulk();
 
         return ['proposal' => $proposal, 'viewer' => $user, 'step' => $proposal->getStep()];
