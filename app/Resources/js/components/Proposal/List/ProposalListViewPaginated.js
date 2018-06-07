@@ -20,6 +20,10 @@ type State = {
 };
 
 export class ProposalListViewPaginated extends React.Component<Props, State> {
+  state = {
+    loading: false,
+  };
+
   render() {
     const { step, viewer, relay } = this.props;
     return (
