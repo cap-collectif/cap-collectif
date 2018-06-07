@@ -35,87 +35,87 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
 
     protected function requestDatas(string $userId): array
     {
-        $executor = $this->getContainer()->get('overblog_graphql.request_executor');
+        $executor = $this->getContainer()->get('overblog_graphql.request_executor')->disabledDebugInfo();
 
         // TODO disable ACL or give admin rights (to disable access)
-        $datas['user'] = $executor->disabledDebugInfo()->execute(
+        $datas['user'] = $executor->execute(
             [
                 'query' => $this->getUserGraphQLQuery($userId),
                 'variables' => [],
             ]
         )->toArray();
 
-        $datas['questions'] = $executor->disabledDebugInfo()->execute(
+        $datas['questions'] = $executor->execute(
             [
                 'query' => $this->getRepliesGraphQLQuery($userId),
                 'variables' => [],
             ]
         )->toArray();
 
-        $datas['medias'] = $executor->disabledDebugInfo()->execute(
+        $datas['medias'] = $executor->execute(
             [
                 'query' => $this->getMediasGraphQLQuery($userId),
                 'variables' => [],
             ]
         )->toArray();
 
-        $datas['groups'] = $executor->disabledDebugInfo()->execute(
+        $datas['groups'] = $executor->execute(
             [
                 'query' => $this->getGroupsGraphQLQuery($userId),
                 'variables' => [],
             ]
         )->toArray();
 
-        $datas['reports'] = $executor->disabledDebugInfo()->execute(
+        $datas['reports'] = $executor->execute(
             [
                 'query' => $this->getReportsGraphQLQuery($userId),
                 'variables' => [],
             ]
         )->toArray();
 
-        $datas['events'] = $executor->disabledDebugInfo()->execute(
+        $datas['events'] = $executor->execute(
             [
                 'query' => $this->getEventsGraphQLQuery($userId),
                 'variables' => [],
             ]
         )->toArray();
 
-        $datas['proposals'] = $executor->disabledDebugInfo()->execute(
+        $datas['proposals'] = $executor->execute(
             [
                 'query' => $this->getProposalsGraphQLQuery($userId),
                 'variables' => [],
             ]
         )->toArray();
 
-        $datas['opinions'] = $executor->disabledDebugInfo()->execute(
+        $datas['opinions'] = $executor->execute(
             [
                 'query' => $this->getOpinionGraphQLQuery($userId),
                 'variables' => [],
             ]
         )->toArray();
 
-        $datas['opinionsVersion'] = $executor->disabledDebugInfo()->execute(
+        $datas['opinionsVersion'] = $executor->execute(
             [
                 'query' => $this->getOpinionVersionGraphQLQuery($userId),
                 'variables' => [],
             ]
         )->toArray();
 
-        $datas['arguments'] = $executor->disabledDebugInfo()->execute(
+        $datas['arguments'] = $executor->execute(
             [
                 'query' => $this->getArgumentGraphQLQuery($userId),
                 'variables' => [],
             ]
         )->toArray();
 
-        $datas['sources'] = $executor->disabledDebugInfo()->execute(
+        $datas['sources'] = $executor->execute(
             [
                 'query' => $this->getSourceGraphQLQuery($userId),
                 'variables' => [],
             ]
         )->toArray();
 
-        $datas['votes'] = $executor->disabledDebugInfo()->execute(
+        $datas['votes'] = $executor->execute(
             [
                 'query' => $this->getVotesGraphQLQuery($userId),
                 'variables' => [],
@@ -170,20 +170,24 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
         }
         unset($data['extensions']);
 
-        $header = $this->resolveHeaders($data, $type);
+        // set headers row
+        $header = $this->getCleanHeadersName($data, $type);
         $writer->addRow($header);
 
         $rows = [];
+        //we need to handle indepth arrays who are not mapped
         if ($contributions = Arr::path($data, 'data.node.contributions.edges')) {
-            $rows = $this->resolveArray($contributions, $header, true);
+            $rows = $this->getCleanArrayForRowInsert($contributions, $header, true);
         } elseif ($medias = Arr::path($data, 'data.node.medias')) {
-            $rows = $this->resolveArray($medias, $header);
+            $rows = $this->getCleanArrayForRowInsert($medias, $header);
         } elseif ($groups = Arr::path($data, 'data.node.groups.edges')) {
-            $rows = $this->resolveArray($groups, $header, true);
+            $rows = $this->getCleanArrayForRowInsert($groups, $header, true);
         } elseif ($reports = Arr::path($data, 'data.node.reports.edges')) {
-            $rows = $this->resolveArray($reports, $header, true);
+            $rows = $this->getCleanArrayForRowInsert($reports, $header, true);
         } elseif ($events = Arr::path($data, 'data.node.events.edges')) {
-            $rows = $this->resolveArray($events, $header, true);
+            $rows = $this->getCleanArrayForRowInsert($events, $header, true);
+        } elseif ($votes = Arr::path($data, 'data.node.votes.edges')) {
+            $rows = $this->getCleanArrayForRowInsert($votes, $header, true);
         } else {
             foreach ($header as $value) {
                 $value = Arr::path($data, "data.node.$value") ?? '';
@@ -209,48 +213,53 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
         }
     }
 
-    protected function resolveArray(array $contents, array $header, bool $isNode = false): array
+    protected function getCleanArrayForRowInsert(array $contents, array $header, bool $isNode = false): array
     {
-        $row = [];
-        $i = 0;
-        $inserted = 0;
+        $rows = [];
+        $rowCounter = 0;
+        $responsesInserted = false;
 
         foreach ($contents as $content) {
-            foreach ($header as $key => $value) {
+            foreach ($header as $columnKey => $columnName) {
                 if ($isNode) {
-                    if (false !== strpos($value, 'responses.') && 0 === $inserted) {
-                        $datas = $this->handleQuestionsResponses($content, $i, $key, $row);
-                        $row = $datas['row'];
-                        $i = $datas['counter'];
-                        $inserted = 1;
+                    if (false !== strpos($columnName, 'responses.') && false === $responsesInserted) {
+                        $responsesDatas = $this->handleMultipleResponsesForQuestions($content, $rowCounter, $columnKey, $rows);
+                        $rows = $responsesDatas['rows'];
+                        $rowCounter = $responsesDatas['counter'];
+                        $responsesInserted = true;
                     }
-                    $value = Arr::path($content['node'], $value);
+                    $cellData = Arr::path($content['node'], $columnName);
                 } else {
-                    $value = Arr::path($content, $value);
+                    $cellData = Arr::path($content, $columnName);
                 }
-                $row[$i][] = false === $value ? 0 : $value;
+
+                if (!\is_array($cellData)) {
+                    $rows[$rowCounter][] = false === $cellData ? 0 : $cellData;
+                }
             }
-            ++$i;
+            ++$rowCounter;
         }
 
-        return $row;
+        return $rows;
     }
 
-    protected function handleQuestionsResponses(array $responses, int $i, int $key, array $row): array
+    protected function handleMultipleResponsesForQuestions(array $responses, int $rowCounter, int $columnKey, array $rows): array
     {
+        //a question can have multiple responses so we insert a line for each response
+        $emptyRow = [null, null, null, null, null, null, null];
         foreach ($responses['node']['responses'] as $response) {
             if ($response['question']['title'] && $response['formattedValue']) {
-                $row[$i][$key] = $response['question']['title'];
-                $row[$i][$key + 1] = $response['formattedValue'];
-                ++$i;
-                $row[$i] = [null, null, null, null, null, null, null];
+                $rows[$rowCounter][$columnKey] = $response['question']['title'];
+                $rows[$rowCounter][$columnKey + 1] = $response['formattedValue'];
+                ++$rowCounter;
+                $rows[$rowCounter] = $emptyRow;
             }
         }
 
-        return ['row' => $row, 'counter' => $i];
+        return ['rows' => $rows, 'counter' => $rowCounter];
     }
 
-    protected function resolveHeaders($data, string $type): array
+    protected function getCleanHeadersName($data, string $type): array
     {
         $infoResolver = new InfoResolver();
         $header = array_map(
@@ -268,6 +277,8 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
                     $item = str_replace('reports.edges.node.', '', $item);
                 } elseif ('events' === $type) {
                     $item = str_replace('events.edges.node.', '', $item);
+                } elseif ('votes' === $type) {
+                    $item = str_replace('votes.edges.node.', '', $item);
                 } else {
                     $item = str_replace('contributions.edges.node.', '', $item);
                 }

@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Process\Process;
+use Symfony\Component\Filesystem\Filesystem;
 
 class DeleteUserArchiveCommand extends ContainerAwareCommand
 {
@@ -46,8 +46,10 @@ class DeleteUserArchiveCommand extends ContainerAwareCommand
 
     protected function removeArchiveFile(UserArchive $archive)
     {
+        $fileSystem = new Filesystem();
         $zipFile = $this->getContainer()->getParameter('kernel.root_dir') . '/../web/export/' . $archive->getPath();
-        $job = new Process('rm ' . $zipFile);
-        $job->mustRun();
+        if ($fileSystem->exists($zipFile)) {
+            $fileSystem->remove($zipFile);
+        }
     }
 }
