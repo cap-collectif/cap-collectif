@@ -14,7 +14,7 @@ use Capco\UserBundle\Entity\User;
 
 final class UserNotifier extends BaseNotifier
 {
-    public function acknowledgeReply(Project $project, Reply $reply)
+    public function acknowledgeReply(Project $project, Reply $reply): void
     {
         $this->mailer->sendMessage(
             QuestionnaireAcknowledgeReplyMessage::create(
@@ -25,7 +25,7 @@ final class UserNotifier extends BaseNotifier
         );
     }
 
-    public function adminConfirmation(User $user)
+    public function adminConfirmation(User $user): void
     {
         $this->mailer->sendMessage(
             UserAdminConfirmationMessage::create(
@@ -37,7 +37,7 @@ final class UserNotifier extends BaseNotifier
         );
     }
 
-    public function newEmailConfirmation(User $user)
+    public function newEmailConfirmation(User $user): void
     {
         $this->mailer->sendMessage(
             UserNewEmailConfirmationMessage::create(
@@ -54,7 +54,7 @@ final class UserNotifier extends BaseNotifier
         );
     }
 
-    public function emailConfirmation(User $user)
+    public function emailConfirmation(User $user): void
     {
         $this->mailer->sendMessage(
             UserNewEmailConfirmationMessage::create(
@@ -65,7 +65,7 @@ final class UserNotifier extends BaseNotifier
         );
     }
 
-    public function expired(User $user, bool $contributionDeleted)
+    public function expired(User $user, bool $contributionDeleted): void
     {
         $adminEmail = $this->siteParams->getValue('admin.mail.notifications.receive_address');
         if ($contributionDeleted) {
