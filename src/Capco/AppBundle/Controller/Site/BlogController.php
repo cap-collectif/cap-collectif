@@ -67,7 +67,7 @@ class BlogController extends Controller
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
         if (null !== $pagination && 0 !== $pagination) {
-            $nbPage = ceil(\count($posts) / $pagination);
+            $nbPage = ceil(count($posts) / $pagination);
         }
 
         return [

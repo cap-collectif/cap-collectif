@@ -49,12 +49,12 @@ class DoctrineUpdateListener implements EventSubscriber
     {
         if ($entity instanceof IndexableInterface) {
             $this->publisher->publish(CapcoAppBundleMessagesTypes::ELASTICSEARCH_INDEXATION, new Message(
-              json_encode(['class' => \get_class($entity), 'id' => $entity->getId()])
+              json_encode(['class' => get_class($entity), 'id' => $entity->getId()])
           ));
         }
         if (($entity instanceof HasAuthorInterface || ($entity instanceof Contribution && method_exists($entity, 'getAuthor'))) && $entity->getAuthor()) {
             $this->publisher->publish(CapcoAppBundleMessagesTypes::ELASTICSEARCH_INDEXATION, new Message(
-              json_encode(['class' => \get_class($entity->getAuthor()), 'id' => $entity->getAuthor()->getId()])
+              json_encode(['class' => get_class($entity->getAuthor()), 'id' => $entity->getAuthor()->getId()])
           ));
         }
         if ($entity instanceof Comment && $entity->getRelatedObject()) {

@@ -201,7 +201,7 @@ abstract class AbstractMaker extends ContainerAwareCommand
             throw new NullableException();
         }
         $responses = explode(',', $response);
-        if (1 === \count($responses) && '' === $responses[0]) {
+        if (1 === count($responses) && '' === $responses[0]) {
             return null;
         }
 

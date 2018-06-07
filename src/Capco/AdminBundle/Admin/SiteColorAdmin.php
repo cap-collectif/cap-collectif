@@ -15,7 +15,7 @@ class SiteColorAdmin extends Admin
 
     public function toString($object)
     {
-        if (!\is_object($object)) {
+        if (!is_object($object)) {
             return '';
         }
 

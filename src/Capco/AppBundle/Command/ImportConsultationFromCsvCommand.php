@@ -113,7 +113,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
 
         $opinions = $this->getOpinions();
 
-        if (!$opinions || 0 === \count($opinions)) {
+        if (!$opinions || 0 === count($opinions)) {
             $output->writeln(
                 '<error>File "opinions.csv" is not provided, is empty or could not be parsed.</error>'
             );
@@ -122,7 +122,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
             return 1;
         }
 
-        $count = \count($opinions);
+        $count = count($opinions);
         $progress = new ProgressBar($output, $count);
         $progress->start();
 
@@ -171,7 +171,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
                 ])
             ;
 
-            if (\is_object($opinion) && !$input->getOption('force')) {
+            if (is_object($opinion) && !$input->getOption('force')) {
                 $output->writeln(
                     '<error>Opinion with title "'
                     . $row[0] .
@@ -182,7 +182,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
                 return 1;
             }
 
-            if (!\is_object($opinion)) {
+            if (!is_object($opinion)) {
                 $opinion = new Opinion();
             }
 
@@ -234,7 +234,7 @@ class ImportConsultationFromCsvCommand extends ContainerAwareCommand
 
         $output->writeln(
             '<info>'
-            . \count($opinions) - 1 .
+            . count($opinions) - 1 .
             ' opinions successfully created.</info>'
         );
 

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Proposal;
+use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;

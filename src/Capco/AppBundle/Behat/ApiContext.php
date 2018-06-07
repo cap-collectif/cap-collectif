@@ -381,7 +381,7 @@ EOF;
 
             // Set id
             $synthesis->setId($sId);
-            $metadata = $this->getEntityManager()->getClassMetadata(\get_class($synthesis));
+            $metadata = $this->getEntityManager()->getClassMetadata(get_class($synthesis));
             $metadata->setIdGenerator(new AssignedGenerator());
 
             $this->getEntityManager()->persist($synthesis);
@@ -427,7 +427,7 @@ EOF;
 
         // Set id
         $element->setId($values['id']);
-        $metadata = $this->getEntityManager()->getClassMetadata(\get_class($element));
+        $metadata = $this->getEntityManager()->getClassMetadata(get_class($element));
         $metadata->setIdGenerator(new AssignedGenerator());
 
         $this->getEntityManager()->persist($element);
@@ -449,7 +449,7 @@ EOF;
         $logExists = false;
         foreach ($logs as $log) {
             $sentences = $this->getService('capco.synthesis.log_manager')->getSentencesForLog($log);
-            if (\in_array($sentence, $sentences, true)) {
+            if (in_array($sentence, $sentences, true)) {
                 $logExists = true;
                 break;
             }
@@ -594,7 +594,7 @@ EOF;
 
             // Set id
             $synthesis->setId($id);
-            $metadata = $this->getEntityManager()->getClassMetadata(\get_class($synthesis));
+            $metadata = $this->getEntityManager()->getClassMetadata(get_class($synthesis));
             $metadata->setIdGenerator(new AssignedGenerator());
 
             $this->getEntityManager()->persist($synthesis);
@@ -618,7 +618,7 @@ EOF;
 
                 // Set id
                 $element->setId($elId);
-                $metadata = $this->getEntityManager()->getClassMetadata(\get_class($element));
+                $metadata = $this->getEntityManager()->getClassMetadata(get_class($element));
                 $metadata->setIdGenerator(new AssignedGenerator());
 
                 // Generate logs for elements

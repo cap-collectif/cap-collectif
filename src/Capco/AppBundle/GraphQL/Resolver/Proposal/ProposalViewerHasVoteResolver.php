@@ -36,10 +36,10 @@ class ProposalViewerHasVoteResolver
             $step = $this->abstractStepRepository->find($args->offsetGet('step'));
 
             if ($step instanceof CollectStep) {
-                return \count($this->proposalCollectVoteRepository->getByProposalAndStepAndUser($proposal, $step, $user)) > 0;
+                return count($this->proposalCollectVoteRepository->getByProposalAndStepAndUser($proposal, $step, $user)) > 0;
             }
             if ($step instanceof SelectionStep) {
-                return \count($this->proposalSelectionVoteRepository->getByProposalAndStepAndUser($proposal, $step, $user)) > 0;
+                return count($this->proposalSelectionVoteRepository->getByProposalAndStepAndUser($proposal, $step, $user)) > 0;
             }
 
             return false;

@@ -61,6 +61,6 @@ class CreateAccountsFromEmailsCommand extends ContainerAwareCommand
 
         (new Filesystem())->dumpFile('dump.txt', $dump);
 
-        $output->writeln(\count($emails) . ' accounts have been created !');
+        $output->writeln(count($emails) . ' accounts have been created !');
     }
 }

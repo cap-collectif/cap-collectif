@@ -24,7 +24,7 @@ class IsSocialNetworkUrlValidator extends ConstraintValidator
             return;
         }
 
-        if (!\in_array($constraint->social_network, $constraint->authorizedNetworks, true)) {
+        if (!in_array($constraint->social_network, $constraint->authorizedNetworks, true)) {
             return;
         }
 

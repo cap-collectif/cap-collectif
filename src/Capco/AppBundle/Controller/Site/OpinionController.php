@@ -50,7 +50,7 @@ class OpinionController extends Controller
             'opinionType' => $opinionType,
             'opinions' => $opinions,
             'page' => $page,
-            'nbPage' => ceil(\count($opinions) / 10),
+            'nbPage' => ceil(count($opinions) / 10),
             'opinionsSort' => $filter,
             'opinionSortOrders' => Opinion::$sortCriterias,
             'currentStep' => $currentStep,

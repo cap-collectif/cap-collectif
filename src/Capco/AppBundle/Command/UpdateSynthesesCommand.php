@@ -38,6 +38,6 @@ class UpdateSynthesesCommand extends ContainerAwareCommand
 
         $output->writeln('');
 
-        $output->writeln(\count($syntheses) . ' syntheses updated');
+        $output->writeln(count($syntheses) . ' syntheses updated');
     }
 }

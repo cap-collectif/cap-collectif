@@ -84,17 +84,17 @@ class CRUDController extends Controller
         $datagrid = $targetAdmin->getDatagrid();
 
         if (null !== $callback) {
-            if (!\is_callable($callback)) {
+            if (!is_callable($callback)) {
                 throw new \RuntimeException('Callback does not contain callable function.');
             }
 
             $callback($targetAdmin, $property, $searchText);
         } else {
-            if (\is_array($property)) {
+            if (is_array($property)) {
                 // multiple properties
                 foreach ($property as $prop) {
                     if (!$datagrid->hasFilter($prop)) {
-                        throw new \RuntimeException(sprintf('To retrieve autocomplete items, you should add filter "%s" to "%s" in configureDatagridFilters() method.', $prop, \get_class($targetAdmin)));
+                        throw new \RuntimeException(sprintf('To retrieve autocomplete items, you should add filter "%s" to "%s" in configureDatagridFilters() method.', $prop, get_class($targetAdmin)));
                     }
 
                     $filter = $datagrid->getFilter($prop);
@@ -104,7 +104,7 @@ class CRUDController extends Controller
                 }
             } else {
                 if (!$datagrid->hasFilter($property)) {
-                    throw new \RuntimeException(sprintf('To retrieve autocomplete items, you should add filter "%s" to "%s" in configureDatagridFilters() method.', $property, \get_class($targetAdmin)));
+                    throw new \RuntimeException(sprintf('To retrieve autocomplete items, you should add filter "%s" to "%s" in configureDatagridFilters() method.', $property, get_class($targetAdmin)));
                 }
 
                 $datagrid->setValue($property, null, $searchText);
@@ -113,7 +113,7 @@ class CRUDController extends Controller
 
         foreach ($conditions as $field => $value) {
             if (!$datagrid->hasFilter($field)) {
-                throw new \RuntimeException(sprintf('To retrieve autocomplete items, you should add filter "%s" to "%s" in configureDatagridFilters() method.', $field, \get_class($targetAdmin)));
+                throw new \RuntimeException(sprintf('To retrieve autocomplete items, you should add filter "%s" to "%s" in configureDatagridFilters() method.', $field, get_class($targetAdmin)));
             }
             $datagrid->setValue($field, null, $value);
         }
@@ -130,11 +130,11 @@ class CRUDController extends Controller
 
         foreach ($results as $entity) {
             if (null !== $toStringCallback) {
-                if (!\is_callable($toStringCallback)) {
+                if (!is_callable($toStringCallback)) {
                     throw new \RuntimeException('Option "to_string_callback" does not contain callable function.');
                 }
 
-                $label = \call_user_func($toStringCallback, $entity, $property);
+                $label = call_user_func($toStringCallback, $entity, $property);
             } else {
                 $resultMetadata = $targetAdmin->getObjectMetadata($entity);
                 $label = $resultMetadata->getTitle();

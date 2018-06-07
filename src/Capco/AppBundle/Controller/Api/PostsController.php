@@ -60,7 +60,7 @@ class PostsController extends FOSRestController
 
         return [
             'commentsAndAnswersCount' => (int) $countWithAnswers,
-            'commentsCount' => \count($paginator),
+            'commentsCount' => count($paginator),
             'comments' => $comments,
         ];
     }

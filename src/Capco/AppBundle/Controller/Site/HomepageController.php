@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
+use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\NewsletterSubscription;
 use Capco\AppBundle\Entity\Section;
 use Capco\AppBundle\Form\NewsletterSubscriptionType;

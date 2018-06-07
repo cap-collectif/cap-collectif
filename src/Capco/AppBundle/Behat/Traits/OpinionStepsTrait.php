@@ -74,6 +74,7 @@ trait OpinionStepsTrait
     {
         $this->visitPageWithParams('opinion page', self::$opinion);
         $this->getSession()->wait(5000, "document.body.innerHTML.toString().indexOf('Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.') > -1");
+        $this->setCookieConsent();
     }
 
     /**
@@ -627,8 +628,6 @@ trait OpinionStepsTrait
     }
 
     /**
-     * Go to a version.
-     *
      * @When I go to a version
      */
     public function iGoToAVersion()

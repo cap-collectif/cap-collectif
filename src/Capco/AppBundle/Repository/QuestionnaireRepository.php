@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\ProposalForm;
 use Doctrine\ORM\EntityRepository;
 
 /**

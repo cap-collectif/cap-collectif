@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Repository\AbstractStepRepository;

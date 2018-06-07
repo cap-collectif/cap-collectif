@@ -192,7 +192,7 @@ class ProfileController extends BaseController
                 ['Projects', 'UserDetails', 'Steps', 'ThemeDetails', 'ProjectType']
             )
         );
-        $projectsCount = \count($projectsRaw);
+        $projectsCount = count($projectsRaw);
 
         $opinionTypesWithUserOpinions = $doctrine->getRepository('CapcoAppBundle:OpinionType')->getByUser($user);
         $versions = $doctrine->getRepository('CapcoAppBundle:OpinionVersion')->getByUser($user);
@@ -249,7 +249,7 @@ class ProfileController extends BaseController
             'json',
             SerializationContext::create()->setGroups(['Projects', 'Steps', 'ThemeDetails'])
         );
-        $projectsCount = \count($projectsRaw);
+        $projectsCount = count($projectsRaw);
 
         return [
             'user' => $user,
@@ -397,7 +397,7 @@ class ProfileController extends BaseController
         $proposalsCount = array_reduce(
             $proposalsWithStep,
             function ($sum, $item) {
-                $sum += \count($item['proposals']);
+                $sum += count($item['proposals']);
 
                 return $sum;
             }

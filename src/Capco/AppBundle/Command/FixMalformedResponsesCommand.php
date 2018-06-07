@@ -30,7 +30,7 @@ class FixMalformedResponsesCommand extends ContainerAwareCommand
         $count = 0;
         foreach ($responses as $response) {
             $value = $response['value'];
-            if (!\is_array($value) && false !== strpos($value, '\\\\')) {
+            if (!is_array($value) && false !== strpos($value, '\\\\')) {
                 ++$count;
                 $value = str_replace('\\\\', '\\', $value);
                 if (json_decode($value)) {

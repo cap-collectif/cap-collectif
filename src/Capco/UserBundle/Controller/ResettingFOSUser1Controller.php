@@ -22,7 +22,7 @@ class ResettingFOSUser1Controller extends BaseController
         $email = $this->container->get('request')->request->get('email');
         $errors = $this->container->get('validator')->validate($email, new EmailConstraint());
 
-        if (\count($errors) > 0) {
+        if (count($errors) > 0) {
             return $this->container->get('templating')->renderResponse('CapcoUserBundle:Resetting:request.html.twig', ['invalid_email' => $email]);
         }
 

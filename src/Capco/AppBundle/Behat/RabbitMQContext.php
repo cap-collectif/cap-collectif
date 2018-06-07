@@ -86,7 +86,7 @@ class RabbitMQContext implements KernelAwareContext
     public function theQueueAssociatedToProducerShouldHave(string $producerName, int $messagesCount)
     {
         $queuedMessages = $this->getQueuedMessages($producerName);
-        \PHPUnit_Framework_Assert::assertCount($messagesCount, $queuedMessages, 'The queue contains ' . \count($queuedMessages) . ' messages');
+        \PHPUnit_Framework_Assert::assertCount($messagesCount, $queuedMessages, 'The queue contains ' . count($queuedMessages) . ' messages');
     }
 
     /**

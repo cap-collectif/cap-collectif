@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Proposal;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 

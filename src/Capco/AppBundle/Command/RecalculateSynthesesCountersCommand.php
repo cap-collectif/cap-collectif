@@ -48,7 +48,7 @@ class RecalculateSynthesesCountersCommand extends ContainerAwareCommand
                 ->getArrayResult()
             ;
 
-            $childCount = \count($publishedChildren);
+            $childCount = count($publishedChildren);
             $score = 0;
 
             foreach ($publishedChildren as $child) {

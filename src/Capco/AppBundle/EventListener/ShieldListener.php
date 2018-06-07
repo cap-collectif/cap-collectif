@@ -73,7 +73,7 @@ class ShieldListener
         $request = $event->getRequest();
         $route = $request->get('_route');
 
-        if (\in_array($route, self::AVAILABLE_ROUTES, true)) {
+        if (in_array($route, self::AVAILABLE_ROUTES, true)) {
             return;
         }
 

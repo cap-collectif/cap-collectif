@@ -40,7 +40,7 @@ class DynamicRelationSubscriber implements EventSubscriber
         foreach ($this->traits as $trait => $params) {
             switch ($trait) {
                 case 'selflinkable':
-                    if (\count(array_intersect(class_implements($metadata->getName()), $params['interfaces'])) > 0) {
+                    if (count(array_intersect(class_implements($metadata->getName()), $params['interfaces'])) > 0) {
                         $metadata->mapManyToMany([
                             'targetEntity' => $metadata->getName(),
                             'fieldName' => 'childConnections',
@@ -59,7 +59,7 @@ class DynamicRelationSubscriber implements EventSubscriber
                     }
                 break;
                 case 'votable':
-                    if (\count(array_intersect(class_implements($metadata->getName()), $params['interfaces'])) > 0) {
+                    if (count(array_intersect(class_implements($metadata->getName()), $params['interfaces'])) > 0) {
                         if (array_key_exists('votes', $metadata->getReflectionProperties())) {
                             break;
                         }

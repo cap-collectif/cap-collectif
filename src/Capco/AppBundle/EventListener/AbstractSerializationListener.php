@@ -20,7 +20,7 @@ abstract class AbstractSerializationListener implements EventSubscriberInterface
         }
 
         // TODO remove this condition when we rewrite synthesis app
-        if ('JMS\Serializer\Exclusion\DisjunctExclusionStrategy' === \get_class($exclusionStrategy)) {
+        if ('JMS\Serializer\Exclusion\DisjunctExclusionStrategy' === get_class($exclusionStrategy)) {
             return [];
         }
 

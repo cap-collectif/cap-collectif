@@ -73,7 +73,7 @@ class MenuItemResolver
         }
         $fixedLink = '/' . $link;
 
-        return $link === $current || substr($current, -\strlen($fixedLink)) === $fixedLink;
+        return $link === $current || substr($current, -strlen($fixedLink)) === $fixedLink;
     }
 
     public function getMenuUrl($url)
@@ -88,7 +88,7 @@ class MenuItemResolver
             $constraint
         );
 
-        if (0 === \count($errorList)) {
+        if (0 === count($errorList)) {
             return $url;
         }
 

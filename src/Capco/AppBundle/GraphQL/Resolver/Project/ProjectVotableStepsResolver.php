@@ -25,7 +25,7 @@ class ProjectVotableStepsResolver implements ResolverInterface
           ->getVotableStepsForProject($project)
         ;
         $collectSteps = $this->collectStepRepository->getCollectStepsForProject($project);
-        if (\count($collectSteps) > 0) {
+        if (count($collectSteps) > 0) {
             $step = $collectSteps[0];
             if ($step->isVotable()) {
                 array_push($collection, $step);

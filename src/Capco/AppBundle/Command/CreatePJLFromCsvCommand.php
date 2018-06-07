@@ -253,7 +253,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
         $user = $em->getRepository('CapcoUserBundle:User')
                    ->findOneByUsername($this->username);
 
-        $progress = new ProgressBar($output, \count($opinionTypesData) + \count($opinions) + \count($motives) + \count($modals));
+        $progress = new ProgressBar($output, count($opinionTypesData) + count($opinions) + count($motives) + count($modals));
         $progress->start();
 
         $project = new Project();
@@ -364,7 +364,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
             $opinion = $em->getRepository('CapcoAppBundle:Opinion')
                           ->findOneByTitle($row['opinion']);
 
-            if (!\is_object($opinion)) {
+            if (!is_object($opinion)) {
                 $opinion = new Opinion();
                 $opinion->setTitle($row['opinion']);
                 $opinion->setOpinionType($opinionType);
@@ -387,11 +387,11 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
             $opinion = $em->getRepository('CapcoAppBundle:Opinion')
                           ->findOneByTitle($row['opinion']);
 
-            if (!\is_object($opinion)) {
+            if (!is_object($opinion)) {
                 throw new \InvalidArgumentException('Unknown title: ' . $row['opinion'], 1);
             }
 
-            if (0 === \count($opinion->getAppendices())) {
+            if (0 === count($opinion->getAppendices())) {
                 $motif = new OpinionAppendix();
                 $motif->setAppendixType($exposayDayMotif);
                 $motif->setBody('<p>' . $row['motif'] . '</p>');
@@ -411,7 +411,7 @@ class CreatePJLFromCsvCommand extends ContainerAwareCommand
             $opinion = $em->getRepository('CapcoAppBundle:Opinion')
                           ->findOneByTitle($row['opinion']);
 
-            if (!\is_object($opinion)) {
+            if (!is_object($opinion)) {
                 throw new \InvalidArgumentException('Unknown title: ' . $row['opinion'], 1);
             }
 

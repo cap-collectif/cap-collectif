@@ -55,6 +55,10 @@ Capco\AppBundle\Entity\Project:
     video:
       expose: true
       groups: [Projects]
+    Cover:
+      expose: true
+      groups: [Default]
+      serialized_name: cover
   virtual_properties:
     hasParticipativeStep:
       expose: true

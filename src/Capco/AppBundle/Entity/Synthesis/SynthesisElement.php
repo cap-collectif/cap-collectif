@@ -796,7 +796,7 @@ class SynthesisElement
 
     public function getChildrenCount()
     {
-        return \count($this->children);
+        return count($this->children);
     }
 
     // ************************* Lifecycle ***********************************

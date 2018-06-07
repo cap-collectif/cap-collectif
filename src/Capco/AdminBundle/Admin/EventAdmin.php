@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Entity\Event;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;

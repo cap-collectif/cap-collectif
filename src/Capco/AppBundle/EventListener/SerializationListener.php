@@ -62,7 +62,7 @@ class SerializationListener extends AbstractSerializationListener
         $context = $event->getContext();
         $context->attributes->get('groups')->map(
                 function (array $groups) use ($event) {
-                    if (\in_array('LogDetails', $groups, true)) {
+                    if (in_array('LogDetails', $groups, true)) {
                         $log = $event->getObject();
                         $event->getVisitor()->addData(
                             'sentences',
@@ -82,7 +82,7 @@ class SerializationListener extends AbstractSerializationListener
         $context = $event->getContext();
         $context->attributes->get('groups')->map(
                 function (array $groups) use ($event) {
-                    if (\in_array('LogDetails', $groups, true)) {
+                    if (in_array('LogDetails', $groups, true)) {
                         $element = $event->getObject();
                         $context = new SerializationContext();
                         $context->setGroups(['LogDetails']);

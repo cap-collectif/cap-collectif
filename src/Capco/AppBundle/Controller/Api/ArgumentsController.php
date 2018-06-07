@@ -61,7 +61,7 @@ class ArgumentsController extends FOSRestController
 
         return [
             'arguments' => $arguments,
-            'count' => \count($arguments),
+            'count' => count($arguments),
         ];
     }
 
@@ -98,7 +98,7 @@ class ArgumentsController extends FOSRestController
 
         return [
             'arguments' => $arguments,
-            'count' => \count($arguments),
+            'count' => count($arguments),
         ];
     }
 
@@ -132,7 +132,7 @@ class ArgumentsController extends FOSRestController
         $author = $this->getUser();
         $repo = $this->get('capco.argument.repository');
 
-        if (\count($repo->findCreatedSinceIntervalByAuthor($author, 'PT1M')) >= 2) {
+        if (count($repo->findCreatedSinceIntervalByAuthor($author, 'PT1M')) >= 2) {
             throw new BadRequestHttpException('You contributed too many times.');
         }
 

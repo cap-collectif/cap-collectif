@@ -41,7 +41,7 @@ trait TextableTrait
     {
         $text = Text::htmlToString($this->body);
 
-        if (\strlen($text) > $nb) {
+        if (strlen($text) > $nb) {
             $text = substr($text, 0, $nb);
             $text .= '[…]';
         }

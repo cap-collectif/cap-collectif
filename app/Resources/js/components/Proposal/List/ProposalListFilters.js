@@ -6,7 +6,6 @@ import type { State } from '../../../types';
 import ProposalListSearch from '../List/ProposalListSearch';
 import Input from '../../Form/Input';
 import ProposalListOrderSorting from './ProposalListOrderSorting';
-
 import { changeFilter, changeProposalListView } from '../../../redux/modules/proposal';
 import ToggleMapButton from './../Map/ToggleMapButton';
 
@@ -78,6 +77,12 @@ export const ProposalListFilters = React.createClass({
     } = this.props;
     const { displayedFilters } = this.state;
 
+    // TO update for prod values, and delete after
+    const isMontreuil =
+      window.location.href ===
+      'http://montreuilpreprod.cap-collectif.com/project/budget-participatif-2017/selection/vote-quartier';
+    const defaultDistrictId = '26370cca-6c96-11e7-ab12-0242ac110008';
+
     return (
       <div className="mb-15 mt-30">
         <Row>
@@ -110,7 +115,11 @@ export const ProposalListFilters = React.createClass({
                 onChange={e => {
                   dispatch(changeFilter(filterName, e.target.value));
                 }}
-                value={filters[filterName] || 0}>
+                value={
+                  filters[filterName] || (isMontreuil && filterName === 'districts')
+                    ? defaultDistrictId
+                    : 0
+                }>
                 <FormattedMessage id={`global.select_${filterName}`}>
                   {message => <option value="0">{message}</option>}
                 </FormattedMessage>

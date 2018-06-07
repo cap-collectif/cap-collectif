@@ -46,7 +46,7 @@ class CreateAnswersFromCsvCommand extends ContainerAwareCommand
             throw new UsernameNotFoundException('Author email does not exist in db');
         }
 
-        $progress = new ProgressBar($output, \count($answers));
+        $progress = new ProgressBar($output, count($answers));
         $progress->start();
 
         $dump = '<ul>';
@@ -59,9 +59,9 @@ class CreateAnswersFromCsvCommand extends ContainerAwareCommand
 
             $slug = $row['slug'];
             $slug = explode('/', $slug);
-            $slug = $slug[\count($slug) - 1];
+            $slug = $slug[count($slug) - 1];
 
-            $type = \in_array('versions', explode('/', $row['slug']), true)
+            $type = in_array('versions', explode('/', $row['slug']), true)
                 ? 'version'
                 : 'opinion'
             ;
@@ -114,6 +114,6 @@ class CreateAnswersFromCsvCommand extends ContainerAwareCommand
 
         $progress->finish();
 
-        $output->writeln(\count($answers) . ' answers have been created !');
+        $output->writeln(count($answers) . ' answers have been created !');
     }
 }

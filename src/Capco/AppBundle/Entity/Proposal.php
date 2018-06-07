@@ -498,7 +498,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
 
     public function canContribute(): bool
     {
-        return ($this->enabled || $this->isDraft()) && !$this->isTrashed && $this->getStep() && $this->getStep()->canContribute();
+        return ($this->enabled || $this->isDraft()) && !$this->isTrashed && $this->getStep()->canContribute();
     }
 
     public function canComment(): bool
@@ -908,7 +908,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
         $findStatus = null;
         $loop = 0;
 
-        while (null === $findStatus && $loop < \count($selections)) {
+        while (null === $findStatus && $loop < count($selections)) {
             $selection = $selections[$loop];
 
             if (null !== $selection->getStatus()) {
@@ -1043,11 +1043,11 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
 
     public function hasFollowers(): bool
     {
-        return \count($this->followers) > 0;
+        return count($this->followers) > 0;
     }
 
     public function countFollowers(): int
     {
-        return \count($this->followers);
+        return count($this->followers);
     }
 }

@@ -133,17 +133,17 @@ class UserActivity implements FollowerNotifiedOfInterface
 
     public function hasUserProject(): bool
     {
-        return \count($this->userProjects) > 0;
+        return count($this->userProjects) > 0;
     }
 
     public function hasProposal(): bool
     {
-        return \count($this->userProposals) > 0;
+        return count($this->userProposals) > 0;
     }
 
     public function setNotifiedOf(string $notifiedOf): self
     {
-        if (!\in_array($notifiedOf, self::NOTIFICATIONS, true)) {
+        if (!in_array($notifiedOf, self::NOTIFICATIONS, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     '%s is not valide value for notified of follower %s -> %s',

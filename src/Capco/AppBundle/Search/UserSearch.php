@@ -34,7 +34,7 @@ class UserSearch extends Search
         if ($terms) {
             $query = $this->searchTermsInMultipleFields($query, self::SEARCH_FIELDS, $terms, 'phrase_prefix');
         }
-        if (\count($notInIds) > 0) {
+        if (count($notInIds) > 0) {
             $query = $this->searchNotInTermsForField($query, 'id', $notInIds);
         }
 

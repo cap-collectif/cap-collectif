@@ -14,7 +14,7 @@ class CsvWriter
     public function writeRowData(&$row, array $currentData, string $fieldKey)
     {
         foreach ($currentData as $dataFieldKey => $dataFieldValue) {
-            if (!\is_array($dataFieldValue)) {
+            if (!is_array($dataFieldValue)) {
                 $rowName = $fieldKey . '_' . $dataFieldKey;
                 if (array_key_exists($rowName, $row)) {
                     $row[$rowName] = $dataFieldValue;
@@ -36,7 +36,7 @@ class CsvWriter
         $rows[] = array_values($row);
         // children rows
         foreach ($currentData as $dataFieldKey => $dataFieldValue) {
-            if (\is_array($dataFieldValue) && $this->isMultiDimensionalArray($dataFieldValue)) {
+            if (is_array($dataFieldValue) && $this->isMultiDimensionalArray($dataFieldValue)) {
                 foreach ($dataFieldValue as $key => $value) {
                     if ($value) {
                         $this->writeNewRow($rows, $value, $fieldKey . '_' . $dataFieldKey);
@@ -48,7 +48,7 @@ class CsvWriter
 
     private function isMultiDimensionalArray(array $array): bool
     {
-        return \count(array_filter($array, 'is_array')) > 0;
+        return count(array_filter($array, 'is_array')) > 0;
     }
 
     private function createCleanRow(): array

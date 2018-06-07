@@ -33,7 +33,7 @@ final class Map
 
     public static function decodeAddressFromJson(string $address)
     {
-        if (!\is_array($address)) {
+        if (!is_array($address)) {
             return json_decode($address, true)[0]['formatted_address'];
         }
 

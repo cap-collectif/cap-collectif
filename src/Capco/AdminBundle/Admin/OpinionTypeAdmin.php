@@ -4,6 +4,7 @@ namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
+use Capco\AppBundle\Entity\Steps\ConsultationStepType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;

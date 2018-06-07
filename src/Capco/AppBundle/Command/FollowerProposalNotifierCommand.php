@@ -2,6 +2,8 @@
 
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\Entity\Follower;
+use Capco\AppBundle\Entity\Proposal;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -38,7 +40,7 @@ class FollowerProposalNotifierCommand extends ContainerAwareCommand
         foreach ($followedProposalsActivitiesByUserId as $userId => $activities) {
             $notifier->onReportActivities($activities, $sendAt, $siteName, $siteUrl);
         }
-        $nbNewsletters = \count($followedProposalsActivitiesByUserId);
+        $nbNewsletters = count($followedProposalsActivitiesByUserId);
         $this->getContainer()->get('logger')->addInfo('Notification correctly send to ' . $nbNewsletters . ' users');
         $output->writeln(
             '<info>Notification correctly send to ' . $nbNewsletters . ' users</info>'
