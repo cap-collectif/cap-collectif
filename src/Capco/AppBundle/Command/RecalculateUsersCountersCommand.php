@@ -31,27 +31,24 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
         ;
     }
 
-    protected function compute(string $dql, bool $native = false): void
+    protected function compute($dql, $native = false)
     {
         if ($this->force) {
-            $native ? $this->em->getConnection()->executeUpdate($dql) : $this->em->createQuery($dql)->execute();
+            if ($native) {
+                $this->em->getConnection()->executeUpdate($dql);
+            } else {
+                $this->em->createQuery($dql)->execute();
+            }
         } else {
-            $this->executeOnlyChangesFromLastRun($dql, $native);
+            $this->executeOnlyChangesFromLastRun($dql);
         }
     }
 
-    protected function executeOnlyChangesFromLastRun(string $dql, bool $native = false): void
+    protected function executeOnlyChangesFromLastRun($dql)
     {
-        if ($this->ids && \count($this->ids) > 0) {
+        if ($this->ids && count($this->ids) > 0) {
             $dql .= ' where u.id in (:ids)';
-
-            if ($native) {
-                $ids = implode(',', $this->ids);
-                $query = $this->em->getConnection()->prepare($dql);
-                $query->bindParam(':ids', $ids);
-            } else {
-                $query = $this->em->createQuery($dql)->setParameter('ids', $this->ids);
-            }
+            $query = $this->em->createQuery($dql)->setParameter('ids', $this->ids);
             $query->execute();
         }
     }

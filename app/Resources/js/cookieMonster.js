@@ -1,5 +1,6 @@
 /* eslint-disable */
 // @flow
+import config from './config';
 
 const GA_COOKIE_NAMES = [
   '__utma',

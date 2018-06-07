@@ -44,11 +44,6 @@ class ProposalRepository extends EntityRepository
         $proposalsWithStep = [];
         foreach ($results as $result) {
             $collectStep = $result->getProposalForm()->getStep();
-
-            if (!$collectStep) {
-                continue;
-            }
-
             if (array_key_exists($collectStep->getId(), $proposalsWithStep)) {
                 $proposalsWithStep[$collectStep->getId()]['proposals'][] = $result;
             } else {
