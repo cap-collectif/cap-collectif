@@ -38,7 +38,7 @@ class HasOnlyOneSelectionStepAllowingProgressStepsValidator extends ConstraintVa
     public function hasMoreThanOneSelectionStepAllowingProgressSteps(Collection $steps): bool
     {
         return $steps->count() > 0 && $steps->filter(
-            function (AbstractStep $step) {
+            function (?AbstractStep $step) {
                 return $step && $step->isSelectionStep() && $step->isAllowingProgressSteps();
             }
         )->count() > 1;
