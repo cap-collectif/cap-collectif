@@ -9,6 +9,7 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\ExpectationException;
 use Behat\Testwork\Hook\Scope\AfterSuiteScope;
 use Behat\Testwork\Tester\Result\TestResult;
+use Capco\AppBundle\Behat\Page\HomePage;
 use Capco\AppBundle\Behat\Traits\AdminTrait;
 use Capco\AppBundle\Behat\Traits\CommentStepsTrait;
 use Capco\AppBundle\Behat\Traits\NotificationsStepTrait;
@@ -45,6 +46,7 @@ class ApplicationContext extends UserContext
     use ThemeStepsTrait;
     use AdminTrait;
     protected $dbContainer;
+    protected $cookieConsented;
     protected $currentPage = 'home page';
     protected $queues = [];
 
@@ -97,6 +99,7 @@ class ApplicationContext extends UserContext
         $this->snapshot->createSnapshot(REPOSITORY_NAME, SNAPSHOT_NAME, [
           'indices' => $this->indexManager->getLiveSearchIndexName(),
         ], true);
+        $this->cookieConsented = !$scenario->hasTag('javascript');
     }
 
     /**
@@ -177,8 +180,8 @@ class ApplicationContext extends UserContext
      */
     public function iVisitedPage(string $pageName)
     {
-        $this->setCookieConsent();
         $this->navigationContext->iVisitedPage($pageName);
+        $this->setCookieConsent();
     }
 
     /**
@@ -228,8 +231,8 @@ class ApplicationContext extends UserContext
      */
     public function iVisitedPageWith($pageName, TableNode $parameters)
     {
-        $this->setCookieConsent();
         $this->navigationContext->iVisitedPageWith($pageName, $parameters);
+        $this->setCookieConsent();
     }
 
     /**
@@ -667,21 +670,30 @@ class ApplicationContext extends UserContext
         $this->visitPageWithParams('home page');
     }
 
-    private function setCookieConsent()
+    public function setCookieConsent()
     {
-        // First we go to homepage, to set cookie consent
-        if ($this->getSession()) {
-            $this->navigationContext->iVisitedPage('HomePage');
-            $this->getSession()->setCookie('hasFullConsent', true);
+        if ($this->cookieConsented) {
+            return;
         }
+        $isPresent = $this->getSession()->wait(2000, "document.getElementById('cookie-banner') != null");
+        if (!$isPresent) {
+            echo 'No cookie banner is present.';
+
+            return;
+        }
+        $isBannerVisible = $this->getSession()->evaluateScript("document.getElementById('cookie-banner').classList.contains('active')");
+        if ($isBannerVisible) {
+            $this->iClickElement('#cookie-consent');
+        }
+        $this->cookieConsented = true;
     }
 
     private function visitPageWithParams($page, $params = [])
     {
         $this->currentPage = $page;
         $this->navigationContext->getPage($page)->open($params);
-        $this->setCookieConsent();
         $this->iWait(2);
+        $this->setCookieConsent();
     }
 
     private function getCurrentPage()

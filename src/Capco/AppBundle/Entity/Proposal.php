@@ -498,7 +498,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
 
     public function canContribute(): bool
     {
-        return ($this->enabled || $this->isDraft()) && !$this->isTrashed && $this->getStep() && $this->getStep()->canContribute();
+        return ($this->enabled || $this->isDraft()) && !$this->isTrashed && $this->getStep()->canContribute();
     }
 
     public function canComment(): bool

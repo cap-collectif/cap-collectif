@@ -100,11 +100,11 @@ abstract class Message
 
     final public function getRecipient($key) //:?MessageRecipient
     {
-        if (!\is_int($key) && !\is_string($key)) {
+        if (!is_int($key) && !is_string($key)) {
             throw new \InvalidArgumentException('Recipient key must be an integer index or valid email address string.');
         }
 
-        if (\is_string($key) && array_key_exists($key = mb_strtolower($key), $this->recipients)) {
+        if (is_string($key) && array_key_exists($key = mb_strtolower($key), $this->recipients)) {
             return $this->recipients[$key];
         }
 
@@ -113,24 +113,24 @@ abstract class Message
         return $recipients[$key] ?? null;
     }
 
-    public function getSenderEmail(): ?string
+    public function getSenderEmail()//: ?string
     {
         return $this->senderEmail;
     }
 
-    public function setSenderEmail(?string $senderEmail): self
+    public function setSenderEmail(/*?string*/ $senderEmail): self
     {
         $this->senderEmail = $senderEmail;
 
         return $this;
     }
 
-    public function getSenderName(): ?string
+    public function getSenderName()//: ?string
     {
         return $this->senderName;
     }
 
-    public function setSenderName(?string $senderName): self
+    public function setSenderName(/*?string*/ $senderName): self
     {
         $this->senderName = $senderName;
 
@@ -142,7 +142,7 @@ abstract class Message
         return $this->cc;
     }
 
-    public function addCC(string $cc): void
+    public function addCC(string $cc)//: void
     {
         $this->cc[] = $cc;
     }
@@ -159,7 +159,7 @@ abstract class Message
         return $this->bcc;
     }
 
-    public function addBcc(string $bcc): void
+    public function addBcc(string $bcc)//: void
     {
         $this->bcc[] = $bcc;
     }

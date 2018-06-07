@@ -12,14 +12,15 @@ use Capco\AppBundle\Repository\FollowerRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
-use Psr\Log\LoggerInterface;
+use Doctrine\ORM\EntityNotFoundException;
+use Monolog\Logger;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Router;
 
 class ActivitiesResolver
 {
-    public const NOT_FOLLOWED = 0;
-    public const ACTIVITIES = ['isUpdated', 'isDeleted', 'comments', 'votes', 'lastStep'];
+    const NOT_FOLLOWED = 0;
+    const ACTIVITIES = ['isUpdated', 'isDeleted', 'comments', 'votes', 'lastStep'];
 
     protected $followerRepository;
     protected $proposalRepository;
@@ -33,7 +34,7 @@ class ActivitiesResolver
         ProposalRepository $proposalRepository,
         ProposalFormRepository $proposalFormRepository,
         ProjectRepository $projectRepository,
-        LoggerInterface $logger,
+        Logger $logger,
         Router $router
     ) {
         $this->followerRepository = $followerRepository;
@@ -55,13 +56,13 @@ class ActivitiesResolver
                 $proposalId = $follower->getProposal()->getId();
                 $user = $follower->getUser();
                 $userId = $user->getId();
-            } catch (\Exception $e) {
-                $this->logger->error(__METHOD__ . ' ' . $e->getMessage());
+            } catch (EntityNotFoundException $e) {
+                $this->logger->addError(__METHOD__ . ' ' . $e->getMessage());
                 continue;
             }
             if (!filter_var($user->getEmailCanonical(), FILTER_VALIDATE_EMAIL)) {
                 $this->logger->error(
-                    sprintf('%s doesn\'t have a valid email %s', $user->getUsername(), $user->getEmailCanonical())
+                    sprintf('%s doesnt have a valid email %s', $user->getUsername(), $user->getEmailCanonical())
                 );
                 continue;
             }
@@ -126,14 +127,15 @@ class ActivitiesResolver
                     $proposalId
                 );
                 $currentProposal['title'] = $proposal->getTitle();
-                $currentProposal['link'] = $proposal->getProject() ? $this->router->generate(
-                    'app_project_show_proposal', [
+                $currentProposal['link'] = $this->router->generate(
+                    'app_project_show_proposal',
+                    [
                         'projectSlug' => $proposal->getProject()->getSlug(),
                         'stepSlug' => $proposal->getStep()->getSlug(),
                         'proposalSlug' => $proposal->getSlug(),
                     ],
                     UrlGeneratorInterface::ABSOLUTE_URL
-                ) : $this->router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL);
+                );
                 $currentProposal['isUpdated'] = $proposal->isUpdatedInLastInterval(
                     $yesterdayLasTime,
                     $twentyFourHoursInterval
@@ -155,7 +157,7 @@ class ActivitiesResolver
             }
         }
 
-        unset($currentProposal, $proposals);
+        unset($proposalForm, $currentProposal, $proposals);
 
         return $proposalActivities;
     }
@@ -229,7 +231,7 @@ class ActivitiesResolver
 
     private function countProposalActivities(array $proposalActivities): int
     {
-        $nbActivities = \count(self::ACTIVITIES);
+        $nbActivities = count(self::ACTIVITIES);
         foreach (self::ACTIVITIES as $activity) {
             if (!$proposalActivities[$activity]) {
                 --$nbActivities;
