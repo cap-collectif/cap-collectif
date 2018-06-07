@@ -4,7 +4,7 @@ import {type IntlShape, injectIntl, FormattedMessage} from 'react-intl';
 import {connect, type MapStateToProps} from 'react-redux';
 import {reduxForm, type FormProps, Field, SubmissionError} from 'redux-form';
 import {createFragmentContainer, graphql} from 'react-relay';
-import {Panel, ButtonToolbar, Button} from 'react-bootstrap';
+import {ButtonToolbar, Button} from 'react-bootstrap';
 import type {Dispatch, State, GlobalState} from '../../../types';
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
@@ -19,7 +19,6 @@ type Props = FormProps &
   hasValue: Object,
   userTypes: Array<Object>,
   features: Object,
-  isGranted: boolean,
 };
 
 const formName = 'user-admin-edit-profile';
@@ -57,12 +56,13 @@ const validate = (values: Object) => {
 
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const {intl} = props;
-  const media =
-    typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null;
+  const media = typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null;
+  const userId = props.user.id;
   delete values.media;
   const input = {
     ...values,
     media,
+    userId,
   };
 
   return UpdateProfilePublicDataMutation.commit({input})
@@ -97,12 +97,12 @@ export class UserAdminProfile extends React.Component<Props, State> {
       userTypes,
       features,
       error,
-      isGranted,
+      user,
     } = this.props;
     return (
       <div className="box box-primary container-fluid">
         <h2 className="page-header">
-          <FormattedMessage id="user.edition"/>
+          <FormattedMessage id="user.profile.show.jumbotron"/>
         </h2>
         <form onSubmit={handleSubmit}>
           <div className="box-content box-content__content-form">
@@ -112,7 +112,8 @@ export class UserAdminProfile extends React.Component<Props, State> {
               label={<FormattedMessage id="form.label_media"/>}
               component={component}
               type="image"
-              disabled={!isGranted}
+              divClassName="col-sm-10"
+              disabled={!user.isUserOrSuperAdmin}
             />
             <Field
               name="username"
@@ -127,7 +128,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
               type="text"
               id="profile-form-username"
               divClassName="col-sm-4"
-              disabled={!isGranted}
+              disabled={!user.isUserOrSuperAdmin}
             />
             <div className="clearfix"/>
             {features.user_type && (
@@ -137,7 +138,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
                 component={component}
                 type="select"
                 divClassName="col-sm-4"
-                disabled={!isGranted}
+                disabled={!user.isUserOrSuperAdmin}
                 label={<FormattedMessage id="registration.type"/>}
               >
                 <FormattedMessage id="registration.select.type">
@@ -156,7 +157,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
               component={component}
               type="textarea"
               id="public-data-form-biography"
-              disabled={!isGranted}
+              disabled={!user.isUserOrSuperAdmin}
               label={<FormattedMessage id="form.label_biography"/>}
               divClassName="col-sm-8"
             />
@@ -165,7 +166,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
               name="neighborhood"
               component={component}
               type="text"
-              disabled={!isGranted}
+              disabled={!user.isUserOrSuperAdmin}
               id="public-data-form-neighborhood"
               label={<FormattedMessage id="form.label_neighborhood"/>}
               divClassName="col-sm-4"
@@ -175,7 +176,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
               name="website"
               component={component}
               type="text"
-              disabled={!isGranted}
+              disabled={!user.isUserOrSuperAdmin}
               id="public-data-form-website"
               label={<FormattedMessage id="form.label_website"/>}
               divClassName="col-sm-4"
@@ -189,7 +190,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
               name="facebookUrl"
               component={component}
               type="text"
-              disabled={!isGranted}
+              disabled={!user.isUserOrSuperAdmin}
               id="public-data-form-facebook"
               label={<FormattedMessage id="user.profile.edit.facebook"/>}
               divClassName="col-sm-4"
@@ -200,7 +201,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
               name="twitterUrl"
               component={component}
               type="text"
-              disabled={!isGranted}
+              disabled={!user.isUserOrSuperAdmin}
               id="public-data-form-twitter"
               divClassName="col-sm-4"
               label={<FormattedMessage id="user.profile.edit.twitter"/>}
@@ -211,7 +212,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
               name="linkedInUrl"
               component={component}
               type="text"
-              disabled={!isGranted}
+              disabled={!user.isUserOrSuperAdmin}
               id="public-data-form-linkedIn"
               divClassName="col-sm-4"
               label={<FormattedMessage id="show.label_linked_in_url"/>}
@@ -225,7 +226,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
               name="profilePageIndexed"
               component={component}
               type="checkbox"
-              disabled={!isGranted}
+              disabled={!user.isUserOrSuperAdmin}
               labelClassName="font-weight-normal"
               children={<FormattedMessage id="user.profile.edit.profilePageIndexed"/>}
               divClassName="col-sm-8"
@@ -233,7 +234,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
             <div className="clearfix"/>
             <ButtonToolbar className="box-content__toolbar">
               <Button
-                disabled={invalid || submitting || !isGranted}
+                disabled={invalid || submitting || !user.isUserOrSuperAdmin}
                 type="submit"
                 bsStyle="primary"
                 id="profile-form-save">
@@ -312,6 +313,7 @@ export default createFragmentContainer(
         id
       }
       neighborhood
+      isUserOrSuperAdmin
     }
   `,
 );

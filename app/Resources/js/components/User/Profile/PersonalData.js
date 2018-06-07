@@ -669,6 +669,7 @@ export default createFragmentContainer(
       zipCode
       city
       gender
+      email
       phoneConfirmed
       isArchiveReady
       ...UserArchiveRequestButton_viewer

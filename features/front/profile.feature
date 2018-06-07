@@ -9,9 +9,10 @@ Scenario: Logged in user wants to change his username
   Given feature "user_type" is enabled
   Given I am logged in as user
   And I visited "edit profile page"
-  And I wait 2 seconds
+  And I wait 5 seconds
   And I fill in the following:
     | profile-form-username | user3 |
+  And I wait 1 seconds
   And I press "profile-form-save"
   And I wait 1 seconds
   Then I should see "global.saved"

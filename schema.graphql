@@ -2584,6 +2584,8 @@ type UpdateProfilePayload {
 }
 
 input UpdateProfilePersonalDataInput {
+  userId: ID
+
   # Your firstname
   firstname: String
 
@@ -2614,12 +2616,15 @@ input UpdateProfilePersonalDataInput {
 }
 
 type UpdateProfilePersonalDataPayload {
-  # The viewer
-  viewer: User!
+  # The user just have been updated
+  user: User!
   clientMutationId: String
 }
 
 input UpdateProfilePublicDataInput {
+  # Your user id (role_super_admin)
+  userId: ID
+
   # Your username
   username: String!
 
@@ -2653,8 +2658,8 @@ input UpdateProfilePublicDataInput {
 }
 
 type UpdateProfilePublicDataPayload {
-  # current user
-  viewer: User!
+  # the user just have been updated
+  user: User!
   clientMutationId: String
 }
 

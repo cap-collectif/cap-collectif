@@ -3,6 +3,8 @@ UpdateProfilePersonalDataInput:
     config:
         description: "Your personal data"
         fields:
+            userId:
+                type: "ID"
             firstname:
                 type: "String"
                 description: "Your firstname"

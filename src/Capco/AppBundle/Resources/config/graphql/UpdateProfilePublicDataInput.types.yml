@@ -3,6 +3,9 @@ UpdateProfilePublicDataInput:
     config:
         description: "Update your public data"
         fields:
+            userId:
+                type: "ID"
+                description: "Your user id (role_super_admin)"
             username:
                 type: "String!"
                 description: "Your username"
