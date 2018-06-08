@@ -24,10 +24,19 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $userId = $input->getArgument('userId');
+        $user = $this->getContainer()->get('capco.user.repository')->find($userId);
 
         $datas = $this->requestDatas($userId);
         foreach ($datas as $key => $value) {
             $this->createCsv($userId, $value, $key);
+        }
+
+        $archive = $this->getContainer()->get('capco.user_archive.repository')->getLastForUser($user);
+
+        if ($archive) {
+            $archive->setReady(true);
+            $archive->setPath(trim($this->getZipFilenameForUser($userId)));
+            $this->getContainer()->get('doctrine.orm.entity_manager')->flush();
         }
 
         $output->writeln($this->getZipFilenameForUser($userId));
@@ -127,7 +136,9 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
 
     protected function getZipFilenameForUser(string $userId): string
     {
-        return "$userId.zip";
+        $hash = sha1($userId . time());
+
+        return "$hash.zip";
     }
 
     protected function getZipPathForUser(string $userId): string

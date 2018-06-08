@@ -10,4 +10,3 @@ Capco\AppBundle\Entity\UserArchive:
     requestedAt: <(new \DateTime('2018-05-27'))>
     ready: true
     user: '@user4'
-    path: 'userAdmin.zip'

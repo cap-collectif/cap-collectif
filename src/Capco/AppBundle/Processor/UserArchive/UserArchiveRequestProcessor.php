@@ -52,12 +52,6 @@ class UserArchiveRequestProcessor implements ProcessorInterface
         $output = new BufferedOutput();
 
         if (0 === $command->run($input, $output)) {
-            $archive->setReady(true);
-
-            $archive->setPath(trim($output->fetch()));
-
-            $this->em->flush();
-
             $this->userArchiveNotifier->onUserArchiveGenerated($archive);
 
             return true;
