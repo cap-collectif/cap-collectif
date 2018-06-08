@@ -190,7 +190,7 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
         if ($contributions = Arr::path($data, 'data.node.contributions.edges')) {
             $rows = $this->getCleanArrayForRowInsert($contributions, $header, true);
         } elseif ($medias = Arr::path($data, 'data.node.medias')) {
-            $this->downloadMedias($medias, $userId);
+            $this->exportMedias($medias, $userId);
             $rows = $this->getCleanArrayForRowInsert($medias, $header);
         } elseif ($groups = Arr::path($data, 'data.node.groups.edges')) {
             $rows = $this->getCleanArrayForRowInsert($groups, $header, true);
@@ -271,7 +271,7 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
         return ['rows' => $rows, 'counter' => $rowCounter];
     }
 
-    protected function downloadMedias(array $medias, string $userId)
+    protected function exportMedias(array $medias, string $userId)
     {
         $mediasPath = $this->getContainer()->getParameter('kernel.root_dir') . '/../web/media/default/0001/01/';
 
