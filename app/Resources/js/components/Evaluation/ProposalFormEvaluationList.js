@@ -21,7 +21,7 @@ export class ProposalFormEvaluationList extends Component<Props> {
     return (
       <div className="container">
         <h4>
-          {proposalForm.step && proposalForm.step.project.title}{' '}
+          {proposalForm.step && proposalForm.step.project && proposalForm.step.project.title}{' '}
           <span className="excerpt small">
             <FormattedMessage
               id="proposal.count"
