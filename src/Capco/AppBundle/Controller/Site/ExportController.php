@@ -102,7 +102,7 @@ query {
         $data = $executor->execute([
           'query' => $requestString,
           'variables' => [],
-        ], ['disable_acl' => true])->toArray();
+        ])->toArray();
 
         if (!isset($data['data'])) {
             $this->get('logger')->error('GraphQL Query Error: ' . $data['error']);
@@ -234,7 +234,7 @@ query {
         $data = $executor->execute([
           'query' => $requestString,
           'variables' => [],
-        ], ['disable_acl' => true])->toArray();
+        ])->toArray();
 
         if (!isset($data['data'])) {
             $this->get('logger')->error('GraphQL Query Error: ' . $data['error']);
@@ -336,7 +336,7 @@ query {
         $data = $executor->execute([
           'query' => $requestString,
           'variables' => [],
-        ], ['disable_acl' => true])->toArray();
+        ])->toArray();
 
         if (!isset($data['data'])) {
             $this->get('logger')->error('GraphQL Query Error: ' . $data['error']);

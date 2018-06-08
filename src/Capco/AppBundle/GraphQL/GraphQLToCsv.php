@@ -22,7 +22,7 @@ class GraphQLToCsv
         $response = $executor->execute([
           'query' => $requestString,
           'variables' => [],
-        ], ['disable_acl' => true])->toArray();
+        ])->toArray();
 
         if (!isset($response['data'])) {
             $this->logger->error('GraphQL Query Error: ' . $response['error']);

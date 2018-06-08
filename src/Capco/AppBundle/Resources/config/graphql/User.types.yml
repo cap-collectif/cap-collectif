@@ -16,7 +16,6 @@ User:
                 type: "String"
                 description: "email."
                 resolve: "@=resolver('user_email', [value])"
-                access: '@=context and context["disable_acl"] ? true : service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             displayName:
                 type: "String!"
             username:
@@ -32,49 +31,42 @@ User:
             createdAt:
                 type: "DateTime!"
                 description: "Identifies the date and time when the object was created."
-                access: '@=context and context["disable_acl"] ? true : service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             updatedAt:
                 type: "String"
                 description: "Updated date of the user."
                 resolve: "@=resolver('user_updatedAt', [value])"
-                access: '@=context and context["disable_acl"] ? true : service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             lastLogin:
                 type: "String"
                 description: "Last connection of the user."
                 resolve: "@=resolver('user_lastLogin', [value])"
-                access: '@=context and context["disable_acl"] ? true : service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             enabled:
                 type: "Boolean!"
                 description: "Is user is activated."
             notificationsConfiguration:
                 type: "UserNotificationsConfiguration!"
                 description: "A user notifications preferences"
-                access: '@=context and context["disable_acl"] ? true : service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             locked:
                 type: "Boolean!"
-                access: '@=context and context["disable_acl"] ? true : service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             phoneConfirmed:
                 type: "Boolean!"
-                access: '@=context and context["disable_acl"] ? true : service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             expiresAt:
                 type: "String"
             phoneConfirmationSentAt:
                 type: "String"
                 resolve: "@=resolver('user_phoneConfirmationSentAt', [value])"
-                access: '@=context and context["disable_acl"] ? true : service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             gender:
                 type: "GenderValue"
-                access: '@=context and context["disable_acl"] ? true : service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             firstname:
                 type: "String"
-                access: '@=context and context["disable_acl"] ? true : service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             lastname:
                 type: "String"
-                access: '@=context and context["disable_acl"] ? true : service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             dateOfBirth:
                 type: "String"
                 resolve: "@=resolver('user_dateOfBirth', [value])"
-                access: '@=context and context["disable_acl"] ? true : service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             roles:
                 type: "[String]"
                 description: "Unattended roles as array."
@@ -83,17 +75,17 @@ User:
                 resolve: "@=resolver('user_rolesText', [value])"
                 description: "Array of roles converted and translated to string."
             isArchiveDeleted:
-                access: '@=context and context["disable_acl"] ? true : service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
                 type: "Boolean!"
                 description: "Is the personal archive of the user has been deleted"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserArchiveDeletedResolver", [user])'
             isArchiveReady:
-                access: '@=context and context["disable_acl"] ? true : service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
                 type: "Boolean!"
                 description: "Is the personal archive of the user is ready?"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserArchiveReadyResolver", [user])'
             firstArchive:
-                access: '@=context and context["disable_acl"] ? true : service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
                 type: "Boolean!"
                 description: "Is the personal archive of the user is being asked for the first time?"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserArchiveFirstResolver", [user])'
@@ -103,28 +95,25 @@ User:
                 type: "String"
             address:
                 type: "String"
-                access: '@=context and context["disable_acl"] ? true : service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             address2:
                 type: "String"
-                access: '@=context and context["disable_acl"] ? true : service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             zipCode:
                 type: "String"
-                access: '@=context and context["disable_acl"] ? true : service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             city:
                 type: "String"
-                access: '@=context and context["disable_acl"] ? true : service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             phone:
                 type: "String"
-                access: '@=context and context["disable_acl"] ? true : service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             googleId:
                 type: "String"
-                access: '@=context and context["disable_acl"] ? true : service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             facebookId:
                 type: "String"
-                access: '@=context and context["disable_acl"] ? true : service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             samlId:
                 type: "String"
-                access: '@=context and context["disable_acl"] ? true : service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             opinionsCount:
                 type: "Int!"
             opinionVotesCount:
@@ -163,7 +152,6 @@ User:
             consentExternalCommunication:
                 type: "Boolean!"
                 description: "Is user accepted the external communication during the registration."
-                access: '@=context and context["disable_acl"] ? true : service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             followingProposals:
                 type: "ProposalConnection!"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalsFollowedByUserResolver", [value, args])'
@@ -202,11 +190,9 @@ User:
             profilePageIndexed:
                 type: "Boolean"
                 description: "Is your profile indexed or not"
-                access: '@=context and context["disable_acl"] ? true : service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             neighborhood:
                 type: "String"
                 description: "Your localisation"
-                access: '@=context and context["disable_acl"] ? true : service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
             proposalVotes:
               type: "ProposalVoteConnection!"
               argsBuilder: "Relay::Connection"
