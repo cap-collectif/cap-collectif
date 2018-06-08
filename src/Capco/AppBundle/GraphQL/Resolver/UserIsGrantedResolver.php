@@ -22,9 +22,13 @@ class UserIsGrantedResolver
      *
      * @param mixed      $user
      * @param null|mixed $userRequest
+     * @param null|mixed $context
      */
-    public function isGranted($user, $userRequest = null)
+    public function isGranted($user, $userRequest = null, $context = null)
     {
+        if ($context && isset($context['disale_acl'])) {
+            return true;
+        }
         if (!$user instanceof User) {
             return false;
         }

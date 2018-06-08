@@ -2,23 +2,18 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Col, Alert } from 'react-bootstrap';
-import { connect, type MapStateToProps } from 'react-redux';
 import Toggle from 'react-toggle';
 import config from '../../config';
 import cookieMonster from '../../cookieMonster';
-import type { State } from '../../types';
 
-type Props = {
-  analyticsJs: ?string,
-  adJs: ?string,
-};
+type Props = {};
 
-type CookieState = {
+type State = {
   isAnalyticEnabled: boolean,
   isAdvertisingEnabled: boolean,
 };
 
-export class Cookie extends React.Component<Props, CookieState> {
+export class Cookie extends React.Component<Props, State> {
   constructor() {
     super();
     this.state = {
@@ -50,7 +45,6 @@ export class Cookie extends React.Component<Props, CookieState> {
 
   render() {
     const { isAnalyticEnabled, isAdvertisingEnabled } = this.state;
-    const { analyticsJs, adJs } = this.props;
     return (
       <div>
         <div>
@@ -85,74 +79,63 @@ export class Cookie extends React.Component<Props, CookieState> {
             </Col>
           </div>
         </div>
-        {analyticsJs &&
-          analyticsJs.length > 1 && (
+        <div>
+          <div className="row" style={{ padding: '10px 0' }}>
             <div>
-              <div className="row" style={{ padding: '10px 0' }}>
-                <div>
-                  <Col sm={8}>
-                    <strong>
-                      <FormattedMessage id="performance" />
-                    </strong>
-                  </Col>
-                  <Col sm={4} className="d-flex flex-end">
-                    <div
-                      className={isAnalyticEnabled ? 'color-green' : 'color-red'}
-                      style={{ marginRight: 10 }}>
-                      <FormattedMessage
-                        id={isAnalyticEnabled ? 'list.label_enabled' : 'step.vote_type.disabled'}
-                      />
-                    </div>
-                    <Toggle
-                      checked={isAnalyticEnabled}
-                      onChange={() => this.toggleAnalyticCookies(!isAnalyticEnabled)}
-                    />
-                  </Col>
+              <Col sm={8}>
+                <strong>
+                  <FormattedMessage id="performance" />
+                </strong>
+              </Col>
+              <Col sm={4} className="d-flex flex-end">
+                <div
+                  className={isAnalyticEnabled ? 'color-green' : 'color-red'}
+                  style={{ marginRight: 10 }}>
+                  <FormattedMessage
+                    id={isAnalyticEnabled ? 'list.label_enabled' : 'step.vote_type.disabled'}
+                  />
                 </div>
-                <Col sm={12} className="color-dark-gray">
-                  <FormattedMessage id="help-text-performance-option" />
-                </Col>
-              </div>
+                <Toggle
+                  checked={isAnalyticEnabled}
+                  onChange={() => this.toggleAnalyticCookies(!isAnalyticEnabled)}
+                />
+              </Col>
             </div>
-          )}
-        {adJs &&
-          adJs.length > 1 && (
+            <Col sm={12} className="color-dark-gray">
+              <FormattedMessage id="help-text-performance-option" />
+            </Col>
+          </div>
+        </div>
+        <div>
+          <div className="row" style={{ padding: '10px 0' }}>
             <div>
-              <div className="row" style={{ padding: '10px 0' }}>
-                <div>
-                  <Col sm={8}>
-                    <strong>
-                      <FormattedMessage id="advertising" />
-                    </strong>
-                  </Col>
-                  <Col sm={4} className="d-flex flex-end">
-                    <div
-                      className={isAdvertisingEnabled ? 'color-green' : 'color-red'}
-                      style={{ marginRight: 10 }}>
-                      <FormattedMessage
-                        id={isAdvertisingEnabled ? 'list.label_enabled' : 'step.vote_type.disabled'}
-                      />
-                    </div>
-                    <Toggle
-                      checked={isAdvertisingEnabled}
-                      onChange={() => this.toggleAdvertisingCookies(!isAdvertisingEnabled)}
-                    />
-                  </Col>
+              <Col sm={8}>
+                <strong>
+                  <FormattedMessage id="advertising" />
+                </strong>
+              </Col>
+              <Col sm={4} className="d-flex flex-end">
+                <div
+                  className={isAdvertisingEnabled ? 'color-green' : 'color-red'}
+                  style={{ marginRight: 10 }}>
+                  <FormattedMessage
+                    id={isAdvertisingEnabled ? 'list.label_enabled' : 'step.vote_type.disabled'}
+                  />
                 </div>
-                <Col sm={12} className="color-dark-gray">
-                  <FormattedMessage id="help-text-advertising-option" />
-                </Col>
-              </div>
+                <Toggle
+                  checked={isAdvertisingEnabled}
+                  onChange={() => this.toggleAdvertisingCookies(!isAdvertisingEnabled)}
+                />
+              </Col>
             </div>
-          )}
+            <Col sm={12} className="color-dark-gray">
+              <FormattedMessage id="help-text-advertising-option" />
+            </Col>
+          </div>
+        </div>
       </div>
     );
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  analyticsJs: state.default.parameters['snalytical-tracking-scripts-on-all-pages'],
-  adJs: state.default.parameters['ad-scripts-on-all-pages'],
-});
-
-export default connect(mapStateToProps)(Cookie);
+export default Cookie;
