@@ -8,18 +8,20 @@ import {
   Field,
   SubmissionError,
 } from 'redux-form';
+import {connect, type MapStateToProps} from "react-redux";
 import CloseButton from '../../Form/CloseButton';
 import component from '../../Form/Field';
 import CreateUserMutation from '../../../mutations/CreateUserMutation';
 import {isEmail} from "../../../services/Validator";
 import {form} from "../Registration/RegistrationForm";
 import AlertForm from '../../Alert/AlertForm';
-import type {Dispatch} from "../../../types";
+import type {Dispatch, GlobalState} from "../../../types";
 
 const formName = 'user-admin-create';
 
 type Props = FormProps & {
   intl: Object,
+  isSuperAdmin: boolean
 };
 
 const validate = (values: Object) => {
@@ -90,27 +92,32 @@ export class UserAdminCreateButton extends Component<Props> {
       submitFailed,
       handleSubmit,
       submitting,
+      isSuperAdmin,
       error,
       intl
     } = this.props;
     const {showModal} = this.state;
+    const superAdminRole = {
+      id: 'ROLE_SUPER_ADMIN',
+      useIdAsValue: true,
+      label: intl.formatMessage({id: 'roles.super_admin'}),
+    };
     const userRoles = [
       {
-        id: 'ROLE_SUPER_ADMIN',
+        id: 'ROLE_USER',
         useIdAsValue: true,
-        label: intl.formatMessage({id: 'roles.super_admin'}),
+        label: intl.formatMessage({id: 'roles.user'}),
       },
       {
         id: 'ROLE_ADMIN',
         useIdAsValue: true,
         label: intl.formatMessage({id: 'roles.admin'}),
-      },
-      {
-        id: 'ROLE_USER',
-        useIdAsValue: true,
-        label: intl.formatMessage({id: 'roles.user'}),
       }
     ];
+
+    if(isSuperAdmin){
+      userRoles.push(superAdminRole);
+    }
 
     return (
       <div>
@@ -241,4 +248,11 @@ const userForm = reduxForm({
   enableReinitialize: true,
   form: formName,
 })(UserAdminCreateButton);
-export default injectIntl(userForm);
+
+const mapStateToProps: MapStateToProps<*, *, *> = (
+  state: GlobalState,
+) => ({
+  isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
+});
+
+export default connect(mapStateToProps)(injectIntl(userForm));
