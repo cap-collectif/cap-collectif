@@ -26,7 +26,7 @@ class UserIsGrantedResolver
      */
     public function isGranted($user, $userRequest = null, $context = null)
     {
-        if ($context && isset($context['disale_acl'])) {
+        if ($context && isset($context['disable_acl'])) {
             return true;
         }
         if (!$user instanceof User) {
