@@ -63,9 +63,11 @@
                     {{ form_rest(form) }}
                     <button type="submit" class="btn btn-primary">{{ 'contact.submit'|trans({}, 'CapcoAppBundle') }}</button>
                 </form>
-                <p class="excerpt">
-                    {{ 'information-for-the-contact-form'|trans({}, 'CapcoAppBundle')|raw }}
-                </p>
+                {% if null != capco_site_parameter_value('global.site.organization_name') or '' != capco_site_parameter_value('global.site.organization_name') %}
+                    <p class="excerpt">
+                        {{ 'information-for-the-contact-form'|trans({'%organisationName%': capco_site_parameter_value('global.site.organization_name') }, 'CapcoAppBundle')|raw }}
+                    </p>
+                {% endif %}
             </div>
         </div>
     </div>
