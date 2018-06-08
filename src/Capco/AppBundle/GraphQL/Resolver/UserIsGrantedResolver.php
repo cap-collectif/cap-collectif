@@ -21,7 +21,7 @@ class UserIsGrantedResolver
      * if $user is tped, I receive an error 500. But I want a graphql error, so I need to check the instance of $user.
      *
      */
-    public function isGranted($user, $userRequest = null, $context = null, array $roleRequest = ['ROLE_ADMIN']): bool
+    public function isGranted($user, $userRequest = null, $context = null, array $roleRequest = ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN']): bool
     {
         if ($context && isset($context['disable_acl'])) {
             return true;
