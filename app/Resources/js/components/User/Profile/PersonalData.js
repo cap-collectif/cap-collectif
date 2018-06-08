@@ -282,20 +282,20 @@ export class PersonalData extends Component<Props, PersonalDataState> {
             />
           </Alert>
         )}
-        <Panel id="capco_horizontal_form" header={header} footer={footer}>
-          <h2 className="page-header">
-            <FormattedMessage id="personal-data" />
-          </h2>
-          {!hasData(viewer, currentValues) && (
-            <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
-              <Well>
-                <FormattedMessage id="no-data" />
-              </Well>
-            </div>
-          )}
-          {hasData(viewer, null) && (
-            <div>
-              <form onSubmit={handleSubmit} className="form-horizontal">
+        <form onSubmit={handleSubmit} className="form-horizontal">
+          <Panel id="capco_horizontal_form" header={header} footer={footer}>
+            <h2 className="page-header">
+              <FormattedMessage id="personal-data" />
+            </h2>
+            {!hasData(viewer, currentValues) && (
+              <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
+                <Well>
+                  <FormattedMessage id="no-data" />
+                </Well>
+              </div>
+            )}
+            {hasData(viewer, null) && (
+              <div>
                 {hasData(viewer, currentValues) && (
                   <div>
                     {currentValues.firstname !== null && (
@@ -588,10 +588,10 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                     />
                   </ButtonGroup>
                 </div>
-              </form>
-            </div>
-          )}
-        </Panel>
+              </div>
+            )}
+          </Panel>
+        </form>
         <Panel>
           <h2 className="page-header">
             <FormattedMessage id="data-export" />

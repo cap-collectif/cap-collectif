@@ -67,14 +67,14 @@ export class NotificationsForm extends Component<Props> {
     );
 
     return (
-      <Panel id="capco_horizontal_form" header={header} footer={footer}>
-        <h2 className="page-header">
-          <FormattedMessage id="profile.account.notifications.title" />
-        </h2>
-        <p className="notifications-app-title">
-          <FormattedMessage id="profile.account.notifications.app.collectstep" />
-        </p>
-        <form onSubmit={handleSubmit} className="form-horizontal">
+      <form onSubmit={handleSubmit} className="form-horizontal">
+        <Panel id="capco_horizontal_form" header={header} footer={footer}>
+          <h2 className="page-header">
+            <FormattedMessage id="profile.account.notifications.title" />
+          </h2>
+          <p className="notifications-app-title">
+            <FormattedMessage id="profile.account.notifications.app.collectstep" />
+          </p>
           <Table className="notifications-table" striped>
             <thead>
               <tr>
@@ -112,8 +112,8 @@ export class NotificationsForm extends Component<Props> {
               submitting={submitting}
             />
           </div>
-        </form>
-      </Panel>
+        </Panel>
+      </form>
     );
   }
 }

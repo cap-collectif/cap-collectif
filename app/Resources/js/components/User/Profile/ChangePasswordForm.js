@@ -94,11 +94,11 @@ export class ChangePasswordForm extends Component<Props> {
     );
 
     return (
-      <Panel id="capco_horizontal_form" header={header} footer={footer}>
-        <h2 className="page-header">
-          <FormattedMessage id="form.new_password" />
-        </h2>
-        <form onSubmit={handleSubmit} className="form-horizontal">
+      <form onSubmit={handleSubmit} className="form-horizontal">
+        <Panel id="capco_horizontal_form" header={header} footer={footer}>
+          <h2 className="page-header">
+            <FormattedMessage id="form.new_password" />
+          </h2>
           <div>
             <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
               <label className="col-sm-3 control-label" htmlFor="password-form-current">
@@ -159,8 +159,8 @@ export class ChangePasswordForm extends Component<Props> {
               </ButtonToolbar>
             </div>
           </div>
-        </form>
-      </Panel>
+        </Panel>
+      </form>
     );
   }
 }

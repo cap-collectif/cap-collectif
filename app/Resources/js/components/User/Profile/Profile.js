@@ -121,11 +121,11 @@ export class Profile extends Component<Props> {
     );
 
     return (
-      <Panel id="capco_horizontal_form" footer={footer} header={header}>
-        <h2 className="page-header">
-          <FormattedMessage id="user.edition" />
-        </h2>
-        <form onSubmit={handleSubmit} className="form-horizontal">
+      <form onSubmit={handleSubmit} className="form-horizontal">
+        <Panel id="capco_horizontal_form" footer={footer} header={header}>
+          <h2 className="page-header">
+            <FormattedMessage id="user.edition" />
+          </h2>
           <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
             <label className="col-sm-3 control-label" htmlFor="profile_avatar">
               <FormattedMessage id="form.label_media" />
@@ -304,8 +304,8 @@ export class Profile extends Component<Props> {
               />
             </ButtonToolbar>
           </div>
-        </form>
-      </Panel>
+        </Panel>
+      </form>
     );
   }
 }

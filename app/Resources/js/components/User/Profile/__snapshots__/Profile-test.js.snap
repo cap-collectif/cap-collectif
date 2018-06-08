@@ -1,56 +1,56 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Profile /> should render my profile with features user_type 1`] = `
-<Panel
-  bsClass="panel"
-  bsStyle="default"
-  defaultExpanded={false}
-  footer={
-    <div
-      className="col-sm-offset-4"
-    >
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="primary"
-        disabled={false}
-        id="profile-form-save"
-        type="submit"
-      >
-        <FormattedMessage
-          id="global.save_modifications"
-          values={Object {}}
-        />
-      </Button>
-    </div>
-  }
-  header={
-    <div
-      className="panel-heading profile-header"
-    >
-      <h1>
-        <FormattedMessage
-          id="user.profile.title"
-          values={Object {}}
-        />
-      </h1>
-    </div>
-  }
-  id="capco_horizontal_form"
+<form
+  className="form-horizontal"
+  onSubmit={[MockFunction]}
 >
-  <h2
-    className="page-header"
+  <Panel
+    bsClass="panel"
+    bsStyle="default"
+    defaultExpanded={false}
+    footer={
+      <div
+        className="col-sm-offset-4"
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={false}
+          id="profile-form-save"
+          type="submit"
+        >
+          <FormattedMessage
+            id="global.save_modifications"
+            values={Object {}}
+          />
+        </Button>
+      </div>
+    }
+    header={
+      <div
+        className="panel-heading profile-header"
+      >
+        <h1>
+          <FormattedMessage
+            id="user.profile.title"
+            values={Object {}}
+          />
+        </h1>
+      </div>
+    }
+    id="capco_horizontal_form"
   >
-    <FormattedMessage
-      id="user.edition"
-      values={Object {}}
-    />
-  </h2>
-  <form
-    className="form-horizontal"
-    onSubmit={[MockFunction]}
-  >
+    <h2
+      className="page-header"
+    >
+      <FormattedMessage
+        id="user.edition"
+        values={Object {}}
+      />
+    </h2>
     <div
       className="horizontal_field_with_border_top"
       style={
@@ -406,29 +406,61 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
         />
       </ButtonToolbar>
     </div>
-  </form>
-</Panel>
+  </Panel>
+</form>
 `;
 
 exports[`<Profile /> should render my profile without features user_type 1`] = `
-<Panel
-  bsClass="panel"
-  bsStyle="default"
-  defaultExpanded={false}
-  id="capco_horizontal_form"
+<form
+  className="form-horizontal"
+  onSubmit={[MockFunction]}
 >
-  <h2
-    className="page-header"
+  <Panel
+    bsClass="panel"
+    bsStyle="default"
+    defaultExpanded={false}
+    footer={
+      <div
+        className="col-sm-offset-4"
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={false}
+          id="profile-form-save"
+          type="submit"
+        >
+          <FormattedMessage
+            id="global.save_modifications"
+            values={Object {}}
+          />
+        </Button>
+      </div>
+    }
+    header={
+      <div
+        className="panel-heading profile-header"
+      >
+        <h1>
+          <FormattedMessage
+            id="user.profile.title"
+            values={Object {}}
+          />
+        </h1>
+      </div>
+    }
+    id="capco_horizontal_form"
   >
-    <FormattedMessage
-      id="user.edition"
-      values={Object {}}
-    />
-  </h2>
-  <form
-    className="form-horizontal"
-    onSubmit={[MockFunction]}
-  >
+    <h2
+      className="page-header"
+    >
+      <FormattedMessage
+        id="user.edition"
+        values={Object {}}
+      />
+    </h2>
     <div
       className="horizontal_field_with_border_top"
       style={
@@ -736,20 +768,6 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
         bsClass="btn-toolbar"
         className="col-sm-6 pl-0"
       >
-        <Button
-          active={false}
-          block={false}
-          bsClass="btn"
-          bsStyle="primary"
-          disabled={false}
-          id="profile-form-save"
-          type="submit"
-        >
-          <FormattedMessage
-            id="global.save_modifications"
-            values={Object {}}
-          />
-        </Button>
         <AlertForm
           errorMessage={null}
           invalid={false}
@@ -760,6 +778,6 @@ exports[`<Profile /> should render my profile without features user_type 1`] = `
         />
       </ButtonToolbar>
     </div>
-  </form>
-</Panel>
+  </Panel>
+</form>
 `;
