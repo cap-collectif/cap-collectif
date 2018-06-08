@@ -23,6 +23,11 @@ class UserIsGrantedResolverSpec extends ObjectBehavior
         $this->shouldHaveType(UserIsGrantedResolver::class);
     }
 
+    function it_should_grant_if_acl_disabled()
+    {
+        $this->isGranted(null, null, ['disable_acl' => true])->shouldReturn(true);
+    }
+
     function it_im_not_a_user_and_i_try_to_be_granted()
     {
         $this->isGranted('anon.')->shouldReturn(false);
