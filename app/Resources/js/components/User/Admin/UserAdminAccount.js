@@ -19,6 +19,7 @@ type Props = FormProps &
   RelayProps & {
   +intl: IntlShape,
   +isSuperAdmin: boolean,
+  +viewerId: string,
 };
 
 const formName = 'user-admin-edit-account';
@@ -39,7 +40,6 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, {user}: Props) => {
 
   return UpdateUserAccountMutation.commit({input})
     .then(response => {
-
       if (!response.updateUserAccount || !response.updateUserAccount.user) {
         throw new Error('Mutation "updateUserAccount" failed.');
       }
@@ -75,16 +75,13 @@ export class UserAdminAccount extends React.Component<Props, State> {
       submitSucceeded,
       submitFailed,
       user,
+      viewerId,
       submitting,
       isSuperAdmin,
       handleSubmit,
       intl,
     } = this.props;
-    console.log('test');
-    console.log(pristine);
-    console.log(valid);
-    console.log(invalid);
-    console.log(submitFailed);
+    const userDeletedIsNotViewer = user.id !== viewerId;
     const superAdminRole = {
       id: 'ROLE_SUPER_ADMIN',
       useIdAsValue: true,
@@ -228,6 +225,8 @@ export class UserAdminAccount extends React.Component<Props, State> {
             {user.isUserOrSuperAdmin && (
               <DeleteAccountModal
                 viewer={user}
+                fromBo
+                userDeletedIsNotViewer={userDeletedIsNotViewer}
                 show={this.state.showDeleteAccountModal}
                 handleClose={() => {
                   this.setState({showDeleteAccountModal: false});
@@ -253,6 +252,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (
   {user}: RelayProps,
 ) => ({
   isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
+  viewerId: state.user.id,
   initialValues: {
     vip: user.vip,
     enabled: user.enabled,

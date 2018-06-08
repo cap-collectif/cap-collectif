@@ -35,9 +35,14 @@ class DeleteAccountMutation implements ContainerAwareInterface
         $this->translator = $translator;
     }
 
-    public function __invoke(Request $request, Arg $input, User $user): array
+    public function __invoke(Arg $input, User $viewer): array
     {
         $deleteType = $input['type'];
+        $user = $viewer;
+        if (isset($input['userId']) && !empty($input['userId']) && $input['userId'] !== $user->getId()) {
+            $user = $this->em->getRepository('CapcoUserBundle:User')->find($input['userId']);
+        }
+
         $this->hardDeleteUserContributionsInActiveSteps($user);
         if ('HARD' === $deleteType && $user) {
             $this->hardDelete($user);
@@ -54,7 +59,9 @@ class DeleteAccountMutation implements ContainerAwareInterface
     public function anonymizeUser(User $user): void
     {
         $usernameDeleted = $this->translator->trans('deleted-user', [], 'CapcoAppBundle');
-        $newsletter = $this->em->getRepository(NewsletterSubscription::class)->findOneBy(['email' => $user->getEmail()]);
+        $newsletter = $this->em->getRepository(NewsletterSubscription::class)->findOneBy(
+            ['email' => $user->getEmail()]
+        );
         $userGroups = $this->em->getRepository(UserGroup::class)->findBy(['user' => $user]);
         $userManager = $this->container->get('fos_user.user_manager');
 
@@ -136,7 +143,9 @@ class DeleteAccountMutation implements ContainerAwareInterface
             }
 
             if ($contribution instanceof Comment) {
-                $hasChild = $this->em->getRepository('CapcoAppBundle:Comment')->findOneBy(['parent' => $contribution->getId()]);
+                $hasChild = $this->em->getRepository('CapcoAppBundle:Comment')->findOneBy(
+                    ['parent' => $contribution->getId()]
+                );
                 if ($hasChild) {
                     $contribution->setBody($deletedBodyText);
                 } else {
@@ -144,7 +153,8 @@ class DeleteAccountMutation implements ContainerAwareInterface
                 }
             }
 
-            if (($contribution instanceof Proposal || $contribution instanceof Opinion || $contribution instanceof Source || $contribution instanceof Argument) && $contribution->getStep()->canContribute()) {
+            if (($contribution instanceof Proposal || $contribution instanceof Opinion || $contribution instanceof Source || $contribution instanceof Argument) && $contribution->getStep(
+                )->canContribute()) {
                 $toDeleteList[] = $contribution;
             }
 

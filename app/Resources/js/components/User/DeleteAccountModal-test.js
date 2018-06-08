@@ -12,15 +12,21 @@ describe('<DeleteAccountModal />', () => {
     contributionsCount: 20,
     votesCount: 10,
     contributionsToDeleteCount: 5,
+    id: 'userAdmin',
+  };
+
+  const props = {
+    fromBo: false,
+    userDeletedIsNotViewer: true
   };
 
   it('should render an visible modal', () => {
-    const wrapper = shallow(<DeleteAccountModal show viewer={viewer} handleClose={() => {}} />);
+    const wrapper = shallow(<DeleteAccountModal show {...props} viewer={viewer} handleClose={() => {}} />);
     expect(wrapper).toMatchSnapshot();
   });
   it('should render an hidden modal', () => {
     const wrapper = shallow(
-      <DeleteAccountModal show={false} viewer={viewer} handleClose={() => {}} />,
+      <DeleteAccountModal show={false} viewer={viewer} {...props} handleClose={() => {}} />,
     );
     expect(wrapper).toMatchSnapshot();
   });

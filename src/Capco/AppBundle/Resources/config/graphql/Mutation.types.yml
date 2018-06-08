@@ -283,7 +283,7 @@ Mutation:
             builderConfig:
               inputType: DeleteAccountInput
               payloadType: DeleteAccountPayload
-              mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteAccountMutation", [request, value, user])'
+              mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteAccountMutation", [value, user])'
           updateRequirement:
             access: "@=hasRole('ROLE_USER')"
             builder: "Relay::Mutation"
