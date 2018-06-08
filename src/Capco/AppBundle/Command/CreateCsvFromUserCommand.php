@@ -29,11 +29,10 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
         $writer = WriterFactory::create(Type::CSV);
         $writer->openToFile($this->getPath());
 
-        // TODO disable ACL or give admin rights (to disable access)
         $data = $executor->disabledDebugInfo()->execute([
             'query' => $this->getUserGraphQLQuery($userId),
             'variables' => [],
-        ])->toArray();
+        ], ['disable_acl' => true])->toArray();
 
         if (isset($data['errors'])) {
             var_dump($data['errors']);
