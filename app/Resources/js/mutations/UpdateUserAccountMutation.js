@@ -6,19 +6,19 @@ import type {
   UpdateUserAccountMutationVariables,
   UpdateUserAccountMutationResponse,
 } from './__generated__/UpdateUserAccountMutation.graphql';
-export type UpdateUserAccountMutation = Response;
 
 const mutation = graphql`
   mutation UpdateUserAccountMutation($input: UpdateUserAccountInput!) {
     updateUserAccount(input: $input) {
       user {
-        ...UserAdminAccount_user  
+        id
+        ...UserAdminAccount_user
       }
     }
   }
 `;
 
-const commit = (variables: UpdateUserAccountMutationVariables): Promise<Response> =>
+const commit = (variables: UpdateUserAccountMutationVariables): Promise<UpdateUserAccountMutationResponse> =>
   commitMutation(environment, {
     mutation,
     variables,

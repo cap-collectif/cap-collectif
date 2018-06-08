@@ -19,22 +19,33 @@ class UpdateUserAccountMutation
     private $userRepository;
     private $logger;
 
-    public function __construct(EntityManagerInterface $em, FormFactory $formFactory, UserRepository $userRepository, Logger $logger)
-    {
+    public function __construct(
+        EntityManagerInterface $em,
+        FormFactory $formFactory,
+        UserRepository $userRepository,
+        Logger $logger
+    ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->userRepository = $userRepository;
         $this->logger = $logger;
     }
 
-    public function __invoke(Argument $input): array
+    public function __invoke(Argument $input, User $viewer): array
     {
         $arguments = $input->getRawArguments();
         /** @var User $user */
         $user = $this->userRepository->find($arguments['userId']);
 
-        if(!$user) {
+        if (!$user) {
             throw new UserError('Invalid user.');
+        }
+        // if viewer (admin) change account of user, but user is super_admin, add (persist) super_admin to roles of user
+        if (!$viewer->hasRole('ROLE_SUPER_ADMIN') && !in_array(
+                'ROLE_USER_ADMIN',
+                $arguments['roles']
+            ) && $user->hasRole('ROLE_SUPER_ADMIN')) {
+            $arguments['roles'][] = 'ROLE_SUPER_ADMIN';
         }
 
         unset($arguments['userId']);
@@ -42,7 +53,7 @@ class UpdateUserAccountMutation
         $form = $this->formFactory->create(UserAccountFormType::class, $user, ['csrf_protection' => false]);
         $form->submit($arguments, false);
         if (!$form->isValid()) {
-            $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
+            $this->logger->error(__METHOD__.' : '.(string)$form->getErrors(true, false));
 
             throw new UserError('Invalid data.');
         }

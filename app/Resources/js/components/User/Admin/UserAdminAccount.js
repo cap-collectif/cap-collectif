@@ -10,6 +10,7 @@ import AlertForm from '../../Alert/AlertForm';
 import type {GlobalState, Dispatch} from '../../../types';
 import UpdateUserAccountMutation from '../../../mutations/UpdateUserAccountMutation';
 import UserAdminAccount_user from './__generated__/UserAdminAccount_user.graphql';
+import DeleteAccountModal from "../DeleteAccountModal";
 
 type RelayProps = {
   +user: UserAdminAccount_user,
@@ -24,18 +25,21 @@ const formName = 'user-admin-edit-account';
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, {user}: Props) => {
 
-  delete values.newsletter;
-  delete values.expired;
   const roles = values.roles.labels;
-  delete values.roles;
+  const vip = values.vip;
+  const enabled = values.enabled;
+  const locked = values.locked;
   const input = {
-    ...values,
+    vip,
+    locked,
+    enabled,
     roles,
     userId: user.id,
   };
 
   return UpdateUserAccountMutation.commit({input})
     .then(response => {
+
       if (!response.updateUserAccount || !response.updateUserAccount.user) {
         throw new Error('Mutation "updateUserAccount" failed.');
       }
@@ -47,13 +51,18 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, {user}: Props) => {
     });
 };
 
-const validate = (values: Object, {user}: Props) => {
+const validate = (values: Object) => {
   const errors = {};
+  if (values.roles.labels.length === 0) {
+    errors.roles = 'not enought';
+  }
 
   return errors;
 };
 
-type State = {};
+type State = {
+  showDeleteAccountModal: boolean,
+};
 
 export class UserAdminAccount extends React.Component<Props, State> {
   state = {};
@@ -71,23 +80,32 @@ export class UserAdminAccount extends React.Component<Props, State> {
       handleSubmit,
       intl,
     } = this.props;
+    console.log('test');
+    console.log(pristine);
+    console.log(valid);
+    console.log(invalid);
+    console.log(submitFailed);
+    const superAdminRole = {
+      id: 'ROLE_SUPER_ADMIN',
+      useIdAsValue: true,
+      label: intl.formatMessage({id: 'roles.super_admin'}),
+    };
     const userRoles = [
       {
-        id: 'ROLE_SUPER_ADMIN',
+        id: 'ROLE_USER',
         useIdAsValue: true,
-        label: intl.formatMessage({id: 'roles.super_admin'}),
+        label: intl.formatMessage({id: 'roles.user'}),
       },
       {
         id: 'ROLE_ADMIN',
         useIdAsValue: true,
         label: intl.formatMessage({id: 'roles.admin'}),
-      },
-      {
-        id: 'ROLE_USER',
-        useIdAsValue: true,
-        label: intl.formatMessage({id: 'roles.user'}),
       }
     ];
+
+    if (isSuperAdmin) {
+      userRoles.push(superAdminRole);
+    }
 
     const newsletterAt = user.isSubscribedToNewsLetterAt ? user.isSubscribedToNewsLetterAt.split(' ') : false;
     const expiredAt = user.expiredAt ? user.expiredAt.split(' ') : false;
@@ -188,6 +206,17 @@ export class UserAdminAccount extends React.Component<Props, State> {
                 disabled={pristine || invalid || submitting}>
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'}/>
               </Button>
+              {user.isUserOrSuperAdmin && (
+                <Button
+                  id="delete-account-profile-button"
+                  bsStyle="danger"
+                  onClick={() => {
+                    this.setState({showDeleteAccountModal: true});
+                  }}
+                  style={{marginLeft: 15}}>
+                  <FormattedMessage id="global.delete"/>
+                </Button>
+              )}
               <AlertForm
                 valid={valid}
                 invalid={invalid}
@@ -196,6 +225,15 @@ export class UserAdminAccount extends React.Component<Props, State> {
                 submitting={submitting}
               />
             </ButtonToolbar>
+            {user.isUserOrSuperAdmin && (
+              <DeleteAccountModal
+                viewer={user}
+                show={this.state.showDeleteAccountModal}
+                handleClose={() => {
+                  this.setState({showDeleteAccountModal: false});
+                }}
+              />
+            )}
           </div>
         </form>
       </div>
@@ -206,7 +244,7 @@ export class UserAdminAccount extends React.Component<Props, State> {
 const form = reduxForm({
   onSubmit,
   validate,
-  enableReinitialize: true,
+  enableReinitialize: false,
   form: formName,
 })(UserAdminAccount);
 
@@ -240,6 +278,8 @@ export default createFragmentContainer(
       expiredAt
       isSubscribedToNewsLetter
       isSubscribedToNewsLetterAt
+      isUserOrSuperAdmin
+      ...DeleteAccountModal_viewer
     }
   `,
 );
