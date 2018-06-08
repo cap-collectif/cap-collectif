@@ -54,8 +54,6 @@ class ParametersExtension extends \Twig_Extension
             'login.text.top',
             'login.text.bottom',
             'global.site.organization_name',
-            'snalytical-tracking-scripts-on-all-pages',
-            'ad-scripts-on-all-pages',
         ];
 
         $exposedParameters = [];

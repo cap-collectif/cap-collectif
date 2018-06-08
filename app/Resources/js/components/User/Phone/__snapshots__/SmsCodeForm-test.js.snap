@@ -3,7 +3,7 @@
 exports[`<SmsCodeForm /> should render correctly 1`] = `
 <form
   className="phone__confirm-code__form"
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <Field
     autoFocus={true}
