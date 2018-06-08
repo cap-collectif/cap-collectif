@@ -665,6 +665,9 @@ scalar DateTime
 input DeleteAccountInput {
   # You must chose a strategy to delete your account
   type: DeleteAccountType!
+
+  # The user to delete
+  userId: ID
   clientMutationId: String
 }
 

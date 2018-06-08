@@ -35,18 +35,6 @@ export class UserAdminPageTabs extends Component<Props, State> {
           <Tab eventKey={4} title={intl.formatMessage({ id: 'user.profile.edit.password' })}>
             <UserAdminPassword user={user} />
           </Tab>
-          {/*<Tab eventKey={4} title={intl.formatMessage({ id: 'user.admin.password' })}>*/}
-            {/*<UserAdminPassword user={user} />*/}
-          {/*</Tab>*/}
-          {/*<Tab*/}
-            {/*eventKey={5}*/}
-            {/*title={*/}
-              {/*<div>*/}
-                {/*<FormattedMessage id="user.tabs.group" />*/}
-              {/*</div>*/}
-            {/*}>*/}
-            {/*<UserAdminGroup user={user} />*/}
-          {/*</Tab>*/}
         </Tabs>
       </div>
     );

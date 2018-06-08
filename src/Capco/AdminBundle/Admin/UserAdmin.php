@@ -6,10 +6,8 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Model\Metadata;
 use Sonata\UserBundle\Admin\Model\UserAdmin as BaseAdmin;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class UserAdmin extends BaseAdmin
 {

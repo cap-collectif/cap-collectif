@@ -118,7 +118,7 @@ export class UserAdminPassword extends React.Component<Props, State> {
             <div className="clearfix"/>
             <ButtonToolbar className="col-sm-6 pl-0">
               <Button
-                disabled={invalid || submitting}
+                disabled={invalid || submitting || !user.isUserOrSuperAdmin}
                 type="submit"
                 bsStyle="primary"
                 id="profile-password-save">
