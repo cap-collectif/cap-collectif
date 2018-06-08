@@ -15,7 +15,6 @@ User:
             email:
                 type: "String"
                 description: "email."
-                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value)'
                 resolve: "@=resolver('user_email', [value])"
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value,context)'
             displayName:
@@ -283,4 +282,4 @@ User:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserNewsLetterResolver", [value, "at"])'
             isUserOrSuperAdmin:
                 type: "Boolean"
-                resolve: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user, value, ["ROLE_SUPER_ADMIN"])'
+                resolve: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user, value, context, ["ROLE_SUPER_ADMIN"])'
