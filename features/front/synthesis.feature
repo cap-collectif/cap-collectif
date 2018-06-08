@@ -73,7 +73,7 @@ Scenario: Admin wants to ignore an element
   And I click the ignore element button
   And I confirm the ignore element action
   Then I should see "synthesis.common.success.archive_success"
-  And I should see the synthesis element in the unpublished inbox
+  #And I should see the synthesis element in the unpublished inbox
 
 @javascript @database
 Scenario: Admin wants to publish an element without note, comment or parent
@@ -141,4 +141,4 @@ Scenario: Admin wants to create an element
   And I go to a synthesis edition page
   When I click the new folder button
   And I create a new synthesis element
-  Then I should see my newly created element in the archived inbox
+  #Then I should see my newly created element in the archived inbox
