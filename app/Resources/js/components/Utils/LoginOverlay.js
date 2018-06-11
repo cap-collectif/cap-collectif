@@ -1,5 +1,5 @@
 // @flow
-import React, { PropTypes, cloneElement } from 'react';
+import React, { cloneElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
@@ -7,25 +7,23 @@ import { showRegistrationModal } from '../../redux/modules/user';
 import type { State, Dispatch } from '../../types';
 import LoginButton from '../User/Login/LoginButton';
 
-export const LoginOverlay = React.createClass({
-  displayName: 'LoginOverlay',
+type Props = {
+  user?: ?Object,
+  children: $FlowFixMe,
+  enabled?: boolean,
+  isLoginOrRegistrationModalOpen: boolean,
+  showRegistrationButton: boolean,
+  openRegistrationModal: Function,
+  loginWithMonCompteParis?: boolean,
+};
 
-  propTypes: {
-    user: PropTypes.object,
-    children: PropTypes.element.isRequired,
-    enabled: PropTypes.bool,
-    isLoginOrRegistrationModalOpen: PropTypes.bool.isRequired,
-    showRegistrationButton: PropTypes.bool.isRequired,
-    openRegistrationModal: PropTypes.func.isRequired,
-    loginWithMonCompteParis: PropTypes.bool,
-  },
+export class LoginOverlay extends React.Component<Props> {
+  static displayName = 'LoginOverlay';
 
-  getDefaultProps() {
-    return {
-      user: null,
-      enabled: true,
-    };
-  },
+  static defaultProps = {
+    user: null,
+    enabled: true,
+  };
 
   // We add Popover if user is not connected
   render() {
@@ -73,8 +71,8 @@ export const LoginOverlay = React.createClass({
         </OverlayTrigger>
       </span>
     );
-  },
-});
+  }
+}
 
 const mapStateToProps = (state: State) => ({
   user: state.user.user,

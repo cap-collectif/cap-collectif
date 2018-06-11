@@ -1,16 +1,33 @@
+// @flow
 import React from 'react';
 import PaginationItem from './PaginationItem';
 
-export default class Pagination extends React.Component {
-  constructor() {
-    super();
-    this.onSelect = this.onSelect.bind(this);
-  }
+type Props = {
+  current: number,
+  nbPages: number,
+  onChange: Function,
+  displayedPages: number,
+  showFirst?: boolean,
+  showLast?: boolean,
+  showPrev?: boolean,
+  showNext?: boolean,
+};
 
-  onSelect(newPage) {
+export default class Pagination extends React.Component<Props> {
+  static displayName = 'Pagination';
+
+  static defaultProps = {
+    displayedPages: 3,
+    showFirst: true,
+    showLast: true,
+    showPrev: true,
+    showNext: true,
+  };
+
+  onSelect = (newPage: $FlowFixMe) => {
     const { onChange } = this.props;
     onChange(newPage);
-  }
+  };
 
   render() {
     const {
@@ -27,6 +44,7 @@ export default class Pagination extends React.Component {
     const lastNumber = firstNumber + displayedPages - 1;
     firstNumber += nbPages - lastNumber < 0 ? nbPages - lastNumber : 0;
     firstNumber = firstNumber > 0 ? firstNumber : 1;
+    // $FlowFixMe
     const pages = Array.apply(0, new Array(displayedPages))
       .filter((x, y) => {
         return y + firstNumber <= nbPages;
@@ -100,24 +118,3 @@ export default class Pagination extends React.Component {
     );
   }
 }
-
-Pagination.propTypes = {
-  current: React.PropTypes.number.isRequired,
-  nbPages: React.PropTypes.number.isRequired,
-  onChange: React.PropTypes.func.isRequired,
-  displayedPages: React.PropTypes.number,
-  showFirst: React.PropTypes.bool,
-  showLast: React.PropTypes.bool,
-  showPrev: React.PropTypes.bool,
-  showNext: React.PropTypes.bool,
-};
-
-Pagination.defaultProps = {
-  displayedPages: 3,
-  showFirst: true,
-  showLast: true,
-  showPrev: true,
-  showNext: true,
-};
-
-Pagination.displayName = 'Pagination';

@@ -1,34 +1,35 @@
+// @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import ReactDOM from 'react-dom';
 
-const VoteLinechart = React.createClass({
-  propTypes: {
-    history: React.PropTypes.array.isRequired,
-    height: React.PropTypes.number,
-    width: React.PropTypes.number,
-  },
+type Props = {
+  history: Array<$FlowFixMe>,
+  height?: number,
+  width?: number,
+};
 
-  getDefaultProps() {
-    return {
-      height: undefined,
-      width: undefined,
-      top: 0,
-      left: 0,
-    };
-  },
+class VoteLinechart extends React.Component<Props> {
+  static defaultProps = {
+    height: undefined,
+    width: undefined,
+    top: 0,
+    left: 0,
+  };
 
   componentDidMount() {
     this.initChart();
-  },
+  }
 
   componentDidUpdate() {
     this.initChart();
-  },
+  }
 
-  initChart() {
+  initChart = () => {
     const { height, history, width } = this.props;
+    // $FlowFixMe
     const AreaChart = google.visualization.AreaChart;
+    // $FlowFixMe
     const DataTable = google.visualization.arrayToDataTable;
     const lines = [
       [
@@ -45,6 +46,7 @@ const VoteLinechart = React.createClass({
       ],
     ];
 
+    // $FlowFixMe
     $.each(history, (i, row) => {
       lines.push([new Date(1000 * parseInt(row[0], 10)), row[1], row[2], row[3]]);
     });
@@ -64,11 +66,11 @@ const VoteLinechart = React.createClass({
     };
 
     new AreaChart(ReactDOM.findDOMNode(this.refs.linechart)).draw(new DataTable(lines), options);
-  },
+  };
 
   render() {
     return <div className="opinion__history_chart" ref="linechart" />;
-  },
-});
+  }
+}
 
 export default VoteLinechart;

@@ -56,6 +56,7 @@ class ArgumentButtons extends React.Component<Props, State> {
           show={this.state.isDeleting}
           onClose={this.closeDeleteModal}
         />{' '}
+        {/* $FlowFixMe */}
         <ShareButtonDropdown
           id={`arg-${argument.id}-share-button`}
           url={argument._links.show}

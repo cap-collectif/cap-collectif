@@ -1,23 +1,23 @@
-import React, { PropTypes } from 'react';
+// @flow
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { Jumbotron } from 'react-bootstrap';
 import classNames from 'classnames';
 import LoginButton from '../User/Login/LoginButton';
+import type { State } from '../../types';
 
-export const VisibilityBox = React.createClass({
-  propTypes: {
-    user: PropTypes.object,
-    children: PropTypes.element.isRequired,
-    enabled: PropTypes.bool,
-  },
+type Props = {
+  user?: ?Object,
+  children: $FlowFixMe,
+  enabled?: boolean,
+};
 
-  getDefaultProps() {
-    return {
-      user: null,
-      enabled: false,
-    };
-  },
+export class VisibilityBox extends React.Component<Props> {
+  static defaultProps = {
+    user: null,
+    enabled: false,
+  };
 
   render() {
     const { user, children, enabled } = this.props;
@@ -53,13 +53,11 @@ export const VisibilityBox = React.createClass({
         <div className={boxClasses}>{children}</div>
       </div>
     );
-  },
-});
+  }
+}
 
-const mapStateToProps = state => {
-  return {
-    user: state.user.user,
-  };
-};
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+  user: state.user.user,
+});
 
 export default connect(mapStateToProps)(VisibilityBox);
