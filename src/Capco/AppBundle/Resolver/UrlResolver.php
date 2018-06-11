@@ -18,7 +18,6 @@ use Capco\AppBundle\Twig\MediaExtension;
 use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Routing\Router;
 
 class UrlResolver
@@ -26,34 +25,20 @@ class UrlResolver
     protected $router;
     protected $manager;
     protected $mediaExtension;
-    protected $scheme;
-    protected $host;
-    private $container;
 
-    public function __construct(ContainerInterface $container, Router $router, Manager $manager, MediaExtension $mediaExtension, string $scheme, string $host)
+    public function __construct(Router $router, Manager $manager, MediaExtension $mediaExtension)
     {
         $this->router = $router;
         $this->manager = $manager;
         $this->mediaExtension = $mediaExtension;
-        $this->scheme = $scheme;
-        $this->host = $host;
-        $this->container = $container;
     }
 
     public function getMediaUrl(Media $media, Arg $args)
     {
-        if (!$media) {
-            return;
-        }
-
-        $format = $args['format'] ?? 'reference';
-        $provider = $this->container->get($media->getProviderName());
-        $path = '';
-        if ('reference' === $format) {
-            $path = '/media';
-        }
-
-        return $this->scheme . '://' . $this->host . $path . $provider->generatePublicUrl($media, $format);
+        return $this->mediaExtension->getMediaUrl(
+          $media,
+            $args['format'] ?? 'reference'
+        );
     }
 
     public function generateOpinionOrProposalRoute($object, $absolute)
@@ -104,6 +89,7 @@ class UrlResolver
         return false;
     }
 
+    // TODO rm duplicate
     public function getStepUrl($step, $absolute = false)
     {
         if (!$step->getProject() || !$step->getProject()->getSlug() || !$step->getSlug()) {

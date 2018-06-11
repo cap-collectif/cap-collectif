@@ -45,6 +45,3 @@ Source:
             kind:
                 type: "String!"
                 description: "Returns 'source'."
-            url:
-                type: "URI!"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceUrlResolver", [value])'

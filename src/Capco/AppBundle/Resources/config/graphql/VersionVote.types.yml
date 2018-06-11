@@ -1,7 +1,7 @@
 VersionVote:
     type: object
     config:
-        interfaces: [YesNoPairedVote, ContributionWithAuthor]
+        interfaces: [YesNoPairedVote, Contribution, ContributionWithAuthor]
         fields:
             id:
               type: "ID!"

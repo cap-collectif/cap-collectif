@@ -299,28 +299,6 @@ class SourceRepository extends EntityRepository
         return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
     }
 
-    public function countAllByAuthor(User $user): int
-    {
-        $qb = $this->createQueryBuilder('s');
-        $qb
-            ->select('count(DISTINCT s)')
-            ->andWhere('s.Author = :author')
-            ->setParameter('author', $user)
-        ;
-
-        return $qb->getQuery()->getSingleScalarResult();
-    }
-
-    public function findAllByAuthor(User $user): array
-    {
-        $qb = $this->createQueryBuilder('s');
-        $qb
-            ->andWhere('s.Author = :author')
-            ->setParameter('author', $user);
-
-        return $qb->getQuery()->getResult();
-    }
-
     /**
      * Get sources by user.
      *

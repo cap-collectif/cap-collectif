@@ -297,28 +297,6 @@ class ArgumentRepository extends EntityRepository
             ->getResult();
     }
 
-    public function countAllByAuthor(User $user): int
-    {
-        $qb = $this->createQueryBuilder('version');
-        $qb
-            ->select('count(DISTINCT version)')
-            ->andWhere('version.Author = :author')
-            ->setParameter('author', $user)
-        ;
-
-        return $qb->getQuery()->getSingleScalarResult();
-    }
-
-    public function findAllByAuthor(User $user): array
-    {
-        $qb = $this->createQueryBuilder('version');
-        $qb
-            ->andWhere('version.Author = :author')
-            ->setParameter('author', $user);
-
-        return $qb->getQuery()->getResult();
-    }
-
     /**
      * Count all arguments by user.
      *

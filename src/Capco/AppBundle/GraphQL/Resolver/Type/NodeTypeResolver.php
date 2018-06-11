@@ -13,7 +13,6 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Questionnaire;
-use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Requirement;
 use Capco\AppBundle\Entity\Source;
@@ -119,9 +118,6 @@ class NodeTypeResolver implements ResolverInterface
         }
         if ($node instanceof User) {
             return $this->typeResolver->resolve('User');
-        }
-        if ($node instanceof Reply) {
-            return $this->typeResolver->resolve('Reply');
         }
         if ($node instanceof Requirement) {
             return $this->requirementTypeResolver->__invoke($node);

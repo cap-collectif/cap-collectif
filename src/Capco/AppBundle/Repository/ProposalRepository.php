@@ -134,39 +134,6 @@ class ProposalRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function getByUser(User $user): array
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->andWhere('proposal.author = :author')
-            ->setParameter('author', $user);
-
-        return $qb
-            ->getQuery()
-            ->execute();
-    }
-
-    public function countAllByAuthor(User $user): int
-    {
-        $qb = $this->createQueryBuilder('p');
-        $qb
-            ->select('count(DISTINCT p)')
-            ->andWhere('p.author = :author')
-            ->setParameter('author', $user)
-        ;
-
-        return $qb->getQuery()->getSingleScalarResult();
-    }
-
-    public function findAllByAuthor(User $user): array
-    {
-        $qb = $this->createQueryBuilder('p');
-        $qb
-            ->andWhere('p.author = :author')
-            ->setParameter('author', $user);
-
-        return $qb->getQuery()->getResult();
-    }
-
     public function getPublishedBySelectionStep(
         SelectionStep $step,
         int $first = 0,

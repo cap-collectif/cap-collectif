@@ -18,15 +18,3 @@ Media:
               type: "String!"
             size:
               type: "String!"
-            enabled:
-              type: "Boolean!"
-            authorName:
-              type: "String"
-            description:
-              type: "String"
-            copyright:
-              type: "String"
-            contentType:
-              type: "String!"
-            providerReference:
-              type: "String!"

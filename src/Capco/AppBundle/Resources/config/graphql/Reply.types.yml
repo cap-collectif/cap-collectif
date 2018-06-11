@@ -1,39 +1,31 @@
 Reply:
     type: object
     config:
-        description: "A Reply"
-        interfaces: [Node, Contribution]
+        description: "A reply contribution"
+        interfaces: [Node]
         fields:
-            id:
-                type: "ID!"
-            author:
-                type: "User!"
             enabled:
                 type: "Boolean!"
             private:
                 type: "Boolean!"
-            createdAt:
-                type: "DateTime!"
-            updatedAt:
-                type: "DateTime"
-                description: "The updated date."
-            expired:
-                type: "Boolean!"
-            questionnaire:
-                type: "Questionnaire!"
-                description: "Identifies the form where the contribution was submitted."
             responses:
                 type: "[Response]!"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ResponsesResolver", [value])'
-            kind:
-                type: "String!"
-                resolve: "@=value.getKind()"
-            related:
-                type: "Contribution"
-                description: "Return the related contribution if the contribution is related to another."
+            author:
+                type: "User!"
+                description: "The author of the contribution."
+            updatedAt:
+                type: "DateTime"
+                description: "The updated date."
+            id:
+                type: "ID!"
+                description: "The id of the contribution."
+            questionnaire:
+                type: "Questionnaire!"
+                description: "Identifies the form where the contribution was submitted."
+            createdAt:
+              type: "DateTime!"
+              description: "Identifies the date and time when the object was created."
             viewerCanDelete:
-                type: "Boolean!"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ReplyViewerCanDeleteResolver", [value, user])'
-            url:
-                type: "URI!"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyUrlResolver", [value])'
+              type: "Boolean!"
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ReplyViewerCanDeleteResolver", [value, user])'

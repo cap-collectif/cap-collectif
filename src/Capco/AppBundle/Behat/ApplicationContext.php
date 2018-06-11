@@ -12,7 +12,6 @@ use Behat\Testwork\Tester\Result\TestResult;
 use Capco\AppBundle\Behat\Page\HomePage;
 use Capco\AppBundle\Behat\Traits\AdminTrait;
 use Capco\AppBundle\Behat\Traits\CommentStepsTrait;
-use Capco\AppBundle\Behat\Traits\ExportDatasUserTrait;
 use Capco\AppBundle\Behat\Traits\NotificationsStepTrait;
 use Capco\AppBundle\Behat\Traits\OpinionStepsTrait;
 use Capco\AppBundle\Behat\Traits\ProjectStepsTrait;
@@ -46,7 +45,6 @@ class ApplicationContext extends UserContext
     use SynthesisStepsTrait;
     use ThemeStepsTrait;
     use AdminTrait;
-    use ExportDatasUserTrait;
     protected $dbContainer;
     protected $cookieConsented;
     protected $currentPage = 'home page';
@@ -195,17 +193,6 @@ class ApplicationContext extends UserContext
         $directory = str_replace('vfs://', '', rtrim($directory, '/\\'));
         $filename = str_replace('vfs://', '', $filename);
         \PHPUnit_Framework_Assert::assertFileExists("$directory/$filename");
-    }
-
-    /**
-     * @Then I should not see :filename file in :directory directory
-     */
-    public function iShouldNotSeeFileInDirectory(string $filename, string $directory)
-    {
-        // Make sure we are not using virtual file system, because here we want to see real files in path
-        $directory = str_replace('vfs://', '', rtrim($directory, '/\\'));
-        $filename = str_replace('vfs://', '', $filename);
-        \PHPUnit_Framework_Assert::assertFileNotExists("$directory/$filename");
     }
 
     /**
