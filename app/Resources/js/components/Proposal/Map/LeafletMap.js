@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { Map, TileLayer, GeoJSON, Marker, Popup } from 'react-leaflet-universal';
-import { connect, type MapStateToProps, type Connector } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import LocateControl from './LocateControl';
 import LeafletSearch from './LeafletSearch';
@@ -38,11 +38,6 @@ type Props = {
   dispatch: Dispatch,
 };
 
-type DefaultProps = {
-  defaultMapOptions: MapOptions,
-  visible: boolean,
-};
-
 let L;
 
 export class LeafletMap extends Component<Props, ComponentState> {
@@ -74,7 +69,7 @@ export class LeafletMap extends Component<Props, ComponentState> {
   }
 
   // $FlowFixMe
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props) {
     const { dispatch, stepId, stepType, visible } = this.props;
     if (visible && prevProps.visible !== visible) {
       dispatch(loadMarkers(stepId, stepType));
@@ -161,6 +156,6 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
     ].type,
 });
 
-const connector: Connector<DefaultProps, Props> = connect(mapStateToProps);
+const container = connect(mapStateToProps)(LeafletMap);
 
-export default connector(LeafletMap);
+export default container;

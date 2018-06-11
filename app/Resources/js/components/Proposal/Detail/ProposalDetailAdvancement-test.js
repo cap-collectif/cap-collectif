@@ -1,14 +1,19 @@
+// @flow
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalDetailAdvancement } from './ProposalDetailAdvancement';
+import { $refType } from '../../../mocks';
 
 describe('<ProposalDetailAdvancement />', () => {
   const proposal = {
+    id: '3',
+    status: null,
+    $refType,
     selections: [
       {
         step: {
-          id: 2,
+          id: '2',
           position: 2,
         },
         status: {
@@ -22,7 +27,7 @@ describe('<ProposalDetailAdvancement />', () => {
   const project = {
     steps: [
       {
-        id: 1,
+        id: '1',
         type: 'collect',
         position: 1,
         endAt: 'endAt',
@@ -30,7 +35,7 @@ describe('<ProposalDetailAdvancement />', () => {
         title: 'Collecte 1',
       },
       {
-        id: 3,
+        id: '3',
         type: 'selection',
         position: 3,
         endAt: 'endAt',
@@ -38,7 +43,7 @@ describe('<ProposalDetailAdvancement />', () => {
         title: 'Selection 2',
       },
       {
-        id: 2,
+        id: '2',
         type: 'selection',
         position: 2,
         endAt: 'endAt',
