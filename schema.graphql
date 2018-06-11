@@ -299,7 +299,7 @@ type CollectStep implements Node & Step & ProposalStep {
   votesLimit: Int
   votesHelpText: String
   budget: Int
-  project: Project!
+  project: Project
   open: Boolean!
   private: Boolean!
   form: ProposalForm!
@@ -1650,7 +1650,7 @@ interface ProposalStep {
   id: ID!
   kind: String!
   title: String!
-  project: Project!
+  project: Project
   votesLimit: Int
   budget: Int
   voteType: ProposalStepVoteType!
