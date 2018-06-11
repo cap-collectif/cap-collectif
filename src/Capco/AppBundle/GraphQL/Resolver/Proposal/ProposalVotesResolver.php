@@ -31,35 +31,33 @@ class ProposalVotesResolver
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
     }
 
-    public function __invoke(Proposal $proposal, Argument $args, array $context): Connection
+    public function __invoke(Proposal $proposal, Argument $args): Connection
     {
-        $includeExpired = $args->offsetGet('includeExpired') && isset($context['disable_acl']);
         if ($args->offsetExists('stepId')) {
             try {
                 $step = $this->abstractStepRepository->find($args->offsetGet('stepId'));
-
                 if (!$step) {
                     // Maybe throw an exception
-                    return $this->resolveAllVotes($proposal, $args, $includeExpired);
+                    return $this->resolveAllVotes($proposal, $args);
                 }
 
                 $field = $args->offsetGet('orderBy')['field'];
                 $direction = $args->offsetGet('orderBy')['direction'];
 
                 if ($step instanceof CollectStep) {
-                    $paginator = new Paginator(function (int $offset, int $limit) use ($proposal, $step, $field, $direction, $includeExpired) {
-                        return $this->proposalCollectVoteRepository->getByProposalAndStep($proposal, $step, $limit, $offset, $field, $direction, $includeExpired)->getIterator()->getArrayCopy();
+                    $paginator = new Paginator(function (int $offset, int $limit) use ($proposal, $step, $field, $direction) {
+                        return $this->proposalCollectVoteRepository->getByProposalAndStep($proposal, $step, $limit, $offset, $field, $direction)->getIterator()->getArrayCopy();
                     });
-                    $totalCount = $this->proposalCollectVoteRepository->countVotesByProposalAndStep($proposal, $step, $includeExpired);
+                    $totalCount = $this->proposalCollectVoteRepository->countVotesByProposalAndStep($proposal, $step);
 
                     return $paginator->auto($args, $totalCount);
                 }
 
                 if ($step instanceof SelectionStep) {
-                    $paginator = new Paginator(function (int $offset, int $limit) use ($proposal, $step, $field, $direction, $includeExpired) {
-                        return $this->proposalSelectionVoteRepository->getByProposalAndStep($proposal, $step, $limit, $offset, $field, $direction, $includeExpired)->getIterator()->getArrayCopy();
+                    $paginator = new Paginator(function (int $offset, int $limit) use ($proposal, $step, $field, $direction) {
+                        return $this->proposalSelectionVoteRepository->getByProposalAndStep($proposal, $step, $limit, $offset, $field, $direction)->getIterator()->getArrayCopy();
                     });
-                    $totalCount = $this->proposalSelectionVoteRepository->countVotesByProposalAndStep($proposal, $step, $includeExpired);
+                    $totalCount = $this->proposalSelectionVoteRepository->countVotesByProposalAndStep($proposal, $step);
 
                     return $paginator->auto($args, $totalCount);
                 }
@@ -71,18 +69,18 @@ class ProposalVotesResolver
             }
         }
 
-        return $this->resolveAllVotes($proposal, $args, $includeExpired);
+        return $this->resolveAllVotes($proposal, $args);
     }
 
-    public function resolveAllVotes(Proposal $proposal, Argument $args, bool $includeExpired = false): Connection
+    public function resolveAllVotes(Proposal $proposal, Argument $args): Connection
     {
         $paginator = new Paginator(function () {
             return [];
         });
 
         $totalCount = 0;
-        $totalCount += $this->proposalCollectVoteRepository->countVotesByProposal($proposal, $includeExpired);
-        $totalCount += $this->proposalSelectionVoteRepository->countVotesByProposal($proposal, $includeExpired);
+        $totalCount += $this->proposalCollectVoteRepository->countVotesByProposal($proposal);
+        $totalCount += $this->proposalSelectionVoteRepository->countVotesByProposal($proposal);
 
         return $paginator->auto($args, $totalCount);
     }

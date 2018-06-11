@@ -46,7 +46,6 @@ ProposalStep:
                       defaultValue: { field: CREATED_AT, direction: DESC }
             proposals:
                 type: "ProposalConnection!"
-                resolve: "@=resolver('proposal_form_proposals', [value, args, user, request])"
                 args:
                   district:
                     type: "ID"

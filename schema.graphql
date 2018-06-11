@@ -1519,9 +1519,6 @@ type Proposal implements Node & Contribution {
 
     # If provided, retrieve only in this step.
     stepId: ID
-
-    # (SuperAdmin only) retrieves ALL votes including expired ones
-    includeExpired: Boolean = false
   ): ProposalVoteConnection!
 
   # Identifies the date and time when the object was created.
@@ -2847,17 +2844,7 @@ type User implements Node {
 
   # Your localisation
   neighborhood: String
-  proposalVotes(
-    after: String
-    first: Int = 100000
-    before: String
-    last: Int
-    orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}
-    stepId: ID
-
-    # (SuperAdmin only) retrieves ALL votes including expired ones
-    includeExpired: Boolean = false
-  ): ProposalVoteConnection!
+  proposalVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}, stepId: ID): ProposalVoteConnection!
   deletedAccountAt: DateTime
 
   # Get all medias the user has published.
