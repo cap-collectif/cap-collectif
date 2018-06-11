@@ -8,7 +8,7 @@ Proposal:
                 type: "URI!"
                 description: "The HTTP show url for this contribution."
                 resolve: "@=resolver('proposal_show_url', [value])"
-                deprecationReason: "user url instead of show_url (depreciated)"
+                deprecationReason: "Use url instead of show_url"
             url:
                 type: "URI!"
                 description: "The HTTP show url for this contribution."
