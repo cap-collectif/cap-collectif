@@ -19,6 +19,7 @@ type Props = FormProps &
   hasValue: Object,
   userTypes: Array<Object>,
   features: Object,
+  isViewerOrSuperAdmin: boolean
 };
 
 const formName = 'user-admin-edit-profile';
@@ -96,7 +97,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
       userTypes,
       features,
       error,
-      user,
+      isViewerOrSuperAdmin,
     } = this.props;
     return (
       <div className="box box-primary container-fluid">
@@ -112,7 +113,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
               component={component}
               type="image"
               divClassName="col-sm-10"
-              disabled={!user.isUserOrSuperAdmin}
+              disabled={!isViewerOrSuperAdmin}
             />
             <Field
               name="username"
@@ -127,7 +128,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
               type="text"
               id="profile-form-username"
               divClassName="col-sm-4"
-              disabled={!user.isUserOrSuperAdmin}
+              disabled={!isViewerOrSuperAdmin}
             />
             <div className="clearfix"/>
             {features.user_type && (
@@ -137,7 +138,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
                 component={component}
                 type="select"
                 divClassName="col-sm-4"
-                disabled={!user.isUserOrSuperAdmin}
+                disabled={!isViewerOrSuperAdmin}
                 label={<FormattedMessage id="registration.type"/>}
               >
                 <FormattedMessage id="registration.select.type">
@@ -156,7 +157,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
               component={component}
               type="textarea"
               id="public-data-form-biography"
-              disabled={!user.isUserOrSuperAdmin}
+              disabled={!isViewerOrSuperAdmin}
               label={<FormattedMessage id="form.label_biography"/>}
               divClassName="col-sm-8"
             />
@@ -165,7 +166,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
               name="neighborhood"
               component={component}
               type="text"
-              disabled={!user.isUserOrSuperAdmin}
+              disabled={!isViewerOrSuperAdmin}
               id="public-data-form-neighborhood"
               label={<FormattedMessage id="form.label_neighborhood"/>}
               divClassName="col-sm-4"
@@ -175,7 +176,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
               name="website"
               component={component}
               type="text"
-              disabled={!user.isUserOrSuperAdmin}
+              disabled={!isViewerOrSuperAdmin}
               id="public-data-form-website"
               label={<FormattedMessage id="form.label_website"/>}
               divClassName="col-sm-4"
@@ -189,7 +190,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
               name="facebookUrl"
               component={component}
               type="text"
-              disabled={!user.isUserOrSuperAdmin}
+              disabled={!isViewerOrSuperAdmin}
               id="public-data-form-facebook"
               label={<FormattedMessage id="user.profile.edit.facebook"/>}
               divClassName="col-sm-4"
@@ -200,7 +201,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
               name="twitterUrl"
               component={component}
               type="text"
-              disabled={!user.isUserOrSuperAdmin}
+              disabled={!isViewerOrSuperAdmin}
               id="public-data-form-twitter"
               divClassName="col-sm-4"
               label={<FormattedMessage id="user.profile.edit.twitter"/>}
@@ -211,7 +212,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
               name="linkedInUrl"
               component={component}
               type="text"
-              disabled={!user.isUserOrSuperAdmin}
+              disabled={!isViewerOrSuperAdmin}
               id="public-data-form-linkedIn"
               divClassName="col-sm-4"
               label={<FormattedMessage id="show.label_linked_in_url"/>}
@@ -225,7 +226,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
               name="profilePageIndexed"
               component={component}
               type="checkbox"
-              disabled={!user.isUserOrSuperAdmin}
+              disabled={!isViewerOrSuperAdmin}
               labelClassName="font-weight-normal"
               children={<FormattedMessage id="user.profile.edit.profilePageIndexed"/>}
               divClassName="col-sm-8"
@@ -233,7 +234,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
             <div className="clearfix"/>
             <ButtonToolbar className="box-content__toolbar">
               <Button
-                disabled={invalid || submitting || !user.isUserOrSuperAdmin}
+                disabled={invalid || submitting || !isViewerOrSuperAdmin}
                 type="submit"
                 bsStyle="primary"
                 id="profile-form-save">
@@ -284,6 +285,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (
   },
   userTypes: state.default.userTypes,
   features: state.default.features,
+  isViewerOrSuperAdmin: user.isViewer || !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN'))
 });
 
 const container = connect(mapStateToProps)(injectIntl(form));
@@ -312,7 +314,7 @@ export default createFragmentContainer(
         id
       }
       neighborhood
-      isUserOrSuperAdmin
+      isViewer
     }
   `,
 );

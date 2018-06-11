@@ -11,21 +11,29 @@ import type {GlobalState, Dispatch} from '../../../types';
 import UpdateUserAccountMutation from '../../../mutations/UpdateUserAccountMutation';
 import UserAdminAccount_user from './__generated__/UserAdminAccount_user.graphql';
 import DeleteAccountModal from "../DeleteAccountModal";
+import SelectUserRoles from '../../Form/SelectUserRoles';
 
 type RelayProps = {
-  +user: UserAdminAccount_user,
+  user: UserAdminAccount_user,
 };
 type Props = FormProps &
   RelayProps & {
-  +intl: IntlShape,
-  +isSuperAdmin: boolean,
-  +viewerId: string,
+  intl: IntlShape,
+  isViewerOrSuperAdmin: boolean,
+  userDeletedIsNotViewer: boolean,
 };
 
 const formName = 'user-admin-edit-account';
+type FormValues = {
+  roles: {
+    labels: [],
+  },
+  vip: boolean,
+  enabled: boolean,
+  locked: boolean,
+};
 
-const onSubmit = (values: Object, dispatch: Dispatch, {user}: Props) => {
-
+const onSubmit = (values: FormValues, dispatch: Dispatch, {user}: Props) => {
   const roles = values.roles.labels;
   const vip = values.vip;
   const enabled = values.enabled;
@@ -51,7 +59,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, {user}: Props) => {
     });
 };
 
-const validate = (values: Object) => {
+const validate = (values: FormValues) => {
   const errors = {};
   if (values.roles.labels.length === 0) {
     errors.roles = 'not enought';
@@ -80,36 +88,13 @@ export class UserAdminAccount extends React.Component<Props, State> {
       submitSucceeded,
       submitFailed,
       user,
-      viewerId,
       submitting,
-      isSuperAdmin,
       handleSubmit,
-      intl,
+      isViewerOrSuperAdmin,
+      userDeletedIsNotViewer,
     } = this.props;
-    const userDeletedIsNotViewer = user.id !== viewerId;
-    const superAdminRole = {
-      id: 'ROLE_SUPER_ADMIN',
-      useIdAsValue: true,
-      label: intl.formatMessage({id: 'roles.super_admin'}),
-    };
-    const userRoles = [
-      {
-        id: 'ROLE_USER',
-        useIdAsValue: true,
-        label: intl.formatMessage({id: 'roles.user'}),
-      },
-      {
-        id: 'ROLE_ADMIN',
-        useIdAsValue: true,
-        label: intl.formatMessage({id: 'roles.admin'}),
-      }
-    ];
 
-    if (isSuperAdmin) {
-      userRoles.push(superAdminRole);
-    }
-
-    const newsletterAt = user.isSubscribedToNewsLetterAt ? user.isSubscribedToNewsLetterAt.split(' ') : false;
+    const newsletterAt = user.subscribedToNewsLetterAt ? user.subscribedToNewsLetterAt.split(' ') : false;
     const expiredAt = user.expiredAt ? user.expiredAt.split(' ') : false;
 
     return (
@@ -168,15 +153,10 @@ export class UserAdminAccount extends React.Component<Props, State> {
                 <FormattedMessage id="form.label_real_roles"/>
               </h3>
             </div>
-            <Field
+            <SelectUserRoles
               id="user_roles"
               name="roles"
-              component={component}
-              type="checkbox"
-              label={
-                <FormattedMessage id="form.label_real_roles"/>
-              }
-              choices={userRoles}
+              label="form.label_real_roles"
             />
             <div className="box-header">
               <h3 className="box-title">
@@ -208,7 +188,7 @@ export class UserAdminAccount extends React.Component<Props, State> {
                 disabled={pristine || invalid || submitting}>
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.save'}/>
               </Button>
-              {user.isUserOrSuperAdmin && (
+              {isViewerOrSuperAdmin && (
                 <Button
                   id="delete-account-profile-button"
                   bsStyle="danger"
@@ -227,7 +207,7 @@ export class UserAdminAccount extends React.Component<Props, State> {
                 submitting={submitting}
               />
             </ButtonToolbar>
-            {user.isUserOrSuperAdmin && (
+            {isViewerOrSuperAdmin && (
               <DeleteAccountModal
                 viewer={user}
                 fromBo
@@ -256,8 +236,6 @@ const mapStateToProps: MapStateToProps<*, *, *> = (
   state: GlobalState,
   {user}: RelayProps,
 ) => ({
-  isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
-  viewerId: state.user.id,
   initialValues: {
     vip: user.vip,
     enabled: user.enabled,
@@ -266,6 +244,8 @@ const mapStateToProps: MapStateToProps<*, *, *> = (
     expired: user.expired,
     newsletter: user.isSubscribedToNewsLetter,
   },
+  isViewerOrSuperAdmin: user.isViewer || !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
+  userDeletedIsNotViewer: user.id !== (state.user.user && state.user.user.id)
 });
 
 const container = connect(mapStateToProps)(injectIntl(form));
@@ -282,8 +262,8 @@ export default createFragmentContainer(
       expired
       expiredAt
       isSubscribedToNewsLetter
-      isSubscribedToNewsLetterAt
-      isUserOrSuperAdmin
+      subscribedToNewsLetterAt
+      isViewer
       ...DeleteAccountModal_viewer
     }
   `,

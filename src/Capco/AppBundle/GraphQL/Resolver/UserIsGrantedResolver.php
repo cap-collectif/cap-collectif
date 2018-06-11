@@ -20,12 +20,16 @@ class UserIsGrantedResolver
     /**
      * if $user is tped, I receive an error 500. But I want a graphql error, so I need to check the instance of $user.
      *
-     * @param mixed      $user
+     * @param mixed $user
      * @param null|mixed $userRequest
      * @param null|mixed $context
      */
-    public function isGranted($user, $userRequest = null, $context = null, array $roleRequest = ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN']): bool
-    {
+    public function isGranted(
+        $user,
+        $userRequest = null,
+        $context = null,
+        array $roleRequest = ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN']
+    ): bool {
         if ($context && isset($context['disable_acl'])) {
             return true;
         }
@@ -56,9 +60,30 @@ class UserIsGrantedResolver
         }
 
         $this->logger->warning(
-            __METHOD__ . ' : User with id ' . $user->getId() . ' try to get information about user with id ' . $token->getUser(
+            __METHOD__.' : User with id '.$user->getId().' try to get information about user with id '.$token->getUser(
             )->getId()
         );
+
+        return false;
+    }
+
+    public function isViewer($user, $userRequest = null): bool
+    {
+        if (!$user instanceof User) {
+            return false;
+        }
+        $token = $this->tokenStorage->getToken();
+        if (!$token) {
+            return false;
+        }
+
+        if ($userRequest && $userRequest instanceof User) {
+            if ($user->hasRole('ROLE_USER') && $user->getId() === $userRequest->getId()) {
+                return true;
+            }
+
+            return false;
+        }
 
         return false;
     }

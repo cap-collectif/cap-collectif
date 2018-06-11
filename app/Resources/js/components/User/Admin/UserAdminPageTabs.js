@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
-import { injectIntl } from 'react-intl';
+import { injectIntl, type IntlShape } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import UserAdminAccount from "./UserAdminAccount";
 import UserAdminProfile from "./UserAdminProfile";
@@ -10,7 +10,7 @@ import UserAdminPersonalData from "./UserAdminPersonalData";
 import UserAdminPassword from "./UserAdminPassword";
 
 type DefaultProps = void;
-type Props = { user: UserAdminPageTabs_user, intl: Object };
+type Props = { user: UserAdminPageTabs_user, intl: IntlShape };
 type State = void;
 
 export class UserAdminPageTabs extends Component<Props, State> {

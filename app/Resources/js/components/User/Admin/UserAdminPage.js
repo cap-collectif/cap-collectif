@@ -9,7 +9,7 @@ import UserAdminPageTabs from './UserAdminPageTabs';
 import Loader from '../../Ui/Loader';
 import type { State } from '../../../types';
 
-type Props = { userId: number, dirty: boolean };
+type Props = { userId: string, dirty: boolean };
 
 const onUnload = e => {
   e.returnValue = true;

@@ -23,6 +23,7 @@ type Props = FormProps &
   RelayProps & {
   intl: IntlShape,
   initialValues: Object,
+  isViewerOrSuperAdmin: boolean
 };
 
 const formName = 'user-admin-edit-personal-data';
@@ -92,7 +93,7 @@ export class UserAdminPersonalData extends React.Component<Props, PersonalDataSt
       handleSubmit,
       submitting,
       error,
-      user,
+      isViewerOrSuperAdmin,
     } = this.props;
     return (
       <div className="box box-primary container-fluid">
@@ -108,7 +109,7 @@ export class UserAdminPersonalData extends React.Component<Props, PersonalDataSt
               component={component}
               type="text"
               divClassName="col-sm-4"
-              disabled={!user.isUserOrSuperAdmin}
+              disabled={!isViewerOrSuperAdmin}
             />
             <div className="clearfix"/>
             <Field
@@ -120,7 +121,7 @@ export class UserAdminPersonalData extends React.Component<Props, PersonalDataSt
               type="text"
               id="personal-data-form-firstname"
               divClassName="col-sm-4"
-              disabled={!user.isUserOrSuperAdmin}
+              disabled={!isViewerOrSuperAdmin}
             />
             <div className="clearfix"/>
             <Field
@@ -129,7 +130,7 @@ export class UserAdminPersonalData extends React.Component<Props, PersonalDataSt
               component={component}
               type="text"
               divClassName="col-sm-4"
-              disabled={!user.isUserOrSuperAdmin}
+              disabled={!isViewerOrSuperAdmin}
               label={<FormattedMessage id="form.label_lastname"/>}
             />
             <div className="clearfix"/>
@@ -171,7 +172,7 @@ export class UserAdminPersonalData extends React.Component<Props, PersonalDataSt
               name="address"
               component={component}
               type="text"
-              disabled={!user.isUserOrSuperAdmin}
+              disabled={!isViewerOrSuperAdmin}
               id="personal-data-form-address"
               label={<FormattedMessage id="form.label_address"/>}
               divClassName="col-sm-4"
@@ -181,7 +182,7 @@ export class UserAdminPersonalData extends React.Component<Props, PersonalDataSt
               name="address2"
               component={component}
               type="text"
-              disabled={!user.isUserOrSuperAdmin}
+              disabled={!isViewerOrSuperAdmin}
               id="personal-data-form-address2"
               divClassName="col-sm-4"
               label={<FormattedMessage id="form.label_address2"/>}
@@ -192,7 +193,7 @@ export class UserAdminPersonalData extends React.Component<Props, PersonalDataSt
               name="city"
               component={component}
               type="text"
-              disabled={!user.isUserOrSuperAdmin}
+              disabled={!isViewerOrSuperAdmin}
               label={<FormattedMessage id="form.label_city"/>}
               divClassName="col-sm-4"
             />
@@ -202,7 +203,7 @@ export class UserAdminPersonalData extends React.Component<Props, PersonalDataSt
               name="zipCode"
               component={component}
               type="text"
-              disabled={!user.isUserOrSuperAdmin}
+              disabled={!isViewerOrSuperAdmin}
               label={<FormattedMessage id="form.label_zip_code"/>}
               divClassName="col-sm-4"
             />
@@ -212,7 +213,7 @@ export class UserAdminPersonalData extends React.Component<Props, PersonalDataSt
               name="phone"
               component={component}
               type="text"
-              disabled={!user.isUserOrSuperAdmin}
+              disabled={!isViewerOrSuperAdmin}
               label={<FormattedMessage id="form.label_phone"/>}
               divClassName="col-sm-4"
             />
@@ -229,7 +230,7 @@ export class UserAdminPersonalData extends React.Component<Props, PersonalDataSt
             <div className="clearfix"/>
             <ButtonToolbar className="box-content__toolbar">
               <Button
-                disabled={invalid || submitting || !user.isUserOrSuperAdmin}
+                disabled={invalid || submitting || !isViewerOrSuperAdmin}
                 type="submit"
                 bsStyle="primary"
                 id="personal-dataform-save">
@@ -274,6 +275,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, {user}: RelayPr
     phone: user ? user.phone : null,
     phoneConfirmed: user ? user.phoneConfirmed : null,
   },
+  isViewerOrSuperAdmin: user.isViewer || !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN'))
 });
 
 const container = connect(mapStateToProps)(injectIntl(form));
@@ -295,6 +297,6 @@ export default createFragmentContainer(
     zipCode
     phone
     phoneConfirmed
-    isUserOrSuperAdmin
+    isViewer
   }`,
 );

@@ -119,15 +119,15 @@ class Checkbox extends React.Component<Props, State> {
         <CheckboxGroup id={fieldName} ref={'choices'} name={fieldName} className="input-choices">
           {field.choices.map(choice => {
             const choiceKey = `choice-${choice.id}`;
-            const valueToReturn = choice.useIdAsValue && choice.id ? choice.id : choice.label;
+            const choiceValue = choice.useIdAsValue && choice.id ? choice.id : choice.label;
             return (
               <div key={choiceKey}>
                 <Input
                   id={`${id}_${choiceKey}`}
                   name={fieldName}
                   type="checkbox"
-                  value={valueToReturn}
-                  checked={finalValue.indexOf(valueToReturn) !== -1}
+                  value={choiceValue}
+                  checked={finalValue.indexOf(choiceValue) !== -1}
                   description={choice.description}
                   disabled={disabled}
                   onBlur={event => {
@@ -137,9 +137,9 @@ class Checkbox extends React.Component<Props, State> {
                     const newValue = [...finalValue];
 
                     if (event.target.checked) {
-                      newValue.push(valueToReturn);
+                      newValue.push(choiceValue);
                     } else {
-                      newValue.splice(newValue.indexOf(valueToReturn), 1);
+                      newValue.splice(newValue.indexOf(choiceValue), 1);
                     }
                     this.onChange(newValue);
                   }}

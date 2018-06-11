@@ -1,6 +1,6 @@
 // @flow
 import React, {Component} from 'react';
-import {FormattedMessage, injectIntl} from 'react-intl';
+import {FormattedMessage, injectIntl, type IntlShape} from 'react-intl';
 import {ButtonGroup, Button, Modal} from 'react-bootstrap';
 import {
   reduxForm,
@@ -8,27 +8,38 @@ import {
   Field,
   SubmissionError,
 } from 'redux-form';
-import {connect, type MapStateToProps} from "react-redux";
 import CloseButton from '../../Form/CloseButton';
 import component from '../../Form/Field';
 import CreateUserMutation from '../../../mutations/CreateUserMutation';
 import {isEmail} from "../../../services/Validator";
 import {form} from "../Registration/RegistrationForm";
 import AlertForm from '../../Alert/AlertForm';
-import type {Dispatch, GlobalState} from "../../../types";
+import type {Dispatch} from "../../../types";
+import SelectUserRoles from "../../Form/SelectUserRoles";
 
 const formName = 'user-admin-create';
 
 type Props = FormProps & {
-  intl: Object,
-  isSuperAdmin: boolean
+  intl: IntlShape
 };
 
 type State = {
   showModal: boolean
 };
 
-const validate = (values: Object) => {
+type FormValues = {
+  username: string,
+  email: string,
+  plainPassword: ?string,
+  roles: {
+    labels: []
+  },
+  vip: boolean,
+  enabled: boolean,
+  locked: boolean,
+};
+
+const validate = (values: FormValues) => {
   const errors = {};
   if (!values.username || values.username.length < 2) {
     errors.username = 'registration.constraints.username.min';
@@ -42,16 +53,17 @@ const validate = (values: Object) => {
   if (values.plainPassword && values.plainPassword.length > 72) {
     errors.plainPassword = 'registration.constraints.password.max';
   }
-  if (!values.roles || values.roles.length === 0) {
+  if (!values.roles.labels || values.roles.labels.length === 0) {
     errors.roles = 'please-select-at-least-1-option';
   }
 
   return errors;
 };
 
-const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
+const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const {intl} = props;
   const roles = values.roles.labels;
+  // delete values.roles, because we need values.roles.labels as roles
   delete values.roles;
   const input = {
     ...values,
@@ -96,32 +108,9 @@ export class UserAdminCreateButton extends Component<Props, State> {
       submitFailed,
       handleSubmit,
       submitting,
-      isSuperAdmin,
       error,
-      intl
     } = this.props;
     const {showModal} = this.state;
-    const superAdminRole = {
-      id: 'ROLE_SUPER_ADMIN',
-      useIdAsValue: true,
-      label: intl.formatMessage({id: 'roles.super_admin'}),
-    };
-    const userRoles = [
-      {
-        id: 'ROLE_USER',
-        useIdAsValue: true,
-        label: intl.formatMessage({id: 'roles.user'}),
-      },
-      {
-        id: 'ROLE_ADMIN',
-        useIdAsValue: true,
-        label: intl.formatMessage({id: 'roles.admin'}),
-      }
-    ];
-
-    if(isSuperAdmin){
-      userRoles.push(superAdminRole);
-    }
 
     return (
       <div>
@@ -170,17 +159,11 @@ export class UserAdminCreateButton extends Component<Props, State> {
                 type="password"
                 label={<FormattedMessage id="registration.password"/>}
               />
-              <Field
+              <SelectUserRoles
                 id="user_roles"
                 name="roles"
-                component={component}
-                type="checkbox"
-                label={
-                  <FormattedMessage id="form.label_real_roles"/>
-                }
-                choices={userRoles}
-              >
-              </Field>
+                label="form.label_real_roles"
+              />
               <Field
                 isOtherAllowed
                 id="user_statuses"
@@ -225,7 +208,7 @@ export class UserAdminCreateButton extends Component<Props, State> {
                 type="submit"
                 bsStyle="primary"
                 onClick={handleSubmit}
-                id="personal-data-form-save">
+                id="confirm-user-create">
                 <FormattedMessage
                   id={submitting ? 'global.loading' : 'global.save_modifications'}
                 />
@@ -253,10 +236,4 @@ const userForm = reduxForm({
   form: formName,
 })(UserAdminCreateButton);
 
-const mapStateToProps: MapStateToProps<*, *, *> = (
-  state: GlobalState,
-) => ({
-  isSuperAdmin: !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
-});
-
-export default connect(mapStateToProps)(injectIntl(userForm));
+export default (injectIntl(userForm));

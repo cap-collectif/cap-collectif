@@ -2572,7 +2572,7 @@ input UpdateProfilePasswordInput {
 }
 
 type UpdateProfilePasswordPayload {
-  # The user just have been updated
+  # The user who just have been updated
   user: User!
 
   # The error
@@ -2625,7 +2625,7 @@ input UpdateProfilePersonalDataInput {
 }
 
 type UpdateProfilePersonalDataPayload {
-  # The user just have been updated
+  # the user who just have been updated
   user: User!
   clientMutationId: String
 }
@@ -2667,7 +2667,7 @@ input UpdateProfilePublicDataInput {
 }
 
 type UpdateProfilePublicDataPayload {
-  # the user just have been updated
+  # the user who just have been updated
   user: User!
   clientMutationId: String
 }
@@ -2964,8 +2964,8 @@ type User implements Node {
   ): ContributionConnection!
   expiredAt: DateTime
   isSubscribedToNewsLetter: Boolean
-  isSubscribedToNewsLetterAt: DateTime
-  isUserOrSuperAdmin: Boolean
+  subscribedToNewsLetterAt: DateTime
+  isViewer: Boolean!
 }
 
 # A connection to a list of items.

@@ -4,6 +4,7 @@ import {type IntlShape, injectIntl, FormattedMessage} from 'react-intl';
 import {reduxForm, type FormProps, Field, SubmissionError} from 'redux-form';
 import {createFragmentContainer, graphql} from 'react-relay';
 import {ButtonToolbar, Button} from 'react-bootstrap';
+import {connect, type MapStateToProps} from "react-redux";
 import type {Dispatch, State} from '../../../types';
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
@@ -14,33 +15,31 @@ type RelayProps = { user: UserAdminPassword_user };
 type Props = FormProps &
   RelayProps & {
   intl: IntlShape,
+  isViewerOrSuperAdmin: boolean,
+};
+type FormValues = {
+  current_password: string,
+  new_password: string,
+  new_password_confirmation: ?string,
 };
 
 const formName = 'user-admin-edit-password';
 
-const validate = ({
-                    current_password,
-                    new_password,
-                    new_password_confirmation,
-                  }: {
-  current_password: ?string,
-  new_password: ?string,
-  new_password_confirmation: ?string,
-}) => {
+const validate = (values: FormValues) => {
   const errors = {};
-  if (current_password && current_password.length < 1) {
+  if (values.current_password && values.current_password.length < 1) {
     errors.current_password = 'fos_user.password.not_current';
   }
-  if (new_password && new_password.length < 8) {
+  if (values.new_password && values.new_password.length < 8) {
     errors.new_password = 'fos_user.new_password.short';
   }
-  if (new_password && new_password_confirmation && new_password_confirmation !== new_password) {
+  if (values.new_password && values.new_password_confirmation && values.new_password_confirmation !== values.new_password) {
     errors.new_password_confirmation = 'fos_user.password.mismatch';
   }
   return errors;
 };
 
-const onSubmit = (values: Object, dispatch: Dispatch, props: Props, {reset, intl}) => {
+const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props, {reset, intl}) => {
   const input = {
     current_password: values.current_password,
     new: values.new_password,
@@ -76,7 +75,7 @@ export class UserAdminPassword extends React.Component<Props, State> {
       handleSubmit,
       submitting,
       error,
-      user,
+      isViewerOrSuperAdmin,
     } = this.props;
     return (
       <div className="box box-primary container-fluid">
@@ -92,7 +91,7 @@ export class UserAdminPassword extends React.Component<Props, State> {
               id="password-form-current"
               divClassName="col-sm-6"
               label={<FormattedMessage id="form.current_password"/>}
-              disabled={!user.isUserOrSuperAdmin}
+              disabled={!isViewerOrSuperAdmin}
             />
             <div className="clearfix"/>
             <Field
@@ -102,7 +101,7 @@ export class UserAdminPassword extends React.Component<Props, State> {
               id="password-form-new_password"
               divClassName="col-sm-6"
               label={<FormattedMessage id="form.new_password"/>}
-              disabled={!user.isUserOrSuperAdmin}
+              disabled={!isViewerOrSuperAdmin}
             />
             <div className="clearfix"/>
             <Field
@@ -112,12 +111,12 @@ export class UserAdminPassword extends React.Component<Props, State> {
               id="password-form-confirmation"
               divClassName="col-sm-6"
               label={<FormattedMessage id="form.new_password_confirmation"/>}
-              disabled={!user.isUserOrSuperAdmin}
+              disabled={!isViewerOrSuperAdmin}
             />
             <div className="clearfix"/>
             <ButtonToolbar className="col-sm-6 pl-0">
               <Button
-                disabled={invalid || submitting || !user.isUserOrSuperAdmin}
+                disabled={invalid || submitting || !isViewerOrSuperAdmin}
                 type="submit"
                 bsStyle="primary"
                 id="profile-password-save">
@@ -148,12 +147,20 @@ const form = reduxForm({
   form: formName,
 })(UserAdminPassword);
 
+const mapStateToProps: MapStateToProps<*, *, *> = (
+  state: State,
+  {user}: RelayProps,
+) => ({
+  isViewerOrSuperAdmin: user.isViewer || !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN'))
+});
+
+const container = connect(mapStateToProps)(injectIntl(form));
 
 export default createFragmentContainer(
-  injectIntl(form),
+  container,
   graphql`
   fragment UserAdminPassword_user on User {
     id
-    isUserOrSuperAdmin
+    isViewer
   }`,
 );
