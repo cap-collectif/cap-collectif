@@ -268,6 +268,28 @@ class OpinionRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
+    public function countAllByAuthor(User $user): int
+    {
+        $qb = $this->createQueryBuilder('o');
+        $qb
+          ->select('count(DISTINCT o)')
+          ->andWhere('o.Author = :author')
+          ->setParameter('author', $user)
+      ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function findAllByAuthor(User $user): array
+    {
+        $qb = $this->createQueryBuilder('o');
+        $qb
+            ->andWhere('o.Author = :author')
+            ->setParameter('author', $user);
+
+        return $qb->getQuery()->getResult();
+    }
+
     /**
      * Get all opinions by user.
      *
@@ -275,7 +297,7 @@ class OpinionRepository extends EntityRepository
      *
      * @return array
      */
-    public function getByUser($user)
+    public function getByUser(User $user)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('ot', 's', 'c', 'aut', 'm')

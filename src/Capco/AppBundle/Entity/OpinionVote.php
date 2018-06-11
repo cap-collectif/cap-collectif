@@ -92,11 +92,6 @@ class OpinionVote extends AbstractVote
         return $this;
     }
 
-    public function getRelatedEntity()
-    {
-        return $this->opinion;
-    }
-
     // ******************* Lifecycle ******************************
 
     /**

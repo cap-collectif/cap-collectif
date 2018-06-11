@@ -12,6 +12,7 @@ use Behat\Testwork\Tester\Result\TestResult;
 use Capco\AppBundle\Behat\Page\HomePage;
 use Capco\AppBundle\Behat\Traits\AdminTrait;
 use Capco\AppBundle\Behat\Traits\CommentStepsTrait;
+use Capco\AppBundle\Behat\Traits\ExportDatasUserTrait;
 use Capco\AppBundle\Behat\Traits\NotificationsStepTrait;
 use Capco\AppBundle\Behat\Traits\OpinionStepsTrait;
 use Capco\AppBundle\Behat\Traits\ProjectStepsTrait;
@@ -45,6 +46,7 @@ class ApplicationContext extends UserContext
     use SynthesisStepsTrait;
     use ThemeStepsTrait;
     use AdminTrait;
+    use ExportDatasUserTrait;
     protected $dbContainer;
     protected $cookieConsented;
     protected $currentPage = 'home page';
@@ -470,8 +472,9 @@ class ApplicationContext extends UserContext
      * Overrided to fill wysiwyg fields as well.
      *
      * @param mixed $value
+     * @param mixed $field
      */
-    public function fillField(string $field, $value)
+    public function fillField($field, $value)
     {
         $field = $this->fixStepArgument($field);
         $value = $this->fixStepArgument($value);

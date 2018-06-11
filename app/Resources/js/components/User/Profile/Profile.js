@@ -100,12 +100,32 @@ export class Profile extends Component<Props> {
       error,
     } = this.props;
 
+    const header = (
+      <div className="panel-heading profile-header">
+        <h1>
+          <FormattedMessage id="user.profile.title" />
+        </h1>
+      </div>
+    );
+
+    const footer = (
+      <div className="col-sm-offset-4">
+        <Button
+          disabled={invalid || submitting}
+          type="submit"
+          bsStyle="primary"
+          id="profile-form-save">
+          <FormattedMessage id={submitting ? 'global.loading' : 'global.save_modifications'} />
+        </Button>
+      </div>
+    );
+
     return (
-      <Panel id="capco_horizontal_form">
-        <h2 className="page-header">
-          <FormattedMessage id="user.edition" />
-        </h2>
-        <form onSubmit={handleSubmit} className="form-horizontal">
+      <form onSubmit={handleSubmit} className="form-horizontal">
+        <Panel id="capco_horizontal_form" footer={footer} header={header}>
+          <h2 className="page-header">
+            <FormattedMessage id="user.edition" />
+          </h2>
           <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
             <label className="col-sm-3 control-label" htmlFor="profile_avatar">
               <FormattedMessage id="form.label_media" />
@@ -274,15 +294,6 @@ export class Profile extends Component<Props> {
           <div className="horizontal_field_with_border_top">
             <div className="col-sm-3" />
             <ButtonToolbar className="col-sm-6 pl-0">
-              <Button
-                disabled={invalid || submitting}
-                type="submit"
-                bsStyle="primary"
-                id="profile-form-save">
-                <FormattedMessage
-                  id={submitting ? 'global.loading' : 'global.save_modifications'}
-                />
-              </Button>
               <AlertForm
                 valid={valid}
                 invalid={invalid}
@@ -293,8 +304,8 @@ export class Profile extends Component<Props> {
               />
             </ButtonToolbar>
           </div>
-        </form>
-      </Panel>
+        </Panel>
+      </form>
     );
   }
 }

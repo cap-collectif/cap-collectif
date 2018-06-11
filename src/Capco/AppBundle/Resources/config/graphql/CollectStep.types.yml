@@ -34,7 +34,7 @@ CollectStep:
             budget:
                 type: "Int"
             project:
-                type: "Project"
+                type: "Project!"
             open:
                 type: "Boolean!"
             private:

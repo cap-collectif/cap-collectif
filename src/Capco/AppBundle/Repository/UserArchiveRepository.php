@@ -18,4 +18,15 @@ class UserArchiveRepository extends EntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function getArchivesToDelete(\DateTime $date): array
+    {
+        return $this->createQueryBuilder('ua')
+            ->andWhere('ua.requestedAt <= :date')
+            ->andWhere('ua.ready = 1')
+            ->andWhere('ua.deletedAt IS NULL')
+            ->setParameter('date', $date)
+            ->getQuery()
+            ->execute();
+    }
 }

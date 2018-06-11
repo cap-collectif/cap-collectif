@@ -115,7 +115,7 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
                   className="icon cap-id-1"
                 />
                 <FormattedMessage
-                  id="personal-data"
+                  id="data"
                   values={Object {}}
                 />
               </ListGroupItem>
@@ -371,7 +371,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
                   className="icon cap-id-1"
                 />
                 <FormattedMessage
-                  id="personal-data"
+                  id="data"
                   values={Object {}}
                 />
               </ListGroupItem>

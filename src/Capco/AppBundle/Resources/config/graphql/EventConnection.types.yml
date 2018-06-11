@@ -1,0 +1,7 @@
+EventConnection:
+    type: relay-connection
+    config:
+        nodeType: Event!
+        connectionFields:
+            totalCount:
+                type: Int!

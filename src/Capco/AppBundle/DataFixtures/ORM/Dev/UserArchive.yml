@@ -4,3 +4,9 @@ Capco\AppBundle\Entity\UserArchive:
     requestedAt: <(new \DateTime('now'))>
     ready: false
     user: '@user1'
+
+  userArchive2:
+    id: userArchive2
+    requestedAt: <(new \DateTime('2018-05-27'))>
+    ready: true
+    user: '@user4'

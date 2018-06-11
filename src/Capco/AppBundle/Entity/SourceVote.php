@@ -41,7 +41,7 @@ class SourceVote extends AbstractVote
         return $this;
     }
 
-    public function getRelatedEntity()
+    public function getRelated()
     {
         return $this->source;
     }

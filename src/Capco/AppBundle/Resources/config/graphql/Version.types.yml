@@ -13,7 +13,7 @@ Version:
                 description: "Identifies the date and time when the object was last updated."
                 resolve: "@=value.getUpdatedAt()"
             url:
-                type: "String!"
+                type: "URI!"
                 description: "The url of version."
                 resolve: "@=resolver('version_url', [value])"
             author:

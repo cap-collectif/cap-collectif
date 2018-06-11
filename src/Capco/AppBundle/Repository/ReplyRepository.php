@@ -41,6 +41,39 @@ class ReplyRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
+    public function getByUser(User $user): array
+    {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->andWhere('reply.author = :author')
+            ->setParameter('author', $user);
+
+        return $qb
+            ->getQuery()
+            ->execute();
+    }
+
+    public function countAllByAuthor(User $user): int
+    {
+        $qb = $this->createQueryBuilder('r');
+        $qb
+            ->select('count(DISTINCT r)')
+            ->andWhere('r.author = :author')
+            ->setParameter('author', $user)
+        ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function findAllByAuthor(User $user): array
+    {
+        $qb = $this->createQueryBuilder('r');
+        $qb
+            ->andWhere('r.author = :author')
+            ->setParameter('author', $user);
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function getForUserAndQuestionnaire(Questionnaire $questionnaire, User $user): Collection
     {
         $qb = $this
