@@ -1,5 +1,5 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Row } from 'react-bootstrap';
 import { connect, type MapStateToProps } from 'react-redux';
 import Pagination from '../../Utils/Pagination';
@@ -9,17 +9,17 @@ import Loader from '../../Ui/Loader';
 import { changePage, fetchProjects } from '../../../redux/modules/project';
 import type { State } from '../../../types';
 
-export const ProjectListPage = React.createClass({
-  propTypes: {
-    features: PropTypes.object.isRequired,
-    themes: PropTypes.array.isRequired,
-    project: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
-  },
+type Props = {
+  features: Object,
+  themes: Array<$FlowFixMe>,
+  project: Object,
+  dispatch: Function,
+};
 
+export class ProjectListPage extends React.Component<Props, State> {
   componentDidMount() {
     this.props.dispatch(fetchProjects());
-  },
+  }
 
   render() {
     const { project, features, dispatch } = this.props;
@@ -47,8 +47,8 @@ export const ProjectListPage = React.createClass({
         </Row>
       </div>
     );
-  },
-});
+  }
+}
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   features: state.default.features,

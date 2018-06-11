@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button, Modal, ListGroup } from 'react-bootstrap';
@@ -6,40 +7,48 @@ import ProjectStatsListItem from './ProjectStatsListItem';
 import ProjectStatsActions from '../../../actions/ProjectStatsActions';
 import Loader from '../../Ui/Loader';
 
-const ProjectStatsModal = React.createClass({
-  propTypes: {
-    type: React.PropTypes.string.isRequired,
-    stepId: React.PropTypes.string.isRequired,
-    icon: React.PropTypes.string.isRequired,
-    label: React.PropTypes.string.isRequired,
-    data: React.PropTypes.object.isRequired,
-    showPercentage: React.PropTypes.bool.isRequired,
-    isCurrency: React.PropTypes.bool.isRequired,
-    theme: React.PropTypes.number.isRequired,
-    district: React.PropTypes.number.isRequired,
-  },
+type Props = {
+  type: string,
+  stepId: string,
+  icon: string,
+  label: string,
+  data: Object,
+  showPercentage: boolean,
+  isCurrency: boolean,
+  theme: ?string,
+  district: ?string,
+};
 
-  getInitialState() {
-    const { data } = this.props;
-    return {
+type State = {
+  showModal: boolean,
+  isLoading: boolean,
+  data: Object,
+};
+
+class ProjectStatsModal extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    const { data } = props;
+
+    this.state = {
       showModal: false,
       isLoading: true,
       data,
     };
-  },
+  }
 
   componentDidMount() {
     this.loadData();
-  },
+  }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: Props) {
     const { district, theme } = this.props;
     if (theme !== nextProps.theme || district !== nextProps.district) {
       this.loadData();
     }
-  },
+  }
 
-  loadData() {
+  loadData = () => {
     const { district, stepId, theme, type } = this.props;
     ProjectStatsActions.load(stepId, type, null, theme, district).then(response => {
       this.setState({
@@ -47,19 +56,19 @@ const ProjectStatsModal = React.createClass({
         isLoading: false,
       });
     });
-  },
+  };
 
-  showModal() {
+  showModal = () => {
     this.setState({
       showModal: true,
     });
-  },
+  };
 
-  hideModal() {
+  hideModal = () => {
     this.setState({
       showModal: false,
     });
-  },
+  };
 
   render() {
     const { icon, isCurrency, label, showPercentage, stepId, type } = this.props;
@@ -107,7 +116,7 @@ const ProjectStatsModal = React.createClass({
         </Modal>
       </div>
     );
-  },
-});
+  }
+}
 
 export default ProjectStatsModal;

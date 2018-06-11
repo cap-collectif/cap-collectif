@@ -3,11 +3,11 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import CardType from '../../Ui/Card/CardType';
 
-const ProjectType = React.createClass({
-  propTypes: {
-    project: React.PropTypes.object.isRequired,
-  },
+type Props = {
+  project: Object,
+};
 
+class ProjectType extends React.Component<Props> {
   render() {
     const { project } = this.props;
 
@@ -16,7 +16,7 @@ const ProjectType = React.createClass({
         <FormattedMessage id={project.projectType.title} />
       </CardType>
     );
-  },
-});
+  }
+}
 
 export default ProjectType;

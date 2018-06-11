@@ -1,15 +1,15 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
 import type { State } from '../../../types';
 import InlineList from '../../Ui/List/InlineList';
 
-const ProjectPreviewThemes = React.createClass({
-  propTypes: {
-    project: PropTypes.object.isRequired,
-    features: PropTypes.object.isRequired,
-  },
+type Props = {
+  project: Object,
+  features: Object,
+};
 
+class ProjectPreviewThemes extends React.Component<Props> {
   render() {
     const { project, features } = this.props;
     if (features.themes && project.themes.length > 0) {
@@ -26,8 +26,8 @@ const ProjectPreviewThemes = React.createClass({
       );
     }
     return null;
-  },
-});
+  }
+}
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
   return { features: state.default.features };

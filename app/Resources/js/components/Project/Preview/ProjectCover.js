@@ -4,11 +4,9 @@ import classNames from 'classnames';
 import ProjectImage from './ProjectImage';
 import CardCover from '../../Ui/Card/CardCover';
 
-const ProjectCover = React.createClass({
-  propTypes: {
-    project: React.PropTypes.object.isRequired,
-  },
+type Props = { project: Object };
 
+class ProjectCover extends React.Component<Props> {
   render() {
     const { project } = this.props;
     const link = project._links.external || project._links.show;
@@ -23,7 +21,7 @@ const ProjectCover = React.createClass({
         </a>
       </CardCover>
     );
-  },
-});
+  }
+}
 
 export default ProjectCover;
