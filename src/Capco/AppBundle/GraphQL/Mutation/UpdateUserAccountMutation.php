@@ -4,7 +4,6 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\UserAccountFormType;
-use Capco\UserBundle\Form\Type\UserFormType;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
@@ -41,9 +40,9 @@ class UpdateUserAccountMutation
             throw new UserError('Invalid user.');
         }
         // if viewer (admin) change account of user, but user is super_admin, add (persist) super_admin to roles of user
-        if (!$viewer->hasRole('ROLE_SUPER_ADMIN') && !in_array(
+        if (!$viewer->hasRole('ROLE_SUPER_ADMIN') && !\in_array(
                 'ROLE_USER_ADMIN',
-                $arguments['roles']
+                $arguments['roles'], true
             ) && $user->hasRole('ROLE_SUPER_ADMIN')) {
             $arguments['roles'][] = 'ROLE_SUPER_ADMIN';
         }
@@ -53,7 +52,7 @@ class UpdateUserAccountMutation
         $form = $this->formFactory->create(UserAccountFormType::class, $user, ['csrf_protection' => false]);
         $form->submit($arguments, false);
         if (!$form->isValid()) {
-            $this->logger->error(__METHOD__.' : '.(string)$form->getErrors(true, false));
+            $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
 
             throw new UserError('Invalid data.');
         }

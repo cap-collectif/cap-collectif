@@ -3,10 +3,10 @@
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\AppBundle\Entity\NewsletterSubscription;
-use GraphQL\Error\UserError;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
 use Capco\UserBundle\Entity\User;
+use GraphQL\Error\UserError;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
 class UserNewsLetterResolver implements ResolverInterface
 {
@@ -21,7 +21,7 @@ class UserNewsLetterResolver implements ResolverInterface
     {
         /** @var $newsLetter NewsletterSubscription */
         $newsLetter = $this->newLetterRepository->findOneBy(['email' => $user->getEmail()]);
-        if(!$newsLetter) {
+        if (!$newsLetter) {
             throw new UserError('No newsletter');
         }
 

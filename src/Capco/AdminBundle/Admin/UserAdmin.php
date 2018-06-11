@@ -16,12 +16,6 @@ class UserAdmin extends BaseAdmin
         '_sort_by' => 'updatedAt',
     ];
 
-    /**
-     * empty to override parent
-     */
-    protected function configureFormFields(FormMapper $formMapper){ }
-
-
 //    public function getFormBuilder()
 //    {
 //        $this->formOptions['data_class'] = $this->getClass();
@@ -68,6 +62,13 @@ class UserAdmin extends BaseAdmin
     public function getExportFormats()
     {
         return ['csv'];
+    }
+
+    /**
+     * empty to override parent.
+     */
+    protected function configureFormFields(FormMapper $formMapper)
+    {
     }
 
     /**

@@ -219,7 +219,7 @@ Scenario: Logged as user, I want to update my profile
   And I wait 1 seconds
   Then I should see "global.saved"
 
-@javascript @database @dev
+@javascript @database
 Scenario: Logged as user, I want to update my profile
   Given feature "user_type" is disabled
   And I am logged in as user

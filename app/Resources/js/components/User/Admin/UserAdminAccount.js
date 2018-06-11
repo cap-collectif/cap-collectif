@@ -24,7 +24,7 @@ type Props = FormProps &
 
 const formName = 'user-admin-edit-account';
 
-const onSubmit = (values: FormValues, dispatch: Dispatch, {user}: Props) => {
+const onSubmit = (values: Object, dispatch: Dispatch, {user}: Props) => {
 
   const roles = values.roles.labels;
   const vip = values.vip;
@@ -65,7 +65,12 @@ type State = {
 };
 
 export class UserAdminAccount extends React.Component<Props, State> {
-  state = {};
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      showDeleteAccountModal: false,
+    };
+  }
 
   render() {
     const {

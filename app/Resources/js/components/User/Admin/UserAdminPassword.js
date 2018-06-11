@@ -40,7 +40,7 @@ const validate = ({
   return errors;
 };
 
-const onSubmit = (values: Object, dispatch: Dispatch,props: Props, {reset, intl}) => {
+const onSubmit = (values: Object, dispatch: Dispatch, props: Props, {reset, intl}) => {
   const input = {
     current_password: values.current_password,
     new: values.new_password,
@@ -65,7 +65,6 @@ const onSubmit = (values: Object, dispatch: Dispatch,props: Props, {reset, intl}
     reset();
   });
 };
-
 
 export class UserAdminPassword extends React.Component<Props, State> {
   render() {

@@ -20,6 +20,9 @@ class UserIsGrantedResolver
     /**
      * if $user is tped, I receive an error 500. But I want a graphql error, so I need to check the instance of $user.
      *
+     * @param mixed      $user
+     * @param null|mixed $userRequest
+     * @param null|mixed $context
      */
     public function isGranted($user, $userRequest = null, $context = null, array $roleRequest = ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN']): bool
     {
@@ -40,7 +43,6 @@ class UserIsGrantedResolver
             }
         }
 
-
         if ($userRequest && $userRequest instanceof User) {
             if ($user->hasRole('ROLE_USER') && $user->getId() === $userRequest->getId()) {
                 return true;
@@ -54,7 +56,7 @@ class UserIsGrantedResolver
         }
 
         $this->logger->warning(
-            __METHOD__.' : User with id '.$user->getId().' try to get information about user with id '.$token->getUser(
+            __METHOD__ . ' : User with id ' . $user->getId() . ' try to get information about user with id ' . $token->getUser(
             )->getId()
         );
 

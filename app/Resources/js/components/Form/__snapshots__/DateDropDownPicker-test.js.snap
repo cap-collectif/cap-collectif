@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<DateDropdownPicker /> should render in english with date 1`] = `
-<div>
+<div
+  className="globalClassName"
+>
   <label
     className="sm-3"
   >
@@ -74,7 +76,9 @@ exports[`<DateDropdownPicker /> should render in english with date 1`] = `
 `;
 
 exports[`<DateDropdownPicker /> should render in english without date 1`] = `
-<div>
+<div
+  className="globalClassName"
+>
   <label
     className="sm-3"
   >

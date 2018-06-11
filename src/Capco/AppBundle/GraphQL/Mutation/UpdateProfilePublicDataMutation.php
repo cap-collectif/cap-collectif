@@ -5,11 +5,8 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\PublicDataType;
-use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Psr\Log\LoggerInterface;
-use Symfony\Component\Form\FormFactory;
 
 class UpdateProfilePublicDataMutation extends BaseUpdateProfile
 {
@@ -28,11 +25,11 @@ class UpdateProfilePublicDataMutation extends BaseUpdateProfile
         try {
             $form->submit($this->arguments, false);
         } catch (\LogicException $e) {
-            $this->logger->error(__METHOD__.' : '.$e->getMessage());
+            $this->logger->error(__METHOD__ . ' : ' . $e->getMessage());
         }
 
         if (!$form->isValid()) {
-            $this->logger->error(__METHOD__.' : '.(string)$form->getErrors(true, false));
+            $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
             throw new UserError('Can\'t update !');
         }
 

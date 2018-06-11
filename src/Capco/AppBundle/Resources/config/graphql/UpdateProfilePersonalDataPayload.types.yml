@@ -4,4 +4,4 @@ UpdateProfilePersonalDataPayload:
         fields:
             user:
                 type: "User!"
-                description: "The user just have been updated"
+                description: "the user who just have been updated"

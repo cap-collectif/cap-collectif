@@ -24,6 +24,10 @@ type Props = FormProps & {
   isSuperAdmin: boolean
 };
 
+type State = {
+  showModal: boolean
+};
+
 const validate = (values: Object) => {
   const errors = {};
   if (!values.username || values.username.length < 2) {
@@ -75,8 +79,8 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
     });
 };
 
-export class UserAdminCreateButton extends Component<Props> {
-  constructor(props) {
+export class UserAdminCreateButton extends Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       showModal: false,

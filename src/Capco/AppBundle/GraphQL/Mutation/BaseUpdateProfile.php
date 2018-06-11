@@ -2,9 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\Form\Type\PublicDataType;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -42,7 +40,7 @@ class BaseUpdateProfile
             $this->user = $this->em->getRepository('CapcoUserBundle:User')->find($this->arguments['userId']);
         }
 
-        if(isset($this->arguments['userId'])) {
+        if (isset($this->arguments['userId'])) {
             unset($this->arguments['userId']);
         }
     }

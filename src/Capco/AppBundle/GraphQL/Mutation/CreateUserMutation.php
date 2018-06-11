@@ -5,11 +5,10 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\UserFormType;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\ORMException;
 use GraphQL\Error\UserError;
 use Monolog\Logger;
-use Symfony\Component\Form\FormFactory;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Symfony\Component\Form\FormFactory;
 
 class CreateUserMutation
 {
@@ -39,7 +38,7 @@ class CreateUserMutation
         $form = $this->formFactory->create(UserFormType::class, $user, ['csrf_protection' => false]);
         $form->submit($arguments, false);
         if (!$form->isValid()) {
-            $this->logger->error(__METHOD__.' : '.(string)$form->getErrors(true, false));
+            $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
 
             throw new UserError('Invalid data.');
         }

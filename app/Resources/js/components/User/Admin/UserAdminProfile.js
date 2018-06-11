@@ -84,7 +84,6 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
     });
 };
 
-
 export class UserAdminProfile extends React.Component<Props, State> {
   render() {
     const {

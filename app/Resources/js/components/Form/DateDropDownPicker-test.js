@@ -19,6 +19,7 @@ describe('<DateDropdownPicker />', () => {
     componentId: 'myId',
     labelClassName: 'sm-3',
     divClassName: 'className',
+    globalClassName: 'globalClassName',
   };
 
   it('should render in english without date', () => {
