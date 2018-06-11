@@ -20,6 +20,6 @@ class ReplyUrlResolver
             return $this->urlResolver->getStepUrl($reply->getQuestionnaire()->getStep(), true);
         }
 
-        return null;
+        return '';
     }
 }

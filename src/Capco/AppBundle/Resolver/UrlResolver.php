@@ -40,10 +40,10 @@ class UrlResolver
         $this->container = $container;
     }
 
-    public function getMediaUrl(Media $media, Arg $args)
+    public function getMediaUrl(Media $media, Arg $args): string
     {
         if (!$media) {
-            return;
+            return '';
         }
 
         $format = $args['format'] ?? 'reference';
