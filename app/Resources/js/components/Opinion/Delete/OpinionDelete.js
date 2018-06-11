@@ -1,5 +1,5 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { Modal, Button } from 'react-bootstrap';
@@ -7,39 +7,40 @@ import OpinionActions from '../../../actions/OpinionActions';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 
-const OpinionDelete = React.createClass({
-  propTypes: {
-    opinion: PropTypes.object.isRequired,
-    user: PropTypes.object,
-  },
+type Props = {
+  opinion: Object,
+  user?: Object,
+};
 
-  getDefaultProps() {
-    return {
-      user: null,
-    };
-  },
+type State = {
+  showModal: boolean,
+  isSubmitting: boolean,
+};
 
-  getInitialState() {
-    return {
-      showModal: false,
-      isSubmitting: false,
-    };
-  },
+class OpinionDelete extends React.Component<Props, State> {
+  static defaultProps = {
+    user: null,
+  };
 
-  showModal() {
+  state = {
+    showModal: false,
+    isSubmitting: false,
+  };
+
+  showModal = () => {
     this.setState({ showModal: true });
-  },
+  };
 
-  hideModal() {
+  hideModal = () => {
     this.setState({ showModal: false });
-  },
+  };
 
-  isVersion() {
+  isVersion = () => {
     const { opinion } = this.props;
     return !!opinion.parent;
-  },
+  };
 
-  delete() {
+  delete = () => {
     const { opinion } = this.props;
     this.setState({ isSubmitting: true });
     if (this.isVersion()) {
@@ -51,15 +52,15 @@ const OpinionDelete = React.createClass({
         window.location.href = opinion._links.type;
       });
     }
-  },
+  };
 
-  isTheUserTheAuthor() {
+  isTheUserTheAuthor = () => {
     const { opinion, user } = this.props;
     if (opinion.author === null || !user) {
       return false;
     }
     return user.uniqueId === opinion.author.uniqueId;
-  },
+  };
 
   render() {
     if (this.isTheUserTheAuthor()) {
@@ -105,8 +106,8 @@ const OpinionDelete = React.createClass({
     }
 
     return null;
-  },
-});
+  }
+}
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => {
   return {

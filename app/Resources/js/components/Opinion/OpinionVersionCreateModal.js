@@ -1,5 +1,5 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
@@ -8,13 +8,13 @@ import { closeOpinionVersionCreateModal } from '../../redux/modules/opinion';
 import OpinionVersionCreateForm, { formName } from './OpinionVersionCreateForm';
 import type { State } from '../../types';
 
-const OpinionVersionCreateModal = React.createClass({
-  propTypes: {
-    show: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    submitting: PropTypes.bool.isRequired,
-  },
+type Props = {
+  show: boolean,
+  dispatch: Function,
+  submitting: boolean,
+};
 
+class OpinionVersionCreateModal extends React.Component<Props> {
   render() {
     const { dispatch, submitting, show } = this.props;
     const onClose = () => {
@@ -55,8 +55,8 @@ const OpinionVersionCreateModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  },
-});
+  }
+}
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   show: state.opinion.showOpinionVersionCreateModal,

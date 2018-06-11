@@ -1,14 +1,14 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import OpinionVersion from './OpinionVersion';
 
-const OpinionVersionList = React.createClass({
-  propTypes: {
-    versions: PropTypes.array.isRequired,
-    rankingThreshold: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.number]).isRequired,
-  },
+type Props = {
+  versions: Array<$FlowFixMe>,
+  rankingThreshold: null | number,
+};
 
+class OpinionVersionList extends React.Component<Props> {
   render() {
     const { rankingThreshold, versions } = this.props;
     if (versions.length === 0) {
@@ -34,7 +34,7 @@ const OpinionVersionList = React.createClass({
         })}
       </ul>
     );
-  },
-});
+  }
+}
 
 export default OpinionVersionList;

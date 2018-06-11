@@ -1,13 +1,11 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Modal } from 'react-bootstrap';
 
-const OpinionSourceFormModalTitle = React.createClass({
-  propTypes: {
-    action: PropTypes.string.isRequired,
-  },
+type Props = { action: string };
 
+class OpinionSourceFormModalTitle extends React.Component<Props> {
   render() {
     const { action } = this.props;
     return (
@@ -19,7 +17,7 @@ const OpinionSourceFormModalTitle = React.createClass({
         )}
       </Modal.Title>
     );
-  },
-});
+  }
+}
 
 export default OpinionSourceFormModalTitle;

@@ -1,15 +1,15 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import LoginOverlay from '../../Utils/LoginOverlay';
 
-const OpinionSourceAddButton = React.createClass({
-  propTypes: {
-    handleClick: PropTypes.func.isRequired,
-    disabled: PropTypes.bool,
-  },
+type Props = {
+  handleClick: Function,
+  disabled?: boolean,
+};
 
+class OpinionSourceAddButton extends React.Component<Props> {
   render() {
     const { disabled, handleClick } = this.props;
     return (
@@ -24,7 +24,7 @@ const OpinionSourceAddButton = React.createClass({
         </Button>
       </LoginOverlay>
     );
-  },
-});
+  }
+}
 
 export default OpinionSourceAddButton;

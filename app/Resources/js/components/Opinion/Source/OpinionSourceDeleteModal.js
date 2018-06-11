@@ -1,5 +1,5 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Modal } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
@@ -8,20 +8,22 @@ import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import OpinionSourceActions from '../../../actions/OpinionSourceActions';
 
-const OpinionSourceDeleteModal = React.createClass({
-  propTypes: {
-    show: PropTypes.bool.isRequired,
-    source: PropTypes.object.isRequired,
-    onClose: PropTypes.func.isRequired,
-  },
+type Props = {
+  show: boolean,
+  source: Object,
+  onClose: Function,
+};
 
-  getInitialState() {
-    return {
-      isSubmitting: false,
-    };
-  },
+type State = {
+  isSubmitting: boolean,
+};
 
-  handleSubmit() {
+class OpinionSourceDeleteModal extends React.Component<Props, State> {
+  state = {
+    isSubmitting: false,
+  };
+
+  handleSubmit = () => {
     const { onClose, source } = this.props;
     this.setState({ isSubmitting: true });
     OpinionSourceActions.delete(OpinionSourceStore.opinion, source.id)
@@ -33,7 +35,7 @@ const OpinionSourceDeleteModal = React.createClass({
       .catch(() => {
         this.setState({ isSubmitting: false });
       });
-  },
+  };
 
   render() {
     const { isSubmitting } = this.state;
@@ -68,7 +70,7 @@ const OpinionSourceDeleteModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  },
-});
+  }
+}
 
 export default OpinionSourceDeleteModal;

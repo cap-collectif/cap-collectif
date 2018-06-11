@@ -3,23 +3,25 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Modal, Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
-const OpinionBodyDiffModal = React.createClass({
-  propTypes: {
-    link: React.PropTypes.string.isRequired,
-    modal: React.PropTypes.object.isRequired,
-  },
+type Props = {
+  link: string,
+  modal: Object,
+};
 
-  getInitialState() {
-    return { showModal: false };
-  },
+type State = {
+  showModal: boolean,
+};
 
-  open() {
+class OpinionBodyDiffModal extends React.Component<Props, State> {
+  state = { showModal: false };
+
+  open = () => {
     this.setState({ showModal: true });
-  },
+  };
 
-  close() {
+  close = () => {
     this.setState({ showModal: false });
-  },
+  };
 
   render() {
     const { link, modal } = this.props;
@@ -51,7 +53,7 @@ const OpinionBodyDiffModal = React.createClass({
         </Modal>
       </span>
     );
-  },
-});
+  }
+}
 
 export default OpinionBodyDiffModal;

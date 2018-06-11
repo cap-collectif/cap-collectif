@@ -1,5 +1,5 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Modal } from 'react-bootstrap';
 import { connect, type MapStateToProps } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
@@ -12,14 +12,14 @@ import SubmitButton from '../../Form/SubmitButton';
 import { hideSourceCreateModal, hideSourceEditModal } from '../../../redux/modules/opinion';
 import type { State } from '../../../types';
 
-const OpinionSourceFormModal = React.createClass({
-  propTypes: {
-    show: PropTypes.bool.isRequired,
-    source: PropTypes.object,
-    submitting: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired,
-  },
+type Props = {
+  show: boolean,
+  source?: Object,
+  submitting: boolean,
+  dispatch: Function,
+};
 
+class OpinionSourceFormModal extends React.Component<Props> {
   render() {
     const { submitting, source, show, dispatch } = this.props;
     const action = source ? 'update' : 'create';
@@ -64,8 +64,8 @@ const OpinionSourceFormModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  },
-});
+  }
+}
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props) => ({
   show:

@@ -1,48 +1,52 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
 import SourceActions from '../../../actions/SourceActions';
 import OpinionSourceVoteButton from './OpinionSourceVoteButton';
-import type { State } from '../../../types';
+import type { GlobalState } from '../../../types';
 
-const OpinionSourceVoteBox = React.createClass({
-  propTypes: {
-    source: PropTypes.object.isRequired,
-    user: PropTypes.object,
-  },
+type Props = {
+  source: Object,
+  user?: Object,
+};
 
-  getDefaultProps() {
-    return {
-      user: null,
-    };
-  },
+type State = {
+  hasVoted: boolean,
+};
 
-  getInitialState() {
-    const { source } = this.props;
-    return {
+class OpinionSourceVoteBox extends React.Component<Props, State> {
+  static defaultProps = {
+    user: null,
+  };
+
+  constructor(props) {
+    super(props);
+    const { source } = props;
+
+    this.state = {
       hasVoted: source.hasUserVoted,
     };
-  },
+  }
 
-  vote() {
+  vote = () => {
     const { source } = this.props;
     this.setState({ hasVoted: true });
     SourceActions.addVote(source.id);
-  },
+  };
 
-  deleteVote() {
+  deleteVote = () => {
     const { source } = this.props;
     this.setState({ hasVoted: false });
     SourceActions.deleteVote(source.id);
-  },
+  };
 
-  isTheUserTheAuthor() {
+  isTheUserTheAuthor = () => {
     const { source, user } = this.props;
     if (source.author === null || !user) {
       return false;
     }
     return user.uniqueId === source.author.uniqueId;
-  },
+  };
 
   render() {
     const { hasVoted } = this.state;
@@ -64,10 +68,10 @@ const OpinionSourceVoteBox = React.createClass({
         </span>
       </span>
     );
-  },
-});
+  }
+}
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => {
   return {
     user: state.user.user,
   };

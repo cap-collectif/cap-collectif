@@ -1,20 +1,20 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import ReportBox from '../../Report/ReportBox';
 import OpinionSourceStore from '../../../stores/OpinionSourceStore';
 import { submitSourceReport } from '../../../redux/modules/report';
 
-const OpinionSourceReportButton = React.createClass({
-  propTypes: {
-    dispatch: PropTypes.func.isRequired,
-    source: PropTypes.object.isRequired,
-  },
+type Props = {
+  dispatch: Function,
+  source: Object,
+};
 
-  handleReport(data) {
+class OpinionSourceReportButton extends React.Component<Props> {
+  handleReport = data => {
     const { source, dispatch } = this.props;
     return submitSourceReport(OpinionSourceStore.opinion, source.id, data, dispatch);
-  },
+  };
 
   render() {
     const { source } = this.props;
@@ -28,7 +28,7 @@ const OpinionSourceReportButton = React.createClass({
         buttonClassName="source__btn--report"
       />
     );
-  },
-});
+  }
+}
 
 export default connect()(OpinionSourceReportButton);

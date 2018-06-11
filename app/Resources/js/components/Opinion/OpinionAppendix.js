@@ -3,33 +3,39 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button, Panel } from 'react-bootstrap';
 
-const OpinionAppendix = React.createClass({
-  propTypes: {
-    appendix: React.PropTypes.object.isRequired,
-    expanded: React.PropTypes.bool,
-  },
+type Props = {
+  appendix: Object,
+  expanded?: boolean,
+};
 
-  getInitialState() {
-    const { expanded } = this.props;
-    return {
+type State = {
+  expanded?: boolean,
+};
+
+class OpinionAppendix extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    const { expanded } = props;
+
+    this.state = {
       expanded: expanded !== 'undefined' ? expanded : false,
     };
-  },
+  }
 
-  toggle() {
+  toggle = () => {
     this.setState({
       expanded: !this.state.expanded,
     });
-  },
+  };
 
-  renderCaret() {
+  renderCaret = () => {
     if (this.state.expanded) {
       return <i className="cap cap-arrow-68" />;
     }
     return <i className="cap cap-arrow-67" />;
-  },
+  };
 
-  renderContent() {
+  renderContent = () => {
     const appendix = this.props.appendix;
     const style = this.state.expanded ? { marginBottom: '15px' } : {};
     return (
@@ -41,7 +47,7 @@ const OpinionAppendix = React.createClass({
         <div dangerouslySetInnerHTML={{ __html: appendix.body }} />
       </Panel>
     );
-  },
+  };
 
   render() {
     const appendix = this.props.appendix;
@@ -82,7 +88,7 @@ const OpinionAppendix = React.createClass({
         {this.renderContent()}
       </div>
     );
-  },
-});
+  }
+}
 
 export default OpinionAppendix;

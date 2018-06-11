@@ -1,12 +1,12 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-const OpinionSourceFormInfos = React.createClass({
-  propTypes: {
-    action: PropTypes.string.isRequired,
-  },
+type Props = {
+  action: string,
+};
 
+class OpinionSourceFormInfos extends React.Component<Props> {
   render() {
     const { action } = this.props;
     if (action === 'update') {
@@ -18,7 +18,7 @@ const OpinionSourceFormInfos = React.createClass({
         <p>{<FormattedMessage id="source.add_infos" />}</p>
       </div>
     );
-  },
-});
+  }
+}
 
 export default OpinionSourceFormInfos;

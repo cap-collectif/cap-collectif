@@ -1,21 +1,21 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import LoginOverlay from '../Utils/LoginOverlay';
 import OpinionCreateModal from './Create/OpinionCreateModal';
 import { openOpinionCreateModal } from '../../redux/modules/opinion';
 
-const NewOpinionButton = React.createClass({
-  propTypes: {
-    opinionType: PropTypes.object.isRequired,
-    stepId: PropTypes.string.isRequired,
-    projectId: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
-    disabled: PropTypes.bool,
-    dispatch: PropTypes.func.isRequired,
-  },
+type Props = {
+  opinionType: Object,
+  stepId: string,
+  projectId: string,
+  label: string,
+  disabled?: boolean,
+  dispatch: Function,
+};
 
+class NewOpinionButton extends React.Component<Props> {
   render() {
     const { dispatch, label, opinionType, projectId, stepId, disabled } = this.props;
     return (
@@ -35,7 +35,7 @@ const NewOpinionButton = React.createClass({
         <OpinionCreateModal opinionType={opinionType} stepId={stepId} projectId={projectId} />
       </span>
     );
-  },
-});
+  }
+}
 
 export default connect()(NewOpinionButton);
