@@ -51,7 +51,7 @@ export class RegistrationAdminPage extends React.Component<Props> {
           <Col xs={1}>
             <Toggle
               checked={features.login_gplus}
-              onChange={() => onToggle('login_ƒgplus', !features.login_gplus)}
+              onChange={() => onToggle('login_ƒplus', !features.login_gplus)}
             />
           </Col>
           <Col xs={11}>Google</Col>
