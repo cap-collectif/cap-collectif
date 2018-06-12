@@ -31,87 +31,171 @@ exports[`<ReplyForm /> should render correctly with equal required and facultati
       questions={
         Array [
           Object {
+            "choices": null,
+            "description": "description of question",
             "helpText": "",
-            "id": 10,
-            "question": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+            "id": "10",
+            "isOtherAllowed": false,
+            "position": 1,
+            "private": false,
             "required": true,
-            "slug": "etes-vous-satisfait-que-la-ville-de-paris-soit-candidate-a-l-organisation-des-jo-de-2024",
+            "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
             "type": "text",
+            "validationRule": null,
           },
           Object {
             "choices": Array [
               Object {
-                "id": 24,
-                "label": "Maxime Arrouard",
+                "color": null,
+                "description": "description",
+                "id": "24",
+                "image": null,
+                "title": "Maxime Arrouard",
               },
               Object {
-                "id": 25,
-                "label": "Spylou Super Sayen",
+                "color": null,
+                "description": "description",
+                "id": "25",
+                "image": null,
+                "title": "Spylou Super Sayen",
               },
               Object {
-                "id": 26,
-                "label": "Cyril Lage",
+                "color": null,
+                "description": "description",
+                "id": "26",
+                "image": null,
+                "title": "Cyril Lage",
               },
               Object {
-                "id": 27,
-                "label": "Superman",
+                "color": null,
+                "description": "description",
+                "id": "27",
+                "image": null,
+                "title": "Superman",
               },
             ],
+            "description": "description of question",
             "helpText": "Un seul choix possible",
-            "id": 12,
+            "id": "12",
             "isOtherAllowed": true,
-            "question": "Quel est ton athlète favori ?",
+            "position": 3,
+            "private": false,
             "required": true,
-            "slug": "quel-est-ton-athlete-favori",
+            "title": "Quel est ton athlète favori ?",
             "type": "radio",
+            "validationRule": null,
           },
           Object {
             "choices": Array [
               Object {
-                "id": 28,
-                "label": "Pas assez fort (Mon sonotone est en panne)",
+                "color": null,
+                "description": "description",
+                "id": "28",
+                "image": null,
+                "title": "Pas assez fort (Mon sonotone est en panne)",
               },
               Object {
-                "id": 29,
-                "label": "Assez fort (Mon sonotone est mal réglé)",
+                "color": null,
+                "description": "description",
+                "id": "29",
+                "image": null,
+                "title": "Assez fort (Mon sonotone est mal réglé)",
               },
               Object {
-                "id": 30,
-                "label": "Trop fort (Mon sonotone est tout neuf)",
+                "color": null,
+                "description": "description",
+                "id": "30",
+                "image": null,
+                "title": "Trop fort (Mon sonotone est tout neuf)",
               },
             ],
+            "description": "description of question",
             "helpText": "Merci de répondre sincèrement",
-            "id": 13,
-            "question": "Nelson Monfort parle-t-il:",
+            "id": "13",
+            "isOtherAllowed": false,
+            "position": 4,
+            "private": false,
             "required": false,
-            "slug": "nelson-monfort-parle-t-il",
+            "title": "Nelson Monfort parle-t-il:",
             "type": "select",
+            "validationRule": null,
           },
           Object {
             "choices": Array [
               Object {
-                "id": 28,
-                "label": "Pas assez fort (Mon sonotone est en panne)",
+                "color": null,
+                "description": "description",
+                "id": "28",
+                "image": null,
+                "title": "Pas assez fort (Mon sonotone est en panne)",
               },
               Object {
-                "id": 29,
-                "label": "Assez fort (Mon sonotone est mal réglé)",
+                "color": null,
+                "description": "description",
+                "id": "29",
+                "image": null,
+                "title": "Assez fort (Mon sonotone est mal réglé)",
               },
               Object {
-                "id": 30,
-                "label": "Trop fort (Mon sonotone est tout neuf)",
+                "color": null,
+                "description": "description",
+                "id": "30",
+                "image": null,
+                "title": "Trop fort (Mon sonotone est tout neuf)",
               },
             ],
+            "description": "description of question",
             "helpText": "Merci de répondre sincèrement",
-            "id": 14,
-            "question": "Nelson Monfort parle-t-il:",
+            "id": "14",
+            "isOtherAllowed": false,
+            "position": 5,
+            "private": false,
             "required": false,
-            "slug": "nelson-monfort-parle-t-il",
+            "title": "Nelson Monfort parle-t-il:",
             "type": "ranking",
+            "validationRule": null,
+          },
+        ]
+      }
+      responses={
+        Array [
+          Object {
+            "question": "Nelson Monfort parle-t-il:",
+            "value": "Trop fort (Mon sonotone est tout neuf)",
+          },
+          Object {
+            "question": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+            "value": Object {
+              "labels": Array [
+                "Superman",
+              ],
+              "other": "Pikachu",
+            },
           },
         ]
       }
     />
+    <div>
+      <hr
+        style={
+          Object {
+            "marginBottom": "30px",
+          }
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        id="reply-private"
+        name="private"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="reply.form.private"
+          values={Object {}}
+        />
+      </Field>
+    </div>
     <Button
       active={false}
       block={false}
@@ -161,65 +245,136 @@ exports[`<ReplyForm /> should render correctly with majority of required fields 
       questions={
         Array [
           Object {
+            "choices": null,
+            "description": "description of question",
             "helpText": "",
-            "id": 10,
-            "question": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+            "id": "10",
+            "isOtherAllowed": false,
+            "position": 1,
+            "private": false,
             "required": true,
-            "slug": "etes-vous-satisfait-que-la-ville-de-paris-soit-candidate-a-l-organisation-des-jo-de-2024",
+            "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
             "type": "text",
+            "validationRule": null,
           },
           Object {
             "choices": Array [
               Object {
-                "id": 24,
-                "label": "Maxime Arrouard",
+                "color": null,
+                "description": "description",
+                "id": "24",
+                "image": null,
+                "title": "Maxime Arrouard",
               },
               Object {
-                "id": 25,
-                "label": "Spylou Super Sayen",
+                "color": null,
+                "description": "description",
+                "id": "25",
+                "image": null,
+                "title": "Spylou Super Sayen",
               },
               Object {
-                "id": 26,
-                "label": "Cyril Lage",
+                "color": null,
+                "description": "description",
+                "id": "26",
+                "image": null,
+                "title": "Cyril Lage",
               },
               Object {
-                "id": 27,
-                "label": "Superman",
+                "color": null,
+                "description": "description",
+                "id": "27",
+                "image": null,
+                "title": "Superman",
               },
             ],
+            "description": "description of question",
             "helpText": "Un seul choix possible",
-            "id": 12,
+            "id": "12",
             "isOtherAllowed": true,
-            "question": "Quel est ton athlète favori ?",
+            "position": 3,
+            "private": false,
             "required": true,
-            "slug": "quel-est-ton-athlete-favori",
+            "title": "Quel est ton athlète favori ?",
             "type": "radio",
+            "validationRule": null,
           },
           Object {
             "choices": Array [
               Object {
-                "id": 28,
-                "label": "Pas assez fort (Mon sonotone est en panne)",
+                "color": null,
+                "description": "description",
+                "id": "28",
+                "image": null,
+                "title": "Pas assez fort (Mon sonotone est en panne)",
               },
               Object {
-                "id": 29,
-                "label": "Assez fort (Mon sonotone est mal réglé)",
+                "color": null,
+                "description": "description",
+                "id": "29",
+                "image": null,
+                "title": "Assez fort (Mon sonotone est mal réglé)",
               },
               Object {
-                "id": 30,
-                "label": "Trop fort (Mon sonotone est tout neuf)",
+                "color": null,
+                "description": "description",
+                "id": "30",
+                "image": null,
+                "title": "Trop fort (Mon sonotone est tout neuf)",
               },
             ],
+            "description": "description of question",
             "helpText": "Merci de répondre sincèrement",
-            "id": 14,
-            "question": "Nelson Monfort parle-t-il:",
+            "id": "14",
+            "isOtherAllowed": false,
+            "position": 5,
+            "private": false,
             "required": false,
-            "slug": "nelson-monfort-parle-t-il",
+            "title": "Nelson Monfort parle-t-il:",
             "type": "ranking",
+            "validationRule": null,
+          },
+        ]
+      }
+      responses={
+        Array [
+          Object {
+            "question": "Nelson Monfort parle-t-il:",
+            "value": "Trop fort (Mon sonotone est tout neuf)",
+          },
+          Object {
+            "question": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+            "value": Object {
+              "labels": Array [
+                "Superman",
+              ],
+              "other": "Pikachu",
+            },
           },
         ]
       }
     />
+    <div>
+      <hr
+        style={
+          Object {
+            "marginBottom": "30px",
+          }
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        id="reply-private"
+        name="private"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="reply.form.private"
+          values={Object {}}
+        />
+      </Field>
+    </div>
     <Button
       active={false}
       block={false}
@@ -269,114 +424,213 @@ exports[`<ReplyForm /> should render correctly with minority of required fields 
       questions={
         Array [
           Object {
+            "choices": null,
+            "description": "description of question",
             "helpText": "",
-            "id": 10,
-            "question": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+            "id": "10",
+            "isOtherAllowed": false,
+            "position": 1,
+            "private": false,
             "required": true,
-            "slug": "etes-vous-satisfait-que-la-ville-de-paris-soit-candidate-a-l-organisation-des-jo-de-2024",
+            "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
             "type": "text",
+            "validationRule": null,
           },
           Object {
             "choices": Array [
               Object {
-                "id": 20,
-                "label": "Athlétisme",
+                "color": null,
+                "description": "description",
+                "id": "20",
+                "image": null,
+                "title": "Athlétisme",
               },
               Object {
-                "id": 21,
-                "label": "Natation",
+                "color": null,
+                "description": "description",
+                "id": "21",
+                "image": null,
+                "title": "Natation",
               },
               Object {
-                "id": 22,
-                "label": "Sports collectifs",
+                "color": null,
+                "description": "description",
+                "id": "22",
+                "image": null,
+                "title": "Sports collectifs",
               },
               Object {
-                "id": 23,
-                "label": "Sports individuels",
+                "color": null,
+                "description": "description",
+                "id": "23",
+                "image": null,
+                "title": "Sports individuels",
               },
             ],
+            "description": "description of question",
             "helpText": "Plusieurs choix sont possibles",
-            "id": 11,
+            "id": "11",
             "isOtherAllowed": true,
-            "question": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+            "position": 2,
+            "private": false,
             "required": false,
-            "slug": "pour-quel-type-d-epreuve-etes-vous-pret-a-acheter-des-places",
+            "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
             "type": "checkbox",
+            "validationRule": null,
           },
           Object {
             "choices": Array [
               Object {
-                "id": 24,
-                "label": "Maxime Arrouard",
+                "color": null,
+                "description": "description",
+                "id": "24",
+                "image": null,
+                "title": "Maxime Arrouard",
               },
               Object {
-                "id": 25,
-                "label": "Spylou Super Sayen",
+                "color": null,
+                "description": "description",
+                "id": "25",
+                "image": null,
+                "title": "Spylou Super Sayen",
               },
               Object {
-                "id": 26,
-                "label": "Cyril Lage",
+                "color": null,
+                "description": "description",
+                "id": "26",
+                "image": null,
+                "title": "Cyril Lage",
               },
               Object {
-                "id": 27,
-                "label": "Superman",
+                "color": null,
+                "description": "description",
+                "id": "27",
+                "image": null,
+                "title": "Superman",
               },
             ],
+            "description": "description of question",
             "helpText": "Un seul choix possible",
-            "id": 12,
+            "id": "12",
             "isOtherAllowed": true,
-            "question": "Quel est ton athlète favori ?",
+            "position": 3,
+            "private": false,
             "required": true,
-            "slug": "quel-est-ton-athlete-favori",
+            "title": "Quel est ton athlète favori ?",
             "type": "radio",
+            "validationRule": null,
           },
           Object {
             "choices": Array [
               Object {
-                "id": 28,
-                "label": "Pas assez fort (Mon sonotone est en panne)",
+                "color": null,
+                "description": "description",
+                "id": "28",
+                "image": null,
+                "title": "Pas assez fort (Mon sonotone est en panne)",
               },
               Object {
-                "id": 29,
-                "label": "Assez fort (Mon sonotone est mal réglé)",
+                "color": null,
+                "description": "description",
+                "id": "29",
+                "image": null,
+                "title": "Assez fort (Mon sonotone est mal réglé)",
               },
               Object {
-                "id": 30,
-                "label": "Trop fort (Mon sonotone est tout neuf)",
+                "color": null,
+                "description": "description",
+                "id": "30",
+                "image": null,
+                "title": "Trop fort (Mon sonotone est tout neuf)",
               },
             ],
+            "description": "description of question",
             "helpText": "Merci de répondre sincèrement",
-            "id": 13,
-            "question": "Nelson Monfort parle-t-il:",
+            "id": "13",
+            "isOtherAllowed": false,
+            "position": 4,
+            "private": false,
             "required": false,
-            "slug": "nelson-monfort-parle-t-il",
+            "title": "Nelson Monfort parle-t-il:",
             "type": "select",
+            "validationRule": null,
           },
           Object {
             "choices": Array [
               Object {
-                "id": 28,
-                "label": "Pas assez fort (Mon sonotone est en panne)",
+                "color": null,
+                "description": "description",
+                "id": "28",
+                "image": null,
+                "title": "Pas assez fort (Mon sonotone est en panne)",
               },
               Object {
-                "id": 29,
-                "label": "Assez fort (Mon sonotone est mal réglé)",
+                "color": null,
+                "description": "description",
+                "id": "29",
+                "image": null,
+                "title": "Assez fort (Mon sonotone est mal réglé)",
               },
               Object {
-                "id": 30,
-                "label": "Trop fort (Mon sonotone est tout neuf)",
+                "color": null,
+                "description": "description",
+                "id": "30",
+                "image": null,
+                "title": "Trop fort (Mon sonotone est tout neuf)",
               },
             ],
+            "description": "description of question",
             "helpText": "Merci de répondre sincèrement",
-            "id": 14,
-            "question": "Nelson Monfort parle-t-il:",
+            "id": "14",
+            "isOtherAllowed": false,
+            "position": 5,
+            "private": false,
             "required": false,
-            "slug": "nelson-monfort-parle-t-il",
+            "title": "Nelson Monfort parle-t-il:",
             "type": "ranking",
+            "validationRule": null,
+          },
+        ]
+      }
+      responses={
+        Array [
+          Object {
+            "question": "Nelson Monfort parle-t-il:",
+            "value": "Trop fort (Mon sonotone est tout neuf)",
+          },
+          Object {
+            "question": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+            "value": Object {
+              "labels": Array [
+                "Superman",
+              ],
+              "other": "Pikachu",
+            },
           },
         ]
       }
     />
+    <div>
+      <hr
+        style={
+          Object {
+            "marginBottom": "30px",
+          }
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        id="reply-private"
+        name="private"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="reply.form.private"
+          values={Object {}}
+        />
+      </Field>
+    </div>
     <Button
       active={false}
       block={false}
@@ -428,77 +682,156 @@ exports[`<ReplyForm /> should render correctly with only facultatives fields 1`]
           Object {
             "choices": Array [
               Object {
-                "id": 20,
-                "label": "Athlétisme",
+                "color": null,
+                "description": "description",
+                "id": "20",
+                "image": null,
+                "title": "Athlétisme",
               },
               Object {
-                "id": 21,
-                "label": "Natation",
+                "color": null,
+                "description": "description",
+                "id": "21",
+                "image": null,
+                "title": "Natation",
               },
               Object {
-                "id": 22,
-                "label": "Sports collectifs",
+                "color": null,
+                "description": "description",
+                "id": "22",
+                "image": null,
+                "title": "Sports collectifs",
               },
               Object {
-                "id": 23,
-                "label": "Sports individuels",
+                "color": null,
+                "description": "description",
+                "id": "23",
+                "image": null,
+                "title": "Sports individuels",
               },
             ],
+            "description": "description of question",
             "helpText": "Plusieurs choix sont possibles",
-            "id": 11,
+            "id": "11",
             "isOtherAllowed": true,
-            "question": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+            "position": 2,
+            "private": false,
             "required": false,
-            "slug": "pour-quel-type-d-epreuve-etes-vous-pret-a-acheter-des-places",
+            "title": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
             "type": "checkbox",
+            "validationRule": null,
           },
           Object {
             "choices": Array [
               Object {
-                "id": 28,
-                "label": "Pas assez fort (Mon sonotone est en panne)",
+                "color": null,
+                "description": "description",
+                "id": "28",
+                "image": null,
+                "title": "Pas assez fort (Mon sonotone est en panne)",
               },
               Object {
-                "id": 29,
-                "label": "Assez fort (Mon sonotone est mal réglé)",
+                "color": null,
+                "description": "description",
+                "id": "29",
+                "image": null,
+                "title": "Assez fort (Mon sonotone est mal réglé)",
               },
               Object {
-                "id": 30,
-                "label": "Trop fort (Mon sonotone est tout neuf)",
+                "color": null,
+                "description": "description",
+                "id": "30",
+                "image": null,
+                "title": "Trop fort (Mon sonotone est tout neuf)",
               },
             ],
+            "description": "description of question",
             "helpText": "Merci de répondre sincèrement",
-            "id": 13,
-            "question": "Nelson Monfort parle-t-il:",
+            "id": "13",
+            "isOtherAllowed": false,
+            "position": 4,
+            "private": false,
             "required": false,
-            "slug": "nelson-monfort-parle-t-il",
+            "title": "Nelson Monfort parle-t-il:",
             "type": "select",
+            "validationRule": null,
           },
           Object {
             "choices": Array [
               Object {
-                "id": 28,
-                "label": "Pas assez fort (Mon sonotone est en panne)",
+                "color": null,
+                "description": "description",
+                "id": "28",
+                "image": null,
+                "title": "Pas assez fort (Mon sonotone est en panne)",
               },
               Object {
-                "id": 29,
-                "label": "Assez fort (Mon sonotone est mal réglé)",
+                "color": null,
+                "description": "description",
+                "id": "29",
+                "image": null,
+                "title": "Assez fort (Mon sonotone est mal réglé)",
               },
               Object {
-                "id": 30,
-                "label": "Trop fort (Mon sonotone est tout neuf)",
+                "color": null,
+                "description": "description",
+                "id": "30",
+                "image": null,
+                "title": "Trop fort (Mon sonotone est tout neuf)",
               },
             ],
+            "description": "description of question",
             "helpText": "Merci de répondre sincèrement",
-            "id": 14,
-            "question": "Nelson Monfort parle-t-il:",
+            "id": "14",
+            "isOtherAllowed": false,
+            "position": 5,
+            "private": false,
             "required": false,
-            "slug": "nelson-monfort-parle-t-il",
+            "title": "Nelson Monfort parle-t-il:",
             "type": "ranking",
+            "validationRule": null,
+          },
+        ]
+      }
+      responses={
+        Array [
+          Object {
+            "question": "Nelson Monfort parle-t-il:",
+            "value": "Trop fort (Mon sonotone est tout neuf)",
+          },
+          Object {
+            "question": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+            "value": Object {
+              "labels": Array [
+                "Superman",
+              ],
+              "other": "Pikachu",
+            },
           },
         ]
       }
     />
+    <div>
+      <hr
+        style={
+          Object {
+            "marginBottom": "30px",
+          }
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        id="reply-private"
+        name="private"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="reply.form.private"
+          values={Object {}}
+        />
+      </Field>
+    </div>
     <Button
       active={false}
       block={false}
@@ -548,43 +881,101 @@ exports[`<ReplyForm /> should render correctly with only required fields 1`] = `
       questions={
         Array [
           Object {
+            "choices": null,
+            "description": "description of question",
             "helpText": "",
-            "id": 10,
-            "question": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
+            "id": "10",
+            "isOtherAllowed": false,
+            "position": 1,
+            "private": false,
             "required": true,
-            "slug": "etes-vous-satisfait-que-la-ville-de-paris-soit-candidate-a-l-organisation-des-jo-de-2024",
+            "title": "Êtes-vous satisfait que la ville de Paris soit candidate à l'organisation des JO de 2024 ?",
             "type": "text",
+            "validationRule": null,
           },
           Object {
             "choices": Array [
               Object {
-                "id": 24,
-                "label": "Maxime Arrouard",
+                "color": null,
+                "description": "description",
+                "id": "24",
+                "image": null,
+                "title": "Maxime Arrouard",
               },
               Object {
-                "id": 25,
-                "label": "Spylou Super Sayen",
+                "color": null,
+                "description": "description",
+                "id": "25",
+                "image": null,
+                "title": "Spylou Super Sayen",
               },
               Object {
-                "id": 26,
-                "label": "Cyril Lage",
+                "color": null,
+                "description": "description",
+                "id": "26",
+                "image": null,
+                "title": "Cyril Lage",
               },
               Object {
-                "id": 27,
-                "label": "Superman",
+                "color": null,
+                "description": "description",
+                "id": "27",
+                "image": null,
+                "title": "Superman",
               },
             ],
+            "description": "description of question",
             "helpText": "Un seul choix possible",
-            "id": 12,
+            "id": "12",
             "isOtherAllowed": true,
-            "question": "Quel est ton athlète favori ?",
+            "position": 3,
+            "private": false,
             "required": true,
-            "slug": "quel-est-ton-athlete-favori",
+            "title": "Quel est ton athlète favori ?",
             "type": "radio",
+            "validationRule": null,
+          },
+        ]
+      }
+      responses={
+        Array [
+          Object {
+            "question": "Nelson Monfort parle-t-il:",
+            "value": "Trop fort (Mon sonotone est tout neuf)",
+          },
+          Object {
+            "question": "Pour quel type d'épreuve êtes vous prêt à acheter des places",
+            "value": Object {
+              "labels": Array [
+                "Superman",
+              ],
+              "other": "Pikachu",
+            },
           },
         ]
       }
     />
+    <div>
+      <hr
+        style={
+          Object {
+            "marginBottom": "30px",
+          }
+        }
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        id="reply-private"
+        name="private"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="reply.form.private"
+          values={Object {}}
+        />
+      </Field>
+    </div>
     <Button
       active={false}
       block={false}
