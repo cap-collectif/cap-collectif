@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
 
@@ -16,28 +15,6 @@ class AbstractVoteRepository extends EntityRepository
           ->getQuery()
           ->getSingleScalarResult()
           ;
-    }
-
-    public function countAllByAuthor(User $user): int
-    {
-        $qb = $this->createQueryBuilder('v');
-        $qb
-            ->select('count(DISTINCT v)')
-            ->andWhere('v.user = :author')
-            ->setParameter('author', $user)
-        ;
-
-        return $qb->getQuery()->getSingleScalarResult();
-    }
-
-    public function findAllByAuthor(User $user): array
-    {
-        $qb = $this->createQueryBuilder('v');
-        $qb
-            ->andWhere('v.user = :author')
-            ->setParameter('author', $user);
-
-        return $qb->getQuery()->getResult();
     }
 
     /**

@@ -12,34 +12,3 @@ Event:
                 description: "A list of Users that are participating to the event."
                 argsBuilder: "Relay::Connection"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\EventParticipantsResolver", [value, args])'
-            startAt:
-                type: "DateTime!"
-            endAt:
-                type: "DateTime!"
-            themes:
-                type: "[Theme!]!"
-            projects:
-                type: "[Project!]!"
-            author:
-                type: "User!"
-            commentable:
-                type: "Boolean!"
-                resolve: "@=value.getIsCommentable()"
-            updatedAt:
-                type: "DateTime"
-            createdAt:
-                type: "DateTime!"
-            body:
-                type: "String"
-            link:
-                type: "URI"
-            media:
-                type: "Media"
-            address:
-                type: "String"
-            zipCode:
-                type: "String"
-            city:
-                type: "String"
-            country:
-                type: "String"

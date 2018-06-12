@@ -1,7 +1,0 @@
-VoteConnection:
-    type: relay-connection
-    config:
-        nodeType: Vote
-        connectionFields:
-            totalCount:
-                type: Int!

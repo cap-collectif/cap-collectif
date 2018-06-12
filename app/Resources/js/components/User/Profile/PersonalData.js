@@ -242,26 +242,6 @@ export class PersonalData extends Component<Props, PersonalDataState> {
       </Tooltip>
     );
 
-    const header = (
-      <div className="panel-heading profile-header">
-        <h1>
-          <FormattedMessage id="data" />
-        </h1>
-      </div>
-    );
-
-    const footer = (
-      <div className="col-sm-offset-4">
-        <Button
-          disabled={invalid || submitting}
-          type="submit"
-          bsStyle="primary"
-          id="personal-data-form-save">
-          <FormattedMessage id={submitting ? 'global.loading' : 'global.save_modifications'} />
-        </Button>
-      </div>
-    );
-
     return (
       <div id="personal-data">
         {!hasData(viewer, currentValues) && (
@@ -282,20 +262,20 @@ export class PersonalData extends Component<Props, PersonalDataState> {
             />
           </Alert>
         )}
-        <form onSubmit={handleSubmit} className="form-horizontal">
-          <Panel id="capco_horizontal_form" header={header} footer={footer}>
-            <h2 className="page-header">
-              <FormattedMessage id="personal-data" />
-            </h2>
-            {!hasData(viewer, currentValues) && (
-              <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
-                <Well>
-                  <FormattedMessage id="no-data" />
-                </Well>
-              </div>
-            )}
-            {hasData(viewer, null) && (
-              <div>
+        <Panel id="capco_horizontal_form">
+          <h2 className="page-header">
+            <FormattedMessage id="personal-data" />
+          </h2>
+          {!hasData(viewer, currentValues) && (
+            <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
+              <Well>
+                <FormattedMessage id="no-data" />
+              </Well>
+            </div>
+          )}
+          {hasData(viewer, null) && (
+            <div>
+              <form onSubmit={handleSubmit} className="form-horizontal">
                 {hasData(viewer, currentValues) && (
                   <div>
                     {currentValues.firstname !== null && (
@@ -578,6 +558,15 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                 <div className="horizontal_field_with_border_top">
                   <div className="col-sm-3" />
                   <ButtonGroup className="col-sm-4 pl-0">
+                    <Button
+                      disabled={invalid || submitting}
+                      type="submit"
+                      bsStyle="primary"
+                      id="personal-data-form-save">
+                      <FormattedMessage
+                        id={submitting ? 'global.loading' : 'global.save_modifications'}
+                      />
+                    </Button>
                     <AlertForm
                       valid={valid}
                       invalid={invalid}
@@ -588,10 +577,10 @@ export class PersonalData extends Component<Props, PersonalDataState> {
                     />
                   </ButtonGroup>
                 </div>
-              </div>
-            )}
-          </Panel>
-        </form>
+              </form>
+            </div>
+          )}
+        </Panel>
         <Panel>
           <h2 className="page-header">
             <FormattedMessage id="data-export" />

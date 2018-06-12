@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 
@@ -88,7 +87,7 @@ class CommentRepository extends EntityRepository
      *
      * @return mixed
      */
-    public function countAllByAuthor(User $user)
+    public function countByUser($user)
     {
         return $this->getIsEnabledQueryBuilder()
             ->select('COUNT(c)')
@@ -96,16 +95,6 @@ class CommentRepository extends EntityRepository
             ->setParameter('author', $user)
             ->getQuery()
             ->getSingleScalarResult();
-    }
-
-    public function findAllByAuthor(User $user): array
-    {
-        $qb = $this->createQueryBuilder('c');
-        $qb
-            ->andWhere('c.Author = :author')
-            ->setParameter('author', $user);
-
-        return $qb->getQuery()->getResult();
     }
 
     /**

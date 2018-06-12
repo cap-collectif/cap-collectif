@@ -73,32 +73,12 @@ export class ChangePasswordForm extends Component<Props> {
       error,
     } = this.props;
 
-    const header = (
-      <div className="panel-heading profile-header">
-        <h1>
-          <FormattedMessage id="user.profile.edit.password" />
-        </h1>
-      </div>
-    );
-
-    const footer = (
-      <div className="col-sm-offset-4">
-        <Button
-          disabled={invalid || submitting}
-          type="submit"
-          bsStyle="primary"
-          id="profile-password-save">
-          <FormattedMessage id={submitting ? 'global.loading' : 'global.save_modifications'} />
-        </Button>
-      </div>
-    );
-
     return (
-      <form onSubmit={handleSubmit} className="form-horizontal">
-        <Panel id="capco_horizontal_form" header={header} footer={footer}>
-          <h2 className="page-header">
-            <FormattedMessage id="form.new_password" />
-          </h2>
+      <Panel id="capco_horizontal_form">
+        <h2 className="page-header">
+          <FormattedMessage id="form.new_password" />
+        </h2>
+        <form onSubmit={handleSubmit} className="form-horizontal">
           <div>
             <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
               <label className="col-sm-3 control-label" htmlFor="password-form-current">
@@ -148,6 +128,15 @@ export class ChangePasswordForm extends Component<Props> {
             <div className="horizontal_field_with_border_top">
               <div className="col-sm-3" />
               <ButtonToolbar className="col-sm-6 pl-0">
+                <Button
+                  disabled={invalid || submitting}
+                  type="submit"
+                  bsStyle="primary"
+                  id="profile-password-save">
+                  <FormattedMessage
+                    id={submitting ? 'global.loading' : 'global.save_modifications'}
+                  />
+                </Button>
                 <AlertForm
                   valid={valid}
                   invalid={invalid}
@@ -159,8 +148,8 @@ export class ChangePasswordForm extends Component<Props> {
               </ButtonToolbar>
             </div>
           </div>
-        </Panel>
-      </form>
+        </form>
+      </Panel>
     );
   }
 }

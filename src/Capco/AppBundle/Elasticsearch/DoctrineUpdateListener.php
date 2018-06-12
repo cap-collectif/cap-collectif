@@ -60,8 +60,8 @@ class DoctrineUpdateListener implements EventSubscriber
         if ($entity instanceof Comment && $entity->getRelatedObject()) {
             $this->sendOrder($entity->getRelatedObject());
         }
-        if ($entity instanceof AbstractVote && $entity->getRelated()) {
-            $this->sendOrder($entity->getRelated());
+        if ($entity instanceof AbstractVote && $entity->getRelatedEntity()) {
+            $this->sendOrder($entity->getRelatedEntity());
         }
     }
 }

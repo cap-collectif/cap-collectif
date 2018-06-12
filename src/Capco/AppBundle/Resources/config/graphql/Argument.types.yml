@@ -13,7 +13,7 @@ Argument:
                 description: "Identifies the date and time when the object was last updated."
                 resolve: "@=value.getUpdatedAt()"
             url:
-                type: "URI!"
+                type: "String!"
                 resolve: "@=resolver('argument_url', [value])"
             expired:
                 type: "Boolean!"

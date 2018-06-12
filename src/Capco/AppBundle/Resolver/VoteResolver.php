@@ -18,7 +18,7 @@ class VoteResolver
 
     public function getRelatedObject(Vote $vote)
     {
-        return $vote->getRelated();
+        return $vote->getRelatedEntity();
     }
 
     public function getRelatedObjectUrl(Vote $vote, $absolute = false)

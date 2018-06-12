@@ -49,7 +49,7 @@ class VoteSubscriber implements EventSubscriberInterface
     {
         $vote = $event->getVote();
         $action = $event->getAction();
-        $entity = $vote->getRelated();
+        $entity = $vote->getRelatedEntity();
 
         if ('remove' === $action) {
             $entity->decrementVotesCount();

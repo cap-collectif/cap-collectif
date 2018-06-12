@@ -33,14 +33,6 @@ exports[`<NavbarRight /> should render correctly 1`] = `
       header={false}
       href="/profile/edit-profile#account"
     >
-      <i
-        className="cap cap-setting-adjustment"
-        style={
-          Object {
-            "marginRight": 10,
-          }
-        }
-      />
       <FormattedMessage
         id="navbar.user_settings"
         values={Object {}}
@@ -61,14 +53,6 @@ exports[`<NavbarRight /> should render correctly 1`] = `
       id="logout-button"
       onClick={[Function]}
     >
-      <i
-        className="cap cap-power-1"
-        style={
-          Object {
-            "marginRight": 10,
-          }
-        }
-      />
       <FormattedMessage
         id="global.logout"
         values={Object {}}

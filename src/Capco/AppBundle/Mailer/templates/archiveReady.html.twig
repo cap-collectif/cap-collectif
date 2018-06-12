@@ -28,7 +28,7 @@
 {% block core_mail %}
     <span style="color:#000;font-weight: bold">{{ 'hello-username'|trans({'{username}': archive.user.username}, 'CapcoAppBundle')|raw }}</span>
     <p style="color:#000;">{{ 'data-archive-ready'|trans({},'CapcoAppBundle')|raw }}</p>
-    <a href="{{ downloadUrl ~ '#personal-data'  }}" style="color: #FFF; background-color: #0069d9; border: 1px solid #0062cc; text-decoration: none; text-align: center; border-radius: 4px; padding: 6px 12px; line-height: 24px;" role="button">
+    <a href="{{ downloadUrl }}" style="color: #FFF; background-color: #0069d9; border: 1px solid #0062cc; text-decoration: none; text-align: center; border-radius: 4px; padding: 6px 12px; line-height: 24px;" role="button">
         {{ 'download-my-copy'|trans({}, 'CapcoAppBundle') }}
     </a>
     <p style="color:#000;">{{ 'email-footer-message-requested-archive'|trans({},'CapcoAppBundle')|raw }}</p>

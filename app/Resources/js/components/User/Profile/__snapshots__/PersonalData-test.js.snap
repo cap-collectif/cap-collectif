@@ -19,57 +19,25 @@ exports[`<PersonalData /> should render user withou address 1`] = `
       values={Object {}}
     />
   </Alert>
-  <form
-    className="form-horizontal"
-    onSubmit={[MockFunction]}
+  <Panel
+    bsClass="panel"
+    bsStyle="default"
+    defaultExpanded={false}
+    id="capco_horizontal_form"
   >
-    <Panel
-      bsClass="panel"
-      bsStyle="default"
-      defaultExpanded={false}
-      footer={
-        <div
-          className="col-sm-offset-4"
-        >
-          <Button
-            active={false}
-            block={false}
-            bsClass="btn"
-            bsStyle="primary"
-            disabled={false}
-            id="personal-data-form-save"
-            type="submit"
-          >
-            <FormattedMessage
-              id="global.save_modifications"
-              values={Object {}}
-            />
-          </Button>
-        </div>
-      }
-      header={
-        <div
-          className="panel-heading profile-header"
-        >
-          <h1>
-            <FormattedMessage
-              id="data"
-              values={Object {}}
-            />
-          </h1>
-        </div>
-      }
-      id="capco_horizontal_form"
+    <h2
+      className="page-header"
     >
-      <h2
-        className="page-header"
+      <FormattedMessage
+        id="personal-data"
+        values={Object {}}
+      />
+    </h2>
+    <div>
+      <form
+        className="form-horizontal"
+        onSubmit={[MockFunction]}
       >
-        <FormattedMessage
-          id="personal-data"
-          values={Object {}}
-        />
-      </h2>
-      <div>
         <div>
           <div
             className="horizontal_field_with_border_top"
@@ -667,6 +635,20 @@ exports[`<PersonalData /> should render user withou address 1`] = `
             justified={false}
             vertical={false}
           >
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="primary"
+              disabled={false}
+              id="personal-data-form-save"
+              type="submit"
+            >
+              <FormattedMessage
+                id="global.save_modifications"
+                values={Object {}}
+              />
+            </Button>
             <AlertForm
               errorMessage={null}
               invalid={false}
@@ -677,9 +659,9 @@ exports[`<PersonalData /> should render user withou address 1`] = `
             />
           </ButtonGroup>
         </div>
-      </div>
-    </Panel>
-  </form>
+      </form>
+    </div>
+  </Panel>
   <Panel
     bsClass="panel"
     bsStyle="default"
@@ -753,57 +735,25 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
       values={Object {}}
     />
   </Alert>
-  <form
-    className="form-horizontal"
-    onSubmit={[MockFunction]}
+  <Panel
+    bsClass="panel"
+    bsStyle="default"
+    defaultExpanded={false}
+    id="capco_horizontal_form"
   >
-    <Panel
-      bsClass="panel"
-      bsStyle="default"
-      defaultExpanded={false}
-      footer={
-        <div
-          className="col-sm-offset-4"
-        >
-          <Button
-            active={false}
-            block={false}
-            bsClass="btn"
-            bsStyle="primary"
-            disabled={false}
-            id="personal-data-form-save"
-            type="submit"
-          >
-            <FormattedMessage
-              id="global.save_modifications"
-              values={Object {}}
-            />
-          </Button>
-        </div>
-      }
-      header={
-        <div
-          className="panel-heading profile-header"
-        >
-          <h1>
-            <FormattedMessage
-              id="data"
-              values={Object {}}
-            />
-          </h1>
-        </div>
-      }
-      id="capco_horizontal_form"
+    <h2
+      className="page-header"
     >
-      <h2
-        className="page-header"
+      <FormattedMessage
+        id="personal-data"
+        values={Object {}}
+      />
+    </h2>
+    <div>
+      <form
+        className="form-horizontal"
+        onSubmit={[MockFunction]}
       >
-        <FormattedMessage
-          id="personal-data"
-          values={Object {}}
-        />
-      </h2>
-      <div>
         <div>
           <div
             className="horizontal_field_with_border_top"
@@ -1224,6 +1174,20 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
             justified={false}
             vertical={false}
           >
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="primary"
+              disabled={false}
+              id="personal-data-form-save"
+              type="submit"
+            >
+              <FormattedMessage
+                id="global.save_modifications"
+                values={Object {}}
+              />
+            </Button>
             <AlertForm
               errorMessage={null}
               invalid={false}
@@ -1234,9 +1198,9 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
             />
           </ButtonGroup>
         </div>
-      </div>
-    </Panel>
-  </form>
+      </form>
+    </div>
+  </Panel>
   <Panel
     bsClass="panel"
     bsStyle="default"
@@ -1310,57 +1274,25 @@ exports[`<PersonalData /> should render with full user 1`] = `
       values={Object {}}
     />
   </Alert>
-  <form
-    className="form-horizontal"
-    onSubmit={[MockFunction]}
+  <Panel
+    bsClass="panel"
+    bsStyle="default"
+    defaultExpanded={false}
+    id="capco_horizontal_form"
   >
-    <Panel
-      bsClass="panel"
-      bsStyle="default"
-      defaultExpanded={false}
-      footer={
-        <div
-          className="col-sm-offset-4"
-        >
-          <Button
-            active={false}
-            block={false}
-            bsClass="btn"
-            bsStyle="primary"
-            disabled={false}
-            id="personal-data-form-save"
-            type="submit"
-          >
-            <FormattedMessage
-              id="global.save_modifications"
-              values={Object {}}
-            />
-          </Button>
-        </div>
-      }
-      header={
-        <div
-          className="panel-heading profile-header"
-        >
-          <h1>
-            <FormattedMessage
-              id="data"
-              values={Object {}}
-            />
-          </h1>
-        </div>
-      }
-      id="capco_horizontal_form"
+    <h2
+      className="page-header"
     >
-      <h2
-        className="page-header"
+      <FormattedMessage
+        id="personal-data"
+        values={Object {}}
+      />
+    </h2>
+    <div>
+      <form
+        className="form-horizontal"
+        onSubmit={[MockFunction]}
       >
-        <FormattedMessage
-          id="personal-data"
-          values={Object {}}
-        />
-      </h2>
-      <div>
         <div>
           <div
             className="horizontal_field_with_border_top"
@@ -2137,6 +2069,20 @@ exports[`<PersonalData /> should render with full user 1`] = `
             justified={false}
             vertical={false}
           >
+            <Button
+              active={false}
+              block={false}
+              bsClass="btn"
+              bsStyle="primary"
+              disabled={false}
+              id="personal-data-form-save"
+              type="submit"
+            >
+              <FormattedMessage
+                id="global.save_modifications"
+                values={Object {}}
+              />
+            </Button>
             <AlertForm
               errorMessage={null}
               invalid={false}
@@ -2147,9 +2093,9 @@ exports[`<PersonalData /> should render with full user 1`] = `
             />
           </ButtonGroup>
         </div>
-      </div>
-    </Panel>
-  </form>
+      </form>
+    </div>
+  </Panel>
   <Panel
     bsClass="panel"
     bsStyle="default"

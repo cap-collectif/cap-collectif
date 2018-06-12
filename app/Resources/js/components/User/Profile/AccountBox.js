@@ -27,48 +27,36 @@ export class AccountBox extends Component<Props, State> {
   state = { showDeleteAccountModal: false };
   render() {
     const { invalid, submitting, dispatch, viewer } = this.props;
-
-    const header = (
-      <div className="panel-heading profile-header">
-        <h1>
-          <FormattedMessage id="profile.account.title" />
-        </h1>
-      </div>
-    );
-
-    const footer = (
-      <div style={{ paddingLeft: 15 }}>
-        <Button
-          id="edit-account-profile-button"
-          onClick={() => dispatch(confirmPassword())}
-          disabled={invalid || submitting}
-          bsStyle="primary"
-          className="col-sm-offset-5">
-          {submitting ? (
-            <FormattedMessage id="global.loading" />
-          ) : (
-            <FormattedMessage id="global.save_modifications" />
-          )}
-        </Button>
-        <Button
-          id="delete-account-profile-button"
-          bsStyle="danger"
-          onClick={() => {
-            this.setState({ showDeleteAccountModal: true });
-          }}
-          style={{ marginLeft: 15 }}>
-          <FormattedMessage id="delete-account" />
-        </Button>
-      </div>
-    );
-
     return (
-      <Panel footer={footer} header={header}>
+      <Panel>
         <h2 className="page-header">
           <FormattedMessage id="profile.account.title" />
         </h2>
         <AccountForm />
         <ConfirmPasswordModal />
+        <div style={{ paddingLeft: 15 }}>
+          <Button
+            id="edit-account-profile-button"
+            onClick={() => dispatch(confirmPassword())}
+            disabled={invalid || submitting}
+            bsStyle="primary"
+            className="col-sm-offset-5">
+            {submitting ? (
+              <FormattedMessage id="global.loading" />
+            ) : (
+              <FormattedMessage id="global.save_modifications" />
+            )}
+          </Button>
+          <Button
+            id="delete-account-profile-button"
+            bsStyle="danger"
+            onClick={() => {
+              this.setState({ showDeleteAccountModal: true });
+            }}
+            style={{ marginLeft: 15 }}>
+            <FormattedMessage id="delete-account" />
+          </Button>
+        </div>
         {/* $FlowFixMe */}
         <DeleteAccountModal
           viewer={viewer}

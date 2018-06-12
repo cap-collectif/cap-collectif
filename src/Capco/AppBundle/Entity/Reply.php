@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
-use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\VoteContribution;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\ExpirableTrait;
@@ -24,7 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ReplyRepository")
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="reply.missing_required_responses", formField="questionnaire")
  */
-class Reply implements Contribution, VoteContribution
+class Reply implements VoteContribution
 {
     use UuidTrait;
     use TimestampableTrait;
@@ -118,30 +117,5 @@ class Reply implements Contribution, VoteContribution
     public function setResponseOn(AbstractResponse $response)
     {
         $response->setReply($this);
-    }
-
-    /**
-     * Tells if this object MUST be sent to Elasticsearch.
-     * If FALSE, we force the removal from ES.
-     */
-    public function isIndexable(): bool
-    {
-        return false;
-    }
-
-    /**
-     * The Elasticsearch Type name. Must exists in `src/Capco/AppBundle/Elasticsearch/mapping.yml`.
-     */
-    public static function getElasticsearchTypeName(): string
-    {
-        return 'reply';
-    }
-
-    /**
-     * The JMS Serializer serialization groups.
-     */
-    public static function getElasticsearchSerializationGroups(): array
-    {
-        return ['Elasticsearch'];
     }
 }

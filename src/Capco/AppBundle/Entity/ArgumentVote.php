@@ -41,7 +41,7 @@ class ArgumentVote extends AbstractVote
         return $this;
     }
 
-    public function getRelated()
+    public function getRelatedEntity()
     {
         return $this->argument;
     }

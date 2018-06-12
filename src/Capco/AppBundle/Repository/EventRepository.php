@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Theme;
-use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -67,28 +66,6 @@ class EventRepository extends EntityRepository
         }
 
         return new Paginator($qb, $fetchJoin = true);
-    }
-
-    public function countAllByUser(User $user): int
-    {
-        $qb = $this->createQueryBuilder('e');
-        $qb
-            ->select('count(DISTINCT e)')
-            ->andWhere('e.Author = :user')
-            ->setParameter('user', $user)
-        ;
-
-        return $qb->getQuery()->getSingleScalarResult();
-    }
-
-    public function findAllByUser(User $user): array
-    {
-        $qb = $this->createQueryBuilder('e');
-        $qb
-            ->andWhere('e.Author = :user')
-            ->setParameter('user', $user);
-
-        return $qb->getQuery()->getResult();
     }
 
     /**
