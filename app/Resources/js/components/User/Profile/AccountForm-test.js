@@ -1,10 +1,13 @@
+// @flow
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
 import { AccountForm } from './AccountForm';
+import { formMock } from '../../../mocks';
 
 describe('<AccountForm />', () => {
   const props = {
+    ...formMock,
     dispatch: () => {},
     handleSubmit: () => {},
     initialValues: { email: 'initial-email@gmail.fr' },

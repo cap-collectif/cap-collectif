@@ -1,5 +1,5 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Field, reduxForm } from 'redux-form';
 import { Alert } from 'react-bootstrap';
@@ -17,11 +17,11 @@ const initialValues: LoginValues = {
   password: '',
 };
 
-export const LoginForm = React.createClass({
-  propTypes: {
-    error: PropTypes.string,
-  },
+type Props = {
+  error?: string,
+};
 
+export class LoginForm extends React.Component<Props> {
   render() {
     const { error } = this.props;
     return (
@@ -58,8 +58,8 @@ export const LoginForm = React.createClass({
         <a href="/resetting/request">{<FormattedMessage id="global.forgot_password" />}</a>
       </div>
     );
-  },
-});
+  }
+}
 
 export default reduxForm({
   initialValues,

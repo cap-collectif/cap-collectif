@@ -1,15 +1,13 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import type { State } from '../../../types';
 
-export const SamlLoginButton = React.createClass({
-  displayName: 'SamlLoginButton',
+type Props = { show: boolean };
 
-  propTypes: {
-    show: PropTypes.bool.isRequired,
-  },
+export class SamlLoginButton extends React.Component<Props> {
+  static displayName = 'SamlLoginButton';
 
   render() {
     const { show } = this.props;
@@ -25,8 +23,8 @@ export const SamlLoginButton = React.createClass({
         {title}
       </a>
     );
-  },
-});
+  }
+}
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   show: state.default.features.login_saml,
