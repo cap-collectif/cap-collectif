@@ -17,7 +17,7 @@ type RelayProps = {
 type Props = RelayProps & {
   show: boolean,
   handleClose: () => void,
-  fromBo: boolean,
+  redirectToAdminUrl: boolean,
   userDeletedIsNotViewer: boolean
 };
 
@@ -40,10 +40,10 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
   };
 
   delete = () => {
-    const {fromBo, userDeletedIsNotViewer, viewer} = this.props;
+    const {redirectToAdminUrl, userDeletedIsNotViewer, viewer} = this.props;
     DeleteAccountMutation.commit({input: {type: this.state.removalType, userId: viewer.id}}).then(() => {
       setTimeout(() => {
-        if (fromBo && userDeletedIsNotViewer) {
+        if (redirectToAdminUrl && userDeletedIsNotViewer) {
           window.location = `/admin/capco/user/user/list`;
         } else {
           window.location = `/logout?deleteType=${this.state.removalType}`;

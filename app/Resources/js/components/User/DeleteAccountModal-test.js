@@ -16,7 +16,7 @@ describe('<DeleteAccountModal />', () => {
   };
 
   const props = {
-    fromBo: false,
+    redirectToAdminUrl: false,
     userDeletedIsNotViewer: true
   };
 

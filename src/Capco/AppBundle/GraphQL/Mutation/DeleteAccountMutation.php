@@ -15,6 +15,7 @@ use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\UserGroup;
 use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -27,11 +28,13 @@ class DeleteAccountMutation implements ContainerAwareInterface
 
     private $em;
     private $translator;
+    private $userRepository;
 
-    public function __construct(EntityManagerInterface $em, TranslatorInterface $translator)
+    public function __construct(EntityManagerInterface $em, TranslatorInterface $translator, UserRepository $userRepository)
     {
         $this->em = $em;
         $this->translator = $translator;
+        $this->userRepository = $userRepository;
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -39,7 +42,7 @@ class DeleteAccountMutation implements ContainerAwareInterface
         $deleteType = $input['type'];
         $user = $viewer;
         if (isset($input['userId']) && !empty($input['userId']) && $input['userId'] !== $user->getId()) {
-            $user = $this->em->getRepository('CapcoUserBundle:User')->find($input['userId']);
+            $user = $this->userRepository->find($input['userId']);
         }
 
         $this->hardDeleteUserContributionsInActiveSteps($user);
@@ -61,7 +64,7 @@ class DeleteAccountMutation implements ContainerAwareInterface
         $newsletter = $this->em->getRepository(NewsletterSubscription::class)->findOneBy(
             ['email' => $user->getEmail()]
         );
-        $userGroups = $this->em->getRepository(UserGroup::class)->findBy(['user' => $user]);
+        $userGroups = $this->userRepository->findBy(['user' => $user]);
         $userManager = $this->container->get('fos_user.user_manager');
 
         if ($newsletter) {

@@ -9,7 +9,7 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactory;
 
-class BaseUpdateProfile
+abstract class BaseUpdateProfile
 {
     protected $em;
     protected $formFactory;

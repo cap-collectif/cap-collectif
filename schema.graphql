@@ -2587,6 +2587,7 @@ type UpdateProfilePayload {
 }
 
 input UpdateProfilePersonalDataInput {
+  # (ROLE_SUPER_ADMIN only) the user to update, if not provided the viewer is updated.
   userId: ID
 
   # Your firstname
@@ -2631,7 +2632,7 @@ type UpdateProfilePersonalDataPayload {
 }
 
 input UpdateProfilePublicDataInput {
-  # Your user id (role_super_admin)
+  # (ROLE_SUPER_ADMIN only) the user to update, if not provided the viewer is updated.
   userId: ID
 
   # Your username
@@ -2776,7 +2777,7 @@ input UpdateUserAccountInput {
   userId: ID!
 
   # Unattended roles as array.
-  roles: [String]
+  roles: [UserRoles]
   locked: Boolean
   vip: Boolean
   enabled: Boolean
@@ -3008,6 +3009,13 @@ type UserGroup {
 type UserNotificationsConfiguration {
   # A boolean representing if the user wants to receive notifications by mail when someone commented his proposal
   onProposalCommentMail: Boolean!
+}
+
+# 3 possible values
+enum UserRoles {
+  ROLE_USER
+  ROLE_ADMIN
+  ROLE_SUPER_ADMIN
 }
 
 # A type of person

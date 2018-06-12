@@ -16,7 +16,6 @@ import DateDropdownPicker from '../../Form/DateDropdownPicker';
 import AlertForm from '../../Alert/AlertForm';
 import UpdateProfilePersonalDataMutation from '../../../mutations/UpdateProfilePersonalDataMutation';
 import UserAdminPersonalData_user from './__generated__/UserAdminPersonalData_user.graphql';
-import config from "../../../config";
 
 type RelayProps = { user: UserAdminPersonalData_user };
 type Props = FormProps &
@@ -42,13 +41,6 @@ const validate = (values: Object) => {
 
   return errors;
 };
-let wLocale = 'fr-FR';
-
-if (config.canUseDOM && window.locale) {
-  wLocale = window.locale;
-} else if (!config.canUseDOM) {
-  wLocale = global.locale;
-}
 
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const {intl} = props;
@@ -77,13 +69,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
     });
 };
 
-type PersonalDataState = {
-  year: ?number,
-  month: ?number,
-  day: ?number,
-};
-
-export class UserAdminPersonalData extends React.Component<Props, PersonalDataState> {
+export class UserAdminPersonalData extends React.Component<Props> {
   render() {
     const {
       invalid,
@@ -156,10 +142,6 @@ export class UserAdminPersonalData extends React.Component<Props, PersonalDataSt
               name={`dateOfBirth`}
               id="dateOfBirth"
               component={DateDropdownPicker}
-              locale={wLocale}
-              dayDefaultValue="Jour"
-              monthDefaultValue="Mois"
-              yearDefaultValue="Année"
               dayId="personal-data-date-of-birth-day"
               monthId="personal-data-date-of-birth-month"
               yearId="personal-data-date-of-birth-year"

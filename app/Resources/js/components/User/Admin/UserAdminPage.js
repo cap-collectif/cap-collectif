@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { QueryRenderer, graphql } from 'react-relay';
+import { type ReadyState, QueryRenderer, graphql } from 'react-relay';
 import { connect } from 'react-redux';
 import type { MapStateToProps } from 'react-redux';
 import { isDirty } from 'redux-form';
@@ -8,6 +8,7 @@ import environment, { graphqlError } from '../../../createRelayEnvironment';
 import UserAdminPageTabs from './UserAdminPageTabs';
 import Loader from '../../Ui/Loader';
 import type { State } from '../../../types';
+import type UserAdminPageQuery from './__generated__/UserAdminPageQuery.graphql';
 
 type Props = { userId: string, dirty: boolean };
 
@@ -15,7 +16,7 @@ const onUnload = e => {
   e.returnValue = true;
 };
 
-const component = ({ error, props }: { error: ?Error, props: any }) => {
+const component = ({ error, props }: ReadyState & { props?: UserAdminPageQuery }) => {
   if (error) {
     console.log(error); // eslint-disable-line no-console
     return graphqlError;
@@ -73,4 +74,5 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
     isDirty('user-admin-evaluation')(state) ||
     isDirty('user-admin-status')(state),
 });
+
 export default connect(mapStateToProps)(UserAdminPage);

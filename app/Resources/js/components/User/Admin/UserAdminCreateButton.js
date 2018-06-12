@@ -53,14 +53,16 @@ const validate = (values: FormValues) => {
   if (values.plainPassword && values.plainPassword.length > 72) {
     errors.plainPassword = 'registration.constraints.password.max';
   }
-  if (!values.roles.labels || values.roles.labels.length === 0) {
+  if (values.roles && !values.roles.labels || values.roles && values.roles.labels.length === 0) {
     errors.roles = 'please-select-at-least-1-option';
   }
 
   return errors;
 };
 
-const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
+// if I give FormValues I got an error "cause of  object type [1] is incompatible
+// with read-only array type [2] in property input.roles." So I give Object
+const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const {intl} = props;
   const roles = values.roles.labels;
   // delete values.roles, because we need values.roles.labels as roles

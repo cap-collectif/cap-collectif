@@ -4,11 +4,13 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\UserFormType;
+use Doctrine\DBAL\Driver\DriverException;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
 use Monolog\Logger;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Symfony\Component\Form\FormFactory;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class CreateUserMutation
 {
@@ -26,19 +28,12 @@ class CreateUserMutation
     public function __invoke(Argument $input): array
     {
         $arguments = $input->getRawArguments();
-        $user = (new User())
-            ->setUsername($arguments['username'])
-            ->setEmail($arguments['email'])
-            ->setPlainPassword(isset($arguments['plainPassword']) ? $arguments['plainPassword'] : '')
-            ->setLocked(isset($arguments['locked']) ? $arguments['locked'] : false)
-            ->setVip(isset($arguments['vip']) ? $arguments['vip'] : false)
-            ->setRoles(isset($arguments['roles']) ? $arguments['roles'] : ['ROLE_USER'])
-            ->setEnabled(isset($arguments['enabled']) ? $arguments['enabled'] : false);
+        $user = new User();
 
         $form = $this->formFactory->create(UserFormType::class, $user, ['csrf_protection' => false]);
         $form->submit($arguments, false);
         if (!$form->isValid()) {
-            $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
+            $this->logger->error(__METHOD__.' : '.(string)$form->getErrors(true, false));
 
             throw new UserError('Invalid data.');
         }
@@ -46,10 +41,10 @@ class CreateUserMutation
         try {
             $this->em->persist($user);
             $this->em->flush();
-        } catch (\Exception $e) {
-            $this->logger->error($e);
+        } catch (DriverException $e) {
+            $this->logger->error(__METHOD__ . ' => ' .$e->getErrorCode().' : '.$e->getMessage());
 
-            throw new UserError('Saving error');
+            throw new BadRequestHttpException('Sorry, please retry.');
         }
 
         return ['user' => $user];

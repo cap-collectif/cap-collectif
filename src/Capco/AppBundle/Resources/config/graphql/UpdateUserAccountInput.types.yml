@@ -6,7 +6,7 @@ UpdateUserAccountInput:
             userId:
                 type: "ID!"
             roles:
-                type: "[String]"
+                type: "[UserRoles]"
                 description: "Unattended roles as array."
             locked:
                 type: "Boolean"

@@ -10,8 +10,6 @@ use Overblog\GraphQLBundle\Definition\Argument;
 
 class UpdateProfilePasswordMutation extends BaseUpdateProfile
 {
-    private $userManager;
-
     public function __invoke(Argument $input, User $user): array
     {
         parent::__invoke($input, $user);
@@ -28,14 +26,6 @@ class UpdateProfilePasswordMutation extends BaseUpdateProfile
             return ['user' => $user, 'error' => 'fos_user.password.not_current'];
         }
 
-        $user->setPlainPassword($this->arguments['new']);
-        $this->userManager->updateUser($user);
-
         return ['user' => $user];
-    }
-
-    public function setUserManager(UserManagerInterface $userManager)
-    {
-        $this->userManager = $userManager;
     }
 }

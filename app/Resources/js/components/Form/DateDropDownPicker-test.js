@@ -6,7 +6,6 @@ import DateDropdownPicker from './DateDropdownPicker';
 
 describe('<DateDropdownPicker />', () => {
   const props = {
-    locale: 'EN',
     dayDefaultValue: 'Day',
     dayId: 'day',
     monthDefaultValue: 'month',

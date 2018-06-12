@@ -210,7 +210,7 @@ export class UserAdminAccount extends React.Component<Props, State> {
             {isViewerOrSuperAdmin && (
               <DeleteAccountModal
                 viewer={user}
-                fromBo
+                redirectToAdminUrl
                 userDeletedIsNotViewer={userDeletedIsNotViewer}
                 show={this.state.showDeleteAccountModal}
                 handleClose={() => {

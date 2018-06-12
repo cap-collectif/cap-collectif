@@ -37,9 +37,9 @@ class UpdateUserAccountMutation
         $user = $this->userRepository->find($arguments['userId']);
 
         if (!$user) {
-            throw new UserError('Invalid user.');
+            throw new UserError('IUser not found.');
         }
-        // if viewer (admin) change account of user, but user is super_admin, add (persist) super_admin to roles of user
+        //If the viewer is ROLE_ADMIN but update a user with ROLE_SUPER_ADMIN, we have to make sur the user doesn't lose his ROLE_SUPER_ADMIN
         if (!$viewer->hasRole('ROLE_SUPER_ADMIN') && !\in_array(
                 'ROLE_USER_ADMIN',
                 $arguments['roles'], true

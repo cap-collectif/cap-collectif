@@ -5,7 +5,7 @@ UpdateProfilePublicDataInput:
         fields:
             userId:
                 type: "ID"
-                description: "Your user id (role_super_admin)"
+                description: "(ROLE_SUPER_ADMIN only) the user to update, if not provided the viewer is updated."
             username:
                 type: "String!"
                 description: "Your username"
