@@ -15,10 +15,13 @@ describe('<ProposalPageContent />', () => {
     title: 'Titre proposition',
     author: {
       id: '3',
-      displayName: 'jack',
+      slug: 'jack',
     },
     media: {
       url: 'http://capco.test',
+    },
+    form: {
+      contribuable: true,
     },
     responses: [],
     publicationStatus: 'PUBLISHED',
