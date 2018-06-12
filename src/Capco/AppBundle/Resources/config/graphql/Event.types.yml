@@ -22,18 +22,15 @@ Event:
                 type: "[Project!]!"
             author:
                 type: "User!"
-            published:
-                type: "Boolean!"
             commentable:
                 type: "Boolean!"
+                resolve: "@=value.getIsCommentable()"
             updatedAt:
                 type: "DateTime"
             createdAt:
                 type: "DateTime!"
             body:
                 type: "String"
-            registrationEnabled:
-                type: "Boolean!"
             link:
                 type: "URI"
             media:

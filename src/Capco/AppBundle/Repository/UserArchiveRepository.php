@@ -2,13 +2,12 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\UserArchive;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
 class UserArchiveRepository extends EntityRepository
 {
-    public function getLastForUser(User $user): ?UserArchive
+    public function getLastForUser(User $user)
     {
         return $this->createQueryBuilder('ua')
             ->andWhere('ua.user = :user')

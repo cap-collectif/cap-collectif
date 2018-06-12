@@ -9,9 +9,9 @@ trait ExportDatasUserTrait
      */
     public function iCheckIfTheArchiveIsCreatedForTheUser(string $userId)
     {
+        $this->getEntityManager()->clear();
         $user = $this->getRepository('CapcoUserBundle:User')->find($userId);
         $archive = $this->getRepository('CapcoAppBundle:UserArchive')->getLastForUser($user);
-
         if (!$archive) {
             throw new \Exception('UserArchive does not exist.');
         }
@@ -26,6 +26,7 @@ trait ExportDatasUserTrait
      */
     public function iCheckIfTheArchiveIsDeletedForTheUser(string $userId)
     {
+        $this->getEntityManager()->clear();
         $user = $this->getRepository('CapcoUserBundle:User')->find($userId);
         $archive = $this->getRepository('CapcoAppBundle:UserArchive')->getLastForUser($user);
 

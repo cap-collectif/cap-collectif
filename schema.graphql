@@ -761,12 +761,10 @@ type Event implements Node {
   themes: [Theme!]!
   projects: [Project!]!
   author: User!
-  published: Boolean!
   commentable: Boolean!
   updatedAt: DateTime
   createdAt: DateTime!
   body: String
-  registrationEnabled: Boolean!
   link: URI
   media: Media
   address: String
@@ -1433,7 +1431,7 @@ type Project implements Node {
 # A budget contribution
 type Proposal implements Node & Contribution {
   # The HTTP show url for this contribution.
-  show_url: URI! @deprecated(reason: "user url instead of show_url (depreciated)")
+  show_url: URI! @deprecated(reason: "Use url instead of show_url")
 
   # The HTTP show url for this contribution.
   url: URI!

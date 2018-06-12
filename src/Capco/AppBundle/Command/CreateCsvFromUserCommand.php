@@ -720,12 +720,10 @@ EOF;
             projects {
               title
             }
-            published
             commentable
             createdAt
             updatedAt
             body
-            registrationEnabled
             link
             address
             zipCode
