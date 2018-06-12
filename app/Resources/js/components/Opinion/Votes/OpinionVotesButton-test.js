@@ -14,7 +14,7 @@ describe('<OpinionVotesButton />', () => {
   const defaultProps = {
     active: true,
     features: {},
-    dispatch: () => {},
+    dispatch: jest.fn(),
   };
   const opinionVoteBoth = {
     id: 1,

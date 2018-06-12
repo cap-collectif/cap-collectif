@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import ReportBox from '../../Report/ReportBox';
 import OpinionSourceStore from '../../../stores/OpinionSourceStore';
 import { submitSourceReport } from '../../../redux/modules/report';
+import type { Dispatch } from '../../../types';
 
 type Props = {
-  dispatch: Function,
+  dispatch: Dispatch,
   source: Object,
 };
 

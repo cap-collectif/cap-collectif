@@ -18,14 +18,21 @@ import RemoveButton from './../Delete/RemoveButton';
 
 import PublishModal from './../Publish/PublishModal';
 
-class DivideModal extends React.Component {
-  static propTypes = {
-    synthesis: React.PropTypes.object,
-    element: React.PropTypes.object,
-    show: React.PropTypes.bool,
-    toggle: React.PropTypes.func,
-  };
+type Props = {
+  synthesis: Object,
+  element: Object,
+  show: boolean,
+  toggle: Function,
+};
 
+type State = {
+  newElements: Object | Array<Object>,
+  currentElement: Object,
+  showPublishModal: boolean,
+  selectedText: ?string,
+};
+
+class DivideModal extends React.Component<Props, State> {
   constructor(props) {
     super(props);
     const { element } = props;

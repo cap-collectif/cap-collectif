@@ -5,10 +5,10 @@ import { connect, type MapStateToProps } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { changeTerm } from '../../../redux/modules/proposal';
 import Input from '../../Form/Input';
-import type { GlobalState } from '../../../types';
+import type { GlobalState, Dispatch } from '../../../types';
 
 type Props = {
-  dispatch: Function,
+  dispatch: Dispatch,
   terms: string,
   intl: Object,
 };

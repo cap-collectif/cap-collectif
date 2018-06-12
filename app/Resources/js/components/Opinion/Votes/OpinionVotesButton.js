@@ -11,7 +11,7 @@ import {
   voteOpinion,
   voteVersion,
 } from '../../../redux/modules/opinion';
-import type { VoteValue, OpinionAndVersion, State } from '../../../types';
+import type { VoteValue, OpinionAndVersion, State, Dispatch } from '../../../types';
 
 const valueToObject = (value: VoteValue): Object => {
   if (value === -1) {
@@ -41,7 +41,7 @@ type Props = {
   value: $FlowFixMe,
   active: boolean,
   disabled?: boolean,
-  dispatch: Function,
+  dispatch: Dispatch,
   user?: Object,
   features: Object,
 };

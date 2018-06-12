@@ -7,13 +7,13 @@ import ProjectList from './../List/ProjectsList';
 import ProjectListFilter from '../List/ProjectListFilter';
 import Loader from '../../Ui/Loader';
 import { changePage, fetchProjects } from '../../../redux/modules/project';
-import type { State } from '../../../types';
+import type { State, Dispatch } from '../../../types';
 
 type Props = {
   features: Object,
   themes: Array<$FlowFixMe>,
   project: Object,
-  dispatch: Function,
+  dispatch: Dispatch,
 };
 
 export class ProjectListPage extends React.Component<Props, State> {

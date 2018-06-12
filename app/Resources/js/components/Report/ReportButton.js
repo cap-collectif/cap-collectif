@@ -7,7 +7,7 @@ import LoginOverlay from '../Utils/LoginOverlay';
 import { type State } from '../../types';
 
 type Props = {
-  id: $FlowFixMe,
+  id: string,
   reported: boolean,
   className: ?string,
   onClick: Function,

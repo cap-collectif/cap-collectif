@@ -1,3 +1,5 @@
+// @flow
+// Todo : ref Quill
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { injectIntl, intlShape } from 'react-intl';
@@ -26,6 +28,7 @@ class Editor extends React.Component<Props> {
   componentDidMount() {
     const { intl, disabled, onBlur, onChange, value, valueLink } = this.props;
     if (!disabled) {
+      // $FlowFixMe
       this._editor = new Quill(ReactDOM.findDOMNode(this.refs.editor), {
         modules: {
           toolbar: {
@@ -65,6 +68,7 @@ class Editor extends React.Component<Props> {
         styles: false,
         theme: 'snow',
       });
+      // $FlowFixMe
       this._editor.getModule('keyboard').removeHotkeys(9);
 
       if (valueLink) {
@@ -72,22 +76,30 @@ class Editor extends React.Component<Props> {
         console.warn('This is deprecated please use redux-form instead of valueLink.');
         const defaultValue = valueLink.value;
         if (defaultValue) {
+          // $FlowFixMe
           this._editor.setHTML(defaultValue);
         }
+        // $FlowFixMe
         this._editor.on('text-change', () => {
+          // $FlowFixMe
           valueLink.requestChange(this._editor.getHTML());
         });
       } else {
         const defaultValue = value;
         if (defaultValue) {
+          // $FlowFixMe
           this._editor.setHTML(defaultValue);
         }
+        // $FlowFixMe
         this._editor.on('selection-change', range => {
           if (!range) {
+            // $FlowFixMe
             onBlur(this._editor.getHTML());
           }
         });
+        // $FlowFixMe
         this._editor.on('text-change', () => {
+          // $FlowFixMe
           onChange(this._editor.getHTML());
         });
       }
@@ -95,7 +107,9 @@ class Editor extends React.Component<Props> {
   }
 
   componentWillUnmount() {
+    // $FlowFixMe
     if (this._editor) {
+      // $FlowFixMe
       this._editor.destroy();
     }
   }

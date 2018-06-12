@@ -52,7 +52,7 @@ class Other extends React.Component<Props, State> {
     onChange(e, e.target.value);
   };
 
-  onCheckUncheck = (e: $FlowFixMe) => {
+  onCheckUncheck = (e: SyntheticInputEvent<>) => {
     // $FlowFixMe
     const input = ReactDOM.findDOMNode(this.textField).getElementsByTagName('input')[0];
 

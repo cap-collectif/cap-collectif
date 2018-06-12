@@ -1,8 +1,5 @@
 // @flow
 import React from 'react';
-// import { Nav } from 'react-bootstrap';
-// import CounterNavItem from './CounterNavItem';
-// import classNames from 'classnames';
 
 type Props = {
   counters: Object,
