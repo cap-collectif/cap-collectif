@@ -26,15 +26,21 @@ trait ExportDatasUserTrait
      */
     public function iCheckIfTheArchiveIsDeletedForTheUser(string $userId)
     {
-        $this->getEntityManager()->clear();
+        $em = $this->getEntityManager();
+        $em->clear();
+
         $user = $this->getRepository('CapcoUserBundle:User')->find($userId);
+
+        if ($em->getFilters()->isEnabled('softdeleted')) {
+            $em->getFilters()->disable('softdeleted');
+        }
         $archive = $this->getRepository('CapcoAppBundle:UserArchive')->getLastForUser($user);
 
         if (!$archive) {
             throw new \Exception('UserArchive does not exist.');
         }
 
-        $archiveFile = $archive;
+        $archiveFile = $archive->getPath();
         $directory = $this->getContainer()->getParameter('kernel.root_dir') . '/../web/export/';
 
         \PHPUnit_Framework_Assert::assertFileNotExists("$directory/$archiveFile");
