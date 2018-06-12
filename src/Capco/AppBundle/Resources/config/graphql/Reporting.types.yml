@@ -28,3 +28,6 @@ Reporting:
             kind:
                 type: "String!"
                 description: "Returns 'report'."
+            url:
+                type: "URI!"
+                resolve: ""

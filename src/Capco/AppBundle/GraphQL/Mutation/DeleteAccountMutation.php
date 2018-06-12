@@ -129,7 +129,7 @@ class DeleteAccountMutation implements ContainerAwareInterface
                 if ($contribution instanceof CommentVote) {
                     $toDeleteList[] = $contribution;
                 } else {
-                    if (method_exists($contribution->getRelatedEntity(), 'getStep') && $contribution->getRelatedEntity()->getStep()->canContribute()) {
+                    if (method_exists($contribution->getRelated(), 'getStep') && $contribution->getRelated()->getStep()->canContribute()) {
                         $toDeleteList[] = $contribution;
                     }
                 }

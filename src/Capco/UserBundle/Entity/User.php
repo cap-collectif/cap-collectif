@@ -1210,15 +1210,16 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public function getContributions()
     {
         $types = [
-        $this->getOpinions(),
-        $this->getOpinionVersions(),
-        $this->getVotes(),
-        $this->getComments(),
-        $this->getArguments(),
-        $this->getSources(),
-        $this->getProposals(),
-        $this->getReplies(),
-      ];
+            $this->getOpinions(),
+            $this->getOpinionVersions(),
+            $this->getVotes(),
+            $this->getComments(),
+            $this->getArguments(),
+            $this->getSources(),
+            $this->getProposals(),
+            $this->getReplies(),
+        ];
+
         $contributions = [];
         foreach ($types as $type) {
             foreach ($type as $contribution) {

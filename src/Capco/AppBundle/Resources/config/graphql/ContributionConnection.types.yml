@@ -1,7 +1,7 @@
 ContributionConnection:
     type: relay-connection
     config:
-        nodeType: Opinion!
+        nodeType: Contribution!
         connectionFields:
             totalCount:
                 type: Int!

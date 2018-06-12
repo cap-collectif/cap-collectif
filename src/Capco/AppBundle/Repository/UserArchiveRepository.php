@@ -2,13 +2,12 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\UserArchive;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
 class UserArchiveRepository extends EntityRepository
 {
-    public function getLastForUser(User $user): ?UserArchive
+    public function getLastForUser(User $user)
     {
         return $this->createQueryBuilder('ua')
             ->andWhere('ua.user = :user')
@@ -17,5 +16,16 @@ class UserArchiveRepository extends EntityRepository
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
+    }
+
+    public function getArchivesToDelete(\DateTime $date): array
+    {
+        return $this->createQueryBuilder('ua')
+            ->andWhere('ua.requestedAt <= :date')
+            ->andWhere('ua.ready = 1')
+            ->andWhere('ua.deletedAt IS NULL')
+            ->setParameter('date', $date)
+            ->getQuery()
+            ->execute();
     }
 }

@@ -217,6 +217,28 @@ class OpinionVersionRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
+    public function countAllByAuthor(User $user): int
+    {
+        $qb = $this->createQueryBuilder('version');
+        $qb
+            ->select('count(DISTINCT version)')
+            ->andWhere('version.author = :author')
+            ->setParameter('author', $user)
+        ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function findAllByAuthor(User $user): array
+    {
+        $qb = $this->createQueryBuilder('version');
+        $qb
+            ->andWhere('version.author = :author')
+            ->setParameter('author', $user);
+
+        return $qb->getQuery()->getResult();
+    }
+
     /**
      * Get all versions in a project.
      *

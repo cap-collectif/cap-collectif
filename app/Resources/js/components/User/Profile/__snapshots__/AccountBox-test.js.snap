@@ -5,6 +5,62 @@ exports[`<AccountBox /> should render a disabled button when the form is invalid
   bsClass="panel"
   bsStyle="default"
   defaultExpanded={false}
+  footer={
+    <div
+      style={
+        Object {
+          "paddingLeft": 15,
+        }
+      }
+    >
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="primary"
+        className="col-sm-offset-5"
+        disabled={true}
+        id="edit-account-profile-button"
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          id="global.save_modifications"
+          values={Object {}}
+        />
+      </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="danger"
+        disabled={false}
+        id="delete-account-profile-button"
+        onClick={[Function]}
+        style={
+          Object {
+            "marginLeft": 15,
+          }
+        }
+      >
+        <FormattedMessage
+          id="delete-account"
+          values={Object {}}
+        />
+      </Button>
+    </div>
+  }
+  header={
+    <div
+      className="panel-heading profile-header"
+    >
+      <h1>
+        <FormattedMessage
+          id="profile.account.title"
+          values={Object {}}
+        />
+      </h1>
+    </div>
+  }
 >
   <h2
     className="page-header"
@@ -16,48 +72,6 @@ exports[`<AccountBox /> should render a disabled button when the form is invalid
   </h2>
   <Connect(ReduxForm) />
   <Connect(ConfirmPasswordModal) />
-  <div
-    style={
-      Object {
-        "paddingLeft": 15,
-      }
-    }
-  >
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="primary"
-      className="col-sm-offset-5"
-      disabled={true}
-      id="edit-account-profile-button"
-      onClick={[Function]}
-    >
-      <FormattedMessage
-        id="global.save_modifications"
-        values={Object {}}
-      />
-    </Button>
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="danger"
-      disabled={false}
-      id="delete-account-profile-button"
-      onClick={[Function]}
-      style={
-        Object {
-          "marginLeft": 15,
-        }
-      }
-    >
-      <FormattedMessage
-        id="delete-account"
-        values={Object {}}
-      />
-    </Button>
-  </div>
   <Relay(DeleteAccountModal)
     handleClose={[Function]}
     show={false}
@@ -70,6 +84,62 @@ exports[`<AccountBox /> should render a disabled button when the form is submitt
   bsClass="panel"
   bsStyle="default"
   defaultExpanded={false}
+  footer={
+    <div
+      style={
+        Object {
+          "paddingLeft": 15,
+        }
+      }
+    >
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="primary"
+        className="col-sm-offset-5"
+        disabled={true}
+        id="edit-account-profile-button"
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          id="global.loading"
+          values={Object {}}
+        />
+      </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="danger"
+        disabled={false}
+        id="delete-account-profile-button"
+        onClick={[Function]}
+        style={
+          Object {
+            "marginLeft": 15,
+          }
+        }
+      >
+        <FormattedMessage
+          id="delete-account"
+          values={Object {}}
+        />
+      </Button>
+    </div>
+  }
+  header={
+    <div
+      className="panel-heading profile-header"
+    >
+      <h1>
+        <FormattedMessage
+          id="profile.account.title"
+          values={Object {}}
+        />
+      </h1>
+    </div>
+  }
 >
   <h2
     className="page-header"
@@ -81,48 +151,6 @@ exports[`<AccountBox /> should render a disabled button when the form is submitt
   </h2>
   <Connect(ReduxForm) />
   <Connect(ConfirmPasswordModal) />
-  <div
-    style={
-      Object {
-        "paddingLeft": 15,
-      }
-    }
-  >
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="primary"
-      className="col-sm-offset-5"
-      disabled={true}
-      id="edit-account-profile-button"
-      onClick={[Function]}
-    >
-      <FormattedMessage
-        id="global.loading"
-        values={Object {}}
-      />
-    </Button>
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="danger"
-      disabled={false}
-      id="delete-account-profile-button"
-      onClick={[Function]}
-      style={
-        Object {
-          "marginLeft": 15,
-        }
-      }
-    >
-      <FormattedMessage
-        id="delete-account"
-        values={Object {}}
-      />
-    </Button>
-  </div>
   <Relay(DeleteAccountModal)
     handleClose={[Function]}
     show={false}
@@ -135,6 +163,62 @@ exports[`<AccountBox /> should render and enabled button when the form is valid 
   bsClass="panel"
   bsStyle="default"
   defaultExpanded={false}
+  footer={
+    <div
+      style={
+        Object {
+          "paddingLeft": 15,
+        }
+      }
+    >
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="primary"
+        className="col-sm-offset-5"
+        disabled={false}
+        id="edit-account-profile-button"
+        onClick={[Function]}
+      >
+        <FormattedMessage
+          id="global.save_modifications"
+          values={Object {}}
+        />
+      </Button>
+      <Button
+        active={false}
+        block={false}
+        bsClass="btn"
+        bsStyle="danger"
+        disabled={false}
+        id="delete-account-profile-button"
+        onClick={[Function]}
+        style={
+          Object {
+            "marginLeft": 15,
+          }
+        }
+      >
+        <FormattedMessage
+          id="delete-account"
+          values={Object {}}
+        />
+      </Button>
+    </div>
+  }
+  header={
+    <div
+      className="panel-heading profile-header"
+    >
+      <h1>
+        <FormattedMessage
+          id="profile.account.title"
+          values={Object {}}
+        />
+      </h1>
+    </div>
+  }
 >
   <h2
     className="page-header"
@@ -146,48 +230,6 @@ exports[`<AccountBox /> should render and enabled button when the form is valid 
   </h2>
   <Connect(ReduxForm) />
   <Connect(ConfirmPasswordModal) />
-  <div
-    style={
-      Object {
-        "paddingLeft": 15,
-      }
-    }
-  >
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="primary"
-      className="col-sm-offset-5"
-      disabled={false}
-      id="edit-account-profile-button"
-      onClick={[Function]}
-    >
-      <FormattedMessage
-        id="global.save_modifications"
-        values={Object {}}
-      />
-    </Button>
-    <Button
-      active={false}
-      block={false}
-      bsClass="btn"
-      bsStyle="danger"
-      disabled={false}
-      id="delete-account-profile-button"
-      onClick={[Function]}
-      style={
-        Object {
-          "marginLeft": 15,
-        }
-      }
-    >
-      <FormattedMessage
-        id="delete-account"
-        values={Object {}}
-      />
-    </Button>
-  </div>
   <Relay(DeleteAccountModal)
     handleClose={[Function]}
     show={false}

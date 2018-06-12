@@ -49,15 +49,32 @@ export class NotificationsForm extends Component<Props> {
       submitSucceeded,
       submitFailed,
     } = this.props;
-    return (
-      <Panel id="capco_horizontal_form">
-        <h2 className="page-header">
+
+    const header = (
+      <div className="panel-heading profile-header">
+        <h1>
           <FormattedMessage id="profile.account.notifications.title" />
-        </h2>
-        <p className="notifications-app-title">
-          <FormattedMessage id="profile.account.notifications.app.collectstep" />
-        </p>
-        <form onSubmit={handleSubmit} className="form-horizontal">
+        </h1>
+      </div>
+    );
+
+    const footer = (
+      <div className="col-sm-offset-4">
+        <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
+          <FormattedMessage id={submitting ? 'global.loading' : 'global.save_modifications'} />
+        </Button>
+      </div>
+    );
+
+    return (
+      <form onSubmit={handleSubmit} className="form-horizontal">
+        <Panel id="capco_horizontal_form" header={header} footer={footer}>
+          <h2 className="page-header">
+            <FormattedMessage id="profile.account.notifications.title" />
+          </h2>
+          <p className="notifications-app-title">
+            <FormattedMessage id="profile.account.notifications.app.collectstep" />
+          </p>
           <Table className="notifications-table" striped>
             <thead>
               <tr>
@@ -87,9 +104,6 @@ export class NotificationsForm extends Component<Props> {
           </Table>
           <div className="divider" />
           <div className="notifications-form-controls">
-            <Button disabled={invalid || pristine || submitting} type="submit" bsStyle="primary">
-              <FormattedMessage id={submitting ? 'global.loading' : 'global.save_modifications'} />
-            </Button>
             <AlertForm
               valid={valid}
               invalid={invalid}
@@ -98,8 +112,8 @@ export class NotificationsForm extends Component<Props> {
               submitting={submitting}
             />
           </div>
-        </form>
-      </Panel>
+        </Panel>
+      </form>
     );
   }
 }

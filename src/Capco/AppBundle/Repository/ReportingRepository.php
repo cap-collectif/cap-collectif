@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
@@ -23,6 +24,28 @@ class ReportingRepository extends EntityRepository
         }
 
         return new Paginator($qb);
+    }
+
+    public function countAllByUser(User $user): int
+    {
+        $qb = $this->createQueryBuilder('r');
+        $qb
+            ->select('count(DISTINCT r)')
+            ->andWhere('r.Reporter = :user')
+            ->setParameter('user', $user)
+        ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function findAllByUser(User $user): array
+    {
+        $qb = $this->createQueryBuilder('r');
+        $qb
+            ->andWhere('r.Reporter = :user')
+            ->setParameter('user', $user);
+
+        return $qb->getQuery()->getResult();
     }
 
     public function countForProposal(Proposal $proposal): int

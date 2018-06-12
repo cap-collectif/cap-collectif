@@ -72,7 +72,7 @@ type Argument implements Node & Contribution & TrashableContribution & Contribut
 
   # Identifies the date and time when the object was last updated.
   updatedAt: DateTime
-  url: String!
+  url: URI!
   expired: Boolean!
   published: Boolean!
   trashed: Boolean!
@@ -337,7 +337,7 @@ type CollectStep implements Node & Step & ProposalStep {
 }
 
 # A comment
-type Comment implements Node {
+type Comment implements Node & Contribution {
   id: ID!
   body: String
   createdAt: DateTime!
@@ -345,7 +345,8 @@ type Comment implements Node {
   author: User
   parent: Comment
   pinned: Boolean!
-  show_url: String!
+  show_url: String! @deprecated(reason: "Use url instead of show_url")
+  url: URI!
   answers: [Comment]!
   authorName: String
   authorEmail: String
@@ -355,6 +356,9 @@ type Comment implements Node {
   votes(after: String, first: Int = 30, before: String, last: Int, orderBy: VoteOrder = {field: CREATED_AT, direction: DESC}): CommentVoteConnection!
   trashedReason: String
   kind: String!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
 }
 
 # A connection to a list of items.
@@ -494,6 +498,9 @@ interface Contribution {
 
   # Related contribution.
   related: Contribution
+
+  # Url of the contribution
+  url: URI!
 }
 
 # A connection to a list of items.
@@ -510,7 +517,7 @@ type ContributionConnection {
 # An edge in a connection.
 type ContributionEdge {
   # The item at the end of the edge.
-  node: Opinion!
+  node: Contribution!
 
   # A cursor for use in pagination.
   cursor: String!
@@ -530,6 +537,17 @@ enum ContributionOrderField {
   POPULAR
   COMMENT_COUNT
   VOTE_COUNT
+}
+
+# Different contribution type
+enum ContributionType {
+  OPINION
+  OPINIONVERSION
+  COMMENT
+  ARGUMENT
+  SOURCE
+  PROPOSAL
+  REPLY
 }
 
 # A contribution with an author
@@ -738,6 +756,41 @@ type Event implements Node {
 
   # A list of Users that are participating to the event.
   participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
+  startAt: DateTime!
+  endAt: DateTime!
+  themes: [Theme!]!
+  projects: [Project!]!
+  author: User!
+  commentable: Boolean!
+  updatedAt: DateTime
+  createdAt: DateTime!
+  body: String
+  link: URI
+  media: Media
+  address: String
+  zipCode: String
+  city: String
+  country: String
+}
+
+# A connection to a list of items.
+type EventConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [EventEdge]
+}
+
+# An edge in a connection.
+type EventEdge {
+  # The item at the end of the edge.
+  node: Event!
+
+  # A cursor for use in pagination.
+  cursor: String!
 }
 
 # Require a firstname
@@ -815,6 +868,28 @@ type Group implements Node {
   # Identifies the description of the group.
   description: String
   users(after: String, first: Int, before: String, last: Int): UserConnection!
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+# A connection to a list of items.
+type GroupConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [GroupEdge]
+}
+
+# An edge in a connection.
+type GroupEdge {
+  # The item at the end of the edge.
+  node: Group!
+
+  # A cursor for use in pagination.
+  cursor: String!
 }
 
 scalar HTML
@@ -846,6 +921,32 @@ type Media {
   ): String!
   name: String!
   size: String!
+  enabled: Boolean!
+  authorName: String
+  description: String
+  copyright: String
+  contentType: String!
+  providerReference: String!
+}
+
+# A connection to a list of items.
+type MediaConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [MediaEdge]
+}
+
+# An edge in a connection.
+type MediaEdge {
+  # The item at the end of the edge.
+  node: Media!
+
+  # A cursor for use in pagination.
+  cursor: String!
 }
 
 # A media question
@@ -1090,7 +1191,7 @@ type OpinionType implements Contribution & TrashableContribution & ContributionW
   updatedAt: DateTime
 
   # The url of contribution.
-  url: String!
+  url: URI!
 
   # The author of the contribution.
   author: User!
@@ -1165,7 +1266,7 @@ type OpinionType implements Contribution & TrashableContribution & ContributionW
   reportings: [Reporting]
 }
 
-type OpinionVote implements YesNoPairedVote & Contribution & ContributionWithAuthor {
+type OpinionVote implements YesNoPairedVote & ContributionWithAuthor {
   id: ID!
 
   # The author of the contribution. If null, account has been deleted.
@@ -1328,9 +1429,12 @@ type Project implements Node {
 }
 
 # A budget contribution
-type Proposal implements Node {
+type Proposal implements Node & Contribution {
   # The HTTP show url for this contribution.
-  show_url: URI!
+  show_url: URI! @deprecated(reason: "Use url instead of show_url")
+
+  # The HTTP show url for this contribution.
+  url: URI!
 
   # The admin url for this contribution.
   adminUrl: URI!
@@ -1468,6 +1572,10 @@ type Proposal implements Node {
   followerConfiguration: Follower
   postsCount: Int!
   viewerCanSeeEvaluation: Boolean!
+  kind: String!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
   viewerHasVote(
     # The concerned step.
     step: ID!
@@ -1697,7 +1805,7 @@ enum ProposalStepVoteType {
 
 union ProposalVotableStep = CollectStep | SelectionStep
 
-type ProposalVote implements Contribution & ContributionWithAuthor {
+type ProposalVote implements ContributionWithAuthor {
   id: ID!
 
   # The author of the contribution. If null, the vote is anonymous.
@@ -1917,27 +2025,47 @@ type RemoveProposalVotePayload {
   clientMutationId: String
 }
 
-# A reply contribution
-type Reply implements Node {
+# A Reply
+type Reply implements Node & Contribution {
+  id: ID!
+  author: User!
   enabled: Boolean!
   private: Boolean!
-  responses: [Response]!
-
-  # The author of the contribution.
-  author: User!
+  createdAt: DateTime!
 
   # The updated date.
   updatedAt: DateTime
-
-  # The id of the contribution.
-  id: ID!
+  expired: Boolean!
 
   # Identifies the form where the contribution was submitted.
   questionnaire: Questionnaire!
+  responses: [Response]!
+  kind: String!
 
-  # Identifies the date and time when the object was created.
-  createdAt: DateTime!
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
   viewerCanDelete: Boolean!
+  url: URI!
+}
+
+# A connection to a list of items.
+type ReportConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [ReportEdge]
+}
+
+# An edge in a connection.
+type ReportEdge {
+  # The item at the end of the edge.
+  node: Reporting!
+
+  # A cursor for use in pagination.
+  cursor: String!
 }
 
 # A report
@@ -1962,6 +2090,7 @@ type Reporting implements Contribution & ContributionWithAuthor {
 
   # Returns 'report'.
   kind: String!
+  url: URI!
 }
 
 # A connection to a list of items.
@@ -2284,6 +2413,7 @@ type Source implements Node & Contribution & TrashableContribution & Contributio
 
   # Returns 'source'.
   kind: String!
+  url: URI!
 }
 
 type Status {
@@ -2717,6 +2847,39 @@ type User implements Node {
   neighborhood: String
   proposalVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}, stepId: ID): ProposalVoteConnection!
   deletedAccountAt: DateTime
+
+  # Get all medias the user has published.
+  medias: [Media]!
+
+  # Get all votes of the user.
+  votes(after: String, first: Int, before: String, last: Int): VoteConnection!
+
+  # Get all groups where the user is.
+  groups(after: String, first: Int, before: String, last: Int): GroupConnection!
+
+  # Get all reports the user has done.
+  reports: ReportConnection!
+
+  # Get all events the user has created.
+  events(after: String, first: Int, before: String, last: Int): EventConnection!
+
+  # Return the user's contributions of the type requested.
+  contributions(
+    # Type of contribustion requested
+    type: ContributionType
+
+    # Returns the elements in the list that come after the specified global ID.
+    after: String
+
+    # Returns the first n elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified global ID.
+    before: String
+
+    # Returns the last n elements from the list.
+    last: Int
+  ): ContributionConnection!
 }
 
 # A connection to a list of items.
@@ -2787,7 +2950,7 @@ type Version implements Contribution & TrashableContribution & ContributionWithA
   updatedAt: DateTime
 
   # The url of version.
-  url: String!
+  url: URI!
 
   # The author of the contribution.
   author: User!
@@ -2858,7 +3021,7 @@ type Version implements Contribution & TrashableContribution & ContributionWithA
   reportings: [Reporting]
 }
 
-type VersionVote implements YesNoPairedVote & Contribution & ContributionWithAuthor {
+type VersionVote implements YesNoPairedVote & ContributionWithAuthor {
   id: ID!
 
   # The author of the contribution.
@@ -2876,6 +3039,48 @@ type VersionVote implements YesNoPairedVote & Contribution & ContributionWithAut
 
   # Returns 'vote'.
   kind: String!
+}
+
+type Vote {
+  id: ID!
+
+  # Date of vote.
+  createdAt: DateTime!
+
+  # If vote is expired, it exists but doesn't count.
+  expired: Boolean!
+
+  # Returns Type of vote
+  kind: String!
+
+  # The author of the contribution.
+  author: User!
+
+  # The contribution that was voted.
+  related: Contribution
+
+  # Update the vote privacy.
+  private: Boolean
+}
+
+# A connection to a list of items.
+type VoteConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [VoteEdge]
+}
+
+# An edge in a connection.
+type VoteEdge {
+  # The item at the end of the edge.
+  node: Vote
+
+  # A cursor for use in pagination.
+  cursor: String!
 }
 
 # A vote

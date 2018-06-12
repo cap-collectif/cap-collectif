@@ -2,7 +2,7 @@ Comment:
     type: object
     config:
         description: "A comment"
-        interfaces: [Node]
+        interfaces: [Node, Contribution]
         fields:
             id:
               type: "ID!"
@@ -20,6 +20,10 @@ Comment:
               type: "Boolean!"
             show_url:
               type: "String!"
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentShowUrlResolver", [value])'
+              deprecationReason: "Use url instead of show_url"
+            url:
+              type: "URI!"
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentShowUrlResolver", [value])'
             answers:
               type: "[Comment]!"
@@ -59,4 +63,6 @@ Comment:
             kind:
               type: "String!"
               resolve: "@=value.getKind()"
-
+            related:
+                type: "Contribution"
+                description: "Return the related contribution if the contribution is related to another."

@@ -88,7 +88,7 @@ export class EditProfileTabs extends Component<Props> {
                   <NavItem eventKey="personal-data" href="#personal-data">
                     <ListGroupItem>
                       <span className="icon cap-id-1" />
-                      <FormattedMessage id="personal-data" />
+                      <FormattedMessage id="data" />
                     </ListGroupItem>
                   </NavItem>
                   {!features.login_paris && (

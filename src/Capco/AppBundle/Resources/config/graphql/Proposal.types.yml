@@ -2,9 +2,14 @@ Proposal:
     type: object
     config:
         description: "A budget contribution"
-        interfaces: [Node]
+        interfaces: [Node, Contribution]
         fields:
             show_url:
+                type: "URI!"
+                description: "The HTTP show url for this contribution."
+                resolve: "@=resolver('proposal_show_url', [value])"
+                deprecationReason: "Use url instead of show_url"
+            url:
                 type: "URI!"
                 description: "The HTTP show url for this contribution."
                 resolve: "@=resolver('proposal_show_url', [value])"
@@ -228,6 +233,12 @@ Proposal:
             viewerCanSeeEvaluation:
                 type: "Boolean!"
                 resolve: "@=resolver('proposal_viewer_can_see_evaluation', [value, user])"
+            kind:
+              type: "String!"
+              resolve: "@=value.getKind()"
+            related:
+                type: "Contribution"
+                description: "Return the related contribution if the contribution is related to another."
             viewerHasVote:
                 access: "@=hasRole('ROLE_USER')"
                 type: "Boolean!"

@@ -133,21 +133,23 @@ Scenario: GraphQL client wants to list contributions in a consultation
   When I send a GraphQL request:
   """
   query {
-  consultations(id: "cstep5") {
-        id
-        title
-      contributionConnection(first: 5, orderBy: { field: VOTE_COUNT, direction: DESC }) {
+     consultations(id: "cstep5") {
+      id
+      title
+      contributionConnection(first: 5, orderBy: {field: VOTE_COUNT, direction: DESC}) {
         totalCount
         edges {
           cursor
-                    node {
-            title
-            pinned
-            votesCount
+          node {
+            ... on Opinion {
+              title
+              pinned
+              votesCount
+            }
+          }
         }
       }
     }
-  }
   }
   """
   Then the JSON response should match:
@@ -182,19 +184,21 @@ Scenario: GraphQL client wants to list contributions in a section
   When I send a GraphQL request:
   """
   query {
-  section: node(id: "opinionType5") {
+    section: node(id: "opinionType5") {
       ... on Section {
-        contributionConnection(first: 5, orderBy: { field: VOTE_COUNT, direction: DESC }) {
-            totalCount
-            edges {
-              cursor
-              node {
+        contributionConnection(first: 5, orderBy: {field: VOTE_COUNT, direction: DESC}) {
+          totalCount
+          edges {
+            cursor
+            node {
+              ... on Opinion {
                 title
+              }
             }
+          }
         }
       }
     }
-  }
   }
   """
   Then the JSON response should match:

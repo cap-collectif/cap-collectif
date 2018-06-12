@@ -110,6 +110,4 @@ abstract class AbstractVote implements VoteContribution, HasAuthorInterface
     {
         return (bool) $this->getUser();
     }
-
-    abstract public function getRelatedEntity();
 }

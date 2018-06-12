@@ -3,12 +3,15 @@
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionTypeAppendixType;
 use Capco\AppBundle\Entity\OpinionVersion;
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
@@ -44,6 +47,15 @@ class ConsultationResolver implements ContainerAwareInterface
         }
         if ($data instanceof Reporting) {
             return $typeResolver->resolve('Reporting');
+        }
+        if ($data instanceof Comment) {
+            return $typeResolver->resolve('Comment');
+        }
+        if ($data instanceof Proposal) {
+            return $typeResolver->resolve('Proposal');
+        }
+        if ($data instanceof Reply) {
+            return $typeResolver->resolve('Reply');
         }
 
         throw new UserError('Could not resolve type of Contribution.');

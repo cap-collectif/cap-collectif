@@ -10,4 +10,4 @@ Scenario: User request for personal archive is asynchronous
   }
   """
   And I consume 1 messages in "user_archive_request"
-  Then I should see "user1.zip" file in "/var/www/web/export" directory
+  Then there should be a personal data archive for user "user1"
