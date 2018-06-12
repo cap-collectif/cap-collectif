@@ -5,8 +5,8 @@ import SynthesisElementActions from '../../actions/SynthesisElementActions';
 import ElementTitle from './Element/ElementTitle';
 import ElementIcon from './Element/ElementIcon';
 
-const ElementsFinder = React.createClass({
-  propTypes: {
+class ElementsFinder extends React.Component {
+  static propTypes = {
     synthesis: React.PropTypes.object,
     type: React.PropTypes.string,
     selectedId: React.PropTypes.string,
@@ -15,23 +15,21 @@ const ElementsFinder = React.createClass({
     onSelect: React.PropTypes.func,
     onExpand: React.PropTypes.func,
     hiddenElementId: React.PropTypes.string,
-  },
+  };
 
-  getDefaultProps() {
-    return {
-      selectedId: 'root',
-      elements: {},
-      expanded: {
-        root: true,
-      },
-      onSelect: null,
-      onExpand: null,
-      type: 'notIgnored',
-      hiddenElementId: null,
-    };
-  },
+  static defaultProps = {
+    selectedId: 'root',
+    elements: {},
+    expanded: {
+      root: true,
+    },
+    onSelect: null,
+    onExpand: null,
+    type: 'notIgnored',
+    hiddenElementId: null,
+  };
 
-  getRootElement() {
+  getRootElement = () => {
     const { elements } = this.props;
     return [
       {
@@ -41,9 +39,9 @@ const ElementsFinder = React.createClass({
         children: elements,
       },
     ];
-  },
+  };
 
-  toggleExpand(event, element) {
+  toggleExpand = (event, element) => {
     const { onExpand, synthesis, type } = this.props;
     event.stopPropagation();
     if (element.childrenCount !== element.children.length) {
@@ -53,16 +51,16 @@ const ElementsFinder = React.createClass({
       onExpand(element);
     }
     return false;
-  },
+  };
 
-  select(element) {
+  select = element => {
     const { onSelect } = this.props;
     if (typeof onSelect === 'function') {
       onSelect(element);
     }
-  },
+  };
 
-  renderTreeItems(elements, level, expand = false, parent = null) {
+  renderTreeItems = (elements, level, expand = false, parent = null) => {
     const { expanded, hiddenElementId } = this.props;
     if (expand && elements) {
       return (
@@ -84,9 +82,9 @@ const ElementsFinder = React.createClass({
         </ul>
       );
     }
-  },
+  };
 
-  renderTreeItemContent(element, parent = null) {
+  renderTreeItemContent = (element, parent = null) => {
     const { selectedId } = this.props;
     const classes = classNames({
       tree__item__content: true,
@@ -106,9 +104,9 @@ const ElementsFinder = React.createClass({
         />
       </div>
     );
-  },
+  };
 
-  renderItemCaret(element) {
+  renderItemCaret = element => {
     const { expanded } = this.props;
     const classes = classNames({
       tree__item__caret: true,
@@ -118,15 +116,15 @@ const ElementsFinder = React.createClass({
     if (element.childrenCount > 0) {
       return <i className={classes} onClick={ev => this.toggleExpand(ev, element)} />;
     }
-  },
+  };
 
-  renderTree() {
+  renderTree = () => {
     return this.renderTreeItems(this.getRootElement(), 0, true);
-  },
+  };
 
   render() {
     return <div className="synthesis__tree">{this.renderTree()}</div>;
-  },
-});
+  }
+}
 
 export default ElementsFinder;

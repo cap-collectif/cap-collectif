@@ -4,35 +4,37 @@ import { FormattedMessage } from 'react-intl';
 import ElementsList from './../List/ElementsList';
 import Loader from '../../Ui/Loader';
 
-const ChildrenModal = React.createClass({
-  propTypes: {
+class ChildrenModal extends React.Component {
+  static propTypes = {
     elements: React.PropTypes.array.isRequired,
     show: React.PropTypes.bool.isRequired,
     toggle: React.PropTypes.func.isRequired,
-  },
+  };
 
-  getInitialState() {
-    const { elements } = this.props;
-    return {
+  constructor(props) {
+    super(props);
+    const { elements } = props;
+
+    this.state = {
       isLoading: elements.length === 0,
     };
-  },
+  }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
       isLoading: nextProps.elements.length === 0,
     });
-  },
+  }
 
-  show() {
+  show = () => {
     const { toggle } = this.props;
     toggle(true);
-  },
+  };
 
-  hide() {
+  hide = () => {
     const { toggle } = this.props;
     toggle(false);
-  },
+  };
 
   render() {
     const { elements, show } = this.props;
@@ -60,7 +62,7 @@ const ChildrenModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  },
-});
+  }
+}
 
 export default ChildrenModal;

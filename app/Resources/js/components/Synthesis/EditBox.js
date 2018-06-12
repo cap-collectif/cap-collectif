@@ -4,12 +4,12 @@ import SecondNavbar from './Navbars/SecondNavbar';
 import SideMenu from './Navbars/SideMenu';
 import TopMenu from './Inbox/TopMenu';
 
-const EditBox = React.createClass({
-  propTypes: {
+class EditBox extends React.Component {
+  static propTypes = {
     synthesis: PropTypes.object,
     children: PropTypes.element,
     sideMenu: PropTypes.bool.isRequired,
-  },
+  };
 
   render() {
     const { synthesis, children, sideMenu } = this.props;
@@ -38,7 +38,7 @@ const EditBox = React.createClass({
         </div>
       );
     }
-  },
-});
+  }
+}
 
 export default EditBox;

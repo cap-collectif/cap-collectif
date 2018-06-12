@@ -1,16 +1,16 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 
-const DivideButton = React.createClass({
-  propTypes: {
+class DivideButton extends React.Component {
+  static propTypes = {
     element: React.PropTypes.object,
     onModal: React.PropTypes.func,
-  },
+  };
 
-  click() {
+  click = () => {
     const { onModal } = this.props;
     onModal(true);
-  },
+  };
 
   render() {
     return (
@@ -24,7 +24,7 @@ const DivideButton = React.createClass({
         </Button>
       </div>
     );
-  },
-});
+  }
+}
 
 export default DivideButton;

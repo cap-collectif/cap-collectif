@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 
-const ElementTitle = React.createClass({
-  propTypes: {
+class ElementTitle extends React.Component {
+  static propTypes = {
     element: React.PropTypes.object,
     parent: React.PropTypes.object,
     linkType: React.PropTypes.string,
@@ -11,25 +11,23 @@ const ElementTitle = React.createClass({
     className: React.PropTypes.string,
     style: React.PropTypes.object,
     onClick: React.PropTypes.func,
-  },
+  };
 
-  getDefaultProps() {
-    return {
-      hasLink: false,
-      linkType: 'none',
-      style: {},
-      className: '',
-      onClick: null,
-    };
-  },
+  static defaultProps = {
+    hasLink: false,
+    linkType: 'none',
+    style: {},
+    className: '',
+    onClick: null,
+  };
 
-  openOriginalContribution() {
+  openOriginalContribution = () => {
     const { element } = this.props;
     window.open(element.linkedDataUrl);
     return false;
-  },
+  };
 
-  renderTitle() {
+  renderTitle = () => {
     const { element } = this.props;
     if (element.title) {
       return element.title;
@@ -38,7 +36,7 @@ const ElementTitle = React.createClass({
       return `${element.body.substr(0, 140)}...`;
     }
     return <FormattedMessage id="synthesis.common.elements.default_title" />;
-  },
+  };
 
   render() {
     const { element, hasLink, linkType, onClick, style } = this.props;
@@ -71,7 +69,7 @@ const ElementTitle = React.createClass({
         {this.renderTitle()}
       </a>
     );
-  },
-});
+  }
+}
 
 export default ElementTitle;

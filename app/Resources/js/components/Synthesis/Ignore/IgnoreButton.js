@@ -4,35 +4,33 @@ import { FormattedMessage } from 'react-intl';
 import { hashHistory } from 'react-router';
 import SynthesisElementActions from '../../../actions/SynthesisElementActions';
 
-const IgnoreButton = React.createClass({
-  propTypes: {
+class IgnoreButton extends React.Component {
+  static propTypes = {
     synthesis: React.PropTypes.object,
     element: React.PropTypes.object,
-  },
+  };
 
-  getInitialState() {
-    return {
-      showConfirmModal: false,
-    };
-  },
+  state = {
+    showConfirmModal: false,
+  };
 
   componentWillUnmount() {
     this.hideConfirmModal();
-  },
+  }
 
-  showConfirmModal() {
+  showConfirmModal = () => {
     this.setState({
       showConfirmModal: true,
     });
-  },
+  };
 
-  hideConfirmModal() {
+  hideConfirmModal = () => {
     this.setState({
       showConfirmModal: false,
     });
-  },
+  };
 
-  ignore() {
+  ignore = () => {
     const { element, synthesis } = this.props;
     this.hideConfirmModal();
     const data = {
@@ -41,9 +39,9 @@ const IgnoreButton = React.createClass({
     };
     SynthesisElementActions.update(synthesis.id, element.id, data);
     hashHistory.push('inbox', { type: 'new' });
-  },
+  };
 
-  renderConfirmButton() {
+  renderConfirmButton = () => {
     return (
       <Button
         bsSize="large"
@@ -53,9 +51,9 @@ const IgnoreButton = React.createClass({
         <i className="cap cap-delete-2" />
       </Button>
     );
-  },
+  };
 
-  renderConfirmModal() {
+  renderConfirmModal = () => {
     const { element } = this.props;
     return (
       <Modal
@@ -90,7 +88,7 @@ const IgnoreButton = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  },
+  };
 
   render() {
     return (
@@ -99,7 +97,7 @@ const IgnoreButton = React.createClass({
         {this.renderConfirmModal()}
       </div>
     );
-  },
-});
+  }
+}
 
 export default IgnoreButton;

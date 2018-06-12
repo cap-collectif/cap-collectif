@@ -1,8 +1,8 @@
 import React from 'react';
 import { Navbar } from 'react-bootstrap';
 
-const MainNavbarHeader = React.createClass({
-  displayName: 'MainNavbarHeader',
+class MainNavbarHeader extends React.Component {
+  static displayName = 'MainNavbarHeader';
 
   render() {
     return (
@@ -15,7 +15,7 @@ const MainNavbarHeader = React.createClass({
         </Navbar.Brand>
       </Navbar.Header>
     );
-  },
-});
+  }
+}
 
 export default MainNavbarHeader;

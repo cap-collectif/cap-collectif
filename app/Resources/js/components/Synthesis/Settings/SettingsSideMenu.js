@@ -3,10 +3,10 @@ import { FormattedMessage } from 'react-intl';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
-const SettingsSideMenu = React.createClass({
-  contextTypes: {
+class SettingsSideMenu extends React.Component {
+  static contextTypes = {
     router: React.PropTypes.object.isRequired,
-  },
+  };
 
   render() {
     return (
@@ -29,7 +29,7 @@ const SettingsSideMenu = React.createClass({
         </div>
       </div>
     );
-  },
-});
+  }
+}
 
 export default SettingsSideMenu;

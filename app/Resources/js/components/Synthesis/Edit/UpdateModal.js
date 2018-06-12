@@ -1,4 +1,5 @@
 import React from 'react';
+import createReactClass from 'create-react-class';
 import { FormattedMessage } from 'react-intl';
 import { Button, Modal } from 'react-bootstrap';
 import SynthesisElementActions from '../../../actions/SynthesisElementActions';
@@ -6,7 +7,9 @@ import SynthesisElementStore from '../../../stores/SynthesisElementStore';
 import ElementsFinder from './../ElementsFinder';
 import Input from '../../Form/ReactBootstrapInput';
 
-const UpdateModal = React.createClass({
+const UpdateModal = createReactClass({
+  displayName: 'UpdateModal',
+
   propTypes: {
     synthesis: React.PropTypes.object.isRequired,
     element: React.PropTypes.object.isRequired,

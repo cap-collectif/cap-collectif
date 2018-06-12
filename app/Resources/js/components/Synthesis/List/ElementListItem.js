@@ -2,25 +2,23 @@ import React from 'react';
 import classNames from 'classnames';
 import ElementBlock from './../Element/ElementBlock';
 
-const ElementListItem = React.createClass({
-  propTypes: {
+class ElementListItem extends React.Component {
+  static propTypes = {
     element: React.PropTypes.object.isRequired,
     showBreadcrumb: React.PropTypes.bool,
     showStatus: React.PropTypes.bool,
     showNotation: React.PropTypes.bool,
     hasLink: React.PropTypes.bool,
     linkType: React.PropTypes.string,
-  },
+  };
 
-  getDefaultProps() {
-    return {
-      showBreadcrumb: true,
-      showStatus: true,
-      showNotation: true,
-      hasLink: true,
-      linkType: 'edition',
-    };
-  },
+  static defaultProps = {
+    showBreadcrumb: true,
+    showStatus: true,
+    showNotation: true,
+    hasLink: true,
+    linkType: 'edition',
+  };
 
   render() {
     const { element, hasLink, linkType, showBreadcrumb, showNotation, showStatus } = this.props;
@@ -41,7 +39,7 @@ const ElementListItem = React.createClass({
         />
       </li>
     );
-  },
-});
+  }
+}
 
 export default ElementListItem;

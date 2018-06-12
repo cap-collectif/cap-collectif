@@ -10,41 +10,39 @@ import Loader from '../Ui/Loader';
 import IgnoreButton from './Ignore/IgnoreButton';
 import UpdateButton from './Edit/UpdateButton';
 
-const FolderManager = React.createClass({
-  propTypes: {
+class FolderManager extends React.Component {
+  static propTypes = {
     synthesis: React.PropTypes.object,
-  },
+  };
 
-  getInitialState() {
-    return {
-      elements: [],
-      expanded: {
-        root: true,
-      },
-      isLoading: true,
-    };
-  },
+  state = {
+    elements: [],
+    expanded: {
+      root: true,
+    },
+    isLoading: true,
+  };
 
   componentWillMount() {
     SynthesisElementStore.addChangeListener(this.onChange);
-  },
+  }
 
   componentDidMount() {
     this.loadElementsTreeFromServer();
-  },
+  }
 
   componentWillUnmount() {
     SynthesisElementStore.removeChangeListener(this.onChange);
-  },
+  }
 
-  onChange() {
+  onChange = () => {
     this.setState({
       elements: SynthesisElementStore.elements.notIgnoredTree,
       isLoading: false,
     });
-  },
+  };
 
-  toggleExpand(element) {
+  toggleExpand = element => {
     const { synthesis } = this.props;
     if (element.childrenCount !== element.children.length) {
       SynthesisElementActions.loadElementsTreeFromServer(synthesis.id, 'notIgnored', element.id);
@@ -54,14 +52,14 @@ const FolderManager = React.createClass({
     this.setState({
       expanded,
     });
-  },
+  };
 
-  loadElementsTreeFromServer() {
+  loadElementsTreeFromServer = () => {
     const { synthesis } = this.props;
     SynthesisElementActions.loadElementsTreeFromServer(synthesis.id, 'notIgnored');
-  },
+  };
 
-  renderButtons(element) {
+  renderButtons = element => {
     const { synthesis } = this.props;
     if (element.displayType === 'folder') {
       return (
@@ -72,9 +70,9 @@ const FolderManager = React.createClass({
       );
     }
     return null;
-  },
+  };
 
-  renderItemCaret(element) {
+  renderItemCaret = element => {
     const classes = classNames({
       tree__item__caret: true,
       'cap-arrow-67': this.state.expanded[element.id],
@@ -83,9 +81,9 @@ const FolderManager = React.createClass({
     if (element.childrenCount > 0) {
       return <i className={classes} onClick={this.toggleExpand.bind(this, element)} />;
     }
-  },
+  };
 
-  renderTreeItems(elements, level) {
+  renderTreeItems = (elements, level) => {
     if (elements) {
       return (
         <ul className={`tree__list tree--level-${level}`}>
@@ -102,9 +100,9 @@ const FolderManager = React.createClass({
         </ul>
       );
     }
-  },
+  };
 
-  renderTreeItemContent(element) {
+  renderTreeItemContent = element => {
     return (
       <div className="tree__item__content box">
         {this.renderItemCaret(element)}
@@ -122,7 +120,7 @@ const FolderManager = React.createClass({
         </span>
       </div>
     );
-  },
+  };
 
   render() {
     return (
@@ -131,7 +129,7 @@ const FolderManager = React.createClass({
         {this.renderTreeItems(this.state.elements, 0)}
       </div>
     );
-  },
-});
+  }
+}
 
 export default FolderManager;
