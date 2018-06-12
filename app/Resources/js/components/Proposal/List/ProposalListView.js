@@ -56,8 +56,8 @@ export const queryVariables = (filters: Filters, order: ?string) => {
   // TO update for prod values, and delete after
   const isMontreuil =
     window.location.href ===
-    'http://montreuilpreprod.cap-collectif.com/project/budget-participatif-2017/selection/vote-quartier';
-  const defaultDistrictId = '26370cca-6c96-11e7-ab12-0242ac110008';
+    'https://budgetparticipatif.montreuil.fr/project/budget-participatif-2017/selection/vote-par-quartier-2';
+  const defaultDistrictId = '51dad909-6e3e-11e8-a324-0242ac110005';
 
   return {
     orderBy: { field, direction },
