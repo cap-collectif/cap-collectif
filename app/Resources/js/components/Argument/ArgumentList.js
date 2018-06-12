@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Row, Col } from 'react-bootstrap';
@@ -7,33 +8,41 @@ import ArgumentActions from '../../actions/ArgumentActions';
 import ArgumentItem from './ArgumentItem';
 import Loader from '../Ui/Loader';
 
-const ArgumentList = React.createClass({
-  propTypes: {
-    opinion: React.PropTypes.object.isRequired,
-    type: React.PropTypes.string.isRequired,
-  },
+type Props = {
+  opinion: Object,
+  type: string,
+};
 
-  getInitialState() {
-    return {
-      arguments: [],
-      count: 0,
-      isLoading: true,
-      order: ArgumentStore.orderByType[this.getNumericType()],
-      type: this.getNumericType(),
-    };
-  },
+type State = {
+  arguments: Array<$FlowFixMe>,
+  count: number,
+  isLoading: boolean,
+  order: $FlowFixMe,
+  type: number,
+};
+
+export class ArgumentList extends React.Component<Props, State> {
+  static displayName = 'ArgumentList';
+
+  state = {
+    arguments: [],
+    count: 0,
+    isLoading: true,
+    order: ArgumentStore.orderByType[this.getNumericType()],
+    type: this.getNumericType(),
+  };
 
   componentWillMount() {
     ArgumentStore.addChangeListener(this.onChange);
-  },
+  }
 
   componentDidMount() {
     this.loadArguments();
-  },
+  }
 
   componentWillUnmount() {
     ArgumentStore.removeChangeListener(this.onChange);
-  },
+  }
 
   onChange() {
     if (ArgumentStore.orderByType[this.state.type] === this.state.order) {
@@ -50,22 +59,23 @@ const ArgumentList = React.createClass({
       isLoading: true,
     });
     this.loadArguments();
-  },
+  }
 
   getNumericType() {
     const { type } = this.props;
     return type === 'no' ? 0 : 1;
-  },
+  }
 
   updateSelectedValue() {
+    // $FlowFixMe
     const value = $(ReactDOM.findDOMNode(this.refs.filter)).val();
     ArgumentActions.changeSortOrder(this.state.type, value);
-  },
+  }
 
   loadArguments() {
     const { opinion } = this.props;
     ArgumentActions.load(opinion, this.state.type);
-  },
+  }
 
   renderFilter() {
     const { type } = this.props;
@@ -98,7 +108,7 @@ const ArgumentList = React.createClass({
         </Col>
       );
     }
-  },
+  }
 
   render() {
     const { type } = this.props;
@@ -135,7 +145,7 @@ const ArgumentList = React.createClass({
         )}
       </div>
     );
-  },
-});
+  }
+}
 
 export default ArgumentList;

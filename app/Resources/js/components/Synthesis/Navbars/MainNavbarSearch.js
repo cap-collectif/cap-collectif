@@ -1,28 +1,29 @@
-// @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Navbar, Button } from 'react-bootstrap';
 import Input from '../../Form/Input';
 
-const MainNavbarSearch = React.createClass({
-  displayName: 'MainNavbarSearch',
+type Props = {
+  router?: Object,
+};
 
-  contextTypes: {
-    router: PropTypes.object.isRequired,
-  },
+type State = {
+  searchTerm: string,
+};
 
-  getInitialState() {
-    return {
-      searchTerm: '',
-    };
-  },
+class MainNavbarSearch extends React.Component<Props, State> {
+  static displayName = 'MainNavbarSearch';
 
-  submit(ev) {
+  state = {
+    searchTerm: '',
+  };
+
+  submit = ev => {
     ev.stopPropagation();
     ev.preventDefault();
     if (this.state.searchTerm.length > 0) {
-      this.context.router.push(`search/${this.state.searchTerm}`);
+      this.props.router.push(`search/${this.state.searchTerm}`);
     }
-  },
+  };
 
   render() {
     const searchButton = (
@@ -37,7 +38,7 @@ const MainNavbarSearch = React.createClass({
             type="text"
             placeholder="synthesis.edition.navbar.search"
             buttonAfter={searchButton}
-            onChange={(event: SyntheticInputEvent<>) => {
+            onChange={event => {
               this.setState({
                 searchTerm: event.target.value,
               });
@@ -46,7 +47,7 @@ const MainNavbarSearch = React.createClass({
         </form>
       </Navbar.Form>
     );
-  },
-});
+  }
+}
 
 export default MainNavbarSearch;
