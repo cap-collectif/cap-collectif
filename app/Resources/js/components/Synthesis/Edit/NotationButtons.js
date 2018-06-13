@@ -1,13 +1,13 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 
-class NotationButtons extends React.Component {
-  static propTypes = {
-    notation: React.PropTypes.number,
-    onChange: React.PropTypes.func,
-    block: React.PropTypes.bool,
-  };
+type Props = {
+  notation: number,
+  onChange: Function,
+  block: boolean,
+};
 
+class NotationButtons extends React.Component<Props> {
   getNotationStarsClasses = () => {
     const { notation } = this.props;
     const classes = [];
