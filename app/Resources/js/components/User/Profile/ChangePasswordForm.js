@@ -38,7 +38,7 @@ const validate = ({
 
 const onSubmit = (values: Object, dispatch: Dispatch, { reset, intl }) => {
   const input = {
-    currentPassword: values.current_password,
+    current_password: values.current_password,
     new: values.new_password,
   };
   return UpdateProfilePasswordMutation.commit({ input }).then(response => {

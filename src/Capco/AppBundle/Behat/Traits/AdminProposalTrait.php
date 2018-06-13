@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\Behat\Traits\Admin;
+namespace Capco\AppBundle\Behat\Traits;
 
 trait AdminProposalTrait
 {
@@ -185,17 +185,5 @@ trait AdminProposalTrait
     {
         $element = '#proposal-admin-page-tabs-pane-6 input[type="radio"][name="publicationStatus"][value="' . $status . '"]+span';
         $this->getCurrentPage()->find('css', $element);
-    }
-
-    /**
-     * @Then I click on button :id
-     */
-    public function iClickOnButton(string $id)
-    {
-        $this->getCurrentPage()->find('css', $id)->click();
-    }
-
-    public function theDonwloadedFileShouldStartWith($header)
-    {
     }
 }

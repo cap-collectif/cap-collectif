@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\Behat\Traits\Admin;
+namespace Capco\AppBundle\Behat\Traits;
 
 trait AdminProposalFormTrait
 {

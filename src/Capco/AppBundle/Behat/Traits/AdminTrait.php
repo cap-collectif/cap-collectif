@@ -1,11 +1,13 @@
 <?php
 
-namespace Capco\AppBundle\Behat\Traits\Admin;
+namespace Capco\AppBundle\Behat\Traits;
 
 trait AdminTrait
 {
     use AdminProposalTrait;
     use AdminProposalFormTrait;
+
+    use AdminUserTrait;
 
     /**
      * @When I go to the admin proposals list page
@@ -86,7 +88,14 @@ trait AdminTrait
      */
     public function iGoToTheAdminUserPageWithId(string $userId)
     {
-        var_dump($userId);
         $this->visitPageWithParams('admin user page', ['userId' => $userId]);
+    }
+
+    /**
+     * @Then I click on button :id
+     */
+    public function iClickOnButton(string $id)
+    {
+        $this->getCurrentPage()->find('css', $id)->click();
     }
 }

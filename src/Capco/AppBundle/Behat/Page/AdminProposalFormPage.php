@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\Behat\Page\Admin;
+namespace Capco\AppBundle\Behat\Page;
 
 use Capco\AppBundle\Behat\PageTrait;
 use Capco\AppBundle\Behat\Traits\AdminProposalFormTrait;

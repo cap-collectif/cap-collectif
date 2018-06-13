@@ -719,4 +719,14 @@ class ApplicationContext extends UserContext
             echo $exception->getMessage();
         }
     }
+
+    /**
+     * @Then The element :element should be disabled
+     */
+    public function theElementShouldBeDisabled($element)
+    {
+        $input = $this->getSession()->getPage()->find('css', $element);
+
+        \PHPUnit_Framework_TestCase::assertTrue($input->hasAttribute('disabled'));
+    }
 }
