@@ -215,7 +215,7 @@ export class UserAdminPersonalData extends React.Component<Props> {
                 disabled={invalid || submitting || !isViewerOrSuperAdmin}
                 type="submit"
                 bsStyle="primary"
-                id="personal-dataform-save">
+                id="user-admin-persona-data-save">
                 <FormattedMessage
                   id={submitting ? 'global.loading' : 'global.save_modifications'}
                 />

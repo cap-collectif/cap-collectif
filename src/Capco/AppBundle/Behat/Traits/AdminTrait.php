@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\Behat\Traits;
+namespace Capco\AppBundle\Behat\Traits\Admin;
 
 trait AdminTrait
 {
@@ -79,5 +79,14 @@ trait AdminTrait
     public function iGoToTheAdminProposalFormPageWithId(string $id)
     {
         $this->visitPageWithParams('admin proposal form page', ['id' => $id]);
+    }
+
+    /**
+     * @When I go to the admin user page with userId :userId
+     */
+    public function iGoToTheAdminUserPageWithId(string $userId)
+    {
+        var_dump($userId);
+        $this->visitPageWithParams('admin user page', ['userId' => $userId]);
     }
 }

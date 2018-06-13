@@ -123,6 +123,8 @@ services:
       # only for sf < 3.3
       class: Capco\AppBundle\GraphQL\Mutation\UpdateProfilePasswordMutation
       parent: Capco\AppBundle\GraphQL\Mutation\BaseUpdateProfile
+      calls:
+          - [setUserManager, ["@fos_user.user_manager.default"]]
       tags:
           - { name: overblog_graphql.mutation }
 

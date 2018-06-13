@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\Behat\Page;
+namespace Capco\AppBundle\Behat\Page\Admin;
 
 use Capco\AppBundle\Behat\PageTrait;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Page;

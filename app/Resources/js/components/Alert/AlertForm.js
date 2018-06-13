@@ -15,7 +15,6 @@ type Props = {
 export class AlertForm extends React.Component<Props> {
   render() {
     const { valid, invalid, submitSucceeded, submitFailed, submitting, errorMessage } = this.props;
-
     if (errorMessage) {
       return (
         <div className="alert__form_server-failed-message">

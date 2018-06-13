@@ -4,7 +4,6 @@ import {type IntlShape, injectIntl, FormattedMessage} from 'react-intl';
 import {reduxForm, type FormProps, Field, SubmissionError} from 'redux-form';
 import {createFragmentContainer, graphql} from 'react-relay';
 import {ButtonToolbar, Button} from 'react-bootstrap';
-import {connect, type MapStateToProps} from "react-redux";
 import type {Dispatch, State} from '../../../types';
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
@@ -15,7 +14,6 @@ type RelayProps = { user: UserAdminPassword_user };
 type Props = FormProps &
   RelayProps & {
   intl: IntlShape,
-  isViewerOrSuperAdmin: boolean,
 };
 type FormValues = {
   current_password: string,
@@ -39,7 +37,7 @@ const validate = (values: FormValues) => {
   return errors;
 };
 
-const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props, {reset, intl}) => {
+const onSubmit = (values: FormValues, dispatch: Dispatch, {reset, intl, ...props}) => {
   const input = {
     current_password: values.current_password,
     new: values.new_password,
@@ -75,7 +73,7 @@ export class UserAdminPassword extends React.Component<Props, State> {
       handleSubmit,
       submitting,
       error,
-      isViewerOrSuperAdmin,
+      user,
     } = this.props;
     return (
       <div className="box box-primary container-fluid">
@@ -91,7 +89,7 @@ export class UserAdminPassword extends React.Component<Props, State> {
               id="password-form-current"
               divClassName="col-sm-6"
               label={<FormattedMessage id="form.current_password"/>}
-              disabled={!isViewerOrSuperAdmin}
+              disabled={!user.isViewer}
             />
             <div className="clearfix"/>
             <Field
@@ -101,7 +99,7 @@ export class UserAdminPassword extends React.Component<Props, State> {
               id="password-form-new_password"
               divClassName="col-sm-6"
               label={<FormattedMessage id="form.new_password"/>}
-              disabled={!isViewerOrSuperAdmin}
+              disabled={!user.isViewer}
             />
             <div className="clearfix"/>
             <Field
@@ -111,15 +109,15 @@ export class UserAdminPassword extends React.Component<Props, State> {
               id="password-form-confirmation"
               divClassName="col-sm-6"
               label={<FormattedMessage id="form.new_password_confirmation"/>}
-              disabled={!isViewerOrSuperAdmin}
+              disabled={!user.isViewer}
             />
             <div className="clearfix"/>
             <ButtonToolbar className="col-sm-6 pl-0">
               <Button
-                disabled={invalid || submitting || !isViewerOrSuperAdmin}
+                disabled={invalid || submitting || !user.isViewer}
                 type="submit"
                 bsStyle="primary"
-                id="profile-password-save">
+                id="user-admin-password-save">
                 <FormattedMessage
                   id={submitting ? 'global.loading' : 'global.save_modifications'}
                 />
@@ -147,14 +145,7 @@ const form = reduxForm({
   form: formName,
 })(UserAdminPassword);
 
-const mapStateToProps: MapStateToProps<*, *, *> = (
-  state: State,
-  {user}: RelayProps,
-) => ({
-  isViewerOrSuperAdmin: user.isViewer || !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN'))
-});
-
-const container = connect(mapStateToProps)(injectIntl(form));
+const container = (injectIntl(form));
 
 export default createFragmentContainer(
   container,

@@ -2568,6 +2568,9 @@ input UpdateProfilePasswordInput {
 
   # The new password
   new: String!
+
+  # Id of user
+  userId: ID
   clientMutationId: String
 }
 

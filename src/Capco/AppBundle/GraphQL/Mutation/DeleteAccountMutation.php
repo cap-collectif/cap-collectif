@@ -49,6 +49,7 @@ class DeleteAccountMutation implements ContainerAwareInterface
         if ('HARD' === $deleteType && $user) {
             $this->hardDelete($user);
         }
+
         $this->anonymizeUser($user);
 
         $this->em->flush();
@@ -64,7 +65,7 @@ class DeleteAccountMutation implements ContainerAwareInterface
         $newsletter = $this->em->getRepository(NewsletterSubscription::class)->findOneBy(
             ['email' => $user->getEmail()]
         );
-        $userGroups = $this->userRepository->findBy(['user' => $user]);
+        $userGroups = $this->em->getRepository(UserGroup::class)->findBy(['user' => $user]);
         $userManager = $this->container->get('fos_user.user_manager');
 
         if ($newsletter) {
@@ -117,7 +118,6 @@ class DeleteAccountMutation implements ContainerAwareInterface
         $user->setLocale(null);
         $user->setTimezone(null);
         $user->setLocked(true);
-
         if ($user->getMedia()) {
             $media = $this->em->getRepository('CapcoMediaBundle:Media')->find($user->getMedia()->getId());
             $this->removeMedia($media);

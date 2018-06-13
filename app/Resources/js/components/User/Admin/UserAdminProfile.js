@@ -237,7 +237,7 @@ export class UserAdminProfile extends React.Component<Props, State> {
                 disabled={invalid || submitting || !isViewerOrSuperAdmin}
                 type="submit"
                 bsStyle="primary"
-                id="profile-form-save">
+                id="user-admin-profile-save">
                 <FormattedMessage
                   id={submitting ? 'global.loading' : 'global.save_modifications'}
                 />

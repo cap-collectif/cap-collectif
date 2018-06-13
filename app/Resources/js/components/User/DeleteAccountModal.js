@@ -116,7 +116,7 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                 <div
                   className={`panel ${softPanelChecked}`}
                   onClick={() => this.onPanelClick('SOFT')}>
-                  <div className="panel-body">
+                  <div className="panel-body" id="delete-account-soft">
                     <div className="row">
                       <div className="col-sm-7">
                         <Radio
@@ -163,7 +163,7 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                 <div
                   className={`panel ${hardPanelChecked}`}
                   onClick={() => this.onPanelClick('HARD')}>
-                  <div className="panel-body">
+                  <div className="panel-body"  id="delete-account-hard">
                     <div className="row">
                       <div className="col-sm-7">
                         <Radio
