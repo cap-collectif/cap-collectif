@@ -20,24 +20,15 @@ exports[`<LeafletMap /> should render a map with markers 1`] = `
   zoom={12}
 >
   <Decorated
-    attribution="© <a href\\"https://www.mapbox.com/about/maps/\\">Mapbox</a> © <a href=\\"http://osm.org/copyright\\">OpenStreetMap</a> <a href\\"https://www.mapbox.com/map-feedback/#/-74.5/40/10\\">Improve this map</a>"
+    attribution="© <a href=\\"https://www.mapbox.com/about/maps/\\">Mapbox</a> © <a href=\\"http://osm.org/copyright\\">OpenStreetMap</a> <a href=\\"https://www.mapbox.com/map-feedback/#/-74.5/40/10\\">Improve this map</a>"
     url="https://api.mapbox.com/styles/v1/capcollectif/cj4zmeym20uhr2smcmgbf49cz/tiles/256/{z}/{x}/{y}?access_token=***REMOVED***"
   />
   <r
     markers={Array []}
-    options={
-      Object {
-        "maxClusterRadius": 30,
-        "showCoverageOnHover": false,
-        "spiderfyOnMaxZoom": true,
-        "zoomToBoundsOnClick": true,
-      }
-    }
-    wrapperOptions={
-      Object {
-        "enableDefaultStyle": true,
-      }
-    }
+    maxClusterRadius={30}
+    showCoverageOnHover={false}
+    spiderfyOnMaxZoom={true}
+    zoomToBoundsOnClick={true}
   />
   <InjectIntl(LocateControl) />
   <InjectIntl(LeafletSearch) />

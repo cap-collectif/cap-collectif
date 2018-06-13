@@ -16,7 +16,6 @@ exports.config = {
       'react-toggle': ['style.css'],
       'react-datetime': ['css/react-datetime.css'],
       'leaflet': ['dist/leaflet.css'],
-      'react-leaflet-markercluster': ['dist/style.css'],
     },
   },
   paths: {

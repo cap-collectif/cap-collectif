@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { Map, TileLayer, GeoJSON } from 'react-leaflet-universal';
+import { Map, TileLayer, GeoJSON, Marker, Popup } from 'react-leaflet-universal';
 import { connect, type MapStateToProps, type Connector } from 'react-redux';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import LocateControl from './LocateControl';
@@ -55,15 +55,6 @@ export class LeafletMap extends Component<Props, ComponentState> {
     visible: true,
   };
 
-  static getStringPopup(marker: Object): string {
-    return `
-        <h2 class="h4 proposal__title">
-          <a href="${marker.url}">${marker.title}</a>
-        </h2>
-        Par : <a href="${marker.author.url}">${marker.author.username}</a>
-      `;
-  }
-
   constructor() {
     super();
     this.state = { loaded: false };
@@ -105,23 +96,6 @@ export class LeafletMap extends Component<Props, ComponentState> {
       opacity: 0.3,
     };
 
-    const markersList =
-      markers && markers.length > 0
-        ? markers.map(mark => ({
-            lat: mark.lat,
-            lng: mark.lng,
-            popup: LeafletMap.getStringPopup(mark),
-            options: {
-              icon: L.icon({
-                iconUrl: '/svg/marker.svg',
-                iconSize: [40, 40],
-                iconAnchor: [20, 40],
-                popupAnchor: [0, -40],
-              }),
-            },
-          }))
-        : [];
-
     return (
       <Map
         center={defaultMapOptions.center}
@@ -132,19 +106,37 @@ export class LeafletMap extends Component<Props, ComponentState> {
           height: '50vw',
         }}>
         <TileLayer
-          attribution="&copy; <a href&quot;https://www.mapbox.com/about/maps/&quot;>Mapbox</a> &copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> <a href&quot;https://www.mapbox.com/map-feedback/#/-74.5/40/10&quot;>Improve this map</a>"
+          attribution="&copy; <a href=&quot;https://www.mapbox.com/about/maps/&quot;>Mapbox</a> &copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> <a href=&quot;https://www.mapbox.com/map-feedback/#/-74.5/40/10&quot;>Improve this map</a>"
           url={`https://api.mapbox.com/styles/v1/capcollectif/cj4zmeym20uhr2smcmgbf49cz/tiles/256/{z}/{x}/{y}?access_token=${token}`}
         />
         <MarkerClusterGroup
-          wrapperOptions={{ enableDefaultStyle: true }}
-          options={{
-            spiderfyOnMaxZoom: true,
-            showCoverageOnHover: false,
-            zoomToBoundsOnClick: true,
-            maxClusterRadius: 30,
-          }}
-          markers={markersList}
-        />
+          spiderfyOnMaxZoom
+          showCoverageOnHover={false}
+          zoomToBoundsOnClick
+          maxClusterRadius={30}>
+          {markers &&
+            markers.length > 0 &&
+            markers.map((mark, key) => (
+              <Marker
+                key={key}
+                position={[mark.lat, mark.lng]}
+                icon={L.icon({
+                  iconUrl: '/svg/marker.svg',
+                  iconSize: [40, 40],
+                  iconAnchor: [20, 40],
+                  popupAnchor: [0, -40],
+                })}>
+                <Popup>
+                  <div>
+                    <h2 className="h4 proposal__title">
+                      <a href={mark.url}>{mark.title}</a>
+                    </h2>{' '}
+                    Par : <a href={mark.author.url}>{mark.author.username}</a>
+                  </div>
+                </Popup>
+              </Marker>
+            ))}
+        </MarkerClusterGroup>
         {geoJsons &&
           geoJsons.map((geoJson, key) => (
             <GeoJSON

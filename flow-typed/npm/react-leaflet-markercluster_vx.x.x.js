@@ -13,7 +13,8 @@
  * https://github.com/flowtype/flow-typed
  */
 
-declare module 'react-leaflet-markercluster' {
+declare module
+'react-leaflet-markercluster' {
   declare module.exports: any;
 }
 
