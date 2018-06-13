@@ -6396,6 +6396,10 @@ locate-path@^2.0.0:
     p-locate "^2.0.0"
     path-exists "^3.0.0"
 
+lodash-es@^4.0.0:
+  version "4.17.10"
+  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.10.tgz#62cd7104cdf5dd87f235a837f0ede0e8e5117e05"
+
 lodash-es@^4.17.3, lodash-es@^4.17.5, lodash-es@^4.2.1:
   version "4.17.5"
   resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.5.tgz#9fc6e737b1c4d151d8f9cae2247305d552ce748f"
@@ -8427,6 +8431,15 @@ react-dom@15.5.4:
     object-assign "^4.1.0"
     prop-types "~15.5.7"
 
+react-dom@16.0.0:
+  version "16.0.0"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.0.0.tgz#9cc3079c3dcd70d4c6e01b84aab2a7e34c303f58"
+  dependencies:
+    fbjs "^0.8.16"
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.0"
+
 react-dom@^15.3.2:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.6.2.tgz#41cfadf693b757faf2708443a1d1fd5a02bef730"
@@ -8530,12 +8543,12 @@ react-leaflet-universal@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/react-leaflet-universal/-/react-leaflet-universal-1.1.0.tgz#0efda955dcc0308a7cf79c430cb421ec84903e98"
 
-react-leaflet@^1.4.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/react-leaflet/-/react-leaflet-1.4.1.tgz#5cc502a34c1e710809fe33fc520483a03d5e3482"
+react-leaflet@1.9.1:
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/react-leaflet/-/react-leaflet-1.9.1.tgz#0a282d8d26f66ea2d719ebb8f4a5fa156b33b8c8"
   dependencies:
-    babel-runtime "^6.23.0"
     lodash "^4.0.0"
+    lodash-es "^4.0.0"
     warning "^3.0.0"
 
 react-linkify@^0.2.1:
@@ -8725,6 +8738,15 @@ react@15.5.4:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
     prop-types "^15.5.7"
+
+react@16.0.0:
+  version "16.0.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.0.0.tgz#ce7df8f1941b036f02b2cca9dbd0cb1f0e855e2d"
+  dependencies:
+    fbjs "^0.8.16"
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.0"
 
 "react@^0.14.0 || ^15.0.0":
   version "15.4.2"
