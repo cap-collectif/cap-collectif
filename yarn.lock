@@ -8539,9 +8539,9 @@ react-leaflet-markercluster@^1.1.8:
   dependencies:
     deep-equal "^1.0.1"
 
-react-leaflet-universal@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/react-leaflet-universal/-/react-leaflet-universal-1.1.0.tgz#0efda955dcc0308a7cf79c430cb421ec84903e98"
+react-leaflet-universal@1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/react-leaflet-universal/-/react-leaflet-universal-1.1.2.tgz#b16058caf71a9a73345266a97a97075590093c2c"
 
 react-leaflet@1.9.1:
   version "1.9.1"
