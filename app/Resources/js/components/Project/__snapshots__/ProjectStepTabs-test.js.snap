@@ -24,7 +24,9 @@ exports[`<ProposalUserVoteItem /> should render correctly without arrow & with a
             }
           }
         >
-          <li>
+          <li
+            key="0"
+          >
             <a
               className="d-flex"
               href="www.test.com"
@@ -99,7 +101,9 @@ exports[`<ProposalUserVoteItem /> should render correctly without arrow & with a
               />
             </svg>
           </li>
-          <li>
+          <li
+            key="1"
+          >
             <a
               className="d-flex"
               href="www.test.com"
@@ -181,6 +185,7 @@ exports[`<ProposalUserVoteItem /> should render correctly without arrow & with a
           </li>
           <li
             className="active"
+            key="2"
           >
             <a
               className="d-flex"
@@ -261,7 +266,9 @@ exports[`<ProposalUserVoteItem /> should render correctly without arrow & with a
               />
             </svg>
           </li>
-          <li>
+          <li
+            key="3"
+          >
             <a
               className="d-flex"
               href="www.test.com"
@@ -348,4 +355,4 @@ exports[`<ProposalUserVoteItem /> should render correctly without arrow & with a
 </div>
 `;
 
-exports[`<ProposalUserVoteItem /> should render null when there is only one step 1`] = `null`;
+exports[`<ProposalUserVoteItem /> should render null when there is only one step 1`] = `""`;

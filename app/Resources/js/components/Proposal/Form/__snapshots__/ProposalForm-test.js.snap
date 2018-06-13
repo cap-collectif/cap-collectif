@@ -130,6 +130,7 @@ exports[`<ProposalForm /> should render a create form 1`] = `
       values={Object {}}
     />
     <option
+      key="theme1"
       value="theme1"
     >
       Theme 1
@@ -155,11 +156,13 @@ exports[`<ProposalForm /> should render a create form 1`] = `
       values={Object {}}
     />
     <option
+      key="category1"
       value="category1"
     >
       Category 1
     </option>
     <option
+      key="category2"
       value="category2"
     >
       Category 2
@@ -200,11 +203,13 @@ exports[`<ProposalForm /> should render a create form 1`] = `
       values={Object {}}
     />
     <option
+      key="district1"
       value="district1"
     >
       District 1
     </option>
     <option
+      key="district2"
       value="district2"
     >
       District 2
@@ -416,6 +421,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
       values={Object {}}
     />
     <option
+      key="theme1"
       value="theme1"
     >
       Theme 1
@@ -441,11 +447,13 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
       values={Object {}}
     />
     <option
+      key="category1"
       value="category1"
     >
       Category 1
     </option>
     <option
+      key="category2"
       value="category2"
     >
       Category 2
@@ -486,11 +494,13 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
       values={Object {}}
     />
     <option
+      key="district1"
       value="district1"
     >
       District 1
     </option>
     <option
+      key="district2"
       value="district2"
     >
       District 2

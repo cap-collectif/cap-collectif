@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProposalDetailLikers /> should not render anything when proposal has no likers 1`] = `null`;
+exports[`<ProposalDetailLikers /> should not render anything when proposal has no likers 1`] = `""`;
 
 exports[`<ProposalDetailLikers /> should render a <OverlayTrigger /> with <Tooltip /> when proposal has likers 1`] = `
 <span

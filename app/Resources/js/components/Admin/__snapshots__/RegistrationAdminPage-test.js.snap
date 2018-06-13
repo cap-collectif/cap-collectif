@@ -15,8 +15,8 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       <Toggle
         icons={
           Object {
-            "checked": <Component />,
-            "unchecked": <Component />,
+            "checked": <Unknown />,
+            "unchecked": <Unknown />,
           }
         }
         onChange={[Function]}
@@ -52,8 +52,8 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       <Toggle
         icons={
           Object {
-            "checked": <Component />,
-            "unchecked": <Component />,
+            "checked": <Unknown />,
+            "unchecked": <Unknown />,
           }
         }
         onChange={[Function]}
@@ -83,8 +83,8 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       <Toggle
         icons={
           Object {
-            "checked": <Component />,
-            "unchecked": <Component />,
+            "checked": <Unknown />,
+            "unchecked": <Unknown />,
           }
         }
         onChange={[Function]}
@@ -117,8 +117,8 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       <Toggle
         icons={
           Object {
-            "checked": <Component />,
-            "unchecked": <Component />,
+            "checked": <Unknown />,
+            "unchecked": <Unknown />,
           }
         }
         onChange={[Function]}
@@ -153,8 +153,8 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
         disabled={true}
         icons={
           Object {
-            "checked": <Component />,
-            "unchecked": <Component />,
+            "checked": <Unknown />,
+            "unchecked": <Unknown />,
           }
         }
       />
@@ -185,8 +185,8 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
         disabled={true}
         icons={
           Object {
-            "checked": <Component />,
-            "unchecked": <Component />,
+            "checked": <Unknown />,
+            "unchecked": <Unknown />,
           }
         }
       />
@@ -215,8 +215,8 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       <Toggle
         icons={
           Object {
-            "checked": <Component />,
-            "unchecked": <Component />,
+            "checked": <Unknown />,
+            "unchecked": <Unknown />,
           }
         }
         onChange={[Function]}
@@ -246,8 +246,8 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       <Toggle
         icons={
           Object {
-            "checked": <Component />,
-            "unchecked": <Component />,
+            "checked": <Unknown />,
+            "unchecked": <Unknown />,
           }
         }
         onChange={[Function]}
@@ -308,8 +308,8 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       <Toggle
         icons={
           Object {
-            "checked": <Component />,
-            "unchecked": <Component />,
+            "checked": <Unknown />,
+            "unchecked": <Unknown />,
           }
         }
         onChange={[Function]}
@@ -364,8 +364,8 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
         disabled={false}
         icons={
           Object {
-            "checked": <Component />,
-            "unchecked": <Component />,
+            "checked": <Unknown />,
+            "unchecked": <Unknown />,
           }
         }
         onChange={[Function]}
@@ -401,8 +401,8 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       <Toggle
         icons={
           Object {
-            "checked": <Component />,
-            "unchecked": <Component />,
+            "checked": <Unknown />,
+            "unchecked": <Unknown />,
           }
         }
         onChange={[Function]}
@@ -438,8 +438,8 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       <Toggle
         icons={
           Object {
-            "checked": <Component />,
-            "unchecked": <Component />,
+            "checked": <Unknown />,
+            "unchecked": <Unknown />,
           }
         }
         onChange={[Function]}
@@ -469,8 +469,8 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       <Toggle
         icons={
           Object {
-            "checked": <Component />,
-            "unchecked": <Component />,
+            "checked": <Unknown />,
+            "unchecked": <Unknown />,
           }
         }
         onChange={[Function]}
@@ -503,8 +503,8 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       <Toggle
         icons={
           Object {
-            "checked": <Component />,
-            "unchecked": <Component />,
+            "checked": <Unknown />,
+            "unchecked": <Unknown />,
           }
         }
         onChange={[Function]}
@@ -539,8 +539,8 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
         disabled={true}
         icons={
           Object {
-            "checked": <Component />,
-            "unchecked": <Component />,
+            "checked": <Unknown />,
+            "unchecked": <Unknown />,
           }
         }
       />
@@ -571,8 +571,8 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
         disabled={true}
         icons={
           Object {
-            "checked": <Component />,
-            "unchecked": <Component />,
+            "checked": <Unknown />,
+            "unchecked": <Unknown />,
           }
         }
       />
@@ -601,8 +601,8 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       <Toggle
         icons={
           Object {
-            "checked": <Component />,
-            "unchecked": <Component />,
+            "checked": <Unknown />,
+            "unchecked": <Unknown />,
           }
         }
         onChange={[Function]}
@@ -632,8 +632,8 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       <Toggle
         icons={
           Object {
-            "checked": <Component />,
-            "unchecked": <Component />,
+            "checked": <Unknown />,
+            "unchecked": <Unknown />,
           }
         }
         onChange={[Function]}
@@ -701,8 +701,8 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       <Toggle
         icons={
           Object {
-            "checked": <Component />,
-            "unchecked": <Component />,
+            "checked": <Unknown />,
+            "unchecked": <Unknown />,
           }
         }
         onChange={[Function]}
@@ -757,8 +757,8 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
         disabled={true}
         icons={
           Object {
-            "checked": <Component />,
-            "unchecked": <Component />,
+            "checked": <Unknown />,
+            "unchecked": <Unknown />,
           }
         }
         onChange={[Function]}

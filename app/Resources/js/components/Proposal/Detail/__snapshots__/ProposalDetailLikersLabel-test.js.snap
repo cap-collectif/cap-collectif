@@ -27,7 +27,7 @@ exports[`<ProposalDetailLikersLabel /> should render a <FormattedMessage/> when 
 </span>
 `;
 
-exports[`<ProposalDetailLikersLabel /> should render nothing when no likers 1`] = `null`;
+exports[`<ProposalDetailLikersLabel /> should render nothing when no likers 1`] = `""`;
 
 exports[`<ProposalDetailLikersLabel /> should render truncated liker name when only one liker 1`] = `
 <span

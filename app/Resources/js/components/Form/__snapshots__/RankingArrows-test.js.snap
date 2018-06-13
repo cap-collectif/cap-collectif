@@ -10,11 +10,13 @@ exports[`<RankingArrows /> should render a button group with disabled ranking ar
 >
   <RankingArrow
     disabled={false}
+    key="right"
     onClick={[Function]}
     type="right"
   />
   <RankingArrow
     disabled={false}
+    key="left"
     onClick={[Function]}
     type="left"
   />

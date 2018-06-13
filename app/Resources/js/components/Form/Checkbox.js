@@ -1,6 +1,6 @@
 // @flow
-import React from 'react';
-import CheckboxGroup from 'react-checkbox-group';
+import * as React from 'react';
+import { CheckboxGroup } from 'react-checkbox-group';
 import classNames from 'classnames';
 import Input from './Input';
 import Other from './Other';

@@ -478,101 +478,121 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
                 values={Object {}}
               />
               <option
+                key="1"
                 value={1}
               >
                 1 - Le monde
               </option>
               <option
+                key="2"
                 value={2}
               >
                 2
               </option>
               <option
+                key="3"
                 value={3}
               >
                 3
               </option>
               <option
+                key="4"
                 value={4}
               >
                 4
               </option>
               <option
+                key="5"
                 value={5}
               >
                 5 - La masse continentale/le continent
               </option>
               <option
+                key="6"
                 value={6}
               >
                 6
               </option>
               <option
+                key="7"
                 value={7}
               >
                 7
               </option>
               <option
+                key="8"
                 value={8}
               >
                 8
               </option>
               <option
+                key="9"
                 value={9}
               >
                 9
               </option>
               <option
+                key="10"
                 value={10}
               >
                 10 - Ville
               </option>
               <option
+                key="11"
                 value={11}
               >
                 11
               </option>
               <option
+                key="12"
                 value={12}
               >
                 12
               </option>
               <option
+                key="13"
                 value={13}
               >
                 13
               </option>
               <option
+                key="14"
                 value={14}
               >
                 14
               </option>
               <option
+                key="15"
                 value={15}
               >
                 15 - Rues
               </option>
               <option
+                key="16"
                 value={16}
               >
                 16
               </option>
               <option
+                key="17"
                 value={17}
               >
                 17
               </option>
               <option
+                key="18"
                 value={18}
               >
                 18
               </option>
               <option
+                key="19"
                 value={19}
               >
                 19
               </option>
               <option
+                key="20"
                 value={20}
               >
                 20 - Immeubles

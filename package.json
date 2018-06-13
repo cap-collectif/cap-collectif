@@ -92,7 +92,7 @@
       "<rootDir>/jest-setup.js"
     ],
     "snapshotSerializers": [
-      "<rootDir>/node_modules/jest-serializer-enzyme"
+      "enzyme-to-json/serializer"
     ],
     "transform": {
       ".*": "<rootDir>/node_modules/babel-jest"
@@ -122,6 +122,7 @@
     "classnames": "^2.2.3",
     "clean-css-brunch": "^2.10.0",
     "diff": "^3.3.0",
+    "enzyme-to-json": "^3.3.4",
     "exports-loader": "^0.6.3",
     "fancybox": "^3.0.0",
     "flux": "^3.1.2",
@@ -149,7 +150,7 @@
     "react-async-script": "^0.9.1",
     "react-beautiful-dnd": "6.0.2",
     "react-bootstrap": "^0.31.2",
-    "react-checkbox-group": "https://github.com/cap-collectif/react-checkbox-group/tarball/296721a62a682c5e441bdd449704550b69257af9",
+    "react-checkbox-group": "4.0.0",
     "react-datetime": "^2.9.0",
     "react-dnd": "^2.4.0",
     "react-dnd-html5-backend": "^2.4.1",
@@ -173,7 +174,7 @@
     "react-relay": "^1.1.0",
     "react-router": "3.2.0",
     "react-router-bootstrap": "rr-v3",
-    "react-select": "1.0.0-rc.6",
+    "react-select": "1.2.1",
     "react-sortable-hoc": "^0.6.1",
     "react-toggle": "^4.0.1",
     "react-treebeard": "https://github.com/cap-collectif/react-treebeard/tarball/6995b4123e3f3d94a4fb9200f884b3371e168628",
@@ -194,9 +195,10 @@
   "devDependencies": {
     "@storybook/react": "^3.3.13",
     "babel-eslint": "^7.2.3",
-    "babel-jest": "^22.0.4",
+    "babel-jest": "^23.0.1",
     "bundlesize": "^0.15.3",
-    "enzyme": "^2.8.2",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^3.19.0",
     "eslint-brunch": "^3.12.0",
     "eslint-config-airbnb": "^15.1.0",
@@ -209,8 +211,7 @@
     "file-loader": "^1.1.11",
     "flow-bin": "^0.70.0",
     "flow-coverage-report": "^0.5.0",
-    "jest": "^22.0.4",
-    "jest-serializer-enzyme": "^1.0.0",
+    "jest": "23.0.1",
     "jest-styled-components": "^4.11.0-1",
     "lint-staged": "^6.0.0",
     "pre-commit": "^1.2.2",

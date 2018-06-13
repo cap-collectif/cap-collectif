@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<LeafletMap /> should not render a map with visible = false 1`] = `null`;
+exports[`<LeafletMap /> should not render a map with visible = false 1`] = `""`;
 
 exports[`<LeafletMap /> should render a map with markers 1`] = `
 <Decorated

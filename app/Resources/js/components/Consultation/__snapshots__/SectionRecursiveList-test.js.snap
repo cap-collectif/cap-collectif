@@ -4,6 +4,7 @@ exports[`<SectionRecursiveList /> renders correcty 1`] = `
 <div>
   <SectionList
     consultation={Object {}}
+    key="0"
     level={0}
     section={
       Object {
@@ -13,6 +14,7 @@ exports[`<SectionRecursiveList /> renders correcty 1`] = `
   />
   <SectionList
     consultation={Object {}}
+    key="1"
     level={0}
     section={
       Object {

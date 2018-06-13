@@ -5,6 +5,7 @@ exports[`<ProjectsList /> should render correctly 1`] = `
   className="d-flex flex-wrap"
 >
   <ProjectPreview
+    key="0"
     project={
       Object {
         "hasParticipativeStep": false,
@@ -13,6 +14,7 @@ exports[`<ProjectsList /> should render correctly 1`] = `
     }
   />
   <ProjectPreview
+    key="1"
     project={
       Object {
         "hasParticipativeStep": true,

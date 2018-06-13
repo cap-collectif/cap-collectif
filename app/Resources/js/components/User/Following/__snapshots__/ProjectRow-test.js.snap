@@ -117,6 +117,7 @@ exports[`<ProjectRow /> should render the project 1 with his proposal displayed 
       bsClass="list-group"
     >
       <ProposalRow
+        key="0"
         proposal={
           Object {
             "id": "proposal1",
@@ -129,6 +130,7 @@ exports[`<ProjectRow /> should render the project 1 with his proposal displayed 
         }
       />
       <ProposalRow
+        key="1"
         proposal={
           Object {
             "id": "proposal2",
@@ -202,6 +204,7 @@ exports[`<ProjectRow /> should render the project 2 with his proposal displayed 
       bsClass="list-group"
     >
       <ProposalRow
+        key="0"
         proposal={
           Object {
             "id": "proposal3",

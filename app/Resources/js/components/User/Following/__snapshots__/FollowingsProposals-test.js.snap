@@ -53,6 +53,7 @@ exports[`<FollowingsProposals /> should render following proposal close 1`] = `
         id="all-projects"
       >
         <ProjectRow
+          key="0"
           project={
             Object {
               "id": "project1",
@@ -98,6 +99,7 @@ exports[`<FollowingsProposals /> should render following proposal close 1`] = `
           }
         />
         <ProjectRow
+          key="1"
           project={
             Object {
               "id": "project2",
@@ -219,6 +221,7 @@ exports[`<FollowingsProposals /> should render following proposal open 1`] = `
         id="all-projects"
       >
         <ProjectRow
+          key="0"
           project={
             Object {
               "id": "project1",
@@ -264,6 +267,7 @@ exports[`<FollowingsProposals /> should render following proposal open 1`] = `
           }
         />
         <ProjectRow
+          key="1"
           project={
             Object {
               "id": "project2",

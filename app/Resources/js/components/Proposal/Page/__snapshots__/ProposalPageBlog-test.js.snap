@@ -5,6 +5,7 @@ exports[`<ProposalPageBlog /> should render a list of posts 1`] = `
   className="media-list"
 >
   <Relay(Connect(Post))
+    key="0"
     post={
       Object {
         "$fragmentRefs": null,
@@ -12,6 +13,7 @@ exports[`<ProposalPageBlog /> should render a list of posts 1`] = `
     }
   />
   <Relay(Connect(Post))
+    key="1"
     post={
       Object {
         "$fragmentRefs": null,

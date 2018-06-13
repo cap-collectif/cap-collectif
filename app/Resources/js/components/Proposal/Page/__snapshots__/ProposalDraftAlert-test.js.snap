@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProposalDraftAlert /> should not render draft alert 1`] = `null`;
+exports[`<ProposalDraftAlert /> should not render draft alert 1`] = `""`;
 
 exports[`<ProposalDraftAlert /> should render draft alert 1`] = `
 <Alert

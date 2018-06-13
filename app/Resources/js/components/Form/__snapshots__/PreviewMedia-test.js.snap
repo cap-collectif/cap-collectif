@@ -23,6 +23,7 @@ exports[`<PreviewMedia /> should render correctly 1`] = `
     <Label
       bsClass="label"
       bsStyle="info"
+      key="0"
       style={
         Object {
           "marginRight": "5px",
@@ -50,4 +51,4 @@ exports[`<PreviewMedia /> should render correctly 1`] = `
 </div>
 `;
 
-exports[`<PreviewMedia /> should render correctly without medias 1`] = `null`;
+exports[`<PreviewMedia /> should render correctly without medias 1`] = `""`;

@@ -1,16 +1,16 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Nav, NavDropdown, MenuItem } from 'react-bootstrap';
 import UserAvatar from '../../User/UserAvatar';
 
-export class MainNavbarUser extends React.Component {
-  static displayName = 'MainNavbarUser';
+type Props = {
+  user: Object,
+  features: Object,
+};
 
-  static propTypes = {
-    user: PropTypes.object,
-    features: PropTypes.object,
-  };
+export class MainNavbarUser extends React.Component<Props> {
+  static displayName = 'MainNavbarUser';
 
   static defaultProps = {
     user: null,

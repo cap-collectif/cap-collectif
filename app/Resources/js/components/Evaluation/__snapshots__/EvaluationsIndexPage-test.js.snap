@@ -3,6 +3,7 @@
 exports[`<EvaluationsIndexPage /> render function renders correctly 1`] = `
 <div>
   <Relay(ProposalFormEvaluationList)
+    key="1"
     proposalForm={
       Object {
         "id": "1",
@@ -10,6 +11,7 @@ exports[`<EvaluationsIndexPage /> render function renders correctly 1`] = `
     }
   />
   <Relay(ProposalFormEvaluationList)
+    key="2"
     proposalForm={
       Object {
         "id": "2",
