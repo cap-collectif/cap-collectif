@@ -1,15 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Nav } from 'react-bootstrap';
 import ElementListItem from './ElementListItem';
 
 class ElementsList extends React.Component {
   static propTypes = {
-    elements: React.PropTypes.array.isRequired,
-    showBreadcrumb: React.PropTypes.bool,
-    showStatus: React.PropTypes.bool,
-    showNotation: React.PropTypes.bool,
-    hasLink: React.PropTypes.bool,
-    linkType: React.PropTypes.string,
+    elements: PropTypes.array.isRequired,
+    showBreadcrumb: PropTypes.bool,
+    showStatus: PropTypes.bool,
+    showNotation: PropTypes.bool,
+    hasLink: PropTypes.bool,
+    linkType: PropTypes.string,
   };
 
   static defaultProps = {

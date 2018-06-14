@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormattedDate } from 'react-intl';
 import moment from 'moment';
 
@@ -16,8 +17,8 @@ import DivideModal from './../Divide/DivideModal';
 
 class EditElement extends React.Component {
   static propTypes = {
-    synthesis: React.PropTypes.object,
-    params: React.PropTypes.object,
+    synthesis: PropTypes.object,
+    params: PropTypes.object,
   };
 
   state = {

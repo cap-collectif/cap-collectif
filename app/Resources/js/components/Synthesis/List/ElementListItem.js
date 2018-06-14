@@ -1,15 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ElementBlock from './../Element/ElementBlock';
 
 class ElementListItem extends React.Component {
   static propTypes = {
-    element: React.PropTypes.object.isRequired,
-    showBreadcrumb: React.PropTypes.bool,
-    showStatus: React.PropTypes.bool,
-    showNotation: React.PropTypes.bool,
-    hasLink: React.PropTypes.bool,
-    linkType: React.PropTypes.string,
+    element: PropTypes.object.isRequired,
+    showBreadcrumb: PropTypes.bool,
+    showStatus: PropTypes.bool,
+    showNotation: PropTypes.bool,
+    hasLink: PropTypes.bool,
+    linkType: PropTypes.string,
   };
 
   static defaultProps = {

@@ -1,6 +1,5 @@
 // @flow
 import React, { PureComponent } from 'react';
-import $ from 'jquery';
 import { FormattedDate, FormattedMessage } from 'react-intl';
 import { DatesInterval } from '../Utils/DatesInterval';
 import DarkenGradientMedia from '../Ui/DarkenGradientMedia';

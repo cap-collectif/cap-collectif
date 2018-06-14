@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Nav, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -12,11 +13,11 @@ import Loader from '../../Ui/Loader';
 
 class SideMenu extends React.Component {
   static propTypes = {
-    synthesis: React.PropTypes.object,
+    synthesis: PropTypes.object,
   };
 
   static contextTypes = {
-    router: React.PropTypes.object.isRequired,
+    router: PropTypes.object.isRequired,
   };
 
   state = {

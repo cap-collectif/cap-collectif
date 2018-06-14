@@ -1,11 +1,11 @@
 import React from 'react';
 
-class ElementNotation extends React.Component {
-  static propTypes = {
-    element: React.PropTypes.object,
-    classes: React.PropTypes.string,
-  };
+type Props = {
+  element: Object,
+  classes: string,
+};
 
+class ElementNotation extends React.Component<Props> {
   getNotationStarsClasses = () => {
     const { element } = this.props;
     const notation = element.notation;

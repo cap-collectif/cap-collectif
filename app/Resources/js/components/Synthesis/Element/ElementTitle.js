@@ -2,17 +2,17 @@ import React from 'react';
 import { Link } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 
-class ElementTitle extends React.Component {
-  static propTypes = {
-    element: React.PropTypes.object,
-    parent: React.PropTypes.object,
-    linkType: React.PropTypes.string,
-    hasLink: React.PropTypes.bool,
-    className: React.PropTypes.string,
-    style: React.PropTypes.object,
-    onClick: React.PropTypes.func,
-  };
+type Props = {
+  element: Object,
+  parent: Object,
+  linkType: string,
+  hasLink: boolean,
+  className: string,
+  style: Object,
+  onClick: Function,
+};
 
+class ElementTitle extends React.Component<Props> {
   static defaultProps = {
     hasLink: false,
     linkType: 'none',

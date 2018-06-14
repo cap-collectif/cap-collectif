@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import TreeView from '../TreeView';
 
 class Preview extends React.Component {
   static propTypes = {
-    synthesis: React.PropTypes.object,
+    synthesis: PropTypes.object,
   };
 
   static defaultProps = {

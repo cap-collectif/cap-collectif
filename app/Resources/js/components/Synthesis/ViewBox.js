@@ -1,13 +1,13 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import TreeView from './TreeView';
 
-class ViewBox extends React.Component {
-  static propTypes = {
-    synthesis: PropTypes.object.isRequired,
-    user: PropTypes.object,
-  };
+type Props = {
+  synthesis: Object,
+  user?: ?Object,
+};
 
+class ViewBox extends React.Component<Props> {
   static defaultProps = {
     user: null,
   };

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Modal, Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import ElementsList from './../List/ElementsList';
@@ -6,9 +7,9 @@ import Loader from '../../Ui/Loader';
 
 class ChildrenModal extends React.Component {
   static propTypes = {
-    elements: React.PropTypes.array.isRequired,
-    show: React.PropTypes.bool.isRequired,
-    toggle: React.PropTypes.func.isRequired,
+    elements: PropTypes.array.isRequired,
+    show: PropTypes.bool.isRequired,
+    toggle: PropTypes.func.isRequired,
   };
 
   constructor(props) {

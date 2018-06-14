@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import UpdateModal from './UpdateModal';
 
 class UpdateButton extends React.Component {
   static propTypes = {
-    synthesis: React.PropTypes.object.isRequired,
-    element: React.PropTypes.object.isRequired,
+    synthesis: PropTypes.object.isRequired,
+    element: PropTypes.object.isRequired,
   };
 
   state = {

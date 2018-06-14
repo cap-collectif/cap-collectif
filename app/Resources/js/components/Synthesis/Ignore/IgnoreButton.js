@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button, Modal } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { hashHistory } from 'react-router';
@@ -6,8 +7,8 @@ import SynthesisElementActions from '../../../actions/SynthesisElementActions';
 
 class IgnoreButton extends React.Component {
   static propTypes = {
-    synthesis: React.PropTypes.object,
-    element: React.PropTypes.object,
+    synthesis: PropTypes.object,
+    element: PropTypes.object,
   };
 
   state = {

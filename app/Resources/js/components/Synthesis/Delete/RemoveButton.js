@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 
 class RemoveButton extends React.Component {
   static propTypes = {
-    element: React.PropTypes.object,
-    onRemove: React.PropTypes.func,
+    element: PropTypes.object,
+    onRemove: PropTypes.func,
   };
 
   click = () => {

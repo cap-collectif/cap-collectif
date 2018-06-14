@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
@@ -12,7 +13,7 @@ import UpdateButton from './Edit/UpdateButton';
 
 class FolderManager extends React.Component {
   static propTypes = {
-    synthesis: React.PropTypes.object,
+    synthesis: PropTypes.object,
   };
 
   state = {

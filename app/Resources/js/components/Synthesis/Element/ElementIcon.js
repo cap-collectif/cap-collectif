@@ -1,13 +1,13 @@
 import React from 'react';
 import classNames from 'classnames';
 
-class ElementIcon extends React.Component {
-  static propTypes = {
-    element: React.PropTypes.object.isRequired,
-    className: React.PropTypes.string,
-    style: React.PropTypes.object,
-  };
+type Props = {
+  element: Object,
+  className: string,
+  style: Object,
+};
 
+class ElementIcon extends React.Component<Props> {
   static defaultProps = {
     className: '',
     style: {},

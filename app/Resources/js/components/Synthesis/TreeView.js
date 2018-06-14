@@ -82,11 +82,11 @@ const preToggleElement = (elements: Array<Object>, depth: number): Array<Object>
   });
 };
 
-class TreeView extends React.Component {
-  static propTypes = {
-    synthesis: React.PropTypes.object.isRequired,
-  };
+type Props = {
+  synthesis: Object,
+};
 
+class TreeView extends React.Component<Props> {
   state = {
     settings: SynthesisStore.settings,
     elements: [],

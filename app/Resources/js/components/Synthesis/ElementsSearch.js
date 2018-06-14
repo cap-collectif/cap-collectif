@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import ElementsList from './List/ElementsList';
 import Loader from '../Ui/Loader';
@@ -10,8 +11,8 @@ const Pagination = 15;
 
 class ElementsSearch extends React.Component {
   static propTypes = {
-    synthesis: React.PropTypes.object.isRequired,
-    params: React.PropTypes.object,
+    synthesis: PropTypes.object.isRequired,
+    params: PropTypes.object,
   };
 
   static defaultProps = {

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 import ElementTitle from './../Element/ElementTitle';
@@ -12,10 +13,10 @@ import SynthesisPourcentageTooltipLabel, {
 
 class ViewElement extends React.Component {
   static propTypes = {
-    element: React.PropTypes.object.isRequired,
-    parent: React.PropTypes.object,
-    settings: React.PropTypes.array.isRequired,
-    onExpandElement: React.PropTypes.func.isRequired,
+    element: PropTypes.object.isRequired,
+    parent: PropTypes.object,
+    settings: PropTypes.array.isRequired,
+    onExpandElement: PropTypes.func.isRequired,
   };
 
   static defaultProps = {

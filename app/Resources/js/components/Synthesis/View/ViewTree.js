@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { NAV_DEPTH } from '../../../constants/SynthesisElementConstants';
@@ -15,7 +16,7 @@ import SynthesisDisplayRules from '../../../services/SynthesisDisplayRules';
 
 class ViewTree extends React.Component {
   static propTypes = {
-    synthesis: React.PropTypes.object.isRequired,
+    synthesis: PropTypes.object.isRequired,
   };
 
   state = {

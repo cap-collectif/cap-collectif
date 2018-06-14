@@ -3,11 +3,11 @@ import { FormattedMessage } from 'react-intl';
 import { Nav, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
-class TopMenu extends React.Component {
-  static propTypes = {
-    synthesis: React.PropTypes.object,
-  };
+type Props = {
+  synthesis: Object,
+};
 
+class TopMenu extends React.Component<Props> {
   getMenuItems = () => {
     return [
       {

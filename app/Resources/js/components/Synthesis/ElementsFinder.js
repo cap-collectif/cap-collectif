@@ -5,18 +5,18 @@ import SynthesisElementActions from '../../actions/SynthesisElementActions';
 import ElementTitle from './Element/ElementTitle';
 import ElementIcon from './Element/ElementIcon';
 
-class ElementsFinder extends React.Component {
-  static propTypes = {
-    synthesis: React.PropTypes.object,
-    type: React.PropTypes.string,
-    selectedId: React.PropTypes.string,
-    elements: React.PropTypes.array,
-    expanded: React.PropTypes.object,
-    onSelect: React.PropTypes.func,
-    onExpand: React.PropTypes.func,
-    hiddenElementId: React.PropTypes.string,
-  };
+type Props = {
+  synthesis: Object,
+  type: string,
+  selectedId: string,
+  elements: Array<Object>,
+  expanded: Object,
+  onSelect: Function,
+  onExpand: Function,
+  hiddenElementId: string,
+};
 
+class ElementsFinder extends React.Component<Props> {
   static defaultProps = {
     selectedId: 'root',
     elements: {},

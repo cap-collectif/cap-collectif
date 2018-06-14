@@ -1,5 +1,6 @@
 import React from 'react';
 import createReactClass from 'create-react-class';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Button, ButtonGroup, Modal } from 'react-bootstrap';
 import { hashHistory } from 'react-router';
@@ -13,11 +14,11 @@ const PublishModal = createReactClass({
   displayName: 'PublishModal',
 
   propTypes: {
-    synthesis: React.PropTypes.object.isRequired,
-    element: React.PropTypes.object.isRequired,
-    show: React.PropTypes.bool.isRequired,
-    toggle: React.PropTypes.func.isRequired,
-    process: React.PropTypes.func,
+    synthesis: PropTypes.object.isRequired,
+    element: PropTypes.object.isRequired,
+    show: PropTypes.bool.isRequired,
+    toggle: PropTypes.func.isRequired,
+    process: PropTypes.func,
   },
 
   getDefaultProps() {

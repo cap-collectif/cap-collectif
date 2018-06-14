@@ -1,12 +1,12 @@
 import React from 'react';
 import ElementTitle from './ElementTitle';
 
-class ElementBreadcrumb extends React.Component {
-  static propTypes = {
-    element: React.PropTypes.object,
-    link: React.PropTypes.string,
-  };
+type Props = {
+  element: Object,
+  link: string,
+};
 
+class ElementBreadcrumb extends React.Component<Props> {
   static defaultProps = {
     link: 'edition',
   };

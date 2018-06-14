@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import ElementsList from './../List/ElementsList';
 import Loader from '../../Ui/Loader';
@@ -10,9 +11,9 @@ const Pagination = 15;
 
 class ElementsInbox extends React.Component {
   static propTypes = {
-    synthesis: React.PropTypes.object,
-    params: React.PropTypes.object,
-    searchTerm: React.PropTypes.string,
+    synthesis: PropTypes.object,
+    params: PropTypes.object,
+    searchTerm: PropTypes.string,
   };
 
   static defaultProps = {
