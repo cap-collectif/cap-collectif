@@ -40,6 +40,7 @@ class UserIsGrantedResolverSpec extends ObjectBehavior
 
         $viewer->hasRole('ROLE_USER')->willReturn(true);
         $viewer->hasRole('ROLE_ADMIN')->willReturn(false);
+        $viewer->hasRole('ROLE_SUPER_ADMIN')->willReturn(false);
 
         $viewer->getId()->willReturn('1');
         $userRequest->getId()->willReturn('1');
@@ -66,6 +67,7 @@ class UserIsGrantedResolverSpec extends ObjectBehavior
     function it_is_not_granted_as_other_user(User $viewer, User $userRequest, TokenStorage $tokenStorage, LoggerInterface $logger, TokenInterface $token)
     {
         $viewer->hasRole('ROLE_USER')->willReturn(true);
+        $viewer->hasRole('ROLE_SUPER_ADMIN')->willReturn(false);
         $viewer->getId()->willReturn('1');
         $userRequest->getId()->willReturn('3');
 
@@ -81,6 +83,7 @@ class UserIsGrantedResolverSpec extends ObjectBehavior
     {
         $viewer->hasRole('ROLE_USER')->willReturn(true);
         $viewer->hasRole('ROLE_ADMIN')->willReturn(false);
+        $viewer->hasRole('ROLE_SUPER_ADMIN')->willReturn(false);
 
         $userInToken->hasRole('ROLE_USER')->willReturn(true);
         $userInToken->getRoles()->willReturn(['ROLE_USER']);
@@ -94,5 +97,30 @@ class UserIsGrantedResolverSpec extends ObjectBehavior
 
         $this->beConstructedWith($tokenStorage, $logger);
         $this->isGranted($viewer, null)->shouldReturn(false);
+    }
+
+    function it_is_viewer(User $user, User $userInToken, User $userRequest, TokenStorage $tokenStorage, LoggerInterface $logger, TokenInterface $token)
+    {
+        $user->getId()->willReturn('1');
+        $user->hasRole('ROLE_USER')->willReturn(true);
+        $userRequest->getId()->willReturn('1');
+        $token->getUser()->willReturn($userInToken);
+        $tokenStorage->getToken()->willReturn($token);
+
+        $this->beConstructedWith($tokenStorage, $logger);
+        $this->isViewer($user, $userRequest)->shouldReturn(true);
+    }
+
+    function it_is_not_viewer(User $user, User $userInToken, User $userRequest, TokenStorage $tokenStorage, LoggerInterface $logger, TokenInterface $token)
+    {
+        $user->getId()->willReturn('1');
+        $user->hasRole('ROLE_USER')->willReturn(true);
+
+        $userRequest->getId()->willReturn('2');
+        $token->getUser()->willReturn($userInToken);
+        $tokenStorage->getToken()->willReturn($token);
+
+        $this->beConstructedWith($tokenStorage, $logger);
+        $this->isViewer($user, $userRequest)->shouldReturn(false);
     }
 }
