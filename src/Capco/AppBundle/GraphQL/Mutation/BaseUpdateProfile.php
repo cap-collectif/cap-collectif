@@ -12,16 +12,15 @@ use Symfony\Component\Form\FormFactory;
 
 abstract class BaseUpdateProfile
 {
+    public const ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
+    public const USER_ID = 'userId';
+    public const USER = 'user';
     protected $userRepository;
     protected $em;
     protected $formFactory;
     protected $logger;
     protected $user;
     protected $arguments;
-
-    public const ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
-    public const USER_ID = 'userId';
-    public const USER = 'user';
 
     public function __construct(
         EntityManagerInterface $em,
@@ -46,7 +45,7 @@ abstract class BaseUpdateProfile
 
         if ($user->hasRole(self::ROLE_SUPER_ADMIN) && !empty($this->arguments[self::USER_ID]) && $user->getId() !== $this->arguments[self::USER_ID]) {
             $user = $this->userRepository->find($this->arguments[self::USER_ID]);
-            if($user){
+            if ($user) {
                 $this->user = $user;
             }
         }

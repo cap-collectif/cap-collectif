@@ -98,6 +98,7 @@ trait AdminTrait
     {
         $this->visitPageWithParams('admin user list page');
     }
+
     /**
      * @Then I click on button :id
      */

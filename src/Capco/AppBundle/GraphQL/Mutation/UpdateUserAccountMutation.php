@@ -4,12 +4,8 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\UserAccountFormType;
-use Capco\UserBundle\Repository\UserRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
-use Monolog\Logger;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Symfony\Component\Form\FormFactory;
 
 class UpdateUserAccountMutation extends BaseUpdateProfile
 {
@@ -26,7 +22,7 @@ class UpdateUserAccountMutation extends BaseUpdateProfile
             throw new UserError('User not found.');
         }
 
-        if (!$viewer->hasRole(self::ROLE_SUPER_ADMIN) && \in_array(self::ROLE_SUPER_ADMIN, $arguments['roles'])) {
+        if (!$viewer->hasRole(self::ROLE_SUPER_ADMIN) && \in_array(self::ROLE_SUPER_ADMIN, $arguments['roles'], true)) {
             throw new UserError('You are not able to add super_admin role to a user.');
         }
 
@@ -44,7 +40,7 @@ class UpdateUserAccountMutation extends BaseUpdateProfile
         $form = $this->formFactory->create(UserAccountFormType::class, $user, ['csrf_protection' => false]);
         $form->submit($arguments, false);
         if (!$form->isValid()) {
-            $this->logger->error(__METHOD__.' : '.(string)$form->getErrors(true, false));
+            $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
 
             throw new UserError('Invalid data.');
         }
