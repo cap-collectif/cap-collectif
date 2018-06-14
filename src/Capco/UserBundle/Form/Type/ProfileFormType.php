@@ -46,7 +46,7 @@ class ProfileFormType extends AbstractType
 
         if ($this->toggleManager->isActive('user_type')) {
             $builder->add('userType', null, [
-                'empty_value' => 'user.profile.edit.no_user_type',
+                'empty_data' => 'user.profile.edit.no_user_type',
             ]);
         }
     }

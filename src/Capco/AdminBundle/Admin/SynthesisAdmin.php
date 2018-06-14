@@ -66,7 +66,7 @@ class SynthesisAdmin extends Admin
                 'class' => 'CapcoAppBundle:Steps\ConsultationStep',
                 'query_builder' => $this->createQueryBuilderForConsultationSteps($projectId),
                 'required' => false,
-                'empty_value' => 'admin.fields.synthesis.consultation_step_empty',
+                'empty_data' => 'admin.fields.synthesis.consultation_step_empty',
                 'help' => 'admin.help.synthesis.consultation_step',
         ]);
     }

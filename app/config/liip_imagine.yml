@@ -1,8 +1,14 @@
 liip_imagine:
+    resolvers:
+       default:
+          web_path: ~
+    loaders:
+        default:
+            filesystem:
+                data_root:  "%kernel.root_dir%/../web/media"
     driver: imagick
-    controller:
-        filter_action: 'SonataMediaBundle:Media:liipImagineFilter'
     filter_sets:
+        cache : ~
         admin:
             quality: 100
             filters:
