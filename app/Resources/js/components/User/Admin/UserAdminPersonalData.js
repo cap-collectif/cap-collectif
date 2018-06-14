@@ -1,16 +1,11 @@
 // @flow
 import * as React from 'react';
-import {type IntlShape, injectIntl, FormattedMessage} from 'react-intl';
-import {connect, type MapStateToProps} from 'react-redux';
-import {
-  reduxForm,
-  type FormProps,
-  Field,
-  SubmissionError,
-} from 'redux-form';
-import {createFragmentContainer, graphql} from 'react-relay';
-import {ButtonToolbar, Button} from 'react-bootstrap';
-import type {Dispatch, State} from '../../../types';
+import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
+import { connect, type MapStateToProps } from 'react-redux';
+import { reduxForm, type FormProps, Field, SubmissionError } from 'redux-form';
+import { createFragmentContainer, graphql } from 'react-relay';
+import { ButtonToolbar, Button } from 'react-bootstrap';
+import type { Dispatch, State } from '../../../types';
 import component from '../../Form/Field';
 import DateDropdownPicker from '../../Form/DateDropdownPicker';
 import AlertForm from '../../Alert/AlertForm';
@@ -20,16 +15,25 @@ import UserAdminPersonalData_user from './__generated__/UserAdminPersonalData_us
 type RelayProps = { user: UserAdminPersonalData_user };
 type Props = FormProps &
   RelayProps & {
-  intl: IntlShape,
-  initialValues: Object,
-  isViewerOrSuperAdmin: boolean
-};
+    intl: IntlShape,
+    initialValues: Object,
+    isViewerOrSuperAdmin: boolean,
+  };
 
 const formName = 'user-admin-edit-personal-data';
 
 const validate = (values: Object) => {
   const errors = {};
-  const addressFields = ['address', 'address2', 'city', 'zipCode', 'firstname', 'lastname', 'phone', 'email'];
+  const addressFields = [
+    'address',
+    'address2',
+    'city',
+    'zipCode',
+    'firstname',
+    'lastname',
+    'phone',
+    'email',
+  ];
   addressFields.forEach(value => {
     if (values[value] && values[value].length <= 2) {
       errors[value] = 'two-characters-minimum-required';
@@ -43,14 +47,14 @@ const validate = (values: Object) => {
 };
 
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
-  const {intl} = props;
+  const { intl } = props;
   const userId = props.user.id;
   const input = {
     ...values,
     userId,
   };
 
-  return UpdateProfilePersonalDataMutation.commit({input})
+  return UpdateProfilePersonalDataMutation.commit({ input })
     .then(response => {
       if (!response.updateProfilePersonalData || !response.updateProfilePersonalData.user) {
         throw new Error('Mutation "updateProfilePersonalData" failed.');
@@ -63,7 +67,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
         });
       } else {
         throw new SubmissionError({
-          _error: intl.formatMessage({id: 'global.error.server.form'}),
+          _error: intl.formatMessage({ id: 'global.error.server.form' }),
         });
       }
     });
@@ -80,7 +84,11 @@ export class UserAdminPersonalData extends React.Component<Props> {
       submitting,
       error,
       isViewerOrSuperAdmin,
+      user,
     } = this.props;
+
+    const emailConfirmedAt = user.emailConfirmedAt ? user.emailConfirmedAt.split(' ') : false;
+
     return (
       <div className="box box-primary container-fluid">
         <h2 className="page-header">
@@ -91,25 +99,49 @@ export class UserAdminPersonalData extends React.Component<Props> {
             <Field
               id="personal-data-email"
               name="email"
-              label={<FormattedMessage id="form.label_email"/>}
+              label={<FormattedMessage id="form.label_email" />}
               component={component}
               type="text"
               divClassName="col-sm-4"
               disabled={!isViewerOrSuperAdmin}
             />
-            <div className="clearfix"/>
+            <div className="clearfix" />
+            <Field
+              id="isEmailConfirmed"
+              name="isEmailConfirmed"
+              component={component}
+              isReduxForm
+              type="checkbox"
+              disabled
+              divClassName="col-sm-4"
+              children={
+                <div>
+                  <FormattedMessage id="confirmed-by-email" />{' '}
+                  {emailConfirmedAt ? (
+                    <FormattedMessage
+                      id={'global.dates.full_day'}
+                      values={{
+                        date: emailConfirmedAt[0],
+                        time: emailConfirmedAt[1],
+                      }}
+                    />
+                  ) : (
+                    ''
+                  )}
+                </div>
+              }
+            />
+            <div className="clearfix" />
             <Field
               name="firstname"
-              label={
-                <FormattedMessage id="form.label_firstname"/>
-              }
+              label={<FormattedMessage id="form.label_firstname" />}
               component={component}
               type="text"
               id="personal-data-form-firstname"
               divClassName="col-sm-4"
               disabled={!isViewerOrSuperAdmin}
             />
-            <div className="clearfix"/>
+            <div className="clearfix" />
             <Field
               id="personal-data-form-lastname"
               name="lastname"
@@ -117,27 +149,27 @@ export class UserAdminPersonalData extends React.Component<Props> {
               type="text"
               divClassName="col-sm-4"
               disabled={!isViewerOrSuperAdmin}
-              label={<FormattedMessage id="form.label_lastname"/>}
+              label={<FormattedMessage id="form.label_lastname" />}
             />
-            <div className="clearfix"/>
+            <div className="clearfix" />
             <Field
               name="gender"
               component={component}
-              label={<FormattedMessage id="form.label_gender"/>}
+              label={<FormattedMessage id="form.label_gender" />}
               type="select"
               id="personal-data-form-gender"
               divClassName="col-sm-4">
               <option value="MALE">
-                <FormattedMessage id="gender.male"/>
+                <FormattedMessage id="gender.male" />
               </option>
               <option value="FEMALE">
-                <FormattedMessage id="gender.female"/>
+                <FormattedMessage id="gender.female" />
               </option>
               <option value="OTHER">
-                <FormattedMessage id="gender.other"/>
+                <FormattedMessage id="gender.other" />
               </option>
             </Field>
-            <div className="clearfix"/>
+            <div className="clearfix" />
             <Field
               name={`dateOfBirth`}
               id="dateOfBirth"
@@ -149,17 +181,17 @@ export class UserAdminPersonalData extends React.Component<Props> {
               componentId="personal-data-date-of-birth"
               globalClassName="col-sm-4 form-group"
             />
-            <div className="clearfix"/>
+            <div className="clearfix" />
             <Field
               name="address"
               component={component}
               type="text"
               disabled={!isViewerOrSuperAdmin}
               id="personal-data-form-address"
-              label={<FormattedMessage id="form.label_address"/>}
+              label={<FormattedMessage id="form.label_address" />}
               divClassName="col-sm-4"
             />
-            <div className="clearfix"/>
+            <div className="clearfix" />
             <Field
               name="address2"
               component={component}
@@ -167,49 +199,49 @@ export class UserAdminPersonalData extends React.Component<Props> {
               disabled={!isViewerOrSuperAdmin}
               id="personal-data-form-address2"
               divClassName="col-sm-4"
-              label={<FormattedMessage id="form.label_address2"/>}
+              label={<FormattedMessage id="form.label_address2" />}
             />
-            <div className="clearfix"/>
+            <div className="clearfix" />
             <Field
               id="city"
               name="city"
               component={component}
               type="text"
               disabled={!isViewerOrSuperAdmin}
-              label={<FormattedMessage id="form.label_city"/>}
+              label={<FormattedMessage id="form.label_city" />}
               divClassName="col-sm-4"
             />
-            <div className="clearfix"/>
+            <div className="clearfix" />
             <Field
               id="zipCode"
               name="zipCode"
               component={component}
               type="text"
               disabled={!isViewerOrSuperAdmin}
-              label={<FormattedMessage id="form.label_zip_code"/>}
+              label={<FormattedMessage id="form.label_zip_code" />}
               divClassName="col-sm-4"
             />
-            <div className="clearfix"/>
+            <div className="clearfix" />
             <Field
               id="phone"
               name="phone"
               component={component}
               type="text"
               disabled={!isViewerOrSuperAdmin}
-              label={<FormattedMessage id="form.label_phone"/>}
+              label={<FormattedMessage id="form.label_phone" />}
               divClassName="col-sm-4"
             />
-            <div className="clearfix"/>
+            <div className="clearfix" />
             <Field
               id="phoneConfirmed"
               name="phoneConfirmed"
               component={component}
               type="checkbox"
               disabled
-              children={<FormattedMessage id="form.label_phone_confirmed"/>}
+              children={<FormattedMessage id="form.label_phone_confirmed" />}
               divClassName="col-sm-4"
             />
-            <div className="clearfix"/>
+            <div className="clearfix" />
             <ButtonToolbar className="box-content__toolbar">
               <Button
                 disabled={invalid || submitting || !isViewerOrSuperAdmin}
@@ -243,7 +275,7 @@ const form = reduxForm({
   form: formName,
 })(UserAdminPersonalData);
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, {user}: RelayProps,) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, { user }: RelayProps) => ({
   initialValues: {
     email: user.email ? user.email : null,
     firstname: user.firstname ? user.firstname : null,
@@ -256,8 +288,10 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, {user}: RelayPr
     zipCode: user.zipCode ? user.zipCode : null,
     phone: user ? user.phone : null,
     phoneConfirmed: user ? user.phoneConfirmed : null,
+    isEmailConfirmed: user ? user.isEmailConfirmed : null,
   },
-  isViewerOrSuperAdmin: user.isViewer || !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN'))
+  isViewerOrSuperAdmin:
+    user.isViewer || !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
 });
 
 const container = connect(mapStateToProps)(injectIntl(form));
@@ -266,19 +300,22 @@ const container = connect(mapStateToProps)(injectIntl(form));
 export default createFragmentContainer(
   container,
   graphql`
-  fragment UserAdminPersonalData_user on User {
-    id
-    email
-    firstname
-    lastname
-    gender
-    dateOfBirth
-    address
-    address2
-    city
-    zipCode
-    phone
-    phoneConfirmed
-    isViewer
-  }`,
+    fragment UserAdminPersonalData_user on User {
+      id
+      email
+      isEmailConfirmed
+      emailConfirmationSentAt
+      firstname
+      lastname
+      gender
+      dateOfBirth
+      address
+      address2
+      city
+      zipCode
+      phone
+      phoneConfirmed
+      isViewer
+    }
+  `,
 );

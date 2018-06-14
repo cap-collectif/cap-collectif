@@ -2970,6 +2970,8 @@ type User implements Node {
   isSubscribedToNewsLetter: Boolean
   subscribedToNewsLetterAt: DateTime
   isViewer: Boolean!
+  isEmailConfirmed: Boolean
+  emailConfirmationSentAt: DateTime
 }
 
 # A connection to a list of items.

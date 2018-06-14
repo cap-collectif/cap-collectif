@@ -283,3 +283,7 @@ User:
             isViewer:
                 type: "Boolean!"
                 resolve: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isViewer(user, value)'
+            isEmailConfirmed:
+                type: "Boolean"
+            emailConfirmationSentAt:
+                type: "DateTime"
