@@ -20,7 +20,7 @@ class UserIsGrantedResolver
     /**
      * if $user is tped, I receive an error 500. But I want a graphql error, so I need to check the instance of $user.
      *
-     * @param mixed $user
+     * @param mixed      $user
      * @param null|mixed $userRequest
      * @param null|mixed $context
      */
@@ -60,7 +60,7 @@ class UserIsGrantedResolver
         }
 
         $this->logger->warning(
-            __METHOD__.' : User with id '.$user->getId().' try to get information about user with id '.$token->getUser(
+            __METHOD__ . ' : User with id ' . $user->getId() . ' try to get information about user with id ' . $token->getUser(
             )->getId()
         );
 

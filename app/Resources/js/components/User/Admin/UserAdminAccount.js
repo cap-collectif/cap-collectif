@@ -1,16 +1,16 @@
 // @flow
 import * as React from 'react';
-import {type IntlShape, injectIntl, FormattedMessage} from 'react-intl';
-import {connect, type MapStateToProps} from 'react-redux';
-import {type FormProps, SubmissionError, reduxForm, Field} from 'redux-form';
-import {createFragmentContainer, graphql} from 'react-relay';
-import {ButtonToolbar, Button} from 'react-bootstrap';
+import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
+import { connect, type MapStateToProps } from 'react-redux';
+import { type FormProps, SubmissionError, reduxForm, Field } from 'redux-form';
+import { createFragmentContainer, graphql } from 'react-relay';
+import { ButtonToolbar, Button } from 'react-bootstrap';
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
-import type {GlobalState, Dispatch} from '../../../types';
+import type { GlobalState, Dispatch } from '../../../types';
 import UpdateUserAccountMutation from '../../../mutations/UpdateUserAccountMutation';
 import UserAdminAccount_user from './__generated__/UserAdminAccount_user.graphql';
-import DeleteAccountModal from "../DeleteAccountModal";
+import DeleteAccountModal from '../DeleteAccountModal';
 import SelectUserRoles from '../../Form/SelectUserRoles';
 
 type RelayProps = {
@@ -18,10 +18,10 @@ type RelayProps = {
 };
 type Props = FormProps &
   RelayProps & {
-  intl: IntlShape,
-  isViewerOrSuperAdmin: boolean,
-  userDeletedIsNotViewer: boolean,
-};
+    intl: IntlShape,
+    isViewerOrSuperAdmin: boolean,
+    userDeletedIsNotViewer: boolean,
+  };
 
 const formName = 'user-admin-edit-account';
 type FormValues = {
@@ -33,7 +33,7 @@ type FormValues = {
   locked: boolean,
 };
 
-const onSubmit = (values: FormValues, dispatch: Dispatch, {user}: Props) => {
+const onSubmit = (values: FormValues, dispatch: Dispatch, { user }: Props) => {
   const roles = values.roles.labels;
   const vip = values.vip;
   const enabled = values.enabled;
@@ -46,7 +46,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, {user}: Props) => {
     userId: user.id,
   };
 
-  return UpdateUserAccountMutation.commit({input})
+  return UpdateUserAccountMutation.commit({ input })
     .then(response => {
       if (!response.updateUserAccount || !response.updateUserAccount.user) {
         throw new Error('Mutation "updateUserAccount" failed.');
@@ -94,20 +94,22 @@ export class UserAdminAccount extends React.Component<Props, State> {
       userDeletedIsNotViewer,
     } = this.props;
 
-    const newsletterAt = user.subscribedToNewsLetterAt ? user.subscribedToNewsLetterAt.split(' ') : false;
+    const newsletterAt = user.subscribedToNewsLetterAt
+      ? user.subscribedToNewsLetterAt.split(' ')
+      : false;
     const expiredAt = user.expiredAt ? user.expiredAt.split(' ') : false;
 
     return (
       <div className="box box-primary container-fluid">
         <div className="box-header">
           <h2 className="box-title">
-            <FormattedMessage id="user.profile.edit.account"/>
+            <FormattedMessage id="user.profile.edit.account" />
           </h2>
         </div>
         <form onSubmit={handleSubmit}>
           <div className="box-header">
             <h3 className="box-title">
-              <FormattedMessage id="admin.fields.step.statuses"/>
+              <FormattedMessage id="admin.fields.step.statuses" />
             </h3>
           </div>
           <div className="box-content box-content__content-form">
@@ -116,21 +118,21 @@ export class UserAdminAccount extends React.Component<Props, State> {
               component={component}
               type="checkbox"
               id="vip"
-              children={<FormattedMessage id="form.label_vip"/>}
+              children={<FormattedMessage id="form.label_vip" />}
             />
             <Field
               name="locked"
               component={component}
               type="checkbox"
               id="enabled"
-              children={<FormattedMessage id="form.label_enabled"/>}
+              children={<FormattedMessage id="form.label_enabled" />}
             />
             <Field
               name="enabled"
               component={component}
               type="checkbox"
               id="locked"
-              children={<FormattedMessage id="form.label_locked"/>}
+              children={<FormattedMessage id="form.label_locked" />}
             />
             <Field
               name="expired"
@@ -140,27 +142,30 @@ export class UserAdminAccount extends React.Component<Props, State> {
               id="locked"
               children={
                 <div>
-                  <FormattedMessage id="form.label_expired"/> {expiredAt ?
-                  <FormattedMessage id={"global.dates.full_day"} values={{
-                    date: expiredAt[0],
-                    time: expiredAt[1],
-                  }}/> : ''}
+                  <FormattedMessage id="form.label_expired" />{' '}
+                  {expiredAt ? (
+                    <FormattedMessage
+                      id={'global.dates.full_day'}
+                      values={{
+                        date: expiredAt[0],
+                        time: expiredAt[1],
+                      }}
+                    />
+                  ) : (
+                    ''
+                  )}
                 </div>
               }
             />
             <div className="box-header">
               <h3 className="box-title">
-                <FormattedMessage id="form.label_real_roles"/>
+                <FormattedMessage id="form.label_real_roles" />
               </h3>
             </div>
-            <SelectUserRoles
-              id="user_roles"
-              name="roles"
-              label="form.label_real_roles"
-            />
+            <SelectUserRoles id="user_roles" name="roles" label="form.label_real_roles" />
             <div className="box-header">
               <h3 className="box-title">
-                <FormattedMessage id="subscription"/>
+                <FormattedMessage id="subscription" />
               </h3>
             </div>
             <Field
@@ -172,11 +177,18 @@ export class UserAdminAccount extends React.Component<Props, State> {
               disabled
               children={
                 <div>
-                  <FormattedMessage id="newsletter"/> {newsletterAt ?
-                  <FormattedMessage id={"global.dates.full_day"} values={{
-                    date: newsletterAt[0],
-                    time: newsletterAt[1],
-                  }}/> : ''}
+                  <FormattedMessage id="newsletter" />{' '}
+                  {newsletterAt ? (
+                    <FormattedMessage
+                      id={'global.dates.full_day'}
+                      values={{
+                        date: newsletterAt[0],
+                        time: newsletterAt[1],
+                      }}
+                    />
+                  ) : (
+                    ''
+                  )}
                 </div>
               }
             />
@@ -186,17 +198,17 @@ export class UserAdminAccount extends React.Component<Props, State> {
                 id="user_admin_account_save"
                 bsStyle="primary"
                 disabled={pristine || invalid || submitting}>
-                <FormattedMessage id={submitting ? 'global.loading' : 'global.save'}/>
+                <FormattedMessage id={submitting ? 'global.loading' : 'global.save'} />
               </Button>
               {isViewerOrSuperAdmin && (
                 <Button
                   id="delete-account-profile-button"
                   bsStyle="danger"
                   onClick={() => {
-                    this.setState({showDeleteAccountModal: true});
+                    this.setState({ showDeleteAccountModal: true });
                   }}
-                  style={{marginLeft: 15}}>
-                  <FormattedMessage id="global.delete"/>
+                  style={{ marginLeft: 15 }}>
+                  <FormattedMessage id="global.delete" />
                 </Button>
               )}
               <AlertForm
@@ -214,7 +226,7 @@ export class UserAdminAccount extends React.Component<Props, State> {
                 userDeletedIsNotViewer={userDeletedIsNotViewer}
                 show={this.state.showDeleteAccountModal}
                 handleClose={() => {
-                  this.setState({showDeleteAccountModal: false});
+                  this.setState({ showDeleteAccountModal: false });
                 }}
               />
             )}
@@ -232,20 +244,18 @@ const form = reduxForm({
   form: formName,
 })(UserAdminAccount);
 
-const mapStateToProps: MapStateToProps<*, *, *> = (
-  state: GlobalState,
-  {user}: RelayProps,
-) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, { user }: RelayProps) => ({
   initialValues: {
     vip: user.vip,
     enabled: user.enabled,
     locked: user.locked,
-    roles: {labels: user.roles},
+    roles: { labels: user.roles },
     expired: user.expired,
     newsletter: user.isSubscribedToNewsLetter,
   },
-  isViewerOrSuperAdmin: user.isViewer || !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
-  userDeletedIsNotViewer: user.id !== (state.user.user && state.user.user.id)
+  isViewerOrSuperAdmin:
+    user.isViewer || !!(state.user.user && state.user.user.roles.includes('ROLE_SUPER_ADMIN')),
+  userDeletedIsNotViewer: user.id !== (state.user.user && state.user.user.id),
 });
 
 const container = connect(mapStateToProps)(injectIntl(form));

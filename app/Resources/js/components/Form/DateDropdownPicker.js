@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { YearPicker, MonthPicker, DayPicker } from 'react-dropdown-date';
 import { Col } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import config from "../../config";
+import config from '../../config';
 
 type Props = {
   dayDefaultValue: string,
@@ -58,9 +58,9 @@ if (config.canUseDOM && window.locale) {
 
 export class DateDropdownPicker extends Component<Props, DateState> {
   static defaultProps = {
-    dayDefaultValue:"Jour",
-    monthDefaultValue:"Mois",
-    yearDefaultValue:"Année"
+    dayDefaultValue: 'Jour',
+    monthDefaultValue: 'Mois',
+    yearDefaultValue: 'Année',
   };
 
   constructor(props: Props) {

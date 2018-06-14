@@ -17,9 +17,7 @@ const mutation = graphql`
   }
 `;
 
-const commit = (
-  variables: CreateUserMutationVariables,
-): Promise<CreateUserMutationResponse> =>
+const commit = (variables: CreateUserMutationVariables): Promise<CreateUserMutationResponse> =>
   commitMutation(environment, {
     mutation,
     variables,

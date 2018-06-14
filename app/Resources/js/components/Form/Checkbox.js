@@ -42,7 +42,7 @@ class Checkbox extends React.Component<Props, State> {
     const otherValue = value.other;
 
     if (Array.isArray(newValue)) {
-      const objectToReturn = {other: otherValue, labels: newValue};
+      const objectToReturn = { other: otherValue, labels: newValue };
 
       onChange(objectToReturn);
       this.setState({
@@ -112,8 +112,8 @@ class Checkbox extends React.Component<Props, State> {
         )}
         {field.helpText && <span className="help-block">{field.helpText}</span>}
         {field.description && (
-          <div style={{paddingBottom: 15}}>
-            <ButtonBody body={field.description || ''}/>
+          <div style={{ paddingBottom: 15 }}>
+            <ButtonBody body={field.description || ''} />
           </div>
         )}
         <CheckboxGroup id={fieldName} ref={'choices'} name={fieldName} className="input-choices">

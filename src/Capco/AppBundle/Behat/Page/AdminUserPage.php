@@ -21,5 +21,4 @@ class AdminUserPage extends Page
     {
         $this->getElement('user save')->click();
     }
-
 }

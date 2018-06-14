@@ -1,30 +1,25 @@
 // @flow
-import React, {Component} from 'react';
-import {FormattedMessage, injectIntl, type IntlShape} from 'react-intl';
-import {ButtonGroup, Button, Modal} from 'react-bootstrap';
-import {
-  reduxForm,
-  type FormProps,
-  Field,
-  SubmissionError,
-} from 'redux-form';
+import React, { Component } from 'react';
+import { FormattedMessage, injectIntl, type IntlShape } from 'react-intl';
+import { ButtonGroup, Button, Modal } from 'react-bootstrap';
+import { reduxForm, type FormProps, Field, SubmissionError } from 'redux-form';
 import CloseButton from '../../Form/CloseButton';
 import component from '../../Form/Field';
 import CreateUserMutation from '../../../mutations/CreateUserMutation';
-import {isEmail} from "../../../services/Validator";
-import {form} from "../Registration/RegistrationForm";
+import { isEmail } from '../../../services/Validator';
+import { form } from '../Registration/RegistrationForm';
 import AlertForm from '../../Alert/AlertForm';
-import type {Dispatch} from "../../../types";
-import SelectUserRoles from "../../Form/SelectUserRoles";
+import type { Dispatch } from '../../../types';
+import SelectUserRoles from '../../Form/SelectUserRoles';
 
 const formName = 'user-admin-create';
 
 type Props = FormProps & {
-  intl: IntlShape
+  intl: IntlShape,
 };
 
 type State = {
-  showModal: boolean
+  showModal: boolean,
 };
 
 type FormValues = {
@@ -32,7 +27,7 @@ type FormValues = {
   email: string,
   plainPassword: ?string,
   roles: {
-    labels: []
+    labels: [],
   },
   vip: boolean,
   enabled: boolean,
@@ -53,7 +48,10 @@ const validate = (values: FormValues) => {
   if (values.plainPassword && values.plainPassword.length > 72) {
     errors.plainPassword = 'registration.constraints.password.max';
   }
-  if (values.roles && !values.roles.labels || values.roles && values.roles.labels.length === 0) {
+  if (
+    (values.roles && !values.roles.labels) ||
+    (values.roles && values.roles.labels.length === 0)
+  ) {
     errors.roles = 'please-select-at-least-1-option';
   }
 
@@ -63,16 +61,16 @@ const validate = (values: FormValues) => {
 // if I give FormValues I got an error "cause of  object type [1] is incompatible
 // with read-only array type [2] in property input.roles." So I give Object
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
-  const {intl} = props;
+  const { intl } = props;
   const roles = values.roles.labels;
   // delete values.roles, because we need values.roles.labels as roles
   delete values.roles;
   const input = {
     ...values,
-    roles
+    roles,
   };
 
-  return CreateUserMutation.commit({input})
+  return CreateUserMutation.commit({ input })
     .then(response => {
       if (!response.createUser || !response.createUser.user) {
         throw new Error('Mutation "createUser" failed.');
@@ -87,7 +85,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
         });
       } else {
         throw new SubmissionError({
-          _error: intl.formatMessage({id: 'global.error.server.form'}),
+          _error: intl.formatMessage({ id: 'global.error.server.form' }),
         });
       }
     });
@@ -112,30 +110,30 @@ export class UserAdminCreateButton extends Component<Props, State> {
       submitting,
       error,
     } = this.props;
-    const {showModal} = this.state;
+    const { showModal } = this.state;
 
     return (
       <div>
         <Button
           id="add-a-user"
           bsStyle="default"
-          style={{marginTop: 10}}
+          style={{ marginTop: 10 }}
           onClick={() => {
-            this.setState({showModal: true});
+            this.setState({ showModal: true });
           }}>
-          <FormattedMessage id="add-a-user"/>
+          <FormattedMessage id="add-a-user" />
         </Button>
         <Modal
           animation={false}
           show={showModal}
           onHide={() => {
-            this.setState({showModal: false});
+            this.setState({ showModal: false });
           }}
           bsSize="medium"
           aria-labelledby="contained-modal-title-lg">
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
-              <FormattedMessage id="add-a-user"/>
+              <FormattedMessage id="add-a-user" />
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -145,38 +143,32 @@ export class UserAdminCreateButton extends Component<Props, State> {
                 id="username"
                 component={component}
                 type="text"
-                label={<FormattedMessage id="registration.username"/>}
+                label={<FormattedMessage id="registration.username" />}
               />
               <Field
                 name="email"
                 id="email"
                 component={component}
                 type="email"
-                label={<FormattedMessage id="global.email"/>}
+                label={<FormattedMessage id="global.email" />}
               />
               <Field
                 name="plainPassword"
                 id="password"
                 component={component}
                 type="password"
-                label={<FormattedMessage id="registration.password"/>}
+                label={<FormattedMessage id="registration.password" />}
               />
-              <SelectUserRoles
-                id="user_roles"
-                name="roles"
-                label="form.label_real_roles"
-              />
+              <SelectUserRoles id="user_roles" name="roles" label="form.label_real_roles" />
               <Field
                 isOtherAllowed
                 id="user_statuses"
                 name="vip"
                 component={component}
                 type="checkbox"
-                label={
-                  <FormattedMessage id="admin.fields.step.statuses"/>
-                }
+                label={<FormattedMessage id="admin.fields.step.statuses" />}
                 value="vip"
-                children={<FormattedMessage id="form.label_vip"/>}
+                children={<FormattedMessage id="form.label_vip" />}
               />
               <Field
                 id="user_statuses"
@@ -185,7 +177,7 @@ export class UserAdminCreateButton extends Component<Props, State> {
                 type="checkbox"
                 isOtherAllowed
                 value="enabled"
-                children={<FormattedMessage id="list.label_enabled"/>}
+                children={<FormattedMessage id="list.label_enabled" />}
               />
               <Field
                 id="user_statuses"
@@ -194,7 +186,7 @@ export class UserAdminCreateButton extends Component<Props, State> {
                 type="checkbox"
                 value="locked"
                 isOtherAllowed
-                children={<FormattedMessage id="list.label_locked"/>}
+                children={<FormattedMessage id="list.label_locked" />}
               />
             </form>
           </Modal.Body>
@@ -202,7 +194,7 @@ export class UserAdminCreateButton extends Component<Props, State> {
             <ButtonGroup className="pl-0 d-flex d-inline-block">
               <CloseButton
                 onClose={() => {
-                  this.setState({showModal: false});
+                  this.setState({ showModal: false });
                 }}
               />
               <Button
@@ -238,4 +230,4 @@ const userForm = reduxForm({
   form: formName,
 })(UserAdminCreateButton);
 
-export default (injectIntl(userForm));
+export default injectIntl(userForm);

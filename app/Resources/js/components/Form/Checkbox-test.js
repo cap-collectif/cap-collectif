@@ -13,10 +13,10 @@ describe('<Checkbox />', () => {
     required: true,
     isOtherAllowed: false,
     choices: [
-      {id: 20, label: 'Athlétisme', useIdAsValue: true},
-      {id: 21, label: 'Natation', useIdAsValue: true},
-      {id: 22, label: 'Sports collectifs',},
-      {id: 23, label: 'Sports individuels'},
+      { id: 20, label: 'Athlétisme', useIdAsValue: true },
+      { id: 21, label: 'Natation', useIdAsValue: true },
+      { id: 22, label: 'Sports collectifs' },
+      { id: 23, label: 'Sports individuels' },
     ],
   };
   const props = {
@@ -39,7 +39,7 @@ describe('<Checkbox />', () => {
   });
 
   it('should render with an other field', () => {
-    const wrapper = shallow(<Checkbox field={{...field, isOtherAllowed: true}} {...props} />);
+    const wrapper = shallow(<Checkbox field={{ ...field, isOtherAllowed: true }} {...props} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

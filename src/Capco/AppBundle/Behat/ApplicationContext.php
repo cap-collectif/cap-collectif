@@ -691,6 +691,18 @@ class ApplicationContext extends UserContext
         $this->cookieConsented = true;
     }
 
+    /**
+     * @Then The element :element should be disabled
+     *
+     * @param mixed $element
+     */
+    public function theElementShouldBeDisabled($element)
+    {
+        $input = $this->getSession()->getPage()->find('css', $element);
+
+        \PHPUnit_Framework_TestCase::assertTrue($input->hasAttribute('disabled'));
+    }
+
     private function visitPageWithParams($page, $params = [])
     {
         $this->currentPage = $page;
@@ -718,15 +730,5 @@ class ApplicationContext extends UserContext
         } catch (\Exception $exception) {
             echo $exception->getMessage();
         }
-    }
-
-    /**
-     * @Then The element :element should be disabled
-     */
-    public function theElementShouldBeDisabled($element)
-    {
-        $input = $this->getSession()->getPage()->find('css', $element);
-
-        \PHPUnit_Framework_TestCase::assertTrue($input->hasAttribute('disabled'));
     }
 }

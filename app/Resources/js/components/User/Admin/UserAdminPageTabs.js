@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
 import { injectIntl, type IntlShape } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
-import UserAdminAccount from "./UserAdminAccount";
-import UserAdminProfile from "./UserAdminProfile";
+import UserAdminAccount from './UserAdminAccount';
+import UserAdminProfile from './UserAdminProfile';
 import UserAdminPageTabs_user from './__generated__/UserAdminPageTabs_user.graphql';
-import UserAdminPersonalData from "./UserAdminPersonalData";
-import UserAdminPassword from "./UserAdminPassword";
+import UserAdminPersonalData from './UserAdminPersonalData';
+import UserAdminPassword from './UserAdminPassword';
 
 type DefaultProps = void;
 type Props = { user: UserAdminPageTabs_user, intl: IntlShape };

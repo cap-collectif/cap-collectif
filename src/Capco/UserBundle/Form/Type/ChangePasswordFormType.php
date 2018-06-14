@@ -2,7 +2,6 @@
 
 namespace Capco\UserBundle\Form\Type;
 
-use Capco\UserBundle\Entity\UserType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;

@@ -1,10 +1,10 @@
 // @flow
 import * as React from 'react';
-import {type IntlShape, injectIntl, FormattedMessage} from 'react-intl';
-import {reduxForm, type FormProps, Field, SubmissionError} from 'redux-form';
-import {createFragmentContainer, graphql} from 'react-relay';
-import {ButtonToolbar, Button} from 'react-bootstrap';
-import type {Dispatch, State} from '../../../types';
+import { type IntlShape, injectIntl, FormattedMessage } from 'react-intl';
+import { reduxForm, type FormProps, Field, SubmissionError } from 'redux-form';
+import { createFragmentContainer, graphql } from 'react-relay';
+import { ButtonToolbar, Button } from 'react-bootstrap';
+import type { Dispatch, State } from '../../../types';
 import component from '../../Form/Field';
 import AlertForm from '../../Alert/AlertForm';
 import UpdateProfilePasswordMutation from '../../../mutations/UpdateProfilePasswordMutation';
@@ -13,8 +13,8 @@ import UserAdminPassword_user from './__generated__/UserAdminPassword_user.graph
 type RelayProps = { user: UserAdminPassword_user };
 type Props = FormProps &
   RelayProps & {
-  intl: IntlShape,
-};
+    intl: IntlShape,
+  };
 type FormValues = {
   current_password: string,
   new_password: string,
@@ -31,19 +31,23 @@ const validate = (values: FormValues) => {
   if (values.new_password && values.new_password.length < 8) {
     errors.new_password = 'fos_user.new_password.short';
   }
-  if (values.new_password && values.new_password_confirmation && values.new_password_confirmation !== values.new_password) {
+  if (
+    values.new_password &&
+    values.new_password_confirmation &&
+    values.new_password_confirmation !== values.new_password
+  ) {
     errors.new_password_confirmation = 'fos_user.password.mismatch';
   }
   return errors;
 };
 
-const onSubmit = (values: FormValues, dispatch: Dispatch, {reset, intl, ...props}) => {
+const onSubmit = (values: FormValues, dispatch: Dispatch, { reset, intl, ...props }) => {
   const input = {
     current_password: values.current_password,
     new: values.new_password,
-    userId: props.user.id
+    userId: props.user.id,
   };
-  return UpdateProfilePasswordMutation.commit({input}).then(response => {
+  return UpdateProfilePasswordMutation.commit({ input }).then(response => {
     if (
       !response.updateProfilePassword ||
       !response.updateProfilePassword.user ||
@@ -55,7 +59,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, {reset, intl, ...props
         });
       } else {
         throw new SubmissionError({
-          _error: intl.formatMessage({id: 'global.error.server.form'}),
+          _error: intl.formatMessage({ id: 'global.error.server.form' }),
         });
       }
     }
@@ -78,7 +82,7 @@ export class UserAdminPassword extends React.Component<Props, State> {
     return (
       <div className="box box-primary container-fluid">
         <h2 className="page-header">
-          <FormattedMessage id="user.profile.edit.password"/>
+          <FormattedMessage id="user.profile.edit.password" />
         </h2>
         <form onSubmit={handleSubmit}>
           <div className="box-content box-content__content-form">
@@ -88,30 +92,30 @@ export class UserAdminPassword extends React.Component<Props, State> {
               name="current_password"
               id="password-form-current"
               divClassName="col-sm-6"
-              label={<FormattedMessage id="form.current_password"/>}
+              label={<FormattedMessage id="form.current_password" />}
               disabled={!user.isViewer}
             />
-            <div className="clearfix"/>
+            <div className="clearfix" />
             <Field
               type="password"
               component={component}
               name="new_password"
               id="password-form-new_password"
               divClassName="col-sm-6"
-              label={<FormattedMessage id="form.new_password"/>}
+              label={<FormattedMessage id="form.new_password" />}
               disabled={!user.isViewer}
             />
-            <div className="clearfix"/>
+            <div className="clearfix" />
             <Field
               type="password"
               component={component}
               name="new_password_confirmation"
               id="password-form-confirmation"
               divClassName="col-sm-6"
-              label={<FormattedMessage id="form.new_password_confirmation"/>}
+              label={<FormattedMessage id="form.new_password_confirmation" />}
               disabled={!user.isViewer}
             />
-            <div className="clearfix"/>
+            <div className="clearfix" />
             <ButtonToolbar className="col-sm-6 pl-0">
               <Button
                 disabled={invalid || submitting || !user.isViewer}
@@ -145,13 +149,14 @@ const form = reduxForm({
   form: formName,
 })(UserAdminPassword);
 
-const container = (injectIntl(form));
+const container = injectIntl(form);
 
 export default createFragmentContainer(
   container,
   graphql`
-  fragment UserAdminPassword_user on User {
-    id
-    isViewer
-  }`,
+    fragment UserAdminPassword_user on User {
+      id
+      isViewer
+    }
+  `,
 );

@@ -18,12 +18,10 @@ trait PageTrait
         throw new \Exception(sprintf('"%s" not found in array', $name));
     }
 
-
     public function clickOnButton($button)
     {
         $this->getElement($button)->click();
     }
-
 
     public function fillElementWithValue(string $element, string $value)
     {
@@ -32,6 +30,6 @@ trait PageTrait
 
     public function clickOnTab($tab)
     {
-        $this->getElement('user '.$tab.' tab')->click();
+        $this->getElement('user ' . $tab . ' tab')->click();
     }
 }

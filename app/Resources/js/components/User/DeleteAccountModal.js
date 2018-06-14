@@ -1,9 +1,9 @@
 // @flow
-import React, {Component} from 'react';
-import {FormattedMessage, FormattedHTMLMessage} from 'react-intl';
-import {Modal, Button, Radio} from 'react-bootstrap';
-import {createFragmentContainer, graphql} from 'react-relay';
-import type {DeleteAccountModal_viewer} from './__generated__/DeleteAccountModal_viewer.graphql';
+import React, { Component } from 'react';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { Modal, Button, Radio } from 'react-bootstrap';
+import { createFragmentContainer, graphql } from 'react-relay';
+import type { DeleteAccountModal_viewer } from './__generated__/DeleteAccountModal_viewer.graphql';
 import DefaultAvatar from './DefaultAvatar';
 import CloseButton from '../Form/CloseButton';
 import DeleteAccountMutation from '../../mutations/DeleteAccountMutation';
@@ -11,14 +11,14 @@ import DeleteAccountMutation from '../../mutations/DeleteAccountMutation';
 const formName = 'delete-user';
 
 type RelayProps = {
-  viewer: DeleteAccountModal_viewer
+  viewer: DeleteAccountModal_viewer,
 };
 
 type Props = RelayProps & {
   show: boolean,
   handleClose: () => void,
   redirectToAdminUrl: boolean,
-  userDeletedIsNotViewer: boolean
+  userDeletedIsNotViewer: boolean,
 };
 
 type ModalState = {
@@ -40,8 +40,10 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
   };
 
   delete = () => {
-    const {redirectToAdminUrl, userDeletedIsNotViewer, viewer} = this.props;
-    DeleteAccountMutation.commit({input: {type: this.state.removalType, userId: viewer.id}}).then(() => {
+    const { redirectToAdminUrl, userDeletedIsNotViewer, viewer } = this.props;
+    DeleteAccountMutation.commit({
+      input: { type: this.state.removalType, userId: viewer.id },
+    }).then(() => {
       setTimeout(() => {
         if (redirectToAdminUrl && userDeletedIsNotViewer) {
           window.location = `/admin/capco/user/user/list`;
@@ -57,7 +59,7 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
       this.state.removalType === 'SOFT' ? 'panel-primary delete__panel__checked' : 'panel-default';
     const hardPanelChecked =
       this.state.removalType === 'HARD' ? 'panel-primary delete__panel__checked' : 'panel-default';
-    const {show, viewer} = this.props;
+    const { show, viewer } = this.props;
     const removalName = 'type-of-removal';
     return (
       <div>
@@ -71,7 +73,7 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
               <b>
-                <FormattedMessage id="account-delete-confirmation"/>
+                <FormattedMessage id="account-delete-confirmation" />
               </b>
             </Modal.Title>
           </Modal.Header>
@@ -79,21 +81,21 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
             <form name={formName}>
               <p>
                 <b>
-                  <FormattedMessage id="account-delete-warning"/>
+                  <FormattedMessage id="account-delete-warning" />
                 </b>
               </p>
               <div className="row">
                 <div className="col-sm-1">
-                  <i className="cap cap-id-8 delete__modal__icon primary"/>
+                  <i className="cap cap-id-8 delete__modal__icon primary" />
                 </div>
                 <p className="col-sm-11">
                   <FormattedHTMLMessage
                     id="alias-name-information"
-                    values={{profileLink: '/profile/edit-profile'}}
+                    values={{ profileLink: '/profile/edit-profile' }}
                   />
                 </p>
                 <div className="col-sm-1">
-                  <i className="cap cap-download-12 delete__modal__icon primary"/>
+                  <i className="cap cap-download-12 delete__modal__icon primary" />
                 </div>
                 <p className="col-sm-11">
                   <FormattedHTMLMessage
@@ -106,10 +108,10 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                   />
                 </p>
               </div>
-              <hr style={{margin: '5px 0 15px 0'}}/>
+              <hr style={{ margin: '5px 0 15px 0' }} />
               <p>
                 <b>
-                  <FormattedMessage id="deleting-options"/>
+                  <FormattedMessage id="deleting-options" />
                 </b>
               </p>
               <div>
@@ -124,7 +126,7 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                           name={removalName}
                           onClick={() => this.onPanelClick('SOFT')}
                           checked={this.state.removalType === 'SOFT'}>
-                          <FormattedMessage id="delete-account-and-anonymize-contents"/>
+                          <FormattedMessage id="delete-account-and-anonymize-contents" />
                         </Radio>
                         <p className="delete__content__choice">
                           <FormattedHTMLMessage
@@ -142,16 +144,16 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                           <div className="panel-body">
                             <div className="row">
                               <div className="col-sm-4 delete__inception__avatar">
-                                <DefaultAvatar size={35}/>
+                                <DefaultAvatar size={35} />
                               </div>
                               <div className="col-sm-8 delete__example">
-                                <FormattedMessage id="deleted-user"/>
-                                <br/>
+                                <FormattedMessage id="deleted-user" />
+                                <br />
                                 <strong>
-                                  <FormattedMessage id="modal-example-contribution-title"/>
+                                  <FormattedMessage id="modal-example-contribution-title" />
                                 </strong>
-                                <br/>
-                                <FormattedMessage id="modal-example-contribution-content"/>
+                                <br />
+                                <FormattedMessage id="modal-example-contribution-content" />
                               </div>
                             </div>
                           </div>
@@ -163,7 +165,7 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                 <div
                   className={`panel ${hardPanelChecked}`}
                   onClick={() => this.onPanelClick('HARD')}>
-                  <div className="panel-body"  id="delete-account-hard">
+                  <div className="panel-body" id="delete-account-hard">
                     <div className="row">
                       <div className="col-sm-7">
                         <Radio
@@ -171,7 +173,7 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                           name={removalName}
                           onClick={() => this.onPanelClick('HARD')}
                           checked={this.state.removalType === 'HARD'}>
-                          <FormattedMessage id="delete-account-and-contents"/>
+                          <FormattedMessage id="delete-account-and-contents" />
                         </Radio>
                         <p className="delete__content__choice">
                           <FormattedHTMLMessage
@@ -188,17 +190,17 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                           <div className="panel-body">
                             <div className="row">
                               <div className="col-sm-4 delete__inception__avatar">
-                                <DefaultAvatar size={35}/>
+                                <DefaultAvatar size={35} />
                               </div>
                               <div className="col-sm-8 delete__example">
-                                <FormattedMessage id="deleted-user"/>
-                                <br/>
+                                <FormattedMessage id="deleted-user" />
+                                <br />
                                 <strong>
-                                  <FormattedMessage id="deleted-title"/>
+                                  <FormattedMessage id="deleted-title" />
                                 </strong>
-                                <br/>
+                                <br />
                                 <i>
-                                  <FormattedMessage id="deleted-content-by-author"/>
+                                  <FormattedMessage id="deleted-content-by-author" />
                                 </i>
                               </div>
                             </div>
@@ -224,8 +226,8 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                 this.delete();
               }}
               bsStyle="danger">
-              <i className="cap cap-attention" style={{padding: '0 5px 0 0'}}/>
-              <FormattedMessage id="global.removeDefinitively"/>
+              <i className="cap cap-attention" style={{ padding: '0 5px 0 0' }} />
+              <FormattedMessage id="global.removeDefinitively" />
             </Button>
           </Modal.Footer>
         </Modal>

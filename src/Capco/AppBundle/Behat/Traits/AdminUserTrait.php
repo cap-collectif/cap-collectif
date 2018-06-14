@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Behat\Traits;
 
 trait AdminUserTrait
 {
-
     /**
      * @When I go to the admin user :tab tab
      *
@@ -35,5 +34,4 @@ trait AdminUserTrait
     {
         $this->getSession()->getDriver()->getWebDriverSession()->accept_alert();
     }
-
 }

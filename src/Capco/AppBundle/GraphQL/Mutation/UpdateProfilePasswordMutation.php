@@ -16,10 +16,10 @@ class UpdateProfilePasswordMutation extends BaseUpdateProfile
     {
         parent::__invoke($input, $user);
 
-        $form = $this->formFactory->create( ChangePasswordFormType::class, new ChangePassword(),['csrf_protection' => false]);
+        $form = $this->formFactory->create(ChangePasswordFormType::class, new ChangePassword(), ['csrf_protection' => false]);
         $form->submit($this->arguments, false);
         if (!$form->isValid()) {
-            $this->logger->error(__METHOD__.' : '.(string)$form->getErrors(true, false));
+            $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
 
             return ['user' => $user, 'error' => 'fos_user.password.not_current'];
         }

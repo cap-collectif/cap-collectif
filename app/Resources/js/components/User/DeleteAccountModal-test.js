@@ -17,11 +17,13 @@ describe('<DeleteAccountModal />', () => {
 
   const props = {
     redirectToAdminUrl: false,
-    userDeletedIsNotViewer: true
+    userDeletedIsNotViewer: true,
   };
 
   it('should render an visible modal', () => {
-    const wrapper = shallow(<DeleteAccountModal show {...props} viewer={viewer} handleClose={() => {}} />);
+    const wrapper = shallow(
+      <DeleteAccountModal show {...props} viewer={viewer} handleClose={() => {}} />,
+    );
     expect(wrapper).toMatchSnapshot();
   });
   it('should render an hidden modal', () => {

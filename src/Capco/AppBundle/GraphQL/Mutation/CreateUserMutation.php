@@ -33,7 +33,7 @@ class CreateUserMutation
         $form = $this->formFactory->create(UserFormType::class, $user, ['csrf_protection' => false]);
         $form->submit($arguments, false);
         if (!$form->isValid()) {
-            $this->logger->error(__METHOD__.' : '.(string)$form->getErrors(true, false));
+            $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
 
             throw new UserError('Invalid data.');
         }
@@ -42,7 +42,7 @@ class CreateUserMutation
             $this->em->persist($user);
             $this->em->flush();
         } catch (DriverException $e) {
-            $this->logger->error(__METHOD__ . ' => ' .$e->getErrorCode().' : '.$e->getMessage());
+            $this->logger->error(__METHOD__ . ' => ' . $e->getErrorCode() . ' : ' . $e->getMessage());
 
             throw new BadRequestHttpException('Sorry, please retry.');
         }
