@@ -1,0 +1,487 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UserAdminProfile/> should render, with user confirmed by email adn viewer is super admin  1`] = `
+<div
+  className="box box-primary container-fluid"
+>
+  <h2
+    className="page-header"
+  >
+    <FormattedMessage
+      id="user.profile.show.jumbotron"
+      values={Object {}}
+    />
+  </h2>
+  <form
+    onSubmit={[MockFunction]}
+  >
+    <div
+      className="box-content box-content__content-form"
+    >
+      <Field
+        component={[Function]}
+        disabled={false}
+        divClassName="col-sm-10"
+        id="profile_avatar"
+        label={
+          <FormattedMessage
+            id="form.label_media"
+            values={Object {}}
+          />
+        }
+        name="media"
+        type="image"
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        divClassName="col-sm-4"
+        id="profile-form-username"
+        label={
+          <div>
+            <FormattedMessage
+              id="registration.username"
+              values={Object {}}
+            />
+            <span
+              className="excerpt"
+            >
+              <FormattedMessage
+                id="global.mandatory"
+                values={Object {}}
+              />
+            </span>
+          </div>
+        }
+        name="username"
+        required={true}
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        divClassName="col-sm-4"
+        id="profile-form-userType"
+        label={
+          <FormattedMessage
+            id="registration.type"
+            values={Object {}}
+          />
+        }
+        name="userType"
+        type="select"
+      >
+        <FormattedMessage
+          id="registration.select.type"
+          values={Object {}}
+        />
+        <option
+          value={1}
+        >
+          type_1
+        </option>
+      </Field>
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        divClassName="col-sm-8"
+        id="public-data-form-biography"
+        label={
+          <FormattedMessage
+            id="form.label_biography"
+            values={Object {}}
+          />
+        }
+        name="biography"
+        type="textarea"
+      />
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        divClassName="col-sm-4"
+        id="public-data-form-neighborhood"
+        label={
+          <FormattedMessage
+            id="form.label_neighborhood"
+            values={Object {}}
+          />
+        }
+        name="neighborhood"
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        divClassName="col-sm-4"
+        id="public-data-form-website"
+        label={
+          <FormattedMessage
+            id="form.label_website"
+            values={Object {}}
+          />
+        }
+        name="website"
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
+      <h2>
+        <FormattedMessage
+          id="social-medias"
+          values={Object {}}
+        />
+      </h2>
+      <Field
+        component={[Function]}
+        disabled={false}
+        divClassName="col-sm-4"
+        id="public-data-form-facebook"
+        label={
+          <FormattedMessage
+            id="user.profile.edit.facebook"
+            values={Object {}}
+          />
+        }
+        name="facebookUrl"
+        placeholder="https://"
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        divClassName="col-sm-4"
+        id="public-data-form-twitter"
+        label={
+          <FormattedMessage
+            id="user.profile.edit.twitter"
+            values={Object {}}
+          />
+        }
+        name="twitterUrl"
+        placeholder="https://"
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        divClassName="col-sm-4"
+        id="public-data-form-linkedIn"
+        label={
+          <FormattedMessage
+            id="show.label_linked_in_url"
+            values={Object {}}
+          />
+        }
+        name="linkedInUrl"
+        placeholder="https://"
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
+      <h2
+        className="page-header"
+      >
+        <FormattedMessage
+          id="confidentialite.title"
+          values={Object {}}
+        />
+      </h2>
+      <Field
+        component={[Function]}
+        disabled={false}
+        divClassName="col-sm-8"
+        id="profilePageIndexed"
+        labelClassName="font-weight-normal"
+        name="profilePageIndexed"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="user.profile.edit.profilePageIndexed"
+          values={Object {}}
+        />
+      </Field>
+      <div
+        className="clearfix"
+      />
+      <ButtonToolbar
+        bsClass="btn-toolbar"
+        className="box-content__toolbar"
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={false}
+          id="user-admin-profile-save"
+          type="submit"
+        >
+          <FormattedMessage
+            id="global.save_modifications"
+            values={Object {}}
+          />
+        </Button>
+        <AlertForm
+          errorMessage={null}
+          invalid={false}
+          submitFailed={false}
+          submitSucceeded={false}
+          submitting={false}
+          valid={true}
+        />
+      </ButtonToolbar>
+    </div>
+  </form>
+</div>
+`;
+
+exports[`<UserAdminProfile/> should render, with user not confirmed by email adn viewer not super admin 1`] = `
+<div
+  className="box box-primary container-fluid"
+>
+  <h2
+    className="page-header"
+  >
+    <FormattedMessage
+      id="user.profile.show.jumbotron"
+      values={Object {}}
+    />
+  </h2>
+  <form
+    onSubmit={[MockFunction]}
+  >
+    <div
+      className="box-content box-content__content-form"
+    >
+      <Field
+        component={[Function]}
+        disabled={true}
+        divClassName="col-sm-10"
+        id="profile_avatar"
+        label={
+          <FormattedMessage
+            id="form.label_media"
+            values={Object {}}
+          />
+        }
+        name="media"
+        type="image"
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        divClassName="col-sm-4"
+        id="profile-form-username"
+        label={
+          <div>
+            <FormattedMessage
+              id="registration.username"
+              values={Object {}}
+            />
+            <span
+              className="excerpt"
+            >
+              <FormattedMessage
+                id="global.mandatory"
+                values={Object {}}
+              />
+            </span>
+          </div>
+        }
+        name="username"
+        required={true}
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        divClassName="col-sm-8"
+        id="public-data-form-biography"
+        label={
+          <FormattedMessage
+            id="form.label_biography"
+            values={Object {}}
+          />
+        }
+        name="biography"
+        type="textarea"
+      />
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        divClassName="col-sm-4"
+        id="public-data-form-neighborhood"
+        label={
+          <FormattedMessage
+            id="form.label_neighborhood"
+            values={Object {}}
+          />
+        }
+        name="neighborhood"
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        divClassName="col-sm-4"
+        id="public-data-form-website"
+        label={
+          <FormattedMessage
+            id="form.label_website"
+            values={Object {}}
+          />
+        }
+        name="website"
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
+      <h2>
+        <FormattedMessage
+          id="social-medias"
+          values={Object {}}
+        />
+      </h2>
+      <Field
+        component={[Function]}
+        disabled={true}
+        divClassName="col-sm-4"
+        id="public-data-form-facebook"
+        label={
+          <FormattedMessage
+            id="user.profile.edit.facebook"
+            values={Object {}}
+          />
+        }
+        name="facebookUrl"
+        placeholder="https://"
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        divClassName="col-sm-4"
+        id="public-data-form-twitter"
+        label={
+          <FormattedMessage
+            id="user.profile.edit.twitter"
+            values={Object {}}
+          />
+        }
+        name="twitterUrl"
+        placeholder="https://"
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        divClassName="col-sm-4"
+        id="public-data-form-linkedIn"
+        label={
+          <FormattedMessage
+            id="show.label_linked_in_url"
+            values={Object {}}
+          />
+        }
+        name="linkedInUrl"
+        placeholder="https://"
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
+      <h2
+        className="page-header"
+      >
+        <FormattedMessage
+          id="confidentialite.title"
+          values={Object {}}
+        />
+      </h2>
+      <Field
+        component={[Function]}
+        disabled={true}
+        divClassName="col-sm-8"
+        id="profilePageIndexed"
+        labelClassName="font-weight-normal"
+        name="profilePageIndexed"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="user.profile.edit.profilePageIndexed"
+          values={Object {}}
+        />
+      </Field>
+      <div
+        className="clearfix"
+      />
+      <ButtonToolbar
+        bsClass="btn-toolbar"
+        className="box-content__toolbar"
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={true}
+          id="user-admin-profile-save"
+          type="submit"
+        >
+          <FormattedMessage
+            id="global.save_modifications"
+            values={Object {}}
+          />
+        </Button>
+        <AlertForm
+          errorMessage={null}
+          invalid={false}
+          submitFailed={false}
+          submitSucceeded={false}
+          submitting={false}
+          valid={true}
+        />
+      </ButtonToolbar>
+    </div>
+  </form>
+</div>
+`;

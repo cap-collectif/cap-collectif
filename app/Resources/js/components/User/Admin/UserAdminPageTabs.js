@@ -20,7 +20,7 @@ export class UserAdminPageTabs extends Component<Props, State> {
     return (
       <div>
         <p>
-          <strong>Permalien : </strong> <a href={user.show_url}>{user.show_url}</a> |{' '}
+          <strong>Permalien : </strong> <a href={user.show_url}>{user.show_url}</a>{' '}
         </p>
         <Tabs defaultActiveKey={1} id="user-admin-page-tabs">
           <Tab eventKey={1} title={intl.formatMessage({ id: 'user.profile.edit.account' })}>

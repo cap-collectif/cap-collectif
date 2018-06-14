@@ -129,7 +129,7 @@ export class UserAdminCreateButton extends Component<Props, State> {
           onHide={() => {
             this.setState({ showModal: false });
           }}
-          bsSize="medium"
+          bsSize="large"
           aria-labelledby="contained-modal-title-lg">
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
