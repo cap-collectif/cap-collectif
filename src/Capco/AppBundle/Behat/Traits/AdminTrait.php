@@ -92,6 +92,13 @@ trait AdminTrait
     }
 
     /**
+     * @When I go to the admin user list page
+     */
+    public function iGoToTheAdminUserListPage()
+    {
+        $this->visitPageWithParams('admin user list page');
+    }
+    /**
      * @Then I click on button :id
      */
     public function iClickOnButton(string $id)

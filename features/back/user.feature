@@ -83,3 +83,23 @@ Scenario: Logged in admin wants delete a user
   And I wait 5 seconds
   Then I should be redirected to "/admin/capco/user/user/list"
   And I should see "deleted-user"
+
+@database
+Scenario: Logged in admin wants create a user
+  Given I am logged in as admin
+  Then I go to the admin user list page
+  And I wait 1 seconds
+  When I click on button "#add-a-user"
+  Then I should see an ".modal-content" element
+  And I should see "add-a-user"
+  Then I fill in the following:
+    | username | a                 |
+    | email    | qsdqsdqsdsqdqsdqs |
+  And I should see "registration.constraints.username.min"
+  And I should see "registration.constraints.email.invalid"
+  Then I fill in the following:
+    | username | Toto                  |
+    | email    | blague.toto@gmail.com |
+  And I check "vip"
+  And I check "roles.super_admin"
+  Then I click on button "#confirm-user-create"
