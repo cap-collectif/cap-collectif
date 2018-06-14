@@ -35,7 +35,7 @@ class UpdateProfilePublicDataMutation extends BaseUpdateProfile
 
         $this->em->flush();
 
-        return ['user' => $user];
+        return [self::USER => $this->user];
     }
 
     public function setToggleManager(Manager $toggleManager)

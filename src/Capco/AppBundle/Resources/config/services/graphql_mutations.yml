@@ -157,11 +157,7 @@ services:
   Capco\AppBundle\GraphQL\Mutation\UpdateUserAccountMutation:
       # only for sf < 3.3
       class: Capco\AppBundle\GraphQL\Mutation\UpdateUserAccountMutation
-      arguments:
-          - "@doctrine.orm.default_entity_manager"
-          - "@form.factory"
-          - "@capco.user.repository"
-          - "@logger"
+      parent: Capco\AppBundle\GraphQL\Mutation\BaseUpdateProfile
       tags:
           - { name: overblog_graphql.mutation }
 
@@ -172,6 +168,7 @@ services:
           - "@doctrine.orm.default_entity_manager"
           - "@form.factory"
           - "@logger"
+          - "@capco.user.repository"
 
   capco.mutation.user_notifications:
         class: Capco\AppBundle\GraphQL\Mutation\UserNotificationsConfigurationMutation

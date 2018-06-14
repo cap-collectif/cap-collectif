@@ -14,20 +14,23 @@ class UpdateProfilePasswordMutation extends BaseUpdateProfile
 
     public function __invoke(Argument $input, User $user): array
     {
-        parent::__invoke($input, $user);
+        $arguments = $input->getRawArguments();
 
         $form = $this->formFactory->create(ChangePasswordFormType::class, new ChangePassword(), ['csrf_protection' => false]);
-        $form->submit($this->arguments, false);
+        $this->logger->error(__METHOD__ . ' : ' . var_export($arguments, true));
+
+        $form->submit($arguments, false);
         if (!$form->isValid()) {
             $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
 
-            return ['user' => $user, 'error' => 'fos_user.password.not_current'];
+            return [self::USER => $user, 'error' => 'fos_user.password.not_current'];
         }
+        $this->logger->debug(__METHOD__ . ' : ' . (string) $form->isValid());
 
-        $user->setPlainPassword($this->arguments['new']);
+        $user->setPlainPassword($arguments['new']);
         $this->userManager->updateUser($user);
 
-        return ['user' => $user];
+        return [self::USER => $user];
     }
 
     public function setUserManager(UserManagerInterface $userManager)

@@ -11,54 +11,46 @@ use Monolog\Logger;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Symfony\Component\Form\FormFactory;
 
-class UpdateUserAccountMutation
+class UpdateUserAccountMutation extends BaseUpdateProfile
 {
-    private $em;
-    private $formFactory;
-    private $userRepository;
-    private $logger;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        FormFactory $formFactory,
-        UserRepository $userRepository,
-        Logger $logger
-    ) {
-        $this->em = $em;
-        $this->formFactory = $formFactory;
-        $this->userRepository = $userRepository;
-        $this->logger = $logger;
-    }
-
     public function __invoke(Argument $input, User $viewer): array
     {
         $arguments = $input->getRawArguments();
-        /** @var User $user */
-        $user = $this->userRepository->find($arguments['userId']);
+        $user = $viewer;
+        if ($viewer->getId() !== $arguments[self::USER_ID]) {
+            /** @var User $user */
+            $user = $this->userRepository->find($arguments[self::USER_ID]);
+        }
 
         if (!$user) {
-            throw new UserError('IUser not found.');
-        }
-        //If the viewer is ROLE_ADMIN but update a user with ROLE_SUPER_ADMIN, we have to make sur the user doesn't lose his ROLE_SUPER_ADMIN
-        if (!$viewer->hasRole('ROLE_SUPER_ADMIN') && !\in_array(
-                'ROLE_USER_ADMIN',
-                $arguments['roles'], true
-            ) && $user->hasRole('ROLE_SUPER_ADMIN')) {
-            $arguments['roles'][] = 'ROLE_SUPER_ADMIN';
+            throw new UserError('User not found.');
         }
 
-        unset($arguments['userId']);
+        if (!$viewer->hasRole(self::ROLE_SUPER_ADMIN) && \in_array(self::ROLE_SUPER_ADMIN, $arguments['roles'])) {
+            throw new UserError('You are not able to add super_admin role to a user.');
+        }
+
+        //If the viewer is ROLE_ADMIN but update a user with ROLE_SUPER_ADMIN, we have to make sur the user doesn't lose his ROLE_SUPER_ADMIN
+        if (
+            !$viewer->hasRole(self::ROLE_SUPER_ADMIN) &&
+            !\in_array(self::ROLE_SUPER_ADMIN, $arguments['roles'], true)
+            && $user->hasRole(self::ROLE_SUPER_ADMIN)
+        ) {
+            $arguments['roles'][] = self::ROLE_SUPER_ADMIN;
+        }
+
+        unset($arguments[self::USER_ID]);
 
         $form = $this->formFactory->create(UserAccountFormType::class, $user, ['csrf_protection' => false]);
         $form->submit($arguments, false);
         if (!$form->isValid()) {
-            $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
+            $this->logger->error(__METHOD__.' : '.(string)$form->getErrors(true, false));
 
             throw new UserError('Invalid data.');
         }
 
         $this->em->flush();
 
-        return ['user' => $user];
+        return [self::USER => $user];
     }
 }

@@ -27,6 +27,6 @@ class UpdateProfilePersonalDataMutation extends BaseUpdateProfile
 
         $this->em->flush();
 
-        return ['user' => $this->user];
+        return [self::USER => $this->user];
     }
 }
