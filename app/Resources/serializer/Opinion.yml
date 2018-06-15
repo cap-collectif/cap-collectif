@@ -42,11 +42,6 @@ Capco\AppBundle\Entity\Opinion:
             type: integer
             serialized_name: sourcesCount
             groups: [Opinions, OpinionLinkPreviews]
-        connectionsCount:
-            expose: true
-            type: integer
-            serialized_name: connectionsCount
-            groups: [Opinions, OpinionLinkPreviews]
         appendices:
             expose: true
             groups: [Opinions, OpinionVersions]
@@ -123,8 +118,3 @@ Capco\AppBundle\Entity\Opinion:
             type: object
             serialized_name: step
             groups: [Opinions]
-        getConnections:
-            expose: true
-            groups: [Opinions]
-            serialized_name: connections
-            max_depth: 1

@@ -73,7 +73,6 @@ Scenario: Anonymous API client wants to retrieve an opinion
         @...@
       ],
       "connections": @array@,
-      "connectionsCount": @integer@,
       "author": {
         "username": @string@,
         "displayName": @string@,

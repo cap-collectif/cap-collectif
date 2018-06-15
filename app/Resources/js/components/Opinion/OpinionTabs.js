@@ -8,7 +8,6 @@ import ArgumentsBox from '../Argument/ArgumentsBox';
 import OpinionVersionsBox from './OpinionVersionsBox';
 import OpinionSourceBox from './Source/OpinionSourceBox';
 import VoteLinechart from '../Utils/VoteLinechart';
-import OpinionLinksBox from './Links/OpinionLinksBox';
 import OpinionSourceStore from '../../stores/OpinionSourceStore';
 import { scrollToAnchor } from '../../services/ScrollToAnchor';
 
@@ -94,11 +93,6 @@ const OpinionTabs = React.createClass({
     return opinion.parent ? opinion.parent.type : opinion.type;
   },
 
-  isLinkable() {
-    const type = this.getType();
-    return this.isVersion() ? false : type.linkable;
-  },
-
   isSourceable() {
     const type = this.getType();
     return type !== 'undefined' ? type.sourceable : false;
@@ -146,11 +140,7 @@ const OpinionTabs = React.createClass({
     const { opinion } = this.props;
 
     if (
-      this.isSourceable() +
-        this.isCommentable() +
-        this.isVersionable() +
-        this.hasStatistics() +
-        this.isLinkable() >
+      this.isSourceable() + this.isCommentable() + this.isVersionable() + this.hasStatistics() >
       1
     ) {
       // at least two tabs
@@ -184,11 +174,6 @@ const OpinionTabs = React.createClass({
                   <FormattedMessage id="vote.evolution.tab" />
                 </NavItem>
               )}
-              {this.isLinkable() && (
-                <NavItem className="opinion-tabs" eventKey="links">
-                  <FormattedMessage id="global.links" values={{ num: opinion.connectionsCount }} />
-                </NavItem>
-              )}
             </Nav>
             <Tab.Content animation={false}>
               {this.isVersionable() && (
@@ -216,11 +201,6 @@ const OpinionTabs = React.createClass({
                   />
                 </Tab.Pane>
               )}
-              {this.isLinkable() && (
-                <Tab.Pane eventKey="links" style={{ marginTop: '20px' }}>
-                  <OpinionLinksBox {...this.props} />
-                </Tab.Pane>
-              )}
             </Tab.Content>
           </div>
         </Tab.Container>
@@ -238,10 +218,6 @@ const OpinionTabs = React.createClass({
     }
     if (this.hasStatistics()) {
       return <VoteLinechart top={20} height={300} width={847} history={opinion.history.votes} />;
-    }
-
-    if (this.isLinkable()) {
-      return <OpinionLinksBox {...this.props} />;
     }
 
     return null;

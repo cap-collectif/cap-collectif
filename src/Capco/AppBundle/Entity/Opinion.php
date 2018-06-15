@@ -3,13 +3,11 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
-use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Traits\AnswerableTrait;
 use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\ModerableTrait;
 use Capco\AppBundle\Traits\PinnableTrait;
-use Capco\AppBundle\Traits\SelfLinkableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
@@ -30,14 +28,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\AppendicesCorrespondToOpinionType()
  */
-class Opinion implements OpinionContributionInterface, SelfLinkableInterface
+class Opinion implements OpinionContributionInterface
 {
     use UuidTrait;
     use TrashableTrait;
     use SluggableTitleTrait;
     use VotableOkNokMitigeTrait;
     use ValidableTrait;
-    use SelfLinkableTrait;
     use AnswerableTrait;
     use PinnableTrait;
     use ExpirableTrait;
@@ -155,8 +152,6 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         $this->Sources = new ArrayCollection();
         $this->versions = new ArrayCollection();
         $this->appendices = new ArrayCollection();
-        $this->childConnections = new ArrayCollection();
-        $this->parentConnections = new ArrayCollection();
 
         $this->updatedAt = new \Datetime();
         $this->createdAt = new \Datetime();
@@ -627,26 +622,6 @@ class Opinion implements OpinionContributionInterface, SelfLinkableInterface
         if (null !== $this->OpinionType) {
             $this->OpinionType->removeOpinion($this);
         }
-    }
-
-    public function getConnections($filter = 'last')
-    {
-        $connections = array_merge(
-            $this->childConnections->toArray(),
-            $this->parentConnections->toArray()
-        );
-
-        if ('old' === $filter) {
-            usort($connections, function ($a, $b) {
-                return $a->getCreatedAt() > $b->getCreatedAt() ? 1 : -1;
-            });
-        } elseif ('last' === $filter) {
-            usort($connections, function ($a, $b) {
-                return $a->getCreatedAt() < $b->getCreatedAt() ? 1 : -1;
-            });
-        }
-
-        return $connections;
     }
 
     public function isIndexable(): bool
