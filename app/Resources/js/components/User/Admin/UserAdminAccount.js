@@ -12,6 +12,7 @@ import UpdateUserAccountMutation from '../../../mutations/UpdateUserAccountMutat
 import UserAdminAccount_user from './__generated__/UserAdminAccount_user.graphql';
 import DeleteAccountModal from '../DeleteAccountModal';
 import SelectUserRoles from '../../Form/SelectUserRoles';
+import DatesInterval from '../../Utils/DatesInterval';
 
 type RelayProps = {
   user: UserAdminAccount_user,
@@ -62,7 +63,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, { user }: Props) => {
 const validate = (values: FormValues) => {
   const errors = {};
   if (values.roles.labels.length === 0) {
-    errors.roles = 'not enought';
+    errors.roles = '1-option-minimum';
   }
 
   return errors;
@@ -93,11 +94,6 @@ export class UserAdminAccount extends React.Component<Props, State> {
       isViewerOrSuperAdmin,
       userDeletedIsNotViewer,
     } = this.props;
-
-    const newsletterAt = user.subscribedToNewsLetterAt
-      ? user.subscribedToNewsLetterAt.split(' ')
-      : false;
-    const expiredAt = user.expiredAt ? user.expiredAt.split(' ') : false;
 
     return (
       <div className="box box-primary container-fluid">
@@ -143,17 +139,7 @@ export class UserAdminAccount extends React.Component<Props, State> {
               children={
                 <div>
                   <FormattedMessage id="form.label_expired" />{' '}
-                  {expiredAt ? (
-                    <FormattedMessage
-                      id={'global.dates.full_day'}
-                      values={{
-                        date: expiredAt[0],
-                        time: expiredAt[1],
-                      }}
-                    />
-                  ) : (
-                    ''
-                  )}
+                  <DatesInterval startAt={user.expiredAt} />
                 </div>
               }
             />
@@ -178,17 +164,7 @@ export class UserAdminAccount extends React.Component<Props, State> {
               children={
                 <div>
                   <FormattedMessage id="newsletter" />{' '}
-                  {newsletterAt ? (
-                    <FormattedMessage
-                      id={'global.dates.full_day'}
-                      values={{
-                        date: newsletterAt[0],
-                        time: newsletterAt[1],
-                      }}
-                    />
-                  ) : (
-                    ''
-                  )}
+                  <DatesInterval startAt={user.subscribedToNewsLetterAt} />
                 </div>
               }
             />

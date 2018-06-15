@@ -6,7 +6,6 @@ trait AdminTrait
 {
     use AdminProposalTrait;
     use AdminProposalFormTrait;
-
     use AdminUserTrait;
 
     /**
@@ -89,6 +88,7 @@ trait AdminTrait
     public function iGoToTheAdminUserPageWithId(string $userId)
     {
         $this->visitPageWithParams('admin user page', ['userId' => $userId]);
+        $this->getSession()->wait(3000, "$('#user-admin-page-tabs').length > 0");
     }
 
     /**
@@ -97,6 +97,7 @@ trait AdminTrait
     public function iGoToTheAdminUserListPage()
     {
         $this->visitPageWithParams('admin user list page');
+        $this->getSession()->wait(3000, "$('div#add-a-user').length > 0");
     }
 
     /**

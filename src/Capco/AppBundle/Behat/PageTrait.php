@@ -30,6 +30,6 @@ trait PageTrait
 
     public function clickOnTab($tab)
     {
-        $this->getElement('user ' . $tab . ' tab')->click();
+        $this->getElement("$tab tab")->click();
     }
 }

@@ -12,17 +12,17 @@ class AdminUserListPage extends Page
     protected $path = '/admin/capco/user/user/list';
 
     protected $elements = [
-        'create user button' => '#add-a-user',
+        'user create button' => '#add-a-user-button',
         'submit user' => '#confirm-user-create',
     ];
-
-    public function clickCreateUserButton()
-    {
-        $this->getElement('create user merge button')->click();
-    }
 
     public function clickSubmitUserButton()
     {
         $this->getElement('submit user merge')->click();
+    }
+
+    public function openModalToCreateUser()
+    {
+        $this->pressButton('add-a-user');
     }
 }

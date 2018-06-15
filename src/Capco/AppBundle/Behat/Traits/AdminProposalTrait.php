@@ -31,7 +31,7 @@ trait AdminProposalTrait
         $page = $this->getCurrentPage();
         $this->iWait(3); // Wait alert to disappear
         $this->getSession()->wait(3000, "$('" . $page->getSelector('proposal ' . $tab . ' tab') . "').length > 0");
-        $page->clickOnTab($tab);
+        $page->clickOnTab("proposal $tab");
         $this->iWait(1);
     }
 

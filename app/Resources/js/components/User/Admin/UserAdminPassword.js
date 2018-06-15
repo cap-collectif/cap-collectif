@@ -41,11 +41,10 @@ const validate = (values: FormValues) => {
   return errors;
 };
 
-const onSubmit = (values: FormValues, dispatch: Dispatch, { reset, intl, ...props }) => {
+const onSubmit = (values: FormValues, dispatch: Dispatch, { reset, intl }) => {
   const input = {
     current_password: values.current_password,
     new: values.new_password,
-    userId: props.user.id,
   };
   return UpdateProfilePasswordMutation.commit({ input }).then(response => {
     if (

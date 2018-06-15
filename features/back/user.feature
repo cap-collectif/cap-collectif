@@ -1,4 +1,4 @@
-@user_admin
+@user_page_admin
 Feature: User Admin
 
 Background:
@@ -11,7 +11,7 @@ Scenario: Logged in admin wants edit a user account tab
   And the "form.label_vip" checkbox should be checked
   And the "form.label_locked" checkbox should be checked
   And the "roles.user" checkbox should be checked
-  And the "roles.super_admin" checkbox should be checked
+  And I should not see "roles.super_admin"
   And the "newsletter" checkbox should be checked
   And I check "form.label_enabled"
   Then I click on button "#user_admin_account_save"
@@ -19,8 +19,8 @@ Scenario: Logged in admin wants edit a user account tab
   And I should see "global.saved"
 
 @database
-Scenario: Logged in admin wants edit a user profile tab
-  Given I am logged in as admin
+Scenario: Logged in super admin wants edit a user profile tab
+  Given I am logged in as super admin
   Then I go to the admin user page with userId "user516"
   And I go to the admin user "profile" tab
   And I wait 2 seconds
@@ -32,19 +32,19 @@ Scenario: Logged in admin wants edit a user profile tab
   And I should see "global.saved"
 
 @database
-Scenario: Logged in admin wants edit a user data tab
-  Given I am logged in as admin
+Scenario: Logged in super admin wants edit a user data tab
+  Given I am logged in as super admin
   Then I go to the admin user page with userId "user516"
   And I go to the admin user "data" tab
   And I wait 3 seconds
   When I fill the element "#city" with value "Issou"
-  Then I click on button "#user-admin-persona-data-save"
+  Then I click on button "#user-admin-personal-data-save"
   And I wait 2 seconds
   And I should see "global.saved"
 
 @database
-Scenario: Logged in admin wants edit a user password tab
-  Given I am logged in as admin
+Scenario: Logged in super admin wants edit a user password tab
+  Given I am logged in as super admin
   Then I go to the admin user page with userId "user516"
   And I go to the admin user "password" tab
   And I wait 2 seconds
@@ -70,12 +70,12 @@ Scenario: Logged in admin wants edit my password in back office
   Then I fill the element "#password-form-confirmation" with value "tototototo"
   And I wait 1 seconds
   Then I click on button "#user-admin-password-save"
-  And I wait 6 seconds
+  And I wait 2 seconds
   And I should see "global.saved"
 
 @database
-Scenario: Logged in admin wants delete a user
-  Given I am logged in as admin
+Scenario: Logged in super admin wants delete a user
+  Given I am logged in as super admin
   Then I go to the admin user page with userId "user516"
   Then I click on button "#delete-account-profile-button"
   And I click the "#delete-account-hard" element
@@ -85,11 +85,10 @@ Scenario: Logged in admin wants delete a user
   And I should see "deleted-user"
 
 @database
-Scenario: Logged in admin wants create a user
-  Given I am logged in as admin
+Scenario: Logged in super admin wants create a user
+  Given I am logged in as super admin
   Then I go to the admin user list page
-  And I wait 1 seconds
-  When I click on button "#add-a-user"
+  And I open modal to create user
   Then I should see an ".modal-content" element
   And I should see "add-a-user"
   Then I fill in the following:

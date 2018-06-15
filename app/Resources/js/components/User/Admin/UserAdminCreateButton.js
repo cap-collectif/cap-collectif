@@ -115,13 +115,15 @@ export class UserAdminCreateButton extends Component<Props, State> {
     return (
       <div>
         <Button
-          id="add-a-user"
+          id="add-a-user-button"
           bsStyle="default"
           style={{ marginTop: 10 }}
           onClick={() => {
             this.setState({ showModal: true });
           }}>
-          <FormattedMessage id="add-a-user" />
+          <div id="add-a-user">
+            <FormattedMessage id="add-a-user" />
+          </div>
         </Button>
         <Modal
           animation={false}

@@ -8,7 +8,7 @@ exports[`<UserAdminCreateButton/> should render 1`] = `
     bsClass="btn"
     bsStyle="default"
     disabled={false}
-    id="add-a-user"
+    id="add-a-user-button"
     onClick={[Function]}
     style={
       Object {
@@ -16,10 +16,14 @@ exports[`<UserAdminCreateButton/> should render 1`] = `
       }
     }
   >
-    <FormattedMessage
+    <div
       id="add-a-user"
-      values={Object {}}
-    />
+    >
+      <FormattedMessage
+        id="add-a-user"
+        values={Object {}}
+      />
+    </div>
   </Button>
   <Modal
     animation={false}

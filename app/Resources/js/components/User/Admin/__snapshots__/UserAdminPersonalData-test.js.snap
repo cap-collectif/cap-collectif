@@ -49,16 +49,8 @@ exports[`<UserAdminPersonalData/> should render, with user confirmed by email ad
             id="confirmed-by-email"
             values={Object {}}
           />
-           
-          <FormattedMessage
-            id="global.dates.full_day"
-            values={
-              Object {
-                "date": "2018-06-06",
-                "time": "06:06:06",
-              }
-            }
-          />
+           
+          <DatesInterval />
         </div>
       </Field>
       <div
@@ -264,7 +256,7 @@ exports[`<UserAdminPersonalData/> should render, with user confirmed by email ad
           bsClass="btn"
           bsStyle="primary"
           disabled={false}
-          id="user-admin-persona-data-save"
+          id="user-admin-personal-data-save"
           type="submit"
         >
           <FormattedMessage
@@ -335,7 +327,8 @@ exports[`<UserAdminPersonalData/> should render, with user not confirmed by emai
             id="confirmed-by-email"
             values={Object {}}
           />
-           
+           
+          <DatesInterval />
         </div>
       </Field>
       <div
@@ -541,7 +534,7 @@ exports[`<UserAdminPersonalData/> should render, with user not confirmed by emai
           bsClass="btn"
           bsStyle="primary"
           disabled={true}
-          id="user-admin-persona-data-save"
+          id="user-admin-personal-data-save"
           type="submit"
         >
           <FormattedMessage

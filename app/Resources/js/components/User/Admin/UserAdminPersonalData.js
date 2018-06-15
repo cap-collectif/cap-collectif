@@ -11,6 +11,7 @@ import DateDropdownPicker from '../../Form/DateDropdownPicker';
 import AlertForm from '../../Alert/AlertForm';
 import UpdateProfilePersonalDataMutation from '../../../mutations/UpdateProfilePersonalDataMutation';
 import UserAdminPersonalData_user from './__generated__/UserAdminPersonalData_user.graphql';
+import DatesInterval from '../../Utils/DatesInterval';
 
 type RelayProps = { user: UserAdminPersonalData_user };
 type Props = FormProps &
@@ -49,6 +50,7 @@ const validate = (values: Object) => {
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const { intl } = props;
   const userId = props.user.id;
+  delete values.isEmailConfirmed;
   const input = {
     ...values,
     userId,
@@ -87,8 +89,6 @@ export class UserAdminPersonalData extends React.Component<Props> {
       user,
     } = this.props;
 
-    const emailConfirmedAt = user.emailConfirmedAt ? user.emailConfirmedAt.split(' ') : false;
-
     return (
       <div className="box box-primary container-fluid">
         <h2 className="page-header">
@@ -116,18 +116,8 @@ export class UserAdminPersonalData extends React.Component<Props> {
               divClassName="col-sm-4"
               children={
                 <div>
-                  <FormattedMessage id="confirmed-by-email" />{' '}
-                  {emailConfirmedAt ? (
-                    <FormattedMessage
-                      id={'global.dates.full_day'}
-                      values={{
-                        date: emailConfirmedAt[0],
-                        time: emailConfirmedAt[1],
-                      }}
-                    />
-                  ) : (
-                    ''
-                  )}
+                  <FormattedMessage id="confirmed-by-email" />&nbsp;
+                  <DatesInterval startAt={user.emailConfirmationSentAt} />
                 </div>
               }
             />
@@ -247,7 +237,7 @@ export class UserAdminPersonalData extends React.Component<Props> {
                 disabled={invalid || submitting || !isViewerOrSuperAdmin}
                 type="submit"
                 bsStyle="primary"
-                id="user-admin-persona-data-save">
+                id="user-admin-personal-data-save">
                 <FormattedMessage
                   id={submitting ? 'global.loading' : 'global.save_modifications'}
                 />

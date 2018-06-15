@@ -12,9 +12,8 @@ trait AdminUserTrait
     public function iGoToTheAdminUserTab($tab)
     {
         $page = $this->getCurrentPage();
-        $this->iWait(3); // Wait alert to disappear
         $this->getSession()->wait(3000, "$('" . $page->getSelector('user ' . $tab . ' tab') . "').length > 0");
-        $page->clickOnTab($tab);
+        $page->clickOnTab("user $tab");
         $this->iWait(1);
     }
 
@@ -33,5 +32,13 @@ trait AdminUserTrait
     public function iConfirmAdminUserDeletion()
     {
         $this->getSession()->getDriver()->getWebDriverSession()->accept_alert();
+    }
+
+    /**
+     * @When I open modal to create user
+     */
+    public function iClickOnAddUserButton()
+    {
+        $this->getCurrentPage()->openModalToCreateUser();
     }
 }

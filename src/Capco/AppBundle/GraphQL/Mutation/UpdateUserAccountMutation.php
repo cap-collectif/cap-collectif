@@ -22,7 +22,7 @@ class UpdateUserAccountMutation extends BaseUpdateProfile
             throw new UserError('User not found.');
         }
 
-        if (!$viewer->hasRole(self::ROLE_SUPER_ADMIN) && \in_array(self::ROLE_SUPER_ADMIN, $arguments['roles'], true)) {
+        if (!$viewer->hasRole(self::ROLE_SUPER_ADMIN) && \in_array(self::ROLE_SUPER_ADMIN, $arguments['roles'], true) && !$user->hasRole(self::ROLE_SUPER_ADMIN)) {
             throw new UserError('You are not able to add super_admin role to a user.');
         }
 
