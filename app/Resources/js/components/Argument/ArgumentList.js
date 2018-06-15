@@ -44,7 +44,7 @@ export class ArgumentList extends React.Component<Props, State> {
     ArgumentStore.removeChangeListener(this.onChange);
   }
 
-  onChange() {
+  onChange = () => {
     if (ArgumentStore.orderByType[this.state.type] === this.state.order) {
       this.setState({
         arguments: ArgumentStore.arguments[this.state.type],
@@ -59,7 +59,7 @@ export class ArgumentList extends React.Component<Props, State> {
       isLoading: true,
     });
     this.loadArguments();
-  }
+  };
 
   getNumericType() {
     const { type } = this.props;
@@ -80,6 +80,7 @@ export class ArgumentList extends React.Component<Props, State> {
   renderFilter() {
     const { type } = this.props;
     const { order } = this.state;
+
     const htmlFor = `filter-arguments-${type}`;
     if (this.state.arguments.length > 1) {
       return (
