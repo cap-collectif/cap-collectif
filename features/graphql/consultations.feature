@@ -45,7 +45,7 @@ Scenario: GraphQL client wants to list consultations
     }
   }
   """
-
+  
 Scenario: GraphQL client wants to list consultations
   When I send a GraphQL request:
   """
@@ -67,7 +67,6 @@ Scenario: GraphQL client wants to list consultations
       votesCountMitige
       votesCount
       versionsCount
-      connectionsCount
       sourcesCount
       argumentsCount
       author {
@@ -105,7 +104,6 @@ Scenario: GraphQL client wants to list consultations
               "votesCountMitige": 0,
               "votesCount": 0,
               "versionsCount": 1,
-              "connectionsCount": 0,
               "sourcesCount": 0,
               "argumentsCount": 2,
               "author": {
