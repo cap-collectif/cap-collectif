@@ -26,12 +26,14 @@ parameters:
     remember_secret: '%env(SYMFONY_REMEMBER_SECRET)%'
     router.request_context.host: '%env(SYMFONY_ROUTER__REQUEST_CONTEXT__HOST)%'
     router.request_context.scheme: '%env(SYMFONY_ROUTER__REQUEST_CONTEXT__SCHEME)%'
+    env(SYMFONY_ROUTER__REQUEST_CONTEXT__SCHEME): https
     assets_version: '%env(SYMFONY_ASSETS_VERSION)%'
     recaptcha_private_key: '%env(SYMFONY_RECAPTCHA_PRIVATE_KEY)%'
     twilio_sid: '%env(SYMFONY_TWILIO_SID)%'
     twilio_token: '%env(SYMFONY_TWILIO_TOKEN)%'
     twilio_number: '%env(SYMFONY_TWILIO_NUMBER)%'
     disable_mail_delivery: '%env(SYMFONY_DISABLE_MAIL_DELIVERY)%'
+    sentry_dsn: '%env(SYMFONY_SENTRY_DSN)%'
 #    sonata.media.thumbnail.liip_imagine: Capco\MediaBundle\Thumbnail\LiipImagineThumbnail
     google_maps_key: ***REMOVED***
     loco_key: 5TYY2LOJxU7WgnDpreCQYXkXLAS_hsDII
