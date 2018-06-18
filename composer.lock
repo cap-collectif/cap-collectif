@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0fded8fa6dc7660ed1543b59d6f0ac0b",
+    "content-hash": "c87981d24bed72def4b668a38704c4c1",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2146,7 +2146,7 @@
                 "mongodb",
                 "search"
             ],
-            "time": "2018-03-30T15:21:22+00:00"
+            "time": "2018-06-12T21:22:51+00:00"
         },
         {
             "name": "friendsofsymfony/http-cache",
@@ -11153,7 +11153,7 @@
             ],
             "authors": [
                 {
-                    "name": "William Durand",
+                    "name": "William DURAND",
                     "email": "william.durand1@gmail.com"
                 }
             ],
@@ -14604,7 +14604,7 @@
                 "page"
             ],
             "support": {
-                "source": "https://github.com/spyl94/BehatPageObjectExtension/tree/master"
+                "source": "https://github.com/cap-collectif/BehatPageObjectExtension/tree/master"
             },
             "time": "2016-03-15T13:13:55+00:00"
         },
@@ -14761,7 +14761,7 @@
                 "testing"
             ],
             "support": {
-                "source": "https://github.com/spyl94/behat-parallel-scenario/tree/master"
+                "source": "https://github.com/cap-collectif/behat-parallel-scenario/tree/master"
             },
             "time": "2016-03-11T13:43:33+00:00"
         },
