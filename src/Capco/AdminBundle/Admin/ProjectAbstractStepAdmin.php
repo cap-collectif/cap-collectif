@@ -2,11 +2,13 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Validator\Constraints\Valid;
 
-class ProjectAbstractStepAdmin extends Admin
+class ProjectAbstractStepAdmin extends AbstractAdmin
 {
     protected $formOptions = [
         'cascade_validation' => true,
@@ -16,6 +18,16 @@ class ProjectAbstractStepAdmin extends Admin
         '_sort_order' => 'ASC',
         '_sort_by' => 'position',
     ];
+
+    public function getFormBuilder()
+    {
+        if (isset($this->formOptions['cascade_validation'])) {
+            unset($this->formOptions['cascade_validation']);
+            $this->formOptions['constraints'][] = new Valid();
+        }
+
+        return parent::getFormBuilder();
+    }
 
     public function postRemove($object)
     {

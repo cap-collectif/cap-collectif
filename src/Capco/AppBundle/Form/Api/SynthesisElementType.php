@@ -7,6 +7,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class SynthesisElementType extends AbstractType
 {
@@ -41,7 +42,7 @@ class SynthesisElementType extends AbstractType
         if ($this->hasDivision) {
             $builder->add('division', new SynthesisDivisionType(), [
                 'required' => false,
-                'cascade_validation' => true,
+                'constraints' => new Valid(),
             ]);
         }
     }

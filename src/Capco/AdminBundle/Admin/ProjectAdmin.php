@@ -3,15 +3,16 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Project;
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Model\Metadata;
+use Symfony\Component\Validator\Constraints\Valid;
 
-class ProjectAdmin extends Admin
+class ProjectAdmin extends AbstractAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
@@ -21,6 +22,16 @@ class ProjectAdmin extends Admin
     protected $formOptions = [
         'cascade_validation' => true,
     ];
+
+    public function getFormBuilder()
+    {
+        if (isset($this->formOptions['cascade_validation'])) {
+            unset($this->formOptions['cascade_validation']);
+            $this->formOptions['constraints'][] = new Valid();
+        }
+
+        return parent::getFormBuilder();
+    }
 
     // For mosaic view
     public function getObjectMetadata($object)
