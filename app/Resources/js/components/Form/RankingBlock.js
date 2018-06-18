@@ -38,7 +38,7 @@ export class RankingBlock extends React.Component<Props> {
     this.recalculateChoicesHeight();
   }
 
-  moveItem(atList, atIndex, it) {
+  moveItem = (atList, atIndex, it) => {
     const { onRankingChange, onBlur } = this.props;
     const { item, list, index } = this.findItem(it.id);
     const items = JSON.parse(JSON.stringify(this.state.items));
@@ -55,7 +55,7 @@ export class RankingBlock extends React.Component<Props> {
     );
 
     onBlur();
-  }
+  };
 
   recalculateChoicesHeight() {
     const height = `${$(ReactDOM.findDOMNode(this.choiceBox)).height()}px`;
