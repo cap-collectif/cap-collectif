@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { Row } from 'react-bootstrap';
 import styled from 'styled-components';
+import ReactDOM from 'react-dom';
 import { reduxForm, FieldArray, arrayMove, type FieldArrayProps, type FormProps } from 'redux-form';
 import { connect, type MapStateToProps } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
@@ -28,6 +29,7 @@ type Props = FormProps &
   RelayProps & {
     onSubmit: Function,
     deletable: boolean,
+    snapshot: DraggableStateSnapshot,
   };
 
 type VotesProps = FieldArrayProps &
@@ -50,6 +52,15 @@ const DraggableItem = styled.div`
   user-select: none;
   transition: background-color 0.1s ease;
 `;
+
+const portal: HTMLElement = document.createElement('div');
+portal.classList.add('proposal-user-votes-portal');
+
+if (!document.body) {
+  throw new Error('body not ready for portal creation!');
+}
+
+document.body.appendChild(portal);
 
 const renderMembers = ({ fields, votes, step, deletable }: VotesProps) => {
   return (
@@ -75,7 +86,7 @@ const renderDraggableMembers = ({ fields, votes, step, deletable }: VotesProps) 
   }
 
   return (
-    <div>
+    <React.Fragment>
       {fields.map((member, index) => {
         const voteId = fields.get(index).id;
         const voteEdge =
@@ -83,6 +94,7 @@ const renderDraggableMembers = ({ fields, votes, step, deletable }: VotesProps) 
           votes.edges.filter(Boolean).filter(edge => edge.node && edge.node.id === voteId)[0];
         if (!voteEdge) return null;
         const vote = voteEdge.node;
+
         return (
           <Draggable key={vote.proposal.id} draggableId={vote.proposal.id} index={index}>
             {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => {
@@ -107,16 +119,20 @@ const renderDraggableMembers = ({ fields, votes, step, deletable }: VotesProps) 
                   {provided.placeholder}
                 </div>
               );
-              // Use portal here https://github.com/atlassian/react-beautiful-dnd/blob/master/stories/src/portal/portal-app.jsx
-              // This will fix position in the modal
-              // TODO @Amelie52
-              // https://github.com/atlassian/react-beautiful-dnd#warning-position-fixed
-              return child;
+
+              const usePortal: boolean = snapshot.isDragging;
+
+              if (!usePortal) {
+                return child;
+              }
+
+              // if dragging - put the item in a portal
+              return ReactDOM.createPortal(child, portal);
             }}
           </Draggable>
         );
       })}
-    </div>
+    </React.Fragment>
   );
 };
 
@@ -131,7 +147,7 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
 
   onDragEnd = (result: DropResult) => {
     // dropped outside the list
-    if (!result.destination) {
+    if (!result.destination || result.destination.index === result.source.index) {
       return;
     }
     // no movement
