@@ -31,7 +31,7 @@ class SynthesisElementType extends AbstractType
             ->add('parent',
                 EntityType::class, [
                 'class' => SynthesisElement::class,
-                'property' => 'id',
+                'choice_label' => 'id',
                 'required' => false,
             ])
             ->add('displayType', null, [
