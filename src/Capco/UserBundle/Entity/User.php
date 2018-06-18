@@ -41,6 +41,8 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     protected $parisId;
     protected $id;
 
+    protected $locked = false;
+
     protected $gender = null;
 
     /**
@@ -379,6 +381,18 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         foreach ($responses as $response) {
             $response->setUser($this);
         }
+
+        return $this;
+    }
+
+    public function getLocked(): bool
+    {
+        return $this->locked;
+    }
+
+    public function setLocked(bool $value): self
+    {
+        $this->locked = $value;
 
         return $this;
     }
