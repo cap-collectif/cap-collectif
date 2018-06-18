@@ -25,14 +25,17 @@ type Props = {
 
 type State = {
   termInputValue: string,
-  value: string,
+  value?: string,
 };
 
 class ProjectListFilter extends React.Component<Props, State> {
-  state = {
-    termInputValue: '',
-    value: '',
-  };
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      termInputValue: '',
+    };
+  }
 
   handleChangeTermInput = event => {
     this.setState({ termInputValue: event.target.value });
