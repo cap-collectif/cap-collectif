@@ -351,7 +351,7 @@ class StepAdmin extends AbstractAdmin
                         'by_reference' => false,
                         'required' => false,
                         'class' => Status::class,
-                        'empty_value' => 'admin.fields.step.default_status_none',
+                        'placeholder' => 'admin.fields.step.default_status_none',
                         'choices_as_values' => true,
                     ])
                 ;
@@ -395,7 +395,7 @@ class StepAdmin extends AbstractAdmin
                     'query' => $this->createQueryForProposalForms(),
                     'by_reference' => false,
                     'required' => false,
-                    'empty_value' => 'admin.fields.step.no_proposal_form',
+                    'placeholder' => 'admin.fields.step.no_proposal_form',
                     'choices_as_values' => true,
                 ])
                 ->end()
@@ -421,7 +421,7 @@ class StepAdmin extends AbstractAdmin
                     'query' => $this->createQueryForQuestionnaires(),
                     'by_reference' => false,
                     'required' => false,
-                    'empty_value' => 'admin.fields.step.no_questionnaire',
+                    'placeholder' => 'admin.fields.step.no_questionnaire',
                     'choices_as_values' => true,
                 ])
                 ->end()
