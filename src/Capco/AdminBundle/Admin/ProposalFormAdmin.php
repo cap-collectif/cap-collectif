@@ -227,8 +227,9 @@ class ProposalFormAdmin extends Admin
             ])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show' => [],
-                    'edit' => [],
+                    'duplicate' => [
+                        'template' => 'CapcoAdminBundle:CRUD:list__action_duplicate.html.twig',
+                    ],
                     'delete' => [],
                 ],
             ])
@@ -258,6 +259,7 @@ class ProposalFormAdmin extends Admin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(['list', 'edit', 'show', 'delete']);
+        $collection->add('duplicate');
+        $collection->clearExcept(['list', 'edit', 'show', 'delete', 'duplicate']);
     }
 }

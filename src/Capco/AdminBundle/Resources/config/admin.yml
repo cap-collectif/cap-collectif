@@ -119,7 +119,7 @@ services:
 
   capco_admin.admin.proposal_form:
     class: Capco\AdminBundle\Admin\ProposalFormAdmin
-    arguments: [~, Capco\AppBundle\Entity\ProposalForm, SonataAdminBundle:CRUD]
+    arguments: [~, Capco\AppBundle\Entity\ProposalForm, CapcoAdminBundle:ProposalForm]
     tags:
       - {name: sonata.admin, manager_type: orm, group: admin.group.project, label: admin.label.proposal_form}
     calls:
