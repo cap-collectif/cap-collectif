@@ -73,7 +73,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     protected $linkedInUrl;
 
     protected $expiresAt;
-    protected $expired;
+    protected $expired = false;
 
     /**
      * @var string
@@ -393,6 +393,18 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public function setLocked(bool $value): self
     {
         $this->locked = $value;
+
+        return $this;
+    }
+
+    public function getExpiresAt(): ?\DateTime
+    {
+        return $this->expiresAt;
+    }
+
+    public function setExpiresAt(?\DateTime $value = null): self
+    {
+        $this->expiresAt = $value;
 
         return $this;
     }
@@ -1188,13 +1200,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public function setPhoneConfirmed($phoneConfirmed)
     {
         $this->phoneConfirmed = $phoneConfirmed;
-
-        return $this;
-    }
-
-    public function setExpiresAt(\DateTime $date = null)
-    {
-        $this->expiresAt = $date;
 
         return $this;
     }
