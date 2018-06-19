@@ -21,6 +21,10 @@ services:
     autoconfigure: true
     autowire: true
 
+  Capco\AppBundle\Form\SearchType:
+    autoconfigure: true
+    autowire: true
+
   Capco\AppBundle\Form\CommentType:
     autoconfigure: true
     autowire: true

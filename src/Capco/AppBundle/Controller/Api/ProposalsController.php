@@ -168,7 +168,7 @@ class ProposalsController extends FOSRestController
             ->setProposal($proposal)
         ;
 
-        $form = $this->createForm(new ReportingType(), $report, ['csrf_protection' => false]);
+        $form = $this->createForm(ReportingType::class, $report, ['csrf_protection' => false]);
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {

@@ -11,13 +11,6 @@ use Symfony\Component\Validator\Constraints\Valid;
 
 class SynthesisElementType extends AbstractType
 {
-    protected $hasDivision = true;
-
-    public function __construct($hasDivision = true)
-    {
-        $this->hasDivision = $hasDivision;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -39,7 +32,7 @@ class SynthesisElementType extends AbstractType
             ])
         ;
 
-        if ($this->hasDivision) {
+        if ($options['hasDivision']) {
             $builder->add('division', new SynthesisDivisionType(), [
                 'required' => false,
                 'constraints' => new Valid(),
