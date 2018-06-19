@@ -5,7 +5,8 @@ import ReactToggle from 'react-toggle';
 type Props = {
   input: Object,
   meta: Object,
-  label: any,
+  label: string,
+  roledescription?: string,
   disabled: boolean,
   error: any,
   labelClassName?: string,
@@ -21,20 +22,15 @@ export class Toggle extends React.Component<Props> {
   };
 
   render() {
-    const {
-      input,
-      labelSide,
-      label,
-      id,
-      disabled,
-      meta: { touched, error },
-    } = this.props;
+    const { input, labelSide, label, id, disabled, roledescription, meta: { touched, error } } = this.props;
     return (
       <div className="form-group">
         <label style={{ display: 'flex', alignItems: 'center' }}>
           {labelSide === 'RIGHT' && <span style={{ marginRight: 10 }}>{label}</span>}
           <ReactToggle
             id={id}
+            label={label}
+            aria-roledescription={roledescription}
             disabled={disabled}
             checked={input.value}
             onChange={input.onChange}

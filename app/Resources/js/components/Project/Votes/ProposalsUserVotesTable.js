@@ -10,7 +10,10 @@ import {
   DragDropContext,
   Droppable,
   Draggable,
+  type DragStart,
+  type HookProvided,
   type DropResult,
+  type DragUpdate,
   type DraggableProvided,
   type DroppableProvided,
   type DraggableStateSnapshot,
@@ -104,7 +107,8 @@ const renderDraggableMembers = ({ fields, votes, step, deletable }: VotesProps) 
                     innerRef={provided.innerRef}
                     isDragging={snapshot.isDragging}
                     {...provided.draggableProps}
-                    {...provided.dragHandleProps}>
+                    {...provided.dragHandleProps}
+                    aria-roledescription="Item déplaçable. Appuyez sur la bar d'espace pour déplacer">
                     {/* $FlowFixMe */}
                     <ProposalUserVoteItem
                       member={member}
@@ -137,15 +141,29 @@ const renderDraggableMembers = ({ fields, votes, step, deletable }: VotesProps) 
 };
 
 export class ProposalsUserVotesTable extends React.Component<Props> {
-  onDragStart = () => {
+  onDragStart = (start: DragStart, provided: HookProvided) => {
     // Add a little vibration if the browser supports it.
     // Add's a nice little physical feedback
     if (window.navigator.vibrate) {
       window.navigator.vibrate(100);
     }
+
+    provided.announce('Start of drag and drop');
   };
 
-  onDragEnd = (result: DropResult) => {
+  onDragUpdate = (update: DragUpdate, provided: HookProvided) => {
+    const { votes } = this.props;
+
+    const title = votes.edges[update.source.index].node.proposal.title;
+
+    provided.announce(`Vous déplacez ${title} en position ${update.destination.index + 1}`);
+  };
+
+  onDragEnd = (result: DropResult, provided: HookProvided) => {
+    const { votes } = this.props;
+
+    const title = votes.edges[result.source.index].node.proposal.title;
+
     // dropped outside the list
     if (!result.destination || result.destination.index === result.source.index) {
       return;
@@ -157,6 +175,8 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
     this.props.dispatch(
       arrayMove(this.props.form, 'votes', result.source.index, result.destination.index),
     );
+
+    provided.announce(`Vous avez déplacé ${title} en position ${result.destination.index + 1}`);
   };
 
   render() {
@@ -178,7 +198,7 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
 
     return (
       <Row className="proposals-user-votes__table" style={{ boxSizing: 'border-box' }}>
-        <DragDropContext onDragEnd={this.onDragEnd} onDragStart={this.onDragStart}>
+        <DragDropContext onDragEnd={this.onDragEnd} onDragStart={this.onDragStart} onDragUpdate={this.onDragUpdate}>
           <Droppable droppableId={`droppable${form}`}>
             {(provided: DroppableProvided, snapshot: DroppableStateSnapshot) => {
               return (
@@ -230,6 +250,7 @@ export default createFragmentContainer(container, {
           anonymous
           proposal {
             id
+            title
           }
         }
       }
