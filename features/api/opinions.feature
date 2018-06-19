@@ -72,6 +72,8 @@ Scenario: Anonymous API client wants to retrieve an opinion
         },
         @...@
       ],
+      "connections": @array@,
+      "connectionsCount": @integer@,
       "author": {
         "username": @string@,
         "displayName": @string@,
@@ -249,7 +251,6 @@ Scenario: Logged in API client wants to update his opinion
   | 0 | {"opinionId": "opinion3"} |
 
 ## Vote
-
 Scenario: Anonymous API client wants to get all votes of an opinion
   When I send a GET request to "/api/opinions/opinion57/votes"
   Then the JSON response status code should be 200

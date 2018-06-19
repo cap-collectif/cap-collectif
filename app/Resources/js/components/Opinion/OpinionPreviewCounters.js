@@ -64,6 +64,16 @@ const OpinionPreviewCounters = React.createClass({
         />,
       );
     }
+    if (!opinion.parent && type.linkable) {
+      counters.push(
+        <FormattedMessage
+          id="global.links"
+          values={{
+            num: opinion.connectionsCount,
+          }}
+        />,
+      );
+    }
     return (
       <p className="opinion__votes excerpt small">
         {counters.map((counter, index) => {

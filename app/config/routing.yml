@@ -92,6 +92,13 @@ capco_api_opinions:
   defaults:
     _format: json
 
+capco_api_opinion_links:
+  resource: "@CapcoAppBundle/Controller/Api/OpinionLinksController.php"
+  type: annotation
+  prefix: /api
+  defaults:
+    _format: json
+
 capco_api_opinion_types:
   resource: "@CapcoAppBundle/Controller/Api/OpinionTypesController.php"
   type: annotation

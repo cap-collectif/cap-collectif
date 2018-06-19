@@ -78,6 +78,14 @@
                     project.show.sources
                 {% endtranschoice %}</span>
             {% endif %}
+            {% if opinionType.linkable and isVersion == false %}
+                <span class="count__separator"> • </span>
+                <span>
+                  {% transchoice nbConnections with {'%count%': nbConnections} from 'CapcoAppBundle' %}
+                    project.show.connections
+                  {% endtranschoice %}
+                </span>
+            {% endif %}
         </p>
     </div>
 </div>

@@ -56,7 +56,7 @@ Scenario: API client wants to list sources of a version
   }
   """
 
-@security 
+@security
 Scenario: Anonymous API client wants to add a source to an opinion
   When I send a POST request to "/api/opinions/opinion1/sources" with a valid source json
   Then the JSON response status code should be 401

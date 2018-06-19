@@ -52,6 +52,8 @@ Opinion:
             votesCountNok:
                 type: "Int!"
                 description: "Number of negative votes."
+            connectionsCount:
+                type: "Int!"
             argumentsCount:
                 type: "Int!"
                 description: "Number of arguments."

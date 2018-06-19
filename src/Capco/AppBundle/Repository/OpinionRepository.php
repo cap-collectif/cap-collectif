@@ -53,12 +53,14 @@ class OpinionRepository extends EntityRepository
     public function getOne(string $id)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('a', 'm', 'ot', 's', 'appendix')
+            ->addSelect('a', 'm', 'ot', 's', 'appendix', 'childConnections', 'parentConnections')
             ->leftJoin('o.Author', 'a')
             ->leftJoin('a.media', 'm')
             ->leftJoin('o.OpinionType', 'ot')
             ->leftJoin('o.step', 's')
             ->leftJoin('o.appendices', 'appendix')
+            ->leftJoin('o.childConnections', 'childConnections')
+            ->leftJoin('o.parentConnections', 'parentConnections')
             ->andWhere('o.id = :id')
             ->setParameter('id', $id)
         ;
