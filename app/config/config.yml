@@ -1,5 +1,5 @@
 imports:
-    - { resource: parameters.yml, ignore_errors: true }
+    - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: sonata.yml }
     - { resource: liip_imagine.yml }
@@ -7,7 +7,7 @@ imports:
     - { resource: joli/jolitypo.yml }
 
 framework:
-    secret: ***REMOVED***
+    secret: '%secret%'
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
         strict_requirements: null
