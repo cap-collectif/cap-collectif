@@ -1,44 +1,45 @@
-// @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import RankingBlock from './RankingBlock';
 import ButtonBody from '../Reply/Form/ButtonBody';
 
-type Props = {
-  id: string,
-  field: Object,
-  getGroupStyle: Function,
-  renderFormErrors: Function,
-  onChange: Function,
-  onBlur?: Function,
-  disabled?: boolean,
-  label?: any,
-  labelClassName: string,
-};
+const Ranking = React.createClass({
+  displayName: 'Ranking',
 
-class Ranking extends React.Component<Props> {
-  static displayName = 'Ranking';
+  propTypes: {
+    id: PropTypes.string.isRequired,
+    field: PropTypes.object.isRequired,
+    getGroupStyle: PropTypes.func.isRequired,
+    renderFormErrors: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
+    onBlur: PropTypes.func,
+    disabled: PropTypes.bool,
+    label: PropTypes.any,
+    labelClassName: PropTypes.string,
+  },
 
-  static defaultProps = {
-    disabled: false,
-    labelClassName: '',
-  };
+  getDefaultProps() {
+    return {
+      disabled: false,
+      labelClassName: '',
+    };
+  },
 
-  empty = () => {
-    //   ¯\_(ツ)_/¯ // $FlowFixMe
+  empty() {
+    //   ¯\_(ツ)_/¯
     this.rankingBlock
       .getDecoratedComponentInstance()
       .getDecoratedComponentInstance()
       .reset();
-  };
+  },
 
-  handleRankingChange = (ranking: Array<Object>) => {
+  handleRankingChange(ranking) {
     const { onChange } = this.props;
     const values = [];
     ranking.map(item => values.push(item.label));
 
     onChange(values);
-  };
+  },
 
   render() {
     const {
@@ -69,7 +70,6 @@ class Ranking extends React.Component<Props> {
           </div>
         )}
         <RankingBlock
-          // $FlowFixMe
           ref={c => (this.rankingBlock = c)}
           field={field}
           disabled={disabled}
@@ -79,7 +79,7 @@ class Ranking extends React.Component<Props> {
         {renderFormErrors(field.id)}
       </div>
     );
-  }
-}
+  },
+});
 
 export default Ranking;

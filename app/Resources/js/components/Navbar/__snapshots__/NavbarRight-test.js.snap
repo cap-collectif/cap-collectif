@@ -32,7 +32,6 @@ exports[`<NavbarRight /> should render correctly 1`] = `
       eventKey={3.4}
       header={false}
       href="/profile/edit-profile#account"
-      key="3.4"
     >
       <i
         className="cap cap-setting-adjustment"
@@ -52,7 +51,6 @@ exports[`<NavbarRight /> should render correctly 1`] = `
       disabled={false}
       divider={true}
       header={false}
-      key="3.5"
     />
     <MenuItem
       bsClass="dropdown"
@@ -61,7 +59,6 @@ exports[`<NavbarRight /> should render correctly 1`] = `
       eventKey={3.6}
       header={false}
       id="logout-button"
-      key="3.6"
       onClick={[Function]}
     >
       <i

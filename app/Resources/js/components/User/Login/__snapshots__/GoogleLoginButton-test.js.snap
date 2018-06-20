@@ -36,4 +36,4 @@ exports[`<GoogleLoginButton /> renders a button with correct label 1`] = `
 </a>
 `;
 
-exports[`<GoogleLoginButton /> renders nothing if login_gplus is not activate 1`] = `""`;
+exports[`<GoogleLoginButton /> renders nothing if login_gplus is not activate 1`] = `null`;

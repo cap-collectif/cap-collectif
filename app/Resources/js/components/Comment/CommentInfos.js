@@ -1,21 +1,20 @@
-// @flow
 import React from 'react';
 import PinnedLabel from '../Utils/PinnedLabel';
 import UserLink from '../User/UserLink';
 
-type Props = {
-  comment: Object,
-};
+const CommentInfos = React.createClass({
+  propTypes: {
+    comment: React.PropTypes.object,
+  },
 
-class CommentInfos extends React.Component<Props> {
-  renderAuthorName = () => {
+  renderAuthorName() {
     const { comment } = this.props;
     if (comment.author) {
       return <UserLink user={comment.author} />;
     }
 
     return <span>{comment.authorName}</span>;
-  };
+  },
 
   render() {
     const { comment } = this.props;
@@ -26,7 +25,7 @@ class CommentInfos extends React.Component<Props> {
         <PinnedLabel show={comment.pinned} type="comment" />
       </p>
     );
-  }
-}
+  },
+});
 
 export default CommentInfos;

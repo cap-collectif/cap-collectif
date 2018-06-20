@@ -19,18 +19,10 @@ const onSubmit = values => {
   });
 };
 
-type Props = {
-  submitting: boolean,
-  handleSubmit: Function,
-  submit: Function,
-};
-
-type State = {
-  showModal: boolean,
-};
-
-export class ProposalFormCreateButton extends React.Component<Props, State> {
-  state = { showModal: false };
+export const ProposalFormCreateButton = React.createClass({
+  getInitialState() {
+    return { showModal: false };
+  },
 
   render() {
     const { submitting, handleSubmit, submit } = this.props;
@@ -87,8 +79,8 @@ export class ProposalFormCreateButton extends React.Component<Props, State> {
         </Modal>
       </div>
     );
-  }
-}
+  },
+});
 
 export default reduxForm({
   onSubmit,

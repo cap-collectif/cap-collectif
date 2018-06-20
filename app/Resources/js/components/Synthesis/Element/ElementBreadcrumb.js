@@ -1,17 +1,19 @@
 import React from 'react';
 import ElementTitle from './ElementTitle';
 
-type Props = {
-  element: Object,
-  link: string,
-};
+const ElementBreadcrumb = React.createClass({
+  propTypes: {
+    element: React.PropTypes.object,
+    link: React.PropTypes.string,
+  },
 
-class ElementBreadcrumb extends React.Component<Props> {
-  static defaultProps = {
-    link: 'edition',
-  };
+  getDefaultProps() {
+    return {
+      link: 'edition',
+    };
+  },
 
-  getElementBreadcrumbItems = element => {
+  getElementBreadcrumbItems(element) {
     const items = [];
     if (element.path) {
       element.path.split('|').map(data => {
@@ -35,9 +37,9 @@ class ElementBreadcrumb extends React.Component<Props> {
     }
     items.push(element);
     return items;
-  };
+  },
 
-  renderBreadCrumbItem = (element, index) => {
+  renderBreadCrumbItem(element, index) {
     const { link } = this.props;
     return (
       <span key={index} className="element__breadcrumb-item">
@@ -45,7 +47,7 @@ class ElementBreadcrumb extends React.Component<Props> {
         <ElementTitle element={element} link={link} />
       </span>
     );
-  };
+  },
 
   render() {
     const { element } = this.props;
@@ -58,7 +60,7 @@ class ElementBreadcrumb extends React.Component<Props> {
         })}
       </p>
     );
-  }
-}
+  },
+});
 
 export default ElementBreadcrumb;

@@ -1,42 +1,36 @@
-// @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { injectIntl } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { changeTerm } from '../../../redux/modules/proposal';
 import Input from '../../Form/Input';
-import type { GlobalState, Dispatch } from '../../../types';
+import type { State } from '../../../types';
 
-type Props = {
-  dispatch: Dispatch,
-  terms: string,
-  intl: Object,
-};
+const ProposalListSearch = React.createClass({
+  propTypes: {
+    dispatch: PropTypes.func.isRequired,
+    terms: PropTypes.string.isRequired,
+    intl: PropTypes.object.isRequired,
+  },
 
-type State = {
-  terms: string,
-};
+  getInitialState() {
+    return {
+      terms: this.props.terms,
+    };
+  },
 
-class ProposalListSearch extends React.Component<Props, State> {
-  state = {
-    terms: this.props.terms,
-  };
-
-  handleSubmit = (e: Event) => {
+  handleSubmit(e) {
     const { dispatch } = this.props;
 
     e.preventDefault();
-    // $FlowFixMe
     let value = this._input.getWrappedInstance().getValue();
     value = value.length > 0 ? value : null;
-    if (value) {
-      dispatch(changeTerm(value));
-    }
-  };
+    dispatch(changeTerm(value));
+  },
 
-  handleChange = (event: $FlowFixMe) => {
+  handleChange(event) {
     this.setState({ terms: event.target.value });
-  };
+  },
 
   render() {
     const { intl } = this.props;
@@ -47,7 +41,6 @@ class ProposalListSearch extends React.Component<Props, State> {
           id="proposal-search-input"
           type="text"
           aria-label={intl.formatMessage({ id: 'project.searchform.search' })}
-          // $FlowFixMe
           ref={c => (this._input = c)}
           placeholder="proposal.search"
           buttonAfter={
@@ -60,12 +53,14 @@ class ProposalListSearch extends React.Component<Props, State> {
         />
       </form>
     );
-  }
-}
-
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
-  terms: state.proposal.terms ? state.proposal.terms : '',
+  },
 });
+
+const mapStateToProps = (state: State) => {
+  return {
+    terms: state.proposal.terms ? state.proposal.terms : '',
+  };
+};
 
 const container = injectIntl(ProposalListSearch);
 

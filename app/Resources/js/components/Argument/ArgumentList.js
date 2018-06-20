@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Row, Col } from 'react-bootstrap';
@@ -8,43 +7,35 @@ import ArgumentActions from '../../actions/ArgumentActions';
 import ArgumentItem from './ArgumentItem';
 import Loader from '../Ui/Loader';
 
-type Props = {
-  opinion: Object,
-  type: string,
-};
+const ArgumentList = React.createClass({
+  propTypes: {
+    opinion: React.PropTypes.object.isRequired,
+    type: React.PropTypes.string.isRequired,
+  },
 
-type State = {
-  arguments: Array<$FlowFixMe>,
-  count: number,
-  isLoading: boolean,
-  order: $FlowFixMe,
-  type: number,
-};
-
-export class ArgumentList extends React.Component<Props, State> {
-  static displayName = 'ArgumentList';
-
-  state = {
-    arguments: [],
-    count: 0,
-    isLoading: true,
-    order: ArgumentStore.orderByType[this.getNumericType()],
-    type: this.getNumericType(),
-  };
+  getInitialState() {
+    return {
+      arguments: [],
+      count: 0,
+      isLoading: true,
+      order: ArgumentStore.orderByType[this.getNumericType()],
+      type: this.getNumericType(),
+    };
+  },
 
   componentWillMount() {
     ArgumentStore.addChangeListener(this.onChange);
-  }
+  },
 
   componentDidMount() {
     this.loadArguments();
-  }
+  },
 
   componentWillUnmount() {
     ArgumentStore.removeChangeListener(this.onChange);
-  }
+  },
 
-  onChange = () => {
+  onChange() {
     if (ArgumentStore.orderByType[this.state.type] === this.state.order) {
       this.setState({
         arguments: ArgumentStore.arguments[this.state.type],
@@ -59,28 +50,26 @@ export class ArgumentList extends React.Component<Props, State> {
       isLoading: true,
     });
     this.loadArguments();
-  };
+  },
 
   getNumericType() {
     const { type } = this.props;
     return type === 'no' ? 0 : 1;
-  }
+  },
 
   updateSelectedValue() {
-    // $FlowFixMe
     const value = $(ReactDOM.findDOMNode(this.refs.filter)).val();
     ArgumentActions.changeSortOrder(this.state.type, value);
-  }
+  },
 
   loadArguments() {
     const { opinion } = this.props;
     ArgumentActions.load(opinion, this.state.type);
-  }
+  },
 
   renderFilter() {
     const { type } = this.props;
     const { order } = this.state;
-
     const htmlFor = `filter-arguments-${type}`;
     if (this.state.arguments.length > 1) {
       return (
@@ -109,7 +98,7 @@ export class ArgumentList extends React.Component<Props, State> {
         </Col>
       );
     }
-  }
+  },
 
   render() {
     const { type } = this.props;
@@ -146,7 +135,7 @@ export class ArgumentList extends React.Component<Props, State> {
         )}
       </div>
     );
-  }
-}
+  },
+});
 
 export default ArgumentList;

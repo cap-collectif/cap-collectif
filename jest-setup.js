@@ -1,28 +1,16 @@
+// @flow
 /* eslint-env jest */
 import 'babel-polyfill';
-import 'whatwg-fetch';
-import $ from 'jquery';
 // $FlowFixMe
 import moment from 'moment-timezone';
 // $FlowFixMe
 import 'moment/locale/fr';
-
-import { configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-
-
-configure({ adapter: new Adapter() });
 
 moment.locale('fr');
 moment.tz.setDefault("Europe/Paris");
 
 // $FlowFixMe
 global.$ = require('jquery')(window);
-// $FlowFixMe
-global.$ = $;
-// $FlowFixMe
-global.jQuery = $;
-
 
 global.window.__SERVER__ = false;
 

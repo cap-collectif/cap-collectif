@@ -13,8 +13,12 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       xs={1}
     >
       <Toggle
-        checked={false}
-        icons={true}
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
         onChange={[Function]}
       />
     </Col>
@@ -46,8 +50,12 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       xs={1}
     >
       <Toggle
-        checked={false}
-        icons={true}
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
         onChange={[Function]}
       />
     </Col>
@@ -73,8 +81,12 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       xs={1}
     >
       <Toggle
-        checked={false}
-        icons={true}
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
         onChange={[Function]}
       />
     </Col>
@@ -103,8 +115,12 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       xs={1}
     >
       <Toggle
-        checked={false}
-        icons={true}
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
         onChange={[Function]}
       />
     </Col>
@@ -135,7 +151,12 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       <Toggle
         checked={true}
         disabled={true}
-        icons={true}
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
       />
     </Col>
     <Col
@@ -162,7 +183,12 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       <Toggle
         checked={true}
         disabled={true}
-        icons={true}
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
       />
     </Col>
     <Col
@@ -187,8 +213,12 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       xs={1}
     >
       <Toggle
-        checked={false}
-        icons={true}
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
         onChange={[Function]}
       />
     </Col>
@@ -214,8 +244,12 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       xs={1}
     >
       <Toggle
-        checked={false}
-        icons={true}
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
         onChange={[Function]}
       />
     </Col>
@@ -272,8 +306,12 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       xs={1}
     >
       <Toggle
-        checked={false}
-        icons={true}
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
         onChange={[Function]}
       />
     </Col>
@@ -323,9 +361,13 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
       xs={1}
     >
       <Toggle
-        checked={false}
         disabled={false}
-        icons={true}
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
         onChange={[Function]}
       />
     </Col>
@@ -357,8 +399,12 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       xs={1}
     >
       <Toggle
-        checked={false}
-        icons={true}
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
         onChange={[Function]}
       />
     </Col>
@@ -390,8 +436,12 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       xs={1}
     >
       <Toggle
-        checked={false}
-        icons={true}
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
         onChange={[Function]}
       />
     </Col>
@@ -417,8 +467,12 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       xs={1}
     >
       <Toggle
-        checked={false}
-        icons={true}
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
         onChange={[Function]}
       />
     </Col>
@@ -447,8 +501,12 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       xs={1}
     >
       <Toggle
-        checked={false}
-        icons={true}
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
         onChange={[Function]}
       />
     </Col>
@@ -479,7 +537,12 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       <Toggle
         checked={true}
         disabled={true}
-        icons={true}
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
       />
     </Col>
     <Col
@@ -506,7 +569,12 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       <Toggle
         checked={true}
         disabled={true}
-        icons={true}
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
       />
     </Col>
     <Col
@@ -531,8 +599,12 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       xs={1}
     >
       <Toggle
-        checked={false}
-        icons={true}
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
         onChange={[Function]}
       />
     </Col>
@@ -558,8 +630,12 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       xs={1}
     >
       <Toggle
-        checked={false}
-        icons={true}
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
         onChange={[Function]}
       />
     </Col>
@@ -623,8 +699,12 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       xs={1}
     >
       <Toggle
-        checked={false}
-        icons={true}
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
         onChange={[Function]}
       />
     </Col>
@@ -674,9 +754,13 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
       xs={1}
     >
       <Toggle
-        checked={false}
         disabled={true}
-        icons={true}
+        icons={
+          Object {
+            "checked": <Component />,
+            "unchecked": <Component />,
+          }
+        }
         onChange={[Function]}
       />
     </Col>

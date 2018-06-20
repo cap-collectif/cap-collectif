@@ -13,7 +13,6 @@ describe('<OpinionEditForm />', () => {
       body: 'body',
     },
     step: {},
-    initialValues: {},
   };
 
   it('renders a form', () => {

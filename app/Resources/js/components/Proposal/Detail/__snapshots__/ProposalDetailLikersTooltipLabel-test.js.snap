@@ -17,7 +17,7 @@ exports[`<ProposalDetailLikersTooltipLabel /> should render a formatted message 
 </Truncate>
 `;
 
-exports[`<ProposalDetailLikersTooltipLabel /> should render nothing when no likers 1`] = `""`;
+exports[`<ProposalDetailLikersTooltipLabel /> should render nothing when no likers 1`] = `null`;
 
 exports[`<ProposalDetailLikersTooltipLabel /> should render two formatted message when several likers 1`] = `
 <span>

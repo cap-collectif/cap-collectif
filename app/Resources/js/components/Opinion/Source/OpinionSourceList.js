@@ -3,11 +3,11 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import OpinionSource from './OpinionSource';
 
-type Props = {
-  sources: Array<$FlowFixMe>,
-};
+const OpinionSourceList = React.createClass({
+  propTypes: {
+    sources: React.PropTypes.array.isRequired,
+  },
 
-class OpinionSourceList extends React.Component<Props> {
   render() {
     const { sources } = this.props;
     if (sources.length === 0) {
@@ -27,7 +27,7 @@ class OpinionSourceList extends React.Component<Props> {
         })}
       </ul>
     );
-  }
-}
+  },
+});
 
 export default OpinionSourceList;

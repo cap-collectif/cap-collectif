@@ -3,18 +3,18 @@ import * as React from 'react';
 import ProjectPreviewCounter from './ProjectPreviewCounter';
 import TagsList from '../../Ui/List/TagsList';
 
-type Props = {
-  project: Object,
-};
+const ProjectPreviewCounters = React.createClass({
+  propTypes: {
+    project: React.PropTypes.object.isRequired,
+  },
 
-class ProjectPreviewCounters extends React.Component<Props> {
-  getNbCounters = () => {
+  getNbCounters() {
     const { project } = this.props;
     const votesCount = project.votesCount;
     let nb = 2;
     nb += votesCount ? 1 : 0;
     return nb;
-  };
+  },
 
   render() {
     const { project } = this.props;
@@ -39,7 +39,7 @@ class ProjectPreviewCounters extends React.Component<Props> {
         />
       </TagsList>
     );
-  }
-}
+  },
+});
 
 export default ProjectPreviewCounters;

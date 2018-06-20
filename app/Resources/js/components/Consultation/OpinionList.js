@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { QueryRenderer, graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import Opinion from './Opinion';
@@ -31,13 +31,13 @@ const renderOpinionList = ({
   return <Loader />;
 };
 
-type Props = {
-  section: Object,
-  consultation: Object,
-  intl: Object,
-};
+export const OpinionList = React.createClass({
+  propTypes: {
+    section: PropTypes.object.isRequired,
+    consultation: PropTypes.object.isRequired,
+    intl: PropTypes.object.isRequired,
+  },
 
-export class OpinionList extends React.Component<Props> {
   render() {
     const { section, consultation, intl } = this.props;
     return (
@@ -122,8 +122,8 @@ export class OpinionList extends React.Component<Props> {
         )}
       </div>
     );
-  }
-}
+  },
+});
 
 const container = injectIntl(OpinionList);
 

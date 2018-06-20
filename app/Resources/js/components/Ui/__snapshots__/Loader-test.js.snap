@@ -30,4 +30,4 @@ exports[`<Loader /> renders LoaderContainer 1`] = `
 />
 `;
 
-exports[`<Loader /> renders nothing 1`] = `""`;
+exports[`<Loader /> renders nothing 1`] = `null`;

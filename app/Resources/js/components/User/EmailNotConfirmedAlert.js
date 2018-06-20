@@ -1,31 +1,30 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { Alert, Button } from 'react-bootstrap';
 import Fetcher from '../../services/Fetcher';
-import type { GlobalState } from '../../types';
+import type { State } from '../../types';
 
-type Props = {
-  user?: ?Object,
-};
+export const EmailNotConfirmedAlert = React.createClass({
+  propTypes: {
+    user: PropTypes.object,
+  },
 
-type State = {
-  resendingConfirmation: boolean,
-  confirmationSent: boolean,
-};
+  getDefaultProps() {
+    return {
+      user: null,
+    };
+  },
 
-export class EmailNotConfirmedAlert extends React.Component<Props, State> {
-  static defaultProps = {
-    user: null,
-  };
+  getInitialState() {
+    return {
+      resendingConfirmation: false,
+      confirmationSent: false,
+    };
+  },
 
-  state = {
-    resendingConfirmation: false,
-    confirmationSent: false,
-  };
-
-  handleResend = () => {
+  handleResend() {
     this.setState({ resendingConfirmation: true });
     Fetcher.post('/account/resend_confirmation_email')
       .then(() => {
@@ -40,7 +39,7 @@ export class EmailNotConfirmedAlert extends React.Component<Props, State> {
           confirmationSent: true,
         });
       });
-  };
+  },
 
   render() {
     const { user } = this.props;
@@ -88,10 +87,10 @@ export class EmailNotConfirmedAlert extends React.Component<Props, State> {
         </div>
       </Alert>
     );
-  }
-}
+  },
+});
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   user: state.user.user,
 });
 

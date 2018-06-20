@@ -1,8 +1,7 @@
-// @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import ArgumentForm, { formName } from './ArgumentForm';
 import CloseButton from '../../Form/CloseButton';
@@ -10,14 +9,14 @@ import SubmitButton from '../../Form/SubmitButton';
 import { closeArgumentEditModal } from '../../../redux/modules/opinion';
 import type { State } from '../../../types';
 
-type Props = {
-  show: boolean,
-  argument?: Object,
-  dispatch: Function,
-  submitting: boolean,
-};
+const ArgumentEditModal = React.createClass({
+  propTypes: {
+    show: PropTypes.bool.isRequired,
+    argument: PropTypes.object,
+    dispatch: PropTypes.func.isRequired,
+    submitting: PropTypes.bool.isRequired,
+  },
 
-class ArgumentEditModal extends React.Component<Props> {
   render() {
     const { argument, show, dispatch, submitting } = this.props;
     return (
@@ -54,12 +53,10 @@ class ArgumentEditModal extends React.Component<Props> {
         </Modal.Footer>
       </Modal>
     );
-  }
-}
-
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, { argument }) => ({
-  show: argument ? state.opinion.showArgumentEditModal === argument.id : false,
-  submitting: isSubmitting(formName)(state),
+  },
 });
 
-export default connect(mapStateToProps)(ArgumentEditModal);
+export default connect((state: State, { argument }) => ({
+  show: state.opinion.showArgumentEditModal === argument.id,
+  submitting: isSubmitting(formName)(state),
+}))(ArgumentEditModal);

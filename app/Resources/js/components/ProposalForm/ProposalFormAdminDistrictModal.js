@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Field } from 'redux-form';
@@ -8,15 +8,15 @@ import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
 import component from '../Form/Field';
 
-type Props = {
-  show: boolean,
-  onClose: Function,
-  onSubmit: Function,
-  member: string,
-  isCreating: boolean,
-};
+export const ProposalFormAdminDistrictModal = React.createClass({
+  propTypes: {
+    show: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    member: PropTypes.string.isRequired,
+    isCreating: PropTypes.bool.isRequired,
+  },
 
-export class ProposalFormAdminDistrictModal extends React.Component<Props> {
   render() {
     const { member, show, isCreating, onClose, onSubmit } = this.props;
     return (
@@ -71,7 +71,7 @@ export class ProposalFormAdminDistrictModal extends React.Component<Props> {
         </Modal.Footer>
       </Modal>
     );
-  }
-}
+  },
+});
 
 export default connect()(ProposalFormAdminDistrictModal);

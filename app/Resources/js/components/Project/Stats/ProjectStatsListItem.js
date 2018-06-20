@@ -1,16 +1,15 @@
-// @flow
 import React from 'react';
 import { FormattedNumber } from 'react-intl';
 import { ListGroupItem } from 'react-bootstrap';
 
-type Props = {
-  item: Object,
-  showPercentage: boolean,
-  isCurrency: boolean,
-};
+const ProjectStatsListItem = React.createClass({
+  propTypes: {
+    item: React.PropTypes.object.isRequired,
+    showPercentage: React.PropTypes.bool.isRequired,
+    isCurrency: React.PropTypes.bool.isRequired,
+  },
 
-class ProjectStatsListItem extends React.Component<Props> {
-  getFormattedValue = () => {
+  getFormattedValue() {
     const { isCurrency, item, showPercentage } = this.props;
     if (showPercentage) {
       return `${item.percentage}%`;
@@ -27,7 +26,7 @@ class ProjectStatsListItem extends React.Component<Props> {
       );
     }
     return item.value;
-  };
+  },
 
   render() {
     const { item } = this.props;
@@ -40,7 +39,7 @@ class ProjectStatsListItem extends React.Component<Props> {
         </div>
       </ListGroupItem>
     );
-  }
-}
+  },
+});
 
 export default ProjectStatsListItem;

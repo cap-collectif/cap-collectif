@@ -1,6 +1,4 @@
 import React from 'react';
-import createReactClass from 'create-react-class';
-import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Button, Modal } from 'react-bootstrap';
 import SynthesisElementActions from '../../../actions/SynthesisElementActions';
@@ -8,15 +6,13 @@ import SynthesisElementStore from '../../../stores/SynthesisElementStore';
 import ElementsFinder from './../ElementsFinder';
 import Input from '../../Form/ReactBootstrapInput';
 
-const UpdateModal = createReactClass({
-  displayName: 'UpdateModal',
-
+const UpdateModal = React.createClass({
   propTypes: {
-    synthesis: PropTypes.object.isRequired,
-    element: PropTypes.object.isRequired,
-    show: PropTypes.bool.isRequired,
-    toggle: PropTypes.func.isRequired,
-    process: PropTypes.func,
+    synthesis: React.PropTypes.object.isRequired,
+    element: React.PropTypes.object.isRequired,
+    show: React.PropTypes.bool.isRequired,
+    toggle: React.PropTypes.func.isRequired,
+    process: React.PropTypes.func,
   },
 
   getDefaultProps() {
@@ -153,7 +149,7 @@ const UpdateModal = createReactClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          <FormattedMessage id="synthesis.edition.action.update.field.title" />
+          {` ${<FormattedMessage id="synthesis.edition.action.update.field.title" />}`}
         </h2>
         <Input
           type="text"
@@ -174,7 +170,7 @@ const UpdateModal = createReactClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          <FormattedMessage id="synthesis.edition.action.update.field.description" />
+          {` ${<FormattedMessage id="synthesis.edition.action.update.field.description" />}`}
         </h2>
         <Input
           type="textarea"
@@ -195,7 +191,7 @@ const UpdateModal = createReactClass({
     return (
       <div className="modal__action">
         <h2 className="h4">
-          <FormattedMessage id="synthesis.edition.action.update.field.parent" />
+          {` ${<FormattedMessage id="synthesis.edition.action.update.field.parent" />}`}
         </h2>
         {this.renderParentFinder()}
       </div>
@@ -225,7 +221,7 @@ const UpdateModal = createReactClass({
       <Modal show={show} onHide={this.hide} animation={false} dialogClassName="modal--update">
         <Modal.Header closeButton>
           <Modal.Title>
-            <FormattedMessage id="synthesis.edition.action.update.title" />
+            {<FormattedMessage id="synthesis.edition.action.update.title" />}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -235,10 +231,10 @@ const UpdateModal = createReactClass({
         </Modal.Body>
         <Modal.Footer>
           <Button type="button" onClick={this.hide}>
-            <FormattedMessage id="synthesis.edition.action.update.btn_cancel" />
+            {<FormattedMessage id="synthesis.edition.action.update.btn_cancel" />}
           </Button>
           <Button bsStyle="primary" type="submit" onClick={this.update}>
-            <FormattedMessage id="synthesis.edition.action.update.btn_submit" />
+            {<FormattedMessage id="synthesis.edition.action.update.btn_submit" />}
           </Button>
         </Modal.Footer>
       </Modal>

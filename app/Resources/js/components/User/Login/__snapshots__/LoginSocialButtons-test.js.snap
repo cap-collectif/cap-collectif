@@ -42,4 +42,4 @@ exports[`<LoginSocialButtons /> renders a button if feature is active 1`] = `
 </div>
 `;
 
-exports[`<LoginSocialButtons /> renders nothing if login_facebook is not activate 1`] = `""`;
+exports[`<LoginSocialButtons /> renders nothing if login_facebook is not activate 1`] = `null`;

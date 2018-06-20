@@ -1,13 +1,12 @@
-// @flow
 import React from 'react';
 import CountersNav from './CountersNav';
 import StepText from './StepText';
 
-type Props = {
-  step: Object,
-};
+const StepInfos = React.createClass({
+  propTypes: {
+    step: React.PropTypes.object.isRequired,
+  },
 
-class StepInfos extends React.Component<Props> {
   render() {
     const { step } = this.props;
     const counters = step.counters;
@@ -24,7 +23,7 @@ class StepInfos extends React.Component<Props> {
         </div>
       </div>
     );
-  }
-}
+  },
+});
 
 export default StepInfos;

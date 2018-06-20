@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { Button } from 'react-bootstrap';
@@ -11,7 +11,7 @@ import {
   voteOpinion,
   voteVersion,
 } from '../../../redux/modules/opinion';
-import type { VoteValue, OpinionAndVersion, State, Dispatch } from '../../../types';
+import type { VoteValue, OpinionAndVersion, State } from '../../../types';
 
 const valueToObject = (value: VoteValue): Object => {
   if (value === -1) {
@@ -35,55 +35,57 @@ const valueToObject = (value: VoteValue): Object => {
   };
 };
 
-type Props = {
-  style?: Object,
-  opinion: Object,
-  value: $FlowFixMe,
-  active: boolean,
-  disabled?: boolean,
-  dispatch: Dispatch,
-  user?: Object,
-  features: Object,
-};
+export const OpinionVotesButton = React.createClass({
+  propTypes: {
+    style: PropTypes.object,
+    opinion: PropTypes.object.isRequired,
+    value: PropTypes.oneOf([-1, 0, 1]).isRequired,
+    active: PropTypes.bool.isRequired,
+    disabled: PropTypes.bool,
+    dispatch: PropTypes.func.isRequired,
+    user: PropTypes.object,
+    features: PropTypes.object.isRequired,
+  },
 
-export class OpinionVotesButton extends React.Component<Props> {
-  static defaultProps = {
-    style: {},
-    disabled: false,
-  };
+  getDefaultProps() {
+    return {
+      style: {},
+      disabled: false,
+    };
+  },
 
-  isVersion = () => {
+  isVersion() {
     const { opinion } = this.props;
     return !!opinion.parent;
-  };
+  },
 
-  vote = () => {
+  vote() {
     const { opinion, value, dispatch } = this.props;
     if (this.isVersion()) {
       voteVersion(value, opinion.id, opinion.parent.id, dispatch);
     } else {
       voteOpinion(value, opinion.id, dispatch);
     }
-  };
+  },
 
-  deleteVote = () => {
+  deleteVote() {
     const { opinion, dispatch } = this.props;
     if (this.isVersion()) {
       deleteVoteVersion(opinion.id, opinion.parent.id, dispatch);
     } else {
       deleteVoteOpinion(opinion.id, dispatch);
     }
-  };
+  },
 
-  voteAction = () => {
+  voteAction() {
     const { disabled, user, active } = this.props;
     if (!user || disabled) {
       return null;
     }
     return active ? this.deleteVote() : this.vote();
-  };
+  },
 
-  voteIsEnabled = () => {
+  voteIsEnabled() {
     const { opinion, value } = this.props;
     const voteType = this.isVersion()
       ? opinion.parent.type.voteWidgetType
@@ -95,7 +97,7 @@ export class OpinionVotesButton extends React.Component<Props> {
       return value === 1;
     }
     return false;
-  };
+  },
 
   render() {
     if (!this.voteIsEnabled()) {
@@ -121,8 +123,8 @@ export class OpinionVotesButton extends React.Component<Props> {
         </Button>
       </LoginOverlay>
     );
-  }
-}
+  },
+});
 
 const mapStateToProps: MapStateToProps<*, *, *> = (
   state: State,

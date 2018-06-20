@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
 import { Row, Col, Button } from 'react-bootstrap';
 import { Field, FieldArray, reduxForm, isSubmitting } from 'redux-form';
@@ -29,12 +29,12 @@ const renderDomains = ({
   </div>
 );
 
-type Props = {
-  handleSubmit: Function,
-  submitting: boolean,
-};
+export const RegistrationEmailDomainsForm = React.createClass({
+  propTypes: {
+    handleSubmit: PropTypes.func.isRequired,
+    submitting: PropTypes.bool.isRequired,
+  },
 
-export class RegistrationEmailDomainsForm extends React.Component<Props> {
   render() {
     const { handleSubmit, submitting } = this.props;
     return (
@@ -50,8 +50,8 @@ export class RegistrationEmailDomainsForm extends React.Component<Props> {
         </form>
       </div>
     );
-  }
-}
+  },
+});
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   submitting: isSubmitting('registration-email-domains')(state),

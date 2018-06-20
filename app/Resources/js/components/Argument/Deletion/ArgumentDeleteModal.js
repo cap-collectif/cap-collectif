@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 
@@ -8,22 +8,20 @@ import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import ArgumentActions from '../../../actions/ArgumentActions';
 
-type Props = {
-  show: boolean,
-  argument: Object,
-  onClose: Function,
-};
+const ArgumentDeleteModal = React.createClass({
+  propTypes: {
+    show: PropTypes.bool.isRequired,
+    argument: PropTypes.object.isRequired,
+    onClose: PropTypes.func.isRequired,
+  },
 
-type State = {
-  isSubmitting: boolean,
-};
+  getInitialState() {
+    return {
+      isSubmitting: false,
+    };
+  },
 
-class ArgumentDeleteModal extends React.Component<Props, State> {
-  state = {
-    isSubmitting: false,
-  };
-
-  handleSubmit = () => {
+  handleSubmit() {
     const { argument, onClose } = this.props;
     this.setState({ isSubmitting: true });
     ArgumentActions.delete(ArgumentStore.opinion, argument.id)
@@ -35,7 +33,7 @@ class ArgumentDeleteModal extends React.Component<Props, State> {
       .catch(() => {
         this.setState({ isSubmitting: false });
       });
-  };
+  },
 
   render() {
     const { isSubmitting } = this.state;
@@ -69,7 +67,7 @@ class ArgumentDeleteModal extends React.Component<Props, State> {
         </Modal.Footer>
       </Modal>
     );
-  }
-}
+  },
+});
 
 export default ArgumentDeleteModal;

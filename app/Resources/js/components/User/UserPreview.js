@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
@@ -10,7 +9,7 @@ import { CardUser } from '../Ui/Card/CardUser';
 type Props = {
   user: ?Object,
   username: ?string,
-  className: string,
+  className: ?string,
   style: ?Object,
 };
 

@@ -1,10 +1,7 @@
-// @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-type Props = {};
-
-class QuillToolbar extends React.Component<Props> {
+const QuillToolbar = React.createClass({
   render() {
     return (
       <div>
@@ -55,7 +52,7 @@ class QuillToolbar extends React.Component<Props> {
         </span>
       </div>
     );
-  }
-}
+  },
+});
 
 export default QuillToolbar;

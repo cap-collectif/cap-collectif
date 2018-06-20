@@ -1,21 +1,20 @@
-// @flow
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { COMMENT_SYSTEM_SIMPLE, COMMENT_SYSTEM_BOTH } from '../../constants/ArgumentConstants';
 import ArgumentList from './ArgumentList';
 import ArgumentCreate from './Creation/ArgumentCreate';
 
-type Props = {
-  opinion: Object,
-};
+const ArgumentsBox = React.createClass({
+  propTypes: {
+    opinion: React.PropTypes.object.isRequired,
+  },
 
-class ArgumentsBox extends React.Component<Props> {
-  getCommentSystem = () => {
+  getCommentSystem() {
     const { opinion } = this.props;
     return opinion.parent ? opinion.parent.type.commentSystem : opinion.type.commentSystem;
-  };
+  },
 
-  renderArgumentsForType = (type: string) => {
+  renderArgumentsForType(type) {
     return (
       <div id={`arguments-col--${type}`}>
         <div className="opinion opinion--add-argument block block--bordered">
@@ -24,7 +23,7 @@ class ArgumentsBox extends React.Component<Props> {
         <ArgumentList type={type} {...this.props} />
       </div>
     );
-  };
+  },
 
   render() {
     if (this.getCommentSystem() === COMMENT_SYSTEM_BOTH) {
@@ -45,7 +44,7 @@ class ArgumentsBox extends React.Component<Props> {
     }
 
     return null;
-  }
-}
+  },
+});
 
 export default ArgumentsBox;

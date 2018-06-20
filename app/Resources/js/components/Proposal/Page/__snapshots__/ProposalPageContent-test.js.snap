@@ -6,36 +6,7 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
 >
   <div
     className="block"
-  >
-    <img
-      alt="Titre proposition"
-      className="img-responsive mb-15"
-      id="proposal-media"
-      src="http://capco.test"
-    />
-    <p
-      className="excerpt"
-    >
-      Summary
-    </p>
-    <div>
-      <h3
-        className="h3"
-      >
-        <FormattedMessage
-          id="proposal.description"
-          values={Object {}}
-        />
-      </h3>
-      <div
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "lorem ipsum dolor",
-          }
-        }
-      />
-    </div>
-  </div>
+  />
   <div
     className="block proposal__buttons"
   >
@@ -43,31 +14,17 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
       <Connect(ShareButtonDropdown)
         id="proposal-share-button"
         title="Titre proposition"
-        url={true}
       />
       <Relay(Connect(ProposalReportButton))
         proposal={
           Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "address": null,
-            "author": Object {
-              "id": "3",
-              "slug": "jack",
+            "_links": Object {
+              "show": "http://capco.test",
             },
-            "body": "lorem ipsum dolor",
-            "currentVotableStep": null,
-            "form": Object {
-              "contribuable": true,
-            },
-            "id": "3",
-            "media": Object {
-              "url": "http://capco.test",
-            },
-            "publicationStatus": "PUBLISHED",
+            "author": Object {},
+            "id": "proposal3",
+            "referer": "http://capco.test",
             "responses": Array [],
-            "show_url": true,
-            "summary": "Summary",
             "title": "Titre proposition",
           }
         }
@@ -77,26 +34,13 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
   <Relay(Connect(InjectIntl(ProposalEditModal)))
     proposal={
       Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "address": null,
-        "author": Object {
-          "id": "3",
-          "slug": "jack",
+        "_links": Object {
+          "show": "http://capco.test",
         },
-        "body": "lorem ipsum dolor",
-        "currentVotableStep": null,
-        "form": Object {
-          "contribuable": true,
-        },
-        "id": "3",
-        "media": Object {
-          "url": "http://capco.test",
-        },
-        "publicationStatus": "PUBLISHED",
+        "author": Object {},
+        "id": "proposal3",
+        "referer": "http://capco.test",
         "responses": Array [],
-        "show_url": true,
-        "summary": "Summary",
         "title": "Titre proposition",
       }
     }
@@ -104,26 +48,13 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
   <Relay(Connect(ProposalDeleteModal))
     proposal={
       Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "address": null,
-        "author": Object {
-          "id": "3",
-          "slug": "jack",
+        "_links": Object {
+          "show": "http://capco.test",
         },
-        "body": "lorem ipsum dolor",
-        "currentVotableStep": null,
-        "form": Object {
-          "contribuable": true,
-        },
-        "id": "3",
-        "media": Object {
-          "url": "http://capco.test",
-        },
-        "publicationStatus": "PUBLISHED",
+        "author": Object {},
+        "id": "proposal3",
+        "referer": "http://capco.test",
         "responses": Array [],
-        "show_url": true,
-        "summary": "Summary",
         "title": "Titre proposition",
       }
     }
@@ -131,26 +62,13 @@ exports[`<ProposalPageContent /> should render a proposal page content 1`] = `
   <Relay(ProposalPageComments)
     proposal={
       Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "address": null,
-        "author": Object {
-          "id": "3",
-          "slug": "jack",
+        "_links": Object {
+          "show": "http://capco.test",
         },
-        "body": "lorem ipsum dolor",
-        "currentVotableStep": null,
-        "form": Object {
-          "contribuable": true,
-        },
-        "id": "3",
-        "media": Object {
-          "url": "http://capco.test",
-        },
-        "publicationStatus": "PUBLISHED",
+        "author": Object {},
+        "id": "proposal3",
+        "referer": "http://capco.test",
         "responses": Array [],
-        "show_url": true,
-        "summary": "Summary",
         "title": "Titre proposition",
       }
     }

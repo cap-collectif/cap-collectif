@@ -1,17 +1,17 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import OpinionSourceButtons from './OpinionSourceButtons';
 
-type Props = {
-  source: Object,
-};
-
-const OpinionSourceFooter = ({ source }: Props) => {
+const OpinionSourceFooter = ({ source }: Object) => {
   return (
     <div className="opinion__votes excerpt small">
       <OpinionSourceButtons source={source} />
     </div>
   );
+};
+
+OpinionSourceFooter.propTypes = {
+  source: PropTypes.object.isRequired,
 };
 
 export default OpinionSourceFooter;

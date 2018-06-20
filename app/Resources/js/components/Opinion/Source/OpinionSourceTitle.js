@@ -1,12 +1,8 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Label } from 'react-bootstrap';
 
-type Props = {
-  source: Object,
-};
-
-const OpinionSourceTitle = ({ source }: Props) => {
+const OpinionSourceTitle = ({ source }: Object) => {
   return (
     <h3 className="opinion__title">
       <Label bsStyle="primary">{source.category.title}</Label>{' '}
@@ -15,6 +11,10 @@ const OpinionSourceTitle = ({ source }: Props) => {
       </a>
     </h3>
   );
+};
+
+OpinionSourceTitle.propTypes = {
+  source: PropTypes.object.isRequired,
 };
 
 export default OpinionSourceTitle;

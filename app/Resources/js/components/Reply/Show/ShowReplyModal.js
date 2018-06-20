@@ -12,7 +12,7 @@ import CloseButton from '../../Form/CloseButton';
 type Props = {
   show: boolean,
   reply: ShowReplyModal_reply,
-  onClose: Function,
+  onClose: () => void,
 };
 
 export class ShowReplyModal extends React.Component<Props> {

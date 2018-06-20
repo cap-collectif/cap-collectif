@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
@@ -9,14 +9,14 @@ import LoginBox from './LoginBox';
 import { closeLoginModal } from '../../../redux/modules/user';
 import type { Dispatch, State } from '../../../types';
 
-type Props = {
-  submitting: boolean,
-  show: boolean,
-  onClose: Function,
-  onSubmit: Function,
-};
+export const LoginModal = React.createClass({
+  propTypes: {
+    submitting: PropTypes.bool.isRequired,
+    show: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+  },
 
-export class LoginModal extends React.Component<Props> {
   render() {
     const { submitting, show, onClose, onSubmit } = this.props;
     return (
@@ -49,8 +49,8 @@ export class LoginModal extends React.Component<Props> {
         </form>
       </Modal>
     );
-  }
-}
+  },
+});
 
 const mapStateToProps = (state: State) => ({
   submitting: isSubmitting('login')(state),

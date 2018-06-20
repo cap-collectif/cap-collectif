@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { submit, isSubmitting } from 'redux-form';
 import { connect } from 'react-redux';
@@ -15,8 +15,13 @@ type Props = {
   submitting: boolean,
   onSubmit: (e: Event) => void,
 };
+export const ShieldPage = React.createClass({
+  propTypes: {
+    showRegistration: PropTypes.bool.isRequired,
+    submitting: PropTypes.bool.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+  },
 
-export class ShieldPage extends React.Component<Props> {
   render() {
     const { showRegistration, submitting, onSubmit }: Props = this.props;
     if (showRegistration) {
@@ -54,8 +59,8 @@ export class ShieldPage extends React.Component<Props> {
         </div>
       </div>
     );
-  }
-}
+  },
+});
 
 const mapStateToProps = (state: State) => ({
   showRegistration: state.default.features.registration,

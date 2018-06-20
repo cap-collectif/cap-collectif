@@ -4,12 +4,12 @@ import { FormattedMessage } from 'react-intl';
 import { COMMENT_SYSTEM_NONE } from '../../constants/ArgumentConstants';
 import { VOTE_WIDGET_DISABLED } from '../../constants/VoteConstants';
 
-type Props = {
-  opinion: Object,
-};
+const OpinionPreviewCounters = React.createClass({
+  propTypes: {
+    opinion: React.PropTypes.object.isRequired,
+  },
 
-class OpinionPreviewCounters extends React.Component<Props> {
-  getType = () => {
+  getType() {
     const opinion = this.props.opinion;
     if (opinion.parent) {
       return opinion.parent.type;
@@ -18,7 +18,7 @@ class OpinionPreviewCounters extends React.Component<Props> {
       return opinion.section;
     }
     return opinion.type;
-  };
+  },
 
   render() {
     const opinion = this.props.opinion;
@@ -79,7 +79,7 @@ class OpinionPreviewCounters extends React.Component<Props> {
         })}
       </p>
     );
-  }
-}
+  },
+});
 
 export default OpinionPreviewCounters;

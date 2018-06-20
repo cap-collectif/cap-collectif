@@ -2,32 +2,34 @@ import React from 'react';
 import { Link } from 'react-router';
 import { FormattedMessage } from 'react-intl';
 
-type Props = {
-  element: Object,
-  parent: Object,
-  linkType: string,
-  hasLink: boolean,
-  className: string,
-  style: Object,
-  onClick: Function,
-};
+const ElementTitle = React.createClass({
+  propTypes: {
+    element: React.PropTypes.object,
+    parent: React.PropTypes.object,
+    linkType: React.PropTypes.string,
+    hasLink: React.PropTypes.bool,
+    className: React.PropTypes.string,
+    style: React.PropTypes.object,
+    onClick: React.PropTypes.func,
+  },
 
-class ElementTitle extends React.Component<Props> {
-  static defaultProps = {
-    hasLink: false,
-    linkType: 'none',
-    style: {},
-    className: '',
-    onClick: null,
-  };
+  getDefaultProps() {
+    return {
+      hasLink: false,
+      linkType: 'none',
+      style: {},
+      className: '',
+      onClick: null,
+    };
+  },
 
-  openOriginalContribution = () => {
+  openOriginalContribution() {
     const { element } = this.props;
     window.open(element.linkedDataUrl);
     return false;
-  };
+  },
 
-  renderTitle = () => {
+  renderTitle() {
     const { element } = this.props;
     if (element.title) {
       return element.title;
@@ -36,7 +38,7 @@ class ElementTitle extends React.Component<Props> {
       return `${element.body.substr(0, 140)}...`;
     }
     return <FormattedMessage id="synthesis.common.elements.default_title" />;
-  };
+  },
 
   render() {
     const { element, hasLink, linkType, onClick, style } = this.props;
@@ -69,7 +71,7 @@ class ElementTitle extends React.Component<Props> {
         {this.renderTitle()}
       </a>
     );
-  }
-}
+  },
+});
 
 export default ElementTitle;

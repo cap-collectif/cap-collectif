@@ -1,8 +1,7 @@
-// @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { Row, Col } from 'react-bootstrap';
-import { FormattedMessage, FormattedHTMLMessage, injectIntl, type IntlShape } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage, injectIntl } from 'react-intl';
 import CommentList from './CommentList';
 import CommentForm from './CommentForm';
 import CommentActions from '../../actions/CommentActions';
@@ -12,62 +11,49 @@ import FlashMessages from '../Utils/FlashMessages';
 
 const MessagePagination = 10;
 
-type Props = {
-  intl: IntlShape,
-  uri: string,
-  object: string | number,
-};
-
-type State = {
-  countWithAnswers: number,
-  count: number,
-  comments: Array<Object>,
-  isLoading: boolean,
-  isLoadingMore: boolean,
-  filter: string,
-  offset: 0,
-  limit: number,
-  messages: {
-    errors: Array<Object>,
-    success: Array<Object>,
+const CommentSection = React.createClass({
+  propTypes: {
+    uri: PropTypes.string,
+    object: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    intl: PropTypes.object,
   },
-};
 
-class CommentSection extends React.Component<Props, State> {
-  state = {
-    countWithAnswers: 0,
-    count: 0,
-    comments: [],
-    isLoading: true,
-    isLoadingMore: false,
-    filter: 'last',
-    offset: 0,
-    limit: MessagePagination,
-    messages: {
-      errors: [],
-      success: [],
-    },
-  };
+  getInitialState() {
+    return {
+      countWithAnswers: 0,
+      count: 0,
+      comments: [],
+      isLoading: true,
+      isLoadingMore: false,
+      filter: 'last',
+      offset: 0,
+      limit: MessagePagination,
+      messages: {
+        errors: [],
+        success: [],
+      },
+    };
+  },
 
   componentWillMount() {
     CommentStore.addChangeListener(this.onChange);
-  }
+  },
 
   componentDidMount() {
     this.loadCommentsFromServer();
-  }
+  },
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.filter !== prevState.filter) {
       this.loadCommentsFromServer();
     }
-  }
+  },
 
   componentWillUnmount() {
     CommentStore.removeChangeListener(this.onChange);
-  }
+  },
 
-  onChange = () => {
+  onChange() {
     this.setState({
       messages: CommentStore.messages,
     });
@@ -95,18 +81,17 @@ class CommentSection extends React.Component<Props, State> {
         this.loadCommentsFromServer();
       },
     );
-  };
+  },
 
-  updateSelectedValue = () => {
+  updateSelectedValue() {
     this.setState({
-      // $FlowFixMe
       filter: $(ReactDOM.findDOMNode(this.refs.filter)).val(),
       isLoading: true,
       comments: [],
     });
-  };
+  },
 
-  loadCommentsFromServer = () => {
+  loadCommentsFromServer() {
     const { object, uri } = this.props;
     CommentActions.loadFromServer(
       uri,
@@ -115,18 +100,16 @@ class CommentSection extends React.Component<Props, State> {
       this.state.limit,
       this.state.filter,
     );
-  };
+  },
 
-  resetLoadMoreButton = () => {
+  resetLoadMoreButton() {
     const loadMoreButton = ReactDOM.findDOMNode(this.refs.loadMore);
     if (loadMoreButton) {
-      // $FlowFixMe
       $(loadMoreButton).button('reset');
     }
-  };
+  },
 
-  loadMore = () => {
-    // $FlowFixMe
+  loadMore() {
     $(ReactDOM.findDOMNode(this.refs.loadMore)).button('loading');
     this.setState(
       {
@@ -137,9 +120,9 @@ class CommentSection extends React.Component<Props, State> {
         this.loadCommentsFromServer();
       },
     );
-  };
+  },
 
-  renderFilter = () => {
+  renderFilter() {
     const { intl } = this.props;
     if (this.state.count > 1) {
       return (
@@ -160,9 +143,9 @@ class CommentSection extends React.Component<Props, State> {
         </Col>
       );
     }
-  };
+  },
 
-  renderLoadMore = () => {
+  renderLoadMore() {
     const { intl } = this.props;
 
     if (
@@ -180,7 +163,7 @@ class CommentSection extends React.Component<Props, State> {
       );
     }
     return null;
-  };
+  },
 
   render() {
     const { uri, object } = this.props;
@@ -214,7 +197,7 @@ class CommentSection extends React.Component<Props, State> {
         {this.renderLoadMore()}
       </div>
     );
-  }
-}
+  },
+});
 
 export default injectIntl(CommentSection);

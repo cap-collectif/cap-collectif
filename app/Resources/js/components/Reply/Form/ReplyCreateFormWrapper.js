@@ -14,7 +14,7 @@ import type { GlobalState } from '../../../types';
 
 type Props = {
   questionnaire: ReplyCreateFormWrapper_questionnaire,
-  user: ?User,
+  user: User,
 };
 
 type State = {

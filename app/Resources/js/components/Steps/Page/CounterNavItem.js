@@ -1,14 +1,13 @@
-// @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-type Props = {
-  counter: number,
-  icon: string,
-  label: string,
-};
+const CounterNavItem = React.createClass({
+  propTypes: {
+    counter: React.PropTypes.number.isRequired,
+    icon: React.PropTypes.string.isRequired,
+    label: React.PropTypes.string.isRequired,
+  },
 
-class CounterNavItem extends React.Component<Props> {
   render() {
     const { icon, label } = this.props;
     const counter = this.props.counter || 0;
@@ -27,7 +26,7 @@ class CounterNavItem extends React.Component<Props> {
         </div>
       </li>
     );
-  }
-}
+  },
+});
 
 export default CounterNavItem;

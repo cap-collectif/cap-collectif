@@ -1,42 +1,43 @@
 // @flow
-import * as React from 'react';
-import { CheckboxGroup } from 'react-checkbox-group';
+import React, { PropTypes } from 'react';
+import CheckboxGroup from 'react-checkbox-group';
 import classNames from 'classnames';
 import Input from './Input';
 import Other from './Other';
 import ButtonBody from '../Reply/Form/ButtonBody';
 
-type Props = {
-  id: string,
-  field: Object,
-  getGroupStyle: Function,
-  onChange: Function,
-  onBlur?: Function,
-  label?: any,
-  renderFormErrors: Function,
-  disabled?: boolean,
-  labelClassName?: string,
-  value: Object,
-  errors?: any,
-  other?: $FlowFixMe,
-};
+const Checkbox = React.createClass({
+  propTypes: {
+    id: PropTypes.string.isRequired,
+    field: PropTypes.object.isRequired,
+    getGroupStyle: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
+    onBlur: PropTypes.func,
+    label: PropTypes.any,
+    renderFormErrors: PropTypes.func.isRequired,
+    disabled: PropTypes.bool,
+    labelClassName: PropTypes.string,
+    value: PropTypes.object.isRequired,
+    errors: PropTypes.any,
+  },
 
-type State = {
-  currentValue: Array<$FlowFixMe>,
-};
+  other: Other,
 
-class Checkbox extends React.Component<Props, State> {
-  static DefaultProps = {
-    disabled: false,
-    labelClassName: '',
-    value: {},
-  };
+  getDefaultProps() {
+    return {
+      disabled: false,
+      labelClassName: '',
+      value: {},
+    };
+  },
 
-  state = {
-    currentValue: [],
-  };
+  getInitialState() {
+    return {
+      currentValue: [],
+    };
+  },
 
-  onChange = (newValue: $FlowFixMe) => {
+  onChange(newValue) {
     const { onChange, value } = this.props;
     const otherValue = value.other;
 
@@ -49,9 +50,9 @@ class Checkbox extends React.Component<Props, State> {
     } else {
       onChange(newValue);
     }
-  };
+  },
 
-  onOtherChange = (e: Event, changeValue: $FlowFixMe) => {
+  onOtherChange(e, changeValue) {
     const { value } = this.props;
     const values = value.labels ? value.labels : [];
 
@@ -59,16 +60,16 @@ class Checkbox extends React.Component<Props, State> {
       labels: values,
       other: changeValue || null,
     });
-  };
+  },
 
-  empty = () => {
+  empty() {
     // $FlowFixMe
     this.other.clear();
     const checkboxes = Array.from(this.refs.choices.getCheckboxes());
     checkboxes.map(checkbox => {
       $(checkbox).prop('checked', false);
     });
-  };
+  },
 
   render() {
     const {
@@ -144,7 +145,6 @@ class Checkbox extends React.Component<Props, State> {
           })}
           {field.isOtherAllowed ? (
             <Other
-              // $FlowFixMe
               ref={c => (this.other = c)}
               value={otherValue}
               field={field}
@@ -156,7 +156,7 @@ class Checkbox extends React.Component<Props, State> {
         {renderFormErrors(field.id)}
       </div>
     );
-  }
-}
+  },
+});
 
 export default Checkbox;

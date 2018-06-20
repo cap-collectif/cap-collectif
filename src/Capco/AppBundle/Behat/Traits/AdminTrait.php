@@ -39,7 +39,7 @@ trait AdminTrait
             $searchInput->setValue($search);
             $this->getSession()->getPage()->find('css', '#fromProposals')->click();
             $this->iWait(3);
-            $option = $this->getSession()->getPage()->find('css', '#fromProposals .Select-option[id*="-option-1"]');
+            $option = $this->getSession()->getPage()->find('css', '#fromProposals .Select-option');
             if ($option) {
                 $option->click();
             }

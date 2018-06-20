@@ -1,14 +1,14 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 
-type Props = {
-  notation: number,
-  onChange: Function,
-  block: boolean,
-};
+const NotationButtons = React.createClass({
+  propTypes: {
+    notation: React.PropTypes.number,
+    onChange: React.PropTypes.func,
+    block: React.PropTypes.bool,
+  },
 
-class NotationButtons extends React.Component<Props> {
-  getNotationStarsClasses = () => {
+  getNotationStarsClasses() {
     const { notation } = this.props;
     const classes = [];
     for (let i = 0; i < 5; i++) {
@@ -17,14 +17,14 @@ class NotationButtons extends React.Component<Props> {
       }
     }
     return classes;
-  };
+  },
 
-  note = value => {
+  note(value) {
     const { onChange } = this.props;
     if (typeof onChange === 'function') {
       onChange(value);
     }
-  };
+  },
 
   render() {
     const { block } = this.props;
@@ -50,7 +50,7 @@ class NotationButtons extends React.Component<Props> {
         </Button>
       </div>
     );
-  }
-}
+  },
+});
 
 export default NotationButtons;

@@ -17,14 +17,11 @@ exports[`<Checkbox /> should render correctly 1`] = `
     Plusieurs choix sont possibles
   </span>
   <CheckboxGroup
-    Component="div"
     className="input-choices"
     id="choices-for-field-11"
     name="choices-for-field-11"
   >
-    <div
-      key="choice-20"
-    >
+    <div>
       <InjectIntl(ReactBootstrapInput)
         checked={false}
         disabled={false}
@@ -39,9 +36,7 @@ exports[`<Checkbox /> should render correctly 1`] = `
         Athlétisme
       </InjectIntl(ReactBootstrapInput)>
     </div>
-    <div
-      key="choice-21"
-    >
+    <div>
       <InjectIntl(ReactBootstrapInput)
         checked={false}
         disabled={false}
@@ -56,9 +51,7 @@ exports[`<Checkbox /> should render correctly 1`] = `
         Natation
       </InjectIntl(ReactBootstrapInput)>
     </div>
-    <div
-      key="choice-22"
-    >
+    <div>
       <InjectIntl(ReactBootstrapInput)
         checked={false}
         disabled={false}
@@ -73,9 +66,7 @@ exports[`<Checkbox /> should render correctly 1`] = `
         Sports collectifs
       </InjectIntl(ReactBootstrapInput)>
     </div>
-    <div
-      key="choice-23"
-    >
+    <div>
       <InjectIntl(ReactBootstrapInput)
         checked={false}
         disabled={false}
@@ -111,14 +102,11 @@ exports[`<Checkbox /> should render with an other field 1`] = `
     Plusieurs choix sont possibles
   </span>
   <CheckboxGroup
-    Component="div"
     className="input-choices"
     id="choices-for-field-11"
     name="choices-for-field-11"
   >
-    <div
-      key="choice-20"
-    >
+    <div>
       <InjectIntl(ReactBootstrapInput)
         checked={false}
         disabled={false}
@@ -133,9 +121,7 @@ exports[`<Checkbox /> should render with an other field 1`] = `
         Athlétisme
       </InjectIntl(ReactBootstrapInput)>
     </div>
-    <div
-      key="choice-21"
-    >
+    <div>
       <InjectIntl(ReactBootstrapInput)
         checked={false}
         disabled={false}
@@ -150,9 +136,7 @@ exports[`<Checkbox /> should render with an other field 1`] = `
         Natation
       </InjectIntl(ReactBootstrapInput)>
     </div>
-    <div
-      key="choice-22"
-    >
+    <div>
       <InjectIntl(ReactBootstrapInput)
         checked={false}
         disabled={false}
@@ -167,9 +151,7 @@ exports[`<Checkbox /> should render with an other field 1`] = `
         Sports collectifs
       </InjectIntl(ReactBootstrapInput)>
     </div>
-    <div
-      key="choice-23"
-    >
+    <div>
       <InjectIntl(ReactBootstrapInput)
         checked={false}
         disabled={false}

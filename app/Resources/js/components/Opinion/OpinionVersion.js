@@ -1,17 +1,17 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import { Row, Col } from 'react-bootstrap';
 
 import OpinionPreview from './OpinionPreview';
 import VotePiechart from '../Utils/VotePiechart';
 
-type Props = {
-  version: Object,
-  rankingThreshold: null | number,
-};
+const OpinionVersion = React.createClass({
+  propTypes: {
+    version: PropTypes.object.isRequired,
+    rankingThreshold: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.number]).isRequired,
+  },
 
-class OpinionVersion extends React.Component<Props> {
   render() {
     const { rankingThreshold } = this.props;
     const version = this.props.version;
@@ -40,7 +40,7 @@ class OpinionVersion extends React.Component<Props> {
         </Row>
       </li>
     );
-  }
-}
+  },
+});
 
 export default OpinionVersion;

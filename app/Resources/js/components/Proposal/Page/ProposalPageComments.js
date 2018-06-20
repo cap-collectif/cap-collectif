@@ -25,7 +25,6 @@ class ProposalPageComments extends React.Component<Props> {
     return (
       <div className={classNames(classes)}>
         {proposal.form.commentable && (
-          // $FlowFixMe
           <CommentSection
             uri={`proposal_forms/${proposal.form.id}/proposals`}
             object={proposal.id}

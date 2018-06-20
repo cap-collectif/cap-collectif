@@ -72,4 +72,4 @@ exports[`<NewEmailNotConfirmedAlert /> should render an alert if there is a newE
 </Alert>
 `;
 
-exports[`<NewEmailNotConfirmedAlert /> should render nothing if no newEmailToConfirm 1`] = `""`;
+exports[`<NewEmailNotConfirmedAlert /> should render nothing if no newEmailToConfirm 1`] = `null`;

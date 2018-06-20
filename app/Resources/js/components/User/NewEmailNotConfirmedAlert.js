@@ -1,17 +1,17 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { Alert, Button } from 'react-bootstrap';
 import { resendConfirmation } from '../../redux/modules/user';
 import type { State } from '../../types';
 
-type Props = {
-  newEmailToConfirm?: string,
-  sendSucceed?: boolean,
-};
+export const NewEmailNotConfirmedAlert = React.createClass({
+  propTypes: {
+    newEmailToConfirm: PropTypes.string,
+    sendSucceed: PropTypes.bool,
+  },
 
-export class NewEmailNotConfirmedAlert extends React.Component<Props> {
   render() {
     const { sendSucceed, newEmailToConfirm } = this.props;
     if (!newEmailToConfirm) {
@@ -46,8 +46,8 @@ export class NewEmailNotConfirmedAlert extends React.Component<Props> {
         </div>
       </Alert>
     );
-  }
-}
+  },
+});
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   newEmailToConfirm: state.user.user && state.user.user.newEmailToConfirm,

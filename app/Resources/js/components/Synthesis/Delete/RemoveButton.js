@@ -1,17 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 
-class RemoveButton extends React.Component {
-  static propTypes = {
-    element: PropTypes.object,
-    onRemove: PropTypes.func,
-  };
+const RemoveButton = React.createClass({
+  propTypes: {
+    element: React.PropTypes.object,
+    onRemove: React.PropTypes.func,
+  },
 
-  click = () => {
+  click() {
     const { element, onRemove } = this.props;
     onRemove(element);
-  };
+  },
 
   render() {
     return (
@@ -25,7 +24,7 @@ class RemoveButton extends React.Component {
         </Button>
       </div>
     );
-  }
-}
+  },
+});
 
 export default RemoveButton;

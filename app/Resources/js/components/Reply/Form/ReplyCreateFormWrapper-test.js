@@ -1,57 +1,22 @@
-// @flow
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { $refType, $fragmentRefs } from '../../../mocks';
+
 import { ReplyCreateFormWrapper } from './ReplyCreateFormWrapper';
 
 describe('<ReplyCreateFormWrapper />', () => {
   const formContribuable = {
     contribuable: true,
     multipleRepliesAllowed: true,
-    viewerReplies: [{ id: '289' }],
-    anonymousAllowed: true,
-    phoneConfirmationRequired: false,
-    id: '2',
-    description: null,
-    $refType,
-    $fragmentRefs,
+    viewerReplies: [{ id: 289 }],
   };
   const formContribuableWithoutMultipleVotes = {
     contribuable: true,
     multipleRepliesAllowed: false,
-    viewerReplies: [{ id: '326' }, { id: '289' }],
-    anonymousAllowed: false,
-    phoneConfirmationRequired: false,
-    id: '4',
-    description: null,
-    $refType,
-    $fragmentRefs,
+    viewerReplies: [{ id: 326 }, { id: 289 }],
   };
   const formNotContribuable = {
     contribuable: false,
-    multipleRepliesAllowed: false,
-    viewerReplies: [{ id: '326' }, { id: '289' }],
-    anonymousAllowed: false,
-    phoneConfirmationRequired: false,
-    id: '3',
-    description: null,
-    $refType,
-    $fragmentRefs,
-  };
-  const user = {
-    id: '23',
-    username: 'Tom',
-    isEmailConfirmed: true,
-    isPhoneConfirmed: true,
-    phone: '0606060606',
-    isAdmin: false,
-    email: 'test@gmail.com',
-    newEmailToConfirm: null,
-    media: null,
-    roles: [],
-    displayName: 'TomTom',
-    uniqueId: '234',
   };
 
   it('should render an alert an a disabled form when form is contribuable and user is not logged in', () => {
@@ -63,22 +28,20 @@ describe('<ReplyCreateFormWrapper />', () => {
 
   it("should render an alert an a disabled form when form is contribuable and doesn't allow multiple votes and user has already votes", () => {
     const wrapper = shallow(
-      <ReplyCreateFormWrapper questionnaire={formContribuableWithoutMultipleVotes} user={user} />,
+      <ReplyCreateFormWrapper questionnaire={formContribuableWithoutMultipleVotes} user={{}} />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should no alert an a disabled form when form is not contribuable', () => {
     const wrapper = shallow(
-      <ReplyCreateFormWrapper questionnaire={formNotContribuable} user={user} />,
+      <ReplyCreateFormWrapper questionnaire={formNotContribuable} user={{}} />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render no alert an an enabled form', () => {
-    const wrapper = shallow(
-      <ReplyCreateFormWrapper questionnaire={formContribuable} user={user} />,
-    );
+    const wrapper = shallow(<ReplyCreateFormWrapper questionnaire={formContribuable} user={{}} />);
     expect(wrapper).toMatchSnapshot();
   });
 });

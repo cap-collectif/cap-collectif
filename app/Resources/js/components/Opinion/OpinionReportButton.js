@@ -1,19 +1,19 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { submitOpinionReport } from '../../redux/modules/report';
 import ReportBox from '../Report/ReportBox';
 
-type Props = {
-  dispatch: Function,
-  opinion: Object,
-};
+const OpinionReportButton = React.createClass({
+  propTypes: {
+    dispatch: PropTypes.func.isRequired,
+    opinion: PropTypes.object.isRequired,
+  },
 
-class OpinionReportButton extends React.Component<Props> {
-  handleReport = data => {
+  handleReport(data) {
     const { opinion, dispatch } = this.props;
     return submitOpinionReport(opinion, data, dispatch);
-  };
+  },
 
   render() {
     const { opinion } = this.props;
@@ -26,7 +26,7 @@ class OpinionReportButton extends React.Component<Props> {
         buttonClassName="opinion__action--report pull-right btn--outline btn-dark-gray"
       />
     );
-  }
-}
+  },
+});
 
 export default connect()(OpinionReportButton);

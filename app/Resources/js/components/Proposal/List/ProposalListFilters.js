@@ -1,49 +1,45 @@
-// @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { Row, Col } from 'react-bootstrap';
-import { connect, type MapStateToProps } from 'react-redux';
-import type { GlobalState, Dispatch } from '../../../types';
+import { connect } from 'react-redux';
+import type { State } from '../../../types';
 import ProposalListSearch from '../List/ProposalListSearch';
 import Input from '../../Form/Input';
 import ProposalListOrderSorting from './ProposalListOrderSorting';
 import { changeFilter, changeProposalListView } from '../../../redux/modules/proposal';
 import ToggleMapButton from './../Map/ToggleMapButton';
 
-type Props = {
-  themes: Array<$FlowFixMe>,
-  types: Array<$FlowFixMe>,
-  districts: Array<$FlowFixMe>,
-  statuses: Array<$FlowFixMe>,
-  categories: Array<$FlowFixMe>,
-  orderByVotes?: boolean,
-  orderByComments?: boolean,
-  orderByCost?: boolean,
-  defaultSort?: string,
-  features: Object,
-  showThemes: boolean,
-  filters: Object,
-  dispatch: Dispatch,
-  showDistrictFilter: boolean,
-  showCategoriesFilter: boolean,
-  showToggleMapButton?: boolean,
-  intl: Object,
-};
+export const ProposalListFilters = React.createClass({
+  propTypes: {
+    themes: PropTypes.array.isRequired,
+    types: PropTypes.array.isRequired,
+    districts: PropTypes.array.isRequired,
+    statuses: PropTypes.array.isRequired,
+    categories: PropTypes.array.isRequired,
+    orderByVotes: PropTypes.bool,
+    orderByComments: PropTypes.bool,
+    orderByCost: PropTypes.bool,
+    defaultSort: PropTypes.string,
+    features: PropTypes.object.isRequired,
+    showThemes: PropTypes.bool.isRequired,
+    filters: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    showDistrictFilter: PropTypes.bool.isRequired,
+    showCategoriesFilter: PropTypes.bool.isRequired,
+    showToggleMapButton: PropTypes.bool,
+    intl: PropTypes.object.isRequired,
+  },
 
-type State = {
-  displayedFilters: Array<$FlowFixMe>,
-};
+  getDefaultProps() {
+    return {
+      orderByVotes: false,
+      orderByComments: false,
+      orderByCost: false,
+      showToggleMapButton: false,
+    };
+  },
 
-export class ProposalListFilters extends React.Component<Props, State> {
-  static defaultProps = {
-    orderByVotes: false,
-    orderByComments: false,
-    orderByCost: false,
-    showToggleMapButton: false,
-  };
-
-  constructor(props: Props) {
-    super(props);
+  getInitialState() {
     const {
       categories,
       features,
@@ -54,9 +50,9 @@ export class ProposalListFilters extends React.Component<Props, State> {
       types,
       showDistrictFilter,
       showCategoriesFilter,
-    } = props;
+    } = this.props;
 
-    this.state = {
+    return {
       displayedFilters: []
         .concat(features.user_type && types.length > 0 ? ['types'] : [])
         .concat(
@@ -66,7 +62,7 @@ export class ProposalListFilters extends React.Component<Props, State> {
         .concat(showCategoriesFilter && categories.length > 1 ? ['categories'] : [])
         .concat(statuses.length > 0 ? ['statuses'] : []),
     };
-  }
+  },
 
   render() {
     const {
@@ -139,15 +135,17 @@ export class ProposalListFilters extends React.Component<Props, State> {
         </Row>
       </div>
     );
-  }
-}
-
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
-  features: state.default.features,
-  themes: state.default.themes,
-  types: state.default.userTypes,
-  filters: state.proposal.filters || {},
+  },
 });
+
+const mapStateToProps = (state: State) => {
+  return {
+    features: state.default.features,
+    themes: state.default.themes,
+    types: state.default.userTypes,
+    filters: state.proposal.filters || {},
+  };
+};
 
 const container = injectIntl(ProposalListFilters);
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import ElementsList from './../List/ElementsList';
 import Loader from '../../Ui/Loader';
@@ -9,34 +8,38 @@ import SynthesisElementActions from '../../../actions/SynthesisElementActions';
 
 const Pagination = 15;
 
-class ElementsInbox extends React.Component {
-  static propTypes = {
-    synthesis: PropTypes.object,
-    params: PropTypes.object,
-    searchTerm: PropTypes.string,
-  };
+const ElementsInbox = React.createClass({
+  propTypes: {
+    synthesis: React.PropTypes.object,
+    params: React.PropTypes.object,
+    searchTerm: React.PropTypes.string,
+  },
 
-  static defaultProps = {
-    params: { type: 'new' },
-    searchTerm: '',
-  };
+  getDefaultProps() {
+    return {
+      params: { type: 'new' },
+      searchTerm: '',
+    };
+  },
 
-  state = {
-    elements: [],
-    count: 0,
-    isLoading: true,
-    isLoadingMore: false,
-    offset: 0,
-    limit: Pagination,
-  };
+  getInitialState() {
+    return {
+      elements: [],
+      count: 0,
+      isLoading: true,
+      isLoadingMore: false,
+      offset: 0,
+      limit: Pagination,
+    };
+  },
 
   componentWillMount() {
     SynthesisElementStore.addChangeListener(this.onChange);
-  }
+  },
 
   componentDidMount() {
     this.loadElementsByTypeFromServer();
-  }
+  },
 
   componentWillReceiveProps(nextProps) {
     const { params } = this.props;
@@ -51,13 +54,13 @@ class ElementsInbox extends React.Component {
         },
       );
     }
-  }
+  },
 
   componentWillUnmount() {
     SynthesisElementStore.removeChangeListener(this.onChange);
-  }
+  },
 
-  onChange = () => {
+  onChange() {
     const { params } = this.props;
     this.setState({
       elements: SynthesisElementStore.elements[params.type],
@@ -65,16 +68,16 @@ class ElementsInbox extends React.Component {
       isLoading: false,
       isLoadingMore: false,
     });
-  };
+  },
 
-  resetLoadMoreButton = () => {
+  resetLoadMoreButton() {
     const loadMoreButton = ReactDOM.findDOMNode(this.refs.loadMore);
     if (loadMoreButton) {
       $(loadMoreButton).button('reset');
     }
-  };
+  },
 
-  loadElementsByTypeFromServer = (type = this.props.params.type) => {
+  loadElementsByTypeFromServer(type = this.props.params.type) {
     const { synthesis } = this.props;
     SynthesisElementActions.loadElementsFromServer(
       synthesis.id,
@@ -82,9 +85,9 @@ class ElementsInbox extends React.Component {
       this.state.offset,
       this.state.limit,
     );
-  };
+  },
 
-  loadMore = () => {
+  loadMore() {
     $(ReactDOM.findDOMNode(this.refs.loadMore)).button('loading');
     this.setState(
       {
@@ -97,9 +100,9 @@ class ElementsInbox extends React.Component {
         });
       },
     );
-  };
+  },
 
-  renderList = () => {
+  renderList() {
     if (!this.state.isLoading) {
       if (this.state.elements.length > 0) {
         return <ElementsList elements={this.state.elements} />;
@@ -111,9 +114,9 @@ class ElementsInbox extends React.Component {
         </div>
       );
     }
-  };
+  },
 
-  renderLoadMore = () => {
+  renderLoadMore() {
     if (
       !this.state.isLoading &&
       (this.state.limit < this.state.count || this.state.isLoadingMore)
@@ -128,7 +131,7 @@ class ElementsInbox extends React.Component {
         </button>
       );
     }
-  };
+  },
 
   render() {
     return (
@@ -138,7 +141,7 @@ class ElementsInbox extends React.Component {
         {this.renderLoadMore()}
       </div>
     );
-  }
-}
+  },
+});
 
 export default ElementsInbox;

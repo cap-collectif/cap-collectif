@@ -1,41 +1,39 @@
-// @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import CommentActions from '../../actions/CommentActions';
 import LoginOverlay from '../Utils/LoginOverlay';
-import type { State } from '../../types';
 
-type Props = {
-  comment: Object,
-  user?: Object,
-  onVote: Function,
-};
+const CommentVoteButton = React.createClass({
+  propTypes: {
+    comment: PropTypes.object,
+    user: PropTypes.object,
+    onVote: PropTypes.func.isRequired,
+  },
 
-class CommentVoteButton extends React.Component<Props> {
-  deleteVote = () => {
+  deleteVote() {
     const { comment, onVote } = this.props;
     CommentActions.deleteVote(comment.id).then(() => {
       onVote();
     });
-  };
+  },
 
-  vote = () => {
+  vote() {
     const { comment, onVote } = this.props;
     CommentActions.vote(comment.id).then(() => {
       onVote();
     });
-  };
+  },
 
-  userIsAuthor = () => {
+  userIsAuthor() {
     const { comment, user } = this.props;
     if (!comment.author || !user) {
       return false;
     }
     return user.uniqueId === comment.author.uniqueId;
-  };
+  },
 
-  renderFormOrDisabled = () => {
+  renderFormOrDisabled() {
     if (this.userIsAuthor()) {
       return (
         <button disabled="disabled" className="btn btn-dark-gray btn-sm">
@@ -45,9 +43,9 @@ class CommentVoteButton extends React.Component<Props> {
     }
 
     return this.renderVoteButton();
-  };
+  },
 
-  renderVoteButton = () => {
+  renderVoteButton() {
     const { comment } = this.props;
 
     if (comment.hasUserVoted) {
@@ -65,7 +63,7 @@ class CommentVoteButton extends React.Component<Props> {
         </button>
       </LoginOverlay>
     );
-  };
+  },
 
   render() {
     const { comment } = this.props;
@@ -75,11 +73,13 @@ class CommentVoteButton extends React.Component<Props> {
         <span className="opinion__votes-nb">{comment.votesCount}</span>
       </span>
     );
-  }
-}
-
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  user: state.user.user,
+  },
 });
+
+const mapStateToProps = state => {
+  return {
+    user: state.user.user,
+  };
+};
 
 export default connect(mapStateToProps)(CommentVoteButton);

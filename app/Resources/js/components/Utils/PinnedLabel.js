@@ -1,14 +1,13 @@
-// @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
-type Props = {
-  show: boolean,
-  type: string,
-};
+const PinnedLabel = React.createClass({
+  propTypes: {
+    show: React.PropTypes.bool.isRequired,
+    type: React.PropTypes.string.isRequired,
+  },
 
-class PinnedLabel extends React.Component<Props> {
   render() {
     const { show, type } = this.props;
     if (show) {
@@ -27,7 +26,7 @@ class PinnedLabel extends React.Component<Props> {
       );
     }
     return null;
-  }
-}
+  },
+});
 
 export default PinnedLabel;

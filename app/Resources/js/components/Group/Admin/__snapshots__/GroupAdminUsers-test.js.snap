@@ -80,7 +80,6 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
     >
       <Relay(Connect(GroupAdminUsersListGroupItem))
         groupId="group4"
-        key="id1"
         user={
           Object {
             "id": "id1",
@@ -170,7 +169,6 @@ exports[`<GroupAdminUsers /> render correctly group admin user with confirmation
     >
       <Relay(Connect(GroupAdminUsersListGroupItem))
         groupId="group4"
-        key="id1"
         user={
           Object {
             "id": "id1",
@@ -262,7 +260,6 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
     >
       <Relay(Connect(GroupAdminUsersListGroupItem))
         groupId="group4"
-        key="id1"
         user={
           Object {
             "id": "id1",
@@ -354,7 +351,6 @@ exports[`<GroupAdminUsers /> render correctly group admin user with error notifi
     >
       <Relay(Connect(GroupAdminUsersListGroupItem))
         groupId="group4"
-        key="id1"
         user={
           Object {
             "id": "id1",

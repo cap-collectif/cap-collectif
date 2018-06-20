@@ -168,7 +168,6 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
     >
       <ListGroupItem
         bsClass="list-group-item"
-        key="1"
         listItem={false}
       >
         <a
@@ -179,7 +178,6 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
       </ListGroupItem>
       <ListGroupItem
         bsClass="list-group-item"
-        key="2"
         listItem={false}
       >
         <a
@@ -285,13 +283,11 @@ exports[`<ProposalAdminContentForm /> render correctly 1`] = `
           values={Object {}}
         />
         <option
-          key="1"
           value="1"
         >
           category-1
         </option>
         <option
-          key="2"
           value="2"
         >
           category-2

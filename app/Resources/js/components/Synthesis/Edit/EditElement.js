@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { FormattedDate } from 'react-intl';
 import moment from 'moment';
 
@@ -15,26 +14,28 @@ import IgnoreButton from './../Ignore/IgnoreButton';
 import PublishModal from './../Publish/PublishModal';
 import DivideModal from './../Divide/DivideModal';
 
-class EditElement extends React.Component {
-  static propTypes = {
-    synthesis: PropTypes.object,
-    params: PropTypes.object,
-  };
+const EditElement = React.createClass({
+  propTypes: {
+    synthesis: React.PropTypes.object,
+    params: React.PropTypes.object,
+  },
 
-  state = {
-    element: null,
-    isLoading: true,
-    showPublishModal: false,
-    showDivideModal: false,
-  };
+  getInitialState() {
+    return {
+      element: null,
+      isLoading: true,
+      showPublishModal: false,
+      showDivideModal: false,
+    };
+  },
 
   componentWillMount() {
     SynthesisElementStore.addChangeListener(this.onChange);
-  }
+  },
 
   componentDidMount() {
     this.loadElementFromServer();
-  }
+  },
 
   componentWillReceiveProps(nextProps) {
     const { params } = this.props;
@@ -48,48 +49,48 @@ class EditElement extends React.Component {
         },
       );
     }
-  }
+  },
 
   componentWillUnmount() {
     SynthesisElementStore.removeChangeListener(this.onChange);
     this.toggleDivideModal(false);
     this.togglePublishModal(false);
-  }
+  },
 
-  onChange = () => {
+  onChange() {
     this.setState({
       element: SynthesisElementStore.element,
       isLoading: false,
     });
-  };
+  },
 
-  togglePublishModal = value => {
+  togglePublishModal(value) {
     this.setState({
       showDivideModal: false,
       showPublishModal: value,
     });
-  };
+  },
 
-  toggleDivideModal = value => {
+  toggleDivideModal(value) {
     this.setState({
       showPublishModal: false,
       showDivideModal: value,
     });
-  };
+  },
 
-  loadElementFromServer = (id = this.props.params.element_id) => {
+  loadElementFromServer(id = this.props.params.element_id) {
     const { synthesis } = this.props;
     SynthesisElementActions.loadElementFromServer(synthesis.id, id);
-  };
+  },
 
-  renderDescription = () => {
+  renderDescription() {
     if (this.state.element && this.state.element.description) {
       return <p className="element__description box">{this.state.element.description}</p>;
     }
     return null;
-  };
+  },
 
-  renderElementPanel = () => {
+  renderElementPanel() {
     const element = this.state.element;
     if (!this.state.isLoading && element) {
       return (
@@ -115,9 +116,9 @@ class EditElement extends React.Component {
         </div>
       );
     }
-  };
+  },
 
-  renderElementButtons = () => {
+  renderElementButtons() {
     const { synthesis } = this.props;
     return (
       <div className="element__actions box text-center">
@@ -126,9 +127,9 @@ class EditElement extends React.Component {
         <IgnoreButton synthesis={synthesis} element={this.state.element} />
       </div>
     );
-  };
+  },
 
-  renderHistory = () => {
+  renderHistory() {
     const element = this.state.element;
     if (!this.state.isLoading && element && element.logs.length > 0) {
       return (
@@ -141,9 +142,9 @@ class EditElement extends React.Component {
         </ul>
       );
     }
-  };
+  },
 
-  renderLogSentence = (sentence, date) => {
+  renderLogSentence(sentence, date) {
     return (
       <li className="element__history__log">
         {sentence}
@@ -159,9 +160,9 @@ class EditElement extends React.Component {
         </span>
       </li>
     );
-  };
+  },
 
-  renderPublishModal = () => {
+  renderPublishModal() {
     const { synthesis } = this.props;
     const element = this.state.element;
     if (!this.state.isLoading && element) {
@@ -174,9 +175,9 @@ class EditElement extends React.Component {
         />
       );
     }
-  };
+  },
 
-  renderDivideModal = () => {
+  renderDivideModal() {
     const { synthesis } = this.props;
     const element = this.state.element;
     if (!this.state.isLoading && element) {
@@ -189,7 +190,7 @@ class EditElement extends React.Component {
         />
       );
     }
-  };
+  },
 
   render() {
     return (
@@ -204,7 +205,7 @@ class EditElement extends React.Component {
         {this.renderDivideModal()}
       </div>
     );
-  }
-}
+  },
+});
 
 export default EditElement;

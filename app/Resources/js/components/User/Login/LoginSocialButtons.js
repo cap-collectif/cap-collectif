@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import FacebookLoginButton from './FacebookLoginButton';
@@ -7,15 +7,17 @@ import GoogleLoginButton from './GoogleLoginButton';
 import SamlLoginButton from './SamlLoginButton';
 import type { State } from '../../../types';
 
-type Props = {
-  features: Object,
-  prefix?: string,
-};
+export const LoginSocialButtons = React.createClass({
+  propTypes: {
+    features: PropTypes.object.isRequired,
+    prefix: PropTypes.string,
+  },
 
-export class LoginSocialButtons extends React.Component<Props> {
-  static defaultProps = {
-    prefix: 'login.',
-  };
+  getDefaultProps() {
+    return {
+      prefix: 'login.',
+    };
+  },
 
   render() {
     const { features } = this.props;
@@ -32,8 +34,8 @@ export class LoginSocialButtons extends React.Component<Props> {
         </p>
       </div>
     );
-  }
-}
+  },
+});
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   features: state.default.features,

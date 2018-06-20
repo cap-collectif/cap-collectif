@@ -1,29 +1,31 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { ButtonToolbar } from 'react-bootstrap';
 import { connect, type MapStateToProps } from 'react-redux';
 import OpinionVotesButton from './OpinionVotesButton';
 import type { State } from '../../../types';
 
-type Props = {
-  opinion: Object,
-  show: boolean,
-  disabled: boolean,
-  user?: Object,
-};
+const OpinionVotesButtons = React.createClass({
+  propTypes: {
+    opinion: PropTypes.object.isRequired,
+    show: PropTypes.bool.isRequired,
+    disabled: PropTypes.bool.isRequired,
+    user: PropTypes.object,
+  },
 
-class OpinionVotesButtons extends React.Component<Props> {
-  static defaultProps = {
-    user: null,
-  };
+  getDefaultProps() {
+    return {
+      user: null,
+    };
+  },
 
-  isTheUserTheAuthor = () => {
+  isTheUserTheAuthor() {
     const { opinion, user } = this.props;
     if (opinion.author === null || !user) {
       return false;
     }
     return user.uniqueId === opinion.author.uniqueId;
-  };
+  },
 
   render() {
     const { opinion, disabled, show } = this.props;
@@ -47,8 +49,8 @@ class OpinionVotesButtons extends React.Component<Props> {
         />
       </ButtonToolbar>
     );
-  }
-}
+  },
+});
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   user: state.user.user,

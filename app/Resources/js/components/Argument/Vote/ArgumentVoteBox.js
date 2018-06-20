@@ -1,37 +1,30 @@
-// @flow
 import React from 'react';
 import ArgumentActions from '../../../actions/ArgumentActions';
 import ArgumentVoteButton from './ArgumentVoteButton';
 
-type Props = {
-  argument: Object,
-};
+const ArgumentVoteBox = React.createClass({
+  propTypes: {
+    argument: React.PropTypes.object.isRequired,
+  },
 
-type State = {
-  hasVoted: boolean,
-};
-
-class ArgumentVoteBox extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    const { argument } = props;
-
-    this.state = {
+  getInitialState() {
+    const { argument } = this.props;
+    return {
       hasVoted: argument.hasUserVoted,
     };
-  }
+  },
 
-  vote = () => {
+  vote() {
     const { argument } = this.props;
     this.setState({ hasVoted: true });
     ArgumentActions.addVote(argument.id);
-  };
+  },
 
-  deleteVote = () => {
+  deleteVote() {
     const { argument } = this.props;
     this.setState({ hasVoted: false });
     ArgumentActions.deleteVote(argument.id);
-  };
+  },
 
   render() {
     const { hasVoted } = this.state;
@@ -53,7 +46,7 @@ class ArgumentVoteBox extends React.Component<Props, State> {
         </span>
       </span>
     );
-  }
-}
+  },
+});
 
 export default ArgumentVoteBox;

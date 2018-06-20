@@ -27,7 +27,6 @@ exports[`<OpinionLinkCreateForm /> renders correctly 1`] = `
       />
     </option>
     <option
-      key="0"
       value="1337"
     />
   </Field>
@@ -60,7 +59,6 @@ exports[`<OpinionLinkCreateForm /> renders correctly 1`] = `
   <Field
     component={[Function]}
     id="opinion_appendix-1"
-    key="0"
     label="appendix-1"
     name="appendix-1"
     type="editor"

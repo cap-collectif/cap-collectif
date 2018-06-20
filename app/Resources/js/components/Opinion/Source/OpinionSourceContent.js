@@ -1,12 +1,12 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 
-type Props = {
-  source: Object,
+const OpinionSourceContent = ({ source }: Object) => {
+  return <p className="excerpt" dangerouslySetInnerHTML={{ __html: source.body }} />;
 };
 
-const OpinionSourceContent = ({ source }: Props) => {
-  return <p className="excerpt" dangerouslySetInnerHTML={{ __html: source.body }} />;
+OpinionSourceContent.propTypes = {
+  source: PropTypes.object.isRequired,
 };
 
 export default OpinionSourceContent;

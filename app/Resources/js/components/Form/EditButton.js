@@ -1,42 +1,42 @@
-// @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import { connect, type MapStateToProps } from 'react-redux';
-import type { State } from '../../types';
+import { connect } from 'react-redux';
 
-type Props = {
-  author: Object,
-  onClick: Function,
-  className: string,
-  style?: Object,
-  editable?: boolean,
-  id?: string,
-  user?: Object,
-};
+const EditButton = React.createClass({
+  propTypes: {
+    author: PropTypes.object,
+    onClick: PropTypes.func.isRequired,
+    className: PropTypes.string,
+    style: PropTypes.object,
+    editable: PropTypes.bool,
+    id: PropTypes.string,
+    user: PropTypes.object,
+  },
 
-class EditButton extends React.Component<Props> {
-  static defaultProps = {
-    author: null,
-    className: '',
-    style: null,
-    editable: true,
-    id: 'edit-button',
-    user: null,
-  };
+  getDefaultProps() {
+    return {
+      author: null,
+      className: '',
+      style: null,
+      editable: true,
+      id: 'edit-button',
+      user: null,
+    };
+  },
 
-  isEditable = () => {
+  isEditable() {
     const { editable } = this.props;
     return editable && this.isTheUserTheAuthor();
-  };
+  },
 
-  isTheUserTheAuthor = () => {
+  isTheUserTheAuthor() {
     const { author, user } = this.props;
     if (author === null || !user) {
       return false;
     }
     return user.uniqueId === author.uniqueId;
-  };
+  },
 
   render() {
     const { className, id, onClick, style } = this.props;
@@ -59,11 +59,13 @@ class EditButton extends React.Component<Props> {
       );
     }
     return null;
-  }
-}
-
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  user: state.user.user,
+  },
 });
+
+const mapStateToProps = state => {
+  return {
+    user: state.user.user,
+  };
+};
 
 export default connect(mapStateToProps)(EditButton);

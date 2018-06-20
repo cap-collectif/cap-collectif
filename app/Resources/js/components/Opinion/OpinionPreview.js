@@ -1,22 +1,24 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import UserAvatar from '../User/UserAvatar';
 import OpinionInfos from './OpinionInfos';
 import OpinionPreviewTitle from './OpinionPreviewTitle';
 import OpinionPreviewCounters from './OpinionPreviewCounters';
 
-type Props = {
-  opinion: Object,
-  rankingThreshold?: null | number,
-  link?: boolean,
-  showTypeLabel?: boolean,
-};
+const OpinionPreview = React.createClass({
+  propTypes: {
+    opinion: PropTypes.object.isRequired,
+    rankingThreshold: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.number]),
+    link: PropTypes.bool,
+    showTypeLabel: PropTypes.bool,
+  },
 
-class OpinionPreview extends React.Component<Props> {
-  static defaultProps = {
-    link: true,
-    showTypeLabel: false,
-  };
+  getDefaultProps() {
+    return {
+      link: true,
+      showTypeLabel: false,
+    };
+  },
 
   render() {
     const { rankingThreshold } = this.props;
@@ -32,7 +34,7 @@ class OpinionPreview extends React.Component<Props> {
         </div>
       </div>
     );
-  }
-}
+  },
+});
 
 export default OpinionPreview;

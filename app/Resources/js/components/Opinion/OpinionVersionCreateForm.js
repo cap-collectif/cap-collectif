@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
@@ -26,9 +26,11 @@ const validate = ({ body, title, comment }: Object, props: Object) => {
   return errors;
 };
 
-type Props = { opinionId: string };
+const OpinionVersionCreateForm = React.createClass({
+  propTypes: {
+    opinionId: PropTypes.string.isRequired,
+  },
 
-class OpinionVersionCreateForm extends React.Component<Props> {
   render() {
     return (
       <form>
@@ -54,8 +56,8 @@ class OpinionVersionCreateForm extends React.Component<Props> {
         />
       </form>
     );
-  }
-}
+  },
+});
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   initialValues: {

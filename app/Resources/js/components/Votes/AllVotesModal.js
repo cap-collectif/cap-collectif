@@ -1,21 +1,20 @@
-// @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Modal, Row } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import CloseButton from '../Form/CloseButton';
 import UserBox from '../User/UserBox';
 
-type Props = {
-  votes: Array<$FlowFixMe>,
-  showModal: boolean,
-  onToggleModal: Function,
-};
+const AllVotesModal = React.createClass({
+  propTypes: {
+    votes: PropTypes.array.isRequired,
+    showModal: PropTypes.bool.isRequired,
+    onToggleModal: PropTypes.func.isRequired,
+  },
 
-export class AllVotesModal extends React.Component<Props> {
-  close = () => {
+  close() {
     const { onToggleModal } = this.props;
     onToggleModal(false);
-  };
+  },
 
   render() {
     const { showModal, votes } = this.props;
@@ -48,7 +47,7 @@ export class AllVotesModal extends React.Component<Props> {
         </Modal.Footer>
       </Modal>
     );
-  }
-}
+  },
+});
 
 export default AllVotesModal;

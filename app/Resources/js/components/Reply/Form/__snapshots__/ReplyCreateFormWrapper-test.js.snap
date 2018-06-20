@@ -5,22 +5,7 @@ exports[`<ReplyCreateFormWrapper /> should no alert an a disabled form when form
   <Relay(Connect(InjectIntl(ReduxForm)))
     questionnaire={
       Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "anonymousAllowed": false,
         "contribuable": false,
-        "description": null,
-        "id": "3",
-        "multipleRepliesAllowed": false,
-        "phoneConfirmationRequired": false,
-        "viewerReplies": Array [
-          Object {
-            "id": "326",
-          },
-          Object {
-            "id": "289",
-          },
-        ],
       }
     }
   />
@@ -50,20 +35,14 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
   <Relay(Connect(InjectIntl(ReduxForm)))
     questionnaire={
       Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "anonymousAllowed": false,
         "contribuable": true,
-        "description": null,
-        "id": "4",
         "multipleRepliesAllowed": false,
-        "phoneConfirmationRequired": false,
         "viewerReplies": Array [
           Object {
-            "id": "326",
+            "id": 326,
           },
           Object {
-            "id": "289",
+            "id": 289,
           },
         ],
       }
@@ -105,17 +84,11 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
   <Relay(Connect(InjectIntl(ReduxForm)))
     questionnaire={
       Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "anonymousAllowed": true,
         "contribuable": true,
-        "description": null,
-        "id": "2",
         "multipleRepliesAllowed": true,
-        "phoneConfirmationRequired": false,
         "viewerReplies": Array [
           Object {
-            "id": "289",
+            "id": 289,
           },
         ],
       }
@@ -129,17 +102,11 @@ exports[`<ReplyCreateFormWrapper /> should render no alert an an enabled form 1`
   <Relay(Connect(InjectIntl(ReduxForm)))
     questionnaire={
       Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "anonymousAllowed": true,
         "contribuable": true,
-        "description": null,
-        "id": "2",
         "multipleRepliesAllowed": true,
-        "phoneConfirmationRequired": false,
         "viewerReplies": Array [
           Object {
-            "id": "289",
+            "id": 289,
           },
         ],
       }

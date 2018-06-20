@@ -2,11 +2,11 @@
 import * as React from 'react';
 import OpinionBodyDiffModal from './OpinionBodyDiffModal';
 
-type Props = {
-  opinion: Object,
-};
+const OpinionBodyDiffContent = React.createClass({
+  propTypes: {
+    opinion: React.PropTypes.object.isRequired,
+  },
 
-class OpinionBodyDiffContent extends React.Component<Props> {
   render() {
     const opinion = this.props.opinion;
 
@@ -62,7 +62,7 @@ class OpinionBodyDiffContent extends React.Component<Props> {
         })}
       </div>
     );
-  }
-}
+  },
+});
 
 export default OpinionBodyDiffContent;
