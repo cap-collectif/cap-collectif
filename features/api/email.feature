@@ -9,8 +9,7 @@ Scenario: Registration is disabled and API client wants to resend an email
   """
   {
     "code":404,
-    "message": "error.feature_not_enabled",
-    "errors": null
+    "message": "error.feature_not_enabled"
   }
   """
 
@@ -37,8 +36,7 @@ Scenario: Confirmed and logged in API client wants resend an email
   """
   {
     "code": 400,
-    "message": "Already confirmed.",
-    "errors": null
+    "message": "Already confirmed."
   }
   """
 

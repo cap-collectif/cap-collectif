@@ -211,11 +211,6 @@ fos_user_registration_check_email:
     defaults:
       _controller: SonataUserBundle:RegistrationFOSUser1:checkEmail
 
-fos_user_security_logout:
-    path: /logout
-    defaults:
-      _controller: SonataUserBundle:SecurityFOSUser1:logout
-
 # sonata admin...
 admin:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
