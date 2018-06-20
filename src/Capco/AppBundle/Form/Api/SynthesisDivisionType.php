@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Form\Api;
 
+use Capco\AppBundle\Entity\Synthesis\SynthesisDivision;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,7 +15,7 @@ class SynthesisDivisionType extends AbstractType
     {
         $builder
             ->add('elements', CollectionType::class, [
-                'type' => new SynthesisElementType(false),
+                'entry_type' => SynthesisElementType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
@@ -26,7 +27,7 @@ class SynthesisDivisionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Capco\AppBundle\Entity\Synthesis\SynthesisDivision',
+            'data_class' => SynthesisDivision::class,
             'csrf_protection' => false,
         ]);
     }

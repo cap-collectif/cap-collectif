@@ -9,6 +9,14 @@ services:
     autowire: true
     autoconfigure: true
 
+  Capco\UserBundle\Form\Type\ApiRegistrationFormType:
+    autowire: true
+    autoconfigure: true
+
+  Capco\UserBundle\Form\Type\ApiAdminRegistrationFormType:
+    autowire: true
+    autoconfigure: true
+
   Capco\AppBundle\Form\EventSearchType:
     autowire: true
     autoconfigure: true

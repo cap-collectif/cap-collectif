@@ -25,7 +25,7 @@ class FeaturesController extends FOSRestController
     /**
      * @Put("/toggles/{feature}")
      * @Security("has_role('ROLE_ADMIN')")
-     * @View(statusCode=200, serializerGroups={})
+     * @View(statusCode=204, serializerGroups={})
      */
     public function putFeatureFlagsAction(Request $request, string $feature)
     {

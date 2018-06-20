@@ -33,7 +33,7 @@ class SynthesisElementType extends AbstractType
         ;
 
         if ($options['hasDivision']) {
-            $builder->add('division', new SynthesisDivisionType(), [
+            $builder->add('division', SynthesisDivisionType::class, [
                 'required' => false,
                 'constraints' => new Valid(),
             ]);
@@ -45,6 +45,7 @@ class SynthesisElementType extends AbstractType
         $resolver->setDefaults([
             'data_class' => SynthesisElement::class,
             'csrf_protection' => false,
+            'hasDivision' => false,
         ]);
     }
 }
