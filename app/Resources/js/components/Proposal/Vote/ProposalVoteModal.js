@@ -118,6 +118,7 @@ export class ProposalVoteModal extends React.Component<Props> {
         show={showModal}
         onHide={this.onHide}
         bsSize="large"
+        role="dialog"
         aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">

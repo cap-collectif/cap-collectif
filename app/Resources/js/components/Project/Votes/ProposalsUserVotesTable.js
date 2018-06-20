@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Row } from 'react-bootstrap';
 import styled from 'styled-components';
 import ReactDOM from 'react-dom';
+import { injectIntl, type IntlShape } from 'react-intl';
 import { reduxForm, FieldArray, arrayMove, type FieldArrayProps, type FormProps } from 'redux-form';
 import { connect, type MapStateToProps } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
@@ -33,6 +34,7 @@ type Props = FormProps &
     onSubmit: Function,
     deletable: boolean,
     snapshot: DraggableStateSnapshot,
+    intl: IntlShape,
   };
 
 type VotesProps = FieldArrayProps &
@@ -83,7 +85,7 @@ const renderMembers = ({ fields, votes, step, deletable }: VotesProps) => {
   );
 };
 
-const renderDraggableMembers = ({ fields, votes, step, deletable }: VotesProps) => {
+const renderDraggableMembers = ({ fields, votes, step, deletable, intl }: VotesProps & Props) => {
   if (!votes.edges) {
     return null;
   }
@@ -108,7 +110,10 @@ const renderDraggableMembers = ({ fields, votes, step, deletable }: VotesProps) 
                     isDragging={snapshot.isDragging}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
-                    aria-roledescription="Item déplaçable. Appuyez sur la bar d'espace pour déplacer">
+                    aria-roledescription={intl.formatMessage(
+                      { id: 'vote-dragndrop-item-description' },
+                      { title: vote.proposal.title, position: index + 1 },
+                    )}>
                     {/* $FlowFixMe */}
                     <ProposalUserVoteItem
                       member={member}
@@ -148,39 +153,79 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
       window.navigator.vibrate(100);
     }
 
-    provided.announce('Start of drag and drop');
+    const { votes, intl } = this.props;
+
+    const title =
+      votes.edges &&
+      votes.edges[start.source.index] &&
+      votes.edges[start.source.index].node.proposal.title;
+
+    provided.announce(intl.formatMessage({ id: 'dragndrop-drag-start' }, { title }));
   };
 
   onDragUpdate = (update: DragUpdate, provided: HookProvided) => {
-    const { votes } = this.props;
+    const { votes, intl } = this.props;
 
-    const title = votes.edges[update.source.index].node.proposal.title;
+    const title =
+      votes.edges &&
+      votes.edges[update.source.index] &&
+      votes.edges[update.source.index].node.proposal.title;
 
-    provided.announce(`Vous déplacez ${title} en position ${update.destination.index + 1}`);
+    provided.announce(
+      intl.formatMessage(
+        { id: 'dragndrop-drag-update' },
+        { title, position: update.destination.index + 1 },
+      ),
+    );
   };
 
   onDragEnd = (result: DropResult, provided: HookProvided) => {
-    const { votes } = this.props;
+    const { votes, intl } = this.props;
 
-    const title = votes.edges[result.source.index].node.proposal.title;
+    const title =
+      votes.edges &&
+      votes.edges[result.source.index] &&
+      votes.edges[result.source.index].node.proposal.title;
+
+    // cancel (esc)
+    if (result.reason === 'CANCEL') {
+      provided.announce(
+        intl.formatMessage(
+          { id: 'dragndrop-drag-cancel' },
+          { title, position: result.source.index + 1 },
+        ),
+      );
+
+      return;
+    }
 
     // dropped outside the list
-    if (!result.destination || result.destination.index === result.source.index) {
+    if (!result.destination) {
+      provided.announce(intl.formatMessage({ id: 'dragndrop-drag-outside' }));
+
       return;
     }
     // no movement
     if (result.destination.index === result.source.index) {
+      provided.announce(intl.formatMessage({ id: 'dragndrop-drag-no-movement' }));
+
       return;
     }
+
     this.props.dispatch(
       arrayMove(this.props.form, 'votes', result.source.index, result.destination.index),
     );
 
-    provided.announce(`Vous avez déplacé ${title} en position ${result.destination.index + 1}`);
+    provided.announce(
+      intl.formatMessage(
+        { id: 'dragndrop-drag-end' },
+        { title, position: result.destination.index + 1 },
+      ),
+    );
   };
 
   render() {
-    const { form, step, votes, deletable } = this.props;
+    const { form, step, votes, deletable, intl } = this.props;
 
     if (!step.votesRanking) {
       return (
@@ -198,7 +243,10 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
 
     return (
       <Row className="proposals-user-votes__table" style={{ boxSizing: 'border-box' }}>
-        <DragDropContext onDragEnd={this.onDragEnd} onDragStart={this.onDragStart} onDragUpdate={this.onDragUpdate}>
+        <DragDropContext
+          onDragEnd={this.onDragEnd}
+          onDragStart={this.onDragStart}
+          onDragUpdate={this.onDragUpdate}>
           <Droppable droppableId={`droppable${form}`}>
             {(provided: DroppableProvided, snapshot: DroppableStateSnapshot) => {
               return (
@@ -209,6 +257,7 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
                   <FieldArray
                     step={step}
                     votes={votes}
+                    intl={intl}
                     deletable={deletable}
                     name="votes"
                     component={renderDraggableMembers}
@@ -238,7 +287,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayPro
         .map(edge => ({ id: edge.node.id, public: !edge.node.anonymous })),
   },
 });
-const container = connect(mapStateToProps)(form);
+const container = connect(mapStateToProps)(injectIntl(form));
 
 export default createFragmentContainer(container, {
   votes: graphql`

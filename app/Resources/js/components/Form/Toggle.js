@@ -22,14 +22,22 @@ export class Toggle extends React.Component<Props> {
   };
 
   render() {
-    const { input, labelSide, label, id, disabled, roledescription, meta: { touched, error } } = this.props;
+    const {
+      input,
+      labelSide,
+      label,
+      id,
+      disabled,
+      roledescription,
+      meta: { touched, error },
+    } = this.props;
     return (
       <div className="form-group">
         <label style={{ display: 'flex', alignItems: 'center' }}>
           {labelSide === 'RIGHT' && <span style={{ marginRight: 10 }}>{label}</span>}
           <ReactToggle
             id={id}
-            label={label}
+            aria-labelledby={label}
             aria-roledescription={roledescription}
             disabled={disabled}
             checked={input.value}

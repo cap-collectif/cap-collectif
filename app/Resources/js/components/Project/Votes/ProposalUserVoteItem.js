@@ -1,6 +1,12 @@
 // @flow
 import * as React from 'react';
-import { FormattedDate, FormattedMessage, FormattedTime, type IntlShape, injectIntl } from 'react-intl';
+import {
+  FormattedDate,
+  FormattedMessage,
+  FormattedTime,
+  type IntlShape,
+  injectIntl,
+} from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Row, Col, Popover, OverlayTrigger } from 'react-bootstrap';
 import { Field } from 'redux-form';
@@ -179,7 +185,10 @@ export class ProposalUserVoteItem extends React.Component<Props> {
               placement="bottom"
               overlay={popoverConfirmDelete}
               ref="popover">
-              <a className="proposal-vote__delete" disabled={!step.open}>
+              <a
+                className="proposal-vote__delete"
+                disabled={!step.open}
+                aria-label="Supprimer mon vote">
                 <i
                   className="cap cap-ios-close"
                   id={`${proposal.id}-proposal-vote__private-delete`}
