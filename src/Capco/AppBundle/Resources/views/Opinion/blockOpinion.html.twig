@@ -2,7 +2,6 @@
 {% set nbVotes = opinion.getVotesCountAll %}
 {% set nbArguments = opinion.argumentsCount %}
 {% set nbSources = opinion.sourcesCount %}
-{% set nbConnections = isVersion ? 0 : opinion.connectionsCount %}
 {% set nbVersions = isVersion ? null : opinion.versionsCount %}
 {% set top = isVersion ? opinion.parent.step.project.versionsRankingThreshold : opinion.step.project.opinionsRankingThreshold %}
 {% set showRanking = showRanking is defined ? showRanking : false %}

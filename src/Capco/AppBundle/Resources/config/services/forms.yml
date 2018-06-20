@@ -26,11 +26,6 @@ services:
     tags:
       - { name: form.type }
 
-  capco.form.opinion_link:
-    class: Capco\AppBundle\Form\OpinionLinkForm
-    tags:
-      - { name: form.type }
-
   capco.form.proposal_admin:
     class: Capco\AppBundle\Form\ProposalAdminType
     arguments: ["@capco.toggle.manager"]

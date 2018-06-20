@@ -215,7 +215,6 @@ Capco\AppBundle\Entity\Opinion:
         isTrashed: false
         Author: '@user2'
         OpinionType: '@opinionType6'
-        childConnections: ['@opinion60']
         position: 1
 
     opinion62:
@@ -230,7 +229,6 @@ Capco\AppBundle\Entity\Opinion:
         isTrashed: false
         Author: '@user2'
         OpinionType: '@opinionType6'
-        childConnections: ['@opinion60']
         position: 1
 
     opinion63:
