@@ -50,9 +50,4 @@ class ProfileFormType extends AbstractType
             ]);
         }
     }
-
-    public function getParent()
-    {
-        return 'sonata_user_profile';
-    }
 }

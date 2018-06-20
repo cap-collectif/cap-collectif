@@ -385,7 +385,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return $this;
     }
 
-    public function getLocked(): bool
+    public function isLocked(): bool
     {
         return $this->locked;
     }
@@ -1272,7 +1272,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return $this->username;
     }
 
-    public function getExpired(): bool
+    public function isExpired(): bool
     {
         return $this->expired;
     }
