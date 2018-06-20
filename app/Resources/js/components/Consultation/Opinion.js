@@ -58,7 +58,6 @@ export default createFragmentContainer(
       votesCountMitige
       votesCount
       versionsCount
-      connectionsCount
       sourcesCount
       argumentsCount
       pinned
