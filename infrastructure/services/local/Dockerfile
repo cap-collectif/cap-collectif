@@ -45,6 +45,7 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
         php7.1-redis \
         php7.1-xsl \
         php7.1-zip \
+        php-xdebug \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -130,6 +131,8 @@ COPY nginx/nginx.conf               /etc/nginx/nginx.conf
 COPY php-fpm/fpm.conf               /etc/service/php-fpm/fpm.conf
 COPY php-fpm/capco.ini              /etc/php/7.1/fpm/conf.d/capco.ini
 COPY php-fpm/capco.ini              /etc/php/7.1/cli/conf.d/capco.ini
+COPY xdebug/20-xdebug.ini           /etc/php/7.1/cli/conf.d/capco.ini
+COPY xdebug/20-xdebug.ini           /etc/php/7.1/fpm/conf.d/capco.ini
 COPY cron/crontab                   /etc/cron.d/crontab
 COPY varnish/capco.vcl              /etc/varnish/capco.vcl
 COPY rabbitmq/rabbitmq.config       /etc/rabbitmq/rabbitmq.config
