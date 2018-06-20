@@ -14,7 +14,7 @@ type Props = {
   submitting: boolean,
   show: boolean,
   onSubmit: (e: Event) => void,
-  onClose: () => void,
+  onClose: Function,
 };
 
 export class UpdateRegistrationQuestionModal extends React.Component<Props> {

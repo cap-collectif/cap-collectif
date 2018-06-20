@@ -57,7 +57,7 @@ exports[`<RankingBlock /> should render two ranking boxes with correct props 1`]
         className="ranking__choice-box"
         style={
           Object {
-            "height": "undefinedpx",
+            "height": "auto",
           }
         }
       >

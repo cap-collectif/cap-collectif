@@ -19,20 +19,32 @@ type Props = {
   onBlur: Function,
 };
 
-export class RankingBlock extends React.Component<Props> {
+type State = {
+  items: {
+    pickBox: Array<Object>,
+    choiceBox: Array<Object>,
+  },
+  choicesHeight: string,
+};
+
+export class RankingBlock extends React.Component<Props, State> {
   static displayName = 'RankingBlock';
 
-  static defaultProps = {
-    disabled: false,
-  };
+  constructor(props: Props) {
+    super(props);
 
-  state = {
-    items: {
-      pickBox: this.props.field.choices,
-      choiceBox: this.props.field.values || [],
-    },
-    choicesHeight: 'auto',
-  };
+    this.props = {
+      disabled: false,
+    };
+
+    this.state = {
+      items: {
+        pickBox: props.field.choices,
+        choiceBox: props.field.values || [],
+      },
+      choicesHeight: 'auto',
+    };
+  }
 
   componentDidMount() {
     this.recalculateChoicesHeight();
@@ -59,7 +71,7 @@ export class RankingBlock extends React.Component<Props> {
 
   recalculateChoicesHeight() {
     const height = `${$(ReactDOM.findDOMNode(this.choiceBox)).height()}px`;
-    if (height !== '0px') {
+    if (height !== '0px' && height !== 'undefinedpx') {
       this.setState({
         choicesHeight: height,
       });
