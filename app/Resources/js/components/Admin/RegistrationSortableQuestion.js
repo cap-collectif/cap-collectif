@@ -13,8 +13,8 @@ type ParentProps = { value: Object };
 type Props = ParentProps & {
   isSuperAdmin: boolean,
   value: Object,
-  deleteField: () => void,
-  updateField: () => void,
+  deleteField: Function,
+  updateField: Function,
 };
 
 export class RegistrationSortableQuestion extends React.Component<Props> {

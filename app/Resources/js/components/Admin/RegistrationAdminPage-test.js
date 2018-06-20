@@ -3,11 +3,14 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { RegistrationAdminPage } from './RegistrationAdminPage';
+import { features } from '../../redux/modules/default';
 
 describe('<RegistrationAdminPage />', () => {
   const props = {
     isSuperAdmin: true,
-    features: {},
+    features: {
+      ...features,
+    },
     onToggle: jest.fn(),
     reorder: jest.fn(),
     addNewField: jest.fn(),

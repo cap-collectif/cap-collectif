@@ -8,14 +8,14 @@ import Toggle from 'react-toggle';
 import { arrayMove } from 'react-sortable-hoc';
 import { toggleFeature, showNewFieldModal } from '../../redux/modules/default';
 import { reorderRegistrationQuestions } from '../../redux/modules/user';
-import type { State, Dispatch, FeatureToggle } from '../../types';
+import type { State, Dispatch, FeatureToggle, FeatureToggles } from '../../types';
 import RegistrationCommunicationForm from './RegistrationCommunicationForm';
 import RegistrationQuestionSortableList from './RegistrationQuestionSortableList';
 import RegistrationEmailDomainsForm from './RegistrationEmailDomainsForm';
 
 type Props = {
-  features: Object,
-  onToggle: Function,
+  features: FeatureToggles,
+  onToggle: (feature: FeatureToggle, value: boolean) => void,
   addNewField: () => void,
   isSuperAdmin: boolean,
   reorder: Function,
@@ -30,6 +30,7 @@ export class RegistrationAdminPage extends React.Component<Props> {
         <div className="row">
           <Col xs={1}>
             <Toggle
+              icons
               checked={features.registration}
               onChange={() => onToggle('registration', !features.registration)}
             />
@@ -41,6 +42,7 @@ export class RegistrationAdminPage extends React.Component<Props> {
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
             <Toggle
+              icons
               checked={features.login_facebook}
               onChange={() => onToggle('login_facebook', !features.login_facebook)}
             />
@@ -50,8 +52,9 @@ export class RegistrationAdminPage extends React.Component<Props> {
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
             <Toggle
+              icons
               checked={features.login_gplus}
-              onChange={() => onToggle('login_ƒplus', !features.login_gplus)}
+              onChange={() => onToggle('login_gplus', !features.login_gplus)}
             />
           </Col>
           <Col xs={11}>Google</Col>
@@ -60,6 +63,7 @@ export class RegistrationAdminPage extends React.Component<Props> {
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
             <Toggle
+              icons
               checked={features.restrict_registration_via_email_domain}
               onChange={() =>
                 onToggle(
@@ -75,19 +79,20 @@ export class RegistrationAdminPage extends React.Component<Props> {
         <h4>Données recueillies</h4>
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
-            <Toggle checked disabled />
+            <Toggle checked icons disabled />
           </Col>
           <Col xs={11}>Nom ou pseudonyme</Col>
         </div>
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
-            <Toggle checked disabled />
+            <Toggle checked icons disabled />
           </Col>
           <Col xs={11}>Mot de passe</Col>
         </div>
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
             <Toggle
+              icons
               checked={features.zipcode_at_register}
               onChange={() => onToggle('zipcode_at_register', !features.zipcode_at_register)}
             />
@@ -97,6 +102,7 @@ export class RegistrationAdminPage extends React.Component<Props> {
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
             <Toggle
+              icons
               checked={features.user_type}
               onChange={() => onToggle('user_type', !features.user_type)}
             />
@@ -139,6 +145,7 @@ export class RegistrationAdminPage extends React.Component<Props> {
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
             <Toggle
+              icons
               checked={features.consent_external_communication}
               onChange={() =>
                 onToggle('consent_external_communication', !features.consent_external_communication)
@@ -171,6 +178,7 @@ export class RegistrationAdminPage extends React.Component<Props> {
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
             <Toggle
+              icons
               disabled={!isSuperAdmin}
               checked={features.captcha}
               onChange={() => onToggle('captcha', !features.captcha)}

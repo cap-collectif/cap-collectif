@@ -5,7 +5,7 @@ import OpinionVersion from './OpinionVersion';
 
 type Props = {
   versions: Array<$FlowFixMe>,
-  rankingThreshold: null | number,
+  rankingThreshold: ?number,
 };
 
 class OpinionVersionList extends React.Component<Props> {
@@ -28,7 +28,7 @@ class OpinionVersionList extends React.Component<Props> {
             <OpinionVersion
               key={version.id}
               version={version}
-              rankingThreshold={rankingThreshold}
+              rankingThreshold={rankingThreshold || null}
             />
           );
         })}
