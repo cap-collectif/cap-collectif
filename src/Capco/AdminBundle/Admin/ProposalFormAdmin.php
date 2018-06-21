@@ -2,6 +2,7 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -207,6 +208,14 @@ class ProposalFormAdmin extends Admin
             ->add('title', null, [
                 'label' => 'admin.fields.proposal_form.title',
             ])
+            ->add('step', null, [
+                'label' => 'project',
+            ],
+                'entity',
+                [
+                    'query_builder' => $this->filterProjectQuery(),
+                ]
+            )
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.proposal_form.updated_at',
             ])
@@ -222,13 +231,20 @@ class ProposalFormAdmin extends Admin
             ->addIdentifier('title', null, [
                 'label' => 'admin.fields.proposal_form.title',
             ])
+            ->add('project', 'sonata_type_model', [
+                'label' => 'project',
+                'template' => 'CapcoAdminBundle:ProposalForm:project_show_field.html.twig',
+            ])
+            ->add('createdAt', null, [
+                'label' => 'admin.fields.proposal_form.created_at',
+            ])
             ->add('updatedAt', null, [
                 'label' => 'admin.fields.proposal_form.updated_at',
             ])
             ->add('_action', 'actions', [
                 'actions' => [
                     'duplicate' => [
-                        'template' => 'CapcoAdminBundle:CRUD:list__action_duplicate.html.twig',
+                        'template' => 'CapcoAdminBundle:ProposalForm:list__action_duplicate.html.twig',
                     ],
                     'delete' => [],
                 ],
@@ -261,5 +277,15 @@ class ProposalFormAdmin extends Admin
     {
         $collection->add('duplicate');
         $collection->clearExcept(['list', 'edit', 'show', 'delete', 'duplicate']);
+    }
+
+    private function filterProjectQuery()
+    {
+        $query = $this->modelManager
+            ->createQuery(CollectStep::class, 'p')
+            ->select('p')
+        ;
+
+        return $query;
     }
 }

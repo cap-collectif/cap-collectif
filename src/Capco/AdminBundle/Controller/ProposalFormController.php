@@ -13,6 +13,7 @@ class ProposalFormController extends Controller
     public function duplicateAction(Request $request)
     {
         $id = $request->get($this->admin->getIdParameter());
+        $translator = $this->get('translator');
 
         /** @var ProposalForm $object */
         $object = $this->admin->getObject($id);
@@ -20,9 +21,9 @@ class ProposalFormController extends Controller
         if (!$object) {
             throw new NotFoundHttpException(sprintf('unable to find the object with id: %s', $id));
         }
-
         $clonedProposalForm = new ProposalForm();
-        $clonedProposalForm->setTitle($object->getTitle() . ' (Clone)');
+
+        $clonedProposalForm->setTitle($translator->trans('copy-of') . ' ' . $object->getTitle());
         $clonedProposalForm->initializeNotificationConfiguration();
         $clonedProposalForm->setQuestions($object->getQuestions());
         $clonedProposalForm->setDescription($object->getDescription());
@@ -51,7 +52,7 @@ class ProposalFormController extends Controller
 
         $this->admin->create($clonedProposalForm);
 
-        $this->addFlash('sonata_flash_success', 'Cloned successfully');
+        $this->addFlash('sonata_flash_success', 'your-form-has-been-duplicated');
 
         return new RedirectResponse($this->admin->generateUrl('list'));
     }
