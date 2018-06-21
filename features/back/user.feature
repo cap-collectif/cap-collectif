@@ -9,11 +9,15 @@ Scenario: Logged in admin wants edit a user account tab
   Given I am logged in as admin
   Then I go to the admin user page with userId "user516"
   And the "form.label_vip" checkbox should be checked
-  And the "form.label_locked" checkbox should be checked
+  And the "form.label_enabled" checkbox should be checked
+  And the "form.label_locked" checkbox should not be checked
   And the "roles.user" checkbox should be checked
   And I should not see "roles.super_admin"
+  And the button "user_admin_account_save" should be disabled
   And the "newsletter" checkbox should be checked
-  And I check "form.label_enabled"
+  Then I check "form.label_locked"
+  And I wait 1 seconds
+  And the button "user_admin_account_save" should not be disabled
   Then I click on button "#user_admin_account_save"
   And I wait 2 seconds
   And I should see "global.saved"
@@ -61,13 +65,9 @@ Scenario: Logged in admin wants edit my password in back office
   When I fill in the following:
     | current_password          | admin       |
     | new_password              | 456465      |
-    | new_password_confirmation | tatatatata  |
   Then I should see "fos_user.new_password.short"
   Then I fill in the following:
     | new_password              | tototototo |
-    | new_password_confirmation | tatatatata |
-  And I should see "fos_user.password.mismatch"
-  Then I fill the element "#password-form-confirmation" with value "tototototo"
   And I wait 1 seconds
   Then I click on button "#user-admin-password-save"
   And I wait 2 seconds
