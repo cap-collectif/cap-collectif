@@ -22,34 +22,8 @@ class ProposalFormController extends Controller
             throw new NotFoundHttpException(sprintf('unable to find the object with id: %s', $id));
         }
 
-        $clonedProposalForm = new ProposalForm();
+        $clonedProposalForm = clone $object;
         $clonedProposalForm->setTitle($translator->trans('copy-of') . ' ' . $object->getTitle());
-        $clonedProposalForm->initializeNotificationConfiguration();
-        $clonedProposalForm->setQuestions($object->getQuestions());
-        $clonedProposalForm->setDescription($object->getDescription());
-        $clonedProposalForm->setCommentable($object->isCommentable());
-        $clonedProposalForm->setQuestions($object->getQuestions());
-        $clonedProposalForm->setCostable($object->isCostable());
-        $clonedProposalForm->setTitleHelpText($object->getTitleHelpText());
-        $clonedProposalForm->setSummaryHelpText($object->getSummaryHelpText());
-        $clonedProposalForm->setThemeHelpText($object->getThemeHelpText());
-        $clonedProposalForm->setDistrictHelpText($object->getDistrictHelpText());
-        $clonedProposalForm->setCategoryHelpText($object->getCategoryHelpText());
-        $clonedProposalForm->setAddressHelpText($object->getAddressHelpText());
-        $clonedProposalForm->setIllustrationHelpText($object->getIllustrationHelpText());
-        $clonedProposalForm->setUsingThemes($object->isUsingThemes());
-        $clonedProposalForm->setAllowAknowledge($object->isAllowAknowledge());
-        $clonedProposalForm->setThemeMandatory($object->isThemeMandatory());
-        $clonedProposalForm->setUsingCategories($object->isUsingCategories());
-        $clonedProposalForm->setCategoryMandatory($object->isCategoryMandatory());
-        $clonedProposalForm->setDistrictMandatory($object->isDistrictMandatory());
-        $clonedProposalForm->setUsingDistrict($object->isUsingDistrict());
-        $clonedProposalForm->setUsingAddress($object->getUsingAddress());
-        $clonedProposalForm->setProposalInAZoneRequired($object->isProposalInAZoneRequired());
-        $clonedProposalForm->setZoomMap($object->getZoomMap());
-        $clonedProposalForm->setLatMap($object->getLatMap());
-        $clonedProposalForm->setLngMap($object->getLngMap());
-        $clonedProposalForm->setEvaluationForm(null);
 
         $this->admin->create($clonedProposalForm);
 

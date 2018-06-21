@@ -213,6 +213,17 @@ class ProposalForm
         $this->initializeNotificationConfiguration();
     }
 
+    public function __clone()
+    {
+        if ($this->id) {
+            $this->evaluationForm = null;
+            $this->questions = null;
+            $this->step = null;
+            $this->reference = null;
+            $this->initializeNotificationConfiguration();
+        }
+    }
+
     public function __toString()
     {
         return $this->getId() ? $this->getTitle() : 'New ProposalForm';
