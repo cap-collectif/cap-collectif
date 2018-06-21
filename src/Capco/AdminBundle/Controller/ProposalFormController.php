@@ -21,8 +21,8 @@ class ProposalFormController extends Controller
         if (!$object) {
             throw new NotFoundHttpException(sprintf('unable to find the object with id: %s', $id));
         }
-        $clonedProposalForm = new ProposalForm();
 
+        $clonedProposalForm = new ProposalForm();
         $clonedProposalForm->setTitle($translator->trans('copy-of') . ' ' . $object->getTitle());
         $clonedProposalForm->initializeNotificationConfiguration();
         $clonedProposalForm->setQuestions($object->getQuestions());
