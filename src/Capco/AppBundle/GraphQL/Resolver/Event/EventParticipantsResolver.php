@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver;
+namespace Capco\AppBundle\GraphQL\Resolver\Event;
 
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Repository\EventRegistrationRepository;

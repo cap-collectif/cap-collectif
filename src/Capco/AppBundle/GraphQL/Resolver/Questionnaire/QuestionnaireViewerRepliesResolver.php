@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver;
+namespace Capco\AppBundle\GraphQL\Resolver\Questionnaire;
 
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Repository\ReplyRepository;

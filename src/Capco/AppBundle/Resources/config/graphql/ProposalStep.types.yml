@@ -30,7 +30,7 @@ ProposalStep:
               type: "Boolean!"
             show_url:
               type: "String!"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\StepUrlResolver", [value])'
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepUrlResolver", [value])'
             viewerVotes:
               access: "@=hasRole('ROLE_USER')"
               type: "ProposalVoteConnection!"

@@ -1,15 +1,15 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
+namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
-class ProposalFormResolver implements ContainerAwareInterface
+class QueryProposalFormResolver implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
-    public function resolveAll(): array
+    public function __invoke(): array
     {
         return $this->container->get('capco.proposal_form.repository')->findAll();
     }

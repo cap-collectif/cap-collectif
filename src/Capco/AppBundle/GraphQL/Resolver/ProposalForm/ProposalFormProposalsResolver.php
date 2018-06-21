@@ -1,4 +1,3 @@
-
 <?php
 
 namespace Capco\AppBundle\GraphQL\Resolver\ProposalForm;

@@ -7,7 +7,7 @@ OtherStep:
               type: "ID!"
             show_url:
               type: "String!"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\StepUrlResolver", [value])'
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepUrlResolver", [value])'
             kind:
                type: "String!"
                resolve: "other"
