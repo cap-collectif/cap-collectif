@@ -20,6 +20,7 @@ type Props = {
   labelClassName: string,
   divClassName: string,
   globalClassName: string,
+  disabled: boolean,
 };
 
 const getDay = (date: string): number => {
@@ -109,6 +110,7 @@ export class DateDropdownPicker extends Component<Props, DateState> {
       labelClassName,
       divClassName,
       globalClassName,
+      disabled,
     } = this.props;
 
     return (
@@ -130,6 +132,7 @@ export class DateDropdownPicker extends Component<Props, DateState> {
               name={'day'}
               classes={'form-control'}
               optionClasses={'option classes'}
+              disabled={disabled}
             />
           </Col>
           <Col sm={3} md={3} id={monthId}>
@@ -145,6 +148,7 @@ export class DateDropdownPicker extends Component<Props, DateState> {
               name={'month'}
               classes={'form-control'}
               optionClasses={'option classes'}
+              disabled={disabled}
             />
           </Col>
           <Col sm={3} md={3} id={yearId}>
@@ -158,6 +162,7 @@ export class DateDropdownPicker extends Component<Props, DateState> {
               name={'year'}
               classes={'form-control'}
               optionClasses={'option classes'}
+              disabled={disabled}
             />
           </Col>
         </div>

@@ -117,14 +117,14 @@ export class UserAdminAccount extends React.Component<Props, State> {
               children={<FormattedMessage id="form.label_vip" />}
             />
             <Field
-              name="locked"
+              name="enabled"
               component={component}
               type="checkbox"
               id="enabled"
               children={<FormattedMessage id="form.label_enabled" />}
             />
             <Field
-              name="enabled"
+              name="locked"
               component={component}
               type="checkbox"
               id="locked"
@@ -134,12 +134,12 @@ export class UserAdminAccount extends React.Component<Props, State> {
               name="expired"
               component={component}
               type="checkbox"
-              disabled
-              id="locked"
+              disabled={!isViewerOrSuperAdmin}
+              id="expired"
               children={
                 <div>
                   <FormattedMessage id="form.label_expired" />{' '}
-                  <DatesInterval startAt={user.expiredAt} />
+                  <DatesInterval startAt={user.expiresAt} />
                 </div>
               }
             />
@@ -160,7 +160,7 @@ export class UserAdminAccount extends React.Component<Props, State> {
               component={component}
               isReduxForm
               type="checkbox"
-              disabled
+              disabled={!user.isViewer}
               children={
                 <div>
                   <FormattedMessage id="newsletter" />{' '}
@@ -246,7 +246,7 @@ export default createFragmentContainer(
       vip
       enabled
       expired
-      expiredAt
+      expiresAt
       isSubscribedToNewsLetter
       subscribedToNewsLetterAt
       isViewer

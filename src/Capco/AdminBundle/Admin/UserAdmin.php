@@ -16,21 +16,6 @@ class UserAdmin extends BaseAdmin
         '_sort_by' => 'updatedAt',
     ];
 
-//    public function getFormBuilder()
-//    {
-//        $this->formOptions['data_class'] = $this->getClass();
-//
-//        $options = $this->formOptions;
-//        $options['validation_groups'] = 'Default';
-//        $options['translation_domain'] = 'CapcoAppBundle';
-//
-//        $formBuilder = $this->getFormContractor()->getFormBuilder($this->getUniqid(), $options);
-//
-//        $this->defineFormBuilder($formBuilder);
-//
-//        return $formBuilder;
-//    }
-
     public function getTemplate($name)
     {
         if ('delete' === $name) {
@@ -76,6 +61,8 @@ class UserAdmin extends BaseAdmin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
+        unset($this->listModes['mosaic']);
+
         $listMapper
             ->addIdentifier(
                 'username',
@@ -119,6 +106,7 @@ class UserAdmin extends BaseAdmin
                 [
                     'actions' => [
                         'show' => [],
+                        'delete' => [],
                     ],
                 ]
             );

@@ -2568,9 +2568,6 @@ input UpdateProfilePasswordInput {
 
   # The new password
   new: String!
-
-  # Id of user
-  userId: ID
   clientMutationId: String
 }
 
@@ -2830,7 +2827,7 @@ type User implements Node {
   notificationsConfiguration: UserNotificationsConfiguration!
   locked: Boolean!
   phoneConfirmed: Boolean!
-  expiresAt: String
+  expiresAt: DateTime
   phoneConfirmationSentAt: String
   gender: GenderValue
   firstname: String
@@ -2966,7 +2963,6 @@ type User implements Node {
     # Returns the last n elements from the list.
     last: Int
   ): ContributionConnection!
-  expiredAt: DateTime
   isSubscribedToNewsLetter: Boolean
   subscribedToNewsLetterAt: DateTime
   isViewer: Boolean!

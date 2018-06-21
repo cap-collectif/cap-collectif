@@ -13,12 +13,12 @@ describe('<UserAdminAccount/>', () => {
 
   const userExpiredAndSubscribed = {
     subscribedToNewsLetterAt: '2018-05-03 11:11:11',
-    expiredAt: '2018-06-03 11:11:11',
+    expiresAt: '2018-06-03 11:11:11',
   };
 
   const userNotExpiredAndNotSubscribed = {
     subscribedToNewsLetterAt: null,
-    expiredAt: null,
+    expiresAt: null,
   };
   it('should render with user is admin or viewer', () => {
     const wrapper = shallow(

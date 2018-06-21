@@ -92,6 +92,7 @@ exports[`<UserAdminPersonalData/> should render, with user confirmed by email ad
       />
       <Field
         component={[Function]}
+        disabled={false}
         divClassName="col-sm-4"
         id="personal-data-form-gender"
         label={
@@ -135,6 +136,7 @@ exports[`<UserAdminPersonalData/> should render, with user confirmed by email ad
         component={[Function]}
         componentId="personal-data-date-of-birth"
         dayId="personal-data-date-of-birth-day"
+        disabled={false}
         globalClassName="col-sm-4 form-group"
         id="dateOfBirth"
         label="form.label_date_of_birth"
@@ -370,6 +372,7 @@ exports[`<UserAdminPersonalData/> should render, with user not confirmed by emai
       />
       <Field
         component={[Function]}
+        disabled={true}
         divClassName="col-sm-4"
         id="personal-data-form-gender"
         label={
@@ -413,6 +416,7 @@ exports[`<UserAdminPersonalData/> should render, with user not confirmed by emai
         component={[Function]}
         componentId="personal-data-date-of-birth"
         dayId="personal-data-date-of-birth-day"
+        disabled={true}
         globalClassName="col-sm-4 form-group"
         id="dateOfBirth"
         label="form.label_date_of_birth"

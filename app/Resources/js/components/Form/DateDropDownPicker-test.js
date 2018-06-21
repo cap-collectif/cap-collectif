@@ -21,8 +21,8 @@ describe('<DateDropdownPicker />', () => {
     globalClassName: 'globalClassName',
   };
 
-  it('should render in english without date', () => {
-    const wrapper = shallow(<DateDropdownPicker {...props} />);
+  it('should render in english without date and disabled', () => {
+    const wrapper = shallow(<DateDropdownPicker {...props} disabled />);
     wrapper.setState({
       year: null,
       month: null,
@@ -32,7 +32,7 @@ describe('<DateDropdownPicker />', () => {
   });
 
   it('should render in english with date', () => {
-    const wrapper = shallow(<DateDropdownPicker {...props} />);
+    const wrapper = shallow(<DateDropdownPicker {...props} disabled={false} />);
     wrapper.setState({
       year: '1990',
       month: '04',

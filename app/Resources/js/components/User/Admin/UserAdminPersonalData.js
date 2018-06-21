@@ -148,6 +148,7 @@ export class UserAdminPersonalData extends React.Component<Props> {
               label={<FormattedMessage id="form.label_gender" />}
               type="select"
               id="personal-data-form-gender"
+              disabled={!isViewerOrSuperAdmin}
               divClassName="col-sm-4">
               <option value="MALE">
                 <FormattedMessage id="gender.male" />
@@ -163,6 +164,7 @@ export class UserAdminPersonalData extends React.Component<Props> {
             <Field
               name={`dateOfBirth`}
               id="dateOfBirth"
+              disabled={!isViewerOrSuperAdmin}
               component={DateDropdownPicker}
               dayId="personal-data-date-of-birth-day"
               monthId="personal-data-date-of-birth-month"

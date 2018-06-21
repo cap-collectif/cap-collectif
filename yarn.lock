@@ -8512,9 +8512,9 @@ react-dom@^15.3.2:
     object-assign "^4.1.0"
     prop-types "^15.5.10"
 
-"react-dropdown-date@https://github.com/cap-collectif/react-dropdown-date/tarball/8b2c37c":
+"react-dropdown-date@https://github.com/cap-collectif/react-dropdown-date/tarball/dd55c48":
   version "0.0.13"
-  resolved "https://github.com/cap-collectif/react-dropdown-date/tarball/8b2c37c#48f529794d07642e1f66cedce92e375c37adbbd1"
+  resolved "https://github.com/cap-collectif/react-dropdown-date/tarball/dd55c48#cb4c74fa7de20b271a5e96611cfbf82c9e13869c"
   dependencies:
     react "^16.3.1"
 

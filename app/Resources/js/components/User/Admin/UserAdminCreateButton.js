@@ -205,9 +205,7 @@ export class UserAdminCreateButton extends Component<Props, State> {
                 bsStyle="primary"
                 onClick={handleSubmit}
                 id="confirm-user-create">
-                <FormattedMessage
-                  id={submitting ? 'global.loading' : 'global.save_modifications'}
-                />
+                <FormattedMessage id={submitting ? 'global.loading' : 'global.add'} />
               </Button>
               <AlertForm
                 valid={pristine ? true : valid}

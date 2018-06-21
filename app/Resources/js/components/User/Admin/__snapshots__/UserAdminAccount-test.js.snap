@@ -48,7 +48,7 @@ exports[`<UserAdminAccount/> should render with user is admin or viewer 1`] = `
       <Field
         component={[Function]}
         id="enabled"
-        name="locked"
+        name="enabled"
         type="checkbox"
       >
         <FormattedMessage
@@ -59,7 +59,7 @@ exports[`<UserAdminAccount/> should render with user is admin or viewer 1`] = `
       <Field
         component={[Function]}
         id="locked"
-        name="enabled"
+        name="locked"
         type="checkbox"
       >
         <FormattedMessage
@@ -69,8 +69,8 @@ exports[`<UserAdminAccount/> should render with user is admin or viewer 1`] = `
       </Field>
       <Field
         component={[Function]}
-        disabled={true}
-        id="locked"
+        disabled={false}
+        id="expired"
         name="expired"
         type="checkbox"
       >
@@ -185,7 +185,7 @@ exports[`<UserAdminAccount/> should render with user is admin or viewer 1`] = `
         userDeletedIsNotViewer={true}
         viewer={
           Object {
-            "expiredAt": "2018-06-03 11:11:11",
+            "expiresAt": "2018-06-03 11:11:11",
             "subscribedToNewsLetterAt": "2018-05-03 11:11:11",
           }
         }
@@ -243,7 +243,7 @@ exports[`<UserAdminAccount/> should render with user is not admin or viewer  1`]
       <Field
         component={[Function]}
         id="enabled"
-        name="locked"
+        name="enabled"
         type="checkbox"
       >
         <FormattedMessage
@@ -254,7 +254,7 @@ exports[`<UserAdminAccount/> should render with user is not admin or viewer  1`]
       <Field
         component={[Function]}
         id="locked"
-        name="enabled"
+        name="locked"
         type="checkbox"
       >
         <FormattedMessage
@@ -265,7 +265,7 @@ exports[`<UserAdminAccount/> should render with user is not admin or viewer  1`]
       <Field
         component={[Function]}
         disabled={true}
-        id="locked"
+        id="expired"
         name="expired"
         type="checkbox"
       >

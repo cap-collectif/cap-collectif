@@ -18,7 +18,6 @@ type Props = FormProps &
 type FormValues = {
   current_password: string,
   new_password: string,
-  new_password_confirmation: ?string,
 };
 
 const formName = 'user-admin-edit-password';
@@ -30,13 +29,6 @@ const validate = (values: FormValues) => {
   }
   if (values.new_password && values.new_password.length < 8) {
     errors.new_password = 'fos_user.new_password.short';
-  }
-  if (
-    values.new_password &&
-    values.new_password_confirmation &&
-    values.new_password_confirmation !== values.new_password
-  ) {
-    errors.new_password_confirmation = 'fos_user.password.mismatch';
   }
   return errors;
 };
@@ -105,15 +97,6 @@ export class UserAdminPassword extends React.Component<Props, State> {
               disabled={!user.isViewer}
             />
             <div className="clearfix" />
-            <Field
-              type="password"
-              component={component}
-              name="new_password_confirmation"
-              id="password-form-confirmation"
-              divClassName="col-sm-6"
-              label={<FormattedMessage id="form.new_password_confirmation" />}
-              disabled={!user.isViewer}
-            />
             <div className="clearfix" />
             <ButtonToolbar className="col-sm-6 pl-0">
               <Button
