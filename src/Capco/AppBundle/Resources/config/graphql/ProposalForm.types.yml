@@ -51,7 +51,7 @@ ProposalForm:
                     description: "Returns the elements in the list that come after the specified global ID."
                   first:
                     type: "Int"
-                    defaultValue: 10
+                    defaultValue: 20
                     description: "Returns the first n elements from the list."
                   before:
                     type: "String"
