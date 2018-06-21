@@ -49,6 +49,7 @@ class ProposalFormController extends Controller
         $clonedProposalForm->setZoomMap($object->getZoomMap());
         $clonedProposalForm->setLatMap($object->getLatMap());
         $clonedProposalForm->setLngMap($object->getLngMap());
+        $clonedProposalForm->setEvaluationForm(null);
 
         $this->admin->create($clonedProposalForm);
 
