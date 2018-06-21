@@ -40,6 +40,6 @@ class ProposalFormRepository extends EntityRepository
             ->where('f.id = :form_id')
             ->setParameter('form_id', $formId);
 
-        return $qb->getQuery()->getSQL() ?? 0;
+        return $qb->getQuery()->getSingleScalarResult() ?? 0;
     }
 }
