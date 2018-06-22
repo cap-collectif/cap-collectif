@@ -43,6 +43,7 @@ class ProjectDownloadResolver
         'district',
         'content',
         'media',
+        'vote_position',
     ];
 
     protected $em;
@@ -317,6 +318,7 @@ class ProjectDownloadResolver
             'estimation' => $proposal['estimation'] ? $proposal['estimation'] . ' €' : '',
             'likers' => $proposal['likers'],
             'expired' => $this->translator->trans('global.' . $expired, [], 'CapcoAppBundle'),
+            'vote_position' => $na,
         ];
 
         $item = $this->addCustomsFieldForProposal($proposal, $item);
@@ -375,6 +377,7 @@ class ProjectDownloadResolver
             'estimation' => $na,
             'likers' => $proposal['likers'],
             'expired' => $this->translator->trans('global.' . $expired, [], 'CapcoAppBundle'),
+            'vote_position' => $vote['position'],
         ];
 
         $item = $this->addCustomsFieldForProposal($proposal, $item);
@@ -456,20 +459,18 @@ class ProjectDownloadResolver
         );
         $nbCols = \count($headers);
         // Add headers
-        list($startColumn, $startRow) = \PHPExcel_Cell::coordinateFromString();
+        [$startColumn, $startRow] = \PHPExcel_Cell::coordinateFromString();
         $currentColumn = $startColumn;
         foreach ($headers as $header) {
             if (\is_array($header)) {
                 $header = $header['label'];
-            } else {
-                if (!\in_array($header, $this->customFields, true)) {
-                    $header = $this->translator->trans('project_download.label.' . $header, [], 'CapcoAppBundle');
-                }
+            } elseif (!\in_array($header, $this->customFields, true)) {
+                $header = $this->translator->trans('project_download.label.' . $header, [], 'CapcoAppBundle');
             }
             $sheet->setCellValueExplicit($currentColumn . $startRow, $header);
             ++$currentColumn;
         }
-        list($startColumn, $startRow) = \PHPExcel_Cell::coordinateFromString('A2');
+        [$startColumn, $startRow] = \PHPExcel_Cell::coordinateFromString('A2');
         $currentRow = $startRow;
         // Loop through data
         foreach ($data as $row) {
@@ -486,7 +487,7 @@ class ProjectDownloadResolver
         return $this->phpexcel->createWriter($phpExcelObject, 'Excel2007');
     }
 
-    private function initCustomFieldsInHeader(ProposalForm $proposalForm)
+    private function initCustomFieldsInHeader(ProposalForm $proposalForm): void
     {
         $this->customFields = [];
         foreach ($proposalForm->getQuestions() as $question) {
