@@ -1,7 +1,8 @@
-import React, { PropTypes } from 'react';
+// @flow
+import React from 'react';
 import { Modal, Alert } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
@@ -10,16 +11,16 @@ import LoginSocialButtons from '../Login/LoginSocialButtons';
 import { closeRegistrationModal } from '../../../redux/modules/user';
 import type { State, Dispatch } from '../../../types';
 
-export const RegistrationModal = React.createClass({
-  propTypes: {
-    show: PropTypes.bool.isRequired,
-    onClose: PropTypes.func.isRequired,
-    textTop: PropTypes.string,
-    textBottom: PropTypes.string,
-    submitting: PropTypes.bool.isRequired,
-    onSubmit: PropTypes.func.isRequired,
-  },
+type Props = {
+  show: boolean,
+  onClose: Function,
+  textTop?: string,
+  textBottom?: string,
+  submitting: boolean,
+  onSubmit: Function,
+};
 
+export class RegistrationModal extends React.Component<Props> {
   render() {
     const { submitting, onSubmit, onClose, show, textTop, textBottom } = this.props;
     return (
@@ -44,8 +45,11 @@ export const RegistrationModal = React.createClass({
           )}
           <LoginSocialButtons prefix="registration." />
           <RegistrationForm
+            // $FlowFixMe
             ref={c => (this.form = c)}
+            // $FlowFixMe
             onSubmitFail={this.stopSubmit}
+            // $FlowFixMe
             onSubmitSuccess={this.handleSubmitSuccess}
           />
           {textBottom && (
@@ -67,10 +71,10 @@ export const RegistrationModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  },
-});
+  }
+}
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   textTop: state.user.registration_form.topTextDisplayed
     ? state.user.registration_form.topText
     : null,

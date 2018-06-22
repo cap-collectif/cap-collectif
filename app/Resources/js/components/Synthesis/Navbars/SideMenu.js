@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Nav, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -10,80 +11,78 @@ import CreateModal from './../Create/CreateModal';
 import ElementsFinder from './../ElementsFinder';
 import Loader from '../../Ui/Loader';
 
-const SideMenu = React.createClass({
-  propTypes: {
-    synthesis: React.PropTypes.object,
-  },
+class SideMenu extends React.Component {
+  static propTypes = {
+    synthesis: PropTypes.object,
+  };
 
-  contextTypes: {
-    router: React.PropTypes.object.isRequired,
-  },
+  static contextTypes = {
+    router: PropTypes.object.isRequired,
+  };
 
-  getInitialState() {
-    return {
-      showCreateModal: false,
-      navItems: [],
-      selectedId: 'root',
-      expanded: {
-        root: true,
-      },
-      isLoading: true,
-    };
-  },
+  state = {
+    showCreateModal: false,
+    navItems: [],
+    selectedId: 'root',
+    expanded: {
+      root: true,
+    },
+    isLoading: true,
+  };
 
   componentWillMount() {
     SynthesisElementStore.addChangeListener(this.onChange);
-  },
+  }
 
   componentDidMount() {
     this.loadElementsTreeFromServer();
-  },
+  }
 
   componentWillUnmount() {
     this.toggleCreateModal(false);
     SynthesisElementStore.removeChangeListener(this.onChange);
-  },
+  }
 
-  onChange() {
+  onChange = () => {
     this.setState({
       navItems: SynthesisElementStore.elements.notIgnoredTree,
       expanded: SynthesisElementStore.expandedItems.nav,
       selectedId: SynthesisElementStore.selectedNavItem,
       isLoading: false,
     });
-  },
+  };
 
-  toggleExpand(element) {
+  toggleExpand = element => {
     SynthesisElementActions.expandTreeItem('nav', element.id, !this.state.expanded[element.id]);
-  },
+  };
 
-  selectItem(element) {
+  selectItem = element => {
     SynthesisElementActions.selectNavItem(element.id);
     if (element.id !== 'root') {
       this.context.router.push(`element/${element.id}`);
     }
-  },
+  };
 
-  showCreateModal() {
+  showCreateModal = () => {
     this.toggleCreateModal(true);
-  },
+  };
 
-  hideCreateModal() {
+  hideCreateModal = () => {
     this.toggleCreateModal(false);
-  },
+  };
 
-  toggleCreateModal(value) {
+  toggleCreateModal = value => {
     this.setState({
       showCreateModal: value,
     });
-  },
+  };
 
-  loadElementsTreeFromServer() {
+  loadElementsTreeFromServer = () => {
     const { synthesis } = this.props;
     SynthesisElementActions.loadElementsTreeFromServer(synthesis.id, 'notIgnored');
-  },
+  };
 
-  renderContributionsButton() {
+  renderContributionsButton = () => {
     return (
       <LinkContainer to="/folder_manager">
         <NavItem className="menu__link" bsStyle="link">
@@ -92,9 +91,9 @@ const SideMenu = React.createClass({
         </NavItem>
       </LinkContainer>
     );
-  },
+  };
 
-  renderTree() {
+  renderTree = () => {
     const { synthesis } = this.props;
     if (this.state.isLoading) {
       return <Loader show={this.state.isLoading} />;
@@ -111,18 +110,18 @@ const SideMenu = React.createClass({
         itemClass="menu__link"
       />
     );
-  },
+  };
 
-  renderCreateButton() {
+  renderCreateButton = () => {
     return (
       <NavItem className="menu__link menu__action" onClick={this.showCreateModal.bind(null, this)}>
         <i className="cap cap-folder-add" />{' '}
         {<FormattedMessage id="synthesis.edition.action.create.label" />}
       </NavItem>
     );
-  },
+  };
 
-  renderManageButton() {
+  renderManageButton = () => {
     return (
       <LinkContainer to="/folder-manager">
         <NavItem className="menu__link menu__action">
@@ -131,7 +130,7 @@ const SideMenu = React.createClass({
         </NavItem>
       </LinkContainer>
     );
-  },
+  };
 
   render() {
     const { synthesis } = this.props;
@@ -151,7 +150,7 @@ const SideMenu = React.createClass({
         />
       </div>
     );
-  },
-});
+  }
+}
 
 export default SideMenu;

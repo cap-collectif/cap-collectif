@@ -1,64 +1,66 @@
-import React, { PropTypes } from 'react';
+// @flow
+import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import { MenuItem, DropdownButton, Modal } from 'react-bootstrap';
+import type { GlobalState } from '../../types';
 
-const ShareButtonDropdown = React.createClass({
-  propTypes: {
-    id: PropTypes.string,
-    enabled: PropTypes.bool.isRequired,
-    title: PropTypes.string,
-    url: PropTypes.string.isRequired,
-    className: PropTypes.string,
-    bsStyle: PropTypes.string,
-    style: PropTypes.object,
-  },
+type Props = {
+  id: string,
+  enabled: boolean,
+  title: string,
+  url: string,
+  className?: string,
+  bsStyle?: string,
+  style?: Object,
+};
 
-  getDefaultProps() {
-    return {
-      id: 'share-button',
-      className: '',
-      title: '',
-      style: {},
-    };
-  },
+type State = {
+  show: boolean,
+};
 
-  getInitialState() {
-    return {
-      show: false,
-    };
-  },
+class ShareButtonDropdown extends React.Component<Props, State> {
+  static defaultProps = {
+    id: 'share-button',
+    className: '',
+    title: '',
+    style: {},
+  };
 
-  getEncodedUrl() {
+  state = {
+    show: false,
+  };
+
+  getEncodedUrl = () => {
     const { url } = this.props;
     return encodeURIComponent(url);
-  },
+  };
 
-  facebook() {
+  facebook = () => {
     const { title } = this.props;
     this.openSharer(
       `http://www.facebook.com/sharer.php?u=${this.getEncodedUrl()}&t=${title}`,
       'Facebook',
     );
-  },
+  };
 
-  twitter() {
+  twitter = () => {
     const { title } = this.props;
     this.openSharer(
       `https://twitter.com/share?url=${this.getEncodedUrl()}&text=${title}`,
       'Twitter',
     );
-  },
+  };
 
-  linkedin() {
+  linkedin = () => {
     const { title } = this.props;
     this.openSharer(
       `https://www.linkedin.com/shareArticle?mini=true&url=${this.getEncodedUrl()}&text=${title}`,
       'Linkedin',
     );
-  },
+  };
 
-  openSharer(href, name) {
+  openSharer = (href, name) => {
     const height = 500;
     const width = 700;
     const top = screen.height / 2 - height / 2;
@@ -68,21 +70,21 @@ const ShareButtonDropdown = React.createClass({
       name,
       `top=${top},left=${left},menubar=0,toolbar=0,status=0,width=${width},height=${height}`,
     );
-  },
+  };
 
-  showModal() {
+  showModal = () => {
     this.setState({
       show: true,
     });
-  },
+  };
 
-  hideModal() {
+  hideModal = () => {
     this.setState({
       show: false,
     });
-  },
+  };
 
-  renderModal() {
+  renderModal = () => {
     const { title, url } = this.props;
     return (
       <Modal
@@ -101,7 +103,7 @@ const ShareButtonDropdown = React.createClass({
         </Modal.Body>
       </Modal>
     );
-  },
+  };
 
   render() {
     const { enabled, style, id, bsStyle, className, title, url } = this.props;
@@ -113,7 +115,7 @@ const ShareButtonDropdown = React.createClass({
         <DropdownButton
           id={id}
           bsStyle={bsStyle}
-          className={`${className} dropdown--custom`}
+          className={`${className || ''} dropdown--custom`}
           style={style}
           title={
             <span>
@@ -139,10 +141,10 @@ const ShareButtonDropdown = React.createClass({
         {this.renderModal()}
       </div>
     );
-  },
-});
+  }
+}
 
-const mapStateToProps = state => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
   enabled: state.default.features.share_buttons,
 });
 

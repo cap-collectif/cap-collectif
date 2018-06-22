@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormattedDate } from 'react-intl';
 import moment from 'moment';
 
@@ -14,28 +15,26 @@ import IgnoreButton from './../Ignore/IgnoreButton';
 import PublishModal from './../Publish/PublishModal';
 import DivideModal from './../Divide/DivideModal';
 
-const EditElement = React.createClass({
-  propTypes: {
-    synthesis: React.PropTypes.object,
-    params: React.PropTypes.object,
-  },
+class EditElement extends React.Component {
+  static propTypes = {
+    synthesis: PropTypes.object,
+    params: PropTypes.object,
+  };
 
-  getInitialState() {
-    return {
-      element: null,
-      isLoading: true,
-      showPublishModal: false,
-      showDivideModal: false,
-    };
-  },
+  state = {
+    element: null,
+    isLoading: true,
+    showPublishModal: false,
+    showDivideModal: false,
+  };
 
   componentWillMount() {
     SynthesisElementStore.addChangeListener(this.onChange);
-  },
+  }
 
   componentDidMount() {
     this.loadElementFromServer();
-  },
+  }
 
   componentWillReceiveProps(nextProps) {
     const { params } = this.props;
@@ -49,48 +48,48 @@ const EditElement = React.createClass({
         },
       );
     }
-  },
+  }
 
   componentWillUnmount() {
     SynthesisElementStore.removeChangeListener(this.onChange);
     this.toggleDivideModal(false);
     this.togglePublishModal(false);
-  },
+  }
 
-  onChange() {
+  onChange = () => {
     this.setState({
       element: SynthesisElementStore.element,
       isLoading: false,
     });
-  },
+  };
 
-  togglePublishModal(value) {
+  togglePublishModal = value => {
     this.setState({
       showDivideModal: false,
       showPublishModal: value,
     });
-  },
+  };
 
-  toggleDivideModal(value) {
+  toggleDivideModal = value => {
     this.setState({
       showPublishModal: false,
       showDivideModal: value,
     });
-  },
+  };
 
-  loadElementFromServer(id = this.props.params.element_id) {
+  loadElementFromServer = (id = this.props.params.element_id) => {
     const { synthesis } = this.props;
     SynthesisElementActions.loadElementFromServer(synthesis.id, id);
-  },
+  };
 
-  renderDescription() {
+  renderDescription = () => {
     if (this.state.element && this.state.element.description) {
       return <p className="element__description box">{this.state.element.description}</p>;
     }
     return null;
-  },
+  };
 
-  renderElementPanel() {
+  renderElementPanel = () => {
     const element = this.state.element;
     if (!this.state.isLoading && element) {
       return (
@@ -116,9 +115,9 @@ const EditElement = React.createClass({
         </div>
       );
     }
-  },
+  };
 
-  renderElementButtons() {
+  renderElementButtons = () => {
     const { synthesis } = this.props;
     return (
       <div className="element__actions box text-center">
@@ -127,9 +126,9 @@ const EditElement = React.createClass({
         <IgnoreButton synthesis={synthesis} element={this.state.element} />
       </div>
     );
-  },
+  };
 
-  renderHistory() {
+  renderHistory = () => {
     const element = this.state.element;
     if (!this.state.isLoading && element && element.logs.length > 0) {
       return (
@@ -142,9 +141,9 @@ const EditElement = React.createClass({
         </ul>
       );
     }
-  },
+  };
 
-  renderLogSentence(sentence, date) {
+  renderLogSentence = (sentence, date) => {
     return (
       <li className="element__history__log">
         {sentence}
@@ -160,9 +159,9 @@ const EditElement = React.createClass({
         </span>
       </li>
     );
-  },
+  };
 
-  renderPublishModal() {
+  renderPublishModal = () => {
     const { synthesis } = this.props;
     const element = this.state.element;
     if (!this.state.isLoading && element) {
@@ -175,9 +174,9 @@ const EditElement = React.createClass({
         />
       );
     }
-  },
+  };
 
-  renderDivideModal() {
+  renderDivideModal = () => {
     const { synthesis } = this.props;
     const element = this.state.element;
     if (!this.state.isLoading && element) {
@@ -190,7 +189,7 @@ const EditElement = React.createClass({
         />
       );
     }
-  },
+  };
 
   render() {
     return (
@@ -205,7 +204,7 @@ const EditElement = React.createClass({
         {this.renderDivideModal()}
       </div>
     );
-  },
-});
+  }
+}
 
 export default EditElement;

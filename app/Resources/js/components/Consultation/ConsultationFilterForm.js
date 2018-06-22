@@ -5,7 +5,9 @@ import renderComponent from '../Form/Field';
 
 export const form = 'consultation-filter-form';
 
-export const ConsultationFilterForm = React.createClass({
+type Props = {};
+
+export class ConsultationFilterForm extends React.Component<Props> {
   render() {
     return (
       <form className="form-inline">
@@ -34,8 +36,8 @@ export const ConsultationFilterForm = React.createClass({
         </Field>
       </form>
     );
-  },
-});
+  }
+}
 
 export default reduxForm({
   form,

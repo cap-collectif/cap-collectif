@@ -25,6 +25,7 @@ exports[`<ProposalPageFollowers /> should render a proposal page follower with m
   >
     <UserBox
       className="proposal__follower"
+      key="0"
       user={
         Object {
           "contributionsCount": 0,
@@ -41,6 +42,7 @@ exports[`<ProposalPageFollowers /> should render a proposal page follower with m
     />
     <UserBox
       className="proposal__follower"
+      key="1"
       user={
         Object {
           "contributionsCount": 55,
@@ -57,6 +59,7 @@ exports[`<ProposalPageFollowers /> should render a proposal page follower with m
     />
     <UserBox
       className="proposal__follower"
+      key="2"
       user={
         Object {
           "contributionsCount": 44,
@@ -113,6 +116,7 @@ exports[`<ProposalPageFollowers /> should render a proposal page follower with u
   >
     <UserBox
       className="proposal__follower"
+      key="0"
       user={
         Object {
           "contributionsCount": 0,
@@ -129,6 +133,7 @@ exports[`<ProposalPageFollowers /> should render a proposal page follower with u
     />
     <UserBox
       className="proposal__follower"
+      key="1"
       user={
         Object {
           "contributionsCount": 55,
@@ -145,6 +150,7 @@ exports[`<ProposalPageFollowers /> should render a proposal page follower with u
     />
     <UserBox
       className="proposal__follower"
+      key="2"
       user={
         Object {
           "contributionsCount": 44,

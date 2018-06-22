@@ -11,7 +11,7 @@ exports[`<CommentForm /> should render correctly 1`] = `
 >
   <Connect(UserAvatar)
     className="pull-left"
-    user={false}
+    user={null}
   />
   <div
     className="opinion__data"

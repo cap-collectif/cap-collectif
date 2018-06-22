@@ -83,6 +83,7 @@ exports[`<ProposalAdminSelections /> render correctly 1`] = `
         <ListGroupItem
           bsClass="list-group-item"
           id="item_0"
+          key="0"
           listItem={false}
         >
           <div>

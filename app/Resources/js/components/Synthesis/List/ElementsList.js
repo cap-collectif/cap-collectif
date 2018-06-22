@@ -1,26 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Nav } from 'react-bootstrap';
 import ElementListItem from './ElementListItem';
 
-const ElementsList = React.createClass({
-  propTypes: {
-    elements: React.PropTypes.array.isRequired,
-    showBreadcrumb: React.PropTypes.bool,
-    showStatus: React.PropTypes.bool,
-    showNotation: React.PropTypes.bool,
-    hasLink: React.PropTypes.bool,
-    linkType: React.PropTypes.string,
-  },
+class ElementsList extends React.Component {
+  static propTypes = {
+    elements: PropTypes.array.isRequired,
+    showBreadcrumb: PropTypes.bool,
+    showStatus: PropTypes.bool,
+    showNotation: PropTypes.bool,
+    hasLink: PropTypes.bool,
+    linkType: PropTypes.string,
+  };
 
-  getDefaultProps() {
-    return {
-      showBreadcrumb: true,
-      showStatus: true,
-      showNotation: true,
-      hasLink: true,
-      linkType: 'edition',
-    };
-  },
+  static defaultProps = {
+    showBreadcrumb: true,
+    showStatus: true,
+    showNotation: true,
+    hasLink: true,
+    linkType: 'edition',
+  };
 
   render() {
     const { elements, hasLink, linkType, showBreadcrumb, showNotation, showStatus } = this.props;
@@ -45,7 +44,7 @@ const ElementsList = React.createClass({
         })}
       </Nav>
     );
-  },
-});
+  }
+}
 
 export default ElementsList;

@@ -1,23 +1,22 @@
-import React, { PropTypes } from 'react';
+// @flow
+import React from 'react';
 import { Button } from 'react-bootstrap';
 import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
 
-const RankingArrow = React.createClass({
-  displayName: 'RankingArrow',
+type Props = {
+  type: string,
+  onClick?: Function,
+  disabled?: boolean,
+};
 
-  propTypes: {
-    type: PropTypes.string.isRequired,
-    onClick: PropTypes.func,
-    disabled: PropTypes.bool,
-  },
+class RankingArrow extends React.Component<Props> {
+  static displayName = 'RankingArrow';
 
-  getDefaultProps() {
-    return {
-      disabled: false,
-      onClick: null,
-    };
-  },
+  static defaultProps = {
+    disabled: false,
+    onClick: null,
+  };
 
   render() {
     const { type, onClick, disabled } = this.props;
@@ -41,7 +40,7 @@ const RankingArrow = React.createClass({
         <i className={classes} />
       </Button>
     );
-  },
-});
+  }
+}
 
 export default RankingArrow;

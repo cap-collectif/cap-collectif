@@ -1,5 +1,5 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 import OpinionSourceList from './OpinionSourceList';
@@ -10,61 +10,65 @@ import CategoriesActions from '../../../actions/CategoriesActions';
 import OpinionSourceStore from '../../../stores/OpinionSourceStore';
 import Filter from '../../Utils/Filter';
 
-const OpinionSourceBox = React.createClass({
-  propTypes: {
-    opinion: PropTypes.object.isRequired,
-  },
+type Props = {
+  opinion: Object,
+};
 
-  getInitialState() {
-    return {
-      sources: [],
-      isLoading: true,
-      filter: OpinionSourceStore.filter,
-    };
-  },
+type State = {
+  sources: Array<$FlowFixMe>,
+  isLoading: boolean,
+  filter: $FlowFixMe,
+};
+
+class OpinionSourceBox extends React.Component<Props, State> {
+  state = {
+    sources: [],
+    isLoading: true,
+    filter: OpinionSourceStore.filter,
+  };
 
   componentWillMount() {
     OpinionSourceStore.addChangeListener(this.onChange);
-  },
+  }
 
   componentDidMount() {
     this.loadSourcesFromServer();
     this.loadCategoriesFromServer();
-  },
+  }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps: Props, prevState: State) {
     if (this.state.filter !== prevState.filter) {
       this.loadSourcesFromServer();
     }
-  },
+  }
 
   componentWillUnmount() {
     OpinionSourceStore.removeChangeListener(this.onChange);
-  },
+  }
 
-  onChange() {
+  onChange = () => {
     this.setState({
       sources: OpinionSourceStore.sources,
       filter: OpinionSourceStore.filter,
       isLoading: false,
     });
-  },
+  };
 
-  handleFilterChange(event) {
+  handleFilterChange = (event: $FlowFixMe) => {
     this.setState({
       filter: event.target.value,
     });
-  },
+  };
 
-  loadSourcesFromServer() {
+  loadSourcesFromServer = () => {
     const { opinion } = this.props;
     this.setState({ isLoading: true });
     OpinionSourceActions.load(opinion, this.state.filter);
-  },
+  };
 
-  loadCategoriesFromServer() {
+  loadCategoriesFromServer = () => {
     CategoriesActions.load();
-  },
+  };
 
   render() {
     const { opinion } = this.props;
@@ -84,7 +88,7 @@ const OpinionSourceBox = React.createClass({
         </Loader>
       </div>
     );
-  },
-});
+  }
+}
 
 export default OpinionSourceBox;

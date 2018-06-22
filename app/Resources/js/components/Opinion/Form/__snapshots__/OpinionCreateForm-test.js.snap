@@ -35,6 +35,7 @@ exports[`<OpinionCreateForm /> renders correctly 1`] = `
   <Field
     component={[Function]}
     id="appendix_0"
+    key="0"
     label="appendice"
     name="appendice"
     type="editor"

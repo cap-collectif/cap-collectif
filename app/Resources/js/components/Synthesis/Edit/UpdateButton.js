@@ -1,28 +1,27 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 import UpdateModal from './UpdateModal';
 
-const UpdateButton = React.createClass({
-  propTypes: {
-    synthesis: React.PropTypes.object.isRequired,
-    element: React.PropTypes.object.isRequired,
-  },
+class UpdateButton extends React.Component {
+  static propTypes = {
+    synthesis: PropTypes.object.isRequired,
+    element: PropTypes.object.isRequired,
+  };
 
-  getInitialState() {
-    return {
-      showUpdateModal: false,
-    };
-  },
+  state = {
+    showUpdateModal: false,
+  };
 
-  toggleUpdateModal() {
+  toggleUpdateModal = () => {
     this.setState({
       showUpdateModal: !this.state.showUpdateModal,
     });
-  },
+  };
 
-  showUpdateModal() {
+  showUpdateModal = () => {
     this.toggleUpdateModal(true);
-  },
+  };
 
   render() {
     const { element, synthesis } = this.props;
@@ -43,7 +42,7 @@ const UpdateButton = React.createClass({
         />
       </div>
     );
-  },
-});
+  }
+}
 
 export default UpdateButton;

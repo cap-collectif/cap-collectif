@@ -1,22 +1,24 @@
+// @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Row, Col } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import Input from '../../Form/Input';
+import type { State } from '../../../types';
 
-export const ProjectStatsFilters = React.createClass({
-  propTypes: {
-    themes: React.PropTypes.array.isRequired,
-    districts: React.PropTypes.array.isRequired,
-    categories: React.PropTypes.array.isRequired,
-    showFilters: React.PropTypes.bool.isRequired,
-    onThemeChange: React.PropTypes.func.isRequired,
-    onDistrictChange: React.PropTypes.func.isRequired,
-    onCategoryChange: React.PropTypes.func.isRequired,
-    showThemes: React.PropTypes.bool.isRequired,
-    showDistricts: React.PropTypes.bool.isRequired,
-  },
+type Props = {
+  themes: Array<$FlowFixMe>,
+  districts: Array<$FlowFixMe>,
+  categories: Array<$FlowFixMe>,
+  showFilters: boolean,
+  onThemeChange: Function,
+  onDistrictChange: Function,
+  onCategoryChange: Function,
+  showThemes: boolean,
+  showDistricts: boolean,
+};
 
+export class ProjectStatsFilters extends React.Component<Props> {
   render() {
     const {
       districts,
@@ -99,12 +101,14 @@ export const ProjectStatsFilters = React.createClass({
         )}
       </Row>
     );
-  },
+  }
+}
+
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) => ({
+  showThemes: state.default.features.themes && props.showThemes,
+  showDistricts: state.default.features.districts && props.showDistricts,
 });
 
-export default connect((state, props) => {
-  return {
-    showThemes: state.default.features.themes && props.showThemes,
-    showDistricts: state.default.features.districts && props.showDistricts,
-  };
-})(ProjectStatsFilters);
+const container = connect(mapStateToProps)(ProjectStatsFilters);
+
+export default container;

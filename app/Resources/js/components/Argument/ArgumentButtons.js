@@ -1,5 +1,5 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
 import ArgumentVoteBox from './Vote/ArgumentVoteBox';
@@ -10,25 +10,27 @@ import EditButton from '../Form/EditButton';
 import DeleteButton from '../Form/DeleteButton';
 import { openArgumentEditModal } from '../../redux/modules/opinion';
 
-const ArgumentButtons = React.createClass({
-  propTypes: {
-    argument: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
-  },
+type Props = {
+  argument: Object,
+  dispatch: Function,
+};
 
-  getInitialState() {
-    return {
-      isDeleting: false,
-    };
-  },
+type State = {
+  isDeleting: boolean,
+};
 
-  openDeleteModal() {
+class ArgumentButtons extends React.Component<Props, State> {
+  state = {
+    isDeleting: false,
+  };
+
+  openDeleteModal = () => {
     this.setState({ isDeleting: true });
-  },
+  };
 
-  closeDeleteModal() {
+  closeDeleteModal = () => {
     this.setState({ isDeleting: false });
-  },
+  };
 
   render() {
     const { argument, dispatch } = this.props;
@@ -54,6 +56,7 @@ const ArgumentButtons = React.createClass({
           show={this.state.isDeleting}
           onClose={this.closeDeleteModal}
         />{' '}
+        {/* $FlowFixMe */}
         <ShareButtonDropdown
           id={`arg-${argument.id}-share-button`}
           url={argument._links.show}
@@ -61,7 +64,7 @@ const ArgumentButtons = React.createClass({
         />
       </div>
     );
-  },
-});
+  }
+}
 
 export default connect()(ArgumentButtons);

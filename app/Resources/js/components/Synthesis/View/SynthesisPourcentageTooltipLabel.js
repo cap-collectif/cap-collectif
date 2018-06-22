@@ -1,5 +1,5 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 export const calculPourcentage = (element: Object, parent: Object): number => {
@@ -8,12 +8,12 @@ export const calculPourcentage = (element: Object, parent: Object): number => {
   return percentage > 0 ? percentage : 0;
 };
 
-const SynthesisPourcentageTooltipLabel = React.createClass({
-  propTypes: {
-    element: PropTypes.object.isRequired,
-    parent: PropTypes.object.isRequired,
-  },
+type Props = {
+  element: Object,
+  parent: Object,
+};
 
+class SynthesisPourcentageTooltipLabel extends React.Component<Props> {
   render() {
     const { element, parent } = this.props;
     return (
@@ -27,7 +27,7 @@ const SynthesisPourcentageTooltipLabel = React.createClass({
         }}
       />
     );
-  },
-});
+  }
+}
 
 export default SynthesisPourcentageTooltipLabel;

@@ -1,9 +1,8 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { reduxForm, Field } from 'redux-form';
 import { connect, type MapStateToProps } from 'react-redux';
-import type { Connector } from 'react-redux';
 import Fetcher, { json } from '../../../services/Fetcher';
 import type { State, Dispatch } from '../../../types';
 import renderInput from '../../Form/Field';
@@ -48,13 +47,14 @@ const onSubmit = (data: Object, dispatch: Dispatch, props: Object) => {
     });
 };
 
-export const OpinionEditForm = React.createClass({
-  propTypes: {
-    opinion: PropTypes.object.isRequired,
-    step: PropTypes.object.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
-  },
+type Props = {
+  opinion: Object,
+  step: Object,
+  handleSubmit: Function,
+  initialValues: Object,
+};
 
+export class OpinionEditForm extends React.Component<Props> {
   render() {
     const { opinion, step, handleSubmit } = this.props;
     return (
@@ -97,27 +97,24 @@ export const OpinionEditForm = React.createClass({
         ))}
       </form>
     );
-  },
-});
+  }
+}
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, { opinion }: Object) => {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) => {
   const dynamicsInitialValues = {};
-  for (const appendix of opinion.appendices) {
+  for (const appendix of props.opinion.appendices) {
     dynamicsInitialValues[appendix.type.title] = appendix.body;
   }
   return {
     initialValues: {
-      title: opinion.title,
-      body: opinion.body,
+      title: props.opinion.title,
+      body: props.opinion.body,
       ...dynamicsInitialValues,
     },
   };
 };
-type Props = {
-  initialValues: Object,
-};
-const connector: Connector<{}, Props> = connect(mapStateToProps);
-export default connector(
+
+export default connect(mapStateToProps)(
   reduxForm({
     form: formName,
     onSubmit,

@@ -1,34 +1,35 @@
-import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
+// @flow
+import React from 'react';
+import { connect, type MapStateToProps } from 'react-redux';
 import ReportModal from './ReportModal';
 import ReportButton from './ReportButton';
 import { openModal } from '../../redux/modules/report';
+import type { State, Dispatch } from '../../types';
 
-export const ReportBox = React.createClass({
-  displayName: 'ReportBox',
-  propTypes: {
-    id: PropTypes.string.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    showModal: PropTypes.bool.isRequired,
-    reported: PropTypes.bool.isRequired,
-    onReport: PropTypes.func.isRequired,
-    features: PropTypes.object.isRequired,
-    user: PropTypes.object,
-    author: PropTypes.object,
-    buttonStyle: PropTypes.object,
-    buttonBsSize: PropTypes.string,
-    buttonClassName: PropTypes.string,
-  },
+type Props = {
+  id: $FlowFixMe,
+  dispatch: Dispatch,
+  showModal: boolean,
+  reported: boolean,
+  onReport: Function,
+  features: Object,
+  user: Object,
+  author?: Object,
+  buttonStyle: ?Object,
+  buttonBsSize?: ?string,
+  buttonClassName?: ?string,
+};
 
-  getDefaultProps() {
-    return {
-      buttonStyle: {},
-      author: null,
-      buttonBsSize: null,
-      buttonClassName: '',
-      user: null,
-    };
-  },
+export class ReportBox extends React.Component<Props> {
+  static displayName = 'ReportBox';
+
+  static defaultProps = {
+    buttonStyle: {},
+    author: null,
+    buttonBsSize: null,
+    buttonClassName: '',
+    user: null,
+  };
 
   render() {
     const {
@@ -60,15 +61,13 @@ export const ReportBox = React.createClass({
       );
     }
     return null;
-  },
-});
+  }
+}
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    features: state.default.features,
-    user: state.user.user,
-    showModal: state.report.currentReportingModal === ownProps.id,
-  };
-};
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props) => ({
+  features: state.default.features,
+  user: state.user.user,
+  showModal: state.report.currentReportingModal === props.id,
+});
 
 export default connect(mapStateToProps)(ReportBox);

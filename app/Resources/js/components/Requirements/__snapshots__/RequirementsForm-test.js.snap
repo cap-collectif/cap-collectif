@@ -9,6 +9,7 @@ exports[`<RequirementsForm /> should render a vote widget for a simple vote with
     addonBefore="France +33"
     component={[Function]}
     divClassName="col-sm-12 col-xs-12"
+    key="requirement1"
     label={
       <FormattedMessage
         id="mobile-phone"
@@ -21,6 +22,7 @@ exports[`<RequirementsForm /> should render a vote widget for a simple vote with
   <Field
     component={[Function]}
     divClassName="col-sm-12 col-xs-12"
+    key="requirement1"
     label={false}
     name="requirement1"
     type="checkbox"

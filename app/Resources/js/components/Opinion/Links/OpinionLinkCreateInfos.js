@@ -2,11 +2,11 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-const OpinionLinkCreateInfos = React.createClass({
-  propTypes: {
-    opinion: React.PropTypes.object.isRequired,
-  },
+type Props = {
+  opinion: Object,
+};
 
+class OpinionLinkCreateInfos extends React.Component<Props> {
   render() {
     const { opinion } = this.props;
     return (
@@ -20,7 +20,7 @@ const OpinionLinkCreateInfos = React.createClass({
         </p>
       </div>
     );
-  },
-});
+  }
+}
 
 export default OpinionLinkCreateInfos;

@@ -1,7 +1,24 @@
+// @flow
 import React from 'react';
 import classNames from 'classnames';
 
-export default class PaginationItem extends React.Component {
+type Props = {
+  page: number,
+  onSelect: ?Function,
+  label: ?string,
+  ariaLabel: ?string,
+  disabled: boolean,
+  active: boolean,
+};
+
+export default class PaginationItem extends React.Component<Props> {
+  static defaultProps = {
+    disabled: false,
+    active: false,
+    label: null,
+    ariaLabel: null,
+  };
+
   render() {
     const { active, ariaLabel, disabled, label, onSelect, page } = this.props;
     const classes = classNames({
@@ -22,21 +39,5 @@ export default class PaginationItem extends React.Component {
     );
   }
 }
-
-PaginationItem.propTypes = {
-  page: React.PropTypes.number.isRequired,
-  onSelect: React.PropTypes.func,
-  label: React.PropTypes.string,
-  ariaLabel: React.PropTypes.string,
-  disabled: React.PropTypes.bool,
-  active: React.PropTypes.bool,
-};
-
-PaginationItem.defaultProps = {
-  disabled: false,
-  active: false,
-  label: null,
-  ariaLabel: null,
-};
 
 PaginationItem.displayName = 'PaginationItem';

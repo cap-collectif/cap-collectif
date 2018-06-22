@@ -3,13 +3,13 @@ import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import OpinionList from './OpinionList';
 
-export const Section = React.createClass({
-  propTypes: {
-    section: React.PropTypes.object.isRequired,
-    consultation: React.PropTypes.object.isRequired,
-    level: React.PropTypes.number.isRequired,
-  },
+type Props = {
+  section: Object,
+  consultation: Object,
+  level: number,
+};
 
+export class Section extends React.Component<Props> {
   render() {
     const { consultation, section, level } = this.props;
     return (
@@ -26,8 +26,8 @@ export const Section = React.createClass({
         )}
       </div>
     );
-  },
-});
+  }
+}
 
 export default createFragmentContainer(
   Section,

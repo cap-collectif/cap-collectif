@@ -1,14 +1,14 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-const FacebookLoginButton = React.createClass({
-  displayName: 'FacebookLoginButton',
+type Props = {
+  features: Object,
+  prefix: string,
+};
 
-  propTypes: {
-    features: PropTypes.object.isRequired,
-    prefix: PropTypes.string.isRequired,
-  },
+class FacebookLoginButton extends React.Component<Props> {
+  static displayName = 'FacebookLoginButton';
 
   render() {
     const { features, prefix } = this.props;
@@ -24,7 +24,7 @@ const FacebookLoginButton = React.createClass({
         <FormattedMessage id={label} />
       </a>
     );
-  },
-});
+  }
+}
 
 export default FacebookLoginButton;

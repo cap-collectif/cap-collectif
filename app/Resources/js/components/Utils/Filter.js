@@ -2,20 +2,18 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-const Filter = React.createClass({
-  propTypes: {
-    value: React.PropTypes.any.isRequired,
-    values: React.PropTypes.array,
-    show: React.PropTypes.bool,
-    onChange: React.PropTypes.func.isRequired,
-  },
+type Props = {
+  value: any,
+  values?: Array<$FlowFixMe>,
+  show?: boolean,
+  onChange: Function,
+};
 
-  getDefaultProps(): Object {
-    return {
-      values: ['popular', 'last', 'old'],
-      show: true,
-    };
-  },
+class Filter extends React.Component<Props> {
+  static defaultProps = {
+    values: ['popular', 'last', 'old'],
+    show: true,
+  };
 
   render(): ?React.Element<any> {
     const { onChange, show, value, values } = this.props;
@@ -34,7 +32,7 @@ const Filter = React.createClass({
       );
     }
     return null;
-  },
-});
+  }
+}
 
 export default Filter;

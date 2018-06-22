@@ -4,11 +4,9 @@ import { Row, Col } from 'react-bootstrap';
 import classNames from 'classnames';
 import OpinionPreview from '../OpinionPreview';
 
-const OpinionLink = React.createClass({
-  propTypes: {
-    link: React.PropTypes.object.isRequired,
-  },
+type Props = { link: Object };
 
+class OpinionLink extends React.Component<Props> {
   render() {
     const { link } = this.props;
     const classes = classNames({
@@ -26,7 +24,7 @@ const OpinionLink = React.createClass({
         </Row>
       </li>
     );
-  },
-});
+  }
+}
 
 export default OpinionLink;

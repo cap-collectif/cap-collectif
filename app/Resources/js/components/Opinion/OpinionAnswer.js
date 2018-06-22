@@ -1,13 +1,13 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import AnswerBody from '../Answer/AnswerBody';
 
-const OpinionAnswer = React.createClass({
-  propTypes: {
-    answer: PropTypes.object,
-  },
+type Props = {
+  answer?: Object,
+};
 
+class OpinionAnswer extends React.Component<Props> {
   render() {
     const answer = this.props.answer;
     if (!answer) {
@@ -27,7 +27,7 @@ const OpinionAnswer = React.createClass({
         <AnswerBody answer={answer} />
       </div>
     );
-  },
-});
+  }
+}
 
 export default OpinionAnswer;

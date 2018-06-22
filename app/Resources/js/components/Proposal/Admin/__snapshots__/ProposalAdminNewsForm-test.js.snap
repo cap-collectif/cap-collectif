@@ -39,6 +39,7 @@ exports[`<ProposalAdminNewsForm /> render correctly 1`] = `
     >
       <ListGroupItem
         bsClass="list-group-item"
+        key="0"
         listItem={false}
       >
         <Row

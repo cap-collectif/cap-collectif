@@ -1,16 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 
-const PublishButton = React.createClass({
-  propTypes: {
-    element: React.PropTypes.object,
-    onModal: React.PropTypes.func,
-  },
+class PublishButton extends React.Component {
+  static propTypes = {
+    element: PropTypes.object,
+    onModal: PropTypes.func,
+  };
 
-  click() {
+  click = () => {
     const { element, onModal } = this.props;
     onModal(true, element);
-  },
+  };
 
   render() {
     return (
@@ -24,7 +25,7 @@ const PublishButton = React.createClass({
         </Button>
       </div>
     );
-  },
-});
+  }
+}
 
 export default PublishButton;

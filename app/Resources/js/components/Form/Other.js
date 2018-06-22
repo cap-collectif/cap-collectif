@@ -1,23 +1,26 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Input from './Input';
 
-const Other = React.createClass({
-  propTypes: {
-    field: PropTypes.object.isRequired,
-    onChange: PropTypes.func.isRequired,
-    disabled: PropTypes.bool,
-    value: PropTypes.string,
-  },
+type Props = {
+  field: Object,
+  onChange: Function,
+  disabled?: boolean,
+  value?: string,
+};
 
-  getInitialState() {
-    return {
-      value: this.props.value || '',
-      checked: !!this.props.value,
-    };
-  },
+type State = {
+  value: string,
+  checked: boolean,
+};
+
+class Other extends React.Component<Props, State> {
+  state = {
+    value: this.props.value || '',
+    checked: !!this.props.value,
+  };
 
   componentDidUpdate() {
     // $FlowFixMe
@@ -36,9 +39,9 @@ const Other = React.createClass({
         true,
       );
     }
-  },
+  }
 
-  onType(e) {
+  onType = (e: $FlowFixMe) => {
     const { onChange } = this.props;
 
     this.setState({
@@ -47,9 +50,9 @@ const Other = React.createClass({
     });
 
     onChange(e, e.target.value);
-  },
+  };
 
-  onCheckUncheck(e) {
+  onCheckUncheck = (e: SyntheticInputEvent<>) => {
     // $FlowFixMe
     const input = ReactDOM.findDOMNode(this.textField).getElementsByTagName('input')[0];
 
@@ -68,9 +71,9 @@ const Other = React.createClass({
     this.setState({
       checked: e.target.checked,
     });
-  },
+  };
 
-  clear() {
+  clear = () => {
     this.setState({
       value: '',
       checked: false,
@@ -80,7 +83,7 @@ const Other = React.createClass({
     if (input instanceof HTMLInputElement) {
       input.value = '';
     }
-  },
+  };
 
   render() {
     const { disabled, field } = this.props;
@@ -115,7 +118,7 @@ const Other = React.createClass({
         </div>
       </div>
     );
-  },
-});
+  }
+}
 
 export default Other;

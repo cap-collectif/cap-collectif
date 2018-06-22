@@ -1,7 +1,8 @@
-import React, { PropTypes } from 'react';
+// @flow
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { Row, Col } from 'react-bootstrap';
-import { FormattedMessage, FormattedHTMLMessage, injectIntl } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage, injectIntl, type IntlShape } from 'react-intl';
 import CommentList from './CommentList';
 import CommentForm from './CommentForm';
 import CommentActions from '../../actions/CommentActions';
@@ -11,49 +12,62 @@ import FlashMessages from '../Utils/FlashMessages';
 
 const MessagePagination = 10;
 
-const CommentSection = React.createClass({
-  propTypes: {
-    uri: PropTypes.string,
-    object: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    intl: PropTypes.object,
-  },
+type Props = {
+  intl: IntlShape,
+  uri: string,
+  object: string | number,
+};
 
-  getInitialState() {
-    return {
-      countWithAnswers: 0,
-      count: 0,
-      comments: [],
-      isLoading: true,
-      isLoadingMore: false,
-      filter: 'last',
-      offset: 0,
-      limit: MessagePagination,
-      messages: {
-        errors: [],
-        success: [],
-      },
-    };
+type State = {
+  countWithAnswers: number,
+  count: number,
+  comments: Array<Object>,
+  isLoading: boolean,
+  isLoadingMore: boolean,
+  filter: string,
+  offset: 0,
+  limit: number,
+  messages: {
+    errors: Array<Object>,
+    success: Array<Object>,
   },
+};
+
+class CommentSection extends React.Component<Props, State> {
+  state = {
+    countWithAnswers: 0,
+    count: 0,
+    comments: [],
+    isLoading: true,
+    isLoadingMore: false,
+    filter: 'last',
+    offset: 0,
+    limit: MessagePagination,
+    messages: {
+      errors: [],
+      success: [],
+    },
+  };
 
   componentWillMount() {
     CommentStore.addChangeListener(this.onChange);
-  },
+  }
 
   componentDidMount() {
     this.loadCommentsFromServer();
-  },
+  }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.filter !== prevState.filter) {
       this.loadCommentsFromServer();
     }
-  },
+  }
 
   componentWillUnmount() {
     CommentStore.removeChangeListener(this.onChange);
-  },
+  }
 
-  onChange() {
+  onChange = () => {
     this.setState({
       messages: CommentStore.messages,
     });
@@ -81,17 +95,18 @@ const CommentSection = React.createClass({
         this.loadCommentsFromServer();
       },
     );
-  },
+  };
 
-  updateSelectedValue() {
+  updateSelectedValue = () => {
     this.setState({
+      // $FlowFixMe
       filter: $(ReactDOM.findDOMNode(this.refs.filter)).val(),
       isLoading: true,
       comments: [],
     });
-  },
+  };
 
-  loadCommentsFromServer() {
+  loadCommentsFromServer = () => {
     const { object, uri } = this.props;
     CommentActions.loadFromServer(
       uri,
@@ -100,16 +115,18 @@ const CommentSection = React.createClass({
       this.state.limit,
       this.state.filter,
     );
-  },
+  };
 
-  resetLoadMoreButton() {
+  resetLoadMoreButton = () => {
     const loadMoreButton = ReactDOM.findDOMNode(this.refs.loadMore);
     if (loadMoreButton) {
+      // $FlowFixMe
       $(loadMoreButton).button('reset');
     }
-  },
+  };
 
-  loadMore() {
+  loadMore = () => {
+    // $FlowFixMe
     $(ReactDOM.findDOMNode(this.refs.loadMore)).button('loading');
     this.setState(
       {
@@ -120,9 +137,9 @@ const CommentSection = React.createClass({
         this.loadCommentsFromServer();
       },
     );
-  },
+  };
 
-  renderFilter() {
+  renderFilter = () => {
     const { intl } = this.props;
     if (this.state.count > 1) {
       return (
@@ -143,9 +160,9 @@ const CommentSection = React.createClass({
         </Col>
       );
     }
-  },
+  };
 
-  renderLoadMore() {
+  renderLoadMore = () => {
     const { intl } = this.props;
 
     if (
@@ -163,7 +180,7 @@ const CommentSection = React.createClass({
       );
     }
     return null;
-  },
+  };
 
   render() {
     const { uri, object } = this.props;
@@ -197,7 +214,7 @@ const CommentSection = React.createClass({
         {this.renderLoadMore()}
       </div>
     );
-  },
-});
+  }
+}
 
 export default injectIntl(CommentSection);

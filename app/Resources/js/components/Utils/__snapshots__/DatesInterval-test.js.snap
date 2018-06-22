@@ -182,4 +182,4 @@ exports[`<DatesInterval /> should render correctly start date 1`] = `
 />
 `;
 
-exports[`<DatesInterval /> should render null 1`] = `null`;
+exports[`<DatesInterval /> should render null 1`] = `""`;

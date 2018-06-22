@@ -1,33 +1,34 @@
-import React, { PropTypes } from 'react';
+// @flow
+// Todo : ref Quill
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { injectIntl, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import Quill from 'quill';
 import QuillToolbar from './QuillToolbar';
 
-const Editor = React.createClass({
-  propTypes: {
-    intl: intlShape.isRequired,
-    valueLink: PropTypes.object, // deprecated way
-    value: PropTypes.any, // redux-form
-    onChange: PropTypes.func, // redux-form
-    onBlur: PropTypes.func, // redux-form
-    id: PropTypes.string,
-    className: PropTypes.string,
-    disabled: PropTypes.bool,
-  },
+type Props = {
+  intl: intlShape,
+  valueLink?: Object,
+  value?: any,
+  onChange: Function,
+  onBlur: Function,
+  id?: string,
+  className: string,
+  disabled?: boolean,
+};
 
-  getDefaultProps() {
-    return {
-      id: '',
-      className: '',
-      disabled: false,
-    };
-  },
+class Editor extends React.Component<Props> {
+  static defaultProps = {
+    id: '',
+    className: '',
+    disabled: false,
+  };
 
   componentDidMount() {
     const { intl, disabled, onBlur, onChange, value, valueLink } = this.props;
     if (!disabled) {
+      // $FlowFixMe
       this._editor = new Quill(ReactDOM.findDOMNode(this.refs.editor), {
         modules: {
           toolbar: {
@@ -67,6 +68,7 @@ const Editor = React.createClass({
         styles: false,
         theme: 'snow',
       });
+      // $FlowFixMe
       this._editor.getModule('keyboard').removeHotkeys(9);
 
       if (valueLink) {
@@ -74,33 +76,43 @@ const Editor = React.createClass({
         console.warn('This is deprecated please use redux-form instead of valueLink.');
         const defaultValue = valueLink.value;
         if (defaultValue) {
+          // $FlowFixMe
           this._editor.setHTML(defaultValue);
         }
+        // $FlowFixMe
         this._editor.on('text-change', () => {
+          // $FlowFixMe
           valueLink.requestChange(this._editor.getHTML());
         });
       } else {
         const defaultValue = value;
         if (defaultValue) {
+          // $FlowFixMe
           this._editor.setHTML(defaultValue);
         }
+        // $FlowFixMe
         this._editor.on('selection-change', range => {
           if (!range) {
+            // $FlowFixMe
             onBlur(this._editor.getHTML());
           }
         });
+        // $FlowFixMe
         this._editor.on('text-change', () => {
+          // $FlowFixMe
           onChange(this._editor.getHTML());
         });
       }
     }
-  },
+  }
 
   componentWillUnmount() {
+    // $FlowFixMe
     if (this._editor) {
+      // $FlowFixMe
       this._editor.destroy();
     }
-  },
+  }
 
   render() {
     const { className, disabled, id } = this.props;
@@ -118,7 +130,7 @@ const Editor = React.createClass({
         <div ref="editor" style={{ position: 'static' }} />
       </div>
     );
-  },
-});
+  }
+}
 
 export default injectIntl(Editor);

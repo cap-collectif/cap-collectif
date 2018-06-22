@@ -1,13 +1,14 @@
+// @flow
 import React from 'react';
 import { FormattedDate, FormattedMessage } from 'react-intl';
 import moment from 'moment';
 
-const CommentDate = React.createClass({
-  propTypes: {
-    comment: React.PropTypes.object,
-  },
+type Props = {
+  comment: Object,
+};
 
-  renderDate() {
+class CommentDate extends React.Component<Props> {
+  renderDate = () => {
     const { comment } = this.props;
     if (!Modernizr.intl) {
       return null;
@@ -25,9 +26,9 @@ const CommentDate = React.createClass({
         />
       </span>
     );
-  },
+  };
 
-  renderEditionDate() {
+  renderEditionDate = () => {
     const { comment } = this.props;
     if (!Modernizr.intl) {
       return null;
@@ -50,7 +51,7 @@ const CommentDate = React.createClass({
         />
       </span>
     );
-  },
+  };
 
   render() {
     return (
@@ -60,7 +61,7 @@ const CommentDate = React.createClass({
         {this.renderEditionDate()}
       </span>
     );
-  },
-});
+  }
+}
 
 export default CommentDate;

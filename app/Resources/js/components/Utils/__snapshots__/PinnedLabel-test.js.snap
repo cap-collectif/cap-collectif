@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<PinnedLabel /> should not render a blue label if not shown 1`] = `null`;
+exports[`<PinnedLabel /> should not render a blue label if not shown 1`] = `""`;
 
 exports[`<PinnedLabel /> should render a blue label if shown for comment 1`] = `
 <OverlayTrigger

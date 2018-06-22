@@ -5,15 +5,15 @@ import { FormattedMessage } from 'react-intl';
 import OpinionBodyDiffContent from './OpinionBodyDiffContent';
 import FormattedText from '../../services/FormattedText';
 
-const OpinionBody = React.createClass({
-  propTypes: {
-    opinion: React.PropTypes.object.isRequired,
-  },
+type Props = {
+  opinion: Object,
+};
 
-  isVersion() {
+class OpinionBody extends React.Component<Props> {
+  isVersion = () => {
     const { opinion } = this.props;
     return !!opinion.parent;
-  },
+  };
 
   render() {
     const { opinion } = this.props;
@@ -37,7 +37,7 @@ const OpinionBody = React.createClass({
     }
 
     return <OpinionBodyDiffContent opinion={opinion} />;
-  },
-});
+  }
+}
 
 export default OpinionBody;

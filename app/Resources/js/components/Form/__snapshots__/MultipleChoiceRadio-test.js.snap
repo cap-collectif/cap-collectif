@@ -13,6 +13,7 @@ exports[`<MultipleChoiceRadio /> render correctly 1`] = `
     <Field
       component={[Function]}
       id="responses[4]-0"
+      key="responses[4]-0"
       name="responses[4].value.labels"
       normalize={[Function]}
       onChange={[Function]}
@@ -25,6 +26,7 @@ exports[`<MultipleChoiceRadio /> render correctly 1`] = `
     <Field
       component={[Function]}
       id="responses[4]-1"
+      key="responses[4]-1"
       name="responses[4].value.labels"
       normalize={[Function]}
       onChange={[Function]}
@@ -37,6 +39,7 @@ exports[`<MultipleChoiceRadio /> render correctly 1`] = `
     <Field
       component={[Function]}
       id="responses[4]-2"
+      key="responses[4]-2"
       name="responses[4].value.labels"
       normalize={[Function]}
       onChange={[Function]}

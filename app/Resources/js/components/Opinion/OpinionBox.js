@@ -1,5 +1,5 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import OpinionPreview from './OpinionPreview';
@@ -10,33 +10,33 @@ import OpinionBody from './OpinionBody';
 import OpinionVotesBox from './Votes/OpinionVotesBox';
 import type { State, OpinionAndVersion } from '../../types';
 
-export const OpinionBox = React.createClass({
-  propTypes: {
-    opinion: PropTypes.object.isRequired,
-    rankingThreshold: PropTypes.number,
-    opinionTerm: PropTypes.number,
-  },
+type Props = {
+  opinion: Object,
+  rankingThreshold?: number,
+  opinionTerm?: number,
+};
 
-  getMaxVotesValue() {
+export class OpinionBox extends React.Component<Props> {
+  getMaxVotesValue = () => {
     return this.getOpinionType().votesThreshold;
-  },
+  };
 
-  getOpinionType() {
+  getOpinionType = () => {
     const { opinion } = this.props;
     return this.isVersion() ? opinion.parent.type : opinion.type;
-  },
+  };
 
-  getBoxLabel() {
+  getBoxLabel = () => {
     const { opinionTerm } = this.props;
     return this.isVersion()
       ? 'opinion.header.version'
       : opinionTerm === 0 ? 'opinion.header.opinion' : 'opinion.header.article';
-  },
+  };
 
-  isVersion() {
+  isVersion = () => {
     const { opinion } = this.props;
     return opinion && opinion.parent;
-  },
+  };
 
   render() {
     const { opinionTerm, rankingThreshold } = this.props;
@@ -89,8 +89,8 @@ export const OpinionBox = React.createClass({
         <OpinionAnswer answer={opinion.answer} />
       </div>
     );
-  },
-});
+  }
+}
 
 const mapStateToProps: MapStateToProps<*, *, *> = (
   state: State,

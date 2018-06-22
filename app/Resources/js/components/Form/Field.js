@@ -1,65 +1,65 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import Input from './Input';
 
-const Field = React.createClass({
-  propTypes: {
-    meta: PropTypes.shape({
-      touched: PropTypes.bool.isRequired,
-      dirty: PropTypes.bool,
-      pristine: PropTypes.bool,
-      error: PropTypes.any,
-    }).isRequired,
-    labelClassName: PropTypes.string,
-    divClassName: PropTypes.string,
-    wrapperClassName: PropTypes.string,
-    help: PropTypes.string,
-    description: PropTypes.string,
-    formName: PropTypes.string,
-    autoComplete: PropTypes.string,
-    disableValidation: PropTypes.bool,
-    type: PropTypes.oneOf([
-      'address',
-      'text',
-      'number',
-      'datetime',
-      'textarea',
-      'editor',
-      'select',
-      'checkbox',
-      'password',
-      'captcha',
-      'email',
-      'radio-buttons',
-      'image',
-      'medias',
-      'ranking',
-      'radio',
-      'button',
-    ]).isRequired,
-    addonAfter: PropTypes.any,
-    addonBefore: PropTypes.any,
-    label: PropTypes.any,
-    placeholder: PropTypes.string,
-    disabled: PropTypes.bool,
-    isOtherAllowed: PropTypes.bool,
-    image: PropTypes.string,
-    children: PropTypes.any,
-    id: PropTypes.string.isRequired,
-    popover: PropTypes.object,
-    choices: PropTypes.array,
-    radioChecked: PropTypes.bool,
-    input: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      autoFocus: PropTypes.bool,
-      onChange: PropTypes.func,
-      onBlur: PropTypes.func,
-      value: PropTypes.any,
-    }).isRequired,
-    style: PropTypes.object,
-    radioImage: PropTypes.object,
+type Props = {
+  meta: {
+    touched: boolean,
+    dirty?: boolean,
+    pristine?: boolean,
+    error?: any,
   },
+  labelClassName?: string,
+  divClassName?: string,
+  wrapperClassName?: string,
+  help?: string,
+  description?: string,
+  formName?: string,
+  autoComplete?: string,
+  disableValidation?: boolean,
+  type: | 'address'
+    | 'text'
+    | 'number'
+    | 'datetime'
+    | 'textarea'
+    | 'editor'
+    | 'select'
+    | 'checkbox'
+    | 'password'
+    | 'captcha'
+    | 'email'
+    | 'radio-buttons'
+    | 'image'
+    | 'medias'
+    | 'ranking'
+    | 'radio'
+    | 'button',
+  addonAfter?: any,
+  addonBefore?: any,
+  label?: any,
+  placeholder?: string,
+  disabled?: boolean,
+  isOtherAllowed?: boolean,
+  image?: string,
+  children?: any,
+  id: string,
+  popover?: Object,
+  choices?: Array<$FlowFixMe>,
+  radioChecked?: boolean,
+  input: {
+    name: string,
+    autoFocus?: boolean,
+    onChange?: Function,
+    onBlur?: Function,
+    value?: any,
+    disableValidation?: boolean,
+  },
+  style?: Object,
+  radioImage?: Object,
+};
+
+class Field extends React.Component<Props> {
   render() {
     const { touched, error, dirty } = this.props.meta;
     const {
@@ -133,7 +133,7 @@ const Field = React.createClass({
       return <div className={divClassName}>{input}</div>;
     }
     return input;
-  },
-});
+  }
+}
 
 export default Field;

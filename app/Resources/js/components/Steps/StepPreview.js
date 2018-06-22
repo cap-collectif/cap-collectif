@@ -1,21 +1,19 @@
+// @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-
 import DatesInterval from './../Utils/DatesInterval';
 
-const StepPreview = React.createClass({
-  propTypes: {
-    step: React.PropTypes.object.isRequired,
-    className: React.PropTypes.string,
-    votes: React.PropTypes.number,
-  },
+type Props = {
+  step: Object,
+  className?: string,
+  votes?: number,
+};
 
-  getDefaultProps() {
-    return {
-      className: '',
-      votes: null,
-    };
-  },
+class StepPreview extends React.Component<Props> {
+  static defaultProps = {
+    className: '',
+    votes: null,
+  };
 
   render() {
     const { className, votes } = this.props;
@@ -47,7 +45,7 @@ const StepPreview = React.createClass({
         </div>
       </li>
     );
-  },
-});
+  }
+}
 
 export default StepPreview;

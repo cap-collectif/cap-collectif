@@ -1,20 +1,21 @@
-import React, { PropTypes } from 'react';
+// @flow
+import React from 'react';
 import moment from 'moment';
 import { Label } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
-const ProposalDetailAdvancementStep = React.createClass({
-  displayName: 'ProposalDetailAdvancementStep',
+type Props = {
+  step: Object,
+  roundColor: string,
+  status?: ?Object,
+  borderColor?: ?string,
+  children?: $FlowFixMe,
+};
 
-  propTypes: {
-    step: PropTypes.object.isRequired,
-    roundColor: PropTypes.string.isRequired,
-    status: PropTypes.object,
-    borderColor: PropTypes.string,
-    children: PropTypes.node,
-  },
+class ProposalDetailAdvancementStep extends React.Component<Props> {
+  static displayName = 'ProposalDetailAdvancementStep';
 
-  renderDate() {
+  renderDate = () => {
     const { step } = this.props;
 
     if (step.timeless && !step.endAt && !step.startAt) {
@@ -25,7 +26,7 @@ const ProposalDetailAdvancementStep = React.createClass({
       return moment(step.startAt).format('ll');
     }
     return `${moment(step.startAt).format('ll')} - ${moment(step.endAt).format('ll')}`;
-  },
+  };
 
   render() {
     const { borderColor, roundColor, step, status, children } = this.props;
@@ -77,7 +78,7 @@ const ProposalDetailAdvancementStep = React.createClass({
         {children}
       </span>
     );
-  },
-});
+  }
+}
 
 export default ProposalDetailAdvancementStep;

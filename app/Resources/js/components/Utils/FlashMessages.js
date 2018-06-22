@@ -3,28 +3,26 @@ import * as React from 'react';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { Alert } from 'react-bootstrap';
 
-const FlashMessages = React.createClass({
-  propTypes: {
-    errors: React.PropTypes.array,
-    success: React.PropTypes.array,
-    style: React.PropTypes.object,
-    form: React.PropTypes.bool,
-    onDismissMessage: React.PropTypes.func,
-    translate: React.PropTypes.bool,
-  },
+type Props = {
+  errors?: Array<$FlowFixMe>,
+  success?: Array<$FlowFixMe>,
+  style?: Object,
+  form?: boolean,
+  onDismissMessage?: ?Function,
+  translate?: boolean,
+};
 
-  getDefaultProps(): Object {
-    return {
-      errors: [],
-      success: [],
-      style: {},
-      form: false,
-      onDismissMessage: null,
-      translate: true,
-    };
-  },
+class FlashMessages extends React.Component<Props> {
+  static defaultProps = {
+    errors: [],
+    success: [],
+    style: {},
+    form: false,
+    onDismissMessage: null,
+    translate: true,
+  };
 
-  renderText(message: string | Object): React.Element<any> | string | void {
+  renderText = (message: string | Object): React.Element<any> | string | void => {
     const { translate } = this.props;
     if (translate) {
       if (typeof message === 'string') {
@@ -35,9 +33,9 @@ const FlashMessages = React.createClass({
     if (typeof message === 'string') {
       return message;
     }
-  },
+  };
 
-  renderMessage(index: number, message: string, type: string): ?React.Element<any> {
+  renderMessage = (index: number, message: string, type: string): ?React.Element<any> => {
     const { form, onDismissMessage, style } = this.props;
     if (!form) {
       return (
@@ -55,7 +53,7 @@ const FlashMessages = React.createClass({
         {this.renderText(message)}
       </p>
     );
-  },
+  };
 
   render(): ?React.Element<any> {
     const { errors, success } = this.props;
@@ -74,7 +72,7 @@ const FlashMessages = React.createClass({
       );
     }
     return null;
-  },
-});
+  }
+}
 
 export default FlashMessages;

@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import ElementsList from './List/ElementsList';
 import Loader from '../Ui/Loader';
@@ -8,36 +9,32 @@ import SynthesisElementActions from '../../actions/SynthesisElementActions';
 
 const Pagination = 15;
 
-const ElementsSearch = React.createClass({
-  propTypes: {
-    synthesis: React.PropTypes.object.isRequired,
-    params: React.PropTypes.object,
-  },
+class ElementsSearch extends React.Component {
+  static propTypes = {
+    synthesis: PropTypes.object.isRequired,
+    params: PropTypes.object,
+  };
 
-  getDefaultProps() {
-    return {
-      params: { term: '' },
-    };
-  },
+  static defaultProps = {
+    params: { term: '' },
+  };
 
-  getInitialState() {
-    return {
-      elements: [],
-      count: 0,
-      isLoading: true,
-      isLoadingMore: false,
-      offset: 0,
-      limit: Pagination,
-    };
-  },
+  state = {
+    elements: [],
+    count: 0,
+    isLoading: true,
+    isLoadingMore: false,
+    offset: 0,
+    limit: Pagination,
+  };
 
   componentWillMount() {
     SynthesisElementStore.addChangeListener(this.onChange);
-  },
+  }
 
   componentDidMount() {
     this.onChange();
-  },
+  }
 
   componentWillReceiveProps(nextProps) {
     const { params } = this.props;
@@ -54,29 +51,29 @@ const ElementsSearch = React.createClass({
         },
       );
     }
-  },
+  }
 
   componentWillUnmount() {
     SynthesisElementStore.removeChangeListener(this.onChange);
-  },
+  }
 
-  onChange() {
+  onChange = () => {
     this.setState({
       elements: SynthesisElementStore.elements.search,
       count: SynthesisElementStore.counts.search,
       isLoading: false,
       isLoadingMore: false,
     });
-  },
+  };
 
-  resetLoadMoreButton() {
+  resetLoadMoreButton = () => {
     const loadMoreButton = ReactDOM.findDOMNode(this.refs.loadMore);
     if (loadMoreButton) {
       $(loadMoreButton).button('reset');
     }
-  },
+  };
 
-  loadElementsByTermFromServer(term = this.props.params.term) {
+  loadElementsByTermFromServer = (term = this.props.params.term) => {
     const { synthesis } = this.props;
     SynthesisElementActions.loadElementsByTermFromServer(
       synthesis.id,
@@ -84,9 +81,9 @@ const ElementsSearch = React.createClass({
       this.state.offset,
       this.state.limit,
     );
-  },
+  };
 
-  loadMore() {
+  loadMore = () => {
     $(ReactDOM.findDOMNode(this.refs.loadMore)).button('loading');
     this.setState(
       {
@@ -97,9 +94,9 @@ const ElementsSearch = React.createClass({
         this.loadElementsByTermFromServer();
       },
     );
-  },
+  };
 
-  renderList() {
+  renderList = () => {
     if (!this.state.isLoading) {
       if (this.state.elements.length > 0) {
         return <ElementsList elements={this.state.elements} />;
@@ -111,9 +108,9 @@ const ElementsSearch = React.createClass({
         </div>
       );
     }
-  },
+  };
 
-  renderLoadMore() {
+  renderLoadMore = () => {
     if (
       !this.state.isLoading &&
       (this.state.limit < this.state.count || this.state.isLoadingMore)
@@ -128,7 +125,7 @@ const ElementsSearch = React.createClass({
         </button>
       );
     }
-  },
+  };
 
   render() {
     return (
@@ -138,7 +135,7 @@ const ElementsSearch = React.createClass({
         {this.renderLoadMore()}
       </div>
     );
-  },
-});
+  }
+}
 
 export default ElementsSearch;

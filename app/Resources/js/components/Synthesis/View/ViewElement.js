@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 import ElementTitle from './../Element/ElementTitle';
@@ -10,41 +11,37 @@ import SynthesisPourcentageTooltipLabel, {
   calculPourcentage,
 } from './SynthesisPourcentageTooltipLabel';
 
-const ViewElement = React.createClass({
-  propTypes: {
-    element: React.PropTypes.object.isRequired,
-    parent: React.PropTypes.object,
-    settings: React.PropTypes.array.isRequired,
-    onExpandElement: React.PropTypes.func.isRequired,
-  },
+class ViewElement extends React.Component {
+  static propTypes = {
+    element: PropTypes.object.isRequired,
+    parent: PropTypes.object,
+    settings: PropTypes.array.isRequired,
+    onExpandElement: PropTypes.func.isRequired,
+  };
 
-  getDefaultProps() {
-    return {
-      parent: null,
-    };
-  },
+  static defaultProps = {
+    parent: null,
+  };
 
-  getInitialState() {
-    return {
-      showChildrenModal: false,
-    };
-  },
+  state = {
+    showChildrenModal: false,
+  };
 
-  openOriginalContribution() {
+  openOriginalContribution = () => {
     const { element } = this.props;
     window.open(element.linkedDataUrl);
     return false;
-  },
+  };
 
-  toggleChildrenModal(value) {
+  toggleChildrenModal = value => {
     const { element, onExpandElement } = this.props;
     onExpandElement(element);
     this.setState({
       showChildrenModal: value,
     });
-  },
+  };
 
-  renderAuthor() {
+  renderAuthor = () => {
     const { element, settings } = this.props;
     if (SynthesisDisplayRules.getValueForRule(settings, 'display', 'author')) {
       return (
@@ -55,9 +52,9 @@ const ViewElement = React.createClass({
       );
     }
     return null;
-  },
+  };
 
-  renderPieChart() {
+  renderPieChart = () => {
     const { element, settings } = this.props;
     const votes = element.votes;
     if (SynthesisDisplayRules.getValueForRule(settings, 'display', 'piechart')) {
@@ -83,9 +80,9 @@ const ViewElement = React.createClass({
       );
     }
     return null;
-  },
+  };
 
-  renderCounters() {
+  renderCounters = () => {
     const { element, settings } = this.props;
     if (SynthesisDisplayRules.getValueForRule(settings, 'display', 'counters')) {
       return (
@@ -106,9 +103,9 @@ const ViewElement = React.createClass({
       );
     }
     return null;
-  },
+  };
 
-  renderSubtitle() {
+  renderSubtitle = () => {
     const { element, settings } = this.props;
     if (
       SynthesisDisplayRules.getValueForRule(settings, 'display', 'subtitle') &&
@@ -117,9 +114,9 @@ const ViewElement = React.createClass({
       return <p className="small excerpt">{element.subtitle}</p>;
     }
     return null;
-  },
+  };
 
-  renderPercentage() {
+  renderPercentage = () => {
     const { element, parent, settings } = this.props;
     if (SynthesisDisplayRules.getValueForRule(settings, 'display', 'percentage') && parent) {
       return (
@@ -135,16 +132,16 @@ const ViewElement = React.createClass({
       );
     }
     return null;
-  },
+  };
 
-  renderDescription() {
+  renderDescription = () => {
     const { element } = this.props;
     if (element.description) {
       return <p className="synthesis__element__description">{element.description}</p>;
     }
-  },
+  };
 
-  renderTitle() {
+  renderTitle = () => {
     const { element, settings } = this.props;
     const childrenModal = SynthesisDisplayRules.getValueForRule(
       settings,
@@ -160,9 +157,9 @@ const ViewElement = React.createClass({
         onClick={childrenModal ? this.toggleChildrenModal.bind(null, true) : null}
       />
     );
-  },
+  };
 
-  renderAsProgressBar() {
+  renderAsProgressBar = () => {
     const { element, parent } = this.props;
     if (parent) {
       return (
@@ -186,7 +183,7 @@ const ViewElement = React.createClass({
       );
     }
     return null;
-  },
+  };
 
   render() {
     const { element, settings } = this.props;
@@ -216,7 +213,7 @@ const ViewElement = React.createClass({
         />
       </div>
     );
-  },
-});
+  }
+}
 
 export default ViewElement;

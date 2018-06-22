@@ -11,6 +11,9 @@ describe('<OpinionLinkCreateForm />', () => {
     currentType: availableTypes[0],
     handleSubmit: jest.fn(),
     opinion: {},
+    initialValues: {
+      opinionType: '12',
+    },
   };
 
   it('renders correctly', () => {

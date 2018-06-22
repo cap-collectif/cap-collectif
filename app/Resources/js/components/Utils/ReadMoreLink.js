@@ -1,22 +1,21 @@
+// @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Button } from 'react-bootstrap';
 
-const ReadMoreLink = React.createClass({
-  displayName: 'ReadMoreLink',
+type Props = {
+  visible?: boolean,
+  expanded?: boolean,
+  onClick: Function,
+};
 
-  propTypes: {
-    visible: React.PropTypes.bool,
-    expanded: React.PropTypes.bool,
-    onClick: React.PropTypes.func.isRequired,
-  },
+class ReadMoreLink extends React.Component<Props> {
+  static displayName = 'ReadMoreLink';
 
-  getDefaultProps() {
-    return {
-      visible: false,
-      expanded: false,
-    };
-  },
+  static defaultProps = {
+    visible: false,
+    expanded: false,
+  };
 
   render() {
     const { expanded, onClick, visible } = this.props;
@@ -32,7 +31,7 @@ const ReadMoreLink = React.createClass({
         )}
       </Button>
     );
-  },
-});
+  }
+}
 
 export default ReadMoreLink;

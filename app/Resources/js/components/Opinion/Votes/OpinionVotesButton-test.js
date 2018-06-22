@@ -1,3 +1,4 @@
+// @flow
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
@@ -13,7 +14,7 @@ describe('<OpinionVotesButton />', () => {
   const defaultProps = {
     active: true,
     features: {},
-    dispatch: () => {},
+    dispatch: jest.fn(),
   };
   const opinionVoteBoth = {
     id: 1,

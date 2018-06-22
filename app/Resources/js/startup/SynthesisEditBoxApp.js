@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 import ReactOnRails from 'react-on-rails';
 import { IntlProvider } from 'react-intl-redux';
@@ -27,10 +27,11 @@ export default props => {
     });
   };
 
-  const SynthesisBoxWrapper = React.createClass({
-    propTypes: {
-      children: PropTypes.object.isRequired,
-    },
+  type Props = {
+    children: Object,
+  };
+
+  class SynthesisBoxWrapper extends React.Component<Props> {
     render() {
       const { children } = this.props;
       const showSideMenu = children.type.displayName !== 'Settings';
@@ -39,8 +40,8 @@ export default props => {
           {children}
         </SynthesisBox>
       );
-    },
-  });
+    }
+  }
 
   return (
     <Provider store={store}>
