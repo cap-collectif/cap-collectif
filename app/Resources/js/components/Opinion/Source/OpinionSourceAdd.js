@@ -1,21 +1,19 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import OpinionSourceAddButton from './OpinionSourceAddButton';
 import OpinionSourceFormModal from './OpinionSourceFormModal';
 import { showSourceCreateModal } from '../../../redux/modules/opinion';
 
-const OpinionSourceAdd = React.createClass({
-  propTypes: {
-    disabled: PropTypes.bool,
-    dispatch: PropTypes.func.isRequired,
-  },
+type Props = {
+  disabled?: boolean,
+  dispatch: Function,
+};
 
-  getDefaultProps() {
-    return {
-      disabled: false,
-    };
-  },
+class OpinionSourceAdd extends React.Component<Props> {
+  static defaultProps = {
+    disabled: false,
+  };
 
   render() {
     const { disabled, dispatch } = this.props;
@@ -30,7 +28,7 @@ const OpinionSourceAdd = React.createClass({
         {!disabled && <OpinionSourceFormModal source={null} />}
       </div>
     );
-  },
-});
+  }
+}
 
 export default connect()(OpinionSourceAdd);

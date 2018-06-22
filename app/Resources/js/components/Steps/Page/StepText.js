@@ -1,30 +1,33 @@
+// @flow
 import React from 'react';
 import ReadMoreLink from '../../Utils/ReadMoreLink';
 
-const StepText = React.createClass({
-  propTypes: {
-    text: React.PropTypes.string,
-  },
+type Props = {
+  text?: ?string,
+};
 
-  getDefaultProps() {
-    return {
-      text: null,
-    };
-  },
+type State = {
+  expanded: boolean,
+  truncated: boolean,
+  hideText: boolean,
+};
 
-  getInitialState() {
-    return {
-      expanded: true,
-      truncated: false,
-      hideText: false,
-    };
-  },
+class StepText extends React.Component<Props, State> {
+  static defaultProps = {
+    text: null,
+  };
 
-  toggleExpand() {
+  state = {
+    expanded: true,
+    truncated: false,
+    hideText: false,
+  };
+
+  toggleExpand = () => {
     this.setState({
       expanded: !this.state.expanded,
     });
-  },
+  };
 
   render() {
     const { text } = this.props;
@@ -56,7 +59,7 @@ const StepText = React.createClass({
         </div>
       </div>
     );
-  },
-});
+  }
+}
 
 export default StepText;

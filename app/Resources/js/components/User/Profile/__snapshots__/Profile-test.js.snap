@@ -176,6 +176,7 @@ exports[`<Profile /> should render my profile with features user_type 1`] = `
             values={Object {}}
           />
           <option
+            key="1"
             value={1}
           >
             type_1

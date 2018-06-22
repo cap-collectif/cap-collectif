@@ -1,21 +1,20 @@
+// @flow
 import React from 'react';
 import { Col } from 'react-bootstrap';
 import UserPreview from './UserPreview';
 
-const UserBox = React.createClass({
-  propTypes: {
-    user: React.PropTypes.object,
-    username: React.PropTypes.string,
-    className: React.PropTypes.string,
-  },
+type Props = {
+  user?: ?Object,
+  username?: ?string,
+  className?: string,
+};
 
-  getDefaultProps() {
-    return {
-      user: null,
-      username: null,
-      className: '',
-    };
-  },
+class UserBox extends React.Component<Props> {
+  static defaultProps = {
+    user: null,
+    username: null,
+    className: '',
+  };
 
   render() {
     const { user, username, className } = this.props;
@@ -27,7 +26,7 @@ const UserBox = React.createClass({
         <UserPreview user={user} username={username} />
       </Col>
     );
-  },
-});
+  }
+}
 
 export default UserBox;

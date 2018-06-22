@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Nav, Navbar, NavbarBrand, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
-const SecondNavbar = React.createClass({
+class SecondNavbar extends React.Component {
   render() {
     return (
       <Navbar fixedTop fluid className="synthesis__second-navbar">
@@ -23,7 +23,7 @@ const SecondNavbar = React.createClass({
         </Nav>
       </Navbar>
     );
-  },
-});
+  }
+}
 
 export default SecondNavbar;

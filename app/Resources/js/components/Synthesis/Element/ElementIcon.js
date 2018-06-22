@@ -1,19 +1,17 @@
 import React from 'react';
 import classNames from 'classnames';
 
-const ElementIcon = React.createClass({
-  propTypes: {
-    element: React.PropTypes.object.isRequired,
-    className: React.PropTypes.string,
-    style: React.PropTypes.object,
-  },
+type Props = {
+  element: Object,
+  className: string,
+  style: Object,
+};
 
-  getDefaultProps() {
-    return {
-      className: '',
-      style: {},
-    };
-  },
+class ElementIcon extends React.Component<Props> {
+  static defaultProps = {
+    className: '',
+    style: {},
+  };
 
   render() {
     const { className, element, style } = this.props;
@@ -28,7 +26,7 @@ const ElementIcon = React.createClass({
       return <i className={classes} style={style} />;
     }
     return null;
-  },
-});
+  }
+}
 
 export default ElementIcon;

@@ -36,4 +36,4 @@ exports[`<FacebookLoginButton /> renders a button with correct label 1`] = `
 </a>
 `;
 
-exports[`<FacebookLoginButton /> renders nothing if login_facebook is not activated 1`] = `null`;
+exports[`<FacebookLoginButton /> renders nothing if login_facebook is not activated 1`] = `""`;

@@ -1,3 +1,4 @@
+// @flow
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
@@ -7,6 +8,12 @@ describe('<LeafletMap />', () => {
   const defaultMapOptions = {
     center: { lat: 48.8586047, lng: 2.3137325 },
     zoom: 12,
+  };
+
+  const step = {
+    dispatch: jest.fn(),
+    stepId: 'step1',
+    stepType: 'collect',
   };
 
   const markers = {
@@ -37,14 +44,7 @@ describe('<LeafletMap />', () => {
 
   it('should render a map with markers', () => {
     const wrapper = shallow(
-      <LeafletMap
-        defaultMapOptions={defaultMapOptions}
-        visible
-        markers={markers}
-        stepId="step1"
-        stepType="collect"
-        dispatch={() => {}}
-      />,
+      <LeafletMap defaultMapOptions={defaultMapOptions} visible {...step} markers={markers} />,
     );
     wrapper.setState({ loaded: true });
     expect(wrapper).toMatchSnapshot();
@@ -56,9 +56,7 @@ describe('<LeafletMap />', () => {
         defaultMapOptions={defaultMapOptions}
         visible={false}
         markers={markers}
-        stepId="step1"
-        stepType="collect"
-        dispatch={() => {}}
+        {...step}
       />,
     );
     expect(wrapper).toMatchSnapshot();

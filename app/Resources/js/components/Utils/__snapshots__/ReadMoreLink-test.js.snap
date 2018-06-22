@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ReadMoreLink /> should not render anything if not visible 1`] = `null`;
+exports[`<ReadMoreLink /> should not render anything if not visible 1`] = `""`;
 
 exports[`<ReadMoreLink /> should render a button with correct label if expanded 1`] = `
 <Button

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormattedDate, FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import UserLink from '../../User/UserLink';
@@ -7,27 +8,25 @@ import ElementTitle from './ElementTitle';
 import ElementBreadcrumb from './ElementBreadcrumb';
 import ElementNotation from './ElementNotation';
 
-const ElementBlock = React.createClass({
-  propTypes: {
-    element: React.PropTypes.object.isRequired,
-    showBreadcrumb: React.PropTypes.bool,
-    showStatus: React.PropTypes.bool,
-    showNotation: React.PropTypes.bool,
-    hasLink: React.PropTypes.bool,
-    linkType: React.PropTypes.string,
-  },
+class ElementBlock extends React.Component {
+  static propTypes = {
+    element: PropTypes.object.isRequired,
+    showBreadcrumb: PropTypes.bool,
+    showStatus: PropTypes.bool,
+    showNotation: PropTypes.bool,
+    hasLink: PropTypes.bool,
+    linkType: PropTypes.string,
+  };
 
-  getDefaultProps() {
-    return {
-      showBreadcrumb: true,
-      showStatus: true,
-      showNotation: true,
-      hasLink: true,
-      linkType: 'edition',
-    };
-  },
+  static defaultProps = {
+    showBreadcrumb: true,
+    showStatus: true,
+    showNotation: true,
+    hasLink: true,
+    linkType: 'edition',
+  };
 
-  renderAuthor() {
+  renderAuthor = () => {
     const { element } = this.props;
     if (element.author) {
       return (
@@ -36,9 +35,9 @@ const ElementBlock = React.createClass({
         </span>
       );
     }
-  },
+  };
 
-  renderStatus() {
+  renderStatus = () => {
     const { element } = this.props;
     if (element.division) {
       return <i className="element__status cap icon--orange cap-scissor-1" />;
@@ -50,9 +49,9 @@ const ElementBlock = React.createClass({
       }
       return <i className="element__status cap icon--red cap-delete-2" />;
     }
-  },
+  };
 
-  renderDate() {
+  renderDate = () => {
     const { element } = this.props;
     if (!Modernizr.intl) {
       return <FormattedMessage id="synthesis.common.elements.no_source_date" />;
@@ -70,7 +69,7 @@ const ElementBlock = React.createClass({
     return (
       <FormattedDate value={moment(element.updated_at)} day="numeric" month="long" year="numeric" />
     );
-  },
+  };
 
   render() {
     const { hasLink, linkType, showBreadcrumb, showNotation, showStatus } = this.props;
@@ -94,7 +93,7 @@ const ElementBlock = React.createClass({
         {showStatus ? this.renderStatus() : null}
       </div>
     );
-  },
-});
+  }
+}
 
 export default ElementBlock;

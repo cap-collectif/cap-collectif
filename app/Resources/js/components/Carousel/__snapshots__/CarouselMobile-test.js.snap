@@ -15,6 +15,7 @@ exports[`<CarouselDesktop /> should render correctly 1`] = `
   >
     <div
       className="item"
+      key="0"
     >
       <div
         className="sixteen-nine"
@@ -62,6 +63,7 @@ exports[`<CarouselDesktop /> should render correctly 1`] = `
     </div>
     <div
       className="item"
+      key="1"
     >
       <div
         className="sixteen-nine"
@@ -113,6 +115,7 @@ exports[`<CarouselDesktop /> should render correctly 1`] = `
     </div>
     <div
       className="item"
+      key="2"
     >
       <div
         className="sixteen-nine"
@@ -158,6 +161,7 @@ exports[`<CarouselDesktop /> should render correctly 1`] = `
     </div>
     <div
       className="item"
+      key="3"
     >
       <div
         className="sixteen-nine"

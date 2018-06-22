@@ -1,22 +1,20 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Nav, NavDropdown, MenuItem } from 'react-bootstrap';
 import UserAvatar from '../../User/UserAvatar';
 
-export const MainNavbarUser = React.createClass({
-  displayName: 'MainNavbarUser',
+type Props = {
+  user: Object,
+  features: Object,
+};
 
-  propTypes: {
-    user: PropTypes.object,
-    features: PropTypes.object,
-  },
+export class MainNavbarUser extends React.Component<Props> {
+  static displayName = 'MainNavbarUser';
 
-  getDefaultProps() {
-    return {
-      user: null,
-    };
-  },
+  static defaultProps = {
+    user: null,
+  };
 
   render() {
     const { user, features } = this.props;
@@ -58,8 +56,8 @@ export const MainNavbarUser = React.createClass({
       );
     }
     return null;
-  },
-});
+  }
+}
 
 const mapStateToProps = state => {
   return {

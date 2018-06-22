@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { FormattedDate } from 'react-intl';
 import classNames from 'classnames';
@@ -7,12 +8,12 @@ import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
 import ArgumentButtons from './ArgumentButtons';
 
-const ArgumentItem = React.createClass({
-  propTypes: {
-    argument: React.PropTypes.object.isRequired,
-  },
+type Props = {
+  argument: Object,
+};
 
-  renderDate() {
+class ArgumentItem extends React.Component<Props> {
+  renderDate = () => {
     const argument = this.props.argument;
     if (!Modernizr.intl) {
       return null;
@@ -29,7 +30,7 @@ const ArgumentItem = React.createClass({
         />
       </p>
     );
-  },
+  };
 
   render() {
     const argument = this.props.argument;
@@ -62,7 +63,7 @@ const ArgumentItem = React.createClass({
         </div>
       </li>
     );
-  },
-});
+  }
+}
 
 export default ArgumentItem;

@@ -82,42 +82,40 @@ const preToggleElement = (elements: Array<Object>, depth: number): Array<Object>
   });
 };
 
-const TreeView = React.createClass({
-  propTypes: {
-    synthesis: React.PropTypes.object.isRequired,
-  },
+type Props = {
+  synthesis: Object,
+};
 
-  getInitialState() {
-    return {
-      settings: SynthesisStore.settings,
-      elements: [],
-      isLoading: true,
-    };
-  },
+class TreeView extends React.Component<Props> {
+  state = {
+    settings: SynthesisStore.settings,
+    elements: [],
+    isLoading: true,
+  };
 
   componentWillMount() {
     SynthesisElementStore.addChangeListener(this.onChange);
-  },
+  }
 
   componentDidMount() {
     this.loadElementsTreeFromServer();
-  },
+  }
 
   componentWillUnmount() {
     SynthesisElementStore.removeChangeListener(this.onChange);
-  },
+  }
 
-  onChange() {
+  onChange = () => {
     this.setState({
       elements: SynthesisElementStore.elements.publishedTree,
       isLoading: false,
     });
-  },
+  };
 
-  loadElementsTreeFromServer(parent = null) {
+  loadElementsTreeFromServer = (parent = null) => {
     const { synthesis } = this.props;
     SynthesisElementActions.loadElementsTreeFromServer(synthesis.id, 'published', parent);
-  },
+  };
 
   render() {
     const { synthesis } = this.props;
@@ -144,7 +142,7 @@ const TreeView = React.createClass({
         ))}
       </Loader>
     );
-  },
-});
+  }
+}
 
 export default TreeView;

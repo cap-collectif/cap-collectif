@@ -65,6 +65,7 @@ exports[`<RegistrationForm /> renders a form with dynamic fields 1`] = `
   <Field
     component={[Function]}
     id="dynamic-6"
+    key="0"
     label={
       <span>
         Champ pas facultatif
@@ -320,6 +321,7 @@ exports[`<RegistrationForm /> renders a form with user_type select if enabled 1`
       values={Object {}}
     />
     <option
+      key="1"
       value={1}
     >
       type_1

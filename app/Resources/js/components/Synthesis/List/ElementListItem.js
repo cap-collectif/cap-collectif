@@ -1,26 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ElementBlock from './../Element/ElementBlock';
 
-const ElementListItem = React.createClass({
-  propTypes: {
-    element: React.PropTypes.object.isRequired,
-    showBreadcrumb: React.PropTypes.bool,
-    showStatus: React.PropTypes.bool,
-    showNotation: React.PropTypes.bool,
-    hasLink: React.PropTypes.bool,
-    linkType: React.PropTypes.string,
-  },
+class ElementListItem extends React.Component {
+  static propTypes = {
+    element: PropTypes.object.isRequired,
+    showBreadcrumb: PropTypes.bool,
+    showStatus: PropTypes.bool,
+    showNotation: PropTypes.bool,
+    hasLink: PropTypes.bool,
+    linkType: PropTypes.string,
+  };
 
-  getDefaultProps() {
-    return {
-      showBreadcrumb: true,
-      showStatus: true,
-      showNotation: true,
-      hasLink: true,
-      linkType: 'edition',
-    };
-  },
+  static defaultProps = {
+    showBreadcrumb: true,
+    showStatus: true,
+    showNotation: true,
+    hasLink: true,
+    linkType: 'edition',
+  };
 
   render() {
     const { element, hasLink, linkType, showBreadcrumb, showNotation, showStatus } = this.props;
@@ -41,7 +40,7 @@ const ElementListItem = React.createClass({
         />
       </li>
     );
-  },
-});
+  }
+}
 
 export default ElementListItem;

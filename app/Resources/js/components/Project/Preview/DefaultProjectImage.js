@@ -1,7 +1,9 @@
 // @flow
 import * as React from 'react';
 
-export default class DefaultProjectImage extends React.Component<{}> {
+type Props = {};
+
+export default class DefaultProjectImage extends React.Component<Props> {
   render() {
     return (
       <svg

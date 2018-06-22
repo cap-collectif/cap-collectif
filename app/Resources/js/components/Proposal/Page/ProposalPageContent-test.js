@@ -1,18 +1,33 @@
+// @flow
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalPageContent } from './ProposalPageContent';
+import { $refType, $fragmentRefs } from '../../../mocks';
 
 describe('<ProposalPageContent />', () => {
   const proposal = {
+    id: '3',
+    body: 'lorem ipsum dolor',
+    $refType,
+    $fragmentRefs,
+    address: null,
     title: 'Titre proposition',
-    author: {},
-    referer: 'http://capco.test',
-    responses: [],
-    _links: {
-      show: 'http://capco.test',
+    author: {
+      id: '3',
+      slug: 'jack',
     },
-    id: 'proposal3',
+    media: {
+      url: 'http://capco.test',
+    },
+    form: {
+      contribuable: true,
+    },
+    responses: [],
+    publicationStatus: 'PUBLISHED',
+    show_url: true,
+    summary: 'Summary',
+    currentVotableStep: null,
   };
 
   const props = {
@@ -23,6 +38,8 @@ describe('<ProposalPageContent />', () => {
     },
     categories: [],
     className: '',
+    step: null,
+    viewer: null,
   };
 
   it('should render a proposal page content', () => {

@@ -1,5 +1,5 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { Col, Row, FormControl, Button } from 'react-bootstrap';
 import { connect, type MapStateToProps } from 'react-redux';
@@ -11,36 +11,43 @@ import {
   changeTerm,
 } from '../../../redux/modules/project';
 import Input from '../../Form/ReactBootstrapInput';
-import type { State } from '../../../types';
+import type { GlobalState } from '../../../types';
 
-const ProjectListFilter = React.createClass({
-  propTypes: {
-    projectTypes: PropTypes.array.isRequired,
-    features: PropTypes.object.isRequired,
-    themes: PropTypes.array.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    orderBy: PropTypes.string.isRequired,
-    intl: PropTypes.object.isRequired,
-    type: PropTypes.string.isRequired,
-  },
+type Props = {
+  projectTypes: Array<$FlowFixMe>,
+  features: Object,
+  themes: Array<$FlowFixMe>,
+  dispatch: Function,
+  orderBy: string,
+  intl: Object,
+  type: string,
+};
 
-  getInitialState() {
-    return {
+type State = {
+  termInputValue: string,
+  value?: string,
+};
+
+class ProjectListFilter extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
       termInputValue: '',
     };
-  },
+  }
 
-  handleChangeTermInput(event) {
+  handleChangeTermInput = event => {
     this.setState({ termInputValue: event.target.value });
-  },
+  };
 
-  handleSubmit(e) {
+  handleSubmit = e => {
     const { dispatch } = this.props;
     e.preventDefault();
     const value = this.state.termInputValue.length > 0 ? this.state.termInputValue : null;
     dispatch(changeTerm(value));
     dispatch(fetchProjects());
-  },
+  };
 
   render() {
     const { projectTypes, features, themes, dispatch, orderBy, type, intl } = this.props;
@@ -147,10 +154,10 @@ const ProjectListFilter = React.createClass({
         })}
       </Row>
     );
-  },
-});
+  }
+}
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => {
   return {
     features: state.default.features,
     themes: state.default.themes,

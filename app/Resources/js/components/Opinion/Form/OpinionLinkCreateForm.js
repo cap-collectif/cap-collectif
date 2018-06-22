@@ -1,8 +1,8 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { reduxForm, Field, formValueSelector } from 'redux-form';
-import { connect, type MapStateToProps, type Connector } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 import renderInput from '../../Form/Field';
 import Fetcher, { json } from '../../../services/Fetcher';
 import type { State, Uuid, Dispatch } from '../../../types';
@@ -34,14 +34,17 @@ const onSubmit = (data: Object, dispatch: Dispatch, props: Object) => {
     });
 };
 
-export const OpinionLinkCreateForm = React.createClass({
-  propTypes: {
-    availableTypes: PropTypes.array.isRequired,
-    currentType: PropTypes.object.isRequired,
-    opinion: PropTypes.object.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
+type Props = {
+  availableTypes: Array<Object>,
+  opinion: Object,
+  handleSubmit: Function,
+  currentType: ?Object,
+  initialValues: {
+    opinionType: ?Uuid,
   },
+};
 
+export class OpinionLinkCreateForm extends React.Component<Props> {
   render() {
     const { currentType, availableTypes, handleSubmit } = this.props;
     return (
@@ -76,26 +79,23 @@ export const OpinionLinkCreateForm = React.createClass({
           autoFocus
           label={<FormattedMessage id="opinion.body" />}
         />
-        {currentType.appendixTypes.map((field, index) => (
-          <Field
-            key={index}
-            component={renderInput}
-            name={field.title}
-            label={field.title}
-            type="editor"
-            id={`opinion_appendix-${index + 1}`}
-          />
-        ))}
+        {currentType &&
+          currentType.appendixTypes.map((field, index) => (
+            <Field
+              key={index}
+              component={renderInput}
+              name={field.title}
+              label={field.title}
+              type="editor"
+              id={`opinion_appendix-${index + 1}`}
+            />
+          ))}
       </form>
     );
-  },
-});
+  }
+}
 
-type PassedProps = { availableTypes: Array<Object> };
-const mapStateToProps: MapStateToProps<*, *, *> = (
-  state: State,
-  { availableTypes }: PassedProps,
-) => {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, { availableTypes }: Props) => {
   const currentTypeId = formValueSelector(formName)(state, 'opinionType');
   const initialType = availableTypes[0];
   return {
@@ -107,17 +107,10 @@ const mapStateToProps: MapStateToProps<*, *, *> = (
     },
   };
 };
-type Props = {
-  currentType: ?Object,
-  initialValues: {
-    opinionType: ?Uuid,
-  },
-};
-const connector: Connector<PassedProps, Props> = connect(mapStateToProps);
 
-export default connector(
+export default connect(mapStateToProps)(
   reduxForm({
-    form: formName,
     onSubmit,
+    form: formName,
   })(OpinionLinkCreateForm),
 );

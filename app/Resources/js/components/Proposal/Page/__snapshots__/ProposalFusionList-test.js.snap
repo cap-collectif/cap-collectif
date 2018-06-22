@@ -17,14 +17,18 @@ exports[`<ProposalFusionList /> should render a list of proposal merged from oth
       />
     }
   >
-    <div>
+    <div
+      key="proposal2"
+    >
       <a
         href={true}
       >
         Title Proposal 2
       </a>
     </div>
-    <div>
+    <div
+      key="proposal3"
+    >
       <a
         href={true}
       >
@@ -52,14 +56,18 @@ exports[`<ProposalFusionList /> should render a list of proposal of merged in ot
       />
     }
   >
-    <div>
+    <div
+      key="proposal2"
+    >
       <a
         href={true}
       >
         Title Proposal 2
       </a>
     </div>
-    <div>
+    <div
+      key="proposal3"
+    >
       <a
         href={true}
       >

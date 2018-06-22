@@ -18,34 +18,43 @@ import RemoveButton from './../Delete/RemoveButton';
 
 import PublishModal from './../Publish/PublishModal';
 
-const DivideModal = React.createClass({
-  propTypes: {
-    synthesis: React.PropTypes.object,
-    element: React.PropTypes.object,
-    show: React.PropTypes.bool,
-    toggle: React.PropTypes.func,
-  },
+type Props = {
+  synthesis: Object,
+  element: Object,
+  show: boolean,
+  toggle: Function,
+};
 
-  getInitialState() {
-    const { element } = this.props;
-    return {
+type State = {
+  newElements: Object | Array<Object>,
+  currentElement: Object,
+  showPublishModal: boolean,
+  selectedText: ?string,
+};
+
+class DivideModal extends React.Component<Props, State> {
+  constructor(props) {
+    super(props);
+    const { element } = props;
+
+    this.state = {
       newElements: element.division ? element.division.elements : [],
       currentElement: null,
       showPublishModal: false,
       selectedText: null,
     };
-  },
+  }
 
   componentDidUpdate() {
     autosize(ReactDOM.findDOMNode(this.refs.originalText));
-  },
+  }
 
   componentWillUnmount() {
     autosize.destroy(ReactDOM.findDOMNode(this.refs.originalText));
     this.togglePublishModal(false);
-  },
+  }
 
-  getSelectedText(obj) {
+  getSelectedText = obj => {
     if (typeof obj !== 'undefined') {
       const start = obj.selectionStart;
       const end = obj.selectionEnd;
@@ -54,33 +63,33 @@ const DivideModal = React.createClass({
       }
     }
     return null;
-  },
+  };
 
-  show() {
+  show = () => {
     const { toggle } = this.props;
     toggle(true);
-  },
+  };
 
-  hide() {
+  hide = () => {
     const { toggle } = this.props;
     toggle(false);
-  },
+  };
 
-  togglePublishModal(value, element = null) {
+  togglePublishModal = (value, element = null) => {
     this.setState({
       currentElement: element || this.state.currentElement,
       showPublishModal: value,
     });
-  },
+  };
 
-  selectText() {
+  selectText = () => {
     const selectedText = this.getSelectedText(ReactDOM.findDOMNode(this.refs.originalText));
     this.setState({
       selectedText,
     });
-  },
+  };
 
-  createFromSelection() {
+  createFromSelection = () => {
     const { element } = this.props;
     const body = this.state.selectedText;
     if (body && body !== '') {
@@ -94,31 +103,31 @@ const DivideModal = React.createClass({
       this.addElement(newElement);
       this.togglePublishModal(true, newElement);
     }
-  },
+  };
 
-  processPublishedElement(element) {
+  processPublishedElement = element => {
     this.removeElement(element);
     this.addElement(element);
-  },
+  };
 
-  addElement(element) {
+  addElement = element => {
     let newElements = this.state.newElements;
     newElements = ArrayHelper.addElementToArray(newElements, element, 'body');
     this.setState({
       newElements,
       selectedText: null,
     });
-  },
+  };
 
-  removeElement(element) {
+  removeElement = element => {
     let newElements = this.state.newElements;
     newElements = ArrayHelper.removeElementFromArray(newElements, element, 'body');
     this.setState({
       newElements,
     });
-  },
+  };
 
-  divide() {
+  divide = () => {
     const { element, synthesis } = this.props;
     this.hide();
     const data = {
@@ -130,9 +139,9 @@ const DivideModal = React.createClass({
     };
     SynthesisElementActions.update(synthesis.id, element.id, data);
     hashHistory.push('inbox', { type: 'new' });
-  },
+  };
 
-  renderOriginalElementPanel() {
+  renderOriginalElementPanel = () => {
     const element = this.props.element;
     if (element.body) {
       return (
@@ -156,9 +165,9 @@ const DivideModal = React.createClass({
         </Col>
       );
     }
-  },
+  };
 
-  renderCreateButton() {
+  renderCreateButton = () => {
     if (this.state.selectedText) {
       return (
         <Button
@@ -186,9 +195,9 @@ const DivideModal = React.createClass({
         </Button>
       </OverlayTrigger>
     );
-  },
+  };
 
-  renderNewElements() {
+  renderNewElements = () => {
     const elements = this.state.newElements;
     if (elements.length) {
       return (
@@ -199,9 +208,9 @@ const DivideModal = React.createClass({
         </ul>
       );
     }
-  },
+  };
 
-  renderElement(element, index) {
+  renderElement = (element, index) => {
     if (element) {
       return (
         <li key={index} className="division__element">
@@ -215,9 +224,9 @@ const DivideModal = React.createClass({
         </li>
       );
     }
-  },
+  };
 
-  renderNewElementsPanel() {
+  renderNewElementsPanel = () => {
     return (
       <Col
         ref="newElementsPanel"
@@ -230,9 +239,9 @@ const DivideModal = React.createClass({
         </div>
       </Col>
     );
-  },
+  };
 
-  renderContent() {
+  renderContent = () => {
     return (
       <Grid fluid>
         <Row>
@@ -243,9 +252,9 @@ const DivideModal = React.createClass({
         </Row>
       </Grid>
     );
-  },
+  };
 
-  renderPublishModal() {
+  renderPublishModal = () => {
     const { synthesis } = this.props;
     const element = this.state.currentElement;
     if (element) {
@@ -259,7 +268,7 @@ const DivideModal = React.createClass({
         />
       );
     }
-  },
+  };
 
   render() {
     const { show } = this.props;
@@ -293,7 +302,7 @@ const DivideModal = React.createClass({
         {this.renderPublishModal()}
       </div>
     );
-  },
-});
+  }
+}
 
 export default DivideModal;

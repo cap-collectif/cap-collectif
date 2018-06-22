@@ -1,4 +1,4 @@
-// import React, { PropTypes } from 'react';
+// import React from 'react';
 // import { Modal, Button, Alert } from 'react-bootstrap';
 // import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 // import CloseButton from '../../Form/CloseButton';

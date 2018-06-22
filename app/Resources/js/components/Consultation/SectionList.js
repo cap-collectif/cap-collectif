@@ -2,13 +2,13 @@
 import * as React from 'react';
 import Section from './Section';
 
-export const SectionList = React.createClass({
-  propTypes: {
-    section: React.PropTypes.object.isRequired,
-    consultation: React.PropTypes.object.isRequired,
-    level: React.PropTypes.number.isRequired,
-  },
+type Props = {
+  section: Object,
+  consultation: Object,
+  level: number,
+};
 
+export class SectionList extends React.Component<Props> {
   render() {
     const { consultation, section, level } = this.props;
     return (
@@ -25,7 +25,7 @@ export const SectionList = React.createClass({
           ))}
       </div>
     );
-  },
-});
+  }
+}
 
 export default SectionList;

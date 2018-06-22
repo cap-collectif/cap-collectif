@@ -1,23 +1,21 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { showOpinionVersionEditModal } from '../../redux/modules/opinion';
 
-const OpinionVersionEditButton = React.createClass({
-  propTypes: {
-    className: PropTypes.string,
-    style: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
-  },
+type Props = {
+  className?: string,
+  style: Object,
+  dispatch: Function,
+};
 
-  getDefaultProps() {
-    return {
-      className: '',
-      style: {},
-    };
-  },
+class OpinionVersionEditButton extends React.Component<Props> {
+  static defaultProps = {
+    className: '',
+    style: {},
+  };
 
   render() {
     const { dispatch, style, className } = this.props;
@@ -35,7 +33,7 @@ const OpinionVersionEditButton = React.createClass({
         </Button>
       </div>
     );
-  },
-});
+  }
+}
 
 export default connect()(OpinionVersionEditButton);

@@ -26,6 +26,7 @@ exports[`<ProjectStatsFilters /> should render 3 filters 1`] = `
         />
       </option>
       <option
+        key="1"
         value={1}
       >
         theme-1
@@ -52,6 +53,7 @@ exports[`<ProjectStatsFilters /> should render 3 filters 1`] = `
         />
       </option>
       <option
+        key="1"
         value={1}
       />
     </InjectIntl(ReactBootstrapInput)>
@@ -76,6 +78,7 @@ exports[`<ProjectStatsFilters /> should render 3 filters 1`] = `
         />
       </option>
       <option
+        key="1"
         value={1}
       />
     </InjectIntl(ReactBootstrapInput)>
@@ -109,6 +112,7 @@ exports[`<ProjectStatsFilters /> should render only categories filter 1`] = `
         />
       </option>
       <option
+        key="1"
         value={1}
       />
     </InjectIntl(ReactBootstrapInput)>

@@ -3,12 +3,12 @@ import { FormattedMessage } from 'react-intl';
 import { Nav, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
-const TopMenu = React.createClass({
-  propTypes: {
-    synthesis: React.PropTypes.object,
-  },
+type Props = {
+  synthesis: Object,
+};
 
-  getMenuItems() {
+class TopMenu extends React.Component<Props> {
+  getMenuItems = () => {
     return [
       {
         link: '/inbox/new',
@@ -41,9 +41,9 @@ const TopMenu = React.createClass({
         label: 'all',
       },
     ];
-  },
+  };
 
-  renderMenuItem(item, index) {
+  renderMenuItem = (item, index) => {
     const menuItemClass = `menu__item menu__item--${item.color}`;
     const menuItemId = `menu-item-${item.label}`;
     const iconClass = `icon--${item.color}`;
@@ -57,7 +57,7 @@ const TopMenu = React.createClass({
         </NavItem>
       </LinkContainer>
     );
-  },
+  };
 
   render() {
     const items = this.getMenuItems();
@@ -68,7 +68,7 @@ const TopMenu = React.createClass({
         })}
       </Nav>
     );
-  },
-});
+  }
+}
 
 export default TopMenu;

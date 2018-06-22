@@ -1,18 +1,17 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import SettingsSideMenu from './SettingsSideMenu';
 
-const Settings = React.createClass({
-  propTypes: {
+class Settings extends React.Component {
+  static propTypes = {
     synthesis: PropTypes.object,
     params: PropTypes.object,
     children: PropTypes.object.isRequired,
-  },
+  };
 
-  getDefaultProps() {
-    return {
-      params: { type: 'display' },
-    };
-  },
+  static defaultProps = {
+    params: { type: 'display' },
+  };
 
   render() {
     const { children, synthesis } = this.props;
@@ -26,7 +25,7 @@ const Settings = React.createClass({
         </div>
       </div>
     );
-  },
-});
+  }
+}
 
 export default Settings;

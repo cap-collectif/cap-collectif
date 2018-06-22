@@ -1,15 +1,15 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-const ProposalVoteBoxMessage = React.createClass({
-  propTypes: {
-    step: PropTypes.object.isRequired,
-    enoughCredits: PropTypes.bool.isRequired,
-    submitting: PropTypes.bool.isRequired,
-  },
+type Props = {
+  step: Object,
+  enoughCredits: boolean,
+  submitting: boolean,
+};
 
-  getMessage() {
+export class ProposalVoteBoxMessage extends React.Component<Props> {
+  getMessage = () => {
     const { enoughCredits, step, submitting } = this.props;
     if (!enoughCredits && !submitting) {
       return <FormattedMessage id="proposal.vote.not_enough_credits" />;
@@ -21,12 +21,12 @@ const ProposalVoteBoxMessage = React.createClass({
       return <FormattedMessage id="proposal.vote.step_closed" />;
     }
     return null;
-  },
+  };
 
   render() {
     const message = this.getMessage();
     return message ? <p style={{ marginBottom: '15px' }}>{message}</p> : null;
-  },
-});
+  }
+}
 
 export default ProposalVoteBoxMessage;

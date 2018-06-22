@@ -1,41 +1,39 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { VOTE_WIDGET_DISABLED, VOTE_WIDGET_BOTH } from '../../../constants/VoteConstants';
 import VotePiechart from '../../Utils/VotePiechart';
 import OpinionVotesBar from './OpinionVotesBar';
 import OpinionVotesButtons from './OpinionVotesButtons';
 
-const OpinionVotesBox = React.createClass({
-  propTypes: {
-    opinion: PropTypes.object.isRequired,
-  },
+type Props = { opinion: Object };
 
-  getOpinionType() {
+class OpinionVotesBox extends React.Component<Props> {
+  getOpinionType = () => {
     const { opinion } = this.props;
     return this.isVersion() ? opinion.parent.type : opinion.type;
-  },
+  };
 
-  isVersion() {
+  isVersion = () => {
     const { opinion } = this.props;
     return opinion && opinion.parent;
-  },
+  };
 
-  isContribuable() {
+  isContribuable = () => {
     const { opinion } = this.props;
     return opinion.isContribuable;
-  },
+  };
 
-  showVotesButtons() {
+  showVotesButtons = () => {
     const widgetType = this.getOpinionType().voteWidgetType;
     return widgetType !== VOTE_WIDGET_DISABLED;
-  },
+  };
 
-  showPiechart() {
+  showPiechart = () => {
     const { opinion: { votesCount } } = this.props;
     const widgetType = this.getOpinionType().voteWidgetType;
     return votesCount > 0 && widgetType === VOTE_WIDGET_BOTH;
-  },
+  };
 
   render() {
     if (this.getOpinionType().voteWidgetType === VOTE_WIDGET_DISABLED) {
@@ -71,7 +69,7 @@ const OpinionVotesBox = React.createClass({
         </Row>
       </div>
     );
-  },
-});
+  }
+}
 
 export default OpinionVotesBox;

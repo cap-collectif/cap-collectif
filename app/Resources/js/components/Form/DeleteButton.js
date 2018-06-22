@@ -1,39 +1,39 @@
-import React, { PropTypes } from 'react';
+// @flow
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
+import type { State } from '../../types';
 
-const DeleteButton = React.createClass({
-  propTypes: {
-    author: PropTypes.object,
-    onClick: PropTypes.func.isRequired,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    id: PropTypes.string,
-    user: PropTypes.object,
-  },
+type Props = {
+  author: Object,
+  onClick: Function,
+  className: string,
+  style?: Object,
+  id?: string,
+  user?: Object,
+};
 
-  getDefaultProps() {
-    return {
-      author: null,
-      className: '',
-      style: null,
-      id: 'delete-button',
-      user: null,
-    };
-  },
+class DeleteButton extends React.Component<Props> {
+  static defaultProps = {
+    author: null,
+    className: '',
+    style: null,
+    id: 'delete-button',
+    user: null,
+  };
 
-  isDeletable() {
+  isDeletable = () => {
     return this.isTheUserTheAuthor();
-  },
+  };
 
-  isTheUserTheAuthor() {
+  isTheUserTheAuthor = () => {
     const { author, user } = this.props;
     if (author === null || !user) {
       return false;
     }
     return user.uniqueId === author.uniqueId;
-  },
+  };
 
   render() {
     const { className, id, onClick, style } = this.props;
@@ -53,13 +53,11 @@ const DeleteButton = React.createClass({
       );
     }
     return null;
-  },
-});
+  }
+}
 
-const mapStateToProps = state => {
-  return {
-    user: state.user.user,
-  };
-};
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+  user: state.user.user,
+});
 
 export default connect(mapStateToProps)(DeleteButton);

@@ -1,23 +1,23 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import moment from 'moment';
 import { FormattedMessage, FormattedDate } from 'react-intl';
 import UserLink from '../User/UserLink';
 import PinnedLabel from '../Utils/PinnedLabel';
 
-const OpinionInfos = React.createClass({
-  propTypes: {
-    opinion: PropTypes.object.isRequired,
-    rankingThreshold: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.number]),
-    opinionTerm: PropTypes.number,
-  },
+type Props = {
+  opinion: Object,
+  rankingThreshold?: null | number,
+  opinionTerm?: number,
+};
 
-  isVersion() {
+class OpinionInfos extends React.Component<Props> {
+  isVersion = () => {
     const { opinion } = this.props;
     return !!opinion.parent;
-  },
+  };
 
-  renderDate() {
+  renderDate = () => {
     const { opinion } = this.props;
     if (!Modernizr.intl) {
       return null;
@@ -34,9 +34,9 @@ const OpinionInfos = React.createClass({
         />
       </span>
     );
-  },
+  };
 
-  renderEditionDate() {
+  renderEditionDate = () => {
     const { opinion } = this.props;
     if (!Modernizr.intl) {
       return null;
@@ -60,18 +60,18 @@ const OpinionInfos = React.createClass({
         />
       </span>
     );
-  },
+  };
 
-  renderAuthorName() {
+  renderAuthorName = () => {
     const { opinion } = this.props;
     if (opinion.author) {
       return <UserLink user={opinion.author} />;
     }
 
     return <span>{opinion.authorName}</span>;
-  },
+  };
 
-  renderRankingLabel() {
+  renderRankingLabel = () => {
     const { opinion, opinionTerm, rankingThreshold } = this.props;
     if (
       rankingThreshold &&
@@ -109,7 +109,7 @@ const OpinionInfos = React.createClass({
     }
 
     return null;
-  },
+  };
 
   render() {
     return (
@@ -122,7 +122,7 @@ const OpinionInfos = React.createClass({
         {this.renderRankingLabel()}
       </p>
     );
-  },
-});
+  }
+}
 
 export default OpinionInfos;

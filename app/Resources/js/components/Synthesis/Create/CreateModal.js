@@ -1,18 +1,22 @@
 import React from 'react';
+import createReactClass from 'create-react-class';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Modal, Button, ButtonGroup } from 'react-bootstrap';
 import Input from '../../Form/ReactBootstrapInput';
 import ElementsFinder from './../ElementsFinder';
 import SynthesisElementActions from '../../../actions/SynthesisElementActions';
 
-const CreateModal = React.createClass({
+const CreateModal = createReactClass({
+  displayName: 'CreateModal',
+
   propTypes: {
-    synthesis: React.PropTypes.object,
-    selectedId: React.PropTypes.string,
-    elements: React.PropTypes.array,
-    show: React.PropTypes.bool,
-    toggle: React.PropTypes.func,
-    process: React.PropTypes.func,
+    synthesis: PropTypes.object,
+    selectedId: PropTypes.string,
+    elements: PropTypes.array,
+    show: PropTypes.bool,
+    toggle: PropTypes.func,
+    process: PropTypes.func,
   },
 
   getDefaultProps() {

@@ -9,33 +9,39 @@ import Loader from '../Ui/Loader';
 import Fetcher from '../../services/Fetcher';
 import OpinionVersionCreateModal from './OpinionVersionCreateModal';
 
-const OpinionVersionsBox = React.createClass({
-  propTypes: {
-    opinionId: React.PropTypes.string.isRequired,
-    opinionBody: React.PropTypes.string.isRequired,
-  },
+type Props = {
+  opinionId: string,
+  opinionBody: string,
+};
 
-  getInitialState() {
-    return {
-      versions: [],
-      isLoading: true,
-      filter: 'last',
-      offset: 0,
-      rankingThreshold: null,
-    };
-  },
+type State = {
+  versions: Array<$FlowFixMe>,
+  isLoading: boolean,
+  filter: string,
+  offset: number,
+  rankingThreshold: $FlowFixMe,
+};
+
+class OpinionVersionsBox extends React.Component<Props, State> {
+  state = {
+    versions: [],
+    isLoading: true,
+    filter: 'last',
+    offset: 0,
+    rankingThreshold: null,
+  };
 
   componentDidMount() {
     this.loadVersionsFromServer();
-  },
+  }
 
   componentDidUpdate(prevProps: Object, prevState: Object) {
     if (this.state.filter !== prevState.filter) {
       this.loadVersionsFromServer();
     }
-  },
+  }
 
-  updateSelectedValue() {
+  updateSelectedValue = () => {
     const element = ReactDOM.findDOMNode(this.refs.filter);
     if (element instanceof Element) {
       this.setState({
@@ -44,9 +50,9 @@ const OpinionVersionsBox = React.createClass({
         versions: [],
       });
     }
-  },
+  };
 
-  loadVersionsFromServer() {
+  loadVersionsFromServer = () => {
     const { opinionId } = this.props;
     this.setState({ isLoading: true });
 
@@ -60,9 +66,9 @@ const OpinionVersionsBox = React.createClass({
       });
       return true;
     });
-  },
+  };
 
-  renderFilter() {
+  renderFilter = () => {
     if (this.state.versions.length > 1) {
       return (
         <form>
@@ -97,7 +103,7 @@ const OpinionVersionsBox = React.createClass({
         </form>
       );
     }
-  },
+  };
 
   render() {
     return (
@@ -121,7 +127,7 @@ const OpinionVersionsBox = React.createClass({
         )}
       </div>
     );
-  },
-});
+  }
+}
 
 export default OpinionVersionsBox;

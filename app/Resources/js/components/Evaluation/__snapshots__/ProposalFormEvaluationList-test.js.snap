@@ -65,6 +65,7 @@ exports[`<ProposalFormEvaluationList /> renders correcty 1`] = `
     </thead>
     <tbody>
       <Relay(ProposalFormEvaluationRow)
+        key="1"
         proposal={
           Object {
             "$fragmentRefs": null,
@@ -73,6 +74,7 @@ exports[`<ProposalFormEvaluationList /> renders correcty 1`] = `
         }
       />
       <Relay(ProposalFormEvaluationRow)
+        key="2"
         proposal={
           Object {
             "$fragmentRefs": null,
@@ -85,4 +87,4 @@ exports[`<ProposalFormEvaluationList /> renders correcty 1`] = `
 </div>
 `;
 
-exports[`<ProposalFormEvaluationList /> renders nothing when no evaluations 1`] = `null`;
+exports[`<ProposalFormEvaluationList /> renders nothing when no evaluations 1`] = `""`;

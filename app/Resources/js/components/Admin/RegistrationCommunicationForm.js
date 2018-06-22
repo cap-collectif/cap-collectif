@@ -1,5 +1,5 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Field, reduxForm, formValueSelector, isDirty } from 'redux-form';
 import { Button } from 'react-bootstrap';
@@ -8,15 +8,15 @@ import renderInput from '../Form/Field';
 import { updateRegistrationCommunicationForm as onSubmit } from '../../redux/modules/default';
 import type { State } from '../../types';
 
-export const formName = 'admin-communication-registration';
-export const RegistrationCommunicationForm = React.createClass({
-  propTypes: {
-    useTopText: PropTypes.bool.isRequired,
-    useBottomText: PropTypes.bool.isRequired,
-    submitting: PropTypes.bool.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
-  },
+type Props = {
+  useTopText: boolean,
+  useBottomText: boolean,
+  submitting: boolean,
+  handleSubmit: Function,
+};
 
+export const formName = 'admin-communication-registration';
+export class RegistrationCommunicationForm extends React.Component<Props> {
   render() {
     const { submitting, handleSubmit, useTopText, useBottomText } = this.props;
     return (
@@ -46,8 +46,8 @@ export const RegistrationCommunicationForm = React.createClass({
         </div>
       </form>
     );
-  },
-});
+  }
+}
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   useTopText: isDirty(formName)(state)

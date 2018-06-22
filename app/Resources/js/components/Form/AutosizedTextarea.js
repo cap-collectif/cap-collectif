@@ -3,21 +3,23 @@ import ReactDOM from 'react-dom';
 import autosize from 'autosize';
 import { FormControl } from 'react-bootstrap';
 
-const AutosizedTextarea = React.createClass({
+type Props = {};
+
+class AutosizedTextarea extends React.Component<Props> {
   componentDidMount() {
     const input = ReactDOM.findDOMNode(this.refFormControl);
     autosize(input);
-  },
+  }
 
   componentDidUpdate() {
     const input = ReactDOM.findDOMNode(this.refFormControl);
     autosize(input);
-  },
+  }
 
   componentWillUnmount() {
     const input = ReactDOM.findDOMNode(this.refFormControl);
     autosize.destroy(input);
-  },
+  }
 
   render() {
     return (
@@ -29,7 +31,7 @@ const AutosizedTextarea = React.createClass({
         {...this.props}
       />
     );
-  },
-});
+  }
+}
 
 export default AutosizedTextarea;

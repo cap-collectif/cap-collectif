@@ -3,6 +3,7 @@
 exports[`<Field /> pass input props to children 1`] = `
 <InjectIntl(ReactBootstrapInput)
   autoFocus={false}
+  disableValidation={false}
   errors={null}
   hasFeedback={false}
   id="id"
@@ -20,6 +21,7 @@ exports[`<Field /> pass input props to children 1`] = `
 exports[`<Field /> renders a default <Input /> element 1`] = `
 <InjectIntl(ReactBootstrapInput)
   autoFocus={false}
+  disableValidation={false}
   errors={null}
   hasFeedback={false}
   id="id"
@@ -59,6 +61,7 @@ exports[`<Field /> renders a div around <Input /> element 1`] = `
 exports[`<Field /> renders a validated <Input /> element 1`] = `
 <InjectIntl(ReactBootstrapInput)
   autoFocus={false}
+  disableValidation={false}
   errors={null}
   hasFeedback={true}
   id="id"
@@ -94,6 +97,7 @@ exports[`<Field /> renders a validation disabled <Input /> element 1`] = `
 exports[`<Field /> renders an error <Input /> element 1`] = `
 <InjectIntl(ReactBootstrapInput)
   autoFocus={false}
+  disableValidation={false}
   errors={
     <FormattedMessage
       id="global.required"

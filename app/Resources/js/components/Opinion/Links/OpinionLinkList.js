@@ -3,11 +3,9 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import OpinionLink from './OpinionLink';
 
-const OpinionLinkList = React.createClass({
-  propTypes: {
-    links: React.PropTypes.array.isRequired,
-  },
+type Props = { links: Array<$FlowFixMe> };
 
+class OpinionLinkList extends React.Component<Props> {
   render() {
     const { links } = this.props;
     if (links.length === 0) {
@@ -27,7 +25,7 @@ const OpinionLinkList = React.createClass({
         })}
       </ul>
     );
-  },
-});
+  }
+}
 
 export default OpinionLinkList;

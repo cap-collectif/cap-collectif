@@ -35,7 +35,7 @@ const validate = (
 };
 
 type Props = FormProps & {
-  newEmailToConfirm: string,
+  newEmailToConfirm?: ?string,
   initialValues: Object,
   confirmationEmailResent: boolean,
   dispatch: Dispatch,

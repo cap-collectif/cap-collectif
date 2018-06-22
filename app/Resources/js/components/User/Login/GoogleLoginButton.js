@@ -1,14 +1,14 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-export const GoogleLoginButton = React.createClass({
-  displayName: 'GoogleLoginButton',
+type Props = {
+  features: Object,
+  prefix: string,
+};
 
-  propTypes: {
-    features: PropTypes.object.isRequired,
-    prefix: PropTypes.string.isRequired,
-  },
+export class GoogleLoginButton extends React.Component<Props> {
+  static displayName = 'GoogleLoginButton';
 
   render() {
     const { features, prefix } = this.props;
@@ -24,7 +24,7 @@ export const GoogleLoginButton = React.createClass({
         {<FormattedMessage id={label} />}
       </a>
     );
-  },
-});
+  }
+}
 
 export default GoogleLoginButton;

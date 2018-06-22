@@ -9,11 +9,11 @@ import OpinionSourceTitle from './OpinionSourceTitle';
 import OpinionSourceContent from './OpinionSourceContent';
 import OpinionSourceFooter from './OpinionSourceFooter';
 
-const OpinionSource = React.createClass({
-  propTypes: {
-    source: React.PropTypes.object.isRequired,
-  },
+type Props = {
+  source: Object,
+};
 
+class OpinionSource extends React.Component<Props> {
   render() {
     const { source } = this.props;
     const classes = classNames({
@@ -38,7 +38,7 @@ const OpinionSource = React.createClass({
         </Row>
       </li>
     );
-  },
-});
+  }
+}
 
 export default OpinionSource;

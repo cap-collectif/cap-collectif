@@ -1,5 +1,5 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import OpinionUserVote from './OpinionUserVote';
@@ -7,15 +7,15 @@ import VotesBar from '../../Utils/VotesBar';
 import OpinionVotesModal from './OpinionVotesModal';
 import type { State, OpinionAndVersion } from '../../../types';
 
-const OpinionVotesBar = React.createClass({
-  propTypes: {
-    opinion: PropTypes.object.isRequired,
-  },
+type Props = {
+  opinion: Object,
+};
 
-  getOpinionType() {
+class OpinionVotesBar extends React.Component<Props> {
+  getOpinionType = () => {
     const { opinion } = this.props;
     return opinion.parent ? opinion.parent.type : opinion.type;
-  },
+  };
 
   render() {
     const { opinion } = this.props;
@@ -44,8 +44,8 @@ const OpinionVotesBar = React.createClass({
         </div>
       </div>
     );
-  },
-});
+  }
+}
 
 const mapStateToProps: MapStateToProps<*, *, *> = (
   state: State,

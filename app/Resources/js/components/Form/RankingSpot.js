@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+// @flow
+import React from 'react';
 import { DropTarget } from 'react-dnd';
 import { ITEM_TYPE } from '../../constants/RankingConstants';
 
@@ -8,16 +9,16 @@ const spotTarget = {
   },
 };
 
-const RankingSpot = React.createClass({
-  displayName: 'RankingSpot',
+type Props = {
+  connectDropTarget: Function,
+  isOver: boolean,
+  onDrop: Function,
+  canDrop: boolean,
+  children?: $FlowFixMe,
+};
 
-  propTypes: {
-    connectDropTarget: PropTypes.func.isRequired,
-    isOver: PropTypes.bool.isRequired,
-    onDrop: PropTypes.func.isRequired,
-    canDrop: PropTypes.bool.isRequired,
-    children: PropTypes.element,
-  },
+class RankingSpot extends React.Component<Props> {
+  static displayName = 'RankingSpot';
 
   render() {
     const { connectDropTarget, isOver, canDrop, children } = this.props;
@@ -27,8 +28,8 @@ const RankingSpot = React.createClass({
         {children}
       </div>,
     );
-  },
-});
+  }
+}
 
 export default DropTarget(ITEM_TYPE, spotTarget, (connect, monitor) => ({
   // eslint-disable-line new-cap

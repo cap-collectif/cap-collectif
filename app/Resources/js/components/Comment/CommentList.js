@@ -1,14 +1,15 @@
-import React, { PropTypes } from 'react';
+// @flow
+import React from 'react';
 import classNames from 'classnames';
 import Comment from './Comment';
 
-const CommentList = React.createClass({
-  propTypes: {
-    root: PropTypes.bool,
-    comments: PropTypes.array.isRequired,
-    onVote: PropTypes.func.isRequired,
-  },
+type Props = {
+  root?: boolean,
+  comments: Array<$FlowFixMe>,
+  onVote: Function,
+};
 
+class CommentList extends React.Component<Props> {
   render() {
     const { comments, onVote, root } = this.props;
     if (comments.length === 0) {
@@ -36,7 +37,7 @@ const CommentList = React.createClass({
         })}
       </ul>
     );
-  },
-});
+  }
+}
 
 export default CommentList;

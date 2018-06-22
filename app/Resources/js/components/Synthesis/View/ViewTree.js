@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { NAV_DEPTH } from '../../../constants/SynthesisElementConstants';
@@ -13,48 +14,46 @@ import SynthesisElementActions from '../../../actions/SynthesisElementActions';
 import ArrayHelper from '../../../services/ArrayHelper';
 import SynthesisDisplayRules from '../../../services/SynthesisDisplayRules';
 
-const ViewTree = React.createClass({
-  propTypes: {
-    synthesis: React.PropTypes.object.isRequired,
-  },
+class ViewTree extends React.Component {
+  static propTypes = {
+    synthesis: PropTypes.object.isRequired,
+  };
 
-  getInitialState() {
-    return {
-      settings: SynthesisStore.settings,
-      elements: [],
-      expanded: {},
-      isLoading: true,
-    };
-  },
+  state = {
+    settings: SynthesisStore.settings,
+    elements: [],
+    expanded: {},
+    isLoading: true,
+  };
 
   componentWillMount() {
     SynthesisElementStore.addChangeListener(this.onChange);
-  },
+  }
 
   componentDidMount() {
     this.loadElementsTreeFromServer();
-  },
+  }
 
   componentWillUnmount() {
     SynthesisElementStore.removeChangeListener(this.onChange);
-  },
+  }
 
-  onChange() {
+  onChange = () => {
     this.setState({
       elements: SynthesisElementStore.elements.publishedTree,
       expanded: SynthesisElementStore.expandedItems.view,
       isLoading: false,
     });
-  },
+  };
 
-  toggleExpand(element) {
+  toggleExpand = element => {
     if (element.childrenCount !== element.children.length) {
       this.loadElementsTreeFromServer(element.id);
     }
     SynthesisElementActions.expandTreeItem('view', element.id, !this.state.expanded[element.id]);
-  },
+  };
 
-  loadElementsTreeFromServer(parent = null) {
+  loadElementsTreeFromServer = (parent = null) => {
     const { synthesis } = this.props;
     const depth =
       synthesis.displayRules && synthesis.displayRules.level
@@ -66,9 +65,9 @@ const ViewTree = React.createClass({
       parent,
       depth > 2 ? depth : depth + NAV_DEPTH,
     );
-  },
+  };
 
-  isElementExpanded(element) {
+  isElementExpanded = element => {
     const { synthesis } = this.props;
     if (!element) {
       return true;
@@ -83,9 +82,9 @@ const ViewTree = React.createClass({
         displayRules,
       ) || this.state.expanded[element.id]
     );
-  },
+  };
 
-  renderCaret(element) {
+  renderCaret = element => {
     const { synthesis } = this.props;
     const displayRules = synthesis.displayRules || {};
     if (
@@ -142,9 +141,9 @@ const ViewTree = React.createClass({
       );
     }
     return null;
-  },
+  };
 
-  renderTreeItems(elements, parent = null) {
+  renderTreeItems = (elements, parent = null) => {
     const { synthesis } = this.props;
     const displayRules = synthesis.displayRules || {};
     if (
@@ -191,7 +190,7 @@ const ViewTree = React.createClass({
         </ul>
       );
     }
-  },
+  };
 
   render() {
     return (
@@ -199,7 +198,7 @@ const ViewTree = React.createClass({
         {this.state.elements.length > 0 ? this.renderTreeItems(this.state.elements, null) : null}
       </Loader>
     );
-  },
-});
+  }
+}
 
 export default ViewTree;

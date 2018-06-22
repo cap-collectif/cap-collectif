@@ -1,19 +1,17 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import UserAvatar from '../../User/UserAvatar';
 
-const OpinionUserVote = React.createClass({
-  propTypes: {
-    vote: PropTypes.object.isRequired,
-    style: PropTypes.object,
-  },
+type Props = {
+  vote: Object,
+  style?: Object,
+};
 
-  getDefaultProps() {
-    return {
-      style: {},
-    };
-  },
+class OpinionUserVote extends React.Component<Props> {
+  static defaultProps = {
+    style: {},
+  };
 
   render() {
     const { vote, style } = this.props;
@@ -24,7 +22,7 @@ const OpinionUserVote = React.createClass({
         <UserAvatar user={vote.user} style={style} />
       </OverlayTrigger>
     );
-  },
-});
+  }
+}
 
 export default OpinionUserVote;

@@ -1,3 +1,4 @@
+// @flow
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 
@@ -8,7 +9,7 @@ type State = {
 };
 
 export class AlertFormSucceededMessage extends React.Component<Props, State> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {

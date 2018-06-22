@@ -1,18 +1,16 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import TreeView from './TreeView';
 
-const ViewBox = React.createClass({
-  propTypes: {
-    synthesis: PropTypes.object.isRequired,
-    user: PropTypes.object,
-  },
+type Props = {
+  synthesis: Object,
+  user?: ?Object,
+};
 
-  getDefaultProps() {
-    return {
-      user: null,
-    };
-  },
+class ViewBox extends React.Component<Props> {
+  static defaultProps = {
+    user: null,
+  };
 
   render() {
     const { synthesis, user } = this.props;
@@ -24,8 +22,8 @@ const ViewBox = React.createClass({
       );
     }
     return null;
-  },
-});
+  }
+}
 
 const mapStateToProps = state => {
   return {

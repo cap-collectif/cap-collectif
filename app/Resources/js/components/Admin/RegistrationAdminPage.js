@@ -1,5 +1,5 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import type { Connector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
@@ -18,20 +18,11 @@ type Props = {
   onToggle: (feature: FeatureToggle, value: boolean) => void,
   addNewField: () => void,
   isSuperAdmin: boolean,
-  reorder: (list: Array<Object>) => void,
+  reorder: Function,
   dynamicFields: Array<Object>,
 };
 
-export const RegistrationAdminPage = React.createClass({
-  propTypes: {
-    isSuperAdmin: PropTypes.bool.isRequired,
-    features: PropTypes.object.isRequired,
-    onToggle: PropTypes.func.isRequired,
-    addNewField: PropTypes.func.isRequired,
-    reorder: PropTypes.func.isRequired,
-    dynamicFields: PropTypes.array.isRequired,
-  },
-
+export class RegistrationAdminPage extends React.Component<Props> {
   render() {
     const { reorder, isSuperAdmin, onToggle, addNewField, features, dynamicFields } = this.props;
     return (
@@ -39,6 +30,7 @@ export const RegistrationAdminPage = React.createClass({
         <div className="row">
           <Col xs={1}>
             <Toggle
+              icons
               checked={features.registration}
               onChange={() => onToggle('registration', !features.registration)}
             />
@@ -50,6 +42,7 @@ export const RegistrationAdminPage = React.createClass({
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
             <Toggle
+              icons
               checked={features.login_facebook}
               onChange={() => onToggle('login_facebook', !features.login_facebook)}
             />
@@ -59,6 +52,7 @@ export const RegistrationAdminPage = React.createClass({
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
             <Toggle
+              icons
               checked={features.login_gplus}
               onChange={() => onToggle('login_gplus', !features.login_gplus)}
             />
@@ -69,6 +63,7 @@ export const RegistrationAdminPage = React.createClass({
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
             <Toggle
+              icons
               checked={features.restrict_registration_via_email_domain}
               onChange={() =>
                 onToggle(
@@ -84,19 +79,20 @@ export const RegistrationAdminPage = React.createClass({
         <h4>Données recueillies</h4>
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
-            <Toggle checked disabled />
+            <Toggle checked icons disabled />
           </Col>
           <Col xs={11}>Nom ou pseudonyme</Col>
         </div>
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
-            <Toggle checked disabled />
+            <Toggle checked icons disabled />
           </Col>
           <Col xs={11}>Mot de passe</Col>
         </div>
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
             <Toggle
+              icons
               checked={features.zipcode_at_register}
               onChange={() => onToggle('zipcode_at_register', !features.zipcode_at_register)}
             />
@@ -106,6 +102,7 @@ export const RegistrationAdminPage = React.createClass({
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
             <Toggle
+              icons
               checked={features.user_type}
               onChange={() => onToggle('user_type', !features.user_type)}
             />
@@ -148,6 +145,7 @@ export const RegistrationAdminPage = React.createClass({
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
             <Toggle
+              icons
               checked={features.consent_external_communication}
               onChange={() =>
                 onToggle('consent_external_communication', !features.consent_external_communication)
@@ -180,6 +178,7 @@ export const RegistrationAdminPage = React.createClass({
         <div className="row" style={{ padding: '10px 0' }}>
           <Col xs={1}>
             <Toggle
+              icons
               disabled={!isSuperAdmin}
               checked={features.captcha}
               onChange={() => onToggle('captcha', !features.captcha)}
@@ -191,8 +190,8 @@ export const RegistrationAdminPage = React.createClass({
         <RegistrationCommunicationForm />
       </div>
     );
-  },
-});
+  }
+}
 
 const mapStateToProps = (state: State) => ({
   features: state.default.features,

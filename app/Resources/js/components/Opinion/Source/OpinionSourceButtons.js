@@ -1,5 +1,5 @@
 // @flow
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import OpinionSourceReportButton from './OpinionSourceReportButton';
 import OpinionSourceFormModal from './OpinionSourceFormModal';
@@ -9,25 +9,27 @@ import DeleteButton from '../../Form/DeleteButton';
 import OpinionSourceVoteBox from './OpinionSourceVoteBox';
 import { showSourceEditModal } from '../../../redux/modules/opinion';
 
-const OpinionSourceButtons = React.createClass({
-  propTypes: {
-    source: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
-  },
+type Props = {
+  source: Object,
+  dispatch: Function,
+};
 
-  getInitialState() {
-    return {
-      isDeleting: false,
-    };
-  },
+type State = {
+  isDeleting: boolean,
+};
 
-  openDeleteModal() {
+class OpinionSourceButtons extends React.Component<Props, State> {
+  state = {
+    isDeleting: false,
+  };
+
+  openDeleteModal = () => {
     this.setState({ isDeleting: true });
-  },
+  };
 
-  closeDeleteModal() {
+  closeDeleteModal = () => {
     this.setState({ isDeleting: false });
-  },
+  };
 
   render() {
     const { source, dispatch } = this.props;
@@ -55,7 +57,7 @@ const OpinionSourceButtons = React.createClass({
         />
       </div>
     );
-  },
-});
+  }
+}
 
 export default connect()(OpinionSourceButtons);

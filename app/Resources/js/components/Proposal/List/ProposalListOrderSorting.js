@@ -9,7 +9,7 @@ import { PROPOSAL_AVAILABLE_ORDERS } from '../../../constants/ProposalConstants'
 import type { Dispatch, State } from '../../../types';
 
 type Props = {
-  orderByVotes: boolean,
+  orderByVotes?: boolean,
   orderByComments?: boolean,
   orderByCost?: boolean,
   dispatch: Dispatch,
