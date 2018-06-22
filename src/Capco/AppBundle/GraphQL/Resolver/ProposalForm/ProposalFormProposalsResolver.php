@@ -3,22 +3,29 @@
 namespace Capco\AppBundle\GraphQL\Resolver\ProposalForm;
 
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Search\ProposalSearch;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Request;
 
-class ProposalFormProposalsResolver implements ContainerAwareInterface
+class ProposalFormProposalsResolver implements ResolverInterface
 {
-    use ContainerAwareTrait;
+    private $proposalRepo;
+    private $proposalSearch;
+
+    public function __construct(ProposalRepository $proposalRepo, ProposalSearch $proposalSearch)
+    {
+        $this->proposalRepo = $proposalRepo;
+        $this->proposalSearch = $proposalSearch;
+    }
 
     public function __invoke(ProposalForm $form, Arg $args, $user, Request $request): Connection
     {
-        $repo = $this->container->get('capco.proposal.repository');
         $totalCount = 0;
         $filters = [];
         $term = null;
@@ -39,7 +46,7 @@ class ProposalFormProposalsResolver implements ContainerAwareInterface
                 $filters['author'] = $user->getId();
             }
         }
-        $paginator = new Paginator(function (int $offset, int $limit) use ($repo, $form, $args, $user, $term, $request, &$totalCount, $filters) {
+        $paginator = new Paginator(function (int $offset, int $limit) use ($form, $args, $user, $term, $request, &$totalCount, $filters) {
             if ($args->offsetExists('district')) {
                 $filters['districts'] = $args->offsetGet('district');
             }
@@ -62,9 +69,9 @@ class ProposalFormProposalsResolver implements ContainerAwareInterface
                     $direction = $args->offsetGet('orderBy')['direction'];
                     $field = $args->offsetGet('orderBy')['field'];
 
-                    $totalCount = $user instanceof User ? $repo->countProposalsByFormAndEvaluer($form, $user) : $totalCount;
+                    $totalCount = $user instanceof User ? $this->proposalRepo->countProposalsByFormAndEvaluer($form, $user) : $totalCount;
 
-                    return $repo->getProposalsByFormAndEvaluer($form, $user, $offset, $limit, $field, $direction)->getIterator()->getArrayCopy();
+                    return $this->proposalRepo->getProposalsByFormAndEvaluer($form, $user, $offset, $limit, $field, $direction)->getIterator()->getArrayCopy();
                 }
 
                 if (\in_array('OWNER', $affiliations, true)) {
@@ -82,7 +89,7 @@ class ProposalFormProposalsResolver implements ContainerAwareInterface
 
             $seed = $user instanceof User ? $user->getId() : $request->getClientIp();
 
-            $results = $this->container->get('capco.search.proposal_search')->searchProposals(
+            $results = $this->proposalSearch->searchProposals(
                     $offset,
                     $limit,
                     $order,
@@ -99,7 +106,7 @@ class ProposalFormProposalsResolver implements ContainerAwareInterface
         $connection = $paginator->auto($args, $totalCount);
         $connection->totalCount = $totalCount;
 
-        $countFusions = $repo->countFusionsByProposalForm($form);
+        $countFusions = $this->proposalRepo->countFusionsByProposalForm($form);
         $connection->{'fusionCount'} = $countFusions;
 
         return $connection;

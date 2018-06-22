@@ -11,7 +11,7 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
-use Capco\AppBundle\GraphQL\Resolver\ProjectContributorResolver;
+use Capco\AppBundle\GraphQL\Resolver\Project\ProjectContributorResolver;
 use Capco\UserBundle\Entity\User;
 use JMS\Serializer\SerializationContext;
 use Overblog\GraphQLBundle\Definition\Argument;

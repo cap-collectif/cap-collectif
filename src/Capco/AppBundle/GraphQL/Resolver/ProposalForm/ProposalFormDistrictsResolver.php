@@ -3,14 +3,11 @@
 namespace Capco\AppBundle\GraphQL\Resolver\ProposalForm;
 
 use Capco\AppBundle\Entity\ProposalForm;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
-class ProposalFormDistrictsResolver implements ContainerAwareInterface
+class ProposalFormDistrictsResolver implements ResolverInterface
 {
-    use ContainerAwareTrait;
-
-    public function resolveDistricts(ProposalForm $form, string $order): array
+    public function __invoke(ProposalForm $form, string $order): array
     {
         $districts = $form->getDistricts()->toArray();
         if ('ALPHABETICAL' === $order) {

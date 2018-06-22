@@ -4,13 +4,10 @@ namespace Capco\AppBundle\GraphQL\Resolver\ProposalForm;
 
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Utils\Text;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
-class ProposalFormSummaryHelpTextResolver implements ContainerAwareInterface
+class ProposalFormSummaryHelpTextResolver implements ResolverInterface
 {
-    use ContainerAwareTrait;
-
     public function __invoke(ProposalForm $proposalForm): ?string
     {
         $text = $proposalForm->getSummaryHelpText();

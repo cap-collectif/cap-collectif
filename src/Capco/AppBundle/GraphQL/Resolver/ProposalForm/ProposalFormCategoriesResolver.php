@@ -3,13 +3,10 @@
 namespace Capco\AppBundle\GraphQL\Resolver\ProposalForm;
 
 use Capco\AppBundle\Entity\ProposalForm;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
-class ProposalFormCategoriesResolver implements ContainerAwareInterface
+class ProposalFormCategoriesResolver implements ResolverInterface
 {
-    use ContainerAwareTrait;
-
     public function __invoke(ProposalForm $form): array
     {
         $categories = $form->getCategories()->toArray();
