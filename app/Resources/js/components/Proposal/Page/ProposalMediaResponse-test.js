@@ -1,15 +1,13 @@
-// @flow
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalMediaResponse } from './ProposalMediaResponse';
-import { $refType } from '../../../mocks';
 
 describe('<ProposalMediaResponse />', () => {
   const props = {
     medias: [
-      { id: 'Media1', url: '/media/1.jpg', name: 'Media1', size: '2 Mo', $refType },
-      { id: 'Media2', url: '/media/2.jpg', name: 'Media2', size: '2 Mo', $refType },
+      { url: '/media/1.jpg', name: 'Media1', size: '2 Mo' },
+      { url: '/media/2.jpg', name: 'Media2', size: '2 Mo' },
     ],
   };
 

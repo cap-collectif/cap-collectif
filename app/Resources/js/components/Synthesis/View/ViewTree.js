@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import { NAV_DEPTH } from '../../../constants/SynthesisElementConstants';
@@ -14,46 +13,48 @@ import SynthesisElementActions from '../../../actions/SynthesisElementActions';
 import ArrayHelper from '../../../services/ArrayHelper';
 import SynthesisDisplayRules from '../../../services/SynthesisDisplayRules';
 
-class ViewTree extends React.Component {
-  static propTypes = {
-    synthesis: PropTypes.object.isRequired,
-  };
+const ViewTree = React.createClass({
+  propTypes: {
+    synthesis: React.PropTypes.object.isRequired,
+  },
 
-  state = {
-    settings: SynthesisStore.settings,
-    elements: [],
-    expanded: {},
-    isLoading: true,
-  };
+  getInitialState() {
+    return {
+      settings: SynthesisStore.settings,
+      elements: [],
+      expanded: {},
+      isLoading: true,
+    };
+  },
 
   componentWillMount() {
     SynthesisElementStore.addChangeListener(this.onChange);
-  }
+  },
 
   componentDidMount() {
     this.loadElementsTreeFromServer();
-  }
+  },
 
   componentWillUnmount() {
     SynthesisElementStore.removeChangeListener(this.onChange);
-  }
+  },
 
-  onChange = () => {
+  onChange() {
     this.setState({
       elements: SynthesisElementStore.elements.publishedTree,
       expanded: SynthesisElementStore.expandedItems.view,
       isLoading: false,
     });
-  };
+  },
 
-  toggleExpand = element => {
+  toggleExpand(element) {
     if (element.childrenCount !== element.children.length) {
       this.loadElementsTreeFromServer(element.id);
     }
     SynthesisElementActions.expandTreeItem('view', element.id, !this.state.expanded[element.id]);
-  };
+  },
 
-  loadElementsTreeFromServer = (parent = null) => {
+  loadElementsTreeFromServer(parent = null) {
     const { synthesis } = this.props;
     const depth =
       synthesis.displayRules && synthesis.displayRules.level
@@ -65,9 +66,9 @@ class ViewTree extends React.Component {
       parent,
       depth > 2 ? depth : depth + NAV_DEPTH,
     );
-  };
+  },
 
-  isElementExpanded = element => {
+  isElementExpanded(element) {
     const { synthesis } = this.props;
     if (!element) {
       return true;
@@ -82,9 +83,9 @@ class ViewTree extends React.Component {
         displayRules,
       ) || this.state.expanded[element.id]
     );
-  };
+  },
 
-  renderCaret = element => {
+  renderCaret(element) {
     const { synthesis } = this.props;
     const displayRules = synthesis.displayRules || {};
     if (
@@ -141,9 +142,9 @@ class ViewTree extends React.Component {
       );
     }
     return null;
-  };
+  },
 
-  renderTreeItems = (elements, parent = null) => {
+  renderTreeItems(elements, parent = null) {
     const { synthesis } = this.props;
     const displayRules = synthesis.displayRules || {};
     if (
@@ -190,7 +191,7 @@ class ViewTree extends React.Component {
         </ul>
       );
     }
-  };
+  },
 
   render() {
     return (
@@ -198,7 +199,7 @@ class ViewTree extends React.Component {
         {this.state.elements.length > 0 ? this.renderTreeItems(this.state.elements, null) : null}
       </Loader>
     );
-  }
-}
+  },
+});
 
 export default ViewTree;

@@ -4,8 +4,8 @@ import { FormattedDate, FormattedTime, FormattedMessage } from 'react-intl';
 import moment from 'moment';
 
 type Props = {
-  startAt?: ?string,
-  endAt?: ?string,
+  startAt: ?string,
+  endAt: ?string,
   fullDay?: boolean,
 };
 

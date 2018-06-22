@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { reduxForm, Field } from 'redux-form';
 import renderInput from '../Form/Field';
@@ -16,11 +16,11 @@ const validate = ({ status, body }) => {
   return errors;
 };
 
-type Props = {
-  handleSubmit: Function,
-};
+const ReportForm = React.createClass({
+  propTypes: {
+    handleSubmit: PropTypes.func.isRequired,
+  },
 
-class ReportForm extends React.Component<Props> {
   render() {
     const { handleSubmit } = this.props;
     return (
@@ -49,8 +49,8 @@ class ReportForm extends React.Component<Props> {
         />
       </form>
     );
-  }
-}
+  },
+});
 
 export default reduxForm({
   form: formName,

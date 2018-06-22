@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps, type Connector } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
@@ -32,11 +32,11 @@ const onSubmit = (values: Object, dispatch, { argument }) => {
   });
 };
 
-type Props = {
-  argument: Object,
-};
+const ArgumentForm = React.createClass({
+  propTypes: {
+    argument: PropTypes.object.isRequired,
+  },
 
-class ArgumentForm extends React.Component<Props> {
   render() {
     return (
       <form id="argument-form" ref="form">
@@ -59,16 +59,18 @@ class ArgumentForm extends React.Component<Props> {
         />
       </form>
     );
-  }
-}
+  },
+});
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) => ({
+type PassedProps = { argument: Object };
+
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: PassedProps) => ({
   initialValues: {
     body: props.argument ? props.argument.body : '',
     confirm: false,
   },
 });
-const connector: Connector<Props, {}> = connect(mapStateToProps);
+const connector: Connector<PassedProps, {}> = connect(mapStateToProps);
 
 export default connector(
   reduxForm({

@@ -14,7 +14,6 @@ exports[`<ImageUpload /> render correctly 1`] = `
     xs={12}
   >
     <Dropzone
-      accept=""
       className="image-uploader__dropzone--fullwidth"
       disableClick={false}
       disablePreview={false}
@@ -139,7 +138,6 @@ exports[`<ImageUpload /> render correctly without preview 1`] = `
     xs={12}
   >
     <Dropzone
-      accept=""
       className="image-uploader__dropzone--fullwidth"
       disableClick={false}
       disablePreview={true}

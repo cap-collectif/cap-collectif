@@ -10,7 +10,6 @@ const props = {
   pristine: false,
   invalid: false,
   handleSubmit: jest.fn(),
-  reset: jest.fn(),
   isAnswer: false,
   comment: 'test of comment',
   object: 'proposal1',
@@ -26,7 +25,7 @@ const userProps = {
 
 describe('<CommentForm />', () => {
   it('should render correctly', () => {
-    const wrapper = shallow(<CommentForm {...props} />);
+    const wrapper = shallow(<CommentForm {...props} user={false} />);
     wrapper.setState({ expanded: true });
     expect(wrapper).toMatchSnapshot();
   });

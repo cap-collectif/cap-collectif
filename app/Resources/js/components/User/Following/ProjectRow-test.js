@@ -1,4 +1,3 @@
-// @flow
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
@@ -16,6 +15,8 @@ describe('<ProjectRow />', () => {
     url: 'http://theuselessweb.com',
     id: 'project2',
   };
+
+  const emptyProject = {};
 
   const viewer = {
     followingProposals: {
@@ -69,9 +70,9 @@ describe('<ProjectRow />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render close collapse', () => {
+  it('should render without project', () => {
     const wrapper = shallow(
-      <ProjectRow viewer={viewerWithoutProjectProposal} project={project1} />,
+      <ProjectRow viewer={viewerWithoutProjectProposal} project={emptyProject} />,
     );
     wrapper.setState({ open: false });
     expect(wrapper).toMatchSnapshot();

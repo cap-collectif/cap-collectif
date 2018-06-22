@@ -7,11 +7,11 @@ import UserAvatar from '../User/UserAvatar';
 import OpinionPreviewCounters from '../Opinion/OpinionPreviewCounters';
 import VotePiechart from '../Utils/VotePiechart';
 
-type Props = {
-  opinion: Object,
-};
+export const Opinion = React.createClass({
+  propTypes: {
+    opinion: React.PropTypes.object.isRequired,
+  },
 
-export class Opinion extends React.Component<Props> {
   render() {
     const { opinion } = this.props;
     const author = opinion.author;
@@ -41,8 +41,8 @@ export class Opinion extends React.Component<Props> {
         </div>
       </li>
     );
-  }
-}
+  },
+});
 
 export default createFragmentContainer(
   Opinion,

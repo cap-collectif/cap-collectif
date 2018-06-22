@@ -7,22 +7,18 @@ import OpinionActions from '../../../actions/OpinionActions';
 import Loader from '../../Ui/Loader';
 import UserBox from '../../User/UserBox';
 
-type Props = {
-  opinion: Object,
-};
+const OpinionVotesModal = React.createClass({
+  propTypes: {
+    opinion: React.PropTypes.object.isRequired,
+  },
 
-type State = {
-  showModal: boolean,
-  isLoading: boolean,
-  votes: Array<$FlowFixMe>,
-};
-
-class OpinionVotesModal extends React.Component<Props, State> {
-  state = {
-    showModal: false,
-    isLoading: true,
-    votes: [],
-  };
+  getInitialState() {
+    return {
+      showModal: false,
+      isLoading: true,
+      votes: [],
+    };
+  },
 
   componentDidMount() {
     const { opinion } = this.props;
@@ -34,15 +30,15 @@ class OpinionVotesModal extends React.Component<Props, State> {
         votes,
       });
     });
-  }
+  },
 
-  show = () => {
+  show() {
     this.setState({ showModal: true });
-  };
+  },
 
-  close = () => {
+  close() {
     this.setState({ showModal: false });
-  };
+  },
 
   render() {
     const { opinion } = this.props;
@@ -93,7 +89,7 @@ class OpinionVotesModal extends React.Component<Props, State> {
         </Modal>
       </span>
     );
-  }
-}
+  },
+});
 
 export default OpinionVotesModal;

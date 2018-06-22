@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Tab, Nav, NavItem } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import ArgumentStore from '../../stores/ArgumentStore';
@@ -11,52 +11,45 @@ import VoteLinechart from '../Utils/VoteLinechart';
 import OpinionSourceStore from '../../stores/OpinionSourceStore';
 import { scrollToAnchor } from '../../services/ScrollToAnchor';
 
-type Props = {
-  opinion: Object,
-};
+const OpinionTabs = React.createClass({
+  propTypes: {
+    opinion: PropTypes.object.isRequired,
+  },
 
-type State = {
-  sourcesCount: number,
-  argumentsCount: number,
-};
-
-class OpinionTabs extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    const { opinion } = props;
-
-    this.state = {
+  getInitialState() {
+    const { opinion } = this.props;
+    return {
       sourcesCount: opinion.sourcesCount,
       argumentsCount: opinion.argumentsCount,
     };
-  }
+  },
 
   componentWillMount() {
     OpinionSourceStore.addChangeListener(this.onSourceChange);
     ArgumentStore.addChangeListener(this.onArgumentChange);
-  }
+  },
 
   componentDidMount() {
     setTimeout(scrollToAnchor, 20); // We use setTimeout to interact with DOM in componentDidMount (see React documentation)
-  }
+  },
 
   componentWillUnmount() {
     ArgumentStore.removeChangeListener(this.onArgumentChange);
-  }
+  },
 
-  onSourceChange = () => {
+  onSourceChange() {
     this.setState({
       sourcesCount: OpinionSourceStore.count,
     });
-  };
+  },
 
-  onArgumentChange = () => {
+  onArgumentChange() {
     this.setState({
       argumentsCount: ArgumentStore.count,
     });
-  };
+  },
 
-  getHashKey = (hash: string) => {
+  getHashKey(hash: string) {
     let key = null;
     if (hash.indexOf('arg') !== -1) {
       key = 'arguments';
@@ -71,20 +64,20 @@ class OpinionTabs extends React.Component<Props, State> {
       key = 'votesevolution';
     }
     return key;
-  };
+  },
 
-  getCommentSystem = () => {
+  getCommentSystem() {
     const opinion = this.props.opinion;
     return opinion.parent ? opinion.parent.type.commentSystem : opinion.type.commentSystem;
-  };
+  },
 
-  getArgumentsTrad = () => {
+  getArgumentsTrad() {
     return this.getCommentSystem() === COMMENT_SYSTEM_BOTH
       ? 'global.arguments'
       : 'global.simple_arguments';
-  };
+  },
 
-  getDefaultKey = () => {
+  getDefaultKey() {
     const hash = window.location.hash;
     if (hash) {
       return this.getHashKey(hash);
@@ -93,46 +86,46 @@ class OpinionTabs extends React.Component<Props, State> {
     return this.isVersionable()
       ? 'versions'
       : this.isCommentable() ? 'arguments' : this.isSourceable() ? 'sources' : null;
-  };
+  },
 
-  getType = () => {
+  getType() {
     const { opinion } = this.props;
     return opinion.parent ? opinion.parent.type : opinion.type;
-  };
+  },
 
-  isSourceable = () => {
+  isSourceable() {
     const type = this.getType();
     return type !== 'undefined' ? type.sourceable : false;
-  };
+  },
 
-  isCommentable = () => {
+  isCommentable() {
     return (
       this.getCommentSystem() === COMMENT_SYSTEM_SIMPLE ||
       this.getCommentSystem() === COMMENT_SYSTEM_BOTH
     );
-  };
+  },
 
-  isVersionable = () => {
+  isVersionable() {
     const opinion = this.props.opinion;
     return !this.isVersion() && opinion.type !== 'undefined' && opinion.type.versionable;
-  };
+  },
 
-  isVersion = () => {
+  isVersion() {
     const { opinion } = this.props;
     return !!opinion.parent;
-  };
+  },
 
-  hasStatistics = () => {
+  hasStatistics() {
     const { opinion } = this.props;
     return !!opinion.history;
-  };
+  },
 
-  isContribuable = () => {
+  isContribuable() {
     const { opinion } = this.props;
     return opinion.isContribuable;
-  };
+  },
 
-  renderVersionsContent = () => {
+  renderVersionsContent() {
     const { opinion } = this.props;
     return (
       <OpinionVersionsBox
@@ -141,7 +134,7 @@ class OpinionTabs extends React.Component<Props, State> {
         opinionBody={opinion.body}
       />
     );
-  };
+  },
 
   render() {
     const { opinion } = this.props;
@@ -228,7 +221,7 @@ class OpinionTabs extends React.Component<Props, State> {
     }
 
     return null;
-  }
-}
+  },
+});
 
 export default OpinionTabs;

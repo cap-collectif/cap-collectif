@@ -221,6 +221,6 @@ exports[`<EmailNotConfirmedAlert /> renders a disabled button when resending is 
 </Alert>
 `;
 
-exports[`<EmailNotConfirmedAlert /> renders nothing if logged user has confirmed his email 1`] = `""`;
+exports[`<EmailNotConfirmedAlert /> renders nothing if logged user has confirmed his email 1`] = `null`;
 
-exports[`<EmailNotConfirmedAlert /> renders nothing if not logged 1`] = `""`;
+exports[`<EmailNotConfirmedAlert /> renders nothing if not logged 1`] = `null`;

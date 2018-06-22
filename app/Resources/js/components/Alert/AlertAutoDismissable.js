@@ -1,19 +1,18 @@
-// @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Alert } from 'react-bootstrap';
 
-type Props = {
-  children: $FlowFixMe,
-  onDismiss: Function,
-  bsStyle: string,
-};
+const AlertAutoDismissable = React.createClass({
+  propTypes: {
+    children: PropTypes.element.isRequired,
+    onDismiss: PropTypes.func.isRequired,
+    bsStyle: PropTypes.string.isRequired,
+  },
 
-class AlertAutoDismissable extends React.Component<Props> {
   componentDidMount() {
     setTimeout(() => {
       this.props.onDismiss();
     }, 10000);
-  }
+  },
 
   render() {
     const { bsStyle, children, onDismiss } = this.props;
@@ -22,7 +21,7 @@ class AlertAutoDismissable extends React.Component<Props> {
         {children}
       </Alert>
     );
-  }
-}
+  },
+});
 
 export default AlertAutoDismissable;

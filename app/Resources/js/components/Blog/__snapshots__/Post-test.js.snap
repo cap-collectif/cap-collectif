@@ -29,12 +29,8 @@ exports[`<Post /> should render a post 1`] = `
     <p
       className="excerpt  media--news__meta"
     >
-      <span
-        key="0"
-      >
-        <a
-          key="0"
-        >
+      <span>
+        <a>
           <span
             className="label label-default"
           />
@@ -61,9 +57,7 @@ exports[`<Post /> should render a post 1`] = `
           Object {
             "author": <span>
               <span>
-                <a>
-                  
-                </a>
+                <a />
               </span>
             </span>,
           }

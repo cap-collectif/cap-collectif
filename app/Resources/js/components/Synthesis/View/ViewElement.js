@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 import ElementTitle from './../Element/ElementTitle';
@@ -11,37 +10,41 @@ import SynthesisPourcentageTooltipLabel, {
   calculPourcentage,
 } from './SynthesisPourcentageTooltipLabel';
 
-class ViewElement extends React.Component {
-  static propTypes = {
-    element: PropTypes.object.isRequired,
-    parent: PropTypes.object,
-    settings: PropTypes.array.isRequired,
-    onExpandElement: PropTypes.func.isRequired,
-  };
+const ViewElement = React.createClass({
+  propTypes: {
+    element: React.PropTypes.object.isRequired,
+    parent: React.PropTypes.object,
+    settings: React.PropTypes.array.isRequired,
+    onExpandElement: React.PropTypes.func.isRequired,
+  },
 
-  static defaultProps = {
-    parent: null,
-  };
+  getDefaultProps() {
+    return {
+      parent: null,
+    };
+  },
 
-  state = {
-    showChildrenModal: false,
-  };
+  getInitialState() {
+    return {
+      showChildrenModal: false,
+    };
+  },
 
-  openOriginalContribution = () => {
+  openOriginalContribution() {
     const { element } = this.props;
     window.open(element.linkedDataUrl);
     return false;
-  };
+  },
 
-  toggleChildrenModal = value => {
+  toggleChildrenModal(value) {
     const { element, onExpandElement } = this.props;
     onExpandElement(element);
     this.setState({
       showChildrenModal: value,
     });
-  };
+  },
 
-  renderAuthor = () => {
+  renderAuthor() {
     const { element, settings } = this.props;
     if (SynthesisDisplayRules.getValueForRule(settings, 'display', 'author')) {
       return (
@@ -52,9 +55,9 @@ class ViewElement extends React.Component {
       );
     }
     return null;
-  };
+  },
 
-  renderPieChart = () => {
+  renderPieChart() {
     const { element, settings } = this.props;
     const votes = element.votes;
     if (SynthesisDisplayRules.getValueForRule(settings, 'display', 'piechart')) {
@@ -80,9 +83,9 @@ class ViewElement extends React.Component {
       );
     }
     return null;
-  };
+  },
 
-  renderCounters = () => {
+  renderCounters() {
     const { element, settings } = this.props;
     if (SynthesisDisplayRules.getValueForRule(settings, 'display', 'counters')) {
       return (
@@ -103,9 +106,9 @@ class ViewElement extends React.Component {
       );
     }
     return null;
-  };
+  },
 
-  renderSubtitle = () => {
+  renderSubtitle() {
     const { element, settings } = this.props;
     if (
       SynthesisDisplayRules.getValueForRule(settings, 'display', 'subtitle') &&
@@ -114,9 +117,9 @@ class ViewElement extends React.Component {
       return <p className="small excerpt">{element.subtitle}</p>;
     }
     return null;
-  };
+  },
 
-  renderPercentage = () => {
+  renderPercentage() {
     const { element, parent, settings } = this.props;
     if (SynthesisDisplayRules.getValueForRule(settings, 'display', 'percentage') && parent) {
       return (
@@ -132,16 +135,16 @@ class ViewElement extends React.Component {
       );
     }
     return null;
-  };
+  },
 
-  renderDescription = () => {
+  renderDescription() {
     const { element } = this.props;
     if (element.description) {
       return <p className="synthesis__element__description">{element.description}</p>;
     }
-  };
+  },
 
-  renderTitle = () => {
+  renderTitle() {
     const { element, settings } = this.props;
     const childrenModal = SynthesisDisplayRules.getValueForRule(
       settings,
@@ -157,9 +160,9 @@ class ViewElement extends React.Component {
         onClick={childrenModal ? this.toggleChildrenModal.bind(null, true) : null}
       />
     );
-  };
+  },
 
-  renderAsProgressBar = () => {
+  renderAsProgressBar() {
     const { element, parent } = this.props;
     if (parent) {
       return (
@@ -183,7 +186,7 @@ class ViewElement extends React.Component {
       );
     }
     return null;
-  };
+  },
 
   render() {
     const { element, settings } = this.props;
@@ -213,7 +216,7 @@ class ViewElement extends React.Component {
         />
       </div>
     );
-  }
-}
+  },
+});
 
 export default ViewElement;

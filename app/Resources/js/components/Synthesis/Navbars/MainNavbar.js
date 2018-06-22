@@ -4,8 +4,8 @@ import MainNavbarHeader from './MainNavbarHeader';
 import MainNavbarUser from './MainNavbarUser';
 import MainNavbarSearch from './MainNavbarSearch';
 
-class MainNavbar extends React.Component {
-  static displayName = 'MainNavbar';
+const MainNavbar = React.createClass({
+  displayName: 'MainNavbar',
 
   render() {
     return (
@@ -15,7 +15,7 @@ class MainNavbar extends React.Component {
         <MainNavbarSearch />
       </Navbar>
     );
-  }
-}
+  },
+});
 
 export default MainNavbar;

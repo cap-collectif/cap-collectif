@@ -1,4 +1,4 @@
-// import React from 'react';
+// import React, { PropTypes } from 'react';
 // import { FormattedMessage } from 'react-intl';
 // import FlashMessages from '../../Utils/FlashMessages';
 // import UserActions from '../../../actions/UserActions';

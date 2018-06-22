@@ -1,12 +1,11 @@
-// @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-type Props = {
-  comment: Object,
-};
+const CommentEdit = React.createClass({
+  propTypes: {
+    comment: React.PropTypes.object,
+  },
 
-class CommentEdit extends React.Component<Props> {
   render() {
     const { comment } = this.props;
     if (comment.canEdit) {
@@ -19,7 +18,7 @@ class CommentEdit extends React.Component<Props> {
     }
 
     return <a />;
-  }
-}
+  },
+});
 
 export default CommentEdit;

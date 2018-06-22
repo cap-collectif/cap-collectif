@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
@@ -10,14 +10,14 @@ import { hideNewFieldModal } from '../../redux/modules/default';
 import type { Dispatch, State } from '../../types';
 import AddRegistrationQuestionForm, { formName } from './AddRegistrationQuestionForm';
 
-type Props = {
-  submitting: boolean,
-  show: boolean,
-  onSubmit: (e: Event) => void,
-  onClose: () => void,
-};
+export const AddRegistrationQuestionModal = React.createClass({
+  propTypes: {
+    submitting: PropTypes.bool.isRequired,
+    show: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+  },
 
-export class AddRegistrationQuestionModal extends React.Component<Props> {
   render() {
     const { submitting, show, onClose, onSubmit } = this.props;
     return (
@@ -51,8 +51,15 @@ export class AddRegistrationQuestionModal extends React.Component<Props> {
         </Modal.Footer>
       </Modal>
     );
-  }
-}
+  },
+});
+
+type Props = {
+  submitting: boolean,
+  show: boolean,
+  onSubmit: (e: Event) => void,
+  onClose: () => void,
+};
 
 const mapStateToProps = (state: State) => ({
   submitting: isSubmitting(formName)(state),

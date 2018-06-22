@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
 import { ButtonToolbar } from 'react-bootstrap';
 import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
@@ -10,35 +10,37 @@ import OpinionDelete from './Delete/OpinionDelete';
 import OpinionEditButton from './OpinionEditButton';
 import type { State } from '../../types';
 
-type Props = {
-  opinion: Object,
-  user?: Object,
-};
+const OpinionButtons = React.createClass({
+  propTypes: {
+    opinion: PropTypes.object.isRequired,
+    user: PropTypes.object,
+  },
 
-class OpinionButtons extends React.Component<Props> {
-  static defaultProps = {
-    user: null,
-  };
+  getDefaultProps() {
+    return {
+      user: null,
+    };
+  },
 
-  isVersion = () => {
+  isVersion() {
     const { opinion } = this.props;
     return !!opinion.parent;
-  };
+  },
 
-  isContribuable = () => {
+  isContribuable() {
     const { opinion } = this.props;
     return opinion.isContribuable;
-  };
+  },
 
-  isTheUserTheAuthor = () => {
+  isTheUserTheAuthor() {
     const { opinion, user } = this.props;
     if (opinion.author === null || !user) {
       return false;
     }
     return user.uniqueId === opinion.author.uniqueId;
-  };
+  },
 
-  renderEditButton = () => {
+  renderEditButton() {
     const { opinion } = this.props;
     if (this.isContribuable() && this.isTheUserTheAuthor()) {
       if (this.isVersion()) {
@@ -58,7 +60,7 @@ class OpinionButtons extends React.Component<Props> {
         />
       );
     }
-  };
+  },
 
   render() {
     const opinion = this.props.opinion;
@@ -76,8 +78,8 @@ class OpinionButtons extends React.Component<Props> {
         <OpinionVersionEditModal />
       </ButtonToolbar>
     );
-  }
-}
+  },
+});
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   features: state.default.features,

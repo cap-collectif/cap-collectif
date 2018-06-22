@@ -1,25 +1,22 @@
-// @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Modal } from 'react-bootstrap';
-import { connect, type MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import { FormattedMessage } from 'react-intl';
 import CloseButton from '../Form/CloseButton';
 import SubmitButton from '../Form/SubmitButton';
 import ReportForm, { formName } from './ReportForm';
 import { closeModal } from '../../redux/modules/report';
-import type { State, Dispatch } from '../../types';
 
-type Props = {
-  id: string,
-  dispatch: Dispatch,
-  isLoading?: boolean,
-  show: boolean,
-  onSubmit: Function,
-};
+const ReportModal = React.createClass({
+  displayName: 'ReportModal',
 
-class ReportModal extends React.Component<Props> {
-  static displayName = 'ReportModal';
+  propTypes: {
+    dispatch: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    show: PropTypes.bool.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+  },
 
   render() {
     const { dispatch, isLoading, show, onSubmit } = this.props;
@@ -50,11 +47,13 @@ class ReportModal extends React.Component<Props> {
         </Modal.Footer>
       </Modal>
     );
-  }
-}
-
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props) => ({
-  isLoading: state.report.currentReportingModal === props.id && isSubmitting(formName)(state),
+  },
 });
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    isLoading: state.report.currentReportingModal === ownProps.id && isSubmitting(formName)(state),
+  };
+};
 
 export default connect(mapStateToProps)(ReportModal);

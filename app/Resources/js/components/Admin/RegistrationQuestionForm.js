@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps, type Connector } from 'react-redux';
 import { Field, FieldArray, formValueSelector } from 'redux-form';
@@ -35,8 +35,11 @@ const renderDynamicFields = (
 type Props = {
   showChoices: boolean,
 };
+export const RegistrationQuestionForm = React.createClass({
+  propTypes: {
+    showChoices: PropTypes.bool.isRequired,
+  },
 
-export class RegistrationQuestionForm extends React.Component<Props> {
   render() {
     const { showChoices } = this.props;
     return (
@@ -72,8 +75,8 @@ export class RegistrationQuestionForm extends React.Component<Props> {
         {showChoices && <FieldArray name="choices" component={renderDynamicFields} />}
       </form>
     );
-  }
-}
+  },
+});
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: { form: string }) => ({
   showChoices: formValueSelector(props.form)(state, 'type') === '4',

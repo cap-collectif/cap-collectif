@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Row, Col, ListGroup } from 'react-bootstrap';
 import { DropTarget, DragDropContext } from 'react-dnd';
@@ -11,46 +11,40 @@ const itemTarget = {
   drop() {},
 };
 
-type Props = {
-  field: Object,
-  connectDropTarget: Function,
-  onRankingChange: Function,
-  disabled: boolean,
-  onBlur: Function,
-};
+const RankingBlock = React.createClass({
+  displayName: 'RankingBlock',
 
-type State = {
-  items: {
-    pickBox: Array<Object>,
-    choiceBox: Array<Object>,
+  propTypes: {
+    field: PropTypes.object.isRequired,
+    connectDropTarget: PropTypes.func.isRequired,
+    onRankingChange: PropTypes.func.isRequired,
+    disabled: PropTypes.bool,
+    onBlur: PropTypes.func,
   },
-  choicesHeight: string,
-};
 
-export class RankingBlock extends React.Component<Props, State> {
-  static displayName = 'RankingBlock';
-
-  constructor(props: Props) {
-    super(props);
-
-    this.props = {
+  getDefaultProps() {
+    return {
       disabled: false,
     };
+  },
 
-    this.state = {
+  getInitialState() {
+    const { field } = this.props;
+
+    return {
       items: {
-        pickBox: props.field.choices,
-        choiceBox: props.field.values || [],
+        pickBox: field.choices,
+        choiceBox: field.values || [],
       },
       choicesHeight: 'auto',
     };
-  }
+  },
 
   componentDidMount() {
     this.recalculateChoicesHeight();
-  }
+  },
 
-  moveItem = (atList, atIndex, it) => {
+  moveItem(atList, atIndex, it) {
     const { onRankingChange, onBlur } = this.props;
     const { item, list, index } = this.findItem(it.id);
     const items = JSON.parse(JSON.stringify(this.state.items));
@@ -67,16 +61,16 @@ export class RankingBlock extends React.Component<Props, State> {
     );
 
     onBlur();
-  };
+  },
 
   recalculateChoicesHeight() {
     const height = `${$(ReactDOM.findDOMNode(this.choiceBox)).height()}px`;
-    if (height !== '0px' && height !== 'undefinedpx') {
+    if (height !== '0px') {
       this.setState({
         choicesHeight: height,
       });
     }
-  }
+  },
 
   findItem(id) {
     const { items } = this.state;
@@ -97,11 +91,11 @@ export class RankingBlock extends React.Component<Props, State> {
       list: itemList,
       index: itemIndex,
     };
-  }
+  },
 
   reset() {
     this.setState(this.getInitialState());
-  }
+  },
 
   render() {
     if (__SERVER__) {
@@ -157,8 +151,8 @@ export class RankingBlock extends React.Component<Props, State> {
         </Row>
       </div>,
     );
-  }
-}
+  },
+});
 
 export default DragDropContext(HTML5Backend)(
   DropTarget(ITEM_TYPE, itemTarget, connect => ({

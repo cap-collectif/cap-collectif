@@ -1,12 +1,12 @@
 import React from 'react';
 
-type Props = {
-  element: Object,
-  classes: string,
-};
+const ElementNotation = React.createClass({
+  propTypes: {
+    element: React.PropTypes.object,
+    classes: React.PropTypes.string,
+  },
 
-class ElementNotation extends React.Component<Props> {
-  getNotationStarsClasses = () => {
+  getNotationStarsClasses() {
     const { element } = this.props;
     const notation = element.notation;
     const classes = [];
@@ -16,7 +16,7 @@ class ElementNotation extends React.Component<Props> {
       }
     }
     return classes;
-  };
+  },
 
   render() {
     const { element } = this.props;
@@ -43,7 +43,7 @@ class ElementNotation extends React.Component<Props> {
       );
     }
     return <span className="element__notation" />;
-  }
-}
+  },
+});
 
 export default ElementNotation;

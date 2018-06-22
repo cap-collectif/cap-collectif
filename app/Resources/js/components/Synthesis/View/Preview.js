@@ -1,15 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import TreeView from '../TreeView';
 
-class Preview extends React.Component {
-  static propTypes = {
-    synthesis: PropTypes.object,
-  };
+const Preview = React.createClass({
+  propTypes: {
+    synthesis: React.PropTypes.object,
+  },
 
-  static defaultProps = {
-    synthesis: {},
-  };
+  getDefaultProps() {
+    return {
+      synthesis: {},
+    };
+  },
 
   render() {
     const { synthesis } = this.props;
@@ -18,7 +19,7 @@ class Preview extends React.Component {
         <TreeView synthesis={synthesis} />
       </div>
     );
-  }
-}
+  },
+});
 
 export default Preview;

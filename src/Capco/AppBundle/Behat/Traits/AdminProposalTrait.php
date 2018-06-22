@@ -83,13 +83,13 @@ trait AdminProposalTrait
         $this->getCurrentPage()->find('css', '#evaluers .Select-input input')->setValue($analyst1);
         $this->iWait(3);
         $this->getCurrentPage()->find('css', '#evaluers')->click();
-        $this->getCurrentPage()->find('css', '#evaluers .Select-option:nth-child(1)')->click();
+        $this->getCurrentPage()->find('css', '#evaluers .Select-option[id*="-option-1"]')->click();
         $this->iWait(3);
         $this->getCurrentPage()->find('css', '#evaluers .Select-input input')->setValue($analyst2);
         $this->iWait(2);
         $this->getCurrentPage()->find('css', '#evaluers')->click();
         $this->iWait(2);
-        $this->getCurrentPage()->find('css', '#evaluers .Select-option:nth-child(1)')->click();
+        $this->getCurrentPage()->find('css', '#evaluers .Select-option[id*="-option-1"]')->click();
     }
 
     /**

@@ -25,7 +25,6 @@ exports[`<ProposalList /> should render a collectStep proposal list 1`] = `
     className="media-list proposal-preview-list opinion__list"
   >
     <Relay(ProposalPreview)
-      key="0"
       proposal={
         Object {
           "$fragmentRefs": null,
@@ -42,7 +41,6 @@ exports[`<ProposalList /> should render a collectStep proposal list 1`] = `
       viewer={null}
     />
     <Relay(ProposalPreview)
-      key="1"
       proposal={
         Object {
           "$fragmentRefs": null,
@@ -71,7 +69,6 @@ exports[`<ProposalList /> should render a selectionStep proposal list 1`] = `
     className="media-list proposal-preview-list opinion__list"
   >
     <Relay(ProposalPreview)
-      key="0"
       proposal={
         Object {
           "$fragmentRefs": null,
@@ -88,7 +85,6 @@ exports[`<ProposalList /> should render a selectionStep proposal list 1`] = `
       viewer={null}
     />
     <Relay(ProposalPreview)
-      key="1"
       proposal={
         Object {
           "$fragmentRefs": null,

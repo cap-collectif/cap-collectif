@@ -1,37 +1,38 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Button, Modal } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { hashHistory } from 'react-router';
 import SynthesisElementActions from '../../../actions/SynthesisElementActions';
 
-class IgnoreButton extends React.Component {
-  static propTypes = {
-    synthesis: PropTypes.object,
-    element: PropTypes.object,
-  };
+const IgnoreButton = React.createClass({
+  propTypes: {
+    synthesis: React.PropTypes.object,
+    element: React.PropTypes.object,
+  },
 
-  state = {
-    showConfirmModal: false,
-  };
+  getInitialState() {
+    return {
+      showConfirmModal: false,
+    };
+  },
 
   componentWillUnmount() {
     this.hideConfirmModal();
-  }
+  },
 
-  showConfirmModal = () => {
+  showConfirmModal() {
     this.setState({
       showConfirmModal: true,
     });
-  };
+  },
 
-  hideConfirmModal = () => {
+  hideConfirmModal() {
     this.setState({
       showConfirmModal: false,
     });
-  };
+  },
 
-  ignore = () => {
+  ignore() {
     const { element, synthesis } = this.props;
     this.hideConfirmModal();
     const data = {
@@ -40,9 +41,9 @@ class IgnoreButton extends React.Component {
     };
     SynthesisElementActions.update(synthesis.id, element.id, data);
     hashHistory.push('inbox', { type: 'new' });
-  };
+  },
 
-  renderConfirmButton = () => {
+  renderConfirmButton() {
     return (
       <Button
         bsSize="large"
@@ -52,9 +53,9 @@ class IgnoreButton extends React.Component {
         <i className="cap cap-delete-2" />
       </Button>
     );
-  };
+  },
 
-  renderConfirmModal = () => {
+  renderConfirmModal() {
     const { element } = this.props;
     return (
       <Modal
@@ -89,7 +90,7 @@ class IgnoreButton extends React.Component {
         </Modal.Footer>
       </Modal>
     );
-  };
+  },
 
   render() {
     return (
@@ -98,7 +99,7 @@ class IgnoreButton extends React.Component {
         {this.renderConfirmModal()}
       </div>
     );
-  }
-}
+  },
+});
 
 export default IgnoreButton;

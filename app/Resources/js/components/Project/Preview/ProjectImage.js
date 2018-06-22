@@ -2,11 +2,11 @@
 import * as React from 'react';
 import DefaultProjectImage from './DefaultProjectImage';
 
-type Props = {
-  project: Object,
-};
+const ProjectImage = React.createClass({
+  propTypes: {
+    project: React.PropTypes.object.isRequired,
+  },
 
-class ProjectImage extends React.Component<Props> {
   render() {
     const { project } = this.props;
     if (project.cover) {
@@ -17,7 +17,7 @@ class ProjectImage extends React.Component<Props> {
         {!project.video ? <DefaultProjectImage /> : null}
       </div>
     );
-  }
-}
+  },
+});
 
 export default ProjectImage;

@@ -1,5 +1,5 @@
 /* @flow */
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Nav, NavDropdown, MenuItem, NavItem } from 'react-bootstrap';
@@ -9,22 +9,24 @@ import LoginActions from '../../actions/LoginActions';
 import UserAvatar from '../User/UserAvatar';
 import type { State } from '../../types';
 
-type Props = {
-  user?: Object,
-  features: Object,
-};
+export const NavbarRight = React.createClass({
+  propTypes: {
+    user: PropTypes.object,
+    features: PropTypes.object.isRequired,
+  },
 
-export class NavbarRight extends React.Component<Props> {
-  static defaultProps = {
-    user: null,
-  };
+  getDefaultProps() {
+    return {
+      user: null,
+    };
+  },
 
-  logout = () => {
+  logout() {
     // suppress jwt
     LoginActions.logoutUser();
     // We redirect to /logout page to invalidate session on the server
     window.location.href = `${window.location.protocol}//${window.location.host}/logout`;
-  };
+  },
 
   render() {
     const { user, features } = this.props;
@@ -87,8 +89,8 @@ export class NavbarRight extends React.Component<Props> {
         )}
       </Nav>
     );
-  }
-}
+  },
+});
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
   return {

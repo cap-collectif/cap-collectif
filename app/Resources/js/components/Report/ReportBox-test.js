@@ -1,4 +1,3 @@
-// @flow
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
@@ -7,9 +6,9 @@ import { ReportBox } from './ReportBox';
 describe('<ReportBox />', () => {
   const defaultProps = {
     id: 'opinion-1',
-    dispatch: jest.fn(),
+    dispatch: () => {},
     showModal: false,
-    onReport: jest.fn(),
+    onReport: () => {},
     reported: false,
     show: false,
     features: { reporting: true },
@@ -40,7 +39,7 @@ describe('<ReportBox />', () => {
   });
 
   it('renders a ReportButton if not logged in', () => {
-    const wrapper = shallow(<ReportBox {...defaultProps} />);
+    const wrapper = shallow(<ReportBox {...defaultProps} user={null} />);
     const button = wrapper.find('Connect(ReportButton)');
     expect(button).toHaveLength(1);
   });

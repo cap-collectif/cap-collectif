@@ -1,5 +1,4 @@
-// @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { DragSource } from 'react-dnd';
 import classNames from 'classnames';
 import { ITEM_TYPE } from '../../constants/RankingConstants';
@@ -17,22 +16,23 @@ const itemSource = {
   },
 };
 
-type Props = {
-  id: string,
-  item: Object,
-  position?: number,
-  connectDragSource: Function,
-  isDragging: boolean,
-  arrowFunctions?: Object,
-  disabled: boolean,
-};
+const RankingItem = React.createClass({
+  displayName: 'RankingItem',
+  propTypes: {
+    id: PropTypes.string.isRequired,
+    item: PropTypes.object.isRequired,
+    position: PropTypes.number,
+    connectDragSource: PropTypes.func.isRequired,
+    isDragging: PropTypes.bool.isRequired,
+    arrowFunctions: PropTypes.object,
+    disabled: PropTypes.bool.isRequired,
+  },
 
-class RankingItem extends React.Component<Props> {
-  static displayName = 'RankingItem';
-
-  static defaultProps = {
-    position: null,
-  };
+  getDefaultProps() {
+    return {
+      position: null,
+    };
+  },
 
   render() {
     const {
@@ -74,8 +74,8 @@ class RankingItem extends React.Component<Props> {
         <RankingArrows item={item} arrowFunctions={arrowFunctions} disabled={disabled} />
       </div>,
     );
-  }
-}
+  },
+});
 
 export default DragSource(ITEM_TYPE, itemSource, (connect, monitor) => ({
   // eslint-disable-line new-cap

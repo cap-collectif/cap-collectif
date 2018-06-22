@@ -1,4 +1,3 @@
-// @flow
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
@@ -12,7 +11,6 @@ describe('<Field />', () => {
       autoFocus: false,
       name: 'name',
       label: 'label',
-      disableValidation: false,
     },
     meta: {
       touched: false,

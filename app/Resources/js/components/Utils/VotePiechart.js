@@ -1,31 +1,31 @@
-// @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-type Props = {
-  ok?: number,
-  nok?: number,
-  mitige?: number,
-  height?: string,
-  width?: string,
-  top?: number,
-  left?: number,
-};
+const VotePiechart = React.createClass({
+  propTypes: {
+    ok: PropTypes.number,
+    nok: PropTypes.number,
+    mitige: PropTypes.number,
+    height: PropTypes.string,
+    width: PropTypes.string,
+    top: PropTypes.number,
+    left: PropTypes.number,
+  },
 
-class VotePiechart extends React.Component<Props> {
-  static defaultProps = {
-    ok: 0,
-    nok: 0,
-    mitige: 0,
-    height: '100%',
-    width: '100%',
-    top: 0,
-    left: 0,
-  };
+  getDefaultProps() {
+    return {
+      ok: 0,
+      nok: 0,
+      mitige: 0,
+      height: '100%',
+      width: '100%',
+      top: 0,
+      left: 0,
+    };
+  },
 
   render() {
     const { ok, mitige, nok, left, top, height, width } = this.props;
-    // $FlowFixMe
     if (!__SERVER__ && ok + mitige + nok > 0) {
       const Chart = require('react-google-charts').Chart; // eslint-disable-line
       return (
@@ -57,7 +57,7 @@ class VotePiechart extends React.Component<Props> {
       );
     }
     return null;
-  }
-}
+  },
+});
 
 export default VotePiechart;

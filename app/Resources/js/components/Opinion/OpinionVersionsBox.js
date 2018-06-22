@@ -9,39 +9,33 @@ import Loader from '../Ui/Loader';
 import Fetcher from '../../services/Fetcher';
 import OpinionVersionCreateModal from './OpinionVersionCreateModal';
 
-type Props = {
-  opinionId: string,
-  opinionBody: string,
-};
+const OpinionVersionsBox = React.createClass({
+  propTypes: {
+    opinionId: React.PropTypes.string.isRequired,
+    opinionBody: React.PropTypes.string.isRequired,
+  },
 
-type State = {
-  versions: Array<$FlowFixMe>,
-  isLoading: boolean,
-  filter: string,
-  offset: number,
-  rankingThreshold: $FlowFixMe,
-};
-
-class OpinionVersionsBox extends React.Component<Props, State> {
-  state = {
-    versions: [],
-    isLoading: true,
-    filter: 'last',
-    offset: 0,
-    rankingThreshold: null,
-  };
+  getInitialState() {
+    return {
+      versions: [],
+      isLoading: true,
+      filter: 'last',
+      offset: 0,
+      rankingThreshold: null,
+    };
+  },
 
   componentDidMount() {
     this.loadVersionsFromServer();
-  }
+  },
 
   componentDidUpdate(prevProps: Object, prevState: Object) {
     if (this.state.filter !== prevState.filter) {
       this.loadVersionsFromServer();
     }
-  }
+  },
 
-  updateSelectedValue = () => {
+  updateSelectedValue() {
     const element = ReactDOM.findDOMNode(this.refs.filter);
     if (element instanceof Element) {
       this.setState({
@@ -50,9 +44,9 @@ class OpinionVersionsBox extends React.Component<Props, State> {
         versions: [],
       });
     }
-  };
+  },
 
-  loadVersionsFromServer = () => {
+  loadVersionsFromServer() {
     const { opinionId } = this.props;
     this.setState({ isLoading: true });
 
@@ -66,9 +60,9 @@ class OpinionVersionsBox extends React.Component<Props, State> {
       });
       return true;
     });
-  };
+  },
 
-  renderFilter = () => {
+  renderFilter() {
     if (this.state.versions.length > 1) {
       return (
         <form>
@@ -103,7 +97,7 @@ class OpinionVersionsBox extends React.Component<Props, State> {
         </form>
       );
     }
-  };
+  },
 
   render() {
     return (
@@ -127,7 +121,7 @@ class OpinionVersionsBox extends React.Component<Props, State> {
         )}
       </div>
     );
-  }
-}
+  },
+});
 
 export default OpinionVersionsBox;

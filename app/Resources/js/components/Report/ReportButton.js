@@ -47,9 +47,9 @@ export class ReportButton extends React.PureComponent<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props) => {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, ownProps) => {
   return {
-    reported: props.reported || state.report.elements.includes(props.id),
+    reported: ownProps.reported || state.report.elements.includes(ownProps.id),
   };
 };
 

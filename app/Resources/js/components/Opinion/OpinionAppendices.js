@@ -3,15 +3,17 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import OpinionAppendix from './OpinionAppendix';
 
-type Props = { opinion: Object };
+const OpinionAppendices = React.createClass({
+  propTypes: {
+    opinion: React.PropTypes.object.isRequired,
+  },
 
-class OpinionAppendices extends React.Component<Props> {
-  isVersion = () => {
+  isVersion() {
     const { opinion } = this.props;
     return !!opinion.parent;
-  };
+  },
 
-  hasAppendices = () => {
+  hasAppendices() {
     const { opinion } = this.props;
     const appendices = this.isVersion() ? opinion.parent.appendices : opinion.appendices;
     if (!appendices) {
@@ -20,7 +22,7 @@ class OpinionAppendices extends React.Component<Props> {
     return appendices.some((app: Object) => {
       return !!app.body;
     });
-  };
+  },
 
   render() {
     if (!this.hasAppendices()) {
@@ -44,7 +46,7 @@ class OpinionAppendices extends React.Component<Props> {
         })}
       </div>
     );
-  }
-}
+  },
+});
 
 export default OpinionAppendices;

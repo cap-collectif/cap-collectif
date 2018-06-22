@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
@@ -51,12 +51,12 @@ const onSubmit = (values, dispatch, props) => {
 
 export const formName = 'opinion-source-form';
 
-type Props = {
-  opinion: Object,
-  source?: Object,
-};
+const OpinionSourceForm = React.createClass({
+  propTypes: {
+    opinion: PropTypes.object.isRequired,
+    source: PropTypes.object,
+  },
 
-class OpinionSourceForm extends React.Component<Props> {
   render() {
     const { source } = this.props;
     return (
@@ -115,8 +115,8 @@ class OpinionSourceForm extends React.Component<Props> {
         />
       </form>
     );
-  }
-}
+  },
+});
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state, { source }) => ({
   initialValues: {

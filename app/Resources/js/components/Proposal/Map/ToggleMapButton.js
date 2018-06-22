@@ -1,22 +1,22 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import type { State } from '../../../types';
 
-type Props = {
-  onChange: Function,
-  mode: string,
-};
+export const ToggleMapButton = React.createClass({
+  propTypes: {
+    onChange: PropTypes.func.isRequired,
+    mode: PropTypes.string.isRequired,
+  },
 
-export class ToggleMapButton extends React.Component<Props> {
-  handleClick = (chooseMode: $FlowFixMe) => {
+  handleClick(chooseMode) {
     const { onChange, mode } = this.props;
     if (chooseMode && chooseMode !== mode) {
       onChange(chooseMode);
     }
-  };
+  },
 
   render() {
     const { mode } = this.props;
@@ -46,8 +46,8 @@ export class ToggleMapButton extends React.Component<Props> {
         </Button>
       </div>
     );
-  }
-}
+  },
+});
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   mode: state.proposal.selectedViewByStep || 'mosaic',

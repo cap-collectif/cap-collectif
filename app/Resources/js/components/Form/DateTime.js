@@ -1,13 +1,13 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import BaseDateTime from 'react-datetime';
 
-type Props = {
-  value?: any,
-  onChange: Function,
-};
+const DateTime = React.createClass({
+  propTypes: {
+    value: PropTypes.any,
+    onChange: PropTypes.func.isRequired,
+  },
 
-class DateTime extends React.Component<Props> {
   render() {
     const { onChange } = this.props;
     return (
@@ -20,7 +20,7 @@ class DateTime extends React.Component<Props> {
         }}
       />
     );
-  }
-}
+  },
+});
 
 export default DateTime;

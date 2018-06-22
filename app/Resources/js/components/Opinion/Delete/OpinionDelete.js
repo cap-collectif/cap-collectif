@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { Modal, Button } from 'react-bootstrap';
@@ -7,40 +7,39 @@ import OpinionActions from '../../../actions/OpinionActions';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 
-type Props = {
-  opinion: Object,
-  user?: Object,
-};
+const OpinionDelete = React.createClass({
+  propTypes: {
+    opinion: PropTypes.object.isRequired,
+    user: PropTypes.object,
+  },
 
-type State = {
-  showModal: boolean,
-  isSubmitting: boolean,
-};
+  getDefaultProps() {
+    return {
+      user: null,
+    };
+  },
 
-class OpinionDelete extends React.Component<Props, State> {
-  static defaultProps = {
-    user: null,
-  };
+  getInitialState() {
+    return {
+      showModal: false,
+      isSubmitting: false,
+    };
+  },
 
-  state = {
-    showModal: false,
-    isSubmitting: false,
-  };
-
-  showModal = () => {
+  showModal() {
     this.setState({ showModal: true });
-  };
+  },
 
-  hideModal = () => {
+  hideModal() {
     this.setState({ showModal: false });
-  };
+  },
 
-  isVersion = () => {
+  isVersion() {
     const { opinion } = this.props;
     return !!opinion.parent;
-  };
+  },
 
-  delete = () => {
+  delete() {
     const { opinion } = this.props;
     this.setState({ isSubmitting: true });
     if (this.isVersion()) {
@@ -52,15 +51,15 @@ class OpinionDelete extends React.Component<Props, State> {
         window.location.href = opinion._links.type;
       });
     }
-  };
+  },
 
-  isTheUserTheAuthor = () => {
+  isTheUserTheAuthor() {
     const { opinion, user } = this.props;
     if (opinion.author === null || !user) {
       return false;
     }
     return user.uniqueId === opinion.author.uniqueId;
-  };
+  },
 
   render() {
     if (this.isTheUserTheAuthor()) {
@@ -106,8 +105,8 @@ class OpinionDelete extends React.Component<Props, State> {
     }
 
     return null;
-  }
-}
+  },
+});
 
 const mapStateToProps: MapStateToProps<*, *, *> = state => {
   return {

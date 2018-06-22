@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import classNames from 'classnames';
 import SynthesisElementStore from '../../stores/SynthesisElementStore';
@@ -11,39 +10,41 @@ import Loader from '../Ui/Loader';
 import IgnoreButton from './Ignore/IgnoreButton';
 import UpdateButton from './Edit/UpdateButton';
 
-class FolderManager extends React.Component {
-  static propTypes = {
-    synthesis: PropTypes.object,
-  };
+const FolderManager = React.createClass({
+  propTypes: {
+    synthesis: React.PropTypes.object,
+  },
 
-  state = {
-    elements: [],
-    expanded: {
-      root: true,
-    },
-    isLoading: true,
-  };
+  getInitialState() {
+    return {
+      elements: [],
+      expanded: {
+        root: true,
+      },
+      isLoading: true,
+    };
+  },
 
   componentWillMount() {
     SynthesisElementStore.addChangeListener(this.onChange);
-  }
+  },
 
   componentDidMount() {
     this.loadElementsTreeFromServer();
-  }
+  },
 
   componentWillUnmount() {
     SynthesisElementStore.removeChangeListener(this.onChange);
-  }
+  },
 
-  onChange = () => {
+  onChange() {
     this.setState({
       elements: SynthesisElementStore.elements.notIgnoredTree,
       isLoading: false,
     });
-  };
+  },
 
-  toggleExpand = element => {
+  toggleExpand(element) {
     const { synthesis } = this.props;
     if (element.childrenCount !== element.children.length) {
       SynthesisElementActions.loadElementsTreeFromServer(synthesis.id, 'notIgnored', element.id);
@@ -53,14 +54,14 @@ class FolderManager extends React.Component {
     this.setState({
       expanded,
     });
-  };
+  },
 
-  loadElementsTreeFromServer = () => {
+  loadElementsTreeFromServer() {
     const { synthesis } = this.props;
     SynthesisElementActions.loadElementsTreeFromServer(synthesis.id, 'notIgnored');
-  };
+  },
 
-  renderButtons = element => {
+  renderButtons(element) {
     const { synthesis } = this.props;
     if (element.displayType === 'folder') {
       return (
@@ -71,9 +72,9 @@ class FolderManager extends React.Component {
       );
     }
     return null;
-  };
+  },
 
-  renderItemCaret = element => {
+  renderItemCaret(element) {
     const classes = classNames({
       tree__item__caret: true,
       'cap-arrow-67': this.state.expanded[element.id],
@@ -82,9 +83,9 @@ class FolderManager extends React.Component {
     if (element.childrenCount > 0) {
       return <i className={classes} onClick={this.toggleExpand.bind(this, element)} />;
     }
-  };
+  },
 
-  renderTreeItems = (elements, level) => {
+  renderTreeItems(elements, level) {
     if (elements) {
       return (
         <ul className={`tree__list tree--level-${level}`}>
@@ -101,9 +102,9 @@ class FolderManager extends React.Component {
         </ul>
       );
     }
-  };
+  },
 
-  renderTreeItemContent = element => {
+  renderTreeItemContent(element) {
     return (
       <div className="tree__item__content box">
         {this.renderItemCaret(element)}
@@ -121,7 +122,7 @@ class FolderManager extends React.Component {
         </span>
       </div>
     );
-  };
+  },
 
   render() {
     return (
@@ -130,7 +131,7 @@ class FolderManager extends React.Component {
         {this.renderTreeItems(this.state.elements, 0)}
       </div>
     );
-  }
-}
+  },
+});
 
 export default FolderManager;

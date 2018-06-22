@@ -1,5 +1,5 @@
 // @flow
-import React, { Fragment } from 'react';
+import React from 'react';
 import { FormattedMessage, FormattedDate } from 'react-intl';
 import { ListGroupItem } from 'react-bootstrap';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -37,32 +37,28 @@ export class ReplyModalLink extends React.Component<Props, State> {
     const { reply, questionnaire } = this.props;
 
     return (
-      <Fragment>
-        <ListGroupItem className="reply" id={`reply-link-${reply.id}`} onClick={this.showModal}>
-          <FormattedMessage
-            id="reply.show.link"
-            values={{
-              date: (
-                <FormattedDate
-                  value={moment(reply.createdAt)}
-                  day="numeric"
-                  month="long"
-                  year="numeric"
-                />
-              ),
+      <ListGroupItem className="reply" id={`reply-link-${reply.id}`} onClick={this.showModal}>
+        <FormattedMessage
+          id="reply.show.link"
+          values={{
+            date: (
+              <FormattedDate
+                value={moment(reply.createdAt)}
+                day="numeric"
+                month="long"
+                year="numeric"
+              />
+            ),
 
-              time: (
-                <FormattedDate value={moment(reply.createdAt)} hour="numeric" minute="numeric" />
-              ),
-            }}
-          />
-          {reply.private && (
-            <span>
-              {' '}
-              <FormattedMessage id="reply.private" />
-            </span>
-          )}
-        </ListGroupItem>
+            time: <FormattedDate value={moment(reply.createdAt)} hour="numeric" minute="numeric" />,
+          }}
+        />
+        {reply.private && (
+          <span>
+            {' '}
+            <FormattedMessage id="reply.private" />
+          </span>
+        )}
         {/* $FlowFixMe $refType */}
         <ShowReplyModal
           show={this.state.showModal}
@@ -70,7 +66,7 @@ export class ReplyModalLink extends React.Component<Props, State> {
           reply={reply}
           questionnaire={questionnaire}
         />
-      </Fragment>
+      </ListGroupItem>
     );
   }
 }

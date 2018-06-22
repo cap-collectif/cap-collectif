@@ -75,12 +75,6 @@ exports[`<AccountBox /> should render a disabled button when the form is invalid
   <Relay(DeleteAccountModal)
     handleClose={[Function]}
     show={false}
-    viewer={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-      }
-    }
   />
 </Panel>
 `;
@@ -160,12 +154,6 @@ exports[`<AccountBox /> should render a disabled button when the form is submitt
   <Relay(DeleteAccountModal)
     handleClose={[Function]}
     show={false}
-    viewer={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-      }
-    }
   />
 </Panel>
 `;
@@ -245,12 +233,6 @@ exports[`<AccountBox /> should render and enabled button when the form is valid 
   <Relay(DeleteAccountModal)
     handleClose={[Function]}
     show={false}
-    viewer={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-      }
-    }
   />
 </Panel>
 `;

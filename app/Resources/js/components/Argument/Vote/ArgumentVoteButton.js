@@ -1,26 +1,24 @@
-// @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
-import type { State } from '../../../types';
+import { connect } from 'react-redux';
 import LoginOverlay from '../../Utils/LoginOverlay';
 
-type Props = {
-  hasVoted: boolean,
-  onClick: Function,
-  argument: Object,
-  user?: Object,
-};
+const ArgumentVoteButton = React.createClass({
+  propTypes: {
+    hasVoted: PropTypes.bool.isRequired,
+    onClick: PropTypes.func.isRequired,
+    argument: PropTypes.object.isRequired,
+    user: PropTypes.object,
+  },
 
-class ArgumentVoteButton extends React.Component<Props> {
-  isTheUserTheAuthor = () => {
+  isTheUserTheAuthor() {
     const { argument, user } = this.props;
     if (argument.author === null || !user) {
       return false;
     }
     return user.uniqueId === argument.author.uniqueId;
-  };
+  },
 
   render() {
     const { hasVoted, onClick, argument } = this.props;
@@ -42,11 +40,13 @@ class ArgumentVoteButton extends React.Component<Props> {
         </Button>
       </LoginOverlay>
     );
-  }
-}
-
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  user: state.user.user,
+  },
 });
+
+const mapStateToProps = state => {
+  return {
+    user: state.user.user,
+  };
+};
 
 export default connect(mapStateToProps)(ArgumentVoteButton);

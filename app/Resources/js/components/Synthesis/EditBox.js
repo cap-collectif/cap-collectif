@@ -1,16 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { PropTypes } from 'react';
 import MainNavbar from './Navbars/MainNavbar';
 import SecondNavbar from './Navbars/SecondNavbar';
 import SideMenu from './Navbars/SideMenu';
 import TopMenu from './Inbox/TopMenu';
 
-class EditBox extends React.Component {
-  static propTypes = {
+const EditBox = React.createClass({
+  propTypes: {
     synthesis: PropTypes.object,
     children: PropTypes.element,
     sideMenu: PropTypes.bool.isRequired,
-  };
+  },
 
   render() {
     const { synthesis, children, sideMenu } = this.props;
@@ -39,7 +38,7 @@ class EditBox extends React.Component {
         </div>
       );
     }
-  }
-}
+  },
+});
 
 export default EditBox;

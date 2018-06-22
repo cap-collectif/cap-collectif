@@ -1,26 +1,23 @@
 // @flow
-import React from 'react';
+import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { FormattedMessage } from 'react-intl';
 import Input from './Input';
 
-type Props = {
-  field: Object,
-  onChange: Function,
-  disabled?: boolean,
-  value?: string,
-};
+const Other = React.createClass({
+  propTypes: {
+    field: PropTypes.object.isRequired,
+    onChange: PropTypes.func.isRequired,
+    disabled: PropTypes.bool,
+    value: PropTypes.string,
+  },
 
-type State = {
-  value: string,
-  checked: boolean,
-};
-
-class Other extends React.Component<Props, State> {
-  state = {
-    value: this.props.value || '',
-    checked: !!this.props.value,
-  };
+  getInitialState() {
+    return {
+      value: this.props.value || '',
+      checked: !!this.props.value,
+    };
+  },
 
   componentDidUpdate() {
     // $FlowFixMe
@@ -39,9 +36,9 @@ class Other extends React.Component<Props, State> {
         true,
       );
     }
-  }
+  },
 
-  onType = (e: $FlowFixMe) => {
+  onType(e) {
     const { onChange } = this.props;
 
     this.setState({
@@ -50,9 +47,9 @@ class Other extends React.Component<Props, State> {
     });
 
     onChange(e, e.target.value);
-  };
+  },
 
-  onCheckUncheck = (e: SyntheticInputEvent<>) => {
+  onCheckUncheck(e) {
     // $FlowFixMe
     const input = ReactDOM.findDOMNode(this.textField).getElementsByTagName('input')[0];
 
@@ -71,9 +68,9 @@ class Other extends React.Component<Props, State> {
     this.setState({
       checked: e.target.checked,
     });
-  };
+  },
 
-  clear = () => {
+  clear() {
     this.setState({
       value: '',
       checked: false,
@@ -83,7 +80,7 @@ class Other extends React.Component<Props, State> {
     if (input instanceof HTMLInputElement) {
       input.value = '';
     }
-  };
+  },
 
   render() {
     const { disabled, field } = this.props;
@@ -118,7 +115,7 @@ class Other extends React.Component<Props, State> {
         </div>
       </div>
     );
-  }
-}
+  },
+});
 
 export default Other;

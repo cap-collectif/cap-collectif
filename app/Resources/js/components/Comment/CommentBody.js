@@ -1,28 +1,25 @@
-// @flow
 import React from 'react';
 import Linkify from 'react-linkify';
 import { FormattedMessage } from 'react-intl';
 import nl2br from 'react-nl2br';
 
-type Props = {
-  comment: Object,
-};
+const CommentBody = React.createClass({
+  propTypes: {
+    comment: React.PropTypes.object,
+  },
 
-type State = {
-  expanded: boolean,
-};
+  getInitialState() {
+    return {
+      expanded: false,
+    };
+  },
 
-class CommentBody extends React.Component<Props, State> {
-  state = {
-    expanded: false,
-  };
-
-  textShouldBeTruncated = () => {
+  textShouldBeTruncated() {
     const { comment } = this.props;
     return comment.body.length > 400;
-  };
+  },
 
-  generateText = () => {
+  generateText() {
     const { comment } = this.props;
     let text = '';
 
@@ -38,15 +35,15 @@ class CommentBody extends React.Component<Props, State> {
     }
 
     return text;
-  };
+  },
 
-  expand = (expanded: boolean) => {
+  expand(expanded) {
     this.setState({
       expanded,
     });
-  };
+  },
 
-  renderReadMoreOrLess = () => {
+  renderReadMoreOrLess() {
     if (this.textShouldBeTruncated() && !this.state.expanded) {
       return (
         <button className="btn-link" onClick={this.expand.bind(this, true)}>
@@ -54,9 +51,9 @@ class CommentBody extends React.Component<Props, State> {
         </button>
       );
     }
-  };
+  },
 
-  renderTrashedLabel = () => {
+  renderTrashedLabel() {
     const { comment } = this.props;
     if (comment.isTrashed) {
       return (
@@ -66,7 +63,7 @@ class CommentBody extends React.Component<Props, State> {
       );
     }
     return null;
-  };
+  },
 
   render() {
     return (
@@ -76,7 +73,7 @@ class CommentBody extends React.Component<Props, State> {
         {this.renderReadMoreOrLess()}
       </div>
     );
-  }
-}
+  },
+});
 
 export default CommentBody;
