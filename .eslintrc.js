@@ -41,7 +41,7 @@ module.exports = {
     ],
     'flowtype/require-valid-file-annotation': 'error',
     'flowtype/semi': ['error', 'always'],
-    'flowtype/space-after-type-colon': ['error', 'always'],
+    'flowtype/space-after-type-colon': ['off'],
     'flowtype/space-before-generic-bracket': ['error', 'never'],
     'flowtype/space-before-type-colon': ['error', 'never'],
     'flowtype/type-id-match': 'off',
