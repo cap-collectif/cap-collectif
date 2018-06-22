@@ -13,7 +13,6 @@ class ProposalFormController extends Controller
     public function duplicateAction(Request $request)
     {
         $id = $request->get($this->admin->getIdParameter());
-        $translator = $this->get('translator');
 
         /** @var ProposalForm $object */
         $object = $this->admin->getObject($id);
@@ -22,11 +21,16 @@ class ProposalFormController extends Controller
             throw new NotFoundHttpException(sprintf('unable to find the object with id: %s', $id));
         }
 
+        $translator = $this->get('translator');
         $em = $this->get('doctrine.orm.entity_manager');
+
         $clonedProposalForm = clone $object;
         $clonedProposalForm->setTitle($translator->trans('copy-of') . ' ' . $object->getTitle());
         $evaluationForm = $clonedProposalForm->getEvaluationForm();
-        $evaluationForm->setTitle($translator->trans('copy-of') . ' ' . $evaluationForm->getTitle());
+
+        if (null !== $evaluationForm) {
+            $evaluationForm->setTitle($translator->trans('copy-of') . ' ' . $evaluationForm->getTitle());
+        }
 
         $em->persist($clonedProposalForm);
         $em->flush();

@@ -221,6 +221,8 @@ class ProposalForm
             $this->step = null;
             $this->reference = null;
             $this->createdAt = new \DateTime();
+            $this->updatedAt = null;
+            $this->proposals = new ArrayCollection();
 
             $questionsClone = new ArrayCollection();
             foreach ($this->questions as $question) {
