@@ -131,6 +131,7 @@ RUN cd / && \
 RUN /etc/elasticsearch/bin/elasticsearch-plugin install --batch analysis-icu
 
 # install erlang for RabbitMQ
+COPY infrastructure/services/remote/rabbitmq/preference /etc/apt/preferences.d/erlang
 RUN echo 'deb https://packages.erlang-solutions.com/debian jessie contrib' >> /etc/apt/sources.list.d/erlang.list && \
     wget -O- https://packages.erlang-solutions.com/debian/erlang_solutions.asc | apt-key add - && \
     apt-get update && \

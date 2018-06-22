@@ -217,6 +217,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->select('COUNT(pv)')
             ->andWhere('pv.selectionStep = :step')
             ->andWhere('pv.proposal = :proposal')
+            ->andWhere('pv.expired = false')
             ->setParameter('proposal', $proposal)
             ->setParameter('step', $step)
             ->getQuery()
