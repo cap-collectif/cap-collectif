@@ -38,7 +38,7 @@ class ProposalFormAdmin extends Admin
             ],
                 'entity',
                 [
-                    'query_builder' => $this->filterProjectQuery(),
+                    'query_builder' => $this->filterByCollectStepQuery(),
                 ]
             )
             ->add('updatedAt', null, [
@@ -83,7 +83,7 @@ class ProposalFormAdmin extends Admin
         $collection->clearExcept(['list', 'edit', 'delete', 'duplicate']);
     }
 
-    private function filterProjectQuery(): QueryBuilder
+    private function filterByCollectStepQuery(): QueryBuilder
     {
         $query = $this->modelManager
             ->createQuery(CollectStep::class, 'p')

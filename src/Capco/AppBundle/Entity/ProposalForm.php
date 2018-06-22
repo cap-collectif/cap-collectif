@@ -216,10 +216,36 @@ class ProposalForm
     public function __clone()
     {
         if ($this->id) {
-            $this->evaluationForm = null;
-            $this->questions = null;
+            $this->id = null;
+            $this->evaluationForm = clone $this->evaluationForm;
             $this->step = null;
             $this->reference = null;
+            $this->createdAt = new \DateTime();
+
+            $questionsClone = new ArrayCollection();
+            foreach ($this->questions as $question) {
+                $itemClone = clone $question;
+                $itemClone->setProposalForm($this);
+                $questionsClone->add($itemClone);
+            }
+
+            $districtsClone = new ArrayCollection();
+            foreach ($this->districts as $district) {
+                $itemClone = clone $district;
+                $itemClone->setForm($this);
+                $districtsClone->add($itemClone);
+            }
+
+            $categoriesClone = new ArrayCollection();
+            foreach ($this->categories as $category) {
+                $itemClone = clone $category;
+                $itemClone->setForm($this);
+                $categoriesClone->add($itemClone);
+            }
+
+            $this->questions = $questionsClone;
+            $this->categories = $categoriesClone;
+            $this->districts = $districtsClone;
             $this->initializeNotificationConfiguration();
         }
     }

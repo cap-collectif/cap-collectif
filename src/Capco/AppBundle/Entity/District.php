@@ -70,6 +70,13 @@ class District implements IndexableInterface
         return $this->getId() ? $this->getName() : 'New district';
     }
 
+    public function __clone()
+    {
+        if ($this->id) {
+            $this->id = null;
+        }
+    }
+
     public function getForm()
     {
         return $this->form;

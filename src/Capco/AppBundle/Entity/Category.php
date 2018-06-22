@@ -64,6 +64,13 @@ class Category
         return $this->getId() ? $this->getTitle() : 'New category';
     }
 
+    public function __clone()
+    {
+        if ($this->id) {
+            $this->id = null;
+        }
+    }
+
     /**
      * Get title.
      *

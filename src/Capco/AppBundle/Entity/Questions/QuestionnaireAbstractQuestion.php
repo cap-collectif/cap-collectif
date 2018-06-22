@@ -73,6 +73,14 @@ class QuestionnaireAbstractQuestion
         return 'undefined question';
     }
 
+    public function __clone()
+    {
+        if ($this->id) {
+            $this->id = null;
+            $this->question = clone $this->question;
+        }
+    }
+
     public function setQuestionnaire(Questionnaire $questionnaire = null): self
     {
         $this->questionnaire = $questionnaire;

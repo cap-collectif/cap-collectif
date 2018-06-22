@@ -22,10 +22,14 @@ class ProposalFormController extends Controller
             throw new NotFoundHttpException(sprintf('unable to find the object with id: %s', $id));
         }
 
+        $em = $this->get('doctrine.orm.entity_manager');
         $clonedProposalForm = clone $object;
         $clonedProposalForm->setTitle($translator->trans('copy-of') . ' ' . $object->getTitle());
+        $evaluationForm = $clonedProposalForm->getEvaluationForm();
+        $evaluationForm->setTitle($translator->trans('copy-of') . ' ' . $evaluationForm->getTitle());
 
-        $this->admin->create($clonedProposalForm);
+        $em->persist($clonedProposalForm);
+        $em->flush();
 
         $this->addFlash('sonata_flash_success', 'your-form-has-been-duplicated');
 

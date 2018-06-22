@@ -104,6 +104,13 @@ abstract class AbstractQuestion
         return 'New Question';
     }
 
+    public function __clone()
+    {
+        if ($this->id) {
+            $this->id = null;
+        }
+    }
+
     public function setHelpText(string $helpText = null): self
     {
         $this->helpText = $helpText;
