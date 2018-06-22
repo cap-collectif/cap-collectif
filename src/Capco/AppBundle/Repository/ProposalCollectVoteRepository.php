@@ -168,7 +168,7 @@ class ProposalCollectVoteRepository extends EntityRepository
     {
         return (int) $this->createQueryBuilder('pv')
             ->select('COUNT(pv.id)')
-            ->andWhere('pv.expired = false')
+            ->andWhere('pv.expired = 0')
             ->andWhere('pv.collectStep = :collectStep')
             ->andWhere('pv.user = :user')
             ->setParameter('collectStep', $step)
@@ -194,7 +194,6 @@ class ProposalCollectVoteRepository extends EntityRepository
         return (int) $this->createQueryBuilder('pv')
             ->select('COUNT(pv.id)')
             ->andWhere('pv.proposal = :proposal')
-            ->andWhere('pv.expired = false')
             ->setParameter('proposal', $proposal)
             ->getQuery()
             ->getSingleScalarResult();
