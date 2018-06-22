@@ -1,7 +1,6 @@
 // @flow
 import React, { PureComponent } from 'react';
 import { FormattedDate, FormattedMessage } from 'react-intl';
-import moment from 'moment';
 import { DatesInterval } from '../Utils/DatesInterval';
 import DarkenGradientMedia from '../Ui/DarkenGradientMedia';
 
@@ -125,37 +124,37 @@ export class CarouselMobile extends PureComponent<Props, State> {
       <div className="carousel__mobile">
         <div className="mobile__content" id="mobile-content" style={{ transform: translation }}>
           {highlighteds.map((highlighted, index) => {
-            const type = highlighted.object_type;
-            const item = highlighted[type];
+            const highlightedType = highlighted.object_type;
 
+            const itemTitle = highlighted[highlightedType].title;
             const maxItemLength = 55;
             const trimmedString =
-              item.title.length > maxItemLength
-                ? `${item.title.substring(0, maxItemLength)}...`
-                : item.title;
+              itemTitle.length > maxItemLength
+                ? `${itemTitle.substring(0, maxItemLength)}...`
+                : itemTitle;
             const hadLinearGradient = windowWidth >= 768;
 
             const getMedia = () => {
-              if (highlighted[type].media) {
+              if (highlighted[highlightedType].media) {
                 return (
                   <DarkenGradientMedia
                     width="100%"
                     height="100%"
                     linearGradient={hadLinearGradient}
-                    url={highlighted[type].media.url}
-                    title={highlighted[type].title}
+                    url={highlighted[highlightedType].media.url}
+                    title={highlighted[highlightedType].title}
                   />
                 );
               }
 
-              if (highlighted[type].cover) {
+              if (highlighted[highlightedType].cover) {
                 return (
                   <DarkenGradientMedia
                     width="100%"
                     height="100%"
                     linearGradient={hadLinearGradient}
-                    url={highlighted[type].cover.url}
-                    title={highlighted[type].title}
+                    url={highlighted[highlightedType].cover.url}
+                    title={highlighted[highlightedType].title}
                   />
                 );
               }
@@ -176,36 +175,45 @@ export class CarouselMobile extends PureComponent<Props, State> {
                     <br />
                     <a
                       className="carousel__title"
-                      href={highlighted[type]._links ? highlighted[type]._links.show : '#'}>
+                      href={
+                        highlighted[highlightedType]._links
+                          ? highlighted[highlightedType]._links.show
+                          : '#'
+                      }>
                       {trimmedString}
                     </a>
                     <br />
                     <span className="carousel__date">
-                      {type === 'event' &&
-                        item.startAt &&
-                        item.endAt && <DatesInterval startAt={item.startAt} endAt={item.endAt} />}
-                      {type === 'project' &&
-                        item.startAt && (
+                      {highlightedType === 'event' &&
+                        highlighted[highlightedType].startAt &&
+                        highlighted[highlightedType].endAt && (
+                          <DatesInterval
+                            startAt={highlighted[highlightedType].startAt}
+                            endAt={highlighted[highlightedType].endAt}
+                          />
+                        )}
+                      {highlightedType === 'project' &&
+                        highlighted[highlightedType].startAt && (
                           <FormattedDate
-                            value={moment(item.startAt).toDate()}
+                            value={highlighted[highlightedType].startAt}
                             day="numeric"
                             month="long"
                             year="numeric"
                           />
                         )}
-                      {type === 'idea' &&
-                        item.createdAt && (
+                      {highlightedType === 'idea' &&
+                        highlighted[highlightedType].createdAt && (
                           <FormattedDate
-                            value={moment(item.createdAt).toDate()}
+                            value={highlighted[highlightedType].createdAt}
                             day="numeric"
                             month="long"
                             year="numeric"
                           />
                         )}
-                      {type === 'post' &&
-                        item.publishedAt && (
+                      {highlightedType === 'post' &&
+                        highlighted[highlightedType].publishedAt && (
                           <FormattedDate
-                            value={moment(item.publishedAt).toDate()}
+                            value={highlighted[highlightedType].publishedAt}
                             day="numeric"
                             month="long"
                             year="numeric"
