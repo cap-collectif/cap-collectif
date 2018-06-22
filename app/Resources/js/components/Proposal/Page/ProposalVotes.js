@@ -13,10 +13,18 @@ type Props = {
   relay: RelayPaginationProp,
 };
 
-export class ProposalVotes extends React.Component<Props> {
+type State = {
+  loading: boolean,
+};
+
+export class ProposalVotes extends React.Component<Props, State> {
+  state = {
+    loading: false,
+  };
+
   render() {
     const { proposal, relay } = this.props;
-    const votesCount = proposal.votes.edges && proposal.votes.edges.length;
+    const votesCount = proposal.votes.totalCount;
 
     if (proposal.votes.edges && votesCount === 0) {
       return (
@@ -59,10 +67,14 @@ export class ProposalVotes extends React.Component<Props> {
         {relay.hasMore() && (
           <div className="text-center">
             <button
+              className="text-center btn btn-secondary"
+              disabled={this.state.loading}
               onClick={() => {
-                relay.loadMore(50);
-              }}
-              className="text-center btn btn-secondary">
+                this.setState({ loading: true });
+                relay.loadMore(50, () => {
+                  this.setState({ loading: false });
+                });
+              }}>
               <FormattedMessage id="proposal.vote.show_more" />
             </button>
           </div>
