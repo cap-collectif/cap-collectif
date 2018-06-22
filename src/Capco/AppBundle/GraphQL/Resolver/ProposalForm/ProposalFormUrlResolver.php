@@ -18,13 +18,9 @@ class ProposalFormUrlResolver implements ResolverInterface
     public function __invoke(ProposalForm $proposalForm): string
     {
         $step = $proposalForm->getStep();
+        $project = $proposalForm->getProject();
 
-        if (!$step) {
-            return '';
-        }
-
-        $project = $step->getProject();
-        if (!$project) {
+        if (!$project || !$step) {
             return '';
         }
 
