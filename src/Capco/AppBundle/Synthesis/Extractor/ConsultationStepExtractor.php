@@ -51,8 +51,12 @@ class ConsultationStepExtractor
     /**
      * Update or create all elements from consultation step and return updated synthesis.
      */
-    public function createOrUpdateElementsFromConsultationStep(Synthesis $synthesis, ConsultationStep $consultationStep): Synthesis
+    public function createOrUpdateElementsFromConsultationStep(Synthesis $synthesis, ?ConsultationStep $consultationStep): Synthesis
     {
+        if (!$consultationStep) {
+            return $synthesis;
+        }
+
         if (!$consultationStep->getIsEnabled()) {
             return $synthesis;
         }
