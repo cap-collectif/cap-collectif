@@ -18,7 +18,8 @@ type Props = {
   formName?: string,
   autoComplete?: string,
   disableValidation?: boolean,
-  type: | 'address'
+  type:
+    | 'address'
     | 'text'
     | 'number'
     | 'datetime'
