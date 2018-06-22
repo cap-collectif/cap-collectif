@@ -71,3 +71,11 @@ Scenario: Logged in admin wants edit a proposal form on settings tab
   Then I save current admin proposal form "parameters"
   And I wait 1 seconds
   Then I should see "global.saved"
+
+@database
+Scenario: Logged in admin wants to duplicate a proposal form
+  Given I am logged in as admin
+  And I duplicate a proposal form "proposalForm1"
+  And I wait 1 seconds
+  And I should be redirected to "/admin/capco/app/proposalform/list"
+  Then I should see "your-form-has-been-duplicated"

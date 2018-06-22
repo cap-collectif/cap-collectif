@@ -107,4 +107,12 @@ trait AdminTrait
     {
         $this->getCurrentPage()->find('css', $id)->click();
     }
+
+    /**
+     * @When I duplicate a proposal form :proposalFormId
+     */
+    public function iDuplicateProposalForm(string $proposalFormId)
+    {
+        $this->visitPath("/admin/capco/app/proposalform/duplicate?id=$proposalFormId");
+    }
 }
