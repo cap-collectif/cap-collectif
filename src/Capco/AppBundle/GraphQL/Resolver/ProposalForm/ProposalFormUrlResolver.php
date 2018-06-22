@@ -3,12 +3,17 @@
 namespace Capco\AppBundle\GraphQL\Resolver\ProposalForm;
 
 use Capco\AppBundle\Entity\ProposalForm;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Symfony\Component\Routing\Router;
 
-class ProposalFormUrlResolver implements ContainerAwareInterface
+class ProposalFormUrlResolver implements ResolverInterface
 {
-    use ContainerAwareTrait;
+    private $router;
+
+    public function __construct(Router $router)
+    {
+        $this->router = $router;
+    }
 
     public function __invoke(ProposalForm $proposalForm): string
     {
@@ -23,7 +28,7 @@ class ProposalFormUrlResolver implements ContainerAwareInterface
             return '';
         }
 
-        return $this->container->get('router')->generate('app_project_show_collect',
+        return $this->router->generate('app_project_show_collect',
             [
                 'projectSlug' => $project->getSlug(),
                 'stepSlug' => $step->getSlug(),
