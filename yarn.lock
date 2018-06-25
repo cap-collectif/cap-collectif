@@ -8437,9 +8437,9 @@ react-bootstrap@^0.31.2:
     uncontrollable "^4.1.0"
     warning "^3.0.0"
 
-react-checkbox-group@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/react-checkbox-group/-/react-checkbox-group-4.0.1.tgz#79b1c17cb406b23aaf5c0985a2332229d106279a"
+react-checkbox-group@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/react-checkbox-group/-/react-checkbox-group-4.0.0.tgz#0ff5faf853b37b92836fb18252404f610cc64de3"
 
 react-class@^2.0.0:
   version "2.1.0"

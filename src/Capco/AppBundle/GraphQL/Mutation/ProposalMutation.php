@@ -435,6 +435,10 @@ class ProposalMutation implements ContainerAwareInterface
             ])
         ));
 
+        $indexer = $this->container->get('capco.elasticsearch.indexer');
+        $indexer->index(\get_class($proposal), $proposal->getId());
+        $indexer->finishBulk();
+
         return ['proposal' => $proposal];
     }
 
