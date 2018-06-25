@@ -221,7 +221,7 @@ COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
 RUN ln -s /usr/local/bin/node /usr/local/bin/nodejs && \
     ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
 
-ENV YARN_VERSION 1.5.1
+ENV YARN_VERSION 1.7.0
 RUN curl -fSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz" \
     && tar -xzf yarn-v$YARN_VERSION.tar.gz -C /opt/ \
     && ln -snf /opt/yarn-v$YARN_VERSION/bin/yarn /usr/local/bin/yarn \
@@ -248,7 +248,7 @@ RUN chown -R capco:capco . \
     && gosu capco php bin/console assets:install --symlink --env=${SYMFONY_ENVIRONMENT} --no-interaction
 
 # Build JS
-RUN yarn global add bower@1.8.0 babel-cli \
+RUN yarn global add bower@1.8.4 babel-cli \
     && gosu capco yarn install --pure-lockfile \
     && gosu capco bower install --config.interactive=false \
     && gosu capco npm rebuild node-sass > /dev/null \
