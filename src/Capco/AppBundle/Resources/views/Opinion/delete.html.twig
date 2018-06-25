@@ -17,7 +17,7 @@
                         <h1 class="h4  dialog__title">{{ 'opinion.delete.title'|trans({}, 'CapcoAppBundle') }}</h1>
                     </div>
 
-                    <form method="post" {{ form_enctype(form) }}>
+                    {{ form_start(form) }}
                         <div class="dialog__body  box">
                             <div class="media">
                                 <div class="media-body">
@@ -35,7 +35,7 @@
                                 <button type="submit" class="btn  btn-danger">{{ 'opinion.delete.submit'|trans({}, 'CapcoAppBundle') }}</button>
                             </div>
                         </div>
-                    </form>
+                    {{ form_end(form) }}
                 </div>
             </div>
         </div>
