@@ -1,4 +1,5 @@
 imports:
+    - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: sonata.yml }
     - { resource: liip_imagine.yml }
