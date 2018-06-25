@@ -19,7 +19,7 @@ type Props = {
   value: Object,
   errors?: any,
   other?: $FlowFixMe,
-  returnValue: bool
+  returnValue: boolean,
 };
 
 type State = {
@@ -54,20 +54,11 @@ class Checkbox extends React.Component<Props, State> {
   };
 
   onOtherChange = (e: Event, changeValue: $FlowFixMe) => {
-    const { value, returnValue } = this.props;
-    const {value, returnValue} = this.props;
-    let values = value.label ? value.label : [];
-    values = returnValue && value.value ? value.value : values;
-    const objectToReturn = {other: changeValue || null,};
+    const { value } = this.props;
+    const values = value.label ? value.label : [];
 
-    if (returnValue) {
-    } else {
-      objectToReturn.value = values;
-      objectToReturn.labels = values;
-    }
-    this.onChange(objectToReturn);
-
-  },
+    this.onChange({ other: changeValue || null, labels: values });
+  };
 
   empty = () => {
     // $FlowFixMe

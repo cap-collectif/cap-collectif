@@ -46,14 +46,30 @@ const validate = (values: Object) => {
 
   return errors;
 };
+type GenderValue = 'FEMALE' | 'MALE' | 'OTHER' | '%future added value';
 
-const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
+type FormValue = {
+  address: string,
+  address2: string,
+  city: string,
+  zipCode: string,
+  firstname: string,
+  lastname: string,
+  email: string,
+  phone: string,
+  isEmailConfirmed: boolean,
+  phoneConfirmed: boolean,
+  gender: GenderValue,
+  dateOfBirth: string,
+};
+
+const onSubmit = (values: FormValue, dispatch: Dispatch, props: Props) => {
   const { intl } = props;
   const userId = props.user.id;
-  delete values.isEmailConfirmed;
   const input = {
     ...values,
     userId,
+    isEmailConfirmed: undefined,
   };
 
   return UpdateProfilePersonalDataMutation.commit({ input })

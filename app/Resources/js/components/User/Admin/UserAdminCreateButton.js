@@ -63,8 +63,6 @@ const validate = (values: FormValues) => {
 const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
   const { intl } = props;
   const roles = values.roles.labels;
-  // delete values.roles, because we need values.roles.labels as roles
-  delete values.roles;
   const input = {
     ...values,
     roles,
@@ -92,12 +90,9 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
 };
 
 export class UserAdminCreateButton extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      showModal: false,
-    };
-  }
+  state = {
+    showModal: false,
+  };
 
   render() {
     const {

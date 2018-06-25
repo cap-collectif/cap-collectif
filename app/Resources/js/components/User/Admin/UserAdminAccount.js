@@ -74,12 +74,9 @@ type State = {
 };
 
 export class UserAdminAccount extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      showDeleteAccountModal: false,
-    };
-  }
+  state = {
+    showDeleteAccountModal: false,
+  };
 
   render() {
     const {

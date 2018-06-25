@@ -79,6 +79,7 @@ exports[`<UserAdminProfile/> should render, with user confirmed by email adn vie
           values={Object {}}
         />
         <option
+          key="1"
           value={1}
         >
           type_1
