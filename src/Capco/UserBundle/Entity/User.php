@@ -75,6 +75,9 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     protected $expiresAt;
     protected $expired = false;
 
+    protected $credentialsExpireAt;
+    protected $credentialsExpired = false;
+
     /**
      * @var string
      */
@@ -1280,6 +1283,30 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public function setExpired(bool $value): self
     {
         $this->expired = $value;
+
+        return $this;
+    }
+
+    public function isCredentialsExpired(): bool
+    {
+        return $this->credentialsExpired;
+    }
+
+    public function setCredentialsExpired(bool $value): self
+    {
+        $this->credentialsExpired = $value;
+
+        return $this;
+    }
+
+    public function getCredentialsExpireAt(): ?\DateTime
+    {
+        return $this->credentialsExpireAt;
+    }
+
+    public function setCredentialsExpireAt(?\DateTime $value): self
+    {
+        $this->credentialsExpireAt = $value;
 
         return $this;
     }
