@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import { CheckboxGroup } from 'react-checkbox-group';
 import classNames from 'classnames';
 import Input from './Input';
 import Other from './Other';
@@ -19,7 +18,6 @@ type Props = {
   value: Object,
   errors?: any,
   other?: $FlowFixMe,
-  returnValue: boolean,
 };
 
 type State = {
@@ -27,7 +25,7 @@ type State = {
 };
 
 class Checkbox extends React.Component<Props, State> {
-  static DefaultProps = {
+  static defaultProps = {
     disabled: false,
     labelClassName: '',
     value: {},
@@ -42,9 +40,8 @@ class Checkbox extends React.Component<Props, State> {
     const otherValue = value.other;
 
     if (Array.isArray(newValue)) {
-      const objectToReturn = { other: otherValue, labels: newValue };
+      onChange({ labels: newValue, other: otherValue });
 
-      onChange(objectToReturn);
       this.setState({
         currentValue: newValue,
       });
@@ -55,9 +52,12 @@ class Checkbox extends React.Component<Props, State> {
 
   onOtherChange = (e: Event, changeValue: $FlowFixMe) => {
     const { value } = this.props;
-    const values = value.label ? value.label : [];
+    const values = value.labels ? value.labels : [];
 
-    this.onChange({ other: changeValue || null, labels: values });
+    this.onChange({
+      labels: values,
+      other: changeValue || null,
+    });
   };
 
   empty = () => {
@@ -107,8 +107,9 @@ class Checkbox extends React.Component<Props, State> {
             <ButtonBody body={field.description || ''} />
           </div>
         )}
-        <CheckboxGroup id={fieldName} ref={'choices'} name={fieldName} className="input-choices">
-          {field.choices.map(choice => {
+
+        {field.choices &&
+          field.choices.map(choice => {
             const choiceKey = `choice-${choice.id}`;
             const choiceValue = choice.useIdAsValue && choice.id ? choice.id : choice.label;
             return (
@@ -140,17 +141,16 @@ class Checkbox extends React.Component<Props, State> {
               </div>
             );
           })}
-          {field.isOtherAllowed ? (
-            <Other
-              // $FlowFixMe
-              ref={c => (this.other = c)}
-              value={otherValue}
-              field={field}
-              onChange={this.onOtherChange}
-              disabled={disabled}
-            />
-          ) : null}
-        </CheckboxGroup>
+        {field.isOtherAllowed ? (
+          <Other
+            // $FlowFixMe
+            ref={c => (this.other = c)}
+            value={otherValue}
+            field={field}
+            onChange={this.onOtherChange}
+            disabled={disabled}
+          />
+        ) : null}
         {renderFormErrors(field.id)}
       </div>
     );

@@ -118,7 +118,6 @@ exports[`<UserAdminAccount/> should render with user is admin or viewer 1`] = `
         component={[Function]}
         disabled={true}
         id="newsletter"
-        isReduxForm={true}
         name="newsletter"
         type="checkbox"
       >
@@ -313,7 +312,6 @@ exports[`<UserAdminAccount/> should render with user is not admin or viewer  1`]
         component={[Function]}
         disabled={true}
         id="newsletter"
-        isReduxForm={true}
         name="newsletter"
         type="checkbox"
       >
