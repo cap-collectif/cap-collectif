@@ -131,14 +131,14 @@ Scenario: Project header should display correct counters
 
 Scenario: Can not have access to download if export is disabled
   Given I visited "consultation page" with:
-    | projectSlug   | strategie-technologique-de-l-etat-et-services-publics |
+    | projectSlug   | strategie-technologique-de-letat-et-services-publics |
     | stepSlug      | collecte-des-avis-pour-une-meilleur-strategie         |
   Then I should not see "project.download.button" in the "#main" element
 
 @javascript
 Scenario: Can not download a project if export is disabled
   Given I visited "home page"
-  When I try to download "projets/strategie-technologique-de-l-etat-et-services-publics/projet/collecte-des-avis-pour-une-meilleur-strategie/download/xls"
+  When I try to download "projets/strategie-technologique-de-letat-et-services-publics/projet/collecte-des-avis-pour-une-meilleur-strategie/download/xls"
   Then I should see 'error.404.title {"%code%":404}'
 
 @javascript

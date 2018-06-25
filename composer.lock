@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c87981d24bed72def4b668a38704c4c1",
+    "content-hash": "cca3ba9c8f0c87bc7ee3fb479a68a61e",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2317,16 +2317,16 @@
         },
         {
             "name": "friendsofsymfony/rest-bundle",
-            "version": "2.2.0",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/FriendsOfSymfony/FOSRestBundle.git",
-                "reference": "d62a6c0f4bc699f899865d7e7bc7a4186aef9a86"
+                "url": "https://github.com/cap-collectif/FOSRestBundle.git",
+                "reference": "dc7a8e4b2c9752f42a7c004fabad7070fc9a6259"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSRestBundle/zipball/d62a6c0f4bc699f899865d7e7bc7a4186aef9a86",
-                "reference": "d62a6c0f4bc699f899865d7e7bc7a4186aef9a86",
+                "url": "https://api.github.com/repos/cap-collectif/FOSRestBundle/zipball/dc7a8e4b2c9752f42a7c004fabad7070fc9a6259",
+                "reference": "dc7a8e4b2c9752f42a7c004fabad7070fc9a6259",
                 "shasum": ""
             },
             "require": {
@@ -2391,7 +2391,6 @@
                     "Tests/"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2401,12 +2400,12 @@
                     "email": "smith@pooteeweet.org"
                 },
                 {
-                    "name": "FriendsOfSymfony Community",
-                    "homepage": "https://github.com/friendsofsymfony/FOSRestBundle/contributors"
-                },
-                {
                     "name": "Konstantin Kudryashov",
                     "email": "ever.zet@gmail.com"
+                },
+                {
+                    "name": "FriendsOfSymfony Community",
+                    "homepage": "https://github.com/friendsofsymfony/FOSRestBundle/contributors"
                 }
             ],
             "description": "This Bundle provides various tools to rapidly develop RESTful API's with Symfony",
@@ -2414,7 +2413,10 @@
             "keywords": [
                 "rest"
             ],
-            "time": "2017-04-06T12:55:03+00:00"
+            "support": {
+                "source": "https://github.com/cap-collectif/FOSRestBundle/tree/2.2.1"
+            },
+            "time": "2018-06-25T09:48:01+00:00"
         },
         {
             "name": "friendsofsymfony/user-bundle",

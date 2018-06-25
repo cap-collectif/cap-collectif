@@ -31,7 +31,7 @@ class PersonalDataFormType extends AbstractType
             )
             ->add('gender', ChoiceType::class,
                 [
-                    'choices' => User::getGenderList(),
+                    'choices' => array_keys(User::getGenderList()),
                 ]
             );
     }

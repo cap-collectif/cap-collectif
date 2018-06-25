@@ -40,6 +40,10 @@
         },
         {
             "type": "vcs",
+            "url": "https://github.com/cap-collectif/FOSRestBundle"
+        },
+        {
+            "type": "vcs",
             "url": "https://github.com/Liinkiing/geoPHP"
         },
         {
@@ -91,7 +95,7 @@
         "egeloen/ckeditor-bundle": "~4.0",
         "friendsofsymfony/elastica-bundle": "dev-master#f583cc5842d1fc2cb42d963f97b7b67f208be0f7",
         "friendsofsymfony/http-cache-bundle": "2.2.0",
-        "friendsofsymfony/rest-bundle": "^2.0",
+        "friendsofsymfony/rest-bundle": "2.2.1",
         "jms/serializer-bundle": "~1.0",
         "jms/serializer": "dev-fix/2-nested-serializer-calls as 1.0.0",
         "nelmio/api-doc-bundle": "^2.13",
