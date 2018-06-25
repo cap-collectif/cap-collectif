@@ -210,7 +210,7 @@ User:
             proposalVotes:
               type: "ProposalVoteConnection!"
               argsBuilder: "Relay::Connection"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ProposalVotesResolver", [value, args])'
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ProposalVotesResolver", [value, args, context])'
               args:
                 first:
                   type: "Int"
@@ -220,6 +220,10 @@ User:
                   defaultValue: { field: CREATED_AT, direction: DESC }
                 stepId:
                   type: "ID"
+                includeExpired:
+                  type: "Boolean"
+                  description: "(SuperAdmin only) retrieves ALL votes including expired ones"
+                  defaultValue: false
             deletedAccountAt:
                 type: "DateTime"
             medias:

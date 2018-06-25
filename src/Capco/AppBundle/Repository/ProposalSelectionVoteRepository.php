@@ -183,21 +183,25 @@ class ProposalSelectionVoteRepository extends EntityRepository
         return new Paginator($query);
     }
 
-    public function countVotesByProposal(Proposal $proposal): int
+    public function countVotesByProposal(Proposal $proposal, bool $includeExpired): int
     {
         return (int) $this->createQueryBuilder('pv')
             ->select('COUNT(pv.id)')
             ->andWhere('pv.proposal = :proposal')
+            ->andWhere('pv.expired = :includeExpired')
+            ->setParameter('includeExpired', $includeExpired)
             ->setParameter('proposal', $proposal)
             ->getQuery()->getSingleScalarResult()
         ;
     }
 
-    public function getByProposalAndStep(Proposal $proposal, SelectionStep $step, int $litmit, int $offset, string $field, string $direction): Paginator
+    public function getByProposalAndStep(Proposal $proposal, SelectionStep $step, int $litmit, int $offset, string $field, string $direction, bool $includeExpired): Paginator
     {
         $qb = $this->createQueryBuilder('pv')
             ->andWhere('pv.selectionStep = :step')
             ->andWhere('pv.proposal = :proposal')
+            ->andWhere('pv.expired = :includeExpired')
+            ->setParameter('includeExpired', $includeExpired)
             ->setParameter('step', $step)
             ->setParameter('proposal', $proposal);
 
@@ -211,13 +215,14 @@ class ProposalSelectionVoteRepository extends EntityRepository
         return new Paginator($qb);
     }
 
-    public function countVotesByProposalAndStep(Proposal $proposal, SelectionStep $step): int
+    public function countVotesByProposalAndStep(Proposal $proposal, SelectionStep $step, bool $includeExpired): int
     {
         return (int) $this->createQueryBuilder('pv')
             ->select('COUNT(pv)')
             ->andWhere('pv.selectionStep = :step')
             ->andWhere('pv.proposal = :proposal')
-            ->andWhere('pv.expired = false')
+            ->andWhere('pv.expired = :includeExpired')
+            ->setParameter('includeExpired', $includeExpired)
             ->setParameter('proposal', $proposal)
             ->setParameter('step', $step)
             ->getQuery()
