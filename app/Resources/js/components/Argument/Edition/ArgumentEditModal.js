@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { Modal } from 'react-bootstrap';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
@@ -62,4 +63,13 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, { argument }) =
   submitting: isSubmitting(formName)(state),
 });
 
-export default connect(mapStateToProps)(ArgumentEditModal);
+const container = connect(mapStateToProps)(ArgumentEditModal);
+export default createFragmentContainer(
+  container,
+  graphql`
+    fragment ArgumentEditModal_argument on Argument {
+      id
+      body
+    }
+  `,
+);

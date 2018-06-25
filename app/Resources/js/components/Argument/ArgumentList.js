@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Row, Col } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
+import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import ArgumentStore from '../../stores/ArgumentStore';
 import ArgumentActions from '../../actions/ArgumentActions';
 import ArgumentItem from './ArgumentItem';
@@ -15,51 +16,44 @@ type Props = {
 
 type State = {
   arguments: Array<$FlowFixMe>,
-  count: number,
-  isLoading: boolean,
   order: $FlowFixMe,
   type: number,
 };
 
-export class ArgumentList extends React.Component<Props, State> {
-  static displayName = 'ArgumentList';
+const renderList = () => {
+  <ul className="media-list opinion__list">
+    {opinion.arguments.map(argument => {
+      if ((type === 'yes' || type === 'simple') && argument.type === 1) {
+        return <ArgumentItem key={argument.id} argument={argument} />;
+      }
+      if (type === 'no' && argument.type === 0) {
+        return <ArgumentItem key={argument.id} argument={argument} />;
+      }
+    })}
+  </ul>
+  <Loader />
+}
 
+export class ArgumentList extends React.Component<Props, State> {
   state = {
-    arguments: [],
-    count: 0,
-    isLoading: true,
     order: ArgumentStore.orderByType[this.getNumericType()],
     type: this.getNumericType(),
   };
 
-  componentWillMount() {
-    ArgumentStore.addChangeListener(this.onChange);
-  }
-
-  componentDidMount() {
-    this.loadArguments();
-  }
-
-  componentWillUnmount() {
-    ArgumentStore.removeChangeListener(this.onChange);
-  }
-
-  onChange = () => {
-    if (ArgumentStore.orderByType[this.state.type] === this.state.order) {
-      this.setState({
-        arguments: ArgumentStore.arguments[this.state.type],
-        count: ArgumentStore.countByType[this.state.type],
-        order: ArgumentStore.orderByType[this.state.type],
-        isLoading: false,
-      });
-      return;
-    }
-    this.setState({
-      order: ArgumentStore.orderByType[this.state.type],
-      isLoading: true,
-    });
-    this.loadArguments();
-  };
+  // onChange = () => {
+  //   if (ArgumentStore.orderByType[this.state.type] === this.state.order) {
+  //     this.setState({
+  //       arguments: ArgumentStore.arguments[this.state.type],
+  //       count: ArgumentStore.countByType[this.state.type],
+  //       order: ArgumentStore.orderByType[this.state.type],
+  //     });
+  //     return;
+  //   }
+  //   this.setState({
+  //     order: ArgumentStore.orderByType[this.state.type],
+  //   });
+  //   this.loadArguments();
+  // };
 
   getNumericType() {
     const { type } = this.props;
@@ -70,11 +64,6 @@ export class ArgumentList extends React.Component<Props, State> {
     // $FlowFixMe
     const value = $(ReactDOM.findDOMNode(this.refs.filter)).val();
     ArgumentActions.changeSortOrder(this.state.type, value);
-  }
-
-  loadArguments() {
-    const { opinion } = this.props;
-    ArgumentActions.load(opinion, this.state.type);
   }
 
   renderFilter() {
@@ -113,7 +102,7 @@ export class ArgumentList extends React.Component<Props, State> {
 
   render() {
     const { type } = this.props;
-    const { count, isLoading } = this.state;
+    const count = 0;
     return (
       <div id={`opinion__arguments--${type}`} className="block--tablet block--bordered">
         <Row className="opinion__arguments__header">
@@ -130,20 +119,25 @@ export class ArgumentList extends React.Component<Props, State> {
           </Col>
           {this.renderFilter()}
         </Row>
-        {!isLoading ? (
-          <ul className="media-list opinion__list">
-            {this.state.arguments.map(argument => {
-              if ((type === 'yes' || type === 'simple') && argument.type === 1) {
-                return <ArgumentItem key={argument.id} argument={argument} />;
+        <QueryRenderer
+          environment={environment}
+          query={graphql`
+            query ArgumentListQuery(
+              $opinionId: ID!
+              $cursor: String
+            ) {
+              opinion: node(id: $opinionId) {
+                arguments(type: FOR) {
+                  id
+                  type
+                  ...ArgumentItem_argument
+                }
               }
-              if (type === 'no' && argument.type === 0) {
-                return <ArgumentItem key={argument.id} argument={argument} />;
-              }
-            })}
-          </ul>
-        ) : (
-          <Loader />
-        )}
+            }
+          `}
+          variables={{ opinionId: opinion.id, count: 10, cursor: null }}
+          render={renderList}
+        />
       </div>
     );
   }

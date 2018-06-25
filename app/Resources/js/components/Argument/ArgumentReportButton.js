@@ -1,13 +1,16 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
+import { graphql, createFragmentContainer } from 'react-relay';
 import ReportBox from '../Report/ReportBox';
 import { submitArgumentReport } from '../../redux/modules/report';
 import ArgumentStore from '../../stores/ArgumentStore';
 
+import type { ArgumentReportButton_argument } from './__generated__/ArgumentReportButton_argument.graphql';
+
 type Props = {
   dispatch: Function,
-  argument: Object,
+  argument: ArgumentReportButton_argument,
 };
 
 class ArgumentReportButton extends React.Component<Props> {
@@ -31,4 +34,17 @@ class ArgumentReportButton extends React.Component<Props> {
   }
 }
 
-export default connect()(ArgumentReportButton);
+const container = connect()(ArgumentReportButton);
+export default createFragmentContainer(
+  container,
+  graphql`
+    fragment ArgumentReportButton_argument on Argument {
+      author {
+        id
+        displayName
+      }
+      id
+      hasUserReported
+    }
+  `,
+);

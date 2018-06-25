@@ -1,0 +1,16 @@
+Reportable:
+    type: interface
+    config:
+        description: "A reportable"
+        resolveType: "@=resolver('contribution_type', [value])"
+        fields:
+            id:
+              type: "ID!"
+            kind:
+              type: "String!"
+            related:
+                type: "Contribution"
+                description: "Related contribution."
+            url:
+                type: "URI!"
+                description: "Url of the contribution"

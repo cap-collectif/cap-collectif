@@ -1,15 +1,17 @@
 // @flow
 import React from 'react';
 import { FormattedDate } from 'react-intl';
+import { graphql, createFragmentContainer } from 'react-relay';
 import classNames from 'classnames';
 import moment from 'moment';
 import Linkify from 'react-linkify';
 import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
 import ArgumentButtons from './ArgumentButtons';
+import type { ArgumentItem_argument } from './__generated__/ArgumentItem_argument.graphql';
 
 type Props = {
-  argument: Object,
+  argument: ArgumentItem_argument,
 };
 
 class ArgumentItem extends React.Component<Props> {
@@ -66,4 +68,19 @@ class ArgumentItem extends React.Component<Props> {
   }
 }
 
-export default ArgumentItem;
+export default createFragmentContainer(
+  ArgumentItem,
+  graphql`
+    fragment ArgumentItem_argument on Argument {
+      createdAt
+      author {
+        id
+        slug
+        displayName
+        url
+        vip
+      }
+      body
+    }
+  `,
+);

@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
+import { graphql, createFragmentContainer } from 'react-relay';
 import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
 import ArgumentVoteBox from './Vote/ArgumentVoteBox';
 import ArgumentEditModal from './Edition/ArgumentEditModal';
@@ -9,9 +10,10 @@ import ArgumentReportButton from './ArgumentReportButton';
 import EditButton from '../Form/EditButton';
 import DeleteButton from '../Form/DeleteButton';
 import { openArgumentEditModal } from '../../redux/modules/opinion';
+import type { ArgumentButtons_argument } from './__generated__/ArgumentButtons_argument.graphql';
 
 type Props = {
-  argument: Object,
+  argument: ArgumentButtons_argument,
   dispatch: Function,
 };
 
@@ -59,7 +61,7 @@ class ArgumentButtons extends React.Component<Props, State> {
         {/* $FlowFixMe */}
         <ShareButtonDropdown
           id={`arg-${argument.id}-share-button`}
-          url={argument._links.show}
+          url={argument.url}
           className="argument__btn--share btn-dark-gray btn--outline btn btn-xs"
         />
       </div>
@@ -67,4 +69,18 @@ class ArgumentButtons extends React.Component<Props, State> {
   }
 }
 
-export default connect()(ArgumentButtons);
+const container = connect()(ArgumentButtons);
+export default createFragmentContainer(
+  container,
+  graphql`
+    fragment ArgumentButtons_argument on Argument {
+      author {
+        id
+        displayName
+      }
+      id
+      isContribuable
+      url
+    }
+  `,
+);

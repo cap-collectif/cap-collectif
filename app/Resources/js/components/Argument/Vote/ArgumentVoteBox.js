@@ -1,10 +1,12 @@
 // @flow
 import React from 'react';
+import { graphql, createFragmentContainer } from 'react-relay';
 import ArgumentActions from '../../../actions/ArgumentActions';
 import ArgumentVoteButton from './ArgumentVoteButton';
+import type { ArgumentVoteBox_argument } from './__generated__/ArgumentVoteBox_argument.graphql';
 
 type Props = {
-  argument: Object,
+  argument: ArgumentVoteBox_argument,
 };
 
 type State = {
@@ -56,4 +58,13 @@ class ArgumentVoteBox extends React.Component<Props, State> {
   }
 }
 
-export default ArgumentVoteBox;
+export default createFragmentContainer(
+  ArgumentVoteBox,
+  graphql`
+    fragment ArgumentVoteBox_argument on Argument {
+      id
+      votesCount
+      hasUserVoted
+    }
+  `,
+);
