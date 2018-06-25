@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
-import { injectIntl, type IntlShape } from 'react-intl';
+import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import UserAdminAccount from './UserAdminAccount';
 import UserAdminProfile from './UserAdminProfile';
@@ -20,7 +20,10 @@ export class UserAdminPageTabs extends Component<Props, State> {
     return (
       <div>
         <p>
-          <strong>Permalien : </strong> <a href={user.show_url}>{user.show_url}</a>{' '}
+          <strong>
+            <FormattedMessage id="permalink" /> :{' '}
+          </strong>{' '}
+          <a href={user.show_url}>{user.show_url}</a>{' '}
         </p>
         <Tabs defaultActiveKey={1} id="user-admin-page-tabs">
           <Tab eventKey={1} title={intl.formatMessage({ id: 'user.profile.edit.account' })}>

@@ -41,9 +41,6 @@ describe('<UserAdminAccount/>', () => {
         userDeletedIsNotViewer={false}
       />,
     );
-    wrapper.setState({
-      showDeleteAccountModal: false,
-    });
     expect(wrapper).toMatchSnapshot();
   });
 });

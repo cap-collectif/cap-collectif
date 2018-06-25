@@ -101,4 +101,7 @@ Scenario: Logged in super admin wants create a user
     | email    | blague.toto@gmail.com |
   And I check "vip"
   And I check "roles.super_admin"
+  And I should not see "global.invalid.form"
   Then I click on button "#confirm-user-create"
+  And I wait 1 seconds
+  Then I should not see "global.invalid.form"

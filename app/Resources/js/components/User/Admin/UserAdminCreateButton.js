@@ -26,8 +26,9 @@ type FormValues = {
   username: string,
   email: string,
   plainPassword: ?string,
+  // $FlowFixMe
   roles: {
-    labels: [],
+    +labels: $ReadOnlyArray<string>,
   },
   vip: boolean,
   enabled: boolean,
@@ -58,14 +59,11 @@ const validate = (values: FormValues) => {
   return errors;
 };
 
-// if I give FormValues I got an error "cause of  object type [1] is incompatible
-// with read-only array type [2] in property input.roles." So I give Object
-const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
+const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const { intl } = props;
-  const roles = values.roles.labels;
   const input = {
     ...values,
-    roles,
+    roles: values.roles.labels,
   };
 
   return CreateUserMutation.commit({ input })
@@ -159,7 +157,7 @@ export class UserAdminCreateButton extends Component<Props, State> {
               <SelectUserRoles id="user_roles" name="roles" label="form.label_real_roles" />
               <Field
                 isOtherAllowed
-                id="user_statuses"
+                id="vip"
                 name="vip"
                 component={component}
                 type="checkbox"
@@ -168,7 +166,7 @@ export class UserAdminCreateButton extends Component<Props, State> {
                 children={<FormattedMessage id="form.label_vip" />}
               />
               <Field
-                id="user_statuses"
+                id="enabled"
                 name="enabled"
                 component={component}
                 type="checkbox"
@@ -177,7 +175,7 @@ export class UserAdminCreateButton extends Component<Props, State> {
                 children={<FormattedMessage id="list.label_enabled" />}
               />
               <Field
-                id="user_statuses"
+                id="locked"
                 name="locked"
                 component={component}
                 type="checkbox"

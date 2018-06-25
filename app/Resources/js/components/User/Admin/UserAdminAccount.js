@@ -155,7 +155,6 @@ export class UserAdminAccount extends React.Component<Props, State> {
               id="newsletter"
               name="newsletter"
               component={component}
-              isReduxForm
               type="checkbox"
               disabled={!user.isViewer}
               children={
@@ -222,7 +221,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, { user }:
     vip: user.vip,
     enabled: user.enabled,
     locked: user.locked,
-    roles: { labels: user.roles },
+    roles: { labels: user.roles, other: null },
     expired: user.expired,
     newsletter: user.isSubscribedToNewsLetter,
   },

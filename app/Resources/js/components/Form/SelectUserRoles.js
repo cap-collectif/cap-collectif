@@ -38,7 +38,6 @@ export class SelectUserRoles extends Component<Props & { intl: IntlShape }> {
     if (isSuperAdmin) {
       userRoles.push(superAdminRole);
     }
-
     return (
       <Field
         id={id}

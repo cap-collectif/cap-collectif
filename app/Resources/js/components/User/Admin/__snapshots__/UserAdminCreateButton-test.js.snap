@@ -116,7 +116,7 @@ exports[`<UserAdminCreateButton/> should render 1`] = `
         />
         <Field
           component={[Function]}
-          id="user_statuses"
+          id="vip"
           isOtherAllowed={true}
           label={
             <FormattedMessage
@@ -135,7 +135,7 @@ exports[`<UserAdminCreateButton/> should render 1`] = `
         </Field>
         <Field
           component={[Function]}
-          id="user_statuses"
+          id="enabled"
           isOtherAllowed={true}
           name="enabled"
           type="checkbox"
@@ -148,7 +148,7 @@ exports[`<UserAdminCreateButton/> should render 1`] = `
         </Field>
         <Field
           component={[Function]}
-          id="user_statuses"
+          id="locked"
           isOtherAllowed={true}
           name="locked"
           type="checkbox"

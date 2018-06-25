@@ -4,7 +4,12 @@ exports[`<UserAdminPageTabs/> should render 1`] = `
 <div>
   <p>
     <strong>
-      Permalien : 
+      <FormattedMessage
+        id="permalink"
+        values={Object {}}
+      />
+       :
+       
     </strong>
      
     <a
