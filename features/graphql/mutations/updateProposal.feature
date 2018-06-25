@@ -61,8 +61,6 @@ Scenario: Admin should be notified if GraphQL user modify his proposal
   """
   Then the queue associated to "proposal_update" producer has messages below:
   | 0 | {"proposalId": "proposal2"} |
-  Then the queue associated to "elasticsearch_indexation" producer has messages below:
-  | 1 | ["{"class":"Capco\\AppBundle\\Entity\\Proposal","id":"proposal2"}","{"class":"Capco\\UserBundle\\Entity\\User","id":"user5"}"] |
 
 @database
 Scenario: GraphQL client wants to edit his proposal
