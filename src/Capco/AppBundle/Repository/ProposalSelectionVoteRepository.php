@@ -185,14 +185,16 @@ class ProposalSelectionVoteRepository extends EntityRepository
 
     public function countVotesByProposal(Proposal $proposal, bool $includeExpired): int
     {
-        return (int) $this->createQueryBuilder('pv')
+        $qb = $this->createQueryBuilder('pv')
             ->select('COUNT(pv.id)')
             ->andWhere('pv.proposal = :proposal')
-            ->andWhere('pv.expired = :includeExpired')
-            ->setParameter('includeExpired', $includeExpired)
-            ->setParameter('proposal', $proposal)
-            ->getQuery()->getSingleScalarResult()
-        ;
+            ->setParameter('proposal', $proposal);
+
+        if (!$includeExpired) {
+            $qb->andWhere('pv.expired = false');
+        }
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
     public function getByProposalAndStep(Proposal $proposal, SelectionStep $step, int $litmit, int $offset, string $field, string $direction, bool $includeExpired): Paginator
@@ -200,10 +202,12 @@ class ProposalSelectionVoteRepository extends EntityRepository
         $qb = $this->createQueryBuilder('pv')
             ->andWhere('pv.selectionStep = :step')
             ->andWhere('pv.proposal = :proposal')
-            ->andWhere('pv.expired = :includeExpired')
-            ->setParameter('includeExpired', $includeExpired)
             ->setParameter('step', $step)
             ->setParameter('proposal', $proposal);
+
+        if (!$includeExpired) {
+            $qb->andWhere('pv.expired = false');
+        }
 
         if ('CREATED_AT' === $field) {
             $qb->addOrderBy('pv.createdAt', $direction);
@@ -217,16 +221,18 @@ class ProposalSelectionVoteRepository extends EntityRepository
 
     public function countVotesByProposalAndStep(Proposal $proposal, SelectionStep $step, bool $includeExpired): int
     {
-        return (int) $this->createQueryBuilder('pv')
-            ->select('COUNT(pv)')
-            ->andWhere('pv.selectionStep = :step')
+        $qb = $this->createQueryBuilder('pv')
+            ->select('COUNT(pv.id)')
+            ->andWhere('pv.collectStep = :step')
             ->andWhere('pv.proposal = :proposal')
-            ->andWhere('pv.expired = :includeExpired')
-            ->setParameter('includeExpired', $includeExpired)
             ->setParameter('proposal', $proposal)
-            ->setParameter('step', $step)
-            ->getQuery()
-            ->getSingleScalarResult();
+            ->setParameter('step', $step);
+
+        if (!$includeExpired) {
+            $qb->andWhere('pv.expired = false');
+        }
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
     public function getVotesForProposalByStepId(Proposal $proposal, string $stepId, $limit = null, $offset = 0): array
