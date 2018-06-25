@@ -2,14 +2,12 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Symfony\Component\Validator\Constraints\Valid;
 
-class AppendixTypeAdmin extends AbstractAdmin
+class AppendixTypeAdmin extends CapcoAdmin
 {
     protected $formOptions = [
         'cascade_validation' => true,
@@ -19,16 +17,6 @@ class AppendixTypeAdmin extends AbstractAdmin
         '_sort_order' => 'ASC',
         '_sort_by' => 'title',
     ];
-
-    public function getFormBuilder()
-    {
-        if (isset($this->formOptions['cascade_validation'])) {
-            unset($this->formOptions['cascade_validation']);
-            $this->formOptions['constraints'][] = new Valid();
-        }
-
-        return parent::getFormBuilder();
-    }
 
     /**
      * @param DatagridMapper $datagridMapper

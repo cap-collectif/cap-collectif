@@ -14,15 +14,13 @@ use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Validator\Constraints\Valid;
 
-class StepAdmin extends AbstractAdmin
+class StepAdmin extends CapcoAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
@@ -43,16 +41,6 @@ class StepAdmin extends AbstractAdmin
         SelectionStep::class => '',
         CollectStep::class => 'admin.fields.proposal.group_collect',
     ];
-
-    public function getFormBuilder()
-    {
-        if (isset($this->formOptions['cascade_validation'])) {
-            unset($this->formOptions['cascade_validation']);
-            $this->formOptions['constraints'][] = new Valid();
-        }
-
-        return parent::getFormBuilder();
-    }
 
     public function getNewInstance()
     {

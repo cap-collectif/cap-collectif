@@ -3,12 +3,10 @@
 namespace Capco\AdminBundle\Admin;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Symfony\Component\Validator\Constraints\Valid;
 
-class AnswerAdmin extends AbstractAdmin
+class AnswerAdmin extends CapcoAdmin
 {
     protected $formOptions = [
         'cascade_validation' => true,
@@ -21,16 +19,6 @@ class AnswerAdmin extends AbstractAdmin
 
     public function getBatchActions()
     {
-    }
-
-    public function getFormBuilder()
-    {
-        if (isset($this->formOptions['cascade_validation'])) {
-            unset($this->formOptions['cascade_validation']);
-            $this->formOptions['constraints'][] = new Valid();
-        }
-
-        return parent::getFormBuilder();
     }
 
     /**

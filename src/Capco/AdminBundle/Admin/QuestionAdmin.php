@@ -7,26 +7,14 @@ use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Symfony\Component\Validator\Constraints\Valid;
 
-class QuestionAdmin extends AbstractAdmin
+class QuestionAdmin extends CapcoAdmin
 {
     protected $formOptions = [
         'cascade_validation' => true,
     ];
-
-    public function getFormBuilder()
-    {
-        if (isset($this->formOptions['cascade_validation'])) {
-            unset($this->formOptions['cascade_validation']);
-            $this->formOptions['constraints'][] = new Valid();
-        }
-
-        return parent::getFormBuilder();
-    }
 
     public function prePersist($question)
     {
