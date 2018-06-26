@@ -3,6 +3,8 @@
 namespace Capco\AppBundle\Traits;
 
 use Capco\AppBundle\Entity\Requirement;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 trait RequirementTrait
@@ -13,7 +15,7 @@ trait RequirementTrait
      */
     protected $requirements;
 
-    public function addRequirement(Requirement $requirement)
+    public function addRequirement(Requirement $requirement):self
     {
         if (!$this->requirements->contains($requirement)) {
             $this->requirements[] = $requirement;
@@ -23,12 +25,14 @@ trait RequirementTrait
         return $this;
     }
 
-    public function removeRequirement(Requirement $requirement)
+    public function removeRequirement(Requirement $requirement):self
     {
         $this->requirements->removeElement($requirement);
+
+        return $this;
     }
 
-    public function getRequirements()
+    public function getRequirements(): ?Collection
     {
         return $this->requirements;
     }

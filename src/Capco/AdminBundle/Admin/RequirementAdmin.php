@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class RequirementAdmin extends Admin
 {
@@ -27,7 +28,7 @@ class RequirementAdmin extends Admin
             ->add('position', null, [
                 'label' => 'admin.fields.step.position',
             ])
-            ->add('type', 'choice', [
+            ->add('type', ChoiceType::class, [
                 'choices' => Requirement::$requirementsLabels,
                 'label' => 'group.title',
                 'required' => true,
