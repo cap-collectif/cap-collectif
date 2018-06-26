@@ -5,9 +5,11 @@ namespace Capco\AppBundle\Entity\Steps;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Status;
+use Capco\AppBundle\Traits\RequirementTrait;
 use Capco\AppBundle\Traits\TimelessStepTrait;
 use Capco\AppBundle\Traits\VoteThresholdTrait;
 use Capco\AppBundle\Traits\VoteTypeTrait;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -17,7 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class CollectStep extends AbstractStep implements ParticipativeStepInterface
 {
-    use TimelessStepTrait, VoteThresholdTrait, VoteTypeTrait;
+    use TimelessStepTrait, VoteThresholdTrait, VoteTypeTrait, RequirementTrait;
 
     public static $sort = ['old', 'last', 'votes', 'least-votes', 'comments', 'random', 'expensive', 'cheap'];
 
@@ -63,6 +65,12 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
      * @Assert\Choice(choices={"old","last","votes","least-votes","comments","random", "cheap", "expensive"})
      */
     private $defaultSort = 'random';
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->requirements = new ArrayCollection();
+    }
 
     public function getProposalsCount(): int
     {

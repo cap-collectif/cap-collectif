@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity\Steps;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Selection;
+use Capco\AppBundle\Traits\RequirementTrait;
 use Capco\AppBundle\Traits\TimelessStepTrait;
 use Capco\AppBundle\Traits\VoteThresholdTrait;
 use Capco\AppBundle\Traits\VoteTypeTrait;
@@ -17,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class SelectionStep extends AbstractStep implements ParticipativeStepInterface
 {
-    use TimelessStepTrait, VoteThresholdTrait, VoteTypeTrait;
+    use TimelessStepTrait, VoteThresholdTrait, VoteTypeTrait, RequirementTrait;
 
     const VOTE_TYPE_DISABLED = 0;
     const VOTE_TYPE_SIMPLE = 1;
@@ -72,6 +73,7 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface
     {
         parent::__construct();
         $this->selections = new ArrayCollection();
+        $this->requirements = new ArrayCollection();
     }
 
     public function addSelection(Selection $selection)

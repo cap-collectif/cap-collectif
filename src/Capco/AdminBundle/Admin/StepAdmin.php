@@ -20,6 +20,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class StepAdmin extends Admin
 {
@@ -329,7 +330,25 @@ class StepAdmin extends Admin
                     'edit' => 'inline',
                     'inline' => 'table',
                     'sortable' => 'position',
+                ])->end()
+            ;
+            $formMapper
+                ->with('requirements')
+                ->add('requirements', 'sonata_type_collection', [
+                    'label' => 'fields',
+                    'by_reference' => false,
+                ], [
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'sortable' => 'position',
                 ])
+                ->add('requirementsReason', TextareaType::class, [
+                    'translation_domain' => 'CapcoAppBundle',
+                    'label' => 'reason-for-collection',
+                    'required' => false,
+                    'help' => 'help-text-for-reason-for-collection-field',
+                ])
+                ->end()
             ;
 
             if ($subject instanceof CollectStep) {
