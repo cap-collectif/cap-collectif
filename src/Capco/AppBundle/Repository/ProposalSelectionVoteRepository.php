@@ -223,7 +223,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('pv')
             ->select('COUNT(pv.id)')
-            ->andWhere('pv.collectStep = :step')
+            ->andWhere('pv.selectionStep = :step')
             ->andWhere('pv.proposal = :proposal')
             ->setParameter('proposal', $proposal)
             ->setParameter('step', $step);
