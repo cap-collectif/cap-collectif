@@ -12,10 +12,33 @@ import UpdateProfilePublicDataMutation from '../../../mutations/UpdateProfilePub
 import UserAdminProfile_user from './__generated__/UserAdminProfile_user.graphql';
 
 type RelayProps = { user: UserAdminProfile_user };
+
+type FormValues = {
+  +id: string,
+  // $FlowFixMe
+  +media: ?{
+    +id: string,
+    +name: string,
+    +size: string,
+    +url: string,
+  },
+  +show_url: ?any,
+  +username: string,
+  +biography: ?string,
+  +website: ?string,
+  +facebookUrl: ?string,
+  +linkedInUrl: ?string,
+  +twitterUrl: ?string,
+  +profilePageIndexed: ?boolean,
+  userType: string,
+  +neighborhood: ?string,
+  +isViewer: boolean,
+};
+
 type Props = FormProps &
   RelayProps & {
     intl: IntlShape,
-    initialValues: Object,
+    initialValues: FormValues,
     hasValue: Object,
     userTypes: Array<Object>,
     features: Object,
@@ -55,12 +78,11 @@ const validate = (values: Object) => {
   return errors;
 };
 
-const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
+const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const { intl } = props;
   const media =
     typeof values.media !== 'undefined' && values.media !== null ? values.media.id : null;
   const userId = props.user.id;
-  delete values.media;
   const input = {
     ...values,
     media,

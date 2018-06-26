@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<UserAdminAccount/> should render with user is admin or viewer 1`] = `
+exports[`<UserAdminAccount/> should render when user is admin or viewer 1`] = `
 <div
   className="box box-primary container-fluid"
 >
@@ -194,7 +194,7 @@ exports[`<UserAdminAccount/> should render with user is admin or viewer 1`] = `
 </div>
 `;
 
-exports[`<UserAdminAccount/> should render with user is not admin or viewer  1`] = `
+exports[`<UserAdminAccount/> should render when user is not admin or viewer 1`] = `
 <div
   className="box box-primary container-fluid"
 >

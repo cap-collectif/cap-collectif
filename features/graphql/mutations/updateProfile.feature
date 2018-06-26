@@ -1,4 +1,4 @@
-@user
+@user @user_graphql
 Feature: Update a user
 
 @database
@@ -96,7 +96,7 @@ Scenario: User should be able to update his personal data
   """
 
 @database
-Scenario: Super Admin should be able to update personal data of an other user
+Scenario: A super admin wants to update personal data of an other user
   Given I am logged in to graphql as super admin
   And I send a GraphQL POST request:
   """
@@ -155,7 +155,7 @@ Scenario: Super Admin should be able to update personal data of an other user
   }
   """
 
-@database
+@security
 Scenario: User should not be able to update personal data of an other user
   Given I am logged in to graphql as user
   And I send a GraphQL POST request:
@@ -196,7 +196,7 @@ Scenario: User should not be able to update personal data of an other user
   Then the JSON response should match:
   """
   {
-    "errors":[{"message":"Your are not allowed","locations":[{"line":1,"column":90}],"path":["updateProfilePersonalData"]}],"data":{"updateProfilePersonalData":null}
+    "errors":[{"message":"Only a SUPER_ADMIN can edit data from another user. Or the account owner","locations":[{"line":1,"column":90}],"path":["updateProfilePersonalData"]}],"data":{"updateProfilePersonalData":null}
   }
   """
 
@@ -283,7 +283,7 @@ Scenario: Super Admin should be able to update public data of an other user
   }
   """
 
-@database
+@security
 Scenario: User should not be able to update personal data of an other user
   Given I am logged in to graphql as user
   And I send a GraphQL POST request:
@@ -312,11 +312,11 @@ Scenario: User should not be able to update personal data of an other user
   Then the JSON response should match:
   """
   {
-    "errors":[{"message":"Your are not allowed","locations":[{"line":1,"column":86}],"path":["updateProfilePublicData"]}],"data":{"updateProfilePublicData":null}
+    "errors":[{"message":"Only a SUPER_ADMIN can edit data from another user. Or the account owner","locations":[{"line":1,"column":86}],"path":["updateProfilePublicData"]}],"data":{"updateProfilePublicData":null}
   }
   """
 
-@database
+@security
 Scenario: User should be able to update his public data, but username is missing
   Given I am logged in to graphql as user
   And I send a GraphQL POST request:
@@ -381,7 +381,7 @@ Scenario: User should be able to update his password
   }
   """
 
-@database
+@security
 Scenario: User should be able to update his password, but give a bad current password
   Given I am logged in to graphql as user
   And I send a GraphQL POST request:
@@ -503,7 +503,7 @@ Scenario: Admin should be able to update other user account
   }
   """
 
-@database
+@security
 Scenario: Admin should not be able to update other/own user as super admin
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:

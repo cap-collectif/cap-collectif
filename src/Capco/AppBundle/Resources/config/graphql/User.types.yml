@@ -275,13 +275,18 @@ User:
             isSubscribedToNewsLetter:
                 type: "Boolean"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserNewsLetterResolver", [value])'
+                description: "Is user subscribed to the newsletter ?"
             subscribedToNewsLetterAt:
                 type: "DateTime"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserNewsLetterResolver", [value, "at"])'
+                description: "The user subrscibes to the newsletter at date"
             isViewer:
                 type: "Boolean!"
                 resolve: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isViewer(user, value)'
+                description: "Is user given the current viewer ?"
             isEmailConfirmed:
                 type: "Boolean"
+                description: "Has the user confirmed his email address ?"
             emailConfirmationSentAt:
                 type: "DateTime"
+                description: "The user's email was confirmed at date"

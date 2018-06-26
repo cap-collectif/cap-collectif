@@ -1,7 +1,7 @@
 UpdateUserAccountPayload:
     type: relay-mutation-payload
     config:
-        description: "Update a user"
+        description: "Payload type of UpdateUserAccount"
         fields:
             user:
                 type: "User!"

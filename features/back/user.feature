@@ -5,7 +5,7 @@ Background:
   Given feature "profiles" is enabled
 
 @database
-Scenario: Logged in admin wants edit a user account tab
+Scenario: Logged in super admin wants to edit a user profile
   Given I am logged in as admin
   Then I go to the admin user page with userId "user516"
   And the "form.label_vip" checkbox should be checked
@@ -23,7 +23,7 @@ Scenario: Logged in admin wants edit a user account tab
   And I should see "global.saved"
 
 @database
-Scenario: Logged in super admin wants edit a user profile tab
+Scenario: Logged in super admin wants to edit a user profile
   Given I am logged in as super admin
   Then I go to the admin user page with userId "user516"
   And I go to the admin user "profile" tab
@@ -36,7 +36,7 @@ Scenario: Logged in super admin wants edit a user profile tab
   And I should see "global.saved"
 
 @database
-Scenario: Logged in super admin wants edit a user data tab
+Scenario: Logged in super admin wants to edit a user data
   Given I am logged in as super admin
   Then I go to the admin user page with userId "user516"
   And I go to the admin user "data" tab
@@ -47,7 +47,7 @@ Scenario: Logged in super admin wants edit a user data tab
   And I should see "global.saved"
 
 @database
-Scenario: Logged in super admin wants edit a user password tab
+Scenario: Logged in super admin wants to edit a user password
   Given I am logged in as super admin
   Then I go to the admin user page with userId "user516"
   And I go to the admin user "password" tab
@@ -57,7 +57,7 @@ Scenario: Logged in super admin wants edit a user password tab
   And the button "user-admin-password-save" should be disabled
 
 @database
-Scenario: Logged in admin wants edit my password in back office
+Scenario: Logged in admin wants to edit my password in back office
   Given I am logged in as admin
   Then I go to the admin user page with userId "userAdmin"
   And I go to the admin user "password" tab
@@ -85,7 +85,7 @@ Scenario: Logged in super admin wants delete a user
   And I should see "deleted-user"
 
 @database
-Scenario: Logged in super admin wants create a user
+Scenario: Logged in super admin wants to create a user
   Given I am logged in as super admin
   Then I go to the admin user list page
   And I open modal to create user

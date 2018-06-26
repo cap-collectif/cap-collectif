@@ -14,10 +14,25 @@ import UserAdminPersonalData_user from './__generated__/UserAdminPersonalData_us
 import DatesInterval from '../../Utils/DatesInterval';
 
 type RelayProps = { user: UserAdminPersonalData_user };
+type GenderValue = 'FEMALE' | 'MALE' | 'OTHER' | '%future added value';
+type FormValue = {
+  address: string,
+  address2: string,
+  city: string,
+  zipCode: string,
+  firstname: string,
+  lastname: string,
+  email: string,
+  phone: string,
+  isEmailConfirmed: boolean,
+  phoneConfirmed: boolean,
+  gender: GenderValue,
+  dateOfBirth: string,
+};
 type Props = FormProps &
   RelayProps & {
     intl: IntlShape,
-    initialValues: Object,
+    initialValues: FormValue,
     isViewerOrSuperAdmin: boolean,
   };
 
@@ -45,22 +60,6 @@ const validate = (values: Object) => {
   });
 
   return errors;
-};
-type GenderValue = 'FEMALE' | 'MALE' | 'OTHER' | '%future added value';
-
-type FormValue = {
-  address: string,
-  address2: string,
-  city: string,
-  zipCode: string,
-  firstname: string,
-  lastname: string,
-  email: string,
-  phone: string,
-  isEmailConfirmed: boolean,
-  phoneConfirmed: boolean,
-  gender: GenderValue,
-  dateOfBirth: string,
 };
 
 const onSubmit = (values: FormValue, dispatch: Dispatch, props: Props) => {

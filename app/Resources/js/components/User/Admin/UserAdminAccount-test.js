@@ -20,7 +20,7 @@ describe('<UserAdminAccount/>', () => {
     subscribedToNewsLetterAt: null,
     expiresAt: null,
   };
-  it('should render with user is admin or viewer', () => {
+  it('should render when user is admin or viewer', () => {
     const wrapper = shallow(
       <UserAdminAccount
         {...props1}
@@ -32,7 +32,7 @@ describe('<UserAdminAccount/>', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render with user is not admin or viewer ', () => {
+  it('should render when user is not admin or viewer', () => {
     const wrapper = shallow(
       <UserAdminAccount
         {...props1}

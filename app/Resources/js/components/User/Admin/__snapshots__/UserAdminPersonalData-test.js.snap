@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<UserAdminPersonalData/> should render, with user confirmed by email adn viewer is super admin  1`] = `
+exports[`<UserAdminPersonalData/> should render when user is confirmed by email and viewer is super admin 1`] = `
 <div
   className="box box-primary container-fluid"
 >
@@ -280,7 +280,7 @@ exports[`<UserAdminPersonalData/> should render, with user confirmed by email ad
 </div>
 `;
 
-exports[`<UserAdminPersonalData/> should render, with user not confirmed by email adn viewer not super admin 1`] = `
+exports[`<UserAdminPersonalData/> should render when user is not confirmed by email and viewer is not super admin 1`] = `
 <div
   className="box box-primary container-fluid"
 >

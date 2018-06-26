@@ -1,7 +1,7 @@
 UpdateUserAccountInput:
     type: relay-mutation-input
     config:
-        description: "Update a user"
+        description: "Input type of UpdateUserAccount"
         fields:
             userId:
                 type: "ID!"

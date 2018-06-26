@@ -39,7 +39,7 @@ abstract class BaseUpdateProfile
         $this->arguments = $input->getRawArguments();
 
         if (!$user->hasRole(self::ROLE_SUPER_ADMIN) && !empty($this->arguments[self::USER_ID])) {
-            throw new UserError('Your are not allowed');
+            throw new UserError('Only a SUPER_ADMIN can edit data from another user. Or the account owner');
         }
         $this->user = $user;
 
