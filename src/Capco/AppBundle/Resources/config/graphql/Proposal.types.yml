@@ -253,4 +253,4 @@ Proposal:
                 resolve: '@=value.userHasReport(user)'
             votableSteps:
               type: "[ProposalStep!]!"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalVotableStepsResolver", [value])'
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalVotableStepsResolver", [value])'

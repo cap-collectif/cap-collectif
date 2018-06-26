@@ -352,8 +352,8 @@ services:
             - '@capco.selection_step.repository'
             - '@capco.collect_step.repository'
 
-    Capco\AppBundle\GraphQL\Resolver\ProposalVotableStepsResolver:
-        class: Capco\AppBundle\GraphQL\Resolver\ProposalVotableStepsResolver
+    Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalVotableStepsResolver:
+        class: Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalVotableStepsResolver
         tags:
             - { name: overblog_graphql.resolver }
 
