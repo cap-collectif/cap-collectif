@@ -1,284 +1,75 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import styled from 'styled-components';
+import { withInfo } from '@storybook/addon-info';
 import { ProgressBar } from 'react-bootstrap';
-import CardProject from './CardProject';
-import CardProposal from './CardProposal';
-import CardTheme from './CardTheme';
+import Pagination from '../components/Utils/Pagination';
 import { Progress } from '../components/Ui/Progress';
-
-const Row = styled.div.attrs({
-  className: 'row',
-})`
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const Col = styled.div.attrs({
-  className: 'col-lg-3 col-md-4 col-sm-6 col-xs-12',
-})`
-  display: flex;
-`;
+import InlineList from '../components/Ui/List/InlineList';
+import TagsList from '../components/Ui/List/TagsList';
 
 const openProject = {
-  title: 'Rénovation du gymnase',
-  theme: ['Immobilier', 'Transport'],
-  counters: {
-    list: ['5 projets', '10 articles', '2 évènements', '4 idées'],
-    comments: {
-      value: '15',
-      label: 'commentaires',
-    },
-    votes: {
-      value: '3',
-      label: 'votes',
-    },
-  },
-  tags: {
-    tag: 'Justice',
-    localisation: 'Maurepas Patton',
-    contributions: '10 contributions',
-    participations: '15 contributions',
-  },
-  content:
-    'Lorem aque eius excepturi expedita ipptio quasi quisquam sunt tenetur vitae voluptas? Ad, iste.',
-  label: 'danger',
-  status: {
-    name: 'Soumis au vote',
-    color: 'status--success',
-  },
-  cover: 'https://source.unsplash.com/collection/1127828',
-  type: {
-    title: 'Consultation',
-    color: '#337ab7',
-  },
-  user: {
-    name: 'Jean Pierre',
-    avatar: 'https://source.unsplash.com/collection/181462',
-    publicationDate: '1 février 2015',
-  },
   step: {
     bsStyle: 'success',
     now: 50,
     label: 'en cours',
     className: null,
-    status: 'open',
-    actionLink: 'Participer',
-    remainingTime: {
-      value: '10',
-      label: 'jours restants',
-    },
   },
 };
 
 const continuousProject = {
-  title: 'Croissance, innovation, disruption',
-  theme: ['Immobilier', 'Transport'],
-  counters: {
-    list: ['5 projets', '10 articles', '2 évènements', '4 idées'],
-    comments: {
-      value: '15',
-      label: 'commentaires',
-    },
-    votes: {
-      value: '3',
-      label: 'votes',
-    },
-  },
-  tags: {
-    tag: 'Transport',
-    localisation: 'Nord Saint-Martin',
-    contributions: '10 contributions',
-    participations: '15 contributions',
-  },
-  content:
-    'Lorem aque eius excepturi expedita ipptio quasi quisquam sunt tenetur vitae voluptas? Ad, iste.',
-  label: 'success',
-  status: {
-    name: 'Aucun statut',
-    color: 'status--primary',
-  },
-  cover: 'https://source.unsplash.com/collection/1127828',
-  type: {
-    title: 'Questionnaire',
-    color: '#999999',
-  },
-  user: {
-    name: 'Jean Pierre',
-    avatar: 'https://source.unsplash.com/collection/181462',
-    publicationDate: '1 février 2015',
-  },
   step: {
     bsStyle: 'success',
     now: 100,
-    status: 'open',
     label: 'Participation en continue',
     className: null,
-    actionLink: 'Participer',
-    remainingTime: {
-      value: '27',
-      label: 'jours restants',
-    },
   },
 };
 
 const endedProject = {
-  title: "Startégie technologique de l'État et services publics",
-  theme: ['Immobilier', 'Transport'],
-  counters: {
-    list: ['5 projets', '10 articles', '2 évènements', '4 idées'],
-    comments: {
-      value: '15',
-      label: 'commentaires',
-    },
-    votes: {
-      value: '3',
-      label: 'votes',
-    },
-  },
-  tags: {
-    tag: 'Politique',
-    localisation: 'Beaulieu',
-    contributions: '10 contributions',
-    participations: '15 contributions',
-  },
-  content:
-    'Lorem aque eius excepturi expedita ipptio quasi quisquam sunt tenetur vitae voluptas? Ad, iste.',
-  label: 'primary',
-  status: {
-    name: 'Vote gagné',
-    color: 'status--danger',
-  },
-  cover: 'https://source.unsplash.com/collection/1127828',
-  type: {
-    title: 'Budget participatif',
-    color: '#5bc0de',
-  },
-  user: {
-    name: 'Jean Pierre',
-    avatar: 'https://source.unsplash.com/collection/181462',
-    publicationDate: '1 février 2015',
-  },
   step: {
     now: 100,
     label: 'Terminé',
-    status: 'ended',
     className: 'progress-bar_grey',
-    actionLink: 'Voir le résultat',
-    remainingTime: {},
   },
 };
 
 const toComeProject = {
-  title: 'Projet à venir',
-  theme: ['Immobilier', 'Transport'],
-  counters: {
-    list: ['5 projets', '10 articles', '2 évènements', '4 idées'],
-    comments: {
-      value: '15',
-      label: 'commentaires',
-    },
-    votes: {
-      value: '3',
-      label: 'votes',
-    },
-  },
-  tags: {
-    tag: 'Aménagement',
-    localisation: 'Beauregard',
-    contributions: '10 contributions',
-    participations: '15 contributions',
-  },
-  content:
-    'Lorem aque eius excepturi expedita ipptio quasi quisquam sunt tenetur vitae voluptas? Ad, iste.',
-  label: 'info',
-  status: {
-    name: 'Aucun statut',
-    color: 'status--info',
-  },
-  cover: 'https://source.unsplash.com/collection/1127828',
-  type: {
-    title: 'Interpellation',
-    color: '#5cb85c',
-  },
-  user: {
-    name: 'Jean Pierre',
-    avatar: 'https://source.unsplash.com/collection/181462',
-    publicationDate: '1 février 2015',
-  },
   step: {
     now: 100,
     label: 'à venir',
-    status: 'future',
-    actionLink: null,
-    className: 'progress-bar_empty',
-    remainingTime: {
-      label: 'Commence le lundi 12 décembre',
-    },
+    className: 'progress-bar_empty'
   },
 };
 
 storiesOf('Components', module)
-  .add('Cards', () => {
+  .add('Progress', withInfo({
+    source: false,
+    propTablesExclude: [Progress],
+    text :`
+      <h2>How to use</h2>
+    
+      ~~~jsx
+      // Inline list
+      <Pagination
+        nbPages={6}
+        current={3}
+        onChange={() => {}}
+      />
+      ~~~
+    
+    `})(() => {
     return (
-      <div className="container storybook-container">
-        <h3>Project Card</h3>
-        <hr />
-        <Row>
-          <Col>
-            <CardProject project={openProject} />
-          </Col>
-          <Col>
-            <CardProject project={endedProject} />
-          </Col>
-          <Col>
-            <CardProject project={continuousProject} />
-          </Col>
-          <Col>
-            <CardProject project={toComeProject} />
-          </Col>
-        </Row>
-        <h3>Proposal Card</h3>
-        <hr />
-        <Row>
-          <Col>
-            <CardProposal proposal={openProject} />
-          </Col>
-          <Col>
-            <CardProposal proposal={endedProject} />
-          </Col>
-          <Col>
-            <CardProposal proposal={continuousProject} />
-          </Col>
-          <Col>
-            <CardProposal proposal={toComeProject} />
-          </Col>
-        </Row>
-        <h3>Theme Card</h3>
-        <hr />
-        <Row>
-          <Col>
-            <CardTheme theme={openProject} />
-          </Col>
-          <Col>
-            <CardTheme theme={endedProject} />
-          </Col>
-          <Col>
-            <CardTheme theme={continuousProject} />
-          </Col>
-          <Col>
-            <CardTheme theme={toComeProject} />
-          </Col>
-        </Row>
-      </div>
-    );
-  })
-  .add('Progress', () => {
-    return (
-      <div className="container storybook-container">
+      <div className="ml-30 mr-30 storybook-container">
+        <h1>
+          Progress bar {' '}
+          <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
+            <i className="small cap cap-setting-gear-1"/>
+          </a>
+        </h1>
+        <hr/>
         <h3>À venir</h3>
-        <Progress>
+        <Progress className="mb-30">
           <ProgressBar
             now={toComeProject.step.now}
             className={toComeProject.step.className}
@@ -286,7 +77,7 @@ storiesOf('Components', module)
           />
         </Progress>
         <h3>En cours</h3>
-        <Progress>
+        <Progress className="mb-30">
           <ProgressBar
             now={openProject.step.now}
             bsStyle={openProject.step.bsStyle}
@@ -295,7 +86,7 @@ storiesOf('Components', module)
           />
         </Progress>
         <h3>Participation en continue</h3>
-        <Progress>
+        <Progress className="mb-30">
           <ProgressBar
             now={continuousProject.step.now}
             bsStyle={continuousProject.step.bsStyle}
@@ -304,7 +95,7 @@ storiesOf('Components', module)
           />
         </Progress>
         <h3>Terminé</h3>
-        <Progress>
+        <Progress className="mb-30">
           <ProgressBar
             now={endedProject.step.now}
             className={endedProject.step.className}
@@ -313,4 +104,102 @@ storiesOf('Components', module)
         </Progress>
       </div>
     );
-  });
+  }))
+  .add('List',  withInfo({
+    propTablesExclude: [InlineList, TagsList],
+    text :`
+      <h2>How to use</h2>
+    
+      ~~~jsx
+      // Inline list
+      <InlineList>
+        <li>Element 1</li>
+        <li>Element 2</li>
+      </InlineList>
+      
+      // Tags list
+      <TagsList>
+        <div className="tags-list__tag">
+          <i />
+          List content
+        </div>
+        <div className="tags-list__tag">
+          <i />
+          List content
+        </div>
+      </TagsList>
+      ~~~
+    
+    `})(() => {
+    return (
+      <div className="ml-30 mr-30 storybook-container">
+        <h1>
+          List {' '}
+          <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Style-stories.js">
+            <i className="small cap cap-setting-gear-1"/>
+          </a>
+        </h1>
+        <hr/>
+        <h3>Inline list</h3>
+        <InlineList className="mb-30">
+          <li>5 projets</li>
+          <li>10 articles</li>
+          <li>2 évènements</li>
+          <li>4 idées</li>
+        </InlineList>
+        <h3>Tags list</h3>
+        <TagsList className="mb-30">
+          <div className="tags-list__tag">
+            <i className="cap cap-marker-1-1 icon--blue" />
+            5 projets
+          </div>
+          <div className="tags-list__tag">
+            <i className="cap cap-tag-1-1 icon--blue" />
+            10 articles
+          </div>
+          <div className="tags-list__tag">
+            <i className="cap cap-tag-1-1 icon--blue" />
+            2 évènements
+          </div>
+          <div className="tags-list__tag">
+            <i className="cap cap-marker-1-1 icon--blue" />
+            4 idées
+          </div>
+        </TagsList>
+      </div>
+    );
+  }))
+  .add('Pagination', withInfo({
+    source: false,
+    text :`
+      <h2>How to use</h2>
+    
+      ~~~jsx
+      // Inline list
+      <Pagination
+        nbPages={6}
+        current={3}
+        onChange={() => {}}
+      />
+      ~~~
+    
+    `})(() => {
+    return (
+      <div className="ml-30 mr-30 storybook-container">
+        <h1>
+          Pagination {' '}
+          <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
+            <i className="small cap cap-setting-gear-1"/>
+          </a>
+        </h1>
+        <hr/>
+        <div className="row">
+          <Pagination
+            nbPages={6}
+            current={3}
+            onChange={() => {}}
+          />
+        </div>
+      </div>
+    );
+  }));

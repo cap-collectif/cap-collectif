@@ -193,6 +193,8 @@
     "xml2json": "^0.11.2"
   },
   "devDependencies": {
+    "@storybook/addon-info": "^3.4.8",
+    "@storybook/addons": "^3.4.8",
     "@storybook/react": "^3.3.13",
     "babel-eslint": "^7.2.3",
     "babel-jest": "^23.0.1",
