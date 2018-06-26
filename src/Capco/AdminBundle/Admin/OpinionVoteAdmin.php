@@ -96,7 +96,7 @@ class OpinionVoteAdmin extends Admin
                 'label' => 'admin.global.expired',
                 'attr' => [
                   'disabled' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
-                  'read_only' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
+                  'readonly' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                 ],
             ])
             ->add('updatedAt', null, [

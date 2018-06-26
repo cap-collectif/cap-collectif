@@ -17,13 +17,12 @@ class ResponseAdmin extends CapcoAdmin
             ->add('question', null, [
                 'label' => 'admin.fields.response.question',
                 'required' => false,
-                'read_only' => true,
-                'disabled' => true,
+                'attr' => ['readonly' => true, 'disabled' => true],
             ])
             ->add('value', null, [
                 'label' => 'admin.fields.response.value',
                 'required' => false,
-                'read_only' => true,
+                'attr' => ['readonly' => true],
             ])
         ;
     }

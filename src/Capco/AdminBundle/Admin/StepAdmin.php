@@ -201,9 +201,8 @@ class StepAdmin extends CapcoAdmin
                     'label' => 'reported',
                     'mapped' => false,
                     'value' => true,
-                    'read_only' => true,
                     'disabled' => true,
-                    'attr' => ['checked' => true],
+                    'attr' => ['readonly' => true, 'checked' => true],
                 ])
                 ->add('moderatingOnCreate', null, [
                     'label' => 'admin.fields.synthesis.enabled',
