@@ -19,7 +19,7 @@ RUN apt-get update \
     && apt-get install --no-install-recommends -y python python-pip build-essential \
     && apt-get clean
 
-ENV YARN_VERSION 1.5.1
+ENV YARN_VERSION 1.7.0
 RUN curl -fSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz" \
     && tar -xzf yarn-v$YARN_VERSION.tar.gz -C /opt/ \
     && ln -snf /opt/yarn-v$YARN_VERSION/bin/yarn /usr/local/bin/yarn \
@@ -52,7 +52,7 @@ RUN apt-get update && \
     rm -r /var/lib/apt/lists/*
 
 # Install bower and babel-cli
-RUN yarn global add bower@1.8.0 babel-cli
+RUN yarn global add bower@1.8.4 babel-cli
 
 COPY capco.ini /usr/local/etc/php/conf.d/capco.ini
 COPY build.sh /usr/local/bin/build
