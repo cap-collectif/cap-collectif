@@ -4,6 +4,8 @@ Argumentable:
         description: "An argumentable"
         resolveType: "@=resolver('contribution_type', [value])"
         fields:
+          id:
+              type: "ID!"
           arguments:
               description: "The arguments related to the argumentable."
               type: "ArgumentConnection!"

@@ -20,7 +20,8 @@ Argument:
                 type: "ArgumentValue!"
                 description: "The type."
             votesCount:
-                type: "Int!"
+                type: "Int"
+                description: "This will be deprecated for a connection, soon."
             body:
                 type: "String!"
                 description: "The content of the argument."

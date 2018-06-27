@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 import ReportBox from '../Report/ReportBox';
 import { submitArgumentReport } from '../../redux/modules/report';
-import ArgumentStore from '../../stores/ArgumentStore';
-
 import type { ArgumentReportButton_argument } from './__generated__/ArgumentReportButton_argument.graphql';
 
 type Props = {
@@ -14,9 +12,12 @@ type Props = {
 };
 
 class ArgumentReportButton extends React.Component<Props> {
-  handleReport = data => {
+  handleReport = (data: Object) => {
     const { argument, dispatch } = this.props;
-    return submitArgumentReport(ArgumentStore.opinion, argument.id, data, dispatch);
+    if (!argument.related) {
+      return;
+    }
+    return submitArgumentReport(argument.related, argument.id, data, dispatch);
   };
 
   render() {
@@ -42,6 +43,14 @@ export default createFragmentContainer(
       author {
         id
         displayName
+      }
+      related {
+        # ... on Version {
+        #   parent {
+        #     id
+        #   }
+        # }
+        id
       }
       id
       viewerHasReport @include(if: $isAuthenticated)

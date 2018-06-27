@@ -2,7 +2,6 @@
 import React from 'react';
 import { Tab, Nav, NavItem } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import ArgumentStore from '../../stores/ArgumentStore';
 import { COMMENT_SYSTEM_SIMPLE, COMMENT_SYSTEM_BOTH } from '../../constants/ArgumentConstants';
 import ArgumentsBox from '../Argument/ArgumentsBox';
 import OpinionVersionsBox from './OpinionVersionsBox';
@@ -33,26 +32,15 @@ class OpinionTabs extends React.Component<Props, State> {
 
   componentWillMount() {
     OpinionSourceStore.addChangeListener(this.onSourceChange);
-    ArgumentStore.addChangeListener(this.onArgumentChange);
   }
 
   componentDidMount() {
     setTimeout(scrollToAnchor, 20); // We use setTimeout to interact with DOM in componentDidMount (see React documentation)
   }
 
-  componentWillUnmount() {
-    ArgumentStore.removeChangeListener(this.onArgumentChange);
-  }
-
   onSourceChange = () => {
     this.setState({
       sourcesCount: OpinionSourceStore.count,
-    });
-  };
-
-  onArgumentChange = () => {
-    this.setState({
-      argumentsCount: ArgumentStore.count,
     });
   };
 

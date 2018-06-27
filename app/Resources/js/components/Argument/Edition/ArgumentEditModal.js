@@ -71,6 +71,7 @@ export default createFragmentContainer(
     fragment ArgumentEditModal_argument on Argument {
       id
       body
+      ...ArgumentForm_argument
     }
   `,
 );

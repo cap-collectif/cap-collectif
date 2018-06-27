@@ -1,3 +1,21 @@
+input AddArgumentInput {
+  # The Argumentable ID to argue.
+  argumentableId: ID!
+
+  # The contents of the argument body.
+  body: String!
+
+  # The type of the argument.
+  type: ArgumentValue!
+  clientMutationId: String
+}
+
+type AddArgumentPayload {
+  # The new argument.
+  argument: Argument!
+  clientMutationId: String
+}
+
 input AddProposalVoteInput {
   # The Node ID of the proposal to vote.
   proposalId: ID!
@@ -88,7 +106,9 @@ type Argument implements Node & Contribution & Reportable & TrashableContributio
 
   # The type.
   type: ArgumentValue!
-  votesCount: Int!
+
+  # This will be deprecated for a connection, soon.
+  votesCount: Int
 
   # The content of the argument.
   id: ID!
@@ -152,6 +172,8 @@ enum ArgumentValue {
 
 # An argumentable
 interface Argumentable {
+  id: ID!
+
   # The arguments related to the argumentable.
   arguments(
     after: String
@@ -163,6 +185,20 @@ interface Argumentable {
     # If omitted, returns all arguments. If provided, returns the arguments of this particular type.
     type: ArgumentValue
   ): ArgumentConnection!
+}
+
+input ChangeArgumentInput {
+  # The argument Node id.
+  argumentId: ID!
+
+  # The contents of the argument body.
+  body: String!
+  clientMutationId: String
+}
+
+type ChangeArgumentPayload {
+  argument: Argument!
+  clientMutationId: String
 }
 
 input ChangeCollectStatusInput {
@@ -742,6 +778,16 @@ enum DeleteAccountType {
   HARD
 }
 
+input DeleteArgumentInput {
+  argumentId: ID!
+  clientMutationId: String
+}
+
+type DeleteArgumentPayload {
+  argumentable: Argumentable!
+  clientMutationId: String
+}
+
 input DeleteGroupInput {
   # The group id
   groupId: ID!
@@ -1081,6 +1127,9 @@ type MultipleChoiceQuestionValidationRule {
 }
 
 type Mutation {
+  addArgument(input: AddArgumentInput!): AddArgumentPayload
+  changeArgument(input: ChangeArgumentInput!): ChangeArgumentPayload
+  deleteArgument(input: DeleteArgumentInput!): DeleteArgumentPayload
   addReply(input: AddReplyInput!): AddReplyPayload
   deleteReply(input: DeleteReplyInput!): DeleteReplyPayload
   changeUserNotificationsConfiguration(input: ChangeUserNotificationsConfigurationInput!): ChangeUserNotificationsConfigurationPayload

@@ -1,0 +1,6 @@
+DeleteArgumentPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            argumentable:
+                type: "Argumentable!"

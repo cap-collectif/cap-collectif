@@ -11,22 +11,40 @@ import {
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { Button, Alert } from 'react-bootstrap';
 import { connect, type MapStateToProps } from 'react-redux';
+import AppDispatcher from '../../../dispatchers/AppDispatcher';
 import LoginOverlay from '../../Utils/LoginOverlay';
-import ArgumentActions from '../../../actions/ArgumentActions';
 import renderComponent from '../../Form/Field';
+import AddArgumentMutation from '../../../mutations/AddArgumentMutation';
 import type { State, Dispatch } from '../../../types';
 
-const onSubmit = (values, dispatch, { opinion, type, reset }) => {
-  const data = {
+type FormValues = { body: ?string };
+type FormValidValues = { body: string };
+
+type Props = FormProps & {
+  type: 'FOR' | 'AGAINST' | 'SIMPLE',
+  opinion: { id: string, isContribuable: boolean },
+  user: { id: string },
+  submitting: boolean,
+  form: string,
+  dispatch: Dispatch,
+};
+
+const onSubmit = (values: FormValidValues, dispatch: Dispatch, { opinion, type, reset }: Props) => {
+  const input = {
+    argumentableId: opinion.id,
     body: values.body,
-    type: type === 'yes' || type === 'simple' ? 1 : 0,
+    type: type === 'FOR' || type === 'SIMPLE' ? 'FOR' : 'AGAINST',
   };
-  return ArgumentActions.add(opinion, data)
+
+  return AddArgumentMutation.commit({ input })
     .then(() => {
-      ArgumentActions.load(opinion, type === 'no' ? 0 : 1);
+      AppDispatcher.dispatch({
+        actionType: 'UPDATE_ALERT',
+        alert: { bsStyle: 'success', content: 'alert.success.add.argument' },
+      });
       reset();
     })
-    .catch((res: Object) => {
+    .catch(res => {
       if (res && res.response && res.response.message === 'You contributed too many times.') {
         throw new SubmissionError({ _error: 'publication-limit-reached' });
       }
@@ -34,7 +52,7 @@ const onSubmit = (values, dispatch, { opinion, type, reset }) => {
     });
 };
 
-const validate = ({ body }: { body: ?string }) => {
+const validate = ({ body }: FormValues) => {
   const errors = {};
   if (!body || body.replace(/<\/?[^>]+(>|$)/g, '').length <= 2) {
     errors.body = 'argument.constraints.min';
@@ -43,15 +61,6 @@ const validate = ({ body }: { body: ?string }) => {
     errors.body = 'argument.constraints.max';
   }
   return errors;
-};
-
-type Props = FormProps & {
-  type: string,
-  opinion: Object,
-  user: Object,
-  submitting: boolean,
-  form: string,
-  dispatch: Dispatch,
 };
 
 export class ArgumentCreate extends React.Component<Props> {
@@ -89,7 +98,9 @@ export class ArgumentCreate extends React.Component<Props> {
                 id={`arguments-body-${type}`}
                 type="textarea"
                 rows={2}
-                label={<FormattedMessage id={`argument.${type}.add`} />}
+                label={
+                  <FormattedMessage id={`argument.${type === 'AGAINST' ? 'no' : 'yes'}.add`} />
+                }
                 placeholder={`argument.${type}.add`}
                 labelClassName="sr-only"
                 disabled={disabled}

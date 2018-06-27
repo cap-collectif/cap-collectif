@@ -54,6 +54,7 @@ class ArgumentButtons extends React.Component<Props, State> {
           author={argument.author}
           className="argument__btn--delete btn-xs"
         />
+        {/* $FlowFixMe */}
         <ArgumentDeleteModal
           argument={argument}
           show={this.state.isDeleting}

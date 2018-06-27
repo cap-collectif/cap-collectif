@@ -1,0 +1,7 @@
+AddArgumentPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            argument:
+                type: "Argument!"
+                description: "The new argument."

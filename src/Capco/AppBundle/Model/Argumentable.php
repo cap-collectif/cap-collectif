@@ -9,4 +9,10 @@ interface Argumentable
     public function getArgumentForCount();
 
     public function getArgumentAgainstCount();
+
+    public function canContribute();
+
+    public function getOpinionType();
+
+    public function increaseArgumentsCount();
 }
