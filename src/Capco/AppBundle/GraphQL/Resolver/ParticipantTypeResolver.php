@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver\Participant;
+namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\EventRegistration;
 use Capco\UserBundle\Entity\User;

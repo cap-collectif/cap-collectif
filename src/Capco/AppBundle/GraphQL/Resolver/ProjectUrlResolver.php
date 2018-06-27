@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver\Project;
+namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Project;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;

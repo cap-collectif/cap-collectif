@@ -12,46 +12,39 @@ ProposalForm:
                 type: "String"
             summaryHelpText:
                 type: "String"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormSummaryHelpTextResolver", [value])'
+                resolve: "@=resolver('proposal_form_summaryHelpText', [value])"
             illustrationHelpText:
                 type: "String"
             title:
                 type: "String!"
             proposals:
                 type: "ProposalConnection!"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormProposalsResolver", [value, args, user, request])'
+                resolve: "@=resolver('proposal_form_proposals', [value, args, user, request])"
                 args:
                   district:
                     type: "ID"
-                    description: "If non-null, filters proposals with the given district."
                   userType:
                     type: "ID"
-                    description: "If non-null, filters proposals with the given type of author."
                   category:
                     type: "ID"
-                    description: "If non-null, filters proposals with the given category."
                   status:
                     type: "ID"
-                    description: "If non-null, filters proposals with the given status."
                   theme:
                     type: "ID"
-                    description: "If non-null, filters proposals with the given theme."
                   term:
                     type: "String"
-                    description: "If non-null, filters proposals with the given string to look for."
                   orderBy:
                     type: "ProposalOrder"
-                    description: "Ordering options for proposals returned from the connection."
+                    description: "Order for connection."
                     defaultValue: { field: "CREATED_AT", direction: "ASC" }
                   affiliations:
                     type: "[ProposalAffiliation]"
-                    description: "Affiliation options for proposals returned from the connection."
                   after:
                     type: "String"
                     description: "Returns the elements in the list that come after the specified global ID."
                   first:
                     type: "Int"
-                    defaultValue: 20
+                    defaultValue: 10
                     description: "Returns the first n elements from the list."
                   before:
                     type: "String"
@@ -61,8 +54,7 @@ ProposalForm:
                     description: "Returns the last n elements from the list."
             categories:
                 type: "[ProposalCategory!]!"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormCategoriesResolver", [value])'
-                description: "Available categories for proposals of this form."
+                resolve: "@=resolver('proposal_form_categories', [value])"
             usingThemes:
                 type: "Boolean!"
             contribuable:
@@ -80,12 +72,12 @@ ProposalForm:
             proposalInAZoneRequired:
                 type: "Boolean!"
             districts:
-                type: "[District!]!"
                 args:
                   order:
                     type: "DistrictOrderField"
                     defaultValue: "ALPHABETICAL"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormDistrictsResolver", [value, args["order"]])'
+                resolve: "@=resolver('proposal_form_districts', [value, args['order']])"
+                type: "[District!]!"
             districtMandatory:
                 type: "Boolean!"
             districtHelpText:
@@ -106,7 +98,7 @@ ProposalForm:
                 type: "String"
             questions:
                 type: "[Question!]!"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormQuestionsResolver", [value])'
+                resolve: "@=resolver('proposal_form_questions', [value])"
             latMap:
                 type: "Float"
             lngMap:
@@ -116,7 +108,7 @@ ProposalForm:
             url:
                 type: "URI!"
                 description: "The HTTP url for this proposal form."
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormUrlResolver", [value])'
+                resolve: "@=resolver('proposal_form_url', [value])"
             notificationsConfiguration:
                 type: "NotificationsConfiguration!"
             evaluationForm:

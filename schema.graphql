@@ -1519,6 +1519,9 @@ type Proposal implements Node & Contribution {
 
     # If provided, retrieve only in this step.
     stepId: ID
+
+    # (SuperAdmin only) retrieves ALL votes including expired ones
+    includeExpired: Boolean = false
   ): ProposalVoteConnection!
 
   # Identifies the date and time when the object was created.
@@ -1641,35 +1644,22 @@ type ProposalForm implements Node {
   illustrationHelpText: String
   title: String!
   proposals(
-    # If non-null, filters proposals with the given district.
     district: ID
-
-    # If non-null, filters proposals with the given type of author.
     userType: ID
-
-    # If non-null, filters proposals with the given category.
     category: ID
-
-    # If non-null, filters proposals with the given status.
     status: ID
-
-    # If non-null, filters proposals with the given theme.
     theme: ID
-
-    # If non-null, filters proposals with the given string to look for.
     term: String
 
-    # Ordering options for proposals returned from the connection.
+    # Order for connection.
     orderBy: ProposalOrder = {field: CREATED_AT, direction: ASC}
-
-    # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
 
     # Returns the elements in the list that come after the specified global ID.
     after: String
 
     # Returns the first n elements from the list.
-    first: Int = 20
+    first: Int = 10
 
     # Returns the elements in the list that come before the specified global ID.
     before: String
@@ -1677,8 +1667,6 @@ type ProposalForm implements Node {
     # Returns the last n elements from the list.
     last: Int
   ): ProposalConnection!
-
-  # Available categories for proposals of this form.
   categories: [ProposalCategory!]!
   usingThemes: Boolean!
   contribuable: Boolean!
@@ -1940,8 +1928,11 @@ interface Question {
   position: Int!
   private: Boolean!
   required: Boolean!
+  isOtherAllowed: Boolean!
   helpText: String
   description: String
+  choices: [QuestionChoice!]
+  validationRule: MultipleChoiceQuestionValidationRule
   kind: String!
   slug: String!
 }
@@ -2856,7 +2847,17 @@ type User implements Node {
 
   # Your localisation
   neighborhood: String
-  proposalVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}, stepId: ID): ProposalVoteConnection!
+  proposalVotes(
+    after: String
+    first: Int = 100000
+    before: String
+    last: Int
+    orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}
+    stepId: ID
+
+    # (SuperAdmin only) retrieves ALL votes including expired ones
+    includeExpired: Boolean = false
+  ): ProposalVoteConnection!
   deletedAccountAt: DateTime
 
   # Get all medias the user has published.

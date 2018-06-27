@@ -1,8 +1,8 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver\Project;
+namespace Capco\AppBundle\GraphQL\Resolver;
 
-use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
@@ -13,7 +13,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
-class ProjectContributorResolver
+class StepContributorResolver
 {
     private $userSearch;
     private $logger;
@@ -28,50 +28,38 @@ class ProjectContributorResolver
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
     }
 
-    public function __invoke(Project $project, Arg $args): Connection
+    public function __invoke(AbstractStep $step, Arg $args): Connection
     {
         $totalCount = 0;
-
-        $paginator = new Paginator(function (int $offset, int $limit) use (&$totalCount, $project) {
+        $paginator = new Paginator(function (int $offset, int $limit) use (&$totalCount, $step) {
             try {
-                $value = $this->userSearch->getContributorByProject($project, $offset, $limit);
+                $value = $this->userSearch->getContributorByStep($step, $offset, $limit);
                 $contributors = $value['results'];
                 $totalCount = $value['totalCount'];
 
                 return $contributors;
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
-                throw new \RuntimeException($exception->getMessage());
+                throw new \RuntimeException('Find contributors failed.');
             }
         });
 
         $connection = $paginator->auto($args, $totalCount);
-        $connection->{'anonymousCount'} = $this->getAnonymousCount($project);
         $connection->totalCount = $totalCount;
+
+        $connection->{'anonymousCount'} = $this->getAnonymousVote($step);
 
         return $connection;
     }
 
-    private function getAnonymousCount(Project $project): int
+    private function getAnonymousVote(AbstractStep $step): int
     {
-        if (!$project->hasVotableStep()) {
+        if (!$step instanceof CollectStep && !$step instanceof SelectionStep) {
             return 0;
         }
 
-        $anonymousCount = 0;
-
-        foreach ($project->getRealSteps() as $step) {
-            if ($step instanceof CollectStep) {
-                $anonymousCount += $this->proposalCollectVoteRepository->getAnonymousVotesCountByStep($step);
-                continue;
-            }
-
-            if ($step instanceof SelectionStep) {
-                $anonymousCount += $this->proposalSelectionVoteRepository->getAnonymousVotesCountByStep($step);
-                continue;
-            }
-        }
-
-        return $anonymousCount;
+        return $step instanceof CollectStep
+            ? $this->proposalCollectVoteRepository->getAnonymousVotesCountByStep($step)
+            : $this->proposalSelectionVoteRepository->getAnonymousVotesCountByStep($step);
     }
 }

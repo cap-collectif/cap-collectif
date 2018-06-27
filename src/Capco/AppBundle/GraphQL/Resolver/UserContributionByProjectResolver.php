@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver\User;
+namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\UserBundle\Entity\User;

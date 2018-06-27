@@ -628,20 +628,18 @@ export default createFragmentContainer(container, {
         helpText
         description
         type
-        ... on MultipleChoiceQuestion {
-          isOtherAllowed
-          validationRule {
-            type
-            number
-          }
-          choices {
-            id
-            title
-            description
-            color
-            image {
-              url
-            }
+        isOtherAllowed
+        validationRule {
+          type
+          number
+        }
+        choices {
+          id
+          title
+          description
+          color
+          image {
+            url
           }
         }
       }

@@ -9,7 +9,7 @@
     "typecheck:coverage": "flow-coverage-report --threshold 70 -i 'app/Resources/js/**/*.js'",
     "build": "NODE_ENV=development ./node_modules/brunch/bin/brunch build",
     "build:watch": "NODE_ENV=development ./node_modules/brunch/bin/brunch watch",
-    "build:prod": "NODE_ENV=production ./node_modules/brunch/bin/brunch build -p",
+    "build:prod": "NODE_ENV=production ./node_modules/brunch/bin/brunch build --production",
     "build-server-bundle": "NODE_ENV=development ./node_modules/webpack/bin/webpack.js --config webpack.config.serverside.js",
     "build-server-bundle:prod": "NODE_ENV=production ./node_modules/webpack/bin/webpack.js --config webpack.config.serverside.js",
     "build-relay-schema": "relay-compiler --src ./app/Resources/js --schema schema.graphql",

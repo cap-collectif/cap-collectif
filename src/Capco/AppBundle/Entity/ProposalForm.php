@@ -319,11 +319,6 @@ class ProposalForm
         return $this->step;
     }
 
-    public function getProject(): ?Project
-    {
-        return $this->step ? $this->step->getProject() : null;
-    }
-
     public function setStep(CollectStep $step = null): self
     {
         $this->step = $step;

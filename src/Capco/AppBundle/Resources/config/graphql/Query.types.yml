@@ -29,7 +29,7 @@ Query:
             proposalForms:
                 type: "[ProposalForm!]!"
                 access: "@=hasRole('ROLE_USER')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryProposalFormResolver")'
+                resolve: "@=resolver('proposalForms')"
             availableDistrictsForLocalisation:
                 type: "[District!]!"
                 description: "Retrieve availables districts for a given address"

@@ -12,4 +12,4 @@ SynthesisStep:
                type: "String!"
             show_url:
                type: "String!"
-               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepUrlResolver", [value])'
+               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\StepUrlResolver", [value])'

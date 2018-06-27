@@ -17,12 +17,12 @@ type Questions = $ReadOnlyArray<{|
   +helpText: ?string,
   +description: ?string,
   +type: QuestionTypeValue,
-  +isOtherAllowed?: boolean,
-  +validationRule?: ?{|
+  +isOtherAllowed: boolean,
+  +validationRule: ?{|
     +type: ?string,
     +number: ?number,
   |},
-  +choices?: ?$ReadOnlyArray<{|
+  +choices: ?$ReadOnlyArray<{|
     +id: string,
     +title: string,
     +description: ?string,

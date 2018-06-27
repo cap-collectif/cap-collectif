@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
+namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\UserBundle\Repository\UserRepository;
@@ -10,7 +10,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
-class ProposalFollowersResolver implements ResolverInterface
+class UsersFollowingProposalResolver implements ResolverInterface
 {
     private $userRepository;
     private $logger;

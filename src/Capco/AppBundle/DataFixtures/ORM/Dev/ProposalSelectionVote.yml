@@ -40,3 +40,10 @@ Capco\AppBundle\Entity\ProposalSelectionVote:
     selectionStep: '@selectionstep8'
     user: '@user1'
     createdAt: <(new \DateTime('yesterday'))>
+  proposalSelectionVote56:
+    id: 1056
+    proposal: '@proposal1'
+    selectionStep: '@selectionstep8'
+    user: '@user4'
+    createdAt: <(new \DateTime('yesterday'))>
+    expired: true

@@ -3,4 +3,4 @@ Participant:
     config:
         types: [User, NotRegistered]
         description: User and NotRegistered
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantTypeResolver", [value])'
+        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ParticipantTypeResolver", [value])'

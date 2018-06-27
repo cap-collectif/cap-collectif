@@ -1,11 +1,11 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver\Reply;
+namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Reply;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
-class ReplyResponsesResolver implements ResolverInterface
+class ResponsesResolver implements ResolverInterface
 {
     public function __invoke(Reply $reply): iterable
     {

@@ -9,7 +9,7 @@ Consultation:
                 resolve: "consultation"
             show_url:
                 type: "String!"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepUrlResolver", [value])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\StepUrlResolver", [value])'
             id:
                 type: "ID!"
                 description: "The id of the consultation."
@@ -38,7 +38,7 @@ Consultation:
                 type: "UserConnection!"
                 description: "A list of contributor associated with the consultation."
                 argsBuilder: "Relay::Connection"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", [value, args])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\StepContributorResolver", [value, args])'
             contributionConnection:
                 type: "ContributionConnection"
                 args:

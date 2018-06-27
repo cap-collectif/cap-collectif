@@ -112,11 +112,7 @@ exports.config = {
     },
     uglify: {
       mangle: true,
-      output: {
-        comments: false, // remove comments
-      },
-      toplevel: true,
-      compress: true
+      compress: false,
     },
   },
 };

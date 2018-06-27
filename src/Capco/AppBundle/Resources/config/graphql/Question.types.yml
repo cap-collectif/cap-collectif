@@ -1,7 +1,7 @@
 Question:
     type: interface
     config:
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTypeResolver", [value])'
+        resolveType: "@=resolver('question_question_type', [value])"
         fields:
             id:
                 type: "String!"
@@ -18,10 +18,19 @@ Question:
                 type: "Boolean!"
             required:
                 type: "Boolean!"
+            isOtherAllowed:
+                type: "Boolean!"
+                resolve: "@=resolver('question_isOtherAllowed', [value])"
             helpText:
                 type: "String"
             description:
                 type: "String"
+            choices:
+                type: "[QuestionChoice!]"
+                resolve: "@=resolver('question_choices', [value])"
+            validationRule:
+                type: "MultipleChoiceQuestionValidationRule"
+                resolve: "@=resolver('question_validation_rule', [value])"
             kind:
                 type: "String!"
             slug:

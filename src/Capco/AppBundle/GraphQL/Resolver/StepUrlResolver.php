@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver\Step;
+namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
