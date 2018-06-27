@@ -21,8 +21,8 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
     const VERIFICATION_NONE = 'none';
     const VERIFICATION_SMS = 'sms';
     public static $verificationLabels = [
-        self::VERIFICATION_NONE => 'step.verification.none',
-        self::VERIFICATION_SMS => 'step.verification.sms',
+         'step.verification.none' => self::VERIFICATION_NONE,
+         'step.verification.sms' => self::VERIFICATION_SMS,
     ];
 
     /**
