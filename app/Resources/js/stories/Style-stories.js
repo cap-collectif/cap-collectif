@@ -1,10 +1,11 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
+import { withInfo } from '@storybook/addon-info';
 import { Label, Alert, Button, DropdownButton, MenuItem } from 'react-bootstrap';
 import styled from 'styled-components';
 import { FontStyle } from './FontStyle';
-// import { AlertForm } from "../components/Alert/AlertForm";
+import { AlertForm } from "../components/Alert/AlertForm";
 
 export const ColorContainer = styled.div`
   height: 50px;
@@ -36,12 +37,10 @@ const buttons = ['default','primary','success','warning','danger','info','link']
 const alerts = ['success','warning','danger','info'];
 
 const alertFormProps = [
-  { description: 'Custom error message', values: { valid:false, errorMessage:"error.test", invalid:true, submitSucceeded:true, submitFailed:true, submitting:false }},
-  { description: 'Submit succeeded', values: { valid:true, invalid:false, submitSucceeded:true, submitFailed:false, submitting:false}},
+  { description: 'Custom error message', values: { valid:false, errorMessage:"My message", invalid:true, submitSucceeded:true, submitFailed:true, submitting:false }},
+  { description: 'Submit succeeded (disappear after 10s)', values: { valid:true, invalid:false, submitSucceeded:true, submitFailed:false, submitting:false}},
   { description: 'Submit failed', values: { valid:true, invalid:false, submitSucceeded:false, submitFailed:true, submitting:false}},
-  { description: 'Invalid', values: { valid:false, invalid:true, submitSucceeded:true, submitFailed:false, submitting:false}},
-  { description: 'Valid', values: { valid:true, invalid:false, submitSucceeded:false, submitFailed:false, submitting:false}},
-  { description: 'Submitting', values: { valid:true, invalid:false, submitSucceeded:false, submitFailed:false, submitting:true}},
+  { description: 'Invalid form', values: { valid:false, invalid:true, submitSucceeded:true, submitFailed:false, submitting:false}},
 ];
 
 storiesOf('UI', module)
@@ -103,7 +102,28 @@ storiesOf('UI', module)
       </div>
     );
   })
-  .add('Alerts',() => {
+  .add('Alerts',withInfo({
+    source: false,
+    text :`
+      <h2>How to use</h2>
+    
+      ~~~jsx
+      // Basic alert
+      <Alert bsStyle="success">My alert</Alert>
+      
+      // Form alert
+      <Pagination
+        <AlertForm
+          valid
+          invalid={false}
+          submitting={false}
+          submitSucceeded={false}
+          submitFailed={false}
+        />
+      />
+      ~~~
+    
+    `})(() => {
     return (
       <div className="ml-30 mr-30 storybook-container">
         <h1>
@@ -122,21 +142,17 @@ storiesOf('UI', module)
           ))}
         </div>
         <h3>Form alert</h3>
-        <div className="row">
-          <div className="col-sm-3 col-xs-12">
-            {alertFormProps.map(props => (
-              <div>
-                {/*<AlertForm*/}
-                  {/*{...props.values}*/}
-                {/*/>*/}
-                <p>{props.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+          {alertFormProps.map(props => (
+            <div className="mb-20">
+              <p>{props.description}</p>
+              <AlertForm
+                {...props.values}
+              />
+            </div>
+          ))}
       </div>
     );
-  })
+  }))
   .add('Buttons',() => {
     return (
       <div className="ml-30 mr-30 storybook-container">
