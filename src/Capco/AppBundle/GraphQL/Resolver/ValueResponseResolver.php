@@ -16,7 +16,9 @@ class ValueResponseResolver
                 return $response->getValue();
             }
             // encodes characters correctly
-            return json_encode($response->getValue(), JSON_UNESCAPED_UNICODE);
+            $value = json_encode($response->getValue(), JSON_UNESCAPED_UNICODE);
+
+            return '"null"' !== $value ? $value : null;
         }
 
         return $response->getValue();
