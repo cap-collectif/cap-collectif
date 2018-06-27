@@ -80,7 +80,7 @@ class ProposalFormAdmin extends Admin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->add('duplicate');
-        $collection->clearExcept(['list', 'edit', 'delete', 'duplicate']);
+        $collection->clearExcept(['batch', 'list', 'edit', 'delete', 'duplicate']);
     }
 
     private function filterByCollectStepQuery(): QueryBuilder
