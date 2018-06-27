@@ -20,8 +20,8 @@ class MenuItem
     const TYPE_FOOTER = 2;
 
     public static $menuLabels = [
-        self::TYPE_HEADER => 'menu.type.header',
-        self::TYPE_FOOTER => 'menu.type.footer',
+        'menu.type.header' => self::TYPE_HEADER,
+        'menu.type.footer' => self::TYPE_FOOTER,
     ];
 
     /**
