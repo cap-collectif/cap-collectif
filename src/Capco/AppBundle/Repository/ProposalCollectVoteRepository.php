@@ -194,7 +194,7 @@ class ProposalCollectVoteRepository extends EntityRepository
             $qb->andWhere('pv.expired = false');
         }
 
-        return $qb->getQuery()->getSingleScalarResult();
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     public function countVotesByProposal(Proposal $proposal, bool $includeExpired): int

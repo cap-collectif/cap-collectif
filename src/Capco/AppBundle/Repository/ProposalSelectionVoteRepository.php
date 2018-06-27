@@ -194,7 +194,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
             $qb->andWhere('pv.expired = false');
         }
 
-        return $qb->getQuery()->getSingleScalarResult();
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     public function getByProposalAndStep(Proposal $proposal, SelectionStep $step, int $litmit, int $offset, string $field, string $direction, bool $includeExpired): Paginator
@@ -232,7 +232,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
             $qb->andWhere('pv.expired = false');
         }
 
-        return $qb->getQuery()->getSingleScalarResult();
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     public function getVotesForProposalByStepId(Proposal $proposal, string $stepId, $limit = null, $offset = 0): array

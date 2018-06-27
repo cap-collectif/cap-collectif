@@ -74,7 +74,7 @@ class ProposalVotesResolver
         return $this->resolveAllVotes($proposal, $args, $includeExpired);
     }
 
-    public function resolveAllVotes(Proposal $proposal, Argument $args, bool $includeExpired): Connection
+    public function resolveAllVotes(Proposal $proposal, Argument $args, bool $includeExpired = false): Connection
     {
         $paginator = new Paginator(function () {
             return [];
