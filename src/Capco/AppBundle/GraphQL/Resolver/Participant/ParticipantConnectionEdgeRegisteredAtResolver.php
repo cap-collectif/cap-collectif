@@ -1,13 +1,13 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver;
+namespace Capco\AppBundle\GraphQL\Resolver\Participant;
 
 use Capco\AppBundle\Entity\EventRegistration;
 use Capco\AppBundle\Repository\EventRegistrationRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 
-class ParticipantConnectionEdgeRegisteredAnonymouslyResolver
+class ParticipantConnectionEdgeRegisteredAtResolver
 {
     private $eventRegistrationRepository;
 
@@ -16,17 +16,15 @@ class ParticipantConnectionEdgeRegisteredAnonymouslyResolver
         $this->eventRegistrationRepository = $eventRegistrationRepository;
     }
 
-    public function __invoke(Edge $edge): bool
+    public function __invoke(Edge $edge): \DateTime
     {
         if ($edge->node instanceof EventRegistration) {
-            return $edge->node->isPrivate();
+            return $edge->node->getCreatedAt();
         }
         if ($edge->node instanceof User) {
             $registration = $this->eventRegistrationRepository->getOneByUserAndEvent($edge->node, $edge->node->registeredEvent);
 
-            return $registration->isPrivate();
+            return $registration->getCreatedAt();
         }
-
-        return false;
     }
 }

@@ -15,10 +15,10 @@ Project:
                 type: "UserConnection!"
                 description: "A list of contributor associated with the project."
                 argsBuilder: "Relay::Connection"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProjectContributorResolver", [value, args])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributorResolver", [value, args])'
             url:
               type: "URI"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProjectUrlResolver", [value])'
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectUrlResolver", [value])'
             votableSteps:
               type: "[ProposalStep!]!"
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectVotableStepsResolver", [value])'

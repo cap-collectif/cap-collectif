@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\EventListener;
 
-use Capco\AppBundle\GraphQL\Resolver\UserContributionByProjectResolver;
-use Capco\AppBundle\GraphQL\Resolver\UserContributionByStepResolver;
+use Capco\AppBundle\GraphQL\Resolver\User\UserContributionByProjectResolver;
+use Capco\AppBundle\GraphQL\Resolver\User\UserContributionByStepResolver;
 use Capco\AppBundle\Toggle\Manager;
 use JMS\Serializer\EventDispatcher\ObjectEvent;
 use Symfony\Component\Routing\RouterInterface;

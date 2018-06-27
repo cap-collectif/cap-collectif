@@ -4,12 +4,9 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
-use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
-use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Capco\AppBundle\Helper\GeometryHelper;
 use Doctrine\Common\Collections\ArrayCollection;
-use Overblog\GraphQLBundle\Error\UserError;
 use PhpParser\Node\Arg;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
@@ -98,21 +95,5 @@ class QuestionResolver implements ContainerAwareInterface
     public function resolveQuestionnairePhoneConfirmationRequired(Questionnaire $questionnaire): bool
     {
         return $questionnaire->isPhoneConfirmationRequired();
-    }
-
-    public function resolveQuestionType(AbstractQuestion $question): string
-    {
-        $typeResolver = $this->container->get('overblog_graphql.type_resolver');
-        if ($question instanceof SimpleQuestion) {
-            return $typeResolver->resolve('SimpleQuestion');
-        }
-        if ($question instanceof MediaQuestion) {
-            return $typeResolver->resolve('MediaQuestion');
-        }
-        if ($question instanceof MultipleChoiceQuestion) {
-            return $typeResolver->resolve('MultipleChoiceQuestion');
-        }
-
-        throw new UserError('Could not resolve type of Question.');
     }
 }

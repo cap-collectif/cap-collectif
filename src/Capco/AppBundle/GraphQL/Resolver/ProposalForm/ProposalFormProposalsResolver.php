@@ -1,59 +1,31 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
+namespace Capco\AppBundle\GraphQL\Resolver\ProposalForm;
 
 use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\Utils\Text;
+use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Search\ProposalSearch;
 use Capco\UserBundle\Entity\User;
-use Doctrine\Common\Collections\Collection;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Request;
 
-class ProposalFormResolver implements ContainerAwareInterface
+class ProposalFormProposalsResolver implements ResolverInterface
 {
-    use ContainerAwareTrait;
+    private $proposalRepo;
+    private $proposalSearch;
 
-    public function resolveQuestions(ProposalForm $form): Collection
+    public function __construct(ProposalRepository $proposalRepo, ProposalSearch $proposalSearch)
     {
-        return $form->getRealQuestions();
+        $this->proposalRepo = $proposalRepo;
+        $this->proposalSearch = $proposalSearch;
     }
 
-    public function resolveCategories(ProposalForm $form): array
+    public function __invoke(ProposalForm $form, Arg $args, $user, Request $request): Connection
     {
-        $categories = $form->getCategories()->toArray();
-        usort(
-          $categories,
-          function ($a, $b) {
-              return $a->getName() <=> $b->getName();
-          }
-      );
-
-        return $categories;
-    }
-
-    public function resolveDistricts(ProposalForm $form, string $order): array
-    {
-        $districts = $form->getDistricts()->toArray();
-        if ('ALPHABETICAL' === $order) {
-            usort(
-                $districts,
-                function ($a, $b) {
-                    return $a->getName() <=> $b->getName();
-                }
-            );
-        }
-
-        return $districts;
-    }
-
-    public function resolveProposals(ProposalForm $form, Arg $args, $user, Request $request): Connection
-    {
-        $repo = $this->container->get('capco.proposal.repository');
         $totalCount = 0;
         $filters = [];
         $term = null;
@@ -74,7 +46,7 @@ class ProposalFormResolver implements ContainerAwareInterface
                 $filters['author'] = $user->getId();
             }
         }
-        $paginator = new Paginator(function (int $offset, int $limit) use ($repo, $form, $args, $user, $term, $request, &$totalCount, $filters) {
+        $paginator = new Paginator(function (int $offset, int $limit) use ($form, $args, $user, $term, $request, &$totalCount, $filters) {
             if ($args->offsetExists('district')) {
                 $filters['districts'] = $args->offsetGet('district');
             }
@@ -97,9 +69,9 @@ class ProposalFormResolver implements ContainerAwareInterface
                     $direction = $args->offsetGet('orderBy')['direction'];
                     $field = $args->offsetGet('orderBy')['field'];
 
-                    $totalCount = $user instanceof User ? $repo->countProposalsByFormAndEvaluer($form, $user) : $totalCount;
+                    $totalCount = $user instanceof User ? $this->proposalRepo->countProposalsByFormAndEvaluer($form, $user) : $totalCount;
 
-                    return $repo->getProposalsByFormAndEvaluer($form, $user, $offset, $limit, $field, $direction)->getIterator()->getArrayCopy();
+                    return $this->proposalRepo->getProposalsByFormAndEvaluer($form, $user, $offset, $limit, $field, $direction)->getIterator()->getArrayCopy();
                 }
 
                 if (\in_array('OWNER', $affiliations, true)) {
@@ -117,7 +89,7 @@ class ProposalFormResolver implements ContainerAwareInterface
 
             $seed = $user instanceof User ? $user->getId() : $request->getClientIp();
 
-            $results = $this->container->get('capco.search.proposal_search')->searchProposals(
+            $results = $this->proposalSearch->searchProposals(
                     $offset,
                     $limit,
                     $order,
@@ -134,42 +106,10 @@ class ProposalFormResolver implements ContainerAwareInterface
         $connection = $paginator->auto($args, $totalCount);
         $connection->totalCount = $totalCount;
 
-        $countFusions = $repo->countFusionsByProposalForm($form);
+        $countFusions = $this->proposalRepo->countFusionsByProposalForm($form);
         $connection->{'fusionCount'} = $countFusions;
 
         return $connection;
-    }
-
-    public function resolveAll(): array
-    {
-        return $this->container->get('capco.proposal_form.repository')->findAll();
-    }
-
-    public function resolveSummaryHelpText(ProposalForm $proposalForm)// : ?string
-    {
-        $text = $proposalForm->getSummaryHelpText();
-
-        return $text ? Text::htmlToString($text) : null;
-    }
-
-    public function resolveUrl(ProposalForm $proposalForm): string
-    {
-        $step = $proposalForm->getStep();
-
-        if (!$step) {
-            return '';
-        }
-
-        $project = $step->getProject();
-        if (!$project) {
-            return '';
-        }
-
-        return $this->container->get('router')->generate('app_project_show_collect',
-            [
-                'projectSlug' => $project->getSlug(),
-                'stepSlug' => $step->getSlug(),
-            ], true);
     }
 
     public static function findOrderFromFieldAndDirection(string $field, string $direction): string

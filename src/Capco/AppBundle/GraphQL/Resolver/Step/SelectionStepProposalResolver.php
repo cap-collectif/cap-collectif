@@ -1,9 +1,9 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver;
+namespace Capco\AppBundle\GraphQL\Resolver\Step;
 
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalFormResolver;
+use Capco\AppBundle\GraphQL\Resolver\ProposalForm\ProposalFormProposalsResolver;
 use Capco\AppBundle\Search\ProposalSearch;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
@@ -49,7 +49,7 @@ class SelectionStepProposalResolver
                     $filters['statuses'] = $args->offsetGet('status');
                 }
 
-                $order = ProposalFormResolver::findOrderFromFieldAndDirection($field, $direction);
+                $order = ProposalFormProposalsResolver::findOrderFromFieldAndDirection($field, $direction);
                 $filters['selectionStep'] = $selectionStep->getId();
 
                 $seed = method_exists($user, 'getId') ? $user->getId() : $request->getClientIp();

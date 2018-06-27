@@ -1,9 +1,9 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver;
+namespace Capco\AppBundle\GraphQL\Resolver\Step;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalFormResolver;
+use Capco\AppBundle\GraphQL\Resolver\ProposalForm\ProposalFormProposalsResolver;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
@@ -12,13 +12,13 @@ class CollectStepProposalResolver implements ResolverInterface
 {
     private $resolver;
 
-    public function __construct(ProposalFormResolver $resolver)
+    public function __construct(ProposalFormProposalsResolver $resolver)
     {
         $this->resolver = $resolver;
     }
 
     public function __invoke(CollectStep $collectStep, Argument $args, $user, $request): Connection
     {
-        return $this->resolver->resolveProposals($collectStep->getProposalForm(), $args, $user, $request);
+        return $this->resolver->__invoke($collectStep->getProposalForm(), $args, $user, $request);
     }
 }

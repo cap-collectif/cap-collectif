@@ -1443,6 +1443,8 @@ type Proposal implements Node & Contribution {
   viewerIsAnEvaluer: Boolean!
   news(after: String, first: Int = 30, before: String, last: Int, orderBy: ProposalOrder = {field: CREATED_AT, direction: DESC}): NewsConnection!
   reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
+
+  # The related project.
   project: Project!
   status(
     # Used to get the status on a selection step.
@@ -1519,9 +1521,6 @@ type Proposal implements Node & Contribution {
 
     # If provided, retrieve only in this step.
     stepId: ID
-
-    # (SuperAdmin only) retrieves ALL votes including expired ones
-    includeExpired: Boolean = false
   ): ProposalVoteConnection!
 
   # Identifies the date and time when the object was created.
@@ -1644,22 +1643,35 @@ type ProposalForm implements Node {
   illustrationHelpText: String
   title: String!
   proposals(
+    # If non-null, filters proposals with the given district.
     district: ID
+
+    # If non-null, filters proposals with the given type of author.
     userType: ID
+
+    # If non-null, filters proposals with the given category.
     category: ID
+
+    # If non-null, filters proposals with the given status.
     status: ID
+
+    # If non-null, filters proposals with the given theme.
     theme: ID
+
+    # If non-null, filters proposals with the given string to look for.
     term: String
 
-    # Order for connection.
+    # Ordering options for proposals returned from the connection.
     orderBy: ProposalOrder = {field: CREATED_AT, direction: ASC}
+
+    # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
 
     # Returns the elements in the list that come after the specified global ID.
     after: String
 
     # Returns the first n elements from the list.
-    first: Int = 10
+    first: Int = 20
 
     # Returns the elements in the list that come before the specified global ID.
     before: String
@@ -1667,6 +1679,8 @@ type ProposalForm implements Node {
     # Returns the last n elements from the list.
     last: Int
   ): ProposalConnection!
+
+  # Available categories for proposals of this form.
   categories: [ProposalCategory!]!
   usingThemes: Boolean!
   contribuable: Boolean!
@@ -1928,11 +1942,8 @@ interface Question {
   position: Int!
   private: Boolean!
   required: Boolean!
-  isOtherAllowed: Boolean!
   helpText: String
   description: String
-  choices: [QuestionChoice!]
-  validationRule: MultipleChoiceQuestionValidationRule
   kind: String!
   slug: String!
 }
@@ -2034,6 +2045,7 @@ type Reply implements Node & Contribution {
   enabled: Boolean!
   private: Boolean!
   createdAt: DateTime!
+  responses: [Response]!
 
   # The updated date.
   updatedAt: DateTime
@@ -2041,7 +2053,6 @@ type Reply implements Node & Contribution {
 
   # Identifies the form where the contribution was submitted.
   questionnaire: Questionnaire!
-  responses: [Response]!
   kind: String!
 
   # Return the related contribution if the contribution is related to another.
@@ -2847,17 +2858,7 @@ type User implements Node {
 
   # Your localisation
   neighborhood: String
-  proposalVotes(
-    after: String
-    first: Int = 100000
-    before: String
-    last: Int
-    orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}
-    stepId: ID
-
-    # (SuperAdmin only) retrieves ALL votes including expired ones
-    includeExpired: Boolean = false
-  ): ProposalVoteConnection!
+  proposalVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}, stepId: ID): ProposalVoteConnection!
   deletedAccountAt: DateTime
 
   # Get all medias the user has published.

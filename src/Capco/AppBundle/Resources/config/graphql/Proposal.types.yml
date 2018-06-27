@@ -52,6 +52,7 @@ Proposal:
                       defaultValue: { field: CREATED_AT, direction: DESC }
             project:
               type: "Project!"
+              description: "The related project."
             status:
               type: "Status"
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalStatusResolver", [value, args])'
@@ -153,7 +154,7 @@ Proposal:
             votes:
               type: "ProposalVoteConnection!"
               argsBuilder: "Relay::Connection"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalVotesResolver", [value, args, context])'
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalVotesResolver", [value, args])'
               args:
                 first:
                   type: "Int"
@@ -164,10 +165,6 @@ Proposal:
                 stepId:
                   type: "ID"
                   description: "If provided, retrieve only in this step."
-                includeExpired:
-                  type: "Boolean"
-                  description: "(ROLE_SUPER_ADMIN only) Select also expired votes."
-                  defaultValue: false
             createdAt:
               type: "DateTime!"
               description: "Identifies the date and time when the object was created."
@@ -199,7 +196,7 @@ Proposal:
                     last:
                       type: "Int"
                       description: "Returns the last n elements from the list."
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\UsersFollowingProposalResolver", [value, args])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalFollowersResolver", [value, args])'
                 description: "Array of users following proposal."
             followerConnection:
                 type: "FollowerConnection!"
@@ -257,4 +254,4 @@ Proposal:
                 resolve: '@=value.userHasReport(user)'
             votableSteps:
               type: "[ProposalStep!]!"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalVotableStepsResolver", [value])'
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalVotableStepsResolver", [value])'

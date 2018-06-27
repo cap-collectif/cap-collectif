@@ -26,4 +26,4 @@ Questionnaire:
             viewerReplies:
                 type: "[Reply!]!"
                 access: "@=isAuthenticated()"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionnaireViewerRepliesResolver", [value, user])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireViewerRepliesResolver", [value, user])'

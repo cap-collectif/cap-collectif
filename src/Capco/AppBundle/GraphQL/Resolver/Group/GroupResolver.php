@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver;
+namespace Capco\AppBundle\GraphQL\Resolver\Group;
 
 use Capco\AppBundle\Entity\Group;
 use Overblog\GraphQLBundle\Definition\Argument;

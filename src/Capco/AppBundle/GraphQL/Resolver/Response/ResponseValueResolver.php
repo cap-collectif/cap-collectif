@@ -1,13 +1,13 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver;
+namespace Capco\AppBundle\GraphQL\Resolver\Response;
 
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 
-class ValueResponseResolver
+class ResponseValueResolver
 {
-    public function resolveValue(ValueResponse $response)//: ?string
+    public function __invoke(ValueResponse $response): ?string
     {
         $question = $response->getQuestion();
         // Multiple choice question value is encoded in JSON.

@@ -17,6 +17,9 @@ type State = {
   loading: boolean,
 };
 
+// You also need to update @argumentDefinitions for initial loading
+const PROPOSAL_VOTES_PAGINATION = 50;
+
 export class ProposalVotes extends React.Component<Props, State> {
   state = {
     loading: false,
@@ -71,7 +74,7 @@ export class ProposalVotes extends React.Component<Props, State> {
               disabled={this.state.loading}
               onClick={() => {
                 this.setState({ loading: true });
-                relay.loadMore(50, () => {
+                relay.loadMore(PROPOSAL_VOTES_PAGINATION, () => {
                   this.setState({ loading: false });
                 });
               }}>
@@ -95,9 +98,8 @@ export default createPaginationContainer(
       ) {
       id
       votes(first: $count, after: $cursor, stepId: $stepId)
-        @connection(key: "ProposalVotes_votes", filters: ["stepId"]) {
+        @connection(key: "ProposalVotes_votes", filters: ["proposalId", "stepId"]) {
         edges {
-          cursor
           node {
             author {
               id
@@ -110,6 +112,7 @@ export default createPaginationContainer(
               }
             }
           }
+          cursor
         }
         pageInfo {
           hasNextPage
@@ -132,18 +135,19 @@ export default createPaginationContainer(
         count: totalCount,
       };
     },
-    getVariables(props: Props, { count, cursor }) {
+    getVariables(props: Props, { count, cursor }, fragmentVariables) {
       return {
+        ...fragmentVariables,
         count,
         cursor,
         proposalId: props.proposal.id,
-        stepId: props.stepId,
       };
     },
     query: graphql`
       query ProposalVotesQuery($proposalId: ID!, $count: Int!, $cursor: String, $stepId: ID!) {
         proposal: node(id: $proposalId) {
-          ...ProposalVotes_proposal @arguments(stepId: $stepId, count: $count, after: $cursor)
+          id
+          ...ProposalVotes_proposal @arguments(count: $count, cursor: $cursor, stepId: $stepId)
         }
       }
     `,
