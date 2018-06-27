@@ -10,10 +10,11 @@ import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import { closeArgumentEditModal } from '../../../redux/modules/opinion';
 import type { State } from '../../../types';
+import type { ArgumentEditModal_argument } from './__generated__/ArgumentEditModal_argument.graphql';
 
 type Props = {
   show: boolean,
-  argument?: Object,
+  argument: ArgumentEditModal_argument,
   dispatch: Function,
   submitting: boolean,
 };

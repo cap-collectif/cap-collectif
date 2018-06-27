@@ -34,7 +34,7 @@ Argument:
             viewerHasVote:
                 access: "@=hasRole('ROLE_USER')"
                 type: "Boolean!"
-                resolve: false
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Argument\\ArgumentViewerHasVoteResolver", [value, user])'
             contribuable:
                 type: "Boolean!"
                 resolve: "@value.canContribute()"

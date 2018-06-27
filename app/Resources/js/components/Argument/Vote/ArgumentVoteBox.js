@@ -19,7 +19,7 @@ class ArgumentVoteBox extends React.Component<Props, State> {
     const { argument } = props;
 
     this.state = {
-      hasVoted: argument.viewerHasVote,
+      hasVoted: !!argument.viewerHasVote,
     };
   }
 
@@ -64,7 +64,8 @@ export default createFragmentContainer(
     fragment ArgumentVoteBox_argument on Argument {
       id
       votesCount
-      viewerHasVote
+      viewerHasVote @include(if: $isAuthenticated)
+      ...ArgumentVoteButton_argument
     }
   `,
 );

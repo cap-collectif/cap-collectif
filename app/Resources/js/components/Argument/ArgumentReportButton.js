@@ -44,7 +44,7 @@ export default createFragmentContainer(
         displayName
       }
       id
-      viewerHasReport
+      viewerHasReport @include(if: $isAuthenticated)
     }
   `,
 );

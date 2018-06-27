@@ -74,6 +74,7 @@ export default createFragmentContainer(
     fragment ArgumentItem_argument on Argument {
       id
       createdAt
+      ...ArgumentButtons_argument
       author {
         id
         slug

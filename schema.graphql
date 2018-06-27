@@ -3115,7 +3115,7 @@ type ValueResponse implements Response {
 }
 
 # A version of contribution
-type Version implements Contribution & Argumentable & TrashableContribution & ContributionWithAuthor & EditableContribution {
+type Version implements Node & Contribution & Argumentable & TrashableContribution & ContributionWithAuthor & EditableContribution {
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
 

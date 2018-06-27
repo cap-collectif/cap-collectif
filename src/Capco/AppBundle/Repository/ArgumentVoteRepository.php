@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\UserBundle\Entity\User;
@@ -71,6 +72,19 @@ class ArgumentVoteRepository extends EntityRepository
         ;
 
         return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
+    }
+
+    public function getByArgumentAndUser(Argument $argument, User $author): array
+    {
+        $qb = $this->getQueryBuilder()
+          ->andWhere('v.expired = false')
+          ->andWhere('v.argument = :argument')
+          ->andWhere('v.user = :author')
+          ->setParameter('argument', $argument)
+          ->setParameter('author', $author)
+      ;
+
+        return $qb->getQuery()->getResult();
     }
 
     /**

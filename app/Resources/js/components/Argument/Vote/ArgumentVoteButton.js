@@ -62,7 +62,7 @@ export default createFragmentContainer(
         slug
       }
       contribuable
-      viewerHasVote
+      viewerHasVote @include(if: $isAuthenticated)
     }
   `,
 );
