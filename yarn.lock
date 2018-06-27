@@ -1238,6 +1238,14 @@ babel-plugin-react-docgen@^1.9.0:
     lodash "^4.17.0"
     react-docgen "^3.0.0-beta11"
 
+babel-plugin-react-docgen@^2.0.0-rc.1:
+  version "2.0.0-rc.1"
+  resolved "https://registry.yarnpkg.com/babel-plugin-react-docgen/-/babel-plugin-react-docgen-2.0.0-rc.1.tgz#2538ecff4102c9e4e4087dbb90bcc76a8db3658f"
+  dependencies:
+    babel-types "^6.26.0"
+    lodash "^4.17.10"
+    react-docgen "^3.0.0-beta12"
+
 babel-plugin-react-intl@^2.3.1:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-react-intl/-/babel-plugin-react-intl-2.4.0.tgz#292fca8030603a9e0476973290836aa0c7da17e2"
@@ -8945,7 +8953,7 @@ react-dnd@^2.4.0:
     lodash "^4.2.0"
     prop-types "^15.5.10"
 
-react-docgen@^3.0.0-beta11:
+react-docgen@^3.0.0-beta11, react-docgen@^3.0.0-beta12:
   version "3.0.0-beta9"
   resolved "https://registry.yarnpkg.com/react-docgen/-/react-docgen-3.0.0-beta9.tgz#6be987e640786ecb10ce2dd22157a022c8285e95"
   dependencies:

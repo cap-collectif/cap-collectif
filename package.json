@@ -198,6 +198,7 @@
     "@storybook/react": "^3.4.8",
     "babel-eslint": "^7.2.3",
     "babel-jest": "^23.0.1",
+    "babel-plugin-react-docgen": "^2.0.0-rc.1",
     "bundlesize": "^0.15.3",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
