@@ -9,7 +9,7 @@ exports[`<ProposalVoteModal /> should render correctly 1`] = `
   bsClass="modal"
   bsSize="large"
   dialogComponentClass={[Function]}
-  enforceFocus={true}
+  enforceFocus={false}
   keyboard={true}
   manager={
     ModalManager {
@@ -116,6 +116,8 @@ exports[`<ProposalVoteModal /> should render correctly 1`] = `
       />
     </h4>
     <Relay(Connect(InjectIntl(ReduxForm)))
+      activeKeyboard={[Function]}
+      disabledKeyboard={[Function]}
       onSubmit={[Function]}
       step={
         Object {

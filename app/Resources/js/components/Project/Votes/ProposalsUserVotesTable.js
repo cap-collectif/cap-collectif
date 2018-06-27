@@ -35,6 +35,8 @@ type Props = FormProps &
     deletable: boolean,
     snapshot: DraggableStateSnapshot,
     intl: IntlShape,
+    disabledKeyboard: Function,
+    activeKeyboard: Function,
   };
 
 type VotesProps = FieldArrayProps &
@@ -147,13 +149,15 @@ const renderDraggableMembers = ({ fields, votes, step, deletable, intl }: VotesP
 
 export class ProposalsUserVotesTable extends React.Component<Props> {
   onDragStart = (start: DragStart, provided: HookProvided) => {
+    const { votes, intl, disabledKeyboard } = this.props;
+
+    disabledKeyboard();
+
     // Add a little vibration if the browser supports it.
     // Add's a nice little physical feedback
     if (window.navigator.vibrate) {
       window.navigator.vibrate(100);
     }
-
-    const { votes, intl } = this.props;
 
     const title =
       votes.edges &&
@@ -180,7 +184,9 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
   };
 
   onDragEnd = (result: DropResult, provided: HookProvided) => {
-    const { votes, intl } = this.props;
+    const { votes, intl, activeKeyboard } = this.props;
+
+    activeKeyboard();
 
     const title =
       votes.edges &&
