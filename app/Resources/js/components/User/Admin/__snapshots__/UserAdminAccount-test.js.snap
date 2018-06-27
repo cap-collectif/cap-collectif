@@ -80,9 +80,6 @@ exports[`<UserAdminAccount/> should render when user is admin or viewer 1`] = `
             values={Object {}}
           />
            
-          <DatesInterval
-            startAt="2018-06-03 11:11:11"
-          />
         </div>
       </Field>
       <div
@@ -274,9 +271,6 @@ exports[`<UserAdminAccount/> should render when user is not admin or viewer 1`] 
             values={Object {}}
           />
            
-          <DatesInterval
-            startAt={null}
-          />
         </div>
       </Field>
       <div

@@ -136,7 +136,6 @@ export class UserAdminAccount extends React.Component<Props, State> {
               children={
                 <div>
                   <FormattedMessage id="form.label_expired" />{' '}
-                  <DatesInterval startAt={user.expiresAt} />
                 </div>
               }
             />
@@ -242,7 +241,6 @@ export default createFragmentContainer(
       vip
       enabled
       expired
-      expiresAt
       isSubscribedToNewsLetter
       subscribedToNewsLetterAt
       isViewer

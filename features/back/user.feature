@@ -88,6 +88,7 @@ Scenario: Logged in super admin wants delete a user
 Scenario: Logged in super admin wants to create a user
   Given I am logged in as super admin
   Then I go to the admin user list page
+  And I wait 1 seconds
   And I open modal to create user
   Then I should see an ".modal-content" element
   And I should see "add-a-user"

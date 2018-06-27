@@ -2626,7 +2626,7 @@ input UpdateProfilePersonalDataInput {
 }
 
 type UpdateProfilePersonalDataPayload {
-  # the user who just have been updated
+  # The user who just have been updated
   user: User!
   clientMutationId: String
 }
@@ -2668,7 +2668,7 @@ input UpdateProfilePublicDataInput {
 }
 
 type UpdateProfilePublicDataPayload {
-  # the user who just have been updated
+  # The user who just have been updated
   user: User!
   clientMutationId: String
 }
@@ -2963,10 +2963,20 @@ type User implements Node {
     # Returns the last n elements from the list.
     last: Int
   ): ContributionConnection!
+
+  # Is user subscribed to the newsletter ?
   isSubscribedToNewsLetter: Boolean
+
+  # The user subrscibes to the newsletter at date
   subscribedToNewsLetterAt: DateTime
+
+  # Is user given the current viewer ?
   isViewer: Boolean!
+
+  # Has the user confirmed his email address ?
   isEmailConfirmed: Boolean
+
+  # The user's email was confirmed at date
   emailConfirmationSentAt: DateTime
 }
 
