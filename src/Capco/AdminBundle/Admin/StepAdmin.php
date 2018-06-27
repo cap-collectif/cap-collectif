@@ -337,6 +337,7 @@ class StepAdmin extends CapcoAdmin
                         'query' => $this->createQueryForDefaultStatus(),
                         'by_reference' => false,
                         'required' => false,
+                        'btn_add' => false,
                         'class' => Status::class,
                         'placeholder' => 'admin.fields.step.default_status_none',
                         'choices_as_values' => true,
