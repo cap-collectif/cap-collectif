@@ -222,7 +222,7 @@ User:
                   type: "ID"
                 includeExpired:
                   type: "Boolean"
-                  description: "(SuperAdmin only) retrieves ALL votes including expired ones"
+                  description: "(ROLE_SUPER_ADMIN only) Select also expired votes."
                   defaultValue: false
             deletedAccountAt:
                 type: "DateTime"
