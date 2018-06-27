@@ -217,7 +217,7 @@ class ProposalForm
     {
         if ($this->id) {
             $this->id = null;
-            $this->evaluationForm = clone $this->evaluationForm;
+            $this->evaluationForm = $this->evaluationForm ? clone $this->evaluationForm : null;
             $this->step = null;
             $this->reference = null;
             $this->createdAt = new \DateTime();
