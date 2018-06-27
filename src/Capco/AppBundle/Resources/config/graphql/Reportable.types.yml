@@ -4,13 +4,7 @@ Reportable:
         description: "A reportable"
         resolveType: "@=resolver('contribution_type', [value])"
         fields:
-            id:
-              type: "ID!"
-            kind:
-              type: "String!"
-            related:
-                type: "Contribution"
-                description: "Related contribution."
-            url:
-                type: "URI!"
-                description: "Url of the contribution"
+            viewerHasReport:
+                access: "@=hasRole('ROLE_USER')"
+                type: "Boolean!"
+                description: "Does the viewer already submitted a report ?"

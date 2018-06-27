@@ -30,42 +30,6 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 class ArgumentsController extends FOSRestController
 {
     /**
-     * Get all arguments of an opinion for specified type.
-     *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Get all arguments of an opinion for specified type",
-     *  statusCodes={
-     *    200 = "Returned when successful",
-     *    404 = "Returned when opinion not found",
-     *  }
-     * )
-     *
-     * @Get("/opinions/{id}/arguments")
-     * @ParamConverter("opinion", options={
-     *  "repository_method": "getOne",
-     *  "mapping": {"id": "id"},
-     *  "map_method_signature" = true
-     * })
-     * @QueryParam(name="type", requirements="(0|1)", default=null)
-     * @QueryParam(name="order", requirements="(old|last|popular)", default="last")
-     * @View(statusCode=200, serializerGroups={"Opinions", "UsersInfos"})
-     */
-    public function cgetOpinionArgumentsAction(Opinion $opinion, ParamFetcherInterface $paramFetcher)
-    {
-        $type = $paramFetcher->get('type');
-        $order = $paramFetcher->get('order');
-
-        $arguments = $this->get('capco.argument.repository')
-            ->getByTypeAndOpinionOrderedJoinUserReports($opinion, $type, $order, $this->getUser());
-
-        return [
-            'arguments' => $arguments,
-            'count' => \count($arguments),
-        ];
-    }
-
-    /**
      * Get all arguments of an opinion version for specified type.
      *
      * @ApiDoc(

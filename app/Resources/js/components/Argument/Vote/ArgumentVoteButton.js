@@ -29,7 +29,7 @@ class ArgumentVoteButton extends React.Component<Props> {
     return (
       <LoginOverlay>
         <Button
-          disabled={!argument.isContribuable || this.isTheUserTheAuthor()}
+          disabled={!argument.contribuable || this.isTheUserTheAuthor()}
           bsStyle={hasVoted ? 'danger' : 'success'}
           className={`argument__btn--vote${hasVoted ? '' : ' btn--outline'}`}
           bsSize="xsmall"
@@ -61,8 +61,8 @@ export default createFragmentContainer(
       author {
         slug
       }
-      isContribuable
-      hasUserVoted
+      contribuable
+      viewerHasVote
     }
   `,
 );

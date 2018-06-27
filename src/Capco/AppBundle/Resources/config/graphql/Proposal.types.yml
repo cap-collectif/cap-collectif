@@ -3,7 +3,7 @@ Proposal:
     inherits: [Node, Contribution]
     config:
         description: "A budget contribution"
-        interfaces: [Node, Contribution]
+        interfaces: [Node, Contribution, Reportable]
         fields:
             show_url:
                 resolve: "@=resolver('proposal_show_url', [value])"
@@ -237,8 +237,8 @@ Proposal:
                     step:
                         type: "ID!"
                         description: "The concerned step."
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalViewerHasVoteResolver", [value, args, getUser()])'
-            viewerHasReported:
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalViewerHasVoteResolver", [value, args, user])'
+            viewerHasReport:
                 access: "@=hasRole('ROLE_USER')"
                 type: "Boolean!"
                 resolve: '@=value.userHasReport(getUser())'

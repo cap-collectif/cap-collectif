@@ -38,13 +38,14 @@ class ArgumentButtons extends React.Component<Props, State> {
     const { argument, dispatch } = this.props;
     return (
       <div>
+        {/* $FlowFixMe */}
         <ArgumentVoteBox argument={argument} /> <ArgumentReportButton argument={argument} />{' '}
         <EditButton
           onClick={() => {
             dispatch(openArgumentEditModal(argument.id));
           }}
           author={argument.author}
-          editable={argument.isContribuable}
+          editable={argument.contribuable}
           className="argument__btn--edit btn-xs btn-dark-gray btn--outline"
         />
         <ArgumentEditModal argument={argument} />{' '}
@@ -79,8 +80,11 @@ export default createFragmentContainer(
         displayName
       }
       id
-      isContribuable
+      contribuable
       url
+      ...ArgumentEditModal_argument
+      ...ArgumentVoteBox_argument
+      ...ArgumentReportButton_argument
     }
   `,
 );

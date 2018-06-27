@@ -50,7 +50,7 @@ class CommentVoteButton extends React.Component<Props> {
   renderVoteButton = () => {
     const { comment } = this.props;
 
-    if (comment.hasUserVoted) {
+    if (comment.viewerHasVote) {
       return (
         <button className="btn btn-danger btn-sm" onClick={this.deleteVote}>
           {<FormattedMessage id="comment.vote.remove" />}

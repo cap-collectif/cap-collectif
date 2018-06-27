@@ -112,11 +112,6 @@ class ConsultationResolver implements ContainerAwareInterface
         return $paginator->auto($args, $totalCount);
     }
 
-    public function resolveConsultationIsContribuable(ConsultationStep $consultation): bool
-    {
-        return $consultation->canContribute();
-    }
-
     public function resolve(Arg $args)
     {
         $repo = $this->container->get('capco.consultation_step.repository');
@@ -225,19 +220,6 @@ class ConsultationResolver implements ContainerAwareInterface
         });
 
         return $iterator;
-    }
-
-    public function resolvePropositionArguments(OpinionContributionInterface $proposition, Arg $argument)
-    {
-        if ($argument->offsetExists('type')) {
-            return $proposition->getArguments()->filter(
-                function ($a) use ($argument) {
-                    return $a->getType() === $argument->offsetGet('type');
-                }
-            );
-        }
-
-        return $proposition->getArguments();
     }
 
     public function resolvePropositionSection(Opinion $proposition)

@@ -66,7 +66,7 @@ type Archive {
 }
 
 # An argument
-type Argument implements Node & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
+type Argument implements Node & Contribution & Reportable & TrashableContribution & ContributionWithAuthor & EditableContribution {
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
 
@@ -101,6 +101,47 @@ type Argument implements Node & Contribution & TrashableContribution & Contribut
 
   # The kind of contribution (argument).
   kind: String!
+  viewerHasReport: Boolean!
+  viewerHasVote: Boolean!
+  contribuable: Boolean!
+}
+
+# A connection to a list of items.
+type ArgumentConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [ArgumentEdge]
+}
+
+# An edge in a connection.
+type ArgumentEdge {
+  # The item at the end of the edge.
+  node: Argument
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# Ways in which argument connections can be ordered.
+input ArgumentOrder {
+  # The field in which to order nodes by.
+  field: ArgumentOrderField!
+
+  # The direction in which to order nodes.
+  direction: OrderDirection! = ASC
+}
+
+# Properties by which argument connections can be ordered
+enum ArgumentOrderField {
+  # Allows ordering a list of arguments by when they were created.
+  CREATED_AT
+
+  # Allows ordering a list of arguments by the number of votes it have.
+  VOTES
 }
 
 # Value of an argument
@@ -1193,9 +1234,15 @@ type Opinion implements Node & Contribution & TrashableContribution & Contributi
 
   # The arguments related to the contribution.
   arguments(
+    after: String
+    first: Int
+    before: String
+    last: Int
+    orderBy: ArgumentOrder = {field: CREATED_AT, direction: DESC}
+
     # If omitted, returns all arguments. If provided, returns the arguments of this particular type.
     type: ArgumentValue
-  ): [Argument]
+  ): ArgumentConnection!
 
   # The versions related to the contribution.
   versions: [Version]
@@ -1457,7 +1504,7 @@ type Project implements Node {
 }
 
 # A budget contribution
-type Proposal implements Node & Contribution {
+type Proposal implements Node & Contribution & Reportable {
   # The HTTP show url for this contribution.
   show_url: URI! @deprecated(reason: "Use url instead of show_url")
 
@@ -1613,7 +1660,7 @@ type Proposal implements Node & Contribution {
     # The concerned step.
     step: ID!
   ): Boolean!
-  viewerHasReported: Boolean!
+  viewerHasReport: Boolean!
   votableSteps: [ProposalStep!]!
 }
 
@@ -2111,6 +2158,12 @@ type ReportEdge {
 
   # A cursor for use in pagination.
   cursor: String!
+}
+
+# A reportable
+interface Reportable {
+  # Does the viewer already submitted a report ?
+  viewerHasReport: Boolean!
 }
 
 # A report

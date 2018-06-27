@@ -1,0 +1,7 @@
+ArgumentConnection:
+    type: relay-connection
+    config:
+        nodeType: Argument
+        connectionFields:
+            totalCount:
+                type: Int!

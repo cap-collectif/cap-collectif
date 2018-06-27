@@ -24,7 +24,7 @@ class ArgumentReportButton extends React.Component<Props> {
     return (
       <ReportBox
         id={`argument-${argument.id}`}
-        reported={argument.hasUserReported}
+        reported={argument.viewerHasReport}
         onReport={this.handleReport}
         author={argument.author}
         buttonBsSize="xs"
@@ -44,7 +44,7 @@ export default createFragmentContainer(
         displayName
       }
       id
-      hasUserReported
+      viewerHasReport
     }
   `,
 );

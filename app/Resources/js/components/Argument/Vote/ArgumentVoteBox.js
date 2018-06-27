@@ -19,7 +19,7 @@ class ArgumentVoteBox extends React.Component<Props, State> {
     const { argument } = props;
 
     this.state = {
-      hasVoted: argument.hasUserVoted,
+      hasVoted: argument.viewerHasVote,
     };
   }
 
@@ -38,8 +38,8 @@ class ArgumentVoteBox extends React.Component<Props, State> {
   render() {
     const { hasVoted } = this.state;
     const { argument } = this.props;
-    const hasVotedSince = hasVoted && !argument.hasUserVoted;
-    const hasUnVotedSince = !hasVoted && argument.hasUserVoted;
+    const hasVotedSince = hasVoted && !argument.viewerHasVote;
+    const hasUnVotedSince = !hasVoted && argument.viewerHasVote;
     const showVoted = hasVoted || hasVotedSince;
     return (
       <span>
@@ -64,7 +64,7 @@ export default createFragmentContainer(
     fragment ArgumentVoteBox_argument on Argument {
       id
       votesCount
-      hasUserVoted
+      viewerHasVote
     }
   `,
 );

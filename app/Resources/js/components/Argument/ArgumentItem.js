@@ -72,12 +72,13 @@ export default createFragmentContainer(
   ArgumentItem,
   graphql`
     fragment ArgumentItem_argument on Argument {
+      id
       createdAt
       author {
         id
         slug
         displayName
-        url
+        show_url
         vip
       }
       body
