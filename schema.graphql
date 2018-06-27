@@ -150,6 +150,21 @@ enum ArgumentValue {
   FOR
 }
 
+# An argumentable
+interface Argumentable {
+  # The arguments related to the argumentable.
+  arguments(
+    after: String
+    first: Int
+    before: String
+    last: Int
+    orderBy: ArgumentOrder = {field: CREATED_AT, direction: DESC}
+
+    # If omitted, returns all arguments. If provided, returns the arguments of this particular type.
+    type: ArgumentValue
+  ): ArgumentConnection!
+}
+
 input ChangeCollectStatusInput {
   statusId: ID
 
@@ -1156,7 +1171,7 @@ type NotificationsConfiguration {
 }
 
 # A contribution
-type Opinion implements Node & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
+type Opinion implements Node & Argumentable & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
 
@@ -3100,7 +3115,7 @@ type ValueResponse implements Response {
 }
 
 # A version of contribution
-type Version implements Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
+type Version implements Contribution & Argumentable & TrashableContribution & ContributionWithAuthor & EditableContribution {
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
 
@@ -3168,15 +3183,21 @@ type Version implements Contribution & TrashableContribution & ContributionWithA
   # The content of the contribution.
   bodyText: HTML!
 
-  # The arguments related to the contribution.
-  arguments(
-    # If omitted, returns all arguments. If provided, returns the arguments of this particular type.
-    type: ArgumentValue
-  ): [Argument]
-
   # The sources related to the contribution.
   sources: [Source]
   reportings: [Reporting]
+
+  # The arguments related to the contribution.
+  arguments(
+    after: String
+    first: Int
+    before: String
+    last: Int
+    orderBy: ArgumentOrder = {field: CREATED_AT, direction: DESC}
+
+    # If omitted, returns all arguments. If provided, returns the arguments of this particular type.
+    type: ArgumentValue
+  ): ArgumentConnection!
 }
 
 type VersionVote implements YesNoPairedVote & ContributionWithAuthor {

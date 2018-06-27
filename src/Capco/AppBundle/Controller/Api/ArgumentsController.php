@@ -11,13 +11,10 @@ use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Form\ArgumentType;
 use Capco\AppBundle\Form\ReportingType;
 use FOS\RestBundle\Controller\Annotations\Delete;
-use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Put;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Request\ParamFetcherInterface;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -29,43 +26,6 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 class ArgumentsController extends FOSRestController
 {
-    /**
-     * Get all arguments of an opinion version for specified type.
-     *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Get all arguments of an opinion version for specified type",
-     *  statusCodes={
-     *    200 = "Returned when successful",
-     *    404 = "Returned when opinion version not found",
-     *  }
-     * )
-     *
-     * @Get("opinions/{opinionId}/versions/{versionId}/arguments")
-     * @ParamConverter("version", options={"mapping": {"versionId": "id"}, "repository_method": "getOne", "map_method_signature": true})
-     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}, "repository_method": "getOne", "map_method_signature": true})
-     * @QueryParam(name="type", requirements="(0|1)", nullable=true)
-     * @QueryParam(name="filter", requirements="(old|last|popular)", default="last")
-     * @View(statusCode=200, serializerGroups={"Opinions", "UsersInfos"})
-     */
-    public function cgetOpinionVersionArgumentsAction(Opinion $opinion, OpinionVersion $version, ParamFetcherInterface $paramFetcher)
-    {
-        $type = $paramFetcher->get('type');
-        $filter = $paramFetcher->get('filter');
-
-        if ($version->getParent() !== $opinion) {
-            throw new BadRequestHttpException('Not a child');
-        }
-
-        $arguments = $this->get('capco.argument.repository')
-            ->getByTypeAndOpinionVersionOrderedJoinUserReports($version, $type, $filter, $this->getUser());
-
-        return [
-            'arguments' => $arguments,
-            'count' => \count($arguments),
-        ];
-    }
-
     /**
      * Post an argument for an opinion.
      *
