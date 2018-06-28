@@ -291,6 +291,12 @@ Capco\AppBundle\Entity\SiteParameter:
         value: fr-FR
         position: 1
         type: 9
+    SiteParameterTimezone:
+        keyname: global.timezone
+        category: settings.global
+        value: Europe/Paris
+        position: 2
+        type: 9
 
     SiteParameterMetaDescription:
         keyname: homepage.metadescription

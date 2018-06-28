@@ -14,8 +14,12 @@ class LocaleListener
         $this->resolver = $resolver;
     }
 
-    public function onKernelRequest(GetResponseEvent $event)
+    public function onKernelRequest(GetResponseEvent $event): void
     {
+        if (date_default_timezone_get() !== $this->resolver->getValue('global.timezone')) {
+            date_default_timezone_set($this->resolver->getValue('global.timezone'));
+        }
+
         $request = $event->getRequest();
         // We set the user locale for symfony translations
         $locale = $this->resolver->getValue('global.locale');

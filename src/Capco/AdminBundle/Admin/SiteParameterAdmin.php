@@ -40,8 +40,8 @@ class SiteParameterAdmin extends Admin
         $translator = $this->getConfigurationPool()->getContainer()->get('translator');
         $texts = explode(' ', $text);
         if (\count($texts) > 1) {
-            foreach ($texts as $text) {
-                $txt .= ' ' . $translator->trans($text, [], 'CapcoAppBundle');
+            foreach ($texts as $splittedText) {
+                $txt .= ' ' . $translator->trans($splittedText, [], 'CapcoAppBundle');
             }
 
             return $txt;
@@ -152,6 +152,13 @@ class SiteParameterAdmin extends Admin
                 ],
                 'help' => $this->getHelpText($subject->getHelpText()),
             ]);
+        } elseif ('global.timezone' === $subject->getKeyname()) {
+            $formMapper->add('value', ChoiceType::class, [
+                'label' => 'global.timezone',
+                'required' => false,
+                'choices' => $this->getTimezonesList(),
+                'help' => $this->getHelpText($subject->getHelpText()),
+            ]);
         } else {
             $formMapper->add('value', null, [
                 'label' => 'admin.fields.site_parameter.value',
@@ -164,5 +171,25 @@ class SiteParameterAdmin extends Admin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->clearExcept(['edit']);
+    }
+
+    private function getTimezonesList(): array
+    {
+        $timezones = \DateTimeZone::listIdentifiers(\DateTimeZone::ALL);
+        $zones = [];
+
+        foreach ($timezones as $zone) {
+            $zones[$zone] = sprintf('%s (GMT%s)',
+                self::formatTimezoneName($zone),
+                (new \DateTime('now', new \DateTimeZone($zone)))->format('P')
+            );
+        }
+
+        return $zones;
+    }
+
+    private static function formatTimezoneName(string $name): string
+    {
+        return str_replace(['_', 'St '], [' ', 'St. '], $name);
     }
 }

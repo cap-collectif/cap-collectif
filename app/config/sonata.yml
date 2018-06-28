@@ -94,7 +94,7 @@ sonata_classification:
 sonata_intl:
     timezone:
         detectors:
-            - sonata.intl.timezone_detector.locale
+            - capco.intl.timezone_detector.global
         locales:
             default: Europe/Paris
             fr-FR: Europe/Paris

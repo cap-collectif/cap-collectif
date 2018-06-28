@@ -6,6 +6,7 @@
 
     <parameters>
         <parameter key="capco_admin.blog.block.recent_post.class">Capco\AdminBundle\Block\RecentPostBlockService</parameter>
+        <parameter key="sonata.intl.timezone_detector.global.class">Capco\AdminBundle\Timezone\GlobalConfigurationTimeZoneDetector</parameter>
     </parameters>
 
     <services>
@@ -56,6 +57,11 @@
 
         <service id="capco.admin.vars_extension" class="Capco\AdminBundle\Twig\VarsExtension">
             <tag name="twig.extension" />
+        </service>
+
+        <service id="capco.intl.timezone_detector.global" class="%sonata.intl.timezone_detector.global.class%">
+            <tag name="sonata_intl.timezone_detector" alias="global" />
+            <argument type="service" id="capco.site_parameter.resolver" />
         </service>
 
     </services>
