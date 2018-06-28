@@ -566,6 +566,7 @@ overblog_graphql:
         config_validation: "%kernel.debug%"
         schema:
             query: Query
+            types: [Argument, CheckboxRequirement, CollectStep, Comment, Consultation, Event, FirstnameRequirement, Group, LastnameRequirement, MediaQuestion, MediaResponse, MultipleChoiceQuestion, Opinion, OpinionType, OpinionVote, OtherStep, PhoneRequirement, PresentationStep, Project, Proposal, ProposalForm, ProposalVote, Questionnaire, QuestionnaireStep, RankingStep, Reply, Reporting, Section, SelectionStep, SimpleQuestion, Source, SynthesisStep, User, ValueResponse, Version, VersionVote]
             mutation: Mutation
 
 limenius_react:

@@ -36,7 +36,7 @@ ProposalStep:
               type: "ProposalVoteConnection!"
               description: "A list of viewer votes associated with the step."
               argsBuilder: "Relay::Connection"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerStepVotesResolver", [value, user, args])'
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerStepVotesResolver", [value, getUser(), args])'
               args:
                   first:
                       type: "Int"
@@ -46,6 +46,7 @@ ProposalStep:
                       defaultValue: { field: CREATED_AT, direction: DESC }
             proposals:
                 type: "ProposalConnection!"
+                resolve: '@=resolver("proposal_form_proposals", [value, args, getUser(), serv("request_stack")])'
                 args:
                   district:
                     type: "ID"

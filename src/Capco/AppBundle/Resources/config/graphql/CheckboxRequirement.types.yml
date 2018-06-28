@@ -12,5 +12,5 @@ CheckboxRequirement:
           viewerMeetsTheRequirement:
               type: "Boolean!"
               access: "@hasRole=('ROLE_USER')"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\ViewerMeetsTheRequirementResolver", [value, user])'
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\ViewerMeetsTheRequirementResolver", [value, getUser()])'
               description: "Does the viewer meets the requirement ?"

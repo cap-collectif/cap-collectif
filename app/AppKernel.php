@@ -125,6 +125,7 @@ class AppKernel extends Kernel
         if (in_array($this->getEnvironment(), ['dev', 'prod'], true)) {
                 // ICU translation
             $bundles[] = new \Webfactory\IcuTranslationBundle\WebfactoryIcuTranslationBundle();
+            $bundles[] = new \Overblog\GraphiQLBundle\OverblogGraphiQLBundle();
         }
 
         if ('prod' === $this->getEnvironment()) {

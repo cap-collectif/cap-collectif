@@ -10,7 +10,7 @@ SelectionStep:
             requirements:
               type: "RequirementConnection!"
               description: "The requirements to vote on this step."
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\StepRequirementsResolver", [value, user, args])'
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\StepRequirementsResolver", [value, getUser(), args])'
             show_url:
               type: "String!"
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepUrlResolver", [value])'
@@ -45,7 +45,7 @@ SelectionStep:
                 type: "Int"
             proposals:
                 type: "ProposalConnection!"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\SelectionStepProposalResolver", [value, args, user, request])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\SelectionStepProposalResolver", [value, args, getUser(), serv("request_stack")])'
                 args:
                   district:
                     type: "ID"
@@ -88,7 +88,7 @@ SelectionStep:
                 type: "ProposalVoteConnection!"
                 description: "A list of viewer votes associated with the step."
                 argsBuilder: "Relay::Connection"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerStepVotesResolver", [value, user, args])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerStepVotesResolver", [value, getUser(), args])'
                 args:
                     first:
                       type: "Int"

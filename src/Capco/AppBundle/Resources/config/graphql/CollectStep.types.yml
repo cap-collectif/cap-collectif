@@ -9,7 +9,7 @@ CollectStep:
             requirements:
               type: "RequirementConnection!"
               description: "The requirements to vote on this step."
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\StepRequirementsResolver", [value, user, args])'
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\StepRequirementsResolver", [value, getUser(), args])'
             show_url:
               type: "String!"
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepUrlResolver", [value])'
@@ -50,13 +50,13 @@ CollectStep:
             viewerProposalDrafts:
                 type: "ProposalConnection!"
                 access: "@=hasRole('ROLE_USER')"
-                resolve: "@=resolver('query_get_draft_proposals_for_user_in_step', [value, user, args])"
+                resolve: "@=resolver('query_get_draft_proposals_for_user_in_step', [value, getUser(), args])"
             viewerVotes:
                 type: "ProposalVoteConnection!"
                 access: "@=hasRole('ROLE_USER')"
                 description: "A list of viewer votes associated with the step."
                 argsBuilder: "Relay::Connection"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerStepVotesResolver", [value, user, args])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerStepVotesResolver", [value, getUser(), args])'
                 args:
                     first:
                       type: "Int"
@@ -66,7 +66,7 @@ CollectStep:
                       defaultValue: { field: CREATED_AT, direction: DESC }
             proposals:
                 type: "ProposalConnection!"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\CollectStepProposalResolver", [value, args, user, request])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\CollectStepProposalResolver", [value, args, getUser(), serv("request_stack")])'
                 args:
                   district:
                     type: "ID"
