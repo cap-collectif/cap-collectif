@@ -154,7 +154,7 @@ Proposal:
             votes:
               type: "ProposalVoteConnection!"
               argsBuilder: "Relay::Connection"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalVotesResolver", [value, args])'
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalVotesResolver", [value, args, context])'
               args:
                 first:
                   type: "Int"
@@ -165,6 +165,10 @@ Proposal:
                 stepId:
                   type: "ID"
                   description: "If provided, retrieve only in this step."
+                includeExpired:
+                  type: "Boolean"
+                  description: "(ROLE_SUPER_ADMIN only) Select also expired votes."
+                  defaultValue: false
             createdAt:
               type: "DateTime!"
               description: "Identifies the date and time when the object was created."
