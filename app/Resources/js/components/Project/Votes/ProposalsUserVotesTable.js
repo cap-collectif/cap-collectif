@@ -63,11 +63,9 @@ const DraggableItem = styled.div`
 const portal: HTMLElement = document.createElement('div');
 portal.classList.add('proposal-user-votes-portal');
 
-if (!document.body) {
-  throw new Error('body not ready for portal creation!');
+if (document.body) {
+  document.body.appendChild(portal);
 }
-
-document.body.appendChild(portal);
 
 const renderMembers = ({ fields, votes, step, deletable }: VotesProps) => {
   return (
