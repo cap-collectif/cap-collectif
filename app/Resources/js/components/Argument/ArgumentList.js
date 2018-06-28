@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import Input from '../Form/Input';
 import environment, { graphqlError } from '../../createRelayEnvironment';
-import ArgumentListView from './ArgumentListView';
+import ArgumentListView, { type ArgumentOrder } from './ArgumentListView';
 import Loader from '../Ui/Loader';
 import type ArgumentListQueryResponse from './__generated__/ArgumentListQuery.graphql';
 
@@ -17,12 +17,12 @@ type Props = {
 };
 
 type State = {
-  order: string,
+  order: ArgumentOrder,
 };
 
 export class ArgumentList extends React.Component<Props, State> {
   state = {
-    order: 'recent',
+    order: 'last',
   };
 
   updateOrderBy = (event: Event) => {
@@ -43,17 +43,23 @@ export class ArgumentList extends React.Component<Props, State> {
               $argumentableId: ID!
               $isAuthenticated: Boolean!
               $type: ArgumentValue
-              $count: Int!
+              $count: Int
               $cursor: String
               $orderBy: ArgumentOrder
             ) {
               argumentable: node(id: $argumentableId) {
                 ... on Argumentable {
-                  allArguments: arguments(first: 0, type: $type) {
+                  allArguments: arguments(first: 0, type: $type)
+                    @connection(key: "ArgumentList_allArguments", filters: ["type"]) {
                     totalCount
+                    edges {
+                      node {
+                        id
+                      }
+                    }
                   }
                 }
-                ...ArgumentListView_argumentable
+                ...ArgumentListView_argumentable @arguments(type: $type)
               }
             }
           `}
@@ -61,9 +67,6 @@ export class ArgumentList extends React.Component<Props, State> {
             isAuthenticated,
             argumentableId: this.props.argumentable.id,
             type,
-            count: 10,
-            cursor: null,
-            orderBy: { field: 'CREATED_AT', direction: 'DESC' },
           }}
           render={({ error, props }: ReadyState & { props?: ArgumentListQueryResponse }) => {
             if (error) {
@@ -103,6 +106,7 @@ export class ArgumentList extends React.Component<Props, State> {
                           id={htmlFor}
                           className="form-control pull-right"
                           type="select"
+                          value={this.state.order}
                           onChange={this.updateOrderBy}>
                           <FormattedMessage id="global.filter_last">
                             {message => <option value="last">{message}</option>}

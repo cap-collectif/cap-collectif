@@ -37,12 +37,12 @@ class ArgumentItem extends React.Component<Props> {
   render() {
     const argument = this.props.argument;
     const classes = classNames({
-      opinion: true,
-      'opinion--argument': true,
+      // opinion: true,
+      // 'opinion--argument': true,
       'bg-vip': argument.author && argument.author.vip,
     });
     return (
-      <li className={classes} id={`arg-${argument.id}`}>
+      <div className={classes} id={`arg-${argument.id}`}>
         <div className="opinion__body box">
           <UserAvatar user={argument.author} className="pull-left" />
           <div className="opinion__data">
@@ -63,7 +63,7 @@ class ArgumentItem extends React.Component<Props> {
           </p>
           <ArgumentButtons argument={argument} />
         </div>
-      </li>
+      </div>
     );
   }
 }
@@ -71,10 +71,11 @@ class ArgumentItem extends React.Component<Props> {
 export default createFragmentContainer(
   ArgumentItem,
   graphql`
-    fragment ArgumentItem_argument on Argument {
+    fragment ArgumentItem_argument on Argument
+      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
       id
       createdAt
-      ...ArgumentButtons_argument
+      ...ArgumentButtons_argument @arguments(isAuthenticated: $isAuthenticated)
       author {
         id
         slug

@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Form\ArgumentType;
+use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Model\Argumentable;
 use Capco\AppBundle\Repository\OpinionRepository;
@@ -15,7 +16,8 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Error\UserError;
-use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
+use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactory;
@@ -92,6 +94,10 @@ class AddArgumentMutation
           ])
         ));
 
-        return ['argument' => $argument];
+        // $totalCount = $this->followerRepository->countFollowersOfProposal($proposal);
+        $totalCount = 0;
+        $edge = new Edge(ConnectionBuilder::offsetToCursor($totalCount), $argument);
+
+        return ['argument' => $argument, 'argumentEdge' => $edge];
     }
 }

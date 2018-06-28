@@ -75,7 +75,8 @@ const container = connect()(ArgumentButtons);
 export default createFragmentContainer(
   container,
   graphql`
-    fragment ArgumentButtons_argument on Argument {
+    fragment ArgumentButtons_argument on Argument
+      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
       author {
         id
         displayName
@@ -83,9 +84,10 @@ export default createFragmentContainer(
       id
       contribuable
       url
+      ...ArgumentDeleteModal_argument
       ...ArgumentEditModal_argument
-      ...ArgumentVoteBox_argument
-      ...ArgumentReportButton_argument
+      ...ArgumentVoteBox_argument @arguments(isAuthenticated: $isAuthenticated)
+      ...ArgumentReportButton_argument @arguments(isAuthenticated: $isAuthenticated)
     }
   `,
 );

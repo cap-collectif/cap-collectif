@@ -10,26 +10,22 @@ exports[`<ArgumentCreate /> renders correctly 1`] = `
     <form
       id="argument-form--FOR"
     >
-      <Connect(LoginOverlay)
-        enabled={true}
-      >
-        <Field
-          component={[Function]}
-          disabled={false}
-          id="arguments-body-FOR"
-          label={
-            <FormattedMessage
-              id="argument.yes.add"
-              values={Object {}}
-            />
-          }
-          labelClassName="sr-only"
-          name="body"
-          placeholder="argument.FOR.add"
-          rows={2}
-          type="textarea"
-        />
-      </Connect(LoginOverlay)>
+      <Field
+        component={[Function]}
+        disabled={false}
+        id="arguments-body-FOR"
+        label={
+          <FormattedMessage
+            id="argument.yes.add"
+            values={Object {}}
+          />
+        }
+        labelClassName="sr-only"
+        name="body"
+        placeholder="argument.yes.add"
+        rows={2}
+        type="textarea"
+      />
       <Button
         active={false}
         block={false}

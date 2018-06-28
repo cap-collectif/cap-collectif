@@ -1,5 +1,6 @@
 // @flow
 import { graphql } from 'react-relay';
+import { ConnectionHandler } from 'relay-runtime';
 import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
 import type {
@@ -10,8 +11,12 @@ import type {
 const mutation = graphql`
   mutation AddArgumentMutation($input: AddArgumentInput!) {
     addArgument(input: $input) {
-      argument {
-        id
+      argumentEdge {
+        cursor
+        node {
+          id
+          ...ArgumentItem_argument
+        }
       }
     }
   }
@@ -21,6 +26,68 @@ const commit = (variables: AddArgumentMutationVariables): Promise<AddArgumentMut
   commitMutation(environment, {
     mutation,
     variables,
+    configs: [
+      // We add the new argument in the last arguments corresponding row
+      {
+        type: 'RANGE_ADD',
+        parentID: variables.input.argumentableId,
+        connectionInfo: [
+          {
+            key: 'ArgumentListViewPaginated_arguments',
+            rangeBehavior: 'prepend',
+            filters: {
+              type: variables.input.type,
+              orderBy: { direction: 'DESC', field: 'CREATED_AT' },
+            },
+          },
+        ],
+        edgeName: 'argumentEdge',
+      },
+      // We add the new argument in the old arguments corresponding row
+      {
+        type: 'RANGE_ADD',
+        parentID: variables.input.argumentableId,
+        connectionInfo: [
+          {
+            key: 'ArgumentListViewPaginated_arguments',
+            rangeBehavior: 'append',
+            filters: {
+              type: variables.input.type,
+              orderBy: { direction: 'ASC', field: 'CREATED_AT' },
+            },
+          },
+        ],
+        edgeName: 'argumentEdge',
+      },
+      // We add the new argument in the popular arguments corresponding row
+      {
+        type: 'RANGE_ADD',
+        parentID: variables.input.argumentableId,
+        connectionInfo: [
+          {
+            key: 'ArgumentListViewPaginated_arguments',
+            rangeBehavior: 'append',
+            filters: {
+              type: variables.input.type,
+              orderBy: { direction: 'DESC', field: 'VOTES' },
+            },
+          },
+        ],
+        edgeName: 'argumentEdge',
+      },
+    ],
+    updater: store => {
+      // We update the "FOR" or "AGAINST" row arguments totalCount
+      const argumentableProxy = store.get(variables.input.argumentableId);
+      const connection = ConnectionHandler.getConnection(
+        argumentableProxy,
+        'ArgumentList_allArguments',
+        {
+          type: variables.input.type,
+        },
+      );
+      connection.setValue(connection.getValue('totalCount') + 1, 'totalCount');
+    },
   });
 
 export default { commit };

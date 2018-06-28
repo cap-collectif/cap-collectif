@@ -19,7 +19,11 @@ class ArgumentsBox extends React.Component<Props> {
     return (
       <div id={`arguments-col--${type}`}>
         <div className="opinion opinion--add-argument block block--bordered">
-          <ArgumentCreate form={`create-argument-${type}`} type={type} {...this.props} />
+          <ArgumentCreate
+            form={`create-argument-${type}`}
+            type={type}
+            argumentable={this.props.opinion}
+          />
         </div>
         <ArgumentList type={type} argumentable={this.props.opinion} />
       </div>

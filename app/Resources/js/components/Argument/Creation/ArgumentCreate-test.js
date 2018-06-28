@@ -9,7 +9,7 @@ describe('<ArgumentCreate />', () => {
   const props = {
     ...formMock,
     type: 'FOR',
-    opinion: { id: 'opinion1', isContribuable: true },
+    argumentable: { id: 'opinion1', isContribuable: true },
     user: { id: 'user1' },
     submitting: false,
     form: 'create-argument',

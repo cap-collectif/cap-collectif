@@ -1,13 +1,12 @@
 // @flow
 import * as React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Panel, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import type { ArgumentListViewPaginated_argumentable } from './__generated__/ArgumentListViewPaginated_argumentable.graphql';
 import ArgumentItem from './ArgumentItem';
 
 type Props = {
-  order: string,
   relay: RelayPaginationProp,
   argumentable: ArgumentListViewPaginated_argumentable,
 };
@@ -16,6 +15,8 @@ type State = {
   loading: boolean,
 };
 
+const ARGUMENTS_PAGINATION = 5;
+
 export class ArgumentListViewPaginated extends React.Component<Props, State> {
   state = {
     loading: false,
@@ -23,35 +24,41 @@ export class ArgumentListViewPaginated extends React.Component<Props, State> {
 
   render() {
     const { argumentable, relay } = this.props;
-    console.log(argumentable);
     return (
-      <div>
-        <ul className="media-list opinion__list">
+      <Panel>
+        <ListGroup fill>
+          {/* <ul className="media-list opinion__list"> */}
           {argumentable.arguments.edges &&
             argumentable.arguments.edges
               .filter(Boolean)
               .map(edge => edge.node)
               .filter(Boolean)
               .map(argument => {
-                // $FlowFixMe
-                return <ArgumentItem key={argument.id} argument={argument} />;
+                return (
+                  <ListGroupItem key={argument.id}>
+                    {/* $FlowFixMe */}
+                    <ArgumentItem argument={argument} />
+                  </ListGroupItem>
+                );
               })}
-        </ul>
-        <div>
           {relay.hasMore() && (
-            <Button
-              disabled={this.state.loading}
-              onClick={() => {
-                this.setState({ loading: true });
-                relay.loadMore(50, () => {
-                  this.setState({ loading: false });
-                });
-              }}>
-              <FormattedMessage id="see-more-proposals" />
-            </Button>
+            <ListGroupItem>
+              <Button
+                disabled={this.state.loading}
+                onClick={() => {
+                  this.setState({ loading: true });
+                  relay.loadMore(ARGUMENTS_PAGINATION, () => {
+                    this.setState({ loading: false });
+                  });
+                }}>
+                <FormattedMessage
+                  id={this.state.loading ? 'global.loading' : 'see-more-proposals'}
+                />
+              </Button>
+            </ListGroupItem>
           )}
-        </div>
-      </div>
+        </ListGroup>
+      </Panel>
     );
   }
 }
@@ -60,17 +67,22 @@ export default createPaginationContainer(
   ArgumentListViewPaginated,
   {
     argumentable: graphql`
-      fragment ArgumentListViewPaginated_argumentable on Argumentable {
-        ... on Node {
-          id
-        }
+      fragment ArgumentListViewPaginated_argumentable on Argumentable
+        @argumentDefinitions(
+          isAuthenticated: { type: "Boolean", defaultValue: true }
+          count: { type: "Int!" }
+          cursor: { type: "String" }
+          type: { type: "ArgumentValue!", nonNull: true }
+          orderBy: { type: "ArgumentOrder!", nonNull: true }
+        ) {
+        id
         arguments(first: $count, after: $cursor, type: $type, orderBy: $orderBy)
-          @connection(key: "ArgumentListViewPaginated_arguments") {
+          @connection(key: "ArgumentListViewPaginated_arguments", filters: ["type", "orderBy"]) {
           totalCount
           edges {
             node {
               id
-              ...ArgumentItem_argument
+              ...ArgumentItem_argument @arguments(isAuthenticated: $isAuthenticated)
             }
           }
           pageInfo {
@@ -111,7 +123,15 @@ export default createPaginationContainer(
         $count: Int
       ) {
         argumentable: node(id: $argumentableId) {
+          id
           ...ArgumentListViewPaginated_argumentable
+            @arguments(
+              isAuthenticated: $isAuthenticated
+              type: $type
+              cursor: $cursor
+              orderBy: $orderBy
+              count: $count
+            )
         }
       }
     `,

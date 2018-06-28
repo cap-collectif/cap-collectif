@@ -54,23 +54,29 @@ class ArgumentRepository extends EntityRepository
         ;
     }
 
-    public function getByContributionAndType(Argumentable $contribution, $type, int $first, int $offset, string $field, string $direction = 'DESC'): Paginator
+    public function getByContributionAndType(Argumentable $contribution, int $type = null, int $limit, int $first, string $field, string $direction): Paginator
     {
         $qb = $this->getByContributionQB($contribution);
 
         if (null !== $type) {
             $qb
-          ->andWhere('a.type = :type')
-          ->setParameter('type', $type)
+              ->andWhere('a.type = :type')
+              ->setParameter('type', $type)
          ;
         }
 
         if ('CREATED_AT' === $field) {
             $qb->addOrderBy('a.createdAt', $direction);
         }
+
         if ('VOTES' === $field) {
             $qb->addOrderBy('a.votesCount', $direction);
         }
+
+        $qb
+            ->setFirstResult($first)
+            ->setMaxResults($limit)
+        ;
 
         return new Paginator($qb);
     }

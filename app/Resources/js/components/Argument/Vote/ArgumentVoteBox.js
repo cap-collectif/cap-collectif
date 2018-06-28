@@ -61,11 +61,12 @@ class ArgumentVoteBox extends React.Component<Props, State> {
 export default createFragmentContainer(
   ArgumentVoteBox,
   graphql`
-    fragment ArgumentVoteBox_argument on Argument {
+    fragment ArgumentVoteBox_argument on Argument
+      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
       id
       votesCount
       viewerHasVote @include(if: $isAuthenticated)
-      ...ArgumentVoteButton_argument
+      ...ArgumentVoteButton_argument @arguments(isAuthenticated: $isAuthenticated)
     }
   `,
 );

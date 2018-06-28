@@ -5,8 +5,10 @@ import type { ArgumentListView_argumentable } from './__generated__/ArgumentList
 import Loader from '../Ui/Loader';
 import ArgumentListViewPaginated from './ArgumentListViewPaginated';
 
+export type ArgumentOrder = 'old' | 'last' | 'popular';
+
 type Props = {
-  order: string,
+  order: ArgumentOrder,
   relay: RelayRefetchProp,
   argumentable: ArgumentListView_argumentable,
 };
@@ -22,16 +24,26 @@ export class ArgumentListView extends React.Component<Props, State> {
 
   componentDidUpdate(prevProps: Props) {
     if (prevProps.order !== this.props.order) {
-      this._refetch();
+      this._refetch(this.props.order);
     }
   }
 
-  _refetch = () => {
+  _refetch = (newOrder: ArgumentOrder) => {
     this.setState({ isRefetching: true });
+
+    const direction = newOrder === 'old' ? 'ASC' : 'DESC';
+    const field = newOrder === 'popular' ? 'VOTES' : 'CREATED_AT';
+
+    const orderBy = {
+      direction,
+      field,
+    };
 
     const refetchVariables = fragmentVariables => ({
       argumentableId: this.props.argumentable.id,
       count: fragmentVariables.count,
+      cursor: null,
+      orderBy,
     });
 
     this.props.relay.refetch(
@@ -61,11 +73,15 @@ export default createRefetchContainer(
   {
     argumentable: graphql`
       fragment ArgumentListView_argumentable on Argumentable
-        @argumentDefinitions(count: { type: "Int" }) {
-        ... on Node {
-          id
-        }
+        @argumentDefinitions(
+          count: { type: "Int!", defaultValue: 5 }
+          cursor: { type: "String", defaultValue: null }
+          type: { type: "ArgumentValue!", nonNull: true }
+          orderBy: { type: "ArgumentOrder", defaultValue: { field: CREATED_AT, direction: DESC } }
+        ) {
+        id
         ...ArgumentListViewPaginated_argumentable
+          @arguments(cursor: $cursor, count: $count, type: $type, orderBy: $orderBy)
       }
     `,
   },
@@ -81,6 +97,7 @@ export default createRefetchContainer(
       argumentable: node(id: $argumentableId) {
         id
         ...ArgumentListView_argumentable
+          @arguments(cursor: $cursor, count: $count, type: $type, orderBy: $orderBy)
       }
     }
   `,

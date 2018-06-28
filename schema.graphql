@@ -13,6 +13,9 @@ input AddArgumentInput {
 type AddArgumentPayload {
   # The new argument.
   argument: Argument!
+
+  # The new argument edge.
+  argumentEdge: ArgumentEdge!
   clientMutationId: String
 }
 

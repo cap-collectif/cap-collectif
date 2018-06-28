@@ -12,8 +12,7 @@ import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { Button, Alert } from 'react-bootstrap';
 import { connect, type MapStateToProps } from 'react-redux';
 import AppDispatcher from '../../../dispatchers/AppDispatcher';
-import LoginOverlay from '../../Utils/LoginOverlay';
-import renderComponent from '../../Form/Field';
+import component from '../../Form/Field';
 import AddArgumentMutation from '../../../mutations/AddArgumentMutation';
 import type { State, Dispatch } from '../../../types';
 
@@ -22,16 +21,20 @@ type FormValidValues = { body: string };
 
 type Props = FormProps & {
   type: 'FOR' | 'AGAINST' | 'SIMPLE',
-  opinion: { id: string, isContribuable: boolean },
+  argumentable: { id: string, isContribuable: boolean },
   user: { id: string },
   submitting: boolean,
   form: string,
   dispatch: Dispatch,
 };
 
-const onSubmit = (values: FormValidValues, dispatch: Dispatch, { opinion, type, reset }: Props) => {
+const onSubmit = (
+  values: FormValidValues,
+  dispatch: Dispatch,
+  { argumentable, type, reset }: Props,
+) => {
   const input = {
-    argumentableId: opinion.id,
+    argumentableId: argumentable.id,
     body: values.body,
     type: type === 'FOR' || type === 'SIMPLE' ? 'FOR' : 'AGAINST',
   };
@@ -65,8 +68,8 @@ const validate = ({ body }: FormValues) => {
 
 export class ArgumentCreate extends React.Component<Props> {
   render() {
-    const { user, opinion, type, dispatch, form, submitting, error } = this.props;
-    const disabled = !opinion.isContribuable;
+    const { user, argumentable, type, dispatch, form, submitting, error } = this.props;
+    const disabled = !argumentable.isContribuable || !user;
     return (
       <div className="opinion__body box">
         <div className="opinion__data">
@@ -91,31 +94,23 @@ export class ArgumentCreate extends React.Component<Props> {
                 )}
               </Alert>
             )}
-            <LoginOverlay enabled={opinion.isContribuable}>
-              <Field
-                name="body"
-                component={renderComponent}
-                id={`arguments-body-${type}`}
-                type="textarea"
-                rows={2}
-                label={
-                  <FormattedMessage id={`argument.${type === 'AGAINST' ? 'no' : 'yes'}.add`} />
-                }
-                placeholder={`argument.${type}.add`}
-                labelClassName="sr-only"
-                disabled={disabled}
-              />
-            </LoginOverlay>
-            {user && (
+            <Field
+              name="body"
+              component={component}
+              id={`arguments-body-${type}`}
+              type="textarea"
+              rows={2}
+              label={<FormattedMessage id={`argument.${type === 'AGAINST' ? 'no' : 'yes'}.add`} />}
+              placeholder={`argument.${type === 'AGAINST' ? 'no' : 'yes'}.add`}
+              labelClassName="sr-only"
+              disabled={disabled}
+            />
+            {!disabled && (
               <Button
-                disabled={submitting || disabled}
-                onClick={
-                  submitting || disabled
-                    ? null
-                    : () => {
-                        dispatch(submit(form));
-                      }
-                }
+                disabled={submitting}
+                onClick={() => {
+                  dispatch(submit(form));
+                }}
                 bsStyle="primary">
                 <FormattedMessage id={submitting ? 'global.loading' : 'global.publish'} />
               </Button>
