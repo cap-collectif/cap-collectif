@@ -110,6 +110,23 @@ class Questionnaire
         return $this->getId() ? $this->getTitle() : 'New Questionnaire';
     }
 
+    public function __clone()
+    {
+        if ($this->id) {
+            $this->id = null;
+            $this->createdAt = new \DateTime();
+            $this->updatedAt = new \DateTime();
+            $questionsClone = new ArrayCollection();
+            foreach ($this->questions as $question) {
+                $itemClone = clone $question;
+                $itemClone->setQuestionnaire($this);
+                $questionsClone->add($itemClone);
+            }
+
+            $this->questions = $questionsClone;
+        }
+    }
+
     /**
      * Set description.
      *

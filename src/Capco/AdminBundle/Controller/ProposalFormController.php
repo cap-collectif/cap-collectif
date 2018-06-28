@@ -13,6 +13,9 @@ class ProposalFormController extends Controller
     public function duplicateAction(Request $request)
     {
         $id = $request->get($this->admin->getIdParameter());
+        $filters = ['_sort_order' => 'DESC',
+                      '_sort_by' => 'createdAt',
+                    ];
 
         /** @var ProposalForm $object */
         $object = $this->admin->getObject($id);
@@ -37,6 +40,6 @@ class ProposalFormController extends Controller
 
         $this->addFlash('sonata_flash_success', 'your-form-has-been-duplicated');
 
-        return new RedirectResponse($this->admin->generateUrl('list'));
+        return new RedirectResponse($this->admin->generateUrl('list', ['filter' => $filters]));
     }
 }
