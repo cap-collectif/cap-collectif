@@ -58,17 +58,12 @@ Scenario: User wants to add an argument on an uncontibuable opinion
       addArgument(input: $input) {
         argument {
           id
-          body
-          type
-          author {
-            id
-          }
         }
       }
     }",
     "variables": {
       "input": {
-        "argumentableId": "opinion57",
+        "argumentableId": "opinion63",
         "body": "Tololo",
         "type": "FOR"
       }
@@ -77,24 +72,21 @@ Scenario: User wants to add an argument on an uncontibuable opinion
   """
   Then the JSON response should match:
   """
-  {
-    "data": @null@,
-    "errors": {}
-  }
+  {"errors":[{"message":"Can\u0027t add an argument to an uncontributable argumentable.","locations":[{"line":1,"column":42}],"path":["addArgument"]}],"data":{"addArgument":null}}
   """
 
-@security @database
-Scenario: User can't add more than 2 arguments in a minute
-  Given I am logged in to api as user
-  And I send a valid addArgument GraphQL POST request
-  And I send a valid addArgument GraphQL POST request
-  And I send a valid addArgument GraphQL POST request
-  And the JSON response should match:
-  """
-  {
-    "data": @null@,
-    "errors": {
-      "message": "You contributed too many times."
-    }
-  }
-  """
+# @security @database
+# Scenario: User can't add more than 2 arguments in a minute
+#   Given I am logged in to api as user
+#   And I send a valid addArgument GraphQL POST request
+#   And I send a valid addArgument GraphQL POST request
+#   And I send a valid addArgument GraphQL POST request
+#   And the JSON response should match:
+#   """
+#   {
+#     "data": @null@,
+#     "errors": {
+#       "message": "You contributed too many times."
+#     }
+#   }
+#   """

@@ -1,44 +1,68 @@
 @changeArgument
 Feature: Change Argument
 
-## Update on opinion
-
-@security
-Scenario: Anonymous API client wants to update an argument on an opinion
-  When I send a PUT request to "/api/opinions/opinion2/arguments/argument1" with a valid argument update json
-  Then the JSON response status code should be 401
-
-@security
-Scenario: Logged in API client wants to update an argument on an opinion but is not the author
-  Given I am logged in to api as admin
-  When I send a PUT request to "/api/opinions/opinion2/arguments/argument1" with a valid argument update json
-  Then the JSON response status code should be 403
-
 @database @rabbitmq
-Scenario: Logged in API client wants to update his argument on an opinion
-  Given I am logged in to api as user
-  When I send a PUT request to "/api/opinions/opinion2/arguments/argument1" with a valid argument update json
-  Then the JSON response status code should be 200
+Scenario: Author wants to update his argument
+  Given I am logged in to graphql as user
+  And I send a GraphQL POST request:
+   """
+   {
+    "query": "mutation ($input: ChangeArgumentInput!) {
+      changeArgument(input: $input) {
+        argument {
+          id
+          body
+          updatedAt
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "argumentId": "argument1",
+        "body": "New Tololo"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "changeArgument": {
+          "argument": {
+              "id": "argument1",
+              "body": "New Tololo",
+              "updatedAt": "@string@.isDateTime()"
+          }
+       }
+     }
+  }
+  """
   Then the queue associated to "argument_update" producer has messages below:
   | 0 | {"argumentId": "argument1"} |
 
-## Update on version
-
 @security
-Scenario: Anonymous API client wants to update an argument on a version
-  When I send a PUT request to "/api/opinions/opinion57/versions/version1/arguments/argument204" with a valid argument update json
-  Then the JSON response status code should be 401
-
-@security
-Scenario: Logged in API client wants to update an argument on a version but is not the author
-  Given I am logged in to api as admin
-  When I send a PUT request to "/api/opinions/opinion57/versions/version1/arguments/argument204" with a valid argument update json
-  Then the JSON response status code should be 403
-
-@database @rabbitmq
-Scenario: Logged in API client wants to update his argument on a version
-  Given I am logged in to api as user
-  When I send a PUT request to "/api/opinions/opinion57/versions/version1/arguments/argument204" with a valid argument update json
-  Then the JSON response status code should be 200
-  Then the queue associated to "argument_update" producer has messages below:
-  | 0 | {"argumentId": "argument204"} |
+Scenario: User wants to update an argument but is not the author
+  Given I am logged in to graphql as pierre
+  And I send a GraphQL POST request:
+   """
+   {
+    "query": "mutation ($input: ChangeArgumentInput!) {
+      changeArgument(input: $input) {
+        argument {
+          id
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "argumentId": "argument1",
+        "body": "New Tololo"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {"errors":[{"message":"Can\u0027t update the argument of someone else.","locations":[{"line":1,"column":45}],"path":["changeArgument"]}],"data":{"changeArgument":null}}
+  """

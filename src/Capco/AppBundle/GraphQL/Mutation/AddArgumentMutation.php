@@ -15,11 +15,12 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Error\UserError;
+use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactory;
 
-class CreateArgumentMutation
+class AddArgumentMutation
 {
     private $em;
     private $opinionRepo;
@@ -40,7 +41,7 @@ class CreateArgumentMutation
 
     public function __invoke(Arg $input, User $author): array
     {
-        $argumentableId = $input->offsetGet('argumentable');
+        $argumentableId = $input->offsetGet('argumentableId');
         $argumentable = $this->opinionRepo->find($argumentableId);
 
         if (!$argumentable) {
@@ -70,12 +71,12 @@ class CreateArgumentMutation
         }
 
         $values = $input->getRawArguments();
-        unset($values['argumentable']);
+        unset($values['argumentableId']);
         $form = $this->formFactory->create(ArgumentType::class, $argument);
         $form->submit($values, false);
 
         if (!$form->isValid()) {
-            throw new UserError('Invalid data.');
+            throw GraphQLException::fromFormErrors($form);
         }
 
         // Should not be sync ?

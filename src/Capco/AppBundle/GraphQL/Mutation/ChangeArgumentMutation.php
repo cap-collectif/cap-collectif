@@ -4,6 +4,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Form\ArgumentType;
+use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\UserBundle\Entity\User;
@@ -32,7 +33,7 @@ class ChangeArgumentMutation
 
     public function __invoke(Arg $input, User $user): array
     {
-        $argumentId = $input->offsetGet('argument');
+        $argumentId = $input->offsetGet('argumentId');
         $argument = $this->argumentRepo->find($argumentId);
 
         if (!$argument) {
@@ -40,7 +41,7 @@ class ChangeArgumentMutation
         }
 
         if ($user !== $argument->getAuthor()) {
-            throw new UserError("Can't update uncontributable argument.");
+            throw new UserError("Can't update the argument of someone else.");
         }
 
         if (!$argument->canContribute()) {
@@ -54,7 +55,7 @@ class ChangeArgumentMutation
         $form->submit($values, false);
 
         if (!$form->isValid()) {
-            throw new UserError('Invalid data.');
+            throw GraphQLException::fromFormErrors($form);
         }
 
         $argument->setValidated(false);
