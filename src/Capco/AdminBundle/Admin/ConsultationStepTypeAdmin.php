@@ -93,8 +93,7 @@ class ConsultationStepTypeAdmin extends Admin
               'multiple' => true,
               'expanded' => true,
               'required' => true,
-              'tree' => true,
-                'choices_as_values' => true,
+              'choices_as_values' => true,
             ]);
         }
     }
