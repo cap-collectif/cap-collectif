@@ -84,7 +84,7 @@ Scenario: Logged in super admin wants delete a user
   Then I should be redirected to "/admin/capco/user/user/list"
   And I should see "deleted-user"
 
-@database
+@database @javascript
 Scenario: Logged in super admin wants to create a user
   Given I am logged in as super admin
   Then I go to the admin user list page
