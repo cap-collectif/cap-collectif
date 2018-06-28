@@ -206,3 +206,13 @@ services:
 
   capco.canonicalizer:
     class: Capco\AppBundle\Utils\Canonicalizer
+
+  Capco\AppBundle\Command\CreateCsvFromProposalStepCommand:
+    autoconfigure: true
+    autowire: true
+    arguments:
+      $kernelRootDir: '%kernel.root_dir%'
+
+  Capco\AppBundle\EventListener\DisableAclListener:
+    tags:
+    - { name: kernel.event_listener, event: graphql.pre_executor, method: onPreExecutor }

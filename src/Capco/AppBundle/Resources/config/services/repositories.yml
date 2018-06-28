@@ -149,6 +149,11 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Steps\SelectionStep']
 
+  Capco\AppBundle\Repository\SelectionStepRepository:
+    class: Capco\AppBundle\Repository\SelectionStepRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:Steps\SelectionStep']
+
   capco.status.repository:
     class: Capco\AppBundle\Repository\StatusRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
@@ -200,6 +205,11 @@ services:
     arguments: ['CapcoAppBundle:Video']
 
   capco.project.repository:
+    class: Capco\AppBundle\Repository\ProjectRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:Project']
+
+  Capco\AppBundle\Repository\ProjectRepository:
     class: Capco\AppBundle\Repository\ProjectRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Project']
@@ -278,11 +288,6 @@ services:
     class: Capco\AppBundle\Repository\UserArchiveRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:UserArchive']
-
-  capco.reply.repository:
-    class: Capco\AppBundle\Repository\ReplyRepository
-    factory: ['@doctrine.orm.entity_manager', getRepository]
-    arguments: ['CapcoAppBundle:Reply']
 
   capco.requirement.repository:
     class: Capco\AppBundle\Repository\RequirementRepository

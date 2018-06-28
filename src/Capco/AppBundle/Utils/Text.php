@@ -9,6 +9,11 @@ final class Text
         return htmlspecialchars($str, ENT_QUOTES | ENT_SUBSTITUTE);
     }
 
+    public static function random(int $length = 10)
+    {
+        return substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / \strlen($x)))), 1, $length);
+    }
+
     public static function htmlToString($str): string
     {
         $str = html_entity_decode(strip_tags($str), ENT_QUOTES);
