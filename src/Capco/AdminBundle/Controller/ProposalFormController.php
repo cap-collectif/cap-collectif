@@ -13,9 +13,7 @@ class ProposalFormController extends Controller
     public function duplicateAction(Request $request)
     {
         $id = $request->get($this->admin->getIdParameter());
-        $filters = ['_sort_order' => 'DESC',
-                      '_sort_by' => 'createdAt',
-                    ];
+        $filters = ['_sort_order' => 'DESC', '_sort_by' => 'createdAt'];
 
         /** @var ProposalForm $object */
         $object = $this->admin->getObject($id);
