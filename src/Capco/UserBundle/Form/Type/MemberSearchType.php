@@ -25,7 +25,7 @@ class MemberSearchType extends AbstractType
             ->add('sort',
                 ChoiceType::class, [
                 'required' => false,
-                'choices' => array_flip(User::$sortOrderLabels),
+                'choices' => User::$sortOrderLabels,
                 'translation_domain' => 'CapcoAppBundle',
                 'label' => 'user.index.sort.label',
                 'placeholder' => false,
@@ -38,10 +38,10 @@ class MemberSearchType extends AbstractType
                 EntityType::class, [
                 'required' => false,
                 'class' => 'CapcoUserBundle:UserType',
-                'choice_label' => 'name',
+                'property' => 'name',
                 'label' => 'user.index.user_type.label',
                 'translation_domain' => 'CapcoAppBundle',
-                'placeholder' => 'user.index.user_type.all_types',
+                'empty_value' => 'user.index.user_type.all_types',
                 'attr' => ['onchange' => 'this.form.submit()'],
             ]);
         }

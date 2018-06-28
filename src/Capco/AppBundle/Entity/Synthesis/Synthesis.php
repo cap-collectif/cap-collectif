@@ -24,8 +24,8 @@ class Synthesis
     const SOURCE_TYPE_CONSULTATION = 'consultation_step';
 
     public static $sourceTypesLabels = [
-        'synthesis.source_types.consultation_step' => self::SOURCE_TYPE_CONSULTATION,
-        'synthesis.source_types.none' => self::SOURCE_TYPE_NONE,
+        self::SOURCE_TYPE_CONSULTATION => 'synthesis.source_types.consultation_step',
+        self::SOURCE_TYPE_NONE => 'synthesis.source_types.none',
     ];
 
     /**
@@ -50,7 +50,7 @@ class Synthesis
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\ConsultationStep")
      * @ORM\JoinColumn(name="consultation_step_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    private $consultationStep;
+    private $consultationStep = null;
 
     /**
      * @var

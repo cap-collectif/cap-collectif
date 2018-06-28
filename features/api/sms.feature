@@ -9,7 +9,8 @@ Scenario: Anonymous API client wants to receive a confirmation sms
   """
   {
     "code":404,
-    "message": "error.feature_not_enabled"
+    "message": "error.feature_not_enabled",
+    "errors": null
   }
   """
 
@@ -36,7 +37,8 @@ Scenario: Logged in API client without phone wants to receive a new confirmation
   """
   {
     "code": 400,
-    "message": "No phone."
+    "message": "No phone.",
+    "errors": null
   }
   """
 
@@ -50,7 +52,8 @@ Scenario: Logged in API client already sms confirmed wants to receive a new conf
   """
   {
     "code": 400,
-    "message": "Already confirmed."
+    "message": "Already confirmed.",
+    "errors": null
   }
   """
 
@@ -89,7 +92,8 @@ Scenario: Logged in API client non-sms confirmed with a wrong code wants to vali
   """
   {
     "code": 400,
-    "message": "sms_code_invalid"
+    "message": "sms_code_invalid",
+    "errors": null
   }
   """
 
@@ -121,6 +125,7 @@ Scenario: Logged in API client sms confirmed with a code wants to validate his p
   """
   {
     "code": 400,
-    "message": "Already confirmed."
+    "message": "Already confirmed.",
+    "errors": null
   }
   """

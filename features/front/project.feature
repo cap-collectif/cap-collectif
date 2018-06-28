@@ -121,24 +121,24 @@ Scenario: Project header should display correct counters
   Given I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
-  Then I should see 'project.show.meta.total_count {"%count%":175}'
-  Then I should see "27 project.show.meta.contributors_count"
+  Then I should see 'project.show.meta.total_count {"%count%":181}'
+  Then I should see "28 project.show.meta.contributors_count"
   And I hover over the "#contributions-counter-pill" element
   And I wait 1 seconds
-  And I should see 'project.show.meta.opinionsCount {"%count%":36}'
+  And I should see 'project.show.meta.opinionsCount {"%count%":37}'
   #And I should see 'project.show.meta.argumentsCount {"%count%":104}'
   And I should see 'project.show.meta.sourcesCount {"%count%":32}'
 
 Scenario: Can not have access to download if export is disabled
   Given I visited "consultation page" with:
-    | projectSlug   | strategie-technologique-de-letat-et-services-publics |
+    | projectSlug   | strategie-technologique-de-l-etat-et-services-publics |
     | stepSlug      | collecte-des-avis-pour-une-meilleur-strategie         |
   Then I should not see "project.download.button" in the "#main" element
 
 @javascript
 Scenario: Can not download a project if export is disabled
   Given I visited "home page"
-  When I try to download "projets/strategie-technologique-de-letat-et-services-publics/projet/collecte-des-avis-pour-une-meilleur-strategie/download/xls"
+  When I try to download "projets/strategie-technologique-de-l-etat-et-services-publics/projet/collecte-des-avis-pour-une-meilleur-strategie/download/xls"
   Then I should see 'error.404.title {"%code%":404}'
 
 @javascript
@@ -157,7 +157,7 @@ Scenario: Can not access trash if not logged in
     | stepSlug    | collecte-des-avis                |
   And I should see "project.show.trashed.short_name" in the "#main" element
   When I click the "#trash-link" element
-  And I wait 3 seconds
+  And I wait 1 seconds
   Then I should see a "#login-popover" element
 
 @javascript

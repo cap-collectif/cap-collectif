@@ -11,6 +11,11 @@ trait ProposalStepsTrait
         'projectSlug' => 'budget-participatif-rennes',
         'stepSlug' => 'collecte-des-propositions',
     ];
+
+    protected static $bpVoteClassement = [
+        'projectSlug' => 'bp-avec-vote-classement',
+        'stepSlug' => 'collecte-avec-vote-classement-limite',
+    ];
     protected static $collectStepNotifiable = [
         'projectSlug' => 'budget-participatif-rennes',
         'stepSlug' => 'collecte-des-propositions',
@@ -695,6 +700,39 @@ trait ProposalStepsTrait
     public function iGoToAProposalWithBudgetVoteEnabled()
     {
         $this->visitPageWithParams('proposal page', self::$proposalWithBudgetVoteParams);
+    }
+
+    /**
+     * @When I go to a project with requirement condition to vote and classement
+     */
+    public function iGoBPWithVoteClassementPage()
+    {
+        $this->visitPageWithParams('collect page', self::$bpVoteClassement);
+        $this->getSession()->wait(3000, "$('#proposal__step-page-rendered').length > 0");
+    }
+
+    /**
+     * @Then I should see a proposal vote modal
+     */
+    public function iShouldSeeAProposalVoteModal()
+    {
+        $this->getSession()->getPage()->find('css', '#confirm-proposal-vote')->click();
+    }
+
+    /**
+     * @When I reorder my vote with :proposalId take place of proposal up
+     */
+    public function iReorderMyVoteWithProposal1TakePlaceOfProposalUp(string $proposalId)
+    {
+        $this->moveDraggableElementTo($proposalId, 38);
+    }
+
+    /**
+     * @When I reorder my vote with :proposalId take place of proposal down
+     */
+    public function iReorderMyVoteWithProposal1TakePlaceOfProposalDown(string $proposalId)
+    {
+        $this->moveDraggableElementTo($proposalId, 40);
     }
 
     /**

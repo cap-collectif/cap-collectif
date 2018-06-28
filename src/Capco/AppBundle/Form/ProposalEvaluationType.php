@@ -9,7 +9,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Valid;
 
 class ProposalEvaluationType extends AbstractType
 {
@@ -35,7 +34,7 @@ class ProposalEvaluationType extends AbstractType
         $resolver->setDefaults([
             'data_class' => ProposalEvaluation::class,
             'csrf_protection' => false,
-            'constraints' => new Valid(),
+            'cascade_validation' => true,
             'translation_domain' => false,
             'anonymousAllowed' => false,
         ]);

@@ -3,14 +3,14 @@
 namespace Capco\AdminBundle\Admin;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class OpinionAdmin extends CapcoAdmin
+class OpinionAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
@@ -189,7 +189,7 @@ class OpinionAdmin extends CapcoAdmin
                 ->add('title', null, [
                     'label' => 'admin.fields.opinion.title',
                 ])
-                ->add('Author', ModelAutocompleteType::class, [
+                ->add('Author', 'sonata_type_model_autocomplete', [
                     'label' => 'admin.fields.opinion.author',
                     'property' => 'username',
                 ])
@@ -204,7 +204,7 @@ class OpinionAdmin extends CapcoAdmin
                 ->add('step', null, [
                     'label' => 'admin.fields.opinion.step',
                     'query_builder' => $this->createQueryBuilderForStep(),
-                    'choice_label' => 'labelTitle',
+                    'property' => 'labelTitle',
                     'required' => true,
                 ])
             ->end()
@@ -233,9 +233,9 @@ class OpinionAdmin extends CapcoAdmin
                 ])
                 ->add('expired', null, [
                     'label' => 'admin.global.expired',
+                    'read_only' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                     'attr' => [
                       'disabled' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
-                      'readonly' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                     ],
                 ])
                 ->add('isTrashed', null, [

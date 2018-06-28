@@ -42,13 +42,13 @@ class Opinion implements OpinionContributionInterface
     use ModerableTrait;
 
     public static $sortCriterias = [
-         'opinion.sort.positions' => 'positions',
-         'opinion.sort.random' => 'random',
-         'opinion.sort.last' => 'last',
-         'opinion.sort.old' => 'old',
-         'opinion.sort.favorable' => 'favorable',
-         'opinion.sort.votes' => 'votes',
-         'opinion.sort.comments' => 'comments',
+        'positions' => 'opinion.sort.positions',
+        'random' => 'opinion.sort.random',
+        'last' => 'opinion.sort.last',
+        'old' => 'opinion.sort.old',
+        'favorable' => 'opinion.sort.favorable',
+        'votes' => 'opinion.sort.votes',
+        'comments' => 'opinion.sort.comments',
     ];
 
     /**

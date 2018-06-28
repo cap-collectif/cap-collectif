@@ -3,13 +3,14 @@
 namespace Capco\AdminBundle\Admin;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
-class QuestionnaireAdmin extends CapcoAdmin
+class QuestionnaireAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',

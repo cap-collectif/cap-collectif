@@ -13,9 +13,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 final class MultipleChoiceQuestionValidationRule
 {
     public static $typeLabels = [
-        'questionnaire.validation.type.min' => 'min',
-        'questionnaire.validation.type.equal' => 'equal',
-        'questionnaire.validation.type.max' => 'max',
+        'min' => 'questionnaire.validation.type.min',
+        'equal' => 'questionnaire.validation.type.equal',
+        'max' => 'questionnaire.validation.type.max',
     ];
 
     /**

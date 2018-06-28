@@ -9,7 +9,8 @@ Scenario: Registration is disabled and API client wants to resend an email
   """
   {
     "code":404,
-    "message": "error.feature_not_enabled"
+    "message": "error.feature_not_enabled",
+    "errors": null
   }
   """
 
@@ -36,7 +37,8 @@ Scenario: Confirmed and logged in API client wants resend an email
   """
   {
     "code": 400,
-    "message": "Already confirmed."
+    "message": "Already confirmed.",
+    "errors": null
   }
   """
 
@@ -54,7 +56,8 @@ Scenario: Not confirmed logged in API client wants resend a confirmation email
   """
   {
     "code": 400,
-    "message": "Email already sent less than a minute ago."
+    "message": "Email already sent less than a minute ago.",
+    "errors":null
   }
   """
   And 0 mail should be sent
@@ -82,7 +85,8 @@ Scenario: Not confirmed logged in API client wants to mass spam confirmation ema
   """
   {
     "code": 400,
-    "message": "Email already sent less than a minute ago."
+    "message": "Email already sent less than a minute ago.",
+    "errors":null
   }
   """
   And 0 mail should be sent

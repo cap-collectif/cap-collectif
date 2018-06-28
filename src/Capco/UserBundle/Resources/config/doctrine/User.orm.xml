@@ -28,11 +28,6 @@
 
         <field name="samlId" unique="true" column="saml_id" type="string" length="255" nullable="true" />
         <field name="parisId" unique="true" column="paris_id" type="string" length="255" nullable="true" />
-        <field name="locked" column="locked" type="boolean"/>
-        <field name="expired" column="expired" type="boolean"/>
-        <field name="expiresAt" column="expires_at" type="datetime" nullable="true"/>
-        <field name="credentialsExpired" column="credentials_expired" type="boolean"/>
-        <field name="credentialsExpireAt" column="credentials_expire_at" type="datetime" nullable="true"/>
 
         <field name="slug" column="slug" type="string" length="255" nullable="false">
             <gedmo:slug unique="true" style="default" updatable="true" separator="" fields="username" />

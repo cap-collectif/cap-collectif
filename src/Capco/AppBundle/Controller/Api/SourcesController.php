@@ -46,7 +46,7 @@ class SourcesController extends FOSRestController
             ->setAuthor($this->getUser())
         ;
 
-        $form = $this->createForm(SourceType::class, $source);
+        $form = $this->createForm(new SourceType(), $source);
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {
@@ -93,7 +93,7 @@ class SourcesController extends FOSRestController
                     ->setUpdatedAt(new \Datetime())
                 ;
 
-        $form = $this->createForm(SourceType::class, $source);
+        $form = $this->createForm(new SourceType(), $source);
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {
@@ -132,7 +132,7 @@ class SourcesController extends FOSRestController
             throw new BadRequestHttpException("Can't update a source of an uncontributable opinion.");
         }
 
-        $form = $this->createForm(SourceType::class, $source);
+        $form = $this->createForm(new SourceType(), $source);
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {
@@ -179,7 +179,7 @@ class SourcesController extends FOSRestController
             throw new BadRequestHttpException("Can't update a source to an unsourceable version.");
         }
 
-        $form = $this->createForm(SourceType::class, $source);
+        $form = $this->createForm(new SourceType(), $source);
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {
@@ -373,7 +373,7 @@ class SourcesController extends FOSRestController
                     ->setSource($source)
                 ;
 
-        $form = $this->createForm(ReportingType::class, $report, ['csrf_protection' => false]);
+        $form = $this->createForm(new ReportingType(), $report, ['csrf_protection' => false]);
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {

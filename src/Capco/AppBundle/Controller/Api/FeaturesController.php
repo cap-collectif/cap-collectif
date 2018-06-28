@@ -25,7 +25,7 @@ class FeaturesController extends FOSRestController
     /**
      * @Put("/toggles/{feature}")
      * @Security("has_role('ROLE_ADMIN')")
-     * @View(statusCode=204, serializerGroups={})
+     * @View(statusCode=200, serializerGroups={})
      */
     public function putFeatureFlagsAction(Request $request, string $feature)
     {
@@ -33,7 +33,7 @@ class FeaturesController extends FOSRestController
         if (!$toggleManager->exists($feature)) {
             throw $this->createNotFoundException(sprintf('The feature "%s" doesn\'t exists.', $feature));
         }
-        $form = $this->createForm(ApiToggleType::class);
+        $form = $this->createForm(new ApiToggleType());
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {
@@ -54,7 +54,7 @@ class FeaturesController extends FOSRestController
      */
     public function postRegistrationQuestionAction(Request $request)
     {
-        $form = $this->createForm(ApiQuestionType::class);
+        $form = $this->createForm(new ApiQuestionType());
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {
@@ -97,7 +97,7 @@ class FeaturesController extends FOSRestController
      *
      * @Patch("/registration_form/questions")
      * @Security("has_role('ROLE_SUPER_ADMIN')")
-     * @View(statusCode=204, serializerGroups={})
+     * @View(statusCode=200, serializerGroups={})
      */
     public function patchRegistrationQuestionAction(Request $request)
     {
@@ -123,7 +123,7 @@ class FeaturesController extends FOSRestController
      */
     public function putRegistrationQuestionAction(Request $request, AbstractQuestion $question)
     {
-        $form = $this->createForm(ApiQuestionType::class);
+        $form = $this->createForm(new ApiQuestionType());
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {
@@ -161,13 +161,13 @@ class FeaturesController extends FOSRestController
     /**
      * @Put("/registration_form")
      * @Security("has_role('ROLE_ADMIN')")
-     * @View(statusCode=204, serializerGroups={})
+     * @View(statusCode=200, serializerGroups={})
      */
     public function putRegistrationFormAction(Request $request)
     {
         $registrationForm = $this->get('capco.registration_form.repository')->findCurrent();
 
-        $form = $this->createForm(AdminConfigureRegistrationType::class, $registrationForm);
+        $form = $this->createForm(new AdminConfigureRegistrationType(), $registrationForm);
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {
@@ -184,7 +184,7 @@ class FeaturesController extends FOSRestController
      * @Delete("/registration_form/questions/{id}")
      * @Security("has_role('ROLE_ADMIN')")
      * @ParamConverter("question", options={"mapping": {"id": "id"}})
-     * @View(statusCode=204, serializerGroups={})
+     * @View(statusCode=200, serializerGroups={})
      */
     public function deleteRegistrationQuestionAction(AbstractQuestion $question)
     {

@@ -3,10 +3,11 @@
 namespace Capco\AdminBundle\Admin;
 
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class AnswerAdmin extends CapcoAdmin
+class AnswerAdmin extends Admin
 {
     protected $formOptions = [
         'cascade_validation' => true,

@@ -166,7 +166,8 @@ Scenario: logged in API client wants to add a comment by hacking
   """
   {
     "code": 404,
-    "message": "This parent comment is not linked to this proposal"
+    "message": "This parent comment is not linked to this proposal",
+    "errors": @null@
   }
   """
 
@@ -185,7 +186,8 @@ Scenario: logged in API client wants to add a comment to the wrong proposal
   """
   {
     "code": 404,
-    "message": "This parent comment is not linked to this proposal"
+    "message": "This parent comment is not linked to this proposal",
+    "errors": @null@
   }
   """
 
@@ -204,6 +206,7 @@ Scenario: logged in API client wants to add an answer to an answer
   """
   {
     "code": 400,
-    "message": "You can't answer the answer of a comment."
+    "message": "You can't answer the answer of a comment.",
+    "errors": @null@
   }
   """
