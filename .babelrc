@@ -12,7 +12,7 @@
   },
   "plugins": [
     "styled-components",
-    "react-docgen",
+    // "react-docgen",
     "relay",
     "transform-class-properties",
     ["react-intl", {

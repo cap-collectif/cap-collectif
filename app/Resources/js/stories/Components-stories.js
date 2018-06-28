@@ -2,9 +2,16 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
-import { Label, Alert, Button, DropdownButton, MenuItem, ProgressBar, Modal } from 'react-bootstrap';
+import {
+  Label,
+  Alert,
+  Button,
+  DropdownButton,
+  MenuItem,
+  ProgressBar,
+  Modal,
+} from 'react-bootstrap';
 import { AlertForm } from "../components/Alert/AlertForm";
-
 import Pagination from '../components/Utils/Pagination';
 import { Progress } from '../components/Ui/Progress';
 import InlineList from '../components/Ui/List/InlineList';
@@ -64,12 +71,21 @@ storiesOf('Components', module)
       <h2>How to use</h2>
     
       ~~~jsx
-      // Inline list
-      <Pagination
-        nbPages={6}
-        current={3}
-        onChange={() => {}}
+      // Simple progress bar
+      <ProgressBar
+        now={30}
+        className={null}
+        label="À venir"
       />
+      
+      // Progress bar for step
+      <Progress>
+        <ProgressBar
+          now={50}
+          className={null}
+          label="À venir"
+        />
+      </Progress>
       ~~~
     
     `})(() => {
@@ -82,7 +98,14 @@ storiesOf('Components', module)
           </a>
         </h1>
         <hr/>
-        <h3>À venir</h3>
+        <h3>Simple progress bar</h3>
+        <ProgressBar
+          now={70}
+          className={toComeProject.step.className}
+          label={toComeProject.step.label}
+        />
+        <h3>Progress bar for step</h3>
+        <h4>À venir</h4>
         <Progress className="mb-30">
           <ProgressBar
             now={toComeProject.step.now}
@@ -90,7 +113,7 @@ storiesOf('Components', module)
             label={toComeProject.step.label}
           />
         </Progress>
-        <h3>En cours</h3>
+        <h4>En cours</h4>
         <Progress className="mb-30">
           <ProgressBar
             now={openProject.step.now}
@@ -99,7 +122,7 @@ storiesOf('Components', module)
             label={openProject.step.label}
           />
         </Progress>
-        <h3>Participation en continue</h3>
+        <h4>Participation en continue</h4>
         <Progress className="mb-30">
           <ProgressBar
             now={continuousProject.step.now}
@@ -108,7 +131,7 @@ storiesOf('Components', module)
             label={continuousProject.step.label}
           />
         </Progress>
-        <h3>Terminé</h3>
+        <h4>Terminé</h4>
         <Progress className="mb-30">
           <ProgressBar
             now={endedProject.step.now}
@@ -407,4 +430,4 @@ storiesOf('Components', module)
         </div>
       </div>
     );
-  }));
+  }))
