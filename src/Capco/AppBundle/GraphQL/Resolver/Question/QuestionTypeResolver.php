@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
+use GraphQL\Type\Definition\Type;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Resolver\TypeResolver;
 
@@ -18,7 +19,7 @@ class QuestionTypeResolver
         $this->typeResolver = $typeResolver;
     }
 
-    public function __invoke(AbstractQuestion $question)
+    public function __invoke(AbstractQuestion $question): Type
     {
         if ($question instanceof SimpleQuestion) {
             return $this->typeResolver->resolve('SimpleQuestion');
