@@ -22,6 +22,22 @@
   }
 }
 
+/* ======================== Button ============================*/
+
+@each $button in $basic-btns {
+  $name: nth($button, 1);
+  $color: nth($button, 2);
+
+  .btn-#{$name}:not(.btn--outline) {
+    background-color: $color;
+    border-color: $color;
+
+    &:hover {
+        background-color: darken($color, 5%);
+    }
+  }
+}
+
 /* ======================== Excerpt ============================*/
 
 .excerpt, a.excerpt, .small.excerpt {

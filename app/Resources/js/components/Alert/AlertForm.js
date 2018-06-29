@@ -17,8 +17,10 @@ export class AlertForm extends React.Component<Props> {
     const { valid, invalid, submitSucceeded, submitFailed, submitting, errorMessage } = this.props;
     if (errorMessage) {
       return (
-        <div className="alert__form_server-failed-message">
-          <i className="cap cap-ios-close-outline" /> <FormattedHTMLMessage id={errorMessage} />
+        <div className="d-ib">
+          <div className="alert__form_server-failed-message">
+            <i className="cap cap-ios-close-outline" /> <FormattedHTMLMessage id={errorMessage} />
+          </div>
         </div>
       );
     }
