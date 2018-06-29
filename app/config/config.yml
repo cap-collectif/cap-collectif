@@ -367,8 +367,8 @@ tweede_golf_prometheus:
         help: Number of newsletter subscribers
 
 hautelook_alice:
-  locale: '%locale%'
-  loading_limit: 1
+  locale: "%locale%"
+  loading_limit: 100
 
 fos_user:
   db_driver: orm
@@ -728,7 +728,7 @@ overblog_graphql:
           - ValueResponse
           - VersionVote
           - SectionQuestion
-          
+
 limenius_react:
   default_rendering: 'both'
   serverside_rendering:

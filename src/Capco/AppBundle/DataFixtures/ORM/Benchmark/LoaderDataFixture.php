@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\DataBenchmark\ORM;
+namespace Capco\AppBundle\DataFixtures\ORM;
 
 use Hautelook\AliceBundle\Doctrine\DataFixtures\AbstractLoader;
 
@@ -9,20 +9,41 @@ class LoaderDataFixture extends AbstractLoader
     public function getFixtures()
     {
         return [
+            __DIR__ . '/UserType.yml',
             __DIR__ . '/User.yml',
-            __DIR__ . '/QuestionnaireStep.yml',
-            __DIR__ . '/ConsultationStepType.yml',
-            __DIR__ . '/ConsultationStep.yml',
+
+            __DIR__ . '/Theme.yml',
+
+            __DIR__ . '/OpinionType.yml',
+
             __DIR__ . '/Project.yml',
+
+            __DIR__ . '/ConsultationStep.yml',
+            __DIR__ . '/ConsultationStepType.yml',
+            __DIR__ . '/CollectStep.yml',
+            __DIR__ . '/SelectionStep.yml',
+            __DIR__ . '/SiteParameter.yml',
+
+            __DIR__ . '/QuestionnaireStep.yml',
             __DIR__ . '/ProjectAbstractStep.yml',
+
+            __DIR__ . '/Opinion.yml',
+            __DIR__ . '/Category.yml',
+            __DIR__ . '/Source.yml',
+            __DIR__ . '/Argument.yml',
+
+            __DIR__ . '/ProposalForm.yml',
+            __DIR__ . '/ProposalFormNotificationConfiguration.yml',
             __DIR__ . '/Questionnaire.yml',
             __DIR__ . '/QuestionChoice.yml',
             __DIR__ . '/MultipleChoiceQuestion.yml',
+
             __DIR__ . '/QuestionnaireAbstractQuestion.yml',
+            __DIR__ . '/QuestionChoice.yml',
+            __DIR__ . '/Proposal.yml',
             __DIR__ . '/Reply.yml',
-            __DIR__ . '/Response.yml',
-            __DIR__ . '/OpinionType.yml',
-            __DIR__ . '/Opinion.yml',
+
+            __DIR__ . '/ProposalSelectionVote.yml',
         ];
     }
 }

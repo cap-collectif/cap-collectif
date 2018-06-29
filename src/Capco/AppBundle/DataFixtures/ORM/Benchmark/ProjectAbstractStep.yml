@@ -7,3 +7,7 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
     step: '@cstep1'
     project: '@project2'
     position: 1
+  pas3:
+    step: '@collectstep1'
+    project: '@project3'
+    position: 1
