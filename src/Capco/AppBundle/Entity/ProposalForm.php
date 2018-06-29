@@ -741,9 +741,4 @@ class ProposalForm
 
         return $this;
     }
-
-    public function getProject(): ?Project
-    {
-        return $this->step ? $this->step->getProject() : null;
-    }
 }
