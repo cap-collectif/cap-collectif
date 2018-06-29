@@ -57,7 +57,7 @@ User:
                 type: "Boolean!"
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value,context)'
             expiresAt:
-                type: "String"
+                type: "DateTime"
             phoneConfirmationSentAt:
                 type: "String"
                 resolve: "@=resolver('user_phoneConfirmationSentAt', [value])"
@@ -271,3 +271,22 @@ User:
                      description: "Returns the last n elements from the list."
                 description: "Return the user's contributions of the type requested."
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserContributionResolver", [value, args])'
+
+            isSubscribedToNewsLetter:
+                type: "Boolean"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserNewsLetterResolver", [value])'
+                description: "Is user subscribed to the newsletter ?"
+            subscribedToNewsLetterAt:
+                type: "DateTime"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserNewsLetterResolver", [value, "at"])'
+                description: "The user subrscibes to the newsletter at date"
+            isViewer:
+                type: "Boolean!"
+                resolve: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isViewer(user, value)'
+                description: "Is user given the current viewer ?"
+            isEmailConfirmed:
+                type: "Boolean"
+                description: "Has the user confirmed his email address ?"
+            emailConfirmationSentAt:
+                type: "DateTime"
+                description: "The user's email was confirmed at date"

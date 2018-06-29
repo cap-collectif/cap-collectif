@@ -1,0 +1,16 @@
+UpdateUserAccountInput:
+    type: relay-mutation-input
+    config:
+        description: "Input type of UpdateUserAccount"
+        fields:
+            userId:
+                type: "ID!"
+            roles:
+                type: "[UserRoles]"
+                description: "Unattended roles as array."
+            locked:
+                type: "Boolean"
+            vip:
+                type: "Boolean"
+            enabled:
+                type: "Boolean"

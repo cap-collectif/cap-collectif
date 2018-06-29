@@ -21,6 +21,8 @@ class PersonalDataFormType extends AbstractType
             ->add('zipCode')
             ->add('city')
             ->add('phone')
+            ->add('email')
+            ->add('phoneConfirmed')
             ->add('dateOfBirth', DateTimeType::class,
                 [
                     'widget' => 'single_text',
