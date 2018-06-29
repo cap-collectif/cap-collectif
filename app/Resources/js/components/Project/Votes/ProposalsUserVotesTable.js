@@ -35,8 +35,8 @@ type Props = FormProps &
     deletable: boolean,
     snapshot: DraggableStateSnapshot,
     intl: IntlShape,
-    disabledKeyboard: Function,
-    activeKeyboard: Function,
+    disabledKeyboard?: Function,
+    activeKeyboard?: Function,
   };
 
 type VotesProps = FieldArrayProps &
@@ -103,8 +103,13 @@ const renderDraggableMembers = ({ fields, votes, step, deletable, intl }: VotesP
         return (
           <Draggable key={vote.proposal.id} draggableId={vote.proposal.id} index={index}>
             {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => {
+              const usePortal: boolean = snapshot.isDragging;
+
               const child = (
-                <div className="proposals-user-votes__draggable-item">
+                <div
+                  className={`proposals-user-votes__draggable-item ${
+                    usePortal ? 'item-in-portal' : ''
+                  }`}>
                   <DraggableItem
                     innerRef={provided.innerRef}
                     isDragging={snapshot.isDragging}
@@ -129,8 +134,6 @@ const renderDraggableMembers = ({ fields, votes, step, deletable, intl }: VotesP
                 </div>
               );
 
-              const usePortal: boolean = snapshot.isDragging;
-
               if (!usePortal) {
                 return child;
               }
@@ -149,7 +152,9 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
   onDragStart = (start: DragStart, provided: HookProvided) => {
     const { votes, intl, disabledKeyboard } = this.props;
 
-    disabledKeyboard();
+    if (disabledKeyboard) {
+      disabledKeyboard();
+    }
 
     // Add a little vibration if the browser supports it.
     // Add's a nice little physical feedback
@@ -184,7 +189,9 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
   onDragEnd = (result: DropResult, provided: HookProvided) => {
     const { votes, intl, activeKeyboard } = this.props;
 
-    activeKeyboard();
+    if (activeKeyboard) {
+      activeKeyboard();
+    }
 
     const title =
       votes.edges &&
