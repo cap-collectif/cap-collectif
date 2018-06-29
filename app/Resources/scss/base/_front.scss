@@ -3,9 +3,8 @@
 ================================================================*/
 body {
     padding-top: $navbar-height;
-    // background-color: $brand-color-2;
+    background-color: $brand-color-2;
     font-family: $font-family-sans-serif;
-    // font-family: "openSans", sans-serif;
     font-size: $font-size-base;
 
     &.modal-open {
@@ -186,6 +185,7 @@ h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
     font-weight: 400;
 }
+
 h1,
 .h1 {
     margin-top: 0;
