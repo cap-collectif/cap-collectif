@@ -12,10 +12,9 @@ export type UpdateProfilePasswordMutationResponse = Response;
 const mutation = graphql`
   mutation UpdateProfilePasswordMutation($input: UpdateProfilePasswordInput!) {
     updateProfilePassword(input: $input) {
-      user {
+      viewer {
         id
         username
-        ...UserAdminPassword_user
       }
       error
     }

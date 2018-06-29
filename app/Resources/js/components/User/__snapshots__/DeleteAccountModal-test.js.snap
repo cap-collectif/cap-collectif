@@ -127,7 +127,6 @@ exports[`<DeleteAccountModal /> should render an hidden modal 1`] = `
           >
             <div
               className="panel-body"
-              id="delete-account-soft"
             >
               <div
                 className="row"
@@ -218,7 +217,6 @@ exports[`<DeleteAccountModal /> should render an hidden modal 1`] = `
           >
             <div
               className="panel-body"
-              id="delete-account-hard"
             >
               <div
                 className="row"
@@ -470,7 +468,6 @@ exports[`<DeleteAccountModal /> should render an visible modal 1`] = `
           >
             <div
               className="panel-body"
-              id="delete-account-soft"
             >
               <div
                 className="row"
@@ -561,7 +558,6 @@ exports[`<DeleteAccountModal /> should render an visible modal 1`] = `
           >
             <div
               className="panel-body"
-              id="delete-account-hard"
             >
               <div
                 className="row"

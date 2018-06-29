@@ -46,6 +46,11 @@ class AdminProposalPage extends Page
         $this->getElement('proposal advancement save')->click();
     }
 
+    public function clickOnTab($tab)
+    {
+        $this->getElement('proposal ' . $tab . ' tab')->click();
+    }
+
     public function toggleProposalElement(string $element)
     {
         $this->getElement($element)->click();
@@ -59,6 +64,11 @@ class AdminProposalPage extends Page
     public function clickSaveProposalEvaluationAnalystsGroupes()
     {
         $this->getElement('proposal evaluation analysts groupes save')->click();
+    }
+
+    public function fillElementWithValue(string $element, string $value)
+    {
+        $this->getElement($element)->setValue($value);
     }
 
     public function saveCustomEvaluation()
@@ -75,5 +85,10 @@ class AdminProposalPage extends Page
 
         $element = $this->elements['proposal evaluation presentation'] . " > div:$child";
         $this->find('css', $element)->click();
+    }
+
+    public function clickOnButton($button)
+    {
+        $this->getElement($button)->click();
     }
 }

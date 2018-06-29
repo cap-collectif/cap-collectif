@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
-import { injectIntl, type IntlShape, FormattedMessage } from 'react-intl';
+import { injectIntl, type IntlShape } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import ProposalFormAdminConfigurationForm from './ProposalFormAdminConfigurationForm';
 import ProposalFormAdminNotificationForm from './ProposalFormAdminNotificationForm';
@@ -21,18 +21,13 @@ export class ProposalFormAdminPageTabs extends Component<Props, State> {
       <div>
         {proposalForm.url !== '' ? (
           <p>
-            <strong>
-              <FormattedMessage id="permalink" /> :
-            </strong>{' '}
-            <a href={proposalForm.url}>{proposalForm.url}</a> |{' '}
+            <strong>Permalien :</strong> <a href={proposalForm.url}>{proposalForm.url}</a> |{' '}
             <b>{intl.formatMessage({ id: 'proposal_form.admin.reference' })} : </b>{' '}
             {proposalForm.reference}
           </p>
         ) : (
           <p>
-            <strong>
-              <FormattedMessage id="permalink-unavailable" />{' '}
-            </strong>
+            <strong>Permalien indisponible </strong>
             (Ce formulaire de dépôt n'est pas encore relié à un projet participatif) |{' '}
             <b>{intl.formatMessage({ id: 'proposal_form.admin.reference' })} : </b>{' '}
             {proposalForm.reference}

@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<DateDropdownPicker /> should render in english with date 1`] = `
-<div
-  className="globalClassName"
->
+<div>
   <label
     className="sm-3"
   >
@@ -26,7 +24,6 @@ exports[`<DateDropdownPicker /> should render in english with date 1`] = `
       <DayPicker
         classes="form-control"
         defaultValue="Day"
-        disabled={false}
         id="day"
         month="04"
         name="day"
@@ -46,9 +43,8 @@ exports[`<DateDropdownPicker /> should render in english with date 1`] = `
       <MonthPicker
         classes="form-control"
         defaultValue="month"
-        disabled={false}
         id="month"
-        locale="FR"
+        locale=""
         name="month"
         onChange={[Function]}
         optionClasses="option classes"
@@ -66,7 +62,6 @@ exports[`<DateDropdownPicker /> should render in english with date 1`] = `
       <YearPicker
         classes="form-control"
         defaultValue="year"
-        disabled={false}
         id="year"
         name="year"
         onChange={[Function]}
@@ -78,10 +73,8 @@ exports[`<DateDropdownPicker /> should render in english with date 1`] = `
 </div>
 `;
 
-exports[`<DateDropdownPicker /> should render in english without date and disabled 1`] = `
-<div
-  className="globalClassName"
->
+exports[`<DateDropdownPicker /> should render in english without date 1`] = `
+<div>
   <label
     className="sm-3"
   >
@@ -104,7 +97,6 @@ exports[`<DateDropdownPicker /> should render in english without date and disabl
       <DayPicker
         classes="form-control"
         defaultValue="Day"
-        disabled={true}
         id="day"
         month={null}
         name="day"
@@ -124,9 +116,8 @@ exports[`<DateDropdownPicker /> should render in english without date and disabl
       <MonthPicker
         classes="form-control"
         defaultValue="month"
-        disabled={true}
         id="month"
-        locale="FR"
+        locale=""
         name="month"
         onChange={[Function]}
         optionClasses="option classes"
@@ -144,7 +135,6 @@ exports[`<DateDropdownPicker /> should render in english without date and disabl
       <YearPicker
         classes="form-control"
         defaultValue="year"
-        disabled={true}
         id="year"
         name="year"
         onChange={[Function]}

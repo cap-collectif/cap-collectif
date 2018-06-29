@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import { YearPicker, MonthPicker, DayPicker } from 'react-dropdown-date';
 import { Col } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import config from '../../config';
 
 type Props = {
+  locale: string,
   dayDefaultValue: string,
   dayId: string,
   monthDefaultValue: string,
@@ -19,8 +19,6 @@ type Props = {
   componentId: string,
   labelClassName: string,
   divClassName: string,
-  globalClassName: string,
-  disabled: boolean,
 };
 
 const getDay = (date: string): number => {
@@ -49,21 +47,7 @@ type DateState = {
   day: ?number,
 };
 
-let wLocale = 'fr-FR';
-
-if (config.canUseDOM && window.locale) {
-  wLocale = window.locale;
-} else if (!config.canUseDOM) {
-  wLocale = global.locale;
-}
-
 export class DateDropdownPicker extends Component<Props, DateState> {
-  static defaultProps = {
-    dayDefaultValue: 'Jour',
-    monthDefaultValue: 'Mois',
-    yearDefaultValue: 'Année',
-  };
-
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -79,7 +63,6 @@ export class DateDropdownPicker extends Component<Props, DateState> {
       };
     }
   }
-
   componentDidUpdate(prevProps: Props, prevState: DateState) {
     if (prevState !== this.state) {
       this.setDate();
@@ -99,6 +82,7 @@ export class DateDropdownPicker extends Component<Props, DateState> {
 
   render() {
     const {
+      locale,
       dayDefaultValue,
       monthDefaultValue,
       yearDefaultValue,
@@ -109,12 +93,10 @@ export class DateDropdownPicker extends Component<Props, DateState> {
       componentId,
       labelClassName,
       divClassName,
-      globalClassName,
-      disabled,
     } = this.props;
 
     return (
-      <div className={globalClassName}>
+      <div>
         <label className={labelClassName}>
           <FormattedMessage id={label} />
         </label>
@@ -132,7 +114,6 @@ export class DateDropdownPicker extends Component<Props, DateState> {
               name={'day'}
               classes={'form-control'}
               optionClasses={'option classes'}
-              disabled={disabled}
             />
           </Col>
           <Col sm={3} md={3} id={monthId}>
@@ -143,12 +124,11 @@ export class DateDropdownPicker extends Component<Props, DateState> {
               onChange={month => {
                 this.setState({ month });
               }}
-              locale={wLocale.substr(3, 5)}
+              locale={locale.substr(3, 5)}
               id={'month'}
               name={'month'}
               classes={'form-control'}
               optionClasses={'option classes'}
-              disabled={disabled}
             />
           </Col>
           <Col sm={3} md={3} id={yearId}>
@@ -162,7 +142,6 @@ export class DateDropdownPicker extends Component<Props, DateState> {
               name={'year'}
               classes={'form-control'}
               optionClasses={'option classes'}
-              disabled={disabled}
             />
           </Col>
         </div>

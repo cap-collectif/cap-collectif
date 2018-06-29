@@ -7,34 +7,36 @@ use Capco\UserBundle\Form\Type\ChangePasswordFormType;
 use FOS\UserBundle\Form\Model\ChangePassword;
 use FOS\UserBundle\Model\UserManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Form\FormFactory;
 
-class UpdateProfilePasswordMutation extends BaseUpdateProfile
+class UpdateProfilePasswordMutation
 {
     private $userManager;
+    private $formFactory;
+    private $logger;
+
+    public function __construct(FormFactory $formFactory, UserManagerInterface $userManager, LoggerInterface $logger)
+    {
+        $this->formFactory = $formFactory;
+        $this->userManager = $userManager;
+        $this->logger = $logger;
+    }
 
     public function __invoke(Argument $input, User $user): array
     {
         $arguments = $input->getRawArguments();
-
         $form = $this->formFactory->create(ChangePasswordFormType::class, new ChangePassword(), ['csrf_protection' => false]);
-        $this->logger->error(__METHOD__ . ' : ' . var_export($arguments, true));
-
         $form->submit($arguments, false);
         if (!$form->isValid()) {
             $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));
 
-            return [self::USER => $user, 'error' => 'fos_user.password.not_current'];
+            return ['viewer' => $user, 'error' => 'fos_user.password.not_current'];
         }
-        $this->logger->debug(__METHOD__ . ' : ' . (string) $form->isValid());
 
         $user->setPlainPassword($arguments['new']);
         $this->userManager->updateUser($user);
 
-        return [self::USER => $user];
-    }
-
-    public function setUserManager(UserManagerInterface $userManager)
-    {
-        $this->userManager = $userManager;
+        return ['viewer' => $user];
     }
 }

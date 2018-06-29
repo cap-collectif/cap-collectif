@@ -270,7 +270,7 @@ Mutation:
               payloadType: UpdateProfilePersonalDataPayload
               mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProfilePersonalDataMutation", [value, user])'
           updateProfilePublicData:
-            access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user, value, context, ["ROLE_SUPER_ADMIN"])'
+            access: '@=hasRole("ROLE_USER")'
             builder: "Relay::Mutation"
             builderConfig:
               inputType: UpdateProfilePublicDataInput
@@ -283,7 +283,7 @@ Mutation:
             builderConfig:
               inputType: DeleteAccountInput
               payloadType: DeleteAccountPayload
-              mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteAccountMutation", [value, user])'
+              mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteAccountMutation", [request, value, user])'
           updateRequirement:
             access: "@=hasRole('ROLE_USER')"
             builder: "Relay::Mutation"
@@ -291,17 +291,3 @@ Mutation:
               inputType: UpdateRequirementInput
               payloadType: UpdateRequirementPayload
               mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateRequirementMutation", [value, user])'
-          createUser:
-            access: "@=hasRole('ROLE_ADMIN')"
-            builder: "Relay::Mutation"
-            builderConfig:
-              inputType: CreateUserInput
-              payloadType: CreateUserPayload
-              mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateUserMutation", [value])'
-          updateUserAccount:
-            access: "@=hasRole('ROLE_ADMIN')"
-            builder: "Relay::Mutation"
-            builderConfig:
-              inputType: UpdateUserAccountInput
-              payloadType: UpdateUserAccountPayload
-              mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateUserAccountMutation", [value, user])'

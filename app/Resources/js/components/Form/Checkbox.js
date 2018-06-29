@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import { CheckboxGroup } from 'react-checkbox-group';
 import classNames from 'classnames';
 import Input from './Input';
 import Other from './Other';
@@ -25,7 +26,7 @@ type State = {
 };
 
 class Checkbox extends React.Component<Props, State> {
-  static defaultProps = {
+  static DefaultProps = {
     disabled: false,
     labelClassName: '',
     value: {},
@@ -94,6 +95,7 @@ class Checkbox extends React.Component<Props, State> {
     if (labelClassName) {
       labelClasses[labelClassName] = true;
     }
+
     return (
       <div className={`form-group ${getGroupStyle(field.id)}`} id={id}>
         {label && (
@@ -107,19 +109,17 @@ class Checkbox extends React.Component<Props, State> {
             <ButtonBody body={field.description || ''} />
           </div>
         )}
-
-        {field.choices &&
-          field.choices.map(choice => {
+        <CheckboxGroup id={fieldName} ref={'choices'} name={fieldName} className="input-choices">
+          {field.choices.map(choice => {
             const choiceKey = `choice-${choice.id}`;
-            const choiceValue = choice.useIdAsValue && choice.id ? choice.id : choice.label;
             return (
               <div key={choiceKey}>
                 <Input
                   id={`${id}_${choiceKey}`}
                   name={fieldName}
                   type="checkbox"
-                  value={choiceValue}
-                  checked={finalValue.indexOf(choiceValue) !== -1}
+                  value={choice.label}
+                  checked={finalValue.indexOf(choice.label) !== -1}
                   description={choice.description}
                   disabled={disabled}
                   onBlur={event => {
@@ -129,10 +129,11 @@ class Checkbox extends React.Component<Props, State> {
                     const newValue = [...finalValue];
 
                     if (event.target.checked) {
-                      newValue.push(choiceValue);
+                      newValue.push(choice.label);
                     } else {
-                      newValue.splice(newValue.indexOf(choiceValue), 1);
+                      newValue.splice(newValue.indexOf(choice.label), 1);
                     }
+
                     this.onChange(newValue);
                   }}
                   image={choice.image ? choice.image.url : null}>
@@ -141,16 +142,17 @@ class Checkbox extends React.Component<Props, State> {
               </div>
             );
           })}
-        {field.isOtherAllowed ? (
-          <Other
-            // $FlowFixMe
-            ref={c => (this.other = c)}
-            value={otherValue}
-            field={field}
-            onChange={this.onOtherChange}
-            disabled={disabled}
-          />
-        ) : null}
+          {field.isOtherAllowed ? (
+            <Other
+              // $FlowFixMe
+              ref={c => (this.other = c)}
+              value={otherValue}
+              field={field}
+              onChange={this.onOtherChange}
+              disabled={disabled}
+            />
+          ) : null}
+        </CheckboxGroup>
         {renderFormErrors(field.id)}
       </div>
     );

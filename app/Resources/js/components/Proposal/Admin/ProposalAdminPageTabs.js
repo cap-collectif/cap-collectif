@@ -20,10 +20,7 @@ export class ProposalAdminPageTabs extends Component<Props> {
     return (
       <div>
         <p>
-          <strong>
-            <FormattedMessage id="permalink" /> :{' '}
-          </strong>{' '}
-          <a href={proposal.show_url}>{proposal.show_url}</a> |{' '}
+          <strong>Permalien : </strong> <a href={proposal.show_url}>{proposal.show_url}</a> |{' '}
           <b>{intl.formatMessage({ id: 'proposal.admin.reference' })} :</b> {proposal.reference}
         </p>
         <Tabs defaultActiveKey={1} id="proposal-admin-page-tabs">

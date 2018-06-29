@@ -95,14 +95,6 @@ class UserContext extends DefaultContext
     }
 
     /**
-     * @Given I am logged in as super admin
-     */
-    public function iAmLoggedInToGraphQLAsSfavot()
-    {
-        $this->logInWith('sfavot@jolicode.com', 'toto');
-    }
-
-    /**
      * @Given I am logged in as drupal
      */
     public function iAmLoggedInAsDrupal()
