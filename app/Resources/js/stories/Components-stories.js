@@ -16,6 +16,9 @@ import Pagination from '../components/Utils/Pagination';
 import { Progress } from '../components/Ui/Progress';
 import InlineList from '../components/Ui/List/InlineList';
 import TagsList from '../components/Ui/List/TagsList';
+import DarkenGradientMedia from "../components/Ui/DarkenGradientMedia";
+import SixteenNineMedia from "../components/Ui/SixteenNineMedia";
+import {Loader} from "../components/Ui/Loader";
 
 const openProject = {
   step: {
@@ -68,7 +71,7 @@ storiesOf('Components', module)
     source: false,
     propTablesExclude: [Progress],
     text :`
-      <h2>How to use</h2>
+      <h2>Comment l'utiliser</h2>
     
       ~~~jsx
       // Simple progress bar
@@ -94,7 +97,7 @@ storiesOf('Components', module)
         <h1>
           Progress bar {' '}
           <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
-            <i className="small cap cap-setting-gear-1"/>
+            <i className="small cap cap-github"/>
           </a>
         </h1>
         <hr/>
@@ -145,7 +148,7 @@ storiesOf('Components', module)
   .add('List',  withInfo({
     propTablesExclude: [InlineList, TagsList],
     text :`
-      <h2>How to use</h2>
+      <h2>Comment l'utiliser</h2>
     
       ~~~jsx
       // Inline list
@@ -173,7 +176,7 @@ storiesOf('Components', module)
         <h1>
           List {' '}
           <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
-            <i className="small cap cap-setting-gear-1"/>
+            <i className="small cap cap-github"/>
           </a>
         </h1>
         <hr/>
@@ -209,7 +212,7 @@ storiesOf('Components', module)
   .add('Pagination', withInfo({
     source: false,
     text :`
-      <h2>How to use</h2>
+      <h2>Comment l'utiliser</h2>
     
       ~~~jsx
       // Inline list
@@ -226,7 +229,7 @@ storiesOf('Components', module)
         <h1>
           Pagination {' '}
           <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
-            <i className="small cap cap-setting-gear-1"/>
+            <i className="small cap cap-github"/>
           </a>
         </h1>
         <hr/>
@@ -243,7 +246,7 @@ storiesOf('Components', module)
   .add('Labels', withInfo({
     source: false,
     text :`
-      <h2>How to use</h2>
+      <h2>Comment l'utiliser</h2>
     
       ~~~jsx
       <Label bsStyle={labelStyle}>{label}</Label>
@@ -255,7 +258,7 @@ storiesOf('Components', module)
         <h1>
           Labels {' '}
           <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
-            <i className="small cap cap-setting-gear-1"/>
+            <i className="small cap cap-github"/>
           </a>
         </h1>
         <hr/>
@@ -272,7 +275,7 @@ storiesOf('Components', module)
   .add('Alerts', withInfo({
     source: false,
     text :`
-      <h2>How to use</h2>
+      <h2>Comment l'utiliser</h2>
     
       ~~~jsx
       // Basic alert
@@ -296,7 +299,7 @@ storiesOf('Components', module)
         <h1>
           Alerts {' '}
           <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
-            <i className="small cap cap-setting-gear-1"/>
+            <i className="small cap cap-github"/>
           </a>
         </h1>
         <hr/>
@@ -323,12 +326,15 @@ storiesOf('Components', module)
   .add('Buttons', withInfo({
     source: false,
     text :`
-      <h2>How to use</h2>
+      <h2>Comment l'utiliser</h2>
     
       ~~~jsx
       // basic button
-      <Button bsStyle={buttonStyle}>{button}</Button>
+      <Button bsStyle={buttonStyle}>Mon bouton</Button>
       
+      // outline button
+      <Button bsStyle={buttonStyle} className="btn--outline">Mon bouton</Button>
+
       //dropdown button
       <DropdownButton
         open={false}
@@ -336,7 +342,7 @@ storiesOf('Components', module)
       >
         <MenuItem eventKey="1">Action</MenuItem>
         <MenuItem divider />
-        <MenuItem eventKey="2" active>Active Item</MenuItem>
+        <MenuItem eventKey="2" active>Item actif</MenuItem>
       </DropdownButton>
       ~~~
     
@@ -346,7 +352,7 @@ storiesOf('Components', module)
         <h1>
           Buttons {' '}
           <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
-            <i className="small cap cap-setting-gear-1"/>
+            <i className="small cap cap-github"/>
           </a>
         </h1>
         <hr/>
@@ -385,19 +391,19 @@ storiesOf('Components', module)
     source: false,
     propTablesExclude: [Button],
     text :`
-      <h2>How to use</h2>
+      <h2>Comment l'utiliser</h2>
     
       ~~~jsx
       <div className="static-modal">
         <Modal.Dialog>
           <Modal.Header>
-            <Modal.Title>Modal title</Modal.Title>
+            <Modal.Title>Titre</Modal.Title>
           </Modal.Header>
       
-          <Modal.Body>body...</Modal.Body>
+          <Modal.Body>Lorem ipsum...</Modal.Body>
       
           <Modal.Footer>
-            <Button>Close</Button>
+            <Button>Fermer</Button>
           </Modal.Footer>
         </Modal.Dialog>
       </div>;
@@ -409,7 +415,7 @@ storiesOf('Components', module)
         <h1>
           Modal {' '}
           <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
-            <i className="small cap cap-setting-gear-1"/>
+            <i className="small cap cap-github"/>
           </a>
         </h1>
         <hr/>
@@ -418,16 +424,87 @@ storiesOf('Components', module)
         >
           <Modal.Dialog className="position-relative">
             <Modal.Header>
-              <Modal.Title>Modal title</Modal.Title>
+              <Modal.Title>Titre</Modal.Title>
             </Modal.Header>
 
-            <Modal.Body>body...</Modal.Body>
+            <Modal.Body>Lorem ipsum ...</Modal.Body>
 
             <Modal.Footer>
-              <Button>Close</Button>
+              <Button>Fermer</Button>
             </Modal.Footer>
           </Modal.Dialog>
         </div>
       </div>
     );
   }))
+  .add('Media', withInfo({
+    source: false,
+    propTablesExclude: [Button],
+    text :`
+      <h2>Comment l'utiliser</h2>
+    
+      ~~~jsx
+      // Darken gradient media
+      <DarkenGradientMedia
+        width="600px"
+        height="400px"
+        url="https://source.unsplash.com/collection/1353633"
+        title="title"
+      />
+      
+      // Sixteen  Nine Media
+      <SixteenNineMedia> // depends on parent size
+        <img src="https://source.unsplash.com/collection/1353633" alt="img example"/>
+      </SixteenNineMedia>
+      ~~~
+    
+    `})(() => {
+    return (
+      <div className="ml-30 mr-30 storybook-container">
+        <h1>
+          Media {' '}
+          <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
+            <i className="small cap cap-github"/>
+          </a>
+        </h1>
+        <hr/>
+        <h3>Darken gradient media</h3>
+        <DarkenGradientMedia
+          width="600px"
+          height="400px"
+          url="https://source.unsplash.com/collection/1353633"
+          title="title"
+        />
+        <h3>16:9 media</h3>
+        <div style={{ maxWidth:'400px' }} className="mb-30">
+          <SixteenNineMedia>
+            <img src="https://source.unsplash.com/collection/1353633" alt="img example"/>
+          </SixteenNineMedia>
+        </div>
+
+      </div>
+    );
+  }))
+  .add('Loader', withInfo({
+    source: false,
+    text :`
+      <h2>Comment l'utiliser</h2>
+    
+      ~~~jsx
+      <Loader />
+      ~~~
+    
+    `})(() => {
+    return (
+      <div className="ml-30 mr-30 storybook-container">
+        <h1>
+          Loader {' '}
+          <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
+            <i className="small cap cap-github"/>
+          </a>
+        </h1>
+        <hr/>
+        <Loader />
+      </div>
+    );
+  }));

@@ -36,7 +36,7 @@ storiesOf('UI', module)
         <h1>
           Fonts {' '}
           <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Style-stories.js">
-            <i className="small cap cap-setting-gear-1"/>
+            <i className="small cap cap-github"/>
           </a>
         </h1>
         <hr/>
@@ -50,7 +50,7 @@ storiesOf('UI', module)
         <h1>
           Colors {' '}
           <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Style-stories.js">
-            <i className="small cap cap-setting-gear-1"/>
+            <i className="small cap cap-github"/>
           </a>
         </h1>
         <hr/>

@@ -1,10 +1,12 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
+import { withInfo } from '@storybook/addon-info';
 import styled from 'styled-components';
 import CardProject from './CardProject';
 import CardProposal from './CardProposal';
 import CardTheme from './CardTheme';
+import {Card} from "./Card";
 
 const Row = styled.div.attrs({
   className: 'row',
@@ -218,13 +220,80 @@ const toComeProject = {
 };
 
 storiesOf('Cards', module)
+  .add('Card', withInfo({
+    source: false,
+    propTablesExclude: [Col, Row, Card],
+    text :`
+      <h2>Comment l'utiliser</h2>
+    
+      ~~~jsx
+      // Card component
+      <CardContainer>
+        <CardType color="#679690">Mon type</CardType>
+        <CardCover>
+          <img src="https://source.unsplash.com/collection/1127828" alt="" />
+        </CardCover>
+        <CardUser>
+          <div className="card__user__avatar">
+            <img src="https://source.unsplash.com/collection/1127828" alt="" />
+          </div>
+          <div>
+            <a href="">Jean Pierre</a>
+            <p>
+              <div className="excerpt small">10 mars 2018</div>
+            </p>
+          </div>
+          <hr />
+        </CardUser>
+        <div className="card__body">
+          <div className="card__body__infos">
+            <h3 className="card__title">
+              <a href="#">Title</a>
+            </h3>
+          </div>
+          <div className="card__actions">
+            <a href="#">Mon action</a>
+          </div>
+        </div>
+        <div className="card__counters card__counters_multiple">
+          <div className="card__counter">
+            <div className="card__counter__value">5</div>
+            opinions
+          </div>
+          <div className="card__counter">
+            <div className="card__counter__value">10</div>
+            votes
+          </div>
+        </div>
+        <CardStatus className="success">Mon statut</CardStatus>
+      </CardContainer>
+      ~~~
+    
+    `})(() => {
+    return (
+      <div className="ml-30 mr-30 storybook-container">
+        <h1>
+          Card {' '}
+          <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Cards-stories.js">
+            <i className="small cap cap-github"/>
+          </a>
+        </h1>
+        <hr />
+        <Row>
+          <Col>
+            <Card project={continuousProject} />
+          </Col>
+        </Row>
+      </div>
+    );
+  }))
   .add('Project Card', () => {
     return (
       <div className="ml-30 mr-30 storybook-container">
         <h1>
           Project Card {' '}
           <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Cards-stories.js">
-            <i className="small cap cap-setting-gear-1"/>
+            <i className="small cap cap-github"/>
           </a>
         </h1>
         <hr />
@@ -251,7 +320,7 @@ storiesOf('Cards', module)
         <h1>
           Proposal Card {' '}
           <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Cards-stories.js">
-            <i className="small cap cap-setting-gear-1"/>
+            <i className="small cap cap-github"/>
           </a>
         </h1>
         <hr />
@@ -278,7 +347,7 @@ storiesOf('Cards', module)
         <h1>
           Theme Card {' '}
           <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Cards-stories.js">
-            <i className="small cap cap-setting-gear-1"/>
+            <i className="small cap cap-github"/>
           </a>
         </h1>
         <hr />
