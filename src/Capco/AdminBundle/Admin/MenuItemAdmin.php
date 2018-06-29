@@ -148,7 +148,7 @@ class MenuItemAdmin extends Admin
             ])
             ->add('menu', 'choice', [
                 'label' => 'admin.fields.menu_item.menu',
-                'choices' => MenuItem::$menuLabels,
+                'choices' => array_flip(MenuItem::$menuLabels),
                 'translation_domain' => 'CapcoAppBundle',
                 'required' => true,
             ])
@@ -161,7 +161,6 @@ class MenuItemAdmin extends Admin
                 'required' => false,
                 'query' => $this->createParentsItemQuery(),
                 'preferred_choices' => [],
-                'empty_data' => 'admin.fields.menu_item.parent_empty',
                 'choices_as_values' => true,
             ])
         ;
@@ -192,7 +191,6 @@ class MenuItemAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $subject = $this->getSubject();
-
         $showMapper
             ->add('title', null, [
                 'label' => 'admin.fields.menu_item.title',

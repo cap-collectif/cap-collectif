@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 class ConsultationStepTypeAdmin extends Admin
@@ -86,13 +87,14 @@ class ConsultationStepTypeAdmin extends Admin
             ])
         ;
         if ($this->getSubject()->getId()) {
-            $formMapper->add('opinionTypes', 'sonata_type_model', [
+            $formMapper->add('opinionTypes', ModelType::class, [
               'label' => 'admin.fields.consultation_step_type.opinion_types',
               'query' => $this->createQueryForOpinionTypes(),
               'by_reference' => false,
               'multiple' => true,
               'expanded' => true,
               'required' => true,
+              'tree' => true,
               'choices_as_values' => true,
             ]);
         }
