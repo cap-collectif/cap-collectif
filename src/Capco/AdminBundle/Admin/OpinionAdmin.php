@@ -6,6 +6,7 @@ use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 
@@ -188,7 +189,7 @@ class OpinionAdmin extends CapcoAdmin
                 ->add('title', null, [
                     'label' => 'admin.fields.opinion.title',
                 ])
-                ->add('Author', 'sonata_type_model_autocomplete', [
+                ->add('Author', ModelAutocompleteType::class, [
                     'label' => 'admin.fields.opinion.author',
                     'property' => 'username',
                 ])
@@ -203,7 +204,7 @@ class OpinionAdmin extends CapcoAdmin
                 ->add('step', null, [
                     'label' => 'admin.fields.opinion.step',
                     'query_builder' => $this->createQueryBuilderForStep(),
-                    'property' => 'labelTitle',
+                    'choice_label' => 'labelTitle',
                     'required' => true,
                 ])
             ->end()
