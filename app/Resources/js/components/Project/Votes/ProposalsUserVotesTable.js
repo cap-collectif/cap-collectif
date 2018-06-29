@@ -24,6 +24,7 @@ import ProposalUserVoteItem from './ProposalUserVoteItem';
 import type { ProposalsUserVotesTable_step } from './__generated__/ProposalsUserVotesTable_step.graphql';
 import type { ProposalsUserVotesTable_votes } from './__generated__/ProposalsUserVotesTable_votes.graphql';
 import type { State } from '../../../types';
+import config from '../../../config';
 
 type RelayProps = {
   step: ProposalsUserVotesTable_step,
@@ -60,11 +61,14 @@ const DraggableItem = styled.div`
   transition: background-color 0.1s ease;
 `;
 
-const portal: HTMLElement = document.createElement('div');
-portal.classList.add('proposal-user-votes-portal');
+let portal: ?HTMLElement = null;
 
-if (document.body) {
-  document.body.appendChild(portal);
+if (config.canUseDOM && document) {
+  portal = document.createElement('div');
+  portal.classList.add('proposal-user-votes-portal');
+  if (document.body) {
+    document.body.appendChild(portal);
+  }
 }
 
 const renderMembers = ({ fields, votes, step, deletable }: VotesProps) => {
@@ -134,7 +138,7 @@ const renderDraggableMembers = ({ fields, votes, step, deletable, intl }: VotesP
                 </div>
               );
 
-              if (!usePortal) {
+              if (!portal || !usePortal) {
                 return child;
               }
 
