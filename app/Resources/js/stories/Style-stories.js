@@ -1,70 +1,49 @@
 // @flow
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import styled from 'styled-components';
 import { FontStyle } from './FontStyle';
+import InlineList from '../components/Ui/List/InlineList';
+import TagsList from '../components/Ui/List/TagsList';
 
-export const ColorContainer = styled.div`
-  height: 50px;
-  width: 100%;
-  margin-bottom: 20px;
-  border: 1px solid #e3e3e3;
-  background-color: ${props => props.hex}
-`;
-
-const colors = [
-  { hex: '#e3e3e3', description:'$border-color' },
-  { hex: '#dddddd', description:'$border-dropdown-color' },
-  { hex: '#fafafa', description:'$form-bgc' },
-  { hex: '#f6f6f6', description:'$page-bgc' },
-  { hex: '#acacac', description:'$icon-gray-color' },
-  { hex: '#6c757d', description:'$secondary-color' },
-  { hex: '#707070', description:'$dark-gray' },
-  { hex: '#333333', description:'$dark-text' },
-  { hex: '#212529', description:'$dark' },
-  { hex: '#dc3545', description:'$danger-color' },
-  { hex: '#f0ad4e', description:'$warning-color' },
-  { hex: '#0388cc', description:'$primary-color' },
-  { hex: '#088A20', description:'$success-color' },
-  { hex: '#1D8293', description:'$info-color' },
-];
-
-storiesOf('UI', module)
-  .add('Fonts',() => {
+storiesOf('Style', module)
+  .add('Fonts', () => {
     return (
-      <div className="ml-30 mr-30 storybook-container">
-        <h1>
-          Fonts {' '}
-          <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Style-stories.js">
-            <i className="small cap cap-github"/>
-          </a>
-        </h1>
-        <hr/>
+      <div className="container storybook-container">
         <FontStyle />
       </div>
     );
   })
-  .add('Colors',() => {
+  .add('List', () => {
     return (
-      <div className="ml-30 mr-30 storybook-container">
-        <h1>
-          Colors {' '}
-          <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Style-stories.js">
-            <i className="small cap cap-github"/>
-          </a>
-        </h1>
-        <hr/>
-        <div className="row">
-          {colors.map(color => (
-            <div className="col-sm-2 col-xs-12 mb-20">
-              <ColorContainer hex={color.hex} />
-              <div className="text-center">
-                <b>{color.hex}</b><br />
-                {color.description}
-              </div>
-            </div>
-          ))}
-        </div>
+      <div className="container storybook-container">
+        <h3>Inline list</h3>
+        <InlineList>
+          <li>5 projets</li>
+          <li>10 articles</li>
+          <li>2 évènements</li>
+          <li>4 idées</li>
+        </InlineList>
+        <hr />
+        <h3>Tags list</h3>
+        <TagsList>
+          <div className="tags-list__tag">
+            <i className="cap cap-marker-1-1 icon--blue" />
+            5 projets
+          </div>
+          <div className="tags-list__tag">
+            <i className="cap cap-tag-1-1 icon--blue" />
+            10 articles
+          </div>
+          <div className="tags-list__tag">
+            <i className="cap cap-tag-1-1 icon--blue" />
+            2 évènements
+          </div>
+          <div className="tags-list__tag">
+            <i className="cap cap-marker-1-1 icon--blue" />
+            4 idées
+          </div>
+        </TagsList>
+        <hr />
       </div>
     );
   });

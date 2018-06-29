@@ -12,7 +12,6 @@
   },
   "plugins": [
     "styled-components",
-    // "react-docgen",
     "relay",
     "transform-class-properties",
     ["react-intl", {

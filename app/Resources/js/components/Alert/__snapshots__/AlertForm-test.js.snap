@@ -48,20 +48,16 @@ exports[`<AlertForm /> render correctly the message for submit succeeded 1`] = `
 
 exports[`<AlertForm /> render correctly the message with a custom error message 1`] = `
 <div
-  className="d-ib"
+  className="alert__form_server-failed-message"
 >
-  <div
-    className="alert__form_server-failed-message"
-  >
-    <i
-      className="cap cap-ios-close-outline"
-    />
-     
-    <FormattedHTMLMessage
-      id="error.test"
-      values={Object {}}
-    />
-  </div>
+  <i
+    className="cap cap-ios-close-outline"
+  />
+   
+  <FormattedHTMLMessage
+    id="error.test"
+    values={Object {}}
+  />
 </div>
 `;
 

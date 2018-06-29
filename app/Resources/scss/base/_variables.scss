@@ -93,13 +93,6 @@ $brand-color-2: #00acc1; // bgc custom
 
 // = Custom buttons
 // -----------------------------
-$basic-btns:
-        (danger $danger-color)
-        (warning $warning-color)
-        (primary $primary-color)
-        (success $success-color)
-        (info $info-color);
-
 $btns-custom:
         (custom-1 $white $brand-color-1)
         (dark-gray $dark-gray $white)
