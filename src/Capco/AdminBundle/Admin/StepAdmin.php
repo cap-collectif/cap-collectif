@@ -440,14 +440,14 @@ class StepAdmin extends Admin
     private function createQueryForConsultationStepType()
     {
         $subject = $this->getSubject()->getId() ? $this->getSubject() : null;
-
-        return $this->getConfigurationPool()
+        $qb = $this->getConfigurationPool()
             ->getContainer()
             ->get('capco.consultation_step_type.repository')
             ->createQueryBuilder('f')
             ->where('f.step IS NULL OR f.step = :step')
-            ->setParameter('step', $subject)
-            ->getQuery();
+            ->setParameter('step', $subject);
+
+        return $qb->getQuery();
     }
 
     private function createQueryForProposalForms()

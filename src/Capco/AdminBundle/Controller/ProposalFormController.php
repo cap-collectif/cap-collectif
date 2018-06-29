@@ -24,7 +24,7 @@ class ProposalFormController extends Controller
 
         $translator = $this->get('translator');
         $em = $this->get('doctrine.orm.entity_manager');
-
+        $object->setCloneEnable(true);
         $clonedProposalForm = clone $object;
         $clonedProposalForm->setTitle($translator->trans('copy-of') . ' ' . $object->getTitle());
         $evaluationForm = $clonedProposalForm->getEvaluationForm();

@@ -112,9 +112,14 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface
 
     public function setProposalForm(ProposalForm $proposalForm = null): self
     {
+        if ($this->proposalForm) {
+            $this->proposalForm->setStep(null);
+        }
+
         if ($proposalForm) {
             $proposalForm->setStep($this);
         }
+
         $this->proposalForm = $proposalForm;
 
         return $this;
