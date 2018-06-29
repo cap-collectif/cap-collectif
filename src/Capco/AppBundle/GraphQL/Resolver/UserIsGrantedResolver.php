@@ -24,8 +24,12 @@ class UserIsGrantedResolver
      * @param null|mixed $userRequest
      * @param null|mixed $context
      */
-    public function isGranted($user, $userRequest = null, $context = null)
-    {
+    public function isGranted(
+        $user,
+        $userRequest = null,
+        $context = null,
+        array $roleRequest = ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN']
+    ): bool {
         if ($context && isset($context['disable_acl'])) {
             return true;
         }
@@ -37,11 +41,13 @@ class UserIsGrantedResolver
             return false;
         }
 
-        if ($user->hasRole('ROLE_ADMIN')) {
-            return true;
+        foreach ($roleRequest as $role) {
+            if ($user->hasRole($role)) {
+                return true;
+            }
         }
 
-        if ($userRequest) {
+        if ($userRequest && $userRequest instanceof User) {
             if ($user->hasRole('ROLE_USER') && $user->getId() === $userRequest->getId()) {
                 return true;
             }
@@ -54,9 +60,30 @@ class UserIsGrantedResolver
         }
 
         $this->logger->warning(
-            __METHOD__ . ' : User with id ' . $user->getId() . ' try to get informations about user with id ' . $token->getUser(
+            __METHOD__ . ' : User with id ' . $user->getId() . ' try to get information about user with id ' . $token->getUser(
             )->getId()
         );
+
+        return false;
+    }
+
+    public function isViewer($user, $userRequest = null): bool
+    {
+        if (!$user instanceof User) {
+            return false;
+        }
+        $token = $this->tokenStorage->getToken();
+        if (!$token) {
+            return false;
+        }
+
+        if ($userRequest && $userRequest instanceof User) {
+            if ($user->hasRole('ROLE_USER') && $user->getId() === $userRequest->getId()) {
+                return true;
+            }
+
+            return false;
+        }
 
         return false;
     }

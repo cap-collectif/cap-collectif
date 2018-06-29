@@ -125,7 +125,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
 
   return UpdateProfilePersonalDataMutation.commit({ input })
     .then(response => {
-      if (!response.updateProfilePersonalData || !response.updateProfilePersonalData.viewer) {
+      if (!response.updateProfilePersonalData || !response.updateProfilePersonalData.user) {
         throw new Error('Mutation "updateProfilePersonalData" failed.');
       }
     })
@@ -669,6 +669,7 @@ export default createFragmentContainer(
       zipCode
       city
       gender
+      email
       phoneConfirmed
       isArchiveReady
       ...UserArchiveRequestButton_viewer

@@ -1,0 +1,352 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UserAdminAccount/> should render when user is admin or viewer 1`] = `
+<div
+  className="box box-primary container-fluid"
+>
+  <div
+    className="box-header"
+  >
+    <h2
+      className="box-title"
+    >
+      <FormattedMessage
+        id="user.profile.edit.account"
+        values={Object {}}
+      />
+    </h2>
+  </div>
+  <form
+    onSubmit={[MockFunction]}
+  >
+    <div
+      className="box-header"
+    >
+      <h3
+        className="box-title"
+      >
+        <FormattedMessage
+          id="admin.fields.step.statuses"
+          values={Object {}}
+        />
+      </h3>
+    </div>
+    <div
+      className="box-content box-content__content-form"
+    >
+      <Field
+        component={[Function]}
+        id="vip"
+        name="vip"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="form.label_vip"
+          values={Object {}}
+        />
+      </Field>
+      <Field
+        component={[Function]}
+        id="enabled"
+        name="enabled"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="form.label_enabled"
+          values={Object {}}
+        />
+      </Field>
+      <Field
+        component={[Function]}
+        id="locked"
+        name="locked"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="form.label_locked"
+          values={Object {}}
+        />
+      </Field>
+      <Field
+        component={[Function]}
+        disabled={false}
+        id="expired"
+        name="expired"
+        type="checkbox"
+      >
+        <div>
+          <FormattedMessage
+            id="form.label_expired"
+            values={Object {}}
+          />
+           
+        </div>
+      </Field>
+      <div
+        className="box-header"
+      >
+        <h3
+          className="box-title"
+        >
+          <FormattedMessage
+            id="form.label_real_roles"
+            values={Object {}}
+          />
+        </h3>
+      </div>
+      <Connect(InjectIntl(SelectUserRoles))
+        id="user_roles"
+        label="form.label_real_roles"
+        name="roles"
+      />
+      <div
+        className="box-header"
+      >
+        <h3
+          className="box-title"
+        >
+          <FormattedMessage
+            id="subscription"
+            values={Object {}}
+          />
+        </h3>
+      </div>
+      <Field
+        component={[Function]}
+        disabled={true}
+        id="newsletter"
+        name="newsletter"
+        type="checkbox"
+      >
+        <div>
+          <FormattedMessage
+            id="newsletter"
+            values={Object {}}
+          />
+           
+          <DatesInterval
+            startAt="2018-05-03 11:11:11"
+          />
+        </div>
+      </Field>
+      <ButtonToolbar
+        bsClass="btn-toolbar"
+        className="box-content__toolbar"
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={true}
+          id="user_admin_account_save"
+          type="submit"
+        >
+          <FormattedMessage
+            id="global.save"
+            values={Object {}}
+          />
+        </Button>
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="danger"
+          disabled={false}
+          id="delete-account-profile-button"
+          onClick={[Function]}
+          style={
+            Object {
+              "marginLeft": 15,
+            }
+          }
+        >
+          <FormattedMessage
+            id="global.delete"
+            values={Object {}}
+          />
+        </Button>
+        <AlertForm
+          invalid={false}
+          submitFailed={false}
+          submitSucceeded={false}
+          submitting={false}
+          valid={true}
+        />
+      </ButtonToolbar>
+      <Relay(DeleteAccountModal)
+        handleClose={[Function]}
+        redirectToAdminUrl={true}
+        show={false}
+        userDeletedIsNotViewer={true}
+        viewer={
+          Object {
+            "expiresAt": "2018-06-03 11:11:11",
+            "subscribedToNewsLetterAt": "2018-05-03 11:11:11",
+          }
+        }
+      />
+    </div>
+  </form>
+</div>
+`;
+
+exports[`<UserAdminAccount/> should render when user is not admin or viewer 1`] = `
+<div
+  className="box box-primary container-fluid"
+>
+  <div
+    className="box-header"
+  >
+    <h2
+      className="box-title"
+    >
+      <FormattedMessage
+        id="user.profile.edit.account"
+        values={Object {}}
+      />
+    </h2>
+  </div>
+  <form
+    onSubmit={[MockFunction]}
+  >
+    <div
+      className="box-header"
+    >
+      <h3
+        className="box-title"
+      >
+        <FormattedMessage
+          id="admin.fields.step.statuses"
+          values={Object {}}
+        />
+      </h3>
+    </div>
+    <div
+      className="box-content box-content__content-form"
+    >
+      <Field
+        component={[Function]}
+        id="vip"
+        name="vip"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="form.label_vip"
+          values={Object {}}
+        />
+      </Field>
+      <Field
+        component={[Function]}
+        id="enabled"
+        name="enabled"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="form.label_enabled"
+          values={Object {}}
+        />
+      </Field>
+      <Field
+        component={[Function]}
+        id="locked"
+        name="locked"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="form.label_locked"
+          values={Object {}}
+        />
+      </Field>
+      <Field
+        component={[Function]}
+        disabled={true}
+        id="expired"
+        name="expired"
+        type="checkbox"
+      >
+        <div>
+          <FormattedMessage
+            id="form.label_expired"
+            values={Object {}}
+          />
+           
+        </div>
+      </Field>
+      <div
+        className="box-header"
+      >
+        <h3
+          className="box-title"
+        >
+          <FormattedMessage
+            id="form.label_real_roles"
+            values={Object {}}
+          />
+        </h3>
+      </div>
+      <Connect(InjectIntl(SelectUserRoles))
+        id="user_roles"
+        label="form.label_real_roles"
+        name="roles"
+      />
+      <div
+        className="box-header"
+      >
+        <h3
+          className="box-title"
+        >
+          <FormattedMessage
+            id="subscription"
+            values={Object {}}
+          />
+        </h3>
+      </div>
+      <Field
+        component={[Function]}
+        disabled={true}
+        id="newsletter"
+        name="newsletter"
+        type="checkbox"
+      >
+        <div>
+          <FormattedMessage
+            id="newsletter"
+            values={Object {}}
+          />
+           
+          <DatesInterval
+            startAt={null}
+          />
+        </div>
+      </Field>
+      <ButtonToolbar
+        bsClass="btn-toolbar"
+        className="box-content__toolbar"
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={true}
+          id="user_admin_account_save"
+          type="submit"
+        >
+          <FormattedMessage
+            id="global.save"
+            values={Object {}}
+          />
+        </Button>
+        <AlertForm
+          invalid={false}
+          submitFailed={false}
+          submitSucceeded={false}
+          submitting={false}
+          valid={true}
+        />
+      </ButtonToolbar>
+    </div>
+  </form>
+</div>
+`;

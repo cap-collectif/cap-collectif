@@ -1,0 +1,561 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UserAdminPersonalData/> should render when user is confirmed by email and viewer is super admin 1`] = `
+<div
+  className="box box-primary container-fluid"
+>
+  <h2
+    className="page-header"
+  >
+    <FormattedMessage
+      id="personal-data"
+      values={Object {}}
+    />
+  </h2>
+  <form
+    onSubmit={[MockFunction]}
+  >
+    <div
+      className="box-content box-content__content-form"
+    >
+      <Field
+        component={[Function]}
+        disabled={false}
+        divClassName="col-sm-4"
+        id="personal-data-email"
+        label={
+          <FormattedMessage
+            id="form.label_email"
+            values={Object {}}
+          />
+        }
+        name="email"
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        divClassName="col-sm-4"
+        id="isEmailConfirmed"
+        isReduxForm={true}
+        name="isEmailConfirmed"
+        type="checkbox"
+      >
+        <div>
+          <FormattedMessage
+            id="confirmed-by-email"
+            values={Object {}}
+          />
+           
+          <DatesInterval />
+        </div>
+      </Field>
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        divClassName="col-sm-4"
+        id="personal-data-form-firstname"
+        label={
+          <FormattedMessage
+            id="form.label_firstname"
+            values={Object {}}
+          />
+        }
+        name="firstname"
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        divClassName="col-sm-4"
+        id="personal-data-form-lastname"
+        label={
+          <FormattedMessage
+            id="form.label_lastname"
+            values={Object {}}
+          />
+        }
+        name="lastname"
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        divClassName="col-sm-4"
+        id="personal-data-form-gender"
+        label={
+          <FormattedMessage
+            id="form.label_gender"
+            values={Object {}}
+          />
+        }
+        name="gender"
+        type="select"
+      >
+        <option
+          value="MALE"
+        >
+          <FormattedMessage
+            id="gender.male"
+            values={Object {}}
+          />
+        </option>
+        <option
+          value="FEMALE"
+        >
+          <FormattedMessage
+            id="gender.female"
+            values={Object {}}
+          />
+        </option>
+        <option
+          value="OTHER"
+        >
+          <FormattedMessage
+            id="gender.other"
+            values={Object {}}
+          />
+        </option>
+      </Field>
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        componentId="personal-data-date-of-birth"
+        dayId="personal-data-date-of-birth-day"
+        disabled={false}
+        globalClassName="col-sm-4 form-group"
+        id="dateOfBirth"
+        label="form.label_date_of_birth"
+        monthId="personal-data-date-of-birth-month"
+        name="dateOfBirth"
+        yearId="personal-data-date-of-birth-year"
+      />
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        divClassName="col-sm-4"
+        id="personal-data-form-address"
+        label={
+          <FormattedMessage
+            id="form.label_address"
+            values={Object {}}
+          />
+        }
+        name="address"
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        divClassName="col-sm-4"
+        id="personal-data-form-address2"
+        label={
+          <FormattedMessage
+            id="form.label_address2"
+            values={Object {}}
+          />
+        }
+        name="address2"
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        divClassName="col-sm-4"
+        id="city"
+        label={
+          <FormattedMessage
+            id="form.label_city"
+            values={Object {}}
+          />
+        }
+        name="city"
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        divClassName="col-sm-4"
+        id="zipCode"
+        label={
+          <FormattedMessage
+            id="form.label_zip_code"
+            values={Object {}}
+          />
+        }
+        name="zipCode"
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={false}
+        divClassName="col-sm-4"
+        id="phone"
+        label={
+          <FormattedMessage
+            id="form.label_phone"
+            values={Object {}}
+          />
+        }
+        name="phone"
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        divClassName="col-sm-4"
+        id="phoneConfirmed"
+        name="phoneConfirmed"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="form.label_phone_confirmed"
+          values={Object {}}
+        />
+      </Field>
+      <div
+        className="clearfix"
+      />
+      <ButtonToolbar
+        bsClass="btn-toolbar"
+        className="box-content__toolbar"
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={false}
+          id="user-admin-personal-data-save"
+          type="submit"
+        >
+          <FormattedMessage
+            id="global.save_modifications"
+            values={Object {}}
+          />
+        </Button>
+        <AlertForm
+          errorMessage={null}
+          invalid={false}
+          submitFailed={false}
+          submitSucceeded={false}
+          submitting={false}
+          valid={true}
+        />
+      </ButtonToolbar>
+    </div>
+  </form>
+</div>
+`;
+
+exports[`<UserAdminPersonalData/> should render when user is not confirmed by email and viewer is not super admin 1`] = `
+<div
+  className="box box-primary container-fluid"
+>
+  <h2
+    className="page-header"
+  >
+    <FormattedMessage
+      id="personal-data"
+      values={Object {}}
+    />
+  </h2>
+  <form
+    onSubmit={[MockFunction]}
+  >
+    <div
+      className="box-content box-content__content-form"
+    >
+      <Field
+        component={[Function]}
+        disabled={true}
+        divClassName="col-sm-4"
+        id="personal-data-email"
+        label={
+          <FormattedMessage
+            id="form.label_email"
+            values={Object {}}
+          />
+        }
+        name="email"
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        divClassName="col-sm-4"
+        id="isEmailConfirmed"
+        isReduxForm={true}
+        name="isEmailConfirmed"
+        type="checkbox"
+      >
+        <div>
+          <FormattedMessage
+            id="confirmed-by-email"
+            values={Object {}}
+          />
+           
+          <DatesInterval />
+        </div>
+      </Field>
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        divClassName="col-sm-4"
+        id="personal-data-form-firstname"
+        label={
+          <FormattedMessage
+            id="form.label_firstname"
+            values={Object {}}
+          />
+        }
+        name="firstname"
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        divClassName="col-sm-4"
+        id="personal-data-form-lastname"
+        label={
+          <FormattedMessage
+            id="form.label_lastname"
+            values={Object {}}
+          />
+        }
+        name="lastname"
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        divClassName="col-sm-4"
+        id="personal-data-form-gender"
+        label={
+          <FormattedMessage
+            id="form.label_gender"
+            values={Object {}}
+          />
+        }
+        name="gender"
+        type="select"
+      >
+        <option
+          value="MALE"
+        >
+          <FormattedMessage
+            id="gender.male"
+            values={Object {}}
+          />
+        </option>
+        <option
+          value="FEMALE"
+        >
+          <FormattedMessage
+            id="gender.female"
+            values={Object {}}
+          />
+        </option>
+        <option
+          value="OTHER"
+        >
+          <FormattedMessage
+            id="gender.other"
+            values={Object {}}
+          />
+        </option>
+      </Field>
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        componentId="personal-data-date-of-birth"
+        dayId="personal-data-date-of-birth-day"
+        disabled={true}
+        globalClassName="col-sm-4 form-group"
+        id="dateOfBirth"
+        label="form.label_date_of_birth"
+        monthId="personal-data-date-of-birth-month"
+        name="dateOfBirth"
+        yearId="personal-data-date-of-birth-year"
+      />
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        divClassName="col-sm-4"
+        id="personal-data-form-address"
+        label={
+          <FormattedMessage
+            id="form.label_address"
+            values={Object {}}
+          />
+        }
+        name="address"
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        divClassName="col-sm-4"
+        id="personal-data-form-address2"
+        label={
+          <FormattedMessage
+            id="form.label_address2"
+            values={Object {}}
+          />
+        }
+        name="address2"
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        divClassName="col-sm-4"
+        id="city"
+        label={
+          <FormattedMessage
+            id="form.label_city"
+            values={Object {}}
+          />
+        }
+        name="city"
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        divClassName="col-sm-4"
+        id="zipCode"
+        label={
+          <FormattedMessage
+            id="form.label_zip_code"
+            values={Object {}}
+          />
+        }
+        name="zipCode"
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        divClassName="col-sm-4"
+        id="phone"
+        label={
+          <FormattedMessage
+            id="form.label_phone"
+            values={Object {}}
+          />
+        }
+        name="phone"
+        type="text"
+      />
+      <div
+        className="clearfix"
+      />
+      <Field
+        component={[Function]}
+        disabled={true}
+        divClassName="col-sm-4"
+        id="phoneConfirmed"
+        name="phoneConfirmed"
+        type="checkbox"
+      >
+        <FormattedMessage
+          id="form.label_phone_confirmed"
+          values={Object {}}
+        />
+      </Field>
+      <div
+        className="clearfix"
+      />
+      <ButtonToolbar
+        bsClass="btn-toolbar"
+        className="box-content__toolbar"
+      >
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={true}
+          id="user-admin-personal-data-save"
+          type="submit"
+        >
+          <FormattedMessage
+            id="global.save_modifications"
+            values={Object {}}
+          />
+        </Button>
+        <AlertForm
+          errorMessage={null}
+          invalid={false}
+          submitFailed={false}
+          submitSucceeded={false}
+          submitting={false}
+          valid={true}
+        />
+      </ButtonToolbar>
+    </div>
+  </form>
+</div>
+`;

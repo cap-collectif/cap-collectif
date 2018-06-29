@@ -44,7 +44,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, { reset, intl }) => {
   return UpdateProfilePasswordMutation.commit({ input }).then(response => {
     if (
       !response.updateProfilePassword ||
-      !response.updateProfilePassword.viewer ||
+      !response.updateProfilePassword.user ||
       response.updateProfilePassword.error
     ) {
       if (response.updateProfilePassword && response.updateProfilePassword.error) {

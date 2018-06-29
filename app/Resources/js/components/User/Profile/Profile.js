@@ -68,7 +68,7 @@ const onSubmit = (values: Object, dispatch: Dispatch, props: Props) => {
 
   return UpdateProfilePublicDataMutation.commit({ input })
     .then(response => {
-      if (!response.updateProfilePublicData || !response.updateProfilePublicData.viewer) {
+      if (!response.updateProfilePublicData || !response.updateProfilePublicData.user) {
         throw new Error('Mutation "updateProfilePublicData" failed.');
       }
     })

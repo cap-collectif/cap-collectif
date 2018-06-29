@@ -65,7 +65,7 @@ class UserController extends Controller
         $id = $this->get('request')->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 
-        if (!$this->isGranted('ROLE_SUPER_ADMIN') && $object->hasRole('ROLE_SUPER_ADMIN')) {
+        if (!$this->isGranted('ROLE_ADMIN') && $object->hasRole('ROLE_ADMIN')) {
             throw $this->createAccessDeniedException();
         }
 

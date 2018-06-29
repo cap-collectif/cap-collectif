@@ -35,9 +35,11 @@ import EvaluationsIndexPageApp from '../js/startup/EvaluationsIndexPageApp';
 import ChooseAUsernameApp from '../js/startup/ChooseAUsernameApp';
 import appStore from '../js/stores/AppStore';
 import AccountProfileFollowingsApp from "../js/startup/AccountProfileFollowingsApp";
+import UserAdminCreateButtonApp from "../js/startup/UserAdminCreateButtonApp";
 import ParisUserNotValidApp from "../js/startup/ParisUserNotValidApp";
 import EditProfileApp from "../js/startup/EditProfileApp";
 import CookieApp from "../js/startup/CookieApp";
+import UserAdminPageApp from '../js/startup/UserAdminPageApp';
 
 const emptyFunction = () => {};
 
@@ -82,7 +84,9 @@ ReactOnRails.register({
   ShareButtonDropdownApp,
   ProposalFormAdminPageApp,
   GroupAdminPageApp,
+  UserAdminCreateButtonApp,
   ParisUserNotValidApp,
   EditProfileApp,
   CookieApp,
+  UserAdminPageApp,
 });

@@ -1,0 +1,206 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UserAdminCreateButton/> should render 1`] = `
+<div>
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="default"
+    disabled={false}
+    id="add-a-user-button"
+    onClick={[Function]}
+    style={
+      Object {
+        "marginTop": 10,
+      }
+    }
+  >
+    <div
+      id="add-a-user"
+    >
+      <FormattedMessage
+        id="add-a-user"
+        values={Object {}}
+      />
+    </div>
+  </Button>
+  <Modal
+    animation={false}
+    aria-labelledby="contained-modal-title-lg"
+    autoFocus={true}
+    backdrop={true}
+    bsClass="modal"
+    bsSize="large"
+    dialogComponentClass={[Function]}
+    enforceFocus={true}
+    keyboard={true}
+    manager={
+      ModalManager {
+        "add": [Function],
+        "containers": Array [],
+        "data": Array [],
+        "handleContainerOverflow": true,
+        "hideSiblingNodes": true,
+        "isTopModal": [Function],
+        "modals": Array [],
+        "remove": [Function],
+      }
+    }
+    onHide={[Function]}
+    renderBackdrop={[Function]}
+    restoreFocus={true}
+    show={true}
+  >
+    <ModalHeader
+      bsClass="modal-header"
+      closeButton={true}
+      closeLabel="Close"
+    >
+      <ModalTitle
+        bsClass="modal-title"
+        componentClass="h4"
+        id="contained-modal-title-lg"
+      >
+        <FormattedMessage
+          id="add-a-user"
+          values={Object {}}
+        />
+      </ModalTitle>
+    </ModalHeader>
+    <ModalBody
+      bsClass="modal-body"
+      componentClass="div"
+    >
+      <form>
+        <Field
+          component={[Function]}
+          id="username"
+          label={
+            <FormattedMessage
+              id="registration.username"
+              values={Object {}}
+            />
+          }
+          name="username"
+          type="text"
+        />
+        <Field
+          component={[Function]}
+          id="email"
+          label={
+            <FormattedMessage
+              id="global.email"
+              values={Object {}}
+            />
+          }
+          name="email"
+          type="email"
+        />
+        <Field
+          component={[Function]}
+          id="password"
+          label={
+            <FormattedMessage
+              id="registration.password"
+              values={Object {}}
+            />
+          }
+          name="plainPassword"
+          type="password"
+        />
+        <Connect(InjectIntl(SelectUserRoles))
+          id="user_roles"
+          label="form.label_real_roles"
+          name="roles"
+        />
+        <Field
+          component={[Function]}
+          id="vip"
+          isOtherAllowed={true}
+          label={
+            <FormattedMessage
+              id="admin.fields.step.statuses"
+              values={Object {}}
+            />
+          }
+          name="vip"
+          type="checkbox"
+          value="vip"
+        >
+          <FormattedMessage
+            id="form.label_vip"
+            values={Object {}}
+          />
+        </Field>
+        <Field
+          component={[Function]}
+          id="enabled"
+          isOtherAllowed={true}
+          name="enabled"
+          type="checkbox"
+          value="enabled"
+        >
+          <FormattedMessage
+            id="list.label_enabled"
+            values={Object {}}
+          />
+        </Field>
+        <Field
+          component={[Function]}
+          id="locked"
+          isOtherAllowed={true}
+          name="locked"
+          type="checkbox"
+          value="locked"
+        >
+          <FormattedMessage
+            id="list.label_locked"
+            values={Object {}}
+          />
+        </Field>
+      </form>
+    </ModalBody>
+    <ModalFooter
+      bsClass="modal-footer"
+      componentClass="div"
+    >
+      <ButtonGroup
+        block={false}
+        bsClass="btn-group"
+        className="pl-0 d-flex d-inline-block"
+        justified={false}
+        vertical={false}
+      >
+        <CloseButton
+          label="global.cancel"
+          onClose={[Function]}
+        />
+        <Button
+          active={false}
+          block={false}
+          bsClass="btn"
+          bsStyle="primary"
+          disabled={false}
+          id="confirm-user-create"
+          onClick={[MockFunction]}
+          type="submit"
+        >
+          <FormattedMessage
+            id="global.add"
+            values={Object {}}
+          />
+        </Button>
+        <AlertForm
+          errorMessage={null}
+          invalid={false}
+          submitFailed={false}
+          submitSucceeded={false}
+          submitting={false}
+          valid={true}
+        />
+      </ButtonGroup>
+    </ModalFooter>
+  </Modal>
+</div>
+`;
