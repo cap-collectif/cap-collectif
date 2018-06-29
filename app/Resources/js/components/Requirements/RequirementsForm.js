@@ -172,6 +172,7 @@ export class RequirementsForm extends React.Component<Props> {
                     ? 'col-sm-12 col-xs-12'
                     : 'col-sm-12 col-xs-12'
                 }
+                id={requirement.id}
                 key={requirement.id}
                 name={requirement.id}
                 label={requirement.__typename !== 'CheckboxRequirement' && getLabel(requirement)}
