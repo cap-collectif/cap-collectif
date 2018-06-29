@@ -67,29 +67,21 @@
               {{ react_render_component('GroupCreateButtonApp') }}
           </li>
       </ul>
-  {% elseif admin.class == 'Capco\\UserBundle\\Entity\\User' and admin.subject is same as(false) %}
-      {# TODO redux store in global #}
-  {% include '@CapcoApp/redux_store.html.twig' %}
-      <ul class="nav navbar-nav navbar-right">
-          <li>
-              {{ react_render_component('UserAdminCreateButtonApp') }}
-          </li>
-      </ul>
   {% endif %}
-{% if _actions|replace({ '<li>': '', '</li>': '' })|trim is not empty %}
-    <ul class="nav navbar-nav navbar-right">
-    {% if _actions|split('</a>')|length > 2 %}
-        <li class="dropdown sonata-actions">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ 'link_actions'|trans({}, 'CapcoAppBundle') }} <b class="caret"></b></a>
-            <ul class="dropdown-menu" role="menu">
-                {{ _actions|raw }}
-            </ul>
-        </li>
-    {% else %}
-        {{ _actions|raw }}
+    {% if _actions|replace({ '<li>': '', '</li>': '' })|trim is not empty %}
+        <ul class="nav navbar-nav navbar-right">
+        {% if _actions|split('</a>')|length > 2 %}
+            <li class="dropdown sonata-actions">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ 'link_actions'|trans({}, 'CapcoAppBundle') }} <b class="caret"></b></a>
+                <ul class="dropdown-menu" role="menu">
+                    {{ _actions|raw }}
+                </ul>
+            </li>
+        {% else %}
+            {{ _actions|raw }}
+        {% endif %}
+        </ul>
     {% endif %}
-    </ul>
-{% endif %}
 {% endblock sonata_admin_content_actions_wrappers %}
 
 {% block logo %}

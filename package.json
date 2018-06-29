@@ -67,7 +67,7 @@
     },
     {
       "path": "./web/js/app.js",
-      "maxSize": "450 kB"
+      "maxSize": "411 kB"
     },
     {
       "path": "./web/js/vendor.js",
@@ -121,7 +121,6 @@
     "brunch": "2.10.10",
     "classnames": "^2.2.3",
     "clean-css-brunch": "^2.10.0",
-    "create-react-class": "^15.6.3",
     "diff": "^3.3.0",
     "enzyme-to-json": "^3.3.4",
     "exports-loader": "^0.6.3",
@@ -151,11 +150,12 @@
     "react-async-script": "^0.9.1",
     "react-beautiful-dnd": "6.0.2",
     "react-bootstrap": "^0.31.2",
+    "react-checkbox-group": "^4.0.1",
     "react-datetime": "^2.9.0",
     "react-dnd": "^2.4.0",
     "react-dnd-html5-backend": "^2.4.1",
     "react-dom": "16.4.1",
-    "react-dropdown-date": "https://github.com/cap-collectif/react-dropdown-date/tarball/dd55c48",
+    "react-dropdown-date": "https://github.com/cap-collectif/react-dropdown-date/tarball/8b2c37c",
     "react-dropzone": "^3.3.4",
     "react-google-charts": "^1.0.2",
     "react-google-recaptcha": "^0.9.6",

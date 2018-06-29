@@ -3,9 +3,6 @@ UpdateProfilePersonalDataInput:
     config:
         description: "Your personal data"
         fields:
-            userId:
-                type: "ID"
-                description: "(ROLE_SUPER_ADMIN only) the user to update, if not provided the viewer is updated."
             firstname:
                 type: "String"
                 description: "Your firstname"
@@ -33,9 +30,3 @@ UpdateProfilePersonalDataInput:
             dateOfBirth:
                 type: "String"
                 description: "Your date of birth"
-            phoneConfirmed:
-                type: "Boolean"
-                description: "Is your phone confirmed ?"
-            email:
-                type: "String"
-                description: "Your email"

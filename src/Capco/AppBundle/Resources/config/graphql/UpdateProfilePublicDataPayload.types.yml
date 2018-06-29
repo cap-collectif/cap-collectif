@@ -2,6 +2,6 @@ UpdateProfilePublicDataPayload:
     type: relay-mutation-payload
     config:
         fields:
-            user:
+            viewer:
                 type: "User!"
-                description: "The user who just have been updated"
+                description: "current user"

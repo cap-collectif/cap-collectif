@@ -1,7 +1,0 @@
-CreateUserPayload:
-    type: relay-mutation-payload
-    config:
-        fields:
-            user:
-                type: "User"
-                description: "The created user, if everything goes well !"

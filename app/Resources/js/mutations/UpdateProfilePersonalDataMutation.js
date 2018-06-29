@@ -12,10 +12,9 @@ export type UpdateProfilePersonalDataMutationResponse = Response;
 const mutation = graphql`
   mutation UpdateProfilePersonalDataMutation($input: UpdateProfilePersonalDataInput!) {
     updateProfilePersonalData(input: $input) {
-      user {
+      viewer {
         id
         ...PersonalData_viewer
-        ...UserAdminPersonalData_user
       }
     }
   }

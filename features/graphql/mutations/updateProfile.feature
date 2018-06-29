@@ -1,4 +1,4 @@
-@user @user_graphql
+@user
 Feature: Update a user
 
 @database
@@ -44,7 +44,7 @@ Scenario: User should be able to update his personal data
   {
     "query": "mutation UpdateProfilePersonalDataMutation($input: UpdateProfilePersonalDataInput!) {
       updateProfilePersonalData(input: $input) {
-        user {
+        viewer {
           id
           firstname
           lastname
@@ -78,7 +78,7 @@ Scenario: User should be able to update his personal data
   {
     "data": {
       "updateProfilePersonalData": {
-        "user": {
+        "viewer": {
           "id": "user5",
           "firstname": "New firstname",
           "lastname": "new lastname",
@@ -92,111 +92,6 @@ Scenario: User should be able to update his personal data
         }
       }
     }
-  }
-  """
-
-@database
-Scenario: A super admin wants to update personal data of an other user
-  Given I am logged in to graphql as super admin
-  And I send a GraphQL POST request:
-  """
-  {
-    "query": "mutation UpdateProfilePersonalDataMutation($input: UpdateProfilePersonalDataInput!) {
-      updateProfilePersonalData(input: $input) {
-        user {
-          id
-          firstname
-          lastname
-          gender
-          dateOfBirth
-          address
-          address2
-          city
-          zipCode
-          phone
-        }
-      }
-    }",
-    "variables": {
-      "input": {
-        "userId": "user516",
-        "firstname": "New firstname",
-        "lastname": "new lastname",
-        "gender": "OTHER",
-        "dateOfBirth": "1992-12-12",
-        "address": "noway",
-        "address2":	null,
-        "city": "Paris",
-        "zipCode": "75012",
-        "phone": null
-      }
-    }
-  }
-  """
-  Then the JSON response should match:
-  """
-  {
-    "data": {
-      "updateProfilePersonalData": {
-        "user": {
-          "id": "user516",
-          "firstname": "New firstname",
-          "lastname": "new lastname",
-          "gender": "OTHER",
-          "dateOfBirth": "1992-12-12T00:00:00+01:00",
-          "address":"noway",
-          "address2": null,
-          "city": "Paris",
-          "zipCode": "75012",
-          "phone": null
-        }
-      }
-    }
-  }
-  """
-
-@security
-Scenario: User should not be able to update personal data of an other user
-  Given I am logged in to graphql as user
-  And I send a GraphQL POST request:
-  """
-  {
-    "query": "mutation UpdateProfilePersonalDataMutation($input: UpdateProfilePersonalDataInput!) {
-      updateProfilePersonalData(input: $input) {
-        user {
-          id
-          firstname
-          lastname
-          gender
-          dateOfBirth
-          address
-          address2
-          city
-          zipCode
-          phone
-        }
-      }
-    }",
-    "variables": {
-      "input": {
-        "userId": "user516",
-        "firstname": "New firstname",
-        "lastname": "new lastname",
-        "gender": "OTHER",
-        "dateOfBirth": "1992-12-12",
-        "address": "noway",
-        "address2":	null,
-        "city": "Paris",
-        "zipCode": "75012",
-        "phone": null
-      }
-    }
-  }
-  """
-  Then the JSON response should match:
-  """
-  {
-    "errors":[{"message":"Only a SUPER_ADMIN can edit data from another user. Or the account owner","locations":[{"line":1,"column":90}],"path":["updateProfilePersonalData"]}],"data":{"updateProfilePersonalData":null}
   }
   """
 
@@ -208,7 +103,7 @@ Scenario: User should be able to update his public data
   {
     "query": "mutation UpdateProfilePublicDataMutation($input: UpdateProfilePublicDataInput!) {
       updateProfilePublicData(input: $input) {
-        user {
+        viewer {
           id
           username
           website
@@ -230,7 +125,7 @@ Scenario: User should be able to update his public data
   {
     "data": {
       "updateProfilePublicData": {
-        "user": {
+        "viewer": {
           "id": "user5",
           "username": "New username",
           "website": "http://perdu.com",
@@ -242,81 +137,6 @@ Scenario: User should be able to update his public data
   """
 
 @database
-Scenario: Super Admin should be able to update public data of an other user
-  Given I am logged in to graphql as super admin
-  And I send a GraphQL POST request:
-  """
-  {
-    "query": "mutation UpdateProfilePublicDataMutation($input: UpdateProfilePublicDataInput!) {
-      updateProfilePublicData(input: $input) {
-        user {
-          id
-          username
-          website
-          biography
-        }
-      }
-    }",
-    "variables": {
-      "input": {
-        "userId": "user516",
-        "username": "New username",
-        "website": "http://perdu.com",
-        "biography": null
-      }
-    }
-  }
-  """
-  Then the JSON response should match:
-  """
-  {
-    "data": {
-      "updateProfilePublicData": {
-        "user": {
-          "id": "user516",
-          "username": "New username",
-          "website": "http://perdu.com",
-          "biography": null
-        }
-      }
-    }
-  }
-  """
-
-@security
-Scenario: User should not be able to update personal data of an other user
-  Given I am logged in to graphql as user
-  And I send a GraphQL POST request:
-  """
-  {
-    "query": "mutation UpdateProfilePublicDataMutation($input: UpdateProfilePublicDataInput!) {
-      updateProfilePublicData(input: $input) {
-        user {
-          id
-          username
-          website
-          biography
-        }
-      }
-    }",
-    "variables": {
-      "input": {
-        "userId": "user516",
-        "username": "New username",
-        "website": "http://perdu.com",
-        "biography": null
-      }
-    }
-  }
-  """
-  Then the JSON response should match:
-  """
-  {
-    "errors":[{"message":"Only a SUPER_ADMIN can edit data from another user. Or the account owner","locations":[{"line":1,"column":86}],"path":["updateProfilePublicData"]}],"data":{"updateProfilePublicData":null}
-  }
-  """
-
-@security
 Scenario: User should be able to update his public data, but username is missing
   Given I am logged in to graphql as user
   And I send a GraphQL POST request:
@@ -324,7 +144,7 @@ Scenario: User should be able to update his public data, but username is missing
   {
     "query": "mutation UpdateProfilePublicDataMutation($input: UpdateProfilePublicDataInput!) {
       updateProfilePublicData(input: $input) {
-        user {
+        viewer {
           id
         }
       }
@@ -351,7 +171,7 @@ Scenario: User should be able to update his password
   {
     "query": "mutation UpdateProfilePasswordMutation($input: UpdateProfilePasswordInput!) {
       updateProfilePassword(input: $input) {
-        user {
+        viewer {
           id
           username
         }
@@ -371,7 +191,7 @@ Scenario: User should be able to update his password
   {
     "data": {
       "updateProfilePassword": {
-        "user": {
+        "viewer": {
           "id": "user5",
           "username": "user"
         },
@@ -381,7 +201,7 @@ Scenario: User should be able to update his password
   }
   """
 
-@security
+@database
 Scenario: User should be able to update his password, but give a bad current password
   Given I am logged in to graphql as user
   And I send a GraphQL POST request:
@@ -389,7 +209,7 @@ Scenario: User should be able to update his password, but give a bad current pas
   {
     "query": "mutation UpdateProfilePasswordMutation($input: UpdateProfilePasswordInput!) {
       updateProfilePassword(input: $input) {
-        user {
+        viewer {
           id
           username
         },
@@ -409,7 +229,7 @@ Scenario: User should be able to update his password, but give a bad current pas
   {
     "data":{
       "updateProfilePassword":{
-        "user":{
+        "viewer":{
           "id":"user5",
           "username":"user"
         },
@@ -417,121 +237,5 @@ Scenario: User should be able to update his password, but give a bad current pas
       }
     }
   }
-  """
 
-@database
-Scenario: Super admin should be able to update other user account
-  Given I am logged in to graphql as super admin
-  And I send a GraphQL POST request:
-  """
-  {
-    "query": "mutation UpdateUserAccountMutation($input: UpdateUserAccountInput!) {
-      updateUserAccount(input: $input) {
-        user {
-          id
-          vip
-          enabled
-          roles
-        }
-      }
-    }",
-    "variables": {
-      "input": {
-        "userId": "user516",
-        "vip": true,
-        "enabled": true,
-        "roles": ["ROLE_ADMIN", "ROLE_USER", "ROLE_SUPER_ADMIN"]
-      }
-    }
-  }
-  """
-  Then the JSON response should match:
-  """
-  {
-    "data":{
-      "updateUserAccount":{
-        "user":{
-          "id":"user516",
-          "vip":true,
-          "enabled":true,
-          "roles":["ROLE_USER","ROLE_SUPER_ADMIN","ROLE_ADMIN"]
-        }
-      }
-    }
-  }
-  """
-
-@database
-Scenario: Admin should be able to update other user account
-  Given I am logged in to graphql as admin
-  And I send a GraphQL POST request:
-  """
-  {
-    "query": "mutation UpdateUserAccountMutation($input: UpdateUserAccountInput!) {
-      updateUserAccount(input: $input) {
-        user {
-          id
-          vip
-          enabled
-          roles
-        }
-      }
-    }",
-    "variables": {
-      "input": {
-        "userId": "user516",
-        "vip": true,
-        "enabled": true,
-        "roles": ["ROLE_ADMIN", "ROLE_USER"]
-      }
-    }
-  }
-  """
-  Then the JSON response should match:
-  """
-  {
-    "data":{
-      "updateUserAccount":{
-        "user":{
-          "id":"user516",
-          "vip":true,
-          "enabled":true,
-          "roles":["ROLE_USER","ROLE_SUPER_ADMIN","ROLE_ADMIN"]
-        }
-      }
-    }
-  }
-  """
-
-@security
-Scenario: Admin should not be able to update other/own user as super admin
-  Given I am logged in to graphql as admin
-  And I send a GraphQL POST request:
-  """
-  {
-    "query": "mutation UpdateUserAccountMutation($input: UpdateUserAccountInput!) {
-      updateUserAccount(input: $input) {
-        user {
-          id
-          vip
-          enabled
-          roles
-        }
-      }
-    }",
-    "variables": {
-      "input": {
-        "userId": "userAdmin",
-        "vip": true,
-        "enabled": true,
-        "roles": ["ROLE_ADMIN", "ROLE_SUPER_ADMIN", "ROLE_USER"]
-      }
-    }
-  }
-  """
-  Then the JSON response should match:
-  """
-  {
-"errors":[{"message":"You are not able to add super_admin role to a user.","locations":[{"line":1,"column":74}],"path":["updateUserAccount"]}],"data":{"updateUserAccount":null}
-  }
   """

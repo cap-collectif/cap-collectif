@@ -634,30 +634,6 @@ type CreateProposalPayload {
   clientMutationId: String
 }
 
-input CreateUserInput {
-  # The user's username
-  username: String!
-
-  # The user's username
-  email: String!
-
-  # The user's password
-  plainPassword: String
-
-  # Unattended roles as array.
-  roles: [String]
-  locked: Boolean
-  vip: Boolean
-  enabled: Boolean
-  clientMutationId: String
-}
-
-type CreateUserPayload {
-  # The created user, if everything goes well !
-  user: User
-  clientMutationId: String
-}
-
 scalar CssJSON
 
 scalar DateTime
@@ -665,9 +641,6 @@ scalar DateTime
 input DeleteAccountInput {
   # You must chose a strategy to delete your account
   type: DeleteAccountType!
-
-  # The user to delete
-  userId: ID
   clientMutationId: String
 }
 
@@ -1065,8 +1038,6 @@ type Mutation {
   updateProfilePublicData(input: UpdateProfilePublicDataInput!): UpdateProfilePublicDataPayload
   deleteAccount(input: DeleteAccountInput!): DeleteAccountPayload
   updateRequirement(input: UpdateRequirementInput!): UpdateRequirementPayload
-  createUser(input: CreateUserInput!): CreateUserPayload
-  updateUserAccount(input: UpdateUserAccountInput!): UpdateUserAccountPayload
 }
 
 # A connection to a list of items.
@@ -2572,8 +2543,8 @@ input UpdateProfilePasswordInput {
 }
 
 type UpdateProfilePasswordPayload {
-  # The user who just have been updated
-  user: User!
+  # The viewer
+  viewer: User!
 
   # The error
   error: String
@@ -2587,9 +2558,6 @@ type UpdateProfilePayload {
 }
 
 input UpdateProfilePersonalDataInput {
-  # (ROLE_SUPER_ADMIN only) the user to update, if not provided the viewer is updated.
-  userId: ID
-
   # Your firstname
   firstname: String
 
@@ -2616,25 +2584,16 @@ input UpdateProfilePersonalDataInput {
 
   # Your date of birth
   dateOfBirth: String
-
-  # Is your phone confirmed ?
-  phoneConfirmed: Boolean
-
-  # Your email
-  email: String
   clientMutationId: String
 }
 
 type UpdateProfilePersonalDataPayload {
-  # The user who just have been updated
-  user: User!
+  # The viewer
+  viewer: User!
   clientMutationId: String
 }
 
 input UpdateProfilePublicDataInput {
-  # (ROLE_SUPER_ADMIN only) the user to update, if not provided the viewer is updated.
-  userId: ID
-
   # Your username
   username: String!
 
@@ -2668,8 +2627,8 @@ input UpdateProfilePublicDataInput {
 }
 
 type UpdateProfilePublicDataPayload {
-  # The user who just have been updated
-  user: User!
+  # current user
+  viewer: User!
   clientMutationId: String
 }
 
@@ -2773,22 +2732,6 @@ type UpdateRequirementPayload {
   clientMutationId: String
 }
 
-input UpdateUserAccountInput {
-  userId: ID!
-
-  # Unattended roles as array.
-  roles: [UserRoles]
-  locked: Boolean
-  vip: Boolean
-  enabled: Boolean
-  clientMutationId: String
-}
-
-type UpdateUserAccountPayload {
-  user: User!
-  clientMutationId: String
-}
-
 # A user is an individual's account.
 type User implements Node {
   # The id of the user.
@@ -2827,7 +2770,7 @@ type User implements Node {
   notificationsConfiguration: UserNotificationsConfiguration!
   locked: Boolean!
   phoneConfirmed: Boolean!
-  expiresAt: DateTime
+  expiresAt: String
   phoneConfirmationSentAt: String
   gender: GenderValue
   firstname: String
@@ -2963,21 +2906,6 @@ type User implements Node {
     # Returns the last n elements from the list.
     last: Int
   ): ContributionConnection!
-
-  # Is user subscribed to the newsletter ?
-  isSubscribedToNewsLetter: Boolean
-
-  # The user subrscibes to the newsletter at date
-  subscribedToNewsLetterAt: DateTime
-
-  # Is user given the current viewer ?
-  isViewer: Boolean!
-
-  # Has the user confirmed his email address ?
-  isEmailConfirmed: Boolean
-
-  # The user's email was confirmed at date
-  emailConfirmationSentAt: DateTime
 }
 
 # A connection to a list of items.
@@ -3020,13 +2948,6 @@ type UserGroup {
 type UserNotificationsConfiguration {
   # A boolean representing if the user wants to receive notifications by mail when someone commented his proposal
   onProposalCommentMail: Boolean!
-}
-
-# 3 possible values
-enum UserRoles {
-  ROLE_USER
-  ROLE_ADMIN
-  ROLE_SUPER_ADMIN
 }
 
 # A type of person

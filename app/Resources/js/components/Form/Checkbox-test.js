@@ -13,8 +13,8 @@ describe('<Checkbox />', () => {
     required: true,
     isOtherAllowed: false,
     choices: [
-      { id: 20, label: 'Athlétisme', useIdAsValue: true },
-      { id: 21, label: 'Natation', useIdAsValue: true },
+      { id: 20, label: 'Athlétisme' },
+      { id: 21, label: 'Natation' },
       { id: 22, label: 'Sports collectifs' },
       { id: 23, label: 'Sports individuels' },
     ],
@@ -25,7 +25,6 @@ describe('<Checkbox />', () => {
     value: {
       labels: 'label',
     },
-    returnValue: false,
     disabled: false,
     onChange: jest.fn(),
     onBlur: jest.fn(),

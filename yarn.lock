@@ -3004,7 +3004,7 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-create-react-class@^15.5.1, create-react-class@^15.6.0, create-react-class@^15.6.2, create-react-class@^15.6.3:
+create-react-class@^15.5.1, create-react-class@^15.6.0, create-react-class@^15.6.2:
   version "15.6.3"
   resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.6.3.tgz#2d73237fb3f970ae6ebe011a9e66f46dbca80036"
   dependencies:
@@ -8437,6 +8437,10 @@ react-bootstrap@^0.31.2:
     uncontrollable "^4.1.0"
     warning "^3.0.0"
 
+react-checkbox-group@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/react-checkbox-group/-/react-checkbox-group-4.0.1.tgz#79b1c17cb406b23aaf5c0985a2332229d106279a"
+
 react-class@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/react-class/-/react-class-2.1.0.tgz#0a7adf1c1951f4d9bf2a4da7c23c2bc77566c642"
@@ -8508,9 +8512,9 @@ react-dom@^15.3.2:
     object-assign "^4.1.0"
     prop-types "^15.5.10"
 
-"react-dropdown-date@https://github.com/cap-collectif/react-dropdown-date/tarball/dd55c48":
+"react-dropdown-date@https://github.com/cap-collectif/react-dropdown-date/tarball/8b2c37c":
   version "0.0.13"
-  resolved "https://github.com/cap-collectif/react-dropdown-date/tarball/dd55c48#cb4c74fa7de20b271a5e96611cfbf82c9e13869c"
+  resolved "https://github.com/cap-collectif/react-dropdown-date/tarball/8b2c37c#48f529794d07642e1f66cedce92e375c37adbbd1"
   dependencies:
     react "^16.3.1"
 

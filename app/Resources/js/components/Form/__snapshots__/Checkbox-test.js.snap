@@ -16,74 +16,81 @@ exports[`<Checkbox /> should render correctly 1`] = `
   >
     Plusieurs choix sont possibles
   </span>
-  <div
-    key="choice-20"
+  <CheckboxGroup
+    Component="div"
+    className="input-choices"
+    id="choices-for-field-11"
+    name="choices-for-field-11"
   >
-    <InjectIntl(ReactBootstrapInput)
-      checked={false}
-      disabled={false}
-      id="reply-1_choice-20"
-      image={null}
-      name="choices-for-field-11"
-      onBlur={[Function]}
-      onChange={[Function]}
-      type="checkbox"
-      value={20}
+    <div
+      key="choice-20"
     >
-      Athlétisme
-    </InjectIntl(ReactBootstrapInput)>
-  </div>
-  <div
-    key="choice-21"
-  >
-    <InjectIntl(ReactBootstrapInput)
-      checked={false}
-      disabled={false}
-      id="reply-1_choice-21"
-      image={null}
-      name="choices-for-field-11"
-      onBlur={[Function]}
-      onChange={[Function]}
-      type="checkbox"
-      value={21}
+      <InjectIntl(ReactBootstrapInput)
+        checked={false}
+        disabled={false}
+        id="reply-1_choice-20"
+        image={null}
+        name="choices-for-field-11"
+        onBlur={[Function]}
+        onChange={[Function]}
+        type="checkbox"
+        value="Athlétisme"
+      >
+        Athlétisme
+      </InjectIntl(ReactBootstrapInput)>
+    </div>
+    <div
+      key="choice-21"
     >
-      Natation
-    </InjectIntl(ReactBootstrapInput)>
-  </div>
-  <div
-    key="choice-22"
-  >
-    <InjectIntl(ReactBootstrapInput)
-      checked={false}
-      disabled={false}
-      id="reply-1_choice-22"
-      image={null}
-      name="choices-for-field-11"
-      onBlur={[Function]}
-      onChange={[Function]}
-      type="checkbox"
-      value="Sports collectifs"
+      <InjectIntl(ReactBootstrapInput)
+        checked={false}
+        disabled={false}
+        id="reply-1_choice-21"
+        image={null}
+        name="choices-for-field-11"
+        onBlur={[Function]}
+        onChange={[Function]}
+        type="checkbox"
+        value="Natation"
+      >
+        Natation
+      </InjectIntl(ReactBootstrapInput)>
+    </div>
+    <div
+      key="choice-22"
     >
-      Sports collectifs
-    </InjectIntl(ReactBootstrapInput)>
-  </div>
-  <div
-    key="choice-23"
-  >
-    <InjectIntl(ReactBootstrapInput)
-      checked={false}
-      disabled={false}
-      id="reply-1_choice-23"
-      image={null}
-      name="choices-for-field-11"
-      onBlur={[Function]}
-      onChange={[Function]}
-      type="checkbox"
-      value="Sports individuels"
+      <InjectIntl(ReactBootstrapInput)
+        checked={false}
+        disabled={false}
+        id="reply-1_choice-22"
+        image={null}
+        name="choices-for-field-11"
+        onBlur={[Function]}
+        onChange={[Function]}
+        type="checkbox"
+        value="Sports collectifs"
+      >
+        Sports collectifs
+      </InjectIntl(ReactBootstrapInput)>
+    </div>
+    <div
+      key="choice-23"
     >
-      Sports individuels
-    </InjectIntl(ReactBootstrapInput)>
-  </div>
+      <InjectIntl(ReactBootstrapInput)
+        checked={false}
+        disabled={false}
+        id="reply-1_choice-23"
+        image={null}
+        name="choices-for-field-11"
+        onBlur={[Function]}
+        onChange={[Function]}
+        type="checkbox"
+        value="Sports individuels"
+      >
+        Sports individuels
+      </InjectIntl(ReactBootstrapInput)>
+    </div>
+  </CheckboxGroup>
 </div>
 `;
 
@@ -103,108 +110,113 @@ exports[`<Checkbox /> should render with an other field 1`] = `
   >
     Plusieurs choix sont possibles
   </span>
-  <div
-    key="choice-20"
+  <CheckboxGroup
+    Component="div"
+    className="input-choices"
+    id="choices-for-field-11"
+    name="choices-for-field-11"
   >
-    <InjectIntl(ReactBootstrapInput)
-      checked={false}
-      disabled={false}
-      id="reply-1_choice-20"
-      image={null}
-      name="choices-for-field-11"
-      onBlur={[Function]}
-      onChange={[Function]}
-      type="checkbox"
-      value={20}
+    <div
+      key="choice-20"
     >
-      Athlétisme
-    </InjectIntl(ReactBootstrapInput)>
-  </div>
-  <div
-    key="choice-21"
-  >
-    <InjectIntl(ReactBootstrapInput)
-      checked={false}
-      disabled={false}
-      id="reply-1_choice-21"
-      image={null}
-      name="choices-for-field-11"
-      onBlur={[Function]}
-      onChange={[Function]}
-      type="checkbox"
-      value={21}
+      <InjectIntl(ReactBootstrapInput)
+        checked={false}
+        disabled={false}
+        id="reply-1_choice-20"
+        image={null}
+        name="choices-for-field-11"
+        onBlur={[Function]}
+        onChange={[Function]}
+        type="checkbox"
+        value="Athlétisme"
+      >
+        Athlétisme
+      </InjectIntl(ReactBootstrapInput)>
+    </div>
+    <div
+      key="choice-21"
     >
-      Natation
-    </InjectIntl(ReactBootstrapInput)>
-  </div>
-  <div
-    key="choice-22"
-  >
-    <InjectIntl(ReactBootstrapInput)
-      checked={false}
-      disabled={false}
-      id="reply-1_choice-22"
-      image={null}
-      name="choices-for-field-11"
-      onBlur={[Function]}
-      onChange={[Function]}
-      type="checkbox"
-      value="Sports collectifs"
+      <InjectIntl(ReactBootstrapInput)
+        checked={false}
+        disabled={false}
+        id="reply-1_choice-21"
+        image={null}
+        name="choices-for-field-11"
+        onBlur={[Function]}
+        onChange={[Function]}
+        type="checkbox"
+        value="Natation"
+      >
+        Natation
+      </InjectIntl(ReactBootstrapInput)>
+    </div>
+    <div
+      key="choice-22"
     >
-      Sports collectifs
-    </InjectIntl(ReactBootstrapInput)>
-  </div>
-  <div
-    key="choice-23"
-  >
-    <InjectIntl(ReactBootstrapInput)
-      checked={false}
-      disabled={false}
-      id="reply-1_choice-23"
-      image={null}
-      name="choices-for-field-11"
-      onBlur={[Function]}
-      onChange={[Function]}
-      type="checkbox"
-      value="Sports individuels"
+      <InjectIntl(ReactBootstrapInput)
+        checked={false}
+        disabled={false}
+        id="reply-1_choice-22"
+        image={null}
+        name="choices-for-field-11"
+        onBlur={[Function]}
+        onChange={[Function]}
+        type="checkbox"
+        value="Sports collectifs"
+      >
+        Sports collectifs
+      </InjectIntl(ReactBootstrapInput)>
+    </div>
+    <div
+      key="choice-23"
     >
-      Sports individuels
-    </InjectIntl(ReactBootstrapInput)>
-  </div>
-  <Other
-    disabled={false}
-    field={
-      Object {
-        "choices": Array [
-          Object {
-            "id": 20,
-            "label": "Athlétisme",
-            "useIdAsValue": true,
-          },
-          Object {
-            "id": 21,
-            "label": "Natation",
-            "useIdAsValue": true,
-          },
-          Object {
-            "id": 22,
-            "label": "Sports collectifs",
-          },
-          Object {
-            "id": 23,
-            "label": "Sports individuels",
-          },
-        ],
-        "helpText": "Plusieurs choix sont possibles",
-        "id": 11,
-        "isOtherAllowed": true,
-        "required": true,
-        "slug": "pour-quel-type-d-epreuve-etes-vous-pret-a-acheter-des-places",
-        "type": "checkbox",
+      <InjectIntl(ReactBootstrapInput)
+        checked={false}
+        disabled={false}
+        id="reply-1_choice-23"
+        image={null}
+        name="choices-for-field-11"
+        onBlur={[Function]}
+        onChange={[Function]}
+        type="checkbox"
+        value="Sports individuels"
+      >
+        Sports individuels
+      </InjectIntl(ReactBootstrapInput)>
+    </div>
+    <Other
+      disabled={false}
+      field={
+        Object {
+          "choices": Array [
+            Object {
+              "id": 20,
+              "label": "Athlétisme",
+            },
+            Object {
+              "id": 21,
+              "label": "Natation",
+            },
+            Object {
+              "id": 22,
+              "label": "Sports collectifs",
+            },
+            Object {
+              "id": 23,
+              "label": "Sports individuels",
+            },
+          ],
+          "helpText": "Plusieurs choix sont possibles",
+          "id": 11,
+          "isOtherAllowed": true,
+          "required": true,
+          "slug": "pour-quel-type-d-epreuve-etes-vous-pret-a-acheter-des-places",
+          "type": "checkbox",
+        }
       }
-    }
-    onChange={[Function]}
-    value=""
-  />
+      onChange={[Function]}
+      value=""
+    />
+  </CheckboxGroup>
 </div>
 `;

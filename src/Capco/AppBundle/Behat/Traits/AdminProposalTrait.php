@@ -31,7 +31,7 @@ trait AdminProposalTrait
         $page = $this->getCurrentPage();
         $this->iWait(3); // Wait alert to disappear
         $this->getSession()->wait(3000, "$('" . $page->getSelector('proposal ' . $tab . ' tab') . "').length > 0");
-        $page->clickOnTab("proposal $tab");
+        $page->clickOnTab($tab);
         $this->iWait(1);
     }
 
@@ -185,5 +185,17 @@ trait AdminProposalTrait
     {
         $element = '#proposal-admin-page-tabs-pane-6 input[type="radio"][name="publicationStatus"][value="' . $status . '"]+span';
         $this->getCurrentPage()->find('css', $element);
+    }
+
+    /**
+     * @Then I click on button :id
+     */
+    public function iClickOnButton(string $id)
+    {
+        $this->getCurrentPage()->find('css', $id)->click();
+    }
+
+    public function theDonwloadedFileShouldStartWith($header)
+    {
     }
 }

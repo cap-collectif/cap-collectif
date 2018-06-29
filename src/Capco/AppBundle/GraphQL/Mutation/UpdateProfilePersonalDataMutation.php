@@ -4,18 +4,32 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\PersonalDataFormType;
+use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Form\FormFactory;
 
-class UpdateProfilePersonalDataMutation extends BaseUpdateProfile
+class UpdateProfilePersonalDataMutation
 {
+    private $em;
+    private $formFactory;
+    private $logger;
+
+    public function __construct(EntityManagerInterface $em, FormFactory $formFactory, LoggerInterface $logger)
+    {
+        $this->em = $em;
+        $this->formFactory = $formFactory;
+        $this->logger = $logger;
+    }
+
     public function __invoke(Argument $input, User $user): array
     {
-        parent::__invoke($input, $user);
+        $arguments = $input->getRawArguments();
 
-        $form = $this->formFactory->create(PersonalDataFormType::class, $this->user, ['csrf_protection' => false]);
+        $form = $this->formFactory->create(PersonalDataFormType::class, $user, ['csrf_protection' => false]);
         try {
-            $form->submit($this->arguments, false);
+            $form->submit($arguments, false);
         } catch (\LogicException $e) {
             $this->logger->error(__METHOD__ . ' : ' . $e->getMessage());
         }
@@ -27,6 +41,6 @@ class UpdateProfilePersonalDataMutation extends BaseUpdateProfile
 
         $this->em->flush();
 
-        return [self::USER => $this->user];
+        return ['viewer' => $user];
     }
 }

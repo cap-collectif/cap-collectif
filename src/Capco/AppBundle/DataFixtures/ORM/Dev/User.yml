@@ -378,7 +378,6 @@ Capco\UserBundle\Entity\User:
         media: '@MediaUser5'
         vip: true
         confirmationToken: ~
-        emailConfirmationSentAt: '2018-06-06 13:37:00'
 
     user517:
          id: 'user517'

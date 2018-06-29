@@ -4,12 +4,7 @@ exports[`<ProposalAdminPageTabs /> render correctly 1`] = `
 <div>
   <p>
     <strong>
-      <FormattedMessage
-        id="permalink"
-        values={Object {}}
-      />
-       :
-       
+      Permalien : 
     </strong>
      
     <a
