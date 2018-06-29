@@ -47,7 +47,7 @@ class ProposalForm
     protected $updatedAt;
 
     // Sonata always triggering _clone so we had to do this :/
-    //@todo change this
+    //@todo change this https://github.com/cap-collectif/platform/issues/5700
     protected $cloneEnable = false;
 
     /**
