@@ -9,7 +9,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20180527103700 extends AbstractMigration
+class Version20180627103700 extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -49,6 +49,7 @@ class Version20180527103700 extends AbstractMigration
             'type' => $parameterTypes['select'],
             'created_at' => $date,
             'updated_at' => $date,
+            'is_enabled' => 1,
         ]);
     }
 
