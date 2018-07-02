@@ -1,0 +1,12 @@
+services:
+  Capco\AppBundle\Command\CreateCsvFromProposalStepCommand:
+    autoconfigure: true
+    autowire: true
+    arguments:
+      $kernelRootDir: '%kernel.root_dir%'
+
+  Capco\AppBundle\Command\CreateCsvFromConsultationStepCommand:
+    autoconfigure: true
+    autowire: true
+    arguments:
+      $kernelRootDir: '%kernel.root_dir%'
