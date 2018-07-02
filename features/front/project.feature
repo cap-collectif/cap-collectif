@@ -157,7 +157,7 @@ Scenario: Can not access trash if not logged in
     | stepSlug    | collecte-des-avis                |
   And I should see "project.show.trashed.short_name" in the "#main" element
   When I click the "#trash-link" element
-  And I wait 2 seconds
+  And I wait 3 seconds
   Then I should see a "#login-popover" element
 
 @javascript
