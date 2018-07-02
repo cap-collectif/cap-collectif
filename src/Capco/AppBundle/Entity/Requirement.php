@@ -38,7 +38,7 @@ class Requirement
     private $label = null;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\AbstractStep")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\AbstractStep", inversedBy="requirements")
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=false)
      */
     private $step;

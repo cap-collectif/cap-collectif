@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class SelectionStep extends AbstractStep implements ParticipativeStepInterface
 {
-    use TimelessStepTrait, VoteThresholdTrait, VoteTypeTrait, RequirementTrait;
+    use TimelessStepTrait, VoteThresholdTrait, VoteTypeTrait;
 
     const VOTE_TYPE_DISABLED = 0;
     const VOTE_TYPE_SIMPLE = 1;

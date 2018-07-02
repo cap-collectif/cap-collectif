@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class CollectStep extends AbstractStep implements ParticipativeStepInterface
 {
-    use TimelessStepTrait, VoteThresholdTrait, VoteTypeTrait, RequirementTrait;
+    use TimelessStepTrait, VoteThresholdTrait, VoteTypeTrait;
 
     public static $sort = ['old', 'last', 'votes', 'least-votes', 'comments', 'random', 'expensive', 'cheap'];
 
