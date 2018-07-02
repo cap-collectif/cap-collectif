@@ -1,0 +1,11 @@
+ProjectVisibility:
+    type: enum
+    config:
+        description: "3 possible values"
+        values:
+            ME:
+                value: 0
+            ADMIN:
+                value: 1
+            PUBLIC:
+                value: 2

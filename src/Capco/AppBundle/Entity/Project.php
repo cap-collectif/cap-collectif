@@ -39,6 +39,16 @@ class Project implements IndexableInterface
     const OPINION_TERM_OPINION = 0;
     const OPINION_TERM_ARTICLE = 1;
 
+    public const VISIBILITY_ME = 0;
+    public const VISIBILITY_ADMIN = 1;
+    public const VISIBILITY_PUBLIC = 2;
+
+    public const VISIBILITY = [
+        'me' => self::VISIBILITY_ME,
+        'admin' => self::VISIBILITY_ADMIN,
+        'public' => self::VISIBILITY_PUBLIC,
+    ];
+
     public static $sortOrder = [
         'date' => self::SORT_ORDER_PUBLISHED_AT,
         'popularity' => self::SORT_ORDER_CONTRIBUTIONS_COUNT,
@@ -213,6 +223,11 @@ class Project implements IndexableInterface
      * @ORM\JoinColumn(name="project_type_id", referencedColumnName="id", nullable=true)
      */
     private $projectType;
+
+    /**
+     * @ORM\Column(name="visibility", type="integer", nullable=false)
+     */
+    private $visibility = self::VISIBILITY_PUBLIC;
 
     /**
      * Constructor.
@@ -965,5 +980,22 @@ class Project implements IndexableInterface
         }
 
         return false;
+    }
+
+    public function getVisibility(): int
+    {
+        return $this->visibility;
+    }
+
+    public function setVisibility(int $visibility):self
+    {
+        $this->visibility = $visibility;
+
+        return $this;
+    }
+
+    public function isPublic()
+    {
+        return $this->getVisibility() === self::VISIBILITY_PUBLIC;
     }
 }
