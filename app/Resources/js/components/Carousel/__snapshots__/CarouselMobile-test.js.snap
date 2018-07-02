@@ -17,11 +17,17 @@ exports[`<CarouselDesktop /> should render correctly 1`] = `
       className="item"
       key="0"
     >
-      <SixteenNineMedia>
+      <div
+        className="sixteen-nine"
+      >
         <div
-          className="bg--default bg--project"
-        />
-      </SixteenNineMedia>
+          className="content"
+        >
+          <div
+            className="bg--default bg--project"
+          />
+        </div>
+      </div>
       <div
         className="carousel__content"
       >
@@ -59,15 +65,21 @@ exports[`<CarouselDesktop /> should render correctly 1`] = `
       className="item"
       key="1"
     >
-      <SixteenNineMedia>
-        <DarkenGradientMedia
-          height="100%"
-          linearGradient={true}
-          title="Croissance, Innovation, Disruption"
-          url="/media/croissance.jpg"
-          width="100%"
-        />
-      </SixteenNineMedia>
+      <div
+        className="sixteen-nine"
+      >
+        <div
+          className="content"
+        >
+          <DarkenGradientMedia
+            height="100%"
+            linearGradient={true}
+            title="Croissance, Innovation, Disruption"
+            url="/media/croissance.jpg"
+            width="100%"
+          />
+        </div>
+      </div>
       <div
         className="carousel__content"
       >
@@ -105,11 +117,17 @@ exports[`<CarouselDesktop /> should render correctly 1`] = `
       className="item"
       key="2"
     >
-      <SixteenNineMedia>
+      <div
+        className="sixteen-nine"
+      >
         <div
-          className="bg--default bg--project"
-        />
-      </SixteenNineMedia>
+          className="content"
+        >
+          <div
+            className="bg--default bg--project"
+          />
+        </div>
+      </div>
       <div
         className="carousel__content"
       >
@@ -145,11 +163,17 @@ exports[`<CarouselDesktop /> should render correctly 1`] = `
       className="item"
       key="3"
     >
-      <SixteenNineMedia>
+      <div
+        className="sixteen-nine"
+      >
         <div
-          className="bg--default bg--project"
-        />
-      </SixteenNineMedia>
+          className="content"
+        >
+          <div
+            className="bg--default bg--project"
+          />
+        </div>
+      </div>
       <div
         className="carousel__content"
       >

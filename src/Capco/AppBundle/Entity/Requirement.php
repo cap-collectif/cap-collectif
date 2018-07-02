@@ -20,17 +20,12 @@ class Requirement
     const FIRSTNAME = 'FIRSTNAME';
     const LASTNAME = 'LASTNAME';
     const PHONE = 'PHONE';
-    public static $requirementsLabels = [
-        self::CHECKBOX => 'check-box',
-        self::FIRSTNAME => 'form.label_firstname',
-        self::LASTNAME => 'group.title',
-        self::PHONE => 'mobile-phone',
-    ];
+
     /**
      * @ORM\Column(name="type", type="string")
      * @Assert\NotNull()
      */
-    private $type = self::CHECKBOX;
+    private $type = self::FIRSTNAME;
 
     /**
      * @ORM\Column(name="label", type="string", nullable=true)
@@ -38,7 +33,7 @@ class Requirement
     private $label = null;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\AbstractStep", inversedBy="requirements")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\AbstractStep")
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id", nullable=false)
      */
     private $step;

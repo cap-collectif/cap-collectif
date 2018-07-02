@@ -150,7 +150,7 @@
     "react-addons-shallow-compare": "^15.4.2",
     "react-async-script": "^0.9.1",
     "react-beautiful-dnd": "6.0.2",
-    "react-bootstrap": "^0.31.2",
+    "react-bootstrap": "^0.32.1",
     "react-datetime": "^2.9.0",
     "react-dnd": "^2.4.0",
     "react-dnd-html5-backend": "^2.4.1",

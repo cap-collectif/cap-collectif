@@ -63,12 +63,18 @@ export class AccountBox extends Component<Props, State> {
     );
 
     return (
-      <Panel footer={footer} header={header}>
+      <Panel>
+        <Panel.Header>
+          {header}
+        </Panel.Header>
         <h2 className="page-header">
           <FormattedMessage id="profile.account.title" />
         </h2>
         <AccountForm />
         <ConfirmPasswordModal />
+        <Panel.Footer>
+          {footer}
+        </Panel.Footer>
         {/* $FlowFixMe */}
         <DeleteAccountModal
           viewer={viewer}
