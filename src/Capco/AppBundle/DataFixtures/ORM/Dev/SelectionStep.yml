@@ -76,3 +76,14 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     body: <p><text(1000)></p>
     voteType: 2
     votesLimit: 1
+  selectionstepVoteClassement:
+    id: selectionstepVoteClassement
+    title: Selection avec vote classement limité
+    label: Selection avec vote classement limité
+    body: <p><text(1000)></p>
+    startAt: <dateTimeBetween('-40 days', '-30 days')>
+    endAt: <dateTimeBetween('+28 days', '+50 days')>
+    voteType: 1
+    votesLimit: 3
+    votesRanking: true
+    requirementsReason: Vous devez habiter sur l'une des 49 communes de la Métropole grenobloise et avoir au minimum 16 ans pour participer. Vos coordonnées de contact seront suceptibles d'être utilisées pour des vérifications aléatoires.

@@ -81,7 +81,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ProposalCreateFusionButton);
+export default connect(mapStateToProps, mapDispatchToProps)(ProposalCreateFusionButton);

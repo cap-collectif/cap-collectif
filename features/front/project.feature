@@ -121,11 +121,11 @@ Scenario: Project header should display correct counters
   Given I visited "consultation page" with:
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
-  Then I should see 'project.show.meta.total_count {"%count%":175}'
-  Then I should see "27 project.show.meta.contributors_count"
+  Then I should see 'project.show.meta.total_count {"%count%":181}'
+  Then I should see "28 project.show.meta.contributors_count"
   And I hover over the "#contributions-counter-pill" element
   And I wait 1 seconds
-  And I should see 'project.show.meta.opinionsCount {"%count%":36}'
+  And I should see 'project.show.meta.opinionsCount {"%count%":37}'
   #And I should see 'project.show.meta.argumentsCount {"%count%":104}'
   And I should see 'project.show.meta.sourcesCount {"%count%":32}'
 

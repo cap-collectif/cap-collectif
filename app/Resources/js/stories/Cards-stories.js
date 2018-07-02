@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import CardProject from './CardProject';
 import CardProposal from './CardProposal';
 import CardTheme from './CardTheme';
-import { Card } from './Card';
+import {Card} from "./Card";
 
 const Row = styled.div.attrs({
   className: 'row',
@@ -220,12 +220,10 @@ const toComeProject = {
 };
 
 storiesOf('Cards', module)
-  .add(
-    'Card',
-    withInfo({
-      source: false,
-      propTablesExclude: [Col, Row, Card],
-      text: `
+  .add('Card', withInfo({
+    source: false,
+    propTablesExclude: [Col, Row, Card],
+    text :`
       <h2>Comment l'utiliser</h2>
     
       ~~~jsx
@@ -271,33 +269,31 @@ storiesOf('Cards', module)
       </CardContainer>
       ~~~
     
-    `,
-    })(() => {
-      return (
-        <div className="ml-30 mr-30 storybook-container">
-          <h1>
-            Card{' '}
-            <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Cards-stories.js">
-              <i className="small cap cap-github" />
-            </a>
-          </h1>
-          <hr />
-          <Row>
-            <Col>
-              <Card project={continuousProject} />
-            </Col>
-          </Row>
-        </div>
-      );
-    }),
-  )
+    `})(() => {
+    return (
+      <div className="ml-30 mr-30 storybook-container">
+        <h1>
+          Card {' '}
+          <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Cards-stories.js">
+            <i className="small cap cap-github"/>
+          </a>
+        </h1>
+        <hr />
+        <Row>
+          <Col>
+            <Card project={continuousProject} />
+          </Col>
+        </Row>
+      </div>
+    );
+  }))
   .add('Project Card', () => {
     return (
       <div className="ml-30 mr-30 storybook-container">
         <h1>
-          Project Card{' '}
+          Project Card {' '}
           <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Cards-stories.js">
-            <i className="small cap cap-github" />
+            <i className="small cap cap-github"/>
           </a>
         </h1>
         <hr />
@@ -322,9 +318,9 @@ storiesOf('Cards', module)
     return (
       <div className="ml-30 mr-30 storybook-container">
         <h1>
-          Proposal Card{' '}
+          Proposal Card {' '}
           <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Cards-stories.js">
-            <i className="small cap cap-github" />
+            <i className="small cap cap-github"/>
           </a>
         </h1>
         <hr />
@@ -349,9 +345,9 @@ storiesOf('Cards', module)
     return (
       <div className="ml-30 mr-30 storybook-container">
         <h1>
-          Theme Card{' '}
+          Theme Card {' '}
           <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Cards-stories.js">
-            <i className="small cap cap-github" />
+            <i className="small cap cap-github"/>
           </a>
         </h1>
         <hr />
@@ -371,4 +367,4 @@ storiesOf('Cards', module)
         </Row>
       </div>
     );
-  });
+  })

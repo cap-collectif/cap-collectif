@@ -13,6 +13,7 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
+use Capco\AppBundle\Form\Type\PurifiedTextareaType;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -329,7 +330,25 @@ class StepAdmin extends Admin
                     'edit' => 'inline',
                     'inline' => 'table',
                     'sortable' => 'position',
+                ])->end()
+            ;
+            $formMapper
+                ->with('requirements')
+                ->add('requirements', 'sonata_type_collection', [
+                    'label' => 'fields',
+                    'by_reference' => false,
+                ], [
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                    'sortable' => 'position',
                 ])
+                ->add('requirementsReason', PurifiedTextareaType::class, [
+                    'translation_domain' => 'CapcoAppBundle',
+                    'label' => 'reason-for-collection',
+                    'required' => false,
+                    'help' => 'help-text-for-reason-for-collection-field',
+                ])
+                ->end()
             ;
 
             if ($subject instanceof CollectStep) {

@@ -21,14 +21,7 @@ export class Toggle extends React.Component<Props> {
   };
 
   render() {
-    const {
-      input,
-      labelSide,
-      label,
-      id,
-      disabled,
-      meta: { touched, error },
-    } = this.props;
+    const { input, labelSide, label, id, disabled, meta: { touched, error } } = this.props;
     return (
       <div className="form-group">
         <label style={{ display: 'flex', alignItems: 'center' }}>

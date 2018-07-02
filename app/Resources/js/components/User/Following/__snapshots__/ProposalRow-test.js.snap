@@ -2,13 +2,13 @@
 
 exports[`<ProposalRow /> should render proposal displayed 1`] = `
 <Collapse
-  appear={false}
   dimension="height"
   getDimensionValue={[Function]}
   id="collapse-proposal-proposal1"
   in={true}
   mountOnEnter={false}
   timeout={300}
+  transitionAppear={false}
   unmountOnExit={false}
 >
   <div>
@@ -58,13 +58,13 @@ exports[`<ProposalRow /> should render proposal displayed 1`] = `
 
 exports[`<ProposalRow /> should render proposal hidden 1`] = `
 <Collapse
-  appear={false}
   dimension="height"
   getDimensionValue={[Function]}
   id="collapse-proposal-proposal1"
   in={false}
   mountOnEnter={false}
   timeout={300}
+  transitionAppear={false}
   unmountOnExit={false}
 >
   <div>

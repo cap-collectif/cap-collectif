@@ -30,9 +30,7 @@ class OpinionVotesBox extends React.Component<Props> {
   };
 
   showPiechart = () => {
-    const {
-      opinion: { votesCount },
-    } = this.props;
+    const { opinion: { votesCount } } = this.props;
     const widgetType = this.getOpinionType().voteWidgetType;
     return votesCount > 0 && widgetType === VOTE_WIDGET_BOTH;
   };

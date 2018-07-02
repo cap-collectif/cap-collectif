@@ -283,341 +283,335 @@ export class PersonalData extends Component<Props, PersonalDataState> {
           </Alert>
         )}
         <form onSubmit={handleSubmit} className="form-horizontal">
-          <Panel id="capco_horizontal_form">
-            <Panel.Heading>{header}</Panel.Heading>
-            <Panel.Body>
-              <h2 className="page-header">
-                <FormattedMessage id="personal-data" />
-              </h2>
-              {!hasData(viewer, currentValues) && (
-                <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
-                  <Well>
-                    <FormattedMessage id="no-data" />
-                  </Well>
-                </div>
-              )}
-              {hasData(viewer, null) && (
-                <div>
-                  {hasData(viewer, currentValues) && (
-                    <div>
-                      {currentValues.firstname !== null && (
-                        <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
-                          <label
-                            className="col-sm-3 control-label"
-                            htmlFor="personal-data-form-firstname">
-                            <FormattedMessage id="form.label_firstname" />
-                          </label>
-                          <div>
-                            <Field
-                              name="firstname"
-                              component={component}
-                              type="text"
-                              id="personal-data-form-firstname"
-                              divClassName="col-sm-4"
-                            />
-                          </div>
-                          <div className="col-sm-4 btn--delete">
-                            <OverlayTrigger
-                              trigger="click"
-                              placement="top"
-                              rootClose
-                              ref="firstname"
-                              overlay={this.popover('firstname')}>
-                              <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                                <span
-                                  className="personal-data-delete-field"
-                                  id="personal-data-firstname">
-                                  <i className="icon cap-ios-close" />
-                                </span>
-                              </OverlayTrigger>
-                            </OverlayTrigger>
-                          </div>
-                        </div>
-                      )}
-                      {currentValues.lastname !== null && (
-                        <div className="horizontal_field_with_border_top">
-                          <label
-                            className="col-sm-3 control-label"
-                            htmlFor="personal-data-form-lastname">
-                            <FormattedMessage id="form.label_lastname" />
-                          </label>
-                          <div>
-                            <Field
-                              name="lastname"
-                              component={component}
-                              type="text"
-                              id="personal-data-form-lastname"
-                              divClassName="col-sm-4"
-                            />
-                          </div>
-                          <div className="col-sm-4 btn--delete">
-                            <OverlayTrigger
-                              trigger="click"
-                              placement="top"
-                              ref="lastname"
-                              overlay={this.popover('lastname')}>
-                              <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                                <span
-                                  className="personal-data-delete-field"
-                                  id="personal-data-lastname">
-                                  <i className="icon cap-ios-close" />
-                                </span>
-                              </OverlayTrigger>
-                            </OverlayTrigger>
-                          </div>
-                        </div>
-                      )}
-                      {currentValues.gender !== null && (
-                        <div className="horizontal_field_with_border_top">
-                          <label
-                            className="col-sm-3 control-label"
-                            htmlFor="personal-data-form-gender">
-                            <FormattedMessage id="form.label_gender" />
-                          </label>
-                          <div>
-                            <Field
-                              name="gender"
-                              component={component}
-                              type="select"
-                              id="personal-data-form-gender"
-                              divClassName="col-sm-4">
-                              <option value="MALE">
-                                <FormattedMessage id="gender.male" />
-                              </option>
-                              <option value="FEMALE">
-                                <FormattedMessage id="gender.female" />
-                              </option>
-                              <option value="OTHER">
-                                <FormattedMessage id="gender.other" />
-                              </option>
-                            </Field>
-                          </div>
-                          <div className="col-sm-4 btn--delete">
-                            <OverlayTrigger
-                              trigger="click"
-                              placement="top"
-                              rootClose
-                              ref="gender"
-                              overlay={this.popover('gender')}>
-                              <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                                <span
-                                  className="personal-data-delete-field"
-                                  id="personal-data-gender">
-                                  <i className="icon cap-ios-close" />
-                                </span>
-                              </OverlayTrigger>
-                            </OverlayTrigger>
-                          </div>
-                        </div>
-                      )}
-                      {currentValues.dateOfBirth !== null && (
+          <Panel id="capco_horizontal_form" header={header} footer={footer}>
+            <h2 className="page-header">
+              <FormattedMessage id="personal-data" />
+            </h2>
+            {!hasData(viewer, currentValues) && (
+              <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
+                <Well>
+                  <FormattedMessage id="no-data" />
+                </Well>
+              </div>
+            )}
+            {hasData(viewer, null) && (
+              <div>
+                {hasData(viewer, currentValues) && (
+                  <div>
+                    {currentValues.firstname !== null && (
+                      <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
+                        <label
+                          className="col-sm-3 control-label"
+                          htmlFor="personal-data-form-firstname">
+                          <FormattedMessage id="form.label_firstname" />
+                        </label>
                         <div>
-                          <div className="horizontal_field_with_border_top">
-                            <Field
-                              name={`dateOfBirth`}
-                              id="dateOfBirth"
-                              component={DateDropdownPicker}
-                              locale={wLocale}
-                              dayDefaultValue="Jour"
-                              monthDefaultValue="Mois"
-                              yearDefaultValue="Année"
-                              dayId="personal-data-date-of-birth-day"
-                              monthId="personal-data-date-of-birth-month"
-                              yearId="personal-data-date-of-birth-year"
-                              label="form.label_date_of_birth"
-                              componentId="personal-data-date-of-birth"
-                              labelClassName="col-sm-3 control-label"
-                              divClassName="col-sm-6"
-                            />
-                          </div>
-                          <div className="col-sm-2 btn--delete" style={{ marginBottom: 15 }}>
-                            <OverlayTrigger
-                              trigger="click"
-                              placement="top"
-                              rootClose
-                              ref="dateOfBirth"
-                              overlay={this.popover('dateOfBirth')}>
-                              <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                                <span
-                                  className="personal-data-delete-field"
-                                  id="personal-data-dateOfBirth">
-                                  <i className="icon cap-ios-close" />
-                                </span>
-                              </OverlayTrigger>
-                            </OverlayTrigger>
-                          </div>
+                          <Field
+                            name="firstname"
+                            component={component}
+                            type="text"
+                            id="personal-data-form-firstname"
+                            divClassName="col-sm-4"
+                          />
                         </div>
-                      )}
-                      {hasAddressData(viewer, currentValues) && (
-                        <div className="horizontal_field_with_border_top">
-                          <div className="col-sm-11 btn--delete">
-                            <OverlayTrigger
-                              trigger="click"
-                              placement="top"
-                              rootClose
-                              ref="address-address2-city-zipCode"
-                              overlay={this.popover('address-address2-city-zipCode')}>
-                              <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                                <span
-                                  className="personal-data-delete-field"
-                                  id="personal-data-address-address2-city-zipCode">
-                                  <i className="icon cap-ios-close" />
-                                </span>
-                              </OverlayTrigger>
+                        <div className="col-sm-4 btn--delete">
+                          <OverlayTrigger
+                            trigger="click"
+                            placement="top"
+                            rootClose
+                            ref="firstname"
+                            overlay={this.popover('firstname')}>
+                            <OverlayTrigger placement="top" overlay={tooltipDelete}>
+                              <span
+                                className="personal-data-delete-field"
+                                id="personal-data-firstname">
+                                <i className="icon cap-ios-close" />
+                              </span>
                             </OverlayTrigger>
-                          </div>
-                          {currentValues.address !== null && (
-                            <div className="personal-data-address">
-                              <label
-                                className="col-sm-3 control-label"
-                                htmlFor="personal-data-form-address">
-                                <FormattedMessage id="form.label_address" />
-                              </label>
-                              <div>
-                                <Field
-                                  name="address"
-                                  component={component}
-                                  type="text"
-                                  id="personal-data-form-address"
-                                  divClassName="col-sm-7"
-                                />
-                              </div>
-                            </div>
-                          )}
-                          {currentValues.address2 !== null && (
-                            <div className="personal-data-address">
-                              <label
-                                className="col-sm-3 control-label"
-                                htmlFor="personal-data-form-address2">
-                                <FormattedMessage id="form.label_address2" />
-                              </label>
-                              <div>
-                                <Field
-                                  name="address2"
-                                  component={component}
-                                  type="text"
-                                  id="personal-data-form-address2"
-                                  divClassName="col-sm-7"
-                                />
-                              </div>
-                            </div>
-                          )}
-                          {currentValues.city !== null && (
-                            <div className="personal-data-address">
-                              <label
-                                className="col-sm-3 control-label"
-                                htmlFor="personal-data-form-city">
-                                <FormattedMessage id="form.label_city" />
-                              </label>
-                              <div>
-                                <Field
-                                  name="city"
-                                  component={component}
-                                  type="text"
-                                  id="personal-data-form-city"
-                                  divClassName="col-sm-7"
-                                />
-                              </div>
-                            </div>
-                          )}
-                          {currentValues.zipCode !== null && (
-                            <div className="personal-data-address">
-                              <label
-                                className="col-sm-3 control-label"
-                                htmlFor="personal-data-form-zip-code">
-                                <FormattedMessage id="form.label_zip_code" />
-                              </label>
-                              <div>
-                                <Field
-                                  name="zipCode"
-                                  component={component}
-                                  type="text"
-                                  id="personal-data-form-zip-code"
-                                  divClassName="col-sm-4"
-                                />
-                              </div>
-                            </div>
-                          )}
+                          </OverlayTrigger>
                         </div>
-                      )}
-                      {currentValues.phone !== null && (
+                      </div>
+                    )}
+                    {currentValues.lastname !== null && (
+                      <div className="horizontal_field_with_border_top">
+                        <label
+                          className="col-sm-3 control-label"
+                          htmlFor="personal-data-form-lastname">
+                          <FormattedMessage id="form.label_lastname" />
+                        </label>
                         <div>
-                          <div className="horizontal_field_with_border_top">
+                          <Field
+                            name="lastname"
+                            component={component}
+                            type="text"
+                            id="personal-data-form-lastname"
+                            divClassName="col-sm-4"
+                          />
+                        </div>
+                        <div className="col-sm-4 btn--delete">
+                          <OverlayTrigger
+                            trigger="click"
+                            placement="top"
+                            ref="lastname"
+                            overlay={this.popover('lastname')}>
+                            <OverlayTrigger placement="top" overlay={tooltipDelete}>
+                              <span
+                                className="personal-data-delete-field"
+                                id="personal-data-lastname">
+                                <i className="icon cap-ios-close" />
+                              </span>
+                            </OverlayTrigger>
+                          </OverlayTrigger>
+                        </div>
+                      </div>
+                    )}
+                    {currentValues.gender !== null && (
+                      <div className="horizontal_field_with_border_top">
+                        <label
+                          className="col-sm-3 control-label"
+                          htmlFor="personal-data-form-gender">
+                          <FormattedMessage id="form.label_gender" />
+                        </label>
+                        <div>
+                          <Field
+                            name="gender"
+                            component={component}
+                            type="select"
+                            id="personal-data-form-gender"
+                            divClassName="col-sm-4">
+                            <option value="MALE">
+                              <FormattedMessage id="gender.male" />
+                            </option>
+                            <option value="FEMALE">
+                              <FormattedMessage id="gender.female" />
+                            </option>
+                            <option value="OTHER">
+                              <FormattedMessage id="gender.other" />
+                            </option>
+                          </Field>
+                        </div>
+                        <div className="col-sm-4 btn--delete">
+                          <OverlayTrigger
+                            trigger="click"
+                            placement="top"
+                            rootClose
+                            ref="gender"
+                            overlay={this.popover('gender')}>
+                            <OverlayTrigger placement="top" overlay={tooltipDelete}>
+                              <span
+                                className="personal-data-delete-field"
+                                id="personal-data-gender">
+                                <i className="icon cap-ios-close" />
+                              </span>
+                            </OverlayTrigger>
+                          </OverlayTrigger>
+                        </div>
+                      </div>
+                    )}
+                    {currentValues.dateOfBirth !== null && (
+                      <div>
+                        <div className="horizontal_field_with_border_top">
+                          <Field
+                            name={`dateOfBirth`}
+                            id="dateOfBirth"
+                            component={DateDropdownPicker}
+                            locale={wLocale}
+                            dayDefaultValue="Jour"
+                            monthDefaultValue="Mois"
+                            yearDefaultValue="Année"
+                            dayId="personal-data-date-of-birth-day"
+                            monthId="personal-data-date-of-birth-month"
+                            yearId="personal-data-date-of-birth-year"
+                            label="form.label_date_of_birth"
+                            componentId="personal-data-date-of-birth"
+                            labelClassName="col-sm-3 control-label"
+                            divClassName="col-sm-6"
+                          />
+                        </div>
+                        <div className="col-sm-2 btn--delete" style={{ marginBottom: 15 }}>
+                          <OverlayTrigger
+                            trigger="click"
+                            placement="top"
+                            rootClose
+                            ref="dateOfBirth"
+                            overlay={this.popover('dateOfBirth')}>
+                            <OverlayTrigger placement="top" overlay={tooltipDelete}>
+                              <span
+                                className="personal-data-delete-field"
+                                id="personal-data-dateOfBirth">
+                                <i className="icon cap-ios-close" />
+                              </span>
+                            </OverlayTrigger>
+                          </OverlayTrigger>
+                        </div>
+                      </div>
+                    )}
+                    {hasAddressData(viewer, currentValues) && (
+                      <div className="horizontal_field_with_border_top">
+                        <div className="col-sm-11 btn--delete">
+                          <OverlayTrigger
+                            trigger="click"
+                            placement="top"
+                            rootClose
+                            ref="address-address2-city-zipCode"
+                            overlay={this.popover('address-address2-city-zipCode')}>
+                            <OverlayTrigger placement="top" overlay={tooltipDelete}>
+                              <span
+                                className="personal-data-delete-field"
+                                id="personal-data-address-address2-city-zipCode">
+                                <i className="icon cap-ios-close" />
+                              </span>
+                            </OverlayTrigger>
+                          </OverlayTrigger>
+                        </div>
+                        {currentValues.address !== null && (
+                          <div className="personal-data-address">
                             <label
                               className="col-sm-3 control-label"
-                              htmlFor="personal-data-form-phone">
-                              <FormattedMessage id="form.label_phone" />
+                              htmlFor="personal-data-form-address">
+                              <FormattedMessage id="form.label_address" />
                             </label>
                             <div>
                               <Field
-                                name="phone"
+                                name="address"
                                 component={component}
                                 type="text"
-                                id="personal-data-form-phone"
-                                divClassName="col-sm-4 col-xs-12"
-                                addonBefore="France +33"
+                                id="personal-data-form-address"
+                                divClassName="col-sm-7"
                               />
                             </div>
-                            <div className="col-sm-4 btn--delete">
-                              <OverlayTrigger
-                                trigger="click"
-                                placement="top"
-                                rootClose
-                                ref="phone"
-                                overlay={this.popover('phone')}>
-                                <OverlayTrigger placement="top" overlay={tooltipDelete}>
-                                  <span className="personal-data-delete-field" id="phone">
-                                    <i className="icon cap-ios-close" />
-                                  </span>
-                                </OverlayTrigger>
-                              </OverlayTrigger>
+                          </div>
+                        )}
+                        {currentValues.address2 !== null && (
+                          <div className="personal-data-address">
+                            <label
+                              className="col-sm-3 control-label"
+                              htmlFor="personal-data-form-address2">
+                              <FormattedMessage id="form.label_address2" />
+                            </label>
+                            <div>
+                              <Field
+                                name="address2"
+                                component={component}
+                                type="text"
+                                id="personal-data-form-address2"
+                                divClassName="col-sm-7"
+                              />
                             </div>
                           </div>
+                        )}
+                        {currentValues.city !== null && (
+                          <div className="personal-data-address">
+                            <label
+                              className="col-sm-3 control-label"
+                              htmlFor="personal-data-form-city">
+                              <FormattedMessage id="form.label_city" />
+                            </label>
+                            <div>
+                              <Field
+                                name="city"
+                                component={component}
+                                type="text"
+                                id="personal-data-form-city"
+                                divClassName="col-sm-7"
+                              />
+                            </div>
+                          </div>
+                        )}
+                        {currentValues.zipCode !== null && (
+                          <div className="personal-data-address">
+                            <label
+                              className="col-sm-3 control-label"
+                              htmlFor="personal-data-form-zip-code">
+                              <FormattedMessage id="form.label_zip_code" />
+                            </label>
+                            <div>
+                              <Field
+                                name="zipCode"
+                                component={component}
+                                type="text"
+                                id="personal-data-form-zip-code"
+                                divClassName="col-sm-4"
+                              />
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                    {currentValues.phone !== null && (
+                      <div>
+                        <div className="horizontal_field_with_border_top">
+                          <label
+                            className="col-sm-3 control-label"
+                            htmlFor="personal-data-form-phone">
+                            <FormattedMessage id="form.label_phone" />
+                          </label>
+                          <div>
+                            <Field
+                              name="phone"
+                              component={component}
+                              type="text"
+                              id="personal-data-form-phone"
+                              divClassName="col-sm-4 col-xs-12"
+                              addonBefore="France +33"
+                            />
+                          </div>
+                          <div className="col-sm-4 btn--delete">
+                            <OverlayTrigger
+                              trigger="click"
+                              placement="top"
+                              rootClose
+                              ref="phone"
+                              overlay={this.popover('phone')}>
+                              <OverlayTrigger placement="top" overlay={tooltipDelete}>
+                                <span className="personal-data-delete-field" id="phone">
+                                  <i className="icon cap-ios-close" />
+                                </span>
+                              </OverlayTrigger>
+                            </OverlayTrigger>
+                          </div>
                         </div>
-                      )}
-                    </div>
-                  )}
-                  <div className="horizontal_field_with_border_top">
-                    <div className="col-sm-3" />
-                    <ButtonGroup className="col-sm-4 pl-0">
-                      <AlertForm
-                        valid={valid}
-                        invalid={invalid}
-                        errorMessage={error}
-                        submitSucceeded={submitSucceeded}
-                        submitFailed={submitFailed}
-                        submitting={submitting}
-                      />
-                    </ButtonGroup>
+                      </div>
+                    )}
                   </div>
+                )}
+                <div className="horizontal_field_with_border_top">
+                  <div className="col-sm-3" />
+                  <ButtonGroup className="col-sm-4 pl-0">
+                    <AlertForm
+                      valid={valid}
+                      invalid={invalid}
+                      errorMessage={error}
+                      submitSucceeded={submitSucceeded}
+                      submitFailed={submitFailed}
+                      submitting={submitting}
+                    />
+                  </ButtonGroup>
                 </div>
-              )}
-            </Panel.Body>
-            <Panel.Footer>{footer}</Panel.Footer>
+              </div>
+            )}
           </Panel>
         </form>
         <Panel>
-          <Panel.Body>
-            <h2 className="page-header">
-              <FormattedMessage id="data-export" />
-            </h2>
-            <div className="horizontal_field_with_border_top">
-              <label className="col-sm-3 control-label">
-                <FormattedMessage id="your-data" />
-              </label>
-              <div className="col-sm-9">
-                <UserArchiveRequestButton viewer={viewer} />
-                {viewer.isArchiveReady && (
-                  <p className="excerpt">
-                    <FormattedMessage id="help-text-data-download-button" />
-                  </p>
-                )}
+          <h2 className="page-header">
+            <FormattedMessage id="data-export" />
+          </h2>
+          <div className="horizontal_field_with_border_top">
+            <label className="col-sm-3 control-label">
+              <FormattedMessage id="your-data" />
+            </label>
+            <div className="col-sm-9">
+              <UserArchiveRequestButton viewer={viewer} />
+              {viewer.isArchiveReady && (
                 <p className="excerpt">
-                  <FormattedMessage id="data-copy-help-text" />
+                  <FormattedMessage id="help-text-data-download-button" />
                 </p>
-              </div>
+              )}
+              <p className="excerpt">
+                <FormattedMessage id="data-copy-help-text" />
+              </p>
             </div>
-          </Panel.Body>
+          </div>
         </Panel>
       </div>
     );

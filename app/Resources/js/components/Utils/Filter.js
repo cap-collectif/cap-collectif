@@ -21,15 +21,13 @@ class Filter extends React.Component<Props> {
       return (
         <select className="form-control pull-right" value={value} onChange={onChange}>
           {values &&
-            values.map(
-              (val: number, index: number): ?React.Element<any> => {
-                return (
-                  <option value={val} key={index}>
-                    <FormattedMessage id={`global.filter_${val}`} />
-                  </option>
-                );
-              },
-            )}
+            values.map((val: number, index: number): ?React.Element<any> => {
+              return (
+                <option value={val} key={index}>
+                  <FormattedMessage id={`global.filter_${val}`} />
+                </option>
+              );
+            })}
         </select>
       );
     }

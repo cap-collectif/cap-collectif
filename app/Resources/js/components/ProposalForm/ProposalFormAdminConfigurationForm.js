@@ -350,162 +350,145 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
               </h3>
             </div>
             {features.themes && (
-              <Panel collapsible defaultExpanded={usingThemes}>
-                <Panel.Heading>{headerPanelUsingThemes}</Panel.Heading>
-                <Panel.Collapse>
-                  <Panel.Body>
-                    <Field
-                      name="themeMandatory"
-                      component={component}
-                      type="checkbox"
-                      id="proposal_form_theme_mandatory">
-                      <FormattedMessage id="proposal_form.required" />
-                    </Field>
-                    <Field
-                      name="themeHelpText"
-                      component={component}
-                      type="text"
-                      id="proposal_form_theme_help_text"
-                      label={
-                        <span>
-                          <FormattedMessage id="proposal_form.help_text" />
-                          {optional}
-                        </span>
-                      }
-                    />
-                  </Panel.Body>
-                </Panel.Collapse>
+              <Panel collapsible expanded={usingThemes} header={headerPanelUsingThemes}>
+                <Field
+                  name="themeMandatory"
+                  component={component}
+                  type="checkbox"
+                  id="proposal_form_theme_mandatory">
+                  <FormattedMessage id="proposal_form.required" />
+                </Field>
+                <Field
+                  name="themeHelpText"
+                  component={component}
+                  type="text"
+                  id="proposal_form_theme_help_text"
+                  label={
+                    <span>
+                      <FormattedMessage id="proposal_form.help_text" />
+                      {optional}
+                    </span>
+                  }
+                />
               </Panel>
             )}
             <Panel
               id="proposal_form_admin_category_panel_body"
               collapsible
-              defaultExpanded={usingCategories}>
-              <Panel.Heading>{headerPanelUsingCategories}</Panel.Heading>
-              <Panel.Collapse>
-                <Panel.Body>
-                  <Field
-                    name="categoryMandatory"
-                    component={component}
-                    type="checkbox"
-                    id="proposal_form_category_mandatory">
-                    <FormattedMessage id="proposal_form.required" />
-                  </Field>
-                  <Field
-                    name="categoryHelpText"
-                    component={component}
-                    type="text"
-                    id="proposal_form_category_help_text"
-                    label={
-                      <span>
-                        <FormattedMessage id="proposal_form.help_text" />
-                        {optional}
-                      </span>
-                    }
-                  />
-                  <FieldArray name="categories" component={ProposalFormAdminCategories} />
-                </Panel.Body>
-              </Panel.Collapse>
+              expanded={usingCategories}
+              header={headerPanelUsingCategories}>
+              <Field
+                name="categoryMandatory"
+                component={component}
+                type="checkbox"
+                id="proposal_form_category_mandatory">
+                <FormattedMessage id="proposal_form.required" />
+              </Field>
+              <Field
+                name="categoryHelpText"
+                component={component}
+                type="text"
+                id="proposal_form_category_help_text"
+                label={
+                  <span>
+                    <FormattedMessage id="proposal_form.help_text" />
+                    {optional}
+                  </span>
+                }
+              />
+              <FieldArray name="categories" component={ProposalFormAdminCategories} />
             </Panel>
-            <Panel id="address-body" collapsible defaultExpanded={usingAddress}>
-              <Panel.Heading>{headerPanelUsingAddress}</Panel.Heading>
-              <Panel.Collapse>
-                <Panel.Body>
+            <Panel
+              id="address-body"
+              collapsible
+              expanded={usingAddress}
+              header={headerPanelUsingAddress}>
+              <Field
+                name="addressHelpText"
+                component={component}
+                type="text"
+                id="proposal_form_address_help_text"
+                label={
+                  <span>
+                    <FormattedMessage id="proposal_form.help_text" />
+                    {optional}
+                  </span>
+                }
+              />
+              <p className="link">
+                <Glyphicon glyph="info-sign" /> Les propositions seront affichées sur une carte
+              </p>
+              <Field
+                name="proposalInAZoneRequired"
+                component={component}
+                type="checkbox"
+                id="proposal_form_district_proposalInAZoneRequired">
+                <FormattedMessage id="proposal_form.proposalInAZoneRequired" />
+              </Field>
+              <h5 style={{ fontWeight: 'bold', marginTop: 20 }}>Position initiale de la carte</h5>
+              <Row>
+                <Col xs={12} md={4}>
                   <Field
-                    name="addressHelpText"
+                    name="latMap"
                     component={component}
-                    type="text"
-                    id="proposal_form_address_help_text"
-                    label={
-                      <span>
-                        <FormattedMessage id="proposal_form.help_text" />
-                        {optional}
-                      </span>
-                    }
+                    type="number"
+                    id="proposal_form_lat_map"
+                    normalize={val => val && parseFloat(val)}
+                    label={<FormattedMessage id="proposal_form.lat_map" />}
                   />
-                  <p className="link">
-                    <Glyphicon glyph="info-sign" /> Les propositions seront affichées sur une carte
-                  </p>
+                </Col>
+                <Col xs={12} md={4}>
                   <Field
-                    name="proposalInAZoneRequired"
+                    name="lngMap"
                     component={component}
-                    type="checkbox"
-                    id="proposal_form_district_proposalInAZoneRequired">
-                    <FormattedMessage id="proposal_form.proposalInAZoneRequired" />
+                    type="number"
+                    id="proposal_form_lng_map"
+                    normalize={val => val && parseFloat(val)}
+                    label={<FormattedMessage id="proposal_form.lng_map" />}
+                  />
+                </Col>
+                <Col xs={12} md={4}>
+                  <Field
+                    name="zoomMap"
+                    component={component}
+                    type="select"
+                    id="proposal_form_zoom_map"
+                    normalize={val => val && parseInt(val, 10)}
+                    label={<FormattedMessage id="proposal_form.zoom" />}>
+                    <FormattedMessage id="proposal_form.select.zoom">
+                      {message => <option value="">{message}</option>}
+                    </FormattedMessage>
+                    {zoomLevels.map(level => (
+                      <option key={level.id} value={level.id}>
+                        {level.name}
+                      </option>
+                    ))}
                   </Field>
-                  <h5 style={{ fontWeight: 'bold', marginTop: 20 }}>
-                    Position initiale de la carte
-                  </h5>
-                  <Row>
-                    <Col xs={12} md={4}>
-                      <Field
-                        name="latMap"
-                        component={component}
-                        type="number"
-                        id="proposal_form_lat_map"
-                        normalize={val => val && parseFloat(val)}
-                        label={<FormattedMessage id="proposal_form.lat_map" />}
-                      />
-                    </Col>
-                    <Col xs={12} md={4}>
-                      <Field
-                        name="lngMap"
-                        component={component}
-                        type="number"
-                        id="proposal_form_lng_map"
-                        normalize={val => val && parseFloat(val)}
-                        label={<FormattedMessage id="proposal_form.lng_map" />}
-                      />
-                    </Col>
-                    <Col xs={12} md={4}>
-                      <Field
-                        name="zoomMap"
-                        component={component}
-                        type="select"
-                        id="proposal_form_zoom_map"
-                        normalize={val => val && parseInt(val, 10)}
-                        label={<FormattedMessage id="proposal_form.zoom" />}>
-                        <FormattedMessage id="proposal_form.select.zoom">
-                          {message => <option value="">{message}</option>}
-                        </FormattedMessage>
-                        {zoomLevels.map(level => (
-                          <option key={level.id} value={level.id}>
-                            {level.name}
-                          </option>
-                        ))}
-                      </Field>
-                    </Col>
-                  </Row>
-                </Panel.Body>
-              </Panel.Collapse>
+                </Col>
+              </Row>
             </Panel>
             {features.districts && (
-              <Panel collapsible defaultExpanded={usingDistrict}>
-                <Panel.Heading>{headerPanelUsingDistrict}</Panel.Heading>
-                <Panel.Collapse>
-                  <Panel.Body>
-                    <Field
-                      name="districtMandatory"
-                      component={component}
-                      type="checkbox"
-                      id="proposal_form_district_mandatory">
-                      <FormattedMessage id="proposal_form.required" />
-                    </Field>
-                    <Field
-                      name="districtHelpText"
-                      component={component}
-                      type="text"
-                      id="proposal_form_district_help_text"
-                      label={
-                        <span>
-                          <FormattedMessage id="proposal_form.help_text" />
-                          {optional}
-                        </span>
-                      }
-                    />
-                    <FieldArray name="districts" component={ProposalFormAdminDistricts} />
-                  </Panel.Body>
-                </Panel.Collapse>
+              <Panel collapsible expanded={usingDistrict} header={headerPanelUsingDistrict}>
+                <Field
+                  name="districtMandatory"
+                  component={component}
+                  type="checkbox"
+                  id="proposal_form_district_mandatory">
+                  <FormattedMessage id="proposal_form.required" />
+                </Field>
+                <Field
+                  name="districtHelpText"
+                  component={component}
+                  type="text"
+                  id="proposal_form_district_help_text"
+                  label={
+                    <span>
+                      <FormattedMessage id="proposal_form.help_text" />
+                      {optional}
+                    </span>
+                  }
+                />
+                <FieldArray name="districts" component={ProposalFormAdminDistricts} />
               </Panel>
             )}
             <div className="box-header">

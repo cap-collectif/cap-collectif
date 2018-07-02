@@ -184,3 +184,8 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
     step: "@collectstepVoteClassement"
     project: "@p15"
     position: 1
+  pas38:
+    id: pas38
+    step: "@selectionstepVoteClassement"
+    project: "@p15"
+    position: 2
