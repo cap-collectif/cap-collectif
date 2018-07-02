@@ -13,6 +13,7 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
+use Capco\AppBundle\Form\Type\PurifiedTextareaType;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -20,7 +21,6 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class StepAdmin extends Admin
 {
@@ -342,7 +342,7 @@ class StepAdmin extends Admin
                     'inline' => 'table',
                     'sortable' => 'position',
                 ])
-                ->add('requirementsReason', TextareaType::class, [
+                ->add('requirementsReason', PurifiedTextareaType::class, [
                     'translation_domain' => 'CapcoAppBundle',
                     'label' => 'reason-for-collection',
                     'required' => false,

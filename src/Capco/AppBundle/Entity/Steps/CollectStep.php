@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Entity\Steps;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Status;
-use Capco\AppBundle\Traits\RequirementTrait;
 use Capco\AppBundle\Traits\TimelessStepTrait;
 use Capco\AppBundle\Traits\VoteThresholdTrait;
 use Capco\AppBundle\Traits\VoteTypeTrait;
