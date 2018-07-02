@@ -13,6 +13,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateCsvFromConsultationStepCommand extends Command
 {
+    protected static $defaultName = 'capco:export:consultation';
+
     protected $toggleManager;
     protected $consultationStepRepository;
     protected $graphQLToCsv;
@@ -33,7 +35,6 @@ class CreateCsvFromConsultationStepCommand extends Command
     protected function configure(): void
     {
         $this
-            ->setName('capco:export:consultation')
             ->setDescription('Create csv file from consultation step data');
     }
 

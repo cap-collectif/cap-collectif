@@ -46,93 +46,91 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
 
     protected function requestDatas(string $userId): array
     {
-        $executor = $this->getContainer()->get('overblog_graphql.request_executor')->disabledDebugInfo();
+        $executor = $this->getContainer()->get('overblog_graphql.request_executor');
 
         // TODO disable ACL or give admin rights (to disable access)
-        $datas['user'] = $executor->execute(
+        $datas['user'] = $executor->execute(null,
             [
                 'query' => $this->getUserGraphQLQuery($userId),
                 'variables' => [],
-            ],
-            ['disable_acl' => true]
+            ]
         )->toArray();
 
-        $datas['questions'] = $executor->execute(
+        $datas['questions'] = $executor->execute(null,
             [
                 'query' => $this->getRepliesGraphQLQuery($userId),
                 'variables' => [],
             ]
         )->toArray();
 
-        $datas['medias'] = $executor->execute(
+        $datas['medias'] = $executor->execute(null,
             [
                 'query' => $this->getMediasGraphQLQuery($userId),
                 'variables' => [],
             ]
         )->toArray();
 
-        $datas['groups'] = $executor->execute(
+        $datas['groups'] = $executor->execute(null,
             [
                 'query' => $this->getGroupsGraphQLQuery($userId),
                 'variables' => [],
             ]
         )->toArray();
 
-        $datas['reports'] = $executor->execute(
+        $datas['reports'] = $executor->execute(null,
             [
                 'query' => $this->getReportsGraphQLQuery($userId),
                 'variables' => [],
             ]
         )->toArray();
 
-        $datas['events'] = $executor->execute(
+        $datas['events'] = $executor->execute(null,
             [
                 'query' => $this->getEventsGraphQLQuery($userId),
                 'variables' => [],
             ]
         )->toArray();
 
-        $datas['proposals'] = $executor->execute(
+        $datas['proposals'] = $executor->execute(null,
             [
                 'query' => $this->getProposalsGraphQLQuery($userId),
                 'variables' => [],
             ]
         )->toArray();
 
-        $datas['opinions'] = $executor->execute(
+        $datas['opinions'] = $executor->execute(null,
             [
                 'query' => $this->getOpinionGraphQLQuery($userId),
                 'variables' => [],
             ]
         )->toArray();
 
-        $datas['opinionsVersion'] = $executor->execute(
+        $datas['opinionsVersion'] = $executor->execute(null,
             [
                 'query' => $this->getOpinionVersionGraphQLQuery($userId),
                 'variables' => [],
             ]
         )->toArray();
 
-        $datas['arguments'] = $executor->execute(
+        $datas['arguments'] = $executor->execute(null,
             [
                 'query' => $this->getArgumentGraphQLQuery($userId),
                 'variables' => [],
             ]
         )->toArray();
 
-        $datas['sources'] = $executor->execute(
+        $datas['sources'] = $executor->execute(null,
             [
                 'query' => $this->getSourceGraphQLQuery($userId),
                 'variables' => [],
             ]
         )->toArray();
 
-        $datas['votes'] = $executor->execute(
+        $datas['votes'] = $executor->execute(null,
             [
                 'query' => $this->getVotesGraphQLQuery($userId),
                 'variables' => [],
-            ],
-            ['disable_acl' => true]
+            ]
         )->toArray();
 
         return $datas;
