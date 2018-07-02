@@ -158,218 +158,212 @@ exports[`<CarouselDesktop /> should render correctly 1`] = `
   <div
     className="carousel__content"
   >
-    <div
-      className="sixteen-nine"
-    >
+    <SixteenNineMedia>
       <div
-        className="content"
+        className="carousel-inner"
+        id="carousel-inner"
+        role="listbox"
       >
         <div
-          className="carousel-inner"
-          id="carousel-inner"
-          role="listbox"
+          className="item active"
+          data-item={0}
+          key="0"
         >
           <div
-            className="item active"
-            data-item={0}
-            key="0"
-          >
-            <div
-              className="bg--default bg--project"
-            />
-            <div
-              className="carousel-caption"
-            >
-              <p>
-                <span
-                  className="carousel__type"
-                >
-                  <FormattedMessage
-                    id="type-post"
-                    values={Object {}}
-                  />
-                </span>
-                <br />
-                <a
-                  className="carousel__title"
-                  href="capco.test/post/immobilier"
-                >
-                  Immobilier
-                </a>
-                <br />
-                <span
-                  className="carousel__date"
-                >
-                  <FormattedDate
-                    day="numeric"
-                    month="long"
-                    value={2018-04-09T21:21:06.000Z}
-                    year="numeric"
-                  />
-                </span>
-              </p>
-            </div>
-          </div>
+            className="bg--default bg--project"
+          />
           <div
-            className="item"
-            data-item={1}
-            key="1"
+            className="carousel-caption"
           >
-            <DarkenGradientMedia
-              height="100%"
-              linearGradient={true}
-              title="Croissance, Innovation, Disruption"
-              url="/media/croissance.jpg"
-              width="100%"
-            />
-            <div
-              className="carousel-caption"
-            >
-              <p>
-                <span
-                  className="carousel__type"
-                >
-                  <FormattedMessage
-                    id="type-project"
-                    values={Object {}}
-                  />
-                </span>
-                <br />
-                <a
-                  className="carousel__title"
-                  href="capco.test/project/croissance"
-                >
-                  Croissance, Innovation, Disruption
-                </a>
-                <br />
-                <span
-                  className="carousel__date"
-                >
-                  <FormattedDate
-                    day="numeric"
-                    month="long"
-                    value={2018-04-09T21:21:06.000Z}
-                    year="numeric"
-                  />
-                </span>
-              </p>
-            </div>
-          </div>
-          <div
-            className="item"
-            data-item={2}
-            key="2"
-          >
-            <div
-              className="bg--default bg--project"
-            />
-            <div
-              className="carousel-caption"
-            >
-              <p>
-                <span
-                  className="carousel__type"
-                >
-                  <FormattedMessage
-                    id="type-event"
-                    values={Object {}}
-                  />
-                </span>
-                <br />
-                <a
-                  className="carousel__title"
-                  href="capco.test/event/parisweb2016"
-                >
-                  ParisWeb 2016
-                </a>
-                <br />
-                <span
-                  className="carousel__date"
-                >
-                  <DatesInterval
-                    endAt="2018-05-12T12:10:00+0200"
-                    startAt="2018-04-18T16:24:00+0200"
-                  />
-                </span>
-              </p>
-            </div>
-          </div>
-          <div
-            className="item"
-            data-item={3}
-            key="3"
-          >
-            <div
-              className="bg--default bg--project"
-            />
-            <div
-              className="carousel-caption"
-            >
-              <p>
-                <span
-                  className="carousel__type"
-                >
-                  <FormattedMessage
-                    id="type-idea"
-                    values={Object {}}
-                  />
-                </span>
-                <br />
-                <a
-                  className="carousel__title"
-                  href="capco.test/idea/myidea"
-                >
-                  My idea
-                </a>
-                <br />
-                <span
-                  className="carousel__date"
-                >
-                  <FormattedDate
-                    day="numeric"
-                    month="long"
-                    value={2018-04-16T16:35:25.000Z}
-                    year="numeric"
-                  />
-                </span>
-              </p>
-            </div>
+            <p>
+              <span
+                className="carousel__type"
+              >
+                <FormattedMessage
+                  id="type-post"
+                  values={Object {}}
+                />
+              </span>
+              <br />
+              <a
+                className="carousel__title"
+                href="capco.test/post/immobilier"
+              >
+                Immobilier
+              </a>
+              <br />
+              <span
+                className="carousel__date"
+              >
+                <FormattedDate
+                  day="numeric"
+                  month="long"
+                  value={2018-04-09T21:21:06.000Z}
+                  year="numeric"
+                />
+              </span>
+            </p>
           </div>
         </div>
-        <a
-          className="left carousel-control disabled"
-          data-slide="prev"
-          href="#carousel"
-          id="left-arrow"
-          role="button"
+        <div
+          className="item"
+          data-item={1}
+          key="1"
         >
-          <i
-            className="cap-arrow-37"
+          <DarkenGradientMedia
+            height="100%"
+            linearGradient={true}
+            title="Croissance, Innovation, Disruption"
+            url="/media/croissance.jpg"
+            width="100%"
           />
-          <span
-            className="sr-only"
+          <div
+            className="carousel-caption"
           >
-            Previous
-          </span>
-        </a>
-        <a
-          className="right carousel-control"
-          data-slide="next"
-          href="#carousel"
-          id="right-arrow"
-          role="button"
+            <p>
+              <span
+                className="carousel__type"
+              >
+                <FormattedMessage
+                  id="type-project"
+                  values={Object {}}
+                />
+              </span>
+              <br />
+              <a
+                className="carousel__title"
+                href="capco.test/project/croissance"
+              >
+                Croissance, Innovation, Disruption
+              </a>
+              <br />
+              <span
+                className="carousel__date"
+              >
+                <FormattedDate
+                  day="numeric"
+                  month="long"
+                  value={2018-04-09T21:21:06.000Z}
+                  year="numeric"
+                />
+              </span>
+            </p>
+          </div>
+        </div>
+        <div
+          className="item"
+          data-item={2}
+          key="2"
         >
-          <i
-            className="cap-arrow-38"
+          <div
+            className="bg--default bg--project"
           />
-          <span
-            className="sr-only"
+          <div
+            className="carousel-caption"
           >
-            Next
-          </span>
-        </a>
+            <p>
+              <span
+                className="carousel__type"
+              >
+                <FormattedMessage
+                  id="type-event"
+                  values={Object {}}
+                />
+              </span>
+              <br />
+              <a
+                className="carousel__title"
+                href="capco.test/event/parisweb2016"
+              >
+                ParisWeb 2016
+              </a>
+              <br />
+              <span
+                className="carousel__date"
+              >
+                <DatesInterval
+                  endAt="2018-05-12T12:10:00+0200"
+                  startAt="2018-04-18T16:24:00+0200"
+                />
+              </span>
+            </p>
+          </div>
+        </div>
+        <div
+          className="item"
+          data-item={3}
+          key="3"
+        >
+          <div
+            className="bg--default bg--project"
+          />
+          <div
+            className="carousel-caption"
+          >
+            <p>
+              <span
+                className="carousel__type"
+              >
+                <FormattedMessage
+                  id="type-idea"
+                  values={Object {}}
+                />
+              </span>
+              <br />
+              <a
+                className="carousel__title"
+                href="capco.test/idea/myidea"
+              >
+                My idea
+              </a>
+              <br />
+              <span
+                className="carousel__date"
+              >
+                <FormattedDate
+                  day="numeric"
+                  month="long"
+                  value={2018-04-16T16:35:25.000Z}
+                  year="numeric"
+                />
+              </span>
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
+      <a
+        className="left carousel-control disabled"
+        data-slide="prev"
+        href="#carousel"
+        id="left-arrow"
+        role="button"
+      >
+        <i
+          className="cap-arrow-37"
+        />
+        <span
+          className="sr-only"
+        >
+          Previous
+        </span>
+      </a>
+      <a
+        className="right carousel-control"
+        data-slide="next"
+        href="#carousel"
+        id="right-arrow"
+        role="button"
+      >
+        <i
+          className="cap-arrow-38"
+        />
+        <span
+          className="sr-only"
+        >
+          Next
+        </span>
+      </a>
+    </SixteenNineMedia>
   </div>
 </div>
 `;

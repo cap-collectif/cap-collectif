@@ -4,7 +4,7 @@ import { FormattedDate, FormattedMessage } from 'react-intl';
 import moment from 'moment';
 import { DatesInterval } from '../Utils/DatesInterval';
 import DarkenGradientMedia from '../Ui/DarkenGradientMedia';
-import SixteenNineMedia from "../Ui/SixteenNineMedia";
+import SixteenNineMedia from '../Ui/SixteenNineMedia';
 
 type Props = {
   highlighteds: Array<Object>,
@@ -188,13 +188,11 @@ export class CarouselDesktop extends PureComponent<Props, State> {
                     {getMedia()}
                     <div className="carousel-caption">
                       <p>
-                          <span className="carousel__type">
-                            <FormattedMessage id={`type-${highlighted.object_type}`} />
-                          </span>
+                        <span className="carousel__type">
+                          <FormattedMessage id={`type-${highlighted.object_type}`} />
+                        </span>
                         <br />
-                        <a
-                          className="carousel__title"
-                          href={item._links ? item._links.show : '#'}>
+                        <a className="carousel__title" href={item._links ? item._links.show : '#'}>
                           {item.title}
                         </a>
                         <br />
@@ -224,7 +222,6 @@ export class CarouselDesktop extends PureComponent<Props, State> {
               <span className="sr-only">Next</span>
             </a>
           </SixteenNineMedia>
-
         </div>
       </div>
     );
