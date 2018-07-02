@@ -210,5 +210,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
 });
 
-const connector: Connector<{}, Props> = connect(mapStateToProps, mapDispatchToProps);
+const connector: Connector<{}, Props> = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
 export default connector(RegistrationAdminPage);

@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Form\Api;
 
-use Capco\AppBundle\Entity\Synthesis\Synthesis;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,7 +18,7 @@ class SynthesisType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Synthesis::class,
+            'data_class' => 'Capco\AppBundle\Entity\Synthesis\Synthesis',
             'csrf_protection' => false,
         ]);
     }

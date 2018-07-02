@@ -272,7 +272,7 @@ class ProjectController extends Controller
     public function indexAction(Request $request)
     {
         $parameters = [];
-        $form = $this->createForm(ProjectSearchType::class);
+        $form = $this->createForm(new ProjectSearchType($this->get('capco.toggle.manager')));
         $form->submit($request->query->all());
 
         if ($form->isValid()) {

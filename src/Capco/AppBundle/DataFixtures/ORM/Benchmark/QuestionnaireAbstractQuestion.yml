@@ -1,5 +1,5 @@
 Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
   qaq1:
-    questionnaire: '@questionnaire1'
-    question: '@multiplequestion1'
+    questionnaire: @questionnaire1
+    question: @multiplequestion1
     position: 1

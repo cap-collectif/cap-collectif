@@ -97,4 +97,9 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
   };
 };
 
-export default connect(mapStateToProps, null, null, { withRef: true })(NavbarRight);
+export default connect(
+  mapStateToProps,
+  null,
+  null,
+  { withRef: true },
+)(NavbarRight);

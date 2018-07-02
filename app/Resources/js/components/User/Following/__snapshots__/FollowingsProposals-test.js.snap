@@ -10,6 +10,7 @@ exports[`<FollowingsProposals /> should render following proposal close 1`] = `
       values={Object {}}
     />
     <Collapse
+      appear={false}
       dimension="height"
       getDimensionValue={[Function]}
       in={false}
@@ -20,7 +21,6 @@ exports[`<FollowingsProposals /> should render following proposal close 1`] = `
         }
       }
       timeout={300}
-      transitionAppear={false}
       unmountOnExit={false}
     >
       <Button
@@ -41,12 +41,12 @@ exports[`<FollowingsProposals /> should render following proposal close 1`] = `
   </h2>
   <div>
     <Collapse
+      appear={false}
       dimension="height"
       getDimensionValue={[Function]}
       in={false}
       mountOnEnter={false}
       timeout={300}
-      transitionAppear={false}
       unmountOnExit={false}
     >
       <div
@@ -149,12 +149,12 @@ exports[`<FollowingsProposals /> should render following proposal close 1`] = `
   </div>
   <div>
     <Collapse
+      appear={false}
       dimension="height"
       getDimensionValue={[Function]}
       in={true}
       mountOnEnter={false}
       timeout={300}
-      transitionAppear={false}
       unmountOnExit={false}
     >
       <div>
@@ -178,6 +178,7 @@ exports[`<FollowingsProposals /> should render following proposal open 1`] = `
       values={Object {}}
     />
     <Collapse
+      appear={false}
       dimension="height"
       getDimensionValue={[Function]}
       in={true}
@@ -188,7 +189,6 @@ exports[`<FollowingsProposals /> should render following proposal open 1`] = `
         }
       }
       timeout={300}
-      transitionAppear={false}
       unmountOnExit={false}
     >
       <Button
@@ -209,12 +209,12 @@ exports[`<FollowingsProposals /> should render following proposal open 1`] = `
   </h2>
   <div>
     <Collapse
+      appear={false}
       dimension="height"
       getDimensionValue={[Function]}
       in={true}
       mountOnEnter={false}
       timeout={300}
-      transitionAppear={false}
       unmountOnExit={false}
     >
       <div
@@ -317,12 +317,12 @@ exports[`<FollowingsProposals /> should render following proposal open 1`] = `
   </div>
   <div>
     <Collapse
+      appear={false}
       dimension="height"
       getDimensionValue={[Function]}
       in={false}
       mountOnEnter={false}
       timeout={300}
-      transitionAppear={false}
       unmountOnExit={false}
     >
       <div>

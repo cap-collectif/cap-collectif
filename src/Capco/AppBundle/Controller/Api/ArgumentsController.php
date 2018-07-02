@@ -496,7 +496,7 @@ class ArgumentsController extends FOSRestController
             ->setArgument($argument)
         ;
 
-        $form = $this->createForm(ReportingType::class, $report, ['csrf_protection' => false]);
+        $form = $this->createForm(new ReportingType(), $report, ['csrf_protection' => false]);
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {

@@ -33,14 +33,6 @@ class ProposalFormProposalsResolver implements ResolverInterface
             $term = $args->offsetGet('term');
         }
 
-        if (!$form->getStep()) {
-            $connection = ConnectionBuilder::connectionFromArray([], $args);
-            $connection->totalCount = 0;
-            $connection->{'fusionCount'} = 0;
-
-            return $connection;
-        }
-
         if ($form->getStep()->isPrivate()) {
             if (!$user instanceof User) {
                 $connection = ConnectionBuilder::connectionFromArray([], $args);

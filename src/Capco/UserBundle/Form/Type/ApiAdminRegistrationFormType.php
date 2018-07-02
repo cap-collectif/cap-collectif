@@ -14,9 +14,6 @@ class ApiAdminRegistrationFormType extends ApiRegistrationFormType
         parent::buildForm($builder, $options);
         $builder->remove('plainPassword');
         $builder->remove('captcha');
-        $builder
-            ->add('username', TextType::class, ['required' => true])
-            ->add('email', TextType::class, ['required' => true]);
         $builder->add('roles', CollectionType::class, ['entry_type' => TextType::class]);
     }
 

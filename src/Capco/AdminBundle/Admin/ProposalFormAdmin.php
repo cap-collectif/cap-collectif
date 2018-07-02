@@ -10,7 +10,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class ProposalFormAdmin extends CapcoAdmin
+class ProposalFormAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',

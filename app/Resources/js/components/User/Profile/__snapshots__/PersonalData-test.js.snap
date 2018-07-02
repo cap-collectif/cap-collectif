@@ -23,31 +23,13 @@ exports[`<PersonalData /> should render user withou address 1`] = `
     className="form-horizontal"
     onSubmit={[MockFunction]}
   >
-    <Panel
-      bsClass="panel"
-      bsStyle="default"
-      defaultExpanded={false}
-      footer={
-        <div
-          className="col-sm-offset-4"
-        >
-          <Button
-            active={false}
-            block={false}
-            bsClass="btn"
-            bsStyle="primary"
-            disabled={false}
-            id="personal-data-form-save"
-            type="submit"
-          >
-            <FormattedMessage
-              id="global.save_modifications"
-              values={Object {}}
-            />
-          </Button>
-        </div>
-      }
-      header={
+    <Uncontrolled(Panel)
+      id="capco_horizontal_form"
+    >
+      <PanelHeading
+        bsClass="panel"
+        componentClass="div"
+      >
         <div
           className="panel-heading profile-header"
         >
@@ -58,509 +40,44 @@ exports[`<PersonalData /> should render user withou address 1`] = `
             />
           </h1>
         </div>
-      }
-      id="capco_horizontal_form"
-    >
-      <h2
-        className="page-header"
+      </PanelHeading>
+      <PanelBody
+        bsClass="panel"
+        collapsible={false}
       >
-        <FormattedMessage
-          id="personal-data"
-          values={Object {}}
-        />
-      </h2>
-      <div>
+        <h2
+          className="page-header"
+        >
+          <FormattedMessage
+            id="personal-data"
+            values={Object {}}
+          />
+        </h2>
         <div>
-          <div
-            className="horizontal_field_with_border_top"
-            style={
-              Object {
-                "border": 0,
-              }
-            }
-          >
-            <label
-              className="col-sm-3 control-label"
-              htmlFor="personal-data-form-firstname"
-            >
-              <FormattedMessage
-                id="form.label_firstname"
-                values={Object {}}
-              />
-            </label>
-            <div>
-              <Field
-                component={[Function]}
-                divClassName="col-sm-4"
-                id="personal-data-form-firstname"
-                name="firstname"
-                type="text"
-              />
-            </div>
-            <div
-              className="col-sm-4 btn--delete"
-            >
-              <OverlayTrigger
-                defaultOverlayShown={false}
-                overlay={
-                  <Popover
-                    bsClass="popover"
-                    className="in"
-                    id="delete-field"
-                    placement="top"
-                    title={
-                      <FormattedMessage
-                        id="are-you-sure-you-want-to-delete-this-field"
-                        values={Object {}}
-                      />
-                    }
-                  >
-                    <Button
-                      active={false}
-                      block={false}
-                      bsClass="btn"
-                      bsStyle="danger"
-                      className="right-bloc btn-block"
-                      disabled={false}
-                      id="btn-confirm-delete-field"
-                      onClick={[Function]}
-                    >
-                      <FormattedMessage
-                        id="btn_delete"
-                        values={Object {}}
-                      />
-                    </Button>
-                    <Button
-                      active={false}
-                      block={false}
-                      bsClass="btn"
-                      bsStyle="default"
-                      className="right-block btn-block"
-                      disabled={false}
-                      id="btn-cancel-delete-field"
-                      onClick={[Function]}
-                    >
-                      <FormattedMessage
-                        id="global.no"
-                        values={Object {}}
-                      />
-                    </Button>
-                  </Popover>
-                }
-                placement="top"
-                rootClose={true}
-                trigger="click"
-              >
-                <OverlayTrigger
-                  defaultOverlayShown={false}
-                  overlay={
-                    <Tooltip
-                      bsClass="tooltip"
-                      id="tooltip"
-                      placement="right"
-                    >
-                      <FormattedMessage
-                        id="global.delete"
-                        values={Object {}}
-                      />
-                    </Tooltip>
-                  }
-                  placement="top"
-                  trigger={
-                    Array [
-                      "hover",
-                      "focus",
-                    ]
-                  }
-                >
-                  <span
-                    className="personal-data-delete-field"
-                    id="personal-data-firstname"
-                  >
-                    <i
-                      className="icon cap-ios-close"
-                    />
-                  </span>
-                </OverlayTrigger>
-              </OverlayTrigger>
-            </div>
-          </div>
-          <div
-            className="horizontal_field_with_border_top"
-          >
-            <label
-              className="col-sm-3 control-label"
-              htmlFor="personal-data-form-lastname"
-            >
-              <FormattedMessage
-                id="form.label_lastname"
-                values={Object {}}
-              />
-            </label>
-            <div>
-              <Field
-                component={[Function]}
-                divClassName="col-sm-4"
-                id="personal-data-form-lastname"
-                name="lastname"
-                type="text"
-              />
-            </div>
-            <div
-              className="col-sm-4 btn--delete"
-            >
-              <OverlayTrigger
-                defaultOverlayShown={false}
-                overlay={
-                  <Popover
-                    bsClass="popover"
-                    className="in"
-                    id="delete-field"
-                    placement="top"
-                    title={
-                      <FormattedMessage
-                        id="are-you-sure-you-want-to-delete-this-field"
-                        values={Object {}}
-                      />
-                    }
-                  >
-                    <Button
-                      active={false}
-                      block={false}
-                      bsClass="btn"
-                      bsStyle="danger"
-                      className="right-bloc btn-block"
-                      disabled={false}
-                      id="btn-confirm-delete-field"
-                      onClick={[Function]}
-                    >
-                      <FormattedMessage
-                        id="btn_delete"
-                        values={Object {}}
-                      />
-                    </Button>
-                    <Button
-                      active={false}
-                      block={false}
-                      bsClass="btn"
-                      bsStyle="default"
-                      className="right-block btn-block"
-                      disabled={false}
-                      id="btn-cancel-delete-field"
-                      onClick={[Function]}
-                    >
-                      <FormattedMessage
-                        id="global.no"
-                        values={Object {}}
-                      />
-                    </Button>
-                  </Popover>
-                }
-                placement="top"
-                trigger="click"
-              >
-                <OverlayTrigger
-                  defaultOverlayShown={false}
-                  overlay={
-                    <Tooltip
-                      bsClass="tooltip"
-                      id="tooltip"
-                      placement="right"
-                    >
-                      <FormattedMessage
-                        id="global.delete"
-                        values={Object {}}
-                      />
-                    </Tooltip>
-                  }
-                  placement="top"
-                  trigger={
-                    Array [
-                      "hover",
-                      "focus",
-                    ]
-                  }
-                >
-                  <span
-                    className="personal-data-delete-field"
-                    id="personal-data-lastname"
-                  >
-                    <i
-                      className="icon cap-ios-close"
-                    />
-                  </span>
-                </OverlayTrigger>
-              </OverlayTrigger>
-            </div>
-          </div>
-          <div
-            className="horizontal_field_with_border_top"
-          >
-            <label
-              className="col-sm-3 control-label"
-              htmlFor="personal-data-form-gender"
-            >
-              <FormattedMessage
-                id="form.label_gender"
-                values={Object {}}
-              />
-            </label>
-            <div>
-              <Field
-                component={[Function]}
-                divClassName="col-sm-4"
-                id="personal-data-form-gender"
-                name="gender"
-                type="select"
-              >
-                <option
-                  value="MALE"
-                >
-                  <FormattedMessage
-                    id="gender.male"
-                    values={Object {}}
-                  />
-                </option>
-                <option
-                  value="FEMALE"
-                >
-                  <FormattedMessage
-                    id="gender.female"
-                    values={Object {}}
-                  />
-                </option>
-                <option
-                  value="OTHER"
-                >
-                  <FormattedMessage
-                    id="gender.other"
-                    values={Object {}}
-                  />
-                </option>
-              </Field>
-            </div>
-            <div
-              className="col-sm-4 btn--delete"
-            >
-              <OverlayTrigger
-                defaultOverlayShown={false}
-                overlay={
-                  <Popover
-                    bsClass="popover"
-                    className="in"
-                    id="delete-field"
-                    placement="top"
-                    title={
-                      <FormattedMessage
-                        id="are-you-sure-you-want-to-delete-this-field"
-                        values={Object {}}
-                      />
-                    }
-                  >
-                    <Button
-                      active={false}
-                      block={false}
-                      bsClass="btn"
-                      bsStyle="danger"
-                      className="right-bloc btn-block"
-                      disabled={false}
-                      id="btn-confirm-delete-field"
-                      onClick={[Function]}
-                    >
-                      <FormattedMessage
-                        id="btn_delete"
-                        values={Object {}}
-                      />
-                    </Button>
-                    <Button
-                      active={false}
-                      block={false}
-                      bsClass="btn"
-                      bsStyle="default"
-                      className="right-block btn-block"
-                      disabled={false}
-                      id="btn-cancel-delete-field"
-                      onClick={[Function]}
-                    >
-                      <FormattedMessage
-                        id="global.no"
-                        values={Object {}}
-                      />
-                    </Button>
-                  </Popover>
-                }
-                placement="top"
-                rootClose={true}
-                trigger="click"
-              >
-                <OverlayTrigger
-                  defaultOverlayShown={false}
-                  overlay={
-                    <Tooltip
-                      bsClass="tooltip"
-                      id="tooltip"
-                      placement="right"
-                    >
-                      <FormattedMessage
-                        id="global.delete"
-                        values={Object {}}
-                      />
-                    </Tooltip>
-                  }
-                  placement="top"
-                  trigger={
-                    Array [
-                      "hover",
-                      "focus",
-                    ]
-                  }
-                >
-                  <span
-                    className="personal-data-delete-field"
-                    id="personal-data-gender"
-                  >
-                    <i
-                      className="icon cap-ios-close"
-                    />
-                  </span>
-                </OverlayTrigger>
-              </OverlayTrigger>
-            </div>
-          </div>
           <div>
             <div
               className="horizontal_field_with_border_top"
-            >
-              <Field
-                component={[Function]}
-                componentId="personal-data-date-of-birth"
-                dayDefaultValue="Jour"
-                dayId="personal-data-date-of-birth-day"
-                divClassName="col-sm-6"
-                id="dateOfBirth"
-                label="form.label_date_of_birth"
-                labelClassName="col-sm-3 control-label"
-                locale="fr-FR"
-                monthDefaultValue="Mois"
-                monthId="personal-data-date-of-birth-month"
-                name="dateOfBirth"
-                yearDefaultValue="Année"
-                yearId="personal-data-date-of-birth-year"
-              />
-            </div>
-            <div
-              className="col-sm-2 btn--delete"
               style={
                 Object {
-                  "marginBottom": 15,
+                  "border": 0,
                 }
               }
-            >
-              <OverlayTrigger
-                defaultOverlayShown={false}
-                overlay={
-                  <Popover
-                    bsClass="popover"
-                    className="in"
-                    id="delete-field"
-                    placement="top"
-                    title={
-                      <FormattedMessage
-                        id="are-you-sure-you-want-to-delete-this-field"
-                        values={Object {}}
-                      />
-                    }
-                  >
-                    <Button
-                      active={false}
-                      block={false}
-                      bsClass="btn"
-                      bsStyle="danger"
-                      className="right-bloc btn-block"
-                      disabled={false}
-                      id="btn-confirm-delete-field"
-                      onClick={[Function]}
-                    >
-                      <FormattedMessage
-                        id="btn_delete"
-                        values={Object {}}
-                      />
-                    </Button>
-                    <Button
-                      active={false}
-                      block={false}
-                      bsClass="btn"
-                      bsStyle="default"
-                      className="right-block btn-block"
-                      disabled={false}
-                      id="btn-cancel-delete-field"
-                      onClick={[Function]}
-                    >
-                      <FormattedMessage
-                        id="global.no"
-                        values={Object {}}
-                      />
-                    </Button>
-                  </Popover>
-                }
-                placement="top"
-                rootClose={true}
-                trigger="click"
-              >
-                <OverlayTrigger
-                  defaultOverlayShown={false}
-                  overlay={
-                    <Tooltip
-                      bsClass="tooltip"
-                      id="tooltip"
-                      placement="right"
-                    >
-                      <FormattedMessage
-                        id="global.delete"
-                        values={Object {}}
-                      />
-                    </Tooltip>
-                  }
-                  placement="top"
-                  trigger={
-                    Array [
-                      "hover",
-                      "focus",
-                    ]
-                  }
-                >
-                  <span
-                    className="personal-data-delete-field"
-                    id="personal-data-dateOfBirth"
-                  >
-                    <i
-                      className="icon cap-ios-close"
-                    />
-                  </span>
-                </OverlayTrigger>
-              </OverlayTrigger>
-            </div>
-          </div>
-          <div>
-            <div
-              className="horizontal_field_with_border_top"
             >
               <label
                 className="col-sm-3 control-label"
-                htmlFor="personal-data-form-phone"
+                htmlFor="personal-data-form-firstname"
               >
                 <FormattedMessage
-                  id="form.label_phone"
+                  id="form.label_firstname"
                   values={Object {}}
                 />
               </label>
               <div>
                 <Field
-                  addonBefore="France +33"
                   component={[Function]}
-                  divClassName="col-sm-4 col-xs-12"
-                  id="personal-data-form-phone"
-                  name="phone"
+                  divClassName="col-sm-4"
+                  id="personal-data-form-firstname"
+                  name="firstname"
                   type="text"
                 />
               </div>
@@ -642,7 +159,7 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                   >
                     <span
                       className="personal-data-delete-field"
-                      id="phone"
+                      id="personal-data-firstname"
                     >
                       <i
                         className="icon cap-ios-close"
@@ -652,85 +169,576 @@ exports[`<PersonalData /> should render user withou address 1`] = `
                 </OverlayTrigger>
               </div>
             </div>
+            <div
+              className="horizontal_field_with_border_top"
+            >
+              <label
+                className="col-sm-3 control-label"
+                htmlFor="personal-data-form-lastname"
+              >
+                <FormattedMessage
+                  id="form.label_lastname"
+                  values={Object {}}
+                />
+              </label>
+              <div>
+                <Field
+                  component={[Function]}
+                  divClassName="col-sm-4"
+                  id="personal-data-form-lastname"
+                  name="lastname"
+                  type="text"
+                />
+              </div>
+              <div
+                className="col-sm-4 btn--delete"
+              >
+                <OverlayTrigger
+                  defaultOverlayShown={false}
+                  overlay={
+                    <Popover
+                      bsClass="popover"
+                      className="in"
+                      id="delete-field"
+                      placement="top"
+                      title={
+                        <FormattedMessage
+                          id="are-you-sure-you-want-to-delete-this-field"
+                          values={Object {}}
+                        />
+                      }
+                    >
+                      <Button
+                        active={false}
+                        block={false}
+                        bsClass="btn"
+                        bsStyle="danger"
+                        className="right-bloc btn-block"
+                        disabled={false}
+                        id="btn-confirm-delete-field"
+                        onClick={[Function]}
+                      >
+                        <FormattedMessage
+                          id="btn_delete"
+                          values={Object {}}
+                        />
+                      </Button>
+                      <Button
+                        active={false}
+                        block={false}
+                        bsClass="btn"
+                        bsStyle="default"
+                        className="right-block btn-block"
+                        disabled={false}
+                        id="btn-cancel-delete-field"
+                        onClick={[Function]}
+                      >
+                        <FormattedMessage
+                          id="global.no"
+                          values={Object {}}
+                        />
+                      </Button>
+                    </Popover>
+                  }
+                  placement="top"
+                  trigger="click"
+                >
+                  <OverlayTrigger
+                    defaultOverlayShown={false}
+                    overlay={
+                      <Tooltip
+                        bsClass="tooltip"
+                        id="tooltip"
+                        placement="right"
+                      >
+                        <FormattedMessage
+                          id="global.delete"
+                          values={Object {}}
+                        />
+                      </Tooltip>
+                    }
+                    placement="top"
+                    trigger={
+                      Array [
+                        "hover",
+                        "focus",
+                      ]
+                    }
+                  >
+                    <span
+                      className="personal-data-delete-field"
+                      id="personal-data-lastname"
+                    >
+                      <i
+                        className="icon cap-ios-close"
+                      />
+                    </span>
+                  </OverlayTrigger>
+                </OverlayTrigger>
+              </div>
+            </div>
+            <div
+              className="horizontal_field_with_border_top"
+            >
+              <label
+                className="col-sm-3 control-label"
+                htmlFor="personal-data-form-gender"
+              >
+                <FormattedMessage
+                  id="form.label_gender"
+                  values={Object {}}
+                />
+              </label>
+              <div>
+                <Field
+                  component={[Function]}
+                  divClassName="col-sm-4"
+                  id="personal-data-form-gender"
+                  name="gender"
+                  type="select"
+                >
+                  <option
+                    value="MALE"
+                  >
+                    <FormattedMessage
+                      id="gender.male"
+                      values={Object {}}
+                    />
+                  </option>
+                  <option
+                    value="FEMALE"
+                  >
+                    <FormattedMessage
+                      id="gender.female"
+                      values={Object {}}
+                    />
+                  </option>
+                  <option
+                    value="OTHER"
+                  >
+                    <FormattedMessage
+                      id="gender.other"
+                      values={Object {}}
+                    />
+                  </option>
+                </Field>
+              </div>
+              <div
+                className="col-sm-4 btn--delete"
+              >
+                <OverlayTrigger
+                  defaultOverlayShown={false}
+                  overlay={
+                    <Popover
+                      bsClass="popover"
+                      className="in"
+                      id="delete-field"
+                      placement="top"
+                      title={
+                        <FormattedMessage
+                          id="are-you-sure-you-want-to-delete-this-field"
+                          values={Object {}}
+                        />
+                      }
+                    >
+                      <Button
+                        active={false}
+                        block={false}
+                        bsClass="btn"
+                        bsStyle="danger"
+                        className="right-bloc btn-block"
+                        disabled={false}
+                        id="btn-confirm-delete-field"
+                        onClick={[Function]}
+                      >
+                        <FormattedMessage
+                          id="btn_delete"
+                          values={Object {}}
+                        />
+                      </Button>
+                      <Button
+                        active={false}
+                        block={false}
+                        bsClass="btn"
+                        bsStyle="default"
+                        className="right-block btn-block"
+                        disabled={false}
+                        id="btn-cancel-delete-field"
+                        onClick={[Function]}
+                      >
+                        <FormattedMessage
+                          id="global.no"
+                          values={Object {}}
+                        />
+                      </Button>
+                    </Popover>
+                  }
+                  placement="top"
+                  rootClose={true}
+                  trigger="click"
+                >
+                  <OverlayTrigger
+                    defaultOverlayShown={false}
+                    overlay={
+                      <Tooltip
+                        bsClass="tooltip"
+                        id="tooltip"
+                        placement="right"
+                      >
+                        <FormattedMessage
+                          id="global.delete"
+                          values={Object {}}
+                        />
+                      </Tooltip>
+                    }
+                    placement="top"
+                    trigger={
+                      Array [
+                        "hover",
+                        "focus",
+                      ]
+                    }
+                  >
+                    <span
+                      className="personal-data-delete-field"
+                      id="personal-data-gender"
+                    >
+                      <i
+                        className="icon cap-ios-close"
+                      />
+                    </span>
+                  </OverlayTrigger>
+                </OverlayTrigger>
+              </div>
+            </div>
+            <div>
+              <div
+                className="horizontal_field_with_border_top"
+              >
+                <Field
+                  component={[Function]}
+                  componentId="personal-data-date-of-birth"
+                  dayDefaultValue="Jour"
+                  dayId="personal-data-date-of-birth-day"
+                  divClassName="col-sm-6"
+                  id="dateOfBirth"
+                  label="form.label_date_of_birth"
+                  labelClassName="col-sm-3 control-label"
+                  locale="fr-FR"
+                  monthDefaultValue="Mois"
+                  monthId="personal-data-date-of-birth-month"
+                  name="dateOfBirth"
+                  yearDefaultValue="Année"
+                  yearId="personal-data-date-of-birth-year"
+                />
+              </div>
+              <div
+                className="col-sm-2 btn--delete"
+                style={
+                  Object {
+                    "marginBottom": 15,
+                  }
+                }
+              >
+                <OverlayTrigger
+                  defaultOverlayShown={false}
+                  overlay={
+                    <Popover
+                      bsClass="popover"
+                      className="in"
+                      id="delete-field"
+                      placement="top"
+                      title={
+                        <FormattedMessage
+                          id="are-you-sure-you-want-to-delete-this-field"
+                          values={Object {}}
+                        />
+                      }
+                    >
+                      <Button
+                        active={false}
+                        block={false}
+                        bsClass="btn"
+                        bsStyle="danger"
+                        className="right-bloc btn-block"
+                        disabled={false}
+                        id="btn-confirm-delete-field"
+                        onClick={[Function]}
+                      >
+                        <FormattedMessage
+                          id="btn_delete"
+                          values={Object {}}
+                        />
+                      </Button>
+                      <Button
+                        active={false}
+                        block={false}
+                        bsClass="btn"
+                        bsStyle="default"
+                        className="right-block btn-block"
+                        disabled={false}
+                        id="btn-cancel-delete-field"
+                        onClick={[Function]}
+                      >
+                        <FormattedMessage
+                          id="global.no"
+                          values={Object {}}
+                        />
+                      </Button>
+                    </Popover>
+                  }
+                  placement="top"
+                  rootClose={true}
+                  trigger="click"
+                >
+                  <OverlayTrigger
+                    defaultOverlayShown={false}
+                    overlay={
+                      <Tooltip
+                        bsClass="tooltip"
+                        id="tooltip"
+                        placement="right"
+                      >
+                        <FormattedMessage
+                          id="global.delete"
+                          values={Object {}}
+                        />
+                      </Tooltip>
+                    }
+                    placement="top"
+                    trigger={
+                      Array [
+                        "hover",
+                        "focus",
+                      ]
+                    }
+                  >
+                    <span
+                      className="personal-data-delete-field"
+                      id="personal-data-dateOfBirth"
+                    >
+                      <i
+                        className="icon cap-ios-close"
+                      />
+                    </span>
+                  </OverlayTrigger>
+                </OverlayTrigger>
+              </div>
+            </div>
+            <div>
+              <div
+                className="horizontal_field_with_border_top"
+              >
+                <label
+                  className="col-sm-3 control-label"
+                  htmlFor="personal-data-form-phone"
+                >
+                  <FormattedMessage
+                    id="form.label_phone"
+                    values={Object {}}
+                  />
+                </label>
+                <div>
+                  <Field
+                    addonBefore="France +33"
+                    component={[Function]}
+                    divClassName="col-sm-4 col-xs-12"
+                    id="personal-data-form-phone"
+                    name="phone"
+                    type="text"
+                  />
+                </div>
+                <div
+                  className="col-sm-4 btn--delete"
+                >
+                  <OverlayTrigger
+                    defaultOverlayShown={false}
+                    overlay={
+                      <Popover
+                        bsClass="popover"
+                        className="in"
+                        id="delete-field"
+                        placement="top"
+                        title={
+                          <FormattedMessage
+                            id="are-you-sure-you-want-to-delete-this-field"
+                            values={Object {}}
+                          />
+                        }
+                      >
+                        <Button
+                          active={false}
+                          block={false}
+                          bsClass="btn"
+                          bsStyle="danger"
+                          className="right-bloc btn-block"
+                          disabled={false}
+                          id="btn-confirm-delete-field"
+                          onClick={[Function]}
+                        >
+                          <FormattedMessage
+                            id="btn_delete"
+                            values={Object {}}
+                          />
+                        </Button>
+                        <Button
+                          active={false}
+                          block={false}
+                          bsClass="btn"
+                          bsStyle="default"
+                          className="right-block btn-block"
+                          disabled={false}
+                          id="btn-cancel-delete-field"
+                          onClick={[Function]}
+                        >
+                          <FormattedMessage
+                            id="global.no"
+                            values={Object {}}
+                          />
+                        </Button>
+                      </Popover>
+                    }
+                    placement="top"
+                    rootClose={true}
+                    trigger="click"
+                  >
+                    <OverlayTrigger
+                      defaultOverlayShown={false}
+                      overlay={
+                        <Tooltip
+                          bsClass="tooltip"
+                          id="tooltip"
+                          placement="right"
+                        >
+                          <FormattedMessage
+                            id="global.delete"
+                            values={Object {}}
+                          />
+                        </Tooltip>
+                      }
+                      placement="top"
+                      trigger={
+                        Array [
+                          "hover",
+                          "focus",
+                        ]
+                      }
+                    >
+                      <span
+                        className="personal-data-delete-field"
+                        id="phone"
+                      >
+                        <i
+                          className="icon cap-ios-close"
+                        />
+                      </span>
+                    </OverlayTrigger>
+                  </OverlayTrigger>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="horizontal_field_with_border_top"
+          >
+            <div
+              className="col-sm-3"
+            />
+            <ButtonGroup
+              block={false}
+              bsClass="btn-group"
+              className="col-sm-4 pl-0"
+              justified={false}
+              vertical={false}
+            >
+              <AlertForm
+                errorMessage={null}
+                invalid={false}
+                submitFailed={false}
+                submitSucceeded={false}
+                submitting={false}
+                valid={true}
+              />
+            </ButtonGroup>
           </div>
         </div>
+      </PanelBody>
+      <PanelFooter
+        bsClass="panel"
+      >
         <div
-          className="horizontal_field_with_border_top"
+          className="col-sm-offset-4"
         >
-          <div
-            className="col-sm-3"
-          />
-          <ButtonGroup
+          <Button
+            active={false}
             block={false}
-            bsClass="btn-group"
-            className="col-sm-4 pl-0"
-            justified={false}
-            vertical={false}
+            bsClass="btn"
+            bsStyle="primary"
+            disabled={false}
+            id="personal-data-form-save"
+            type="submit"
           >
-            <AlertForm
-              errorMessage={null}
-              invalid={false}
-              submitFailed={false}
-              submitSucceeded={false}
-              submitting={false}
-              valid={true}
+            <FormattedMessage
+              id="global.save_modifications"
+              values={Object {}}
             />
-          </ButtonGroup>
+          </Button>
         </div>
-      </div>
-    </Panel>
+      </PanelFooter>
+    </Uncontrolled(Panel)>
   </form>
-  <Panel
-    bsClass="panel"
-    bsStyle="default"
-    defaultExpanded={false}
-  >
-    <h2
-      className="page-header"
+  <Uncontrolled(Panel)>
+    <PanelBody
+      bsClass="panel"
+      collapsible={false}
     >
-      <FormattedMessage
-        id="data-export"
-        values={Object {}}
-      />
-    </h2>
-    <div
-      className="horizontal_field_with_border_top"
-    >
-      <label
-        className="col-sm-3 control-label"
+      <h2
+        className="page-header"
       >
         <FormattedMessage
-          id="your-data"
+          id="data-export"
           values={Object {}}
         />
-      </label>
+      </h2>
       <div
-        className="col-sm-9"
+        className="horizontal_field_with_border_top"
       >
-        <Relay(UserArchiveRequestButton)
-          viewer={
-            Object {
-              "dateOfBirth": "29-02-1990",
-              "firstname": "Utilisateur",
-              "gender": "MALE",
-              "id": "user",
-              "lastname": "Super",
-              "phone": "0123456789",
-              "phoneConfirmed": true,
-            }
-          }
-        />
-        <p
-          className="excerpt"
+        <label
+          className="col-sm-3 control-label"
         >
           <FormattedMessage
-            id="data-copy-help-text"
+            id="your-data"
             values={Object {}}
           />
-        </p>
+        </label>
+        <div
+          className="col-sm-9"
+        >
+          <Relay(UserArchiveRequestButton)
+            viewer={
+              Object {
+                "dateOfBirth": "29-02-1990",
+                "firstname": "Utilisateur",
+                "gender": "MALE",
+                "id": "user",
+                "lastname": "Super",
+                "phone": "0123456789",
+                "phoneConfirmed": true,
+              }
+            }
+          />
+          <p
+            className="excerpt"
+          >
+            <FormattedMessage
+              id="data-copy-help-text"
+              values={Object {}}
+            />
+          </p>
+        </div>
       </div>
-    </div>
-  </Panel>
+    </PanelBody>
+  </Uncontrolled(Panel)>
 </div>
 `;
 
@@ -757,31 +765,13 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
     className="form-horizontal"
     onSubmit={[MockFunction]}
   >
-    <Panel
-      bsClass="panel"
-      bsStyle="default"
-      defaultExpanded={false}
-      footer={
-        <div
-          className="col-sm-offset-4"
-        >
-          <Button
-            active={false}
-            block={false}
-            bsClass="btn"
-            bsStyle="primary"
-            disabled={false}
-            id="personal-data-form-save"
-            type="submit"
-          >
-            <FormattedMessage
-              id="global.save_modifications"
-              values={Object {}}
-            />
-          </Button>
-        </div>
-      }
-      header={
+    <Uncontrolled(Panel)
+      id="capco_horizontal_form"
+    >
+      <PanelHeading
+        bsClass="panel"
+        componentClass="div"
+      >
         <div
           className="panel-heading profile-header"
         >
@@ -792,298 +782,35 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
             />
           </h1>
         </div>
-      }
-      id="capco_horizontal_form"
-    >
-      <h2
-        className="page-header"
+      </PanelHeading>
+      <PanelBody
+        bsClass="panel"
+        collapsible={false}
       >
-        <FormattedMessage
-          id="personal-data"
-          values={Object {}}
-        />
-      </h2>
-      <div>
+        <h2
+          className="page-header"
+        >
+          <FormattedMessage
+            id="personal-data"
+            values={Object {}}
+          />
+        </h2>
         <div>
-          <div
-            className="horizontal_field_with_border_top"
-            style={
-              Object {
-                "border": 0,
+          <div>
+            <div
+              className="horizontal_field_with_border_top"
+              style={
+                Object {
+                  "border": 0,
+                }
               }
-            }
-          >
-            <label
-              className="col-sm-3 control-label"
-              htmlFor="personal-data-form-firstname"
-            >
-              <FormattedMessage
-                id="form.label_firstname"
-                values={Object {}}
-              />
-            </label>
-            <div>
-              <Field
-                component={[Function]}
-                divClassName="col-sm-4"
-                id="personal-data-form-firstname"
-                name="firstname"
-                type="text"
-              />
-            </div>
-            <div
-              className="col-sm-4 btn--delete"
-            >
-              <OverlayTrigger
-                defaultOverlayShown={false}
-                overlay={
-                  <Popover
-                    bsClass="popover"
-                    className="in"
-                    id="delete-field"
-                    placement="top"
-                    title={
-                      <FormattedMessage
-                        id="are-you-sure-you-want-to-delete-this-field"
-                        values={Object {}}
-                      />
-                    }
-                  >
-                    <Button
-                      active={false}
-                      block={false}
-                      bsClass="btn"
-                      bsStyle="danger"
-                      className="right-bloc btn-block"
-                      disabled={false}
-                      id="btn-confirm-delete-field"
-                      onClick={[Function]}
-                    >
-                      <FormattedMessage
-                        id="btn_delete"
-                        values={Object {}}
-                      />
-                    </Button>
-                    <Button
-                      active={false}
-                      block={false}
-                      bsClass="btn"
-                      bsStyle="default"
-                      className="right-block btn-block"
-                      disabled={false}
-                      id="btn-cancel-delete-field"
-                      onClick={[Function]}
-                    >
-                      <FormattedMessage
-                        id="global.no"
-                        values={Object {}}
-                      />
-                    </Button>
-                  </Popover>
-                }
-                placement="top"
-                rootClose={true}
-                trigger="click"
-              >
-                <OverlayTrigger
-                  defaultOverlayShown={false}
-                  overlay={
-                    <Tooltip
-                      bsClass="tooltip"
-                      id="tooltip"
-                      placement="right"
-                    >
-                      <FormattedMessage
-                        id="global.delete"
-                        values={Object {}}
-                      />
-                    </Tooltip>
-                  }
-                  placement="top"
-                  trigger={
-                    Array [
-                      "hover",
-                      "focus",
-                    ]
-                  }
-                >
-                  <span
-                    className="personal-data-delete-field"
-                    id="personal-data-firstname"
-                  >
-                    <i
-                      className="icon cap-ios-close"
-                    />
-                  </span>
-                </OverlayTrigger>
-              </OverlayTrigger>
-            </div>
-          </div>
-          <div
-            className="horizontal_field_with_border_top"
-          >
-            <div
-              className="col-sm-11 btn--delete"
-            >
-              <OverlayTrigger
-                defaultOverlayShown={false}
-                overlay={
-                  <Popover
-                    bsClass="popover"
-                    className="in"
-                    id="delete-field"
-                    placement="top"
-                    title={
-                      <FormattedMessage
-                        id="are-you-sure-you-want-to-delete-this-field"
-                        values={Object {}}
-                      />
-                    }
-                  >
-                    <Button
-                      active={false}
-                      block={false}
-                      bsClass="btn"
-                      bsStyle="danger"
-                      className="right-bloc btn-block"
-                      disabled={false}
-                      id="btn-confirm-delete-field"
-                      onClick={[Function]}
-                    >
-                      <FormattedMessage
-                        id="btn_delete"
-                        values={Object {}}
-                      />
-                    </Button>
-                    <Button
-                      active={false}
-                      block={false}
-                      bsClass="btn"
-                      bsStyle="default"
-                      className="right-block btn-block"
-                      disabled={false}
-                      id="btn-cancel-delete-field"
-                      onClick={[Function]}
-                    >
-                      <FormattedMessage
-                        id="global.no"
-                        values={Object {}}
-                      />
-                    </Button>
-                  </Popover>
-                }
-                placement="top"
-                rootClose={true}
-                trigger="click"
-              >
-                <OverlayTrigger
-                  defaultOverlayShown={false}
-                  overlay={
-                    <Tooltip
-                      bsClass="tooltip"
-                      id="tooltip"
-                      placement="right"
-                    >
-                      <FormattedMessage
-                        id="global.delete"
-                        values={Object {}}
-                      />
-                    </Tooltip>
-                  }
-                  placement="top"
-                  trigger={
-                    Array [
-                      "hover",
-                      "focus",
-                    ]
-                  }
-                >
-                  <span
-                    className="personal-data-delete-field"
-                    id="personal-data-address-address2-city-zipCode"
-                  >
-                    <i
-                      className="icon cap-ios-close"
-                    />
-                  </span>
-                </OverlayTrigger>
-              </OverlayTrigger>
-            </div>
-            <div
-              className="personal-data-address"
             >
               <label
                 className="col-sm-3 control-label"
-                htmlFor="personal-data-form-address"
+                htmlFor="personal-data-form-firstname"
               >
                 <FormattedMessage
-                  id="form.label_address"
-                  values={Object {}}
-                />
-              </label>
-              <div>
-                <Field
-                  component={[Function]}
-                  divClassName="col-sm-7"
-                  id="personal-data-form-address"
-                  name="address"
-                  type="text"
-                />
-              </div>
-            </div>
-            <div
-              className="personal-data-address"
-            >
-              <label
-                className="col-sm-3 control-label"
-                htmlFor="personal-data-form-address2"
-              >
-                <FormattedMessage
-                  id="form.label_address2"
-                  values={Object {}}
-                />
-              </label>
-              <div>
-                <Field
-                  component={[Function]}
-                  divClassName="col-sm-7"
-                  id="personal-data-form-address2"
-                  name="address2"
-                  type="text"
-                />
-              </div>
-            </div>
-            <div
-              className="personal-data-address"
-            >
-              <label
-                className="col-sm-3 control-label"
-                htmlFor="personal-data-form-city"
-              >
-                <FormattedMessage
-                  id="form.label_city"
-                  values={Object {}}
-                />
-              </label>
-              <div>
-                <Field
-                  component={[Function]}
-                  divClassName="col-sm-7"
-                  id="personal-data-form-city"
-                  name="city"
-                  type="text"
-                />
-              </div>
-            </div>
-            <div
-              className="personal-data-address"
-            >
-              <label
-                className="col-sm-3 control-label"
-                htmlFor="personal-data-form-zip-code"
-              >
-                <FormattedMessage
-                  id="form.label_zip_code"
+                  id="form.label_firstname"
                   values={Object {}}
                 />
               </label>
@@ -1091,33 +818,8 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
                 <Field
                   component={[Function]}
                   divClassName="col-sm-4"
-                  id="personal-data-form-zip-code"
-                  name="zipCode"
-                  type="text"
-                />
-              </div>
-            </div>
-          </div>
-          <div>
-            <div
-              className="horizontal_field_with_border_top"
-            >
-              <label
-                className="col-sm-3 control-label"
-                htmlFor="personal-data-form-phone"
-              >
-                <FormattedMessage
-                  id="form.label_phone"
-                  values={Object {}}
-                />
-              </label>
-              <div>
-                <Field
-                  addonBefore="France +33"
-                  component={[Function]}
-                  divClassName="col-sm-4 col-xs-12"
-                  id="personal-data-form-phone"
-                  name="phone"
+                  id="personal-data-form-firstname"
+                  name="firstname"
                   type="text"
                 />
               </div>
@@ -1199,7 +901,7 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
                   >
                     <span
                       className="personal-data-delete-field"
-                      id="phone"
+                      id="personal-data-firstname"
                     >
                       <i
                         className="icon cap-ios-close"
@@ -1209,85 +911,399 @@ exports[`<PersonalData /> should render user without lastname, dateOfBirth, gend
                 </OverlayTrigger>
               </div>
             </div>
+            <div
+              className="horizontal_field_with_border_top"
+            >
+              <div
+                className="col-sm-11 btn--delete"
+              >
+                <OverlayTrigger
+                  defaultOverlayShown={false}
+                  overlay={
+                    <Popover
+                      bsClass="popover"
+                      className="in"
+                      id="delete-field"
+                      placement="top"
+                      title={
+                        <FormattedMessage
+                          id="are-you-sure-you-want-to-delete-this-field"
+                          values={Object {}}
+                        />
+                      }
+                    >
+                      <Button
+                        active={false}
+                        block={false}
+                        bsClass="btn"
+                        bsStyle="danger"
+                        className="right-bloc btn-block"
+                        disabled={false}
+                        id="btn-confirm-delete-field"
+                        onClick={[Function]}
+                      >
+                        <FormattedMessage
+                          id="btn_delete"
+                          values={Object {}}
+                        />
+                      </Button>
+                      <Button
+                        active={false}
+                        block={false}
+                        bsClass="btn"
+                        bsStyle="default"
+                        className="right-block btn-block"
+                        disabled={false}
+                        id="btn-cancel-delete-field"
+                        onClick={[Function]}
+                      >
+                        <FormattedMessage
+                          id="global.no"
+                          values={Object {}}
+                        />
+                      </Button>
+                    </Popover>
+                  }
+                  placement="top"
+                  rootClose={true}
+                  trigger="click"
+                >
+                  <OverlayTrigger
+                    defaultOverlayShown={false}
+                    overlay={
+                      <Tooltip
+                        bsClass="tooltip"
+                        id="tooltip"
+                        placement="right"
+                      >
+                        <FormattedMessage
+                          id="global.delete"
+                          values={Object {}}
+                        />
+                      </Tooltip>
+                    }
+                    placement="top"
+                    trigger={
+                      Array [
+                        "hover",
+                        "focus",
+                      ]
+                    }
+                  >
+                    <span
+                      className="personal-data-delete-field"
+                      id="personal-data-address-address2-city-zipCode"
+                    >
+                      <i
+                        className="icon cap-ios-close"
+                      />
+                    </span>
+                  </OverlayTrigger>
+                </OverlayTrigger>
+              </div>
+              <div
+                className="personal-data-address"
+              >
+                <label
+                  className="col-sm-3 control-label"
+                  htmlFor="personal-data-form-address"
+                >
+                  <FormattedMessage
+                    id="form.label_address"
+                    values={Object {}}
+                  />
+                </label>
+                <div>
+                  <Field
+                    component={[Function]}
+                    divClassName="col-sm-7"
+                    id="personal-data-form-address"
+                    name="address"
+                    type="text"
+                  />
+                </div>
+              </div>
+              <div
+                className="personal-data-address"
+              >
+                <label
+                  className="col-sm-3 control-label"
+                  htmlFor="personal-data-form-address2"
+                >
+                  <FormattedMessage
+                    id="form.label_address2"
+                    values={Object {}}
+                  />
+                </label>
+                <div>
+                  <Field
+                    component={[Function]}
+                    divClassName="col-sm-7"
+                    id="personal-data-form-address2"
+                    name="address2"
+                    type="text"
+                  />
+                </div>
+              </div>
+              <div
+                className="personal-data-address"
+              >
+                <label
+                  className="col-sm-3 control-label"
+                  htmlFor="personal-data-form-city"
+                >
+                  <FormattedMessage
+                    id="form.label_city"
+                    values={Object {}}
+                  />
+                </label>
+                <div>
+                  <Field
+                    component={[Function]}
+                    divClassName="col-sm-7"
+                    id="personal-data-form-city"
+                    name="city"
+                    type="text"
+                  />
+                </div>
+              </div>
+              <div
+                className="personal-data-address"
+              >
+                <label
+                  className="col-sm-3 control-label"
+                  htmlFor="personal-data-form-zip-code"
+                >
+                  <FormattedMessage
+                    id="form.label_zip_code"
+                    values={Object {}}
+                  />
+                </label>
+                <div>
+                  <Field
+                    component={[Function]}
+                    divClassName="col-sm-4"
+                    id="personal-data-form-zip-code"
+                    name="zipCode"
+                    type="text"
+                  />
+                </div>
+              </div>
+            </div>
+            <div>
+              <div
+                className="horizontal_field_with_border_top"
+              >
+                <label
+                  className="col-sm-3 control-label"
+                  htmlFor="personal-data-form-phone"
+                >
+                  <FormattedMessage
+                    id="form.label_phone"
+                    values={Object {}}
+                  />
+                </label>
+                <div>
+                  <Field
+                    addonBefore="France +33"
+                    component={[Function]}
+                    divClassName="col-sm-4 col-xs-12"
+                    id="personal-data-form-phone"
+                    name="phone"
+                    type="text"
+                  />
+                </div>
+                <div
+                  className="col-sm-4 btn--delete"
+                >
+                  <OverlayTrigger
+                    defaultOverlayShown={false}
+                    overlay={
+                      <Popover
+                        bsClass="popover"
+                        className="in"
+                        id="delete-field"
+                        placement="top"
+                        title={
+                          <FormattedMessage
+                            id="are-you-sure-you-want-to-delete-this-field"
+                            values={Object {}}
+                          />
+                        }
+                      >
+                        <Button
+                          active={false}
+                          block={false}
+                          bsClass="btn"
+                          bsStyle="danger"
+                          className="right-bloc btn-block"
+                          disabled={false}
+                          id="btn-confirm-delete-field"
+                          onClick={[Function]}
+                        >
+                          <FormattedMessage
+                            id="btn_delete"
+                            values={Object {}}
+                          />
+                        </Button>
+                        <Button
+                          active={false}
+                          block={false}
+                          bsClass="btn"
+                          bsStyle="default"
+                          className="right-block btn-block"
+                          disabled={false}
+                          id="btn-cancel-delete-field"
+                          onClick={[Function]}
+                        >
+                          <FormattedMessage
+                            id="global.no"
+                            values={Object {}}
+                          />
+                        </Button>
+                      </Popover>
+                    }
+                    placement="top"
+                    rootClose={true}
+                    trigger="click"
+                  >
+                    <OverlayTrigger
+                      defaultOverlayShown={false}
+                      overlay={
+                        <Tooltip
+                          bsClass="tooltip"
+                          id="tooltip"
+                          placement="right"
+                        >
+                          <FormattedMessage
+                            id="global.delete"
+                            values={Object {}}
+                          />
+                        </Tooltip>
+                      }
+                      placement="top"
+                      trigger={
+                        Array [
+                          "hover",
+                          "focus",
+                        ]
+                      }
+                    >
+                      <span
+                        className="personal-data-delete-field"
+                        id="phone"
+                      >
+                        <i
+                          className="icon cap-ios-close"
+                        />
+                      </span>
+                    </OverlayTrigger>
+                  </OverlayTrigger>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="horizontal_field_with_border_top"
+          >
+            <div
+              className="col-sm-3"
+            />
+            <ButtonGroup
+              block={false}
+              bsClass="btn-group"
+              className="col-sm-4 pl-0"
+              justified={false}
+              vertical={false}
+            >
+              <AlertForm
+                errorMessage={null}
+                invalid={false}
+                submitFailed={false}
+                submitSucceeded={false}
+                submitting={false}
+                valid={true}
+              />
+            </ButtonGroup>
           </div>
         </div>
+      </PanelBody>
+      <PanelFooter
+        bsClass="panel"
+      >
         <div
-          className="horizontal_field_with_border_top"
+          className="col-sm-offset-4"
         >
-          <div
-            className="col-sm-3"
-          />
-          <ButtonGroup
+          <Button
+            active={false}
             block={false}
-            bsClass="btn-group"
-            className="col-sm-4 pl-0"
-            justified={false}
-            vertical={false}
+            bsClass="btn"
+            bsStyle="primary"
+            disabled={false}
+            id="personal-data-form-save"
+            type="submit"
           >
-            <AlertForm
-              errorMessage={null}
-              invalid={false}
-              submitFailed={false}
-              submitSucceeded={false}
-              submitting={false}
-              valid={true}
+            <FormattedMessage
+              id="global.save_modifications"
+              values={Object {}}
             />
-          </ButtonGroup>
+          </Button>
         </div>
-      </div>
-    </Panel>
+      </PanelFooter>
+    </Uncontrolled(Panel)>
   </form>
-  <Panel
-    bsClass="panel"
-    bsStyle="default"
-    defaultExpanded={false}
-  >
-    <h2
-      className="page-header"
+  <Uncontrolled(Panel)>
+    <PanelBody
+      bsClass="panel"
+      collapsible={false}
     >
-      <FormattedMessage
-        id="data-export"
-        values={Object {}}
-      />
-    </h2>
-    <div
-      className="horizontal_field_with_border_top"
-    >
-      <label
-        className="col-sm-3 control-label"
+      <h2
+        className="page-header"
       >
         <FormattedMessage
-          id="your-data"
+          id="data-export"
           values={Object {}}
         />
-      </label>
+      </h2>
       <div
-        className="col-sm-9"
+        className="horizontal_field_with_border_top"
       >
-        <Relay(UserArchiveRequestButton)
-          viewer={
-            Object {
-              "address": "12 rue des boulets",
-              "address2": "2ième etage",
-              "city": "Paris",
-              "firstname": "Utilisateur",
-              "id": "user",
-              "phone": "0123456789",
-              "zipCode": "75012",
-            }
-          }
-        />
-        <p
-          className="excerpt"
+        <label
+          className="col-sm-3 control-label"
         >
           <FormattedMessage
-            id="data-copy-help-text"
+            id="your-data"
             values={Object {}}
           />
-        </p>
+        </label>
+        <div
+          className="col-sm-9"
+        >
+          <Relay(UserArchiveRequestButton)
+            viewer={
+              Object {
+                "address": "12 rue des boulets",
+                "address2": "2ième etage",
+                "city": "Paris",
+                "firstname": "Utilisateur",
+                "id": "user",
+                "phone": "0123456789",
+                "zipCode": "75012",
+              }
+            }
+          />
+          <p
+            className="excerpt"
+          >
+            <FormattedMessage
+              id="data-copy-help-text"
+              values={Object {}}
+            />
+          </p>
+        </div>
       </div>
-    </div>
-  </Panel>
+    </PanelBody>
+  </Uncontrolled(Panel)>
 </div>
 `;
 
@@ -1314,31 +1330,13 @@ exports[`<PersonalData /> should render with full user 1`] = `
     className="form-horizontal"
     onSubmit={[MockFunction]}
   >
-    <Panel
-      bsClass="panel"
-      bsStyle="default"
-      defaultExpanded={false}
-      footer={
-        <div
-          className="col-sm-offset-4"
-        >
-          <Button
-            active={false}
-            block={false}
-            bsClass="btn"
-            bsStyle="primary"
-            disabled={false}
-            id="personal-data-form-save"
-            type="submit"
-          >
-            <FormattedMessage
-              id="global.save_modifications"
-              values={Object {}}
-            />
-          </Button>
-        </div>
-      }
-      header={
+    <Uncontrolled(Panel)
+      id="capco_horizontal_form"
+    >
+      <PanelHeading
+        bsClass="panel"
+        componentClass="div"
+      >
         <div
           className="panel-heading profile-header"
         >
@@ -1349,654 +1347,35 @@ exports[`<PersonalData /> should render with full user 1`] = `
             />
           </h1>
         </div>
-      }
-      id="capco_horizontal_form"
-    >
-      <h2
-        className="page-header"
+      </PanelHeading>
+      <PanelBody
+        bsClass="panel"
+        collapsible={false}
       >
-        <FormattedMessage
-          id="personal-data"
-          values={Object {}}
-        />
-      </h2>
-      <div>
+        <h2
+          className="page-header"
+        >
+          <FormattedMessage
+            id="personal-data"
+            values={Object {}}
+          />
+        </h2>
         <div>
-          <div
-            className="horizontal_field_with_border_top"
-            style={
-              Object {
-                "border": 0,
-              }
-            }
-          >
-            <label
-              className="col-sm-3 control-label"
-              htmlFor="personal-data-form-firstname"
-            >
-              <FormattedMessage
-                id="form.label_firstname"
-                values={Object {}}
-              />
-            </label>
-            <div>
-              <Field
-                component={[Function]}
-                divClassName="col-sm-4"
-                id="personal-data-form-firstname"
-                name="firstname"
-                type="text"
-              />
-            </div>
-            <div
-              className="col-sm-4 btn--delete"
-            >
-              <OverlayTrigger
-                defaultOverlayShown={false}
-                overlay={
-                  <Popover
-                    bsClass="popover"
-                    className="in"
-                    id="delete-field"
-                    placement="top"
-                    title={
-                      <FormattedMessage
-                        id="are-you-sure-you-want-to-delete-this-field"
-                        values={Object {}}
-                      />
-                    }
-                  >
-                    <Button
-                      active={false}
-                      block={false}
-                      bsClass="btn"
-                      bsStyle="danger"
-                      className="right-bloc btn-block"
-                      disabled={false}
-                      id="btn-confirm-delete-field"
-                      onClick={[Function]}
-                    >
-                      <FormattedMessage
-                        id="btn_delete"
-                        values={Object {}}
-                      />
-                    </Button>
-                    <Button
-                      active={false}
-                      block={false}
-                      bsClass="btn"
-                      bsStyle="default"
-                      className="right-block btn-block"
-                      disabled={false}
-                      id="btn-cancel-delete-field"
-                      onClick={[Function]}
-                    >
-                      <FormattedMessage
-                        id="global.no"
-                        values={Object {}}
-                      />
-                    </Button>
-                  </Popover>
-                }
-                placement="top"
-                rootClose={true}
-                trigger="click"
-              >
-                <OverlayTrigger
-                  defaultOverlayShown={false}
-                  overlay={
-                    <Tooltip
-                      bsClass="tooltip"
-                      id="tooltip"
-                      placement="right"
-                    >
-                      <FormattedMessage
-                        id="global.delete"
-                        values={Object {}}
-                      />
-                    </Tooltip>
-                  }
-                  placement="top"
-                  trigger={
-                    Array [
-                      "hover",
-                      "focus",
-                    ]
-                  }
-                >
-                  <span
-                    className="personal-data-delete-field"
-                    id="personal-data-firstname"
-                  >
-                    <i
-                      className="icon cap-ios-close"
-                    />
-                  </span>
-                </OverlayTrigger>
-              </OverlayTrigger>
-            </div>
-          </div>
-          <div
-            className="horizontal_field_with_border_top"
-          >
-            <label
-              className="col-sm-3 control-label"
-              htmlFor="personal-data-form-lastname"
-            >
-              <FormattedMessage
-                id="form.label_lastname"
-                values={Object {}}
-              />
-            </label>
-            <div>
-              <Field
-                component={[Function]}
-                divClassName="col-sm-4"
-                id="personal-data-form-lastname"
-                name="lastname"
-                type="text"
-              />
-            </div>
-            <div
-              className="col-sm-4 btn--delete"
-            >
-              <OverlayTrigger
-                defaultOverlayShown={false}
-                overlay={
-                  <Popover
-                    bsClass="popover"
-                    className="in"
-                    id="delete-field"
-                    placement="top"
-                    title={
-                      <FormattedMessage
-                        id="are-you-sure-you-want-to-delete-this-field"
-                        values={Object {}}
-                      />
-                    }
-                  >
-                    <Button
-                      active={false}
-                      block={false}
-                      bsClass="btn"
-                      bsStyle="danger"
-                      className="right-bloc btn-block"
-                      disabled={false}
-                      id="btn-confirm-delete-field"
-                      onClick={[Function]}
-                    >
-                      <FormattedMessage
-                        id="btn_delete"
-                        values={Object {}}
-                      />
-                    </Button>
-                    <Button
-                      active={false}
-                      block={false}
-                      bsClass="btn"
-                      bsStyle="default"
-                      className="right-block btn-block"
-                      disabled={false}
-                      id="btn-cancel-delete-field"
-                      onClick={[Function]}
-                    >
-                      <FormattedMessage
-                        id="global.no"
-                        values={Object {}}
-                      />
-                    </Button>
-                  </Popover>
-                }
-                placement="top"
-                trigger="click"
-              >
-                <OverlayTrigger
-                  defaultOverlayShown={false}
-                  overlay={
-                    <Tooltip
-                      bsClass="tooltip"
-                      id="tooltip"
-                      placement="right"
-                    >
-                      <FormattedMessage
-                        id="global.delete"
-                        values={Object {}}
-                      />
-                    </Tooltip>
-                  }
-                  placement="top"
-                  trigger={
-                    Array [
-                      "hover",
-                      "focus",
-                    ]
-                  }
-                >
-                  <span
-                    className="personal-data-delete-field"
-                    id="personal-data-lastname"
-                  >
-                    <i
-                      className="icon cap-ios-close"
-                    />
-                  </span>
-                </OverlayTrigger>
-              </OverlayTrigger>
-            </div>
-          </div>
-          <div
-            className="horizontal_field_with_border_top"
-          >
-            <label
-              className="col-sm-3 control-label"
-              htmlFor="personal-data-form-gender"
-            >
-              <FormattedMessage
-                id="form.label_gender"
-                values={Object {}}
-              />
-            </label>
-            <div>
-              <Field
-                component={[Function]}
-                divClassName="col-sm-4"
-                id="personal-data-form-gender"
-                name="gender"
-                type="select"
-              >
-                <option
-                  value="MALE"
-                >
-                  <FormattedMessage
-                    id="gender.male"
-                    values={Object {}}
-                  />
-                </option>
-                <option
-                  value="FEMALE"
-                >
-                  <FormattedMessage
-                    id="gender.female"
-                    values={Object {}}
-                  />
-                </option>
-                <option
-                  value="OTHER"
-                >
-                  <FormattedMessage
-                    id="gender.other"
-                    values={Object {}}
-                  />
-                </option>
-              </Field>
-            </div>
-            <div
-              className="col-sm-4 btn--delete"
-            >
-              <OverlayTrigger
-                defaultOverlayShown={false}
-                overlay={
-                  <Popover
-                    bsClass="popover"
-                    className="in"
-                    id="delete-field"
-                    placement="top"
-                    title={
-                      <FormattedMessage
-                        id="are-you-sure-you-want-to-delete-this-field"
-                        values={Object {}}
-                      />
-                    }
-                  >
-                    <Button
-                      active={false}
-                      block={false}
-                      bsClass="btn"
-                      bsStyle="danger"
-                      className="right-bloc btn-block"
-                      disabled={false}
-                      id="btn-confirm-delete-field"
-                      onClick={[Function]}
-                    >
-                      <FormattedMessage
-                        id="btn_delete"
-                        values={Object {}}
-                      />
-                    </Button>
-                    <Button
-                      active={false}
-                      block={false}
-                      bsClass="btn"
-                      bsStyle="default"
-                      className="right-block btn-block"
-                      disabled={false}
-                      id="btn-cancel-delete-field"
-                      onClick={[Function]}
-                    >
-                      <FormattedMessage
-                        id="global.no"
-                        values={Object {}}
-                      />
-                    </Button>
-                  </Popover>
-                }
-                placement="top"
-                rootClose={true}
-                trigger="click"
-              >
-                <OverlayTrigger
-                  defaultOverlayShown={false}
-                  overlay={
-                    <Tooltip
-                      bsClass="tooltip"
-                      id="tooltip"
-                      placement="right"
-                    >
-                      <FormattedMessage
-                        id="global.delete"
-                        values={Object {}}
-                      />
-                    </Tooltip>
-                  }
-                  placement="top"
-                  trigger={
-                    Array [
-                      "hover",
-                      "focus",
-                    ]
-                  }
-                >
-                  <span
-                    className="personal-data-delete-field"
-                    id="personal-data-gender"
-                  >
-                    <i
-                      className="icon cap-ios-close"
-                    />
-                  </span>
-                </OverlayTrigger>
-              </OverlayTrigger>
-            </div>
-          </div>
           <div>
             <div
               className="horizontal_field_with_border_top"
-            >
-              <Field
-                component={[Function]}
-                componentId="personal-data-date-of-birth"
-                dayDefaultValue="Jour"
-                dayId="personal-data-date-of-birth-day"
-                divClassName="col-sm-6"
-                id="dateOfBirth"
-                label="form.label_date_of_birth"
-                labelClassName="col-sm-3 control-label"
-                locale="fr-FR"
-                monthDefaultValue="Mois"
-                monthId="personal-data-date-of-birth-month"
-                name="dateOfBirth"
-                yearDefaultValue="Année"
-                yearId="personal-data-date-of-birth-year"
-              />
-            </div>
-            <div
-              className="col-sm-2 btn--delete"
               style={
                 Object {
-                  "marginBottom": 15,
+                  "border": 0,
                 }
               }
             >
-              <OverlayTrigger
-                defaultOverlayShown={false}
-                overlay={
-                  <Popover
-                    bsClass="popover"
-                    className="in"
-                    id="delete-field"
-                    placement="top"
-                    title={
-                      <FormattedMessage
-                        id="are-you-sure-you-want-to-delete-this-field"
-                        values={Object {}}
-                      />
-                    }
-                  >
-                    <Button
-                      active={false}
-                      block={false}
-                      bsClass="btn"
-                      bsStyle="danger"
-                      className="right-bloc btn-block"
-                      disabled={false}
-                      id="btn-confirm-delete-field"
-                      onClick={[Function]}
-                    >
-                      <FormattedMessage
-                        id="btn_delete"
-                        values={Object {}}
-                      />
-                    </Button>
-                    <Button
-                      active={false}
-                      block={false}
-                      bsClass="btn"
-                      bsStyle="default"
-                      className="right-block btn-block"
-                      disabled={false}
-                      id="btn-cancel-delete-field"
-                      onClick={[Function]}
-                    >
-                      <FormattedMessage
-                        id="global.no"
-                        values={Object {}}
-                      />
-                    </Button>
-                  </Popover>
-                }
-                placement="top"
-                rootClose={true}
-                trigger="click"
-              >
-                <OverlayTrigger
-                  defaultOverlayShown={false}
-                  overlay={
-                    <Tooltip
-                      bsClass="tooltip"
-                      id="tooltip"
-                      placement="right"
-                    >
-                      <FormattedMessage
-                        id="global.delete"
-                        values={Object {}}
-                      />
-                    </Tooltip>
-                  }
-                  placement="top"
-                  trigger={
-                    Array [
-                      "hover",
-                      "focus",
-                    ]
-                  }
-                >
-                  <span
-                    className="personal-data-delete-field"
-                    id="personal-data-dateOfBirth"
-                  >
-                    <i
-                      className="icon cap-ios-close"
-                    />
-                  </span>
-                </OverlayTrigger>
-              </OverlayTrigger>
-            </div>
-          </div>
-          <div
-            className="horizontal_field_with_border_top"
-          >
-            <div
-              className="col-sm-11 btn--delete"
-            >
-              <OverlayTrigger
-                defaultOverlayShown={false}
-                overlay={
-                  <Popover
-                    bsClass="popover"
-                    className="in"
-                    id="delete-field"
-                    placement="top"
-                    title={
-                      <FormattedMessage
-                        id="are-you-sure-you-want-to-delete-this-field"
-                        values={Object {}}
-                      />
-                    }
-                  >
-                    <Button
-                      active={false}
-                      block={false}
-                      bsClass="btn"
-                      bsStyle="danger"
-                      className="right-bloc btn-block"
-                      disabled={false}
-                      id="btn-confirm-delete-field"
-                      onClick={[Function]}
-                    >
-                      <FormattedMessage
-                        id="btn_delete"
-                        values={Object {}}
-                      />
-                    </Button>
-                    <Button
-                      active={false}
-                      block={false}
-                      bsClass="btn"
-                      bsStyle="default"
-                      className="right-block btn-block"
-                      disabled={false}
-                      id="btn-cancel-delete-field"
-                      onClick={[Function]}
-                    >
-                      <FormattedMessage
-                        id="global.no"
-                        values={Object {}}
-                      />
-                    </Button>
-                  </Popover>
-                }
-                placement="top"
-                rootClose={true}
-                trigger="click"
-              >
-                <OverlayTrigger
-                  defaultOverlayShown={false}
-                  overlay={
-                    <Tooltip
-                      bsClass="tooltip"
-                      id="tooltip"
-                      placement="right"
-                    >
-                      <FormattedMessage
-                        id="global.delete"
-                        values={Object {}}
-                      />
-                    </Tooltip>
-                  }
-                  placement="top"
-                  trigger={
-                    Array [
-                      "hover",
-                      "focus",
-                    ]
-                  }
-                >
-                  <span
-                    className="personal-data-delete-field"
-                    id="personal-data-address-address2-city-zipCode"
-                  >
-                    <i
-                      className="icon cap-ios-close"
-                    />
-                  </span>
-                </OverlayTrigger>
-              </OverlayTrigger>
-            </div>
-            <div
-              className="personal-data-address"
-            >
               <label
                 className="col-sm-3 control-label"
-                htmlFor="personal-data-form-address"
+                htmlFor="personal-data-form-firstname"
               >
                 <FormattedMessage
-                  id="form.label_address"
-                  values={Object {}}
-                />
-              </label>
-              <div>
-                <Field
-                  component={[Function]}
-                  divClassName="col-sm-7"
-                  id="personal-data-form-address"
-                  name="address"
-                  type="text"
-                />
-              </div>
-            </div>
-            <div
-              className="personal-data-address"
-            >
-              <label
-                className="col-sm-3 control-label"
-                htmlFor="personal-data-form-address2"
-              >
-                <FormattedMessage
-                  id="form.label_address2"
-                  values={Object {}}
-                />
-              </label>
-              <div>
-                <Field
-                  component={[Function]}
-                  divClassName="col-sm-7"
-                  id="personal-data-form-address2"
-                  name="address2"
-                  type="text"
-                />
-              </div>
-            </div>
-            <div
-              className="personal-data-address"
-            >
-              <label
-                className="col-sm-3 control-label"
-                htmlFor="personal-data-form-city"
-              >
-                <FormattedMessage
-                  id="form.label_city"
-                  values={Object {}}
-                />
-              </label>
-              <div>
-                <Field
-                  component={[Function]}
-                  divClassName="col-sm-7"
-                  id="personal-data-form-city"
-                  name="city"
-                  type="text"
-                />
-              </div>
-            </div>
-            <div
-              className="personal-data-address"
-            >
-              <label
-                className="col-sm-3 control-label"
-                htmlFor="personal-data-form-zip-code"
-              >
-                <FormattedMessage
-                  id="form.label_zip_code"
+                  id="form.label_firstname"
                   values={Object {}}
                 />
               </label>
@@ -2004,33 +1383,8 @@ exports[`<PersonalData /> should render with full user 1`] = `
                 <Field
                   component={[Function]}
                   divClassName="col-sm-4"
-                  id="personal-data-form-zip-code"
-                  name="zipCode"
-                  type="text"
-                />
-              </div>
-            </div>
-          </div>
-          <div>
-            <div
-              className="horizontal_field_with_border_top"
-            >
-              <label
-                className="col-sm-3 control-label"
-                htmlFor="personal-data-form-phone"
-              >
-                <FormattedMessage
-                  id="form.label_phone"
-                  values={Object {}}
-                />
-              </label>
-              <div>
-                <Field
-                  addonBefore="France +33"
-                  component={[Function]}
-                  divClassName="col-sm-4 col-xs-12"
-                  id="personal-data-form-phone"
-                  name="phone"
+                  id="personal-data-form-firstname"
+                  name="firstname"
                   type="text"
                 />
               </div>
@@ -2112,7 +1466,7 @@ exports[`<PersonalData /> should render with full user 1`] = `
                   >
                     <span
                       className="personal-data-delete-field"
-                      id="phone"
+                      id="personal-data-firstname"
                     >
                       <i
                         className="icon cap-ios-close"
@@ -2122,88 +1476,758 @@ exports[`<PersonalData /> should render with full user 1`] = `
                 </OverlayTrigger>
               </div>
             </div>
+            <div
+              className="horizontal_field_with_border_top"
+            >
+              <label
+                className="col-sm-3 control-label"
+                htmlFor="personal-data-form-lastname"
+              >
+                <FormattedMessage
+                  id="form.label_lastname"
+                  values={Object {}}
+                />
+              </label>
+              <div>
+                <Field
+                  component={[Function]}
+                  divClassName="col-sm-4"
+                  id="personal-data-form-lastname"
+                  name="lastname"
+                  type="text"
+                />
+              </div>
+              <div
+                className="col-sm-4 btn--delete"
+              >
+                <OverlayTrigger
+                  defaultOverlayShown={false}
+                  overlay={
+                    <Popover
+                      bsClass="popover"
+                      className="in"
+                      id="delete-field"
+                      placement="top"
+                      title={
+                        <FormattedMessage
+                          id="are-you-sure-you-want-to-delete-this-field"
+                          values={Object {}}
+                        />
+                      }
+                    >
+                      <Button
+                        active={false}
+                        block={false}
+                        bsClass="btn"
+                        bsStyle="danger"
+                        className="right-bloc btn-block"
+                        disabled={false}
+                        id="btn-confirm-delete-field"
+                        onClick={[Function]}
+                      >
+                        <FormattedMessage
+                          id="btn_delete"
+                          values={Object {}}
+                        />
+                      </Button>
+                      <Button
+                        active={false}
+                        block={false}
+                        bsClass="btn"
+                        bsStyle="default"
+                        className="right-block btn-block"
+                        disabled={false}
+                        id="btn-cancel-delete-field"
+                        onClick={[Function]}
+                      >
+                        <FormattedMessage
+                          id="global.no"
+                          values={Object {}}
+                        />
+                      </Button>
+                    </Popover>
+                  }
+                  placement="top"
+                  trigger="click"
+                >
+                  <OverlayTrigger
+                    defaultOverlayShown={false}
+                    overlay={
+                      <Tooltip
+                        bsClass="tooltip"
+                        id="tooltip"
+                        placement="right"
+                      >
+                        <FormattedMessage
+                          id="global.delete"
+                          values={Object {}}
+                        />
+                      </Tooltip>
+                    }
+                    placement="top"
+                    trigger={
+                      Array [
+                        "hover",
+                        "focus",
+                      ]
+                    }
+                  >
+                    <span
+                      className="personal-data-delete-field"
+                      id="personal-data-lastname"
+                    >
+                      <i
+                        className="icon cap-ios-close"
+                      />
+                    </span>
+                  </OverlayTrigger>
+                </OverlayTrigger>
+              </div>
+            </div>
+            <div
+              className="horizontal_field_with_border_top"
+            >
+              <label
+                className="col-sm-3 control-label"
+                htmlFor="personal-data-form-gender"
+              >
+                <FormattedMessage
+                  id="form.label_gender"
+                  values={Object {}}
+                />
+              </label>
+              <div>
+                <Field
+                  component={[Function]}
+                  divClassName="col-sm-4"
+                  id="personal-data-form-gender"
+                  name="gender"
+                  type="select"
+                >
+                  <option
+                    value="MALE"
+                  >
+                    <FormattedMessage
+                      id="gender.male"
+                      values={Object {}}
+                    />
+                  </option>
+                  <option
+                    value="FEMALE"
+                  >
+                    <FormattedMessage
+                      id="gender.female"
+                      values={Object {}}
+                    />
+                  </option>
+                  <option
+                    value="OTHER"
+                  >
+                    <FormattedMessage
+                      id="gender.other"
+                      values={Object {}}
+                    />
+                  </option>
+                </Field>
+              </div>
+              <div
+                className="col-sm-4 btn--delete"
+              >
+                <OverlayTrigger
+                  defaultOverlayShown={false}
+                  overlay={
+                    <Popover
+                      bsClass="popover"
+                      className="in"
+                      id="delete-field"
+                      placement="top"
+                      title={
+                        <FormattedMessage
+                          id="are-you-sure-you-want-to-delete-this-field"
+                          values={Object {}}
+                        />
+                      }
+                    >
+                      <Button
+                        active={false}
+                        block={false}
+                        bsClass="btn"
+                        bsStyle="danger"
+                        className="right-bloc btn-block"
+                        disabled={false}
+                        id="btn-confirm-delete-field"
+                        onClick={[Function]}
+                      >
+                        <FormattedMessage
+                          id="btn_delete"
+                          values={Object {}}
+                        />
+                      </Button>
+                      <Button
+                        active={false}
+                        block={false}
+                        bsClass="btn"
+                        bsStyle="default"
+                        className="right-block btn-block"
+                        disabled={false}
+                        id="btn-cancel-delete-field"
+                        onClick={[Function]}
+                      >
+                        <FormattedMessage
+                          id="global.no"
+                          values={Object {}}
+                        />
+                      </Button>
+                    </Popover>
+                  }
+                  placement="top"
+                  rootClose={true}
+                  trigger="click"
+                >
+                  <OverlayTrigger
+                    defaultOverlayShown={false}
+                    overlay={
+                      <Tooltip
+                        bsClass="tooltip"
+                        id="tooltip"
+                        placement="right"
+                      >
+                        <FormattedMessage
+                          id="global.delete"
+                          values={Object {}}
+                        />
+                      </Tooltip>
+                    }
+                    placement="top"
+                    trigger={
+                      Array [
+                        "hover",
+                        "focus",
+                      ]
+                    }
+                  >
+                    <span
+                      className="personal-data-delete-field"
+                      id="personal-data-gender"
+                    >
+                      <i
+                        className="icon cap-ios-close"
+                      />
+                    </span>
+                  </OverlayTrigger>
+                </OverlayTrigger>
+              </div>
+            </div>
+            <div>
+              <div
+                className="horizontal_field_with_border_top"
+              >
+                <Field
+                  component={[Function]}
+                  componentId="personal-data-date-of-birth"
+                  dayDefaultValue="Jour"
+                  dayId="personal-data-date-of-birth-day"
+                  divClassName="col-sm-6"
+                  id="dateOfBirth"
+                  label="form.label_date_of_birth"
+                  labelClassName="col-sm-3 control-label"
+                  locale="fr-FR"
+                  monthDefaultValue="Mois"
+                  monthId="personal-data-date-of-birth-month"
+                  name="dateOfBirth"
+                  yearDefaultValue="Année"
+                  yearId="personal-data-date-of-birth-year"
+                />
+              </div>
+              <div
+                className="col-sm-2 btn--delete"
+                style={
+                  Object {
+                    "marginBottom": 15,
+                  }
+                }
+              >
+                <OverlayTrigger
+                  defaultOverlayShown={false}
+                  overlay={
+                    <Popover
+                      bsClass="popover"
+                      className="in"
+                      id="delete-field"
+                      placement="top"
+                      title={
+                        <FormattedMessage
+                          id="are-you-sure-you-want-to-delete-this-field"
+                          values={Object {}}
+                        />
+                      }
+                    >
+                      <Button
+                        active={false}
+                        block={false}
+                        bsClass="btn"
+                        bsStyle="danger"
+                        className="right-bloc btn-block"
+                        disabled={false}
+                        id="btn-confirm-delete-field"
+                        onClick={[Function]}
+                      >
+                        <FormattedMessage
+                          id="btn_delete"
+                          values={Object {}}
+                        />
+                      </Button>
+                      <Button
+                        active={false}
+                        block={false}
+                        bsClass="btn"
+                        bsStyle="default"
+                        className="right-block btn-block"
+                        disabled={false}
+                        id="btn-cancel-delete-field"
+                        onClick={[Function]}
+                      >
+                        <FormattedMessage
+                          id="global.no"
+                          values={Object {}}
+                        />
+                      </Button>
+                    </Popover>
+                  }
+                  placement="top"
+                  rootClose={true}
+                  trigger="click"
+                >
+                  <OverlayTrigger
+                    defaultOverlayShown={false}
+                    overlay={
+                      <Tooltip
+                        bsClass="tooltip"
+                        id="tooltip"
+                        placement="right"
+                      >
+                        <FormattedMessage
+                          id="global.delete"
+                          values={Object {}}
+                        />
+                      </Tooltip>
+                    }
+                    placement="top"
+                    trigger={
+                      Array [
+                        "hover",
+                        "focus",
+                      ]
+                    }
+                  >
+                    <span
+                      className="personal-data-delete-field"
+                      id="personal-data-dateOfBirth"
+                    >
+                      <i
+                        className="icon cap-ios-close"
+                      />
+                    </span>
+                  </OverlayTrigger>
+                </OverlayTrigger>
+              </div>
+            </div>
+            <div
+              className="horizontal_field_with_border_top"
+            >
+              <div
+                className="col-sm-11 btn--delete"
+              >
+                <OverlayTrigger
+                  defaultOverlayShown={false}
+                  overlay={
+                    <Popover
+                      bsClass="popover"
+                      className="in"
+                      id="delete-field"
+                      placement="top"
+                      title={
+                        <FormattedMessage
+                          id="are-you-sure-you-want-to-delete-this-field"
+                          values={Object {}}
+                        />
+                      }
+                    >
+                      <Button
+                        active={false}
+                        block={false}
+                        bsClass="btn"
+                        bsStyle="danger"
+                        className="right-bloc btn-block"
+                        disabled={false}
+                        id="btn-confirm-delete-field"
+                        onClick={[Function]}
+                      >
+                        <FormattedMessage
+                          id="btn_delete"
+                          values={Object {}}
+                        />
+                      </Button>
+                      <Button
+                        active={false}
+                        block={false}
+                        bsClass="btn"
+                        bsStyle="default"
+                        className="right-block btn-block"
+                        disabled={false}
+                        id="btn-cancel-delete-field"
+                        onClick={[Function]}
+                      >
+                        <FormattedMessage
+                          id="global.no"
+                          values={Object {}}
+                        />
+                      </Button>
+                    </Popover>
+                  }
+                  placement="top"
+                  rootClose={true}
+                  trigger="click"
+                >
+                  <OverlayTrigger
+                    defaultOverlayShown={false}
+                    overlay={
+                      <Tooltip
+                        bsClass="tooltip"
+                        id="tooltip"
+                        placement="right"
+                      >
+                        <FormattedMessage
+                          id="global.delete"
+                          values={Object {}}
+                        />
+                      </Tooltip>
+                    }
+                    placement="top"
+                    trigger={
+                      Array [
+                        "hover",
+                        "focus",
+                      ]
+                    }
+                  >
+                    <span
+                      className="personal-data-delete-field"
+                      id="personal-data-address-address2-city-zipCode"
+                    >
+                      <i
+                        className="icon cap-ios-close"
+                      />
+                    </span>
+                  </OverlayTrigger>
+                </OverlayTrigger>
+              </div>
+              <div
+                className="personal-data-address"
+              >
+                <label
+                  className="col-sm-3 control-label"
+                  htmlFor="personal-data-form-address"
+                >
+                  <FormattedMessage
+                    id="form.label_address"
+                    values={Object {}}
+                  />
+                </label>
+                <div>
+                  <Field
+                    component={[Function]}
+                    divClassName="col-sm-7"
+                    id="personal-data-form-address"
+                    name="address"
+                    type="text"
+                  />
+                </div>
+              </div>
+              <div
+                className="personal-data-address"
+              >
+                <label
+                  className="col-sm-3 control-label"
+                  htmlFor="personal-data-form-address2"
+                >
+                  <FormattedMessage
+                    id="form.label_address2"
+                    values={Object {}}
+                  />
+                </label>
+                <div>
+                  <Field
+                    component={[Function]}
+                    divClassName="col-sm-7"
+                    id="personal-data-form-address2"
+                    name="address2"
+                    type="text"
+                  />
+                </div>
+              </div>
+              <div
+                className="personal-data-address"
+              >
+                <label
+                  className="col-sm-3 control-label"
+                  htmlFor="personal-data-form-city"
+                >
+                  <FormattedMessage
+                    id="form.label_city"
+                    values={Object {}}
+                  />
+                </label>
+                <div>
+                  <Field
+                    component={[Function]}
+                    divClassName="col-sm-7"
+                    id="personal-data-form-city"
+                    name="city"
+                    type="text"
+                  />
+                </div>
+              </div>
+              <div
+                className="personal-data-address"
+              >
+                <label
+                  className="col-sm-3 control-label"
+                  htmlFor="personal-data-form-zip-code"
+                >
+                  <FormattedMessage
+                    id="form.label_zip_code"
+                    values={Object {}}
+                  />
+                </label>
+                <div>
+                  <Field
+                    component={[Function]}
+                    divClassName="col-sm-4"
+                    id="personal-data-form-zip-code"
+                    name="zipCode"
+                    type="text"
+                  />
+                </div>
+              </div>
+            </div>
+            <div>
+              <div
+                className="horizontal_field_with_border_top"
+              >
+                <label
+                  className="col-sm-3 control-label"
+                  htmlFor="personal-data-form-phone"
+                >
+                  <FormattedMessage
+                    id="form.label_phone"
+                    values={Object {}}
+                  />
+                </label>
+                <div>
+                  <Field
+                    addonBefore="France +33"
+                    component={[Function]}
+                    divClassName="col-sm-4 col-xs-12"
+                    id="personal-data-form-phone"
+                    name="phone"
+                    type="text"
+                  />
+                </div>
+                <div
+                  className="col-sm-4 btn--delete"
+                >
+                  <OverlayTrigger
+                    defaultOverlayShown={false}
+                    overlay={
+                      <Popover
+                        bsClass="popover"
+                        className="in"
+                        id="delete-field"
+                        placement="top"
+                        title={
+                          <FormattedMessage
+                            id="are-you-sure-you-want-to-delete-this-field"
+                            values={Object {}}
+                          />
+                        }
+                      >
+                        <Button
+                          active={false}
+                          block={false}
+                          bsClass="btn"
+                          bsStyle="danger"
+                          className="right-bloc btn-block"
+                          disabled={false}
+                          id="btn-confirm-delete-field"
+                          onClick={[Function]}
+                        >
+                          <FormattedMessage
+                            id="btn_delete"
+                            values={Object {}}
+                          />
+                        </Button>
+                        <Button
+                          active={false}
+                          block={false}
+                          bsClass="btn"
+                          bsStyle="default"
+                          className="right-block btn-block"
+                          disabled={false}
+                          id="btn-cancel-delete-field"
+                          onClick={[Function]}
+                        >
+                          <FormattedMessage
+                            id="global.no"
+                            values={Object {}}
+                          />
+                        </Button>
+                      </Popover>
+                    }
+                    placement="top"
+                    rootClose={true}
+                    trigger="click"
+                  >
+                    <OverlayTrigger
+                      defaultOverlayShown={false}
+                      overlay={
+                        <Tooltip
+                          bsClass="tooltip"
+                          id="tooltip"
+                          placement="right"
+                        >
+                          <FormattedMessage
+                            id="global.delete"
+                            values={Object {}}
+                          />
+                        </Tooltip>
+                      }
+                      placement="top"
+                      trigger={
+                        Array [
+                          "hover",
+                          "focus",
+                        ]
+                      }
+                    >
+                      <span
+                        className="personal-data-delete-field"
+                        id="phone"
+                      >
+                        <i
+                          className="icon cap-ios-close"
+                        />
+                      </span>
+                    </OverlayTrigger>
+                  </OverlayTrigger>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="horizontal_field_with_border_top"
+          >
+            <div
+              className="col-sm-3"
+            />
+            <ButtonGroup
+              block={false}
+              bsClass="btn-group"
+              className="col-sm-4 pl-0"
+              justified={false}
+              vertical={false}
+            >
+              <AlertForm
+                errorMessage={null}
+                invalid={false}
+                submitFailed={false}
+                submitSucceeded={false}
+                submitting={false}
+                valid={true}
+              />
+            </ButtonGroup>
           </div>
         </div>
+      </PanelBody>
+      <PanelFooter
+        bsClass="panel"
+      >
         <div
-          className="horizontal_field_with_border_top"
+          className="col-sm-offset-4"
         >
-          <div
-            className="col-sm-3"
-          />
-          <ButtonGroup
+          <Button
+            active={false}
             block={false}
-            bsClass="btn-group"
-            className="col-sm-4 pl-0"
-            justified={false}
-            vertical={false}
+            bsClass="btn"
+            bsStyle="primary"
+            disabled={false}
+            id="personal-data-form-save"
+            type="submit"
           >
-            <AlertForm
-              errorMessage={null}
-              invalid={false}
-              submitFailed={false}
-              submitSucceeded={false}
-              submitting={false}
-              valid={true}
+            <FormattedMessage
+              id="global.save_modifications"
+              values={Object {}}
             />
-          </ButtonGroup>
+          </Button>
         </div>
-      </div>
-    </Panel>
+      </PanelFooter>
+    </Uncontrolled(Panel)>
   </form>
-  <Panel
-    bsClass="panel"
-    bsStyle="default"
-    defaultExpanded={false}
-  >
-    <h2
-      className="page-header"
+  <Uncontrolled(Panel)>
+    <PanelBody
+      bsClass="panel"
+      collapsible={false}
     >
-      <FormattedMessage
-        id="data-export"
-        values={Object {}}
-      />
-    </h2>
-    <div
-      className="horizontal_field_with_border_top"
-    >
-      <label
-        className="col-sm-3 control-label"
+      <h2
+        className="page-header"
       >
         <FormattedMessage
-          id="your-data"
+          id="data-export"
           values={Object {}}
         />
-      </label>
+      </h2>
       <div
-        className="col-sm-9"
+        className="horizontal_field_with_border_top"
       >
-        <Relay(UserArchiveRequestButton)
-          viewer={
-            Object {
-              "address": "12 rue des boulets",
-              "address2": "2ième etage",
-              "city": "Paris",
-              "dateOfBirth": "29-02-1990",
-              "firstname": "Utilisateur",
-              "gender": "MALE",
-              "id": "user",
-              "lastname": "Super",
-              "phone": "0123456789",
-              "phoneConfirmed": true,
-              "zipCode": "75012",
-            }
-          }
-        />
-        <p
-          className="excerpt"
+        <label
+          className="col-sm-3 control-label"
         >
           <FormattedMessage
-            id="data-copy-help-text"
+            id="your-data"
             values={Object {}}
           />
-        </p>
+        </label>
+        <div
+          className="col-sm-9"
+        >
+          <Relay(UserArchiveRequestButton)
+            viewer={
+              Object {
+                "address": "12 rue des boulets",
+                "address2": "2ième etage",
+                "city": "Paris",
+                "dateOfBirth": "29-02-1990",
+                "firstname": "Utilisateur",
+                "gender": "MALE",
+                "id": "user",
+                "lastname": "Super",
+                "phone": "0123456789",
+                "phoneConfirmed": true,
+                "zipCode": "75012",
+              }
+            }
+          />
+          <p
+            className="excerpt"
+          >
+            <FormattedMessage
+              id="data-copy-help-text"
+              values={Object {}}
+            />
+          </p>
+        </div>
       </div>
-    </div>
-  </Panel>
+    </PanelBody>
+  </Uncontrolled(Panel)>
 </div>
 `;

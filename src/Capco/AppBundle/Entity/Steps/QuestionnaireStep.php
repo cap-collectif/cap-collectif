@@ -21,8 +21,8 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
     const VERIFICATION_NONE = 'none';
     const VERIFICATION_SMS = 'sms';
     public static $verificationLabels = [
-        'step.verification.none' => self::VERIFICATION_NONE,
-        'step.verification.sms' => self::VERIFICATION_SMS,
+        self::VERIFICATION_NONE => 'step.verification.none',
+        self::VERIFICATION_SMS => 'step.verification.sms',
     ];
 
     /**
@@ -155,7 +155,7 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
     {
         if ($questionnaire) {
             $questionnaire->setStep($this);
-        } elseif ($this->questionnaire) {
+        } else {
             $this->questionnaire->setStep(null);
         }
         $this->questionnaire = $questionnaire;
