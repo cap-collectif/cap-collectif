@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class ProposalFormUpdateType extends AbstractType
 {
@@ -80,7 +81,7 @@ class ProposalFormUpdateType extends AbstractType
         $resolver->setDefaults([
             'csrf_protection' => false,
             'data_class' => ProposalForm::class,
-            'cascade_validation' => true,
+            'constraints' => new Valid(),
         ]);
     }
 }

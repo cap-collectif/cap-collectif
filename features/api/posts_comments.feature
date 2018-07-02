@@ -174,7 +174,6 @@ Scenario: logged in API client wants to add a comment by hacking
   """
   {
     "code": 404,
-    "message": "This parent comment is not linked to this post",
-    "errors": @null@
+    "message": "This parent comment is not linked to this post"
   }
   """

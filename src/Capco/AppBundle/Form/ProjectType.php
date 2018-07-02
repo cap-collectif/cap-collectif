@@ -2,10 +2,12 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class ProjectType extends AbstractType
 {
@@ -20,10 +22,10 @@ class ProjectType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Capco\AppBundle\Entity\Project',
+            'data_class' => Project::class,
             'csrf_protection' => false,
             'translation_domain' => 'CapcoAppBundle',
-            'cascade_validation' => true,
+            'constraints' => new Valid(),
         ]);
     }
 }

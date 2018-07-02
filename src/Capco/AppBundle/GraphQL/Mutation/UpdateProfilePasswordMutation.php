@@ -4,7 +4,6 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\ChangePasswordFormType;
-use FOS\UserBundle\Form\Model\ChangePassword;
 use FOS\UserBundle\Model\UserManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 
@@ -15,10 +14,7 @@ class UpdateProfilePasswordMutation extends BaseUpdateProfile
     public function __invoke(Argument $input, User $user): array
     {
         $arguments = $input->getRawArguments();
-
-        $form = $this->formFactory->create(ChangePasswordFormType::class, new ChangePassword(), ['csrf_protection' => false]);
-        $this->logger->error(__METHOD__ . ' : ' . var_export($arguments, true));
-
+        $form = $this->formFactory->create(ChangePasswordFormType::class, null, ['csrf_protection' => false]);
         $form->submit($arguments, false);
         if (!$form->isValid()) {
             $this->logger->error(__METHOD__ . ' : ' . (string) $form->getErrors(true, false));

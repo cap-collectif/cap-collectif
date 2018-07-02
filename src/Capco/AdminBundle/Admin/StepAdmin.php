@@ -13,16 +13,14 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
-use Capco\AppBundle\Form\Type\PurifiedTextareaType;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
-class StepAdmin extends Admin
+class StepAdmin extends CapcoAdmin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',
@@ -203,9 +201,8 @@ class StepAdmin extends Admin
                     'label' => 'reported',
                     'mapped' => false,
                     'value' => true,
-                    'read_only' => true,
                     'disabled' => true,
-                    'attr' => ['checked' => true],
+                    'attr' => ['readonly' => true, 'checked' => true],
                 ])
                 ->add('moderatingOnCreate', null, [
                     'label' => 'admin.fields.synthesis.enabled',
@@ -330,25 +327,7 @@ class StepAdmin extends Admin
                     'edit' => 'inline',
                     'inline' => 'table',
                     'sortable' => 'position',
-                ])->end()
-            ;
-            $formMapper
-                ->with('requirements')
-                ->add('requirements', 'sonata_type_collection', [
-                    'label' => 'fields',
-                    'by_reference' => false,
-                ], [
-                    'edit' => 'inline',
-                    'inline' => 'table',
-                    'sortable' => 'position',
                 ])
-                ->add('requirementsReason', PurifiedTextareaType::class, [
-                    'translation_domain' => 'CapcoAppBundle',
-                    'label' => 'reason-for-collection',
-                    'required' => false,
-                    'help' => 'help-text-for-reason-for-collection-field',
-                ])
-                ->end()
             ;
 
             if ($subject instanceof CollectStep) {
@@ -358,8 +337,9 @@ class StepAdmin extends Admin
                         'query' => $this->createQueryForDefaultStatus(),
                         'by_reference' => false,
                         'required' => false,
+                        'btn_add' => false,
                         'class' => Status::class,
-                        'empty_value' => 'admin.fields.step.default_status_none',
+                        'placeholder' => 'admin.fields.step.default_status_none',
                         'choices_as_values' => true,
                     ])
                 ;
@@ -403,7 +383,7 @@ class StepAdmin extends Admin
                     'query' => $this->createQueryForProposalForms(),
                     'by_reference' => false,
                     'required' => false,
-                    'empty_value' => 'admin.fields.step.no_proposal_form',
+                    'placeholder' => 'admin.fields.step.no_proposal_form',
                     'choices_as_values' => true,
                 ])
                 ->end()
@@ -429,7 +409,7 @@ class StepAdmin extends Admin
                     'query' => $this->createQueryForQuestionnaires(),
                     'by_reference' => false,
                     'required' => false,
-                    'empty_value' => 'admin.fields.step.no_questionnaire',
+                    'placeholder' => 'admin.fields.step.no_questionnaire',
                     'choices_as_values' => true,
                 ])
                 ->end()

@@ -39,7 +39,7 @@ This template overloading due to a bug in the preview of the image.
                         <div class="box-body table-responsive">
 
                             <center> <!-- yeah, center is still awesome ;) -->
-                                {% media object, 'header_sm' with {'class': 'img-responsive img-rounded'} %}
+                                <img src="{{ media_public_url(object, 'default_blockHeader') }}" class="img-responsive img-rounded" alt="">
                             </center>
 
                             <table class="table">

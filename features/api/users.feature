@@ -66,7 +66,7 @@ Scenario: Anonymous API client wants to register but registration is not enabled
   Then the JSON response status code should be 404
   And the JSON response should match:
   """
-  {"code":404,"message":"error.feature_not_enabled","errors":null}
+  {"code":404,"message":"error.feature_not_enabled"}
   """
 
 # Note: captcha validation is disabled in test environement
@@ -257,7 +257,9 @@ Scenario: API client wants to update his phone
     "errors": {
       "children": {
         "phone": {
-          "errors": ["This value is not a valid phone number. {\"{{ type }}\":\"any\",\"{{ value }}\":\"+33\"}"]
+          "errors": [
+            "This value is not a valid phone number. {\"{{ type }}\":\"any\",\"{{ value }}\":\"\\\"+33\\\"\"}"
+          ]
         }
       }
     }

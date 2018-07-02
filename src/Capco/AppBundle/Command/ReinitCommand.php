@@ -58,7 +58,7 @@ class ReinitCommand extends ContainerAwareCommand
             }
         }
 
-        $eventManager = $this->getContainer()->get('doctrine')->getEntityManager()->getEventManager();
+        $eventManager = $this->getContainer()->get('doctrine')->getManager()->getEventManager();
         $listener = $this->getContainer()->get('capco.elasticsearch.listener');
         $eventManager->removeEventListener($listener->getSubscribedEvents(), $listener);
         $output->writeln('Disabled <info>' . \get_class($listener) . '</info>.');

@@ -14,11 +14,11 @@ use Doctrine\ORM\Mapping as ORM;
 class MultipleChoiceQuestion extends AbstractQuestion
 {
     public static $questionTypesLabels = [
-        self::QUESTION_TYPE_BUTTON => 'question.types.button',
-        self::QUESTION_TYPE_RADIO => 'question.types.radio',
-        self::QUESTION_TYPE_SELECT => 'question.types.select',
-        self::QUESTION_TYPE_CHECKBOX => 'question.types.checkbox',
-        self::QUESTION_TYPE_RANKING => 'question.types.ranking',
+         'question.types.button' => self::QUESTION_TYPE_BUTTON,
+         'question.types.radio' => self::QUESTION_TYPE_RADIO,
+         'question.types.select' => self::QUESTION_TYPE_SELECT,
+         'question.types.checkbox' => self::QUESTION_TYPE_CHECKBOX,
+         'question.types.ranking' => self::QUESTION_TYPE_RANKING,
     ];
 
     /**

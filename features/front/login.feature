@@ -52,8 +52,8 @@ Scenario: Admin wants to set his password
   And I go to "/account/email_confirmation/check-my-email-token"
   Then I should be redirected to "/resetting/reset/check-my-email-token"
   When I fill in the following:
-    | fos_user_resetting_form_new_first  | capcopopototo |
-    | fos_user_resetting_form_new_second | capcopopototo |
+    | fos_user_resetting_plainPassword_first  | capcopopototo |
+    | fos_user_resetting_plainPassword_second | capcopopototo |
   And I press "change_password.form.submit"
   Then I should be redirected to "/"
   Then I can see I am logged in as "admin_without_password"

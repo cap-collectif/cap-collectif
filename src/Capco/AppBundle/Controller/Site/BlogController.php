@@ -31,7 +31,7 @@ class BlogController extends Controller
         $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_blog');
 
-        $form = $this->createForm(new PostSearchType($this->get('capco.toggle.manager')), null, [
+        $form = $this->createForm(PostSearchType::class, null, [
             'action' => $currentUrl,
             'method' => 'POST',
         ]);
