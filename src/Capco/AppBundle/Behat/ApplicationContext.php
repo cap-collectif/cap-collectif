@@ -734,6 +734,7 @@ class ApplicationContext extends UserContext
 
     private function moveDraggableElementTo($element, $key)
     {
+        // http://keycode.info/
         $spaceBar = 32;
         $page = $this->getCurrentPage();
         $element = $page->find('css', $element);
@@ -744,7 +745,7 @@ class ApplicationContext extends UserContext
         $this->iWait(1);
         $element->keyUp($key);
         $element->keyUp($spaceBar);
-        // press space bare again to validate
+        // press spacebar again to validate
         $element->keyDown($spaceBar);
         $element->keyPress($spaceBar);
         $element->keyUp($spaceBar);

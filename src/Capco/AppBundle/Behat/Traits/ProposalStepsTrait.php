@@ -7,6 +7,10 @@ use FilesystemIterator;
 
 trait ProposalStepsTrait
 {
+    // http://keycode.info/
+    protected static $arrowDown = 40;
+    protected static $arrowUp = 38;
+
     protected static $collectStepOpenParams = [
         'projectSlug' => 'budget-participatif-rennes',
         'stepSlug' => 'collecte-des-propositions',
@@ -173,7 +177,10 @@ trait ProposalStepsTrait
     public function iGoToAProposal()
     {
         $this->visitPageWithParams('proposal page', self::$proposalWithSimpleVoteParams);
-        $this->getSession()->wait(5000, "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1");
+        $this->getSession()->wait(
+            5000,
+            "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1"
+        );
     }
 
     /**
@@ -182,7 +189,10 @@ trait ProposalStepsTrait
     public function iGoToAProposalMadeByMSantoStefano()
     {
         $this->visitPageWithParams('proposal page', self::$proposalByMSantoStefano);
-        $this->getSession()->wait(5000, "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1");
+        $this->getSession()->wait(
+            5000,
+            "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1"
+        );
     }
 
     /**
@@ -191,7 +201,10 @@ trait ProposalStepsTrait
     public function iGoToAProposalFollowedByUser()
     {
         $this->visitPageWithParams('proposal page', self::$proposalWithOneFollower);
-        $this->getSession()->wait(5000, "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1");
+        $this->getSession()->wait(
+            5000,
+            "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1"
+        );
     }
 
     /**
@@ -200,7 +213,10 @@ trait ProposalStepsTrait
     public function iGoToAProposalMadeByUser()
     {
         $this->visitPageWithParams('proposal page', self::$proposalsByUserTest);
-        $this->getSession()->wait(5000, "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1");
+        $this->getSession()->wait(
+            5000,
+            "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1"
+        );
     }
 
     /**
@@ -209,7 +225,10 @@ trait ProposalStepsTrait
     public function iGoToACommentNotifiableProposal()
     {
         $this->visitPageWithParams('proposal page', self::$proposalCommentNotifiable);
-        $this->getSession()->wait(5000, "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1");
+        $this->getSession()->wait(
+            5000,
+            "document.body.innerHTML.toString().indexOf('On va en faire un beau gymnase, promis :)') > -1"
+        );
     }
 
     /**
@@ -655,6 +674,14 @@ trait ProposalStepsTrait
     }
 
     /**
+     * @When I got to the votes details page of project with requirements
+     */
+    public function iGoToTheVotesDetailsOfProjectWithRequirementsPage()
+    {
+        $this->visitPageWithParams('project user votes page', self::$bpVoteClassement);
+    }
+
+    /**
      * @When I go to a selection step with simple vote enabled
      */
     public function iGoToASelectionStepWithSimpleVoteEnabled()
@@ -712,6 +739,72 @@ trait ProposalStepsTrait
     }
 
     /**
+     * @When I toggle vote access of proposal :proposalId
+     */
+    public function iToggleVoteAccessOfProposal(string $proposalId)
+    {
+        $this->getCurrentPage()->toggleVoteAccess($proposalId);
+    }
+
+    /**
+     * @When I delete a vote of a proposal :proposalId
+     */
+    public function iDeleteAVoteOfProposal(string $proposalId)
+    {
+        $this->getCurrentPage()->deleteProposalVote($proposalId);
+    }
+
+    /**
+     * @Then I didn't full fill requirements conditions
+     */
+    public function iDidnotFullFillRequirementsCondition()
+    {
+        $this->assertFieldContains('form.label_firstname', 'Pierre');
+        $this->assertFieldContains('group.title', 'Tondereau');
+    }
+
+    /**
+     * @Then I cannot confirm my vote
+     */
+    public function iCannotConfirmMyVote()
+    {
+        $this->buttonShouldBeDisabled('global.validate');
+    }
+
+    /**
+     * @When I click on my votes
+     */
+    public function iClickOnMyVote()
+    {
+        $this->getCurrentPage()->clickMyVotesButton();
+    }
+
+    /**
+     * @Then I full fill the requirements conditions
+     */
+    public function iFullFillTheRequirementsConditions()
+    {
+        $this->fillField('mobile-phone', '0123456789');
+        $this->checkOption('requirement1');
+        $this->iWait(1);
+        $this->assertPageContainsText('global.saved');
+        $this->checkOption('requirement2');
+        $this->checkOption('requirement3');
+        $this->iWait(1);
+        $this->assertPageContainsText('global.saved');
+    }
+
+    /**
+     * @Then I can confirm my vote
+     */
+    public function iCanConfirmMyVote()
+    {
+        $this->buttonShouldNotBeDisabled('global.validate');
+        $this->iClickOnButton('#confirm-proposal-vote');
+        $this->iWait(1);
+    }
+
+    /**
      * @Then I should see a proposal vote modal
      */
     public function iShouldSeeAProposalVoteModal()
@@ -724,7 +817,7 @@ trait ProposalStepsTrait
      */
     public function iReorderMyVoteWithProposal1TakePlaceOfProposalUp(string $proposalId)
     {
-        $this->moveDraggableElementTo($proposalId, 38);
+        $this->moveDraggableElementTo($proposalId, static::$arrowUp);
     }
 
     /**
@@ -732,7 +825,7 @@ trait ProposalStepsTrait
      */
     public function iReorderMyVoteWithProposal1TakePlaceOfProposalDown(string $proposalId)
     {
-        $this->moveDraggableElementTo($proposalId, 40);
+        $this->moveDraggableElementTo($proposalId, static::$arrowDown);
     }
 
     /**
@@ -752,7 +845,11 @@ trait ProposalStepsTrait
     {
         $this->iWait(2);
         $votesCount = $this->getCurrentPage()->getVotesCount($this->getProposalId());
-        \PHPUnit_Framework_Assert::assertEquals($nb, $votesCount, 'Incorrect votes number ' . $votesCount . ' for proposal.');
+        \PHPUnit_Framework_Assert::assertEquals(
+            $nb,
+            $votesCount,
+            'Incorrect votes number ' . $votesCount . ' for proposal.'
+        );
     }
 
     /**
@@ -762,7 +859,11 @@ trait ProposalStepsTrait
     public function theProposalShouldHaveNbComments(int $nb)
     {
         $commentsCount = $this->getCurrentPage()->getCommentsCount($this->getProposalId());
-        \PHPUnit_Framework_Assert::assertEquals($nb, $commentsCount, 'Incorrect comments number ' . $commentsCount . ' for proposal.');
+        \PHPUnit_Framework_Assert::assertEquals(
+            $nb,
+            $commentsCount,
+            'Incorrect comments number ' . $commentsCount . ' for proposal.'
+        );
     }
 
     /**
@@ -804,10 +905,12 @@ trait ProposalStepsTrait
      */
     public function iFillTheProposalVoteForm()
     {
-        $tableNode = new TableNode([
-            ['proposal-vote__username', 'test'],
-            ['proposal-vote__email', 'test@coucou.fr'],
-        ]);
+        $tableNode = new TableNode(
+            [
+                ['proposal-vote__username', 'test'],
+                ['proposal-vote__email', 'test@coucou.fr'],
+            ]
+        );
         $this->fillFields($tableNode);
     }
 
@@ -816,10 +919,12 @@ trait ProposalStepsTrait
      */
     public function iFillTheProposalVoteFormWithAlreadyUsedEmail()
     {
-        $tableNode = new TableNode([
-            ['proposal-vote__username', 'test'],
-            ['proposal-vote__email', 'cheater@test.com'],
-        ]);
+        $tableNode = new TableNode(
+            [
+                ['proposal-vote__username', 'test'],
+                ['proposal-vote__email', 'cheater@test.com'],
+            ]
+        );
         $this->fillFields($tableNode);
     }
 
@@ -828,10 +933,12 @@ trait ProposalStepsTrait
      */
     public function iFillTheProposalVoteFormWithARegisteredEmail()
     {
-        $tableNode = new TableNode([
-            ['proposal-vote__username', 'test'],
-            ['proposal-vote__email', 'user@test.com'],
-        ]);
+        $tableNode = new TableNode(
+            [
+                ['proposal-vote__username', 'test'],
+                ['proposal-vote__email', 'user@test.com'],
+            ]
+        );
         $this->fillFields($tableNode);
     }
 
@@ -840,10 +947,12 @@ trait ProposalStepsTrait
      */
     public function proposalSelectionShouldHaveStatus(string $selectionStepId, string $proposalId, string $statusId)
     {
-        $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
-          'selectionStep' => $selectionStepId,
-          'proposal' => $proposalId,
-        ]);
+        $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy(
+            [
+                'selectionStep' => $selectionStepId,
+                'proposal' => $proposalId,
+            ]
+        );
         expect($selection->getStatus()->getId())->toBe($statusId);
         $this->getEntityManager()->clear();
     }
@@ -853,10 +962,12 @@ trait ProposalStepsTrait
      */
     public function proposalSelectionShouldHaveNoStatus(string $selectionStepId, string $proposalId)
     {
-        $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
-          'selectionStep' => $selectionStepId,
-          'proposal' => $proposalId,
-        ]);
+        $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy(
+            [
+                'selectionStep' => $selectionStepId,
+                'proposal' => $proposalId,
+            ]
+        );
         expect($selection->getStatus())->toBe(null);
         $this->getEntityManager()->clear();
     }
@@ -887,10 +998,12 @@ trait ProposalStepsTrait
     public function proposalShouldBeSelected(string $proposalId, string $selectionStepId)
     {
         $this->getEntityManager()->clear();
-        $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
-          'selectionStep' => $selectionStepId,
-          'proposal' => $proposalId,
-        ]);
+        $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy(
+            [
+                'selectionStep' => $selectionStepId,
+                'proposal' => $proposalId,
+            ]
+        );
         expect($selection)->toNotBe(null);
     }
 
@@ -900,10 +1013,12 @@ trait ProposalStepsTrait
     public function proposalShouldNotBeSelected(string $proposalId, string $selectionStepId)
     {
         $this->getEntityManager()->clear();
-        $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
-          'selectionStep' => $selectionStepId,
-          'proposal' => $proposalId,
-        ]);
+        $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy(
+            [
+                'selectionStep' => $selectionStepId,
+                'proposal' => $proposalId,
+            ]
+        );
         expect($selection)->toBe(null);
     }
 
@@ -920,7 +1035,10 @@ trait ProposalStepsTrait
      */
     public function iCheckTheProposalVotePrivateCheckbox()
     {
-        $this->getSession()->getPage()->find('css', '#proposal2-proposal-vote__private .form-group .react-toggle')->click();
+        $this->getSession()->getPage()->find(
+            'css',
+            '#proposal2-proposal-vote__private .form-group .react-toggle'
+        )->click();
     }
 
     /**
@@ -941,8 +1059,8 @@ trait ProposalStepsTrait
         $proposal = $this->getRepository('CapcoAppBundle:Proposal')->find($proposalId);
         $step = $this->getRepository('CapcoAppBundle:Steps\SelectionStep')->findOneBySlug($stepSlug);
         \PHPUnit_Framework_Assert::assertNotNull(
-          $this->getRepository('CapcoAppBundle:ProposalSelectionVote')
-               ->findOneBy(['user' => $user, 'proposal' => $proposal, 'selectionStep' => $step])
+            $this->getRepository('CapcoAppBundle:ProposalSelectionVote')
+                ->findOneBy(['user' => $user, 'proposal' => $proposal, 'selectionStep' => $step])
         );
     }
 
@@ -982,7 +1100,10 @@ trait ProposalStepsTrait
      */
     public function iShouldSeeTheProposalVoteLimitedTooltip()
     {
-        $this->assertElementContainsText('#vote-tooltip-proposal-proposal18', 'proposal.vote.popover.limit_reached_title');
+        $this->assertElementContainsText(
+            '#vote-tooltip-proposal-proposal18',
+            'proposal.vote.popover.limit_reached_title'
+        );
     }
 
     /**
@@ -990,7 +1111,10 @@ trait ProposalStepsTrait
      */
     public function iShouldSeeTheProposalVoteTooltip()
     {
-        $this->assertElementContainsText('#vote-tooltip-proposal-proposal8', 'proposal.vote.popover.not_enough_credits_text');
+        $this->assertElementContainsText(
+            '#vote-tooltip-proposal-proposal8',
+            'proposal.vote.popover.not_enough_credits_text'
+        );
     }
 
     /**
@@ -1244,16 +1368,14 @@ trait ProposalStepsTrait
     {
         return $this->navigationContext
             ->getPage('collect page')
-            ->isOpen(self::$collectStepOpenParams)
-            ;
+            ->isOpen(self::$collectStepOpenParams);
     }
 
     protected function closedCollectStepIsOpen()
     {
         return $this->navigationContext
             ->getPage('collect page')
-            ->isOpen(self::$collectStepClosedParams)
-            ;
+            ->isOpen(self::$collectStepClosedParams);
     }
 
     protected function proposalPageIsOpen()
@@ -1280,14 +1402,19 @@ trait ProposalStepsTrait
         );
     }
 
-    protected function fillProposalForm($fillDistrict = false, $fillTheme = false, $requiredResponse = 'Réponse à la question 2')
-    {
-        $tableNode = new TableNode([
-            ['proposal_title', 'Nouvelle proposition créée'],
-            ['proposal_body', 'Description de ma proposition'],
-            ['responses[0]', 'Réponse à la question 1'],
-            ['proposal_address', '5 Allée Rallier-du-Baty 35000 Rennes'],
-        ]);
+    protected function fillProposalForm(
+        $fillDistrict = false,
+        $fillTheme = false,
+        $requiredResponse = 'Réponse à la question 2'
+    ) {
+        $tableNode = new TableNode(
+            [
+                ['proposal_title', 'Nouvelle proposition créée'],
+                ['proposal_body', 'Description de ma proposition'],
+                ['responses[0]', 'Réponse à la question 1'],
+                ['proposal_address', '5 Allée Rallier-du-Baty 35000 Rennes'],
+            ]
+        );
         if (false !== $requiredResponse) {
             $this->fillField('responses[1]', $requiredResponse);
         }
@@ -1325,32 +1452,28 @@ trait ProposalStepsTrait
     {
         return $this->navigationContext
             ->getPage('selection page')
-            ->isOpen(self::$selectionStepWithSimpleVoteParams)
-            ;
+            ->isOpen(self::$selectionStepWithSimpleVoteParams);
     }
 
     protected function selectionStepWithBudgetVoteIsOpen()
     {
         return $this->navigationContext
             ->getPage('selection page')
-            ->isOpen(self::$selectionStepWithBudgetVoteParams)
-            ;
+            ->isOpen(self::$selectionStepWithBudgetVoteParams);
     }
 
     protected function selectionStepNotYetOpenIsOpen()
     {
         return $this->navigationContext
             ->getPage('selection page')
-            ->isOpen(self::$selectionStepNotYetOpen)
-            ;
+            ->isOpen(self::$selectionStepNotYetOpen);
     }
 
     protected function selectionStepClosedIsOpen()
     {
         return $this->navigationContext
             ->getPage('selection page')
-            ->isOpen(self::$selectionStepClosed)
-            ;
+            ->isOpen(self::$selectionStepClosed);
     }
 
     protected function proposalPageWithBudgetVoteIsOpen()
@@ -1381,7 +1504,11 @@ trait ProposalStepsTrait
         $page = $this->getCurrentPage();
         $proposalId = $id ?: $this->getProposalId();
         $buttonLabel = $page->getVoteButtonLabel($proposalId);
-        \PHPUnit_Framework_Assert::assertEquals($label, $buttonLabel, 'Incorrect button label ' . $buttonLabel . ' on proposal vote button.');
+        \PHPUnit_Framework_Assert::assertEquals(
+            $label,
+            $buttonLabel,
+            'Incorrect button label ' . $buttonLabel . ' on proposal vote button.'
+        );
         $page->clickVoteButton($proposalId);
         $this->iWait(2);
     }
