@@ -64,7 +64,6 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
       >
         <Field
           component={[Function]}
-          id="1-proposal-vote__private-toggle"
           label={
             <FormattedMessage
               id="public"

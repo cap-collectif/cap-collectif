@@ -62,5 +62,8 @@ const mapDispatchToProps = (dispatch: Dispatch, props: ParentProps) => ({
     deleteRegistrationField(props.value.id, dispatch);
   },
 });
-const connector: Connector<ParentProps, Props> = connect(mapStateToProps, mapDispatchToProps);
+const connector: Connector<ParentProps, Props> = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
 export default SortableElement(connector(RegistrationSortableQuestion));

@@ -56,12 +56,16 @@ class ArrayHelper {
       if (order === 'ASC') {
         return nsort
           ? this.naturalComparison(el1[field], el2[field])
-          : el1[field] > el2[field] ? 1 : -1;
+          : el1[field] > el2[field]
+            ? 1
+            : -1;
       }
       if (order === 'DESC') {
         return nsort
           ? this.naturalComparison(el2[field], el1[field])
-          : el1[field] < el2[field] ? 1 : -1;
+          : el1[field] < el2[field]
+            ? 1
+            : -1;
       }
       return 0;
     });

@@ -44,7 +44,11 @@ class OpinionAppendix extends React.Component<Props, State> {
         expanded={this.state.expanded}
         style={style}
         className="opinion__appendix__content">
-        <div dangerouslySetInnerHTML={{ __html: appendix.body }} />
+        <Panel.Collapse>
+          <Panel.Body>
+            <div dangerouslySetInnerHTML={{ __html: appendix.body }} />
+          </Panel.Body>
+        </Panel.Collapse>
       </Panel>
     );
   };

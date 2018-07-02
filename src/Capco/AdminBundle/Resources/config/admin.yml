@@ -154,14 +154,6 @@ services:
     calls:
       - [ setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.requirement:
-    class: Capco\AdminBundle\Admin\RequirementAdmin
-    arguments: [~, Capco\AppBundle\Entity\Requirement, SonataAdminBundle:CRUD]
-    tags:
-      - {name: sonata.admin, manager_type: orm, label: admin.label.status}
-    calls:
-      - [ setTranslationDomain, [CapcoAppBundle]]
-
   capco_admin.admin.footer_social_network:
     class: Capco\AdminBundle\Admin\FooterSocialNetworkAdmin
     arguments: [~, Capco\AppBundle\Entity\FooterSocialNetwork, SonataAdminBundle:CRUD]

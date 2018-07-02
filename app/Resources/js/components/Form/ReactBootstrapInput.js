@@ -361,9 +361,7 @@ class ReactBootstrapInput extends React.Component<Props> {
         bsClass={cx({ 'form-group': !standalone }, groupClassName)}
         validationState={validationState}>
         {label && (
-          <ControlLabel htmlFor={this.props.id} bsClass={cx('control-label', labelClassName)}>
-            {label}
-          </ControlLabel>
+          <ControlLabel bsClass={cx('control-label', labelClassName)}>{label}</ControlLabel>
         )}
         {props.help && <HelpBlock>{props.help}</HelpBlock>}
         {props.description && (

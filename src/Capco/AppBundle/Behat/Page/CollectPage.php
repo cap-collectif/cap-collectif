@@ -26,7 +26,6 @@ class CollectPage extends Page
         'selected sorting option' => '#proposal-sorting option[selected]',
         'follow proposal button' => '.proposal__button__follow',
         'type of follow proposal' => '.proposal__follow',
-        'my votes' => '.widget__button.navbar-btn.pull-right.btn.btn-default',
     ];
 
     public function sortByDate()
@@ -79,11 +78,6 @@ class CollectPage extends Page
         return $this->getElement('follow proposal button')->click();
     }
 
-    public function clickMyVotesButton()
-    {
-        return $this->getElement('my votes')->click();
-    }
-
     public function isFollowedAs($type)
     {
         $element = $this->elements['type of follow proposal'] . "__$type";
@@ -111,8 +105,7 @@ class CollectPage extends Page
                         'Expected to be on "%s" but found "%s" instead',
                         $this->getUrl($urlParameters),
                         $this->getSession()->getCurrentUrl()
-                    )
-                );
+                ));
             }
         }
     }
