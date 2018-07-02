@@ -13,7 +13,15 @@ import {
 } from 'redux-form';
 import { createFragmentContainer, fetchQuery, graphql } from 'react-relay';
 import { debounce } from 'lodash';
-import { Alert, Collapse, Panel, Glyphicon, Button } from 'react-bootstrap';
+import {
+  Alert,
+  Collapse,
+  ListGroup,
+  ListGroupItem,
+  Panel,
+  Glyphicon,
+  Button,
+} from 'react-bootstrap';
 import component from '../../Form/Field';
 import type {
   ProposalFormSearchProposalsQueryResponse,
@@ -355,31 +363,35 @@ export class ProposalForm extends React.Component<Props, State> {
           }
         />
         <Collapse in={titleSuggestions.length > 0}>
-          <Panel
-            header={
-              <FormattedMessage
-                id="proposal.suggest_header"
-                values={{
-                  matches: titleSuggestions.length,
-                  terms: titleValue ? titleValue.split(' ').length : '',
-                }}
-              />
-            }>
-            <ul style={{ listStyleType: 'none', padding: 0 }}>
+          <Panel>
+            <Panel.Heading>
+              <Panel.Title>
+                <FormattedMessage
+                  id="proposal.suggest_header"
+                  values={{
+                    matches: titleSuggestions.length,
+                    terms: titleValue ? titleValue.split(' ').length : '',
+                  }}
+                />
+                <Button
+                  style={{ marginTop: -5 }}
+                  className="pull-right"
+                  onClick={() => {
+                    this.setState({ titleSuggestions: [] });
+                  }}>
+                  <FormattedMessage id="global.close" />
+                </Button>
+              </Panel.Title>
+            </Panel.Heading>
+            <ListGroup>
               {titleSuggestions.slice(0, 5).map(suggestion => (
-                <li>
+                <ListGroupItem>
                   <a href={suggestion.show_url} className="external-link">
                     {suggestion.title}
                   </a>
-                </li>
+                </ListGroupItem>
               ))}
-            </ul>
-            <Button
-              onClick={() => {
-                this.setState({ titleSuggestions: [] });
-              }}>
-              <FormattedMessage id="global.close" />
-            </Button>
+            </ListGroup>
           </Panel>
         </Collapse>
         <Field

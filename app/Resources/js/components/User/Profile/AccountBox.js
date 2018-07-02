@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import * as React from 'react';
 import { Panel, Button } from 'react-bootstrap';
 import { connect, type MapStateToProps } from 'react-redux';
 import { isInvalid } from 'redux-form';
@@ -23,18 +23,10 @@ type State = {
   showDeleteAccountModal: boolean,
 };
 
-export class AccountBox extends Component<Props, State> {
+export class AccountBox extends React.Component<Props, State> {
   state = { showDeleteAccountModal: false };
   render() {
     const { invalid, submitting, dispatch, viewer } = this.props;
-
-    const header = (
-      <div className="panel-heading profile-header">
-        <h1>
-          <FormattedMessage id="profile.account.title" />
-        </h1>
-      </div>
-    );
 
     const footer = (
       <div style={{ paddingLeft: 15 }}>
@@ -63,18 +55,26 @@ export class AccountBox extends Component<Props, State> {
     );
 
     return (
-      <Panel>
-        <Panel.Header>
-          {header}
-        </Panel.Header>
-        <h2 className="page-header">
-          <FormattedMessage id="profile.account.title" />
-        </h2>
-        <AccountForm />
-        <ConfirmPasswordModal />
-        <Panel.Footer>
-          {footer}
-        </Panel.Footer>
+      <React.Fragment>
+        <Panel>
+          <Panel.Heading>
+            <Panel.Title>
+              <div className="panel-heading profile-header">
+                <h1>
+                  <FormattedMessage id="profile.account.title" />
+                </h1>
+              </div>
+            </Panel.Title>
+          </Panel.Heading>
+          <Panel.Body>
+            <h2 className="page-header">
+              <FormattedMessage id="profile.account.title" />
+            </h2>
+            <AccountForm />
+            <ConfirmPasswordModal />
+          </Panel.Body>
+          <Panel.Footer>{footer}</Panel.Footer>
+        </Panel>
         {/* $FlowFixMe */}
         <DeleteAccountModal
           viewer={viewer}
@@ -83,7 +83,7 @@ export class AccountBox extends Component<Props, State> {
             this.setState({ showDeleteAccountModal: false });
           }}
         />
-      </Panel>
+      </React.Fragment>
     );
   }
 }
