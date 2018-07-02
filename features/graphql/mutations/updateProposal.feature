@@ -339,7 +339,7 @@ Scenario: GraphQL client wants to edit his proposal without required response
   Then the JSON response should match:
   """
   {
-    "errors":[{"message":"proposal.missing_required_responses {\"missing\":11}","locations":[{"line":1,"column":53}]}],
+    "errors":[{"message":"proposal.missing_required_responses {\"missing\":11}","category":@string@,"locations":[{"line":1,"column":53}],"path":[@...@]}],
     "data": { "changeProposalContent": null }
   }
   """

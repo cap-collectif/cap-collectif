@@ -213,6 +213,6 @@ services:
     arguments:
       $kernelRootDir: '%kernel.root_dir%'
 
-  Capco\AppBundle\EventListener\DisableAclListener:
+  Capco\AppBundle\EventListener\GraphQlAclListener:
     tags:
     - { name: kernel.event_listener, event: graphql.pre_executor, method: onPreExecutor }

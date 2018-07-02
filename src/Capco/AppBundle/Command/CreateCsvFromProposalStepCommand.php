@@ -8,6 +8,7 @@ use Box\Spout\Writer\WriterInterface;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\InfoResolver;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\SelectionStepRepository;
@@ -425,11 +426,13 @@ EOF;
 
     public function __construct(Executor $executor,
                                 ProjectRepository $projectRepository,
+                                GraphQlAclListener $listener,
                                 SelectionStepRepository $selectionStepRepository,
                                 Manager $toggleManager,
                                 LoggerInterface $logger,
                                 string $kernelRootDir
     ) {
+        $listener->disableAcl();
         $this->executor = $executor;
         $this->toggleManager = $toggleManager;
         $this->projectRepository = $projectRepository;
@@ -450,11 +453,11 @@ EOF;
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-//        if (!$this->toggleManager->isActive('export')) {
-//            $output->writeln('Please enable "export" feature to run this command');
-//
-//            return;
-//        }
+        if (!$this->toggleManager->isActive('export')) {
+            $output->writeln('Please enable "export" feature to run this command');
+
+            return;
+        }
 
         if ($project = $this->getProject($input)) {
             $steps = $project->getSteps()

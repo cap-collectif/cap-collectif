@@ -339,7 +339,7 @@ Scenario: User should be able to update his public data, but username is missing
   Then the JSON response should match:
   """
   {
-    "errors":[{"message":"Variable \u0022$input\u0022 got invalid value {\u0022username\u0022:null}.\nIn field \u0022username\u0022: Expected \u0022String!\u0022, found null.","locations":[{"line":1,"column":42}]}]
+    "errors":[{"message":"Variable \u0022$input\u0022 got invalid value {\u0022username\u0022:null}.\nIn field \u0022username\u0022: Expected \u0022String!\u0022, found null.","category":@string@,"locations":[{"line":1,"column":42}]}]
   }
   """
 

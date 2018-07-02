@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Steps\CollectStep;
@@ -15,7 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Error\UserError;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class AddProposalVoteMutation
@@ -37,7 +36,7 @@ class AddProposalVoteMutation
         $this->resolver = $resolver;
     }
 
-    public function __invoke(Argument $input, User $user, Request $request)
+    public function __invoke(Argument $input, User $user, RequestStack $request)
     {
         $proposal = $this->proposalRepo->find($input->offsetGet('proposalId'));
         $step = $this->stepRepo->find($input->offsetGet('stepId'));
@@ -99,7 +98,7 @@ class AddProposalVoteMutation
         }
 
         $vote
-            ->setIpAddress($request->getClientIp())
+            ->setIpAddress($request->getCurrentRequest()->getClientIp())
             ->setUser($user)
             ->setPrivate($input->offsetGet('anonymously'))
             ->setProposal($proposal)

@@ -20,17 +20,19 @@ class UserIsGrantedResolver
     /**
      * if $user is tped, I receive an error 500. But I want a graphql error, so I need to check the instance of $user.
      *
-     * @param mixed      $user
+     * @param mixed $user
      * @param null|mixed $userRequest
      * @param null|mixed $context
+     * @param array $roleRequest
+     * @return bool
      */
     public function isGranted(
         $user,
         $userRequest = null,
-        $context = null,
+        \ArrayObject $context = null,
         array $roleRequest = ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN']
     ): bool {
-        if ($context && isset($context['disable_acl'])) {
+        if ($context && $context->offsetExists('disable_acl') && true === $context->offsetGet('disable_acl')) {
             return true;
         }
         if (!$user instanceof User) {
