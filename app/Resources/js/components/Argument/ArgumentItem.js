@@ -35,15 +35,15 @@ class ArgumentItem extends React.Component<Props> {
   };
 
   render() {
-    const argument = this.props.argument;
+    const { argument } = this.props;
     const classes = classNames({
-      // opinion: true,
-      // 'opinion--argument': true,
+      opinion: true,
+      'opinion--argument': true,
       'bg-vip': argument.author && argument.author.vip,
     });
     return (
       <div className={classes} id={`arg-${argument.id}`}>
-        <div className="opinion__body box">
+        <div className="opinion__body">
           <UserAvatar user={argument.author} className="pull-left" />
           <div className="opinion__data">
             <p className="h5 opinion__user">

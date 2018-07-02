@@ -487,8 +487,6 @@
 // Arguments
 .opinion__arguments__header {
     margin: 0;
-    padding-top: 15px;
-    padding-bottom: 15px;
     background-color: $page-bgc;
     border-bottom: 1px solid $border-color;
 
@@ -498,14 +496,14 @@
     }
 }
 
-#opinion__arguments--yes,
-#opinion__arguments--simple {
+#opinion__arguments--FOR,
+#opinion__arguments--SIMPLE {
     .opinion__header__title {
         color: $success-color;
     }
 }
 
-#opinion__arguments--no {
+#opinion__arguments--AGAINST {
     .opinion__header__title {
         color: $brand-danger;
     }

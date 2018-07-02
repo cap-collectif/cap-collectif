@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Panel } from 'react-bootstrap';
 import { connect, type MapStateToProps } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
@@ -35,7 +35,7 @@ export class ArgumentList extends React.Component<Props, State> {
   render() {
     const { type, isAuthenticated } = this.props;
     return (
-      <div id={`opinion__arguments--${type}`} className="block--tablet block--bordered">
+      <div id={`opinion__arguments--${type}`} className="block--tablet">
         <QueryRenderer
           environment={environment}
           query={graphql`
@@ -77,53 +77,55 @@ export class ArgumentList extends React.Component<Props, State> {
               const totalCount = argumentable.allArguments.totalCount;
               const htmlFor = `filter-arguments-${type}`;
               return (
-                <React.Fragment>
-                  <Row className="opinion__arguments__header">
-                    <Col xs={12} sm={6} md={6}>
-                      <h4 className="opinion__header__title">
-                        {type === 'SIMPLE' ? (
-                          <FormattedMessage
-                            id="argument.simple.list"
-                            values={{ num: totalCount }}
-                          />
-                        ) : type === 'FOR' ? (
-                          <FormattedMessage id="argument.yes.list" values={{ num: totalCount }} />
-                        ) : (
-                          <FormattedMessage id="argument.no.list" values={{ num: totalCount }} />
-                        )}
-                      </h4>
-                    </Col>
-                    {totalCount && (
-                      <Col xs={12} sm={6} md={6} className="block--first-mobile">
-                        <label htmlFor={htmlFor}>
-                          <span className="sr-only">
+                <Panel
+                  header={
+                    <Row className="opinion__arguments__header" style={{ border: 0 }}>
+                      <Col xs={12} sm={6} md={6}>
+                        <h4 className="opinion__header__title">
+                          {type === 'SIMPLE' ? (
                             <FormattedMessage
-                              id={`argument.filter.${type === 'AGAINST' ? 'no' : 'yes'}`}
+                              id="argument.simple.list"
+                              values={{ num: totalCount }}
                             />
-                          </span>
-                        </label>
-                        <Input
-                          id={htmlFor}
-                          className="form-control pull-right"
-                          type="select"
-                          value={this.state.order}
-                          onChange={this.updateOrderBy}>
-                          <FormattedMessage id="global.filter_last">
-                            {message => <option value="last">{message}</option>}
-                          </FormattedMessage>
-                          <FormattedMessage id="global.filter_old">
-                            {message => <option value="old">{message}</option>}
-                          </FormattedMessage>
-                          <FormattedMessage id="global.filter_popular">
-                            {message => <option value="popular">{message}</option>}
-                          </FormattedMessage>
-                        </Input>
+                          ) : type === 'FOR' ? (
+                            <FormattedMessage id="argument.yes.list" values={{ num: totalCount }} />
+                          ) : (
+                            <FormattedMessage id="argument.no.list" values={{ num: totalCount }} />
+                          )}
+                        </h4>
                       </Col>
-                    )}
-                  </Row>
+                      {totalCount && (
+                        <Col xs={12} sm={6} md={6} className="block--first-mobile">
+                          <Input
+                            id={htmlFor}
+                            label={
+                              <span className="sr-only">
+                                <FormattedMessage
+                                  id={`argument.filter.${type === 'AGAINST' ? 'no' : 'yes'}`}
+                                />
+                              </span>
+                            }
+                            className="form-control pull-right"
+                            type="select"
+                            value={this.state.order}
+                            onChange={this.updateOrderBy}>
+                            <FormattedMessage id="global.filter_last">
+                              {message => <option value="last">{message}</option>}
+                            </FormattedMessage>
+                            <FormattedMessage id="global.filter_old">
+                              {message => <option value="old">{message}</option>}
+                            </FormattedMessage>
+                            <FormattedMessage id="global.filter_popular">
+                              {message => <option value="popular">{message}</option>}
+                            </FormattedMessage>
+                          </Input>
+                        </Col>
+                      )}
+                    </Row>
+                  }>
                   {/* $FlowFixMe */}
                   <ArgumentListView order={this.state.order} argumentable={argumentable} />
-                </React.Fragment>
+                </Panel>
               );
             }
             return <Loader />;

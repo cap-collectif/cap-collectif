@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Button, Panel, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Button, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import type { ArgumentListViewPaginated_argumentable } from './__generated__/ArgumentListViewPaginated_argumentable.graphql';
@@ -25,40 +25,35 @@ export class ArgumentListViewPaginated extends React.Component<Props, State> {
   render() {
     const { argumentable, relay } = this.props;
     return (
-      <Panel>
-        <ListGroup fill>
-          {/* <ul className="media-list opinion__list"> */}
-          {argumentable.arguments.edges &&
-            argumentable.arguments.edges
-              .filter(Boolean)
-              .map(edge => edge.node)
-              .filter(Boolean)
-              .map(argument => {
-                return (
-                  <ListGroupItem key={argument.id}>
-                    {/* $FlowFixMe */}
-                    <ArgumentItem argument={argument} />
-                  </ListGroupItem>
-                );
-              })}
-          {relay.hasMore() && (
-            <ListGroupItem>
-              <Button
-                disabled={this.state.loading}
-                onClick={() => {
-                  this.setState({ loading: true });
-                  relay.loadMore(ARGUMENTS_PAGINATION, () => {
-                    this.setState({ loading: false });
-                  });
-                }}>
-                <FormattedMessage
-                  id={this.state.loading ? 'global.loading' : 'see-more-proposals'}
-                />
-              </Button>
-            </ListGroupItem>
-          )}
-        </ListGroup>
-      </Panel>
+      <ListGroup>
+        {argumentable.arguments.edges &&
+          argumentable.arguments.edges
+            .filter(Boolean)
+            .map(edge => edge.node)
+            .filter(Boolean)
+            .map(argument => {
+              return (
+                <ListGroupItem key={argument.id}>
+                  {/* $FlowFixMe */}
+                  <ArgumentItem argument={argument} />
+                </ListGroupItem>
+              );
+            })}
+        {relay.hasMore() && (
+          <ListGroupItem>
+            <Button
+              disabled={this.state.loading}
+              onClick={() => {
+                this.setState({ loading: true });
+                relay.loadMore(ARGUMENTS_PAGINATION, () => {
+                  this.setState({ loading: false });
+                });
+              }}>
+              <FormattedMessage id={this.state.loading ? 'global.loading' : 'see-more-proposals'} />
+            </Button>
+          </ListGroupItem>
+        )}
+      </ListGroup>
     );
   }
 }
