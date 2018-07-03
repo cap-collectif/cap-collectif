@@ -19,8 +19,7 @@ RUN chown -R capco /usr/local /usr/bin /usr/lib
 # Add composer global binaries to $PATH
 ENV PATH $PATH:/home/capco/.composer/vendor/bin/
 
-# Add yarn modules binaries to $PATH
-ENV PATH $PATH:$(yarn global bin)
+RUN yarn global add jest flow-bin bundlesize eslint
 
 WORKDIR /var/www
 
