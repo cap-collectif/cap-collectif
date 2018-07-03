@@ -115,7 +115,8 @@ Scenario: logged in API client wants to add an opinion to a not enabled opinionT
   """
   {
     "code": 400,
-    "message": "This opinionType is not enabled."
+    "message": "This opinionType is not enabled.",
+    "errors": @null@
   }
   """
 
@@ -140,7 +141,8 @@ Scenario: logged in API client can not add more than 2 opinions in a minute
   """
   {
       "code": 400,
-      "message": "You contributed too many times."
+      "message": "You contributed too many times.",
+      "errors": @null@
   }
   """
 

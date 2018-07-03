@@ -9,6 +9,11 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Argument']
 
+  capco.reply.repository:
+    class: Capco\AppBundle\Repository\ReplyRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:Reply']
+
   capco.argument_vote.repository:
     class: Capco\AppBundle\Repository\ArgumentVoteRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]

@@ -152,7 +152,7 @@ class UsersController extends FOSRestController
     /**
      * @Put("/users/me")
      * @Security("has_role('ROLE_USER')")
-     * @View(statusCode=204, serializerGroups={})
+     * @View(statusCode=200, serializerGroups={})
      */
     public function putMeAction(Request $request)
     {

@@ -46,7 +46,7 @@ Scenario: Logged in admin wants edit a proposal form on evaluation tab
   And I change the proposal form select "proposal form evaluation question" with option questionnaire5
   And I wait 1 seconds
   Then I save current admin proposal form "evaluation"
-  And I wait 2 seconds
+  And I wait 1 seconds
   Then I should see "global.saved"
 
 @database
@@ -57,7 +57,7 @@ Scenario: Logged in admin wants edit a proposal form on notification tab
   And I check a proposal form checkbox "notification proposition modified"
   And I check a proposal form checkbox "notification commentary created"
   Then I save current admin proposal form "notification"
-  And I wait 2 seconds
+  And I wait 1 seconds
   Then I should see "global.saved"
 
 @database
@@ -69,7 +69,7 @@ Scenario: Logged in admin wants edit a proposal form on settings tab
     | title | test text random |
   And I check a proposal form checkbox "parameters costable"
   Then I save current admin proposal form "parameters"
-  And I wait 2 seconds
+  And I wait 1 seconds
   Then I should see "global.saved"
 
 @database

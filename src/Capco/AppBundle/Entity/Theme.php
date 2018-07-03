@@ -31,9 +31,9 @@ class Theme implements IndexableInterface
     ];
 
     public static $statusesLabels = [
-         'theme.show.status.closed' => self::STATUS_CLOSED,
-         'theme.show.status.opened' => self::STATUS_OPENED,
-         'theme.show.status.future' => self::STATUS_FUTURE,
+        self::STATUS_CLOSED => 'theme.show.status.closed',
+        self::STATUS_OPENED => 'theme.show.status.opened',
+        self::STATUS_FUTURE => 'theme.show.status.future',
     ];
 
     /**

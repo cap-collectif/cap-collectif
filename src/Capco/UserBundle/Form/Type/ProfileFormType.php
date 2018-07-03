@@ -46,8 +46,13 @@ class ProfileFormType extends AbstractType
 
         if ($this->toggleManager->isActive('user_type')) {
             $builder->add('userType', null, [
-                'empty_data' => 'user.profile.edit.no_user_type',
+                'empty_value' => 'user.profile.edit.no_user_type',
             ]);
         }
+    }
+
+    public function getParent()
+    {
+        return 'sonata_user_profile';
     }
 }

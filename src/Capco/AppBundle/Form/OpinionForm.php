@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Form;
 
-use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Form\Type\PurifiedTextareaType;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Symfony\Component\Form\AbstractType;
@@ -19,7 +18,7 @@ class OpinionForm extends AbstractType
             ->add('body', PurifiedTextareaType::class, ['required' => true])
             ->add('appendices',
                 CollectionType::class, [
-                'entry_type' => AppendixType::class,
+                'type' => new AppendixType(),
                 'required' => false,
                 'allow_add' => true,
                 'by_reference' => false,
@@ -30,7 +29,7 @@ class OpinionForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Opinion::class,
+            'data_class' => 'Capco\AppBundle\Entity\Opinion',
             'csrf_protection' => false,
         ]);
     }

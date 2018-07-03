@@ -32,6 +32,7 @@ exports[`<PreviewMedia /> should render correctly 1`] = `
     >
       <a
         href="http://capco.dev/image.jpg"
+        rel="noopener noreferrer"
         target="_blank"
       >
         image

@@ -3,12 +3,13 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Status;
+use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class StatusAdmin extends CapcoAdmin
+class StatusAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',

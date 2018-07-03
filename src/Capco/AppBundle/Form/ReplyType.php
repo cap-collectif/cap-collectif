@@ -8,7 +8,6 @@ use Infinite\FormBundle\Form\Type\PolyCollectionType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Valid;
 
 class ReplyType extends AbstractType
 {
@@ -42,7 +41,7 @@ class ReplyType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Reply::class,
             'csrf_protection' => false,
-            'constraints' => new Valid(),
+            'cascade_validation' => true,
             'anonymousAllowed' => false,
         ]);
     }

@@ -10,7 +10,7 @@ class OpinionTypeController extends Controller
     protected function redirectTo($object)
     {
         $url = false;
-        $request = $this->getRequest()->request;
+        $request = $this->get('request')->request;
 
         $consultationStepTypeId = $object->getConsultationStepType() ? $object->getConsultationStepType()->getId() : $request->get('consultation_step_type_id');
 
