@@ -20,7 +20,7 @@ if [ "$PRODUCTION" ]; then
   php vendor/sensio/distribution-bundle/Resources/bin/build_bootstrap.php var
 
   # Frontend deps
-  yarn install --pure-lockfile
+  yarn install --pure-lockfile --production=false
   bower install --config.interactive=false --allow-root
 
   echo "Building node-sass binding for the container..."
@@ -50,7 +50,7 @@ else
   composer dump-autoload
 
   # Frontend deps
-  NODE_ENV=development yarn install
+  yarn install --pure-lockfile --production=false
   bower install --config.interactive=false --allow-root
 
   echo "Testing node-sass binding..."
