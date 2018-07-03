@@ -29,7 +29,7 @@ Scenario: Can not create an opinion of non-contribuable type
 Scenario: Can not create an opinion in closed project
   Given I am logged in as user
   And I visited "consultation page" with:
-    | projectSlug | strategie-technologique-de-letat-et-services-publics |
+    | projectSlug | strategie-technologique-de-l-etat-et-services-publics |
     | stepSlug    | collecte-des-avis-pour-une-meilleur-strategie         |
   Then I should see "step.consultation.alert.ended.title" in the "#main" element
   Then I should see "step.consultation.alert.ended.text" in the "#main" element

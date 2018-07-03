@@ -131,13 +131,3 @@ svg.avatar {
 .table-responsive {
   overflow: visible;
 }
-
-// Disable tooltip showed by Sonata Admin since version 3
-.ui-tooltip {
-    display: none !important;
-}
-
-// Fix wrong padding left in checkboxes
-.tab-pane.active .checkbox label, .modal-body .checkbox label {
-    padding-left: 40px;
-}

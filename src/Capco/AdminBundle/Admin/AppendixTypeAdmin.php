@@ -2,12 +2,13 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class AppendixTypeAdmin extends CapcoAdmin
+class AppendixTypeAdmin extends Admin
 {
     protected $formOptions = [
         'cascade_validation' => true,

@@ -19,6 +19,8 @@ RUN chown -R capco /usr/local /usr/bin /usr/lib
 # Add composer global binaries to $PATH
 ENV PATH $PATH:/home/capco/.composer/vendor/bin/
 
+RUN yarn global add jest babel-jest flow-bin@0.70.0 flow-coverage-report bundlesize eslint
+
 WORKDIR /var/www
 
 USER capco

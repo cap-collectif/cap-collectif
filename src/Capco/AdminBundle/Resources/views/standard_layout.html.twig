@@ -46,27 +46,28 @@
     </script>
 {% endblock %}
 
+
 {% block sonata_admin_content_actions_wrappers %}
-  {% if admin.class == 'Capco\\AppBundle\\Entity\\Proposal' and admin.hasSubject == false %}
+  {% if admin.class == 'Capco\\AppBundle\\Entity\\Proposal' and admin.subject is same as(false) %}
         <ul class="nav navbar-nav navbar-right">
             <li>
                 {{ react_render_component('ProposalCreateFusionButtonApp') }}
             </li>
         </ul>
   {% endif %}
-  {% if admin.class == 'Capco\\AppBundle\\Entity\\ProposalForm' and admin.hasSubject == false %}
+  {% if admin.class == 'Capco\\AppBundle\\Entity\\ProposalForm' and admin.subject is same as(false) %}
       <ul class="nav navbar-nav navbar-right">
         <li>
             {{ react_render_component('ProposalFormCreateButtonApp') }}
         </li>
       </ul>
-  {% elseif admin.class == 'Capco\\AppBundle\\Entity\\Group' and admin.hasSubject == false %}
+  {% elseif admin.class == 'Capco\\AppBundle\\Entity\\Group' and admin.subject is same as(false) %}
       <ul class="nav navbar-nav navbar-right">
           <li>
               {{ react_render_component('GroupCreateButtonApp') }}
           </li>
       </ul>
-  {% elseif admin.class == 'Capco\\UserBundle\\Entity\\User' and admin.hasSubject == false %}
+  {% elseif admin.class == 'Capco\\UserBundle\\Entity\\User' and admin.subject is same as(false) %}
       {# TODO redux store in global #}
   {% include '@CapcoApp/redux_store.html.twig' %}
       <ul class="nav navbar-nav navbar-right">

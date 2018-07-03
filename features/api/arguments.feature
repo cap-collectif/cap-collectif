@@ -100,7 +100,7 @@ Scenario: Anonymous API client wants to add an argument to an opinion
   When I send a POST request to "/api/opinions/opinion57/arguments" with a valid argument json
   Then the JSON response status code should be 401
 
-@database @rabbitmq
+@database
 Scenario: Logged in API client wants to add an argument to an opinion
   Given I am logged in to api as user
   When I send a POST request to "/api/opinions/opinion57/arguments" with a valid argument json
@@ -121,7 +121,8 @@ Scenario: logged in API client can not add more than 2 arguments in a minute
   """
   {
       "code": 400,
-      "message": "You contributed too many times."
+      "message": "You contributed too many times.",
+      "errors": @null@
   }
   """
 
@@ -250,7 +251,8 @@ Scenario: logged in API client wants to delete a non-existent vote
   """
   {
     "code": 400,
-    "message": "You have not voted for this argument."
+    "message": "You have not voted for this argument.",
+    "errors": @null@
   }
   """
 

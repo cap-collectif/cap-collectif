@@ -203,7 +203,9 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, { step }: Props
               typeof requirement.viewerValue !== 'undefined'
                 ? requirement.__typename !== 'PhoneRequirement'
                   ? requirement.viewerValue
-                  : requirement.viewerValue ? requirement.viewerValue.replace('+33', '') : null
+                  : requirement.viewerValue
+                    ? requirement.viewerValue.replace('+33', '')
+                    : null
                 : requirement.viewerMeetsTheRequirement,
           }),
           {},

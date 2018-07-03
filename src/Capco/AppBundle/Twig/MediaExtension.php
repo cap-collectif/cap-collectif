@@ -27,7 +27,12 @@ class MediaExtension extends \Twig_Extension
         }
 
         $provider = $this->container->get($media->getProviderName());
+        $request = $this->container->get('request_stack')->getCurrentRequest();
+        $path = '';
+        if ('reference' === $format) {
+            $path = '/media';
+        }
 
-        return $provider->generatePublicUrl($media, $format);
+        return $request->getUriForPath($path) . $provider->generatePublicUrl($media, $format);
     }
 }

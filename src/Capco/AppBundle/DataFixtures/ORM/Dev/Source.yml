@@ -47,7 +47,7 @@ Capco\AppBundle\Entity\Source:
     id: 'source32'
     title: <text(20)>
     body: <text(1000)>
-    Author: '@user4'
+    Author: @user4
     opinionVersion: '@version1'
     Category: '@Category<numberBetween(1,5)>'
     link: https://toto.fr/

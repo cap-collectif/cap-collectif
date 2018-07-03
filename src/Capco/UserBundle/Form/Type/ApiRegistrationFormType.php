@@ -8,10 +8,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Valid;
 
 class ApiRegistrationFormType extends AbstractType
 {
@@ -29,10 +27,6 @@ class ApiRegistrationFormType extends AbstractType
             ->remove('plainPassword')
             ->add('plainPassword', PasswordType::class)
         ;
-
-        $builder
-            ->add('username', TextType::class, ['required' => true])
-            ->add('email', TextType::class, ['required' => true]);
 
         $builder->add('captcha', ReCaptchaType::class, ['validation_groups' => ['registration']]);
 
@@ -62,8 +56,13 @@ class ApiRegistrationFormType extends AbstractType
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
-            'constraints' => new Valid(),
+            'cascade_validation' => true,
             'validation_groups' => ['registration'],
         ]);
+    }
+
+    public function getParent(): string
+    {
+        return 'sonata_user_registration';
     }
 }

@@ -7,10 +7,11 @@ use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Questions\SimpleQuestion;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class QuestionAdmin extends CapcoAdmin
+class QuestionAdmin extends Admin
 {
     protected $formOptions = [
         'cascade_validation' => true,

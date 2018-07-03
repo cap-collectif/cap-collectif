@@ -2,9 +2,10 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class ProposalCategoryAdmin extends CapcoAdmin
+class ProposalCategoryAdmin extends Admin
 {
     protected $formOptions = [
         'cascade_validation' => true,
