@@ -6,8 +6,6 @@ Reply:
         fields:
             id:
                 type: "ID!"
-            author:
-                type: "User!"
             enabled:
                 type: "Boolean!"
             private:
@@ -28,9 +26,6 @@ Reply:
             questionnaire:
                 type: "Questionnaire!"
                 description: "Identifies the form where the contribution was submitted."
-            responses:
-                type: "[Response]!"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ResponsesResolver", [value])'
             kind:
                 type: "String!"
                 resolve: "@=value.getKind()"

@@ -282,7 +282,7 @@ User:
                 description: "The user subrscibes to the newsletter at date"
             isViewer:
                 type: "Boolean!"
-                resolve: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isViewer(user, value)'
+                resolve: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isViewer(getUser(), value)'
                 description: "Is user given the current viewer ?"
             isEmailConfirmed:
                 type: "Boolean"

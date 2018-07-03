@@ -270,7 +270,7 @@ Mutation:
               payloadType: UpdateProfilePersonalDataPayload
               mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProfilePersonalDataMutation", [value, getUser()])'
           updateProfilePublicData:
-            access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user, value, context, ["ROLE_SUPER_ADMIN"])'
+            access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(), value, context, ["ROLE_SUPER_ADMIN"])'
             builder: "Relay::Mutation"
             builderConfig:
               inputType: UpdateProfilePublicDataInput
@@ -304,4 +304,4 @@ Mutation:
             builderConfig:
               inputType: UpdateUserAccountInput
               payloadType: UpdateUserAccountPayload
-              mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateUserAccountMutation", [value, user])'
+              mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateUserAccountMutation", [value, getUser()])'
