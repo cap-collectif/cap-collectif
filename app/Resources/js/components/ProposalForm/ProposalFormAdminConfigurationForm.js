@@ -350,7 +350,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
               </h3>
             </div>
             {features.themes && (
-              <Panel collapsible defaultExpanded={usingThemes}>
+              <Panel expanded={usingThemes} onToggle={() => {}}>
                 <Panel.Heading>{headerPanelUsingThemes}</Panel.Heading>
                 <Panel.Collapse>
                   <Panel.Body>
@@ -379,8 +379,8 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
             )}
             <Panel
               id="proposal_form_admin_category_panel_body"
-              collapsible
-              defaultExpanded={usingCategories}>
+              expanded={usingCategories}
+              onToggle={() => {}}>
               <Panel.Heading>{headerPanelUsingCategories}</Panel.Heading>
               <Panel.Collapse>
                 <Panel.Body>
@@ -407,7 +407,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
                 </Panel.Body>
               </Panel.Collapse>
             </Panel>
-            <Panel id="address-body" collapsible defaultExpanded={usingAddress}>
+            <Panel id="address-body" expanded={usingAddress} onToggle={() => {}}>
               <Panel.Heading>{headerPanelUsingAddress}</Panel.Heading>
               <Panel.Collapse>
                 <Panel.Body>
@@ -480,7 +480,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
               </Panel.Collapse>
             </Panel>
             {features.districts && (
-              <Panel collapsible defaultExpanded={usingDistrict}>
+              <Panel expanded={usingDistrict} onToggle={() => {}}>
                 <Panel.Heading>{headerPanelUsingDistrict}</Panel.Heading>
                 <Panel.Collapse>
                   <Panel.Body>

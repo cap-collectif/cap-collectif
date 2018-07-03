@@ -249,9 +249,9 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
         </h3>
       </div>
       <Uncontrolled(Panel)
-        collapsible={true}
-        defaultExpanded={true}
+        expanded={true}
         id="proposal_form_admin_category_panel_body"
+        onToggle={[Function]}
       >
         <PanelHeading
           bsClass="panel"
@@ -332,9 +332,9 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
         </PanelCollapse>
       </Uncontrolled(Panel)>
       <Uncontrolled(Panel)
-        collapsible={true}
-        defaultExpanded={true}
+        expanded={true}
         id="address-body"
+        onToggle={[Function]}
       >
         <PanelHeading
           bsClass="panel"

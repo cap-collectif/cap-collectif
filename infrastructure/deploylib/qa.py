@@ -20,7 +20,6 @@ def check_dependencies():
 @task(environments=['local', 'ci'])
 def check_codestyle():
     "Check code style"
-    env.compose_run('ls node_modules/.bin/', 'qarunner', '.')
     env.compose_run('yarn run checkcs', 'qarunner', '.')
     env.compose_run('pycodestyle infrastructure/deploylib --ignore=E501,W605', 'qarunner', '.', no_deps=True)
     env.service_command('php bin/console lint:twig app src', 'application', env.www_app)
@@ -52,7 +51,9 @@ def phpspec():
 @task(environments=['local', 'ci'])
 def jest():
     "Run JS Unit Tests"
-    env.compose('run -e CI=true qarunner yarn test:ci')
+    env.compose_run('ls', 'qarunner', '.', no_deps=True)
+    env.compose_run('CI=true yarn test:ci', 'qarunner', '.', no_deps=True)
+    # env.compose('run -e CI=true qarunner yarn test:ci')
 
 
 @task(environments=['ci'])

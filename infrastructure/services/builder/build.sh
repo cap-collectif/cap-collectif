@@ -50,8 +50,7 @@ else
   composer dump-autoload
 
   # Frontend deps
-  echo "yarn install --pure-lockfile --production=false"
-  yarn install --pure-lockfile --production=false --silent --check-files
+  NODE_ENV=development yarn install
   bower install --config.interactive=false --allow-root
 
   echo "Testing node-sass binding..."
