@@ -36,12 +36,12 @@ type VotesProps = FieldArrayProps &
   };
 
 const Wrapper = styled.div`
-  #background-color: ${({ isDraggingOver }) => (isDraggingOver ? 'blue' : 'grey')};
-  display: flex;
-  flex-direction: column;
-  #opacity: ${({ isDropDisabled }) => (isDropDisabled ? 0.5 : 'inherit')};
-  transition: background-color 0.1s ease, opacity 0.1s ease;
-  user-select: none;
+    #background-color: ${({ isDraggingOver }) => (isDraggingOver ? 'blue' : 'grey')};
+    display: flex;
+    flex-direction: column;
+    #opacity: ${({ isDropDisabled }) => (isDropDisabled ? 0.5 : 'inherit')};
+    transition: background-color 0.1s ease, opacity 0.1s ease;
+    user-select: none;
 `;
 
 const DraggableItem = styled.div`

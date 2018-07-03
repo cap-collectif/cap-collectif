@@ -2,22 +2,21 @@
 
 exports[`<ProjectRow /> should render close collapse 1`] = `
 <Collapse
-  appear={false}
   dimension="height"
   getDimensionValue={[Function]}
   id="profile-project-collapse-project1"
   in={false}
   mountOnEnter={false}
   timeout={300}
+  transitionAppear={false}
   unmountOnExit={false}
 >
-  <Uncontrolled(Panel)
+  <Panel
+    bsClass="panel"
+    bsStyle="default"
     className="capco-panel-list"
-  >
-    <PanelHeading
-      bsClass="panel"
-      componentClass="div"
-    >
+    defaultExpanded={false}
+    header={
       <div
         id="all-proposals"
       >
@@ -52,32 +51,32 @@ exports[`<ProjectRow /> should render close collapse 1`] = `
           </Button>
         </h3>
       </div>
-    </PanelHeading>
+    }
+  >
     <ListGroup
       bsClass="list-group"
     />
-  </Uncontrolled(Panel)>
+  </Panel>
 </Collapse>
 `;
 
 exports[`<ProjectRow /> should render the project 1 with his proposal displayed 1`] = `
 <Collapse
-  appear={false}
   dimension="height"
   getDimensionValue={[Function]}
   id="profile-project-collapse-project1"
   in={true}
   mountOnEnter={false}
   timeout={300}
+  transitionAppear={false}
   unmountOnExit={false}
 >
-  <Uncontrolled(Panel)
+  <Panel
+    bsClass="panel"
+    bsStyle="default"
     className="capco-panel-list"
-  >
-    <PanelHeading
-      bsClass="panel"
-      componentClass="div"
-    >
+    defaultExpanded={false}
+    header={
       <div
         id="all-proposals"
       >
@@ -112,7 +111,8 @@ exports[`<ProjectRow /> should render the project 1 with his proposal displayed 
           </Button>
         </h3>
       </div>
-    </PanelHeading>
+    }
+  >
     <ListGroup
       bsClass="list-group"
     >
@@ -143,28 +143,27 @@ exports[`<ProjectRow /> should render the project 1 with his proposal displayed 
         }
       />
     </ListGroup>
-  </Uncontrolled(Panel)>
+  </Panel>
 </Collapse>
 `;
 
 exports[`<ProjectRow /> should render the project 2 with his proposal displayed 1`] = `
 <Collapse
-  appear={false}
   dimension="height"
   getDimensionValue={[Function]}
   id="profile-project-collapse-project2"
   in={true}
   mountOnEnter={false}
   timeout={300}
+  transitionAppear={false}
   unmountOnExit={false}
 >
-  <Uncontrolled(Panel)
+  <Panel
+    bsClass="panel"
+    bsStyle="default"
     className="capco-panel-list"
-  >
-    <PanelHeading
-      bsClass="panel"
-      componentClass="div"
-    >
+    defaultExpanded={false}
+    header={
       <div
         id="all-proposals"
       >
@@ -199,7 +198,8 @@ exports[`<ProjectRow /> should render the project 2 with his proposal displayed 
           </Button>
         </h3>
       </div>
-    </PanelHeading>
+    }
+  >
     <ListGroup
       bsClass="list-group"
     >
@@ -217,6 +217,6 @@ exports[`<ProjectRow /> should render the project 2 with his proposal displayed 
         }
       />
     </ListGroup>
-  </Uncontrolled(Panel)>
+  </Panel>
 </Collapse>
 `;

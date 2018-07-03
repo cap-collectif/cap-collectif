@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 
 export const calculPourcentage = (element: Object, parent: Object): number => {
   const percentage =
-    Math.round((element.childrenElementsNb / parent.parentChildrenElementsNb) * 1000) / 10;
+    Math.round(element.childrenElementsNb / parent.parentChildrenElementsNb * 1000) / 10;
   return percentage > 0 ? percentage : 0;
 };
 

@@ -64,9 +64,7 @@ export const queryVariables = (filters: Filters, order: ?string) => {
     district:
       filters.districts && filters.districts !== '0'
         ? filters.districts
-        : isMontreuil
-          ? defaultDistrictId
-          : null,
+        : isMontreuil ? defaultDistrictId : null,
     theme: filters.themes && filters.themes !== '0' ? filters.themes : null,
     category: filters.categories && filters.categories !== '0' ? filters.categories : null,
     userType: filters.types && filters.types !== '0' ? filters.types : null,

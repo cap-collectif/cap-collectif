@@ -172,6 +172,7 @@ export class RequirementsForm extends React.Component<Props> {
                     ? 'col-sm-12 col-xs-12'
                     : 'col-sm-12 col-xs-12'
                 }
+                id={requirement.id}
                 key={requirement.id}
                 name={requirement.id}
                 label={requirement.__typename !== 'CheckboxRequirement' && getLabel(requirement)}
@@ -203,9 +204,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, { step }: Props
               typeof requirement.viewerValue !== 'undefined'
                 ? requirement.__typename !== 'PhoneRequirement'
                   ? requirement.viewerValue
-                  : requirement.viewerValue
-                    ? requirement.viewerValue.replace('+33', '')
-                    : null
+                  : requirement.viewerValue ? requirement.viewerValue.replace('+33', '') : null
                 : requirement.viewerMeetsTheRequirement,
           }),
           {},

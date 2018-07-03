@@ -15,37 +15,33 @@ export class ProposalFusionList extends React.Component<Props> {
     return (
       <div>
         {proposal.mergedFrom.length > 0 && (
-          <Panel>
-            <Panel.Heading>
+          <Panel
+            header={
               <FormattedMessage
                 id={`proposal.fusionnedFrom`}
                 values={{ num: proposal.mergedFrom.length }}
               />
-            </Panel.Heading>
-            <Panel.Body>
-              {proposal.mergedFrom.map(child => (
-                <div key={child.id}>
-                  <a href={child.show_url}>{child.title}</a>
-                </div>
-              ))}
-            </Panel.Body>
+            }>
+            {proposal.mergedFrom.map(child => (
+              <div key={child.id}>
+                <a href={child.show_url}>{child.title}</a>
+              </div>
+            ))}
           </Panel>
         )}
         {proposal.mergedIn.length > 0 && (
-          <Panel>
-            <Panel.Heading>
+          <Panel
+            header={
               <FormattedMessage
                 id={`proposal.fusionnedInto`}
                 values={{ num: proposal.mergedIn.length }}
               />
-            </Panel.Heading>
-            <Panel.Body>
-              {proposal.mergedIn.map(parent => (
-                <div key={parent.id}>
-                  <a href={parent.show_url}>{parent.title}</a>
-                </div>
-              ))}
-            </Panel.Body>
+            }>
+            {proposal.mergedIn.map(parent => (
+              <div key={parent.id}>
+                <a href={parent.show_url}>{parent.title}</a>
+              </div>
+            ))}
           </Panel>
         )}
       </div>

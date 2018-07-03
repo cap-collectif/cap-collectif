@@ -122,192 +122,188 @@ export class Profile extends Component<Props> {
 
     return (
       <form onSubmit={handleSubmit} className="form-horizontal">
-        <Panel id="capco_horizontal_form">
-          <Panel.Heading>{header}</Panel.Heading>
-          <Panel.Body>
-            <h2 className="page-header">
-              <FormattedMessage id="user.edition" />
-            </h2>
-            <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
-              <label className="col-sm-3 control-label" htmlFor="profile_avatar">
-                <FormattedMessage id="form.label_media" />
-              </label>
-              <UserAvatar className="col-sm-1" user={viewer} />
-              <div className="clearfix" />
-              <div className="col-sm-3" />
+        <Panel id="capco_horizontal_form" footer={footer} header={header}>
+          <h2 className="page-header">
+            <FormattedMessage id="user.edition" />
+          </h2>
+          <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
+            <label className="col-sm-3 control-label" htmlFor="profile_avatar">
+              <FormattedMessage id="form.label_media" />
+            </label>
+            <UserAvatar className="col-sm-1" user={viewer} />
+            <div className="clearfix" />
+            <div className="col-sm-3" />
+            <Field
+              id="profile_avatar"
+              name="media"
+              component={component}
+              type="image"
+              divClassName="col-sm-6"
+            />
+          </div>
+          <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
+            <label className="col-sm-3 control-label" htmlFor="profile-form-username">
+              <FormattedMessage id="registration.username" />
+              <br />
+              <span className="excerpt">
+                <FormattedMessage id="global.mandatory" />
+              </span>
+            </label>
+            <div>
               <Field
-                id="profile_avatar"
-                name="media"
+                name="username"
                 component={component}
-                type="image"
+                required
+                type="text"
+                id="profile-form-username"
                 divClassName="col-sm-6"
               />
             </div>
+          </div>
+          {features.user_type && (
             <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
-              <label className="col-sm-3 control-label" htmlFor="profile-form-username">
-                <FormattedMessage id="registration.username" />
-                <br />
-                <span className="excerpt">
-                  <FormattedMessage id="global.mandatory" />
-                </span>
+              <label className="col-sm-3 control-label" htmlFor="profile-form-userType">
+                <FormattedMessage id="registration.type" />{' '}
               </label>
               <div>
                 <Field
-                  name="username"
+                  id="profile-form-userType"
+                  name="userType"
                   component={component}
-                  required
-                  type="text"
-                  id="profile-form-username"
-                  divClassName="col-sm-6"
-                />
+                  type="select"
+                  divClassName="col-sm-6">
+                  <FormattedMessage id="registration.select.type">
+                    {message => <option value="">{message}</option>}
+                  </FormattedMessage>
+                  {userTypes.map((type, i) => (
+                    <option key={i + 1} value={type.id}>
+                      {type.name}
+                    </option>
+                  ))}
+                </Field>
               </div>
             </div>
-            {features.user_type && (
-              <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
-                <label className="col-sm-3 control-label" htmlFor="profile-form-userType">
-                  <FormattedMessage id="registration.type" />{' '}
-                </label>
-                <div>
-                  <Field
-                    id="profile-form-userType"
-                    name="userType"
-                    component={component}
-                    type="select"
-                    divClassName="col-sm-6">
-                    <FormattedMessage id="registration.select.type">
-                      {message => <option value="">{message}</option>}
-                    </FormattedMessage>
-                    {userTypes.map((type, i) => (
-                      <option key={i + 1} value={type.id}>
-                        {type.name}
-                      </option>
-                    ))}
-                  </Field>
-                </div>
-              </div>
-            )}
-            <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
-              <label className="col-sm-3 control-label" htmlFor="public-data-form-biography">
-                <FormattedMessage id="form.label_biography" />
-              </label>
-              <div>
-                <Field
-                  name="biography"
-                  component={component}
-                  type="textarea"
-                  id="public-data-form-biography"
-                  divClassName="col-sm-6"
-                />
-              </div>
-            </div>
-            <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
-              <label className="col-sm-3 control-label" htmlFor="public-data-form-neighborhood">
-                <FormattedMessage id="form.label_neighborhood" />
-              </label>
-              <div>
-                <Field
-                  name="neighborhood"
-                  component={component}
-                  type="text"
-                  id="public-data-form-neighborhood"
-                  divClassName="col-sm-6"
-                />
-              </div>
-            </div>
-            <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
-              <label className="col-sm-3 control-label" htmlFor="public-data-form-website">
-                <FormattedMessage id="form.label_website" />
-              </label>
-              <div>
-                <Field
-                  name="website"
-                  component={component}
-                  type="text"
-                  id="public-data-form-website"
-                  divClassName="col-sm-6"
-                />
-              </div>
-            </div>
-            <div className="clearfix" />
-            <h2>
-              <FormattedMessage id="social-medias" />
-            </h2>
-            <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
-              <label className="col-sm-3 control-label" htmlFor="public-data-form-facebook">
-                <FormattedMessage id="user.profile.edit.facebook" />
-              </label>
-              <div>
-                <Field
-                  placeholder="https://"
-                  name="facebookUrl"
-                  component={component}
-                  type="text"
-                  id="public-data-form-facebook"
-                  divClassName="col-sm-6"
-                />
-              </div>
-            </div>
-            <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
-              <label className="col-sm-3 control-label" htmlFor="public-data-form-twitter">
-                <FormattedMessage id="user.profile.edit.twitter" />
-              </label>
-              <div>
-                <Field
-                  placeholder="https://"
-                  name="twitterUrl"
-                  component={component}
-                  type="text"
-                  id="public-data-form-twitter"
-                  divClassName="col-sm-6"
-                />
-              </div>
-            </div>
-            <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
-              <label className="col-sm-3 control-label" htmlFor="public-data-form-linkedIn">
-                <FormattedMessage id="show.label_linked_in_url" />
-              </label>
-              <div>
-                <Field
-                  placeholder="https://"
-                  name="linkedInUrl"
-                  component={component}
-                  type="text"
-                  id="public-data-form-linkedIn"
-                  divClassName="col-sm-6"
-                />
-              </div>
-            </div>
-            <div className="clearfix" />
-            <h2>
-              <FormattedMessage id="confidentialite.title" />
-            </h2>
-            <div className="horizontal_field_with_border_top">
-              <div className="col-sm-3" />
+          )}
+          <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
+            <label className="col-sm-3 control-label" htmlFor="public-data-form-biography">
+              <FormattedMessage id="form.label_biography" />
+            </label>
+            <div>
               <Field
-                id="profilePageIndexed"
-                name="profilePageIndexed"
+                name="biography"
                 component={component}
-                type="checkbox"
-                labelClassName="font-weight-normal"
-                children={<FormattedMessage id="user.profile.edit.profilePageIndexed" />}
-                divClassName="col-sm-8"
+                type="textarea"
+                id="public-data-form-biography"
+                divClassName="col-sm-6"
               />
             </div>
-            <div className="horizontal_field_with_border_top">
-              <div className="col-sm-3" />
-              <ButtonToolbar className="col-sm-6 pl-0">
-                <AlertForm
-                  valid={valid}
-                  invalid={invalid}
-                  errorMessage={error}
-                  submitSucceeded={submitSucceeded}
-                  submitFailed={submitFailed}
-                  submitting={submitting}
-                />
-              </ButtonToolbar>
+          </div>
+          <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
+            <label className="col-sm-3 control-label" htmlFor="public-data-form-neighborhood">
+              <FormattedMessage id="form.label_neighborhood" />
+            </label>
+            <div>
+              <Field
+                name="neighborhood"
+                component={component}
+                type="text"
+                id="public-data-form-neighborhood"
+                divClassName="col-sm-6"
+              />
             </div>
-          </Panel.Body>
-          <Panel.Footer>{footer}</Panel.Footer>
+          </div>
+          <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
+            <label className="col-sm-3 control-label" htmlFor="public-data-form-website">
+              <FormattedMessage id="form.label_website" />
+            </label>
+            <div>
+              <Field
+                name="website"
+                component={component}
+                type="text"
+                id="public-data-form-website"
+                divClassName="col-sm-6"
+              />
+            </div>
+          </div>
+          <div className="clearfix" />
+          <h2>
+            <FormattedMessage id="social-medias" />
+          </h2>
+          <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
+            <label className="col-sm-3 control-label" htmlFor="public-data-form-facebook">
+              <FormattedMessage id="user.profile.edit.facebook" />
+            </label>
+            <div>
+              <Field
+                placeholder="https://"
+                name="facebookUrl"
+                component={component}
+                type="text"
+                id="public-data-form-facebook"
+                divClassName="col-sm-6"
+              />
+            </div>
+          </div>
+          <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
+            <label className="col-sm-3 control-label" htmlFor="public-data-form-twitter">
+              <FormattedMessage id="user.profile.edit.twitter" />
+            </label>
+            <div>
+              <Field
+                placeholder="https://"
+                name="twitterUrl"
+                component={component}
+                type="text"
+                id="public-data-form-twitter"
+                divClassName="col-sm-6"
+              />
+            </div>
+          </div>
+          <div className="horizontal_field_with_border_top" style={{ border: 0 }}>
+            <label className="col-sm-3 control-label" htmlFor="public-data-form-linkedIn">
+              <FormattedMessage id="show.label_linked_in_url" />
+            </label>
+            <div>
+              <Field
+                placeholder="https://"
+                name="linkedInUrl"
+                component={component}
+                type="text"
+                id="public-data-form-linkedIn"
+                divClassName="col-sm-6"
+              />
+            </div>
+          </div>
+          <div className="clearfix" />
+          <h2>
+            <FormattedMessage id="confidentialite.title" />
+          </h2>
+          <div className="horizontal_field_with_border_top">
+            <div className="col-sm-3" />
+            <Field
+              id="profilePageIndexed"
+              name="profilePageIndexed"
+              component={component}
+              type="checkbox"
+              labelClassName="font-weight-normal"
+              children={<FormattedMessage id="user.profile.edit.profilePageIndexed" />}
+              divClassName="col-sm-8"
+            />
+          </div>
+          <div className="horizontal_field_with_border_top">
+            <div className="col-sm-3" />
+            <ButtonToolbar className="col-sm-6 pl-0">
+              <AlertForm
+                valid={valid}
+                invalid={invalid}
+                errorMessage={error}
+                submitSucceeded={submitSucceeded}
+                submitFailed={submitFailed}
+                submitting={submitting}
+              />
+            </ButtonToolbar>
+          </div>
         </Panel>
       </form>
     );

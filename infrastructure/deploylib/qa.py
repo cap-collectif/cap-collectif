@@ -20,7 +20,7 @@ def check_dependencies():
 @task(environments=['local', 'ci'])
 def check_codestyle():
     "Check code style"
-    env.compose_run('yarn run checkcs', 'qarunner', '.')
+    env.compose_run('yarn run checkcs', 'qarunner', '.', no_deps=True)
     env.compose_run('pycodestyle infrastructure/deploylib --ignore=E501,W605', 'qarunner', '.', no_deps=True)
     env.service_command('php bin/console lint:twig app src', 'application', env.www_app)
     env.compose_run('php-cs-fixer fix --config=.php_cs -v --dry-run --stop-on-violation', 'qarunner', '.', no_deps=True)

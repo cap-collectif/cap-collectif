@@ -72,6 +72,7 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface
     {
         parent::__construct();
         $this->selections = new ArrayCollection();
+        $this->requirements = new ArrayCollection();
     }
 
     public function addSelection(Selection $selection)

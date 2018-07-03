@@ -25,9 +25,7 @@ export class UserArchiveRequestButton extends Component<Props, State> {
     showModal: false,
   };
   handleButtonClick = async () => {
-    const {
-      viewer: { isArchiveReady, isArchiveDeleted },
-    } = this.props;
+    const { viewer: { isArchiveReady, isArchiveDeleted } } = this.props;
     if ((isArchiveReady && !isArchiveDeleted) || isArchiveDeleted) {
       window.open(`${baseUrl}/profile/download_archive`, '_blank');
     } else {
@@ -39,9 +37,7 @@ export class UserArchiveRequestButton extends Component<Props, State> {
 
   render() {
     const { loading } = this.state;
-    const {
-      viewer: { email, isArchiveReady, isArchiveDeleted, firstArchive },
-    } = this.props;
+    const { viewer: { email, isArchiveReady, isArchiveDeleted, firstArchive } } = this.props;
     let translationKey = loading ? 'global.loading' : 'request-my-copy';
     let disabled = loading;
     if (!firstArchive) {
