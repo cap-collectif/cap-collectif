@@ -28,5 +28,7 @@ Reply:
             viewerCanDelete:
                 type: "Boolean!"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyViewerCanDeleteResolver", [value, getUser()])'
+            show_url:
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyUrlResolver", [value])'
             url:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyUrlResolver", [value])'

@@ -22,5 +22,7 @@ Reporting:
                 description: "The content of the argument."
             kind:
                 resolve: "report"
+            show_url:
+                resolve: ""
             url:
                 resolve: ""

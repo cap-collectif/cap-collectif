@@ -22,5 +22,7 @@ Source:
                 description: "The content of the source."
             kind:
                 resolve: "source"
+            show_url:
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceUrlResolver", [value])'
             url:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceUrlResolver", [value])'

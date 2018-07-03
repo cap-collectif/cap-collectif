@@ -8,6 +8,8 @@ Argument:
             createdAt:
                 type: "DateTime!"
                 description: "Identifies the date and time when the object was created."
+            show_url:
+                resolve: "@=resolver('argument_url', [value])"
             url:
                 resolve: "@=resolver('argument_url', [value])"
             expired:

@@ -4,6 +4,8 @@ CollectStep:
     config:
         interfaces: [Node, Step, ProposalStep]
         fields:
+            kind:
+              resolve: "collect"
             requirements:
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\StepRequirementsResolver", [value, getUser(), args])'
             statuses:

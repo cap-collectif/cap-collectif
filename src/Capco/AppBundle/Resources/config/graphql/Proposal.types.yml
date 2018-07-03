@@ -5,6 +5,8 @@ Proposal:
         description: "A budget contribution"
         interfaces: [Node, Contribution]
         fields:
+            show_url:
+                resolve: "@=resolver('proposal_show_url', [value])"
             url:
                 resolve: "@=resolver('proposal_show_url', [value])"
             adminUrl:

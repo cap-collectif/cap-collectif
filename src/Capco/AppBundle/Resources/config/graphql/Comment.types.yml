@@ -17,6 +17,8 @@ Comment:
               type: "Comment"
             pinned:
               type: "Boolean!"
+            show_url:
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentShowUrlResolver", [value])'
             url:
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentShowUrlResolver", [value])'
             answers:
