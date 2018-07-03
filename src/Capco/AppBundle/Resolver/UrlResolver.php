@@ -20,6 +20,7 @@ use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 
 class UrlResolver
 {
@@ -67,7 +68,7 @@ class UrlResolver
                     'opinionTypeSlug' => $object->getOpinionType()->getSlug(),
                     'opinionSlug' => $object->getSlug(),
                 ],
-                $absolute
+                $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH
             );
         }
 
@@ -83,7 +84,7 @@ class UrlResolver
                     'opinionSlug' => $opinion->getSlug(),
                     'versionSlug' => $object->getSlug(),
                 ],
-                $absolute
+                $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH
             );
         }
 
@@ -96,7 +97,7 @@ class UrlResolver
                         'stepSlug' => $object->getStep()->getSlug(),
                         'proposalSlug' => $object->getSlug(),
                     ],
-                    $absolute
+                    $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH
                 )
                 : $this->router->generate('app_homepage');
         }
@@ -114,56 +115,56 @@ class UrlResolver
             return $this->router->generate(
                 'app_project_show_consultation',
                 ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()],
-                $absolute
+                $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH
             );
         }
         if ($step->isPresentationStep()) {
             return $this->router->generate(
                 'app_project_show_presentation',
                 ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()],
-                $absolute
+                $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH
             );
         }
         if ($step->isOtherStep()) {
             return $this->router->generate(
                 'app_project_show_step',
                 ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()],
-                $absolute
+                $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH
             );
         }
         if ($step->isSynthesisStep()) {
             return $this->router->generate(
                 'app_project_show_synthesis',
                 ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()],
-                $absolute
+                $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH
             );
         }
         if ($step->isRankingStep()) {
             return $this->router->generate(
                 'app_project_show_ranking',
                 ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()],
-                $absolute
+                $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH
             );
         }
         if ($step->isCollectStep()) {
             return $this->router->generate(
                 'app_project_show_collect',
                 ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()],
-                $absolute
+                $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH
             );
         }
         if ($step->isSelectionStep()) {
             return $this->router->generate(
                 'app_project_show_selection',
                 ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()],
-                $absolute
+                $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH
             );
         }
         if ($step->isQuestionnaireStep()) {
             return $this->router->generate(
                 'app_project_show_questionnaire',
                 ['projectSlug' => $step->getProject()->getSlug(), 'stepSlug' => $step->getSlug()],
-                $absolute
+                $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH
             );
         }
 
@@ -173,7 +174,7 @@ class UrlResolver
     public function getObjectUrl($object, $absolute = false)
     {
         if ($object instanceof Post && $object->getSlug()) {
-            return $this->router->generate('app_blog_show', ['slug' => $object->getSlug()], $absolute);
+            return $this->router->generate('app_blog_show', ['slug' => $object->getSlug()], $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH);
         }
 
         if ($object instanceof Argument && $object->getParent() && $object->getId()) {
@@ -189,7 +190,7 @@ class UrlResolver
         }
 
         if ($object instanceof Event && $object->getSlug()) {
-            return $this->router->generate('app_event_show', ['slug' => $object->getSlug()], $absolute);
+            return $this->router->generate('app_event_show', ['slug' => $object->getSlug()], $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH);
         }
 
         if ($object instanceof Comment && $object->getRelatedObject()) {
@@ -201,12 +202,12 @@ class UrlResolver
         }
 
         if ($object instanceof Theme && $object->getSlug()) {
-            return $this->router->generate('app_theme_show', ['slug' => $object->getSlug()], $absolute);
+            return $this->router->generate('app_theme_show', ['slug' => $object->getSlug()], $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH);
         }
 
         if ($object instanceof User && $object->getSlug()) {
             return $this->manager->isActive('profiles')
-                ? $this->router->generate('capco_user_profile_show_all', ['slug' => $object->getSlug()], $absolute)
+                ? $this->router->generate('capco_user_profile_show_all', ['slug' => $object->getSlug()], $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH)
                 : null;
         }
 
@@ -226,7 +227,7 @@ class UrlResolver
                     [
                         'projectSlug' => $object->getLinkedOpinion()->getStep()->getProject()->getSlug(),
                     ],
-                    $absolute
+                    $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH
                 );
         }
 
@@ -238,11 +239,11 @@ class UrlResolver
     public function getAdminObjectUrl($object, $absolute = false)
     {
         if ($object instanceof Source) {
-            return $this->router->generate('admin_capco_app_source_show', ['id' => $object->getId()], $absolute);
+            return $this->router->generate('admin_capco_app_source_show', ['id' => $object->getId()], $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH);
         }
 
         if ($object instanceof Argument) {
-            return $this->router->generate('admin_capco_app_argument_show', ['id' => $object->getId()], $absolute);
+            return $this->router->generate('admin_capco_app_argument_show', ['id' => $object->getId()], $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH);
         }
 
         if ($object instanceof Comment) {
@@ -250,19 +251,19 @@ class UrlResolver
         }
 
         if ($object instanceof Opinion) {
-            return $this->router->generate('admin_capco_app_opinion_show', ['id' => $object->getId()], $absolute);
+            return $this->router->generate('admin_capco_app_opinion_show', ['id' => $object->getId()], $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH);
         }
 
         if ($object instanceof OpinionVersion) {
             return $this->router->generate(
                 'admin_capco_app_opinionversion_show',
                 ['id' => $object->getId()],
-                $absolute
+                $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH
             );
         }
 
         if ($object instanceof Proposal) {
-            return $this->router->generate('admin_capco_app_proposal_edit', ['id' => $object->getId()], $absolute);
+            return $this->router->generate('admin_capco_app_proposal_edit', ['id' => $object->getId()], $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH);
         }
 
         return '';
@@ -270,6 +271,6 @@ class UrlResolver
 
     public function getReportedUrl(Reporting $reporting, bool $absolute = false): string
     {
-        return $this->router->generate('admin_capco_app_reporting_show', ['id' => $reporting->getId()], $absolute);
+        return $this->router->generate('admin_capco_app_reporting_show', ['id' => $reporting->getId()], $absolute ? RouterInterface::ABSOLUTE_URL : RouterInterface::RELATIVE_PATH);
     }
 }
