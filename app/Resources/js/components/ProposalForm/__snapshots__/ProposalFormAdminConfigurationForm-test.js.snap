@@ -248,13 +248,15 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
           />
         </h3>
       </div>
-      <Panel
-        bsClass="panel"
-        bsStyle="default"
-        collapsible={true}
-        defaultExpanded={false}
+      <Uncontrolled(Panel)
         expanded={true}
-        header={
+        id="proposal_form_admin_category_panel_body"
+        onToggle={[Function]}
+      >
+        <PanelHeading
+          bsClass="panel"
+          componentClass="div"
+        >
           <div
             id="proposal_form_admin_category_panel"
           >
@@ -280,55 +282,64 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
               className="clearfix"
             />
           </div>
-        }
-        id="proposal_form_admin_category_panel_body"
-      >
-        <Field
-          component={[Function]}
-          id="proposal_form_category_mandatory"
-          name="categoryMandatory"
-          type="checkbox"
+        </PanelHeading>
+        <PanelCollapse
+          bsClass="panel"
         >
-          <FormattedMessage
-            id="proposal_form.required"
-            values={Object {}}
-          />
-        </Field>
-        <Field
-          component={[Function]}
-          id="proposal_form_category_help_text"
-          label={
-            <span>
+          <PanelBody
+            bsClass="panel"
+            collapsible={false}
+          >
+            <Field
+              component={[Function]}
+              id="proposal_form_category_mandatory"
+              name="categoryMandatory"
+              type="checkbox"
+            >
               <FormattedMessage
-                id="proposal_form.help_text"
+                id="proposal_form.required"
                 values={Object {}}
               />
-              <span
-                className="excerpt"
-              >
-                 
-                <FormattedMessage
-                  id="global.form.optional"
-                  values={Object {}}
-                />
-              </span>
-            </span>
-          }
-          name="categoryHelpText"
-          type="text"
-        />
-        <FieldArray
-          component={[Function]}
-          name="categories"
-        />
-      </Panel>
-      <Panel
-        bsClass="panel"
-        bsStyle="default"
-        collapsible={true}
-        defaultExpanded={false}
+            </Field>
+            <Field
+              component={[Function]}
+              id="proposal_form_category_help_text"
+              label={
+                <span>
+                  <FormattedMessage
+                    id="proposal_form.help_text"
+                    values={Object {}}
+                  />
+                  <span
+                    className="excerpt"
+                  >
+                     
+                    <FormattedMessage
+                      id="global.form.optional"
+                      values={Object {}}
+                    />
+                  </span>
+                </span>
+              }
+              name="categoryHelpText"
+              type="text"
+            />
+            <FieldArray
+              component={[Function]}
+              name="categories"
+            />
+          </PanelBody>
+        </PanelCollapse>
+      </Uncontrolled(Panel)>
+      <Uncontrolled(Panel)
         expanded={true}
-        header={
+        id="address-body"
+        onToggle={[Function]}
+      >
+        <PanelHeading
+          bsClass="panel"
+          componentClass="div"
+        >
           <div
             id="address"
           >
@@ -354,253 +365,260 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
               className="clearfix"
             />
           </div>
-        }
-        id="address-body"
-      >
-        <Field
-          component={[Function]}
-          id="proposal_form_address_help_text"
-          label={
-            <span>
-              <FormattedMessage
-                id="proposal_form.help_text"
-                values={Object {}}
+        </PanelHeading>
+        <PanelCollapse
+          bsClass="panel"
+        >
+          <PanelBody
+            bsClass="panel"
+            collapsible={false}
+          >
+            <Field
+              component={[Function]}
+              id="proposal_form_address_help_text"
+              label={
+                <span>
+                  <FormattedMessage
+                    id="proposal_form.help_text"
+                    values={Object {}}
+                  />
+                  <span
+                    className="excerpt"
+                  >
+                     
+                    <FormattedMessage
+                      id="global.form.optional"
+                      values={Object {}}
+                    />
+                  </span>
+                </span>
+              }
+              name="addressHelpText"
+              type="text"
+            />
+            <p
+              className="link"
+            >
+              <Glyphicon
+                bsClass="glyphicon"
+                glyph="info-sign"
               />
-              <span
-                className="excerpt"
-              >
-                 
-                <FormattedMessage
-                  id="global.form.optional"
-                  values={Object {}}
-                />
-              </span>
-            </span>
-          }
-          name="addressHelpText"
-          type="text"
-        />
-        <p
-          className="link"
-        >
-          <Glyphicon
-            bsClass="glyphicon"
-            glyph="info-sign"
-          />
-           Les propositions seront affichées sur une carte
-        </p>
-        <Field
-          component={[Function]}
-          id="proposal_form_district_proposalInAZoneRequired"
-          name="proposalInAZoneRequired"
-          type="checkbox"
-        >
-          <FormattedMessage
-            id="proposal_form.proposalInAZoneRequired"
-            values={Object {}}
-          />
-        </Field>
-        <h5
-          style={
-            Object {
-              "fontWeight": "bold",
-              "marginTop": 20,
-            }
-          }
-        >
-          Position initiale de la carte
-        </h5>
-        <Row
-          bsClass="row"
-          componentClass="div"
-        >
-          <Col
-            bsClass="col"
-            componentClass="div"
-            md={4}
-            xs={12}
-          >
+               Les propositions seront affichées sur une carte
+            </p>
             <Field
               component={[Function]}
-              id="proposal_form_lat_map"
-              label={
-                <FormattedMessage
-                  id="proposal_form.lat_map"
-                  values={Object {}}
-                />
-              }
-              name="latMap"
-              normalize={[Function]}
-              type="number"
-            />
-          </Col>
-          <Col
-            bsClass="col"
-            componentClass="div"
-            md={4}
-            xs={12}
-          >
-            <Field
-              component={[Function]}
-              id="proposal_form_lng_map"
-              label={
-                <FormattedMessage
-                  id="proposal_form.lng_map"
-                  values={Object {}}
-                />
-              }
-              name="lngMap"
-              normalize={[Function]}
-              type="number"
-            />
-          </Col>
-          <Col
-            bsClass="col"
-            componentClass="div"
-            md={4}
-            xs={12}
-          >
-            <Field
-              component={[Function]}
-              id="proposal_form_zoom_map"
-              label={
-                <FormattedMessage
-                  id="proposal_form.zoom"
-                  values={Object {}}
-                />
-              }
-              name="zoomMap"
-              normalize={[Function]}
-              type="select"
+              id="proposal_form_district_proposalInAZoneRequired"
+              name="proposalInAZoneRequired"
+              type="checkbox"
             >
               <FormattedMessage
-                id="proposal_form.select.zoom"
+                id="proposal_form.proposalInAZoneRequired"
                 values={Object {}}
               />
-              <option
-                key="1"
-                value={1}
-              >
-                1 - Le monde
-              </option>
-              <option
-                key="2"
-                value={2}
-              >
-                2
-              </option>
-              <option
-                key="3"
-                value={3}
-              >
-                3
-              </option>
-              <option
-                key="4"
-                value={4}
-              >
-                4
-              </option>
-              <option
-                key="5"
-                value={5}
-              >
-                5 - La masse continentale/le continent
-              </option>
-              <option
-                key="6"
-                value={6}
-              >
-                6
-              </option>
-              <option
-                key="7"
-                value={7}
-              >
-                7
-              </option>
-              <option
-                key="8"
-                value={8}
-              >
-                8
-              </option>
-              <option
-                key="9"
-                value={9}
-              >
-                9
-              </option>
-              <option
-                key="10"
-                value={10}
-              >
-                10 - Ville
-              </option>
-              <option
-                key="11"
-                value={11}
-              >
-                11
-              </option>
-              <option
-                key="12"
-                value={12}
-              >
-                12
-              </option>
-              <option
-                key="13"
-                value={13}
-              >
-                13
-              </option>
-              <option
-                key="14"
-                value={14}
-              >
-                14
-              </option>
-              <option
-                key="15"
-                value={15}
-              >
-                15 - Rues
-              </option>
-              <option
-                key="16"
-                value={16}
-              >
-                16
-              </option>
-              <option
-                key="17"
-                value={17}
-              >
-                17
-              </option>
-              <option
-                key="18"
-                value={18}
-              >
-                18
-              </option>
-              <option
-                key="19"
-                value={19}
-              >
-                19
-              </option>
-              <option
-                key="20"
-                value={20}
-              >
-                20 - Immeubles
-              </option>
             </Field>
-          </Col>
-        </Row>
-      </Panel>
+            <h5
+              style={
+                Object {
+                  "fontWeight": "bold",
+                  "marginTop": 20,
+                }
+              }
+            >
+              Position initiale de la carte
+            </h5>
+            <Row
+              bsClass="row"
+              componentClass="div"
+            >
+              <Col
+                bsClass="col"
+                componentClass="div"
+                md={4}
+                xs={12}
+              >
+                <Field
+                  component={[Function]}
+                  id="proposal_form_lat_map"
+                  label={
+                    <FormattedMessage
+                      id="proposal_form.lat_map"
+                      values={Object {}}
+                    />
+                  }
+                  name="latMap"
+                  normalize={[Function]}
+                  type="number"
+                />
+              </Col>
+              <Col
+                bsClass="col"
+                componentClass="div"
+                md={4}
+                xs={12}
+              >
+                <Field
+                  component={[Function]}
+                  id="proposal_form_lng_map"
+                  label={
+                    <FormattedMessage
+                      id="proposal_form.lng_map"
+                      values={Object {}}
+                    />
+                  }
+                  name="lngMap"
+                  normalize={[Function]}
+                  type="number"
+                />
+              </Col>
+              <Col
+                bsClass="col"
+                componentClass="div"
+                md={4}
+                xs={12}
+              >
+                <Field
+                  component={[Function]}
+                  id="proposal_form_zoom_map"
+                  label={
+                    <FormattedMessage
+                      id="proposal_form.zoom"
+                      values={Object {}}
+                    />
+                  }
+                  name="zoomMap"
+                  normalize={[Function]}
+                  type="select"
+                >
+                  <FormattedMessage
+                    id="proposal_form.select.zoom"
+                    values={Object {}}
+                  />
+                  <option
+                    key="1"
+                    value={1}
+                  >
+                    1 - Le monde
+                  </option>
+                  <option
+                    key="2"
+                    value={2}
+                  >
+                    2
+                  </option>
+                  <option
+                    key="3"
+                    value={3}
+                  >
+                    3
+                  </option>
+                  <option
+                    key="4"
+                    value={4}
+                  >
+                    4
+                  </option>
+                  <option
+                    key="5"
+                    value={5}
+                  >
+                    5 - La masse continentale/le continent
+                  </option>
+                  <option
+                    key="6"
+                    value={6}
+                  >
+                    6
+                  </option>
+                  <option
+                    key="7"
+                    value={7}
+                  >
+                    7
+                  </option>
+                  <option
+                    key="8"
+                    value={8}
+                  >
+                    8
+                  </option>
+                  <option
+                    key="9"
+                    value={9}
+                  >
+                    9
+                  </option>
+                  <option
+                    key="10"
+                    value={10}
+                  >
+                    10 - Ville
+                  </option>
+                  <option
+                    key="11"
+                    value={11}
+                  >
+                    11
+                  </option>
+                  <option
+                    key="12"
+                    value={12}
+                  >
+                    12
+                  </option>
+                  <option
+                    key="13"
+                    value={13}
+                  >
+                    13
+                  </option>
+                  <option
+                    key="14"
+                    value={14}
+                  >
+                    14
+                  </option>
+                  <option
+                    key="15"
+                    value={15}
+                  >
+                    15 - Rues
+                  </option>
+                  <option
+                    key="16"
+                    value={16}
+                  >
+                    16
+                  </option>
+                  <option
+                    key="17"
+                    value={17}
+                  >
+                    17
+                  </option>
+                  <option
+                    key="18"
+                    value={18}
+                  >
+                    18
+                  </option>
+                  <option
+                    key="19"
+                    value={19}
+                  >
+                    19
+                  </option>
+                  <option
+                    key="20"
+                    value={20}
+                  >
+                    20 - Immeubles
+                  </option>
+                </Field>
+              </Col>
+            </Row>
+          </PanelBody>
+        </PanelCollapse>
+      </Uncontrolled(Panel)>
       <div
         className="box-header"
       >

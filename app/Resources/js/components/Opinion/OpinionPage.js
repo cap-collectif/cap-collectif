@@ -111,4 +111,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(OpinionPage);
+export default connect(
+  null,
+  mapDispatchToProps,
+)(OpinionPage);

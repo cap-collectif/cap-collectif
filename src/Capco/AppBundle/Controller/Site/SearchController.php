@@ -26,7 +26,7 @@ class SearchController extends Controller
 
         $page = (int) $request->get('page', 1);
 
-        $form = $this->createForm(new SearchForm($this->get('capco.toggle.manager')), $searchParams, ['method' => 'GET']);
+        $form = $this->createForm(SearchForm::class, $searchParams, ['method' => 'GET']);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

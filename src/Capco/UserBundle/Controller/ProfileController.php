@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sonata\UserBundle\Controller\ProfileFOSUser1Controller as BaseController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
@@ -21,7 +21,7 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 /**
  * @Route("/profile")
  */
-class ProfileController extends BaseController
+class ProfileController extends Controller
 {
     /**
      * @Route("/edit-profile", name="capco_profile_edit", defaults={"_feature_flags" = "profiles"})

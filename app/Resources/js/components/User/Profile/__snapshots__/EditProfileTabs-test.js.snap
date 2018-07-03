@@ -16,11 +16,13 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
       md={3}
       sm={4}
     >
-      <Panel
-        bsClass="panel"
-        bsStyle="default"
-        defaultExpanded={false}
-        header={
+      <Uncontrolled(Panel)
+        id="panel-account"
+      >
+        <PanelHeading
+          bsClass="panel"
+          componentClass="div"
+        >
           <CardUser>
             <Connect(UserAvatar)
               className="pull-left"
@@ -49,9 +51,7 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
               }
             />
           </CardUser>
-        }
-        id="panel-account"
-      >
+        </PanelHeading>
         <ListGroup
           bsClass="list-group"
         >
@@ -181,7 +181,7 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
             </NavItem>
           </Nav>
         </ListGroup>
-      </Panel>
+      </Uncontrolled(Panel)>
     </Col>
     <Col
       bsClass="col"
@@ -310,11 +310,13 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
       md={3}
       sm={4}
     >
-      <Panel
-        bsClass="panel"
-        bsStyle="default"
-        defaultExpanded={false}
-        header={
+      <Uncontrolled(Panel)
+        id="panel-account"
+      >
+        <PanelHeading
+          bsClass="panel"
+          componentClass="div"
+        >
           <CardUser>
             <Connect(UserAvatar)
               className="pull-left"
@@ -343,9 +345,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
               }
             />
           </CardUser>
-        }
-        id="panel-account"
-      >
+        </PanelHeading>
         <ListGroup
           bsClass="list-group"
         >
@@ -418,7 +418,7 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
             </NavItem>
           </Nav>
         </ListGroup>
-      </Panel>
+      </Uncontrolled(Panel)>
     </Col>
     <Col
       bsClass="col"

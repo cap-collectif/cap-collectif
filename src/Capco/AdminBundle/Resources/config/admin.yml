@@ -422,6 +422,14 @@ services:
     calls:
       - [ setTranslationDomain, [CapcoAppBundle]]
 
+  capco_admin.list_mosaic:
+    class: Capco\AdminBundle\Admin\MediaAdmin
+    arguments: [~, Capco\MediaBundle\Entity\Media, SonataAdminBundle:CRUD, '@sonata.media.pool']
+    tags:
+    - {name: sonata.admin, manager_type: orm, group: sonata_media, label_catalogue: '%sonata.media.admin.media.translation_domain%', label: media, label_translator_strategy: sonata.admin.label.strategy.underscore}
+    calls:
+    - [ setTemplate, [list, CapcoMediaBundle:MediaAdmin:mosaic.html.twig]]
+
   capco_admin.admin.group:
     class: Capco\AdminBundle\Admin\GroupAdmin
     arguments: [~, Capco\AppBundle\Entity\Group, SonataAdminBundle:CRUD]

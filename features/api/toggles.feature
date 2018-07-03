@@ -27,7 +27,7 @@ Scenario: Anonymous API client wants to receive a confirmation sms
   Then the JSON response status code should be 403
   And the JSON response should match:
   """
-  {"code":403,"message":"Expression \"has_role('ROLE_ADMIN')\" denied access.","errors":null}
+  {"code":403,"message":"Expression \"has_role('ROLE_ADMIN')\" denied access."}
   """
 
 @security
@@ -44,8 +44,7 @@ Scenario: Admin API client wants to update a non existing toggle
   """
   {
     "code":404,
-    "message":"The feature \"qsdoqshdoqsuhd\" doesn't exists.",
-    "errors":null
+    "message":"The feature \"qsdoqshdoqsuhd\" doesn't exists."
   }
   """
 

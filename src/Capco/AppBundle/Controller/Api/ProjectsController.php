@@ -54,7 +54,7 @@ class ProjectsController extends FOSRestController
     public function postProjectAction(Request $request)
     {
         $project = new Project();
-        $form = $this->createForm(new ProjectType(), $project);
+        $form = $this->createForm(ProjectType::class, $project);
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {

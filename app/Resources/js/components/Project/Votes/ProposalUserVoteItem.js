@@ -156,7 +156,6 @@ export class ProposalUserVoteItem extends React.Component<Props> {
                 label={getToggleLabel()}
                 name={`${member}.public`}
                 normalize={val => !!val}
-                id={`${proposal.id}-proposal-vote__private-toggle`}
               />
             </div>
           </div>
@@ -177,10 +176,7 @@ export class ProposalUserVoteItem extends React.Component<Props> {
               overlay={popoverConfirmDelete}
               ref="popover">
               <a className="proposal-vote__delete" disabled={!step.open}>
-                <i
-                  className="cap cap-ios-close"
-                  id={`${proposal.id}-proposal-vote__private-delete`}
-                />
+                <i className="cap cap-ios-close" />
               </a>
             </OverlayTrigger>
           </Col>

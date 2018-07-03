@@ -68,50 +68,54 @@ export class NotificationsForm extends Component<Props> {
 
     return (
       <form onSubmit={handleSubmit} className="form-horizontal">
-        <Panel id="capco_horizontal_form" header={header} footer={footer}>
-          <h2 className="page-header">
-            <FormattedMessage id="profile.account.notifications.title" />
-          </h2>
-          <p className="notifications-app-title">
-            <FormattedMessage id="profile.account.notifications.app.collectstep" />
-          </p>
-          <Table className="notifications-table" striped>
-            <thead>
-              <tr>
-                <th>
-                  <FormattedMessage id="profile.account.notifications.informations" />
-                </th>
-                <th>
-                  <FormattedMessage id="profile.account.notifications.email" />
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <FormattedMessage id="profile.account.notifications.proposal_comment" />
-                </td>
-                <td>
-                  <Field
-                    name="onProposalCommentMail"
-                    component={component}
-                    type="checkbox"
-                    id="proposal-comment-mail"
-                  />
-                </td>
-              </tr>
-            </tbody>
-          </Table>
-          <div className="divider" />
-          <div className="notifications-form-controls">
-            <AlertForm
-              valid={valid}
-              invalid={invalid}
-              submitSucceeded={submitSucceeded}
-              submitFailed={submitFailed}
-              submitting={submitting}
-            />
-          </div>
+        <Panel id="capco_horizontal_form">
+          <Panel.Heading>{header}</Panel.Heading>
+          <Panel.Body>
+            <h2 className="page-header">
+              <FormattedMessage id="profile.account.notifications.title" />
+            </h2>
+            <p className="notifications-app-title">
+              <FormattedMessage id="profile.account.notifications.app.collectstep" />
+            </p>
+            <Table className="notifications-table" striped>
+              <thead>
+                <tr>
+                  <th>
+                    <FormattedMessage id="profile.account.notifications.informations" />
+                  </th>
+                  <th>
+                    <FormattedMessage id="profile.account.notifications.email" />
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <FormattedMessage id="profile.account.notifications.proposal_comment" />
+                  </td>
+                  <td>
+                    <Field
+                      name="onProposalCommentMail"
+                      component={component}
+                      type="checkbox"
+                      id="proposal-comment-mail"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
+            <div className="divider" />
+            <div className="notifications-form-controls">
+              <AlertForm
+                valid={valid}
+                invalid={invalid}
+                submitSucceeded={submitSucceeded}
+                submitFailed={submitFailed}
+                submitting={submitting}
+              />
+            </div>
+          </Panel.Body>
+          <Panel.Footer>{footer}</Panel.Footer>
         </Panel>
       </form>
     );

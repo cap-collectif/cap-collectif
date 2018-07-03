@@ -14,7 +14,6 @@ class ProjectUserVotesPage extends Page
         'vote' => '.proposals-user-votes__row',
         'first vote button' => '.proposals-user-votes__table .proposals-user-votes__row:nth-child(1) .proposal-vote__delete',
         'confirm vote delete' => '.popover-content .proposal-vote__delete',
-        'toggle vote access' => ' > div > div > div > label > div > div.react-toggle-track > div.react-toggle-track-check',
     ];
 
     /**
@@ -31,19 +30,5 @@ class ProjectUserVotesPage extends Page
     {
         $this->getElement('first vote button')->click();
         $this->getElement('confirm vote delete')->click();
-    }
-
-    public function toggleVoteAccess($proposalId)
-    {
-        $element = $proposalId . $this->elements['toggle vote access'];
-
-        return $this->find('css', $element)->click();
-    }
-
-    public function deleteProposalVote($proposalId)
-    {
-        $element = $proposalId . '-delete';
-
-        return $this->find('css', $element)->click();
     }
 }

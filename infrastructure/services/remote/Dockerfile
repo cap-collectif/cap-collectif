@@ -127,7 +127,7 @@ RUN cd / && \
     wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-$ES_VERSION.tar.gz && \
     tar -xzf elasticsearch-$ES_VERSION.tar.gz && \
     rm -f elasticsearch-$ES_VERSION.tar.gz && \
-    mv /elasticsearch-$ES_VERSION /etc/elasticsearch 
+    mv /elasticsearch-$ES_VERSION /etc/elasticsearch
 RUN /etc/elasticsearch/bin/elasticsearch-plugin install --batch analysis-icu
 
 # install erlang for RabbitMQ
@@ -250,6 +250,7 @@ RUN chown -R capco:capco . \
 # Build JS
 RUN yarn global add bower@1.8.4 babel-cli \
     && gosu capco yarn install --pure-lockfile \
+    && gosu capco yarn cache clean \
     && gosu capco bower install --config.interactive=false \
     && gosu capco npm rebuild node-sass > /dev/null \
     && gosu capco php bin/console translation:download --env=prod \

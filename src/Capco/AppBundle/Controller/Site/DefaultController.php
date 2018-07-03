@@ -39,7 +39,7 @@ class DefaultController extends Controller
      */
     public function contactAction(Request $request)
     {
-        $form = $this->createForm(new ContactType());
+        $form = $this->createForm(ContactType::class);
 
         if ('POST' === $request->getMethod()) {
             $form->handleRequest($request);

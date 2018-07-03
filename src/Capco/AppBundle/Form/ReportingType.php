@@ -17,7 +17,7 @@ class ReportingType extends AbstractType
             ->add('status',
                 ChoiceType::class, [
                 'required' => true,
-                'choices' => Reporting::$statusesLabels,
+                'choices' => array_keys(Reporting::$statusesLabels),
             ])
             ->add('body', PurifiedTextareaType::class, ['required' => true])
         ;
