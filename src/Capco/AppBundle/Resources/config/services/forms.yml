@@ -5,6 +5,42 @@ services:
     tags:
       - { name: form.type }
 
+  Capco\UserBundle\Form\Type\MemberSearchType:
+    autowire: true
+    autoconfigure: true
+
+  Capco\UserBundle\Form\Type\ApiRegistrationFormType:
+    autowire: true
+    autoconfigure: true
+
+  Capco\UserBundle\Form\Type\ApiAdminRegistrationFormType:
+    autowire: true
+    autoconfigure: true
+
+  Capco\AppBundle\Form\EventSearchType:
+    autowire: true
+    autoconfigure: true
+
+  Capco\AppBundle\Form\EventRegistrationType:
+    autowire: true
+    autoconfigure: true
+
+  Capco\AppBundle\Form\PostSearchType:
+    autoconfigure: true
+    autowire: true
+
+  Capco\AppBundle\Form\SearchType:
+    autoconfigure: true
+    autowire: true
+
+  Capco\AppBundle\Form\CommentType:
+    autoconfigure: true
+    autowire: true
+
+  Capco\AppBundle\Form\ProjectSearchType:
+    autoconfigure: true
+    autowire: true
+
   capco.form.type.purified_textarea:
     class: Capco\AppBundle\Form\Type\PurifiedTextareaType
     arguments: ["@capco.form.transformer.html_purifier"]
@@ -14,12 +50,12 @@ services:
   capco.help_extension:
     class: Capco\AppBundle\Form\Extension\HelpExtension
     tags:
-      - { name: form.type_extension }
+      - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
 
   capco.form.type_extension.media:
     class: Capco\AppBundle\Form\Extension\MediaTypeExtension
     tags:
-      - { name: form.type_extension, extended-type: sonata_media_type }
+      - { name: form.type_extension, extended_type: Sonata\MediaBundle\Form\Type\MediaType }
 
   capco.form.opinion:
     class: Capco\AppBundle\Form\OpinionForm

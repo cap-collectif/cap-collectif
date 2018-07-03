@@ -461,7 +461,7 @@ class OpinionsController extends FOSRestController
             ->setParent($opinion)
         ;
 
-        $form = $this->createForm(new OpinionVersionType(), $opinionVersion);
+        $form = $this->createForm(OpinionVersionType::class, $opinionVersion);
         $form->submit($request->request->all(), false);
 
         if ($form->isValid()) {
@@ -508,7 +508,7 @@ class OpinionsController extends FOSRestController
             throw new AccessDeniedException();
         }
 
-        $form = $this->createForm(new OpinionVersionType(), $opinionVersion);
+        $form = $this->createForm(OpinionVersionType::class, $opinionVersion);
         $form->submit($request->request->all(), false);
 
         if ($form->isValid()) {
@@ -796,7 +796,7 @@ class OpinionsController extends FOSRestController
             ->setOpinion($opinion)
         ;
 
-        $form = $this->createForm(new ReportingType(), $report, ['csrf_protection' => false]);
+        $form = $this->createForm(ReportingType::class, $report, ['csrf_protection' => false]);
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {
@@ -827,7 +827,7 @@ class OpinionsController extends FOSRestController
             ->setOpinionVersion($version)
         ;
 
-        $form = $this->createForm(new ReportingType(), $report, ['csrf_protection' => false]);
+        $form = $this->createForm(ReportingType::class, $report, ['csrf_protection' => false]);
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {

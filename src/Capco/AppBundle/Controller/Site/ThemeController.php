@@ -26,7 +26,7 @@ class ThemeController extends Controller
         $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_theme');
 
-        $form = $this->createForm(new ThemeSearchType(), null, [
+        $form = $this->createForm(ThemeSearchType::class, null, [
             'action' => $currentUrl,
             'method' => 'POST',
         ]);

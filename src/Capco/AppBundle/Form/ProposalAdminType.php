@@ -11,7 +11,7 @@ class ProposalAdminType extends ProposalType
         $builder
             ->add('author', null, [
               'required' => false,
-              'property' => 'id',
+              'choice_label' => 'id',
             ])
         ;
 

@@ -22,6 +22,7 @@ parameters:
         - %currentWorkingDirectory%/src/Capco/AppBundle/Command/ImportProposalsFromCsvCommand.php
         - %currentWorkingDirectory%/src/Capco/AppBundle/Resolver/ProjectStatsResolver.php
         - %currentWorkingDirectory%/src/Capco/AppBundle/Traits/TimestampableTrait.php
+        - %currentWorkingDirectory%/src/Capco/MediaBundle/Entity/Media.php
         - %currentWorkingDirectory%/src/Capco/AppBundle/Command/Maker/templates/*
         - %currentWorkingDirectory%/src/Capco/AppBundle/Command/Paris/*
         - %currentWorkingDirectory%/src/Capco/AppBundle/Notifier/ContributionNotifier

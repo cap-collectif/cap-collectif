@@ -67,141 +67,138 @@ exports[`<ProposalFollowButton /> should render a button to unfollow a proposal 
         bsRole="menu"
         pullRight={false}
       >
-        <Uncontrolled(Panel)
+        <Panel
+          bsClass="panel"
+          bsStyle="default"
           className="mb-0 b-none width250"
+          defaultExpanded={false}
+          header={
+            <span>
+              <FormattedMessage
+                id="to-be-notified-by-email"
+                values={Object {}}
+              />
+              <OverlayTrigger
+                defaultOverlayShown={false}
+                overlay={
+                  <Popover
+                    bsClass="popover"
+                    className="in"
+                    id="pinned-label"
+                    placement="top"
+                  >
+                    <FormattedMessage
+                      id="you-will-receive-a-summary-of-your-notifications-once-a-day"
+                      values={Object {}}
+                    />
+                  </Popover>
+                }
+                placement="top"
+                trigger={
+                  Array [
+                    "hover",
+                    "focus",
+                  ]
+                }
+              >
+                <span
+                  className="cap-information ml-30"
+                />
+              </OverlayTrigger>
+            </span>
+          }
         >
-          <PanelHeading
-            bsClass="panel"
-            componentClass="div"
+          <div
+            className="b-none mb-0"
+            id="proposal-follow-btn-proposal1"
           >
-            <FormattedMessage
-              id="to-be-notified-by-email"
-              values={Object {}}
-            />
-            <OverlayTrigger
-              defaultOverlayShown={false}
-              overlay={
-                <Popover
-                  bsClass="popover"
-                  className="in"
-                  id="pinned-label"
-                  placement="top"
+            <ListGroup
+              bsClass="list-group"
+              className="mb-0"
+            >
+              <ListGroupItem
+                bsClass="list-group-item"
+                listItem={false}
+              >
+                <Radio
+                  bsClass="radio"
+                  checked="checked"
+                  className="proposal__follow__advancement"
+                  disabled={false}
+                  id="proposal-follow-btn-default-proposal1"
+                  inline={true}
+                  name="default"
+                  onClick={[Function]}
+                  title=""
                 >
+                  <b>
+                    <FormattedMessage
+                      id="the-progress"
+                      values={Object {}}
+                    />
+                  </b>
+                   
+                  <br />
                   <FormattedMessage
-                    id="you-will-receive-a-summary-of-your-notifications-once-a-day"
+                    id="list-of-progress-notifications"
                     values={Object {}}
                   />
-                </Popover>
-              }
-              placement="top"
-              trigger={
-                Array [
-                  "hover",
-                  "focus",
-                ]
-              }
-            >
-              <span
-                className="cap-information ml-30"
-              />
-            </OverlayTrigger>
-          </PanelHeading>
-          <PanelBody
-            bsClass="panel"
-            collapsible={false}
-          >
-            <div
-              className="b-none mb-0"
-              id="proposal-follow-btn-proposal1"
-            >
-              <ListGroup
-                bsClass="list-group"
-                className="mb-0"
+                </Radio>
+              </ListGroupItem>
+              <ListGroupItem
+                bsClass="list-group-item"
+                listItem={false}
               >
-                <ListGroupItem
-                  bsClass="list-group-item"
-                  listItem={false}
+                <Radio
+                  bsClass="radio"
+                  checked=""
+                  className="proposal__follow__default_and_comments"
+                  disabled={false}
+                  id="proposal-follow-btn-default_and_comments-proposal1"
+                  inline={false}
+                  name="default_and_comments"
+                  onClick={[Function]}
+                  title=""
                 >
-                  <Radio
-                    bsClass="radio"
-                    checked="checked"
-                    className="proposal__follow__advancement"
-                    disabled={false}
-                    id="proposal-follow-btn-default-proposal1"
-                    inline={true}
-                    name="default"
-                    onClick={[Function]}
-                    title=""
-                  >
-                    <b>
-                      <FormattedMessage
-                        id="the-progress"
-                        values={Object {}}
-                      />
-                    </b>
-                     
-                    <br />
+                  <b>
                     <FormattedMessage
-                      id="list-of-progress-notifications"
+                      id="progress-and-comments"
                       values={Object {}}
                     />
-                  </Radio>
-                </ListGroupItem>
-                <ListGroupItem
-                  bsClass="list-group-item"
-                  listItem={false}
+                  </b>
+                </Radio>
+              </ListGroupItem>
+              <ListGroupItem
+                bsClass="list-group-item"
+                listItem={false}
+              >
+                <Radio
+                  bsClass="radio"
+                  checked=""
+                  className="proposal__follow__all"
+                  disabled={false}
+                  id="proposal-follow-btn-all-proposal1"
+                  inline={false}
+                  name="all"
+                  onClick={[Function]}
+                  title=""
                 >
-                  <Radio
-                    bsClass="radio"
-                    checked=""
-                    className="proposal__follow__default_and_comments"
-                    disabled={false}
-                    id="proposal-follow-btn-default_and_comments-proposal1"
-                    inline={false}
-                    name="default_and_comments"
-                    onClick={[Function]}
-                    title=""
-                  >
-                    <b>
-                      <FormattedMessage
-                        id="progress-and-comments"
-                        values={Object {}}
-                      />
-                    </b>
-                  </Radio>
-                </ListGroupItem>
-                <ListGroupItem
-                  bsClass="list-group-item"
-                  listItem={false}
-                >
-                  <Radio
-                    bsClass="radio"
-                    checked=""
-                    className="proposal__follow__all"
-                    disabled={false}
-                    id="proposal-follow-btn-all-proposal1"
-                    inline={false}
-                    name="all"
-                    onClick={[Function]}
-                    title=""
-                  >
-                    <b>
-                      <FormattedMessage
-                        id="all-activities"
-                        values={Object {}}
-                      />
-                    </b>
-                    <br />
+                  <b>
                     <FormattedMessage
-                      id="list-of-activity-notifications"
+                      id="all-activities"
                       values={Object {}}
                     />
-                  </Radio>
-                </ListGroupItem>
-              </ListGroup>
-            </div>
-          </PanelBody>
-        </Uncontrolled(Panel)>
+                  </b>
+                  <br />
+                  <FormattedMessage
+                    id="list-of-activity-notifications"
+                    values={Object {}}
+                  />
+                </Radio>
+              </ListGroupItem>
+            </ListGroup>
+          </div>
+        </Panel>
         <MenuItem
           bsClass="dropdown"
           className="proposal__unfollow"

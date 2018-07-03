@@ -4,12 +4,13 @@ namespace Capco\AdminBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class ReportingController extends Controller
 {
-    public function disableAction()
+    public function disableAction(Request $request)
     {
-        $id = $this->get('request')->get($this->admin->getIdParameter());
+        $id = $request->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 
         if (!$object) {
@@ -33,9 +34,9 @@ class ReportingController extends Controller
         return new RedirectResponse($this->generateUrl('capco_admin_reporting_index'));
     }
 
-    public function trashAction()
+    public function trashAction(Request $request)
     {
-        $id = $this->get('request')->get($this->admin->getIdParameter());
+        $id = $request->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 
         if (!$object) {
@@ -59,9 +60,9 @@ class ReportingController extends Controller
         return new RedirectResponse($this->generateUrl('capco_admin_reporting_index'));
     }
 
-    public function archiveAction()
+    public function archiveAction(Request $request)
     {
-        $id = $this->get('request')->get($this->admin->getIdParameter());
+        $id = $request->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 
         if (!$object) {

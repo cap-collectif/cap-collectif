@@ -214,8 +214,7 @@ Scenario: logged in API client wants to add a version to an uncontributable opin
   """
   {
     "code": 400,
-    "message": "Can't add a version to an uncontributable opinion.",
-    "errors": @null@
+    "message": "Can't add a version to an uncontributable opinion."
   }
   """
 

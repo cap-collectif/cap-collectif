@@ -133,7 +133,7 @@ class SectionAdmin extends Admin
         } else {
             $formMapper->add('title', null, [
                 'label' => 'admin.fields.section.title',
-                'read_only' => true,
+                'attr' => ['readonly' => true],
             ]);
         }
 

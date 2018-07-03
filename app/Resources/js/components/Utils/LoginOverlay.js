@@ -87,8 +87,5 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
 });
 
-const connector = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const connector = connect(mapStateToProps, mapDispatchToProps);
 export default connector(LoginOverlay);

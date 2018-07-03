@@ -12,7 +12,7 @@ trait OpinionStepsTrait
     ];
 
     protected static $opinionInClosedStep = [
-        'projectSlug' => 'strategie-technologique-de-l-etat-et-services-publics',
+        'projectSlug' => 'strategie-technologique-de-letat-et-services-publics',
         'stepSlug' => 'collecte-des-avis-pour-une-meilleur-strategie',
         'opinionTypeSlug' => 'les-causes',
         'opinionSlug' => 'opinion-51',
@@ -58,7 +58,7 @@ trait OpinionStepsTrait
         'versionSlug' => 'modification-2',
     ];
     protected static $versionInClosedStep = [
-        'projectSlug' => 'strategie-technologique-de-l-etat-et-services-publics',
+        'projectSlug' => 'strategie-technologique-de-letat-et-services-publics',
         'stepSlug' => 'collecte-des-avis-pour-une-meilleur-strategie',
         'opinionTypeSlug' => 'les-causes',
         'opinionSlug' => 'opinion-51',

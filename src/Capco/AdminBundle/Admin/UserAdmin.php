@@ -4,7 +4,6 @@ namespace Capco\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\CoreBundle\Model\Metadata;
 use Sonata\UserBundle\Admin\Model\UserAdmin as BaseAdmin;
@@ -50,16 +49,9 @@ class UserAdmin extends BaseAdmin
     }
 
     /**
-     * empty to override parent.
-     */
-    protected function configureFormFields(FormMapper $formMapper)
-    {
-    }
-
-    /**
      * {@inheritdoc}
      */
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $listMapper): void
     {
         unset($this->listModes['mosaic']);
 
@@ -115,7 +107,7 @@ class UserAdmin extends BaseAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureDatagridFilters(DatagridMapper $filterMapper)
+    protected function configureDatagridFilters(DatagridMapper $filterMapper): void
     {
         $filterMapper
             ->add('id')

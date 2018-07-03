@@ -30,9 +30,7 @@ export class OpinionBox extends React.Component<Props> {
     const { opinionTerm } = this.props;
     return this.isVersion()
       ? 'opinion.header.version'
-      : opinionTerm === 0
-        ? 'opinion.header.opinion'
-        : 'opinion.header.article';
+      : opinionTerm === 0 ? 'opinion.header.opinion' : 'opinion.header.article';
   };
 
   isVersion = () => {

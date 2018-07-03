@@ -2,4 +2,4 @@ Capco\AppBundle\Entity\Steps\ConsultationStepType:
     typeDefault:
         id: typeDefault
         title: Défaut
-        step: @cstep1
+        step: '@cstep1'
