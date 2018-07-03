@@ -6,7 +6,7 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class QuestionnaireAbstractQuestionAdmin extends Admin
+class QuestionnaireAbstractQuestionAdmin extends CapcoAdmin
 {
     protected $formOptions = [
         'cascade_validation' => true,

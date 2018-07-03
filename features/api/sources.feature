@@ -174,8 +174,7 @@ Scenario: logged in API client wants to delete a vote that doesn't exist
   """
   {
     "code": 400,
-    "message": "You have not voted for this source.",
-    "errors": @null@
+    "message": "You have not voted for this source."
   }
   """
 

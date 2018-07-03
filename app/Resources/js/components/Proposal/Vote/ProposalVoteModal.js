@@ -128,23 +128,25 @@ export class ProposalVoteModal extends React.Component<Props> {
         </Modal.Header>
         <Modal.Body>
           {step.requirements.totalCount > 0 && (
-            <Panel id="required-conditions" bsStyle="primary">
-              <Panel.Heading>
-                <FormattedMessage id="requirements" />{' '}
-                {step.requirements.viewerMeetsTheRequirements && (
-                  <Label bsStyle="primary">
-                    <FormattedMessage id="filled" />
-                  </Label>
-                )}
-              </Panel.Heading>
-              <Panel.Body>
-                {!step.requirements.viewerMeetsTheRequirements && (
-                  <div>
-                    <p>{step.requirements.reason}</p>
-                    <RequirementsForm step={step} />
-                  </div>
-                )}
-              </Panel.Body>
+            <Panel
+              id="required-conditions"
+              bsStyle="primary"
+              header={
+                <span>
+                  <FormattedMessage id="requirements" />{' '}
+                  {step.requirements.viewerMeetsTheRequirements && (
+                    <Label bsStyle="primary">
+                      <FormattedMessage id="filled" />
+                    </Label>
+                  )}
+                </span>
+              }>
+              {!step.requirements.viewerMeetsTheRequirements && (
+                <div>
+                  <p>{step.requirements.reason}</p>
+                  <RequirementsForm step={step} />
+                </div>
+              )}
             </Panel>
           )}
           <h3 className="d-ib mr-10 mb-10">

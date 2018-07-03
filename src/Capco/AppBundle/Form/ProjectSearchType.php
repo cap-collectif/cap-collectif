@@ -39,7 +39,7 @@ class ProjectSearchType extends AbstractType
 
         $builder->add('type', EntityType::class, [
             'required' => false,
-            'class' => 'Capco\AppBundle\Entity\ProjectType',
+            'class' => \Capco\AppBundle\Entity\ProjectType::class,
             'choice_value' => 'slug',
         ]);
 
@@ -54,7 +54,7 @@ class ProjectSearchType extends AbstractType
                         ->where('t.isEnabled = :enabled')
                         ->setParameter('enabled', true);
                 },
-                'empty_value' => 'project.searchform.all_themes',
+                'placeholder' => 'project.searchform.all_themes',
             ]);
         }
 

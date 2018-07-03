@@ -82,9 +82,9 @@ class ProposalSelectionVoteAdmin extends Admin
             ])
             ->add('expired', null, [
                 'label' => 'admin.global.expired',
-                'read_only' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                 'attr' => [
                   'disabled' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
+                  'readonly' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                 ],
             ])
             ->add('createdAt', null, [

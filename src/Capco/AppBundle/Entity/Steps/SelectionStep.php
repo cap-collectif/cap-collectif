@@ -24,22 +24,22 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface
     const VOTE_TYPE_BUDGET = 2;
 
     public static $voteTypeLabels = [
-        self::VOTE_TYPE_DISABLED => 'step.selection.vote_type.disabled',
-        self::VOTE_TYPE_SIMPLE => 'step.selection.vote_type.simple',
-        self::VOTE_TYPE_BUDGET => 'step.selection.vote_type.budget',
+         'step.selection.vote_type.disabled' => self::VOTE_TYPE_DISABLED,
+         'step.selection.vote_type.simple' => self::VOTE_TYPE_SIMPLE,
+         'step.selection.vote_type.budget' => self::VOTE_TYPE_BUDGET,
     ];
 
     public static $sort = ['old', 'last', 'votes', 'least-votes', 'comments', 'random', 'expensive', 'cheap'];
 
     public static $sortLabels = [
-        'comments' => 'step.sort.comments',
-        'last' => 'step.sort.last',
-        'old' => 'step.sort.old',
-        'random' => 'step.sort.random',
-        'votes' => 'step.sort.votes',
-        'least-votes' => 'step.sort.least-votes',
-        'expensive' => 'step.sort.expensive',
-        'cheap' => 'step.sort.cheap',
+         'step.sort.comments' => 'comments',
+         'step.sort.last' => 'last',
+         'step.sort.old' => 'old',
+         'step.sort.random' => 'random',
+         'step.sort.votes' => 'votes',
+         'step.sort.least-votes' => 'least-votes',
+         'step.sort.expensive' => 'expensive',
+         'step.sort.cheap' => 'cheap',
     ];
 
     /**
@@ -72,6 +72,7 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface
     {
         parent::__construct();
         $this->selections = new ArrayCollection();
+        $this->requirements = new ArrayCollection();
     }
 
     public function addSelection(Selection $selection)

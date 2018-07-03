@@ -43,7 +43,7 @@ class EventSearchType extends AbstractType
                     [
                         'required' => false,
                         'class' => 'CapcoAppBundle:Theme',
-                        'property' => 'title',
+                        'choice_label' => 'title',
                         'label' => 'event.searchform.theme',
                         'translation_domain' => 'CapcoAppBundle',
                         'query_builder' => function (ThemeRepository $tr) {
@@ -51,7 +51,7 @@ class EventSearchType extends AbstractType
                                 ->where('t.isEnabled = :enabled')
                                 ->setParameter('enabled', true);
                         },
-                        'empty_value' => 'event.searchform.all_themes',
+                        'placeholder' => 'event.searchform.all_themes',
                         'attr' => ['onchange' => 'this.form.submit()'],
                     ]
                 );
@@ -61,7 +61,7 @@ class EventSearchType extends AbstractType
             EntityType::class, [
             'required' => false,
             'class' => 'CapcoAppBundle:Project',
-            'property' => 'title',
+            'choice_label' => 'title',
             'label' => 'event.searchform.project',
             'translation_domain' => 'CapcoAppBundle',
             'query_builder' => function (ProjectRepository $cr) {
@@ -69,7 +69,7 @@ class EventSearchType extends AbstractType
                     ->where('c.isEnabled = :enabled')
                     ->setParameter('enabled', true);
             },
-            'empty_value' => 'event.searchform.all_projects',
+            'placeholder' => 'event.searchform.all_projects',
             'attr' => ['onchange' => 'this.form.submit()'],
         ]);
     }

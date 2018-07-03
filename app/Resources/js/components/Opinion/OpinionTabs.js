@@ -92,11 +92,7 @@ class OpinionTabs extends React.Component<Props, State> {
 
     return this.isVersionable()
       ? 'versions'
-      : this.isCommentable()
-        ? 'arguments'
-        : this.isSourceable()
-          ? 'sources'
-          : null;
+      : this.isCommentable() ? 'arguments' : this.isSourceable() ? 'sources' : null;
   };
 
   getType = () => {

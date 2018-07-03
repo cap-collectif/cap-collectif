@@ -43,12 +43,12 @@ class Status
     ];
 
     public static $statusesLabels = [
-        self::NORMAL => 'statuses.labels.normal',
-        self::PRIMARY => 'statuses.labels.primary',
-        self::SUCCESS => 'statuses.labels.success',
-        self::INFO => 'statuses.labels.info',
-        self::WARNING => 'statuses.labels.warning',
-        self::DANGER => 'statuses.labels.danger',
+         'statuses.labels.normal' => self::NORMAL,
+         'statuses.labels.primary' => self::PRIMARY,
+         'statuses.labels.success' => self::SUCCESS,
+         'statuses.labels.info' => self::INFO,
+         'statuses.labels.warning' => self::WARNING,
+         'statuses.labels.danger' => self::DANGER,
     ];
 
     /**

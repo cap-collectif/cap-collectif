@@ -13,6 +13,9 @@
             const voteThresholdField = $("#sonata-ba-field-container-{{ admin.uniqid }}_voteThreshold");
             const voteThresholdInput = $("#{{ admin.uniqid }}_voteThreshold");
             const voteLimitField = $("#sonata-ba-field-container-{{ admin.uniqid }}_votesLimit");
+            const requirementsReason = $("#sonata-ba-field-container-{{ admin.uniqid }}_requirementsReason");
+            const requirementsPosition = $(".sonata-ba-td-{{ admin.uniqid }}_requirements-position");
+            const requirementDeleteControl = $(".sonata-ba-td-{{ admin.uniqid }}_requirements-_delete.control-group");
 
             function toggleVoteLimitField(show) {
                 if (show) {
@@ -57,6 +60,60 @@
                     budgetField.addClass('hidden');
                 }
             }
+
+            function configureRequirement(select) {
+              const selectId = $(select).attr('id');
+              const selectValue = $(select).val();
+              let labelId = selectId.split('_');
+              labelId = labelId[0]+'_'+labelId[1]+'_'+labelId[2]+'_label';
+              if (selectValue !== 'CHECKBOX') {
+                $('#'+labelId).attr('placeholder', null);
+                $('#'+labelId).val(null);
+                $('#'+labelId).attr('disabled', true);
+                $('#'+labelId).attr('required', false);
+              } else {
+                $('#'+labelId).attr('disabled', false);
+                $('#'+labelId).attr('required', true);
+              }
+            }
+
+            function onLoadConfigureRequirementLabelAttributes() {
+              $('.select-type').each(function() {
+                configureRequirement(this);
+              });
+            }
+
+            function onChangeRequirementType() {
+              $('.select-type').on('change', function () {
+                configureRequirement(this);
+              });
+            }
+
+            // Requirement reason
+            if(requirementsPosition.length >= 1) {
+              requirementsReason.removeClass('hidden');
+            } else {
+              requirementsReason.addClass('hidden');
+            }
+            // on add a requirement
+            $('body').on('sonata.add_element', requirementsPosition, function(e) {
+              if($(".sonata-ba-td-{{ admin.uniqid }}_requirements-position").length >= 1) {
+                requirementsReason.removeClass('hidden');
+                onLoadConfigureRequirementLabelAttributes();
+                onChangeRequirementType();
+              } else {
+                requirementsReason.addClass('hidden');
+              }
+            });
+
+            // requirement checkbox label
+            // on load form
+            onLoadConfigureRequirementLabelAttributes();
+
+            // on change
+            $('.select-type').change(function () {
+            configureRequirement(this);
+            });
 
             const initialValue = voteTypeField.val();
             toggleVotesHelpTextField(initialValue === "1" || initialValue === "2");

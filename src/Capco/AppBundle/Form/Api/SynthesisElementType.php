@@ -7,16 +7,10 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class SynthesisElementType extends AbstractType
 {
-    protected $hasDivision = true;
-
-    public function __construct($hasDivision = true)
-    {
-        $this->hasDivision = $hasDivision;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -30,7 +24,7 @@ class SynthesisElementType extends AbstractType
             ->add('parent',
                 EntityType::class, [
                 'class' => SynthesisElement::class,
-                'property' => 'id',
+                'choice_label' => 'id',
                 'required' => false,
             ])
             ->add('displayType', null, [
@@ -38,10 +32,10 @@ class SynthesisElementType extends AbstractType
             ])
         ;
 
-        if ($this->hasDivision) {
-            $builder->add('division', new SynthesisDivisionType(), [
+        if ($options['hasDivision']) {
+            $builder->add('division', SynthesisDivisionType::class, [
                 'required' => false,
-                'cascade_validation' => true,
+                'constraints' => new Valid(),
             ]);
         }
     }
@@ -51,6 +45,7 @@ class SynthesisElementType extends AbstractType
         $resolver->setDefaults([
             'data_class' => SynthesisElement::class,
             'csrf_protection' => false,
+            'hasDivision' => false,
         ]);
     }
 }

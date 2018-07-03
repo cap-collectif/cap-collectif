@@ -20,8 +20,8 @@ builder:
     command: echo "Use 'docker-compose run builder build' to build deps"
 
 qarunner:
-    build: ../services/qa-runner
-    environment:
-      BUNDLESIZE_GITHUB_TOKEN: feca92cec5b5d9f99cdfae51b7ebd086ead41e48
-    volumes:
-      - ../../:/var/www
+  build: ../services/qa-runner
+  environment:
+    BUNDLESIZE_GITHUB_TOKEN: feca92cec5b5d9f99cdfae51b7ebd086ead41e48
+  volumes:
+    - ../../:/var/www

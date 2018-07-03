@@ -162,7 +162,4 @@ const form = reduxForm({
   onSubmit,
 })(ProposalFusionForm);
 
-export default connect(
-  mapStateToProps,
-  { onProjectChange: change },
-)(injectIntl(form));
+export default connect(mapStateToProps, { onProjectChange: change })(injectIntl(form));

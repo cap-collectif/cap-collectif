@@ -21,7 +21,7 @@ export class ProposalPageVoteThreshold extends React.Component<Props> {
       return null;
     }
     const votesRemaining = voteThreshold - votesCount;
-    const votesPercentage = Math.ceil((votesCount * 100) / voteThreshold);
+    const votesPercentage = Math.ceil(votesCount * 100 / voteThreshold);
     return (
       <div className="proposal__page__vote_threshold">
         <div className="proposal__infos" style={{ marginTop: '-15px' }}>

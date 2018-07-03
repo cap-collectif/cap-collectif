@@ -13,6 +13,8 @@ type Props = {
 };
 
 class ProposalDetailAdvancementStep extends React.Component<Props> {
+  static displayName = 'ProposalDetailAdvancementStep';
+
   renderDate = () => {
     const { step } = this.props;
 
