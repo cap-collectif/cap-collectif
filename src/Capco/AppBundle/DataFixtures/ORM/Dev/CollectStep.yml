@@ -87,5 +87,20 @@ Capco\AppBundle\Entity\Steps\CollectStep:
     voteType: 1
     votesLimit: 3
     votesRanking: true
-    requirementsReason:
-      Vous devez habiter sur l'une des 49 communes de la Métropole grenobloise et avoir au minimum 16 ans pour participer. Vos coordonnées de contact seront suceptibles d'être utilisées pour des vérifications aléatoires.
+    requirementsReason: Vous devez habiter sur l'une des 49 communes de la Métropole grenobloise et avoir au minimum 16 ans pour participer. Vos coordonnées de contact seront suceptibles d'être utilisées pour des vérifications aléatoires.
+  collectstep9:
+    id: collectstep9
+    title: Collecte des propositions pour La Force
+    label: Dépôt
+    body: <p><text(1000)></p>
+    startAt: <dateTimeBetween('-40 days', 'now')>
+    endAt: <dateTimeBetween('+3 days', '+10 days')>
+    voteType: 0
+  collectstep10:
+    id: collectstep10
+    title: Collecte des propositions pour conquérir le monde
+    label: Dépôt
+    body: <p><text(1000)></p>
+    startAt: <dateTimeBetween('-40 days', 'now')>
+    endAt: <dateTimeBetween('+3 days', '+10 days')>
+    voteType: 0

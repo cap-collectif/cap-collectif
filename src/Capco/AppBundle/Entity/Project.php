@@ -987,7 +987,7 @@ class Project implements IndexableInterface
         return $this->visibility;
     }
 
-    public function setVisibility(int $visibility):self
+    public function setVisibility(int $visibility): self
     {
         $this->visibility = $visibility;
 
@@ -996,6 +996,6 @@ class Project implements IndexableInterface
 
     public function isPublic()
     {
-        return $this->getVisibility() === self::VISIBILITY_PUBLIC;
+        return self::VISIBILITY_PUBLIC === $this->getVisibility();
     }
 }

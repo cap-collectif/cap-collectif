@@ -145,3 +145,23 @@ Capco\AppBundle\Entity\Project:
     themes: ['@theme3']
     exportable: true
     publishedAt: <dateTimeBetween('-50 days', 'now')>
+  p17:
+    id: 'ProjectAccessibleForMeOnly'
+    title: Project pour La Force (visible par mauriau seulement)
+    projectType: '@projectType4'
+    Author: '@user516'
+    isEnabled: true
+    themes: ['@theme3']
+    exportable: true
+    publishedAt: <dateTimeBetween('-50 days', 'now')>
+    visibility: 0
+  p18:
+    id: 'ProjectAccessibleForAdminOnly'
+    title: Qui doit conquérir le monde ? | Visible par les admins seulement
+    projectType: '@projectType2'
+    Author: '@user516'
+    isEnabled: true
+    themes: ['@theme2']
+    exportable: true
+    publishedAt: <dateTimeBetween('-50 days', 'now')>
+    visibility: 1

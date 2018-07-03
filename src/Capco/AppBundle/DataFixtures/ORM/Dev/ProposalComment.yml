@@ -34,3 +34,35 @@ Capco\AppBundle\Entity\ProposalComment:
     isEnabled: true
     createdAt: '<dateTimeBetween("-2 days", "now")>'
     publishedAt: '<dateTimeBetween("-2 days", "now")>'
+  propComment{21..27}:
+    id: 'proposalComment<current()>'
+    proposal: '@proposal27'
+    Author: '@user<numberBetween(1, 5)>'
+    body: <text(300)>
+    isEnabled: true
+    isTrashed: false
+    createdAt: <dateTimeBetween('-50 days', '-1 days')>
+  propComment{28..32}:
+    id: 'proposalComment<current()>'
+    proposal: '@proposal28'
+    Author: '@user<numberBetween(1, 5)>'
+    body: <text(300)>
+    isEnabled: true
+    isTrashed: false
+    createdAt: <dateTimeBetween('-50 days', '-1 days')>
+  propComment{33..37}:
+    id: 'proposalComment<current()>'
+    proposal: '@proposal31'
+    Author: '@user<numberBetween(1, 5)>'
+    body: <text(300)>
+    isEnabled: true
+    isTrashed: false
+    createdAt: <dateTimeBetween('-50 days', '-1 days')>
+  propComment{37..42}:
+    id: 'proposalComment<current()>'
+    proposal: '@proposal32'
+    Author: '@user<numberBetween(1, 5)>'
+    body: <text(300)>
+    isEnabled: true
+    isTrashed: false
+    createdAt: <dateTimeBetween('-50 days', '-1 days')>

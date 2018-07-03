@@ -27,3 +27,11 @@ Capco\AppBundle\Entity\Questionnaire:
     id: questionnaire5
     title: Questionnaire pour budget participatif disponible
     description: <p><text(100)></p>
+  questionnaire6:
+    id: questionnaire6
+    title: Questionnaire pour budget participatif de la Force
+    description: <p><text(100)></p>
+  questionnaire7:
+    id: questionnaire7
+    title: Consultation pour conquerir le monde
+    description: <p><text(100)></p>

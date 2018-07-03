@@ -105,3 +105,48 @@ Capco\AppBundle\Entity\ProposalForm:
     usingCategories: false
     themeMandatory: false
     reference: 1337
+  proposalform9:
+    id: proposalForm9
+    title: Collecte des propositions pour le budget 2018 de la Ville de La Force
+    description: <p><text(100)></p>
+    step: "@collectstep9"
+    notificationsConfiguration: "@proposalFormNotificationConfiguration11"
+    titleHelpText: Choisissez un titre pour votre proposition
+    themeHelpText: Sélectionnez un thème
+    districtHelpText: Sélectionnez une zone géographique
+    descriptionHelpText: Décrivez votre proposition
+    categoryHelpText: Sélectionnez une catégorie.
+    usingThemes: true
+    usingDistrict: true
+    districtMandatory: true
+    usingCategories: true
+    themeMandatory: false
+    categoryMandatory: true
+    usingAddress: true
+    proposalInAZoneRequired: true
+    zoomMap: 12
+    latMap: 44.8799786
+    lngMap: 0.3404569
+    reference: 1980
+    evaluationForm: "@questionnaire6"
+    allowAknowledge: true
+  proposalform10:
+    id: proposalform10
+    title: Qui ? Quoi ? Comment conquerir le monde ?
+    description: <p><text(100)></p>
+    step: "@collectstep10"
+    notificationsConfiguration: "@proposalFormNotificationConfiguration12"
+    titleHelpText: Choisissez un titre pour votre proposition
+    themeHelpText: Sélectionnez un thème
+    districtHelpText: Sélectionnez une zone géographique
+    descriptionHelpText: Décrivez votre proposition
+    categoryHelpText: Sélectionnez une catégorie.
+    usingThemes: true
+    usingDistrict: true
+    districtMandatory: true
+    usingCategories: true
+    themeMandatory: false
+    categoryMandatory: true
+    reference: 1664
+    evaluationForm: "@questionnaire7"
+    allowAknowledge: true
