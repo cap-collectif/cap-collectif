@@ -51,10 +51,7 @@ def phpspec():
 @task(environments=['local', 'ci'])
 def jest():
     "Run JS Unit Tests"
-    env.compose_run('ls node_modules', 'qarunner', '.', no_deps=True)
-    env.compose_run('ls node_modules/jest', 'qarunner', '.', no_deps=True)
-    env.compose_run('CI=true yarn test:ci', 'qarunner', '.', no_deps=True)
-    # env.compose('run -e CI=true qarunner yarn test:ci')
+    env.compose('run -e CI=true qarunner yarn test:ci')
 
 
 @task(environments=['ci'])
