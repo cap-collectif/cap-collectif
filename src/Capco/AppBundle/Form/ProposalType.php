@@ -12,7 +12,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Valid;
 
 class ProposalType extends AbstractType
 {
@@ -76,7 +75,7 @@ class ProposalType extends AbstractType
             'data_class' => Proposal::class,
             'csrf_protection' => false,
             'translation_domain' => false,
-            'constraints' => new Valid(),
+            'cascade_validation' => true,
             'proposalForm' => null,
         ]);
     }

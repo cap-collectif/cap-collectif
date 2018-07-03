@@ -19,7 +19,7 @@ services:
           - "@capco.proposal.repository"
           - "@capco.abstract_step.repository"
           - "@logger"
-          - '@Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver'
+          - '@capco\appbundle\graphql\resolver\requirement\steprequirementsresolver'
       tags:
           - { name: overblog_graphql.mutation }
   Capco\AppBundle\GraphQL\Mutation\RemoveProposalVoteMutation:

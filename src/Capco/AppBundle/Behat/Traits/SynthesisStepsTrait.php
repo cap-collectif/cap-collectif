@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Behat\Traits;
 trait SynthesisStepsTrait
 {
     protected static $synthesis = [
-        'projectSlug' => 'strategie-technologique-de-letat-et-services-publics',
+        'projectSlug' => 'strategie-technologique-de-l-etat-et-services-publics',
         'stepSlug' => 'synthese',
     ];
 

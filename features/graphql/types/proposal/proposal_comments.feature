@@ -45,7 +45,7 @@ Scenario: Admin wants to get comments for a proposal
             {
               "cursor": @string@,
               "node": {
-                "id": "proposalComment4"
+                "id": "proposalComment3"
               }
             },
             @...@

@@ -6,8 +6,9 @@ use Capco\AppBundle\Entity\NewsletterSubscription;
 use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Error\UserError;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 
-class UserNewsLetterResolver
+class UserNewsLetterResolver implements ResolverInterface
 {
     protected $newLetterRepository;
 

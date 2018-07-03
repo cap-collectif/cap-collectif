@@ -4,12 +4,13 @@ namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Doctrine\ORM\QueryBuilder;
+use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class ProposalFormAdmin extends CapcoAdmin
+class ProposalFormAdmin extends Admin
 {
     protected $datagridValues = [
         '_sort_order' => 'ASC',

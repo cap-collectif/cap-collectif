@@ -17,7 +17,7 @@
                     <div class="dialog__header  box">
                         <h1 class="h4  dialog__title">{{ 'comment.update.title'|trans({}, 'CapcoAppBundle') }}</h1>
                     </div>
-                    {{ form_start(form) }}
+                    <form method="post" {{ form_enctype(form) }}>
                         <div class="dialog__body  box">
                             <div class="media">
                                 {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': comment.Author, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
@@ -42,7 +42,7 @@
                                 <button type="submit" class="btn  btn-warning">{{ 'comment.update.submit'|trans({}, 'CapcoAppBundle') }}</button>
                             </div>
                         </div>
-                    {{ form_end(form) }}
+                    </form>
                 </div>
             </div>
         </div>

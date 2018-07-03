@@ -183,9 +183,10 @@ export class ProposalAdminContentForm extends React.Component<Props, State> {
           proposal={proposal}
         />
         {proposal.mergedIn.length > 0 && (
-          <Panel
-            className="mt-30 mb-0 panel_flex"
-            header={<FormattedMessage id="grouped-into-a-new-proposal" />}>
+          <Panel className="mt-30 mb-0 panel_flex">
+            <Panel.Heading>
+              <FormattedMessage id="grouped-into-a-new-proposal" />
+            </Panel.Heading>
             <ListGroup fill>
               {proposal.mergedIn.map(parent => (
                 <ListGroupItem key={parent.id}>
@@ -475,14 +476,20 @@ const mapStateToProps: MapStateToProps<*, *, *> = (
     author: proposal.author.id,
     theme:
       state.default.features.themes && proposal.form.usingThemes
-        ? proposal.theme ? proposal.theme.id : null
+        ? proposal.theme
+          ? proposal.theme.id
+          : null
         : undefined,
     category: proposal.form.usingCategories
-      ? proposal.category ? proposal.category.id : null
+      ? proposal.category
+        ? proposal.category.id
+        : null
       : undefined,
     district:
       state.default.features.districts && proposal.form.usingDistrict
-        ? proposal.district ? proposal.district.id : null
+        ? proposal.district
+          ? proposal.district.id
+          : null
         : undefined,
     address: proposal.form.usingAddress ? proposal.address : undefined,
     media: proposal.media ? proposal.media : null,

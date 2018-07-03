@@ -47,7 +47,7 @@ class DownloadController extends Controller
             $downloadMode = $this->get('sonata.media.pool')->getDownloadMode($media);
             $response = $provider->getDownloadResponse($media, 'reference', $downloadMode);
             if ($response instanceof BinaryFileResponse) {
-                $response->prepare($request);
+                $response->prepare($this->get('request'));
             }
 
             // Avoid some files to be corrupt

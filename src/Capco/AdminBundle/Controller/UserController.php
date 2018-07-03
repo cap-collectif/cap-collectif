@@ -39,7 +39,7 @@ class UserController extends Controller
      */
     public function deleteAction($id, Request $request = null)
     {
-        $id = $request->get($this->admin->getIdParameter());
+        $id = $this->get('request')->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 
         if (!$this->isGranted('ROLE_SUPER_ADMIN') && $object->hasRole('ROLE_SUPER_ADMIN')) {
@@ -62,7 +62,7 @@ class UserController extends Controller
      */
     public function editAction($id = null, Request $request = null)
     {
-        $id = $request->get($this->admin->getIdParameter());
+        $id = $this->get('request')->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 
         if (!$this->isGranted('ROLE_ADMIN') && $object->hasRole('ROLE_ADMIN')) {

@@ -56,8 +56,8 @@ class Project implements IndexableInterface
     ];
 
     public static $opinionTermsLabels = [
-         'project.opinion_term.opinion' => self::OPINION_TERM_OPINION,
-         'project.opinion_term.article' => self::OPINION_TERM_ARTICLE,
+        self::OPINION_TERM_OPINION => 'project.opinion_term.opinion',
+        self::OPINION_TERM_ARTICLE => 'project.opinion_term.article',
     ];
 
     /**

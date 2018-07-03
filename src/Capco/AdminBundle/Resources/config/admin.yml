@@ -154,14 +154,6 @@ services:
     calls:
       - [ setTranslationDomain, [CapcoAppBundle]]
 
-  capco_admin.admin.requirement:
-    class: Capco\AdminBundle\Admin\RequirementAdmin
-    arguments: [~, Capco\AppBundle\Entity\Requirement, SonataAdminBundle:CRUD]
-    tags:
-      - {name: sonata.admin, manager_type: orm, label: admin.label.status}
-    calls:
-      - [ setTranslationDomain, [CapcoAppBundle]]
-
   capco_admin.admin.footer_social_network:
     class: Capco\AdminBundle\Admin\FooterSocialNetworkAdmin
     arguments: [~, Capco\AppBundle\Entity\FooterSocialNetwork, SonataAdminBundle:CRUD]
@@ -421,14 +413,6 @@ services:
       - {name: sonata.admin, manager_type: orm, group: admin.group.project, label: admin.label.pages.types}
     calls:
       - [ setTranslationDomain, [CapcoAppBundle]]
-
-  capco_admin.list_mosaic:
-    class: Capco\AdminBundle\Admin\MediaAdmin
-    arguments: [~, Capco\MediaBundle\Entity\Media, SonataAdminBundle:CRUD, '@sonata.media.pool']
-    tags:
-    - {name: sonata.admin, manager_type: orm, group: sonata_media, label_catalogue: '%sonata.media.admin.media.translation_domain%', label: media, label_translator_strategy: sonata.admin.label.strategy.underscore}
-    calls:
-    - [ setTemplate, [list, CapcoMediaBundle:MediaAdmin:mosaic.html.twig]]
 
   capco_admin.admin.group:
     class: Capco\AdminBundle\Admin\GroupAdmin

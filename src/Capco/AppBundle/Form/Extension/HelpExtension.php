@@ -3,16 +3,15 @@
 namespace Capco\AppBundle\Form\Extension;
 
 use Symfony\Component\Form\AbstractTypeExtension;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class HelpExtension extends AbstractTypeExtension
 {
-    public function getExtendedType(): string
+    public function getExtendedType()
     {
-        return FormType::class;
+        return 'form';
     }
 
     public function configureOptions(OptionsResolver $resolver)

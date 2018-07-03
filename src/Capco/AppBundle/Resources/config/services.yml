@@ -72,9 +72,6 @@ services:
     class: Capco\AppBundle\Toggle\Manager
     arguments: ["@qandidate.toggle.manager", "@qandidate.toggle.user_context_factory" ]
 
-  Capco\AppBundle\Toggle\Manager:
-    alias: capco.toggle.manager
-
   capco.proposal.helper:
     class: Capco\AppBundle\Helper\ProposalHelper
     arguments: ["@capco.proposal.repository"]

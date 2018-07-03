@@ -30,7 +30,7 @@
 
         <service id="capco.model_type.extension" class="Capco\AdminBundle\Form\Extension\ModelTypeExtension">
             <argument type="service" id="doctrine.orm.entity_manager" />
-            <tag name="form.type_extension" extended-type="Sonata\AdminBundle\Form\Type\ModelType" />
+            <tag name="form.type_extension" extended-type="sonata_type_model" />
         </service>
 
         <service id="capco_admin.recent_contributions_resolver" class="Capco\AdminBundle\Resolver\RecentContributionsResolver">
