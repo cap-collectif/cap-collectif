@@ -31,9 +31,9 @@ class ProposalVotesResolver
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
     }
 
-    public function __invoke(Proposal $proposal, Argument $args, array $context): Connection
+    public function __invoke(Proposal $proposal, Argument $args, \ArrayObject $context): Connection
     {
-        $includeExpired = $args->offsetGet('includeExpired') && isset($context['disable_acl']);
+        $includeExpired = $args->offsetGet('includeExpired') && $context->offsetExists('disable_acl') && true === $context->offsetGet('disable_acl');
         if ($args->offsetExists('stepId')) {
             try {
                 $step = $this->abstractStepRepository->find($args->offsetGet('stepId'));

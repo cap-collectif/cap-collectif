@@ -196,7 +196,7 @@ Scenario: User should not be able to update personal data of an other user
   Then the JSON response should match:
   """
   {
-    "errors":[{"message":"Only a SUPER_ADMIN can edit data from another user. Or the account owner","locations":[{"line":1,"column":90}],"path":["updateProfilePersonalData"]}],"data":{"updateProfilePersonalData":null}
+    "errors":[{"message":"Only a SUPER_ADMIN can edit data from another user. Or the account owner","category":@string@,"locations":[{"line":1,"column":90}],"path":["updateProfilePersonalData"]}],"data":{"updateProfilePersonalData":null}
   }
   """
 
@@ -312,7 +312,7 @@ Scenario: User should not be able to update personal data of an other user
   Then the JSON response should match:
   """
   {
-    "errors":[{"message":"Only a SUPER_ADMIN can edit data from another user. Or the account owner","locations":[{"line":1,"column":86}],"path":["updateProfilePublicData"]}],"data":{"updateProfilePublicData":null}
+    "errors":[{"message":"Only a SUPER_ADMIN can edit data from another user. Or the account owner","category":@string@,"locations":[{"line":1,"column":86}],"path":["updateProfilePublicData"]}],"data":{"updateProfilePublicData":null}
   }
   """
 
@@ -532,6 +532,6 @@ Scenario: Admin should not be able to update other/own user as super admin
   Then the JSON response should match:
   """
   {
-"errors":[{"message":"You are not able to add super_admin role to a user.","locations":[{"line":1,"column":74}],"path":["updateUserAccount"]}],"data":{"updateUserAccount":null}
+"errors":[{"message":"You are not able to add super_admin role to a user.","category":@string@,"locations":[{"line":1,"column":74}],"path":["updateUserAccount"]}],"data":{"updateUserAccount":null}
   }
   """
