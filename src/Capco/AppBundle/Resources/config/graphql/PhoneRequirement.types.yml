@@ -1,16 +1,10 @@
 PhoneRequirement:
     type: object
+    inherits: [Node, Requirement]
     config:
         interfaces: [Node, Requirement]
         description: "Requires a phone"
         fields:
-            id:
-                type: "ID!"
-            viewerMeetsTheRequirement:
-                type: "Boolean!"
-                access: "@hasRole=('ROLE_USER')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\ViewerMeetsTheRequirementResolver", [value, getUser()])'
-                description: "Does the viewer meets the requirement ?"
             viewerValue:
                 type: "String"
                 access: "@hasRole('ROLE_USER')"

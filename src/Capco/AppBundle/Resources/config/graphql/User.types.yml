@@ -27,6 +27,10 @@ User:
                 description: "(unique) slug of the user."
             show_url:
                 type: "URI"
+                resolve: "@=resolver('user_show_url', [value])"
+                deprecationReason: "Use url instead of show_url"
+            url:
+                type: "URI"
                 description: "URL to user profile, null if the feature profiles is disabled."
                 resolve: "@=resolver('user_show_url', [value])"
             createdAt:

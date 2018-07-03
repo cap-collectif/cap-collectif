@@ -1,42 +1,13 @@
 CollectStep:
     type: object
-    # inherits: [Step]
+    inherits: [Node, Step, ProposalStep]
     config:
         interfaces: [Node, Step, ProposalStep]
         fields:
-            id:
-              type: "ID!"
             requirements:
-              type: "RequirementConnection!"
-              description: "The requirements to vote on this step."
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\StepRequirementsResolver", [value, getUser(), args])'
-            show_url:
-              type: "String!"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepUrlResolver", [value])'
-            kind:
-               type: "String!"
-               resolve: "collect"
-            votesRanking:
-               type: "Boolean!"
-               description: "If enabled, allow voters to order their votes by preferences."
-            title:
-               type: "String!"
             statuses:
                 type: "[Status!]!"
-            voteType:
-                type: "ProposalStepVoteType!"
-            voteThreshold:
-                type: "Int"
-            votesLimit:
-                type: "Int"
-            votesHelpText:
-                type: "String"
-            budget:
-                type: "Int"
-            project:
-                type: "Project"
-            open:
-                type: "Boolean!"
             private:
                 type: "Boolean!"
             form:
@@ -51,51 +22,6 @@ CollectStep:
                 type: "ProposalConnection!"
                 access: "@=hasRole('ROLE_USER')"
                 resolve: "@=resolver('query_get_draft_proposals_for_user_in_step', [value, getUser(), args])"
-            viewerVotes:
-                type: "ProposalVoteConnection!"
-                access: "@=hasRole('ROLE_USER')"
-                description: "A list of viewer votes associated with the step."
-                argsBuilder: "Relay::Connection"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerStepVotesResolver", [value, getUser(), args])'
-                args:
-                    first:
-                      type: "Int"
-                      defaultValue: 100000
-                    orderBy:
-                      type: "ProposalVotesOrder"
-                      defaultValue: { field: CREATED_AT, direction: DESC }
             proposals:
                 type: "ProposalConnection!"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\CollectStepProposalResolver", [value, args, getUser(), serv("request_stack")])'
-                args:
-                  district:
-                    type: "ID"
-                  userType:
-                    type: "ID"
-                  category:
-                    type: "ID"
-                  status:
-                    type: "ID"
-                  theme:
-                    type: "ID"
-                  term:
-                    type: "String"
-                  orderBy:
-                    type: "ProposalOrder"
-                    description: "Order for connection."
-                    defaultValue: { field: "CREATED_AT", direction: "ASC" }
-                  affiliations:
-                    type: "[ProposalAffiliation]"
-                  after:
-                    type: "String"
-                    description: "Returns the elements in the list that come after the specified global ID."
-                  first:
-                    type: "Int"
-                    defaultValue: 10
-                    description: "Returns the first n elements from the list."
-                  before:
-                    type: "String"
-                    description: "Returns the elements in the list that come before the specified global ID."
-                  last:
-                    type: "Int"
-                    description: "Returns the last n elements from the list."

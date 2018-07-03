@@ -1,17 +1,14 @@
 ProposalStep:
     type: interface
+    inherits: [Step]
     config:
         description: "A proposal step"
         resolveType: "@=resolver('step_type', [value])"
         fields:
             requirements:
               type: "RequirementConnection!"
-            id:
-              type: "ID!"
-            kind:
-              type: "String!"
-            title:
-              type: "String!"
+              description: "The requirements to vote on this step."
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\StepRequirementsResolver", [value, getUser(), args])'
             project:
               type: "Project"
             votesLimit:
@@ -28,9 +25,7 @@ ProposalStep:
               type: "Boolean!"
             votesRanking:
               type: "Boolean!"
-            show_url:
-              type: "String!"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepUrlResolver", [value])'
+              description: "If enabled, allow voters to order their votes by preferences."
             viewerVotes:
               access: "@=hasRole('ROLE_USER')"
               type: "ProposalVoteConnection!"

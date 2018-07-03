@@ -1,17 +1,11 @@
 Proposal:
     type: object
+    inherits: [Node, Contribution]
     config:
         description: "A budget contribution"
         interfaces: [Node, Contribution]
         fields:
-            show_url:
-                type: "URI!"
-                description: "The HTTP show url for this contribution."
-                resolve: "@=resolver('proposal_show_url', [value])"
-                deprecationReason: "Use url instead of show_url"
             url:
-                type: "URI!"
-                description: "The HTTP show url for this contribution."
                 resolve: "@=resolver('proposal_show_url', [value])"
             adminUrl:
                 type: "URI!"
@@ -105,9 +99,6 @@ Proposal:
                 type: "DateTime"
             expired:
                 type: "Boolean"
-            id:
-                type: "ID!"
-                description: "The id of the contribution."
             reference:
                 type: "String!"
                 description: "The unique reference of proposal"
@@ -172,7 +163,6 @@ Proposal:
             createdAt:
               type: "DateTime!"
               description: "Identifies the date and time when the object was created."
-              resolve: "@=value.getCreatedAt()"
             mergedFrom:
                 type: "[Proposal!]!"
                 description: "If the proposal is a fusion, contains the list of merged proposals."
@@ -238,12 +228,6 @@ Proposal:
             viewerCanSeeEvaluation:
                 type: "Boolean!"
                 resolve: "@=resolver('proposal_viewer_can_see_evaluation', [value, getUser()])"
-            kind:
-              type: "String!"
-              resolve: "@=value.getKind()"
-            related:
-                type: "Contribution"
-                description: "Return the related contribution if the contribution is related to another."
             viewerHasVote:
                 access: "@=hasRole('ROLE_USER')"
                 type: "Boolean!"

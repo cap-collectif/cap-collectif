@@ -1,11 +1,10 @@
 ProposalForm:
     type: object
+    inherits: [Node]
     config:
         description: "A budget form"
         interfaces: [Node]
         fields:
-            id:
-                type: "ID!"
             reference:
                 type: "String!"
             description:

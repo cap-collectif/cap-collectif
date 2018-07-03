@@ -6,10 +6,11 @@ TrashableContribution:
         fields:
             trashed:
                 type: "Boolean!"
+                description: "True if the contribution is trashed."
             trashedAt:
                 type: "String"
-                description: "Date of trash."
+                description: "The moment the moderator trashed the contribution."
                 resolve: "@=resolver('proposition_trashedAt', [value])"
             trashedReason:
                 type: "String"
-                description: "Reason of trash."
+                description: "The reason the moderator trashed the contribution."
