@@ -994,7 +994,7 @@ class Project implements IndexableInterface
         return $this;
     }
 
-    public function isPublic()
+    public function isPublic(): bool
     {
         return self::VISIBILITY_PUBLIC === $this->getVisibility();
     }
