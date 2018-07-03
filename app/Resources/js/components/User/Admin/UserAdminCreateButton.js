@@ -10,7 +10,8 @@ import { isEmail } from '../../../services/Validator';
 import { form } from '../Registration/RegistrationForm';
 import AlertForm from '../../Alert/AlertForm';
 import type { Dispatch } from '../../../types';
-import SelectUserRoles from '../../Form/SelectUserRoles';
+import SelectUserRole from '../../Form/SelectUserRole';
+import {type UserRole} from '../../../mutations/__generated__/CreateUserMutation.graphql';
 
 const formName = 'user-admin-create';
 
@@ -27,7 +28,11 @@ type FormValues = {
   email: string,
   plainPassword: ?string,
   // $FlowFixMe
-  roles?: ?UserRoles,
+  roles: {
+    // Cannot call CreateUserMutation.commit with object literal bound to variables because object type [1] is incompatible
+    // with read-only array type [2] in property input.roles.
+    labels: [UserRole]
+  },
   vip: boolean,
   enabled: boolean,
   locked: boolean,
@@ -152,7 +157,7 @@ export class UserAdminCreateButton extends Component<Props, State> {
                 type="password"
                 label={<FormattedMessage id="registration.password" />}
               />
-              <SelectUserRoles id="user_roles" name="roles" label="form.label_real_roles" />
+              <SelectUserRole id="user_roles" name="roles" label="form.label_real_roles" />
               <Field
                 isOtherAllowed
                 id="vip"

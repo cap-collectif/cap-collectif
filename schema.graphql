@@ -645,7 +645,7 @@ input CreateUserInput {
   plainPassword: String
 
   # Unattended roles as array.
-  roles: UserRoles
+  roles: [UserRole]
   locked: Boolean
   vip: Boolean
   enabled: Boolean
@@ -2777,7 +2777,7 @@ input UpdateUserAccountInput {
   userId: ID!
 
   # Unattended roles as array.
-  roles: [UserRoles]
+  roles: [UserRole]
   locked: Boolean
   vip: Boolean
   enabled: Boolean
@@ -2835,7 +2835,7 @@ type User implements Node {
   dateOfBirth: String
 
   # Unattended roles as array.
-  roles: [String]
+  roles: [UserRole]
 
   # Array of roles converted and translated to string.
   rolesText: String
@@ -3023,7 +3023,7 @@ type UserNotificationsConfiguration {
 }
 
 # 3 possible values
-enum UserRoles {
+enum UserRole {
   ROLE_USER
   ROLE_ADMIN
   ROLE_SUPER_ADMIN

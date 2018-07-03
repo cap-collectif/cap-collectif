@@ -94,7 +94,7 @@ exports[`<UserAdminAccount/> should render when user is admin or viewer 1`] = `
           />
         </h3>
       </div>
-      <Connect(InjectIntl(SelectUserRoles))
+      <Connect(InjectIntl(SelectUserRole))
         id="user_roles"
         label="form.label_real_roles"
         name="roles"
@@ -285,7 +285,7 @@ exports[`<UserAdminAccount/> should render when user is not admin or viewer 1`] 
           />
         </h3>
       </div>
-      <Connect(InjectIntl(SelectUserRoles))
+      <Connect(InjectIntl(SelectUserRole))
         id="user_roles"
         label="form.label_real_roles"
         name="roles"

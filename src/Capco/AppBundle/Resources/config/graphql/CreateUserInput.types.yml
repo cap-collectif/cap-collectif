@@ -13,7 +13,7 @@ CreateUserInput:
                 type: "String"
                 description: "The user's password"
             roles:
-                type: "UserRoles"
+                type: "[UserRole]"
                 description: "Unattended roles as array."
             locked:
                 type: "Boolean"

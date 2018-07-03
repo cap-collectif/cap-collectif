@@ -76,7 +76,7 @@ User:
                 resolve: "@=resolver('user_dateOfBirth', [value])"
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(user,value,context)'
             roles:
-                type: "[String]"
+                type: "[UserRole]"
                 description: "Unattended roles as array."
             rolesText:
                 type: "String"

@@ -11,7 +11,7 @@ import type { GlobalState, Dispatch } from '../../../types';
 import UpdateUserAccountMutation from '../../../mutations/UpdateUserAccountMutation';
 import UserAdminAccount_user from './__generated__/UserAdminAccount_user.graphql';
 import DeleteAccountModal from '../DeleteAccountModal';
-import SelectUserRoles from '../../Form/SelectUserRoles';
+import SelectUserRole from '../../Form/SelectUserRole';
 import DatesInterval from '../../Utils/DatesInterval';
 
 type RelayProps = {
@@ -144,7 +144,7 @@ export class UserAdminAccount extends React.Component<Props, State> {
                 <FormattedMessage id="form.label_real_roles" />
               </h3>
             </div>
-            <SelectUserRoles id="user_roles" name="roles" label="form.label_real_roles" />
+            <SelectUserRole id="user_roles" name="roles" label="form.label_real_roles" />
             <div className="box-header">
               <h3 className="box-title">
                 <FormattedMessage id="subscription" />

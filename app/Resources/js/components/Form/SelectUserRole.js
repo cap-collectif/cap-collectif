@@ -13,7 +13,7 @@ type Props = {
   label: string,
 };
 
-export class SelectUserRoles extends Component<Props & { intl: IntlShape }> {
+export class SelectUserRole extends Component<Props & { intl: IntlShape }> {
   render() {
     const { isSuperAdmin, intl, id, name, label } = this.props;
 
@@ -63,4 +63,4 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
 
 const connector: Connector<ParentProps, Props> = connect(mapStateToProps);
 
-export default connector(injectIntl(SelectUserRoles));
+export default connector(injectIntl(SelectUserRole));

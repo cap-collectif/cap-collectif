@@ -100,8 +100,10 @@ Scenario: Logged in super admin wants to create a user
   Then I fill in the following:
     | username | Toto                  |
     | email    | blague.toto@gmail.com |
+    | password | toto1234              |
   And I check "vip"
   And I check "roles.super_admin"
+  And I check "roles.user"
   And I should not see "global.invalid.form"
   Then I click on button "#confirm-user-create"
   And I wait 1 seconds

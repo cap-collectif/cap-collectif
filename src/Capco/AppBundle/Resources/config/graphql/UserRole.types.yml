@@ -1,4 +1,4 @@
-UserRoles:
+UserRole:
     type: enum
     config:
         description: "3 possible values"
