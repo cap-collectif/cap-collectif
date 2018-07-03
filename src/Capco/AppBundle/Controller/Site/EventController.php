@@ -33,7 +33,7 @@ class EventController extends Controller
     {
         $currentUrl = $this->generateUrl('app_event');
 
-        $form = $this->createForm(new EventSearchType($this->get('capco.toggle.manager')), null, [
+        $form = $this->createForm(EventSearchType::class, null, [
             'action' => $currentUrl,
             'method' => 'POST',
         ]);
@@ -83,7 +83,7 @@ class EventController extends Controller
     {
         $currentUrl = $this->generateUrl('app_event_archived');
 
-        $form = $this->createForm(new EventSearchType($this->get('capco.toggle.manager')), null, [
+        $form = $this->createForm(EventSearchType::class, null, [
             'action' => $currentUrl,
             'method' => 'POST',
         ]);
@@ -141,7 +141,7 @@ class EventController extends Controller
 
         $user = $this->getUser();
         $registration = $eventHelper->findUserRegistrationOrCreate($event, $user);
-        $form = $this->createForm(new EventRegistrationType($user, $registration->isConfirmed()), $registration);
+        $form = $this->createForm(EventRegistrationType::class, $registration, ['registered' => $registration->isConfirmed()]);
 
         if ('POST' === $request->getMethod()) {
             $registration->setIpAddress($request->getClientIp());

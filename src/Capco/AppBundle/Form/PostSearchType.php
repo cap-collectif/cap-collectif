@@ -26,7 +26,7 @@ class PostSearchType extends AbstractType
                 EntityType::class, [
                 'required' => false,
                 'class' => 'CapcoAppBundle:Theme',
-                'property' => 'title',
+                'choice_label' => 'title',
                 'label' => 'blog.searchform.theme',
                 'translation_domain' => 'CapcoAppBundle',
                 'query_builder' => function (ThemeRepository $tr) {
@@ -34,7 +34,7 @@ class PostSearchType extends AbstractType
                         ->where('t.isEnabled = :enabled')
                         ->setParameter('enabled', true);
                 },
-                'empty_value' => 'blog.searchform.all_themes',
+                'placeholder' => 'blog.searchform.all_themes',
                 'attr' => ['onchange' => 'this.form.submit()'],
             ]);
         }
@@ -43,7 +43,7 @@ class PostSearchType extends AbstractType
             EntityType::class, [
             'required' => false,
             'class' => 'CapcoAppBundle:Project',
-            'property' => 'title',
+            'choice_label' => 'title',
             'label' => 'blog.searchform.project',
             'translation_domain' => 'CapcoAppBundle',
             'query_builder' => function (ProjectRepository $cr) {
@@ -51,7 +51,7 @@ class PostSearchType extends AbstractType
                     ->where('c.isEnabled = :enabled')
                     ->setParameter('enabled', true);
             },
-            'empty_value' => 'blog.searchform.all_projects',
+            'placeholder' => 'blog.searchform.all_projects',
             'attr' => ['onchange' => 'this.form.submit()'],
         ]);
     }

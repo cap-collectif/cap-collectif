@@ -60,12 +60,8 @@ else
   fi
   echo "Binding ready!"
   yarn run trad
+  yarn run build
 
-  if [ -n "CI" ]; then
-    yarn run build:prod
-    yarn run build-server-bundle:prod
-  else
-    yarn run build
-    yarn run build-server-bundle
-  fi
+  # Server side rendering deps
+  yarn run build-server-bundle
 fi

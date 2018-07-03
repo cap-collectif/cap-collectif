@@ -27,11 +27,6 @@ infrastructure/services/databasefixtures/dump.sql
 *.log
 .eslintcache
 
-# Configuration files
-app/config/parameters.ini
-app/config/parameters.yml
-app/config/parameters/*
-
 # Node / grunt / bower
 /node_modules/
 /app/Resources/libs

@@ -129,7 +129,7 @@ class VideoAdmin extends Admin
             ])
             ->add('color', 'choice', [
                 'label' => 'admin.fields.video.color',
-                'choices' => Video::$colorButtonPlay,
+                'choices' => array_flip(Video::$colorButtonPlay),
                 'translation_domain' => 'CapcoAppBundle',
             ])
             ->add('media', 'sonata_type_model_list', [

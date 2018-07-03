@@ -109,7 +109,7 @@ class ProposalsController extends FOSRestController
             ->setIsEnabled(true)
         ;
 
-        $form = $this->createForm(new CommentType($user), $comment);
+        $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
         if (!$form->isValid()) {
@@ -168,7 +168,7 @@ class ProposalsController extends FOSRestController
             ->setProposal($proposal)
         ;
 
-        $form = $this->createForm(new ReportingType(), $report, ['csrf_protection' => false]);
+        $form = $this->createForm(ReportingType::class, $report, ['csrf_protection' => false]);
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {

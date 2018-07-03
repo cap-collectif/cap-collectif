@@ -44,7 +44,7 @@ export class PreviewMedia extends React.PureComponent<Props, State> {
               {medias.map((file, key) => {
                 return (
                   <Label key={key} bsStyle="info" style={{ marginRight: '5px' }}>
-                    <a href={file.url} target="_blank" rel="noopener noreferrer">
+                    <a href={file.url} target="_blank">
                       {file.name}
                     </a>{' '}
                     <i

@@ -2,11 +2,11 @@
 
 exports[`<ProposalFusionList /> should render a list of proposal merged from other proposal 1`] = `
 <div>
-  <Uncontrolled(Panel)>
-    <PanelHeading
-      bsClass="panel"
-      componentClass="div"
-    >
+  <Panel
+    bsClass="panel"
+    bsStyle="default"
+    defaultExpanded={false}
+    header={
       <FormattedMessage
         id="proposal.fusionnedInto"
         values={
@@ -15,41 +15,37 @@ exports[`<ProposalFusionList /> should render a list of proposal merged from oth
           }
         }
       />
-    </PanelHeading>
-    <PanelBody
-      bsClass="panel"
-      collapsible={false}
+    }
+  >
+    <div
+      key="proposal2"
     >
-      <div
-        key="proposal2"
+      <a
+        href={true}
       >
-        <a
-          href={true}
-        >
-          Title Proposal 2
-        </a>
-      </div>
-      <div
-        key="proposal3"
+        Title Proposal 2
+      </a>
+    </div>
+    <div
+      key="proposal3"
+    >
+      <a
+        href={true}
       >
-        <a
-          href={true}
-        >
-          Title Proposal 3
-        </a>
-      </div>
-    </PanelBody>
-  </Uncontrolled(Panel)>
+        Title Proposal 3
+      </a>
+    </div>
+  </Panel>
 </div>
 `;
 
 exports[`<ProposalFusionList /> should render a list of proposal of merged in other proposal 1`] = `
 <div>
-  <Uncontrolled(Panel)>
-    <PanelHeading
-      bsClass="panel"
-      componentClass="div"
-    >
+  <Panel
+    bsClass="panel"
+    bsStyle="default"
+    defaultExpanded={false}
+    header={
       <FormattedMessage
         id="proposal.fusionnedFrom"
         values={
@@ -58,30 +54,26 @@ exports[`<ProposalFusionList /> should render a list of proposal of merged in ot
           }
         }
       />
-    </PanelHeading>
-    <PanelBody
-      bsClass="panel"
-      collapsible={false}
+    }
+  >
+    <div
+      key="proposal2"
     >
-      <div
-        key="proposal2"
+      <a
+        href={true}
       >
-        <a
-          href={true}
-        >
-          Title Proposal 2
-        </a>
-      </div>
-      <div
-        key="proposal3"
+        Title Proposal 2
+      </a>
+    </div>
+    <div
+      key="proposal3"
+    >
+      <a
+        href={true}
       >
-        <a
-          href={true}
-        >
-          Title Proposal 3
-        </a>
-      </div>
-    </PanelBody>
-  </Uncontrolled(Panel)>
+        Title Proposal 3
+      </a>
+    </div>
+  </Panel>
 </div>
 `;

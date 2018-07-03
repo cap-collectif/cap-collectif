@@ -29,7 +29,7 @@ trait ContributionRepositoryTrait
         return $qb->getQuery()->getArrayResult();
     }
 
-    public function count(): int
+    public function getCount(): int
     {
         $qb = $this->createQueryBuilder('o');
         $qb->select('count(DISTINCT o.id)')

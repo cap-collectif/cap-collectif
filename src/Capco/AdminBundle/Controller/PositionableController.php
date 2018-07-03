@@ -4,6 +4,7 @@ namespace Capco\AdminBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class PositionableController extends Controller
 {
@@ -14,9 +15,9 @@ class PositionableController extends Controller
         $this->resolverName = $resolverName;
     }
 
-    public function upAction()
+    public function upAction(Request $request)
     {
-        $id = $this->get('request')->get($this->admin->getIdParameter());
+        $id = $request->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 
         $this->move($object, -1);
@@ -27,9 +28,9 @@ class PositionableController extends Controller
         ));
     }
 
-    public function downAction()
+    public function downAction(Request $request)
     {
-        $id = $this->get('request')->get($this->admin->getIdParameter());
+        $id = $request->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 
         $this->move($object, 1);

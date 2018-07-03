@@ -65,7 +65,7 @@ class SynthesisController extends FOSRestController
     public function createSynthesisAction(Request $request)
     {
         $synthesis = new Synthesis();
-        $form = $this->createForm(new SynthesisForm(), $synthesis);
+        $form = $this->createForm(SynthesisForm::class, $synthesis);
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {
@@ -97,7 +97,7 @@ class SynthesisController extends FOSRestController
     public function createSynthesisFromConsultationStepAction(Request $request, ConsultationStep $consultationStep)
     {
         $synthesis = new Synthesis();
-        $form = $this->createForm(new SynthesisForm(), $synthesis);
+        $form = $this->createForm(SynthesisForm::class, $synthesis);
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {
@@ -153,7 +153,7 @@ class SynthesisController extends FOSRestController
      */
     public function updateSynthesisAction(Request $request, Synthesis $synthesis)
     {
-        $form = $this->createForm(new SynthesisForm(), $synthesis);
+        $form = $this->createForm(SynthesisForm::class, $synthesis);
         $form->submit($request->request->all(), false);
         if ($form->isValid()) {
             $synthesis = $this->get('capco.synthesis.synthesis_handler')->updateSynthesis($synthesis);
@@ -334,7 +334,7 @@ class SynthesisController extends FOSRestController
     public function createSynthesisElementAction(Request $request, Synthesis $synthesis)
     {
         $element = new SynthesisElement();
-        $form = $this->createForm(new SynthesisElementForm(false), $element);
+        $form = $this->createForm(SynthesisElementForm::class, $element, ['hasDivision' => false]);
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {
@@ -370,7 +370,7 @@ class SynthesisController extends FOSRestController
      */
     public function updateSynthesisElementAction(Request $request, Synthesis $synthesis, SynthesisElement $element)
     {
-        $form = $this->createForm(new SynthesisElementForm(true), $element);
+        $form = $this->createForm(SynthesisElementForm::class, $element, ['hasDivision' => true]);
         $form->submit($request->request->all(), false);
 
         if (!$form->isValid()) {

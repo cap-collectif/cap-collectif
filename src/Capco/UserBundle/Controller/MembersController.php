@@ -28,7 +28,7 @@ class MembersController extends Controller
         $currentUrl = $this->generateUrl('app_members');
         $em = $this->get('doctrine.orm.entity_manager');
 
-        $form = $this->createForm(new MemberSearchType($this->get('capco.toggle.manager')), null, [
+        $form = $this->createForm(MemberSearchType::class, null, [
             'action' => $currentUrl,
             'method' => 'POST',
         ]);

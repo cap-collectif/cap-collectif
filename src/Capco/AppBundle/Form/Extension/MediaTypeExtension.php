@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Form\Extension;
 
+use Sonata\MediaBundle\Form\Type\MediaType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -57,6 +58,6 @@ class MediaTypeExtension extends AbstractTypeExtension
 
     public function getExtendedType(): string
     {
-        return 'sonata_media_type';
+        return MediaType::class;
     }
 }

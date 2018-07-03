@@ -79,8 +79,7 @@ Scenario: Anonymous API client wants to get votes stats for a collect step
   """
   {
     "code": 400,
-    "message": "Collect steps have no votes stats.",
-    "errors": @null@
+    "message": "Collect steps have no votes stats."
   }
   """
 
@@ -92,8 +91,7 @@ Scenario: Anonymous API client wants to get districts stats for a selection step
   """
   {
     "code": 400,
-    "message": "Selection steps have no districts stats.",
-    "errors": @null@
+    "message": "Selection steps have no districts stats."
   }
   """
 @security

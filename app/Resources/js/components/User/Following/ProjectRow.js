@@ -48,8 +48,9 @@ export class ProjectRow extends Component<Props, State> {
     const { project, viewer } = this.props;
     return (
       <Collapse in={this.state.open} id={`profile-project-collapse-${project.id}`}>
-        <Panel className="capco-panel-list">
-          <Panel.Heading>
+        <Panel
+          className="capco-panel-list"
+          header={
             <div id="all-proposals">
               <h3>
                 <a
@@ -70,7 +71,7 @@ export class ProjectRow extends Component<Props, State> {
                 </Button>
               </h3>
             </div>
-          </Panel.Heading>
+          }>
           <ListGroup>
             {viewer.followingProposals.edges &&
               viewer.followingProposals.edges

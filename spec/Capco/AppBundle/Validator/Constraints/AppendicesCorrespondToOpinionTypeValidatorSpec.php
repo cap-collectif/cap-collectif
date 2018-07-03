@@ -12,12 +12,13 @@ use Capco\AppBundle\Entity\OpinionAppendix;
 use Capco\AppBundle\Entity\AppendixType;
 use Capco\AppBundle\Entity\OpinionTypeAppendixType;
 use Doctrine\Common\Collections\ArrayCollection;
+use Capco\AppBundle\Validator\Constraints\AppendicesCorrespondToOpinionTypeValidator;
 
 class AppendicesCorrespondToOpinionTypeValidatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Capco\AppBundle\Validator\Constraints\AppendicesCorrespondToOpinionTypeValidator');
+        $this->shouldHaveType(AppendicesCorrespondToOpinionTypeValidator::class);
     }
 
     function it_should_add_violation_if_there_is_an_appendice_a_not_available_type(
@@ -75,7 +76,7 @@ class AppendicesCorrespondToOpinionTypeValidatorSpec extends ObjectBehavior
       // bug in phpspec ?
 
       $this->initialize($context);
-        $context->addViolationAt('appendices', $constraint->message)->shouldNotBeCalled();
+        $context->addViolation('appendices', $constraint->message)->shouldNotBeCalled();
       // $this->validate($opinion, $constraint);
     }
 
@@ -87,7 +88,7 @@ class AppendicesCorrespondToOpinionTypeValidatorSpec extends ObjectBehavior
       ) {
         $opinion->getAppendices()->willReturn(new ArrayCollection([]));
         $this->initialize($context);
-        $context->addViolationAt('appendices', $constraint->message)->shouldNotBeCalled();
+        $context->addViolation('appendices', $constraint->message)->shouldNotBeCalled();
         $this->validate($opinion, $constraint);
     }
 }

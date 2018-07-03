@@ -41,6 +41,8 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     protected $parisId;
     protected $id;
 
+    protected $locked = false;
+
     protected $gender = null;
 
     /**
@@ -69,6 +71,12 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     protected $google_access_token;
 
     protected $linkedInUrl;
+
+    protected $expiresAt;
+    protected $expired = false;
+
+    protected $credentialsExpireAt;
+    protected $credentialsExpired = false;
 
     /**
      * @var string
@@ -376,6 +384,30 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         foreach ($responses as $response) {
             $response->setUser($this);
         }
+
+        return $this;
+    }
+
+    public function isLocked(): bool
+    {
+        return $this->locked;
+    }
+
+    public function setLocked(bool $value): self
+    {
+        $this->locked = $value;
+
+        return $this;
+    }
+
+    public function getExpiresAt(): ?\DateTime
+    {
+        return $this->expiresAt;
+    }
+
+    public function setExpiresAt(?\DateTime $value = null): self
+    {
+        $this->expiresAt = $value;
 
         return $this;
     }
@@ -1175,13 +1207,6 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return $this;
     }
 
-    public function setExpiresAt(\DateTime $date = null)
-    {
-        $this->expiresAt = $date;
-
-        return $this;
-    }
-
     // ************************* Custom methods *********************************
 
     public function isEmailConfirmed()
@@ -1248,6 +1273,42 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     public function getUsername(): ?string
     {
         return $this->username;
+    }
+
+    public function isExpired(): bool
+    {
+        return $this->expired;
+    }
+
+    public function setExpired(bool $value): self
+    {
+        $this->expired = $value;
+
+        return $this;
+    }
+
+    public function isCredentialsExpired(): bool
+    {
+        return $this->credentialsExpired;
+    }
+
+    public function setCredentialsExpired(bool $value): self
+    {
+        $this->credentialsExpired = $value;
+
+        return $this;
+    }
+
+    public function getCredentialsExpireAt(): ?\DateTime
+    {
+        return $this->credentialsExpireAt;
+    }
+
+    public function setCredentialsExpireAt(?\DateTime $value): self
+    {
+        $this->credentialsExpireAt = $value;
+
+        return $this;
     }
 
     // ********************* Methods for synthesis tool **************************
