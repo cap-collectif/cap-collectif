@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\UserBundle\Authenticator;
 
 use Capco\AppBundle\Toggle\Manager;
@@ -31,9 +30,16 @@ class SimplePreAuthenticator implements SimplePreAuthenticatorInterface
         return null;
     }
 
-    public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey)
-    {
-        return $this->getCurrentAuthenticator()->authenticateToken($token, $userProvider, $providerKey);
+    public function authenticateToken(
+        TokenInterface $token,
+        UserProviderInterface $userProvider,
+        $providerKey
+    ) {
+        return $this->getCurrentAuthenticator()->authenticateToken(
+            $token,
+            $userProvider,
+            $providerKey
+        );
     }
 
     public function supportsToken(TokenInterface $token, $providerKey): bool

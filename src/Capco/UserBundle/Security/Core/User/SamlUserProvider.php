@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\UserBundle\Security\Core\User;
 
 use Capco\UserBundle\Entity\User;

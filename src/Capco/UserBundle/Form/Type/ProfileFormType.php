@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\UserBundle\Form\Type;
 
 use Capco\AppBundle\Toggle\Manager;
@@ -19,19 +18,11 @@ class ProfileFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('twitterUrl', null, [
-                'label' => 'user.profile.edit.twitter',
-            ])
-            ->add('facebookUrl', null, [
-                'label' => 'user.profile.edit.facebook',
-            ])
-            ->add('linkedInUrl', null, [
-            ])
-            ->add('username', null, [
-                'required' => true,
-            ])
-            ->add('neighborhood', null, [
-            ])
+            ->add('twitterUrl', null, ['label' => 'user.profile.edit.twitter'])
+            ->add('facebookUrl', null, ['label' => 'user.profile.edit.facebook'])
+            ->add('linkedInUrl', null, [])
+            ->add('username', null, ['required' => true])
+            ->add('neighborhood', null, [])
             ->add('media', 'sonata_media_type', [
                 'provider' => 'sonata.media.provider.image',
                 'context' => 'default',
@@ -41,13 +32,9 @@ class ProfileFormType extends AbstractType
             ->remove('phone')
             ->add('profilePageIndexed', CheckboxType::class, [
                 'label_attr' => ['style' => 'font-weight: normal; color: #000000'],
-            ])
-        ;
-
-        if ($this->toggleManager->isActive('user_type')) {
-            $builder->add('userType', null, [
-                'empty_data' => 'user.profile.edit.no_user_type',
             ]);
+        if ($this->toggleManager->isActive('user_type')) {
+            $builder->add('userType', null, ['empty_data' => 'user.profile.edit.no_user_type']);
         }
     }
 }

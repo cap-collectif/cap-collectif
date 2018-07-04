@@ -33,8 +33,8 @@
   "lint-staged": {
     "app/Resources/js/**/*.js": [
       "eslint --fix",
-      "prettier --write",
-      "jest --findRelatedTests",
+      "prettier --parser flow --write",
+      "jest --bail --findRelatedTests",
       "git add"
     ],
     "features/**/*.feature": [
@@ -44,7 +44,7 @@
       "yamllint"
     ],
     "*.php": [
-      "php-cs-fixer fix --config=.php_cs --path-mode=intersection",
+      "prettier --parser php --write",
       "git add",
       "php -d memory_limit=-1 bin/phpstan analyse -l 2 -c phpstan.neon"
     ],
@@ -99,6 +99,7 @@
     }
   },
   "dependencies": {
+    "@prettier/plugin-php": "^0.2.2",
     "@storybook/addon-info": "^3.4.8",
     "@storybook/addons": "^3.4.8",
     "@storybook/react": "^3.4.8",
@@ -161,7 +162,7 @@
     "leaflet-geosearch": "^2.6.0",
     "leaflet.locatecontrol": "^0.62.0",
     "leaflet.markercluster": "^1.3.0",
-    "lint-staged": "^6.0.0",
+    "lint-staged": "^7.2.0",
     "lodash": "^4.17.4",
     "mailcheck": "^1.1.1",
     "moment": "^2.11.2",
