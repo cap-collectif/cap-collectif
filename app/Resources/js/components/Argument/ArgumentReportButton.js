@@ -27,7 +27,7 @@ class ArgumentReportButton extends React.Component<Props> {
         id={`argument-${argument.id}`}
         reported={argument.viewerHasReport}
         onReport={this.handleReport}
-        author={argument.author}
+        author={{ uniqueId: argument.author.slug }}
         buttonBsSize="xs"
         buttonClassName="argument__btn--report"
       />
@@ -43,7 +43,7 @@ export default createFragmentContainer(
       @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
       author {
         id
-        displayName
+        slug
       }
       related {
         id

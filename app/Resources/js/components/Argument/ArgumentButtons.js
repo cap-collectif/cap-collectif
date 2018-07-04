@@ -39,19 +39,20 @@ class ArgumentButtons extends React.Component<Props, State> {
     return (
       <div>
         {/* $FlowFixMe */}
-        <ArgumentVoteBox argument={argument} /> <ArgumentReportButton argument={argument} />{' '}
+        <ArgumentVoteBox argument={argument} />
+        <ArgumentReportButton argument={argument} />{' '}
         <EditButton
           onClick={() => {
             dispatch(openArgumentEditModal(argument.id));
           }}
-          author={argument.author}
+          author={{ uniqueId: argument.author.slug }}
           editable={argument.contribuable}
           className="argument__btn--edit btn-xs btn-dark-gray btn--outline"
         />
         <ArgumentEditModal argument={argument} />{' '}
         <DeleteButton
           onClick={this.openDeleteModal}
-          author={argument.author}
+          author={{ uniqueId: argument.author.slug }}
           className="argument__btn--delete btn-xs"
         />
         {/* $FlowFixMe */}
@@ -79,6 +80,7 @@ export default createFragmentContainer(
       @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
       author {
         id
+        slug
         displayName
       }
       id

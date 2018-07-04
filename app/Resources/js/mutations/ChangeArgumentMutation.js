@@ -12,6 +12,7 @@ const mutation = graphql`
     changeArgument(input: $input) {
       argument {
         id
+        ...ArgumentItem_argument
       }
     }
   }

@@ -787,6 +787,7 @@ input DeleteArgumentInput {
 }
 
 type DeleteArgumentPayload {
+  deletedArgumentId: ID
   argumentable: Argumentable!
   clientMutationId: String
 }

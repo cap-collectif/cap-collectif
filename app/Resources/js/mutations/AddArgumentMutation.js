@@ -27,11 +27,11 @@ const commit = (variables: AddArgumentMutationVariables): Promise<AddArgumentMut
     mutation,
     variables,
     configs: [
-      // We add the new argument in the last arguments corresponding row
       {
         type: 'RANGE_ADD',
         parentID: variables.input.argumentableId,
         connectionInfo: [
+          // We add the new argument in the last arguments corresponding row
           {
             key: 'ArgumentListViewPaginated_arguments',
             rangeBehavior: 'prepend',
@@ -40,14 +40,7 @@ const commit = (variables: AddArgumentMutationVariables): Promise<AddArgumentMut
               orderBy: { direction: 'DESC', field: 'CREATED_AT' },
             },
           },
-        ],
-        edgeName: 'argumentEdge',
-      },
-      // We add the new argument in the old arguments corresponding row
-      {
-        type: 'RANGE_ADD',
-        parentID: variables.input.argumentableId,
-        connectionInfo: [
+          // We add the new argument in the old arguments corresponding row
           {
             key: 'ArgumentListViewPaginated_arguments',
             rangeBehavior: 'append',
@@ -56,14 +49,7 @@ const commit = (variables: AddArgumentMutationVariables): Promise<AddArgumentMut
               orderBy: { direction: 'ASC', field: 'CREATED_AT' },
             },
           },
-        ],
-        edgeName: 'argumentEdge',
-      },
-      // We add the new argument in the popular arguments corresponding row
-      {
-        type: 'RANGE_ADD',
-        parentID: variables.input.argumentableId,
-        connectionInfo: [
+          // We add the new argument in the popular arguments corresponding row
           {
             key: 'ArgumentListViewPaginated_arguments',
             rangeBehavior: 'append',

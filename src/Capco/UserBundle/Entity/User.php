@@ -405,7 +405,7 @@ class User extends BaseUser
         return $this->locked;
     }
 
-    public function setLocked(bool $value): self
+    public function setLocked(/*bool */$value): self
     {
         $this->locked = $value;
 

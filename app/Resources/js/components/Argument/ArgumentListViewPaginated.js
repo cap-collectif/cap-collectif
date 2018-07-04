@@ -1,10 +1,11 @@
 // @flow
 import * as React from 'react';
-import { Button, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import type { ArgumentListViewPaginated_argumentable } from './__generated__/ArgumentListViewPaginated_argumentable.graphql';
 import ArgumentItem from './ArgumentItem';
+import Loader from '../Ui/Loader';
 
 type Props = {
   relay: RelayPaginationProp,
@@ -40,17 +41,21 @@ export class ArgumentListViewPaginated extends React.Component<Props, State> {
               );
             })}
         {relay.hasMore() && (
-          <ListGroupItem>
-            <Button
-              disabled={this.state.loading}
-              onClick={() => {
-                this.setState({ loading: true });
-                relay.loadMore(ARGUMENTS_PAGINATION, () => {
-                  this.setState({ loading: false });
-                });
-              }}>
-              <FormattedMessage id={this.state.loading ? 'global.loading' : 'see-more-proposals'} />
-            </Button>
+          <ListGroupItem style={{ textAlign: 'center' }}>
+            {this.state.loading ? (
+              <Loader />
+            ) : (
+              <a
+                className="small"
+                onClick={() => {
+                  this.setState({ loading: true });
+                  relay.loadMore(ARGUMENTS_PAGINATION, () => {
+                    this.setState({ loading: false });
+                  });
+                }}>
+                <FormattedMessage id="see-more-proposals" />
+              </a>
+            )}
           </ListGroupItem>
         )}
       </ListGroup>

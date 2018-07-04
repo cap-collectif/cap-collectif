@@ -39,7 +39,14 @@ class OpinionAppendices extends React.Component<Props> {
         ) : null}
         {appendices.map((appendix, index) => {
           if (appendix.body) {
-            return <OpinionAppendix key={index} appendix={appendix} expanded={index === 0} />;
+            return (
+              <OpinionAppendix
+                key={index}
+                appendix={appendix}
+                expanded={index === 0}
+                onToggle={() => {}}
+              />
+            );
           }
         })}
       </div>

@@ -48,6 +48,6 @@ class DeleteArgumentMutation
         $this->em->flush();
         $this->redisStorage->recomputeUserCounters($user);
 
-        return ['argumentable' => $argumentable];
+        return ['argumentable' => $argumentable, 'deletedArgumentId' => $argumentId];
     }
 }

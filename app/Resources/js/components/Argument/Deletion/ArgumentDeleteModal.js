@@ -28,7 +28,7 @@ class ArgumentDeleteModal extends React.Component<Props, State> {
     const { argument, onClose } = this.props;
     this.setState({ isSubmitting: true });
 
-    return DeleteArgumentMutation.commit({ input: { argumentId: argument.id } })
+    return DeleteArgumentMutation.commit({ input: { argumentId: argument.id } }, argument.type)
       .then(() => {
         AppDispatcher.dispatch({
           actionType: 'UPDATE_ALERT',
@@ -82,6 +82,7 @@ export default createFragmentContainer(
   graphql`
     fragment ArgumentDeleteModal_argument on Argument {
       id
+      type
     }
   `,
 );

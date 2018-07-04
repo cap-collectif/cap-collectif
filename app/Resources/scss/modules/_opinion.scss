@@ -6,7 +6,7 @@
     font-size: 15px;
 
     &:hover {
-        background-color: $page-bgc;
+        //background-color: $page-bgc;
     }
 
     .ranking__nb {
@@ -216,7 +216,7 @@
     // Special case : argument
     &.opinion--argument {
         position: relative;
-        background-color: $page-bgc;
+        //background-color: $page-bgc;
 
         .opinion__text {
             padding-top: 10px;
@@ -242,7 +242,7 @@
         }
 
         &.opinion--argument--white {
-            background-color: $white;
+            //background-color: $white;
         }
     }
 

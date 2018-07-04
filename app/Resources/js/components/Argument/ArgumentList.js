@@ -59,7 +59,8 @@ export class ArgumentList extends React.Component<Props, State> {
                     }
                   }
                 }
-                ...ArgumentListView_argumentable @arguments(type: $type)
+                ...ArgumentListView_argumentable
+                  @arguments(isAuthenticated: $isAuthenticated, type: $type)
               }
             }
           `}
@@ -77,8 +78,8 @@ export class ArgumentList extends React.Component<Props, State> {
               const totalCount = argumentable.allArguments.totalCount;
               const htmlFor = `filter-arguments-${type}`;
               return (
-                <Panel
-                  header={
+                <Panel>
+                  <Panel.Heading>
                     <Row className="opinion__arguments__header" style={{ border: 0 }}>
                       <Col xs={12} sm={6} md={6}>
                         <h4 className="opinion__header__title">
@@ -122,7 +123,7 @@ export class ArgumentList extends React.Component<Props, State> {
                         </Col>
                       )}
                     </Row>
-                  }>
+                  </Panel.Heading>
                   {/* $FlowFixMe */}
                   <ArgumentListView order={this.state.order} argumentable={argumentable} />
                 </Panel>

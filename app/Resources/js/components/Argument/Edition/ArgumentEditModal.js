@@ -33,7 +33,7 @@ class ArgumentEditModal extends React.Component<Props> {
         aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
-            {<FormattedMessage id="argument.update" />}
+            <FormattedMessage id="argument.update" />
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
