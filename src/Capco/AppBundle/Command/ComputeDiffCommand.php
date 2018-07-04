@@ -29,7 +29,6 @@ class ComputeDiffCommand extends ContainerAwareCommand
 
         $versions = $repo->getAllIds();
 
-        // TOTO
         $progress = new ProgressBar($output, \count($versions));
 
         foreach ($versions as $versionId) {
