@@ -111,3 +111,59 @@ Scenario: Logged in user wants to see his votes on a project and remove one
   And I remove the first vote
   And I should see 'project.votes.nb {"num":0}'
   And I should have 2 votes
+
+@javascript @database
+Scenario: Logged in user that don't full fill requirements wants to vote...
+  Given I am logged in as pierre
+  When I go to a project with requirement condition to vote and classement
+  And I vote for the first proposal
+  Then I should see a proposal vote modal
+  And I should see "vote-modal-title"
+  Then I didn't full fill requirements conditions
+  And I cannot confirm my vote
+  Then I full fill the requirements conditions
+  And I can confirm my vote
+  Then I should see "proposal.vote.hasVoted"
+  And I click on button "#proposal-vote-btn-proposal25"
+  Then I should see "vote-modal-title"
+  And I should see "requirements filled"
+  And the button "global.validate" should not be disabled
+  Then I click on button "#confirm-proposal-vote"
+
+@javascript @database
+Scenario: Logged in user wants to reorder my vote for a project
+  Given I am logged in as user
+  When I got to the votes details page of project with requirements
+  And I wait 2 seconds
+  Then I reorder my vote with "#vote-stepcollectstepVoteClassement-proposalproposal24" take place of proposal up
+  And I wait 2 seconds
+  Then I click on button "#confirm-update-votes"
+
+@javascript @database
+Scenario: Logged in user wants to set a vote as anonymous
+  Given I am logged in as user
+  When I got to the votes details page of project with requirements
+  And I wait 1 seconds
+  And I should not see "admin.fields.idea_vote.private"
+  Then I toggle vote access of proposal "#proposal26-proposal-vote__private"
+  And I wait 1 seconds
+  And I should see "admin.fields.idea_vote.private"
+  Then I click on button "#confirm-update-votes"
+  And I wait 1 seconds
+  Then I reload the page
+  And I wait 1 seconds
+  And I should see "admin.fields.idea_vote.private"
+
+@javascript @database
+Scenario: Logged in user wants to delete a vote
+  Given I am logged in as user
+  When I got to the votes details page of project with requirements
+  And I should see "Proposition 3"
+  Then I delete a vote of a proposal "#proposal26-proposal-vote__private"
+  And I wait 1 seconds
+  And I should see "are-you-sure-you-want-to-delete-this-vote"
+  Then I press "btn-delete"
+  And I click on button "#confirm-update-votes"
+  Then I reload the page
+  And I wait 1 seconds
+  And I should not see "Proposition 3"

@@ -111,6 +111,14 @@ class UserContext extends DefaultContext
     }
 
     /**
+     * @Given I am logged in as pierre
+     */
+    public function iAmLoggedInAsPierre()
+    {
+        $this->logInWith('pierre@cap-collectif.com', 'toto');
+    }
+
+    /**
      * @Given I am logged in as user
      */
     public function iAmLoggedInAsUser()

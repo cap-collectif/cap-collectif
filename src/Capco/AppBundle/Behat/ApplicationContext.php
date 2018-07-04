@@ -731,4 +731,23 @@ class ApplicationContext extends UserContext
             echo $exception->getMessage();
         }
     }
+
+    private function moveDraggableElementTo($element, $key)
+    {
+        // http://keycode.info/
+        $spaceBar = 32;
+        $page = $this->getCurrentPage();
+        $element = $page->find('css', $element);
+        $element->keyDown($spaceBar);
+        $element->keyPress($spaceBar);
+        $element->keyDown($key);
+        $element->keyPress(0);
+        $this->iWait(1);
+        $element->keyUp($key);
+        $element->keyUp($spaceBar);
+        // press spacebar again to validate
+        $element->keyDown($spaceBar);
+        $element->keyPress($spaceBar);
+        $element->keyUp($spaceBar);
+    }
 }
