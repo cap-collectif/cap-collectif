@@ -93,7 +93,7 @@ class ProposalFormProposalsResolver implements ResolverInterface
             $order = self::findOrderFromFieldAndDirection($field, $direction);
 
             $filters['proposalForm'] = $form->getId();
-            $filters['collectStep'] = $form->getStep()->getType();
+            $filters['collectStep'] = $form->getStep()->getId();
 
             $seed = $user instanceof User ? $user->getId() : $request->getCurrentRequest()->getClientIp();
 

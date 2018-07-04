@@ -24,7 +24,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateCsvFromProposalStepCommand extends Command
 {
-    protected const PROPOSALS_PER_PAGE = 50;
+    protected const PROPOSALS_PER_PAGE = 10;
     protected const VOTES_PER_PAGE = 150;
     protected const COMMENTS_PER_PAGE = 150;
     protected const NEWS_PER_PAGE = 70;
@@ -410,15 +410,21 @@ EOF;
         'proposal_illustration' => 'media.url',
         'proposal_summaryOrBodyExcerpt' => 'summaryOrBodyExcerpt',
     ];
+
     protected $currentProposalIndex;
+
     /**
      * @var LoggerInterface
      */
     protected $logger;
+
+    protected static $defaultName = 'capco:export:proposalStep';
+
     /**
      * @var SelectionStepRepository
      */
     private $selectionStepRepository;
+
     /**
      * @var string
      */
@@ -446,7 +452,6 @@ EOF;
     protected function configure(): void
     {
         $this
-            ->setName('capco:export:proposalStep')
             ->setDescription('Create csv file from selection step data')
             ->addArgument('projectId', InputArgument::OPTIONAL, 'The ID of the project');
     }
@@ -921,7 +926,7 @@ EOF;
         }
     }
 
-    protected function traverseConnection(array $data, string $path, callable $callback, callable $renewalQuery): void
+    protected function traverseConnection(array &$data, string $path, callable $callback, callable $renewalQuery): void
     {
         do {
             $connection = Arr::path($data, $path);
