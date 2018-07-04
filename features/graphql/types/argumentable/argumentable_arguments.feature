@@ -170,7 +170,7 @@ Scenario: Anonymous wants to get arguments filtered by type for an opinion
     "data": {
         "opinion": {
             "arguments": {
-              "totalCount": 2,
+              "totalCount": 1,
               "edges": [
                 {
                   "node": {
