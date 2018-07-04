@@ -9,6 +9,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Model\Metadata;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ProjectAdmin extends CapcoAdmin
 {
@@ -39,6 +40,15 @@ class ProjectAdmin extends CapcoAdmin
     public function getExportFormats(): array
     {
         return [];
+    }
+
+    public function getTemplate($name)
+    {
+        if ('edit' === $name) {
+            return 'CapcoAdminBundle:Project:edit.html.twig';
+        }
+
+        return parent::getTemplate($name);
     }
 
     /**
@@ -150,8 +160,8 @@ class ProjectAdmin extends CapcoAdmin
             ->with('admin.fields.project.group_meta', ['class' => 'col-md-6'])->end()
             ->with('admin.fields.project.group_ranking', ['class' => 'col-md-6'])->end()
             ->with('admin.fields.project.group_steps', ['class' => 'col-md-12'])->end()
-            ->with('admin.fields.project.advanced', ['class' => 'col-md-12'])->end()
-        ;
+            ->with('project-access', ['class' => 'col-md-6'])->end()
+            ->with('admin.fields.project.advanced', ['class' => 'col-md-6'])->end();
 
         $formMapper
             // Content
@@ -242,9 +252,9 @@ class ProjectAdmin extends CapcoAdmin
                 'help' => 'admin.help.project.video',
                 ], [
                     'link_parameters' => ['context' => 'project'],
-            ])
+                ]
+            )
             ->end()
-
             // Ranking
             ->with('admin.fields.project.group_ranking')
             ->add('opinionsRankingThreshold', null, [
@@ -260,7 +270,6 @@ class ProjectAdmin extends CapcoAdmin
                 'required' => false,
             ])
             ->end()
-
             // Steps
             ->with('admin.fields.project.group_steps')
                 ->add('steps', 'sonata_type_collection', [
@@ -274,7 +283,24 @@ class ProjectAdmin extends CapcoAdmin
                 ])
             ->end();
 
-        $formMapper->with('admin.fields.project.advanced')
+        $formMapper
+            ->with('project-access')
+            ->add(
+                'visibility',
+                ChoiceType::class,
+                [
+                    'choices' => Project::VISIBILITY,
+                    'help' => 'who-can-see-this-project',
+                    'label' => 'project-access',
+                    'multiple' => false,
+                    'expanded' => true,
+                    'required' => true,
+                    'choices_as_values' => true,
+                    'choice_translation_domain' => 'CapcoAppBundle',
+                ]
+            )
+            ->end()
+            ->with('admin.fields.project.advanced')
             ->add('metaDescription', null, [
                 'label' => 'projects.metadescription',
                 'required' => false,
@@ -355,5 +381,6 @@ class ProjectAdmin extends CapcoAdmin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->clearExcept(['batch', 'list', 'create', 'edit', 'delete']);
+        $collection->add('preview', $this->getRouterIdParameter() . '/preview');
     }
 }

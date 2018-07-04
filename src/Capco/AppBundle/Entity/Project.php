@@ -44,8 +44,8 @@ class Project implements IndexableInterface
     public const VISIBILITY_PUBLIC = 2;
 
     public const VISIBILITY = [
-        'me' => self::VISIBILITY_ME,
-        'admin' => self::VISIBILITY_ADMIN,
+        'myself' => self::VISIBILITY_ME,
+        'private' => self::VISIBILITY_ADMIN,
         'public' => self::VISIBILITY_PUBLIC,
     ];
 
@@ -227,7 +227,7 @@ class Project implements IndexableInterface
     /**
      * @ORM\Column(name="visibility", type="integer", nullable=false)
      */
-    private $visibility = self::VISIBILITY_PUBLIC;
+    private $visibility = self::VISIBILITY_ME;
 
     /**
      * Constructor.
