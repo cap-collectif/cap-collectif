@@ -33,7 +33,7 @@ class ProposalVotesResolver
 
     public function __invoke(Proposal $proposal, Argument $args, \ArrayObject $context): Connection
     {
-        $includeExpired = $args->offsetGet('includeExpired') && $context->offsetExists('disable_acl') && true === $context->offsetGet('disable_acl');
+        $includeExpired = true === $args->offsetGet('includeExpired') && $context->offsetExists('disable_acl') && true === $context->offsetGet('disable_acl');
         if ($args->offsetExists('stepId')) {
             try {
                 $step = $this->abstractStepRepository->find($args->offsetGet('stepId'));
