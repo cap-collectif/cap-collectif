@@ -34,7 +34,7 @@ class ConfirmationController extends Controller
         $user->setLastLogin(new \DateTime());
 
         $instanceName = EnvHelper::get('SYMFONY_INSTANCE_NAME');
-        if ('preprod' === $instanceName || 'rennes' === $instanceName || 'rennespreprod' === $instanceName) {
+        if ('preprod' === $instanceName || 'rennes' === $instanceName || 'rennespreprod' === $instanceName || 'montreuil' === $instanceName) {
             $hasRepublishedContributions = false;
         } else {
             $hasRepublishedContributions = $this->get('capco.contribution.manager')->republishContributions($user);
