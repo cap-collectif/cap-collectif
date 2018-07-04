@@ -16,7 +16,7 @@ type State = {
   loading: boolean,
 };
 
-const ARGUMENTS_PAGINATION = 5;
+const ARGUMENTS_PAGINATION = 25;
 
 export class ArgumentListViewPaginated extends React.Component<Props, State> {
   state = {
@@ -25,6 +25,9 @@ export class ArgumentListViewPaginated extends React.Component<Props, State> {
 
   render() {
     const { argumentable, relay } = this.props;
+    if (argumentable.arguments.totalCount === 0) {
+      return null;
+    }
     return (
       <ListGroup>
         {argumentable.arguments.edges &&

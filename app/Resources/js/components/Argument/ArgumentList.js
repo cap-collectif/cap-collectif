@@ -95,7 +95,7 @@ export class ArgumentList extends React.Component<Props, State> {
                           )}
                         </h4>
                       </Col>
-                      {totalCount && (
+                      {totalCount ? (
                         <Col xs={12} sm={6} md={6} className="block--first-mobile">
                           <Input
                             id={htmlFor}
@@ -121,7 +121,7 @@ export class ArgumentList extends React.Component<Props, State> {
                             </FormattedMessage>
                           </Input>
                         </Col>
-                      )}
+                      ) : null}
                     </Row>
                   </Panel.Heading>
                   {/* $FlowFixMe */}
