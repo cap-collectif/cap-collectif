@@ -4,6 +4,10 @@ LABEL maintainer "Cap Collectif <tech@cap-collectif.com>"
 
 RUN pip install pycodestyle
 
+# Install php-cs-fixer
+RUN wget --quiet https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.12.0/php-cs-fixer.phar -O /usr/local/bin/php-cs-fixer && \
+    chmod +x /usr/local/bin/php-cs-fixer
+
 COPY capco.ini /usr/local/etc/php/conf.d/capco.ini
 
 # Install fake user 1000

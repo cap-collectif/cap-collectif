@@ -1,17 +1,14 @@
 ProposalStep:
     type: interface
+    inherits: [Step]
     config:
         description: "A proposal step"
         resolveType: "@=resolver('step_type', [value])"
         fields:
             requirements:
               type: "RequirementConnection!"
-            id:
-              type: "ID!"
-            kind:
-              type: "String!"
-            title:
-              type: "String!"
+              description: "The requirements to vote on this step."
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\StepRequirementsResolver", [value, getUser(), args])'
             project:
               type: "Project"
             votesLimit:
@@ -28,15 +25,13 @@ ProposalStep:
               type: "Boolean!"
             votesRanking:
               type: "Boolean!"
-            show_url:
-              type: "String!"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepUrlResolver", [value])'
+              description: "If enabled, allow voters to order their votes by preferences."
             viewerVotes:
               access: "@=hasRole('ROLE_USER')"
               type: "ProposalVoteConnection!"
               description: "A list of viewer votes associated with the step."
               argsBuilder: "Relay::Connection"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerStepVotesResolver", [value, user, args])'
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerStepVotesResolver", [value, getUser(), args])'
               args:
                   first:
                       type: "Int"
@@ -46,6 +41,7 @@ ProposalStep:
                       defaultValue: { field: CREATED_AT, direction: DESC }
             proposals:
                 type: "ProposalConnection!"
+                resolve: '@=resolver("proposal_form_proposals", [value, args, getUser(), serv("request_stack")])'
                 args:
                   district:
                     type: "ID"

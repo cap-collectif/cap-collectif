@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\UserBundle\Form\Type;
 
 use Capco\UserBundle\Entity\User;
@@ -16,12 +17,11 @@ class UserAccountFormType extends AbstractType
             ->add('locked')
             ->add('vip')
             ->add('enabled')
-            ->add('roles', CollectionType::class, [
-                'entry_type' => TextType::class,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-            ]);
+            ->add(
+                'roles',
+                CollectionType::class,
+                ['entry_type' => TextType::class, 'allow_add' => true, 'allow_delete' => true, 'by_reference' => false]
+            );
     }
 
     /**
@@ -29,6 +29,10 @@ class UserAccountFormType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(['data_class' => User::class]);
+        $resolver->setDefaults(
+            [
+                'data_class' => User::class,
+            ]
+        );
     }
 }

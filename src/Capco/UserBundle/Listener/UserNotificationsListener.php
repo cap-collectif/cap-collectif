@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\UserBundle\Listener;
 
 use Capco\AppBundle\Entity\UserNotificationsConfiguration;
@@ -16,9 +17,7 @@ class UserNotificationsListener
     public function prePersist(UserNotificationsConfiguration $userNotificationsConfiguration)
     {
         if (!$userNotificationsConfiguration->getUnsubscribeToken()) {
-            $userNotificationsConfiguration->setUnsubscribeToken(
-                $this->tokenGenerator->generateToken()
-            );
+            $userNotificationsConfiguration->setUnsubscribeToken($this->tokenGenerator->generateToken());
         }
     }
 }

@@ -9,10 +9,11 @@ use Capco\AppBundle\Repository\UserRequirementRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Psr\Log\LoggerInterface;
 
-class UpdateRequirementMutation
+class UpdateRequirementMutation implements MutationInterface
 {
     private $em;
     private $requirementRepository;

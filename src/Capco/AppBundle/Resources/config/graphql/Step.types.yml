@@ -5,11 +5,20 @@ Step:
         resolveType: "@=resolver('step_type', [value])"
         fields:
             id:
+              description: "The ID of the step"
               type: "ID!"
             kind:
+              description: "The kind of the step"
               type: "String!"
             title:
+              description: "The title of the step"
               type: "String!"
             show_url:
               type: "String!"
+              description: "The url of the step"
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepUrlResolver", [value])'
+              deprecationReason: "Use url instead of show_url"
+            url:
+              type: "String!"
+              description: "The url of the step"
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepUrlResolver", [value])'

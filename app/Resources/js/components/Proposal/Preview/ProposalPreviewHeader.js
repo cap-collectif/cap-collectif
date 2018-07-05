@@ -43,9 +43,6 @@ export default createFragmentContainer(ProposalPreviewHeader, {
         id
         displayName
         show_url
-        media {
-          url
-        }
       }
     }
   `,

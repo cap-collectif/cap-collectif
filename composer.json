@@ -20,6 +20,10 @@
         },
         {
             "type": "vcs",
+            "url": "https://github.com/cap-collectif/graphql-php"
+        },
+        {
+            "type": "vcs",
             "url": "https://github.com/cap-collectif/behat-parallel-scenario"
         },
         {
@@ -33,10 +37,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/cap-collectif/SonataUserBundle"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/cap-collectif/graphql-php"
         },
         {
             "type": "vcs",
@@ -133,11 +133,11 @@
         "php-translation/loco-adapter": "^0.4.0",
         "pmill/doctrine-array-hydrator": "^0.1.2",
         "webonyx/graphql-php": "dev-master#efe1bcf052d4b42910c9f96fad3c10e4482ef7a8 as 0.11.2",
-        "overblog/graphql-php-generator": "@dev",
+        "overblog/graphql-php-generator": "^0.7.0",
         "php-http/httplug-bundle": "^1.8",
         "php-http/curl-client": "^1.7",
         "symfony/polyfill-apcu": "^1.7",
-        "overblog/graphql-bundle": "0.9.3",
+        "overblog/graphql-bundle": "^0.11.0",
         "imagine/imagine": "^0.6",
         "knplabs/knp-menu-bundle": "2.2.1",
         "sensio/generator-bundle": "3.1.7",
@@ -169,7 +169,8 @@
         "phpstan/phpstan-doctrine": "^0.8.0",
         "alexandresalome/mailcatcher": "dev-master#e5bff236a6560d5314ea9bba32bcea6e3588b40d",
         "lookyman/phpstan-symfony": "^0.4.1",
-        "symfony/phpunit-bridge": "^4.0"
+        "symfony/phpunit-bridge": "^4.0",
+        "overblog/graphiql-bundle": "^0.1.1"
     },
     "scripts": {
         "post-install-cmd":[

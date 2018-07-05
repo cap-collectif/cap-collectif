@@ -786,12 +786,8 @@ trait ProposalStepsTrait
     {
         $this->fillField('mobile-phone', '0123456789');
         $this->checkOption('requirement1');
-        $this->iWait(1);
-        $this->assertPageContainsText('global.saved');
         $this->checkOption('requirement2');
         $this->checkOption('requirement3');
-        $this->iWait(1);
-        $this->assertPageContainsText('global.saved');
     }
 
     /**

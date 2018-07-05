@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Type;
 
 use Capco\AppBundle\Entity\Responses\ValueResponse;
+use Capco\AppBundle\Utils\Text;
 
 class FormattedValueResponseTypeResolver
 {
@@ -12,13 +13,16 @@ class FormattedValueResponseTypeResolver
             return null;
         }
         if (\is_string($response->getValue())) {
-            return $response->getValue();
+            return Text::htmlToString($response->getValue());
         }
 
         $value = $response->getValue();
-        $labels = array_filter(array_merge($value['labels'] ?? [], [$value['other'] ?? []]), function ($label) {
+        $filtered = array_filter(array_merge($value['labels'] ?? [], [$value['other'] ?? []]), function ($label) {
             return $label;
         });
+        $labels = array_map(function ($label) {
+            return Text::htmlToString($label);
+        }, $filtered);
 
         return implode(', ', $labels);
     }

@@ -6,11 +6,17 @@ Contribution:
         fields:
             id:
               type: "ID!"
+              description: "The id of the contribution."
             kind:
               type: "String!"
+              description: "The kind of contribution."
             related:
                 type: "Contribution"
-                description: "Related contribution."
+                description: "Return the related contribution if the contribution is related to another."
+            show_url:
+                type: "URI!"
+                description: "The HTTP show url for this contribution."
+                deprecationReason: "Use url instead of show_url"
             url:
                 type: "URI!"
                 description: "Url of the contribution"
