@@ -11,6 +11,7 @@ Capco\AppBundle\Entity\Project:
     exportable: true
     opinionsRankingThreshold: 60
     versionsRankingThreshold: 20
+    visibility: 2
   p2:
     id: 'project2'
     title: Stratégie technologique de l'Etat et services publics
@@ -19,21 +20,22 @@ Capco\AppBundle\Entity\Project:
     Cover: '@MediaProject2'
     themes: ['@theme1', '@theme3']
     publishedAt: <dateTimeBetween('-50 days', 'now')>
+    visibility: 2
   p3:
     id: 'project3'
     title: Transformation numérique des relations
     projectType: '@projectType3'
-    isEnabled: false
     Author: '@user4'
     themes: ['@theme2', '@theme3']
+    visibility: 2
   p4:
     id: 'project4'
     title: Projet vide
     projectType: '@projectType2'
-    isEnabled: true
     Author: '@user4'
     themes: ['@theme2', '@theme3']
     publishedAt: <dateTimeBetween('+1 days', '+10 days')>
+    visibility: 2
   p5:
     id: 'project5'
     title: Projet de loi Renseignement
@@ -46,111 +48,111 @@ Capco\AppBundle\Entity\Project:
     exportable: true
     opinionsRankingThreshold: 60
     versionsRankingThreshold: 20
+    visibility: 2
   p6:
     id: 'project6'
     title: Budget Participatif Rennes
     projectType: '@projectType4'
     Author: '@user502'
-    isEnabled: true
     themes: ['@theme3']
     exportable: true
     publishedAt: <dateTimeBetween('-50 days', 'now')>
+    visibility: 2
   p7:
     id: 'project7'
     title: Dépot avec selection vote budget
     projectType: '@projectType4'
     Author: '@user4'
-    isEnabled: true
     themes: ['@theme3']
     exportable: true
     publishedAt: <dateTimeBetween('-50 days', 'now')>
+    visibility: 2
   p8:
     id: 'project8'
     title: Projet avec questionnaire
     projectType: '@projectType7'
     Author: '@user502'
-    isEnabled: true
     themes: ['@theme3']
     exportable: true
     publishedAt: <dateTimeBetween('-50 days', 'now')>
+    visibility: 2
   p9:
     id: 'project9'
     title: Appel à projets
     projectType: '@projectType1'
     Author: '@user1'
-    isEnabled: true
     themes: []
     exportable: true
     publishedAt: <dateTimeBetween('-50 days', 'now')>
+    visibility: 2
   p10:
     id: 'project10'
     title: Dépôt avec selection vote simple
     projectType: '@projectType4'
     Author: '@user4'
-    isEnabled: true
     themes: ['@theme3']
     exportable: true
     publishedAt: <dateTimeBetween('-50 days', 'now')>
+    visibility: 2
   p11:
     id: 'project11'
     title: Budget avec vote limité
     projectType: '@projectType4'
     Author: '@user4'
-    isEnabled: true
     exportable: true
     publishedAt: <dateTimeBetween('-50 days', 'now')>
+    visibility: 2
   p12:
     id: 'project12'
     title: Projet sans étapes participatives
     projectType: '@projectType2'
     Author: '@user4'
     Cover: '@MediaProject4'
-    isEnabled: true
     themes: ['@theme2']
     exportable: true
     publishedAt: <dateTimeBetween('-50 days', 'now')>
+    visibility: 2
   p13:
     id: 'project13'
     title: Projet avec une étape de participation en continue
     projectType: '@projectType4'
     Author: '@user3'
-    isEnabled: true
     themes: ['@theme1']
     exportable: true
     publishedAt: <dateTimeBetween('-50 days', 'now')>
+    visibility: 2
   p14:
     id: 'project14'
     title: Projet à venir
     projectType: '@projectType2'
     Author: '@user4'
-    isEnabled: true
     themes: ['@theme1']
     exportable: true
     publishedAt: <dateTimeBetween('-50 days', 'now')>
+    visibility: 2
   p15:
     id: 'project15'
     title: BP avec vote classement
     projectType: '@projectType4'
     Author: '@user4'
-    isEnabled: true
     themes: []
     exportable: true
     publishedAt: <dateTimeBetween('-50 days', 'now')>
+    visibility: 2
   p16:
     id: 'project16'
     title: Le P16 un projet à base de riz
     projectType: '@projectType4'
     Author: '@user4'
-    isEnabled: true
     themes: ['@theme3']
     exportable: true
     publishedAt: <dateTimeBetween('-50 days', 'now')>
+    visibility: 2
   p17:
     id: 'ProjectAccessibleForMeOnly'
     title: Project pour La Force (visible par mauriau seulement)
     projectType: '@projectType4'
     Author: '@user516'
-    isEnabled: true
     themes: ['@theme3']
     exportable: true
     publishedAt: <dateTimeBetween('-50 days', 'now')>
@@ -160,7 +162,6 @@ Capco\AppBundle\Entity\Project:
     title: Qui doit conquérir le monde ? | Visible par les admins seulement
     projectType: '@projectType2'
     Author: '@user516'
-    isEnabled: true
     themes: ['@theme2']
     exportable: true
     publishedAt: <dateTimeBetween('-50 days', 'now')>

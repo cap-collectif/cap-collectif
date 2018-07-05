@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
@@ -31,9 +30,9 @@ class Theme implements IndexableInterface
     ];
 
     public static $statusesLabels = [
-         'theme.show.status.closed' => self::STATUS_CLOSED,
-         'theme.show.status.opened' => self::STATUS_OPENED,
-         'theme.show.status.future' => self::STATUS_FUTURE,
+        'theme.show.status.closed' => self::STATUS_CLOSED,
+        'theme.show.status.opened' => self::STATUS_OPENED,
+        'theme.show.status.future' => self::STATUS_FUTURE,
     ];
 
     /**
@@ -491,9 +490,15 @@ class Theme implements IndexableInterface
 
     public function countEnabledProjects()
     {
+        return $this->countPublicProject();
+    }
+
+    public function countPublicProject()
+    {
         $count = 0;
+        /** @var Project $project */
         foreach ($this->projects as $project) {
-            if ($project->getIsEnabled()) {
+            if ($project->isPublic()) {
                 ++$count;
             }
         }
@@ -503,16 +508,20 @@ class Theme implements IndexableInterface
 
     public function countEnabledPosts(): int
     {
-        return $this->posts->map(function (Post $post) {
-            return $post->canDisplay() && $post->getIsPublished();
-        })->count();
+        return $this->posts
+            ->map(function (Post $post) {
+                return $post->canDisplay() && $post->getIsPublished();
+            })
+            ->count();
     }
 
     public function countEnabledEvents(): int
     {
-        return $this->events->map(function (Event $event) {
-            return $event->getIsEnabled();
-        })->count();
+        return $this->events
+            ->map(function (Event $event) {
+                return $event->getIsEnabled();
+            })
+            ->count();
     }
 
     public function isOpened()

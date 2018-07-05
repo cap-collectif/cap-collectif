@@ -1,18 +1,31 @@
 <?php
-
 namespace Capco\AppBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use Capco\AppBundle\Entity\ProjectType;
+use Capco\AppBundle\Traits\ProjectVisibilityTrait;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
+use Symfony\Bridge\Doctrine\ManagerRegistry;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class ProjectTypeRepository extends EntityRepository
+class ProjectTypeRepository extends ServiceEntityRepository
 {
+    use ProjectVisibilityTrait;
+
+    private $token;
+
+    public function __construct(ManagerRegistry $registry, TokenStorageInterface $tokenStorage)
+    {
+        $this->token = $tokenStorage->getToken();
+        parent::__construct($registry, ProjectType::class);
+    }
+
     public function findAll()
     {
         return $this->createQueryBuilder('p')
             ->select('p')
             ->leftJoin('p.projects', 'projects', Join::WITH, 'projects.projectType IS NOT NULL')
-            ->where('projects.isEnabled = true')
+            ->where('projects.visibility >= ' . $this->getVisibilityByViewer())
             ->groupBy('projects.id')
             ->distinct('p.id')
             ->getQuery()

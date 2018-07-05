@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Entity\Project;
@@ -14,7 +13,7 @@ class StepResolver
         $this->urlResolver = $urlResolver;
     }
 
-    public function getLink(AbstractStep $step = null, $absolute = false)
+    public function getLink(?AbstractStep $step = null, $absolute = false)
     {
         return $this->urlResolver->getObjectUrl($step, $absolute);
     }

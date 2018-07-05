@@ -132,7 +132,9 @@ services:
 
   capco.project.search.resolver:
     class: Capco\AppBundle\Resolver\Project\ProjectSearchResolver
-    arguments: ['@capco.project.repository']
+    autowire: true
+    autoconfigure: true
+    public: true
 
   capco.follower.resolver:
     class: Capco\AppBundle\Resolver\ProposalResolver

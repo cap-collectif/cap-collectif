@@ -79,7 +79,7 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
         $this->em->createQuery(
             'UPDATE CapcoUserBundle:User u SET u.projectsCount = (
             SELECT count(p.id) FROM CapcoAppBundle:Project p
-            WHERE p.Author = u AND p.isEnabled = 1
+            WHERE p.Author = u 
             GROUP BY p.Author
             )
             WHERE u.roles like :role

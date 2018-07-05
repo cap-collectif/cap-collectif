@@ -3,12 +3,10 @@ Capco\AppBundle\Entity\OpinionTypeAppendixType:
     appendixType: '@appendixType1'
     opinionType: '@opinionType5'
     position: 1
-
   opinionTypeAppendixType2:
     appendixType: '@appendixType2'
     opinionType: '@opinionType5'
     position: 2
-
   opinionTypeAppendixType3:
     appendixType: '@appendixType3'
     opinionType: '@opinionType1'

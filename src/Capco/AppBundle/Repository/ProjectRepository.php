@@ -1,14 +1,27 @@
 <?php
-
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Theme;
-use Doctrine\ORM\EntityRepository;
+use Capco\AppBundle\Traits\ProjectVisibilityTrait;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class ProjectRepository extends EntityRepository
+class ProjectRepository extends ServiceEntityRepository
 {
+    use ProjectVisibilityTrait;
+
+    private $token;
+
+    public function __construct(ManagerRegistry $registry, TokenStorageInterface $tokenStorage)
+    {
+        $this->token = $tokenStorage->getToken();
+        parent::__construct($registry, Project::class);
+    }
+
     /**
      * @param mixed $slug
      *
@@ -16,7 +29,7 @@ class ProjectRepository extends EntityRepository
      */
     public function getOne($slug)
     {
-        $qb = $this->getIsEnabledQueryBuilder()
+        $qb = $this->getVisibilityQueryBuilder()
             ->addSelect('t', 'pas', 's', 'pov')
             ->leftJoin('p.themes', 't', 'WITH', 't.isEnabled = true')
             ->leftJoin('p.steps', 'pas')
@@ -26,33 +39,28 @@ class ProjectRepository extends EntityRepository
             ->andWhere('s.isEnabled = true')
             ->setParameter('slug', $slug);
 
-        return $qb
-            ->getQuery()
-            ->getOneOrNullResult();
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
     public function getByUser($user)
     {
-        $qb = $this->getIsEnabledQueryBuilder()
+        $qb = $this->getVisibilityQueryBuilder()
             ->addSelect('a', 'm', 't')
             ->leftJoin('p.Author', 'a')
             ->leftJoin('a.media', 'm')
             ->leftJoin('p.projectType', 't')
             ->andWhere('p.Author = :user')
             ->setParameter('user', $user)
-            ->orderBy('p.updatedAt', 'DESC')
-        ;
+            ->orderBy('p.updatedAt', 'DESC');
 
-        return $qb
-            ->getQuery()
-            ->execute();
+        return $qb->getQuery()->execute();
     }
 
     /**
      * Get search results.
      *
-     * @param int  $nbByPage
-     * @param int  $page
+     * @param int $nbByPage
+     * @param int $page
      * @param null $theme
      * @param null $sort
      * @param null $term
@@ -69,13 +77,12 @@ class ProjectRepository extends EntityRepository
         $type = null
     ) {
         if ($page < 1) {
-            throw new \InvalidArgumentException(sprintf(
-                'The argument "page" cannot be lower than 1 (current value: "%s")',
-                $page
-            ));
+            throw new \InvalidArgumentException(
+                sprintf('The argument "page" cannot be lower than 1 (current value: "%s")', $page)
+            );
         }
 
-        $qb = $this->getIsEnabledQueryBuilder()
+        $qb = $this->getVisibilityQueryBuilder()
             ->addSelect('t', 'pas', 's', 'pov')
             ->leftJoin('p.themes', 't')
             ->leftJoin('p.steps', 'pas')
@@ -85,24 +92,21 @@ class ProjectRepository extends EntityRepository
             ->addOrderBy('p.publishedAt', 'DESC');
 
         if (null !== $theme && Theme::FILTER_ALL !== $theme) {
-            $qb->andWhere('t.slug = :theme')
-                ->setParameter('theme', $theme)
-            ;
+            $qb->andWhere('t.slug = :theme')->setParameter('theme', $theme);
         }
 
         if (null !== $term) {
-            $qb->andWhere('p.title LIKE :term')
-                ->setParameter('term', '%' . $term . '%')
-            ;
+            $qb->andWhere('p.title LIKE :term')->setParameter('term', '%' . $term . '%');
         }
 
         if (null !== $type) {
-            $qb->andWhere('projectType.slug = :type')
-                ->setParameter('type', $type)
-            ;
+            $qb->andWhere('projectType.slug = :type')->setParameter('type', $type);
         }
 
-        if (isset(Project::$sortOrder[$sort]) && Project::SORT_ORDER_CONTRIBUTIONS_COUNT === Project::$sortOrder[$sort]) {
+        if (
+            isset(Project::$sortOrder[$sort]) &&
+            Project::SORT_ORDER_CONTRIBUTIONS_COUNT === Project::$sortOrder[$sort]
+        ) {
             $qb->orderBy('p.contributionsCount', 'DESC');
         } else {
             $qb->orderBy('p.publishedAt', 'DESC');
@@ -111,8 +115,7 @@ class ProjectRepository extends EntityRepository
         $query = $qb->getQuery();
 
         if ($nbByPage > 0) {
-            $query->setFirstResult(($page - 1) * $nbByPage)
-                ->setMaxResults($nbByPage);
+            $query->setFirstResult(($page - 1) * $nbByPage)->setMaxResults($nbByPage);
         }
 
         return new Paginator($query);
@@ -128,27 +131,19 @@ class ProjectRepository extends EntityRepository
      */
     public function countSearchResults($themeSlug = null, $term = null)
     {
-        $qb = $this->getIsEnabledQueryBuilder()
+        $qb = $this->getVisibilityQueryBuilder()
             ->select('COUNT(p.id)')
-            ->innerJoin('p.themes', 't')
-        ;
+            ->innerJoin('p.themes', 't');
 
         if (null !== $themeSlug && Theme::FILTER_ALL !== $themeSlug) {
-            $qb->andWhere('t.slug = :themeSlug')
-                ->setParameter('themeSlug', $themeSlug)
-            ;
+            $qb->andWhere('t.slug = :themeSlug')->setParameter('themeSlug', $themeSlug);
         }
 
         if (null !== $term) {
-            $qb->andWhere('p.title LIKE :term')
-                ->setParameter('term', '%' . $term . '%')
-            ;
+            $qb->andWhere('p.title LIKE :term')->setParameter('term', '%' . $term . '%');
         }
 
-        return $qb
-            ->getQuery()
-            ->getSingleScalarResult()
-        ;
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
     /**
@@ -159,7 +154,7 @@ class ProjectRepository extends EntityRepository
      */
     public function getLastPublished($limit = 1, $offset = 0)
     {
-        $qb = $this->getIsEnabledQueryBuilder()
+        $qb = $this->getVisibilityQueryBuilder()
             ->addSelect('t', 'pas', 's', 'pov')
             ->leftJoin('p.themes', 't')
             ->leftJoin('p.steps', 'pas')
@@ -187,7 +182,7 @@ class ProjectRepository extends EntityRepository
 
     public function getProjectsByTheme(Theme $theme): array
     {
-        $query = $this->getIsEnabledQueryBuilder()
+        $query = $this->getVisibilityQueryBuilder()
             ->addSelect('t', 'pas', 's', 'pov')
             ->leftJoin('p.themes', 't')
             ->leftJoin('p.steps', 'pas')
@@ -203,9 +198,7 @@ class ProjectRepository extends EntityRepository
 
     public function countPublished()
     {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->select('COUNT(p.id)')
-        ;
+        $qb = $this->getVisibilityQueryBuilder()->select('COUNT(p.id)');
 
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -214,15 +207,15 @@ class ProjectRepository extends EntityRepository
      * Get last projects by theme.
      *
      * @param theme
-     * @param int   $limit
-     * @param int   $offset
+     * @param int $limit
+     * @param int $offset
      * @param mixed $themeId
      *
      * @return mixed
      */
     public function getLastByTheme($themeId, $limit = null, $offset = null)
     {
-        $qb = $this->getIsEnabledQueryBuilder()
+        $qb = $this->getVisibilityQueryBuilder()
             ->addSelect('pov', 't', 'pas', 's')
             ->leftJoin('p.Cover', 'pov')
             ->leftJoin('p.themes', 't')
@@ -249,9 +242,10 @@ class ProjectRepository extends EntityRepository
         return $projects;
     }
 
-    protected function getIsEnabledQueryBuilder()
+    public function getVisibilityQueryBuilder(): QueryBuilder
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.isEnabled = true');
+        $visibility = $this->getVisibilityByViewer();
+
+        return $this->createQueryBuilder('p')->andWhere("p.visibility >= $visibility");
     }
 }

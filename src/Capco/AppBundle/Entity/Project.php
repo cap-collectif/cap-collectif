@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
@@ -26,7 +25,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Project implements IndexableInterface
 {
-    use UuidTrait, MetaDescriptionCustomCodeTrait;
+    use UuidTrait, MetaDescriptionCustomCodeTrait, ProjectVisibilityTrait;
 
     const FILTER_ALL = 'all';
 
@@ -57,8 +56,8 @@ class Project implements IndexableInterface
     ];
 
     public static $opinionTermsLabels = [
-         'project.opinion_term.opinion' => self::OPINION_TERM_OPINION,
-         'project.opinion_term.article' => self::OPINION_TERM_ARTICLE,
+        'project.opinion_term.opinion' => self::OPINION_TERM_OPINION,
+        'project.opinion_term.article' => self::OPINION_TERM_ARTICLE,
     ];
 
     /**
@@ -695,20 +694,14 @@ class Project implements IndexableInterface
 
     // ******************** Custom methods ******************************
 
-    /**
-     * @return bool
-     */
-    public function canDisplay()
+    public function canDisplay(?User $user = null): bool
     {
-        return $this->isEnabled;
+        return $this->getVisibilityByViewer($user) === ProjectVisibilityMode::VISIBILITY_PUBLIC;
     }
 
-    /**
-     * @return bool
-     */
-    public function canContribute()
+    public function canContribute(?User $user = null): bool
     {
-        return $this->isEnabled;
+        return $this->getVisibilityByViewer($user) === ProjectVisibilityMode::VISIBILITY_PUBLIC;
     }
 
     /**
@@ -719,7 +712,9 @@ class Project implements IndexableInterface
         $count = 0;
         foreach ($this->steps as $step) {
             if ($step->getStep()->isConsultationStep()) {
-                $count += ($step->getStep()->getOpinionCount() + $step->getStep()->getTrashedOpinionCount());
+                $count += (
+                    $step->getStep()->getOpinionCount() + $step->getStep()->getTrashedOpinionCount()
+                );
             }
         }
 
@@ -749,7 +744,10 @@ class Project implements IndexableInterface
         $count = 0;
         foreach ($this->steps as $step) {
             if ($step->getStep()->isConsultationStep()) {
-                $count += ($step->getStep()->getOpinionVersionsCount() + $step->getStep()->getTrashedOpinionVersionsCount());
+                $count += (
+                    $step->getStep()->getOpinionVersionsCount() +
+                        $step->getStep()->getTrashedOpinionVersionsCount()
+                );
             }
         }
 
@@ -764,7 +762,10 @@ class Project implements IndexableInterface
         $count = 0;
         foreach ($this->steps as $step) {
             if ($step->getStep()->isConsultationStep()) {
-                $count += ($step->getStep()->getArgumentCount() + $step->getStep()->getTrashedArgumentCount());
+                $count += (
+                    $step->getStep()->getArgumentCount() +
+                        $step->getStep()->getTrashedArgumentCount()
+                );
             }
         }
 
@@ -776,7 +777,9 @@ class Project implements IndexableInterface
         $count = 0;
         foreach ($this->steps as $step) {
             if ($step->getStep()->isConsultationStep()) {
-                $count += ($step->getStep()->getSourcesCount() + $step->getStep()->getTrashedSourceCount());
+                $count += (
+                    $step->getStep()->getSourcesCount() + $step->getStep()->getTrashedSourceCount()
+                );
             }
         }
 
@@ -869,7 +872,12 @@ class Project implements IndexableInterface
 
         foreach ($this->steps as $pas) {
             $step = $pas->getStep();
-            if ($step->isConsultationStep() || $step->isCollectStep() || $step->isSelectionStep() || $step->isQuestionnaireStep()) {
+            if (
+                $step->isConsultationStep() ||
+                $step->isCollectStep() ||
+                $step->isSelectionStep() ||
+                $step->isQuestionnaireStep()
+            ) {
                 $steps[] = $pas;
             }
         }

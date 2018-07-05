@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Resolver\Project;
 
 use Capco\AppBundle\Repository\ProjectRepository;
@@ -22,18 +21,16 @@ class ProjectSearchResolver
         return [
             'projects' => $projects->getIterator()->getArrayCopy(),
             'page' => $projectSearchParameters->getPage(),
-            'pages' => $projectSearchParameters->getElements() > 0
-                ? ceil($count / $projectSearchParameters->getElements())
-                : 1,
+            'pages' =>
+                $projectSearchParameters->getElements() > 0
+                    ? ceil($count / $projectSearchParameters->getElements())
+                    : 1,
             'count' => $count,
         ];
     }
 
     protected function getProjects(ProjectSearchParameters $projectSearchParameters): Paginator
     {
-        return \call_user_func_array(
-            [$this->projectRepository, 'getSearchResults'],
-            $projectSearchParameters->toArray()
-        );
+        return $this->projectRepository->getSearchResults(...$projectSearchParameters->toArray());
     }
 }
