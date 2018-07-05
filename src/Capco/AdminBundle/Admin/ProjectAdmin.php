@@ -3,6 +3,8 @@
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\ProjectVisibilityMode;
+use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -289,9 +291,8 @@ class ProjectAdmin extends CapcoAdmin
                 'visibility',
                 ChoiceType::class,
                 [
-                    'choices' => Project::VISIBILITY,
-                    'help' => 'who-can-see-this-project',
-                    'label' => 'project-access',
+                    'choices' => ProjectVisibilityMode::VISIBILITY,
+                    'label' => 'who-can-see-this-project',
                     'multiple' => false,
                     'expanded' => true,
                     'required' => true,

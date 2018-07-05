@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
+use Capco\AppBundle\Traits\ProjectVisibilityTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\UserBundle\Entity\User;
@@ -38,16 +39,6 @@ class Project implements IndexableInterface
 
     const OPINION_TERM_OPINION = 0;
     const OPINION_TERM_ARTICLE = 1;
-
-    public const VISIBILITY_ME = 0;
-    public const VISIBILITY_ADMIN = 1;
-    public const VISIBILITY_PUBLIC = 2;
-
-    public const VISIBILITY = [
-        'myself' => self::VISIBILITY_ME,
-        'private' => self::VISIBILITY_ADMIN,
-        'public' => self::VISIBILITY_PUBLIC,
-    ];
 
     public static $sortOrder = [
         'date' => self::SORT_ORDER_PUBLISHED_AT,
@@ -88,13 +79,6 @@ class Project implements IndexableInterface
      * @ORM\Column(length=255)
      */
     private $slug;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="is_enabled", type="boolean")
-     */
-    private $isEnabled = true;
 
     /**
      * @var bool
@@ -227,7 +211,7 @@ class Project implements IndexableInterface
     /**
      * @ORM\Column(name="visibility", type="integer", nullable=false)
      */
-    private $visibility = self::VISIBILITY_ME;
+    private $visibility = ProjectVisibilityMode::VISIBILITY_ME;
 
     /**
      * Constructor.
@@ -299,30 +283,6 @@ class Project implements IndexableInterface
     public function setSlug($slug)
     {
         $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get isEnabled.
-     *
-     * @return bool
-     */
-    public function getIsEnabled()
-    {
-        return $this->isEnabled;
-    }
-
-    /**
-     * Set isEnabled.
-     *
-     * @param bool $isEnabled
-     *
-     * @return Project
-     */
-    public function setIsEnabled($isEnabled)
-    {
-        $this->isEnabled = $isEnabled;
 
         return $this;
     }
@@ -858,7 +818,7 @@ class Project implements IndexableInterface
         return $this->getCurrentStep() ? $this->getCurrentStep()->getStartAt() : null;
     }
 
-    public function getCurrentStep()
+    public function getCurrentStep(): ?AbstractStep
     {
         foreach ($this->steps as $step) {
             if ($step->getStep()->isOpen()) {
@@ -876,6 +836,8 @@ class Project implements IndexableInterface
                 return $step->getStep();
             }
         }
+
+        return null;
     }
 
     public function isClosed(): bool
@@ -958,7 +920,7 @@ class Project implements IndexableInterface
 
     public function isIndexable(): bool
     {
-        return $this->getIsEnabled();
+        return $this->isPublic();
     }
 
     public static function getElasticsearchTypeName(): string
@@ -996,6 +958,6 @@ class Project implements IndexableInterface
 
     public function isPublic(): bool
     {
-        return self::VISIBILITY_PUBLIC === $this->getVisibility();
+        return ProjectVisibilityMode::VISIBILITY_PUBLIC === $this->getVisibility();
     }
 }

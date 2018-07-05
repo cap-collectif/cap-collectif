@@ -3,6 +3,7 @@
 namespace Application\Migrations;
 
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\ProjectVisibilityMode;
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
@@ -37,7 +38,7 @@ class Version20180702151723 extends AbstractMigration
     {
         $projects = $this->connection->fetchAll('SELECT id FROM project');
         foreach ($projects as $project) {
-            $this->connection->update('project', ['visibility' => Project::VISIBILITY_PUBLIC], ['id' => $project['id']]);
+            $this->connection->update('project', ['visibility' => ProjectVisibilityMode::VISIBILITY_PUBLIC], ['id' => $project['id']]);
         }
     }
 }

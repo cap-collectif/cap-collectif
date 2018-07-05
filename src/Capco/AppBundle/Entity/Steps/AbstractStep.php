@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity\Steps;
 
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Traits\DateHelperTrait;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
@@ -289,6 +290,7 @@ abstract class AbstractStep
 
     public function getProjectId(): ?string
     {
+        /** @var Project $project */
         $project = $this->getProject();
 
         return $project ? $project->getId() : null;
