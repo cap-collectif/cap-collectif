@@ -6,7 +6,6 @@ services:
       - { name: doctrine.event_listener, event: preFlush, method: preFlush }
 
   capco.listener.feature_toggle:
-    public: true
     class: Capco\AppBundle\EventListener\FeatureToggleListener
     arguments:
       - "@capco.toggle.manager"
@@ -15,14 +14,12 @@ services:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
   capco.listener.paris_authentication_exception:
-    public: true
     class: Capco\AppBundle\EventListener\ParisAuthenticationExceptionListener
     tags:
       - { name: kernel.event_listener, event: kernel.exception }
     arguments: ['@logger', '@templating', '@capco.paris.opem_am_client']
 
   capco.listener.locale:
-    public: true
     class: Capco\AppBundle\EventListener\LocaleListener
     arguments:
       - "@capco.site_parameter.resolver"
@@ -30,7 +27,6 @@ services:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 15 }
 
   capco.listener.shield:
-    public: true
     class: Capco\AppBundle\EventListener\ShieldListener
     arguments:
       - "@capco.toggle.manager"
@@ -40,7 +36,6 @@ services:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
   capco.listener.empty_username:
-    public: true
     class: Capco\AppBundle\EventListener\EmptyUsernameListener
     arguments:
       - "@security.token_storage"
@@ -49,42 +44,36 @@ services:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
   capco.diff.subscriber:
-    public: true
     class: Capco\AppBundle\EventListener\DiffSubscriber
     arguments: ["@capco.diff.generator"]
     tags:
         - { name: doctrine.event_subscriber, connection: default }
 
   capco.serialization_listener:
-    public: true
     class: Capco\AppBundle\EventListener\SerializationListener
     arguments: ["@capco.synthesis.log_manager", "@sonata.media.twig.extension", "@jms_serializer"]
     tags:
       - { name: "jms_serializer.event_subscriber" }
 
   capco.comment.serialization_listener:
-    public: true
     class: Capco\AppBundle\EventListener\CommentSerializationListener
     arguments: ["@router", "@security.token_storage"]
     tags:
       - { name: "jms_serializer.event_subscriber" }
 
   capco.theme.serialization_listener:
-    public: true
     class: Capco\AppBundle\EventListener\ThemeSerializationListener
     arguments: ["@router"]
     tags:
       - { name: "jms_serializer.event_subscriber" }
 
   capco.argument.serialization_listener:
-    public: true
     class: Capco\AppBundle\EventListener\ArgumentSerializationListener
     arguments: ["@router", "@security.token_storage"]
     tags:
       - { name: "jms_serializer.event_subscriber" }
 
   capco.proposal.serialization_listener:
-    public: true
     class: Capco\AppBundle\EventListener\ProposalSerializationListener
     arguments:
       - "@capco.proposal_selection_vote.repository"
@@ -92,7 +81,6 @@ services:
     tags:
       - { name: "jms_serializer.event_subscriber" }
   capco.event.serialization_listener:
-    public: true
     class: Capco\AppBundle\EventListener\EventSerializationListener
     arguments:
       - "@router"
@@ -101,21 +89,18 @@ services:
       - { name: "jms_serializer.event_subscriber" }
 
   capco.media_response.serialization_listener:
-    public: true
     class: Capco\AppBundle\EventListener\MediaResponseSerializationListener
     arguments: ["@jms_serializer", "@router", "@sonata.core.twig.template_extension"]
     tags:
       - { name: "jms_serializer.event_subscriber" }
 
   capco.source.serialization_listener:
-    public: true
     class: Capco\AppBundle\EventListener\SourceSerializationListener
     arguments: ["@security.token_storage"]
     tags:
       - { name: "jms_serializer.event_subscriber" }
 
   capco.opinion.serialization_listener:
-    public: true
     class: Capco\AppBundle\EventListener\OpinionSerializationListener
     arguments:
       - "@router"
@@ -126,7 +111,6 @@ services:
       - { name: "jms_serializer.event_subscriber" }
 
   capco.user.serialization_listener:
-    public: true
     class: Capco\AppBundle\EventListener\UserSerializationListener
     arguments:
       - "@router"
@@ -138,20 +122,17 @@ services:
       - { name: "jms_serializer.event_subscriber" }
 
   capco.post.serialization_listener:
-    public: true
     class: Capco\AppBundle\EventListener\PostSerializationListener
     arguments: ["@router"]
     tags:
       - { name: "jms_serializer.event_subscriber" }
 
   capco.synthesis.synthesis_listener:
-    public: true
     class: Capco\AppBundle\EventListener\SynthesisLoggableListener
     calls:
       - [ setAnnotationReader, [ "@annotation_reader" ] ]
 
   capco.opinion_type.serialization_listener:
-    public: true
     class: Capco\AppBundle\EventListener\OpinionTypeSerializationListener
     arguments:
       - "@capco.opinion_types.resolver"
@@ -160,7 +141,6 @@ services:
       - { name: "jms_serializer.event_subscriber" }
 
   capco.proposal_vote.serialization_listener:
-    public: true
     class: Capco\AppBundle\EventListener\ProposalVoteSerializationListener
     arguments:
       - "@translator"
@@ -168,62 +148,53 @@ services:
       - { name: "jms_serializer.event_subscriber" }
 
   capco.selection_step.serialization_listener:
-    public: true
     class: Capco\AppBundle\EventListener\SelectionStepSerializationListener
     arguments: [ "@jms_serializer", "@router"]
     tags:
       - { name: "jms_serializer.event_subscriber" }
 
   capco.consultation_step.serialization_listener:
-    public: true
     class: Capco\AppBundle\EventListener\ConsultationStepSerializationListener
     arguments: []
     tags:
       - { name: "jms_serializer.event_subscriber" }
 
   capco.collect_step.serialization_listener:
-    public: true
     class: Capco\AppBundle\EventListener\CollectStepSerializationListener
     arguments: []
     tags:
       - { name: "jms_serializer.event_subscriber" }
 
   capco.questionnaire_step.serialization_listener:
-    public: true
     class: Capco\AppBundle\EventListener\QuestionnaireStepSerializationListener
     arguments: []
     tags:
       - { name: "jms_serializer.event_subscriber" }
 
   capco.project.serialization_listener:
-    public: true
     class: Capco\AppBundle\EventListener\ProjectSerializationListener
     arguments: ["@capco.step.resolver", "@sonata.media.twig.extension", "@jms_serializer", "@capco.project.helper", "@router" ]
     tags:
      - { name: "jms_serializer.event_subscriber" }
 
   capco.abstract_step.serialization_listener:
-    public: true
     class: Capco\AppBundle\EventListener\AbstractStepSerializationListener
     arguments: ["@capco.step.helper"]
     tags:
       - { name: "jms_serializer.event_subscriber" }
 
   capco.question_choice.serialization_listener:
-    public: true
     class: Capco\AppBundle\EventListener\QuestionChoiceSerializationListener
     arguments: ["@sonata.media.twig.extension"]
     tags:
       - { name: "jms_serializer.event_subscriber" }
 
   capco.listener.reference:
-    public: true
     class: Capco\AppBundle\EventListener\ReferenceEventListener
     tags:
       - { name: doctrine.event_listener, event: preFlush, method: preFlush }
 
   capco.listener.moderation_token:
-    public: true
     class: Capco\AppBundle\EventListener\ModerationTokenListener
     arguments:
       - "@fos_user.util.token_generator"

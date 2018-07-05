@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\UserBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
@@ -19,7 +18,8 @@ use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface as RealUserInterface;
 
-class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInterface, EquatableInterface, IndexableInterface
+class User extends BaseUser
+    implements EncoderAwareInterface, SynthesisUserInterface, EquatableInterface, IndexableInterface
 {
     const SORT_ORDER_CREATED_AT = 0;
     const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;
@@ -295,9 +295,17 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
             $this->setUsername($attributes['oda_prenom'][0] . ' ' . $attributes['oda_nom'][0]);
         }
         if ('daher' === $idp) {
-            $this->setUsername($attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn'][0]);
-            $this->setEmail($attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn'][0]);
-            $this->setEmailCanonical((new Canonicalizer())->canonicalize($attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn'][0]));
+            $this->setUsername(
+                $attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn'][0]
+            );
+            $this->setEmail(
+                $attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn'][0]
+            );
+            $this->setEmailCanonical(
+                (new Canonicalizer())->canonicalize(
+                    $attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn'][0]
+                )
+            );
         }
         if ('afd-interne' === $idp) {
             $this->setUsername($attributes['cn'][0]);
@@ -353,7 +361,11 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
     /*  We check the account is not deleted in case of the user has multiple accounts sessions and just deleted his account */
     public function isEqualTo(RealUserInterface $user)
     {
-        return $user instanceof self && $this->id === $user->getId() && null === $user->getDeletedAccountAt();
+        return (
+            $user instanceof self &&
+            $this->id === $user->getId() &&
+            null === $user->getDeletedAccountAt()
+        );
     }
 
     public function addResponse(AbstractResponse $response): self
@@ -1216,11 +1228,7 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     public function getFullname()
     {
-        return sprintf(
-            '%s %s',
-            $this->getFirstname(),
-            $this->getLastname()
-        );
+        return sprintf('%s %s', $this->getFirstname(), $this->getLastname());
     }
 
     public static function getGenderList()
@@ -1257,12 +1265,26 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
 
     public function getContributionsCount()
     {
-        return $this->sourcesCount + $this->argumentsCount + $this->opinionsCount + $this->opinionVersionsCount + $this->getCommentsCount() + $this->proposalsCount;
+        return (
+            $this->sourcesCount +
+            $this->argumentsCount +
+            $this->opinionsCount +
+            $this->opinionVersionsCount +
+            $this->getCommentsCount() +
+            $this->proposalsCount
+        );
     }
 
     public function getVotesCount()
     {
-        return $this->commentVotesCount + $this->opinionVotesCount + $this->opinionVersionVotesCount + $this->argumentVotesCount + $this->sourceVotesCount + $this->proposalVotesCount;
+        return (
+            $this->commentVotesCount +
+            $this->opinionVotesCount +
+            $this->opinionVersionVotesCount +
+            $this->argumentVotesCount +
+            $this->sourceVotesCount +
+            $this->proposalVotesCount
+        );
     }
 
     public function getCommentsCount()
@@ -1364,8 +1386,9 @@ class User extends BaseUser implements EncoderAwareInterface, SynthesisUserInter
         return $this->notificationsConfiguration;
     }
 
-    public function setNotificationsConfiguration(UserNotificationsConfiguration $notificationsConfiguration): self
-    {
+    public function setNotificationsConfiguration(
+        UserNotificationsConfiguration $notificationsConfiguration
+    ): self {
         $this->notificationsConfiguration = $notificationsConfiguration;
 
         return $this;

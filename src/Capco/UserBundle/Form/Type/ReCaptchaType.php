@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\UserBundle\Form\Type;
 
 use Capco\AppBundle\Validator\Constraints\ReCaptchaConstraint;
@@ -14,9 +13,7 @@ class ReCaptchaType extends AbstractType
             'mapped' => false,
             'required' => true,
             'compound' => false,
-            'constraints' => [
-              new ReCaptchaConstraint(['groups' => ['registration']]),
-            ],
+            'constraints' => [new ReCaptchaConstraint(['groups' => ['registration']])],
         ]);
     }
 }

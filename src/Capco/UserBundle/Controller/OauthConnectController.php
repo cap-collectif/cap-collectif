@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\UserBundle\Controller;
 
 use HWI\Bundle\OAuthBundle\Controller\ConnectController;
@@ -36,20 +35,21 @@ class OauthConnectController extends ConnectController
     public function connectAction(Request $request)
     {
         $connect = $this->container->getParameter('hwi_oauth.connect');
-        $hasUser = $this->container->get('security.token_storage')->isGranted('IS_AUTHENTICATED_REMEMBERED');
+        $hasUser = $this->container
+            ->get('security.token_storage')
+            ->isGranted('IS_AUTHENTICATED_REMEMBERED');
 
         $error = $this->getErrorForRequest($request);
 
         // if connecting is enabled and there is no user, redirect to the registration form
-        if ($connect
-            && !$hasUser
-            && $error instanceof AccountNotLinkedException
-        ) {
+        if ($connect && !$hasUser && $error instanceof AccountNotLinkedException) {
             $key = time();
             $session = $request->getSession();
             $session->set('_hwi_oauth.registration_error.' . $key, $error);
 
-            return new RedirectResponse($this->generateUrl('hwi_oauth_connect_registration', ['key' => $key]));
+            return new RedirectResponse(
+                $this->generateUrl('hwi_oauth_connect_registration', ['key' => $key])
+            );
         }
 
         if ($error) {
@@ -73,7 +73,9 @@ class OauthConnectController extends ConnectController
     public function connectServiceAction(Request $request, $service)
     {
         if (!$this->serviceHasEnabledFeature($service)) {
-            $message = $this->container->get('translator')->trans('error.feature_not_enabled', [], 'CapcoAppBundle');
+            $message = $this->container
+                ->get('translator')
+                ->trans('error.feature_not_enabled', [], 'CapcoAppBundle');
             throw new NotFoundHttpException($message);
         }
 
@@ -91,7 +93,9 @@ class OauthConnectController extends ConnectController
     public function redirectToServiceAction(Request $request, $service)
     {
         if (!$this->serviceHasEnabledFeature($service)) {
-            $message = $this->container->get('translator')->trans('error.feature_not_enabled', [], 'CapcoAppBundle');
+            $message = $this->container
+                ->get('translator')
+                ->trans('error.feature_not_enabled', [], 'CapcoAppBundle');
             throw new NotFoundHttpException($message);
         }
 

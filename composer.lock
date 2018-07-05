@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "667211701063982fa93f0ca74dba6a4c",
+    "content-hash": "cca3ba9c8f0c87bc7ee3fb479a68a61e",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -5624,55 +5624,55 @@
         },
         {
             "name": "overblog/graphql-bundle",
-            "version": "v0.11.1",
+            "version": "v0.9.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overblog/GraphQLBundle.git",
-                "reference": "db25cfff3ae47182f7da53b1d35680a0eedd628c"
+                "reference": "352700bbb806176461d22db2c1f587e706cba6d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/overblog/GraphQLBundle/zipball/db25cfff3ae47182f7da53b1d35680a0eedd628c",
-                "reference": "db25cfff3ae47182f7da53b1d35680a0eedd628c",
+                "url": "https://api.github.com/repos/overblog/GraphQLBundle/zipball/352700bbb806176461d22db2c1f587e706cba6d2",
+                "reference": "352700bbb806176461d22db2c1f587e706cba6d2",
                 "shasum": ""
             },
             "require": {
-                "overblog/graphql-php-generator": "^0.7.0",
-                "php": ">=5.6",
-                "psr/log": "^1.0",
-                "symfony/config": "^3.1 || ^4.0",
-                "symfony/dependency-injection": "^3.1 || ^4.0",
-                "symfony/event-dispatcher": "^3.1 || ^4.0",
-                "symfony/expression-language": "^3.1 || ^4.0",
-                "symfony/framework-bundle": "^3.1 || ^4.0",
-                "symfony/options-resolver": "^3.1 || ^4.0",
-                "symfony/property-access": "^3.1 || ^4.0",
-                "webonyx/graphql-php": "^0.11.2 || ^0.12.0"
+                "doctrine/doctrine-cache-bundle": "^1.2",
+                "overblog/graphql-php-generator": "^0.5.0",
+                "php": ">=5.5.9",
+                "symfony/cache": "^3.1",
+                "symfony/expression-language": "^2.8 || ^3.0",
+                "symfony/framework-bundle": "^2.8 || ^3.0",
+                "symfony/options-resolver": "^2.8 || ^3.0",
+                "symfony/property-access": "^2.8 || ^3.0",
+                "webonyx/graphql-php": "^0.10.0 || ^0.11.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^5.7.26 || ^6.0",
+                "friendsofphp/php-cs-fixer": "^1.11",
+                "phpunit/phpunit": "^4.1 || ^5.5 || ^6.0",
                 "react/promise": "^2.5",
                 "sensio/framework-extra-bundle": "^3.0",
-                "symfony/asset": "^3.1 || ^4.0",
-                "symfony/browser-kit": "^3.1 || ^4.0",
-                "symfony/console": "^3.1 || ^4.0",
-                "symfony/css-selector": "^3.1 || ^4.0",
-                "symfony/phpunit-bridge": "^3.1 || ^4.0",
-                "symfony/process": "^3.1 || ^4.0",
-                "symfony/security-bundle": "^3.1 || ^4.0",
-                "symfony/templating": "^3.1 || ^4.0",
-                "symfony/web-profiler-bundle": "^3.1 || ^4.0",
-                "symfony/yaml": "^3.1 || ^4.0"
+                "sllh/php-cs-fixer-styleci-bridge": "^1.5",
+                "symfony/asset": "^2.8 || ^3.0",
+                "symfony/browser-kit": "^2.8 || ^3.0",
+                "symfony/css-selector": "^2.8 || ^3.0",
+                "symfony/dependency-injection": "^2.8 || ^3.0",
+                "symfony/phpunit-bridge": "^2.8 || ^3.0",
+                "symfony/security-bundle": "^2.8 || ^3.0",
+                "symfony/templating": "^2.8 || ^3.0",
+                "symfony/twig-bundle": "^2.8 || ^3.0",
+                "symfony/web-profiler-bundle": "^2.8 || ^3.0",
+                "symfony/yaml": "^2.8 || ^3.0"
             },
             "suggest": {
                 "nelmio/cors-bundle": "For more flexibility when using CORS prefight",
-                "overblog/graphiql-bundle": "If you want to use graphiQL.",
-                "react/promise": "To use ReactPHP promise adapter"
+                "react/promise": "To use ReactPHP promise adapter",
+                "twig/twig": "If you want to use graphiQL."
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.11-dev"
+                    "dev-master": "0.9-dev"
                 }
             },
             "autoload": {
@@ -5698,34 +5698,34 @@
                 "Relay",
                 "graphql"
             ],
-            "time": "2018-05-31T09:11:13+00:00"
+            "time": "2017-10-28T16:57:46+00:00"
         },
         {
             "name": "overblog/graphql-php-generator",
-            "version": "v0.7.3",
+            "version": "v0.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overblog/GraphQLPhpGenerator.git",
-                "reference": "acea33b6db4cf3943b92b07c8ad69df97127e628"
+                "reference": "bca60ad7214c2ad451b992ab6c5acea89531fceb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/overblog/GraphQLPhpGenerator/zipball/acea33b6db4cf3943b92b07c8ad69df97127e628",
-                "reference": "acea33b6db4cf3943b92b07c8ad69df97127e628",
+                "url": "https://api.github.com/repos/overblog/GraphQLPhpGenerator/zipball/bca60ad7214c2ad451b992ab6c5acea89531fceb",
+                "reference": "bca60ad7214c2ad451b992ab6c5acea89531fceb",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.5|~7.0",
-                "webonyx/graphql-php": "^0.11.2|^0.12.0"
+                "php": "^5.4|~7.0",
+                "webonyx/graphql-php": "^0.10.0 || ^0.11.0"
             },
             "require-dev": {
                 "fabpot/php-cs-fixer": "^1.11",
                 "phpunit/phpunit": "^4.1|^5.1",
                 "sllh/php-cs-fixer-styleci-bridge": "^1.5",
-                "symfony/expression-language": "^3.3",
-                "symfony/filesystem": "^3.3",
-                "symfony/process": "^3.3",
-                "symfony/yaml": "^3.3"
+                "symfony/expression-language": "^2.7|^3.0",
+                "symfony/filesystem": "^2.7|^3.0",
+                "symfony/process": "^2.7|^3.0",
+                "symfony/yaml": "^2.7|^3.0"
             },
             "type": "library",
             "autoload": {
@@ -5749,7 +5749,7 @@
                 "graphql",
                 "type"
             ],
-            "time": "2018-05-30T06:14:42+00:00"
+            "time": "2017-09-21T09:27:43+00:00"
         },
         {
             "name": "pagerfanta/pagerfanta",
@@ -11011,21 +11011,21 @@
         },
         {
             "name": "webonyx/graphql-php",
-            "version": "v0.12.2",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/webonyx/graphql-php.git",
-                "reference": "167c3e735451633a524787b3103d3536cb9d78ea"
+                "url": "https://github.com/cap-collectif/graphql-php.git",
+                "reference": "efe1bcf052d4b42910c9f96fad3c10e4482ef7a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webonyx/graphql-php/zipball/167c3e735451633a524787b3103d3536cb9d78ea",
-                "reference": "167c3e735451633a524787b3103d3536cb9d78ea",
+                "url": "https://api.github.com/repos/cap-collectif/graphql-php/zipball/efe1bcf052d4b42910c9f96fad3c10e4482ef7a8",
+                "reference": "efe1bcf052d4b42910c9f96fad3c10e4482ef7a8",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
-                "php": ">=5.6"
+                "php": ">=5.5,<8.0-DEV"
             },
             "require-dev": {
                 "phpunit/phpunit": "^4.8",
@@ -11037,21 +11037,33 @@
             },
             "type": "library",
             "autoload": {
+                "files": [
+                    "src/deprecated.php"
+                ],
                 "psr-4": {
                     "GraphQL\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "GraphQL\\Tests\\": "tests/",
+                    "GraphQL\\Benchmarks\\": "benchmarks/",
+                    "GraphQL\\Examples\\Blog\\": "examples/01-blog/Blog/"
+                }
+            },
             "license": [
                 "MIT"
             ],
             "description": "A PHP port of GraphQL reference implementation",
             "homepage": "https://github.com/webonyx/graphql-php",
             "keywords": [
-                "api",
+                "API",
                 "graphql"
             ],
-            "time": "2018-06-25T16:56:32+00:00"
+            "support": {
+                "source": "https://github.com/cap-collectif/graphql-php/tree/master"
+            },
+            "time": "2018-02-22T10:14:53+00:00"
         },
         {
             "name": "whitehat101/apr1-md5",
@@ -12575,7 +12587,6 @@
                 "PHPStan",
                 "symfony"
             ],
-            "abandoned": "phpstan/phpstan-symfony",
             "time": "2018-01-18T10:20:29+00:00"
         },
         {
@@ -13138,74 +13149,6 @@
                 "xml conversion"
             ],
             "time": "2015-09-16T18:59:23+00:00"
-        },
-        {
-            "name": "overblog/graphiql-bundle",
-            "version": "v0.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/overblog/GraphiQLBundle.git",
-                "reference": "e3164ef62ff7fd91954009266e84803a6543ae96"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/overblog/GraphiQLBundle/zipball/e3164ef62ff7fd91954009266e84803a6543ae96",
-                "reference": "e3164ef62ff7fd91954009266e84803a6543ae96",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.6 || ^7.0",
-                "symfony/http-foundation": "^3.2.2 || ^4.0",
-                "symfony/routing": "^3.2 || ^4.0",
-                "symfony/twig-bundle": "^3.2.10 || ^4.0"
-            },
-            "require-dev": {
-                "overblog/graphql-bundle": "^0.9.0 || ^0.10.0",
-                "phpunit/phpunit": "^5.7 || ^6.0",
-                "sensio/framework-extra-bundle": "^3.0 || ^4.0",
-                "symfony/browser-kit": "^3.2 || ^4.0",
-                "symfony/config": "^3.2 || ^4.0",
-                "symfony/console": "^3.2 || ^4.0",
-                "symfony/dependency-injection": "^3.2 || ^4.0",
-                "symfony/expression-language": "^3.2 || ^4.0",
-                "symfony/framework-bundle": "^3.2.2 || ^4.0",
-                "symfony/templating": "^3.2 || ^4.0",
-                "symfony/yaml": "^3.2 || ^4.0"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Overblog\\GraphiQLBundle\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Overblog",
-                    "homepage": "http://www.over-blog.com"
-                },
-                {
-                    "name": "Renato Mefi",
-                    "email": "renato@mefi.in"
-                }
-            ],
-            "description": "Symfony GraphiQLBundle makes possible to render the UI into your symfony project",
-            "keywords": [
-                "graphiql",
-                "graphql"
-            ],
-            "time": "2018-05-14T09:39:33+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -14873,6 +14816,12 @@
             "alias_normalized": "1.0.0.0",
             "version": "dev-fix/2-nested-serializer-calls",
             "package": "jms/serializer"
+        },
+        {
+            "alias": "0.11.2",
+            "alias_normalized": "0.11.2.0",
+            "version": "9999999-dev",
+            "package": "webonyx/graphql-php"
         }
     ],
     "minimum-stability": "stable",
@@ -14885,6 +14834,8 @@
         "gfreeau/get-jwt-bundle": 20,
         "cocur/slugify": 20,
         "phayes/geophp": 20,
+        "webonyx/graphql-php": 20,
+        "overblog/graphql-php-generator": 20,
         "tweedegolf/prometheus-bundle": 20,
         "tonicforhealth/behat-parallel-scenario": 20,
         "sensiolabs/behat-page-object-extension": 20,

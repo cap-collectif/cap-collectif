@@ -11,7 +11,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Request;
 
 class ProposalFormProposalsResolver implements ResolverInterface
 {
@@ -24,7 +24,7 @@ class ProposalFormProposalsResolver implements ResolverInterface
         $this->proposalSearch = $proposalSearch;
     }
 
-    public function __invoke(ProposalForm $form, Arg $args, $user, RequestStack $request): Connection
+    public function __invoke(ProposalForm $form, Arg $args, $user, Request $request): Connection
     {
         $totalCount = 0;
         $filters = [];
@@ -93,9 +93,9 @@ class ProposalFormProposalsResolver implements ResolverInterface
             $order = self::findOrderFromFieldAndDirection($field, $direction);
 
             $filters['proposalForm'] = $form->getId();
-            $filters['collectStep'] = $form->getStep()->getId();
+            $filters['collectStep'] = $form->getStep()->getType();
 
-            $seed = $user instanceof User ? $user->getId() : $request->getCurrentRequest()->getClientIp();
+            $seed = $user instanceof User ? $user->getId() : $request->getClientIp();
 
             $results = $this->proposalSearch->searchProposals(
                     $offset,

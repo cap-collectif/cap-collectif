@@ -5,12 +5,10 @@ namespace Capco\AppBundle\GraphQL\Resolver\Step;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\Resolver\ProposalForm\ProposalFormProposalsResolver;
 use Capco\AppBundle\Search\ProposalSearch;
-use Capco\AppBundle\Utils\Text;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 class SelectionStepProposalResolver
 {
@@ -23,7 +21,7 @@ class SelectionStepProposalResolver
         $this->proposalSearch = $proposalSearch;
     }
 
-    public function __invoke(SelectionStep $selectionStep, Argument $args, $user, RequestStack $request): Connection
+    public function __invoke(SelectionStep $selectionStep, Argument $args, $user, $request): Connection
     {
         $totalCount = 0;
         $term = null;
@@ -54,13 +52,7 @@ class SelectionStepProposalResolver
                 $order = ProposalFormProposalsResolver::findOrderFromFieldAndDirection($field, $direction);
                 $filters['selectionStep'] = $selectionStep->getId();
 
-                if (method_exists($user, 'getId')) {
-                    $seed = $user->getId();
-                } elseif ($request->getCurrentRequest()) {
-                    $seed = $request->getCurrentRequest()->getClientIp();
-                } else {
-                    $seed = Text::random();
-                }
+                $seed = method_exists($user, 'getId') ? $user->getId() : $request->getClientIp();
 
                 $results = $this->proposalSearch->searchProposals(
                     $offset,

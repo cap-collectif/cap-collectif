@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\UserBundle\Repository;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
@@ -12,10 +11,7 @@ class UserTypeRepository extends EntityRepository
 {
     public function findAllToArray()
     {
-        $qb = $this->createQueryBuilder('ut')
-          ->select('ut.name as name, ut.id as id')
-      ;
-
+        $qb = $this->createQueryBuilder('ut')->select('ut.name as name, ut.id as id');
         return $qb->getQuery()->getArrayResult();
     }
 
@@ -23,7 +19,8 @@ class UserTypeRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('ut')
             ->select('ut.name as name')
-            ->addSelect('(
+            ->addSelect(
+                '(
                 SELECT COUNT(p.id) as pCount
                 FROM CapcoAppBundle:Proposal p
                 LEFT JOIN p.proposalForm pf
@@ -33,11 +30,10 @@ class UserTypeRepository extends EntityRepository
                 AND p.enabled = true
                 AND paut.id = ut.id
                 AND p.isTrashed = false
-            ) as value')
+            ) as value'
+            )
             ->setParameter('step', $step)
-            ->orderBy('value', 'DESC')
-        ;
-
+            ->orderBy('value', 'DESC');
         if ($limit) {
             $qb->setMaxResults($limit);
         }
@@ -47,10 +43,7 @@ class UserTypeRepository extends EntityRepository
 
     public function countAll()
     {
-        $qb = $this->createQueryBuilder('ut')
-            ->select('COUNT(ut.id)')
-        ;
-
+        $qb = $this->createQueryBuilder('ut')->select('COUNT(ut.id)');
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 }

@@ -1,6 +1,5 @@
 OpinionType:
     type: object
-    inherits: [Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
     config:
         description: "A type of opinion"
         interfaces: [Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
@@ -8,16 +7,33 @@ OpinionType:
             createdAt:
                 type: "DateTime!"
                 description: "Identifies the date and time when the object was created."
-            show_url:
-                resolve: "@=resolver('proposition_url', [value])"
+                resolve: "@=value.getCreatedAt()"
+            updatedAt:
+                type: "DateTime"
+                description: "Identifies the date and time when the object was last updated."
+                resolve: "@=value.getUpdatedAt()"
             url:
+                type: "URI!"
+                description: "The url of contribution."
                 resolve: "@=resolver('proposition_url', [value])"
+            author:
+                type: "User!"
+                description: "The author of the contribution."
             type:
                 type: "OpinionType!"
             expired:
                 type: "Boolean!"
             published:
                 type: "Boolean!"
+            trashed:
+                type: "Boolean!"
+            trashedAt:
+                type: "String"
+                description: "Date of trash."
+                resolve: "@=resolver('proposition_trashedAt', [value])"
+            trashedReason:
+                type: "String"
+                description: "Reason of trash."
             votesCount:
                 type: "Int!"
                 description: "Number of votes."
@@ -54,8 +70,15 @@ OpinionType:
                     first:
                         type: "Int"
                 resolve: "@=resolver('proposition_votes', [value, args])"
+            id:
+                type: "ID!"
+                description: "The content of the contribution."
+            related:
+                type: "Contribution"
+                description: "Return the related contribution if the contribution is related to another."
             kind:
-                resolve: "opinionType"
+                type: "String!"
+                description: "The kind of contribution."
             title:
                 type: "String!"
                 description: "The title of the contribution."

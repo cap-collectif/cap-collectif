@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\UserBundle\Form\Type;
 
 use Capco\AppBundle\Form\ValueResponseType;
@@ -25,11 +24,7 @@ class ApiRegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         // disable password repeated
-        $builder
-            ->remove('plainPassword')
-            ->add('plainPassword', PasswordType::class)
-        ;
-
+        $builder->remove('plainPassword')->add('plainPassword', PasswordType::class);
         $builder
             ->add('username', TextType::class, ['required' => true])
             ->add('email', TextType::class, ['required' => true]);
@@ -45,17 +40,14 @@ class ApiRegistrationFormType extends AbstractType
         }
 
         $builder
-            ->add('consentExternalCommunication', CheckboxType::class, [
-                'required' => false,
-            ])
+            ->add('consentExternalCommunication', CheckboxType::class, ['required' => false])
             ->add('responses', CollectionType::class, [
                 'allow_add' => true,
                 'allow_delete' => false,
                 'by_reference' => false,
                 'entry_type' => ValueResponseType::class,
                 'required' => false,
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

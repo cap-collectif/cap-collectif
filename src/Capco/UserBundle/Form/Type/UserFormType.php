@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\UserBundle\Form\Type;
 
 use Capco\UserBundle\Entity\User;
@@ -14,22 +13,18 @@ class UserFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', null, [
-                'required' => true,
-            ])
-            ->add('email', null, [
-                'required' => true,
-            ])
+            ->add('username', null, ['required' => true])
+            ->add('email', null, ['required' => true])
             ->add('plainPassword')
-            ->add(
-                'roles',
-                CollectionType::class,
-                ['entry_type' => TextType::class, 'allow_add' => true, 'allow_delete' => true, 'by_reference' => false]
-            )
+            ->add('roles', CollectionType::class, [
+                'entry_type' => TextType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+            ])
             ->add('locked')
             ->add('vip')
-            ->add('enabled')
-        ;
+            ->add('enabled');
     }
 
     /**
@@ -37,10 +32,6 @@ class UserFormType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(
-            [
-                'data_class' => User::class,
-            ]
-        );
+        $resolver->setDefaults(['data_class' => User::class]);
     }
 }

@@ -1,10 +1,11 @@
 Comment:
     type: object
-    inherits: [Node, Contribution]
     config:
         description: "A comment"
         interfaces: [Node, Contribution]
         fields:
+            id:
+              type: "ID!"
             body:
               type: "String"
             createdAt:
@@ -18,8 +19,11 @@ Comment:
             pinned:
               type: "Boolean!"
             show_url:
+              type: "String!"
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentShowUrlResolver", [value])'
+              deprecationReason: "Use url instead of show_url"
             url:
+              type: "URI!"
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentShowUrlResolver", [value])'
             answers:
               type: "[Comment]!"
@@ -56,3 +60,9 @@ Comment:
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentVotesResolver", [value, args])'
             trashedReason:
               type: "String"
+            kind:
+              type: "String!"
+              resolve: "@=value.getKind()"
+            related:
+                type: "Contribution"
+                description: "Return the related contribution if the contribution is related to another."
