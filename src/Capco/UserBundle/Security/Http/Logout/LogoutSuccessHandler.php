@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\UserBundle\Security\Http\Logout;
 
 use Capco\AppBundle\Toggle\Manager;
@@ -16,12 +17,8 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
     protected $toggleManager;
     protected $client;
 
-    public function __construct(
-        Simple $samlAuth,
-        Router $router,
-        Manager $toggleManager,
-        OpenAmClient $client
-    ) {
+    public function __construct(Simple $samlAuth, Router $router, Manager $toggleManager, OpenAmClient $client)
+    {
         $this->samlAuth = $samlAuth;
         $this->router = $router;
         $this->toggleManager = $toggleManager;
@@ -32,10 +29,7 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
     {
         /* @var Session $session */
         $deleteType = $request->get('deleteType');
-        $returnTo =
-            'SOFT' === $deleteType || 'HARD' === $deleteType
-                ? $this->router->generate('app_homepage', ['deleteType' => $deleteType])
-                : $request->headers->get('referer', '/');
+        $returnTo = 'SOFT' === $deleteType || 'HARD' === $deleteType ? $this->router->generate('app_homepage', ['deleteType' => $deleteType]) : $request->headers->get('referer', '/');
 
         $request->getSession()->invalidate();
 
@@ -49,11 +43,7 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
             if ($request->cookies->has(OpenAmClient::COOKIE_NAME)) {
                 $this->client->setCookie($request->cookies->get(OpenAmClient::COOKIE_NAME));
                 $this->client->logoutUser();
-                $response->headers->clearCookie(
-                    OpenAmClient::COOKIE_NAME,
-                    '/',
-                    OpenAmClient::COOKIE_DOMAIN
-                );
+                $response->headers->clearCookie(OpenAmClient::COOKIE_NAME, '/', OpenAmClient::COOKIE_DOMAIN);
             }
         }
 

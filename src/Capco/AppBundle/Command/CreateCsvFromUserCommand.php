@@ -4,20 +4,52 @@ namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
 use Box\Spout\Writer\WriterFactory;
+use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\InfoResolver;
+use Capco\AppBundle\Repository\UserArchiveRepository;
 use Capco\AppBundle\Utils\Arr;
 use Capco\UserBundle\Entity\User;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Capco\UserBundle\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Overblog\GraphQLBundle\Request\Executor;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CreateCsvFromUserCommand extends ContainerAwareCommand
+class CreateCsvFromUserCommand extends Command
 {
+    protected static $defaultName = 'capco:export:user';
+
+    protected $userRepository;
+    protected $userArchiveRepository;
+    protected $em;
+    protected $executor;
+    protected $listener;
+    protected $kernelRootDir;
+
+    public function __construct(
+        UserRepository $userRepository,
+        UserArchiveRepository $userArchiveRepository,
+        EntityManagerInterface $em,
+        Executor $executor,
+        GraphQlAclListener $listener,
+        string $kernelRootDir
+    ) {
+        $listener->disableAcl();
+        $this->userRepository = $userRepository;
+        $this->userArchiveRepository = $userArchiveRepository;
+        $this->em = $em;
+        $this->executor = $executor;
+        $this->listener = $listener;
+        $this->kernelRootDir = $kernelRootDir;
+
+        parent::__construct();
+    }
+
     protected function configure(): void
     {
         $this
-            ->setName('capco:export:user')
             ->setDescription('Create csv file from user data')
             ->addArgument('userId', InputArgument::REQUIRED, 'The ID of the user');
     }
@@ -26,19 +58,19 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
     {
         $userId = $input->getArgument('userId');
         /** @var User $user */
-        $user = $this->getContainer()->get('capco.user.repository')->find($userId);
+        $user = $this->userRepository->find($userId);
 
         $datas = $this->requestDatas($userId);
         foreach ($datas as $key => $value) {
             $this->createCsv($userId, $value, $key);
         }
 
-        $archive = $this->getContainer()->get('capco.user_archive.repository')->getLastForUser($user);
+        $archive = $this->userArchiveRepository->getLastForUser($user);
 
         if ($archive) {
             $archive->setReady(true);
             $archive->setPath(trim($this->getZipFilenameForUser($userId)));
-            $this->getContainer()->get('doctrine.orm.entity_manager')->flush();
+            $this->em->flush();
         }
 
         $output->writeln($this->getZipFilenameForUser($userId));
@@ -46,94 +78,31 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
 
     protected function requestDatas(string $userId): array
     {
-        $executor = $this->getContainer()->get('overblog_graphql.request_executor')->disabledDebugInfo();
+        $datas = [];
 
-        // TODO disable ACL or give admin rights (to disable access)
-        $datas['user'] = $executor->execute(
-            [
-                'query' => $this->getUserGraphQLQuery($userId),
-                'variables' => [],
-            ],
-            ['disable_acl' => true]
-        )->toArray();
+        $types = [
+            'user' => $this->getUserGraphQLQuery($userId),
+            'questions' => $this->getRepliesGraphQLQuery($userId),
+            'medias' => $this->getMediasGraphQLQuery($userId),
+            'groups' => $this->getGroupsGraphQLQuery($userId),
+            'reports' => $this->getReportsGraphQLQuery($userId),
+            'events' => $this->getEventsGraphQLQuery($userId),
+            'proposals' => $this->getProposalsGraphQLQuery($userId),
+            'opinions' => $this->getOpinionGraphQLQuery($userId),
+            'opinionsVersion' => $this->getOpinionVersionGraphQLQuery($userId),
+            'arguments' => $this->getArgumentGraphQLQuery($userId),
+            'sources' => $this->getSourceGraphQLQuery($userId),
+            'votes' => $this->getVotesGraphQLQuery($userId),
+        ];
 
-        $datas['questions'] = $executor->execute(
-            [
-                'query' => $this->getRepliesGraphQLQuery($userId),
-                'variables' => [],
-            ]
-        )->toArray();
-
-        $datas['medias'] = $executor->execute(
-            [
-                'query' => $this->getMediasGraphQLQuery($userId),
-                'variables' => [],
-            ]
-        )->toArray();
-
-        $datas['groups'] = $executor->execute(
-            [
-                'query' => $this->getGroupsGraphQLQuery($userId),
-                'variables' => [],
-            ]
-        )->toArray();
-
-        $datas['reports'] = $executor->execute(
-            [
-                'query' => $this->getReportsGraphQLQuery($userId),
-                'variables' => [],
-            ]
-        )->toArray();
-
-        $datas['events'] = $executor->execute(
-            [
-                'query' => $this->getEventsGraphQLQuery($userId),
-                'variables' => [],
-            ]
-        )->toArray();
-
-        $datas['proposals'] = $executor->execute(
-            [
-                'query' => $this->getProposalsGraphQLQuery($userId),
-                'variables' => [],
-            ]
-        )->toArray();
-
-        $datas['opinions'] = $executor->execute(
-            [
-                'query' => $this->getOpinionGraphQLQuery($userId),
-                'variables' => [],
-            ]
-        )->toArray();
-
-        $datas['opinionsVersion'] = $executor->execute(
-            [
-                'query' => $this->getOpinionVersionGraphQLQuery($userId),
-                'variables' => [],
-            ]
-        )->toArray();
-
-        $datas['arguments'] = $executor->execute(
-            [
-                'query' => $this->getArgumentGraphQLQuery($userId),
-                'variables' => [],
-            ]
-        )->toArray();
-
-        $datas['sources'] = $executor->execute(
-            [
-                'query' => $this->getSourceGraphQLQuery($userId),
-                'variables' => [],
-            ]
-        )->toArray();
-
-        $datas['votes'] = $executor->execute(
-            [
-                'query' => $this->getVotesGraphQLQuery($userId),
-                'variables' => [],
-            ],
-            ['disable_acl' => true]
-        )->toArray();
+        foreach ($types as $type => $query) {
+            $datas[$type] = $this->executor->execute(null,
+                [
+                    'query' => $query,
+                    'variables' => [],
+                ]
+            )->toArray();
+        }
 
         return $datas;
     }
@@ -147,7 +116,7 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
 
     protected function getZipPathForUser(string $userId): string
     {
-        return $this->getContainer()->getParameter('kernel.root_dir') . '/../web/export/' . $this->getZipFilenameForUser(
+        return $this->kernelRootDir . '/../web/export/' . $this->getZipFilenameForUser(
                 $userId
             );
     }
@@ -190,7 +159,6 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
         $writer->openToFile($this->getPath());
 
         if (isset($data['errors'])) {
-            var_dump($data['errors']);
             throw new \RuntimeException('Failed to query GraphQL to export userId ' . $userId);
         }
         unset($data['extensions']);
@@ -287,7 +255,7 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
 
     protected function exportMedias(array $medias, string $userId)
     {
-        $mediasPath = $this->getContainer()->getParameter('kernel.root_dir') . '/../web/media/default/0001/01/';
+        $mediasPath = $this->kernelRootDir . '/../web/media/default/0001/01/';
 
         foreach ($medias as $media) {
             if (isset($media['providerReference'])) {
@@ -344,7 +312,7 @@ class CreateCsvFromUserCommand extends ContainerAwareCommand
 
     protected function getPath(): string
     {
-        return $this->getContainer()->getParameter('kernel.root_dir') . '/../web/export/' . $this->getFilename();
+        return $this->kernelRootDir . '/../web/export/' . $this->getFilename();
     }
 
     protected function getUserGraphQLQuery(string $userId): string

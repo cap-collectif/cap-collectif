@@ -19,7 +19,7 @@ class UserReportsResolver
 
     public function __invoke(User $user, Argument $args): Connection
     {
-        $paginator = new Paginator(function (int $offset, int $limit) use ($user) {
+        $paginator = new Paginator(function (?int $offset, ?int $limit) use ($user) {
             return $this->reportingRepo->findAllByUser($user);
         });
 

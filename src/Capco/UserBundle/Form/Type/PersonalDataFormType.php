@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\UserBundle\Form\Type;
 
 use Capco\UserBundle\Entity\User;
@@ -22,11 +23,17 @@ class PersonalDataFormType extends AbstractType
             ->add('phone')
             ->add('email')
             ->add('phoneConfirmed')
-            ->add('dateOfBirth', DateTimeType::class, [
-                'widget' => 'single_text',
-                'format' => 'Y-MM-dd',
-            ])
-            ->add('gender', ChoiceType::class, ['choices' => array_keys(User::getGenderList())]);
+            ->add('dateOfBirth', DateTimeType::class,
+                [
+                    'widget' => 'single_text',
+                    'format' => 'Y-MM-dd',
+                ]
+            )
+            ->add('gender', ChoiceType::class,
+                [
+                    'choices' => array_keys(User::getGenderList()),
+                ]
+            );
     }
 
     /**
@@ -34,6 +41,10 @@ class PersonalDataFormType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(['data_class' => User::class]);
+        $resolver->setDefaults(
+            [
+                'data_class' => User::class,
+            ]
+        );
     }
 }

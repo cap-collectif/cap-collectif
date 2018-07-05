@@ -6,7 +6,7 @@ Query:
                 access: "@=hasRole('ROLE_USER')"
                 type: "User!"
                 description: "The currently authenticated user."
-                resolve: "@=user"
+                resolve: "@=getUser()"
             users:
                 type: "[User!]!"
                 args:
@@ -76,7 +76,7 @@ Query:
                 builder: "Relay::Node"
                 builderConfig:
                     nodeInterfaceType: Node
-                    idFetcher: '@=resolver("query_node", [value, user])'
+                    idFetcher: '@=resolver("query_node", [value, getUser()])'
             nodes:
                 type: "[Node]!"
                 description: "Lookup nodes by a list of IDs."
@@ -84,4 +84,4 @@ Query:
                     ids:
                         type: "[ID!]!"
                         description: "The list of node IDs."
-                resolve: "@=resolver('query_nodes', [args['ids'], user])"
+                resolve: "@=resolver('query_nodes', [args['ids'], getUser()])"

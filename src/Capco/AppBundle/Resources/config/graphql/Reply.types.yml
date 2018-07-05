@@ -1,13 +1,10 @@
 Reply:
     type: object
+    inherits: [Node, Contribution]
     config:
         description: "A Reply"
         interfaces: [Node, Contribution]
         fields:
-            id:
-                type: "ID!"
-            author:
-                type: "User!"
             enabled:
                 type: "Boolean!"
             private:
@@ -28,18 +25,10 @@ Reply:
             questionnaire:
                 type: "Questionnaire!"
                 description: "Identifies the form where the contribution was submitted."
-            responses:
-                type: "[Response]!"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ResponsesResolver", [value])'
-            kind:
-                type: "String!"
-                resolve: "@=value.getKind()"
-            related:
-                type: "Contribution"
-                description: "Return the related contribution if the contribution is related to another."
             viewerCanDelete:
                 type: "Boolean!"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyViewerCanDeleteResolver", [value, user])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyViewerCanDeleteResolver", [value, getUser()])'
+            show_url:
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyUrlResolver", [value])'
             url:
-                type: "URI!"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyUrlResolver", [value])'

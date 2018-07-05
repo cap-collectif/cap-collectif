@@ -1,10 +1,9 @@
 Questionnaire:
     type: object
+    inherits: [Node]
     config:
         interfaces: [Node]
         fields:
-            id:
-                type: "ID!"
             title:
                 type: "String!"
             anonymousAllowed:
@@ -26,4 +25,4 @@ Questionnaire:
             viewerReplies:
                 type: "[Reply!]!"
                 access: "@=isAuthenticated()"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireViewerRepliesResolver", [value, user])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireViewerRepliesResolver", [value, getUser()])'

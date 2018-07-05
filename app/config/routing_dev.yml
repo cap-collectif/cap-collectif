@@ -17,5 +17,8 @@ _translation_webui:
 _translation_profiler:
   resource: '@TranslationBundle/Resources/config/routing_symfony_profiler.yml'
 
+overblog_graphiql_endpoint:
+  resource: "@OverblogGraphiQLBundle/Resources/config/routing.xml"
+
 _main:
     resource: routing.yml

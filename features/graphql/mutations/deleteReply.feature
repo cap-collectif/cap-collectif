@@ -62,7 +62,7 @@ Scenario: User can not delete the reply of someone else
   """
   {
     "errors": [
-      {"message":"You are not the author of this reply","locations":[{"line":1,"column":43}],"path":["deleteReply"]}
+      {"message":"You are not the author of this reply","category":@string@,"locations":[{"line":1,"column":43}],"path":["deleteReply"]}
     ],
     "data": {
       "deleteReply": null

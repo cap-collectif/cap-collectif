@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\UserBundle\Authenticator;
 
 use Capco\UserBundle\Entity\User;
@@ -19,12 +20,8 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
     protected $httpUtils;
     protected $logger;
 
-    public function __construct(
-        Simple $samlAuth,
-        string $samlIdp,
-        HttpUtils $httpUtils,
-        LoggerInterface $logger
-    ) {
+    public function __construct(Simple $samlAuth, string $samlIdp, HttpUtils $httpUtils, LoggerInterface $logger)
+    {
         $this->samlAuth = $samlAuth;
         $this->samlIdp = $samlIdp;
         $this->httpUtils = $httpUtils;
@@ -56,11 +53,7 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
         $authAttribute = $this->getAuthenticationAttribute();
         if (!array_key_exists($authAttribute, $attributes)) {
             throw new MissingSamlAuthAttributeException(
-                sprintf(
-                    "Attribute '%s' was not found in SAMLResponse '%s'",
-                    $authAttribute,
-                    print_r($attributes, true)
-                )
+                sprintf("Attribute '%s' was not found in SAMLResponse '%s'", $authAttribute, print_r($attributes, true))
             );
         }
 
@@ -86,11 +79,8 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
         return $token;
     }
 
-    public function authenticateToken(
-        TokenInterface $token,
-        UserProviderInterface $userProvider,
-        $providerKey
-    ): SamlToken {
+    public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey): SamlToken
+    {
         $username = $token->getUsername();
         $user = $userProvider->loadUserByUsername($username);
 

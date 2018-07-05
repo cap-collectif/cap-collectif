@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\UserBundle\Authenticator\Token;
 
 use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;

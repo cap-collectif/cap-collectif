@@ -34,6 +34,15 @@ EOF;
         $this($response)->shouldReturn("Incohérente, Que de la publicité (mensongère en plus !), L'autre réponse");
     }
 
+    public function it_should_correcty_return_a_value_stripped_off_html_tags_when_it_has_html_tags(ValueResponse $response): void
+    {
+        $value = <<<EOF
+{"labels":["<p>Incohérente</p>","<h1>Que de la <span class='ad'>publicité</span> (<em>mensongère</em> en plus !</h1>)"],"other":null}
+EOF;
+        $response->getValue()->willReturn(\GuzzleHttp\json_decode($value, true));
+        $this($response)->shouldReturn("Incohérente, Que de la publicité (mensongère en plus !)");
+    }
+
     public function it_should_correctly_return_a_string_when_value_is_a_json_with_only_one_answer_specified(ValueResponse $response): void
     {
         $value = <<<EOF

@@ -7,9 +7,6 @@ overblog_graphql_endpoint:
   resource: "@OverblogGraphQLBundle/Resources/config/routing/graphql.yml"
   prefix: /graphql
 
-overblog_graphql_graphiql:
-    resource: "@OverblogGraphQLBundle/Resources/config/routing/graphiql.yml"
-
 # API
 
 capco_api_login_check:

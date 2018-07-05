@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle;
 
 use Capco\AppBundle\DependencyInjection\Compiler\SonataMediaResizerServicePass;
