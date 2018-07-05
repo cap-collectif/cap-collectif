@@ -1,7 +1,7 @@
 OpinionVote:
     type: object
     config:
-        interfaces: [YesNoPairedVote, ContributionWithAuthor]
+        interfaces: [YesNoPairedVote]
         fields:
             id:
               type: "ID!"

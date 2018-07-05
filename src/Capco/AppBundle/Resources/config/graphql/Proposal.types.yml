@@ -237,7 +237,7 @@ Proposal:
                     step:
                         type: "ID!"
                         description: "The concerned step."
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalViewerHasVoteResolver", [value, args, user])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalViewerHasVoteResolver", [value, args, getUser()])'
             viewerHasReport:
                 access: "@=hasRole('ROLE_USER')"
                 type: "Boolean!"
