@@ -24,7 +24,7 @@ class OpinionVersionPage extends Page
         'argument yes button' => '#argument-form--FOR button',
         'argument no field' => '#argument-form--AGAINST textarea',
         'argument no button' => '#argument-form--AGAINST button',
-        'arguments yes box' => '#opinion__arguments--FOR .list-group',
+        'arguments yes box' => '#opinion__arguments--FOR',
         'arguments no box' => '#opinion__arguments--AGAINST',
         'argument edit button' => '#arg-argument204 .argument__btn--edit',
         'argument edit body field' => '#argument-form #argument-body',
