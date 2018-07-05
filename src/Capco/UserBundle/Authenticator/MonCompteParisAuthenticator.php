@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\UserBundle\Authenticator;
 
 use Capco\UserBundle\Authenticator\Token\ParisToken;
@@ -17,8 +16,11 @@ class MonCompteParisAuthenticator implements SimplePreAuthenticatorInterface
     protected $logger;
     protected $openAmCaller;
 
-    public function __construct(HttpUtils $httpUtils, LoggerInterface $logger, OpenAmClient $openAmCaller)
-    {
+    public function __construct(
+        HttpUtils $httpUtils,
+        LoggerInterface $logger,
+        OpenAmClient $openAmCaller
+    ) {
         $this->httpUtils = $httpUtils;
         $this->logger = $logger;
         $this->openAmCaller = $openAmCaller;
@@ -36,7 +38,9 @@ class MonCompteParisAuthenticator implements SimplePreAuthenticatorInterface
         }
 
         if (!$isOnLoginUrl && !$isAlreadyAuthenticated) {
-            $this->logger->debug('Skipping MonCompteParisAuthenticator, to let user browse anonymously.');
+            $this->logger->debug(
+                'Skipping MonCompteParisAuthenticator, to let user browse anonymously.'
+            );
 
             return null;
         }
@@ -64,8 +68,11 @@ class MonCompteParisAuthenticator implements SimplePreAuthenticatorInterface
         return $token;
     }
 
-    public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey): ParisToken
-    {
+    public function authenticateToken(
+        TokenInterface $token,
+        UserProviderInterface $userProvider,
+        $providerKey
+    ): ParisToken {
         $username = $token->getUsername();
         $user = $userProvider->loadUserByUsername($username);
 
