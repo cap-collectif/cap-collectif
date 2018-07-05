@@ -85,7 +85,7 @@ class CommandContext implements KernelAwareContext
     private function run($command, $parameters = [])
     {
         $application = new Application($this->kernel);
-        $application->getKernel()->getContainer()->get('overblog_graphql.cache_compiler')->loadClasses(true);
+
         if (\count($parameters) > 0) {
             $arguments = array_merge(['command' => $command], $parameters);
             $input = new ArrayInput($arguments);

@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AdminBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
@@ -14,13 +13,17 @@ class ReportingController extends Controller
         $object = $this->admin->getObject($id);
 
         if (!$object) {
-            throw $this->createNotFoundException(sprintf('unable to find the object with id : %s', $id));
+            throw $this->createNotFoundException(
+                sprintf('unable to find the object with id : %s', $id)
+            );
         }
 
         $related = $object->getRelatedObject();
 
         if ($related) {
-            $related->setIsEnabled(false);
+            method_exists($related, 'setEnabled')
+                ? $related->setEnabled(false)
+                : $related->setIsEnabled(false);
             $this->get('capco.contribution_notifier')->onModeration($related);
         }
 
@@ -40,7 +43,9 @@ class ReportingController extends Controller
         $object = $this->admin->getObject($id);
 
         if (!$object) {
-            throw $this->createNotFoundException(sprintf('unable to find the object with id : %s', $id));
+            throw $this->createNotFoundException(
+                sprintf('unable to find the object with id : %s', $id)
+            );
         }
 
         $related = $object->getRelatedObject();
@@ -66,7 +71,9 @@ class ReportingController extends Controller
         $object = $this->admin->getObject($id);
 
         if (!$object) {
-            throw $this->createNotFoundException(sprintf('unable to find the object with id : %s', $id));
+            throw $this->createNotFoundException(
+                sprintf('unable to find the object with id : %s', $id)
+            );
         }
 
         $object->setIsArchived(true);

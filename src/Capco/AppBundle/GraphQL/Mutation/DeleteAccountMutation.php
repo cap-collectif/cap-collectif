@@ -18,12 +18,11 @@ use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class DeleteAccountMutation implements ContainerAwareInterface, MutationInterface
+class DeleteAccountMutation implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 

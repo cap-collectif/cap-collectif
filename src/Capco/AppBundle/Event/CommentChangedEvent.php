@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Event;
 
 use Capco\AppBundle\Entity\Comment;

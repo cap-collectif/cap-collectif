@@ -25,7 +25,7 @@ class UserIsGrantedResolverSpec extends ObjectBehavior
 
     function it_should_grant_if_acl_disabled()
     {
-        $this->isGranted(null, null, new \ArrayObject(['disable_acl' => true]))->shouldReturn(true);
+        $this->isGranted(null, null, ['disable_acl' => true])->shouldReturn(true);
     }
 
     function it_im_not_a_user_and_i_try_to_be_granted()

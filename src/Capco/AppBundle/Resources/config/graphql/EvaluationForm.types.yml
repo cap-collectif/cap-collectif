@@ -15,4 +15,4 @@ EvaluationForm:
             questions:
                 type: "[Question!]!"
                 description: "List of questions in the evaluation form"
-                resolve: "@=resolver('evaluation_form_questions', [value, getUser()])"
+                resolve: "@=resolver('evaluation_form_questions', [value, user])"

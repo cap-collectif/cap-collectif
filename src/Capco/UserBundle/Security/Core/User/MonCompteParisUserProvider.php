@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\UserBundle\Security\Core\User;
 
 use Capco\AppBundle\Exception\ParisAuthenticationException;
@@ -25,7 +24,10 @@ class MonCompteParisUserProvider implements UserProviderInterface
         if (null === $user) {
             $informations = $this->openAmCaller->getUserInformations();
             if (false === filter_var($informations['validated'], FILTER_VALIDATE_BOOLEAN)) {
-                throw new ParisAuthenticationException($id, 'Please validate your account from Mon Compte Paris');
+                throw new ParisAuthenticationException(
+                    $id,
+                    'Please validate your account from Mon Compte Paris'
+                );
             }
 
             $user = $this->userManager->createUser();

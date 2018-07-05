@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\UserBundle\Form\Type;
 
 use Capco\AppBundle\Toggle\Manager;
@@ -21,21 +20,16 @@ class MemberSearchType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('sort',
-                ChoiceType::class, [
-                'required' => false,
-                'choices' => array_flip(User::$sortOrderLabels),
-                'translation_domain' => 'CapcoAppBundle',
-                'label' => 'user.index.sort.label',
-                'placeholder' => false,
-                'attr' => ['onchange' => 'this.form.submit()'],
-            ])
-        ;
-
+        $builder->add('sort', ChoiceType::class, [
+            'required' => false,
+            'choices' => array_flip(User::$sortOrderLabels),
+            'translation_domain' => 'CapcoAppBundle',
+            'label' => 'user.index.sort.label',
+            'placeholder' => false,
+            'attr' => ['onchange' => 'this.form.submit()'],
+        ]);
         if ($this->toggleManager->isActive('user_type')) {
-            $builder->add('userType',
-                EntityType::class, [
+            $builder->add('userType', EntityType::class, [
                 'required' => false,
                 'class' => 'CapcoUserBundle:UserType',
                 'choice_label' => 'name',
@@ -49,8 +43,6 @@ class MemberSearchType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'csrf_protection' => false,
-        ]);
+        $resolver->setDefaults(['csrf_protection' => false]);
     }
 }

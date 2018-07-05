@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\UserBundle\Entity;
 
 use Capco\AppBundle\Traits\IdTrait;

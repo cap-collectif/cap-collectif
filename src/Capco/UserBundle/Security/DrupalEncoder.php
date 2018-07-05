@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\UserBundle\Security;
 
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
@@ -18,7 +17,9 @@ function drupal_random_bytes($count)
         // PHP versions prior 5.3.4 experienced openssl_random_pseudo_bytes()
         // locking on Windows and rendered it unusable.
         if (!isset($has_openssl)) {
-            $has_openssl = version_compare(PHP_VERSION, '5.3.4', '>=') && function_exists('openssl_random_pseudo_bytes');
+            $has_openssl =
+                version_compare(PHP_VERSION, '5.3.4', '>=') &&
+                function_exists('openssl_random_pseudo_bytes');
         }
 
         // openssl_random_pseudo_bytes() will find entropy in a system-dependent
@@ -318,7 +319,7 @@ class DrupalEncoder implements PasswordEncoderInterface
                 $hash = _password_crypt('sha512', $password, $stored_hash);
                 break;
             case '$H$':
-                // phpBB3 uses "$H$" for the same thing as "$P$".
+            // phpBB3 uses "$H$" for the same thing as "$P$".
             case '$P$':
                 // A phpass password generated using md5.  This is an
                 // imported password or from an earlier Drupal version.

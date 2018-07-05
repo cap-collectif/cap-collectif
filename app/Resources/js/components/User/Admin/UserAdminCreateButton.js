@@ -11,7 +11,7 @@ import { form } from '../Registration/RegistrationForm';
 import AlertForm from '../../Alert/AlertForm';
 import type { Dispatch } from '../../../types';
 import SelectUserRole from '../../Form/SelectUserRole';
-import {type UserRole} from '../../../mutations/__generated__/CreateUserMutation.graphql';
+import { type UserRole } from '../../../mutations/__generated__/CreateUserMutation.graphql';
 
 const formName = 'user-admin-create';
 
@@ -31,7 +31,7 @@ type FormValues = {
   roles: {
     // Cannot call CreateUserMutation.commit with object literal bound to variables because object type [1] is incompatible
     // with read-only array type [2] in property input.roles.
-    labels: [UserRole]
+    labels: [UserRole],
   },
   vip: boolean,
   enabled: boolean,
