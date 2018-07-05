@@ -25,30 +25,30 @@ export class ArgumentListViewPaginated extends React.Component<Props, State> {
 
   render() {
     const { argumentable, relay } = this.props;
-    if (argumentable.arguments.totalCount === 0) {
+    if (!argumentable.arguments.edges || argumentable.arguments.edges.length === 0) {
       return null;
     }
     return (
       <ListGroup>
-        {argumentable.arguments.edges &&
-          argumentable.arguments.edges
-            .filter(Boolean)
-            .map(edge => edge.node)
-            .filter(Boolean)
-            .map(argument => {
-              return (
-                <ListGroupItem key={argument.id}>
-                  {/* $FlowFixMe */}
-                  <ArgumentItem argument={argument} />
-                </ListGroupItem>
-              );
-            })}
+        {argumentable.arguments.edges
+          .filter(Boolean)
+          .map(edge => edge.node)
+          .filter(Boolean)
+          .map(argument => {
+            return (
+              <ListGroupItem key={argument.id}>
+                {/* $FlowFixMe */}
+                <ArgumentItem argument={argument} />
+              </ListGroupItem>
+            );
+          })}
         {relay.hasMore() && (
           <ListGroupItem style={{ textAlign: 'center' }}>
             {this.state.loading ? (
               <Loader />
             ) : (
               <a
+                style={{ cursor: 'pointer' }}
                 className="small"
                 onClick={() => {
                   this.setState({ loading: true });

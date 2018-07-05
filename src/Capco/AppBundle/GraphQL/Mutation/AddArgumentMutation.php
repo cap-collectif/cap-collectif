@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
@@ -10,6 +9,7 @@ use Capco\AppBundle\Form\ArgumentType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\Helper\RedisStorageHelper;
 use Capco\AppBundle\Model\Argumentable;
+use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\UserBundle\Entity\User;
@@ -30,15 +30,24 @@ class AddArgumentMutation
     private $formFactory;
     private $redisStorage;
     private $publisher;
+    private $argumentRepo;
 
-    public function __construct(EntityManagerInterface $em, FormFactory $formFactory, OpinionRepository $opinionRepo, OpinionVersionRepository $versionRepo, RedisStorageHelper $redisStorage, Publisher $publisher)
-    {
+    public function __construct(
+        EntityManagerInterface $em,
+        FormFactory $formFactory,
+        OpinionRepository $opinionRepo,
+        OpinionVersionRepository $versionRepo,
+        RedisStorageHelper $redisStorage,
+        Publisher $publisher,
+        ArgumentRepository $argumentRepo
+    ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->opinionRepo = $opinionRepo;
         $this->versionRepo = $versionRepo;
         $this->redisStorage = $redisStorage;
         $this->publisher = $publisher;
+        $this->argumentRepo = $argumentRepo;
     }
 
     public function __invoke(Arg $input, User $author): array
@@ -62,9 +71,11 @@ class AddArgumentMutation
             throw new UserError("Can't add argument to this opinion type.");
         }
 
-        $argument = (new Argument())
-            ->setAuthor($author)
-        ;
+        if (\count($this->argumentRepo->findCreatedSinceIntervalByAuthor($author, 'PT1M')) >= 2) {
+            throw new UserError('You contributed too many times.');
+        }
+
+        $argument = (new Argument())->setAuthor($author);
         if ($argumentable instanceof Opinion) {
             $argument->setOpinion($argumentable);
         }
@@ -88,11 +99,10 @@ class AddArgumentMutation
         $this->em->flush();
 
         $this->redisStorage->recomputeUserCounters($author);
-        $this->publisher->publish(CapcoAppBundleMessagesTypes::ARGUMENT_CREATE, new Message(
-          json_encode([
-              'argumentId' => $argument->getId(),
-          ])
-        ));
+        $this->publisher->publish(
+            CapcoAppBundleMessagesTypes::ARGUMENT_CREATE,
+            new Message(json_encode(['argumentId' => $argument->getId()]))
+        );
 
         // $totalCount = $this->followerRepository->countFollowersOfProposal($proposal);
         $totalCount = 0;

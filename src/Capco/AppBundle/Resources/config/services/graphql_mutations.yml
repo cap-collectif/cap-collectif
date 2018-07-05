@@ -270,6 +270,7 @@ services:
         - "@capco.opinion_version.repository"
         - "@redis_storage.helper"
         - "@swarrot.publisher"
+        - "@capco.argument.repository"
     tags:
         - { name: overblog_graphql.mutation }
 

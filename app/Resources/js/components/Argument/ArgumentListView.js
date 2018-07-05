@@ -75,7 +75,7 @@ export default createRefetchContainer(
       fragment ArgumentListView_argumentable on Argumentable
         @argumentDefinitions(
           isAuthenticated: { type: "Boolean", defaultValue: true }
-          count: { type: "Int!", defaultValue: 5 }
+          count: { type: "Int!", defaultValue: 25 }
           cursor: { type: "String", defaultValue: null }
           type: { type: "ArgumentValue!", nonNull: true }
           orderBy: { type: "ArgumentOrder", defaultValue: { field: CREATED_AT, direction: DESC } }
