@@ -600,10 +600,19 @@ exercise_html_purifier:
 hslavich_simplesamlphp:
   sp: '%saml_sp%'
 
+overblog_dataloader:
+  defaults:
+    promise_adapter: 'overblog_dataloader.webonyx_graphql_sync_promise_adapter'
+  loaders:
+    proposals:
+      alias: "proposals_loader"
+      batch_load_fn: "@capco.proposal_loader:all"
 overblog_graphql:
   security:
     query_max_depth: false
     query_max_complexity: false
+  services:
+        promise_adapter: "webonyx_graphql.sync_promise_adapter"
   definitions:
     show_debug_info: '%kernel.debug%'
     # internal_error_message: "An error occurred, please retry later or contact us!"
