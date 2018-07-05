@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\UserBundle\Controller;
 
 use Capco\UserBundle\Entity\UserType;
@@ -40,22 +39,30 @@ class MembersController extends Controller
                 // redirect to the results page (avoids reload alerts)
                 $data = $form->getData();
 
-                return $this->redirect($this->generateUrl('app_members_type_sorted', [
-                    'userType' => $data['userType'] ? $data['userType']->getSlug() : UserType::FILTER_ALL,
-                    'sort' => $data['sort'],
-                ]));
+                return $this->redirect(
+                    $this->generateUrl('app_members_type_sorted', [
+                        'userType' =>
+                            $data['userType'] ? $data['userType']->getSlug() : UserType::FILTER_ALL,
+                        'sort' => $data['sort'],
+                    ])
+                );
             }
         } else {
             $form->setData([
-                'userType' => $em->getRepository('CapcoUserBundle:UserType')->findOneBySlug($userType),
+                'userType' =>
+                    $em->getRepository('CapcoUserBundle:UserType')->findOneBySlug($userType),
                 'sort' => $sort,
             ]);
         }
 
-        $pagination = $this->get('capco.site_parameter.resolver')->getValue('members.pagination.size');
+        $pagination = $this->get('capco.site_parameter.resolver')->getValue(
+            'members.pagination.size'
+        );
 
         $sort = null === $sort ? 'activity' : $sort;
-        $members = $em->getRepository('CapcoUserBundle:User')->getSearchResults($pagination, $page, $sort, $userType);
+        $members = $em
+            ->getRepository('CapcoUserBundle:User')
+            ->getSearchResults($pagination, $page, $sort, $userType);
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;

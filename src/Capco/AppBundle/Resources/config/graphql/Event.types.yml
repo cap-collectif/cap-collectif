@@ -1,9 +1,10 @@
 Event:
     type: object
-    inherits: [Node]
     config:
         interfaces: [Node]
         fields:
+            id:
+              type: "ID!"
             title:
                type: "String!"
             participants:

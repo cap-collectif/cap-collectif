@@ -12,7 +12,7 @@ Scenario: "Cron want to notify followers and open an email"
   And I should see "new-activity {&quot;%count%&quot;:3,&quot;%num%&quot;:3}" in mail
   And I should see "admin.fields.source.opinion" in mail
   And I should see "Ravalement de la façade de la bibliothèque municipale" in mail
-  And I should see "💬 new-comment {&quot;%count%&quot;:11,&quot;%num%&quot;:11}" in mail
+  And I should see "💬 new-comment {&quot;%count%&quot;:14,&quot;%num%&quot;:14}" in mail
   And I should see "✔️ moving-to-the-step-with-status {&quot;{titleStep}&quot;:&quot;S\u00e9lection&quot;,&quot;{statusName}&quot;:&quot;Soumis au vote&quot;}" in mail
   And I should see "admin.fields.source.opinion" in mail
   And I should see "Rénovation du gymnase" in mail

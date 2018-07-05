@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\UserBundle\Security\Core\User;
 
 use Capco\AppBundle\Toggle\Manager;
@@ -12,8 +11,11 @@ class SimplePreAuthenticatorUserProvider implements UserProviderInterface
     private $samlProvider;
     private $parisProvider;
 
-    public function __construct(Manager $toggleManager, SamlUserProvider $samlProvider, MonCompteParisUserProvider $parisProvider)
-    {
+    public function __construct(
+        Manager $toggleManager,
+        SamlUserProvider $samlProvider,
+        MonCompteParisUserProvider $parisProvider
+    ) {
         $this->toggleManager = $toggleManager;
         $this->samlProvider = $samlProvider;
         $this->parisProvider = $parisProvider;

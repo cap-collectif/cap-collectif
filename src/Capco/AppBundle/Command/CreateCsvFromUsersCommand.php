@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateCsvFromUsersCommand extends ContainerAwareCommand
 {
-    protected function configure(): void
+    protected function configure()
     {
         $this
             ->setName('capco:export:users')
@@ -23,7 +23,7 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         if (!$container->get('capco.toggle.manager')->isActive('export')) {
             return;
         }
-        $csvGenerator = $this->getContainer()->get(GraphQLToCsv::class);
+        $csvGenerator = new GraphQLToCsv($container->get('logger'));
         $fileName = 'users.csv';
         $writer = Writer::createFromPath($container->getParameter('kernel.root_dir') . '/../web/export/' . $fileName, 'w');
         $writer->setDelimiter(',');
@@ -32,6 +32,7 @@ class CreateCsvFromUsersCommand extends ContainerAwareCommand
         $requestString = $this->getUsersGraphQLQuery();
         $csvGenerator->generate(
             $requestString,
+            $container->get('overblog_graphql.request_executor'),
             $writer
         );
         $output->writeln('The export file "' . $fileName . '" has been created.');

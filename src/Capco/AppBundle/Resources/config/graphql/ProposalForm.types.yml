@@ -1,10 +1,11 @@
 ProposalForm:
     type: object
-    inherits: [Node]
     config:
         description: "A budget form"
         interfaces: [Node]
         fields:
+            id:
+                type: "ID!"
             reference:
                 type: "String!"
             description:
@@ -18,7 +19,7 @@ ProposalForm:
                 type: "String!"
             proposals:
                 type: "ProposalConnection!"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormProposalsResolver", [value, args, getUser(), serv("request_stack")])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormProposalsResolver", [value, args, user, request])'
                 args:
                   district:
                     type: "ID"

@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
@@ -11,9 +10,7 @@ class ApiProfileFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('phone', null, ['required' => false])
-        ;
+        $builder->add('phone', null, ['required' => false]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

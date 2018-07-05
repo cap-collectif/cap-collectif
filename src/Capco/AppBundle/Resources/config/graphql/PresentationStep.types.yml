@@ -1,8 +1,15 @@
 PresentationStep:
     type: object
-    inherits: [Step]
     config:
         interfaces: [Step]
         fields:
+            id:
+              type: "ID!"
             kind:
+               type: "String!"
                resolve: "presentation"
+            title:
+               type: "String!"
+            show_url:
+               type: "String!"
+               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepUrlResolver", [value])'

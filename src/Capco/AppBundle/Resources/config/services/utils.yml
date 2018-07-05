@@ -17,7 +17,3 @@ services:
   capco.utils.throwable_email_checker.adapter:
     class: EmailChecker\Adapter\FileAdapter
     arguments: ["%kernel.root_dir%/config/throwable_emails.txt"]
-
-  Capco\AppBundle\GraphQL\GraphQLToCsv:
-    autowire: true
-    autoconfigure: true

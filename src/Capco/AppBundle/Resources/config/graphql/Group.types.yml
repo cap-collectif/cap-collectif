@@ -1,11 +1,11 @@
 Group:
     type: object
-    inherits: [Node]
     config:
         interfaces: [Node]
         description: "A group of User"
         fields:
             id:
+                type: "ID!"
                 description: "The id of the group."
             title:
                 type: "String!"

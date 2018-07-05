@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\UserBundle\Controller;
 
 use FOS\UserBundle\Form\Type\ResettingFormType;
@@ -18,26 +17,41 @@ class ResettingFOSUser1Controller extends Controller
 
     public function requestAction()
     {
-        return $this->container->get('templating')->renderResponse('CapcoUserBundle:Resetting:request.html.twig');
+        return $this->container
+            ->get('templating')
+            ->renderResponse('CapcoUserBundle:Resetting:request.html.twig');
     }
 
     public function resetAction(Request $request, string $token)
     {
         $user = $this->container->get('fos_user.user_manager')->findUserByConfirmationToken($token);
         if (null === $user) {
-            throw new NotFoundHttpException(sprintf('The user with "confirmation token" does not exist for value "%s"', $token));
+            throw new NotFoundHttpException(
+                sprintf('The user with "confirmation token" does not exist for value "%s"', $token)
+            );
         }
-        if (!$user->isPasswordRequestNonExpired($this->container->getParameter('fos_user.resetting.token_ttl'))) {
-            return new RedirectResponse($this->container->get('router')->generate('fos_user_resetting_request'));
+        if (
+            !$user->isPasswordRequestNonExpired(
+                $this->container->getParameter('fos_user.resetting.token_ttl')
+            )
+        ) {
+            return new RedirectResponse(
+                $this->container->get('router')->generate('fos_user_resetting_request')
+            );
         }
 
         $form = $this->createForm(ResettingFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $password = $this->get('security.password_encoder')->encodePassword($user, $user->getPlainPassword());
+            $password = $this->get('security.password_encoder')->encodePassword(
+                $user,
+                $user->getPlainPassword()
+            );
             $user->setPassword($password);
-            $this->getDoctrine()->getManager()->flush();
+            $this->getDoctrine()
+                ->getManager()
+                ->flush();
             $this->addFlash('fos_user_success', 'resetting.flash.success');
             $response = new RedirectResponse($this->getRedirectionUrl($user));
             $this->authenticateUser($user, $response);
@@ -45,10 +59,12 @@ class ResettingFOSUser1Controller extends Controller
             return $response;
         }
 
-        return $this->container->get('templating')->renderResponse('@CapcoUser/Resetting/reset.html.twig', [
-            'token' => $token,
-            'form' => $form->createView(),
-        ]);
+        return $this->container
+            ->get('templating')
+            ->renderResponse('@CapcoUser/Resetting/reset.html.twig', [
+                'token' => $token,
+                'form' => $form->createView(),
+            ]);
     }
 
     /**
@@ -60,12 +76,22 @@ class ResettingFOSUser1Controller extends Controller
         $errors = $this->container->get('validator')->validate($email, new EmailConstraint());
 
         if (\count($errors) > 0) {
-            return $this->container->get('templating')->renderResponse('CapcoUserBundle:Resetting:request.html.twig', ['invalid_email' => $email]);
+            return $this->container
+                ->get('templating')
+                ->renderResponse('CapcoUserBundle:Resetting:request.html.twig', [
+                    'invalid_email' => $email,
+                ]);
         }
 
         $user = $this->container->get('fos_user.user_manager')->findUserByEmail($email);
 
-        if (null !== $user && !$user->isExpired() && !$user->isPasswordRequestNonExpired($this->container->getParameter('fos_user.resetting.token_ttl'))) {
+        if (
+            null !== $user &&
+            !$user->isExpired() &&
+            !$user->isPasswordRequestNonExpired(
+                $this->container->getParameter('fos_user.resetting.token_ttl')
+            )
+        ) {
             if (null === $user->getConfirmationToken()) {
                 $tokenGenerator = $this->container->get('fos_user.util.token_generator');
                 $user->setConfirmationToken($tokenGenerator->generateToken());
@@ -79,7 +105,9 @@ class ResettingFOSUser1Controller extends Controller
 
         $this->container->get('session')->set(static::SESSION_EMAIL, $email);
 
-        return new RedirectResponse($this->container->get('router')->generate('fos_user_resetting_check_email'));
+        return new RedirectResponse(
+            $this->container->get('router')->generate('fos_user_resetting_check_email')
+        );
     }
 
     /**
@@ -91,9 +119,9 @@ class ResettingFOSUser1Controller extends Controller
         $email = $session->get(static::SESSION_EMAIL);
         $session->remove(static::SESSION_EMAIL);
 
-        return $this->container->get('templating')->renderResponse('@CapcoUser/Resetting/checkEmail.html.twig', [
-            'email' => $email,
-        ]);
+        return $this->container
+            ->get('templating')
+            ->renderResponse('@CapcoUser/Resetting/checkEmail.html.twig', ['email' => $email]);
     }
 
     /**
@@ -117,10 +145,13 @@ class ResettingFOSUser1Controller extends Controller
     protected function authenticateUser(UserInterface $user, Response $response): void
     {
         try {
-            $this->container->get('fos_user.security.login_manager')->logInUser(
-                $this->container->getParameter('fos_user.firewall_name'),
-                $user,
-                $response);
+            $this->container
+                ->get('fos_user.security.login_manager')
+                ->logInUser(
+                    $this->container->getParameter('fos_user.firewall_name'),
+                    $user,
+                    $response
+                );
         } catch (AccountStatusException $ex) {
             // We simply do not authenticate users which do not pass the user
             // checker (not enabled, expired, etc.).
