@@ -384,7 +384,7 @@ abstract class AbstractStep
         return false;
     }
 
-    public function isOpen(): ?bool
+    public function isOpen(): bool
     {
         $now = new \DateTime();
 

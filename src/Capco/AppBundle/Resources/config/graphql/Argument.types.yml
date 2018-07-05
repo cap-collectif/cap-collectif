@@ -38,4 +38,4 @@ Argument:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Argument\\ArgumentViewerHasVoteResolver", [value, user])'
             contribuable:
                 type: "Boolean!"
-                resolve: "@value.canContribute()"
+                resolve: "@=value.canContribute()"

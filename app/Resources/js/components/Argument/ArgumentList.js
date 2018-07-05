@@ -95,7 +95,7 @@ export class ArgumentList extends React.Component<Props, State> {
                           )}
                         </h4>
                       </Col>
-                      {totalCount ? (
+                      {totalCount > 1 ? (
                         <Col xs={12} sm={6} md={6} className="block--first-mobile">
                           <Input
                             id={htmlFor}

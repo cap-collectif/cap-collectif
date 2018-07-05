@@ -29,7 +29,12 @@ class GraphQLToCsv
         ])->toArray();
 
         if (!isset($response['data'])) {
-            $this->logger->error('GraphQL Query Error: ' . $response['error']);
+            if (isset($response['error'])) {
+                $this->logger->error('GraphQL Query Error: ' . $response['error']);
+            }
+            if (isset($response['errors'])) {
+                $this->logger->error('GraphQL Query Errors: ' . $response['errors']);
+            }
             $this->logger->info('Last graphQL query: ' . json_encode($response));
         }
 
