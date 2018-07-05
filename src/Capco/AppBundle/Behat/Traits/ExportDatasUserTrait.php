@@ -13,7 +13,7 @@ trait ExportDatasUserTrait
         $user = $this->getRepository('CapcoUserBundle:User')->find($userId);
         $archive = $this->getRepository('CapcoAppBundle:UserArchive')->getLastForUser($user);
         if (!$archive) {
-            throw new \Exception('UserArchive does not exist.');
+            throw new \RuntimeException('UserArchive does not exist.');
         }
 
         $archiveFile = $archive->getPath();

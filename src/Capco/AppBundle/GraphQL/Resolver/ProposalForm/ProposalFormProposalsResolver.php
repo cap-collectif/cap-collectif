@@ -11,7 +11,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class ProposalFormProposalsResolver implements ResolverInterface
 {
@@ -24,7 +24,7 @@ class ProposalFormProposalsResolver implements ResolverInterface
         $this->proposalSearch = $proposalSearch;
     }
 
-    public function __invoke(ProposalForm $form, Arg $args, $user, Request $request): Connection
+    public function __invoke(ProposalForm $form, Arg $args, $user, RequestStack $request): Connection
     {
         $totalCount = 0;
         $filters = [];
@@ -93,9 +93,15 @@ class ProposalFormProposalsResolver implements ResolverInterface
             $order = self::findOrderFromFieldAndDirection($field, $direction);
 
             $filters['proposalForm'] = $form->getId();
-            $filters['collectStep'] = $form->getStep()->getType();
+            $filters['collectStep'] = $form->getStep()->getId();
 
-            $seed = $user instanceof User ? $user->getId() : $request->getClientIp();
+            if ($user instanceof User) {
+                $seed = $user->getId();
+            } elseif ($request->getCurrentRequest()) {
+                $seed = $request->getCurrentRequest()->getClientIp();
+            } else {
+                $seed = substr(md5(mt_rand()), 0, 10);
+            }
 
             $results = $this->proposalSearch->searchProposals(
                     $offset,

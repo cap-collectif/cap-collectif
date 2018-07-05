@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -11,14 +12,14 @@ class ComputeDiffCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this->setName('capco:compute:diff')
+        $this
+            ->setName('capco:compute:diff')
             ->setDescription('Recalculate diff')
             ->addOption(
-                'force',
-                false,
-                InputOption::VALUE_NONE,
+                'force', false, InputOption::VALUE_NONE,
                 'set this option to force the recompute on non empty diff'
-            );
+            )
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -28,7 +29,6 @@ class ComputeDiffCommand extends ContainerAwareCommand
         $repo = $em->getRepository('CapcoAppBundle:OpinionVersion');
 
         $versions = $repo->getAllIds();
-
         $progress = new ProgressBar($output, \count($versions));
 
         foreach ($versions as $versionId) {

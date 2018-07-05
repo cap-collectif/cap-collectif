@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\UserBundle\Handler;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -11,7 +12,10 @@ class AuthenticationFailureHandler extends DefaultAuthenticationFailureHandler
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
         if ($request->isXmlHttpRequest()) {
-            return new JsonResponse(['success' => false, 'message' => $exception->getMessage()]);
+            return new JsonResponse([
+              'success' => false,
+              'message' => $exception->getMessage(),
+            ]);
         }
 
         return parent::onAuthenticationFailure($request, $exception);

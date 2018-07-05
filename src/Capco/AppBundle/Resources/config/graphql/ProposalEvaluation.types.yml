@@ -12,4 +12,4 @@ ProposalEvaluation:
             responses:
                 type: "[Response]!"
                 description: "List of responses for the evaluation"
-                resolve: "@=resolver('proposal_evaluation_responses', [value, user])"
+                resolve: "@=resolver('proposal_evaluation_responses', [value, getUser()])"

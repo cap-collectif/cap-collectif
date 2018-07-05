@@ -4,45 +4,60 @@ namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\GraphQL\GraphQLToCsv;
+use Capco\AppBundle\Repository\ConsultationStepRepository;
+use Capco\AppBundle\Toggle\Manager;
 use League\Csv\Writer;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CreateCsvFromConsultationStepCommand extends ContainerAwareCommand
+class CreateCsvFromConsultationStepCommand extends Command
 {
-    protected function configure()
+    protected static $defaultName = 'capco:export:consultation';
+
+    protected $toggleManager;
+    protected $consultationStepRepository;
+    protected $graphQLToCsv;
+    protected $kernelRootDir;
+
+    public function __construct(Manager $toggleManager,
+                                ConsultationStepRepository $consultationStepRepository,
+                                GraphQLToCsv $graphQLToCsv,
+                                string $kernelRootDir
+    ) {
+        $this->toggleManager = $toggleManager;
+        $this->consultationStepRepository = $consultationStepRepository;
+        $this->graphQLToCsv = $graphQLToCsv;
+        $this->kernelRootDir = $kernelRootDir;
+        parent::__construct();
+    }
+
+    protected function configure(): void
     {
         $this
-            ->setName('capco:export:consultation')
             ->setDescription('Create csv file from consultation step data');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): void
     {
-        $container = $this->getContainer();
-        if (!$container->get('capco.toggle.manager')->isActive('export')) {
+        if (!$this->toggleManager->isActive('export')) {
             $output->writeln('Please enable "export" feature to run this command');
 
             return;
         }
 
-        $steps = $container->get('doctrine')
-            ->getRepository('CapcoAppBundle:Steps\ConsultationStep')
-            ->findAll();
-        $csvGenerator = new GraphQLToCsv($container->get('logger'));
+        $steps = $this->consultationStepRepository->findAll();
 
         foreach ($steps as $step) {
             if ($step->getProject()) {
                 $requestString = $this->getContributionsGraphQLqueryByConsultationStep($step);
                 $fileName = $step->getProject()->getSlug() . '_' . $step->getSlug() . '.csv';
-                $writer = Writer::createFromPath($this->getContainer()->getParameter('kernel.root_dir') . '/../web/export/' . $fileName, 'w');
+                $writer = Writer::createFromPath($this->kernelRootDir . '/../web/export/' . $fileName, 'w');
                 $writer->setDelimiter(',');
                 $writer->setNewline("\r\n");
                 $writer->setOutputBOM(Writer::BOM_UTF8);
-                $csvGenerator->generate(
+                $this->graphQLToCsv->generate(
                   $requestString,
-                  $this->getContainer()->get('overblog_graphql.request_executor'),
                   $writer
                 );
                 $output->writeln('The export file "' . $fileName . '" has been created.');

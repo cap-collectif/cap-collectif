@@ -7,6 +7,7 @@ imports:
     - { resource: services/forms.yml }
     - { resource: services/processors.yml }
     - { resource: services/search.yml }
+    - { resource: services/commands.yml }
     - { resource: services/utils.yml }
     - { resource: services/makers.yml }
     - { resource: services/graphql_mutations.yml }
@@ -22,6 +23,39 @@ parameters:
     votable:
       interfaces:
         - Capco\AppBundle\Entity\Interfaces\VotableInterface
+  env(SYMFONY_DATABASE_DRIVER): pdo_mysql
+  env(SYMFONY_DATABASE_HOST): 127.0.0.1
+  env(SYMFONY_DATABASE_PORT): 3306
+  env(SYMFONY_DATABASE_NAME): symfony
+  env(SYMFONY_DATABASE_USER): root
+  env(SYMFONY_DATABASE_PASSWORD): ~
+  env(SYMFONY_RABBITMQ_LOGIN): guest
+  env(SYMFONY_RABBITMQ_PASSWORD): guest
+  env(SYMFONY_SAML_SP): oda
+  env(SYMFONY_ELASTICSEARCH_HOST): 127.0.0.1
+  env(SYMFONY_REDIS_HOST): 127.0.0.1
+  env(SYMFONY_MAILER_USER): ~
+  env(SYMFONY_MAILER_PASSWORD): ~
+  env(SYMFONY_MAILER_HOST): mailcatchersmtp
+  env(SYMFONY_MAILER_PORT): 25
+  env(SYMFONY_LOCALE): fr-FR
+  env(SYMFONY_SECRET): ***REMOVED***
+  env(SYMFONY_USE_ASSETIC_CONTROLLER): true
+  env(SYMFONY_FACEBOOK_APP_ID): ***REMOVED***
+  env(SYMFONY_FACEBOOK_APP_SECRET): ***REMOVED***
+  env(SYMFONY_GOOGLE_APP_ID): ***REMOVED***
+  env(SYMFONY_GOOGLE_APP_SECRET): ***REMOVED***
+  env(SYMFONY_JWT_TOKEN_TTL): 86400
+  env(SYMFONY_LANGUAGE_ANALYZER): french
+  env(SYMFONY_REMEMBER_SECRET): ***REMOVED***
+  env(SYMFONY_ROUTER__REQUEST_CONTEXT__HOST): capco.dev
+  env(SYMFONY_ROUTER__REQUEST_CONTEXT__SCHEME): http
+  env(SYMFONY_ASSETS_VERSION): v1
+  env(SYMFONY_RECAPTCHA_PRIVATE_KEY): ***REMOVED***
+  env(SYMFONY_TWILIO_SID): ***REMOVED***
+  env(SYMFONY_TWILIO_TOKEN): ***REMOVED***
+  env(SYMFONY_TWILIO_NUMBER): +***REMOVED***
+  env(SYMFONY_DISABLE_MAIL_DELIVERY): false
 
 services:
   import.csvtoarray:
@@ -173,3 +207,4 @@ services:
 
   capco.canonicalizer:
     class: Capco\AppBundle\Utils\Canonicalizer
+

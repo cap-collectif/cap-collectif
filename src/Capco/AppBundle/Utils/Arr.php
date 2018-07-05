@@ -5,6 +5,14 @@ namespace Capco\AppBundle\Utils;
 // https://github.com/kohana/ohanzee-helpers/blob/master/src/Arr.php
 final class Arr
 {
+    /**
+     * @param $array
+     * @param $path
+     * @param null $default
+     * @param null $delimiter
+     *
+     * @return mixed
+     */
     public static function path($array, $path, $default = null, $delimiter = null)
     {
         if (!\is_array($array)) {

@@ -1,17 +1,13 @@
 Consultation:
     type: object
+    inherits: [Node, Step]
     config:
         interfaces: [Node, Step]
         description: "A consultation"
         fields:
             kind:
-                type: "String!"
                 resolve: "consultation"
-            show_url:
-                type: "String!"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepUrlResolver", [value])'
             id:
-                type: "ID!"
                 description: "The id of the consultation."
             project:
                 type: "Project!"
@@ -20,7 +16,6 @@ Consultation:
                 type: "String!"
                 description: "The id of the related project."
             title:
-                type: "String!"
                 description: "The title of the consultation."
             contribuable:
                 type: "Boolean!"

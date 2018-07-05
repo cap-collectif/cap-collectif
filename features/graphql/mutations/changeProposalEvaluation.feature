@@ -352,6 +352,7 @@ Scenario: Admin should be prompted to refresh page if someone has already modifi
     "errors": [
       {
         "message": "The proposal was modified. Please refresh the page.",
+        "category": @string@,
         "locations": [
           @...@
         ],
@@ -643,6 +644,7 @@ Scenario: Evaluer should be prompted to refresh page if someone has already modi
     "errors": [
       {
         "message": "The proposal was modified. Please refresh the page.",
+        "category": @string@,
         "locations": [
           @...@
         ],
@@ -691,5 +693,5 @@ Scenario: Non evaluer wants to update the evaluation of a proposal
   """
   Then the JSON response should match:
   """
-  {"errors":[{"message":"You are not an evaluer of proposal with id proposal2","locations":[{"line":1,"column":55}],"path":["changeProposalEvaluation"]}],"data":{"changeProposalEvaluation":null}}
+  {"errors":[{"message":"You are not an evaluer of proposal with id proposal2","category":@string@,"locations":[{"line":1,"column":55}],"path":["changeProposalEvaluation"]}],"data":{"changeProposalEvaluation":null}}
   """

@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
@@ -13,17 +14,23 @@ class ChangePasswordFormType extends AbstractType
     {
         // copy paste of FOSUser but we add the message to enable traduction
         $constraint = new UserPassword(['message' => 'fos_user.password.not_current']);
-        $builder
-            ->add('current_password', PasswordType::class, [
+        $builder->add(
+            'current_password',
+            PasswordType::class,
+            [
                 'mapped' => false,
                 'constraints' => $constraint,
-            ])
-            ->add('new', RepeatedType::class, [
+            ]
+        )->add(
+            'new',
+            RepeatedType::class,
+            [
                 'type' => 'password',
                 'options' => ['translation_domain' => 'CapcoAppBundle'],
                 'first_options' => ['label' => 'form.new_password'],
                 'invalid_message' => 'fos_user.password.mismatch',
-            ]);
+            ]
+        );
     }
 
     public function getParent()

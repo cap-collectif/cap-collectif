@@ -2,27 +2,31 @@
 
 namespace Capco\AppBundle\GraphQL;
 
+use Capco\AppBundle\EventListener\GraphQlAclListener;
 use League\Csv\Writer;
-use Monolog\Logger;
 use Overblog\GraphQLBundle\Request\Executor;
+use Psr\Log\LoggerInterface;
 
 class GraphQLToCsv
 {
     protected $infoResolver;
     protected $csvGenerator;
     protected $logger;
+    protected $executor;
 
-    public function __construct(Logger $logger)
+    public function __construct(LoggerInterface $logger, GraphQlAclListener $listener, Executor $executor)
     {
         $this->logger = $logger;
+        $this->executor = $executor;
+        $listener->disableAcl();
     }
 
-    public function generate(string $requestString, Executor $executor, Writer $writer)
+    public function generate(string $requestString, Writer $writer)
     {
-        $response = $executor->execute([
+        $response = $this->executor->execute(null, [
           'query' => $requestString,
           'variables' => [],
-        ], ['disable_acl' => true])->toArray();
+        ])->toArray();
 
         if (!isset($response['data'])) {
             $this->logger->error('GraphQL Query Error: ' . $response['error']);

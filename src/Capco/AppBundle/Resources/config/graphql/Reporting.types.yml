@@ -1,5 +1,6 @@
 Reporting:
     type: object
+    inherits: [Contribution, ContributionWithAuthor]
     config:
         description: "A report"
         interfaces: [Contribution, ContributionWithAuthor]
@@ -7,27 +8,21 @@ Reporting:
             createdAt:
                 type: "DateTime!"
                 description: "Identifies the date and time when the object was created."
-                resolve: "@=value.getCreatedAt()"
             author:
-                type: "User!"
-                description: "The author of the reporting."
                 resolve: "@=resolver('reporting_author', [value])"
+            bodyText:
+                type: "String!"
+                description: "The escaped content of the argument."
             type:
                 type: "ReportingType!"
                 description: "Kind of report."
                 resolve: "@=resolver('reporting_type', [value])"
-            id:
-                type: "ID!"
-                description: "The content of the argument."
             body:
                 type: "String!"
                 description: "The content of the argument."
-            related:
-                type: "Contribution"
-                description: "Return the related contribution if the contribution is related to another."
             kind:
-                type: "String!"
-                description: "Returns 'report'."
+                resolve: "report"
+            show_url:
+                resolve: ""
             url:
-                type: "URI!"
                 resolve: ""
