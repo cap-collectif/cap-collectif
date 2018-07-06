@@ -12,6 +12,11 @@ use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Capco\AppBundle\GraphQL\Resolver\Project\ProjectContributorResolver;
+use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\AppBundle\Repository\OpinionVersionRepository;
+use Capco\AppBundle\Repository\ProjectRepository;
+use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Traits\ControllerTrait;
 use Capco\UserBundle\Entity\User;
 use JMS\Serializer\SerializationContext;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -22,9 +27,32 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
-class StepController extends Controller
+class StepController
 {
+    use ControllerTrait;
+
+    protected $projectRepository;
+    protected $opinionVersionRepository;
+    protected $opinionRepository;
+    protected $proposalRepository;
+    protected $tokenStorage;
+
+    public function __construct(
+        ProjectRepository $projectRepository,
+        OpinionRepository $opinionRepository,
+        OpinionVersionRepository $opinionVersionRepository,
+        ProposalRepository $proposalRepository,
+        TokenStorage $tokenStorage
+    ) {
+        $this->projectRepository = $projectRepository;
+        $this->opinionVersionRepository = $opinionVersionRepository;
+        $this->opinionRepository = $opinionRepository;
+        $this->proposalRepository = $proposalRepository;
+        $this->tokenStorage = $tokenStorage;
+    }
+
     /**
      * @Route("/project/{projectSlug}/step/{stepSlug}", name="app_project_show_step")
      * @Route("/consultation/{projectSlug}/step/{stepSlug}", name="app_consultation_show_step")
@@ -34,12 +62,11 @@ class StepController extends Controller
      */
     public function showStepAction(string $projectSlug, OtherStep $step)
     {
-        if (!$step->canDisplay()) {
-            throw $this->createNotFoundException();
+        if (!$step->canDisplay($this->getUser())) {
+            throw $this->createAccessDeniedException();
         }
 
-        $em = $this->getDoctrine()->getManager();
-        $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
+        $project = $this->projectRepository->getOne($projectSlug);
 
         if (!$project) {
             throw $this->createNotFoundException();
@@ -60,11 +87,11 @@ class StepController extends Controller
      */
     public function showPresentationAction(string $projectSlug, PresentationStep $step)
     {
-        if (!$step->canDisplay()) {
-            throw $this->createNotFoundException();
+        if (!$step->canDisplay($this->getUser())) {
+            throw $this->createAccessDeniedException();
         }
 
-        $project = $this->get('capco.project.repository')->getOne($projectSlug);
+        $project = $this->projectRepository->getOne($projectSlug);
 
         if (!$project) {
             throw $this->createNotFoundException();
@@ -80,21 +107,26 @@ class StepController extends Controller
         $contributorsConnection = $projectContributorResolver($project, new Argument(['first' => 10]));
 
         $contributorsList = $contributorsConnection->totalCount > 0
-         ? array_merge(
-            ...array_map(function (Edge $edge) {
-                /** @var User $user */
-                $user = $edge->node;
+            ? array_merge(
+                ...array_map(
+                    function (Edge $edge) {
+                        /** @var User $user */
+                        $user = $edge->node;
 
-                return [$user->getId() => [
-                    'user' => $user,
-                    'sources' => $user->getSourcesCount(),
-                    'arguments' => $user->getArgumentsCount(),
-                    'opinions' => $user->getOpinionsCount(),
-                    'contributions' => $user->getContributionsCount(),
-                    'votes' => $user->getVotesCount(),
-                ]];
-            }, $contributorsConnection->edges)
-        ) : [];
+                        return [
+                            $user->getId() => [
+                                'user' => $user,
+                                'sources' => $user->getSourcesCount(),
+                                'arguments' => $user->getArgumentsCount(),
+                                'opinions' => $user->getOpinionsCount(),
+                                'contributions' => $user->getContributionsCount(),
+                                'votes' => $user->getVotesCount(),
+                            ],
+                        ];
+                    },
+                    $contributorsConnection->edges
+                )
+            ) : [];
 
         $showVotes = $this->get('capco.project.helper')->hasStepWithVotes($project);
 
@@ -120,12 +152,12 @@ class StepController extends Controller
      */
     public function showRankingAction(string $projectSlug, RankingStep $step)
     {
-        if (!$step->canDisplay()) {
-            throw $this->createNotFoundException();
+        if (!$step->canDisplay($this->getUser())) {
+            throw $this->createAccessDeniedException();
         }
 
-        $em = $this->getDoctrine()->getManager();
-        $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
+        /** @var Project $project */
+        $project = $this->projectRepository->getOne($projectSlug);
         if (!$project) {
             throw $this->createNotFoundException();
         }
@@ -133,16 +165,12 @@ class StepController extends Controller
         $excludedAuthor = !$project->getIncludeAuthorInRanking() ? $project->getAuthor()->getId() : null;
 
         $nbOpinionsToDisplay = null !== $step->getNbOpinionsToDisplay() ? $step->getNbOpinionsToDisplay() : 10;
-        $opinions = $em
-            ->getRepository('CapcoAppBundle:Opinion')
-            ->getEnabledByProject($project, $excludedAuthor, true, $nbOpinionsToDisplay)
-        ;
+        $opinions =$this->opinionRepository
+            ->getEnabledByProject($project, $excludedAuthor, true, $nbOpinionsToDisplay);
 
         $nbVersionsToDisplay = null !== $step->getNbVersionsToDisplay() ? $step->getNbVersionsToDisplay() : 10;
-        $versions = $em
-            ->getRepository('CapcoAppBundle:OpinionVersion')
-            ->getEnabledByProject($project, $excludedAuthor, true, $nbVersionsToDisplay)
-        ;
+        $versions = $this->opinionVersionRepository
+            ->getEnabledByProject($project, $excludedAuthor, true, $nbVersionsToDisplay);
 
         return [
             'project' => $project,
@@ -165,22 +193,19 @@ class StepController extends Controller
      */
     public function showOpinionsRankingAction(string $projectSlug, RankingStep $step, $page = 1)
     {
-        if (!$step->canDisplay()) {
-            throw $this->createNotFoundException();
+        if (!$step->canDisplay($this->getUser())) {
+            throw $this->createAccessDeniedException();
         }
 
-        $em = $this->getDoctrine()->getManager();
-        $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
+        $project = $this->projectRepository->getOne($projectSlug);
         if (!$project) {
             throw $this->createNotFoundException();
         }
 
         $excludedAuthor = !$project->getIncludeAuthorInRanking() ? $project->getAuthor()->getId() : null;
 
-        $opinions = $em
-            ->getRepository('CapcoAppBundle:Opinion')
-            ->getEnabledByProject($project, $excludedAuthor, true, 10, $page)
-        ;
+        $opinions =$this->opinionRepository
+            ->getEnabledByProject($project, $excludedAuthor, true, 10, $page);
 
         return [
             'project' => $project,
@@ -202,22 +227,19 @@ class StepController extends Controller
      */
     public function showVersionsRankingAction(string $projectSlug, RankingStep $step, $page = 1)
     {
-        if (!$step->canDisplay()) {
-            throw $this->createNotFoundException();
+        if (!$step->canDisplay($this->getUser())) {
+            throw $this->createAccessDeniedException();
         }
 
-        $em = $this->getDoctrine()->getManager();
-        $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
+        $project = $this->projectRepository->getOne($projectSlug);
         if (!$project) {
             throw $this->createNotFoundException();
         }
 
         $excludedAuthor = !$project->getIncludeAuthorInRanking() ? $project->getAuthor()->getId() : null;
 
-        $versions = $em
-            ->getRepository('CapcoAppBundle:OpinionVersion')
-            ->getEnabledByProject($project, $excludedAuthor, true, 10, $page)
-        ;
+        $versions = $this->opinionVersionRepository
+            ->getEnabledByProject($project, $excludedAuthor, true, 10, $page);
 
         return [
             'project' => $project,
@@ -237,21 +259,25 @@ class StepController extends Controller
      */
     public function showSynthesisAction(string $projectSlug, SynthesisStep $step)
     {
-        if (!$step->canDisplay()) {
-            throw $this->createNotFoundException();
+        if (!$step->canDisplay($this->getUser())) {
+            throw $this->createAccessDeniedException();
         }
 
-        $project = $this->get('capco.project.repository')->getOne($projectSlug);
+        $project = $this->projectRepository->getOne($projectSlug);
         if (!$project) {
             throw $this->createNotFoundException();
         }
 
         $serializer = $this->get('serializer');
 
-        $props = $serializer->serialize([
-            'synthesis_id' => $step->getSynthesis()->getId(),
-            'mode' => 'view',
-        ], 'json', SerializationContext::create());
+        $props = $serializer->serialize(
+            [
+                'synthesis_id' => $step->getSynthesis()->getId(),
+                'mode' => 'view',
+            ],
+            'json',
+            SerializationContext::create()
+        );
 
         return [
             'project' => $project,
@@ -269,31 +295,47 @@ class StepController extends Controller
      */
     public function showCollectStepAction(Request $request, Project $project, CollectStep $step)
     {
-        if (!$step->canDisplay() || !$step->getProposalForm()) {
-            throw $this->createNotFoundException();
+        if (!$step->canDisplay($this->getUser()) || !$step->getProposalForm()) {
+            throw $this->createAccessDeniedException();
         }
-
-        $em = $this->getDoctrine()->getManager();
-        $serializer = $this->get('serializer');
 
         $proposalForm = $step->getProposalForm();
         $searchResults = ['proposals' => [], 'count' => 0];
 
         $countFusions = $this->get('capco.proposal.repository')
-          ->countFusionsByProposalForm($proposalForm)
-        ;
+            ->countFusionsByProposalForm($proposalForm);
 
         $serializer = $this->get('serializer');
 
-        $props = $serializer->serialize([
-            'statuses' => $step->getStatuses(),
-            'form' => $proposalForm,
-            'categories' => $proposalForm ? $proposalForm->getCategories() : [],
-            'stepId' => $step->getId(),
-            'defaultSort' => $step->getDefaultSort() ?: null,
-            'count' => $searchResults['count'],
-            'countFusions' => $countFusions,
-        ], 'json', SerializationContext::create()->setGroups(['Statuses', 'ProposalForms', 'Questions', 'ThemeDetails', 'Districts', 'DistrictDetails', 'Default', 'Steps', 'VoteThreshold', 'UserVotes', 'Proposals', 'UsersInfos', 'UserMedias']));
+        $props = $serializer->serialize(
+            [
+                'statuses' => $step->getStatuses(),
+                'form' => $proposalForm,
+                'categories' => $proposalForm ? $proposalForm->getCategories() : [],
+                'stepId' => $step->getId(),
+                'defaultSort' => $step->getDefaultSort() ?: null,
+                'count' => $searchResults['count'],
+                'countFusions' => $countFusions,
+            ],
+            'json',
+            SerializationContext::create()->setGroups(
+                [
+                    'Statuses',
+                    'ProposalForms',
+                    'Questions',
+                    'ThemeDetails',
+                    'Districts',
+                    'DistrictDetails',
+                    'Default',
+                    'Steps',
+                    'VoteThreshold',
+                    'UserVotes',
+                    'Proposals',
+                    'UsersInfos',
+                    'UserMedias',
+                ]
+            )
+        );
 
         return [
             'project' => $project,
@@ -312,17 +354,20 @@ class StepController extends Controller
      */
     public function showQuestionnaireStepAction(Project $project, QuestionnaireStep $step)
     {
-        if (!$step->canDisplay()) {
-            throw $this->createNotFoundException();
+        if (!$step->canDisplay($this->getUser())) {
+            throw $this->createAccessDeniedException();
         }
 
         $serializer = $this->get('serializer');
-        $props = $serializer->serialize([
-            'step' => $step,
-            'form' => $step->getQuestionnaire() ?: null,
-        ], 'json', SerializationContext::create()
-            ->setGroups(['Questionnaires', 'Questions', 'QuestionnaireSteps', 'Steps']))
-        ;
+        $props = $serializer->serialize(
+            [
+                'step' => $step,
+                'form' => $step->getQuestionnaire() ?: null,
+            ],
+            'json',
+            SerializationContext::create()
+                ->setGroups(['Questionnaires', 'Questions', 'QuestionnaireSteps', 'Steps'])
+        );
 
         return [
             'project' => $project,
@@ -340,8 +385,8 @@ class StepController extends Controller
      */
     public function showSelectionStepAction(Request $request, Project $project, SelectionStep $step)
     {
-        if (!$step->canDisplay()) {
-            throw $this->createNotFoundException();
+        if (!$step->canDisplay($this->getUser())) {
+            throw $this->createAccessDeniedException();
         }
 
         $searchResults = ['proposals' => [], 'count' => 0];
@@ -352,15 +397,33 @@ class StepController extends Controller
 
         $serializer = $this->get('serializer');
 
-        $props = $serializer->serialize([
-            'stepId' => $step->getId(),
-            'statuses' => $step->getStatuses(),
-            'categories' => $categories,
-            'count' => $searchResults['count'],
-            'defaultSort' => $step->getDefaultSort() ?: null,
-            'form' => $form,
-            'showThemes' => $showThemes,
-        ], 'json', SerializationContext::create()->setGroups(['Steps', 'ProposalForms', 'UserVotes', 'Statuses', 'ThemeDetails', 'Districts', 'Default', 'Proposals', 'UsersInfos', 'UserMedias', 'VoteThreshold']));
+        $props = $serializer->serialize(
+            [
+                'stepId' => $step->getId(),
+                'statuses' => $step->getStatuses(),
+                'categories' => $categories,
+                'count' => $searchResults['count'],
+                'defaultSort' => $step->getDefaultSort() ?: null,
+                'form' => $form,
+                'showThemes' => $showThemes,
+            ],
+            'json',
+            SerializationContext::create()->setGroups(
+                [
+                    'Steps',
+                    'ProposalForms',
+                    'UserVotes',
+                    'Statuses',
+                    'ThemeDetails',
+                    'Districts',
+                    'Default',
+                    'Proposals',
+                    'UsersInfos',
+                    'UserMedias',
+                    'VoteThreshold',
+                ]
+            )
+        );
 
         return [
             'project' => $project,
@@ -379,26 +442,33 @@ class StepController extends Controller
      */
     public function editSynthesisAction($projectSlug, SynthesisStep $step)
     {
-        if (!$step->canDisplay() || !$step->getSynthesis()) {
-            throw $this->createNotFoundException();
+        if (!$step->canDisplay($this->getUser()) || !$step->getSynthesis()) {
+            throw $this->createAccessDeniedException();
         }
 
-        if (!$step->getSynthesis()->isEditable() || !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            throw $this->createAccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
+        if (!$step->getSynthesis()->isEditable() || !$this->get('security.authorization_checker')->isGranted(
+                'ROLE_ADMIN'
+            )) {
+            throw $this->createAccessDeniedException(
+                $this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle')
+            );
         }
 
-        $em = $this->getDoctrine()->getManager();
-        $project = $em->getRepository('CapcoAppBundle:Project')->getOne($projectSlug);
+        $project = $this->projectRepository->getOne($projectSlug);
         if (!$project) {
             throw $this->createNotFoundException();
         }
 
         $serializer = $this->get('serializer');
 
-        $props = $serializer->serialize([
-            'synthesis_id' => $step->getSynthesis()->getId(),
-            'mode' => 'edit',
-        ], 'json', SerializationContext::create());
+        $props = $serializer->serialize(
+            [
+                'synthesis_id' => $step->getSynthesis()->getId(),
+                'mode' => 'edit',
+            ],
+            'json',
+            SerializationContext::create()
+        );
 
         return [
             'project' => $project,
@@ -426,14 +496,17 @@ class StepController extends Controller
     {
         $serializer = $this->get('serializer');
 
-        if (!$currentStep->canDisplay()) {
-            $error = $this->get('translator')->trans('project.error.not_found', [], 'CapcoAppBundle');
-            throw $this->createNotFoundException($error);
+        if (!$currentStep->canDisplay($this->getUser())) {
+            throw $this->createAccessDeniedException();
         }
 
-        $stepProps = $serializer->serialize([
-            'step' => $currentStep,
-        ], 'json', SerializationContext::create()->setGroups(['ConsultationSteps', 'Steps', 'UserVotes']));
+        $stepProps = $serializer->serialize(
+            [
+                'step' => $currentStep,
+            ],
+            'json',
+            SerializationContext::create()->setGroups(['ConsultationSteps', 'Steps', 'UserVotes'])
+        );
 
         return [
             'project' => $project,
