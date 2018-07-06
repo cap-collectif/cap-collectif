@@ -120,6 +120,7 @@ class Field extends React.Component<Props> {
         placeholder={placeholder || null}
         errors={errorMessage}
         validationState={check ? (error ? 'error' : 'success') : null}
+        hasFeedback={check}
         autoComplete={autoComplete}
         autoFocus={autoFocus || false}
         choices={choices}

@@ -1,8 +1,0 @@
-DeleteArgumentPayload:
-    type: relay-mutation-payload
-    config:
-        fields:
-            deletedArgumentId:
-                type: "ID"
-            argumentable:
-                type: "Argumentable!"

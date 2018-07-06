@@ -20,7 +20,7 @@ Consultation:
             contribuable:
                 type: "Boolean!"
                 description: "Contributions are allowed right now."
-                resolve: "@=value.canContribute()"
+                resolve: "@=resolver('consultation_contribuable', [value])"
             contributions:
                 type: "[Opinion]"
                 description: "List of contributions from any sections."

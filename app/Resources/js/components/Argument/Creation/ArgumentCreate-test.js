@@ -8,9 +8,9 @@ import { formMock } from '../../../mocks';
 describe('<ArgumentCreate />', () => {
   const props = {
     ...formMock,
-    type: 'FOR',
-    argumentable: { id: 'opinion1', isContribuable: true },
-    user: { id: 'user1' },
+    type: 'for',
+    opinion: {},
+    user: {},
     submitting: false,
     form: 'create-argument',
     dispatch: jest.fn(),

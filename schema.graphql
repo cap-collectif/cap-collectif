@@ -1,24 +1,3 @@
-input AddArgumentInput {
-  # The Argumentable ID to argue.
-  argumentableId: ID!
-
-  # The contents of the argument body.
-  body: String!
-
-  # The type of the argument.
-  type: ArgumentValue!
-  clientMutationId: String
-}
-
-type AddArgumentPayload {
-  # The new argument.
-  argument: Argument!
-
-  # The new argument edge.
-  argumentEdge: ArgumentEdge!
-  clientMutationId: String
-}
-
 input AddProposalVoteInput {
   # The Node ID of the proposal to vote.
   proposalId: ID!
@@ -71,129 +50,63 @@ type AddUsersInGroupPayload {
 
 scalar Address
 
-# An argument
-type Argument implements Node & Contribution & Reportable & TrashableContribution & ContributionWithAuthor & EditableContribution {
-  # True if the contribution is trashed.
-  trashed: Boolean!
-
-  # The moment the moderator trashed the contribution.
-  trashedAt: String
-
-  # The reason the moderator trashed the contribution.
-  trashedReason: String
-
-  # The ID of an object
+# A user personnal archive.
+type Archive {
+  # The id of the archive.
   id: ID!
 
-  # The kind of contribution (argument).
-  kind: String!
+  # When did the user requested his archive?
+  requestedAt: DateTime!
+
+  # Has the archive been generated?
+  ready: Boolean!
+
+  # When the archive has been deleted?
+  deletedAt: DateTime
+}
+
+# An argument
+type Argument implements Node & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
+  # Identifies the date and time when the object was created.
+  createdAt: DateTime!
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
+  url: URI!
+  expired: Boolean!
+  published: Boolean!
+  trashed: Boolean!
+
+  # Date of trash.
+  trashedAt: String
+
+  # Reason of trash.
+  trashedReason: String
+
+  # The author of the argument.
+  author: User!
+
+  # The type.
+  type: ArgumentValue!
+  votesCount: Int!
+
+  # The content of the argument.
+  id: ID!
+
+  # The content of the argument.
+  body: String!
 
   # Return the related contribution if the contribution is related to another.
   related: Contribution
 
-  # The HTTP show url for this contribution.
-  show_url: URI! @deprecated(reason: "Use url instead of show_url")
-
-  # Url of the contribution
-  url: URI!
-
-  # The author of the contribution.
-  author: User!
-
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
-
-  # Identifies the date and time when the object was created.
-  createdAt: DateTime!
-  expired: Boolean!
-  published: Boolean!
-
-  # The type.
-  type: ArgumentValue!
-
-  # This will be deprecated for a connection, soon.
-  votesCount: Int
-
-  # The content of the argument.
-  body: String!
-  viewerHasReport: Boolean!
-  viewerHasVote: Boolean!
-  contribuable: Boolean!
-}
-
-# A connection to a list of items.
-type ArgumentConnection {
-  totalCount: Int!
-
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # Information to aid in pagination.
-  edges: [ArgumentEdge]
-}
-
-# An edge in a connection.
-type ArgumentEdge {
-  # The item at the end of the edge.
-  node: Argument
-
-  # A cursor for use in pagination.
-  cursor: String!
-}
-
-# Ways in which argument connections can be ordered.
-input ArgumentOrder {
-  # The field in which to order nodes by.
-  field: ArgumentOrderField!
-
-  # The direction in which to order nodes.
-  direction: OrderDirection! = ASC
-}
-
-# Properties by which argument connections can be ordered
-enum ArgumentOrderField {
-  # Allows ordering a list of arguments by when they were created.
-  CREATED_AT
-
-  # Allows ordering a list of arguments by the number of votes it have.
-  VOTES
+  # The kind of contribution (argument).
+  kind: String!
 }
 
 # Value of an argument
 enum ArgumentValue {
   AGAINST
   FOR
-}
-
-# An argumentable
-interface Argumentable {
-  id: ID!
-
-  # The arguments related to the argumentable.
-  arguments(
-    after: String
-    first: Int
-    before: String
-    last: Int
-    orderBy: ArgumentOrder = {field: CREATED_AT, direction: DESC}
-
-    # If omitted, returns all arguments. If provided, returns the arguments of this particular type.
-    type: ArgumentValue
-  ): ArgumentConnection!
-}
-
-input ChangeArgumentInput {
-  # The argument Node id.
-  argumentId: ID!
-
-  # The contents of the argument body.
-  body: String!
-  clientMutationId: String
-}
-
-type ChangeArgumentPayload {
-  argument: Argument!
-  clientMutationId: String
 }
 
 input ChangeCollectStatusInput {
@@ -360,45 +273,40 @@ type ChangeUserNotificationsConfigurationPayload {
 
 # Requires the viewer to check a box
 type CheckboxRequirement implements Node & Requirement {
-  # The ID of an object
   id: ID!
-
-  # Does the viewer meets the requirement ?
-  viewerMeetsTheRequirement: Boolean!
 
   # The condition set by the requirement.
   label: String!
+
+  # Does the viewer meets the requirement ?
+  viewerMeetsTheRequirement: Boolean!
 }
 
-# A proposal step
 type CollectStep implements Node & Step & ProposalStep {
-  # The ID of the step
   id: ID!
-
-  # The kind of the step
-  kind: String!
-
-  # The title of the step
-  title: String!
-
-  # The url of the step
-  show_url: String! @deprecated(reason: "Use url instead of show_url")
-
-  # The url of the step
-  url: String!
 
   # The requirements to vote on this step.
   requirements: RequirementConnection!
-  project: Project
-  votesLimit: Int
-  budget: Int
-  voteType: ProposalStepVoteType!
-  votesHelpText: String
-  voteThreshold: Int
-  open: Boolean!
+  show_url: String!
+  kind: String!
 
   # If enabled, allow voters to order their votes by preferences.
   votesRanking: Boolean!
+  title: String!
+  statuses: [Status!]!
+  voteType: ProposalStepVoteType!
+  voteThreshold: Int
+  votesLimit: Int
+  votesHelpText: String
+  budget: Int
+  project: Project
+  open: Boolean!
+  private: Boolean!
+  form: ProposalForm!
+
+  # A list of contributor associated with the step.
+  contributors(after: String, first: Int, before: String, last: Int): UserConnection!
+  viewerProposalDrafts: ProposalConnection!
 
   # A list of viewer votes associated with the step.
   viewerVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}): ProposalVoteConnection!
@@ -426,37 +334,19 @@ type CollectStep implements Node & Step & ProposalStep {
     # Returns the last n elements from the list.
     last: Int
   ): ProposalConnection!
-  statuses: [Status!]!
-  private: Boolean!
-  form: ProposalForm!
-
-  # A list of contributor associated with the step.
-  contributors(after: String, first: Int, before: String, last: Int): UserConnection!
-  viewerProposalDrafts: ProposalConnection!
 }
 
 # A comment
 type Comment implements Node & Contribution {
-  # The ID of an object
   id: ID!
-
-  # The kind of contribution.
-  kind: String!
-
-  # Return the related contribution if the contribution is related to another.
-  related: Contribution
-
-  # The HTTP show url for this contribution.
-  show_url: URI! @deprecated(reason: "Use url instead of show_url")
-
-  # Url of the contribution
-  url: URI!
   body: String
   createdAt: DateTime!
   updatedAt: DateTime
   author: User
   parent: Comment
   pinned: Boolean!
+  show_url: String! @deprecated(reason: "Use url instead of show_url")
+  url: URI!
   answers: [Comment]!
   authorName: String
   authorEmail: String
@@ -465,6 +355,10 @@ type Comment implements Node & Contribution {
   reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
   votes(after: String, first: Int = 30, before: String, last: Int, orderBy: VoteOrder = {field: CREATED_AT, direction: DESC}): CommentVoteConnection!
   trashedReason: String
+  kind: String!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
 }
 
 # A connection to a list of items.
@@ -553,26 +447,20 @@ type CommentVoteEdge {
 
 # A consultation
 type Consultation implements Node & Step {
+  kind: String!
+  show_url: String!
+
   # The id of the consultation.
   id: ID!
-
-  # The kind of the step
-  kind: String!
-
-  # The title of the consultation.
-  title: String!
-
-  # The url of the step
-  show_url: String! @deprecated(reason: "Use url instead of show_url")
-
-  # The url of the step
-  url: String!
 
   # The project
   project: Project!
 
   # The id of the related project.
   projectId: String!
+
+  # The title of the consultation.
+  title: String!
 
   # Contributions are allowed right now.
   contribuable: Boolean!
@@ -605,17 +493,11 @@ type Consultation implements Node & Step {
 
 # A contribution with an author
 interface Contribution {
-  # The id of the contribution.
   id: ID!
-
-  # The kind of contribution.
   kind: String!
 
-  # Return the related contribution if the contribution is related to another.
+  # Related contribution.
   related: Contribution
-
-  # The HTTP show url for this contribution.
-  show_url: URI! @deprecated(reason: "Use url instead of show_url")
 
   # Url of the contribution
   url: URI!
@@ -671,7 +553,7 @@ enum ContributionType {
 # A contribution with an author
 interface ContributionWithAuthor {
   # The author of the contribution.
-  author: User!
+  author: User
 }
 
 input CreateGroupInput {
@@ -804,17 +686,6 @@ enum DeleteAccountType {
   HARD
 }
 
-input DeleteArgumentInput {
-  argumentId: ID!
-  clientMutationId: String
-}
-
-type DeleteArgumentPayload {
-  deletedArgumentId: ID
-  argumentable: Argumentable!
-  clientMutationId: String
-}
-
 input DeleteGroupInput {
   # The group id
   groupId: ID!
@@ -906,9 +777,7 @@ type EvaluationForm {
   questions: [Question!]!
 }
 
-# Fetches an object given its ID
 type Event implements Node {
-  # The ID of an object
   id: ID!
   title: String!
 
@@ -953,7 +822,6 @@ type EventEdge {
 
 # Require a firstname
 type FirstnameRequirement implements Node & Requirement {
-  # The ID of an object
   id: ID!
 
   # Does the viewer meets the requirement ?
@@ -1059,7 +927,6 @@ scalar JSON
 
 # Requires a lastname
 type LastnameRequirement implements Node & Requirement {
-  # The ID of an object
   id: ID!
 
   # Does the viewer meets the requirement ?
@@ -1087,6 +954,26 @@ type Media {
   copyright: String
   contentType: String!
   providerReference: String!
+}
+
+# A connection to a list of items.
+type MediaConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [MediaEdge]
+}
+
+# An edge in a connection.
+type MediaEdge {
+  # The item at the end of the edge.
+  node: Media!
+
+  # A cursor for use in pagination.
+  cursor: String!
 }
 
 # A media question
@@ -1138,9 +1025,6 @@ type MultipleChoiceQuestionValidationRule {
 }
 
 type Mutation {
-  addArgument(input: AddArgumentInput!): AddArgumentPayload
-  changeArgument(input: ChangeArgumentInput!): ChangeArgumentPayload
-  deleteArgument(input: DeleteArgumentInput!): DeleteArgumentPayload
   addReply(input: AddReplyInput!): AddReplyPayload
   deleteReply(input: DeleteReplyInput!): DeleteReplyPayload
   changeUserNotificationsConfiguration(input: ChangeUserNotificationsConfigurationInput!): ChangeUserNotificationsConfigurationPayload
@@ -1231,39 +1115,18 @@ type NotificationsConfiguration {
 }
 
 # A contribution
-type Opinion implements Node & Argumentable & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
-  # True if the contribution is trashed.
-  trashed: Boolean!
-
-  # The moment the moderator trashed the contribution.
-  trashedAt: String
-
-  # The reason the moderator trashed the contribution.
-  trashedReason: String
-
-  # The ID of an object
-  id: ID!
-
-  # The kind of contribution.
-  kind: String!
-
-  # Return the related contribution if the contribution is related to another.
-  related: Contribution
-
-  # The HTTP show url for this contribution.
-  show_url: URI! @deprecated(reason: "Use url instead of show_url")
-
-  # Url of the contribution
-  url: URI!
-
-  # The author of the contribution.
-  author: User!
+type Opinion implements Node & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
+  # Identifies the date and time when the object was created.
+  createdAt: DateTime!
 
   # Identifies the date and time when the object was last updated.
   updatedAt: DateTime
 
-  # Identifies the date and time when the object was created.
-  createdAt: DateTime!
+  # The HTTP url for this contribution.
+  url: URI!
+
+  # The author of the contribution.
+  author: User!
   type: OpinionType!
 
   # true if the contribution is pinned.
@@ -1272,6 +1135,15 @@ type Opinion implements Node & Argumentable & Contribution & TrashableContributi
   # true if the contribution is expired.
   expired: Boolean!
   published: Boolean!
+
+  # true if the contribution is trashed.
+  trashed: Boolean!
+
+  # The moment the moderator trashed the contribution.
+  trashedAt: String
+
+  # The reason the moderator trashed the contribution.
+  trashedReason: String
 
   # Number of votes.
   votesCount: Int!
@@ -1300,6 +1172,15 @@ type Opinion implements Node & Argumentable & Contribution & TrashableContributi
   # Number of sources.
   sourcesCount: Int!
   votes(first: Int): [OpinionVote]
+
+  # The content of the contribution.
+  id: ID!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
+
+  # The kind of contribution.
+  kind: String!
 
   # Identifies the contribution title.
   title: String!
@@ -1312,15 +1193,9 @@ type Opinion implements Node & Argumentable & Contribution & TrashableContributi
 
   # The arguments related to the contribution.
   arguments(
-    after: String
-    first: Int
-    before: String
-    last: Int
-    orderBy: ArgumentOrder = {field: CREATED_AT, direction: DESC}
-
     # If omitted, returns all arguments. If provided, returns the arguments of this particular type.
     type: ArgumentValue
-  ): ArgumentConnection!
+  ): [Argument]
 
   # The versions related to the contribution.
   versions: [Version]
@@ -1333,43 +1208,31 @@ type Opinion implements Node & Argumentable & Contribution & TrashableContributi
   reportings: [Reporting]
 }
 
+union OpinionOrVersion = Opinion | Version
+
 # A type of opinion
 type OpinionType implements Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
-  # True if the contribution is trashed.
-  trashed: Boolean!
-
-  # The moment the moderator trashed the contribution.
-  trashedAt: String
-
-  # The reason the moderator trashed the contribution.
-  trashedReason: String
-
-  # The id of the contribution.
-  id: ID!
-
-  # The kind of contribution.
-  kind: String!
-
-  # Return the related contribution if the contribution is related to another.
-  related: Contribution
-
-  # The HTTP show url for this contribution.
-  show_url: URI! @deprecated(reason: "Use url instead of show_url")
-
-  # Url of the contribution
-  url: URI!
-
-  # The author of the contribution.
-  author: User!
+  # Identifies the date and time when the object was created.
+  createdAt: DateTime!
 
   # Identifies the date and time when the object was last updated.
   updatedAt: DateTime
 
-  # Identifies the date and time when the object was created.
-  createdAt: DateTime!
+  # The url of contribution.
+  url: URI!
+
+  # The author of the contribution.
+  author: User!
   type: OpinionType!
   expired: Boolean!
   published: Boolean!
+  trashed: Boolean!
+
+  # Date of trash.
+  trashedAt: String
+
+  # Reason of trash.
+  trashedReason: String
 
   # Number of votes.
   votesCount: Int!
@@ -1398,6 +1261,15 @@ type OpinionType implements Contribution & TrashableContribution & ContributionW
   # Number of sources.
   sourcesCount: Int!
   votes(first: Int): [OpinionVote]
+
+  # The content of the contribution.
+  id: ID!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
+
+  # The kind of contribution.
+  kind: String!
 
   # The title of the contribution.
   title: String!
@@ -1422,7 +1294,7 @@ type OpinionType implements Contribution & TrashableContribution & ContributionW
   reportings: [Reporting]
 }
 
-type OpinionVote implements YesNoPairedVote {
+type OpinionVote implements YesNoPairedVote & ContributionWithAuthor {
   id: ID!
 
   # The author of the contribution. If null, account has been deleted.
@@ -1451,22 +1323,11 @@ enum OrderDirection {
   DESC
 }
 
-# A step in a project
 type OtherStep implements Step {
-  # The ID of the step
   id: ID!
-
-  # The kind of the step
+  show_url: String!
   kind: String!
-
-  # The title of the step
   title: String!
-
-  # The url of the step
-  show_url: String! @deprecated(reason: "Use url instead of show_url")
-
-  # The url of the step
-  url: String!
 }
 
 # Information about pagination in a connection.
@@ -1513,7 +1374,6 @@ type ParticipantEdge {
 
 # Requires a phone
 type PhoneRequirement implements Node & Requirement {
-  # The ID of an object
   id: ID!
 
   # Does the viewer meets the requirement ?
@@ -1563,22 +1423,11 @@ enum PostPublicationStatus {
 # A related content for a post
 union PostRelatedContent = Theme | Proposal | Project
 
-# A step in a project
 type PresentationStep implements Step {
-  # The ID of the step
   id: ID!
-
-  # The kind of the step
   kind: String!
-
-  # The title of the step
   title: String!
-
-  # The url of the step
-  show_url: String! @deprecated(reason: "Use url instead of show_url")
-
-  # The url of the step
-  url: String!
+  show_url: String!
 }
 
 # A budget contribution
@@ -1597,7 +1446,6 @@ input ProgressStepInput {
 
 # A participatory project.
 type Project implements Node {
-  # The ID of an object
   id: ID!
   steps: [Step!]!
   title: String!
@@ -1609,20 +1457,11 @@ type Project implements Node {
 }
 
 # A budget contribution
-type Proposal implements Node & Contribution & Reportable {
-  # The ID of an object
-  id: ID!
-
-  # The kind of contribution.
-  kind: String!
-
-  # Return the related contribution if the contribution is related to another.
-  related: Contribution
-
+type Proposal implements Node & Contribution {
   # The HTTP show url for this contribution.
   show_url: URI! @deprecated(reason: "Use url instead of show_url")
 
-  # Url of the contribution
+  # The HTTP show url for this contribution.
   url: URI!
 
   # The admin url for this contribution.
@@ -1668,6 +1507,9 @@ type Proposal implements Node & Contribution & Reportable {
   trashedReason: String
   trashedAt: DateTime
   expired: Boolean
+
+  # The id of the contribution.
+  id: ID!
 
   # The unique reference of proposal
   reference: String!
@@ -1763,11 +1605,15 @@ type Proposal implements Node & Contribution & Reportable {
   followerConfiguration: Follower
   postsCount: Int!
   viewerCanSeeEvaluation: Boolean!
+  kind: String!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
   viewerHasVote(
     # The concerned step.
     step: ID!
   ): Boolean!
-  viewerHasReport: Boolean!
+  viewerHasReported: Boolean!
   votableSteps: [ProposalStep!]!
 }
 
@@ -1822,7 +1668,6 @@ type ProposalEvaluation {
 
 # A budget form
 type ProposalForm implements Node {
-  # The ID of an object
   id: ID!
   reference: String!
   description: String
@@ -1957,23 +1802,10 @@ enum ProposalPublicationStatus {
 
 # A proposal step
 interface ProposalStep {
-  # The ID of the step
-  id: ID!
-
-  # The kind of the step
-  kind: String!
-
-  # The title of the step
-  title: String!
-
-  # The url of the step
-  show_url: String! @deprecated(reason: "Use url instead of show_url")
-
-  # The url of the step
-  url: String!
-
-  # The requirements to vote on this step.
   requirements: RequirementConnection!
+  id: ID!
+  kind: String!
+  title: String!
   project: Project
   votesLimit: Int
   budget: Int
@@ -1981,9 +1813,8 @@ interface ProposalStep {
   votesHelpText: String
   voteThreshold: Int
   open: Boolean!
-
-  # If enabled, allow voters to order their votes by preferences.
   votesRanking: Boolean!
+  show_url: String!
 
   # A list of viewer votes associated with the step.
   viewerVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}): ProposalVoteConnection!
@@ -2020,7 +1851,9 @@ enum ProposalStepVoteType {
   BUDGET
 }
 
-type ProposalVote {
+union ProposalVotableStep = CollectStep | SelectionStep
+
+type ProposalVote implements ContributionWithAuthor {
   id: ID!
 
   # The author of the contribution. If null, the vote is anonymous.
@@ -2070,10 +1903,25 @@ type ProposalVoteEdge {
   cursor: String!
 }
 
+# Ways in which lists of proposal votes can be ordered upon return.
+input ProposalVoteOrder {
+  field: ProposalVoteOrderField! = CREATED_AT
+  direction: OrderDirection! = DESC
+}
+
+# Ordering options for proposals votes connections.
+enum ProposalVoteOrderField {
+  CREATED_AT
+}
+
 # Ways in which lists of votes can be ordered upon return.
 input ProposalVotesOrder {
   field: VoteOrderField! = CREATED_AT
   direction: OrderDirection! = DESC
+}
+
+input ProposalsConnectionFilter {
+  viewerIsEvaluer: Boolean = false
 }
 
 type Query {
@@ -2164,9 +2012,7 @@ enum QuestionTypeValue {
   button
 }
 
-# Fetches an object given its ID
 type Questionnaire implements Node {
-  # The ID of an object
   id: ID!
   title: String!
   anonymousAllowed: Boolean!
@@ -2180,48 +2026,32 @@ type Questionnaire implements Node {
   viewerReplies: [Reply!]!
 }
 
+type QuestionnaireAbstractQuestion {
+  id: Int!
+  position: Int
+  question: Question
+}
+
 input QuestionnaireAbstractQuestionInput {
   question: QuestionInput!
   position: Int!
 }
 
-# A step in a project
 type QuestionnaireStep implements Node & Step {
-  # The ID of the step
   id: ID!
-
-  # The kind of the step
   kind: String!
-
-  # The title of the step
   title: String!
-
-  # The url of the step
-  show_url: String! @deprecated(reason: "Use url instead of show_url")
-
-  # The url of the step
-  url: String!
 
   # A list of contributor associated with the step.
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
+  show_url: String!
 }
 
-# A step in a project
 type RankingStep implements Step {
-  # The ID of the step
   id: ID!
-
-  # The kind of the step
   kind: String!
-
-  # The title of the step
   title: String!
-
-  # The url of the step
-  show_url: String! @deprecated(reason: "Use url instead of show_url")
-
-  # The url of the step
-  url: String!
+  show_url: String!
 }
 
 input RemoveProposalVoteInput {
@@ -2242,27 +2072,12 @@ type RemoveProposalVotePayload {
 
 # A Reply
 type Reply implements Node & Contribution {
-  # The ID of an object
   id: ID!
-
-  # The kind of contribution.
-  kind: String!
-
-  # Return the related contribution if the contribution is related to another.
-  related: Contribution
-
-  # The HTTP show url for this contribution.
-  show_url: URI! @deprecated(reason: "Use url instead of show_url")
-
-  # Url of the contribution
-  url: URI!
+  author: User!
   enabled: Boolean!
   private: Boolean!
   createdAt: DateTime!
   responses: [Response]!
-
-  # The author of the contribution.
-  author: User!
 
   # The updated date.
   updatedAt: DateTime
@@ -2270,7 +2085,12 @@ type Reply implements Node & Contribution {
 
   # Identifies the form where the contribution was submitted.
   questionnaire: Questionnaire!
+  kind: String!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
   viewerCanDelete: Boolean!
+  url: URI!
 }
 
 # A connection to a list of items.
@@ -2293,43 +2113,29 @@ type ReportEdge {
   cursor: String!
 }
 
-# A reportable
-interface Reportable {
-  # Does the viewer already submitted a report ?
-  viewerHasReport: Boolean!
-}
-
 # A report
 type Reporting implements Contribution & ContributionWithAuthor {
-  # The id of the contribution.
-  id: ID!
-
-  # The kind of contribution.
-  kind: String!
-
-  # Return the related contribution if the contribution is related to another.
-  related: Contribution
-
-  # The HTTP show url for this contribution.
-  show_url: URI! @deprecated(reason: "Use url instead of show_url")
-
-  # Url of the contribution
-  url: URI!
-
-  # The author of the contribution.
-  author: User!
-
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
 
-  # The escaped content of the argument.
-  bodyText: String!
+  # The author of the reporting.
+  author: User!
 
   # Kind of report.
   type: ReportingType!
 
   # The content of the argument.
+  id: ID!
+
+  # The content of the argument.
   body: String!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
+
+  # Returns 'report'.
+  kind: String!
+  url: URI!
 }
 
 # A connection to a list of items.
@@ -2370,6 +2176,26 @@ enum ReportingType {
   SPAM
   ERROR
   OFF_TOPIC
+}
+
+# A connection to a list of items.
+type ReportsConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [ReportsEdge]
+}
+
+# An edge in a connection.
+type ReportsEdge {
+  # The item at the end of the edge.
+  node: Reporting!
+
+  # A cursor for use in pagination.
+  cursor: String!
 }
 
 input RequestUserArchiveInput {
@@ -2514,37 +2340,29 @@ type Selection {
 }
 
 # A budget contribution
-type SelectionStep implements Node & Step & ProposalStep {
-  # The ID of the step
+type SelectionStep implements Step & Node & ProposalStep {
   id: ID!
-
-  # The kind of the step
-  kind: String!
-
-  # The title of the step
-  title: String!
-
-  # The url of the step
-  show_url: String! @deprecated(reason: "Use url instead of show_url")
-
-  # The url of the step
-  url: String!
 
   # The requirements to vote on this step.
   requirements: RequirementConnection!
-  project: Project
-  votesLimit: Int
-  budget: Int
-  voteType: ProposalStepVoteType!
-  votesHelpText: String
-  voteThreshold: Int
-  open: Boolean!
+  show_url: String!
+  kind: String!
 
   # If enabled, allow voters to order their votes by preferences.
   votesRanking: Boolean!
+  votesLimit: Int
+  position: Int!
+  voteType: ProposalStepVoteType!
+  budget: Int
+  open: Boolean!
+  title: String!
+  votesHelpText: String
+  statuses: [Status!]!
+  project: Project!
 
-  # A list of viewer votes associated with the step.
-  viewerVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}): ProposalVoteConnection!
+  # Only one selection step inside a project can have realisation steps, true if this one
+  allowingProgressSteps: Boolean!
+  voteThreshold: Int
   proposals(
     district: ID
     userType: ID
@@ -2569,14 +2387,12 @@ type SelectionStep implements Node & Step & ProposalStep {
     # Returns the last n elements from the list.
     last: Int
   ): ProposalConnection!
-  position: Int!
-  statuses: [Status!]!
-
-  # Only one selection step inside a project can have realisation steps, true if this one
-  allowingProgressSteps: Boolean!
 
   # A list of contributor associated with the consultation.
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
+
+  # A list of viewer votes associated with the step.
+  viewerVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}): ProposalVoteConnection!
 }
 
 input SetEvaluationFormInProposalFormInput {
@@ -2609,47 +2425,40 @@ type SimpleQuestion implements Question {
 
 # A source
 type Source implements Node & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
-  # True if the contribution is trashed.
-  trashed: Boolean!
-
-  # The moment the moderator trashed the contribution.
-  trashedAt: String
-
-  # The reason the moderator trashed the contribution.
-  trashedReason: String
-
-  # The ID of an object
-  id: ID!
-
-  # The kind of contribution.
-  kind: String!
-
-  # Return the related contribution if the contribution is related to another.
-  related: Contribution
-
-  # The HTTP show url for this contribution.
-  show_url: URI! @deprecated(reason: "Use url instead of show_url")
-
-  # Url of the contribution
-  url: URI!
-
-  # The author of the contribution.
-  author: User!
+  # Identifies the date and time when the object was created.
+  createdAt: DateTime!
 
   # Identifies the date and time when the object was last updated.
   updatedAt: DateTime
-
-  # Identifies the date and time when the object was created.
-  createdAt: DateTime!
   expired: Boolean!
   published: Boolean!
+  trashed: Boolean!
+
+  # Date of trash.
+  trashedAt: String
+
+  # Reason of trash.
+  trashedReason: String
+
+  # The id of the source.
+  id: ID!
   votesCount: Int!
+
+  # The author of the source.
+  author: User!
 
   # The title of the source.
   title: String!
 
   # The content of the source.
   body: String!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
+
+  # Returns 'source'.
+  kind: String!
+  url: URI!
 }
 
 type Status {
@@ -2660,38 +2469,17 @@ type Status {
 
 # A step in a project
 interface Step {
-  # The ID of the step
   id: ID!
-
-  # The kind of the step
   kind: String!
-
-  # The title of the step
   title: String!
-
-  # The url of the step
-  show_url: String! @deprecated(reason: "Use url instead of show_url")
-
-  # The url of the step
-  url: String!
+  show_url: String!
 }
 
-# A step in a project
 type SynthesisStep implements Step {
-  # The ID of the step
   id: ID!
-
-  # The kind of the step
   kind: String!
-
-  # The title of the step
   title: String!
-
-  # The url of the step
-  show_url: String! @deprecated(reason: "Use url instead of show_url")
-
-  # The url of the step
-  url: String!
+  show_url: String!
 }
 
 # A theme
@@ -2703,13 +2491,12 @@ type Theme {
 
 # A trashable contribution
 interface TrashableContribution {
-  # True if the contribution is trashed.
   trashed: Boolean!
 
-  # The moment the moderator trashed the contribution.
+  # Date of trash.
   trashedAt: String
 
-  # The reason the moderator trashed the contribution.
+  # Reason of trash.
   trashedReason: String
 }
 
@@ -3020,10 +2807,9 @@ type User implements Node {
 
   # (unique) slug of the user.
   slug: String
-  show_url: URI @deprecated(reason: "Use url instead of show_url")
 
   # URL to user profile, null if the feature profiles is disabled.
-  url: URI
+  show_url: URI
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
@@ -3218,6 +3004,18 @@ type UserEdge {
   cursor: String!
 }
 
+# A list of users in groups
+type UserGroup {
+  # The identifier of the group
+  id: ID!
+
+  # Identifies the user
+  user: User!
+
+  # Identifies the group
+  group: Group!
+}
+
 # A user's notifications configuration
 type UserNotificationsConfiguration {
   # A boolean representing if the user wants to receive notifications by mail when someone commented his proposal
@@ -3249,41 +3047,27 @@ type ValueResponse implements Response {
 }
 
 # A version of contribution
-type Version implements Node & Contribution & Argumentable & TrashableContribution & ContributionWithAuthor & EditableContribution {
-  # True if the contribution is trashed.
-  trashed: Boolean!
+type Version implements Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
+  # Identifies the date and time when the object was created.
+  createdAt: DateTime!
 
-  # The moment the moderator trashed the contribution.
-  trashedAt: String
-
-  # The reason the moderator trashed the contribution.
-  trashedReason: String
-
-  # The id of the contribution.
-  id: ID!
-
-  # The kind of contribution.
-  kind: String!
-
-  # Return the related contribution if the contribution is related to another.
-  related: Contribution
-
-  # The HTTP show url for this contribution.
-  show_url: URI! @deprecated(reason: "Use url instead of show_url")
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
 
   # The url of version.
   url: URI!
 
   # The author of the contribution.
   author: User!
-
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
-
-  # Identifies the date and time when the object was created.
-  createdAt: DateTime!
   expired: Boolean!
   published: Boolean!
+  trashed: Boolean!
+
+  # Date of trash.
+  trashedAt: String
+
+  # Reason of trash.
+  trashedReason: String
 
   # Explenation.
   comment: String
@@ -3313,6 +3097,15 @@ type Version implements Node & Contribution & Argumentable & TrashableContributi
   sourcesCount: Int!
   votes(first: Int): [VersionVote]
 
+  # The content of the contribution.
+  id: ID!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
+
+  # Returns 'version'.
+  kind: String!
+
   # The title of the contribution.
   title: String!
 
@@ -3322,21 +3115,15 @@ type Version implements Node & Contribution & Argumentable & TrashableContributi
   # The content of the contribution.
   bodyText: HTML!
 
+  # The arguments related to the contribution.
+  arguments(
+    # If omitted, returns all arguments. If provided, returns the arguments of this particular type.
+    type: ArgumentValue
+  ): [Argument]
+
   # The sources related to the contribution.
   sources: [Source]
   reportings: [Reporting]
-
-  # The arguments related to the contribution.
-  arguments(
-    after: String
-    first: Int
-    before: String
-    last: Int
-    orderBy: ArgumentOrder = {field: CREATED_AT, direction: DESC}
-
-    # If omitted, returns all arguments. If provided, returns the arguments of this particular type.
-    type: ArgumentValue
-  ): ArgumentConnection!
 }
 
 type VersionVote implements YesNoPairedVote & ContributionWithAuthor {

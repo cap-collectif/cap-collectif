@@ -1,18 +1,17 @@
 // @flow
 import React from 'react';
 import { Modal } from 'react-bootstrap';
-import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+
+import ArgumentStore from '../../../stores/ArgumentStore';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
-import AppDispatcher from '../../../dispatchers/AppDispatcher';
-import DeleteArgumentMutation from '../../../mutations/DeleteArgumentMutation';
-import type { ArgumentDeleteModal_argument } from './__generated__/ArgumentDeleteModal_argument.graphql';
+import ArgumentActions from '../../../actions/ArgumentActions';
 
 type Props = {
   show: boolean,
-  argument: ArgumentDeleteModal_argument,
-  onClose: () => void,
+  argument: Object,
+  onClose: Function,
 };
 
 type State = {
@@ -27,15 +26,11 @@ class ArgumentDeleteModal extends React.Component<Props, State> {
   handleSubmit = () => {
     const { argument, onClose } = this.props;
     this.setState({ isSubmitting: true });
-
-    return DeleteArgumentMutation.commit({ input: { argumentId: argument.id } }, argument.type)
+    ArgumentActions.delete(ArgumentStore.opinion, argument.id)
       .then(() => {
-        AppDispatcher.dispatch({
-          actionType: 'UPDATE_ALERT',
-          alert: { bsStyle: 'success', content: 'alert.success.delete.argument' },
-        });
         onClose();
         this.setState({ isSubmitting: false });
+        ArgumentActions.load(ArgumentStore.opinion, argument.type);
       })
       .catch(() => {
         this.setState({ isSubmitting: false });
@@ -54,7 +49,7 @@ class ArgumentDeleteModal extends React.Component<Props, State> {
         aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
-            <FormattedMessage id="global.removeMessage" />
+            {<FormattedMessage id="global.removeMessage" />}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -77,12 +72,4 @@ class ArgumentDeleteModal extends React.Component<Props, State> {
   }
 }
 
-export default createFragmentContainer(
-  ArgumentDeleteModal,
-  graphql`
-    fragment ArgumentDeleteModal_argument on Argument {
-      id
-      type
-    }
-  `,
-);
+export default ArgumentDeleteModal;

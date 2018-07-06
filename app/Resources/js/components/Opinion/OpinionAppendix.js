@@ -40,8 +40,8 @@ class OpinionAppendix extends React.Component<Props, State> {
     const style = this.state.expanded ? { marginBottom: '15px' } : {};
     return (
       <Panel
+        collapsible
         expanded={this.state.expanded}
-        onToggle={() => {}}
         style={style}
         className="opinion__appendix__content">
         <Panel.Collapse>

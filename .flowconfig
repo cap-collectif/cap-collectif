@@ -1,5 +1,5 @@
 [version]
-0.75.0
+0.70.0
 
 [lints]
 all=warn
@@ -19,16 +19,8 @@ flow-typed
 
 [options]
 emoji=true
-module.use_strict=true
-
-; This enforce a good practice
 experimental.const_params=true
-
-; We are using this for * as React
-esproposal.export_star_as=enable
-
-; We are not using decorators
-esproposal.decorators=ignore
-
-; An IDE is a much better interface to show warnings…
-;include_warnings=true
+;module.system=haste
+module.use_strict=true
+esproposal.class_static_fields=enable
+esproposal.class_instance_fields=enable

@@ -1,23 +1,19 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import { graphql, createFragmentContainer } from 'react-relay';
 import ReportBox from '../Report/ReportBox';
 import { submitArgumentReport } from '../../redux/modules/report';
-import type { ArgumentReportButton_argument } from './__generated__/ArgumentReportButton_argument.graphql';
+import ArgumentStore from '../../stores/ArgumentStore';
 
 type Props = {
   dispatch: Function,
-  argument: ArgumentReportButton_argument,
+  argument: Object,
 };
 
 class ArgumentReportButton extends React.Component<Props> {
-  handleReport = (data: Object) => {
+  handleReport = data => {
     const { argument, dispatch } = this.props;
-    if (!argument.related) {
-      return;
-    }
-    return submitArgumentReport(argument.related, argument.id, data, dispatch);
+    return submitArgumentReport(ArgumentStore.opinion, argument.id, data, dispatch);
   };
 
   render() {
@@ -25,9 +21,9 @@ class ArgumentReportButton extends React.Component<Props> {
     return (
       <ReportBox
         id={`argument-${argument.id}`}
-        reported={argument.viewerHasReport}
+        reported={argument.hasUserReported}
         onReport={this.handleReport}
-        author={{ uniqueId: argument.author.slug }}
+        author={argument.author}
         buttonBsSize="xs"
         buttonClassName="argument__btn--report"
       />
@@ -35,21 +31,4 @@ class ArgumentReportButton extends React.Component<Props> {
   }
 }
 
-const container = connect()(ArgumentReportButton);
-export default createFragmentContainer(
-  container,
-  graphql`
-    fragment ArgumentReportButton_argument on Argument
-      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
-      author {
-        id
-        slug
-      }
-      related {
-        id
-      }
-      id
-      viewerHasReport @include(if: $isAuthenticated)
-    }
-  `,
-);
+export default connect()(ArgumentReportButton);

@@ -71,6 +71,7 @@ type Props = {
   buttonBefore?: any,
   buttonAfter?: any,
   standalone?: boolean,
+  hasFeedback?: boolean,
   validationState?: string,
   isOtherAllowed?: boolean,
   label?: string | any,
@@ -131,7 +132,6 @@ class ReactBootstrapInput extends React.Component<Props> {
     image,
     medias,
     intl,
-    isOtherAllowed,
     radioChecked,
     ...props
   }: Object) {
@@ -206,7 +206,7 @@ class ReactBootstrapInput extends React.Component<Props> {
         const field = {};
         field.id = props.id;
         field.type = type;
-        field.isOtherAllowed = isOtherAllowed;
+        field.isOtherAllowed = props.isOtherAllowed;
         field.choices = props.choices;
         field.checked = props.checked;
         return (
@@ -252,7 +252,7 @@ class ReactBootstrapInput extends React.Component<Props> {
 
     if (type === 'radio') {
       formControl = (
-        <Radio value={value} {...props} checked={radioChecked} isOtherAllowed={isOtherAllowed}>
+        <Radio value={value} {...props} checked={radioChecked}>
           {children}
         </Radio>
       );

@@ -14,7 +14,7 @@ import UserAdminPersonalData_user from './__generated__/UserAdminPersonalData_us
 import DatesInterval from '../../Utils/DatesInterval';
 
 type RelayProps = { user: UserAdminPersonalData_user };
-type GenderValue = 'FEMALE' | 'MALE' | 'OTHER';
+type GenderValue = 'FEMALE' | 'MALE' | 'OTHER' | '%future added value';
 type FormValue = {
   address: string,
   address2: string,

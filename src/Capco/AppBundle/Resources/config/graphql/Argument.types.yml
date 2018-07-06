@@ -3,7 +3,7 @@ Argument:
     inherits: [Node, Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
     config:
         description: "An argument"
-        interfaces: [Node, Contribution, Reportable, TrashableContribution, ContributionWithAuthor, EditableContribution]
+        interfaces: [Node, Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
         fields:
             createdAt:
                 type: "DateTime!"
@@ -20,22 +20,9 @@ Argument:
                 type: "ArgumentValue!"
                 description: "The type."
             votesCount:
-                type: "Int"
-                description: "This will be deprecated for a connection, soon."
+                type: "Int!"
             body:
                 type: "String!"
                 description: "The content of the argument."
             kind:
-                type: "String!"
-                description: "The kind of contribution (argument)."
-            viewerHasReport:
-                access: "@=hasRole('ROLE_USER')"
-                type: "Boolean!"
-                resolve: '@=value.userHasReport(getUser())'
-            viewerHasVote:
-                access: "@=hasRole('ROLE_USER')"
-                type: "Boolean!"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Argument\\ArgumentViewerHasVoteResolver", [value, getUser()])'
-            contribuable:
-                type: "Boolean!"
-                resolve: "@=value.canContribute()"
+                description: "argument"
