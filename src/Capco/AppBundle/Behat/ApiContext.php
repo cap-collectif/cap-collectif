@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Behat;
 
 use Behat\Gherkin\Node\PyStringNode;
@@ -70,7 +69,10 @@ class ApiContext extends ApplicationContext
      */
     public function iAmLoggedInToApiAsUserWithPhoneNotPhoneConfirmed()
     {
-        $this->createAuthenticatedClient('user_with_phone_not_phone_confirmed@test.com', 'user_with_phone_not_phone_confirmed');
+        $this->createAuthenticatedClient(
+            'user_with_phone_not_phone_confirmed@test.com',
+            'user_with_phone_not_phone_confirmed'
+        );
     }
 
     /**
@@ -86,7 +88,10 @@ class ApiContext extends ApplicationContext
      */
     public function iAmLoggedInToApiAsUserWithSmsCode()
     {
-        $this->createAuthenticatedClient('user_with_code_not_phone_confirmed@test.com', 'user_with_code_not_phone_confirmed');
+        $this->createAuthenticatedClient(
+            'user_with_code_not_phone_confirmed@test.com',
+            'user_with_code_not_phone_confirmed'
+        );
     }
 
     /**
@@ -116,7 +121,7 @@ class ApiContext extends ApplicationContext
      */
     public function iSendSourceRequest($method, $url)
     {
-        $json = <<< 'EOF'
+        $json = <<<'EOF'
         {
             "link": "http://google.com",
             "title": "Je suis une source",
@@ -136,7 +141,7 @@ EOF;
      */
     public function iSendOpinionRequest($method, $url)
     {
-        $json = <<< 'EOF'
+        $json = <<<'EOF'
        {
          "title": "Nouveau titre",
          "body": "Mes modifications blablabla"
@@ -153,45 +158,10 @@ EOF;
      */
     public function iSendReportRequest($method, $url)
     {
-        $json = <<< 'EOF'
+        $json = <<<'EOF'
         {
             "status": 2,
             "body": "Pas très catholique tout ça"
-        }
-EOF;
-
-        $this->iSendARequestWithJson($method, $url, $json);
-    }
-
-    /**
-     * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid argument json$/
-     *
-     * @param mixed $method
-     * @param mixed $url
-     */
-    public function iSendArgumentRequest($method, $url)
-    {
-        $json = <<< 'EOF'
-        {
-            "type": "1",
-            "body": "Coucou, je suis un argument !"
-        }
-EOF;
-
-        $this->iSendARequestWithJson($method, $url, $json);
-    }
-
-    /**
-     * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid argument update json$/
-     *
-     * @param mixed $method
-     * @param mixed $url
-     */
-    public function iSendUpdateArgumentRequest($method, $url)
-    {
-        $json = <<< 'EOF'
-        {
-            "body": "Je suis un argument modifié."
         }
 EOF;
 
@@ -207,10 +177,11 @@ EOF;
     public function iSendARequest($method, $url)
     {
         $this->response = $this->client->request($method, $url, [
-            'headers' => [
-                'Authorization' => sprintf('Bearer %s', $this->token),
-                'Content-Type' => 'application/json',
-            ],
+            'headers' =>
+                [
+                    'Authorization' => sprintf('Bearer %s', $this->token),
+                    'Content-Type' => 'application/json',
+                ],
             'exceptions' => false,
         ]);
     }
@@ -241,10 +212,11 @@ EOF;
         $this->response = $this->client->request($method, $url, [
             'json' => json_decode($string->getRaw(), true),
             'exceptions' => false,
-            'headers' => [
-                'Authorization' => sprintf('Bearer %s', $this->token),
-                'Content-Type' => 'application/json',
-            ],
+            'headers' =>
+                [
+                    'Authorization' => sprintf('Bearer %s', $this->token),
+                    'Content-Type' => 'application/json',
+                ],
         ]);
     }
 
@@ -256,7 +228,7 @@ EOF;
      */
     public function iSendARequestWithDocumentAndIllustration($method, $url)
     {
-        $json = <<< 'EOF'
+        $json = <<<'EOF'
         {
             "title": "Acheter un sauna pour Capco",
             "body": "Avec tout le travail accompli, on mérite bien un (petit) cadeau, donc on a choisi un sauna. Attention JoliCode ne sera accepté que sur invitation !",
@@ -354,7 +326,9 @@ EOF;
      */
     public function thereIsASynthesisBasedOnConsultationStep(string $sId, string $csId)
     {
-        $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find($sId);
+        $synthesis = $this->getEntityManager()
+            ->getRepository('CapcoAppBundle:Synthesis\Synthesis')
+            ->find($sId);
 
         if (null === $synthesis) {
             // Create synthesis
@@ -370,8 +344,13 @@ EOF;
             $this->getEntityManager()->flush();
         }
 
-        $consultationStep = $this->getEntityManager()->getRepository('CapcoAppBundle:Steps\ConsultationStep')->find($csId);
-        $this->getService('capco.synthesis.synthesis_handler')->createSynthesisFromConsultationStep($synthesis, $consultationStep);
+        $consultationStep = $this->getEntityManager()
+            ->getRepository('CapcoAppBundle:Steps\ConsultationStep')
+            ->find($csId);
+        $this->getService('capco.synthesis.synthesis_handler')->createSynthesisFromConsultationStep(
+            $synthesis,
+            $consultationStep
+        );
     }
 
     /**
@@ -384,7 +363,9 @@ EOF;
     public function iCreateAnElementInSynthesisWithValues($id, TableNode $data)
     {
         $values = $data->getRowsHash();
-        $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find($id);
+        $synthesis = $this->getEntityManager()
+            ->getRepository('CapcoAppBundle:Synthesis\Synthesis')
+            ->find($id);
 
         $element = new SynthesisElement();
         $element->setSynthesis($synthesis);
@@ -426,7 +407,9 @@ EOF;
      */
     public function thereShouldBeALogOnElementWithSentence($id, $sentence)
     {
-        $element = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->find($id);
+        $element = $this->getEntityManager()
+            ->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')
+            ->find($id);
         $logs = $this->getService('capco.synthesis.log_manager')->getLogEntries($element);
         $logExists = false;
         foreach ($logs as $log) {
@@ -449,7 +432,9 @@ EOF;
      */
     public function iUpdateOpinionWithValues(string $id, TableNode $data)
     {
-        $opinion = $this->getEntityManager()->getRepository('CapcoAppBundle:Opinion')->find($id);
+        $opinion = $this->getEntityManager()
+            ->getRepository('CapcoAppBundle:Opinion')
+            ->find($id);
 
         if (null !== $opinion) {
             $values = $data->getRowsHash();
@@ -473,7 +458,7 @@ EOF;
      */
     public function iSendUpdateSynthesisDisplayRulesRequest($method, $url)
     {
-        $json = <<< 'EOF'
+        $json = <<<'EOF'
         {
             "level": 1
         }
@@ -489,7 +474,10 @@ EOF;
     {
         $max = 100000;
         $pinned = true;
-        foreach (json_decode($this->response->getBody()->getContents(), true)['comments'] as $comment) {
+        foreach (
+            json_decode($this->response->getBody()->getContents(), true)['comments']
+            as $comment
+        ) {
             if ($pinned && !$comment['pinned']) {
                 $max = 100000;
                 $pinned = false;
@@ -526,21 +514,14 @@ EOF;
     /**
      * Create a client with a an Authorization header.
      */
-    protected function createAuthenticatedClient(string $username = 'test', string $password = 'test')
-    {
-        $response = $this->client->request(
-            'POST',
-            '/api/login_check',
-            [
-                'headers' => [
-                  'X-Requested-With' => 'XMLHttpRequest',
-                ],
-                'json' => [
-                    'username' => $username,
-                    'password' => $password,
-                ],
-            ]
-        );
+    protected function createAuthenticatedClient(
+        string $username = 'test',
+        string $password = 'test'
+    ) {
+        $response = $this->client->request('POST', '/api/login_check', [
+            'headers' => ['X-Requested-With' => 'XMLHttpRequest'],
+            'json' => ['username' => $username, 'password' => $password],
+        ]);
         $body = (string) $response->getBody();
         $this->token = json_decode($body, true)['token'];
     }
@@ -550,11 +531,12 @@ EOF;
         $this->response = $this->client->request($method, $url, [
             'json' => json_decode($body, true),
             'exceptions' => false,
-            'headers' => [
-                'Authorization' => sprintf('Bearer %s', $this->token),
-                'Content-Type' => 'application/json',
-                'Accept' => 'application/json',
-            ],
+            'headers' =>
+                [
+                    'Authorization' => sprintf('Bearer %s', $this->token),
+                    'Content-Type' => 'application/json',
+                    'Accept' => 'application/json',
+                ],
         ]);
     }
 
@@ -566,7 +548,9 @@ EOF;
      */
     private function createSynthesisWithElements($id, TableNode $elementsIds, $published = false)
     {
-        $synthesis = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\Synthesis')->find($id);
+        $synthesis = $this->getEntityManager()
+            ->getRepository('CapcoAppBundle:Synthesis\Synthesis')
+            ->find($id);
         $author = $this->getService('fos_user.user_manager')->findOneBy(['slug' => 'sfavot']);
 
         if (null === $synthesis) {
@@ -585,7 +569,9 @@ EOF;
         foreach ($elementsIds->getRows() as $el) {
             $elId = $el[0];
 
-            $element = $this->getEntityManager()->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')->find($elId);
+            $element = $this->getEntityManager()
+                ->getRepository('CapcoAppBundle:Synthesis\SynthesisElement')
+                ->find($elId);
 
             if (null === $element) {
                 // Create element

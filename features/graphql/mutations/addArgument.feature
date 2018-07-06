@@ -1,7 +1,7 @@
 @addArgument
 Feature: Add Argument
 
-@database
+@database @rabbitmq
 Scenario: User wants to add an argument on an opinion
   Given I am logged in to graphql as user
   And I send a GraphQL POST request:
@@ -72,21 +72,73 @@ Scenario: User wants to add an argument on an uncontibuable opinion
   """
   Then the JSON response should match:
   """
-  {"errors":[{"message":"Can\u0027t add an argument to an uncontributable argumentable.","locations":[{"line":1,"column":42}],"path":["addArgument"]}],"data":{"addArgument":null}}
+  {"errors":[{"message":"Can\u0027t add an argument to an uncontributable argumentable.","category":"user","locations":[{"line":1,"column":42}],"path":["addArgument"]}],"data":{"addArgument":null}}
   """
 
-# @security @database
-# Scenario: User can't add more than 2 arguments in a minute
-#   Given I am logged in to api as user
-#   And I send a valid addArgument GraphQL POST request
-#   And I send a valid addArgument GraphQL POST request
-#   And I send a valid addArgument GraphQL POST request
-#   And the JSON response should match:
-#   """
-#   {
-#     "data": @null@,
-#     "errors": {
-#       "message": "You contributed too many times."
-#     }
-#   }
-#   """
+@security @database
+Scenario: User can't add more than 2 arguments in a minute
+  Given I am logged in to graphql as user
+  And I send a GraphQL POST request:
+   """
+   {
+    "query": "mutation ($input: AddArgumentInput!) {
+      addArgument(input: $input) {
+        argument {
+          id
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "argumentableId": "opinion57",
+        "body": "Tololo",
+        "type": "FOR"
+      }
+    }
+  }
+  """
+  And I send a GraphQL POST request:
+   """
+   {
+    "query": "mutation ($input: AddArgumentInput!) {
+      addArgument(input: $input) {
+        argument {
+          id
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "argumentableId": "opinion57",
+        "body": "Tololo",
+        "type": "FOR"
+      }
+    }
+  }
+  """
+  And I send a GraphQL POST request:
+   """
+   {
+    "query": "mutation ($input: AddArgumentInput!) {
+      addArgument(input: $input) {
+        argument {
+          id
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "argumentableId": "opinion57",
+        "body": "Tololo",
+        "type": "FOR"
+      }
+    }
+  }
+  """
+  And the JSON response should match:
+  """
+  {
+    "errors":[{"message":"You contributed too many times.","category":"user","locations":[{"line":1,"column":42}],"path":["addArgument"]}],
+    "data":{"addArgument":null}
+  }
+  """
