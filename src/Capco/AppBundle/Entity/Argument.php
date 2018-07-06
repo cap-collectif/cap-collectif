@@ -55,34 +55,44 @@ class Argument implements Contribution, VotableInterface, IsPublishableInterface
     private $createdAt;
 
     /**
+     * @var \DateTime
      * @Gedmo\Timestampable(on="change", field={"body"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
 
     /**
+     * @var bool
+     *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
     private $isEnabled = true;
 
     /**
+     * @var int
+     *
      * @ORM\Column(name="type", type="integer")
      * @Assert\Choice(choices={0, 1})
      */
     private $type = 1;
 
     /**
+     * @var bool
+     *
      * @ORM\Column(name="is_trashed", type="boolean")
      */
     private $isTrashed = false;
 
     /**
+     * @var \DateTime
      * @Gedmo\Timestampable(on="change", field={"isTrashed"})
      * @ORM\Column(name="trashed_at", type="datetime", nullable=true)
      */
     private $trashedAt = null;
 
     /**
+     * @var string
+     *
      * @ORM\Column(name="trashed_reason", type="text", nullable=true)
      */
     private $trashedReason = null;
@@ -138,29 +148,46 @@ class Argument implements Contribution, VotableInterface, IsPublishableInterface
         return $this->getParent();
     }
 
-    public function getCreatedAt(): ?\DateTime
+    public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
-    public function getUpdatedAt(): ?\DateTime
+    /**
+     * Get updatedAt.
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTime $date): self
+    public function setUpdatedAt(\DateTime $date)
     {
         $this->updatedAt = $date;
 
         return $this;
     }
 
-    public function getIsEnabled(): bool
+    /**
+     * Get isEnabled.
+     *
+     * @return bool
+     */
+    public function getIsEnabled()
     {
         return $this->isEnabled;
     }
 
-    public function setIsEnabled(bool $isEnabled): self
+    /**
+     * Set isEnabled.
+     *
+     * @param bool $isEnabled
+     *
+     * @return Argument
+     */
+    public function setIsEnabled($isEnabled)
     {
         $this->isEnabled = $isEnabled;
 
@@ -174,7 +201,10 @@ class Argument implements Contribution, VotableInterface, IsPublishableInterface
         return $this;
     }
 
-    public function getType(): int
+    /**
+     * @return int
+     */
+    public function getType()
     {
         return $this->type;
     }
@@ -189,7 +219,10 @@ class Argument implements Contribution, VotableInterface, IsPublishableInterface
         }
     }
 
-    public function setType(int $type)
+    /**
+     * @param int $type
+     */
+    public function setType($type)
     {
         $this->type = $type;
     }
@@ -204,14 +237,26 @@ class Argument implements Contribution, VotableInterface, IsPublishableInterface
         return $this->isTrashed;
     }
 
-    public function setIsTrashed(bool $isTrashed): self
+    /**
+     * Set isTrashed.
+     *
+     * @param bool $isTrashed
+     *
+     * @return Argument
+     */
+    public function setIsTrashed($isTrashed)
     {
         $this->isTrashed = $isTrashed;
 
         return $this;
     }
 
-    public function getTrashedAt(): ?\DateTime
+    /**
+     * Get trashedAt.
+     *
+     * @return \DateTime
+     */
+    public function getTrashedAt()
     {
         return $this->trashedAt;
     }
@@ -223,30 +268,55 @@ class Argument implements Contribution, VotableInterface, IsPublishableInterface
         return $this;
     }
 
-    public function setTrashedAt(\DateTime $trashedAt = null): self
+    /**
+     * Set trashedAt.
+     *
+     * @param \DateTime $trashedAt
+     *
+     * @return Argument
+     */
+    public function setTrashedAt($trashedAt)
     {
         $this->trashedAt = $trashedAt;
 
         return $this;
     }
 
-    public function getTrashedReason(): ?string
+    /**
+     * Get trashedReason.
+     *
+     * @return string
+     */
+    public function getTrashedReason()
     {
         return $this->trashedReason;
     }
 
-    public function setTrashedReason(string $trashedReason = null): self
+    /**
+     * Set trashedReason.
+     *
+     * @param string $trashedReason
+     *
+     * @return Argument
+     */
+    public function setTrashedReason($trashedReason)
     {
         $this->trashedReason = $trashedReason;
 
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getAuthor()
     {
         return $this->Author;
     }
 
+    /**
+     * @param mixed $Author
+     */
     public function setAuthor($Author)
     {
         $this->Author = $Author;
@@ -259,12 +329,18 @@ class Argument implements Contribution, VotableInterface, IsPublishableInterface
         return $this->getRelated()->getStep();
     }
 
+    /**
+     * @return mixed
+     */
     public function getOpinion()
     {
         return $this->opinion;
     }
 
-    public function setOpinion($opinion): self
+    /**
+     * @param mixed $opinion
+     */
+    public function setOpinion($opinion)
     {
         $this->opinion = $opinion;
         $opinion->addArgument($this);
@@ -277,7 +353,7 @@ class Argument implements Contribution, VotableInterface, IsPublishableInterface
         return $this->opinionVersion;
     }
 
-    public function setOpinionVersion($opinionVersion): self
+    public function setOpinionVersion($opinionVersion)
     {
         $this->opinionVersion = $opinionVersion;
         $opinionVersion->addArgument($this);
@@ -285,12 +361,20 @@ class Argument implements Contribution, VotableInterface, IsPublishableInterface
         return $this;
     }
 
-    public function getReports(): iterable
+    /**
+     * @return string
+     */
+    public function getReports()
     {
         return $this->Reports;
     }
 
-    public function addReport(Reporting $report): self
+    /**
+     * @param Reporting $report
+     *
+     * @return $this
+     */
+    public function addReport(Reporting $report)
     {
         if (!$this->Reports->contains($report)) {
             $this->Reports->add($report);
@@ -299,7 +383,12 @@ class Argument implements Contribution, VotableInterface, IsPublishableInterface
         return $this;
     }
 
-    public function removeReport(Reporting $report): self
+    /**
+     * @param Reporting $report
+     *
+     * @return $this
+     */
+    public function removeReport(Reporting $report)
     {
         $this->Reports->removeElement($report);
 
@@ -308,7 +397,12 @@ class Argument implements Contribution, VotableInterface, IsPublishableInterface
 
     // ************************ Custom methods *********************************
 
-    public function userHasReport(User $user = null): bool
+    /**
+     * @param User $user
+     *
+     * @return bool
+     */
+    public function userHasReport(User $user = null)
     {
         if (null !== $user) {
             foreach ($this->Reports as $report) {

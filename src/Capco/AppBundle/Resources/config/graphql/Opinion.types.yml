@@ -3,7 +3,7 @@ Opinion:
     inherits: [Node, Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
     config:
         description: "A contribution"
-        interfaces: [Node, Argumentable, Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
+        interfaces: [Node, Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
         fields:
             createdAt:
                 type: "DateTime!"
@@ -68,17 +68,13 @@ Opinion:
                 type: "String!"
                 description: "Identifies the body of the contribution rendered to text."
             arguments:
-                type: "ArgumentConnection!"
-                argsBuilder: "Relay::Connection"
+                type: "[Argument]"
                 args:
-                    orderBy:
-                        type: "ArgumentOrder"
-                        defaultValue: { field: CREATED_AT, direction: DESC }
                     type:
                         description: "If omitted, returns all arguments. If provided, returns the arguments of this particular type."
                         type: "ArgumentValue"
                 description: "The arguments related to the contribution."
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionArgumentsResolver", [value, args])'
+                resolve: "@=resolver('proposition_arguments', [value, args])"
             versions:
                 type: "[Version]"
                 description: "The versions related to the contribution."

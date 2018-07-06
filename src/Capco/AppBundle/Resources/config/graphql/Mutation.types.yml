@@ -2,27 +2,6 @@ Mutation:
     type: object
     config:
         fields:
-          addArgument:
-                access: "@=hasRole('ROLE_USER')"
-                builder: "Relay::Mutation"
-                builderConfig:
-                    inputType: AddArgumentInput
-                    payloadType: AddArgumentPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddArgumentMutation", [value, getUser()])'
-          changeArgument:
-                access: "@=hasRole('ROLE_USER')"
-                builder: "Relay::Mutation"
-                builderConfig:
-                    inputType: ChangeArgumentInput
-                    payloadType: ChangeArgumentPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ChangeArgumentMutation", [value, getUser()])'
-          deleteArgument:
-                access: "@=hasRole('ROLE_USER')"
-                builder: "Relay::Mutation"
-                builderConfig:
-                    inputType: DeleteArgumentInput
-                    payloadType: DeleteArgumentPayload
-                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteArgumentMutation", [value, getUser()])'
           addReply:
                  access: "@=hasRole('ROLE_USER')"
                  builder: "Relay::Mutation"

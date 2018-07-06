@@ -150,11 +150,7 @@ fragment sourceInfos on Source {
     sourcesCount
     versionsCount
     arguments {
-      edges {
-        node {
-          ...argumentInfos
-        }
-      }
+  		...argumentInfos
     }
     sources {
   		...sourceInfos
@@ -184,11 +180,7 @@ fragment sourceInfos on Source {
       argumentsCountAgainst
       sourcesCount
       arguments {
-        edges {
-          node {
-            ...argumentInfos
-          }
-        }
+  			...argumentInfos
       }
       sources {
   			...sourceInfos

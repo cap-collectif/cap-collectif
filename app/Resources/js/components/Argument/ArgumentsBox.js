@@ -15,17 +15,13 @@ class ArgumentsBox extends React.Component<Props> {
     return opinion.parent ? opinion.parent.type.commentSystem : opinion.type.commentSystem;
   };
 
-  renderArgumentsForType = (type: 'FOR' | 'AGAINST' | 'SIMPLE') => {
+  renderArgumentsForType = (type: string) => {
     return (
       <div id={`arguments-col--${type}`}>
         <div className="opinion opinion--add-argument block block--bordered">
-          <ArgumentCreate
-            form={`create-argument-${type}`}
-            type={type}
-            argumentable={this.props.opinion}
-          />
+          <ArgumentCreate form={`create-argument-${type}`} type={type} {...this.props} />
         </div>
-        <ArgumentList type={type} argumentable={this.props.opinion} />
+        <ArgumentList type={type} {...this.props} />
       </div>
     );
   };
@@ -35,17 +31,17 @@ class ArgumentsBox extends React.Component<Props> {
       return (
         <Row>
           <Col sm={12} md={6}>
-            {this.renderArgumentsForType('FOR')}
+            {this.renderArgumentsForType('yes')}
           </Col>
           <Col sm={12} md={6}>
-            {this.renderArgumentsForType('AGAINST')}
+            {this.renderArgumentsForType('no')}
           </Col>
         </Row>
       );
     }
 
     if (this.getCommentSystem() === COMMENT_SYSTEM_SIMPLE) {
-      return this.renderArgumentsForType('SIMPLE');
+      return this.renderArgumentsForType('simple');
     }
 
     return null;

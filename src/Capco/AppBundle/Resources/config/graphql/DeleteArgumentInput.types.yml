@@ -1,7 +1,0 @@
-DeleteArgumentInput:
-    type: relay-mutation-input
-    config:
-        description: ""
-        fields:
-            argumentId:
-              type: "ID!"

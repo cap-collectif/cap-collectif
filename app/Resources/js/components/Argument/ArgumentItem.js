@@ -1,17 +1,15 @@
 // @flow
 import React from 'react';
 import { FormattedDate } from 'react-intl';
-import { graphql, createFragmentContainer } from 'react-relay';
 import classNames from 'classnames';
 import moment from 'moment';
 import Linkify from 'react-linkify';
 import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
 import ArgumentButtons from './ArgumentButtons';
-import type { ArgumentItem_argument } from './__generated__/ArgumentItem_argument.graphql';
 
 type Props = {
-  argument: ArgumentItem_argument,
+  argument: Object,
 };
 
 class ArgumentItem extends React.Component<Props> {
@@ -35,15 +33,15 @@ class ArgumentItem extends React.Component<Props> {
   };
 
   render() {
-    const { argument } = this.props;
+    const argument = this.props.argument;
     const classes = classNames({
       opinion: true,
       'opinion--argument': true,
       'bg-vip': argument.author && argument.author.vip,
     });
     return (
-      <div className={classes} id={`arg-${argument.id}`}>
-        <div className="opinion__body">
+      <li className={classes} id={`arg-${argument.id}`}>
+        <div className="opinion__body box">
           <UserAvatar user={argument.author} className="pull-left" />
           <div className="opinion__data">
             <p className="h5 opinion__user">
@@ -63,27 +61,9 @@ class ArgumentItem extends React.Component<Props> {
           </p>
           <ArgumentButtons argument={argument} />
         </div>
-      </div>
+      </li>
     );
   }
 }
 
-export default createFragmentContainer(
-  ArgumentItem,
-  graphql`
-    fragment ArgumentItem_argument on Argument
-      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
-      id
-      createdAt
-      ...ArgumentButtons_argument @arguments(isAuthenticated: $isAuthenticated)
-      author {
-        id
-        slug
-        displayName
-        show_url
-        vip
-      }
-      body
-    }
-  `,
-);
+export default ArgumentItem;

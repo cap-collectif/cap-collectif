@@ -1,31 +1,16 @@
 // @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { graphql, createFragmentContainer } from 'react-relay';
 import { connect, type MapStateToProps, type Connector } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
-import component from '../../Form/Field';
-import AppDispatcher from '../../../dispatchers/AppDispatcher';
-import ChangeArgumentMutation from '../../../mutations/ChangeArgumentMutation';
+import ArgumentActions from '../../../actions/ArgumentActions';
+import ArgumentStore from '../../../stores/ArgumentStore';
+import renderComponent from '../../Form/Field';
 import { closeArgumentEditModal } from '../../../redux/modules/opinion';
 import type { State } from '../../../types';
-import type { ArgumentForm_argument } from './__generated__/ArgumentForm_argument.graphql';
 
 export const formName = 'argument-edit-form';
-
-type FormValues = {
-  body?: string,
-  confirm?: boolean,
-};
-type FormValidValues = {
-  body: string,
-  confirm?: boolean,
-};
-type Props = {
-  argument: ArgumentForm_argument,
-};
-
-const validate = ({ body, confirm }: FormValues) => {
+const validate = ({ body, confirm }: Object) => {
   const errors = {};
   if (!body || body.length <= 2) {
     errors.body = 'argument.constraints.min';
@@ -36,25 +21,19 @@ const validate = ({ body, confirm }: FormValues) => {
   return errors;
 };
 
-const onSubmit = (values: FormValidValues, dispatch, { argument }: Props) => {
-  const input = {
-    argumentId: argument.id,
-    body: values.body,
-  };
-  return ChangeArgumentMutation.commit({ input })
-    .then(() => {
-      AppDispatcher.dispatch({
-        actionType: 'UPDATE_ALERT',
-        alert: { bsStyle: 'success', content: 'alert.success.update.argument' },
-      });
-      dispatch(closeArgumentEditModal());
-    })
-    .catch(() => {
-      AppDispatcher.dispatch({
-        actionType: 'UPDATE_ALERT',
-        alert: { bsStyle: 'danger', content: 'alert.danger.update.argument' },
-      });
-    });
+const onSubmit = (values: Object, dispatch, { argument }) => {
+  const opinion = ArgumentStore.opinion;
+  const data = Object.assign({}, values);
+  data.type = argument.type;
+  delete data.confirm;
+  return ArgumentActions.update(opinion, argument.id, data).then(() => {
+    ArgumentActions.load(ArgumentStore.opinion, argument.type);
+    dispatch(closeArgumentEditModal());
+  });
+};
+
+type Props = {
+  argument: Object,
 };
 
 class ArgumentForm extends React.Component<Props> {
@@ -64,7 +43,7 @@ class ArgumentForm extends React.Component<Props> {
         <div className="alert alert-warning edit-confirm-alert">
           <Field
             type="checkbox"
-            component={component}
+            component={renderComponent}
             id="argument-confirm"
             name="confirm"
             children={<FormattedMessage id="argument.edit.confirm" />}
@@ -72,7 +51,7 @@ class ArgumentForm extends React.Component<Props> {
         </div>
         <Field
           id="argument-body"
-          component={component}
+          component={renderComponent}
           type="textarea"
           rows={2}
           name="body"
@@ -85,26 +64,16 @@ class ArgumentForm extends React.Component<Props> {
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) => ({
   initialValues: {
-    body: props.argument.body,
+    body: props.argument ? props.argument.body : '',
     confirm: false,
   },
 });
 const connector: Connector<Props, {}> = connect(mapStateToProps);
 
-const container = connector(
+export default connector(
   reduxForm({
     validate,
     onSubmit,
     form: formName,
   })(ArgumentForm),
-);
-
-export default createFragmentContainer(
-  container,
-  graphql`
-    fragment ArgumentForm_argument on Argument {
-      id
-      body
-    }
-  `,
 );

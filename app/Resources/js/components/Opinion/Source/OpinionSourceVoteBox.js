@@ -24,7 +24,7 @@ class OpinionSourceVoteBox extends React.Component<Props, State> {
     const { source } = props;
 
     this.state = {
-      hasVoted: source.viewerHasVote,
+      hasVoted: source.hasUserVoted,
     };
   }
 
@@ -51,8 +51,8 @@ class OpinionSourceVoteBox extends React.Component<Props, State> {
   render() {
     const { hasVoted } = this.state;
     const { source } = this.props;
-    const hasVotedSince = hasVoted && !source.viewerHasVote;
-    const hasUnVotedSince = !hasVoted && source.viewerHasVote;
+    const hasVotedSince = hasVoted && !source.hasUserVoted;
+    const hasUnVotedSince = !hasVoted && source.hasUserVoted;
     const showVoted = hasVoted || hasVotedSince;
     return (
       <span>

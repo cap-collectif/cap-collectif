@@ -81,7 +81,6 @@ export class NavbarRight extends React.Component<Props> {
           </NavDropdown>
         ) : (
           <li>
-            {/* TODO fix warning on li "React does not recognize the `activeKey` prop on a DOM element" */}
             <RegistrationButton className="navbar-btn" />{' '}
             <LoginButton className="btn-darkest-gray navbar-btn btn--connection" />
           </li>
