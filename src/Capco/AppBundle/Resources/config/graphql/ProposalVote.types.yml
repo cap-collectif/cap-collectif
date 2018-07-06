@@ -1,7 +1,6 @@
 ProposalVote:
     type: object
     config:
-        interfaces: [ContributionWithAuthor]
         fields:
             id:
               type: "ID!"

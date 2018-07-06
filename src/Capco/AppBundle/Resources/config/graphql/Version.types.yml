@@ -3,7 +3,7 @@ Version:
     inherits: [Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
     config:
         description: "A version of contribution"
-        interfaces: [Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
+        interfaces: [Node, Contribution, Argumentable, TrashableContribution, ContributionWithAuthor, EditableContribution]
         fields:
             createdAt:
                 type: "DateTime!"
@@ -62,17 +62,21 @@ Version:
             bodyText:
                 type: "HTML!"
                 description: "The content of the contribution."
-            arguments:
-                type: "[Argument]"
-                args:
-                    type:
-                        description: "If omitted, returns all arguments. If provided, returns the arguments of this particular type."
-                        type: "ArgumentValue"
-                description: "The arguments related to the contribution."
-                resolve: "@=resolver('proposition_arguments', [value, args])"
             sources:
                 type: "[Source]"
                 description: "The sources related to the contribution."
             reportings:
                 type: "[Reporting]"
                 resolve: "@=resolver('version_reportings', [value])"
+            arguments:
+                type: "ArgumentConnection!"
+                argsBuilder: "Relay::Connection"
+                args:
+                    orderBy:
+                        type: "ArgumentOrder"
+                        defaultValue: { field: CREATED_AT, direction: DESC }
+                    type:
+                        description: "If omitted, returns all arguments. If provided, returns the arguments of this particular type."
+                        type: "ArgumentValue"
+                description: "The arguments related to the contribution."
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionArgumentsResolver", [value, args])'

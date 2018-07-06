@@ -2,14 +2,16 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { connect, type MapStateToProps } from 'react-redux';
 import type { State } from '../../../types';
 import LoginOverlay from '../../Utils/LoginOverlay';
+import type { ArgumentVoteButton_argument } from './__generated__/ArgumentVoteButton_argument.graphql';
 
 type Props = {
   hasVoted: boolean,
-  onClick: Function,
-  argument: Object,
+  onClick: () => void,
+  argument: ArgumentVoteButton_argument,
   user?: Object,
 };
 
@@ -19,7 +21,7 @@ class ArgumentVoteButton extends React.Component<Props> {
     if (argument.author === null || !user) {
       return false;
     }
-    return user.uniqueId === argument.author.uniqueId;
+    return user.uniqueId === argument.author.slug;
   };
 
   render() {
@@ -27,7 +29,7 @@ class ArgumentVoteButton extends React.Component<Props> {
     return (
       <LoginOverlay>
         <Button
-          disabled={!argument.isContribuable || this.isTheUserTheAuthor()}
+          disabled={!argument.contribuable || this.isTheUserTheAuthor()}
           bsStyle={hasVoted ? 'danger' : 'success'}
           className={`argument__btn--vote${hasVoted ? '' : ' btn--outline'}`}
           bsSize="xsmall"
@@ -49,4 +51,19 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   user: state.user.user,
 });
 
-export default connect(mapStateToProps)(ArgumentVoteButton);
+const container = connect(mapStateToProps)(ArgumentVoteButton);
+
+export default createFragmentContainer(
+  container,
+  graphql`
+    fragment ArgumentVoteButton_argument on Argument
+      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
+      id
+      author {
+        slug
+      }
+      contribuable
+      viewerHasVote @include(if: $isAuthenticated)
+    }
+  `,
+);

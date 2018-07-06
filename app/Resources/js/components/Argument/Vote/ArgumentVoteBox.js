@@ -1,10 +1,12 @@
 // @flow
 import React from 'react';
+import { graphql, createFragmentContainer } from 'react-relay';
 import ArgumentActions from '../../../actions/ArgumentActions';
 import ArgumentVoteButton from './ArgumentVoteButton';
+import type { ArgumentVoteBox_argument } from './__generated__/ArgumentVoteBox_argument.graphql';
 
 type Props = {
-  argument: Object,
+  argument: ArgumentVoteBox_argument,
 };
 
 type State = {
@@ -17,7 +19,7 @@ class ArgumentVoteBox extends React.Component<Props, State> {
     const { argument } = props;
 
     this.state = {
-      hasVoted: argument.hasUserVoted,
+      hasVoted: !!argument.viewerHasVote,
     };
   }
 
@@ -36,8 +38,8 @@ class ArgumentVoteBox extends React.Component<Props, State> {
   render() {
     const { hasVoted } = this.state;
     const { argument } = this.props;
-    const hasVotedSince = hasVoted && !argument.hasUserVoted;
-    const hasUnVotedSince = !hasVoted && argument.hasUserVoted;
+    const hasVotedSince = hasVoted && !argument.viewerHasVote;
+    const hasUnVotedSince = !hasVoted && argument.viewerHasVote;
     const showVoted = hasVoted || hasVotedSince;
     return (
       <span>
@@ -56,4 +58,15 @@ class ArgumentVoteBox extends React.Component<Props, State> {
   }
 }
 
-export default ArgumentVoteBox;
+export default createFragmentContainer(
+  ArgumentVoteBox,
+  graphql`
+    fragment ArgumentVoteBox_argument on Argument
+      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
+      id
+      votesCount
+      viewerHasVote @include(if: $isAuthenticated)
+      ...ArgumentVoteButton_argument @arguments(isAuthenticated: $isAuthenticated)
+    }
+  `,
+);
