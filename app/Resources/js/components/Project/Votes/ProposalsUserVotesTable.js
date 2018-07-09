@@ -166,10 +166,7 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
       window.navigator.vibrate(100);
     }
 
-    const title =
-      votes.edges &&
-      votes.edges[start.source.index] &&
-      votes.edges[start.source.index].node.proposal.title;
+    const title = this.getTitle(votes, start);
 
     provided.announce(intl.formatMessage({ id: 'dragndrop-drag-start' }, { title }));
   };
@@ -177,17 +174,16 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
   onDragUpdate = (update: DragUpdate, provided: HookProvided) => {
     const { votes, intl } = this.props;
 
-    const title =
-      votes.edges &&
-      votes.edges[update.source.index] &&
-      votes.edges[update.source.index].node.proposal.title;
+    const title = this.getTitle(votes, update);
 
-    provided.announce(
-      intl.formatMessage(
-        { id: 'dragndrop-drag-update' },
-        { title, position: update.destination.index + 1 },
-      ),
-    );
+    if (update.destination !== null) {
+      provided.announce(
+        intl.formatMessage(
+          { id: 'dragndrop-drag-update' },
+          { title, position: update.destination.index + 1 },
+        ),
+      );
+    }
   };
 
   onDragEnd = (result: DropResult, provided: HookProvided) => {
@@ -197,10 +193,7 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
       activeKeyboard();
     }
 
-    const title =
-      votes.edges &&
-      votes.edges[result.source.index] &&
-      votes.edges[result.source.index].node.proposal.title;
+    const title = this.getTitle(votes, result);
 
     // cancel (esc)
     if (result.reason === 'CANCEL') {
@@ -237,6 +230,16 @@ export class ProposalsUserVotesTable extends React.Component<Props> {
         { title, position: result.destination.index + 1 },
       ),
     );
+  };
+
+  getTitle = (votes: Object, position: Object) => {
+    const draggedProposal =
+      votes.edges &&
+      votes.edges.filter(el => {
+        return el && el.node.proposal.id === position.draggableId;
+      });
+
+    return draggedProposal[0] && draggedProposal[0].node.proposal.title;
   };
 
   render() {
