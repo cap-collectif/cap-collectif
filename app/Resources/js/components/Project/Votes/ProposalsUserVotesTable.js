@@ -138,7 +138,7 @@ const renderDraggableMembers = ({ fields, votes, step, deletable, intl }: VotesP
                 </div>
               );
 
-              if (!portal || !usePortal) {
+              if (config.isMobile || !portal || !usePortal) {
                 return child;
               }
 
