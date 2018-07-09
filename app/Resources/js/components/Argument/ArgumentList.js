@@ -1,152 +1,145 @@
 // @flow
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Row, Col } from 'react-bootstrap';
+import * as React from 'react';
+import { Row, Col, Panel } from 'react-bootstrap';
+import { connect, type MapStateToProps } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import ArgumentStore from '../../stores/ArgumentStore';
-import ArgumentActions from '../../actions/ArgumentActions';
-import ArgumentItem from './ArgumentItem';
+import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
+import Input from '../Form/Input';
+import environment, { graphqlError } from '../../createRelayEnvironment';
+import ArgumentListView, { type ArgumentOrder } from './ArgumentListView';
 import Loader from '../Ui/Loader';
+import type ArgumentListQueryResponse from './__generated__/ArgumentListQuery.graphql';
 
 type Props = {
-  opinion: Object,
-  type: string,
+  argumentable: { id: string },
+  isAuthenticated: boolean,
+  type: 'FOR' | 'AGAINST' | 'SIMPLE',
 };
 
 type State = {
-  arguments: Array<$FlowFixMe>,
-  count: number,
-  isLoading: boolean,
-  order: $FlowFixMe,
-  type: number,
+  order: ArgumentOrder,
 };
 
 export class ArgumentList extends React.Component<Props, State> {
-  static displayName = 'ArgumentList';
-
   state = {
-    arguments: [],
-    count: 0,
-    isLoading: true,
-    order: ArgumentStore.orderByType[this.getNumericType()],
-    type: this.getNumericType(),
+    order: 'last',
   };
 
-  componentWillMount() {
-    ArgumentStore.addChangeListener(this.onChange);
-  }
-
-  componentDidMount() {
-    this.loadArguments();
-  }
-
-  componentWillUnmount() {
-    ArgumentStore.removeChangeListener(this.onChange);
-  }
-
-  onChange = () => {
-    if (ArgumentStore.orderByType[this.state.type] === this.state.order) {
-      this.setState({
-        arguments: ArgumentStore.arguments[this.state.type],
-        count: ArgumentStore.countByType[this.state.type],
-        order: ArgumentStore.orderByType[this.state.type],
-        isLoading: false,
-      });
-      return;
-    }
+  updateOrderBy = (event: Event) => {
     this.setState({
-      order: ArgumentStore.orderByType[this.state.type],
-      isLoading: true,
+      // $FlowFixMe
+      order: event.target.value,
     });
-    this.loadArguments();
   };
-
-  getNumericType() {
-    const { type } = this.props;
-    return type === 'no' ? 0 : 1;
-  }
-
-  updateSelectedValue() {
-    // $FlowFixMe
-    const value = $(ReactDOM.findDOMNode(this.refs.filter)).val();
-    ArgumentActions.changeSortOrder(this.state.type, value);
-  }
-
-  loadArguments() {
-    const { opinion } = this.props;
-    ArgumentActions.load(opinion, this.state.type);
-  }
-
-  renderFilter() {
-    const { type } = this.props;
-    const { order } = this.state;
-
-    const htmlFor = `filter-arguments-${type}`;
-    if (this.state.arguments.length > 1) {
-      return (
-        <Col xs={12} sm={6} md={6} className="block--first-mobile">
-          <label htmlFor={htmlFor}>
-            <span className="sr-only">
-              <FormattedMessage id={`argument.filter.${type}`} />
-            </span>
-          </label>
-          <select
-            id={htmlFor}
-            ref="filter"
-            className="form-control pull-right"
-            value={order}
-            onChange={() => this.updateSelectedValue()}>
-            <FormattedMessage id="global.filter_last">
-              {message => <option value="last">{message}</option>}
-            </FormattedMessage>
-            <FormattedMessage id="global.filter_old">
-              {message => <option value="old">{message}</option>}
-            </FormattedMessage>
-            <FormattedMessage id="global.filter_popular">
-              {message => <option value="popular">{message}</option>}
-            </FormattedMessage>
-          </select>
-        </Col>
-      );
-    }
-  }
 
   render() {
-    const { type } = this.props;
-    const { count, isLoading } = this.state;
+    const { type, isAuthenticated } = this.props;
     return (
-      <div id={`opinion__arguments--${type}`} className="block--tablet block--bordered">
-        <Row className="opinion__arguments__header">
-          <Col xs={12} sm={6} md={6}>
-            <h4 className="opinion__header__title">
-              {type === 'simple' ? (
-                <FormattedMessage id="argument.simple.list" values={{ num: count }} />
-              ) : type === 'yes' ? (
-                <FormattedMessage id="argument.yes.list" values={{ num: count }} />
-              ) : (
-                <FormattedMessage id="argument.no.list" values={{ num: count }} />
-              )}
-            </h4>
-          </Col>
-          {this.renderFilter()}
-        </Row>
-        {!isLoading ? (
-          <ul className="media-list opinion__list">
-            {this.state.arguments.map(argument => {
-              if ((type === 'yes' || type === 'simple') && argument.type === 1) {
-                return <ArgumentItem key={argument.id} argument={argument} />;
+      <div id={`opinion__arguments--${type}`} className="block--tablet">
+        <QueryRenderer
+          environment={environment}
+          query={graphql`
+            query ArgumentListQuery(
+              $argumentableId: ID!
+              $isAuthenticated: Boolean!
+              $type: ArgumentValue
+              $count: Int
+              $cursor: String
+              $orderBy: ArgumentOrder
+            ) {
+              argumentable: node(id: $argumentableId) {
+                ... on Argumentable {
+                  allArguments: arguments(first: 0, type: $type)
+                    @connection(key: "ArgumentList_allArguments", filters: ["type"]) {
+                    totalCount
+                    edges {
+                      node {
+                        id
+                      }
+                    }
+                  }
+                }
+                ...ArgumentListView_argumentable
+                  @arguments(isAuthenticated: $isAuthenticated, type: $type)
               }
-              if (type === 'no' && argument.type === 0) {
-                return <ArgumentItem key={argument.id} argument={argument} />;
-              }
-            })}
-          </ul>
-        ) : (
-          <Loader />
-        )}
+            }
+          `}
+          variables={{
+            isAuthenticated,
+            argumentableId: this.props.argumentable.id,
+            type,
+          }}
+          render={({ error, props }: ReadyState & { props?: ArgumentListQueryResponse }) => {
+            if (error) {
+              return graphqlError;
+            }
+            if (props) {
+              const argumentable = props.argumentable;
+              const totalCount = argumentable.allArguments.totalCount;
+              const htmlFor = `filter-arguments-${type}`;
+              return (
+                <Panel>
+                  <Panel.Heading>
+                    <Row className="opinion__arguments__header" style={{ border: 0 }}>
+                      <Col xs={12} sm={6} md={6}>
+                        <h4 className="opinion__header__title">
+                          {type === 'SIMPLE' ? (
+                            <FormattedMessage
+                              id="argument.simple.list"
+                              values={{ num: totalCount }}
+                            />
+                          ) : type === 'FOR' ? (
+                            <FormattedMessage id="argument.yes.list" values={{ num: totalCount }} />
+                          ) : (
+                            <FormattedMessage id="argument.no.list" values={{ num: totalCount }} />
+                          )}
+                        </h4>
+                      </Col>
+                      {totalCount > 1 ? (
+                        <Col xs={12} sm={6} md={6} className="block--first-mobile">
+                          <Input
+                            id={htmlFor}
+                            label={
+                              <span className="sr-only">
+                                <FormattedMessage
+                                  id={`argument.filter.${type === 'AGAINST' ? 'no' : 'yes'}`}
+                                />
+                              </span>
+                            }
+                            className="form-control pull-right"
+                            type="select"
+                            value={this.state.order}
+                            onChange={this.updateOrderBy}>
+                            <FormattedMessage id="global.filter_last">
+                              {message => <option value="last">{message}</option>}
+                            </FormattedMessage>
+                            <FormattedMessage id="global.filter_old">
+                              {message => <option value="old">{message}</option>}
+                            </FormattedMessage>
+                            <FormattedMessage id="global.filter_popular">
+                              {message => <option value="popular">{message}</option>}
+                            </FormattedMessage>
+                          </Input>
+                        </Col>
+                      ) : null}
+                    </Row>
+                  </Panel.Heading>
+                  {/* $FlowFixMe */}
+                  <ArgumentListView order={this.state.order} argumentable={argumentable} />
+                </Panel>
+              );
+            }
+            return <Loader />;
+          }}
+        />
       </div>
     );
   }
 }
 
-export default ArgumentList;
+const mapStateToProps: MapStateToProps<*, *, *> = state => ({
+  isAuthenticated: !!state.user.user,
+});
+const container = connect(mapStateToProps)(ArgumentList);
+
+export default container;

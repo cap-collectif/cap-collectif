@@ -23,7 +23,7 @@ export class ProposalReportButton extends React.Component<Props> {
       <ReportBox
         id={`proposal-${proposal.id}`}
         buttonStyle={{ marginLeft: '15px' }}
-        reported={proposal.viewerHasReported || false}
+        reported={proposal.viewerHasReport || false}
         onReport={this.handleReport}
         author={proposal.author}
         buttonClassName="proposal__btn--report"
@@ -43,7 +43,7 @@ export default createFragmentContainer(
       author {
         id
       }
-      viewerHasReported @include(if: $isAuthenticated)
+      viewerHasReport @include(if: $isAuthenticated)
     }
   `,
 );
