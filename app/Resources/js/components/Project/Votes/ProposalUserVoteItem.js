@@ -1,12 +1,6 @@
 // @flow
 import * as React from 'react';
-import {
-  FormattedDate,
-  FormattedMessage,
-  FormattedTime,
-  type IntlShape,
-  injectIntl,
-} from 'react-intl';
+import { FormattedDate, FormattedMessage, FormattedTime } from 'react-intl';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Row, Col, Popover, OverlayTrigger } from 'react-bootstrap';
 import { Field } from 'redux-form';
@@ -20,7 +14,6 @@ type Props = {
   step: ProposalUserVoteItem_step,
   ranking?: number,
   isVoteVisibilityPublic: boolean,
-  intl: IntlShape,
   onDelete?: ?() => void,
   member: string,
   showDraggableIcon: boolean,
@@ -38,7 +31,6 @@ export class ProposalUserVoteItem extends React.Component<Props> {
       member,
       showDraggableIcon,
       step,
-      intl,
       vote,
       ranking,
     } = this.props;
@@ -76,10 +68,10 @@ export class ProposalUserVoteItem extends React.Component<Props> {
 
     const getToggleLabel = () => {
       if (isVoteVisibilityPublic) {
-        return intl.formatMessage({ id: 'public' });
+        return <FormattedMessage id="public" />;
       }
 
-      return intl.formatMessage({ id: 'admin.fields.idea_vote.private' });
+      return <FormattedMessage id="admin.fields.idea_vote.private" />;
     };
 
     const popoverConfirmDelete = (
@@ -162,7 +154,6 @@ export class ProposalUserVoteItem extends React.Component<Props> {
                 labelSide="RIGHT"
                 component={toggle}
                 label={getToggleLabel()}
-                roledescription={intl.formatMessage({ id: 'vote-toggle-aria-roledescription' })}
                 name={`${member}.public`}
                 normalize={val => !!val}
                 id={`${proposal.id}-proposal-vote__private-toggle`}
@@ -185,10 +176,7 @@ export class ProposalUserVoteItem extends React.Component<Props> {
               placement="bottom"
               overlay={popoverConfirmDelete}
               ref="popover">
-              <a
-                className="proposal-vote__delete"
-                disabled={!step.open}
-                aria-label="Supprimer mon vote">
+              <a className="proposal-vote__delete" disabled={!step.open}>
                 <i
                   className="cap cap-ios-close"
                   id={`${proposal.id}-proposal-vote__private-delete`}
@@ -207,9 +195,7 @@ export class ProposalUserVoteItem extends React.Component<Props> {
   }
 }
 
-const container = injectIntl(ProposalUserVoteItem);
-
-export default createFragmentContainer(container, {
+export default createFragmentContainer(ProposalUserVoteItem, {
   vote: graphql`
     fragment ProposalUserVoteItem_vote on ProposalVote {
       createdAt

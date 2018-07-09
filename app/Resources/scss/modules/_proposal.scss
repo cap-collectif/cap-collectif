@@ -244,14 +244,6 @@
     background-color: $white;
 }
 
-.proposals-user-votes__draggable-item.item-in-portal > div {
-    border: 1px solid $dark-gray;
-
-    .cap-android-menu {
-        color: $dark-gray;
-    }
-}
-
 .proposals-user-votes__row {
     padding: 15px 0 15px;
     border-bottom: 1px solid $border-color;

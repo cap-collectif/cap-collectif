@@ -5,8 +5,7 @@ import ReactToggle from 'react-toggle';
 type Props = {
   input: Object,
   meta: Object,
-  label: string,
-  roledescription?: string,
+  label: any,
   disabled: boolean,
   error: any,
   labelClassName?: string,
@@ -28,7 +27,6 @@ export class Toggle extends React.Component<Props> {
       label,
       id,
       disabled,
-      roledescription,
       meta: { touched, error },
     } = this.props;
     return (
@@ -37,8 +35,6 @@ export class Toggle extends React.Component<Props> {
           {labelSide === 'RIGHT' && <span style={{ marginRight: 10 }}>{label}</span>}
           <ReactToggle
             id={id}
-            aria-labelledby={label}
-            aria-roledescription={roledescription}
             disabled={disabled}
             checked={input.value}
             onChange={input.onChange}

@@ -11,7 +11,4 @@ export default {
     '***REMOVED***',
   // https://github.com/elementalui/elemental/blob/master/src/constants.js
   canUseDOM: !!(typeof window !== 'undefined' && window.document && window.document.createElement),
-  isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-    window.navigator.userAgent,
-  ),
 };

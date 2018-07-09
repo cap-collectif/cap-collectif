@@ -11,7 +11,7 @@ import SubmitButton from '../../Form/SubmitButton';
 import { closeVoteModal, vote } from '../../../redux/modules/proposal';
 import ProposalsUserVotesTable from '../../Project/Votes/ProposalsUserVotesTable';
 import environment from '../../../createRelayEnvironment';
-import type { GlobalState, Dispatch } from '../../../types';
+import type { State, Dispatch } from '../../../types';
 import RequirementsForm, { formName } from '../../Requirements/RequirementsForm';
 import UpdateProposalVotesMutation from '../../../mutations/UpdateProposalVotesMutation';
 import type { ProposalVoteModal_proposal } from './__generated__/ProposalVoteModal_proposal.graphql';
@@ -29,15 +29,7 @@ type Props = ParentProps & {
   invalid: boolean,
 };
 
-type State = {
-  keyboard: boolean,
-};
-
-export class ProposalVoteModal extends React.Component<Props, State> {
-  state = {
-    keyboard: true,
-  };
-
+export class ProposalVoteModal extends React.Component<Props> {
   componentDidUpdate(prevProps: Props) {
     if (!prevProps.showModal && this.props.showModal) {
       this.createTmpVote();
@@ -118,29 +110,14 @@ export class ProposalVoteModal extends React.Component<Props, State> {
     });
   };
 
-  disabledKeyboard = () => {
-    this.setState({
-      keyboard: false,
-    });
-  };
-
-  activeKeyboard = () => {
-    this.setState({
-      keyboard: true,
-    });
-  };
-
   render() {
     const { dispatch, showModal, proposal, step, invalid, isSubmitting } = this.props;
     return (
       <Modal
         animation={false}
-        enforceFocus={false}
-        keyboard={this.state.keyboard}
         show={showModal}
         onHide={this.onHide}
         bsSize="large"
-        role="dialog"
         aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
@@ -183,13 +160,7 @@ export class ProposalVoteModal extends React.Component<Props, State> {
               }}
             />
           </h4>
-          <ProposalsUserVotesTable
-            onSubmit={this.onSubmit}
-            step={step}
-            votes={step.viewerVotes}
-            disabledKeyboard={this.disabledKeyboard}
-            activeKeyboard={this.activeKeyboard}
-          />
+          <ProposalsUserVotesTable onSubmit={this.onSubmit} step={step} votes={step.viewerVotes} />
           {step.votesHelpText && (
             <div className="well mb-0 mt-15">
               <p>
@@ -220,7 +191,7 @@ export class ProposalVoteModal extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState, props: ParentProps) => {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: ParentProps) => {
   return {
     showModal: !!(
       state.proposal.currentVoteModal && state.proposal.currentVoteModal === props.proposal.id
