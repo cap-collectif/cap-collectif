@@ -264,7 +264,9 @@
         background-color: {{ headerBg | raw }};
     }
 
-    .btn-primary {
+    .btn-primary,
+    .btn-primary:not(.btn--outline),
+    .btn-primary:not(.btn--outline):hover {
         color: {{ btnPrimaryText | raw }};
         background-color: {{ btnPrimary | raw }};
         border-color: {{ btnPrimary | raw }};
