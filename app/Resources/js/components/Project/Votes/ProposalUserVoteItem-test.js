@@ -3,7 +3,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ProposalUserVoteItem } from './ProposalUserVoteItem';
-import { $refType, $fragmentRefs } from '../../../mocks';
+import { $refType, $fragmentRefs, intlMock } from '../../../mocks';
 
 describe('<ProposalUserVoteItem />', () => {
   const vote = {
@@ -24,9 +24,19 @@ describe('<ProposalUserVoteItem />', () => {
     $refType,
   };
 
+  const props = {
+    intl: intlMock,
+  };
+
   it('should render a vote item', () => {
     const wrapper = shallow(
-      <ProposalUserVoteItem isVoteVisibilityPublic member="votes.1" step={step} vote={vote} />,
+      <ProposalUserVoteItem
+        isVoteVisibilityPublic
+        member="votes.1"
+        {...props}
+        step={step}
+        vote={vote}
+      />,
     );
     expect(wrapper).toMatchSnapshot();
   });
