@@ -353,20 +353,12 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getCategory()
     {
         return $this->Category;
     }
 
-    /**
-     * @param mixed $Category
-     *
-     * @return $this
-     */
-    public function setCategory($Category)
+    public function setCategory($Category): self
     {
         $this->Category = $Category;
         $this->Category->addSource($this);
@@ -374,17 +366,11 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getMedia()
     {
         return $this->media;
     }
 
-    /**
-     * @param mixed $media
-     */
     public function setMedia($media)
     {
         $this->media = $media;

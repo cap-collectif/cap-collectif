@@ -1,9 +1,11 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
+import { graphql, createFragmentContainer } from 'react-relay';
 import OpinionSourceButtons from './OpinionSourceButtons';
+import type { OpinionSourceFooter_source } from './__generated__/OpinionSourceFooter_source.graphql';
 
 type Props = {
-  source: Object,
+  source: OpinionSourceFooter_source,
 };
 
 const OpinionSourceFooter = ({ source }: Props) => {
@@ -14,4 +16,11 @@ const OpinionSourceFooter = ({ source }: Props) => {
   );
 };
 
-export default OpinionSourceFooter;
+export default createFragmentContainer(
+  OpinionSourceFooter,
+  graphql`
+    fragment OpinionSourceFooter_source on Source {
+      ...OpinionSourceButtons_source
+    }
+  `,
+);
