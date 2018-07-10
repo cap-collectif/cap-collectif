@@ -20,6 +20,21 @@ type AddArgumentPayload {
   clientMutationId: String
 }
 
+input AddOpinionVoteInput {
+  # The Node ID of the opinion/version to vote.
+  opinionId: ID!
+
+  # The vote value.
+  value: YesNoPairedVoteValue!
+  clientMutationId: String
+}
+
+type AddOpinionVotePayload {
+  vote: OpinionVote
+  viewer: User!
+  clientMutationId: String
+}
+
 input AddProposalVoteInput {
   # The Node ID of the proposal to vote.
   proposalId: ID!
@@ -56,6 +71,30 @@ type AddReplyPayload {
   clientMutationId: String
 }
 
+input AddSourceInput {
+  # The Sourceable ID to source.
+  sourceableId: ID!
+
+  # The contents of the argument body.
+  body: String!
+
+  # The type of the argument.
+  category: ID!
+  link: URI!
+  title: String!
+  clientMutationId: String
+}
+
+type AddSourcePayload {
+  # The newly created source.
+  source: Source
+
+  # The edge from the sourceable's sources connection.
+  sourceEdge: SourceEdge
+  userErrors: [UserError!]!
+  clientMutationId: String
+}
+
 input AddUsersInGroupInput {
   # Users that will be added to the group.
   users: [ID!]!
@@ -70,7 +109,51 @@ type AddUsersInGroupPayload {
   clientMutationId: String
 }
 
+input AddVersionInput {
+  # The concerned opinion id.
+  opinionId: ID!
+  title: String!
+  body: String!
+  comment: String
+  clientMutationId: String
+}
+
+type AddVersionPayload {
+  version: Version
+  versionEdge: VersionEdge
+  userErrors: [UserError]
+  clientMutationId: String
+}
+
 scalar Address
+
+# A contribution
+type Answer {
+  # Identifies the date and time when the object was created.
+  createdAt: DateTime!
+
+  # Identifies the contribution title.
+  title: String!
+
+  # Identifies the body of the contribution.
+  body: HTML!
+  author: User
+}
+
+# A contribution
+type Appendix {
+  # Identifies the body of the contribution.
+  body: HTML!
+
+  # Identifies the body of the contribution rendered to text.
+  bodyText: String!
+  appendixType: AppendixType!
+}
+
+# An AppendixType
+type AppendixType {
+  title: String!
+}
 
 # An argument
 type Argument implements Node & Contribution & Reportable & TrashableContribution & ContributionWithAuthor & EditableContribution {
@@ -98,6 +181,9 @@ type Argument implements Node & Contribution & Reportable & TrashableContributio
   # Url of the contribution
   url: URI!
 
+  # Does the viewer already submitted a report ?
+  viewerHasReport: Boolean!
+
   # The author of the contribution.
   author: User!
 
@@ -117,7 +203,6 @@ type Argument implements Node & Contribution & Reportable & TrashableContributio
 
   # The content of the argument.
   body: String!
-  viewerHasReport: Boolean!
   viewerHasVote: Boolean!
   contribuable: Boolean!
 }
@@ -169,6 +254,7 @@ enum ArgumentValue {
 # An argumentable
 interface Argumentable {
   id: ID!
+  contribuable: Boolean!
 
   # The arguments related to the argumentable.
   arguments(
@@ -348,6 +434,29 @@ type ChangeSelectionStatusPayload {
   clientMutationId: String
 }
 
+input ChangeSourceInput {
+  # The source Node id.
+  sourceId: ID!
+
+  # The contents of the source body.
+  body: String!
+
+  # The contents of the source category.
+  category: ID!
+
+  # The contents of the source title.
+  title: String!
+
+  # The contents of the source link.
+  link: URI!
+  clientMutationId: String
+}
+
+type ChangeSourcePayload {
+  source: Source
+  clientMutationId: String
+}
+
 input ChangeUserNotificationsConfigurationInput {
   # The new proposal comment notification value
   onProposalCommentMail: Boolean!
@@ -356,6 +465,23 @@ input ChangeUserNotificationsConfigurationInput {
 
 type ChangeUserNotificationsConfigurationPayload {
   user: User!
+  clientMutationId: String
+}
+
+input ChangeVersionInput {
+  # The version Node id.
+  versionId: ID!
+
+  # The contents of the version body.
+  body: String!
+
+  # The contents of the version title.
+  title: String!
+  clientMutationId: String
+}
+
+type ChangeVersionPayload {
+  version: Version
   clientMutationId: String
 }
 
@@ -387,46 +513,6 @@ type CollectStep implements Node & Step & ProposalStep {
 
   # The url of the step
   url: String!
-  proposals(
-    # If non-null, filters proposals with the given district.
-    district: ID
-
-    # If non-null, filters proposals with the given type of author.
-    userType: ID
-
-    # If non-null, filters proposals with the given category.
-    category: ID
-
-    # If non-null, filters proposals with the given author.
-    author: ID
-
-    # If non-null, filters proposals with the given status.
-    status: ID
-
-    # If non-null, filters proposals with the given theme.
-    theme: ID
-
-    # If non-null, filters proposals with the given string to look for.
-    term: String
-
-    # Ordering options for proposals returned from the connection.
-    orderBy: ProposalOrder = {field: CREATED_AT, direction: ASC}
-
-    # Affiliation options for proposals returned from the connection.
-    affiliations: [ProposalAffiliation]
-
-    # Returns the elements in the list that come after the specified global ID.
-    after: String
-
-    # Returns the first n elements from the list.
-    first: Int = 20
-
-    # Returns the elements in the list that come before the specified global ID.
-    before: String
-
-    # Returns the last n elements from the list.
-    last: Int
-  ): ProposalConnection!
 
   # The requirements to vote on this step.
   requirements: RequirementConnection!
@@ -443,6 +529,30 @@ type CollectStep implements Node & Step & ProposalStep {
 
   # A list of viewer votes associated with the step.
   viewerVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}): ProposalVoteConnection!
+  proposals(
+    district: ID
+    userType: ID
+    category: ID
+    status: ID
+    theme: ID
+    term: String
+
+    # Order for connection.
+    orderBy: ProposalOrder = {field: CREATED_AT, direction: ASC}
+    affiliations: [ProposalAffiliation]
+
+    # Returns the elements in the list that come after the specified global ID.
+    after: String
+
+    # Returns the first n elements from the list.
+    first: Int = 10
+
+    # Returns the elements in the list that come before the specified global ID.
+    before: String
+
+    # Returns the last n elements from the list.
+    last: Int
+  ): ProposalConnection!
   statuses: [Status!]!
   private: Boolean!
   form: ProposalForm!
@@ -866,6 +976,17 @@ type DeleteReplyPayload {
   clientMutationId: String
 }
 
+input DeleteSourceInput {
+  sourceId: ID!
+  clientMutationId: String
+}
+
+type DeleteSourcePayload {
+  deletedSourceId: ID
+  sourceable: Sourceable!
+  clientMutationId: String
+}
+
 input DeleteUserInGroupInput {
   # The user id
   userId: ID!
@@ -877,6 +998,18 @@ input DeleteUserInGroupInput {
 
 type DeleteUserInGroupPayload {
   group: Group!
+  clientMutationId: String
+}
+
+input DeleteVersionInput {
+  # The version id
+  versionId: ID!
+  clientMutationId: String
+}
+
+type DeleteVersionPayload {
+  deletedVersionId: ID
+  opinion: Opinion
   clientMutationId: String
 }
 
@@ -1156,11 +1289,19 @@ type MultipleChoiceQuestionValidationRule {
 
 type Mutation {
   addArgument(input: AddArgumentInput!): AddArgumentPayload
+  addSource(input: AddSourceInput!): AddSourcePayload
+  addVersion(input: AddVersionInput!): AddVersionPayload
   changeArgument(input: ChangeArgumentInput!): ChangeArgumentPayload
+  changeVersion(input: ChangeVersionInput!): ChangeVersionPayload
+  changeSource(input: ChangeSourceInput!): ChangeSourcePayload
   deleteArgument(input: DeleteArgumentInput!): DeleteArgumentPayload
+  deleteSource(input: DeleteSourceInput!): DeleteSourcePayload
+  deleteVersion(input: DeleteVersionInput!): DeleteVersionPayload
   addReply(input: AddReplyInput!): AddReplyPayload
   deleteReply(input: DeleteReplyInput!): DeleteReplyPayload
   changeUserNotificationsConfiguration(input: ChangeUserNotificationsConfigurationInput!): ChangeUserNotificationsConfigurationPayload
+  addOpinionVote(input: AddOpinionVoteInput!): AddOpinionVotePayload
+  removeOpinionVote(input: RemoveOpinionVoteInput!): RemoveOpinionVotePayload
   addProposalVote(input: AddProposalVoteInput!): AddProposalVotePayload
   removeProposalVote(input: RemoveProposalVoteInput!): RemoveProposalVotePayload
   updateProposalVotes(input: UpdateProposalVotesInput!): UpdateProposalVotesPayload
@@ -1248,7 +1389,7 @@ type NotificationsConfiguration {
 }
 
 # A contribution
-type Opinion implements Node & Argumentable & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
+type Opinion implements Node & Argumentable & Sourceable & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
   # True if the contribution is trashed.
   trashed: Boolean!
 
@@ -1260,6 +1401,19 @@ type Opinion implements Node & Argumentable & Contribution & TrashableContributi
 
   # The ID of an object
   id: ID!
+  contribuable: Boolean!
+
+  # The arguments related to the argumentable.
+  arguments(
+    after: String
+    first: Int
+    before: String
+    last: Int
+    orderBy: ArgumentOrder = {field: CREATED_AT, direction: DESC}
+
+    # If omitted, returns all arguments. If provided, returns the arguments of this particular type.
+    type: ArgumentValue
+  ): ArgumentConnection!
 
   # The kind of contribution.
   kind: String!
@@ -1279,9 +1433,14 @@ type Opinion implements Node & Argumentable & Contribution & TrashableContributi
   # Identifies the date and time when the object was last updated.
   updatedAt: DateTime
 
+  # The sources related to the sourceable.
+  sources(after: String, first: Int, before: String, last: Int, orderBy: SourceOrder = {field: CREATED_AT, direction: DESC}): SourceConnection!
+
+  # The available sources categories of to the sourceable.
+  availableSourceCategories: [SourceCategory]
+
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
-  type: OpinionType!
 
   # true if the contribution is pinned.
   pinned: Boolean!
@@ -1316,7 +1475,10 @@ type Opinion implements Node & Argumentable & Contribution & TrashableContributi
 
   # Number of sources.
   sourcesCount: Int!
-  votes(first: Int): [OpinionVote]
+
+  # The viewer vote.
+  viewerVote: OpinionVote
+  votes(after: String, first: Int, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}): OpinionVoteConnection!
 
   # Identifies the contribution title.
   title: String!
@@ -1327,117 +1489,33 @@ type Opinion implements Node & Argumentable & Contribution & TrashableContributi
   # Identifies the body of the contribution rendered to text.
   bodyText: String!
 
-  # The arguments related to the contribution.
-  arguments(
-    after: String
-    first: Int
-    before: String
-    last: Int
-    orderBy: ArgumentOrder = {field: CREATED_AT, direction: DESC}
-
-    # If omitted, returns all arguments. If provided, returns the arguments of this particular type.
-    type: ArgumentValue
-  ): ArgumentConnection!
-
   # The versions related to the contribution.
-  versions: [Version]
-
-  # The sources related to the contribution.
-  sources: [Source]
+  versions(after: String, first: Int, before: String, last: Int, orderBy: VersionOrder = {field: CREATED_AT, direction: DESC}): VersionConnection!
 
   # Where the proposition has been placed.
   section: Section!
   reportings: [Reporting]
+  answer: Answer
+  ranking: Int
+  modals: [OpinionModal]
+  appendices: [Appendix]
 }
 
-# A type of opinion
-type OpinionType implements Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
-  # True if the contribution is trashed.
-  trashed: Boolean!
+# A contribution
+type OpinionModal {
+  # Identifies the contribution title.
+  key: String!
 
-  # The moment the moderator trashed the contribution.
-  trashedAt: String
+  # Identifies the contribution title.
+  after: String!
 
-  # The reason the moderator trashed the contribution.
-  trashedReason: String
-
-  # The id of the contribution.
-  id: ID!
-
-  # The kind of contribution.
-  kind: String!
-
-  # Return the related contribution if the contribution is related to another.
-  related: Contribution
-
-  # The HTTP show url for this contribution.
-  show_url: URI! @deprecated(reason: "Use url instead of show_url")
-
-  # Url of the contribution
-  url: URI!
-
-  # The author of the contribution.
-  author: User!
-
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
-
-  # Identifies the date and time when the object was created.
-  createdAt: DateTime!
-  type: OpinionType!
-  expired: Boolean!
-  published: Boolean!
-
-  # Number of votes.
-  votesCount: Int!
-
-  # Number of ok votes.
-  votesCountOk: Int!
-
-  # Number of mitige votes.
-  votesCountMitige: Int!
-
-  # Number of negative votes.
-  votesCountNok: Int!
-
-  # Number of arguments.
-  argumentsCount: Int!
-
-  # Number of for arguments.
-  argumentsCountFor: Int!
-
-  # Number of against arguments.
-  argumentsCountAgainst: Int!
-
-  # Number of versions.
-  versionsCount: Int!
-
-  # Number of sources.
-  sourcesCount: Int!
-  votes(first: Int): [OpinionVote]
-
-  # The title of the contribution.
+  # Identifies the contribution title.
+  before: String!
   title: String!
-
-  # The content of the contribution.
-  body: String!
-
-  # The arguments related to the contribution.
-  arguments(
-    # If omitted, returns all arguments. If provided, returns the arguments of this particular type.
-    type: ArgumentValue
-  ): [Argument]
-
-  # The versions related to the contribution.
-  versions: [Version]
-
-  # The sources related to the contribution.
-  sources: [Source]
-
-  # Where the proposition has been placed.
-  section: Section!
-  reportings: [Reporting]
+  diff: HTML
 }
+
+union OpinionOrVersion = Opinion | Version
 
 type OpinionVote implements YesNoPairedVote {
   id: ID!
@@ -1457,6 +1535,26 @@ type OpinionVote implements YesNoPairedVote {
 
   # Returns 'opinionVote'.
   kind: String!
+}
+
+# A connection to a list of items.
+type OpinionVoteConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [OpinionVoteEdge]
+}
+
+# An edge in a connection.
+type OpinionVoteEdge {
+  # The item at the end of the edge.
+  node: OpinionVote
+
+  # A cursor for use in pagination.
+  cursor: String!
 }
 
 # Possible directions in which to order a list of items when provided an orderBy argument.
@@ -1642,6 +1740,9 @@ type Proposal implements Node & Contribution & Reportable {
   # Url of the contribution
   url: URI!
 
+  # Does the viewer already submitted a report ?
+  viewerHasReport: Boolean!
+
   # The admin url for this contribution.
   adminUrl: URI!
   progressSteps: [ProgressStep!]!
@@ -1784,7 +1885,6 @@ type Proposal implements Node & Contribution & Reportable {
     # The concerned step.
     step: ID!
   ): Boolean!
-  viewerHasReport: Boolean!
   votableSteps: [ProposalStep!]!
 }
 
@@ -1841,6 +1941,11 @@ type ProposalEvaluation {
 type ProposalForm implements Node {
   # The ID of an object
   id: ID!
+  reference: String!
+  description: String
+  summaryHelpText: String
+  illustrationHelpText: String
+  title: String!
   proposals(
     # If non-null, filters proposals with the given district.
     district: ID
@@ -1850,9 +1955,6 @@ type ProposalForm implements Node {
 
     # If non-null, filters proposals with the given category.
     category: ID
-
-    # If non-null, filters proposals with the given author.
-    author: ID
 
     # If non-null, filters proposals with the given status.
     status: ID
@@ -1881,11 +1983,6 @@ type ProposalForm implements Node {
     # Returns the last n elements from the list.
     last: Int
   ): ProposalConnection!
-  reference: String!
-  description: String
-  summaryHelpText: String
-  illustrationHelpText: String
-  title: String!
 
   # Available categories for proposals of this form.
   categories: [ProposalCategory!]!
@@ -1991,46 +2088,6 @@ interface ProposalStep {
 
   # The url of the step
   url: String!
-  proposals(
-    # If non-null, filters proposals with the given district.
-    district: ID
-
-    # If non-null, filters proposals with the given type of author.
-    userType: ID
-
-    # If non-null, filters proposals with the given category.
-    category: ID
-
-    # If non-null, filters proposals with the given author.
-    author: ID
-
-    # If non-null, filters proposals with the given status.
-    status: ID
-
-    # If non-null, filters proposals with the given theme.
-    theme: ID
-
-    # If non-null, filters proposals with the given string to look for.
-    term: String
-
-    # Ordering options for proposals returned from the connection.
-    orderBy: ProposalOrder = {field: CREATED_AT, direction: ASC}
-
-    # Affiliation options for proposals returned from the connection.
-    affiliations: [ProposalAffiliation]
-
-    # Returns the elements in the list that come after the specified global ID.
-    after: String
-
-    # Returns the first n elements from the list.
-    first: Int = 20
-
-    # Returns the elements in the list that come before the specified global ID.
-    before: String
-
-    # Returns the last n elements from the list.
-    last: Int
-  ): ProposalConnection!
 
   # The requirements to vote on this step.
   requirements: RequirementConnection!
@@ -2047,6 +2104,30 @@ interface ProposalStep {
 
   # A list of viewer votes associated with the step.
   viewerVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}): ProposalVoteConnection!
+  proposals(
+    district: ID
+    userType: ID
+    category: ID
+    status: ID
+    theme: ID
+    term: String
+
+    # Order for connection.
+    orderBy: ProposalOrder = {field: CREATED_AT, direction: ASC}
+    affiliations: [ProposalAffiliation]
+
+    # Returns the elements in the list that come after the specified global ID.
+    after: String
+
+    # Returns the first n elements from the list.
+    first: Int = 10
+
+    # Returns the elements in the list that come before the specified global ID.
+    before: String
+
+    # Returns the last n elements from the list.
+    last: Int
+  ): ProposalConnection!
 }
 
 # Type of vote.
@@ -2124,7 +2205,7 @@ type Query {
     id: ID
   ): [Consultation!]!
   groups: [Group!]!
-  proposalForms: [ProposalForm]!
+  proposalForms: [ProposalForm!]!
 
   # Retrieve availables districts for a given address
   availableDistrictsForLocalisation(proposalFormId: ID!, latitude: Float!, longitude: Float!): [District!]!
@@ -2258,6 +2339,18 @@ type RankingStep implements Step {
 
   # The url of the step
   url: String!
+}
+
+input RemoveOpinionVoteInput {
+  # The Node ID of the opinion to unvote.
+  opinionId: ID!
+  clientMutationId: String
+}
+
+type RemoveOpinionVotePayload {
+  contribution: Opinion
+  viewer: User!
+  clientMutationId: String
 }
 
 input RemoveProposalVoteInput {
@@ -2514,9 +2607,12 @@ type Section implements Node {
   versionable: Boolean!
   sourceable: Boolean!
   linkable: Boolean!
+  votesHelpText: String
+  votesThreshold: Int
+  votesThresholdHelpText: String
 
   # The url of the section.
-  url: String
+  url: URI!
 }
 
 # A section
@@ -2565,46 +2661,6 @@ type SelectionStep implements Node & Step & ProposalStep {
 
   # The url of the step
   url: String!
-  proposals(
-    # If non-null, filters proposals with the given district.
-    district: ID
-
-    # If non-null, filters proposals with the given type of author.
-    userType: ID
-
-    # If non-null, filters proposals with the given category.
-    category: ID
-
-    # If non-null, filters proposals with the given author.
-    author: ID
-
-    # If non-null, filters proposals with the given status.
-    status: ID
-
-    # If non-null, filters proposals with the given theme.
-    theme: ID
-
-    # If non-null, filters proposals with the given string to look for.
-    term: String
-
-    # Ordering options for proposals returned from the connection.
-    orderBy: ProposalOrder = {field: CREATED_AT, direction: ASC}
-
-    # Affiliation options for proposals returned from the connection.
-    affiliations: [ProposalAffiliation]
-
-    # Returns the elements in the list that come after the specified global ID.
-    after: String
-
-    # Returns the first n elements from the list.
-    first: Int = 20
-
-    # Returns the elements in the list that come before the specified global ID.
-    before: String
-
-    # Returns the last n elements from the list.
-    last: Int
-  ): ProposalConnection!
 
   # The requirements to vote on this step.
   requirements: RequirementConnection!
@@ -2621,6 +2677,30 @@ type SelectionStep implements Node & Step & ProposalStep {
 
   # A list of viewer votes associated with the step.
   viewerVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}): ProposalVoteConnection!
+  proposals(
+    district: ID
+    userType: ID
+    category: ID
+    status: ID
+    theme: ID
+    term: String
+
+    # Order for connection.
+    orderBy: ProposalOrder = {field: CREATED_AT, direction: ASC}
+    affiliations: [ProposalAffiliation]
+
+    # Returns the elements in the list that come after the specified global ID.
+    after: String
+
+    # Returns the first n elements from the list.
+    first: Int = 10
+
+    # Returns the elements in the list that come before the specified global ID.
+    before: String
+
+    # Returns the last n elements from the list.
+    last: Int
+  ): ProposalConnection!
   position: Int!
   statuses: [Status!]!
 
@@ -2660,7 +2740,7 @@ type SimpleQuestion implements Question {
 }
 
 # A source
-type Source implements Node & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
+type Source implements Node & Contribution & Reportable & TrashableContribution & ContributionWithAuthor & EditableContribution {
   # True if the contribution is trashed.
   trashed: Boolean!
 
@@ -2685,6 +2765,9 @@ type Source implements Node & Contribution & TrashableContribution & Contributio
   # Url of the contribution
   url: URI!
 
+  # Does the viewer already submitted a report ?
+  viewerHasReport: Boolean!
+
   # The author of the contribution.
   author: User!
 
@@ -2696,12 +2779,74 @@ type Source implements Node & Contribution & TrashableContribution & Contributio
   expired: Boolean!
   published: Boolean!
   votesCount: Int!
+  contribuable: Boolean!
+  viewerHasVote: Boolean!
+  category: SourceCategory
+
+  # The link of the source.
+  link: URI!
 
   # The title of the source.
   title: String!
 
   # The content of the source.
   body: String!
+}
+
+# A source category.
+type SourceCategory {
+  id: ID!
+  title: String!
+}
+
+# A connection to a list of items.
+type SourceConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [SourceEdge]
+}
+
+# An edge in a connection.
+type SourceEdge {
+  # The item at the end of the edge.
+  node: Source
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# Ways in which source connections can be ordered.
+input SourceOrder {
+  # The field in which to order nodes by.
+  field: SourceOrderField!
+
+  # The direction in which to order nodes.
+  direction: OrderDirection! = ASC
+}
+
+# Properties by which source connections can be ordered
+enum SourceOrderField {
+  # Allows ordering a list of sources by when they were created.
+  CREATED_AT
+
+  # Allows ordering a list of sources by the number of votes it have.
+  VOTES
+}
+
+# A sourceable
+interface Sourceable {
+  id: ID!
+  contribuable: Boolean!
+
+  # The sources related to the sourceable.
+  sources(after: String, first: Int, before: String, last: Int, orderBy: SourceOrder = {field: CREATED_AT, direction: DESC}): SourceConnection!
+
+  # The available sources categories of to the sourceable.
+  availableSourceCategories: [SourceCategory]
 }
 
 type Status {
@@ -3306,7 +3451,7 @@ type ValueResponse implements Response {
 }
 
 # A version of contribution
-type Version implements Node & Contribution & Argumentable & TrashableContribution & ContributionWithAuthor & EditableContribution {
+type Version implements Node & Contribution & Sourceable & Argumentable & TrashableContribution & ContributionWithAuthor & EditableContribution {
   # True if the contribution is trashed.
   trashed: Boolean!
 
@@ -3318,6 +3463,19 @@ type Version implements Node & Contribution & Argumentable & TrashableContributi
 
   # The id of the contribution.
   id: ID!
+  contribuable: Boolean!
+
+  # The arguments related to the argumentable.
+  arguments(
+    after: String
+    first: Int
+    before: String
+    last: Int
+    orderBy: ArgumentOrder = {field: CREATED_AT, direction: DESC}
+
+    # If omitted, returns all arguments. If provided, returns the arguments of this particular type.
+    type: ArgumentValue
+  ): ArgumentConnection!
 
   # The kind of contribution.
   kind: String!
@@ -3336,6 +3494,12 @@ type Version implements Node & Contribution & Argumentable & TrashableContributi
 
   # Identifies the date and time when the object was last updated.
   updatedAt: DateTime
+
+  # The sources related to the sourceable.
+  sources(after: String, first: Int, before: String, last: Int, orderBy: SourceOrder = {field: CREATED_AT, direction: DESC}): SourceConnection!
+
+  # The available sources categories of to the sourceable.
+  availableSourceCategories: [SourceCategory]
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
@@ -3378,22 +3542,55 @@ type Version implements Node & Contribution & Argumentable & TrashableContributi
 
   # The content of the contribution.
   bodyText: HTML!
-
-  # The sources related to the contribution.
-  sources: [Source]
   reportings: [Reporting]
 
-  # The arguments related to the contribution.
-  arguments(
-    after: String
-    first: Int
-    before: String
-    last: Int
-    orderBy: ArgumentOrder = {field: CREATED_AT, direction: DESC}
+  # The section of the parent opinion.
+  section: Section!
+  answer: Answer
+  parent: Opinion!
 
-    # If omitted, returns all arguments. If provided, returns the arguments of this particular type.
-    type: ArgumentValue
-  ): ArgumentConnection!
+  # The viewer vote.
+  viewerVote: OpinionVote
+  diff: HTML
+}
+
+# A connection to a list of items.
+type VersionConnection {
+  # Identifies the total count of items in the connection.
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [VersionEdge]
+}
+
+# An edge in a connection.
+type VersionEdge {
+  # The item at the end of the edge.
+  node: Version!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# Ways in which version connections can be ordered.
+input VersionOrder {
+  # The field in which to order nodes by.
+  field: VersionOrderField!
+
+  # The direction in which to order nodes.
+  direction: OrderDirection! = ASC
+}
+
+# Properties by which version connections can be ordered
+enum VersionOrderField {
+  # Allows ordering a list of versions by when they were created.
+  CREATED_AT
+
+  # Allows ordering a list of versions by the number of votes it have.
+  VOTES
 }
 
 type VersionVote implements YesNoPairedVote & ContributionWithAuthor {
