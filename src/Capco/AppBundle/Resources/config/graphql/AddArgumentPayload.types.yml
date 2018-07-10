@@ -3,8 +3,10 @@ AddArgumentPayload:
     config:
         fields:
             argument:
-                type: "Argument!"
-                description: "The new argument."
+                type: "Argument"
+                description: "The newly created argument."
             argumentEdge:
-                type: "ArgumentEdge!"
-                description: "The new argument edge."
+                type: "ArgumentEdge"
+                description: "The edge from the argumentable's arguments connection."
+            userErrors:
+                type: "[UserError!]!"

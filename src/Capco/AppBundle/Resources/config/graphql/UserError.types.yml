@@ -1,0 +1,7 @@
+UserError:
+    type: object
+    config:
+        description: "An error."
+        fields:
+            message:
+                type: "String"

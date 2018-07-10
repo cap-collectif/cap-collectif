@@ -62,7 +62,7 @@ export default createFragmentContainer(
   ArgumentVoteBox,
   graphql`
     fragment ArgumentVoteBox_argument on Argument
-      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       id
       votesCount
       viewerHasVote @include(if: $isAuthenticated)

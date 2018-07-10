@@ -74,7 +74,7 @@ export default createRefetchContainer(
     argumentable: graphql`
       fragment ArgumentListView_argumentable on Argumentable
         @argumentDefinitions(
-          isAuthenticated: { type: "Boolean", defaultValue: true }
+          isAuthenticated: { type: "Boolean!" }
           count: { type: "Int!", defaultValue: 25 }
           cursor: { type: "String", defaultValue: null }
           type: { type: "ArgumentValue!", nonNull: true }

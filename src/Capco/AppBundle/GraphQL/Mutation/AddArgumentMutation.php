@@ -21,6 +21,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactory;
+use Psr\Log\LoggerInterface;
 
 class AddArgumentMutation
 {
@@ -31,6 +32,7 @@ class AddArgumentMutation
     private $redisStorage;
     private $publisher;
     private $argumentRepo;
+    private $logger;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -39,7 +41,8 @@ class AddArgumentMutation
         OpinionVersionRepository $versionRepo,
         RedisStorageHelper $redisStorage,
         Publisher $publisher,
-        ArgumentRepository $argumentRepo
+        ArgumentRepository $argumentRepo,
+        LoggerInterface $logger
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -48,6 +51,7 @@ class AddArgumentMutation
         $this->redisStorage = $redisStorage;
         $this->publisher = $publisher;
         $this->argumentRepo = $argumentRepo;
+        $this->logger = $logger;
     }
 
     public function __invoke(Arg $input, User $author): array
@@ -60,19 +64,30 @@ class AddArgumentMutation
         }
 
         if (!$argumentable || !$argumentable instanceof Argumentable) {
-            throw new UserError('Unknown argumentable with id: ' . $argumentableId);
+            $this->logger->error('Unknown argumentable with id: ' . $argumentableId);
+            $error = ['message' => 'Unknown argumentable.'];
+            return ['argument' => null, 'argumentEdge' => null, 'userErrors' => [$error]];
         }
 
         if (!$argumentable->canContribute()) {
-            throw new UserError("Can't add an argument to an uncontributable argumentable.");
+            $this->logger->error(
+                "Can't add an argument to an uncontributable argumentable with id: " .
+                    $argumentableId
+            );
+            $error = ['message' => "Can't add an argument to an uncontributable argumentable."];
+            return ['argument' => null, 'argumentEdge' => null, 'userErrors' => [$error]];
         }
 
         if (0 === $argumentable->getOpinionType()->getCommentSystem()) {
-            throw new UserError("Can't add argument to this opinion type.");
+            $this->logger->error("Can't add argument to this opinion type.");
+            $error = ['message' => "Can't add argument to this opinion type."];
+            return ['argument' => null, 'argumentEdge' => null, 'userErrors' => [$error]];
         }
 
         if (\count($this->argumentRepo->findCreatedSinceIntervalByAuthor($author, 'PT1M')) >= 2) {
-            throw new UserError('You contributed too many times.');
+            $this->logger->error('You contributed too many times.');
+            $error = ['message' => 'You contributed too many times.'];
+            return ['argument' => null, 'argumentEdge' => null, 'userErrors' => [$error]];
         }
 
         $argument = (new Argument())->setAuthor($author);
@@ -108,6 +123,6 @@ class AddArgumentMutation
         $totalCount = 0;
         $edge = new Edge(ConnectionBuilder::offsetToCursor($totalCount), $argument);
 
-        return ['argument' => $argument, 'argumentEdge' => $edge];
+        return ['argument' => $argument, 'argumentEdge' => $edge, 'userErrors' => []];
     }
 }

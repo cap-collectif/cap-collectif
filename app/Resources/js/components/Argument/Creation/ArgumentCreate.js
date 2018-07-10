@@ -40,16 +40,27 @@ const onSubmit = (
   };
 
   return AddArgumentMutation.commit({ input })
-    .then(() => {
-      AppDispatcher.dispatch({
-        actionType: 'UPDATE_ALERT',
-        alert: { bsStyle: 'success', content: 'alert.success.add.argument' },
-      });
-      reset();
+    .then(res => {
+      if (res.addArgument && res.addArgument.userErrors.length === 0) {
+        AppDispatcher.dispatch({
+          actionType: 'UPDATE_ALERT',
+          alert: { bsStyle: 'success', content: 'alert.success.add.argument' },
+        });
+        reset();
+        return;
+      }
+      if (res.addArgument) {
+        for (const error of res.addArgument.userErrors) {
+          if (error.message === 'You contributed too many times.') {
+            throw new SubmissionError({ _error: 'publication-limit-reached' });
+          }
+        }
+      }
+      throw new SubmissionError({ _error: 'global.error.server.form' });
     })
-    .catch(res => {
-      if (res && res.response && res.response.message === 'You contributed too many times.') {
-        throw new SubmissionError({ _error: 'publication-limit-reached' });
+    .catch(e => {
+      if (e instanceof SubmissionError) {
+        throw e;
       }
       throw new SubmissionError({ _error: 'global.error.server.form' });
     });
