@@ -6,6 +6,7 @@ import Opinion from './Opinion';
 import NewOpinionButton from '../Opinion/NewOpinionButton';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Ui/Loader';
+import type { OpinionList_section } from './__generated__/OpinionList_section.graphql';
 
 const renderOpinionList = ({
   error,
@@ -32,7 +33,7 @@ const renderOpinionList = ({
 };
 
 type Props = {
-  section: Object,
+  section: OpinionList_section,
   consultation: Object,
   intl: Object,
 };
