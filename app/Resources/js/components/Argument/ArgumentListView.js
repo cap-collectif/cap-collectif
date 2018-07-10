@@ -104,7 +104,13 @@ export default createRefetchContainer(
       argumentable: node(id: $argumentableId) {
         id
         ...ArgumentListView_argumentable
-          @arguments(cursor: $cursor, count: $count, type: $type, orderBy: $orderBy)
+          @arguments(
+            cursor: $cursor
+            count: $count
+            type: $type
+            orderBy: $orderBy
+            isAuthenticated: $isAuthenticated
+          )
       }
     }
   `,

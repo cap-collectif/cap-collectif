@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Mailer\Message\User;
 
 use Capco\AppBundle\Mailer\Message\DefaultMessage;
@@ -11,16 +12,22 @@ final class ContactMessage extends DefaultMessage
         string $senderName,
         string $message,
         string $sitename,
-        string $siteUrl,
         string $recipientName = null
     ): self {
         return new self(
             $recipentEmail,
             $recipientName,
             'email-subject-contact',
-            static::getMySubjectVars($senderName),
+            static::getMySubjectVars(
+                $senderName
+            ),
             'email-content-contact',
-            static::getMyTemplateVars($message, $senderEmail, $senderName, $sitename, $siteUrl),
+            static::getMyTemplateVars(
+                $message,
+                $senderEmail,
+                $senderName,
+                $sitename
+            ),
             $senderEmail,
             $senderName
         );
@@ -30,20 +37,21 @@ final class ContactMessage extends DefaultMessage
         string $message,
         string $email,
         string $name,
-        string $sitename,
-        string $siteUrl
+        string $sitename
     ): array {
         return [
             '{message}' => $message,
             '{email}' => $email,
             '{name}' => $name,
             '{sitename}' => $sitename,
-            '{siteUrl}' => $siteUrl,
         ];
     }
 
-    private static function getMySubjectVars(string $senderName): array
-    {
-        return ['{sender}' => $senderName];
+    private static function getMySubjectVars(
+        string $senderName
+    ): array {
+        return [
+            '{sender}' => $senderName,
+        ];
     }
 }
