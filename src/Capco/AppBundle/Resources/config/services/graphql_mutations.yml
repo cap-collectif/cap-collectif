@@ -271,6 +271,7 @@ services:
         - "@redis_storage.helper"
         - "@swarrot.publisher"
         - "@capco.argument.repository"
+        - "@logger"
     tags:
         - { name: overblog_graphql.mutation }
 

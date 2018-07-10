@@ -17,6 +17,12 @@ Scenario: User wants to add an argument on an opinion
             id
           }
         }
+        argumentEdge {
+          cursor
+          node {
+            id
+          }
+        }
       }
     }",
     "variables": {
@@ -40,6 +46,12 @@ Scenario: User wants to add an argument on an opinion
               "author": {
                 "id": "user5"
               }
+          },
+          "argumentEdge": {
+              "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+              "node": {
+                "id": @uuid@
+              }
           }
        }
      }
@@ -59,6 +71,9 @@ Scenario: User wants to add an argument on an uncontibuable opinion
         argument {
           id
         }
+        userErrors {
+          message
+        }
       }
     }",
     "variables": {
@@ -72,7 +87,14 @@ Scenario: User wants to add an argument on an uncontibuable opinion
   """
   Then the JSON response should match:
   """
-  {"errors":[{"message":"Can\u0027t add an argument to an uncontributable argumentable.","category":"user","locations":[{"line":1,"column":42}],"path":["addArgument"]}],"data":{"addArgument":null}}
+  {
+    "data": {
+      "addArgument": {
+        "argument": null,
+        "userErrors": [{"message":"Can\u0027t add an argument to an uncontributable argumentable."}]
+      }
+    }
+  }
   """
 
 @security @database
@@ -124,6 +146,9 @@ Scenario: User can't add more than 2 arguments in a minute
         argument {
           id
         }
+        userErrors {
+          message
+        }
       }
     }",
     "variables": {
@@ -137,8 +162,12 @@ Scenario: User can't add more than 2 arguments in a minute
   """
   And the JSON response should match:
   """
-  {
-    "errors":[{"message":"You contributed too many times.","category":"user","locations":[{"line":1,"column":42}],"path":["addArgument"]}],
-    "data":{"addArgument":null}
-  }
+   {
+     "data":{
+       "addArgument":{
+         "argument":null,
+         "userErrors":[{"message":"You contributed too many times."}]
+         }
+      }
+    }
   """

@@ -11,11 +11,12 @@ input AddArgumentInput {
 }
 
 type AddArgumentPayload {
-  # The new argument.
-  argument: Argument!
+  # The newly created argument.
+  argument: Argument
 
-  # The new argument edge.
-  argumentEdge: ArgumentEdge!
+  # The edge from the argumentable's arguments connection.
+  argumentEdge: ArgumentEdge
+  userErrors: [UserError!]!
   clientMutationId: String
 }
 
@@ -82,14 +83,8 @@ type Argument implements Node & Contribution & Reportable & TrashableContributio
   # The reason the moderator trashed the contribution.
   trashedReason: String
 
-  # The id of the contribution.
+  # The ID of an object
   id: ID!
-
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
-
-  # The author of the contribution.
-  author: User!
 
   # The kind of contribution (argument).
   kind: String!
@@ -102,6 +97,12 @@ type Argument implements Node & Contribution & Reportable & TrashableContributio
 
   # Url of the contribution
   url: URI!
+
+  # The author of the contribution.
+  author: User!
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
@@ -370,9 +371,9 @@ type CheckboxRequirement implements Node & Requirement {
   label: String!
 }
 
-# Fetches an object given its ID
+# A proposal step
 type CollectStep implements Node & Step & ProposalStep {
-  # The ID of an object
+  # The ID of the step
   id: ID!
 
   # The kind of the step
@@ -437,7 +438,7 @@ type CollectStep implements Node & Step & ProposalStep {
 
 # A comment
 type Comment implements Node & Contribution {
-  # The id of the contribution.
+  # The ID of an object
   id: ID!
 
   # The kind of contribution.
@@ -1241,14 +1242,8 @@ type Opinion implements Node & Argumentable & Contribution & TrashableContributi
   # The reason the moderator trashed the contribution.
   trashedReason: String
 
-  # The id of the contribution.
+  # The ID of an object
   id: ID!
-
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
-
-  # The author of the contribution.
-  author: User!
 
   # The kind of contribution.
   kind: String!
@@ -1261,6 +1256,12 @@ type Opinion implements Node & Argumentable & Contribution & TrashableContributi
 
   # Url of the contribution
   url: URI!
+
+  # The author of the contribution.
+  author: User!
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
@@ -1344,12 +1345,6 @@ type OpinionType implements Contribution & TrashableContribution & ContributionW
   # The reason the moderator trashed the contribution.
   trashedReason: String
 
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
-
-  # The author of the contribution.
-  author: User!
-
   # The id of the contribution.
   id: ID!
 
@@ -1364,6 +1359,12 @@ type OpinionType implements Contribution & TrashableContribution & ContributionW
 
   # Url of the contribution
   url: URI!
+
+  # The author of the contribution.
+  author: User!
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
@@ -1610,7 +1611,7 @@ type Project implements Node {
 
 # A budget contribution
 type Proposal implements Node & Contribution & Reportable {
-  # The id of the contribution.
+  # The ID of an object
   id: ID!
 
   # The kind of contribution.
@@ -2185,9 +2186,9 @@ input QuestionnaireAbstractQuestionInput {
   position: Int!
 }
 
-# Fetches an object given its ID
+# A step in a project
 type QuestionnaireStep implements Node & Step {
-  # The ID of an object
+  # The ID of the step
   id: ID!
 
   # The kind of the step
@@ -2242,7 +2243,7 @@ type RemoveProposalVotePayload {
 
 # A Reply
 type Reply implements Node & Contribution {
-  # The id of the contribution.
+  # The ID of an object
   id: ID!
 
   # The kind of contribution.
@@ -2301,9 +2302,6 @@ interface Reportable {
 
 # A report
 type Reporting implements Contribution & ContributionWithAuthor {
-  # The author of the contribution.
-  author: User!
-
   # The id of the contribution.
   id: ID!
 
@@ -2318,6 +2316,9 @@ type Reporting implements Contribution & ContributionWithAuthor {
 
   # Url of the contribution
   url: URI!
+
+  # The author of the contribution.
+  author: User!
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
@@ -2515,7 +2516,7 @@ type Selection {
 
 # A budget contribution
 type SelectionStep implements Node & Step & ProposalStep {
-  # The ID of an object
+  # The ID of the step
   id: ID!
 
   # The kind of the step
@@ -2618,14 +2619,8 @@ type Source implements Node & Contribution & TrashableContribution & Contributio
   # The reason the moderator trashed the contribution.
   trashedReason: String
 
-  # The id of the contribution.
+  # The ID of an object
   id: ID!
-
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
-
-  # The author of the contribution.
-  author: User!
 
   # The kind of contribution.
   kind: String!
@@ -2638,6 +2633,12 @@ type Source implements Node & Contribution & TrashableContribution & Contributio
 
   # Url of the contribution
   url: URI!
+
+  # The author of the contribution.
+  author: User!
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
@@ -3218,6 +3219,11 @@ type UserEdge {
   cursor: String!
 }
 
+# An error.
+type UserError {
+  message: String
+}
+
 # A user's notifications configuration
 type UserNotificationsConfiguration {
   # A boolean representing if the user wants to receive notifications by mail when someone commented his proposal
@@ -3259,12 +3265,6 @@ type Version implements Node & Contribution & Argumentable & TrashableContributi
   # The reason the moderator trashed the contribution.
   trashedReason: String
 
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
-
-  # The author of the contribution.
-  author: User!
-
   # The id of the contribution.
   id: ID!
 
@@ -3279,6 +3279,12 @@ type Version implements Node & Contribution & Argumentable & TrashableContributi
 
   # The url of version.
   url: URI!
+
+  # The author of the contribution.
+  author: User!
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
 
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
