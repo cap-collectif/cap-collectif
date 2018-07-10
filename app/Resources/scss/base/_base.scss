@@ -22,6 +22,36 @@
   }
 }
 
+/* ======================== Panel ============================*/
+
+.panel .panel-heading {
+    display: flex;
+    justify-content: space-between;
+
+    & p, & h3 {
+        font-size: 16px;
+        font-weight: 500;
+        margin: 0;
+    }
+
+    h3 {
+        display: flex;
+        margin: auto 0;
+
+        a {
+            margin: auto;
+        }
+    }
+
+    .panel-heading__action {
+        display: flex;
+
+        button, select {
+            margin-left: 5px;
+        }
+    }
+}
+
 /* ======================== Button ============================*/
 
 @each $button in $basic-btns {
@@ -111,36 +141,4 @@ svg.avatar {
 
 .b-none {
   border: 0;
-}
-
-.capco-panel-list {
-  border-bottom: none;
-}
-
-.capco-panel-list .panel-body {
-  padding: 0;
-}
-
-.capco-panel-list .panel-body .list-group {
-  margin-bottom: 0;
-  padding-left: 0;
-  border: none;
-}
-
-.capco-panel-list .panel-body .list-group .list-group-item:first-child {
-  border-top: none;
-  border-left: none;
-  border-right: none;
-}
-
-.capco-panel-list .panel-body .list-group .list-group-item:last-child {
-  border-left: none;
-  border-right: none;
-  border-bottom: 1px solid rgb(221, 221, 221);
-  border-radius: 0;
-}
-
-.capco-panel-list .panel-body .list-group .list-group-item {
-  border-left: none;
-  border-right: none;
 }

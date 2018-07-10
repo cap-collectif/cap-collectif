@@ -48,28 +48,25 @@ export class ProjectRow extends Component<Props, State> {
     const { project, viewer } = this.props;
     return (
       <Collapse in={this.state.open} id={`profile-project-collapse-${project.id}`}>
-        <Panel className="capco-panel-list">
+        <Panel>
           <Panel.Heading>
-            <div id="all-proposals">
-              <h3>
-                <a
-                  href={project.url}
-                  title={project.title}
-                  id={`profile-project-link-${project.id}`}
-                  className="profile__project__open__link">
-                  {project.title}
-                </a>
-                <Button
-                  style={{ float: 'right' }}
-                  className="profile__project__unfollow__button"
-                  id={`profile-project-unfollow-button-${project.id}`}
-                  onClick={() => {
-                    this.onUnfollowCurrentProject();
-                  }}>
-                  <FormattedMessage id="unfollow-this-project" />
-                </Button>
-              </h3>
-            </div>
+            <h3>
+              <a
+                href={project.url}
+                title={project.title}
+                id={`profile-project-link-${project.id}`}
+                className="profile__project__open__link">
+                {project.title}
+              </a>
+            </h3>
+            <Button
+              className="profile__project__unfollow__button"
+              id={`profile-project-unfollow-button-${project.id}`}
+              onClick={() => {
+                this.onUnfollowCurrentProject();
+              }}>
+              <FormattedMessage id="unfollow-this-project" />
+            </Button>
           </Panel.Heading>
           <ListGroup>
             {viewer.followingProposals.edges &&

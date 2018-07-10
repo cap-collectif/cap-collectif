@@ -9,7 +9,7 @@ import {
   DropdownButton,
   MenuItem,
   ProgressBar,
-  Modal,
+  Modal, Panel, FormControl, ListGroup, ListGroupItem,
 } from 'react-bootstrap';
 import { AlertForm } from '../components/Alert/AlertForm';
 import Pagination from '../components/Utils/Pagination';
@@ -538,6 +538,12 @@ storiesOf('Components', module)
               <img src="https://source.unsplash.com/collection/1353633" alt="img example" />
             </SixteenNineMedia>
           </div>
+          <h3>Round media</h3>
+          <div style={{ maxWidth: '400px' }} className="mb-30">
+            <div className="img-circle">
+              <img src="https://source.unsplash.com/collection/1353633" alt="img example" />
+            </div>
+          </div>
         </div>
       );
     }),
@@ -565,6 +571,75 @@ storiesOf('Components', module)
           </h1>
           <hr />
           <Loader />
+        </div>
+      );
+    }),
+  )
+  .add(
+    'Panel',
+    withInfo({
+      source: false,
+      propTablesExclude: [Button, FormControl],
+      text: `
+      <h2>Comment l'utiliser</h2>
+    
+      ~~~jsx
+      <Panel>
+        <Panel.Heading>
+          <Panel.Title componentClass="h3">Panel heading with a title</Panel.Title>
+          <div className="panel-heading__action"> // create this div if you have more than 1 element
+            <FormControl componentClass="select" placeholder="select">
+              <option value="select">select</option>
+              <option value="other">...</option>
+            </FormControl>
+            <Button>My button</Button>
+          </div>
+        </Panel.Heading>
+        <Panel.Body>Panel content</Panel.Body>
+        <ListGroup>
+          <ListGroupItem>Item 1</ListGroupItem>
+          <ListGroupItem>Item 2</ListGroupItem>
+        </ListGroup>
+        <Panel.Footer>Panel footer</Panel.Footer>
+      </Panel>
+      ~~~
+    
+    `,
+    })(() => {
+      return (
+        <div className="ml-30 mr-30 storybook-container">
+          <h1>
+            Loader{' '}
+            <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
+              <i className="small cap cap-github" />
+            </a>
+          </h1>
+          <hr />
+          <Panel>
+            <Panel.Heading>
+              <Panel.Title componentClass="h3">Panel heading with a title</Panel.Title>
+              <div className="panel-heading__action">
+                <FormControl componentClass="select" placeholder="select">
+                  <option value="select">select</option>
+                  <option value="other">...</option>
+                </FormControl>
+                <Button>My button</Button>
+              </div>
+            </Panel.Heading>
+            <Panel.Body>
+              <div className="col-xs-12  col-sm-8  col-md-9  col-lg-10">
+                div
+              </div>
+              <div className="hidden-xs col-sm-4 col-md-3 col-lg-2">
+
+              </div>
+            </Panel.Body>
+            <ListGroup>
+              <ListGroupItem>Item 1</ListGroupItem>
+              <ListGroupItem>Item 2</ListGroupItem>
+            </ListGroup>
+            <Panel.Footer>Panel footer</Panel.Footer>
+          </Panel>
         </div>
       );
     }),
