@@ -9,7 +9,11 @@ import {
   DropdownButton,
   MenuItem,
   ProgressBar,
-  Modal, Panel, FormControl, ListGroup, ListGroupItem,
+  Modal,
+  Panel,
+  FormControl,
+  ListGroup,
+  ListGroupItem, Row,
 } from 'react-bootstrap';
 import { AlertForm } from '../components/Alert/AlertForm';
 import Pagination from '../components/Utils/Pagination';
@@ -19,6 +23,7 @@ import TagsList from '../components/Ui/List/TagsList';
 import DarkenGradientMedia from '../components/Ui/DarkenGradientMedia';
 import SixteenNineMedia from '../components/Ui/SixteenNineMedia';
 import { Loader } from '../components/Ui/Loader';
+import {UserAvatar} from "../components/User/UserAvatar";
 
 const openProject = {
   step: {
@@ -102,6 +107,13 @@ const alertFormProps = [
     },
   },
 ];
+
+const author = {
+  username: 'Karim',
+  media: {
+    url: 'https://source.unsplash.com/collection/181462'
+  }
+};
 
 storiesOf('Components', module)
   .add(
@@ -512,6 +524,9 @@ storiesOf('Components', module)
       <SixteenNineMedia> // depends on parent size
         <img src="https://source.unsplash.com/collection/1353633" alt="img example"/>
       </SixteenNineMedia>
+      
+      // User avatar
+      <UserAvatar user={author}/>
       ~~~
     
     `,
@@ -538,12 +553,8 @@ storiesOf('Components', module)
               <img src="https://source.unsplash.com/collection/1353633" alt="img example" />
             </SixteenNineMedia>
           </div>
-          <h3>Round media</h3>
-          <div style={{ maxWidth: '400px' }} className="mb-30">
-            <div className="img-circle">
-              <img src="https://source.unsplash.com/collection/1353633" alt="img example" />
-            </div>
-          </div>
+          <h3>User avatar</h3>
+          <UserAvatar user={author}/>
         </div>
       );
     }),
@@ -587,7 +598,7 @@ storiesOf('Components', module)
       <Panel>
         <Panel.Heading>
           <Panel.Title componentClass="h3">Panel heading with a title</Panel.Title>
-          <div className="panel-heading__action"> // create this div if you have more than 1 element
+          <div className="panel-heading__actions"> // create this div if you have more than 1 element
             <FormControl componentClass="select" placeholder="select">
               <option value="select">select</option>
               <option value="other">...</option>
@@ -598,7 +609,22 @@ storiesOf('Components', module)
         <Panel.Body>Panel content</Panel.Body>
         <ListGroup>
           <ListGroupItem>Item 1</ListGroupItem>
-          <ListGroupItem>Item 2</ListGroupItem>
+          <ListGroupItem>
+            <div className="list-group-item__left-block">
+              <UserAvatar user={author}/>
+              <div>
+                <p><a href="#">Lorem ipsum</a> <span className="excerpt">3 juin 2014</span></p>
+                <h3>Yoloo</h3>
+                <InlineList>
+                  <li>Item 1</li>
+                  <li>Item 2</li>
+                </InlineList>
+              </div>
+            </div>
+            <div className="list-group-item__right-block">
+              Right block ...
+            </div>
+          </ListGroupItem>
         </ListGroup>
         <Panel.Footer>Panel footer</Panel.Footer>
       </Panel>
@@ -618,7 +644,7 @@ storiesOf('Components', module)
           <Panel>
             <Panel.Heading>
               <Panel.Title componentClass="h3">Panel heading with a title</Panel.Title>
-              <div className="panel-heading__action">
+              <div className="panel-heading__actions">
                 <FormControl componentClass="select" placeholder="select">
                   <option value="select">select</option>
                   <option value="other">...</option>
@@ -627,16 +653,26 @@ storiesOf('Components', module)
               </div>
             </Panel.Heading>
             <Panel.Body>
-              <div className="col-xs-12  col-sm-8  col-md-9  col-lg-10">
-                div
-              </div>
-              <div className="hidden-xs col-sm-4 col-md-3 col-lg-2">
-
-              </div>
+              panel body
             </Panel.Body>
             <ListGroup>
               <ListGroupItem>Item 1</ListGroupItem>
-              <ListGroupItem>Item 2</ListGroupItem>
+              <ListGroupItem>
+                    <div className="list-group-item__left-block">
+                      <UserAvatar user={author}/>
+                      <div>
+                        <p><a href="#">Lorem ipsum</a> <span className="excerpt">3 juin 2014</span></p>
+                        <h3>Yoloo</h3>
+                        <InlineList>
+                          <li>Item 1</li>
+                          <li>Item 2</li>
+                        </InlineList>
+                      </div>
+                    </div>
+                    <div className="list-group-item__right-block">
+                      Right block ...
+                    </div>
+              </ListGroupItem>
             </ListGroup>
             <Panel.Footer>Panel footer</Panel.Footer>
           </Panel>

@@ -54,13 +54,11 @@ export class ProjectRow extends Component<Props, State> {
               <a
                 href={project.url}
                 title={project.title}
-                id={`profile-project-link-${project.id}`}
-                className="profile__project__open__link">
+                id={`profile-project-link-${project.id}`}>
                 {project.title}
               </a>
             </h3>
             <Button
-              className="profile__project__unfollow__button"
               id={`profile-project-unfollow-button-${project.id}`}
               onClick={() => {
                 this.onUnfollowCurrentProject();

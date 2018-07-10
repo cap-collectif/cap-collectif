@@ -24,6 +24,7 @@ class OpinionInfos extends React.Component<Props> {
     }
     return (
       <span className="excerpt">
+        {' • '}
         <FormattedDate
           value={moment(opinion.createdAt).toDate()}
           day="numeric"
@@ -113,9 +114,8 @@ class OpinionInfos extends React.Component<Props> {
 
   render() {
     return (
-      <p className="opinion__user">
+      <p>
         {this.renderAuthorName()}
-        {' • '}
         {this.renderDate()}
         {this.renderEditionDate()}
         <PinnedLabel show={this.props.opinion.pinned || false} type="opinion" />

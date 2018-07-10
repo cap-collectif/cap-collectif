@@ -38,30 +38,24 @@ export class ProposalRow extends Component<Props, State> {
     const { proposal } = this.props;
     return (
       <Collapse in={this.state.open} id={`collapse-proposal-${proposal.id}`}>
-        <div>
           <ListGroupItem id={`item-proposal-${proposal.id}`}>
-            <div className="ml-25">
-              <h4>
-                <a
-                  href={proposal.show_url}
-                  title={proposal.title}
-                  id={`item-proposal-link-${proposal.id}`}
-                  className="profile__proposal__open__link">
-                  {proposal.title}
-                </a>
-                <Button
-                  style={{ float: 'right' }}
-                  className="profile__proposal__unfollow__button"
-                  id={`profile-proposal-unfollow-button-${proposal.id}`}
-                  onClick={() => {
-                    this.onUnfollowCurrentProposal(proposal.id);
-                  }}>
-                  <FormattedMessage id="unfollow" />
-                </Button>
-              </h4>
-            </div>
+            <h4>
+              <a
+                href={proposal.show_url}
+                title={proposal.title}
+                id={`item-proposal-link-${proposal.id}`}
+                className="profile__proposal__open__link">
+                {proposal.title}
+              </a>
+            </h4>
+            <Button
+              id={`profile-proposal-unfollow-button-${proposal.id}`}
+              onClick={() => {
+                this.onUnfollowCurrentProposal(proposal.id);
+              }}>
+              <FormattedMessage id="unfollow" />
+          </Button>
           </ListGroupItem>
-        </div>
       </Collapse>
     );
   }

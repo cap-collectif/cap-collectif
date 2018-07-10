@@ -24,33 +24,66 @@
 
 /* ======================== Panel ============================*/
 
-.panel .panel-heading {
-    display: flex;
-    justify-content: space-between;
-
-    & p, & h3 {
-        font-size: 16px;
-        font-weight: 500;
-        margin: 0;
-    }
-
-    h3 {
+.panel {
+    .panel-heading {
         display: flex;
-        margin: auto 0;
+        justify-content: space-between;
 
-        a {
-            margin: auto;
+        p, h3 {
+            font-size: 18px;
+            font-weight: 500;
+            margin: auto 15px auto 0;
+        }
+
+        &__actions {
+            display: flex;
+
+            button, select {
+                margin-left: 5px;
+            }
         }
     }
 
-    .panel-heading__action {
+    .list-group-item {
         display: flex;
+        justify-content: space-between;
 
-        button, select {
-            margin-left: 5px;
+        &__left-block {
+            display: flex;
+            text-align: left;
+
+            h3 {
+                line-height: 33px;
+            }
+
+            p {
+                margin: 0;
+
+                a {
+                    color: $dark;
+                    font-weight: 500;
+                }
+            }
+
+            .excerpt {
+                font-size: 14px;
+            }
+        }
+
+        &__right-block {
+            display: flex;
+            margin: auto 0;
+        }
+
+        h4, h3 {
+            margin: auto 15px auto 0;
+            font-size: 16px;
+            font-weight: 400;
         }
     }
 }
+
+
 
 /* ======================== Button ============================*/
 
