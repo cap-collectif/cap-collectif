@@ -1,8 +1,5 @@
 # www.robotstxt.org/
 # www.google.com/support/webmasters/bin/answer.py?hl=en&answer=156449
-
-Sitemap: http://local.capcollectif.com/sitemap.xml
-
 User-agent: *
 Allow: /
 Disallow: /_profiler/
