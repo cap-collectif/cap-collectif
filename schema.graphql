@@ -11,12 +11,11 @@ input AddArgumentInput {
 }
 
 type AddArgumentPayload {
-  # The newly created argument.
-  argument: Argument
+  # The new argument.
+  argument: Argument!
 
-  # The edge from the argumentable's arguments connection.
-  argumentEdge: ArgumentEdge
-  userErrors: [UserError!]!
+  # The new argument edge.
+  argumentEdge: ArgumentEdge!
   clientMutationId: String
 }
 
@@ -3217,11 +3216,6 @@ type UserEdge {
 
   # A cursor for use in pagination.
   cursor: String!
-}
-
-# An error.
-type UserError {
-  message: String
 }
 
 # A user's notifications configuration

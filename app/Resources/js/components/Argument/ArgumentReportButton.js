@@ -40,7 +40,7 @@ export default createFragmentContainer(
   container,
   graphql`
     fragment ArgumentReportButton_argument on Argument
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
       author {
         id
         slug

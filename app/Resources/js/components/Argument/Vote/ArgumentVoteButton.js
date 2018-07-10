@@ -57,7 +57,7 @@ export default createFragmentContainer(
   container,
   graphql`
     fragment ArgumentVoteButton_argument on Argument
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
       id
       author {
         slug

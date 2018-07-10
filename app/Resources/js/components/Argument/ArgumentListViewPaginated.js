@@ -72,7 +72,7 @@ export default createPaginationContainer(
     argumentable: graphql`
       fragment ArgumentListViewPaginated_argumentable on Argumentable
         @argumentDefinitions(
-          isAuthenticated: { type: "Boolean!" }
+          isAuthenticated: { type: "Boolean", defaultValue: true }
           count: { type: "Int!" }
           cursor: { type: "String" }
           type: { type: "ArgumentValue!", nonNull: true }

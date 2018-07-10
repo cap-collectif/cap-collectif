@@ -18,9 +18,6 @@ const mutation = graphql`
           ...ArgumentItem_argument
         }
       }
-      userErrors {
-        message
-      }
     }
   }
 `;
@@ -66,12 +63,6 @@ const commit = (variables: AddArgumentMutationVariables): Promise<AddArgumentMut
       },
     ],
     updater: store => {
-      const payload = store.getRootField('addArgument');
-      if (!payload.getLinkedRecord('argumentEdge')) {
-        // Mutation failed
-        return;
-      }
-
       // We update the "FOR" or "AGAINST" row arguments totalCount
       const argumentableProxy = store.get(variables.input.argumentableId);
       const connection = ConnectionHandler.getConnection(

@@ -72,7 +72,7 @@ export default createFragmentContainer(
   ArgumentItem,
   graphql`
     fragment ArgumentItem_argument on Argument
-      @argumentDefinitions(isAuthenticated: { type: "Boolean!", defaultValue: true }) {
+      @argumentDefinitions(isAuthenticated: { type: "Boolean", defaultValue: true }) {
       id
       createdAt
       ...ArgumentButtons_argument @arguments(isAuthenticated: $isAuthenticated)

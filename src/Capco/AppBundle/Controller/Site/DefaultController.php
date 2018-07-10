@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\MenuItem;
@@ -47,23 +46,33 @@ class DefaultController extends Controller
             if ($form->isValid()) {
                 $data = $form->getData();
 
-                $adminEmail = $this->get('capco.site_parameter.resolver')->getValue('admin.mail.contact');
+                $adminEmail = $this->get('capco.site_parameter.resolver')->getValue(
+                    'admin.mail.contact'
+                );
                 if (null === $adminEmail) {
-                    $this->get('session')->getFlashBag()->add('danger', 'contact.email.sent_error');
+                    $this->get('session')
+                        ->getFlashBag()
+                        ->add('danger', 'contact.email.sent_error');
 
                     return $this->redirect($this->generateUrl('app_homepage'));
                 }
 
-                $this->get('capco.contact_notifier')->onContact($adminEmail, $data['email'], $data['name'], $data['message']);
-                $this->get('session')->getFlashBag()->add('success', 'contact.email.sent_success');
+                $this->get('capco.contact_notifier')->onContact(
+                    $adminEmail,
+                    $data['email'],
+                    $data['name'],
+                    $data['message'],
+                    $this->generateUrl('app_homepage')
+                );
+                $this->get('session')
+                    ->getFlashBag()
+                    ->add('success', 'contact.email.sent_success');
 
                 return $this->redirect($this->generateUrl('app_homepage'));
             }
         }
 
-        return [
-            'form' => $form->createView(),
-        ];
+        return ['form' => $form->createView()];
     }
 
     /**
@@ -84,14 +93,15 @@ class DefaultController extends Controller
      */
     public function footerAction($max = 4, $offset = 0)
     {
-        $footerLinks = $this->getDoctrine()->getRepository('CapcoAppBundle:MenuItem')->getParentItems(MenuItem::TYPE_FOOTER);
+        $footerLinks = $this->getDoctrine()
+            ->getRepository('CapcoAppBundle:MenuItem')
+            ->getParentItems(MenuItem::TYPE_FOOTER);
 
-        $socialNetworks = $this->getDoctrine()->getRepository('CapcoAppBundle:FooterSocialNetwork')->getEnabled();
+        $socialNetworks = $this->getDoctrine()
+            ->getRepository('CapcoAppBundle:FooterSocialNetwork')
+            ->getEnabled();
 
-        return [
-            'socialNetworks' => $socialNetworks,
-            'footerLinks' => $footerLinks,
-        ];
+        return ['socialNetworks' => $socialNetworks, 'footerLinks' => $footerLinks];
     }
 
     /**
@@ -100,17 +110,12 @@ class DefaultController extends Controller
     public function getTokenAction()
     {
         if (!$this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            return new JsonResponse([
-              'message' => 'You are not authenticated.',
-            ], 200);
+            return new JsonResponse(['message' => 'You are not authenticated.'], 200);
         }
 
         $user = $this->getUser();
-        $token = $this->get('lexik_jwt_authentication.jwt_manager')
-                      ->create($user);
+        $token = $this->get('lexik_jwt_authentication.jwt_manager')->create($user);
 
-        return new JsonResponse([
-            'token' => $token,
-        ]);
+        return new JsonResponse(['token' => $token]);
     }
 }
