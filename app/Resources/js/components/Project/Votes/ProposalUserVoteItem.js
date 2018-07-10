@@ -188,7 +188,7 @@ export class ProposalUserVoteItem extends React.Component<Props> {
               <a
                 className="proposal-vote__delete"
                 disabled={!step.open}
-                aria-label="Supprimer mon vote">
+                aria-label={intl.formatMessage({ id: 'aria-label-delete-vote' })}>
                 <i
                   className="cap cap-ios-close"
                   id={`${proposal.id}-proposal-vote__private-delete`}

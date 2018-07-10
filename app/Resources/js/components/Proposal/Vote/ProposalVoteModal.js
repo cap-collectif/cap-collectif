@@ -160,14 +160,12 @@ export class ProposalVoteModal extends React.Component<Props, State> {
                   </Label>
                 )}
               </Panel.Heading>
-              <Panel.Body>
-                {!step.requirements.viewerMeetsTheRequirements && (
-                  <div>
-                    <p>{step.requirements.reason}</p>
-                    <RequirementsForm step={step} />
-                  </div>
-                )}
-              </Panel.Body>
+              {!step.requirements.viewerMeetsTheRequirements && (
+                <Panel.Body>
+                  <p>{step.requirements.reason}</p>
+                  <RequirementsForm step={step} />
+                </Panel.Body>
+              )}
             </Panel>
           )}
           <h3 className="d-ib mr-10 mb-10">

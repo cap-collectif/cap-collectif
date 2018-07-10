@@ -67,32 +67,30 @@ exports[`<ProposalVoteModal /> should render correctly 1`] = `
         bsClass="panel"
         collapsible={false}
       >
-        <div>
-          <p>
-            We need to collect
-          </p>
-          <Relay(Connect(ReduxForm))
-            step={
-              Object {
+        <p>
+          We need to collect
+        </p>
+        <Relay(Connect(ReduxForm))
+          step={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "id": "step1",
+              "requirements": Object {
+                "reason": "We need to collect",
+                "totalCount": 3,
+                "viewerMeetsTheRequirements": false,
+              },
+              "viewerVotes": Object {
                 "$fragmentRefs": null,
-                "$refType": null,
-                "id": "step1",
-                "requirements": Object {
-                  "reason": "We need to collect",
-                  "totalCount": 3,
-                  "viewerMeetsTheRequirements": false,
-                },
-                "viewerVotes": Object {
-                  "$fragmentRefs": null,
-                  "edges": Array [],
-                  "totalCount": 0,
-                },
-                "votesHelpText": "Help",
-                "votesRanking": false,
-              }
+                "edges": Array [],
+                "totalCount": 0,
+              },
+              "votesHelpText": "Help",
+              "votesRanking": false,
             }
-          />
-        </div>
+          }
+        />
       </PanelBody>
     </Uncontrolled(Panel)>
     <h3
