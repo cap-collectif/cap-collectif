@@ -9,12 +9,51 @@ exports[`<Opinion /> renders correcty 1`] = `
   <div
     className="left-block"
   >
-    <Connect(UserAvatar) />
+    <Connect(UserAvatar)
+      user={
+        Object {
+          "displayName": "",
+          "media": Object {
+            "url": "",
+          },
+          "show_url": "",
+          "vip": false,
+        }
+      }
+    />
     <div>
       <OpinionInfos
         opinion={
           Object {
+            "$refType": null,
+            "argumentsCount": 0,
+            "author": Object {
+              "displayName": "",
+              "media": Object {
+                "url": "",
+              },
+              "show_url": "",
+              "vip": false,
+            },
+            "createdAt": "",
             "id": "opinionId",
+            "pinned": true,
+            "section": Object {
+              "linkable": false,
+              "sourceable": true,
+              "title": "Section",
+              "versionable": true,
+              "voteWidgetType": 1,
+            },
+            "sourcesCount": 0,
+            "title": "title",
+            "updatedAt": "",
+            "url": "",
+            "versionsCount": 0,
+            "votesCount": 0,
+            "votesCountMitige": 0,
+            "votesCountNok": 0,
+            "votesCountOk": 0,
           }
         }
         rankingThreshold={0}
@@ -23,7 +62,35 @@ exports[`<Opinion /> renders correcty 1`] = `
         link={true}
         opinion={
           Object {
+            "$refType": null,
+            "argumentsCount": 0,
+            "author": Object {
+              "displayName": "",
+              "media": Object {
+                "url": "",
+              },
+              "show_url": "",
+              "vip": false,
+            },
+            "createdAt": "",
             "id": "opinionId",
+            "pinned": true,
+            "section": Object {
+              "linkable": false,
+              "sourceable": true,
+              "title": "Section",
+              "versionable": true,
+              "voteWidgetType": 1,
+            },
+            "sourcesCount": 0,
+            "title": "title",
+            "updatedAt": "",
+            "url": "",
+            "versionsCount": 0,
+            "votesCount": 0,
+            "votesCountMitige": 0,
+            "votesCountNok": 0,
+            "votesCountOk": 0,
           }
         }
         showTypeLabel={false}
@@ -31,7 +98,35 @@ exports[`<Opinion /> renders correcty 1`] = `
       <OpinionPreviewCounters
         opinion={
           Object {
+            "$refType": null,
+            "argumentsCount": 0,
+            "author": Object {
+              "displayName": "",
+              "media": Object {
+                "url": "",
+              },
+              "show_url": "",
+              "vip": false,
+            },
+            "createdAt": "",
             "id": "opinionId",
+            "pinned": true,
+            "section": Object {
+              "linkable": false,
+              "sourceable": true,
+              "title": "Section",
+              "versionable": true,
+              "voteWidgetType": 1,
+            },
+            "sourcesCount": 0,
+            "title": "title",
+            "updatedAt": "",
+            "url": "",
+            "versionsCount": 0,
+            "votesCount": 0,
+            "votesCountMitige": 0,
+            "votesCountNok": 0,
+            "votesCountOk": 0,
           }
         }
       />

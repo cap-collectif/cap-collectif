@@ -3,10 +3,10 @@
 exports[`<OpinionList /> renders correcty 1`] = `
 <div
   className="anchor-offset"
-  id="opinions--test17undefined"
+  id="opinions--test17slug"
 >
   <Uncontrolled(Panel)
-    className="opinion panel--undefined panel--default panel-custom"
+    className="opinion panel--red panel--default panel-custom"
   >
     <PanelHeading
       bsClass="panel"
@@ -17,14 +17,31 @@ exports[`<OpinionList /> renders correcty 1`] = `
           id="global.opinionsCount"
           values={
             Object {
-              "num": undefined,
+              "num": 0,
             }
           }
         />
       </p>
       <div
         className="panel-heading__actions"
-      />
+      >
+        <Connect(NewOpinionButton)
+          disabled={true}
+          label="opinion.create.button"
+          opinionType={
+            Object {
+              "$refType": null,
+              "appendixTypes": Array [],
+              "color": "red",
+              "contribuable": true,
+              "contributionsCount": 0,
+              "id": "id",
+              "slug": "slug",
+              "url": "https://capco.dev",
+            }
+          }
+        />
+      </div>
     </PanelHeading>
   </Uncontrolled(Panel)>
 </div>
