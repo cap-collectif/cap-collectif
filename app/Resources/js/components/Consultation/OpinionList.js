@@ -6,7 +6,6 @@ import Opinion from './Opinion';
 import NewOpinionButton from '../Opinion/NewOpinionButton';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Ui/Loader';
-import type { OpinionList_section } from './__generated__/OpinionList_section.graphql';
 
 const renderOpinionList = ({
   error,
@@ -33,7 +32,7 @@ const renderOpinionList = ({
 };
 
 type Props = {
-  section: OpinionList_section,
+  section: Object,
   consultation: Object,
   intl: Object,
 };
@@ -58,9 +57,7 @@ export class OpinionList extends React.Component<Props> {
                   style={{ marginRight: section.contribuable ? 15 : 0 }}
                   aria-label={intl.formatMessage({ id: 'global.filter' })}
                   onChange={(event: SyntheticInputEvent<>) => {
-                    if (section.url) {
-                      window.location.href = `${section.url}/sort/${event.target.value}`;
-                    }
+                    window.location.href = `${section.url}/sort/${event.target.value}`;
                   }}>
                   <option value="positions">
                     <FormattedMessage id="opinion.sort.positions" />
