@@ -154,16 +154,18 @@
 
         .btn,
         .opinion__votes-nb {
-            margin-top: 10px;
+            margin-top: 11px;
         }
 
         .opinion__votes-nb {
             display: inline-block;
             vertical-align: middle;
-            padding: 5px 6px;
-            border: 1px solid $border-color;
+            padding: 1px 6px;
+            border: 1px solid $dark-gray;
             font-size: 12px;
             line-height: 1.5;
+            border-radius: 3px;
+            margin-right: 4px;
         }
     }
 

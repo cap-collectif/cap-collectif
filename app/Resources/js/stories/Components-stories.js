@@ -555,7 +555,7 @@ storiesOf('Components', module)
             </SixteenNineMedia>
           </div>
           <h3>User avatar</h3>
-          <UserAvatar user={author}/>
+          <UserAvatar user={author} defaultAvatar={null} />
         </div>
       );
     }),
@@ -773,7 +773,7 @@ storiesOf('Components', module)
             </ListGroupItem>
             <ListGroupItem className="list-group-item__opinion">
               <div className="left-block">
-                <UserAvatar user={author}/>
+                <UserAvatar user={author} defaultAvatar={null} />
                 <div>
                   <p><a href="#" className="author-name">Lorem ipsum</a> <span className="excerpt">3 juin 2014</span></p>
                   <h3 className="title">Yoloo</h3>

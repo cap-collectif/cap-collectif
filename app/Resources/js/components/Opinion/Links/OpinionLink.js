@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Row, Col } from 'react-bootstrap';
+import {ListGroup, ListGroupItem} from 'react-bootstrap';
 import classNames from 'classnames';
 import OpinionPreview from '../OpinionPreview';
 
@@ -12,17 +12,19 @@ class OpinionLink extends React.Component<Props> {
     const classes = classNames({
       opinion: true,
       'block--bordered': true,
+      'list-group-custom': true,
+      'mb-0': true,
       'bg-vip': link.author && link.author.vip,
     });
 
     return (
-      <li className={classes}>
-        <Row>
-          <Col xs={12}>
+      <ListGroup className={classes}>
+        <ListGroupItem className="list-group-item__opinion">
+          <div className="left-block">
             <OpinionPreview rankingThreshold={null} opinion={link} showTypeLabel />
-          </Col>
-        </Row>
-      </li>
+          </div>
+        </ListGroupItem>
+      </ListGroup>
     );
   }
 }

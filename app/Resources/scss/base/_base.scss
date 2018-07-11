@@ -22,6 +22,34 @@
   }
 }
 
+.text-label {
+    font-size: 14px;
+
+    i {
+        @include border-radius(3px);
+        padding: 3px 3px 0;
+        font-size: 10px;
+        margin-right: 5px;
+        top: 0;
+    }
+
+    // Colors
+    @each $label in $opinion-labels {
+        $name: nth($label, 1);
+        $color: nth($label, 2);
+        $text: set-link-text-color($color);
+
+        &--#{$name} {
+            color: $color;
+
+            i {
+                background-color: $color;
+                color: $text;
+            }
+        }
+    }
+}
+
 /* ======================== Panel ============================*/
 
 .panel-custom { // Todo remove custom when all panel changed
@@ -49,12 +77,21 @@
             margin: auto 15px auto 0;
         }
 
+        .panel-title span {
+            margin: auto 0;
+        }
+
         &__actions {
             display: flex;
 
             button, select {
                 margin-left: 5px;
             }
+        }
+
+        .form-group {
+            display: flex;
+            margin: 0;
         }
     }
 
@@ -71,6 +108,14 @@
 
         &__actions{
             margin-top: 10px;
+
+            .form-group {
+                width: 100%;
+            }
+
+            select {
+                margin-left: 0;
+            }
         }
     }
 }

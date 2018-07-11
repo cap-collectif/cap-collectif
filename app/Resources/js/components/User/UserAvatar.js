@@ -19,10 +19,10 @@ type Props = {
   defaultAvatar: ?string,
   style?: any,
   anchor?: boolean,
-  onBlur?: () => {},
-  onFocus?: () => {},
-  onMouseOver?: () => {},
-  onMouseOut?: () => {},
+  onBlur?: Function,
+  onFocus?: Function,
+  onMouseOver?: Function,
+  onMouseOut?: Function,
 };
 
 export class UserAvatar extends React.Component<Props> {

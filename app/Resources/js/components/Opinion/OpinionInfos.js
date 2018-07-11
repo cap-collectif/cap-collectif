@@ -81,7 +81,7 @@ class OpinionInfos extends React.Component<Props> {
       opinion.ranking <= rankingThreshold
     ) {
       return (
-        <span className="opinion__label opinion__label--green">
+        <span className="text-label text-label--green ml-10">
           <i className="cap cap-trophy" />
           {this.isVersion() ? (
             <FormattedMessage

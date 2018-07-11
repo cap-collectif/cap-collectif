@@ -80,49 +80,45 @@ export class ArgumentList extends React.Component<Props, State> {
               return (
                 <Panel className="panel-custom">
                   <Panel.Heading>
-                    <Row className="opinion__arguments__header" style={{ border: 0 }}>
-                      <Col xs={12} sm={6} md={6}>
-                        <h4 className="opinion__header__title">
-                          {type === 'SIMPLE' ? (
-                            <FormattedMessage
-                              id="argument.simple.list"
-                              values={{ num: totalCount }}
-                            />
-                          ) : type === 'FOR' ? (
-                            <FormattedMessage id="argument.yes.list" values={{ num: totalCount }} />
-                          ) : (
-                            <FormattedMessage id="argument.no.list" values={{ num: totalCount }} />
-                          )}
-                        </h4>
-                      </Col>
-                      {totalCount > 1 ? (
-                        <Col xs={12} sm={6} md={6} className="block--first-mobile">
-                          <Input
-                            id={htmlFor}
-                            label={
-                              <span className="sr-only">
-                                <FormattedMessage
-                                  id={`argument.filter.${type === 'AGAINST' ? 'no' : 'yes'}`}
-                                />
-                              </span>
-                            }
-                            className="form-control pull-right"
-                            type="select"
-                            value={this.state.order}
-                            onChange={this.updateOrderBy}>
-                            <FormattedMessage id="global.filter_last">
-                              {message => <option value="last">{message}</option>}
-                            </FormattedMessage>
-                            <FormattedMessage id="global.filter_old">
-                              {message => <option value="old">{message}</option>}
-                            </FormattedMessage>
-                            <FormattedMessage id="global.filter_popular">
-                              {message => <option value="popular">{message}</option>}
-                            </FormattedMessage>
-                          </Input>
-                        </Col>
-                      ) : null}
-                    </Row>
+                    <Panel.Title componentClass="h4" className="opinion__header__title d-flex">
+                      {type === 'SIMPLE' ? (
+                        <FormattedMessage
+                          id="argument.simple.list"
+                          values={{ num: totalCount }}
+                        />
+                      ) : type === 'FOR' ? (
+                        <FormattedMessage id="argument.yes.list" values={{ num: totalCount }} />
+                      ) : (
+                        <FormattedMessage id="argument.no.list" values={{ num: totalCount }} />
+                      )}
+                    </Panel.Title>
+                    {totalCount > 1 ? (
+                      <div className="panel-heading__actions">
+                        <Input
+                          id={htmlFor}
+                          label={
+                            <span className="sr-only">
+                              <FormattedMessage
+                                id={`argument.filter.${type === 'AGAINST' ? 'no' : 'yes'}`}
+                              />
+                            </span>
+                          }
+                          className="form-control pull-right"
+                          type="select"
+                          value={this.state.order}
+                          onChange={this.updateOrderBy}>
+                          <FormattedMessage id="global.filter_last">
+                            {message => <option value="last">{message}</option>}
+                          </FormattedMessage>
+                          <FormattedMessage id="global.filter_old">
+                            {message => <option value="old">{message}</option>}
+                          </FormattedMessage>
+                          <FormattedMessage id="global.filter_popular">
+                            {message => <option value="popular">{message}</option>}
+                          </FormattedMessage>
+                        </Input>
+                      </div>
+                    ) : null}
                   </Panel.Heading>
                   {/* $FlowFixMe */}
                   <ArgumentListView order={this.state.order} argumentable={argumentable} />

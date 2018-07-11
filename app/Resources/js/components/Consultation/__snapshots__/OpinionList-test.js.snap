@@ -6,7 +6,7 @@ exports[`<OpinionList /> renders correcty 1`] = `
   id="opinions--test17undefined"
 >
   <Uncontrolled(Panel)
-    className="opinion  opinion--undefined opinion--default"
+    className="opinion panel--undefined panel--default panel-custom"
   >
     <PanelHeading
       bsClass="panel"
