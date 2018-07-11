@@ -1,7 +1,7 @@
 module.exports = {
   extends: ['airbnb', 'prettier', 'prettier/flowtype', 'prettier/react'],
   parser: 'babel-eslint',
-  plugins: ['flowtype', 'import', 'react', 'jsx-a11y', 'jest'],
+  plugins: ['flowtype', 'import', 'react', 'jsx-a11y', 'jest', 'relay'],
   globals: {
     $: true,
     screen: true,
@@ -27,6 +27,11 @@ module.exports = {
     'jest/no-disabled-tests': 'warn',
     'jest/no-focused-tests': 'error',
     'jest/no-identical-title': 'error',
+    'relay/graphql-syntax': 'error',
+    'relay/compat-uses-vars': 'warn',
+    'relay/graphql-naming': 'error',
+    'relay/generated-flow-types': 'warn',
+    'relay/unused-fields': 'warn',
     'flowtype/boolean-style': ['error', 'boolean'],
     'flowtype/define-flow-type': 1,
     'flowtype/generic-spacing': ['off'],

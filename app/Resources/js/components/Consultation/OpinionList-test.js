@@ -3,11 +3,20 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { OpinionList } from './OpinionList';
-import { intlMock } from '../../mocks';
+import { $refType, intlMock } from '../../mocks';
 
 describe('<OpinionList />', () => {
   const props = {
-    section: {},
+    section: {
+      $refType,
+      appendixTypes: [],
+      color: 'red',
+      contribuable: true,
+      contributionsCount: 0,
+      id: 'id',
+      slug: 'slug',
+      url: 'https://capco.dev',
+    },
     consultation: {},
     intl: intlMock,
   };

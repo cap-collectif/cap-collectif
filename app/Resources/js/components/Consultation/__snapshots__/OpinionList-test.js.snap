@@ -3,10 +3,10 @@
 exports[`<OpinionList /> renders correcty 1`] = `
 <div
   className="anchor-offset block  block--bordered"
-  id="opinions--test17undefined"
+  id="opinions--test17slug"
 >
   <div
-    className="opinion  opinion--undefined opinion--default"
+    className="opinion  opinion--red opinion--default"
   >
     <div
       className="opinion__header  opinion__header--mobile-centered"
@@ -18,14 +18,31 @@ exports[`<OpinionList /> renders correcty 1`] = `
           id="global.opinionsCount"
           values={
             Object {
-              "num": undefined,
+              "num": 0,
             }
           }
         />
       </div>
       <div
         className="pull-right  opinion__header__filter"
-      />
+      >
+        <Connect(NewOpinionButton)
+          disabled={true}
+          label="opinion.create.button"
+          opinionType={
+            Object {
+              "$refType": null,
+              "appendixTypes": Array [],
+              "color": "red",
+              "contribuable": true,
+              "contributionsCount": 0,
+              "id": "id",
+              "slug": "slug",
+              "url": "https://capco.dev",
+            }
+          }
+        />
+      </div>
     </div>
   </div>
 </div>

@@ -6,9 +6,10 @@ import OpinionInfos from '../Opinion/OpinionInfos';
 import UserAvatar from '../User/UserAvatar';
 import OpinionPreviewCounters from '../Opinion/OpinionPreviewCounters';
 import VotePiechart from '../Utils/VotePiechart';
+import type { Opinion_opinion } from './__generated__/Opinion_opinion.graphql';
 
 type Props = {
-  opinion: Object,
+  opinion: Opinion_opinion,
 };
 
 export class Opinion extends React.Component<Props> {
