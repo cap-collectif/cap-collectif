@@ -36,6 +36,7 @@ export class ContributionPaginatedList extends React.Component<Props> {
           <div>
             {contributionConnection.edges
               .filter(Boolean)
+              // $FlowFixMe
               .map((edge, index) => <Opinion key={index} opinion={edge.node} />)}
           </div>
         </ul>
