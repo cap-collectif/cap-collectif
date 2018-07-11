@@ -2,10 +2,9 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import OpinionList from './OpinionList';
-import type { Section_section } from './__generated__/Section_section.graphql';
 
 type Props = {
-  section: Section_section,
+  section: Object,
   consultation: Object,
   level: number,
 };
