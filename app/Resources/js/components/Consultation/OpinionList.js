@@ -44,7 +44,7 @@ export class OpinionList extends React.Component<Props> {
     const { section, consultation, intl } = this.props;
     return (
       <div id={`opinions--test17${section.slug}`} className="anchor-offset">
-        <Panel className={`opinion  opinion--${section.color} opinion--default`}>
+        <Panel className={`opinion panel--${section.color} panel--default panel-custom`}>
           <Panel.Heading>
             <p>
               <FormattedMessage
@@ -97,7 +97,7 @@ export class OpinionList extends React.Component<Props> {
             </div>
           </Panel.Heading>
           {section.contributionsCount > 0 && (
-            <ListGroup>
+            <ListGroup className="list-group-custom">
               <QueryRenderer
                 environment={environment}
                 query={graphql`

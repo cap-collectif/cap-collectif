@@ -2,48 +2,30 @@
 
 exports[`<OpinionList /> renders correcty 1`] = `
 <div
-  className="anchor-offset block  block--bordered"
-  id="opinions--test17slug"
+  className="anchor-offset"
+  id="opinions--test17undefined"
 >
-  <div
-    className="opinion  opinion--red opinion--default"
+  <Uncontrolled(Panel)
+    className="opinion  opinion--undefined opinion--default"
   >
-    <div
-      className="opinion__header  opinion__header--mobile-centered"
+    <PanelHeading
+      bsClass="panel"
+      componentClass="div"
     >
-      <div
-        className="pull-left opinion__header__title"
-      >
+      <p>
         <FormattedMessage
           id="global.opinionsCount"
           values={
             Object {
-              "num": 0,
+              "num": undefined,
             }
           }
         />
-      </div>
+      </p>
       <div
-        className="pull-right  opinion__header__filter"
-      >
-        <Connect(NewOpinionButton)
-          disabled={true}
-          label="opinion.create.button"
-          opinionType={
-            Object {
-              "$refType": null,
-              "appendixTypes": Array [],
-              "color": "red",
-              "contribuable": true,
-              "contributionsCount": 0,
-              "id": "id",
-              "slug": "slug",
-              "url": "https://capco.dev",
-            }
-          }
-        />
-      </div>
-    </div>
-  </div>
+        className="panel-heading__actions"
+      />
+    </PanelHeading>
+  </Uncontrolled(Panel)>
 </div>
 `;

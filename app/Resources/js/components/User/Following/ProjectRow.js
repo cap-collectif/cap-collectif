@@ -48,7 +48,7 @@ export class ProjectRow extends Component<Props, State> {
     const { project, viewer } = this.props;
     return (
       <Collapse in={this.state.open} id={`profile-project-collapse-${project.id}`}>
-        <Panel>
+        <Panel className="panel-custom">
           <Panel.Heading>
             <h3>
               <a
@@ -66,7 +66,7 @@ export class ProjectRow extends Component<Props, State> {
               <FormattedMessage id="unfollow-this-project" />
             </Button>
           </Panel.Heading>
-          <ListGroup>
+          <ListGroup className="list-group-custom">
             {viewer.followingProposals.edges &&
               viewer.followingProposals.edges
                 .filter(Boolean)

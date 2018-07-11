@@ -78,7 +78,7 @@ export class ArgumentList extends React.Component<Props, State> {
               const totalCount = argumentable.allArguments.totalCount;
               const htmlFor = `filter-arguments-${type}`;
               return (
-                <Panel>
+                <Panel className="panel-custom">
                   <Panel.Heading>
                     <Row className="opinion__arguments__header" style={{ border: 0 }}>
                       <Col xs={12} sm={6} md={6}>

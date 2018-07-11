@@ -66,10 +66,10 @@ class OpinionInfos extends React.Component<Props> {
   renderAuthorName = () => {
     const { opinion } = this.props;
     if (opinion.author) {
-      return <UserLink user={opinion.author} />;
+      return <UserLink user={opinion.author} className="author-name" />;
     }
 
-    return <span>{opinion.authorName}</span>;
+    return <span className="author-name">{opinion.authorName}</span>;
   };
 
   renderRankingLabel = () => {

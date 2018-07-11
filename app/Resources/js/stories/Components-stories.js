@@ -112,7 +112,8 @@ const author = {
   username: 'Karim',
   media: {
     url: 'https://source.unsplash.com/collection/181462'
-  }
+  },
+  _links: {}
 };
 
 storiesOf('Components', module)
@@ -590,14 +591,14 @@ storiesOf('Components', module)
     'Panel',
     withInfo({
       source: false,
-      propTablesExclude: [Button, FormControl],
+      propTablesExclude: [Button, FormControl, UserAvatar, InlineList, ListGroup, ListGroupItem],
       text: `
       <h2>Comment l'utiliser</h2>
     
       ~~~jsx
-      <Panel>
+      <Panel className="panel-custom">
         <Panel.Heading>
-          <Panel.Title componentClass="h3">Panel heading with a title</Panel.Title>
+          <Panel.Title componentClass="h3">Panel heading</Panel.Title>
           <div className="panel-heading__actions"> // create this div if you have more than 1 element
             <FormControl componentClass="select" placeholder="select">
               <option value="select">select</option>
@@ -607,26 +608,24 @@ storiesOf('Components', module)
           </div>
         </Panel.Heading>
         <Panel.Body>Panel content</Panel.Body>
-        <ListGroup>
-          <ListGroupItem>Item 1</ListGroupItem>
+        <ListGroup className="list-group-custom">
+            <ListGroupItem>
+              <p>Alone item</p>
+            </ListGroupItem>
           <ListGroupItem>
-            <div className="list-group-item__left-block">
-              <UserAvatar user={author}/>
-              <div>
-                <p><a href="#">Lorem ipsum</a> <span className="excerpt">3 juin 2014</span></p>
-                <h3>Yoloo</h3>
-                <InlineList>
-                  <li>Item 1</li>
-                  <li>Item 2</li>
-                </InlineList>
-              </div>
-            </div>
-            <div className="list-group-item__right-block">
-              Right block ...
-            </div>
+          <a href="#" className="d-flex"> // center title with flex
+            <h3>My title</h3>
+          </a>
           </ListGroupItem>
         </ListGroup>
         <Panel.Footer>Panel footer</Panel.Footer>
+      </Panel>
+      
+      // panel with color
+      <Panel className="panel-custom panel--blue">
+        <Panel.Heading>
+          <Panel.Title componentClass="h3">Blue panel</Panel.Title>
+        </Panel.Heading>
       </Panel>
       ~~~
     
@@ -635,15 +634,15 @@ storiesOf('Components', module)
       return (
         <div className="ml-30 mr-30 storybook-container">
           <h1>
-            Loader{' '}
+            Panel{' '}
             <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
               <i className="small cap cap-github" />
             </a>
           </h1>
           <hr />
-          <Panel>
+          <Panel className="panel-custom">
             <Panel.Heading>
-              <Panel.Title componentClass="h3">Panel heading with a title</Panel.Title>
+              <Panel.Title componentClass="h3">Panel heading [default]</Panel.Title>
               <div className="panel-heading__actions">
                 <FormControl componentClass="select" placeholder="select">
                   <option value="select">select</option>
@@ -653,30 +652,144 @@ storiesOf('Components', module)
               </div>
             </Panel.Heading>
             <Panel.Body>
-              panel body
+              <p>panel body</p>
             </Panel.Body>
-            <ListGroup>
-              <ListGroupItem>Item 1</ListGroupItem>
+            <ListGroup className="list-group-custom">
               <ListGroupItem>
-                    <div className="list-group-item__left-block">
-                      <UserAvatar user={author}/>
-                      <div>
-                        <p><a href="#">Lorem ipsum</a> <span className="excerpt">3 juin 2014</span></p>
-                        <h3>Yoloo</h3>
-                        <InlineList>
-                          <li>Item 1</li>
-                          <li>Item 2</li>
-                        </InlineList>
-                      </div>
-                    </div>
-                    <div className="list-group-item__right-block">
-                      Right block ...
-                    </div>
+                <p>Alone item</p>
+              </ListGroupItem>
+              <ListGroupItem>
+                <a href="#" className="d-flex">
+                  <h3>My item</h3>
+                </a>
+                <Button>
+                  My button
+                </Button>
               </ListGroupItem>
             </ListGroup>
             <Panel.Footer>Panel footer</Panel.Footer>
           </Panel>
+          <Panel className="panel-custom panel--blue">
+            <Panel.Heading>
+              <Panel.Title componentClass="h3">Blue panel</Panel.Title>
+            </Panel.Heading>
+          </Panel>
+          <Panel className="panel-custom panel--red">
+            <Panel.Heading>
+              <Panel.Title componentClass="h3">Red panel</Panel.Title>
+            </Panel.Heading>
+          </Panel>
+          <Panel className="panel-custom panel--orange">
+            <Panel.Heading>
+              <Panel.Title componentClass="h3">Orange panel</Panel.Title>
+            </Panel.Heading>
+          </Panel>
+          <Panel className="panel-custom panel--green">
+            <Panel.Heading>
+              <Panel.Title componentClass="h3">Green panel</Panel.Title>
+            </Panel.Heading>
+          </Panel>
+          <Panel className="panel-custom panel--gray">
+            <Panel.Heading>
+              <Panel.Title componentClass="h3">Gray panel</Panel.Title>
+            </Panel.Heading>
+          </Panel>
+          <Panel className="panel-custom panel--lightgray">
+            <Panel.Heading>
+              <Panel.Title componentClass="h3">Lightgray panel</Panel.Title>
+            </Panel.Heading>
+          </Panel>
+          <Panel className="panel-custom panel--bluedark">
+            <Panel.Heading>
+              <Panel.Title componentClass="h3">Bluedark panel</Panel.Title>
+            </Panel.Heading>
+          </Panel>
+        </div>
+      );
+    }),
+  )
+  .add(
+    'ListGroup',
+    withInfo({
+      source: false,
+      propTablesExclude: [UserAvatar, InlineList, Button],
+      text: `
+      <h2>Comment l'utiliser</h2>
+    
+      ~~~jsx
+      <ListGroup className="list-group-custom">
+        // simple list group item
+        <ListGroupItem>Item 1</ListGroupItem>
+        
+        // list group item with element on right side
+        <ListGroupItem>
+        <a href="#" className="d-flex"> // center title with flex
+          <h3>My title</h3>
+        </a>
+        </ListGroupItem>
+        
+        // opinion list group item
+        <ListGroupItem className="list-group-item__opinion">
+          <div className="left-block">
+            <UserAvatar user={author}/>
+            <div>
+              <p><a href="#">Lorem ipsum</a> <span className="excerpt">3 juin 2014</span></p>
+              <h3 className="title">Yoloo</h3>
+              <InlineList>
+                <li>Item 1</li>
+                <li>Item 2</li>
+              </InlineList>
+            </div>
+          </div>
+          <div className="right-block">
+            Right block ...
+          </div>
+        </ListGroupItem>
+      </ListGroup>
+      ~~~
+    
+    `,
+    })(() => {
+      return (
+        <div className="ml-30 mr-30 storybook-container">
+          <h1>
+            List Group{' '}
+            <a href="https://github.com/cap-collectif/platform/blob/master/app/Resources/js/stories/Components-stories.js">
+              <i className="small cap cap-github" />
+            </a>
+          </h1>
+          <hr />
+          <ListGroup className="list-group-custom">
+            <ListGroupItem>
+              <p>Paragraph</p>
+            </ListGroupItem>
+            <ListGroupItem>
+              <a href="#" className="d-flex">
+                <h3>My item</h3>
+              </a>
+              <Button>
+                My button
+              </Button>
+            </ListGroupItem>
+            <ListGroupItem className="list-group-item__opinion">
+              <div className="left-block">
+                <UserAvatar user={author}/>
+                <div>
+                  <p><a href="#" className="author-name">Lorem ipsum</a> <span className="excerpt">3 juin 2014</span></p>
+                  <h3 className="title">Yoloo</h3>
+                  <InlineList>
+                    <li>Item 1</li>
+                    <li>Item 2</li>
+                  </InlineList>
+                </div>
+              </div>
+              <div className="right-block">
+                Right block ...
+              </div>
+            </ListGroupItem>
+          </ListGroup>
         </div>
       );
     }),
   );
+

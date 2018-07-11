@@ -18,8 +18,8 @@ export class Opinion extends React.Component<Props> {
     const { opinion } = this.props;
     const author = opinion.author;
     return (
-      <ListGroupItem className={`opinion has-chart${author && author.vip ? ' bg-vip' : ''}`}>
-        <div className="list-group-item__left-block">
+      <ListGroupItem className={`list-group-item__opinion has-chart${author && author.vip ? ' bg-vip' : ''}`}>
+        <div className="left-block">
           <UserAvatar user={author}/>
           <div>
             <OpinionInfos rankingThreshold={0} opinion={opinion} />
