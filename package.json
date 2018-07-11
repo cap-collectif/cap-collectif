@@ -142,6 +142,7 @@
     "eslint-plugin-jest": "^21.0.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.4.0-rc.1",
+    "eslint-plugin-relay": "^0.0.24",
     "exports-loader": "^0.6.3",
     "fancybox": "^3.0.0",
     "file-loader": "^1.1.11",
