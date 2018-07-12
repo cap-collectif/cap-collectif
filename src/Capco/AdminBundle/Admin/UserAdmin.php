@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -9,7 +10,10 @@ use Sonata\UserBundle\Admin\Model\UserAdmin as BaseAdmin;
 
 class UserAdmin extends BaseAdmin
 {
-    protected $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'updatedAt'];
+    protected $datagridValues = [
+        '_sort_order' => 'DESC',
+        '_sort_by' => 'updatedAt',
+    ];
 
     public function getTemplate($name)
     {
@@ -29,9 +33,7 @@ class UserAdmin extends BaseAdmin
     {
         $media = $object->getMedia();
         if ($media) {
-            $provider = $this->getConfigurationPool()
-                ->getContainer()
-                ->get($media->getProviderName());
+            $provider = $this->getConfigurationPool()->getContainer()->get($media->getProviderName());
             $format = $provider->getFormatName($media, 'form');
             $url = $provider->generatePublicUrl($media, $format);
 
@@ -54,13 +56,52 @@ class UserAdmin extends BaseAdmin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->addIdentifier('username', null, ['label' => 'registration.username'])
+            ->addIdentifier(
+                'username',
+                null,
+                [
+                    'label' => 'registration.username',
+                ]
+            )
             ->add('email')
-            ->add('enabled', null, ['editable' => true])
-            ->add('locked', null, ['editable' => true])
-            ->add('updatedAt', null, ['label' => 'admin.fields.group.created_at'])
-            ->add('deletedAccountAt', null, ['label' => 'admin.fields.proposal.deleted_at'])
-            ->add('_action', 'actions', ['actions' => ['show' => [], 'delete' => []]]);
+            ->add(
+                'enabled',
+                null,
+                [
+                    'editable' => true,
+                ]
+            )
+            ->add(
+                'locked',
+                null,
+                [
+                    'editable' => true,
+                ]
+            )
+            ->add(
+                'updatedAt',
+                null,
+                [
+                    'label' => 'admin.fields.group.created_at',
+                ]
+            )
+            ->add(
+                'deletedAccountAt',
+                null,
+                [
+                    'label' => 'admin.fields.proposal.deleted_at',
+                ]
+            )
+            ->add(
+                '_action',
+                'actions',
+                [
+                    'actions' => [
+                        'show' => [],
+                        'delete' => [],
+                    ],
+                ]
+            );
     }
 
     /**
@@ -74,7 +115,13 @@ class UserAdmin extends BaseAdmin
             ->add('email')
             ->add('enabled')
             ->add('locked')
-            ->add('phone', null, ['translation_domain' => 'CapcoAppBundle']);
+            ->add(
+                'phone',
+                null,
+                [
+                    'translation_domain' => 'CapcoAppBundle',
+                ]
+            );
     }
 
     /**
@@ -82,6 +129,6 @@ class UserAdmin extends BaseAdmin
      */
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(['list', 'edit', 'show', 'delete', 'export']);
+        $collection->clearExcept(['list', 'edit', 'show', 'delete']);
     }
 }
