@@ -42,7 +42,7 @@ export default createFragmentContainer(ProposalPreviewHeader, {
       author {
         id
         displayName
-        url
+        show_url
         media {
           url
         }

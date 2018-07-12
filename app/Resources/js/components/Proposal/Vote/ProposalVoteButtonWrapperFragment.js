@@ -26,7 +26,7 @@ export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
 
   userHasEnoughCredits = () => {
     const { viewer, proposal } = this.props;
-    if (!viewer || !viewer.proposalVotes) {
+    if (!viewer) {
       return true;
     }
     const creditsLeft = viewer.proposalVotes.creditsLeft;
@@ -52,7 +52,6 @@ export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
         </LoginOverlay>
       );
     }
-    const viewerVotesCount = viewer.proposalVotes ? viewer.proposalVotes.totalCount : 0;
     const popoverId = `vote-tooltip-proposal-${proposal.id}`;
     if (step.voteType === 'SIMPLE') {
       return (
@@ -62,7 +61,9 @@ export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
           step={step}
           userHasVote={proposal.viewerHasVote || false}
           hasReachedLimit={
-            !proposal.viewerHasVote && step.votesLimit && step.votesLimit - viewerVotesCount <= 0
+            !proposal.viewerHasVote &&
+            step.votesLimit &&
+            step.votesLimit - viewer.proposalVotes.totalCount <= 0
           }>
           <ProposalVoteButton
             userHasVote={proposal.viewerHasVote}
@@ -82,7 +83,7 @@ export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
         popoverId={popoverId}
         step={step}
         userHasVote={proposal.viewerHasVote}
-        hasReachedLimit={step.votesLimit && step.votesLimit - viewerVotesCount <= 0}
+        hasReachedLimit={step.votesLimit && step.votesLimit - viewer.proposalVotes.totalCount <= 0}
         hasUserEnoughCredits={this.userHasEnoughCredits()}>
         <ProposalVoteButton
           id={id}
@@ -112,12 +113,9 @@ export default createFragmentContainer(ProposalVoteButtonWrapperFragment, {
   `,
   viewer: graphql`
     fragment ProposalVoteButtonWrapperFragment_viewer on User
-      @argumentDefinitions(
-        isAuthenticated: { type: "Boolean", defaultValue: true }
-        stepId: { type: "ID!", nonNull: true }
-      ) {
+      @argumentDefinitions(stepId: { type: "ID!", nonNull: true }) {
       id
-      proposalVotes(stepId: $stepId) @include(if: $isAuthenticated) {
+      proposalVotes(stepId: $stepId) {
         totalCount
         creditsLeft
       }

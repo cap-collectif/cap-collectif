@@ -27,7 +27,8 @@ Query:
                 access: "@=hasRole('ROLE_ADMIN')"
                 resolve: "@=resolver('groups')"
             proposalForms:
-                type: "[ProposalForm]!"
+                type: "[ProposalForm!]!"
+                access: "@=hasRole('ROLE_USER')"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryProposalFormResolver")'
             availableDistrictsForLocalisation:
                 type: "[District!]!"
