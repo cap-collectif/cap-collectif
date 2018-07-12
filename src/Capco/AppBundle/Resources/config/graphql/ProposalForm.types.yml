@@ -1,6 +1,8 @@
 ProposalForm:
     type: object
-    inherits: [Node]
+    inherits:
+      - Node
+      - WithProposals
     config:
         description: "A budget form"
         interfaces: [Node]
@@ -17,47 +19,7 @@ ProposalForm:
             title:
                 type: "String!"
             proposals:
-                type: "ProposalConnection!"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormProposalsResolver", [value, args, getUser(), serv("request_stack")])'
-                args:
-                  district:
-                    type: "ID"
-                    description: "If non-null, filters proposals with the given district."
-                  userType:
-                    type: "ID"
-                    description: "If non-null, filters proposals with the given type of author."
-                  category:
-                    type: "ID"
-                    description: "If non-null, filters proposals with the given category."
-                  status:
-                    type: "ID"
-                    description: "If non-null, filters proposals with the given status."
-                  theme:
-                    type: "ID"
-                    description: "If non-null, filters proposals with the given theme."
-                  term:
-                    type: "String"
-                    description: "If non-null, filters proposals with the given string to look for."
-                  orderBy:
-                    type: "ProposalOrder"
-                    description: "Ordering options for proposals returned from the connection."
-                    defaultValue: { field: "CREATED_AT", direction: "ASC" }
-                  affiliations:
-                    type: "[ProposalAffiliation]"
-                    description: "Affiliation options for proposals returned from the connection."
-                  after:
-                    type: "String"
-                    description: "Returns the elements in the list that come after the specified global ID."
-                  first:
-                    type: "Int"
-                    defaultValue: 20
-                    description: "Returns the first n elements from the list."
-                  before:
-                    type: "String"
-                    description: "Returns the elements in the list that come before the specified global ID."
-                  last:
-                    type: "Int"
-                    description: "Returns the last n elements from the list."
             categories:
                 type: "[ProposalCategory!]!"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormCategoriesResolver", [value])'

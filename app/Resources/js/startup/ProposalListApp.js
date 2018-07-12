@@ -8,15 +8,16 @@ import environment, { graphqlError } from '../createRelayEnvironment';
 import ProposalList from '../components/Proposal/List/ProposalList';
 import type { ProposalListAppQueryResponse } from './__generated__/ProposalListAppQuery.graphql';
 
-export default () => (
+export default ({ authorId, isAuthenticated }: { authorId: string, isAuthenticated: boolean }) => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
       <QueryRenderer
-        variables={{ isProfileView: true, isAuthenticated: false, stepId: '' }}
+        variables={{ authorId, isProfileView: true, isAuthenticated, stepId: '' }}
         environment={environment}
         query={graphql`
           query ProposalListAppQuery(
             $stepId: ID!
+            $authorId: ID!
             $isProfileView: Boolean!
             $isAuthenticated: Boolean!
           ) {
@@ -24,12 +25,12 @@ export default () => (
               step {
                 title
               }
-              proposals(first: 50, affiliations: [OWNER]) {
+              proposals(first: 50, author: $authorId) {
                 ...ProposalList_proposals
                 totalCount
               }
             }
-            viewer {
+            viewer @include(if: $isAuthenticated) {
               ...ProposalList_viewer
             }
           }
@@ -48,7 +49,7 @@ export default () => (
                       <ProposalList
                         step={null}
                         proposals={proposalForm.proposals}
-                        viewer={props.viewer}
+                        viewer={props.viewer || null}
                       />
                     </div>
                   ))}
