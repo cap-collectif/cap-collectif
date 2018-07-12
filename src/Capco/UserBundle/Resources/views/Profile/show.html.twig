@@ -64,7 +64,7 @@
     {% if proposalsCount > 0 %}
         <div class="container container--custom">
             <h2>{{ 'user.profile.show.proposals' | trans({}, 'CapcoAppBundle') }}</h2>
-            {{ react_render_component('ProposalListApp', { 'props': { 'authorId': user.id, 'isAuthenticated': is_granted('ROLE_USER') } }) }}
+            {{ react_render_component('ProposalListApp') }}
         </div>
     {% endif %}
 

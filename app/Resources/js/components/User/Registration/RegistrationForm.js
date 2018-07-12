@@ -4,8 +4,8 @@ import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { isEmail } from '../../../services/Validator';
-import type { State } from '../../../types';
-import { register as onSubmit } from '../../../redux/modules/user';
+import type { Dispatch, State } from '../../../types';
+import { register as onSubmit, displayChartModal } from '../../../redux/modules/user';
 import renderComponent from '../../Form/Field';
 
 type Props = {
@@ -19,6 +19,8 @@ type Props = {
   handleSubmit: Function,
   dynamicFields: Array<Object>,
   organizationName: string,
+  shieldEnabled: boolean,
+  dispatch: Dispatch,
 };
 
 export const validate = (values: Object, props: Object) => {
@@ -67,7 +69,37 @@ export class RegistrationForm extends React.Component<Props> {
       handleSubmit,
       addCaptchaField,
       organizationName,
+      shieldEnabled,
+      dispatch,
     } = this.props;
+
+    const chartLinkComponent = shieldEnabled ? (
+      <FormattedMessage
+        id="registration.charte"
+        values={{
+          link: (
+            <a
+              onClick={() => {
+                dispatch(displayChartModal());
+              }}>
+              {cguName}
+            </a>
+          ),
+        }}
+      />
+    ) : (
+      <FormattedMessage
+        id="registration.charte"
+        values={{
+          link: (
+            <a className="external-link" href={cguLink}>
+              {cguName}
+            </a>
+          ),
+        }}
+      />
+    );
+
     return (
       <form onSubmit={handleSubmit} id="registration-form">
         <Field
@@ -192,18 +224,7 @@ export class RegistrationForm extends React.Component<Props> {
           component={renderComponent}
           type="checkbox"
           labelClassName="font-weight-normal"
-          children={
-            <FormattedMessage
-              id="registration.charte"
-              values={{
-                link: (
-                  <a className="external-link" href={cguLink}>
-                    {cguName}
-                  </a>
-                ),
-              }}
-            />
-          }
+          children={chartLinkComponent}
         />
         {addConsentExternalCommunicationField && (
           <Field
@@ -240,6 +261,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   cguLink: state.default.parameters['signin.cgu.link'],
   organizationName: state.default.parameters['global.site.organization_name'],
   dynamicFields: state.user.registration_form.questions,
+  shieldEnabled: state.default.features.shield_mode,
 });
 
 const connector = connect(mapStateToProps);

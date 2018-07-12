@@ -10,6 +10,10 @@ describe('<RegistrationModal />', () => {
     onClose: jest.fn(),
     onSubmit: jest.fn(),
     submitting: false,
+    dispatch: jest.fn(),
+    displayChartModal: false,
+    onCloseChart: jest.fn(),
+    chartBody: 'Super charte !!',
   };
 
   it('renders hidden modal if not shown', () => {
