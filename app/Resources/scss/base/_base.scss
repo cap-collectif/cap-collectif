@@ -231,12 +231,14 @@
 
 /* ==================== Private elements ========================*/
 .react-bootstrap-table {
+    color: $dark-text;
+
     th {
         background-color: $page-bgc;
         border-bottom-width: 1px;
 
         &:hover {
-            background-color: $background-hover;
+            background-color: $border-dropdown-color;
         }
     }
 }
