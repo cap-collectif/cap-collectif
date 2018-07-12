@@ -5,6 +5,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import classNames from 'classnames';
 import { Row } from 'react-bootstrap';
 import ProposalPreview from '../Preview/ProposalPreview';
+import ProposalListTable from './ProposalListTable';
 import VisibilityBox from '../../Utils/VisibilityBox';
 import type { ProposalList_step } from './__generated__/ProposalList_step.graphql';
 import type { ProposalList_viewer } from './__generated__/ProposalList_viewer.graphql';
@@ -24,26 +25,28 @@ const classes = classNames({
 });
 
 const renderProposals = (proposals, step, viewer) => (
-  <ul className={classes}>
-    {proposals.edges &&
-      proposals.edges
-        .filter(Boolean)
-        .map(edge => edge.node)
-        .filter(Boolean)
-        .map((node, key) => (
-          // $FlowFixMe
-          <ProposalPreview
-            key={key}
+  <Row>
+    <ul className={classes}>
+      {proposals.edges &&
+        proposals.edges
+          .filter(Boolean)
+          .map(edge => edge.node)
+          .filter(Boolean)
+          .map((node, key) => (
             // $FlowFixMe
-            proposal={node}
-            step={step}
-            viewer={viewer}
-          />
-        ))}
-  </ul>
+            <ProposalPreview
+              key={key}
+              // $FlowFixMe
+              proposal={node}
+              step={step}
+              viewer={viewer}
+            />
+          ))}
+    </ul>
+  </Row>
 );
 
-const renderProposalListTableView = () => <div>React boostrap table 2</div>;
+const renderProposalListTableView = () => <ProposalListTable />;
 
 export class ProposalList extends React.Component<Props> {
   render() {
@@ -61,7 +64,7 @@ export class ProposalList extends React.Component<Props> {
     const proposalsVisiblePublicly = proposals;
 
     return (
-      <Row>
+      <React.Fragment>
         {proposalsVisiblePublicly.edges &&
           proposalsVisiblePublicly.edges.length > 0 && (
             <React.Fragment>
@@ -78,7 +81,7 @@ export class ProposalList extends React.Component<Props> {
                 : renderProposalListTableView()}
             </VisibilityBox>
           )}
-      </Row>
+      </React.Fragment>
     );
   }
 }

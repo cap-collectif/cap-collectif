@@ -17,27 +17,17 @@ exports[`<ProposalList /> should not render list if proposal is not provided 1`]
 `;
 
 exports[`<ProposalList /> should render a collectStep proposal list 1`] = `
-<Row
-  bsClass="row"
-  componentClass="div"
->
+<React.Fragment>
   <React.Fragment>
-    <div>
-      React boostrap table 2
-    </div>
+    <ProposalListTable />
   </React.Fragment>
-</Row>
+</React.Fragment>
 `;
 
 exports[`<ProposalList /> should render a selectionStep proposal list 1`] = `
-<Row
-  bsClass="row"
-  componentClass="div"
->
+<React.Fragment>
   <React.Fragment>
-    <div>
-      React boostrap table 2
-    </div>
+    <ProposalListTable />
   </React.Fragment>
-</Row>
+</React.Fragment>
 `;

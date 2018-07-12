@@ -230,6 +230,19 @@
 }
 
 /* ==================== Private elements ========================*/
+.react-bootstrap-table {
+    th {
+        background-color: $page-bgc;
+        border-bottom-width: 1px;
+
+        &:hover {
+            background-color: $background-hover;
+        }
+    }
+}
+
+
+/* ==================== Private elements ========================*/
 
 .PrivateList {
   &__box {
