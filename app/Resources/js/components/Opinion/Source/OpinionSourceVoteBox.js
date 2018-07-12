@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { connect, type MapStateToProps } from 'react-redux';
-import SourceActions from '../../../actions/SourceActions';
+// import SourceActions from '../../../actions/SourceActions';
 import OpinionSourceVoteButton from './OpinionSourceVoteButton';
 import type { GlobalState } from '../../../types';
 import type { OpinionSourceVoteBox_source } from './__generated__/OpinionSourceVoteBox_source.graphql';
@@ -13,15 +13,14 @@ type Props = {
 };
 
 class OpinionSourceVoteBox extends React.Component<Props> {
-
   vote = () => {
-    const { source } = this.props;
+    // const { source } = this.props;
     // this.setState({ hasVoted: true });
     // SourceActions.addVote(source.id);
   };
 
   deleteVote = () => {
-    const { source } = this.props;
+    // const { source } = this.props;
     // this.setState({ hasVoted: false });
     // SourceActions.deleteVote(source.id);
   };
@@ -45,9 +44,7 @@ class OpinionSourceVoteBox extends React.Component<Props> {
             onClick={source.viewerHasVote ? this.deleteVote : this.vote}
           />
         </form>{' '}
-        <span className="opinion__votes-nb">
-          {source.votesCount}
-        </span>
+        <span className="opinion__votes-nb">{source.votesCount}</span>
       </span>
     );
   }

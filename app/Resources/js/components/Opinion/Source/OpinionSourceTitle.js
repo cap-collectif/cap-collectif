@@ -11,7 +11,7 @@ type Props = {
 const OpinionSourceTitle = ({ source }: Props) => {
   return (
     <h3 className="opinion__title">
-      <Label bsStyle="primary">{source.category.title}</Label>{' '}
+      {source.category && <Label bsStyle="primary">{source.category.title}</Label>}
       <a className="external-link" href={source.url}>
         {source.title}
       </a>

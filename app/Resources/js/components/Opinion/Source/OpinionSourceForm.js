@@ -1,13 +1,15 @@
 // @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { connect, type MapStateToProps } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
-import OpinionSourceActions from '../../../actions/OpinionSourceActions';
+// import OpinionSourceActions from '../../../actions/OpinionSourceActions';
 import renderComponent from '../../Form/Field';
 import CategoriesStore from '../../../stores/CategoriesStore';
 import { isUrl } from '../../../services/Validator';
-import { hideSourceCreateModal, hideSourceEditModal } from '../../../redux/modules/opinion';
+// import { hideSourceCreateModal, hideSourceEditModal } from '../../../redux/modules/opinion';
+import type { OpinionSourceForm_source } from './__generated__/OpinionSourceForm_source.graphql';
 
 const validate = ({ title, body, category, link, check }: Object) => {
   const errors = {};
@@ -30,30 +32,33 @@ const validate = ({ title, body, category, link, check }: Object) => {
 };
 
 const onSubmit = (values, dispatch, props) => {
-  const { opinion, source } = props;
+  console.log(props);
+  // const { opinion, source } = props;
   const tmpFixData: Object = values;
   tmpFixData.Category = tmpFixData.category;
   delete tmpFixData.category;
   delete tmpFixData.check;
 
-  if (!source) {
-    return OpinionSourceActions.add(opinion, tmpFixData).then(() => {
-      dispatch(hideSourceCreateModal());
-      OpinionSourceActions.load(opinion, 'last');
-    });
-  }
+  // if (!source) {
+  //   return OpinionSourceActions.add(opinion, tmpFixData).then(() => {
+  //     dispatch(hideSourceCreateModal());
+  //     //OpinionSourceActions.load(opinion, 'last');
+  //   });
+  // }
 
-  return OpinionSourceActions.update(opinion, source.id, tmpFixData).then(() => {
-    dispatch(hideSourceEditModal());
-    OpinionSourceActions.load(opinion, 'last');
-  });
+  // return OpinionSourceActions.update(opinion, source.id, tmpFixData).then(() => {
+  //   dispatch(hideSourceEditModal());
+  //   //OpinionSourceActions.load(opinion, 'last');
+  // });
 };
 
 export const formName = 'opinion-source-form';
 
-type Props = {
+type RelayProps = {
+  source: OpinionSourceForm_source,
+};
+type Props = RelayProps & {
   opinion: Object,
-  source?: Object,
 };
 
 class OpinionSourceForm extends React.Component<Props> {
@@ -127,10 +132,25 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state, { source }) => ({
     check: !source,
   },
 });
-export default connect(mapStateToProps)(
+const container = connect(mapStateToProps)(
   reduxForm({
     validate,
     onSubmit,
     form: formName,
   })(OpinionSourceForm),
+);
+
+export default createFragmentContainer(
+  container,
+  graphql`
+    fragment OpinionSourceForm_source on Source {
+      id
+      link
+      title
+      body
+      category {
+        id
+      }
+    }
+  `,
 );

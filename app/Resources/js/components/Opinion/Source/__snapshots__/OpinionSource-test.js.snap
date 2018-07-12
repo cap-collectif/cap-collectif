@@ -1,0 +1,197 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OpinionSource /> should render a li bordered 1`] = `
+<ListGroupItem
+  bsClass="list-group-item"
+  className="opinion block--bordered bg-vip"
+  id="source-1"
+  listItem={false}
+>
+  <div
+    className="opinion__body box"
+  >
+    <Connect(UserAvatar)
+      className="pull-left"
+      user={
+        Object {
+          "displayName": "author1",
+          "id": "author1",
+          "media": null,
+          "vip": true,
+        }
+      }
+    />
+    <div
+      className="opinion__data"
+    >
+      <OpinionInfos
+        opinion={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "displayName": "author1",
+              "id": "author1",
+              "media": null,
+              "vip": true,
+            },
+            "createdAt": "",
+            "id": "1",
+            "updatedAt": null,
+          }
+        }
+        rankingThreshold={null}
+      />
+      <Relay(OpinionSourceTitle)
+        source={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "displayName": "author1",
+              "id": "author1",
+              "media": null,
+              "vip": true,
+            },
+            "createdAt": "",
+            "id": "1",
+            "updatedAt": null,
+          }
+        }
+      />
+      <Relay(OpinionSourceContent)
+        source={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "displayName": "author1",
+              "id": "author1",
+              "media": null,
+              "vip": true,
+            },
+            "createdAt": "",
+            "id": "1",
+            "updatedAt": null,
+          }
+        }
+      />
+      <Relay(OpinionSourceFooter)
+        source={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "displayName": "author1",
+              "id": "author1",
+              "media": null,
+              "vip": true,
+            },
+            "createdAt": "",
+            "id": "1",
+            "updatedAt": null,
+          }
+        }
+      />
+    </div>
+  </div>
+</ListGroupItem>
+`;
+
+exports[`<OpinionSource /> should render a white li if not vip 1`] = `
+<ListGroupItem
+  bsClass="list-group-item"
+  className="opinion block--bordered"
+  id="source-1"
+  listItem={false}
+>
+  <div
+    className="opinion__body box"
+  >
+    <Connect(UserAvatar)
+      className="pull-left"
+      user={
+        Object {
+          "displayName": "author1",
+          "id": "author1",
+          "media": null,
+          "vip": false,
+        }
+      }
+    />
+    <div
+      className="opinion__data"
+    >
+      <OpinionInfos
+        opinion={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "displayName": "author1",
+              "id": "author1",
+              "media": null,
+              "vip": false,
+            },
+            "createdAt": "",
+            "id": "1",
+            "updatedAt": null,
+          }
+        }
+        rankingThreshold={null}
+      />
+      <Relay(OpinionSourceTitle)
+        source={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "displayName": "author1",
+              "id": "author1",
+              "media": null,
+              "vip": false,
+            },
+            "createdAt": "",
+            "id": "1",
+            "updatedAt": null,
+          }
+        }
+      />
+      <Relay(OpinionSourceContent)
+        source={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "displayName": "author1",
+              "id": "author1",
+              "media": null,
+              "vip": false,
+            },
+            "createdAt": "",
+            "id": "1",
+            "updatedAt": null,
+          }
+        }
+      />
+      <Relay(OpinionSourceFooter)
+        source={
+          Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "author": Object {
+              "displayName": "author1",
+              "id": "author1",
+              "media": null,
+              "vip": false,
+            },
+            "createdAt": "",
+            "id": "1",
+            "updatedAt": null,
+          }
+        }
+      />
+    </div>
+  </div>
+</ListGroupItem>
+`;

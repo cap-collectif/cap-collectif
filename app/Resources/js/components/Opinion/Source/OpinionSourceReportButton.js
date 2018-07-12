@@ -1,20 +1,23 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
+import { graphql, createFragmentContainer } from 'react-relay';
 import ReportBox from '../../Report/ReportBox';
-import OpinionSourceStore from '../../../stores/OpinionSourceStore';
-import { submitSourceReport } from '../../../redux/modules/report';
+// import { submitSourceReport } from '../../../redux/modules/report';
 import type { Dispatch } from '../../../types';
+import type { OpinionSourceReportButton_source } from './__generated__/OpinionSourceReportButton_source.graphql';
 
 type Props = {
   dispatch: Dispatch,
-  source: Object,
+  source: OpinionSourceReportButton_source,
 };
 
 class OpinionSourceReportButton extends React.Component<Props> {
-  handleReport = data => {
-    const { source, dispatch } = this.props;
-    return submitSourceReport(OpinionSourceStore.opinion, source.id, data, dispatch);
+  handleReport = (data: Object) => {
+    console.log(data);
+    // const { source, dispatch } = this.props;
+    // const opinion = {};
+    // return submitSourceReport(opinion, source.id, data, dispatch);
   };
 
   render() {
@@ -22,9 +25,9 @@ class OpinionSourceReportButton extends React.Component<Props> {
     return (
       <ReportBox
         id={`source-${source.id}`}
-        reported={source.hasUserReported}
+        reported={source.viewerHasReport}
         onReport={this.handleReport}
-        author={source.author}
+        author={{ uniqueId: source.author.slug }}
         buttonBsSize="xs"
         buttonClassName="source__btn--report"
       />
@@ -32,4 +35,17 @@ class OpinionSourceReportButton extends React.Component<Props> {
   }
 }
 
-export default connect()(OpinionSourceReportButton);
+const container = connect()(OpinionSourceReportButton);
+export default createFragmentContainer(
+  container,
+  graphql`
+    fragment OpinionSourceReportButton_source on Source {
+      contribuable
+      id
+      author {
+        slug
+      }
+      viewerHasReport
+    }
+  `,
+);

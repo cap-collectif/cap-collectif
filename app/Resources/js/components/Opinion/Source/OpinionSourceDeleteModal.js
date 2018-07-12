@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import OpinionSourceStore from '../../../stores/OpinionSourceStore';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
-import OpinionSourceActions from '../../../actions/OpinionSourceActions';
+// import OpinionSourceActions from '../../../actions/OpinionSourceActions';
 
 type Props = {
   show: boolean,
@@ -24,8 +24,9 @@ class OpinionSourceDeleteModal extends React.Component<Props, State> {
   };
 
   handleSubmit = () => {
-    const { onClose, source } = this.props;
+    // const { onClose, source } = this.props;
     this.setState({ isSubmitting: true });
+<<<<<<< HEAD
     OpinionSourceActions.delete(OpinionSourceStore.opinion, source.id)
       .then(() => {
         onClose();
@@ -35,6 +36,18 @@ class OpinionSourceDeleteModal extends React.Component<Props, State> {
       .catch(() => {
         this.setState({ isSubmitting: false });
       });
+=======
+    // const opinion = {};
+    // OpinionSourceActions.delete(opinion, source.id)
+    //   .then(() => {
+    //     onClose();
+    //     this.setState({ isSubmitting: false });
+    //     OpinionSourceActions.load(opinion, 'last');
+    //   })
+    //   .catch(() => {
+    //     this.setState({ isSubmitting: false });
+    //   });
+>>>>>>> Some flow
   };
 
   render() {
@@ -49,11 +62,13 @@ class OpinionSourceDeleteModal extends React.Component<Props, State> {
         aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
-            {<FormattedMessage id="source.delete_modal.title" />}
+            <FormattedMessage id="source.delete_modal.title" />
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p className="h4">{<FormattedMessage id="source.delete_modal.bold" />}</p>
+          <p className="h4">
+            <FormattedMessage id="source.delete_modal.bold" />
+          </p>
           <div>{<FormattedMessage id="source.delete_modal.infos" />}</div>
         </Modal.Body>
         <Modal.Footer>

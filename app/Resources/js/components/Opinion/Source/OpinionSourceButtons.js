@@ -68,6 +68,7 @@ export default createFragmentContainer(
   container,
   graphql`
     fragment OpinionSourceButtons_source on Source {
+      id
       author {
         id
         slug
@@ -76,7 +77,7 @@ export default createFragmentContainer(
       ...OpinionSourceVoteBox_source
       ...OpinionSourceReportButton_source
       ...OpinionSourceFormModal_source
-      ...OpinionSourceDeleteModal_source
+      #...OpinionSourceDeleteModal_source
     }
   `,
 );

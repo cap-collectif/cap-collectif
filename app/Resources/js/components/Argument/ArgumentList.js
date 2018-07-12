@@ -75,6 +75,9 @@ export class ArgumentList extends React.Component<Props, State> {
             }
             if (props) {
               const argumentable = props.argumentable;
+              if (!argumentable) {
+                return graphqlError;
+              }
               const totalCount = argumentable.allArguments.totalCount;
               const htmlFor = `filter-arguments-${type}`;
               return (

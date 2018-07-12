@@ -22,6 +22,7 @@ export class Section extends React.Component<Props> {
         {section.subtitle && <span className="small excerpt">{section.subtitle}</span>}
         {(section.contributionsCount > 0 || section.contribuable) && (
           <div style={{ marginTop: 15 }}>
+            {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
             <OpinionList consultation={consultation} section={section} />
           </div>
         )}

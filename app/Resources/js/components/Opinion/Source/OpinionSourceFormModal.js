@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { Modal } from 'react-bootstrap';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { connect, type MapStateToProps } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
 import OpinionSourceStore from '../../../stores/OpinionSourceStore';
@@ -11,10 +12,11 @@ import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import { hideSourceCreateModal, hideSourceEditModal } from '../../../redux/modules/opinion';
 import type { State } from '../../../types';
+import type { OpinionSourceFormModal_source } from './__generated__/OpinionSourceFormModal_source.graphql';
 
 type Props = {
   show: boolean,
-  source?: Object,
+  source?: OpinionSourceFormModal_source,
   submitting: boolean,
   dispatch: Function,
 };
@@ -75,4 +77,12 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props) => ({
   submitting: isSubmitting(formName)(state),
 });
 
-export default connect(mapStateToProps)(OpinionSourceFormModal);
+const container = connect(mapStateToProps)(OpinionSourceFormModal);
+export default createFragmentContainer(
+  container,
+  graphql`
+    fragment OpinionSourceFormModal_source on Source {
+      id
+    }
+  `,
+);

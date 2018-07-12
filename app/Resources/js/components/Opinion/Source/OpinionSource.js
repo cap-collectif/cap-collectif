@@ -29,8 +29,11 @@ class OpinionSource extends React.Component<Props> {
           <UserAvatar user={source.author} className="pull-left" />
           <div className="opinion__data">
             <OpinionInfos rankingThreshold={null} opinion={source} />
+            {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
             <OpinionSourceTitle source={source} />
+            {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
             <OpinionSourceContent source={source} />
+            {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
             <OpinionSourceFooter source={source} />
           </div>
         </div>
