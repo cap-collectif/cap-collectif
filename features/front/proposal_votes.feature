@@ -122,12 +122,10 @@ Scenario: Logged in user that don't full fill requirements wants to vote...
   Then I didn't full fill requirements conditions
   And I cannot confirm my vote
   Then I full fill the requirements conditions
-  And I confirm my vote
-  # We delete the vote
+  And I can confirm my vote
+  Then I should see "proposal.vote.hasVoted"
   And I click on button "#proposal-vote-btn-proposal25"
-  And I wait 2 seconds
-  # We vote again
-  And I click on button "#proposal-vote-btn-proposal25"
+  Then I should see "vote-modal-title"
   And I should see "requirements filled"
   And the button "global.validate" should not be disabled
   Then I click on button "#confirm-proposal-vote"

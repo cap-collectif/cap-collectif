@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\GraphQL\Resolver\ProposalForm;
 
 use Capco\AppBundle\Entity\ProposalForm;
@@ -23,12 +24,8 @@ class ProposalFormProposalsResolver implements ResolverInterface
         $this->proposalSearch = $proposalSearch;
     }
 
-    public function __invoke(
-        ProposalForm $form,
-        Arg $args,
-        $viewer,
-        RequestStack $request
-    ): Connection {
+    public function __invoke(ProposalForm $form, Arg $args, $user, RequestStack $request): Connection
+    {
         $totalCount = 0;
         $filters = [];
         $term = null;
@@ -36,49 +33,28 @@ class ProposalFormProposalsResolver implements ResolverInterface
             $term = $args->offsetGet('term');
         }
 
-        $emptyConnection = ConnectionBuilder::connectionFromArray([], $args);
-        $emptyConnection->totalCount = 0;
-        $emptyConnection->{'fusionCount'} = 0;
-
         if (!$form->getStep()) {
-            return $emptyConnection;
+            $connection = ConnectionBuilder::connectionFromArray([], $args);
+            $connection->totalCount = 0;
+            $connection->{'fusionCount'} = 0;
+
+            return $connection;
         }
 
         if ($form->getStep()->isPrivate()) {
-            // The step is private
-            // only an author or an admin can see proposals
+            if (!$user instanceof User) {
+                $connection = ConnectionBuilder::connectionFromArray([], $args);
+                $connection->totalCount = 0;
+                $connection->{'fusionCount'} = 0;
 
-            // If viewer is not authentiated we return an empty connection
-            if (!$viewer instanceof User) {
-                return $emptyConnection;
+                return $connection;
             }
-
-            // If viewer is asking for proposals of someone else we return an empty connection
-            if ($args->offsetExists('author') && $viewer->getId() !== $args->offsetGet('author')) {
-                if (!$viewer->isAdmin()) {
-                    return $emptyConnection;
-                }
-                $filters['author'] = $args->offsetGet('author');
-            } else {
-                if (!$viewer->isAdmin()) {
-                    // When the step is private, only an author or an admin can see proposals
-                    $filters['author'] = $viewer->getId();
-                }
-            }
-        } else {
-            if ($args->offsetExists('author')) {
-                $filters['author'] = $args->offsetGet('author');
+            if (!$user->isAdmin()) {
+                // When the step is private, only an author or an admin can see proposals
+                $filters['author'] = $user->getId();
             }
         }
-        $paginator = new Paginator(function (int $offset, int $limit) use (
-            $form,
-            $args,
-            $viewer,
-            $term,
-            $request,
-            &$totalCount,
-            $filters
-        ) {
+        $paginator = new Paginator(function (int $offset, int $limit) use ($form, $args, $user, $term, $request, &$totalCount, $filters) {
             if ($args->offsetExists('district')) {
                 $filters['districts'] = $args->offsetGet('district');
             }
@@ -101,26 +77,13 @@ class ProposalFormProposalsResolver implements ResolverInterface
                     $direction = $args->offsetGet('orderBy')['direction'];
                     $field = $args->offsetGet('orderBy')['field'];
 
-                    $totalCount =
-                        $viewer instanceof User
-                            ? $this->proposalRepo->countProposalsByFormAndEvaluer($form, $viewer)
-                            : $totalCount;
+                    $totalCount = $user instanceof User ? $this->proposalRepo->countProposalsByFormAndEvaluer($form, $user) : $totalCount;
 
-                    return $this->proposalRepo
-                        ->getProposalsByFormAndEvaluer(
-                            $form,
-                            $viewer,
-                            $offset,
-                            $limit,
-                            $field,
-                            $direction
-                        )
-                        ->getIterator()
-                        ->getArrayCopy();
+                    return $this->proposalRepo->getProposalsByFormAndEvaluer($form, $user, $offset, $limit, $field, $direction)->getIterator()->getArrayCopy();
                 }
 
                 if (\in_array('OWNER', $affiliations, true)) {
-                    $filters['author'] = $viewer->getId();
+                    $filters['author'] = $user->getId();
                 }
             }
 
@@ -132,8 +95,8 @@ class ProposalFormProposalsResolver implements ResolverInterface
             $filters['proposalForm'] = $form->getId();
             $filters['collectStep'] = $form->getStep()->getId();
 
-            if ($viewer instanceof User) {
-                $seed = $viewer->getId();
+            if ($user instanceof User) {
+                $seed = $user->getId();
             } elseif ($request->getCurrentRequest()) {
                 $seed = $request->getCurrentRequest()->getClientIp();
             } else {
@@ -141,13 +104,13 @@ class ProposalFormProposalsResolver implements ResolverInterface
             }
 
             $results = $this->proposalSearch->searchProposals(
-                $offset,
-                $limit,
-                $order,
-                $term,
-                $filters,
-                $seed
-            );
+                    $offset,
+                    $limit,
+                    $order,
+                    $term,
+                    $filters,
+                    $seed
+                );
 
             $totalCount = $results['count'];
 
