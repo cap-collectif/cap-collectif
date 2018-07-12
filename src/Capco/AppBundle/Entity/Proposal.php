@@ -1,8 +1,8 @@
 <?php
-
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
+use Capco\AppBundle\Entity\Interfaces\SoftDeleteable;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Steps\CollectStep as StepsCollectStep;
 use Capco\AppBundle\Model\CommentableInterface;
@@ -44,7 +44,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @CapcoAssert\HasOnlyOneSelectionPerStep()
  * @CapcoAssert\HasAddressIfMandatory()
  */
-class Proposal implements Contribution, CommentableInterface, SelfLinkableInterface
+class Proposal implements Contribution, CommentableInterface, SelfLinkableInterface, SoftDeleteable
 {
     use UuidTrait;
     use ReferenceTrait;
@@ -483,7 +483,11 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
 
     public function isPrivate(): bool
     {
-        return $this->getProposalForm() && $this->getProposalForm()->getStep() ? $this->getProposalForm()->getStep()->isPrivate() : false;
+        return $this->getProposalForm() && $this->getProposalForm()->getStep()
+            ? $this->getProposalForm()
+                ->getStep()
+                ->isPrivate()
+            : false;
     }
 
     public function isSelected(): bool
@@ -498,12 +502,23 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
 
     public function canContribute(): bool
     {
-        return ($this->enabled || $this->isDraft()) && !$this->isTrashed && $this->getStep() && $this->getStep()->canContribute();
+        return (
+            ($this->enabled || $this->isDraft()) &&
+            !$this->isTrashed &&
+            $this->getStep() &&
+            $this->getStep()->canContribute()
+        );
     }
 
     public function canComment(): bool
     {
-        return $this->enabled && !$this->isTrashed && $this->proposalForm && $this->proposalForm->isCommentable() && $this->getIsCommentable();
+        return (
+            $this->enabled &&
+            !$this->isTrashed &&
+            $this->proposalForm &&
+            $this->proposalForm->isCommentable() &&
+            $this->getIsCommentable()
+        );
     }
 
     public function userHasReport(User $user): bool
@@ -567,26 +582,44 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
 
     public function getProject()
     {
-        if ($this->getProposalForm() && $this->getProposalForm()->getStep() && $this->getProposalForm()->getStep()->getProject()) {
-            return $this->getProposalForm()->getStep()->getProject();
+        if (
+            $this->getProposalForm() &&
+            $this->getProposalForm()->getStep() &&
+            $this->getProposalForm()
+                ->getStep()
+                ->getProject()
+        ) {
+            return $this->getProposalForm()
+                ->getStep()
+                ->getProject();
         }
     }
 
     public function getProjectId()
     {
-        if ($this->getProposalForm() && $this->getProposalForm()->getStep() && $this->getProposalForm()->getStep()->getProject()) {
-            return $this->getProposalForm()->getStep()->getProjectId();
+        if (
+            $this->getProposalForm() &&
+            $this->getProposalForm()->getStep() &&
+            $this->getProposalForm()
+                ->getStep()
+                ->getProject()
+        ) {
+            return $this->getProposalForm()
+                ->getStep()
+                ->getProjectId();
         }
     }
 
     public function getSelectionStepsIds(): array
     {
-        $ids = array_filter(array_map(function ($value) {
-            return $value->getSelectionStep() ? $value->getSelectionStep()->getId() : null;
-        }, $this->getSelections()->getValues()),
+        $ids = array_filter(
+            array_map(function ($value) {
+                return $value->getSelectionStep() ? $value->getSelectionStep()->getId() : null;
+            }, $this->getSelections()->getValues()),
             function ($value) {
                 return null !== $value;
-            });
+            }
+        );
 
         return $ids;
     }
@@ -684,13 +717,21 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
 
     public function canHaveProgessSteps(): bool
     {
-        if (!$this->getProposalForm()) { // for sonata
+        if (!$this->getProposalForm()) {
+            // for sonata
             return false;
         }
 
-        return $this->getProposalForm()->getStep()->getProject()->getSteps()->exists(function ($key, $step) {
-            return $step->getStep()->isSelectionStep() && $step->getStep()->isAllowingProgressSteps();
-        });
+        return $this->getProposalForm()
+            ->getStep()
+            ->getProject()
+            ->getSteps()
+            ->exists(function ($key, $step) {
+                return (
+                    $step->getStep()->isSelectionStep() &&
+                    $step->getStep()->isAllowingProgressSteps()
+                );
+            });
     }
 
     /**
@@ -875,10 +916,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
      */
     public function updatedInfo(): array
     {
-        return [
-            'date' => $this->getUpdatedAt(),
-            'user' => $this->getUpdateAuthor(),
-        ];
+        return ['date' => $this->getUpdatedAt(), 'user' => $this->getUpdateAuthor()];
     }
 
     /**
@@ -955,7 +993,9 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
             return self::STATE_ENABLED;
         }
 
-        throw new \Exception(sprintf('no current state was found for this proposition %s', $this->getId()));
+        throw new \Exception(
+            sprintf('no current state was found for this proposition %s', $this->getId())
+        );
     }
 
     public function getProposalEvaluation()

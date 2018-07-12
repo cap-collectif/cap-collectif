@@ -65,7 +65,6 @@ exports[`<ShieldPage /> renders with registration enabled 1`] = `
       }
     />
     <Connect(RegistrationButton)
-      chartBody="Super charte !!"
       className="btn-block"
     />
   </div>

@@ -3,8 +3,36 @@
 exports[`<Section /> renders correcty 1`] = `
 <div
   className="anchor-offset text-center opinion-type__title level--0"
-  id="opinion-type--undefined"
+  id="opinion-type--slug"
 >
+  title
   <br />
+  <span
+    className="small excerpt"
+  >
+    subtitle
+  </span>
+  <div
+    style={
+      Object {
+        "marginTop": 15,
+      }
+    }
+  >
+    <Relay(InjectIntl(OpinionList))
+      consultation={Object {}}
+      section={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "contribuable": true,
+          "contributionsCount": 0,
+          "slug": "slug",
+          "subtitle": "subtitle",
+          "title": "title",
+        }
+      }
+    />
+  </div>
 </div>
 `;

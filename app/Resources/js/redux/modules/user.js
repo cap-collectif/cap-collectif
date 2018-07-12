@@ -24,7 +24,6 @@ export type User = {
 
 export type State = {
   +showLoginModal: boolean,
-  +displayChartModal: boolean,
   +showRegistrationModal: boolean,
   +isSubmittingAccountForm: boolean,
   +showConfirmPasswordModal: boolean,
@@ -67,8 +66,6 @@ type CloseRegistrationModalAction = { type: 'CLOSE_REGISTRATION_MODAL' };
 type ShowRegistrationModalAction = { type: 'SHOW_REGISTRATION_MODAL' };
 type CloseLoginModalAction = { type: 'CLOSE_LOGIN_MODAL' };
 type ShowLoginModalAction = { type: 'SHOW_LOGIN_MODAL' };
-type DisplayChartModalAction = { type: 'DISPLAY_CHART_MODAL' };
-type HideChartModalAction = { type: 'HIDE_CHART_MODAL' };
 type UserRequestEmailChangeAction = { type: 'USER_REQUEST_EMAIL_CHANGE', email: string };
 type StartSubmittingAccountFormAction = { type: 'SUBMIT_ACCOUNT_FORM' };
 type StopSubmittingAccountFormAction = { type: 'STOP_SUBMIT_ACCOUNT_FORM' };
@@ -99,8 +96,6 @@ export type UserAction =
   | ShowRegistrationModalAction
   | CloseRegistrationModalAction
   | ShowLoginModalAction
-  | DisplayChartModalAction
-  | HideChartModalAction
   | CloseLoginModalAction
   | StartSubmittingAccountFormAction
   | ConfirmPasswordAction
@@ -118,7 +113,6 @@ export type UserAction =
 
 const initialState: State = {
   showLoginModal: false,
-  displayChartModal: false,
   showRegistrationModal: false,
   isSubmittingAccountForm: false,
   confirmationEmailResent: false,
@@ -155,8 +149,6 @@ export const closeRegistrationModal = (): CloseRegistrationModalAction => ({
 });
 export const closeLoginModal = (): CloseLoginModalAction => ({ type: 'CLOSE_LOGIN_MODAL' });
 export const showLoginModal = (): ShowLoginModalAction => ({ type: 'SHOW_LOGIN_MODAL' });
-export const displayChartModal = (): DisplayChartModalAction => ({ type: 'DISPLAY_CHART_MODAL' });
-export const hideChartModal = (): HideChartModalAction => ({ type: 'HIDE_CHART_MODAL' });
 export const confirmPassword = (): ConfirmPasswordAction => ({
   type: 'SHOW_CONFIRM_PASSWORD_MODAL',
 });
@@ -418,10 +410,6 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
       return { ...state, showRegistrationModal: true };
     case 'CLOSE_REGISTRATION_MODAL':
       return { ...state, showRegistrationModal: false };
-    case 'DISPLAY_CHART_MODAL':
-      return { ...state, displayChartModal: true };
-    case 'HIDE_CHART_MODAL':
-      return { ...state, displayChartModal: false };
     case 'SHOW_LOGIN_MODAL':
       return { ...state, showLoginModal: true };
     case 'CLOSE_LOGIN_MODAL':
