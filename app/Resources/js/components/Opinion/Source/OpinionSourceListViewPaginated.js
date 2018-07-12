@@ -93,8 +93,8 @@ export default createPaginationContainer(
         $sourceableId: ID!
         $isAuthenticated: Boolean!
         $cursor: String
-        $orderBy: SourceOrder
-        $count: Int
+        $orderBy: SourceOrder!
+        $count: Int!
       ) {
         sourceable: node(id: $sourceableId) {
           id

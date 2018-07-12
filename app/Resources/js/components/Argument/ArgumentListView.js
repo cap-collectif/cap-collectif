@@ -86,7 +86,6 @@ export default createRefetchContainer(
             isAuthenticated: $isAuthenticated
             cursor: $cursor
             count: $count
-            type: $type
             orderBy: $orderBy
           )
       }

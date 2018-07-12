@@ -1,105 +1,83 @@
 Opinion:
-  type: object
-  inherits:
-    [Node, Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
-  config:
-    description: 'A contribution'
-    interfaces:
-      [
-        Node,
-        Argumentable,
-        Contribution,
-        TrashableContribution,
-        ContributionWithAuthor,
-        EditableContribution,
-      ]
-    fields:
-      createdAt:
-        type: 'DateTime!'
-        description: 'Identifies the date and time when the object was created.'
-      show_url:
-        resolve: "@=resolver('proposition_url', [value])"
-      url:
-        resolve: "@=resolver('proposition_url', [value])"
-      type:
-        type: 'OpinionType!'
-      pinned:
-        type: 'Boolean!'
-        description: 'true if the contribution is pinned.'
-      expired:
-        type: 'Boolean!'
-        description: 'true if the contribution is expired.'
-      published:
-        type: 'Boolean!'
-      votesCount:
-        type: 'Int!'
-        description: 'Number of votes.'
-        resolve: "@=resolver('proposition_votesCount', [value])"
-      votesCountOk:
-        type: 'Int!'
-        description: 'Number of ok votes.'
-      votesCountMitige:
-        type: 'Int!'
-        description: 'Number of mitige votes.'
-      votesCountNok:
-        type: 'Int!'
-        description: 'Number of negative votes.'
-      argumentsCount:
-        type: 'Int!'
-        description: 'Number of arguments.'
-      argumentsCountFor:
-        type: 'Int!'
-        description: 'Number of for arguments.'
-        resolve: "@=resolver('proposition_argumentsCountFor', [value])"
-      argumentsCountAgainst:
-        type: 'Int!'
-        description: 'Number of against arguments.'
-        resolve: "@=resolver('proposition_argumentsCountAgainst', [value])"
-      versionsCount:
-        type: 'Int!'
-        description: 'Number of versions.'
-      sourcesCount:
-        type: 'Int!'
-        description: 'Number of sources.'
-      votes:
-        type: '[OpinionVote]'
-        args:
-          first:
-            type: 'Int'
-        resolve: "@=resolver('proposition_votes', [value, args])"
-      title:
-        type: 'String!'
-        description: 'Identifies the contribution title.'
-      body:
-        type: 'HTML!'
-        description: 'Identifies the body of the contribution.'
-      bodyText:
-        type: 'String!'
-        description: 'Identifies the body of the contribution rendered to text.'
-      arguments:
-        type: 'ArgumentConnection!'
-        argsBuilder: 'Relay::Connection'
-        args:
-          orderBy:
-            type: 'ArgumentOrder'
-            defaultValue: { field: CREATED_AT, direction: DESC }
-          type:
-            description:
-              'If omitted, returns all arguments. If provided, returns the arguments of this particular type.'
-            type: 'ArgumentValue'
-        description: 'The arguments related to the contribution.'
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionArgumentsResolver", [value, args])'
-      versions:
-        type: '[Version]'
-        description: 'The versions related to the contribution.'
-      sources:
-        type: '[Source]'
-        description: 'The sources related to the contribution.'
-      section:
-        type: 'Section!'
-        description: 'Where the proposition has been placed.'
-        resolve: "@=resolver('proposition_section', [value])"
-      reportings:
-        type: '[Reporting]'
-        resolve: "@=resolver('proposition_reportings', [value])"
+    type: object
+    inherits: [Node, Argumentable, Sourceable, Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
+    config:
+        description: "A contribution"
+        interfaces: [Node, Argumentable, Sourceable, Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
+        fields:
+            createdAt:
+                type: "DateTime!"
+                description: "Identifies the date and time when the object was created."
+            show_url:
+                resolve: "@=resolver('proposition_url', [value])"
+            url:
+                resolve: "@=resolver('proposition_url', [value])"
+            type:
+                type: "OpinionType!"
+            pinned:
+                type: "Boolean!"
+                description: "true if the contribution is pinned."
+            expired:
+                type: "Boolean!"
+                description: "true if the contribution is expired."
+            published:
+                type: "Boolean!"
+            votesCount:
+                type: "Int!"
+                description: "Number of votes."
+                resolve: "@=resolver('proposition_votesCount', [value])"
+            votesCountOk:
+                type: "Int!"
+                description: "Number of ok votes."
+            votesCountMitige:
+                type: "Int!"
+                description: "Number of mitige votes."
+            votesCountNok:
+                type: "Int!"
+                description: "Number of negative votes."
+            argumentsCount:
+                type: "Int!"
+                description: "Number of arguments."
+            argumentsCountFor:
+                type: "Int!"
+                description: "Number of for arguments."
+                resolve: "@=resolver('proposition_argumentsCountFor', [value])"
+            argumentsCountAgainst:
+                type: "Int!"
+                description: "Number of against arguments."
+                resolve: "@=resolver('proposition_argumentsCountAgainst', [value])"
+            versionsCount:
+                type: "Int!"
+                description: "Number of versions."
+            sourcesCount:
+                type: "Int!"
+                description: "Number of sources."
+            votes:
+                type: "[OpinionVote]"
+                args:
+                    first:
+                        type: "Int"
+                resolve: "@=resolver('proposition_votes', [value, args])"
+            title:
+                type: "String!"
+                description: "Identifies the contribution title."
+            body:
+                type: "HTML!"
+                description: "Identifies the body of the contribution."
+            bodyText:
+                type: "String!"
+                description: "Identifies the body of the contribution rendered to text."
+            arguments:
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionArgumentsResolver", [value, args])'
+            versions:
+                type: "[Version]"
+                description: "The versions related to the contribution."
+            section:
+                type: "Section!"
+                description: "Where the proposition has been placed."
+                resolve: "@=resolver('proposition_section', [value])"
+            reportings:
+                type: "[Reporting]"
+                resolve: "@=resolver('proposition_reportings', [value])"
+            contribuable:
+                resolve: "@=value.canContribute()"

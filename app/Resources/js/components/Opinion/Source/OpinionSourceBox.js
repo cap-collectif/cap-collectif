@@ -87,9 +87,9 @@ class OpinionSourceBox extends React.Component<Props, State> {
             query OpinionSourceBoxQuery(
               $sourceableId: ID!
               $isAuthenticated: Boolean!
-              $count: Int
+              $count: Int!
               $cursor: String
-              $orderBy: SourceOrder
+              $orderBy: SourceOrder!
             ) {
               sourceable: node(id: $sourceableId) {
                 ... on Sourceable {
@@ -104,14 +104,18 @@ class OpinionSourceBox extends React.Component<Props, State> {
                     }
                   }
                 }
-                ...OpinionSourceListView_sourceable @arguments(isAuthenticated: $isAuthenticated)
+                ...OpinionSourceListView_sourceable
+                  @arguments(orderBy: $orderBy, count: $count, isAuthenticated: $isAuthenticated)
               }
             }
           `}
           variables={
             ({
               isAuthenticated,
+              cursor: null,
+              count: 25,
               sourceableId: opinion.id,
+              orderBy: { field: 'CREATED_AT', direction: 'DESC' },
             }: OpinionSourceBoxQueryVariables)
           }
           render={({ error, props }: ReadyState & { props?: OpinionSourceBoxQueryResponse }) => {
@@ -120,11 +124,10 @@ class OpinionSourceBox extends React.Component<Props, State> {
             }
             if (props) {
               const sourceable = props.sourceable;
-              if (!sourceable) {
+              if (!sourceable || !sourceable.allSources) {
                 return graphqlError;
               }
               const totalCount = sourceable.allSources.totalCount;
-              // const htmlFor = `orderBy-sources`;
               return (
                 <Panel>
                   <Panel.Heading>
