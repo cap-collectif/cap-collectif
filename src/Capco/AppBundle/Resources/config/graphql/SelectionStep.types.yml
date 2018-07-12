@@ -15,7 +15,6 @@ SelectionStep:
                 type: "Boolean!"
                 description: "Only one selection step inside a project can have realisation steps, true if this one"
             proposals:
-                type: "ProposalConnection!"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\SelectionStepProposalResolver", [value, args, getUser(), serv("request_stack")])'
             contributors:
                 type: "UserConnection!"

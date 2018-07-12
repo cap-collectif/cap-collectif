@@ -207,4 +207,3 @@ services:
 
   capco.canonicalizer:
     class: Capco\AppBundle\Utils\Canonicalizer
-

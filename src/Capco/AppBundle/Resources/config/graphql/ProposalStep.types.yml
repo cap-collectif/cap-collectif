@@ -1,6 +1,8 @@
 ProposalStep:
     type: interface
-    inherits: [Step]
+    inherits:
+      - Step
+      - WithProposals
     config:
         description: "A proposal step"
         resolveType: "@=resolver('step_type', [value])"
@@ -39,38 +41,3 @@ ProposalStep:
                   orderBy:
                       type: "ProposalVotesOrder"
                       defaultValue: { field: CREATED_AT, direction: DESC }
-            proposals:
-                type: "ProposalConnection!"
-                resolve: '@=resolver("proposal_form_proposals", [value, args, getUser(), serv("request_stack")])'
-                args:
-                  district:
-                    type: "ID"
-                  userType:
-                    type: "ID"
-                  category:
-                    type: "ID"
-                  status:
-                    type: "ID"
-                  theme:
-                    type: "ID"
-                  term:
-                    type: "String"
-                  orderBy:
-                    type: "ProposalOrder"
-                    description: "Order for connection."
-                    defaultValue: { field: "CREATED_AT", direction: "ASC" }
-                  affiliations:
-                    type: "[ProposalAffiliation]"
-                  after:
-                    type: "String"
-                    description: "Returns the elements in the list that come after the specified global ID."
-                  first:
-                    type: "Int"
-                    defaultValue: 10
-                    description: "Returns the first n elements from the list."
-                  before:
-                    type: "String"
-                    description: "Returns the elements in the list that come before the specified global ID."
-                  last:
-                    type: "Int"
-                    description: "Returns the last n elements from the list."
