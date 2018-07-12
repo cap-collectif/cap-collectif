@@ -8,7 +8,7 @@ import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import RegistrationForm, { form } from './RegistrationForm';
 import LoginSocialButtons from '../Login/LoginSocialButtons';
-import { closeRegistrationModal } from '../../../redux/modules/user';
+import { closeRegistrationModal, hideChartModal } from '../../../redux/modules/user';
 import type { State, Dispatch } from '../../../types';
 
 type Props = {
@@ -18,11 +18,49 @@ type Props = {
   textBottom?: string,
   submitting: boolean,
   onSubmit: Function,
+  shieldEnabled: boolean,
+  displayChartModal: boolean,
+  onCloseChart: Function,
+  chartBody: string,
 };
 
 export class RegistrationModal extends React.Component<Props> {
   render() {
-    const { submitting, onSubmit, onClose, show, textTop, textBottom } = this.props;
+    const {
+      submitting,
+      onSubmit,
+      onClose,
+      show,
+      textTop,
+      textBottom,
+      shieldEnabled,
+      displayChartModal,
+      onCloseChart,
+      chartBody,
+    } = this.props;
+
+    if (displayChartModal) {
+      return (
+        <Modal
+          animation={false}
+          show={displayChartModal}
+          autoFocus
+          onHide={onCloseChart}
+          bsSize="medium"
+          aria-labelledby="contained-modal-title-lg"
+          enforceFocus={false}>
+          <Modal.Header closeButton>
+            <Modal.Title id="contained-modal-title-lg">
+              {<FormattedMessage id="charter" />}
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body dangerouslySetInnerHTML={{ __html: chartBody }} />
+          <Modal.Footer>
+            <CloseButton label={'global.close'} onClose={onCloseChart} />
+          </Modal.Footer>
+        </Modal>
+      );
+    }
     return (
       <Modal
         animation={false}
@@ -51,6 +89,7 @@ export class RegistrationModal extends React.Component<Props> {
             onSubmitFail={this.stopSubmit}
             // $FlowFixMe
             onSubmitSuccess={this.handleSubmitSuccess}
+            shieldEnabled={shieldEnabled}
           />
           {textBottom && (
             <div
@@ -82,6 +121,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
     ? state.user.registration_form.bottomText
     : null,
   show: state.user.showRegistrationModal,
+  displayChartModal: state.user.displayChartModal,
   submitting: isSubmitting(form)(state),
 });
 
@@ -91,6 +131,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
   onSubmit: () => {
     dispatch(submit(form));
+  },
+  onCloseChart: () => {
+    dispatch(hideChartModal());
   },
 });
 

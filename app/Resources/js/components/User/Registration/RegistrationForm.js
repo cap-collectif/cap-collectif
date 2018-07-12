@@ -4,8 +4,8 @@ import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { isEmail } from '../../../services/Validator';
-import type { State } from '../../../types';
-import { register as onSubmit } from '../../../redux/modules/user';
+import type { Dispatch, State } from '../../../types';
+import { register as onSubmit, displayChartModal } from '../../../redux/modules/user';
 import renderComponent from '../../Form/Field';
 
 type Props = {
@@ -19,6 +19,8 @@ type Props = {
   handleSubmit: Function,
   dynamicFields: Array<Object>,
   organizationName: string,
+  shieldEnabled: boolean,
+  dispatch: Dispatch,
 };
 
 export const validate = (values: Object, props: Object) => {
@@ -67,7 +69,10 @@ export class RegistrationForm extends React.Component<Props> {
       handleSubmit,
       addCaptchaField,
       organizationName,
+      shieldEnabled,
+      dispatch,
     } = this.props;
+
     return (
       <form onSubmit={handleSubmit} id="registration-form">
         <Field
@@ -186,25 +191,50 @@ export class RegistrationForm extends React.Component<Props> {
             />
           );
         })}
-        <Field
-          id="charte"
-          name="charte"
-          component={renderComponent}
-          type="checkbox"
-          labelClassName="font-weight-normal"
-          children={
-            <FormattedMessage
-              id="registration.charte"
-              values={{
-                link: (
-                  <a className="external-link" href={cguLink}>
-                    {cguName}
-                  </a>
-                ),
-              }}
-            />
-          }
-        />
+        {shieldEnabled ? (
+          <Field
+            id="charte"
+            name="charte"
+            component={renderComponent}
+            type="checkbox"
+            labelClassName="font-weight-normal"
+            children={
+              <FormattedMessage
+                id="registration.charte"
+                values={{
+                  link: (
+                    <a
+                      onClick={() => {
+                        dispatch(displayChartModal());
+                      }}>
+                      {cguName}
+                    </a>
+                  ),
+                }}
+              />
+            }
+          />
+        ) : (
+          <Field
+            id="charte"
+            name="charte"
+            component={renderComponent}
+            type="checkbox"
+            labelClassName="font-weight-normal"
+            children={
+              <FormattedMessage
+                id="registration.charte"
+                values={{
+                  link: (
+                    <a className="external-link" href={cguLink}>
+                      {cguName}
+                    </a>
+                  ),
+                }}
+              />
+            }
+          />
+        )}
         {addConsentExternalCommunicationField && (
           <Field
             id="consent-external-communication"

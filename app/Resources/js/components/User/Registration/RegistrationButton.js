@@ -15,6 +15,8 @@ type Props = {
   bsStyle: ?string,
   buttonStyle: ?Object,
   openRegistrationModal: () => void,
+  shieldEnabled: boolean,
+  chartBody: ?string,
 };
 
 export class RegistrationButton extends React.Component<Props> {
@@ -24,6 +26,8 @@ export class RegistrationButton extends React.Component<Props> {
     user: null,
     className: '',
     bsStyle: 'primary',
+    shieldEnabled: false,
+    chartBody: '',
   };
 
   render() {
@@ -35,6 +39,8 @@ export class RegistrationButton extends React.Component<Props> {
       style,
       user,
       openRegistrationModal,
+      shieldEnabled,
+      chartBody,
     } = this.props;
     if (!features.registration || !!user) {
       return null;
@@ -48,7 +54,7 @@ export class RegistrationButton extends React.Component<Props> {
           className={`btn--registration ${className}`}>
           {<FormattedMessage id="global.registration" />}
         </Button>
-        <RegistrationModal />
+        <RegistrationModal shieldEnabled={shieldEnabled} chartBody={chartBody} />
       </span>
     );
   }

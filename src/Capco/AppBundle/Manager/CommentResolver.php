@@ -1,10 +1,10 @@
 <?php
+
 namespace Capco\AppBundle\Manager;
 
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventComment;
-use Capco\AppBundle\Entity\Interfaces\SoftDeleteable;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\PostComment;
 use Capco\AppBundle\Resolver\UrlResolver;
@@ -53,31 +53,21 @@ class CommentResolver
     public function getCommentsByObject($object)
     {
         if ($object instanceof Event) {
-            return $this->em
-                ->getRepository('CapcoAppBundle:EventComment')
-                ->getEnabledByEvent($object);
+            return $this->em->getRepository('CapcoAppBundle:EventComment')->getEnabledByEvent($object);
         }
 
         if ($object instanceof Post) {
-            return $this->em
-                ->getRepository('CapcoAppBundle:PostComment')
-                ->getEnabledByPost($object);
+            return $this->em->getRepository('CapcoAppBundle:PostComment')->getEnabledByPost($object);
         }
     }
 
     public function getRelatedObject(Comment $comment)
     {
         try {
-            $relatedObject = $comment->getRelatedObject();
+            return $comment->getRelatedObject();
         } catch (EntityNotFoundException $e) {
-            $relatedObject = null;
+            return null;
         }
-
-        if ($relatedObject && $relatedObject instanceof SoftDeleteable) {
-            return !$relatedObject->isDeleted() ? $relatedObject : null;
-        }
-
-        return $relatedObject;
     }
 
     public function getUrlOfObjectByTypeAndId($objectType, $objectId, $absolute = false)
@@ -103,11 +93,8 @@ class CommentResolver
 
     public function getAdminUrl(Comment $comment, $absolute = false)
     {
-        return $this->router->generate(
-            'admin_capco_app_comment_show',
-            ['id' => $comment->getId()],
-            $absolute ? UrlGeneratorInterface::ABSOLUTE_URL : UrlGeneratorInterface::RELATIVE_PATH
-        );
+        return $this->router->generate('admin_capco_app_comment_show', ['id' => $comment->getId()],
+            $absolute ? UrlGeneratorInterface::ABSOLUTE_URL : UrlGeneratorInterface::RELATIVE_PATH);
     }
 
     public function canShowCommentOn($object)
