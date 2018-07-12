@@ -11,7 +11,6 @@ describe('<RegistrationModal />', () => {
     onSubmit: jest.fn(),
     submitting: false,
     dispatch: jest.fn(),
-    shieldEnabled: false,
     displayChartModal: false,
     onCloseChart: jest.fn(),
     chartBody: 'Super charte !!',

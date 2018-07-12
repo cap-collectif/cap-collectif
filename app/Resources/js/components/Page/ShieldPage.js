@@ -14,7 +14,7 @@ type Props = {
   showRegistration: boolean,
   submitting: boolean,
   onSubmit: (e: Event) => void,
-  chartBody: string,
+  chartBody: ?string,
 };
 
 export class ShieldPage extends React.Component<Props> {
@@ -28,7 +28,7 @@ export class ShieldPage extends React.Component<Props> {
           <div className="panel-body">
             <LoginButton className="btn--connection btn-block" />
             <div style={{ marginTop: 10 }} />
-            <RegistrationButton chartBody={chartBody} shieldEnabled className="btn-block" />
+            <RegistrationButton chartBody={chartBody} className="btn-block" />
           </div>
         </div>
       );

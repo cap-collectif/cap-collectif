@@ -191,14 +191,14 @@ export class RegistrationForm extends React.Component<Props> {
             />
           );
         })}
-        {shieldEnabled ? (
-          <Field
-            id="charte"
-            name="charte"
-            component={renderComponent}
-            type="checkbox"
-            labelClassName="font-weight-normal"
-            children={
+        <Field
+          id="charte"
+          name="charte"
+          component={renderComponent}
+          type="checkbox"
+          labelClassName="font-weight-normal"
+          children={
+            shieldEnabled ? (
               <FormattedMessage
                 id="registration.charte"
                 values={{
@@ -212,16 +212,7 @@ export class RegistrationForm extends React.Component<Props> {
                   ),
                 }}
               />
-            }
-          />
-        ) : (
-          <Field
-            id="charte"
-            name="charte"
-            component={renderComponent}
-            type="checkbox"
-            labelClassName="font-weight-normal"
-            children={
+            ) : (
               <FormattedMessage
                 id="registration.charte"
                 values={{
@@ -232,9 +223,9 @@ export class RegistrationForm extends React.Component<Props> {
                   ),
                 }}
               />
-            }
-          />
-        )}
+            )
+          }
+        />
         {addConsentExternalCommunicationField && (
           <Field
             id="consent-external-communication"
@@ -270,6 +261,7 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   cguLink: state.default.parameters['signin.cgu.link'],
   organizationName: state.default.parameters['global.site.organization_name'],
   dynamicFields: state.user.registration_form.questions,
+  shieldEnabled: state.default.features.shield_mode,
 });
 
 const connector = connect(mapStateToProps);

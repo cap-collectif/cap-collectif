@@ -18,7 +18,6 @@ type Props = {
   textBottom?: string,
   submitting: boolean,
   onSubmit: Function,
-  shieldEnabled: boolean,
   displayChartModal: boolean,
   onCloseChart: Function,
   chartBody: string,
@@ -33,7 +32,6 @@ export class RegistrationModal extends React.Component<Props> {
       show,
       textTop,
       textBottom,
-      shieldEnabled,
       displayChartModal,
       onCloseChart,
       chartBody,
@@ -89,7 +87,6 @@ export class RegistrationModal extends React.Component<Props> {
             onSubmitFail={this.stopSubmit}
             // $FlowFixMe
             onSubmitSuccess={this.handleSubmitSuccess}
-            shieldEnabled={shieldEnabled}
           />
           {textBottom && (
             <div
