@@ -118,9 +118,8 @@ Scenario: Logged in user that don't full fill requirements wants to vote...
   When I go to a project with requirement condition to vote and classement
   And I vote for the first proposal
   Then I should see a proposal vote modal
-  And I should see "vote-modal-title"
-  Then I didn't full fill requirements conditions
-  And I cannot confirm my vote
+  Given I didn't full fill requirements conditions
+  Then I cannot confirm my vote
   Then I full fill the requirements conditions
   And I confirm my vote
   # We delete the vote
