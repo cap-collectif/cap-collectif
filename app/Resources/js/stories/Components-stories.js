@@ -13,7 +13,7 @@ import {
   Panel,
   FormControl,
   ListGroup,
-  ListGroupItem, Row,
+  ListGroupItem,
 } from 'react-bootstrap';
 import { AlertForm } from '../components/Alert/AlertForm';
 import Pagination from '../components/Utils/Pagination';
@@ -23,7 +23,7 @@ import TagsList from '../components/Ui/List/TagsList';
 import DarkenGradientMedia from '../components/Ui/DarkenGradientMedia';
 import SixteenNineMedia from '../components/Ui/SixteenNineMedia';
 import { Loader } from '../components/Ui/Loader';
-import {UserAvatar} from "../components/User/UserAvatar";
+import { UserAvatar } from '../components/User/UserAvatar';
 
 const openProject = {
   step: {
@@ -111,9 +111,9 @@ const alertFormProps = [
 const author = {
   username: 'Karim',
   media: {
-    url: 'https://source.unsplash.com/collection/181462'
+    url: 'https://source.unsplash.com/collection/181462',
   },
-  _links: {}
+  _links: {},
 };
 
 storiesOf('Components', module)
@@ -662,9 +662,7 @@ storiesOf('Components', module)
                 <a href="#" className="d-flex">
                   <h3>My item</h3>
                 </a>
-                <Button>
-                  My button
-                </Button>
+                <Button>My button</Button>
               </ListGroupItem>
             </ListGroup>
             <Panel.Footer>Panel footer</Panel.Footer>
@@ -767,15 +765,18 @@ storiesOf('Components', module)
               <a href="#" className="d-flex">
                 <h3>My item</h3>
               </a>
-              <Button>
-                My button
-              </Button>
+              <Button>My button</Button>
             </ListGroupItem>
             <ListGroupItem className="list-group-item__opinion">
               <div className="left-block">
                 <UserAvatar user={author} defaultAvatar={null} />
                 <div>
-                  <p><a href="#" className="author-name">Lorem ipsum</a> <span className="excerpt">3 juin 2014</span></p>
+                  <p>
+                    <a href="#" className="author-name">
+                      Lorem ipsum
+                    </a>{' '}
+                    <span className="excerpt">3 juin 2014</span>
+                  </p>
                   <h3 className="title">Yoloo</h3>
                   <InlineList>
                     <li>Item 1</li>
@@ -783,13 +784,10 @@ storiesOf('Components', module)
                   </InlineList>
                 </div>
               </div>
-              <div className="right-block">
-                Right block ...
-              </div>
+              <div className="right-block">Right block ...</div>
             </ListGroupItem>
           </ListGroup>
         </div>
       );
     }),
   );
-
