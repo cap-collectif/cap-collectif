@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AdminBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
@@ -38,7 +39,7 @@ class UserController extends Controller
      */
     public function deleteAction($id, Request $request = null)
     {
-        $id = $id ?: $request->get($this->admin->getIdParameter());
+        $id = $request->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 
         if (!$this->isGranted('ROLE_SUPER_ADMIN') && $object->hasRole('ROLE_SUPER_ADMIN')) {
@@ -80,12 +81,7 @@ class UserController extends Controller
         $filename = 'users.csv';
 
         if (!file_exists($path . $filename)) {
-            $this->get('session')
-                ->getFlashBag()
-                ->add(
-                    'danger',
-                    $trans->trans('project.download.not_yet_generated', [], 'CapcoAppBundle')
-                );
+            $this->get('session')->getFlashBag()->add('danger', $trans->trans('project.download.not_yet_generated', [], 'CapcoAppBundle'));
 
             return $this->redirect($request->headers->get('referer'));
         }
@@ -99,8 +95,7 @@ class UserController extends Controller
         $response = new BinaryFileResponse($absolutePath);
         $response->headers->set('X-Accel-Redirect', '/export/' . $filename);
         $response->setContentDisposition(
-            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            $date . '_' . $filename
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT, $date . '_' . $filename
         );
         $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
         $response->headers->set('Pragma', 'public');

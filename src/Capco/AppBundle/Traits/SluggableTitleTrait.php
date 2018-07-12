@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -24,7 +25,7 @@ trait SluggableTitleTrait
         return $this->title ?? '';
     }
 
-    public function setTitle(string $title = ''): self
+    public function setTitle(string $title): self
     {
         $this->title = $title;
 
