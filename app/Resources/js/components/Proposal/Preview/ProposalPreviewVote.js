@@ -35,7 +35,8 @@ export class ProposalPreviewVote extends React.Component<Props> {
 export default createFragmentContainer(ProposalPreviewVote, {
   viewer: graphql`
     fragment ProposalPreviewVote_viewer on User {
-      ...ProposalVoteButtonWrapperFragment_viewer @arguments(stepId: $stepId)
+      ...ProposalVoteButtonWrapperFragment_viewer
+        @arguments(isAuthenticated: $isAuthenticated, stepId: $stepId)
     }
   `,
   proposal: graphql`

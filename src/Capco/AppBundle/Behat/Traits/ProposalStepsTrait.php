@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Behat\Traits;
 
 use Behat\Gherkin\Node\TableNode;
@@ -36,9 +35,7 @@ trait ProposalStepsTrait
         'projectSlug' => 'budget-participatif-rennes',
         'stepSlug' => 'selection',
     ];
-    protected static $votesDetailsPageParams = [
-        'projectSlug' => 'budget-participatif-rennes',
-    ];
+    protected static $votesDetailsPageParams = ['projectSlug' => 'budget-participatif-rennes'];
     protected static $selectionStepWithSimpleVoteParams = [
         'projectSlug' => 'budget-participatif-rennes',
         'stepSlug' => 'selection',
@@ -286,7 +283,9 @@ trait ProposalStepsTrait
      */
     public function thereShouldBeNbProposals(int $nb)
     {
-        $this->assertPageMatchesText('/(proposal.count_with_total {"num":' . $nb . '|proposal.count {"num":' . $nb . '})/');
+        $this->assertPageMatchesText(
+            '/(proposal.count_with_total {"num":' . $nb . '|proposal.count {"num":' . $nb . '})/'
+        );
         $proposalSelector = $this->getCurrentPage()->getProposalSelector();
         $this->assertNumElements($nb, $proposalSelector);
     }
@@ -409,10 +408,7 @@ trait ProposalStepsTrait
         \PHPUnit_Framework_Assert::assertEquals('comments', $option);
         $this->assertPageContainsText('Proposition pas encore votable');
         $this->assertPageContainsText('Proposition plus votable');
-        $this->proposalBeforeProposal(
-            'Proposition pas encore votable',
-            'Proposition plus votable'
-        );
+        $this->proposalBeforeProposal('Proposition pas encore votable', 'Proposition plus votable');
     }
 
     /**
@@ -702,7 +698,10 @@ trait ProposalStepsTrait
      */
     public function iGoToASelectionStepWithBudgetVoteLimitedEnabled()
     {
-        $this->visitPageWithParams('selection page', self::$selectionStepWithBudgetVoteLimitedParams);
+        $this->visitPageWithParams(
+            'selection page',
+            self::$selectionStepWithBudgetVoteLimitedParams
+        );
     }
 
     /**
@@ -785,19 +784,23 @@ trait ProposalStepsTrait
     public function iFullFillTheRequirementsConditions()
     {
         $this->fillField('mobile-phone', '0123456789');
+        $this->iWait(1);
         $this->checkOption('requirement1');
+        $this->iWait(1);
         $this->checkOption('requirement2');
+        $this->iWait(1);
         $this->checkOption('requirement3');
+        $this->iWait(1);
     }
 
     /**
-     * @Then I can confirm my vote
+     * @Then I confirm my vote
      */
-    public function iCanConfirmMyVote()
+    public function iConfirmMyVote()
     {
         $this->buttonShouldNotBeDisabled('global.validate');
         $this->iClickOnButton('#confirm-proposal-vote');
-        $this->iWait(1);
+        $this->iWait(2);
     }
 
     /**
@@ -805,7 +808,10 @@ trait ProposalStepsTrait
      */
     public function iShouldSeeAProposalVoteModal()
     {
-        $this->getSession()->getPage()->find('css', '#confirm-proposal-vote')->click();
+        $this->getSession()
+            ->getPage()
+            ->find('css', '#confirm-proposal-vote')
+            ->click();
         $this->getSession()->wait(2000, "$('#contained-modal-title-lg').length > 0");
     }
 
@@ -902,12 +908,10 @@ trait ProposalStepsTrait
      */
     public function iFillTheProposalVoteForm()
     {
-        $tableNode = new TableNode(
-            [
-                ['proposal-vote__username', 'test'],
-                ['proposal-vote__email', 'test@coucou.fr'],
-            ]
-        );
+        $tableNode = new TableNode([
+            ['proposal-vote__username', 'test'],
+            ['proposal-vote__email', 'test@coucou.fr'],
+        ]);
         $this->fillFields($tableNode);
     }
 
@@ -916,12 +920,10 @@ trait ProposalStepsTrait
      */
     public function iFillTheProposalVoteFormWithAlreadyUsedEmail()
     {
-        $tableNode = new TableNode(
-            [
-                ['proposal-vote__username', 'test'],
-                ['proposal-vote__email', 'cheater@test.com'],
-            ]
-        );
+        $tableNode = new TableNode([
+            ['proposal-vote__username', 'test'],
+            ['proposal-vote__email', 'cheater@test.com'],
+        ]);
         $this->fillFields($tableNode);
     }
 
@@ -930,26 +932,25 @@ trait ProposalStepsTrait
      */
     public function iFillTheProposalVoteFormWithARegisteredEmail()
     {
-        $tableNode = new TableNode(
-            [
-                ['proposal-vote__username', 'test'],
-                ['proposal-vote__email', 'user@test.com'],
-            ]
-        );
+        $tableNode = new TableNode([
+            ['proposal-vote__username', 'test'],
+            ['proposal-vote__email', 'user@test.com'],
+        ]);
         $this->fillFields($tableNode);
     }
 
     /**
      * @Then selection :selectionStepId :proposalId should have status :statusId
      */
-    public function proposalSelectionShouldHaveStatus(string $selectionStepId, string $proposalId, string $statusId)
-    {
-        $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy(
-            [
-                'selectionStep' => $selectionStepId,
-                'proposal' => $proposalId,
-            ]
-        );
+    public function proposalSelectionShouldHaveStatus(
+        string $selectionStepId,
+        string $proposalId,
+        string $statusId
+    ) {
+        $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
+            'selectionStep' => $selectionStepId,
+            'proposal' => $proposalId,
+        ]);
         expect($selection->getStatus()->getId())->toBe($statusId);
         $this->getEntityManager()->clear();
     }
@@ -957,14 +958,14 @@ trait ProposalStepsTrait
     /**
      * @Then selection :selectionStepId :proposalId should have no status
      */
-    public function proposalSelectionShouldHaveNoStatus(string $selectionStepId, string $proposalId)
-    {
-        $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy(
-            [
-                'selectionStep' => $selectionStepId,
-                'proposal' => $proposalId,
-            ]
-        );
+    public function proposalSelectionShouldHaveNoStatus(
+        string $selectionStepId,
+        string $proposalId
+    ) {
+        $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
+            'selectionStep' => $selectionStepId,
+            'proposal' => $proposalId,
+        ]);
         expect($selection->getStatus())->toBe(null);
         $this->getEntityManager()->clear();
     }
@@ -995,12 +996,10 @@ trait ProposalStepsTrait
     public function proposalShouldBeSelected(string $proposalId, string $selectionStepId)
     {
         $this->getEntityManager()->clear();
-        $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy(
-            [
-                'selectionStep' => $selectionStepId,
-                'proposal' => $proposalId,
-            ]
-        );
+        $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
+            'selectionStep' => $selectionStepId,
+            'proposal' => $proposalId,
+        ]);
         expect($selection)->toNotBe(null);
     }
 
@@ -1010,12 +1009,10 @@ trait ProposalStepsTrait
     public function proposalShouldNotBeSelected(string $proposalId, string $selectionStepId)
     {
         $this->getEntityManager()->clear();
-        $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy(
-            [
-                'selectionStep' => $selectionStepId,
-                'proposal' => $proposalId,
-            ]
-        );
+        $selection = $this->getRepository('CapcoAppBundle:Selection')->findOneBy([
+            'selectionStep' => $selectionStepId,
+            'proposal' => $proposalId,
+        ]);
         expect($selection)->toBe(null);
     }
 
@@ -1032,10 +1029,10 @@ trait ProposalStepsTrait
      */
     public function iCheckTheProposalVotePrivateCheckbox()
     {
-        $this->getSession()->getPage()->find(
-            'css',
-            '#proposal2-proposal-vote__private .form-group .react-toggle'
-        )->click();
+        $this->getSession()
+            ->getPage()
+            ->find('css', '#proposal2-proposal-vote__private .form-group .react-toggle')
+            ->click();
     }
 
     /**
@@ -1050,14 +1047,22 @@ trait ProposalStepsTrait
     /**
      * @Given :userSlug has voted for proposal :proposalId in selection step :stepSlug
      */
-    public function userHasVotedForProposalForStep(string $userSlug, string $proposalId, string $stepSlug)
-    {
+    public function userHasVotedForProposalForStep(
+        string $userSlug,
+        string $proposalId,
+        string $stepSlug
+    ) {
         $user = $this->getRepository('CapcoUserBundle:User')->findOneBySlug($userSlug);
         $proposal = $this->getRepository('CapcoAppBundle:Proposal')->find($proposalId);
-        $step = $this->getRepository('CapcoAppBundle:Steps\SelectionStep')->findOneBySlug($stepSlug);
+        $step = $this->getRepository('CapcoAppBundle:Steps\SelectionStep')->findOneBySlug(
+            $stepSlug
+        );
         \PHPUnit_Framework_Assert::assertNotNull(
-            $this->getRepository('CapcoAppBundle:ProposalSelectionVote')
-                ->findOneBy(['user' => $user, 'proposal' => $proposal, 'selectionStep' => $step])
+            $this->getRepository('CapcoAppBundle:ProposalSelectionVote')->findOneBy([
+                'user' => $user,
+                'proposal' => $proposal,
+                'selectionStep' => $step,
+            ])
         );
     }
 
@@ -1201,7 +1206,10 @@ trait ProposalStepsTrait
     {
         $page = $this->getCurrentPage();
         $this->iWait(3); // Wait alert to disappear
-        $this->getSession()->wait(3000, "$('" . $page->getSelector('followers tab') . "').length > 0");
+        $this->getSession()->wait(
+            3000,
+            "$('" . $page->getSelector('followers tab') . "').length > 0"
+        );
         $page->clickFollowersTab();
         $this->iWait(1);
     }
@@ -1269,7 +1277,10 @@ trait ProposalStepsTrait
     {
         $page = $this->getCurrentPage();
         $this->iWait(3); // Wait alert to disappear
-        $this->getSession()->wait(3000, "$('" . $page->getSelector('comments tab') . "').length > 0");
+        $this->getSession()->wait(
+            3000,
+            "$('" . $page->getSelector('comments tab') . "').length > 0"
+        );
         $page->clickCommentsTab();
         $this->iWait(1);
     }
@@ -1280,7 +1291,10 @@ trait ProposalStepsTrait
     public function iShouldHaveXFilesInMediaFolder(int $filesNumber)
     {
         $filesCount = iterator_count(
-            new FilesystemIterator('/var/www/web/media/default/0001/01', FilesystemIterator::SKIP_DOTS)
+            new FilesystemIterator(
+                '/var/www/web/media/default/0001/01',
+                FilesystemIterator::SKIP_DOTS
+            )
         );
         \PHPUnit_Framework_Assert::assertSame($filesNumber, $filesCount);
     }
@@ -1294,7 +1308,9 @@ trait ProposalStepsTrait
             function ($element) {
                 return $element->getText();
             },
-            $this->getSession()->getPage()->findAll('css', '.opinion__list .card__title')
+            $this->getSession()
+                ->getPage()
+                ->findAll('css', '.opinion__list .card__title')
         );
 
         $this->currentCollectsStep = $items;
@@ -1312,7 +1328,9 @@ trait ProposalStepsTrait
             function ($element) {
                 return $element->getText();
             },
-            $this->getSession()->getPage()->findAll('css', $selector)
+            $this->getSession()
+                ->getPage()
+                ->findAll('css', $selector)
         );
 
         \PHPUnit_Framework_Assert::assertSame($savedSteps, $items);
@@ -1330,7 +1348,9 @@ trait ProposalStepsTrait
             function ($element) {
                 return $element->getText();
             },
-            $this->getSession()->getPage()->findAll('css', $selector)
+            $this->getSession()
+                ->getPage()
+                ->findAll('css', $selector)
         );
 
         \PHPUnit_Framework_Assert::assertNotSame($savedSteps, $items);
@@ -1356,7 +1376,10 @@ trait ProposalStepsTrait
         }
 
         $filesCount = iterator_count(
-            new FilesystemIterator('/var/www/web/media/sources/0001/01', FilesystemIterator::SKIP_DOTS)
+            new FilesystemIterator(
+                '/var/www/web/media/sources/0001/01',
+                FilesystemIterator::SKIP_DOTS
+            )
         );
         \PHPUnit_Framework_Assert::assertSame($filesNumber, $filesCount);
     }
@@ -1377,17 +1400,23 @@ trait ProposalStepsTrait
 
     protected function proposalPageIsOpen()
     {
-        return $this->navigationContext->getPage('proposal page')->isOpen(self::$proposalWithSimpleVoteParams);
+        return $this->navigationContext
+            ->getPage('proposal page')
+            ->isOpen(self::$proposalWithSimpleVoteParams);
     }
 
     protected function proposalNotYetVotablePageIsOpen()
     {
-        return $this->navigationContext->getPage('proposal page')->isOpen(self::$proposalNotYetVotable);
+        return $this->navigationContext
+            ->getPage('proposal page')
+            ->isOpen(self::$proposalNotYetVotable);
     }
 
     protected function proposalNotVotableAnymoreIsOpen()
     {
-        return $this->navigationContext->getPage('proposal page')->isOpen(self::$proposalNotVotableAnymore);
+        return $this->navigationContext
+            ->getPage('proposal page')
+            ->isOpen(self::$proposalNotVotableAnymore);
     }
 
     protected function proposalBeforeProposal($proposal1, $proposal2)
@@ -1404,14 +1433,12 @@ trait ProposalStepsTrait
         $fillTheme = false,
         $requiredResponse = 'Réponse à la question 2'
     ) {
-        $tableNode = new TableNode(
-            [
-                ['proposal_title', 'Nouvelle proposition créée'],
-                ['proposal_body', 'Description de ma proposition'],
-                ['responses[0]', 'Réponse à la question 1'],
-                ['proposal_address', '5 Allée Rallier-du-Baty 35000 Rennes'],
-            ]
-        );
+        $tableNode = new TableNode([
+            ['proposal_title', 'Nouvelle proposition créée'],
+            ['proposal_body', 'Description de ma proposition'],
+            ['responses[0]', 'Réponse à la question 1'],
+            ['proposal_address', '5 Allée Rallier-du-Baty 35000 Rennes'],
+        ]);
         if (false !== $requiredResponse) {
             $this->fillField('responses[1]', $requiredResponse);
         }
@@ -1475,7 +1502,9 @@ trait ProposalStepsTrait
 
     protected function proposalPageWithBudgetVoteIsOpen()
     {
-        return $this->navigationContext->getPage('proposal page')->isOpen(self::$proposalWithBudgetVoteParams);
+        return $this->navigationContext
+            ->getPage('proposal page')
+            ->isOpen(self::$proposalWithBudgetVoteParams);
     }
 
     protected function getProposalId(): string
@@ -1483,7 +1512,10 @@ trait ProposalStepsTrait
         if ($this->proposalPageIsOpen() || $this->selectionStepWithSimpleVoteIsOpen()) {
             return 'proposal2';
         }
-        if ($this->proposalPageWithBudgetVoteIsOpen() || $this->selectionStepWithBudgetVoteIsOpen()) {
+        if (
+            $this->proposalPageWithBudgetVoteIsOpen() ||
+            $this->selectionStepWithBudgetVoteIsOpen()
+        ) {
             return 'proposal8';
         }
         if ($this->selectionStepNotYetOpenIsOpen() || $this->proposalNotYetVotablePageIsOpen()) {
@@ -1512,32 +1544,42 @@ trait ProposalStepsTrait
 
     protected function assertProposalCommentsContains($text)
     {
-        $firstVoteSelector = $this->navigationContext->getPage('proposal page')->getCommentsListSelector();
+        $firstVoteSelector = $this->navigationContext
+            ->getPage('proposal page')
+            ->getCommentsListSelector();
         $this->assertElementContainsText($firstVoteSelector, $text);
     }
 
     protected function assertFirstProposalVoteContains($text)
     {
-        $firstVoteSelector = $this->navigationContext->getPage('proposal page')->getFirstVoteSelector();
+        $firstVoteSelector = $this->navigationContext
+            ->getPage('proposal page')
+            ->getFirstVoteSelector();
         $this->assertElementContainsText($firstVoteSelector, $text);
     }
 
     // TODO : refactor all assert proposal in one more scalable function ?
     protected function assertFirstProposalFollowerContains($text)
     {
-        $lastFollowerSelector = $this->navigationContext->getPage('proposal page')->getLastSelector('follower');
+        $lastFollowerSelector = $this->navigationContext
+            ->getPage('proposal page')
+            ->getLastSelector('follower');
         $this->assertElementContainsText($lastFollowerSelector, $text);
     }
 
     protected function assertFirstProposalVoteNotContains($text)
     {
-        $firstVoteSelector = $this->navigationContext->getPage('proposal page')->getFirstVoteSelector();
+        $firstVoteSelector = $this->navigationContext
+            ->getPage('proposal page')
+            ->getFirstVoteSelector();
         $this->assertElementNotContainsText($firstVoteSelector, $text);
     }
 
     protected function assertFirstProposalFollowerNotContains(string $text)
     {
-        $lastFollowerSelector = $this->navigationContext->getPage('proposal page')->getLastSelector('follower');
+        $lastFollowerSelector = $this->navigationContext
+            ->getPage('proposal page')
+            ->getLastSelector('follower');
         if ('null' === $text) {
             $this->assertElementNotOnPage($lastFollowerSelector);
         } else {
@@ -1547,7 +1589,9 @@ trait ProposalStepsTrait
 
     protected function assertFirstProposalFollowerNotOnPage()
     {
-        $lastFollowerSelector = $this->navigationContext->getPage('proposal page')->getLastSelector('follower');
+        $lastFollowerSelector = $this->navigationContext
+            ->getPage('proposal page')
+            ->getLastSelector('follower');
         $this->assertElementNotOnPage($lastFollowerSelector);
     }
 }
