@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
@@ -51,10 +52,10 @@ fragment commentInfos on Comment {
     pageInfo {
       startCursor
       endCursor
-      hasNextPage
+      hasNextPage  
     }
     edges {
-      cursor
+      cursor 
       node {
         ... reportingInfos
       }
@@ -68,10 +69,10 @@ fragment newsInfo on Post {
   id
   title
   authors {
-    ... authorInfos
+    ... authorInfos  
   }
   relatedContent {
-    __typename
+    __typename  
     ... on Proposal {
       title
     }
@@ -100,7 +101,7 @@ fragment newsInfo on Post {
 EOF;
     protected const PROPOSAL_VOTE_INFOS_FRAGMENT = <<<'EOF'
 fragment voteInfos on ProposalVote{
-  id
+  id 
   createdAt
   expired
   anonymous
@@ -111,7 +112,7 @@ fragment voteInfos on ProposalVote{
 EOF;
     protected const COMMENT_VOTE_INFOS_FRAGMENT = <<<'EOF'
 fragment voteInfos on CommentVote{
-  id
+  id 
   createdAt
   expired
   author {
@@ -437,15 +438,14 @@ EOF;
      */
     private $collectStepRepository;
 
-    public function __construct(
-        Executor $executor,
-        ProjectRepository $projectRepository,
-        GraphQlAclListener $listener,
-        SelectionStepRepository $selectionStepRepository,
-        CollectStepRepository $collectStepRepository,
-        Manager $toggleManager,
-        LoggerInterface $logger,
-        string $kernelRootDir
+    public function __construct(Executor $executor,
+                                ProjectRepository $projectRepository,
+                                GraphQlAclListener $listener,
+                                SelectionStepRepository $selectionStepRepository,
+                                CollectStepRepository $collectStepRepository,
+                                Manager $toggleManager,
+                                LoggerInterface $logger,
+                                string $kernelRootDir
     ) {
         $listener->disableAcl();
         $this->executor = $executor;
@@ -461,11 +461,9 @@ EOF;
 
     protected function configure(): void
     {
-        $this->setDescription('Create csv file from step which have proposals')->addArgument(
-            'projectId',
-            InputArgument::OPTIONAL,
-            'The ID of the project'
-        );
+        $this
+            ->setDescription('Create csv file from step which have proposals')
+            ->addArgument('projectId', InputArgument::OPTIONAL, 'The ID of the project');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -477,28 +475,24 @@ EOF;
         }
 
         if ($project = $this->getProject($input)) {
-            $steps = $project
-                ->getSteps()
+            $steps = $project->getSteps()
                 ->filter(function (ProjectAbstractStep $projectAbstractStep) {
-                    return (
-                        $projectAbstractStep->getStep() instanceof SelectionStep ||
-                        $projectAbstractStep->getStep() instanceof CollectStep
-                    );
+                    return $projectAbstractStep->getStep() instanceof SelectionStep || $projectAbstractStep->getStep() instanceof CollectStep;
                 })
                 ->map(function (ProjectAbstractStep $projectAbstractStep) {
                     return $projectAbstractStep->getStep();
                 });
         } else {
-            $steps = array_merge(
-                $this->collectStepRepository->findAll(),
-                $this->selectionStepRepository->findAll()
-            );
+            $steps = array_merge($this->collectStepRepository->findAll(), $this->selectionStepRepository->findAll());
         }
 
         foreach ($steps as $step) {
             if ($step->getProject()) {
                 $this->currentStep = $step;
-                $this->generateSheet($this->currentStep, $output);
+                $this->generateSheet(
+                    $this->currentStep,
+                    $output
+                );
                 $this->printMemoryUsage($output);
             }
         }
@@ -515,9 +509,10 @@ EOF;
 
         $proposalsQuery = $this->getContributionsGraphQLQueryByProposalStep($this->currentStep);
 
-        $proposals = $this->executor
-            ->execute(null, ['query' => $proposalsQuery, 'variables' => []])
-            ->toArray();
+        $proposals = $this->executor->execute(null, [
+            'query' => $proposalsQuery,
+            'variables' => [],
+        ])->toArray();
 
         $totalCount = Arr::path($proposals, 'data.node.proposals.totalCount');
         if ($totalCount > 0) {
@@ -525,37 +520,21 @@ EOF;
             $this->writer = WriterFactory::create(Type::CSV);
             $this->writer->openToFile($this->kernelRootDir . '/../web/export/' . $fileName);
             $this->headersMap = $this->createHeadersMap(self::SHEET_HEADERS, $proposals);
-            $this->writer->addRow(
-                array_merge(['contribution_type'], array_values($this->headersMap))
-            );
+            $this->writer->addRow(array_merge(['contribution_type'], array_values($this->headersMap)));
             $progress = new ProgressBar($output, $totalCount);
-            $this->traverseConnection(
-                $proposals,
-                'data.node.proposals',
-                function ($edge) use ($progress, $output) {
-                    $proposal = $edge['node'];
-                    $this->addProposalRow($proposal, $output);
-                    $progress->advance();
-                },
-                function ($pageInfo) {
-                    return $this->getContributionsGraphQLQueryByProposalStep(
-                        $this->currentStep,
-                        $pageInfo['endCursor']
-                    );
-                }
-            );
+            $this->traverseConnection($proposals, 'data.node.proposals', function ($edge) use ($progress, $output) {
+                $proposal = $edge['node'];
+                $this->addProposalRow($proposal, $output);
+                $progress->advance();
+            }, function ($pageInfo) {
+                return $this->getContributionsGraphQLQueryByProposalStep($this->currentStep, $pageInfo['endCursor']);
+            });
 
             $progress->clear();
 
             $this->writer->close();
         } else {
-            $output->writeln(
-                "<info>No proposal found for step '" .
-                    $step->getTitle() .
-                    "' in project '" .
-                    $step->getProject()->getTitle() .
-                    "'</info>"
-            );
+            $output->writeln("<info>No proposal found for step '" . $step->getTitle() . "' in project '" . $step->getProject()->getTitle() . "'</info>");
         }
 
         $output->writeln('The export file "' . $fileName . '" has been created.');
@@ -576,123 +555,86 @@ EOF;
         $this->writer->addRow($row);
 
         $reportingsQuery = $this->getProposalReportingsGraphQLQuery($proposal['id']);
-        $proposalWithReportings = $this->executor
-            ->execute(null, ['query' => $reportingsQuery, 'variables' => []])
-            ->toArray();
+        $proposalWithReportings = $this->executor->execute(null, [
+            'query' => $reportingsQuery,
+            'variables' => [],
+        ])->toArray();
 
         $totalCount = Arr::path($proposalWithReportings, 'data.node.reportings.totalCount');
         $progress = new ProgressBar($output, $totalCount);
 
-        $output->writeln(
-            "<info>Importing $totalCount reportings for proposal " . $proposal['title'] . '</info>'
-        );
+        $output->writeln("<info>Importing $totalCount reportings for proposal " . $proposal['title'] . '</info>');
 
-        $this->traverseConnection(
-            $proposalWithReportings,
-            'data.node.reportings',
-            function ($edge) use ($proposal, $progress) {
-                $report = $edge['node'];
-                $this->addProposalReportRow($report, $proposal);
-                $progress->advance();
-            },
-            function ($pageInfo) use ($proposal) {
-                return $this->getProposalReportingsGraphQLQuery(
-                    $proposal['id'],
-                    $pageInfo['endCursor']
-                );
-            }
-        );
+        $this->traverseConnection($proposalWithReportings, 'data.node.reportings', function ($edge) use ($proposal, $progress) {
+            $report = $edge['node'];
+            $this->addProposalReportRow($report, $proposal);
+            $progress->advance();
+        }, function ($pageInfo) use ($proposal) {
+            return $this->getProposalReportingsGraphQLQuery($proposal['id'], $pageInfo['endCursor']);
+        });
 
         $progress->clear();
 
-        $votesQuery = $this->getProposalVotesGraphQLQuery(
-            $proposal['id'],
-            $this->currentStep->getId()
-        );
-        $proposalsWithVotes = $this->executor
-            ->execute(null, ['query' => $votesQuery, 'variables' => []])
-            ->toArray();
+        $votesQuery = $this->getProposalVotesGraphQLQuery($proposal['id'], $this->currentStep->getId());
+        $proposalsWithVotes = $this->executor->execute(null, [
+            'query' => $votesQuery,
+            'variables' => [],
+        ])->toArray();
 
         $totalCount = Arr::path($proposalsWithVotes, 'data.node.votes.totalCount');
         $progress = new ProgressBar($output, $totalCount);
 
-        $output->writeln(
-            "<info>Importing $totalCount votes for proposal " . $proposal['title'] . '</info>'
-        );
+        $output->writeln("<info>Importing $totalCount votes for proposal " . $proposal['title'] . '</info>');
 
-        $this->traverseConnection(
-            $proposalsWithVotes,
-            'data.node.votes',
-            function ($edge) use ($proposal, $progress) {
-                $vote = $edge['node'];
-                $this->addProposalVotesRow($vote, $proposal);
-                $progress->advance();
-            },
-            function ($pageInfo) use ($proposal) {
-                return $this->getProposalVotesGraphQLQuery(
-                    $proposal['id'],
-                    $this->currentStep->getId(),
-                    $pageInfo['endCursor']
-                );
-            }
-        );
+        $this->traverseConnection($proposalsWithVotes, 'data.node.votes', function ($edge) use ($proposal, $progress) {
+            $vote = $edge['node'];
+            $this->addProposalVotesRow($vote, $proposal);
+            $progress->advance();
+        }, function ($pageInfo) use ($proposal) {
+            return $this->getProposalVotesGraphQLQuery($proposal['id'], $this->currentStep->getId(), $pageInfo['endCursor']);
+        });
 
         $progress->clear();
 
         $commentsQuery = $this->getProposalCommentsGraphQLQuery($proposal['id']);
-        $proposalsWithComments = $this->executor
-            ->execute(null, ['query' => $commentsQuery, 'variables' => []])
-            ->toArray();
+        $proposalsWithComments = $this->executor->execute(null, [
+            'query' => $commentsQuery,
+            'variables' => [],
+        ])->toArray();
 
         $totalCount = Arr::path($proposalsWithComments, 'data.node.comments.totalCount');
         $progress = new ProgressBar($output, $totalCount);
 
-        $output->writeln(
-            "<info>Importing $totalCount comments for proposal " . $proposal['title'] . '</info>'
-        );
+        $output->writeln("<info>Importing $totalCount comments for proposal " . $proposal['title'] . '</info>');
 
-        $this->traverseConnection(
-            $proposalsWithComments,
-            'data.node.comments',
-            function ($edge) use ($proposal, $progress) {
-                $comment = $edge['node'];
-                $this->addProposalCommentRow($comment, $proposal);
-                $progress->advance();
-            },
-            function ($pageInfo) use ($proposal) {
-                return $this->getProposalCommentsGraphQLQuery(
-                    $proposal['id'],
-                    $pageInfo['endCursor']
-                );
-            }
-        );
+        $this->traverseConnection($proposalsWithComments, 'data.node.comments', function ($edge) use ($proposal, $progress) {
+            $comment = $edge['node'];
+            $this->addProposalCommentRow($comment, $proposal);
+            $progress->advance();
+        }, function ($pageInfo) use ($proposal) {
+            return $this->getProposalCommentsGraphQLQuery($proposal['id'], $pageInfo['endCursor']);
+        });
 
         $progress->clear();
 
         $newsQuery = $this->getProposalNewsGraphQLQuery($proposal['id']);
-        $proposalWithNews = $this->executor
-            ->execute(null, ['query' => $newsQuery, 'variables' => []])
-            ->toArray();
+        $proposalWithNews = $this->executor->execute(null, [
+            'query' => $newsQuery,
+            'variables' => [],
+        ])->toArray();
 
         $totalCount = Arr::path($proposalWithNews, 'data.node.news.totalCount');
         $progress = new ProgressBar($output, $totalCount);
 
-        $output->writeln(
-            "<info>Importing $totalCount news for proposal " . $proposal['title'] . '</info>'
-        );
+        $output->writeln("<info>Importing $totalCount news for proposal " . $proposal['title'] . '</info>');
 
-        $this->traverseConnection(
-            $proposalWithNews,
-            'data.node.news',
-            function ($edge) use ($proposal, $progress) {
-                $news = $edge['node'];
-                $this->addProposalNewsRow($news, $proposal, $edge['cursor']);
-                $progress->advance();
-            },
-            function ($pageInfo) use ($proposal) {
-                return $this->getProposalNewsGraphQLQuery($proposal['id'], $pageInfo['endCursor']);
-            }
-        );
+        $this->traverseConnection($proposalWithNews, 'data.node.news', function ($edge) use ($proposal, $progress) {
+            $news = $edge['node'];
+            $this->addProposalNewsRow($news, $proposal, $edge['cursor']);
+            $progress->advance();
+        }, function ($pageInfo) use ($proposal) {
+            return $this->getProposalNewsGraphQLQuery($proposal['id'], $pageInfo['endCursor']);
+        });
 
         $progress->clear();
     }
@@ -704,8 +646,7 @@ EOF;
             if (isset(self::PROPOSAL_REPORTING_HEADER_MAP[$columnName])) {
                 $value = Arr::path($report, self::PROPOSAL_REPORTING_HEADER_MAP[$columnName]);
                 $row[] = $this->parseCellValue($value);
-            } elseif (isset($this->proposalHeaderMap[$columnName])) {
-                // copy proposal row
+            } elseif (isset($this->proposalHeaderMap[$columnName])) { // copy proposal row
                 $row = $this->handleProposalValues($proposal, $columnName, $row);
             } else {
                 $row[] = '';
@@ -722,8 +663,7 @@ EOF;
             if (isset(self::PROPOSAL_VOTE_HEADER_MAP[$columnName])) {
                 $value = Arr::path($vote, self::PROPOSAL_VOTE_HEADER_MAP[$columnName]);
                 $row[] = $this->parseCellValue($value);
-            } elseif (isset($this->proposalHeaderMap[$columnName])) {
-                // copy proposal row
+            } elseif (isset($this->proposalHeaderMap[$columnName])) { // copy proposal row
                 $row = $this->handleProposalValues($proposal, $columnName, $row);
             } else {
                 $row[] = '';
@@ -740,8 +680,7 @@ EOF;
             if (isset(self::PROPOSAL_COMMENT_HEADER_MAP[$columnName])) {
                 $value = Arr::path($comment, self::PROPOSAL_COMMENT_HEADER_MAP[$columnName]);
                 $row[] = $this->parseCellValue($value);
-            } elseif (isset($this->proposalHeaderMap[$columnName])) {
-                // copy proposal row
+            } elseif (isset($this->proposalHeaderMap[$columnName])) { // copy proposal row
                 $row = $this->handleProposalValues($proposal, $columnName, $row);
             } else {
                 $row[] = '';
@@ -751,61 +690,42 @@ EOF;
         $this->writer->addRow($row);
 
         $commentReportings = $this->getProposalCommentReportingsGraphQLQuery($comment['id']);
-        $commentWithReportings = $this->executor
-            ->execute(null, ['query' => $commentReportings, 'variables' => []])
-            ->toArray();
+        $commentWithReportings = $this->executor->execute(null, [
+            'query' => $commentReportings,
+            'variables' => [],
+        ])->toArray();
 
-        $this->traverseConnection(
-            $commentWithReportings,
-            'data.node.reportings',
-            function ($edge) use ($proposal, $comment) {
-                $report = $edge['node'];
-                $this->addProposalCommentReportRow($report, $proposal, $comment);
-            },
-            function ($pageInfo) use ($comment) {
-                return $this->getProposalCommentReportingsGraphQLQuery(
-                    $comment['id'],
-                    $pageInfo['endCursor']
-                );
-            }
-        );
+        $this->traverseConnection($commentWithReportings, 'data.node.reportings', function ($edge) use ($proposal, $comment) {
+            $report = $edge['node'];
+            $this->addProposalCommentReportRow($report, $proposal, $comment);
+        }, function ($pageInfo) use ($comment) {
+            return $this->getProposalCommentReportingsGraphQLQuery($comment['id'], $pageInfo['endCursor']);
+        });
 
         $commentVotesQuery = $this->getProposalCommentVotesGraphQLQuery($comment['id']);
-        $commentWithVotes = $this->executor
-            ->execute(null, ['query' => $commentVotesQuery, 'variables' => []])
-            ->toArray();
+        $commentWithVotes = $this->executor->execute(null, [
+            'query' => $commentVotesQuery,
+            'variables' => [],
+        ])->toArray();
 
-        $this->traverseConnection(
-            $commentWithVotes,
-            'data.node.votes',
-            function ($edge) use ($proposal, $comment) {
-                $vote = $edge['node'];
-                $this->addProposalCommentVotesRow($vote, $proposal, $comment);
-            },
-            function ($pageInfo) use ($comment) {
-                return $this->getProposalCommentVotesGraphQLQuery(
-                    $comment['id'],
-                    $pageInfo['endCursor']
-                );
-            }
-        );
+        $this->traverseConnection($commentWithVotes, 'data.node.votes', function ($edge) use ($proposal, $comment) {
+            $vote = $edge['node'];
+            $this->addProposalCommentVotesRow($vote, $proposal, $comment);
+        }, function ($pageInfo) use ($comment) {
+            return $this->getProposalCommentVotesGraphQLQuery($comment['id'], $pageInfo['endCursor']);
+        });
     }
 
-    protected function addProposalCommentReportRow(
-        array $report,
-        array $proposal,
-        array $comment
-    ): void {
+    protected function addProposalCommentReportRow(array $report, array $proposal, array $comment): void
+    {
         $row = ['proposalCommentReporting'];
         foreach ($this->headersMap as $path => $columnName) {
             if (isset(self::PROPOSAL_REPORTING_HEADER_MAP[$columnName])) {
                 $value = Arr::path($report, self::PROPOSAL_REPORTING_HEADER_MAP[$columnName]);
                 $row[] = $this->parseCellValue($value);
-            } elseif (isset($this->proposalHeaderMap[$columnName])) {
-                // copy proposal row
+            } elseif (isset($this->proposalHeaderMap[$columnName])) { // copy proposal row
                 $row = $this->handleProposalValues($proposal, $columnName, $row);
-            } elseif (isset(self::PROPOSAL_COMMENT_HEADER_MAP[$columnName])) {
-                // copy comment row
+            } elseif (isset(self::PROPOSAL_COMMENT_HEADER_MAP[$columnName])) { // copy comment row
                 $value = Arr::path($comment, self::PROPOSAL_COMMENT_HEADER_MAP[$columnName]);
                 $row[] = $this->parseCellValue($value);
             } else {
@@ -816,21 +736,16 @@ EOF;
         $this->writer->addRow($row);
     }
 
-    protected function addProposalCommentVotesRow(
-        array $vote,
-        array $proposal,
-        array $comment
-    ): void {
+    protected function addProposalCommentVotesRow(array $vote, array $proposal, array $comment): void
+    {
         $row = ['proposalCommentVote'];
         foreach ($this->headersMap as $path => $columnName) {
             if (isset(self::PROPOSAL_COMMENT_VOTE_HEADER_MAP[$columnName])) {
                 $value = Arr::path($vote, self::PROPOSAL_COMMENT_VOTE_HEADER_MAP[$columnName]);
                 $row[] = $this->parseCellValue($value);
-            } elseif (isset($this->proposalHeaderMap[$columnName])) {
-                // copy proposal row
+            } elseif (isset($this->proposalHeaderMap[$columnName])) { // copy proposal row
                 $row = $this->handleProposalValues($proposal, $columnName, $row);
-            } elseif (isset(self::PROPOSAL_COMMENT_HEADER_MAP[$columnName])) {
-                // copy comment row
+            } elseif (isset(self::PROPOSAL_COMMENT_HEADER_MAP[$columnName])) { // copy comment row
                 $value = Arr::path($comment, self::PROPOSAL_COMMENT_HEADER_MAP[$columnName]);
                 $row[] = $this->parseCellValue($value);
             } else {
@@ -841,17 +756,13 @@ EOF;
         $this->writer->addRow($row);
     }
 
-    protected function addProposalNewsRow(
-        array $news,
-        array $proposal,
-        string $proposalNewsCursor
-    ): void {
+    protected function addProposalNewsRow(array $news, array $proposal, string $proposalNewsCursor): void
+    {
         $row = ['proposalNews'];
         foreach ($this->headersMap as $path => $columnName) {
             if (isset(self::PROPOSAL_NEWS_HEADER_MAP[$columnName])) {
                 $this->handleProposalNewsValues($news, $columnName, $row);
-            } elseif (isset($this->proposalHeaderMap[$columnName])) {
-                // copy proposal row
+            } elseif (isset($this->proposalHeaderMap[$columnName])) { // copy proposal row
                 $row = $this->handleProposalValues($proposal, $columnName, $row);
             } else {
                 $row[] = '';
@@ -860,46 +771,24 @@ EOF;
 
         $this->writer->addRow($row);
 
-        $this->traverseConnection(
-            $news,
-            'comments',
-            function ($edge) use ($proposal, $news, $proposalNewsCursor) {
-                $comment = $edge['node'];
-                $this->addProposalNewsCommentRow(
-                    $comment,
-                    $proposal,
-                    $news,
-                    $proposalNewsCursor,
-                    $edge['cursor']
-                );
-            },
-            function ($pageInfo) use ($proposal, $proposalNewsCursor) {
-                return $this->getProposalNewsGraphQLQuery(
-                    $proposal['id'],
-                    $proposalNewsCursor,
-                    $pageInfo['endCursor']
-                );
-            }
-        );
+        $this->traverseConnection($news, 'comments', function ($edge) use ($proposal, $news, $proposalNewsCursor) {
+            $comment = $edge['node'];
+            $this->addProposalNewsCommentRow($comment, $proposal, $news, $proposalNewsCursor, $edge['cursor']);
+        }, function ($pageInfo) use ($proposal, $proposalNewsCursor) {
+            return $this->getProposalNewsGraphQLQuery($proposal['id'], $proposalNewsCursor, $pageInfo['endCursor']);
+        });
     }
 
-    protected function addProposalNewsCommentRow(
-        array $comment,
-        array $proposal,
-        array $news,
-        string $proposalNewsCursor,
-        string $proposalNewsCommentCursor
-    ): void {
+    protected function addProposalNewsCommentRow(array $comment, array $proposal, array $news, string $proposalNewsCursor, string $proposalNewsCommentCursor): void
+    {
         $row = ['proposalNewsComment'];
         foreach ($this->headersMap as $path => $columnName) {
             if (isset(self::PROPOSAL_NEWS_COMMENT_HEADER_MAP[$columnName])) {
                 $value = Arr::path($comment, self::PROPOSAL_NEWS_COMMENT_HEADER_MAP[$columnName]);
                 $row[] = $this->parseCellValue($value);
-            } elseif (isset($this->proposalHeaderMap[$columnName])) {
-                // copy proposal row
+            } elseif (isset($this->proposalHeaderMap[$columnName])) { // copy proposal row
                 $row = $this->handleProposalValues($proposal, $columnName, $row);
-            } elseif (isset(self::PROPOSAL_NEWS_HEADER_MAP[$columnName])) {
-                // copy news row
+            } elseif (isset(self::PROPOSAL_NEWS_HEADER_MAP[$columnName])) { // copy news row
                 $this->handleProposalNewsValues($news, $columnName, $row);
             } else {
                 $row[] = '';
@@ -908,62 +797,34 @@ EOF;
 
         $this->writer->addRow($row);
 
-        $this->traverseConnection(
-            $comment,
-            'votes',
-            function ($edge) use ($proposal, $news, $comment) {
-                $vote = $edge['node'];
-                $this->addProposalNewsCommentVoteRow($vote, $comment, $proposal, $news);
-            },
-            function ($pageInfo) use ($proposal, $proposalNewsCursor, $proposalNewsCommentCursor) {
-                return $this->getProposalNewsGraphQLQuery(
-                    $proposal['id'],
-                    $proposalNewsCursor,
-                    $proposalNewsCommentCursor,
-                    $pageInfo['endCursor']
-                );
-            }
-        );
+        $this->traverseConnection($comment, 'votes', function ($edge) use ($proposal, $news, $comment) {
+            $vote = $edge['node'];
+            $this->addProposalNewsCommentVoteRow($vote, $comment, $proposal, $news);
+        }, function ($pageInfo) use ($proposal, $proposalNewsCursor, $proposalNewsCommentCursor) {
+            return $this->getProposalNewsGraphQLQuery($proposal['id'], $proposalNewsCursor, $proposalNewsCommentCursor, $pageInfo['endCursor']);
+        });
 
-        $this->traverseConnection(
-            $comment,
-            'reportings',
-            function ($edge) use ($proposal, $news, $comment) {
-                $report = $edge['node'];
-                $this->addProposalNewsCommentReportingRow($report, $comment, $proposal, $news);
-            },
-            function ($pageInfo) use ($proposal, $proposalNewsCursor, $proposalNewsCommentCursor) {
-                return $this->getProposalNewsGraphQLQuery(
-                    $proposal['id'],
-                    $proposalNewsCursor,
-                    $proposalNewsCommentCursor,
-                    null,
-                    $pageInfo['endCursor']
-                );
-            }
-        );
+        $this->traverseConnection($comment, 'reportings', function ($edge) use ($proposal, $news, $comment) {
+            $report = $edge['node'];
+            $this->addProposalNewsCommentReportingRow($report, $comment, $proposal, $news);
+        }, function ($pageInfo) use ($proposal, $proposalNewsCursor, $proposalNewsCommentCursor) {
+            return $this->getProposalNewsGraphQLQuery($proposal['id'], $proposalNewsCursor, $proposalNewsCommentCursor, null, $pageInfo['endCursor']);
+        });
     }
 
-    protected function addProposalNewsCommentVoteRow(
-        array $vote,
-        array $comment,
-        array $proposal,
-        array $news
-    ): void {
+    protected function addProposalNewsCommentVoteRow(array $vote, array $comment, array $proposal, array $news): void
+    {
         $row = ['proposalNewsCommentVote'];
         foreach ($this->headersMap as $path => $columnName) {
             if (isset(self::PROPOSAL_NEWS_COMMENT_VOTE_HEADER_MAP[$columnName])) {
                 $value = Arr::path($vote, self::PROPOSAL_NEWS_COMMENT_VOTE_HEADER_MAP[$columnName]);
                 $row[] = $this->parseCellValue($value);
-            } elseif (isset($this->proposalHeaderMap[$columnName])) {
-                // copy proposal row
+            } elseif (isset($this->proposalHeaderMap[$columnName])) { // copy proposal row
                 $row = $this->handleProposalValues($proposal, $columnName, $row);
-            } elseif (isset(self::PROPOSAL_NEWS_COMMENT_HEADER_MAP[$columnName])) {
-                // copy comment row
+            } elseif (isset(self::PROPOSAL_NEWS_COMMENT_HEADER_MAP[$columnName])) { // copy comment row
                 $value = Arr::path($comment, self::PROPOSAL_NEWS_COMMENT_HEADER_MAP[$columnName]);
                 $row[] = $this->parseCellValue($value);
-            } elseif (isset(self::PROPOSAL_NEWS_HEADER_MAP[$columnName])) {
-                // copy news row
+            } elseif (isset(self::PROPOSAL_NEWS_HEADER_MAP[$columnName])) { // copy news row
                 $this->handleProposalNewsValues($news, $columnName, $row);
             } else {
                 $row[] = '';
@@ -973,29 +834,19 @@ EOF;
         $this->writer->addRow($row);
     }
 
-    protected function addProposalNewsCommentReportingRow(
-        array $report,
-        array $comment,
-        array $proposal,
-        array $news
-    ): void {
+    protected function addProposalNewsCommentReportingRow(array $report, array $comment, array $proposal, array $news): void
+    {
         $row = ['proposalNewsCommentReporting'];
         foreach ($this->headersMap as $path => $columnName) {
             if (isset(self::PROPOSAL_NEWS_COMMENT_REPORTING_HEADER_MAP[$columnName])) {
-                $value = Arr::path(
-                    $report,
-                    self::PROPOSAL_NEWS_COMMENT_REPORTING_HEADER_MAP[$columnName]
-                );
+                $value = Arr::path($report, self::PROPOSAL_NEWS_COMMENT_REPORTING_HEADER_MAP[$columnName]);
                 $row[] = $this->parseCellValue($value);
-            } elseif (isset($this->proposalHeaderMap[$columnName])) {
-                // copy proposal row
+            } elseif (isset($this->proposalHeaderMap[$columnName])) { // copy proposal row
                 $row = $this->handleProposalValues($proposal, $columnName, $row);
-            } elseif (isset(self::PROPOSAL_NEWS_COMMENT_HEADER_MAP[$columnName])) {
-                // copy comment row
+            } elseif (isset(self::PROPOSAL_NEWS_COMMENT_HEADER_MAP[$columnName])) { // copy comment row
                 $value = Arr::path($comment, self::PROPOSAL_NEWS_COMMENT_HEADER_MAP[$columnName]);
                 $row[] = $this->parseCellValue($value);
-            } elseif (isset(self::PROPOSAL_NEWS_HEADER_MAP[$columnName])) {
-                // copy news row
+            } elseif (isset(self::PROPOSAL_NEWS_HEADER_MAP[$columnName])) { // copy news row
                 $this->handleProposalNewsValues($news, $columnName, $row);
             } else {
                 $row[] = '';
@@ -1019,19 +870,13 @@ EOF;
                     break;
                 }
             }
-        } elseif (
-            'evaluation_responses' === $this->proposalHeaderMap[$columnName] &&
-            Arr::path($proposal, 'evaluation.responses')
-        ) {
+        } elseif ('evaluation_responses' === $this->proposalHeaderMap[$columnName] && Arr::path($proposal, 'evaluation.responses')) {
             $values = Arr::path($proposal, 'evaluation.responses');
             foreach ($values as $value) {
                 if (isset($value['question']) && $value['question']['title'] === $columnName) {
                     if (isset($value['formattedValue'])) {
                         $row[] = $value['formattedValue'];
-                    } elseif (
-                        isset($value['medias']) &&
-                        $value['question']['title'] === $columnName
-                    ) {
+                    } elseif (isset($value['medias']) && $value['question']['title'] === $columnName) {
                         $urls = array_map(function ($media) {
                             return $media['url'];
                         }, $value['medias']);
@@ -1063,36 +908,27 @@ EOF;
             $row[] = $this->parseCellValue(implode(', ', $values));
         } elseif ('proposal_news_linkedProposal' === $columnName) {
             $related = Arr::path($news, self::PROPOSAL_NEWS_HEADER_MAP[$columnName]);
-            $proposal = array_map(
-                function ($node) {
-                    return $node['title'];
-                },
-                array_filter($related, function ($item) {
-                    return 'Proposal' === $item['__typename'];
-                })
-            );
+            $proposal = array_map(function ($node) {
+                return $node['title'];
+            }, array_filter($related, function ($item) {
+                return 'Proposal' === $item['__typename'];
+            }));
             $row[] = implode('', $proposal);
         } elseif ('proposal_news_linkedProjects' === $columnName) {
             $related = Arr::path($news, self::PROPOSAL_NEWS_HEADER_MAP[$columnName]);
-            $projects = array_map(
-                function ($node) {
-                    return $node['title'];
-                },
-                array_filter($related, function ($item) {
-                    return 'Project' === $item['__typename'];
-                })
-            );
+            $projects = array_map(function ($node) {
+                return $node['title'];
+            }, array_filter($related, function ($item) {
+                return 'Project' === $item['__typename'];
+            }));
             $row[] = implode(', ', $projects);
         } elseif ('proposal_news_themes' === $columnName) {
             $related = Arr::path($news, self::PROPOSAL_NEWS_HEADER_MAP[$columnName]);
-            $themes = array_map(
-                function ($node) {
-                    return $node['title'];
-                },
-                array_filter($related, function ($item) {
-                    return 'Theme' === $item['__typename'];
-                })
-            );
+            $themes = array_map(function ($node) {
+                return $node['title'];
+            }, array_filter($related, function ($item) {
+                return 'Theme' === $item['__typename'];
+            }));
             $row[] = implode(', ', $themes);
         } else {
             $value = Arr::path($news, self::PROPOSAL_NEWS_HEADER_MAP[$columnName]);
@@ -1100,12 +936,8 @@ EOF;
         }
     }
 
-    protected function traverseConnection(
-        array &$data,
-        string $path,
-        callable $callback,
-        callable $renewalQuery
-    ): void {
+    protected function traverseConnection(array &$data, string $path, callable $callback, callable $renewalQuery): void
+    {
         do {
             $connection = Arr::path($data, $path);
             $edges = Arr::path($connection, 'edges');
@@ -1115,12 +947,10 @@ EOF;
                 foreach ($edges as $edge) {
                     $callback($edge);
                     if ($edge['cursor'] === $endCursor) {
-                        $data = $this->executor
-                            ->execute(null, [
-                                'query' => $renewalQuery($pageInfo),
-                                'variables' => [],
-                            ])
-                            ->toArray();
+                        $data = $this->executor->execute(null, [
+                            'query' => $renewalQuery($pageInfo),
+                            'variables' => [],
+                        ])->toArray();
                     }
                 }
             }
@@ -1155,15 +985,8 @@ EOF;
         }
         if ($this->currentStep->getProposalForm()) {
             if ($evaluationForm = $this->currentStep->getProposalForm()->getEvaluationForm()) {
-                foreach (
-                    \array_reverse($evaluationForm->getRealQuestions()->toArray())
-                    as $question
-                ) {
-                    $result = $this->insert(
-                        $result,
-                        self::CUSTOM_QUESTIONS_HEADER_OFFSET + \count($questions),
-                        $question->getTitle()
-                    );
+                foreach (\array_reverse($evaluationForm->getRealQuestions()->toArray()) as $question) {
+                    $result = $this->insert($result, self::CUSTOM_QUESTIONS_HEADER_OFFSET + \count($questions), $question->getTitle());
                     $this->proposalHeaderMap[$question->getTitle()] = 'evaluation_responses';
                 }
             }
@@ -1174,8 +997,7 @@ EOF;
 
     protected function getFilename(AbstractStep $selectionStep): string
     {
-        return sprintf(
-            '%s_%s_%s_contributions.csv',
+        return sprintf('%s_%s_%s_contributions.csv',
             (new \DateTime())->format('Y-M-d'),
             str_replace(' ', '_', $selectionStep->getProject()->getTitle()),
             str_replace(' ', '_', $selectionStep->getTitle())
@@ -1204,12 +1026,8 @@ EOF;
         return null;
     }
 
-    protected function getProposalVotesGraphQLQuery(
-        string $proposalId,
-        string $stepId,
-        ?string $votesAfter = null,
-        ?string $VOTES_PER_PAGE = self::VOTES_PER_PAGE
-    ): string {
+    protected function getProposalVotesGraphQLQuery(string $proposalId, string $stepId, ?string $votesAfter = null, ?string $VOTES_PER_PAGE = self::VOTES_PER_PAGE): string
+    {
         $VOTE_INFOS_FRAGMENT = self::PROPOSAL_VOTE_INFOS_FRAGMENT;
         $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
         $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
@@ -1225,7 +1043,7 @@ ${AUTHOR_INFOS_FRAGMENT}
 {
   node(id: "${proposalId}") {
     ... on Proposal {
-      votes(includeExpired: true, stepId: "${stepId}", first: ${VOTES_PER_PAGE}${votesAfter}) {
+      votes(includeExpired: true, step: "${stepId}", first: ${VOTES_PER_PAGE}${votesAfter}) {
         totalCount
         pageInfo {
           startCursor
@@ -1233,7 +1051,7 @@ ${AUTHOR_INFOS_FRAGMENT}
           hasNextPage
         }
         edges {
-          cursor
+          cursor  
           node {
             ... voteInfos
           }
@@ -1245,11 +1063,8 @@ ${AUTHOR_INFOS_FRAGMENT}
 EOF;
     }
 
-    protected function getProposalReportingsGraphQLQuery(
-        string $proposalId,
-        ?string $reportingsAfter = null,
-        ?string $REPORTING_PER_PAGE = self::REPORTINGS_PER_PAGE
-    ): string {
+    protected function getProposalReportingsGraphQLQuery(string $proposalId, ?string $reportingsAfter = null, ?string $REPORTING_PER_PAGE = self::REPORTINGS_PER_PAGE): string
+    {
         $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
         $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
         $REPORTING_INFOS_FRAGMENT = self::REPORTING_INFOS_FRAGMENT;
@@ -1270,13 +1085,13 @@ ${AUTHOR_INFOS_FRAGMENT}
         pageInfo {
           startCursor
           endCursor
-          hasNextPage
+          hasNextPage  
         }
         edges {
           cursor
           node {
             ...reportingInfos
-          }
+          }  
         }
       }
     }
@@ -1285,11 +1100,8 @@ ${AUTHOR_INFOS_FRAGMENT}
 EOF;
     }
 
-    protected function getProposalCommentsGraphQLQuery(
-        string $proposalId,
-        ?string $commentsAfter = null,
-        ?string $COMMENTS_PER_PAGE = self::COMMENTS_PER_PAGE
-    ): string {
+    protected function getProposalCommentsGraphQLQuery(string $proposalId, ?string $commentsAfter = null, ?string $COMMENTS_PER_PAGE = self::COMMENTS_PER_PAGE): string
+    {
         $COMMENTS_INFO_FRAGMENT = self::COMMENT_INFOS_FRAGMENT;
         $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
         $REPORTING_INFOS_FRAGMENT = self::REPORTING_INFOS_FRAGMENT;
@@ -1315,7 +1127,7 @@ ${USER_TYPE_INFOS_FRAGMENT}
           hasNextPage
         }
         edges {
-          cursor
+          cursor  
           node {
             ... commentInfos
           }
@@ -1327,17 +1139,15 @@ ${USER_TYPE_INFOS_FRAGMENT}
 EOF;
     }
 
-    protected function getProposalNewsGraphQLQuery(
-        string $proposalId,
-        ?string $newsAfter = null,
-        ?string $commentsAfter = null,
-        ?string $votesAfter = null,
-        ?string $reportingsAfter = null,
-        ?string $NEWS_PER_PAGE = self::NEWS_PER_PAGE,
-        ?string $VOTES_PER_PAGE = self::VOTES_PER_PAGE,
-        ?string $REPORTINGS_PER_PAGE = self::REPORTINGS_PER_PAGE,
-        ?string $COMMENTS_PER_PAGE = self::COMMENTS_PER_PAGE
-    ): string {
+    protected function getProposalNewsGraphQLQuery(string $proposalId, ?string $newsAfter = null,
+                                                   ?string $commentsAfter = null,
+                                                   ?string $votesAfter = null,
+                                                   ?string $reportingsAfter = null,
+                                                   ?string $NEWS_PER_PAGE = self::NEWS_PER_PAGE,
+                                                   ?string $VOTES_PER_PAGE = self::VOTES_PER_PAGE,
+                                                   ?string $REPORTINGS_PER_PAGE = self::REPORTINGS_PER_PAGE,
+                                                   ?string $COMMENTS_PER_PAGE = self::COMMENTS_PER_PAGE): string
+    {
         $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
         $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
         $VOTES_INFOS_FRAGMENT = self::COMMENT_VOTE_INFOS_FRAGMENT;
@@ -1360,18 +1170,18 @@ ${VOTES_INFOS_FRAGMENT}
         pageInfo {
           startCursor
           endCursor
-          hasNextPage
+          hasNextPage  
         }
         edges {
-          cursor
+          cursor  
           node {
             id
             title
             authors {
-              ... authorInfos
+              ... authorInfos  
             }
             relatedContent {
-              __typename
+              __typename  
               ... on Proposal {
                 title
               }
@@ -1389,7 +1199,7 @@ ${VOTES_INFOS_FRAGMENT}
                 hasNextPage
               }
               edges {
-                cursor
+                cursor  
                 node {
                   id
                   body
@@ -1411,7 +1221,7 @@ ${VOTES_INFOS_FRAGMENT}
                       hasNextPage
                     }
                     edges {
-                      cursor
+                      cursor  
                       node {
                         ... voteInfos
                       }
@@ -1424,7 +1234,7 @@ ${VOTES_INFOS_FRAGMENT}
                       hasNextPage
                     }
                     edges {
-                      cursor
+                      cursor  
                       node {
                         ... reportingInfos
                       }
@@ -1449,11 +1259,8 @@ ${VOTES_INFOS_FRAGMENT}
 EOF;
     }
 
-    protected function getProposalCommentReportingsGraphQLQuery(
-        string $commentId,
-        ?string $reportsAfter = null,
-        ?string $REPORTINGS_PER_PAGE = self::REPORTINGS_PER_PAGE
-    ): string {
+    protected function getProposalCommentReportingsGraphQLQuery(string $commentId, ?string $reportsAfter = null, ?string $REPORTINGS_PER_PAGE = self::REPORTINGS_PER_PAGE): string
+    {
         $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
         $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
         $REPORTING_INFOS_FRAGMENT = self::REPORTING_INFOS_FRAGMENT;
@@ -1489,11 +1296,8 @@ ${AUTHOR_INFOS_FRAGMENT}
 EOF;
     }
 
-    protected function getProposalCommentVotesGraphQLQuery(
-        string $commentId,
-        ?string $votesAfter = null,
-        ?string $VOTES_PER_PAGE = self::VOTES_PER_PAGE
-    ): string {
+    protected function getProposalCommentVotesGraphQLQuery(string $commentId, ?string $votesAfter = null, ?string $VOTES_PER_PAGE = self::VOTES_PER_PAGE): string
+    {
         $VOTE_INFOS_FRAGMENT = self::COMMENT_VOTE_INFOS;
         $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
         $AUTHOR_INFOS_FRAGMENT = self::AUTHOR_INFOS_FRAGMENT;
@@ -1528,15 +1332,14 @@ ${AUTHOR_INFOS_FRAGMENT}
 EOF;
     }
 
-    protected function getContributionsGraphQLQueryByProposalStep(
-        AbstractStep $proposalStep,
-        ?string $proposalAfter = null,
-        ?string $votesAfter = null,
-        ?string $commentsAfter = null,
-        string $PROPOSALS_PER_PAGE = self::PROPOSALS_PER_PAGE,
-        string $COMMENTS_PER_PAGE = self::COMMENTS_PER_PAGE,
-        string $VOTES_PER_PAGE = self::VOTES_PER_PAGE
-    ): string {
+    protected function getContributionsGraphQLQueryByProposalStep(AbstractStep $proposalStep,
+                                                                  ?string $proposalAfter = null,
+                                                                  ?string $votesAfter = null,
+                                                                  ?string $commentsAfter = null,
+                                                                  string $PROPOSALS_PER_PAGE = self::PROPOSALS_PER_PAGE,
+                                                                  string $COMMENTS_PER_PAGE = self::COMMENTS_PER_PAGE,
+                                                                  string $VOTES_PER_PAGE = self::VOTES_PER_PAGE): string
+    {
         $COMMENTS_INFO_FRAGMENT = self::COMMENT_INFOS_FRAGMENT;
         $USER_TYPE_FRAGMENT = self::USER_TYPE_INFOS_FRAGMENT;
         $NEWS_INFO_FRAGMENT = self::NEWS_INFO_FRAGMENT;
@@ -1625,7 +1428,7 @@ ${COMMENT_VOTE_INFOS}
               name
             }
             media {
-              url
+              url  
             }
             summaryOrBodyExcerpt
             responses {
@@ -1640,7 +1443,7 @@ ${COMMENT_VOTE_INFOS}
                   title
                 }
                 medias {
-                  url
+                  url  
                 }
               }
             }
@@ -1659,7 +1462,7 @@ ${COMMENT_VOTE_INFOS}
                     title
                   }
                   medias {
-                    url
+                    url  
                   }
                 }
               }
@@ -1707,12 +1510,6 @@ EOF;
     private function printMemoryUsage(OutputInterface $output): void
     {
         $output->write("\n");
-        $output->writeln(
-            sprintf(
-                'Memory usage (currently) %dKB/ (max) %dKB',
-                round(memory_get_usage(true) / 1024),
-                memory_get_peak_usage(true) / 1024
-            )
-        );
+        $output->writeln(sprintf('Memory usage (currently) %dKB/ (max) %dKB', round(memory_get_usage(true) / 1024), memory_get_peak_usage(true) / 1024));
     }
 }

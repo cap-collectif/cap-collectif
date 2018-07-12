@@ -125,7 +125,7 @@ export default createFragmentContainer(container, {
     fragment ProposalPageHeader_viewer on User
       @argumentDefinitions(hasVotableStep: { type: "Boolean", defaultValue: true }) {
       ...ProposalVoteButtonWrapperFragment_viewer
-        @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
+        @arguments(stepId: $stepId)
         @include(if: $hasVotableStep)
     }
   `,

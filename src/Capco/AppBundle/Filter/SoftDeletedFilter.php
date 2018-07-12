@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Filter;
 
 use Doctrine\ORM\Mapping\ClassMetadata;
@@ -10,7 +9,8 @@ class SoftDeletedFilter extends SQLFilter
     public function addFilterConstraint(ClassMetadata $targetEntity, $targetTableAlias): string
     {
         if ($targetEntity->hasField('deletedAt')) {
-            return $targetTableAlias . '.deleted_at > \'' . date('Y-m-d H:i:s') . '\' OR ' . $targetTableAlias . '.deleted_at IS NULL';
+            $currentDate = date('Y-m-d H:i:s');
+            return "$targetTableAlias.deleted_at > '$currentDate' OR $targetTableAlias.deleted_at IS NULL";
         }
 
         return '';

@@ -15,9 +15,6 @@ export default class UserLink extends React.Component<Props, State> {
     if (!userUrl) {
       userUrl = user && user.show_url ? user.show_url : null;
     }
-    if (!userUrl) {
-      userUrl = user && user.url ? user.url : null;
-    }
     const username = user && user.displayName ? user.displayName : 'Utilisateur supprimé';
     if (userUrl) {
       return (

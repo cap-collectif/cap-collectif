@@ -8,30 +8,28 @@ import environment, { graphqlError } from '../createRelayEnvironment';
 import ProposalList from '../components/Proposal/List/ProposalList';
 import type { ProposalListAppQueryResponse } from './__generated__/ProposalListAppQuery.graphql';
 
-export default ({ authorId, isAuthenticated }: { authorId: string, isAuthenticated: boolean }) => (
+export default () => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
       <QueryRenderer
-        variables={{ authorId, isProfileView: true, isAuthenticated, stepId: '' }}
+        variables={{ isProfileView: true, isAuthenticated: false, stepId: '' }}
         environment={environment}
         query={graphql`
           query ProposalListAppQuery(
             $stepId: ID!
-            $authorId: ID!
             $isProfileView: Boolean!
             $isAuthenticated: Boolean!
           ) {
             proposalForms {
-              id
               step {
                 title
               }
-              proposals(first: 50, author: $authorId) {
+              proposals(first: 50, affiliations: [OWNER]) {
                 ...ProposalList_proposals
                 totalCount
               }
             }
-            viewer @include(if: $isAuthenticated) {
+            viewer {
               ...ProposalList_viewer
             }
           }
@@ -45,12 +43,12 @@ export default ({ authorId, isAuthenticated }: { authorId: string, isAuthenticat
               return (
                 <div>
                   {props.proposalForms.filter(p => p.proposals.totalCount > 0).map(proposalForm => (
-                    <div key={proposalForm.id}>
+                    <div>
                       <h3>{proposalForm.step.title}</h3>
                       <ProposalList
                         step={null}
                         proposals={proposalForm.proposals}
-                        viewer={props.viewer || null}
+                        viewer={props.viewer}
                       />
                     </div>
                   ))}
