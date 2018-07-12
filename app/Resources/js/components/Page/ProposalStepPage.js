@@ -161,7 +161,8 @@ export class ProposalStepPage extends React.Component<Props> {
                   <ProposalListView
                     step={props.step}
                     viewer={props.viewer || null}
-                    visible={selectedViewByStep === 'mosaic'}
+                    view={selectedViewByStep === 'mosaic' ? 'mosaic' : 'table'}
+                    visible={selectedViewByStep === 'mosaic' || selectedViewByStep === 'table'}
                   />
                 </div>
               );

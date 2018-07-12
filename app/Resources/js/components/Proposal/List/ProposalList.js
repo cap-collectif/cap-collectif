@@ -14,6 +14,7 @@ type Props = {
   step: ?ProposalList_step,
   proposals: ProposalList_proposals,
   viewer: ?ProposalList_viewer,
+  view?: string,
 };
 
 const classes = classNames({
@@ -42,9 +43,11 @@ const renderProposals = (proposals, step, viewer) => (
   </ul>
 );
 
+const renderProposalListTableView = () => <div>React boostrap table 2</div>;
+
 export class ProposalList extends React.Component<Props> {
   render() {
-    const { step, proposals, viewer } = this.props;
+    const { step, proposals, viewer, view } = this.props;
 
     if (proposals.totalCount === 0) {
       return (
@@ -60,12 +63,19 @@ export class ProposalList extends React.Component<Props> {
     return (
       <Row>
         {proposalsVisiblePublicly.edges &&
-          proposalsVisiblePublicly.edges.length > 0 &&
-          renderProposals(proposalsVisiblePublicly, step, viewer)}
+          proposalsVisiblePublicly.edges.length > 0 && (
+            <React.Fragment>
+              {view === 'mosaic'
+                ? renderProposals(proposalsVisiblePublicly, step, viewer)
+                : renderProposalListTableView()}
+            </React.Fragment>
+          )}
         {proposalsVisibleOnlyByViewer.edges &&
           proposalsVisibleOnlyByViewer.edges.length > 0 && (
             <VisibilityBox enabled>
-              {renderProposals(proposalsVisibleOnlyByViewer, step, viewer)}
+              {view === 'mosaic'
+                ? renderProposals(proposalsVisibleOnlyByViewer, step, viewer)
+                : renderProposalListTableView()}
             </VisibilityBox>
           )}
       </Row>

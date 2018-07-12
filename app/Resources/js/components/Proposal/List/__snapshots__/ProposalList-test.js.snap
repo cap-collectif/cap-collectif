@@ -21,44 +21,11 @@ exports[`<ProposalList /> should render a collectStep proposal list 1`] = `
   bsClass="row"
   componentClass="div"
 >
-  <ul
-    className="media-list proposal-preview-list opinion__list"
-  >
-    <ForwardRef(Relay(ProposalPreview))
-      key="0"
-      proposal={
-        Object {
-          "$fragmentRefs": null,
-          "id": "1",
-        }
-      }
-      step={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "id": "1",
-        }
-      }
-      viewer={null}
-    />
-    <ForwardRef(Relay(ProposalPreview))
-      key="1"
-      proposal={
-        Object {
-          "$fragmentRefs": null,
-          "id": "2",
-        }
-      }
-      step={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "id": "1",
-        }
-      }
-      viewer={null}
-    />
-  </ul>
+  <React.Fragment>
+    <div>
+      React boostrap table 2
+    </div>
+  </React.Fragment>
 </Row>
 `;
 
@@ -67,43 +34,10 @@ exports[`<ProposalList /> should render a selectionStep proposal list 1`] = `
   bsClass="row"
   componentClass="div"
 >
-  <ul
-    className="media-list proposal-preview-list opinion__list"
-  >
-    <ForwardRef(Relay(ProposalPreview))
-      key="0"
-      proposal={
-        Object {
-          "$fragmentRefs": null,
-          "id": "1",
-        }
-      }
-      step={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "id": "1",
-        }
-      }
-      viewer={null}
-    />
-    <ForwardRef(Relay(ProposalPreview))
-      key="1"
-      proposal={
-        Object {
-          "$fragmentRefs": null,
-          "id": "2",
-        }
-      }
-      step={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "id": "1",
-        }
-      }
-      viewer={null}
-    />
-  </ul>
+  <React.Fragment>
+    <div>
+      React boostrap table 2
+    </div>
+  </React.Fragment>
 </Row>
 `;

@@ -24,14 +24,21 @@ export class ToggleMapButton extends React.Component<Props> {
     return (
       <div
         id="step-view-toggle"
-        className="btn-group"
+        className="btn-group d-flex"
         style={{ width: '100%' }}
         role="group"
         aria-label="Step view">
         <Button
           bsStyle="default"
+          active={mode === 'table'}
+          onClick={this.handleClick.bind(this, 'table')}>
+          <i className="cap cap-android-menu" onClick={this.handleClick.bind(this, 'table')} />{' '}
+          {<FormattedMessage id="list-view" />}
+        </Button>
+        <Button
+          bsStyle="default"
           active={mode === 'mosaic'}
-          style={{ width: '50%' }}
+          style={{ flex: '1 0 auto' }}
           onClick={this.handleClick.bind(this, 'mosaic')}>
           <i className="cap cap-th-large" onClick={this.handleClick.bind(this, 'mosaic')} />{' '}
           {<FormattedMessage id="proposal.map.mosaic" />}
@@ -39,7 +46,6 @@ export class ToggleMapButton extends React.Component<Props> {
         <Button
           bsStyle="default"
           active={mode === 'map'}
-          style={{ width: '50%' }}
           onClick={this.handleClick.bind(this, 'map')}>
           <i className="cap cap-map-location" onClick={this.handleClick.bind(this, 'map')} />{' '}
           {<FormattedMessage id="proposal.map.map" />}

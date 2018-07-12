@@ -3,7 +3,7 @@
 exports[`<ToggleMapButton /> should render a toggle button with map selected 1`] = `
 <div
   aria-label="Step view"
-  className="btn-group"
+  className="btn-group d-flex"
   id="step-view-toggle"
   role="group"
   style={
@@ -19,9 +19,27 @@ exports[`<ToggleMapButton /> should render a toggle button with map selected 1`]
     bsStyle="default"
     disabled={false}
     onClick={[Function]}
+  >
+    <i
+      className="cap cap-android-menu"
+      onClick={[Function]}
+    />
+     
+    <FormattedMessage
+      id="list-view"
+      values={Object {}}
+    />
+  </Button>
+  <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="default"
+    disabled={false}
+    onClick={[Function]}
     style={
       Object {
-        "width": "50%",
+        "flex": "1 0 auto",
       }
     }
   >
@@ -42,11 +60,6 @@ exports[`<ToggleMapButton /> should render a toggle button with map selected 1`]
     bsStyle="default"
     disabled={false}
     onClick={[Function]}
-    style={
-      Object {
-        "width": "50%",
-      }
-    }
   >
     <i
       className="cap cap-map-location"
@@ -64,7 +77,7 @@ exports[`<ToggleMapButton /> should render a toggle button with map selected 1`]
 exports[`<ToggleMapButton /> should render a toggle button with mosaic selected 1`] = `
 <div
   aria-label="Step view"
-  className="btn-group"
+  className="btn-group d-flex"
   id="step-view-toggle"
   role="group"
   style={
@@ -74,6 +87,24 @@ exports[`<ToggleMapButton /> should render a toggle button with mosaic selected 
   }
 >
   <Button
+    active={false}
+    block={false}
+    bsClass="btn"
+    bsStyle="default"
+    disabled={false}
+    onClick={[Function]}
+  >
+    <i
+      className="cap cap-android-menu"
+      onClick={[Function]}
+    />
+     
+    <FormattedMessage
+      id="list-view"
+      values={Object {}}
+    />
+  </Button>
+  <Button
     active={true}
     block={false}
     bsClass="btn"
@@ -82,7 +113,7 @@ exports[`<ToggleMapButton /> should render a toggle button with mosaic selected 
     onClick={[Function]}
     style={
       Object {
-        "width": "50%",
+        "flex": "1 0 auto",
       }
     }
   >
@@ -103,11 +134,6 @@ exports[`<ToggleMapButton /> should render a toggle button with mosaic selected 
     bsStyle="default"
     disabled={false}
     onClick={[Function]}
-    style={
-      Object {
-        "width": "50%",
-      }
-    }
   >
     <i
       className="cap cap-map-location"

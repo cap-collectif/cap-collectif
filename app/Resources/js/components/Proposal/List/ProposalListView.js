@@ -82,6 +82,7 @@ type Props = {
   step: ProposalListView_step,
   viewer: ?ProposalListView_viewer,
   visible: boolean,
+  view: string,
 };
 type State = {
   isRefetching: boolean,
@@ -124,7 +125,7 @@ export class ProposalListView extends React.Component<Props, State> {
   };
 
   render() {
-    const { visible, step, viewer } = this.props;
+    const { visible, step, viewer, view } = this.props;
 
     if (!visible) {
       return null;
@@ -135,7 +136,7 @@ export class ProposalListView extends React.Component<Props, State> {
     }
 
     // $FlowFixMe
-    return <ProposalListViewPaginated step={step} viewer={viewer} />;
+    return <ProposalListViewPaginated step={step} viewer={viewer} view={view} />;
   }
 }
 
