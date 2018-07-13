@@ -179,7 +179,7 @@ export default createFragmentContainer(container, {
       @argumentDefinitions(hasVotableStep: { type: "Boolean", defaultValue: true }) {
       id
       ...ProposalVoteButtonWrapperFragment_viewer
-        @arguments(stepId: $stepId)
+        @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
         @include(if: $hasVotableStep)
     }
   `,

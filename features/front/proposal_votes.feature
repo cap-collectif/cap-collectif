@@ -118,14 +118,15 @@ Scenario: Logged in user that don't full fill requirements wants to vote...
   When I go to a project with requirement condition to vote and classement
   And I vote for the first proposal
   Then I should see a proposal vote modal
-  And I should see "vote-modal-title"
-  Then I didn't full fill requirements conditions
-  And I cannot confirm my vote
+  Given I didn't full fill requirements conditions
+  Then I cannot confirm my vote
   Then I full fill the requirements conditions
-  And I can confirm my vote
-  Then I should see "proposal.vote.hasVoted"
-  And I click on button "#proposal-vote-btn-proposal25"
-  Then I should see "vote-modal-title"
+  And I confirm my vote
+  # We delete the vote
+  And I vote for the first proposal
+  And I wait 2 seconds
+  # We vote again
+  And I vote for the first proposal
   And I should see "requirements filled"
   And the button "global.validate" should not be disabled
   Then I click on button "#confirm-proposal-vote"
