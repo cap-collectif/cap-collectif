@@ -37,6 +37,8 @@ class OauthConnectController extends ConnectController
         $connect = $this->container->getParameter('hwi_oauth.connect');
         $hasUser = $this->container
             ->get('security.token_storage')
+            ->getToken()
+            ->getUser()
             ->isGranted('IS_AUTHENTICATED_REMEMBERED');
 
         $error = $this->getErrorForRequest($request);

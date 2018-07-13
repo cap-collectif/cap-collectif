@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Controller\Site;
 
 use Box\Spout\Common\Type;
@@ -12,7 +13,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use Capco\AppBundle\EventListener\GraphQlAclListener;
 
 const USER_FRAGMENT = '
   id
@@ -42,28 +42,28 @@ const USER_FRAGMENT = '
 ';
 
 const USER_HEADERS = [
-    'user_id',
-    'user_email',
-    'user_userName',
-    'user_TypeName',
-    'user_createdAt',
-    'user_updatedAt',
-    'user_expired',
-    'user_lastLogin',
-    'user_rolesText',
-    'user_consentExternalCommunication',
-    'user_enabled',
-    'user_locked',
-    'user_phoneConfirmed',
-    'user_gender',
-    'user_dateOfBirth',
-    'user_websiteUrl',
-    'user_biography',
-    'user_address',
-    'user_zipCode',
-    'user_city',
-    'user_phone',
-    'user_profileUrl',
+  'user_id',
+  'user_email',
+  'user_userName',
+  'user_TypeName',
+  'user_createdAt',
+  'user_updatedAt',
+  'user_expired',
+  'user_lastLogin',
+  'user_rolesText',
+  'user_consentExternalCommunication',
+  'user_enabled',
+  'user_locked',
+  'user_phoneConfirmed',
+  'user_gender',
+  'user_dateOfBirth',
+  'user_websiteUrl',
+  'user_biography',
+  'user_address',
+  'user_zipCode',
+  'user_city',
+  'user_phone',
+  'user_profileUrl',
 ];
 
 class ExportController extends Controller
@@ -73,16 +73,11 @@ class ExportController extends Controller
      * @ParamConverter("event", options={"mapping": {"eventId": "id"}})
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function downloadEventParticipantsAction(
-        Event $event,
-        Request $request
-    ): StreamedResponse {
-        $requestString =
-            '
+    public function downloadEventParticipantsAction(Event $event, Request $request): StreamedResponse
+    {
+        $requestString = '
 query {
-  node(id: "' .
-            $event->getId() .
-            '") {
+  node(id: "' . $event->getId() . '") {
     ... on Event {
       participants(first: 1000) {
         edges {
@@ -90,9 +85,7 @@ query {
           registeredAnonymously
           node {
             ... on User {
-              ' .
-            USER_FRAGMENT .
-            '
+              ' . USER_FRAGMENT . '
             }
             ... on NotRegistered {
               username
@@ -104,108 +97,105 @@ query {
     }
   }
 }';
-
-        $this->get(GraphQlAclListener::class)->disableAcl();
         $executor = $this->get('overblog_graphql.request_executor');
 
-        $data = $executor->execute(null, ['query' => $requestString, 'variables' => []])->toArray();
+        $data = $executor->execute([
+          'query' => $requestString,
+          'variables' => [],
+        ], ['disable_acl' => true])->toArray();
 
         if (!isset($data['data'])) {
             $this->get('logger')->error('GraphQL Query Error: ' . $data['error']);
             $this->get('logger')->info('GraphQL query: ' . json_encode($data));
         }
 
-        $fileName =
-            (new \DateTime())->format('Y-m-d') .
-            '-registeredAttendees-' .
-            $event->getSlug() .
-            '.csv';
+        $fileName = (new \DateTime())->format('Y-m-d') . '-registeredAttendees-' . $event->getSlug() . '.csv';
 
         $writer = WriterFactory::create(Type::CSV);
 
         $response = new StreamedResponse(function () use ($writer, $data) {
             $writer->openToFile('php://output');
             $writer->addRow([
-                'user_id',
-                'user_email',
-                'user_userName',
-                'user_TypeName',
-                'event_RegisteredOn',
-                'event_privateRegistration',
-                'user_createdAt',
-                'user_updatedAt',
-                'user_expired',
-                'user_lastLogin',
-                'user_rolesText',
-                'user_consentExternalCommunication',
-                'user_enabled',
-                'user_locked',
-                'user_phoneConfirmed',
-                'user_gender',
-                'user_dateOfBirth',
-                'user_websiteUrl',
-                'user_biography',
-                'user_address',
-                'user_zipCode',
-                'user_city',
-                'user_phone',
-                'user_profileUrl',
+              'user_id',
+              'user_email',
+              'user_userName',
+              'user_TypeName',
+              'event_RegisteredOn',
+              'event_privateRegistration',
+              'user_createdAt',
+              'user_updatedAt',
+              'user_expired',
+              'user_lastLogin',
+              'user_rolesText',
+              'user_consentExternalCommunication',
+              'user_enabled',
+              'user_locked',
+              'user_phoneConfirmed',
+              'user_gender',
+              'user_dateOfBirth',
+              'user_websiteUrl',
+              'user_biography',
+              'user_address',
+              'user_zipCode',
+              'user_city',
+              'user_phone',
+              'user_profileUrl',
             ]);
             foreach ($data['data']['node']['participants']['edges'] as $edge) {
                 $participant = $edge['node'];
                 if (isset($participant['id'])) {
                     $writer->addRow([
-                        $participant['id'],
-                        $participant['email'],
-                        $participant['username'],
-                        $participant['userType'] ? $participant['userType']['name'] : null,
-                        $edge['registeredAt'],
-                        $edge['registeredAnonymously'] ? 'yes' : 'no',
-                        $participant['createdAt'],
-                        $participant['updatedAt'],
-                        $participant['expired'],
-                        $participant['lastLogin'],
-                        $participant['rolesText'],
-                        $participant['consentExternalCommunication'],
-                        $participant['enabled'],
-                        $participant['locked'],
-                        $participant['phoneConfirmed'],
-                        $participant['gender'],
-                        $participant['dateOfBirth'],
-                        $participant['website'],
-                        $participant['biography'],
-                        $participant['address'],
-                        $participant['zipCode'],
-                        $participant['city'],
-                        $participant['phone'],
-                        $participant['show_url'],
+                      $participant['id'],
+                      $participant['email'],
+                      $participant['username'],
+                      $participant['userType'] ? $participant['userType']['name'] : null,
+                      $edge['registeredAt'],
+                      $edge['registeredAnonymously'] ? 'yes' : 'no',
+                      $participant['createdAt'],
+                      $participant['updatedAt'],
+                      $participant['expired'],
+                      $participant['lastLogin'],
+                      $participant['rolesText'],
+                      $participant['consentExternalCommunication'],
+                      $participant['enabled'],
+                      $participant['locked'],
+                      $participant['phoneConfirmed'],
+                      $participant['gender'],
+                      $participant['dateOfBirth'],
+                      $participant['website'],
+                      $participant['biography'],
+                      $participant['address'],
+                      $participant['zipCode'],
+                      $participant['city'],
+                      $participant['phone'],
+                      $participant['show_url'],
                     ]);
                 } else {
                     $writer->addRow([
-                        null,
-                        $participant['notRegisteredEmail'],
-                        $participant['username'],
-                        null,
-                        $edge['registeredAt'],
-                        $edge['registeredAnonymously'] ? 'yes' : 'no',
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
+                      null,
+                      $participant['notRegisteredEmail'],
+                      $participant['username'],
+                      null,
+                      $edge['registeredAt'],
+                      $edge['registeredAnonymously'] ? 'yes' : 'no',
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
+                      null,
                     ]);
                 }
             }
@@ -223,41 +213,35 @@ query {
      * @ParamConverter("project", options={"mapping": {"projectId": "id"}})
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function downloadProjectContributorsAction(
-        Project $project,
-        Request $request
-    ): StreamedResponse {
-        $requestString =
-            '
+    public function downloadProjectContributorsAction(Project $project, Request $request): StreamedResponse
+    {
+        $requestString = '
 query {
-  node(id: "' .
-            $project->getId() .
-            '") {
+  node(id: "' . $project->getId() . '") {
     ... on Project {
       contributors(first: 1000) {
         edges {
           node {
-            ' .
-            USER_FRAGMENT .
-            '
+            ' . USER_FRAGMENT . '
           }
         }
       }
     }
   }
 }';
-        $this->get(GraphQlAclListener::class)->disableAcl();
         $executor = $this->get('overblog_graphql.request_executor');
 
-        $data = $executor->execute(null, ['query' => $requestString, 'variables' => []])->toArray();
+        $data = $executor->execute([
+          'query' => $requestString,
+          'variables' => [],
+        ], ['disable_acl' => true])->toArray();
 
         if (!isset($data['data'])) {
             $this->get('logger')->error('GraphQL Query Error: ' . $data['error']);
             $this->get('logger')->info('GraphQL query: ' . json_encode($data));
         }
 
-        $fileName =
-            (new \DateTime())->format('Y-m-d') . '_participants_' . $project->getSlug() . '.csv';
+        $fileName = (new \DateTime())->format('Y-m-d') . '_participants_' . $project->getSlug() . '.csv';
         $writer = WriterFactory::create(Type::CSV);
 
         $response = new StreamedResponse(function () use ($writer, $data) {
@@ -304,23 +288,16 @@ query {
      * @ParamConverter("step", options={"mapping": {"stepId": "id"}})
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function downloadStepContributorsAction(
-        AbstractStep $step,
-        Request $request
-    ): StreamedResponse {
-        $requestString =
-            '
+    public function downloadStepContributorsAction(AbstractStep $step, Request $request): StreamedResponse
+    {
+        $requestString = '
 query {
-  node(id: "' .
-            $step->getId() .
-            '") {
+  node(id: "' . $step->getId() . '") {
     ... on Consultation {
       contributors(first: 1000) {
         edges {
           node {
-            ' .
-            USER_FRAGMENT .
-            '
+            ' . USER_FRAGMENT . '
           }
         }
       }
@@ -329,9 +306,7 @@ query {
       contributors(first: 1000) {
         edges {
           node {
-            ' .
-            USER_FRAGMENT .
-            '
+            ' . USER_FRAGMENT . '
           }
         }
       }
@@ -340,9 +315,7 @@ query {
       contributors(first: 1000) {
         edges {
           node {
-            ' .
-            USER_FRAGMENT .
-            '
+            ' . USER_FRAGMENT . '
           }
         }
       }
@@ -351,27 +324,26 @@ query {
       contributors(first: 1000) {
         edges {
           node {
-            ' .
-            USER_FRAGMENT .
-            '
+            ' . USER_FRAGMENT . '
           }
         }
       }
     }
   }
 }';
-        $this->get(GraphQlAclListener::class)->disableAcl();
         $executor = $this->get('overblog_graphql.request_executor');
 
-        $data = $executor->execute(null, ['query' => $requestString, 'variables' => []])->toArray();
+        $data = $executor->execute([
+          'query' => $requestString,
+          'variables' => [],
+        ], ['disable_acl' => true])->toArray();
 
         if (!isset($data['data'])) {
             $this->get('logger')->error('GraphQL Query Error: ' . $data['error']);
             $this->get('logger')->info('GraphQL query: ' . json_encode($data));
         }
 
-        $fileName =
-            (new \DateTime())->format('Y-m-d') . '_participants_' . $step->getSlug() . '.csv';
+        $fileName = (new \DateTime())->format('Y-m-d') . '_participants_' . $step->getSlug() . '.csv';
         $writer = WriterFactory::create(Type::CSV);
 
         $response = new StreamedResponse(function () use ($writer, $data) {

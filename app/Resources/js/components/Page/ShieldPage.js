@@ -14,12 +14,11 @@ type Props = {
   showRegistration: boolean,
   submitting: boolean,
   onSubmit: (e: Event) => void,
-  chartBody: ?string,
 };
 
 export class ShieldPage extends React.Component<Props> {
   render() {
-    const { showRegistration, submitting, onSubmit, chartBody }: Props = this.props;
+    const { showRegistration, submitting, onSubmit }: Props = this.props;
     if (showRegistration) {
       return (
         <div
@@ -28,7 +27,7 @@ export class ShieldPage extends React.Component<Props> {
           <div className="panel-body">
             <LoginButton className="btn--connection btn-block" />
             <div style={{ marginTop: 10 }} />
-            <RegistrationButton chartBody={chartBody} className="btn-block" />
+            <RegistrationButton className="btn-block" />
           </div>
         </div>
       );

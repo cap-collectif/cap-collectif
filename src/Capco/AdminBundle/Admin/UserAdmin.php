@@ -13,15 +13,23 @@ class UserAdmin extends BaseAdmin
 
     public function getTemplate($name)
     {
-        if ('delete' === $name) {
-            return 'CapcoAdminBundle:User:delete.html.twig';
-        }
-
         if ('edit' === $name) {
             return 'CapcoAdminBundle:User:edit.html.twig';
         }
 
         return parent::getTemplate($name);
+    }
+
+    public function getBatchActions()
+    {
+        // have to get at least one batch action to display number of users
+        $actions = parent::getBatchActions();
+        $actions['nothing'] = [
+            'label' => '',
+            'translation_domain' => 'SonataAdminBundle',
+            'ask_confirmation' => false,
+        ];
+        return $actions;
     }
 
     // For mosaic view
@@ -82,6 +90,6 @@ class UserAdmin extends BaseAdmin
      */
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(['list', 'edit', 'show', 'delete', 'export']);
+        $collection->clearExcept(['batch', 'list', 'edit', 'show', 'export']);
     }
 }

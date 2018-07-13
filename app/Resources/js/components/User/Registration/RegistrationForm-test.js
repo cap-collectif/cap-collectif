@@ -16,9 +16,6 @@ describe('<RegistrationForm />', () => {
     cguLink: '/charte',
     dynamicFields: [],
     organizationName: 'Cap Collectif',
-    dispatch: jest.fn(),
-    shieldEnabled: false,
-    chartBody: 'Super charte !!',
   };
 
   it('renders a form with inputs and a captcha', () => {

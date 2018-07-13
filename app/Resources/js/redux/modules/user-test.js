@@ -27,7 +27,6 @@ const initialState: State = {
     domains: [],
   },
   user: null,
-  displayChartModal: false,
   groupAdminUsersUserDeletionSuccessful: false,
   groupAdminUsersUserDeletionFailed: false,
 };

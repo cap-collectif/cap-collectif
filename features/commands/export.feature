@@ -10,7 +10,7 @@ Scenario: Admin wants to export consultation steps
 
 @parallel-scenario
 Scenario: Admin wants to export collect steps
-  Given I run "capco:export:proposalStep"
+  Given I run "capco:export:collect"
   Then the command exit code should be 0
 
 @parallel-scenario
