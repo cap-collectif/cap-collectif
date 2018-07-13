@@ -1,6 +1,6 @@
 // @flow
-import { graphql } from 'react-relay';
-// import { ConnectionHandler } from 'relay-runtime';
+import { graphql, type RecordSourceSelectorProxy } from 'react-relay';
+import { ConnectionHandler } from 'relay-runtime';
 import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
 import type {
@@ -19,57 +19,58 @@ const mutation = graphql`
   }
 `;
 
-// function sharedUpdater(store, SourceableID, type, deletedID) {
-//   const SourceableProxy = store.get(SourceableID);
-//   if (!SourceableProxy) {
-//     return;
-//   }
-//   const allOrderBy = [
-//     { direction: 'DESC', field: 'CREATED_AT' },
-//     { direction: 'ASC', field: 'CREATED_AT' },
-//     { direction: 'DESC', field: 'VOTES' },
-//   ];
-//   for (const orderBy of allOrderBy) {
-//     const connection = ConnectionHandler.getConnection(
-//       SourceableProxy,
-//       'SourceListViewPaginated_Sources',
-//       {
-//         type,
-//         orderBy,
-//       },
-//     );
-//     if (connection) {
-//       ConnectionHandler.deleteNode(connection, deletedID);
-//     }
-//   }
-// }
+function sharedUpdater(store, sourceableID, deletedID) {
+  const sourceableProxy = store.get(sourceableID);
+  if (!sourceableProxy) {
+    return;
+  }
+  const allOrderBy = [
+    { direction: 'DESC', field: 'CREATED_AT' },
+    { direction: 'ASC', field: 'CREATED_AT' },
+    { direction: 'DESC', field: 'VOTES' },
+  ];
+  for (const orderBy of allOrderBy) {
+    const connection = ConnectionHandler.getConnection(
+      sourceableProxy,
+      'OpinionSourceListViewPaginated_sources',
+      {
+        orderBy,
+      },
+    );
+    if (connection) {
+      ConnectionHandler.deleteNode(connection, deletedID);
+    }
+  }
+}
 
 const commit = (variables: DeleteSourceMutationVariables): Promise<DeleteSourceMutationResponse> =>
   commitMutation(environment, {
     mutation,
     variables,
-    // updater: store => {
-    //   const payload = store.getRootField('deleteSource');
-    //   const Sourceable = payload.getLinkedRecord('Sourceable');
+    updater: (store: RecordSourceSelectorProxy) => {
+      const payload = store.getRootField('deleteSource');
+      if (!payload) {
+        return;
+      }
+      const sourceable = payload.getLinkedRecord('sourceable');
+      if (!sourceable) {
+        return;
+      }
 
-    //   const id = Sourceable.getValue('id');
-    //   if (!id || typeof id !== 'string') {
-    //     return;
-    //   }
+      const id = sourceable.getValue('id');
+      if (!id || typeof id !== 'string') {
+        return;
+      }
 
-    //   sharedUpdater(store, id, type, payload.getValue('deletedSourceId'));
+      sharedUpdater(store, id, payload.getValue('deletedSourceId'));
 
-    //   // We update the "FOR" or "AGAINST" row Sources totalCount
-    //   const SourceableProxy = store.get(id);
-    //   const connection = ConnectionHandler.getConnection(
-    //     SourceableProxy,
-    //     'SourceList_allSources',
-    //     {
-    //       type,
-    //     },
-    //   );
-    //   connection.setValue(connection.getValue('totalCount') - 1, 'totalCount');
-    // },
+      // const sourceableProxy = store.get(id);
+      // const connection = ConnectionHandler.getConnection(
+      //   SourceableProxy,
+      //   'SourceList_allSources',
+      // );
+      // connection.setValue(connection.getValue('totalCount') - 1, 'totalCount');
+    },
   });
 
 export default { commit };

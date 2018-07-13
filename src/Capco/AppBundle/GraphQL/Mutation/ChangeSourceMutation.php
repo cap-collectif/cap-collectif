@@ -32,7 +32,7 @@ class ChangeSourceMutation implements MutationInterface
         $this->redisStorage = $redisStorage;
     }
 
-    public function __invoke(Arg $input, User $user): array
+    public function __invoke(Arg $input, User $viewer): array
     {
         $sourceId = $input->offsetGet('sourceId');
         $source = $this->sourceRepo->find($sourceId);
@@ -41,7 +41,7 @@ class ChangeSourceMutation implements MutationInterface
             throw new UserError('Unknown source with id: ' . $sourceId);
         }
 
-        if ($user !== $source->getAuthor()) {
+        if ($viewer !== $source->getAuthor()) {
             throw new UserError("Can't update the source of someone else.");
         }
 

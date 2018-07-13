@@ -51,7 +51,7 @@ class AddSourceMutation implements MutationInterface
         $this->logger = $logger;
     }
 
-    public function __invoke(Arg $input, User $author): array
+    public function __invoke(Arg $input, User $viewer): array
     {
         $sourceableId = $input->offsetGet('sourceableId');
         $sourceable = $this->opinionRepo->find($sourceableId);
@@ -79,7 +79,7 @@ class AddSourceMutation implements MutationInterface
             return ['source' => null, 'sourceEdge' => null, 'userErrors' => [$error]];
         }
 
-        // if (\count($this->sourceRepo->findCreatedSinceIntervalByAuthor($author, 'PT1M')) >= 2) {
+        // if (\count($this->sourceRepo->findCreatedSinceIntervalByAuthor($viewer, 'PT1M')) >= 2) {
         //     $this->logger->error('You contributed too many times.');
         //     $error = ['message' => 'You contributed too many times.'];
         //     return ['source' => null, 'sourceEdge' => null, 'userErrors' => [$error]];
@@ -88,7 +88,7 @@ class AddSourceMutation implements MutationInterface
         $source = (new Source()) // ->setUpdatedAt(new \Datetime())
             ->setType(Source::LINK)
             ->setIsEnabled(true)
-            ->setAuthor($author);
+            ->setAuthor($viewer);
         if ($sourceable instanceof Opinion) {
             $source->setOpinion($sourceable);
         }
@@ -110,7 +110,7 @@ class AddSourceMutation implements MutationInterface
         $this->em->persist($source);
         $this->em->flush();
 
-        $this->redisStorage->recomputeUserCounters($author);
+        $this->redisStorage->recomputeUserCounters($viewer);
 
         $edge = new Edge(ConnectionBuilder::offsetToCursor(0), $source);
 

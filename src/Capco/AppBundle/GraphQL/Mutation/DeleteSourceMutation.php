@@ -25,7 +25,7 @@ class DeleteSourceMutation implements MutationInterface
         $this->redisStorage = $redisStorage;
     }
 
-    public function __invoke(Arg $input, User $user): array
+    public function __invoke(Arg $input, User $viewer): array
     {
         $sourceId = $input->offsetGet('sourceId');
         $source = $this->sourceRepo->find($sourceId);
@@ -34,22 +34,18 @@ class DeleteSourceMutation implements MutationInterface
             throw new UserError('Unknown source with id: ' . $sourceId);
         }
 
-        if ($user !== $source->getAuthor()) {
+        if ($viewer !== $source->getAuthor()) {
             throw new UserError('You are not the author of source with id: ' . $sourceId);
-        }
-
-        if (!$source->canBeDeleted()) {
-            throw new UserError('Uncontributable source.');
         }
 
         $sourceable = $source->getRelated();
 
         // Sync ?
-        $sourceable->decreaseSourcesCount();
+        //$sourceable->decreaseSourcesCount();
 
         $this->em->remove($source);
         $this->em->flush();
-        $this->redisStorage->recomputeUserCounters($user);
+        $this->redisStorage->recomputeUserCounters($viewer);
 
         return ['sourceable' => $sourceable, 'deletedSourceId' => $sourceId];
     }
