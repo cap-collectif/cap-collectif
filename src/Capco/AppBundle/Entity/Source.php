@@ -1,20 +1,24 @@
 <?php
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
-use Capco\AppBundle\Entity\Interfaces\VotableInterface;
-use Capco\AppBundle\Model\Contribution;
-use Capco\AppBundle\Model\IsPublishableInterface;
-use Capco\AppBundle\Traits\ExpirableTrait;
-use Capco\AppBundle\Traits\TextableTrait;
+use Doctrine\ORM\Mapping as ORM;
+use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\Category;
+use Capco\AppBundle\Model\Sourceable;
 use Capco\AppBundle\Traits\UuidTrait;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Model\Contribution;
+use Capco\AppBundle\Traits\TextableTrait;
+use Capco\AppBundle\Entity\OpinionVersion;
+use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\ValidableTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
-use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Model\IsPublishableInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Entity\Interfaces\VotableInterface;
+use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
 
 /**
  * @ORM\Table(name="source")
@@ -65,7 +69,7 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
     private $createdAt;
 
     /**
-     * @Gedmo\Timestampable(on="change", field={"title", "link", "body", "Author", "Opinion", "category", "media", "type"})
+     * @Gedmo\Timestampable(on="change", field={"title", "link", "body", "author", "opinion", "category", "media", "type"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
@@ -79,13 +83,13 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="sources")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
-    private $Author;
+    private $author;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="Sources", cascade={"persist"})
      * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
-    private $Opinion;
+    private $opinion;
 
     // ONE OF opinion or opinionVersion : should be in separate classes TODO
     /**
@@ -118,29 +122,22 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
     private $type;
 
     /**
-     * @var
-     *
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Reporting", mappedBy="Source", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $Reports;
+    private $reports;
 
     /**
-     * @var bool
-     *
      * @ORM\Column(name="is_trashed", type="boolean")
      */
     private $isTrashed = false;
 
     /**
-     * @var \DateTime
      * @Gedmo\Timestampable(on="change", field={"isTrashed"})
      * @ORM\Column(name="trashed_at", type="datetime", nullable=true)
      */
     private $trashedAt = null;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="trashed_reason", type="text", nullable=true)
      */
     private $trashedReason = null;
@@ -148,7 +145,7 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
     public function __construct()
     {
         $this->type = self::LINK;
-        $this->Reports = new ArrayCollection();
+        $this->reports = new ArrayCollection();
         $this->votes = new ArrayCollection();
         $this->updatedAt = new \DateTime();
     }
@@ -290,51 +287,37 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getAuthor()
+    public function getAuthor(): ?User
     {
-        return $this->Author;
+        return $this->author;
     }
 
-    /**
-     * @param mixed $Author
-     */
-    public function setAuthor($Author)
+    public function setAuthor(User $author): self
     {
-        $this->Author = $Author;
+        $this->author = $author;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getOpinion()
+    public function getOpinion(): ?Opinion
     {
-        return $this->Opinion;
+        return $this->opinion;
     }
 
-    /**
-     * @param mixed $Opinion
-     *
-     * @return $this
-     */
-    public function setOpinion($Opinion)
+    public function setOpinion(?Opinion $opinion): self
     {
-        $this->Opinion = $Opinion;
-        $this->Opinion->addSource($this);
+        $this->opinion = $opinion;
+        $this->opinion->addSource($this);
 
         return $this;
     }
 
-    public function getOpinionVersion()
+    public function getOpinionVersion(): ?OpinionVersion
     {
         return $this->opinionVersion;
     }
 
-    public function setOpinionVersion($opinionVersion)
+    public function setOpinionVersion(?OpinionVersion $opinionVersion): self
     {
         $this->opinionVersion = $opinionVersion;
         $this->opinionVersion->addSource($this);
@@ -342,12 +325,12 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
         return $this;
     }
 
-    public function getCategory()
+    public function getCategory(): ?Category
     {
         return $this->category;
     }
 
-    public function setCategory($category): self
+    public function setCategory(Category $category): self
     {
         $this->category = $category;
         $this->category->addSource($this);
@@ -367,17 +350,11 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getType()
     {
         return $this->type;
     }
 
-    /**
-     * @param mixed $type
-     */
     public function setType($type)
     {
         $this->type = $type;
@@ -385,63 +362,38 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getReports()
     {
-        return $this->Reports;
+        return $this->reports;
     }
 
-    /**
-     * @param Reporting $report
-     *
-     * @return $this
-     */
-    public function addReport(Reporting $report)
+    public function addReport(Reporting $report): self
     {
-        if (!$this->Reports->contains($report)) {
-            $this->Reports->add($report);
+        if (!$this->reports->contains($report)) {
+            $this->reports->add($report);
         }
 
         return $this;
     }
 
-    /**
-     * @param Reporting $report
-     *
-     * @return $this
-     */
-    public function removeReport(Reporting $report)
+    public function removeReport(Reporting $report): self
     {
-        $this->Reports->removeElement($report);
+        $this->reports->removeElement($report);
 
         return $this;
     }
 
-    /**
-     * Get isTrashed.
-     *
-     * @return bool
-     */
-    public function getIsTrashed()
+    public function getIsTrashed(): bool
     {
         return $this->isTrashed;
     }
 
-    public function isTrashed()
+    public function isTrashed(): bool
     {
         return $this->isTrashed;
     }
 
-    /**
-     * Set isTrashed.
-     *
-     * @param bool $isTrashed
-     *
-     * @return Source
-     */
-    public function setIsTrashed($isTrashed)
+    public function setIsTrashed(bool $isTrashed): self
     {
         if ($isTrashed !== $this->isTrashed) {
             if (false === $this->isTrashed) {
@@ -454,48 +406,24 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
         return $this;
     }
 
-    /**
-     * Get trashedAt.
-     *
-     * @return \DateTime
-     */
-    public function getTrashedAt()
+    public function getTrashedAt(): ?\DateTime
     {
         return $this->trashedAt;
     }
 
-    /**
-     * Set trashedAt.
-     *
-     * @param \DateTime $trashedAt
-     *
-     * @return Source
-     */
-    public function setTrashedAt($trashedAt)
+    public function setTrashedAt(?\DateTime $trashedAt): self
     {
         $this->trashedAt = $trashedAt;
 
         return $this;
     }
 
-    /**
-     * Get trashedReason.
-     *
-     * @return string
-     */
-    public function getTrashedReason()
+    public function getTrashedReason(): ?string
     {
         return $this->trashedReason;
     }
 
-    /**
-     * Set trashedReason.
-     *
-     * @param string $trashedReason
-     *
-     * @return Source
-     */
-    public function setTrashedReason($trashedReason)
+    public function setTrashedReason(?string $trashedReason): self
     {
         $this->trashedReason = $trashedReason;
 
@@ -506,31 +434,26 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
 
     public function getLinkedOpinion()
     {
-        if ($this->Opinion) {
-            return $this->Opinion;
+        if ($this->opinion) {
+            return $this->opinion;
         }
 
         return $this->opinionVersion->getParent();
     }
 
-    public function getParent()
+    public function getParent(): Sourceable
     {
         if ($this->opinionVersion) {
             return $this->opinionVersion;
         }
 
-        return $this->Opinion;
+        return $this->opinion;
     }
 
-    /**
-     * @param User $user
-     *
-     * @return bool
-     */
-    public function userHasReport(User $user = null)
+    public function userHasReport(User $user = null): bool
     {
         if (null !== $user) {
-            foreach ($this->Reports as $report) {
+            foreach ($this->reports as $report) {
                 if ($report->getReporter() === $user) {
                     return true;
                 }
@@ -540,26 +463,17 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
         return false;
     }
 
-    /**
-     * @return bool
-     */
-    public function canDisplay()
+    public function canDisplay(): bool
     {
         return $this->isEnabled && $this->getParent()->canDisplay();
     }
 
-    /**
-     * @return bool
-     */
-    public function canContribute()
+    public function canContribute(): bool
     {
         return $this->isEnabled && !$this->isTrashed && $this->getParent()->canContribute();
     }
 
-    /**
-     * @return bool
-     */
-    public function isPublished()
+    public function isPublished(): bool
     {
         return $this->isEnabled && !$this->isTrashed && $this->getParent()->isPublished();
     }
@@ -574,8 +488,8 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
         if (null !== $this->category) {
             $this->category->removeSource($this);
         }
-        if (null !== $this->Opinion) {
-            $this->Opinion->removeSource($this);
+        if (null !== $this->opinion) {
+            $this->opinion->removeSource($this);
         }
         if (null !== $this->opinionVersion) {
             $this->opinionVersion->removeSource($this);

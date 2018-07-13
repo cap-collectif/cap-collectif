@@ -30,7 +30,7 @@ class SourceRepository extends EntityRepository
                 's.isTrashed as trashed'
             )
             ->where('s.validated = :validated')
-            ->leftJoin('s.Author', 'a')
+            ->leftJoin('s.author', 'a')
             ->leftJoin('a.userType', 'ut')
             ->setParameter('validated', false);
         return $qb->getQuery()->getArrayResult();
@@ -41,7 +41,7 @@ class SourceRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder();
 
         if ($sourceable instanceof Opinion) {
-            $qb->andWhere('s.Opinion = :opinion')->setParameter('opinion', $sourceable->getId());
+            $qb->andWhere('s.opinion = :opinion')->setParameter('opinion', $sourceable->getId());
         }
         if ($sourceable instanceof OpinionVersion) {
             $qb
@@ -84,30 +84,22 @@ class SourceRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('aut', 'ut', 'cat', 'media')
-            ->leftJoin('s.Author', 'aut')
+            ->leftJoin('s.author', 'aut')
             ->leftJoin('aut.userType', 'ut')
-            ->leftJoin('s.Category', 'cat')
+            ->leftJoin('s.category', 'cat')
             ->leftJoin('s.media', 'media')
-            ->andWhere('s.Opinion = :opinion')
+            ->andWhere('s.opinion = :opinion')
             ->setParameter('opinion', $opinionId);
         return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
     }
 
-    /**
-     * Get all by version.
-     *
-     * @param $versionId
-     * @param mixed $asArray
-     *
-     * @return mixed
-     */
     public function getAllByVersion(string $versionId, $asArray = false)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('aut', 'ut', 'cat', 'media')
-            ->leftJoin('s.Author', 'aut')
+            ->leftJoin('s.author', 'aut')
             ->leftJoin('aut.userType', 'ut')
-            ->leftJoin('s.Category', 'cat')
+            ->leftJoin('s.category', 'cat')
             ->leftJoin('s.media', 'media')
             ->andWhere('s.opinionVersion = :version')
             ->setParameter('version', $versionId);
@@ -127,7 +119,7 @@ class SourceRepository extends EntityRepository
                 's.isTrashed as trashed',
                 's.body as body'
             )
-            ->leftJoin('s.Author', 'a')
+            ->leftJoin('s.author', 'a')
             ->where('s.id = :id')
             ->setParameter('id', $id);
         return $qb->getQuery()->getOneOrNullResult(Query::HYDRATE_ARRAY);
@@ -137,13 +129,13 @@ class SourceRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('ca', 'o', 'aut', 'm', 'media')
-            ->leftJoin('s.Category', 'ca')
+            ->leftJoin('s.category', 'ca')
             ->leftJoin('s.media', 'media')
-            ->leftJoin('s.Opinion', 'o')
-            ->leftJoin('s.Author', 'aut')
+            ->leftJoin('s.opinion', 'o')
+            ->leftJoin('s.author', 'aut')
             ->leftJoin('aut.media', 'm')
             ->andWhere('s.isTrashed = :trashed')
-            ->andWhere('s.Opinion = :opinion')
+            ->andWhere('s.opinion = :opinion')
             ->setParameter('opinion', $opinion)
             ->setParameter('trashed', $trashed);
         if ('old' === $filter) {
@@ -171,10 +163,10 @@ class SourceRepository extends EntityRepository
     ) {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('ca', 'o', 'aut', 'm', 'media')
-            ->leftJoin('s.Category', 'ca')
+            ->leftJoin('s.category', 'ca')
             ->leftJoin('s.media', 'media')
-            ->leftJoin('s.Opinion', 'o')
-            ->leftJoin('s.Author', 'aut')
+            ->leftJoin('s.opinion', 'o')
+            ->leftJoin('s.author', 'aut')
             ->leftJoin('aut.media', 'm')
             ->andWhere('s.isTrashed = :trashed')
             ->andWhere('s.opinionVersion = :version')
@@ -196,25 +188,16 @@ class SourceRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    /**
-     * Get one source by slug.
-     *
-     * @param $source
-     *
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     *
-     * @return mixed
-     */
     public function getOneBySlug(string $slug)
     {
         return $this->getIsEnabledQueryBuilder()
             ->addSelect('a', 'm', 'v', 'o', 'cat', 'media')
-            ->leftJoin('s.Author', 'a')
+            ->leftJoin('s.author', 'a')
             ->leftJoin('s.media', 'media')
-            ->leftJoin('s.Category', 'cat')
+            ->leftJoin('s.category', 'cat')
             ->leftJoin('a.media', 'm')
             ->leftJoin('s.votes', 'v')
-            ->leftJoin('s.Opinion', 'o')
+            ->leftJoin('s.opinion', 'o')
             ->andWhere('s.slug = :slug')
             ->setParameter('slug', $slug)
 
@@ -226,7 +209,7 @@ class SourceRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(DISTINCT s)')
-            ->leftJoin('s.Opinion', 'o')
+            ->leftJoin('s.opinion', 'o')
             ->leftJoin('s.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'ovo')
             ->leftJoin('o.step', 'ostep')
@@ -234,7 +217,7 @@ class SourceRepository extends EntityRepository
             ->leftJoin('ostep.projectAbstractStep', 'opas')
             ->leftJoin('ovostep.projectAbstractStep', 'ovopas')
             ->andWhere('opas.project = :project OR ovopas.project = :project')
-            ->andWhere('s.Author = :author')
+            ->andWhere('s.author = :author')
             ->setParameter('project', $project)
             ->setParameter('author', $author);
         return $qb->getQuery()->getSingleScalarResult();
@@ -244,11 +227,11 @@ class SourceRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(DISTINCT s)')
-            ->leftJoin('s.Opinion', 'o')
+            ->leftJoin('s.opinion', 'o')
             ->leftJoin('s.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'ovo')
             ->andWhere('o.step = :step OR ovo.step = :step')
-            ->andWhere('s.Author = :author')
+            ->andWhere('s.author = :author')
             ->setParameter('step', $step)
             ->setParameter('author', $author);
         return $qb->getQuery()->getSingleScalarResult();
@@ -261,11 +244,11 @@ class SourceRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('s')
             ->addSelect('ca', 'o', 'aut', 'm', 'media')
-            ->leftJoin('s.Category', 'ca')
+            ->leftJoin('s.category', 'ca')
             ->leftJoin('s.media', 'media')
-            ->leftJoin('s.Author', 'aut')
+            ->leftJoin('s.author', 'aut')
             ->leftJoin('aut.media', 'm')
-            ->leftJoin('s.Opinion', 'o')
+            ->leftJoin('s.opinion', 'o')
             ->leftJoin('s.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'ovo')
             ->leftJoin('o.step', 'ostep')
@@ -284,24 +267,19 @@ class SourceRepository extends EntityRepository
 
     /**
      * Get sources by opinion with user reports.
-     *
-     * @param $opinion
-     * @param $user
-     *
-     * @return mixed
      */
     public function getByOpinionJoinUserReports($opinion, $user = null)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('ca', 'o', 'aut', 'm', 'media', 'r')
-            ->leftJoin('s.Category', 'ca')
+            ->leftJoin('s.category', 'ca')
             ->leftJoin('s.media', 'media')
-            ->leftJoin('s.Opinion', 'o')
-            ->leftJoin('s.Author', 'aut')
+            ->leftJoin('s.opinion', 'o')
+            ->leftJoin('s.author', 'aut')
             ->leftJoin('aut.media', 'm')
-            ->leftJoin('s.Reports', 'r', 'WITH', 'r.Reporter =  :user')
+            ->leftJoin('s.reports', 'r', 'WITH', 'r.Reporter =  :user')
             ->andWhere('s.isTrashed = :notTrashed')
-            ->andWhere('s.Opinion = :opinion')
+            ->andWhere('s.opinion = :opinion')
             ->setParameter('notTrashed', false)
             ->setParameter('opinion', $opinion)
             ->setParameter('user', $user)
@@ -322,15 +300,15 @@ class SourceRepository extends EntityRepository
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('ca', 'o', 'ov', 'aut', 'votes')
-            ->leftJoin('s.Category', 'ca')
-            ->leftJoin('s.Author', 'aut')
+            ->leftJoin('s.category', 'ca')
+            ->leftJoin('s.author', 'aut')
             ->leftJoin('s.votes', 'votes')
-            ->leftJoin('s.Opinion', 'o')
+            ->leftJoin('s.opinion', 'o')
             ->leftJoin('s.opinionVersion', 'ov')
             ->leftJoin('ov.parent', 'ovo')
             ->andWhere(
                 '
-                (s.Opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = :step)
+                (s.opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = :step)
                 OR
                 (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovo.step = :step)
             '
@@ -346,7 +324,7 @@ class SourceRepository extends EntityRepository
         $qb = $this->createQueryBuilder('s');
         $qb
             ->select('count(DISTINCT s)')
-            ->andWhere('s.Author = :author')
+            ->andWhere('s.author = :author')
             ->setParameter('author', $user);
         return $qb->getQuery()->getSingleScalarResult();
     }
@@ -354,31 +332,27 @@ class SourceRepository extends EntityRepository
     public function findAllByAuthor(User $user): array
     {
         $qb = $this->createQueryBuilder('s');
-        $qb->andWhere('s.Author = :author')->setParameter('author', $user);
+        $qb->andWhere('s.author = :author')->setParameter('author', $user);
 
         return $qb->getQuery()->getResult();
     }
 
     /**
      * Get sources by user.
-     *
-     * @param $user
-     *
-     * @return mixed
      */
     public function getByUser($user)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('ca', 'o', 'cs', 'cas', 'c', 'aut', 'm', 'media')
-            ->leftJoin('s.Category', 'ca')
+            ->leftJoin('s.category', 'ca')
             ->leftJoin('s.media', 'media')
-            ->leftJoin('s.Opinion', 'o')
+            ->leftJoin('s.opinion', 'o')
             ->leftJoin('o.step', 'cs')
             ->leftJoin('cs.projectAbstractStep', 'cas')
             ->leftJoin('cas.project', 'c')
-            ->leftJoin('s.Author', 'aut')
+            ->leftJoin('s.author', 'aut')
             ->leftJoin('aut.media', 'm')
-            ->andWhere('s.Author = :author')
+            ->andWhere('s.author = :author')
             ->andWhere('o.isEnabled = :enabled')
             ->andWhere('cs.isEnabled = :enabled')
             ->andWhere('c.isEnabled = :enabled')
@@ -391,23 +365,19 @@ class SourceRepository extends EntityRepository
 
     /**
      * Count by user.
-     *
-     * @param $user
-     *
-     * @return mixed
      */
     public function countByUser($user)
     {
         $qb = $this->getIsEnabledQueryBuilder()
             ->select('COUNT(s) as TotalSources')
-            ->leftJoin('s.Opinion', 'o')
+            ->leftJoin('s.opinion', 'o')
             ->leftJoin('o.step', 'cs')
             ->leftJoin('cs.projectAbstractStep', 'cas')
             ->leftJoin('cas.project', 'c')
             ->andWhere('o.isEnabled = :enabled')
             ->andWhere('cs.isEnabled = :enabled')
             ->andWhere('c.isEnabled = :enabled')
-            ->andWhere('s.Author = :author')
+            ->andWhere('s.author = :author')
             ->setParameter('enabled', true)
             ->setParameter('author', $user);
 
