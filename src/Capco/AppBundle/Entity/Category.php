@@ -26,35 +26,30 @@ class Category
     private $slug;
 
     /**
-     * @var bool
-     *
      * @ORM\Column(name="isEnabled", type="boolean")
      */
     private $isEnabled;
 
     /**
-     * @var \DateTime
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
     /**
-     * @var \DateTime
      * @Gedmo\Timestampable(on="change", field={"title"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
 
     /**
-     * @var
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Source", mappedBy="Category",  cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Source", mappedBy="category",  cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $Sources;
+    private $sources;
 
     public function __construct()
     {
-        $this->Sources = new ArrayCollection();
+        $this->sources = new ArrayCollection();
         $this->updatedAt = new \Datetime();
     }
 
@@ -70,124 +65,69 @@ class Category
         }
     }
 
-    /**
-     * Get title.
-     *
-     * @return string
-     */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    /**
-     * Set title.
-     *
-     * @param string $title
-     *
-     * @return Category
-     */
-    public function setTitle($title)
+    public function setTitle(?string $title): self
     {
         $this->title = $title;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getSlug()
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    /**
-     * @param $slug
-     *
-     * @return $this
-     */
-    public function setSlug($slug)
+    public function setSlug(?string $slug): self
     {
         $this->slug = $slug;
 
         return $this;
     }
 
-    /**
-     * Get isEnabled.
-     *
-     * @return bool
-     */
-    public function getIsEnabled()
+    public function getIsEnabled(): bool
     {
         return $this->isEnabled;
     }
 
-    /**
-     * Set isEnabled.
-     *
-     * @param bool $isEnabled
-     *
-     * @return Category
-     */
-    public function setIsEnabled($isEnabled)
+    public function setIsEnabled(bool $isEnabled): self
     {
         $this->isEnabled = $isEnabled;
 
         return $this;
     }
 
-    /**
-     * Get createdAt.
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * Get updatedAt.
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?\DateTime
     {
         return $this->updatedAt;
     }
 
-    /**
-     * @return mixed
-     */
     public function getSources()
     {
-        return $this->Sources;
+        return $this->sources;
     }
 
-    /**
-     * @param Source $source
-     *
-     * @return $this
-     */
-    public function addSource(Source $source)
+    public function addSource(Source $source): self
     {
-        if (!$this->Sources->contains($source)) {
-            $this->Sources->add($source);
+        if (!$this->sources->contains($source)) {
+            $this->sources->add($source);
         }
 
         return $this;
     }
 
-    /**
-     * @param Source $source
-     *
-     * @return $this
-     */
-    public function removeSource(Source $source)
+    public function removeSource(Source $source): self
     {
-        $this->Sources->removeElement($source);
+        $this->sources->removeElement($source);
 
         return $this;
     }

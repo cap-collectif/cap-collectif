@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
@@ -74,7 +73,6 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
     protected $reports;
 
     /**
-     * @var \DateTime
      * @Gedmo\Timestampable(on="change", field={"title", "body", "comment"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
@@ -117,7 +115,9 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
 
     public function getProject()
     {
-        return $this->getParent()->getStep()->getProject();
+        return $this->getParent()
+            ->getStep()
+            ->getProject();
     }
 
     public function getStep(): ?AbstractStep

@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Opinion;
@@ -19,35 +18,46 @@ class OpinionRepository extends EntityRepository
     public function getRecentOrdered()
     {
         $qb = $this->createQueryBuilder('o')
-            ->select('o.id', 'o.title', 'o.createdAt', 'o.updatedAt', 'a.username as author', 'o.isEnabled as published', 'o.isTrashed as trashed', 'c.title as project')
+            ->select(
+                'o.id',
+                'o.title',
+                'o.createdAt',
+                'o.updatedAt',
+                'a.username as author',
+                'o.isEnabled as published',
+                'o.isTrashed as trashed',
+                'c.title as project'
+            )
             ->where('o.validated = :validated')
             ->leftJoin('o.Author', 'a')
             ->leftJoin('o.step', 's')
             ->leftJoin('s.projectAbstractStep', 'cas')
             ->leftJoin('cas.project', 'c')
-            ->setParameter('validated', false)
-        ;
-
-        return $qb->getQuery()
-            ->getArrayResult()
-        ;
+            ->setParameter('validated', false);
+        return $qb->getQuery()->getArrayResult();
     }
 
     public function getArrayById(string $id)
     {
         $qb = $this->createQueryBuilder('o')
-            ->select('o.id', 'o.title', 'o.createdAt', 'o.updatedAt', 'a.username as author', 'o.isEnabled as published', 'o.isTrashed as trashed', 'o.body as body', 'c.title as project')
+            ->select(
+                'o.id',
+                'o.title',
+                'o.createdAt',
+                'o.updatedAt',
+                'a.username as author',
+                'o.isEnabled as published',
+                'o.isTrashed as trashed',
+                'o.body as body',
+                'c.title as project'
+            )
             ->leftJoin('o.Author', 'a')
             ->leftJoin('o.step', 's')
             ->leftJoin('s.projectAbstractStep', 'cas')
             ->leftJoin('cas.project', 'c')
             ->where('o.id = :id')
-            ->setParameter('id', $id)
-        ;
-
-        return $qb->getQuery()
-            ->getOneOrNullResult(Query::HYDRATE_ARRAY)
-        ;
+            ->setParameter('id', $id);
+        return $qb->getQuery()->getOneOrNullResult(Query::HYDRATE_ARRAY);
     }
 
     public function getOne(string $id)
@@ -60,33 +70,7 @@ class OpinionRepository extends EntityRepository
             ->leftJoin('o.step', 's')
             ->leftJoin('o.appendices', 'appendix')
             ->andWhere('o.id = :id')
-            ->setParameter('id', $id)
-        ;
-
-        return $qb->getQuery()->getOneOrNullResult();
-    }
-
-    public function getWithArguments(string $id)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('argument')
-            ->innerJoin('o.arguments', 'argument', 'WITH', 'argument.isTrashed = false')
-            ->andWhere('o.id = :id')
-            ->setParameter('id', $id)
-        ;
-
-        return $qb->getQuery()->getOneOrNullResult();
-    }
-
-    public function getWithSources(string $id)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('source')
-            ->innerJoin('o.Sources', 'source', 'WITH', 'source.isTrashed = false')
-            ->andWhere('o.id = :id')
-            ->setParameter('id', $id)
-        ;
-
+            ->setParameter('id', $id);
         return $qb->getQuery()->getOneOrNullResult();
     }
 
@@ -96,9 +80,7 @@ class OpinionRepository extends EntityRepository
             ->addSelect('vote')
             ->innerJoin('o.votes', 'vote')
             ->andWhere('o.id = :id')
-            ->setParameter('id', $id)
-        ;
-
+            ->setParameter('id', $id);
         if (null !== $limit) {
             $qb->setMaxResults($limit);
         }
@@ -124,11 +106,8 @@ class OpinionRepository extends EntityRepository
             ->leftJoin('o.OpinionType', 'ot')
             ->leftJoin('o.step', 's')
             ->andWhere('o.slug = :opinion')
-            ->setParameter('opinion', $opinion)
-        ;
-
-        return $qb->getQuery()
-            ->getOneOrNullResult();
+            ->setParameter('opinion', $opinion);
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
     /**
@@ -154,8 +133,7 @@ class OpinionRepository extends EntityRepository
             ->setParameter('opinion', $opinion)
             ->setParameter('user', $user);
 
-        return $qb->getQuery()
-            ->getOneOrNullResult();
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
     /**
@@ -169,8 +147,13 @@ class OpinionRepository extends EntityRepository
      *
      * @return mixed
      */
-    public function getEnabledByProject($project, $excludedAuthor = null, $orderByRanking = false, $limit = null, $page = 1)
-    {
+    public function getEnabledByProject(
+        $project,
+        $excludedAuthor = null,
+        $orderByRanking = false,
+        $limit = null,
+        $page = 1
+    ) {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('ot', 's', 'aut', 'm')
             ->leftJoin('o.OpinionType', 'ot')
@@ -181,14 +164,9 @@ class OpinionRepository extends EntityRepository
             ->andWhere('cas.project = :project')
             ->andWhere('o.isTrashed = :trashed')
             ->setParameter('project', $project)
-            ->setParameter('trashed', false)
-        ;
-
+            ->setParameter('trashed', false);
         if (null !== $excludedAuthor) {
-            $qb
-                ->andWhere('aut.id != :author')
-                ->setParameter('author', $excludedAuthor)
-            ;
+            $qb->andWhere('aut.id != :author')->setParameter('author', $excludedAuthor);
         }
 
         if ($orderByRanking) {
@@ -196,18 +174,16 @@ class OpinionRepository extends EntityRepository
                 ->orderBy('o.ranking', 'ASC')
                 ->addOrderBy('o.votesCountOk', 'DESC')
                 ->addOrderBy('o.votesCountNok', 'ASC')
-                ->addOrderBy('o.updatedAt', 'DESC')
-            ;
+                ->addOrderBy('o.updatedAt', 'DESC');
         }
 
         $qb->addOrderBy('o.updatedAt', 'DESC');
 
         if (null !== $limit && \is_int($limit) && 0 < $limit) {
-            $query = $qb->getQuery()
+            $query = $qb
+                ->getQuery()
                 ->setFirstResult(($page - 1) * $limit)
-                ->setMaxResults($limit)
-            ;
-
+                ->setMaxResults($limit);
             return new Paginator($query);
         }
 
@@ -241,28 +217,27 @@ class OpinionRepository extends EntityRepository
     public function countByAuthorAndProject(User $user, Project $project): int
     {
         $qb = $this->getIsEnabledQueryBuilder()
-          ->select('count(DISTINCT o)')
-          ->andWhere('o.Author = :author')
-          ->andWhere('o.step IN (:steps)')
-          ->setParameter('steps', array_map(function ($step) {
-              return $step;
-          }, $project->getRealSteps()))
-          ->setParameter('author', $user)
-          ;
-
+            ->select('count(DISTINCT o)')
+            ->andWhere('o.Author = :author')
+            ->andWhere('o.step IN (:steps)')
+            ->setParameter(
+                'steps',
+                array_map(function ($step) {
+                    return $step;
+                }, $project->getRealSteps())
+            )
+            ->setParameter('author', $user);
         return $qb->getQuery()->getSingleScalarResult();
     }
 
     public function countByAuthorAndStep(User $user, ConsultationStep $step): int
     {
         $qb = $this->getIsEnabledQueryBuilder()
-          ->select('count(DISTINCT o)')
-          ->andWhere('o.step = :step')
-          ->andWhere('o.Author = :author')
-          ->setParameter('author', $user)
-          ->setParameter('step', $step)
-      ;
-
+            ->select('count(DISTINCT o)')
+            ->andWhere('o.step = :step')
+            ->andWhere('o.Author = :author')
+            ->setParameter('author', $user)
+            ->setParameter('step', $step);
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -270,20 +245,16 @@ class OpinionRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('o');
         $qb
-          ->select('count(DISTINCT o)')
-          ->andWhere('o.Author = :author')
-          ->setParameter('author', $user)
-      ;
-
+            ->select('count(DISTINCT o)')
+            ->andWhere('o.Author = :author')
+            ->setParameter('author', $user);
         return $qb->getQuery()->getSingleScalarResult();
     }
 
     public function findAllByAuthor(User $user): array
     {
         $qb = $this->createQueryBuilder('o');
-        $qb
-            ->andWhere('o.Author = :author')
-            ->setParameter('author', $user);
+        $qb->andWhere('o.Author = :author')->setParameter('author', $user);
 
         return $qb->getQuery()->getResult();
     }
@@ -332,9 +303,7 @@ class OpinionRepository extends EntityRepository
             ->andWhere('o.Author = :author')
             ->setParameter('author', $user);
 
-        return $qb
-            ->getQuery()
-            ->getSingleScalarResult();
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
     public function countByOpinionType(string $opinionTypeId): int
@@ -345,103 +314,80 @@ class OpinionRepository extends EntityRepository
             ->andWhere('o.OpinionType = :opinionTypeId')
             ->setParameter('opinionTypeId', $opinionTypeId);
 
-        return $qb
+        return // ->useResultCache(true, 60)
+        $qb
             ->getQuery()
             ->useQueryCache(true)
-            // ->useResultCache(true, 60)
             ->getSingleScalarResult();
     }
 
-    public function getByCriteriaOrdered(array $criteria, array $orderBy, $limit = 50, $offset = 0): Paginator
-    {
+    public function getByCriteriaOrdered(
+        array $criteria,
+        array $orderBy,
+        $limit = 50,
+        $offset = 0
+    ): Paginator {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('aut', 'm')
             ->leftJoin('o.Author', 'aut')
             ->leftJoin('aut.media', 'm')
-            ->addOrderBy('o.pinned', 'DESC') // Pinned always come first
-        ;
-
+            ->addOrderBy('o.pinned', 'DESC'); // Pinned always come first
         if (isset($criteria['section'])) {
             $qb
-              ->andWhere('o.OpinionType = :section')
-              ->setParameter('section', $criteria['section'])
-            ;
+                ->andWhere('o.OpinionType = :section')
+                ->setParameter('section', $criteria['section']);
         }
 
         if (isset($criteria['step'])) {
-            $qb
-              ->andWhere('o.step = :step')
-              ->setParameter('step', $criteria['step'])
-            ;
+            $qb->andWhere('o.step = :step')->setParameter('step', $criteria['step']);
         }
 
         if (isset($criteria['trashed'])) {
-            $qb
-                ->andWhere('o.isTrashed = :trashed')
-                ->setParameter('trashed', $criteria['trashed'])
-            ;
+            $qb->andWhere('o.isTrashed = :trashed')->setParameter('trashed', $criteria['trashed']);
         }
 
         $sortField = array_keys($orderBy)[0];
         $direction = $orderBy[$sortField];
 
         if ('CREATED_AT' === $sortField) {
-            $qb
-                    ->addOrderBy('o.createdAt', $direction)
-                    ->addOrderBy('o.votesCountOk', 'DESC')
-                ;
+            $qb->addOrderBy('o.createdAt', $direction)->addOrderBy('o.votesCountOk', 'DESC');
         }
         if ('POPULAR' === $sortField) {
             if ('DESC' === $direction) {
-                $qb
-                      ->addOrderBy('o.votesCountOk', 'DESC')
-                      ->addOrderBy('o.votesCountNok', 'ASC')
-                    ;
+                $qb->addOrderBy('o.votesCountOk', 'DESC')->addOrderBy('o.votesCountNok', 'ASC');
             }
             if ('ASC' === $direction) {
-                $qb
-                       ->addOrderBy('o.votesCountNok', 'DESC')
-                       ->addOrderBy('o.votesCountOk', 'ASC')
-                     ;
+                $qb->addOrderBy('o.votesCountNok', 'DESC')->addOrderBy('o.votesCountOk', 'ASC');
             }
             $qb->addOrderBy('o.createdAt', 'DESC');
         }
         if ('VOTE_COUNT' === $sortField) {
             $qb
-                    ->addSelect('(o.votesCountMitige + o.votesCountOk + o.votesCountNok) as HIDDEN vnb')
-                    ->addOrderBy('vnb', $direction)
-                    ->addOrderBy('o.createdAt', 'DESC')
-                ;
+                ->addSelect('(o.votesCountMitige + o.votesCountOk + o.votesCountNok) as HIDDEN vnb')
+                ->addOrderBy('vnb', $direction)
+                ->addOrderBy('o.createdAt', 'DESC');
         }
         if ('COMMENT_COUNT' === $sortField) {
-            $qb
-                    ->addOrderBy('o.argumentsCount', $direction)
-                    ->addOrderBy('o.createdAt', 'DESC')
-                ;
+            $qb->addOrderBy('o.argumentsCount', $direction)->addOrderBy('o.createdAt', 'DESC');
         }
         if ('POSITION' === $sortField) {
+            // trick in DQL to order NULL values last
             $qb
-                    // trick in DQL to order NULL values last
-                    ->addSelect('-o.position as HIDDEN inversePosition')
-                    ->addOrderBy('inversePosition', $direction)
-                    ->addSelect('RAND() as HIDDEN rand')
-                    ->addOrderBy('rand')
-                ;
+                ->addSelect('-o.position as HIDDEN inversePosition')
+                ->addOrderBy('inversePosition', $direction)
+                ->addSelect('RAND() as HIDDEN rand')
+                ->addOrderBy('rand');
         }
         if ('RANDOM' === $sortField) {
-            $qb
-                    ->addSelect('RAND() as HIDDEN rand')
-                    ->addOrderBy('rand')
-                ;
+            $qb->addSelect('RAND() as HIDDEN rand')->addOrderBy('rand');
         }
 
-        $query = $qb->getQuery()
-                    ->setFirstResult($offset)
-                    ->setMaxResults($limit)
-                    ->useQueryCache(true)
-                    // ->useResultCache(true, 60)
-        ;
-
+        $query = $qb
+            ->getQuery()
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->useQueryCache(true);
+        // ->useResultCache(true, 60)
         return new Paginator($query);
     }
 
@@ -453,76 +399,63 @@ class OpinionRepository extends EntityRepository
      * @param mixed $page
      * @param mixed $opinionsSort
      */
-    public function getByOpinionTypeOrdered($opinionTypeId, $nbByPage = 10, $page = 1, $opinionsSort = 'positions')
-    {
+    public function getByOpinionTypeOrdered(
+        $opinionTypeId,
+        $nbByPage = 10,
+        $page = 1,
+        $opinionsSort = 'positions'
+    ) {
         if ($page < 1) {
-            throw new \InvalidArgumentException(sprintf(
-                'The argument "page" cannot be lower than 1 (current value: "%s")',
-                $page
-            ));
+            throw new \InvalidArgumentException(
+                sprintf('The argument "page" cannot be lower than 1 (current value: "%s")', $page)
+            );
         }
 
         $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('ot', 'aut', 'm', '(o.votesCountMitige + o.votesCountOk + o.votesCountNok) as HIDDEN vnb')
+            ->addSelect(
+                'ot',
+                'aut',
+                'm',
+                '(o.votesCountMitige + o.votesCountOk + o.votesCountNok) as HIDDEN vnb'
+            )
             ->leftJoin('o.OpinionType', 'ot')
             ->leftJoin('o.Author', 'aut')
             ->leftJoin('aut.media', 'm')
             ->andWhere('ot.id = :opinionType')
             ->andWhere('o.isTrashed = false')
             ->setParameter('opinionType', $opinionTypeId)
-            ->addOrderBy('o.pinned', 'DESC')
-        ;
-
+            ->addOrderBy('o.pinned', 'DESC');
         if ($opinionsSort) {
             if ('last' === $opinionsSort) {
-                $qb
-                    ->addOrderBy('o.createdAt', 'DESC')
-                    ->addOrderBy('o.votesCountOk', 'DESC')
-                ;
+                $qb->addOrderBy('o.createdAt', 'DESC')->addOrderBy('o.votesCountOk', 'DESC');
             } elseif ('old' === $opinionsSort) {
-                $qb
-                    ->addOrderBy('o.createdAt', 'ASC')
-                    ->addOrderBy('o.votesCountOk', 'DESC')
-                ;
+                $qb->addOrderBy('o.createdAt', 'ASC')->addOrderBy('o.votesCountOk', 'DESC');
             } elseif ('favorable' === $opinionsSort) {
                 $qb
                     ->addOrderBy('o.votesCountOk', 'DESC')
                     ->addOrderBy('o.votesCountNok', 'ASC')
-                    ->addOrderBy('o.createdAt', 'DESC')
-                ;
+                    ->addOrderBy('o.createdAt', 'DESC');
             } elseif ('votes' === $opinionsSort) {
-                $qb
-                    ->addOrderBy('vnb', 'DESC')
-                    ->addOrderBy('o.createdAt', 'DESC')
-                ;
+                $qb->addOrderBy('vnb', 'DESC')->addOrderBy('o.createdAt', 'DESC');
             } elseif ('comments' === $opinionsSort) {
-                $qb
-                    ->addOrderBy('o.argumentsCount', 'DESC')
-                    ->addOrderBy('o.createdAt', 'DESC')
-                ;
+                $qb->addOrderBy('o.argumentsCount', 'DESC')->addOrderBy('o.createdAt', 'DESC');
             } elseif ('positions' === $opinionsSort) {
+                // trick in DQL to order NULL values last
                 $qb
-                    // trick in DQL to order NULL values last
                     ->addSelect('-o.position as HIDDEN inversePosition')
                     ->addOrderBy('inversePosition', 'DESC')
 
                     ->addSelect('RAND() as HIDDEN rand')
-                    ->addOrderBy('rand')
-                ;
+                    ->addOrderBy('rand');
             } elseif ('random' === $opinionsSort) {
-                $qb
-                    ->addSelect('RAND() as HIDDEN rand')
-                    ->addOrderBy('rand')
-                ;
+                $qb->addSelect('RAND() as HIDDEN rand')->addOrderBy('rand');
             }
         }
 
         $query = $qb
-                    ->getQuery()
-                    ->setFirstResult(($page - 1) * $nbByPage)
-                    ->setMaxResults($nbByPage)
-        ;
-
+            ->getQuery()
+            ->setFirstResult(($page - 1) * $nbByPage)
+            ->setMaxResults($nbByPage);
         $query->useQueryCache(true);
         // $query->useResultCache(true, 60);
 
@@ -545,21 +478,15 @@ class OpinionRepository extends EntityRepository
             ->innerJoin('cas.project', 'c')
             ->andWhere('o.isTrashed = false')
             ->andWhere('cas.project = :project')
-            ->setParameter('project', $project)
-        ;
-
+            ->setParameter('project', $project);
         if (null !== $excludedAuthor) {
             $qb
                 ->innerJoin('o.Author', 'a')
                 ->andWhere('a.id != :author')
-                ->setParameter('author', $excludedAuthor)
-            ;
+                ->setParameter('author', $excludedAuthor);
         }
 
-        $qb
-            ->orderBy('o.votesCountOk', 'DESC')
-        ;
-
+        $qb->orderBy('o.votesCountOk', 'DESC');
         return $qb->getQuery()->getResult();
     }
 
@@ -567,7 +494,6 @@ class OpinionRepository extends EntityRepository
     {
         return $this->createQueryBuilder($alias)
             ->andWhere($alias . '.isEnabled = true')
-            ->andWhere($alias . '.expired = false')
-        ;
+            ->andWhere($alias . '.expired = false');
     }
 }

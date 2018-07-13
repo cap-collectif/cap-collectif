@@ -51,17 +51,7 @@ class OpinionsController extends FOSRestController
         $repo = $em->getRepository('CapcoAppBundle:Opinion');
         $id = $opinion->getId();
 
-        $opinionWithArguments = $repo->getWithArguments($id);
-        $opinionWithSources = $repo->getWithSources($id);
         $opinionWithVotes = $repo->getWithVotes($id, 5);
-
-        if (\is_object($opinionWithArguments)) {
-            $opinion->setArguments($opinionWithArguments->getArguments());
-        }
-
-        if (\is_object($opinionWithSources)) {
-            $opinion->setSources($opinionWithSources->getSources());
-        }
 
         if (\is_object($opinionWithVotes)) {
             $opinion->setVotes($opinionWithVotes->getVotes());

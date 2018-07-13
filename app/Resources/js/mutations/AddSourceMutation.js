@@ -35,21 +35,21 @@ const commit = (variables: AddSourceMutationVariables): Promise<AddSourceMutatio
         parentID: variables.input.sourceableId,
         connectionInfo: [
           {
-            key: 'SourceListViewPaginated_sources',
+            key: 'OpinionSourceListViewPaginated_sources',
             rangeBehavior: 'prepend',
             filters: {
               orderBy: { direction: 'DESC', field: 'CREATED_AT' },
             },
           },
           {
-            key: 'SourceListViewPaginated_sources',
+            key: 'OpinionSourceListViewPaginated_sources',
             rangeBehavior: 'append',
             filters: {
               orderBy: { direction: 'ASC', field: 'CREATED_AT' },
             },
           },
           {
-            key: 'SourceListViewPaginated_sources',
+            key: 'OpinionSourceListViewPaginated_sources',
             rangeBehavior: 'append',
             filters: {
               orderBy: { direction: 'DESC', field: 'VOTES' },
@@ -65,14 +65,10 @@ const commit = (variables: AddSourceMutationVariables): Promise<AddSourceMutatio
         // Mutation failed
       }
 
-      // We update the "FOR" or "AGAINST" row Sources totalCount
-      //   const SourceableProxy = store.get(variables.input.SourceableId);
+      // const sourceableProxy = store.get(variables.input.sourceableId);
       //   const connection = ConnectionHandler.getConnection(
-      //     SourceableProxy,
+      //     sourceableProxy,
       //     'SourceList_allSources',
-      //     {
-      //       type: variables.input.type,
-      //     },
       //   );
       //   connection.setValue(connection.getValue('totalCount') + 1, 'totalCount');
     },

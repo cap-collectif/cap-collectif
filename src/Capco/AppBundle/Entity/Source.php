@@ -86,7 +86,7 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
     private $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="Sources", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="sources", cascade={"persist"})
      * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
     private $opinion;
@@ -99,14 +99,12 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
     private $opinionVersion;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Category", inversedBy="Sources", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Category", inversedBy="sources", cascade={"persist"})
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
      */
     private $category;
 
     /**
-     * @var
-     *
      * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", fetch="LAZY", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true)
      * @Assert\NotBlank(groups={"file"})
@@ -115,8 +113,6 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
     private $media;
 
     /**
-     * @var int
-     *
      * @ORM\Column(name="type", type="integer")
      */
     private $type;
@@ -174,113 +170,65 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
         return $this->getRelated()->getStep();
     }
 
-    /**
-     * Get title.
-     *
-     * @return string
-     */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    /**
-     * Set title.
-     *
-     * @param string $title
-     *
-     * @return Source
-     */
-    public function setTitle($title)
+    public function setTitle(string $title): self
     {
         $this->title = $title;
 
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getSlug()
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    /**
-     * @param mixed $slug
-     */
-    public function setSlug($slug)
+    public function setSlug(string $slug)
     {
         $this->slug = $slug;
 
         return $this;
     }
 
-    /**
-     * Get link.
-     *
-     * @return string
-     */
-    public function getLink()
+    public function getLink(): ?string
     {
         return $this->link;
     }
 
-    /**
-     * Set link.
-     *
-     * @param string $link
-     *
-     * @return Source
-     */
-    public function setLink($link)
+    public function setLink(?string $link): self
     {
         $this->link = $link;
 
         return $this;
     }
 
-    /**
-     * @return \DateTime
-     */
-    public function getCreatedAt()
+    public function getCreatedAt(): \DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?\DateTime
     {
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt(?\DateTime $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
-    /**
-     * Get isEnabled.
-     *
-     * @return bool
-     */
-    public function getIsEnabled()
+    public function getIsEnabled(): bool
     {
         return $this->isEnabled;
     }
 
-    /**
-     * Set isEnabled.
-     *
-     * @param bool $isEnabled
-     *
-     * @return Source
-     */
-    public function setIsEnabled($isEnabled)
+    public function setIsEnabled(bool $isEnabled): self
     {
         $this->isEnabled = $isEnabled;
 
@@ -432,7 +380,7 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
 
     // *************************** custom methods *******************************
 
-    public function getLinkedOpinion()
+    public function getLinkedOpinion(): Opinion
     {
         if ($this->opinion) {
             return $this->opinion;
