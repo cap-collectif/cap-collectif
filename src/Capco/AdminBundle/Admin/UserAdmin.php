@@ -13,6 +13,10 @@ class UserAdmin extends BaseAdmin
 
     public function getTemplate($name)
     {
+        if ('delete' === $name) {
+            return 'CapcoAdminBundle:User:delete.html.twig';
+        }
+
         if ('edit' === $name) {
             return 'CapcoAdminBundle:User:edit.html.twig';
         }
@@ -78,6 +82,6 @@ class UserAdmin extends BaseAdmin
      */
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(['list', 'edit', 'show', 'export']);
+        $collection->clearExcept(['list', 'edit', 'show', 'delete', 'export']);
     }
 }

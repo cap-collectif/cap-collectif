@@ -26,7 +26,7 @@
 # Generate exports every hour
 0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:consultation --env=prod
 0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:questionnaire --env=prod
-0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:collect --withoutVote --env=prod
+0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:proposalStep --env=prod
 0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=4096M -d zend.enable_gc=0 /var/www/bin/console capco:export:users --env=prod
 
 # Delete user archives every hour
