@@ -1,0 +1,9 @@
+{% set items = [] %}
+
+{% if group.label == 'admin.group.moderation' %}
+    <li {% if recentContributions is defined and recentContributions %} class="active"{% endif %} >
+        <a href="{{ path('capco_admin_contributions_index') }}">
+            <i class="fa fa-angle-double-right"></i> {{ 'admin.label.recent_contributions' |trans({}, 'CapcoAppBundle') }}
+        </a>
+    </li>
+{% endif %}
