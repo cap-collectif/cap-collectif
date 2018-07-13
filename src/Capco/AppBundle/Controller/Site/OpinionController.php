@@ -75,19 +75,12 @@ class OpinionController extends Controller
 
         $currentStep = $opinion->getStep();
         $sources = $this->get('capco.source.repository')->getByOpinionJoinUserReports($opinion, $this->getUser());
-        $backLink = $this->generateUrl('app_project_show_opinion', [
-          'projectSlug' => $projectSlug,
-          'stepSlug' => $stepSlug,
-          'opinionTypeSlug' => $opinionTypeSlug,
-          'opinionSlug' => $opinionSlug,
-        ]);
 
         return [
             'version' => $version,
             'currentStep' => $currentStep,
             'project' => $currentStep->getProject(),
             'opinion' => $opinion,
-            'backLink' => $backLink,
             'sources' => $sources,
             'opinionType' => $opinion->getOpinionType(),
             'votes' => $opinion->getVotes(),
@@ -115,39 +108,11 @@ class OpinionController extends Controller
 
         $steps = $this->get('capco.abstract_step.repository')->getByProjectSlug($projectSlug);
 
-        $urlResolver = $this->get('capco.url.resolver');
-
-        // Very bad for performances, because per user
-        //
-        // $referer = $request->headers->get('referer');
-        // $availableRoutes = [
-        //     'app_project_show_opinions',
-        //     'app_project_show_opinions_sorted',
-        //     'app_project_show_consultation',
-        //     'app_consultation_show_opinions',
-        //     'app_consultation_show_opinions_sorted',
-        // ];
-        // $baseUrl = $request->getHost();
-        // $pathinfos = substr($referer, strpos($referer, $baseUrl) + strlen($baseUrl));
-        // $currentRoute = '';
-        // try {
-        //     $currentRoute = $this->get('router')->match($pathinfos)['_route'];
-        // } catch (\Exception $e) {
-        // }
-        // $backLink = $referer &&
-        //     filter_var($referer, FILTER_VALIDATE_URL) !== false &&
-        //     in_array($currentRoute, $availableRoutes, true)
-        //         ? $referer
-        //         : $urlResolver->getStepUrl($currentStep, UrlGeneratorInterface::ABSOLUTE_URL)
-        // ;
-        $backLink = $urlResolver->getStepUrl($currentStep, UrlGeneratorInterface::ABSOLUTE_URL);
-
         return [
             'currentUrl' => $currentUrl,
             'currentStep' => $currentStep,
             'project' => $currentStep->getProject(),
             'opinion' => $opinion,
-            'backLink' => $backLink,
             'opinionType' => $opinion->getOpinionType(),
             'project_steps' => $steps,
         ];

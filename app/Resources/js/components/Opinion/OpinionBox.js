@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { connect, type MapStateToProps } from 'react-redux';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import {ListGroup, ListGroupItem} from "react-bootstrap";
 import OpinionPreview from './OpinionPreview';
@@ -9,10 +9,11 @@ import OpinionButtons from './OpinionButtons';
 import OpinionAppendices from './OpinionAppendices';
 import OpinionBody from './OpinionBody';
 import OpinionVotesBox from './Votes/OpinionVotesBox';
-import type { State, OpinionAndVersion } from '../../types';
+import OpinionVersion from './OpinionVersion';
+import type { OpinionBox_opinion } from './__generated__/OpinionBox_opinion.graphql';
 
 type Props = {
-  opinion: Object,
+  opinion: OpinionBox_opinion,
   rankingThreshold?: number,
   opinionTerm?: number,
 };
@@ -42,18 +43,18 @@ export class OpinionBox extends React.Component<Props> {
   };
 
   render() {
-    const { opinionTerm, rankingThreshold } = this.props;
-    const opinion = this.props.opinion;
+    const { opinion, opinionTerm, rankingThreshold } = this.props;
     const color = this.getOpinionType().color;
     const parentTitle = this.isVersion() ? opinion.parent.title : this.getOpinionType().title;
     const headerTitle = this.getBoxLabel();
 
+    const backLink = opinion.type.url;
     const colorClass = `opinion opinion--${color} opinion--current`;
     return (
       <div className="block block--bordered opinion__details">
         <div className={colorClass}>
           <div className="opinion__header opinion__header--centered" style={{ height: 'auto' }}>
-            <a className="pull-left btn btn-default opinion__header__back" href={opinion.backLink}>
+            <a className="pull-left btn btn-default opinion__header__back" href={backLink}>
               <i className="cap cap-arrow-1-1" />
               <span className="hidden-xs hidden-sm">
                 {' '}
@@ -101,16 +102,23 @@ export class OpinionBox extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (
-  state: State,
-  props: { opinion: OpinionAndVersion },
-) => ({
-  opinion: {
-    ...props.opinion,
-    ...(Object.keys(state.opinion.opinionsById).length
-      ? state.opinion.opinionsById[props.opinion.id]
-      : state.opinion.versionsById[props.opinion.id]),
-  },
+export default createFragmentContainer(OpinionBox, {
+  opinion: graphql`
+    fragment OpinionBox_opinion on Opinion {
+      id
+      body
+      answer
+      type {
+        color
+        votesThreshold
+        url
+      }
+      ... on OpinionVersion {
+        parent {
+          title
+          url
+        }
+      }
+    }
+  `,
 });
-
-export default connect(mapStateToProps)(OpinionBox);

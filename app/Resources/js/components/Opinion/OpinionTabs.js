@@ -1,17 +1,18 @@
 // @flow
 import React from 'react';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { Tab, Nav, NavItem } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { COMMENT_SYSTEM_SIMPLE, COMMENT_SYSTEM_BOTH } from '../../constants/ArgumentConstants';
 import ArgumentsBox from '../Argument/ArgumentsBox';
 import OpinionVersionsBox from './OpinionVersionsBox';
 import OpinionSourceBox from './Source/OpinionSourceBox';
-import VoteLinechart from '../Utils/VoteLinechart';
-import OpinionSourceStore from '../../stores/OpinionSourceStore';
+// import VoteLinechart from '../Utils/VoteLinechart';
 import { scrollToAnchor } from '../../services/ScrollToAnchor';
+import type { OpinionTabs_opinion } from './__generated__/OpinionTabs_opinion.graphql';
 
 type Props = {
-  opinion: Object,
+  opinion: OpinionTabs_opinion,
 };
 
 type State = {
@@ -63,7 +64,7 @@ class OpinionTabs extends React.Component<Props, State> {
 
   getCommentSystem = () => {
     const opinion = this.props.opinion;
-    return opinion.parent ? opinion.parent.type.commentSystem : opinion.type.commentSystem;
+    return opinion.type.commentSystem;
   };
 
   getArgumentsTrad = () => {
@@ -89,7 +90,7 @@ class OpinionTabs extends React.Component<Props, State> {
 
   getType = () => {
     const { opinion } = this.props;
-    return opinion.parent ? opinion.parent.type : opinion.type;
+    return opinion.type;
   };
 
   isSourceable = () => {
@@ -121,7 +122,7 @@ class OpinionTabs extends React.Component<Props, State> {
 
   isContribuable = () => {
     const { opinion } = this.props;
-    return opinion.isContribuable;
+    return opinion.contribuable;
   };
 
   renderVersionsContent = () => {
@@ -137,6 +138,7 @@ class OpinionTabs extends React.Component<Props, State> {
 
   render() {
     const { opinion } = this.props;
+    const isAuthenticated = false;
 
     if (
       this.isSourceable() + this.isCommentable() + this.isVersionable() + this.hasStatistics() >
@@ -157,15 +159,12 @@ class OpinionTabs extends React.Component<Props, State> {
               )}
               {this.isCommentable() && (
                 <NavItem className="opinion-tabs" eventKey="arguments">
-                  <FormattedMessage
-                    id={this.getArgumentsTrad()}
-                    values={{ num: this.state.argumentsCount }}
-                  />
+                  <FormattedMessage id={this.getArgumentsTrad()} values={{ num: opinion.argumentsCount }} />
                 </NavItem>
               )}
               {this.isSourceable() && (
                 <NavItem className="opinion-tabs" eventKey="sources">
-                  <FormattedMessage id="global.sources" values={{ num: this.state.sourcesCount }} />
+                  <FormattedMessage id="global.sources" values={{ num: opinion.sourcesCount }} />
                 </NavItem>
               )}
               {this.hasStatistics() && (
@@ -187,10 +186,10 @@ class OpinionTabs extends React.Component<Props, State> {
               )}
               {this.isSourceable() && (
                 <Tab.Pane eventKey="sources" style={marginTop}>
-                  <OpinionSourceBox {...this.props} />
+                  <OpinionSourceBox isAuthenticated={isAuthenticated} opinion={opinion} />
                 </Tab.Pane>
               )}
-              {this.hasStatistics() && (
+              {/* {this.hasStatistics() && (
                 <Tab.Pane eventKey="votesevolution" style={marginTop}>
                   <VoteLinechart
                     top={20}
@@ -199,7 +198,7 @@ class OpinionTabs extends React.Component<Props, State> {
                     history={opinion.history.votes}
                   />
                 </Tab.Pane>
-              )}
+              )} */}
             </Tab.Content>
           </div>
         </Tab.Container>
@@ -215,12 +214,29 @@ class OpinionTabs extends React.Component<Props, State> {
     if (this.isCommentable()) {
       return <ArgumentsBox {...this.props} />;
     }
-    if (this.hasStatistics()) {
-      return <VoteLinechart top={20} height={300} width={847} history={opinion.history.votes} />;
-    }
+    // if (this.hasStatistics()) {
+    //   return <VoteLinechart top={20} height={300} width={847} history={opinion.history.votes} />;
+    // }
 
     return null;
   }
 }
 
-export default OpinionTabs;
+export default createFragmentContainer(OpinionTabs, {
+  opinion: graphql`
+    fragment OpinionTabs_opinion on Opinion {
+      id
+      body
+      contribuable
+      versionsCount
+      argumentsCount
+      sourcesCount
+      ...OpinionSourceBox_opinion
+      type {
+        versionable
+        sourceable
+        commentSystem
+      }
+    }
+  `,
+});

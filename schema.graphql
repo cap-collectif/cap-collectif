@@ -1501,10 +1501,77 @@ type Opinion implements Node & Argumentable & Sourceable & Contribution & Trasha
   appendices: [Appendix]
 }
 
+<<<<<<< HEAD
 # A contribution
 type OpinionModal {
   # Identifies the contribution title.
   key: String!
+=======
+# A type of opinion
+type OpinionType implements Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
+  # True if the contribution is trashed.
+  trashed: Boolean!
+
+  # The moment the moderator trashed the contribution.
+  trashedAt: String
+
+  # The reason the moderator trashed the contribution.
+  trashedReason: String
+
+  # The id of the contribution.
+  id: ID!
+
+  # The kind of contribution.
+  kind: String!
+
+  # Return the related contribution if the contribution is related to another.
+  related: Contribution
+
+  # The HTTP show url for this contribution.
+  show_url: URI! @deprecated(reason: "Use url instead of show_url")
+
+  # Url of the contribution
+  url: URI!
+
+  # The author of the contribution.
+  author: User!
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
+  versionable: Boolean!
+  sourceable: Boolean!
+  commentSystem: String!
+
+  # Identifies the date and time when the object was created.
+  createdAt: DateTime!
+  type: OpinionType!
+  expired: Boolean!
+  published: Boolean!
+
+  # Number of votes.
+  votesCount: Int!
+
+  # Number of ok votes.
+  votesCountOk: Int!
+
+  # Number of mitige votes.
+  votesCountMitige: Int!
+
+  # Number of negative votes.
+  votesCountNok: Int!
+
+  # Number of arguments.
+  argumentsCount: Int!
+
+  # Number of for arguments.
+  argumentsCountFor: Int!
+
+  # Number of against arguments.
+  argumentsCountAgainst: Int!
+
+  # Number of versions.
+  versionsCount: Int!
+>>>>>>> Start work on opinion page
 
   # Identifies the contribution title.
   after: String!
