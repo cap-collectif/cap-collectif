@@ -28,13 +28,17 @@ class AuthenticationSuccessHandler extends DefaultAuthenticationSuccessHandler
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
         if ($request->isXmlHttpRequest()) {
+            // invalidate session if trying to login when shield enabled and user not verified
             if (
                 $this->toggleManager->isActive('shield_mode') &&
-                $token->getUser()->getExpiresAt() > new \DateTime()
+                !$token->getUser()->isEmailConfirmed()
             ) {
                 $this->securityContext->setToken(null);
                 $request->getSession()->invalidate();
-                return new JsonResponse(['success' => true, 'shieldEnabled' => true]);
+                return new JsonResponse([
+                    'success' => false,
+                    'reason' => 'please-confirm-your-email-address-to-login',
+                ]);
             }
             return new JsonResponse(['success' => true, 'username' => $token->getUsername()]);
         }

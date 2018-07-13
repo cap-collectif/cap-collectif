@@ -22,6 +22,11 @@ export type User = {
   +uniqueId: string,
 };
 
+type Props = {
+  dynamicFields: Object,
+  shieldEnabled: boolean,
+};
+
 export type State = {
   +showLoginModal: boolean,
   +displayChartModal: boolean,
@@ -201,28 +206,24 @@ export const login = (
     },
   })
     .then(response => response.json())
-    .then((response: { success: boolean, shieldEnabled: boolean }) => {
+    .then((response: { success: boolean, reason: ?string }) => {
       if (response.success) {
-        if (response.shieldEnabled) {
-          FluxDispatcher.dispatch({
-            actionType: 'UPDATE_ALERT',
-            alert: { bsStyle: 'danger', content: 'please-confirm-your-email-address-to-login' },
-          });
-          dispatch(closeLoginModal());
-        } else {
-          dispatch(closeLoginModal());
-          window.location.reload();
-        }
+        dispatch(closeLoginModal());
+        window.location.reload();
         return true;
       }
-      throw new SubmissionError({ _error: 'global.login_failed' });
+      if (response.reason) {
+        throw new SubmissionError({ _error: response.reason });
+      } else {
+        throw new SubmissionError({ _error: 'global.login_failed' });
+      }
     });
 };
 
 export const register = (
   values: Object,
   dispatch: Dispatch,
-  { dynamicFields, shieldEnabled }: Object,
+  { dynamicFields, shieldEnabled }: Props,
 ) => {
   const form = { ...values };
   delete form.charte;

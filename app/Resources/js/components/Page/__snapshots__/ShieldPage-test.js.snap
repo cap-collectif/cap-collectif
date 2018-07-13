@@ -9,7 +9,6 @@ exports[`<ShieldPage /> renders with registration disabled 1`] = `
     }
   }
 >
-  \`
   <div
     className="panel-body"
   >
