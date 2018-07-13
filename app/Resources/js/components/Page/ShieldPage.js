@@ -35,6 +35,7 @@ export class ShieldPage extends React.Component<Props> {
     }
     return (
       <div style={{ background: 'white' }} className="col-md-4 col-md-offset-4 panel panel-default">
+        `
         <div className="panel-body">
           <form id="login-form" onSubmit={onSubmit}>
             <LoginBox />

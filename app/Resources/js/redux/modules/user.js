@@ -201,17 +201,29 @@ export const login = (
     },
   })
     .then(response => response.json())
-    .then((response: { success: boolean }) => {
+    .then((response: { success: boolean, shieldEnabled: boolean }) => {
       if (response.success) {
-        dispatch(closeLoginModal());
-        window.location.reload();
+        if (response.shieldEnabled) {
+          FluxDispatcher.dispatch({
+            actionType: 'UPDATE_ALERT',
+            alert: { bsStyle: 'danger', content: 'please-confirm-your-email-address-to-login' },
+          });
+          dispatch(closeLoginModal());
+        } else {
+          dispatch(closeLoginModal());
+          window.location.reload();
+        }
         return true;
       }
       throw new SubmissionError({ _error: 'global.login_failed' });
     });
 };
 
-export const register = (values: Object, dispatch: Dispatch, { dynamicFields }: Object) => {
+export const register = (
+  values: Object,
+  dispatch: Dispatch,
+  { dynamicFields, shieldEnabled }: Object,
+) => {
   const form = { ...values };
   delete form.charte;
   const responses = [];
@@ -239,11 +251,18 @@ export const register = (values: Object, dispatch: Dispatch, { dynamicFields }: 
   }
   return Fetcher.post('/users', apiForm)
     .then(() => {
-      FluxDispatcher.dispatch({
-        actionType: 'UPDATE_ALERT',
-        alert: { bsStyle: 'success', content: 'alert.success.add.user' },
-      });
-      login({ username: values.email, password: values.plainPassword }, dispatch);
+      if (shieldEnabled) {
+        FluxDispatcher.dispatch({
+          actionType: 'UPDATE_ALERT',
+          alert: { bsStyle: 'success', content: 'please-check-your-inbox' },
+        });
+      } else {
+        FluxDispatcher.dispatch({
+          actionType: 'UPDATE_ALERT',
+          alert: { bsStyle: 'success', content: 'alert.success.add.user' },
+        });
+        login({ username: values.email, password: values.plainPassword }, dispatch);
+      }
       dispatch(closeRegistrationModal());
     })
     .catch(error => {
