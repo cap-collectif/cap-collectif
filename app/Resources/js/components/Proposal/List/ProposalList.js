@@ -46,7 +46,7 @@ const renderProposals = (proposals, step, viewer) => (
   </Row>
 );
 
-const renderProposalListTableView = () => <ProposalListTable />;
+const renderProposalListTableView = (proposals) => <ProposalListTable proposals={proposals} />;
 
 export class ProposalList extends React.Component<Props> {
   render() {
@@ -70,7 +70,7 @@ export class ProposalList extends React.Component<Props> {
             <React.Fragment>
               {view === 'mosaic'
                 ? renderProposals(proposalsVisiblePublicly, step, viewer)
-                : renderProposalListTableView()}
+                : renderProposalListTableView(proposalsVisiblePublicly)}
             </React.Fragment>
           )}
         {proposalsVisibleOnlyByViewer.edges &&
@@ -78,7 +78,7 @@ export class ProposalList extends React.Component<Props> {
             <VisibilityBox enabled>
               {view === 'mosaic'
                 ? renderProposals(proposalsVisibleOnlyByViewer, step, viewer)
-                : renderProposalListTableView()}
+                : renderProposalListTableView(proposalsVisibleOnlyByViewer)}
             </VisibilityBox>
           )}
       </React.Fragment>
@@ -100,6 +100,7 @@ export default createFragmentContainer(ProposalList, {
   `,
   proposals: graphql`
     fragment ProposalList_proposals on ProposalConnection {
+      ...ProposalListTable_proposals @arguments(stepId: $stepId)
       totalCount
       edges {
         node {

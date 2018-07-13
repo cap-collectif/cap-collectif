@@ -232,14 +232,28 @@
 /* ==================== Private elements ========================*/
 .react-bootstrap-table {
     color: $dark-text;
+    overflow-x: scroll;
+
+    th, td {
+        padding: 15px 10px
+    }
+
+    td {
+        vertical-align: middle;
+    }
 
     th {
         background-color: $page-bgc;
         border-bottom-width: 1px;
+        // width: 100%;
 
         &:hover {
             background-color: $border-dropdown-color;
         }
+    }
+
+    td {
+        // width: 100%;
     }
 }
 
