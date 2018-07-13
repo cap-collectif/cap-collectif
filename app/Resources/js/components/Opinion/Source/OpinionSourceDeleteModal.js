@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import OpinionSourceStore from '../../../stores/OpinionSourceStore';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
-// import OpinionSourceActions from '../../../actions/OpinionSourceActions';
+import DeleteSourceMutation from '../../../mutations/DeleteSourceMutation';
 
 type Props = {
   show: boolean,
@@ -24,18 +24,31 @@ class OpinionSourceDeleteModal extends React.Component<Props, State> {
   };
 
   handleSubmit = () => {
-    // const { onClose, source } = this.props;
+    const { onClose, source } = this.props;
     this.setState({ isSubmitting: true });
+<<<<<<< HEAD
 <<<<<<< HEAD
     OpinionSourceActions.delete(OpinionSourceStore.opinion, source.id)
       .then(() => {
         onClose();
         this.setState({ isSubmitting: false });
         OpinionSourceActions.load(OpinionSourceStore.opinion, 'last');
+=======
+    const input = {
+      sourceId: source.id,
+    };
+    DeleteSourceMutation.commit({ input })
+      .then(res => {
+        if (res.deleteSource && res.deleteSource.deletedSourceId) {
+          onClose();
+        }
+        this.setState({ isSubmitting: false });
+>>>>>>> Add mutations
       })
       .catch(() => {
         this.setState({ isSubmitting: false });
       });
+<<<<<<< HEAD
 =======
     // const opinion = {};
     // OpinionSourceActions.delete(opinion, source.id)
@@ -48,6 +61,8 @@ class OpinionSourceDeleteModal extends React.Component<Props, State> {
     //     this.setState({ isSubmitting: false });
     //   });
 >>>>>>> Some flow
+=======
+>>>>>>> Add mutations
   };
 
   render() {

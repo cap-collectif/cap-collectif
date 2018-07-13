@@ -56,28 +56,6 @@ Scenario: API client wants to list sources of a version
   }
   """
 
-@security 
-Scenario: Anonymous API client wants to add a source to an opinion
-  When I send a POST request to "/api/opinions/opinion1/sources" with a valid source json
-  Then the JSON response status code should be 401
-
-@database
-Scenario: Logged in API client wants to add a source to an opinion
-  Given I am logged in to api as user
-  When I send a POST request to "/api/opinions/opinion1/sources" with a valid source json
-  Then the JSON response status code should be 201
-
-@security
-Scenario: Anonymous API client wants to add a source to an opinion version
-  When I send a POST request to "/api/opinions/opinion57/versions/version1/sources" with a valid source json
-  Then the JSON response status code should be 401
-
-@database
-Scenario: Logged in API client wants to add a source to an opinion version
-  Given I am logged in to api as user
-  When I send a POST request to "/api/opinions/opinion57/versions/version1/sources" with a valid source json
-  Then the JSON response status code should be 201
-
 @security
 Scenario: Anonymous API client wants to update a source
   When I send a PUT request to "/api/opinions/opinion3/sources/source1" with a valid source json

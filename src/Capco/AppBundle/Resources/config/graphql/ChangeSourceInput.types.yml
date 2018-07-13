@@ -1,0 +1,11 @@
+ChangeSourceInput:
+    type: relay-mutation-input
+    config:
+        description: ""
+        fields:
+            sourceId:
+                type: "ID!"
+                description: "The source Node id."
+            body:
+                type: "String!"
+                description: "The contents of the source body."

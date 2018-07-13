@@ -17,6 +17,7 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
           "displayName": "author1",
           "id": "author1",
           "media": null,
+          "url": "https://capco/dev/profile/author1",
           "vip": true,
         }
       }
@@ -33,6 +34,7 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
               "displayName": "author1",
               "id": "author1",
               "media": null,
+              "url": "https://capco/dev/profile/author1",
               "vip": true,
             },
             "createdAt": "",
@@ -51,6 +53,7 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
               "displayName": "author1",
               "id": "author1",
               "media": null,
+              "url": "https://capco/dev/profile/author1",
               "vip": true,
             },
             "createdAt": "",
@@ -68,6 +71,7 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
               "displayName": "author1",
               "id": "author1",
               "media": null,
+              "url": "https://capco/dev/profile/author1",
               "vip": true,
             },
             "createdAt": "",
@@ -76,23 +80,35 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
           }
         }
       />
-      <Relay(OpinionSourceFooter)
-        source={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "author": Object {
-              "displayName": "author1",
-              "id": "author1",
-              "media": null,
-              "vip": true,
-            },
-            "createdAt": "",
-            "id": "1",
-            "updatedAt": null,
+      <div
+        className="opinion__votes excerpt small"
+      >
+        <Relay(Connect(OpinionSourceButtons))
+          source={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "author1",
+                "id": "author1",
+                "media": null,
+                "url": "https://capco/dev/profile/author1",
+                "vip": true,
+              },
+              "createdAt": "",
+              "id": "1",
+              "updatedAt": null,
+            }
           }
-        }
-      />
+          sourceable={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "id": "sourceableId",
+            }
+          }
+        />
+      </div>
     </div>
   </div>
 </ListGroupItem>
@@ -115,6 +131,7 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
           "displayName": "author1",
           "id": "author1",
           "media": null,
+          "url": "https://capco/dev/profile/author1",
           "vip": false,
         }
       }
@@ -131,6 +148,7 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
               "displayName": "author1",
               "id": "author1",
               "media": null,
+              "url": "https://capco/dev/profile/author1",
               "vip": false,
             },
             "createdAt": "",
@@ -149,6 +167,7 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
               "displayName": "author1",
               "id": "author1",
               "media": null,
+              "url": "https://capco/dev/profile/author1",
               "vip": false,
             },
             "createdAt": "",
@@ -166,6 +185,7 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
               "displayName": "author1",
               "id": "author1",
               "media": null,
+              "url": "https://capco/dev/profile/author1",
               "vip": false,
             },
             "createdAt": "",
@@ -174,23 +194,35 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
           }
         }
       />
-      <Relay(OpinionSourceFooter)
-        source={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "author": Object {
-              "displayName": "author1",
-              "id": "author1",
-              "media": null,
-              "vip": false,
-            },
-            "createdAt": "",
-            "id": "1",
-            "updatedAt": null,
+      <div
+        className="opinion__votes excerpt small"
+      >
+        <Relay(Connect(OpinionSourceButtons))
+          source={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "author": Object {
+                "displayName": "author1",
+                "id": "author1",
+                "media": null,
+                "url": "https://capco/dev/profile/author1",
+                "vip": false,
+              },
+              "createdAt": "",
+              "id": "1",
+              "updatedAt": null,
+            }
           }
-        }
-      />
+          sourceable={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
+              "id": "sourceableId",
+            }
+          }
+        />
+      </div>
     </div>
   </div>
 </ListGroupItem>

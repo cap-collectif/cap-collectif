@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
@@ -94,8 +93,12 @@ class OpinionsController extends FOSRestController
      * @Security("has_role('ROLE_USER')")
      * @View(statusCode=201, serializerGroups={})
      */
-    public function postOpinionAction(Request $request, Project $project, ConsultationStep $step, OpinionType $type)
-    {
+    public function postOpinionAction(
+        Request $request,
+        Project $project,
+        ConsultationStep $step,
+        OpinionType $type
+    ) {
         if (!$step->canContribute()) {
             throw new BadRequestHttpException('This step is not contribuable.');
         }
@@ -112,12 +115,10 @@ class OpinionsController extends FOSRestController
         }
 
         $opinion = (new Opinion())
-          ->setAuthor($author)
-          ->setStep($step)
-          ->setIsEnabled(true)
-          ->setOpinionType($type)
-          ;
-
+            ->setAuthor($author)
+            ->setStep($step)
+            ->setIsEnabled(true)
+            ->setOpinionType($type);
         $form = $this->createForm(OpinionForm::class, $opinion);
         $form->submit($request->request->all(), false);
 
@@ -129,11 +130,10 @@ class OpinionsController extends FOSRestController
         $em->persist($opinion);
         $em->flush();
 
-        $this->get('swarrot.publisher')->publish(CapcoAppBundleMessagesTypes::OPINION_CREATE, new Message(
-            json_encode([
-                'opinionId' => $opinion->getId(),
-            ])
-        ));
+        $this->get('swarrot.publisher')->publish(
+            CapcoAppBundleMessagesTypes::OPINION_CREATE,
+            new Message(json_encode(['opinionId' => $opinion->getId()]))
+        );
 
         return $opinion;
     }
@@ -167,13 +167,14 @@ class OpinionsController extends FOSRestController
 
         $opinion->resetVotes();
         $opinion->setValidated(false);
-        $this->getDoctrine()->getManager()->flush();
+        $this->getDoctrine()
+            ->getManager()
+            ->flush();
 
-        $this->get('swarrot.publisher')->publish(CapcoAppBundleMessagesTypes::OPINION_UPDATE, new Message(
-            json_encode([
-                'opinionId' => $opinion->getId(),
-            ])
-        ));
+        $this->get('swarrot.publisher')->publish(
+            CapcoAppBundleMessagesTypes::OPINION_UPDATE,
+            new Message(json_encode(['opinionId' => $opinion->getId()]))
+        );
 
         return $opinion;
     }
@@ -239,11 +240,7 @@ class OpinionsController extends FOSRestController
         $votes = $repo->getByOpinion($opinion->getId(), false, $limit, $offset);
         $count = $repo->getVotesCountByOpinion($opinion);
 
-        return [
-            'votes' => $votes,
-            'count' => $count,
-            'hasMore' => $count > $offset + $limit,
-        ];
+        return ['votes' => $votes, 'count' => $count, 'hasMore' => $count > $offset + $limit];
     }
 
     /**
@@ -265,8 +262,11 @@ class OpinionsController extends FOSRestController
      * @ParamConverter("vote", converter="fos_rest.request_body")
      * @View(statusCode=200, serializerGroups={"Opinions", "UsersInfos", "UserMedias"})
      */
-    public function putOpinionVoteAction(Opinion $opinion, OpinionVote $vote, ConstraintViolationListInterface $validationErrors)
-    {
+    public function putOpinionVoteAction(
+        Opinion $opinion,
+        OpinionVote $vote,
+        ConstraintViolationListInterface $validationErrors
+    ) {
         if (!$opinion->canContribute()) {
             throw new BadRequestHttpException('Uncontribuable opinion.');
         }
@@ -277,29 +277,31 @@ class OpinionsController extends FOSRestController
 
         $user = $this->getUser();
         $previousVote = $this->getDoctrine()
-                    ->getRepository('CapcoAppBundle:OpinionVote')
-                    ->findOneBy(['user' => $user, 'opinion' => $opinion]);
+            ->getRepository('CapcoAppBundle:OpinionVote')
+            ->findOneBy(['user' => $user, 'opinion' => $opinion]);
 
         if ($previousVote) {
             $opinion->incrementVotesCountByType($vote->getValue());
             $opinion->decrementVotesCountByType($previousVote->getValue());
 
             $previousVote->setValue($vote->getValue());
-            $this->getDoctrine()->getManager()->flush();
+            $this->getDoctrine()
+                ->getManager()
+                ->flush();
 
             return $previousVote;
         }
 
-        $vote
-            ->setOpinion($opinion)
-            ->setUser($user)
-        ;
-
+        $vote->setOpinion($opinion)->setUser($user);
         $opinion->incrementVotesCountByType($vote->getValue());
 
         try {
-            $this->getDoctrine()->getManager()->persist($vote);
-            $this->getDoctrine()->getManager()->flush();
+            $this->getDoctrine()
+                ->getManager()
+                ->persist($vote);
+            $this->getDoctrine()
+                ->getManager()
+                ->flush();
         } catch (DriverException $e) {
             // Updating opinion votes count failed
             throw new BadRequestHttpException('Sorry, please retry.');
@@ -332,17 +334,22 @@ class OpinionsController extends FOSRestController
             throw new BadRequestHttpException('Uncontribuable opinion.');
         }
 
-        $vote = $this->getDoctrine()->getManager()
-                     ->getRepository('CapcoAppBundle:OpinionVote')
-                     ->findOneBy(['user' => $this->getUser(), 'opinion' => $opinion]);
+        $vote = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('CapcoAppBundle:OpinionVote')
+            ->findOneBy(['user' => $this->getUser(), 'opinion' => $opinion]);
 
         if (!$vote) {
             throw new BadRequestHttpException('You have not voted for this opinion.');
         }
 
         $opinion->decrementVotesCountByType($vote->getValue());
-        $this->getDoctrine()->getManager()->remove($vote);
-        $this->getDoctrine()->getManager()->flush();
+        $this->getDoctrine()
+            ->getManager()
+            ->remove($vote);
+        $this->getDoctrine()
+            ->getManager()
+            ->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
 
         return $vote;
@@ -367,16 +374,19 @@ class OpinionsController extends FOSRestController
      * @QueryParam(name="filter", requirements="(old|last|votes|favorable|comments|random)", default="last")
      * @View(statusCode=200, serializerGroups={"OpinionVersionPreviews", "UsersInfos"})
      */
-    public function cgetOpinionVersionsAction(Opinion $opinion, ParamFetcherInterface $paramFetcher)
-    {
+    public function cgetOpinionVersionsAction(
+        Opinion $opinion,
+        ParamFetcherInterface $paramFetcher
+    ) {
         $offset = $paramFetcher->get('offset');
         $limit = $paramFetcher->get('limit');
         $filter = $paramFetcher->get('filter');
         $trashed = false;
 
-        $paginator = $this->getDoctrine()->getManager()
-                    ->getRepository('CapcoAppBundle:OpinionVersion')
-                    ->getEnabledByOpinion($opinion, $filter, $trashed, $offset, $limit);
+        $paginator = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('CapcoAppBundle:OpinionVersion')
+            ->getEnabledByOpinion($opinion, $filter, $trashed, $offset, $limit);
 
         $project = $opinion->getStep()->getProject();
 
@@ -413,7 +423,8 @@ class OpinionsController extends FOSRestController
     {
         $project = $opinion->getStep()->getProject();
 
-        $votes = $this->getDoctrine()->getManager()
+        $votes = $this->getDoctrine()
+            ->getManager()
             ->getRepository('CapcoAppBundle:OpinionVersion')
             ->getWithVotes($version->getId(), 5);
 
@@ -456,18 +467,18 @@ class OpinionsController extends FOSRestController
         }
 
         $user = $this->getUser();
-        $opinionVersion = (new OpinionVersion())
-            ->setAuthor($user)
-            ->setParent($opinion)
-        ;
-
+        $opinionVersion = (new OpinionVersion())->setAuthor($user)->setParent($opinion);
         $form = $this->createForm(OpinionVersionType::class, $opinionVersion);
         $form->submit($request->request->all(), false);
 
         if ($form->isValid()) {
             $opinion->setVersionsCount($opinion->getVersionsCount() + 1);
-            $this->getDoctrine()->getManager()->persist($opinionVersion);
-            $this->getDoctrine()->getManager()->flush();
+            $this->getDoctrine()
+                ->getManager()
+                ->persist($opinionVersion);
+            $this->getDoctrine()
+                ->getManager()
+                ->flush();
             $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
 
             return $opinionVersion;
@@ -497,10 +508,15 @@ class OpinionsController extends FOSRestController
      * @ParamConverter("opinionVersion", options={"mapping": {"versionId": "id"}})
      * @View(statusCode=204, serializerGroups={})
      */
-    public function putOpinionVersionAction(Request $request, Opinion $opinion, OpinionVersion $opinionVersion)
-    {
+    public function putOpinionVersionAction(
+        Request $request,
+        Opinion $opinion,
+        OpinionVersion $opinionVersion
+    ) {
         if (!$opinion->canContribute()) {
-            throw new BadRequestHttpException("Can't update a version of an uncontributable opinion.");
+            throw new BadRequestHttpException(
+                "Can't update a version of an uncontributable opinion."
+            );
         }
 
         $user = $this->getUser();
@@ -514,8 +530,12 @@ class OpinionsController extends FOSRestController
         if ($form->isValid()) {
             $opinionVersion->resetVotes();
             $opinionVersion->setValidated(false);
-            $this->getDoctrine()->getManager()->persist($opinionVersion);
-            $this->getDoctrine()->getManager()->flush();
+            $this->getDoctrine()
+                ->getManager()
+                ->persist($opinionVersion);
+            $this->getDoctrine()
+                ->getManager()
+                ->flush();
 
             return $opinionVersion;
         }
@@ -542,8 +562,11 @@ class OpinionsController extends FOSRestController
      * @ParamConverter("opinionVersion", options={"mapping": {"versionId": "id"}})
      * @View(statusCode=204, serializerGroups={})
      */
-    public function deleteOpinionVersionAction(Request $request, Opinion $opinion, OpinionVersion $opinionVersion)
-    {
+    public function deleteOpinionVersionAction(
+        Request $request,
+        Opinion $opinion,
+        OpinionVersion $opinionVersion
+    ) {
         $user = $this->getUser();
         if ($user !== $opinionVersion->getAuthor()) {
             throw $this->createAccessDeniedException();
@@ -553,88 +576,6 @@ class OpinionsController extends FOSRestController
         $em->remove($opinionVersion);
         $em->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
-    }
-
-    /**
-     * Get all sources of an opinion.
-     *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Get all sources of an opinion.",
-     *  statusCodes={
-     *    200 = "Returned when successful",
-     *    404 = "Returned when opinion not found",
-     *  }
-     * )
-     *
-     * @Get("/opinions/{id}/sources")
-     * @ParamConverter("opinion", options={"mapping": {"id": "id"}})
-     * @QueryParam(name="offset", requirements="[0-9.]+", default="0")
-     * @QueryParam(name="limit", requirements="[0-9.]+", default="10")
-     * @QueryParam(name="filter", requirements="(old|last|popular)", default="last")
-     * @View(serializerGroups={"Opinions", "UsersInfos", "Categories"})
-     */
-    public function cgetOpinionSourcesAction(Opinion $opinion, ParamFetcherInterface $paramFetcher)
-    {
-        $offset = $paramFetcher->get('offset');
-        $limit = $paramFetcher->get('limit');
-        $filter = $paramFetcher->get('filter');
-        $trashed = false;
-
-        $em = $this->getDoctrine()->getManager();
-        $paginator = $em->getRepository('CapcoAppBundle:Source')
-                        ->getByOpinion($opinion, $offset, $limit, $filter, $trashed);
-
-        $sources = [];
-        foreach ($paginator as $source) {
-            $sources[] = $source;
-        }
-
-        return [
-            'sources' => $sources,
-            'count' => \count($paginator),
-        ];
-    }
-
-    /**
-     * Get all sources of a version.
-     *
-     * @ApiDoc(
-     *  resource=true,
-     *  description="Get all sources of a version.",
-     *  statusCodes={
-     *    200 = "Returned when successful",
-     *    404 = "Returned when opinion not found",
-     *  }
-     * )
-     *
-     * @Get("/opinions/{opinionId}/versions/{versionId}/sources")
-     * @ParamConverter("opinion", options={"mapping": {"opinionId": "id"}})
-     * @ParamConverter("version", options={"mapping": {"versionId": "id"}})
-     * @QueryParam(name="offset", requirements="[0-9.]+", default="0")
-     * @QueryParam(name="limit", requirements="[0-9.]+", default="10")
-     * @QueryParam(name="filter", requirements="(old|last|popular)", default="last")
-     * @View(serializerGroups={"Opinions", "UsersInfos", "Categories"})
-     */
-    public function cgetOpinionVersionSourcesAction(Opinion $opinion, OpinionVersion $version, ParamFetcherInterface $paramFetcher)
-    {
-        $offset = $paramFetcher->get('offset');
-        $limit = $paramFetcher->get('limit');
-        $filter = $paramFetcher->get('filter');
-
-        $paginator = $this->getDoctrine()->getManager()
-            ->getRepository('CapcoAppBundle:Source')
-            ->getByOpinionVersion($version, $offset, $limit, $filter);
-
-        $sources = [];
-        foreach ($paginator as $source) {
-            $sources[] = $source;
-        }
-
-        return [
-            'sources' => $sources,
-            'count' => \count($paginator),
-        ];
     }
 
     /**
@@ -657,22 +598,22 @@ class OpinionsController extends FOSRestController
      * @Cache(smaxage="60", public=true)
      * @View(statusCode=200, serializerGroups={"OpinionVersions", "UsersInfos", "UserMedias"})
      */
-    public function getVersionVotesAction(Opinion $opinion, OpinionVersion $version, ParamFetcherInterface $paramFetcher)
-    {
+    public function getVersionVotesAction(
+        Opinion $opinion,
+        OpinionVersion $version,
+        ParamFetcherInterface $paramFetcher
+    ) {
         $limit = $paramFetcher->get('limit');
         $offset = $paramFetcher->get('offset');
 
-        $repo = $this->getDoctrine()->getManager()
+        $repo = $this->getDoctrine()
+            ->getManager()
             ->getRepository('CapcoAppBundle:OpinionVersionVote');
 
         $votes = $repo->getByVersion($version->getId(), false, $limit, $offset);
         $count = $repo->getVotesCountByVersion($version);
 
-        return [
-            'votes' => $votes,
-            'count' => $count,
-            'hasMore' => $count > $offset + $limit,
-        ];
+        return ['votes' => $votes, 'count' => $count, 'hasMore' => $count > $offset + $limit];
     }
 
     /**
@@ -694,8 +635,12 @@ class OpinionsController extends FOSRestController
      * @ParamConverter("vote", converter="fos_rest.request_body")
      * @View(statusCode=200, serializerGroups={"OpinionVersions", "UsersInfos", "UserMedias"})
      */
-    public function putOpinionVersionVoteAction(Opinion $opinion, OpinionVersion $version, OpinionVersionVote $vote, ConstraintViolationListInterface $validationErrors)
-    {
+    public function putOpinionVersionVoteAction(
+        Opinion $opinion,
+        OpinionVersion $version,
+        OpinionVersionVote $vote,
+        ConstraintViolationListInterface $validationErrors
+    ) {
         if (!$opinion->canContribute()) {
             throw new BadRequestHttpException("Can't add a vote to an uncontributable opinion.");
         }
@@ -709,28 +654,31 @@ class OpinionsController extends FOSRestController
         }
 
         $user = $this->getUser();
-        $previousVote = $this->getDoctrine()->getManager()
-                    ->getRepository('CapcoAppBundle:OpinionVersionVote')
-                    ->findOneBy(['user' => $user, 'opinionVersion' => $version]);
+        $previousVote = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('CapcoAppBundle:OpinionVersionVote')
+            ->findOneBy(['user' => $user, 'opinionVersion' => $version]);
 
         if ($previousVote) {
             $version->incrementVotesCountByType($vote->getValue());
             $version->decrementVotesCountByType($previousVote->getValue());
 
             $previousVote->setValue($vote->getValue());
-            $this->getDoctrine()->getManager()->flush();
+            $this->getDoctrine()
+                ->getManager()
+                ->flush();
 
             return $previousVote;
         }
 
-        $vote
-            ->setOpinionVersion($version)
-            ->setUser($user)
-        ;
-
+        $vote->setOpinionVersion($version)->setUser($user);
         $version->incrementVotesCountByType($vote->getValue());
-        $this->getDoctrine()->getManager()->persist($vote);
-        $this->getDoctrine()->getManager()->flush();
+        $this->getDoctrine()
+            ->getManager()
+            ->persist($vote);
+        $this->getDoctrine()
+            ->getManager()
+            ->flush();
 
         return $vote;
     }
@@ -763,17 +711,22 @@ class OpinionsController extends FOSRestController
             throw new BadRequestHttpException('Unversionable opinion.');
         }
 
-        $vote = $this->getDoctrine()->getManager()
-                     ->getRepository('CapcoAppBundle:OpinionVersionVote')
-                     ->findOneBy(['user' => $this->getUser(), 'opinionVersion' => $version]);
+        $vote = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('CapcoAppBundle:OpinionVersionVote')
+            ->findOneBy(['user' => $this->getUser(), 'opinionVersion' => $version]);
 
         if (!$vote) {
             throw new BadRequestHttpException('You have not voted for this opinion version.');
         }
 
         $version->decrementVotesCountByType($vote->getValue());
-        $this->getDoctrine()->getManager()->remove($vote);
-        $this->getDoctrine()->getManager()->flush();
+        $this->getDoctrine()
+            ->getManager()
+            ->remove($vote);
+        $this->getDoctrine()
+            ->getManager()
+            ->flush();
         $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
 
         return $vote;
@@ -791,11 +744,7 @@ class OpinionsController extends FOSRestController
             throw $this->createAccessDeniedException();
         }
 
-        $report = (new Reporting())
-            ->setReporter($this->getUser())
-            ->setOpinion($opinion)
-        ;
-
+        $report = (new Reporting())->setReporter($this->getUser())->setOpinion($opinion);
         $form = $this->createForm(ReportingType::class, $report, ['csrf_protection' => false]);
         $form->submit($request->request->all(), false);
 
@@ -803,8 +752,12 @@ class OpinionsController extends FOSRestController
             return $form;
         }
 
-        $this->getDoctrine()->getManager()->persist($report);
-        $this->getDoctrine()->getManager()->flush();
+        $this->getDoctrine()
+            ->getManager()
+            ->persist($report);
+        $this->getDoctrine()
+            ->getManager()
+            ->flush();
         $this->get('capco.report_notifier')->onCreate($report);
 
         return $report;
@@ -822,11 +775,7 @@ class OpinionsController extends FOSRestController
             throw $this->createAccessDeniedException();
         }
 
-        $report = (new Reporting())
-            ->setReporter($this->getUser())
-            ->setOpinionVersion($version)
-        ;
-
+        $report = (new Reporting())->setReporter($this->getUser())->setOpinionVersion($version);
         $form = $this->createForm(ReportingType::class, $report, ['csrf_protection' => false]);
         $form->submit($request->request->all(), false);
 
@@ -834,8 +783,12 @@ class OpinionsController extends FOSRestController
             return $form;
         }
 
-        $this->getDoctrine()->getManager()->persist($report);
-        $this->getDoctrine()->getManager()->flush();
+        $this->getDoctrine()
+            ->getManager()
+            ->persist($report);
+        $this->getDoctrine()
+            ->getManager()
+            ->flush();
         $this->get('capco.report_notifier')->onCreate($report);
 
         return $report;

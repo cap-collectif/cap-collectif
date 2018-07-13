@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
@@ -60,37 +59,29 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
     private $link;
 
     /**
-     * @var \DateTime
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
     /**
-     * @var \DateTime
-     * @Gedmo\Timestampable(on="change", field={"title", "link", "body", "Author", "Opinion", "Category", "media", "type"})
+     * @Gedmo\Timestampable(on="change", field={"title", "link", "body", "Author", "Opinion", "category", "media", "type"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
 
     /**
-     * @var bool
-     *
      * @ORM\Column(name="is_enabled", type="boolean")
      */
     private $isEnabled = true;
 
     /**
-     * @var string
-     *
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="sources")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     private $Author;
 
     /**
-     * @var
-     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="Sources", cascade={"persist"})
      * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
@@ -104,12 +95,10 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
     private $opinionVersion;
 
     /**
-     * @var
-     *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Category", inversedBy="Sources", cascade={"persist"})
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
      */
-    private $Category;
+    private $category;
 
     /**
      * @var
@@ -355,13 +344,13 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
 
     public function getCategory()
     {
-        return $this->Category;
+        return $this->category;
     }
 
-    public function setCategory($Category): self
+    public function setCategory($category): self
     {
-        $this->Category = $Category;
-        $this->Category->addSource($this);
+        $this->category = $category;
+        $this->category->addSource($this);
 
         return $this;
     }
@@ -582,8 +571,8 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
      */
     public function deleteSource()
     {
-        if (null !== $this->Category) {
-            $this->Category->removeSource($this);
+        if (null !== $this->category) {
+            $this->category->removeSource($this);
         }
         if (null !== $this->Opinion) {
             $this->Opinion->removeSource($this);

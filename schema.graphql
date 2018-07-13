@@ -440,6 +440,7 @@ input ChangeSourceInput {
 
   # The contents of the source body.
   body: String!
+<<<<<<< HEAD
 
   # The contents of the source category.
   category: ID!
@@ -449,6 +450,8 @@ input ChangeSourceInput {
 
   # The contents of the source link.
   link: URI!
+=======
+>>>>>>> Add mutations
   clientMutationId: String
 }
 
@@ -1290,6 +1293,7 @@ type MultipleChoiceQuestionValidationRule {
 type Mutation {
   addArgument(input: AddArgumentInput!): AddArgumentPayload
   addSource(input: AddSourceInput!): AddSourcePayload
+<<<<<<< HEAD
   addVersion(input: AddVersionInput!): AddVersionPayload
   changeArgument(input: ChangeArgumentInput!): ChangeArgumentPayload
   changeVersion(input: ChangeVersionInput!): ChangeVersionPayload
@@ -1297,6 +1301,12 @@ type Mutation {
   deleteArgument(input: DeleteArgumentInput!): DeleteArgumentPayload
   deleteSource(input: DeleteSourceInput!): DeleteSourcePayload
   deleteVersion(input: DeleteVersionInput!): DeleteVersionPayload
+=======
+  changeArgument(input: ChangeArgumentInput!): ChangeArgumentPayload
+  changeSource(input: ChangeSourceInput!): ChangeSourcePayload
+  deleteArgument(input: DeleteArgumentInput!): DeleteArgumentPayload
+  deleteSource(input: DeleteSourceInput!): DeleteSourcePayload
+>>>>>>> Add mutations
   addReply(input: AddReplyInput!): AddReplyPayload
   deleteReply(input: DeleteReplyInput!): DeleteReplyPayload
   changeUserNotificationsConfiguration(input: ChangeUserNotificationsConfigurationInput!): ChangeUserNotificationsConfigurationPayload

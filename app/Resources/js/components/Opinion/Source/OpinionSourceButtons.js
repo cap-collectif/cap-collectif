@@ -10,9 +10,11 @@ import DeleteButton from '../../Form/DeleteButton';
 import OpinionSourceVoteBox from './OpinionSourceVoteBox';
 import { showSourceEditModal } from '../../../redux/modules/opinion';
 import type { OpinionSourceButtons_source } from './__generated__/OpinionSourceButtons_source.graphql';
+import type { OpinionSourceButtons_sourceable } from './__generated__/OpinionSourceButtons_sourceable.graphql';
 
 type Props = {
   source: OpinionSourceButtons_source,
+  sourceable: OpinionSourceButtons_sourceable,
   dispatch: Function,
 };
 
@@ -34,7 +36,7 @@ class OpinionSourceButtons extends React.Component<Props, State> {
   };
 
   render() {
-    const { source, dispatch } = this.props;
+    const { source, sourceable, dispatch } = this.props;
     return (
       <div>
         <OpinionSourceVoteBox source={source} />
@@ -43,14 +45,14 @@ class OpinionSourceButtons extends React.Component<Props, State> {
           onClick={() => {
             dispatch(showSourceEditModal(source.id));
           }}
-          author={source.author}
+          author={{ uniqueId: source.author.slug }}
           editable={source.contribuable}
           className="source__btn--edit btn-xs btn-dark-gray btn--outline"
         />
-        <OpinionSourceFormModal source={source} />{' '}
+        <OpinionSourceFormModal sourceable={sourceable} source={source} />{' '}
         <DeleteButton
           onClick={this.openDeleteModal}
-          author={source.author}
+          author={{ uniqueId: source.author.slug }}
           className="source__btn--delete btn-xs"
         />
         <OpinionSourceDeleteModal
@@ -64,20 +66,25 @@ class OpinionSourceButtons extends React.Component<Props, State> {
 }
 
 const container = connect()(OpinionSourceButtons);
-export default createFragmentContainer(
-  container,
-  graphql`
-    fragment OpinionSourceButtons_source on Source {
+export default createFragmentContainer(container, {
+  source: graphql`
+    fragment OpinionSourceButtons_source on Source
+      @argumentDefinitions(isAuthenticated: { type: "Boolean" }) {
       id
       author {
         id
         slug
       }
       contribuable
-      ...OpinionSourceVoteBox_source
-      ...OpinionSourceReportButton_source
+      ...OpinionSourceVoteBox_source @arguments(isAuthenticated: $isAuthenticated)
+      ...OpinionSourceReportButton_source @arguments(isAuthenticated: $isAuthenticated)
       ...OpinionSourceFormModal_source
       #...OpinionSourceDeleteModal_source
     }
   `,
-);
+  sourceable: graphql`
+    fragment OpinionSourceButtons_sourceable on Sourceable {
+      ...OpinionSourceFormModal_sourceable
+    }
+  `,
+});

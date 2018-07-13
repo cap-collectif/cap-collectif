@@ -1,0 +1,8 @@
+DeleteSourcePayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            deletedSourceId:
+                type: "ID"
+            sourceable:
+                type: "Sourceable!"

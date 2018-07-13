@@ -32,7 +32,7 @@ class OpinionSourceListViewPaginated extends React.Component<Props> {
           .filter(Boolean)
           .map(source => {
             // $FlowFixMe https://github.com/cap-collectif/platform/issues/4973
-            return <OpinionSource {...this.props} key={source.id} source={source} />;
+            return <OpinionSource key={source.id} source={source} sourceable={sourceable} />;
           })}
       </ListGroup>
     );
@@ -67,6 +67,7 @@ export default createPaginationContainer(
             endCursor
           }
         }
+        ...OpinionSource_sourceable
       }
     `,
   },

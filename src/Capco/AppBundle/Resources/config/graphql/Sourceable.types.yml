@@ -17,3 +17,7 @@ Sourceable:
                 orderBy:
                   type: "SourceOrder"
                   defaultValue: { field: CREATED_AT, direction: DESC }
+          availableSourceCategories:
+              description: "The available sources categories of to the sourceable."
+              type: "[SourceCategory]"
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableAvailableCategoriesResolver", [])'

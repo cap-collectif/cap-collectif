@@ -25,7 +25,7 @@ class OpinionSourceReportButton extends React.Component<Props> {
     return (
       <ReportBox
         id={`source-${source.id}`}
-        reported={source.viewerHasReport}
+        reported={source.viewerHasReport || false}
         onReport={this.handleReport}
         author={{ uniqueId: source.author.slug }}
         buttonBsSize="xs"
@@ -39,13 +39,14 @@ const container = connect()(OpinionSourceReportButton);
 export default createFragmentContainer(
   container,
   graphql`
-    fragment OpinionSourceReportButton_source on Source {
+    fragment OpinionSourceReportButton_source on Source
+      @argumentDefinitions(isAuthenticated: { type: "Boolean" }) {
       contribuable
       id
       author {
         slug
       }
-      viewerHasReport
+      viewerHasReport @include(if: $isAuthenticated)
     }
   `,
 );

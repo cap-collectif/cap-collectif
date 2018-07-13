@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import { Panel, Row, Col } from 'react-bootstrap';
-import { FormattedMessage } from 'react-intl';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import type {
@@ -93,6 +92,7 @@ class OpinionSourceBox extends React.Component<Props, State> {
             ) {
               sourceable: node(id: $sourceableId) {
                 ... on Sourceable {
+                  ...OpinionSourceAdd_sourceable
                   contribuable
                   allSources: sources(first: 0)
                     @connection(key: "OpinionSourceBox_allSources", filters: []) {
@@ -118,7 +118,7 @@ class OpinionSourceBox extends React.Component<Props, State> {
               orderBy: { field: 'CREATED_AT', direction: 'DESC' },
             }: OpinionSourceBoxQueryVariables)
           }
-          render={({ error, props }: ReadyState & { props?: OpinionSourceBoxQueryResponse }) => {
+          render={({ error, props }: ReadyState & { props?: ?OpinionSourceBoxQueryResponse }) => {
             if (error) {
               return graphqlError;
             }
@@ -131,14 +131,9 @@ class OpinionSourceBox extends React.Component<Props, State> {
               return (
                 <Panel>
                   <Panel.Heading>
-                    <Col xs={12} sm={6} md={6}>
-                      <OpinionSourceAdd disabled={!sourceable.contribuable} />
-                    </Col>
-                    <Row className="" style={{ border: 0 }}>
+                    <Row>
                       <Col xs={12} sm={6} md={6}>
-                        <h4 className="opinion__header__title">
-                          <FormattedMessage id="argument.yes.list" values={{ num: totalCount }} />
-                        </h4>
+                        <OpinionSourceAdd sourceable={sourceable} />
                       </Col>
                       {totalCount > 1 && (
                         <Col xs={12} sm={6} md={6}>

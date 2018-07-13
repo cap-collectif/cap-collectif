@@ -1,0 +1,18 @@
+AddSourceInput:
+    type: relay-mutation-input
+    config:
+        description: "Input type of AddArgument"
+        fields:
+            sourceableId:
+                type: "ID!"
+                description: "The Sourceable ID to source."
+            body:
+                type: "String!"
+                description: "The contents of the argument body."
+            category:
+                type: "ID!"
+                description: "The type of the argument."
+            link:
+                type: "URI!"
+            title:
+                type: "String!"

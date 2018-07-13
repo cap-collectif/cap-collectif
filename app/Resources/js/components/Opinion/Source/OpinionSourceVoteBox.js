@@ -60,14 +60,15 @@ const container = connect(mapStateToProps)(OpinionSourceVoteBox);
 export default createFragmentContainer(
   container,
   graphql`
-    fragment OpinionSourceVoteBox_source on Source {
+    fragment OpinionSourceVoteBox_source on Source
+      @argumentDefinitions(isAuthenticated: { type: "Boolean" }) {
       author {
         id
         slug
       }
       contribuable
       votesCount
-      viewerHasVote
+      viewerHasVote @include(if: $isAuthenticated)
     }
   `,
 );

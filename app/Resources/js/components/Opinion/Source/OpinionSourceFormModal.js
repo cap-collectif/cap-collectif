@@ -4,7 +4,6 @@ import { Modal } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { connect, type MapStateToProps } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
-import OpinionSourceStore from '../../../stores/OpinionSourceStore';
 import OpinionSourceFormInfos from './OpinionSourceFormInfos';
 import OpinionSourceFormModalTitle from './OpinionSourceFormModalTitle';
 import OpinionSourceForm, { formName } from './OpinionSourceForm';
@@ -13,17 +12,19 @@ import SubmitButton from '../../Form/SubmitButton';
 import { hideSourceCreateModal, hideSourceEditModal } from '../../../redux/modules/opinion';
 import type { State } from '../../../types';
 import type { OpinionSourceFormModal_source } from './__generated__/OpinionSourceFormModal_source.graphql';
+import type { OpinionSourceFormModal_sourceable } from './__generated__/OpinionSourceFormModal_sourceable.graphql';
 
 type Props = {
   show: boolean,
   source?: OpinionSourceFormModal_source,
+  sourceable: OpinionSourceFormModal_sourceable,
   submitting: boolean,
   dispatch: Function,
 };
 
 class OpinionSourceFormModal extends React.Component<Props> {
   render() {
-    const { submitting, source, show, dispatch } = this.props;
+    const { submitting, sourceable, source, show, dispatch } = this.props;
     const action = source ? 'update' : 'create';
     return (
       <Modal
@@ -43,7 +44,7 @@ class OpinionSourceFormModal extends React.Component<Props> {
         </Modal.Header>
         <Modal.Body>
           <OpinionSourceFormInfos action={action} />
-          <OpinionSourceForm opinion={OpinionSourceStore.opinion} source={source} />
+          <OpinionSourceForm sourceable={sourceable} source={source} />
         </Modal.Body>
         <Modal.Footer>
           <CloseButton
@@ -78,11 +79,18 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props) => ({
 });
 
 const container = connect(mapStateToProps)(OpinionSourceFormModal);
-export default createFragmentContainer(
-  container,
-  graphql`
+
+export default createFragmentContainer(container, {
+  source: graphql`
     fragment OpinionSourceFormModal_source on Source {
       id
+      ...OpinionSourceForm_source
     }
   `,
-);
+  sourceable: graphql`
+    fragment OpinionSourceFormModal_sourceable on Sourceable {
+      id
+      ...OpinionSourceForm_sourceable
+    }
+  `,
+});

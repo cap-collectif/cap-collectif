@@ -6,6 +6,7 @@ import { OpinionSource } from './OpinionSource';
 import { $refType, $fragmentRefs } from '../../../mocks';
 
 describe('<OpinionSource />', () => {
+  const sourceable = { id: 'sourceableId', $refType, $fragmentRefs };
   const sourceUserVip = {
     $refType,
     $fragmentRefs,
@@ -14,6 +15,7 @@ describe('<OpinionSource />', () => {
       displayName: 'author1',
       vip: true,
       media: null,
+      url: 'https://capco/dev/profile/author1',
     },
     createdAt: '',
     id: '1',
@@ -27,6 +29,7 @@ describe('<OpinionSource />', () => {
       displayName: 'author1',
       vip: false,
       media: null,
+      url: 'https://capco/dev/profile/author1',
     },
     createdAt: '',
     id: '1',
@@ -34,12 +37,12 @@ describe('<OpinionSource />', () => {
   };
 
   it('should render a li bordered', () => {
-    const wrapper = shallow(<OpinionSource source={sourceUserVip} />);
-    expect(wrapper.find('li.opinion.block--bordered')).toHaveLength(1);
+    const wrapper = shallow(<OpinionSource sourceable={sourceable} source={sourceUserVip} />);
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('should render a white li if not vip', () => {
-    const wrapper = shallow(<OpinionSource source={sourceUserNotVip} />);
-    expect(wrapper.find('li.bg-vip')).toHaveLength(0.0);
+    const wrapper = shallow(<OpinionSource sourceable={sourceable} source={sourceUserNotVip} />);
+    expect(wrapper).toMatchSnapshot();
   });
 });
