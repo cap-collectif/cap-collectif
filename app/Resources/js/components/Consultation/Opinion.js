@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import {ListGroupItem, Row} from "react-bootstrap";
+import { ListGroupItem } from 'react-bootstrap';
 import OpinionPreviewTitle from '../Opinion/OpinionPreviewTitle';
 import OpinionInfos from '../Opinion/OpinionInfos';
 import UserAvatar from '../User/UserAvatar';
@@ -18,9 +18,10 @@ export class Opinion extends React.Component<Props> {
     const { opinion } = this.props;
     const author = opinion.author;
     return (
-      <ListGroupItem className={`list-group-item__opinion has-chart${author && author.vip ? ' bg-vip' : ''}`}>
+      <ListGroupItem
+        className={`list-group-item__opinion has-chart${author && author.vip ? ' bg-vip' : ''}`}>
         <div className="left-block">
-          <UserAvatar user={author}/>
+          <UserAvatar user={author} />
           <div>
             <OpinionInfos rankingThreshold={0} opinion={opinion} />
             <OpinionPreviewTitle showTypeLabel={false} link opinion={opinion} />

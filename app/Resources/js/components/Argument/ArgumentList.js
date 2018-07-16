@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Row, Col, Panel } from 'react-bootstrap';
+import { Panel } from 'react-bootstrap';
 import { connect, type MapStateToProps } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
@@ -82,10 +82,7 @@ export class ArgumentList extends React.Component<Props, State> {
                   <Panel.Heading>
                     <Panel.Title componentClass="h4" className="opinion__header__title d-flex">
                       {type === 'SIMPLE' ? (
-                        <FormattedMessage
-                          id="argument.simple.list"
-                          values={{ num: totalCount }}
-                        />
+                        <FormattedMessage id="argument.simple.list" values={{ num: totalCount }} />
                       ) : type === 'FOR' ? (
                         <FormattedMessage id="argument.yes.list" values={{ num: totalCount }} />
                       ) : (
