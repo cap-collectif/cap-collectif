@@ -1,12 +1,14 @@
 // @flow
 import * as React from 'react';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { Well } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import OpinionBodyDiffContent from './OpinionBodyDiffContent';
 import FormattedText from '../../services/FormattedText';
+import type { OpinionBody_opinion } from './__generated__/OpinionBody_opinion.graphql';
 
 type Props = {
-  opinion: Object,
+  opinion: OpinionBody_opinion,
 };
 
 class OpinionBody extends React.Component<Props> {
@@ -40,4 +42,14 @@ class OpinionBody extends React.Component<Props> {
   }
 }
 
-export default OpinionBody;
+export default createFragmentContainer(OpinionBody, {
+  opinion: graphql`
+    fragment OpinionBody_opinion on OpinionOrVersion {
+      ... on Version {
+        comment
+        #diff
+      }
+      ...OpinionBodyDiffContent_opinion
+    }
+  `,
+});

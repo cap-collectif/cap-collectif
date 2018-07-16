@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import moment from 'moment';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage, FormattedDate } from 'react-intl';
 import UserLink from '../User/UserLink';
 import PinnedLabel from '../Utils/PinnedLabel';
@@ -125,4 +126,23 @@ class OpinionInfos extends React.Component<Props> {
   }
 }
 
-export default OpinionInfos;
+export default createFragmentContainer(OpinionInfos, {
+  opinion: graphql`
+    fragment OpinionInfos_opinion on OpinionOrVersion {
+      ... on Opinion {
+        createdAt
+        pinned
+        author {
+          displayName
+        }
+      }
+      ... on Version {
+        author {
+          displayName
+        }
+        createdAt
+        pinned
+      }
+    }
+  `,
+});

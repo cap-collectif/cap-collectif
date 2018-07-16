@@ -154,7 +154,7 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
               OR
               (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ov.expired = 0 AND ovo.isEnabled = 1 AND ovocs.isEnabled = 1)
             )
-            GROUP BY s.Author
+            GROUP BY s.author
         )'
         );
 
@@ -297,12 +297,12 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
             from CapcoAppBundle:SourceVote sv
             LEFT JOIN CapcoAppBundle:Source s WITH sv.source = s
             LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
-            LEFT JOIN CapcoAppBundle:Opinion o WITH s.Opinion = o
+            LEFT JOIN CapcoAppBundle:Opinion o WITH s.opinion = o
             LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
             LEFT JOIN CapcoAppBundle:Steps\ConsultationStep cs WITH o.step = cs
             LEFT JOIN CapcoAppBundle:Steps\ConsultationStep ovocs WITH ovo.step = ovocs
             WHERE sv.user = u AND sv.expired = 0 AND s.isEnabled = 1 AND s.expired = 0 AND (
-              (s.Opinion IS NOT NULL AND o.isEnabled = 1 AND o.expired =0 AND cs.isEnabled = 1)
+              (s.opinion IS NOT NULL AND o.isEnabled = 1 AND o.expired =0 AND cs.isEnabled = 1)
               OR
               (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ov.expired = 0 AND ovo.isEnabled = 1 AND ovocs.isEnabled = 1)
             )

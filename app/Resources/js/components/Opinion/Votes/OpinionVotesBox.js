@@ -1,18 +1,16 @@
 // @flow
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { VOTE_WIDGET_DISABLED, VOTE_WIDGET_BOTH } from '../../../constants/VoteConstants';
 import VotePiechart from '../../Utils/VotePiechart';
 import OpinionVotesBar from './OpinionVotesBar';
 import OpinionVotesButtons from './OpinionVotesButtons';
+import type { OpinionVotesBox_opinion } from './__generated__/OpinionVotesBox_opinion.graphql';
 
-type Props = { opinion: Object };
+type Props = { opinion: OpinionVotesBox_opinion };
 
 class OpinionVotesBox extends React.Component<Props> {
-  getOpinionType = () => {
-    const { opinion } = this.props;
-    return this.isVersion() ? opinion.parent.type : opinion.type;
-  };
 
   isVersion = () => {
     const { opinion } = this.props;
@@ -21,28 +19,28 @@ class OpinionVotesBox extends React.Component<Props> {
 
   isContribuable = () => {
     const { opinion } = this.props;
-    return opinion.isContribuable;
+    return opinion.contribuable;
   };
 
   showVotesButtons = () => {
-    const widgetType = this.getOpinionType().voteWidgetType;
+    const widgetType = this.props.opinion.section.voteWidgetType;
     return widgetType !== VOTE_WIDGET_DISABLED;
   };
 
   showPiechart = () => {
     const {
-      opinion: { votesCount },
+      opinion,
     } = this.props;
-    const widgetType = this.getOpinionType().voteWidgetType;
-    return votesCount > 0 && widgetType === VOTE_WIDGET_BOTH;
+    const widgetType = opinion.section.voteWidgetType;
+    return opinion.votesCount > 0 && widgetType === VOTE_WIDGET_BOTH;
   };
 
   render() {
-    if (this.getOpinionType().voteWidgetType === VOTE_WIDGET_DISABLED) {
+    const { opinion } = this.props;
+    if (opinion.section.voteWidgetType === VOTE_WIDGET_DISABLED) {
       return null;
     }
-    const { opinion } = this.props;
-    const helpText = this.getOpinionType().votesHelpText;
+    const helpText = opinion.section.votesHelpText;
 
     return (
       <div className="opinion__votes__box">
@@ -74,4 +72,31 @@ class OpinionVotesBox extends React.Component<Props> {
   }
 }
 
-export default OpinionVotesBox;
+export default createFragmentContainer(OpinionVotesBox, {
+  opinion: graphql`
+    fragment OpinionVotesBox_opinion on OpinionOrVersion {
+      ...OpinionVotesButtons_opinion
+      ...OpinionVotesBar_opinion
+      ... on Opinion {
+        votesCountMitige
+        votesCountNok
+        votesCountOk
+        contribuable
+        section {
+          voteWidgetType
+          votesHelpText
+        }
+      }
+      ... on Version {
+        votesCountMitige
+        votesCountNok
+        votesCountOk
+        contribuable
+        section {
+          voteWidgetType
+          votesHelpText
+        }
+      }
+    }
+  `,
+});

@@ -20,12 +20,7 @@ type Props = {
 
 export class OpinionBox extends React.Component<Props> {
   getMaxVotesValue = () => {
-    return this.getOpinionType().votesThreshold;
-  };
-
-  getOpinionType = () => {
-    const { opinion } = this.props;
-    return this.isVersion() ? opinion.parent.type : opinion.type;
+    return this.props.opinion.section.votesThreshold;
   };
 
   getBoxLabel = () => {
@@ -44,11 +39,11 @@ export class OpinionBox extends React.Component<Props> {
 
   render() {
     const { opinion, opinionTerm, rankingThreshold } = this.props;
-    const color = this.getOpinionType().color;
-    const parentTitle = this.isVersion() ? opinion.parent.title : this.getOpinionType().title;
+    const color = opinion.section.color;
+    const parentTitle = this.isVersion() ? opinion.parent.title : opinion.section.title;
     const headerTitle = this.getBoxLabel();
 
-    const backLink = opinion.type.url;
+    const backLink = opinion.section.url;
     const colorClass = `opinion opinion--${color} opinion--current`;
     return (
       <div className="block block--bordered opinion__details">
@@ -96,7 +91,7 @@ export class OpinionBox extends React.Component<Props> {
           </div>
           <OpinionVotesBox opinion={opinion} />
         </div>
-        <OpinionAnswer answer={opinion.answer} />
+        <OpinionAnswer opinion={opinion} />
       </div>
     );
   }
@@ -104,16 +99,30 @@ export class OpinionBox extends React.Component<Props> {
 
 export default createFragmentContainer(OpinionBox, {
   opinion: graphql`
-    fragment OpinionBox_opinion on Opinion {
-      id
-      body
-      answer
-      type {
-        color
-        votesThreshold
-        url
+    fragment OpinionBox_opinion on OpinionOrVersion {
+      ...OpinionPreview_opinion
+      ...OpinionAnswer_opinion
+      ...OpinionVotesBox_opinion
+      ...OpinionButtons_opinion
+      ...OpinionBody_opinion
+      ...OpinionAppendices_opinion
+      ... on Opinion {
+        id
+        body
+        section {
+          color
+          votesThreshold
+          url
+        }
       }
-      ... on OpinionVersion {
+      ... on Version {
+        id
+        body
+        section {
+          color
+          votesThreshold
+          url
+        }
         parent {
           title
           url

@@ -1,29 +1,17 @@
 // @flow
 import React from 'react';
 import { ButtonToolbar } from 'react-bootstrap';
-import { connect, type MapStateToProps } from 'react-redux';
+import { graphql, createFragmentContainer } from 'react-relay';
 import OpinionVotesButton from './OpinionVotesButton';
-import type { State } from '../../../types';
+import type { OpinionVotesButtons_opinion } from './__generated/OpinionVotesButtons_opinion.graphql';
 
 type Props = {
-  opinion: Object,
+  opinion: OpinionVotesButtons_opinion,
   show: boolean,
   disabled: boolean,
-  user?: Object,
 };
 
 class OpinionVotesButtons extends React.Component<Props> {
-  static defaultProps = {
-    user: null,
-  };
-
-  isTheUserTheAuthor = () => {
-    const { opinion, user } = this.props;
-    if (opinion.author === null || !user) {
-      return false;
-    }
-    return user.uniqueId === opinion.author.uniqueId;
-  };
 
   render() {
     const { opinion, disabled, show } = this.props;
@@ -50,8 +38,10 @@ class OpinionVotesButtons extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  user: state.user.user,
+export default createFragmentContainer(OpinionVotesButtons, {
+  opinion: graphql`
+    fragment OpinionVotesButtons_opinion on OpinionOrVersion {
+      ...OpinionVotesButton_opinion
+    }
+  `,
 });
-
-export default connect(mapStateToProps)(OpinionVotesButtons);

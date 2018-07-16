@@ -1,5 +1,6 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { connect, type MapStateToProps } from 'react-redux';
 import { ButtonToolbar } from 'react-bootstrap';
 import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
@@ -9,9 +10,10 @@ import OpinionReportButton from './OpinionReportButton';
 import OpinionDelete from './Delete/OpinionDelete';
 import OpinionEditButton from './OpinionEditButton';
 import type { State } from '../../types';
+import type { OpinionButtons_opinion } from './__generated__/OpinionButtons_opinion.graphql';
 
 type Props = {
-  opinion: Object,
+  opinion: OpinionButtons_opinion,
   user?: Object,
 };
 
@@ -25,22 +27,17 @@ class OpinionButtons extends React.Component<Props> {
     return !!opinion.parent;
   };
 
-  isContribuable = () => {
-    const { opinion } = this.props;
-    return opinion.isContribuable;
-  };
-
   isTheUserTheAuthor = () => {
     const { opinion, user } = this.props;
     if (opinion.author === null || !user) {
       return false;
     }
-    return user.uniqueId === opinion.author.uniqueId;
+    return user.uniqueId === opinion.author.slug;
   };
 
   renderEditButton = () => {
     const { opinion } = this.props;
-    if (this.isContribuable() && this.isTheUserTheAuthor()) {
+    if (opinion.contribuable && this.isTheUserTheAuthor()) {
       if (this.isVersion()) {
         return (
           <OpinionVersionEditButton
@@ -71,7 +68,7 @@ class OpinionButtons extends React.Component<Props> {
           id="opinion-share-button"
           className="pull-right"
           title={opinion.title}
-          url={opinion._links.show}
+          url={opinion.section.url}
         />
         <OpinionVersionEditModal />
       </ButtonToolbar>
@@ -84,4 +81,21 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   user: state.user.user,
 });
 
-export default connect(mapStateToProps)(OpinionButtons);
+const container = connect(mapStateToProps)(OpinionButtons);
+
+export default createFragmentContainer(container, {
+  opinion: graphql`
+    fragment OpinionButtons_opinion on OpinionOrVersion {
+      ... on Opinion {
+        contribuable
+        title
+        section {
+          url
+        }
+        author {
+          slug
+        }
+      }
+    }
+  `,
+});

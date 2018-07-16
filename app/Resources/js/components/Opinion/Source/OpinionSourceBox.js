@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Panel, Row, Col } from 'react-bootstrap';
-import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
+import { QueryRenderer, createFragmentContainer, graphql, type ReadyState } from 'react-relay';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
 import type {
   OpinionSourceBoxQueryVariables,
@@ -11,9 +11,10 @@ import OpinionSourceListView from './OpinionSourceListView';
 import OpinionSourceAdd from './OpinionSourceAdd';
 import Loader from '../../Ui/Loader';
 import Filter from '../../Utils/Filter';
+import type { OpinionSourceBox_opinion } from './__generated__/OpinionSourceBox_opinion.graphql';
 
 type Props = {
-  opinion: { id: string },
+  sourceable: OpinionSourceBox_opinion,
   isAuthenticated: boolean,
 };
 
@@ -76,59 +77,10 @@ class OpinionSourceBox extends React.Component<Props, State> {
   };
 
   render() {
-    const { opinion } = this.props;
-    const { sources, isLoading, filter } = this.state;
+    const { sourceable, isAuthenticated } = this.props;
+    const { order } = this.state;
+    const totalCount = sourceable.allSources.totalCount;
     return (
-      <div>
-        <QueryRenderer
-          environment={environment}
-          query={graphql`
-            query OpinionSourceBoxQuery(
-              $sourceableId: ID!
-              $isAuthenticated: Boolean!
-              $count: Int!
-              $cursor: String
-              $orderBy: SourceOrder!
-            ) {
-              sourceable: node(id: $sourceableId) {
-                ... on Sourceable {
-                  ...OpinionSourceAdd_sourceable
-                  contribuable
-                  allSources: sources(first: 0)
-                    @connection(key: "OpinionSourceBox_allSources", filters: []) {
-                    totalCount
-                    edges {
-                      node {
-                        id
-                      }
-                    }
-                  }
-                }
-                ...OpinionSourceListView_sourceable
-                  @arguments(orderBy: $orderBy, count: $count, isAuthenticated: $isAuthenticated)
-              }
-            }
-          `}
-          variables={
-            ({
-              isAuthenticated,
-              cursor: null,
-              count: 25,
-              sourceableId: opinion.id,
-              orderBy: { field: 'CREATED_AT', direction: 'DESC' },
-            }: OpinionSourceBoxQueryVariables)
-          }
-          render={({ error, props }: ReadyState & { props?: ?OpinionSourceBoxQueryResponse }) => {
-            if (error) {
-              return graphqlError;
-            }
-            if (props) {
-              const sourceable = props.sourceable;
-              if (!sourceable || !sourceable.allSources) {
-                return graphqlError;
-              }
-              const totalCount = sourceable.allSources.totalCount;
-              return (
                 <Panel>
                   <Panel.Heading>
                     <Row>
@@ -142,17 +94,60 @@ class OpinionSourceBox extends React.Component<Props, State> {
                       )}
                     </Row>
                   </Panel.Heading>
-                  {/* $FlowFixMe */}
+        <QueryRenderer
+          environment={environment}
+          query={graphql`
+            query OpinionSourceBoxQuery(
+              $sourceableId: ID!
+              $isAuthenticated: Boolean!
+              $count: Int!
+              $cursor: String
+              $orderBy: SourceOrder!
+            ) {
+              sourceable: node(id: $sourceableId) {
+                ...OpinionSourceListView_sourceable
+                  @arguments(orderBy: $orderBy, count: $count, isAuthenticated: $isAuthenticated)
+              }
+            }
+          `}
+          variables={
+            ({
+              isAuthenticated,
+              cursor: null,
+              count: 25,
+              sourceableId: sourceable.id,
+              orderBy: { field: 'CREATED_AT', direction: 'DESC' },
+            }: OpinionSourceBoxQueryVariables)
+          }
+          render={({ error, props }: ReadyState & { props?: ?OpinionSourceBoxQueryResponse }) => {
+            if (error) {
+              return graphqlError;
+            }
+            if (props) {
+              const sourceable = props.sourceable;
+              if (!sourceable) {
+                return graphqlError;
+              }
+              return (
                   <OpinionSourceListView order={order} sourceable={sourceable} />
-                </Panel>
               );
             }
             return <Loader />;
           }}
         />
-      </div>
+      </Panel>
     );
   }
 }
 
-export default OpinionSourceBox;
+export default createFragmentContainer(OpinionSourceBox, {
+  sourceable: graphql`
+    fragment OpinionSourceBox_sourceable on Sourceable {
+      id
+      ...OpinionSourceAdd_sourceable
+      allSources: sources(first: 0) {
+        totalCount
+      }
+    }
+  `,
+});

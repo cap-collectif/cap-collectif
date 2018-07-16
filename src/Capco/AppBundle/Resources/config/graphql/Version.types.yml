@@ -67,3 +67,14 @@ Version:
                 resolve: "@=resolver('version_reportings', [value])"
             arguments:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionArgumentsResolver", [value, args])'
+            section:
+                type: "Section!"
+                description: "The section of the parent opinion."
+                resolve: "@=resolver('proposition_section', [value])"
+            answer:
+                type: "Answer"
+                resolve: "@=value.getAnswer()"
+            parent:
+                type: "Opinion!"
+            pinned:
+                type: "Boolean!"

@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { Button } from 'react-bootstrap';
@@ -85,9 +86,7 @@ export class OpinionVotesButton extends React.Component<Props> {
 
   voteIsEnabled = () => {
     const { opinion, value } = this.props;
-    const voteType = this.isVersion()
-      ? opinion.parent.type.voteWidgetType
-      : opinion.type.voteWidgetType;
+    const voteType = opinion.section.voteWidgetType;
     if (voteType === VOTE_WIDGET_BOTH) {
       return true;
     }
@@ -138,4 +137,28 @@ const mapStateToProps: MapStateToProps<*, *, *> = (
   };
 };
 
-export default connect(mapStateToProps)(OpinionVotesButton);
+const container = connect(mapStateToProps)(OpinionVotesButton);
+
+export default createFragmentContainer(container, {
+  opinion: graphql`
+    fragment OpinionVotesButton_opinion on OpinionOrVersion {
+      ... on Opinion {
+        id
+        section {
+          voteWidgetType
+        }
+        #viewerHasVote
+        #viewerVote
+      }
+      ... on Version {
+        id
+        section {
+          voteWidgetType
+        }
+        parent {
+          id
+        }
+      }
+    }
+  `,
+});

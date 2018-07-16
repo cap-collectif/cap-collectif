@@ -1,39 +1,35 @@
 // @flow
 import React from 'react';
-import { connect, type MapStateToProps } from 'react-redux';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import OpinionUserVote from './OpinionUserVote';
+// import OpinionUserVote from './OpinionUserVote';
 import VotesBar from '../../Utils/VotesBar';
-import OpinionVotesModal from './OpinionVotesModal';
-import type { State, OpinionAndVersion } from '../../../types';
+// import OpinionVotesModal from './OpinionVotesModal';
+import type { OpinionVotesBar_opinion } from './__generated__/OpinionVotesBar_opinion.graphql';
 
 type Props = {
-  opinion: Object,
+  opinion: OpinionVotesBar_opinion,
 };
 
 class OpinionVotesBar extends React.Component<Props> {
-  getOpinionType = () => {
-    const { opinion } = this.props;
-    return opinion.parent ? opinion.parent.type : opinion.type;
-  };
 
   render() {
     const { opinion } = this.props;
     return (
       <div>
-        {this.getOpinionType().votesThreshold && (
+        {opinion.section.votesThreshold && (
           <VotesBar
-            max={this.getOpinionType().votesThreshold}
+            max={opinion.section.votesThreshold}
             value={opinion.votesCountOk}
-            helpText={this.getOpinionType().votesThresholdHelpText}
+            helpText={opinion.section.votesThresholdHelpText}
           />
         )}
-        <div style={{ paddingTop: '20px' }}>
+        {/* <div style={{ paddingTop: '20px' }}>
           {opinion.votes.slice(0, 5).map((vote, index) => {
             return <OpinionUserVote key={index} vote={vote} style={{ marginRight: 5 }} />;
           })}
           <OpinionVotesModal opinion={opinion} />
-        </div>
+        </div> */}
         <div>
           <FormattedMessage
             id="global.votes"
@@ -47,16 +43,43 @@ class OpinionVotesBar extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (
-  state: State,
-  props: { opinion: OpinionAndVersion },
-) => ({
-  opinion: {
-    ...props.opinion,
-    ...(Object.keys(state.opinion.opinionsById).length
-      ? state.opinion.opinionsById[props.opinion.id]
-      : state.opinion.versionsById[props.opinion.id]),
-  },
-});
+// const mapStateToProps: MapStateToProps<*, *, *> = (
+//   state: State,
+//   props: { opinion: OpinionAndVersion },
+// ) => ({
+//   opinion: {
+//     ...props.opinion,
+//     ...(Object.keys(state.opinion.opinionsById).length
+//       ? state.opinion.opinionsById[props.opinion.id]
+//       : state.opinion.versionsById[props.opinion.id]),
+//   },
+// });
 
-export default connect(mapStateToProps)(OpinionVotesBar);
+// const container = connect(mapStateToProps)(OpinionVotesBar);
+export default createFragmentContainer(OpinionVotesBar, {
+  opinion: graphql`
+    fragment OpinionVotesBar_opinion on OpinionOrVersion {
+      #...OpinionVotesModal_opinion
+      ... on Opinion {
+        id
+        section {
+          voteWidgetType
+          votesThreshold
+        }
+        votesCount
+        votesCountOk
+        #viewerHasVote
+        #viewerVote
+      }
+      ... on Version {
+        id
+        section {
+          voteWidgetType
+        }
+        parent {
+          id
+        }
+      }
+    }
+  `,
+});

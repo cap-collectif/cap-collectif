@@ -264,10 +264,10 @@ class RecalculateCountersCommand extends ContainerAwareCommand
           select count(DISTINCT s.id)
           from CapcoAppBundle:Source s
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
-          LEFT JOIN CapcoAppBundle:Opinion o WITH s.Opinion = o
+          LEFT JOIN CapcoAppBundle:Opinion o WITH s.opinion = o
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
           WHERE s.isEnabled = 1 AND s.isTrashed = 0 AND s.expired = 0 AND (
-            (s.Opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = cs)
+            (s.opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = cs)
             OR
             (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovo.step = cs)
           )
@@ -279,10 +279,10 @@ class RecalculateCountersCommand extends ContainerAwareCommand
           select count(DISTINCT s.id)
           from CapcoAppBundle:Source s
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
-          LEFT JOIN CapcoAppBundle:Opinion o WITH s.Opinion = o
+          LEFT JOIN CapcoAppBundle:Opinion o WITH s.opinion = o
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
           WHERE s.isEnabled = 1 AND s.isTrashed = 1 AND o.expired = 0 AND (
-            (s.Opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = cs)
+            (s.opinion IS NOT NULL AND o.isEnabled = 1 AND o.step = cs)
             OR
             (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ovo.isEnabled = 1 AND ovo.step = cs)
           )

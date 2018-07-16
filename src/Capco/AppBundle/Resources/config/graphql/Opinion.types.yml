@@ -12,8 +12,6 @@ Opinion:
                 resolve: "@=resolver('proposition_url', [value])"
             url:
                 resolve: "@=resolver('proposition_url', [value])"
-            type:
-                type: "OpinionType!"
             pinned:
                 type: "Boolean!"
                 description: "true if the contribution is pinned."
@@ -81,3 +79,8 @@ Opinion:
                 resolve: "@=resolver('proposition_reportings', [value])"
             contribuable:
                 resolve: "@=value.canContribute()"
+            answer:
+                type: "Answer"
+                resolve: "@=value.getAnswer()"
+            appendices:
+                type: "[Appendix]"

@@ -64,7 +64,7 @@ class OpinionTabs extends React.Component<Props, State> {
 
   getCommentSystem = () => {
     const opinion = this.props.opinion;
-    return opinion.type.commentSystem;
+    return opinion.section.commentSystem;
   };
 
   getArgumentsTrad = () => {
@@ -90,7 +90,7 @@ class OpinionTabs extends React.Component<Props, State> {
 
   getType = () => {
     const { opinion } = this.props;
-    return opinion.type;
+    return opinion.section;
   };
 
   isSourceable = () => {
@@ -107,7 +107,7 @@ class OpinionTabs extends React.Component<Props, State> {
 
   isVersionable = () => {
     const opinion = this.props.opinion;
-    return !this.isVersion() && opinion.type !== 'undefined' && opinion.type.versionable;
+    return !this.isVersion() && opinion.section !== 'undefined' && opinion.section.versionable;
   };
 
   isVersion = () => {
@@ -206,7 +206,7 @@ class OpinionTabs extends React.Component<Props, State> {
     }
 
     if (this.isSourceable()) {
-      return <OpinionSourceBox {...this.props} />;
+      return <OpinionSourceBox isAuthenticated={false} sourceable={opinion} />;
     }
     if (this.isVersionable()) {
       return this.renderVersionsContent();
@@ -231,8 +231,8 @@ export default createFragmentContainer(OpinionTabs, {
       versionsCount
       argumentsCount
       sourcesCount
-      ...OpinionSourceBox_opinion
-      type {
+      ...OpinionSourceBox_sourceable
+      section {
         versionable
         sourceable
         commentSystem
