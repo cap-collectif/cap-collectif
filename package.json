@@ -203,6 +203,7 @@
     "moment-locales-webpack-plugin": "^1.0.7",
     "moment-timezone": "^0.5.23",
     "node-sass": "^4.10.0",
+    "node-expat": "^2.3.16",
     "points-cluster": "^0.1.4",
     "pre-commit": "^1.2.2",
     "prettier": "^1.15.2",
