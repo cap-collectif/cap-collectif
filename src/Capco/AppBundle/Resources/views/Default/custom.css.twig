@@ -123,6 +123,8 @@
     a:focus,
     .opinion .opinion__body .opinion__title a:hover,
     .opinion .opinion__body .opinion__user a:hover,
+    .list-group-item__opinion .title a:hover,
+    .list-group-item__opinion .author-name:hover,
     .btn.btn-link:hover,
     .btn.btn-link:active,
     .btn.btn-link.active {
@@ -140,7 +142,8 @@
     }
 
     .opinion .opinion__body .opinion__title a,
-    .opinion .opinion__body .opinion__user a {
+    .opinion .opinion__body .opinion__user a,
+    .list-group-item__opinion .author-name {
         color: {{ link | raw }};
     }
 

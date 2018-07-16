@@ -6,6 +6,7 @@ const InlineList = styled.ul.attrs({
   className: 'excerpt',
 })`
   padding: 0;
+  margin: 0;
 
   li {
     display: inline;

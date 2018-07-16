@@ -35,12 +35,8 @@ export class ArgumentListViewPaginated extends React.Component<Props, State> {
           .map(edge => edge.node)
           .filter(Boolean)
           .map(argument => {
-            return (
-              <ListGroupItem key={argument.id}>
-                {/* $FlowFixMe */}
-                <ArgumentItem argument={argument} />
-              </ListGroupItem>
-            );
+            // $FlowFixMe
+            return <ArgumentItem key={argument.id} argument={argument} />;
           })}
         {relay.hasMore() && (
           <ListGroupItem style={{ textAlign: 'center' }}>

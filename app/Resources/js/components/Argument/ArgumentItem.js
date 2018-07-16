@@ -5,6 +5,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import classNames from 'classnames';
 import moment from 'moment';
 import Linkify from 'react-linkify';
+import { ListGroupItem } from 'react-bootstrap';
 import UserAvatar from '../User/UserAvatar';
 import UserLink from '../User/UserLink';
 import ArgumentButtons from './ArgumentButtons';
@@ -42,7 +43,7 @@ class ArgumentItem extends React.Component<Props> {
       'bg-vip': argument.author && argument.author.vip,
     });
     return (
-      <div className={classes} id={`arg-${argument.id}`}>
+      <ListGroupItem className={classes} id={`arg-${argument.id}`}>
         <div className="opinion__body">
           <UserAvatar user={argument.author} className="pull-left" />
           <div className="opinion__data">
@@ -63,7 +64,7 @@ class ArgumentItem extends React.Component<Props> {
           </p>
           <ArgumentButtons argument={argument} />
         </div>
-      </div>
+      </ListGroupItem>
     );
   }
 }

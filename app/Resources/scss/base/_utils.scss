@@ -104,6 +104,14 @@
 }
 
 /* =====
+  Border
+==== */
+
+.no-border {
+    border: none;
+}
+
+/* =====
   Display
 ==== */
 
@@ -141,6 +149,10 @@
 
 .flex-end {
     justify-content: flex-end;
+}
+
+.object-cover {
+    object-fit: cover;
 }
 
 /* =====

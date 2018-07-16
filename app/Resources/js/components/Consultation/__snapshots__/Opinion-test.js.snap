@@ -1,163 +1,145 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Opinion /> renders correcty 1`] = `
-<li
-  className="opinion has-chart"
+<ListGroupItem
+  bsClass="list-group-item"
+  className="list-group-item__opinion has-chart"
+  listItem={false}
 >
   <div
-    className="row"
+    className="left-block"
   >
-    <div
-      className="col-xs-12  col-sm-8  col-md-9  col-lg-10"
-    >
-      <div
-        className="opinion__body box excerpt"
-        style={
-          Object {
-            "textAlign": "left",
-          }
+    <Connect(UserAvatar)
+      user={
+        Object {
+          "displayName": "",
+          "media": Object {
+            "url": "",
+          },
+          "show_url": "",
+          "vip": false,
         }
-      >
-        <Connect(UserAvatar)
-          className="pull-left"
-          user={
-            Object {
+      }
+    />
+    <div>
+      <OpinionInfos
+        opinion={
+          Object {
+            "$refType": null,
+            "argumentsCount": 0,
+            "author": Object {
               "displayName": "",
               "media": Object {
                 "url": "",
               },
               "show_url": "",
               "vip": false,
-            }
+            },
+            "createdAt": "",
+            "id": "opinionId",
+            "pinned": true,
+            "section": Object {
+              "linkable": false,
+              "sourceable": true,
+              "title": "Section",
+              "versionable": true,
+              "voteWidgetType": 1,
+            },
+            "sourcesCount": 0,
+            "title": "title",
+            "updatedAt": "",
+            "url": "",
+            "versionsCount": 0,
+            "votesCount": 0,
+            "votesCountMitige": 0,
+            "votesCountNok": 0,
+            "votesCountOk": 0,
           }
-        />
-        <div
-          className="opinion__data"
-        >
-          <OpinionInfos
-            opinion={
-              Object {
-                "$refType": null,
-                "argumentsCount": 0,
-                "author": Object {
-                  "displayName": "",
-                  "media": Object {
-                    "url": "",
-                  },
-                  "show_url": "",
-                  "vip": false,
-                },
-                "createdAt": "",
-                "id": "opinionId",
-                "pinned": true,
-                "section": Object {
-                  "linkable": false,
-                  "sourceable": true,
-                  "title": "Section",
-                  "versionable": true,
-                  "voteWidgetType": 1,
-                },
-                "sourcesCount": 0,
-                "title": "title",
-                "updatedAt": "",
+        }
+        rankingThreshold={0}
+      />
+      <OpinionPreviewTitle
+        link={true}
+        opinion={
+          Object {
+            "$refType": null,
+            "argumentsCount": 0,
+            "author": Object {
+              "displayName": "",
+              "media": Object {
                 "url": "",
-                "versionsCount": 0,
-                "votesCount": 0,
-                "votesCountMitige": 0,
-                "votesCountNok": 0,
-                "votesCountOk": 0,
-              }
-            }
-            rankingThreshold={0}
-          />
-          <OpinionPreviewTitle
-            link={true}
-            opinion={
-              Object {
-                "$refType": null,
-                "argumentsCount": 0,
-                "author": Object {
-                  "displayName": "",
-                  "media": Object {
-                    "url": "",
-                  },
-                  "show_url": "",
-                  "vip": false,
-                },
-                "createdAt": "",
-                "id": "opinionId",
-                "pinned": true,
-                "section": Object {
-                  "linkable": false,
-                  "sourceable": true,
-                  "title": "Section",
-                  "versionable": true,
-                  "voteWidgetType": 1,
-                },
-                "sourcesCount": 0,
-                "title": "title",
-                "updatedAt": "",
+              },
+              "show_url": "",
+              "vip": false,
+            },
+            "createdAt": "",
+            "id": "opinionId",
+            "pinned": true,
+            "section": Object {
+              "linkable": false,
+              "sourceable": true,
+              "title": "Section",
+              "versionable": true,
+              "voteWidgetType": 1,
+            },
+            "sourcesCount": 0,
+            "title": "title",
+            "updatedAt": "",
+            "url": "",
+            "versionsCount": 0,
+            "votesCount": 0,
+            "votesCountMitige": 0,
+            "votesCountNok": 0,
+            "votesCountOk": 0,
+          }
+        }
+        showTypeLabel={false}
+      />
+      <OpinionPreviewCounters
+        opinion={
+          Object {
+            "$refType": null,
+            "argumentsCount": 0,
+            "author": Object {
+              "displayName": "",
+              "media": Object {
                 "url": "",
-                "versionsCount": 0,
-                "votesCount": 0,
-                "votesCountMitige": 0,
-                "votesCountNok": 0,
-                "votesCountOk": 0,
-              }
-            }
-            showTypeLabel={false}
-          />
-          <OpinionPreviewCounters
-            opinion={
-              Object {
-                "$refType": null,
-                "argumentsCount": 0,
-                "author": Object {
-                  "displayName": "",
-                  "media": Object {
-                    "url": "",
-                  },
-                  "show_url": "",
-                  "vip": false,
-                },
-                "createdAt": "",
-                "id": "opinionId",
-                "pinned": true,
-                "section": Object {
-                  "linkable": false,
-                  "sourceable": true,
-                  "title": "Section",
-                  "versionable": true,
-                  "voteWidgetType": 1,
-                },
-                "sourcesCount": 0,
-                "title": "title",
-                "updatedAt": "",
-                "url": "",
-                "versionsCount": 0,
-                "votesCount": 0,
-                "votesCountMitige": 0,
-                "votesCountNok": 0,
-                "votesCountOk": 0,
-              }
-            }
-          />
-        </div>
-      </div>
-    </div>
-    <div
-      className="hidden-xs col-sm-4 col-md-3 col-lg-2"
-    >
-      <VotePiechart
-        height="90px"
-        left={0}
-        mitige={0}
-        nok={0}
-        ok={0}
-        top={10}
-        width="145px"
+              },
+              "show_url": "",
+              "vip": false,
+            },
+            "createdAt": "",
+            "id": "opinionId",
+            "pinned": true,
+            "section": Object {
+              "linkable": false,
+              "sourceable": true,
+              "title": "Section",
+              "versionable": true,
+              "voteWidgetType": 1,
+            },
+            "sourcesCount": 0,
+            "title": "title",
+            "updatedAt": "",
+            "url": "",
+            "versionsCount": 0,
+            "votesCount": 0,
+            "votesCountMitige": 0,
+            "votesCountNok": 0,
+            "votesCountOk": 0,
+          }
+        }
       />
     </div>
   </div>
-</li>
+  <VotePiechart
+    height="90px"
+    left={0}
+    mitige={0}
+    nok={0}
+    ok={0}
+    top={10}
+    width="145px"
+  />
+</ListGroupItem>
 `;

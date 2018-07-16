@@ -2,18 +2,17 @@
 
 exports[`<OpinionList /> renders correcty 1`] = `
 <div
-  className="anchor-offset block  block--bordered"
+  className="anchor-offset"
   id="opinions--test17slug"
 >
-  <div
-    className="opinion  opinion--red opinion--default"
+  <Uncontrolled(Panel)
+    className="opinion panel--red panel--default panel-custom"
   >
-    <div
-      className="opinion__header  opinion__header--mobile-centered"
+    <PanelHeading
+      bsClass="panel"
+      componentClass="div"
     >
-      <div
-        className="pull-left opinion__header__title"
-      >
+      <p>
         <FormattedMessage
           id="global.opinionsCount"
           values={
@@ -22,9 +21,9 @@ exports[`<OpinionList /> renders correcty 1`] = `
             }
           }
         />
-      </div>
+      </p>
       <div
-        className="pull-right  opinion__header__filter"
+        className="panel-heading__actions"
       >
         <Connect(NewOpinionButton)
           disabled={true}
@@ -43,7 +42,7 @@ exports[`<OpinionList /> renders correcty 1`] = `
           }
         />
       </div>
-    </div>
-  </div>
+    </PanelHeading>
+  </Uncontrolled(Panel)>
 </div>
 `;
