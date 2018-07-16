@@ -254,8 +254,8 @@ input ArgumentOrder {
 
 # Properties by which argument connections can be ordered
 enum ArgumentOrderField {
-  # Allows ordering a list of arguments by when they were published.
-  PUBLISHED_AT
+  # Allows ordering a list of arguments by when they were created.
+  CREATED_AT
 
   # Allows ordering a list of arguments by the number of votes it have.
   VOTES
@@ -299,7 +299,6 @@ type ArgumentVote implements Publishable {
 
 # An argumentable
 interface Argumentable {
-  # The ID of an object
   id: ID!
   contribuable: Boolean!
 
@@ -309,22 +308,12 @@ interface Argumentable {
     first: Int
     before: String
     last: Int
-    orderBy: ArgumentOrder = {field: PUBLISHED_AT, direction: DESC}
+    viewerUnpublishedOnly: Boolean = false
+    orderBy: ArgumentOrder = {field: CREATED_AT, direction: DESC}
 
     # If provided, returns the arguments of this particular type.
     type: ArgumentValue
   ): ArgumentConnection!
-
-  # The unpublished arguments of to the viewer.
-  viewerArgumentsUnpublished(
-    after: String
-    first: Int
-    before: String
-    last: Int
-
-    # If provided, returns the arguments of this particular type.
-    type: ArgumentValue
-  ): ArgumentConnection
 }
 
 input ChangeArgumentInput {
@@ -576,7 +565,7 @@ type CollectStep implements Node & Step & ProposalStep {
   url: String!
   proposals(
     after: String
-    first: Int = 100
+    first: Int
     before: String
     last: Int
 
@@ -602,14 +591,14 @@ type CollectStep implements Node & Step & ProposalStep {
     term: String
 
     # Ordering options for proposals returned from the connection.
-    orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
+    orderBy: ProposalOrder = {field: CREATED_AT, direction: ASC}
 
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
-  ): ProposalConnection!
 
-  # The viewer unpublished proposals (only visible by viewer).
-  viewerProposalsUnpublished(after: String, first: Int, before: String, last: Int): ProposalConnection
+    # If `true`, retrieves unpublished proposals, otherwise only published proposals are retrived.
+    includeUnpublishedOnly: Boolean = false
+  ): ProposalConnection!
 
   # The requirements to vote on this step.
   requirements: RequirementConnection!
@@ -625,10 +614,10 @@ type CollectStep implements Node & Step & ProposalStep {
   votesRanking: Boolean!
 
   # A list of viewer votes associated with the step.
-  viewerVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: PUBLISHED_AT, direction: DESC}): ProposalVoteConnection!
+  viewerVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}): ProposalVoteConnection!
+  form: ProposalForm!
   statuses: [Status!]!
   private: Boolean!
-  form: ProposalForm!
 
   # A list of contributor associated with the step.
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
@@ -687,7 +676,7 @@ type Comment implements Node & Publishable & Contribution {
   authorIp: IP
   publicationStatus: CommentPublicationStatus!
   reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
-  votes(after: String, first: Int = 30, before: String, last: Int, orderBy: VoteOrder = {field: PUBLISHED_AT, direction: DESC}): CommentVoteConnection!
+  votes(after: String, first: Int = 30, before: String, last: Int, orderBy: VoteOrder = {field: CREATED_AT, direction: DESC}): CommentVoteConnection!
 }
 
 # A connection to a list of items.
@@ -712,13 +701,13 @@ type CommentEdge {
 
 # Ways in which lists of comments can be ordered upon return.
 input CommentOrder {
-  field: CommentOrderField! = PUBLISHED_AT
+  field: CommentOrderField! = CREATED_AT
   direction: OrderDirection! = DESC
 }
 
 # Ordering options for comments.
 enum CommentOrderField {
-  PUBLISHED_AT
+  CREATED_AT
   UPDATED_AT
   POPULARITY
 }
@@ -773,7 +762,7 @@ type CommentVoteEdge {
 
 # A consultation
 type Consultation implements Node & Step {
-  # The ID of the step
+  # The id of the consultation.
   id: ID!
 
   # The kind of the step
@@ -800,20 +789,30 @@ type Consultation implements Node & Step {
   # Contributions are allowed right now.
   contribuable: Boolean!
 
+  # List of contributions from any sections.
+  contributions: [Opinion]
+
   # List of sections.
   sections: [Section]
 
   # A list of contributor associated with the consultation.
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
-  viewerOpinionsUnpublished(after: String, first: Int, before: String, last: Int): OpinionConnection
+  viewerUnpublishedOpinions(after: String, first: Int, before: String, last: Int): ContributionConnection
   contributionConnection(
-    after: String
-    first: Int
-    before: String
-    last: Int
-
     # Ordering options for contributions returned from the connection.
-    orderBy: ContributionOrder = {field: POSITION, direction: DESC}
+    orderBy: ContributionOrder
+
+    # Returns the elements in the list that come after the specified global ID.
+    after: String
+
+    # Returns the first n elements from the list.
+    first: Int
+
+    # Returns the elements in the list that come before the specified global ID.
+    before: String
+
+    # Returns the last n elements from the list.
+    last: Int
   ): ContributionConnection
 }
 
@@ -865,7 +864,7 @@ input ContributionOrder {
 enum ContributionOrderField {
   POSITION
   RANDOM
-  PUBLISHED_AT
+  CREATED_AT
   POPULAR
   COMMENT_COUNT
   VOTE_COUNT
@@ -1522,6 +1521,8 @@ type NotificationsConfiguration {
 
 # A contribution
 type Opinion implements Node & Publishable & Argumentable & Sourceable & Reportable & Contribution & Trashable & ContributionWithAuthor & EditableContribution {
+  # The ID of an object
+  id: ID!
   contribuable: Boolean!
 
   # The arguments related to the argumentable.
@@ -1530,25 +1531,12 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
     first: Int
     before: String
     last: Int
-    orderBy: ArgumentOrder = {field: PUBLISHED_AT, direction: DESC}
+    viewerUnpublishedOnly: Boolean = false
+    orderBy: ArgumentOrder = {field: CREATED_AT, direction: DESC}
 
     # If provided, returns the arguments of this particular type.
     type: ArgumentValue
   ): ArgumentConnection!
-
-  # The unpublished arguments of to the viewer.
-  viewerArgumentsUnpublished(
-    after: String
-    first: Int
-    before: String
-    last: Int
-
-    # If provided, returns the arguments of this particular type.
-    type: ArgumentValue
-  ): ArgumentConnection
-
-  # The ID of an object
-  id: ID!
 
   # The kind of contribution.
   kind: String!
@@ -1572,10 +1560,7 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
   updatedAt: DateTime
 
   # The sources related to the sourceable.
-  sources(after: String, first: Int, before: String, last: Int, orderBy: SourceOrder = {field: PUBLISHED_AT, direction: DESC}): SourceConnection!
-
-  # The viewer unpublished sources related to the sourceable (only visible by viewer).
-  viewerSourcesUnpublished(after: String, first: Int, before: String, last: Int): SourceConnection!
+  sources(after: String, first: Int, before: String, last: Int, viewerUnpublishedOnly: Boolean = false, orderBy: SourceOrder = {field: CREATED_AT, direction: DESC}): SourceConnection!
 
   # The available sources categories of to the sourceable.
   availableSourceCategories: [SourceCategory]
@@ -1627,7 +1612,7 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
     first: Int
     before: String
     last: Int
-    orderBy: ProposalVotesOrder = {field: PUBLISHED_AT, direction: DESC}
+    orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}
 
     # Filters vote by value
     value: YesNoPairedVoteValue
@@ -1643,10 +1628,7 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
   bodyText: String!
 
   # The versions related to the contribution.
-  versions(after: String, first: Int, before: String, last: Int, orderBy: VersionOrder = {field: PUBLISHED_AT, direction: DESC}): VersionConnection!
-
-  # The viewer versions related to the contribution.
-  viewerVersionsUnpublished(after: String, first: Int, before: String, last: Int, orderBy: VersionOrder = {field: PUBLISHED_AT, direction: DESC}): VersionConnection!
+  versions(after: String, first: Int, before: String, last: Int, viewerUnpublishedOnly: Boolean = false, orderBy: VersionOrder = {field: CREATED_AT, direction: DESC}): VersionConnection!
 
   # Where the proposition has been placed.
   section: Section!
@@ -1821,7 +1803,7 @@ type Post {
   publicationStatus: PostPublicationStatus!
   commentable: Boolean!
   displayedOnBlog: Boolean!
-  comments(after: String, first: Int = 30, before: String, last: Int, orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}): CommentConnection!
+  comments(after: String, first: Int = 30, before: String, last: Int, orderBy: CommentOrder = {field: CREATED_AT, direction: DESC}): CommentConnection!
   abstract: String!
   url: URI!
   media: Media
@@ -1974,7 +1956,7 @@ type Proposal implements Node & Contribution & Publishable & Reportable & Trasha
   evaluers: [Group!]!
   currentVotableStep: ProposalStep
   viewerIsAnEvaluer: Boolean!
-  news(after: String, first: Int = 30, before: String, last: Int, orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: DESC}): NewsConnection!
+  news(after: String, first: Int = 30, before: String, last: Int, orderBy: ProposalOrder = {field: CREATED_AT, direction: DESC}): NewsConnection!
   reportings(after: String, first: Int = 30, before: String, last: Int, orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}): ReportingConnection!
 
   # The related project.
@@ -2038,13 +2020,13 @@ type Proposal implements Node & Contribution & Publishable & Reportable & Trasha
 
   # Count number of comments for the proposal.
   commentsCount: Int!
-  comments(after: String, first: Int = 30, before: String, last: Int, orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}): CommentConnection!
+  comments(after: String, first: Int = 30, before: String, last: Int, orderBy: CommentOrder = {field: CREATED_AT, direction: DESC}): CommentConnection!
   votes(
     after: String
     first: Int = 30
     before: String
     last: Int
-    orderBy: ProposalVotesOrder = {field: PUBLISHED_AT, direction: DESC}
+    orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}
 
     # If provided, retrieve only in this step.
     stepId: ID
@@ -2125,7 +2107,7 @@ type ProposalForm implements Node {
   id: ID!
   proposals(
     after: String
-    first: Int = 100
+    first: Int
     before: String
     last: Int
 
@@ -2151,14 +2133,14 @@ type ProposalForm implements Node {
     term: String
 
     # Ordering options for proposals returned from the connection.
-    orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
+    orderBy: ProposalOrder = {field: CREATED_AT, direction: ASC}
 
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
-  ): ProposalConnection!
 
-  # The viewer unpublished proposals (only visible by viewer).
-  viewerProposalsUnpublished(after: String, first: Int, before: String, last: Int): ProposalConnection
+    # If `true`, retrieves unpublished proposals, otherwise only published proposals are retrived.
+    includeUnpublishedOnly: Boolean = false
+  ): ProposalConnection!
   reference: String!
   description: String
   summaryHelpText: String
@@ -2216,7 +2198,7 @@ input ProposalOrder {
 # Properties by which proposal connections can be ordered
 enum ProposalOrderField {
   # Allows ordering a list of proposals by when they were created.
-  PUBLISHED_AT
+  CREATED_AT
 
   # Allows ordering a list of proposals by the number of votes it have.
   VOTES
@@ -2270,7 +2252,7 @@ interface ProposalStep {
   url: String!
   proposals(
     after: String
-    first: Int = 100
+    first: Int
     before: String
     last: Int
 
@@ -2296,14 +2278,14 @@ interface ProposalStep {
     term: String
 
     # Ordering options for proposals returned from the connection.
-    orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
+    orderBy: ProposalOrder = {field: CREATED_AT, direction: ASC}
 
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
-  ): ProposalConnection!
 
-  # The viewer unpublished proposals (only visible by viewer).
-  viewerProposalsUnpublished(after: String, first: Int, before: String, last: Int): ProposalConnection
+    # If `true`, retrieves unpublished proposals, otherwise only published proposals are retrived.
+    includeUnpublishedOnly: Boolean = false
+  ): ProposalConnection!
 
   # The requirements to vote on this step.
   requirements: RequirementConnection!
@@ -2319,7 +2301,8 @@ interface ProposalStep {
   votesRanking: Boolean!
 
   # A list of viewer votes associated with the step.
-  viewerVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: PUBLISHED_AT, direction: DESC}): ProposalVoteConnection!
+  viewerVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}): ProposalVoteConnection!
+  form: ProposalForm!
 }
 
 # Type of vote.
@@ -2392,7 +2375,7 @@ type ProposalVoteEdge {
 
 # Ways in which lists of votes can be ordered upon return.
 input ProposalVotesOrder {
-  field: VoteOrderField! = PUBLISHED_AT
+  field: VoteOrderField! = CREATED_AT
   direction: OrderDirection! = DESC
 }
 
@@ -2739,9 +2722,8 @@ input ReportingOrder {
   direction: OrderDirection! = DESC
 }
 
-# Properties by which report connections can be ordered
+# Ordering options for reporting.
 enum ReportingOrderField {
-  # Allows ordering a list of reports by when they were created.
   CREATED_AT
 }
 
@@ -2937,7 +2919,7 @@ type SelectionStep implements Node & Step & ProposalStep {
   url: String!
   proposals(
     after: String
-    first: Int = 100
+    first: Int
     before: String
     last: Int
 
@@ -2963,14 +2945,14 @@ type SelectionStep implements Node & Step & ProposalStep {
     term: String
 
     # Ordering options for proposals returned from the connection.
-    orderBy: ProposalOrder = {field: PUBLISHED_AT, direction: ASC}
+    orderBy: ProposalOrder = {field: CREATED_AT, direction: ASC}
 
     # Affiliation options for proposals returned from the connection.
     affiliations: [ProposalAffiliation]
-  ): ProposalConnection!
 
-  # The viewer unpublished proposals (only visible by viewer).
-  viewerProposalsUnpublished(after: String, first: Int, before: String, last: Int): ProposalConnection
+    # If `true`, retrieves unpublished proposals, otherwise only published proposals are retrived.
+    includeUnpublishedOnly: Boolean = false
+  ): ProposalConnection!
 
   # The requirements to vote on this step.
   requirements: RequirementConnection!
@@ -2986,7 +2968,8 @@ type SelectionStep implements Node & Step & ProposalStep {
   votesRanking: Boolean!
 
   # A list of viewer votes associated with the step.
-  viewerVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: PUBLISHED_AT, direction: DESC}): ProposalVoteConnection!
+  viewerVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}): ProposalVoteConnection!
+  form: ProposalForm!
   position: Int!
   statuses: [Status!]!
 
@@ -3131,8 +3114,8 @@ input SourceOrder {
 
 # Properties by which source connections can be ordered
 enum SourceOrderField {
-  # Allows ordering a list of sources by when they were published.
-  PUBLISHED_AT
+  # Allows ordering a list of sources by when they were created.
+  CREATED_AT
 
   # Allows ordering a list of sources by the number of votes it have.
   VOTES
@@ -3174,10 +3157,7 @@ interface Sourceable {
   contribuable: Boolean!
 
   # The sources related to the sourceable.
-  sources(after: String, first: Int, before: String, last: Int, orderBy: SourceOrder = {field: PUBLISHED_AT, direction: DESC}): SourceConnection!
-
-  # The viewer unpublished sources related to the sourceable (only visible by viewer).
-  viewerSourcesUnpublished(after: String, first: Int, before: String, last: Int): SourceConnection!
+  sources(after: String, first: Int, before: String, last: Int, viewerUnpublishedOnly: Boolean = false, orderBy: SourceOrder = {field: CREATED_AT, direction: DESC}): SourceConnection!
 
   # The available sources categories of to the sourceable.
   availableSourceCategories: [SourceCategory]
@@ -3707,7 +3687,7 @@ type User implements Node {
     first: Int = 100000
     before: String
     last: Int
-    orderBy: ProposalVotesOrder = {field: PUBLISHED_AT, direction: DESC}
+    orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}
     stepId: ID
 
     # (ROLE_SUPER_ADMIN only) Select also unpublished votes.
@@ -3825,6 +3805,8 @@ type ValueResponse implements Response {
 
 # A version of contribution
 type Version implements Node & Contribution & Sourceable & Reportable & Publishable & Argumentable & Trashable & ContributionWithAuthor & EditableContribution {
+  # The ID of an object
+  id: ID!
   contribuable: Boolean!
 
   # The arguments related to the argumentable.
@@ -3833,25 +3815,12 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
     first: Int
     before: String
     last: Int
-    orderBy: ArgumentOrder = {field: PUBLISHED_AT, direction: DESC}
+    viewerUnpublishedOnly: Boolean = false
+    orderBy: ArgumentOrder = {field: CREATED_AT, direction: DESC}
 
     # If provided, returns the arguments of this particular type.
     type: ArgumentValue
   ): ArgumentConnection!
-
-  # The unpublished arguments of to the viewer.
-  viewerArgumentsUnpublished(
-    after: String
-    first: Int
-    before: String
-    last: Int
-
-    # If provided, returns the arguments of this particular type.
-    type: ArgumentValue
-  ): ArgumentConnection
-
-  # The ID of an object
-  id: ID!
 
   # The kind of contribution.
   kind: String!
@@ -3875,10 +3844,7 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
   updatedAt: DateTime
 
   # The sources related to the sourceable.
-  sources(after: String, first: Int, before: String, last: Int, orderBy: SourceOrder = {field: PUBLISHED_AT, direction: DESC}): SourceConnection!
-
-  # The viewer unpublished sources related to the sourceable (only visible by viewer).
-  viewerSourcesUnpublished(after: String, first: Int, before: String, last: Int): SourceConnection!
+  sources(after: String, first: Int, before: String, last: Int, viewerUnpublishedOnly: Boolean = false, orderBy: SourceOrder = {field: CREATED_AT, direction: DESC}): SourceConnection!
 
   # The available sources categories of to the sourceable.
   availableSourceCategories: [SourceCategory]
@@ -3917,7 +3883,7 @@ type Version implements Node & Contribution & Sourceable & Reportable & Publisha
     first: Int
     before: String
     last: Int
-    orderBy: ProposalVotesOrder = {field: PUBLISHED_AT, direction: DESC}
+    orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}
 
     # Filters vote by value
     value: YesNoPairedVoteValue
@@ -3978,8 +3944,8 @@ input VersionOrder {
 
 # Properties by which version connections can be ordered
 enum VersionOrderField {
-  # Allows ordering a list of versions by when they were published.
-  PUBLISHED_AT
+  # Allows ordering a list of versions by when they were created.
+  CREATED_AT
 
   # Allows ordering a list of versions by the number of votes it have.
   VOTES
@@ -4075,13 +4041,13 @@ input VoteInput {
 
 # Ways in which lists of votes can be ordered upon return.
 input VoteOrder {
-  field: VoteOrderField! = PUBLISHED_AT
+  field: VoteOrderField! = CREATED_AT
   direction: OrderDirection! = DESC
 }
 
 # Ordering options for votes.
 enum VoteOrderField {
-  PUBLISHED_AT
+  CREATED_AT
   POSITION
 }
 

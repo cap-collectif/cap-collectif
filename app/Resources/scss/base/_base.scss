@@ -243,6 +243,12 @@
     thead > tr > th {
         word-break: keep-all;
         vertical-align: middle;
+        background-color: $page-bgc;
+        border-bottom-width: 1px;
+
+        &:hover {
+            background-color: $border-dropdown-color;
+        }
     }
 
     thead > tr > th,
@@ -253,15 +259,6 @@
 
     td:not(:first-child) {
         font-weight: 500;
-    }
-
-    th {
-        background-color: $page-bgc;
-        border-bottom-width: 1px;
-
-        &:hover {
-            background-color: $border-dropdown-color;
-        }
     }
 
     span.badge-pill {

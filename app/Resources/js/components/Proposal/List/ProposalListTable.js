@@ -6,11 +6,13 @@ import {FormattedMessage} from "react-intl";
 import moment from "moment";
 import * as graphql from "graphql";
 import type { ProposalListTable_proposals } from './__generated__/ProposalListTable_proposals.graphql';
+import type { ProposalListTable_step } from './__generated__/ProposalListTable_step.graphql';
 import UserAvatar from "../../User/UserAvatar";
 import ProgressList from "../../Ui/List/ProgressList";
 
 type Props = {
   proposals: ProposalListTable_proposals,
+  step: ProposalListTable_step,
 };
 
 export class ProposalListTable extends React.Component<Props> {
@@ -87,7 +89,7 @@ export class ProposalListTable extends React.Component<Props> {
               status: node.status,
               author: node.author,
               ref: node.reference,
-              // district: node.district.name, // condition
+              district: node.district.name, // condition
               // category: node.category.name, // condition
               theme: node.theme,
               priceEstimation: node.estimation,
@@ -103,7 +105,7 @@ export class ProposalListTable extends React.Component<Props> {
 
     const columns = [
       // Todo add translation
-      { dataField: 'title', text: 'admin.fields.selection.proposal', headerFormatter: columnTitleFormatter, formatter: titleFormatter },
+      { dataField: 'title', text: 'admin.fields.selection.proposal', headerStyle: { width: 'auto'},headerFormatter: columnTitleFormatter, formatter: titleFormatter },
       { dataField: 'implementationPhase', text: 'implementation-phase', headerFormatter: columnTitleFormatter, formatter: implementationPhaseFormatter},
       { dataField: 'status', text: 'admin.fields.theme.status', headerFormatter: columnTitleFormatter, formatter: statusFormatter },
       { dataField: 'author', text: 'project_download.label.author', headerFormatter: columnTitleFormatter, formatter: authorFormatter },
@@ -127,6 +129,16 @@ export class ProposalListTable extends React.Component<Props> {
 }
 
 export default createFragmentContainer(ProposalListTable, {
+  step: graphql`
+  fragment ProposalListTable_step on ProposalStep
+    {
+      form {
+        usingThemes
+        usingDistrict
+        usingCategories
+      }
+    }
+  `,
   proposals: graphql`
     fragment ProposalListTable_proposals on ProposalConnection
       @argumentDefinitions(

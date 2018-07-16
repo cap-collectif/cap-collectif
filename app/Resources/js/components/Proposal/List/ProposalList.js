@@ -70,7 +70,7 @@ export class ProposalList extends React.Component<Props> {
             <React.Fragment>
               {view === 'mosaic'
                 ? renderProposals(proposalsVisiblePublicly, step, viewer)
-                : renderProposalListTableView(proposalsVisiblePublicly)}
+                : renderProposalListTableView(proposalsVisiblePublicly, step)}
             </React.Fragment>
           )}
         {proposalsVisibleOnlyByViewer.edges &&
@@ -78,7 +78,7 @@ export class ProposalList extends React.Component<Props> {
             <VisibilityBox enabled>
               {view === 'mosaic'
                 ? renderProposals(proposalsVisibleOnlyByViewer, step, viewer)
-                : renderProposalListTableView(proposalsVisibleOnlyByViewer)}
+                : renderProposalListTableView(proposalsVisibleOnlyByViewer, step)}
             </VisibilityBox>
           )}
       </React.Fragment>
@@ -95,6 +95,7 @@ export default createFragmentContainer(ProposalList, {
   step: graphql`
     fragment ProposalList_step on ProposalStep {
       id
+      ...ProposalListTable_step
       ...ProposalPreview_step
     }
   `,
