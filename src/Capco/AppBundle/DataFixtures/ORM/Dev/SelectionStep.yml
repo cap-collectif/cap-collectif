@@ -8,7 +8,7 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     endAt: <dateTimeBetween('now', '+40 days')>
     body: <p><text(1000)></p>
     voteType: 1
-    votesHelpText: <p><text(1000)></p>
+    votesHelpText: <p><text(100)></p>
   selectionstep2:
     id: selectionstep2
     title: Vainqueur
@@ -36,7 +36,7 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     endAt: <dateTimeBetween('now', '+40 days')>
     body: <p><text(1000)></p>
     voteType: 2
-    votesHelpText: <p><text(1000)></p>
+    votesHelpText: <p><text(100)></p>
     budget: 3000000
   selectionstep5:
     id: selectionstep5
@@ -47,7 +47,7 @@ Capco\AppBundle\Entity\Steps\SelectionStep:
     endAt: <dateTimeBetween('now', '+40 days')>
     body: <p><text(1000)></p>
     voteType: 1
-    votesHelpText: <p><text(1000)></p>
+    votesHelpText: <p><text(100)></p>
   selectionstep6:
     id: selectionstep6
     title: Sélection à venir

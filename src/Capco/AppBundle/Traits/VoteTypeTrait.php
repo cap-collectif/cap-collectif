@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -19,7 +18,7 @@ trait VoteTypeTrait
     /**
      * @ORM\Column(name="votes_help_text", type="string", nullable=true)
      */
-    private $votesHelpText = null;
+    private $votesHelpText;
 
     /**
      * @ORM\Column(name="votes_count", type="integer")
@@ -63,9 +62,9 @@ trait VoteTypeTrait
     public static function getVoteTypeLabels()
     {
         return [
-             'step.vote_type.disabled' => self::$VOTE_TYPE_DISABLED,
-             'step.vote_type.simple' => self::$VOTE_TYPE_SIMPLE,
-             'step.vote_type.budget' => self::$VOTE_TYPE_BUDGET,
+            'step.vote_type.disabled' => self::$VOTE_TYPE_DISABLED,
+            'step.vote_type.simple' => self::$VOTE_TYPE_SIMPLE,
+            'step.vote_type.budget' => self::$VOTE_TYPE_BUDGET,
         ];
     }
 

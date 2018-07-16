@@ -5675,16 +5675,16 @@
         },
         {
             "name": "overblog/graphql-bundle",
-            "version": "v0.11.1",
+            "version": "v0.11.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overblog/GraphQLBundle.git",
-                "reference": "db25cfff3ae47182f7da53b1d35680a0eedd628c"
+                "reference": "878ab23bfeca6b669611023c3581d3477f13355d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/overblog/GraphQLBundle/zipball/db25cfff3ae47182f7da53b1d35680a0eedd628c",
-                "reference": "db25cfff3ae47182f7da53b1d35680a0eedd628c",
+                "url": "https://api.github.com/repos/overblog/GraphQLBundle/zipball/878ab23bfeca6b669611023c3581d3477f13355d",
+                "reference": "878ab23bfeca6b669611023c3581d3477f13355d",
                 "shasum": ""
             },
             "require": {
@@ -5749,7 +5749,7 @@
                 "Relay",
                 "graphql"
             ],
-            "time": "2018-05-31T09:11:13+00:00"
+            "time": "2018-07-13T05:39:57+00:00"
         },
         {
             "name": "overblog/graphql-php-generator",
@@ -12591,6 +12591,7 @@
                 "PHPStan",
                 "symfony"
             ],
+            "abandoned": "phpstan/phpstan-symfony",
             "time": "2018-01-18T10:20:29+00:00"
         },
         {

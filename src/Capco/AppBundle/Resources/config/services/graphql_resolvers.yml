@@ -11,6 +11,7 @@ services:
     class: Capco\AppBundle\GraphQL\Resolver\Type\NodeTypeResolver
     arguments:
       - '@overblog_graphql.type_resolver'
+      - '@Capco\AppBundle\GraphQL\Resolver\Requirement\RequirementTypeResolver'
       - '@logger'
     tags:
       - { name: overblog_graphql.resolver }
@@ -624,3 +625,9 @@ services:
       - '@capco.newsletter_subscription.repository'
     tags:
       - { name: overblog_graphql.resolver }
+  Capco\AppBundle\GraphQL\Resolver\Requirement\RequirementTypeResolver:
+    class: Capco\AppBundle\GraphQL\Resolver\Requirement\RequirementTypeResolver
+    arguments:
+      - '@overblog_graphql.type_resolver'
+    tags:
+      - {name: overblog_graphql.resolver}
