@@ -18,9 +18,9 @@ while ! (mysqladmin ping --host=127.0.0.1)
 done
 
 echo "Warming up cache and install bundle assets after $(( SECONDS - start )) seconds..."
+chmod -R 777 var/ && chown -R capco:capco var/
 gosu capco php bin/console cache:warmup --no-debug --env=prod --no-interaction --quiet
 gosu capco php bin/console assets:install --symlink --env=prod --no-interaction --quiet
-gosu capco chmod -R 777 var
 
 
 # Retry variables for migrations (max 3)
@@ -66,12 +66,6 @@ done
 
 echo "Updating rabbitmq vhost to match schema..."
 gosu capco php bin/rabbit vhost:mapping:create --password=guest app/config/rabbitmq.yml --quiet
-
-# Because of SF 2.8 and our GraphQLBundle's fork we rewarm cache
-gosu capco php bin/console cache:warmup --no-debug --env=prod --no-interaction --quiet
-
-# Ensure permissions on var
-chmod -R 777 var/ && chown -R capco:capco var/
 
 echo "Starting daemon to populate elasticsearch..."
 /etc/service/php-fpm/populate_elasticsearch_index &

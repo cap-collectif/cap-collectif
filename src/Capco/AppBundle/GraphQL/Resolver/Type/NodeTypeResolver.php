@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL\Resolver\Type;
 
 use Capco\AppBundle\Entity\Argument;
@@ -30,19 +29,18 @@ use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Resolver\TypeResolver;
-use Psr\Log\LoggerInterface;
 
 class NodeTypeResolver implements ResolverInterface
 {
     private $typeResolver;
     private $requirementTypeResolver;
-    private $logger;
 
-    public function __construct(TypeResolver $typeResolver, RequirementTypeResolver $requirementTypeResolver, LoggerInterface $logger)
-    {
+    public function __construct(
+        TypeResolver $typeResolver,
+        RequirementTypeResolver $requirementTypeResolver
+    ) {
         $this->typeResolver = $typeResolver;
         $this->requirementTypeResolver = $requirementTypeResolver;
-        $this->logger = $logger;
     }
 
     public function __invoke($node)
