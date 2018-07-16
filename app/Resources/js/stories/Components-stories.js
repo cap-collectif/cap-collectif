@@ -23,6 +23,7 @@ import TagsList from '../components/Ui/List/TagsList';
 import DarkenGradientMedia from '../components/Ui/DarkenGradientMedia';
 import SixteenNineMedia from '../components/Ui/SixteenNineMedia';
 import { Loader } from '../components/Ui/Loader';
+import ProgressList from "../components/Ui/List/ProgressList";
 import { UserAvatar } from '../components/User/UserAvatar';
 
 const openProject = {
@@ -224,6 +225,13 @@ storiesOf('Components', module)
           List content
         </div>
       </TagsList>
+      
+      // Progress list
+      <ProgressList list={[
+        { title: 'step 1', isActive: true},
+        { title: 'step 2', isActive: false},
+        { title: 'step 3', isActive: false},
+      ]}/>
       ~~~
     
     `,
@@ -263,6 +271,14 @@ storiesOf('Components', module)
               4 idées
             </div>
           </TagsList>
+          <h3>Progress list</h3>
+          <div style={{ width: '200px' }} className="mt-15 mb-15">
+            <ProgressList list={[
+              { title: 'step 1', isActive: true},
+              { title: 'step 2', isActive: false},
+              { title: 'step 3', isActive: false},
+            ]}/>
+          </div>
         </div>
       );
     }),

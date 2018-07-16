@@ -192,6 +192,11 @@
     }
 }
 
+// Todo remove with btp4
+.badge-pill {
+    border-radius: 10rem;
+}
+
 /* ======================== Button ============================*/
 
 @each $button in $basic-btns {
@@ -229,31 +234,39 @@
   margin-left: 10px;
 }
 
-/* ==================== Private elements ========================*/
+/* ==================== Table ========================*/
+
 .react-bootstrap-table {
     color: $dark-text;
     overflow-x: scroll;
 
-    th, td {
-        padding: 15px 10px
+    thead > tr > th {
+        word-break: keep-all;
+        vertical-align: middle;
     }
 
-    td {
+    thead > tr > th,
+    tbody > tr > td {
+        padding: 10px 15px;
         vertical-align: middle;
+    }
+
+    td:not(:first-child) {
+        font-weight: 500;
     }
 
     th {
         background-color: $page-bgc;
         border-bottom-width: 1px;
-        // width: 100%;
 
         &:hover {
             background-color: $border-dropdown-color;
         }
     }
 
-    td {
-        // width: 100%;
+    span.badge-pill {
+        font-size: 13px;
+        font-weight: 400;
     }
 }
 
