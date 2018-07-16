@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class OpinionVoteRepository extends EntityRepository
 {
@@ -55,6 +56,38 @@ class OpinionVoteRepository extends EntityRepository
             ->orderBy('v.updatedAt', 'ASC');
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function getByContributionQB(Opinion $votable)
+    {
+        $qb = $this->getQueryBuilder();
+            $qb->andWhere('v.opinion = :opinion')
+            ->setParameter('opinion', $votable->getId());
+        return $qb;
+    }
+
+    public function countByContribution(Opinion $votable) : int
+    {
+        $qb = $this->getByContributionQB($votable);
+        $qb->select('COUNT(v.id)');
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function getByContribution(
+        Opinion $votable,
+        int $limit,
+        int $first,
+        string $field,
+        string $direction
+    ) : Paginator {
+        $qb = $this->getByContributionQB($votable);
+
+        if ('CREATED_AT' === $field) {
+            $qb->addOrderBy('v.createdAt', $direction);
+        }
+
+        $qb->setFirstResult($first)->setMaxResults($limit);
+        return new Paginator($qb);
     }
 
     public function getByOpinion(string $opinionId, bool $asArray = false, int $limit = -1, int $offset = 0)

@@ -1,40 +1,26 @@
 // @flow
 import * as React from 'react';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Modal, Row } from 'react-bootstrap';
 import CloseButton from '../../Form/CloseButton';
-import OpinionActions from '../../../actions/OpinionActions';
+// import OpinionActions from '../../../actions/OpinionActions';
 import Loader from '../../Ui/Loader';
 import UserBox from '../../User/UserBox';
+import type { OpinionVotesModal_opinion } from './__generated__/OpinionVotesModal_opinion.graphql';
 
 type Props = {
-  opinion: Object,
+  opinion: OpinionVotesModal_opinion,
 };
 
 type State = {
   showModal: boolean,
-  isLoading: boolean,
-  votes: Array<$FlowFixMe>,
 };
 
 class OpinionVotesModal extends React.Component<Props, State> {
   state = {
     showModal: false,
-    isLoading: true,
-    votes: [],
   };
-
-  componentDidMount() {
-    const { opinion } = this.props;
-    const opinionId = opinion.parent ? opinion.parent.id : opinion.id;
-    const versionId = opinion.parent ? opinion.id : null;
-    OpinionActions.loadAllVotes(opinionId, versionId).then(votes => {
-      this.setState({
-        isLoading: false,
-        votes,
-      });
-    });
-  }
 
   show = () => {
     this.setState({ showModal: true });
@@ -51,6 +37,7 @@ class OpinionVotesModal extends React.Component<Props, State> {
       return null;
     }
 
+  const votes = [];
     return (
       <span>
         <span
@@ -72,9 +59,9 @@ class OpinionVotesModal extends React.Component<Props, State> {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Loader show={this.state.isLoading}>
+            <Loader show={false}>
               <Row>
-                {this.state.votes.map((vote, index) => {
+                {votes.map((vote, index) => {
                   return (
                     <UserBox
                       key={index}
@@ -96,4 +83,13 @@ class OpinionVotesModal extends React.Component<Props, State> {
   }
 }
 
-export default OpinionVotesModal;
+export default createFragmentContainer(OpinionVotesModal, {
+  opinion: graphql`
+    fragment OpinionVotesModal_opinion on OpinionOrVersion {
+      ... on Opinion {
+        id
+        votesCount
+      }
+    }
+  `,
+});

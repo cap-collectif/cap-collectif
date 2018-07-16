@@ -2,9 +2,9 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-// import OpinionUserVote from './OpinionUserVote';
+import OpinionUserVote from './OpinionUserVote';
 import VotesBar from '../../Utils/VotesBar';
-// import OpinionVotesModal from './OpinionVotesModal';
+import OpinionVotesModal from './OpinionVotesModal';
 import type { OpinionVotesBar_opinion } from './__generated__/OpinionVotesBar_opinion.graphql';
 
 type Props = {
@@ -24,17 +24,17 @@ class OpinionVotesBar extends React.Component<Props> {
             helpText={opinion.section.votesThresholdHelpText}
           />
         )}
-        {/* <div style={{ paddingTop: '20px' }}>
-          {opinion.votes.slice(0, 5).map((vote, index) => {
+        <div style={{ paddingTop: '20px' }}>
+          {opinion.votes.edges.map(edge => edge.node).slice(0, 5).map((vote, index) => {
             return <OpinionUserVote key={index} vote={vote} style={{ marginRight: 5 }} />;
           })}
           <OpinionVotesModal opinion={opinion} />
-        </div> */}
+        </div>
         <div>
           <FormattedMessage
             id="global.votes"
             values={{
-              num: opinion.votesCount,
+              num: opinion.votes.totalCount,
             }}
           />
         </div>
@@ -59,9 +59,17 @@ class OpinionVotesBar extends React.Component<Props> {
 export default createFragmentContainer(OpinionVotesBar, {
   opinion: graphql`
     fragment OpinionVotesBar_opinion on OpinionOrVersion {
-      #...OpinionVotesModal_opinion
+      ...OpinionVotesModal_opinion
       ... on Opinion {
         id
+        votes(first: 5) {
+          totalCount
+          edges {
+            node {
+              ...OpinionUserVote_vote
+            }
+          }
+        }
         section {
           voteWidgetType
           votesThresholdHelpText

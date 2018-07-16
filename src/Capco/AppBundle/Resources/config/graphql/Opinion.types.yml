@@ -51,11 +51,13 @@ Opinion:
                 type: "Int!"
                 description: "Number of sources."
             votes:
-                type: "[OpinionVote]"
+                type: "OpinionVoteConnection!"
+                argsBuilder: "Relay::Connection"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionVotesResolver", [value, args])'
                 args:
-                    first:
-                        type: "Int"
-                resolve: "@=resolver('proposition_votes', [value, args])"
+                    orderBy:
+                        type: "ProposalVotesOrder"
+                        defaultValue: { field: CREATED_AT, direction: DESC }
             title:
                 type: "String!"
                 description: "Identifies the contribution title."

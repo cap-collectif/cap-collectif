@@ -11,9 +11,11 @@ use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionTypeAppendixType;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Source;
+use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Model\CreatableInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -71,13 +73,13 @@ class ConsultationResolver implements ContainerAwareInterface
         return $type->getAppendixTypeTitle();
     }
 
-    public function getConsultationContributionsConnection(ConsultationStep $consultation, Arg $args): Connection
+    public function getConsultationContributionsConnection(ConsultationStep $consultation, Arg $args) : Connection
     {
         $paginator = new Paginator(function ($offset, $limit) use ($consultation, $args) {
             $repo = $this->container->get('capco.opinion.repository');
             $criteria = [
-              'step' => $consultation,
-              'trashed' => false,
+                'step' => $consultation,
+                'trashed' => false,
             ];
             $field = $args->offsetGet('orderBy')['field'];
             $direction = $args->offsetGet('orderBy')['direction'];
@@ -92,13 +94,13 @@ class ConsultationResolver implements ContainerAwareInterface
         return $paginator->auto($args, $totalCount);
     }
 
-    public function getSectionContributionsConnection(OpinionType $section, Arg $args): Connection
+    public function getSectionContributionsConnection(OpinionType $section, Arg $args) : Connection
     {
         $paginator = new Paginator(function ($offset, $limit) use ($section, $args) {
             $repo = $this->container->get('capco.opinion.repository');
             $criteria = [
-              'section' => $section,
-              'trashed' => false,
+                'section' => $section,
+                'trashed' => false,
             ];
             $field = $args->offsetGet('orderBy')['field'];
             $direction = $args->offsetGet('orderBy')['direction'];
@@ -122,11 +124,10 @@ class ConsultationResolver implements ContainerAwareInterface
         return $repo->findAll();
     }
 
-    public function resolvePropositionUrl(Opinion $contribution): string
+    public function resolvePropositionUrl(Opinion $contribution) : string
     {
         $step = $this->container->get('capco.consultation_step.repository')
-          ->getByOpinionId($contribution->getId())
-        ;
+            ->getByOpinionId($contribution->getId());
         $project = $step->getProject();
 
         return $this->container->get('router')->generate(
@@ -147,7 +148,7 @@ class ConsultationResolver implements ContainerAwareInterface
 
         // define ordering closure, using preferred comparison method/field
         $iterator->uasort(function ($first, $second) {
-            return (int) $first->getPosition() > (int) $second->getPosition() ? 1 : -1;
+            return (int)$first->getPosition() > (int)$second->getPosition() ? 1 : -1;
         });
 
         return $iterator;
@@ -167,14 +168,14 @@ class ConsultationResolver implements ContainerAwareInterface
         $project = $step->getProject();
 
         return $this->container->get('router')->generate(
-          'app_consultation_show_opinions',
-          [
-              'projectSlug' => $project->getSlug(),
-              'stepSlug' => $step->getSlug(),
-              'opinionTypeSlug' => $type->getSlug(),
-          ],
-          UrlGeneratorInterface::ABSOLUTE_URL
-      ) . '/1';
+            'app_consultation_show_opinions',
+            [
+                'projectSlug' => $project->getSlug(),
+                'stepSlug' => $step->getSlug(),
+                'opinionTypeSlug' => $type->getSlug(),
+            ],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        ) . '/1';
     }
 
     public function getSectionOpinions(OpinionType $type, Arg $arg)
@@ -187,17 +188,16 @@ class ConsultationResolver implements ContainerAwareInterface
 
         $opinionRepo = $this->container->get('capco.opinion.repository');
         $opinions = $opinionRepo->getByOpinionTypeOrdered(
-              $type->getId(),
-              $limit,
-              1,
-              $type->getDefaultFilter()
-          )
-        ;
+            $type->getId(),
+            $limit,
+            1,
+            $type->getDefaultFilter()
+        );
 
         return $opinions;
     }
 
-    public function getSectionOpinionsCount(OpinionType $type): int
+    public function getSectionOpinionsCount(OpinionType $type) : int
     {
         $repo = $this->container->get('capco.opinion.repository');
 
@@ -216,7 +216,7 @@ class ConsultationResolver implements ContainerAwareInterface
 
         // define ordering closure, using preferred comparison method/field
         $iterator->uasort(function ($first, $second) {
-            return (int) $first->getPosition() > (int) $second->getPosition() ? 1 : -1;
+            return (int)$first->getPosition() > (int)$second->getPosition() ? 1 : -1;
         });
 
         return $iterator;
@@ -227,18 +227,17 @@ class ConsultationResolver implements ContainerAwareInterface
         return $proposition->getOpinionType();
     }
 
-    public function resolvePropositionVoteAuthor(array $vote)
+    public function resolvePropositionVoteAuthor(AbstractVote $vote): ?User
     {
-        return $vote['user'];
+        return $vote->getUser();
     }
 
-    public function resolvePropositionVoteProposition(array $vote)
+    public function resolvePropositionVoteProposition(AbstractVote $vote)
     {
         if (isset($vote['opinion'])) {
             return $this->container
-              ->get('capco.opinion.repository')
-              ->find($vote['opinion'])
-            ;
+                ->get('capco.opinion.repository')
+                ->find($vote['opinion']);
         }
 
         return null;
@@ -249,7 +248,7 @@ class ConsultationResolver implements ContainerAwareInterface
         return $object->getTrashedAt() ? $object->getTrashedAt()->format(\DateTime::ATOM) : null;
     }
 
-    public function resolveContributionVotesCount(OpinionContributionInterface $opinion): int
+    public function resolveContributionVotesCount(OpinionContributionInterface $opinion) : int
     {
         return $opinion->getVotesCountAll();
     }
@@ -264,7 +263,7 @@ class ConsultationResolver implements ContainerAwareInterface
         return $opinion->getArgumentAgainstCount();
     }
 
-    public function resolveReportingType(Reporting $reporting): int
+    public function resolveReportingType(Reporting $reporting) : int
     {
         return $reporting->getStatus();
     }
@@ -288,7 +287,7 @@ class ConsultationResolver implements ContainerAwareInterface
             ->findBy(['opinionVersion' => $version]);
     }
 
-    public function resolveArgumentUrl(Argument $argument): string
+    public function resolveArgumentUrl(Argument $argument) : string
     {
         $parent = $argument->getParent();
         if ($parent instanceof Opinion) {
@@ -300,7 +299,7 @@ class ConsultationResolver implements ContainerAwareInterface
         return '';
     }
 
-    public function resolveVersionUrl(OpinionVersion $version): string
+    public function resolveVersionUrl(OpinionVersion $version) : string
     {
         $opinion = $version->getParent();
         $opinionType = $opinion->getOpinionType();
@@ -320,22 +319,14 @@ class ConsultationResolver implements ContainerAwareInterface
         );
     }
 
-    public function resolveCreatedAt(CreatableInterface $object): string
+    public function resolveCreatedAt(CreatableInterface $object) : string
     {
         return $object->getCreatedAt()->format(\DateTime::ATOM);
     }
 
-    public function resolveUpdatedAt($object): string
+    public function resolveUpdatedAt($object) : string
     {
         return $object->getUpdatedAt()->format(\DateTime::ATOM);
-    }
-
-    public function resolvePropositionVotes(Opinion $proposition, Arg $argument)
-    {
-        return $this->container->get('doctrine')->getManager()
-            ->createQuery('SELECT PARTIAL vote.{id, value, createdAt, expired}, PARTIAL author.{id}, PARTIAL opinion.{id} FROM CapcoAppBundle:OpinionVote vote LEFT JOIN vote.user author LEFT JOIN vote.opinion opinion WHERE vote.opinion = \'' . $proposition->getId() . '\'')
-            // ->setMaxResults(50)
-            ->getArrayResult();
     }
 
     public function resolveVersionVotes(OpinionVersion $version, Arg $argument)
