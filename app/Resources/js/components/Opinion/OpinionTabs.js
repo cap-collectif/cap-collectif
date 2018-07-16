@@ -144,13 +144,16 @@ class OpinionTabs extends React.Component<Props, State> {
                 <NavItem className="opinion-tabs" eventKey="arguments">
                   <FormattedMessage
                     id={this.getArgumentsTrad()}
-                    values={{ num: opinion.argumentsCount }}
+                    values={{ num: opinion.allArguments ? opinion.allArguments.totalCount : 0 }}
                   />
                 </NavItem>
               )}
               {this.isSourceable() && (
                 <NavItem className="opinion-tabs" eventKey="sources">
-                  <FormattedMessage id="global.sources" values={{ num: opinion.sourcesCount }} />
+                  <FormattedMessage
+                    id="global.sources"
+                    values={{ num: opinion.allSources ? opinion.allSources.totalCount : 0 }}
+                  />
                 </NavItem>
               )}
               {/* {this.hasStatistics() && (
@@ -221,8 +224,12 @@ export default createFragmentContainer(OpinionTabs, {
         body
         contribuable
         versionsCount
-        argumentsCount
-        sourcesCount
+        allArguments: arguments(first: 0) {
+          totalCount
+        }
+        allSources: sources(first: 0) {
+          totalCount
+        }
         section {
           versionable
           sourceable

@@ -64,12 +64,10 @@ const commit = (variables: DeleteSourceMutationVariables): Promise<DeleteSourceM
 
       sharedUpdater(store, id, payload.getValue('deletedSourceId'));
 
-      // const sourceableProxy = store.get(id);
-      // const connection = ConnectionHandler.getConnection(
-      //   SourceableProxy,
-      //   'SourceList_allSources',
-      // );
-      // connection.setValue(connection.getValue('totalCount') - 1, 'totalCount');
+      const allSourcesProxy = sourceable.getLinkedRecord('sources', { first: 0 });
+      if (!allSourcesProxy) return;
+      const previousValue = parseInt(allSourcesProxy.getValue('totalCount'), 10);
+      allSourcesProxy.setValue(previousValue - 1, 'totalCount');
     },
   });
 

@@ -64,13 +64,12 @@ const commit = (variables: AddSourceMutationVariables): Promise<AddSourceMutatio
       if (!payload || !payload.getLinkedRecord('sourceEdge')) {
         // Mutation failed
       }
-
-      // const sourceableProxy = store.get(variables.input.sourceableId);
-      //   const connection = ConnectionHandler.getConnection(
-      //     sourceableProxy,
-      //     'SourceList_allSources',
-      //   );
-      //   connection.setValue(connection.getValue('totalCount') + 1, 'totalCount');
+      const sourceableProxy = store.get(variables.input.sourceableId);
+      if (!sourceableProxy) return;
+      const allSourcesProxy = sourceableProxy.getLinkedRecord('sources', { first: 0 });
+      if (!allSourcesProxy) return;
+      const previousValue = parseInt(allSourcesProxy.getValue('totalCount'), 10);
+      allSourcesProxy.setValue(previousValue + 1, 'totalCount');
     },
   });
 

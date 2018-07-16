@@ -214,6 +214,7 @@
     "redux-form": "^7.2.0",
     "redux-saga": "v0.14.0",
     "relay-compiler": "^1.1.0",
+    "relay-devtools": "^1.4.0",
     "relay-runtime": "^1.6.0",
     "sass-brunch": "https://github.com/jukebox017/sass-brunch/tarball/793d58d32664a611794efb3894fa3e9827fae4ff",
     "sass-loader": "^6.0.7",
