@@ -11,37 +11,13 @@ import type { OpinionVotesBox_opinion } from './__generated__/OpinionVotesBox_op
 type Props = { opinion: OpinionVotesBox_opinion };
 
 class OpinionVotesBox extends React.Component<Props> {
-
-  isVersion = () => {
-    const { opinion } = this.props;
-    return opinion && opinion.parent;
-  };
-
-  isContribuable = () => {
-    const { opinion } = this.props;
-    return opinion.contribuable;
-  };
-
-  showVotesButtons = () => {
-    const widgetType = this.props.opinion.section.voteWidgetType;
-    return widgetType !== VOTE_WIDGET_DISABLED;
-  };
-
-  showPiechart = () => {
-    const {
-      opinion,
-    } = this.props;
-    const widgetType = opinion.section.voteWidgetType;
-    return opinion.votesCount > 0 && widgetType === VOTE_WIDGET_BOTH;
-  };
-
   render() {
     const { opinion } = this.props;
-    if (opinion.section.voteWidgetType === VOTE_WIDGET_DISABLED) {
+    if (!opinion || !opinion.section || opinion.section.voteWidgetType === VOTE_WIDGET_DISABLED) {
       return null;
     }
     const helpText = opinion.section.votesHelpText;
-
+    const widgetType = opinion.section && opinion.section.voteWidgetType;
     return (
       <div className="opinion__votes__box">
         {helpText && (
@@ -51,21 +27,25 @@ class OpinionVotesBox extends React.Component<Props> {
         )}
         <Row>
           <Col sm={12} md={8} style={{ paddingTop: '15px' }}>
-            <OpinionVotesButtons show disabled={!this.isContribuable()} opinion={opinion} />
+            {/* $FlowFixMe */}
+            <OpinionVotesButtons show disabled={!opinion.contribuable} opinion={opinion} />
+            {/* $FlowFixMe */}
             <OpinionVotesBar opinion={opinion} />
           </Col>
-          {this.showPiechart() && (
-            <Col sm={12} md={4}>
-              <VotePiechart
-                top={20}
-                height={'180px'}
-                width={'200px'}
-                ok={opinion.votesCountOk}
-                nok={opinion.votesCountNok}
-                mitige={opinion.votesCountMitige}
-              />
-            </Col>
-          )}
+          {opinion.votesCount &&
+            opinion.votesCount > 0 &&
+            widgetType === VOTE_WIDGET_BOTH && (
+              <Col sm={12} md={4}>
+                <VotePiechart
+                  top={20}
+                  height={'180px'}
+                  width={'200px'}
+                  ok={opinion.votesCountOk}
+                  nok={opinion.votesCountNok}
+                  mitige={opinion.votesCountMitige}
+                />
+              </Col>
+            )}
         </Row>
       </div>
     );
@@ -81,6 +61,7 @@ export default createFragmentContainer(OpinionVotesBox, {
         votesCountMitige
         votesCountNok
         votesCountOk
+        votesCount
         contribuable
         section {
           voteWidgetType
@@ -91,6 +72,7 @@ export default createFragmentContainer(OpinionVotesBox, {
         votesCountMitige
         votesCountNok
         votesCountOk
+        votesCount
         contribuable
         section {
           voteWidgetType

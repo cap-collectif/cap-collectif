@@ -12,3 +12,5 @@ Answer:
             body:
                 type: "HTML!"
                 description: "Identifies the body of the contribution."
+            author:
+                type: "User"

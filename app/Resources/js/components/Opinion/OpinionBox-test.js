@@ -2,15 +2,17 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-
+import { $refType, $fragmentRefs } from '../../mocks';
 import { OpinionBox } from './OpinionBox';
 
 describe('<OpinionBox />', () => {
   const props = {
     opinion: {
+      __typename: 'Opinion',
+      $refType,
+      $fragmentRefs,
       title: 'title',
-      answer: {},
-      type: { title: 'opinionType', color: 'info' },
+      section: { title: 'sectionTitle', votesThreshold: 0, url: '#', color: 'info' },
     },
     rankingThreshold: 0,
     opinionTerm: 0,

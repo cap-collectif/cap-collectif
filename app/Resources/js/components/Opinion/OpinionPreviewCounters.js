@@ -12,9 +12,9 @@ type Props = {
 };
 
 class OpinionPreviewCounters extends React.Component<Props> {
-
   render() {
     const opinion = this.props.opinion;
+    if (!opinion || !opinion.section) return null;
     const section = opinion.section;
     const counters = [];
     if (section.voteWidgetType !== VOTE_WIDGET_DISABLED) {
@@ -27,14 +27,9 @@ class OpinionPreviewCounters extends React.Component<Props> {
         />,
       );
     }
-    if (!opinion.parent && section.versionable) {
+    if (opinion.__typename === 'Opinion' && section.versionable) {
       counters.push(
-        <FormattedMessage
-          id="global.versions"
-          values={{
-            num: opinion.versionsCount,
-          }}
-        />,
+        <FormattedMessage id="global.versions" values={{ num: opinion.versionsCount }} />,
       );
     }
     if (section.commentSystem !== COMMENT_SYSTEM_NONE) {
@@ -75,17 +70,23 @@ export default createFragmentContainer(OpinionPreviewCounters, {
   opinion: graphql`
     fragment OpinionPreviewCounters_opinion on OpinionOrVersion {
       ... on Opinion {
+        __typename
         votesCount
         sourcesCount
+        argumentsCount
+        versionsCount
         section {
           voteWidgetType
           commentSystem
           sourceable
+          versionable
         }
       }
       ... on Version {
+        __typename
         votesCount
         sourcesCount
+        argumentsCount
         section {
           voteWidgetType
           commentSystem

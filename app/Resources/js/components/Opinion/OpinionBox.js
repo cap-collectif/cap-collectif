@@ -9,40 +9,34 @@ import OpinionButtons from './OpinionButtons';
 import OpinionAppendices from './OpinionAppendices';
 import OpinionBody from './OpinionBody';
 import OpinionVotesBox from './Votes/OpinionVotesBox';
-import OpinionVersion from './OpinionVersion';
+// import OpinionVersion from './OpinionVersion';
 import type { OpinionBox_opinion } from './__generated__/OpinionBox_opinion.graphql';
 
 type Props = {
-  opinion: OpinionBox_opinion,
+  +opinion: OpinionBox_opinion,
   rankingThreshold?: number,
   opinionTerm?: number,
 };
 
 export class OpinionBox extends React.Component<Props> {
-  getMaxVotesValue = () => {
-    return this.props.opinion.section.votesThreshold;
-  };
-
   getBoxLabel = () => {
     const { opinionTerm } = this.props;
-    return this.isVersion()
+    return this.props.opinion.__typename === 'Version'
       ? 'opinion.header.version'
       : opinionTerm === 0
         ? 'opinion.header.opinion'
         : 'opinion.header.article';
   };
 
-  isVersion = () => {
-    const { opinion } = this.props;
-    return opinion && opinion.parent;
-  };
-
   render() {
     const { opinion, opinionTerm, rankingThreshold } = this.props;
+    if (!opinion.section) return null;
     const color = opinion.section.color;
-    const parentTitle = this.isVersion() ? opinion.parent.title : opinion.section.title;
+    if (!opinion.section) return null;
+    const parentTitle =
+      opinion.__typename === 'Version' ? opinion.parent.title : opinion.section.title;
     const headerTitle = this.getBoxLabel();
-
+    if (!opinion.section) return null;
     const backLink = opinion.section.url;
     const colorClass = `opinion opinion--${color} opinion--current`;
     return (
@@ -77,11 +71,13 @@ export class OpinionBox extends React.Component<Props> {
             </ListGroupItem>
           </ListGroup>
         </div>
+        {/* $FlowFixMe */}
         <OpinionAppendices opinion={opinion} />
         <div className="opinion__description">
           <p className="h4" style={{ marginTop: '0' }}>
             {opinion.title}
           </p>
+          {/* $FlowFixMe */}
           <OpinionBody opinion={opinion} />
           <div
             className="opinion__buttons"
@@ -89,8 +85,10 @@ export class OpinionBox extends React.Component<Props> {
             aria-label={<FormattedMessage id="vote.form" />}>
             <OpinionButtons opinion={opinion} />
           </div>
+          {/* $FlowFixMe */}
           <OpinionVotesBox opinion={opinion} />
         </div>
+        {/* $FlowFixMe */}
         <OpinionAnswer opinion={opinion} />
       </div>
     );
@@ -107,18 +105,24 @@ export default createFragmentContainer(OpinionBox, {
       ...OpinionBody_opinion
       ...OpinionAppendices_opinion
       ... on Opinion {
+        __typename
         id
         body
+        title
         section {
+          title
           color
           votesThreshold
           url
         }
       }
       ... on Version {
+        __typename
         id
         body
+        title
         section {
+          title
           color
           votesThreshold
           url

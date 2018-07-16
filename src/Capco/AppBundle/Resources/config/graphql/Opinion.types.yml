@@ -82,5 +82,9 @@ Opinion:
             answer:
                 type: "Answer"
                 resolve: "@=value.getAnswer()"
+            ranking:
+                type: "Int"
+            modals:
+                type: "[OpinionModal]"
             appendices:
                 type: "[Appendix]"

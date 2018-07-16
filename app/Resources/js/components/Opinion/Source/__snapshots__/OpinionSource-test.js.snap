@@ -25,7 +25,7 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
     <div
       className="opinion__data"
     >
-      <OpinionInfos
+      <Relay(OpinionInfos)
         opinion={
           Object {
             "$fragmentRefs": null,
@@ -139,7 +139,7 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
     <div
       className="opinion__data"
     >
-      <OpinionInfos
+      <Relay(OpinionInfos)
         opinion={
           Object {
             "$fragmentRefs": null,

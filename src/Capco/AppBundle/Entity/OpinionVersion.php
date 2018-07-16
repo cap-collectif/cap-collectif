@@ -229,27 +229,16 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getSources()
     {
         return $this->sources;
     }
 
-    /**
-     * @param mixed $sources
-     */
     public function setSources($sources)
     {
         $this->sources = $sources;
     }
 
-    /**
-     * @param $source
-     *
-     * @return $this
-     */
     public function addSource($source)
     {
         if (!$this->sources->contains($source)) {
@@ -259,11 +248,6 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         return $this;
     }
 
-    /**
-     * @param $source
-     *
-     * @return $this
-     */
     public function removeSource($source)
     {
         $this->sources->removeElement($source);
@@ -271,18 +255,12 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getSourcesCount()
+    public function getSourcesCount(): int
     {
         return $this->sourcesCount;
     }
 
-    /**
-     * @param mixed $sourcesCount
-     */
-    public function setSourcesCount($sourcesCount)
+    public function setSourcesCount(int $sourcesCount)
     {
         $this->sourcesCount = $sourcesCount;
     }

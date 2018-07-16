@@ -17,6 +17,7 @@ exports[`<OpinionBox /> should render correctly 1`] = `
     >
       <a
         className="pull-left btn btn-default opinion__header__back"
+        href="#"
       >
         <i
           className="cap cap-arrow-1-1"
@@ -49,10 +50,11 @@ exports[`<OpinionBox /> should render correctly 1`] = `
             }
           }
         >
-          opinionType
+          sectionTitle
         </p>
       </h2>
     </div>
+<<<<<<< HEAD
     <ListGroup
       bsClass="list-group"
       className="list-group-custom mb-0"
@@ -84,16 +86,41 @@ exports[`<OpinionBox /> should render correctly 1`] = `
         </div>
       </ListGroupItem>
     </ListGroup>
+=======
+    <Relay(OpinionPreview)
+      link={false}
+      opinion={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "__typename": "Opinion",
+          "section": Object {
+            "color": "info",
+            "title": "sectionTitle",
+            "url": "#",
+            "votesThreshold": 0,
+          },
+          "title": "title",
+        }
+      }
+      opinionTerm={0}
+      rankingThreshold={0}
+    />
+>>>>>>> Fragments everywhere on consultation
   </div>
-  <OpinionAppendices
+  <Relay(OpinionAppendices)
     opinion={
       Object {
-        "answer": Object {},
-        "title": "title",
-        "type": Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "__typename": "Opinion",
+        "section": Object {
           "color": "info",
-          "title": "opinionType",
+          "title": "sectionTitle",
+          "url": "#",
+          "votesThreshold": 0,
         },
+        "title": "title",
       }
     }
   />
@@ -110,15 +137,19 @@ exports[`<OpinionBox /> should render correctly 1`] = `
     >
       title
     </p>
-    <OpinionBody
+    <Relay(OpinionBody)
       opinion={
         Object {
-          "answer": Object {},
-          "title": "title",
-          "type": Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "__typename": "Opinion",
+          "section": Object {
             "color": "info",
-            "title": "opinionType",
+            "title": "sectionTitle",
+            "url": "#",
+            "votesThreshold": 0,
           },
+          "title": "title",
         }
       }
     />
@@ -137,34 +168,55 @@ exports[`<OpinionBox /> should render correctly 1`] = `
         }
       }
     >
-      <Connect(OpinionButtons)
+      <Relay(Connect(OpinionButtons))
         opinion={
           Object {
-            "answer": Object {},
-            "title": "title",
-            "type": Object {
+            "$fragmentRefs": null,
+            "$refType": null,
+            "__typename": "Opinion",
+            "section": Object {
               "color": "info",
-              "title": "opinionType",
+              "title": "sectionTitle",
+              "url": "#",
+              "votesThreshold": 0,
             },
+            "title": "title",
           }
         }
       />
     </div>
-    <OpinionVotesBox
+    <Relay(OpinionVotesBox)
       opinion={
         Object {
-          "answer": Object {},
-          "title": "title",
-          "type": Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "__typename": "Opinion",
+          "section": Object {
             "color": "info",
-            "title": "opinionType",
+            "title": "sectionTitle",
+            "url": "#",
+            "votesThreshold": 0,
           },
+          "title": "title",
         }
       }
     />
   </div>
-  <OpinionAnswer
-    answer={Object {}}
+  <Relay(OpinionAnswer)
+    opinion={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "__typename": "Opinion",
+        "section": Object {
+          "color": "info",
+          "title": "sectionTitle",
+          "url": "#",
+          "votesThreshold": 0,
+        },
+        "title": "title",
+      }
+    }
   />
 </div>
 `;

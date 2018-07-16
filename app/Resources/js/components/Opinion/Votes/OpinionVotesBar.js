@@ -12,15 +12,15 @@ type Props = {
 };
 
 class OpinionVotesBar extends React.Component<Props> {
-
   render() {
     const { opinion } = this.props;
+    if (!opinion.section) return null;
     return (
       <div>
         {opinion.section.votesThreshold && (
           <VotesBar
             max={opinion.section.votesThreshold}
-            value={opinion.votesCountOk}
+            value={opinion.votesCountOk || 0}
             helpText={opinion.section.votesThresholdHelpText}
           />
         )}
@@ -64,6 +64,7 @@ export default createFragmentContainer(OpinionVotesBar, {
         id
         section {
           voteWidgetType
+          votesThresholdHelpText
           votesThreshold
         }
         votesCount
@@ -73,7 +74,11 @@ export default createFragmentContainer(OpinionVotesBar, {
       }
       ... on Version {
         id
+        votesCount
+        votesCountOk
         section {
+          votesThreshold
+          votesThresholdHelpText
           voteWidgetType
         }
         parent {

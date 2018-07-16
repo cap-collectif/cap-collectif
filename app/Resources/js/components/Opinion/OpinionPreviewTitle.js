@@ -11,7 +11,6 @@ type Props = {
 };
 
 export class OpinionPreviewTitle extends React.Component<Props> {
-
   render() {
     const { link, opinion, showTypeLabel } = this.props;
     let url = '';
@@ -20,6 +19,7 @@ export class OpinionPreviewTitle extends React.Component<Props> {
     }
     return (
       <h3 className="opinion__title">
+        {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
         {showTypeLabel ? <OpinionTypeLabel type={opinion.section} /> : null}
         {showTypeLabel ? ' ' : null}
         {link ? <a href={url}>{opinion.title}</a> : opinion.title}
@@ -34,10 +34,16 @@ export default createFragmentContainer(OpinionPreviewTitle, {
       ... on Opinion {
         url
         title
+        section {
+          ...OpinionTypeLabel_section
+        }
       }
       ... on Version {
         url
         title
+        section {
+          ...OpinionTypeLabel_section
+        }
       }
     }
   `,

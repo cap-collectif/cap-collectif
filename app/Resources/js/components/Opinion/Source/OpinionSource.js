@@ -30,6 +30,7 @@ class OpinionSource extends React.Component<Props> {
         <div className="opinion__body box">
           <UserAvatar user={source.author} className="pull-left" />
           <div className="opinion__data">
+            {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
             <OpinionInfos rankingThreshold={null} opinion={source} />
             {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
             <OpinionSourceTitle source={source} />
@@ -53,6 +54,7 @@ export default createFragmentContainer(OpinionSource, {
       id
       createdAt
       updatedAt
+      ...OpinionInfos_opinion
       ...OpinionSourceTitle_source
       ...OpinionSourceContent_source
       ...OpinionSourceButtons_source @arguments(isAuthenticated: $isAuthenticated)

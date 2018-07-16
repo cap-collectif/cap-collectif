@@ -11,10 +11,10 @@ import OpinionSourceListView from './OpinionSourceListView';
 import OpinionSourceAdd from './OpinionSourceAdd';
 import Loader from '../../Ui/Loader';
 import Filter from '../../Utils/Filter';
-import type { OpinionSourceBox_opinion } from './__generated__/OpinionSourceBox_opinion.graphql';
+import type { OpinionSourceBox_sourceable } from './__generated__/OpinionSourceBox_sourceable.graphql';
 
 type Props = {
-  sourceable: OpinionSourceBox_opinion,
+  sourceable: OpinionSourceBox_sourceable,
   isAuthenticated: boolean,
 };
 
@@ -81,19 +81,19 @@ class OpinionSourceBox extends React.Component<Props, State> {
     const { order } = this.state;
     const totalCount = sourceable.allSources.totalCount;
     return (
-                <Panel>
-                  <Panel.Heading>
-                    <Row>
-                      <Col xs={12} sm={6} md={6}>
-                        <OpinionSourceAdd sourceable={sourceable} />
-                      </Col>
-                      {totalCount > 1 && (
-                        <Col xs={12} sm={6} md={6}>
-                          <Filter show value={order} onChange={this.handleFilterChange} />
-                        </Col>
-                      )}
-                    </Row>
-                  </Panel.Heading>
+      <Panel>
+        <Panel.Heading>
+          <Row>
+            <Col xs={12} sm={6} md={6}>
+              <OpinionSourceAdd sourceable={sourceable} />
+            </Col>
+            {totalCount > 1 && (
+              <Col xs={12} sm={6} md={6}>
+                <Filter show value={order} onChange={this.handleFilterChange} />
+              </Col>
+            )}
+          </Row>
+        </Panel.Heading>
         <QueryRenderer
           environment={environment}
           query={graphql`
@@ -124,12 +124,12 @@ class OpinionSourceBox extends React.Component<Props, State> {
               return graphqlError;
             }
             if (props) {
-              const sourceable = props.sourceable;
-              if (!sourceable) {
+              if (!props.sourceable) {
                 return graphqlError;
               }
               return (
-                  <OpinionSourceListView order={order} sourceable={sourceable} />
+                // $FlowFixMe
+                <OpinionSourceListView order={order} sourceable={props.sourceable} />
               );
             }
             return <Loader />;

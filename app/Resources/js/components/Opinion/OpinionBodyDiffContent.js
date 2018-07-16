@@ -19,17 +19,18 @@ class OpinionBodyDiffContent extends React.Component<Props> {
     const modals = opinion.modals;
     const sections = [];
 
-    opinion.body.split('<p>').forEach(sentence => {
-      if (sentence.length > 0) {
-        sections.push(sentence.replace('</p>', ''));
-      }
-    });
-
+    if (opinion.body) {
+      opinion.body.split('<p>').forEach(sentence => {
+        if (sentence.length > 0) {
+          sections.push(sentence.replace('</p>', ''));
+        }
+      });
+    }
     const parts = [];
     sections.forEach(section => {
       let foundModal = false;
       modals.forEach(modal => {
-        if (section.indexOf(modal.key) !== -1) {
+        if (modal && section.indexOf(modal.key) !== -1) {
           foundModal = modal;
         }
       });
@@ -72,6 +73,12 @@ export default createFragmentContainer(OpinionBodyDiffContent, {
     fragment OpinionBodyDiffContent_opinion on OpinionOrVersion {
       ... on Opinion {
         body
+        modals {
+          key
+          before
+          after
+          ...OpinionBodyDiffModal_modal
+        }
       }
     }
   `,

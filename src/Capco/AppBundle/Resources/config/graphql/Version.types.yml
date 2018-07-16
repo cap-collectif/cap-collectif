@@ -76,5 +76,7 @@ Version:
                 resolve: "@=value.getAnswer()"
             parent:
                 type: "Opinion!"
+            diff:
+                type: "HTML"
             pinned:
                 type: "Boolean!"

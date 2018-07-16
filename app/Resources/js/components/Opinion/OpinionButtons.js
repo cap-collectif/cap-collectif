@@ -22,14 +22,9 @@ class OpinionButtons extends React.Component<Props> {
     user: null,
   };
 
-  isVersion = () => {
-    const { opinion } = this.props;
-    return !!opinion.parent;
-  };
-
   isTheUserTheAuthor = () => {
     const { opinion, user } = this.props;
-    if (opinion.author === null || !user) {
+    if (!opinion.author || !user) {
       return false;
     }
     return user.uniqueId === opinion.author.slug;
@@ -38,7 +33,7 @@ class OpinionButtons extends React.Component<Props> {
   renderEditButton = () => {
     const { opinion } = this.props;
     if (opinion.contribuable && this.isTheUserTheAuthor()) {
-      if (this.isVersion()) {
+      if (opinion.__typename === 'Version' && opinion.parent) {
         return (
           <OpinionVersionEditButton
             className="pull-right"
@@ -59,6 +54,9 @@ class OpinionButtons extends React.Component<Props> {
 
   render() {
     const opinion = this.props.opinion;
+    if (!opinion || !opinion.section) {
+      return null;
+    }
     return (
       <ButtonToolbar>
         <OpinionDelete opinion={opinion} />
@@ -87,6 +85,7 @@ export default createFragmentContainer(container, {
   opinion: graphql`
     fragment OpinionButtons_opinion on OpinionOrVersion {
       ... on Opinion {
+        __typename
         contribuable
         title
         section {
@@ -94,6 +93,20 @@ export default createFragmentContainer(container, {
         }
         author {
           slug
+        }
+      }
+      ... on Version {
+        __typename
+        contribuable
+        title
+        section {
+          url
+        }
+        author {
+          slug
+        }
+        parent {
+          id
         }
       }
     }

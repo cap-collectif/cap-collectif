@@ -38,11 +38,17 @@ export default createFragmentContainer(OpinionAnswer, {
       ... on Opinion {
         answer {
           title
+          author {
+            vip
+          }
         }
       }
       ... on Version {
         answer {
           title
+          author {
+            vip
+          }
         }
       }
     }

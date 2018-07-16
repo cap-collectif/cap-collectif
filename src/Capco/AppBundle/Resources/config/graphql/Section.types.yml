@@ -65,7 +65,9 @@ Section:
                 type: "String"
             votesThreshold:
                 type: "Int"
-            url:
+            votesThresholdHelpText:
                 type: "String"
+            url:
+                type: "URI!"
                 description: "The url of the section."
                 resolve: "@=resolver('section_url', [value])"

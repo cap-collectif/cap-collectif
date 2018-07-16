@@ -12,15 +12,10 @@ type Props = {
 };
 
 class OpinionBody extends React.Component<Props> {
-  isVersion = () => {
-    const { opinion } = this.props;
-    return !!opinion.parent;
-  };
-
   render() {
     const { opinion } = this.props;
 
-    if (this.isVersion()) {
+    if (opinion.__typename === 'Version') {
       return (
         <div>
           {opinion.comment !== null && FormattedText.strip(opinion.comment).length ? (
@@ -38,6 +33,7 @@ class OpinionBody extends React.Component<Props> {
       );
     }
 
+    // $FlowFixMe
     return <OpinionBodyDiffContent opinion={opinion} />;
   }
 }
@@ -46,8 +42,9 @@ export default createFragmentContainer(OpinionBody, {
   opinion: graphql`
     fragment OpinionBody_opinion on OpinionOrVersion {
       ... on Version {
+        __typename
         comment
-        #diff
+        diff
       }
       ...OpinionBodyDiffContent_opinion
     }

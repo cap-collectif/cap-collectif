@@ -64,7 +64,7 @@ class OpinionTabs extends React.Component<Props, State> {
 
   getCommentSystem = () => {
     const opinion = this.props.opinion;
-    return opinion.section.commentSystem;
+    return opinion.section && opinion.section.commentSystem;
   };
 
   getArgumentsTrad = () => {
@@ -88,14 +88,8 @@ class OpinionTabs extends React.Component<Props, State> {
           : null;
   };
 
-  getType = () => {
-    const { opinion } = this.props;
-    return opinion.section;
-  };
-
   isSourceable = () => {
-    const type = this.getType();
-    return type !== 'undefined' ? type.sourceable : false;
+    return this.props.opinion.section && this.props.opinion.section.sourceable;
   };
 
   isCommentable = () => {
@@ -107,43 +101,32 @@ class OpinionTabs extends React.Component<Props, State> {
 
   isVersionable = () => {
     const opinion = this.props.opinion;
-    return !this.isVersion() && opinion.section !== 'undefined' && opinion.section.versionable;
+    return opinion.__typename === 'Opinion' && opinion.section && opinion.section.versionable;
   };
 
-  isVersion = () => {
-    const { opinion } = this.props;
-    return !!opinion.parent;
-  };
-
-  hasStatistics = () => {
-    const { opinion } = this.props;
-    return !!opinion.history;
-  };
-
-  isContribuable = () => {
-    const { opinion } = this.props;
-    return opinion.contribuable;
-  };
+  // hasStatistics = () => {
+  //   const { opinion } = this.props;
+  //   return !!opinion.history;
+  // };
 
   renderVersionsContent = () => {
     const { opinion } = this.props;
-    return (
-      <OpinionVersionsBox
-        isContribuable={this.isContribuable()}
-        opinionId={opinion.id}
-        opinionBody={opinion.body}
-      />
-    );
+    if (opinion.id && opinion.body) {
+      return (
+        <OpinionVersionsBox
+          isContribuable={opinion.contribuable}
+          opinionId={opinion.id}
+          opinionBody={opinion.body}
+        />
+      );
+    }
+    return null;
   };
 
   render() {
     const { opinion } = this.props;
     const isAuthenticated = false;
-
-    if (
-      this.isSourceable() + this.isCommentable() + this.isVersionable() + this.hasStatistics() >
-      1
-    ) {
+    if (this.isSourceable() + this.isCommentable() + this.isVersionable() > 1) {
       // at least two tabs
 
       const marginTop = { marginTop: '20px' };
@@ -159,7 +142,10 @@ class OpinionTabs extends React.Component<Props, State> {
               )}
               {this.isCommentable() && (
                 <NavItem className="opinion-tabs" eventKey="arguments">
-                  <FormattedMessage id={this.getArgumentsTrad()} values={{ num: opinion.argumentsCount }} />
+                  <FormattedMessage
+                    id={this.getArgumentsTrad()}
+                    values={{ num: opinion.argumentsCount }}
+                  />
                 </NavItem>
               )}
               {this.isSourceable() && (
@@ -167,11 +153,11 @@ class OpinionTabs extends React.Component<Props, State> {
                   <FormattedMessage id="global.sources" values={{ num: opinion.sourcesCount }} />
                 </NavItem>
               )}
-              {this.hasStatistics() && (
+              {/* {this.hasStatistics() && (
                 <NavItem className="opinion-tabs" eventKey="votesevolution">
                   <FormattedMessage id="vote.evolution.tab" />
                 </NavItem>
-              )}
+              )} */}
             </Nav>
             <Tab.Content animation={false}>
               {this.isVersionable() && (
@@ -181,12 +167,14 @@ class OpinionTabs extends React.Component<Props, State> {
               )}
               {this.isCommentable() && (
                 <Tab.Pane eventKey="arguments" style={marginTop}>
-                  <ArgumentsBox {...this.props} />
+                  {/* $FlowFixMe */}
+                  <ArgumentsBox opinion={opinion} />
                 </Tab.Pane>
               )}
               {this.isSourceable() && (
                 <Tab.Pane eventKey="sources" style={marginTop}>
-                  <OpinionSourceBox isAuthenticated={isAuthenticated} opinion={opinion} />
+                  {/* $FlowFixMe */}
+                  <OpinionSourceBox isAuthenticated={isAuthenticated} sourceable={opinion} />
                 </Tab.Pane>
               )}
               {/* {this.hasStatistics() && (
@@ -206,13 +194,15 @@ class OpinionTabs extends React.Component<Props, State> {
     }
 
     if (this.isSourceable()) {
-      return <OpinionSourceBox isAuthenticated={false} sourceable={opinion} />;
+      /* $FlowFixMe */
+      return <OpinionSourceBox isAuthenticated={isAuthenticated} sourceable={opinion} />;
     }
     if (this.isVersionable()) {
       return this.renderVersionsContent();
     }
     if (this.isCommentable()) {
-      return <ArgumentsBox {...this.props} />;
+      /* $FlowFixMe */
+      return <ArgumentsBox opinion={opinion} />;
     }
     // if (this.hasStatistics()) {
     //   return <VoteLinechart top={20} height={300} width={847} history={opinion.history.votes} />;
@@ -224,19 +214,36 @@ class OpinionTabs extends React.Component<Props, State> {
 
 export default createFragmentContainer(OpinionTabs, {
   opinion: graphql`
-    fragment OpinionTabs_opinion on Opinion {
-      id
-      body
-      contribuable
-      versionsCount
-      argumentsCount
-      sourcesCount
-      ...OpinionSourceBox_sourceable
-      section {
-        versionable
-        sourceable
-        commentSystem
+    fragment OpinionTabs_opinion on OpinionOrVersion {
+      ... on Opinion {
+        __typename
+        id
+        body
+        contribuable
+        versionsCount
+        argumentsCount
+        sourcesCount
+        section {
+          versionable
+          sourceable
+          commentSystem
+        }
       }
+      ... on Version {
+        __typename
+        id
+        body
+        contribuable
+        argumentsCount
+        sourcesCount
+        section {
+          versionable
+          sourceable
+          commentSystem
+        }
+      }
+      ...OpinionSourceBox_sourceable
+      ...ArgumentsBox_opinion
     }
   `,
 });
