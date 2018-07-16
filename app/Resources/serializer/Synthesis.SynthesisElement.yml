@@ -79,8 +79,7 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
       serialized_name: hasLinkedData
       groups: [ElementsList, ElementsPublished, ElementDetails]
   relations:
-    -
-      rel: self
+    - rel: self
       href:
         route: get_synthesis_element
         parameters:
@@ -88,8 +87,7 @@ Capco\AppBundle\Entity\Synthesis\SynthesisElement:
           element_id: expr(object.getId())
       exclusion:
         groups: [Elements, ElementsList, ElementDetails]
-    -
-      rel: history
+    - rel: history
       href:
         route: get_synthesis_element_history
         parameters:

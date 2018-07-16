@@ -1,8 +1,8 @@
 DeleteProposalInput:
-    type: relay-mutation-input
-    config:
-        description: ""
-        fields:
-            proposalId:
-              type: "ID!"
-              description: "The proposal id"
+  type: relay-mutation-input
+  config:
+    description: ''
+    fields:
+      proposalId:
+        type: 'ID!'
+        description: 'The proposal id'

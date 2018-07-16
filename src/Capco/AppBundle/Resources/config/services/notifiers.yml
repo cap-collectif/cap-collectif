@@ -2,21 +2,21 @@ services:
   capco.proposal_notifier:
     class: Capco\AppBundle\Notifier\ProposalNotifier
     arguments:
-      - "@mailer_service"
-      - "@capco.site_parameter.resolver"
-      - "@capco.resolvers.users"
-      - "@capco.resolver.proposals"
-      - "@capco.url.resolver"
-      - "@router"
-      - "@translator"
+      - '@mailer_service'
+      - '@capco.site_parameter.resolver'
+      - '@capco.resolvers.users'
+      - '@capco.resolver.proposals'
+      - '@capco.url.resolver'
+      - '@router'
+      - '@translator'
   capco.comment_notifier:
     class: Capco\AppBundle\Notifier\CommentNotifier
     arguments:
-      - "@mailer_service"
-      - "@capco.site_parameter.resolver"
-      - "@capco.resolvers.users"
-      - "@capco.comment.resolver"
-      - "@capco.resolver.proposals"
+      - '@mailer_service'
+      - '@capco.site_parameter.resolver'
+      - '@capco.resolvers.users'
+      - '@capco.comment.resolver'
+      - '@capco.resolver.proposals'
   capco.fos_notifier:
     class: Capco\AppBundle\Notifier\FOSNotifier
     arguments:
@@ -26,20 +26,20 @@ services:
   capco.opinion_notifier:
     class: Capco\AppBundle\Notifier\OpinionNotifier
     arguments:
-      - "@mailer_service"
-      - "@capco.site_parameter.resolver"
-      - "@capco.resolvers.users"
-      - "@capco.resolver.consultations"
-      - "@router"
+      - '@mailer_service'
+      - '@capco.site_parameter.resolver'
+      - '@capco.resolvers.users'
+      - '@capco.resolver.consultations'
+      - '@router'
   capco.argument_notifier:
     class: Capco\AppBundle\Notifier\ArgumentNotifier
     arguments:
-      - "@mailer_service"
-      - "@capco.site_parameter.resolver"
-      - "@capco.resolvers.users"
-      - "@capco.resolver.consultations"
-      - "@router"
-      - "@translator"
+      - '@mailer_service'
+      - '@capco.site_parameter.resolver'
+      - '@capco.resolvers.users'
+      - '@capco.resolver.consultations'
+      - '@router'
+      - '@translator'
   capco.contact_notifier:
     class: Capco\AppBundle\Notifier\ContactNotifier
     arguments:
@@ -53,19 +53,19 @@ services:
       - '@capco.site_parameter.resolver'
       - '@capco.resolvers.users'
   capco.project_notifier:
-      class: Capco\AppBundle\Notifier\ProjectNotifier
-      arguments:
-        - '@mailer_service'
-        - '@capco.site_parameter.resolver'
-        - '@capco.resolvers.users'
-        - '@capco.project.resolver'
+    class: Capco\AppBundle\Notifier\ProjectNotifier
+    arguments:
+      - '@mailer_service'
+      - '@capco.site_parameter.resolver'
+      - '@capco.resolvers.users'
+      - '@capco.project.resolver'
   capco.contribution_notifier:
-      class: Capco\AppBundle\Notifier\ContributionNotifier
-      arguments:
-        - '@mailer_service'
-        - '@capco.site_parameter.resolver'
-        - '@capco.resolvers.users'
-        - '@capco.url.resolver'
+    class: Capco\AppBundle\Notifier\ContributionNotifier
+    arguments:
+      - '@mailer_service'
+      - '@capco.site_parameter.resolver'
+      - '@capco.resolvers.users'
+      - '@capco.url.resolver'
   capco.report_notifier:
     class: Capco\AppBundle\Notifier\ReportNotifier
     arguments:

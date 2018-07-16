@@ -1,36 +1,35 @@
 Capco\AppBundle\Entity\OpinionAppendix:
-
-## PJL
-    ### Article 1
-    opinionAppendix1:
-        id: '1'
-        opinion: '@opinion57'
-        appendixType: '@appendixType1'
-        body: Motifs 1
-    opinionAppendix2:
-        id: '2'
-        opinion: '@opinion57'
-        appendixType: '@appendixType2'
-        body: Impacts 1
-    ### Article 2
-    opinionAppendix3:
-        id: '3'
-        opinion: '@opinion58'
-        appendixType: '@appendixType1'
-        body: Motifs 2
-    opinionAppendix4:
-        id: '4'
-        opinion: '@opinion58'
-        appendixType: '@appendixType2'
-        body: Les impacts 2
-    ### Article 3
-    opinionAppendix5:
-        id: '5'
-        opinion: '@opinion59'
-        appendixType: '@appendixType1'
-        body: Motifs 3
-    opinionAppendix6:
-        id: '6'
-        opinion: '@opinion59'
-        appendixType: '@appendixType2'
-        body: Les impacts 3
+  ## PJL
+  ### Article 1
+  opinionAppendix1:
+    id: '1'
+    opinion: '@opinion57'
+    appendixType: '@appendixType1'
+    body: Motifs 1
+  opinionAppendix2:
+    id: '2'
+    opinion: '@opinion57'
+    appendixType: '@appendixType2'
+    body: Impacts 1
+  ### Article 2
+  opinionAppendix3:
+    id: '3'
+    opinion: '@opinion58'
+    appendixType: '@appendixType1'
+    body: Motifs 2
+  opinionAppendix4:
+    id: '4'
+    opinion: '@opinion58'
+    appendixType: '@appendixType2'
+    body: Les impacts 2
+  ### Article 3
+  opinionAppendix5:
+    id: '5'
+    opinion: '@opinion59'
+    appendixType: '@appendixType1'
+    body: Motifs 3
+  opinionAppendix6:
+    id: '6'
+    opinion: '@opinion59'
+    appendixType: '@appendixType2'
+    body: Les impacts 3

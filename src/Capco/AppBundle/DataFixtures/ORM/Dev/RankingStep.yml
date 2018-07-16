@@ -1,31 +1,31 @@
 Capco\AppBundle\Entity\Steps\RankingStep:
-    rstep1:
-        id: rstep1
-        title: Classement des propositions et modifications
-        label: Classement
-        isEnabled: true
-        startAt: <(new \DateTime('2015-04-25'))>
-        endAt: <(new \DateTime('2015-05-25'))>
-        nbOpinionsToDisplay: 10
-        nbVersionsToDisplay: 15
-        body: |
-              <p>Coucou je suis le classement !</p>
-              <h3>Un classement</h3>
-              <p><text(1000)></p>
-              <h3>Basé sur les votes</h3>
-              <p><text(500)></p>
-    rstep2:
-        id: rstep2
-        title: Classement
-        label: Classement
-        isEnabled: true
-        nbOpinionsToDisplay: 10
-        nbVersionsToDisplay: 15
-        startAt: <(new \DateTime('2014-09-27'))>
-        endAt: <(new \DateTime('2014-11-20'))>
-        body: |
-              <p>Coucou je suis le classement !</p>
-              <h3>Un classement</h3>
-              <p><text(1000)></p>
-              <h3>Basé sur les votes</h3>
-              <p><text(500)></p>
+  rstep1:
+    id: rstep1
+    title: Classement des propositions et modifications
+    label: Classement
+    isEnabled: true
+    startAt: <(new \DateTime('2015-04-25'))>
+    endAt: <(new \DateTime('2015-05-25'))>
+    nbOpinionsToDisplay: 10
+    nbVersionsToDisplay: 15
+    body: |
+      <p>Coucou je suis le classement !</p>
+      <h3>Un classement</h3>
+      <p><text(1000)></p>
+      <h3>Basé sur les votes</h3>
+      <p><text(500)></p>
+  rstep2:
+    id: rstep2
+    title: Classement
+    label: Classement
+    isEnabled: true
+    nbOpinionsToDisplay: 10
+    nbVersionsToDisplay: 15
+    startAt: <(new \DateTime('2014-09-27'))>
+    endAt: <(new \DateTime('2014-11-20'))>
+    body: |
+      <p>Coucou je suis le classement !</p>
+      <h3>Un classement</h3>
+      <p><text(1000)></p>
+      <h3>Basé sur les votes</h3>
+      <p><text(500)></p>

@@ -1,234 +1,233 @@
-
 settings:
-    number_of_shards: 1
-    number_of_replicas: 0
-    analysis:
-        filter:
-            french_elision:
-                type: elision
-                articles: [l, m, t, qu, n, s, j, d, c, jusqu, quoiqu, lorsqu, puisqu]
-            french_stop:
-                type: stop
-                stopwords: _french_
-            french_stemmer:
-                type: stemmer
-                language: light_french
-            capco_autocomplete_filter:
-                type: edge_ngram
-                min_gram: 1
-                max_gram: 15
-        analyzer:
-            capco_autocomplete:
-                tokenizer: icu_tokenizer
-                filter: ["lowercase", "icu_folding", "capco_autocomplete_filter"]
-                char_filter: ["html_strip"]
-            capco_sort:
-                tokenizer: keyword
-                filter: ["truncate", "icu_collation"]
-                char_filter: ["html_strip"]
-            capco_standard:
-                tokenizer: icu_tokenizer
-                filter: ["lowercase", "icu_folding"]
-                char_filter: ["html_strip"]
-            capco_french:
-                tokenizer: icu_tokenizer
-                filter: ["lowercase", "icu_folding", "french_elision", "french_stop", "french_stemmer"]
-                char_filter: ["html_strip"]
+  number_of_shards: 1
+  number_of_replicas: 0
+  analysis:
+    filter:
+      french_elision:
+        type: elision
+        articles: [l, m, t, qu, n, s, j, d, c, jusqu, quoiqu, lorsqu, puisqu]
+      french_stop:
+        type: stop
+        stopwords: _french_
+      french_stemmer:
+        type: stemmer
+        language: light_french
+      capco_autocomplete_filter:
+        type: edge_ngram
+        min_gram: 1
+        max_gram: 15
+    analyzer:
+      capco_autocomplete:
+        tokenizer: icu_tokenizer
+        filter: ['lowercase', 'icu_folding', 'capco_autocomplete_filter']
+        char_filter: ['html_strip']
+      capco_sort:
+        tokenizer: keyword
+        filter: ['truncate', 'icu_collation']
+        char_filter: ['html_strip']
+      capco_standard:
+        tokenizer: icu_tokenizer
+        filter: ['lowercase', 'icu_folding']
+        char_filter: ['html_strip']
+      capco_french:
+        tokenizer: icu_tokenizer
+        filter: ['lowercase', 'icu_folding', 'french_elision', 'french_stop', 'french_stemmer']
+        char_filter: ['html_strip']
 
 # Only map the fields we need to search on.
 mappings:
-    _default_:
-        dynamic: false
-        _all:
-            enabled: false
+  _default_:
+    dynamic: false
+    _all:
+      enabled: false
 
-    user:
+  user:
+    properties:
+      id: { type: keyword }
+      slug: { type: keyword }
+      username: &text_analysis_highlighted
+        type: text
+        analyzer: capco_french
+        index_options: offsets
+        fields:
+          std: { type: text, analyzer: capco_standard }
+      biography: *text_analysis_highlighted
+      user_type:
+        type: object
         properties:
-            id: { type: keyword }
-            slug: { type: keyword }
-            username: &text_analysis_highlighted
-                type: text
-                analyzer: capco_french
-                index_options: offsets
-                fields:
-                    std: { type: text, analyzer: capco_standard }
-            biography: *text_analysis_highlighted
-            user_type:
-                type: object
-                properties:
-                    id:
-                        type: long
-            contributionsCountByProject:
-                type: nested
-                properties:
-                    project:
-                        type: object
-                        properties:
-                            id: { type: keyword }
-                    count:
-                        type: long
-            contributionsCountByStep:
-                type: nested
-                properties:
-                    step:
-                        type: object
-                        properties:
-                            id: { type: keyword }
-                    count:
-                        type: long
-    argument:
+          id:
+            type: long
+      contributionsCountByProject:
+        type: nested
         properties:
-            id: { type: keyword }
-            body: *text_analysis_highlighted
-            createdAt: { type: date }
-            updatedAt: { type: date }
-            Author: &Author
-                type: object
-                properties:
-                    id: { type: keyword }
-                    userType:
-                      type: object
-                      properties:
-                          id: { type: long }
-    district:
+          project:
+            type: object
+            properties:
+              id: { type: keyword }
+          count:
+            type: long
+      contributionsCountByStep:
+        type: nested
         properties:
-            id: { type: keyword }
-            name: { type: keyword }
+          step:
+            type: object
+            properties:
+              id: { type: keyword }
+          count:
+            type: long
+  argument:
+    properties:
+      id: { type: keyword }
+      body: *text_analysis_highlighted
+      createdAt: { type: date }
+      updatedAt: { type: date }
+      Author: &Author
+        type: object
+        properties:
+          id: { type: keyword }
+          userType:
+            type: object
+            properties:
+              id: { type: long }
+  district:
+    properties:
+      id: { type: keyword }
+      name: { type: keyword }
 
-    project:
-        properties:
-            title: *text_analysis_highlighted
-            createdAt: { type: date }
+  project:
+    properties:
+      title: *text_analysis_highlighted
+      createdAt: { type: date }
 
-    comment:
-        properties:
-            id: { type: keyword }
-            body: *text_analysis_highlighted
-            createdAt: { type: date }
-            authorName: *text_analysis_highlighted
-            Author: *Author
+  comment:
+    properties:
+      id: { type: keyword }
+      body: *text_analysis_highlighted
+      createdAt: { type: date }
+      authorName: *text_analysis_highlighted
+      Author: *Author
 
-    event:
-        properties:
-            id: { type: keyword }
-            title: *text_analysis_highlighted
-            slug: { type: keyword }
-            body: *text_analysis_highlighted
-            createdAt: { type: date }
-            updatedAt: { type: date }
-            startAt: { type: date }
-            endAt: { type: date }
-            Author: *Author
+  event:
+    properties:
+      id: { type: keyword }
+      title: *text_analysis_highlighted
+      slug: { type: keyword }
+      body: *text_analysis_highlighted
+      createdAt: { type: date }
+      updatedAt: { type: date }
+      startAt: { type: date }
+      endAt: { type: date }
+      Author: *Author
 
-    proposal:
+  proposal:
+    properties:
+      id: { type: keyword }
+      title: &text_analysis_highlighted_autocompleted
+        type: text
+        analyzer: capco_french
+        index_options: offsets
+        fields:
+          std: { type: text, analyzer: capco_standard }
+          autocomplete: { type: text, analyzer: capco_autocomplete }
+      slug: { type: keyword }
+      body: *text_analysis_highlighted_autocompleted
+      reference: *text_analysis_highlighted
+      author: *Author
+      createdAt: { type: date }
+      updatedAt: { type: date }
+      deletedAt: { type: date }
+      isTrashed: { type: boolean }
+      commentsCount: { type: long }
+      estimation: { type: float }
+      district:
+        type: object
         properties:
-            id: { type: keyword }
-            title: &text_analysis_highlighted_autocompleted
-                type: text
-                analyzer: capco_french
-                index_options: offsets
-                fields:
-                    std: { type: text, analyzer: capco_standard }
-                    autocomplete: { type: text, analyzer: capco_autocomplete }
-            slug: { type: keyword }
-            body: *text_analysis_highlighted_autocompleted
-            reference: *text_analysis_highlighted
-            author: *Author
-            createdAt: { type: date }
-            updatedAt: { type: date }
-            deletedAt: { type: date }
-            isTrashed: { type: boolean }
-            commentsCount: { type: long }
-            estimation: { type: float }
-            district:
-                type: object
-                properties:
-                    id: { type: keyword }
-            status:
-                type: object
-                properties:
-                    id: { type: keyword }
-            proposalForm:
-                type: object
-                properties:
-                    id: { type: keyword }
-            category:
-                type: object
-                properties:
-                    id: { type: keyword }
-            theme:
-                type: object
-                properties:
-                    id: { type: keyword }
-            selections:
-                type: object
-                properties:
-                    step:
-                        type: object
-                        properties:
-                            id: { type: keyword }
-                    status:
-                        type: object
-                        properties:
-                            id: { type: keyword }
-            votesCountByStep:
-                type: nested
-                properties:
-                    step:
-                        type: object
-                        properties:
-                            id: { type: keyword }
-                    count:
-                        type: long
-    opinion:
+          id: { type: keyword }
+      status:
+        type: object
         properties:
-            id: { type: keyword }
-            title: *text_analysis_highlighted
-            slug: { type: keyword }
-            body: *text_analysis_highlighted
-            createdAt: { type: date }
-            updatedAt: { type: date }
-            Author: *Author
+          id: { type: keyword }
+      proposalForm:
+        type: object
+        properties:
+          id: { type: keyword }
+      category:
+        type: object
+        properties:
+          id: { type: keyword }
+      theme:
+        type: object
+        properties:
+          id: { type: keyword }
+      selections:
+        type: object
+        properties:
+          step:
+            type: object
+            properties:
+              id: { type: keyword }
+          status:
+            type: object
+            properties:
+              id: { type: keyword }
+      votesCountByStep:
+        type: nested
+        properties:
+          step:
+            type: object
+            properties:
+              id: { type: keyword }
+          count:
+            type: long
+  opinion:
+    properties:
+      id: { type: keyword }
+      title: *text_analysis_highlighted
+      slug: { type: keyword }
+      body: *text_analysis_highlighted
+      createdAt: { type: date }
+      updatedAt: { type: date }
+      Author: *Author
 
-    opinionVersion:
-        properties:
-            id: { type: keyword }
-            title: *text_analysis_highlighted
-            slug: { type: keyword }
-            body: *text_analysis_highlighted
-            createdAt: { type: date }
-            updatedAt: { type: date }
-            Author: *Author
+  opinionVersion:
+    properties:
+      id: { type: keyword }
+      title: *text_analysis_highlighted
+      slug: { type: keyword }
+      body: *text_analysis_highlighted
+      createdAt: { type: date }
+      updatedAt: { type: date }
+      Author: *Author
 
-    post:
-        properties:
-            id: { type: keyword }
-            title: *text_analysis_highlighted
-            abstract: *text_analysis_highlighted
-            slug: { type: keyword }
-            body: *text_analysis_highlighted
-            createdAt: { type: date }
-            updatedAt: { type: date }
-            publishedAt: { type: date }
-            Author: *Author
+  post:
+    properties:
+      id: { type: keyword }
+      title: *text_analysis_highlighted
+      abstract: *text_analysis_highlighted
+      slug: { type: keyword }
+      body: *text_analysis_highlighted
+      createdAt: { type: date }
+      updatedAt: { type: date }
+      publishedAt: { type: date }
+      Author: *Author
 
-    source:
-        properties:
-            id: { type: keyword }
-            title: *text_analysis_highlighted
-            slug: { type: keyword }
-            body: *text_analysis_highlighted
-            createdAt: { type: date }
-            updatedAt: { type: date }
-            Author: *Author
+  source:
+    properties:
+      id: { type: keyword }
+      title: *text_analysis_highlighted
+      slug: { type: keyword }
+      body: *text_analysis_highlighted
+      createdAt: { type: date }
+      updatedAt: { type: date }
+      Author: *Author
 
-    theme:
-        properties:
-            id: { type: keyword }
-            title: *text_analysis_highlighted
-            slug: { type: keyword }
-            teaser: *text_analysis_highlighted
-            body: *text_analysis_highlighted
-            Author: *Author
-            createdAt: { type: date }
-            updatedAt: { type: date }
+  theme:
+    properties:
+      id: { type: keyword }
+      title: *text_analysis_highlighted
+      slug: { type: keyword }
+      teaser: *text_analysis_highlighted
+      body: *text_analysis_highlighted
+      Author: *Author
+      createdAt: { type: date }
+      updatedAt: { type: date }

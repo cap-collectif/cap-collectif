@@ -21,16 +21,14 @@ Capco\AppBundle\Entity\Synthesis\Synthesis:
       groups: [Syntheses, SynthesisDetails]
       serialized_name: displayRules
   relations:
-    -
-      rel: self
+    - rel: self
       href:
         route: get_synthesis
         parameters:
           id: expr(object.getId())
       exclusion:
         groups: [Syntheses, SynthesisDetails]
-    -
-      rel: elements
+    - rel: elements
       href:
         route: get_synthesis_elements
         parameters:

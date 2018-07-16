@@ -1,28 +1,29 @@
 Question:
-    type: interface
-    config:
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTypeResolver", [value])'
-        fields:
-            id:
-                type: "String!"
-            title:
-                type: "String!"
-            type:
-                type: "QuestionTypeValue!"
-                resolve: "@=resolver('question_type', [value])"
-            # This field should not be exposed
-            position:
-                type: "Int!"
-                resolve: "@=resolver('question_position', [value])"
-            private:
-                type: "Boolean!"
-            required:
-                type: "Boolean!"
-            helpText:
-                type: "String"
-            description:
-                type: "String"
-            kind:
-                type: "String!"
-            slug:
-                type: "String!"
+  type: interface
+  config:
+    resolveType:
+      '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTypeResolver", [value])'
+    fields:
+      id:
+        type: 'String!'
+      title:
+        type: 'String!'
+      type:
+        type: 'QuestionTypeValue!'
+        resolve: "@=resolver('question_type', [value])"
+      # This field should not be exposed
+      position:
+        type: 'Int!'
+        resolve: "@=resolver('question_position', [value])"
+      private:
+        type: 'Boolean!'
+      required:
+        type: 'Boolean!'
+      helpText:
+        type: 'String'
+      description:
+        type: 'String'
+      kind:
+        type: 'String!'
+      slug:
+        type: 'String!'

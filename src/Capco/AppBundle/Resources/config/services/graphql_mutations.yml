@@ -1,298 +1,341 @@
 services:
   Capco\AppBundle\GraphQL\Mutation\DeleteProposalMutation:
-      # only for sf < 3.3
-      class: Capco\AppBundle\GraphQL\Mutation\DeleteProposalMutation
-      arguments:
-          - "@doctrine.orm.default_entity_manager"
-          - "@capco.proposal.repository"
-          - "@redis_storage.helper"
-          - "@swarrot.publisher"
-          - "@capco.elasticsearch.indexer"
-      tags:
-          - { name: overblog_graphql.mutation }
+    # only for sf < 3.3
+    class: Capco\AppBundle\GraphQL\Mutation\DeleteProposalMutation
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+      - '@capco.proposal.repository'
+      - '@redis_storage.helper'
+      - '@swarrot.publisher'
+      - '@capco.elasticsearch.indexer'
+    tags:
+      - { name: overblog_graphql.mutation }
   Capco\AppBundle\GraphQL\Mutation\AddProposalVoteMutation:
-      # only for sf < 3.3
-      class: Capco\AppBundle\GraphQL\Mutation\AddProposalVoteMutation
-      arguments:
-          - "@doctrine.orm.default_entity_manager"
-          - "@validator"
-          - "@capco.proposal.repository"
-          - "@capco.abstract_step.repository"
-          - "@logger"
-          - '@Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver'
-      tags:
-          - { name: overblog_graphql.mutation }
+    # only for sf < 3.3
+    class: Capco\AppBundle\GraphQL\Mutation\AddProposalVoteMutation
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+      - '@validator'
+      - '@capco.proposal.repository'
+      - '@capco.abstract_step.repository'
+      - '@logger'
+      - '@Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver'
+    tags:
+      - { name: overblog_graphql.mutation }
   Capco\AppBundle\GraphQL\Mutation\RemoveProposalVoteMutation:
-      # only for sf < 3.3
-      class: Capco\AppBundle\GraphQL\Mutation\RemoveProposalVoteMutation
-      arguments:
-          - "@doctrine.orm.default_entity_manager"
-          - "@capco.proposal.repository"
-          - "@capco.abstract_step.repository"
-          - "@logger"
-      tags:
-          - { name: overblog_graphql.mutation }
+    # only for sf < 3.3
+    class: Capco\AppBundle\GraphQL\Mutation\RemoveProposalVoteMutation
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+      - '@capco.proposal.repository'
+      - '@capco.abstract_step.repository'
+      - '@logger'
+    tags:
+      - { name: overblog_graphql.mutation }
   Capco\AppBundle\GraphQL\Mutation\UpdateProposalVotesMutation:
-        # only for sf < 3.3
-        class: Capco\AppBundle\GraphQL\Mutation\UpdateProposalVotesMutation
-        arguments:
-            - "@doctrine.orm.default_entity_manager"
-            - "@capco.proposal_collect_vote.repository"
-            - "@capco.proposal_selection_vote.repository"
-            - "@capco.abstract_step.repository"
-            - "@logger"
-        tags:
-            - { name: overblog_graphql.mutation }
+    # only for sf < 3.3
+    class: Capco\AppBundle\GraphQL\Mutation\UpdateProposalVotesMutation
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+      - '@capco.proposal_collect_vote.repository'
+      - '@capco.proposal_selection_vote.repository'
+      - '@capco.abstract_step.repository'
+      - '@logger'
+    tags:
+      - { name: overblog_graphql.mutation }
   Capco\AppBundle\GraphQL\Mutation\CreateProposalFusionMutation:
-      # only for sf < 3.3
-      class: Capco\AppBundle\GraphQL\Mutation\CreateProposalFusionMutation
-      arguments:
-          - "@doctrine.orm.default_entity_manager"
-          - "@form.factory"
-          - "@capco.proposal.repository"
-          - "@translator"
-      tags:
-          - { name: overblog_graphql.mutation }
+    # only for sf < 3.3
+    class: Capco\AppBundle\GraphQL\Mutation\CreateProposalFusionMutation
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+      - '@form.factory'
+      - '@capco.proposal.repository'
+      - '@translator'
+    tags:
+      - { name: overblog_graphql.mutation }
   Capco\AppBundle\GraphQL\Mutation\UpdateProposalFusionMutation:
-      # only for sf < 3.3
-      class: Capco\AppBundle\GraphQL\Mutation\UpdateProposalFusionMutation
-      arguments:
-          - "@doctrine.orm.default_entity_manager"
-          - "@form.factory"
-          - "@capco.proposal.repository"
-      tags:
-          - { name: overblog_graphql.mutation }
+    # only for sf < 3.3
+    class: Capco\AppBundle\GraphQL\Mutation\UpdateProposalFusionMutation
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+      - '@form.factory'
+      - '@capco.proposal.repository'
+    tags:
+      - { name: overblog_graphql.mutation }
 
   Capco\AppBundle\GraphQL\Mutation\UpdateProposalFormMutation:
-      # only for sf < 3.3
-      class: Capco\AppBundle\GraphQL\Mutation\UpdateProposalFormMutation
-      arguments:
-          - "@doctrine.orm.default_entity_manager"
-          - "@form.factory"
-          - "@capco.proposal_form.repository"
-          - "@logger"
-      tags:
-          - { name: overblog_graphql.mutation }
+    # only for sf < 3.3
+    class: Capco\AppBundle\GraphQL\Mutation\UpdateProposalFormMutation
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+      - '@form.factory'
+      - '@capco.proposal_form.repository'
+      - '@logger'
+    tags:
+      - { name: overblog_graphql.mutation }
   Capco\AppBundle\GraphQL\Mutation\FollowProposalMutation:
-      # only for sf < 3.3
-      class: Capco\AppBundle\GraphQL\Mutation\FollowProposalMutation
-      arguments:
-          - "@doctrine.orm.entity_manager"
-          - "@capco.proposal.repository"
-          - "@capco.follower.repository"
-      tags:
-          - { name: overblog_graphql.mutation }
+    # only for sf < 3.3
+    class: Capco\AppBundle\GraphQL\Mutation\FollowProposalMutation
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@capco.proposal.repository'
+      - '@capco.follower.repository'
+    tags:
+      - { name: overblog_graphql.mutation }
   Capco\AppBundle\GraphQL\Mutation\UpdateFollowProposalMutation:
-      class: Capco\AppBundle\GraphQL\Mutation\UpdateFollowProposalMutation
-      arguments:
-          - "@doctrine.orm.entity_manager"
-          - "@capco.proposal.repository"
-          - "@capco.follower.repository"
-      tags:
-          - { name: overblog_graphql.mutation }
+    class: Capco\AppBundle\GraphQL\Mutation\UpdateFollowProposalMutation
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@capco.proposal.repository'
+      - '@capco.follower.repository'
+    tags:
+      - { name: overblog_graphql.mutation }
   Capco\AppBundle\GraphQL\Mutation\UnfollowProposalMutation:
-      # only for sf < 3.3
-      class: Capco\AppBundle\GraphQL\Mutation\UnfollowProposalMutation
-      arguments:
-          - "@doctrine.orm.entity_manager"
-          - "@capco.proposal.repository"
-          - "@capco.follower.repository"
-      tags:
-          - { name: overblog_graphql.mutation }
+    # only for sf < 3.3
+    class: Capco\AppBundle\GraphQL\Mutation\UnfollowProposalMutation
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@capco.proposal.repository'
+      - '@capco.follower.repository'
+    tags:
+      - { name: overblog_graphql.mutation }
 
   Capco\AppBundle\GraphQL\Mutation\UpdateProfileMutation:
-      # only for sf < 3.3
-      class: Capco\AppBundle\GraphQL\Mutation\UpdateProfileMutation
-      arguments:
-          - "@doctrine.orm.default_entity_manager"
-          - "@form.factory"
-          - "@logger"
-      tags:
-          - { name: overblog_graphql.mutation }
+    # only for sf < 3.3
+    class: Capco\AppBundle\GraphQL\Mutation\UpdateProfileMutation
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+      - '@form.factory'
+      - '@logger'
+    tags:
+      - { name: overblog_graphql.mutation }
   Capco\AppBundle\GraphQL\Mutation\RequestUserArchiveMutation:
-      # only for sf < 3.3
-      class: Capco\AppBundle\GraphQL\Mutation\RequestUserArchiveMutation
-      arguments:
-          - "@doctrine.orm.default_entity_manager"
-          - "@swarrot.publisher"
-      tags:
-          - { name: overblog_graphql.mutation }
-
+    # only for sf < 3.3
+    class: Capco\AppBundle\GraphQL\Mutation\RequestUserArchiveMutation
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+      - '@swarrot.publisher'
+    tags:
+      - { name: overblog_graphql.mutation }
 
   Capco\AppBundle\GraphQL\Mutation\UpdateProfilePasswordMutation:
-      # only for sf < 3.3
-      class: Capco\AppBundle\GraphQL\Mutation\UpdateProfilePasswordMutation
-      parent: Capco\AppBundle\GraphQL\Mutation\BaseUpdateProfile
-      calls:
-          - [setUserManager, ["@fos_user.user_manager.default"]]
-      tags:
-          - { name: overblog_graphql.mutation }
+    # only for sf < 3.3
+    class: Capco\AppBundle\GraphQL\Mutation\UpdateProfilePasswordMutation
+    parent: Capco\AppBundle\GraphQL\Mutation\BaseUpdateProfile
+    calls:
+      - [setUserManager, ['@fos_user.user_manager.default']]
+    tags:
+      - { name: overblog_graphql.mutation }
 
   Capco\AppBundle\GraphQL\Mutation\UpdateProfilePersonalDataMutation:
-      # only for sf < 3.3
-      class: Capco\AppBundle\GraphQL\Mutation\UpdateProfilePersonalDataMutation
-      parent: Capco\AppBundle\GraphQL\Mutation\BaseUpdateProfile
-      tags:
-          - { name: overblog_graphql.mutation }
+    # only for sf < 3.3
+    class: Capco\AppBundle\GraphQL\Mutation\UpdateProfilePersonalDataMutation
+    parent: Capco\AppBundle\GraphQL\Mutation\BaseUpdateProfile
+    tags:
+      - { name: overblog_graphql.mutation }
 
   Capco\AppBundle\GraphQL\Mutation\UpdateProfilePublicDataMutation:
-      # only for sf < 3.3
-      class: Capco\AppBundle\GraphQL\Mutation\UpdateProfilePublicDataMutation
-      parent: Capco\AppBundle\GraphQL\Mutation\BaseUpdateProfile
-      calls:
-          - [setToggleManager, ['@capco.toggle.manager']]
-      tags:
-          - { name: overblog_graphql.mutation }
+    # only for sf < 3.3
+    class: Capco\AppBundle\GraphQL\Mutation\UpdateProfilePublicDataMutation
+    parent: Capco\AppBundle\GraphQL\Mutation\BaseUpdateProfile
+    calls:
+      - [setToggleManager, ['@capco.toggle.manager']]
+    tags:
+      - { name: overblog_graphql.mutation }
 
   Capco\AppBundle\GraphQL\Mutation\CreateUserMutation:
-      # only for sf < 3.3
-      class: Capco\AppBundle\GraphQL\Mutation\CreateUserMutation
-      arguments:
-          - "@doctrine.orm.default_entity_manager"
-          - "@form.factory"
-          - "@logger"
-      tags:
-          - { name: overblog_graphql.mutation }
+    # only for sf < 3.3
+    class: Capco\AppBundle\GraphQL\Mutation\CreateUserMutation
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+      - '@form.factory'
+      - '@logger'
+    tags:
+      - { name: overblog_graphql.mutation }
 
   Capco\AppBundle\GraphQL\Mutation\UpdateUserAccountMutation:
-      # only for sf < 3.3
-      class: Capco\AppBundle\GraphQL\Mutation\UpdateUserAccountMutation
-      parent: Capco\AppBundle\GraphQL\Mutation\BaseUpdateProfile
-      tags:
-          - { name: overblog_graphql.mutation }
+    # only for sf < 3.3
+    class: Capco\AppBundle\GraphQL\Mutation\UpdateUserAccountMutation
+    parent: Capco\AppBundle\GraphQL\Mutation\BaseUpdateProfile
+    tags:
+      - { name: overblog_graphql.mutation }
 
   Capco\AppBundle\GraphQL\Mutation\BaseUpdateProfile:
-      # only for sf < 3.3
-      class: Capco\AppBundle\GraphQL\Mutation\BaseUpdateProfile
-      arguments:
-          - "@doctrine.orm.default_entity_manager"
-          - "@form.factory"
-          - "@logger"
-          - "@capco.user.repository"
+    # only for sf < 3.3
+    class: Capco\AppBundle\GraphQL\Mutation\BaseUpdateProfile
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+      - '@form.factory'
+      - '@logger'
+      - '@capco.user.repository'
 
   capco.mutation.user_notifications:
-        class: Capco\AppBundle\GraphQL\Mutation\UserNotificationsConfigurationMutation
-        tags:
-            - { name: overblog_graphql.mutation, alias: "changeUserNotificationsConfiguration", method: "change" }
+    class: Capco\AppBundle\GraphQL\Mutation\UserNotificationsConfigurationMutation
+    tags:
+      - {
+          name: overblog_graphql.mutation,
+          alias: 'changeUserNotificationsConfiguration',
+          method: 'change',
+        }
   capco.mutation.district:
-        class: Capco\AppBundle\GraphQL\Mutation\DistrictMutation
-        tags:
-            - { name: overblog_graphql.mutation, alias: "changeDistrict", method: "change" }
+    class: Capco\AppBundle\GraphQL\Mutation\DistrictMutation
+    tags:
+      - { name: overblog_graphql.mutation, alias: 'changeDistrict', method: 'change' }
 
   capco.mutation.proposal:
-        class: Capco\AppBundle\GraphQL\Mutation\ProposalMutation
-        tags:
-            - { name: overblog_graphql.mutation, alias: "changeProposalNotation", method: "changeNotation" }
-            - { name: overblog_graphql.mutation, alias: "changeProposalEvaluers", method: "changeEvaluers" }
-            - { name: overblog_graphql.mutation, alias: "changeProgressSteps", method: "changeProgressSteps" }
-            - { name: overblog_graphql.mutation, alias: "changeCollectStatus", method: "changeCollectStatus" }
-            - { name: overblog_graphql.mutation, alias: "changeSelectionStatus", method: "changeSelectionStatus" }
-            - { name: overblog_graphql.mutation, alias: "unselectProposal", method: "unselectProposal" }
-            - { name: overblog_graphql.mutation, alias: "selectProposal", method: "selectProposal" }
-            - { name: overblog_graphql.mutation, alias: "changeProposalPublicationStatus", method: "changePublicationStatus" }
-            - { name: overblog_graphql.mutation, alias: "changeProposalContent", method: "changeContent" }
-            - { name: overblog_graphql.mutation, alias: "createProposal", method: "create" }
+    class: Capco\AppBundle\GraphQL\Mutation\ProposalMutation
+    tags:
+      - {
+          name: overblog_graphql.mutation,
+          alias: 'changeProposalNotation',
+          method: 'changeNotation',
+        }
+      - {
+          name: overblog_graphql.mutation,
+          alias: 'changeProposalEvaluers',
+          method: 'changeEvaluers',
+        }
+      - {
+          name: overblog_graphql.mutation,
+          alias: 'changeProgressSteps',
+          method: 'changeProgressSteps',
+        }
+      - {
+          name: overblog_graphql.mutation,
+          alias: 'changeCollectStatus',
+          method: 'changeCollectStatus',
+        }
+      - {
+          name: overblog_graphql.mutation,
+          alias: 'changeSelectionStatus',
+          method: 'changeSelectionStatus',
+        }
+      - { name: overblog_graphql.mutation, alias: 'unselectProposal', method: 'unselectProposal' }
+      - { name: overblog_graphql.mutation, alias: 'selectProposal', method: 'selectProposal' }
+      - {
+          name: overblog_graphql.mutation,
+          alias: 'changeProposalPublicationStatus',
+          method: 'changePublicationStatus',
+        }
+      - { name: overblog_graphql.mutation, alias: 'changeProposalContent', method: 'changeContent' }
+      - { name: overblog_graphql.mutation, alias: 'createProposal', method: 'create' }
 
   capco.mutation.proposal_form:
     class: Capco\AppBundle\GraphQL\Mutation\ProposalFormMutation
     tags:
-      - { name: overblog_graphql.mutation, alias: "createProposalForm", method: "create" }
-      - { name: overblog_graphql.mutation, alias: "updateProposalForm", method: "update" }
-      - { name: overblog_graphql.mutation, alias: "changeProposalFormParameters", method: "changeParameters" }
-      - { name: overblog_graphql.mutation, alias: "updateProposalFormNotificationsConfiguration", method: "updateNotificationsConfiguration" }
-      - { name: overblog_graphql.mutation, alias: "setEvaluationFormInProposalForm", method: "setEvaluationForm" }
+      - { name: overblog_graphql.mutation, alias: 'createProposalForm', method: 'create' }
+      - { name: overblog_graphql.mutation, alias: 'updateProposalForm', method: 'update' }
+      - {
+          name: overblog_graphql.mutation,
+          alias: 'changeProposalFormParameters',
+          method: 'changeParameters',
+        }
+      - {
+          name: overblog_graphql.mutation,
+          alias: 'updateProposalFormNotificationsConfiguration',
+          method: 'updateNotificationsConfiguration',
+        }
+      - {
+          name: overblog_graphql.mutation,
+          alias: 'setEvaluationFormInProposalForm',
+          method: 'setEvaluationForm',
+        }
 
   capco.mutation.groups:
     class: Capco\AppBundle\GraphQL\Mutation\GroupMutation
     tags:
-        - { name: overblog_graphql.mutation, alias: "createGroup", method: "create" }
-        - { name: overblog_graphql.mutation, alias: "updateGroup", method: "update" }
-        - { name: overblog_graphql.mutation, alias: "deleteGroup", method: "delete" }
-        - { name: overblog_graphql.mutation, alias: "deleteUserInGroup", method: "deleteUserInGroup" }
-        - { name: overblog_graphql.mutation, alias: "addUsersInGroup", method: "addUsersInGroup" }
+      - { name: overblog_graphql.mutation, alias: 'createGroup', method: 'create' }
+      - { name: overblog_graphql.mutation, alias: 'updateGroup', method: 'update' }
+      - { name: overblog_graphql.mutation, alias: 'deleteGroup', method: 'delete' }
+      - { name: overblog_graphql.mutation, alias: 'deleteUserInGroup', method: 'deleteUserInGroup' }
+      - { name: overblog_graphql.mutation, alias: 'addUsersInGroup', method: 'addUsersInGroup' }
 
   capco.mutation.proposal_evaluation:
     class: Capco\AppBundle\GraphQL\Mutation\ProposalEvaluationMutation
     tags:
-      - { name: overblog_graphql.mutation, alias: "changeProposalEvaluation", method: "changeProposalEvaluation" }
+      - {
+          name: overblog_graphql.mutation,
+          alias: 'changeProposalEvaluation',
+          method: 'changeProposalEvaluation',
+        }
 
   capco.mutation.delete_account:
     class: Capco\AppBundle\GraphQL\Mutation\DeleteAccountMutation
     arguments:
-        - "@doctrine.orm.entity_manager"
-        - "@translator"
-        - "@capco.user.repository"
+      - '@doctrine.orm.entity_manager'
+      - '@translator'
+      - '@capco.user.repository'
     tags:
       - { name: overblog_graphql.mutation }
 
   capco.mutation.update_requirement:
     class: Capco\AppBundle\GraphQL\Mutation\UpdateRequirementMutation
     arguments:
-        - "@doctrine.orm.entity_manager"
-        - "@capco.requirement.repository"
-        - "@capco.user_requirement.repository"
-        - "@logger"
+      - '@doctrine.orm.entity_manager'
+      - '@capco.requirement.repository'
+      - '@capco.user_requirement.repository'
+      - '@logger'
     tags:
       - { name: overblog_graphql.mutation }
 
   Capco\AppBundle\GraphQL\Mutation\AddReplyMutation:
-      # only for sf < 3.3
-      class: Capco\AppBundle\GraphQL\Mutation\AddReplyMutation
-      arguments:
-          - "@doctrine.orm.default_entity_manager"
-          - "@form.factory"
-          - "@capco.reply.repository"
-          - "@capco.questionnaire.repository"
-          - "@redis_storage.helper"
-          - "@responses.formatter"
-          - "@logger"
-          - "@capco.user_notifier"
-      tags:
-          - { name: overblog_graphql.mutation }
+    # only for sf < 3.3
+    class: Capco\AppBundle\GraphQL\Mutation\AddReplyMutation
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+      - '@form.factory'
+      - '@capco.reply.repository'
+      - '@capco.questionnaire.repository'
+      - '@redis_storage.helper'
+      - '@responses.formatter'
+      - '@logger'
+      - '@capco.user_notifier'
+    tags:
+      - { name: overblog_graphql.mutation }
 
   Capco\AppBundle\GraphQL\Mutation\DeleteReplyMutation:
-      # only for sf < 3.3
-      class: Capco\AppBundle\GraphQL\Mutation\DeleteReplyMutation
-      arguments:
-          - "@doctrine.orm.default_entity_manager"
-          - "@capco.reply.repository"
-          - "@redis_storage.helper"
-      tags:
-          - { name: overblog_graphql.mutation }
+    # only for sf < 3.3
+    class: Capco\AppBundle\GraphQL\Mutation\DeleteReplyMutation
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+      - '@capco.reply.repository'
+      - '@redis_storage.helper'
+    tags:
+      - { name: overblog_graphql.mutation }
 
   Capco\AppBundle\GraphQL\Mutation\AddArgumentMutation:
     # only for sf < 3.3
     class: Capco\AppBundle\GraphQL\Mutation\AddArgumentMutation
     arguments:
-        - "@doctrine.orm.default_entity_manager"
-        - "@form.factory"
-        - "@capco.opinion.repository"
-        - "@capco.opinion_version.repository"
-        - "@redis_storage.helper"
-        - "@swarrot.publisher"
-        - "@capco.argument.repository"
-        - "@logger"
+      - '@doctrine.orm.default_entity_manager'
+      - '@form.factory'
+      - '@capco.opinion.repository'
+      - '@capco.opinion_version.repository'
+      - '@redis_storage.helper'
+      - '@swarrot.publisher'
+      - '@capco.argument.repository'
+      - '@logger'
     tags:
-        - { name: overblog_graphql.mutation }
+      - { name: overblog_graphql.mutation }
 
   Capco\AppBundle\GraphQL\Mutation\ChangeArgumentMutation:
-      # only for sf < 3.3
-      class: Capco\AppBundle\GraphQL\Mutation\ChangeArgumentMutation
-      arguments:
-          - "@doctrine.orm.default_entity_manager"
-          - "@form.factory"
-          - "@capco.argument.repository"
-          - "@redis_storage.helper"
-          - "@swarrot.publisher"
-      tags:
-          - { name: overblog_graphql.mutation }
+    # only for sf < 3.3
+    class: Capco\AppBundle\GraphQL\Mutation\ChangeArgumentMutation
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+      - '@form.factory'
+      - '@capco.argument.repository'
+      - '@redis_storage.helper'
+      - '@swarrot.publisher'
+    tags:
+      - { name: overblog_graphql.mutation }
 
   Capco\AppBundle\GraphQL\Mutation\DeleteArgumentMutation:
-      # only for sf < 3.3
-      class: Capco\AppBundle\GraphQL\Mutation\DeleteArgumentMutation
-      arguments:
-          - "@doctrine.orm.default_entity_manager"
-          - "@capco.argument.repository"
-          - "@redis_storage.helper"
-      tags:
-          - { name: overblog_graphql.mutation }
+    # only for sf < 3.3
+    class: Capco\AppBundle\GraphQL\Mutation\DeleteArgumentMutation
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+      - '@capco.argument.repository'
+      - '@redis_storage.helper'
+    tags:
+      - { name: overblog_graphql.mutation }

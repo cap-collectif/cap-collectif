@@ -1,8 +1,8 @@
 joli_typo:
-    presets:
-        default:
-            fixers: [ Ellipsis, Dimension, Dash, FrenchQuotes, FrenchNoBreakSpace, CurlyQuote, Trademark ]
-            locale: fr_FR
-        en:
-            fixers: [ Ellipsis, Dimension, Dash, EnglishQuotes, CurlyQuote, Trademark ]
-            locale: en_GB
+  presets:
+    default:
+      fixers: [Ellipsis, Dimension, Dash, FrenchQuotes, FrenchNoBreakSpace, CurlyQuote, Trademark]
+      locale: fr_FR
+    en:
+      fixers: [Ellipsis, Dimension, Dash, EnglishQuotes, CurlyQuote, Trademark]
+      locale: en_GB

@@ -1,10 +1,10 @@
 capco_admin:
-  resource: "@CapcoAdminBundle/Controller/"
+  resource: '@CapcoAdminBundle/Controller/'
   type: annotation
   prefix: /
 
 overblog_graphql_endpoint:
-  resource: "@OverblogGraphQLBundle/Resources/config/routing/graphql.yml"
+  resource: '@OverblogGraphQLBundle/Resources/config/routing/graphql.yml'
   prefix: /graphql
 
 # API
@@ -13,140 +13,140 @@ capco_api_login_check:
   path: /api/login_check
 
 capco_api_toggles:
-  resource: "@CapcoAppBundle/Controller/Api/FeaturesController.php"
+  resource: '@CapcoAppBundle/Controller/Api/FeaturesController.php'
   type: annotation
   prefix: /api
   defaults:
     _format: json
 
 capco_api_synthesis:
-  resource: "@CapcoAppBundle/Controller/Api/SynthesisController.php"
+  resource: '@CapcoAppBundle/Controller/Api/SynthesisController.php'
   type: annotation
   prefix: /api
   defaults:
     _format: json
 
 capco_api_projects:
-  resource: "@CapcoAppBundle/Controller/Api/ProjectsController.php"
+  resource: '@CapcoAppBundle/Controller/Api/ProjectsController.php'
   type: annotation
   prefix: /api
   defaults:
     _format: json
 
 capco_api_comments:
-  resource: "@CapcoAppBundle/Controller/Api/CommentsController.php"
+  resource: '@CapcoAppBundle/Controller/Api/CommentsController.php'
   type: annotation
   prefix: /api
   defaults:
     _format: json
 
 capco_api_medias:
-  resource: "@CapcoAppBundle/Controller/Api/MediasController.php"
+  resource: '@CapcoAppBundle/Controller/Api/MediasController.php'
   type: annotation
   prefix: /api
   defaults:
     _format: json
 
 capco_api_users:
-  resource: "@CapcoAppBundle/Controller/Api/UsersController.php"
+  resource: '@CapcoAppBundle/Controller/Api/UsersController.php'
   type: annotation
   prefix: /api
   defaults:
     _format: json
 
 capco_api_events:
-  resource: "@CapcoAppBundle/Controller/Api/EventsController.php"
+  resource: '@CapcoAppBundle/Controller/Api/EventsController.php'
   type: annotation
   prefix: /api
   defaults:
     _format: json
 
 capco_api_posts:
-  resource: "@CapcoAppBundle/Controller/Api/PostsController.php"
+  resource: '@CapcoAppBundle/Controller/Api/PostsController.php'
   type: annotation
   prefix: /api
   defaults:
     _format: json
 
 capco_api_selection_steps:
-  resource: "@CapcoAppBundle/Controller/Api/SelectionStepsController.php"
+  resource: '@CapcoAppBundle/Controller/Api/SelectionStepsController.php'
   type: annotation
   prefix: /api
   defaults:
     _format: json
 
 capco_api_collect_steps:
-  resource: "@CapcoAppBundle/Controller/Api/CollectStepsController.php"
+  resource: '@CapcoAppBundle/Controller/Api/CollectStepsController.php'
   type: annotation
   prefix: /api
   defaults:
     _format: json
 
 capco_api_opinions:
-  resource: "@CapcoAppBundle/Controller/Api/OpinionsController.php"
+  resource: '@CapcoAppBundle/Controller/Api/OpinionsController.php'
   type: annotation
   prefix: /api
   defaults:
     _format: json
 
 capco_api_opinion_types:
-  resource: "@CapcoAppBundle/Controller/Api/OpinionTypesController.php"
+  resource: '@CapcoAppBundle/Controller/Api/OpinionTypesController.php'
   type: annotation
   prefix: /api
   defaults:
     _format: json
 
 capco_api_questionnaires:
-  resource: "@CapcoAppBundle/Controller/Api/QuestionnairesController.php"
+  resource: '@CapcoAppBundle/Controller/Api/QuestionnairesController.php'
   type: annotation
   prefix: /api
   defaults:
     _format: json
 
 capco_api_proposal_forms:
-  resource: "@CapcoAppBundle/Controller/Api/ProposalFormsController.php"
+  resource: '@CapcoAppBundle/Controller/Api/ProposalFormsController.php'
   type: annotation
   prefix: /api
   defaults:
     _format: json
 
 capco_api_proposals:
-  resource: "@CapcoAppBundle/Controller/Api/ProposalsController.php"
+  resource: '@CapcoAppBundle/Controller/Api/ProposalsController.php'
   type: annotation
   prefix: /api
   defaults:
     _format: json
 
 capco_api_themes:
-  resource: "@CapcoAppBundle/Controller/Api/ThemesController.php"
+  resource: '@CapcoAppBundle/Controller/Api/ThemesController.php'
   type: annotation
   prefix: /api
   defaults:
     _format: json
 
 capco_api_statuses:
-  resource: "@CapcoAppBundle/Controller/Api/StatusesController.php"
+  resource: '@CapcoAppBundle/Controller/Api/StatusesController.php'
   type: annotation
   prefix: /api
   defaults:
     _format: json
 
 capco_api_arguments:
-  resource: "@CapcoAppBundle/Controller/Api/ArgumentsController.php"
+  resource: '@CapcoAppBundle/Controller/Api/ArgumentsController.php'
   type: annotation
   prefix: /api
   defaults:
     _format: json
 
 capco_api_sources:
-  resource: "@CapcoAppBundle/Controller/Api/SourcesController.php"
+  resource: '@CapcoAppBundle/Controller/Api/SourcesController.php'
   type: annotation
   prefix: /api
   defaults:
     _format: json
 
 capco_api_categories:
-  resource: "@CapcoAppBundle/Controller/Api/CategoriesController.php"
+  resource: '@CapcoAppBundle/Controller/Api/CategoriesController.php'
   type: annotation
   prefix: /api
   defaults:
@@ -154,103 +154,103 @@ capco_api_categories:
 
 # App
 capco_app:
-    resource: "@CapcoAppBundle/Controller/Site"
-    type:     annotation
-    prefix:   /
+  resource: '@CapcoAppBundle/Controller/Site'
+  type: annotation
+  prefix: /
 
 # Dummy route for sonata
 sonata_user_profile_show:
   path: /profile/redirect-sonata-show
   defaults:
-        _controller: FrameworkBundle:Redirect:redirect
-        route: capco_user_profile_show
-        permanent: true
+    _controller: FrameworkBundle:Redirect:redirect
+    route: capco_user_profile_show
+    permanent: true
 
 # Dummy route for fos
 fos_user_profile_show:
   path: /profile/redirect-fos-show
   defaults:
-        _controller: FrameworkBundle:Redirect:redirect
-        route: capco_user_profile_show
-        permanent: true
+    _controller: FrameworkBundle:Redirect:redirect
+    route: capco_user_profile_show
+    permanent: true
 
 capco_profile_edit:
-    path:      /profile/edit-profile
-    defaults:  { _controller: CapcoUserBundle:Profile:editProfile }
+  path: /profile/edit-profile
+  defaults: { _controller: CapcoUserBundle:Profile:editProfile }
 
 capco_change_password:
-    path:      /profile/change-password
-    defaults:  { _controller: SonataUserBundle:ChangePasswordFOSUser1:changePassword }
+  path: /profile/change-password
+  defaults: { _controller: SonataUserBundle:ChangePasswordFOSUser1:changePassword }
 
 fos_user_resetting_request:
-    path: /resetting/request
-    defaults:  { _controller: SonataUserBundle:ResettingFOSUser1:request }
+  path: /resetting/request
+  defaults: { _controller: SonataUserBundle:ResettingFOSUser1:request }
 
 fos_user_resetting_reset:
-    path: /resetting/reset/{token}
-    defaults:  { _controller: SonataUserBundle:ResettingFOSUser1:reset }
+  path: /resetting/reset/{token}
+  defaults: { _controller: SonataUserBundle:ResettingFOSUser1:reset }
 
 fos_user_resetting_send_email:
-    path: /resetting/send-email
-    defaults:  { _controller: SonataUserBundle:ResettingFOSUser1:sendEmail }
+  path: /resetting/send-email
+  defaults: { _controller: SonataUserBundle:ResettingFOSUser1:sendEmail }
 
 fos_user_resetting_check_email:
-    path: /resetting/check-email
-    defaults:  { _controller: SonataUserBundle:ResettingFOSUser1:checkEmail }
+  path: /resetting/check-email
+  defaults: { _controller: SonataUserBundle:ResettingFOSUser1:checkEmail }
 
 capco_user:
-    resource: "@CapcoUserBundle/Controller/"
-    type: annotation
-    prefix: /
+  resource: '@CapcoUserBundle/Controller/'
+  type: annotation
+  prefix: /
 
 fos_user_registration_check_email:
-    path: /check-email
-    defaults:
-      _controller: SonataUserBundle:RegistrationFOSUser1:checkEmail
+  path: /check-email
+  defaults:
+    _controller: SonataUserBundle:RegistrationFOSUser1:checkEmail
 
 # sonata admin...
 admin:
-    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
-    prefix: /admin
+  resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+  prefix: /admin
 
 _sonata_admin:
-    resource: .
-    type: sonata_admin
-    prefix: /admin
+  resource: .
+  type: sonata_admin
+  prefix: /admin
 
 gallery:
-    resource: '@SonataMediaBundle/Resources/config/routing/gallery.xml'
-    prefix: /media/gallery
+  resource: '@SonataMediaBundle/Resources/config/routing/gallery.xml'
+  prefix: /media/gallery
 
 # sonata media
 media:
-    resource: '@SonataMediaBundle/Resources/config/routing/media.xml'
-    prefix: /media
+  resource: '@SonataMediaBundle/Resources/config/routing/media.xml'
+  prefix: /media
 
 # liip imagine
 _liip_imagine:
-  resource: "@LiipImagineBundle/Resources/config/routing.yaml"
+  resource: '@LiipImagineBundle/Resources/config/routing.yaml'
 
 #HWIOAuthBundle routes
 hwi_oauth:
-    resource: "@CapcoUserBundle/Resources/config/routing.xml"
-    prefix: /login
+  resource: '@CapcoUserBundle/Resources/config/routing.xml'
+  prefix: /login
 
 facebook_login:
-    path: /login/check-facebook
+  path: /login/check-facebook
 
 google_login:
-    path: /login/check-google
+  path: /login/check-google
 
 api_login_check:
-    path: /api/login_check
+  path: /api/login_check
 
 # nelmio doc
 NelmioApiDocBundle:
-    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
-    prefix: /api/doc
+  resource: '@NelmioApiDocBundle/Resources/config/routing.yml'
+  prefix: /api/doc
 
 # last...
 capco_app_cms:
-    resource: "@CapcoAppBundle/Resources/config/routing.yml"
-    prefix: /
+  resource: '@CapcoAppBundle/Resources/config/routing.yml'
+  prefix: /

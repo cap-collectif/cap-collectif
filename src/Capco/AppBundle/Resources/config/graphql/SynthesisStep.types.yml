@@ -1,8 +1,8 @@
 SynthesisStep:
-    type: object
-    inherits: [Step]
-    config:
-        interfaces: [Step]
-        fields:
-            kind:
-               resolve: "synthesis"
+  type: object
+  inherits: [Step]
+  config:
+    interfaces: [Step]
+    fields:
+      kind:
+        resolve: 'synthesis'

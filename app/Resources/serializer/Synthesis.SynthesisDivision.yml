@@ -11,4 +11,3 @@ Capco\AppBundle\Entity\Synthesis\SynthesisDivision:
       type: ArrayCollection<Capco\AppBundle\Entity\Synthesis\SynthesisElement>
       expose: true
       groups: [ElementDetails]
-

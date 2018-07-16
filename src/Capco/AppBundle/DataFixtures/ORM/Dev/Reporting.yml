@@ -1,46 +1,46 @@
 Capco\AppBundle\Entity\Reporting:
-    reporting2:
-        id: 2
-        body: |
-             <p><text(100)></p>
-             <p><text(300)></p>
-        Reporter: '@user100'
-        proposal: '@proposal1'
-        status: 2
-        isArchived: false
-    reporting3:
-        id: 3
-        body: |
-             <p><text(100)></p>
-             <p><text(300)></p>
-        Reporter: '@user100'
-        Source: '@source1'
-        status: 2
-        isArchived: false
-    reporting4:
-        id: 4
-        body: |
-             <p><text(100)></p>
-             <p><text(300)></p>
-        Reporter: '@user100'
-        opinionVersion: '@version1'
-        status: 2
-        isArchived: false
-    reporting5:
-        id: 5
-        body: |
-             <p><text(100)></p>
-             <p><text(300)></p>
-        Reporter: '@user100'
-        Argument: '@argument1'
-        status: 2
-        isArchived: false
-    reporting6:
-        id: 6
-        body: |
-             <p><text(100)></p>
-             <p><text(300)></p>
-        Reporter: '@user100'
-        Comment: '@evComment1'
-        status: 2
-        isArchived: false
+  reporting2:
+    id: 2
+    body: |
+      <p><text(100)></p>
+      <p><text(300)></p>
+    Reporter: '@user100'
+    proposal: '@proposal1'
+    status: 2
+    isArchived: false
+  reporting3:
+    id: 3
+    body: |
+      <p><text(100)></p>
+      <p><text(300)></p>
+    Reporter: '@user100'
+    Source: '@source1'
+    status: 2
+    isArchived: false
+  reporting4:
+    id: 4
+    body: |
+      <p><text(100)></p>
+      <p><text(300)></p>
+    Reporter: '@user100'
+    opinionVersion: '@version1'
+    status: 2
+    isArchived: false
+  reporting5:
+    id: 5
+    body: |
+      <p><text(100)></p>
+      <p><text(300)></p>
+    Reporter: '@user100'
+    Argument: '@argument1'
+    status: 2
+    isArchived: false
+  reporting6:
+    id: 6
+    body: |
+      <p><text(100)></p>
+      <p><text(300)></p>
+    Reporter: '@user100'
+    Comment: '@evComment1'
+    status: 2
+    isArchived: false

@@ -1,19 +1,19 @@
 QuestionInput:
-    type: input-object
-    config:
-        fields:
-            id:
-                type: "String"
-                description: "If null, a new question will be created."
-            title:
-                type: "String!"
-            type:
-                type: "QuestionTypeValue!"
-            private:
-                type: "Boolean!"
-                defaultValue: false
-            required:
-                type: "Boolean!"
-                defaultValue: false
-            helpText:
-                type: "String"
+  type: input-object
+  config:
+    fields:
+      id:
+        type: 'String'
+        description: 'If null, a new question will be created.'
+      title:
+        type: 'String!'
+      type:
+        type: 'QuestionTypeValue!'
+      private:
+        type: 'Boolean!'
+        defaultValue: false
+      required:
+        type: 'Boolean!'
+        defaultValue: false
+      helpText:
+        type: 'String'

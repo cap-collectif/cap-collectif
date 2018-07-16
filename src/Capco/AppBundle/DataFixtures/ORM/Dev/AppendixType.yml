@@ -1,5 +1,4 @@
 Capco\AppBundle\Entity\AppendixType:
-
   appendixType1:
     id: '1'
     title: Exposé des motifs

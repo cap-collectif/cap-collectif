@@ -1,14 +1,14 @@
 AddReplyInput:
-    type: relay-mutation-input
-    config:
-        description: "Create a reply"
-        fields:
-            questionnaireId:
-                type: "ID!"
-                description: "The id of the questionnaire"
-            responses:
-              type: "[ResponseInput]"
-              description: "The responses to the questionnaire questions"
-            private:
-              type: "Boolean"
-              description: "Anonymous or not."
+  type: relay-mutation-input
+  config:
+    description: 'Create a reply'
+    fields:
+      questionnaireId:
+        type: 'ID!'
+        description: 'The id of the questionnaire'
+      responses:
+        type: '[ResponseInput]'
+        description: 'The responses to the questionnaire questions'
+      private:
+        type: 'Boolean'
+        description: 'Anonymous or not.'

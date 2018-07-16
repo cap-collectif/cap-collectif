@@ -1,10 +1,10 @@
 UpdateProposalFusionPayload:
-    type: relay-mutation-payload
-    config:
-        fields:
-            proposal:
-                type: "Proposal"
-                description: "The updated proposal"
-            removedMergedFrom:
-                type: "[Proposal]!"
-                description: "The proposals that have been removed from the fusion."
+  type: relay-mutation-payload
+  config:
+    fields:
+      proposal:
+        type: 'Proposal'
+        description: 'The updated proposal'
+      removedMergedFrom:
+        type: '[Proposal]!'
+        description: 'The proposals that have been removed from the fusion.'

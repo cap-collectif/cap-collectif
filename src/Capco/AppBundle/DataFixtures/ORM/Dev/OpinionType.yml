@@ -1,181 +1,181 @@
 Capco\AppBundle\Entity\OpinionType:
-    opinionType1:
-        id: 'opinionType1'
-        title: Le problème constaté
-        position: 1
-        color: red
-        isEnabled: false
-        defaultFilter: votes
-        votesHelpText: <text(200)>
-        votesThreshold: 5
-        votesThresholdHelpText: <text(200)>
-        consultationStepType: '@typeAll'
-    opinionType2:
-        id: 'opinionType2'
-        title: Les causes
-        position: 2
-        color: orange
-        defaultFilter: votes
-        isEnabled: true
-        consultationStepType: '@typeAll'
-    opinionType3:
-        id: 'opinionType3'
-        title: Les enjeux
-        position: 3
-        color: bluedark
-        defaultFilter: votes
-        isEnabled: true
-        sourceable: false
-        consultationStepType: '@typeAll'
-    opinionType4:
-        id: 'opinionType4'
-        title: Les solutions
-        position: 4
-        color: green
-        defaultFilter: votes
-        isEnabled: true
-        consultationStepType: '@typeAll'
-    opinionType5bis:
-        id: 'opinionType5bis'
-        title: Titre Ier
-        subtitle: La circulation des données et du savoir
-        position: 1
-        color: blue
-        defaultFilter: positions
-        isEnabled: false
-        versionable: false
-        sourceable: false
-        consultationStepType: '@typePJL'
-    opinionType5ter:
-        id: 'opinionType5ter'
-        title: Chapitre Ier
-        subtitle: Économie de la donnée
-        position: 1
-        color: blue
-        defaultFilter: positions
-        isEnabled: false
-        versionable: false
-        sourceable: false
-        consultationStepType: '@typePJL'
-        parent: '@opinionType5bis'
-    opinionType5:
-        id: 'opinionType5'
-        title: Section 1
-        subtitle: Ouverture des données publiques
-        position: 1
-        color: blue
-        defaultFilter: positions
-        isEnabled: true
-        versionable: true
-        votesHelpText: <text(200)>
-        votesThreshold: 5
-        votesThresholdHelpText: <text(200)>
-        consultationStepType: '@typePJL'
-        parent: '@opinionType5ter'
-        linkable: true
-    opinionType6:
-        id: 'opinionType6'
-        title: Sous-partie 1
-        position: 1
-        color: orange
-        defaultFilter: positions
-        isEnabled: true
-        versionable: true
-        linkable: true
-        votesHelpText: <text(200)>
-        votesThreshold: 5
-        votesThresholdHelpText: <text(200)>
-        consultationStepType: '@typePJL'
-        parent: '@opinionType5'
-    opinionType7:
-        id: 'opinionType7'
-        title: Sous-partie 2
-        position: 2
-        color: red
-        defaultFilter: positions
-        isEnabled: true
-        versionable: true
-        linkable: true
-        votesHelpText: <text(200)>
-        votesThreshold: 5
-        votesThresholdHelpText: <text(200)>
-        consultationStepType: '@typePJL'
-        parent: '@opinionType5'
-    opinionType7bis:
-        id: 'opinionType7bis'
-        title: Sous-sous-partie 1
-        position: 1
-        color: red
-        defaultFilter: positions
-        isEnabled: true
-        versionable: true
-        votesHelpText: <text(200)>
-        votesThreshold: 5
-        votesThresholdHelpText: <text(200)>
-        consultationStepType: '@typePJL'
-        parent: '@opinionType7'
-    opinionType8:
-        id: 'opinionType8'
-        title: Le problème constaté
-        position: 1
-        color: red
-        isEnabled: 0
-        defaultFilter: votes
-        votesHelpText: <text(200)>
-        votesThreshold: 5
-        votesThresholdHelpText: <text(200)>
-        consultationStepType: '@typeDefault'
-    opinionType9:
-        id: 'opinionType9'
-        title: Les causes
-        position: 2
-        color: orange
-        defaultFilter: votes
-        isEnabled: true
-        consultationStepType: '@typeDefault'
-    opinionType10:
-        id: 'opinionType10'
-        title: Les enjeux
-        position: 3
-        color: bluedark
-        defaultFilter: votes
-        isEnabled: true
-        sourceable: false
-        consultationStepType: '@typeDefault'
-    opinionType11:
-        id: 'opinionType11'
-        title: Le problème constaté
-        position: 1
-        color: red
-        isEnabled: 0
-        defaultFilter: votes
-        votesHelpText: <text(200)>
-        votesThreshold: 5
-        votesThresholdHelpText: <text(200)>
-        consultationStepType: '@typeSimple'
-    opinionType12:
-        id: 'opinionType12'
-        title: Les causes
-        position: 2
-        color: orange
-        defaultFilter: votes
-        isEnabled: true
-        versionable: true
-        consultationStepType: '@typeSimple'
-    opinionType13:
-        id: 'opinionType13'
-        title: Les causes
-        position: 2
-        color: orange
-        defaultFilter: votes
-        isEnabled: true
-        consultationStepType: '@typeCauses'
-    opinionType{17...27}:
-        id: opinionType<current()>
-        title: Test<current()>
-        position: 2
-        color: orange
-        defaultFilter: votes
-        isEnabled: true
-        consultationStepType: '@typePJL'
-        parent: '@opinionType5ter'
+  opinionType1:
+    id: 'opinionType1'
+    title: Le problème constaté
+    position: 1
+    color: red
+    isEnabled: false
+    defaultFilter: votes
+    votesHelpText: <text(200)>
+    votesThreshold: 5
+    votesThresholdHelpText: <text(200)>
+    consultationStepType: '@typeAll'
+  opinionType2:
+    id: 'opinionType2'
+    title: Les causes
+    position: 2
+    color: orange
+    defaultFilter: votes
+    isEnabled: true
+    consultationStepType: '@typeAll'
+  opinionType3:
+    id: 'opinionType3'
+    title: Les enjeux
+    position: 3
+    color: bluedark
+    defaultFilter: votes
+    isEnabled: true
+    sourceable: false
+    consultationStepType: '@typeAll'
+  opinionType4:
+    id: 'opinionType4'
+    title: Les solutions
+    position: 4
+    color: green
+    defaultFilter: votes
+    isEnabled: true
+    consultationStepType: '@typeAll'
+  opinionType5bis:
+    id: 'opinionType5bis'
+    title: Titre Ier
+    subtitle: La circulation des données et du savoir
+    position: 1
+    color: blue
+    defaultFilter: positions
+    isEnabled: false
+    versionable: false
+    sourceable: false
+    consultationStepType: '@typePJL'
+  opinionType5ter:
+    id: 'opinionType5ter'
+    title: Chapitre Ier
+    subtitle: Économie de la donnée
+    position: 1
+    color: blue
+    defaultFilter: positions
+    isEnabled: false
+    versionable: false
+    sourceable: false
+    consultationStepType: '@typePJL'
+    parent: '@opinionType5bis'
+  opinionType5:
+    id: 'opinionType5'
+    title: Section 1
+    subtitle: Ouverture des données publiques
+    position: 1
+    color: blue
+    defaultFilter: positions
+    isEnabled: true
+    versionable: true
+    votesHelpText: <text(200)>
+    votesThreshold: 5
+    votesThresholdHelpText: <text(200)>
+    consultationStepType: '@typePJL'
+    parent: '@opinionType5ter'
+    linkable: true
+  opinionType6:
+    id: 'opinionType6'
+    title: Sous-partie 1
+    position: 1
+    color: orange
+    defaultFilter: positions
+    isEnabled: true
+    versionable: true
+    linkable: true
+    votesHelpText: <text(200)>
+    votesThreshold: 5
+    votesThresholdHelpText: <text(200)>
+    consultationStepType: '@typePJL'
+    parent: '@opinionType5'
+  opinionType7:
+    id: 'opinionType7'
+    title: Sous-partie 2
+    position: 2
+    color: red
+    defaultFilter: positions
+    isEnabled: true
+    versionable: true
+    linkable: true
+    votesHelpText: <text(200)>
+    votesThreshold: 5
+    votesThresholdHelpText: <text(200)>
+    consultationStepType: '@typePJL'
+    parent: '@opinionType5'
+  opinionType7bis:
+    id: 'opinionType7bis'
+    title: Sous-sous-partie 1
+    position: 1
+    color: red
+    defaultFilter: positions
+    isEnabled: true
+    versionable: true
+    votesHelpText: <text(200)>
+    votesThreshold: 5
+    votesThresholdHelpText: <text(200)>
+    consultationStepType: '@typePJL'
+    parent: '@opinionType7'
+  opinionType8:
+    id: 'opinionType8'
+    title: Le problème constaté
+    position: 1
+    color: red
+    isEnabled: 0
+    defaultFilter: votes
+    votesHelpText: <text(200)>
+    votesThreshold: 5
+    votesThresholdHelpText: <text(200)>
+    consultationStepType: '@typeDefault'
+  opinionType9:
+    id: 'opinionType9'
+    title: Les causes
+    position: 2
+    color: orange
+    defaultFilter: votes
+    isEnabled: true
+    consultationStepType: '@typeDefault'
+  opinionType10:
+    id: 'opinionType10'
+    title: Les enjeux
+    position: 3
+    color: bluedark
+    defaultFilter: votes
+    isEnabled: true
+    sourceable: false
+    consultationStepType: '@typeDefault'
+  opinionType11:
+    id: 'opinionType11'
+    title: Le problème constaté
+    position: 1
+    color: red
+    isEnabled: 0
+    defaultFilter: votes
+    votesHelpText: <text(200)>
+    votesThreshold: 5
+    votesThresholdHelpText: <text(200)>
+    consultationStepType: '@typeSimple'
+  opinionType12:
+    id: 'opinionType12'
+    title: Les causes
+    position: 2
+    color: orange
+    defaultFilter: votes
+    isEnabled: true
+    versionable: true
+    consultationStepType: '@typeSimple'
+  opinionType13:
+    id: 'opinionType13'
+    title: Les causes
+    position: 2
+    color: orange
+    defaultFilter: votes
+    isEnabled: true
+    consultationStepType: '@typeCauses'
+  opinionType{17...27}:
+    id: opinionType<current()>
+    title: Test<current()>
+    position: 2
+    color: orange
+    defaultFilter: votes
+    isEnabled: true
+    consultationStepType: '@typePJL'
+    parent: '@opinionType5ter'

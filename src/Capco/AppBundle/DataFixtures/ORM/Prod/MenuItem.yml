@@ -1,8 +1,7 @@
 Capco\AppBundle\Entity\MenuItem:
-
   MenuItem1:
     title: Accueil
-    link: "/"
+    link: '/'
     isEnabled: 1
     isDeletable: 0
     isFullyModifiable: 0
@@ -33,7 +32,7 @@ Capco\AppBundle\Entity\MenuItem:
 
   MenuItem5:
     title: À propos
-    link: ""
+    link: ''
     isEnabled: 1
     isDeletable: 1
     isFullyModifiable: 1

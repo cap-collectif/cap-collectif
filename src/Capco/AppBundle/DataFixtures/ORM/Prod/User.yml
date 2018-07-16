@@ -1,19 +1,19 @@
 Capco\UserBundle\Entity\User:
-    user1:
-        username: capco
-        email: admin@cap-collectif.com
-        enabled: true
-        userType: '@UserType2'
-        plainPassword: ***REMOVED***
-        roles:
-         - 'ROLE_SUPER_ADMIN'
-        confirmationToken: ~
-        phone: +33000000000
-        firstname: Capco
-        lastname: Lectif
-        address: 25 rue claude tiller
-        address2: 3ieme etage
-        zipCode: 75012
-        city: Paris
-        gender: 'm'
-        dateOfBirth: <(new \DateTime('2014-03-01'))>
+  user1:
+    username: capco
+    email: admin@cap-collectif.com
+    enabled: true
+    userType: '@UserType2'
+    plainPassword: ***REMOVED***
+    roles:
+      - 'ROLE_SUPER_ADMIN'
+    confirmationToken: ~
+    phone: +33000000000
+    firstname: Capco
+    lastname: Lectif
+    address: 25 rue claude tiller
+    address2: 3ieme etage
+    zipCode: 75012
+    city: Paris
+    gender: 'm'
+    dateOfBirth: <(new \DateTime('2014-03-01'))>

@@ -1,9 +1,9 @@
 imports:
-    - { resource: security.yml }
-    - { resource: sonata.yml }
-    - { resource: liip_imagine.yml }
-    - { resource: swarrot.yml }
-    - { resource: joli/jolitypo.yml }
+  - { resource: security.yml }
+  - { resource: sonata.yml }
+  - { resource: liip_imagine.yml }
+  - { resource: swarrot.yml }
+  - { resource: joli/jolitypo.yml }
 
 parameters:
   database_driver: '%env(SYMFONY_DATABASE_DRIVER)%'
@@ -42,11 +42,11 @@ parameters:
   sentry_dsn: '%env(SYMFONY_SENTRY_DSN)%'
   google_maps_key: ***REMOVED***
   loco_key: 5TYY2LOJxU7WgnDpreCQYXkXLAS_hsDII
-  locales: ["en-GB", "fr-FR", "es-ES"]
+  locales: ['en-GB', 'fr-FR', 'es-ES']
   google_maps_key_server: '***REMOVED***'
   jms_serializer.serialized_name_annotation_strategy.class: Capco\AppBundle\Utils\IdenticalUnlessSpecifiedPropertyNamingStrategy
 
-# Default values
+  # Default values
   env(SYMFONY_DATABASE_DRIVER): pdo_mysql
   env(SYMFONY_DATABASE_HOST): 127.0.0.1
   env(SYMFONY_DATABASE_PORT): 3306
@@ -67,7 +67,8 @@ parameters:
   env(SYMFONY_USE_ASSETIC_CONTROLLER): true
   env(SYMFONY_FACEBOOK_APP_ID): ***REMOVED***
   env(SYMFONY_FACEBOOK_APP_SECRET): ***REMOVED***
-  env(SYMFONY_GOOGLE_APP_ID): ***REMOVED***
+  env(SYMFONY_GOOGLE_APP_ID):
+    ***REMOVED***
   env(SYMFONY_GOOGLE_APP_SECRET): ***REMOVED***
   env(SYMFONY_JWT_TOKEN_TTL): 86400
   env(SYMFONY_LANGUAGE_ANALYZER): french
@@ -83,506 +84,588 @@ parameters:
   env(SYMFONY_SENTRY_DSN): ~
 
 framework:
-    secret: '%secret%'
-    router:
-        resource: "%kernel.root_dir%/config/routing.yml"
-        strict_requirements: null
-    form: null
-    csrf_protection: null
-    validation:
-        enabled: true
-        enable_annotations: true
-    templating:
-        engines:
-            - twig
-    assets:
-        version: "%assets_version%"
-    default_locale: "%locale%"
-    trusted_hosts: null
-    trusted_proxies: ['127.0.0.1']
-    session:
-        handler_id: snc_redis.session.handler
-    fragments: null
-    http_method_override: true
-    translator:
-        paths:
-            - '%kernel.root_dir%/../translations'
-        fallback: fr-FR
+  secret: '%secret%'
+  router:
+    resource: '%kernel.root_dir%/config/routing.yml'
+    strict_requirements: null
+  form: null
+  csrf_protection: null
+  validation:
+    enabled: true
+    enable_annotations: true
+  templating:
+    engines:
+      - twig
+  assets:
+    version: '%assets_version%'
+  default_locale: '%locale%'
+  trusted_hosts: null
+  trusted_proxies: ['127.0.0.1']
+  session:
+    handler_id: snc_redis.session.handler
+  fragments: null
+  http_method_override: true
+  translator:
+    paths:
+      - '%kernel.root_dir%/../translations'
+    fallback: fr-FR
 
 twig:
-    debug: "%kernel.debug%"
-    strict_variables: "%kernel.debug%"
-    form_themes :
-        - 'CapcoAppBundle:Form:bootstrap.html.twig'
-        - 'CapcoAppBundle:Form:media_widgets.html.twig'
-        - 'SonataCoreBundle:Form:datepicker.html.twig'
-    globals:
-        facebook_app_id: "%facebook_app_id%"
-        google_maps_key: '%google_maps_key%'
-    paths:
-        '%kernel.root_dir%/../src/Capco/AppBundle/Mailer/templates': CapcoMail
+  debug: '%kernel.debug%'
+  strict_variables: '%kernel.debug%'
+  form_themes:
+    - 'CapcoAppBundle:Form:bootstrap.html.twig'
+    - 'CapcoAppBundle:Form:media_widgets.html.twig'
+    - 'SonataCoreBundle:Form:datepicker.html.twig'
+  globals:
+    facebook_app_id: '%facebook_app_id%'
+    google_maps_key: '%google_maps_key%'
+  paths:
+    '%kernel.root_dir%/../src/Capco/AppBundle/Mailer/templates': CapcoMail
 
 ekino_new_relic:
-    enabled:          true
-    log_exceptions:   true
+  enabled: true
+  log_exceptions: true
 
 # Fetch xlf files from Loco: CapcoAppBundle.{locale}.xlf and validators.{locale}.xlf
 translation_adapter_loco:
   projects:
     cap-collectif:
-      api_key: "%loco_key%"
+      api_key: '%loco_key%'
       domains: ['CapcoAppBundle', 'validators']
 
 translation:
-  locales: "%locales%"
+  locales: '%locales%'
   configs:
     app:
-      dirs: ["%kernel.root_dir%/../src"]
-      output_dir: "%kernel.root_dir%/../translations"
-      remote_storage: ["php_translation.adapter.loco"]
+      dirs: ['%kernel.root_dir%/../src']
+      output_dir: '%kernel.root_dir%/../translations'
+      remote_storage: ['php_translation.adapter.loco']
 
 doctrine:
-    dbal:
-        driver: "%database_driver%"
-        host: "%database_host%"
-        port: "%database_port%"
-        dbname: "%database_name%"
-        user: "%database_user%"
-        password: "%database_password%"
-        charset: UTF8
-        server_version: 5.6
-        types:
-            json: Sonata\Doctrine\Types\JsonType
-        mapping_types:
-            enum: string
-    orm:
-        auto_generate_proxy_classes: true # not the best production setting but otherwise cache:warmup fail
-        auto_mapping: true
-        # naming_strategy: doctrine.orm.naming_strategy.underscore
-        filters:
-          softdeleted:
-              class: Capco\AppBundle\Filter\SoftDeletedFilter
-              enabled: true
-        dql:
-          datetime_functions:
-            DATE: Capco\AppBundle\DQL\DateFunction
-          numeric_functions:
-            RAND: Capco\AppBundle\DQL\RandFunction
-        mappings:
-          tree:
-            type: annotation
-            prefix: Gedmo\Tree\Entity
-            dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
-            alias: GedmoTree
-          loggable:
-            type: annotation
-            alias: GedmoLoggable
-            prefix: Gedmo\Loggable\Entity
-            dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
-            is_bundle: false
-        resolve_target_entities:
-           # Used to tell synthesis tool wich entity to use for users. If none is defined in the project, you can use Capco\AppBundle\Entity\Synthesis\SynthesisUser
-           Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface: Capco\UserBundle\Entity\User
+  dbal:
+    driver: '%database_driver%'
+    host: '%database_host%'
+    port: '%database_port%'
+    dbname: '%database_name%'
+    user: '%database_user%'
+    password: '%database_password%'
+    charset: UTF8
+    server_version: 5.6
+    types:
+      json: Sonata\Doctrine\Types\JsonType
+    mapping_types:
+      enum: string
+  orm:
+    auto_generate_proxy_classes: true # not the best production setting but otherwise cache:warmup fail
+    auto_mapping: true
+    # naming_strategy: doctrine.orm.naming_strategy.underscore
+    filters:
+      softdeleted:
+        class: Capco\AppBundle\Filter\SoftDeletedFilter
+        enabled: true
+    dql:
+      datetime_functions:
+        DATE: Capco\AppBundle\DQL\DateFunction
+      numeric_functions:
+        RAND: Capco\AppBundle\DQL\RandFunction
+    mappings:
+      tree:
+        type: annotation
+        prefix: Gedmo\Tree\Entity
+        dir: '%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity'
+        alias: GedmoTree
+      loggable:
+        type: annotation
+        alias: GedmoLoggable
+        prefix: Gedmo\Loggable\Entity
+        dir: '%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity'
+        is_bundle: false
+    resolve_target_entities:
+      # Used to tell synthesis tool wich entity to use for users. If none is defined in the project, you can use Capco\AppBundle\Entity\Synthesis\SynthesisUser
+      Capco\AppBundle\Entity\Synthesis\SynthesisUserInterface: Capco\UserBundle\Entity\User
 
 snc_redis:
-    clients:
-        default:
-            type: predis
-            alias: default
-            dsn: redis://%redis_host%
-            logging: "%kernel.debug%"
-        cache:
-            type: predis
-            alias: cache
-            dsn: redis://%redis_host%
-            logging: "%kernel.debug%"
-        session:
-            type: predis
-            alias: session
-            dsn: redis://%redis_host%
-            logging: "%kernel.debug%"
+  clients:
+    default:
+      type: predis
+      alias: default
+      dsn: redis://%redis_host%
+      logging: '%kernel.debug%'
+    cache:
+      type: predis
+      alias: cache
+      dsn: redis://%redis_host%
+      logging: '%kernel.debug%'
     session:
-        client: session
-        ttl: 1209600 # Two weeks
-        prefix: session_%kernel.environment%_ # We add env in prefix to allow multi environments sessions in dev
-        locking: true # Not using locking improve performance, but may cause bugs
-    # Can't succeed to have doctrine cache work inside redis, so for now we keep apc
-    # doctrine:
-    #     metadata_cache:
-    #         client: cache
-    #         entity_manager: default
-    #         document_manager: default
-    #         namespace: metadata_cache_%kernel.environment%_
-    #     result_cache:
-    #         client: cache
-    #         entity_manager: default
-    #         namespace: result_cache_%kernel.environment%_
-    #     query_cache:
-    #         client: cache
-    #         entity_manager: default
-    #         namespace: query_cache_%kernel.environment%_
-    # second_level_cache:
-    #     client: cache
-    #     entity_manager: default
+      type: predis
+      alias: session
+      dsn: redis://%redis_host%
+      logging: '%kernel.debug%'
+  session:
+    client: session
+    ttl: 1209600 # Two weeks
+    prefix: session_%kernel.environment%_ # We add env in prefix to allow multi environments sessions in dev
+    locking: true # Not using locking improve performance, but may cause bugs
+# Can't succeed to have doctrine cache work inside redis, so for now we keep apc
+# doctrine:
+#     metadata_cache:
+#         client: cache
+#         entity_manager: default
+#         document_manager: default
+#         namespace: metadata_cache_%kernel.environment%_
+#     result_cache:
+#         client: cache
+#         entity_manager: default
+#         namespace: result_cache_%kernel.environment%_
+#     query_cache:
+#         client: cache
+#         entity_manager: default
+#         namespace: query_cache_%kernel.environment%_
+# second_level_cache:
+#     client: cache
+#     entity_manager: default
 
 swiftmailer:
-    default_mailer: default
-    mailers:
-        default:
-            transport: smtp
-            local_domain: "%router.request_context.host%"
-            host: "%mailer_host%"
-            port: "%mailer_port%"
-            username: "%mailer_user%"
-            password: "%mailer_password%"
+  default_mailer: default
+  mailers:
+    default:
+      transport: smtp
+      local_domain: '%router.request_context.host%'
+      host: '%mailer_host%'
+      port: '%mailer_port%'
+      username: '%mailer_user%'
+      password: '%mailer_password%'
 
 # Stof\DoctrineExtensionBundle configuration
 stof_doctrine_extensions:
-    default_locale: "%locale%"
-    orm:
-        default:
-            timestampable: true
-            translatable: true
-            sluggable : true
-            softdeleteable: true
-            loggable: true
-            tree: true
+  default_locale: '%locale%'
+  orm:
+    default:
+      timestampable: true
+      translatable: true
+      sluggable: true
+      softdeleteable: true
+      loggable: true
+      tree: true
 
 tweede_golf_prometheus:
-    storage_adapter_service: 'redis_adapter'
-    register_defaults: false
-    collectors:
-        registered:
-            gauge:
-                help: Number of registrations
-        registeredContributors:
-            gauge:
-                help: Number of registered contributors
-        projectCount:
-            gauge:
-                help: Number of projects
-        contribuableStepsCount:
-            gauge:
-                help: Number of contribuable steps
-        voteCount:
-            gauge:
-                help: Number of votes
-        commentCount:
-            gauge:
-                help: Number of comments
-        contributionCount:
-            gauge:
-                help: Number of contributions
-        opinionCount:
-            gauge:
-                help: Number of opinions
-        versionCount:
-            gauge:
-                help: Number of versions
-        argumentCount:
-            gauge:
-                help: Number of arguments
-        sourceCount:
-            gauge:
-                help: Number of sources
-        proposalCount:
-            gauge:
-                help: Number of proposals
-        replyCount:
-            gauge:
-                help: Number of replies
-        reportCount:
-            gauge:
-                help: Number of reports
-        reportArchivedCount:
-            gauge:
-                help: Number of reports archived
-        followerCount:
-            gauge:
-                help: Number of followers
-        contributionTrashedCount:
-            gauge:
-                help: Number of contributions which has been trashed
+  storage_adapter_service: 'redis_adapter'
+  register_defaults: false
+  collectors:
+    registered:
+      gauge:
+        help: Number of registrations
+    registeredContributors:
+      gauge:
+        help: Number of registered contributors
+    projectCount:
+      gauge:
+        help: Number of projects
+    contribuableStepsCount:
+      gauge:
+        help: Number of contribuable steps
+    voteCount:
+      gauge:
+        help: Number of votes
+    commentCount:
+      gauge:
+        help: Number of comments
+    contributionCount:
+      gauge:
+        help: Number of contributions
+    opinionCount:
+      gauge:
+        help: Number of opinions
+    versionCount:
+      gauge:
+        help: Number of versions
+    argumentCount:
+      gauge:
+        help: Number of arguments
+    sourceCount:
+      gauge:
+        help: Number of sources
+    proposalCount:
+      gauge:
+        help: Number of proposals
+    replyCount:
+      gauge:
+        help: Number of replies
+    reportCount:
+      gauge:
+        help: Number of reports
+    reportArchivedCount:
+      gauge:
+        help: Number of reports archived
+    followerCount:
+      gauge:
+        help: Number of followers
+    contributionTrashedCount:
+      gauge:
+        help: Number of contributions which has been trashed
 
 hautelook_alice:
-    locale: "%locale%"
-    loading_limit: 1
+  locale: '%locale%'
+  loading_limit: 1
 
 fos_user:
-    db_driver:      orm
-    firewall_name:  main
-    user_class:     Capco\UserBundle\Entity\User
-    group:
-        group_class: Capco\AppBundle\Entity\Group
-    service:
-        user_manager: sonata.user.orm.user_manager
-        email_canonicalizer: capco.canonicalizer
-        username_canonicalizer: capco.canonicalizer
-        mailer: capco.fos_notifier
-    registration:
-        confirmation:
-            enabled:    true
-    change_password:
-        form:
-            type: Capco\UserBundle\Form\Type\ChangePasswordFormType
-    resetting:
-        email:
-          template: CapcoUserBundle:Resetting:email.txt.twig
-    from_email:
-        address: noreply@ton_domaine.tld
-        sender_name: MonSite - Espace membre
-    profile:
-        form:
-            type: Capco\UserBundle\Form\Type\ProfileFormType
-            validation_groups:
-                - profile
+  db_driver: orm
+  firewall_name: main
+  user_class: Capco\UserBundle\Entity\User
+  group:
+    group_class: Capco\AppBundle\Entity\Group
+  service:
+    user_manager: sonata.user.orm.user_manager
+    email_canonicalizer: capco.canonicalizer
+    username_canonicalizer: capco.canonicalizer
+    mailer: capco.fos_notifier
+  registration:
+    confirmation:
+      enabled: true
+  change_password:
+    form:
+      type: Capco\UserBundle\Form\Type\ChangePasswordFormType
+  resetting:
+    email:
+      template: CapcoUserBundle:Resetting:email.txt.twig
+  from_email:
+    address: noreply@ton_domaine.tld
+    sender_name: MonSite - Espace membre
+  profile:
+    form:
+      type: Capco\UserBundle\Form\Type\ProfileFormType
+      validation_groups:
+        - profile
 
 services:
-    twig.extension.text:
-       class: Twig_Extensions_Extension_Text
-       tags:
-            - { name: twig.extension }
-    twig.extension.intl:
-        class: Twig_Extensions_Extension_Intl
-        tags:
-            - { name: twig.extension }
+  twig.extension.text:
+    class: Twig_Extensions_Extension_Text
+    tags:
+      - { name: twig.extension }
+  twig.extension.intl:
+    class: Twig_Extensions_Extension_Intl
+    tags:
+      - { name: twig.extension }
 
 httplug:
-    clients:
-        default:
-            factory: 'httplug.factory.curl'
-            http_methods_client: true
-        hwi:
-            factory: 'httplug.factory.guzzle6'
-            config:
-                timeout: 10
-                verify_peer: false
-                max_redirects: 1
-                ignore_errors: false
+  clients:
+    default:
+      factory: 'httplug.factory.curl'
+      http_methods_client: true
+    hwi:
+      factory: 'httplug.factory.guzzle6'
+      config:
+        timeout: 10
+        verify_peer: false
+        max_redirects: 1
+        ignore_errors: false
 
 hwi_oauth:
-    http:
-        client: httplug.client.hwi
-    connect:
-        account_connector: capco.oauth.provider
-    firewall_names: [main]
-    target_path_parameter: _destination
-    fosub:
-        username_iterations: 30
-        properties:
-            facebook: facebook_id
-            google: google_id
-    resource_owners:
-        facebook:
-            type: facebook
-            client_id: "%facebook_app_id%"
-            client_secret: "%facebook_app_secret%"
-            scope: "email"
-            options:
-                display: page
-        google:
-            type: google
-            client_id: "%google_app_id%"
-            client_secret: "%google_app_secret%"
-            scope: "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
-            options:
-                access_type: offline
-                approval_prompt: auto
-                display: page
-                login_hint: email address
+  http:
+    client: httplug.client.hwi
+  connect:
+    account_connector: capco.oauth.provider
+  firewall_names: [main]
+  target_path_parameter: _destination
+  fosub:
+    username_iterations: 30
+    properties:
+      facebook: facebook_id
+      google: google_id
+  resource_owners:
+    facebook:
+      type: facebook
+      client_id: '%facebook_app_id%'
+      client_secret: '%facebook_app_secret%'
+      scope: 'email'
+      options:
+        display: page
+    google:
+      type: google
+      client_id: '%google_app_id%'
+      client_secret: '%google_app_secret%'
+      scope:
+        'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile'
+      options:
+        access_type: offline
+        approval_prompt: auto
+        display: page
+        login_hint: email address
 
 qandidate_toggle:
-    persistence: redis
-    context_factory: null
-    redis_namespace: feature_toggle # default, only required when persistence = redis
-    redis_client: snc_redis.default # only required when persistence = redis
+  persistence: redis
+  context_factory: null
+  redis_namespace: feature_toggle # default, only required when persistence = redis
+  redis_client: snc_redis.default # only required when persistence = redis
 
 ivory_ck_editor:
-    base_path: 'js/ckeditor/'
-    js_path: 'js/ckeditor/ckeditor.js'
-    default_config: user_editor
-    input_sync: true
+  base_path: 'js/ckeditor/'
+  js_path: 'js/ckeditor/ckeditor.js'
+  default_config: user_editor
+  input_sync: true
+  configs:
+    user_editor:
+      removePlugins: 'elementspath'
+      toolbar: user_toolbar
+      language: fr
+      skin: minimalist
+      extraPlugins: autolink,autogrow
+      extraAllowedContent: 'a[!href,_src,target,class],iframe[data-type]'
+      entities: false
+    empty_editor:
+      removePlugins: 'toolbar,elementspath,resize'
+      language: fr
+      skin: minimalist
+      extraPlugins: autolink,autogrow
+      extraAllowedContent: 'a[!href,_src,target,class]'
+      entities: false
+    admin_editor:
+      toolbar: admin_toolbar
+      language: fr
+      skin: minimalist
+      extraPlugins: oembed,btgrid,autolink,autogrow
+      allowedContent: true
+      filebrowserBrowseRoute: admin_capco_media_media_browser
+      filebrowserImageBrowseRoute: admin_capco_media_media_browser
+      entities: false
+      # Display images by default when clicking the image dialog browse button
+      filebrowserImageBrowseRouteParameters:
+        provider: sonata.media.provider.image
+      filebrowserUploadRoute: admin_capco_media_media_upload
+      filebrowserUploadRouteParameters:
+        provider: sonata.media.provider.file
+      # Upload file as image when sending a file from the image dialog
+      filebrowserImageUploadRoute: admin_capco_media_media_upload
+      filebrowserImageUploadRouteParameters:
+        provider: sonata.media.provider.image
+        context: default
+      filebrowserWindowWidth: '50%'
+      filebrowserWindowHeight: '80%'
+  toolbars:
     configs:
-        user_editor:
-            removePlugins: 'elementspath'
-            toolbar: user_toolbar
-            language: fr
-            skin: minimalist
-            extraPlugins: autolink,autogrow
-            extraAllowedContent: "a[!href,_src,target,class],iframe[data-type]"
-            entities: false
-        empty_editor:
-            removePlugins: 'toolbar,elementspath,resize'
-            language: fr
-            skin: minimalist
-            extraPlugins: autolink,autogrow
-            extraAllowedContent: "a[!href,_src,target,class]"
-            entities: false
-        admin_editor:
-            toolbar: admin_toolbar
-            language: fr
-            skin: minimalist
-            extraPlugins: oembed,btgrid,autolink,autogrow
-            allowedContent: true
-            filebrowserBrowseRoute: admin_capco_media_media_browser
-            filebrowserImageBrowseRoute: admin_capco_media_media_browser
-            entities: false
-            # Display images by default when clicking the image dialog browse button
-            filebrowserImageBrowseRouteParameters:
-                provider: sonata.media.provider.image
-            filebrowserUploadRoute: admin_capco_media_media_upload
-            filebrowserUploadRouteParameters:
-                provider: sonata.media.provider.file
-            # Upload file as image when sending a file from the image dialog
-            filebrowserImageUploadRoute: admin_capco_media_media_upload
-            filebrowserImageUploadRouteParameters:
-                provider: sonata.media.provider.image
-                context: default
-            filebrowserWindowWidth: '50%'
-            filebrowserWindowHeight: '80%'
-    toolbars:
-        configs:
-            admin_toolbar: ['@clipboard', '@styles', '@basicstyles', '@colors', '@paragraph', '@links', '@insert', '@document', '@tools' ]
-            user_toolbar: ['@clipboard', '@user_styles', '@basicstyles', '@user_paragraph', '@user_links', '@user_insert', '@tools']
-        items:
-            clipboard: [ 'Undo', 'Redo' ]
-            styles: [ 'Format', 'FontSize']
-            user_styles: [ 'Format' ]
-            basicstyles: [ 'Bold', 'Italic', 'Underline', 'Strike']
-            colors: ['TextColor', 'BGColor']
-            paragraph: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ]
-            user_paragraph: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote' ]
-            links: [ 'Link', 'Unlink', 'Anchor' ]
-            user_links: [ 'Link', 'Unlink' ]
-            insert: [ 'Image', 'oembed', 'Iframe', 'Table', 'btgrid', 'HorizontalRule' ]
-            user_insert: [ 'Image', 'Table', 'HorizontalRule' ]
-            document: ['Source']
-            tools: [ 'Maximize' ]
+      admin_toolbar:
+        [
+          '@clipboard',
+          '@styles',
+          '@basicstyles',
+          '@colors',
+          '@paragraph',
+          '@links',
+          '@insert',
+          '@document',
+          '@tools',
+        ]
+      user_toolbar:
+        [
+          '@clipboard',
+          '@user_styles',
+          '@basicstyles',
+          '@user_paragraph',
+          '@user_links',
+          '@user_insert',
+          '@tools',
+        ]
+    items:
+      clipboard: ['Undo', 'Redo']
+      styles: ['Format', 'FontSize']
+      user_styles: ['Format']
+      basicstyles: ['Bold', 'Italic', 'Underline', 'Strike']
+      colors: ['TextColor', 'BGColor']
+      paragraph:
+        [
+          'NumberedList',
+          'BulletedList',
+          '-',
+          'Outdent',
+          'Indent',
+          '-',
+          'Blockquote',
+          '-',
+          'JustifyLeft',
+          'JustifyCenter',
+          'JustifyRight',
+          'JustifyBlock',
+        ]
+      user_paragraph: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote']
+      links: ['Link', 'Unlink', 'Anchor']
+      user_links: ['Link', 'Unlink']
+      insert: ['Image', 'oembed', 'Iframe', 'Table', 'btgrid', 'HorizontalRule']
+      user_insert: ['Image', 'Table', 'HorizontalRule']
+      document: ['Source']
+      tools: ['Maximize']
 
 coop_tilleuls_ck_editor_sonata_media:
-    templates:
-        layout: CoopTilleulsCKEditorSonataMediaBundle::layout.html.twig
-        browser: CapcoMediaBundle:MediaAdmin:browser.html.twig
-        upload: CoopTilleulsCKEditorSonataMediaBundle:MediaAdmin:upload.html.twig
+  templates:
+    layout: CoopTilleulsCKEditorSonataMediaBundle::layout.html.twig
+    browser: CapcoMediaBundle:MediaAdmin:browser.html.twig
+    upload: CoopTilleulsCKEditorSonataMediaBundle:MediaAdmin:upload.html.twig
 
 nelmio_api_doc: ~
 
 fos_rest:
-    view:
-        view_response_listener: true
-        failed_validation: HTTP_BAD_REQUEST
-        empty_content: 204
-        formats:
-            json: true
-    format_listener:
-        enabled: false # We support only json
-    # versioning: false
-    body_listener:
-        enabled: true
-        decoders:
-            json: fos_rest.decoder.json
-        # array_normalizer:
-        #     service: fos_rest.normalizer.camel_keys_with_leading_underscore
-        #     forms: true
-        # throw_exception_on_unsupported_content_type: false
-    body_converter:
-        enabled: true
-        validate: true
-        validation_errors_argument: validationErrors
-    param_fetcher_listener: true
-    allowed_methods_listener: true
-    serializer:
-        serialize_null: true
-    exception:
-        enabled: true
-        codes:
-            'Symfony\Component\HttpKernel\Exception\BadRequestHttpException': 400
-            'Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException': 401
-            'Symfony\Component\Security\Core\Exception\AuthenticationException': 401
-            'Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException': 403
-            'Symfony\Component\Security\Core\Exception\AccessDeniedException': 403
-            'Symfony\Component\HttpKernel\Exception\NotFoundHttpException': 404
-            'Symfony\Component\Routing\Exception\ResourceNotFoundException': 404
-            'Doctrine\ORM\OptimisticLockException': 409
-        messages:
-            'Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException': true
-            'Symfony\Component\HttpKernel\Exception\BadRequestHttpException': true
-            'Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException': true
-            'Symfony\Component\HttpKernel\Exception\NotFoundHttpException': true
-            'Symfony\Component\Routing\Exception\ResourceNotFoundException': true
-            'Symfony\Component\Security\Core\Exception\AccessDeniedException': true
-            'Symfony\Component\Security\Core\Exception\AuthenticationException': true
+  view:
+    view_response_listener: true
+    failed_validation: HTTP_BAD_REQUEST
+    empty_content: 204
+    formats:
+      json: true
+  format_listener:
+    enabled: false # We support only json
+  # versioning: false
+  body_listener:
+    enabled: true
+    decoders:
+      json: fos_rest.decoder.json
+  # array_normalizer:
+  #     service: fos_rest.normalizer.camel_keys_with_leading_underscore
+  #     forms: true
+  # throw_exception_on_unsupported_content_type: false
+  body_converter:
+    enabled: true
+    validate: true
+    validation_errors_argument: validationErrors
+  param_fetcher_listener: true
+  allowed_methods_listener: true
+  serializer:
+    serialize_null: true
+  exception:
+    enabled: true
+    codes:
+      'Symfony\Component\HttpKernel\Exception\BadRequestHttpException': 400
+      'Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException': 401
+      'Symfony\Component\Security\Core\Exception\AuthenticationException': 401
+      'Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException': 403
+      'Symfony\Component\Security\Core\Exception\AccessDeniedException': 403
+      'Symfony\Component\HttpKernel\Exception\NotFoundHttpException': 404
+      'Symfony\Component\Routing\Exception\ResourceNotFoundException': 404
+      'Doctrine\ORM\OptimisticLockException': 409
+    messages:
+      'Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException': true
+      'Symfony\Component\HttpKernel\Exception\BadRequestHttpException': true
+      'Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException': true
+      'Symfony\Component\HttpKernel\Exception\NotFoundHttpException': true
+      'Symfony\Component\Routing\Exception\ResourceNotFoundException': true
+      'Symfony\Component\Security\Core\Exception\AccessDeniedException': true
+      'Symfony\Component\Security\Core\Exception\AuthenticationException': true
 
 lexik_jwt_authentication:
-    private_key_path: "%kernel.root_dir%/var/jwt/private.pem"
-    public_key_path:  "%kernel.root_dir%/var/jwt/public.pem"
-    pass_phrase: iamapassphrase
-    token_ttl: "%jwt_token_ttl%"
-    user_identity_field: email
+  private_key_path: '%kernel.root_dir%/var/jwt/private.pem'
+  public_key_path: '%kernel.root_dir%/var/jwt/public.pem'
+  pass_phrase: iamapassphrase
+  token_ttl: '%jwt_token_ttl%'
+  user_identity_field: email
 
 jms_serializer:
-    metadata:
-        cache: file
-        debug: "%kernel.debug%"
-        file_cache:
-            dir: "%kernel.cache_dir%/serializer"
-        auto_detection: false
-        directories:
-            App:
-                namespace_prefix: "Capco\\AppBundle\\Entity"
-                path: "%kernel.root_dir%/Resources/serializer"
-            User:
-                namespace_prefix: "Capco\\UserBundle"
-                path: "@CapcoUserBundle/Resources/config/serializer"
-            Media:
-                namespace_prefix: "Capco\\MediaBundle"
-                path: "@CapcoMediaBundle/Resources/config/serializer"
-            FOSUserBundle:
-                namespace_prefix: "FOS\\UserBundle"
-                path: "@CapcoUserBundle/Resources/config/serializer/FOSUserBundle"
-            GedmoLoggable:
-                namespace_prefix: "Gedmo\\Loggable"
-                path: "@CapcoAppBundle/Resources/config/serializer/GedmoLoggable"
+  metadata:
+    cache: file
+    debug: '%kernel.debug%'
+    file_cache:
+      dir: '%kernel.cache_dir%/serializer'
+    auto_detection: false
+    directories:
+      App:
+        namespace_prefix: "Capco\\AppBundle\\Entity"
+        path: '%kernel.root_dir%/Resources/serializer'
+      User:
+        namespace_prefix: "Capco\\UserBundle"
+        path: '@CapcoUserBundle/Resources/config/serializer'
+      Media:
+        namespace_prefix: "Capco\\MediaBundle"
+        path: '@CapcoMediaBundle/Resources/config/serializer'
+      FOSUserBundle:
+        namespace_prefix: "FOS\\UserBundle"
+        path: '@CapcoUserBundle/Resources/config/serializer/FOSUserBundle'
+      GedmoLoggable:
+        namespace_prefix: "Gedmo\\Loggable"
+        path: '@CapcoAppBundle/Resources/config/serializer/GedmoLoggable'
 
 exercise_html_purifier:
-    default:
-        Cache.SerializerPath: '%kernel.cache_dir%/htmlpurifier'
-    custom:
-        HTML.Allowed: "div[style],span[style],br,b,i,u,ol[style],ul[style],li[style],a[href|style],img[src|style]"
-        HTML.BlockWrapper: "div"
-        HTML.CoreModules:
-          - { Structure: true, Text: true, Hypertext: true, List: true, NonXMLCommonAttributes: false, XMLCommonAttributes: false, CommonAttributes: false, }
+  default:
+    Cache.SerializerPath: '%kernel.cache_dir%/htmlpurifier'
+  custom:
+    HTML.Allowed:
+      'div[style],span[style],br,b,i,u,ol[style],ul[style],li[style],a[href|style],img[src|style]'
+    HTML.BlockWrapper: 'div'
+    HTML.CoreModules:
+      - {
+          Structure: true,
+          Text: true,
+          Hypertext: true,
+          List: true,
+          NonXMLCommonAttributes: false,
+          XMLCommonAttributes: false,
+          CommonAttributes: false,
+        }
 
 hslavich_simplesamlphp:
-    sp: "%saml_sp%"
+  sp: '%saml_sp%'
 
 overblog_graphql:
-    security:
-        query_max_depth: false
-        query_max_complexity: false
-    definitions:
-        show_debug_info: "%kernel.debug%"
-        # internal_error_message: "An error occurred, please retry later or contact us!"
-        config_validation: "%kernel.debug%"
-        schema:
-            query: Query
-            # Put here types that are not exposed
-            types: [Argument, CheckboxRequirement, CollectStep, Comment, Consultation, Event, FirstnameRequirement, Group, LastnameRequirement, MediaQuestion, MediaResponse, MultipleChoiceQuestion, Opinion, OpinionType, OpinionVote, OtherStep, PhoneRequirement, PresentationStep, Project, Proposal, ProposalForm, ProposalVote, Questionnaire, QuestionnaireStep, RankingStep, Reply, Reporting, Section, SelectionStep, SimpleQuestion, Source, SynthesisStep, User, ValueResponse, Version, VersionVote]
-            mutation: Mutation
+  security:
+    query_max_depth: false
+    query_max_complexity: false
+  definitions:
+    show_debug_info: '%kernel.debug%'
+    # internal_error_message: "An error occurred, please retry later or contact us!"
+    config_validation: '%kernel.debug%'
+    schema:
+      query: Query
+      # Put here types that are not exposed
+      types:
+        [
+          Argument,
+          CheckboxRequirement,
+          CollectStep,
+          Comment,
+          Consultation,
+          Event,
+          FirstnameRequirement,
+          Group,
+          LastnameRequirement,
+          MediaQuestion,
+          MediaResponse,
+          MultipleChoiceQuestion,
+          Opinion,
+          OpinionType,
+          OpinionVote,
+          OtherStep,
+          PhoneRequirement,
+          PresentationStep,
+          Project,
+          Proposal,
+          ProposalForm,
+          ProposalVote,
+          Questionnaire,
+          QuestionnaireStep,
+          RankingStep,
+          Reply,
+          Reporting,
+          Section,
+          SelectionStep,
+          SimpleQuestion,
+          Source,
+          SynthesisStep,
+          User,
+          ValueResponse,
+          Version,
+          VersionVote,
+        ]
+      mutation: Mutation
 
 limenius_react:
-  default_rendering: "both"
+  default_rendering: 'both'
   serverside_rendering:
-      mode: "external_server"
-      fail_loud: false # Fix warnings then set to true in dev
-      trace: false
-      server_socket_path: "unix:///var/node_ssr.sock"
+    mode: 'external_server'
+    fail_loud: false # Fix warnings then set to true in dev
+    trace: false
+    server_socket_path: 'unix:///var/node_ssr.sock'
 
 fos_http_cache:
-    proxy_client:
-       default: varnish
-       varnish:
-          http:
-            servers:
-                - 127.0.0.1
-            base_url: 127.0.0.1
+  proxy_client:
+    default: varnish
+    varnish:
+      http:
+        servers:
+          - 127.0.0.1
+        base_url: 127.0.0.1

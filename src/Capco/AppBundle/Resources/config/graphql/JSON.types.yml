@@ -1,7 +1,7 @@
 JSON:
-    type: custom-scalar
-    config:
-        # description: "A string containing JSON code."
-        serialize: ["Capco\\AppBundle\\GraphQL\\Type\\JSONType", "serialize"]
-        parseValue: ["Capco\\AppBundle\\GraphQL\\Type\\JSONType", "parseValue"]
-        parseLiteral: ["Capco\\AppBundle\\GraphQL\\Type\\JSONType", "parseLiteral"]
+  type: custom-scalar
+  config:
+    # description: "A string containing JSON code."
+    serialize: ["Capco\\AppBundle\\GraphQL\\Type\\JSONType", 'serialize']
+    parseValue: ["Capco\\AppBundle\\GraphQL\\Type\\JSONType", 'parseValue']
+    parseLiteral: ["Capco\\AppBundle\\GraphQL\\Type\\JSONType", 'parseLiteral']

@@ -1,11 +1,11 @@
 YesNoPairedVoteValue:
-    type: enum
-    config:
-        description: "3 possible values"
-        values:
-            YES:
-                value: 1
-            NO:
-                value: -1
-            MITIGE:
-                value: 0
+  type: enum
+  config:
+    description: '3 possible values'
+    values:
+      YES:
+        value: 1
+      NO:
+        value: -1
+      MITIGE:
+        value: 0

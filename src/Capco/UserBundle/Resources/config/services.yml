@@ -1,5 +1,5 @@
 services:
-    # Redeclare Sonata services
+  # Redeclare Sonata services
   sonata.user.admin.group:
     abstract: false
     public: true
@@ -9,33 +9,33 @@ services:
 
   capco.paris.opem_am_client:
     class: Capco\UserBundle\MonCompteParis\OpenAmClient
-    arguments: ["@httplug.client.default", "@logger"]
+    arguments: ['@httplug.client.default', '@logger']
 
   capco.oauth.provider:
     class: Capco\UserBundle\Security\Core\User\OauthUserProvider
-    arguments: ["@fos_user.user_manager" ,{facebook: facebook_id, google: google_id}]
+    arguments: ['@fos_user.user_manager', { facebook: facebook_id, google: google_id }]
 
   capco.simple_preauth.provider:
     class: Capco\UserBundle\Security\Core\User\SimplePreAuthenticatorUserProvider
-    arguments: ["@capco.toggle.manager", "@capco.saml.provider", "@capco.paris.provider"]
+    arguments: ['@capco.toggle.manager', '@capco.saml.provider', '@capco.paris.provider']
 
   capco.saml.provider:
     class: Capco\UserBundle\Security\Core\User\SamlUserProvider
-    arguments: ["@fos_user.user_manager", "%simplesamlphp.sp%"]
+    arguments: ['@fos_user.user_manager', '%simplesamlphp.sp%']
 
   capco.paris.provider:
     class: Capco\UserBundle\Security\Core\User\MonCompteParisUserProvider
-    arguments: ["@fos_user.user_manager", "@capco.paris.opem_am_client"]
+    arguments: ['@fos_user.user_manager', '@capco.paris.opem_am_client']
 
   capco_user.registration.form.type:
     class: Capco\UserBundle\Form\Type\ApiRegistrationFormType
-    arguments: ["@capco.toggle.manager"]
+    arguments: ['@capco.toggle.manager']
     tags:
       - { name: form.type, alias: capco_user_registration }
 
   capco_user.profile.form.type:
     class: Capco\UserBundle\Form\Type\ProfileFormType
-    arguments: ["@capco.toggle.manager"]
+    arguments: ['@capco.toggle.manager']
     tags:
       - { name: form.type }
 
@@ -46,19 +46,19 @@ services:
 
   capco_user.public_data.form.type:
     class: Capco\UserBundle\Form\Type\PublicDataType
-    arguments: ["@capco.toggle.manager"]
+    arguments: ['@capco.toggle.manager']
     tags:
       - { name: form.type }
 
   capco_user_notifications.listener:
     class: Capco\UserBundle\Listener\UserNotificationsListener
     tags:
-        - { name: doctrine.orm.entity_listener, event: prePersist }
+      - { name: doctrine.orm.entity_listener, event: prePersist }
     arguments: ['@fos_user.util.token_generator']
 
   capco_user.user_provider.email:
     class: Capco\UserBundle\Security\Core\User\UserEmailProvider
-    arguments: ["@fos_user.user_manager", {}]
+    arguments: ['@fos_user.user_manager', {}]
 
   drupal.encoder:
     class: Capco\UserBundle\Security\DrupalEncoder
@@ -66,7 +66,7 @@ services:
   capco_user.change_password.form.type:
     class: Capco\UserBundle\Form\Type\ChangePasswordFormType
     tags:
-        - { name: form.type }
+      - { name: form.type }
 
   capco_user.create.form.type:
     class: Capco\UserBundle\Form\Type\UserFormType
@@ -80,30 +80,31 @@ services:
 
   # Saml
   capco.logout_handler:
-      class: Capco\UserBundle\Security\Http\Logout\LogoutSuccessHandler
-      arguments: ["@simplesamlphp.auth", "@router", "@capco.toggle.manager", "@capco.paris.opem_am_client"]
+    class: Capco\UserBundle\Security\Http\Logout\LogoutSuccessHandler
+    arguments:
+      ['@simplesamlphp.auth', '@router', '@capco.toggle.manager', '@capco.paris.opem_am_client']
 
   # Custom authentications
   capco.simple_preauth.authenticator:
-      class: Capco\UserBundle\Authenticator\SimplePreAuthenticator
-      arguments: ["@capco.toggle.manager", "@capco.saml.authenticator", "@capco.paris.authenticator"]
+    class: Capco\UserBundle\Authenticator\SimplePreAuthenticator
+    arguments: ['@capco.toggle.manager', '@capco.saml.authenticator', '@capco.paris.authenticator']
 
   capco.paris.authenticator:
-      class: Capco\UserBundle\Authenticator\MonCompteParisAuthenticator
-      arguments: ["@security.http_utils", "@logger", "@capco.paris.opem_am_client"]
+    class: Capco\UserBundle\Authenticator\MonCompteParisAuthenticator
+    arguments: ['@security.http_utils', '@logger', '@capco.paris.opem_am_client']
 
   capco.saml.authenticator:
-      class: Capco\UserBundle\Authenticator\SamlAuthenticator
-      arguments: ["@simplesamlphp.auth", "%simplesamlphp.sp%", "@security.http_utils", "@logger"]
+    class: Capco\UserBundle\Authenticator\SamlAuthenticator
+    arguments: ['@simplesamlphp.auth', '%simplesamlphp.sp%', '@security.http_utils', '@logger']
 
   # We override default security services:
   security.authentication.success_handler:
-      class:  Capco\UserBundle\Handler\AuthenticationSuccessHandler
-      arguments:  ["@security.http_utils", {}]
-      tags:
-          - { name: 'monolog.logger', channel: 'security' }
+    class: Capco\UserBundle\Handler\AuthenticationSuccessHandler
+    arguments: ['@security.http_utils', {}]
+    tags:
+      - { name: 'monolog.logger', channel: 'security' }
   security.authentication.failure_handler:
-      class:  Capco\UserBundle\Handler\AuthenticationFailureHandler
-      arguments:  ["@http_kernel", "@security.http_utils", {}, "@logger"]
-      tags:
-          - { name: 'monolog.logger', channel: 'security' }
+    class: Capco\UserBundle\Handler\AuthenticationFailureHandler
+    arguments: ['@http_kernel', '@security.http_utils', {}, '@logger']
+    tags:
+      - { name: 'monolog.logger', channel: 'security' }

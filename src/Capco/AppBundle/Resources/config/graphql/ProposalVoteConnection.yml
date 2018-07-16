@@ -1,11 +1,11 @@
 ProposalVoteConnection:
-    type: relay-connection
-    config:
-        nodeType: ProposalVote!
-        connectionFields:
-            totalCount:
-                type: Int!
-            creditsLeft:
-                type: Int
-            creditsSpent:
-                type: Int
+  type: relay-connection
+  config:
+    nodeType: ProposalVote!
+    connectionFields:
+      totalCount:
+        type: Int!
+      creditsLeft:
+        type: Int
+      creditsSpent:
+        type: Int

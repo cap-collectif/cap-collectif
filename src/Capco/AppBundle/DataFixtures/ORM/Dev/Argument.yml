@@ -8,7 +8,7 @@ Capco\AppBundle\Entity\Argument:
     body: Coucou, je suis un bel argument !
     isEnabled: true
     isTrashed: false
-    moderationToken: "argument1ModerationToken"
+    moderationToken: 'argument1ModerationToken'
   argument2:
     id: 'argument2'
     Opinion: '@opinion2'
@@ -130,7 +130,7 @@ Capco\AppBundle\Entity\Argument:
     isTrashed: true
     createdAt: <(new \DateTime('2016-03-01'))>
     trashedAt: <(new \DateTime('2017-03-01'))>
-    trashedReason: "moderation-guideline-violation"
+    trashedReason: 'moderation-guideline-violation'
 
   argument{209..210}:
     id: 'argument<current()>'

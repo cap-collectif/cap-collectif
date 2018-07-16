@@ -1,10 +1,10 @@
 Reportable:
-    type: interface
-    config:
-        description: "A reportable"
-        resolveType: "@=resolver('contribution_type', [value])"
-        fields:
-            viewerHasReport:
-                access: "@=hasRole('ROLE_USER')"
-                type: "Boolean!"
-                description: "Does the viewer already submitted a report ?"
+  type: interface
+  config:
+    description: 'A reportable'
+    resolveType: "@=resolver('contribution_type', [value])"
+    fields:
+      viewerHasReport:
+        access: "@=hasRole('ROLE_USER')"
+        type: 'Boolean!'
+        description: 'Does the viewer already submitted a report ?'

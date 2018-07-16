@@ -1,16 +1,16 @@
 TrashableContribution:
-    type: interface
-    config:
-        description: "A trashable contribution"
-        resolveType: "@=resolver('contribution_type', [value])"
-        fields:
-            trashed:
-                type: "Boolean!"
-                description: "True if the contribution is trashed."
-            trashedAt:
-                type: "String"
-                description: "The moment the moderator trashed the contribution."
-                resolve: "@=resolver('proposition_trashedAt', [value])"
-            trashedReason:
-                type: "String"
-                description: "The reason the moderator trashed the contribution."
+  type: interface
+  config:
+    description: 'A trashable contribution'
+    resolveType: "@=resolver('contribution_type', [value])"
+    fields:
+      trashed:
+        type: 'Boolean!'
+        description: 'True if the contribution is trashed.'
+      trashedAt:
+        type: 'String'
+        description: 'The moment the moderator trashed the contribution.'
+        resolve: "@=resolver('proposition_trashedAt', [value])"
+      trashedReason:
+        type: 'String'
+        description: 'The reason the moderator trashed the contribution.'

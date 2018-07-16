@@ -1,411 +1,413 @@
 Capco\UserBundle\Entity\User:
-    user1:
-        id: 'user1'
-        username: lbrunet
-        firstname: Laurent
-        lastname: Brunet
-        email: lbrunet@jolicode.com
-        enabled: true
-        userType: '@UserType1'
-        plainPassword: toto
-        roles:
-         - 'ROLE_SUPER_ADMIN'
-        media: '@MediaUser2'
-        confirmationToken: ~
+  user1:
+    id: 'user1'
+    username: lbrunet
+    firstname: Laurent
+    lastname: Brunet
+    email: lbrunet@jolicode.com
+    enabled: true
+    userType: '@UserType1'
+    plainPassword: toto
+    roles:
+      - 'ROLE_SUPER_ADMIN'
+    media: '@MediaUser2'
+    confirmationToken: ~
 
-    user2:
-        id: 'user2'
-        username: sfavot
-        firstname: Suzanne
-        lastname: Favot
-        email: sfavot@jolicode.com
-        enabled: true
-        userType: '@UserType1'
-        plainPassword: toto
-        roles:
-         - 'ROLE_SUPER_ADMIN'
-        media: '@MediaUser1'
-        city: Antony
-        website: http://www.sfavot.fr
-        biography: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum earum fuga quaerat expedita minima labore vitae voluptate, repellendus perspiciatis consequuntur cum, dignissimos quas temporibus consequatur tempora est repellat. Architecto, quia.
-        vip: true
-        phone: '+3300000000'
-        confirmationToken: ~
-        phoneConfirmed: true
+  user2:
+    id: 'user2'
+    username: sfavot
+    firstname: Suzanne
+    lastname: Favot
+    email: sfavot@jolicode.com
+    enabled: true
+    userType: '@UserType1'
+    plainPassword: toto
+    roles:
+      - 'ROLE_SUPER_ADMIN'
+    media: '@MediaUser1'
+    city: Antony
+    website: http://www.sfavot.fr
+    biography:
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum earum fuga quaerat expedita minima labore vitae voluptate, repellendus perspiciatis consequuntur cum, dignissimos quas temporibus consequatur tempora est repellat. Architecto, quia.
+    vip: true
+    phone: '+3300000000'
+    confirmationToken: ~
+    phoneConfirmed: true
 
-    user3:
-        id: 'user3'
-        username: xlacot
-        firstname: Xavier
-        lastname: Lacot
-        email: xlacot@jolicode.com
-        enabled: true
-        userType: '@UserType1'
-        plainPassword: toto
-        roles:
-         - 'ROLE_SUPER_ADMIN'
-        media: '@MediaUser3'
-        confirmationToken: ~
+  user3:
+    id: 'user3'
+    username: xlacot
+    firstname: Xavier
+    lastname: Lacot
+    email: xlacot@jolicode.com
+    enabled: true
+    userType: '@UserType1'
+    plainPassword: toto
+    roles:
+      - 'ROLE_SUPER_ADMIN'
+    media: '@MediaUser3'
+    confirmationToken: ~
 
-    user4:
-        id: 'userAdmin'
-        username: admin
-        firstname: Administrateur
-        lastname: authentifier
-        email: admin@test.com
-        enabled: true
-        userType: '@UserType1'
-        plainPassword: admin
-        media: null
-        roles:
-         - 'ROLE_ADMIN'
-        vip: true
-        confirmationToken: ~
-        phoneConfirmed: true
-        phone: '+33675492871'
+  user4:
+    id: 'userAdmin'
+    username: admin
+    firstname: Administrateur
+    lastname: authentifier
+    email: admin@test.com
+    enabled: true
+    userType: '@UserType1'
+    plainPassword: admin
+    media: null
+    roles:
+      - 'ROLE_ADMIN'
+    vip: true
+    confirmationToken: ~
+    phoneConfirmed: true
+    phone: '+33675492871'
 
-    user666:
-        id: 'adminCapco'
-        username: adminpro
-        firstname: Administrateur
-        lastname: authentifier
-        email: admin@cap-collectif.com
-        enabled: true
-        userType: '@UserType1'
-        plainPassword: admin
-        media: null
-        roles:
-         - 'ROLE_ADMIN'
-        vip: true
-        confirmationToken: ~
-        phoneConfirmed: true
-        phone: '+33675492871'
+  user666:
+    id: 'adminCapco'
+    username: adminpro
+    firstname: Administrateur
+    lastname: authentifier
+    email: admin@cap-collectif.com
+    enabled: true
+    userType: '@UserType1'
+    plainPassword: admin
+    media: null
+    roles:
+      - 'ROLE_ADMIN'
+    vip: true
+    confirmationToken: ~
+    phoneConfirmed: true
+    phone: '+33675492871'
 
-    user5:
-        id: 'user5'
-        username: user
-        firstname: Utilisateur
-        lastname: authentifier
-        email: user@test.com
-        enabled: true
-        notificationsConfiguration: '@allDisabledUserNotifications'
-        userType: '@UserType1'
-        media: null
-        plainPassword: user
-        dateOfBirth: <(new \DateTime('1996-03-01'))>
-        address: '12 rue des boulets'
-        address2: '2ieme etages'
-        zip_code: '75012'
-        city: 'Paris'
-        roles:
-         - 'ROLE_USER'
-        confirmationToken: ~
-        phoneConfirmed: true
-        phone: '+33635492871'
-        gender: 'f'
+  user5:
+    id: 'user5'
+    username: user
+    firstname: Utilisateur
+    lastname: authentifier
+    email: user@test.com
+    enabled: true
+    notificationsConfiguration: '@allDisabledUserNotifications'
+    userType: '@UserType1'
+    media: null
+    plainPassword: user
+    dateOfBirth: <(new \DateTime('1996-03-01'))>
+    address: '12 rue des boulets'
+    address2: '2ieme etages'
+    zip_code: '75012'
+    city: 'Paris'
+    roles:
+      - 'ROLE_USER'
+    confirmationToken: ~
+    phoneConfirmed: true
+    phone: '+33635492871'
+    gender: 'f'
 
-    user_drupal:
-        id: 'user_drupal'
-        __construct: ['drupal']
-        username: drupal
-        userType: '@UserType1'
-        firstname: toto
-        lastname: toto
-        email: drupal@gmail.com
-        enabled: true
-        password: $S$DV4UqpdijYQloOE/c6CHQg2SzxEW0K0iHQxOEPLfbv3H/4plvGAU
-        confirmationToken: ~
+  user_drupal:
+    id: 'user_drupal'
+    __construct: ['drupal']
+    username: drupal
+    userType: '@UserType1'
+    firstname: toto
+    lastname: toto
+    email: drupal@gmail.com
+    enabled: true
+    password: $S$DV4UqpdijYQloOE/c6CHQg2SzxEW0K0iHQxOEPLfbv3H/4plvGAU
+    confirmationToken: ~
 
-    user{6..200}:
-        id: 'user<current()>'
-        username (unique): <username()>
-        firstname: <firstname()>
-        lastname: <lastname()>
-        email (unique): <email()>
-        enabled: true
-        userType: '@UserType1'
-        password: <password()>
-        roles:
-         - 'ROLE_USER'
-        confirmationToken: ~
+  user{6..200}:
+    id: 'user<current()>'
+    username (unique): <username()>
+    firstname: <firstname()>
+    lastname: <lastname()>
+    email (unique): <email()>
+    enabled: true
+    userType: '@UserType1'
+    password: <password()>
+    roles:
+      - 'ROLE_USER'
+    confirmationToken: ~
 
-    user501:
-        id: 'user501'
-        username: spyl
-        firstname: Aurélien
-        lastname: David
-        email: aurelien@cap-collectif.com
-        enabled: true
-        userType: '@UserType1'
-        plainPassword: toto
-        roles:
-         - 'ROLE_SUPER_ADMIN'
-        media: '@MediaUser4'
-        vip: true
-        confirmationToken: ~
+  user501:
+    id: 'user501'
+    username: spyl
+    firstname: Aurélien
+    lastname: David
+    email: aurelien@cap-collectif.com
+    enabled: true
+    userType: '@UserType1'
+    plainPassword: toto
+    roles:
+      - 'ROLE_SUPER_ADMIN'
+    media: '@MediaUser4'
+    vip: true
+    confirmationToken: ~
 
-    user502:
-        id: 'user502'
-        username: welcomattic
-        firstname: Mathieu
-        lastname: Santostefano
-        email: msantostefano@jolicode.com
-        enabled: true
-        userType: '@UserType1'
-        plainPassword: capco
-        roles:
-         - 'ROLE_SUPER_ADMIN'
-        media: '@MediaUser5'
-        vip: true
-        confirmationToken: ~
+  user502:
+    id: 'user502'
+    username: welcomattic
+    firstname: Mathieu
+    lastname: Santostefano
+    email: msantostefano@jolicode.com
+    enabled: true
+    userType: '@UserType1'
+    plainPassword: capco
+    roles:
+      - 'ROLE_SUPER_ADMIN'
+    media: '@MediaUser5'
+    vip: true
+    confirmationToken: ~
 
-    user503:
-        id: 'user503'
-        username: disabled
-        firstname: disabled
-        lastname: disabled
-        email: disabled@test.com
-        enabled: false
-        userType: '@UserType1'
-        plainPassword: disabled
-        roles:
-         - 'ROLE_USER'
-        media: '@MediaUser1'
-        vip: false
-        confirmationToken: ~
+  user503:
+    id: 'user503'
+    username: disabled
+    firstname: disabled
+    lastname: disabled
+    email: disabled@test.com
+    enabled: false
+    userType: '@UserType1'
+    plainPassword: disabled
+    roles:
+      - 'ROLE_USER'
+    media: '@MediaUser1'
+    vip: false
+    confirmationToken: ~
 
-    user504:
-        id: 'user504'
-        username: user avec un nom très long comme par exemple conseil régional de machin truc
-        firstname: prenom
-        lastname: nom
-        email: conseilregional@test.com
-        enabled: true
-        userType: '@UserType1'
-        plainPassword: monsupermotdepassetropsafe
-        roles:
-         - 'ROLE_USER'
-        media: null
-        vip: true
-        confirmationToken: ~
+  user504:
+    id: 'user504'
+    username: user avec un nom très long comme par exemple conseil régional de machin truc
+    firstname: prenom
+    lastname: nom
+    email: conseilregional@test.com
+    enabled: true
+    userType: '@UserType1'
+    plainPassword: monsupermotdepassetropsafe
+    roles:
+      - 'ROLE_USER'
+    media: null
+    vip: true
+    confirmationToken: ~
 
-    user505:
-        id: 'user505'
-        username: ptondereau
-        firstname: Pierre
-        lastname: Tondereau
-        email: pierre@cap-collectif.com
-        enabled: true
-        userType: '@UserType1'
-        plainPassword: toto
-        roles:
-         - 'ROLE_USER'
-        media: '@MediaUser5'
-        vip: true
-        confirmationToken: ~
+  user505:
+    id: 'user505'
+    username: ptondereau
+    firstname: Pierre
+    lastname: Tondereau
+    email: pierre@cap-collectif.com
+    enabled: true
+    userType: '@UserType1'
+    plainPassword: toto
+    roles:
+      - 'ROLE_USER'
+    media: '@MediaUser5'
+    vip: true
+    confirmationToken: ~
 
-    user_not_confirmed:
-        id: 'user506'
-        username: user_not_confirmed
-        firstname: user_not_confirmed
-        lastname: user_not_confirmed
-        email: user_not_confirmed@test.com
-        enabled: true
-        userType: '@UserType1'
-        plainPassword: user_not_confirmed
-        roles:
-         - 'ROLE_USER'
-        media: null
-        confirmationToken: azertyuiop
+  user_not_confirmed:
+    id: 'user506'
+    username: user_not_confirmed
+    firstname: user_not_confirmed
+    lastname: user_not_confirmed
+    email: user_not_confirmed@test.com
+    enabled: true
+    userType: '@UserType1'
+    plainPassword: user_not_confirmed
+    roles:
+      - 'ROLE_USER'
+    media: null
+    confirmationToken: azertyuiop
 
-    user_not_confirmed_to_be_expired:
-        id: 'user507'
-        username: user_not_confirmed_to_be_expired
-        firstname: user_not_confirmed_to_be_expired
-        lastname: user_not_confirmed_to_be_expired
-        email: user_not_confirmed_to_be_expired@test.com
-        enabled: true
-        expired: false
-        expiresAt: <date('now')>
-        userType: '@UserType1'
-        plainPassword: user_not_confirmed_to_be_expired
-        roles:
-         - 'ROLE_USER'
-        media: null
-        confirmationToken: qsdfghjklm
+  user_not_confirmed_to_be_expired:
+    id: 'user507'
+    username: user_not_confirmed_to_be_expired
+    firstname: user_not_confirmed_to_be_expired
+    lastname: user_not_confirmed_to_be_expired
+    email: user_not_confirmed_to_be_expired@test.com
+    enabled: true
+    expired: false
+    expiresAt: <date('now')>
+    userType: '@UserType1'
+    plainPassword: user_not_confirmed_to_be_expired
+    roles:
+      - 'ROLE_USER'
+    media: null
+    confirmationToken: qsdfghjklm
 
-    user_not_confirmed_with_contributions_to_be_expired:
-        id: 'user508'
-        username: user_not_confirmed_with_contributions_to_be_expired
-        firstname: user_not_confirmed_with_contributions_to_be_expired
-        lastname: user_not_confirmed_with_contributions_to_be_expired
-        email: user_not_confirmed_with_contributions_to_be_expired@test.com
-        enabled: true
-        expired: false
-        expiresAt: <dateTimeBetween('-10 days', '-2 days')>
-        userType: '@UserType1'
-        plainPassword: user_not_confirmed_with_contributions_to_be_expired
-        roles:
-         - 'ROLE_USER'
-        media: null
-        confirmationToken: oklmoklm
+  user_not_confirmed_with_contributions_to_be_expired:
+    id: 'user508'
+    username: user_not_confirmed_with_contributions_to_be_expired
+    firstname: user_not_confirmed_with_contributions_to_be_expired
+    lastname: user_not_confirmed_with_contributions_to_be_expired
+    email: user_not_confirmed_with_contributions_to_be_expired@test.com
+    enabled: true
+    expired: false
+    expiresAt: <dateTimeBetween('-10 days', '-2 days')>
+    userType: '@UserType1'
+    plainPassword: user_not_confirmed_with_contributions_to_be_expired
+    roles:
+      - 'ROLE_USER'
+    media: null
+    confirmationToken: oklmoklm
 
-    user_not_confirmed_to_be_expired_in_24_hours:
-        id: 'user509'
-        username: user_not_confirmed_to_be_expired_in_24_hours
-        firstname: user_not_confirmed_to_be_expired_in_24_hours
-        lastname: user_not_confirmed_to_be_expired_in_24_hours
-        email: user_not_confirmed_to_be_expired_in_24_hours@test.com
-        enabled: true
-        expired: false
-        expiresAt: <dateTimeBetween('+1 days', '+1 days')>
-        userType: '@UserType1'
-        plainPassword: user_not_confirmed_to_be_expired_in_24_hours
-        roles:
-         - 'ROLE_USER'
-        media: null
-        confirmationToken: qsdfgsqdqsdsqdsqdhjkldsqdsqdsqdqsdm
+  user_not_confirmed_to_be_expired_in_24_hours:
+    id: 'user509'
+    username: user_not_confirmed_to_be_expired_in_24_hours
+    firstname: user_not_confirmed_to_be_expired_in_24_hours
+    lastname: user_not_confirmed_to_be_expired_in_24_hours
+    email: user_not_confirmed_to_be_expired_in_24_hours@test.com
+    enabled: true
+    expired: false
+    expiresAt: <dateTimeBetween('+1 days', '+1 days')>
+    userType: '@UserType1'
+    plainPassword: user_not_confirmed_to_be_expired_in_24_hours
+    roles:
+      - 'ROLE_USER'
+    media: null
+    confirmationToken: qsdfgsqdqsdsqdsqdhjkldsqdsqdsqdqsdm
 
-    user_expired:
-        id: 'user510'
-        username: user_expired
-        firstname: user_expired
-        lastname: user_expired
-        email: user_expired@test.com
-        enabled: false
-        expired: true
-        expiresAt: ~
-        userType: '@UserType1'
-        plainPassword: user_expired
-        roles:
-         - 'ROLE_USER'
-        media: null
-        confirmationToken: wxcvbn
+  user_expired:
+    id: 'user510'
+    username: user_expired
+    firstname: user_expired
+    lastname: user_expired
+    email: user_expired@test.com
+    enabled: false
+    expired: true
+    expiresAt: ~
+    userType: '@UserType1'
+    plainPassword: user_expired
+    roles:
+      - 'ROLE_USER'
+    media: null
+    confirmationToken: wxcvbn
 
-    user_without_phone:
-        id: 'user511'
-        username: user_without_phone
-        firstname: user_without_phone
-        lastname: user_without_phone
-        email: user_without_phone@test.com
-        enabled: true
-        expired: false
-        expiresAt: ~
-        userType: '@UserType1'
-        plainPassword: user_without_phone
-        roles:
-         - 'ROLE_USER'
-        media: null
-        confirmationToken: ~
+  user_without_phone:
+    id: 'user511'
+    username: user_without_phone
+    firstname: user_without_phone
+    lastname: user_without_phone
+    email: user_without_phone@test.com
+    enabled: true
+    expired: false
+    expiresAt: ~
+    userType: '@UserType1'
+    plainPassword: user_without_phone
+    roles:
+      - 'ROLE_USER'
+    media: null
+    confirmationToken: ~
 
-    user_with_phone_not_phone_confirmed:
-        id: 'user512'
-        username: user_with_phone_not_phone_confirmed
-        firstname: user_with_phone_not_phone_confirmed
-        lastname: user_with_phone_not_phone_confirmed
-        email: user_with_phone_not_phone_confirmed@test.com
-        enabled: true
-        expired: false
-        expiresAt: ~
-        userType: '@UserType1'
-        plainPassword: user_with_phone_not_phone_confirmed
-        roles:
-         - 'ROLE_USER'
-        media: null
-        confirmationToken: ~
-        phone: '+33628353289'
+  user_with_phone_not_phone_confirmed:
+    id: 'user512'
+    username: user_with_phone_not_phone_confirmed
+    firstname: user_with_phone_not_phone_confirmed
+    lastname: user_with_phone_not_phone_confirmed
+    email: user_with_phone_not_phone_confirmed@test.com
+    enabled: true
+    expired: false
+    expiresAt: ~
+    userType: '@UserType1'
+    plainPassword: user_with_phone_not_phone_confirmed
+    roles:
+      - 'ROLE_USER'
+    media: null
+    confirmationToken: ~
+    phone: '+33628353289'
 
-    user_with_code_not_phone_confirmed:
-        id: 'user513'
-        username: user_with_code_not_phone_confirmed
-        firstname: user_with_code_not_phone_confirmed
-        lastname: user_with_code_not_phone_confirmed
-        email: user_with_code_not_phone_confirmed@test.com
-        enabled: true
-        expired: false
-        expiresAt: ~
-        userType: '@UserType1'
-        plainPassword: user_with_code_not_phone_confirmed
-        roles:
-         - 'ROLE_USER'
-        media: null
-        confirmationToken: ~
-        phone: '+33628232323'
-        smsConfirmationCode: 123456
+  user_with_code_not_phone_confirmed:
+    id: 'user513'
+    username: user_with_code_not_phone_confirmed
+    firstname: user_with_code_not_phone_confirmed
+    lastname: user_with_code_not_phone_confirmed
+    email: user_with_code_not_phone_confirmed@test.com
+    enabled: true
+    expired: false
+    expiresAt: ~
+    userType: '@UserType1'
+    plainPassword: user_with_code_not_phone_confirmed
+    roles:
+      - 'ROLE_USER'
+    media: null
+    confirmationToken: ~
+    phone: '+33628232323'
+    smsConfirmationCode: 123456
 
-    admin_without_password:
-        id: 'user514'
-        username: admin_without_password
-        firstname: admin_without_password
-        lastname: admin_without_password
-        email: admin_without_password@test.com
-        enabled: false
-        expired: false
-        expiresAt: ~
-        userType: '@UserType1'
-        roles:
-         - 'ROLE_ADMIN'
-        media: null
-        confirmationToken: check-my-email-token
+  admin_without_password:
+    id: 'user514'
+    username: admin_without_password
+    firstname: admin_without_password
+    lastname: admin_without_password
+    email: admin_without_password@test.com
+    enabled: false
+    expired: false
+    expiresAt: ~
+    userType: '@UserType1'
+    roles:
+      - 'ROLE_ADMIN'
+    media: null
+    confirmationToken: check-my-email-token
 
-    user_updating_email:
-        id: 'user515'
-        username: user_updating_email
-        firstname: user_updating_email
-        lastname: user_updating_email
-        email: user_updating_email@test.com
-        enabled: true
-        expired: false
-        expiresAt: ~
-        userType: '@UserType1'
-        roles:
-         - 'ROLE_USER'
-        media: null
-        newEmailToConfirm: new-email-to-confirm@test.com
-        newEmailConfirmationToken: check-my-new-email-token
+  user_updating_email:
+    id: 'user515'
+    username: user_updating_email
+    firstname: user_updating_email
+    lastname: user_updating_email
+    email: user_updating_email@test.com
+    enabled: true
+    expired: false
+    expiresAt: ~
+    userType: '@UserType1'
+    roles:
+      - 'ROLE_USER'
+    media: null
+    newEmailToConfirm: new-email-to-confirm@test.com
+    newEmailConfirmationToken: check-my-new-email-token
 
-    user516:
-        id: 'user516'
-        username: mauriau
-        firstname: Maxime
-        lastname: AURIAU
-        email: maxime.auriau@cap-collectif.com
-        enabled: true
-        userType: '@UserType1'
-        plainPassword: toto
-        roles:
-         - 'ROLE_SUPER_ADMIN'
-        media: '@MediaUser5'
-        vip: true
-        confirmationToken: ~
-        emailConfirmationSentAt: '2018-06-06 13:37:00'
+  user516:
+    id: 'user516'
+    username: mauriau
+    firstname: Maxime
+    lastname: AURIAU
+    email: maxime.auriau@cap-collectif.com
+    enabled: true
+    userType: '@UserType1'
+    plainPassword: toto
+    roles:
+      - 'ROLE_SUPER_ADMIN'
+    media: '@MediaUser5'
+    vip: true
+    confirmationToken: ~
+    emailConfirmationSentAt: '2018-06-06 13:37:00'
 
-    user517:
-         id: 'user517'
-         username: sanzo
-         firstname: Pierre
-         lastname: Bellenger
-         email: pierre.bellenger@cap-collectif.com
-         enabled: true
-         userType: '@UserType1'
-         plainPassword: azerty
-         roles:
-          - 'ROLE_SUPER_ADMIN'
-         media: '@MediaUser1'
-         city: Antony
-         website: http://www.sfavot.fr
-         biography: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum earum fuga quaerat expedita minima labore vitae voluptate, repellendus perspiciatis consequuntur cum, dignissimos quas temporibus consequatur tempora est repellat. Architecto, quia.
-         vip: true
-         phone: '+3300000000'
-         confirmationToken: ~
-         phoneConfirmed: true
+  user517:
+    id: 'user517'
+    username: sanzo
+    firstname: Pierre
+    lastname: Bellenger
+    email: pierre.bellenger@cap-collectif.com
+    enabled: true
+    userType: '@UserType1'
+    plainPassword: azerty
+    roles:
+      - 'ROLE_SUPER_ADMIN'
+    media: '@MediaUser1'
+    city: Antony
+    website: http://www.sfavot.fr
+    biography:
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum earum fuga quaerat expedita minima labore vitae voluptate, repellendus perspiciatis consequuntur cum, dignissimos quas temporibus consequatur tempora est repellat. Architecto, quia.
+    vip: true
+    phone: '+3300000000'
+    confirmationToken: ~
+    phoneConfirmed: true
 
-    user518:
-     id: 'user518'
-     username: null
-     email: no_name@cap-collectif.com
-     enabled: true
-     userType: '@UserType1'
-     plainPassword: no_name
-     roles:
+  user518:
+    id: 'user518'
+    username: null
+    email: no_name@cap-collectif.com
+    enabled: true
+    userType: '@UserType1'
+    plainPassword: no_name
+    roles:
       - 'ROLE_USER'

@@ -6,7 +6,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
   response2:
     question: '@simplequestion3'
     proposal: '@proposal1'
-    value: "250 000 €"
+    value: '250 000 €'
   response3:
     question: '@simplequestion1'
     proposal: '@proposal2'
@@ -38,7 +38,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
   response10:
     question: '@multiplequestion1'
     reply: '@reply1'
-    value: {"labels":["Athlétisme","Sports collectifs"],"other":null}
+    value: { 'labels': ['Athlétisme', 'Sports collectifs'], 'other': null }
   response11:
     question: '@simplequestion2'
     reply: '@reply2'
@@ -46,11 +46,11 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
   response12:
     question: '@multiplequestion1'
     reply: '@reply2'
-    value: {"labels":["Natation","Sports collectifs"],"other":null}
+    value: { 'labels': ['Natation', 'Sports collectifs'], 'other': null }
   response13:
     question: '@multiplequestion2'
     reply: '@reply2'
-    value: {"labels":["Maxime Arrouard"],"other":null}
+    value: { 'labels': ['Maxime Arrouard'], 'other': null }
   response14:
     question: '@simplequestion8'
     proposalEvaluation: '@proposalEvaluation1'
@@ -62,11 +62,12 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
   response16:
     question: '@multiplequestion9'
     proposalEvaluation: '@proposalEvaluation1'
-    value: {"labels":["Incohérente","Que de la publicité (mensongère en plus !)"],"other":null}
+    value:
+      { 'labels': ['Incohérente', 'Que de la publicité (mensongère en plus !)'], 'other': null }
   response17:
     question: '@multiplequestion10'
     proposalEvaluation: '@proposalEvaluation1'
-    value: {"labels":["Je dis oui"],"other":null}
+    value: { 'labels': ['Je dis oui'], 'other': null }
   response18:
     question: '@simplequestion8'
     proposalEvaluation: '@proposalEvaluation2'
@@ -78,19 +79,19 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
   response20:
     question: '@multiplequestion9'
     proposalEvaluation: '@proposalEvaluation2'
-    value: {"labels":["Incohérente"],"other":null}
+    value: { 'labels': ['Incohérente'], 'other': null }
   response21:
     question: '@multiplequestion10'
     proposalEvaluation: '@proposalEvaluation2'
-    value: {"labels":["Je dis non"],"other":null}
+    value: { 'labels': ['Je dis non'], 'other': null }
   response22:
     question: '@multiplequestion11'
     proposalEvaluation: '@proposalEvaluation2'
-    value: {"labels":["Réalisable", "Importante"],"other":null}
+    value: { 'labels': ['Réalisable', 'Importante'], 'other': null }
   response23:
     question: '@multiplequestion8'
     proposalEvaluation: '@proposalEvaluation2'
-    value: {"labels":["Du pur bullshit"],"other":null}
+    value: { 'labels': ['Du pur bullshit'], 'other': null }
   response24:
     question: '@simplequestion8'
     proposalEvaluation: '@proposalEvaluation3'
@@ -102,8 +103,12 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
   response26:
     question: '@multiplequestion9'
     proposalEvaluation: '@proposalEvaluation3'
-    value: {"labels":["C'est de la diffamation !", "Que de la publicité (mensongère en plus !)"],"other":null}
+    value:
+      {
+        'labels': ["C'est de la diffamation !", 'Que de la publicité (mensongère en plus !)'],
+        'other': null,
+      }
   response27:
     question: '@multiplequestion10'
     proposalEvaluation: '@proposalEvaluation3'
-    value: {"labels":["J'ai rien compris"],"other":null}
+    value: { 'labels': ["J'ai rien compris"], 'other': null }

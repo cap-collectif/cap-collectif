@@ -1,5 +1,4 @@
 Capco\AppBundle\Entity\OpinionTypeAppendixType:
-
   opinionTypeAppendixType1:
     appendixType: '@appendixType1'
     opinionType: '@opinionType5'

@@ -1,82 +1,92 @@
 Version:
-    type: object
-    inherits: [Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
-    config:
-        description: "A version of contribution"
-        interfaces: [Node, Contribution, Argumentable, TrashableContribution, ContributionWithAuthor, EditableContribution]
-        fields:
-            createdAt:
-                type: "DateTime!"
-                description: "Identifies the date and time when the object was created."
-            url:
-                description: "The url of version."
-                resolve: "@=resolver('version_url', [value])"
-            expired:
-                type: "Boolean!"
-            published:
-                type: "Boolean!"
-            comment:
-                type: "String"
-                description: "Explenation."
-            votesCount:
-                type: "Int!"
-                description: "Number of votes."
-                resolve: "@=resolver('proposition_votesCount', [value])"
-            votesCountOk:
-                type: "Int!"
-                description: "Number of ok votes."
-            votesCountMitige:
-                type: "Int!"
-                description: "Number of mitige votes."
-            votesCountNok:
-                type: "Int!"
-                description: "Number of negative votes."
-            argumentsCount:
-                type: "Int!"
-                description: "Number of arguments."
-            argumentsCountFor:
-                type: "Int!"
-                description: "Number of for arguments."
-                resolve: "@=resolver('proposition_argumentsCountFor', [value])"
-            argumentsCountAgainst:
-                type: "Int!"
-                description: "Number of against arguments."
-                resolve: "@=resolver('proposition_argumentsCountAgainst', [value])"
-            sourcesCount:
-                type: "Int!"
-                description: "Number of sources."
-            votes:
-                type: "[VersionVote]"
-                args:
-                    first:
-                        type: "Int"
-                resolve: "@=resolver('version_votes', [value, args])"
-            kind:
-                resolve: "version"
-            title:
-                type: "String!"
-                description: "The title of the contribution."
-            body:
-                type: "HTML!"
-                description: "The content of the contribution."
-            bodyText:
-                type: "HTML!"
-                description: "The content of the contribution."
-            sources:
-                type: "[Source]"
-                description: "The sources related to the contribution."
-            reportings:
-                type: "[Reporting]"
-                resolve: "@=resolver('version_reportings', [value])"
-            arguments:
-                type: "ArgumentConnection!"
-                argsBuilder: "Relay::Connection"
-                args:
-                    orderBy:
-                        type: "ArgumentOrder"
-                        defaultValue: { field: CREATED_AT, direction: DESC }
-                    type:
-                        description: "If omitted, returns all arguments. If provided, returns the arguments of this particular type."
-                        type: "ArgumentValue"
-                description: "The arguments related to the contribution."
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionArgumentsResolver", [value, args])'
+  type: object
+  inherits: [Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
+  config:
+    description: 'A version of contribution'
+    interfaces:
+      [
+        Node,
+        Contribution,
+        Argumentable,
+        TrashableContribution,
+        ContributionWithAuthor,
+        EditableContribution,
+      ]
+    fields:
+      createdAt:
+        type: 'DateTime!'
+        description: 'Identifies the date and time when the object was created.'
+      url:
+        description: 'The url of version.'
+        resolve: "@=resolver('version_url', [value])"
+      expired:
+        type: 'Boolean!'
+      published:
+        type: 'Boolean!'
+      comment:
+        type: 'String'
+        description: 'Explenation.'
+      votesCount:
+        type: 'Int!'
+        description: 'Number of votes.'
+        resolve: "@=resolver('proposition_votesCount', [value])"
+      votesCountOk:
+        type: 'Int!'
+        description: 'Number of ok votes.'
+      votesCountMitige:
+        type: 'Int!'
+        description: 'Number of mitige votes.'
+      votesCountNok:
+        type: 'Int!'
+        description: 'Number of negative votes.'
+      argumentsCount:
+        type: 'Int!'
+        description: 'Number of arguments.'
+      argumentsCountFor:
+        type: 'Int!'
+        description: 'Number of for arguments.'
+        resolve: "@=resolver('proposition_argumentsCountFor', [value])"
+      argumentsCountAgainst:
+        type: 'Int!'
+        description: 'Number of against arguments.'
+        resolve: "@=resolver('proposition_argumentsCountAgainst', [value])"
+      sourcesCount:
+        type: 'Int!'
+        description: 'Number of sources.'
+      votes:
+        type: '[VersionVote]'
+        args:
+          first:
+            type: 'Int'
+        resolve: "@=resolver('version_votes', [value, args])"
+      kind:
+        resolve: 'version'
+      title:
+        type: 'String!'
+        description: 'The title of the contribution.'
+      body:
+        type: 'HTML!'
+        description: 'The content of the contribution.'
+      bodyText:
+        type: 'HTML!'
+        description: 'The content of the contribution.'
+      sources:
+        type: '[Source]'
+        description: 'The sources related to the contribution.'
+      reportings:
+        type: '[Reporting]'
+        resolve: "@=resolver('version_reportings', [value])"
+      arguments:
+        type: 'ArgumentConnection!'
+        argsBuilder: 'Relay::Connection'
+        args:
+          orderBy:
+            type: 'ArgumentOrder'
+            defaultValue: { field: CREATED_AT, direction: DESC }
+          type:
+            description:
+              'If omitted, returns all arguments. If provided, returns the arguments of this particular type.'
+            type: 'ArgumentValue'
+        description: 'The arguments related to the contribution.'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionArgumentsResolver", [value, args])'

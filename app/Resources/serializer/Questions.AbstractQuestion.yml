@@ -43,4 +43,3 @@ Capco\AppBundle\Entity\Questions\AbstractQuestion:
       type: string
       serialized_name: type
       groups: [Questions, Proposals, Replies]
-

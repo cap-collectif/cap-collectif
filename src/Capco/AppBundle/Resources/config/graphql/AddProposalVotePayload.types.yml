@@ -1,8 +1,8 @@
 AddProposalVotePayload:
-    type: relay-mutation-payload
-    config:
-        fields:
-            vote:
-                type: "ProposalVote!"
-            viewer:
-                type: "User!"
+  type: relay-mutation-payload
+  config:
+    fields:
+      vote:
+        type: 'ProposalVote!'
+      viewer:
+        type: 'User!'

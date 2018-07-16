@@ -1,19 +1,19 @@
 UpdateProposalFormNotificationsConfigurationInput:
-    type: relay-mutation-input
-    config:
-        description: ""
-        fields:
-            proposalFormId:
-                type: "ID!"
-            onCreate:
-              type: "Boolean!"
-            onUpdate:
-              type: "Boolean!"
-            onDelete:
-              type: "Boolean!"
-            onCommentCreate:
-              type: "Boolean!"
-            onCommentUpdate:
-              type: "Boolean!"
-            onCommentDelete:
-              type: "Boolean!"
+  type: relay-mutation-input
+  config:
+    description: ''
+    fields:
+      proposalFormId:
+        type: 'ID!'
+      onCreate:
+        type: 'Boolean!'
+      onUpdate:
+        type: 'Boolean!'
+      onDelete:
+        type: 'Boolean!'
+      onCommentCreate:
+        type: 'Boolean!'
+      onCommentUpdate:
+        type: 'Boolean!'
+      onCommentDelete:
+        type: 'Boolean!'

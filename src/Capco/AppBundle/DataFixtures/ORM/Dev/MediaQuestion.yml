@@ -2,7 +2,7 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
   mediaquestion1:
     title: Documents
     id: 11
-    helpText: "5 fichiers max"
+    helpText: '5 fichiers max'
     required: true
     type: 7 # media
     private: false
@@ -10,7 +10,7 @@ Capco\AppBundle\Entity\Questions\MediaQuestion:
   mediaquestion2:
     title: Bilans
     id: 12
-    helpText: "5 fichiers max"
+    helpText: '5 fichiers max'
     required: false
     type: 7 # media
     private: false

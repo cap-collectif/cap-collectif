@@ -1,19 +1,19 @@
 imports:
-    - { resource: services/listeners.yml }
-    - { resource: services/repositories.yml }
-    - { resource: services/resolvers.yml }
-    - { resource: services/twig.yml }
-    - { resource: services/validators.yml }
-    - { resource: services/forms.yml }
-    - { resource: services/processors.yml }
-    - { resource: services/search.yml }
-    - { resource: services/commands.yml }
-    - { resource: services/utils.yml }
-    - { resource: services/makers.yml }
-    - { resource: services/graphql_mutations.yml }
-    - { resource: services/graphql_resolvers.yml }
-    - { resource: services/notifiers.yml }
-    - { resource: services/elasticsearch.yml }
+  - { resource: services/listeners.yml }
+  - { resource: services/repositories.yml }
+  - { resource: services/resolvers.yml }
+  - { resource: services/twig.yml }
+  - { resource: services/validators.yml }
+  - { resource: services/forms.yml }
+  - { resource: services/processors.yml }
+  - { resource: services/search.yml }
+  - { resource: services/commands.yml }
+  - { resource: services/utils.yml }
+  - { resource: services/makers.yml }
+  - { resource: services/graphql_mutations.yml }
+  - { resource: services/graphql_resolvers.yml }
+  - { resource: services/notifiers.yml }
+  - { resource: services/elasticsearch.yml }
 
 parameters:
   traits:
@@ -43,7 +43,8 @@ parameters:
   env(SYMFONY_USE_ASSETIC_CONTROLLER): true
   env(SYMFONY_FACEBOOK_APP_ID): ***REMOVED***
   env(SYMFONY_FACEBOOK_APP_SECRET): ***REMOVED***
-  env(SYMFONY_GOOGLE_APP_ID): ***REMOVED***
+  env(SYMFONY_GOOGLE_APP_ID):
+    ***REMOVED***
   env(SYMFONY_GOOGLE_APP_SECRET): ***REMOVED***
   env(SYMFONY_JWT_TOKEN_TTL): 86400
   env(SYMFONY_LANGUAGE_ANALYZER): french
@@ -68,16 +69,16 @@ services:
   mailer_service:
     class: Capco\AppBundle\Mailer\MailerService
     arguments:
-      - "@mailer"
-      - "@templating"
-      - "@translator"
-      - "@capco.site_parameter.resolver"
-      - "@router"
+      - '@mailer'
+      - '@templating'
+      - '@translator'
+      - '@capco.site_parameter.resolver'
+      - '@router'
 
   responses.formatter:
     class: Capco\AppBundle\Helper\ResponsesFormatter
     arguments:
-      - "@capco.abstract_question.repository"
+      - '@capco.abstract_question.repository'
 
   twilio.sms_sender:
     class: Capco\AppBundle\Sms\TwilioSmsSender
@@ -86,121 +87,127 @@ services:
   sms.service:
     class: Capco\AppBundle\Sms\SmsService
     arguments:
-      - "@twilio.sms_sender"
-      - "%twilio_number%"
-      - "@capco.site_parameter.resolver"
-      - "@translator"
+      - '@twilio.sms_sender'
+      - '%twilio_number%'
+      - '@capco.site_parameter.resolver'
+      - '@translator'
 
   capco.doctrine.subscriber.dynamic_relation:
     class: Capco\AppBundle\EventListener\DynamicRelationSubscriber
     tags:
-      - {name: doctrine.event_subscriber, event: loadClassMetadata}
-    arguments: ["%traits%"]
+      - { name: doctrine.event_subscriber, event: loadClassMetadata }
+    arguments: ['%traits%']
 
   capco.contribution.manager:
     class: Capco\AppBundle\Manager\ContributionManager
-    arguments: ["@doctrine.orm.entity_manager"]
+    arguments: ['@doctrine.orm.entity_manager']
 
   ## Toggle
   capco.toggle.manager:
     class: Capco\AppBundle\Toggle\Manager
-    arguments: ["@qandidate.toggle.manager", "@qandidate.toggle.user_context_factory" ]
+    arguments: ['@qandidate.toggle.manager', '@qandidate.toggle.user_context_factory']
 
   Capco\AppBundle\Toggle\Manager:
     alias: capco.toggle.manager
 
   capco.proposal.helper:
     class: Capco\AppBundle\Helper\ProposalHelper
-    arguments: ["@capco.proposal.repository"]
+    arguments: ['@capco.proposal.repository']
 
   capco.event.helper:
     class: Capco\AppBundle\Helper\EventHelper
 
   capco.diff.generator:
     class: Capco\AppBundle\Generator\DiffGenerator
-    arguments: ["@caxy.html_diff"]
+    arguments: ['@caxy.html_diff']
 
   redis_storage.helper:
     class: Capco\AppBundle\Helper\RedisStorageHelper
-    arguments: ["@snc_redis.default"]
+    arguments: ['@snc_redis.default']
 
   capco.project.helper:
     class: Capco\AppBundle\Helper\ProjectHelper
-    arguments: ["@capco.project.repository", "@capco.abstract_step.repository"]
+    arguments: ['@capco.project.repository', '@capco.abstract_step.repository']
 
   capco.step.helper:
     class: Capco\AppBundle\Helper\StepHelper
-    arguments: ["@capco.project.helper"]
+    arguments: ['@capco.project.helper']
 
   capco.vote.subscriber:
     class: Capco\AppBundle\EventListener\VoteSubscriber
-    arguments: ["@doctrine.orm.entity_manager"]
+    arguments: ['@doctrine.orm.entity_manager']
     tags:
-      - { name: "kernel.event_subscriber" }
+      - { name: 'kernel.event_subscriber' }
 
   capco.comment.subscriber:
     class: Capco\AppBundle\EventListener\CommentSubscriber
     arguments: ['@swarrot.publisher']
     tags:
-      - { name: "kernel.event_subscriber" }
+      - { name: 'kernel.event_subscriber' }
 
   capco.synthesis.log_manager:
     class: Capco\AppBundle\Manager\LogManager
     arguments:
-      - "@translator"
-      - "@fos_user.user_manager"
-      - "@doctrine.orm.entity_manager"
+      - '@translator'
+      - '@fos_user.user_manager'
+      - '@doctrine.orm.entity_manager'
 
   capco.synthesis.synthesis_handler:
     class: Capco\AppBundle\Synthesis\Handler\SynthesisHandler
-    arguments: ["@doctrine.orm.entity_manager", "@capco.synthesis.consultation_step_extractor"]
+    arguments: ['@doctrine.orm.entity_manager', '@capco.synthesis.consultation_step_extractor']
 
   capco.synthesis.synthesis_element_handler:
     class: Capco\AppBundle\Synthesis\Handler\SynthesisElementHandler
-    arguments: ["@doctrine.orm.entity_manager", "@capco.synthesis.log_manager"]
+    arguments: ['@doctrine.orm.entity_manager', '@capco.synthesis.log_manager']
 
   capco.synthesis.consultation_step_extractor:
     class: Capco\AppBundle\Synthesis\Extractor\ConsultationStepExtractor
     arguments:
-      - "@doctrine.orm.entity_manager"
-      - "@translator"
-      - "@router"
-      - "@capco.opinion_types.resolver"
-      - "@capco.url.resolver"
+      - '@doctrine.orm.entity_manager'
+      - '@translator'
+      - '@router'
+      - '@capco.opinion_types.resolver'
+      - '@capco.url.resolver'
 
   capco.react_intl.twig:
     class: Capco\AppBundle\Twig\ReactIntlExtension
-    arguments: ["%kernel.root_dir%/../translations/", "@capco.site_parameter.resolver", "%kernel.environment%"]
+    arguments:
+      [
+        '%kernel.root_dir%/../translations/',
+        '@capco.site_parameter.resolver',
+        '%kernel.environment%',
+      ]
     tags:
-      - { name: "twig.extension" }
+      - { name: 'twig.extension' }
 
   capco.react_render.twig:
     class: Capco\AppBundle\Twig\ReactRenderExtension
-    arguments: ["@limenius_react.render_extension", "@capco.toggle.manager", "@security.token_storage"]
+    arguments:
+      ['@limenius_react.render_extension', '@capco.toggle.manager', '@security.token_storage']
     tags:
-      - { name: "twig.extension" }
+      - { name: 'twig.extension' }
 
   capco.form.transformer.html_purifier:
     class: Exercise\HTMLPurifierBundle\Form\HTMLPurifierTransformer
-    arguments: ["@exercise_html_purifier.default"]
+    arguments: ['@exercise_html_purifier.default']
 
   alice.processor.media:
     class: Capco\AppBundle\DataFixtures\Processor\MediaProcessor
-    tags: [ { name: hautelook_alice.alice.processor } ]
+    tags: [{ name: hautelook_alice.alice.processor }]
 
   alice.processor.ids:
     class: Capco\AppBundle\DataFixtures\Processor\FixedIdsProcessor
-    tags: [ { name: hautelook_alice.alice.processor } ]
-    arguments: ["@doctrine.orm.entity_manager"]
+    tags: [{ name: hautelook_alice.alice.processor }]
+    arguments: ['@doctrine.orm.entity_manager']
 
   geocoder.google_map:
     class: Geocoder\Provider\GoogleMaps
     arguments:
-      - "@curl.http_adapter"
+      - '@curl.http_adapter'
       - ~
       - ~
       - true
-      - "%google_maps_key_server%"
+      - '%google_maps_key_server%'
 
   curl.http_adapter:
     class: Ivory\HttpAdapter\CurlHttpAdapter

@@ -1,107 +1,107 @@
 Capco\AppBundle\Entity\OpinionVersion:
-    exclusion_policy: ALL
-    properties:
-        id:
-            expose: true
-            type: string
-            groups: [OpinionVersions, OpinionVersionPreviews, Elasticsearch]
-        title:
-            expose: true
-            type: string
-            groups: [OpinionVersions, OpinionVersionPreviews, Elasticsearch]
-        slug:
-            expose: true
-            type: string
-            groups: [OpinionVersions, OpinionVersionPreviews]
-        body:
-            expose: true
-            type: string
-            groups: [OpinionVersions, Elasticsearch]
-        diff:
-            expose: true
-            type: string
-            groups: [OpinionVersions]
-        comment:
-            expose: true
-            type: string
-            groups: [OpinionVersions]
-        parent:
-            expose: true
-            groups: [OpinionVersions, OpinionVersionPreviews]
-        createdAt:
-            expose: true
-            type: DateTime
-            serialized_name: createdAt
-            groups: [OpinionVersions, OpinionVersionPreviews, Elasticsearch]
-        answer:
-            expose: true
-            groups: [OpinionVersions]
-        updatedAt:
-            expose: true
-            type: DateTime
-            serialized_name: updatedAt
-            groups: [OpinionVersions, OpinionVersionPreviews]
-        votesCountNok:
-            expose: true
-            type: integer
-            serialized_name: votesCountNok
-            groups: [OpinionVersions, OpinionVersionPreviews]
-        votesCountOk:
-            expose: true
-            type: integer
-            serialized_name: votesCountOk
-            groups: [OpinionVersions, OpinionVersionPreviews]
-        votesCountMitige:
-            expose: true
-            type: integer
-            serialized_name: votesCountMitige
-            groups: [OpinionVersions, OpinionVersionPreviews]
-        arguments:
-            expose: true
-            groups: [OpinionVersions]
-        argumentsCount:
-            expose: true
-            type: integer
-            groups: [OpinionVersions, OpinionVersionPreviews]
-            serialized_name: argumentsCount
-        votes:
-            expose: true
-            groups: [OpinionVersions]
-        sources:
-            expose: true
-            groups: [OpinionVersions]
-        sourcesCount:
-            expose: true
-            type: integer
-            serialized_name: sourcesCount
-            groups: [OpinionVersions, OpinionVersionPreviews]
-        author:
-            expose: true
-            type: Capco\UserBundle\Entity\User
-            groups: [OpinionVersions, UserMedias, OpinionVersionPreviews]
-        isTrashed:
-            expose: true
-            type: boolean
-            groups: [OpinionVersions]
-            serialized_name: isTrashed
-        ranking:
-            expose: true
-            type: integer
-            groups: [OpinionVersions, OpinionVersionPreviews]
-    virtual_properties:
-        canContribute:
-            serialized_name: isContribuable
-            type: boolean
-            groups: [OpinionVersions]
-        getVotesCountAll:
-            serialized_name: votesCount
-            type: integer
-            groups: [OpinionVersions, OpinionVersionPreviews]
-        getArgumentForCount:
-            type: integer
-            serialized_name: argumentsYesCount
-            groups: [OpinionVersions, OpinionVersionPreviews]
-        getArgumentAgainstCount:
-            type: integer
-            serialized_name: argumentsNoCount
-            groups: [OpinionVersions, OpinionVersionPreviews]
+  exclusion_policy: ALL
+  properties:
+    id:
+      expose: true
+      type: string
+      groups: [OpinionVersions, OpinionVersionPreviews, Elasticsearch]
+    title:
+      expose: true
+      type: string
+      groups: [OpinionVersions, OpinionVersionPreviews, Elasticsearch]
+    slug:
+      expose: true
+      type: string
+      groups: [OpinionVersions, OpinionVersionPreviews]
+    body:
+      expose: true
+      type: string
+      groups: [OpinionVersions, Elasticsearch]
+    diff:
+      expose: true
+      type: string
+      groups: [OpinionVersions]
+    comment:
+      expose: true
+      type: string
+      groups: [OpinionVersions]
+    parent:
+      expose: true
+      groups: [OpinionVersions, OpinionVersionPreviews]
+    createdAt:
+      expose: true
+      type: DateTime
+      serialized_name: createdAt
+      groups: [OpinionVersions, OpinionVersionPreviews, Elasticsearch]
+    answer:
+      expose: true
+      groups: [OpinionVersions]
+    updatedAt:
+      expose: true
+      type: DateTime
+      serialized_name: updatedAt
+      groups: [OpinionVersions, OpinionVersionPreviews]
+    votesCountNok:
+      expose: true
+      type: integer
+      serialized_name: votesCountNok
+      groups: [OpinionVersions, OpinionVersionPreviews]
+    votesCountOk:
+      expose: true
+      type: integer
+      serialized_name: votesCountOk
+      groups: [OpinionVersions, OpinionVersionPreviews]
+    votesCountMitige:
+      expose: true
+      type: integer
+      serialized_name: votesCountMitige
+      groups: [OpinionVersions, OpinionVersionPreviews]
+    arguments:
+      expose: true
+      groups: [OpinionVersions]
+    argumentsCount:
+      expose: true
+      type: integer
+      groups: [OpinionVersions, OpinionVersionPreviews]
+      serialized_name: argumentsCount
+    votes:
+      expose: true
+      groups: [OpinionVersions]
+    sources:
+      expose: true
+      groups: [OpinionVersions]
+    sourcesCount:
+      expose: true
+      type: integer
+      serialized_name: sourcesCount
+      groups: [OpinionVersions, OpinionVersionPreviews]
+    author:
+      expose: true
+      type: Capco\UserBundle\Entity\User
+      groups: [OpinionVersions, UserMedias, OpinionVersionPreviews]
+    isTrashed:
+      expose: true
+      type: boolean
+      groups: [OpinionVersions]
+      serialized_name: isTrashed
+    ranking:
+      expose: true
+      type: integer
+      groups: [OpinionVersions, OpinionVersionPreviews]
+  virtual_properties:
+    canContribute:
+      serialized_name: isContribuable
+      type: boolean
+      groups: [OpinionVersions]
+    getVotesCountAll:
+      serialized_name: votesCount
+      type: integer
+      groups: [OpinionVersions, OpinionVersionPreviews]
+    getArgumentForCount:
+      type: integer
+      serialized_name: argumentsYesCount
+      groups: [OpinionVersions, OpinionVersionPreviews]
+    getArgumentAgainstCount:
+      type: integer
+      serialized_name: argumentsNoCount
+      groups: [OpinionVersions, OpinionVersionPreviews]

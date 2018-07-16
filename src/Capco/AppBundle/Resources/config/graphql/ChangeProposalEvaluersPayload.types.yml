@@ -1,6 +1,6 @@
 ChangeProposalEvaluersPayload:
-    type: relay-mutation-payload
-    config:
-        fields:
-            proposal:
-                type: "Proposal!"
+  type: relay-mutation-payload
+  config:
+    fields:
+      proposal:
+        type: 'Proposal!'

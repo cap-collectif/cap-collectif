@@ -1,15 +1,15 @@
 Capco\AppBundle\Entity\Synthesis\Synthesis:
-    synthesis1:
-        id: '1'
-        ConsultationStep: '@cstep2'
-        sourceType: consultation_step
-        enabled: true
-        editable: true
-        displayRules: {"level": 1}
-    synthesis2:
-        id: '2'
-        ConsultationStep: '@cstep5'
-        sourceType: consultation_step
-        enabled: true
-        editable: true
-        displayRules: {"level": 1}
+  synthesis1:
+    id: '1'
+    ConsultationStep: '@cstep2'
+    sourceType: consultation_step
+    enabled: true
+    editable: true
+    displayRules: { 'level': 1 }
+  synthesis2:
+    id: '2'
+    ConsultationStep: '@cstep5'
+    sourceType: consultation_step
+    enabled: true
+    editable: true
+    displayRules: { 'level': 1 }

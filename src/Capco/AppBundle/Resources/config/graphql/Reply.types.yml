@@ -1,34 +1,38 @@
 Reply:
-    type: object
-    inherits: [Node, Contribution]
-    config:
-        description: "A Reply"
-        interfaces: [Node, Contribution]
-        fields:
-            enabled:
-                type: "Boolean!"
-            private:
-                type: "Boolean!"
-            createdAt:
-                type: "DateTime!"
-            responses:
-                type: "[Response]!"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyResponsesResolver", [value])'
-            author:
-                type: "User!"
-                description: "The author of the contribution."
-            updatedAt:
-                type: "DateTime"
-                description: "The updated date."
-            expired:
-                type: "Boolean!"
-            questionnaire:
-                type: "Questionnaire!"
-                description: "Identifies the form where the contribution was submitted."
-            viewerCanDelete:
-                type: "Boolean!"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyViewerCanDeleteResolver", [value, getUser()])'
-            show_url:
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyUrlResolver", [value])'
-            url:
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyUrlResolver", [value])'
+  type: object
+  inherits: [Node, Contribution]
+  config:
+    description: 'A Reply'
+    interfaces: [Node, Contribution]
+    fields:
+      enabled:
+        type: 'Boolean!'
+      private:
+        type: 'Boolean!'
+      createdAt:
+        type: 'DateTime!'
+      responses:
+        type: '[Response]!'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyResponsesResolver", [value])'
+      author:
+        type: 'User!'
+        description: 'The author of the contribution.'
+      updatedAt:
+        type: 'DateTime'
+        description: 'The updated date.'
+      expired:
+        type: 'Boolean!'
+      questionnaire:
+        type: 'Questionnaire!'
+        description: 'Identifies the form where the contribution was submitted.'
+      viewerCanDelete:
+        type: 'Boolean!'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyViewerCanDeleteResolver", [value, getUser()])'
+      show_url:
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyUrlResolver", [value])'
+      url:
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyUrlResolver", [value])'

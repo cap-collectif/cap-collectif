@@ -1,15 +1,15 @@
 ReportingType:
-    type: enum
-    config:
-        description: "Type of reporting"
-        values:
-            SEX:
-                value: 0
-            OFF:
-                value: 1
-            SPAM:
-                value: 2
-            ERROR:
-                value: 3
-            OFF_TOPIC:
-                value: 4
+  type: enum
+  config:
+    description: 'Type of reporting'
+    values:
+      SEX:
+        value: 0
+      OFF:
+        value: 1
+      SPAM:
+        value: 2
+      ERROR:
+        value: 3
+      OFF_TOPIC:
+        value: 4

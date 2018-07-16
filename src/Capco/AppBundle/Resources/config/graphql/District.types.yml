@@ -1,15 +1,15 @@
 District:
-    type: object
-    config:
-        description: "A district"
-        fields:
-            id:
-                type: "ID!"
-            name:
-                type: "String!"
-            geojson:
-                type: "GeoJSON"
-            geojsonStyle:
-                type: "CssJSON"
-            displayedOnMap:
-                type: "Boolean!"
+  type: object
+  config:
+    description: 'A district'
+    fields:
+      id:
+        type: 'ID!'
+      name:
+        type: 'String!'
+      geojson:
+        type: 'GeoJSON'
+      geojsonStyle:
+        type: 'CssJSON'
+      displayedOnMap:
+        type: 'Boolean!'

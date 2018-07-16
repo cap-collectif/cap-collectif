@@ -1,19 +1,19 @@
 Capco\AppBundle\Entity\HighlightedPost:
-    highlightedPost1:
-        position: 1
-        post: '@post1'
+  highlightedPost1:
+    position: 1
+    post: '@post1'
 
 Capco\AppBundle\Entity\HighlightedTheme:
-    highlightedTheme1:
-        position: 2
-        theme: '@theme1'
+  highlightedTheme1:
+    position: 2
+    theme: '@theme1'
 
 Capco\AppBundle\Entity\HighlightedProject:
-    highlightedProject1:
-        position: 3
-        project: '@p1'
+  highlightedProject1:
+    position: 3
+    project: '@p1'
 
 Capco\AppBundle\Entity\HighlightedEvent:
-    highlightedEvent1:
-        position: 5
-        event: '@event1'
+  highlightedEvent1:
+    position: 5
+    event: '@event1'

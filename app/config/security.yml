@@ -1,86 +1,86 @@
 security:
-    acl:
-        connection: default
+  acl:
+    connection: default
 
-    encoders:
-        Capco\UserBundle\Entity\User: bcrypt
-        drupal:
-            id: drupal.encoder
+  encoders:
+    Capco\UserBundle\Entity\User: bcrypt
+    drupal:
+      id: drupal.encoder
 
-    role_hierarchy:
-        ROLE_ADMIN:       [ROLE_USER, ROLE_SONATA_ADMIN]
-        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
-        SONATA:
-            - ROLE_SONATA_PAGE_ADMIN_PAGE_EDIT # if you are using acl then this line must be commented
+  role_hierarchy:
+    ROLE_ADMIN: [ROLE_USER, ROLE_SONATA_ADMIN]
+    ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+    SONATA:
+      - ROLE_SONATA_PAGE_ADMIN_PAGE_EDIT # if you are using acl then this line must be commented
 
-    providers:
-        fos_userbundle:
-            id: capco_user.user_provider.email
-        simple_preauth:
-            id: capco.simple_preauth.provider
+  providers:
+    fos_userbundle:
+      id: capco_user.user_provider.email
+    simple_preauth:
+      id: capco.simple_preauth.provider
 
-    firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
 
-        api_login:
-            pattern: ^/api/login_check
-            stateless: true
-            gfreeau_get_jwt: ~ # form_login is never stateless, that's why we use this bundle
+    api_login:
+      pattern: ^/api/login_check
+      stateless: true
+      gfreeau_get_jwt: ~ # form_login is never stateless, that's why we use this bundle
 
-        graphql:
-            pattern: ^/graphql
-            provider: fos_userbundle
-            stateless: true
-            anonymous: true
-            lexik_jwt:
-                authorization_header:
-                    enabled: true
-                    prefix: Bearer
-                query_parameter:
-                    enabled: false
+    graphql:
+      pattern: ^/graphql
+      provider: fos_userbundle
+      stateless: true
+      anonymous: true
+      lexik_jwt:
+        authorization_header:
+          enabled: true
+          prefix: Bearer
+        query_parameter:
+          enabled: false
 
-        api:
-            pattern: ^/api
-            provider: fos_userbundle
-            stateless: true
-            anonymous: true
-            lexik_jwt:
-                authorization_header:
-                    enabled: true
-                    prefix: Bearer
-                query_parameter:
-                    enabled: false
-        main:
-            pattern: ^/
-            provider: fos_userbundle
-            anonymous: true
-            simple_preauth:
-                authenticator: capco.simple_preauth.authenticator
-                provider: simple_preauth
-            form_login:
-                check_path: /login_check
-                username_parameter: username
-                password_parameter: password
-                require_previous_session: false
-                remember_me: true
-            oauth:
-                resource_owners:
-                    facebook: /login/check-facebook
-                    google: /login/check-google
-                login_path: /
-                oauth_user_provider:
-                    service: capco.oauth.provider
-            remember_me:
-              always_remember_me: false
-              secret: "%remember_secret%"
-              lifetime: 31536000
-              path: /
-              domain: ~
-            logout:
-              path: /logout
-              success_handler: capco.logout_handler
+    api:
+      pattern: ^/api
+      provider: fos_userbundle
+      stateless: true
+      anonymous: true
+      lexik_jwt:
+        authorization_header:
+          enabled: true
+          prefix: Bearer
+        query_parameter:
+          enabled: false
+    main:
+      pattern: ^/
+      provider: fos_userbundle
+      anonymous: true
+      simple_preauth:
+        authenticator: capco.simple_preauth.authenticator
+        provider: simple_preauth
+      form_login:
+        check_path: /login_check
+        username_parameter: username
+        password_parameter: password
+        require_previous_session: false
+        remember_me: true
+      oauth:
+        resource_owners:
+          facebook: /login/check-facebook
+          google: /login/check-google
+        login_path: /
+        oauth_user_provider:
+          service: capco.oauth.provider
+      remember_me:
+        always_remember_me: false
+        secret: '%remember_secret%'
+        lifetime: 31536000
+        path: /
+        domain: ~
+      logout:
+        path: /logout
+        success_handler: capco.logout_handler
 
-    access_control:
-        - { path: ^/admin, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
+  access_control:
+    - { path: ^/admin, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }

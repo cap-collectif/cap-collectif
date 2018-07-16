@@ -1,41 +1,51 @@
 Argument:
-    type: object
-    inherits: [Node, Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
-    config:
-        description: "An argument"
-        interfaces: [Node, Contribution, Reportable, TrashableContribution, ContributionWithAuthor, EditableContribution]
-        fields:
-            createdAt:
-                type: "DateTime!"
-                description: "Identifies the date and time when the object was created."
-            show_url:
-                resolve: "@=resolver('argument_url', [value])"
-            url:
-                resolve: "@=resolver('argument_url', [value])"
-            expired:
-                type: "Boolean!"
-            published:
-                type: "Boolean!"
-            type:
-                type: "ArgumentValue!"
-                description: "The type."
-            votesCount:
-                type: "Int"
-                description: "This will be deprecated for a connection, soon."
-            body:
-                type: "String!"
-                description: "The content of the argument."
-            kind:
-                type: "String!"
-                description: "The kind of contribution (argument)."
-            viewerHasReport:
-                access: "@=hasRole('ROLE_USER')"
-                type: "Boolean!"
-                resolve: '@=value.userHasReport(getUser())'
-            viewerHasVote:
-                access: "@=hasRole('ROLE_USER')"
-                type: "Boolean!"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Argument\\ArgumentViewerHasVoteResolver", [value, getUser()])'
-            contribuable:
-                type: "Boolean!"
-                resolve: "@=value.canContribute()"
+  type: object
+  inherits:
+    [Node, Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
+  config:
+    description: 'An argument'
+    interfaces:
+      [
+        Node,
+        Contribution,
+        Reportable,
+        TrashableContribution,
+        ContributionWithAuthor,
+        EditableContribution,
+      ]
+    fields:
+      createdAt:
+        type: 'DateTime!'
+        description: 'Identifies the date and time when the object was created.'
+      show_url:
+        resolve: "@=resolver('argument_url', [value])"
+      url:
+        resolve: "@=resolver('argument_url', [value])"
+      expired:
+        type: 'Boolean!'
+      published:
+        type: 'Boolean!'
+      type:
+        type: 'ArgumentValue!'
+        description: 'The type.'
+      votesCount:
+        type: 'Int'
+        description: 'This will be deprecated for a connection, soon.'
+      body:
+        type: 'String!'
+        description: 'The content of the argument.'
+      kind:
+        type: 'String!'
+        description: 'The kind of contribution (argument).'
+      viewerHasReport:
+        access: "@=hasRole('ROLE_USER')"
+        type: 'Boolean!'
+        resolve: '@=value.userHasReport(getUser())'
+      viewerHasVote:
+        access: "@=hasRole('ROLE_USER')"
+        type: 'Boolean!'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Argument\\ArgumentViewerHasVoteResolver", [value, getUser()])'
+      contribuable:
+        type: 'Boolean!'
+        resolve: '@=value.canContribute()'

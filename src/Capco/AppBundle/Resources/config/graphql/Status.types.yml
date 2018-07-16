@@ -1,10 +1,10 @@
 Status:
-    type: object
-    config:
-        fields:
-            id:
-                type: "ID!"
-            name:
-                type: "String!"
-            color:
-                type: "String!"
+  type: object
+  config:
+    fields:
+      id:
+        type: 'ID!'
+      name:
+        type: 'String!'
+      color:
+        type: 'String!'

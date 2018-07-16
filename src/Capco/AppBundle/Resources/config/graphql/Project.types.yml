@@ -1,23 +1,26 @@
 Project:
-    type: object
-    inherits: [Node]
-    config:
-        interfaces: [Node]
-        description: "A participatory project."
-        fields:
-            steps:
-                type: "[Step!]!"
-                resolve: "@=resolver('project_steps', [value])"
-            title:
-                type: "String!"
-            contributors:
-                type: "UserConnection!"
-                description: "A list of contributor associated with the project."
-                argsBuilder: "Relay::Connection"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributorResolver", [value, args])'
-            url:
-              type: "URI"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectUrlResolver", [value])'
-            votableSteps:
-              type: "[ProposalStep!]!"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectVotableStepsResolver", [value])'
+  type: object
+  inherits: [Node]
+  config:
+    interfaces: [Node]
+    description: 'A participatory project.'
+    fields:
+      steps:
+        type: '[Step!]!'
+        resolve: "@=resolver('project_steps', [value])"
+      title:
+        type: 'String!'
+      contributors:
+        type: 'UserConnection!'
+        description: 'A list of contributor associated with the project.'
+        argsBuilder: 'Relay::Connection'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributorResolver", [value, args])'
+      url:
+        type: 'URI'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectUrlResolver", [value])'
+      votableSteps:
+        type: '[ProposalStep!]!'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectVotableStepsResolver", [value])'

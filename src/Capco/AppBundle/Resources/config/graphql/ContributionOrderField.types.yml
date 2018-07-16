@@ -1,17 +1,17 @@
 ContributionOrderField:
-    type: enum
-    config:
-        description: "Ordering options for contributions connections."
-        values:
-            POSITION:
-                value: "POSITION"
-            RANDOM:
-                value: "RANDOM"
-            CREATED_AT:
-                value: "CREATED_AT"
-            POPULAR:
-                value: "POPULAR"
-            COMMENT_COUNT:
-                value: "COMMENT_COUNT"
-            VOTE_COUNT:
-                value: "VOTE_COUNT"
+  type: enum
+  config:
+    description: 'Ordering options for contributions connections.'
+    values:
+      POSITION:
+        value: 'POSITION'
+      RANDOM:
+        value: 'RANDOM'
+      CREATED_AT:
+        value: 'CREATED_AT'
+      POPULAR:
+        value: 'POPULAR'
+      COMMENT_COUNT:
+        value: 'COMMENT_COUNT'
+      VOTE_COUNT:
+        value: 'VOTE_COUNT'

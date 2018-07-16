@@ -8,7 +8,8 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     id: 13
     title: Pour quel type d'épreuve êtes vous prêt à acheter des places ?
     helpText: Plusieurs choix sont possibles
-    questionChoices: ['@questionchoice1', '@questionchoice2', '@questionchoice3', '@questionchoice4']
+    questionChoices:
+      ['@questionchoice1', '@questionchoice2', '@questionchoice3', '@questionchoice4']
     required: true
     type: 5 # checkbox
     randomQuestionChoices: false
@@ -18,14 +19,15 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     id: 14
     title: Quel est ton athlète favori ?
     helpText: Un seul choix possible
-    questionChoices: ['@questionchoice5', '@questionchoice6', '@questionchoice7', '@questionchoice8']
+    questionChoices:
+      ['@questionchoice5', '@questionchoice6', '@questionchoice7', '@questionchoice8']
     required: false
     type: 3 # radio
     randomQuestionChoices: true
     otherAllowed: true
   multiplequestion3:
     id: 15
-    title: "Nelson Monfort parle-t-il:"
+    title: 'Nelson Monfort parle-t-il:'
     helpText: Merci de répondre sincèrement
     questionChoices: ['@questionchoice9', '@questionchoice10', '@questionchoice11']
     required: false
@@ -34,7 +36,8 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
   multiplequestion4:
     id: 16
     title: Classez vos choix
-    helpText: Pour chaque valeur, vous pouvez assigner un classement ou glisser-déposer au bon endroit dans la colonne de droite.
+    helpText:
+      Pour chaque valeur, vous pouvez assigner un classement ou glisser-déposer au bon endroit dans la colonne de droite.
     questionChoices: ['@questionchoice12', '@questionchoice13', '@questionchoice14']
     required: false
     type: 6
@@ -89,7 +92,8 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
   multiplequestion11:
     id: 23
     title: Classez vos choix
-    helpText: Pour chaque valeur, vous pouvez assigner un classement ou glisser-déposer au bon endroit dans la colonne de droite.
+    helpText:
+      Pour chaque valeur, vous pouvez assigner un classement ou glisser-déposer au bon endroit dans la colonne de droite.
     questionChoices: ['@questionchoice29', '@questionchoice30', '@questionchoice31']
     required: false
     type: 6

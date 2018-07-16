@@ -1,42 +1,42 @@
 Capco\AppBundle\Entity\Argument:
-    exclusion_policy: ALL
-    properties:
-        id:
-            expose: true
-            type: string
-            groups: [Opinions, OpinionVersions, Elasticsearch]
-        body:
-            expose: true
-            type: string
-            groups: [Opinions, OpinionVersions, Elasticsearch]
-        type:
-            expose: true
-            groups: [Opinions, OpinionVersions]
-        createdAt:
-            expose: true
-            type: DateTime
-            groups: [Opinions, OpinionVersions, Elasticsearch]
-            serialized_name: createdAt
-        updatedAt:
-            expose: true
-            type: DateTime
-            groups: [Opinions, OpinionVersions, Elasticsearch]
-            serialized_name: updatedAt
-        votesCount:
-            expose: true
-            type: integer
-            serialized_name: votesCount
-            groups: [Opinions, OpinionVersions]
-        Author:
-            expose: true
-            type: Capco\UserBundle\Entity\User
-            serialized_name: author
-            groups: [Opinions, OpinionVersions, UserMedias]
-        isTrashed:
-            expose: true
-            type: boolean
-            groups: [Opinions, OpinionVersions]
-        isEnabled:
-            expose: true
-            type: boolean
-            groups: [Opinions, OpinionVersions]
+  exclusion_policy: ALL
+  properties:
+    id:
+      expose: true
+      type: string
+      groups: [Opinions, OpinionVersions, Elasticsearch]
+    body:
+      expose: true
+      type: string
+      groups: [Opinions, OpinionVersions, Elasticsearch]
+    type:
+      expose: true
+      groups: [Opinions, OpinionVersions]
+    createdAt:
+      expose: true
+      type: DateTime
+      groups: [Opinions, OpinionVersions, Elasticsearch]
+      serialized_name: createdAt
+    updatedAt:
+      expose: true
+      type: DateTime
+      groups: [Opinions, OpinionVersions, Elasticsearch]
+      serialized_name: updatedAt
+    votesCount:
+      expose: true
+      type: integer
+      serialized_name: votesCount
+      groups: [Opinions, OpinionVersions]
+    Author:
+      expose: true
+      type: Capco\UserBundle\Entity\User
+      serialized_name: author
+      groups: [Opinions, OpinionVersions, UserMedias]
+    isTrashed:
+      expose: true
+      type: boolean
+      groups: [Opinions, OpinionVersions]
+    isEnabled:
+      expose: true
+      type: boolean
+      groups: [Opinions, OpinionVersions]

@@ -26,20 +26,20 @@ Capco\AppBundle\Entity\Selection:
     proposal: '@proposal9'
     selectionStep: '@selectionstep4'
   selection11:
-     proposal: '@proposal10'
-     selectionStep: '@selectionstep6'
+    proposal: '@proposal10'
+    selectionStep: '@selectionstep6'
   selection12:
-     proposal: '@proposal11'
-     selectionStep: '@selectionstep3'
+    proposal: '@proposal11'
+    selectionStep: '@selectionstep3'
   selection13:
-     proposal: '@proposal16'
-     selectionStep: '@selectionstep5'
+    proposal: '@proposal16'
+    selectionStep: '@selectionstep5'
   selection14:
-     proposal: '@proposal15'
-     selectionStep: '@selectionstep5'
+    proposal: '@proposal15'
+    selectionStep: '@selectionstep5'
   selection15:
-     proposal: '@proposal17'
-     selectionStep: '@selectionstep8'
+    proposal: '@proposal17'
+    selectionStep: '@selectionstep8'
   selection16:
-     proposal: '@proposal18'
-     selectionStep: '@selectionstep8'
+    proposal: '@proposal18'
+    selectionStep: '@selectionstep8'

@@ -1,15 +1,15 @@
 RequirementConnection:
-    type: relay-connection
-    config:
-        nodeType: Requirement!
-        connectionFields:
-            totalCount:
-                type: "Int!"
-                description: "Identifies the total count of items in the connection."
-            viewerMeetsTheRequirements:
-                type: "Boolean!"
-                access: "@hasRole=('ROLE_USER')"
-                description: "Does the viewer meets all the requirements ?"
-            reason:
-                type: "String"
-                description: "The reason for requirements."
+  type: relay-connection
+  config:
+    nodeType: Requirement!
+    connectionFields:
+      totalCount:
+        type: 'Int!'
+        description: 'Identifies the total count of items in the connection.'
+      viewerMeetsTheRequirements:
+        type: 'Boolean!'
+        access: "@hasRole=('ROLE_USER')"
+        description: 'Does the viewer meets all the requirements ?'
+      reason:
+        type: 'String'
+        description: 'The reason for requirements.'

@@ -1,23 +1,23 @@
 QuestionTypeValue:
-    type: enum
-    config:
-        description: "Value of type of question"
-        values:
-            text:
-                value: 0
-            textarea:
-                value: 1
-            editor:
-                value: 2
-            radio:
-                value: 3
-            select:
-                value: 4
-            checkbox:
-                value: 5
-            ranking:
-                value: 6
-            medias:
-                value: 7
-            button:
-                value: 8
+  type: enum
+  config:
+    description: 'Value of type of question'
+    values:
+      text:
+        value: 0
+      textarea:
+        value: 1
+      editor:
+        value: 2
+      radio:
+        value: 3
+      select:
+        value: 4
+      checkbox:
+        value: 5
+      ranking:
+        value: 6
+      medias:
+        value: 7
+      button:
+        value: 8

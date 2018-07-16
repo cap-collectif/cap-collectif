@@ -1,10 +1,10 @@
 ChangeCollectStatusInput:
-    type: relay-mutation-input
-    config:
-        description: ""
-        fields:
-            statusId:
-                type: "ID"
-            proposalId:
-              type: "ID!"
-              description: "The proposal id"
+  type: relay-mutation-input
+  config:
+    description: ''
+    fields:
+      statusId:
+        type: 'ID'
+      proposalId:
+        type: 'ID!'
+        description: 'The proposal id'

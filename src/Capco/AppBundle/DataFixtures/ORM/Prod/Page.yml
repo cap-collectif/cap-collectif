@@ -1,23 +1,23 @@
 Capco\AppBundle\Entity\Page:
   page2:
-      title: Comment ça marche ?
-      body: |
-            Retrouvez sur cette page la possibilité de pouvoir afficher le fonctionnement du site.
-            <h2>Définissez le processus</h2>
-            <p><text(1000)></p>
-            <h2>Structurez vos propositions</h2>
-            <p><text(550)></p>
-            <h2>Étayez vos propos</h2>
-            <p><text(350)></p>
+    title: Comment ça marche ?
+    body: |
+      Retrouvez sur cette page la possibilité de pouvoir afficher le fonctionnement du site.
+      <h2>Définissez le processus</h2>
+      <p><text(1000)></p>
+      <h2>Structurez vos propositions</h2>
+      <p><text(550)></p>
+      <h2>Étayez vos propos</h2>
+      <p><text(350)></p>
 
-            <h3>Efficacité</h3>
-            <p>En organisant l’expression de tous les organisations s’assurent de prendre de bonnes décisions.</p>
+      <h3>Efficacité</h3>
+      <p>En organisant l’expression de tous les organisations s’assurent de prendre de bonnes décisions.</p>
 
-            <h3>Confiance</h3>
-            <p>En associant leur(s) communauté(s) à leurs prises de décisions les responsables publics et privés renforcent la confiance.</p>
+      <h3>Confiance</h3>
+      <p>En associant leur(s) communauté(s) à leurs prises de décisions les responsables publics et privés renforcent la confiance.</p>
 
-            <h3>Adhésion</h3>
-            <p>Lorsque les tenants et les aboutissant des décisions sont construites avec ceux qu’elles affectent le niveau d’adhésion s’en trouve renforcé.</p>
+      <h3>Adhésion</h3>
+      <p>Lorsque les tenants et les aboutissant des décisions sont construites avec ceux qu’elles affectent le niveau d’adhésion s’en trouve renforcé.</p>
 
-            <h3>Mobilisation</h3>
-            <p>En impliquant le publics dans l’élaboration des décisions vous renforcer leur désir de s’investir à vos côtés.</p>
+      <h3>Mobilisation</h3>
+      <p>En impliquant le publics dans l’élaboration des décisions vous renforcer leur désir de s’investir à vos côtés.</p>

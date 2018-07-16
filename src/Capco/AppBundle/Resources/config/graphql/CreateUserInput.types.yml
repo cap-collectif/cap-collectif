@@ -1,23 +1,23 @@
 CreateUserInput:
-    type: relay-mutation-input
-    config:
-        description: "Create a user"
-        fields:
-            username:
-                type: "String!"
-                description: "The user's username"
-            email:
-                type: "String!"
-                description: "The user's email"
-            plainPassword:
-                type: "String"
-                description: "The user's password"
-            roles:
-                type: "[UserRole]"
-                description: "Unattended roles as array."
-            locked:
-                type: "Boolean"
-            vip:
-                type: "Boolean"
-            enabled:
-                type: "Boolean"
+  type: relay-mutation-input
+  config:
+    description: 'Create a user'
+    fields:
+      username:
+        type: 'String!'
+        description: "The user's username"
+      email:
+        type: 'String!'
+        description: "The user's email"
+      plainPassword:
+        type: 'String'
+        description: "The user's password"
+      roles:
+        type: '[UserRole]'
+        description: 'Unattended roles as array.'
+      locked:
+        type: 'Boolean'
+      vip:
+        type: 'Boolean'
+      enabled:
+        type: 'Boolean'

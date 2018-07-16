@@ -1,10 +1,10 @@
 Capco\AppBundle\Entity\NewsletterSubscription:
-    NewsSub{1..10}:
-        email: <email()>
-        isEnabled: <boolean()>
-    NewsSub11:
-        email: maxime.auriau@cap-collectif.com
-        isEnabled: true
-    NewsSub12:
-        email: pierre.bellenger@cap-collectif.com
-        isEnabled: true
+  NewsSub{1..10}:
+    email: <email()>
+    isEnabled: <boolean()>
+  NewsSub11:
+    email: maxime.auriau@cap-collectif.com
+    isEnabled: true
+  NewsSub12:
+    email: pierre.bellenger@cap-collectif.com
+    isEnabled: true

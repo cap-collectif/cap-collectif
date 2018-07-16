@@ -1,14 +1,14 @@
 UserGroup:
-    type: object
-    config:
-        description: "A list of users in groups"
-        fields:
-            id:
-                type: "ID!"
-                description: "The identifier of the group"
-            user:
-                type: "User!"
-                description: "Identifies the user"
-            group:
-                type: "Group!"
-                description: "Identifies the group"
+  type: object
+  config:
+    description: 'A list of users in groups'
+    fields:
+      id:
+        type: 'ID!'
+        description: 'The identifier of the group'
+      user:
+        type: 'User!'
+        description: 'Identifies the user'
+      group:
+        type: 'Group!'
+        description: 'Identifies the group'

@@ -136,56 +136,56 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
     position: 1
   pas28:
     id: pas28
-    step: "@collectstep4"
-    project: "@p6"
+    step: '@collectstep4'
+    project: '@p6'
     position: 2
   pas29:
     id: pas29
-    step: "@selectionstep7"
-    project: "@p6"
+    step: '@selectionstep7'
+    project: '@p6'
     position: 10
   pas30:
     id: pas30
-    step: "@collectstep5"
-    project: "@p9"
+    step: '@collectstep5'
+    project: '@p9'
     position: 1
   pas31:
     id: pas31
-    step: "@collectstep6"
-    project: "@p10"
+    step: '@collectstep6'
+    project: '@p10'
     position: 1
   pas32:
     id: pas32
-    step: "@collectstep7"
-    project: "@p11"
+    step: '@collectstep7'
+    project: '@p11'
     position: 1
   pas33:
     id: pas33
-    step: "@selectionstep8"
-    project: "@p11"
+    step: '@selectionstep8'
+    project: '@p11'
     position: 2
   pas34:
     id: pas34
-    step: "@pstep3"
-    project: "@p12"
+    step: '@pstep3'
+    project: '@p12'
     position: 1
   pas35:
     id: pas35
-    step: "@collectstep8"
-    project: "@p13"
+    step: '@collectstep8'
+    project: '@p13'
     position: 1
   pas36:
     id: pas36
-    step: "@pstep4"
-    project: "@p14"
+    step: '@pstep4'
+    project: '@p14'
     position: 1
   pas37:
     id: pas37
-    step: "@collectstepVoteClassement"
-    project: "@p15"
+    step: '@collectstepVoteClassement'
+    project: '@p15'
     position: 1
   pas38:
     id: pas38
-    step: "@selectionstepVoteClassement"
-    project: "@p15"
+    step: '@selectionstepVoteClassement'
+    project: '@p15'
     position: 2

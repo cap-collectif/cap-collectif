@@ -1,13 +1,13 @@
 DistrictInput:
-    type: input-object
-    config:
-        fields:
-            name:
-                type: "String!"
-            geojson:
-                type: "GeoJSON"
-            geojsonStyle:
-                type: "CssJSON"
-            displayedOnMap:
-                type: "Boolean"
-                defaultValue: false
+  type: input-object
+  config:
+    fields:
+      name:
+        type: 'String!'
+      geojson:
+        type: 'GeoJSON'
+      geojsonStyle:
+        type: 'CssJSON'
+      displayedOnMap:
+        type: 'Boolean'
+        defaultValue: false

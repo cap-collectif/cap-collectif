@@ -1,8 +1,8 @@
 RankingStep:
-    type: object
-    inherits: [Step]
-    config:
-        interfaces: [Step]
-        fields:
-            kind:
-               resolve: "ranking"
+  type: object
+  inherits: [Step]
+  config:
+    interfaces: [Step]
+    fields:
+      kind:
+        resolve: 'ranking'

@@ -1,14 +1,14 @@
 ChangeProposalPublicationStatusInput:
-    type: relay-mutation-input
-    config:
-        description: ""
-        fields:
-            publicationStatus:
-                type: "ProposalPublicationStatus!"
-                description: "The new publication status"
-            trashedReason:
-                type: "String"
-                description: "Added if you set publicationStatus to TRASHED"
-            proposalId:
-              type: "ID!"
-              description: "The proposal id"
+  type: relay-mutation-input
+  config:
+    description: ''
+    fields:
+      publicationStatus:
+        type: 'ProposalPublicationStatus!'
+        description: 'The new publication status'
+      trashedReason:
+        type: 'String'
+        description: 'Added if you set publicationStatus to TRASHED'
+      proposalId:
+        type: 'ID!'
+        description: 'The proposal id'

@@ -1,6 +1,6 @@
 AddUsersInGroupPayload:
-    type: relay-mutation-payload
-    config:
-        fields:
-            group:
-                type: "Group!"
+  type: relay-mutation-payload
+  config:
+    fields:
+      group:
+        type: 'Group!'

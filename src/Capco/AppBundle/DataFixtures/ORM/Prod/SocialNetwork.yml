@@ -1,56 +1,56 @@
 Capco\AppBundle\Entity\SocialNetwork:
-    SocialNetwork1:
-        title: Facebook
-        link: http://facebook.com
-        position: 1
-        isEnabled: true
-        media: '@MediaFacebook'
+  SocialNetwork1:
+    title: Facebook
+    link: http://facebook.com
+    position: 1
+    isEnabled: true
+    media: '@MediaFacebook'
 
-    SocialNetwork2:
-        title: Twitter
-        link: https://twitter.com/CapCollectif
-        position: 2
-        isEnabled: true
-        media: '@MediaTwitter'
+  SocialNetwork2:
+    title: Twitter
+    link: https://twitter.com/CapCollectif
+    position: 2
+    isEnabled: true
+    media: '@MediaTwitter'
 
-    SocialNetwork3:
-        title: Linkedin
-        link: http://linkedin.com
-        position: 3
-        isEnabled: false
-        media: '@MediaLinkedIn'
+  SocialNetwork3:
+    title: Linkedin
+    link: http://linkedin.com
+    position: 3
+    isEnabled: false
+    media: '@MediaLinkedIn'
 
-    SocialNetwork4:
-        title: Flickr
-        link: http://flickr.com
-        position: 4
-        isEnabled: false
-        media: '@MediaFlickr'
+  SocialNetwork4:
+    title: Flickr
+    link: http://flickr.com
+    position: 4
+    isEnabled: false
+    media: '@MediaFlickr'
 
-    SocialNetwork5:
-        title: Flux RSS
-        link: http://www.cap-collectif.com/
-        position: 5
-        isEnabled: false
-        media: '@MediaRSS'
+  SocialNetwork5:
+    title: Flux RSS
+    link: http://www.cap-collectif.com/
+    position: 5
+    isEnabled: false
+    media: '@MediaRSS'
 
-    SocialNetwork6:
-        title: Google
-        link: ***REMOVED***
-        position: 6
-        isEnabled: true
-        media: '@MediaGooglePlus'
+  SocialNetwork6:
+    title: Google
+    link: ***REMOVED***
+    position: 6
+    isEnabled: true
+    media: '@MediaGooglePlus'
 
-    SocialNetwork7:
-        title: Cap Collectif
-        link: http://www.cap-collectif.com/
-        position: 8
-        isEnabled: true
-        media: '@MediaCapcoSite'
+  SocialNetwork7:
+    title: Cap Collectif
+    link: http://www.cap-collectif.com/
+    position: 8
+    isEnabled: true
+    media: '@MediaCapcoSite'
 
-    SocialNetwork8:
-        title: Instagram
-        link: https://www.instagram.com/coucou.capco/
-        position: 7
-        isEnabled: true
-        media: '@MediaInstagram'
+  SocialNetwork8:
+    title: Instagram
+    link: https://www.instagram.com/coucou.capco/
+    position: 7
+    isEnabled: true
+    media: '@MediaInstagram'

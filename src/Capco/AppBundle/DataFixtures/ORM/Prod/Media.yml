@@ -1,39 +1,39 @@
 Capco\MediaBundle\Entity\Media:
-    #SiteImages
-    Logo:
-        binaryContent: logo.png
-        name:          Logo
-    header:
-        binaryContent: header.jpg
-        name:          Header
-    picto:
-        binaryContent: picto.png
-        name:          Picto
-    # Social Network
-    MediaFlickr:
-        binaryContent: social/flickr.png
-        name:          Flickr
-    MediaFacebook:
-        binaryContent: social/facebook.png
-        name:          Facebook
-    MediaGooglePlus:
-        binaryContent: social/google_plus.png
-        name:          Google
-    MediaLinkedIn:
-        binaryContent: social/linkedIn.png
-        name:          LinkedIn
-    MediaRSS:
-        binaryContent: social/rss.png
-        name:          RSS
-    MediaTwitter:
-        binaryContent: social/twitter.png
-        name:          Twitter
-    MediaCapcoSite:
-        binaryContent: social/capco.png
-        name:          Capco
-    MediaInstagram:
-        binaryContent: social/instagram.png
-        name:          Instagram
-    MediaVotesBar:
-        binaryContent: votes_bar_image.png
-        name: Image de la barre de votes
+  #SiteImages
+  Logo:
+    binaryContent: logo.png
+    name: Logo
+  header:
+    binaryContent: header.jpg
+    name: Header
+  picto:
+    binaryContent: picto.png
+    name: Picto
+  # Social Network
+  MediaFlickr:
+    binaryContent: social/flickr.png
+    name: Flickr
+  MediaFacebook:
+    binaryContent: social/facebook.png
+    name: Facebook
+  MediaGooglePlus:
+    binaryContent: social/google_plus.png
+    name: Google
+  MediaLinkedIn:
+    binaryContent: social/linkedIn.png
+    name: LinkedIn
+  MediaRSS:
+    binaryContent: social/rss.png
+    name: RSS
+  MediaTwitter:
+    binaryContent: social/twitter.png
+    name: Twitter
+  MediaCapcoSite:
+    binaryContent: social/capco.png
+    name: Capco
+  MediaInstagram:
+    binaryContent: social/instagram.png
+    name: Instagram
+  MediaVotesBar:
+    binaryContent: votes_bar_image.png
+    name: Image de la barre de votes

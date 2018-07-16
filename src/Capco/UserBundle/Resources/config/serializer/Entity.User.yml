@@ -1,42 +1,42 @@
 Capco\UserBundle\Entity\User:
-    exclusion_policy: ALL
-    properties:
-      id:
-        expose: true
-        type: string
-        groups: [UserId, Elasticsearch]
-      slug:
-        expose: true
-        type: string
-        groups: [Default, Elasticsearch]
-      media:
-        expose: true
-        serialized_name: media
-        groups: [UsersInfos, UserDetails]
-      vip:
-        expose: true
-        groups: [UsersInfos, UserDetails]
-      userType:
-        expose: true
-        groups: [UsersInfos, Elasticsearch]
-        serialized_name: userType
-      biography:
-        expose: true
-        groups: [Default, sonata_api_read, sonata_api_write, sonata_search, UsersInfos, Elasticsearch]
-    virtual_properties:
-      getUsername:
-        serialized_name: username
-        type: string
-        groups: [Default, Elasticsearch, sonata_api_read, sonata_api_write, sonata_search, UsersInfos]
-      getDisplayName:
-        serialized_name: displayName
-        type: string
-        groups: [UserDetails, UsersInfos]
-      getUniqueIdentifier:
-        serialized_name: uniqueId
-        type: string
-        groups: [UserDetails, UsersInfos]
-      isAdmin:
-        serialized_name: isAdmin
-        type: boolean
-        groups: [UserDetails, UsersInfos]
+  exclusion_policy: ALL
+  properties:
+    id:
+      expose: true
+      type: string
+      groups: [UserId, Elasticsearch]
+    slug:
+      expose: true
+      type: string
+      groups: [Default, Elasticsearch]
+    media:
+      expose: true
+      serialized_name: media
+      groups: [UsersInfos, UserDetails]
+    vip:
+      expose: true
+      groups: [UsersInfos, UserDetails]
+    userType:
+      expose: true
+      groups: [UsersInfos, Elasticsearch]
+      serialized_name: userType
+    biography:
+      expose: true
+      groups: [Default, sonata_api_read, sonata_api_write, sonata_search, UsersInfos, Elasticsearch]
+  virtual_properties:
+    getUsername:
+      serialized_name: username
+      type: string
+      groups: [Default, Elasticsearch, sonata_api_read, sonata_api_write, sonata_search, UsersInfos]
+    getDisplayName:
+      serialized_name: displayName
+      type: string
+      groups: [UserDetails, UsersInfos]
+    getUniqueIdentifier:
+      serialized_name: uniqueId
+      type: string
+      groups: [UserDetails, UsersInfos]
+    isAdmin:
+      serialized_name: isAdmin
+      type: boolean
+      groups: [UserDetails, UsersInfos]

@@ -1,15 +1,15 @@
 AddProposalVoteInput:
-    type: relay-mutation-input
-    config:
-        description: "Add a vote for a proposal in a contribuable step."
-        fields:
-            proposalId:
-                type: "ID!"
-                description: "The Node ID of the proposal to vote."
-            stepId:
-                type: "ID!"
-                description: "The Node ID of the step."
-            anonymously:
-                type: "Boolean"
-                defaultValue: false
-                description: "The vote will be anonymous."
+  type: relay-mutation-input
+  config:
+    description: 'Add a vote for a proposal in a contribuable step.'
+    fields:
+      proposalId:
+        type: 'ID!'
+        description: 'The Node ID of the proposal to vote.'
+      stepId:
+        type: 'ID!'
+        description: 'The Node ID of the step.'
+      anonymously:
+        type: 'Boolean'
+        defaultValue: false
+        description: 'The vote will be anonymous.'

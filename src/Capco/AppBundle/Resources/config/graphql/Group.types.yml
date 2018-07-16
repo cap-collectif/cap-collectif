@@ -1,23 +1,23 @@
 Group:
-    type: object
-    inherits: [Node]
-    config:
-        interfaces: [Node]
-        description: "A group of User"
-        fields:
-            id:
-                description: "The id of the group."
-            title:
-                type: "String!"
-                description: "Identifies the group name."
-            description:
-                type: "String"
-                description: "Identifies the description of the group."
-            users:
-                type: "UserConnection!"
-                argsBuilder: "Relay::Connection"
-                resolve: "@=resolver('group_users_connection', [value, args])"
-            createdAt:
-                type: "DateTime!"
-            updatedAt:
-                type: "DateTime"
+  type: object
+  inherits: [Node]
+  config:
+    interfaces: [Node]
+    description: 'A group of User'
+    fields:
+      id:
+        description: 'The id of the group.'
+      title:
+        type: 'String!'
+        description: 'Identifies the group name.'
+      description:
+        type: 'String'
+        description: 'Identifies the description of the group.'
+      users:
+        type: 'UserConnection!'
+        argsBuilder: 'Relay::Connection'
+        resolve: "@=resolver('group_users_connection', [value, args])"
+      createdAt:
+        type: 'DateTime!'
+      updatedAt:
+        type: 'DateTime'

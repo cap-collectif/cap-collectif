@@ -53,9 +53,9 @@ services:
 
   capco.recaptcha.validator:
     class: Capco\AppBundle\Validator\Constraints\ReCaptchaValidator
-    arguments: ["@request_stack", '%recaptcha_private_key%', '@capco.toggle.manager']
+    arguments: ['@request_stack', '%recaptcha_private_key%', '@capco.toggle.manager']
     tags:
-        - { name: validator.constraint_validator, alias: recaptcha.validator }
+      - { name: validator.constraint_validator, alias: recaptcha.validator }
 
   capco.has_theme_if_mandatory.validator:
     class: Capco\AppBundle\Validator\Constraints\HasThemeIfMandatoryValidator
@@ -80,9 +80,13 @@ services:
       - { name: validator.constraint_validator, alias: has_valid_address.validator }
 
   capco.has_only_one_selection_step_allowing_progress_step.validator:
-    class: Capco\AppBundle\Validator\Constraints\HasOnlyOneSelectionStepAllowingProgressStepsValidator
+    class:
+      Capco\AppBundle\Validator\Constraints\HasOnlyOneSelectionStepAllowingProgressStepsValidator
     tags:
-      - { name: validator.constraint_validator, alias: has_only_one_selection_step_allowing_progress_step.validator }
+      - {
+          name: validator.constraint_validator,
+          alias: has_only_one_selection_step_allowing_progress_step.validator,
+        }
 
   capco.has_district_if_mandatory.validator:
     class: Capco\AppBundle\Validator\Constraints\HasDistrictIfMandatoryValidator
@@ -97,6 +101,6 @@ services:
 
   capco.not_throwable_email.validator:
     class: Capco\AppBundle\Validator\Constraints\NotThrowableEmailValidator
-    arguments: ["@capco.utils.throwable_email_checker"]
+    arguments: ['@capco.utils.throwable_email_checker']
     tags:
       - { name: validator.constraint_validator, alias: capco.not_throwable_email.validator }

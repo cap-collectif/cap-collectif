@@ -1,22 +1,22 @@
 services:
   capco.utils.map:
     class: Capco\AppBundle\Utils\Map
-    arguments: ["%google_maps_key_server%"]
+    arguments: ['%google_maps_key_server%']
 
   capco.utils.array_hydrator:
     class: pmill\Doctrine\Hydrator\ArrayHydrator
-    arguments: ["@doctrine.orm.default_entity_manager"]
+    arguments: ['@doctrine.orm.default_entity_manager']
 
   capco.maker_parser:
     class: Capco\AppBundle\Command\Maker\Parser
 
   capco.utils.throwable_email_checker:
     class: EmailChecker\EmailChecker
-    arguments: ["@capco.utils.throwable_email_checker.adapter"]
+    arguments: ['@capco.utils.throwable_email_checker.adapter']
 
   capco.utils.throwable_email_checker.adapter:
     class: EmailChecker\Adapter\FileAdapter
-    arguments: ["%kernel.root_dir%/config/throwable_emails.txt"]
+    arguments: ['%kernel.root_dir%/config/throwable_emails.txt']
 
   Capco\AppBundle\GraphQL\GraphQLToCsv:
     autowire: true

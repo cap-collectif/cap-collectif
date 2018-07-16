@@ -1,38 +1,38 @@
 Capco\AppBundle\Entity\Steps\OtherStep:
-    ostep1:
-        id: ostep1
-        title: Proposition
-        label: Proposition
-        isEnabled: true
-        startAt: <(new \DateTime('2015-04-25'))>
-        endAt: <(new \DateTime('2015-05-25'))>
-        body: |
-             <p> Afficher le texte pour la proposition de la synthèse</p>
-             <h3>Argumentation</h3>
-             <p><text(1000)></p>
-    ostep2:
-        id: ostep2
-        title: Mettre en place une proposition adaptée à la synthèse
-        label: Mettre en place une proposition adaptée à la synthèse
-        isEnabled: true
-        startAt: <(new \DateTime('2014-09-27'))>
-        endAt: <(new \DateTime('2014-11-20'))>
-        body: |
-              <p>Afficher le texte pour la préparation de la proposition</p>
-              <h3>Une synthèse</h3>
-              <p><text(1000)></p>
-              <h3>Une bonne synthèse argumentée</h3>
-              <p><text(500)></p>
-    ostep3:
-        id: ostep3
-        title: À venir une synthèse optimisée
-        label: À venir une synthèse optimisée
-        isEnabled: true
-        startAt: <(new \DateTime('2015-10-20'))>
-        endAt: <(new \DateTime('2015-11-20'))>
-        body: |
-            <p><text(100)></p>
-            <h2>Ma synthèse</h2>
-            <p><text(1000)></p>
-            <h3>Une bonne synthèse argumentée</h3>
-            <p><text(500)></p>
+  ostep1:
+    id: ostep1
+    title: Proposition
+    label: Proposition
+    isEnabled: true
+    startAt: <(new \DateTime('2015-04-25'))>
+    endAt: <(new \DateTime('2015-05-25'))>
+    body: |
+      <p> Afficher le texte pour la proposition de la synthèse</p>
+      <h3>Argumentation</h3>
+      <p><text(1000)></p>
+  ostep2:
+    id: ostep2
+    title: Mettre en place une proposition adaptée à la synthèse
+    label: Mettre en place une proposition adaptée à la synthèse
+    isEnabled: true
+    startAt: <(new \DateTime('2014-09-27'))>
+    endAt: <(new \DateTime('2014-11-20'))>
+    body: |
+      <p>Afficher le texte pour la préparation de la proposition</p>
+      <h3>Une synthèse</h3>
+      <p><text(1000)></p>
+      <h3>Une bonne synthèse argumentée</h3>
+      <p><text(500)></p>
+  ostep3:
+    id: ostep3
+    title: À venir une synthèse optimisée
+    label: À venir une synthèse optimisée
+    isEnabled: true
+    startAt: <(new \DateTime('2015-10-20'))>
+    endAt: <(new \DateTime('2015-11-20'))>
+    body: |
+      <p><text(100)></p>
+      <h2>Ma synthèse</h2>
+      <p><text(1000)></p>
+      <h3>Une bonne synthèse argumentée</h3>
+      <p><text(500)></p>

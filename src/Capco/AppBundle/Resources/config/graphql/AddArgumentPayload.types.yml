@@ -1,12 +1,12 @@
 AddArgumentPayload:
-    type: relay-mutation-payload
-    config:
-        fields:
-            argument:
-                type: "Argument"
-                description: "The newly created argument."
-            argumentEdge:
-                type: "ArgumentEdge"
-                description: "The edge from the argumentable's arguments connection."
-            userErrors:
-                type: "[UserError!]!"
+  type: relay-mutation-payload
+  config:
+    fields:
+      argument:
+        type: 'Argument'
+        description: 'The newly created argument.'
+      argumentEdge:
+        type: 'ArgumentEdge'
+        description: "The edge from the argumentable's arguments connection."
+      userErrors:
+        type: '[UserError!]!'

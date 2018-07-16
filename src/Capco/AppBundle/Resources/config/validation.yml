@@ -2,12 +2,18 @@ Capco\AppBundle\Entity\Argument:
   properties:
     body:
       - NotBlank: ~
-      - Length: { min: 3, max: 2000, minMessage: "argument.body.min_length", maxMessage: "argument.body.max_length" }
+      - Length:
+          {
+            min: 3,
+            max: 2000,
+            minMessage: 'argument.body.min_length',
+            maxMessage: 'argument.body.max_length',
+          }
 
 Capco\AppBundle\Entity\Comment:
   properties:
     body:
-      - NotBlank: { message: "comment.create.no_body_error" }
+      - NotBlank: { message: 'comment.create.no_body_error' }
 
 Capco\AppBundle\Entity\Event:
   properties:

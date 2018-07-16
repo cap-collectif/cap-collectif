@@ -5,7 +5,8 @@ services:
 
   capco.search.global_search:
     class: Capco\AppBundle\Search\GlobalSearch
-    arguments: ['@capco.elasticsearch.index', '@capco.elasticsearch.elastica_to_doctrine_transformer']
+    arguments:
+      ['@capco.elasticsearch.index', '@capco.elasticsearch.elastica_to_doctrine_transformer']
 
   capco.search.user_search:
     class: Capco\AppBundle\Search\UserSearch

@@ -1,58 +1,63 @@
 Comment:
-    type: object
-    inherits: [Node, Contribution]
-    config:
-        description: "A comment"
-        interfaces: [Node, Contribution]
-        fields:
-            body:
-              type: "String"
-            createdAt:
-              type: "DateTime!"
-            updatedAt:
-              type: "DateTime"
-            author:
-              type: "User"
-            parent:
-              type: "Comment"
-            pinned:
-              type: "Boolean!"
-            show_url:
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentShowUrlResolver", [value])'
-            url:
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentShowUrlResolver", [value])'
-            answers:
-              type: "[Comment]!"
-            authorName:
-              type: "String"
-            authorEmail:
-              type: "String"
-            authorIp:
-              type: "IP"
-            publicationStatus:
-              type: "CommentPublicationStatus!"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentPublicationStatusResolver", [value])'
-            reportings:
-              type: "ReportingConnection!"
-              argsBuilder: "Relay::Connection"
-              args:
-                first:
-                  type: "Int"
-                  defaultValue: 30
-                orderBy:
-                  type: "ReportingOrder"
-                  defaultValue: { field: CREATED_AT, direction: DESC }
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentReportingsResolver", [value, args])'
-            votes:
-              type: "CommentVoteConnection!"
-              argsBuilder: "Relay::Connection"
-              args:
-                first:
-                  type: "Int"
-                  defaultValue: 30
-                orderBy:
-                  type: "VoteOrder"
-                  defaultValue: { field: CREATED_AT, direction: DESC }
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentVotesResolver", [value, args])'
-            trashedReason:
-              type: "String"
+  type: object
+  inherits: [Node, Contribution]
+  config:
+    description: 'A comment'
+    interfaces: [Node, Contribution]
+    fields:
+      body:
+        type: 'String'
+      createdAt:
+        type: 'DateTime!'
+      updatedAt:
+        type: 'DateTime'
+      author:
+        type: 'User'
+      parent:
+        type: 'Comment'
+      pinned:
+        type: 'Boolean!'
+      show_url:
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentShowUrlResolver", [value])'
+      url:
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentShowUrlResolver", [value])'
+      answers:
+        type: '[Comment]!'
+      authorName:
+        type: 'String'
+      authorEmail:
+        type: 'String'
+      authorIp:
+        type: 'IP'
+      publicationStatus:
+        type: 'CommentPublicationStatus!'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentPublicationStatusResolver", [value])'
+      reportings:
+        type: 'ReportingConnection!'
+        argsBuilder: 'Relay::Connection'
+        args:
+          first:
+            type: 'Int'
+            defaultValue: 30
+          orderBy:
+            type: 'ReportingOrder'
+            defaultValue: { field: CREATED_AT, direction: DESC }
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentReportingsResolver", [value, args])'
+      votes:
+        type: 'CommentVoteConnection!'
+        argsBuilder: 'Relay::Connection'
+        args:
+          first:
+            type: 'Int'
+            defaultValue: 30
+          orderBy:
+            type: 'VoteOrder'
+            defaultValue: { field: CREATED_AT, direction: DESC }
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentVotesResolver", [value, args])'
+      trashedReason:
+        type: 'String'

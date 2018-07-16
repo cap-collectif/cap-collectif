@@ -1,14 +1,14 @@
 SelectProposalInput:
-    type: relay-mutation-input
-    config:
-        description: ""
-        fields:
-            stepId:
-                type: "String!"
-                description: "The step where the proposal is selected"
-            proposalId:
-                type: "ID!"
-                description: "The proposal ID to select."
-            statusId:
-                type: "String"
-                description: "The selection status."
+  type: relay-mutation-input
+  config:
+    description: ''
+    fields:
+      stepId:
+        type: 'String!'
+        description: 'The step where the proposal is selected'
+      proposalId:
+        type: 'ID!'
+        description: 'The proposal ID to select.'
+      statusId:
+        type: 'String'
+        description: 'The selection status.'

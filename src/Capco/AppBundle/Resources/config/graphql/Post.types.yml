@@ -1,51 +1,54 @@
 Post:
-    type: object
-    config:
-        fields:
-            id:
-              type: "String!"
-            title:
-              type: "String!"
-            relatedContent:
-              type: "[PostRelatedContent!]!"
-              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostRelatedContentResolver", [value])'
-            createdAt:
-              type: "DateTime!"
-            updatedAt:
-              type: "DateTime!"
-            publishedAt:
-              type: "DateTime"
-            authors:
-              type: "[User!]!"
-            publicationStatus:
-                type: "PostPublicationStatus!"
-                description: "The publication status for this post."
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostPublicationStatusResolver", [value])'
-            commentable:
-                type: "Boolean!"
-                resolve: "@=value.getIsCommentable()"
-            displayedOnBlog:
-                type: "Boolean!"
-            comments:
-                type: "CommentConnection!"
-                argsBuilder: "Relay::Connection"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostCommentsResolver", [value, args])'
-                args:
-                    first:
-                        type: "Int"
-                        defaultValue: 30
-                    orderBy:
-                        type: "CommentOrder"
-                        defaultValue: { field: CREATED_AT, direction: DESC }
-            abstract:
-               type: "String!"
-               resolve: "@=resolver('post_abstract', [value])"
-            url:
-               type: "URI!"
-               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostUrlResolver", [value])'
-            media:
-              type: "Media"
-            themes:
-              type: "[Theme!]!"
-            body:
-               type: "String!"
+  type: object
+  config:
+    fields:
+      id:
+        type: 'String!'
+      title:
+        type: 'String!'
+      relatedContent:
+        type: '[PostRelatedContent!]!'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostRelatedContentResolver", [value])'
+      createdAt:
+        type: 'DateTime!'
+      updatedAt:
+        type: 'DateTime!'
+      publishedAt:
+        type: 'DateTime'
+      authors:
+        type: '[User!]!'
+      publicationStatus:
+        type: 'PostPublicationStatus!'
+        description: 'The publication status for this post.'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostPublicationStatusResolver", [value])'
+      commentable:
+        type: 'Boolean!'
+        resolve: '@=value.getIsCommentable()'
+      displayedOnBlog:
+        type: 'Boolean!'
+      comments:
+        type: 'CommentConnection!'
+        argsBuilder: 'Relay::Connection'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostCommentsResolver", [value, args])'
+        args:
+          first:
+            type: 'Int'
+            defaultValue: 30
+          orderBy:
+            type: 'CommentOrder'
+            defaultValue: { field: CREATED_AT, direction: DESC }
+      abstract:
+        type: 'String!'
+        resolve: "@=resolver('post_abstract', [value])"
+      url:
+        type: 'URI!'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostUrlResolver", [value])'
+      media:
+        type: 'Media'
+      themes:
+        type: '[Theme!]!'
+      body:
+        type: 'String!'

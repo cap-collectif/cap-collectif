@@ -1,7 +1,7 @@
 services:
   capco.form.type.purified_text:
     class: Capco\AppBundle\Form\Type\PurifiedTextType
-    arguments: ["@capco.form.transformer.html_purifier"]
+    arguments: ['@capco.form.transformer.html_purifier']
     tags:
       - { name: form.type }
 
@@ -43,14 +43,17 @@ services:
 
   capco.form.type.purified_textarea:
     class: Capco\AppBundle\Form\Type\PurifiedTextareaType
-    arguments: ["@capco.form.transformer.html_purifier"]
+    arguments: ['@capco.form.transformer.html_purifier']
     tags:
       - { name: form.type }
 
   capco.help_extension:
     class: Capco\AppBundle\Form\Extension\HelpExtension
     tags:
-      - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
+      - {
+          name: form.type_extension,
+          extended_type: Symfony\Component\Form\Extension\Core\Type\FormType,
+        }
 
   capco.form.type_extension.media:
     class: Capco\AppBundle\Form\Extension\MediaTypeExtension
@@ -64,19 +67,19 @@ services:
 
   capco.form.proposal_admin:
     class: Capco\AppBundle\Form\ProposalAdminType
-    arguments: ["@capco.toggle.manager"]
+    arguments: ['@capco.toggle.manager']
     tags:
       - { name: form.type }
 
   capco.form.proposal_fusion:
     class: Capco\AppBundle\Form\ProposalFusionType
-    arguments: ["@capco.toggle.manager"]
+    arguments: ['@capco.toggle.manager']
     tags:
       - { name: form.type }
 
   capco.form.proposal:
     class: Capco\AppBundle\Form\ProposalType
-    arguments: ["@capco.toggle.manager"]
+    arguments: ['@capco.toggle.manager']
     tags:
       - { name: form.type }
 
@@ -96,16 +99,16 @@ services:
       - { name: form.type }
 
   capco.form.proposal_selection_vote:
-      class: Capco\AppBundle\Form\ProposalSelectionVoteType
-      arguments: ["@security.token_storage", "@capco.toggle.manager"]
-      tags:
-        - { name: form.type }
+    class: Capco\AppBundle\Form\ProposalSelectionVoteType
+    arguments: ['@security.token_storage', '@capco.toggle.manager']
+    tags:
+      - { name: form.type }
 
   capco.form.proposal_collect_vote:
-      class: Capco\AppBundle\Form\ProposalCollectVoteType
-      arguments: ["@security.token_storage"]
-      tags:
-        - { name: form.type }
+    class: Capco\AppBundle\Form\ProposalCollectVoteType
+    arguments: ['@security.token_storage']
+    tags:
+      - { name: form.type }
 
   capco.form.argument:
     class: Capco\AppBundle\Form\ArgumentType
@@ -113,19 +116,19 @@ services:
       - { name: form.type }
 
   capco.form.profile:
-      class: Capco\UserBundle\Form\Type\ApiProfileFormType
-      tags:
-        - { name: form.type }
+    class: Capco\UserBundle\Form\Type\ApiProfileFormType
+    tags:
+      - { name: form.type }
 
   capco.form.admin_registration:
-      class: Capco\UserBundle\Form\Type\ApiAdminRegistrationFormType
-      arguments: ["@capco.toggle.manager"]
-      tags:
-        - { name: form.type }
+    class: Capco\UserBundle\Form\Type\ApiAdminRegistrationFormType
+    arguments: ['@capco.toggle.manager']
+    tags:
+      - { name: form.type }
 
   capco.form.project_search:
     class: Capco\AppBundle\Form\ProjectSearchType
-    arguments: ["@capco.toggle.manager"]
+    arguments: ['@capco.toggle.manager']
     tags:
       - { name: form.type }
 
@@ -141,7 +144,7 @@ services:
 
   capco.form.questionnaire_abstract_question:
     class: Capco\AppBundle\Form\QuestionnaireAbstractQuestionType
-    arguments: ["@capco.utils.array_hydrator"]
+    arguments: ['@capco.utils.array_hydrator']
     tags:
       - { name: form.type }
 

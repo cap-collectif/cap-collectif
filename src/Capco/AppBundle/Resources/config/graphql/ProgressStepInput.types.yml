@@ -1,10 +1,10 @@
 ProgressStepInput:
-    type: input-object
-    config:
-        fields:
-            title:
-                type: "String!"
-            startAt:
-                type: "DateTime!"
-            endAt:
-                type: "DateTime"
+  type: input-object
+  config:
+    fields:
+      title:
+        type: 'String!'
+      startAt:
+        type: 'DateTime!'
+      endAt:
+        type: 'DateTime'

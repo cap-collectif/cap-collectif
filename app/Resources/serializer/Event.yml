@@ -1,85 +1,85 @@
 Capco\AppBundle\Entity\Event:
-    exclusion_policy: ALL
-    properties:
-        id:
-            expose: true
-            groups: [Events, Elasticsearch]
-        title:
-            expose: true
-            type: string
-            groups: [Events, Elasticsearch]
-        body:
-            expose: true
-            type: string
-            groups: [Events, Elasticsearch]
-        zipcode:
-            expose: true
-            type: string
-            groups: [Events]
-        lat:
-            expose: true
-            type: double
-            groups: [Events]
-        lng:
-            expose: true
-            type: double
-            groups: [Events]
-        address:
-            expose: true
-            type: string
-            groups: [Events]
-        city:
-            expose: true
-            type: string
-            groups: [Events]
-        country:
-            expose: true
-            type: string
-            groups: [Events]
-        link:
-            expose: true
-            type: string
-            groups: [Events]
-        author:
-            expose: true
-            type: Capco\UserBundle\Entity\User
-            serialized_name: author
-            groups: [Events, Elasticsearch]
-        commentsCount:
-            expose: true
-            type: integer
-            groups: [Events]
-        canContribute:
-            expose: true
-            type: boolean
-            groups: [Events]
-        createdAt:
-            expose: true
-            type: DateTime
-            groups: [Events, Elasticsearch]
-            serialized_name: createdAt
-        updatedAt:
-            expose: true
-            type: DateTime
-            groups: [Events]
-            serialized_name: updatedAt
-        startAt:
-            expose: true
-            type: DateTime
-            groups: [Default]
-            serialized_name: startAt
-        endAt:
-            expose: true
-            type: DateTime
-            groups: [Default]
-            serialized_name: endAt
-        media:
-            expose: true
-            groups: [Default]
-            serialized_name: media
-        comments:
-            expose: true
-            groups: [Events]
-        enabled:
-            expose: true
-            groups: [Events]
+  exclusion_policy: ALL
+  properties:
+    id:
+      expose: true
+      groups: [Events, Elasticsearch]
+    title:
+      expose: true
+      type: string
+      groups: [Events, Elasticsearch]
+    body:
+      expose: true
+      type: string
+      groups: [Events, Elasticsearch]
+    zipcode:
+      expose: true
+      type: string
+      groups: [Events]
+    lat:
+      expose: true
+      type: double
+      groups: [Events]
+    lng:
+      expose: true
+      type: double
+      groups: [Events]
+    address:
+      expose: true
+      type: string
+      groups: [Events]
+    city:
+      expose: true
+      type: string
+      groups: [Events]
+    country:
+      expose: true
+      type: string
+      groups: [Events]
+    link:
+      expose: true
+      type: string
+      groups: [Events]
+    author:
+      expose: true
+      type: Capco\UserBundle\Entity\User
+      serialized_name: author
+      groups: [Events, Elasticsearch]
+    commentsCount:
+      expose: true
+      type: integer
+      groups: [Events]
+    canContribute:
+      expose: true
+      type: boolean
+      groups: [Events]
+    createdAt:
+      expose: true
+      type: DateTime
+      groups: [Events, Elasticsearch]
+      serialized_name: createdAt
+    updatedAt:
+      expose: true
+      type: DateTime
+      groups: [Events]
+      serialized_name: updatedAt
+    startAt:
+      expose: true
+      type: DateTime
+      groups: [Default]
+      serialized_name: startAt
+    endAt:
+      expose: true
+      type: DateTime
+      groups: [Default]
+      serialized_name: endAt
+    media:
+      expose: true
+      groups: [Default]
+      serialized_name: media
+    comments:
+      expose: true
+      groups: [Events]
+    enabled:
+      expose: true
+      groups: [Events]

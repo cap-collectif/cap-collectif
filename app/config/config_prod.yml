@@ -1,46 +1,46 @@
 imports:
-    - { resource: config.yml }
+  - { resource: config.yml }
 
 framework:
-   validation:
-       cache: validator.mapping.cache.doctrine.apc
+  validation:
+    cache: validator.mapping.cache.doctrine.apc
 
 doctrine:
-    orm:
-        metadata_cache_driver: apcu
-        query_cache_driver: apcu
-        result_cache_driver: apcu
+  orm:
+    metadata_cache_driver: apcu
+    query_cache_driver: apcu
+    result_cache_driver: apcu
 
 sentry:
-    dsn: "%sentry_dsn%"
-    options:
-        environment: "%kernel.environment%"
+  dsn: '%sentry_dsn%'
+  options:
+    environment: '%kernel.environment%'
 
 monolog:
-    handlers:
-        file:
-            type: rotating_file
-            path: "%kernel.logs_dir%/prod.warning.log"
-            level: warning
-            max_files: 10
-        main:
-            type: fingers_crossed
-            handler: streamed
-            action_level: error
-            excluded_404s:
-                - ^/
-        streamed:
-            type: stream
-            path: "%kernel.logs_dir%/prod.error.log"
-            level: debug
-        console:
-            type: console
-            bubble: false
-        nested:
-            type:  stream
-            path:  "php://stderr"
-            level: warning
-        sentry:
-            level: warning
-            type: raven
-            dsn: "%sentry_dsn%"
+  handlers:
+    file:
+      type: rotating_file
+      path: '%kernel.logs_dir%/prod.warning.log'
+      level: warning
+      max_files: 10
+    main:
+      type: fingers_crossed
+      handler: streamed
+      action_level: error
+      excluded_404s:
+        - ^/
+    streamed:
+      type: stream
+      path: '%kernel.logs_dir%/prod.error.log'
+      level: debug
+    console:
+      type: console
+      bubble: false
+    nested:
+      type: stream
+      path: 'php://stderr'
+      level: warning
+    sentry:
+      level: warning
+      type: raven
+      dsn: '%sentry_dsn%'

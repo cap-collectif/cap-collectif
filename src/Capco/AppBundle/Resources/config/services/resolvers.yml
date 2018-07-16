@@ -6,12 +6,12 @@ services:
   capco.project.download.resolver:
     class: Capco\AppBundle\Resolver\ProjectDownloadResolver
     arguments:
-        - '@doctrine.orm.entity_manager'
-        - "@translator"
-        - '@capco.url.array.resolver'
-        - '@phpexcel'
-        - '@sonata.media.twig.extension'
-        - '@twig.extension.httpfoundation'
+      - '@doctrine.orm.entity_manager'
+      - '@translator'
+      - '@capco.url.array.resolver'
+      - '@phpexcel'
+      - '@sonata.media.twig.extension'
+      - '@twig.extension.httpfoundation'
 
   capco.contribution.resolver:
     class: Capco\AppBundle\Resolver\ContributionResolver
@@ -30,8 +30,8 @@ services:
     arguments: ['@capco.menu_item.repository', '@capco.toggle.manager', '@router', '@validator']
 
   capco.opinion_types.resolver:
-      class: Capco\AppBundle\Resolver\OpinionTypesResolver
-      arguments: ['@capco.opinion_type.repository', '@capco.opinion.repository', '@router']
+    class: Capco\AppBundle\Resolver\OpinionTypesResolver
+    arguments: ['@capco.opinion_type.repository', '@capco.opinion.repository', '@router']
 
   capco.section.resolver:
     class: Capco\AppBundle\Resolver\SectionResolver
@@ -66,14 +66,22 @@ services:
       - { name: twig.extension }
 
   capco.url.resolver:
-      class: Capco\AppBundle\Resolver\UrlResolver
-      arguments: ['@service_container','@router', '@capco.toggle.manager', '@capco.twig.media','%router.request_context.scheme%', '%router.request_context.host%']
-      tags:
-        - { name: overblog_graphql.resolver, alias: "media_url", method: "getMediaUrl" }
+    class: Capco\AppBundle\Resolver\UrlResolver
+    arguments:
+      [
+        '@service_container',
+        '@router',
+        '@capco.toggle.manager',
+        '@capco.twig.media',
+        '%router.request_context.scheme%',
+        '%router.request_context.host%',
+      ]
+    tags:
+      - { name: overblog_graphql.resolver, alias: 'media_url', method: 'getMediaUrl' }
 
   capco.url.array.resolver:
-      class: Capco\AppBundle\Resolver\UrlArrayResolver
-      arguments: ['@router']
+    class: Capco\AppBundle\Resolver\UrlArrayResolver
+    arguments: ['@router']
 
   capco.vote.resolver:
     class: Capco\AppBundle\Resolver\VoteResolver
@@ -81,13 +89,30 @@ services:
 
   capco.proposal_votes.resolver:
     class: Capco\AppBundle\Resolver\ProposalStepVotesResolver
-    arguments: ['@capco.proposal_selection_vote.repository', '@capco.selection_step.repository', '@capco.proposal_collect_vote.repository', '@capco.collect_step.repository', '@capco.proposal.repository']
+    arguments:
+      [
+        '@capco.proposal_selection_vote.repository',
+        '@capco.selection_step.repository',
+        '@capco.proposal_collect_vote.repository',
+        '@capco.collect_step.repository',
+        '@capco.proposal.repository',
+      ]
     tags:
       - { name: twig.extension }
 
   capco.project_stats.resolver:
     class: Capco\AppBundle\Resolver\ProjectStatsResolver
-    arguments: ['@capco.selection_step.repository', '@capco.collect_step.repository', '@capco.theme.repository', '@capco.district.repository', '@capco.proposal_category.repository', '@capco.user_type.repository', '@capco.proposal.repository', '@capco.proposal_selection_vote.repository']
+    arguments:
+      [
+        '@capco.selection_step.repository',
+        '@capco.collect_step.repository',
+        '@capco.theme.repository',
+        '@capco.district.repository',
+        '@capco.proposal_category.repository',
+        '@capco.user_type.repository',
+        '@capco.proposal.repository',
+        '@capco.proposal_selection_vote.repository',
+      ]
 
   capco.project.resolver:
     class: Capco\AppBundle\Resolver\ProjectResolver
@@ -101,7 +126,6 @@ services:
     class: Capco\AppBundle\Resolver\Project\ProjectSerializer
     arguments: ['@jms_serializer.serializer']
 
-
   capco.project.json.serializer:
     class: Capco\AppBundle\Resolver\Project\JsonProjectSerializer
     arguments: ['@capco.project.serializer']
@@ -112,8 +136,22 @@ services:
 
   capco.follower.resolver:
     class: Capco\AppBundle\Resolver\ProposalResolver
-    arguments: ['@doctrine.orm.entity_manager', '%kernel.root_dir%','@capco.resolvers.users', '@monolog.logger']
+    arguments:
+      [
+        '@doctrine.orm.entity_manager',
+        '%kernel.root_dir%',
+        '@capco.resolvers.users',
+        '@monolog.logger',
+      ]
 
   capco.following.activities.resolver:
     class: Capco\AppBundle\Following\ActivitiesResolver
-    arguments: ['@capco.follower.repository','@capco.proposal.repository' ,'@capco.proposal_form.repository','@capco.project.repository','@logger', '@router']
+    arguments:
+      [
+        '@capco.follower.repository',
+        '@capco.proposal.repository',
+        '@capco.proposal_form.repository',
+        '@capco.project.repository',
+        '@logger',
+        '@router',
+      ]

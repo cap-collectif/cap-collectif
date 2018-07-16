@@ -1,61 +1,61 @@
 UpdateProposalFormInput:
-    type: relay-mutation-input
-    config:
-        description: ""
-        fields:
-            proposalFormId:
-                type: "ID!"
-            title:
-                type: "String"
-            description:
-                type: "String"
-            summaryHelpText:
-                type: "String"
-            illustrationHelpText:
-                type: "String"
-            usingThemes:
-                type: "Boolean"
-            themeMandatory:
-                type: "Boolean"
-            themeHelpText:
-                type: "String"
-            usingDistrict:
-                type: "Boolean"
-            districtMandatory:
-                type: "Boolean"
-            commentable:
-                type: "Boolean"
-            costable:
-                type: "Boolean"
-            districtHelpText:
-                type: "String"
-            usingCategories:
-                type: "Boolean"
-            categoryMandatory:
-                type: "Boolean"
-            categoryHelpText:
-                type: "String"
-            usingAddress:
-                type: "Boolean"
-            proposalInAZoneRequired:
-                type: "Boolean"
-            titleHelpText:
-                type: "String"
-            descriptionHelpText:
-                type: "String"
-            addressHelpText:
-                type: "String"
-            latMap:
-                type: "Float"
-            lngMap:
-                type: "Float"
-            zoomMap:
-                type: "Int"
-            categories:
-                type: "[ProposalCategoryInput!]"
-            districts:
-                type: "[DistrictInput!]"
-            questions:
-                type: "[QuestionnaireAbstractQuestionInput!]"
-            allowAknowledge:
-                type: "Boolean"
+  type: relay-mutation-input
+  config:
+    description: ''
+    fields:
+      proposalFormId:
+        type: 'ID!'
+      title:
+        type: 'String'
+      description:
+        type: 'String'
+      summaryHelpText:
+        type: 'String'
+      illustrationHelpText:
+        type: 'String'
+      usingThemes:
+        type: 'Boolean'
+      themeMandatory:
+        type: 'Boolean'
+      themeHelpText:
+        type: 'String'
+      usingDistrict:
+        type: 'Boolean'
+      districtMandatory:
+        type: 'Boolean'
+      commentable:
+        type: 'Boolean'
+      costable:
+        type: 'Boolean'
+      districtHelpText:
+        type: 'String'
+      usingCategories:
+        type: 'Boolean'
+      categoryMandatory:
+        type: 'Boolean'
+      categoryHelpText:
+        type: 'String'
+      usingAddress:
+        type: 'Boolean'
+      proposalInAZoneRequired:
+        type: 'Boolean'
+      titleHelpText:
+        type: 'String'
+      descriptionHelpText:
+        type: 'String'
+      addressHelpText:
+        type: 'String'
+      latMap:
+        type: 'Float'
+      lngMap:
+        type: 'Float'
+      zoomMap:
+        type: 'Int'
+      categories:
+        type: '[ProposalCategoryInput!]'
+      districts:
+        type: '[DistrictInput!]'
+      questions:
+        type: '[QuestionnaireAbstractQuestionInput!]'
+      allowAknowledge:
+        type: 'Boolean'

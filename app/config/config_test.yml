@@ -1,5 +1,5 @@
 imports:
-    - { resource: config_dev.yml }
+  - { resource: config_dev.yml }
 
 framework:
   test: ~
@@ -9,38 +9,38 @@ framework:
     enabled: true
 
 translation:
-    symfony_profiler:
-        enabled: false
+  symfony_profiler:
+    enabled: false
 
 qandidate_toggle:
-    redis_namespace: feature_toggle_test
+  redis_namespace: feature_toggle_test
 
 web_profiler:
   toolbar: false
   intercept_redirects: false
 
 services:
-    # We disable captcha validation
-    capco.recaptcha.validator:
-          class: Capco\AppBundle\Validator\Constraints\ReCaptchaValidator
-          arguments: ["@request_stack", '%recaptcha_private_key%', '@capco.toggle.manager', false]
-          tags:
-              - { name: validator.constraint_validator, alias: recaptcha.validator }
-    # We disable translation
-    no_translator:
-        class: Capco\AppBundle\Translator\NoTranslator
-        decorates: translator
-        arguments:
-            - '@no_translator.inner'
-        public: true
+  # We disable captcha validation
+  capco.recaptcha.validator:
+    class: Capco\AppBundle\Validator\Constraints\ReCaptchaValidator
+    arguments: ['@request_stack', '%recaptcha_private_key%', '@capco.toggle.manager', false]
+    tags:
+      - { name: validator.constraint_validator, alias: recaptcha.validator }
+  # We disable translation
+  no_translator:
+    class: Capco\AppBundle\Translator\NoTranslator
+    decorates: translator
+    arguments:
+      - '@no_translator.inner'
+    public: true
 
 monolog:
-    handlers:
-        main:
-            type:   stream
-            path:   php://stderr
-            level:  warning
-        file:
-            type: stream
-            path: "%kernel.logs_dir%/test.log"
-            level: debug
+  handlers:
+    main:
+      type: stream
+      path: php://stderr
+      level: warning
+    file:
+      type: stream
+      path: '%kernel.logs_dir%/test.log'
+      level: debug

@@ -1,11 +1,11 @@
 ChangeSelectionStatusInput:
-    type: relay-mutation-input
-    config:
-        description: ""
-        fields:
-            stepId:
-                type: "ID!"
-            proposalId:
-                type: "ID!"
-            statusId:
-                type: "ID"
+  type: relay-mutation-input
+  config:
+    description: ''
+    fields:
+      stepId:
+        type: 'ID!'
+      proposalId:
+        type: 'ID!'
+      statusId:
+        type: 'ID'

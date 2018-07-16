@@ -1,145 +1,145 @@
 liip_imagine:
-    resolvers:
-       default:
-          web_path: ~
-    loaders:
-        default:
-            filesystem:
-                data_root:  "%kernel.root_dir%/../web/media"
-    driver: imagick
-    filter_sets:
-        cache : ~
-        admin:
-            quality: 100
-            filters:
-                thumbnail: { size: [100, 100], mode: outbound }
+  resolvers:
+    default:
+      web_path: ~
+  loaders:
+    default:
+      filesystem:
+        data_root: '%kernel.root_dir%/../web/media'
+  driver: imagick
+  filter_sets:
+    cache: ~
+    admin:
+      quality: 100
+      filters:
+        thumbnail: { size: [100, 100], mode: outbound }
 
-        default_avatar:
-            quality: 70
-            filters:
-                thumbnail: { size: [45, 45], mode: outbound }
+    default_avatar:
+      quality: 70
+      filters:
+        thumbnail: { size: [45, 45], mode: outbound }
 
-        default_avatar_source:
-            quality: 70
-            filters:
-                thumbnail: { size: [32, 32], mode: outbound }
+    default_avatar_source:
+      quality: 70
+      filters:
+        thumbnail: { size: [32, 32], mode: outbound }
 
-        default_big:
-            quality: 75
-            filters:
-                thumbnail: { size: [500, 70], mode: outbound }
+    default_big:
+      quality: 75
+      filters:
+        thumbnail: { size: [500, 70], mode: outbound }
 
-        default_blockHeader:
-            quality: 100
-            filters:
-                thumbnail: { size: [750, 500], mode: outbound }
+    default_blockHeader:
+      quality: 100
+      filters:
+        thumbnail: { size: [750, 500], mode: outbound }
 
-        default_project:
-            quality: 100
-            filters:
-                thumbnail: { size: [360, 240], mode: outbound }
-                crop: { start: [0, 0], size: [360, 240] }
+    default_project:
+      quality: 100
+      filters:
+        thumbnail: { size: [360, 240], mode: outbound }
+        crop: { start: [0, 0], size: [360, 240] }
 
-        default_post:
-            quality: 80
-            format: png
-            filters:
-                thumbnail: { size: [225, 150], mode: inbound }
+    default_post:
+      quality: 80
+      format: png
+      filters:
+        thumbnail: { size: [225, 150], mode: inbound }
 
-        default_form:
-            quality: 70
-            filters:
-                relative_resize: {heighten: 150 }
+    default_form:
+      quality: 70
+      filters:
+        relative_resize: { heighten: 150 }
 
-        default_idea:
-            quality: 70
-            filters:
-                relative_resize: { heighten: 400 }
+    default_idea:
+      quality: 70
+      filters:
+        relative_resize: { heighten: 400 }
 
-        default_proposal:
-            quality: 70
-            filters:
-                relative_resize: { heighten: 400 }
+    default_proposal:
+      quality: 70
+      filters:
+        relative_resize: { heighten: 400 }
 
-        default_response:
-             quality: 70
-             filters:
-                relative_resize: { heighten: 400 }
+    default_response:
+      quality: 70
+      filters:
+        relative_resize: { heighten: 400 }
 
-        default_logo:
-            quality: 70
-            filters:
-                relative_resize: {heighten: 50 }
+    default_logo:
+      quality: 70
+      filters:
+        relative_resize: { heighten: 50 }
 
-        default_profile:
-            quality: 100
-            filters:
-                upscale: { min: [200, 200] }
-                thumbnail: { size: [200, 200], mode: outbound }
+    default_profile:
+      quality: 100
+      filters:
+        upscale: { min: [200, 200] }
+        thumbnail: { size: [200, 200], mode: outbound }
 
-        default_small:
-            quality: 75
-            filters:
-                thumbnail: { size: [100, 70], mode: outbound }
+    default_small:
+      quality: 75
+      filters:
+        thumbnail: { size: [100, 70], mode: outbound }
 
-        default_socialIcon:
-            quality: 70
-            filters:
-                thumbnail: { size: [50, 50], mode: inbound }
+    default_socialIcon:
+      quality: 70
+      filters:
+        thumbnail: { size: [50, 50], mode: inbound }
 
-        default_header:
-            quality: 70
-            filters:
-                relative_resize: { widen: 1280 }
+    default_header:
+      quality: 70
+      filters:
+        relative_resize: { widen: 1280 }
 
-        default_header_xs:
-            quality: 70
-            filters:
-                relative_resize: { widen: 640 }
+    default_header_xs:
+      quality: 70
+      filters:
+        relative_resize: { widen: 640 }
 
-        default_shield:
-            quality: 70
+    default_shield:
+      quality: 70
 
-        default_header_sm:
-            quality: 70
-            filters:
-                relative_resize: { widen: 800 }
+    default_header_sm:
+      quality: 70
+      filters:
+        relative_resize: { widen: 800 }
 
-        default_header_md:
-            quality: 70
-            filters:
-                relative_resize: { widen: 1024 }
+    default_header_md:
+      quality: 70
+      filters:
+        relative_resize: { widen: 1024 }
 
-        default_header_picto:
-            quality: 70
-            filters:
-                relative_resize: { heighten: 100 }
+    default_header_picto:
+      quality: 70
+      filters:
+        relative_resize: { heighten: 100 }
 
-        default_form_radio:
-            quality: 70
-            filters:
-                thumbnail: { size: [847, 847], mode: outbound, allow_upscale: false }
+    default_form_radio:
+      quality: 70
+      filters:
+        thumbnail: { size: [847, 847], mode: outbound, allow_upscale: false }
 
-        default_img_video:
-            quality: 70
-            filters:
-                relative_resize: {widen: 320 }
+    default_img_video:
+      quality: 70
+      filters:
+        relative_resize: { widen: 320 }
 
-        default_homepageVideo:
-            quality: 100
-            filters:
-                thumbnail: { size: [360, 240], mode: outbound }
-                crop: { start: [0, 0], size: [360, 240] }
+    default_homepageVideo:
+      quality: 100
+      filters:
+        thumbnail: { size: [360, 240], mode: outbound }
+        crop: { start: [0, 0], size: [360, 240] }
 
-        default_theme:
-            quality: 100
-            filters:
-                thumbnail: { size: [360, 240], mode: outbound }
-                crop: { start: [0, 0], size: [360, 240] }
+    default_theme:
+      quality: 100
+      filters:
+        thumbnail: { size: [360, 240], mode: outbound }
+        crop: { start: [0, 0], size: [360, 240] }
 
-        default_slider:
-            quality: 70
-            filters:
-                upscale: { min: [800, 500] }
-                thumbnail: { size: [800, 500], mode: outbound }
-                crop: { start: [0, 0], size: [800, 500] }
+    default_slider:
+      quality: 70
+      filters:
+        upscale: { min: [800, 500] }
+        thumbnail: { size: [800, 500], mode: outbound }
+        crop: { start: [0, 0], size: [800, 500] }

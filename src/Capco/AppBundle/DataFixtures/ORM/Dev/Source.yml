@@ -1,5 +1,4 @@
 Capco\AppBundle\Entity\Source:
-
   ## Sources on opinions
   source1:
     id: 'source1'

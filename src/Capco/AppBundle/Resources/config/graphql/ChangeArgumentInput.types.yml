@@ -1,11 +1,11 @@
 ChangeArgumentInput:
-    type: relay-mutation-input
-    config:
-        description: ""
-        fields:
-            argumentId:
-                type: "ID!"
-                description: "The argument Node id."
-            body:
-                type: "String!"
-                description: "The contents of the argument body."
+  type: relay-mutation-input
+  config:
+    description: ''
+    fields:
+      argumentId:
+        type: 'ID!'
+        description: 'The argument Node id.'
+      body:
+        type: 'String!'
+        description: 'The contents of the argument body.'

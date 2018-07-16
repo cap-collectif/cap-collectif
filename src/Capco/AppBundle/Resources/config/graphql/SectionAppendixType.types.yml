@@ -1,13 +1,13 @@
 SectionAppendixType:
-    type: object
-    config:
-        description: "A section"
-        fields:
-            id:
-                type: "String"
-                resolve: "@=resolver('sectionappendixtype_id', [value])"
-            position:
-                type: "Int!"
-            title:
-                type: "String"
-                resolve: "@=resolver('sectionappendixtype_title', [value])"
+  type: object
+  config:
+    description: 'A section'
+    fields:
+      id:
+        type: 'String'
+        resolve: "@=resolver('sectionappendixtype_id', [value])"
+      position:
+        type: 'Int!'
+      title:
+        type: 'String'
+        resolve: "@=resolver('sectionappendixtype_title', [value])"
