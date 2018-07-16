@@ -12,39 +12,49 @@ exports[`<ProjectRow /> should render close collapse 1`] = `
   unmountOnExit={false}
 >
   <Uncontrolled(Panel)
-    className="panel-custom"
+    className="capco-panel-list"
   >
     <PanelHeading
       bsClass="panel"
       componentClass="div"
     >
-      <h3>
-        <a
-          href="http://perdu.com"
-          id="profile-project-link-project1"
-          title="Perdu sur internet ?"
-        >
-          Perdu sur internet ?
-        </a>
-      </h3>
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="default"
-        disabled={false}
-        id="profile-project-unfollow-button-project1"
-        onClick={[Function]}
+      <div
+        id="all-proposals"
       >
-        <FormattedMessage
-          id="unfollow-this-project"
-          values={Object {}}
-        />
-      </Button>
+        <h3>
+          <a
+            className="profile__project__open__link"
+            href="http://perdu.com"
+            id="profile-project-link-project1"
+            title="Perdu sur internet ?"
+          >
+            Perdu sur internet ?
+          </a>
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="default"
+            className="profile__project__unfollow__button"
+            disabled={false}
+            id="profile-project-unfollow-button-project1"
+            onClick={[Function]}
+            style={
+              Object {
+                "float": "right",
+              }
+            }
+          >
+            <FormattedMessage
+              id="unfollow-this-project"
+              values={Object {}}
+            />
+          </Button>
+        </h3>
+      </div>
     </PanelHeading>
     <ListGroup
       bsClass="list-group"
-      className="list-group-custom"
     />
   </Uncontrolled(Panel)>
 </Collapse>
@@ -62,39 +72,49 @@ exports[`<ProjectRow /> should render the project 1 with his proposal displayed 
   unmountOnExit={false}
 >
   <Uncontrolled(Panel)
-    className="panel-custom"
+    className="capco-panel-list"
   >
     <PanelHeading
       bsClass="panel"
       componentClass="div"
     >
-      <h3>
-        <a
-          href="http://perdu.com"
-          id="profile-project-link-project1"
-          title="Perdu sur internet ?"
-        >
-          Perdu sur internet ?
-        </a>
-      </h3>
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="default"
-        disabled={false}
-        id="profile-project-unfollow-button-project1"
-        onClick={[Function]}
+      <div
+        id="all-proposals"
       >
-        <FormattedMessage
-          id="unfollow-this-project"
-          values={Object {}}
-        />
-      </Button>
+        <h3>
+          <a
+            className="profile__project__open__link"
+            href="http://perdu.com"
+            id="profile-project-link-project1"
+            title="Perdu sur internet ?"
+          >
+            Perdu sur internet ?
+          </a>
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="default"
+            className="profile__project__unfollow__button"
+            disabled={false}
+            id="profile-project-unfollow-button-project1"
+            onClick={[Function]}
+            style={
+              Object {
+                "float": "right",
+              }
+            }
+          >
+            <FormattedMessage
+              id="unfollow-this-project"
+              values={Object {}}
+            />
+          </Button>
+        </h3>
+      </div>
     </PanelHeading>
     <ListGroup
       bsClass="list-group"
-      className="list-group-custom"
     >
       <ProposalRow
         key="0"
@@ -139,39 +159,49 @@ exports[`<ProjectRow /> should render the project 2 with his proposal displayed 
   unmountOnExit={false}
 >
   <Uncontrolled(Panel)
-    className="panel-custom"
+    className="capco-panel-list"
   >
     <PanelHeading
       bsClass="panel"
       componentClass="div"
     >
-      <h3>
-        <a
-          href="http://theuselessweb.com"
-          id="profile-project-link-project2"
-          title="Se perdre sur internet"
-        >
-          Se perdre sur internet
-        </a>
-      </h3>
-      <Button
-        active={false}
-        block={false}
-        bsClass="btn"
-        bsStyle="default"
-        disabled={false}
-        id="profile-project-unfollow-button-project2"
-        onClick={[Function]}
+      <div
+        id="all-proposals"
       >
-        <FormattedMessage
-          id="unfollow-this-project"
-          values={Object {}}
-        />
-      </Button>
+        <h3>
+          <a
+            className="profile__project__open__link"
+            href="http://theuselessweb.com"
+            id="profile-project-link-project2"
+            title="Se perdre sur internet"
+          >
+            Se perdre sur internet
+          </a>
+          <Button
+            active={false}
+            block={false}
+            bsClass="btn"
+            bsStyle="default"
+            className="profile__project__unfollow__button"
+            disabled={false}
+            id="profile-project-unfollow-button-project2"
+            onClick={[Function]}
+            style={
+              Object {
+                "float": "right",
+              }
+            }
+          >
+            <FormattedMessage
+              id="unfollow-this-project"
+              values={Object {}}
+            />
+          </Button>
+        </h3>
+      </div>
     </PanelHeading>
     <ListGroup
       bsClass="list-group"
-      className="list-group-custom"
     >
       <ProposalRow
         key="0"

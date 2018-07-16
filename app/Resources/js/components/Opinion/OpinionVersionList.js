@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import {ListGroup} from "react-bootstrap";
 import { FormattedMessage } from 'react-intl';
 import OpinionVersion from './OpinionVersion';
 
@@ -23,7 +22,7 @@ class OpinionVersionList extends React.Component<Props> {
     }
 
     return (
-      <ListGroup className="list-group-custom mt-10">
+      <ul className="media-list" style={{ marginTop: '20px' }}>
         {versions.map(version => {
           return (
             <OpinionVersion
@@ -33,7 +32,7 @@ class OpinionVersionList extends React.Component<Props> {
             />
           );
         })}
-      </ListGroup>
+      </ul>
     );
   }
 }

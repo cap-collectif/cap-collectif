@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import { ListGroupItem } from 'react-bootstrap';
 import OpinionPreviewTitle from '../Opinion/OpinionPreviewTitle';
 import OpinionInfos from '../Opinion/OpinionInfos';
 import UserAvatar from '../User/UserAvatar';
@@ -18,25 +17,30 @@ export class Opinion extends React.Component<Props> {
     const { opinion } = this.props;
     const author = opinion.author;
     return (
-      <ListGroupItem
-        className={`list-group-item__opinion has-chart${author && author.vip ? ' bg-vip' : ''}`}>
-        <div className="left-block">
-          <UserAvatar user={author} />
-          <div>
-            <OpinionInfos rankingThreshold={0} opinion={opinion} />
-            <OpinionPreviewTitle showTypeLabel={false} link opinion={opinion} />
-            <OpinionPreviewCounters opinion={opinion} />
+      <li className={`opinion has-chart${author && author.vip ? ' bg-vip' : ''}`}>
+        <div className="row">
+          <div className="col-xs-12  col-sm-8  col-md-9  col-lg-10">
+            <div className="opinion__body box excerpt" style={{ textAlign: 'left' }}>
+              <UserAvatar user={author} className="pull-left" />
+              <div className="opinion__data">
+                <OpinionInfos rankingThreshold={0} opinion={opinion} />
+                <OpinionPreviewTitle showTypeLabel={false} link opinion={opinion} />
+                <OpinionPreviewCounters opinion={opinion} />
+              </div>
+            </div>
+          </div>
+          <div className="hidden-xs col-sm-4 col-md-3 col-lg-2">
+            <VotePiechart
+              top={10}
+              height={'90px'}
+              width={'145px'}
+              ok={opinion.votesCountOk}
+              nok={opinion.votesCountNok}
+              mitige={opinion.votesCountMitige}
+            />
           </div>
         </div>
-        <VotePiechart
-          top={10}
-          height={'90px'}
-          width={'145px'}
-          ok={opinion.votesCountOk}
-          nok={opinion.votesCountNok}
-          mitige={opinion.votesCountMitige}
-        />
-      </ListGroupItem>
+      </li>
     );
   }
 }

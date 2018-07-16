@@ -19,10 +19,10 @@ type Props = {
   defaultAvatar: ?string,
   style?: any,
   anchor?: boolean,
-  onBlur?: Function,
-  onFocus?: Function,
-  onMouseOver?: Function,
-  onMouseOut?: Function,
+  onBlur?: () => {},
+  onFocus?: () => {},
+  onMouseOver?: () => {},
+  onMouseOut?: () => {},
 };
 
 export class UserAvatar extends React.Component<Props> {
@@ -47,7 +47,7 @@ export class UserAvatar extends React.Component<Props> {
         <img
           src={user.media.url}
           alt={user.username}
-          className="img-circle mr-10 object-cover"
+          className="img-circle mr-10"
           style={{ width: mediaSize, height: mediaSize }}
         />
       );
@@ -58,7 +58,7 @@ export class UserAvatar extends React.Component<Props> {
         <img
           src={defaultAvatar}
           alt={user.username}
-          className="img-circle mr-10 object-cover"
+          className="img-circle mr-10"
           style={{ width: mediaSize, height: mediaSize }}
         />
       );

@@ -2,6 +2,13 @@
    $Opinion
 ================================================================*/
 .opinion {
+
+    font-size: 15px;
+
+    &:hover {
+        //background-color: $page-bgc;
+    }
+
     .ranking__nb {
         font-size: 25px;
         padding-left: 15px;
@@ -154,18 +161,16 @@
 
         .btn,
         .opinion__votes-nb {
-            margin-top: 11px;
+            margin-top: 10px;
         }
 
         .opinion__votes-nb {
             display: inline-block;
             vertical-align: middle;
-            padding: 1px 6px;
-            border: 1px solid $dark-gray;
+            padding: 5px 6px;
+            border: 1px solid $border-color;
             font-size: 12px;
             line-height: 1.5;
-            border-radius: 3px;
-            margin-right: 4px;
         }
     }
 

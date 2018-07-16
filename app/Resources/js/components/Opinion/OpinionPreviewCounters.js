@@ -3,7 +3,6 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { COMMENT_SYSTEM_NONE } from '../../constants/ArgumentConstants';
 import { VOTE_WIDGET_DISABLED } from '../../constants/VoteConstants';
-import InlineList from "../Ui/List/InlineList";
 
 type Props = {
   opinion: Object,
@@ -66,15 +65,19 @@ class OpinionPreviewCounters extends React.Component<Props> {
       );
     }
     return (
-      <InlineList>
+      <p className="opinion__votes excerpt small">
         {counters.map((counter, index) => {
+          if (index < counters.length - 1) {
             return (
-              <li key={index}>
+              <span key={index}>
                 {counter}
-              </li>
-            )
+                <span> • </span>
+              </span>
+            );
+          }
+          return <span key={index}>{counter}</span>;
         })}
-      </InlineList>
+      </p>
     );
   }
 }

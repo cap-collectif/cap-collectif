@@ -24,7 +24,7 @@ export default class OpinionPreviewTitle extends React.Component<Props> {
       url = opinion._links ? opinion._links.show : opinion.url;
     }
     return (
-      <h3 className="title">
+      <h3 className="opinion__title">
         {showTypeLabel ? <OpinionTypeLabel type={this.getType()} /> : null}
         {showTypeLabel ? ' ' : null}
         {link ? <a href={url}>{opinion.title}</a> : opinion.title}

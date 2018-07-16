@@ -2,7 +2,6 @@
 import React from 'react';
 import { QueryRenderer, graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage, injectIntl } from 'react-intl';
-import {ListGroup, Panel} from "react-bootstrap";
 import Opinion from './Opinion';
 import NewOpinionButton from '../Opinion/NewOpinionButton';
 import environment, { graphqlError } from '../../createRelayEnvironment';
@@ -22,12 +21,12 @@ const renderOpinionList = ({
   }
   if (props) {
     return (
-      <React.Fragment>
+      <div>
         {// eslint-disable-next-line react/prop-types
         props.contributionsBySection.map((opinion, index) => (
           <Opinion key={index} opinion={opinion} />
         ))}
-      </React.Fragment>
+      </div>
     );
   }
   return <Loader />;
@@ -43,19 +42,20 @@ export class OpinionList extends React.Component<Props> {
   render() {
     const { section, consultation, intl } = this.props;
     return (
-      <div id={`opinions--test17${section.slug}`} className="anchor-offset">
-        <Panel className={`opinion panel--${section.color} panel--default panel-custom`}>
-          <Panel.Heading>
-            <p>
+      <div id={`opinions--test17${section.slug}`} className="anchor-offset block  block--bordered">
+        <div className={`opinion  opinion--${section.color} opinion--default`}>
+          <div className="opinion__header  opinion__header--mobile-centered">
+            <div className="pull-left opinion__header__title">
               <FormattedMessage
                 id="global.opinionsCount"
                 values={{ num: section.contributionsCount }}
               />
-            </p>
-            <div className="panel-heading__actions">
+            </div>
+            <div className="pull-right  opinion__header__filter">
               {section.contributionsCount > 1 && (
                 <select
                   className="form-control"
+                  style={{ marginRight: section.contribuable ? 15 : 0 }}
                   aria-label={intl.formatMessage({ id: 'global.filter' })}
                   onChange={(event: SyntheticInputEvent<>) => {
                     if (section.url) {
@@ -95,28 +95,27 @@ export class OpinionList extends React.Component<Props> {
                 />
               )}
             </div>
-          </Panel.Heading>
-          {section.contributionsCount > 0 && (
-            <ListGroup className="list-group-custom">
-              <QueryRenderer
-                environment={environment}
-                query={graphql`
+          </div>
+        </div>
+        {section.contributionsCount > 0 && (
+          <ul className="media-list  opinion__list">
+            <QueryRenderer
+              environment={environment}
+              query={graphql`
                 query OpinionListQuery($sectionId: ID!, $limit: Int!) {
                   contributionsBySection(sectionId: $sectionId, limit: $limit) {
                     ...Opinion_opinion
                   }
                 }
               `}
-                variables={{
-                  sectionId: section.id,
-                  limit: consultation.opinionCountShownBySection,
-                }}
-                render={renderOpinionList}
-              />
-            </ListGroup>
-          )}
-        </Panel>
-
+              variables={{
+                sectionId: section.id,
+                limit: consultation.opinionCountShownBySection,
+              }}
+              render={renderOpinionList}
+            />
+          </ul>
+        )}
         {section.contributionsCount > consultation.opinionCountShownBySection && (
           <div className="opinion  opinion__footer  box">
             <a href={section.url} className="text-center" style={{ display: 'block' }}>

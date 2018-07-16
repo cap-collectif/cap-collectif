@@ -2,7 +2,6 @@
 import React from 'react';
 import { connect, type MapStateToProps } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import {ListGroup, ListGroupItem} from "react-bootstrap";
 import OpinionPreview from './OpinionPreview';
 import OpinionAnswer from './OpinionAnswer';
 import OpinionButtons from './OpinionButtons';
@@ -68,18 +67,12 @@ export class OpinionBox extends React.Component<Props> {
               </p>
             </h2>
           </div>
-          <ListGroup className="list-group-custom mb-0">
-            <ListGroupItem className="list-group-item__opinion no-border">
-              <div className="left-block">
-                <OpinionPreview
-                  rankingThreshold={rankingThreshold}
-                  opinionTerm={opinionTerm}
-                  opinion={opinion}
-                  link={false}
-                />
-              </div>
-            </ListGroupItem>
-          </ListGroup>
+          <OpinionPreview
+            rankingThreshold={rankingThreshold}
+            opinionTerm={opinionTerm}
+            opinion={opinion}
+            link={false}
+          />
         </div>
         <OpinionAppendices opinion={opinion} />
         <div className="opinion__description">

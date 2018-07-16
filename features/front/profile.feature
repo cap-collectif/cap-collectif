@@ -93,7 +93,7 @@ Scenario: Logged in user wants to manage his followings and unfollow the first p
   And I visited "manage followings page"
   And I wait 2 seconds
   Then I click the "#profile-proposal-unfollow-button-proposal1" element
-  And the "span#collapse-proposal-proposal1" element should not contain "class=\"collapse in\""
+  And the "div#collapse-proposal-proposal1" element should not contain "class=\"collapse in\""
   And I wait 2 seconds
   And I reload the page
   Then I should not see an "#profile-proposal-unfollow-button-proposal1" element

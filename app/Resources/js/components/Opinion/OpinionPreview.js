@@ -23,14 +23,14 @@ class OpinionPreview extends React.Component<Props> {
     const opinion = this.props.opinion;
 
     return (
-      <React.Fragment>
-        <UserAvatar user={opinion.author} />
-        <div>
+      <div className="opinion__body box">
+        <UserAvatar user={opinion.author} className="pull-left" />
+        <div className="opinion__data">
           <OpinionInfos rankingThreshold={rankingThreshold} opinion={opinion} />
           <OpinionPreviewTitle {...this.props} />
           <OpinionPreviewCounters {...this.props} />
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 }

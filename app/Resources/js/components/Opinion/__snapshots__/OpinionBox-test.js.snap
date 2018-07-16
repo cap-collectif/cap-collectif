@@ -53,37 +53,22 @@ exports[`<OpinionBox /> should render correctly 1`] = `
         </p>
       </h2>
     </div>
-    <ListGroup
-      bsClass="list-group"
-      className="list-group-custom mb-0"
-    >
-      <ListGroupItem
-        bsClass="list-group-item"
-        className="list-group-item__opinion no-border"
-        listItem={false}
-      >
-        <div
-          className="left-block"
-        >
-          <OpinionPreview
-            link={false}
-            opinion={
-              Object {
-                "answer": Object {},
-                "title": "title",
-                "type": Object {
-                  "color": "info",
-                  "title": "opinionType",
-                },
-              }
-            }
-            opinionTerm={0}
-            rankingThreshold={0}
-            showTypeLabel={false}
-          />
-        </div>
-      </ListGroupItem>
-    </ListGroup>
+    <OpinionPreview
+      link={false}
+      opinion={
+        Object {
+          "answer": Object {},
+          "title": "title",
+          "type": Object {
+            "color": "info",
+            "title": "opinionType",
+          },
+        }
+      }
+      opinionTerm={0}
+      rankingThreshold={0}
+      showTypeLabel={false}
+    />
   </div>
   <OpinionAppendices
     opinion={

@@ -24,7 +24,6 @@ class OpinionInfos extends React.Component<Props> {
     }
     return (
       <span className="excerpt">
-        {' • '}
         <FormattedDate
           value={moment(opinion.createdAt).toDate()}
           day="numeric"
@@ -66,10 +65,10 @@ class OpinionInfos extends React.Component<Props> {
   renderAuthorName = () => {
     const { opinion } = this.props;
     if (opinion.author) {
-      return <UserLink user={opinion.author} className="author-name" />;
+      return <UserLink user={opinion.author} />;
     }
 
-    return <span className="author-name">{opinion.authorName}</span>;
+    return <span>{opinion.authorName}</span>;
   };
 
   renderRankingLabel = () => {
@@ -81,7 +80,7 @@ class OpinionInfos extends React.Component<Props> {
       opinion.ranking <= rankingThreshold
     ) {
       return (
-        <span className="text-label text-label--green ml-10">
+        <span className="opinion__label opinion__label--green">
           <i className="cap cap-trophy" />
           {this.isVersion() ? (
             <FormattedMessage
@@ -114,8 +113,9 @@ class OpinionInfos extends React.Component<Props> {
 
   render() {
     return (
-      <p>
+      <p className="opinion__user">
         {this.renderAuthorName()}
+        {' • '}
         {this.renderDate()}
         {this.renderEditionDate()}
         <PinnedLabel show={this.props.opinion.pinned || false} type="opinion" />
