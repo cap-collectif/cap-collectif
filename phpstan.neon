@@ -27,5 +27,5 @@ parameters:
         - %currentWorkingDirectory%/src/Capco/AppBundle/Command/Paris/*
         - %currentWorkingDirectory%/src/Capco/AppBundle/Notifier/ContributionNotifier
         - %currentWorkingDirectory%/src/Capco/AppBundle/Mailer/Message/Contribution/ContributionModerationMessage
-        - %currentWorkingDirectory%/src/Overblog/*
+        - %currentWorkingDirectory%/src/Capco/AppBundle/GraphQL/__generated__/*
         - %currentWorkingDirectory%/spec/*
