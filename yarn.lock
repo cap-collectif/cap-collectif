@@ -417,6 +417,10 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
+ansi-color@~0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/ansi-color/-/ansi-color-0.2.1.tgz#3e75c037475217544ed763a8db5709fa9ae5bf9a"
+
 ansi-escapes@^1.0.0, ansi-escapes@^1.1.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/ansi-escapes/-/ansi-escapes-1.4.0.tgz#d3a8a83b319aa67793662b13e761c7911422306e"
@@ -2744,6 +2748,14 @@ copy-descriptor@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/copy-descriptor/-/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
 
+copycat-brunch@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/copycat-brunch/-/copycat-brunch-1.1.0.tgz#10e17b85909e0e129981dfb9030b9866483d66bd"
+  dependencies:
+    loggy "~0.2.2"
+    mkdirp "^0.5.1"
+    quickly-copy-file "^0.1.0"
+
 core-js@^1.0.0:
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
@@ -3072,6 +3084,10 @@ date-fns@^1.27.2:
 date-now@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
+
+date-utils@~1.2.17:
+  version "1.2.21"
+  resolved "https://registry.yarnpkg.com/date-utils/-/date-utils-1.2.21.tgz#61fb16cdc1274b3c9acaaffe9fc69df8720a2b64"
 
 debug@2.6.9, debug@^2.1.1, debug@^2.1.2, debug@^2.2, debug@^2.2.0, debug@^2.3.3, debug@^2.6.0, debug@^2.6.6, debug@^2.6.8, debug@^2.6.9:
   version "2.6.9"
@@ -6476,6 +6492,14 @@ loggy@^1, loggy@~1.0.1, loggy@~1.0.2:
     chalk "^1.1.1"
     native-notifier "~0.1.0"
 
+loggy@~0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/loggy/-/loggy-0.2.2.tgz#7edc85706a82d761ce9cef868f1afbad84165427"
+  dependencies:
+    ansi-color "~0.2.1"
+    date-utils "~1.2.17"
+    growl "~1.8.1"
+
 loggy@~0.3.0:
   version "0.3.5"
   resolved "https://registry.yarnpkg.com/loggy/-/loggy-0.3.5.tgz#33f12801b1f6063966ea79d9b6a25db8fcbc4107"
@@ -8232,6 +8256,12 @@ querystring@0.2.0, querystring@^0.2.0:
 querystringify@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.0.0.tgz#fa3ed6e68eb15159457c89b37bc6472833195755"
+
+quickly-copy-file@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/quickly-copy-file/-/quickly-copy-file-0.1.0.tgz#d14063ff659f68697e7cbfee817a07bb635237c2"
+  dependencies:
+    mkdirp "~0.5.0"
 
 quill@^0.20.1:
   version "0.20.1"

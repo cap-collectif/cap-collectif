@@ -128,6 +128,7 @@
     "bundlesize": "^0.15.3",
     "classnames": "^2.2.3",
     "clean-css-brunch": "^2.10.0",
+    "copycat-brunch": "^1.1.0",
     "create-react-class": "^15.6.3",
     "diff": "^3.3.0",
     "enzyme": "^3.3.0",
