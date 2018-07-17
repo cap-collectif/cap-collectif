@@ -609,9 +609,14 @@ overblog_graphql:
     show_debug_info: '%kernel.debug%'
     # internal_error_message: "An error occurred, please retry later or contact us!"
     config_validation: '%kernel.debug%'
+    use_classloader_listener: false
+    auto_compile: false
+    cache_dir: '%kernel.project_dir%/src/Overblog'
     schema:
       query: Query
-      # Put here types that are not exposed
+      # the name of extra types that can not be detected
+      # by graphql-php during static schema analysis.
+      # These types names should be explicitly declare here
       types:
         [
           Argument,

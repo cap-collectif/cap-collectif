@@ -9,7 +9,8 @@
             "Capco\\AdminBundle\\": "src/Capco/AdminBundle",
             "Capco\\ClassificationBundle\\": "src/Capco/ClassificationBundle",
             "Capco\\MediaBundle\\": "src/Capco/MediaBundle",
-            "Capco\\UserBundle\\": "src/Capco/UserBundle"
+            "Capco\\UserBundle\\": "src/Capco/UserBundle",
+            "Overblog\\GraphQLBundle\\__DEFINITIONS__\\": "src/Overblog"
         },
         "files": ["app/AppKernel.php"]
     },
