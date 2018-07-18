@@ -6,4 +6,4 @@ Capco\AppBundle\Entity\Steps\CollectStep:
     body: <p><text(1000)></p>
     startAt: <dateTimeBetween('-40 days', 'now')>
     endAt: <dateTimeBetween('+3 days', '+10 days')>
-    voteType: 0
+    voteType: 1
