@@ -414,27 +414,11 @@ EOF;
     ];
 
     protected $currentProposalIndex;
-
-    /**
-     * @var LoggerInterface
-     */
     protected $logger;
 
     protected static $defaultName = 'capco:export:proposalStep';
-
-    /**
-     * @var SelectionStepRepository
-     */
     private $selectionStepRepository;
-
-    /**
-     * @var string
-     */
-    private $kernelRootDir;
-
-    /**
-     * @var CollectStepRepository
-     */
+    private $projectRootDir;
     private $collectStepRepository;
 
     public function __construct(
@@ -445,7 +429,7 @@ EOF;
         CollectStepRepository $collectStepRepository,
         Manager $toggleManager,
         LoggerInterface $logger,
-        string $kernelRootDir
+        string $projectRootDir
     ) {
         $listener->disableAcl();
         $this->executor = $executor;
@@ -454,7 +438,7 @@ EOF;
         $this->infoResolver = new InfoResolver();
         $this->logger = $logger;
         $this->selectionStepRepository = $selectionStepRepository;
-        $this->kernelRootDir = $kernelRootDir;
+        $this->projectRootDir = $projectRootDir;
         $this->collectStepRepository = $collectStepRepository;
         parent::__construct();
     }
@@ -515,15 +499,18 @@ EOF;
 
         $proposalsQuery = $this->getContributionsGraphQLQueryByProposalStep($this->currentStep);
 
-        $proposals = $this->executor
-            ->execute(null, ['query' => $proposalsQuery, 'variables' => []])
-            ->toArray();
+        $proposals = $this->executor->execute(null, [
+            'query' => $proposalsQuery,
+            'variables' => [],
+        ])->toArray();
 
         $totalCount = Arr::path($proposals, 'data.node.proposals.totalCount');
         if ($totalCount > 0) {
             $output->writeln('<info>Importing ' . $totalCount . ' proposals...</info>');
             $this->writer = WriterFactory::create(Type::CSV);
-            $this->writer->openToFile($this->kernelRootDir . '/../web/export/' . $fileName);
+            $this->writer->openToFile(
+                sprintf('%s/web/export/%s', $this->projectRootDir, $fileName)
+            );
             $this->headersMap = $this->createHeadersMap(self::SHEET_HEADERS, $proposals);
             $this->writer->addRow(
                 array_merge(['contribution_type'], array_values($this->headersMap))
@@ -576,9 +563,10 @@ EOF;
         $this->writer->addRow($row);
 
         $reportingsQuery = $this->getProposalReportingsGraphQLQuery($proposal['id']);
-        $proposalWithReportings = $this->executor
-            ->execute(null, ['query' => $reportingsQuery, 'variables' => []])
-            ->toArray();
+        $proposalWithReportings = $this->executor->execute(null, [
+            'query' => $reportingsQuery,
+            'variables' => [],
+        ])->toArray();
 
         $totalCount = Arr::path($proposalWithReportings, 'data.node.reportings.totalCount');
         $progress = new ProgressBar($output, $totalCount);
@@ -609,9 +597,10 @@ EOF;
             $proposal['id'],
             $this->currentStep->getId()
         );
-        $proposalsWithVotes = $this->executor
-            ->execute(null, ['query' => $votesQuery, 'variables' => []])
-            ->toArray();
+        $proposalsWithVotes = $this->executor->execute(null, [
+            'query' => $votesQuery,
+            'variables' => [],
+        ])->toArray();
 
         $totalCount = Arr::path($proposalsWithVotes, 'data.node.votes.totalCount');
         $progress = new ProgressBar($output, $totalCount);
@@ -619,7 +608,6 @@ EOF;
         $output->writeln(
             "<info>Importing $totalCount votes for proposal " . $proposal['title'] . '</info>'
         );
-
         $this->traverseConnection(
             $proposalsWithVotes,
             'data.node.votes',
@@ -640,9 +628,10 @@ EOF;
         $progress->clear();
 
         $commentsQuery = $this->getProposalCommentsGraphQLQuery($proposal['id']);
-        $proposalsWithComments = $this->executor
-            ->execute(null, ['query' => $commentsQuery, 'variables' => []])
-            ->toArray();
+        $proposalsWithComments = $this->executor->execute(null, [
+            'query' => $commentsQuery,
+            'variables' => [],
+        ])->toArray();
 
         $totalCount = Arr::path($proposalsWithComments, 'data.node.comments.totalCount');
         $progress = new ProgressBar($output, $totalCount);
@@ -670,9 +659,10 @@ EOF;
         $progress->clear();
 
         $newsQuery = $this->getProposalNewsGraphQLQuery($proposal['id']);
-        $proposalWithNews = $this->executor
-            ->execute(null, ['query' => $newsQuery, 'variables' => []])
-            ->toArray();
+        $proposalWithNews = $this->executor->execute(null, [
+            'query' => $newsQuery,
+            'variables' => [],
+        ])->toArray();
 
         $totalCount = Arr::path($proposalWithNews, 'data.node.news.totalCount');
         $progress = new ProgressBar($output, $totalCount);
@@ -751,9 +741,10 @@ EOF;
         $this->writer->addRow($row);
 
         $commentReportings = $this->getProposalCommentReportingsGraphQLQuery($comment['id']);
-        $commentWithReportings = $this->executor
-            ->execute(null, ['query' => $commentReportings, 'variables' => []])
-            ->toArray();
+        $commentWithReportings = $this->executor->execute(null, [
+            'query' => $commentReportings,
+            'variables' => [],
+        ])->toArray();
 
         $this->traverseConnection(
             $commentWithReportings,
@@ -771,9 +762,10 @@ EOF;
         );
 
         $commentVotesQuery = $this->getProposalCommentVotesGraphQLQuery($comment['id']);
-        $commentWithVotes = $this->executor
-            ->execute(null, ['query' => $commentVotesQuery, 'variables' => []])
-            ->toArray();
+        $commentWithVotes = $this->executor->execute(null, [
+            'query' => $commentVotesQuery,
+            'variables' => [],
+        ])->toArray();
 
         $this->traverseConnection(
             $commentWithVotes,
@@ -1028,10 +1020,7 @@ EOF;
                 if (isset($value['question']) && $value['question']['title'] === $columnName) {
                     if (isset($value['formattedValue'])) {
                         $row[] = $value['formattedValue'];
-                    } elseif (
-                        isset($value['medias']) &&
-                        $value['question']['title'] === $columnName
-                    ) {
+                    } elseif (isset($value['medias'])) {
                         $urls = array_map(function ($media) {
                             return $media['url'];
                         }, $value['medias']);
@@ -1115,12 +1104,10 @@ EOF;
                 foreach ($edges as $edge) {
                     $callback($edge);
                     if ($edge['cursor'] === $endCursor) {
-                        $data = $this->executor
-                            ->execute(null, [
-                                'query' => $renewalQuery($pageInfo),
-                                'variables' => [],
-                            ])
-                            ->toArray();
+                        $data = $this->executor->execute(null, [
+                            'query' => $renewalQuery($pageInfo),
+                            'variables' => [],
+                        ])->toArray();
                     }
                 }
             }
@@ -1153,19 +1140,17 @@ EOF;
         foreach (\array_reverse($questions) as $question) {
             $result = $this->insert($result, self::CUSTOM_QUESTIONS_HEADER_OFFSET, $question);
         }
-        if ($this->currentStep->getProposalForm()) {
-            if ($evaluationForm = $this->currentStep->getProposalForm()->getEvaluationForm()) {
-                foreach (
-                    \array_reverse($evaluationForm->getRealQuestions()->toArray())
-                    as $question
-                ) {
-                    $result = $this->insert(
-                        $result,
-                        self::CUSTOM_QUESTIONS_HEADER_OFFSET + \count($questions),
-                        $question->getTitle()
-                    );
-                    $this->proposalHeaderMap[$question->getTitle()] = 'evaluation_responses';
-                }
+        if (
+            $this->currentStep->getProposalForm() &&
+            $evaluationForm = $this->currentStep->getProposalForm()->getEvaluationForm()
+        ) {
+            foreach (\array_reverse($evaluationForm->getRealQuestions()->toArray()) as $question) {
+                $result = $this->insert(
+                    $result,
+                    self::CUSTOM_QUESTIONS_HEADER_OFFSET + \count($questions),
+                    $question->getTitle()
+                );
+                $this->proposalHeaderMap[$question->getTitle()] = 'evaluation_responses';
             }
         }
 
@@ -1175,10 +1160,9 @@ EOF;
     protected function getFilename(AbstractStep $selectionStep): string
     {
         return sprintf(
-            '%s_%s_%s_contributions.csv',
-            (new \DateTime())->format('Y-M-d'),
-            str_replace(' ', '_', $selectionStep->getProject()->getTitle()),
-            str_replace(' ', '_', $selectionStep->getTitle())
+            '%s_%s.csv',
+            $selectionStep->getProject()->getSlug(),
+            $selectionStep->getSlug()
         );
     }
 
@@ -1706,6 +1690,10 @@ EOF;
 
     private function printMemoryUsage(OutputInterface $output): void
     {
+        if (!$output->isVerbose()) {
+            return;
+        }
+
         $output->write("\n");
         $output->writeln(
             sprintf(

@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Argument;
@@ -28,19 +27,26 @@ class ProjectController extends Controller
      */
     public function lastProjectsAction($max = 4, $offset = 0)
     {
-        $props = $this->get('jms_serializer')->serialize([
-            'projects' => $this
-                ->getDoctrine()
-                ->getManager()
-                ->getRepository('CapcoAppBundle:Project')
-                ->getLastPublished($max, $offset),
-        ], 'json', SerializationContext::create()->setGroups([
-            'Projects', 'Steps', 'UserDetails', 'StepTypes', 'ThemeDetails', 'ProjectType',
-        ]));
+        $props = $this->get('jms_serializer')->serialize(
+            [
+                'projects' =>
+                    $this->getDoctrine()
+                        ->getManager()
+                        ->getRepository('CapcoAppBundle:Project')
+                        ->getLastPublished($max, $offset),
+            ],
+            'json',
+            SerializationContext::create()->setGroups([
+                'Projects',
+                'Steps',
+                'UserDetails',
+                'StepTypes',
+                'ThemeDetails',
+                'ProjectType',
+            ])
+        );
 
-        return [
-            'props' => $props,
-        ];
+        return ['props' => $props];
     }
 
     /**
@@ -52,11 +58,11 @@ class ProjectController extends Controller
     public function showUserVotesAction(Project $project)
     {
         $serializer = $this->get('serializer');
-        $proposalRepo = $this->getDoctrine()->getManager()->getRepository('CapcoAppBundle:Proposal');
+        $proposalRepo = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('CapcoAppBundle:Proposal');
 
-        return [
-          'project' => $project,
-        ];
+        return ['project' => $project];
     }
 
     /**
@@ -69,21 +75,13 @@ class ProjectController extends Controller
     {
         $serializer = $this->get('serializer');
 
-        $steps = $this
-            ->get('capco.project_stats.resolver')
-            ->getStepsWithStatsForProject($project)
-        ;
+        $steps = $this->get('capco.project_stats.resolver')->getStepsWithStatsForProject($project);
+        $props = $serializer->serialize(
+            ['projectId' => $project->getId(), 'steps' => $steps],
+            'json'
+        );
 
-        $props = $serializer->serialize([
-            'projectId' => $project->getId(),
-            'steps' => $steps,
-        ], 'json');
-
-        return [
-            'project' => $project,
-            'props' => $props,
-            'currentStep' => 'stats_step',
-        ];
+        return ['project' => $project, 'props' => $props, 'currentStep' => 'stats_step'];
     }
 
     /**
@@ -99,21 +97,35 @@ class ProjectController extends Controller
     public function showTrashedAction(Project $project)
     {
         if (!$project->canDisplay()) {
-            throw $this->createNotFoundException($this->get('translator')->trans('project.error.not_found', [], 'CapcoAppBundle'));
+            throw $this->createNotFoundException(
+                $this->get('translator')->trans('project.error.not_found', [], 'CapcoAppBundle')
+            );
         }
 
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw $this->createAccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
+            throw $this->createAccessDeniedException(
+                $this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle')
+            );
         }
 
         $em = $this->getDoctrine()->getManager();
 
-        $opinions = $em->getRepository('CapcoAppBundle:Opinion')->getTrashedOrUnpublishedByProject($project);
-        $versions = $em->getRepository('CapcoAppBundle:OpinionVersion')->getTrashedOrUnpublishedByProject($project);
-        $arguments = $em->getRepository('CapcoAppBundle:Argument')->getTrashedOrUnpublishedByProject($project);
-        $sources = $em->getRepository('CapcoAppBundle:Source')->getTrashedOrUnpublishedByProject($project);
+        $opinions = $em
+            ->getRepository('CapcoAppBundle:Opinion')
+            ->getTrashedOrUnpublishedByProject($project);
+        $versions = $em
+            ->getRepository('CapcoAppBundle:OpinionVersion')
+            ->getTrashedOrUnpublishedByProject($project);
+        $arguments = $em
+            ->getRepository('CapcoAppBundle:Argument')
+            ->getTrashedOrUnpublishedByProject($project);
+        $sources = $em
+            ->getRepository('CapcoAppBundle:Source')
+            ->getTrashedOrUnpublishedByProject($project);
 
-        $proposals = $em->getRepository('CapcoAppBundle:Proposal')->getTrashedOrUnpublishedByProject($project);
+        $proposals = $em
+            ->getRepository('CapcoAppBundle:Proposal')
+            ->getTrashedOrUnpublishedByProject($project);
 
         return [
             'project' => $project,
@@ -137,11 +149,16 @@ class ProjectController extends Controller
     {
         $trans = $this->get('translator');
 
-        if (!$project->isExportable() && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            throw $this->createAccessDeniedException($trans->trans('project.error.not_exportable', [], 'CapcoAppBundle'));
+        if (
+            !$project->isExportable() &&
+            !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+        ) {
+            throw $this->createAccessDeniedException(
+                $trans->trans('project.error.not_exportable', [], 'CapcoAppBundle')
+            );
         }
 
-        $path = $this->container->getParameter('kernel.root_dir') . '/../web/export/';
+        $path = sprintf('%s/web/export/', $this->container->getParameter('kernel.project_dir'));
         $filename = '';
         if ($step->getProject()) {
             $filename .= $step->getProject()->getSlug() . '_';
@@ -152,7 +169,12 @@ class ProjectController extends Controller
         $xlsxFile = $filename . '.xlsx';
 
         if (!file_exists($path . $csvFile) && !file_exists($path . $xlsxFile)) {
-            $this->get('session')->getFlashBag()->add('danger', $trans->trans('project.download.not_yet_generated', [], 'CapcoAppBundle'));
+            $this->get('session')
+                ->getFlashBag()
+                ->add(
+                    'danger',
+                    $trans->trans('project.download.not_yet_generated', [], 'CapcoAppBundle')
+                );
 
             return $this->redirect($request->headers->get('referer'));
         }
@@ -166,7 +188,8 @@ class ProjectController extends Controller
         $response = new BinaryFileResponse($path . $filename);
         $response->headers->set('X-Accel-Redirect', '/export/' . $filename);
         $response->setContentDisposition(
-            ResponseHeaderBag::DISPOSITION_ATTACHMENT, $date . '_' . $filename
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            $date . '_' . $filename
         );
         $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
         $response->headers->set('Pragma', 'public');
@@ -183,8 +206,18 @@ class ProjectController extends Controller
      */
     public function showEventsAction(Project $project)
     {
-        $groupedEvents = $this->get('capco.event.resolver')->getEventsGroupedByYearAndMonth(null, null, $project->getSlug(), null);
-        $nbEvents = $this->get('capco.event.resolver')->countEvents(null, null, $project->getSlug(), null);
+        $groupedEvents = $this->get('capco.event.resolver')->getEventsGroupedByYearAndMonth(
+            null,
+            null,
+            $project->getSlug(),
+            null
+        );
+        $nbEvents = $this->get('capco.event.resolver')->countEvents(
+            null,
+            null,
+            $project->getSlug(),
+            null
+        );
 
         return [
             'project' => $project,
@@ -242,9 +275,16 @@ class ProjectController extends Controller
      */
     public function showContributorsAction(Project $project, $page)
     {
-        $pagination = $this->get('capco.site_parameter.resolver')->getValue('contributors.pagination');
+        $pagination = $this->get('capco.site_parameter.resolver')->getValue(
+            'contributors.pagination'
+        );
 
-        $contributors = $this->get('capco.contribution.resolver')->getProjectContributorsOrdered($project, true, $pagination, $page);
+        $contributors = $this->get('capco.contribution.resolver')->getProjectContributorsOrdered(
+            $project,
+            true,
+            $pagination,
+            $page
+        );
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
@@ -280,11 +320,14 @@ class ProjectController extends Controller
             $parameters['type'] = $parameters['type'] ? $parameters['type']->getSlug() : null;
 
             if (isset($parameters['theme'])) {
-                $parameters['theme'] = $parameters['theme'] ? $parameters['theme']->getSlug() : null;
+                $parameters['theme'] = $parameters['theme']
+                    ? $parameters['theme']->getSlug()
+                    : null;
             }
         }
 
-        $parameters['projectTypes'] = $this->getDoctrine()->getRepository('CapcoAppBundle:ProjectType')
+        $parameters['projectTypes'] = $this->getDoctrine()
+            ->getRepository('CapcoAppBundle:ProjectType')
             ->findAll();
 
         return ['params' => $parameters];
