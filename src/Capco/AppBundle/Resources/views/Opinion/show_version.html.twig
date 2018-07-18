@@ -22,39 +22,7 @@
 {% endblock %}
 
 {% block reduxStore %}
-  {% set initialState = {
-    'opinion': {
-      'currentVersionId': version.id,
-      'opinionsById': {},
-      'versionsById': {
-        (version.id) : {
-          'id': version.id,
-          'title': version.title,
-          'comment': version.comment,
-          'body': version.body,
-          'parent': {
-            'id': version.parent.id,
-            'title': version.parent.title,
-            'type': {
-              'votesHelpText': version.parent.opinionType.votesHelpText,
-              'voteWidgetType': version.parent.opinionType.voteWidgetType,
-            }
-          },
-          'type': {
-            'voteWidgetType': version.parent.opinionType.voteWidgetType,
-            'votesHelpText': version.parent.opinionType.votesHelpText,
-          },
-          'votes': [],
-          'votesCount': version.getVotesCountAll(),
-          'votesCountOk': version.votesCountOk,
-          'votesCountNok': version.votesCountNok,
-          'votesCountMitige': version.votesCountMitige,
-          'userVote': version.getVoteValueByUser(app.user)
-        }
-      }
-    }
-  } %}
-  {% include '@CapcoApp/redux_store.html.twig' with {'data' : initialState} %}
+  {% include '@CapcoApp/redux_store.html.twig' %}
 {% endblock %}
 
 {% block content %}

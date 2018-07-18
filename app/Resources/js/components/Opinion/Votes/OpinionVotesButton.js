@@ -6,12 +6,6 @@ import { connect, type MapStateToProps } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import LoginOverlay from '../../Utils/LoginOverlay';
 import { VOTE_WIDGET_SIMPLE, VOTE_WIDGET_BOTH } from '../../../constants/VoteConstants';
-import {
-  deleteVoteVersion,
-  deleteVoteOpinion,
-  voteOpinion,
-  voteVersion,
-} from '../../../redux/modules/opinion';
 import type { VoteValue, State, Dispatch } from '../../../types';
 import type { OpinionVotesButton_opinion } from './__generated__/OpinionVotesButton_opinion.graphql';
 
@@ -58,22 +52,22 @@ export class OpinionVotesButton extends React.Component<Props> {
 
   vote = () => {
     const { opinion, value, dispatch } = this.props;
-    if (opinion.__typename === 'Version') {
-      voteVersion(value, opinion.id, opinion.parent.id, dispatch);
-    }
-    if (opinion.__typename === 'Opinion') {
-      voteOpinion(value, opinion.id, dispatch);
-    }
+    // if (opinion.__typename === 'Version') {
+    //   //voteVersion(value, opinion.id, opinion.parent.id, dispatch);
+    // }
+    // if (opinion.__typename === 'Opinion') {
+    //   //voteOpinion(value, opinion.id, dispatch);
+    // }
   };
 
   deleteVote = () => {
     const { opinion, dispatch } = this.props;
-    if (opinion.__typename === 'Version') {
-      deleteVoteVersion(opinion.id, opinion.parent.id, dispatch);
-    }
-    if (opinion.__typename === 'Opinion') {
-      deleteVoteOpinion(opinion.id, dispatch);
-    }
+    // if (opinion.__typename === 'Version') {
+    //   //deleteVoteVersion(opinion.id, opinion.parent.id, dispatch);
+    // }
+    // if (opinion.__typename === 'Opinion') {
+    //   //deleteVoteOpinion(opinion.id, dispatch);
+    // }
   };
 
   voteAction = () => {
