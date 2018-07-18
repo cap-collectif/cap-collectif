@@ -35,12 +35,10 @@ class OpinionButtons extends React.Component<Props> {
     if (opinion.contribuable && this.isTheUserTheAuthor()) {
       if (opinion.__typename === 'Version' && opinion.parent) {
         return (
-          <OpinionVersionEditButton
-            className="pull-right"
-            style={{ marginLeft: '5px' }}
-            opinionId={opinion.parent.id}
-            version={opinion}
-          />
+          <React.Fragment>
+            <OpinionVersionEditModal version={opinion} />
+            <OpinionVersionEditButton className="pull-right" style={{ marginLeft: '5px' }} />
+          </React.Fragment>
         );
       }
       return (
@@ -54,7 +52,7 @@ class OpinionButtons extends React.Component<Props> {
 
   render() {
     const opinion = this.props.opinion;
-    if (!opinion || !opinion.section) {
+    if (!opinion) {
       return null;
     }
     return (
@@ -62,13 +60,16 @@ class OpinionButtons extends React.Component<Props> {
         <OpinionDelete opinion={opinion} />
         {this.renderEditButton()}
         <OpinionReportButton opinion={opinion} />
-        <ShareButtonDropdown
-          id="opinion-share-button"
-          className="pull-right"
-          title={opinion.title}
-          url={opinion.section.url}
-        />
-        <OpinionVersionEditModal />
+        {opinion.title &&
+          opinion.section &&
+          opinion.section.url && (
+            <ShareButtonDropdown
+              id="opinion-share-button"
+              className="pull-right"
+              title={opinion.title}
+              url={opinion.section.url}
+            />
+          )}
       </ButtonToolbar>
     );
   }
@@ -84,6 +85,7 @@ const container = connect(mapStateToProps)(OpinionButtons);
 export default createFragmentContainer(container, {
   opinion: graphql`
     fragment OpinionButtons_opinion on OpinionOrVersion {
+      ...OpinionDelete_opinion
       ... on Opinion {
         __typename
         contribuable
@@ -97,6 +99,7 @@ export default createFragmentContainer(container, {
       }
       ... on Version {
         __typename
+        ...OpinionVersionEditModal_version
         contribuable
         title
         section {

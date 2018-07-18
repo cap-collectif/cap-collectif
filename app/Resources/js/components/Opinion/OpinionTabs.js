@@ -109,20 +109,6 @@ class OpinionTabs extends React.Component<Props, State> {
   //   return !!opinion.history;
   // };
 
-  renderVersionsContent = () => {
-    const { opinion } = this.props;
-    if (opinion.id && opinion.body) {
-      return (
-        <OpinionVersionsBox
-          isContribuable={opinion.contribuable}
-          opinionId={opinion.id}
-          opinionBody={opinion.body}
-        />
-      );
-    }
-    return null;
-  };
-
   render() {
     const { opinion } = this.props;
     const isAuthenticated = false;
@@ -137,7 +123,10 @@ class OpinionTabs extends React.Component<Props, State> {
             <Nav bsStyle="tabs">
               {this.isVersionable() && (
                 <NavItem eventKey="versions" className="opinion-tabs">
-                  <FormattedMessage id="global.versions" values={{ num: opinion.versionsCount }} />
+                  <FormattedMessage
+                    id="global.versions"
+                    values={{ num: opinion.allVersions ? opinion.allVersions.totalCount : 0 }}
+                  />
                 </NavItem>
               )}
               {this.isCommentable() && (
@@ -165,7 +154,8 @@ class OpinionTabs extends React.Component<Props, State> {
             <Tab.Content animation={false}>
               {this.isVersionable() && (
                 <Tab.Pane eventKey="versions" style={marginTop}>
-                  {this.renderVersionsContent()}
+                  {/* $FlowFixMe */}
+                  <OpinionVersionsBox opinion={opinion} isAuthenticated={isAuthenticated} />
                 </Tab.Pane>
               )}
               {this.isCommentable() && (
@@ -201,7 +191,8 @@ class OpinionTabs extends React.Component<Props, State> {
       return <OpinionSourceBox isAuthenticated={isAuthenticated} sourceable={opinion} />;
     }
     if (this.isVersionable()) {
-      return this.renderVersionsContent();
+      /* $FlowFixMe */
+      return <OpinionVersionsBox opinion={opinion} isAuthenticated={isAuthenticated} />;
     }
     if (this.isCommentable()) {
       /* $FlowFixMe */
@@ -223,7 +214,9 @@ export default createFragmentContainer(OpinionTabs, {
         id
         body
         contribuable
-        versionsCount
+        allVersions: versions(first: 0) {
+          totalCount
+        }
         allArguments: arguments(first: 0) {
           totalCount
         }
@@ -241,8 +234,12 @@ export default createFragmentContainer(OpinionTabs, {
         id
         body
         contribuable
-        argumentsCount
-        sourcesCount
+        allArguments: arguments(first: 0) {
+          totalCount
+        }
+        allSources: sources(first: 0) {
+          totalCount
+        }
         section {
           versionable
           sourceable
@@ -250,6 +247,7 @@ export default createFragmentContainer(OpinionTabs, {
         }
       }
       ...OpinionSourceBox_sourceable
+      ...OpinionVersionsBox_opinion
       ...ArgumentsBox_opinion
     }
   `,

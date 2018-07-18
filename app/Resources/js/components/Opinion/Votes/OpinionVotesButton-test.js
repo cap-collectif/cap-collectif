@@ -2,7 +2,7 @@
 /* eslint-env jest */
 import React from 'react';
 import { shallow } from 'enzyme';
-
+import { $refType } from '../../../mocks';
 import { OpinionVotesButton } from './OpinionVotesButton';
 import {
   VOTE_WIDGET_DISABLED,
@@ -17,20 +17,30 @@ describe('<OpinionVotesButton />', () => {
     dispatch: jest.fn(),
   };
   const opinionVoteBoth = {
-    id: 1,
+    $refType,
+    __typename: 'Opinion',
+    id: '1',
+    viewerVote: null,
     section: {
       voteWidgetType: VOTE_WIDGET_BOTH,
     },
   };
 
   const opinionVoteSimple = {
-    id: 1,
-    section: {
-      voteWidgetType: VOTE_WIDGET_SIMPLE,
-    },
+    $refType,
+    __typename: 'Opinion',
+    id: '1',
+    viewerVote: null,
+    section: { voteWidgetType: VOTE_WIDGET_SIMPLE },
   };
 
-  const opinionVoteDisabled = { id: 1, section: { voteWidgetType: VOTE_WIDGET_DISABLED } };
+  const opinionVoteDisabled = {
+    $refType,
+    __typename: 'Opinion',
+    id: '1',
+    viewerVote: null,
+    section: { voteWidgetType: VOTE_WIDGET_DISABLED },
+  };
 
   it('should render a green button when value is 1 and vote type is both', () => {
     const wrapper = shallow(

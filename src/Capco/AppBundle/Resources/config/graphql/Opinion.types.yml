@@ -50,6 +50,10 @@ Opinion:
             sourcesCount:
                 type: "Int!"
                 description: "Number of sources."
+            viewerVote:
+                type: "OpinionVote"
+                description: "The viewer vote."
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionViewerVoteResolver", [value, getUser()])'
             votes:
                 type: "OpinionVoteConnection!"
                 argsBuilder: "Relay::Connection"
@@ -70,8 +74,14 @@ Opinion:
             arguments:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionArgumentsResolver", [value, args])'
             versions:
-                type: "[Version]"
+                type: "VersionConnection!"
+                argsBuilder: "Relay::Connection"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionVersionsResolver", [value, args])'
                 description: "The versions related to the contribution."
+                args:
+                    orderBy:
+                        type: "VersionOrder"
+                        defaultValue: { field: CREATED_AT, direction: DESC }
             section:
                 type: "Section!"
                 description: "Where the proposition has been placed."

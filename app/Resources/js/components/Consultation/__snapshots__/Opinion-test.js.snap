@@ -147,7 +147,6 @@ exports[`<Opinion /> renders correcty 1`] = `
             rankingThreshold={0}
           />
           <Relay(OpinionPreviewTitle)
-            link={true}
             opinion={
               Object {
                 "id": "opinionId",

@@ -1,20 +1,25 @@
 // @flow
 import React from 'react';
+import { graphql, createFragmentContainer } from 'react-relay';
 import classNames from 'classnames';
+<<<<<<< HEAD
 import {ListGroupItem} from 'react-bootstrap';
 
+=======
+import { Row, Col } from 'react-bootstrap';
+>>>>>>> More fragments and mutations
 import OpinionPreview from './OpinionPreview';
 import VotePiechart from '../Utils/VotePiechart';
+import type { OpinionVersion_version } from './__generated__/OpinionVersion_version.graphql';
 
 type Props = {
-  version: Object,
-  rankingThreshold: null | number,
+  version: OpinionVersion_version,
+  rankingThreshold: ?number,
 };
 
 class OpinionVersion extends React.Component<Props> {
   render() {
-    const { rankingThreshold } = this.props;
-    const version = this.props.version;
+    const { version, rankingThreshold } = this.props;
     const classes = classNames({
       opinion: true,
       'has-chart': true,
@@ -39,4 +44,16 @@ class OpinionVersion extends React.Component<Props> {
   }
 }
 
-export default OpinionVersion;
+export default createFragmentContainer(OpinionVersion, {
+  version: graphql`
+    fragment OpinionVersion_version on Version {
+      ...OpinionPreview_opinion
+      author {
+        vip
+      }
+      votesCountOk
+      votesCountNok
+      votesCountMitige
+    }
+  `,
+});

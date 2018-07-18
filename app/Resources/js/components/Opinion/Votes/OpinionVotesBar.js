@@ -25,37 +25,34 @@ class OpinionVotesBar extends React.Component<Props> {
           />
         )}
         <div style={{ paddingTop: '20px' }}>
-          {opinion.votes.edges.map(edge => edge.node).slice(0, 5).map((vote, index) => {
-            return <OpinionUserVote key={index} vote={vote} style={{ marginRight: 5 }} />;
-          })}
+          {opinion.votes &&
+            opinion.votes.edges &&
+            opinion.votes.edges
+              .filter(Boolean)
+              .map(edge => edge.node)
+              .slice(0, 5)
+              .map((vote, index) => {
+                /* $FlowFixMe */
+                return <OpinionUserVote key={index} vote={vote} style={{ marginRight: 5 }} />;
+              })}
+          {/* $FlowFixMe */}
           <OpinionVotesModal opinion={opinion} />
         </div>
         <div>
-          <FormattedMessage
-            id="global.votes"
-            values={{
-              num: opinion.votes.totalCount,
-            }}
-          />
+          {opinion.votes && (
+            <FormattedMessage
+              id="global.votes"
+              values={{
+                num: opinion.votes.totalCount,
+              }}
+            />
+          )}
         </div>
       </div>
     );
   }
 }
 
-// const mapStateToProps: MapStateToProps<*, *, *> = (
-//   state: State,
-//   props: { opinion: OpinionAndVersion },
-// ) => ({
-//   opinion: {
-//     ...props.opinion,
-//     ...(Object.keys(state.opinion.opinionsById).length
-//       ? state.opinion.opinionsById[props.opinion.id]
-//       : state.opinion.versionsById[props.opinion.id]),
-//   },
-// });
-
-// const container = connect(mapStateToProps)(OpinionVotesBar);
 export default createFragmentContainer(OpinionVotesBar, {
   opinion: graphql`
     fragment OpinionVotesBar_opinion on OpinionOrVersion {

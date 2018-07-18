@@ -28,7 +28,7 @@ class OpinionVotesBox extends React.Component<Props> {
         <Row>
           <Col sm={12} md={8} style={{ paddingTop: '15px' }}>
             {/* $FlowFixMe */}
-            <OpinionVotesButtons show disabled={!opinion.contribuable} opinion={opinion} />
+            <OpinionVotesButtons show opinion={opinion} />
             {/* $FlowFixMe */}
             <OpinionVotesBar opinion={opinion} />
           </Col>

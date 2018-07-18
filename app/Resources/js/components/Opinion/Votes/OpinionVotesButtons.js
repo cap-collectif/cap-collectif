@@ -8,15 +8,15 @@ import type { OpinionVotesButtons_opinion } from './__generated__/OpinionVotesBu
 type Props = {
   opinion: OpinionVotesButtons_opinion,
   show: boolean,
-  disabled: boolean,
 };
 
 class OpinionVotesButtons extends React.Component<Props> {
   render() {
-    const { opinion, disabled, show } = this.props;
+    const { opinion, show } = this.props;
     if (!show) {
       return null;
     }
+    const disabled = !opinion.contribuable;
     return (
       <ButtonToolbar className="opinion__votes__buttons">
         <OpinionVotesButton disabled={disabled} opinion={opinion} value={1} />
@@ -40,6 +40,12 @@ class OpinionVotesButtons extends React.Component<Props> {
 export default createFragmentContainer(OpinionVotesButtons, {
   opinion: graphql`
     fragment OpinionVotesButtons_opinion on OpinionOrVersion {
+      ... on Opinion {
+        contribuable
+      }
+      ... on Version {
+        contribuable
+      }
       ...OpinionVotesButton_opinion
     }
   `,

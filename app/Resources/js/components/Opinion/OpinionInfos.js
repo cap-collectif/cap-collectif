@@ -60,14 +60,6 @@ class OpinionInfos extends React.Component<Props> {
     );
   };
 
-  renderAuthorName = () => {
-    const { opinion } = this.props;
-    if (opinion.author) {
-      return <UserLink user={opinion.author} className="author-name" />;
-    }
-    return null;
-  };
-
   renderRankingLabel = () => {
     const { opinion, opinionTerm, rankingThreshold } = this.props;
     if (
@@ -113,8 +105,9 @@ class OpinionInfos extends React.Component<Props> {
   render() {
     const { opinion } = this.props;
     return (
-      <p>
-        {this.renderAuthorName()}
+      <p className="opinion__user">
+        {opinion.author && <UserLink user={opinion.author} />}
+        {' • '}
         {this.renderDate()}
         {this.renderEditionDate()}
         <PinnedLabel show={opinion.pinned || false} type="opinion" />
@@ -146,7 +139,6 @@ export default createFragmentContainer(OpinionInfos, {
         }
         createdAt
         updatedAt
-        pinned
       }
       ... on Source {
         __typename

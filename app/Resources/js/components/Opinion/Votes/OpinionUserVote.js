@@ -17,10 +17,13 @@ class OpinionUserVote extends React.Component<Props> {
 
   render() {
     const { vote, style } = this.props;
+    if (!vote.author) return null;
     return (
       <OverlayTrigger
         placement="top"
-        overlay={<Tooltip id={`opinion-vote-tooltip-${vote.id}`}>{vote.author.displayName}</Tooltip>}>
+        overlay={
+          <Tooltip id={`opinion-vote-tooltip-${vote.id}`}>{vote.author.displayName}</Tooltip>
+        }>
         <UserAvatar user={vote.author} style={style} />
       </OverlayTrigger>
     );

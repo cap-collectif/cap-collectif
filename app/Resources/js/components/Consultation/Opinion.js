@@ -45,6 +45,9 @@ export default createFragmentContainer(
   Opinion,
   graphql`
     fragment Opinion_opinion on Opinion {
+      ...OpinionPreviewCounters_opinion
+      ...OpinionInfos_opinion
+      ...OpinionPreviewTitle_opinion
       id
       url
       title

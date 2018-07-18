@@ -12,8 +12,12 @@ import {
   voteOpinion,
   voteVersion,
 } from '../../../redux/modules/opinion';
-import type { VoteValue, OpinionAndVersion, State, Dispatch } from '../../../types';
+import type { VoteValue, State, Dispatch } from '../../../types';
+import type { OpinionVotesButton_opinion } from './__generated__/OpinionVotesButton_opinion.graphql';
 
+type RelayProps = {
+  opinion: OpinionVotesButton_opinion,
+};
 const valueToObject = (value: VoteValue): Object => {
   if (value === -1) {
     return {
@@ -38,14 +42,13 @@ const valueToObject = (value: VoteValue): Object => {
 
 type Props = {
   style?: Object,
-  opinion: Object,
-  value: $FlowFixMe,
+  value: VoteValue,
   active: boolean,
   disabled?: boolean,
   dispatch: Dispatch,
   user?: Object,
   features: Object,
-};
+} & RelayProps;
 
 export class OpinionVotesButton extends React.Component<Props> {
   static defaultProps = {
@@ -53,25 +56,22 @@ export class OpinionVotesButton extends React.Component<Props> {
     disabled: false,
   };
 
-  isVersion = () => {
-    const { opinion } = this.props;
-    return !!opinion.parent;
-  };
-
   vote = () => {
     const { opinion, value, dispatch } = this.props;
-    if (this.isVersion()) {
+    if (opinion.__typename === 'Version') {
       voteVersion(value, opinion.id, opinion.parent.id, dispatch);
-    } else {
+    }
+    if (opinion.__typename === 'Opinion') {
       voteOpinion(value, opinion.id, dispatch);
     }
   };
 
   deleteVote = () => {
     const { opinion, dispatch } = this.props;
-    if (this.isVersion()) {
+    if (opinion.__typename === 'Version') {
       deleteVoteVersion(opinion.id, opinion.parent.id, dispatch);
-    } else {
+    }
+    if (opinion.__typename === 'Opinion') {
       deleteVoteOpinion(opinion.id, dispatch);
     }
   };
@@ -86,6 +86,9 @@ export class OpinionVotesButton extends React.Component<Props> {
 
   voteIsEnabled = () => {
     const { opinion, value } = this.props;
+    if (!opinion.section) {
+      return false;
+    }
     const voteType = opinion.section.voteWidgetType;
     if (voteType === VOTE_WIDGET_BOTH) {
       return true;
@@ -125,15 +128,16 @@ export class OpinionVotesButton extends React.Component<Props> {
 
 const mapStateToProps: MapStateToProps<*, *, *> = (
   state: State,
-  { opinion, value }: { value: VoteValue, opinion: OpinionAndVersion },
+  { opinion, value }: { value: VoteValue } & RelayProps,
 ) => {
-  const vote = opinion.parent
-    ? state.opinion.versionsById[opinion.id].userVote
-    : state.opinion.opinionsById[opinion.id].userVote;
+  const vote =
+    opinion.__typename === 'Opinion' || opinion.__typename === 'Version'
+      ? opinion.viewerVote
+      : null;
   return {
     features: state.default.features,
     user: state.user.user,
-    active: vote !== null && vote === value,
+    active: vote && vote.value === value,
   };
 };
 
@@ -142,18 +146,25 @@ const container = connect(mapStateToProps)(OpinionVotesButton);
 export default createFragmentContainer(container, {
   opinion: graphql`
     fragment OpinionVotesButton_opinion on OpinionOrVersion {
+      __typename
       ... on Opinion {
         id
         section {
           voteWidgetType
         }
-        #viewerHasVote
-        #viewerVote
+        viewerVote {
+          id
+          value
+        }
       }
       ... on Version {
         id
         section {
           voteWidgetType
+        }
+        viewerVote {
+          id
+          value
         }
         parent {
           id

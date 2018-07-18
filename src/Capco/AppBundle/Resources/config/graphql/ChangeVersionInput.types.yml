@@ -1,0 +1,14 @@
+ChangeVersionInput:
+    type: relay-mutation-input
+    config:
+        description: "The input type of changeVersion."
+        fields:
+            versionId:
+                type: "ID!"
+                description: "The version Node id."
+            body:
+                type: "String!"
+                description: "The contents of the version body."
+            title:
+                type: "String!"
+                description: "The contents of the version title."

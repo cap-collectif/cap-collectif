@@ -76,7 +76,9 @@ Version:
                 resolve: "@=value.getAnswer()"
             parent:
                 type: "Opinion!"
+            viewerVote:
+                type: "OpinionVote"
+                description: "The viewer vote."
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionViewerVoteResolver", [value, getUser()])'
             diff:
                 type: "HTML"
-            pinned:
-                type: "Boolean!"

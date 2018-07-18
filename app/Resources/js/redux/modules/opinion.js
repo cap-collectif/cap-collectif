@@ -1,5 +1,4 @@
 // @flow
-import { takeEvery, call, put } from 'redux-saga/effects';
 import { UPDATE_OPINION_SUCCESS, UPDATE_OPINION_FAILURE } from '../../constants/OpinionConstants';
 import FluxDispatcher from '../../dispatchers/AppDispatcher';
 import Fetcher, { json } from '../../services/Fetcher';
@@ -52,11 +51,6 @@ type ShowOpinionVersionCreateModalAction = {
 type CloseOpinionVersionCreateModalAction = {
   type: 'opinion/CLOSE_OPINION_VERSION_CREATE_MODAL',
 };
-type FetchOpinionVotesAction = {
-  type: 'opinion/OPINION_VOTES_FETCH_REQUESTED',
-  opinionId: Uuid,
-  versionId: ?Uuid,
-};
 type ShowOpinionCreateModalAction = {
   type: 'opinion/SHOW_OPINION_CREATE_MODAL',
   opinionTypeId: Uuid,
@@ -91,12 +85,6 @@ export type OpinionAction =
       versionId: Uuid,
       vote: OpinionVote,
     }
-  | {
-      type: 'opinion/OPINION_VOTES_FETCH_SUCCEEDED',
-      votes: OpinionVotes,
-      opinionId: Uuid,
-    }
-  | { type: 'opinion/OPINION_VOTES_FETCH_FAILED', error: Object }
   | ShowSourceCreateModalAction
   | HideSourceCreateModalAction
   | HideSourceEditModalAction
@@ -110,7 +98,6 @@ export type OpinionAction =
   | CloseOpinionVersionCreateModalAction
   | StartCreateOpinionVersionAction
   | CancelCreateOpinionVersionAction
-  | FetchOpinionVotesAction
   | ShowOpinionCreateModalAction
   | CloseOpinionCreateModalAction
   | ShowOpinionEditModalAction
@@ -131,8 +118,6 @@ type ContributionMap = {
   },
 };
 export type State = {
-  +currentOpinionId: ?Uuid,
-  +currentVersionId: ?Uuid,
   +opinionsById: ContributionMap,
   +versionsById: ContributionMap,
   +isEditingOpinionVersion: boolean,
@@ -146,19 +131,13 @@ export type State = {
   +showSourceEditModal: ?Uuid,
 };
 
-const VOTES_PREVIEW_COUNT = 8;
 export const OPINION_VOTE_SUCCEEDED = 'opinion/OPINION_VOTE_SUCCEEDED';
 export const VERSION_VOTE_SUCCEEDED = 'opinion/VERSION_VOTE_SUCCEEDED';
 export const DELETE_OPINION_VOTE_SUCCEEDED = 'opinion/DELETE_OPINION_VOTE_SUCCEEDED';
 export const DELETE_VERSION_VOTE_SUCCEEDED = 'opinion/DELETE_VERSION_VOTE_SUCCEEDED';
-export const OPINION_VOTES_FETCH_REQUESTED = 'opinion/OPINION_VOTES_FETCH_REQUESTED';
-export const OPINION_VOTES_FETCH_SUCCEEDED = 'opinion/OPINION_VOTES_FETCH_SUCCEEDED';
-export const OPINION_VOTES_FETCH_FAILED = 'opinion/OPINION_VOTES_FETCH_FAILED';
 
 const initialState: State = {
-  currentOpinionId: null,
   opinionsById: {},
-  currentVersionId: null,
   versionsById: {},
   isEditingOpinionVersion: false,
   showArgumentEditModal: null,
@@ -195,10 +174,10 @@ export const closeArgumentEditModal = (): HideArgumentEditModalAction => ({
   type: 'opinion/HIDE_ARGUMENT_EDIT_MODAL',
 });
 
-const startCreatingOpinionVersion = (): StartCreateOpinionVersionAction => ({
+export const startCreatingOpinionVersion = (): StartCreateOpinionVersionAction => ({
   type: 'opinion/START_CREATE_OPINION_VERSION',
 });
-const cancelCreatingOpinionVersion = (): CancelCreateOpinionVersionAction => ({
+export const cancelCreatingOpinionVersion = (): CancelCreateOpinionVersionAction => ({
   type: 'opinion/CANCEL_CREATE_OPINION_VERSION',
 });
 const startEditingOpinionVersion = (): StartEditOpinionVersionAction => ({
@@ -235,23 +214,6 @@ export const closeOpinionEditModal = (): CloseOpinionEditModalAction => ({
   type: 'opinion/CLOSE_OPINION_EDIT_MODAL',
 });
 
-export const createOpinionVersion = (
-  data: Object,
-  dispatch: Dispatch,
-  { opinionId }: { opinionId: string },
-): Promise<*> => {
-  dispatch(startCreatingOpinionVersion());
-  return Fetcher.postToJson(`/opinions/${opinionId}/versions`, data).then(
-    (version: { slug: string }) => {
-      dispatch(closeOpinionVersionCreateModal());
-      window.location.href = `${window.location.href}/versions/${version.slug}`;
-    },
-    () => {
-      dispatch(cancelCreatingOpinionVersion());
-    },
-  );
-};
-
 export const editOpinionVersion = (
   data: Object,
   dispatch: Dispatch,
@@ -273,42 +235,6 @@ export const editOpinionVersion = (
     },
   );
 };
-
-export function* fetchAllOpinionVotes(action: FetchOpinionVotesAction): Generator<*, *, *> {
-  try {
-    let hasMore = true;
-    let iterationCount = 0;
-    const votesPerIteration = 30;
-    const { opinionId, versionId } = action;
-    while (hasMore) {
-      const votesUrl = versionId
-        ? `/opinions/${opinionId}/versions/${versionId}/votes?offset=${iterationCount *
-            votesPerIteration}&limit=${votesPerIteration}`
-        : `/opinions/${opinionId}/votes?offset=${iterationCount *
-            votesPerIteration}&limit=${votesPerIteration}`;
-      const result: { votes: OpinionVotes, hasMore: boolean } = yield call(Fetcher.get, votesUrl);
-      hasMore = result.hasMore;
-      iterationCount++;
-      yield put({
-        type: OPINION_VOTES_FETCH_SUCCEEDED,
-        votes: result.votes,
-        opinionId,
-      });
-    }
-  } catch (e) {
-    yield put({ type: OPINION_VOTES_FETCH_FAILED, error: e });
-  }
-}
-
-export function* saga(): Generator<*, *, *> {
-  yield takeEvery(OPINION_VOTES_FETCH_REQUESTED, fetchAllOpinionVotes);
-}
-
-export const fetchOpinionVotes = (opinionId: Uuid, versionId: ?Uuid): FetchOpinionVotesAction => ({
-  type: OPINION_VOTES_FETCH_REQUESTED,
-  opinionId,
-  versionId,
-});
 
 export const versionVoteSuccess = (versionId: Uuid, vote: OpinionVote): Action => ({
   type: VERSION_VOTE_SUCCEEDED,
@@ -522,17 +448,6 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
     case 'opinion/CLOSE_OPINION_VERSION_CREATE_MODAL': {
       return { ...state, showOpinionVersionCreateModal: false };
     }
-    case OPINION_VOTES_FETCH_SUCCEEDED: {
-      let votes = state.opinionsById[action.opinionId].votes;
-      if (votes.length <= VOTES_PREVIEW_COUNT) {
-        votes = []; // we remove preview votes
-      }
-      votes.push(...action.votes);
-      return updateOpinion(state, {
-        ...state.opinionsById[action.opinionId],
-        votes,
-      });
-    }
     case OPINION_VOTE_SUCCEEDED: {
       return appendVote(state, action.vote, state.opinionsById[action.opinionId], 'opinion');
     }
@@ -544,11 +459,6 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
     }
     case DELETE_VERSION_VOTE_SUCCEEDED: {
       return removeVote(state, action.vote, state.versionsById[action.versionId], 'version');
-    }
-    case OPINION_VOTES_FETCH_FAILED: {
-      // eslint-disable-next-line no-console
-      console.log(OPINION_VOTES_FETCH_FAILED, action.error);
-      return state;
     }
     default:
       return state;

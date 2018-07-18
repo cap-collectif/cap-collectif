@@ -9,7 +9,7 @@ import type { OpinionPreview_opinion } from './__generated__/OpinionPreview_opin
 
 type Props = {
   opinion: OpinionPreview_opinion,
-  rankingThreshold?: null | number,
+  rankingThreshold?: ?number,
   link?: boolean,
   showTypeLabel?: boolean,
 };
@@ -29,7 +29,7 @@ class OpinionPreview extends React.Component<Props> {
         <div>
           <OpinionInfos rankingThreshold={rankingThreshold} opinion={opinion} />
           {/* $FlowFixMe */}
-          <OpinionPreviewTitle opinion={opinion} />
+          <OpinionPreviewTitle opinion={opinion} showTypeLabel />
           {/* $FlowFixMe */}
           <OpinionPreviewCounters opinion={opinion} />
         </div>

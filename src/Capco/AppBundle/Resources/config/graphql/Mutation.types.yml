@@ -16,6 +16,13 @@ Mutation:
                     inputType: AddSourceInput
                     payloadType: AddSourcePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddSourceMutation", [value, getUser()])'
+          addVersion:
+                access: "@=hasRole('ROLE_USER')"
+                builder: "Relay::Mutation"
+                builderConfig:
+                    inputType: AddVersionInput
+                    payloadType: AddVersionPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddVersionMutation", [value, getUser()])'
           changeArgument:
                 access: "@=hasRole('ROLE_USER')"
                 builder: "Relay::Mutation"
@@ -23,6 +30,13 @@ Mutation:
                     inputType: ChangeArgumentInput
                     payloadType: ChangeArgumentPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ChangeArgumentMutation", [value, getUser()])'
+          changeVersion:
+                access: "@=hasRole('ROLE_USER')"
+                builder: "Relay::Mutation"
+                builderConfig:
+                    inputType: ChangeVersionInput
+                    payloadType: ChangeVersionPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\ChangeVersionMutation", [value, getUser()])'
           changeSource:
                 access: "@=hasRole('ROLE_USER')"
                 builder: "Relay::Mutation"
@@ -44,6 +58,13 @@ Mutation:
                     inputType: DeleteSourceInput
                     payloadType: DeleteSourcePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteSourceMutation", [value, getUser()])'
+          deleteVersion:
+                access: "@=hasRole('ROLE_USER')"
+                builder: "Relay::Mutation"
+                builderConfig:
+                    inputType: DeleteVersionInput
+                    payloadType: DeleteVersionPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteVersionMutation", [value, getUser()])'
           addReply:
                  access: "@=hasRole('ROLE_USER')"
                  builder: "Relay::Mutation"
