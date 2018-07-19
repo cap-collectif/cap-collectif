@@ -1,0 +1,8 @@
+AddOpinionVotePayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            vote:
+                type: "OpinionVote"
+            viewer:
+                type: "User!"

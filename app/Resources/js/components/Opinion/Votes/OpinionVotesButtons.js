@@ -16,22 +16,11 @@ class OpinionVotesButtons extends React.Component<Props> {
     if (!show) {
       return null;
     }
-    const disabled = !opinion.contribuable;
     return (
       <ButtonToolbar className="opinion__votes__buttons">
-        <OpinionVotesButton disabled={disabled} opinion={opinion} value={1} />
-        <OpinionVotesButton
-          disabled={disabled}
-          style={{ marginLeft: 5 }}
-          opinion={opinion}
-          value={0}
-        />
-        <OpinionVotesButton
-          disabled={disabled}
-          style={{ marginLeft: 5 }}
-          opinion={opinion}
-          value={-1}
-        />
+        <OpinionVotesButton opinion={opinion} value="YES" />
+        <OpinionVotesButton style={{ marginLeft: 5 }} opinion={opinion} value="MITIGE" />
+        <OpinionVotesButton style={{ marginLeft: 5 }} opinion={opinion} value="NO" />
       </ButtonToolbar>
     );
   }

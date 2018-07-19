@@ -4,7 +4,6 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { Modal, Button } from 'react-bootstrap';
-import OpinionActions from '../../../actions/OpinionActions';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import DeleteVersionMutation from '../../../mutations/DeleteVersionMutation';
@@ -48,9 +47,10 @@ class OpinionDelete extends React.Component<Props, State> {
       });
     }
     if (opinion.__typename === 'Opinion') {
-      OpinionActions.deleteOpinion(opinion.id).then(() => {
-        window.location.href = opinion.section.url;
-      });
+      // const input = { opinionId: opinion.id };
+      // DeleteOpinionMutation.commit({input}).then(() => {
+      //   window.location.href = opinion.section.url;
+      // });
     }
   };
 
@@ -84,7 +84,7 @@ class OpinionDelete extends React.Component<Props, State> {
           aria-labelledby="contained-modal-title-lg">
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
-              {<FormattedMessage id="global.removeMessage" />}
+              <FormattedMessage id="global.removeMessage" />
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>

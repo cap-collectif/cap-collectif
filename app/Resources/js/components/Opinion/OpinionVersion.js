@@ -2,12 +2,8 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import classNames from 'classnames';
-<<<<<<< HEAD
 import {ListGroupItem} from 'react-bootstrap';
 
-=======
-import { Row, Col } from 'react-bootstrap';
->>>>>>> More fragments and mutations
 import OpinionPreview from './OpinionPreview';
 import VotePiechart from '../Utils/VotePiechart';
 import type { OpinionVersion_version } from './__generated__/OpinionVersion_version.graphql';

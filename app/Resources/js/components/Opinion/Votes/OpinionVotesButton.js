@@ -6,21 +6,26 @@ import { connect, type MapStateToProps } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import LoginOverlay from '../../Utils/LoginOverlay';
 import { VOTE_WIDGET_SIMPLE, VOTE_WIDGET_BOTH } from '../../../constants/VoteConstants';
-import type { VoteValue, State, Dispatch } from '../../../types';
+import AddOpinionVoteMutation from '../../../mutations/AddOpinionVoteMutation';
+import RemoveOpinionVoteMutation from '../../../mutations/RemoveOpinionVoteMutation';
+import type { State, Dispatch } from '../../../types';
 import type { OpinionVotesButton_opinion } from './__generated__/OpinionVotesButton_opinion.graphql';
 
 type RelayProps = {
   opinion: OpinionVotesButton_opinion,
 };
-const valueToObject = (value: VoteValue): Object => {
-  if (value === -1) {
+
+type YesNoPairedVoteValue = 'MITIGE' | 'NO' | 'YES';
+
+const valueToObject = (value: YesNoPairedVoteValue): Object => {
+  if (value === 'NO') {
     return {
       style: 'danger',
       str: 'nok',
       icon: 'cap cap-hand-unlike-2-1',
     };
   }
-  if (value === 0) {
+  if (value === 'MITIGE') {
     return {
       style: 'warning',
       str: 'mitige',
@@ -35,13 +40,10 @@ const valueToObject = (value: VoteValue): Object => {
 };
 
 type Props = {
-  style?: Object,
-  value: VoteValue,
-  active: boolean,
-  disabled?: boolean,
+  style: Object,
+  value: YesNoPairedVoteValue,
   dispatch: Dispatch,
   user?: Object,
-  features: Object,
 } & RelayProps;
 
 export class OpinionVotesButton extends React.Component<Props> {
@@ -51,30 +53,51 @@ export class OpinionVotesButton extends React.Component<Props> {
   };
 
   vote = () => {
-    const { opinion, value, dispatch } = this.props;
-    // if (opinion.__typename === 'Version') {
-    //   //voteVersion(value, opinion.id, opinion.parent.id, dispatch);
-    // }
-    // if (opinion.__typename === 'Opinion') {
-    //   //voteOpinion(value, opinion.id, dispatch);
-    // }
+    const { opinion, value } = this.props;
+    if (opinion.__typename === 'Version' || opinion.__typename === 'Opinion') {
+      const input = { opinionId: opinion.id, value };
+      AddOpinionVoteMutation.commit({ input })
+        .then(() => {
+          //  FluxDispatcher.dispatch({
+          //    actionType: UPDATE_OPINION_SUCCESS,
+          //    message: 'opinion.request.delete_vote.success',
+          //  });
+        })
+        .catch(() => {
+          //    FluxDispatcher.dispatch({
+          //      actionType: UPDATE_OPINION_FAILURE,
+          //      message: 'opinion.request.failure',
+          //    });
+          //    console.error(e); // eslint-disable-line no-console
+          //  });
+        });
+    }
   };
 
   deleteVote = () => {
-    const { opinion, dispatch } = this.props;
-    // if (opinion.__typename === 'Version') {
-    //   //deleteVoteVersion(opinion.id, opinion.parent.id, dispatch);
-    // }
-    // if (opinion.__typename === 'Opinion') {
-    //   //deleteVoteOpinion(opinion.id, dispatch);
-    // }
+    const { opinion } = this.props;
+    if (opinion.__typename === 'Version' || opinion.__typename === 'Opinion') {
+      const input = { opinionId: opinion.id };
+      RemoveOpinionVoteMutation.commit({ input })
+        .then(() => {
+          // FluxDispatcher.dispatch({
+          //   actionType: UPDATE_OPINION_SUCCESS,
+          //           message: 'opinion.request.create_vote.success',
+          // });
+        })
+        .catch(e => {
+          // FluxDispatcher.dispatch({
+          //   actionType: UPDATE_OPINION_FAILURE,
+          //   message: 'opinion.request.failure',
+          // });
+          console.error(e); // eslint-disable-line no-console
+        });
+    }
   };
 
   voteAction = () => {
-    const { disabled, user, active } = this.props;
-    if (!user || disabled) {
-      return null;
-    }
+    const { opinion, value } = this.props;
+    const active = opinion.viewerVote && opinion.viewerVote.value === value;
     return active ? this.deleteVote() : this.vote();
   };
 
@@ -97,8 +120,13 @@ export class OpinionVotesButton extends React.Component<Props> {
     if (!this.voteIsEnabled()) {
       return null;
     }
-    const { disabled, style, value, active } = this.props;
+    const { opinion, value, style, user } = this.props;
+    if (opinion.__typename !== 'Opinion' || opinion.__typename !== 'Version') {
+      return null;
+    }
+    const disabled = !opinion.contribuable || !user;
     const data = valueToObject(value);
+    const active = opinion.viewerVote && opinion.viewerVote.value === value;
     return (
       <LoginOverlay>
         <Button
@@ -120,18 +148,9 @@ export class OpinionVotesButton extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (
-  state: State,
-  { opinion, value }: { value: VoteValue } & RelayProps,
-) => {
-  const vote =
-    opinion.__typename === 'Opinion' || opinion.__typename === 'Version'
-      ? opinion.viewerVote
-      : null;
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
   return {
-    features: state.default.features,
     user: state.user.user,
-    active: vote && vote.value === value,
   };
 };
 
@@ -143,6 +162,7 @@ export default createFragmentContainer(container, {
       __typename
       ... on Opinion {
         id
+        contribuable
         section {
           voteWidgetType
         }
@@ -153,6 +173,7 @@ export default createFragmentContainer(container, {
       }
       ... on Version {
         id
+        contribuable
         section {
           voteWidgetType
         }

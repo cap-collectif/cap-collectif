@@ -114,10 +114,7 @@ input AddVersionInput {
   opinionId: ID!
   title: String!
   body: String!
-<<<<<<< HEAD
   comment: String
-=======
->>>>>>> More fragments and mutations
   clientMutationId: String
 }
 
@@ -1478,18 +1475,9 @@ type Opinion implements Node & Argumentable & Sourceable & Contribution & Trasha
 
   # Number of sources.
   sourcesCount: Int!
-<<<<<<< HEAD
-<<<<<<< HEAD
 
   # The viewer vote.
   viewerVote: OpinionVote
-=======
->>>>>>> Fix vote preview loading
-=======
-
-  # The viewer vote.
-  viewerVote: OpinionVote
->>>>>>> More fragments and mutations
   votes(after: String, first: Int, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}): OpinionVoteConnection!
 
   # Identifies the contribution title.

@@ -1,43 +1,53 @@
 <?php
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Entity\OpinionVote;
-use Capco\AppBundle\Entity\OpinionVersionVote;
-use Capco\AppBundle\Repository\ProposalRepository;
-use Capco\UserBundle\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Error\UserError;
 use Psr\Log\LoggerInterface;
+use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionVote;
+use Doctrine\ORM\EntityManagerInterface;
+use Capco\AppBundle\Entity\OpinionVersion;
+use Overblog\GraphQLBundle\Error\UserError;
+use Doctrine\DBAL\Exception\DriverException;
+use Capco\AppBundle\Entity\OpinionVersionVote;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Capco\AppBundle\Repository\OpinionRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Capco\AppBundle\Repository\OpinionVoteRepository;
+use Capco\AppBundle\Repository\OpinionVersionRepository;
+use Capco\AppBundle\Repository\OpinionVersionVoteRepository;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class AddOpinionVoteMutation implements MutationInterface
 {
     private $em;
     private $validator;
-    private $proposalRepo;
-    private $stepRepo;
+    private $opinionRepo;
+    private $opinionVoteRepo;
+    private $versionRepo;
+    private $versionVoteRepo;
     private $logger;
-    private $resolver;
 
     public function __construct(
         EntityManagerInterface $em,
         ValidatorInterface $validator,
-        ProposalRepository $proposalRepo,
-        AbstractStepRepository $stepRepo,
-        LoggerInterface $logger,
-        StepRequirementsResolver $resolver
+        OpinionRepository $opinionRepo,
+        OpinionVoteRepository $opinionVoteRepo,
+        OpinionVersionRepository $versionRepo,
+        OpinionVersionVoteRepository $versionVoteRepo,
+        LoggerInterface $logger
     ) {
         $this->em = $em;
         $this->validator = $validator;
         $this->opinionRepo = $opinionRepo;
+        $this->opinionVoteRepo = $opinionVoteRepo;
         $this->versionRepo = $versionRepo;
+        $this->versionVoteRepo = $versionVoteRepo;
         $this->logger = $logger;
-        $this->resolver = $resolver;
     }
 
-    public function __invoke(Argument $input, User $user, RequestStack $request)
+    public function __invoke(Argument $input, User $viewer, RequestStack $requestStack): array
     {
         $opinion = $this->opinionRepo->find($input->offsetGet('opinionId'));
         $version = $this->versionRepo->find($input->offsetGet('opinionId'));
@@ -48,7 +58,8 @@ class AddOpinionVoteMutation implements MutationInterface
             );
         }
 
-        $step = $opinion->getStep();
+        $contribution = $opinion ?? $version;
+        $step = $contribution->getStep();
 
         // Check if step is contributable
         if (!$step->canContribute()) {
@@ -61,66 +72,56 @@ class AddOpinionVoteMutation implements MutationInterface
         }
 
         if (!$opinion->canContribute()) {
-            throw new BadRequestHttpException('Uncontribuable opinion.');
+            throw new UserError('Uncontribuable opinion.');
         }
 
-        // if ($validationErrors->count() > 0) {
-        //     throw new BadRequestHttpException($validationErrors->__toString());
-        // }
+        $voteValue = $input->offsetGet('value');
+        $previousVote = null;
 
-        // $user = $this->getUser();
-        // $previousVote = $this->getDoctrine()
-        //     ->getRepository('CapcoAppBundle:OpinionVote')
-        //     ->findOneBy(['user' => $user, 'opinion' => $opinion]);
+        if ($contribution instanceof Opinion) {
+            $previousVote = $this->opinionVoteRepo->findOneBy([
+                'user' => $viewer,
+                'opinion' => $opinion,
+            ]);
+        }
+        if ($contribution instanceof OpinionVersion) {
+            $previousVote = $this->versionVoteRepo->findOneBy([
+                'user' => $viewer,
+                'opinion' => $opinion,
+            ]);
+        }
 
-        // if ($previousVote) {
-        //     $opinion->incrementVotesCountByType($vote->getValue());
-        //     $opinion->decrementVotesCountByType($previousVote->getValue());
+        if ($previousVote) {
+            //$opinion->incrementVotesCountByType($vote->getValue());
+            //$opinion->decrementVotesCountByType($previousVote->getValue());
+            $previousVote->setValue($voteValue);
+            $this->em->flush();
 
-        //     $previousVote->setValue($vote->getValue());
-        //     $this->getDoctrine()
-        //         ->getManager()
-        //         ->flush();
+            return ['vote' => $previousVote, 'viewer' => $viewer];
+        }
 
-        //     return $previousVote;
-        // }
-
-        // $vote->setOpinion($opinion)->setUser($user);
-        // $opinion->incrementVotesCountByType($vote->getValue());
-
-        // try {
-        //     $this->getDoctrine()
-        //         ->getManager()
-        //         ->persist($vote);
-        //     $this->getDoctrine()
-        //         ->getManager()
-        //         ->flush();
-        // } catch (DriverException $e) {
-        //     // Updating opinion votes count failed
-        //     throw new BadRequestHttpException('Sorry, please retry.');
-        // }
+        $vote = null;
+        if ($contribution instanceof Opinion) {
+            $vote = (new OpinionVote())->setOpinion($contribution);
+        }
+        if ($contribution instanceof OpinionVersion) {
+            $vote = (new OpinionVersionVote())->setOpinionVersion($contribution);
+        }
 
         $vote
-            ->setIpAddress($request->getCurrentRequest()->getClientIp())
-            ->setUser($user)
-            ->setPrivate($input->offsetGet('anonymously'))
-            ->setProposal($proposal);
-
-        $errors = $this->validator->validate($vote);
-        foreach ($errors as $error) {
-            $this->logger->error((string) $error->getMessage());
-            throw new UserError((string) $error->getMessage());
-        }
-
-        $this->em->persist($vote);
+            ->setIpAddress($requestStack->getCurrentRequest()->getClientIp())
+            ->setUser($viewer)
+            ->setValue($voteValue);
+        // $opinion->incrementVotesCountByType($vote->getValue());
 
         try {
+            $this->em->persist($vote);
             $this->em->flush();
-        } catch (\Exception $e) {
-            // Let's assume it's a Unique Exception
-            throw new UserError('proposal.vote.already_voted');
+        } catch (DriverException $e) {
+            // Updating opinion votes count failed
+            throw new UserError('Sorry, please retry.');
         }
 
-        return ['vote' => $vote, 'viewer' => $user];
+        return ['vote' => $vote, 'viewer' => $viewer];
     }
 }

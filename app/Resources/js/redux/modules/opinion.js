@@ -1,6 +1,5 @@
 // @flow
-import Fetcher from '../../services/Fetcher';
-import type { Exact, Version, Opinion, VoteValue, Uuid, Dispatch, Action } from '../../types';
+import type { Exact, Uuid, Action } from '../../types';
 
 type ShowSourceCreateModalAction = {
   type: 'opinion/SHOW_SOURCE_CREATE_MODAL',
@@ -60,7 +59,7 @@ type ShowOpinionEditModalAction = {
 type CloseOpinionEditModalAction = { type: 'opinion/CLOSE_OPINION_EDIT_MODAL' };
 
 export type OpinionAction =
-    ShowSourceCreateModalAction
+  | ShowSourceCreateModalAction
   | HideSourceCreateModalAction
   | HideSourceEditModalAction
   | HideArgumentEditModalAction
@@ -79,21 +78,7 @@ export type OpinionAction =
   | ShowSourceEditModalAction
   | CloseOpinionEditModalAction;
 
-type ContributionMap = {
-  [id: Uuid]: {
-    id: Uuid,
-    body: string,
-    title: string,
-    comment: string,
-    parent: {
-      id: Uuid,
-    },
-  },
-};
 export type State = {
-  +opinionsById: ContributionMap,
-  +versionsById: ContributionMap,
-  +isEditingOpinionVersion: boolean,
   +showOpinionCreateModal: ?Uuid,
   +showOpinionEditModal: ?Uuid,
   +showArgumentEditModal: ?Uuid,
@@ -110,9 +95,6 @@ export const DELETE_OPINION_VOTE_SUCCEEDED = 'opinion/DELETE_OPINION_VOTE_SUCCEE
 export const DELETE_VERSION_VOTE_SUCCEEDED = 'opinion/DELETE_VERSION_VOTE_SUCCEEDED';
 
 const initialState: State = {
-  opinionsById: {},
-  versionsById: {},
-  isEditingOpinionVersion: false,
   showArgumentEditModal: null,
   showOpinionCreateModal: null,
   showOpinionEditModal: null,
@@ -153,12 +135,6 @@ export const startCreatingOpinionVersion = (): StartCreateOpinionVersionAction =
 export const cancelCreatingOpinionVersion = (): CancelCreateOpinionVersionAction => ({
   type: 'opinion/CANCEL_CREATE_OPINION_VERSION',
 });
-const startEditingOpinionVersion = (): StartEditOpinionVersionAction => ({
-  type: 'opinion/START_EDIT_OPINION_VERSION',
-});
-const cancelEditingOpinionVersion = (): CancelEditOpinionVersionAction => ({
-  type: 'opinion/CANCEL_EDIT_OPINION_VERSION',
-});
 export const showOpinionVersionEditModal = (): ShowOpinionVersionEditModalAction => ({
   type: 'opinion/SHOW_OPINION_VERSION_EDIT_MODAL',
 });
@@ -185,90 +161,6 @@ export const openOpinionEditModal = (opinionId: Uuid): ShowOpinionEditModalActio
 });
 export const closeOpinionEditModal = (): CloseOpinionEditModalAction => ({
   type: 'opinion/CLOSE_OPINION_EDIT_MODAL',
-});
-
-export const editOpinionVersion = (
-  data: Object,
-  dispatch: Dispatch,
-  { opinionId, versionId }: { opinionId: string, versionId: string },
-): Promise<*> => {
-  dispatch(startEditingOpinionVersion());
-  const apiData = {
-    title: data.title,
-    body: data.body,
-    comment: data.comment,
-  };
-  return Fetcher.put(`/opinions/${opinionId}/versions/${versionId}`, apiData).then(
-    () => {
-      dispatch(closeOpinionVersionEditModal());
-      location.reload(); // TODO when enough time
-    },
-    () => {
-      dispatch(cancelEditingOpinionVersion());
-    },
-  );
-};
-
-// const deleteVote = (opinion: Uuid, parent: ?Uuid, dispatch: Dispatch): void => {
-//   const url = parent
-//     ? `/opinions/${parent}/versions/${opinion}/votes`
-//     : `/opinions/${opinion}/votes`;
-//   Fetcher.delete(url)
-//     .then(json)
-//     .then(data => {
-//       if (parent) {
-//         dispatch(deleteVersionVoteSuccess(opinion, data));
-//       } else {
-//         dispatch(deleteOpinionVoteSuccess(opinion, data));
-//       }
-//       FluxDispatcher.dispatch({
-//         actionType: UPDATE_OPINION_SUCCESS,
-//         message: 'opinion.request.delete_vote.success',
-//       });
-//     })
-//     .catch(e => {
-//       FluxDispatcher.dispatch({
-//         actionType: UPDATE_OPINION_FAILURE,
-//         message: 'opinion.request.failure',
-//       });
-//       console.error(e); // eslint-disable-line no-console
-//     });
-// };
-
-// const vote = (value: VoteValue, opinion: Uuid, parent: ?Uuid, dispatch: Dispatch): void => {
-//   const url = parent
-//     ? `/opinions/${parent}/versions/${opinion}/votes`
-//     : `/opinions/${opinion}/votes`;
-//   Fetcher.put(url, { value })
-//     .then(json)
-//     .then((newVote: OpinionVote) => {
-//       if (parent) {
-//         dispatch(versionVoteSuccess(opinion, newVote));
-//       } else {
-//         dispatch(opinionVoteSuccess(opinion, newVote));
-//       }
-//       FluxDispatcher.dispatch({
-//         actionType: UPDATE_OPINION_SUCCESS,
-//         message: 'opinion.request.create_vote.success',
-//       });
-//     })
-//     .catch(e => {
-//       FluxDispatcher.dispatch({
-//         actionType: UPDATE_OPINION_FAILURE,
-//         message: 'opinion.request.failure',
-//       });
-//       console.error(e); // eslint-disable-line no-console
-//     });
-// };
-
-const updateOpinion = (state: State, opinion: Opinion): Exact<State> => ({
-  ...state,
-  opinionsById: { ...state.opinionsById, [opinion.id]: opinion },
-});
-
-const updateVersion = (state: State, version: Version): Exact<State> => ({
-  ...state,
-  versionsById: { ...state.versionsById, [version.id]: version },
 });
 
 export const reducer = (state: State = initialState, action: Action): Exact<State> => {
@@ -298,12 +190,6 @@ export const reducer = (state: State = initialState, action: Action): Exact<Stat
     }
     case 'opinion/CANCEL_CREATE_OPINION_VERSION': {
       return { ...state, isCreatingOpinionVersion: false };
-    }
-    case 'opinion/START_EDIT_OPINION_VERSION': {
-      return { ...state, isEditingOpinionVersion: true };
-    }
-    case 'opinion/CANCEL_EDIT_OPINION_VERSION': {
-      return { ...state, isEditingOpinionVersion: false };
     }
     case 'opinion/SHOW_OPINION_VERSION_EDIT_MODAL': {
       return { ...state, showOpinionVersionEditModal: true };

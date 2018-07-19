@@ -67,7 +67,7 @@ class OpinionVersionEditModal extends React.Component<Props> {
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   show: state.opinion.showOpinionVersionEditModal,
-  submitting: state.opinion.isEditingOpinionVersion,
+  submitting: false,
 });
 
 const container = connect(mapStateToProps)(OpinionVersionEditModal);

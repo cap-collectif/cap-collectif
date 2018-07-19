@@ -87,6 +87,20 @@ Mutation:
                     inputType: ChangeUserNotificationsConfigurationInput
                     payloadType: ChangeUserNotificationsConfigurationPayload
                     mutateAndGetPayload: "@=mutation('changeUserNotificationsConfiguration', [value, getUser()])"
+          addOpinionVote:
+               access: "@=hasRole('ROLE_USER')"
+               builder: "Relay::Mutation"
+               builderConfig:
+                   inputType: AddOpinionVoteInput
+                   payloadType: AddOpinionVotePayload
+                   mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\AddOpinionVoteMutation", [value, getUser(), serv("request_stack")])'
+          removeOpinionVote:
+               access: "@=hasRole('ROLE_USER')"
+               builder: "Relay::Mutation"
+               builderConfig:
+                   inputType: RemoveOpinionVoteInput
+                   payloadType: RemoveOpinionVotePayload
+                   mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\RemoveOpinionVoteMutation", [value, getUser()])'
         # Proposal
           addProposalVote:
                access: "@=hasRole('ROLE_USER')"
@@ -109,7 +123,7 @@ Mutation:
                    inputType: UpdateProposalVotesInput
                    payloadType: UpdateProposalVotesPayload
                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateProposalVotesMutation", [value, getUser()])'
-        # User
+            # User
           requestUserArchive:
                 access: "@=hasRole('ROLE_USER')"
                 builder: "Relay::Mutation"
@@ -117,7 +131,7 @@ Mutation:
                     inputType: RequestUserArchiveInput
                     payloadType: RequestUserArchivePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\RequestUserArchiveMutation", [value, getUser()])'
-         # Proposal
+            # Proposal
           changeProposalPublicationStatus:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: "Relay::Mutation"

@@ -5,86 +5,66 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Capco\AppBundle\Repository\ProposalRepository;
-use Capco\AppBundle\Repository\AbstractStepRepository;
+use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\AppBundle\Repository\OpinionVersionRepository;
+use Capco\AppBundle\Repository\OpinionVoteRepository;
+use Capco\AppBundle\Repository\OpinionVersionVoteRepository;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class RemoveOpinionVoteMutation implements MutationInterface
 {
     private $em;
-    private $proposalRepo;
-    private $stepRepo;
+    private $opinionVoteRepo;
+    private $versionVoteRepo;
+    private $opinionRepo;
+    private $versionRepo;
+    private $redisStorageHelper;
 
     public function __construct(
         EntityManagerInterface $em,
-        ProposalRepository $proposalRepo,
-        AbstractStepRepository $stepRepo
+        OpinionVoteRepository $opinionVoteRepo,
+        OpinionRepository $opinionRepo,
+        OpinionVersionVoteRepository $versionVoteRepo,
+        OpinionVersionRepository $versionRepo
     ) {
         $this->em = $em;
-        $this->stepRepo = $stepRepo;
-        $this->proposalRepo = $proposalRepo;
+        $this->opinionVoteRepo = $opinionVoteRepo;
+        $this->opinionRepo = $opinionRepo;
+        $this->versionRepo = $versionRepo;
+        $this->versionVoteRepo = $versionVoteRepo;
     }
 
-    public function __invoke(Argument $input, User $user)
+    public function __invoke(Argument $input, User $viewer): array
     {
-        // if (!$opinion->canContribute()) {
-        //     throw new BadRequestHttpException('Uncontribuable opinion.');
-        // }
+        $id = $input->offsetGet('opinionId');
+        $opinion = $this->opinionRepo->find($id);
+        $version = $this->versionRepo->find($id);
 
-        // $vote = $this->getDoctrine()
-        //     ->getManager()
-        //     ->getRepository('CapcoAppBundle:OpinionVote')
-        //     ->findOneBy(['user' => $this->getUser(), 'opinion' => $opinion]);
+        $contribution = $opinion ?? $version;
 
-        // if (!$vote) {
-        //     throw new BadRequestHttpException('You have not voted for this opinion.');
-        // }
-
-        // $opinion->decrementVotesCountByType($vote->getValue());
-        // $this->getDoctrine()
-        //     ->getManager()
-        //     ->remove($vote);
-        // $this->getDoctrine()
-        //     ->getManager()
-        //     ->flush();
-        // $this->get('redis_storage.helper')->recomputeUserCounters($this->getUser());
-
-        // return $vote;
-        $proposal = $this->proposalRepo->find($input->offsetGet('proposalId'));
-        $step = $this->stepRepo->find($input->offsetGet('stepId'));
-
-        if (!$proposal) {
-            throw new UserError('Unknown proposal with id: ' . $input->offsetGet('proposalId'));
-        }
-        if (!$step) {
-            throw new UserError('Unknown step with id: ' . $input->offsetGet('stepId'));
+        if (!$contribution->canContribute()) {
+            throw new UserError('Uncontribuable opinion.');
         }
 
-        $vote = null;
-        if ($step instanceof CollectStep) {
-            $vote = $this->em
-                ->getRepository('CapcoAppBundle:ProposalCollectVote')
-                ->findOneBy(['user' => $user, 'proposal' => $proposal, 'collectStep' => $step]);
-        } elseif ($step instanceof SelectionStep) {
-            $vote = $this->em
-                ->getRepository('CapcoAppBundle:ProposalSelectionVote')
-                ->findOneBy(['user' => $user, 'proposal' => $proposal, 'selectionStep' => $step]);
-        } else {
-            throw new UserError('Wrong step with id: ' . $input->offsetGet('stepId'));
+        $vote = $this->opinionVoteRepo->findOneBy(['user' => $viewer, 'opinion' => $opinion]);
+
+        if (!$vote) {
+            $vote = $this->versionVoteRepo->findOneBy([
+                'user' => $viewer,
+                'opinionVersion' => $opinion,
+            ]);
         }
 
         if (!$vote) {
-            throw new UserError('You have not voted for this proposal in this step.');
+            throw new UserError('You have not voted for this opinion.');
         }
-
-        // Check if step is contributable
-        if (!$step->canContribute()) {
-            throw new UserError('This step is no longer contributable.');
-        }
+        // $opinion->decrementVotesCountByType($vote->getValue());
 
         $this->em->remove($vote);
         $this->em->flush();
 
-        return ['proposal' => $proposal, 'step' => $step, 'viewer' => $user];
+        $this->redisStorageHelper->recomputeUserCounters($viewer);
+
+        return ['contribution' => $contribution, 'viewer' => $viewer];
     }
 }

@@ -12,14 +12,13 @@ import {
 
 describe('<OpinionVotesButton />', () => {
   const defaultProps = {
-    active: true,
-    features: {},
     dispatch: jest.fn(),
   };
   const opinionVoteBoth = {
     $refType,
     __typename: 'Opinion',
     id: '1',
+    contribuable: true,
     viewerVote: null,
     section: {
       voteWidgetType: VOTE_WIDGET_BOTH,
@@ -30,6 +29,7 @@ describe('<OpinionVotesButton />', () => {
     $refType,
     __typename: 'Opinion',
     id: '1',
+    contribuable: true,
     viewerVote: null,
     section: { voteWidgetType: VOTE_WIDGET_SIMPLE },
   };
@@ -38,69 +38,70 @@ describe('<OpinionVotesButton />', () => {
     $refType,
     __typename: 'Opinion',
     id: '1',
+    contribuable: true,
     viewerVote: null,
     section: { voteWidgetType: VOTE_WIDGET_DISABLED },
   };
 
   it('should render a green button when value is 1 and vote type is both', () => {
     const wrapper = shallow(
-      <OpinionVotesButton {...defaultProps} opinion={opinionVoteBoth} value={1} />,
+      <OpinionVotesButton {...defaultProps} opinion={opinionVoteBoth} value="YES" />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render an orange button when value is 0 and vote type is both', () => {
     const wrapper = shallow(
-      <OpinionVotesButton {...defaultProps} opinion={opinionVoteBoth} value={0} />,
+      <OpinionVotesButton {...defaultProps} opinion={opinionVoteBoth} value="MITIGE" />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render a red button when value is -1 and vote type is both', () => {
     const wrapper = shallow(
-      <OpinionVotesButton {...defaultProps} opinion={opinionVoteBoth} value={-1} />,
+      <OpinionVotesButton {...defaultProps} opinion={opinionVoteBoth} value="NO" />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should render a green button when value is 1 and vote type is simple', () => {
     const wrapper = shallow(
-      <OpinionVotesButton {...defaultProps} opinion={opinionVoteSimple} value={1} />,
+      <OpinionVotesButton {...defaultProps} opinion={opinionVoteSimple} value="YES" />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should not render a button when value is 0 and vote type is simple', () => {
     const wrapper = shallow(
-      <OpinionVotesButton {...defaultProps} opinion={opinionVoteSimple} value={0} />,
+      <OpinionVotesButton {...defaultProps} opinion={opinionVoteSimple} value="MITIGE" />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should not render a button when value is -1 and vote type is simple', () => {
     const wrapper = shallow(
-      <OpinionVotesButton {...defaultProps} opinion={opinionVoteSimple} value={-1} />,
+      <OpinionVotesButton {...defaultProps} opinion={opinionVoteSimple} value="NO" />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should not render a button when value is 1 and vote type is disabled', () => {
     const wrapper = shallow(
-      <OpinionVotesButton {...defaultProps} opinion={opinionVoteDisabled} value={1} />,
+      <OpinionVotesButton {...defaultProps} opinion={opinionVoteDisabled} value="YES" />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should not render a button when value is 0 and vote type is disabled', () => {
     const wrapper = shallow(
-      <OpinionVotesButton {...defaultProps} opinion={opinionVoteDisabled} value={0} />,
+      <OpinionVotesButton {...defaultProps} opinion={opinionVoteDisabled} value="MITIGE" />,
     );
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should not render a button when value is -1 and vote type is disabled', () => {
     const wrapper = shallow(
-      <OpinionVotesButton {...defaultProps} opinion={opinionVoteDisabled} value={-1} />,
+      <OpinionVotesButton {...defaultProps} opinion={opinionVoteDisabled} value="NO" />,
     );
     expect(wrapper).toMatchSnapshot();
   });

@@ -5,11 +5,35 @@ import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import renderInput from '../Form/Field';
-import { editOpinionVersion as onSubmit } from '../../redux/modules/opinion';
 import type { State } from '../../types';
 import type { OpinionVersionEditForm_version } from './__generated__/OpinionVersionEditForm_version.graphql';
 
 export const formName = 'opinion-version-edit';
+
+const onSubmit = () => {
+  // RemoveOpinionVersionMutation
+  // export const editOpinionVersion = (
+  //   data: Object,
+  //   dispatch: Dispatch,
+  //   { opinionId, versionId }: { opinionId: string, versionId: string },
+  // ): Promise<*> => {
+  //   dispatch(startEditingOpinionVersion());
+  //   const apiData = {
+  //     title: data.title,
+  //     body: data.body,
+  //     comment: data.comment,
+  //   };
+  //   return Fetcher.put(`/opinions/${opinionId}/versions/${versionId}`, apiData).then(
+  //     () => {
+  //       dispatch(closeOpinionVersionEditModal());
+  //       location.reload(); // TODO when enough time
+  //     },
+  //     () => {
+  //       dispatch(cancelEditingOpinionVersion());
+  //     },
+  //   );
+  // };
+};
 
 type RelayProps = {
   version: OpinionVersionEditForm_version,
