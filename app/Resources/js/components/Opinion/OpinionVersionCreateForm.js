@@ -31,11 +31,10 @@ const onSubmit = (data: FormValues, dispatch: Dispatch, { opinion }: Props): Pro
   };
   return AddVersionMutation.commit({ input })
     .then(res => {
-      if (res.addVersion && res.addVersion.versionEdge) {
-        const version = res.addVersion.versionEdge.node;
-        window.location.href = version.url;
+      if (res && res.addVersion && res.addVersion.versionEdge && res.addVersion.versionEdge.node) {
+        window.location.href = res.addVersion.versionEdge.node.url;
+        dispatch(closeOpinionVersionCreateModal());
       }
-      dispatch(closeOpinionVersionCreateModal());
     })
     .catch(() => {
       dispatch(cancelCreatingOpinionVersion());

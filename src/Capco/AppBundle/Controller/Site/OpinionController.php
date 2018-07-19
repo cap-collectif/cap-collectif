@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Opinion;
@@ -25,24 +24,36 @@ class OpinionController extends Controller
      * @Template("CapcoAppBundle:Consultation:show_by_type.html.twig")
      * @Cache(smaxage=60, public=true)
      */
-    public function showByTypeAction(Project $project, ConsultationStep $currentStep, string $opinionTypeSlug, int $page, Request $request, string $opinionsSort = null)
-    {
+    public function showByTypeAction(
+        Project $project,
+        ConsultationStep $currentStep,
+        string $opinionTypeSlug,
+        int $page,
+        Request $request,
+        string $opinionsSort = null
+    ) {
         if (!$currentStep->canDisplay()) {
-            throw $this->createNotFoundException($this->get('translator')->trans('project.error.not_found', [], 'CapcoAppBundle'));
+            throw $this->createNotFoundException(
+                $this->get('translator')->trans('project.error.not_found', [], 'CapcoAppBundle')
+            );
         }
 
         $opinionTypesResolver = $this->get('capco.opinion_types.resolver');
         $opinionType = $opinionTypesResolver->findByStepAndSlug($currentStep, $opinionTypeSlug);
 
         $filter = $opinionsSort ?: $opinionType->getDefaultFilter();
-        $currentUrl = $this
-            ->generateUrl('app_consultation_show_opinions', [
-                'projectSlug' => $project->getSlug(),
-                'stepSlug' => $currentStep->getSlug(),
-                'opinionTypeSlug' => $opinionType->getSlug(),
-                'page' => $page,
-            ]);
-        $opinions = $this->get('capco.opinion.repository')->getByOpinionTypeOrdered($opinionType->getId(), 10, $page, $filter);
+        $currentUrl = $this->generateUrl('app_consultation_show_opinions', [
+            'projectSlug' => $project->getSlug(),
+            'stepSlug' => $currentStep->getSlug(),
+            'opinionTypeSlug' => $opinionType->getSlug(),
+            'page' => $page,
+        ]);
+        $opinions = $this->get('capco.opinion.repository')->getByOpinionTypeOrdered(
+            $opinionType->getId(),
+            10,
+            $page,
+            $filter
+        );
 
         return [
             'currentUrl' => $currentUrl,
@@ -64,26 +75,30 @@ class OpinionController extends Controller
      * @Template("CapcoAppBundle:Opinion:show_version.html.twig")
      * @Cache(smaxage=60, public=true)
      */
-    public function showOpinionVersionAction(string $projectSlug, string $stepSlug, string $opinionTypeSlug, string $opinionSlug, string $versionSlug)
-    {
-        $opinion = $this->get('capco.opinion.repository')->getOneBySlugJoinUserReports($opinionSlug, $this->getUser());
+    public function showOpinionVersionAction(
+        string $projectSlug,
+        string $stepSlug,
+        string $opinionTypeSlug,
+        string $opinionSlug,
+        string $versionSlug
+    ) {
+        $opinion = $this->get('capco.opinion.repository')->findOneBySlug($opinionSlug);
         $version = $this->get('capco.opinion_version.repository')->findOneBySlug($versionSlug);
 
         if (!$opinion || !$version || !$version->canDisplay()) {
-            throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', [], 'CapcoAppBundle'));
+            throw $this->createNotFoundException(
+                $this->get('translator')->trans('opinion.error.not_found', [], 'CapcoAppBundle')
+            );
         }
 
         $currentStep = $opinion->getStep();
-        $sources = $this->get('capco.source.repository')->getByOpinionJoinUserReports($opinion, $this->getUser());
 
         return [
             'version' => $version,
+            'opinion' => $opinion,
             'currentStep' => $currentStep,
             'project' => $currentStep->getProject(),
-            'opinion' => $opinion,
-            'sources' => $sources,
             'opinionType' => $opinion->getOpinionType(),
-            'votes' => $opinion->getVotes(),
         ];
     }
 
@@ -95,15 +110,29 @@ class OpinionController extends Controller
      * @Template("CapcoAppBundle:Opinion:show.html.twig")
      * @Cache(smaxage=60, public=true)
      */
-    public function showOpinionAction(string $projectSlug, string $stepSlug, string $opinionTypeSlug, string $opinionSlug)
-    {
-        $opinion = $this->get('capco.opinion.repository')->getOneBySlugJoinUserReports($opinionSlug, $this->getUser());
+    public function showOpinionAction(
+        string $projectSlug,
+        string $stepSlug,
+        string $opinionTypeSlug,
+        string $opinionSlug
+    ) {
+        $opinion = $this->get('capco.opinion.repository')->getOneBySlugJoinUserReports(
+            $opinionSlug,
+            $this->getUser()
+        );
 
         if (!$opinion || !$opinion->canDisplay()) {
-            throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', [], 'CapcoAppBundle'));
+            throw $this->createNotFoundException(
+                $this->get('translator')->trans('opinion.error.not_found', [], 'CapcoAppBundle')
+            );
         }
 
-        $currentUrl = $this->generateUrl('app_project_show_opinion', ['projectSlug' => $projectSlug, 'stepSlug' => $stepSlug, 'opinionTypeSlug' => $opinionTypeSlug, 'opinionSlug' => $opinionSlug]);
+        $currentUrl = $this->generateUrl('app_project_show_opinion', [
+            'projectSlug' => $projectSlug,
+            'stepSlug' => $stepSlug,
+            'opinionTypeSlug' => $opinionTypeSlug,
+            'opinionSlug' => $opinionSlug,
+        ]);
         $currentStep = $opinion->getStep();
 
         $steps = $this->get('capco.abstract_step.repository')->getByProjectSlug($projectSlug);

@@ -74,6 +74,8 @@ Version:
             answer:
                 type: "Answer"
                 resolve: "@=value.getAnswer()"
+            contribuable:
+                resolve: "@=value.canContribute()"
             parent:
                 type: "Opinion!"
             viewerVote:

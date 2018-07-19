@@ -10,3 +10,5 @@ AddVersionInput:
               type: "String!"
             body:
               type: "String!"
+            comment:
+              type: "String"

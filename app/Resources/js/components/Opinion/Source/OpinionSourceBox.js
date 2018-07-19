@@ -19,55 +19,12 @@ type Props = {
 };
 
 type State = {
-  sources: Array<$FlowFixMe>,
-  isLoading: boolean,
-  filter: $FlowFixMe,
+  order: string,
 };
 
 class OpinionSourceBox extends React.Component<Props, State> {
   state = {
-    sources: [],
-    isLoading: true,
-    filter: OpinionSourceStore.filter,
-  };
-
-  componentWillMount() {
-    OpinionSourceStore.addChangeListener(this.onChange);
-  }
-
-  componentDidMount() {
-    this.loadSourcesFromServer();
-    this.loadCategoriesFromServer();
-  }
-
-  componentDidUpdate(prevProps: Props, prevState: State) {
-    if (this.state.filter !== prevState.filter) {
-      this.loadSourcesFromServer();
-    }
-  }
-
-  componentWillUnmount() {
-    OpinionSourceStore.removeChangeListener(this.onChange);
-  }
-
-  onChange = () => {
-    this.setState({
-      sources: OpinionSourceStore.sources,
-      filter: OpinionSourceStore.filter,
-      isLoading: false,
-    });
-  };
-
-  handleFilterChange = (event: $FlowFixMe) => {
-    this.setState({
-      filter: event.target.value,
-    });
-  };
-
-  loadSourcesFromServer = () => {
-    const { opinion } = this.props;
-    this.setState({ isLoading: true });
-    OpinionSourceActions.load(opinion, this.state.filter);
+    order: string,
   };
 
   handleFilterChange = (event: $FlowFixMe) => {
@@ -106,7 +63,7 @@ class OpinionSourceBox extends React.Component<Props, State> {
             ) {
               sourceable: node(id: $sourceableId) {
                 ...OpinionSourceListView_sourceable
-                  @arguments(orderBy: $orderBy, count: $count, isAuthenticated: $isAuthenticated)
+                  @arguments(cursor: $cursor, orderBy: $orderBy, count: $count, isAuthenticated: $isAuthenticated)
               }
             }
           `}
