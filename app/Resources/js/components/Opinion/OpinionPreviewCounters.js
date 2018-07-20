@@ -4,7 +4,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { COMMENT_SYSTEM_NONE } from '../../constants/ArgumentConstants';
 import { VOTE_WIDGET_DISABLED } from '../../constants/VoteConstants';
-import InlineList from "../Ui/List/InlineList";
+import InlineList from '../Ui/List/InlineList';
 import type { OpinionPreviewCounters_opinion } from './__generated__/OpinionPreviewCounters_opinion.graphql';
 
 type Props = {
@@ -22,7 +22,7 @@ class OpinionPreviewCounters extends React.Component<Props> {
         <FormattedMessage
           id="global.votes"
           values={{
-            num: opinion.votesCount,
+            num: opinion.votes ? opinion.votes.totalCount : 0,
           }}
         />,
       );
@@ -55,11 +55,7 @@ class OpinionPreviewCounters extends React.Component<Props> {
     return (
       <InlineList>
         {counters.map((counter, index) => {
-            return (
-              <li key={index}>
-                {counter}
-              </li>
-            )
+          return <li key={index}>{counter}</li>;
         })}
       </InlineList>
     );
@@ -71,7 +67,9 @@ export default createFragmentContainer(OpinionPreviewCounters, {
     fragment OpinionPreviewCounters_opinion on OpinionOrVersion {
       ... on Opinion {
         __typename
-        votesCount
+        votes(first: 0) {
+          totalCount
+        }
         sourcesCount
         argumentsCount
         versionsCount
@@ -84,7 +82,9 @@ export default createFragmentContainer(OpinionPreviewCounters, {
       }
       ... on Version {
         __typename
-        votesCount
+        votes(first: 0) {
+          totalCount
+        }
         sourcesCount
         argumentsCount
         section {

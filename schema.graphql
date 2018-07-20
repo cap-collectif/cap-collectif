@@ -31,7 +31,9 @@ input AddOpinionVoteInput {
 
 type AddOpinionVotePayload {
   vote: OpinionVote
+  voteEdge: OpinionVoteEdge
   viewer: User!
+  previousVoteId: ID
   clientMutationId: String
 }
 
@@ -1444,18 +1446,6 @@ type Opinion implements Node & Argumentable & Sourceable & Contribution & Trasha
   expired: Boolean!
   published: Boolean!
 
-  # Number of votes.
-  votesCount: Int!
-
-  # Number of ok votes.
-  votesCountOk: Int!
-
-  # Number of mitige votes.
-  votesCountMitige: Int!
-
-  # Number of negative votes.
-  votesCountNok: Int!
-
   # Number of arguments.
   argumentsCount: Int!
 
@@ -1473,7 +1463,16 @@ type Opinion implements Node & Argumentable & Sourceable & Contribution & Trasha
 
   # The viewer vote.
   viewerVote: OpinionVote
-  votes(after: String, first: Int, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}): OpinionVoteConnection!
+  votes(
+    after: String
+    first: Int
+    before: String
+    last: Int
+    orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}
+
+    # Filters vote by value
+    value: YesNoPairedVoteValue
+  ): OpinionVoteConnection!
 
   # Identifies the contribution title.
   title: String!
@@ -1513,6 +1512,7 @@ type OpinionModal {
 union OpinionOrVersion = Opinion | Version
 
 type OpinionVote implements YesNoPairedVote {
+  # The ID of an object
   id: ID!
 
   # The author of the contribution. If null, account has been deleted.
@@ -2273,7 +2273,8 @@ input RemoveOpinionVoteInput {
 }
 
 type RemoveOpinionVotePayload {
-  contribution: Opinion
+  deletedVoteId: ID
+  contribution: Contribution
   viewer: User!
   clientMutationId: String
 }
@@ -3408,18 +3409,6 @@ type Version implements Node & Contribution & Sourceable & Argumentable & Trasha
   # Explenation.
   comment: String
 
-  # Number of votes.
-  votesCount: Int!
-
-  # Number of ok votes.
-  votesCountOk: Int!
-
-  # Number of mitige votes.
-  votesCountMitige: Int!
-
-  # Number of negative votes.
-  votesCountNok: Int!
-
   # Number of arguments.
   argumentsCount: Int!
 
@@ -3431,7 +3420,16 @@ type Version implements Node & Contribution & Sourceable & Argumentable & Trasha
 
   # Number of sources.
   sourcesCount: Int!
-  votes(first: Int): [VersionVote]
+  votes(
+    after: String
+    first: Int
+    before: String
+    last: Int
+    orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}
+
+    # Filters vote by value
+    value: YesNoPairedVoteValue
+  ): VersionVoteConnection!
 
   # The title of the contribution.
   title: String!
@@ -3493,6 +3491,7 @@ enum VersionOrderField {
 }
 
 type VersionVote implements YesNoPairedVote & ContributionWithAuthor {
+  # The ID of an object
   id: ID!
 
   # The author of the contribution.
@@ -3510,6 +3509,26 @@ type VersionVote implements YesNoPairedVote & ContributionWithAuthor {
 
   # Returns 'vote'.
   kind: String!
+}
+
+# A connection to a list of items.
+type VersionVoteConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [VersionVoteEdge]
+}
+
+# An edge in a connection.
+type VersionVoteEdge {
+  # The item at the end of the edge.
+  node: VersionVote
+
+  # A cursor for use in pagination.
+  cursor: String!
 }
 
 type Vote {

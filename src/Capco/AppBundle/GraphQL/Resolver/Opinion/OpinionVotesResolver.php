@@ -1,47 +1,83 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL\Resolver\Opinion;
 
-use Capco\AppBundle\Repository\OpinionVoteRepository;
-use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
+use Capco\AppBundle\Entity\OpinionVersion;
+use Overblog\GraphQLBundle\Definition\Argument;
+use Capco\AppBundle\Repository\OpinionVoteRepository;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Capco\AppBundle\Repository\OpinionVersionVoteRepository;
+use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 
 class OpinionVotesResolver implements ResolverInterface
 {
     private $logger;
-    private $voteRepository;
+    private $opinionVoteRepository;
+    private $versionVoteRepository;
 
     public function __construct(
-        OpinionVoteRepository $voteRepository,
+        OpinionVoteRepository $opinionVoteRepository,
+        OpinionVersionVoteRepository $versionVoteRepository,
         LoggerInterface $logger
     ) {
         $this->logger = $logger;
-        $this->voteRepository = $voteRepository;
+        $this->opinionVoteRepository = $opinionVoteRepository;
+        $this->versionVoteRepository = $versionVoteRepository;
     }
 
-    public function __invoke($votable, Argument $args) : Connection
-    {
-        $includeExpired = false;
-        $type = $args->offsetGet('type');
+    public function __invoke(
+        OpinionContributionInterface $contribution,
+        Argument $args
+    ): Connection {
         $field = $args->offsetGet('orderBy')['field'];
         $direction = $args->offsetGet('orderBy')['direction'];
 
-        $paginator = new Paginator(function (int $offset, int $limit) use ($votable, $type, $field, $direction) {
-            return $this->voteRepository->getByContribution($votable, $limit, $offset, $field, $direction)->getIterator()->getArrayCopy();
+        $repo = $this->opinionVoteRepository;
+        if ($contribution instanceof OpinionVersion) {
+            $repo = $this->versionVoteRepository;
+        }
+
+        if ($args->offsetExists('value')) {
+            $value = $args->offsetGet('value');
+            $paginator = new Paginator(function (int $offset, int $limit) use (
+                $repo,
+                $contribution,
+                $value,
+                $field,
+                $direction
+            ) {
+                return $repo
+                    ->getByContributionAndValue(
+                        $contribution,
+                        $value,
+                        $limit,
+                        $offset,
+                        $field,
+                        $direction
+                    )
+                    ->getIterator()
+                    ->getArrayCopy();
+            });
+            $totalCount = $repo->countByContributionAndValue($contribution, $value);
+
+            return $paginator->auto($args, $totalCount);
+        }
+
+        $paginator = new Paginator(function (int $offset, int $limit) use (
+            $repo,
+            $contribution,
+            $field,
+            $direction
+        ) {
+            return $repo
+                ->getByContribution($contribution, $limit, $offset, $field, $direction)
+                ->getIterator()
+                ->getArrayCopy();
         });
-        $totalCount = $this->voteRepository->countByContribution($votable);
+        $totalCount = $repo->countByContribution($contribution);
 
         return $paginator->auto($args, $totalCount);
     }
-
-    // public function resolvePropositionVotes(Opinion $proposition, Arg $argument)
-    // {
-    //     return $this->container->get('doctrine')->getManager()
-    //         ->createQuery('SELECT PARTIAL vote.{id, value, createdAt, expired}, PARTIAL author.{id}, PARTIAL opinion.{id} FROM CapcoAppBundle:OpinionVote vote LEFT JOIN vote.user author LEFT JOIN vote.opinion opinion WHERE vote.opinion = \'' . $proposition->getId() . '\'')
-    //         // ->setMaxResults(50)
-    //         ->getArrayResult();
-    // }
 }

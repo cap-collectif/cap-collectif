@@ -31,13 +31,14 @@ export class Opinion extends React.Component<Props> {
             <OpinionPreviewCounters opinion={opinion} />
           </div>
         </div>
+        {/* $FlowFixMe */}
         <VotePiechart
           top={10}
           height={'90px'}
           width={'145px'}
-          ok={opinion.votesCountOk}
-          nok={opinion.votesCountNok}
-          mitige={opinion.votesCountMitige}
+          ok={opinion.votesOk.totalCount}
+          nok={opinion.votesNok.totalCount}
+          mitige={opinion.votesMitige.totalCount}
         />
       </ListGroupItem>
     );
@@ -56,13 +57,15 @@ export default createFragmentContainer(
       title
       createdAt
       updatedAt
-      votesCountOk
-      votesCountNok
-      votesCountMitige
-      votesCount
-      versionsCount
-      sourcesCount
-      argumentsCount
+      votesOk: votes(first: 0, value: YES) {
+        totalCount
+      }
+      votesNok: votes(first: 0, value: NO) {
+        totalCount
+      }
+      votesMitige: votes(first: 0, value: MITIGE) {
+        totalCount
+      }
       pinned
       author {
         vip

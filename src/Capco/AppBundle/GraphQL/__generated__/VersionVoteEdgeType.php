@@ -11,59 +11,35 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
 /**
  * THIS FILE WAS GENERATED AND SHOULD NOT BE MODIFIED!
  */
-final class RemoveOpinionVotePayloadType extends ObjectType implements GeneratedTypeInterface
+final class VersionVoteEdgeType extends ObjectType implements GeneratedTypeInterface
 {
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
-            'name' => 'RemoveOpinionVotePayload',
-            'description' => null,
+            'name' => 'VersionVoteEdge',
+            'description' => 'An edge in a connection.',
             'fields' => function () use ($globalVariable) {
                 return [
-                'deletedVoteId' => [
-                    'type' => Type::id(),
+                'node' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('VersionVote'),
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => null,
+                    'description' => 'The item at the end of the edge.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => null,
                 ],
-                'contribution' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('Contribution'),
+                'cursor' => [
+                    'type' => Type::nonNull(Type::string()),
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'viewer' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('User')),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'clientMutationId' => [
-                    'type' => Type::string(),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => null,
+                    'description' => 'A cursor for use in pagination.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

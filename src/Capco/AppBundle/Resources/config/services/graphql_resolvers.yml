@@ -240,11 +240,6 @@ services:
         }
       - {
           name: overblog_graphql.resolver,
-          alias: 'proposition_votesCount',
-          method: 'resolveContributionVotesCount',
-        }
-      - {
-          name: overblog_graphql.resolver,
           alias: 'proposition_argumentsCountFor',
           method: 'resolveArgumentsCountFor',
         }

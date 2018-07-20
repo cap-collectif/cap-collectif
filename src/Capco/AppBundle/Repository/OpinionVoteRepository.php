@@ -32,7 +32,7 @@ class OpinionVoteRepository extends EntityRepository
     public function getByAuthorAndOpinion(User $author, Opinion $opinion): ?OpinionVote
     {
         $qb = $this->getQueryBuilder()
-            ->leftJoin('v.opinion = :opinion')
+            ->andWhere('v.opinion = :opinion')
             ->andWhere('v.user = :author')
             ->setParameter('author', $author)
             ->setParameter('opinion', $opinion);
@@ -74,11 +74,47 @@ class OpinionVoteRepository extends EntityRepository
         return $qb;
     }
 
+    public function getByContributionAndValueQB(Opinion $votable, int $value)
+    {
+        $qb = $this->getQueryBuilder();
+        $qb
+            ->andWhere('v.opinion = :opinion')
+            ->setParameter('opinion', $votable->getId())
+            ->andWhere('v.value = :value')
+            ->setParameter('value', $value);
+        return $qb;
+    }
+
     public function countByContribution(Opinion $votable): int
     {
         $qb = $this->getByContributionQB($votable);
         $qb->select('COUNT(v.id)');
         return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function countByContributionAndValue(Opinion $votable, int $value): int
+    {
+        $qb = $this->getByContributionAndValueQB($votable, $value);
+        $qb->select('COUNT(v.id)');
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function getByContributionAndValue(
+        Opinion $votable,
+        int $value,
+        int $limit,
+        int $first,
+        string $field,
+        string $direction
+    ): Paginator {
+        $qb = $this->getByContributionAndValueQB($votable, $value);
+
+        if ('CREATED_AT' === $field) {
+            $qb->addOrderBy('v.createdAt', $direction);
+        }
+
+        $qb->setFirstResult($first)->setMaxResults($limit);
+        return new Paginator($qb);
     }
 
     public function getByContribution(

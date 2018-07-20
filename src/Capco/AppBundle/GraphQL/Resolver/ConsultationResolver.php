@@ -127,23 +127,21 @@ class ConsultationResolver implements ContainerAwareInterface
 
     public function resolvePropositionUrl(Opinion $contribution): string
     {
-        $step = $this->container
-            ->get('capco.consultation_step.repository')
-            ->getByOpinionId($contribution->getId());
+        $step = $this->container->get('capco.consultation_step.repository')->getByOpinionId(
+            $contribution->getId()
+        );
         $project = $step->getProject();
 
-        return $this->container
-            ->get('router')
-            ->generate(
-                'app_consultation_show_opinion',
-                [
-                    'projectSlug' => $project->getSlug(),
-                    'stepSlug' => $step->getSlug(),
-                    'opinionTypeSlug' => $contribution->getOpinionType()->getSlug(),
-                    'opinionSlug' => $contribution->getSlug(),
-                ],
-                UrlGeneratorInterface::ABSOLUTE_URL
-            );
+        return $this->container->get('router')->generate(
+            'app_consultation_show_opinion',
+            [
+                'projectSlug' => $project->getSlug(),
+                'stepSlug' => $step->getSlug(),
+                'opinionTypeSlug' => $contribution->getOpinionType()->getSlug(),
+                'opinionSlug' => $contribution->getSlug(),
+            ],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
     }
 
     public function getSectionChildren(OpinionType $type, Arg $argument)
@@ -172,17 +170,15 @@ class ConsultationResolver implements ContainerAwareInterface
         $project = $step->getProject();
 
         return (
-            $this->container
-                ->get('router')
-                ->generate(
-                    'app_consultation_show_opinions',
-                    [
-                        'projectSlug' => $project->getSlug(),
-                        'stepSlug' => $step->getSlug(),
-                        'opinionTypeSlug' => $type->getSlug(),
-                    ],
-                    UrlGeneratorInterface::ABSOLUTE_URL
-                ) . '/1'
+            $this->container->get('router')->generate(
+                'app_consultation_show_opinions',
+                [
+                    'projectSlug' => $project->getSlug(),
+                    'stepSlug' => $step->getSlug(),
+                    'opinionTypeSlug' => $type->getSlug(),
+                ],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            ) . '/1'
         );
     }
 
@@ -254,11 +250,6 @@ class ConsultationResolver implements ContainerAwareInterface
         return $object->getTrashedAt() ? $object->getTrashedAt()->format(\DateTime::ATOM) : null;
     }
 
-    public function resolveContributionVotesCount(OpinionContributionInterface $opinion): int
-    {
-        return $opinion->getVotesCountAll();
-    }
-
     public function resolveArgumentsCountFor(OpinionContributionInterface $opinion)
     {
         return $opinion->getArgumentForCount();
@@ -286,9 +277,9 @@ class ConsultationResolver implements ContainerAwareInterface
 
     public function resolveVersionReportings(OpinionVersion $version)
     {
-        return $this->container
-            ->get('capco.reporting.repository')
-            ->findBy(['opinionVersion' => $version]);
+        return $this->container->get('capco.reporting.repository')->findBy([
+            'opinionVersion' => $version,
+        ]);
     }
 
     public function resolveArgumentUrl(Argument $argument): string
@@ -310,19 +301,17 @@ class ConsultationResolver implements ContainerAwareInterface
         $step = $opinion->getStep();
         $project = $step->getProject();
 
-        return $this->container
-            ->get('router')
-            ->generate(
-                'app_project_show_opinion_version',
-                [
-                    'projectSlug' => $project->getSlug(),
-                    'stepSlug' => $step->getSlug(),
-                    'opinionTypeSlug' => $opinionType->getSlug(),
-                    'opinionSlug' => $opinion->getSlug(),
-                    'versionSlug' => $version->getSlug(),
-                ],
-                UrlGeneratorInterface::ABSOLUTE_URL
-            );
+        return $this->container->get('router')->generate(
+            'app_project_show_opinion_version',
+            [
+                'projectSlug' => $project->getSlug(),
+                'stepSlug' => $step->getSlug(),
+                'opinionTypeSlug' => $opinionType->getSlug(),
+                'opinionSlug' => $opinion->getSlug(),
+                'versionSlug' => $version->getSlug(),
+            ],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
     }
 
     public function resolveCreatedAt(CreatableInterface $object): string
@@ -338,8 +327,7 @@ class ConsultationResolver implements ContainerAwareInterface
     public function resolveVersionVotes(OpinionVersion $version, Arg $argument)
     {
         return // ->setMaxResults(50)
-        $this->container
-            ->get('doctrine')
+        $this->container->get('doctrine')
             ->getManager()
             ->createQuery(
                 'SELECT PARTIAL vote.{id, value, createdAt, expired}, PARTIAL author.{id} FROM CapcoAppBundle:OpinionVersionVote vote LEFT JOIN vote.user author WHERE vote.opinionVersion = \'' .
@@ -351,8 +339,7 @@ class ConsultationResolver implements ContainerAwareInterface
 
     public function resolveVotesByContribution(Arg $argument)
     {
-        return $this->container
-            ->get('doctrine')
+        return $this->container->get('doctrine')
             ->getManager()
             ->createQuery(
                 'SELECT PARTIAL vote.{id, value}, PARTIAL author.{id} FROM CapcoAppBundle:OpinionVote vote LEFT JOIN vote.user author WHERE vote.opinion = \'' .
@@ -364,15 +351,15 @@ class ConsultationResolver implements ContainerAwareInterface
 
     public function resolveContributionsByConsultation(Arg $argument)
     {
-        return $this->container
-            ->get('capco.opinion.repository')
-            ->findBy(['step' => $argument->offsetGet('consultation')]);
+        return $this->container->get('capco.opinion.repository')->findBy([
+            'step' => $argument->offsetGet('consultation'),
+        ]);
     }
 
     public function resolveContributions(ConsultationStep $consultation)
     {
-        return $this->container
-            ->get('capco.opinion.repository')
-            ->findBy(['step' => $consultation->getId()]);
+        return $this->container->get('capco.opinion.repository')->findBy([
+            'step' => $consultation->getId(),
+        ]);
     }
 }

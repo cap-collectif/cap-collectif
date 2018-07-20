@@ -1,0 +1,7 @@
+VersionVoteConnection:
+    type: relay-connection
+    config:
+        nodeType: VersionVote
+        connectionFields:
+            totalCount:
+                type: Int!

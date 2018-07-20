@@ -4,10 +4,12 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Error\UserError;
+use Capco\AppBundle\Helper\RedisStorageHelper;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Capco\AppBundle\Repository\OpinionRepository;
-use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\OpinionVoteRepository;
+use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\OpinionVersionVoteRepository;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
@@ -25,13 +27,15 @@ class RemoveOpinionVoteMutation implements MutationInterface
         OpinionVoteRepository $opinionVoteRepo,
         OpinionRepository $opinionRepo,
         OpinionVersionVoteRepository $versionVoteRepo,
-        OpinionVersionRepository $versionRepo
+        OpinionVersionRepository $versionRepo,
+        RedisStorageHelper $redisStorageHelper
     ) {
         $this->em = $em;
         $this->opinionVoteRepo = $opinionVoteRepo;
         $this->opinionRepo = $opinionRepo;
         $this->versionRepo = $versionRepo;
         $this->versionVoteRepo = $versionVoteRepo;
+        $this->redisStorageHelper = $redisStorageHelper;
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -58,13 +62,19 @@ class RemoveOpinionVoteMutation implements MutationInterface
         if (!$vote) {
             throw new UserError('You have not voted for this opinion.');
         }
+
         // $opinion->decrementVotesCountByType($vote->getValue());
+        $deletedVoteId = GlobalId::toGlobalId('OpinionVote', $vote->getId());
 
         $this->em->remove($vote);
         $this->em->flush();
 
         $this->redisStorageHelper->recomputeUserCounters($viewer);
 
-        return ['contribution' => $contribution, 'viewer' => $viewer];
+        return [
+            'deletedVoteId' => $deletedVoteId,
+            'contribution' => $contribution,
+            'viewer' => $viewer,
+        ];
     }
 }

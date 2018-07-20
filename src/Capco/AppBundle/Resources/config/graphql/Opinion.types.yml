@@ -20,19 +20,6 @@ Opinion:
                 description: "true if the contribution is expired."
             published:
                 type: "Boolean!"
-            votesCount:
-                type: "Int!"
-                description: "Number of votes."
-                resolve: "@=resolver('proposition_votesCount', [value])"
-            votesCountOk:
-                type: "Int!"
-                description: "Number of ok votes."
-            votesCountMitige:
-                type: "Int!"
-                description: "Number of mitige votes."
-            votesCountNok:
-                type: "Int!"
-                description: "Number of negative votes."
             argumentsCount:
                 type: "Int!"
                 description: "Number of arguments."
@@ -62,6 +49,9 @@ Opinion:
                     orderBy:
                         type: "ProposalVotesOrder"
                         defaultValue: { field: CREATED_AT, direction: DESC }
+                    value:
+                        type: "YesNoPairedVoteValue"
+                        description: "Filters vote by value"
             title:
                 type: "String!"
                 description: "Identifies the contribution title."

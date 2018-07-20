@@ -2,13 +2,11 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import { connect, type MapStateToProps } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import LoginOverlay from '../../Utils/LoginOverlay';
-import { VOTE_WIDGET_SIMPLE, VOTE_WIDGET_BOTH } from '../../../constants/VoteConstants';
+import { VOTE_WIDGET_BOTH } from '../../../constants/VoteConstants';
 import AddOpinionVoteMutation from '../../../mutations/AddOpinionVoteMutation';
 import RemoveOpinionVoteMutation from '../../../mutations/RemoveOpinionVoteMutation';
-import type { State, Dispatch } from '../../../types';
 import type { OpinionVotesButton_opinion } from './__generated__/OpinionVotesButton_opinion.graphql';
 
 type RelayProps = {
@@ -42,14 +40,12 @@ const valueToObject = (value: YesNoPairedVoteValue): Object => {
 type Props = {
   style: Object,
   value: YesNoPairedVoteValue,
-  dispatch: Dispatch,
   user?: Object,
 } & RelayProps;
 
 export class OpinionVotesButton extends React.Component<Props> {
   static defaultProps = {
     style: {},
-    disabled: false,
   };
 
   vote = () => {
@@ -68,8 +64,6 @@ export class OpinionVotesButton extends React.Component<Props> {
           //      actionType: UPDATE_OPINION_FAILURE,
           //      message: 'opinion.request.failure',
           //    });
-          //    console.error(e); // eslint-disable-line no-console
-          //  });
         });
     }
   };
@@ -102,7 +96,7 @@ export class OpinionVotesButton extends React.Component<Props> {
   };
 
   voteIsEnabled = () => {
-    const { opinion, value } = this.props;
+    const { opinion } = this.props;
     if (!opinion.section) {
       return false;
     }
@@ -110,21 +104,18 @@ export class OpinionVotesButton extends React.Component<Props> {
     if (voteType === VOTE_WIDGET_BOTH) {
       return true;
     }
-    if (voteType === VOTE_WIDGET_SIMPLE) {
-      return value === 1;
-    }
     return false;
   };
 
   render() {
-    if (!this.voteIsEnabled()) {
+    const { opinion, value, style } = this.props;
+    if (
+      !this.voteIsEnabled() ||
+      (opinion.__typename !== 'Opinion' && opinion.__typename !== 'Version')
+    ) {
       return null;
     }
-    const { opinion, value, style, user } = this.props;
-    if (opinion.__typename !== 'Opinion' || opinion.__typename !== 'Version') {
-      return null;
-    }
-    const disabled = !opinion.contribuable || !user;
+    const disabled = !opinion.contribuable;
     const data = valueToObject(value);
     const active = opinion.viewerVote && opinion.viewerVote.value === value;
     return (
@@ -148,15 +139,7 @@ export class OpinionVotesButton extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => {
-  return {
-    user: state.user.user,
-  };
-};
-
-const container = connect(mapStateToProps)(OpinionVotesButton);
-
-export default createFragmentContainer(container, {
+export default createFragmentContainer(OpinionVotesButton, {
   opinion: graphql`
     fragment OpinionVotesButton_opinion on OpinionOrVersion {
       __typename

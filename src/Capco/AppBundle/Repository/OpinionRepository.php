@@ -74,20 +74,6 @@ class OpinionRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
-    public function getWithVotes(string $id, $limit = null)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('vote')
-            ->innerJoin('o.votes', 'vote')
-            ->andWhere('o.id = :id')
-            ->setParameter('id', $id);
-        if (null !== $limit) {
-            $qb->setMaxResults($limit);
-        }
-
-        return $qb->getQuery()->getOneOrNullResult();
-    }
-
     /**
      * Get one opinion by slug.
      *
@@ -107,32 +93,6 @@ class OpinionRepository extends EntityRepository
             ->leftJoin('o.step', 's')
             ->andWhere('o.slug = :opinion')
             ->setParameter('opinion', $opinion);
-        return $qb->getQuery()->getOneOrNullResult();
-    }
-
-    /**
-     * Get one opinion by slug with user reports.
-     *
-     * @param $opinion
-     * @param $user
-     *
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     *
-     * @return mixed
-     */
-    public function getOneBySlugJoinUserReports($opinion, $user)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->addSelect('a', 'm', 'ot', 's', 'r')
-            ->leftJoin('o.Author', 'a')
-            ->leftJoin('a.media', 'm')
-            ->leftJoin('o.OpinionType', 'ot')
-            ->leftJoin('o.step', 's')
-            ->leftJoin('o.Reports', 'r', 'WITH', 'r.Reporter =  :user')
-            ->andWhere('o.slug = :opinion')
-            ->setParameter('opinion', $opinion)
-            ->setParameter('user', $user);
-
         return $qb->getQuery()->getOneOrNullResult();
     }
 

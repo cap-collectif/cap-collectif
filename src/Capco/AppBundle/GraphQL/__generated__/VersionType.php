@@ -310,56 +310,6 @@ final class VersionType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'votesCount' => [
-                    'type' => Type::nonNull(Type::int()),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["proposition_votesCount", array(0 => $value)]);
-                    },
-                    'description' => 'Number of votes.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'votesCountOk' => [
-                    'type' => Type::nonNull(Type::int()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'Number of ok votes.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'votesCountMitige' => [
-                    'type' => Type::nonNull(Type::int()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'Number of mitige votes.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'votesCountNok' => [
-                    'type' => Type::nonNull(Type::int()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'Number of negative votes.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'argumentsCount' => [
                     'type' => Type::nonNull(Type::int()),
                     'args' => [
@@ -413,16 +363,42 @@ final class VersionType extends ObjectType implements GeneratedTypeInterface
                     'access' => null,
                 ],
                 'votes' => [
-                    'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('VersionVote')),
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('VersionVoteConnection')),
                     'args' => [
+                        [
+                            'name' => 'after',
+                            'type' => Type::string(),
+                            'description' => null,
+                        ],
                         [
                             'name' => 'first',
                             'type' => Type::int(),
                             'description' => null,
                         ],
+                        [
+                            'name' => 'before',
+                            'type' => Type::string(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'last',
+                            'type' => Type::int(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'orderBy',
+                            'type' => $globalVariable->get('typeResolver')->resolve('ProposalVotesOrder'),
+                            'description' => null,
+                            'defaultValue' => ['field' => 'CREATED_AT', 'direction' => 'DESC'],
+                        ],
+                        [
+                            'name' => 'value',
+                            'type' => $globalVariable->get('typeResolver')->resolve('YesNoPairedVoteValue'),
+                            'description' => 'Filters vote by value',
+                        ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["version_votes", array(0 => $value, 1 => $args)]);
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionVotesResolver", array(0 => $value, 1 => $args)]);
                     },
                     'description' => null,
                     'deprecationReason' => null,

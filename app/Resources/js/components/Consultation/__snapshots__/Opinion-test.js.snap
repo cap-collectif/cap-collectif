@@ -27,7 +27,6 @@ exports[`<Opinion /> renders correcty 1`] = `
           Object {
             "$fragmentRefs": null,
             "$refType": null,
-            "argumentsCount": 0,
             "author": Object {
               "displayName": "",
               "media": Object {
@@ -46,15 +45,18 @@ exports[`<Opinion /> renders correcty 1`] = `
               "versionable": true,
               "voteWidgetType": 1,
             },
-            "sourcesCount": 0,
             "title": "title",
             "updatedAt": "",
             "url": "",
-            "versionsCount": 0,
-            "votesCount": 0,
-            "votesCountMitige": 0,
-            "votesCountNok": 0,
-            "votesCountOk": 0,
+            "votesMitige": Object {
+              "totalCount": 0,
+            },
+            "votesNok": Object {
+              "totalCount": 0,
+            },
+            "votesOk": Object {
+              "totalCount": 0,
+            },
           }
         }
         rankingThreshold={0}
@@ -65,7 +67,6 @@ exports[`<Opinion /> renders correcty 1`] = `
           Object {
             "$fragmentRefs": null,
             "$refType": null,
-            "argumentsCount": 0,
             "author": Object {
               "displayName": "",
               "media": Object {
@@ -84,15 +85,18 @@ exports[`<Opinion /> renders correcty 1`] = `
               "versionable": true,
               "voteWidgetType": 1,
             },
-            "sourcesCount": 0,
             "title": "title",
             "updatedAt": "",
             "url": "",
-            "versionsCount": 0,
-            "votesCount": 0,
-            "votesCountMitige": 0,
-            "votesCountNok": 0,
-            "votesCountOk": 0,
+            "votesMitige": Object {
+              "totalCount": 0,
+            },
+            "votesNok": Object {
+              "totalCount": 0,
+            },
+            "votesOk": Object {
+              "totalCount": 0,
+            },
           }
         }
         showTypeLabel={false}
@@ -102,7 +106,6 @@ exports[`<Opinion /> renders correcty 1`] = `
           Object {
             "$fragmentRefs": null,
             "$refType": null,
-            "argumentsCount": 0,
             "author": Object {
               "displayName": "",
               "media": Object {
@@ -121,23 +124,25 @@ exports[`<Opinion /> renders correcty 1`] = `
               "versionable": true,
               "voteWidgetType": 1,
             },
-            "sourcesCount": 0,
             "title": "title",
             "updatedAt": "",
             "url": "",
-            "versionsCount": 0,
-            "votesCount": 0,
-            "votesCountMitige": 0,
-            "votesCountNok": 0,
-            "votesCountOk": 0,
+            "votesMitige": Object {
+              "totalCount": 0,
+            },
+            "votesNok": Object {
+              "totalCount": 0,
+            },
+            "votesOk": Object {
+              "totalCount": 0,
+            },
           }
         }
       />
     </div>
   </div>
-  <VotePiechart
+  <InjectIntl(VotePiechart)
     height="90px"
-    left={0}
     mitige={0}
     nok={0}
     ok={0}

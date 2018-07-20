@@ -28,21 +28,23 @@ class OpinionVotesBox extends React.Component<Props> {
         <Row>
           <Col sm={12} md={8} style={{ paddingTop: '15px' }}>
             {/* $FlowFixMe */}
-            <OpinionVotesButtons show opinion={opinion} />
+            <OpinionVotesButtons opinion={opinion} />
             {/* $FlowFixMe */}
             <OpinionVotesBar opinion={opinion} />
           </Col>
-          {opinion.votesCount &&
-            opinion.votesCount > 0 &&
+          {opinion.votes &&
+            opinion.votes.totalCount &&
+            opinion.votes.totalCount > 0 &&
             widgetType === VOTE_WIDGET_BOTH && (
               <Col sm={12} md={4}>
+                {/* $FlowFixMe */}
                 <VotePiechart
                   top={20}
                   height={'180px'}
                   width={'200px'}
-                  ok={opinion.votesCountOk}
-                  nok={opinion.votesCountNok}
-                  mitige={opinion.votesCountMitige}
+                  ok={opinion.votesYes ? opinion.votesYes.totalCount : 0}
+                  nok={opinion.votesNo ? opinion.votesNo.totalCount : 0}
+                  mitige={opinion.votesMitige ? opinion.votesMitige.totalCount : 0}
                 />
               </Col>
             )}
@@ -58,10 +60,18 @@ export default createFragmentContainer(OpinionVotesBox, {
       ...OpinionVotesButtons_opinion
       ...OpinionVotesBar_opinion
       ... on Opinion {
-        votesCountMitige
-        votesCountNok
-        votesCountOk
-        votesCount
+        votes(first: 0) {
+          totalCount
+        }
+        votesYes: votes(first: 0, value: YES) {
+          totalCount
+        }
+        votesNo: votes(first: 0, value: NO) {
+          totalCount
+        }
+        votesMitige: votes(first: 0, value: MITIGE) {
+          totalCount
+        }
         contribuable
         section {
           voteWidgetType
@@ -69,10 +79,18 @@ export default createFragmentContainer(OpinionVotesBox, {
         }
       }
       ... on Version {
-        votesCountMitige
-        votesCountNok
-        votesCountOk
-        votesCount
+        votes(first: 0) {
+          totalCount
+        }
+        votesYes: votes(first: 0, value: YES) {
+          totalCount
+        }
+        votesNo: votes(first: 0, value: NO) {
+          totalCount
+        }
+        votesMitige: votes(first: 0, value: MITIGE) {
+          totalCount
+        }
         contribuable
         section {
           voteWidgetType

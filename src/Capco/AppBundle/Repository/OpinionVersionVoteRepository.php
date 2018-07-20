@@ -7,9 +7,77 @@ use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Capco\AppBundle\Entity\OpinionVersionVote;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class OpinionVersionVoteRepository extends EntityRepository
 {
+    public function getByContributionQB(OpinionVersion $votable)
+    {
+        $qb = $this->getQueryBuilder();
+        $qb->andWhere('v.opinionVersion = :opinion')->setParameter('opinion', $votable->getId());
+        return $qb;
+    }
+
+    public function getByContributionAndValueQB(OpinionVersion $votable, int $value)
+    {
+        $qb = $this->getQueryBuilder();
+        $qb
+            ->andWhere('v.opinionVersion = :opinion')
+            ->setParameter('opinion', $votable->getId())
+            ->andWhere('v.value = :value')
+            ->setParameter('value', $value);
+        return $qb;
+    }
+
+    public function countByContribution(OpinionVersion $votable): int
+    {
+        $qb = $this->getByContributionQB($votable);
+        $qb->select('COUNT(v.id)');
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function countByContributionAndValue(OpinionVersion $votable, int $value): int
+    {
+        $qb = $this->getByContributionAndValueQB($votable, $value);
+        $qb->select('COUNT(v.id)');
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function getByContributionAndValue(
+        OpinionVersion $votable,
+        int $value,
+        int $limit,
+        int $first,
+        string $field,
+        string $direction
+    ): Paginator {
+        $qb = $this->getByContributionAndValueQB($votable, $value);
+
+        if ('CREATED_AT' === $field) {
+            $qb->addOrderBy('v.createdAt', $direction);
+        }
+
+        $qb->setFirstResult($first)->setMaxResults($limit);
+        return new Paginator($qb);
+    }
+
+    public function getByContribution(
+        OpinionVersion $votable,
+        int $limit,
+        int $first,
+        string $field,
+        string $direction
+    ): Paginator {
+        $qb = $this->getByContributionQB($votable);
+
+        if ('CREATED_AT' === $field) {
+            $qb->addOrderBy('v.createdAt', $direction);
+        }
+
+        $qb->setFirstResult($first)->setMaxResults($limit);
+        return new Paginator($qb);
+    }
+
     public function countByAuthorAndProject(User $author, Project $project): int
     {
         $qb = $this->getQueryBuilder()

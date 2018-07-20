@@ -28,13 +28,14 @@ class OpinionVersion extends React.Component<Props> {
           {/* $FlowFixMe */}
           <OpinionPreview opinion={version} rankingThreshold={rankingThreshold} />
         </div>
+        {/* $FlowFixMe */}
         <VotePiechart
           top={10}
           height={'90px'}
           width={'145px'}
-          ok={version.votesCountOk}
-          nok={version.votesCountNok}
-          mitige={version.votesCountMitige}
+          ok={version.votesOk ? version.votesOk.totalCount : 0}
+          nok={version.votesNok ? version.votesNok.totalCount : 0}
+          mitige={version.votesMitige ? version.votesMitige.totalCount : 0}
         />
       </ListGroupItem>
     );
@@ -48,9 +49,15 @@ export default createFragmentContainer(OpinionVersion, {
       author {
         vip
       }
-      votesCountOk
-      votesCountNok
-      votesCountMitige
+      votesOk: votes(first: 0, value: YES) {
+        totalCount
+      }
+      votesNok: votes(first: 0, value: NO) {
+        totalCount
+      }
+      votesMitige: votes(first: 0, value: MITIGE) {
+        totalCount
+      }
     }
   `,
 });

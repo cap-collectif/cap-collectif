@@ -2,7 +2,9 @@ RemoveOpinionVotePayload:
     type: relay-mutation-payload
     config:
         fields:
+            deletedVoteId:
+                type: "ID"
             contribution:
-                type: "Opinion"
+                type: "Contribution"
             viewer:
                 type: "User!"

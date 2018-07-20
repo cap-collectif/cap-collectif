@@ -116,10 +116,7 @@ class OpinionController extends Controller
         string $opinionTypeSlug,
         string $opinionSlug
     ) {
-        $opinion = $this->get('capco.opinion.repository')->getOneBySlugJoinUserReports(
-            $opinionSlug,
-            $this->getUser()
-        );
+        $opinion = $this->get('capco.opinion.repository')->findOneBySlug($opinionSlug);
 
         if (!$opinion || !$opinion->canDisplay()) {
             throw $this->createNotFoundException(
@@ -127,23 +124,13 @@ class OpinionController extends Controller
             );
         }
 
-        $currentUrl = $this->generateUrl('app_project_show_opinion', [
-            'projectSlug' => $projectSlug,
-            'stepSlug' => $stepSlug,
-            'opinionTypeSlug' => $opinionTypeSlug,
-            'opinionSlug' => $opinionSlug,
-        ]);
         $currentStep = $opinion->getStep();
 
-        $steps = $this->get('capco.abstract_step.repository')->getByProjectSlug($projectSlug);
-
         return [
-            'currentUrl' => $currentUrl,
             'currentStep' => $currentStep,
             'project' => $currentStep->getProject(),
             'opinion' => $opinion,
             'opinionType' => $opinion->getOpinionType(),
-            'project_steps' => $steps,
         ];
     }
 }

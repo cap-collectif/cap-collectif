@@ -52,7 +52,7 @@ export class ArgumentListViewPaginated extends React.Component<Props, State> {
                     this.setState({ loading: false });
                   });
                 }}>
-                <FormattedMessage id="see-more-proposals" />
+                <FormattedMessage id="global.more" />
               </a>
             )}
           </ListGroupItem>

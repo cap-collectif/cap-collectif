@@ -4,5 +4,9 @@ AddOpinionVotePayload:
         fields:
             vote:
                 type: "OpinionVote"
+            voteEdge:
+                type: "OpinionVoteEdge"
             viewer:
                 type: "User!"
+            previousVoteId:
+                type: "ID"

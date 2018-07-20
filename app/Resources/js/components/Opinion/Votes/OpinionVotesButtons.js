@@ -7,19 +7,18 @@ import type { OpinionVotesButtons_opinion } from './__generated__/OpinionVotesBu
 
 type Props = {
   opinion: OpinionVotesButtons_opinion,
-  show: boolean,
 };
 
 class OpinionVotesButtons extends React.Component<Props> {
   render() {
-    const { opinion, show } = this.props;
-    if (!show) {
-      return null;
-    }
+    const { opinion } = this.props;
     return (
       <ButtonToolbar className="opinion__votes__buttons">
+        {/* $FlowFixMe */}
         <OpinionVotesButton opinion={opinion} value="YES" />
+        {/* $FlowFixMe */}
         <OpinionVotesButton style={{ marginLeft: 5 }} opinion={opinion} value="MITIGE" />
+        {/* $FlowFixMe */}
         <OpinionVotesButton style={{ marginLeft: 5 }} opinion={opinion} value="NO" />
       </ButtonToolbar>
     );
@@ -29,12 +28,6 @@ class OpinionVotesButtons extends React.Component<Props> {
 export default createFragmentContainer(OpinionVotesButtons, {
   opinion: graphql`
     fragment OpinionVotesButtons_opinion on OpinionOrVersion {
-      ... on Opinion {
-        contribuable
-      }
-      ... on Version {
-        contribuable
-      }
       ...OpinionVotesButton_opinion
     }
   `,

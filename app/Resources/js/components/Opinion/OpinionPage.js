@@ -4,7 +4,6 @@ import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import { FormattedHTMLMessage } from 'react-intl';
 import { Alert, Glyphicon } from 'react-bootstrap';
 import environment, { graphqlError } from '../../createRelayEnvironment';
-import FlashMessages from '../Utils/FlashMessages';
 import OpinionBox from './OpinionBox';
 import OpinionTabs from './OpinionTabs';
 import Loader from '../Ui/Loader';
@@ -18,21 +17,7 @@ type Props = {
   versionId?: string,
 };
 
-type State = {
-  messages: {
-    errors: Array<string>,
-    success: Array<string>,
-  },
-};
-
-export class OpinionPage extends React.Component<Props, State> {
-  state = {
-    messages: {
-      errors: [],
-      success: [],
-    },
-  };
-
+export class OpinionPage extends React.Component<Props> {
   render() {
     const { opinionId, versionId } = this.props;
     const id = opinionId || versionId;
@@ -41,7 +26,6 @@ export class OpinionPage extends React.Component<Props, State> {
     }
     return (
       <div className="has-chart">
-        <FlashMessages errors={this.state.messages.errors} success={this.state.messages.success} />
         <QueryRenderer
           environment={environment}
           query={graphql`

@@ -20,16 +20,17 @@ class OpinionVotesBar extends React.Component<Props> {
         {opinion.section.votesThreshold && (
           <VotesBar
             max={opinion.section.votesThreshold}
-            value={opinion.votesCountOk || 0}
+            value={opinion.votesYes ? opinion.votesYes.totalCount : 0}
             helpText={opinion.section.votesThresholdHelpText}
           />
         )}
         <div style={{ paddingTop: '20px' }}>
-          {opinion.votes &&
-            opinion.votes.edges &&
-            opinion.votes.edges
+          {opinion.previewVotes &&
+            opinion.previewVotes.edges &&
+            opinion.previewVotes.edges
               .filter(Boolean)
               .map(edge => edge.node)
+              .filter(Boolean)
               .slice(0, 5)
               .map((vote, index) => {
                 /* $FlowFixMe */
@@ -39,11 +40,11 @@ class OpinionVotesBar extends React.Component<Props> {
           <OpinionVotesModal opinion={opinion} />
         </div>
         <div>
-          {opinion.votes && (
+          {opinion.previewVotes && (
             <FormattedMessage
               id="global.votes"
               values={{
-                num: opinion.votes.totalCount,
+                num: opinion.previewVotes.totalCount,
               }}
             />
           )}
@@ -59,7 +60,10 @@ export default createFragmentContainer(OpinionVotesBar, {
       ...OpinionVotesModal_opinion
       ... on Opinion {
         id
-        votes(first: 5) {
+        votesYes: votes(first: 0, value: YES) {
+          totalCount
+        }
+        previewVotes: votes(first: 5) @connection(key: "OpinionVotesBar_previewVotes") {
           totalCount
           edges {
             node {
@@ -72,15 +76,20 @@ export default createFragmentContainer(OpinionVotesBar, {
           votesThresholdHelpText
           votesThreshold
         }
-        votesCount
-        votesCountOk
-        #viewerHasVote
-        #viewerVote
       }
       ... on Version {
         id
-        votesCount
-        votesCountOk
+        votesYes: votes(first: 0, value: YES) {
+          totalCount
+        }
+        previewVotes: votes(first: 5) {
+          totalCount
+          edges {
+            node {
+              ...OpinionUserVote_vote
+            }
+          }
+        }
         section {
           votesThreshold
           votesThresholdHelpText

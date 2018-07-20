@@ -82,10 +82,6 @@ class OpinionVersionRepository extends EntityRepository
 
     /**
      * Get trashed or unpublished versions by project.
-     *
-     * @param $project
-     *
-     * @return array
      */
     public function getTrashedOrUnpublishedByProject($project)
     {
@@ -177,31 +173,6 @@ class OpinionVersionRepository extends EntityRepository
             ->setParameter('author', $user)
             ->getQuery()
             ->getResult();
-    }
-
-    /**
-     * Get enabled opinions by consultation step.
-     *
-     * @param $step
-     * @param mixed $asArray
-     *
-     * @return mixed
-     */
-    public function getEnabledByConsultationStep($step, $asArray = false)
-    {
-        $qb = $this->getIsEnabledQueryBuilder('ov')
-            ->addSelect('o', 'ot', 'aut', 'ut', 'args')
-            ->leftJoin('ov.parent', 'o')
-            ->leftJoin('ov.author', 'aut')
-            ->leftJoin('aut.userType', 'ut')
-            ->leftJoin('ov.arguments', 'args')
-            ->leftJoin('o.OpinionType', 'ot')
-            ->andWhere('o.step = :step')
-            ->andWhere('o.isEnabled = 1')
-            ->setParameter('step', $step)
-            ->addOrderBy('ov.updatedAt', 'DESC');
-
-        return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
     }
 
     public function countByAuthorAndProject(User $author, Project $project): int
@@ -334,20 +305,6 @@ class OpinionVersionRepository extends EntityRepository
 
         $qb->orderBy('ov.votesCountOk', 'DESC');
         return $qb->getQuery()->getResult();
-    }
-
-    public function getWithVotes(string $id, $limit = null)
-    {
-        $qb = $this->getIsEnabledQueryBuilder('o')
-            ->addSelect('vote')
-            ->innerJoin('o.votes', 'vote')
-            ->andWhere('o.id = :id')
-            ->setParameter('id', $id);
-        if (null !== $limit) {
-            $qb->setMaxResults($limit);
-        }
-
-        return $qb->getQuery()->getOneOrNullResult();
     }
 
     protected function getIsEnabledQueryBuilder($alias = 'o')

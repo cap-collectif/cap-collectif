@@ -34,8 +34,32 @@ final class AddOpinionVotePayloadType extends ObjectType implements GeneratedTyp
                     'public' => null,
                     'access' => null,
                 ],
+                'voteEdge' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('OpinionVoteEdge'),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'viewer' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('User')),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'previousVoteId' => [
+                    'type' => Type::id(),
                     'args' => [
                     ],
                     'resolve' => null,

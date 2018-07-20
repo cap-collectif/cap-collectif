@@ -11,15 +11,7 @@ describe('<Opinion />', () => {
       $refType,
       $fragmentRefs,
       id: 'opinionId',
-      argumentsCount: 0,
-      author: {
-        displayName: '',
-        show_url: '',
-        vip: false,
-        media: {
-          url: '',
-        },
-      },
+      author: { displayName: '', show_url: '', vip: false, media: { url: '' } },
       createdAt: '',
       pinned: true,
       section: {
@@ -29,15 +21,12 @@ describe('<Opinion />', () => {
         voteWidgetType: 1,
         title: 'Section',
       },
-      sourcesCount: 0,
       title: 'title',
       updatedAt: '',
       url: '',
-      versionsCount: 0,
-      votesCount: 0,
-      votesCountMitige: 0,
-      votesCountNok: 0,
-      votesCountOk: 0,
+      votesMitige: { totalCount: 0 },
+      votesNok: { totalCount: 0 },
+      votesOk: { totalCount: 0 },
     },
   };
 

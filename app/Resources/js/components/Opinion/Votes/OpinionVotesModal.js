@@ -1,24 +1,26 @@
 // @flow
 import * as React from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
+import { graphql, createPaginationContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import { Modal, Row } from 'react-bootstrap';
+import { Modal, Row, Button } from 'react-bootstrap';
 import CloseButton from '../../Form/CloseButton';
-// import Loader from '../Ui/Loader';
 import UserBox from '../../User/UserBox';
 import type { OpinionVotesModal_opinion } from './__generated__/OpinionVotesModal_opinion.graphql';
 
 type Props = {
   opinion: OpinionVotesModal_opinion,
+  relay: Object,
 };
 
 type State = {
   showModal: boolean,
+  loading: boolean,
 };
 
 class OpinionVotesModal extends React.Component<Props, State> {
   state = {
     showModal: false,
+    loading: false,
   };
 
   show = () => {
@@ -30,7 +32,7 @@ class OpinionVotesModal extends React.Component<Props, State> {
   };
 
   render() {
-    const { opinion } = this.props;
+    const { relay, opinion } = this.props;
     const moreVotes =
       opinion.moreVotes && opinion.moreVotes.totalCount > 5
         ? opinion.moreVotes.totalCount - 5
@@ -77,6 +79,18 @@ class OpinionVotesModal extends React.Component<Props, State> {
                     );
                   })}
             </Row>
+            {relay.hasMore() && (
+              <Button
+                disabled={this.state.loading}
+                onClick={() => {
+                  this.setState({ loading: true });
+                  relay.loadMore(100, () => {
+                    this.setState({ loading: false });
+                  });
+                }}>
+                <FormattedMessage id="global.more" />
+              </Button>
+            )}
           </Modal.Body>
           <Modal.Footer>
             <CloseButton onClose={this.close} label="global.close" />
@@ -87,29 +101,69 @@ class OpinionVotesModal extends React.Component<Props, State> {
   }
 }
 
-export default createFragmentContainer(OpinionVotesModal, {
-  opinion: graphql`
-    fragment OpinionVotesModal_opinion on OpinionOrVersion {
-      ... on Opinion {
-        id
-        moreVotes: votes(first: 100) {
-          totalCount
-          edges {
-            node {
-              author {
-                id
-                show_url
-                displayName
-                username
-                contributionsCount
-                media {
-                  url
+export default createPaginationContainer(
+  OpinionVotesModal,
+  {
+    opinion: graphql`
+      fragment OpinionVotesModal_opinion on OpinionOrVersion
+        @argumentDefinitions(
+          count: { type: "Int", defaultValue: 10 }
+          cursor: { type: "String", defaultValue: null }
+        ) {
+        ... on Opinion {
+          id
+          moreVotes: votes(first: $count, after: $cursor)
+            @connection(key: "OpinionVotesModal_moreVotes", filters: []) {
+            totalCount
+            pageInfo {
+              hasPreviousPage
+              hasNextPage
+              startCursor
+              endCursor
+            }
+            edges {
+              node {
+                author {
+                  id
+                  show_url
+                  displayName
+                  username
+                  contributionsCount
+                  media {
+                    url
+                  }
                 }
               }
             }
           }
         }
       }
-    }
-  `,
-});
+    `,
+  },
+  {
+    direction: 'forward',
+    getConnectionFromProps(props: Props) {
+      return props.opinion && props.opinion.moreVotes;
+    },
+    getFragmentVariables(prevVars) {
+      return {
+        ...prevVars,
+      };
+    },
+    getVariables(props: Props, { count, cursor }, fragmentVariables) {
+      return {
+        ...fragmentVariables,
+        count,
+        cursor,
+        opinionId: props.opinion.id,
+      };
+    },
+    query: graphql`
+      query OpinionVotesModalPaginatedQuery($opinionId: ID!, $cursor: String, $count: Int) {
+        opinion: node(id: $opinionId) {
+          ...OpinionVotesModal_opinion @arguments(cursor: $cursor, count: $count)
+        }
+      }
+    `,
+  },
+);

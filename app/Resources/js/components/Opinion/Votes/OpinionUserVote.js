@@ -32,7 +32,7 @@ class OpinionUserVote extends React.Component<Props> {
 
 export default createFragmentContainer(OpinionUserVote, {
   vote: graphql`
-    fragment OpinionUserVote_vote on OpinionVote {
+    fragment OpinionUserVote_vote on YesNoPairedVote {
       id
       author {
         displayName
