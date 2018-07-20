@@ -59,6 +59,7 @@ type Props = {
   style?: Object,
   radioImage?: Object,
   lang?: string,
+  // to use in case of decimal number input
   step?: string,
 };
 
