@@ -30,7 +30,7 @@ class OpinionPreview extends React.Component<Props> {
           {/* $FlowFixMe */}
           <OpinionInfos rankingThreshold={rankingThreshold} opinion={opinion} />
           {/* $FlowFixMe */}
-          <OpinionPreviewTitle opinion={opinion} showTypeLabel />
+          <OpinionPreviewTitle opinion={opinion} showTypeLabel={false} />
           {/* $FlowFixMe */}
           <OpinionPreviewCounters opinion={opinion} />
         </div>

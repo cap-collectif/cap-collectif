@@ -107,7 +107,6 @@ class OpinionInfos extends React.Component<Props> {
     return (
       <p className="opinion__user">
         {opinion.author && <UserLink user={opinion.author} />}
-        {' • '}
         {this.renderDate()}
         {this.renderEditionDate()}
         <PinnedLabel show={opinion.pinned || false} type="opinion" />
