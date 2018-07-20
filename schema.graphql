@@ -387,6 +387,46 @@ type CollectStep implements Node & Step & ProposalStep {
 
   # The url of the step
   url: String!
+  proposals(
+    # If non-null, filters proposals with the given district.
+    district: ID
+
+    # If non-null, filters proposals with the given type of author.
+    userType: ID
+
+    # If non-null, filters proposals with the given category.
+    category: ID
+
+    # If non-null, filters proposals with the given author.
+    author: ID
+
+    # If non-null, filters proposals with the given status.
+    status: ID
+
+    # If non-null, filters proposals with the given theme.
+    theme: ID
+
+    # If non-null, filters proposals with the given string to look for.
+    term: String
+
+    # Ordering options for proposals returned from the connection.
+    orderBy: ProposalOrder = {field: CREATED_AT, direction: ASC}
+
+    # Affiliation options for proposals returned from the connection.
+    affiliations: [ProposalAffiliation]
+
+    # Returns the elements in the list that come after the specified global ID.
+    after: String
+
+    # Returns the first n elements from the list.
+    first: Int = 20
+
+    # Returns the elements in the list that come before the specified global ID.
+    before: String
+
+    # Returns the last n elements from the list.
+    last: Int
+  ): ProposalConnection!
 
   # The requirements to vote on this step.
   requirements: RequirementConnection!
@@ -403,30 +443,6 @@ type CollectStep implements Node & Step & ProposalStep {
 
   # A list of viewer votes associated with the step.
   viewerVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}): ProposalVoteConnection!
-  proposals(
-    district: ID
-    userType: ID
-    category: ID
-    status: ID
-    theme: ID
-    term: String
-
-    # Order for connection.
-    orderBy: ProposalOrder = {field: CREATED_AT, direction: ASC}
-    affiliations: [ProposalAffiliation]
-
-    # Returns the elements in the list that come after the specified global ID.
-    after: String
-
-    # Returns the first n elements from the list.
-    first: Int = 10
-
-    # Returns the elements in the list that come before the specified global ID.
-    before: String
-
-    # Returns the last n elements from the list.
-    last: Int
-  ): ProposalConnection!
   statuses: [Status!]!
   private: Boolean!
   form: ProposalForm!
@@ -1825,11 +1841,6 @@ type ProposalEvaluation {
 type ProposalForm implements Node {
   # The ID of an object
   id: ID!
-  reference: String!
-  description: String
-  summaryHelpText: String
-  illustrationHelpText: String
-  title: String!
   proposals(
     # If non-null, filters proposals with the given district.
     district: ID
@@ -1839,6 +1850,9 @@ type ProposalForm implements Node {
 
     # If non-null, filters proposals with the given category.
     category: ID
+
+    # If non-null, filters proposals with the given author.
+    author: ID
 
     # If non-null, filters proposals with the given status.
     status: ID
@@ -1867,6 +1881,11 @@ type ProposalForm implements Node {
     # Returns the last n elements from the list.
     last: Int
   ): ProposalConnection!
+  reference: String!
+  description: String
+  summaryHelpText: String
+  illustrationHelpText: String
+  title: String!
 
   # Available categories for proposals of this form.
   categories: [ProposalCategory!]!
@@ -1972,6 +1991,46 @@ interface ProposalStep {
 
   # The url of the step
   url: String!
+  proposals(
+    # If non-null, filters proposals with the given district.
+    district: ID
+
+    # If non-null, filters proposals with the given type of author.
+    userType: ID
+
+    # If non-null, filters proposals with the given category.
+    category: ID
+
+    # If non-null, filters proposals with the given author.
+    author: ID
+
+    # If non-null, filters proposals with the given status.
+    status: ID
+
+    # If non-null, filters proposals with the given theme.
+    theme: ID
+
+    # If non-null, filters proposals with the given string to look for.
+    term: String
+
+    # Ordering options for proposals returned from the connection.
+    orderBy: ProposalOrder = {field: CREATED_AT, direction: ASC}
+
+    # Affiliation options for proposals returned from the connection.
+    affiliations: [ProposalAffiliation]
+
+    # Returns the elements in the list that come after the specified global ID.
+    after: String
+
+    # Returns the first n elements from the list.
+    first: Int = 20
+
+    # Returns the elements in the list that come before the specified global ID.
+    before: String
+
+    # Returns the last n elements from the list.
+    last: Int
+  ): ProposalConnection!
 
   # The requirements to vote on this step.
   requirements: RequirementConnection!
@@ -1988,30 +2047,6 @@ interface ProposalStep {
 
   # A list of viewer votes associated with the step.
   viewerVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}): ProposalVoteConnection!
-  proposals(
-    district: ID
-    userType: ID
-    category: ID
-    status: ID
-    theme: ID
-    term: String
-
-    # Order for connection.
-    orderBy: ProposalOrder = {field: CREATED_AT, direction: ASC}
-    affiliations: [ProposalAffiliation]
-
-    # Returns the elements in the list that come after the specified global ID.
-    after: String
-
-    # Returns the first n elements from the list.
-    first: Int = 10
-
-    # Returns the elements in the list that come before the specified global ID.
-    before: String
-
-    # Returns the last n elements from the list.
-    last: Int
-  ): ProposalConnection!
 }
 
 # Type of vote.
@@ -2089,7 +2124,7 @@ type Query {
     id: ID
   ): [Consultation!]!
   groups: [Group!]!
-  proposalForms: [ProposalForm!]!
+  proposalForms: [ProposalForm]!
 
   # Retrieve availables districts for a given address
   availableDistrictsForLocalisation(proposalFormId: ID!, latitude: Float!, longitude: Float!): [District!]!
@@ -2530,6 +2565,46 @@ type SelectionStep implements Node & Step & ProposalStep {
 
   # The url of the step
   url: String!
+  proposals(
+    # If non-null, filters proposals with the given district.
+    district: ID
+
+    # If non-null, filters proposals with the given type of author.
+    userType: ID
+
+    # If non-null, filters proposals with the given category.
+    category: ID
+
+    # If non-null, filters proposals with the given author.
+    author: ID
+
+    # If non-null, filters proposals with the given status.
+    status: ID
+
+    # If non-null, filters proposals with the given theme.
+    theme: ID
+
+    # If non-null, filters proposals with the given string to look for.
+    term: String
+
+    # Ordering options for proposals returned from the connection.
+    orderBy: ProposalOrder = {field: CREATED_AT, direction: ASC}
+
+    # Affiliation options for proposals returned from the connection.
+    affiliations: [ProposalAffiliation]
+
+    # Returns the elements in the list that come after the specified global ID.
+    after: String
+
+    # Returns the first n elements from the list.
+    first: Int = 20
+
+    # Returns the elements in the list that come before the specified global ID.
+    before: String
+
+    # Returns the last n elements from the list.
+    last: Int
+  ): ProposalConnection!
 
   # The requirements to vote on this step.
   requirements: RequirementConnection!
@@ -2546,30 +2621,6 @@ type SelectionStep implements Node & Step & ProposalStep {
 
   # A list of viewer votes associated with the step.
   viewerVotes(after: String, first: Int = 100000, before: String, last: Int, orderBy: ProposalVotesOrder = {field: CREATED_AT, direction: DESC}): ProposalVoteConnection!
-  proposals(
-    district: ID
-    userType: ID
-    category: ID
-    status: ID
-    theme: ID
-    term: String
-
-    # Order for connection.
-    orderBy: ProposalOrder = {field: CREATED_AT, direction: ASC}
-    affiliations: [ProposalAffiliation]
-
-    # Returns the elements in the list that come after the specified global ID.
-    after: String
-
-    # Returns the first n elements from the list.
-    first: Int = 10
-
-    # Returns the elements in the list that come before the specified global ID.
-    before: String
-
-    # Returns the last n elements from the list.
-    last: Int
-  ): ProposalConnection!
   position: Int!
   statuses: [Status!]!
 
