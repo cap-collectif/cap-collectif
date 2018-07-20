@@ -15,7 +15,7 @@ export class OpinionPreviewTitle extends React.Component<Props> {
     return (
       <h3 className="opinion__title">
         {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
-        {showTypeLabel ? <OpinionTypeLabel type={opinion.section || null} /> : null}
+        {showTypeLabel ? <OpinionTypeLabel section={opinion.section || null} /> : null}
         {showTypeLabel ? ' ' : null}
         <a href={opinion.url}>{opinion.title}</a>
       </h3>

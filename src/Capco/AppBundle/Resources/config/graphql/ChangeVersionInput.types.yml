@@ -12,3 +12,6 @@ ChangeVersionInput:
             title:
                 type: "String!"
                 description: "The contents of the version title."
+            comment:
+                type: "String!"
+                description: "The contents of the version comment."

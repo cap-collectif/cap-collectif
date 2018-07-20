@@ -4,7 +4,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { Modal, Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
-import { submit } from 'redux-form';
+import { submit, isSubmitting } from 'redux-form';
 import { closeOpinionVersionEditModal } from '../../redux/modules/opinion';
 import OpinionVersionEditForm, { formName } from './OpinionVersionEditForm';
 import type { State } from '../../types';
@@ -32,15 +32,10 @@ class OpinionVersionEditModal extends React.Component<Props> {
         aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-lg">
-            <FormattedMessage id="opinion.add_new_version" />
+            <FormattedMessage id="opinion.edit_version" />
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className="modal-top bg-info">
-            <p>
-              <FormattedMessage id="opinion.add_new_version_infos" />
-            </p>
-          </div>
           <OpinionVersionEditForm version={version} />
         </Modal.Body>
         <Modal.Footer>
@@ -67,7 +62,7 @@ class OpinionVersionEditModal extends React.Component<Props> {
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   show: state.opinion.showOpinionVersionEditModal,
-  submitting: false,
+  submitting: isSubmitting(formName)(state),
 });
 
 const container = connect(mapStateToProps)(OpinionVersionEditModal);

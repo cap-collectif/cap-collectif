@@ -4,36 +4,13 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+import ChangeVersionMutation from '../../mutations/ChangeVersionMutation';
+import { closeOpinionVersionEditModal } from '../../redux/modules/opinion';
 import renderInput from '../Form/Field';
 import type { State } from '../../types';
 import type { OpinionVersionEditForm_version } from './__generated__/OpinionVersionEditForm_version.graphql';
 
 export const formName = 'opinion-version-edit';
-
-const onSubmit = () => {
-  // RemoveOpinionVersionMutation
-  // export const editOpinionVersion = (
-  //   data: Object,
-  //   dispatch: Dispatch,
-  //   { opinionId, versionId }: { opinionId: string, versionId: string },
-  // ): Promise<*> => {
-  //   dispatch(startEditingOpinionVersion());
-  //   const apiData = {
-  //     title: data.title,
-  //     body: data.body,
-  //     comment: data.comment,
-  //   };
-  //   return Fetcher.put(`/opinions/${opinionId}/versions/${versionId}`, apiData).then(
-  //     () => {
-  //       dispatch(closeOpinionVersionEditModal());
-  //       location.reload(); // TODO when enough time
-  //     },
-  //     () => {
-  //       dispatch(cancelEditingOpinionVersion());
-  //     },
-  //   );
-  // };
-};
 
 type RelayProps = {
   version: OpinionVersionEditForm_version,
@@ -42,6 +19,21 @@ type FormValues = {
   confirm: boolean,
   title: string,
   comment: string,
+  body: string,
+};
+
+type Props = RelayProps;
+
+const onSubmit = (values: FormValues, dispatch, props: Props) => {
+  const input = {
+    versionId: props.version.id,
+    body: values.body,
+    title: values.title,
+    comment: values.comment,
+  };
+  return ChangeVersionMutation.commit({ input }).then(() => {
+    dispatch(closeOpinionVersionEditModal());
+  });
 };
 
 const validate = ({ confirm, title, comment }: FormValues) => {
@@ -65,8 +57,6 @@ const validate = ({ confirm, title, comment }: FormValues) => {
   }
   return errors;
 };
-
-type Props = RelayProps;
 
 class OpinionVersionEditForm extends React.Component<Props> {
   render() {
