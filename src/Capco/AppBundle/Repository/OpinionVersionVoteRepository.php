@@ -74,7 +74,7 @@ class OpinionVersionVoteRepository extends EntityRepository
         $qb = $this->getQueryBuilder();
         $qb
             ->andWhere('v.opinionVersion = :version')
-            ->andWhere('v.author = :author')
+            ->andWhere('v.user = :author')
             ->setParameter('version', $version)
             ->setParameter('author', $author);
 

@@ -13,8 +13,7 @@ exports[`<OpinionLink /> should render a colored list-group-item if author is vi
     <div
       className="left-block"
     >
-      <OpinionPreview
-        link={true}
+      <Relay(OpinionPreview)
         opinion={
           Object {
             "author": Object {
@@ -43,8 +42,7 @@ exports[`<OpinionLink /> should render a white list-group-item if not vip 1`] = 
     <div
       className="left-block"
     >
-      <OpinionPreview
-        link={true}
+      <Relay(OpinionPreview)
         opinion={
           Object {
             "author": Object {

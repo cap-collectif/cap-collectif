@@ -1,16 +1,16 @@
 // @flow
 import React from 'react';
 import { Modal } from 'react-bootstrap';
+import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-
-import OpinionSourceStore from '../../../stores/OpinionSourceStore';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import DeleteSourceMutation from '../../../mutations/DeleteSourceMutation';
+import type { OpinionSourceDeleteModal_source } from './__generated__/OpinionSourceDeleteModal_source.graphql';
 
 type Props = {
   show: boolean,
-  source: Object,
+  source: OpinionSourceDeleteModal_source,
   onClose: Function,
 };
 
@@ -26,14 +26,6 @@ class OpinionSourceDeleteModal extends React.Component<Props, State> {
   handleSubmit = () => {
     const { onClose, source } = this.props;
     this.setState({ isSubmitting: true });
-<<<<<<< HEAD
-<<<<<<< HEAD
-    OpinionSourceActions.delete(OpinionSourceStore.opinion, source.id)
-      .then(() => {
-        onClose();
-        this.setState({ isSubmitting: false });
-        OpinionSourceActions.load(OpinionSourceStore.opinion, 'last');
-=======
     const input = {
       sourceId: source.id,
     };
@@ -43,26 +35,10 @@ class OpinionSourceDeleteModal extends React.Component<Props, State> {
           onClose();
         }
         this.setState({ isSubmitting: false });
->>>>>>> Add mutations
       })
       .catch(() => {
         this.setState({ isSubmitting: false });
       });
-<<<<<<< HEAD
-=======
-    // const opinion = {};
-    // OpinionSourceActions.delete(opinion, source.id)
-    //   .then(() => {
-    //     onClose();
-    //     this.setState({ isSubmitting: false });
-    //     OpinionSourceActions.load(opinion, 'last');
-    //   })
-    //   .catch(() => {
-    //     this.setState({ isSubmitting: false });
-    //   });
->>>>>>> Some flow
-=======
->>>>>>> Add mutations
   };
 
   render() {
@@ -84,7 +60,9 @@ class OpinionSourceDeleteModal extends React.Component<Props, State> {
           <p className="h4">
             <FormattedMessage id="source.delete_modal.bold" />
           </p>
-          <div>{<FormattedMessage id="source.delete_modal.infos" />}</div>
+          <div>
+            <FormattedMessage id="source.delete_modal.infos" />
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <CloseButton onClose={onClose} />
@@ -103,4 +81,10 @@ class OpinionSourceDeleteModal extends React.Component<Props, State> {
   }
 }
 
-export default OpinionSourceDeleteModal;
+export default createFragmentContainer(OpinionSourceDeleteModal, {
+  source: graphql`
+    fragment OpinionSourceDeleteModal_source on Source {
+      id
+    }
+  `,
+});

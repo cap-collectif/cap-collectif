@@ -73,6 +73,65 @@ final class VersionType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
+                'contribuable' => [
+                    'type' => Type::nonNull(Type::boolean()),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $value->canContribute();
+                    },
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'arguments' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ArgumentConnection')),
+                    'args' => [
+                        [
+                            'name' => 'after',
+                            'type' => Type::string(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'first',
+                            'type' => Type::int(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'before',
+                            'type' => Type::string(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'last',
+                            'type' => Type::int(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'orderBy',
+                            'type' => $globalVariable->get('typeResolver')->resolve('ArgumentOrder'),
+                            'description' => null,
+                            'defaultValue' => ['field' => 'CREATED_AT', 'direction' => 'DESC'],
+                        ],
+                        [
+                            'name' => 'type',
+                            'type' => $globalVariable->get('typeResolver')->resolve('ArgumentValue'),
+                            'description' => 'If omitted, returns all arguments. If provided, returns the arguments of this particular type.',
+                        ],
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionArgumentsResolver", array(0 => $value, 1 => $args)]);
+                    },
+                    'description' => 'The arguments related to the argumentable.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'kind' => [
                     'type' => Type::nonNull(Type::string()),
                     'args' => [
@@ -143,6 +202,60 @@ final class VersionType extends ObjectType implements GeneratedTypeInterface
                     ],
                     'resolve' => null,
                     'description' => 'Identifies the date and time when the object was last updated.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'sources' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('SourceConnection')),
+                    'args' => [
+                        [
+                            'name' => 'after',
+                            'type' => Type::string(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'first',
+                            'type' => Type::int(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'before',
+                            'type' => Type::string(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'last',
+                            'type' => Type::int(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'orderBy',
+                            'type' => $globalVariable->get('typeResolver')->resolve('SourceOrder'),
+                            'description' => null,
+                            'defaultValue' => ['field' => 'CREATED_AT', 'direction' => 'DESC'],
+                        ],
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableSourcesResolver", array(0 => $value, 1 => $args)]);
+                    },
+                    'description' => 'The sources related to the sourceable.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'availableSourceCategories' => [
+                    'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('SourceCategory')),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableAvailableCategoriesResolver", array()]);
+                    },
+                    'description' => 'The available sources categories of to the sourceable.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -354,18 +467,6 @@ final class VersionType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'sources' => [
-                    'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('Source')),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The sources related to the contribution.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'reportings' => [
                     'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('Reporting')),
                     'args' => [
@@ -380,45 +481,66 @@ final class VersionType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'arguments' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ArgumentConnection')),
+                'section' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('Section')),
                     'args' => [
-                        [
-                            'name' => 'after',
-                            'type' => Type::string(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'first',
-                            'type' => Type::int(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'before',
-                            'type' => Type::string(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'last',
-                            'type' => Type::int(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'orderBy',
-                            'type' => $globalVariable->get('typeResolver')->resolve('ArgumentOrder'),
-                            'description' => null,
-                            'defaultValue' => ['field' => 'CREATED_AT', 'direction' => 'DESC'],
-                        ],
-                        [
-                            'name' => 'type',
-                            'type' => $globalVariable->get('typeResolver')->resolve('ArgumentValue'),
-                            'description' => 'If omitted, returns all arguments. If provided, returns the arguments of this particular type.',
-                        ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionArgumentsResolver", array(0 => $value, 1 => $args)]);
+                        return $globalVariable->get('resolverResolver')->resolve(["proposition_section", array(0 => $value)]);
                     },
-                    'description' => 'The arguments related to the contribution.',
+                    'description' => 'The section of the parent opinion.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'answer' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('Answer'),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $value->getAnswer();
+                    },
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'parent' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('Opinion')),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'viewerVote' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('OpinionVote'),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionViewerVoteResolver", array(0 => $value, 1 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
+                    },
+                    'description' => 'The viewer vote.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'diff' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('HTML'),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => null,
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -428,7 +550,7 @@ final class VersionType extends ObjectType implements GeneratedTypeInterface
             ];
             },
             'interfaces' => function () use ($globalVariable) {
-                return [$globalVariable->get('typeResolver')->resolve('Node'), $globalVariable->get('typeResolver')->resolve('Contribution'), $globalVariable->get('typeResolver')->resolve('Argumentable'), $globalVariable->get('typeResolver')->resolve('TrashableContribution'), $globalVariable->get('typeResolver')->resolve('ContributionWithAuthor'), $globalVariable->get('typeResolver')->resolve('EditableContribution')];
+                return [$globalVariable->get('typeResolver')->resolve('Node'), $globalVariable->get('typeResolver')->resolve('Contribution'), $globalVariable->get('typeResolver')->resolve('Sourceable'), $globalVariable->get('typeResolver')->resolve('Argumentable'), $globalVariable->get('typeResolver')->resolve('TrashableContribution'), $globalVariable->get('typeResolver')->resolve('ContributionWithAuthor'), $globalVariable->get('typeResolver')->resolve('EditableContribution')];
             },
             'isTypeOf' => null,
             'resolveField' => null,

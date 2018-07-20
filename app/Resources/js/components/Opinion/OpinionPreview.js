@@ -27,6 +27,7 @@ class OpinionPreview extends React.Component<Props> {
       <React.Fragment>
         <UserAvatar user={opinion.author} />
         <div>
+          {/* $FlowFixMe */}
           <OpinionInfos rankingThreshold={rankingThreshold} opinion={opinion} />
           {/* $FlowFixMe */}
           <OpinionPreviewTitle opinion={opinion} showTypeLabel />

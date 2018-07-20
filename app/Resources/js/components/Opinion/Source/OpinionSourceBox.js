@@ -19,12 +19,12 @@ type Props = {
 };
 
 type State = {
-  order: string,
+  order: 'old' | 'last' | 'popular',
 };
 
 class OpinionSourceBox extends React.Component<Props, State> {
   state = {
-    order: string,
+    order: 'last',
   };
 
   handleFilterChange = (event: $FlowFixMe) => {
@@ -63,7 +63,12 @@ class OpinionSourceBox extends React.Component<Props, State> {
             ) {
               sourceable: node(id: $sourceableId) {
                 ...OpinionSourceListView_sourceable
-                  @arguments(cursor: $cursor, orderBy: $orderBy, count: $count, isAuthenticated: $isAuthenticated)
+                  @arguments(
+                    cursor: $cursor
+                    orderBy: $orderBy
+                    count: $count
+                    isAuthenticated: $isAuthenticated
+                  )
               }
             }
           `}

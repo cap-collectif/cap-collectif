@@ -2,7 +2,7 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import classNames from 'classnames';
-import {ListGroupItem} from 'react-bootstrap';
+import { ListGroupItem } from 'react-bootstrap';
 
 import OpinionPreview from './OpinionPreview';
 import VotePiechart from '../Utils/VotePiechart';
@@ -25,6 +25,7 @@ class OpinionVersion extends React.Component<Props> {
     return (
       <ListGroupItem className={classes}>
         <div className="left-block">
+          {/* $FlowFixMe */}
           <OpinionPreview opinion={version} rankingThreshold={rankingThreshold} />
         </div>
         <VotePiechart

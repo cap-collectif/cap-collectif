@@ -2,7 +2,7 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import {ListGroup, ListGroupItem} from "react-bootstrap";
+import { ListGroup, ListGroupItem } from 'react-bootstrap';
 import OpinionPreview from './OpinionPreview';
 import OpinionAnswer from './OpinionAnswer';
 import OpinionButtons from './OpinionButtons';
@@ -61,6 +61,7 @@ export class OpinionBox extends React.Component<Props> {
           <ListGroup className="list-group-custom mb-0">
             <ListGroupItem className="list-group-item__opinion no-border">
               <div className="left-block">
+                {/* $FlowFixMe */}
                 <OpinionPreview
                   rankingThreshold={rankingThreshold}
                   opinionTerm={opinionTerm}

@@ -54,7 +54,6 @@ exports[`<OpinionBox /> should render correctly 1`] = `
         </p>
       </h2>
     </div>
-<<<<<<< HEAD
     <ListGroup
       bsClass="list-group"
       className="list-group-custom mb-0"
@@ -67,46 +66,28 @@ exports[`<OpinionBox /> should render correctly 1`] = `
         <div
           className="left-block"
         >
-          <OpinionPreview
+          <Relay(OpinionPreview)
             link={false}
             opinion={
               Object {
-                "answer": Object {},
-                "title": "title",
-                "type": Object {
+                "$fragmentRefs": null,
+                "$refType": null,
+                "__typename": "Opinion",
+                "section": Object {
                   "color": "info",
-                  "title": "opinionType",
+                  "title": "sectionTitle",
+                  "url": "#",
+                  "votesThreshold": 0,
                 },
+                "title": "title",
               }
             }
             opinionTerm={0}
             rankingThreshold={0}
-            showTypeLabel={false}
           />
         </div>
       </ListGroupItem>
     </ListGroup>
-=======
-    <Relay(OpinionPreview)
-      link={false}
-      opinion={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "__typename": "Opinion",
-          "section": Object {
-            "color": "info",
-            "title": "sectionTitle",
-            "url": "#",
-            "votesThreshold": 0,
-          },
-          "title": "title",
-        }
-      }
-      opinionTerm={0}
-      rankingThreshold={0}
-    />
->>>>>>> Fragments everywhere on consultation
   </div>
   <Relay(OpinionAppendices)
     opinion={

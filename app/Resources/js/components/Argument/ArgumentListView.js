@@ -87,13 +87,14 @@ export default createRefetchContainer(
             cursor: $cursor
             count: $count
             orderBy: $orderBy
+            type: $type
           )
       }
     `,
   },
   graphql`
     query ArgumentListViewRefetchQuery(
-      $type: ArgumentValue
+      $type: ArgumentValue!
       $isAuthenticated: Boolean!
       $argumentableId: ID!
       $cursor: String

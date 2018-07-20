@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import { connect, type Connector, type MapStateToProps } from 'react-redux';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Tab, Nav, NavItem } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
@@ -8,42 +9,21 @@ import ArgumentsBox from '../Argument/ArgumentsBox';
 import OpinionVersionsBox from './OpinionVersionsBox';
 import OpinionSourceBox from './Source/OpinionSourceBox';
 // import VoteLinechart from '../Utils/VoteLinechart';
+import type { State } from '../../types';
 import { scrollToAnchor } from '../../services/ScrollToAnchor';
 import type { OpinionTabs_opinion } from './__generated__/OpinionTabs_opinion.graphql';
 
-type Props = {
+type RelayProps = {
   opinion: OpinionTabs_opinion,
 };
-
-type State = {
-  sourcesCount: number,
-  argumentsCount: number,
+type Props = RelayProps & {
+  isAuthenticated: boolean,
 };
 
-class OpinionTabs extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    const { opinion } = props;
-
-    this.state = {
-      sourcesCount: opinion.sourcesCount,
-      argumentsCount: opinion.argumentsCount,
-    };
-  }
-
-  componentWillMount() {
-    OpinionSourceStore.addChangeListener(this.onSourceChange);
-  }
-
+class OpinionTabs extends React.Component<Props> {
   componentDidMount() {
     setTimeout(scrollToAnchor, 20); // We use setTimeout to interact with DOM in componentDidMount (see React documentation)
   }
-
-  onSourceChange = () => {
-    this.setState({
-      sourcesCount: OpinionSourceStore.count,
-    });
-  };
 
   getHashKey = (hash: string) => {
     let key = null;
@@ -110,8 +90,8 @@ class OpinionTabs extends React.Component<Props, State> {
   // };
 
   render() {
-    const { opinion } = this.props;
-    const isAuthenticated = false;
+    const { opinion, isAuthenticated } = this.props;
+
     if (this.isSourceable() + this.isCommentable() + this.isVersionable() > 1) {
       // at least two tabs
 
@@ -206,7 +186,14 @@ class OpinionTabs extends React.Component<Props, State> {
   }
 }
 
-export default createFragmentContainer(OpinionTabs, {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+  isAuthenticated: !!state.user.user,
+});
+
+const connector: Connector<RelayProps, Props> = connect(mapStateToProps);
+const container = connector(OpinionTabs);
+
+export default createFragmentContainer(container, {
   opinion: graphql`
     fragment OpinionTabs_opinion on OpinionOrVersion {
       ... on Opinion {

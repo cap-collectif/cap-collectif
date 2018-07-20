@@ -173,7 +173,7 @@ class OpinionVersionRepository extends EntityRepository
             ->addSelect('m')
             ->leftJoin('ov.votes', 'votes')
             ->addSelect('votes')
-            ->andWhere('ov.author = :author')
+            ->andWhere('ov.user = :author')
             ->setParameter('author', $user)
             ->getQuery()
             ->getResult();

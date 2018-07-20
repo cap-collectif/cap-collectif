@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import { Row, Col } from 'react-bootstrap';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { ListGroupItem } from 'react-bootstrap';
 import classNames from 'classnames';
@@ -17,7 +16,7 @@ type Props = {
   sourceable: OpinionSource_sourceable,
 };
 
-class OpinionSource extends React.Component<Props> {
+export class OpinionSource extends React.Component<Props> {
   render() {
     const { source, sourceable } = this.props;
     const classes = classNames({

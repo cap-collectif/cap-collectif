@@ -116,7 +116,7 @@ export default createPaginationContainer(
       query ArgumentListViewPaginatedQuery(
         $argumentableId: ID!
         $isAuthenticated: Boolean!
-        $type: ArgumentValue
+        $type: ArgumentValue!
         $cursor: String
         $orderBy: ArgumentOrder
         $count: Int

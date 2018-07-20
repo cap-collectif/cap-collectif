@@ -22,9 +22,10 @@ exports[`<Opinion /> renders correcty 1`] = `
       }
     />
     <div>
-      <OpinionInfos
+      <Relay(OpinionInfos)
         opinion={
           Object {
+            "$fragmentRefs": null,
             "$refType": null,
             "argumentsCount": 0,
             "author": Object {
@@ -58,10 +59,11 @@ exports[`<Opinion /> renders correcty 1`] = `
         }
         rankingThreshold={0}
       />
-      <OpinionPreviewTitle
+      <Relay(OpinionPreviewTitle)
         link={true}
         opinion={
           Object {
+            "$fragmentRefs": null,
             "$refType": null,
             "argumentsCount": 0,
             "author": Object {
@@ -95,9 +97,10 @@ exports[`<Opinion /> renders correcty 1`] = `
         }
         showTypeLabel={false}
       />
-      <OpinionPreviewCounters
+      <Relay(OpinionPreviewCounters)
         opinion={
           Object {
+            "$fragmentRefs": null,
             "$refType": null,
             "argumentsCount": 0,
             "author": Object {
@@ -129,53 +132,6 @@ exports[`<Opinion /> renders correcty 1`] = `
             "votesCountOk": 0,
           }
         }
-<<<<<<< HEAD
-=======
-      >
-        <Connect(UserAvatar)
-          className="pull-left"
-        />
-        <div
-          className="opinion__data"
-        >
-          <Relay(OpinionInfos)
-            opinion={
-              Object {
-                "id": "opinionId",
-              }
-            }
-            rankingThreshold={0}
-          />
-          <Relay(OpinionPreviewTitle)
-            opinion={
-              Object {
-                "id": "opinionId",
-              }
-            }
-            showTypeLabel={false}
-          />
-          <Relay(OpinionPreviewCounters)
-            opinion={
-              Object {
-                "id": "opinionId",
-              }
-            }
-          />
-        </div>
-      </div>
-    </div>
-    <div
-      className="hidden-xs col-sm-4 col-md-3 col-lg-2"
-    >
-      <VotePiechart
-        height="90px"
-        left={0}
-        mitige={0}
-        nok={0}
-        ok={0}
-        top={10}
-        width="145px"
->>>>>>> Fragments everywhere on consultation
       />
     </div>
   </div>

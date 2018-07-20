@@ -23,8 +23,11 @@ export class Opinion extends React.Component<Props> {
         <div className="left-block">
           <UserAvatar user={author} />
           <div>
+            {/* $FlowFixMe */}
             <OpinionInfos rankingThreshold={0} opinion={opinion} />
+            {/* $FlowFixMe */}
             <OpinionPreviewTitle showTypeLabel={false} link opinion={opinion} />
+            {/* $FlowFixMe */}
             <OpinionPreviewCounters opinion={opinion} />
           </div>
         </div>

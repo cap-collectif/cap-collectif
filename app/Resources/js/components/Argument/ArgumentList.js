@@ -43,7 +43,7 @@ export class ArgumentList extends React.Component<Props, State> {
             query ArgumentListQuery(
               $argumentableId: ID!
               $isAuthenticated: Boolean!
-              $type: ArgumentValue
+              $type: ArgumentValue!
               $count: Int
               $cursor: String
               $orderBy: ArgumentOrder

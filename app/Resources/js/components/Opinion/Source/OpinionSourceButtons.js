@@ -55,6 +55,7 @@ class OpinionSourceButtons extends React.Component<Props, State> {
           author={{ uniqueId: source.author.slug }}
           className="source__btn--delete btn-xs"
         />
+        {/* $FlowFixMe */}
         <OpinionSourceDeleteModal
           source={source}
           show={this.state.isDeleting}
@@ -79,7 +80,7 @@ export default createFragmentContainer(container, {
       ...OpinionSourceVoteBox_source @arguments(isAuthenticated: $isAuthenticated)
       ...OpinionSourceReportButton_source @arguments(isAuthenticated: $isAuthenticated)
       ...OpinionSourceFormModal_source
-      #...OpinionSourceDeleteModal_source
+      ...OpinionSourceDeleteModal_source
     }
   `,
   sourceable: graphql`

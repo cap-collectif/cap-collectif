@@ -1,8 +1,8 @@
 ProposalForm:
   type: object
   inherits:
-    - Node
-    - WithProposals
+    - 'Node'
+    - 'WithProposals'
   config:
     description: 'A budget form'
     interfaces: [Node]

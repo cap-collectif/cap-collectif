@@ -3,12 +3,13 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { Opinion } from './Opinion';
-import { $refType } from '../../mocks';
+import { $refType, $fragmentRefs } from '../../mocks';
 
 describe('<Opinion />', () => {
   const props = {
     opinion: {
       $refType,
+      $fragmentRefs,
       id: 'opinionId',
       argumentsCount: 0,
       author: {
