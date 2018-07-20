@@ -37,9 +37,7 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
               "url": "https://capco/dev/profile/author1",
               "vip": true,
             },
-            "createdAt": "",
             "id": "1",
-            "updatedAt": null,
           }
         }
         rankingThreshold={null}
@@ -56,9 +54,7 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
               "url": "https://capco/dev/profile/author1",
               "vip": true,
             },
-            "createdAt": "",
             "id": "1",
-            "updatedAt": null,
           }
         }
       />
@@ -74,9 +70,7 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
               "url": "https://capco/dev/profile/author1",
               "vip": true,
             },
-            "createdAt": "",
             "id": "1",
-            "updatedAt": null,
           }
         }
       />
@@ -95,9 +89,7 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
                 "url": "https://capco/dev/profile/author1",
                 "vip": true,
               },
-              "createdAt": "",
               "id": "1",
-              "updatedAt": null,
             }
           }
           sourceable={
@@ -151,9 +143,7 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
               "url": "https://capco/dev/profile/author1",
               "vip": false,
             },
-            "createdAt": "",
             "id": "1",
-            "updatedAt": null,
           }
         }
         rankingThreshold={null}
@@ -170,9 +160,7 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
               "url": "https://capco/dev/profile/author1",
               "vip": false,
             },
-            "createdAt": "",
             "id": "1",
-            "updatedAt": null,
           }
         }
       />
@@ -188,9 +176,7 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
               "url": "https://capco/dev/profile/author1",
               "vip": false,
             },
-            "createdAt": "",
             "id": "1",
-            "updatedAt": null,
           }
         }
       />
@@ -209,9 +195,7 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
                 "url": "https://capco/dev/profile/author1",
                 "vip": false,
               },
-              "createdAt": "",
               "id": "1",
-              "updatedAt": null,
             }
           }
           sourceable={

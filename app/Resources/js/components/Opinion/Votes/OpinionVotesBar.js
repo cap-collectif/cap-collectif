@@ -17,13 +17,14 @@ class OpinionVotesBar extends React.Component<Props> {
     if (!opinion.section) return null;
     return (
       <div>
-        {opinion.section.votesThreshold && (
-          <VotesBar
-            max={opinion.section.votesThreshold}
-            value={opinion.votesYes ? opinion.votesYes.totalCount : 0}
-            helpText={opinion.section.votesThresholdHelpText}
-          />
-        )}
+        {opinion.section.votesThreshold &&
+          opinion.section.votesThreshold > 0 && (
+            <VotesBar
+              max={opinion.section.votesThreshold}
+              value={opinion.votesYes ? opinion.votesYes.totalCount : 0}
+              helpText={opinion.section.votesThresholdHelpText}
+            />
+          )}
         <div style={{ paddingTop: '20px' }}>
           {opinion.previewVotes &&
             opinion.previewVotes.edges &&
@@ -59,7 +60,6 @@ export default createFragmentContainer(OpinionVotesBar, {
     fragment OpinionVotesBar_opinion on OpinionOrVersion {
       ...OpinionVotesModal_opinion
       ... on Opinion {
-        id
         votesYes: votes(first: 0, value: YES) {
           totalCount
         }
@@ -72,13 +72,11 @@ export default createFragmentContainer(OpinionVotesBar, {
           }
         }
         section {
-          voteWidgetType
           votesThresholdHelpText
           votesThreshold
         }
       }
       ... on Version {
-        id
         votesYes: votes(first: 0, value: YES) {
           totalCount
         }
@@ -93,10 +91,6 @@ export default createFragmentContainer(OpinionVotesBar, {
         section {
           votesThreshold
           votesThresholdHelpText
-          voteWidgetType
-        }
-        parent {
-          id
         }
       }
     }

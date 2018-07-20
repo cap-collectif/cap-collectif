@@ -77,7 +77,6 @@ exports[`<OpinionBox /> should render correctly 1`] = `
                   "color": "info",
                   "title": "sectionTitle",
                   "url": "#",
-                  "votesThreshold": 0,
                 },
                 "title": "title",
               }
@@ -99,7 +98,6 @@ exports[`<OpinionBox /> should render correctly 1`] = `
           "color": "info",
           "title": "sectionTitle",
           "url": "#",
-          "votesThreshold": 0,
         },
         "title": "title",
       }
@@ -128,7 +126,6 @@ exports[`<OpinionBox /> should render correctly 1`] = `
             "color": "info",
             "title": "sectionTitle",
             "url": "#",
-            "votesThreshold": 0,
           },
           "title": "title",
         }
@@ -159,7 +156,6 @@ exports[`<OpinionBox /> should render correctly 1`] = `
               "color": "info",
               "title": "sectionTitle",
               "url": "#",
-              "votesThreshold": 0,
             },
             "title": "title",
           }
@@ -176,7 +172,6 @@ exports[`<OpinionBox /> should render correctly 1`] = `
             "color": "info",
             "title": "sectionTitle",
             "url": "#",
-            "votesThreshold": 0,
           },
           "title": "title",
         }
@@ -193,7 +188,6 @@ exports[`<OpinionBox /> should render correctly 1`] = `
           "color": "info",
           "title": "sectionTitle",
           "url": "#",
-          "votesThreshold": 0,
         },
         "title": "title",
       }

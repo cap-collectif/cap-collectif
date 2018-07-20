@@ -14,8 +14,8 @@ import type { OpinionBox_opinion } from './__generated__/OpinionBox_opinion.grap
 
 type Props = {
   +opinion: OpinionBox_opinion,
-  rankingThreshold?: number,
-  opinionTerm?: number,
+  rankingThreshold: number,
+  opinionTerm: number,
 };
 
 export class OpinionBox extends React.Component<Props> {
@@ -107,25 +107,19 @@ export default createFragmentContainer(OpinionBox, {
       ...OpinionAppendices_opinion
       ... on Opinion {
         __typename
-        id
-        body
         title
         section {
           title
           color
-          votesThreshold
           url
         }
       }
       ... on Version {
         __typename
-        id
-        body
         title
         section {
           title
           color
-          votesThreshold
           url
         }
         parent {

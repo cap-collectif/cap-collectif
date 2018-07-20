@@ -12,7 +12,7 @@ describe('<OpinionBox />', () => {
       $refType,
       $fragmentRefs,
       title: 'title',
-      section: { title: 'sectionTitle', votesThreshold: 0, url: '#', color: 'info' },
+      section: { title: 'sectionTitle', url: '#', color: 'info' },
     },
     rankingThreshold: 0,
     opinionTerm: 0,

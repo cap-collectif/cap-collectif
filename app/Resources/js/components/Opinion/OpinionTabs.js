@@ -199,8 +199,6 @@ export default createFragmentContainer(container, {
       ... on Opinion {
         __typename
         id
-        body
-        contribuable
         allVersions: versions(first: 0) {
           totalCount
         }
@@ -219,8 +217,6 @@ export default createFragmentContainer(container, {
       ... on Version {
         __typename
         id
-        body
-        contribuable
         allArguments: arguments(first: 0) {
           totalCount
         }

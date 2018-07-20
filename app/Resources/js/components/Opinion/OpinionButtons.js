@@ -33,7 +33,7 @@ class OpinionButtons extends React.Component<Props> {
   renderEditButton = () => {
     const { opinion } = this.props;
     if (opinion.contribuable && this.isTheUserTheAuthor()) {
-      if (opinion.__typename === 'Version' && opinion.parent) {
+      if (opinion.__typename === 'Version') {
         return (
           <React.Fragment>
             <OpinionVersionEditModal version={opinion} />
@@ -107,9 +107,6 @@ export default createFragmentContainer(container, {
         }
         author {
           slug
-        }
-        parent {
-          id
         }
       }
     }

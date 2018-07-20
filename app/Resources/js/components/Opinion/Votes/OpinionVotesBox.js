@@ -72,7 +72,6 @@ export default createFragmentContainer(OpinionVotesBox, {
         votesMitige: votes(first: 0, value: MITIGE) {
           totalCount
         }
-        contribuable
         section {
           voteWidgetType
           votesHelpText
@@ -91,7 +90,6 @@ export default createFragmentContainer(OpinionVotesBox, {
         votesMitige: votes(first: 0, value: MITIGE) {
           totalCount
         }
-        contribuable
         section {
           voteWidgetType
           votesHelpText

@@ -143,7 +143,6 @@ export default createFragmentContainer(container, {
   argumentable: graphql`
     fragment ArgumentList_argumentable on Argumentable {
       id
-      contribuable
     }
   `,
 });

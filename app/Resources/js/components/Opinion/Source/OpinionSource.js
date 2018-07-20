@@ -51,8 +51,6 @@ export default createFragmentContainer(OpinionSource, {
     fragment OpinionSource_source on Source
       @argumentDefinitions(isAuthenticated: { type: "Boolean" }) {
       id
-      createdAt
-      updatedAt
       ...OpinionInfos_opinion
       ...OpinionSourceTitle_source
       ...OpinionSourceContent_source

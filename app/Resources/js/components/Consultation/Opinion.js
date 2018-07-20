@@ -24,22 +24,24 @@ export class Opinion extends React.Component<Props> {
           <UserAvatar user={author} />
           <div>
             {/* $FlowFixMe */}
-            <OpinionInfos rankingThreshold={0} opinion={opinion} />
+            <OpinionInfos rankingThreshold={null} opinion={opinion} />
             {/* $FlowFixMe */}
             <OpinionPreviewTitle showTypeLabel={false} link opinion={opinion} />
             {/* $FlowFixMe */}
             <OpinionPreviewCounters opinion={opinion} />
           </div>
         </div>
-        {/* $FlowFixMe */}
-        <VotePiechart
-          top={10}
-          height={'90px'}
-          width={'145px'}
-          ok={opinion.votesOk.totalCount}
-          nok={opinion.votesNok.totalCount}
-          mitige={opinion.votesMitige.totalCount}
-        />
+        {opinion.votes && opinion.votes.totalCount > 0 ? (
+          /* $FlowFixMe */
+          <VotePiechart
+            top={10}
+            height={'90px'}
+            width={'145px'}
+            ok={opinion.votesOk.totalCount}
+            nok={opinion.votesNok.totalCount}
+            mitige={opinion.votesMitige.totalCount}
+          />
+        ) : null}
       </ListGroupItem>
     );
   }
@@ -52,11 +54,9 @@ export default createFragmentContainer(
       ...OpinionPreviewCounters_opinion
       ...OpinionInfos_opinion
       ...OpinionPreviewTitle_opinion
-      id
-      url
-      title
-      createdAt
-      updatedAt
+      votes(first: 0) {
+        totalCount
+      }
       votesOk: votes(first: 0, value: YES) {
         totalCount
       }
@@ -66,7 +66,6 @@ export default createFragmentContainer(
       votesMitige: votes(first: 0, value: MITIGE) {
         totalCount
       }
-      pinned
       author {
         vip
         displayName
@@ -74,13 +73,6 @@ export default createFragmentContainer(
           url
         }
         show_url
-      }
-      section {
-        title
-        versionable
-        linkable
-        sourceable
-        voteWidgetType
       }
     }
   `,

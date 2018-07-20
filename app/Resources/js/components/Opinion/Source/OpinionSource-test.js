@@ -17,9 +17,7 @@ describe('<OpinionSource />', () => {
       media: null,
       url: 'https://capco/dev/profile/author1',
     },
-    createdAt: '',
     id: '1',
-    updatedAt: null,
   };
   const sourceUserNotVip = {
     $refType,
@@ -31,9 +29,7 @@ describe('<OpinionSource />', () => {
       media: null,
       url: 'https://capco/dev/profile/author1',
     },
-    createdAt: '',
     id: '1',
-    updatedAt: null,
   };
 
   it('should render a li bordered', () => {

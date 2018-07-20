@@ -35,19 +35,9 @@ exports[`<Opinion /> renders correcty 1`] = `
               "show_url": "",
               "vip": false,
             },
-            "createdAt": "",
-            "id": "opinionId",
-            "pinned": true,
-            "section": Object {
-              "linkable": false,
-              "sourceable": true,
-              "title": "Section",
-              "versionable": true,
-              "voteWidgetType": 1,
+            "votes": Object {
+              "totalCount": 0,
             },
-            "title": "title",
-            "updatedAt": "",
-            "url": "",
             "votesMitige": Object {
               "totalCount": 0,
             },
@@ -59,7 +49,7 @@ exports[`<Opinion /> renders correcty 1`] = `
             },
           }
         }
-        rankingThreshold={0}
+        rankingThreshold={null}
       />
       <Relay(OpinionPreviewTitle)
         link={true}
@@ -75,19 +65,9 @@ exports[`<Opinion /> renders correcty 1`] = `
               "show_url": "",
               "vip": false,
             },
-            "createdAt": "",
-            "id": "opinionId",
-            "pinned": true,
-            "section": Object {
-              "linkable": false,
-              "sourceable": true,
-              "title": "Section",
-              "versionable": true,
-              "voteWidgetType": 1,
+            "votes": Object {
+              "totalCount": 0,
             },
-            "title": "title",
-            "updatedAt": "",
-            "url": "",
             "votesMitige": Object {
               "totalCount": 0,
             },
@@ -114,19 +94,9 @@ exports[`<Opinion /> renders correcty 1`] = `
               "show_url": "",
               "vip": false,
             },
-            "createdAt": "",
-            "id": "opinionId",
-            "pinned": true,
-            "section": Object {
-              "linkable": false,
-              "sourceable": true,
-              "title": "Section",
-              "versionable": true,
-              "voteWidgetType": 1,
+            "votes": Object {
+              "totalCount": 0,
             },
-            "title": "title",
-            "updatedAt": "",
-            "url": "",
             "votesMitige": Object {
               "totalCount": 0,
             },
@@ -141,13 +111,5 @@ exports[`<Opinion /> renders correcty 1`] = `
       />
     </div>
   </div>
-  <InjectIntl(VotePiechart)
-    height="90px"
-    mitige={0}
-    nok={0}
-    ok={0}
-    top={10}
-    width="145px"
-  />
 </ListGroupItem>
 `;
