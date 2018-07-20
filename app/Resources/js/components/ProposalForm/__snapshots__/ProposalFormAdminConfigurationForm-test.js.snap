@@ -445,8 +445,10 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
                       values={Object {}}
                     />
                   }
+                  lang="us"
                   name="latMap"
                   normalize={[Function]}
+                  step="any"
                   type="number"
                 />
               </Col>
@@ -465,8 +467,10 @@ exports[`<ProposalFormAdminConfigurationForm /> render correctly 1`] = `
                       values={Object {}}
                     />
                   }
+                  lang="us"
                   name="lngMap"
                   normalize={[Function]}
+                  step="any"
                   type="number"
                 />
               </Col>
