@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Toggle\Manager;
@@ -23,33 +22,29 @@ class SearchType extends AbstractType
         $choices = $this->generateChoices();
 
         $builder
-            ->add('term',
-                TextType::class, [
+            ->add('term', TextType::class, [
                 'required' => false,
                 'label' => 'search.form.label.term',
                 'translation_domain' => 'CapcoAppBundle',
                 'attr' => ['placeholder' => 'search.form.placeholder.term'],
             ])
-            ->add('type',
-                ChoiceType::class, [
+            ->add('type', ChoiceType::class, [
                 'required' => false,
                 'translation_domain' => 'CapcoAppBundle',
                 'placeholder' => false,
                 'expanded' => true,
                 'choices' => $choices,
             ])
-            ->add('sort',
-                ChoiceType::class, [
+            ->add('sort', ChoiceType::class, [
                 'required' => false,
                 'translation_domain' => 'CapcoAppBundle',
                 'placeholder' => false,
                 'choices' => [
-                    'score' => 'search.form.sort.score',
-                    'date' => 'search.form.sort.date',
+                    'search.form.sort.score' => 'score',
+                    'search.form.sort.date' => 'date',
                 ],
                 'attr' => ['onchange' => 'this.form.submit()'],
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -63,29 +58,29 @@ class SearchType extends AbstractType
     private function generateChoices()
     {
         $choices = [
-            'all' => 'search.form.types.all',
-            'proposal' => 'search.form.types.proposals',
-            'comment' => 'search.form.types.comments',
-            'argument' => 'search.form.types.arguments',
-            'project' => 'search.form.types.projects',
-            'opinion' => 'search.form.types.opinions',
-            'source' => 'search.form.types.sources',
+            'search.form.types.all' => 'all',
+            'search.form.types.proposals' => 'proposal',
+            'search.form.types.comments' => 'comment',
+            'search.form.types.arguments' => 'argument',
+            'search.form.types.projects' => 'project',
+            'search.form.types.opinions' => 'opinion',
+            'search.form.types.sources' => 'source',
         ];
 
         if ($this->toggleManager->isActive('versions')) {
-            $choices['opinionVersion'] = 'search.form.types.versions';
+            $choices['search.form.types.versions'] = 'opinionVersion';
         }
         if ($this->toggleManager->isActive('blog')) {
-            $choices['post'] = 'search.form.types.posts';
+            $choices['search.form.types.posts'] = 'post';
         }
         if ($this->toggleManager->isActive('calendar')) {
-            $choices['event'] = 'search.form.types.events';
+            $choices['search.form.types.events'] = 'event';
         }
         if ($this->toggleManager->isActive('themes')) {
-            $choices['theme'] = 'search.form.types.themes';
+            $choices['search.form.types.themes'] = 'theme';
         }
 
-        $choices['user'] = 'search.form.types.users';
+        $choices['search.form.types.users'] = 'user';
 
         return $choices;
     }
