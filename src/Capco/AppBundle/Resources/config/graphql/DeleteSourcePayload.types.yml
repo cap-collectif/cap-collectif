@@ -5,4 +5,4 @@ DeleteSourcePayload:
             deletedSourceId:
                 type: "ID"
             sourceable:
-                type: "Sourceable!"
+                type: "Sourceable"

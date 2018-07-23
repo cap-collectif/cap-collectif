@@ -12,6 +12,7 @@ Scenario: Author wants to delete his source
         sourceable {
           id
         }
+        deletedSourceId
       }
     }",
     "variables": {
@@ -26,8 +27,9 @@ Scenario: Author wants to delete his source
   {
     "data": {
       "deleteSource": {
+          "deletedSourceId": "source1",
           "sourceable": {
-              "id": "opinion2"
+              "id": "opinion3"
           }
        }
      }
@@ -45,6 +47,7 @@ Scenario: User wants to delete an source but is not the author
         sourceable {
           id
         }
+        deletedSourceId
       }
     }",
     "variables": {
@@ -56,5 +59,5 @@ Scenario: User wants to delete an source but is not the author
   """
   Then the JSON response should match:
   """
-  {"errors":[{"message":"You are not the author of source with id: source1","category":"user","locations":[{"line":1,"column":45}],"path":["deleteSource"]}],"data":{"deleteSource":null}}
+  {"errors":[{"message":"You are not the author of source with id: source1","category":"user","locations":[@...@],"path":["deleteSource"]}],"data":{"deleteSource":null}}
   """

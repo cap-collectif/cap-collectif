@@ -1,7 +1,7 @@
 @changeSource
 Feature: Change Source
 
-@database @rabbitmq
+@database
 Scenario: Author wants to update his source
   Given I am logged in to graphql as user
   And I send a GraphQL POST request:
@@ -28,21 +28,19 @@ Scenario: Author wants to update his source
   """
   {
     "data": {
-      "changeSource": {
-          "source": {
+        "changeSource": {
+            "source": {
               "id": "source1",
               "body": "New Tololo",
               "updatedAt": "@string@.isDateTime()"
-          }
-       }
-     }
+            }
+        }
+    }
   }
   """
-  Then the queue associated to "source_update" producer has messages below:
-  | 0 | {"sourceId": "source1"} |
 
 @security
-Scenario: User wants to update an source but is not the author
+Scenario: User wants to update a source but is not the author
   Given I am logged in to graphql as pierre
   And I send a GraphQL POST request:
    """
@@ -64,5 +62,5 @@ Scenario: User wants to update an source but is not the author
   """
   Then the JSON response should match:
   """
-  {"errors":[{"message":"Can\u0027t update the source of someone else.","category":"user","locations":[{"line":1,"column":45}],"path":["changeSource"]}],"data":{"changeSource":null}}
+  {"errors":[{"message":"You are not the author of source with id: source1","category":"user","locations":[@...@],"path":["deleteSource"]}],"data":{"deleteSource":null}}
   """

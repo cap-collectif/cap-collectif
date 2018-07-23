@@ -5,16 +5,16 @@ ChangeSourceInput:
         fields:
             sourceId:
                 type: "ID!"
-                description: "The source Node id."
+                description: "The source id."
             body:
-                type: "String!"
+                type: "String"
                 description: "The contents of the source body."
             category:
-                type: "ID!"
+                type: "ID"
                 description: "The contents of the source category."
             title:
-                type: "String!"
+                type: "String"
                 description: "The contents of the source title."
             link:
-                type: "URI!"
+                type: "URI"
                 description: "The contents of the source link."

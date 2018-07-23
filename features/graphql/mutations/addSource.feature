@@ -90,7 +90,7 @@ Scenario: User wants to add a source on an uncontributable
     }",
     "variables": {
       "input": {
-        "sourceableId": "opinion3",
+        "sourceableId": "opinion63",
         "link": "http://google.com",
         "title": "Je suis une source",
         "body": "<div>Jai un corps mais pas de bras :'(</div>",
