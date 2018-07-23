@@ -234,40 +234,6 @@
   margin-left: 10px;
 }
 
-/* ==================== Table ========================*/
-
-.react-bootstrap-table {
-    color: $dark-text;
-    overflow-x: scroll;
-
-    thead > tr > th {
-        word-break: keep-all;
-        vertical-align: middle;
-        background-color: $page-bgc;
-        border-bottom-width: 1px;
-
-        &:hover {
-            background-color: $border-dropdown-color;
-        }
-    }
-
-    thead > tr > th,
-    tbody > tr > td {
-        padding: 10px 15px;
-        vertical-align: middle;
-    }
-
-    td:not(:first-child) {
-        font-weight: 500;
-    }
-
-    span.badge-pill {
-        font-size: 13px;
-        font-weight: 400;
-    }
-}
-
-
 /* ==================== Private elements ========================*/
 
 .PrivateList {

@@ -27,8 +27,8 @@ class ProgressList extends React.Component<Props> {
 
     return (
       <ul className="d-flex p-0 m-0">
-        {list.map(e => (
-          <ListElement isActive={e.isActive}>
+        {list.map((e, index) => (
+          <ListElement key={index} isActive={e.isActive}>
             <div aria-label={e.title} />
           </ListElement>
         ))}

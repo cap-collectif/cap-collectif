@@ -41,7 +41,7 @@ export class ToggleMapButton extends React.Component<Props> {
           style={{ flex: '1 0 auto' }}
           onClick={this.handleClick.bind(this, 'mosaic')}>
           <i className="cap cap-th-large" onClick={this.handleClick.bind(this, 'mosaic')} />{' '}
-          {<FormattedMessage id="proposal.map.mosaic" />}
+          {<FormattedMessage id="grid" />}
         </Button>
         <Button
           bsStyle="default"
