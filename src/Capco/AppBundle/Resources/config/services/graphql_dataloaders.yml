@@ -2,6 +2,8 @@ services:
 #  Capco\AppBundle\GraphQL\DataLoader\ProposalStatusDataLoader:
 #    autowire: true
 
-  capco.proposal_loader:
-    class: Capco\AppBundle\GraphQL\DataLoader\ProposalDataLoader
+  Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesCountByStepDataLoader:
+    autowire: true
+
+  Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader:
     autowire: true

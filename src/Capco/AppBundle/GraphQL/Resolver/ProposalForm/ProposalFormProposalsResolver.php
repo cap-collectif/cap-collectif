@@ -13,22 +13,16 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ProposalFormProposalsResolver implements ResolverInterface
 {
     private $proposalRepo;
     private $proposalSearch;
-    private $container;
 
-    public function __construct(
-        ProposalRepository $proposalRepo,
-        ProposalSearch $proposalSearch,
-        ContainerInterface $container
-    ) {
+    public function __construct(ProposalRepository $proposalRepo, ProposalSearch $proposalSearch)
+    {
         $this->proposalRepo = $proposalRepo;
         $this->proposalSearch = $proposalSearch;
-        $this->container = $container;
     }
 
     public function __invoke(
@@ -157,13 +151,9 @@ class ProposalFormProposalsResolver implements ResolverInterface
             );
 
             $totalCount = $results['count'];
-            $ids = array_map(function (Proposal $proposal) {
-                return $proposal->getId();
-            }, $results['proposals']);
 
-            return $this->container->get('proposals_loader')->loadMany($ids);
-        },
-        Paginator::MODE_PROMISE);
+            return $results['proposals'];
+        });
 
         $connection = $paginator->auto($args, $totalCount);
         $connection->totalCount = $totalCount;

@@ -603,10 +603,6 @@ hslavich_simplesamlphp:
 overblog_dataloader:
   defaults:
     promise_adapter: 'overblog_dataloader.webonyx_graphql_sync_promise_adapter'
-  loaders:
-    proposals:
-      alias: "proposals_loader"
-      batch_load_fn: "@capco.proposal_loader:all"
 overblog_graphql:
   security:
     query_max_depth: false

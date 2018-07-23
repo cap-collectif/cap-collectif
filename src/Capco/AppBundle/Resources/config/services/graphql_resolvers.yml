@@ -413,6 +413,8 @@ services:
       - '@capco.proposal_collect_vote.repository'
       - '@capco.proposal_selection_vote.repository'
       - '@monolog.logger'
+      - '@Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesCountByStepDataLoader'
+      - '@Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader'
 
   Capco\AppBundle\GraphQL\Resolver\User\ProposalVotesResolver:
     class: Capco\AppBundle\GraphQL\Resolver\User\ProposalVotesResolver
