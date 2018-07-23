@@ -166,3 +166,12 @@ Capco\AppBundle\Entity\Project:
     exportable: true
     publishedAt: <dateTimeBetween('-50 days', 'now')>
     visibility: 1
+  p19:
+    id: 'ProjectAccessibleForMeOnlyByAdmin'
+    title: Project pour la création de la capCoBeer (visible par admin seulement)
+    projectType: '@projectType4'
+    Author: '@user4'
+    themes: ['@theme3']
+    exportable: true
+    publishedAt: <dateTimeBetween('-50 days', 'now')>
+    visibility: 0

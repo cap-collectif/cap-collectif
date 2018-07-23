@@ -150,3 +150,23 @@ Capco\AppBundle\Entity\ProposalForm:
     reference: 1664
     evaluationForm: "@questionnaire7"
     allowAknowledge: true
+  proposalform11:
+    id: proposalform11
+    title: CapcoBeer ?
+    description: <p><text(100)></p>
+    step: "@collectstep11"
+    notificationsConfiguration: "@proposalFormNotificationConfiguration13"
+    titleHelpText: Choisissez un titre pour votre proposition
+    themeHelpText: Sélectionnez un thème
+    districtHelpText: Sélectionnez une zone géographique
+    descriptionHelpText: Décrivez votre proposition
+    categoryHelpText: Sélectionnez une catégorie.
+    usingThemes: true
+    usingDistrict: true
+    districtMandatory: true
+    usingCategories: true
+    themeMandatory: false
+    categoryMandatory: true
+    reference: 86
+    evaluationForm: "@questionnaire8"
+    allowAknowledge: true

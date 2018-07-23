@@ -35,3 +35,7 @@ Capco\AppBundle\Entity\Questionnaire:
     id: questionnaire7
     title: Consultation pour conquerir le monde
     description: <p><text(100)></p>
+  questionnaire8:
+    id: questionnaire8
+    title: Consultation pour la capcoBeer
+    description: <p><text(100)></p>

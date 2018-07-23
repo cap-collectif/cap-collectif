@@ -432,3 +432,12 @@ Capco\AppBundle\Entity\Proposal:
     author: '@user1'
     proposalForm: '@proposalform10'
     reference: 43
+  proposal34:
+    id: proposal34
+    title: Quel type de bière ?
+    body: <p><text(100)></p>
+    enabled: true
+    isTrashed: false
+    author: '@user1'
+    proposalForm: '@proposalform11'
+    reference: 45

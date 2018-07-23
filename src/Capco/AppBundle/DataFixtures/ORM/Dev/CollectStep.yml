@@ -104,3 +104,11 @@ Capco\AppBundle\Entity\Steps\CollectStep:
     startAt: <dateTimeBetween('-40 days', 'now')>
     endAt: <dateTimeBetween('+3 days', '+10 days')>
     voteType: 0
+  collectstep11:
+    id: collectstep11
+    title: Collecte des propositions pour la capcoBeer
+    label: Dépôt
+    body: <p><text(1000)></p>
+    startAt: <dateTimeBetween('-40 days', 'now')>
+    endAt: <dateTimeBetween('+3 days', '+10 days')>
+    voteType: 0
