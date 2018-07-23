@@ -35,7 +35,7 @@ final class DeleteSourcePayloadType extends ObjectType implements GeneratedTypeI
                     'access' => null,
                 ],
                 'sourceable' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('Sourceable')),
+                    'type' => $globalVariable->get('typeResolver')->resolve('Sourceable'),
                     'args' => [
                     ],
                     'resolve' => null,

@@ -77,10 +77,10 @@ input AddSourceInput {
   # The Sourceable ID to source.
   sourceableId: ID!
 
-  # The contents of the argument body.
+  # The contents of the source body.
   body: String!
 
-  # The type of the argument.
+  # The category of the source.
   category: ID!
   link: URI!
   title: String!
@@ -437,20 +437,20 @@ type ChangeSelectionStatusPayload {
 }
 
 input ChangeSourceInput {
-  # The source Node id.
+  # The source id.
   sourceId: ID!
 
   # The contents of the source body.
-  body: String!
+  body: String
 
   # The contents of the source category.
-  category: ID!
+  category: ID
 
   # The contents of the source title.
-  title: String!
+  title: String
 
   # The contents of the source link.
-  link: URI!
+  link: URI
   clientMutationId: String
 }
 
@@ -474,14 +474,14 @@ input ChangeVersionInput {
   # The version Node id.
   versionId: ID!
 
-  # The contents of the version body.
-  body: String!
+  # Updated version body.
+  body: String
 
-  # The contents of the version title.
-  title: String!
+  # Updated version title.
+  title: String
 
-  # The contents of the version comment.
-  comment: String!
+  # Updated version comment.
+  comment: String
   clientMutationId: String
 }
 
@@ -997,7 +997,7 @@ input DeleteSourceInput {
 
 type DeleteSourcePayload {
   deletedSourceId: ID
-  sourceable: Sourceable!
+  sourceable: Sourceable
   clientMutationId: String
 }
 

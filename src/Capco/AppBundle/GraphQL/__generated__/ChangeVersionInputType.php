@@ -27,16 +27,16 @@ final class ChangeVersionInputType extends InputObjectType implements GeneratedT
                     'description' => 'The version Node id.',
                 ],
                 'body' => [
-                    'type' => Type::nonNull(Type::string()),
-                    'description' => 'The contents of the version body.',
+                    'type' => Type::string(),
+                    'description' => 'Updated version body.',
                 ],
                 'title' => [
-                    'type' => Type::nonNull(Type::string()),
-                    'description' => 'The contents of the version title.',
+                    'type' => Type::string(),
+                    'description' => 'Updated version title.',
                 ],
                 'comment' => [
-                    'type' => Type::nonNull(Type::string()),
-                    'description' => 'The contents of the version comment.',
+                    'type' => Type::string(),
+                    'description' => 'Updated version comment.',
                 ],
                 'clientMutationId' => [
                     'type' => Type::string(),

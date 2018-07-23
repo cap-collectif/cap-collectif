@@ -62,10 +62,6 @@ Scenario: GraphQL client wants to list consultations
       title
       createdAt
       updatedAt
-      votesCountOk
-      votesCountNok
-      votesCountMitige
-      votesCount
       versionsCount
       sourcesCount
       argumentsCount
@@ -99,10 +95,6 @@ Scenario: GraphQL client wants to list consultations
               "title": "Opinion 51",
               "createdAt": @string@,
               "updatedAt": @string@,
-              "votesCountOk": 0,
-              "votesCountNok": 0,
-              "votesCountMitige": 0,
-              "votesCount": 0,
               "versionsCount": 1,
               "sourcesCount": 0,
               "argumentsCount": 2,
@@ -142,7 +134,6 @@ Scenario: GraphQL client wants to list contributions in a consultation
             ... on Opinion {
               title
               pinned
-              votesCount
             }
           }
         }
@@ -165,8 +156,7 @@ Scenario: GraphQL client wants to list contributions in a consultation
               "cursor": @string@,
               "node": {
                 "title": @string@,
-                "pinned": @boolean@,
-                "votesCount": @integer@
+                "pinned": @boolean@
               }
             },
             @...@

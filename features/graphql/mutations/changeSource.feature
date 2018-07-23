@@ -62,5 +62,5 @@ Scenario: User wants to update a source but is not the author
   """
   Then the JSON response should match:
   """
-  {"errors":[{"message":"You are not the author of source with id: source1","category":"user","locations":[@...@],"path":["changeSource"]}],"data":{"changeSource":null}}
+  {"errors":[{"message":"Can't update the source of someone else.","category":"user","locations":[@...@],"path":["changeSource"]}],"data":{"changeSource":null}}
   """

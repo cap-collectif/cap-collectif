@@ -28,11 +28,11 @@ final class AddSourceInputType extends InputObjectType implements GeneratedTypeI
                 ],
                 'body' => [
                     'type' => Type::nonNull(Type::string()),
-                    'description' => 'The contents of the argument body.',
+                    'description' => 'The contents of the source body.',
                 ],
                 'category' => [
                     'type' => Type::nonNull(Type::id()),
-                    'description' => 'The type of the argument.',
+                    'description' => 'The category of the source.',
                 ],
                 'link' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('URI')),

@@ -24,22 +24,22 @@ final class ChangeSourceInputType extends InputObjectType implements GeneratedTy
                 return [
                 'sourceId' => [
                     'type' => Type::nonNull(Type::id()),
-                    'description' => 'The source Node id.',
+                    'description' => 'The source id.',
                 ],
                 'body' => [
-                    'type' => Type::nonNull(Type::string()),
+                    'type' => Type::string(),
                     'description' => 'The contents of the source body.',
                 ],
                 'category' => [
-                    'type' => Type::nonNull(Type::id()),
+                    'type' => Type::id(),
                     'description' => 'The contents of the source category.',
                 ],
                 'title' => [
-                    'type' => Type::nonNull(Type::string()),
+                    'type' => Type::string(),
                     'description' => 'The contents of the source title.',
                 ],
                 'link' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('URI')),
+                    'type' => $globalVariable->get('typeResolver')->resolve('URI'),
                     'description' => 'The contents of the source link.',
                 ],
                 'clientMutationId' => [

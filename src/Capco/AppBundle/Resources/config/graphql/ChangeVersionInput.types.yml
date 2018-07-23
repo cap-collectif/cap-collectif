@@ -7,11 +7,11 @@ ChangeVersionInput:
                 type: "ID!"
                 description: "The version Node id."
             body:
-                type: "String!"
-                description: "The contents of the version body."
+                type: "String"
+                description: "Updated version body."
             title:
-                type: "String!"
-                description: "The contents of the version title."
+                type: "String"
+                description: "Updated version title."
             comment:
-                type: "String!"
-                description: "The contents of the version comment."
+                type: "String"
+                description: "Updated version comment."

@@ -9,6 +9,7 @@ Scenario: Author wants to delete his version
     {
         "query": "mutation ($input: DeleteVersionInput!) {
             deleteVersion(input: $input) {
+                deletedVersionId
                 opinion {
                     id
                 }
@@ -26,8 +27,9 @@ Scenario: Author wants to delete his version
     {
         "data": {
             "deleteVersion": {
+                "deletedVersionId": "version1",
                 "opinion": {
-                    "id": "opinion2"
+                    "id": "opinion57"
                 }
             }
         }
@@ -42,6 +44,7 @@ Scenario: User wants to delete a version but is not the author
     {
         "query": "mutation ($input: DeleteVersionInput!) {
             deleteVersion(input: $input) {
+                deletedVersionId
                 opinion {
                     id
                 }
@@ -56,5 +59,5 @@ Scenario: User wants to delete a version but is not the author
   """
   Then the JSON response should match:
   """
-    {"errors":[{"message":"You are not the author of argument with id: argument1","category":"user","locations":[{"line":1,"column":45}],"path":["deleteVersion"]}],"data":{"deleteVersion":null}}
+    {"errors":[{"message":"You are not the author of version with id: version1","category":"user","locations":[@...@],"path":["deleteVersion"]}],"data":{"deleteVersion":null}}
   """

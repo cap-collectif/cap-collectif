@@ -56,7 +56,7 @@ Scenario: User wants to update a version but is not the author
         }",
         "variables": {
             "input": {
-                "versionId": "argument1",
+                "versionId": "version1",
                 "body": "New Tololo"
             }
         }
@@ -64,5 +64,5 @@ Scenario: User wants to update a version but is not the author
   """
   Then the JSON response should match:
   """
-        {"errors":[{"message":"Can\u0027t update the argument of someone else.","category":"user","locations":[@...@],"path":["changeVersion"]}],"data":{"changeVersion":null}}
+    {"errors":[{"message":"Can't update the version of someone else.","category":"user","locations":[@...@],"path":["changeVersion"]}],"data":{"changeVersion":null}}
   """
