@@ -12,6 +12,11 @@ Scenario: User wants to add a source on an opinion
         source {
           id
           body
+          title
+          link
+          category {
+            id
+          }
           author {
             id
           }
@@ -21,6 +26,9 @@ Scenario: User wants to add a source on an opinion
           node {
             id
           }
+        }
+        userErrors {
+          message
         }
       }
     }",
@@ -40,20 +48,65 @@ Scenario: User wants to add a source on an opinion
   {
     "data": {
       "addSource": {
-          "source": {
-              "id": @uuid@,
-              "body": "Tololo",
-              "author": {
-                "id": "user5"
-              }
+        "userErrors": [],
+        "source": {
+          "id": @string@,
+          "link": "http://google.com",
+          "title": "Je suis une source",
+          "category": {
+            "id": "category2"
           },
-          "sourceEdge": {
-              "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
-              "node": {
-                "id": @uuid@
-              }
+          "body": "\u003Cdiv\u003EJai un corps mais pas de bras :\u0027(\u003C\/div\u003E",
+          "author": {
+            "id": "user5"
           }
-       }
-     }
+        },
+        "sourceEdge": {
+          "cursor": @string@,
+          "node": {
+            "id": @string@
+          }
+        }
+      }
+    }
+  }
+  """
+
+@security
+Scenario: User wants to add a source on an uncontributable
+  Given I am logged in to graphql as user
+  And I send a GraphQL POST request:
+   """
+   {
+    "query": "mutation ($input: AddSourceInput!) {
+      addSource(input: $input) {
+        source {
+          id
+        }
+        userErrors {
+          message
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "sourceableId": "opinion3",
+        "link": "http://google.com",
+        "title": "Je suis une source",
+        "body": "<div>Jai un corps mais pas de bras :'(</div>",
+        "category": "category2"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "addSource": {
+        "userErrors":[{"message":"Can't add an source to an uncontributable sourceable."}],
+        "source": null
+      }
+    }
   }
   """
