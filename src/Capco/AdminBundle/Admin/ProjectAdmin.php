@@ -12,6 +12,7 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Model\Metadata;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ProjectAdmin extends CapcoAdmin
 {
@@ -50,7 +51,7 @@ class ProjectAdmin extends CapcoAdmin
             return 'CapcoAdminBundle:Project:edit.html.twig';
         }
 
-        return parent::getTemplate($name);
+        return $this->getTemplateRegistry()->getTemplate($name);
     }
 
     /**
@@ -66,8 +67,7 @@ class ProjectAdmin extends CapcoAdmin
                 'label' => 'admin.fields.project.author',
             ], null, [
                 'property' => 'username',
-            ])
-        ;
+            ]);
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
             $datagridMapper->add('themes', null, [
@@ -85,8 +85,8 @@ class ProjectAdmin extends CapcoAdmin
             ->add('posts', null, [
                 'label' => 'admin.fields.project.posts',
             ])
-            ->add('isEnabled', null, [
-                'label' => 'admin.fields.project.is_enabled',
+            ->add('visibility', null, [
+                'label' => 'who-can-see-this-project',
             ])
             ->add('exportable', null, [
                 'label' => 'admin.fields.project.exportable',
@@ -105,13 +105,9 @@ class ProjectAdmin extends CapcoAdmin
             ])
             ->add('includeAuthorInRanking', null, [
                 'label' => 'admin.fields.project.ranking.include_author',
-            ])
-        ;
+            ]);
     }
 
-    /**
-     * @param ListMapper $listMapper
-     */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -120,8 +116,7 @@ class ProjectAdmin extends CapcoAdmin
             ])
             ->add('Author', 'sonata_type_model', [
                 'label' => 'admin.fields.project.author',
-            ])
-        ;
+            ]);
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
             $listMapper->add('themes', null, [
@@ -130,10 +125,15 @@ class ProjectAdmin extends CapcoAdmin
         }
 
         $listMapper
-            ->add('isEnabled', null, [
-                'editable' => true,
-                'label' => 'admin.fields.project.is_enabled',
-            ])
+            ->add(
+                'visibility',
+                'choices', [
+                    'template' => 'CapcoAdminBundle:Project:visibility_list_field.html.twig',
+                    'choices' => ProjectVisibilityMode::REVERSE_KEY_VISIBILITY,
+                    'label' => 'who-can-see-this-project',
+                    'catalogue' => 'CapcoAppBundle'
+                ]
+            )
             ->add('exportable', null, [
                 'editable' => true,
                 'label' => 'admin.fields.project.exportable',
@@ -144,12 +144,11 @@ class ProjectAdmin extends CapcoAdmin
             ->add('_action', 'actions', [
                 'actions' => [
                     'download' => [
-                      'template' => 'CapcoAdminBundle:CRUD:list__action_download.html.twig',
+                        'template' => 'CapcoAdminBundle:CRUD:list__action_download.html.twig',
                     ],
                     'delete' => ['template' => 'CapcoAdminBundle:CRUD:list__action_delete.html.twig'],
                 ],
-            ])
-        ;
+            ]);
     }
 
     /**
@@ -185,33 +184,27 @@ class ProjectAdmin extends CapcoAdmin
                 'label' => 'admin.fields.project.opinion_term',
                 'choices' => Project::$opinionTermsLabels,
                 'translation_domain' => 'CapcoAppBundle',
-            ])
-        ;
+            ]);
 
         if ($this->getConfigurationPool()->getContainer()->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
             $formMapper
-              ->add('externalLink', null, [
-                  'label' => 'admin.fields.project.externalLink',
-                  'required' => false,
-              ])
-              ->add('participantsCount', null, [
-                  'label' => 'admin.fields.project.participantsCount',
-              ])
-              ->add('contributionsCount', null, [
-                  'label' => 'admin.fields.project.contributionsCount',
-              ])
-              ->add('votesCount', null, [
-                  'label' => 'admin.fields.project.votesCount',
-              ])
-            ;
+                ->add('externalLink', null, [
+                    'label' => 'admin.fields.project.externalLink',
+                    'required' => false,
+                ])
+                ->add('participantsCount', null, [
+                    'label' => 'admin.fields.project.participantsCount',
+                ])
+                ->add('contributionsCount', null, [
+                    'label' => 'admin.fields.project.contributionsCount',
+                ])
+                ->add('votesCount', null, [
+                    'label' => 'admin.fields.project.votesCount',
+                ]);
         }
 
         $formMapper->end()
             ->with('admin.fields.project.group_meta')
-            ->add('isEnabled', null, [
-                'label' => 'admin.fields.project.is_enabled',
-                'required' => false,
-            ])
             ->add('exportable', null, [
                 'label' => 'admin.fields.project.exportable',
                 'required' => false,
@@ -223,18 +216,17 @@ class ProjectAdmin extends CapcoAdmin
                 'attr' => [
                     'data-date-format' => 'DD/MM/YYYY HH:mm',
                 ],
-            ])
-        ;
+            ]);
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
             $formMapper
                 ->add('themes', 'sonata_type_model', [
-                'label' => 'admin.fields.project.themes',
-                'required' => false,
-                'multiple' => true,
-                'by_reference' => false,
-                'choices_as_values' => true,
-            ]);
+                    'label' => 'admin.fields.project.themes',
+                    'required' => false,
+                    'multiple' => true,
+                    'by_reference' => false,
+                    'choices_as_values' => true,
+                ]);
         }
 
         $formMapper
@@ -252,7 +244,7 @@ class ProjectAdmin extends CapcoAdmin
                 'label' => 'admin.fields.project.video',
                 'required' => false,
                 'help' => 'admin.help.project.video',
-                ], [
+            ], [
                     'link_parameters' => ['context' => 'project'],
                 ]
             )
@@ -274,15 +266,15 @@ class ProjectAdmin extends CapcoAdmin
             ->end()
             // Steps
             ->with('admin.fields.project.group_steps')
-                ->add('steps', 'sonata_type_collection', [
-                    'label' => 'admin.fields.project.steps',
-                    'by_reference' => false,
-                    'required' => false,
-                ], [
-                    'edit' => 'inline',
-                    'inline' => 'table',
-                    'sortable' => 'position',
-                ])
+            ->add('steps', 'sonata_type_collection', [
+                'label' => 'admin.fields.project.steps',
+                'by_reference' => false,
+                'required' => false,
+            ], [
+                'edit' => 'inline',
+                'inline' => 'table',
+                'sortable' => 'position',
+            ])
             ->end();
 
         $formMapper
@@ -307,8 +299,7 @@ class ProjectAdmin extends CapcoAdmin
                 'required' => false,
                 'help' => 'admin.help.metadescription',
             ])
-            ->end()
-        ;
+            ->end();
     }
 
     /**
@@ -323,8 +314,8 @@ class ProjectAdmin extends CapcoAdmin
             ->add('title', null, [
                 'label' => 'admin.fields.project.title',
             ])
-            ->add('isEnabled', 'boolean', [
-                'label' => 'admin.fields.project.is_enabled',
+            ->add('visibility', null, [
+                'label' => 'who-can-see-this-project',
             ])
             ->add('exportable', null, [
                 'label' => 'admin.fields.project.exportable',
@@ -341,8 +332,7 @@ class ProjectAdmin extends CapcoAdmin
             ])
             ->add('video', null, [
                 'label' => 'admin.fields.project.video',
-            ])
-        ;
+            ]);
 
         if ($this->getConfigurationPool()->getContainer()->get('capco.toggle.manager')->isActive('themes')) {
             $showMapper->add('themes', null, [
@@ -375,13 +365,12 @@ class ProjectAdmin extends CapcoAdmin
             ->add('includeAuthorInRanking', null, [
                 'label' => 'admin.fields.project.ranking.include_author',
             ])
-            ->end()
-        ;
+            ->end();
     }
 
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->clearExcept(['batch', 'list', 'create', 'edit', 'delete']);
-        $collection->add('preview', $this->getRouterIdParameter() . '/preview');
+        $collection->add('preview', $this->getRouterIdParameter().'/preview');
     }
 }
