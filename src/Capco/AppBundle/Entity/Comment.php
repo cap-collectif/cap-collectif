@@ -365,10 +365,7 @@ abstract class Comment
         return false;
     }
 
-    /**
-     * @return bool
-     */
-    public function canDisplay()
+    public function canDisplay($user = null): bool
     {
         return $this->isEnabled && $this->canDisplayRelatedObject();
     }
@@ -388,11 +385,12 @@ abstract class Comment
         $this->getRelatedObject()->removeComment($this);
     }
 
-    /**
-     * @return bool
-     */
-    public function canDisplayRelatedObject()
+    public function canDisplayRelatedObject(?User $user = null): bool
     {
+        if ($this->getRelatedObject() instanceof ProposalComment) {
+            return $this->getRelatedObject()->canDisplay($user);
+        }
+
         return $this->getRelatedObject()->canDisplay();
     }
 

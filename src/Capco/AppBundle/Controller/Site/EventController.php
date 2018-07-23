@@ -53,7 +53,7 @@ class EventController extends Controller
         } else {
             $form->setData([
                 'theme' => $this->get('capco.theme.repository')->findOneBySlug($theme),
-                'project' => $this->get('capco.project.repository')->findOneBySlug($project),
+                'project' => $this->get('Capco\AppBundle\Repository\ProjectRepository')->findOneBySlug($project),
                 'term' => $term,
             ]);
         }
@@ -103,7 +103,7 @@ class EventController extends Controller
         } else {
             $form->setData([
                 'theme' => $this->get('capco.theme.repository')->findOneBySlug($theme),
-                'project' => $this->get('capco.project.repository')->findOneBySlug($project),
+                'project' => $this->get('Capco\AppBundle\Repository\ProjectRepository')->findOneBySlug($project),
                 'term' => $term,
             ]);
         }

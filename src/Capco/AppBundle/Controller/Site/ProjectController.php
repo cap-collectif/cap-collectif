@@ -29,10 +29,9 @@ class ProjectController extends Controller
     {
         $props = $this->get('jms_serializer')->serialize(
             [
-                'projects' => $this->getDoctrine()
-                    ->getManager()
-                    ->getRepository('CapcoAppBundle:Project')
-                    ->getLastPublished($max, $offset),
+                'projects' =>
+                    $this->get('Capco\AppBundle\Repository\ProjectRepository')
+                        ->getLastPublished($max, $offset),
             ],
             'json',
             SerializationContext::create()->setGroups([
@@ -56,11 +55,6 @@ class ProjectController extends Controller
      */
     public function showUserVotesAction(Project $project)
     {
-        $serializer = $this->get('serializer');
-        $proposalRepo = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('CapcoAppBundle:Proposal');
-
         return ['project' => $project];
     }
 
@@ -317,9 +311,7 @@ class ProjectController extends Controller
             }
         }
 
-        $parameters['projectTypes'] = $this->getDoctrine()
-            ->getRepository('CapcoAppBundle:ProjectType')
-            ->findAll();
+        $parameters['projectTypes'] = $this->get('Capco\AppBundle\Repository\ProjectTypeRepository')->findAll();
 
         return ['params' => $parameters];
     }

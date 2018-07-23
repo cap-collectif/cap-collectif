@@ -514,9 +514,9 @@ class Opinion implements OpinionContributionInterface
         return $count;
     }
 
-    public function canDisplay(): bool
+    public function canDisplay($user=null): bool
     {
-        return $this->getIsEnabled() && $this->getStep() && $this->getStep()->canDisplay();
+        return $this->getIsEnabled() && $this->getStep() && $this->getStep()->canDisplay($user);
     }
 
     public function canContribute(): bool

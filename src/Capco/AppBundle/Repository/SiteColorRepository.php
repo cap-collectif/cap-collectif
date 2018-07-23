@@ -14,8 +14,6 @@ class SiteColorRepository extends EntityRepository
         return $this->getEntityManager()->createQueryBuilder()
             ->from($this->getClassName(), 'p', 'p.keyname')
             ->select('p.value', 'p.keyname')
-            ->andWhere('p.isEnabled = :enabled')
-            ->setParameter('enabled', true)
             ->groupBy('p.keyname')
             ->getQuery()
             ->useQueryCache(true)

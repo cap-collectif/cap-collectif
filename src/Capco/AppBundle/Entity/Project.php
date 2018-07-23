@@ -694,14 +694,14 @@ class Project implements IndexableInterface
 
     // ******************** Custom methods ******************************
 
-    public function canDisplay(?User $user = null): bool
+    public function canDisplay($user = null): bool
     {
-        return $this->getVisibilityByViewer($user) === ProjectVisibilityMode::VISIBILITY_PUBLIC;
+        return $this->canDisplayForViewer($user);
     }
 
-    public function canContribute(?User $user = null): bool
+    public function canContribute($user = null): bool
     {
-        return $this->getVisibilityByViewer($user) === ProjectVisibilityMode::VISIBILITY_PUBLIC;
+        return $this->canDisplayForViewer($user);
     }
 
     /**

@@ -8,6 +8,9 @@ use Capco\AppBundle\Entity\Category;
 use Capco\AppBundle\Model\Sourceable;
 use Capco\AppBundle\Traits\UuidTrait;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
+use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
+use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Entity\OpinionVersion;
@@ -350,9 +353,9 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable
         return false;
     }
 
-    public function canDisplay(): bool
+    public function canDisplay($user = null): bool
     {
-        return $this->isEnabled && $this->getParent()->canDisplay();
+        return $this->isEnabled && $this->getParent()->canDisplay($user);
     }
 
     public function canContribute(): bool

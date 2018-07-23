@@ -487,9 +487,9 @@ class Proposal
         return 'Proposal';
     }
 
-    public function canDisplay(): bool
+    public function canDisplay($user = null): bool
     {
-        return $this->enabled && !$this->isTrashed() && $this->getStep()->canDisplay();
+        return $this->enabled && !$this->isTrashed && $this->getStep()->canDisplay($user);
     }
 
     public function isPrivate(): bool

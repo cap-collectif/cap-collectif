@@ -49,7 +49,7 @@ class EventComment extends Comment
 
     // ************************ Overriden methods *********************************
 
-    public function getRelatedObject()
+    public function getRelatedObject(): ?Event
     {
         return $this->getEvent();
     }

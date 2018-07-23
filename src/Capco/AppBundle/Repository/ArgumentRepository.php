@@ -232,7 +232,6 @@ class ArgumentRepository extends EntityRepository
             ->andWhere('a.Author = :author')
             ->andWhere('o.isEnabled = true')
             ->andWhere('s.isEnabled = true')
-            ->andWhere('p.isEnabled = true')
             ->setParameter('author', $user)
             ->getQuery()
             ->getResult();

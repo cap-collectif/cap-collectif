@@ -55,7 +55,7 @@ class ProposalEvaluation
         $response->setProposalEvaluation($this);
     }
 
-    public function getProposal()
+    public function getProposal(): ?Proposal
     {
         return $this->proposal;
     }

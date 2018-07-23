@@ -72,7 +72,7 @@ class ThemeController extends Controller
     public function showAction(Theme $theme)
     {
         if (!$theme->canDisplay()) {
-            throw $this->createNotFoundException($this->get('translator')->trans('theme.error.not_found', [], 'CapcoAppBundle'));
+            throw $this->createAccessDeniedException($this->get('translator')->trans('restricted-access', [], 'CapcoAppBundle'));
         }
 
         $em = $this->getDoctrine()->getManager();

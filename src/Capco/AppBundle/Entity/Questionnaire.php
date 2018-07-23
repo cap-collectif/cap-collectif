@@ -236,10 +236,7 @@ class Questionnaire
         return $this;
     }
 
-    /**
-     * @return QuestionnaireStep
-     */
-    public function getStep()
+    public function getStep(): ?QuestionnaireStep
     {
         return $this->step;
     }
@@ -256,12 +253,9 @@ class Questionnaire
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function canDisplay()
+    public function canDisplay($user): bool
     {
-        return $this->getStep()->canDisplay();
+        return $this->getStep()->canDisplay($user);
     }
 
     public function canContribute(): bool

@@ -20,12 +20,12 @@ class ProjectTypeRepository extends ServiceEntityRepository
         parent::__construct($registry, ProjectType::class);
     }
 
-    public function findAll()
+    public function findAll($user = null)
     {
         return $this->createQueryBuilder('p')
             ->select('p')
             ->leftJoin('p.projects', 'projects', Join::WITH, 'projects.projectType IS NOT NULL')
-            ->where('projects.visibility >= ' . $this->getVisibilityByViewer())
+            ->where('projects.visibility >= ' . $this->getVisibilityByViewer($user))
             ->groupBy('projects.id')
             ->distinct('p.id')
             ->getQuery()

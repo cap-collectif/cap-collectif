@@ -3,6 +3,8 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Entity\AbstractVote;
+use Capco\AppBundle\Model\VoteContribution;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
@@ -116,6 +118,7 @@ class AbstractVoteRepository extends EntityRepository
 
         $votes = $qb->getQuery()->execute();
         $publicVotes = [];
+        /** @var AbstractVote $vote */
         foreach ($votes as $vote) {
             try {
                 if (!method_exists($vote, 'getProposal') || !$vote->getProposal()->isDeleted()) {

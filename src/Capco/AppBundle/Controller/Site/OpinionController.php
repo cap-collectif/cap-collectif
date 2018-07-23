@@ -27,12 +27,12 @@ class OpinionController extends Controller
     public function showByTypeAction(
         Project $project,
         ConsultationStep $currentStep,
-        string $opinionTypeSlug,
         int $page,
+        string $opinionTypeSlug,
         Request $request,
         string $opinionsSort = null
     ) {
-        if (!$currentStep->canDisplay()) {
+        if (!$currentStep->canDisplay($this->getUser())) {
             throw $this->createNotFoundException(
                 $this->get('translator')->trans('project.error.not_found', [], 'CapcoAppBundle')
             );
@@ -85,10 +85,8 @@ class OpinionController extends Controller
         $opinion = $this->get('capco.opinion.repository')->findOneBySlug($opinionSlug);
         $version = $this->get('capco.opinion_version.repository')->findOneBySlug($versionSlug);
 
-        if (!$opinion || !$version || !$version->canDisplay()) {
-            throw $this->createNotFoundException(
-                $this->get('translator')->trans('opinion.error.not_found', [], 'CapcoAppBundle')
-            );
+        if (!$opinion || !$version || !$version->canDisplay($this->getUser())) {
+            throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', [], 'CapcoAppBundle'));
         }
 
         $currentStep = $opinion->getStep();
@@ -116,12 +114,11 @@ class OpinionController extends Controller
         string $opinionTypeSlug,
         string $opinionSlug
     ) {
+        /** @var Opinion $opinion */
         $opinion = $this->get('capco.opinion.repository')->findOneBySlug($opinionSlug);
 
-        if (!$opinion || !$opinion->canDisplay()) {
-            throw $this->createNotFoundException(
-                $this->get('translator')->trans('opinion.error.not_found', [], 'CapcoAppBundle')
-            );
+        if (!$opinion || !$opinion->canDisplay($this->getUser())) {
+            throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', [], 'CapcoAppBundle'));
         }
 
         $currentStep = $opinion->getStep();

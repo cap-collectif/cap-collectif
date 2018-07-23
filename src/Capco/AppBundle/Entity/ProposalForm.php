@@ -388,9 +388,9 @@ class ProposalForm
         return $this;
     }
 
-    public function canDisplay(): bool
+    public function canDisplay($user = null): bool
     {
-        return $this->getStep()->canDisplay();
+        return $this->getStep()->canDisplay($user);
     }
 
     public function isContribuable(): bool

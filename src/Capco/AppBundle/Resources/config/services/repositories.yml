@@ -250,20 +250,16 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Video']
 
-  capco.project.repository:
-    public: true
-    class: Capco\AppBundle\Repository\ProjectRepository
-    autowire: true
-    autoconfigure: true
-
   Capco\AppBundle\Repository\ProjectRepository:
     class: Capco\AppBundle\Repository\ProjectRepository
     autowire: true
     autoconfigure: true
+    public: true
 
   Capco\AppBundle\Repository\ProjectTypeRepository:
     class: Capco\AppBundle\Repository\ProjectTypeRepository
     autowire: true
+    public: true
     autoconfigure: true
 
   capco.abstract_step.repository:

@@ -116,7 +116,7 @@ services:
 
   capco.project.resolver:
     class: Capco\AppBundle\Resolver\ProjectResolver
-    arguments: ['@capco.project.repository', '@router.default']
+    arguments: ['@Capco\AppBundle\Repository\ProjectRepository', '@router.default']
 
   capco.media.manager:
     class: Capco\AppBundle\Manager\MediaManager
@@ -148,12 +148,4 @@ services:
 
   capco.following.activities.resolver:
     class: Capco\AppBundle\Following\ActivitiesResolver
-    arguments:
-      [
-        '@capco.follower.repository',
-        '@capco.proposal.repository',
-        '@capco.proposal_form.repository',
-        '@capco.project.repository',
-        '@logger',
-        '@router',
-      ]
+    arguments: ['@capco.follower.repository','@capco.proposal.repository' ,'@capco.proposal_form.repository','@Capco\AppBundle\Repository\ProjectRepository','@logger', '@router']

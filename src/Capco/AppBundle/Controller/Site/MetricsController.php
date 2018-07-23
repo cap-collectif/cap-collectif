@@ -1,6 +1,7 @@
 <?php
 namespace Capco\AppBundle\Controller\Site;
 
+use Capco\AppBundle\Entity\ProjectVisibilityMode;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,9 +50,7 @@ class MetricsController extends Controller
         $contributionTrashedCount += $this->get('capco.source.repository')->countTrashed();
         $contributionTrashedCount += $this->get('capco.proposal.repository')->countTrashed();
 
-        $projectCount = \count(
-            $this->get('capco.project.repository')->findBy(['isEnabled' => true])
-        );
+        $projectCount = \count($this->get('Capco\AppBundle\Repository\ProjectRepository')->findBy(['visibility' => ProjectVisibilityMode::VISIBILITY_PUBLIC]));
         $steps = $this->get('capco.abstract_step.repository')->findAll();
         $contribuableStepsCount = \count(
             array_reduce($steps, function ($step) {

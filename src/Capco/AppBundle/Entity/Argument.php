@@ -1,6 +1,7 @@
 <?php
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\Publishable;
@@ -261,9 +262,9 @@ class Argument implements Contribution, VotableInterface, Trashable, Publishable
         return false;
     }
 
-    public function canDisplay(): bool
+    public function canDisplay($user = null): bool
     {
-        return $this->getIsEnabled() && $this->getParent()->canDisplay();
+        return $this->getIsEnabled() && $this->getParent()->canDisplay($user);
     }
 
     public function canContribute(): bool
@@ -281,10 +282,7 @@ class Argument implements Contribution, VotableInterface, Trashable, Publishable
         return $this->getIsEnabled() && !$this->isTrashed() && $this->getParent()->canBeDeleted();
     }
 
-    /**
-     * @return OpinionVersion|Opinion
-     */
-    public function getParent()
+    public function getParent(): OpinionContributionInterface
     {
         if (null !== $this->opinionVersion) {
             return $this->opinionVersion;

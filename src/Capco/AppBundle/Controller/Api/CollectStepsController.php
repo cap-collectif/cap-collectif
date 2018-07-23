@@ -20,7 +20,7 @@ class CollectStepsController extends FOSRestController
         $proposalForm = $step->getProposalForm();
 
         if ($proposalForm->getStep()->isPrivate()) {
-            throw $this->createNotFoundException();
+            throw $this->createAccessDeniedException();
         }
 
         $proposalRepository = $this->get('capco.proposal.repository');

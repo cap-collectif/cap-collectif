@@ -74,7 +74,7 @@ class ThemeRepository extends EntityRepository
             ->leftJoin('t.Author', 'a')
             ->leftJoin('a.media', 'am')
             ->leftJoin('t.media', 'm')
-            ->leftJoin('t.projects', 'p', 'WITH', 'p.isEnabled = :enabled')
+            ->leftJoin('t.projects', 'p')
             ->leftJoin('t.posts', 'post', 'WITH', 'post.isPublished = :enabled')
             ->leftJoin('t.events', 'e', 'WITH', 'e.isEnabled = :enabled')
             ->andWhere('t.slug = :slug')

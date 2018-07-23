@@ -1,6 +1,8 @@
 <?php
 namespace Capco\AppBundle\Controller\Site;
 
+use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -128,11 +130,9 @@ class SitemapsController extends Controller
 
         // Steps
         $stepResolver = $this->get('capco.step.resolver');
-        foreach (
-            $em->getRepository('CapcoAppBundle:Steps\AbstractStep')->findBy(['isEnabled' => true])
-            as $step
-        ) {
-            if ($step->getProject() && $step->getProject()->canDisplay()) {
+        /** @var AbstractStep $step */
+        foreach ($this->get('capco.abstract_step.repository')->findBy(['isEnabled' => true]) as $step) {
+            if ($step->getProject()->canDisplay($this->getUser())) {
                 $urls[] = [
                     'loc' => $stepResolver->getLink($step, false),
                     'priority' => '0.5',
@@ -142,12 +142,9 @@ class SitemapsController extends Controller
             }
         }
 
-        // Opinions
-        foreach (
-            $em->getRepository('CapcoAppBundle:Opinion')->findBy(['isEnabled' => true])
-            as $opinion
-        ) {
-            if ($opinion->canDisplay()) {
+        /** @var Opinion $opinion */
+        foreach ($em->getRepository('CapcoAppBundle:Opinion')->findBy(['isEnabled' => true]) as $opinion) {
+            if ($opinion->canDisplay($this->getUser())) {
                 $urls[] = [
                     'loc' =>
                         $this->get('router')->generate('app_project_show_opinion', [

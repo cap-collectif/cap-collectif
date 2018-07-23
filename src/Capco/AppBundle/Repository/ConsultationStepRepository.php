@@ -39,9 +39,7 @@ class ConsultationStepRepository extends EntityRepository
             ->leftJoin('p.themes', 't')
             ->leftJoin('p.Cover', 'pov')
             ->andWhere(':now BETWEEN cs.startAt AND ps.endAt')
-            ->andWhere('p.isEnabled = :enabled')
             ->setParameter('now', new \DateTime())
-            ->setParameter('enabled', true)
             ->groupBy('pas.project')
             ->addOrderBy('ps.endAt', 'DESC');
 
@@ -75,9 +73,7 @@ class ConsultationStepRepository extends EntityRepository
             ->leftJoin('p.themes', 't')
             ->leftJoin('p.Cover', 'pov')
             ->andWhere(':now < ps.startAt')
-            ->andWhere('p.isEnabled = :enabled')
             ->setParameter('now', new \DateTime())
-            ->setParameter('enabled', true)
             ->groupBy('pas.project')
             ->addOrderBy('ps.startAt', 'DESC');
 
@@ -111,9 +107,7 @@ class ConsultationStepRepository extends EntityRepository
             ->leftJoin('p.themes', 't')
             ->leftJoin('p.Cover', 'cov')
             ->andWhere(':now > ps.endAt')
-            ->andWhere('p.isEnabled = :enabled')
             ->setParameter('now', new \DateTime())
-            ->setParameter('enabled', true)
             ->groupBy('pas.project')
             ->addOrderBy('ps.startAt', 'ASC');
 

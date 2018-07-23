@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\ProjectVisibilityMode;
 use Capco\AppBundle\Entity\Theme;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;

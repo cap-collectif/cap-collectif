@@ -13,4 +13,10 @@ final class ProjectVisibilityMode
         'private' => self::VISIBILITY_ADMIN,
         'public' => self::VISIBILITY_PUBLIC,
     ];
+
+    public const REVERSE_KEY_VISIBILITY = [
+        self::VISIBILITY_ME => 'myself' ,
+        self::VISIBILITY_ADMIN =>'private',
+        self::VISIBILITY_PUBLIC =>'public',
+    ];
 }

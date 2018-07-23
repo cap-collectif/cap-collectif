@@ -165,7 +165,6 @@ class SourceRepository extends EntityRepository
             ->andWhere('s.author = :author')
             ->andWhere('o.isEnabled = :enabled')
             ->andWhere('cs.isEnabled = :enabled')
-            ->andWhere('c.isEnabled = :enabled')
             ->setParameter('author', $user)
             ->setParameter('enabled', true)
             ->orderBy('s.createdAt', 'DESC');

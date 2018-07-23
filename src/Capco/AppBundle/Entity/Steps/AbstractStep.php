@@ -10,6 +10,7 @@ use Capco\AppBundle\Traits\RequirementTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -281,11 +282,13 @@ abstract class AbstractStep
 
     // ************************* Custom methods *********************
 
-    public function getProject()
+    public function getProject(): ?Project
     {
         if ($this->projectAbstractStep) {
             return $this->projectAbstractStep->getProject();
         }
+
+        return null;
     }
 
     public function getProjectId(): ?string
@@ -303,9 +306,9 @@ abstract class AbstractStep
         }
     }
 
-    public function canDisplay(): bool
+    public function canDisplay($user): bool
     {
-        return $this->isEnabled && $this->getProject() && $this->getProject()->canDisplay();
+        return $this->isEnabled && $this->getProject() && $this->getProject()->canDisplay($user);
     }
 
     public function canContribute(): bool

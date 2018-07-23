@@ -1,35 +1,59 @@
 <?php
+
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Traits\ProjectVisibilityTrait;
+use Capco\UserBundle\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class ProjectRepository extends ServiceEntityRepository
 {
     use ProjectVisibilityTrait;
 
+    /**
+     * @var TokenStorageInterface $token
+     */
     private $token;
+    private $user;
 
     public function __construct(ManagerRegistry $registry, TokenStorageInterface $tokenStorage)
     {
-        $this->token = $tokenStorage->getToken();
+        $this->token = $tokenStorage;
+        // sometimes, DI failed, and I dont understand why...
+        if ($tokenStorage) {
+            $this->token = $tokenStorage->getToken();
+        }
         parent::__construct($registry, Project::class);
     }
 
+
     /**
-     * @param mixed $slug
-     *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function getOne($slug)
     {
         $qb = $this->getVisibilityQueryBuilder()
+            ->addSelect('t', 'pas', 's', 'pov')
+            ->leftJoin('p.themes', 't', 'WITH', 't.isEnabled = true')
+            ->leftJoin('p.steps', 'pas')
+            ->leftJoin('pas.step', 's')
+            ->leftJoin('p.Cover', 'pov')
+            ->andWhere('p.slug = :slug')
+            ->andWhere('s.isEnabled = true')
+            ->setParameter('slug', $slug);
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    public function getOneWithoutVisibility($slug)
+    {
+        $qb = $this->createQueryBuilder('p')
             ->addSelect('t', 'pas', 's', 'pov')
             ->leftJoin('p.themes', 't', 'WITH', 't.isEnabled = true')
             ->leftJoin('p.steps', 'pas')
@@ -82,7 +106,7 @@ class ProjectRepository extends ServiceEntityRepository
             );
         }
 
-        $qb = $this->getVisibilityQueryBuilder()
+        $qb = $this->getVisibilityQueryBuilder($this->getUser())
             ->addSelect('t', 'pas', 's', 'pov')
             ->leftJoin('p.themes', 't')
             ->leftJoin('p.steps', 'pas')
@@ -96,7 +120,7 @@ class ProjectRepository extends ServiceEntityRepository
         }
 
         if (null !== $term) {
-            $qb->andWhere('p.title LIKE :term')->setParameter('term', '%' . $term . '%');
+            $qb->andWhere('p.title LIKE :term')->setParameter('term', '%'.$term.'%');
         }
 
         if (null !== $type) {
@@ -140,7 +164,7 @@ class ProjectRepository extends ServiceEntityRepository
         }
 
         if (null !== $term) {
-            $qb->andWhere('p.title LIKE :term')->setParameter('term', '%' . $term . '%');
+            $qb->andWhere('p.title LIKE :term')->setParameter('term', '%'.$term.'%');
         }
 
         return $qb->getQuery()->getSingleScalarResult();
@@ -242,10 +266,38 @@ class ProjectRepository extends ServiceEntityRepository
         return $projects;
     }
 
-    public function getVisibilityQueryBuilder(): QueryBuilder
+    public function getVisibilityQueryBuilder($user = null): QueryBuilder
     {
-        $visibility = $this->getVisibilityByViewer();
+        $visibility = $this->getVisibilityByViewer($user);
 
-        return $this->createQueryBuilder('p')->andWhere("p.visibility >= $visibility");
+        return $this->createQueryBuilder('p')
+            ->select('p')
+            ->andWhere("p.visibility >= :visibility")
+            ->setParameter('visibility', $visibility);
     }
+
+    public function countByUser(User $user)
+    {
+        $qb = $this->getVisibilityQueryBuilder();
+        $qb->select('COUNT(p.id)')
+            ->where('p.Author :author')
+            ->setParameter('author', $user);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    // sometimes, DI failed, and I dont understand why, so I set the user from the service or controller
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+
 }

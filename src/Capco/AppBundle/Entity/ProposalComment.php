@@ -49,7 +49,7 @@ class ProposalComment extends Comment
         return 'proposalComment';
     }
 
-    public function getRelatedObject()
+    public function getRelatedObject(): ?Proposal
     {
         return $this->proposal;
     }

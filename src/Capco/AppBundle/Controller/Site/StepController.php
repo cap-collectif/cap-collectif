@@ -12,11 +12,7 @@ use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Entity\Steps\SynthesisStep;
 use Capco\AppBundle\GraphQL\Resolver\Project\ProjectContributorResolver;
-use Capco\AppBundle\Repository\OpinionRepository;
-use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
-use Capco\AppBundle\Repository\ProposalRepository;
-use Capco\AppBundle\Traits\ControllerTrait;
 use Capco\UserBundle\Entity\User;
 use JMS\Serializer\SerializationContext;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -27,46 +23,23 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
-class StepController
+class StepController extends Controller
 {
-    use ControllerTrait;
-
-    protected $projectRepository;
-    protected $opinionVersionRepository;
-    protected $opinionRepository;
-    protected $proposalRepository;
-    protected $tokenStorage;
-
-    public function __construct(
-        ProjectRepository $projectRepository,
-        OpinionRepository $opinionRepository,
-        OpinionVersionRepository $opinionVersionRepository,
-        ProposalRepository $proposalRepository,
-        TokenStorage $tokenStorage
-    ) {
-        $this->projectRepository = $projectRepository;
-        $this->opinionVersionRepository = $opinionVersionRepository;
-        $this->opinionRepository = $opinionRepository;
-        $this->proposalRepository = $proposalRepository;
-        $this->tokenStorage = $tokenStorage;
-    }
 
     /**
      * @Route("/project/{projectSlug}/step/{stepSlug}", name="app_project_show_step")
      * @Route("/consultation/{projectSlug}/step/{stepSlug}", name="app_consultation_show_step")
      * @Template("CapcoAppBundle:Step:show.html.twig")
      * @Cache(smaxage="60", public=true)
+     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
      * @ParamConverter("step", class="CapcoAppBundle:Steps\OtherStep", options={"mapping": {"stepSlug": "slug"}})
      */
-    public function showStepAction(string $projectSlug, OtherStep $step)
+    public function showStepAction(Request $request, Project $project, OtherStep $step)
     {
-        if (!$step->canDisplay($this->getUser())) {
+        if (!$project->canDisplay($this->getUser())) {
             throw $this->createAccessDeniedException();
         }
-
-        $project = $this->projectRepository->getOne($projectSlug);
 
         if (!$project) {
             throw $this->createNotFoundException();
@@ -82,21 +55,20 @@ class StepController
      * @Route("/project/{projectSlug}/presentation/{stepSlug}", name="app_project_show_presentation")
      * @Route("/consultation/{projectSlug}/presentation/{stepSlug}", name="app_consultation_show_presentation")
      * @Template("CapcoAppBundle:Step:presentation.html.twig")
+     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
      * @ParamConverter("step", class="CapcoAppBundle:Steps\PresentationStep", options={"mapping" = {"stepSlug": "slug"}})
      * @Cache(smaxage="60", public=true)
      */
-    public function showPresentationAction(string $projectSlug, PresentationStep $step)
+    public function showPresentationAction(Request $request, Project $project, PresentationStep $step)
     {
-        if (!$step->canDisplay($this->getUser())) {
+        if (!$project->canDisplay($this->getUser())) {
             throw $this->createAccessDeniedException();
         }
-
-        $project = $this->projectRepository->getOne($projectSlug);
 
         if (!$project) {
             throw $this->createNotFoundException();
         }
-
+        $projectSlug = $project->getSlug();
         $events = $this->get('capco.event.resolver')->getLastByProject($projectSlug, 2);
         $posts = $this->get('capco.blog.post.repository')->getLastPublishedByProject($projectSlug, 2);
         $nbEvents = $this->get('capco.event.resolver')->countEvents(null, null, $projectSlug, null);
@@ -107,26 +79,21 @@ class StepController
         $contributorsConnection = $projectContributorResolver($project, new Argument(['first' => 10]));
 
         $contributorsList = $contributorsConnection->totalCount > 0
-            ? array_merge(
-                ...array_map(
-                    function (Edge $edge) {
-                        /** @var User $user */
-                        $user = $edge->node;
+         ? array_merge(
+            ...array_map(function (Edge $edge) {
+                /** @var User $user */
+                $user = $edge->node;
 
-                        return [
-                            $user->getId() => [
-                                'user' => $user,
-                                'sources' => $user->getSourcesCount(),
-                                'arguments' => $user->getArgumentsCount(),
-                                'opinions' => $user->getOpinionsCount(),
-                                'contributions' => $user->getContributionsCount(),
-                                'votes' => $user->getVotesCount(),
-                            ],
-                        ];
-                    },
-                    $contributorsConnection->edges
-                )
-            ) : [];
+                return [$user->getId() => [
+                    'user' => $user,
+                    'sources' => $user->getSourcesCount(),
+                    'arguments' => $user->getArgumentsCount(),
+                    'opinions' => $user->getOpinionsCount(),
+                    'contributions' => $user->getContributionsCount(),
+                    'votes' => $user->getVotesCount(),
+                ]];
+            }, $contributorsConnection->edges)
+        ) : [];
 
         $showVotes = $this->get('capco.project.helper')->hasStepWithVotes($project);
 
@@ -147,17 +114,16 @@ class StepController
      * @Route("/project/{projectSlug}/ranking/{stepSlug}", name="app_project_show_ranking")
      * @Route("/consultation/{projectSlug}/ranking/{stepSlug}", name="app_consultation_show_ranking")
      * @Template("CapcoAppBundle:Step:ranking.html.twig")
+     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
      * @ParamConverter("step", class="CapcoAppBundle:Steps\RankingStep", options={"mapping" = {"stepSlug": "slug"}})
      * @Cache(smaxage="60", public=true)
      */
-    public function showRankingAction(string $projectSlug, RankingStep $step)
+    public function showRankingAction(Request $request, Project $project, RankingStep $step)
     {
-        if (!$step->canDisplay($this->getUser())) {
+        if (!$project->canDisplay($this->getUser())) {
             throw $this->createAccessDeniedException();
         }
 
-        /** @var Project $project */
-        $project = $this->projectRepository->getOne($projectSlug);
         if (!$project) {
             throw $this->createNotFoundException();
         }
@@ -165,12 +131,14 @@ class StepController
         $excludedAuthor = !$project->getIncludeAuthorInRanking() ? $project->getAuthor()->getId() : null;
 
         $nbOpinionsToDisplay = null !== $step->getNbOpinionsToDisplay() ? $step->getNbOpinionsToDisplay() : 10;
-        $opinions =$this->opinionRepository
-            ->getEnabledByProject($project, $excludedAuthor, true, $nbOpinionsToDisplay);
+        $opinions = $this->get('capco.opinion.repository')
+            ->getEnabledByProject($project, $excludedAuthor, true, $nbOpinionsToDisplay)
+        ;
 
         $nbVersionsToDisplay = null !== $step->getNbVersionsToDisplay() ? $step->getNbVersionsToDisplay() : 10;
-        $versions = $this->opinionVersionRepository
-            ->getEnabledByProject($project, $excludedAuthor, true, $nbVersionsToDisplay);
+        $versions = $this->get('capco.opinion_version.repository')
+            ->getEnabledByProject($project, $excludedAuthor, true, $nbVersionsToDisplay)
+        ;
 
         return [
             'project' => $project,
@@ -186,26 +154,27 @@ class StepController
      * @Route("/project/{projectSlug}/ranking/{stepSlug}/opinions/{page}", name="app_project_show_opinions_ranking", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @Route("/consultation/{projectSlug}/ranking/{stepSlug}/opinions/{page}", name="app_consultation_show_opinions_ranking", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @Template("CapcoAppBundle:Step:opinions_ranking.html.twig")
+     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
      * @ParamConverter("step", class="CapcoAppBundle:Steps\RankingStep", options={"mapping" = {"stepSlug": "slug"}})
      * @Cache(smaxage="60", public=true)
      *
      * @param mixed $page
      */
-    public function showOpinionsRankingAction(string $projectSlug, RankingStep $step, $page = 1)
+    public function showOpinionsRankingAction(Request $request, Project $project, RankingStep $step, $page = 1)
     {
-        if (!$step->canDisplay($this->getUser())) {
+        if (!$project->canDisplay($this->getUser())) {
             throw $this->createAccessDeniedException();
         }
 
-        $project = $this->projectRepository->getOne($projectSlug);
         if (!$project) {
             throw $this->createNotFoundException();
         }
 
         $excludedAuthor = !$project->getIncludeAuthorInRanking() ? $project->getAuthor()->getId() : null;
 
-        $opinions =$this->opinionRepository
-            ->getEnabledByProject($project, $excludedAuthor, true, 10, $page);
+        $opinions = $this->get('capco.opinion.repository')
+            ->getEnabledByProject($project, $excludedAuthor, true, 10, $page)
+        ;
 
         return [
             'project' => $project,
@@ -220,26 +189,27 @@ class StepController
      * @Route("/project/{projectSlug}/ranking/{stepSlug}/versions/{page}", name="app_project_show_versions_ranking", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @Route("/consultation/{projectSlug}/ranking/{stepSlug}/versions/{page}", name="app_consultation_show_versions_ranking", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @Template("CapcoAppBundle:Step:versions_ranking.html.twig")
+     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
      * @ParamConverter("step", class="CapcoAppBundle:Steps\RankingStep", options={"mapping" = {"stepSlug": "slug"}})
      * @Cache(smaxage="60", public=true)
      *
      * @param mixed $page
      */
-    public function showVersionsRankingAction(string $projectSlug, RankingStep $step, $page = 1)
+    public function showVersionsRankingAction(Request $request, Project $project, RankingStep $step, $page = 1)
     {
-        if (!$step->canDisplay($this->getUser())) {
+        if (!$project->canDisplay($this->getUser())) {
             throw $this->createAccessDeniedException();
         }
 
-        $project = $this->projectRepository->getOne($projectSlug);
         if (!$project) {
             throw $this->createNotFoundException();
         }
 
         $excludedAuthor = !$project->getIncludeAuthorInRanking() ? $project->getAuthor()->getId() : null;
 
-        $versions = $this->opinionVersionRepository
-            ->getEnabledByProject($project, $excludedAuthor, true, 10, $page);
+        $versions = $this->get('capco.opinion_version.repository')
+            ->getEnabledByProject($project, $excludedAuthor, true, 10, $page)
+        ;
 
         return [
             'project' => $project,
@@ -254,30 +224,26 @@ class StepController
      * @Route("/project/{projectSlug}/synthesis/{stepSlug}", name="app_project_show_synthesis")
      * @Route("/consultation/{projectSlug}/synthesis/{stepSlug}", name="app_consultation_show_synthesis")
      * @Template("CapcoAppBundle:Step:synthesis.html.twig")
+     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
      * @ParamConverter("step", class="CapcoAppBundle:Steps\SynthesisStep", options={"mapping" = {"stepSlug": "slug"}})
      * @Cache(smaxage="60", public=true)
      */
-    public function showSynthesisAction(string $projectSlug, SynthesisStep $step)
+    public function showSynthesisAction(Request $request, Project $project, SynthesisStep $step)
     {
-        if (!$step->canDisplay($this->getUser())) {
+        if (!$project->canDisplay($this->getUser())) {
             throw $this->createAccessDeniedException();
         }
 
-        $project = $this->projectRepository->getOne($projectSlug);
         if (!$project) {
             throw $this->createNotFoundException();
         }
 
         $serializer = $this->get('serializer');
 
-        $props = $serializer->serialize(
-            [
-                'synthesis_id' => $step->getSynthesis()->getId(),
-                'mode' => 'view',
-            ],
-            'json',
-            SerializationContext::create()
-        );
+        $props = $serializer->serialize([
+            'synthesis_id' => $step->getSynthesis()->getId(),
+            'mode' => 'view',
+        ], 'json', SerializationContext::create());
 
         return [
             'project' => $project,
@@ -288,54 +254,34 @@ class StepController
 
     /**
      * @Route("/project/{projectSlug}/collect/{stepSlug}", name="app_project_show_collect")
-     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOne", "map_method_signature" = true})
+     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
      * @ParamConverter("step", class="CapcoAppBundle:Steps\CollectStep", options={"mapping" = {"stepSlug": "slug"}})
      * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Step:collect.html.twig")
      */
     public function showCollectStepAction(Request $request, Project $project, CollectStep $step)
     {
-        if (!$step->canDisplay($this->getUser()) || !$step->getProposalForm()) {
+        if (!$project->canDisplay($this->getUser())) {
             throw $this->createAccessDeniedException();
         }
-
         $proposalForm = $step->getProposalForm();
         $searchResults = ['proposals' => [], 'count' => 0];
 
         $countFusions = $this->get('capco.proposal.repository')
-            ->countFusionsByProposalForm($proposalForm);
+          ->countFusionsByProposalForm($proposalForm)
+        ;
 
         $serializer = $this->get('serializer');
 
-        $props = $serializer->serialize(
-            [
-                'statuses' => $step->getStatuses(),
-                'form' => $proposalForm,
-                'categories' => $proposalForm ? $proposalForm->getCategories() : [],
-                'stepId' => $step->getId(),
-                'defaultSort' => $step->getDefaultSort() ?: null,
-                'count' => $searchResults['count'],
-                'countFusions' => $countFusions,
-            ],
-            'json',
-            SerializationContext::create()->setGroups(
-                [
-                    'Statuses',
-                    'ProposalForms',
-                    'Questions',
-                    'ThemeDetails',
-                    'Districts',
-                    'DistrictDetails',
-                    'Default',
-                    'Steps',
-                    'VoteThreshold',
-                    'UserVotes',
-                    'Proposals',
-                    'UsersInfos',
-                    'UserMedias',
-                ]
-            )
-        );
+        $props = $serializer->serialize([
+            'statuses' => $step->getStatuses(),
+            'form' => $proposalForm,
+            'categories' => $proposalForm ? $proposalForm->getCategories() : [],
+            'stepId' => $step->getId(),
+            'defaultSort' => $step->getDefaultSort() ?: null,
+            'count' => $searchResults['count'],
+            'countFusions' => $countFusions,
+        ], 'json', SerializationContext::create()->setGroups(['Statuses', 'ProposalForms', 'Questions', 'ThemeDetails', 'Districts', 'DistrictDetails', 'Default', 'Steps', 'VoteThreshold', 'UserVotes', 'Proposals', 'UsersInfos', 'UserMedias']));
 
         return [
             'project' => $project,
@@ -347,27 +293,24 @@ class StepController
 
     /**
      * @Route("/project/{projectSlug}/questionnaire/{stepSlug}", name="app_project_show_questionnaire")
-     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOne", "map_method_signature" = true})
+     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
      * @ParamConverter("step", class="CapcoAppBundle:Steps\QuestionnaireStep", options={"mapping" = {"stepSlug": "slug"}, "repository_method"= "getOne", "map_method_signature" = true})
      * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Step:questionnaire.html.twig")
      */
-    public function showQuestionnaireStepAction(Project $project, QuestionnaireStep $step)
+    public function showQuestionnaireStepAction(Request $request, Project $project, QuestionnaireStep $step)
     {
-        if (!$step->canDisplay($this->getUser())) {
+        if (!$project->canDisplay($this->getUser())) {
             throw $this->createAccessDeniedException();
         }
 
         $serializer = $this->get('serializer');
-        $props = $serializer->serialize(
-            [
-                'step' => $step,
-                'form' => $step->getQuestionnaire() ?: null,
-            ],
-            'json',
-            SerializationContext::create()
-                ->setGroups(['Questionnaires', 'Questions', 'QuestionnaireSteps', 'Steps'])
-        );
+        $props = $serializer->serialize([
+            'step' => $step,
+            'form' => $step->getQuestionnaire() ?: null,
+        ], 'json', SerializationContext::create()
+            ->setGroups(['Questionnaires', 'Questions', 'QuestionnaireSteps', 'Steps']))
+        ;
 
         return [
             'project' => $project,
@@ -378,14 +321,14 @@ class StepController
 
     /**
      * @Route("/project/{projectSlug}/selection/{stepSlug}", name="app_project_show_selection")
-     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOne", "map_method_signature" = true})
+     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
      * @ParamConverter("step", class="CapcoAppBundle:Steps\SelectionStep", options={"mapping" = {"stepSlug": "slug"}})
      * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Step:selection.html.twig")
      */
     public function showSelectionStepAction(Request $request, Project $project, SelectionStep $step)
     {
-        if (!$step->canDisplay($this->getUser())) {
+        if (!$project->canDisplay($this->getUser())) {
             throw $this->createAccessDeniedException();
         }
 
@@ -397,33 +340,15 @@ class StepController
 
         $serializer = $this->get('serializer');
 
-        $props = $serializer->serialize(
-            [
-                'stepId' => $step->getId(),
-                'statuses' => $step->getStatuses(),
-                'categories' => $categories,
-                'count' => $searchResults['count'],
-                'defaultSort' => $step->getDefaultSort() ?: null,
-                'form' => $form,
-                'showThemes' => $showThemes,
-            ],
-            'json',
-            SerializationContext::create()->setGroups(
-                [
-                    'Steps',
-                    'ProposalForms',
-                    'UserVotes',
-                    'Statuses',
-                    'ThemeDetails',
-                    'Districts',
-                    'Default',
-                    'Proposals',
-                    'UsersInfos',
-                    'UserMedias',
-                    'VoteThreshold',
-                ]
-            )
-        );
+        $props = $serializer->serialize([
+            'stepId' => $step->getId(),
+            'statuses' => $step->getStatuses(),
+            'categories' => $categories,
+            'count' => $searchResults['count'],
+            'defaultSort' => $step->getDefaultSort() ?: null,
+            'form' => $form,
+            'showThemes' => $showThemes,
+        ], 'json', SerializationContext::create()->setGroups(['Steps', 'ProposalForms', 'UserVotes', 'Statuses', 'ThemeDetails', 'Districts', 'Default', 'Proposals', 'UsersInfos', 'UserMedias', 'VoteThreshold']));
 
         return [
             'project' => $project,
@@ -436,39 +361,29 @@ class StepController
      * @Route("/project/{projectSlug}/synthesis/{stepSlug}/edition", name="app_project_edit_synthesis")
      * @Route("/consultation/{projectSlug}/synthesis/{stepSlug}/edition", name="app_consultation_edit_synthesis")
      * @Template("CapcoAppBundle:Synthesis:main.html.twig")
+     * @ParamConverter("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
      * @ParamConverter("step", class="CapcoAppBundle:Steps\SynthesisStep", options={"mapping" = {"stepSlug": "slug"}})
-     *
-     * @param mixed $projectSlug
      */
-    public function editSynthesisAction($projectSlug, SynthesisStep $step)
+    public function editSynthesisAction(Request $request, Project $project, SynthesisStep $step)
     {
-        if (!$step->canDisplay($this->getUser()) || !$step->getSynthesis()) {
+        if (!$project->canDisplay($this->getUser())) {
             throw $this->createAccessDeniedException();
         }
 
-        if (!$step->getSynthesis()->isEditable() || !$this->get('security.authorization_checker')->isGranted(
-                'ROLE_ADMIN'
-            )) {
-            throw $this->createAccessDeniedException(
-                $this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle')
-            );
+        if (!$step->getSynthesis()->isEditable() || !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException($this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle'));
         }
 
-        $project = $this->projectRepository->getOne($projectSlug);
         if (!$project) {
             throw $this->createNotFoundException();
         }
 
         $serializer = $this->get('serializer');
 
-        $props = $serializer->serialize(
-            [
-                'synthesis_id' => $step->getSynthesis()->getId(),
-                'mode' => 'edit',
-            ],
-            'json',
-            SerializationContext::create()
-        );
+        $props = $serializer->serialize([
+            'synthesis_id' => $step->getSynthesis()->getId(),
+            'mode' => 'edit',
+        ], 'json', SerializationContext::create());
 
         return [
             'project' => $project,
@@ -482,7 +397,7 @@ class StepController
      * @Route("/project/{projectSlug}/consultation/{stepSlug}", name="app_project_show_consultation")
      * @ParamConverter("project", class="CapcoAppBundle:Project", options={
      *    "mapping": {"projectSlug": "slug"},
-     *    "repository_method"="findOneBySlug"
+     *    "repository_method"="getOneWithoutVisibility"
      * })
      * @ParamConverter("currentStep", class="CapcoAppBundle:Steps\ConsultationStep", options={
      *    "mapping": {"stepSlug": "slug"},
@@ -494,19 +409,19 @@ class StepController
      */
     public function showConsultationAction(Project $project, ConsultationStep $currentStep)
     {
+        if (!$project->canDisplay($this->getUser())) {
+            throw $this->createAccessDeniedException();
+        }
         $serializer = $this->get('serializer');
 
         if (!$currentStep->canDisplay($this->getUser())) {
-            throw $this->createAccessDeniedException();
+            $error = $this->get('translator')->trans('project.error.not_found', [], 'CapcoAppBundle');
+            throw $this->createAccessDeniedException($error);
         }
 
-        $stepProps = $serializer->serialize(
-            [
-                'step' => $currentStep,
-            ],
-            'json',
-            SerializationContext::create()->setGroups(['ConsultationSteps', 'Steps', 'UserVotes'])
-        );
+        $stepProps = $serializer->serialize([
+            'step' => $currentStep,
+        ], 'json', SerializationContext::create()->setGroups(['ConsultationSteps', 'Steps', 'UserVotes']));
 
         return [
             'project' => $project,
