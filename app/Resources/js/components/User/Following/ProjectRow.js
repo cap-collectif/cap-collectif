@@ -51,10 +51,7 @@ export class ProjectRow extends Component<Props, State> {
         <Panel className="panel-custom">
           <Panel.Heading>
             <h3>
-              <a
-                href={project.url}
-                title={project.title}
-                id={`profile-project-link-${project.id}`}>
+              <a href={project.url} title={project.title} id={`profile-project-link-${project.id}`}>
                 {project.title}
               </a>
             </h3>

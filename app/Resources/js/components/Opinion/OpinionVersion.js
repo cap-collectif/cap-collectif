@@ -2,6 +2,7 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { ListGroupItem } from 'react-bootstrap';
+import classNames from 'classnames';
 import OpinionPreview from './OpinionPreview';
 import VotePiechart from '../Utils/VotePiechart';
 import type { OpinionVersion_version } from './__generated__/OpinionVersion_version.graphql';
