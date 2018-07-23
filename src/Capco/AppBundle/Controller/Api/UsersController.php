@@ -76,7 +76,7 @@ class UsersController extends FOSRestController
         $userType = null;
 
         if ($type) {
-            $userType = $em->getRepository('CapcoUserBundle:UserType')->findOneBySlug($type);
+            $userType = $this->container->get('capco.user.repository')->findOneBySlug($type);
             if (!$userType) {
                 throw new BadRequestHttpException(
                     "This user type doesn't exist, please use a correct slug."
