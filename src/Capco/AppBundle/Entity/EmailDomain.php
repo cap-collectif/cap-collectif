@@ -5,7 +5,7 @@ use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\EmailDomain")
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\EmailDomainRepository")
  * @ORM\Table(name="email_domain")
  */
 class EmailDomain
