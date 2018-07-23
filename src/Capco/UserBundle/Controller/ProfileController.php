@@ -177,10 +177,9 @@ class ProfileController extends Controller
         ) {
             throw $this->createAccessDeniedException();
         }
-        $doctrine = $this->getDoctrine();
 
         $user = $slug
-            ? $doctrine->getRepository('CapcoUserBundle:User')->findOneBySlug($slug)
+            ? $this->get('capco.user.repository')->findOneBySlug($slug)
             : $this->get('security.token_storage')
                 ->getToken()
                 ->getUser();
@@ -191,33 +190,35 @@ class ProfileController extends Controller
 
         $serializer = $this->get('jms_serializer');
 
-        $projectsRaw = $doctrine->getRepository('CapcoAppBundle:Project')->getByUser($user);
+        $projectsRaw = $this->get('Capco\AppBundle\Repository\ProjectRepository')->getByUser($user);
 
         $projectsProps = $serializer->serialize(
             ['projects' => $projectsRaw],
             'json',
-            SerializationContext
-                ::create()
-                ->setGroups(['Projects', 'UserDetails', 'Steps', 'ThemeDetails', 'ProjectType'])
+            SerializationContext::create()->setGroups([
+                'Projects',
+                'UserDetails',
+                'Steps',
+                'ThemeDetails',
+                'ProjectType',
+            ])
         );
         $projectsCount = \count($projectsRaw);
 
-        $opinionTypesWithUserOpinions = $doctrine
-            ->getRepository('CapcoAppBundle:OpinionType')
-            ->getByUser($user);
-        $versions = $doctrine->getRepository('CapcoAppBundle:OpinionVersion')->getByUser($user);
-        $arguments = $doctrine->getRepository('CapcoAppBundle:Argument')->getByUser($user);
+        $opinionTypesWithUserOpinions = $this->get('capco.opinion_type.repository')->getByUser(
+            $user
+        );
+        $versions = $this->get('capco.opinion_version.repository')->getByUser($user);
+        $arguments = $this->get('capco.argument.repository')->getByUser($user);
 
-        $replies = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('CapcoAppBundle:Reply')
-            ->findBy(['author' => $user, 'private' => false]);
+        $replies = $this->get('capco.reply.repository')->findBy([
+            'author' => $user,
+            'private' => false,
+        ]);
 
-        $sources = $doctrine->getRepository('CapcoAppBundle:Source')->getByUser($user);
-        $comments = $doctrine->getRepository('CapcoAppBundle:Comment')->getByUser($user);
-        $votes = $doctrine
-            ->getRepository('CapcoAppBundle:AbstractVote')
-            ->getPublicVotesByUser($user);
+        $sources = $this->get('capco.source.repository')->getByUser($user);
+        $comments = $this->get('capco.comment.repository')->getByUser($user);
+        $votes = $this->get('capco.abstract_vote.repository')->getPublicVotesByUser($user);
 
         return array_merge(
             [
@@ -244,9 +245,8 @@ class ProfileController extends Controller
     public function showProjectsAction(User $user)
     {
         $serializer = $this->get('jms_serializer');
-        $projectsRaw = $this->get('doctrine.orm.entity_manager')
-            ->getRepository('CapcoAppBundle:Project')
-            ->getByUser($user);
+        $projectsRaw = $this->get('Capco\AppBundle\Repository\ProjectRepository')->getByUser($user);
+
         $projectsProps = $serializer->serialize(
             ['projects' => $projectsRaw],
             'json',
@@ -284,9 +284,7 @@ class ProfileController extends Controller
      */
     public function showOpinionVersionsAction(User $user)
     {
-        $versions = $this->getDoctrine()
-            ->getRepository('CapcoAppBundle:OpinionVersion')
-            ->getByUser($user);
+        $versions = $this->get('capco.opinion_version.repository')->getByUser($user);
 
         return ['user' => $user, 'versions' => $versions];
     }
@@ -366,18 +364,16 @@ class ProfileController extends Controller
      */
     public function showVotesAction(User $user)
     {
-        $votes = $this->getDoctrine()
-            ->getRepository('CapcoAppBundle:AbstractVote')
-            ->getPublicVotesByUser($user);
+        $votes = $this->get('capco.abstract_vote.repository')->getPublicVotesByUser($user);
 
         return ['user' => $user, 'votes' => $votes];
     }
 
     private function getProposalsProps(User $user)
     {
-        $proposalsWithStep = $this->getDoctrine()
-            ->getRepository('CapcoAppBundle:Proposal')
-            ->getProposalsGroupedByCollectSteps($user, $this->getUser() !== $user);
+        $proposalsWithStep = $this->get(
+            'capco.proposal.repository'
+        )->getProposalsGroupedByCollectSteps($user, $this->getUser() !== $user);
         $proposalsCount = array_reduce($proposalsWithStep, function ($sum, $item) {
             $sum += \count($item['proposals']);
 
@@ -389,16 +385,14 @@ class ProfileController extends Controller
                 $this->get('jms_serializer')->serialize(
                     $value,
                     'json',
-                    SerializationContext
-                        ::create()
-                        ->setGroups([
-                            'Steps',
-                            'Proposals',
-                            'PrivateProposals',
-                            'ProposalResponses',
-                            'UsersInfos',
-                            'UserMedias',
-                        ])
+                    SerializationContext::create()->setGroups([
+                        'Steps',
+                        'Proposals',
+                        'PrivateProposals',
+                        'ProposalResponses',
+                        'UsersInfos',
+                        'UserMedias',
+                    ])
                 ),
                 true
             );

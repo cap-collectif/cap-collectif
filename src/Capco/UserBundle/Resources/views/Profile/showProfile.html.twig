@@ -56,11 +56,11 @@
                     </a>
                 </li>
                 {% endif %}
-                {% if user.projectsCount > 0 %}
+                {% if projectsCount > 0 %}
                 <li class="profile__value {% if (app.request.attributes.get('_route') == 'capco_user_profile_show_projects') %}active{% endif %} ">
                     <a href="{{ path('capco_user_profile_show_projects', {'slug': user.slug}) }}">
                         <h2 class="h5 excerpt  profile__value__label">{{ 'user.profile.show.projects'|trans({}, 'CapcoAppBundle') }}</h2>
-                        <p class="profile__value__number">{{ user.projectsCount }}</p>
+                        <p class="profile__value__number">{{ projectsCount }}</p>
                     </a>
                 </li>
                 {% endif %}
