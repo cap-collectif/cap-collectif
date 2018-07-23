@@ -1,5 +1,33 @@
-@opinions_votes
+@removeOpinionVote
 Feature: mutation removeOpinionVote
+
+@security
+Scenario: Logged in API client wants to remove a vote in a not contribuable opinion
+  Given I am logged in to graphql as user
+  And I send a GraphQL POST request:
+  """
+  {
+    "query": "mutation ($input: RemoveOpinionVoteInput!) {
+      removeOpinionVote(input: $input) {
+        contribution {
+          id
+        }
+      }
+    }",
+    "variables": {
+      "input": {
+        "opinionId": "opinion3"
+      }
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "errors":[{"message":"Uncontribuable opinion.","category":"user","locations":[{"line":1,"column":49}],"path":["removeOpinionVote"]}],
+    "data":{"removeOpinionVote":null}
+  }
+  """
 
 @security
 Scenario: Logged in API client wants to remove a vote but has not voted
@@ -9,14 +37,14 @@ Scenario: Logged in API client wants to remove a vote but has not voted
   {
     "query": "mutation ($input: RemoveOpinionVoteInput!) {
       removeOpinionVote(input: $input) {
-        opinion {
+        contribution {
           id
         }
       }
     }",
     "variables": {
       "input": {
-        "opinionId": "opinion2"
+        "opinionId": "opinion58"
       }
     }
   }
@@ -26,47 +54,9 @@ Scenario: Logged in API client wants to remove a vote but has not voted
   {
     "errors": [
       {
-        "message": "You have not voted for this opinion in this step.",
+        "message": "You have not voted for this opinion.",
         "category": @string@,
-        "locations": [{"line":1,"column":50}],
-        "path": ["removeOpinionVote"]
-      }
-    ],
-    "data": {
-      "removeOpinionVote": null
-    }
-  }
-  """
-
-@security
-Scenario: Logged in API client wants to remove a vote but has not voted
-  Given I am logged in to graphql as admin
-  And I send a GraphQL POST request:
-  """
-  {
-    "query": "mutation ($input: RemoveOpinionVoteInput!) {
-      removeOpinionVote(input: $input) {
-        opinion {
-          id
-        }
-      }
-    }",
-    "variables": {
-      "input": {
-        "stepId": "selectionstep3",
-        "opinionId": "opinion11"
-      }
-    }
-  }
-  """
-  Then the JSON response should match:
-  """
-  {
-    "errors": [
-      {
-        "message": "This step is no longer contributable.",
-        "category": @string@,
-        "locations": [{"line":1,"column":50}],
+        "locations": [{"line":1,"column":49}],
         "path": ["removeOpinionVote"]
       }
     ],
@@ -84,15 +74,15 @@ Scenario: Logged in API client wants to remove a vote
   {
     "query": "mutation ($input: RemoveOpinionVoteInput!) {
       removeOpinionVote(input: $input) {
-        opinion {
+        contribution {
           id
         }
+        deletedVoteId
       }
     }",
     "variables": {
       "input": {
-        "stepId": "selectionstep4",
-        "opinionId": "opinion7"
+        "opinionId": "opinion57"
       }
     }
   }
@@ -102,9 +92,10 @@ Scenario: Logged in API client wants to remove a vote
   {
     "data": {
       "removeOpinionVote": {
-        "opinion": {
-          "id": "opinion7"
-        }
+        "contribution": {
+          "id": "opinion57"
+        },
+        "deletedVoteId": "T3BpbmlvblZvdGU6NA=="
       }
     }
   }
