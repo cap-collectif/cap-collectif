@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Model\ModerableInterface;
@@ -27,8 +26,10 @@ class GlobalIdResolver
         return $results;
     }
 
-    public function resolve(string $uuid, $user)// : Node
-    {
+    public function resolve(
+        string $uuid,
+        $user // : Node
+    ) {
         $em = $this->container->get('doctrine.orm.default_entity_manager');
         if ($user instanceof User && $user->isAdmin()) {
             // If user is an admin, we allow to retrieve softdeleted nodes
@@ -73,7 +74,9 @@ class GlobalIdResolver
         }
 
         if (!$node) {
-            $node = $this->container->get('capco.project.repository')->find($uuid);
+            $node = $this->container->get('Capco\AppBundle\Repository\ProjectRepository')->find(
+                $uuid
+            );
         }
 
         if (!$node) {
@@ -108,15 +111,21 @@ class GlobalIdResolver
         $node = $this->container->get('capco.opinion.repository')->findOneByModerationToken($token);
 
         if (!$node) {
-            $node = $this->container->get('capco.opinion_version.repository')->findOneByModerationToken($token);
+            $node = $this->container->get(
+                'capco.opinion_version.repository'
+            )->findOneByModerationToken($token);
         }
 
         if (!$node) {
-            $node = $this->container->get('capco.argument.repository')->findOneByModerationToken($token);
+            $node = $this->container->get('capco.argument.repository')->findOneByModerationToken(
+                $token
+            );
         }
 
         if (!$node) {
-            $this->container->get('logger')->warn(__METHOD__ . ' : Unknown moderation_token: ' . $token);
+            $this->container->get('logger')->warn(
+                __METHOD__ . ' : Unknown moderation_token: ' . $token
+            );
             throw new NotFoundHttpException();
         }
 

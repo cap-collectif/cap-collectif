@@ -14,7 +14,7 @@
         'title':       (jumbotron_title ?: 'projects.jumbotron.title'|trans({}, 'CapcoAppBundle')),
         'description': (meta_description|striptags ?: jumbotron_body|striptags ?: content_body|striptags|truncate(250, true)),
         'image':       image,
-    'url':         url('app_project')
+        'url':         url('app_project')
     } only %}
 {% endblock %}
 
@@ -41,6 +41,10 @@
     </div>
 {% endblock %}
 
+{% block reduxStore %}
+    {% include '@CapcoApp/redux_store.html.twig' with {'projectReducerData' : params} %}
+{% endblock %}
+
 {% block body %}
     <div class="container container--custom" {% if content_body is null %}style="display: none;"{% endif %}>
         {% if null != content_body %}
@@ -53,10 +57,6 @@
            react_render_component('ProjectListPageApp')
         }}
     </div>
-{% endblock %}
-
-{% block reduxStore %}
-    {% include '@CapcoApp/redux_store.html.twig' with {'projectReducerData' : params} %}
 {% endblock %}
 
 {% block javascripts %}

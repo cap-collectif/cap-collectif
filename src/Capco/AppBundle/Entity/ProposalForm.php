@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration;
@@ -333,9 +332,13 @@ class ProposalForm
 
     public function getRealQuestions(): Collection
     {
-        return $this->getQuestions() ? $this->getQuestions()->map(function (QuestionnaireAbstractQuestion $questionnaireAbstractQuestion) {
-            return $questionnaireAbstractQuestion->getQuestion();
-        }) : new ArrayCollection();
+        return $this->getQuestions()
+            ? $this->getQuestions()->map(function (
+                QuestionnaireAbstractQuestion $questionnaireAbstractQuestion
+            ) {
+                return $questionnaireAbstractQuestion->getQuestion();
+            })
+            : new ArrayCollection();
     }
 
     public function getQuestions(): Collection
@@ -620,17 +623,26 @@ class ProposalForm
 
     public function isNotifyingCommentOnCreate(): bool
     {
-        return $this->notificationsConfiguration && $this->notificationsConfiguration->isOnCommentCreate();
+        return (
+            $this->notificationsConfiguration &&
+            $this->notificationsConfiguration->isOnCommentCreate()
+        );
     }
 
     public function isNotifyingCommentOnUpdate(): bool
     {
-        return $this->notificationsConfiguration && $this->notificationsConfiguration->isOnCommentUpdate();
+        return (
+            $this->notificationsConfiguration &&
+            $this->notificationsConfiguration->isOnCommentUpdate()
+        );
     }
 
     public function isNotifyingCommentOnDelete(): bool
     {
-        return $this->notificationsConfiguration && $this->notificationsConfiguration->isOnCommentDelete();
+        return (
+            $this->notificationsConfiguration &&
+            $this->notificationsConfiguration->isOnCommentDelete()
+        );
     }
 
     public function getNotificationsConfiguration(): ProposalFormNotificationConfiguration
@@ -638,8 +650,9 @@ class ProposalForm
         return $this->notificationsConfiguration;
     }
 
-    public function setNotificationsConfiguration(ProposalFormNotificationConfiguration $configuration): self
-    {
+    public function setNotificationsConfiguration(
+        ProposalFormNotificationConfiguration $configuration
+    ): self {
         $this->notificationsConfiguration = $configuration;
         $configuration->setProposalForm($this);
 
@@ -718,7 +731,7 @@ class ProposalForm
         return $this;
     }
 
-    public function getEvaluationForm()
+    public function getEvaluationForm(): ?Questionnaire
     {
         return $this->evaluationForm;
     }

@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Project;
@@ -25,38 +24,37 @@ class EventRepository extends EntityRepository
      * @param null|mixed $limit
      * @param null|mixed $offset
      */
-    public function getSearchResults($archived = null, $themeSlug = null, $projectSlug = null, $term = null, $limit = null, $offset = null)
-    {
+    public function getSearchResults(
+        $archived = null,
+        $themeSlug = null,
+        $projectSlug = null,
+        $term = null,
+        $limit = null,
+        $offset = null
+    ) {
         $qb = $this->getIsEnabledQueryBuilder()
             ->addSelect('a', 'm', 't', 'c')
             ->leftJoin('e.Author', 'a')
             ->leftJoin('a.media', 'm')
             ->leftJoin('e.themes', 't', 'WITH', 't.isEnabled = :enabled')
-            ->leftJoin('e.projects', 'c', 'WITH', 'c.isEnabled = :enabled')
+            ->leftJoin('e.projects', 'c', 'WITH', 'c.visibility = :visibility')
             ->setParameter('enabled', true)
-            ->orderBy('e.startAt', 'ASC')
-        ;
-
+            ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
+            ->orderBy('e.startAt', 'ASC');
         if (null !== $archived) {
             $qb = $this->whereIsArchived($archived, $qb);
         }
 
         if ($themeSlug && Theme::FILTER_ALL !== $themeSlug) {
-            $qb->andWhere('t.slug = :theme')
-                ->setParameter('theme', $themeSlug)
-            ;
+            $qb->andWhere('t.slug = :theme')->setParameter('theme', $themeSlug);
         }
 
         if (null !== $projectSlug && Project::FILTER_ALL !== $projectSlug) {
-            $qb->andWhere('c.slug = :project')
-                ->setParameter('project', $projectSlug)
-            ;
+            $qb->andWhere('c.slug = :project')->setParameter('project', $projectSlug);
         }
 
         if ($term) {
-            $qb->andWhere('e.title LIKE :term')
-                ->setParameter('term', '%' . $term . '%')
-            ;
+            $qb->andWhere('e.title LIKE :term')->setParameter('term', '%' . $term . '%');
         }
 
         if ($limit) {
@@ -76,18 +74,14 @@ class EventRepository extends EntityRepository
         $qb
             ->select('count(DISTINCT e)')
             ->andWhere('e.Author = :user')
-            ->setParameter('user', $user)
-        ;
-
+            ->setParameter('user', $user);
         return $qb->getQuery()->getSingleScalarResult();
     }
 
     public function findAllByUser(User $user): array
     {
         $qb = $this->createQueryBuilder('e');
-        $qb
-            ->andWhere('e.Author = :user')
-            ->setParameter('user', $user);
+        $qb->andWhere('e.Author = :user')->setParameter('user', $user);
 
         return $qb->getQuery()->getResult();
     }
@@ -102,36 +96,35 @@ class EventRepository extends EntityRepository
      *
      * @return array
      */
-    public function countSearchResults($archived = null, $themeSlug = null, $projectSlug = null, $term = null)
-    {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->select('COUNT(e.id)')
-        ;
-
+    public function countSearchResults(
+        $archived = null,
+        $themeSlug = null,
+        $projectSlug = null,
+        $term = null
+    ) {
+        $qb = $this->getIsEnabledQueryBuilder()->select('COUNT(e.id)');
         if (null !== $archived) {
             $qb = $this->whereIsArchived($archived, $qb);
         }
 
         if (null !== $themeSlug && Theme::FILTER_ALL !== $themeSlug) {
-            $qb->innerJoin('e.themes', 't', 'WITH', 't.isEnabled = :tEnabled')
+            $qb
+                ->innerJoin('e.themes', 't', 'WITH', 't.isEnabled = :tEnabled')
                 ->andWhere('t.slug = :theme')
                 ->setParameter('tEnabled', true)
-                ->setParameter('theme', $themeSlug)
-            ;
+                ->setParameter('theme', $themeSlug);
         }
 
         if (null !== $projectSlug && Project::FILTER_ALL !== $projectSlug) {
-            $qb->innerJoin('e.projects', 'c', 'WITH', 'c.isEnabled = :cEnabled')
+            $qb
+                ->innerJoin('e.projects', 'c', 'WITH', 'c.isEnabled = :cEnabled')
                 ->andWhere('c.slug = :project')
                 ->setParameter('cEnabled', true)
-                ->setParameter('project', $projectSlug)
-            ;
+                ->setParameter('project', $projectSlug);
         }
 
         if (null !== $term) {
-            $qb->andWhere('e.title LIKE :term')
-                ->setParameter('term', '%' . $term . '%')
-            ;
+            $qb->andWhere('e.title LIKE :term')->setParameter('term', '%' . $term . '%');
         }
 
         return $qb->getQuery()->getSingleScalarResult();
@@ -160,9 +153,7 @@ class EventRepository extends EntityRepository
             ->setParameter('cEnabled', true)
             ->setParameter('slug', $slug)
             ->orderBy('e.startAt', 'ASC')
-            ->addOrderBy('registration.updatedAt', 'DESC')
-        ;
-
+            ->addOrderBy('registration.updatedAt', 'DESC');
         return $qb->getQuery()->getOneOrNullResult();
     }
 
@@ -217,9 +208,7 @@ class EventRepository extends EntityRepository
             ->setParameter('theme', $theme)
             ->orderBy('e.startAt', 'ASC');
 
-        return $qb
-            ->getQuery()
-            ->execute();
+        return $qb->getQuery()->execute();
     }
 
     protected function getIsEnabledQueryBuilder(): QueryBuilder
@@ -232,23 +221,54 @@ class EventRepository extends EntityRepository
     protected function whereIsFuture(QueryBuilder $qb, string $alias = 'e'): QueryBuilder
     {
         return $qb
-            ->andWhere('(' . $alias . '.endAt IS NULL AND :now <= ' . $alias . '.startAt) OR (' . $alias . '.endAt IS NOT NULL AND :now < ' . $alias . '.endAt)')
+            ->andWhere(
+                '(' .
+                    $alias .
+                    '.endAt IS NULL AND :now <= ' .
+                    $alias .
+                    '.startAt) OR (' .
+                    $alias .
+                    '.endAt IS NOT NULL AND :now < ' .
+                    $alias .
+                    '.endAt)'
+            )
             ->setParameter('now', new \DateTime());
     }
 
-    protected function whereIsArchived(bool $archived, QueryBuilder $qb, string $alias = 'e'): QueryBuilder
-    {
+    protected function whereIsArchived(
+        bool $archived,
+        QueryBuilder $qb,
+        string $alias = 'e'
+    ): QueryBuilder {
         if ($archived) {
             return $qb
-                ->andWhere('(' . $alias . '.endAt IS NOT NULL AND :now > ' . $alias . '.endAt) OR (' . $alias . '.endAt IS NULL AND DATE(:now) > DATE(' . $alias . '.startAt))')
+                ->andWhere(
+                    '(' .
+                        $alias .
+                        '.endAt IS NOT NULL AND :now > ' .
+                        $alias .
+                        '.endAt) OR (' .
+                        $alias .
+                        '.endAt IS NULL AND DATE(:now) > DATE(' .
+                        $alias .
+                        '.startAt))'
+                )
                 ->setParameter('now', new \DateTime())
-                ->orderBy($alias . '.startAt', 'DESC')
-            ;
+                ->orderBy($alias . '.startAt', 'DESC');
         }
 
         return $qb
-            ->andWhere('(' . $alias . '.endAt IS NULL AND DATE(:now) <= DATE(' . $alias . '.startAt)) OR (' . $alias . '.endAt IS NOT NULL AND :now < ' . $alias . '.endAt)')
-            ->setParameter('now', new \DateTime())
-        ;
+            ->andWhere(
+                '(' .
+                    $alias .
+                    '.endAt IS NULL AND DATE(:now) <= DATE(' .
+                    $alias .
+                    '.startAt)) OR (' .
+                    $alias .
+                    '.endAt IS NOT NULL AND :now < ' .
+                    $alias .
+                    '.endAt)'
+            )
+            ->setParameter('now', new \DateTime());
     }
 }

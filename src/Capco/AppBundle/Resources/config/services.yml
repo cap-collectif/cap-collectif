@@ -133,7 +133,7 @@ services:
 
   capco.project.helper:
     class: Capco\AppBundle\Helper\ProjectHelper
-    arguments: ['@capco.project.repository', '@capco.abstract_step.repository']
+    arguments: ['@Capco\AppBundle\Repository\ProjectRepository', "@capco.abstract_step.repository"]
 
   capco.step.helper:
     class: Capco\AppBundle\Helper\StepHelper
