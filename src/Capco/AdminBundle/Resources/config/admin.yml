@@ -121,7 +121,7 @@ services:
 
   capco_admin.admin.project:
     class: Capco\AdminBundle\Admin\ProjectAdmin
-    arguments: [~, Capco\AppBundle\Entity\Project, SonataAdminBundle:CRUD]
+    arguments: [~, Capco\AppBundle\Entity\Project, SonataAdminBundle:CRUD, '@security.token_storage']
     tags:
       - {
           name: sonata.admin,
