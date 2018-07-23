@@ -1,8 +1,8 @@
 <?php
-
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\ProjectVisibilityMode;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Theme;
 use Doctrine\ORM\EntityRepository;
@@ -29,8 +29,13 @@ class PostRepository extends EntityRepository
             ->getResult();
     }
 
-    public function getOrderedPublishedPostsByProposal(Proposal $proposal, ?int $limit = null, string $field, int $offset = 0, string $direction = 'ASC'): Paginator
-    {
+    public function getOrderedPublishedPostsByProposal(
+        Proposal $proposal,
+        ?int $limit = null,
+        string $field,
+        int $offset = 0,
+        string $direction = 'ASC'
+    ): Paginator {
         $query = $this->createPublishedPostsByProposalQB($proposal)
             ->addSelect('a', 'm', 't')
             ->leftJoin('p.Authors', 'a')
@@ -76,13 +81,16 @@ class PostRepository extends EntityRepository
      *
      * @return array
      */
-    public function getSearchResults($nbByPage = 8, $page = 1, $themeSlug = null, $projectSlug = null)
-    {
+    public function getSearchResults(
+        $nbByPage = 8,
+        $page = 1,
+        $themeSlug = null,
+        $projectSlug = null
+    ) {
         if ((int) $page < 1) {
-            throw new \InvalidArgumentException(sprintf(
-                'The argument "page" cannot be lower than 1 (current value: "%s")',
-                $page
-            ));
+            throw new \InvalidArgumentException(
+                sprintf('The argument "page" cannot be lower than 1 (current value: "%s")', $page)
+            );
         }
 
         $qb = $this->getIsPublishedQueryBuilder('p')
@@ -90,27 +98,24 @@ class PostRepository extends EntityRepository
             ->leftJoin('p.Authors', 'a')
             ->leftJoin('p.media', 'm')
             ->leftJoin('p.themes', 't', 'WITH', 't.isEnabled = true')
-            ->leftJoin('p.projects', 'c', 'WITH', 'c.isEnabled = true')
+            ->leftJoin('p.projects', 'c', 'WITH', 'c.visibility = :visibility')
             ->leftJoin('p.proposals', 'proposal')
             ->andWhere('p.displayedOnBlog = true')
-            ->orderBy('p.publishedAt', 'DESC');
+            ->orderBy('p.publishedAt', 'DESC')
+            ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC);
 
         if (null !== $themeSlug && Theme::FILTER_ALL !== $themeSlug) {
-            $qb->andWhere('t.slug = :theme')
-                ->setParameter('theme', $themeSlug);
+            $qb->andWhere('t.slug = :theme')->setParameter('theme', $themeSlug);
         }
 
         if (null !== $projectSlug && Project::FILTER_ALL !== $projectSlug) {
-            $qb->andWhere('c.slug = :project')
-                ->setParameter('project', $projectSlug);
+            $qb->andWhere('c.slug = :project')->setParameter('project', $projectSlug);
         }
 
         $query = $qb->getQuery();
 
         if ($nbByPage > 0) {
-            $query
-                ->setFirstResult(($page - 1) * $nbByPage)
-                ->setMaxResults($nbByPage);
+            $query->setFirstResult(($page - 1) * $nbByPage)->setMaxResults($nbByPage);
         }
 
         return new Paginator($query);
@@ -126,24 +131,24 @@ class PostRepository extends EntityRepository
      */
     public function countSearchResults($themeSlug = null, $projectSlug = null)
     {
-        $qb = $this->getIsPublishedQueryBuilder('p')
-            ->select('COUNT(p.id)');
+        $qb = $this->getIsPublishedQueryBuilder('p')->select('COUNT(p.id)');
 
         if (null !== $themeSlug && Theme::FILTER_ALL !== $themeSlug) {
-            $qb->innerJoin('p.themes', 't', 'WITH', 't.isEnabled = true')
+            $qb
+                ->innerJoin('p.themes', 't', 'WITH', 't.isEnabled = true')
                 ->andWhere('t.slug = :theme')
                 ->setParameter('theme', $themeSlug);
         }
 
         if (null !== $projectSlug && Project::FILTER_ALL !== $projectSlug) {
-            $qb->innerJoin('p.projects', 'c', 'WITH', 'c.isEnabled = true')
+            $qb
+                ->innerJoin('p.projects', 'c', 'WITH', 'c.visibility = :visibility')
                 ->andWhere('c.slug = :project')
-                ->setParameter('project', $projectSlug);
+                ->setParameter('project', $projectSlug)
+                ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC);
         }
 
-        return $qb
-            ->getQuery()
-            ->getSingleScalarResult();
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
     /**
@@ -205,9 +210,7 @@ class PostRepository extends EntityRepository
             $qb->setFirstResult($offset);
         }
 
-        return $qb
-            ->getQuery()
-            ->execute();
+        return $qb->getQuery()->execute();
     }
 
     /**
@@ -223,9 +226,10 @@ class PostRepository extends EntityRepository
             ->leftJoin('a.media', 'am')
             ->leftJoin('p.media', 'm')
             ->leftJoin('p.themes', 't', 'WITH', 't.isEnabled = true')
-            ->leftJoin('p.projects', 'c', 'WITH', 'c.isEnabled = true')
+            ->leftJoin('p.projects', 'c', 'WITH', 'c.visibility = :visibility')
             ->andWhere('p.slug = :slug')
             ->setParameter('slug', $slug)
+            ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
             ->orderBy('p.publishedAt', 'DESC');
 
         return $qb->getQuery()->getOneOrNullResult();

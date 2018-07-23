@@ -75,19 +75,6 @@ class RecalculateUsersCountersCommand extends ContainerAwareCommand
         )'
         );
 
-        // Recalculate admin projects count
-        //        $this->em
-        //            ->createQuery(
-        //                'UPDATE CapcoUserBundle:User u SET u.projectsCount = (
-        //            SELECT count(p.id) FROM CapcoAppBundle:Project p
-        //            WHERE p.Author = u
-        //            GROUP BY p.Author
-        //            )
-        //            WHERE u.roles like :role
-        //          '
-        //            )
-        //            ->setParameter('role', '%"ROLE_SUPER_ADMIN"%')
-        //            ->execute();
         $this->compute(
             'UPDATE CapcoUserBundle:User u set u.proposalsCount = (
           SELECT count(p.id) FROM CapcoAppBundle:Proposal p
