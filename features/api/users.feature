@@ -278,3 +278,22 @@ Scenario: API client wants to update his email
   """
   Then the JSON response status code should be 204
   And user "user" email_to_confirm should be "popopopopo@gmail.com"
+
+@database
+Scenario: API client wants to update his email and the domain email is restricted
+  Given I am logged in to api as user
+  Given feature "restrict_registration_via_email_domain" is enabled
+  When I send a PUT request to "/api/users/me" with json:
+  """
+  {
+    "email": "popopopopo@gmail.com",
+    "password": "user"
+  }
+  """
+  Then the JSON response status code should be 400
+  Then the JSON response should match:
+  """
+  {
+    "message": "Unauthorized email domain."
+  }
+  """
