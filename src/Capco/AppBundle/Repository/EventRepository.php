@@ -117,9 +117,9 @@ class EventRepository extends EntityRepository
 
         if (null !== $projectSlug && Project::FILTER_ALL !== $projectSlug) {
             $qb
-                ->innerJoin('e.projects', 'c', 'WITH', 'c.isEnabled = :cEnabled')
+                ->innerJoin('e.projects', 'c', 'WITH', 'c.visibility = :visibility')
                 ->andWhere('c.slug = :project')
-                ->setParameter('cEnabled', true)
+                ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
                 ->setParameter('project', $projectSlug);
         }
 
@@ -146,11 +146,11 @@ class EventRepository extends EntityRepository
             ->leftJoin('e.Author', 'a')
             ->leftJoin('e.media', 'media')
             ->leftJoin('e.themes', 't', 'WITH', 't.isEnabled = :tEnabled')
-            ->leftJoin('e.projects', 'c', 'WITH', 'c.isEnabled = :cEnabled')
+            ->leftJoin('e.projects', 'c', 'WITH', 'c.visibility = :visibility')
             ->leftJoin('e.registrations', 'registration', 'WITH', 'registration.confirmed = true')
             ->andWhere('e.slug = :slug')
             ->setParameter('tEnabled', true)
-            ->setParameter('cEnabled', true)
+            ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
             ->setParameter('slug', $slug)
             ->orderBy('e.startAt', 'ASC')
             ->addOrderBy('registration.updatedAt', 'DESC');
