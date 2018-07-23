@@ -327,6 +327,9 @@ export const submitAccountForm = (values: Object, dispatch: Dispatch): Promise<*
         if (message === 'Already used email.') {
           throw new SubmissionError({ _error: 'registration.constraints.email.already_used' });
         }
+        if (message === 'Unauthorized email domain.') {
+          throw new SubmissionError({ _error: 'unauthorized-domain-name' });
+        }
         if (message === 'Validation Failed.') {
           if (
             errors.children &&

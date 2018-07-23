@@ -1,7 +1,8 @@
 <?php
-
 namespace Capco\AppBundle\Controller\Api;
 
+use Capco\AppBundle\CapcoAppBundle;
+use Capco\UserBundle\CapcoUserBundle;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\ApiAdminRegistrationFormType;
 use Capco\UserBundle\Form\Type\ApiProfileAccountFormType;
@@ -29,14 +30,16 @@ class UsersController extends FOSRestController
      */
     public function getUsersCountersAction()
     {
-        $registeredContributorCount = $this->get('capco.user.repository')->getRegisteredContributorCount();
+        $registeredContributorCount = $this->get(
+            'capco.user.repository'
+        )->getRegisteredContributorCount();
         $anonymousComments = $this->get('capco.comment.repository')->getAnonymousCount();
 
         return [
-          'contributors' => $registeredContributorCount + $anonymousComments + $anonymousVoters,
-          'registeredContributors' => $registeredContributorCount,
-          'anonymousComments' => $anonymousComments,
-      ];
+            'contributors' => $registeredContributorCount + $anonymousComments + $anonymousVoters,
+            'registeredContributors' => $registeredContributorCount,
+            'anonymousComments' => $anonymousComments,
+        ];
     }
 
     /**
@@ -77,25 +80,23 @@ class UsersController extends FOSRestController
         $userType = null;
 
         if ($type) {
-            $userType = $em->getRepository('CapcoUserBundle:UserType')
-                           ->findOneBySlug($type);
+            $userType = $em->getRepository('CapcoUserBundle:UserType')->findOneBySlug($type);
             if (!$userType) {
-                throw new BadRequestHttpException("This user type doesn't exist, please use a correct slug.");
+                throw new BadRequestHttpException(
+                    "This user type doesn't exist, please use a correct slug."
+                );
             }
         }
 
         if ($email) {
-            $users = $em->getRepository('CapcoUserBundle:User')
-                      ->findBy(['email' => $email]);
+            $users = $em->getRepository('CapcoUserBundle:User')->findBy(['email' => $email]);
         } else {
-            $users = $em->getRepository('CapcoUserBundle:User')
-                      ->getEnabledWith($userType, $from, $to);
+            $users = $em
+                ->getRepository('CapcoUserBundle:User')
+                ->getEnabledWith($userType, $from, $to);
         }
 
-        return [
-            'count' => \count($users),
-            'users' => $users,
-        ];
+        return ['count' => \count($users), 'users' => $users];
     }
 
     /**
@@ -120,9 +121,8 @@ class UsersController extends FOSRestController
         $creatingAnAdmin = $this->getUser() && $this->getUser()->isAdmin();
 
         $formClass = $creatingAnAdmin
-          ? ApiAdminRegistrationFormType::class
-          : ApiRegistrationFormType::class
-        ;
+            ? ApiAdminRegistrationFormType::class
+            : ApiRegistrationFormType::class;
         $form = $this->createForm($formClass, $user);
         $form->submit($request->request->all(), false);
 
@@ -174,7 +174,9 @@ class UsersController extends FOSRestController
         $user = $this->getUser();
         $user->setNewEmailToConfirm(null);
         $user->setNewEmailConfirmationToken(null);
-        $this->getDoctrine()->getManager()->flush();
+        $this->getDoctrine()
+            ->getManager()
+            ->flush();
     }
 
     /**
@@ -201,7 +203,9 @@ class UsersController extends FOSRestController
         }
 
         $user->setEmailConfirmationSentAt(new \DateTime());
-        $this->getDoctrine()->getManager()->flush();
+        $this->getDoctrine()
+            ->getManager()
+            ->flush();
     }
 
     /**
@@ -221,7 +225,10 @@ class UsersController extends FOSRestController
         }
 
         // security against mass click sms resend
-        if ($user->getSmsConfirmationSentAt() && $user->getSmsConfirmationSentAt() > (new \DateTime())->modify('- 3 minutes')) {
+        if (
+            $user->getSmsConfirmationSentAt() &&
+            $user->getSmsConfirmationSentAt() > (new \DateTime())->modify('- 3 minutes')
+        ) {
             throw new BadRequestHttpException('sms_already_sent_recently');
         }
 
@@ -233,7 +240,9 @@ class UsersController extends FOSRestController
         }
 
         $user->setSmsConfirmationSentAt(new \DateTime());
-        $this->getDoctrine()->getManager()->flush();
+        $this->getDoctrine()
+            ->getManager()
+            ->flush();
     }
 
     /**
@@ -259,7 +268,9 @@ class UsersController extends FOSRestController
         $user->setPhoneConfirmed(true);
         $user->setSmsConfirmationSentAt(null);
         $user->setSmsConfirmationCode(null);
-        $this->getDoctrine()->getManager()->flush();
+        $this->getDoctrine()
+            ->getManager()
+            ->flush();
     }
 
     private function updatePhone(Request $request)
@@ -281,7 +292,9 @@ class UsersController extends FOSRestController
             $user->setSmsConfirmationSentAt(null);
         }
 
-        $this->getDoctrine()->getManager()->flush();
+        $this->getDoctrine()
+            ->getManager()
+            ->flush();
     }
 
     private function updateEmail(Request $request)
@@ -290,18 +303,27 @@ class UsersController extends FOSRestController
         $newEmailToConfirm = $request->request->get('email');
         $password = $request->request->get('password');
         $em = $this->getDoctrine()->getManager();
+        $toggleManager = $this->container->get('capco.toggle.manager');
 
         $encoder = $this->get('security.encoder_factory')->getEncoder($user);
         if (!$encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt())) {
-            return new JsonResponse([
-            'message' => 'You must specify your password to update your email.',
-          ], 400);
+            return new JsonResponse(
+                ['message' => 'You must specify your password to update your email.'],
+                400
+            );
         }
 
         if ($em->getRepository('CapcoUserBundle:User')->findOneByEmail($newEmailToConfirm)) {
-            return new JsonResponse([
-                'message' => 'Already used email.',
-            ], 400);
+            return new JsonResponse(['message' => 'Already used email.'], 400);
+        }
+
+        if (
+            $toggleManager->isActive('restrict_registration_via_email_domain') &&
+            !$em
+                ->getRepository('CapcoAppBundle:EmailDomain')
+                ->findOneBy(['value' => explode('@', $newEmailToConfirm)[1]])
+        ) {
+            return new JsonResponse(['message' => 'Unauthorized email domain.'], 400);
         }
 
         $form = $this->createForm(ApiProfileAccountFormType::class, $user);
