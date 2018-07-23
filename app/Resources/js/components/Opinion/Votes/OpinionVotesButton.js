@@ -4,6 +4,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Button } from 'react-bootstrap';
 import LoginOverlay from '../../Utils/LoginOverlay';
+import FluxDispatcher from '../../../dispatchers/AppDispatcher';
 import { VOTE_WIDGET_BOTH } from '../../../constants/VoteConstants';
 import AddOpinionVoteMutation from '../../../mutations/AddOpinionVoteMutation';
 import RemoveOpinionVoteMutation from '../../../mutations/RemoveOpinionVoteMutation';
@@ -54,16 +55,22 @@ export class OpinionVotesButton extends React.Component<Props> {
       const input = { opinionId: opinion.id, value };
       AddOpinionVoteMutation.commit({ input })
         .then(() => {
-          //  FluxDispatcher.dispatch({
-          //    actionType: UPDATE_OPINION_SUCCESS,
-          //    message: 'opinion.request.delete_vote.success',
-          //  });
+          FluxDispatcher.dispatch({
+            actionType: 'UPDATE_ALERT',
+            alert: {
+              bsStyle: 'success',
+              content: 'opinion.request.create_vote.success',
+            },
+          });
         })
         .catch(() => {
-          //    FluxDispatcher.dispatch({
-          //      actionType: UPDATE_OPINION_FAILURE,
-          //      message: 'opinion.request.failure',
-          //    });
+          FluxDispatcher.dispatch({
+            actionType: 'UPDATE_ALERT',
+            alert: {
+              bsStyle: 'danger',
+              content: 'opinion.request.failure',
+            },
+          });
         });
     }
   };
@@ -74,17 +81,22 @@ export class OpinionVotesButton extends React.Component<Props> {
       const input = { opinionId: opinion.id };
       RemoveOpinionVoteMutation.commit({ input })
         .then(() => {
-          // FluxDispatcher.dispatch({
-          //   actionType: UPDATE_OPINION_SUCCESS,
-          //           message: 'opinion.request.create_vote.success',
-          // });
+          FluxDispatcher.dispatch({
+            actionType: 'UPDATE_ALERT',
+            alert: {
+              bsStyle: 'success',
+              content: 'opinion.request.delete_vote.success',
+            },
+          });
         })
-        .catch(e => {
-          // FluxDispatcher.dispatch({
-          //   actionType: UPDATE_OPINION_FAILURE,
-          //   message: 'opinion.request.failure',
-          // });
-          console.error(e); // eslint-disable-line no-console
+        .catch(() => {
+          FluxDispatcher.dispatch({
+            actionType: 'UPDATE_ALERT',
+            alert: {
+              bsStyle: 'danger',
+              content: 'opinion.request.failure',
+            },
+          });
         });
     }
   };

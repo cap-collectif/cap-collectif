@@ -40,7 +40,7 @@ class OpinionSourceButtons extends React.Component<Props, State> {
     return (
       <div>
         <OpinionSourceVoteBox source={source} />
-        <OpinionSourceReportButton source={source} />
+        <OpinionSourceReportButton sourceable={sourceable} source={source} />
         <EditButton
           onClick={() => {
             dispatch(showSourceEditModal(source.id));
