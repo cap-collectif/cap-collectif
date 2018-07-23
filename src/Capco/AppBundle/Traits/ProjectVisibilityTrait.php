@@ -2,24 +2,42 @@
 namespace Capco\AppBundle\Traits;
 
 use Capco\AppBundle\Entity\ProjectVisibilityMode;
+use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\UserBundle\Entity\User;
 
 trait ProjectVisibilityTrait
 {
-    public function getVisibilityByViewer(?User $user = null): int
+    public function getVisibilityByViewer($user = null): int
     {
-        if (!$user) {
-            $user = $this->token->getUser();
+        if (property_exists($this, 'token')) {
+            if (!$user && !$this->token) {
+                $user = null;
+            } elseif (!$user && $this->token) {
+                $user = $this->token->getUser();
+            }
         }
 
         // no user authenticated
         $visibility = ProjectVisibilityMode::VISIBILITY_PUBLIC;
-        if (is_object($user) && $user->hasRole('ROLE_SUPER_ADMIN')) {
-            $visibility = ProjectVisibilityMode::VISIBILITY_ME;
-        } elseif (is_object($user) && $user->hasRole('ROLE_ADMIN')) {
-            $visibility = ProjectVisibilityMode::VISIBILITY_ADMIN;
+
+        if ($user) {
+            if (is_object($user) && $user->hasRole('ROLE_SUPER_ADMIN')) {
+                $visibility = ProjectVisibilityMode::VISIBILITY_ME;
+            } elseif (is_object($user) && $user->hasRole('ROLE_ADMIN')) {
+                $visibility = ProjectVisibilityMode::VISIBILITY_ADMIN;
+            }
         }
 
         return $visibility;
+    }
+
+    /**
+     * get user visibility and check if I'm author of project
+     */
+    public function canDisplayForViewer($user = null): bool
+    {
+        $viewerVisibility = $this->getVisibilityByViewer($user);
+
+        return $this->getVisibility() >= $viewerVisibility || $this->getAuthor() === $user;
     }
 }

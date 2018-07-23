@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
 use Capco\AppBundle\Entity\Proposal;
@@ -24,12 +23,25 @@ class ProposalCommentsResolver
     {
         try {
             $paginator = new Paginator(function (int $offset, int $limit) use ($proposal, $args) {
-                [$field, $direction] = [$args->offsetGet('orderBy')['field'], $args->offsetGet('orderBy')['direction']];
+                [$field, $direction] = [
+                    $args->offsetGet('orderBy')['field'],
+                    $args->offsetGet('orderBy')['direction'],
+                ];
 
-                return $this->commentRepository->getByProposal($proposal, $offset, $limit, $field, $direction)->getIterator()->getArrayCopy();
+                return $this->commentRepository->getByProposal(
+                    $proposal,
+                    $offset,
+                    $limit,
+                    $field,
+                    $direction
+                )
+                    ->getIterator()
+                    ->getArrayCopy();
             });
 
-            $totalCount = $this->commentRepository->countCommentsAndAnswersEnabledByProposal($proposal);
+            $totalCount = $this->commentRepository->countCommentsAndAnswersEnabledByProposal(
+                $proposal
+            );
 
             return $paginator->auto($args, $totalCount);
         } catch (\RuntimeException $exception) {
