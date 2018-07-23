@@ -70,7 +70,7 @@ Scenario: Anonymous wants to get votes "YES" for an opinion
     "query": "query ($opinionId: ID!) {
       opinion: node(id: $opinionId) {
         ... on Opinion {
-          votes(first: 10, value: "YES") {
+          votes(first: 10, value: YES) {
             totalCount
             edges {
               cursor
