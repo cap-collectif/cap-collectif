@@ -494,10 +494,16 @@ services:
       - '@capco.selection_step.repository'
       - '@capco.collect_step.repository'
 
-  Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalVotableStepsResolver:
-    class: Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalVotableStepsResolver
-    tags:
-      - { name: overblog_graphql.resolver }
+    Capco\AppBundle\GraphQL\Resolver\Project\ProjectAllowedViewersResolver:
+        class: Capco\AppBundle\GraphQL\Resolver\Project\ProjectAllowedViewersResolver
+        autowire: true
+        tags:
+          - { name: overblog_graphql.resolver }
+
+    Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalVotableStepsResolver:
+        class: Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalVotableStepsResolver
+        tags:
+            - { name: overblog_graphql.resolver }
 
   Capco\AppBundle\GraphQL\Resolver\ViewerStepVotesResolver:
     autowire: true

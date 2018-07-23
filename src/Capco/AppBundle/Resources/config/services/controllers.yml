@@ -1,5 +1,0 @@
-services:
-  Capco\AppBundle\Controller\StepController:
-      autowire: true
-      autoconfigure: true
-      public: true
