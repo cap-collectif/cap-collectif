@@ -7,6 +7,7 @@ import { connect, type MapStateToProps } from 'react-redux';
 import { reduxForm, Field, SubmissionError, clearSubmitErrors, type FormProps } from 'redux-form';
 import renderComponent from '../../Form/Field';
 import { isUrl } from '../../../services/Validator';
+import FluxDispatcher from '../../../dispatchers/AppDispatcher';
 import AddSourceMutation from '../../../mutations/AddSourceMutation';
 import ChangeSourceMutation from '../../../mutations/ChangeSourceMutation';
 import { hideSourceCreateModal, hideSourceEditModal } from '../../../redux/modules/opinion';
@@ -64,8 +65,16 @@ const onSubmit = (values: FormValidValues, dispatch, props: Props) => {
     };
     return AddSourceMutation.commit({ input }).then(res => {
       if (!res.addSource || !res.addSource.sourceEdge) {
+        FluxDispatcher.dispatch({
+          actionType: "UPDATE_ALERT",
+          alert: { bsStyle: 'danger', content: 'alert.danger.add.source' },
+        });
         throw new SubmissionError({ _error: 'global.error.server.form' });
       }
+      FluxDispatcher.dispatch({
+         actionType: "UPDATE_ALERT",	
+          alert: { bsStyle: 'success', content: 'alert.success.add.source' },	
+      });
       dispatch(hideSourceCreateModal());
     });
   }
@@ -78,8 +87,16 @@ const onSubmit = (values: FormValidValues, dispatch, props: Props) => {
   };
   return ChangeSourceMutation.commit({ input }).then(res => {
     if (!res.changeSource || !res.changeSource.source) {
+        FluxDispatcher.dispatch({
+          actionType: "UPDATE_ALERT",
+          alert: { bsStyle: 'danger', content: 'alert.danger.update.source' },
+        });
       throw new SubmissionError({ _error: 'global.error.server.form' });
     }
+          FluxDispatcher.dispatch({
+         actionType: "UPDATE_ALERT",	
+          alert: { bsStyle: 'success', content: 'alert.success.update.source' },	
+      });
     dispatch(hideSourceEditModal());
   });
 };

@@ -17,6 +17,10 @@ Consultation:
         description: 'The id of the related project.'
       title:
         description: 'The title of the consultation.'
+      titleHelpText:
+        type: 'String'
+      descriptionHelpText:
+        type: 'String'
       contribuable:
         type: 'Boolean!'
         description: 'Contributions are allowed right now.'

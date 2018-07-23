@@ -113,6 +113,30 @@ final class ConsultationType extends ObjectType implements GeneratedTypeInterfac
                     'public' => null,
                     'access' => null,
                 ],
+                'titleHelpText' => [
+                    'type' => Type::string(),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'descriptionHelpText' => [
+                    'type' => Type::string(),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'contribuable' => [
                     'type' => Type::nonNull(Type::boolean()),
                     'args' => [

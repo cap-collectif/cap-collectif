@@ -374,6 +374,18 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
+                'step' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('Consultation')),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'viewerVote' => [
                     'type' => $globalVariable->get('typeResolver')->resolve('OpinionVote'),
                     'args' => [

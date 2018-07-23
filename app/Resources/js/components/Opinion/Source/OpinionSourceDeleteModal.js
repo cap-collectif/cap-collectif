@@ -5,6 +5,7 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
+import FluxDispatcher from '../../../dispatchers/AppDispatcher';
 import DeleteSourceMutation from '../../../mutations/DeleteSourceMutation';
 import type { OpinionSourceDeleteModal_source } from './__generated__/OpinionSourceDeleteModal_source.graphql';
 
@@ -32,6 +33,10 @@ class OpinionSourceDeleteModal extends React.Component<Props, State> {
     DeleteSourceMutation.commit({ input })
       .then(res => {
         if (res.deleteSource && res.deleteSource.deletedSourceId) {
+          FluxDispatcher.dispatch({	
+        actionType: "UPDATE_ALERT",	
+        alert: { bsStyle: 'success', content: 'alert.success.delete.source' },	
+        });
           onClose();
         }
         this.setState({ isSubmitting: false });

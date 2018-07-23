@@ -55,7 +55,7 @@ Scenario: Logged in user can report an opinion
   And I submit the reporting form
   Then I should see "alert.success.report.opinion" in the "#global-alert-box" element
 
-@javascript @database
+@javascript @database @dev
 Scenario: Author of an opinion loose their votes when updating it
   Given I am logged in as user
   And I visited "opinion page" with:

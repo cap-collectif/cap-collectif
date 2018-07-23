@@ -1,12 +1,18 @@
 // @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { reduxForm, Field } from 'redux-form';
 import { connect, type MapStateToProps } from 'react-redux';
 import Fetcher, { json } from '../../../services/Fetcher';
 import type { State, Dispatch } from '../../../types';
 import renderInput from '../../Form/Field';
 import { closeOpinionEditModal } from '../../../redux/modules/opinion';
+import type { OpinionEditForm_opinion } from './__generated__/OpinionEditForm_opinion.graphql';
+
+type RelayProps = {
+  opinion: OpinionEditForm_opinion,
+};
 
 export const formName = 'opinion-edit-form';
 const validate = ({ title, body, check }: Object) => {
@@ -47,16 +53,15 @@ const onSubmit = (data: Object, dispatch: Dispatch, props: Object) => {
     });
 };
 
-type Props = {
-  opinion: Object,
-  step: Object,
+type Props = RelayProps & {
   handleSubmit: Function,
   initialValues: Object,
 };
 
 export class OpinionEditForm extends React.Component<Props> {
   render() {
-    const { opinion, step, handleSubmit } = this.props;
+    const { opinion, handleSubmit } = this.props;
+    const step = opinion.step;
     return (
       <form id={formName} onSubmit={handleSubmit}>
         <Field
@@ -89,8 +94,8 @@ export class OpinionEditForm extends React.Component<Props> {
           <Field
             key={index}
             component={renderInput}
-            name={field.type.title}
-            label={field.type.title}
+            name={field.appendixType.title}
+            label={field.appendixType.title}
             type="editor"
             id={`opinion_appendix-${index + 1}`}
           />
@@ -100,7 +105,7 @@ export class OpinionEditForm extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) => {
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => {
   const dynamicsInitialValues = {};
   for (const appendix of props.opinion.appendices) {
     dynamicsInitialValues[appendix.type.title] = appendix.body;
@@ -114,10 +119,31 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Props) =
   };
 };
 
-export default connect(mapStateToProps)(
+const container = connect(mapStateToProps)(
   reduxForm({
     form: formName,
     onSubmit,
     validate,
   })(OpinionEditForm),
 );
+
+
+export default createFragmentContainer(container, {
+  opinion: graphql`
+    fragment OpinionEditForm_opinion on Opinion {
+      appendices {
+        appendixType {
+          title
+        }
+        body
+      }
+      step {
+        titleHelpText
+        descriptionHelpText
+      }
+      id
+      title
+      body
+    }
+  `,
+});

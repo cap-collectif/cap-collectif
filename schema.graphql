@@ -714,6 +714,8 @@ type Consultation implements Node & Step {
 
   # The id of the related project.
   projectId: String!
+  titleHelpText: String
+  descriptionHelpText: String
 
   # Contributions are allowed right now.
   contribuable: Boolean!
@@ -1460,6 +1462,7 @@ type Opinion implements Node & Argumentable & Sourceable & Contribution & Trasha
 
   # Number of sources.
   sourcesCount: Int!
+  step: Consultation!
 
   # The viewer vote.
   viewerVote: OpinionVote

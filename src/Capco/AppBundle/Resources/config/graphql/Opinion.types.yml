@@ -37,6 +37,8 @@ Opinion:
             sourcesCount:
                 type: "Int!"
                 description: "Number of sources."
+            step:
+                type: "Consultation!"
             viewerVote:
                 type: "OpinionVote"
                 description: "The viewer vote."
