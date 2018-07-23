@@ -444,6 +444,8 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
                         type="number"
                         id="proposal_form_lat_map"
                         normalize={val => val && parseFloat(val)}
+                        lang="us"
+                        step="any"
                         label={<FormattedMessage id="proposal_form.lat_map" />}
                       />
                     </Col>
@@ -454,6 +456,8 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
                         type="number"
                         id="proposal_form_lng_map"
                         normalize={val => val && parseFloat(val)}
+                        lang="us"
+                        step="any"
                         label={<FormattedMessage id="proposal_form.lng_map" />}
                       />
                     </Col>
@@ -550,6 +554,7 @@ export class ProposalFormAdminConfigurationForm extends React.Component<Props> {
 const form = reduxForm({
   onSubmit,
   validate,
+
   enableReinitialize: true,
   form: formName,
 })(ProposalFormAdminConfigurationForm);
