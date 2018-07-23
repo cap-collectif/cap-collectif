@@ -362,3 +362,10 @@ services:
     class: Capco\AppBundle\Repository\UserRequirementRepository
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:UserRequirement']
+
+  capco.email_domain.repository:
+    public: true
+    class: Capco\AppBundle\Repository\UserRequirementRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments: ['CapcoAppBundle:EmailDomain']
+
