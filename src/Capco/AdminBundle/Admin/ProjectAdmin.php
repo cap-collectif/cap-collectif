@@ -134,6 +134,9 @@ class ProjectAdmin extends CapcoAdmin
             ->add('publishedAt', null, ['label' => 'admin.fields.project.published_at'])
             ->add('_action', 'actions', [
                 'actions' => [
+                    'display' => [
+                        'template' => 'CapcoAdminBundle:CRUD:list__action_display.html.twig',
+                    ],
                     'download' => [
                         'template' => 'CapcoAdminBundle:CRUD:list__action_download.html.twig',
                     ],

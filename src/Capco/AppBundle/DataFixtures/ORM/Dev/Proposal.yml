@@ -411,7 +411,7 @@ Capco\AppBundle\Entity\Proposal:
     body: <p><text(100)></p>
     enabled: true
     isTrashed: false
-    author: '@user1'
+    author: '@user5'
     proposalForm: '@proposalform10'
     reference: 42
   proposal32:
@@ -420,7 +420,7 @@ Capco\AppBundle\Entity\Proposal:
     body: <p><text(100)></p>
     enabled: true
     isTrashed: false
-    author: '@user1'
+    author: '@user2'
     proposalForm: '@proposalform10'
     reference: 44
   proposal33:
@@ -429,7 +429,7 @@ Capco\AppBundle\Entity\Proposal:
     body: <p><text(100)></p>
     enabled: true
     isTrashed: false
-    author: '@user1'
+    author: '@user4'
     proposalForm: '@proposalform10'
     reference: 43
   proposal34:
