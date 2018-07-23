@@ -79,22 +79,23 @@ Scenario: Logged in API client wants to vote for an opinion not contributable
   """
 
 @database
-Scenario: Logged in API client wants to update a vote
+Scenario: Logged in API client wants to update an existing vote
   Given I am logged in to graphql as admin
   And I send a GraphQL POST request:
   """
   {
-    "query": "mutation ($input: RemoveOpinionVoteInput!) {
+    "query": "mutation ($input: AddOpinionVoteInput!) {
       addOpinionVote(input: $input) {
-        contribution {
+        vote {
           id
         }
-        deletedVoteId
+        previousVoteId
       }
     }",
     "variables": {
       "input": {
-        "opinionId": "opinion3"
+        "opinionId": "opinion57",
+        "value": "NO"
       }
     }
   }
@@ -103,11 +104,11 @@ Scenario: Logged in API client wants to update a vote
   """
   {
     "data": {
-      "removeOpinionVote": {
-        "contribution": {
-          "id": "opinion3"
+      "addOpinionVote": {
+        "vote": {
+          "id": @string@
         },
-        "deletedVoteId": "1"
+        "previousVoteId": "T3BpbmlvblZvdGU6NA=="
       }
     }
   }
