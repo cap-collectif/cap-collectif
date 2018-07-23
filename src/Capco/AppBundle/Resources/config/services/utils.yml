@@ -21,3 +21,7 @@ services:
   Capco\AppBundle\GraphQL\GraphQLToCsv:
     autowire: true
     autoconfigure: true
+
+  Capco\AppBundle\GraphQL\ConnectionTraversor:
+    class: Capco\AppBundle\GraphQL\ConnectionTraversor
+    arguments: ['@overblog_graphql.request_executor']

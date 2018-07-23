@@ -16,6 +16,7 @@ final class ContributionEdgeType extends ObjectType implements GeneratedTypeInte
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
+
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
             'name' => 'ContributionEdge',

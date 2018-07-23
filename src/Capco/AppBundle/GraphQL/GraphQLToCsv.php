@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL;
 
 use Capco\AppBundle\EventListener\GraphQlAclListener;
@@ -14,8 +13,11 @@ class GraphQLToCsv
     protected $logger;
     protected $executor;
 
-    public function __construct(LoggerInterface $logger, GraphQlAclListener $listener, Executor $executor)
-    {
+    public function __construct(
+        LoggerInterface $logger,
+        GraphQlAclListener $listener,
+        Executor $executor
+    ) {
         $this->logger = $logger;
         $this->executor = $executor;
         $listener->disableAcl();
@@ -24,8 +26,8 @@ class GraphQLToCsv
     public function generate(string $requestString, Writer $writer)
     {
         $response = $this->executor->execute(null, [
-          'query' => $requestString,
-          'variables' => [],
+            'query' => $requestString,
+            'variables' => [],
         ])->toArray();
 
         if (!isset($response['data'])) {

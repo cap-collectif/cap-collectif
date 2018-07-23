@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\AbstractVote;
@@ -31,8 +30,11 @@ class DeleteAccountMutation implements ContainerAwareInterface, MutationInterfac
     private $translator;
     private $userRepository;
 
-    public function __construct(EntityManagerInterface $em, TranslatorInterface $translator, UserRepository $userRepository)
-    {
+    public function __construct(
+        EntityManagerInterface $em,
+        TranslatorInterface $translator,
+        UserRepository $userRepository
+    ) {
         $this->em = $em;
         $this->translator = $translator;
         $this->userRepository = $userRepository;
@@ -42,7 +44,11 @@ class DeleteAccountMutation implements ContainerAwareInterface, MutationInterfac
     {
         $deleteType = $input['type'];
         $user = $viewer;
-        if (isset($input['userId']) && !empty($input['userId']) && $input['userId'] !== $user->getId()) {
+        if (
+            isset($input['userId']) &&
+            !empty($input['userId']) &&
+            $input['userId'] !== $user->getId()
+        ) {
             $user = $this->userRepository->find($input['userId']);
         }
 
@@ -55,17 +61,15 @@ class DeleteAccountMutation implements ContainerAwareInterface, MutationInterfac
 
         $this->em->flush();
 
-        return [
-            'userId' => $user->getId(),
-        ];
+        return ['userId' => $user->getId()];
     }
 
     public function anonymizeUser(User $user): void
     {
         $usernameDeleted = $this->translator->trans('deleted-user', [], 'CapcoAppBundle');
-        $newsletter = $this->em->getRepository(NewsletterSubscription::class)->findOneBy(
-            ['email' => $user->getEmail()]
-        );
+        $newsletter = $this->em->getRepository(NewsletterSubscription::class)->findOneBy([
+            'email' => $user->getEmail(),
+        ]);
         $userGroups = $this->em->getRepository(UserGroup::class)->findBy(['user' => $user]);
         $userManager = $this->container->get('fos_user.user_manager');
 
@@ -120,7 +124,9 @@ class DeleteAccountMutation implements ContainerAwareInterface, MutationInterfac
         $user->setTimezone(null);
         $user->setLocked(true);
         if ($user->getMedia()) {
-            $media = $this->em->getRepository('CapcoMediaBundle:Media')->find($user->getMedia()->getId());
+            $media = $this->em->getRepository('CapcoMediaBundle:Media')->find(
+                $user->getMedia()->getId()
+            );
             $this->removeMedia($media);
             $user->setMedia(null);
         }
@@ -130,7 +136,11 @@ class DeleteAccountMutation implements ContainerAwareInterface, MutationInterfac
 
     public function hardDeleteUserContributionsInActiveSteps(User $user, bool $dryRun = false): int
     {
-        $deletedBodyText = $this->translator->trans('deleted-content-by-author', [], 'CapcoAppBundle');
+        $deletedBodyText = $this->translator->trans(
+            'deleted-content-by-author',
+            [],
+            'CapcoAppBundle'
+        );
         $contributions = $user->getContributions();
         $toDeleteList = [];
 
@@ -138,17 +148,21 @@ class DeleteAccountMutation implements ContainerAwareInterface, MutationInterfac
             if ($contribution instanceof AbstractVote) {
                 if ($contribution instanceof CommentVote) {
                     $toDeleteList[] = $contribution;
-                } else {
-                    if (method_exists($contribution->getRelated(), 'getStep') && $contribution->getRelated()->getStep()->canContribute()) {
-                        $toDeleteList[] = $contribution;
-                    }
+                } elseif (
+                    method_exists($contribution->getRelated(), 'getStep') &&
+                    $contribution
+                        ->getRelated()
+                        ->getStep()
+                        ->canContribute()
+                ) {
+                    $toDeleteList[] = $contribution;
                 }
             }
 
             if ($contribution instanceof Comment) {
-                $hasChild = $this->em->getRepository('CapcoAppBundle:Comment')->findOneBy(
-                    ['parent' => $contribution->getId()]
-                );
+                $hasChild = $this->em->getRepository('CapcoAppBundle:Comment')->findOneBy([
+                    'parent' => $contribution->getId(),
+                ]);
                 if ($hasChild) {
                     $contribution->setBody($deletedBodyText);
                 } else {
@@ -156,19 +170,24 @@ class DeleteAccountMutation implements ContainerAwareInterface, MutationInterfac
                 }
             }
 
-            if (($contribution instanceof Proposal || $contribution instanceof Opinion || $contribution instanceof Source || $contribution instanceof Argument) && $contribution->getStep(
-                )->canContribute()) {
+            if (
+                (
+                    $contribution instanceof Proposal ||
+                        $contribution instanceof Opinion ||
+                        $contribution instanceof Source ||
+                        $contribution instanceof Argument
+                ) &&
+                $contribution->getStep()->canContribute()
+            ) {
                 $toDeleteList[] = $contribution;
             }
 
-            if (!$dryRun) {
-                if (method_exists($contribution, 'getMedia') && $contribution->getMedia()) {
-                    $media = $this->em->getRepository('CapcoMediaBundle:Media')->find(
-                        $contribution->getMedia()->getId()
-                    );
-                    $this->removeMedia($media);
-                    $contribution->setMedia(null);
-                }
+            if (!$dryRun && method_exists($contribution, 'getMedia') && $contribution->getMedia()) {
+                $media = $this->em->getRepository('CapcoMediaBundle:Media')->find(
+                    $contribution->getMedia()->getId()
+                );
+                $this->removeMedia($media);
+                $contribution->setMedia(null);
             }
         }
 
@@ -187,7 +206,11 @@ class DeleteAccountMutation implements ContainerAwareInterface, MutationInterfac
     public function hardDelete(User $user): void
     {
         $contributions = $user->getContributions();
-        $deletedBodyText = $this->translator->trans('deleted-content-by-author', [], 'CapcoAppBundle');
+        $deletedBodyText = $this->translator->trans(
+            'deleted-content-by-author',
+            [],
+            'CapcoAppBundle'
+        );
         $deletedTitleText = $this->translator->trans('deleted-title', [], 'CapcoAppBundle');
 
         $reports = $this->em->getRepository(Reporting::class)->findBy(['Reporter' => $user]);
@@ -204,7 +227,9 @@ class DeleteAccountMutation implements ContainerAwareInterface, MutationInterfac
                 $contribution->setSummary(null);
             }
             if (method_exists($contribution, 'getMedia') && $contribution->getMedia()) {
-                $media = $this->em->getRepository('CapcoMediaBundle:Media')->find($contribution->getMedia()->getId());
+                $media = $this->em->getRepository('CapcoMediaBundle:Media')->find(
+                    $contribution->getMedia()->getId()
+                );
                 $this->removeMedia($media);
                 $contribution->setMedia(null);
             }

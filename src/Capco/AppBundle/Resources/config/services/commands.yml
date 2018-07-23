@@ -9,7 +9,7 @@ services:
     autoconfigure: true
     autowire: true
     arguments:
-      $kernelRootDir: '%kernel.root_dir%'
+      $projectRootDir: '%kernel.project_dir%'
 
   Capco\AppBundle\Command\CreateCsvFromUserCommand:
     autoconfigure: true

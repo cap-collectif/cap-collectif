@@ -10,6 +10,7 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
+use Capco\AppBundle\GraphQL\ConnectionTraversor;
 use Capco\AppBundle\GraphQL\InfoResolver;
 use Capco\AppBundle\Repository\CollectStepRepository;
 use Capco\AppBundle\Repository\ProjectRepository;
@@ -420,6 +421,7 @@ EOF;
     private $selectionStepRepository;
     private $projectRootDir;
     private $collectStepRepository;
+    private $connectionTraversor;
 
     public function __construct(
         Executor $executor,
@@ -429,6 +431,7 @@ EOF;
         CollectStepRepository $collectStepRepository,
         Manager $toggleManager,
         LoggerInterface $logger,
+        ConnectionTraversor $connectionTraversor,
         string $projectRootDir
     ) {
         $listener->disableAcl();
@@ -440,6 +443,7 @@ EOF;
         $this->selectionStepRepository = $selectionStepRepository;
         $this->projectRootDir = $projectRootDir;
         $this->collectStepRepository = $collectStepRepository;
+        $this->connectionTraversor = $connectionTraversor;
         parent::__construct();
     }
 
@@ -516,7 +520,7 @@ EOF;
                 array_merge(['contribution_type'], array_values($this->headersMap))
             );
             $progress = new ProgressBar($output, $totalCount);
-            $this->traverseConnection(
+            $this->connectionTraversor->traverse(
                 $proposals,
                 'data.node.proposals',
                 function ($edge) use ($progress, $output) {
@@ -575,7 +579,7 @@ EOF;
             "<info>Importing $totalCount reportings for proposal " . $proposal['title'] . '</info>'
         );
 
-        $this->traverseConnection(
+        $this->connectionTraversor->traverse(
             $proposalWithReportings,
             'data.node.reportings',
             function ($edge) use ($proposal, $progress) {
@@ -608,7 +612,8 @@ EOF;
         $output->writeln(
             "<info>Importing $totalCount votes for proposal " . $proposal['title'] . '</info>'
         );
-        $this->traverseConnection(
+
+        $this->connectionTraversor->traverse(
             $proposalsWithVotes,
             'data.node.votes',
             function ($edge) use ($proposal, $progress) {
@@ -640,7 +645,7 @@ EOF;
             "<info>Importing $totalCount comments for proposal " . $proposal['title'] . '</info>'
         );
 
-        $this->traverseConnection(
+        $this->connectionTraversor->traverse(
             $proposalsWithComments,
             'data.node.comments',
             function ($edge) use ($proposal, $progress) {
@@ -671,7 +676,7 @@ EOF;
             "<info>Importing $totalCount news for proposal " . $proposal['title'] . '</info>'
         );
 
-        $this->traverseConnection(
+        $this->connectionTraversor->traverse(
             $proposalWithNews,
             'data.node.news',
             function ($edge) use ($proposal, $progress) {
@@ -746,7 +751,7 @@ EOF;
             'variables' => [],
         ])->toArray();
 
-        $this->traverseConnection(
+        $this->connectionTraversor->traverse(
             $commentWithReportings,
             'data.node.reportings',
             function ($edge) use ($proposal, $comment) {
@@ -767,7 +772,7 @@ EOF;
             'variables' => [],
         ])->toArray();
 
-        $this->traverseConnection(
+        $this->connectionTraversor->traverse(
             $commentWithVotes,
             'data.node.votes',
             function ($edge) use ($proposal, $comment) {
@@ -852,7 +857,7 @@ EOF;
 
         $this->writer->addRow($row);
 
-        $this->traverseConnection(
+        $this->connectionTraversor->traverse(
             $news,
             'comments',
             function ($edge) use ($proposal, $news, $proposalNewsCursor) {
@@ -900,7 +905,7 @@ EOF;
 
         $this->writer->addRow($row);
 
-        $this->traverseConnection(
+        $this->connectionTraversor->traverse(
             $comment,
             'votes',
             function ($edge) use ($proposal, $news, $comment) {
@@ -917,7 +922,7 @@ EOF;
             }
         );
 
-        $this->traverseConnection(
+        $this->connectionTraversor->traverse(
             $comment,
             'reportings',
             function ($edge) use ($proposal, $news, $comment) {
@@ -1087,31 +1092,6 @@ EOF;
             $value = Arr::path($news, self::PROPOSAL_NEWS_HEADER_MAP[$columnName]);
             $row[] = $this->parseCellValue($value);
         }
-    }
-
-    protected function traverseConnection(
-        array &$data,
-        string $path,
-        callable $callback,
-        callable $renewalQuery
-    ): void {
-        do {
-            $connection = Arr::path($data, $path);
-            $edges = Arr::path($connection, 'edges');
-            $pageInfo = Arr::path($connection, 'pageInfo');
-            $endCursor = $pageInfo['endCursor'];
-            if (\count($edges) > 0) {
-                foreach ($edges as $edge) {
-                    $callback($edge);
-                    if ($edge['cursor'] === $endCursor) {
-                        $data = $this->executor->execute(null, [
-                            'query' => $renewalQuery($pageInfo),
-                            'variables' => [],
-                        ])->toArray();
-                    }
-                }
-            }
-        } while (true === $pageInfo['hasNextPage']);
     }
 
     protected function insert($array, $index, $val)
@@ -1547,7 +1527,6 @@ ${AUTHOR_INFOS_FRAGMENT}
 ${REPORTING_INFOS_FRAGMENT}
 ${VOTE_INFOS_FRAGMENT}
 ${COMMENT_VOTE_INFOS}
-
 {
   node(id: "{$proposalStep->getId()}") {
     ... on ProposalStep {
@@ -1561,23 +1540,23 @@ ${COMMENT_VOTE_INFOS}
         edges {
           cursor
           node {
-              id
-              comments(first: ${COMMENTS_PER_PAGE}{$commentsAfter}) {
-              pageInfo {
-                startCursor
-                endCursor
-                hasNextPage
-              }
-              edges {
-                cursor
-                node {
-                  ... commentInfos
-                  votes {
-                    edges {
-                      node {
-                        ... commentVoteInfos
-                      }
+            id
+            comments(first: ${COMMENTS_PER_PAGE}{$commentsAfter}) {
+            pageInfo {
+              startCursor
+              endCursor
+              hasNextPage
+            }
+            edges {
+              cursor
+              node {
+                ... commentInfos
+                votes {
+                  edges {
+                    node {
+                      ... commentVoteInfos
                     }
+                  }
                   }
                 }
               }

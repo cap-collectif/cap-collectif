@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Opinion;
@@ -20,7 +19,16 @@ class ArgumentRepository extends EntityRepository
     public function getRecentOrdered()
     {
         $qb = $this->createQueryBuilder('a')
-            ->select('a.id', 'a.createdAt', 'a.updatedAt', 'aut.username as author', 'ut.name as userType', 'a.isEnabled as published', 'a.isTrashed as trashed', 'c.title as project')
+            ->select(
+                'a.id',
+                'a.createdAt',
+                'a.updatedAt',
+                'aut.username as author',
+                'ut.name as userType',
+                'a.isEnabled as published',
+                'a.isTrashed as trashed',
+                'c.title as project'
+            )
             ->leftJoin('a.Author', 'aut')
             ->leftJoin('aut.userType', 'ut')
             ->leftJoin('a.opinion', 'o')
@@ -28,41 +36,45 @@ class ArgumentRepository extends EntityRepository
             ->leftJoin('s.projectAbstractStep', 'cas')
             ->leftJoin('cas.project', 'c')
             ->where('a.validated = :validated')
-            ->setParameter('validated', false)
-        ;
-
-        return $qb->getQuery()
-            ->getArrayResult()
-        ;
+            ->setParameter('validated', false);
+        return $qb->getQuery()->getArrayResult();
     }
 
     public function getArrayById(string $id)
     {
         $qb = $this->createQueryBuilder('a')
-            ->select('a.id', 'a.createdAt', 'a.updatedAt', 'aut.username as author', 'a.isEnabled as published', 'a.isTrashed as trashed', 'a.body as body', 'c.title as project')
+            ->select(
+                'a.id',
+                'a.createdAt',
+                'a.updatedAt',
+                'aut.username as author',
+                'a.isEnabled as published',
+                'a.isTrashed as trashed',
+                'a.body as body',
+                'c.title as project'
+            )
             ->leftJoin('a.Author', 'aut')
             ->leftJoin('a.opinion', 'o')
             ->leftJoin('o.step', 's')
             ->leftJoin('s.projectAbstractStep', 'cas')
             ->leftJoin('cas.project', 'c')
             ->where('a.id = :id')
-            ->setParameter('id', $id)
-        ;
-
-        return $qb->getQuery()
-            ->getOneOrNullResult(Query::HYDRATE_ARRAY)
-        ;
+            ->setParameter('id', $id);
+        return $qb->getQuery()->getOneOrNullResult(Query::HYDRATE_ARRAY);
     }
 
-    public function getByContributionAndType(Argumentable $contribution, int $type = null, int $limit, int $first, string $field, string $direction): Paginator
-    {
+    public function getByContributionAndType(
+        Argumentable $contribution,
+        ?int $type = null,
+        ?int $limit = null,
+        ?int $first = null,
+        string $field,
+        string $direction
+    ): Paginator {
         $qb = $this->getByContributionQB($contribution);
 
         if (null !== $type) {
-            $qb
-              ->andWhere('a.type = :type')
-              ->setParameter('type', $type)
-         ;
+            $qb->andWhere('a.type = :type')->setParameter('type', $type);
         }
 
         if ('CREATED_AT' === $field) {
@@ -73,24 +85,24 @@ class ArgumentRepository extends EntityRepository
             $qb->addOrderBy('a.votesCount', $direction);
         }
 
-        $qb
-            ->setFirstResult($first)
-            ->setMaxResults($limit)
-        ;
+        if ($first) {
+            $qb->setFirstResult($first);
+        }
+
+        if ($limit) {
+            $qb->setMaxResults($limit);
+        }
 
         return new Paginator($qb);
     }
 
-    public function countByContributionAndType(Argumentable $contribution, $type): int
+    public function countByContributionAndType(Argumentable $contribution, ?int $type = null): int
     {
         $qb = $this->getByContributionQB($contribution);
         $qb->select('COUNT(a.id)');
 
         if (null !== $type) {
-            $qb
-        ->andWhere('a.type = :type')
-        ->setParameter('type', $type)
-       ;
+            $qb->andWhere('a.type = :type')->setParameter('type', $type);
         }
 
         return (int) $qb->getQuery()->getSingleScalarResult();
@@ -133,18 +145,14 @@ class ArgumentRepository extends EntityRepository
         $qb
             ->select('count(DISTINCT version)')
             ->andWhere('version.Author = :author')
-            ->setParameter('author', $user)
-        ;
-
+            ->setParameter('author', $user);
         return $qb->getQuery()->getSingleScalarResult();
     }
 
     public function findAllByAuthor(User $user): array
     {
         $qb = $this->createQueryBuilder('version');
-        $qb
-            ->andWhere('version.Author = :author')
-            ->setParameter('author', $user);
+        $qb->andWhere('version.Author = :author')->setParameter('author', $user);
 
         return $qb->getQuery()->getResult();
     }
@@ -168,44 +176,43 @@ class ArgumentRepository extends EntityRepository
             ->andWhere('o.isEnabled = true')
             ->andWhere('s.isEnabled = true')
             ->andWhere('c.isEnabled = true')
-            ->setParameter('author', $user)
-          ;
-
-        return $qb
-            ->getQuery()
-            ->getSingleScalarResult();
+            ->setParameter('author', $user);
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
     public function countByAuthorAndProject(User $author, Project $project): int
     {
         return $this->getIsEnabledQueryBuilder()
-          ->select('COUNT(DISTINCT a)')
-          ->leftJoin('a.opinion', 'o')
-          ->leftJoin('a.opinionVersion', 'ov')
-          ->leftJoin('ov.parent', 'ovo')
-          ->andWhere('o.step IN (:steps) OR ovo.step IN (:steps)')
-          ->andWhere('a.Author = :author')
-          ->setParameter('steps', array_map(function ($step) {
-              return $step;
-          }, $project->getRealSteps()))
-          ->setParameter('author', $author)
-          ->getQuery()
-          ->getSingleScalarResult();
+            ->select('COUNT(DISTINCT a)')
+            ->leftJoin('a.opinion', 'o')
+            ->leftJoin('a.opinionVersion', 'ov')
+            ->leftJoin('ov.parent', 'ovo')
+            ->andWhere('o.step IN (:steps) OR ovo.step IN (:steps)')
+            ->andWhere('a.Author = :author')
+            ->setParameter(
+                'steps',
+                array_map(function ($step) {
+                    return $step;
+                }, $project->getRealSteps())
+            )
+            ->setParameter('author', $author)
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 
     public function countByAuthorAndStep(User $author, ConsultationStep $step): int
     {
         return $this->getIsEnabledQueryBuilder()
-          ->select('COUNT(DISTINCT a)')
-          ->leftJoin('a.opinion', 'o')
-          ->leftJoin('a.opinionVersion', 'ov')
-          ->leftJoin('ov.parent', 'ovo')
-          ->andWhere('o.step = :step OR ovo.step = :step')
-          ->andWhere('a.Author = :author')
-          ->setParameter('step', $step)
-          ->setParameter('author', $author)
-          ->getQuery()
-          ->getSingleScalarResult();
+            ->select('COUNT(DISTINCT a)')
+            ->leftJoin('a.opinion', 'o')
+            ->leftJoin('a.opinionVersion', 'ov')
+            ->leftJoin('ov.parent', 'ovo')
+            ->andWhere('o.step = :step OR ovo.step = :step')
+            ->andWhere('a.Author = :author')
+            ->setParameter('step', $step)
+            ->setParameter('author', $author)
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 
     /**
@@ -243,23 +250,19 @@ class ArgumentRepository extends EntityRepository
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.isEnabled = true')
-            ->andWhere('a.expired = false')
-        ;
+            ->andWhere('a.expired = false');
     }
 
     private function getByContributionQB(Argumentable $contribution)
     {
-        $qb = $this->getIsEnabledQueryBuilder()
-         ->andWhere('a.isTrashed = false');
+        $qb = $this->getIsEnabledQueryBuilder()->andWhere('a.isTrashed = false');
         if ($contribution instanceof Opinion) {
-            $qb
-      ->andWhere('a.opinion = :opinion')
-      ->setParameter('opinion', $contribution);
+            $qb->andWhere('a.opinion = :opinion')->setParameter('opinion', $contribution);
         }
         if ($contribution instanceof OpinionVersion) {
             $qb
-      ->andWhere('a.opinionVersion = :opinionVersion')
-      ->setParameter('opinionVersion', $contribution);
+                ->andWhere('a.opinionVersion = :opinionVersion')
+                ->setParameter('opinionVersion', $contribution);
         }
 
         return $qb;
