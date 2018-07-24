@@ -4,29 +4,31 @@ namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 use Capco\AppBundle\GraphQL\DataLoader\GenericDataLoader;
 use Capco\AppBundle\Repository\ProposalRepository;
 use GraphQL\Executor\Promise\Promise;
+use GraphQL\Executor\Promise\PromiseAdapter;
 use Overblog\DataLoader\CacheMap;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Psr\Cache\CacheItemPoolInterface;
 
-class ProposalDataLoader extends GenericDataLoader
+class ProposalDataLoader
 {
     private $repository;
+    private $promiseAdapter;
 
-    public function __construct(
-        PromiseAdapterInterface $promiseFactory,
-        CacheMap $cacheMap,
-        CacheItemPoolInterface $cache,
-        ProposalRepository $repository
-    ) {
+    public function __construct(PromiseAdapter $promiseAdapter, ProposalRepository $repository)
+    {
         $this->repository = $repository;
-        parent::__construct([$this, 'all'], $promiseFactory, $cacheMap, $cache);
+        $this->promiseAdapter = $promiseAdapter;
     }
 
     public function all(array $ids): Promise
     {
         $qb = $this->repository->createQueryBuilder('p');
-        $qb->add('where', $qb->expr()->in('p.id', ':ids'))->setParameter('ids', $ids);
+        $proposals = $qb
+            ->add('where', $qb->expr()->in('p.id', ':ids'))
+            ->setParameter('ids', $ids)
+            ->getQuery()
+            ->getResult();
 
-        return $this->getPromiseAdapter()->createAll($ids);
+        return $this->promiseAdapter->all($proposals);
     }
 }

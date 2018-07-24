@@ -12,6 +12,7 @@ use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class ProposalFormProposalsResolver implements ResolverInterface
@@ -19,15 +20,18 @@ class ProposalFormProposalsResolver implements ResolverInterface
     private $proposalRepo;
     private $proposalSearch;
     private $proposalDataLoader;
+    private $container;
 
     public function __construct(
         ProposalRepository $proposalRepo,
         ProposalSearch $proposalSearch,
-        ProposalDataLoader $proposalDataLoader
+        ProposalDataLoader $proposalDataLoader,
+        ContainerInterface $container
     ) {
         $this->proposalRepo = $proposalRepo;
         $this->proposalSearch = $proposalSearch;
         $this->proposalDataLoader = $proposalDataLoader;
+        $this->container = $container;
     }
 
     public function __invoke(ProposalForm $form, Arg $args, $viewer, RequestStack $request)
@@ -152,9 +156,13 @@ class ProposalFormProposalsResolver implements ResolverInterface
             );
 
             $totalCount = $results['count'];
+            $ids = array_map(function (Proposal $proposal) {
+                return $proposal->getId();
+            }, $results['proposals']);
 
-            return $results['proposals'];
-        });
+            return $this->container->get('proposals_loader')->loadMany($ids);
+        },
+        Paginator::MODE_PROMISE);
 
         $connection = $paginator->auto($args, $totalCount);
         $connection->totalCount = $totalCount;
