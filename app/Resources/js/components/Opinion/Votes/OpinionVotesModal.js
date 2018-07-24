@@ -107,7 +107,7 @@ export default createPaginationContainer(
     opinion: graphql`
       fragment OpinionVotesModal_opinion on OpinionOrVersion
         @argumentDefinitions(
-          count: { type: "Int", defaultValue: 10 }
+          count: { type: "Int", defaultValue: 100 }
           cursor: { type: "String", defaultValue: null }
         ) {
         ... on Opinion {
