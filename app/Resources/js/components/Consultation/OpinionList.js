@@ -2,7 +2,7 @@
 import React from 'react';
 import { QueryRenderer, graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage, injectIntl } from 'react-intl';
-import {ListGroup, Panel} from "react-bootstrap";
+import { ListGroup, Panel } from 'react-bootstrap';
 import Opinion from './Opinion';
 import NewOpinionButton from '../Opinion/NewOpinionButton';
 import environment, { graphqlError } from '../../createRelayEnvironment';
@@ -101,12 +101,12 @@ export class OpinionList extends React.Component<Props> {
               <QueryRenderer
                 environment={environment}
                 query={graphql`
-                query OpinionListQuery($sectionId: ID!, $limit: Int!) {
-                  contributionsBySection(sectionId: $sectionId, limit: $limit) {
-                    ...Opinion_opinion
+                  query OpinionListQuery($sectionId: ID!, $limit: Int!) {
+                    contributionsBySection(sectionId: $sectionId, limit: $limit) {
+                      ...Opinion_opinion
+                    }
                   }
-                }
-              `}
+                `}
                 variables={{
                   sectionId: section.id,
                   limit: consultation.opinionCountShownBySection,
@@ -115,15 +115,14 @@ export class OpinionList extends React.Component<Props> {
               />
             </ListGroup>
           )}
+          {section.contributionsCount > consultation.opinionCountShownBySection && (
+            <Panel.Footer>
+              <a href={section.url} className="text-center" style={{ display: 'block' }}>
+                <FormattedMessage id="opinion.show.all" />
+              </a>
+            </Panel.Footer>
+          )}
         </Panel>
-
-        {section.contributionsCount > consultation.opinionCountShownBySection && (
-          <div className="opinion  opinion__footer  box">
-            <a href={section.url} className="text-center" style={{ display: 'block' }}>
-              <FormattedMessage id="opinion.show.all" />
-            </a>
-          </div>
-        )}
       </div>
     );
   }

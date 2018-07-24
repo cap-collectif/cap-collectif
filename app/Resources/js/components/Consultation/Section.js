@@ -16,7 +16,7 @@ export class Section extends React.Component<Props> {
     return (
       <div
         id={`opinion-type--${section.slug}`}
-        className={`anchor-offset text-center opinion-type__title level--${level}`}>
+        className={`anchor-offset text-center level--${level}`}>
         {section.title}
         <br />
         {section.subtitle && <span className="small excerpt">{section.subtitle}</span>}

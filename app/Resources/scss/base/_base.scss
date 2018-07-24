@@ -100,6 +100,10 @@
             margin: 0;
         }
     }
+
+    .panel-footer {
+        font-size: 16px;
+    }
 }
 
 @media (max-width: $screen-xs-max) {
@@ -142,7 +146,6 @@
 
                 .author-name {
                     color: $dark;
-                    font-size: 16px;
                     font-weight: 500;
                 }
 
