@@ -1389,7 +1389,7 @@ type NotificationsConfiguration {
 }
 
 # A contribution
-type Opinion implements Node & Argumentable & Sourceable & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
+type Opinion implements Node & Argumentable & Sourceable & Reportable & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
   # True if the contribution is trashed.
   trashed: Boolean!
 
@@ -1426,6 +1426,9 @@ type Opinion implements Node & Argumentable & Sourceable & Contribution & Trasha
 
   # Url of the contribution
   url: URI!
+
+  # Does the viewer already submitted a report ?
+  viewerHasReport: Boolean!
 
   # The author of the contribution.
   author: User!
@@ -3355,7 +3358,7 @@ type ValueResponse implements Response {
 }
 
 # A version of contribution
-type Version implements Node & Contribution & Sourceable & Argumentable & TrashableContribution & ContributionWithAuthor & EditableContribution {
+type Version implements Node & Contribution & Sourceable & Reportable & Argumentable & TrashableContribution & ContributionWithAuthor & EditableContribution {
   # True if the contribution is trashed.
   trashed: Boolean!
 
@@ -3392,6 +3395,9 @@ type Version implements Node & Contribution & Sourceable & Argumentable & Trasha
 
   # The url of version.
   url: URI!
+
+  # Does the viewer already submitted a report ?
+  viewerHasReport: Boolean!
 
   # The author of the contribution.
   author: User!

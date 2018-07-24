@@ -86,6 +86,7 @@ export default createFragmentContainer(container, {
   opinion: graphql`
     fragment OpinionButtons_opinion on OpinionOrVersion {
       ...OpinionDelete_opinion
+      ...OpinionReportButton_opinion
       ... on Opinion {
         ...OpinionEditButton_opinion
         __typename

@@ -1,9 +1,9 @@
 Opinion:
     type: object
-    inherits: [Node, Argumentable, Sourceable, Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
+    inherits: [Node, Argumentable, Sourceable, Reportable, Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
     config:
         description: "A contribution"
-        interfaces: [Node, Argumentable, Sourceable, Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
+        interfaces: [Node, Argumentable, Sourceable, Reportable, Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
         fields:
             createdAt:
                 type: "DateTime!"
@@ -20,6 +20,8 @@ Opinion:
                 description: "true if the contribution is expired."
             published:
                 type: "Boolean!"
+            viewerHasReport:
+                resolve: '@=value.userHasReport(getUser())'
             argumentsCount:
                 type: "Int!"
                 description: "Number of arguments."

@@ -184,6 +184,22 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
+                'viewerHasReport' => [
+                    'type' => Type::nonNull(Type::boolean()),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $value->userHasReport(\Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable));
+                    },
+                    'description' => 'Does the viewer already submitted a report ?',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
+                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
+                    },
+                ],
                 'author' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('User')),
                     'args' => [
@@ -602,7 +618,7 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
             ];
             },
             'interfaces' => function () use ($globalVariable) {
-                return [$globalVariable->get('typeResolver')->resolve('Node'), $globalVariable->get('typeResolver')->resolve('Argumentable'), $globalVariable->get('typeResolver')->resolve('Sourceable'), $globalVariable->get('typeResolver')->resolve('Contribution'), $globalVariable->get('typeResolver')->resolve('TrashableContribution'), $globalVariable->get('typeResolver')->resolve('ContributionWithAuthor'), $globalVariable->get('typeResolver')->resolve('EditableContribution')];
+                return [$globalVariable->get('typeResolver')->resolve('Node'), $globalVariable->get('typeResolver')->resolve('Argumentable'), $globalVariable->get('typeResolver')->resolve('Sourceable'), $globalVariable->get('typeResolver')->resolve('Reportable'), $globalVariable->get('typeResolver')->resolve('Contribution'), $globalVariable->get('typeResolver')->resolve('TrashableContribution'), $globalVariable->get('typeResolver')->resolve('ContributionWithAuthor'), $globalVariable->get('typeResolver')->resolve('EditableContribution')];
             },
             'isTypeOf' => null,
             'resolveField' => null,
