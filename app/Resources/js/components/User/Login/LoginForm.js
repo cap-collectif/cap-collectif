@@ -1,13 +1,10 @@
 // @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { connect } from 'react-redux';
-import type { MapStateToProps } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Alert } from 'react-bootstrap';
 import renderInput from '../../Form/Field';
 import { login as onSubmit } from '../../../redux/modules/user';
-import type { State } from '../../../types';
 
 type LoginValues = {
   username: string,
@@ -64,16 +61,9 @@ export class LoginForm extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  shieldEnabled: state.default.features.shield_mode,
-});
-
-const connector = connect(mapStateToProps);
-export default connector(
-  reduxForm({
-    initialValues,
-    onSubmit,
-    form: formName,
-    destroyOnUnmount: true,
-  })(LoginForm),
-);
+export default reduxForm({
+  initialValues,
+  onSubmit,
+  form: formName,
+  destroyOnUnmount: true,
+})(LoginForm);
