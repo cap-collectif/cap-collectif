@@ -12,8 +12,8 @@ class CacheDataLoader
         $this->cacheItemPool = $cacheItemPool;
     }
 
-    protected function getCacheKeyNameByValue(string $value): string
+    protected function getCacheKeyNameByParameters(array $parameters): string
     {
-        return '-[' . base64_encode($value) . ']-';
+        return '-[' . base64_encode(var_export($parameters, true)) . ']-';
     }
 }

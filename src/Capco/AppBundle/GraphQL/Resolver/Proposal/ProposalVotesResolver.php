@@ -79,13 +79,9 @@ class ProposalVotesResolver
                     });
 
                     $totalCount = $this->proposalVotesCountByStepDataLoader->load(
-                        $this->proposalCollectVoteRepository->countVotesByProposalAndStep(
-                            $proposal,
-                            $step,
-                            $includeExpired
-                        ),
                         $proposal,
-                        $step
+                        $step,
+                        $includeExpired
                     );
 
                     return $paginator->auto($args, $totalCount);
@@ -113,13 +109,9 @@ class ProposalVotesResolver
                     });
 
                     $totalCount = $this->proposalVotesCountByStepDataLoader->load(
-                        $this->proposalSelectionVoteRepository->countVotesByProposalAndStep(
-                            $proposal,
-                            $step,
-                            $includeExpired
-                        ),
                         $proposal,
-                        $step
+                        $step,
+                        $includeExpired
                     );
 
                     return $paginator->auto($args, $totalCount);
@@ -146,17 +138,14 @@ class ProposalVotesResolver
 
         $totalCount = 0;
         $totalCount += $this->proposalVotesDataLoader->load(
-            $this->proposalCollectVoteRepository->countVotesByProposal($proposal, $includeExpired),
             $proposal,
-            ProposalVotesDataLoader::COLLECT_STEP_TYPE
+            ProposalVotesDataLoader::COLLECT_STEP_TYPE,
+            $includeExpired
         );
         $totalCount += $this->proposalVotesDataLoader->load(
-            $this->proposalSelectionVoteRepository->countVotesByProposal(
-                $proposal,
-                $includeExpired
-            ),
             $proposal,
-            ProposalVotesDataLoader::SELECTION_STEP_TYPE
+            ProposalVotesDataLoader::SELECTION_STEP_TYPE,
+            $includeExpired
         );
 
         return $paginator->auto($args, $totalCount);
