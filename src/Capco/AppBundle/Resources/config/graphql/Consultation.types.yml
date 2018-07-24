@@ -9,6 +9,8 @@ Consultation:
         resolve: 'consultation'
       id:
         description: 'The id of the consultation.'
+      opinionCountShownBySection:
+        type: "Int"
       project:
         type: 'Project!'
         description: 'The project'

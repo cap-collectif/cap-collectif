@@ -36,7 +36,8 @@ const onSubmit = (data: Object, dispatch: Dispatch, props: Object) => {
     .filter(key => key !== 'title' && key !== 'body' && key !== 'check')
     .map(key => {
       return {
-        appendixType: opinion.appendices.filter(a => a.type.title === key)[0].type.id,
+        appendixType: opinion.appendices.filter(a => a.appendixType.title === key)[0].appendixType
+          .id,
         body: data[key],
       };
     });
@@ -90,16 +91,19 @@ export class OpinionEditForm extends React.Component<Props> {
           autoFocus
           label={<FormattedMessage id="opinion.body" />}
         />
-        {opinion.appendices.map((field, index) => (
-          <Field
-            key={index}
-            component={renderInput}
-            name={field.appendixType.title}
-            label={field.appendixType.title}
-            type="editor"
-            id={`opinion_appendix-${index + 1}`}
-          />
-        ))}
+        {opinion.appendices &&
+          opinion.appendices
+            .filter(Boolean)
+            .map((field, index) => (
+              <Field
+                key={index}
+                component={renderInput}
+                name={field.appendixType.title}
+                label={field.appendixType.title}
+                type="editor"
+                id={`opinion_appendix-${index + 1}`}
+              />
+            ))}
       </form>
     );
   }
@@ -107,8 +111,12 @@ export class OpinionEditForm extends React.Component<Props> {
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => {
   const dynamicsInitialValues = {};
-  for (const appendix of props.opinion.appendices) {
-    dynamicsInitialValues[appendix.type.title] = appendix.body;
+  if (props.opinion.appendices) {
+    for (const appendix of props.opinion.appendices) {
+      if (appendix && appendix.appendixType) {
+        dynamicsInitialValues[appendix.appendixType.title] = appendix.body;
+      }
+    }
   }
   return {
     initialValues: {
@@ -126,7 +134,6 @@ const container = connect(mapStateToProps)(
     validate,
   })(OpinionEditForm),
 );
-
 
 export default createFragmentContainer(container, {
   opinion: graphql`

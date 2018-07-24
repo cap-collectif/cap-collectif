@@ -87,6 +87,7 @@ export default createFragmentContainer(container, {
     fragment OpinionButtons_opinion on OpinionOrVersion {
       ...OpinionDelete_opinion
       ... on Opinion {
+        ...OpinionEditButton_opinion
         __typename
         contribuable
         title

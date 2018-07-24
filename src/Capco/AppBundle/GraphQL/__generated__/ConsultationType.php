@@ -89,6 +89,18 @@ final class ConsultationType extends ObjectType implements GeneratedTypeInterfac
                     'public' => null,
                     'access' => null,
                 ],
+                'opinionCountShownBySection' => [
+                    'type' => Type::int(),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'project' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('Project')),
                     'args' => [

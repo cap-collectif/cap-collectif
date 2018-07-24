@@ -708,6 +708,7 @@ type Consultation implements Node & Step {
 
   # The url of the step
   url: String!
+  opinionCountShownBySection: Int
 
   # The project
   project: Project!

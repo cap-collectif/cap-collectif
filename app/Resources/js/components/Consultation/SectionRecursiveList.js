@@ -2,21 +2,23 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import SectionList from './SectionList';
-import type { SectionRecursiveList_sections } from './__generated__/SectionRecursiveList_sections.graphql';
+import type { SectionRecursiveList_consultation } from './__generated__/SectionRecursiveList_consultation.graphql';
 
 type Props = {
-  sections: SectionRecursiveList_sections,
-  consultation: Object,
+  consultation: SectionRecursiveList_consultation,
 };
 
 export class SectionRecursiveList extends React.Component<Props> {
   render() {
-    const { sections, consultation } = this.props;
+    const { consultation } = this.props;
     return (
       <div>
-        {sections.map((section, index) => (
-          <SectionList key={index} consultation={consultation} section={section} level={0} />
-        ))}
+        {consultation.sections &&
+          consultation.sections
+            .filter(Boolean)
+            .map((section, index) => (
+              <SectionList key={index} consultation={consultation} section={section} level={0} />
+            ))}
       </div>
     );
   }
@@ -25,8 +27,8 @@ export class SectionRecursiveList extends React.Component<Props> {
 export default createFragmentContainer(
   SectionRecursiveList,
   graphql`
-    fragment SectionRecursiveList_sections on Section @relay(plural: true) {
-      ...Section_section
+    fragment SectionRecursiveList_consultation on Consultation {
+      ...Section_consultation
       sections {
         ...Section_section
         sections {
@@ -35,6 +37,9 @@ export default createFragmentContainer(
             ...Section_section
             sections {
               ...Section_section
+              sections {
+                ...Section_section
+              }
             }
           }
         }
