@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Command;
 
 use Box\Spout\Common\Type;
@@ -49,9 +48,11 @@ class CreateCsvFromUserCommand extends Command
 
     protected function configure(): void
     {
-        $this
-            ->setDescription('Create csv file from user data')
-            ->addArgument('userId', InputArgument::REQUIRED, 'The ID of the user');
+        $this->setDescription('Create csv file from user data')->addArgument(
+            'userId',
+            InputArgument::REQUIRED,
+            'The ID of the user'
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): void
@@ -96,12 +97,10 @@ class CreateCsvFromUserCommand extends Command
         ];
 
         foreach ($types as $type => $query) {
-            $datas[$type] = $this->executor->execute(null,
-                [
-                    'query' => $query,
-                    'variables' => [],
-                ]
-            )->toArray();
+            $datas[$type] = $this->executor->execute(null, [
+                'query' => $query,
+                'variables' => [],
+            ])->toArray();
         }
 
         return $datas;
@@ -116,13 +115,15 @@ class CreateCsvFromUserCommand extends Command
 
     protected function getZipPathForUser(string $userId): string
     {
-        return $this->kernelRootDir . '/../web/export/' . $this->getZipFilenameForUser(
-                $userId
-            );
+        return $this->kernelRootDir . '/../web/export/' . $this->getZipFilenameForUser($userId);
     }
 
-    protected function createZipArchive(string $zipName, array $files, bool $removeFilesAfter = true, bool $isMedias = false): void
-    {
+    protected function createZipArchive(
+        string $zipName,
+        array $files,
+        bool $removeFilesAfter = true,
+        bool $isMedias = false
+    ): void {
         $zip = new \ZipArchive();
 
         $zip->open($zipName, \ZipArchive::CREATE);
@@ -198,17 +199,17 @@ class CreateCsvFromUserCommand extends Command
         $writer->close();
 
         if ($header) {
-            $this->createZipArchive(
-                $this->getZipPathForUser($userId),
-                [
-                    ["$type.csv" => $this->getPath()],
-                ]
-            );
+            $this->createZipArchive($this->getZipPathForUser($userId), [
+                ["$type.csv" => $this->getPath()],
+            ]);
         }
     }
 
-    protected function getCleanArrayForRowInsert(array $contents, array $header, bool $isNode = false): array
-    {
+    protected function getCleanArrayForRowInsert(
+        array $contents,
+        array $header,
+        bool $isNode = false
+    ): array {
         $rows = [];
         $rowCounter = 0;
         $responsesInserted = false;
@@ -216,8 +217,16 @@ class CreateCsvFromUserCommand extends Command
         foreach ($contents as $content) {
             foreach ($header as $columnKey => $columnName) {
                 if ($isNode) {
-                    if (false !== strpos($columnName, 'responses.') && false === $responsesInserted) {
-                        $responsesDatas = $this->handleMultipleResponsesForQuestions($content, $rowCounter, $columnKey, $rows);
+                    if (
+                        false !== strpos($columnName, 'responses.') &&
+                        false === $responsesInserted
+                    ) {
+                        $responsesDatas = $this->handleMultipleResponsesForQuestions(
+                            $content,
+                            $rowCounter,
+                            $columnKey,
+                            $rows
+                        );
                         $rows = $responsesDatas['rows'];
                         $rowCounter = $responsesDatas['counter'];
                         $responsesInserted = true;
@@ -237,8 +246,12 @@ class CreateCsvFromUserCommand extends Command
         return $rows;
     }
 
-    protected function handleMultipleResponsesForQuestions(array $responses, int $rowCounter, int $columnKey, array $rows): array
-    {
+    protected function handleMultipleResponsesForQuestions(
+        array $responses,
+        int $rowCounter,
+        int $columnKey,
+        array $rows
+    ): array {
         //a question can have multiple responses so we insert a line for each response
         $emptyRow = [null, null, null, null, null, null, null];
         foreach ($responses['node']['responses'] as $response) {
@@ -263,9 +276,7 @@ class CreateCsvFromUserCommand extends Command
 
                 $this->createZipArchive(
                     $this->getZipPathForUser($userId),
-                    [
-                        [$media['providerReference'] => $fileToCopy],
-                    ],
+                    [[$media['providerReference'] => $fileToCopy]],
                     false,
                     true
                 );
@@ -276,31 +287,28 @@ class CreateCsvFromUserCommand extends Command
     protected function getCleanHeadersName($data, string $type): array
     {
         $infoResolver = new InfoResolver();
-        $header = array_map(
-            function ($item) use ($type) {
-                $item = str_replace('data_node_', '', $item);
-                if ('show_url' !== $item) {
-                    $item = str_replace('_', '.', $item);
-                }
+        $header = array_map(function ($item) use ($type) {
+            $item = str_replace('data_node_', '', $item);
+            if ('show_url' !== $item) {
+                $item = str_replace('_', '.', $item);
+            }
 
-                if ('medias' === $type) {
-                    $item = str_replace('medias.', '', $item);
-                } elseif ('groups' === $type) {
-                    $item = str_replace('groups.edges.node.', '', $item);
-                } elseif ('reports' === $type) {
-                    $item = str_replace('reports.edges.node.', '', $item);
-                } elseif ('events' === $type) {
-                    $item = str_replace('events.edges.node.', '', $item);
-                } elseif ('votes' === $type) {
-                    $item = str_replace('votes.edges.node.', '', $item);
-                } else {
-                    $item = str_replace('contributions.edges.node.', '', $item);
-                }
+            if ('medias' === $type) {
+                $item = str_replace('medias.', '', $item);
+            } elseif ('groups' === $type) {
+                $item = str_replace('groups.edges.node.', '', $item);
+            } elseif ('reports' === $type) {
+                $item = str_replace('reports.edges.node.', '', $item);
+            } elseif ('events' === $type) {
+                $item = str_replace('events.edges.node.', '', $item);
+            } elseif ('votes' === $type) {
+                $item = str_replace('votes.edges.node.', '', $item);
+            } else {
+                $item = str_replace('contributions.edges.node.', '', $item);
+            }
 
-                return $item;
-            },
-            $infoResolver->guessHeadersFromFields($data)
-        );
+            return $item;
+        }, $infoResolver->guessHeadersFromFields($data));
 
         return $header;
     }
@@ -398,10 +406,9 @@ EOF;
               trashed
               trashedAt
               trashedReason
-              votesCount
-              votesCountOk
-              votesCountMitige
-              votesCountNok
+              votes(first: 0) {
+                totalCount
+              }
               argumentsCount
               argumentsCountFor
               argumentsCountAgainst
@@ -442,10 +449,9 @@ EOF;
               trashed
               trashedAt
               trashedReason
-              votesCount
-              votesCountOk
-              votesCountMitige
-              votesCountNok
+              votes {
+                totalCount
+              }
               argumentsCount
               argumentsCountFor
               argumentsCountAgainst
