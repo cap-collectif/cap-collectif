@@ -3,13 +3,13 @@ namespace Capco\AppBundle\GraphQL\Resolver\ProposalForm;
 
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalDataLoader;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Search\ProposalSearch;
 use Capco\UserBundle\Entity\User;
 use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -18,19 +18,20 @@ class ProposalFormProposalsResolver implements ResolverInterface
 {
     private $proposalRepo;
     private $proposalSearch;
+    private $proposalDataLoader;
 
-    public function __construct(ProposalRepository $proposalRepo, ProposalSearch $proposalSearch)
-    {
+    public function __construct(
+        ProposalRepository $proposalRepo,
+        ProposalSearch $proposalSearch,
+        ProposalDataLoader $proposalDataLoader
+    ) {
         $this->proposalRepo = $proposalRepo;
         $this->proposalSearch = $proposalSearch;
+        $this->proposalDataLoader = $proposalDataLoader;
     }
 
-    public function __invoke(
-        ProposalForm $form,
-        Arg $args,
-        $viewer,
-        RequestStack $request
-    ): Connection {
+    public function __invoke(ProposalForm $form, Arg $args, $viewer, RequestStack $request)
+    {
         $totalCount = 0;
         $filters = [];
         $term = null;
