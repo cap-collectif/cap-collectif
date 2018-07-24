@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {createFragmentContainer} from "react-relay";
-import { Label } from "react-bootstrap";
+import {Label, ListGroup, ListGroupItem} from "react-bootstrap";
 import {FormattedDate, FormattedMessage} from "react-intl";
 import moment from "moment";
 import * as graphql from "graphql";
@@ -28,7 +28,93 @@ export class ProposalListTable extends React.Component<Props, State> {
       windowWidth: window.innerWidth,
     };
   }
-  
+
+  getPhaseTitle = (data) => {
+    const openPhase = data.filter(e => moment().isBetween(e.startAt, e.endAt));
+    const toComePhase = data.filter(e => moment().isBefore(e.startAt));
+    const endPhase = data[data.length - 1];
+
+    if(openPhase.length > 0) {
+      return openPhase[0].title;
+    }
+
+    if(toComePhase.length > 0) {
+      return toComePhase[0].title;
+    }
+
+    if(endPhase) {
+      return endPhase.title;
+    }
+  };
+
+  getTable = (tableWidth, columns, data) => {
+    const { windowWidth } = this.state;
+
+    window.addEventListener('resize', () => {
+      this.setState({
+        windowWidth: window.innerWidth,
+      });
+    });
+
+    if (windowWidth > 992) {
+      return <ReactBootstrapTable width={tableWidth} keyField="title" columns={columns} data={data} />;
+    }
+
+    return (
+      <ListGroup className="list-group-custom">
+        {data.map(item => {
+          const list = item.implementationPhase && item.implementationPhase.map(e => {
+            let isActive = false;
+
+            if(moment().isSameOrAfter(e.startAt)) {
+              isActive = true;
+            }
+
+            return (
+              {
+                title: e.title,
+                isActive,
+              }
+            )
+          });
+
+          return (
+            <ListGroupItem>
+              <div>
+                <div className="d-flex justify-content-between">
+                  {item.title &&
+                  <a href={item.title.url}>{item.title.value}</a>
+                  }
+                  {item.status &&
+                  <div className="ml-5">
+                    <Label bsStyle={item.status.color} className="badge-pill">
+                      {item.status.name}
+                    </Label>
+                  </div>
+
+                  }
+                </div>
+                {item.implementationPhase &&
+                <div className="m-auto">
+                  {this.getPhaseTitle(item.implementationPhase) &&
+                  <div className="mb-5 mt-10">
+                      <span>
+                        {this.getPhaseTitle(item.implementationPhase)}
+                      </span>
+                  </div>
+                  }
+                  <ProgressList list={list}/>
+                </div>
+                }
+              </div>
+            </ListGroupItem>
+          )
+
+        })}
+      </ListGroup>
+    );
+  };
+
   statusFormatter = (cell) => {
     if(cell){
       return (
@@ -64,30 +150,12 @@ export class ProposalListTable extends React.Component<Props, State> {
         )
       });
 
-      const getTitle = () => {
-        const openPhase = cell.filter(e => moment().isBetween(e.startAt, e.endAt));
-        const toComePhase = cell.filter(e => moment().isBefore(e.startAt));
-        const endPhase = cell[cell.length - 1];
-
-        if(openPhase.length > 0) {
-          return openPhase[0].title;
-        }
-
-        if(toComePhase.length > 0) {
-          return toComePhase[0].title;
-        }
-
-        if(endPhase) {
-          return endPhase.title;
-        }
-      };
-
       return (
         <div className="m-auto">
-          {getTitle() &&
+          {this.getPhaseTitle(cell) &&
           <div className="mb-10" >
               <span>
-                {getTitle()}
+                {this.getPhaseTitle(cell)}
               </span>
           </div>
           }
@@ -206,7 +274,7 @@ export class ProposalListTable extends React.Component<Props, State> {
     };
 
     const columns = [
-      { style: { width: '250px', verticalAlign: 'top' }, hidden: isHidden('title'), dataField: 'title', text: 'admin.fields.selection.proposal',headerFormatter: this.columnTitleFormatter, formatter: (cell) => this.titleFormatter(cell) },
+      { style: { width: '250px', verticalAlign: 'top' }, hidden: isHidden('title'), dataField: 'title', text: 'admin.fields.selection.proposal',headerFormatter: this.columnTitleFormatter, formatter: this.titleFormatter },
       { style: { width: '250px' }, hidden: isHidden('implementationPhase'), dataField: 'implementationPhase', text: 'implementation-phase', headerFormatter: this.columnTitleFormatter, formatter: this.implementationPhaseFormatter},
       { style: { width: '200px' }, hidden: isHidden('status'), dataField: 'status', text: 'admin.fields.theme.status', headerFormatter: this.columnTitleFormatter, formatter: this.statusFormatter },
       { style: { width: '200px' }, hidden: isHidden('author'), dataField: 'author', text: 'project_download.label.author', headerFormatter: this.columnTitleFormatter, formatter: this.authorFormatter },
@@ -225,9 +293,7 @@ export class ProposalListTable extends React.Component<Props, State> {
         .filter(column => column.hidden !== true)
         .reduce((accumulator, currentValue) => accumulator + parseInt(currentValue.style.width, 0), 0);
 
-    return (
-      <ReactBootstrapTable id="test" width={tableWidth} keyField="title" columns={columns} data={data} />
-    );
+    return this.getTable(tableWidth, columns, data);
   }
 }
 
