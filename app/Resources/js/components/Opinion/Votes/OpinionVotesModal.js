@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { graphql, createPaginationContainer } from 'react-relay';
+import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Modal, Row, Button } from 'react-bootstrap';
 import CloseButton from '../../Form/CloseButton';
@@ -9,7 +9,7 @@ import type { OpinionVotesModal_opinion } from './__generated__/OpinionVotesModa
 
 type Props = {
   opinion: OpinionVotesModal_opinion,
-  relay: Object,
+  relay: RelayPaginationProp,
 };
 
 type State = {

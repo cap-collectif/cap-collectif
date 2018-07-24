@@ -2,10 +2,7 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { ListGroupItem } from 'react-bootstrap';
-import OpinionPreviewTitle from '../Opinion/OpinionPreviewTitle';
-import OpinionInfos from '../Opinion/OpinionInfos';
-import UserAvatar from '../User/UserAvatar';
-import OpinionPreviewCounters from '../Opinion/OpinionPreviewCounters';
+import OpinionPreview from '../Opinion/OpinionPreview';
 import VotePiechart from '../Utils/VotePiechart';
 import type { Opinion_opinion } from './__generated__/Opinion_opinion.graphql';
 
@@ -21,15 +18,8 @@ export class Opinion extends React.Component<Props> {
       <ListGroupItem
         className={`list-group-item__opinion has-chart${author && author.vip ? ' bg-vip' : ''}`}>
         <div className="left-block">
-          <UserAvatar user={author} />
-          <div>
-            {/* $FlowFixMe */}
-            <OpinionInfos rankingThreshold={null} opinion={opinion} />
-            {/* $FlowFixMe */}
-            <OpinionPreviewTitle showTypeLabel={false} link opinion={opinion} />
-            {/* $FlowFixMe */}
-            <OpinionPreviewCounters opinion={opinion} />
-          </div>
+          {/* $FlowFixMe */}
+          <OpinionPreview opinion={opinion} />
         </div>
         {opinion.votes && opinion.votes.totalCount > 0 ? (
           /* $FlowFixMe */
@@ -51,9 +41,7 @@ export default createFragmentContainer(
   Opinion,
   graphql`
     fragment Opinion_opinion on Opinion {
-      ...OpinionPreviewCounters_opinion
-      ...OpinionInfos_opinion
-      ...OpinionPreviewTitle_opinion
+      ...OpinionPreview_opinion
       votes(first: 0) {
         totalCount
       }

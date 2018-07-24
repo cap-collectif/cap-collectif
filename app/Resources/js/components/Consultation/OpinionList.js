@@ -139,11 +139,6 @@ export default createFragmentContainer(container, {
       color
       contribuable
       contributionsCount
-      appendixTypes {
-        id
-        title
-        position
-      }
     }
   `,
   consultation: graphql`

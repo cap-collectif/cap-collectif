@@ -2,7 +2,7 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { QueryRenderer, createFragmentContainer, graphql, type ReadyState } from 'react-relay';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Panel } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import OpinionVersionListView, { type VersionOrder } from './OpinionVersionListView';
@@ -78,7 +78,8 @@ export class OpinionVersionsBox extends React.Component<Props, State> {
   render() {
     const { isAuthenticated, opinion } = this.props;
     return (
-      <div>
+      <Panel>
+        <Panel.Heading>
         <OpinionVersionCreateModal opinion={opinion} />
         <Row>
           <Col xs={12} sm={6} md={6}>
@@ -88,6 +89,7 @@ export class OpinionVersionsBox extends React.Component<Props, State> {
             {this.renderFilter()}
           </Col>
         </Row>
+        </Panel.Heading>
         <QueryRenderer
           environment={environment}
           query={graphql`
@@ -134,7 +136,7 @@ export class OpinionVersionsBox extends React.Component<Props, State> {
             return <Loader />;
           }}
         />
-      </div>
+      </Panel>
     );
   }
 }

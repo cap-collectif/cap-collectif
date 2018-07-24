@@ -17,13 +17,13 @@ class OpinionVersionList extends React.Component<Props> {
         <p className="text-center">
           <i className="cap-32 cap-baloon-1" />
           <br />
-          {<FormattedMessage id="opinion.no_new_version" />}
+          <FormattedMessage id="opinion.no_new_version" />
         </p>
       );
     }
 
     return (
-      <ListGroup className="list-group-custom mt-10">
+      <ListGroup className="list-group-custom">
         {versions.map(version => {
           return (
             <OpinionVersion

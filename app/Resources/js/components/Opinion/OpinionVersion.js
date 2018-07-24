@@ -1,9 +1,7 @@
 // @flow
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
-import classNames from 'classnames';
 import { ListGroupItem } from 'react-bootstrap';
-
 import OpinionPreview from './OpinionPreview';
 import VotePiechart from '../Utils/VotePiechart';
 import type { OpinionVersion_version } from './__generated__/OpinionVersion_version.graphql';
@@ -16,27 +14,24 @@ type Props = {
 class OpinionVersion extends React.Component<Props> {
   render() {
     const { version, rankingThreshold } = this.props;
-    const classes = classNames({
-      opinion: true,
-      'has-chart': true,
-      'list-group-item__opinion': true,
-      'bg-vip': version.author && version.author.vip,
-    });
     return (
-      <ListGroupItem className={classes}>
+      <ListGroupItem 
+              className={`list-group-item__opinion has-chart${version.author && version.author.vip ? ' bg-vip' : ''}`}>
         <div className="left-block">
           {/* $FlowFixMe */}
           <OpinionPreview opinion={version} rankingThreshold={rankingThreshold} />
         </div>
-        {/* $FlowFixMe */}
-        <VotePiechart
-          top={10}
-          height={'90px'}
-          width={'145px'}
-          ok={version.votesOk ? version.votesOk.totalCount : 0}
-          nok={version.votesNok ? version.votesNok.totalCount : 0}
-          mitige={version.votesMitige ? version.votesMitige.totalCount : 0}
-        />
+        {version.votes && version.votes.totalCount > 0 ? (
+          /* $FlowFixMe */
+          <VotePiechart
+            top={10}
+            height={'90px'}
+            width={'145px'}
+            ok={version.votesOk.totalCount}
+            nok={version.votesNok.totalCount}
+            mitige={version.votesMitige.totalCount}
+          />
+        ) : null}
       </ListGroupItem>
     );
   }
@@ -48,6 +43,9 @@ export default createFragmentContainer(OpinionVersion, {
       ...OpinionPreview_opinion
       author {
         vip
+      }
+      votes(first: 0) {
+        totalCount
       }
       votesOk: votes(first: 0, value: YES) {
         totalCount
