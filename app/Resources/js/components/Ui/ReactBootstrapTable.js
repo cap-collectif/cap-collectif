@@ -19,6 +19,7 @@ export const Container = styled.div`
     .table {
         max-width: none;
         margin-bottom: 0;
+        border: none;
         width : ${props => props.width}px;
     }
   
@@ -32,11 +33,23 @@ export const Container = styled.div`
             background-color: #dddddd;
         }
     }
+    
+    tbody > tr:last-child td {
+      border-bottom: none;
+    }
   
     thead > tr > th,
     tbody > tr > td {
-        padding: 10px 15px;
-        vertical-align: middle;
+      padding: 10px 15px;
+      vertical-align: middle;
+      
+      &:first-child {
+        border-left: none; 
+      }
+      
+      &:last-child {
+        border-right: none;
+      }
     }
   
     td:not(:first-child) {

@@ -16,26 +16,39 @@ type Props = {
   step: ProposalListTable_step,
 };
 
-export class ProposalListTable extends React.Component<Props> {
+type State = {
+  windowWidth: number,
+};
 
-  // move method here
+export class ProposalListTable extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
 
-  render() {
-    const { proposals } = this.props;
+    this.state = {
+      windowWidth: window.innerWidth,
+    };
+  }
+  
+  statusFormatter = (cell) => {
+    if(cell){
+      return (
+        <Label bsStyle={cell.color} className="badge-pill">{cell.name}</Label>
+      )
+    }
+  };
 
-    // console.log(step);
+  titleFormatter = (cell) => {
+    if (cell) {
+      return (
+        <a href={cell && cell.url}>
+          {cell && cell.value}
+        </a>
+      )
+    }
+  };
 
-    const statusFormatter = (cell) => (
-      <Label bsStyle={cell && cell.color} className="badge-pill">{cell && cell.name}</Label>
-    );
-
-    const titleFormatter = (cell) => (
-      <a href={cell && cell.url}>
-        {cell && cell.value}
-      </a>
-    );
-
-    const implementationPhaseFormatter = (cell) => {
+  implementationPhaseFormatter = (cell) => {
+    if(cell) {
       const list = cell && cell.map(e => {
         let isActive = false;
 
@@ -64,74 +77,99 @@ export class ProposalListTable extends React.Component<Props> {
           return toComePhase[0].title;
         }
 
-        return endPhase.title;
+        if(endPhase) {
+          return endPhase.title;
+        }
       };
 
       return (
         <div className="m-auto">
           {getTitle() &&
-            <div className="mb-10" >
+          <div className="mb-10" >
               <span>
                 {getTitle()}
               </span>
-            </div>
+          </div>
           }
           <ProgressList list={list} className="mt-10" />
         </div>
       )
-    };
+    }
+  };
 
-    const authorFormatter = (cell) => (
-      <div>
-        {cell &&
+  authorFormatter = (cell) => {
+    if (cell) {
+      return (
+        <div className="d-flex align-items-baseline">
           <UserAvatar
-            user={{username: cell.displayName, media: cell.media, _links: {} }}
+            user={{username: cell.displayName, media: cell.media, _links: {}}}
             defaultAvatar={null}
           />
-        }
-        {cell && cell.displayName}
-      </div>
-    );
+          {cell.displayName}
+        </div>
+      )
+    }
+  };
 
-    const estimationFormatter = (cell) => (
-       <React.Fragment>{cell && <span>{cell} €</span>}</React.Fragment>
-    );
+  estimationFormatter = (cell) => {
+    if(cell) {
+      return (
+        <span>{cell} €</span>
+      )
+    }
+  };
 
-    const likersFormatter = (cell) => (
-       <InlineList className="mb-0">
-         {cell && cell.map((user, index) => <li key={index}>{user.displayName}</li>)}
-       </InlineList>
-    );
+  likersFormatter = (cell) => {
+    if(cell) {
+      return (
+        <InlineList className="mb-0">
+          {cell.map((user, index) => <li key={index}>{user.displayName}</li>)}
+        </InlineList>
+      )
+    }
+  };
 
-    const lastActivityFormatter = (cell) => (
-      <React.Fragment>
-        <FormattedDate
-          value={moment(cell.date)}
-          day="numeric"
-          month="long"
-          year="numeric"
-          hour="numeric"
-          minute="numeric"
+  lastActivityFormatter = (cell) => {
+    if(cell && cell.user) {
+      return (
+        <FormattedMessage
+          id="last-activity-date"
+          values={{
+            date: (
+              <FormattedDate
+                value={moment(cell.date).toDate()}
+              />
+            ),
+            user: cell.user,
+          }}
         />
-        <span>{cell.user}</span>
-      </React.Fragment>
-    );
+      )
+    }
+    if(cell) {
+      return (
+        <FormattedDate
+          value={moment(cell.date).toDate()}
+        />
+      )
+    }
+  };
 
+  publishedOnFormatter = (cell) => {
+    if(cell) {
+      return (
+        <FormattedDate
+          value={moment(cell).toDate()}
+        />
+      )
+    }
+  };
 
-    const publishedOnFormatter = (cell) => (
-      <FormattedDate
-        value={moment(cell)}
-        day="numeric"
-        month="long"
-        year="numeric"
-        hour="numeric"
-        minute="numeric"
-      />
-    );
+  columnTitleFormatter = (column) => (
+    <FormattedMessage id={column.text} />
+  );
 
-    const columnTitleFormatter = (column) => (
-      <FormattedMessage id={column.text} />
-    );
+  render() {
+    const { proposals } = this.props;
 
     const data =
       proposals.edges &&
@@ -140,46 +178,46 @@ export class ProposalListTable extends React.Component<Props> {
         .map(edge => edge.node)
         .filter(Boolean)
         .map((node) => {
-          console.warn(node);
+          // console.warn(node);
 
           return (
             {
-              title: { value: node.title, url: node.url },
-              implementationPhase: node.progressSteps,
-              status: node.status,
-              author: node.author,
-              ref: node.reference,
-              district: node.district.name, // condition
-              category: node.category.name, // condition
-              theme: node.theme.title,
-              priceEstimation: node.estimation,
-              likers: node.likers,
+              title: { value: node.title && node.title, url: node.url && node.url },
+              implementationPhase: node.progressSteps && node.progressSteps,
+              status: node.status && node.status,
+              author: node.author && node.author,
+              ref: node.reference && node.reference,
+              district: node.district && node.district.name,
+              category: node.category && node.category.name,
+              theme: node.theme && node.theme.title,
+              priceEstimation: node.estimation && node.estimation,
+              likers: node.likers && node.likers,
               lastActivity: {
-                date: node.updatedAt,
-                user: node.updatedBy.displayName
+                date: node.updatedAt && node.updatedAt,
+                user: node.updatedBy && node.updatedBy.displayName
               },
-              publishedOn: node.createdAt, // not include // formatter date
+              publishedOn: node.createdAt && node.createdAt,
             }
           )
         });
 
     const isHidden = (element) => {
-      return data && data.filter(e => e[element]).length === 0
+      return data && data.filter(e => Array.isArray(e[element]) ? e[element].length !==0 : e[element] ).length === 0
     };
 
     const columns = [
-      { style: { width: '250px' }, hidden: isHidden('title'), dataField: 'title', text: 'admin.fields.selection.proposal',headerFormatter: columnTitleFormatter, formatter: titleFormatter },
-      { style: { width: '200px' }, hidden: isHidden('implementationPhase'), dataField: 'implementationPhase', text: 'implementation-phase', headerFormatter: columnTitleFormatter, formatter: implementationPhaseFormatter},
-      { style: { width: '200px' }, hidden: isHidden('status'), dataField: 'status', text: 'admin.fields.theme.status', headerFormatter: columnTitleFormatter, formatter: statusFormatter },
-      { style: { width: '200px' }, hidden: isHidden('author'), dataField: 'author', text: 'project_download.label.author', headerFormatter: columnTitleFormatter, formatter: authorFormatter },
-      { style: { width: '200px' }, hidden: isHidden('ref'), dataField: 'ref', text: 'proposal.admin.reference', headerFormatter: columnTitleFormatter },
-      { style: { width: '200px' }, hidden: isHidden('district'), dataField: 'district', text: 'proposal.district', headerFormatter: columnTitleFormatter },
-      { style: { width: '200px' }, hidden: isHidden('category'), dataField: 'category', text: 'proposal.category', headerFormatter: columnTitleFormatter },
-      { style: { width: '200px' }, hidden: isHidden('theme'), dataField: 'theme', text: 'proposal.theme', headerFormatter: columnTitleFormatter },
-      { style: { width: '200px' }, hidden: isHidden('priceEstimation'), dataField: 'priceEstimation', text: 'proposal.estimation', headerFormatter: columnTitleFormatter, formatter: estimationFormatter },
-      { style: { width: '200px' }, hidden: isHidden('likers'), dataField: 'likers', text: 'project_download.label.likers', headerFormatter: columnTitleFormatter, formatter: likersFormatter },
-      { style: { width: '200px' }, hidden: isHidden('lastActivity'), dataField: 'lastActivity', text: 'last-activity', headerFormatter: columnTitleFormatter, formatter: lastActivityFormatter },
-      { style: { width: '150px' }, hidden: isHidden('publishedOn'), dataField: 'publishedOn', text: 'published-on', headerFormatter: columnTitleFormatter, formatter: publishedOnFormatter },
+      { style: { width: '250px', verticalAlign: 'top' }, hidden: isHidden('title'), dataField: 'title', text: 'admin.fields.selection.proposal',headerFormatter: this.columnTitleFormatter, formatter: (cell) => this.titleFormatter(cell) },
+      { style: { width: '250px' }, hidden: isHidden('implementationPhase'), dataField: 'implementationPhase', text: 'implementation-phase', headerFormatter: this.columnTitleFormatter, formatter: this.implementationPhaseFormatter},
+      { style: { width: '200px' }, hidden: isHidden('status'), dataField: 'status', text: 'admin.fields.theme.status', headerFormatter: this.columnTitleFormatter, formatter: this.statusFormatter },
+      { style: { width: '200px' }, hidden: isHidden('author'), dataField: 'author', text: 'project_download.label.author', headerFormatter: this.columnTitleFormatter, formatter: this.authorFormatter },
+      { style: { width: '150px' }, hidden: isHidden('ref'), dataField: 'ref', text: 'proposal.admin.reference', headerFormatter: this.columnTitleFormatter },
+      { style: { width: '200px' }, hidden: isHidden('district'), dataField: 'district', text: 'proposal.district', headerFormatter: this.columnTitleFormatter },
+      { style: { width: '200px' }, hidden: isHidden('category'), dataField: 'category', text: 'proposal.category', headerFormatter: this.columnTitleFormatter },
+      { style: { width: '200px' }, hidden: isHidden('theme'), dataField: 'theme', text: 'proposal.theme', headerFormatter: this.columnTitleFormatter },
+      { style: { width: '200px' }, hidden: isHidden('priceEstimation'), dataField: 'priceEstimation', text: 'proposal.estimation', headerFormatter: this.columnTitleFormatter, formatter: this.estimationFormatter },
+      { style: { width: '250px' }, hidden: isHidden('likers'), dataField: 'likers', text: 'project_download.label.likers', headerFormatter: this.columnTitleFormatter, formatter: this.likersFormatter },
+      { style: { width: '200px' }, hidden: isHidden('lastActivity'), dataField: 'lastActivity', text: 'last-activity', headerFormatter: this.columnTitleFormatter, formatter: this.lastActivityFormatter },
+      { style: { width: '150px' }, hidden: isHidden('publishedOn'), dataField: 'publishedOn', text: 'published-on', headerFormatter: this.columnTitleFormatter, formatter: this.publishedOnFormatter },
     ];
 
     const tableWidth =
@@ -188,7 +226,7 @@ export class ProposalListTable extends React.Component<Props> {
         .reduce((accumulator, currentValue) => accumulator + parseInt(currentValue.style.width, 0), 0);
 
     return (
-      <ReactBootstrapTable width={tableWidth} keyField="title" columns={columns} data={data} />
+      <ReactBootstrapTable id="test" width={tableWidth} keyField="title" columns={columns} data={data} />
     );
   }
 }
