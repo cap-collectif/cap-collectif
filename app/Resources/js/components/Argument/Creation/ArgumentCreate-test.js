@@ -3,13 +3,13 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { ArgumentCreate } from './ArgumentCreate';
-import { formMock, $refType } from '../../../mocks';
+import { formMock } from '../../../mocks';
 
 describe('<ArgumentCreate />', () => {
   const props = {
     ...formMock,
     type: 'FOR',
-    argumentable: { id: 'opinion1', $refType, contribuable: true },
+    argumentable: { id: 'opinion1', isContribuable: true },
     user: { id: 'user1' },
     submitting: false,
     form: 'create-argument',

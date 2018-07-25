@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
@@ -73,6 +74,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
     protected $reports;
 
     /**
+     * @var \DateTime
      * @Gedmo\Timestampable(on="change", field={"title", "body", "comment"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
@@ -115,9 +117,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
 
     public function getProject()
     {
-        return $this->getParent()
-            ->getStep()
-            ->getProject();
+        return $this->getParent()->getStep()->getProject();
     }
 
     public function getStep(): ?AbstractStep
@@ -229,16 +229,27 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getSources()
     {
         return $this->sources;
     }
 
+    /**
+     * @param mixed $sources
+     */
     public function setSources($sources)
     {
         $this->sources = $sources;
     }
 
+    /**
+     * @param $source
+     *
+     * @return $this
+     */
     public function addSource($source)
     {
         if (!$this->sources->contains($source)) {
@@ -248,6 +259,11 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         return $this;
     }
 
+    /**
+     * @param $source
+     *
+     * @return $this
+     */
     public function removeSource($source)
     {
         $this->sources->removeElement($source);
@@ -255,12 +271,18 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         return $this;
     }
 
-    public function getSourcesCount(): int
+    /**
+     * @return mixed
+     */
+    public function getSourcesCount()
     {
         return $this->sourcesCount;
     }
 
-    public function setSourcesCount(int $sourcesCount)
+    /**
+     * @param mixed $sourcesCount
+     */
+    public function setSourcesCount($sourcesCount)
     {
         $this->sourcesCount = $sourcesCount;
     }

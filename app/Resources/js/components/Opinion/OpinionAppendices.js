@@ -1,38 +1,45 @@
 // @flow
 import * as React from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import OpinionAppendix from './OpinionAppendix';
-import type { OpinionAppendices_opinion } from './__generated__/OpinionAppendices_opinion.graphql';
 
-type Props = { opinion: OpinionAppendices_opinion };
+type Props = { opinion: Object };
 
 class OpinionAppendices extends React.Component<Props> {
+  isVersion = () => {
+    const { opinion } = this.props;
+    return !!opinion.parent;
+  };
+
+  hasAppendices = () => {
+    const { opinion } = this.props;
+    const appendices = this.isVersion() ? opinion.parent.appendices : opinion.appendices;
+    if (!appendices) {
+      return false;
+    }
+    return appendices.some((app: Object) => {
+      return !!app.body;
+    });
+  };
+
   render() {
-    const opinion = this.props.opinion;
-    if (!opinion) {
-      return;
-    }
-    let appendices = opinion.__typename === 'Version' ? opinion.parent.appendices : [];
-    if (opinion.__typename === 'Opinion') {
-      appendices = opinion.appendices;
-    }
-    if (!appendices || appendices.length === 0) {
+    if (!this.hasAppendices()) {
       return null;
     }
+    const opinion = this.props.opinion;
+    const appendices = this.isVersion() ? opinion.parent.appendices : opinion.appendices;
 
     return (
       <div className="opinion__description">
-        {opinion.__typename === 'Version' ? (
+        {this.isVersion() ? (
           <p>
-            <FormattedMessage id="opinion.version_parent" />
-            <a href={opinion.parent.url}>{opinion.parent.title}</a>
+            {<FormattedMessage id="opinion.version_parent" />}
+            <a href={opinion.parent._links.show}>{opinion.parent.title}</a>
           </p>
         ) : null}
         {appendices.map((appendix, index) => {
-          if (appendix && appendix.body) {
+          if (appendix.body) {
             return (
-              // $FlowFixMe
               <OpinionAppendix
                 key={index}
                 appendix={appendix}
@@ -47,27 +54,4 @@ class OpinionAppendices extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(OpinionAppendices, {
-  opinion: graphql`
-    fragment OpinionAppendices_opinion on OpinionOrVersion {
-      __typename
-      ... on Opinion {
-        id
-        appendices {
-          body
-          ...OpinionAppendix_appendix
-        }
-      }
-      ... on Version {
-        parent {
-          title
-          url
-          appendices {
-            body
-            ...OpinionAppendix_appendix
-          }
-        }
-      }
-    }
-  `,
-});
+export default OpinionAppendices;

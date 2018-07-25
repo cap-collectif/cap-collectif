@@ -1,25 +1,24 @@
 // @flow
 import * as React from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Button, Panel } from 'react-bootstrap';
-import type { OpinionAppendix_appendix } from './__generated__/OpinionAppendix_appendix.graphql';
 
 type Props = {
-  appendix: OpinionAppendix_appendix,
+  appendix: Object,
   expanded?: boolean,
 };
 
 type State = {
-  expanded: boolean,
+  expanded?: boolean,
 };
 
 class OpinionAppendix extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     const { expanded } = props;
+
     this.state = {
-      expanded: !!expanded,
+      expanded: expanded !== 'undefined' ? expanded : false,
     };
   }
 
@@ -75,20 +74,20 @@ class OpinionAppendix extends React.Component<Props, State> {
               <FormattedMessage
                 id="opinion.appendices.hide"
                 values={{
-                  title: appendix.appendixType.title,
+                  title: this.props.appendix.type.title,
                 }}
               />
             ) : (
               <FormattedMessage
                 id="opinion.appendices.show"
                 values={{
-                  title: appendix.appendixType.title,
+                  title: this.props.appendix.type.title,
                 }}
               />
             )
           }>
           {this.renderCaret()}
-          {` ${appendix.appendixType.title}`}
+          {` ${appendix.type.title}`}
         </Button>
         {this.renderContent()}
       </div>
@@ -96,13 +95,4 @@ class OpinionAppendix extends React.Component<Props, State> {
   }
 }
 
-export default createFragmentContainer(OpinionAppendix, {
-  appendix: graphql`
-    fragment OpinionAppendix_appendix on Appendix {
-      body
-      appendixType {
-        title
-      }
-    }
-  `,
-});
+export default OpinionAppendix;

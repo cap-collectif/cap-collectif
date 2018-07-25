@@ -5,7 +5,6 @@ WithProposals:
     fields:
       proposals:
         type: 'ProposalConnection!'
-        argsBuilder: "Relay::Connection"
         args:
           district:
             type: 'ID'
@@ -35,3 +34,17 @@ WithProposals:
           affiliations:
             type: '[ProposalAffiliation]'
             description: 'Affiliation options for proposals returned from the connection.'
+          after:
+            type: 'String'
+            description: 'Returns the elements in the list that come after the specified global ID.'
+          first:
+            type: 'Int'
+            defaultValue: 20
+            description: 'Returns the first n elements from the list.'
+          before:
+            type: 'String'
+            description:
+              'Returns the elements in the list that come before the specified global ID.'
+          last:
+            type: 'Int'
+            description: 'Returns the last n elements from the list.'

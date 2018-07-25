@@ -9,8 +9,6 @@ Consultation:
         resolve: 'consultation'
       id:
         description: 'The id of the consultation.'
-      opinionCountShownBySection:
-        type: "Int"
       project:
         type: 'Project!'
         description: 'The project'
@@ -19,10 +17,6 @@ Consultation:
         description: 'The id of the related project.'
       title:
         description: 'The title of the consultation.'
-      titleHelpText:
-        type: 'String'
-      descriptionHelpText:
-        type: 'String'
       contribuable:
         type: 'Boolean!'
         description: 'Contributions are allowed right now.'
