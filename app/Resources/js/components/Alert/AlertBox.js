@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { FormattedHTMLMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import AlertStore from '../../stores/AlertStore';
 import AlertAutoDismissable from './AlertAutoDismissable';
 
@@ -43,7 +43,7 @@ class AlertBox extends React.Component<Props, State> {
 
     return (
       <AlertAutoDismissable onDismiss={this.handleDismiss} bsStyle={alert.bsStyle}>
-        <FormattedHTMLMessage id={alert.content} values={alert.values} />
+        <FormattedMessage id={alert.content} />
       </AlertAutoDismissable>
     );
   }

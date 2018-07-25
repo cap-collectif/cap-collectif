@@ -1117,10 +1117,11 @@ type MediaQuestion implements Question {
   helpText: String
   description: String
   kind: String!
+  slug: String!
+  participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
   isOtherAllowed: Boolean!
   choices: [QuestionChoice!]
   validationRule: MultipleChoiceQuestionValidationRule
-  slug: String!
 }
 
 # A response
@@ -1142,10 +1143,11 @@ type MultipleChoiceQuestion implements Question {
   helpText: String
   description: String
   kind: String!
+  slug: String!
+  participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
   isOtherAllowed: Boolean!
   choices: [QuestionChoice!]
   validationRule: MultipleChoiceQuestionValidationRule
-  slug: String!
 }
 
 # Multiple Choice Question Validation Rule
@@ -2166,6 +2168,10 @@ interface Question {
   description: String
   kind: String!
   slug: String!
+  participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
+  isOtherAllowed: Boolean!
+  choices: [QuestionChoice!]
+  validationRule: MultipleChoiceQuestionValidationRule
 }
 
 # A possible choice of a question
@@ -2214,6 +2220,7 @@ type Questionnaire implements Node {
   phoneConfirmationRequired: Boolean!
   questions: [Question!]!
   viewerReplies: [Reply!]!
+  participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
 }
 
 input QuestionnaireAbstractQuestionInput {
@@ -2653,10 +2660,11 @@ type SimpleQuestion implements Question {
   helpText: String
   description: String
   kind: String!
+  slug: String!
+  participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
   isOtherAllowed: Boolean!
   choices: [QuestionChoice!]
   validationRule: MultipleChoiceQuestionValidationRule
-  slug: String!
 }
 
 # A source

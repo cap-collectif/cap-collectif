@@ -1,9 +1,10 @@
 <?php
-
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Console\Question\Question;
 
 /**
  * AbstractQuestionRepository.
@@ -19,10 +20,18 @@ class AbstractResponseRepository extends EntityRepository
             ->addSelect('question')
             ->leftJoin('r.question', 'question')
             ->andWhere('r.reply = :reply')
-            ->setParameter('reply', $replyId)
-        ;
-
+            ->setParameter('reply', $replyId);
         return $qb->getQuery()->getArrayResult();
+    }
+
+    public function countByQuestion(AbstractQuestion $question)
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->select('COUNT(r.id) as responseCount')
+            ->leftJoin('r.question', 'question')
+            ->andWhere('question.id = :question')
+            ->setParameter('question', $question);
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
     public function getByProposal(Proposal $proposal, bool $showPrivate = false)
@@ -33,13 +42,9 @@ class AbstractResponseRepository extends EntityRepository
             ->leftJoin('question.questionnaireAbstractQuestion', 'questionnaire_abstract_question')
             ->andWhere('r.proposal = :proposal')
             ->orderBy('questionnaire_abstract_question.position', 'ASC')
-            ->setParameter('proposal', $proposal->getId())
-        ;
-
+            ->setParameter('proposal', $proposal->getId());
         if (!$showPrivate) {
-            $qb
-                ->andWhere('question.private = false')
-            ;
+            $qb->andWhere('question.private = false');
         }
 
         return $qb->getQuery()->getResult();

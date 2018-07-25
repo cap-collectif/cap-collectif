@@ -27,3 +27,7 @@ Questionnaire:
         access: '@=isAuthenticated()'
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireViewerRepliesResolver", [value, getUser()])'
+      participants:
+        type: 'ParticipantConnection!'
+        argsBuilder: 'Relay::Connection'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireParticipantsResolver", [value, args])'

@@ -10,7 +10,6 @@ import {
 import { graphql, createFragmentContainer } from 'react-relay';
 import { Row, Col, Popover, OverlayTrigger } from 'react-bootstrap';
 import { Field } from 'redux-form';
-import moment from 'moment';
 import toggle from '../../Form/Toggle';
 import ProposalDetailEstimation from '../../Proposal/Detail/ProposalDetailEstimation';
 import type { ProposalUserVoteItem_vote } from './__generated__/ProposalUserVoteItem_vote.graphql';
@@ -136,19 +135,13 @@ export class ProposalUserVoteItem extends React.Component<Props> {
                   values={{
                     date: (
                       <FormattedDate
-                        value={moment(vote.createdAt)}
+                        value={vote.createdAt}
                         day="numeric"
                         month="long"
                         year="numeric"
                       />
                     ),
-                    time: (
-                      <FormattedTime
-                        value={moment(vote.createdAt)}
-                        hour="numeric"
-                        minute="numeric"
-                      />
-                    ),
+                    time: <FormattedTime value={vote.createdAt} hour="numeric" minute="numeric" />,
                   }}
                 />
               ) : (
