@@ -86,6 +86,7 @@ export default createFragmentContainer(container, {
   sourceable: graphql`
     fragment OpinionSourceButtons_sourceable on Sourceable {
       ...OpinionSourceFormModal_sourceable
+      ...OpinionSourceReportButton_sourceable
     }
   `,
 });

@@ -27,27 +27,27 @@ class OpinionPreviewCounters extends React.Component<Props> {
         />,
       );
     }
-    if (opinion.__typename === 'Opinion' && section.versionable) {
+    if (opinion.__typename === 'Opinion' && section.versionable && opinion.versions) {
       counters.push(
-        <FormattedMessage id="global.versions" values={{ num: opinion.versionsCount }} />,
+        <FormattedMessage id="global.versions" values={{ num: opinion.versions.totalCount }} />,
       );
     }
-    if (section.commentSystem !== COMMENT_SYSTEM_NONE) {
+    if (section.commentSystem !== COMMENT_SYSTEM_NONE && opinion.arguments) {
       counters.push(
         <FormattedMessage
           id="global.arguments"
           values={{
-            num: opinion.argumentsCount,
+            num: opinion.arguments.totalCount,
           }}
         />,
       );
     }
-    if (section.sourceable) {
+    if (section.sourceable && opinion.sources) {
       counters.push(
         <FormattedMessage
           id="global.sources"
           values={{
-            num: opinion.sourcesCount,
+            num: opinion.sources.totalCount,
           }}
         />,
       );
@@ -70,9 +70,15 @@ export default createFragmentContainer(OpinionPreviewCounters, {
         votes(first: 0) {
           totalCount
         }
-        sourcesCount
-        argumentsCount
-        versionsCount
+        sources(first: 0) {
+          totalCount
+        }
+        arguments(first: 0) {
+          totalCount
+        }
+        versions(first: 0) {
+          totalCount
+        }
         section {
           voteWidgetType
           commentSystem
@@ -85,8 +91,12 @@ export default createFragmentContainer(OpinionPreviewCounters, {
         votes(first: 0) {
           totalCount
         }
-        sourcesCount
-        argumentsCount
+        sources(first: 0) {
+          totalCount
+        }
+        arguments(first: 0) {
+          totalCount
+        }
         section {
           voteWidgetType
           commentSystem

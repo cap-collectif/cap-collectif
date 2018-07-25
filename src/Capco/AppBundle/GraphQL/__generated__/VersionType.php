@@ -326,58 +326,6 @@ final class VersionType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'argumentsCount' => [
-                    'type' => Type::nonNull(Type::int()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'Number of arguments.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'argumentsCountFor' => [
-                    'type' => Type::nonNull(Type::int()),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["proposition_argumentsCountFor", array(0 => $value)]);
-                    },
-                    'description' => 'Number of for arguments.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'argumentsCountAgainst' => [
-                    'type' => Type::nonNull(Type::int()),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["proposition_argumentsCountAgainst", array(0 => $value)]);
-                    },
-                    'description' => 'Number of against arguments.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'sourcesCount' => [
-                    'type' => Type::nonNull(Type::int()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'Number of sources.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'votes' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('VersionVoteConnection')),
                     'args' => [

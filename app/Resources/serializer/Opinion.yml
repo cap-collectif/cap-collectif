@@ -27,42 +27,12 @@ Capco\AppBundle\Entity\Opinion:
             type: DateTime
             serialized_name: updatedAt
             groups: [Opinions, OpinionLinkPreviews, Elasticsearch]
-        versionsCount:
-            expose: true
-            type: integer
-            serialized_name: versionsCount
-            groups: [Opinions, OpinionLinkPreviews]
-        argumentsCount:
-            expose: true
-            type: integer
-            serialized_name: argumentsCount
-            groups: [Opinions, OpinionLinkPreviews]
-        sourcesCount:
-            expose: true
-            type: integer
-            serialized_name: sourcesCount
-            groups: [Opinions, OpinionLinkPreviews]
         appendices:
             expose: true
             groups: [Opinions, OpinionVersions]
         votes:
             expose: true
             groups: [Opinions]
-        votesCountNok:
-            expose: true
-            type: integer
-            serialized_name: votesCountNok
-            groups: [Opinions, OpinionLinkPreviews]
-        votesCountOk:
-            expose: true
-            type: integer
-            serialized_name: votesCountOk
-            groups: [Opinions, OpinionLinkPreviews]
-        votesCountMitige:
-            expose: true
-            type: integer
-            serialized_name: votesCountMitige
-            groups: [Opinions, OpinionLinkPreviews]
         arguments:
             expose: true
             groups: [Opinions]

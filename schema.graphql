@@ -1451,21 +1451,6 @@ type Opinion implements Node & Argumentable & Sourceable & Reportable & Contribu
   # true if the contribution is expired.
   expired: Boolean!
   published: Boolean!
-
-  # Number of arguments.
-  argumentsCount: Int!
-
-  # Number of for arguments.
-  argumentsCountFor: Int!
-
-  # Number of against arguments.
-  argumentsCountAgainst: Int!
-
-  # Number of versions.
-  versionsCount: Int!
-
-  # Number of sources.
-  sourcesCount: Int!
   step: Consultation!
 
   # The viewer vote.
@@ -3418,18 +3403,6 @@ type Version implements Node & Contribution & Sourceable & Reportable & Argument
 
   # Explenation.
   comment: String
-
-  # Number of arguments.
-  argumentsCount: Int!
-
-  # Number of for arguments.
-  argumentsCountFor: Int!
-
-  # Number of against arguments.
-  argumentsCountAgainst: Int!
-
-  # Number of sources.
-  sourcesCount: Int!
   votes(
     after: String
     first: Int

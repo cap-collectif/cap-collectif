@@ -223,8 +223,8 @@ EOF;
         'contributions_votesCountMitige' => 'votesMitige.totalCount',
         'contributions_votesCountNok' => 'votesNo.totalCount',
         'contributions_argumentsCount' => 'arguments.totalCount',
-        'contributions_argumentsCountFor' => 'argumentsCountFor',
-        'contributions_argumentsCountAgainst' => 'argumentsCountAgainst',
+        'contributions_argumentsCountFor' => 'argumentsFor.totalCount',
+        'contributions_argumentsCountAgainst' => 'argumentsAgainst.totalCount',
         'contributions_sourcesCount' => 'sources.totalCount',
         'contributions_versionsCount' => 'versions.totalCount',
         'contributions_arguments_related_id' => 'related.id',
@@ -412,8 +412,12 @@ ${sourceFragment}
             votesNo: votes(first: 0, value: NO) {
                 totalCount
             }
-            argumentsCountFor
-            argumentsCountAgainst
+            argumentsFor: arguments(first: 0, type: FOR) {
+                totalCount
+            }
+            argumentsAgainst: arguments(first: 0, type: AGAINST) {
+                totalCount
+            }
             votes {
                 totalCount
                 edges {
@@ -482,8 +486,12 @@ ${sourceFragment}
                         votesNo: votes(first: 0, value: NO) {
                             totalCount
                         }
-                        argumentsCountFor
-                        argumentsCountAgainst
+                        argumentsFor: arguments(first: 0, type: FOR) {
+                            totalCount
+                        }
+                        argumentsAgainst: arguments(first: 0, type: AGAINST) {
+                            totalCount
+                        }
                         arguments {
                           totalCount
                           edges {

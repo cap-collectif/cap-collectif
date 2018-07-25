@@ -409,11 +409,17 @@ EOF;
               votes(first: 0) {
                 totalCount
               }
-              argumentsCount
               argumentsCountFor
               argumentsCountAgainst
-              sourcesCount
-              versionsCount
+              arguments(first: 0) {
+                totalCount
+              }
+              sources(first: 0) {
+                totalCount
+              }
+              versions(first: 0) {
+                totalCount
+              }
             }
           }
         }
@@ -449,13 +455,17 @@ EOF;
               trashed
               trashedAt
               trashedReason
-              votes {
+              votes(first: 0) {
                 totalCount
               }
-              argumentsCount
+              arguments(first: 0) {
+                totalCount
+              }
               argumentsCountFor
               argumentsCountAgainst
-              sourcesCount
+              sources(first: 0) {
+                totalCount
+              }
             }
           }
         }

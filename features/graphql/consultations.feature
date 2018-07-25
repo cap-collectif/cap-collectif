@@ -62,9 +62,6 @@ Scenario: GraphQL client wants to list consultations
       title
       createdAt
       updatedAt
-      versionsCount
-      sourcesCount
-      argumentsCount
       author {
       vip
       displayName
@@ -95,9 +92,6 @@ Scenario: GraphQL client wants to list consultations
               "title": "Opinion 51",
               "createdAt": @string@,
               "updatedAt": @string@,
-              "versionsCount": 1,
-              "sourcesCount": 0,
-              "argumentsCount": 2,
               "author": {
                  "vip": false,
                  "displayName": "user",

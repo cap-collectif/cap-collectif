@@ -20,20 +20,6 @@ Version:
             comment:
                 type: "String"
                 description: "Explenation."
-            argumentsCount:
-                type: "Int!"
-                description: "Number of arguments."
-            argumentsCountFor:
-                type: "Int!"
-                description: "Number of for arguments."
-                resolve: "@=resolver('proposition_argumentsCountFor', [value])"
-            argumentsCountAgainst:
-                type: "Int!"
-                description: "Number of against arguments."
-                resolve: "@=resolver('proposition_argumentsCountAgainst', [value])"
-            sourcesCount:
-                type: "Int!"
-                description: "Number of sources."
             votes:
                 type: "VersionVoteConnection!"
                 argsBuilder: "Relay::Connection"

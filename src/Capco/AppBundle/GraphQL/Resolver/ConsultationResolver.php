@@ -250,16 +250,6 @@ class ConsultationResolver implements ContainerAwareInterface
         return $object->getTrashedAt() ? $object->getTrashedAt()->format(\DateTime::ATOM) : null;
     }
 
-    public function resolveArgumentsCountFor(OpinionContributionInterface $opinion)
-    {
-        return $opinion->getArgumentForCount();
-    }
-
-    public function resolveArgumentsCountAgainst(OpinionContributionInterface $opinion)
-    {
-        return $opinion->getArgumentAgainstCount();
-    }
-
     public function resolveReportingType(Reporting $reporting): int
     {
         return $reporting->getStatus();
