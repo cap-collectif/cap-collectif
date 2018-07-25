@@ -4,8 +4,6 @@ import std;
 backend default {
   .host = "localhost";
   .port = "8080";
-  .connect_timeout = 15s;
-  .between_bytes_timeout = 15s;
 }
 
 acl invalidators {

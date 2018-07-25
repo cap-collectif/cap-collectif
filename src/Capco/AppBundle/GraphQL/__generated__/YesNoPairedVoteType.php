@@ -83,18 +83,6 @@ final class YesNoPairedVoteType extends InterfaceType implements GeneratedTypeIn
                     'public' => null,
                     'access' => null,
                 ],
-                'related' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('Contribution'),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
             ];
             },
             'resolveType' => function ($value, $context, ResolveInfo $info) use ($globalVariable) {

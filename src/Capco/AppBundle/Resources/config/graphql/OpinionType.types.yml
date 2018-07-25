@@ -1,0 +1,86 @@
+OpinionType:
+  type: object
+  inherits: [Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
+  config:
+    description: 'A type of opinion'
+    interfaces: [Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
+    fields:
+      createdAt:
+        type: 'DateTime!'
+        description: 'Identifies the date and time when the object was created.'
+      show_url:
+        resolve: "@=resolver('proposition_url', [value])"
+      url:
+        resolve: "@=resolver('proposition_url', [value])"
+      type:
+        type: 'OpinionType!'
+      expired:
+        type: 'Boolean!'
+      published:
+        type: 'Boolean!'
+      votesCount:
+        type: 'Int!'
+        description: 'Number of votes.'
+        resolve: "@=resolver('proposition_votesCount', [value])"
+      votesCountOk:
+        type: 'Int!'
+        description: 'Number of ok votes.'
+      votesCountMitige:
+        type: 'Int!'
+        description: 'Number of mitige votes.'
+      votesCountNok:
+        type: 'Int!'
+        description: 'Number of negative votes.'
+      argumentsCount:
+        type: 'Int!'
+        description: 'Number of arguments.'
+      argumentsCountFor:
+        type: 'Int!'
+        description: 'Number of for arguments.'
+        resolve: "@=resolver('proposition_argumentsCountFor', [value])"
+      argumentsCountAgainst:
+        type: 'Int!'
+        description: 'Number of against arguments.'
+        resolve: "@=resolver('proposition_argumentsCountAgainst', [value])"
+      versionsCount:
+        type: 'Int!'
+        description: 'Number of versions.'
+      sourcesCount:
+        type: 'Int!'
+        description: 'Number of sources.'
+      votes:
+        type: '[OpinionVote]'
+        args:
+          first:
+            type: 'Int'
+        resolve: "@=resolver('proposition_votes', [value, args])"
+      kind:
+        resolve: 'opinionType'
+      title:
+        type: 'String!'
+        description: 'The title of the contribution.'
+      body:
+        type: 'String!'
+        description: 'The content of the contribution.'
+      arguments:
+        type: '[Argument]'
+        args:
+          type:
+            description:
+              'If omitted, returns all arguments. If provided, returns the arguments of this particular type.'
+            type: 'ArgumentValue'
+        description: 'The arguments related to the contribution.'
+        resolve: "@=resolver('proposition_arguments', [value, args])"
+      versions:
+        type: '[Version]'
+        description: 'The versions related to the contribution.'
+      sources:
+        type: '[Source]'
+        description: 'The sources related to the contribution.'
+      section:
+        type: 'Section!'
+        description: 'Where the proposition has been placed.'
+        resolve: "@=resolver('proposition_section', [value])"
+      reportings:
+        type: '[Reporting]'
+        resolve: "@=resolver('proposition_reportings', [value])"

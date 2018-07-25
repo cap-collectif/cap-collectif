@@ -14,7 +14,7 @@ Scenario: GraphQL client wants to retrieve his evaluations
               title
             }
           }
-          proposals(first: 10, affiliations: [EVALUER]) {
+          proposals(affiliations: [EVALUER]) {
             totalCount
             edges {
               node {

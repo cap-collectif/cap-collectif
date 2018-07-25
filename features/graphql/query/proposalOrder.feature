@@ -9,7 +9,7 @@ Scenario: GraphQL client want to order proposals by COMMENTS
     "query": "query node ($proposalForm: ID!){
       proposalForm: node(id: $proposalForm) {
         ... on ProposalForm {
-          proposals(first: 10, orderBy: {field: COMMENTS, direction: DESC}) {
+          proposals(orderBy: {field: COMMENTS, direction: DESC}) {
             edges {
               node {
                 id
@@ -84,7 +84,7 @@ Scenario: GraphQL client want to randomize proposals
     "query": "query node ($proposalForm: ID!){
       proposalForm: node(id: $proposalForm) {
         ... on ProposalForm {
-          proposals(first: 10, orderBy: {field: RANDOM, direction: DESC}) {
+          proposals(orderBy: {field: RANDOM, direction: DESC}) {
             edges {
               node {
                 id
@@ -108,7 +108,7 @@ Scenario: GraphQL client want to randomize proposals
     "query": "query node ($proposalForm: ID!){
       proposalForm: node(id: $proposalForm) {
         ... on ProposalForm {
-          proposals(first: 10, orderBy: {field: RANDOM, direction: DESC}) {
+          proposals(orderBy: {field: RANDOM, direction: DESC}) {
             edges {
               node {
                 id

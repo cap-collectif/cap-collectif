@@ -16,10 +16,7 @@ describe('<Section />', () => {
       subtitle: 'subtitle',
       title: 'title',
     },
-    consultation: {
-      $fragmentRefs,
-      $refType,
-    },
+    consultation: {},
     level: 0,
   };
 

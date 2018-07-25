@@ -1,4 +1,4 @@
-@followProposal
+@proposal_follow @proposal_follow_graphql
 Feature: Follow Proposals
 
 @database

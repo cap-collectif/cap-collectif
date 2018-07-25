@@ -37,8 +37,13 @@
                   {% endfor %}
                   {{ react_render_component('NewOpinionApp', {
                     'props': {
-                      'sectionId': opinionType.id,
-                      'consultationId': currentStep.id,
+                      'opinionType': {
+                        'id': opinionType.id,
+                        'slug': opinionType.slug,
+                        'appendixTypes': appendixTypes
+                      },
+                      'projectId': project.id,
+                      'stepId': currentStep.id,
                       'label': buttonLabel | trans({}, 'CapcoAppBundle')
                     },
                     })
