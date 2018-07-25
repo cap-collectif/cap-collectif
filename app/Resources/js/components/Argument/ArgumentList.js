@@ -3,15 +3,16 @@ import * as React from 'react';
 import { Panel } from 'react-bootstrap';
 import { connect, type MapStateToProps } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
+import { QueryRenderer, createFragmentContainer, graphql, type ReadyState } from 'react-relay';
 import Input from '../Form/Input';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import ArgumentListView, { type ArgumentOrder } from './ArgumentListView';
 import Loader from '../Ui/Loader';
-import type ArgumentListQueryResponse from './__generated__/ArgumentListQuery.graphql';
+import type { ArgumentListQueryResponse } from './__generated__/ArgumentListQuery.graphql';
+import type { ArgumentList_argumentable } from './__generated__/ArgumentList_argumentable.graphql';
 
 type Props = {
-  argumentable: { id: string },
+  argumentable: ArgumentList_argumentable,
   isAuthenticated: boolean,
   type: 'FOR' | 'AGAINST' | 'SIMPLE',
 };
@@ -42,7 +43,7 @@ export class ArgumentList extends React.Component<Props, State> {
             query ArgumentListQuery(
               $argumentableId: ID!
               $isAuthenticated: Boolean!
-              $type: ArgumentValue
+              $type: ArgumentValue!
               $count: Int
               $cursor: String
               $orderBy: ArgumentOrder
@@ -69,12 +70,15 @@ export class ArgumentList extends React.Component<Props, State> {
             argumentableId: this.props.argumentable.id,
             type,
           }}
-          render={({ error, props }: ReadyState & { props?: ArgumentListQueryResponse }) => {
+          render={({ error, props }: ReadyState & { props?: ?ArgumentListQueryResponse }) => {
             if (error) {
               return graphqlError;
             }
             if (props) {
               const argumentable = props.argumentable;
+              if (!argumentable) {
+                return graphqlError;
+              }
               const totalCount = argumentable.allArguments.totalCount;
               const htmlFor = `filter-arguments-${type}`;
               return (
@@ -135,4 +139,10 @@ const mapStateToProps: MapStateToProps<*, *, *> = state => ({
 });
 const container = connect(mapStateToProps)(ArgumentList);
 
-export default container;
+export default createFragmentContainer(container, {
+  argumentable: graphql`
+    fragment ArgumentList_argumentable on Argumentable {
+      id
+    }
+  `,
+});

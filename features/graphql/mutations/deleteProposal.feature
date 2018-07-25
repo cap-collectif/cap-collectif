@@ -1,4 +1,4 @@
-@proposal @delete_proposal
+@deleteProposal
 Feature: Delete proposal
 
 @security

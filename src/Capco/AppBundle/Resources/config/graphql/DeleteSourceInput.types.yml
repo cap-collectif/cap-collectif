@@ -1,0 +1,7 @@
+DeleteSourceInput:
+    type: relay-mutation-input
+    config:
+        description: "Input type of deleteSource."
+        fields:
+            sourceId:
+              type: "ID!"

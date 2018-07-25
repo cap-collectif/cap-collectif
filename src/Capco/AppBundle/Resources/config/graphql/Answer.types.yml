@@ -1,0 +1,16 @@
+Answer:
+    type: object
+    config:
+        description: "A contribution"
+        fields:
+            createdAt:
+                type: "DateTime!"
+                description: "Identifies the date and time when the object was created."
+            title:
+                type: "String!"
+                description: "Identifies the contribution title."
+            body:
+                type: "HTML!"
+                description: "Identifies the body of the contribution."
+            author:
+                type: "User"

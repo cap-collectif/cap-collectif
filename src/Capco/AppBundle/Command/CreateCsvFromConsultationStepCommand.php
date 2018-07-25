@@ -159,11 +159,11 @@ EOF;
         'contributions_arguments_trashedAt',
         'contributions_arguments_trashedReason',
         'contributions_arguments_votesCount',
-        'contributions_votes_id',
-        'contributions_votes_author_id',
-        'contributions_votes_value',
-        'contributions_votes_createdAt',
-        'contributions_votes_expired',
+        // 'contributions_votes_id',
+        // 'contributions_votes_author_id',
+        // 'contributions_votes_value',
+        // 'contributions_votes_createdAt',
+        // 'contributions_votes_expired',
         'contributions_reportings_related_id',
         'contributions_reportings_related_kind',
         'contributions_reportings_id',
@@ -171,19 +171,19 @@ EOF;
         'contributions_reportings_type',
         'contributions_reportings_body',
         'contributions_reportings_createdAt',
-        'contributions_sources_id',
-        'contributions_sources_related_id',
-        'contributions_sources_related_kind',
-        'contributions_sources_author_id',
-        'contributions_sources_trashed',
-        'contributions_sources_trashedAt',
-        'contributions_sources_trashedReason',
-        'contributions_sources_body',
-        'contributions_sources_createdAt',
-        'contributions_sources_updatedAt',
-        'contributions_sources_expired',
-        'contributions_sources_published',
-        'contributions_sources_votesCount',
+        // 'contributions_sources_id',
+        // 'contributions_sources_related_id',
+        // 'contributions_sources_related_kind',
+        // 'contributions_sources_author_id',
+        // 'contributions_sources_trashed',
+        // 'contributions_sources_trashedAt',
+        // 'contributions_sources_trashedReason',
+        // 'contributions_sources_body',
+        // 'contributions_sources_createdAt',
+        // 'contributions_sources_updatedAt',
+        // 'contributions_sources_expired',
+        // 'contributions_sources_published',
+        // 'contributions_sources_votesCount',
     ];
 
     protected const ARGUMENT_HEADER_MAP = [
@@ -218,15 +218,15 @@ EOF;
         'contributions_trashed' => 'trashed',
         'contributions_trashedAt' => 'trashedAt',
         'contributions_trashedReason' => 'trashedReason',
-        'contributions_votesCount' => 'votesCount',
-        'contributions_votesCountOk' => 'votesCountOk',
-        'contributions_votesCountMitige' => 'votesCountMitige',
-        'contributions_votesCountNok' => 'votesCountNok',
-        'contributions_argumentsCount' => 'argumentsCount',
-        'contributions_argumentsCountFor' => 'argumentsCountFor',
-        'contributions_argumentsCountAgainst' => 'argumentsCountAgainst',
-        'contributions_sourcesCount' => 'sourcesCount',
-        'contributions_versionsCount' => 'versionsCount',
+        'contributions_votesCount' => 'votes.totalCount',
+        'contributions_votesCountOk' => 'votesOk.totalCount',
+        'contributions_votesCountMitige' => 'votesMitige.totalCount',
+        'contributions_votesCountNok' => 'votesNo.totalCount',
+        'contributions_argumentsCount' => 'arguments.totalCount',
+        'contributions_argumentsCountFor' => 'argumentsFor.totalCount',
+        'contributions_argumentsCountAgainst' => 'argumentsAgainst.totalCount',
+        'contributions_sourcesCount' => 'sources.totalCount',
+        'contributions_versionsCount' => 'versions.totalCount',
         'contributions_arguments_related_id' => 'related.id',
         'contributions_arguments_related_kind' => 'related.kind',
         'contributions_arguments_id' => 'id',
@@ -308,6 +308,8 @@ EOF;
             $this->currentStep = $step;
             $this->generateSheet($step);
         }
+
+        $output->writeln('Done !');
     }
 
     protected function generateSheet(ConsultationStep $step): void
@@ -401,20 +403,38 @@ ${sourceFragment}
             expired
             published
             ...trashableInfos
-            votesCount
-            votesCountOk
-            votesCountMitige
-            votesCountNok
-            argumentsCount
-            argumentsCountFor
-            argumentsCountAgainst
-            sourcesCount
-            versionsCount
+            votesOk: votes(first: 0, value: YES) {
+                totalCount
+            }
+            votesMitige: votes(first: 0, value: MITIGE) {
+                totalCount
+            }
+            votesNo: votes(first: 0, value: NO) {
+                totalCount
+            }
+            argumentsFor: arguments(first: 0, type: FOR) {
+                totalCount
+            }
+            argumentsAgainst: arguments(first: 0, type: AGAINST) {
+                totalCount
+            }
             votes {
-              ...voteInfos
+                totalCount
+                edges {
+                    cursor
+                    node {
+                        ...voteInfos
+                    }
+                }
+                pageInfo {
+                    endCursor
+                    hasNextPage
+                }
             }
             arguments(first: ${argumentsPerPage}${argumentAfter}) {
+              totalCount
               edges {
+                cursor
                 node {
                   ...argumentInfos
                 }
@@ -425,50 +445,96 @@ ${sourceFragment}
               }
             }
             sources {
-              ...sourceInfos
+                totalCount
+                edges {
+                    cursor
+                    node {
+                      ...sourceInfos
+                    }
+                }
+                pageInfo {
+                    endCursor
+                    hasNextPage
+                }
             }
             reportings {
               ...reportInfos
             }
             versions {
-              ...relatedInfos
-              id
-              ...authorInfos
-              title
-              bodyText
-              comment
-              createdAt
-              updatedAt
-              url
-              expired
-              published
-              ...trashableInfos
-              votesCount
-              votesCountOk
-              votesCountMitige
-              votesCountNok
-              argumentsCount
-              argumentsCountFor
-              argumentsCountAgainst
-              sourcesCount
-              arguments {
+                totalCount
                 edges {
-                  node {
-                    ...argumentInfos
-                  }
+                    cursor
+                    node {
+                        ...relatedInfos
+                        id
+                        ...authorInfos
+                        title
+                        bodyText
+                        comment
+                        createdAt
+                        updatedAt
+                        url
+                        expired
+                        published
+                        ...trashableInfos
+                        votesOk: votes(first: 0, value: YES) {
+                          totalCount
+                        }
+                        votesMitige: votes(first: 0, value: MITIGE) {
+                            totalCount
+                        }
+                        votesNo: votes(first: 0, value: NO) {
+                            totalCount
+                        }
+                        argumentsFor: arguments(first: 0, type: FOR) {
+                            totalCount
+                        }
+                        argumentsAgainst: arguments(first: 0, type: AGAINST) {
+                            totalCount
+                        }
+                        arguments {
+                          totalCount
+                          edges {
+                            node {
+                              ...argumentInfos
+                            }
+                          }
+                          pageInfo {
+                            endCursor
+                            hasNextPage
+                          }
+                        }
+                        sources {
+                          totalCount
+                          edges {
+                            node {
+                              ...sourceInfos
+                            }
+                          }
+                          pageInfo {
+                              endCursor
+                              hasNextPage
+                          }
+                        }
+                        reportings {
+                          ...reportInfos
+                        }
+                        votes {
+                            totalCount
+                            edges {
+                                node {
+                                  ...voteInfos
+                                }
+                            }
+                            pageInfo {
+                              endCursor
+                              hasNextPage
+                            }
+                        }
+                    }
                 }
-              }
-              sources {
-                ...sourceInfos
-              }
-              reportings {
-                ...reportInfos
-              }
-              votes {
-                ...voteInfos
-              }
-            }   
-          }
+            }
+            }
           }
         }
       }
@@ -533,18 +599,18 @@ EOF;
         $this->writer->addRow($row);
 
         // we add Opinion's votes rows.
-        $votes = Arr::path($contribution, 'votes');
+        // $votes = Arr::path($contribution, 'votes');
 
-        foreach ($votes as $vote) {
-            $this->addContributionVotesRow($contribution, $vote);
-        }
+        // foreach ($votes as $vote) {
+        //     $this->addContributionVotesRow($contribution, $vote);
+        // }
 
         // we add Opinion's Sources rows.
-        $sources = Arr::path($contribution, 'sources');
+        // $sources = Arr::path($contribution, 'sources');
 
-        foreach ($sources as $source) {
-            $this->addContributionSourcesRow($contribution, $source);
-        }
+        // foreach ($sources as $source) {
+        //     $this->addContributionSourcesRow($contribution, $source);
+        // }
 
         $argumentsQuery = $this->getContributionsArgumentsGraphQLQuery($contribution['id']);
 

@@ -1,0 +1,14 @@
+AddVersionInput:
+    type: relay-mutation-input
+    config:
+        description: "Add a version to a specific opinion."
+        fields:
+            opinionId:
+              type: "ID!"
+              description: "The concerned opinion id."
+            title:
+              type: "String!"
+            body:
+              type: "String!"
+            comment:
+              type: "String"

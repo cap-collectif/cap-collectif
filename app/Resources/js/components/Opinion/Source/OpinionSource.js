@@ -1,44 +1,75 @@
 // @flow
 import * as React from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { graphql, createFragmentContainer } from 'react-relay';
+import { ListGroupItem } from 'react-bootstrap';
 import classNames from 'classnames';
-
 import UserAvatar from '../../User/UserAvatar';
 import OpinionInfos from '../OpinionInfos';
 import OpinionSourceTitle from './OpinionSourceTitle';
 import OpinionSourceContent from './OpinionSourceContent';
-import OpinionSourceFooter from './OpinionSourceFooter';
+import OpinionSourceButtons from './OpinionSourceButtons';
+import type { OpinionSource_source } from './__generated__/OpinionSource_source.graphql';
+import type { OpinionSource_sourceable } from './__generated__/OpinionSource_sourceable.graphql';
 
 type Props = {
-  source: Object,
+  source: OpinionSource_source,
+  sourceable: OpinionSource_sourceable,
 };
 
-class OpinionSource extends React.Component<Props> {
+export class OpinionSource extends React.Component<Props> {
   render() {
-    const { source } = this.props;
+    const { source, sourceable } = this.props;
     const classes = classNames({
       opinion: true,
       'block--bordered': true,
       'bg-vip': source.author && source.author.vip,
     });
     return (
-      <li className={classes} id={`source-${source.id}`}>
-        <Row>
-          <Col xs={12}>
-            <div className="opinion__body box">
-              <UserAvatar user={source.author} className="pull-left" />
-              <div className="opinion__data">
-                <OpinionInfos rankingThreshold={null} opinion={source} />
-                <OpinionSourceTitle source={source} />
-                <OpinionSourceContent source={source} />
-                <OpinionSourceFooter source={source} />
-              </div>
+      <ListGroupItem className={classes} id={`source-${source.id}`}>
+        <div className="opinion__body box">
+          <UserAvatar user={source.author} className="pull-left" />
+          <div className="opinion__data">
+            {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
+            <OpinionInfos rankingThreshold={null} opinion={source} />
+            {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
+            <OpinionSourceTitle source={source} />
+            {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
+            <OpinionSourceContent source={source} />
+            {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
+            <div className="opinion__votes excerpt small">
+              <OpinionSourceButtons sourceable={sourceable} source={source} />
             </div>
-          </Col>
-        </Row>
-      </li>
+          </div>
+        </div>
+      </ListGroupItem>
     );
   }
 }
 
-export default OpinionSource;
+export default createFragmentContainer(OpinionSource, {
+  source: graphql`
+    fragment OpinionSource_source on Source
+      @argumentDefinitions(isAuthenticated: { type: "Boolean" }) {
+      id
+      ...OpinionInfos_opinion
+      ...OpinionSourceTitle_source
+      ...OpinionSourceContent_source
+      ...OpinionSourceButtons_source @arguments(isAuthenticated: $isAuthenticated)
+      author {
+        id
+        displayName
+        vip
+        url
+        media {
+          url
+        }
+      }
+    }
+  `,
+  sourceable: graphql`
+    fragment OpinionSource_sourceable on Sourceable {
+      id
+      ...OpinionSourceButtons_sourceable
+    }
+  `,
+});
