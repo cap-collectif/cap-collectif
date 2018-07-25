@@ -21,7 +21,7 @@ Version:
                 type: "String"
                 description: "Explenation."
             votes:
-                type: "VersionVoteConnection!"
+                type: "YesNoPairedVoteConnection!"
                 argsBuilder: "Relay::Connection"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionVotesResolver", [value, args])'
                 args:

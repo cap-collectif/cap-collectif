@@ -77,19 +77,20 @@ class AddOpinionVoteMutation implements MutationInterface
         if ($contribution instanceof Opinion) {
             $previousVote = $this->opinionVoteRepo->findOneBy([
                 'user' => $viewer,
-                'opinion' => $opinion,
+                'opinion' => $contribution,
             ]);
         }
         if ($contribution instanceof OpinionVersion) {
             $previousVote = $this->versionVoteRepo->findOneBy([
                 'user' => $viewer,
-                'opinion' => $opinion,
+                'opinionVersion' => $contribution,
             ]);
         }
 
         $previousVoteId = null;
         if ($previousVote) {
-            $previousVoteId = GlobalId::toGlobalId('OpinionVote', $previousVote->getId());
+            $typeName = $contribution instanceof Opinion ? 'OpinionVote' : 'VersionVote';
+            $previousVoteId = GlobalId::toGlobalId($typeName, $previousVote->getId());
             $this->em->remove($previousVote);
             $this->em->flush();
         }
@@ -102,9 +103,7 @@ class AddOpinionVoteMutation implements MutationInterface
             $vote = (new OpinionVersionVote())->setOpinionVersion($contribution);
         }
 
-        //->setIpAddress($requestStack->getCurrentRequest()->getClientIp())
         $vote->setUser($viewer)->setValue($voteValue);
-        // $opinion->incrementVotesCountByType($vote->getValue());
 
         try {
             $this->em->persist($vote);

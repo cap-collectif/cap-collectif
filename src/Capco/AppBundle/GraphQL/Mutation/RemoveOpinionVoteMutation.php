@@ -2,6 +2,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Entity\Opinion;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Capco\AppBundle\Helper\RedisStorageHelper;
@@ -50,12 +51,12 @@ class RemoveOpinionVoteMutation implements MutationInterface
             throw new UserError('Uncontribuable opinion.');
         }
 
-        $vote = $this->opinionVoteRepo->findOneBy(['user' => $viewer, 'opinion' => $opinion]);
+        $vote = $this->opinionVoteRepo->findOneBy(['user' => $viewer, 'opinion' => $contribution]);
 
         if (!$vote) {
             $vote = $this->versionVoteRepo->findOneBy([
                 'user' => $viewer,
-                'opinionVersion' => $opinion,
+                'opinionVersion' => $contribution,
             ]);
         }
 
@@ -63,8 +64,8 @@ class RemoveOpinionVoteMutation implements MutationInterface
             throw new UserError('You have not voted for this opinion.');
         }
 
-        // $opinion->decrementVotesCountByType($vote->getValue());
-        $deletedVoteId = GlobalId::toGlobalId('OpinionVote', $vote->getId());
+        $typeName = $contribution instanceof Opinion ? 'OpinionVote' : 'VersionVote';
+        $deletedVoteId = GlobalId::toGlobalId($typeName, $vote->getId());
 
         $this->em->remove($vote);
         $this->em->flush();

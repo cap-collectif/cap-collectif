@@ -89,7 +89,7 @@ export default createFragmentContainer(OpinionVotesBar, {
         votesYes: votes(first: 0, value: YES) {
           totalCount
         }
-        previewVotes: votes(first: 5) {
+        previewVotes: votes(first: 5) @connection(key: "OpinionVotesBar_previewVotes") {
           totalCount
           edges {
             node {

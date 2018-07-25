@@ -327,7 +327,7 @@ final class VersionType extends ObjectType implements GeneratedTypeInterface
                     'access' => null,
                 ],
                 'votes' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('VersionVoteConnection')),
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('YesNoPairedVoteConnection')),
                     'args' => [
                         [
                             'name' => 'after',

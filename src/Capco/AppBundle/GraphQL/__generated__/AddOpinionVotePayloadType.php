@@ -23,7 +23,7 @@ final class AddOpinionVotePayloadType extends ObjectType implements GeneratedTyp
             'fields' => function () use ($globalVariable) {
                 return [
                 'vote' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('OpinionVote'),
+                    'type' => $globalVariable->get('typeResolver')->resolve('YesNoPairedVote'),
                     'args' => [
                     ],
                     'resolve' => null,
@@ -35,7 +35,7 @@ final class AddOpinionVotePayloadType extends ObjectType implements GeneratedTyp
                     'access' => null,
                 ],
                 'voteEdge' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('OpinionVoteEdge'),
+                    'type' => $globalVariable->get('typeResolver')->resolve('YesNoPairedVoteEdge'),
                     'args' => [
                     ],
                     'resolve' => null,

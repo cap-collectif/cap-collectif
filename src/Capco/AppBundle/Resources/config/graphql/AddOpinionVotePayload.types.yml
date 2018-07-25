@@ -3,9 +3,9 @@ AddOpinionVotePayload:
     config:
         fields:
             vote:
-                type: "OpinionVote"
+                type: "YesNoPairedVote"
             voteEdge:
-                type: "OpinionVoteEdge"
+                type: "YesNoPairedVoteEdge"
             viewer:
                 type: "User!"
             previousVoteId:

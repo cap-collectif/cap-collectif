@@ -11,19 +11,19 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
 /**
  * THIS FILE WAS GENERATED AND SHOULD NOT BE MODIFIED!
  */
-final class VersionVoteEdgeType extends ObjectType implements GeneratedTypeInterface
+final class YesNoPairedVoteEdgeType extends ObjectType implements GeneratedTypeInterface
 {
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
-            'name' => 'VersionVoteEdge',
+            'name' => 'YesNoPairedVoteEdge',
             'description' => 'An edge in a connection.',
             'fields' => function () use ($globalVariable) {
                 return [
                 'node' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('VersionVote'),
+                    'type' => $globalVariable->get('typeResolver')->resolve('YesNoPairedVote'),
                     'args' => [
                     ],
                     'resolve' => null,

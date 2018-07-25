@@ -57,9 +57,6 @@ const mutation = graphql`
           }
         }
       }
-      viewer {
-        id
-      }
     }
   }
 `;
@@ -71,7 +68,7 @@ const commit = (
     mutation,
     variables,
     configs: [
-      // If previous vote in preview, we remove it
+      // If the is previous vote, we remove it
       {
         type: 'NODE_DELETE',
         deletedIDFieldName: 'previousVoteId',

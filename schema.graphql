@@ -30,8 +30,8 @@ input AddOpinionVoteInput {
 }
 
 type AddOpinionVotePayload {
-  vote: OpinionVote
-  voteEdge: OpinionVoteEdge
+  vote: YesNoPairedVote
+  voteEdge: YesNoPairedVoteEdge
   viewer: User!
   previousVoteId: ID
   clientMutationId: String
@@ -1476,7 +1476,7 @@ type Opinion implements Node & Argumentable & Sourceable & Reportable & Contribu
 
     # Filters vote by value
     value: YesNoPairedVoteValue
-  ): OpinionVoteConnection!
+  ): YesNoPairedVoteConnection!
 
   # Identifies the contribution title.
   title: String!
@@ -1534,26 +1534,6 @@ type OpinionVote implements YesNoPairedVote {
 
   # Returns 'opinionVote'.
   kind: String!
-}
-
-# A connection to a list of items.
-type OpinionVoteConnection {
-  totalCount: Int!
-
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # Information to aid in pagination.
-  edges: [OpinionVoteEdge]
-}
-
-# An edge in a connection.
-type OpinionVoteEdge {
-  # The item at the end of the edge.
-  node: OpinionVote
-
-  # A cursor for use in pagination.
-  cursor: String!
 }
 
 # Possible directions in which to order a list of items when provided an orderBy argument.
@@ -3424,7 +3404,7 @@ type Version implements Node & Contribution & Sourceable & Reportable & Argument
 
     # Filters vote by value
     value: YesNoPairedVoteValue
-  ): VersionVoteConnection!
+  ): YesNoPairedVoteConnection!
 
   # The title of the contribution.
   title: String!
@@ -3506,26 +3486,6 @@ type VersionVote implements YesNoPairedVote {
   kind: String!
 }
 
-# A connection to a list of items.
-type VersionVoteConnection {
-  totalCount: Int!
-
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # Information to aid in pagination.
-  edges: [VersionVoteEdge]
-}
-
-# An edge in a connection.
-type VersionVoteEdge {
-  # The item at the end of the edge.
-  node: VersionVote
-
-  # A cursor for use in pagination.
-  cursor: String!
-}
-
 type Vote {
   id: ID!
 
@@ -3601,6 +3561,27 @@ interface YesNoPairedVote {
 
   # Date of vote.
   createdAt: DateTime!
+  related: Contribution
+}
+
+# A connection to a list of items.
+type YesNoPairedVoteConnection {
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [YesNoPairedVoteEdge]
+}
+
+# An edge in a connection.
+type YesNoPairedVoteEdge {
+  # The item at the end of the edge.
+  node: YesNoPairedVote
+
+  # A cursor for use in pagination.
+  cursor: String!
 }
 
 # 3 possible values

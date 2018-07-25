@@ -54,7 +54,10 @@ export class OpinionVotesButton extends React.Component<Props> {
     if (opinion.__typename === 'Version' || opinion.__typename === 'Opinion') {
       const input = { opinionId: opinion.id, value };
       AddOpinionVoteMutation.commit({ input })
-        .then(() => {
+        .then(res => {
+          if (!res.addOpinionVote) {
+            throw new Error('mutation failed');
+          }
           FluxDispatcher.dispatch({
             actionType: 'UPDATE_ALERT',
             alert: {
@@ -80,7 +83,10 @@ export class OpinionVotesButton extends React.Component<Props> {
     if (opinion.__typename === 'Version' || opinion.__typename === 'Opinion') {
       const input = { opinionId: opinion.id };
       RemoveOpinionVoteMutation.commit({ input })
-        .then(() => {
+        .then(res => {
+          if (!res.removeOpinionVote) {
+            throw new Error('mutation failed');
+          }
           FluxDispatcher.dispatch({
             actionType: 'UPDATE_ALERT',
             alert: {

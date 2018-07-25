@@ -353,7 +353,7 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                     'access' => null,
                 ],
                 'votes' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('OpinionVoteConnection')),
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('YesNoPairedVoteConnection')),
                     'args' => [
                         [
                             'name' => 'after',

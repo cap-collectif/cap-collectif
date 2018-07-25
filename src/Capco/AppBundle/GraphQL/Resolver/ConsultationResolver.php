@@ -6,6 +6,8 @@ use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\Entity\OpinionVote;
+use Capco\AppBundle\Entity\OpinionVersionVote;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionTypeAppendixType;
 use Capco\AppBundle\Entity\OpinionVersion;
@@ -37,8 +39,14 @@ class ConsultationResolver implements ContainerAwareInterface
         if ($data instanceof Opinion) {
             return $typeResolver->resolve('Opinion');
         }
+        if ($data instanceof OpinionVote) {
+            return $typeResolver->resolve('OpinionVote');
+        }
         if ($data instanceof OpinionVersion) {
             return $typeResolver->resolve('Version');
+        }
+        if ($data instanceof OpinionVersionVote) {
+            return $typeResolver->resolve('VersionVote');
         }
         if ($data instanceof Argument) {
             return $typeResolver->resolve('Argument');
