@@ -25,7 +25,7 @@ class OpinionVersionListViewPaginated extends React.Component<Props> {
     }
 
     return (
-      <ListGroup id="versions-list" className="media-list" style={{ marginTop: '20px' }}>
+      <ListGroup id="versions-list" className="list-group-custom">
         {opinion.versions.edges
           .filter(Boolean)
           .map(edge => edge.node)
