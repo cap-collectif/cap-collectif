@@ -322,31 +322,6 @@ class ConsultationResolver implements ContainerAwareInterface
         return $object->getUpdatedAt()->format(\DateTime::ATOM);
     }
 
-    public function resolveVersionVotes(OpinionVersion $version, Arg $argument)
-    {
-        return // ->setMaxResults(50)
-        $this->container->get('doctrine')
-            ->getManager()
-            ->createQuery(
-                'SELECT PARTIAL vote.{id, value, createdAt, expired}, PARTIAL author.{id} FROM CapcoAppBundle:OpinionVersionVote vote LEFT JOIN vote.user author WHERE vote.opinionVersion = \'' .
-                    $version->getId() .
-                    '\''
-            )
-            ->getArrayResult();
-    }
-
-    public function resolveVotesByContribution(Arg $argument)
-    {
-        return $this->container->get('doctrine')
-            ->getManager()
-            ->createQuery(
-                'SELECT PARTIAL vote.{id, value}, PARTIAL author.{id} FROM CapcoAppBundle:OpinionVote vote LEFT JOIN vote.user author WHERE vote.opinion = \'' .
-                    $argument->offsetGet('contribution') .
-                    '\''
-            )
-            ->getArrayResult();
-    }
-
     public function resolveContributionsByConsultation(Arg $argument)
     {
         return $this->container->get('capco.opinion.repository')->findBy([

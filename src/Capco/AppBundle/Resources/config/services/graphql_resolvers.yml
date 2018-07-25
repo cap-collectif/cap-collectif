@@ -256,7 +256,6 @@ services:
           alias: 'version_reportings',
           method: 'resolveVersionReportings',
         }
-      - { name: overblog_graphql.resolver, alias: 'version_votes', method: 'resolveVersionVotes' }
       - {
           name: overblog_graphql.resolver,
           alias: 'contribution_type',

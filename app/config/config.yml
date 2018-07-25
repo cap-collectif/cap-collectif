@@ -622,40 +622,19 @@ overblog_graphql:
       types:
           - Argument
           - CheckboxRequirement
-          # CollectStep,
-          # Comment,
-          # Consultation,
-          # Event,
           - FirstnameRequirement
-          # Group,
           - LastnameRequirement
-          # MediaQuestion,
+          - MediaQuestion
           - MediaResponse
           - MultipleChoiceQuestion
-          # Opinion,
           - OpinionOrVersion
-          # OpinionType,
-          # OpinionVote,
-          # OtherStep,
+          - OtherStep
           - PhoneRequirement
-          # PresentationStep,
-          # Project,
-          # Proposal,
-          # ProposalForm,
-          # ProposalVote,
-          # Questionnaire,
-          # QuestionnaireStep,
-          # RankingStep,
-          # Reply,
-          # Reporting,
-          # Section,
-          # SelectionStep,
-          # SimpleQuestion,
-          # SynthesisStep,
-          # User,
-          # Source,
+          - PresentationStep
+          - QuestionnaireStep
+          - RankingStep
+          - SimpleQuestion
           - ValueResponse
-          # Version,
           - VersionVote
 
 limenius_react:

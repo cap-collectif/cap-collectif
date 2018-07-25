@@ -1267,6 +1267,23 @@ type Media {
   providerReference: String!
 }
 
+# A media question
+type MediaQuestion implements Question {
+  id: String!
+  title: String!
+  type: QuestionTypeValue!
+  position: Int!
+  private: Boolean!
+  required: Boolean!
+  helpText: String
+  description: String
+  kind: String!
+  isOtherAllowed: Boolean!
+  choices: [QuestionChoice!]
+  validationRule: MultipleChoiceQuestionValidationRule
+  slug: String!
+}
+
 # A response
 type MediaResponse implements Response {
   question: Question!
@@ -1545,6 +1562,24 @@ enum OrderDirection {
   DESC
 }
 
+# A step in a project
+type OtherStep implements Step {
+  # The ID of the step
+  id: ID!
+
+  # The kind of the step
+  kind: String!
+
+  # The title of the step
+  title: String!
+
+  # The url of the step
+  show_url: String! @deprecated(reason: "Use url instead of show_url")
+
+  # The url of the step
+  url: String!
+}
+
 # Information about pagination in a connection.
 type PageInfo {
   # When paginating forwards, are there more items?
@@ -1638,6 +1673,24 @@ enum PostPublicationStatus {
 
 # A related content for a post
 union PostRelatedContent = Theme | Proposal | Project
+
+# A step in a project
+type PresentationStep implements Step {
+  # The ID of the step
+  id: ID!
+
+  # The kind of the step
+  kind: String!
+
+  # The title of the step
+  title: String!
+
+  # The url of the step
+  show_url: String! @deprecated(reason: "Use url instead of show_url")
+
+  # The url of the step
+  url: String!
+}
 
 # A budget contribution
 type ProgressStep {
@@ -2250,6 +2303,45 @@ input QuestionnaireAbstractQuestionInput {
   position: Int!
 }
 
+# A step in a project
+type QuestionnaireStep implements Node & Step {
+  # The ID of the step
+  id: ID!
+
+  # The kind of the step
+  kind: String!
+
+  # The title of the step
+  title: String!
+
+  # The url of the step
+  show_url: String! @deprecated(reason: "Use url instead of show_url")
+
+  # The url of the step
+  url: String!
+
+  # A list of contributor associated with the step.
+  contributors(after: String, first: Int, before: String, last: Int): UserConnection!
+}
+
+# A step in a project
+type RankingStep implements Step {
+  # The ID of the step
+  id: ID!
+
+  # The kind of the step
+  kind: String!
+
+  # The title of the step
+  title: String!
+
+  # The url of the step
+  show_url: String! @deprecated(reason: "Use url instead of show_url")
+
+  # The url of the step
+  url: String!
+}
+
 input RemoveOpinionVoteInput {
   # The Node ID of the opinion to unvote.
   opinionId: ID!
@@ -2639,6 +2731,23 @@ input SetEvaluationFormInProposalFormInput {
 type SetEvaluationFormInProposalFormPayload {
   proposalForm: ProposalForm!
   clientMutationId: String
+}
+
+# A simple question
+type SimpleQuestion implements Question {
+  id: String!
+  title: String!
+  type: QuestionTypeValue!
+  position: Int!
+  private: Boolean!
+  required: Boolean!
+  helpText: String
+  description: String
+  kind: String!
+  isOtherAllowed: Boolean!
+  choices: [QuestionChoice!]
+  validationRule: MultipleChoiceQuestionValidationRule
+  slug: String!
 }
 
 # A source
