@@ -46,7 +46,7 @@ const renderProposals = (proposals, step, viewer) => (
   </Row>
 );
 
-const renderProposalListTableView = (proposals) => <ProposalListTable proposals={proposals} />;
+const renderProposalListTableView = (proposals, step) => <ProposalListTable step={step} proposals={proposals} />;
 
 export class ProposalList extends React.Component<Props> {
   render() {

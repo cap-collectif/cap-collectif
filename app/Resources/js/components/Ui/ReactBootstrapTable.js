@@ -2,12 +2,15 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import BootstrapTable from 'react-bootstrap-table-next';
+import { Label } from 'react-bootstrap';
+import {FormattedDate, FormattedMessage} from 'react-intl';
+import moment from 'moment';
+import ProgressList from "./List/ProgressList";
+import UserAvatar from "../User/UserAvatar";
+import InlineList from "./List/InlineList";
 
 type Props = {
-  keyField: string,
-  columns: Array<Object>,
   data: Array<Object>,
-  width: number
 };
 
 export const Container = styled.div`
@@ -15,6 +18,7 @@ export const Container = styled.div`
     color: #333333;
     overflow-x: scroll;
     border: 1px solid #e3e3e3;
+    margin-bottom: 20px;
   
     .table {
         max-width: none;
@@ -69,12 +73,161 @@ export const Container = styled.div`
 `;
 
 export class ReactBootstrapTable extends React.Component<Props> {
-  render() {
-    const { keyField, columns, data, width } = this.props;
+  getFormatter = (cell, row, index, key) => {
+    const value = cell.value;
+
+    if(key === 'title' && value) {
+      return (
+        <a href={value.url}>
+          {value.displayTitle}
+        </a>
+      )
+    }
+
+    if(key === 'implementationPhase' && value) {
+      const list = value && value.list.map(e => {
+        let isActive = false;
+
+        if(e.startAt && moment().isSameOrAfter(e.startAt)) {
+          isActive = true;
+        }
+
+        return (
+          {
+            title: e.title,
+            isActive,
+          }
+        )
+      });
+
+      return (
+        <div className="m-auto">
+          <div className="mb-10" >
+              <span>
+                {value.title}
+              </span>
+          </div>
+          <ProgressList list={list} className="mt-10" />
+        </div>
+      )
+    }
+
+    if(key === 'status' && value) {
+      return (
+        <Label bsStyle={value.color} className="badge-pill">{value.name}</Label>
+      )
+    }
+
+    if(key === 'author' && value) {
+      return (
+        <div className="d-flex align-items-baseline">
+          <UserAvatar
+            user={{username: value.displayName, media: value.media, _links: {}}}
+            defaultAvatar={null}
+          />
+          {value.displayName}
+        </div>
+      )
+    }
+
+    if(key === 'priceEstimation' && value) {
+      return (
+        <span>{value} €</span>
+      )
+    }
+
+    if(key === 'lastActivity' && value) {
+      if(value.user) {
+
+        return (
+          <FormattedMessage
+            id="last-activity-date"
+            values={{
+              date: (
+                <FormattedDate
+                  value={moment(value.date).toDate()}
+                />
+              ),
+              user: value.user,
+            }}
+          />
+        )
+      }
+
+      return (
+        <FormattedDate
+          value={moment(value.date).toDate()}
+        />
+      )
+    }
+
+    if(key === 'likers' && value) {
+      return (
+        <InlineList className="mb-0">
+          {value.map((user, i) => <li key={i}>{user.displayName}</li>)}
+        </InlineList>
+      )
+    }
+
+    if(key === 'publishedOn' && value) {
+      return (
+        <FormattedDate
+          value={moment(value).toDate()}
+        />
+      )
+    }
 
     return (
-      <Container width={width.toString()}>
-        <BootstrapTable keyField={keyField} columns={columns} data={data} />
+      <div>{value}</div>
+    )
+  };
+
+  getColumns = () => {
+    const { data } = this.props;
+
+    const columnName = Object.keys(data[0]);
+    const firstData = data[0];
+
+    const isHidden = (element) => {
+      return data && data.filter(e => Array.isArray(e[element].value) ? e[element].value.length !==0 : e[element].value ).length === 0
+    };
+
+    const column =
+      columnName.map(e => {
+        return ({
+          style: { width: firstData[e].width ? firstData[e].width : '200px' },
+          hidden: firstData[e].hidden ? firstData[e].hidden : isHidden(e),
+          dataField: e,
+          text: firstData[e] && firstData[e].text,
+          // formatter: (cell) => this.getFormatter(cell.value, e),
+          formatter: this.getFormatter,
+          formatExtraData: e,
+          headerFormatter: this.columnTitleFormatter
+        })
+      });
+
+    return column;
+  };
+
+  getTableWidth = () => {
+    const tableWidth =
+      this.getColumns()
+        .filter(column => column.hidden !== true)
+        .reduce((accumulator, currentValue) => accumulator + parseInt(currentValue.style.width, 0), 0)
+
+    return tableWidth.toString();
+  };
+
+  columnTitleFormatter = (column) => (
+    <FormattedMessage id={column.text} />
+  );
+
+  render() {
+    const { data } = this.props;
+
+    return (
+      <Container width={this.getTableWidth()}>
+        <BootstrapTable keyField="title" columns={this.getColumns()} data={data} />
       </Container>
     );
   }

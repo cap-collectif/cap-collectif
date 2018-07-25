@@ -91,7 +91,7 @@ export class ProposalListFilters extends React.Component<Props, State> {
       <div className="mb-15 mt-30">
         <Row>
           {showToggleMapButton && (
-            <Col xs={12} sm={6} md={4} lg={3} xsHidden smHidden>
+            <Col xs={12} sm={6} md={4} lg={3}>
               <ToggleMapButton
                 onChange={mode => {
                   dispatch(changeProposalListView(mode));

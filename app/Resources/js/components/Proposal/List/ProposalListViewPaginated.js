@@ -39,7 +39,7 @@ export class ProposalListViewPaginated extends React.Component<Props, State> {
             id="proposals-list"
           />
         </VisibilityBox>
-        <div id="proposal-list-pagination-footer">
+        <div id="proposal-list-pagination-footer" className="text-center">
           {relay.hasMore() && (
             <Button
               disabled={this.state.loading}

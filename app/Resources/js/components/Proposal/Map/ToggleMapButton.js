@@ -4,6 +4,8 @@ import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import type { State } from '../../../types';
+import config from '../../../config';
+
 
 type Props = {
   onChange: Function,
@@ -31,6 +33,7 @@ export class ToggleMapButton extends React.Component<Props> {
         <Button
           bsStyle="default"
           active={mode === 'table'}
+          style={{ flex: '1 0 auto' }}
           onClick={this.handleClick.bind(this, 'table')}>
           <i className="cap cap-android-menu" onClick={this.handleClick.bind(this, 'table')} />{' '}
           {<FormattedMessage id="list-view" />}
@@ -43,13 +46,16 @@ export class ToggleMapButton extends React.Component<Props> {
           <i className="cap cap-th-large" onClick={this.handleClick.bind(this, 'mosaic')} />{' '}
           {<FormattedMessage id="grid" />}
         </Button>
-        <Button
-          bsStyle="default"
-          active={mode === 'map'}
-          onClick={this.handleClick.bind(this, 'map')}>
-          <i className="cap cap-map-location" onClick={this.handleClick.bind(this, 'map')} />{' '}
-          {<FormattedMessage id="proposal.map.map" />}
-        </Button>
+        {!config.isMobile &&
+          <Button
+            bsStyle="default"
+            style={{ flex: '1 0 auto' }}
+            active={mode === 'map'}
+            onClick={this.handleClick.bind(this, 'map')}>
+            <i className="cap cap-map-location" onClick={this.handleClick.bind(this, 'map')} />{' '}
+            {<FormattedMessage id="proposal.map.map" />}
+          </Button>
+        }
       </div>
     );
   }
