@@ -114,13 +114,15 @@ export class OpinionList extends React.Component<Props> {
               />
             </ListGroup>
           )}
-          {section.contributionsCount > consultation.opinionCountShownBySection && (
+          {section.contributionsCount &&
+          consultation.opinionCountShownBySection &&
+          section.contributionsCount > consultation.opinionCountShownBySection ? (
             <Panel.Footer>
               <a href={section.url} className="text-center" style={{ display: 'block' }}>
                 <FormattedMessage id="opinion.show.all" />
               </a>
             </Panel.Footer>
-          )}
+          ) : null}
         </Panel>
       </div>
     );

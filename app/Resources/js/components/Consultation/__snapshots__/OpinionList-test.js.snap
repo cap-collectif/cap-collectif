@@ -39,7 +39,6 @@ exports[`<OpinionList /> renders correcty 1`] = `
             Object {
               "$fragmentRefs": null,
               "$refType": null,
-              "appendixTypes": Array [],
               "color": "red",
               "contribuable": true,
               "contributionsCount": 0,

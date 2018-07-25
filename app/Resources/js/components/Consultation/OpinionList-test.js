@@ -10,7 +10,6 @@ describe('<OpinionList />', () => {
     section: {
       $fragmentRefs,
       $refType,
-      appendixTypes: [],
       color: 'red',
       contribuable: true,
       contributionsCount: 0,

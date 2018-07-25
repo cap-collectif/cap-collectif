@@ -9,107 +9,34 @@ exports[`<Opinion /> renders correcty 1`] = `
   <div
     className="left-block"
   >
-    <Connect(UserAvatar)
-      user={
+    <Relay(OpinionPreview)
+      opinion={
         Object {
-          "displayName": "",
-          "media": Object {
-            "url": "",
+          "$fragmentRefs": null,
+          "$refType": null,
+          "author": Object {
+            "displayName": "",
+            "media": Object {
+              "url": "",
+            },
+            "show_url": "",
+            "vip": false,
           },
-          "show_url": "",
-          "vip": false,
+          "votes": Object {
+            "totalCount": 0,
+          },
+          "votesMitige": Object {
+            "totalCount": 0,
+          },
+          "votesNok": Object {
+            "totalCount": 0,
+          },
+          "votesOk": Object {
+            "totalCount": 0,
+          },
         }
       }
     />
-    <div>
-      <Relay(OpinionInfos)
-        opinion={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "author": Object {
-              "displayName": "",
-              "media": Object {
-                "url": "",
-              },
-              "show_url": "",
-              "vip": false,
-            },
-            "votes": Object {
-              "totalCount": 0,
-            },
-            "votesMitige": Object {
-              "totalCount": 0,
-            },
-            "votesNok": Object {
-              "totalCount": 0,
-            },
-            "votesOk": Object {
-              "totalCount": 0,
-            },
-          }
-        }
-        rankingThreshold={null}
-      />
-      <Relay(OpinionPreviewTitle)
-        link={true}
-        opinion={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "author": Object {
-              "displayName": "",
-              "media": Object {
-                "url": "",
-              },
-              "show_url": "",
-              "vip": false,
-            },
-            "votes": Object {
-              "totalCount": 0,
-            },
-            "votesMitige": Object {
-              "totalCount": 0,
-            },
-            "votesNok": Object {
-              "totalCount": 0,
-            },
-            "votesOk": Object {
-              "totalCount": 0,
-            },
-          }
-        }
-        showTypeLabel={false}
-      />
-      <Relay(OpinionPreviewCounters)
-        opinion={
-          Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "author": Object {
-              "displayName": "",
-              "media": Object {
-                "url": "",
-              },
-              "show_url": "",
-              "vip": false,
-            },
-            "votes": Object {
-              "totalCount": 0,
-            },
-            "votesMitige": Object {
-              "totalCount": 0,
-            },
-            "votesNok": Object {
-              "totalCount": 0,
-            },
-            "votesOk": Object {
-              "totalCount": 0,
-            },
-          }
-        }
-      />
-    </div>
   </div>
 </ListGroupItem>
 `;
