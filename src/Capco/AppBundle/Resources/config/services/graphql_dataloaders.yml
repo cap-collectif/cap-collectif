@@ -1,9 +1,12 @@
 services:
-#  Capco\AppBundle\GraphQL\DataLoader\ProposalStatusDataLoader:
-#    autowire: true
+  Overblog\PromiseAdapter\PromiseAdapterInterface:
+    alias: overblog_dataloader.webonyx_graphql_sync_promise_adapter
 
   Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesCountByStepDataLoader:
     autowire: true
 
   Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader:
+    autowire: true
+
+  Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalsDataLoader:
     autowire: true
