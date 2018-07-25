@@ -26,5 +26,5 @@
 {% endblock %}
 
 {% block content %}
-    {{ react_render_component('OpinionPageApp', {'props': {'versionId': version.id} }) }}
+    {{ react_render_component('OpinionPageApp', {'props': {'versionId': version.id, 'isAuthenticated': is_granted('ROLE_USER') } }) }}
 {% endblock %}

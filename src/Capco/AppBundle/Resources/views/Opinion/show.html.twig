@@ -24,7 +24,7 @@
 
 {% block content %}
     {{ react_render_component('OpinionPageApp', {
-        'props': {'opinionId': opinion.id},
+        'props': {'opinionId': opinion.id, 'isAuthenticated': is_granted('ROLE_USER')},
       })
     }}
 {% endblock %}

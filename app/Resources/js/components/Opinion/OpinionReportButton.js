@@ -37,17 +37,18 @@ class OpinionReportButton extends React.Component<Props> {
 const container = connect()(OpinionReportButton);
 export default createFragmentContainer(container, {
   opinion: graphql`
-    fragment OpinionReportButton_opinion on OpinionOrVersion {
+    fragment OpinionReportButton_opinion on OpinionOrVersion
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       ... on Opinion {
         id
-        viewerHasReport
+        viewerHasReport @include(if: $isAuthenticated)
         author {
           slug
         }
       }
       ... on Version {
         id
-        viewerHasReport
+        viewerHasReport @include(if: $isAuthenticated)
         author {
           slug
         }

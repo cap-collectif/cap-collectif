@@ -98,11 +98,12 @@ export class OpinionBox extends React.Component<Props> {
 
 export default createFragmentContainer(OpinionBox, {
   opinion: graphql`
-    fragment OpinionBox_opinion on OpinionOrVersion {
+    fragment OpinionBox_opinion on OpinionOrVersion
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
       ...OpinionPreview_opinion
       ...OpinionAnswer_opinion
       ...OpinionVotesBox_opinion
-      ...OpinionButtons_opinion
+      ...OpinionButtons_opinion @arguments(isAuthenticated: $isAuthenticated)
       ...OpinionBody_opinion
       ...OpinionAppendices_opinion
       ... on Opinion {

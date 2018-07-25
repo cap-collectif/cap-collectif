@@ -15,11 +15,12 @@ import type {
 type Props = {
   opinionId?: string,
   versionId?: string,
+  isAuthenticated: boolean,
 };
 
 export class OpinionPage extends React.Component<Props> {
   render() {
-    const { opinionId, versionId } = this.props;
+    const { opinionId, versionId, isAuthenticated } = this.props;
     const id = opinionId || versionId;
     if (!id) {
       return null;
@@ -29,7 +30,7 @@ export class OpinionPage extends React.Component<Props> {
         <QueryRenderer
           environment={environment}
           query={graphql`
-            query OpinionPageQuery($opinionId: ID!) {
+            query OpinionPageQuery($opinionId: ID!, $isAuthenticated: Boolean!) {
               opinion: node(id: $opinionId) {
                 ... on Opinion {
                   id
@@ -41,7 +42,7 @@ export class OpinionPage extends React.Component<Props> {
                   trashed
                   trashedReason
                 }
-                ...OpinionBox_opinion
+                ...OpinionBox_opinion @arguments(isAuthenticated: $isAuthenticated)
                 ...OpinionTabs_opinion
               }
             }
@@ -49,6 +50,7 @@ export class OpinionPage extends React.Component<Props> {
           variables={
             ({
               opinionId: id,
+              isAuthenticated,
             }: OpinionPageQueryVariables)
           }
           render={({ error, props }: ReadyState & { props?: ?OpinionPageQueryResponse }) => {
