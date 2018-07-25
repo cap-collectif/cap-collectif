@@ -87,30 +87,6 @@ const commit = (
         edgeName: 'voteEdge',
       },
     ],
-    // updater: store => {
-    //   const payload = store.getRootField('addArgument');
-    //   if (!payload.getLinkedRecord('argumentEdge')) {
-    //     // Mutation failed
-    //     return;
-    //   }
-
-    //   // We update the "FOR" or "AGAINST" row arguments totalCount
-    //   const argumentableProxy = store.get(variables.input.argumentableId);
-    //   if (!argumentableProxy) return;
-    //   const connection = ConnectionHandler.getConnection(
-    //     argumentableProxy,
-    //     'ArgumentList_allArguments',
-    //     {
-    //       type: variables.input.type,
-    //     },
-    //   );
-    //   connection.setValue(connection.getValue('totalCount') + 1, 'totalCount');
-
-    //   const allArgumentsProxy = argumentableProxy.getLinkedRecord('arguments', { first: 0 });
-    //   if (!allArgumentsProxy) return;
-    //   const previousValue = parseInt(allArgumentsProxy.getValue('totalCount'), 10);
-    //   allArgumentsProxy.setValue(previousValue + 1, 'totalCount');
-    // },
   });
 
 export default { commit };

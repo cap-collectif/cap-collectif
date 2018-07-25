@@ -48,7 +48,7 @@ Scenario: logged in API client can not add more than 2 opinions in a minute
 Scenario: logged in API client wants to add an opinion with appendices
   Given I am logged in to api as user
   When I send a POST request to "/api/projects/project5/steps/cstep5/opinion_types/opinionType5/opinions" with json:
-  """
+  """ 
   {
     "title": "Nouveau titre",
     "body": "Mes modifications blablabla",

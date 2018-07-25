@@ -68,11 +68,6 @@ const commit = (variables: AddVersionMutationVariables): Promise<AddVersionMutat
       if (!payload.getLinkedRecord('versionEdge')) {
         // Mutation failed
       }
-
-      // const allVersionsProxy = versionableProxy.getLinkedRecord('versions', { first: 0 });
-      // if (!allVersionsProxy) return;
-      // const previousValue = parseInt(allVersionsProxy.getValue('totalCount'), 10);
-      // allVersionsProxy.setValue(previousValue + 1, 'totalCount');
     },
   });
 
