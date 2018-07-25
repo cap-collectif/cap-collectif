@@ -47,7 +47,7 @@ class OauthUserProvider extends FOSUBUserProvider
             $user = $this->userManager->createUser();
             $user->setUsername($username);
             $user->setEmail($email);
-            $user->setPlainPassword($this->random_string(20));
+            $user->setPlainPassword($this->randomString(20));
             $user->setEnabled(true);
         }
 
@@ -63,12 +63,7 @@ class OauthUserProvider extends FOSUBUserProvider
         return $user;
     }
 
-    /**
-     * @param $length
-     *
-     * @return string
-     */
-    protected function random_string($length)
+    protected function randomString(int $length): string
     {
         $key = '';
         $keys = array_merge(range(0, 9), range('a', 'Z'));
