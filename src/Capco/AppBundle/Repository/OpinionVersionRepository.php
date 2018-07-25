@@ -123,8 +123,8 @@ class OpinionVersionRepository extends EntityRepository
 
     public function getByContribution(
         Opinion $opinion,
-        int $limit,
-        int $first,
+        ?int $limit,
+        ?int $first,
         string $field,
         string $direction
     ) {

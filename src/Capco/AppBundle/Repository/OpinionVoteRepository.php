@@ -102,8 +102,8 @@ class OpinionVoteRepository extends EntityRepository
     public function getByContributionAndValue(
         Opinion $votable,
         int $value,
-        int $limit,
-        int $first,
+        ?int $limit,
+        ?int $first,
         string $field,
         string $direction
     ): Paginator {
@@ -119,8 +119,8 @@ class OpinionVoteRepository extends EntityRepository
 
     public function getByContribution(
         Opinion $votable,
-        int $limit,
-        int $first,
+        ?int $limit,
+        ?int $first,
         string $field,
         string $direction
     ): Paginator {

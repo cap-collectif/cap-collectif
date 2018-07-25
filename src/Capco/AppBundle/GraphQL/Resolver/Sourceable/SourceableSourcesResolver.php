@@ -26,7 +26,7 @@ class SourceableSourcesResolver implements ResolverInterface
         $field = $args->offsetGet('orderBy')['field'];
         $direction = $args->offsetGet('orderBy')['direction'];
 
-        $paginator = new Paginator(function (int $offset, int $limit) use (
+        $paginator = new Paginator(function (?int $offset, ?int $limit) use (
             $sourceable,
             $field,
             $direction

@@ -61,8 +61,8 @@ class SourceRepository extends EntityRepository
 
     public function getByContribution(
         Sourceable $sourceable,
-        int $limit,
-        int $first,
+        ?int $limit,
+        ?int $first,
         string $field,
         string $direction
     ): Paginator {

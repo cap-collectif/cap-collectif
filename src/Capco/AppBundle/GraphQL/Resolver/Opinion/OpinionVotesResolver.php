@@ -41,7 +41,7 @@ class OpinionVotesResolver implements ResolverInterface
 
         if ($args->offsetExists('value')) {
             $value = $args->offsetGet('value');
-            $paginator = new Paginator(function (int $offset, int $limit) use (
+            $paginator = new Paginator(function (?int $offset, ?int $limit) use (
                 $repo,
                 $contribution,
                 $value,
@@ -65,7 +65,7 @@ class OpinionVotesResolver implements ResolverInterface
             return $paginator->auto($args, $totalCount);
         }
 
-        $paginator = new Paginator(function (int $offset, int $limit) use (
+        $paginator = new Paginator(function (?int $offset, ?int $limit) use (
             $repo,
             $contribution,
             $field,
