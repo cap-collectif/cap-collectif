@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Modal } from 'react-bootstrap';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { injectIntl, FormattedMessage, type IntlShape } from 'react-intl';
 import { connect, type Connector, type MapStateToProps } from 'react-redux';
 import { submit, isSubmitting } from 'redux-form';
@@ -9,11 +10,14 @@ import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import type { State, Dispatch } from '../../../types';
 import { closeOpinionEditModal } from '../../../redux/modules/opinion';
+import type { OpinionEditModal_opinion } from './__generated__/OpinionEditModal_opinion.graphql';
 
-type Props = {
+type RelayProps = {
+  opinion: OpinionEditModal_opinion,
+};
+
+type Props = RelayProps & {
   show: boolean,
-  opinion: Object,
-  step: ?Object,
   submitting: boolean,
   dispatch: Dispatch,
 };
@@ -21,7 +25,7 @@ type Props = {
 export class OpinionEditModal extends React.Component<Props & { intl: IntlShape }> {
   render() {
     // eslint-disable-next-line
-    const { dispatch, submitting, show, opinion, step, intl } = this.props;
+    const { dispatch, submitting, show, opinion, intl } = this.props;
     return (
       <Modal
         animation={false}
@@ -42,7 +46,7 @@ export class OpinionEditModal extends React.Component<Props & { intl: IntlShape 
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <OpinionEditForm opinion={opinion} step={step} />
+          <OpinionEditForm opinion={opinion} />
         </Modal.Body>
         <Modal.Footer>
           <CloseButton
@@ -64,18 +68,20 @@ export class OpinionEditModal extends React.Component<Props & { intl: IntlShape 
   }
 }
 
-type ParentProps = { opinion: Object };
-
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: ParentProps) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
   show: !!(state.opinion.showOpinionEditModal === props.opinion.id),
   submitting: isSubmitting(formName)(state),
-  step: state.project.currentProjectById
-    ? state.project.projectsById[state.project.currentProjectById].steps.filter(
-        step => step.type === 'consultation',
-      )[0]
-    : null,
 });
 
-const connector: Connector<ParentProps, Props> = connect(mapStateToProps);
+const connector: Connector<RelayProps, Props> = connect(mapStateToProps);
 
-export default connector(injectIntl(OpinionEditModal));
+const container = connector(injectIntl(OpinionEditModal));
+
+export default createFragmentContainer(container, {
+  opinion: graphql`
+    fragment OpinionEditModal_opinion on Opinion {
+      ...OpinionEditForm_opinion
+      id
+    }
+  `,
+});

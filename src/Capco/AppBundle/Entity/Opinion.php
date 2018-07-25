@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
@@ -42,13 +41,13 @@ class Opinion implements OpinionContributionInterface
     use ModerableTrait;
 
     public static $sortCriterias = [
-         'opinion.sort.positions' => 'positions',
-         'opinion.sort.random' => 'random',
-         'opinion.sort.last' => 'last',
-         'opinion.sort.old' => 'old',
-         'opinion.sort.favorable' => 'favorable',
-         'opinion.sort.votes' => 'votes',
-         'opinion.sort.comments' => 'comments',
+        'opinion.sort.positions' => 'positions',
+        'opinion.sort.random' => 'random',
+        'opinion.sort.last' => 'last',
+        'opinion.sort.old' => 'old',
+        'opinion.sort.favorable' => 'favorable',
+        'opinion.sort.votes' => 'votes',
+        'opinion.sort.comments' => 'comments',
     ];
 
     /**
@@ -94,10 +93,10 @@ class Opinion implements OpinionContributionInterface
     protected $Author;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Source", mappedBy="Opinion",  cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Source", mappedBy="opinion",  cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"updatedAt" = "DESC"})
      */
-    protected $Sources;
+    protected $sources;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Argument", mappedBy="opinion",  cascade={"persist", "remove"}, orphanRemoval=true)
@@ -149,7 +148,7 @@ class Opinion implements OpinionContributionInterface
         $this->votes = new ArrayCollection();
         $this->Reports = new ArrayCollection();
         $this->arguments = new ArrayCollection();
-        $this->Sources = new ArrayCollection();
+        $this->sources = new ArrayCollection();
         $this->versions = new ArrayCollection();
         $this->appendices = new ArrayCollection();
 
@@ -310,20 +309,20 @@ class Opinion implements OpinionContributionInterface
 
     public function getSources(): Collection
     {
-        return $this->Sources;
+        return $this->sources;
     }
 
     public function setSources(Collection $sources)
     {
-        $this->Sources = $sources;
+        $this->sources = $sources;
 
         return $this;
     }
 
     public function addSource(Source $source): self
     {
-        if (!$this->Sources->contains($source)) {
-            $this->Sources->add($source);
+        if (!$this->sources->contains($source)) {
+            $this->sources->add($source);
         }
 
         return $this;
@@ -331,7 +330,7 @@ class Opinion implements OpinionContributionInterface
 
     public function removeSource(Source $source): self
     {
-        $this->Sources->removeElement($source);
+        $this->sources->removeElement($source);
 
         return $this;
     }
@@ -546,7 +545,12 @@ class Opinion implements OpinionContributionInterface
     {
         $iterator = $this->appendices->getIterator();
         $iterator->uasort(function ($a, $b) {
-            return ($this->getPositionForAppendixType($a->getAppendixType()) < $this->getPositionForAppendixType($b->getAppendixType())) ? -1 : 1;
+            return (
+                $this->getPositionForAppendixType($a->getAppendixType()) <
+                    $this->getPositionForAppendixType($b->getAppendixType())
+            )
+                ? -1
+                : 1;
         });
 
         return iterator_to_array($iterator);

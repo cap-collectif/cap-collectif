@@ -1,14 +1,46 @@
 // @flow
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { connect, type MapStateToProps } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import renderInput from '../Form/Field';
-import { createOpinionVersion as onSubmit } from '../../redux/modules/opinion';
+import {
+  startCreatingOpinionVersion,
+  closeOpinionVersionCreateModal,
+  cancelCreatingOpinionVersion,
+} from '../../redux/modules/opinion';
+import AddVersionMutation from '../../mutations/AddVersionMutation';
 import type { State } from '../../types';
+import type { OpinionVersionCreateForm_opinion } from './__generated__/OpinionVersionCreateForm_opinion.graphql';
 
 export const formName = 'opinion-version-create';
-const validate = ({ body, title, comment }: Object, props: Object) => {
+type FormValues = {
+  body: string,
+  title: string,
+  comment: string,
+};
+type RelayProps = { opinion: OpinionVersionCreateForm_opinion };
+type Props = RelayProps & { initialValues: FormValues };
+
+const onSubmit = (data: FormValues, dispatch: Dispatch, { opinion }: Props): Promise<*> => {
+  dispatch(startCreatingOpinionVersion());
+  const input = {
+    opinionId: opinion.id,
+    ...data,
+  };
+  return AddVersionMutation.commit({ input })
+    .then(res => {
+      if (res && res.addVersion && res.addVersion.versionEdge && res.addVersion.versionEdge.node) {
+        window.location.href = res.addVersion.versionEdge.node.url;
+        dispatch(closeOpinionVersionCreateModal());
+      }
+    })
+    .catch(() => {
+      dispatch(cancelCreatingOpinionVersion());
+    });
+};
+const validate = ({ body, title, comment }: FormValues, props: Props) => {
   const errors = {};
   if (body === props.initialValues.body) {
     errors.body = 'opinion.version.body_error';
@@ -25,8 +57,6 @@ const validate = ({ body, title, comment }: Object, props: Object) => {
   }
   return errors;
 };
-
-type Props = { opinionId: string };
 
 class OpinionVersionCreateForm extends React.Component<Props> {
   render() {
@@ -57,21 +87,27 @@ class OpinionVersionCreateForm extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
   initialValues: {
     title: '',
-    body:
-      state.opinion.currentOpinionId &&
-      state.opinion.opinionsById[state.opinion.currentOpinionId].body,
+    body: props.opinion.body,
     comment: '',
   },
-  opinionId: state.opinion.currentOpinionId,
 });
 
-export default connect(mapStateToProps)(
+const container = connect(mapStateToProps)(
   reduxForm({
     form: formName,
     onSubmit,
     validate,
   })(OpinionVersionCreateForm),
 );
+
+export default createFragmentContainer(container, {
+  opinion: graphql`
+    fragment OpinionVersionCreateForm_opinion on Opinion {
+      id
+      body
+    }
+  `,
+});
