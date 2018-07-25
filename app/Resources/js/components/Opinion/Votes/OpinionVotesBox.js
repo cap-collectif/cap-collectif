@@ -33,21 +33,21 @@ class OpinionVotesBox extends React.Component<Props> {
             <OpinionVotesBar opinion={opinion} />
           </Col>
           {opinion.votes &&
-            opinion.votes.totalCount &&
-            opinion.votes.totalCount > 0 &&
-            widgetType === VOTE_WIDGET_BOTH && (
-              <Col sm={12} md={4}>
-                {/* $FlowFixMe */}
-                <VotePiechart
-                  top={20}
-                  height={'180px'}
-                  width={'200px'}
-                  ok={opinion.votesYes ? opinion.votesYes.totalCount : 0}
-                  nok={opinion.votesNo ? opinion.votesNo.totalCount : 0}
-                  mitige={opinion.votesMitige ? opinion.votesMitige.totalCount : 0}
-                />
-              </Col>
-            )}
+          opinion.votes.totalCount &&
+          opinion.votes.totalCount > 0 &&
+          widgetType === VOTE_WIDGET_BOTH ? (
+            <Col sm={12} md={4}>
+              {/* $FlowFixMe */}
+              <VotePiechart
+                top={20}
+                height={'180px'}
+                width={'200px'}
+                ok={opinion.votesYes ? opinion.votesYes.totalCount : 0}
+                nok={opinion.votesNo ? opinion.votesNo.totalCount : 0}
+                mitige={opinion.votesMitige ? opinion.votesMitige.totalCount : 0}
+              />
+            </Col>
+          ) : null}
         </Row>
       </div>
     );

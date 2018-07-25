@@ -7,6 +7,7 @@ import { Modal, Button } from 'react-bootstrap';
 import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import DeleteVersionMutation from '../../../mutations/DeleteVersionMutation';
+import DeleteOpinionMutation from '../../../mutations/DeleteOpinionMutation';
 import type { OpinionDelete_opinion } from './__generated__/OpinionDelete_opinion.graphql';
 
 type Props = {
@@ -47,10 +48,10 @@ class OpinionDelete extends React.Component<Props, State> {
       });
     }
     if (opinion.__typename === 'Opinion') {
-      // const input = { opinionId: opinion.id };
-      // DeleteOpinionMutation.commit({input}).then(() => {
-      //   window.location.href = opinion.section.url;
-      // });
+      const input = { opinionId: opinion.id };
+      DeleteOpinionMutation.commit({ input }).then(() => {
+        window.location.href = opinion.section.url;
+      });
     }
   };
 

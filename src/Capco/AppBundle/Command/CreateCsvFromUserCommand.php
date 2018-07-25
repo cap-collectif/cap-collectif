@@ -409,8 +409,6 @@ EOF;
               votes(first: 0) {
                 totalCount
               }
-              argumentsCountFor
-              argumentsCountAgainst
               arguments(first: 0) {
                 totalCount
               }
@@ -461,8 +459,6 @@ EOF;
               arguments(first: 0) {
                 totalCount
               }
-              argumentsCountFor
-              argumentsCountAgainst
               sources(first: 0) {
                 totalCount
               }

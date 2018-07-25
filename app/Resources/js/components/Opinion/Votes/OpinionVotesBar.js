@@ -5,6 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import OpinionUserVote from './OpinionUserVote';
 import VotesBar from '../../Utils/VotesBar';
 import OpinionVotesModal from './OpinionVotesModal';
+import VersionVotesModal from '../VersionVotesModal';
 import type { OpinionVotesBar_opinion } from './__generated__/OpinionVotesBar_opinion.graphql';
 
 type Props = {
@@ -37,8 +38,14 @@ class OpinionVotesBar extends React.Component<Props> {
                 /* $FlowFixMe */
                 return <OpinionUserVote key={index} vote={vote} style={{ marginRight: 5 }} />;
               })}
-          {/* $FlowFixMe */}
-          <OpinionVotesModal opinion={opinion} />
+          {opinion.__typename === 'Opinion' && (
+            /* $FlowFixMe */
+            <OpinionVotesModal opinion={opinion} />
+          )}
+          {opinion.__typename === 'Version' && (
+            /* $FlowFixMe */
+            <VersionVotesModal version={opinion} />
+          )}
         </div>
         <div>
           {opinion.previewVotes && (
@@ -58,8 +65,9 @@ class OpinionVotesBar extends React.Component<Props> {
 export default createFragmentContainer(OpinionVotesBar, {
   opinion: graphql`
     fragment OpinionVotesBar_opinion on OpinionOrVersion {
-      ...OpinionVotesModal_opinion
+      __typename
       ... on Opinion {
+        ...OpinionVotesModal_opinion
         votesYes: votes(first: 0, value: YES) {
           totalCount
         }
@@ -77,6 +85,7 @@ export default createFragmentContainer(OpinionVotesBar, {
         }
       }
       ... on Version {
+        ...VersionVotesModal_version
         votesYes: votes(first: 0, value: YES) {
           totalCount
         }

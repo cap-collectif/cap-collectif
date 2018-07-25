@@ -58,6 +58,13 @@ Mutation:
                     inputType: DeleteSourceInput
                     payloadType: DeleteSourcePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteSourceMutation", [value, getUser()])'
+            deleteOpinion:
+                access: "@=hasRole('ROLE_USER')"
+                builder: "Relay::Mutation"
+                builderConfig:
+                    inputType: DeleteOpinionInput
+                    payloadType: DeleteOpinionPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteOpinionMutation", [value, getUser()])'
             deleteVersion:
                 access: "@=hasRole('ROLE_USER')"
                 builder: "Relay::Mutation"

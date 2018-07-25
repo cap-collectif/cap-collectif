@@ -38,7 +38,7 @@ final class VersionVoteType extends ObjectType implements GeneratedTypeInterface
                     'access' => null,
                 ],
                 'author' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('User')),
+                    'type' => $globalVariable->get('typeResolver')->resolve('User'),
                     'args' => [
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
@@ -114,7 +114,7 @@ final class VersionVoteType extends ObjectType implements GeneratedTypeInterface
             ];
             },
             'interfaces' => function () use ($globalVariable) {
-                return [$globalVariable->get('typeResolver')->resolve('YesNoPairedVote'), $globalVariable->get('typeResolver')->resolve('ContributionWithAuthor')];
+                return [$globalVariable->get('typeResolver')->resolve('YesNoPairedVote')];
             },
             'isTypeOf' => null,
             'resolveField' => null,

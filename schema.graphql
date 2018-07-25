@@ -970,6 +970,17 @@ type DeleteGroupPayload {
   clientMutationId: String
 }
 
+input DeleteOpinionInput {
+  # The opinion id
+  opinionId: ID!
+  clientMutationId: String
+}
+
+type DeleteOpinionPayload {
+  deletedOpinionId: ID
+  clientMutationId: String
+}
+
 input DeleteProposalInput {
   # The proposal id
   proposalId: ID!
@@ -1296,6 +1307,7 @@ type Mutation {
   changeSource(input: ChangeSourceInput!): ChangeSourcePayload
   deleteArgument(input: DeleteArgumentInput!): DeleteArgumentPayload
   deleteSource(input: DeleteSourceInput!): DeleteSourcePayload
+  deleteOpinion(input: DeleteOpinionInput!): DeleteOpinionPayload
   deleteVersion(input: DeleteVersionInput!): DeleteVersionPayload
   addReply(input: AddReplyInput!): AddReplyPayload
   deleteReply(input: DeleteReplyInput!): DeleteReplyPayload
@@ -3473,12 +3485,12 @@ enum VersionOrderField {
   VOTES
 }
 
-type VersionVote implements YesNoPairedVote & ContributionWithAuthor {
+type VersionVote implements YesNoPairedVote {
   # The ID of an object
   id: ID!
 
   # The author of the contribution.
-  author: User!
+  author: User
   value: YesNoPairedVoteValue!
 
   # If vote is expired, it exists but doesn't count.

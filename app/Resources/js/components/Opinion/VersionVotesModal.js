@@ -3,12 +3,12 @@ import * as React from 'react';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { Modal, Row, Button } from 'react-bootstrap';
-import CloseButton from '../../Form/CloseButton';
-import UserBox from '../../User/UserBox';
-import type { OpinionVotesModal_opinion } from './__generated__/OpinionVotesModal_opinion.graphql';
+import CloseButton from '../Form/CloseButton';
+import UserBox from '../User/UserBox';
+import type { VersionVotesModal_version } from './__generated__/VersionVotesModal_version.graphql';
 
 type Props = {
-  opinion: OpinionVotesModal_opinion,
+  version: VersionVotesModal_version,
   relay: RelayPaginationProp,
 };
 
@@ -17,7 +17,7 @@ type State = {
   loading: boolean,
 };
 
-class OpinionVotesModal extends React.Component<Props, State> {
+class VersionVotesModal extends React.Component<Props, State> {
   state = {
     showModal: false,
     loading: false,
@@ -32,10 +32,10 @@ class OpinionVotesModal extends React.Component<Props, State> {
   };
 
   render() {
-    const { relay, opinion } = this.props;
+    const { relay, version } = this.props;
     const moreVotes =
-      opinion.moreVotes && opinion.moreVotes.totalCount > 5
-        ? opinion.moreVotes.totalCount - 5
+      version.moreVotes && version.moreVotes.totalCount > 5
+        ? version.moreVotes.totalCount - 5
         : false;
     if (!moreVotes) {
       return null;
@@ -63,10 +63,10 @@ class OpinionVotesModal extends React.Component<Props, State> {
           </Modal.Header>
           <Modal.Body>
             <Row>
-              {opinion &&
-                opinion.moreVotes &&
-                opinion.moreVotes.edges &&
-                opinion.moreVotes.edges
+              {version &&
+                version.moreVotes &&
+                version.moreVotes.edges &&
+                version.moreVotes.edges
                   .filter(Boolean)
                   .map(edge => edge.node)
                   .filter(Boolean)
@@ -102,17 +102,17 @@ class OpinionVotesModal extends React.Component<Props, State> {
 }
 
 export default createPaginationContainer(
-  OpinionVotesModal,
+  VersionVotesModal,
   {
-    opinion: graphql`
-      fragment OpinionVotesModal_opinion on Opinion
+    version: graphql`
+      fragment VersionVotesModal_version on Version
         @argumentDefinitions(
           count: { type: "Int", defaultValue: 100 }
           cursor: { type: "String", defaultValue: null }
         ) {
         id
         moreVotes: votes(first: $count, after: $cursor)
-          @connection(key: "OpinionVotesModal_moreVotes", filters: []) {
+          @connection(key: "VersionVotesModal_moreVotes", filters: []) {
           totalCount
           pageInfo {
             hasPreviousPage
@@ -141,7 +141,7 @@ export default createPaginationContainer(
   {
     direction: 'forward',
     getConnectionFromProps(props: Props) {
-      return props.opinion && props.opinion.moreVotes;
+      return props.version && props.version.moreVotes;
     },
     getFragmentVariables(prevVars) {
       return {
@@ -153,13 +153,13 @@ export default createPaginationContainer(
         ...fragmentVariables,
         count,
         cursor,
-        opinionId: props.opinion.id,
+        versionId: props.version.id,
       };
     },
     query: graphql`
-      query OpinionVotesModalPaginatedQuery($opinionId: ID!, $cursor: String, $count: Int) {
-        opinion: node(id: $opinionId) {
-          ...OpinionVotesModal_opinion @arguments(cursor: $cursor, count: $count)
+      query VersionVotesModalPaginatedQuery($versionId: ID!, $cursor: String, $count: Int) {
+        version: node(id: $versionId) {
+          ...VersionVotesModal_version @arguments(cursor: $cursor, count: $count)
         }
       }
     `,

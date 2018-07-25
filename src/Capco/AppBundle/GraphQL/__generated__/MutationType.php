@@ -191,6 +191,27 @@ final class MutationType extends ObjectType implements GeneratedTypeInterface
                         return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
                     },
                 ],
+                'deleteOpinion' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('DeleteOpinionPayload'),
+                    'args' => [
+                        [
+                            'name' => 'input',
+                            'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('DeleteOpinionInput')),
+                            'description' => null,
+                        ],
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["relay_mutation_field", array(0 => $args, 1 => $context, 2 => $info, 3 => function ($value) use ($globalVariable, $args, $context, $info) { return $globalVariable->get('mutationResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Mutation\\DeleteOpinionMutation", array(0 => $value, 1 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]); })]);
+                    },
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
+                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
+                    },
+                ],
                 'deleteVersion' => [
                     'type' => $globalVariable->get('typeResolver')->resolve('DeleteVersionPayload'),
                     'args' => [

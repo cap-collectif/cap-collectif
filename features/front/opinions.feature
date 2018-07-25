@@ -55,7 +55,7 @@ Scenario: Logged in user can report an opinion
   And I submit the reporting form
   Then I should see "alert.success.report.opinion" in the "#global-alert-box" element
 
-@javascript @database @dev
+@javascript @database
 Scenario: Author of an opinion loose their votes when updating it
   Given I am logged in as user
   And I visited "opinion page" with:
@@ -112,9 +112,9 @@ Scenario: Anonymous user wants to share an opinion
   And I click the opinion share link button
   Then I should see the share link modal
 
-@javascript
-Scenario: Anonymous wants to see votes evolution
-  Given feature "votes_evolution" is enabled
-  And I go to an opinion with versions
-  When I go on the votes evolution tab
-  Then I should see 1 ".opinion__history_chart" element
+# @javascript
+# Scenario: Anonymous wants to see votes evolution
+#   Given feature "votes_evolution" is enabled
+#   And I go to an opinion with versions
+#   When I go on the votes evolution tab
+#   Then I should see 1 ".opinion__history_chart" element
