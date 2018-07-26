@@ -16,3 +16,5 @@ YesNoPairedVote:
       createdAt:
         type: 'DateTime!'
         description: 'Date of vote.'
+      related:
+        type: 'Contribution'

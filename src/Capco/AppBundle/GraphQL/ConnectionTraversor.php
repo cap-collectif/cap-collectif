@@ -17,7 +17,7 @@ class ConnectionTraversor
         array &$data,
         string $path,
         callable $callback,
-        callable $renewalQuery
+        ?callable $renewalQuery = null
     ): void {
         do {
             $connection = Arr::path($data, $path);
@@ -27,7 +27,7 @@ class ConnectionTraversor
             if (\count($edges) > 0) {
                 foreach ($edges as $edge) {
                     $callback($edge);
-                    if ($edge['cursor'] === $endCursor) {
+                    if ($edge['cursor'] === $endCursor && $renewalQuery) {
                         $data = $this->executor->execute(null, [
                             'query' => $renewalQuery($pageInfo),
                             'variables' => [],

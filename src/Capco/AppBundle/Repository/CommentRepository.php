@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Repository;
 
 use Capco\UserBundle\Entity\User;
@@ -11,51 +10,50 @@ class CommentRepository extends EntityRepository
     public function countNotExpired(): int
     {
         $qb = $this->createQueryBuilder('c')
-        ->select('count(DISTINCT c.id)')
-        ->where('c.expired = false')
-    ;
-
+            ->select('count(DISTINCT c.id)')
+            ->where('c.expired = false');
         return $qb->getQuery()->getSingleScalarResult();
     }
 
     public function getAnonymousCount(): int
     {
         $qb = $this->createQueryBuilder('c')
-          ->select('count(DISTINCT c.authorEmail)')
-          ->where('c.Author IS NULL')
-      ;
-
-        return $qb->getQuery()
-          ->getSingleScalarResult()
-          ;
+            ->select('count(DISTINCT c.authorEmail)')
+            ->where('c.Author IS NULL');
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
     public function getRecentOrdered()
     {
         $qb = $this->createQueryBuilder('c')
-            ->select('c.id', 'c.createdAt', 'c.updatedAt', 'a.username as author', 'c.isEnabled as published', 'c.isTrashed as trashed')
-            ->where('c.validated = :validated')
-            ->leftJoin('c.Author', 'a')
-            ->setParameter('validated', false)
-        ;
-
-        return $qb->getQuery()
-            ->getArrayResult()
-            ;
+            ->select(
+                'c.id',
+                'c.createdAt',
+                'c.updatedAt',
+                'a.username as author',
+                'c.isEnabled as published',
+                'c.isTrashed as trashed'
+            )
+            ->leftJoin('c.Author', 'a');
+        return $qb->getQuery()->getArrayResult();
     }
 
     public function getArrayById($id)
     {
         $qb = $this->createQueryBuilder('c')
-            ->select('c.id', 'c.createdAt', 'c.updatedAt', 'a.username as author', 'c.isEnabled as published', 'c.isTrashed as trashed', 'c.body as body')
+            ->select(
+                'c.id',
+                'c.createdAt',
+                'c.updatedAt',
+                'a.username as author',
+                'c.isEnabled as published',
+                'c.isTrashed as trashed',
+                'c.body as body'
+            )
             ->leftJoin('c.Author', 'a')
             ->where('c.id = :id')
-            ->setParameter('id', $id)
-        ;
-
-        return $qb->getQuery()
-            ->getOneOrNullResult(Query::HYDRATE_ARRAY)
-            ;
+            ->setParameter('id', $id);
+        return $qb->getQuery()->getOneOrNullResult(Query::HYDRATE_ARRAY);
     }
 
     /**
@@ -101,9 +99,7 @@ class CommentRepository extends EntityRepository
     public function findAllByAuthor(User $user): array
     {
         $qb = $this->createQueryBuilder('c');
-        $qb
-            ->andWhere('c.Author = :author')
-            ->setParameter('author', $user);
+        $qb->andWhere('c.Author = :author')->setParameter('author', $user);
 
         return $qb->getQuery()->getResult();
     }
@@ -126,9 +122,7 @@ class CommentRepository extends EntityRepository
             ->setParameter('user', $user)
             ->orderBy('c.updatedAt', 'ASC');
 
-        return $qb
-            ->getQuery()
-            ->execute();
+        return $qb->getQuery()->execute();
     }
 
     public function getEnabledWith($from = null, $to = null)
@@ -136,15 +130,11 @@ class CommentRepository extends EntityRepository
         $qb = $this->getIsEnabledQueryBuilder();
 
         if ($from) {
-            $qb->andWhere('c.createdAt >= :from')
-               ->setParameter('from', $from)
-            ;
+            $qb->andWhere('c.createdAt >= :from')->setParameter('from', $from);
         }
 
         if ($to) {
-            $qb->andWhere('c.createdAt <= :to')
-               ->setParameter('to', $to)
-           ;
+            $qb->andWhere('c.createdAt <= :to')->setParameter('to', $to);
         }
 
         return $qb->getQuery()->getResult();
@@ -154,7 +144,6 @@ class CommentRepository extends EntityRepository
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.isEnabled = true')
-            ->andWhere('c.expired = false')
-        ;
+            ->andWhere('c.expired = false');
     }
 }

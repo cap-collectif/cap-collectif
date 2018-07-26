@@ -1,8 +1,8 @@
 ProposalStep:
   type: interface
   inherits:
-    - Step
-    - WithProposals
+    - 'Step'
+    - 'WithProposals'
   config:
     description: 'A proposal step'
     resolveType: "@=resolver('step_type', [value])"
@@ -10,8 +10,7 @@ ProposalStep:
       requirements:
         type: 'RequirementConnection!'
         description: 'The requirements to vote on this step.'
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\StepRequirementsResolver", [value, getUser(), args])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\StepRequirementsResolver", [value, getUser(), args])'
       project:
         type: 'Project'
       votesLimit:
@@ -34,8 +33,7 @@ ProposalStep:
         type: 'ProposalVoteConnection!'
         description: 'A list of viewer votes associated with the step.'
         argsBuilder: 'Relay::Connection'
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerStepVotesResolver", [value, getUser(), args])'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerStepVotesResolver", [value, getUser(), args])'
         args:
           first:
             type: 'Int'

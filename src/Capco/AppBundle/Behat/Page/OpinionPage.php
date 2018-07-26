@@ -39,8 +39,8 @@ class OpinionPage extends Page
         // Sources
         'sources list' => '#sources-list',
         'add source button' => '#source-form__add',
-        'source vote button' => '#sources-list li:first-child .source__btn--vote',
-        'first source vote count' => '#sources-list li:first-child .opinion__votes-nb',
+        'source vote button' => '#sources-list .list-group-item:first-child .source__btn--vote',
+        'first source vote count' => '#sources-list .list-group-item:first-child .opinion__votes-nb',
         'source create title field' => '#source-form #sourceTitle',
         'source create body field' => '#source-form #sourceBody .ql-editor',
         'source create link field' => '#source-form #sourceLink',

@@ -16,6 +16,7 @@ export class ProposalDetailEstimation extends React.Component<Props> {
 
     return estimation !== null && typeof estimation !== 'undefined' ? (
       <div className="tags-list__tag ellipsis">
+        <i className="cap cap-coins-2-1 icon--blue" />
         <FormattedNumber
           minimumFractionDigits={0}
           value={estimation}

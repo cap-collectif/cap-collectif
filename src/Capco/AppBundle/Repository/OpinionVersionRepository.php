@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Opinion;
@@ -17,10 +16,7 @@ class OpinionVersionRepository extends EntityRepository
 
     public function getAllIds()
     {
-        $qb = $this->createQueryBuilder('o')
-                  ->select('o.id')
-        ;
-
+        $qb = $this->createQueryBuilder('o')->select('o.id');
         return $qb->getQuery()->getArrayResult();
     }
 
@@ -33,54 +29,57 @@ class OpinionVersionRepository extends EntityRepository
             ->leftJoin('o.arguments', 'argument', 'WITH', 'argument.isTrashed = false')
             ->leftJoin('o.sources', 'source', 'WITH', 'source.isTrashed = false')
             ->andWhere('o.id = :id')
-            ->setParameter('id', $id)
-        ;
-
+            ->setParameter('id', $id);
         return $qb->getQuery()->getOneOrNullResult();
     }
 
     public function getRecentOrdered()
     {
         $qb = $this->createQueryBuilder('o')
-            ->select('o.id', 'o.title', 'o.createdAt', 'o.updatedAt', 'a.username as author', 'o.enabled as published', 'o.isTrashed as trashed', 'c.title as project')
-            ->where('o.validated = :validated')
+            ->select(
+                'o.id',
+                'o.title',
+                'o.createdAt',
+                'o.updatedAt',
+                'a.username as author',
+                'o.enabled as published',
+                'o.isTrashed as trashed',
+                'c.title as project'
+            )
             ->leftJoin('o.author', 'a')
             ->leftJoin('o.parent', 'op')
             ->leftJoin('op.step', 's')
             ->leftJoin('s.projectAbstractStep', 'cas')
-            ->leftJoin('cas.project', 'c')
-            ->setParameter('validated', false)
-        ;
-
-        return $qb->getQuery()
-            ->getArrayResult()
-        ;
+            ->leftJoin('cas.project', 'c');
+        return $qb->getQuery()->getArrayResult();
     }
 
     public function getArrayById(string $id)
     {
         $qb = $this->createQueryBuilder('o')
-            ->select('o.id', 'o.title', 'o.createdAt', 'o.updatedAt', 'a.username as author', 'o.enabled as published', 'o.isTrashed as trashed', 'CONCAT(CONCAT(o.comment, \'<hr>\'), o.body) as body', 'c.title as project')
+            ->select(
+                'o.id',
+                'o.title',
+                'o.createdAt',
+                'o.updatedAt',
+                'a.username as author',
+                'o.enabled as published',
+                'o.isTrashed as trashed',
+                'CONCAT(CONCAT(o.comment, \'<hr>\'), o.body) as body',
+                'c.title as project'
+            )
             ->leftJoin('o.author', 'a')
             ->leftJoin('o.parent', 'op')
             ->leftJoin('op.step', 's')
             ->leftJoin('s.projectAbstractStep', 'cas')
             ->leftJoin('cas.project', 'c')
             ->where('o.id = :id')
-            ->setParameter('id', $id)
-        ;
-
-        return $qb->getQuery()
-            ->getOneOrNullResult(Query::HYDRATE_ARRAY)
-        ;
+            ->setParameter('id', $id);
+        return $qb->getQuery()->getOneOrNullResult(Query::HYDRATE_ARRAY);
     }
 
     /**
      * Get trashed or unpublished versions by project.
-     *
-     * @param $project
-     *
-     * @return array
      */
     public function getTrashedOrUnpublishedByProject($project)
     {
@@ -102,118 +101,98 @@ class OpinionVersionRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getEnabledByOpinion(Opinion $opinion, $filter = 'last', $trashed = false, $offset = 0, $limit = null)
+    public function getByContributionQB(Opinion $opinion)
     {
         $qb = $this->getIsEnabledQueryBuilder()
-            ->select('o', 'author', 'media', '(o.votesCountMitige + o.votesCountOk + o.votesCountNok) as HIDDEN vnb')
-            ->leftJoin('o.author', 'author')
-            ->leftJoin('author.media', 'media')
+            ->select('o', '(o.votesCountMitige + o.votesCountOk + o.votesCountNok) as HIDDEN vnb')
             ->andWhere('o.parent = :opinion')
             ->andWhere('o.isTrashed = :trashed')
             ->setParameter('opinion', $opinion)
-            ->setParameter('trashed', $trashed)
-        ;
+            ->setParameter('trashed', false);
+        return $qb;
+    }
 
-        if ('last' === $filter) {
-            $qb->orderBy('o.updatedAt', 'DESC');
-            $qb->addOrderBy('o.votesCountOk', 'DESC');
-        } elseif ('old' === $filter) {
-            $qb->orderBy('o.updatedAt', 'ASC');
-            $qb->addOrderBy('o.votesCountOk', 'DESC');
-        } elseif ('favorable' === $filter) {
-            $qb->orderBy('o.votesCountOk', 'DESC');
-            $qb->addOrderBy('o.votesCountNok', 'ASC');
-            $qb->addOrderBy('o.updatedAt', 'DESC');
-        } elseif ('votes' === $filter) {
-            $qb->orderBy('vnb', 'DESC');
-            $qb->addOrderBy('o.updatedAt', 'DESC');
-        } elseif ('comments' === $filter) {
-            $qb->orderBy('o.argumentsCount', 'DESC');
-            $qb->addOrderBy('o.updatedAt', 'DESC');
-        } elseif ('random' === $filter) {
-            $qb->addSelect('RAND() as HIDDEN rand')
-                ->addOrderBy('rand')
-            ;
+    public function countByContribution(Opinion $opinion): int
+    {
+        $qb = $this->getByContributionQB($opinion);
+        $qb->select('COUNT(o.id)');
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function getByContribution(
+        Opinion $opinion,
+        ?int $limit,
+        ?int $first,
+        string $field,
+        string $direction
+    ) {
+        $qb = $this->getByContributionQB($opinion);
+
+        if ('CREATED_AT' === $field) {
+            $qb->addOrderBy('o.createdAt', $direction);
         }
 
-        if ($offset) {
-            $qb->setFirstResult($offset);
+        if ('VOTES' === $field) {
+            $qb->addOrderBy('vnb', $direction);
         }
 
-        if ($limit) {
-            $qb->setMaxResults($limit);
+        if ('VOTES_OK' === $field) {
+            $qb->addOrderBy('o.votesCountOk', $direction);
         }
 
+        if ('COMMENTS' === $field) {
+            $qb->addOrderBy('o.argumentsCount', $direction);
+        }
+
+        if ('RANDOM' === $field) {
+            $qb->addSelect('RAND() as HIDDEN rand')->addOrderBy('rand');
+        }
+
+        $qb->setFirstResult($first)->setMaxResults($limit);
         return new Paginator($qb);
     }
 
     public function getByUser($user)
     {
-        return $this->getIsEnabledQueryBuilder('ov')
-            ->leftJoin('ov.author', 'author')
+        return $this->getIsEnabledQueryBuilder('v')
+            ->leftJoin('v.author', 'author')
             ->addSelect('author')
             ->leftJoin('author.media', 'm')
             ->addSelect('m')
-            ->leftJoin('ov.votes', 'votes')
+            ->leftJoin('v.votes', 'votes')
             ->addSelect('votes')
-            ->andWhere('ov.author = :author')
+            ->andWhere('v.author = :author')
             ->setParameter('author', $user)
             ->getQuery()
             ->getResult();
     }
 
-    /**
-     * Get enabled opinions by consultation step.
-     *
-     * @param $step
-     * @param mixed $asArray
-     *
-     * @return mixed
-     */
-    public function getEnabledByConsultationStep($step, $asArray = false)
-    {
-        $qb = $this->getIsEnabledQueryBuilder('ov')
-            ->addSelect('o', 'ot', 'aut', 'ut', 'args')
-            ->leftJoin('ov.parent', 'o')
-            ->leftJoin('ov.author', 'aut')
-            ->leftJoin('aut.userType', 'ut')
-            ->leftJoin('ov.arguments', 'args')
-            ->leftJoin('o.OpinionType', 'ot')
-            ->andWhere('o.step = :step')
-            ->andWhere('o.isEnabled = 1')
-            ->setParameter('step', $step)
-            ->addOrderBy('ov.updatedAt', 'DESC');
-
-        return $asArray ? $qb->getQuery()->getArrayResult() : $qb->getQuery()->getResult();
-    }
-
     public function countByAuthorAndProject(User $author, Project $project): int
     {
         $qb = $this->getIsEnabledQueryBuilder('version')
-          ->select('count(DISTINCT version)')
-          ->leftJoin('version.parent', 'opinion')
-          ->andWhere('version.author = :author')
-          ->andWhere('opinion.step IN (:steps)')
-          ->setParameter('steps', array_map(function ($step) {
-              return $step;
-          }, $project->getRealSteps()))
-          ->setParameter('author', $author)
-      ;
-
+            ->select('count(DISTINCT version)')
+            ->leftJoin('version.parent', 'opinion')
+            ->andWhere('version.author = :author')
+            ->andWhere('opinion.step IN (:steps)')
+            ->setParameter(
+                'steps',
+                array_map(function ($step) {
+                    return $step;
+                }, $project->getRealSteps())
+            )
+            ->setParameter('author', $author);
         return $qb->getQuery()->getSingleScalarResult();
     }
 
     public function countByAuthorAndStep(User $author, ConsultationStep $step): int
     {
         $qb = $this->getIsEnabledQueryBuilder('version')
-          ->select('count(DISTINCT version)')
-          ->leftJoin('version.parent', 'opinion')
-          ->andWhere('opinion.step = :step')
-          ->andWhere('version.author = :author')
-          ->setParameter('step', $step)
-          ->setParameter('author', $author)
-      ;
-
+            ->select('count(DISTINCT version)')
+            ->leftJoin('version.parent', 'opinion')
+            ->andWhere('opinion.step = :step')
+            ->andWhere('version.author = :author')
+            ->setParameter('step', $step)
+            ->setParameter('author', $author);
         return $qb->getQuery()->getSingleScalarResult();
     }
 
@@ -223,18 +202,14 @@ class OpinionVersionRepository extends EntityRepository
         $qb
             ->select('count(DISTINCT version)')
             ->andWhere('version.author = :author')
-            ->setParameter('author', $user)
-        ;
-
+            ->setParameter('author', $user);
         return $qb->getQuery()->getSingleScalarResult();
     }
 
     public function findAllByAuthor(User $user): array
     {
         $qb = $this->createQueryBuilder('version');
-        $qb
-            ->andWhere('version.author = :author')
-            ->setParameter('author', $user);
+        $qb->andWhere('version.author = :author')->setParameter('author', $user);
 
         return $qb->getQuery()->getResult();
     }
@@ -250,8 +225,13 @@ class OpinionVersionRepository extends EntityRepository
      *
      * @return mixed
      */
-    public function getEnabledByProject($project, $excludedAuthor = null, $orderByRanking = false, $limit = null, $page = 1)
-    {
+    public function getEnabledByProject(
+        $project,
+        $excludedAuthor = null,
+        $orderByRanking = false,
+        $limit = null,
+        $page = 1
+    ) {
         $qb = $this->getIsEnabledQueryBuilder('ov')
             ->addSelect('o', 'ot', 's', 'aut', 'm')
             ->leftJoin('ov.parent', 'o')
@@ -263,14 +243,9 @@ class OpinionVersionRepository extends EntityRepository
             ->andWhere('cas.project = :project')
             ->andWhere('ov.isTrashed = :trashed')
             ->setParameter('project', $project)
-            ->setParameter('trashed', false)
-        ;
-
+            ->setParameter('trashed', false);
         if (null !== $excludedAuthor) {
-            $qb
-                ->andWhere('aut.id != :author')
-                ->setParameter('author', $excludedAuthor)
-            ;
+            $qb->andWhere('aut.id != :author')->setParameter('author', $excludedAuthor);
         }
 
         if ($orderByRanking) {
@@ -278,18 +253,16 @@ class OpinionVersionRepository extends EntityRepository
                 ->orderBy('ov.ranking', 'ASC')
                 ->addOrderBy('ov.votesCountOk', 'DESC')
                 ->addOrderBy('ov.votesCountNok', 'ASC')
-                ->addOrderBy('ov.updatedAt', 'DESC')
-            ;
+                ->addOrderBy('ov.updatedAt', 'DESC');
         }
 
         $qb->addOrderBy('ov.updatedAt', 'DESC');
 
         if (null !== $limit && \is_int($limit) && 0 < $limit) {
-            $query = $qb->getQuery()
+            $query = $qb
+                ->getQuery()
                 ->setFirstResult(($page - 1) * $limit)
-                ->setMaxResults($limit)
-            ;
-
+                ->setMaxResults($limit);
             return new Paginator($query);
         }
 
@@ -314,46 +287,22 @@ class OpinionVersionRepository extends EntityRepository
             ->andWhere('ov.isTrashed = :trashed')
             ->andWhere('cas.project = :project')
             ->setParameter('trashed', false)
-            ->setParameter('project', $project)
-        ;
-
+            ->setParameter('project', $project);
         if (null !== $excludedAuthor) {
             $qb
                 ->innerJoin('ov.author', 'a')
                 ->andWhere('a.id != :author')
-                ->setParameter('author', $excludedAuthor)
-            ;
+                ->setParameter('author', $excludedAuthor);
         }
 
-        $qb
-            ->orderBy('ov.votesCountOk', 'DESC')
-        ;
-
+        $qb->orderBy('ov.votesCountOk', 'DESC');
         return $qb->getQuery()->getResult();
-    }
-
-    public function getWithVotes(string $id, $limit = null)
-    {
-        $qb = $this->getIsEnabledQueryBuilder('o')
-            ->addSelect('vote')
-            ->innerJoin('o.votes', 'vote')
-            ->andWhere('o.id = :id')
-            ->setParameter('id', $id)
-        ;
-
-        if (null !== $limit) {
-            $qb->setMaxResults($limit);
-        }
-
-        return $qb->getQuery()->getOneOrNullResult();
     }
 
     protected function getIsEnabledQueryBuilder($alias = 'o')
     {
-        return $this
-            ->createQueryBuilder($alias)
+        return $this->createQueryBuilder($alias)
             ->andWhere($alias . '.enabled = true')
-            ->andWhere($alias . '.expired = false')
-        ;
+            ->andWhere($alias . '.expired = false');
     }
 }

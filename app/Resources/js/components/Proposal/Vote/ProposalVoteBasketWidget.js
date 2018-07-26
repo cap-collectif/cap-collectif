@@ -11,7 +11,7 @@ type Props = {
   step: ProposalVoteBasketWidget_step,
   viewer: ?ProposalVoteBasketWidget_viewer,
   votesPageUrl: string,
-  image: string,
+  image: ?string,
   relay: RelayRefetchProp,
 };
 
