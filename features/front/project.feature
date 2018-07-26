@@ -150,6 +150,17 @@ Scenario: Can not access trash if feature is disabled
   Then I should not see "project.show.trashed.short_name" in the "#main" element
 
 @javascript
+Scenario: Can not access trash if not logged in
+  Given feature "project_trash" is enabled
+  And I visited "consultation page" with:
+    | projectSlug | croissance-innovation-disruption |
+    | stepSlug    | collecte-des-avis                |
+  And I should see "project.show.trashed.short_name" in the "#main" element
+  When I click the "#trash-link" element
+  And I wait 3 seconds
+  Then I should see a "#login-popover" element
+
+@javascript
 Scenario: Project trash display correct numbers of elements
   Given feature "project_trash" is enabled
   And I am logged in as user

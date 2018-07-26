@@ -1,21 +1,22 @@
 // @flow
-import * as React from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { graphql, createFragmentContainer } from 'react-relay';
 import OpinionSourceAddButton from './OpinionSourceAddButton';
 import OpinionSourceFormModal from './OpinionSourceFormModal';
 import { showSourceCreateModal } from '../../../redux/modules/opinion';
-import type { OpinionSourceAdd_sourceable } from './__generated__/OpinionSourceAdd_sourceable.graphql';
 
 type Props = {
+  disabled?: boolean,
   dispatch: Function,
-  sourceable: OpinionSourceAdd_sourceable,
 };
 
 class OpinionSourceAdd extends React.Component<Props> {
+  static defaultProps = {
+    disabled: false,
+  };
+
   render() {
-    const { dispatch, sourceable } = this.props;
-    const disabled = !sourceable.contribuable;
+    const { disabled, dispatch } = this.props;
     return (
       <div>
         <OpinionSourceAddButton
@@ -24,19 +25,10 @@ class OpinionSourceAdd extends React.Component<Props> {
             dispatch(showSourceCreateModal());
           }}
         />
-        {!disabled && <OpinionSourceFormModal sourceable={sourceable} source={null} />}
+        {!disabled && <OpinionSourceFormModal source={null} />}
       </div>
     );
   }
 }
 
-const container = connect()(OpinionSourceAdd);
-export default createFragmentContainer(container, {
-  sourceable: graphql`
-    fragment OpinionSourceAdd_sourceable on Sourceable {
-      id
-      contribuable
-      ...OpinionSourceFormModal_sourceable
-    }
-  `,
-});
+export default connect()(OpinionSourceAdd);

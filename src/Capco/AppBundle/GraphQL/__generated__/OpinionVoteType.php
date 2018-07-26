@@ -27,10 +27,8 @@ final class OpinionVoteType extends ObjectType implements GeneratedTypeInterface
                     'type' => Type::nonNull(Type::id()),
                     'args' => [
                     ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["relay_globalid_field", array(0 => $value, 1 => $info, 2 => null, 3 => null)]);
-                    },
-                    'description' => 'The ID of an object',
+                    'resolve' => null,
+                    'description' => null,
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

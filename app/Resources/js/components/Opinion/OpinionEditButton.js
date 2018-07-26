@@ -1,16 +1,14 @@
 // @flow
-import * as React from 'react';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { graphql, createFragmentContainer } from 'react-relay';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import OpinionEditModal from './Edit/OpinionEditModal';
 import { openOpinionEditModal } from '../../redux/modules/opinion';
-import type { OpinionEditButton_opinion } from './__generated__/OpinionEditButton_opinion.graphql';
 
 type Props = {
   dispatch: Function,
-  opinion: OpinionEditButton_opinion,
+  opinion: Object,
 };
 
 export class OpinionEditButton extends React.Component<Props> {
@@ -32,13 +30,4 @@ export class OpinionEditButton extends React.Component<Props> {
   }
 }
 
-const container = connect()(OpinionEditButton);
-
-export default createFragmentContainer(container, {
-  opinion: graphql`
-    fragment OpinionEditButton_opinion on Opinion {
-      ...OpinionEditModal_opinion
-      id
-    }
-  `,
-});
+export default connect()(OpinionEditButton);

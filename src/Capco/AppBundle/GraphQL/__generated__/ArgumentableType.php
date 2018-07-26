@@ -35,18 +35,6 @@ final class ArgumentableType extends InterfaceType implements GeneratedTypeInter
                     'public' => null,
                     'access' => null,
                 ],
-                'contribuable' => [
-                    'type' => Type::nonNull(Type::boolean()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'arguments' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ArgumentConnection')),
                     'args' => [
