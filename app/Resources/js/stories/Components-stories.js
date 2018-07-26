@@ -731,16 +731,8 @@ storiesOf('Components', module)
           <div className="left-block">
             <UserAvatar user={author}/>
             <div>
-              <p>
-                <a href="#" className="author-name">
-                  Lorem ipsum
-                </a>{' '}
-                <span className="excerpt">3 juin 2014</span>
-              </p>
-              <h3 className="title">
-                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua.
-              </h3>
+              <p><a href="#">Lorem ipsum</a> <span className="excerpt">3 juin 2014</span></p>
+              <h3 className="title">Yoloo</h3>
               <InlineList>
                 <li>Item 1</li>
                 <li>Item 2</li>
@@ -785,10 +777,7 @@ storiesOf('Components', module)
                     </a>{' '}
                     <span className="excerpt">3 juin 2014</span>
                   </p>
-                  <h3 className="title">
-                    consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua.
-                  </h3>
+                  <h3 className="title">Yoloo</h3>
                   <InlineList>
                     <li>Item 1</li>
                     <li>Item 2</li>

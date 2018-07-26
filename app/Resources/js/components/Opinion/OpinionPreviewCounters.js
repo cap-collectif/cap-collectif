@@ -1,53 +1,66 @@
 // @flow
 import * as React from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { COMMENT_SYSTEM_NONE } from '../../constants/ArgumentConstants';
 import { VOTE_WIDGET_DISABLED } from '../../constants/VoteConstants';
-import InlineList from '../Ui/List/InlineList';
-import type { OpinionPreviewCounters_opinion } from './__generated__/OpinionPreviewCounters_opinion.graphql';
+import InlineList from "../Ui/List/InlineList";
 
 type Props = {
-  opinion: OpinionPreviewCounters_opinion,
+  opinion: Object,
 };
 
 class OpinionPreviewCounters extends React.Component<Props> {
+  getType = () => {
+    const opinion = this.props.opinion;
+    if (opinion.parent) {
+      return opinion.parent.type;
+    }
+    if (opinion.section) {
+      return opinion.section;
+    }
+    return opinion.type;
+  };
+
   render() {
     const opinion = this.props.opinion;
-    if (!opinion || !opinion.section) return null;
-    const section = opinion.section;
+    const type = this.getType();
     const counters = [];
-    if (section.voteWidgetType !== VOTE_WIDGET_DISABLED) {
+    if (type.voteWidgetType !== VOTE_WIDGET_DISABLED) {
       counters.push(
         <FormattedMessage
           id="global.votes"
           values={{
-            num: opinion.votes ? opinion.votes.totalCount : 0,
+            num: opinion.votesCount,
           }}
         />,
       );
     }
-    if (opinion.__typename === 'Opinion' && section.versionable && opinion.versions) {
+    if (!opinion.parent && type.versionable) {
       counters.push(
-        <FormattedMessage id="global.versions" values={{ num: opinion.versions.totalCount }} />,
+        <FormattedMessage
+          id="global.versions"
+          values={{
+            num: opinion.versionsCount,
+          }}
+        />,
       );
     }
-    if (section.commentSystem !== COMMENT_SYSTEM_NONE && opinion.arguments) {
+    if (type.commentSystem !== COMMENT_SYSTEM_NONE) {
       counters.push(
         <FormattedMessage
           id="global.arguments"
           values={{
-            num: opinion.arguments.totalCount,
+            num: opinion.argumentsCount,
           }}
         />,
       );
     }
-    if (section.sourceable && opinion.sources) {
+    if (type.sourceable) {
       counters.push(
         <FormattedMessage
           id="global.sources"
           values={{
-            num: opinion.sources.totalCount,
+            num: opinion.sourcesCount,
           }}
         />,
       );
@@ -55,54 +68,15 @@ class OpinionPreviewCounters extends React.Component<Props> {
     return (
       <InlineList>
         {counters.map((counter, index) => {
-          return <li key={index}>{counter}</li>;
+            return (
+              <li key={index}>
+                {counter}
+              </li>
+            )
         })}
       </InlineList>
     );
   }
 }
 
-export default createFragmentContainer(OpinionPreviewCounters, {
-  opinion: graphql`
-    fragment OpinionPreviewCounters_opinion on OpinionOrVersion {
-      ... on Opinion {
-        __typename
-        votes(first: 0) {
-          totalCount
-        }
-        sources(first: 0) {
-          totalCount
-        }
-        arguments(first: 0) {
-          totalCount
-        }
-        versions(first: 0) {
-          totalCount
-        }
-        section {
-          voteWidgetType
-          commentSystem
-          sourceable
-          versionable
-        }
-      }
-      ... on Version {
-        __typename
-        votes(first: 0) {
-          totalCount
-        }
-        sources(first: 0) {
-          totalCount
-        }
-        arguments(first: 0) {
-          totalCount
-        }
-        section {
-          voteWidgetType
-          commentSystem
-          sourceable
-        }
-      }
-    }
-  `,
-});
+export default OpinionPreviewCounters;

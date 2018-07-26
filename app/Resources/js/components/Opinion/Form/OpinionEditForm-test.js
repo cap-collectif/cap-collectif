@@ -3,19 +3,16 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { OpinionEditForm } from './OpinionEditForm';
-import { $refType } from '../../../mocks';
 
 describe('<OpinionEditForm />', () => {
   const props = {
     handleSubmit: jest.fn(),
     opinion: {
-      id: 'opinion1',
-      $refType,
-      step: { descriptionHelpText: 'descriptionHelpText', titleHelpText: 'titleHelpText' },
-      appendices: [{ body: 'content', appendixType: { title: 'Exposé des motifs' } }],
+      appendices: [{ type: { title: 'Exposé des motifs' } }],
       title: 'titre',
       body: 'body',
     },
+    step: {},
     initialValues: {},
   };
 

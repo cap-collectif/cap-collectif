@@ -20,7 +20,6 @@ exports[`<OpinionEditForm /> renders a form 1`] = `
   <Field
     autoFocus={true}
     component={[Function]}
-    help="titleHelpText"
     id="opinion_title"
     label={
       <FormattedMessage
@@ -34,7 +33,6 @@ exports[`<OpinionEditForm /> renders a form 1`] = `
   <Field
     autoFocus={true}
     component={[Function]}
-    help="descriptionHelpText"
     id="opinion_body"
     label={
       <FormattedMessage

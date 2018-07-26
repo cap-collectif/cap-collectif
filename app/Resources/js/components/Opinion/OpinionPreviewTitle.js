@@ -1,45 +1,34 @@
 // @flow
 import * as React from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
 import OpinionTypeLabel from './OpinionTypeLabel';
-import type { OpinionPreviewTitle_opinion } from './__generated__/OpinionPreviewTitle_opinion.graphql';
 
 type Props = {
-  opinion: OpinionPreviewTitle_opinion,
+  link: boolean,
+  opinion: Object,
   showTypeLabel: boolean,
 };
 
-export class OpinionPreviewTitle extends React.Component<Props> {
+export default class OpinionPreviewTitle extends React.Component<Props> {
+  getType() {
+    const opinion = this.props.opinion;
+    if (opinion.parent) {
+      return opinion.parent.type;
+    }
+    return opinion.type;
+  }
+
   render() {
-    const { opinion, showTypeLabel } = this.props;
+    const { link, opinion, showTypeLabel } = this.props;
+    let url = '';
+    if (link) {
+      url = opinion._links ? opinion._links.show : opinion.url;
+    }
     return (
       <h3 className="title">
-        {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
-        {showTypeLabel ? <OpinionTypeLabel section={opinion.section || null} /> : null}
+        {showTypeLabel ? <OpinionTypeLabel type={this.getType()} /> : null}
         {showTypeLabel ? ' ' : null}
-        <a href={opinion.url}>{opinion.title}</a>
+        {link ? <a href={url}>{opinion.title}</a> : opinion.title}
       </h3>
     );
   }
 }
-
-export default createFragmentContainer(OpinionPreviewTitle, {
-  opinion: graphql`
-    fragment OpinionPreviewTitle_opinion on OpinionOrVersion {
-      ... on Opinion {
-        url
-        title
-        section {
-          ...OpinionTypeLabel_section
-        }
-      }
-      ... on Version {
-        url
-        title
-        section {
-          ...OpinionTypeLabel_section
-        }
-      }
-    }
-  `,
-});

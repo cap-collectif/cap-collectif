@@ -2,9 +2,6 @@
 
 {% block mainContent %}
 <style>body { background-color: #F6F6F6 }</style>
-<div style="position: fixed; width: 60%; left: 20%; z-index: 1030;">
-    {{ react_render_component('AlertBoxApp') }}
-</div>
 <div id="shield-mode" class="container" style="margin-top: 50px">
     <div class="text-center" style="margin-bottom: 10px">
       <img src="{{ media_public_url(capco_site_image_media('image.shield'), 'default_shield') }}"/>

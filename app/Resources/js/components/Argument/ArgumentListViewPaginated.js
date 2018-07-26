@@ -52,7 +52,7 @@ export class ArgumentListViewPaginated extends React.Component<Props, State> {
                     this.setState({ loading: false });
                   });
                 }}>
-                <FormattedMessage id="global.more" />
+                <FormattedMessage id="see-more-proposals" />
               </a>
             )}
           </ListGroupItem>
@@ -116,7 +116,7 @@ export default createPaginationContainer(
       query ArgumentListViewPaginatedQuery(
         $argumentableId: ID!
         $isAuthenticated: Boolean!
-        $type: ArgumentValue!
+        $type: ArgumentValue
         $cursor: String
         $orderBy: ArgumentOrder
         $count: Int

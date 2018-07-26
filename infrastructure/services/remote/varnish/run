@@ -1,4 +1,4 @@
 #!/bin/bash
 
-echo "[$(date -u)][VARNISH] Started!"
+# Start varnish and log
 exec varnishd -F -f /etc/varnish/capco.vcl -s malloc,${VARNISH_MEMORY} -a 0.0.0.0:80

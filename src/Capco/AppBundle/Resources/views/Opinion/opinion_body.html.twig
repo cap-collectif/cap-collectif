@@ -1,4 +1,3 @@
-{% set date = opinion.updatedAt | localizeddate('medium', 'none') %}
 <div class="opinion__body  box">
     {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': opinion.Author, 'link_classes': 'pull-left'} only %}
     <div class="opinion__data">
@@ -10,7 +9,7 @@
             {% endif %}
             • {{ opinion.createdAt | localizeddate('medium', 'none', app.request.locale) }}
             {% if opinion.createdAt != opinion.updatedAt %}
-                • {{ 'global.edited'|trans({}, 'CapcoAppBundle') }} {{ date }}
+                • {{ 'global.edited' | trans({'%date%': opinion.updatedAt | localizeddate('medium', 'none') }, 'CapcoAppBundle') }}
             {% endif %}
 
             {% if isVersion == false and opinion.pinned %}

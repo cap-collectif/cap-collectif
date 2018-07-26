@@ -73,65 +73,6 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'contribuable' => [
-                    'type' => Type::nonNull(Type::boolean()),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $value->canContribute();
-                    },
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'arguments' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ArgumentConnection')),
-                    'args' => [
-                        [
-                            'name' => 'after',
-                            'type' => Type::string(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'first',
-                            'type' => Type::int(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'before',
-                            'type' => Type::string(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'last',
-                            'type' => Type::int(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'orderBy',
-                            'type' => $globalVariable->get('typeResolver')->resolve('ArgumentOrder'),
-                            'description' => null,
-                            'defaultValue' => ['field' => 'CREATED_AT', 'direction' => 'DESC'],
-                        ],
-                        [
-                            'name' => 'type',
-                            'type' => $globalVariable->get('typeResolver')->resolve('ArgumentValue'),
-                            'description' => 'If omitted, returns all arguments. If provided, returns the arguments of this particular type.',
-                        ],
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionArgumentsResolver", array(0 => $value, 1 => $args)]);
-                    },
-                    'description' => 'The arguments related to the argumentable.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'kind' => [
                     'type' => Type::nonNull(Type::string()),
                     'args' => [
@@ -184,22 +125,6 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'viewerHasReport' => [
-                    'type' => Type::nonNull(Type::boolean()),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $value->userHasReport(\Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable));
-                    },
-                    'description' => 'Does the viewer already submitted a report ?',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
-                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
-                    },
-                ],
                 'author' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('User')),
                     'args' => [
@@ -224,66 +149,24 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'sources' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('SourceConnection')),
-                    'args' => [
-                        [
-                            'name' => 'after',
-                            'type' => Type::string(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'first',
-                            'type' => Type::int(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'before',
-                            'type' => Type::string(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'last',
-                            'type' => Type::int(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'orderBy',
-                            'type' => $globalVariable->get('typeResolver')->resolve('SourceOrder'),
-                            'description' => null,
-                            'defaultValue' => ['field' => 'CREATED_AT', 'direction' => 'DESC'],
-                        ],
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableSourcesResolver", array(0 => $value, 1 => $args)]);
-                    },
-                    'description' => 'The sources related to the sourceable.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'availableSourceCategories' => [
-                    'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('SourceCategory')),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableAvailableCategoriesResolver", array()]);
-                    },
-                    'description' => 'The available sources categories of to the sourceable.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'createdAt' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('DateTime')),
                     'args' => [
                     ],
                     'resolve' => null,
                     'description' => 'Identifies the date and time when the object was created.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'type' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('OpinionType')),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => null,
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -326,26 +209,114 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'step' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('Consultation')),
+                'votesCount' => [
+                    'type' => Type::nonNull(Type::int()),
                     'args' => [
                     ],
-                    'resolve' => null,
-                    'description' => null,
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["proposition_votesCount", array(0 => $value)]);
+                    },
+                    'description' => 'Number of votes.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => null,
                 ],
-                'viewerVote' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('OpinionVote'),
+                'votesCountOk' => [
+                    'type' => Type::nonNull(Type::int()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'Number of ok votes.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'votesCountMitige' => [
+                    'type' => Type::nonNull(Type::int()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'Number of mitige votes.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'votesCountNok' => [
+                    'type' => Type::nonNull(Type::int()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'Number of negative votes.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'argumentsCount' => [
+                    'type' => Type::nonNull(Type::int()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'Number of arguments.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'argumentsCountFor' => [
+                    'type' => Type::nonNull(Type::int()),
                     'args' => [
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionViewerVoteResolver", array(0 => $value, 1 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
+                        return $globalVariable->get('resolverResolver')->resolve(["proposition_argumentsCountFor", array(0 => $value)]);
                     },
-                    'description' => 'The viewer vote.',
+                    'description' => 'Number of for arguments.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'argumentsCountAgainst' => [
+                    'type' => Type::nonNull(Type::int()),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["proposition_argumentsCountAgainst", array(0 => $value)]);
+                    },
+                    'description' => 'Number of against arguments.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'versionsCount' => [
+                    'type' => Type::nonNull(Type::int()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'Number of versions.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'sourcesCount' => [
+                    'type' => Type::nonNull(Type::int()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'Number of sources.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -353,42 +324,16 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                     'access' => null,
                 ],
                 'votes' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('YesNoPairedVoteConnection')),
+                    'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('OpinionVote')),
                     'args' => [
-                        [
-                            'name' => 'after',
-                            'type' => Type::string(),
-                            'description' => null,
-                        ],
                         [
                             'name' => 'first',
                             'type' => Type::int(),
                             'description' => null,
                         ],
-                        [
-                            'name' => 'before',
-                            'type' => Type::string(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'last',
-                            'type' => Type::int(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'orderBy',
-                            'type' => $globalVariable->get('typeResolver')->resolve('ProposalVotesOrder'),
-                            'description' => null,
-                            'defaultValue' => ['field' => 'CREATED_AT', 'direction' => 'DESC'],
-                        ],
-                        [
-                            'name' => 'value',
-                            'type' => $globalVariable->get('typeResolver')->resolve('YesNoPairedVoteValue'),
-                            'description' => 'Filters vote by value',
-                        ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionVotesResolver", array(0 => $value, 1 => $args)]);
+                        return $globalVariable->get('resolverResolver')->resolve(["proposition_votes", array(0 => $value, 1 => $args)]);
                     },
                     'description' => null,
                     'deprecationReason' => null,
@@ -433,8 +378,8 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'versions' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('VersionConnection')),
+                'arguments' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ArgumentConnection')),
                     'args' => [
                         [
                             'name' => 'after',
@@ -458,15 +403,44 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                         ],
                         [
                             'name' => 'orderBy',
-                            'type' => $globalVariable->get('typeResolver')->resolve('VersionOrder'),
+                            'type' => $globalVariable->get('typeResolver')->resolve('ArgumentOrder'),
                             'description' => null,
                             'defaultValue' => ['field' => 'CREATED_AT', 'direction' => 'DESC'],
                         ],
+                        [
+                            'name' => 'type',
+                            'type' => $globalVariable->get('typeResolver')->resolve('ArgumentValue'),
+                            'description' => 'If omitted, returns all arguments. If provided, returns the arguments of this particular type.',
+                        ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionVersionsResolver", array(0 => $value, 1 => $args)]);
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionArgumentsResolver", array(0 => $value, 1 => $args)]);
                     },
+                    'description' => 'The arguments related to the contribution.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'versions' => [
+                    'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('Version')),
+                    'args' => [
+                    ],
+                    'resolve' => null,
                     'description' => 'The versions related to the contribution.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'sources' => [
+                    'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('Source')),
+                    'args' => [
+                    ],
+                    'resolve' => null,
+                    'description' => 'The sources related to the contribution.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -501,60 +475,10 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'answer' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('Answer'),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $value->getAnswer();
-                    },
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'ranking' => [
-                    'type' => Type::int(),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'modals' => [
-                    'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('OpinionModal')),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'appendices' => [
-                    'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('Appendix')),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
             ];
             },
             'interfaces' => function () use ($globalVariable) {
-                return [$globalVariable->get('typeResolver')->resolve('Node'), $globalVariable->get('typeResolver')->resolve('Argumentable'), $globalVariable->get('typeResolver')->resolve('Sourceable'), $globalVariable->get('typeResolver')->resolve('Reportable'), $globalVariable->get('typeResolver')->resolve('Contribution'), $globalVariable->get('typeResolver')->resolve('TrashableContribution'), $globalVariable->get('typeResolver')->resolve('ContributionWithAuthor'), $globalVariable->get('typeResolver')->resolve('EditableContribution')];
+                return [$globalVariable->get('typeResolver')->resolve('Node'), $globalVariable->get('typeResolver')->resolve('Argumentable'), $globalVariable->get('typeResolver')->resolve('Contribution'), $globalVariable->get('typeResolver')->resolve('TrashableContribution'), $globalVariable->get('typeResolver')->resolve('ContributionWithAuthor'), $globalVariable->get('typeResolver')->resolve('EditableContribution')];
             },
             'isTypeOf' => null,
             'resolveField' => null,

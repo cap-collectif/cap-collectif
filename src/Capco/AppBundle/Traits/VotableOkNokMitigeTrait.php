@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Traits;
 
 use Capco\AppBundle\Entity\AbstractVote;
@@ -57,6 +58,20 @@ trait VotableOkNokMitigeTrait
     public function getVotesCountAll()
     {
         return $this->votesCountNok + $this->votesCountOk + $this->votesCountMitige;
+    }
+
+    public function getVoteValueByUser(User $user = null)
+    {
+        if (!$user) {
+            return null;
+        }
+        foreach ($this->votes as $vote) {
+            if ($vote->getUser() === $user) {
+                return $vote->getValue();
+            }
+        }
+
+        return null;
     }
 
     public function resetVotes()

@@ -1,0 +1,9 @@
+QuestionChoiceRanking:
+  type: object
+  config:
+    description: 'A possible choice of a question'
+    fields:
+      position:
+        type: 'Int!'
+      answerCount:
+        type: 'Int!'
