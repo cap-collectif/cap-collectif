@@ -31,7 +31,7 @@ class DeleteVersionMutation implements MutationInterface
         $version = $this->versionRepo->find($versionId);
 
         if (!$version) {
-            throw new UserError('Unknown version with id: ' . $versionId);
+            throw new UserError("Unknown version with id: $versionId");
         }
 
         if ($user !== $version->getAuthor()) {

@@ -31,7 +31,7 @@ class DeleteOpinionMutation implements MutationInterface
         $opinion = $this->opinionRepo->find($opinionId);
 
         if (!$opinion) {
-            throw new UserError('Unknown opinion with id: ' . $opinionId);
+            throw new UserError("Unknown opinion with id: $opinionId");
         }
 
         if ($user !== $opinion->getAuthor()) {
