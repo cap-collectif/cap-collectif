@@ -25,3 +25,9 @@ Project:
               type: "ProjectConnection!"
               argsBuilder: "Relay::Connection"
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAllowedViewersResolver", [value, args])'
+            visibility:
+              type: "ProjectVisibility!"
+              description: 'The visibility of project'
+            adminUrl:
+              type: "URI"
+              resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAdminUrlResolver", [value])'

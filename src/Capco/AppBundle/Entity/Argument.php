@@ -282,7 +282,7 @@ class Argument implements Contribution, VotableInterface, Trashable, Publishable
         return $this->getIsEnabled() && !$this->isTrashed() && $this->getParent()->canBeDeleted();
     }
 
-    public function getParent(): OpinionContributionInterface
+    public function getParent()
     {
         if (null !== $this->opinionVersion) {
             return $this->opinionVersion;
@@ -318,7 +318,7 @@ class Argument implements Contribution, VotableInterface, Trashable, Publishable
 
     public function isIndexable(): bool
     {
-        return $this->getIsEnabled();
+        return $this->getProject()->isIndexable();
     }
 
     public static function getElasticsearchTypeName(): string

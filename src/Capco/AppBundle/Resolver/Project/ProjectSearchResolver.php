@@ -14,11 +14,9 @@ class ProjectSearchResolver
         $this->projectRepository = $projectRepository;
     }
 
-    public function search(
-        ProjectSearchParameters $projectSearchParameters,
-        ?User $user = null
-    ): array {
-        $projects = $this->getProjects($projectSearchParameters, $user);
+    public function search(ProjectSearchParameters $projectSearchParameters): array
+    {
+        $projects = $this->getProjects($projectSearchParameters);
         $count = $projects->count();
 
         return [
@@ -32,11 +30,9 @@ class ProjectSearchResolver
         ];
     }
 
-    protected function getProjects(
-        ProjectSearchParameters $projectSearchParameters,
-        ?User $user = null
-    ): Paginator {
-        $this->projectRepository->setUser($user);
+    protected function getProjects(ProjectSearchParameters $projectSearchParameters): Paginator
+    {
+        // TODO in next feature, to find projects accessible by current user, parse user to query
         return $this->projectRepository->getSearchResults(...$projectSearchParameters->toArray());
     }
 }

@@ -49,6 +49,7 @@ import UserAdminCreateButtonApp from './startup/UserAdminCreateButtonApp';
 import EditProfileApp from './startup/EditProfileApp';
 import CookieApp from '../js/startup/CookieApp';
 import UserAdminPageApp from '../js/startup/UserAdminPageApp';
+import ProjectRestrictedAccessApp from '../js/startup/ProjectRestrictedAccessApp';
 
 import appStore from '../js/stores/AppStore';
 
@@ -111,4 +112,5 @@ ReactOnRails.register({
   EditProfileApp,
   CookieApp,
   UserAdminPageApp,
+  ProjectRestrictedAccessApp,
 });

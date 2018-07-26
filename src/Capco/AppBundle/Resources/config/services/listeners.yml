@@ -193,7 +193,7 @@ services:
       - { name: 'jms_serializer.event_subscriber' }
 
   capco.collect_step.serialization_listener:
-    public: true
+    public: truetest
     class: Capco\AppBundle\EventListener\CollectStepSerializationListener
     arguments: []
     tags:
@@ -247,3 +247,14 @@ services:
       - '@fos_user.util.token_generator'
     tags:
       - { name: doctrine.event_listener, event: preFlush, method: preFlush }
+
+  Capco\AppBundle\EventListener\ProjectAccessDeniedExceptionListener:
+    public: true
+    autowire: true
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception,  priority: 250 }
+#
+#  Capco\AppBundle\EventSubscriber\ExceptionSubscriber:
+#    public: true
+#    autowire: true
+#    autoconfigure: true

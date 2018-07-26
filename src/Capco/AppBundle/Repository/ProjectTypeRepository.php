@@ -2,6 +2,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\ProjectType;
+use Capco\AppBundle\Entity\ProjectVisibilityMode;
 use Capco\AppBundle\Traits\ProjectVisibilityTrait;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
@@ -22,10 +23,11 @@ class ProjectTypeRepository extends ServiceEntityRepository
 
     public function findAll($user = null)
     {
-        return $this->createQueryBuilder('p')
+        return //            ->where('projects.visibility >= ' . $this->getVisibilityByViewer($user))
+        $this->createQueryBuilder('p')
             ->select('p')
             ->leftJoin('p.projects', 'projects', Join::WITH, 'projects.projectType IS NOT NULL')
-            ->where('projects.visibility >= ' . $this->getVisibilityByViewer($user))
+            ->where('projects.visibility >= ' . ProjectVisibilityMode::VISIBILITY_PUBLIC)
             ->groupBy('projects.id')
             ->distinct('p.id')
             ->getQuery()

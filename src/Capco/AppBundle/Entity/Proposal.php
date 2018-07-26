@@ -1100,4 +1100,9 @@ class Proposal
     {
         return \count($this->followers);
     }
+
+    public function getVisibility(): int
+    {
+        return $this->getProject()->getVisibility();
+    }
 }

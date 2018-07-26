@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Entity\Project;
@@ -35,13 +34,24 @@ class ProjectsController extends FOSRestController
      */
     public function getProjectsAction(ParamFetcherInterface $paramFetcher)
     {
-        $shouldLimit = !$paramFetcher->get('limit') && $this->get('capco.toggle.manager')->isActive('projects_form');
-        $projectSearchParameters = ProjectSearchParameters::createFromRequest($paramFetcher, $shouldLimit);
-        if ($shouldLimit && !$paramFetcher->get('limit') && $this->get('capco.toggle.manager')->isActive('projects_form')) {
-            $projectSearchParameters->setElements($this->get('capco.site_parameter.resolver')->getValue('projects.pagination'));
+        $shouldLimit =
+            !$paramFetcher->get('limit') &&
+            $this->get('capco.toggle.manager')->isActive('projects_form');
+        $projectSearchParameters = ProjectSearchParameters::createFromRequest(
+            $paramFetcher,
+            $shouldLimit
+        );
+        if (
+            $shouldLimit &&
+            !$paramFetcher->get('limit') &&
+            $this->get('capco.toggle.manager')->isActive('projects_form')
+        ) {
+            $projectSearchParameters->setElements(
+                $this->get('capco.site_parameter.resolver')->getValue('projects.pagination')
+            );
         }
 
-        return $this->get('capco.project.search.resolver')->search($projectSearchParameters, $this->getUser());
+        return $this->get('capco.project.search.resolver')->search($projectSearchParameters);
     }
 
     /**
@@ -118,13 +128,15 @@ class ProjectsController extends FOSRestController
             // throw new BadRequestHttpException('Only votes stats can be filtered by theme or district.');
         }
 
-        $data = $this->get('capco.project_stats.resolver')
-            ->getStatsForStepByKey($step, $key, $limit, $theme, $district, $category)
-        ;
-
-        return [
-            'data' => $data,
-        ];
+        $data = $this->get('capco.project_stats.resolver')->getStatsForStepByKey(
+            $step,
+            $key,
+            $limit,
+            $theme,
+            $district,
+            $category
+        );
+        return ['data' => $data];
     }
 
     /**

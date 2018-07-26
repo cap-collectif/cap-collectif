@@ -15,8 +15,7 @@ import SynthesisEditBoxApp from '../js/startup/SynthesisEditBoxApp';
 import ProposalPageApp from '../js/startup/ProposalPageApp';
 import QuestionnaireStepPageApp from '../js/startup/QuestionnaireStepPageApp';
 import ProjectStatsPageApp from '../js/startup/ProjectStatsPageApp';
-import ProposalVoteBasketWidgetApp
-  from '../js/startup/ProposalVoteBasketWidgetApp';
+import ProposalVoteBasketWidgetApp from '../js/startup/ProposalVoteBasketWidgetApp';
 import AlertBoxApp from '../js/startup/AlertBoxApp';
 import ConsultationPageApp from '../js/startup/ConsultationPageApp';
 import ProposalListApp from '../js/startup/ProposalListApp';
@@ -34,12 +33,13 @@ import GroupAdminPageApp from '../js/startup/GroupAdminPageApp';
 import EvaluationsIndexPageApp from '../js/startup/EvaluationsIndexPageApp';
 import ChooseAUsernameApp from '../js/startup/ChooseAUsernameApp';
 import appStore from '../js/stores/AppStore';
-import AccountProfileFollowingsApp from "../js/startup/AccountProfileFollowingsApp";
-import UserAdminCreateButtonApp from "../js/startup/UserAdminCreateButtonApp";
-import ParisUserNotValidApp from "../js/startup/ParisUserNotValidApp";
-import EditProfileApp from "../js/startup/EditProfileApp";
-import CookieApp from "../js/startup/CookieApp";
+import AccountProfileFollowingsApp from '../js/startup/AccountProfileFollowingsApp';
+import UserAdminCreateButtonApp from '../js/startup/UserAdminCreateButtonApp';
+import ParisUserNotValidApp from '../js/startup/ParisUserNotValidApp';
+import EditProfileApp from '../js/startup/EditProfileApp';
+import CookieApp from '../js/startup/CookieApp';
 import UserAdminPageApp from '../js/startup/UserAdminPageApp';
+import ProjectRestrictedAccessApp from '../js/startup/ProjectRestrictedAccessApp';
 
 const emptyFunction = () => {};
 
@@ -89,4 +89,5 @@ ReactOnRails.register({
   EditProfileApp,
   CookieApp,
   UserAdminPageApp,
+  ProjectRestrictedAccessApp,
 });

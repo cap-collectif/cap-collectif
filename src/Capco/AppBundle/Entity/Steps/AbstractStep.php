@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Entity\Steps;
 
 use Capco\AppBundle\Entity\Project;
@@ -372,10 +371,7 @@ abstract class AbstractStep
             }
 
             if ($time) {
-                return [
-                    'days' => (int) $time->format('%a'),
-                    'hours' => (int) $time->format('%h'),
-                ];
+                return ['days' => (int) $time->format('%a'), 'hours' => (int) $time->format('%h')];
             }
         }
     }
@@ -458,5 +454,10 @@ abstract class AbstractStep
         }
 
         return $this;
+    }
+
+    public function getVisibility(): int
+    {
+        return $this->getProject()->getVisibility();
     }
 }
