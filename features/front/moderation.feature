@@ -4,12 +4,12 @@ Feature: Moderation
 @security
 Scenario: Hacker wants to moderate with a random token
   Given I go to "/moderate/iamahackerlolilol/reason/reporting.status.sexual"
-  Then I should see 'error.404.title {"%code%":404}'
+  Then I should see "error.404.title"
 
 @security
 Scenario: Moderator wants to moderate with a random reason
   Given I go to "/moderate/opinion1ModerationToken/reason/jesuispasok"
-  Then I should see 'error.404.title {"%code%":404}'
+  Then I should see "error.404.title"
 
 @database @javascript
 Scenario: Moderator wants to moderate and hide an opinion via email link
