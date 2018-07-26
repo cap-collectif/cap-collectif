@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
-import { ListGroup } from 'react-bootstrap';
+import { ListGroup, Panel } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import OpinionSource from './OpinionSource';
 import type { OpinionSourceListViewPaginated_sourceable } from './__generated__/OpinionSourceListViewPaginated_sourceable.graphql';
@@ -16,16 +16,16 @@ class OpinionSourceListViewPaginated extends React.Component<Props> {
     const { sourceable } = this.props;
     if (!sourceable.sources.edges || sourceable.sources.edges.length === 0) {
       return (
-        <p className="text-center">
+        <Panel.Body className="text-center">
           <i className="cap-32 cap-baloon-1" />
           <br />
           <FormattedMessage id="opinion.no_new_source" />
-        </p>
+        </Panel.Body>
       );
     }
 
     return (
-      <ListGroup id="sources-list" className="media-list" style={{ marginTop: '20px' }}>
+      <ListGroup id="sources-list" className="list-group-custom">
         {sourceable.sources.edges
           .filter(Boolean)
           .map(edge => edge.node)

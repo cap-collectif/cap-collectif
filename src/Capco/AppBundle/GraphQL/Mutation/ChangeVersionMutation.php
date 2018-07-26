@@ -32,33 +32,6 @@ class ChangeVersionMutation implements MutationInterface
         $this->redisStorage = $redisStorage;
     }
 
-    // if (!$opinion->canContribute()) {
-    //     throw new BadRequestHttpException(
-    //         "Can't update a version of an uncontributable opinion."
-    //     );
-    // }
-
-    // $user = $this->getUser();
-    // if ($user !== $opinionVersion->getAuthor()) {
-    //     throw new AccessDeniedException();
-    // }
-
-    // $form = $this->createForm(OpinionOpinionVersionType::class, $opinionVersion);
-    // $form->submit($request->request->all(), false);
-
-    // if ($form->isValid()) {
-    //     $opinionVersion->resetVotes();
-    //     $opinionVersion->setValidated(false);
-    //     $this->getDoctrine()
-    //         ->getManager()
-    //         ->persist($opinionVersion);
-    //     $this->getDoctrine()
-    //         ->getManager()
-    //         ->flush();
-
-    //     return $opinionVersion;
-    // }
-
     public function __invoke(Arg $input, User $user): array
     {
         $versionId = $input->offsetGet('versionId');

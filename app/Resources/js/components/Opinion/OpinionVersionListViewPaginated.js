@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
-import { ListGroup } from 'react-bootstrap';
+import { ListGroup, Panel } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import OpinionVersion from './OpinionVersion';
 import type { OpinionVersionListViewPaginated_opinion } from './__generated__/OpinionVersionListViewPaginated_opinion.graphql';
@@ -16,11 +16,11 @@ class OpinionVersionListViewPaginated extends React.Component<Props> {
     const { opinion } = this.props;
     if (!opinion.versions.edges || opinion.versions.edges.length === 0) {
       return (
-        <p className="text-center">
+        <Panel.Body className="text-center">
           <i className="cap-32 cap-baloon-1" />
           <br />
           <FormattedMessage id="opinion.no_new_version" />
-        </p>
+        </Panel.Body>
       );
     }
 

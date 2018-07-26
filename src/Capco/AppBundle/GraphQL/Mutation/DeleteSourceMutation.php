@@ -40,9 +40,6 @@ class DeleteSourceMutation implements MutationInterface
 
         $sourceable = $source->getRelated();
 
-        // Sync ?
-        //$sourceable->decreaseSourcesCount();
-
         $this->em->remove($source);
         $this->em->flush();
         $this->redisStorage->recomputeUserCounters($viewer);

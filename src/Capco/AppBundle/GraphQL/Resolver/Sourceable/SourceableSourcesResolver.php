@@ -7,16 +7,13 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
-use Psr\Log\LoggerInterface;
 
 class SourceableSourcesResolver implements ResolverInterface
 {
-    private $logger;
     private $sourceRepository;
 
-    public function __construct(SourceRepository $sourceRepository, LoggerInterface $logger)
+    public function __construct(SourceRepository $sourceRepository)
     {
-        $this->logger = $logger;
         $this->sourceRepository = $sourceRepository;
     }
 

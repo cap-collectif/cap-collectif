@@ -1,7 +1,6 @@
 <?php
 namespace Capco\AppBundle\GraphQL\Resolver\Opinion;
 
-use Psr\Log\LoggerInterface;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Repository\OpinionVoteRepository;
@@ -13,16 +12,13 @@ use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 
 class OpinionVotesResolver implements ResolverInterface
 {
-    private $logger;
     private $opinionVoteRepository;
     private $versionVoteRepository;
 
     public function __construct(
         OpinionVoteRepository $opinionVoteRepository,
-        OpinionVersionVoteRepository $versionVoteRepository,
-        LoggerInterface $logger
+        OpinionVersionVoteRepository $versionVoteRepository
     ) {
-        $this->logger = $logger;
         $this->opinionVoteRepository = $opinionVoteRepository;
         $this->versionVoteRepository = $versionVoteRepository;
     }

@@ -38,8 +38,6 @@ Scenario: Author wants to update his version
         }
     }
   """
-    #Then the queue associated to "version_update" producer has messages below:
-    #    | 0 | {"versionId": "version1"} |
 
 @security
 Scenario: User wants to update a version but is not the author

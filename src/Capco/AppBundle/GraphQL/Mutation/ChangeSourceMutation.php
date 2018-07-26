@@ -38,7 +38,7 @@ class ChangeSourceMutation implements MutationInterface
         $source = $this->sourceRepo->find($sourceId);
 
         if (!$source) {
-            throw new UserError('Unknown source with id: ' . $sourceId);
+            throw new UserError("Unknown source with id: $sourceId");
         }
 
         if ($viewer !== $source->getAuthor()) {

@@ -9,7 +9,6 @@ import OpinionButtons from './OpinionButtons';
 import OpinionAppendices from './OpinionAppendices';
 import OpinionBody from './OpinionBody';
 import OpinionVotesBox from './Votes/OpinionVotesBox';
-// import OpinionVersion from './OpinionVersion';
 import type { OpinionBox_opinion } from './__generated__/OpinionBox_opinion.graphql';
 
 type Props = {
@@ -37,8 +36,10 @@ export class OpinionBox extends React.Component<Props> {
       opinion.__typename === 'Version' ? opinion.parent.title : opinion.section.title;
     const headerTitle = this.getBoxLabel();
     if (!opinion.section) return null;
-    const backLink = opinion.section.url;
+
+    const backLink = opinion.__typename === 'Version' ? opinion.parent.url : opinion.section.url;
     const colorClass = `opinion opinion--${color} opinion--current`;
+
     return (
       <div className="block block--bordered opinion__details">
         <div className={colorClass}>

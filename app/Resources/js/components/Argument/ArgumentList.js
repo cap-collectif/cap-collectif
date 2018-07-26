@@ -68,7 +68,7 @@ export class ArgumentList extends React.Component<Props, State> {
           variables={{
             isAuthenticated,
             argumentableId: this.props.argumentable.id,
-            type,
+            type: type === 'SIMPLE' ? 'FOR' : type,
           }}
           render={({ error, props }: ReadyState & { props?: ?ArgumentListQueryResponse }) => {
             if (error) {
@@ -76,7 +76,7 @@ export class ArgumentList extends React.Component<Props, State> {
             }
             if (props) {
               const argumentable = props.argumentable;
-              if (!argumentable) {
+              if (!argumentable || !argumentable.allArguments) {
                 return graphqlError;
               }
               const totalCount = argumentable.allArguments.totalCount;

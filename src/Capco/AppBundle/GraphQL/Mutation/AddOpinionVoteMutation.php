@@ -1,7 +1,6 @@
 <?php
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Psr\Log\LoggerInterface;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVote;
@@ -30,7 +29,6 @@ class AddOpinionVoteMutation implements MutationInterface
     private $opinionVoteRepo;
     private $versionRepo;
     private $versionVoteRepo;
-    private $logger;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -38,8 +36,7 @@ class AddOpinionVoteMutation implements MutationInterface
         OpinionRepository $opinionRepo,
         OpinionVoteRepository $opinionVoteRepo,
         OpinionVersionRepository $versionRepo,
-        OpinionVersionVoteRepository $versionVoteRepo,
-        LoggerInterface $logger
+        OpinionVersionVoteRepository $versionVoteRepo
     ) {
         $this->em = $em;
         $this->validator = $validator;
@@ -47,7 +44,6 @@ class AddOpinionVoteMutation implements MutationInterface
         $this->opinionVoteRepo = $opinionVoteRepo;
         $this->versionRepo = $versionRepo;
         $this->versionVoteRepo = $versionVoteRepo;
-        $this->logger = $logger;
     }
 
     public function __invoke(Argument $input, User $viewer, RequestStack $requestStack): array

@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { ListGroupItem } from 'react-bootstrap';
-import classNames from 'classnames';
 import UserAvatar from '../../User/UserAvatar';
 import OpinionInfos from '../OpinionInfos';
 import OpinionSourceTitle from './OpinionSourceTitle';
@@ -19,13 +18,12 @@ type Props = {
 export class OpinionSource extends React.Component<Props> {
   render() {
     const { source, sourceable } = this.props;
-    const classes = classNames({
-      opinion: true,
-      'block--bordered': true,
-      'bg-vip': source.author && source.author.vip,
-    });
     return (
-      <ListGroupItem className={classes} id={`source-${source.id}`}>
+      <ListGroupItem
+        className={`list-group-item__opinion ${
+          source.author && source.author.vip ? ' bg-vip' : ''
+        }`}
+        id={`source-${source.id}`}>
         <div className="opinion__body box">
           <UserAvatar user={source.author} className="pull-left" />
           <div className="opinion__data">

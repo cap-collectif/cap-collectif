@@ -63,6 +63,7 @@ class AddSourceMutation implements MutationInterface
         if (!$sourceable || !$sourceable instanceof Sourceable) {
             $this->logger->error('Unknown Sourceable with id: ' . $sourceableId);
             $error = ['message' => 'Unknown Sourceable.'];
+
             return ['source' => null, 'sourceEdge' => null, 'userErrors' => [$error]];
         }
 
@@ -71,21 +72,17 @@ class AddSourceMutation implements MutationInterface
                 'Can\'t add an source to an uncontributable sourceable with id: ' . $sourceableId
             );
             $error = ['message' => 'Can\'t add an source to an uncontributable sourceable.'];
+
             return ['source' => null, 'sourceEdge' => null, 'userErrors' => [$error]];
         }
 
         if (!$sourceable->getOpinionType()->isSourceable()) {
             $error = ['message' => 'Can\'t add an source to non-sourceable.'];
+
             return ['source' => null, 'sourceEdge' => null, 'userErrors' => [$error]];
         }
 
-        // if (\count($this->sourceRepo->findCreatedSinceIntervalByAuthor($viewer, 'PT1M')) >= 2) {
-        //     $this->logger->error('You contributed too many times.');
-        //     $error = ['message' => 'You contributed too many times.'];
-        //     return ['source' => null, 'sourceEdge' => null, 'userErrors' => [$error]];
-        // }
-
-        $source = (new Source()) // ->setUpdatedAt(new \Datetime())
+        $source = (new Source())
             ->setType(Source::LINK)
             ->setIsEnabled(true)
             ->setAuthor($viewer);

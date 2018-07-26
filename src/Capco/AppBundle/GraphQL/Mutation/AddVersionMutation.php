@@ -49,7 +49,7 @@ class AddVersionMutation implements MutationInterface
         $opinion = $this->opinionRepo->find($opinionId);
 
         if (!$opinion || !$opinion instanceof Opinion) {
-            $this->logger->error('Unknown opinion with id: ' . $opinionId);
+            $this->logger->error("Unknown opinion with id: $opinionId");
             $error = ['message' => 'Unknown opinion.'];
             return ['version' => null, 'versionEdge' => null, 'userErrors' => [$error]];
         }
