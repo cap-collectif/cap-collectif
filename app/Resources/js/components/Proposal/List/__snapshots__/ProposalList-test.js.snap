@@ -19,7 +19,36 @@ exports[`<ProposalList /> should not render list if proposal is not provided 1`]
 exports[`<ProposalList /> should render a collectStep proposal list 1`] = `
 <React.Fragment>
   <React.Fragment>
-    <ProposalListTable />
+    <Relay(ProposalListTable)
+      proposals={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "edges": Array [
+            Object {
+              "node": Object {
+                "$fragmentRefs": null,
+                "id": "1",
+              },
+            },
+            Object {
+              "node": Object {
+                "$fragmentRefs": null,
+                "id": "2",
+              },
+            },
+          ],
+          "totalCount": 2,
+        }
+      }
+      step={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "id": "1",
+        }
+      }
+    />
   </React.Fragment>
 </React.Fragment>
 `;
@@ -27,7 +56,36 @@ exports[`<ProposalList /> should render a collectStep proposal list 1`] = `
 exports[`<ProposalList /> should render a selectionStep proposal list 1`] = `
 <React.Fragment>
   <React.Fragment>
-    <ProposalListTable />
+    <Relay(ProposalListTable)
+      proposals={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "edges": Array [
+            Object {
+              "node": Object {
+                "$fragmentRefs": null,
+                "id": "1",
+              },
+            },
+            Object {
+              "node": Object {
+                "$fragmentRefs": null,
+                "id": "2",
+              },
+            },
+          ],
+          "totalCount": 2,
+        }
+      }
+      step={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "id": "1",
+        }
+      }
+    />
   </React.Fragment>
 </React.Fragment>
 `;
