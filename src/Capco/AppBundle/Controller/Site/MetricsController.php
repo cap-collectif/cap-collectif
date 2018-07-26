@@ -23,8 +23,6 @@ class MetricsController extends Controller
         )->getRegisteredContributorCount();
         $registeredCount = $this->get('capco.user.repository')->getRegisteredCount();
 
-        $anonymousComments = $this->get('capco.comment.repository')->getAnonymousCount();
-
         $commentCount = $this->get('capco.comment.repository')->countNotExpired();
         $voteCount = $this->get('capco.abstract_vote.repository')->countNotExpired();
 
@@ -50,7 +48,11 @@ class MetricsController extends Controller
         $contributionTrashedCount += $this->get('capco.source.repository')->countTrashed();
         $contributionTrashedCount += $this->get('capco.proposal.repository')->countTrashed();
 
-        $projectCount = \count($this->get('Capco\AppBundle\Repository\ProjectRepository')->findBy(['visibility' => ProjectVisibilityMode::VISIBILITY_PUBLIC]));
+        $projectCount = \count(
+            $this->get('Capco\AppBundle\Repository\ProjectRepository')->findBy([
+                'visibility' => ProjectVisibilityMode::VISIBILITY_PUBLIC,
+            ])
+        );
         $steps = $this->get('capco.abstract_step.repository')->findAll();
         $contribuableStepsCount = \count(
             array_reduce($steps, function ($step) {

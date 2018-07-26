@@ -1,11 +1,11 @@
 <?php
-
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
+use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -26,47 +26,72 @@ class ProposalController extends Controller
      * @Template("CapcoAppBundle:Proposal:show.html.twig")
      * @Cache(smaxage="60", public=true)
      */
-    public function showProposalAction(Request $request, Project $project, CollectStep $currentStep, Proposal $proposal)
-    {
+    public function showProposalAction(
+        Request $request,
+        Project $project,
+        CollectStep $currentStep,
+        Proposal $proposal
+    ) {
         if ($proposal->isDraft() && $proposal->getAuthor() !== $this->getUser()) {
-            throw new NotFoundHttpException(sprintf('The proposal `%s` is in draft state and current user is not the creator.', $proposal->getId()));
+            throw new NotFoundHttpException(
+                sprintf(
+                    'The proposal `%s` is in draft state and current user is not the creator.',
+                    $proposal->getId()
+                )
+            );
+        }
+
+        if (!$proposal->canDisplay($this->getUser())) {
+            throw new ProjectAccessDeniedException();
         }
 
         $serializer = $this->get('serializer');
         $urlResolver = $this->get('capco.url.resolver');
 
-        $stepUrls = $project->getSteps()->map(function (ProjectAbstractStep $step) use ($urlResolver) {
-            return  $urlResolver->getStepUrl($step->getStep(), UrlGeneratorInterface::ABSOLUTE_URL);
-        })->toArray();
+        $stepUrls = $project
+            ->getSteps()
+            ->map(function (ProjectAbstractStep $step) use ($urlResolver) {
+                return $urlResolver->getStepUrl(
+                    $step->getStep(),
+                    UrlGeneratorInterface::ABSOLUTE_URL
+                );
+            })
+            ->toArray();
 
-        $refererUri = $request->headers->has('referer')
-            && false !== filter_var($request->headers->get('referer'), FILTER_VALIDATE_URL) && \in_array($request->headers->get('referer'), $stepUrls, true)
+        $refererUri =
+            $request->headers->has('referer') &&
+            false !== filter_var($request->headers->get('referer'), FILTER_VALIDATE_URL) &&
+            \in_array($request->headers->get('referer'), $stepUrls, true)
                 ? $request->headers->get('referer')
                 : $urlResolver->getStepUrl($currentStep, UrlGeneratorInterface::ABSOLUTE_URL);
 
         $proposalForm = $currentStep->getProposalForm();
-        $votableStep = $this->get('capco\appbundle\graphql\resolver\proposal\proposalcurrentvotablestepresolver')->__invoke($proposal);
-        $props = $serializer->serialize([
-            'proposalId' => $proposal->getId(),
-            'currentVotableStepId' => $votableStep ? $votableStep->getId() : null,
-            'form' => $proposalForm,
-            'categories' => $proposalForm ? $proposalForm->getCategories() : [],
-        ], 'json', SerializationContext::create()
-            ->setSerializeNull(true)
-            ->setGroups([
-                'ProposalCategories',
-                'UserVotes',
-                'Districts',
-                'ProposalForms',
-                'Questions',
-                'Steps',
-                'ThemeDetails',
-                'UserMedias',
-                'VoteThreshold',
-                'Default', // force step_type serialization
-            ]))
-        ;
-
+        $votableStep = $this->get(
+            'capco\appbundle\graphql\resolver\proposal\proposalcurrentvotablestepresolver'
+        )->__invoke($proposal);
+        $props = $serializer->serialize(
+            [
+                'proposalId' => $proposal->getId(),
+                'currentVotableStepId' => $votableStep ? $votableStep->getId() : null,
+                'form' => $proposalForm,
+                'categories' => $proposalForm ? $proposalForm->getCategories() : [],
+            ],
+            'json',
+            SerializationContext::create()
+                ->setSerializeNull(true)
+                ->setGroups([
+                    'ProposalCategories',
+                    'UserVotes',
+                    'Districts',
+                    'ProposalForms',
+                    'Questions',
+                    'Steps',
+                    'ThemeDetails',
+                    'UserMedias',
+                    'VoteThreshold',
+                    'Default', // force step_type serialization
+                ])
+        );
         return $this->render('CapcoAppBundle:Proposal:show.html.twig', [
             'project' => $project,
             'currentStep' => $currentStep,

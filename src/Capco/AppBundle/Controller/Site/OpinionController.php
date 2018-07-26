@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Controller\Site;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -26,16 +27,13 @@ class OpinionController extends Controller
      */
     public function showByTypeAction(
         Project $project,
-        ConsultationStep $currentStep,
         int $page,
         string $opinionTypeSlug,
         Request $request,
         string $opinionsSort = null
     ) {
         if (!$currentStep->canDisplay($this->getUser())) {
-            throw $this->createNotFoundException(
-                $this->get('translator')->trans('project.error.not_found', [], 'CapcoAppBundle')
-            );
+            throw new ProjectAccessDeniedException();
         }
 
         $opinionTypesResolver = $this->get('capco.opinion_types.resolver');
@@ -85,10 +83,14 @@ class OpinionController extends Controller
         $opinion = $this->get('capco.opinion.repository')->findOneBySlug($opinionSlug);
         $version = $this->get('capco.opinion_version.repository')->findOneBySlug($versionSlug);
 
-        if (!$opinion || !$version || !$version->canDisplay($this->getUser())) {
-            throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', [], 'CapcoAppBundle'));
+        if (!$opinion || !$version) {
+            throw $this->createNotFoundException(
+                $this->get('translator')->trans('opinion.error.not_found', [], 'CapcoAppBundle')
+            );
         }
-
+        if (!$version->canDisplay($this->getUser())) {
+            throw new ProjectAccessDeniedException();
+        }
         $currentStep = $opinion->getStep();
 
         return [
@@ -117,10 +119,14 @@ class OpinionController extends Controller
         /** @var Opinion $opinion */
         $opinion = $this->get('capco.opinion.repository')->findOneBySlug($opinionSlug);
 
-        if (!$opinion || !$opinion->canDisplay($this->getUser())) {
-            throw $this->createNotFoundException($this->get('translator')->trans('opinion.error.not_found', [], 'CapcoAppBundle'));
+        if (!$opinion) {
+            throw $this->createNotFoundException(
+                $this->get('translator')->trans('opinion.error.not_found', [], 'CapcoAppBundle')
+            );
         }
-
+        if (!$opinion->canDisplay($this->getUser())) {
+            throw new ProjectAccessDeniedException();
+        }
         $currentStep = $opinion->getStep();
 
         return [

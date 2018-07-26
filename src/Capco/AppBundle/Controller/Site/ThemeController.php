@@ -1,9 +1,9 @@
 <?php
-
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Form\ThemeSearchType;
+use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -23,7 +23,6 @@ class ThemeController extends Controller
      */
     public function indexAction(Request $request, $page, $term = null)
     {
-        $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_theme');
 
         $form = $this->createForm(ThemeSearchType::class, null, [
@@ -38,9 +37,9 @@ class ThemeController extends Controller
                 // redirect to the results page (avoids reload alerts)
                 $data = $form->getData();
 
-                return $this->redirect($this->generateUrl('app_theme_search', [
-                    'term' => $data['term'],
-                ]));
+                return $this->redirect(
+                    $this->generateUrl('app_theme_search', ['term' => $data['term']])
+                );
             }
         } else {
             $form->setData(['term' => $term]);
@@ -48,7 +47,11 @@ class ThemeController extends Controller
 
         $pagination = $this->get('capco.site_parameter.resolver')->getValue('themes.pagination');
 
-        $themes = $em->getRepository('CapcoAppBundle:Theme')->getSearchResultsWithCounters($pagination, $page, $term);
+        $themes = $this->get('capco.theme.repository')->getSearchResultsWithCounters(
+            $pagination,
+            $page,
+            $term
+        );
 
         //Avoid division by 0 in nbPage calculation
         $nbPage = 1;
@@ -72,22 +75,38 @@ class ThemeController extends Controller
     public function showAction(Theme $theme)
     {
         if (!$theme->canDisplay()) {
-            throw $this->createAccessDeniedException($this->get('translator')->trans('restricted-access', [], 'CapcoAppBundle'));
+            throw new ProjectAccessDeniedException(
+                $this->get('translator')->trans('restricted-access', [], 'CapcoAppBundle')
+            );
         }
 
-        $em = $this->getDoctrine()->getManager();
         $serializer = $this->get('serializer');
 
-        $projectProps = $serializer->serialize([
-            'projects' => $em
-                ->getRepository('CapcoAppBundle:Project')
-                ->getProjectsByTheme($theme),
-        ], 'json', SerializationContext::create()->setGroups(['Projects', 'UserDetails', 'Steps', 'Themes', 'ProjectType']));
+        $projectProps = $serializer->serialize(
+            [
+                'projects' =>
+                    $this->get('Capco\AppBundle\Repository\ProjectRepository')->getProjectsByTheme(
+                        $theme
+                    ),
+            ],
+            'json',
+            SerializationContext::create()->setGroups([
+                'Projects',
+                'UserDetails',
+                'Steps',
+                'Themes',
+                'ProjectType',
+            ])
+        );
 
-        $ideaCreationProps = $serializer->serialize([
-            'themes' => $em->getRepository('CapcoAppBundle:Theme')->findAll(),
-            'themeId' => $theme->getId(),
-        ], 'json', SerializationContext::create()->setGroups(['ThemeDetails']));
+        $ideaCreationProps = $serializer->serialize(
+            [
+                'themes' => $this->get('capco.theme.repository')->findAll(),
+                'themeId' => $theme->getId(),
+            ],
+            'json',
+            SerializationContext::create()->setGroups(['ThemeDetails'])
+        );
 
         return [
             'theme' => $theme,

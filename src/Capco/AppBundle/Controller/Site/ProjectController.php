@@ -5,6 +5,7 @@ use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Form\ProjectSearchType;
+use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use JMS\Serializer\SerializationContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -30,8 +31,10 @@ class ProjectController extends Controller
         $props = $this->get('jms_serializer')->serialize(
             [
                 'projects' =>
-                    $this->get('Capco\AppBundle\Repository\ProjectRepository')
-                        ->getLastPublished($max, $offset),
+                    $this->get('Capco\AppBundle\Repository\ProjectRepository')->getLastPublished(
+                        $max,
+                        $offset
+                    ),
             ],
             'json',
             SerializationContext::create()->setGroups([
@@ -96,7 +99,7 @@ class ProjectController extends Controller
         }
 
         if (false === $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            throw $this->createAccessDeniedException(
+            throw new ProjectAccessDeniedException(
                 $this->get('translator')->trans('error.access_restricted', [], 'CapcoAppBundle')
             );
         }
@@ -138,7 +141,7 @@ class ProjectController extends Controller
             !$project->isExportable() &&
             !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
         ) {
-            throw $this->createAccessDeniedException(
+            throw new ProjectAccessDeniedException(
                 $trans->trans('project.error.not_exportable', [], 'CapcoAppBundle')
             );
         }
@@ -311,7 +314,9 @@ class ProjectController extends Controller
             }
         }
 
-        $parameters['projectTypes'] = $this->get('Capco\AppBundle\Repository\ProjectTypeRepository')->findAll();
+        $parameters['projectTypes'] = $this->get(
+            'Capco\AppBundle\Repository\ProjectTypeRepository'
+        )->findAll();
 
         return ['params' => $parameters];
     }

@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\NewsletterSubscription;
@@ -46,19 +45,25 @@ class HomepageController extends Controller
             $form->handleRequest($request);
 
             if ($form->isSubmitted()) {
-                $em = $this->getDoctrine()->getManager();
-
                 if ($form->isValid()) {
                     // TODO: move this to a unique constraint in form instead
-                    $email = $em->getRepository('CapcoAppBundle:NewsletterSubscription')
-                                ->findOneByEmail($subscription->getEmail());
+                    $email = $this->get('capco.newsletter_subscription.repository')->findOneByEmail(
+                        $subscription->getEmail()
+                    );
 
                     if ($email) {
-                        $flashBag->add('info', $translator->trans('homepage.newsletter.already_subscribed'));
+                        $flashBag->add(
+                            'info',
+                            $translator->trans('homepage.newsletter.already_subscribed')
+                        );
                     } else {
+                        $em = $this->getDoctrine()->getManager();
                         $em->persist($subscription);
                         $em->flush();
-                        $flashBag->add('success', $translator->trans('homepage.newsletter.success'));
+                        $flashBag->add(
+                            'success',
+                            $translator->trans('homepage.newsletter.success')
+                        );
                     }
                 } else {
                     $flashBag->add('danger', $translator->trans('homepage.newsletter.invalid'));
@@ -68,10 +73,7 @@ class HomepageController extends Controller
             }
         }
 
-        return [
-            'form' => $newsletterActive ? $form->createView() : false,
-            'sections' => $sections,
-        ];
+        return ['form' => $newsletterActive ? $form->createView() : false, 'sections' => $sections];
     }
 
     /**
@@ -81,15 +83,13 @@ class HomepageController extends Controller
     {
         $serializer = $this->get('jms_serializer');
         $highlighteds = $this->get('capco.highlighted.repository')->getAllOrderedByPosition(4);
-        $props = $serializer->serialize([
-            'highlighteds' => $highlighteds,
-        ], 'json', SerializationContext::create()
-            ->setSerializeNull(true));
+        $props = $serializer->serialize(
+            ['highlighteds' => $highlighteds],
+            'json',
+            SerializationContext::create()->setSerializeNull(true)
+        );
 
-        return [
-            'props' => $props,
-            'section' => $section,
-        ];
+        return ['props' => $props, 'section' => $section];
     }
 
     /**
@@ -101,37 +101,31 @@ class HomepageController extends Controller
         $offset = $offset ?? 0;
         $videos = $this->get('capco.video.repository')->getLast($max, $offset);
 
-        return [
-            'videos' => $videos,
-            'section' => $section,
-        ];
+        return ['videos' => $videos, 'section' => $section];
     }
 
     /**
      * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Homepage:lastProposals.html.twig")
      */
-    public function lastProposalsAction(int $max = null, int $offset = null, Section $section = null)
-    {
+    public function lastProposalsAction(
+        int $max = null,
+        int $offset = null,
+        Section $section = null
+    ) {
         $max = $max ?? 4;
         $offset = $offset ?? 0;
-        $em = $this->getDoctrine()->getManager();
         if ($section->getStep() && $section->getStep()->isCollectStep()) {
-            $proposals = $em
-                ->getRepository('CapcoAppBundle:Proposal')
-                ->getLastByStep($max, $offset, $section->getStep())
-            ;
+            $proposals = $this->get('capco.proposal.repository')->getLastByStep(
+                $max,
+                $offset,
+                $section->getStep()
+            );
         } else {
-            $proposals = $em
-                ->getRepository('CapcoAppBundle:Proposal')
-                ->getLast($max, $offset)
-            ;
+            $proposals = $this->get('capco.proposal.repository')->getLast($max, $offset);
         }
 
-        return [
-            'proposals' => $proposals,
-            'section' => $section,
-        ];
+        return ['proposals' => $proposals, 'section' => $section];
     }
 
     /**
@@ -142,12 +136,9 @@ class HomepageController extends Controller
     {
         $max = $max ?? 4;
         $offset = $offset ?? 0;
-        $topics = $this->getDoctrine()->getManager()->getRepository('CapcoAppBundle:Theme')->getLast($max, $offset);
+        $topics = $this->get('capco.theme.repository')->getLast($max, $offset);
 
-        return [
-            'topics' => $topics,
-            'section' => $section,
-        ];
+        return ['topics' => $topics, 'section' => $section];
     }
 
     /**
@@ -160,36 +151,36 @@ class HomepageController extends Controller
         $offset = $offset ?? 0;
         $posts = $this->get('capco.blog.post.repository')->getLast($max, $offset);
 
-        return [
-            'posts' => $posts,
-            'section' => $section,
-        ];
+        return ['posts' => $posts, 'section' => $section];
     }
 
     /**
      * @Cache(smaxage="60", public=true)
      * @Template("CapcoAppBundle:Homepage:lastProjects.html.twig")
      */
-    public function lastProjectsAction(int $max = null, int $offset = null, Section $section = null)
-    {
+    public function lastProjectsAction(
+        int $max = null,
+        int $offset = null,
+        Section $section = null
+    ) {
         $max = $max ?? 3;
         $offset = $offset ?? 0;
         $serializer = $this->get('jms_serializer');
-        $count = $this->getDoctrine()->getRepository('CapcoAppBundle:Project')->countPublished();
-        $props = $serializer->serialize([
-            'projects' => $this
-                ->getDoctrine()
-                ->getManager()
-                ->getRepository('CapcoAppBundle:Project')
-                ->getLastPublished($max, $offset),
-        ], 'json', SerializationContext::create()->setGroups(['Projects', 'UserDetails', 'Steps', 'Themes', 'ProjectType']));
+        $projectRepo = $this->get('Capco\AppBundle\Repository\ProjectRepository');
+        $count = $projectRepo->countPublished();
+        $props = $serializer->serialize(
+            ['projects' => $projectRepo->getLastPublished($max, $offset)],
+            'json',
+            SerializationContext::create()->setGroups([
+                'Projects',
+                'UserDetails',
+                'Steps',
+                'Themes',
+                'ProjectType',
+            ])
+        );
 
-        return [
-            'max' => $max,
-            'props' => $props,
-            'count' => $count,
-            'section' => $section,
-        ];
+        return ['max' => $max, 'props' => $props, 'count' => $count, 'section' => $section];
     }
 
     /**
@@ -202,10 +193,7 @@ class HomepageController extends Controller
         $offset = $offset ?? 0;
         $events = $this->get('capco.event.repository')->getLast($max, $offset);
 
-        return [
-            'events' => $events,
-            'section' => $section,
-        ];
+        return ['events' => $events, 'section' => $section];
     }
 
     /**
@@ -213,11 +201,11 @@ class HomepageController extends Controller
      */
     public function socialNetworksAction(Section $section = null)
     {
-        $socialNetworks = $this->getDoctrine()->getManager()->getRepository('CapcoAppBundle:SocialNetwork')->getEnabled();
+        $socialNetworks = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('CapcoAppBundle:SocialNetwork')
+            ->getEnabled();
 
-        return [
-            'socialNetworks' => $socialNetworks,
-            'section' => $section,
-        ];
+        return ['socialNetworks' => $socialNetworks, 'section' => $section];
     }
 }

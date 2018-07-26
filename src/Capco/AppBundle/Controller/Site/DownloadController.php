@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Responses\MediaResponse;
@@ -11,6 +10,7 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class DownloadController extends Controller
 {
@@ -18,13 +18,13 @@ class DownloadController extends Controller
      * @Route("/download/{responseId}/media/{mediaId}", name="app_media_response_download")
      * @ParamConverter("mediaResponse", options={"mapping": {"responseId": "id"}})
      * @ParamConverter("media", options={"mapping": {"mediaId": "id"}})
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function downloadAction(MediaResponse $mediaResponse, Media $media, Request $request)
     {
         if (
-            !$mediaResponse->getQuestion()->isPrivate()
-            || $this->getUser() === $mediaResponse->getProposal()->getAuthor()
-            || $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+            !$mediaResponse->getQuestion()->isPrivate() ||
+            $this->getUser() === $mediaResponse->getProposal()->getAuthor()
         ) {
             $provider = $this->get('sonata.media.pool')->getProvider($media->getProviderName());
 
@@ -39,7 +39,9 @@ class DownloadController extends Controller
             $type = $media->getContentType();
             $redirectFileTypes = ['application/pdf', 'image/jpeg', 'image/png'];
             if (\in_array($type, $redirectFileTypes, true)) {
-                $url = $request->getUriForPath('/media') . $this->get('sonata.media.twig.extension')->path($media, 'reference');
+                $url =
+                    $request->getUriForPath('/media') .
+                    $this->get('sonata.media.twig.extension')->path($media, 'reference');
 
                 return new RedirectResponse($url);
             }
