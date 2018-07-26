@@ -761,6 +761,12 @@ storiesOf('Components', module)
                 <li>Item 1</li>
                 <li>Item 2</li>
               </InlineList>
+              <div className="actions">
+                <Button className="btn-xs">Update</Button>
+                <Button bsStyle="success" className="btn-xs btn--outline">
+                  Agree
+                </Button>
+              </div>
             </div>
           </div>
           <div className="right-block">
