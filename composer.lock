@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4229e5f2d7ec593c8cb0d6954ef4c050",
+    "content-hash": "13d5e9e0c91c377bfe5fea1e6c550e8b",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -5675,16 +5675,16 @@
         },
         {
             "name": "overblog/dataloader-bundle",
-            "version": "v0.4.0",
+            "version": "v0.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overblog/dataloader-bundle.git",
-                "reference": "005b73f413744a9716862e6e943ae205d6ca3af9"
+                "reference": "a1deeca2fa825d323acd018b761becb08d74ba52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/overblog/dataloader-bundle/zipball/005b73f413744a9716862e6e943ae205d6ca3af9",
-                "reference": "005b73f413744a9716862e6e943ae205d6ca3af9",
+                "url": "https://api.github.com/repos/overblog/dataloader-bundle/zipball/a1deeca2fa825d323acd018b761becb08d74ba52",
+                "reference": "a1deeca2fa825d323acd018b761becb08d74ba52",
                 "shasum": ""
             },
             "require": {
@@ -5729,7 +5729,7 @@
                 "caching",
                 "dataLoader"
             ],
-            "time": "2017-11-16T12:57:10+00:00"
+            "time": "2018-07-25T08:41:51+00:00"
         },
         {
             "name": "overblog/dataloader-php",
@@ -11196,6 +11196,7 @@
                 "php": ">=5.5,<8.0-DEV"
             },
             "require-dev": {
+                "doctrine/coding-standard": "^4.0",
                 "phpunit/phpunit": "^4.8",
                 "psr/http-message": "^1.0"
             },
@@ -11205,32 +11206,20 @@
             },
             "type": "library",
             "autoload": {
-                "files": [
-                    "src/deprecated.php"
-                ],
                 "psr-4": {
                     "GraphQL\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "GraphQL\\Tests\\": "tests/",
-                    "GraphQL\\Benchmarks\\": "benchmarks/",
-                    "GraphQL\\Examples\\Blog\\": "examples/01-blog/Blog/"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "A PHP port of GraphQL reference implementation",
             "homepage": "https://github.com/webonyx/graphql-php",
             "keywords": [
-                "API",
+                "api",
                 "graphql"
             ],
-            "support": {
-                "source": "https://github.com/cap-collectif/graphql-php/tree/master"
-            },
             "time": "2018-02-22T10:14:53+00:00"
         },
         {
@@ -14792,7 +14781,7 @@
                 "page"
             ],
             "support": {
-                "source": "https://github.com/spyl94/BehatPageObjectExtension/tree/master"
+                "source": "https://github.com/cap-collectif/BehatPageObjectExtension/tree/master"
             },
             "time": "2016-03-15T13:13:55+00:00"
         },
@@ -14949,7 +14938,7 @@
                 "testing"
             ],
             "support": {
-                "source": "https://github.com/spyl94/behat-parallel-scenario/tree/master"
+                "source": "https://github.com/cap-collectif/behat-parallel-scenario/tree/master"
             },
             "time": "2016-03-11T13:43:33+00:00"
         },
