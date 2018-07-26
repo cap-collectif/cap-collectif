@@ -31,24 +31,6 @@ final class VersionOrderFieldType extends EnumType implements GeneratedTypeInter
                     'deprecationReason' => null,
                     'description' => 'Allows ordering a list of versions by the number of votes it have.',
                 ],
-                'COMMENTS' => [
-                    'name' => 'COMMENTS',
-                    'value' => 'COMMENTS',
-                    'deprecationReason' => null,
-                    'description' => 'Allows ordering a list of versions by the number of votes it have.',
-                ],
-                'VOTES_OK' => [
-                    'name' => 'VOTES_OK',
-                    'value' => 'VOTES_OK',
-                    'deprecationReason' => null,
-                    'description' => 'Allows ordering a list of versions by the number of votes ok it have.',
-                ],
-                'RANDOM' => [
-                    'name' => 'RANDOM',
-                    'value' => 'RANDOM',
-                    'deprecationReason' => null,
-                    'description' => 'Allows ordering a list of versions randomly.',
-                ],
             ],
             'description' => 'Properties by which version connections can be ordered',
         ];

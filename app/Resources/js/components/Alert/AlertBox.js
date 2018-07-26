@@ -43,7 +43,7 @@ class AlertBox extends React.Component<Props, State> {
 
     return (
       <AlertAutoDismissable onDismiss={this.handleDismiss} bsStyle={alert.bsStyle}>
-        <FormattedHTMLMessage id={alert.content} />
+        <FormattedHTMLMessage id={alert.content} values={alert.values} />
       </AlertAutoDismissable>
     );
   }
