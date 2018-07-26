@@ -7,7 +7,7 @@ interface Sourceable
 
     public function canContribute(): bool;
 
-    public function canDisplay(): bool;
+    public function canDisplay($user = null): bool;
 
     public function isPublished(): bool;
 

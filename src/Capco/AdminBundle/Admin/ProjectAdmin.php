@@ -378,7 +378,7 @@ class ProjectAdmin extends CapcoAdmin
             $query
                 ->expr()
                 ->andX(
-                    $query->expr()->eq($query->getRootAliases()[0] . '.Author', ':author'),
+                    $query->expr()->eq($query->getRootAliases()[0] . '.author', ':author'),
                     $query->expr()->eq($query->getRootAliases()[0] . '.visibility', 0)
                 )
         );

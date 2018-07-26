@@ -3,17 +3,13 @@ namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\Category;
 use Capco\AppBundle\Model\Sourceable;
 use Capco\AppBundle\Traits\UuidTrait;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\TextableTrait;
-use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\AppBundle\Traits\PublishableTrait;

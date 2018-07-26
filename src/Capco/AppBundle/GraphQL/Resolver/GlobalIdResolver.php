@@ -118,13 +118,6 @@ class GlobalIdResolver
             ProposalForm::class,
             AbstractStep::class,
         ];
-        $this->container->get('logger')->debug(
-            '-----------------------------------------------------------------------------------------'
-        );
-        $this->container->get('logger')->debug(get_class($node));
-        $this->container->get('logger')->debug(
-            '-----------------------------------------------------------------------------------------'
-        );
         foreach ($projectContributionClass as $object) {
             if ($node instanceof $object) {
                 if (!$node->canDisplay($user)) {

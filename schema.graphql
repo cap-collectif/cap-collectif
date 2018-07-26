@@ -161,6 +161,9 @@ type AppendixType {
 type Argument implements Node & Publishable & Contribution & Reportable & Trashable & ContributionWithAuthor & EditableContribution {
   # The ID of an object
 type Argument implements Node & Contribution & Reportable & TrashableContribution & ContributionWithAuthor & EditableContribution {
+  # Does the viewer already submitted a report ?
+  viewerHasReport: Boolean!
+
   # Identifies the date and time when the object was last updated.
   updatedAt: DateTime
 
@@ -1486,6 +1489,13 @@ type NotificationsConfiguration {
 type Opinion implements Node & Publishable & Argumentable & Sourceable & Reportable & Contribution & Trashable & ContributionWithAuthor & EditableContribution {
   # The ID of an object
 type Opinion implements Node & Publishable & Argumentable & Sourceable & Reportable & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
+type Opinion implements Node & Argumentable & Sourceable & Reportable & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
+  # Does the viewer already submitted a report ?
+  viewerHasReport: Boolean!
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
+
   # True if the contribution is trashed.
   trashed: Boolean!
 
@@ -1511,6 +1521,9 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
     type: ArgumentValue
   ): ArgumentConnection!
 
+  # The author of the contribution.
+  author: User!
+
   # The kind of contribution.
   kind: String!
 
@@ -1522,15 +1535,6 @@ type Opinion implements Node & Publishable & Argumentable & Sourceable & Reporta
 
   # Url of the contribution
   url: URI!
-
-  # Does the viewer already submitted a report ?
-  viewerHasReport: Boolean!
-
-  # The author of the contribution.
-  author: User!
-
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
 
   # The sources related to the sourceable.
   sources(after: String, first: Int, before: String, last: Int, orderBy: SourceOrder = {field: CREATED_AT, direction: DESC}): SourceConnection!
@@ -1852,6 +1856,9 @@ enum ProjectVisibility {
 type Proposal implements Node & Contribution & Publishable & Reportable & Trashable {
   # The ID of an object
 type Proposal implements Node & Contribution & Reportable {
+  # Does the viewer already submitted a report ?
+  viewerHasReport: Boolean!
+
   # The id of the contribution.
   id: ID!
 
@@ -2032,7 +2039,6 @@ type Proposal implements Node & Contribution & Reportable {
     step: ID!
   ): Boolean!
   votableSteps: [ProposalStep!]!
-  visibility: ProjectVisibility!
 }
 
 # The affiliation of a user to a proposal
@@ -2980,6 +2986,12 @@ type SimpleQuestion implements Question {
 type Source implements Node & Contribution & Reportable & Trashable & ContributionWithAuthor & EditableContribution {
   # The ID of an object
 type Source implements Node & Contribution & Reportable & TrashableContribution & ContributionWithAuthor & EditableContribution {
+  # Does the viewer already submitted a report ?
+  viewerHasReport: Boolean!
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
+
   # True if the contribution is trashed.
   trashed: Boolean!
 
@@ -3701,6 +3713,12 @@ type ValueResponse implements Response {
 # A version of contribution
 type Version implements Node & Contribution & Sourceable & Reportable & Argumentable & Trashable & ContributionWithAuthor & EditableContribution {
 type Version implements Node & Contribution & Sourceable & Reportable & Argumentable & TrashableContribution & ContributionWithAuthor & EditableContribution {
+  # Does the viewer already submitted a report ?
+  viewerHasReport: Boolean!
+
+  # Identifies the date and time when the object was last updated.
+  updatedAt: DateTime
+
   # True if the contribution is trashed.
   trashed: Boolean!
 
@@ -3709,9 +3727,6 @@ type Version implements Node & Contribution & Sourceable & Reportable & Argument
 
   # The reason the moderator trashed the contribution.
   trashedReason: String
-
-  # The author of the contribution.
-  author: User!
 
   # The id of the contribution.
   id: ID!
@@ -3729,6 +3744,9 @@ type Version implements Node & Contribution & Sourceable & Reportable & Argument
     type: ArgumentValue
   ): ArgumentConnection!
 
+  # The author of the contribution.
+  author: User!
+
   # The kind of contribution.
   kind: String!
 
@@ -3740,15 +3758,6 @@ type Version implements Node & Contribution & Sourceable & Reportable & Argument
 
   # The url of version.
   url: URI!
-
-  # Does the viewer already submitted a report ?
-  viewerHasReport: Boolean!
-
-  # The author of the contribution.
-  author: User!
-
-  # Identifies the date and time when the object was last updated.
-  updatedAt: DateTime
 
   # The sources related to the sourceable.
   sources(after: String, first: Int, before: String, last: Int, orderBy: SourceOrder = {field: CREATED_AT, direction: DESC}): SourceConnection!
