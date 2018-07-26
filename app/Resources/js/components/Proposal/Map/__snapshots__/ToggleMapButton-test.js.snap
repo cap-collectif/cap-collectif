@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ToggleMapButton /> should render a toggle button with map selected 1`] = `
+exports[`<ToggleMapButton /> should render a toggle button with map selected and without table list 1`] = `
 <div
   aria-label="Step view"
   className="btn-group d-flex"
@@ -12,29 +12,6 @@ exports[`<ToggleMapButton /> should render a toggle button with map selected 1`]
     }
   }
 >
-  <Button
-    active={false}
-    block={false}
-    bsClass="btn"
-    bsStyle="default"
-    disabled={false}
-    onClick={[Function]}
-    style={
-      Object {
-        "flex": "1 0 auto",
-      }
-    }
-  >
-    <i
-      className="cap cap-android-menu"
-      onClick={[Function]}
-    />
-     
-    <FormattedMessage
-      id="list-view"
-      values={Object {}}
-    />
-  </Button>
   <Button
     active={false}
     block={false}

@@ -3,15 +3,18 @@ import React from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { Row, Col } from 'react-bootstrap';
 import { connect, type MapStateToProps } from 'react-redux';
+import { graphql, createFragmentContainer } from 'react-relay';
 import type { GlobalState, Dispatch } from '../../../types';
 import ProposalListSearch from '../List/ProposalListSearch';
 import Input from '../../Form/Input';
 import ProposalListOrderSorting from './ProposalListOrderSorting';
 import { changeFilter, changeProposalListView } from '../../../redux/modules/proposal';
 import ToggleMapButton from './../Map/ToggleMapButton';
+import type { ProposalListFilters_step } from './__generated__/ProposalListFilters_step.graphql';
 
 type Props = {
   themes: Array<$FlowFixMe>,
+  step: ProposalListFilters_step,
   types: Array<$FlowFixMe>,
   districts: Array<$FlowFixMe>,
   statuses: Array<$FlowFixMe>,
@@ -78,6 +81,7 @@ export class ProposalListFilters extends React.Component<Props, State> {
       showToggleMapButton,
       defaultSort,
       intl,
+      step,
     } = this.props;
     const { displayedFilters } = this.state;
 
@@ -93,6 +97,7 @@ export class ProposalListFilters extends React.Component<Props, State> {
           {showToggleMapButton && (
             <Col xs={12} sm={6} md={4} lg={3}>
               <ToggleMapButton
+                step={step}
                 onChange={mode => {
                   dispatch(changeProposalListView(mode));
                 }}
@@ -151,4 +156,13 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: GlobalState) => ({
 
 const container = injectIntl(ProposalListFilters);
 
-export default connect(mapStateToProps)(container);
+const connector = connect(mapStateToProps)(container);
+
+export default createFragmentContainer(connector, {
+  step: graphql`
+    fragment ProposalListFilters_step on ProposalStep {
+      id
+      ...ToggleMapButton_step
+    }
+  `,
+});
