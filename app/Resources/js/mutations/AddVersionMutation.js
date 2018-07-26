@@ -1,6 +1,5 @@
 // @flow
 import { graphql } from 'react-relay';
-// import { ConnectionHandler } from 'relay-runtime';
 import environment from '../createRelayEnvironment';
 import commitMutation from './commitMutation';
 import type {
