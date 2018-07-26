@@ -1,6 +1,13 @@
 <?php
 namespace Capco\AppBundle\GraphQL\Resolver;
 
+use Capco\AppBundle\Entity\Argument;
+use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\ModerableInterface;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Error\UserError;
@@ -101,6 +108,30 @@ class GlobalIdResolver
             $error = 'Could not resolve node with id ' . $uuid;
             $this->container->get('logger')->warn($error);
             throw new UserError($error);
+        }
+
+        $projectContributionClass = [
+            Project::class,
+            Proposal::class,
+            Comment::class,
+            Argument::class,
+            ProposalForm::class,
+            AbstractStep::class,
+        ];
+        $this->container->get('logger')->debug(
+            '-----------------------------------------------------------------------------------------'
+        );
+        $this->container->get('logger')->debug(get_class($node));
+        $this->container->get('logger')->debug(
+            '-----------------------------------------------------------------------------------------'
+        );
+        foreach ($projectContributionClass as $object) {
+            if ($node instanceof $object) {
+                if (!$node->canDisplay($user)) {
+                    throw new \GraphQL\Error\UserError('Access denied');
+                }
+                break;
+            }
         }
 
         return $node;

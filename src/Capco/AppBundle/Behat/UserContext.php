@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Behat;
 
 use Capco\AppBundle\Entity\EventRegistration;
@@ -41,7 +40,11 @@ class UserContext extends DefaultContext
         $this->getEntityManager()->clear();
         $qA = $this->getRepository('CapcoAppBundle:Questions\AbstractQuestion')->find($questionAId);
         $qB = $this->getRepository('CapcoAppBundle:Questions\AbstractQuestion')->find($questionBId);
-        expect($qB->getQuestionnaireAbstractQuestion()->getPosition() - $qA->getQuestionnaireAbstractQuestion()->getPosition() > 0)->toBe(true);
+        expect(
+            $qB->getQuestionnaireAbstractQuestion()->getPosition() -
+                $qA->getQuestionnaireAbstractQuestion()->getPosition() >
+                0
+        )->toBe(true);
     }
 
     /**
@@ -116,6 +119,14 @@ class UserContext extends DefaultContext
     public function iAmLoggedInAsPierre()
     {
         $this->logInWith('pierre@cap-collectif.com', 'toto');
+    }
+
+    /**
+     * @Given I am logged in as mauriau
+     */
+    public function iAmLoggedInAsMauriau()
+    {
+        $this->logInWith('maxime.auriau@cap-collectif.com', 'toto');
     }
 
     /**
@@ -200,7 +211,9 @@ class UserContext extends DefaultContext
      */
     public function iCloseCurrentAlert()
     {
-        $alertCloseButton = $this->getSession()->getPage()->find('css', '#current-alert .close');
+        $alertCloseButton = $this->getSession()
+            ->getPage()
+            ->find('css', '#current-alert .close');
         $alertCloseButton->click();
     }
 
@@ -249,11 +262,9 @@ class UserContext extends DefaultContext
     {
         $event = $this->getRepository('CapcoAppBundle:Event')->findOneBySlug($slug);
         $registration = (new EventRegistration($event))
-                            ->setEmail($email)
-                            ->setUsername($email)
-                            ->setPrivate(false)
-                        ;
-
+            ->setEmail($email)
+            ->setUsername($email)
+            ->setPrivate(false);
         $this->getEntityManager()->persist($registration);
         $this->getEntityManager()->flush();
     }

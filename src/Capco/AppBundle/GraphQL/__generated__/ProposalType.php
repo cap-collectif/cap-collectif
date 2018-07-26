@@ -28,7 +28,7 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => 'The ID of an object',
+                    'description' => 'The id of the contribution.',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -999,6 +999,18 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalVotableStepsResolver", array(0 => $value)]);
                     },
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'visibility' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ProjectVisibility')),
+                    'args' => [
+                    ],
+                    'resolve' => null,
                     'description' => null,
                     'deprecationReason' => null,
                     'complexity' => null,
