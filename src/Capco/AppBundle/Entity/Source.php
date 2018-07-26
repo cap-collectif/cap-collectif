@@ -14,7 +14,7 @@ use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
 use Doctrine\Common\Collections\ArrayCollection;
-use Capco\AppBundle\Model\IsPublishableInterface;
+use Capco\AppBundle\Model\Publishable;
 use Symfony\Component\Validator\Constraints as Assert;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
@@ -24,7 +24,7 @@ use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SourceRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Source implements Contribution, TrashableInterface, VotableInterface, IsPublishableInterface
+class Source implements Contribution, TrashableInterface, VotableInterface, Publishable
 {
     use UuidTrait;
 
