@@ -1,0 +1,22 @@
+{% extends "CapcoAppBundle::base.html.twig" %}
+
+{% block jumbotron %}
+	<div class="jumbotron jumbotron--custom jumbotron--bg-1  text-center">
+		<div class="header-img">
+			<div class="container">
+				<h1>{{ 'unauthorized-access'|trans({},'CapcoAppBundle') }}</h1>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block body %}
+	<div class="container container--custom text-center" id="page-error">
+		<i class="cap cap-lock-2"></i>
+		<span class="clearfix mt-5" id="error-name">{{ '403-error'|trans({}, 'CapcoAppBundle') }}</span>
+		<span class="clearfix mt-5" id="er2ror-definition">{{ 'restricted-access'|trans({}, 'CapcoAppBundle') }}</span>
+		<span class="clearfix mt-5" id="error-help">{{ 'if-you-have-access'|trans({}, 'CapcoAppBundle') }}</span>
+		<a class="clearfix" id="error-back-home" href="{{ path('app_homepage') }}">{{ 'error.to_homepage'|trans({}, 'CapcoAppBundle') }}</a>
+		<a class="clearfix" id="error-report" href="{{ path('app_contact') }}">{{ 'error.report'|trans({}, 'CapcoAppBundle') }}</a>
+	</div>
+{% endblock %}

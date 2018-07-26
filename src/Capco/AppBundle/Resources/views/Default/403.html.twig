@@ -1,0 +1,61 @@
+{% set page_class = "home-page" %}
+{% extends "CapcoAppBundle::base.html.twig" %}
+
+{% set jumbotron_title = capco_site_parameter_value('homepage.jumbotron.title') %}
+{% set jumbotron_body = capco_site_parameter_value('homepage.jumbotron.body') %}
+{% set meta_description = capco_site_parameter_value('homepage.metadescription') %}
+
+{% block canonical_link %}{{ url('app_homepage') }}{% endblock %}
+
+{% block metaTags %}
+    {% set picto = capco_site_image_media('homepage.picto') %}
+    {% set image %}{% if picto %}{% path picto, 'blockHeader' %}{% endif %}{% endset %}
+    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+        'title':       jumbotron_title ?: siteName,
+        'description': meta_description,
+        'url':         url('app_homepage'),
+        'image':       image
+    } only %}
+{% endblock %}
+
+{% block title %}
+    {% if null != title %}
+        {{ parent() }} - {{ title|trans({},'CapcoAppBundle') }}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('js/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block jumbotron %}
+    <div class="jumbotron jumbotron--custom jumbotron--bg-1  text-center">
+        <div class="header-img">
+            <div class="container">
+                {% if null != title %}
+                    <h1>{{ title|trans({},'CapcoAppBundle') }}</h1>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="container container--custom text-center" id="page-error">
+        <i class="cap cap-lock-2"></i>
+        <span class="clearfix mt-5" id="error-name">{{ '403-error'|trans({}, 'CapcoAppBundle') }}</span>
+        <span class="clearfix mt-5" id="er2ror-definition">{{ 'restricted-access'|trans({}, 'CapcoAppBundle') }}</span>
+        <span class="clearfix mt-5" id="error-help">{{ 'if-you-have-access'|trans({}, 'CapcoAppBundle') }}</span>
+        <a class="clearfix" id="error-back-home" href="{{ path('app_homepage') }}">{{ 'error.to_homepage'|trans({}, 'CapcoAppBundle') }}</a>
+        <a class="clearfix" id="error-report" href="{{ path('app_contact') }}">{{ 'error.report'|trans({}, 'CapcoAppBundle') }}</a>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% set customCode = capco_site_parameter_value('homepage.customcode') %}
+    {% if customCode is defined and customCode != '' %}{{ customCode | raw }}{% endif %}
+{% endblock %}

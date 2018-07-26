@@ -1,0 +1,30 @@
+#page-error {
+  .cap {
+    font-size: 128px;
+    color: $icon-gray-color;
+    font-weight: bold;
+  }
+  #error-name {
+    font-size: 36px;
+    color: $icon-gray-color;
+    font-family: OpenSans-Bold;
+    font-weight: bold;
+  }
+  #error-definition {
+    width: 497px;
+    height: 24px;
+    color: $dark-text;
+    font-size: 18px;
+    font-family: OpenSans-Semibold;
+    font-weight: 600;
+    text-align: left;
+  }
+  #error-help {
+    width: 518px;
+    height: 44px;
+    color: $dark-text;
+    font-size: 16px;
+    font-family: OpenSans;
+    text-align: left;
+  }
+}
