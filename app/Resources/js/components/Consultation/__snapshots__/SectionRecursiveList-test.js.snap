@@ -3,21 +3,53 @@
 exports[`<SectionRecursiveList /> renders correcty 1`] = `
 <div>
   <SectionList
-    consultation={Object {}}
+    consultation={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "sections": Array [
+          Object {
+            "$fragmentRefs": null,
+            "sections": Array [],
+          },
+          Object {
+            "$fragmentRefs": null,
+            "sections": Array [],
+          },
+        ],
+      }
+    }
     key="0"
     level={0}
     section={
       Object {
+        "$fragmentRefs": null,
         "sections": Array [],
       }
     }
   />
   <SectionList
-    consultation={Object {}}
+    consultation={
+      Object {
+        "$fragmentRefs": null,
+        "$refType": null,
+        "sections": Array [
+          Object {
+            "$fragmentRefs": null,
+            "sections": Array [],
+          },
+          Object {
+            "$fragmentRefs": null,
+            "sections": Array [],
+          },
+        ],
+      }
+    }
     key="1"
     level={0}
     section={
       Object {
+        "$fragmentRefs": null,
         "sections": Array [],
       }
     }

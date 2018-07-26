@@ -1,15 +1,39 @@
 // @flow
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { graphql, createFragmentContainer } from 'react-relay';
+import { Alert } from 'react-bootstrap';
 import { connect, type MapStateToProps } from 'react-redux';
-import { reduxForm, Field } from 'redux-form';
-import OpinionSourceActions from '../../../actions/OpinionSourceActions';
+import { reduxForm, Field, SubmissionError, clearSubmitErrors, type FormProps } from 'redux-form';
 import renderComponent from '../../Form/Field';
-import CategoriesStore from '../../../stores/CategoriesStore';
 import { isUrl } from '../../../services/Validator';
+import FluxDispatcher from '../../../dispatchers/AppDispatcher';
+import AddSourceMutation from '../../../mutations/AddSourceMutation';
+import ChangeSourceMutation from '../../../mutations/ChangeSourceMutation';
 import { hideSourceCreateModal, hideSourceEditModal } from '../../../redux/modules/opinion';
+import type { OpinionSourceForm_source } from './__generated__/OpinionSourceForm_source.graphql';
+import type { OpinionSourceForm_sourceable } from './__generated__/OpinionSourceForm_sourceable.graphql';
 
-const validate = ({ title, body, category, link, check }: Object) => {
+type FormValues = {
+  title: ?string,
+  body: ?string,
+  category: ?string,
+  link: ?string,
+  check?: boolean,
+};
+type FormValidValues = {
+  title: string,
+  body: string,
+  category: string,
+  link: string,
+};
+type RelayProps = {
+  source: OpinionSourceForm_source,
+  sourceable: OpinionSourceForm_sourceable,
+};
+type Props = RelayProps & FormProps;
+
+const validate = ({ title, body, category, link, check }: FormValues) => {
   const errors = {};
   if (!title || title.length <= 2) {
     errors.title = 'source.constraints.title';
@@ -29,38 +53,81 @@ const validate = ({ title, body, category, link, check }: Object) => {
   return errors;
 };
 
-const onSubmit = (values, dispatch, props) => {
-  const { opinion, source } = props;
-  const tmpFixData: Object = values;
-  tmpFixData.Category = tmpFixData.category;
-  delete tmpFixData.category;
-  delete tmpFixData.check;
-
+const onSubmit = (values: FormValidValues, dispatch, props: Props) => {
+  const { sourceable, source } = props;
   if (!source) {
-    return OpinionSourceActions.add(opinion, tmpFixData).then(() => {
+    const input = {
+      sourceableId: sourceable.id,
+      title: values.title,
+      body: values.body,
+      category: values.category,
+      link: values.link,
+    };
+    return AddSourceMutation.commit({ input }).then(res => {
+      if (!res.addSource || !res.addSource.sourceEdge) {
+        FluxDispatcher.dispatch({
+          actionType: "UPDATE_ALERT",
+          alert: { bsStyle: 'danger', content: 'alert.danger.add.source' },
+        });
+        throw new SubmissionError({ _error: 'global.error.server.form' });
+      }
+      FluxDispatcher.dispatch({
+         actionType: "UPDATE_ALERT",	
+          alert: { bsStyle: 'success', content: 'alert.success.add.source' },	
+      });
       dispatch(hideSourceCreateModal());
-      OpinionSourceActions.load(opinion, 'last');
     });
   }
-
-  return OpinionSourceActions.update(opinion, source.id, tmpFixData).then(() => {
+  const input = {
+    sourceId: source.id,
+    title: values.title,
+    body: values.body,
+    category: values.category,
+    link: values.link,
+  };
+  return ChangeSourceMutation.commit({ input }).then(res => {
+    if (!res.changeSource || !res.changeSource.source) {
+        FluxDispatcher.dispatch({
+          actionType: "UPDATE_ALERT",
+          alert: { bsStyle: 'danger', content: 'alert.danger.update.source' },
+        });
+      throw new SubmissionError({ _error: 'global.error.server.form' });
+    }
+          FluxDispatcher.dispatch({
+         actionType: "UPDATE_ALERT",	
+          alert: { bsStyle: 'success', content: 'alert.success.update.source' },	
+      });
     dispatch(hideSourceEditModal());
-    OpinionSourceActions.load(opinion, 'last');
   });
 };
 
 export const formName = 'opinion-source-form';
 
-type Props = {
-  opinion: Object,
-  source?: Object,
-};
-
 class OpinionSourceForm extends React.Component<Props> {
   render() {
-    const { source } = this.props;
+    const { error, dispatch, source, sourceable } = this.props;
     return (
       <form id="source-form">
+        {error && (
+          <Alert
+            bsStyle="warning"
+            onDismiss={() => {
+              dispatch(clearSubmitErrors(formName));
+            }}>
+            {error === 'publication-limit-reached' ? (
+              <div>
+                <h4>
+                  <strong>
+                    <FormattedMessage id="publication-limit-reached" />
+                  </strong>
+                </h4>
+                <FormattedMessage id="publication-limit-reached-argument-content" />
+              </div>
+            ) : (
+              <FormattedHTMLMessage id="global.error.server.form" />
+            )}
+          </Alert>
+        )}
         {source && (
           <div className="alert alert-warning edit-confirm-alert">
             <Field
@@ -78,18 +145,19 @@ class OpinionSourceForm extends React.Component<Props> {
           id="sourceCategory"
           component={renderComponent}
           label={<FormattedMessage id="source.type" />}>
-          {source ? null : (
+          {!source && (
             <option value="" disabled>
-              {<FormattedMessage id="global.select" />}
+              <FormattedMessage id="global.select" />
             </option>
           )}
-          {CategoriesStore.categories.map(category => {
-            return (
-              <option key={category.id} value={category.id}>
-                {category.title}
-              </option>
-            );
-          })}
+          {sourceable.availableSourceCategories &&
+            sourceable.availableSourceCategories.filter(Boolean).map(category => {
+              return (
+                <option key={category.id} value={category.id}>
+                  {category.title}
+                </option>
+              );
+            })}
         </Field>
         <Field
           id="sourceLink"
@@ -127,10 +195,33 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state, { source }) => ({
     check: !source,
   },
 });
-export default connect(mapStateToProps)(
+const container = connect(mapStateToProps)(
   reduxForm({
     validate,
     onSubmit,
     form: formName,
   })(OpinionSourceForm),
 );
+
+export default createFragmentContainer(container, {
+  source: graphql`
+    fragment OpinionSourceForm_source on Source {
+      id
+      link
+      title
+      body
+      category {
+        id
+      }
+    }
+  `,
+  sourceable: graphql`
+    fragment OpinionSourceForm_sourceable on Sourceable {
+      id
+      availableSourceCategories {
+        id
+        title
+      }
+    }
+  `,
+});

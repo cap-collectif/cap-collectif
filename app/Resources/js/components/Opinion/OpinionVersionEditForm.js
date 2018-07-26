@@ -1,15 +1,42 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+import ChangeVersionMutation from '../../mutations/ChangeVersionMutation';
+import { closeOpinionVersionEditModal } from '../../redux/modules/opinion';
 import renderInput from '../Form/Field';
-import { editOpinionVersion as onSubmit } from '../../redux/modules/opinion';
 import type { State } from '../../types';
+import type { OpinionVersionEditForm_version } from './__generated__/OpinionVersionEditForm_version.graphql';
 
 export const formName = 'opinion-version-edit';
 
-const validate = ({ confirm, title, comment }) => {
+type RelayProps = {
+  version: OpinionVersionEditForm_version,
+};
+type FormValues = {
+  confirm: boolean,
+  title: string,
+  comment: string,
+  body: string,
+};
+
+type Props = RelayProps;
+
+const onSubmit = (values: FormValues, dispatch, props: Props) => {
+  const input = {
+    versionId: props.version.id,
+    body: values.body,
+    title: values.title,
+    comment: values.comment,
+  };
+  return ChangeVersionMutation.commit({ input }).then(() => {
+    dispatch(closeOpinionVersionEditModal());
+  });
+};
+
+const validate = ({ confirm, title, comment }: FormValues) => {
   const errors = {};
   if (!confirm) {
     errors.confirm = 'global.required';
@@ -30,8 +57,6 @@ const validate = ({ confirm, title, comment }) => {
   }
   return errors;
 };
-
-type Props = { versionId: string };
 
 class OpinionVersionEditForm extends React.Component<Props> {
   render() {
@@ -70,28 +95,29 @@ class OpinionVersionEditForm extends React.Component<Props> {
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: RelayProps) => ({
   initialValues: {
-    title:
-      state.opinion.currentVersionId &&
-      state.opinion.versionsById[state.opinion.currentVersionId].title,
-    body:
-      state.opinion.currentVersionId &&
-      state.opinion.versionsById[state.opinion.currentVersionId].body,
-    comment:
-      state.opinion.currentVersionId &&
-      state.opinion.versionsById[state.opinion.currentVersionId].comment,
+    title: props.version.title,
+    body: props.version.body,
+    comment: props.version.comment,
   },
-  opinionId:
-    state.opinion.currentVersionId &&
-    state.opinion.versionsById[state.opinion.currentVersionId].parent.id,
-  versionId: state.opinion.currentVersionId,
 });
 
-export default connect(mapStateToProps)(
+const container = connect(mapStateToProps)(
   reduxForm({
     form: formName,
     onSubmit,
     validate,
   })(OpinionVersionEditForm),
 );
+
+export default createFragmentContainer(container, {
+  version: graphql`
+    fragment OpinionVersionEditForm_version on Version {
+      id
+      title
+      body
+      comment
+    }
+  `,
+});

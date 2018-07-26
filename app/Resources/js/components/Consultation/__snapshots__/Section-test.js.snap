@@ -20,7 +20,12 @@ exports[`<Section /> renders correcty 1`] = `
     }
   >
     <Relay(InjectIntl(OpinionList))
-      consultation={Object {}}
+      consultation={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+        }
+      }
       section={
         Object {
           "$fragmentRefs": null,

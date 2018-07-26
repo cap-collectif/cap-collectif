@@ -1,20 +1,21 @@
 Argumentable:
-  type: interface
-  config:
-    description: 'An argumentable'
-    resolveType: "@=resolver('contribution_type', [value])"
-    fields:
-      id:
-        type: 'ID!'
-      arguments:
-        description: 'The arguments related to the argumentable.'
-        type: 'ArgumentConnection!'
-        argsBuilder: 'Relay::Connection'
-        args:
-          orderBy:
-            type: 'ArgumentOrder'
-            defaultValue: { field: CREATED_AT, direction: DESC }
-          type:
-            description:
-              'If omitted, returns all arguments. If provided, returns the arguments of this particular type.'
-            type: 'ArgumentValue'
+    type: interface
+    config:
+        description: "An argumentable"
+        resolveType: "@=resolver('contribution_type', [value])"
+        fields:
+          id:
+              type: "ID!"
+          contribuable:
+              type: "Boolean!"
+          arguments:
+              description: "The arguments related to the argumentable."
+              type: "ArgumentConnection!"
+              argsBuilder: "Relay::Connection"
+              args:
+                orderBy:
+                  type: "ArgumentOrder"
+                  defaultValue: { field: CREATED_AT, direction: DESC }
+                type:
+                  description: "If omitted, returns all arguments. If provided, returns the arguments of this particular type."
+                  type: "ArgumentValue"

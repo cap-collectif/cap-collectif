@@ -25,13 +25,20 @@ exports[`<OpinionList /> renders correcty 1`] = `
       <div
         className="panel-heading__actions"
       >
-        <Connect(NewOpinionButton)
-          disabled={true}
-          label="opinion.create.button"
-          opinionType={
+        <Relay(Connect(NewOpinionButton))
+          consultation={
             Object {
+              "$fragmentRefs": null,
               "$refType": null,
-              "appendixTypes": Array [],
+              "id": "consultation1",
+              "opinionCountShownBySection": 5,
+            }
+          }
+          label="opinion.create.button"
+          section={
+            Object {
+              "$fragmentRefs": null,
+              "$refType": null,
               "color": "red",
               "contribuable": true,
               "contributionsCount": 0,

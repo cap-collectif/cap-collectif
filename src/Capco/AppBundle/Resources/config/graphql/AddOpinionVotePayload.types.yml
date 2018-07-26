@@ -1,0 +1,12 @@
+AddOpinionVotePayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            vote:
+                type: "YesNoPairedVote"
+            voteEdge:
+                type: "YesNoPairedVoteEdge"
+            viewer:
+                type: "User!"
+            previousVoteId:
+                type: "ID"

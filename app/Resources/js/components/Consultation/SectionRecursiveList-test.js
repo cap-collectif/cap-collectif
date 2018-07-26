@@ -3,12 +3,15 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { SectionRecursiveList } from './SectionRecursiveList';
+import { $refType, $fragmentRefs } from '../../mocks';
 
 describe('<SectionRecursiveList />', () => {
   const props = {
-    // $FlowFixMe $refType
-    sections: [{ sections: [] }, { sections: [] }],
-    consultation: {},
+    consultation: {
+      $refType,
+      $fragmentRefs,
+      sections: [{ sections: [], $fragmentRefs }, { sections: [], $fragmentRefs }],
+    },
   };
 
   it('renders correcty', () => {

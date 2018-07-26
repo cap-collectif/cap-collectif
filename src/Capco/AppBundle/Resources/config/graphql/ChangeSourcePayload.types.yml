@@ -1,0 +1,6 @@
+ChangeSourcePayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            source:
+                type: "Source"

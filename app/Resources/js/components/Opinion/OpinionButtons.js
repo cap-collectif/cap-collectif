@@ -1,5 +1,6 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { connect, type MapStateToProps } from 'react-redux';
 import { ButtonToolbar } from 'react-bootstrap';
 import ShareButtonDropdown from '../Utils/ShareButtonDropdown';
@@ -9,9 +10,10 @@ import OpinionReportButton from './OpinionReportButton';
 import OpinionDelete from './Delete/OpinionDelete';
 import OpinionEditButton from './OpinionEditButton';
 import type { State } from '../../types';
+import type { OpinionButtons_opinion } from './__generated__/OpinionButtons_opinion.graphql';
 
 type Props = {
-  opinion: Object,
+  opinion: OpinionButtons_opinion,
   user?: Object,
 };
 
@@ -20,35 +22,23 @@ class OpinionButtons extends React.Component<Props> {
     user: null,
   };
 
-  isVersion = () => {
-    const { opinion } = this.props;
-    return !!opinion.parent;
-  };
-
-  isContribuable = () => {
-    const { opinion } = this.props;
-    return opinion.isContribuable;
-  };
-
   isTheUserTheAuthor = () => {
     const { opinion, user } = this.props;
-    if (opinion.author === null || !user) {
+    if (!opinion.author || !user) {
       return false;
     }
-    return user.uniqueId === opinion.author.uniqueId;
+    return user.uniqueId === opinion.author.slug;
   };
 
   renderEditButton = () => {
     const { opinion } = this.props;
-    if (this.isContribuable() && this.isTheUserTheAuthor()) {
-      if (this.isVersion()) {
+    if (opinion.contribuable && this.isTheUserTheAuthor()) {
+      if (opinion.__typename === 'Version') {
         return (
-          <OpinionVersionEditButton
-            className="pull-right"
-            style={{ marginLeft: '5px' }}
-            opinionId={opinion.parent.id}
-            version={opinion}
-          />
+          <React.Fragment>
+            <OpinionVersionEditModal version={opinion} />
+            <OpinionVersionEditButton className="pull-right" style={{ marginLeft: '5px' }} />
+          </React.Fragment>
         );
       }
       return (
@@ -62,18 +52,24 @@ class OpinionButtons extends React.Component<Props> {
 
   render() {
     const opinion = this.props.opinion;
+    if (!opinion) {
+      return null;
+    }
     return (
       <ButtonToolbar>
         <OpinionDelete opinion={opinion} />
         {this.renderEditButton()}
         <OpinionReportButton opinion={opinion} />
-        <ShareButtonDropdown
-          id="opinion-share-button"
-          className="pull-right"
-          title={opinion.title}
-          url={opinion._links.show}
-        />
-        <OpinionVersionEditModal />
+        {opinion.title &&
+          opinion.section &&
+          opinion.section.url && (
+            <ShareButtonDropdown
+              id="opinion-share-button"
+              className="pull-right"
+              title={opinion.title}
+              url={opinion.section.url}
+            />
+          )}
       </ButtonToolbar>
     );
   }
@@ -84,4 +80,38 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   user: state.user.user,
 });
 
-export default connect(mapStateToProps)(OpinionButtons);
+const container = connect(mapStateToProps)(OpinionButtons);
+
+export default createFragmentContainer(container, {
+  opinion: graphql`
+    fragment OpinionButtons_opinion on OpinionOrVersion
+      @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+      ...OpinionDelete_opinion
+      ...OpinionReportButton_opinion @arguments(isAuthenticated: $isAuthenticated)
+      ... on Opinion {
+        ...OpinionEditButton_opinion
+        __typename
+        contribuable
+        title
+        section {
+          url
+        }
+        author {
+          slug
+        }
+      }
+      ... on Version {
+        __typename
+        ...OpinionVersionEditModal_version
+        contribuable
+        title
+        section {
+          url
+        }
+        author {
+          slug
+        }
+      }
+    }
+  `,
+});

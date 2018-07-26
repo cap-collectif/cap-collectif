@@ -1,40 +1,27 @@
 // @flow
 import * as React from 'react';
+import { graphql, createPaginationContainer, type RelayPaginationProp } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
-import { Modal, Row } from 'react-bootstrap';
+import { Modal, Row, Button } from 'react-bootstrap';
 import CloseButton from '../../Form/CloseButton';
-import OpinionActions from '../../../actions/OpinionActions';
-import Loader from '../../Ui/Loader';
 import UserBox from '../../User/UserBox';
+import type { OpinionVotesModal_opinion } from './__generated__/OpinionVotesModal_opinion.graphql';
 
 type Props = {
-  opinion: Object,
+  opinion: OpinionVotesModal_opinion,
+  relay: RelayPaginationProp,
 };
 
 type State = {
   showModal: boolean,
-  isLoading: boolean,
-  votes: Array<$FlowFixMe>,
+  loading: boolean,
 };
 
 class OpinionVotesModal extends React.Component<Props, State> {
   state = {
     showModal: false,
-    isLoading: true,
-    votes: [],
+    loading: false,
   };
-
-  componentDidMount() {
-    const { opinion } = this.props;
-    const opinionId = opinion.parent ? opinion.parent.id : opinion.id;
-    const versionId = opinion.parent ? opinion.id : null;
-    OpinionActions.loadAllVotes(opinionId, versionId).then(votes => {
-      this.setState({
-        isLoading: false,
-        votes,
-      });
-    });
-  }
 
   show = () => {
     this.setState({ showModal: true });
@@ -45,8 +32,11 @@ class OpinionVotesModal extends React.Component<Props, State> {
   };
 
   render() {
-    const { opinion } = this.props;
-    const moreVotes = opinion.votesCount > 5 ? opinion.votesCount - 5 : null;
+    const { relay, opinion } = this.props;
+    const moreVotes =
+      opinion.moreVotes && opinion.moreVotes.totalCount > 5
+        ? opinion.moreVotes.totalCount - 5
+        : false;
     if (!moreVotes) {
       return null;
     }
@@ -68,24 +58,39 @@ class OpinionVotesModal extends React.Component<Props, State> {
           aria-labelledby="opinion-votes-more-title">
           <Modal.Header closeButton>
             <Modal.Title id="opinion-votes-more-title">
-              {<FormattedMessage id="opinion.votes.modal.title" />}
+              <FormattedMessage id="opinion.votes.modal.title" />
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Loader show={this.state.isLoading}>
-              <Row>
-                {this.state.votes.map((vote, index) => {
-                  return (
-                    <UserBox
-                      key={index}
-                      user={vote.user}
-                      username={vote.username}
-                      className="opinion__votes__userbox"
-                    />
-                  );
-                })}
-              </Row>
-            </Loader>
+            <Row>
+              {opinion &&
+                opinion.moreVotes &&
+                opinion.moreVotes.edges &&
+                opinion.moreVotes.edges
+                  .filter(Boolean)
+                  .map(edge => edge.node)
+                  .filter(Boolean)
+                  .map(vote => vote.author)
+                  .filter(Boolean)
+                  .map((author, index) => {
+                    /* $FlowFixMe */
+                    return (
+                      <UserBox key={index} user={author} className="opinion__votes__userbox" />
+                    );
+                  })}
+            </Row>
+            {relay.hasMore() && (
+              <Button
+                disabled={this.state.loading}
+                onClick={() => {
+                  this.setState({ loading: true });
+                  relay.loadMore(100, () => {
+                    this.setState({ loading: false });
+                  });
+                }}>
+                <FormattedMessage id="global.more" />
+              </Button>
+            )}
           </Modal.Body>
           <Modal.Footer>
             <CloseButton onClose={this.close} label="global.close" />
@@ -96,4 +101,67 @@ class OpinionVotesModal extends React.Component<Props, State> {
   }
 }
 
-export default OpinionVotesModal;
+export default createPaginationContainer(
+  OpinionVotesModal,
+  {
+    opinion: graphql`
+      fragment OpinionVotesModal_opinion on Opinion
+        @argumentDefinitions(
+          count: { type: "Int", defaultValue: 100 }
+          cursor: { type: "String", defaultValue: null }
+        ) {
+        id
+        moreVotes: votes(first: $count, after: $cursor)
+          @connection(key: "OpinionVotesModal_moreVotes", filters: []) {
+          totalCount
+          pageInfo {
+            hasPreviousPage
+            hasNextPage
+            startCursor
+            endCursor
+          }
+          edges {
+            node {
+              author {
+                id
+                show_url
+                displayName
+                username
+                contributionsCount
+                media {
+                  url
+                }
+              }
+            }
+          }
+        }
+      }
+    `,
+  },
+  {
+    direction: 'forward',
+    getConnectionFromProps(props: Props) {
+      return props.opinion && props.opinion.moreVotes;
+    },
+    getFragmentVariables(prevVars) {
+      return {
+        ...prevVars,
+      };
+    },
+    getVariables(props: Props, { count, cursor }, fragmentVariables) {
+      return {
+        ...fragmentVariables,
+        count,
+        cursor,
+        opinionId: props.opinion.id,
+      };
+    },
+    query: graphql`
+      query OpinionVotesModalPaginatedQuery($opinionId: ID!, $cursor: String, $count: Int) {
+        opinion: node(id: $opinionId) {
+          ...OpinionVotesModal_opinion @arguments(cursor: $cursor, count: $count)
+        }
+      }
+    `,
+  },
+);

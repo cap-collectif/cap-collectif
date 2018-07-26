@@ -64,6 +64,7 @@ const commit = (
 
       // We update the "FOR" or "AGAINST" row arguments totalCount
       const argumentableProxy = store.get(id);
+      if (!argumentableProxy) return;
       const connection = ConnectionHandler.getConnection(
         argumentableProxy,
         'ArgumentList_allArguments',
@@ -72,6 +73,11 @@ const commit = (
         },
       );
       connection.setValue(connection.getValue('totalCount') - 1, 'totalCount');
+
+      const allArgumentsProxy = argumentableProxy.getLinkedRecord('arguments', { first: 0 });
+      if (!allArgumentsProxy) return;
+      const previousValue = parseInt(allArgumentsProxy.getValue('totalCount'), 10);
+      allArgumentsProxy.setValue(previousValue - 1, 'totalCount');
     },
   });
 

@@ -1,49 +1,23 @@
 // @flow
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { VOTE_WIDGET_DISABLED, VOTE_WIDGET_BOTH } from '../../../constants/VoteConstants';
 import VotePiechart from '../../Utils/VotePiechart';
 import OpinionVotesBar from './OpinionVotesBar';
 import OpinionVotesButtons from './OpinionVotesButtons';
+import type { OpinionVotesBox_opinion } from './__generated__/OpinionVotesBox_opinion.graphql';
 
-type Props = { opinion: Object };
+type Props = { opinion: OpinionVotesBox_opinion };
 
 class OpinionVotesBox extends React.Component<Props> {
-  getOpinionType = () => {
-    const { opinion } = this.props;
-    return this.isVersion() ? opinion.parent.type : opinion.type;
-  };
-
-  isVersion = () => {
-    const { opinion } = this.props;
-    return opinion && opinion.parent;
-  };
-
-  isContribuable = () => {
-    const { opinion } = this.props;
-    return opinion.isContribuable;
-  };
-
-  showVotesButtons = () => {
-    const widgetType = this.getOpinionType().voteWidgetType;
-    return widgetType !== VOTE_WIDGET_DISABLED;
-  };
-
-  showPiechart = () => {
-    const {
-      opinion: { votesCount },
-    } = this.props;
-    const widgetType = this.getOpinionType().voteWidgetType;
-    return votesCount > 0 && widgetType === VOTE_WIDGET_BOTH;
-  };
-
   render() {
-    if (this.getOpinionType().voteWidgetType === VOTE_WIDGET_DISABLED) {
+    const { opinion } = this.props;
+    if (!opinion || !opinion.section || opinion.section.voteWidgetType === VOTE_WIDGET_DISABLED) {
       return null;
     }
-    const { opinion } = this.props;
-    const helpText = this.getOpinionType().votesHelpText;
-
+    const helpText = opinion.section.votesHelpText;
+    const widgetType = opinion.section && opinion.section.voteWidgetType;
     return (
       <div className="opinion__votes__box">
         {helpText && (
@@ -53,25 +27,74 @@ class OpinionVotesBox extends React.Component<Props> {
         )}
         <Row>
           <Col sm={12} md={8} style={{ paddingTop: '15px' }}>
-            <OpinionVotesButtons show disabled={!this.isContribuable()} opinion={opinion} />
+            {/* $FlowFixMe */}
+            <OpinionVotesButtons opinion={opinion} />
+            {/* $FlowFixMe */}
             <OpinionVotesBar opinion={opinion} />
           </Col>
-          {this.showPiechart() && (
+          {opinion.votes &&
+          opinion.votes.totalCount &&
+          opinion.votes.totalCount > 0 &&
+          widgetType === VOTE_WIDGET_BOTH ? (
             <Col sm={12} md={4}>
+              {/* $FlowFixMe */}
               <VotePiechart
                 top={20}
                 height={'180px'}
                 width={'200px'}
-                ok={opinion.votesCountOk}
-                nok={opinion.votesCountNok}
-                mitige={opinion.votesCountMitige}
+                ok={opinion.votesYes ? opinion.votesYes.totalCount : 0}
+                nok={opinion.votesNo ? opinion.votesNo.totalCount : 0}
+                mitige={opinion.votesMitige ? opinion.votesMitige.totalCount : 0}
               />
             </Col>
-          )}
+          ) : null}
         </Row>
       </div>
     );
   }
 }
 
-export default OpinionVotesBox;
+export default createFragmentContainer(OpinionVotesBox, {
+  opinion: graphql`
+    fragment OpinionVotesBox_opinion on OpinionOrVersion {
+      ...OpinionVotesButtons_opinion
+      ...OpinionVotesBar_opinion
+      ... on Opinion {
+        votes(first: 0) {
+          totalCount
+        }
+        votesYes: votes(first: 0, value: YES) {
+          totalCount
+        }
+        votesNo: votes(first: 0, value: NO) {
+          totalCount
+        }
+        votesMitige: votes(first: 0, value: MITIGE) {
+          totalCount
+        }
+        section {
+          voteWidgetType
+          votesHelpText
+        }
+      }
+      ... on Version {
+        votes(first: 0) {
+          totalCount
+        }
+        votesYes: votes(first: 0, value: YES) {
+          totalCount
+        }
+        votesNo: votes(first: 0, value: NO) {
+          totalCount
+        }
+        votesMitige: votes(first: 0, value: MITIGE) {
+          totalCount
+        }
+        section {
+          voteWidgetType
+          votesHelpText
+        }
+      }
+    }
+  `,
+});

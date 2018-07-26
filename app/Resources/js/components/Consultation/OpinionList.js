@@ -8,6 +8,7 @@ import NewOpinionButton from '../Opinion/NewOpinionButton';
 import environment, { graphqlError } from '../../createRelayEnvironment';
 import Loader from '../Ui/Loader';
 import type { OpinionList_section } from './__generated__/OpinionList_section.graphql';
+import type { OpinionList_consultation } from './__generated__/OpinionList_consultation.graphql';
 
 const renderOpinionList = ({
   error,
@@ -35,7 +36,7 @@ const renderOpinionList = ({
 
 type Props = {
   section: OpinionList_section,
-  consultation: Object,
+  consultation: OpinionList_consultation,
   intl: Object,
 };
 
@@ -87,10 +88,8 @@ export class OpinionList extends React.Component<Props> {
               )}
               {section.contribuable && (
                 <NewOpinionButton
-                  opinionType={section}
-                  stepId={consultation.id}
-                  projectId={consultation.projectId}
-                  disabled={!consultation.open}
+                  section={section}
+                  consultation={consultation}
                   label={intl.formatMessage({ id: 'opinion.create.button' })}
                 />
               )}
@@ -115,13 +114,15 @@ export class OpinionList extends React.Component<Props> {
               />
             </ListGroup>
           )}
-          {section.contributionsCount > consultation.opinionCountShownBySection && (
+          {section.contributionsCount &&
+          consultation.opinionCountShownBySection &&
+          section.contributionsCount > consultation.opinionCountShownBySection ? (
             <Panel.Footer>
               <a href={section.url} className="text-center" style={{ display: 'block' }}>
                 <FormattedMessage id="opinion.show.all" />
               </a>
             </Panel.Footer>
-          )}
+          ) : null}
         </Panel>
       </div>
     );
@@ -133,17 +134,20 @@ const container = injectIntl(OpinionList);
 export default createFragmentContainer(container, {
   section: graphql`
     fragment OpinionList_section on Section {
+      ...NewOpinionButton_section
       id
       url
       slug
       color
       contribuable
       contributionsCount
-      appendixTypes {
-        id
-        title
-        position
-      }
+    }
+  `,
+  consultation: graphql`
+    fragment OpinionList_consultation on Consultation {
+      id
+      opinionCountShownBySection
+      ...NewOpinionButton_consultation
     }
   `,
 });
