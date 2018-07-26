@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createFragmentContainer } from 'react-relay';
-import { Label, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Label, ListGroup, ListGroupItem, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import moment from 'moment';
 import * as graphql from 'graphql';
 import type { ProposalListTable_proposals } from './__generated__/ProposalListTable_proposals.graphql';
@@ -53,64 +53,69 @@ export class ProposalListTable extends React.Component<Props, State> {
         .filter(Boolean)
         .map(edge => edge.node)
         .filter(Boolean)
-        .map(node => ({
-          title: {
-            text: 'admin.fields.selection.proposal',
-            value: { displayTitle: node.title && node.title, url: node.url && node.url },
-            width: '250px',
-          },
-          implementationPhase: {
-            text: 'implementation-phase',
-            value: {
-              list: node.progressSteps && node.progressSteps,
-              title: this.getPhaseTitle(node.progressSteps),
+        .map(node => {
+          const getProposalTitle =
+            node.title.length > 55 ? `${node.title.substring(0, 55)}...` : node.title;
+
+          return {
+            title: {
+              text: 'admin.fields.selection.proposal',
+              value: { displayTitle: getProposalTitle, url: node.url && node.url },
+              width: '250px',
             },
-            width: '250px',
-          },
-          status: { text: 'admin.fields.theme.status', value: node.status && node.status },
-          author: { text: 'project_download.label.author', value: node.author && node.author },
-          ref: {
-            text: 'proposal.admin.reference',
-            value: node.reference && node.reference,
-            width: '150px',
-          },
-          district: {
-            text: 'proposal.district',
-            value: node.district && node.district.name,
-            hidden: step && !step.form.usingDistrict,
-          },
-          category: {
-            text: 'proposal.category',
-            value: node.category && node.category.name,
-            hidden: step && !step.form.usingCategories,
-          },
-          theme: {
-            text: 'proposal.theme',
-            value: node.theme && node.theme.title,
-            hidden: step && !step.form.usingThemes,
-          },
-          priceEstimation: {
-            text: 'proposal.estimation',
-            value: node.estimation && node.estimation,
-          },
-          likers: {
-            text: 'project_download.label.likers',
-            value: node.likers && node.likers,
-            width: '250px',
-          },
-          lastActivity: {
-            text: 'last-activity',
-            value: {
-              date: node.updatedAt && node.updatedAt,
-              user: node.updatedBy && node.updatedBy.displayName,
+            implementationPhase: {
+              text: 'implementation-phase',
+              value: {
+                list: node.progressSteps && node.progressSteps,
+                title: this.getPhaseTitle(node.progressSteps),
+              },
+              width: '250px',
             },
-          },
-          publishedOn: {
-            text: 'published-on',
-            value: node.createdAt && node.createdAt,
-            width: '150px',
-          },
-        }))
+            status: { text: 'admin.fields.theme.status', value: node.status && node.status },
+            author: { text: 'project_download.label.author', value: node.author && node.author },
+            ref: {
+              text: 'proposal.admin.reference',
+              value: node.reference && node.reference,
+              width: '150px',
+            },
+            district: {
+              text: 'proposal.district',
+              value: node.district && node.district.name,
+              hidden: step && !step.form.usingDistrict,
+            },
+            category: {
+              text: 'proposal.category',
+              value: node.category && node.category.name,
+              hidden: step && !step.form.usingCategories,
+            },
+            theme: {
+              text: 'proposal.theme',
+              value: node.theme && node.theme.title,
+              hidden: step && !step.form.usingThemes,
+            },
+            priceEstimation: {
+              text: 'proposal.estimation',
+              value: node.estimation && node.estimation,
+            },
+            likers: {
+              text: 'project_download.label.likers',
+              value: node.likers && node.likers,
+              width: '250px',
+            },
+            lastActivity: {
+              text: 'last-activity',
+              value: {
+                date: node.updatedAt && node.updatedAt,
+                user: node.updatedBy && node.updatedBy.displayName,
+              },
+            },
+            publishedOn: {
+              text: 'published-on',
+              value: node.createdAt && node.createdAt,
+              width: '150px',
+            },
+          };
+        })
     );
   };
 
@@ -145,20 +150,43 @@ export class ProposalListTable extends React.Component<Props, State> {
               };
             });
 
+          const getProposalTitle =
+            item.title.value.displayTitle.length > 45
+              ? `${item.title.value.displayTitle.substring(0, 45)}...`
+              : item.title.value.displayTitle;
+
+          const getStatus = () => {
+            if (item.status.value && item.status.value.name.length > 9) {
+              const tooltip = (
+                <Tooltip placement="top" id="tooltip">
+                  {item.status.value.name}
+                </Tooltip>
+              );
+
+              return (
+                <OverlayTrigger overlay={tooltip} placement="top">
+                  <Label bsStyle={item.status.value.color} className="badge-pill">
+                    {item.status.value.name.substring(0, 9)}...
+                  </Label>
+                </OverlayTrigger>
+              );
+            }
+
+            if (item.status.value) {
+              return (
+                <Label bsStyle={item.status.value.color} className="badge-pill">
+                  {item.status.value.name}
+                </Label>
+              );
+            }
+          };
+
           return (
             <ListGroupItem>
               <div>
                 <div className="d-flex justify-content-between">
-                  {item.title.value && (
-                    <a href={item.title.value.url}>{item.title.value.displayTitle}</a>
-                  )}
-                  {item.status.value && (
-                    <div className="ml-5">
-                      <Label bsStyle={item.status.value.color} className="badge-pill">
-                        {item.status.value.name}
-                      </Label>
-                    </div>
-                  )}
+                  {item.title.value && <a href={item.title.value.url}>{getProposalTitle}</a>}
+                  {item.status.value && <div className="ml-5">{getStatus()}</div>}
                 </div>
                 {item.implementationPhase.value && (
                   <div className="m-auto">

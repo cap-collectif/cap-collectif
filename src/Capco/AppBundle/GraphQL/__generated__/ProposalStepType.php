@@ -23,6 +23,90 @@ final class ProposalStepType extends InterfaceType implements GeneratedTypeInter
             'description' => 'A proposal step',
             'fields' => function () use ($globalVariable) {
                 return [
+                'proposals' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ProposalConnection')),
+                    'args' => [
+                        [
+                            'name' => 'after',
+                            'type' => Type::string(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'first',
+                            'type' => Type::int(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'before',
+                            'type' => Type::string(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'last',
+                            'type' => Type::int(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'district',
+                            'type' => Type::id(),
+                            'description' => 'If non-null, filters proposals with the given district.',
+                        ],
+                        [
+                            'name' => 'userType',
+                            'type' => Type::id(),
+                            'description' => 'If non-null, filters proposals with the given type of author.',
+                        ],
+                        [
+                            'name' => 'category',
+                            'type' => Type::id(),
+                            'description' => 'If non-null, filters proposals with the given category.',
+                        ],
+                        [
+                            'name' => 'author',
+                            'type' => Type::id(),
+                            'description' => 'If non-null, filters proposals with the given author.',
+                        ],
+                        [
+                            'name' => 'status',
+                            'type' => Type::id(),
+                            'description' => 'If non-null, filters proposals with the given status.',
+                        ],
+                        [
+                            'name' => 'theme',
+                            'type' => Type::id(),
+                            'description' => 'If non-null, filters proposals with the given theme.',
+                        ],
+                        [
+                            'name' => 'term',
+                            'type' => Type::string(),
+                            'description' => 'If non-null, filters proposals with the given string to look for.',
+                        ],
+                        [
+                            'name' => 'orderBy',
+                            'type' => $globalVariable->get('typeResolver')->resolve('ProposalOrder'),
+                            'description' => 'Ordering options for proposals returned from the connection.',
+                            'defaultValue' => ['field' => 'CREATED_AT', 'direction' => 'ASC'],
+                        ],
+                        [
+                            'name' => 'affiliations',
+                            'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('ProposalAffiliation')),
+                            'description' => 'Affiliation options for proposals returned from the connection.',
+                        ],
+                        [
+                            'name' => 'includeUnpublishedOnly',
+                            'type' => Type::boolean(),
+                            'description' => 'If `true`, retrieves unpublished proposals, otherwise only published proposals are retrived.',
+                            'defaultValue' => false,
+                        ],
+                    ],
+                    'resolve' => null,
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'id' => [
                     'type' => Type::nonNull(Type::id()),
                     'args' => [
@@ -86,119 +170,6 @@ final class ProposalStepType extends InterfaceType implements GeneratedTypeInter
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => null,
-                ],
-                'proposals' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ProposalConnection')),
-                    'args' => [
-                        [
-                            'name' => 'after',
-                            'type' => Type::string(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'first',
-                            'type' => Type::int(),
-                            'description' => null,
-                            'defaultValue' => 100,
-                        ],
-                        [
-                            'name' => 'before',
-                            'type' => Type::string(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'last',
-                            'type' => Type::int(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'district',
-                            'type' => Type::id(),
-                            'description' => 'If non-null, filters proposals with the given district.',
-                        ],
-                        [
-                            'name' => 'userType',
-                            'type' => Type::id(),
-                            'description' => 'If non-null, filters proposals with the given type of author.',
-                        ],
-                        [
-                            'name' => 'category',
-                            'type' => Type::id(),
-                            'description' => 'If non-null, filters proposals with the given category.',
-                        ],
-                        [
-                            'name' => 'author',
-                            'type' => Type::id(),
-                            'description' => 'If non-null, filters proposals with the given author.',
-                        ],
-                        [
-                            'name' => 'status',
-                            'type' => Type::id(),
-                            'description' => 'If non-null, filters proposals with the given status.',
-                        ],
-                        [
-                            'name' => 'theme',
-                            'type' => Type::id(),
-                            'description' => 'If non-null, filters proposals with the given theme.',
-                        ],
-                        [
-                            'name' => 'term',
-                            'type' => Type::string(),
-                            'description' => 'If non-null, filters proposals with the given string to look for.',
-                        ],
-                        [
-                            'name' => 'orderBy',
-                            'type' => $globalVariable->get('typeResolver')->resolve('ProposalOrder'),
-                            'description' => 'Ordering options for proposals returned from the connection.',
-                            'defaultValue' => ['field' => 'PUBLISHED_AT', 'direction' => 'ASC'],
-                        ],
-                        [
-                            'name' => 'affiliations',
-                            'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('ProposalAffiliation')),
-                            'description' => 'Affiliation options for proposals returned from the connection.',
-                        ],
-                    ],
-                    'resolve' => null,
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'viewerProposalsUnpublished' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('ProposalConnection'),
-                    'args' => [
-                        [
-                            'name' => 'after',
-                            'type' => Type::string(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'first',
-                            'type' => Type::int(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'before',
-                            'type' => Type::string(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'last',
-                            'type' => Type::int(),
-                            'description' => null,
-                        ],
-                    ],
-                    'resolve' => null,
-                    'description' => 'The viewer unpublished proposals (only visible by viewer).',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
-                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
-                    },
                 ],
                 'requirements' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('RequirementConnection')),
@@ -338,7 +309,7 @@ final class ProposalStepType extends InterfaceType implements GeneratedTypeInter
                             'name' => 'orderBy',
                             'type' => $globalVariable->get('typeResolver')->resolve('ProposalVotesOrder'),
                             'description' => null,
-                            'defaultValue' => ['field' => 'PUBLISHED_AT', 'direction' => 'DESC'],
+                            'defaultValue' => ['field' => 'CREATED_AT', 'direction' => 'DESC'],
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
@@ -352,6 +323,20 @@ final class ProposalStepType extends InterfaceType implements GeneratedTypeInter
                     'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
                         return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
                     },
+                ],
+                'form' => [
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ProposalForm')),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $value->getProposalForm();
+                    },
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
                 ],
             ];
             },

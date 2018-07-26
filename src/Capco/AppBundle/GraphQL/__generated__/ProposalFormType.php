@@ -23,18 +23,6 @@ final class ProposalFormType extends ObjectType implements GeneratedTypeInterfac
             'description' => 'A budget form',
             'fields' => function () use ($globalVariable) {
                 return [
-                'id' => [
-                    'type' => Type::nonNull(Type::id()),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => 'The ID of an object',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'proposals' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ProposalConnection')),
                     'args' => [
@@ -47,7 +35,6 @@ final class ProposalFormType extends ObjectType implements GeneratedTypeInterfac
                             'name' => 'first',
                             'type' => Type::int(),
                             'description' => null,
-                            'defaultValue' => 100,
                         ],
                         [
                             'name' => 'before',
@@ -98,12 +85,18 @@ final class ProposalFormType extends ObjectType implements GeneratedTypeInterfac
                             'name' => 'orderBy',
                             'type' => $globalVariable->get('typeResolver')->resolve('ProposalOrder'),
                             'description' => 'Ordering options for proposals returned from the connection.',
-                            'defaultValue' => ['field' => 'PUBLISHED_AT', 'direction' => 'ASC'],
+                            'defaultValue' => ['field' => 'CREATED_AT', 'direction' => 'ASC'],
                         ],
                         [
                             'name' => 'affiliations',
                             'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('ProposalAffiliation')),
                             'description' => 'Affiliation options for proposals returned from the connection.',
+                        ],
+                        [
+                            'name' => 'includeUnpublishedOnly',
+                            'type' => Type::boolean(),
+                            'description' => 'If `true`, retrieves unpublished proposals, otherwise only published proposals are retrived.',
+                            'defaultValue' => false,
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
@@ -116,41 +109,17 @@ final class ProposalFormType extends ObjectType implements GeneratedTypeInterfac
                     'public' => null,
                     'access' => null,
                 ],
-                'viewerProposalsUnpublished' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('ProposalConnection'),
+                'id' => [
+                    'type' => Type::nonNull(Type::id()),
                     'args' => [
-                        [
-                            'name' => 'after',
-                            'type' => Type::string(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'first',
-                            'type' => Type::int(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'before',
-                            'type' => Type::string(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'last',
-                            'type' => Type::int(),
-                            'description' => null,
-                        ],
                     ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormViewerProposalsUnpublishedResolver", array(0 => $value, 1 => $args, 2 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
-                    },
-                    'description' => 'The viewer unpublished proposals (only visible by viewer).',
+                    'resolve' => null,
+                    'description' => 'The ID of an object',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
-                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
-                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
-                    },
+                    'access' => null,
                 ],
                 'reference' => [
                     'type' => Type::nonNull(Type::string()),

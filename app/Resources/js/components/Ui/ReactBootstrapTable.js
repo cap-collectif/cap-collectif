@@ -206,7 +206,14 @@ export class ReactBootstrapTable extends React.Component<Props> {
     return tableWidth.toString();
   };
 
-  columnTitleFormatter = (column: Object) => <FormattedMessage id={column.text} />;
+  columnTitleFormatter = (column: Object, index: number, { sortElement }: Object) => {
+    return (
+      <React.Fragment>
+        <FormattedMessage id={column.text} />
+        {sortElement}
+      </React.Fragment>
+    );
+  };
 
   render() {
     const { data } = this.props;
