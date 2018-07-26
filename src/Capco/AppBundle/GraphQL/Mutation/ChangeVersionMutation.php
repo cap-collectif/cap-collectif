@@ -59,6 +59,7 @@ class ChangeVersionMutation implements MutationInterface
             throw GraphQLException::fromFormErrors($form);
         }
 
+        $version->setValidated(false);
         $version->resetVotes();
 
         $this->em->flush();

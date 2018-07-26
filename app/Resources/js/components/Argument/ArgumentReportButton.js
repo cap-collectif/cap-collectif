@@ -29,7 +29,7 @@ class ArgumentReportButton extends React.Component<Props> {
         onReport={this.handleReport}
         author={{ uniqueId: argument.author.slug }}
         buttonBsSize="xs"
-        buttonClassName="argument__btn--report"
+        buttonClassName="btn--outline btn-dark-gray"
       />
     );
   }

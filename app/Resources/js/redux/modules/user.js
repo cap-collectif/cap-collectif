@@ -255,7 +255,11 @@ export const register = (
       if (shieldEnabled) {
         FluxDispatcher.dispatch({
           actionType: 'UPDATE_ALERT',
-          alert: { bsStyle: 'success', content: 'please-check-your-inbox' },
+          alert: {
+            bsStyle: 'success',
+            content: 'please-check-your-inbox',
+            values: { emailAddress: values.email },
+          },
         });
       } else {
         FluxDispatcher.dispatch({

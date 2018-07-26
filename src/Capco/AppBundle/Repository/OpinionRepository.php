@@ -28,10 +28,12 @@ class OpinionRepository extends EntityRepository
                 'o.isTrashed as trashed',
                 'c.title as project'
             )
+            ->where('o.validated = :validated')
             ->leftJoin('o.Author', 'a')
             ->leftJoin('o.step', 's')
             ->leftJoin('s.projectAbstractStep', 'cas')
-            ->leftJoin('cas.project', 'c');
+            ->leftJoin('cas.project', 'c')
+            ->setParameter('validated', false);
         return $qb->getQuery()->getArrayResult();
     }
 

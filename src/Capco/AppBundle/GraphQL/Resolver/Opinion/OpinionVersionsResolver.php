@@ -24,10 +24,14 @@ class OpinionVersionsResolver implements ResolverInterface
 
     public function __invoke(Opinion $opinion, Argument $args): Connection
     {
-        $paginator = new Paginator(function (?int $offset, ?int $limit) use ($opinion, $args) {
-            $field = $args->offsetGet('orderBy')['field'];
-            $direction = $args->offsetGet('orderBy')['direction'];
+        $field = $args->offsetGet('orderBy')['field'];
+        $direction = $args->offsetGet('orderBy')['direction'];
 
+        $paginator = new Paginator(function (?int $offset, ?int $limit) use (
+            $opinion,
+            $field,
+            $direction
+        ) {
             return $this->versionRepository->getByContribution(
                 $opinion,
                 $limit,
