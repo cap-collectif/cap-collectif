@@ -1,3 +1,4 @@
 #!/bin/bash
 
+echo "[$(date -u)][REDIS] Started!"
 exec /usr/bin/redis-server /etc/redis/redis.conf --loglevel warning

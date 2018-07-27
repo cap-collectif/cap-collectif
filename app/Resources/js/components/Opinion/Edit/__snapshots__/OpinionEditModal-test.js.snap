@@ -48,9 +48,14 @@ exports[`<OpinionEditModal /> renders correctly 1`] = `
     bsClass="modal-body"
     componentClass="div"
   >
-    <Connect(ReduxForm)
-      opinion={Object {}}
-      step={Object {}}
+    <Relay(Connect(ReduxForm))
+      opinion={
+        Object {
+          "$fragmentRefs": null,
+          "$refType": null,
+          "id": "opinion1",
+        }
+      }
     />
   </ModalBody>
   <ModalFooter

@@ -1,12 +1,21 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
+import { graphql, createFragmentContainer } from 'react-relay';
+import type { OpinionSourceContent_source } from './__generated__/OpinionSourceContent_source.graphql';
 
 type Props = {
-  source: Object,
+  source: OpinionSourceContent_source,
 };
 
 const OpinionSourceContent = ({ source }: Props) => {
   return <p className="excerpt" dangerouslySetInnerHTML={{ __html: source.body }} />;
 };
 
-export default OpinionSourceContent;
+export default createFragmentContainer(
+  OpinionSourceContent,
+  graphql`
+    fragment OpinionSourceContent_source on Source {
+      body
+    }
+  `,
+);

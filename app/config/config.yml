@@ -67,8 +67,7 @@ parameters:
   env(SYMFONY_USE_ASSETIC_CONTROLLER): true
   env(SYMFONY_FACEBOOK_APP_ID): ***REMOVED***
   env(SYMFONY_FACEBOOK_APP_SECRET): ***REMOVED***
-  env(SYMFONY_GOOGLE_APP_ID):
-    ***REMOVED***
+  env(SYMFONY_GOOGLE_APP_ID): ***REMOVED***
   env(SYMFONY_GOOGLE_APP_SECRET): ***REMOVED***
   env(SYMFONY_JWT_TOKEN_TTL): 86400
   env(SYMFONY_LANGUAGE_ANALYZER): french
@@ -615,49 +614,27 @@ overblog_graphql:
     class_namespace: "Capco\\AppBundle\\GraphQL\\__GENERATED__"
     schema:
       query: Query
+      mutation: Mutation
       # the name of extra types that can not be detected
       # by graphql-php during static schema analysis.
       # These types names should be explicitly declare here
       types:
-        [
-          Argument,
-          CheckboxRequirement,
-          CollectStep,
-          Comment,
-          Consultation,
-          Event,
-          FirstnameRequirement,
-          Group,
-          LastnameRequirement,
-          MediaQuestion,
-          MediaResponse,
-          MultipleChoiceQuestion,
-          Opinion,
-          OpinionType,
-          OpinionVote,
-          OtherStep,
-          PhoneRequirement,
-          PresentationStep,
-          Project,
-          Proposal,
-          ProposalForm,
-          ProposalVote,
-          Questionnaire,
-          QuestionnaireStep,
-          RankingStep,
-          Reply,
-          Reporting,
-          Section,
-          SelectionStep,
-          SimpleQuestion,
-          Source,
-          SynthesisStep,
-          User,
-          ValueResponse,
-          Version,
-          VersionVote,
-        ]
-      mutation: Mutation
+          - Argument
+          - CheckboxRequirement
+          - FirstnameRequirement
+          - LastnameRequirement
+          - MediaQuestion
+          - MediaResponse
+          - MultipleChoiceQuestion
+          - OpinionOrVersion
+          - OtherStep
+          - PhoneRequirement
+          - PresentationStep
+          - QuestionnaireStep
+          - RankingStep
+          - SimpleQuestion
+          - ValueResponse
+          - VersionVote
 
 limenius_react:
   default_rendering: 'both'
