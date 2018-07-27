@@ -1,9 +1,8 @@
 <?php
-
 namespace Application\Migrations;
 
 use Capco\AppBundle\Entity\SiteParameter;
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -30,7 +29,6 @@ class Version20150211123011 extends AbstractMigration implements ContainerAwareI
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-
     }
 
     public function postUp(Schema $schema)
@@ -78,24 +76,33 @@ class Version20150211123011 extends AbstractMigration implements ContainerAwareI
                 true,
                 $date,
                 $date,
-            )
+            ),
         );
 
         foreach ($newParameters as $values) {
-            $query = $em->createQuery("SELECT sp.id FROM Capco\AppBundle\Entity\SiteParameter sp WHERE sp.keyname = :keyname");
+            $query = $em->createQuery(
+                "SELECT sp.id FROM Capco\AppBundle\Entity\SiteParameter sp WHERE sp.keyname = :keyname"
+            );
             $query->setParameter('keyname', $values[0]);
             $param = $query->getOneOrNullResult();
             if (null == $param) {
-                $this->connection->insert('site_parameter', array('keyname' => $values[0], 'title' => $values[1], 'value' => $values[2], 'position' => $values[3], 'type' => $values[4], 'is_enabled' => $values[5], 'created_at' => $values[6], 'updated_at' => $values[7]));
+                $this->connection->insert('site_parameter', array(
+                    'keyname' => $values[0],
+                    'title' => $values[1],
+                    'value' => $values[2],
+                    'position' => $values[3],
+                    'type' => $values[4],
+                    'is_enabled' => $values[5],
+                    'created_at' => $values[6],
+                    'updated_at' => $values[7],
+                ));
             }
         }
-
     }
 
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-
     }
 
     public function postDown(Schema $schema)
@@ -110,13 +117,14 @@ class Version20150211123011 extends AbstractMigration implements ContainerAwareI
         );
 
         foreach ($parametersKeys as $key) {
-            $query = $em->createQuery("SELECT sp.id FROM Capco\AppBundle\Entity\SiteParameter sp WHERE sp.keyname = :keyname");
+            $query = $em->createQuery(
+                "SELECT sp.id FROM Capco\AppBundle\Entity\SiteParameter sp WHERE sp.keyname = :keyname"
+            );
             $query->setParameter('keyname', $key);
             $param = $query->getOneOrNullResult();
             if (null != $param) {
                 $this->connection->delete('site_parameter', array('id' => $param['id']));
             }
         }
-
     }
 }

@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -16,10 +15,15 @@ class Version20160209233117 extends AbstractMigration
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $this->addSql('ALTER TABLE selectionstep_proposal DROP PRIMARY KEY');
-        $this->addSql('ALTER TABLE selectionstep_proposal ADD PRIMARY KEY (proposal_id, selectionstep_id)');
+        $this->addSql(
+            'ALTER TABLE selectionstep_proposal ADD PRIMARY KEY (proposal_id, selectionstep_id)'
+        );
     }
 
     /**
@@ -28,9 +32,14 @@ class Version20160209233117 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $this->addSql('ALTER TABLE selectionstep_proposal DROP PRIMARY KEY');
-        $this->addSql('ALTER TABLE selectionstep_proposal ADD PRIMARY KEY (selectionstep_id, proposal_id)');
+        $this->addSql(
+            'ALTER TABLE selectionstep_proposal ADD PRIMARY KEY (selectionstep_id, proposal_id)'
+        );
     }
 }

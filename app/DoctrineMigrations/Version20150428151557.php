@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -16,24 +15,18 @@ class Version20150428151557 extends AbstractMigration
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-
     }
 
     public function postUp(Schema $schema)
     {
-        $menu = $this->connection->fetchColumn(
-            'SELECT id from menu where type = ?',
-            array(1)
+        $menu = $this->connection->fetchColumn('SELECT id from menu where type = ?', array(1));
+
+        $this->connection->update(
+            'menu_item',
+            array('menu_id' => $menu),
+            array('link' => 'members', 'is_deletable' => false)
         );
-
-        $this->connection->update('menu_item', array(
-            'menu_id' => $menu,
-        ), array(
-            'link' => 'members',
-            'is_deletable' => false,
-        ));
     }
-
 
     /**
      * @param Schema $schema
@@ -41,6 +34,5 @@ class Version20150428151557 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-
     }
 }

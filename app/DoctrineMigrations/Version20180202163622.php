@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -10,7 +9,6 @@ use Doctrine\DBAL\Schema\Schema;
  */
 class Version20180202163622 extends AbstractMigration
 {
-
     protected $siteParamer = [
         'keyname' => 'homepage.meta_description',
         'category' => 'pages.homepage',
@@ -26,7 +24,6 @@ class Version20180202163622 extends AbstractMigration
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-
     }
 
     /**
@@ -35,13 +32,14 @@ class Version20180202163622 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-
     }
 
     public function postUp(Schema $schema)
     {
         $this->connection->delete('site_parameter', ['keyname' => 'homepage.meta_description']);
-        $this->write('-> Removed old "homepage.meta_description". Now using "homepage.metadescription"');
+        $this->write(
+            '-> Removed old "homepage.meta_description". Now using "homepage.metadescription"'
+        );
     }
 
     public function postDown(Schema $schema)

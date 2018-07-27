@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -28,11 +27,9 @@ class Version20150302191738 extends AbstractMigration implements ContainerAwareI
         $this->container = $container;
     }
 
-
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-
     }
 
     public function postUp(Schema $schema)
@@ -54,8 +51,10 @@ class Version20150302191738 extends AbstractMigration implements ContainerAwareI
             $updated,
         );
 
-        $query = $em->createQuery("SELECT sp.id FROM Capco\AppBundle\Entity\SiteParameter sp WHERE sp.keyname = :keyname");
-        $query->setParameter('keyname',$values[0]);
+        $query = $em->createQuery(
+            "SELECT sp.id FROM Capco\AppBundle\Entity\SiteParameter sp WHERE sp.keyname = :keyname"
+        );
+        $query->setParameter('keyname', $values[0]);
         $param = $query->getOneOrNullResult();
 
         if (null == $param) {
@@ -66,15 +65,15 @@ class Version20150302191738 extends AbstractMigration implements ContainerAwareI
         }
     }
 
-
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-
     }
 
     public function postDown(Schema $schema)
     {
-        $this->connection->delete('site_parameter', array('keyname' => 'homepage.jumbotron.darken'));
+        $this->connection->delete('site_parameter', array(
+            'keyname' => 'homepage.jumbotron.darken',
+        ));
     }
 }

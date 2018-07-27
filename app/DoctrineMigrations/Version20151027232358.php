@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -16,7 +15,6 @@ class Version20151027232358 extends AbstractMigration
     public function up(Schema $schema)
     {
         $this->connection->update('section', ['type' => 'projects'], ['type' => 'consultations']);
-
     }
 
     /**
@@ -25,6 +23,5 @@ class Version20151027232358 extends AbstractMigration
     public function down(Schema $schema)
     {
         $this->connection->update('section', ['type' => 'consultations'], ['type' => 'projects']);
-
     }
 }

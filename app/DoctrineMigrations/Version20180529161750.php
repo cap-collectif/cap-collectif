@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -16,7 +15,6 @@ class Version20180529161750 extends AbstractMigration
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-
     }
 
     /**
@@ -25,29 +23,24 @@ class Version20180529161750 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-
     }
 
     public function postUp(Schema $schema)
     {
         $date = (new \DateTime())->format('Y-m-d H:i:s');
 
-        $this->connection->insert(
-            'site_color',
-            [
-                'keyname' => 'color.bg.primary',
-                'category' => 'settings.appearance',
-                'created_at' => $date,
-                'updated_at' => $date,
-                'value' => '#e3e3e3',
-                'position' => 34
-            ]
-        );
+        $this->connection->insert('site_color', [
+            'keyname' => 'color.bg.primary',
+            'category' => 'settings.appearance',
+            'created_at' => $date,
+            'updated_at' => $date,
+            'value' => '#e3e3e3',
+            'position' => 34,
+        ]);
     }
 
     public function postDown(Schema $schema)
     {
         $this->connection->delete('site_color', ['keyname' => 'color.bg.primary']);
     }
-
 }

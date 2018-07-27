@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -33,7 +32,10 @@ class Version20150615174101 extends AbstractMigration
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $this->addSql('ALTER TABLE menu_item DROP FOREIGN KEY FK_D754D550CCD7E912');
         $this->addSql('DROP TABLE menu');
@@ -53,39 +55,44 @@ class Version20150615174101 extends AbstractMigration
         $this->items = $this->connection->fetchAll('SELECT * FROM menu_item');
     }
 
-        /**
+    /**
      * @param Schema $schema
      */
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
-        $this->addSql('CREATE TABLE menu (id INT AUTO_INCREMENT NOT NULL, type INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
+        $this->addSql(
+            'CREATE TABLE menu (id INT AUTO_INCREMENT NOT NULL, type INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB'
+        );
         $this->addSql('ALTER TABLE menu_item ADD menu_id INT DEFAULT NULL, DROP menu');
-        $this->addSql('ALTER TABLE menu_item ADD CONSTRAINT FK_D754D550CCD7E912 FOREIGN KEY (menu_id) REFERENCES menu (id)');
+        $this->addSql(
+            'ALTER TABLE menu_item ADD CONSTRAINT FK_D754D550CCD7E912 FOREIGN KEY (menu_id) REFERENCES menu (id)'
+        );
         $this->addSql('CREATE INDEX IDX_D754D550CCD7E912 ON menu_item (menu_id)');
     }
 
     public function postDown(Schema $schema)
     {
-        $this->connection->insert('menu', [
-            'type' => 1,
-        ]);
-        $this->connection->insert('menu', [
-            'type' => 2,
-        ]);
+        $this->connection->insert('menu', ['type' => 1]);
+        $this->connection->insert('menu', ['type' => 2]);
 
         $this->menus = $this->connection->fetchAll('SELECT * FROM menu');
 
         foreach ($this->items as $mi) {
             foreach ($this->menus as $m) {
                 if ($m['type'] == $mi['menu']) {
-                    $this->connection->update('menu_item', ['menu_id' => $m['id']], ['id' => $mi['id']]);
+                    $this->connection->update(
+                        'menu_item',
+                        ['menu_id' => $m['id']],
+                        ['id' => $mi['id']]
+                    );
                 }
             }
         }
     }
-
-
 }

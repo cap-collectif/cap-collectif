@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -15,8 +14,11 @@ class Version20160503123843 extends AbstractMigration
      */
     public function up(Schema $schema)
     {
-        $this->connection->update('site_parameter', ['keyname' => 'projects.pagination'], ['keyname' => 'consultations.pagination']);
-
+        $this->connection->update(
+            'site_parameter',
+            ['keyname' => 'projects.pagination'],
+            ['keyname' => 'consultations.pagination']
+        );
     }
 
     /**
@@ -25,6 +27,5 @@ class Version20160503123843 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-
     }
 }

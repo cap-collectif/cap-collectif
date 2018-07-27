@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -13,7 +12,6 @@ class Version20150330161617 extends AbstractMigration
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-
     }
 
     public function postUp(Schema $schema)
@@ -27,17 +25,16 @@ class Version20150330161617 extends AbstractMigration
         ];
 
         foreach ($newTitles as $key => $title) {
-            $this->connection->update('site_color',
-                array('title' => $title,),
-                array('keyname' => $key,)
+            $this->connection->update(
+                'site_color',
+                array('title' => $title),
+                array('keyname' => $key)
             );
         }
     }
 
-
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-
     }
 }

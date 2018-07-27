@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -16,7 +15,10 @@ class Version20170105143100 extends AbstractMigration
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
     }
 
     public function postUp(Schema $schema)
@@ -26,13 +28,14 @@ class Version20170105143100 extends AbstractMigration
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        $query = $this->connection->executeQuery('
+        $query = $this->connection->executeQuery(
+            '
             DELETE s FROM selection s LEFT JOIN proposal p ON p.id = s.proposal_id WHERE p.deletedAt IS NOT NULL
-        ');
+        '
+        );
 
         $query->execute();
     }
-
 
     /**
      * @param Schema $schema
@@ -40,6 +43,9 @@ class Version20170105143100 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
     }
 }

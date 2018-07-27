@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -28,19 +27,20 @@ class Version20150302153402 extends AbstractMigration implements ContainerAwareI
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-
     }
     public function postUp(Schema $schema)
     {
         $em = $this->container->get('doctrine.orm.entity_manager');
 
-        $query = $em->createQuery('SELECT si.id FROM Capco\AppBundle\Entity\SiteImage si WHERE si.keyname = :keyname');
+        $query = $em->createQuery(
+            'SELECT si.id FROM Capco\AppBundle\Entity\SiteImage si WHERE si.keyname = :keyname'
+        );
         $query->setParameter('keyname', 'image.default_avatar');
         $siteImages = $query->getArrayResult();
         $siteImagesNb = count($siteImages);
 
         if ($siteImagesNb > 1) {
-            for($i = 1; $i<$siteImagesNb; $i++) {
+            for ($i = 1; $i < $siteImagesNb; $i++) {
                 $this->connection->delete('site_image', array('id' => $siteImages[$i]['id']));
             }
         }
@@ -49,6 +49,5 @@ class Version20150302153402 extends AbstractMigration implements ContainerAwareI
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-
     }
 }

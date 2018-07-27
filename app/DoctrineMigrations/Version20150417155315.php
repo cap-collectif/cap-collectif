@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -16,7 +15,6 @@ class Version20150417155315 extends AbstractMigration
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-
     }
 
     /**
@@ -65,11 +63,10 @@ class Version20150417155315 extends AbstractMigration
             ],
         ];
 
-        foreach($newColors as $color) {
+        foreach ($newColors as $color) {
             $this->connection->insert('site_color', $color);
         }
     }
-
 
     /**
      * @param Schema $schema
@@ -77,7 +74,6 @@ class Version20150417155315 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-
     }
 
     public function postDown(Schema $schema)
@@ -88,6 +84,4 @@ class Version20150417155315 extends AbstractMigration
         $this->connection->delete('site_color', array('keyname' => 'color.main_menu.bg'));
         $this->connection->delete('site_color', array('keyname' => 'color.main_menu.bg_active'));
     }
-
-
 }

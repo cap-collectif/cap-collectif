@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -15,14 +14,11 @@ class Version20150511181432 extends AbstractMigration
      */
     public function up(Schema $schema)
     {
-        $this->connection->update('menu_item',
-            [
-                'associated_features' => 'members_list',
-            ], [
-                'is_deletable' => 0,
-                'link' => 'members',
-        ]);
-
+        $this->connection->update(
+            'menu_item',
+            ['associated_features' => 'members_list'],
+            ['is_deletable' => 0, 'link' => 'members']
+        );
     }
 
     /**
@@ -31,6 +27,5 @@ class Version20150511181432 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-
     }
 }

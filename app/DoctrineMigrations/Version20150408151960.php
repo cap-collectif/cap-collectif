@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -12,7 +11,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class Version20150408151960 extends AbstractMigration implements ContainerAwareInterface
 {
-
     protected $container;
 
     /**
@@ -33,19 +31,20 @@ class Version20150408151960 extends AbstractMigration implements ContainerAwareI
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
     }
 
     public function postUp(Schema $schema)
     {
-
         $menuId = $this->connection->fetchColumn('SELECT id FROM menu WHERE type = 2');
 
         if (!$menuId) {
             $this->connection->insert('menu', array('type' => 2));
             $menuId = $this->connection->lastInsertId();
         }
-
 
         $this->connection->insert('menu_item', [
             'menu_id' => $menuId,
@@ -54,7 +53,7 @@ class Version20150408151960 extends AbstractMigration implements ContainerAwareI
             'link' => 'confidentialite',
             'is_deletable' => false,
             'isFullyModifiable' => false,
-            'is_enabled' => true
+            'is_enabled' => true,
         ]);
     }
 
@@ -64,7 +63,10 @@ class Version20150408151960 extends AbstractMigration implements ContainerAwareI
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
     }
 
     public function postDown(Schema $schema)

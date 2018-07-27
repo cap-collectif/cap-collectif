@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -25,14 +24,20 @@ class Version20151026194744 extends AbstractMigration implements ContainerAwareI
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
-        $this->addSql('ALTER TABLE synthesis_element ADD subtitle VARCHAR(255) DEFAULT NULL, ADD published_children_count INT NOT NULL, ADD linked_data_url VARCHAR(255) DEFAULT NULL');
+        $this->addSql(
+            'ALTER TABLE synthesis_element ADD subtitle VARCHAR(255) DEFAULT NULL, ADD published_children_count INT NOT NULL, ADD linked_data_url VARCHAR(255) DEFAULT NULL'
+        );
     }
 
     public function postUp(Schema $schema)
     {
-        $elements = $this->connection->fetchAll('
+        $elements = $this->connection->fetchAll(
+            '
             SELECT se.id, se.linked_data_id, se.linked_data_class
             FROM synthesis_element se
             WHERE se.linked_data_class LIKE ?',
@@ -40,7 +45,8 @@ class Version20151026194744 extends AbstractMigration implements ContainerAwareI
         );
 
         foreach ($elements as $el) {
-            $ot = $this->connection->fetchAll('
+            $ot = $this->connection->fetchAll(
+                '
                 SELECT ot.id as id, ot.subtitle as subtitle
                 FROM opinion_type ot
                 WHERE ot.id = ?',
@@ -55,15 +61,19 @@ class Version20151026194744 extends AbstractMigration implements ContainerAwareI
         }
     }
 
-
     /**
      * @param Schema $schema
      */
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
-        $this->addSql('ALTER TABLE synthesis_element DROP subtitle, DROP total_children_count, DROP linked_data_url');
+        $this->addSql(
+            'ALTER TABLE synthesis_element DROP subtitle, DROP total_children_count, DROP linked_data_url'
+        );
     }
 }

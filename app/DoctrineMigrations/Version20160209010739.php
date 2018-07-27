@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -62,7 +61,6 @@ class Version20160209010739 extends AbstractMigration
         foreach ($newColors as $color) {
             $this->connection->insert('site_color', $color);
         }
-
     }
 
     /**
@@ -81,6 +79,5 @@ class Version20160209010739 extends AbstractMigration
         foreach ($colors as $color) {
             $this->connection->delete('site_color', ['keyname' => $color]);
         }
-
     }
 }

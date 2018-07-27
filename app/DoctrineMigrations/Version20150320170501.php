@@ -1,12 +1,10 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-
 
 /**
  * Auto-generated Migration: Please modify to your needs!
@@ -29,7 +27,10 @@ class Version20150320170501 extends AbstractMigration implements ContainerAwareI
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $this->addSql('ALTER TABLE idea_vote DROP message');
     }
@@ -37,9 +38,14 @@ class Version20150320170501 extends AbstractMigration implements ContainerAwareI
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
-        $this->addSql('ALTER TABLE idea_vote ADD message LONGTEXT DEFAULT NULL COLLATE utf8_unicode_ci');
+        $this->addSql(
+            'ALTER TABLE idea_vote ADD message LONGTEXT DEFAULT NULL COLLATE utf8_unicode_ci'
+        );
     }
 
     public function postUp(Schema $schema)
@@ -51,5 +57,4 @@ class Version20150320170501 extends AbstractMigration implements ContainerAwareI
     {
         $this->connection->delete('idea_vote', array('confirmed' => false));
     }
-
 }

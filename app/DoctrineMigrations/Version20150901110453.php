@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -15,11 +14,7 @@ class Version20150901110453 extends AbstractMigration
      */
     public function up(Schema $schema)
     {
-        $this->connection->executeQuery(
-            'UPDATE opinion_type SET vote_widget_type = ?',
-            [2]
-        );
-
+        $this->connection->executeQuery('UPDATE opinion_type SET vote_widget_type = ?', [2]);
     }
 
     /**
@@ -28,6 +23,5 @@ class Version20150901110453 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-
     }
 }

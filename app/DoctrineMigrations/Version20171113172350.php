@@ -1,15 +1,16 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 class Version20171113172350 extends AbstractMigration
 {
     public function up(Schema $schema)
     {
-        $this->addSql('ALTER TABLE proposal_form ADD commentable TINYINT(1) DEFAULT \'1\' NOT NULL');
+        $this->addSql(
+            'ALTER TABLE proposal_form ADD commentable TINYINT(1) DEFAULT \'1\' NOT NULL'
+        );
     }
 
     public function down(Schema $schema)

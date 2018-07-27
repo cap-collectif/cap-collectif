@@ -1,9 +1,8 @@
 <?php
-
 namespace Application\Migrations;
 
 use Capco\MediaBundle\Entity\Media;
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;

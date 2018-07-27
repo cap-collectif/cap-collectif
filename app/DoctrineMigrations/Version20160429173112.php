@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -16,10 +15,15 @@ class Version20160429173112 extends AbstractMigration
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $this->addSql('ALTER TABLE step ADD verification ENUM(\'none\', \'sms\')');
-        $this->addSql('ALTER TABLE fos_user ADD phone_confirmation_code INT DEFAULT NULL, ADD phone_confirmation_sent_at DATETIME DEFAULT NULL, ADD phone_confirmed TINYINT(1) NOT NULL');
+        $this->addSql(
+            'ALTER TABLE fos_user ADD phone_confirmation_code INT DEFAULT NULL, ADD phone_confirmation_sent_at DATETIME DEFAULT NULL, ADD phone_confirmed TINYINT(1) NOT NULL'
+        );
     }
 
     /**
@@ -28,9 +32,14 @@ class Version20160429173112 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
-        $this->addSql('ALTER TABLE fos_user DROP phone_confirmation_code, DROP phone_confirmation_sent_at, DROP phone_confirmed');
+        $this->addSql(
+            'ALTER TABLE fos_user DROP phone_confirmation_code, DROP phone_confirmation_sent_at, DROP phone_confirmed'
+        );
         $this->addSql('ALTER TABLE step DROP verification');
     }
 }

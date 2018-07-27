@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 class Version20170830143519 extends AbstractMigration
@@ -17,7 +16,9 @@ class Version20170830143519 extends AbstractMigration
     public function down(Schema $schema)
     {
         $this->addSql('ALTER TABLE proposal ADD answer_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE proposal ADD CONSTRAINT FK_BFE59472AA334807 FOREIGN KEY (answer_id) REFERENCES answer (id) ON DELETE SET NULL');
+        $this->addSql(
+            'ALTER TABLE proposal ADD CONSTRAINT FK_BFE59472AA334807 FOREIGN KEY (answer_id) REFERENCES answer (id) ON DELETE SET NULL'
+        );
         $this->addSql('CREATE UNIQUE INDEX UNIQ_BFE59472AA334807 ON proposal (answer_id)');
     }
 }

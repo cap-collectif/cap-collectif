@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 class Version20180525155558 extends AbstractMigration
@@ -15,6 +14,5 @@ class Version20180525155558 extends AbstractMigration
 
     public function down(Schema $schema)
     {
-
     }
 }

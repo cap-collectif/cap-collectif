@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -16,10 +15,15 @@ class Version20160530185219 extends AbstractMigration
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $this->addSql('ALTER TABLE questionnaire DROP FOREIGN KEY FK_7A64DAF73B21E9C');
-        $this->addSql('ALTER TABLE questionnaire ADD CONSTRAINT FK_7A64DAF73B21E9C FOREIGN KEY (step_id) REFERENCES step (id) ON DELETE SET NULL');
+        $this->addSql(
+            'ALTER TABLE questionnaire ADD CONSTRAINT FK_7A64DAF73B21E9C FOREIGN KEY (step_id) REFERENCES step (id) ON DELETE SET NULL'
+        );
     }
 
     /**
@@ -28,9 +32,14 @@ class Version20160530185219 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $this->addSql('ALTER TABLE questionnaire DROP FOREIGN KEY FK_7A64DAF73B21E9C');
-        $this->addSql('ALTER TABLE questionnaire ADD CONSTRAINT FK_7A64DAF73B21E9C FOREIGN KEY (step_id) REFERENCES step (id) ON DELETE CASCADE');
+        $this->addSql(
+            'ALTER TABLE questionnaire ADD CONSTRAINT FK_7A64DAF73B21E9C FOREIGN KEY (step_id) REFERENCES step (id) ON DELETE CASCADE'
+        );
     }
 }

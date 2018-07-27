@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -16,10 +15,15 @@ class Version20151116102733 extends AbstractMigration
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $this->addSql('ALTER TABLE reporting ADD proposal_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE reporting ADD CONSTRAINT FK_BD7CFA9FF4792058 FOREIGN KEY (proposal_id) REFERENCES proposal (id) ON DELETE CASCADE');
+        $this->addSql(
+            'ALTER TABLE reporting ADD CONSTRAINT FK_BD7CFA9FF4792058 FOREIGN KEY (proposal_id) REFERENCES proposal (id) ON DELETE CASCADE'
+        );
         $this->addSql('CREATE INDEX IDX_BD7CFA9FF4792058 ON reporting (proposal_id)');
     }
 
@@ -29,7 +33,10 @@ class Version20151116102733 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $this->addSql('ALTER TABLE reporting DROP FOREIGN KEY FK_BD7CFA9FF4792058');
         $this->addSql('DROP INDEX IDX_BD7CFA9FF4792058 ON reporting');

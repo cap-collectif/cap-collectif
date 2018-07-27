@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -30,7 +29,6 @@ class Version20150210172512 extends AbstractMigration implements ContainerAwareI
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-
     }
 
     public function postUp(Schema $schema)
@@ -79,44 +77,57 @@ class Version20150210172512 extends AbstractMigration implements ContainerAwareI
         );
 
         foreach ($newTypeSettings as $key => $type) {
-
             $em = $this->container->get('doctrine.orm.entity_manager');
 
-            $query = $em->createQuery("SELECT sp.id FROM Capco\AppBundle\Entity\SiteParameter sp WHERE sp.keyname = :keyname");
+            $query = $em->createQuery(
+                "SELECT sp.id FROM Capco\AppBundle\Entity\SiteParameter sp WHERE sp.keyname = :keyname"
+            );
             $query->setParameter('keyname', $key);
             $parameter = $query->getOneOrNullResult();
 
             if (null != $parameter) {
-                $this->connection->update('site_parameter', array('type' => $parameterTypes[$type]), array('id' => $parameter['id']));
+                $this->connection->update(
+                    'site_parameter',
+                    array('type' => $parameterTypes[$type]),
+                    array('id' => $parameter['id'])
+                );
             }
         }
 
-        $query = $em->createQuery("SELECT sp.id FROM Capco\AppBundle\Entity\SiteParameter sp WHERE sp.keyname = :keyname");
+        $query = $em->createQuery(
+            "SELECT sp.id FROM Capco\AppBundle\Entity\SiteParameter sp WHERE sp.keyname = :keyname"
+        );
         $query->setParameter('keyname', 'global.site.embed_js');
         $newParameter = $query->getOneOrNullResult();
         if (null == $newParameter) {
             $date = (new \DateTime())->format('Y-m-d H:i:s');
-            $this->connection->insert('site_parameter', array('keyname' => 'global.site.embed_js', 'title' => 'Script à insérer dans les pages', 'value' => '', 'position' => 2, 'type' => $parameterTypes['javascript'], 'created_at' => $date, 'updated_at' => $date));
+            $this->connection->insert('site_parameter', array(
+                'keyname' => 'global.site.embed_js',
+                'title' => 'Script à insérer dans les pages',
+                'value' => '',
+                'position' => 2,
+                'type' => $parameterTypes['javascript'],
+                'created_at' => $date,
+                'updated_at' => $date,
+            ));
         }
     }
-
 
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-
     }
 
     public function postDown(Schema $schema)
     {
         $em = $this->container->get('doctrine.orm.entity_manager');
-        $query = $em->createQuery("SELECT sp.id FROM Capco\AppBundle\Entity\SiteParameter sp WHERE sp.keyname = :keyname");
+        $query = $em->createQuery(
+            "SELECT sp.id FROM Capco\AppBundle\Entity\SiteParameter sp WHERE sp.keyname = :keyname"
+        );
         $query->setParameter('keyname', 'global.site.embed_js');
         $newParameter = $query->getOneOrNullResult();
         if (null != $newParameter) {
             $this->connection->delete('site_parameter', array('id' => $newParameter['id']));
         }
     }
-
-
 }

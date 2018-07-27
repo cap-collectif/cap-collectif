@@ -1,9 +1,8 @@
 <?php
-
 namespace Application\Migrations;
 
 use Capco\AppBundle\Entity\SiteParameter;
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -44,37 +43,33 @@ class Version20180525135721 extends AbstractMigration
         $parameterTypes = SiteParameter::$types;
 
         $date = (new \DateTime())->format('Y-m-d H:i:s');
-        $this->connection->insert(
-            'site_parameter',
-            array(
-                'keyname' => 'snalytical-tracking-scripts-on-all-pages',
-                'help_text' => 'for-analytical-scripts-only  script-desactivatable-by-user',
-                'value' => '',
-                'position' => 3,
-                'category'=> 'settings.global',
-                'type' => $parameterTypes['javascript'],
-                'created_at' => $date,
-                'updated_at' => $date,
-            )
-        );
-        $this->connection->insert(
-            'site_parameter',
-            array(
-                'keyname' => 'ad-scripts-on-all-pages',
-                'help_text' => 'reserved-for-ad-scripts  script-desactivatable-by-user',
-                'value' => '',
-                'position' => 3,
-                'category'=> 'settings.global',
-                'type' => $parameterTypes['javascript'],
-                'created_at' => $date,
-                'updated_at' => $date,
-            )
-        );
+        $this->connection->insert('site_parameter', array(
+            'keyname' => 'snalytical-tracking-scripts-on-all-pages',
+            'help_text' => 'for-analytical-scripts-only  script-desactivatable-by-user',
+            'value' => '',
+            'position' => 3,
+            'category' => 'settings.global',
+            'type' => $parameterTypes['javascript'],
+            'created_at' => $date,
+            'updated_at' => $date,
+        ));
+        $this->connection->insert('site_parameter', array(
+            'keyname' => 'ad-scripts-on-all-pages',
+            'help_text' => 'reserved-for-ad-scripts  script-desactivatable-by-user',
+            'value' => '',
+            'position' => 3,
+            'category' => 'settings.global',
+            'type' => $parameterTypes['javascript'],
+            'created_at' => $date,
+            'updated_at' => $date,
+        ));
     }
 
     public function postDown(Schema $schema)
     {
-        $this->connection->delete('site_image', ['keyname' => 'snalytical-tracking-scripts-on-all-pages']);
+        $this->connection->delete('site_image', [
+            'keyname' => 'snalytical-tracking-scripts-on-all-pages',
+        ]);
         $this->connection->delete('site_image', ['keyname' => 'ad-scripts-on-all-pages']);
     }
 }

@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -16,7 +15,6 @@ class Version20160211000145 extends AbstractMigration
     public function up(Schema $schema)
     {
         $this->connection->update('menu_item', ['link' => 'projects'], ['link' => 'consultations']);
-
     }
 
     /**
@@ -25,6 +23,5 @@ class Version20160211000145 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-
     }
 }

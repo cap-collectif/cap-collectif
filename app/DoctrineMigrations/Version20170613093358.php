@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -18,10 +17,10 @@ class Version20170613093358 extends AbstractMigration implements ContainerAwareI
 
     public function up(Schema $schema)
     {
-
     }
 
-    public function postUp(Schema $schema) {
+    public function postUp(Schema $schema)
+    {
         $toggleManager = $this->container->get('capco.toggle.manager');
         $toggleManager->activate('captcha');
     }

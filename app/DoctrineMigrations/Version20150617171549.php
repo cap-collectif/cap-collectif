@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -16,7 +15,10 @@ class Version20150617171549 extends AbstractMigration
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $this->addSql('ALTER TABLE site_color ADD category LONGTEXT NOT NULL');
         $this->addSql('ALTER TABLE site_image ADD category LONGTEXT NOT NULL');
@@ -33,10 +35,7 @@ class Version20150617171549 extends AbstractMigration
                 'homepage.jumbotron.button_link',
                 'homepage.jumbotron.darken',
             ],
-            'pages.footer' => [
-                'footer.text.title',
-                'footer.text.body',
-            ],
+            'pages.footer' => ['footer.text.title', 'footer.text.body'],
             'pages.consultations' => [
                 'consultations.jumbotron.title',
                 'consultations.jumbotron.body',
@@ -58,11 +57,7 @@ class Version20150617171549 extends AbstractMigration
                 'themes.content.body',
                 'themes.pagination',
             ],
-            'pages.blog' => [
-                'blog.pagination.size',
-                'blog.jumbotron.body',
-                'blog.jumbotron.title',
-            ],
+            'pages.blog' => ['blog.pagination.size', 'blog.jumbotron.body', 'blog.jumbotron.title'],
             'pages.events' => [
                 'events.jumbotron.title',
                 'events.jumbotron.body',
@@ -81,10 +76,7 @@ class Version20150617171549 extends AbstractMigration
                 'signin.text.top',
                 'signin.text.bottom',
             ],
-            'pages.login' => [
-                'login.text.top',
-                'login.text.bottom',
-            ],
+            'pages.login' => ['login.text.top', 'login.text.bottom'],
             'pages.members' => [
                 'members.pagination.size',
                 'members.jumbotron.body',
@@ -100,24 +92,26 @@ class Version20150617171549 extends AbstractMigration
 
         foreach ($parameterCategories as $category => $keynames) {
             foreach ($keynames as $key) {
-                $this->connection->update('site_parameter', ['category' => $category], ['keyname' => $key]);
+                $this->connection->update(
+                    'site_parameter',
+                    ['category' => $category],
+                    ['keyname' => $key]
+                );
             }
         }
 
         $imagesCategories = [
-            'pages.homepage' => [
-                'image.header',
-                'image.picto',
-            ],
-            'settings.global' => [
-                'image.logo',
-                'image.default_avatar',
-            ],
+            'pages.homepage' => ['image.header', 'image.picto'],
+            'settings.global' => ['image.logo', 'image.default_avatar'],
         ];
 
         foreach ($imagesCategories as $category => $keynames) {
             foreach ($keynames as $key) {
-                $this->connection->update('site_image', ['category' => $category], ['keyname' => $key]);
+                $this->connection->update(
+                    'site_image',
+                    ['category' => $category],
+                    ['keyname' => $key]
+                );
             }
         }
 
@@ -164,11 +158,14 @@ class Version20150617171549 extends AbstractMigration
 
         foreach ($colorsCategories as $category => $keynames) {
             foreach ($keynames as $key) {
-                $this->connection->update('site_color', ['category' => $category], ['keyname' => $key]);
+                $this->connection->update(
+                    'site_color',
+                    ['category' => $category],
+                    ['keyname' => $key]
+                );
             }
         }
     }
-
 
     /**
      * @param Schema $schema
@@ -176,7 +173,10 @@ class Version20150617171549 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $this->addSql('ALTER TABLE site_color DROP category');
         $this->addSql('ALTER TABLE site_image DROP category');

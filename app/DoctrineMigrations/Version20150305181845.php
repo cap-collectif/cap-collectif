@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -27,16 +26,22 @@ class Version20150305181845 extends AbstractMigration implements ContainerAwareI
         $this->container = $container;
     }
 
-
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $this->addSql('ALTER TABLE comment ADD post_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE comment ADD CONSTRAINT FK_9474526C4B89032C FOREIGN KEY (post_id) REFERENCES blog_post (id) ON DELETE CASCADE');
+        $this->addSql(
+            'ALTER TABLE comment ADD CONSTRAINT FK_9474526C4B89032C FOREIGN KEY (post_id) REFERENCES blog_post (id) ON DELETE CASCADE'
+        );
         $this->addSql('CREATE INDEX IDX_9474526C4B89032C ON comment (post_id)');
-        $this->addSql('ALTER TABLE blog_post ADD comments_count INT NOT NULL, ADD is_commentable TINYINT(1) NOT NULL');
+        $this->addSql(
+            'ALTER TABLE blog_post ADD comments_count INT NOT NULL, ADD is_commentable TINYINT(1) NOT NULL'
+        );
     }
 
     public function postUp(Schema $schema)
@@ -44,11 +49,13 @@ class Version20150305181845 extends AbstractMigration implements ContainerAwareI
         $this->connection->delete('site_parameter', array('keyname' => 'blog.disqus.username'));
     }
 
-
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $this->addSql('ALTER TABLE blog_post DROP comments_count, DROP is_commentable');
         $this->addSql('ALTER TABLE comment DROP FOREIGN KEY FK_9474526C4B89032C');
@@ -75,8 +82,10 @@ class Version20150305181845 extends AbstractMigration implements ContainerAwareI
             $updated,
         );
 
-        $query = $em->createQuery("SELECT sp.id FROM Capco\AppBundle\Entity\SiteParameter sp WHERE sp.keyname = :keyname");
-        $query->setParameter('keyname',$values[0]);
+        $query = $em->createQuery(
+            "SELECT sp.id FROM Capco\AppBundle\Entity\SiteParameter sp WHERE sp.keyname = :keyname"
+        );
+        $query->setParameter('keyname', $values[0]);
         $param = $query->getOneOrNullResult();
 
         if (null == $param) {
@@ -86,6 +95,4 @@ class Version20150305181845 extends AbstractMigration implements ContainerAwareI
             );
         }
     }
-
-
 }

@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -16,7 +15,6 @@ class Version20150428162449 extends AbstractMigration
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-
     }
 
     /**
@@ -30,16 +28,16 @@ class Version20150428162449 extends AbstractMigration
             array('color.main_menu.text_active')
         );
 
-        $this->connection->update('site_color', array(
-            'title' => "Libellés du menu actif",
-        ), array(
-            'keyname' => 'color.main_menu.text_active',
-        ));
-        $this->connection->update('site_color', array(
-            'title' => "Fond des éléments de menu au survol et actif",
-        ), array(
-            'keyname' => 'color.main_menu.bg_active',
-        ));
+        $this->connection->update(
+            'site_color',
+            array('title' => "Libellés du menu actif"),
+            array('keyname' => 'color.main_menu.text_active')
+        );
+        $this->connection->update(
+            'site_color',
+            array('title' => "Fond des éléments de menu au survol et actif"),
+            array('keyname' => 'color.main_menu.bg_active')
+        );
 
         $date = (new \DateTime())->format('Y-m-d H:i:s');
         $newColor = [
@@ -53,7 +51,6 @@ class Version20150428162449 extends AbstractMigration
         ];
 
         $this->connection->insert('site_color', $newColor);
-
     }
 
     /**
@@ -62,22 +59,21 @@ class Version20150428162449 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-
     }
 
     public function postDown(Schema $schema)
     {
-        $this->connection->update('site_color', array(
-            'title' => "Libellés du menu au survol et actif",
-        ), array(
-            'keyname' => 'color.main_menu.text_active',
-        ));
+        $this->connection->update(
+            'site_color',
+            array('title' => "Libellés du menu au survol et actif"),
+            array('keyname' => 'color.main_menu.text_active')
+        );
 
-        $this->connection->update('site_color', array(
-            'title' => "Fond des éléments de menu actif",
-        ), array(
-            'keyname' => 'color.main_menu.bg_active',
-        ));
+        $this->connection->update(
+            'site_color',
+            array('title' => "Fond des éléments de menu actif"),
+            array('keyname' => 'color.main_menu.bg_active')
+        );
 
         // delete footer title color
         $this->connection->delete('site_color', array('keyname' => 'color.main_menu.text_hover'));

@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -24,7 +23,6 @@ class Version20160615193504 extends AbstractMigration
         ];
 
         $this->connection->insert('site_parameter', $values);
-
     }
 
     public function down(Schema $schema)

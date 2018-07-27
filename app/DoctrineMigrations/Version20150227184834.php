@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Migrations\Version;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -23,15 +22,14 @@ class Version20150227184834 extends AbstractMigration implements ContainerAwareI
      *
      * @api
      */
-    public function setContainer(ContainerInterface $container = null) {
+    public function setContainer(ContainerInterface $container = null)
+    {
         $this->container = $container;
     }
-
 
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-
     }
 
     public function postUp(Schema $schema)
@@ -69,9 +67,10 @@ class Version20150227184834 extends AbstractMigration implements ContainerAwareI
         );
 
         foreach ($newParameters as $values) {
-
-            $query = $em->createQuery("SELECT sp.id FROM Capco\AppBundle\Entity\SiteParameter sp WHERE sp.keyname = :keyname");
-            $query->setParameter('keyname',$values[0]);
+            $query = $em->createQuery(
+                "SELECT sp.id FROM Capco\AppBundle\Entity\SiteParameter sp WHERE sp.keyname = :keyname"
+            );
+            $query->setParameter('keyname', $values[0]);
             $param = $query->getOneOrNullResult();
 
             if (null == $param) {
@@ -81,26 +80,19 @@ class Version20150227184834 extends AbstractMigration implements ContainerAwareI
                 );
             }
         }
-
     }
 
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-
     }
 
     public function postDown(Schema $schema)
     {
-        $newParameters = array(
-            'security.shield_mode.username',
-            'security.shield_mode.password',
-        );
+        $newParameters = array('security.shield_mode.username', 'security.shield_mode.password');
 
         foreach ($newParameters as $key) {
             $this->connection->delete('site_parameter', array('keyname' => $key));
         }
     }
-
-
 }

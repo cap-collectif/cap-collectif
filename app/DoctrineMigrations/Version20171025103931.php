@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 class Version20171025103931 extends AbstractMigration
@@ -16,6 +15,8 @@ class Version20171025103931 extends AbstractMigration
     public function down(Schema $schema)
     {
         $this->addSql('ALTER TABLE proposal DROP is_draft');
-        $this->addSql('ALTER TABLE proposal CHANGE body body LONGTEXT NOT NULL COLLATE utf8_unicode_ci');
+        $this->addSql(
+            'ALTER TABLE proposal CHANGE body body LONGTEXT NOT NULL COLLATE utf8_unicode_ci'
+        );
     }
 }

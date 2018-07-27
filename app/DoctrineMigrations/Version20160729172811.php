@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -16,7 +15,10 @@ class Version20160729172811 extends AbstractMigration
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $this->addSql('ALTER TABLE opinion_type DROP lft, DROP rgt, DROP root, DROP lvl');
     }
@@ -27,8 +29,13 @@ class Version20160729172811 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
-        $this->addSql('ALTER TABLE opinion_type ADD lft INT NOT NULL, ADD rgt INT NOT NULL, ADD root INT DEFAULT NULL, ADD lvl INT NOT NULL');
+        $this->addSql(
+            'ALTER TABLE opinion_type ADD lft INT NOT NULL, ADD rgt INT NOT NULL, ADD root INT DEFAULT NULL, ADD lvl INT NOT NULL'
+        );
     }
 }

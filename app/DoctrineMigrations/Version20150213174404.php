@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -29,7 +28,6 @@ class Version20150213174404 extends AbstractMigration implements ContainerAwareI
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-
     }
 
     public function postUp(Schema $schema)
@@ -37,7 +35,10 @@ class Version20150213174404 extends AbstractMigration implements ContainerAwareI
         $toggleManager = $this->container->get('capco.toggle.manager');
         $toggleManager->activate('themes');
 
-        $themeMIId = $this->connection->fetchColumn('SELECT id FROM menu_item WHERE link = :link AND is_deletable = :deletable', ['link' => 'themes', 'deletable' => false]);
+        $themeMIId = $this->connection->fetchColumn(
+            'SELECT id FROM menu_item WHERE link = :link AND is_deletable = :deletable',
+            ['link' => 'themes', 'deletable' => false]
+        );
 
         if (!$themeMIId) {
             $headerId = $this->connection->fetchColumn('SELECT id FROM menu WHERE type = 1');
@@ -49,25 +50,45 @@ class Version20150213174404 extends AbstractMigration implements ContainerAwareI
             }
 
             $date = (new \DateTime())->format('Y-m-d H:i:s');
-            $this->connection->insert('menu_item', array('title' => 'Thèmes', 'link' => 'themes', 'is_enabled' => true, 'is_deletable' => false, 'isFullyModifiable' => false, 'position' => 2, 'parent_id' => null, 'menu_id' => $headerId, 'created_at' => $date, 'updated_at' => $date));
+            $this->connection->insert('menu_item', array(
+                'title' => 'Thèmes',
+                'link' => 'themes',
+                'is_enabled' => true,
+                'is_deletable' => false,
+                'isFullyModifiable' => false,
+                'position' => 2,
+                'parent_id' => null,
+                'menu_id' => $headerId,
+                'created_at' => $date,
+                'updated_at' => $date,
+            ));
         }
 
-        $this->connection->update('menu_item', array('associated_features' => 'themes'), array('link' => 'themes', 'is_deletable' => false));
+        $this->connection->update(
+            'menu_item',
+            array('associated_features' => 'themes'),
+            array('link' => 'themes', 'is_deletable' => false)
+        );
     }
-
 
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-
     }
 
     public function postDown(Schema $schema)
     {
-        $themeMIId = $this->connection->fetchColumn('SELECT id FROM menu_item WHERE link = :link AND is_deletable = :deletable', ['link' => 'themes', 'deletable' => false]);
+        $themeMIId = $this->connection->fetchColumn(
+            'SELECT id FROM menu_item WHERE link = :link AND is_deletable = :deletable',
+            ['link' => 'themes', 'deletable' => false]
+        );
 
         if (null !== $themeMIId) {
-            $this->connection->update('menu_item', array('associated_features' => 'themes'), array('id' => $themeMIId));
+            $this->connection->update(
+                'menu_item',
+                array('associated_features' => 'themes'),
+                array('id' => $themeMIId)
+            );
         }
     }
 }

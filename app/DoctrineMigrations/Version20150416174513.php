@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Gedmo\Sluggable\Util\Urlizer;
 
@@ -17,7 +16,10 @@ class Version20150416174513 extends AbstractMigration
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $this->addSql('ALTER TABLE user_type ADD slug VARCHAR(255) NOT NULL');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_F65F1BE05E237E06 ON user_type (name)');
@@ -31,7 +33,11 @@ class Version20150416174513 extends AbstractMigration
         $types = $this->connection->fetchAll('SELECT id, name FROM user_type ut');
         foreach ($types as $type) {
             $slug = Urlizer::urlize($type['name'], '');
-            $this->connection->update('user_type', array('slug' => $slug), array('id'=>$type['id']));
+            $this->connection->update(
+                'user_type',
+                array('slug' => $slug),
+                array('id' => $type['id'])
+            );
         }
 
         // Add menu item
@@ -102,9 +108,7 @@ class Version20150416174513 extends AbstractMigration
         foreach ($newParameters as $values) {
             $this->connection->insert('site_parameter', $values);
         }
-
     }
-
 
     /**
      * @param Schema $schema
@@ -112,7 +116,10 @@ class Version20150416174513 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $this->addSql('DROP INDEX UNIQ_F65F1BE05E237E06 ON user_type');
         $this->addSql('ALTER TABLE user_type DROP slug');
@@ -121,10 +128,7 @@ class Version20150416174513 extends AbstractMigration
     public function postDown(Schema $schema)
     {
         // Delete menu item
-        $this->connection->delete('menu_item', array(
-            'is_deletable' => 0,
-            'link' => 'members',
-        ));
+        $this->connection->delete('menu_item', array('is_deletable' => 0, 'link' => 'members'));
 
         // Delete site parameters
         $params = [
@@ -138,6 +142,4 @@ class Version20150416174513 extends AbstractMigration
             $this->connection->delete('site_parameter', array('keyname' => $keyname));
         }
     }
-
-
 }

@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -16,13 +15,14 @@ class Version20180129102441 extends AbstractMigration
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-
     }
 
     public function postUp(Schema $schema)
     {
         $this->connection->delete('site_image', ['keyname' => 'image.picto']);
-        $this->write('-> Deleted old "image.picto" from site_image parameter. Now replaced by homepage.picto');
+        $this->write(
+            '-> Deleted old "image.picto" from site_image parameter. Now replaced by homepage.picto'
+        );
     }
 
     public function postDown(Schema $schema)
@@ -34,7 +34,7 @@ class Version20180129102441 extends AbstractMigration
             'is_enabled' => true,
             'position' => 3,
             'category' => 'pages.homepage',
-            'is_social_network_thumbnail' => false
+            'is_social_network_thumbnail' => false,
         ]);
         $this->write('-> Reverted "image.picto" into site_image parameter.');
     }
@@ -45,6 +45,5 @@ class Version20180129102441 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-
     }
 }

@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -15,11 +14,10 @@ class Version20150817124710 extends AbstractMigration
      */
     public function up(Schema $schema)
     {
-        $updated = [
-            'keyname' => 'admin.mail.notifications.receive_address',
-            'position' => 1
-        ];
-        $this->connection->update('site_parameter', $updated, ['keyname' => 'admin.mail.notifications']);
+        $updated = ['keyname' => 'admin.mail.notifications.receive_address', 'position' => 1];
+        $this->connection->update('site_parameter', $updated, [
+            'keyname' => 'admin.mail.notifications',
+        ]);
 
         $parameters = [
             [
@@ -27,20 +25,19 @@ class Version20150817124710 extends AbstractMigration
                 'category' => 'settings.notifications',
                 'value' => 'Cap Collectif',
                 'position' => 2,
-                'type' => 0
+                'type' => 0,
             ],
             [
                 'keyname' => 'admin.mail.notifications.send_address',
                 'category' => 'settings.notifications',
                 'value' => 'assistance@cap-collectif.com',
                 'position' => 3,
-                'type' => 4
-            ]
+                'type' => 4,
+            ],
         ];
         foreach ($parameters as $values) {
             $this->connection->insert('site_parameter', $values);
         }
-
     }
 
     /**
@@ -50,17 +47,15 @@ class Version20150817124710 extends AbstractMigration
     {
         $parameters = [
             ['keyname' => 'admin.mail.notifications.send_address'],
-            ['keyname' => 'admin.mail.notifications.send_name']
+            ['keyname' => 'admin.mail.notifications.send_name'],
         ];
         foreach ($parameters as $values) {
             $this->connection->delete('site_parameter', $values);
         }
 
-        $updated = [
-            'keyname' => 'admin.mail.notifications',
-            'position' => 1
-        ];
-        $this->connection->update('site_parameter', $updated, ['keyname' => 'admin.mail.notifications.receive_address']);
-
+        $updated = ['keyname' => 'admin.mail.notifications', 'position' => 1];
+        $this->connection->update('site_parameter', $updated, [
+            'keyname' => 'admin.mail.notifications.receive_address',
+        ]);
     }
 }

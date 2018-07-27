@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -16,11 +15,18 @@ class Version20150407145146 extends AbstractMigration
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
-        $this->addSql('CREATE TABLE user_type (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB');
+        $this->addSql(
+            'CREATE TABLE user_type (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB'
+        );
         $this->addSql('ALTER TABLE fos_user ADD user_type_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE fos_user ADD CONSTRAINT FK_957A64799D419299 FOREIGN KEY (user_type_id) REFERENCES user_type (id) ON DELETE SET NULL');
+        $this->addSql(
+            'ALTER TABLE fos_user ADD CONSTRAINT FK_957A64799D419299 FOREIGN KEY (user_type_id) REFERENCES user_type (id) ON DELETE SET NULL'
+        );
         $this->addSql('CREATE INDEX IDX_957A64799D419299 ON fos_user (user_type_id)');
     }
 
@@ -34,11 +40,14 @@ class Version20150407145146 extends AbstractMigration
             'Institution',
         ];
         $date = (new \DateTime())->format('Y-m-d H:i:s');
-        foreach($types as $type) {
-            $this->connection->insert('user_type', array('name' => $type, 'created_at' => $date, 'updated_at' => $date));
+        foreach ($types as $type) {
+            $this->connection->insert('user_type', array(
+                'name' => $type,
+                'created_at' => $date,
+                'updated_at' => $date,
+            ));
         }
     }
-
 
     /**
      * @param Schema $schema
@@ -46,13 +55,14 @@ class Version20150407145146 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $this->addSql('ALTER TABLE fos_user DROP FOREIGN KEY FK_957A64799D419299');
         $this->addSql('DROP INDEX IDX_957A64799D419299 ON fos_user');
         $this->addSql('ALTER TABLE fos_user DROP user_type_id');
         $this->addSql('DROP TABLE user_type');
     }
-
-
 }

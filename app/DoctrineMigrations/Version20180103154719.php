@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -16,10 +15,15 @@ class Version20180103154719 extends AbstractMigration
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $this->addSql('ALTER TABLE site_image ADD is_social_network_thumbnail TINYINT(1) NOT NULL');
-        $this->addSql('ALTER TABLE site_parameter ADD is_social_network_description TINYINT(1) NOT NULL');
+        $this->addSql(
+            'ALTER TABLE site_parameter ADD is_social_network_description TINYINT(1) NOT NULL'
+        );
         $this->addSql('ALTER TABLE project ADD meta_description VARCHAR(160) DEFAULT NULL');
         $this->addSql('ALTER TABLE theme ADD meta_description VARCHAR(160) DEFAULT NULL');
         $this->addSql('ALTER TABLE step ADD meta_description VARCHAR(160) DEFAULT NULL');
@@ -27,8 +31,12 @@ class Version20180103154719 extends AbstractMigration
         $this->addSql('ALTER TABLE event ADD meta_description VARCHAR(160) DEFAULT NULL');
         $this->addSql('ALTER TABLE blog_post ADD meta_description VARCHAR(160) DEFAULT NULL');
 
-        $this->addSql('ALTER TABLE page ADD cover_id CHAR(36) DEFAULT NULL COMMENT \'(DC2Type:guid)\'');
-        $this->addSql('ALTER TABLE page ADD CONSTRAINT FK_140AB620922726E9 FOREIGN KEY (cover_id) REFERENCES media__media (id) ON DELETE SET NULL');
+        $this->addSql(
+            'ALTER TABLE page ADD cover_id CHAR(36) DEFAULT NULL COMMENT \'(DC2Type:guid)\''
+        );
+        $this->addSql(
+            'ALTER TABLE page ADD CONSTRAINT FK_140AB620922726E9 FOREIGN KEY (cover_id) REFERENCES media__media (id) ON DELETE SET NULL'
+        );
         $this->addSql('CREATE INDEX IDX_140AB620922726E9 ON page (cover_id)');
 
         $this->addSql('ALTER TABLE theme ADD custom_code LONGTEXT DEFAULT NULL');
@@ -42,7 +50,11 @@ class Version20180103154719 extends AbstractMigration
     private function setPosition($keyname, $position)
     {
         echo "-> Updating $keyname with position $position " . PHP_EOL;
-        echo $this->connection->update('site_parameter', ['position' => $position], ['keyname' => $keyname]) . ' rows updated';
+        echo $this->connection->update(
+                'site_parameter',
+                ['position' => $position],
+                ['keyname' => $keyname]
+            ) . ' rows updated';
     }
 
     public function postUp(Schema $schema)
@@ -94,7 +106,10 @@ class Version20180103154719 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $this->addSql('ALTER TABLE site_image DROP is_social_network_thumbnail');
         $this->addSql('ALTER TABLE site_parameter DROP is_social_network_description');

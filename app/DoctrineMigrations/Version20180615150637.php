@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -30,7 +29,7 @@ class Version20180615150637 extends AbstractMigration
     {
         $users = $this->connection->fetchAll('SELECT id FROM fos_user fu where fu.gender = "u"');
         foreach ($users as $user) {
-            $this->connection->update('fos_user', ['gender' => NULL], ['id' => $user['id']]);
+            $this->connection->update('fos_user', ['gender' => null], ['id' => $user['id']]);
         }
     }
 

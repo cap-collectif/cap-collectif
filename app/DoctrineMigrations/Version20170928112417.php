@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 class Version20170928112417 extends AbstractMigration
@@ -30,22 +29,32 @@ class Version20170928112417 extends AbstractMigration
         $count = 0;
         $reference = 1;
         foreach ($proposalForms as $proposalForm) {
-            $this->connection->update('proposal_form', ['reference' => $reference], ['id' => $proposalForm['id']]);
+            $this->connection->update(
+                'proposal_form',
+                ['reference' => $reference],
+                ['id' => $proposalForm['id']]
+            );
 
             $reference++;
 
             // Update reference on each proposals in proposal form
-            $proposals = $this->connection->fetchAll('SELECT * FROM proposal WHERE proposal_form_id = "'.$proposalForm['id'].'"');
+            $proposals = $this->connection->fetchAll(
+                'SELECT * FROM proposal WHERE proposal_form_id = "' . $proposalForm['id'] . '"'
+            );
 
             $proposalReference = 1;
             foreach ($proposals as $proposal) {
-                $this->connection->update('proposal', ['reference' => $proposalReference], ['id' => $proposal['id']]);
+                $this->connection->update(
+                    'proposal',
+                    ['reference' => $proposalReference],
+                    ['id' => $proposal['id']]
+                );
 
                 ++$proposalReference;
                 ++$count;
             }
         }
 
-        echo $count.' proposals were updated.';
+        echo $count . ' proposals were updated.';
     }
 }

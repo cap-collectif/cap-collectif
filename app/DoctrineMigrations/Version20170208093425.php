@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -15,9 +14,14 @@ class Version20170208093425 extends AbstractMigration
      */
     public function up(Schema $schema)
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
-        $parameter = $this->connection->executeQuery("SELECT keyname FROM site_parameter WHERE keyname = 'homepage.jumbotron.margin'");
+        $parameter = $this->connection->executeQuery(
+            "SELECT keyname FROM site_parameter WHERE keyname = 'homepage.jumbotron.margin'"
+        );
 
         if ($parameter->rowCount() === 0) {
             $this->addSql(
@@ -31,7 +35,10 @@ class Version20170208093425 extends AbstractMigration
      */
     public function down(Schema $schema)
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $this->addSql("DELETE FROM site_parameter WHERE keyname = 'homepage.jumbotron.margin'");
     }

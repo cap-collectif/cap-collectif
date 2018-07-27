@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -12,7 +11,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class Version20151023122045 extends AbstractMigration implements ContainerAwareInterface
 {
-
     private $container;
 
     public function setContainer(ContainerInterface $container = null)
@@ -23,7 +21,10 @@ class Version20151023122045 extends AbstractMigration implements ContainerAwareI
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $em = $this->container->get('doctrine.orm.entity_manager');
 
@@ -32,23 +33,13 @@ class Version20151023122045 extends AbstractMigration implements ContainerAwareI
         $updated = $created;
 
         $sections = [
-            [
-                'budget',
-                'Budget participatif',
-                12,
-                null,
-                '',
-                null,
-                true,
-                $created,
-                $updated,
-                null,
-            ],
+            ['budget', 'Budget participatif', 12, null, '', null, true, $created, $updated, null],
         ];
 
         foreach ($sections as $values) {
-
-            $query = $em->createQuery("SELECT s.id FROM Capco\AppBundle\Entity\Section s WHERE s.title = :title");
+            $query = $em->createQuery(
+                "SELECT s.id FROM Capco\AppBundle\Entity\Section s WHERE s.title = :title"
+            );
             $query->setParameter('title', $values[1]);
             $section = $query->getOneOrNullResult();
 
@@ -64,14 +55,16 @@ class Version20151023122045 extends AbstractMigration implements ContainerAwareI
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $em = $this->container->get('doctrine.orm.entity_manager');
 
-        $query = $em->createQuery("DELETE FROM Capco\AppBundle\Entity\Section s WHERE s.type = :type");
+        $query = $em->createQuery(
+            "DELETE FROM Capco\AppBundle\Entity\Section s WHERE s.type = :type"
+        );
         $query->setParameter('type', 'budget');
-
     }
-
-
 }

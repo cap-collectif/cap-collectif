@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -20,7 +19,6 @@ class Version20151204111931 extends AbstractMigration
             $newSlug = substr(md5(uniqid(rand(), true)), 0, 10);
             $this->connection->update('fos_user', ['slug' => $newSlug], ['id' => $user['id']]);
         }
-
     }
 
     /**
@@ -29,6 +27,5 @@ class Version20151204111931 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-
     }
 }

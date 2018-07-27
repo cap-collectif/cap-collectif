@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -16,7 +15,10 @@ class Version20150415150860 extends AbstractMigration
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
     }
 
     public function postUp(Schema $schema)
@@ -27,7 +29,7 @@ class Version20150415150860 extends AbstractMigration
             'value' => 18,
             'position' => 730,
             'is_enabled' => true,
-            'type' => 2
+            'type' => 2,
         ]);
     }
 
@@ -37,13 +39,14 @@ class Version20150415150860 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
     }
 
     public function postDown(Schema $schema)
     {
-        $this->connection->delete('site_parameter', [
-            'keyname' => 'contributors.pagination'
-        ]);
+        $this->connection->delete('site_parameter', ['keyname' => 'contributors.pagination']);
     }
 }

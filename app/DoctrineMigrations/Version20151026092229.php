@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -19,7 +18,6 @@ class Version20151026092229 extends AbstractMigration implements ContainerAwareI
         $this->container = $container;
     }
 
-
     /**
      * @param Schema $schema
      */
@@ -27,7 +25,6 @@ class Version20151026092229 extends AbstractMigration implements ContainerAwareI
     {
         // Migration used to fix an issue on republique-numerique.fr.
         // Commented since as we don't want it to be executed on other instances.
-
     }
 
     /**
@@ -36,6 +33,5 @@ class Version20151026092229 extends AbstractMigration implements ContainerAwareI
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-
     }
 }

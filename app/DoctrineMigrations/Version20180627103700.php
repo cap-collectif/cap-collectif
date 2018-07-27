@@ -1,9 +1,8 @@
 <?php
-
 namespace Application\Migrations;
 
 use Capco\AppBundle\Entity\SiteParameter;
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -33,7 +32,6 @@ class Version20180627103700 extends AbstractMigration
             $this->connection->getDatabasePlatform()->getName() !== 'mysql',
             'Migration can only be executed safely on \'mysql\'.'
         );
-
     }
 
     public function postUp(Schema $schema)
@@ -45,7 +43,7 @@ class Version20180627103700 extends AbstractMigration
             'keyname' => 'global.timezone',
             'value' => 'Europe/Paris',
             'position' => 2,
-            'category'=> 'settings.global',
+            'category' => 'settings.global',
             'type' => $parameterTypes['select'],
             'created_at' => $date,
             'updated_at' => $date,

@@ -1,6 +1,7 @@
 <?php
 namespace Application\Migrations;
-use Doctrine\DBAL\Migrations\AbstractMigration;
+
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -25,14 +26,19 @@ class Version20151022093708 extends AbstractMigration implements ContainerAwareI
     public function up(Schema $schema)
     {
         foreach ($this->parameters as $oldKey => $newKey) {
-            $this->connection->update('site_parameter',
-                [ 'keyname' => $newKey],
-                [ 'keyname' => $oldKey]
+            $this->connection->update(
+                'site_parameter',
+                ['keyname' => $newKey],
+                ['keyname' => $oldKey]
             );
         }
         $manager = $this->container->get('capco.toggle.manager');
-        $manager->isActive('consultations_form') ? $manager->activate('projects_form') : $manager->deactivate('projects_form');
-        $manager->isActive('consultation_trash') ? $manager->activate('project_trash') : $manager->deactivate('project_trash');
+        $manager->isActive('consultations_form')
+            ? $manager->activate('projects_form')
+            : $manager->deactivate('projects_form');
+        $manager->isActive('consultation_trash')
+            ? $manager->activate('project_trash')
+            : $manager->deactivate('project_trash');
     }
     /**
      * @param Schema $schema
@@ -40,12 +46,17 @@ class Version20151022093708 extends AbstractMigration implements ContainerAwareI
     public function down(Schema $schema)
     {
         $manager = $this->container->get('capco.toggle.manager');
-        $manager->isActive('projects_form') ? $manager->activate('consultations_form') : $manager->deactivate('consultations_form');
-        $manager->isActive('project_trash') ? $manager->activate('consultation_trash') : $manager->deactivate('consultation_trash');
+        $manager->isActive('projects_form')
+            ? $manager->activate('consultations_form')
+            : $manager->deactivate('consultations_form');
+        $manager->isActive('project_trash')
+            ? $manager->activate('consultation_trash')
+            : $manager->deactivate('consultation_trash');
         foreach ($this->parameters as $newKey => $oldKey) {
-            $this->connection->update('site_parameter',
-                [ 'keyname' => $newKey],
-                [ 'keyname' => $oldKey]
+            $this->connection->update(
+                'site_parameter',
+                ['keyname' => $newKey],
+                ['keyname' => $oldKey]
             );
         }
     }

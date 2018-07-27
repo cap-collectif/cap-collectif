@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -16,7 +15,6 @@ class Version20150414121059 extends AbstractMigration
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-
     }
 
     /**
@@ -25,8 +23,14 @@ class Version20150414121059 extends AbstractMigration
     public function postUp(Schema $schema)
     {
         // create footer2 colors and set footer2 colors to footer colors
-        $footerBgColor = $this->connection->fetchColumn('SELECT value from site_color where keyname= ?', array('color.footer.bg'));
-        $footerTextColor = $this->connection->fetchColumn('SELECT value from site_color where keyname= ?', array('color.footer.text'));
+        $footerBgColor = $this->connection->fetchColumn(
+            'SELECT value from site_color where keyname= ?',
+            array('color.footer.bg')
+        );
+        $footerTextColor = $this->connection->fetchColumn(
+            'SELECT value from site_color where keyname= ?',
+            array('color.footer.text')
+        );
 
         $date = (new \DateTime())->format('Y-m-d H:i:s');
         $newColors = [
@@ -50,19 +54,31 @@ class Version20150414121059 extends AbstractMigration
             ],
         ];
 
-        foreach($newColors as $color) {
+        foreach ($newColors as $color) {
             $this->connection->insert('site_color', $color);
         }
 
         // Set footer colors to header2 colors
-        $header2BgColor = $this->connection->fetchColumn('SELECT value from site_color where keyname= ?', array('color.header2.bg'));
-        $header2TextColor = $this->connection->fetchColumn('SELECT value from site_color where keyname= ?', array('color.header2.text'));
+        $header2BgColor = $this->connection->fetchColumn(
+            'SELECT value from site_color where keyname= ?',
+            array('color.header2.bg')
+        );
+        $header2TextColor = $this->connection->fetchColumn(
+            'SELECT value from site_color where keyname= ?',
+            array('color.header2.text')
+        );
 
-        $this->connection->update('site_color', array('value' => $header2BgColor), array('keyname' => 'color.footer.bg'));
-        $this->connection->update('site_color', array('value' => $header2TextColor), array('keyname' => 'color.footer.text'));
-
+        $this->connection->update(
+            'site_color',
+            array('value' => $header2BgColor),
+            array('keyname' => 'color.footer.bg')
+        );
+        $this->connection->update(
+            'site_color',
+            array('value' => $header2TextColor),
+            array('keyname' => 'color.footer.text')
+        );
     }
-
 
     /**
      * @param Schema $schema
@@ -70,22 +86,33 @@ class Version20150414121059 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-
     }
 
     public function postDown(Schema $schema)
     {
         // set footer colors to footer2 colors
-        $footer2BgColor = $this->connection->fetchColumn('SELECT value from site_color where keyname= ?', array('color.footer2.bg'));
-        $footer2TextColor = $this->connection->fetchColumn('SELECT value from site_color where keyname= ?', array('color.footer2.text'));
+        $footer2BgColor = $this->connection->fetchColumn(
+            'SELECT value from site_color where keyname= ?',
+            array('color.footer2.bg')
+        );
+        $footer2TextColor = $this->connection->fetchColumn(
+            'SELECT value from site_color where keyname= ?',
+            array('color.footer2.text')
+        );
 
-        $this->connection->update('site_color', array('value' => $footer2BgColor), array('keyname' => 'color.footer.bg'));
-        $this->connection->update('site_color', array('value' => $footer2TextColor), array('keyname' => 'color.footer.text'));
+        $this->connection->update(
+            'site_color',
+            array('value' => $footer2BgColor),
+            array('keyname' => 'color.footer.bg')
+        );
+        $this->connection->update(
+            'site_color',
+            array('value' => $footer2TextColor),
+            array('keyname' => 'color.footer.text')
+        );
 
         // delete footer2
         $this->connection->delete('site_color', array('keyname' => 'color.footer2.bg'));
         $this->connection->delete('site_color', array('keyname' => 'color.footer2.text'));
     }
-
-
 }

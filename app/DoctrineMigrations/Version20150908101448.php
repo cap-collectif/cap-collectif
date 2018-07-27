@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -23,7 +22,6 @@ class Version20150908101448 extends AbstractMigration
         foreach ($newKeys as $old => $new) {
             $this->connection->update('site_color', ['keyname' => $new], ['keyname' => $old]);
         }
-
     }
 
     /**
@@ -32,6 +30,5 @@ class Version20150908101448 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-
     }
 }

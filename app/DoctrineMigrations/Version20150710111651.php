@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -16,7 +15,10 @@ class Version20150710111651 extends AbstractMigration
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $this->addSql('ALTER TABLE site_color DROP title');
         $this->addSql('ALTER TABLE site_image DROP title');
@@ -26,10 +28,21 @@ class Version20150710111651 extends AbstractMigration
     public function postUp(Schema $schema)
     {
         // Change some keynames that cause troubles
-        $this->connection->update('site_color', ['keyname' => 'color.btn.bg'], ['keyname' => 'color.btn']);
-        $this->connection->update('site_color', ['keyname' => 'color.btn.primary.bg'], ['keyname' => 'color.btn.primary']);
-        $this->connection->update('site_color', ['keyname' => 'color.link.default'], ['keyname' => 'color.link']);
-
+        $this->connection->update(
+            'site_color',
+            ['keyname' => 'color.btn.bg'],
+            ['keyname' => 'color.btn']
+        );
+        $this->connection->update(
+            'site_color',
+            ['keyname' => 'color.btn.primary.bg'],
+            ['keyname' => 'color.btn.primary']
+        );
+        $this->connection->update(
+            'site_color',
+            ['keyname' => 'color.link.default'],
+            ['keyname' => 'color.link']
+        );
 
         // Set new categories
 
@@ -69,9 +82,12 @@ class Version20150710111651 extends AbstractMigration
             'image.default_avatar' => 'settings.appearance',
         ];
 
-
         foreach ($parametersCategories as $key => $category) {
-            $this->connection->update('site_parameter', ['category' => $category], ['keyname' => $key]);
+            $this->connection->update(
+                'site_parameter',
+                ['category' => $category],
+                ['keyname' => $key]
+            );
         }
 
         foreach ($colorsCategories as $key => $category) {
@@ -81,7 +97,6 @@ class Version20150710111651 extends AbstractMigration
         foreach ($imagesCategories as $key => $category) {
             $this->connection->update('site_image', ['category' => $category], ['keyname' => $key]);
         }
-
     }
 
     /**
@@ -90,10 +105,19 @@ class Version20150710111651 extends AbstractMigration
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
-        $this->addSql('ALTER TABLE site_color ADD title VARCHAR(255) NOT NULL COLLATE utf8_unicode_ci');
-        $this->addSql('ALTER TABLE site_image ADD title VARCHAR(255) NOT NULL COLLATE utf8_unicode_ci');
-        $this->addSql('ALTER TABLE site_parameter ADD title VARCHAR(255) NOT NULL COLLATE utf8_unicode_ci');
+        $this->addSql(
+            'ALTER TABLE site_color ADD title VARCHAR(255) NOT NULL COLLATE utf8_unicode_ci'
+        );
+        $this->addSql(
+            'ALTER TABLE site_image ADD title VARCHAR(255) NOT NULL COLLATE utf8_unicode_ci'
+        );
+        $this->addSql(
+            'ALTER TABLE site_parameter ADD title VARCHAR(255) NOT NULL COLLATE utf8_unicode_ci'
+        );
     }
 }

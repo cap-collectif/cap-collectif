@@ -1,8 +1,7 @@
 <?php
-
 namespace Application\Migrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -29,7 +28,6 @@ class Version20150309171716 extends AbstractMigration implements ContainerAwareI
     public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
-
     }
 
     public function postUp(Schema $schema)
@@ -41,24 +39,25 @@ class Version20150309171716 extends AbstractMigration implements ContainerAwareI
             $menuId = $this->connection->lastInsertId();
         }
 
-        $menuItemId = $this->connection->fetchColumn('SELECT id FROM menu_item WHERE link = :link AND is_deletable = :deletable', ['link' => 'events', 'deletable' => false]);
+        $menuItemId = $this->connection->fetchColumn(
+            'SELECT id FROM menu_item WHERE link = :link AND is_deletable = :deletable',
+            ['link' => 'events', 'deletable' => false]
+        );
 
         if (!$menuItemId) {
-            $menuItemId = $this->connection->fetchColumn('SELECT id FROM menu_item WHERE link = :link AND is_deletable = :deletable', ['link' => 'event', 'deletable' => false]);
+            $menuItemId = $this->connection->fetchColumn(
+                'SELECT id FROM menu_item WHERE link = :link AND is_deletable = :deletable',
+                ['link' => 'event', 'deletable' => false]
+            );
         }
 
         if (null !== $menuItemId) {
-
-            $this->connection->update('menu_item', array(
-                'link' => 'events',
-                'associated_features' => 'blog',
-                ), array(
-                    'id' => $menuItemId,
-                )
+            $this->connection->update(
+                'menu_item',
+                array('link' => 'events', 'associated_features' => 'blog'),
+                array('id' => $menuItemId)
             );
-
         } else {
-
             $date = new \DateTime();
             $formattedDate = $date->format('Y-m-d H:i:s');
 
@@ -79,10 +78,8 @@ class Version20150309171716 extends AbstractMigration implements ContainerAwareI
         }
     }
 
-
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-
     }
 }
