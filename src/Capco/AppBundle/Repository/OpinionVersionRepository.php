@@ -46,13 +46,11 @@ class OpinionVersionRepository extends EntityRepository
                 'o.isTrashed as trashed',
                 'c.title as project'
             )
-            ->where('o.validated = :validated')
             ->leftJoin('o.author', 'a')
             ->leftJoin('o.parent', 'op')
             ->leftJoin('op.step', 's')
             ->leftJoin('s.projectAbstractStep', 'cas')
-            ->leftJoin('cas.project', 'c')
-            ->setParameter('validated', false);
+            ->leftJoin('cas.project', 'c');
         return $qb->getQuery()->getArrayResult();
     }
 
@@ -134,27 +132,21 @@ class OpinionVersionRepository extends EntityRepository
             $qb->addOrderBy('o.createdAt', $direction);
         }
 
-        // if ('last' === $filter) {
-        //     $qb->orderBy('o.updatedAt', 'DESC');
-        //     $qb->addOrderBy('o.votesCountOk', 'DESC');
-        // } elseif ('old' === $filter) {
-        //     $qb->orderBy('o.updatedAt', 'ASC');
-        //     $qb->addOrderBy('o.votesCountOk', 'DESC');
-        // } elseif ('favorable' === $filter) {
-        //     $qb->orderBy('o.votesCountOk', 'DESC');
-        //     $qb->addOrderBy('o.votesCountNok', 'ASC');
-        //     $qb->addOrderBy('o.updatedAt', 'DESC');
-        // } elseif ('votes' === $filter) {
-        //     $qb->orderBy('vnb', 'DESC');
-        //     $qb->addOrderBy('o.updatedAt', 'DESC');
-        // } elseif ('comments' === $filter) {
-        //     $qb->orderBy('o.argumentsCount', 'DESC');
-        //     $qb->addOrderBy('o.updatedAt', 'DESC');
-        // } elseif ('random' === $filter) {
-        //     $qb->addSelect('RAND() as HIDDEN rand')
-        //         ->addOrderBy('rand')
-        //     ;
-        // }
+        if ('VOTES' === $field) {
+            $qb->addOrderBy('vnb', $direction);
+        }
+
+        if ('VOTES_OK' === $field) {
+            $qb->addOrderBy('o.votesCountOk', $direction);
+        }
+
+        if ('COMMENTS' === $field) {
+            $qb->addOrderBy('o.argumentsCount', $direction);
+        }
+
+        if ('RANDOM' === $field) {
+            $qb->addSelect('RAND() as HIDDEN rand')->addOrderBy('rand');
+        }
 
         $qb->setFirstResult($first)->setMaxResults($limit);
         return new Paginator($qb);
@@ -162,14 +154,14 @@ class OpinionVersionRepository extends EntityRepository
 
     public function getByUser($user)
     {
-        return $this->getIsEnabledQueryBuilder('ov')
-            ->leftJoin('ov.author', 'author')
+        return $this->getIsEnabledQueryBuilder('v')
+            ->leftJoin('v.author', 'author')
             ->addSelect('author')
             ->leftJoin('author.media', 'm')
             ->addSelect('m')
-            ->leftJoin('ov.votes', 'votes')
+            ->leftJoin('v.votes', 'votes')
             ->addSelect('votes')
-            ->andWhere('ov.user = :author')
+            ->andWhere('v.author = :author')
             ->setParameter('author', $user)
             ->getQuery()
             ->getResult();

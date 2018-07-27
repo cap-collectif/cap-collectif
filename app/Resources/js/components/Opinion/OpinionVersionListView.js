@@ -5,7 +5,7 @@ import Loader from '../Ui/Loader';
 import OpinionVersionListViewPaginated from './OpinionVersionListViewPaginated';
 import type { OpinionVersionListView_opinion } from './__generated__/OpinionVersionListView_opinion.graphql';
 
-export type VersionOrder = 'old' | 'last' | 'popular';
+export type VersionOrder = 'old' | 'last' | 'votes' | 'favorable' | 'comments' | 'random';
 
 type Props = {
   order: VersionOrder,
@@ -31,9 +31,33 @@ export class OpinionVersionListView extends React.Component<Props, State> {
   _refetch = (newOrder: VersionOrder) => {
     this.setState({ isRefetching: true });
 
-    const direction = newOrder === 'old' ? 'ASC' : 'DESC';
-    const field = newOrder === 'popular' ? 'VOTES' : 'CREATED_AT';
-
+    let direction = 'DESC';
+    let field = 'CREATED_AT';
+    switch (newOrder) {
+      case 'old':
+        break;
+      case 'last':
+        direction = 'ASC';
+        break;
+      case 'favorable':
+        field = 'VOTES_OK';
+        direction = 'DESC';
+        break;
+      case 'votes':
+        field = 'VOTES';
+        direction = 'DESC';
+        break;
+      case 'comments':
+        field = 'ARGUMENTS';
+        direction = 'DESC';
+        break;
+      case 'random':
+        field = 'RANDOM';
+        direction = 'DESC';
+        break;
+      default:
+        break;
+    }
     const orderBy = {
       direction,
       field,

@@ -11,7 +11,7 @@ use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
-use Capco\AppBundle\Traits\ValidableTrait;
+use Capco\AppBundle\Traits\PublishableTrait;
 use Capco\AppBundle\Traits\VotableOkNokMitigeTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\UserBundle\Entity\User;
@@ -33,12 +33,12 @@ class Opinion implements OpinionContributionInterface
     use TrashableTrait;
     use SluggableTitleTrait;
     use VotableOkNokMitigeTrait;
-    use ValidableTrait;
     use AnswerableTrait;
     use PinnableTrait;
     use ExpirableTrait;
     use TextableTrait;
     use ModerableTrait;
+    use PublishableTrait;
 
     public static $sortCriterias = [
         'opinion.sort.positions' => 'positions',

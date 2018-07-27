@@ -1,9 +1,9 @@
 Opinion:
     type: object
-    inherits: [Node, Argumentable, Sourceable, Reportable, Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
+    inherits: [Node, Publishable, Argumentable, Sourceable, Reportable, Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
     config:
         description: "A contribution"
-        interfaces: [Node, Argumentable, Sourceable, Reportable, Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
+        interfaces: [Node, Publishable, Argumentable, Sourceable, Reportable, Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
         fields:
             createdAt:
                 type: "DateTime!"

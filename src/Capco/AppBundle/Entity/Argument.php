@@ -1,17 +1,16 @@
 <?php
-
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Model\Contribution;
-use Capco\AppBundle\Model\IsPublishableInterface;
+use Capco\AppBundle\Model\Publishable;
 use Capco\AppBundle\Model\ModerableInterface;
 use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\ModerableTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
-use Capco\AppBundle\Traits\ValidableTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
+use Capco\AppBundle\Traits\PublishableTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -23,14 +22,14 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ArgumentRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Argument implements Contribution, VotableInterface, IsPublishableInterface, ModerableInterface
+class Argument implements Contribution, VotableInterface, Publishable, ModerableInterface
 {
     use UuidTrait;
-    use ValidableTrait;
     use VotableOkTrait;
     use ExpirableTrait;
     use TextableTrait;
     use ModerableTrait;
+    use PublishableTrait;
 
     const TYPE_AGAINST = 0;
     const TYPE_FOR = 1;
@@ -40,7 +39,7 @@ class Argument implements Contribution, VotableInterface, IsPublishableInterface
         self::TYPE_FOR => 'yes',
         self::TYPE_AGAINST => 'no',
         self::TYPE_SIMPLE => 'simple',
-   ];
+    ];
 
     public static $argumentTypesLabels = [
         self::TYPE_FOR => 'argument.show.type.for',
@@ -130,7 +129,9 @@ class Argument implements Contribution, VotableInterface, IsPublishableInterface
 
     public function getProject()
     {
-        return $this->getParent()->getStep()->getProject();
+        return $this->getParent()
+            ->getStep()
+            ->getProject();
     }
 
     public function getRelated()
@@ -182,10 +183,10 @@ class Argument implements Contribution, VotableInterface, IsPublishableInterface
     public function getTypeAsString(): string
     {
         switch ($this->type) {
-          case 0:
-            return 'argument.show.type.against';
-          case 1:
-            return 'argument.show.type.for';
+            case 0:
+                return 'argument.show.type.against';
+            case 1:
+                return 'argument.show.type.for';
         }
     }
 

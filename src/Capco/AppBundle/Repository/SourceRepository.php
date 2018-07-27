@@ -29,10 +29,8 @@ class SourceRepository extends EntityRepository
                 's.isEnabled as published',
                 's.isTrashed as trashed'
             )
-            ->where('s.validated = :validated')
             ->leftJoin('s.author', 'a')
-            ->leftJoin('a.userType', 'ut')
-            ->setParameter('validated', false);
+            ->leftJoin('a.userType', 'ut');
         return $qb->getQuery()->getArrayResult();
     }
 
