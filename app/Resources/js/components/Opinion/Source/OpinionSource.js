@@ -24,9 +24,9 @@ export class OpinionSource extends React.Component<Props> {
           source.author && source.author.vip ? ' bg-vip' : ''
         }`}
         id={`source-${source.id}`}>
-        <div className="left-block">
-          <UserAvatar user={source.author} />
-          <div>
+        <div className="opinion__body box">
+          <UserAvatar user={source.author} className="pull-left" />
+          <div className="opinion__data">
             {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
             <OpinionInfos rankingThreshold={null} opinion={source} />
             {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
@@ -34,7 +34,7 @@ export class OpinionSource extends React.Component<Props> {
             {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
             <OpinionSourceContent source={source} />
             {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
-            <div className="actions small">
+            <div className="opinion__votes excerpt small">
               <OpinionSourceButtons sourceable={sourceable} source={source} />
             </div>
           </div>

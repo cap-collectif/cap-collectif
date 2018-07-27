@@ -59,7 +59,6 @@ class ChangeSourceMutation implements MutationInterface
             throw GraphQLException::fromFormErrors($form);
         }
 
-        $source->setValidated(false);
         $source->resetVotes();
 
         $this->em->flush();

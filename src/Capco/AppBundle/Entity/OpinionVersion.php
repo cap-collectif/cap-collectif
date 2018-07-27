@@ -14,7 +14,6 @@ use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
-use Capco\AppBundle\Traits\ValidableTrait;
 use Capco\AppBundle\Traits\VotableOkNokMitigeTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -34,7 +33,6 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
     use SluggableTitleTrait;
     use TimestampableTrait;
     use VotableOkNokMitigeTrait;
-    use ValidableTrait;
     use AnswerableTrait;
     use DiffableTrait;
     use ExpirableTrait;
@@ -74,7 +72,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "body", "comment"})
-     * @ORM\Column(name="updated_at", type="datetime")
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     protected $updatedAt;
 
@@ -96,7 +94,6 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
 
     public function __construct()
     {
-        $this->updatedAt = new \DateTime();
         $this->arguments = new ArrayCollection();
         $this->sources = new ArrayCollection();
         $this->votes = new ArrayCollection();

@@ -47,13 +47,13 @@ class OpinionSourceButtons extends React.Component<Props, State> {
           }}
           author={{ uniqueId: source.author.slug }}
           editable={source.contribuable}
-          className="btn-xs btn--outline"
+          className="source__btn--edit btn-xs btn-dark-gray btn--outline"
         />
-        <OpinionSourceFormModal sourceable={sourceable} source={source} />
+        <OpinionSourceFormModal sourceable={sourceable} source={source} />{' '}
         <DeleteButton
           onClick={this.openDeleteModal}
           author={{ uniqueId: source.author.slug }}
-          className="btn-xs"
+          className="source__btn--delete btn-xs"
         />
         {/* $FlowFixMe */}
         <OpinionSourceDeleteModal

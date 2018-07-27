@@ -12,7 +12,6 @@ use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Traits\ExpirableTrait;
-use Capco\AppBundle\Traits\ValidableTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Capco\AppBundle\Model\IsPublishableInterface;
@@ -29,7 +28,6 @@ class Source implements Contribution, TrashableInterface, VotableInterface, IsPu
 {
     use UuidTrait;
 
-    use ValidableTrait;
     use VotableOkTrait;
     use ExpirableTrait;
     use TextableTrait;

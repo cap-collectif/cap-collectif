@@ -126,7 +126,6 @@ class OpinionsController extends FOSRestController
         }
 
         $opinion->resetVotes();
-        $opinion->setValidated(false);
         $this->getDoctrine()
             ->getManager()
             ->flush();
