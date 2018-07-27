@@ -16,11 +16,15 @@ class DoctrineListener implements EventSubscriber
     {
         $entity = $args->getObject();
         if ($entity instanceof Publishable) {
-            $author = $entity->getAuthor();
-            if (!$author || $author->isEmailConfirmed()) {
-                $entity->setPublishedAt(new \DateTime());
-                return;
-            }
+            $this->setPublishedStatus($entity);
+        }
+    }
+
+    public function setPublishedStatus(Publishable $entity)
+    {
+        $author = $entity->getAuthor();
+        if (!$author || $author->isEmailConfirmed()) {
+            $entity->setPublishedAt(new \DateTime());
         }
     }
 }
