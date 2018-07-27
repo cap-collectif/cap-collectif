@@ -14,7 +14,11 @@ type Props = {
   features: Object,
 };
 
-class OpinionSourceVoteButton extends React.Component<Props> {
+type State = {
+  user: ?Object,
+};
+
+class OpinionSourceVoteButton extends React.Component<Props, State> {
   static defaultProps = {
     user: null,
   };

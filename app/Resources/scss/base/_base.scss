@@ -83,7 +83,6 @@
 
         &__actions {
             display: flex;
-            align-items: center;
 
             button, select {
                 margin-left: 5px;
@@ -100,10 +99,6 @@
         p:last-child {
             margin: 0;
         }
-    }
-
-    .panel-footer {
-        font-size: 16px;
     }
 }
 
@@ -137,15 +132,12 @@
         }
 
         &__opinion {
-            font-size: 16px;
-
             .left-block {
                 display: flex;
                 text-align: left;
 
                 .title {
-                    line-height: 20px;
-                    margin: 10px 0;
+                    line-height: 33px;
                 }
 
                 .author-name {
@@ -155,14 +147,6 @@
 
                 .excerpt {
                     font-size: 14px;
-                }
-
-                .actions {
-                    margin-top: 10px;
-
-                    .btn {
-                        margin-right: 5px;
-                    }
                 }
             }
 

@@ -1,6 +1,0 @@
-DeleteOpinionPayload:
-    type: relay-mutation-payload
-    config:
-        fields:
-            deletedOpinionId:
-                type: "ID"

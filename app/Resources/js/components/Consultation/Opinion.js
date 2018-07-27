@@ -2,7 +2,10 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { ListGroupItem } from 'react-bootstrap';
-import OpinionPreview from '../Opinion/OpinionPreview';
+import OpinionPreviewTitle from '../Opinion/OpinionPreviewTitle';
+import OpinionInfos from '../Opinion/OpinionInfos';
+import UserAvatar from '../User/UserAvatar';
+import OpinionPreviewCounters from '../Opinion/OpinionPreviewCounters';
 import VotePiechart from '../Utils/VotePiechart';
 import type { Opinion_opinion } from './__generated__/Opinion_opinion.graphql';
 
@@ -18,20 +21,21 @@ export class Opinion extends React.Component<Props> {
       <ListGroupItem
         className={`list-group-item__opinion has-chart${author && author.vip ? ' bg-vip' : ''}`}>
         <div className="left-block">
-          {/* $FlowFixMe */}
-          <OpinionPreview opinion={opinion} />
+          <UserAvatar user={author} />
+          <div>
+            <OpinionInfos rankingThreshold={0} opinion={opinion} />
+            <OpinionPreviewTitle showTypeLabel={false} link opinion={opinion} />
+            <OpinionPreviewCounters opinion={opinion} />
+          </div>
         </div>
-        {opinion.votes && opinion.votes.totalCount > 0 ? (
-          /* $FlowFixMe */
-          <VotePiechart
-            top={10}
-            height={'90px'}
-            width={'145px'}
-            ok={opinion.votesOk.totalCount}
-            nok={opinion.votesNok.totalCount}
-            mitige={opinion.votesMitige.totalCount}
-          />
-        ) : null}
+        <VotePiechart
+          top={10}
+          height={'90px'}
+          width={'145px'}
+          ok={opinion.votesCountOk}
+          nok={opinion.votesCountNok}
+          mitige={opinion.votesCountMitige}
+        />
       </ListGroupItem>
     );
   }
@@ -41,19 +45,19 @@ export default createFragmentContainer(
   Opinion,
   graphql`
     fragment Opinion_opinion on Opinion {
-      ...OpinionPreview_opinion
-      votes(first: 0) {
-        totalCount
-      }
-      votesOk: votes(first: 0, value: YES) {
-        totalCount
-      }
-      votesNok: votes(first: 0, value: NO) {
-        totalCount
-      }
-      votesMitige: votes(first: 0, value: MITIGE) {
-        totalCount
-      }
+      id
+      url
+      title
+      createdAt
+      updatedAt
+      votesCountOk
+      votesCountNok
+      votesCountMitige
+      votesCount
+      versionsCount
+      sourcesCount
+      argumentsCount
+      pinned
       author {
         vip
         displayName
@@ -61,6 +65,13 @@ export default createFragmentContainer(
           url
         }
         show_url
+      }
+      section {
+        title
+        versionable
+        linkable
+        sourceable
+        voteWidgetType
       }
     }
   `,

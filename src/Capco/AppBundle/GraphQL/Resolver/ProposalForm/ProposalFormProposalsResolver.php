@@ -70,7 +70,7 @@ class ProposalFormProposalsResolver implements ResolverInterface
                 $filters['author'] = $args->offsetGet('author');
             }
         }
-        $paginator = new Paginator(function (?int $offset, ?int $limit) use (
+        $paginator = new Paginator(function (int $offset, int $limit) use (
             $form,
             $args,
             $viewer,
@@ -106,14 +106,15 @@ class ProposalFormProposalsResolver implements ResolverInterface
                             ? $this->proposalRepo->countProposalsByFormAndEvaluer($form, $viewer)
                             : $totalCount;
 
-                    return $this->proposalRepo->getProposalsByFormAndEvaluer(
-                        $form,
-                        $viewer,
-                        $offset,
-                        $limit,
-                        $field,
-                        $direction
-                    )
+                    return $this->proposalRepo
+                        ->getProposalsByFormAndEvaluer(
+                            $form,
+                            $viewer,
+                            $offset,
+                            $limit,
+                            $field,
+                            $direction
+                        )
                         ->getIterator()
                         ->getArrayCopy();
                 }

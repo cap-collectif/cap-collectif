@@ -11,7 +11,7 @@ import {
   saga as proposalSaga,
   initialState as proposalInitialState,
 } from '../redux/modules/proposal';
-import { reducer as opinionReducer } from '../redux/modules/opinion';
+import { reducer as opinionReducer, saga as opinionSaga } from '../redux/modules/opinion';
 import { reducer as userReducer } from '../redux/modules/user';
 import { reducer as defaultReducer } from '../redux/modules/default';
 import type { SubmitConfirmPasswordAction } from '../redux/modules/user';
@@ -96,6 +96,7 @@ export default function configureStore(initialState: Object): Store {
 
   sagaMiddleware.run(proposalSaga);
   sagaMiddleware.run(projectSaga);
+  sagaMiddleware.run(opinionSaga);
 
   return store;
 }

@@ -1,9 +1,8 @@
 // @flow
 import React from 'react';
-import { injectIntl, type IntlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 type Props = {
-  intl: IntlShape,
   ok?: number,
   nok?: number,
   mitige?: number,
@@ -25,7 +24,7 @@ class VotePiechart extends React.Component<Props> {
   };
 
   render() {
-    const { intl, ok, mitige, nok, left, top, height, width } = this.props;
+    const { ok, mitige, nok, left, top, height, width } = this.props;
     // $FlowFixMe
     if (!__SERVER__ && ok + mitige + nok > 0) {
       const Chart = require('react-google-charts').Chart; // eslint-disable-line
@@ -35,9 +34,9 @@ class VotePiechart extends React.Component<Props> {
             chartType="PieChart"
             data={[
               [{ type: 'string' }, { type: 'number' }],
-              [intl.formatMessage({ id: 'vote.ok' }), ok],
-              [intl.formatMessage({ id: 'vote.mitige' }), mitige],
-              [intl.formatMessage({ id: 'vote.nok' }), nok],
+              [<FormattedMessage id="vote.ok" />, ok],
+              [<FormattedMessage id="vote.mitige" />, mitige],
+              [<FormattedMessage id="vote.nok" />, nok],
             ]}
             height={height}
             width={width}
@@ -61,4 +60,4 @@ class VotePiechart extends React.Component<Props> {
   }
 }
 
-export default injectIntl(VotePiechart);
+export default VotePiechart;

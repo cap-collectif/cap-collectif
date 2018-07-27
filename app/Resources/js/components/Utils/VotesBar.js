@@ -7,7 +7,7 @@ type Props = {
   style?: Object,
   max: number,
   value: number,
-  helpText?: ?string,
+  helpText?: string,
 };
 
 class VotesBar extends React.Component<Props> {

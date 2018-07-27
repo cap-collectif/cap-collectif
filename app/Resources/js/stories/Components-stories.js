@@ -400,11 +400,6 @@ storiesOf('Components', module)
       
       // outline button
       <Button bsStyle={buttonStyle} className="btn--outline">Mon bouton</Button>
-      
-      // size button
-      <Button className="btn-xs">Xs button</Button>
-      <Button className="btn-sm">Sm button</Button>
-      <Button className="btn-lg">Lg button</Button>
 
       //dropdown button
       <DropdownButton
@@ -451,17 +446,6 @@ storiesOf('Components', module)
                 <MenuItem divider />
                 <MenuItem eventKey="4">Separated link</MenuItem>
               </DropdownButton>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-1 col-sm-2 col-xs-12 mb-20">
-              <Button className="btn-xs">Xs button</Button>
-            </div>
-            <div className="col-md-1 col-sm-2 col-xs-12 mb-20">
-              <Button className="btn-sm">Sm button</Button>
-            </div>
-            <div className="col-md-1 col-sm-2 col-xs-12 mb-20">
-              <Button className="btn-lg">Lg button</Button>
             </div>
           </div>
         </div>
@@ -747,26 +731,12 @@ storiesOf('Components', module)
           <div className="left-block">
             <UserAvatar user={author}/>
             <div>
-              <p>
-                <a href="#" className="author-name">
-                  Lorem ipsum
-                </a>{' '}
-                <span className="excerpt">3 juin 2014</span>
-              </p>
-              <h3 className="title">
-                consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua.
-              </h3>
+              <p><a href="#">Lorem ipsum</a> <span className="excerpt">3 juin 2014</span></p>
+              <h3 className="title">Yoloo</h3>
               <InlineList>
                 <li>Item 1</li>
                 <li>Item 2</li>
               </InlineList>
-              <div className="actions">
-                <Button className="btn-xs">Update</Button>
-                <Button bsStyle="success" className="btn-xs btn--outline">
-                  Agree
-                </Button>
-              </div>
             </div>
           </div>
           <div className="right-block">
@@ -807,23 +777,11 @@ storiesOf('Components', module)
                     </a>{' '}
                     <span className="excerpt">3 juin 2014</span>
                   </p>
-                  <h3 className="title">
-                    consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua.
-                  </h3>
+                  <h3 className="title">Yoloo</h3>
                   <InlineList>
                     <li>Item 1</li>
                     <li>Item 2</li>
                   </InlineList>
-                  <div className="actions">
-                    <Button bsStyle="danger" className="btn-xs">
-                      Delete
-                    </Button>
-                    <Button className="btn-xs">Update</Button>
-                    <Button bsStyle="success" className="btn-xs btn--outline">
-                      Agree
-                    </Button>
-                  </div>
                 </div>
               </div>
               <div className="right-block">Right block ...</div>

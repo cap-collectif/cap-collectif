@@ -22,11 +22,6 @@ export type User = {
   +uniqueId: string,
 };
 
-type Props = {
-  dynamicFields: Object,
-  shieldEnabled: boolean,
-};
-
 export type State = {
   +showLoginModal: boolean,
   +displayChartModal: boolean,
@@ -206,25 +201,17 @@ export const login = (
     },
   })
     .then(response => response.json())
-    .then((response: { success: boolean, reason: ?string }) => {
+    .then((response: { success: boolean }) => {
       if (response.success) {
         dispatch(closeLoginModal());
         window.location.reload();
         return true;
       }
-      if (response.reason) {
-        throw new SubmissionError({ _error: response.reason });
-      } else {
-        throw new SubmissionError({ _error: 'global.login_failed' });
-      }
+      throw new SubmissionError({ _error: 'global.login_failed' });
     });
 };
 
-export const register = (
-  values: Object,
-  dispatch: Dispatch,
-  { dynamicFields, shieldEnabled }: Props,
-) => {
+export const register = (values: Object, dispatch: Dispatch, { dynamicFields }: Object) => {
   const form = { ...values };
   delete form.charte;
   const responses = [];
@@ -252,22 +239,11 @@ export const register = (
   }
   return Fetcher.post('/users', apiForm)
     .then(() => {
-      if (shieldEnabled) {
-        FluxDispatcher.dispatch({
-          actionType: 'UPDATE_ALERT',
-          alert: {
-            bsStyle: 'success',
-            content: 'please-check-your-inbox',
-            values: { emailAddress: values.email },
-          },
-        });
-      } else {
-        FluxDispatcher.dispatch({
-          actionType: 'UPDATE_ALERT',
-          alert: { bsStyle: 'success', content: 'alert.success.add.user' },
-        });
-        login({ username: values.email, password: values.plainPassword }, dispatch);
-      }
+      FluxDispatcher.dispatch({
+        actionType: 'UPDATE_ALERT',
+        alert: { bsStyle: 'success', content: 'alert.success.add.user' },
+      });
+      login({ username: values.email, password: values.plainPassword }, dispatch);
       dispatch(closeRegistrationModal());
     })
     .catch(error => {

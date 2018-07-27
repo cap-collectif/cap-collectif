@@ -20,7 +20,7 @@ type Props = {
 
 export class ProposalVoteButtonWrapperFragment extends React.Component<Props> {
   static defaultProps = {
-    id: '',
+    id: undefined,
     className: '',
   };
 

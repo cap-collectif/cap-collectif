@@ -33,13 +33,13 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
               "date": <FormattedDate
                 day="numeric"
                 month="long"
-                value={"2014-12-31T23:00:00.000Z"}
+                value="2015-01-01 00:00:00"
                 year="numeric"
               />,
               "time": <FormattedTime
                 hour="numeric"
                 minute="numeric"
-                value={"2014-12-31T23:00:00.000Z"}
+                value="2015-01-01 00:00:00"
               />,
             }
           }

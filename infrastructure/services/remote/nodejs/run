@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "[$(date -u)][NODEJS] Started!"
+echo "Starting nodejs..."
 
 rm -f /var/node_ssr.sock || true
 cd /var

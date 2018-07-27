@@ -58,20 +58,17 @@ exports[`<OpinionCreateModal /> renders correctly 1`] = `
         />
       </p>
     </div>
-    <Relay(ReduxForm)
-      consultation={
+    <ReduxForm
+      opinionType={
         Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-        }
-      }
-      section={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
+          "appendixTypes": Array [],
           "id": "opinionTypeId",
+          "title": "opinionTypeTitle",
         }
       }
+      projectId="projectId"
+      step={Object {}}
+      stepId="1"
     />
   </ModalBody>
   <ModalFooter
