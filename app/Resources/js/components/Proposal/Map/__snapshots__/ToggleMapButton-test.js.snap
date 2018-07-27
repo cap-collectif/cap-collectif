@@ -26,17 +26,17 @@ exports[`<ToggleMapButton /> should render a toggle button with map selected and
     }
   >
     <i
-      className="cap cap-th-large"
+      className="cap cap-android-menu"
       onClick={[Function]}
     />
      
     <FormattedMessage
-      id="grid"
+      id="list-view"
       values={Object {}}
     />
   </Button>
   <Button
-    active={true}
+    active={false}
     block={false}
     bsClass="btn"
     bsStyle="default"
@@ -49,12 +49,12 @@ exports[`<ToggleMapButton /> should render a toggle button with map selected and
     }
   >
     <i
-      className="cap cap-map-location"
+      className="cap cap-th-large"
       onClick={[Function]}
     />
      
     <FormattedMessage
-      id="proposal.map.map"
+      id="grid"
       values={Object {}}
     />
   </Button>
@@ -116,29 +116,6 @@ exports[`<ToggleMapButton /> should render a toggle button with mosaic selected 
      
     <FormattedMessage
       id="grid"
-      values={Object {}}
-    />
-  </Button>
-  <Button
-    active={false}
-    block={false}
-    bsClass="btn"
-    bsStyle="default"
-    disabled={false}
-    onClick={[Function]}
-    style={
-      Object {
-        "flex": "1 0 auto",
-      }
-    }
-  >
-    <i
-      className="cap cap-map-location"
-      onClick={[Function]}
-    />
-     
-    <FormattedMessage
-      id="proposal.map.map"
       values={Object {}}
     />
   </Button>

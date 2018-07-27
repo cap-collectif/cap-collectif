@@ -12,6 +12,7 @@ type Props = {
   onChange: Function,
   mode: string,
   step: ToggleMapButton_step,
+  showMapButton: boolean
 };
 
 export class ToggleMapButton extends React.Component<Props> {
@@ -23,7 +24,9 @@ export class ToggleMapButton extends React.Component<Props> {
   };
 
   render() {
-    const { mode, step } = this.props;
+    const { mode, showMapButton } = this.props;
+
+    console.log(this.props.step.allowingProgressSteps);
 
     return (
       <div
@@ -32,16 +35,14 @@ export class ToggleMapButton extends React.Component<Props> {
         style={{ width: '100%' }}
         role="group"
         aria-label="Step view">
-        {step.allowingProgressSteps && (
-          <Button
-            bsStyle="default"
-            active={mode === 'table'}
-            style={{ flex: '1 0 auto' }}
-            onClick={this.handleClick.bind(this, 'table')}>
-            <i className="cap cap-android-menu" onClick={this.handleClick.bind(this, 'table')} />{' '}
-            {<FormattedMessage id="list-view" />}
-          </Button>
-        )}
+        <Button
+          bsStyle="default"
+          active={mode === 'table'}
+          style={{ flex: '1 0 auto' }}
+          onClick={this.handleClick.bind(this, 'table')}>
+          <i className="cap cap-android-menu" onClick={this.handleClick.bind(this, 'table')} />{' '}
+          {<FormattedMessage id="list-view" />}
+        </Button>
         <Button
           bsStyle="default"
           active={mode === 'mosaic'}
@@ -50,7 +51,7 @@ export class ToggleMapButton extends React.Component<Props> {
           <i className="cap cap-th-large" onClick={this.handleClick.bind(this, 'mosaic')} />{' '}
           {<FormattedMessage id="grid" />}
         </Button>
-        {!config.isMobile && (
+        {!config.isMobile && showMapButton && (
           <Button
             bsStyle="default"
             style={{ flex: '1 0 auto' }}

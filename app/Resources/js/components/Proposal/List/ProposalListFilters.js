@@ -29,7 +29,7 @@ type Props = {
   dispatch: Dispatch,
   showDistrictFilter: boolean,
   showCategoriesFilter: boolean,
-  showToggleMapButton?: boolean,
+  showMapButton?: boolean,
   intl: Object,
 };
 
@@ -42,7 +42,7 @@ export class ProposalListFilters extends React.Component<Props, State> {
     orderByVotes: false,
     orderByComments: false,
     orderByCost: false,
-    showToggleMapButton: false,
+    showMapButton: false,
   };
 
   constructor(props: Props) {
@@ -78,7 +78,7 @@ export class ProposalListFilters extends React.Component<Props, State> {
       orderByComments,
       orderByCost,
       orderByVotes,
-      showToggleMapButton,
+      showMapButton,
       defaultSort,
       intl,
       step,
@@ -94,16 +94,15 @@ export class ProposalListFilters extends React.Component<Props, State> {
     return (
       <div className="mb-15 mt-30">
         <Row>
-          {showToggleMapButton && (
-            <Col xs={12} sm={6} md={4} lg={3}>
-              <ToggleMapButton
-                step={step}
-                onChange={mode => {
-                  dispatch(changeProposalListView(mode));
-                }}
-              />
-            </Col>
-          )}
+          <Col xs={12} sm={6} md={4} lg={3}>
+            <ToggleMapButton
+              step={step}
+              showMapButton={showMapButton}
+              onChange={mode => {
+                dispatch(changeProposalListView(mode));
+              }}
+            />
+          </Col>
           <Col xs={12} sm={6} md={4} lg={3}>
             <ProposalListSearch />
           </Col>

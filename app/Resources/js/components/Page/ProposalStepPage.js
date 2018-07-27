@@ -150,7 +150,7 @@ export class ProposalStepPage extends React.Component<Props> {
                     showThemes={form.usingThemes}
                     showDistrictFilter={form.usingDistrict}
                     showCategoriesFilter={form.usingCategories}
-                    showToggleMapButton={form.usingAddress && !props.step.private}
+                    showMapButton={form.usingAddress && !props.step.private}
                   />
                   <LeafletMap
                     geoJsons={geoJsons}
