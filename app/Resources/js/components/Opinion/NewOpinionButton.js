@@ -22,7 +22,7 @@ class NewOpinionButton extends React.Component<Props> {
     const { dispatch, label, consultation, section } = this.props;
     const disabled = !consultation.contribuable;
     return (
-      <span>
+      <React.Fragment>
         <LoginOverlay>
           <Button
             bsStyle="primary"
@@ -36,7 +36,7 @@ class NewOpinionButton extends React.Component<Props> {
           </Button>
         </LoginOverlay>
         <OpinionCreateModal section={section} consultation={consultation} />
-      </span>
+      </React.Fragment>
     );
   }
 }

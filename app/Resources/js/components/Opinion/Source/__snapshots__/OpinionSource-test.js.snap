@@ -8,10 +8,9 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
   listItem={false}
 >
   <div
-    className="opinion__body box"
+    className="left-block"
   >
     <Connect(UserAvatar)
-      className="pull-left"
       user={
         Object {
           "displayName": "author1",
@@ -22,9 +21,7 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
         }
       }
     />
-    <div
-      className="opinion__data"
-    >
+    <div>
       <Relay(OpinionInfos)
         opinion={
           Object {
@@ -75,7 +72,7 @@ exports[`<OpinionSource /> should render a li bordered 1`] = `
         }
       />
       <div
-        className="opinion__votes excerpt small"
+        className="actions small"
       >
         <Relay(Connect(OpinionSourceButtons))
           source={
@@ -114,10 +111,9 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
   listItem={false}
 >
   <div
-    className="opinion__body box"
+    className="left-block"
   >
     <Connect(UserAvatar)
-      className="pull-left"
       user={
         Object {
           "displayName": "author1",
@@ -128,9 +124,7 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
         }
       }
     />
-    <div
-      className="opinion__data"
-    >
+    <div>
       <Relay(OpinionInfos)
         opinion={
           Object {
@@ -181,7 +175,7 @@ exports[`<OpinionSource /> should render a white li if not vip 1`] = `
         }
       />
       <div
-        className="opinion__votes excerpt small"
+        className="actions small"
       >
         <Relay(Connect(OpinionSourceButtons))
           source={

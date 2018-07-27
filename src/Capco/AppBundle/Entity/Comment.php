@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
@@ -9,6 +10,7 @@ use Capco\AppBundle\Traits\PinnableTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Traits\ValidableTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\UserBundle\Entity\User;
@@ -32,7 +34,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 abstract class Comment implements Contribution, VotableInterface, HasAuthorInterface
 {
-    use VotableOkTrait, PinnableTrait, ExpirableTrait, UuidTrait, TextableTrait, TimestampableTrait;
+    use ValidableTrait, VotableOkTrait, PinnableTrait, ExpirableTrait, UuidTrait, TextableTrait, TimestampableTrait;
 
     public static $sortCriterias = [
         'date' => 'argument.sort.date',

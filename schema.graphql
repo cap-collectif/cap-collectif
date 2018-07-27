@@ -3572,15 +3572,6 @@ enum VersionOrderField {
 
   # Allows ordering a list of versions by the number of votes it have.
   VOTES
-
-  # Allows ordering a list of versions by the number of votes it have.
-  COMMENTS
-
-  # Allows ordering a list of versions by the number of votes ok it have.
-  VOTES_OK
-
-  # Allows ordering a list of versions randomly.
-  RANDOM
 }
 
 type VersionVote implements YesNoPairedVote {
