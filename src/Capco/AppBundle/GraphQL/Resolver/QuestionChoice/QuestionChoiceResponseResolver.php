@@ -26,11 +26,7 @@ class QuestionChoiceResponseResolver implements ResolverInterface
 
         foreach ($responses as $response) {
             $responseValue = $response ? $response->getValue() : null;
-            if (
-                $responseValue &&
-                isset($responseValue['labels']) &&
-                null !== $responseValue['labels']
-            ) {
+            if ($responseValue && isset($responseValue['labels'])) {
                 foreach ($responseValue['labels'] as $label) {
                     if ($label === $questionChoice->getTitle()) {
                         ++$totalCount;
@@ -39,8 +35,8 @@ class QuestionChoiceResponseResolver implements ResolverInterface
             }
         }
 
-        $paginator = new Paginator(function () use ($responses) {
-            return $responses;
+        $paginator = new Paginator(function () {
+            return [];
         });
 
         return $paginator->auto($args, $totalCount);

@@ -26,16 +26,11 @@ class QuestionChoiceRankingResolver implements ResolverInterface
         $responses = $this->responseRepository->findBy([
             'question' => $questionChoice->getQuestion(),
         ]);
-
         $rankingArray = [];
 
         foreach ($responses as $response) {
             $responseValue = $response ? $response->getValue() : null;
-            if (
-                $responseValue &&
-                isset($responseValue['labels']) &&
-                null !== $responseValue['labels']
-            ) {
+            if ($responseValue && isset($responseValue['labels'])) {
                 $position = 0;
                 foreach ($responseValue['labels'] as $label) {
                     ++$position;
@@ -50,6 +45,7 @@ class QuestionChoiceRankingResolver implements ResolverInterface
                 }
             }
         }
+
         return $rankingArray;
     }
 }
