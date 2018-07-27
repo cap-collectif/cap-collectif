@@ -181,34 +181,6 @@ final class QuestionType extends InterfaceType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'isOtherAllowed' => [
-                    'type' => Type::nonNull(Type::boolean()),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["question_isOtherAllowed", array(0 => $value)]);
-                    },
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'choices' => [
-                    'type' => Type::listOf(Type::nonNull($globalVariable->get('typeResolver')->resolve('QuestionChoice'))),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["question_choices", array(0 => $value)]);
-                    },
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'validationRule' => [
                     'type' => $globalVariable->get('typeResolver')->resolve('MultipleChoiceQuestionValidationRule'),
                     'args' => [

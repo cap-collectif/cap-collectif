@@ -24,7 +24,7 @@ class AbstractResponseRepository extends EntityRepository
         return $qb->getQuery()->getArrayResult();
     }
 
-    public function countByQuestion(AbstractQuestion $question)
+    public function countByQuestion(AbstractQuestion $question): ?int
     {
         $qb = $this->createQueryBuilder('r')
             ->select('COUNT(r.id) as responseCount')

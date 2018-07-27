@@ -28,6 +28,7 @@ class QuestionChoiceRankingResolver implements ResolverInterface
         ]);
         $rankingArray = [];
 
+        // Responses values are in an array so we can't directly request them. Maybe SQL request with JSON conditions ?
         foreach ($responses as $response) {
             $responseValue = $response ? $response->getValue() : null;
             if ($responseValue && isset($responseValue['labels'])) {

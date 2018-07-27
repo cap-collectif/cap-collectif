@@ -183,6 +183,20 @@ final class MultipleChoiceQuestionType extends ObjectType implements GeneratedTy
                     'public' => null,
                     'access' => null,
                 ],
+                'validationRule' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('MultipleChoiceQuestionValidationRule'),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["question_validation_rule", array(0 => $value)]);
+                    },
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'isOtherAllowed' => [
                     'type' => Type::nonNull(Type::boolean()),
                     'args' => [
@@ -203,20 +217,6 @@ final class MultipleChoiceQuestionType extends ObjectType implements GeneratedTy
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["question_choices", array(0 => $value)]);
-                    },
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'validationRule' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('MultipleChoiceQuestionValidationRule'),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["question_validation_rule", array(0 => $value)]);
                     },
                     'description' => null,
                     'deprecationReason' => null,

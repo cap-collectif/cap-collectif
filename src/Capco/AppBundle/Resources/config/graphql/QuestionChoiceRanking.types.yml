@@ -9,3 +9,8 @@ QuestionChoiceRanking:
       answerCount:
         type: 'Int!'
         description: 'Return the amount of people who put the choice at the current position'
+      responses:
+        type: 'ResponseConnection!'
+        argsBuilder: 'Relay::Connection'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\QuestionChoiceResponseResolver", [value, args])'
+        description: 'Display the responses for the choice'

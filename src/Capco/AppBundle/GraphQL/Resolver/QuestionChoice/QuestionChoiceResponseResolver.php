@@ -24,6 +24,7 @@ class QuestionChoiceResponseResolver implements ResolverInterface
         ]);
         $totalCount = 0;
 
+        // Responses values are in an array so we can't directly request them. Maybe SQL request with JSON conditions ?
         foreach ($responses as $response) {
             $responseValue = $response ? $response->getValue() : null;
             if ($responseValue && isset($responseValue['labels'])) {
@@ -35,8 +36,8 @@ class QuestionChoiceResponseResolver implements ResolverInterface
             }
         }
 
-        $paginator = new Paginator(function () {
-            return [];
+        $paginator = new Paginator(function () use ($responses) {
+            return $responses;
         });
 
         return $paginator->auto($args, $totalCount);

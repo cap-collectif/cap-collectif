@@ -7,3 +7,9 @@ MultipleChoiceQuestion:
     fields:
       kind:
         resolve: 'multiple_choice'
+      isOtherAllowed:
+        type: 'Boolean!'
+        resolve: "@=resolver('question_isOtherAllowed', [value])"
+      choices:
+        type: '[QuestionChoice!]'
+        resolve: "@=resolver('question_choices', [value])"

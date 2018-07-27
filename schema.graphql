@@ -1121,8 +1121,6 @@ type MediaQuestion implements Question {
 
   # Return users who answered the question
   participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
-  isOtherAllowed: Boolean!
-  choices: [QuestionChoice!]
   validationRule: MultipleChoiceQuestionValidationRule
 }
 
@@ -1149,9 +1147,9 @@ type MultipleChoiceQuestion implements Question {
 
   # Return users who answered the question
   participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
+  validationRule: MultipleChoiceQuestionValidationRule
   isOtherAllowed: Boolean!
   choices: [QuestionChoice!]
-  validationRule: MultipleChoiceQuestionValidationRule
 }
 
 # Multiple Choice Question Validation Rule
@@ -2175,8 +2173,6 @@ interface Question {
 
   # Return users who answered the question
   participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
-  isOtherAllowed: Boolean!
-  choices: [QuestionChoice!]
   validationRule: MultipleChoiceQuestionValidationRule
 }
 
@@ -2202,6 +2198,9 @@ type QuestionChoiceRanking {
 
   # Return the amount of people who put the choice at the current position
   answerCount: Int!
+
+  # Display the responses for the choice
+  responses(after: String, first: Int, before: String, last: Int): ResponseConnection!
 }
 
 input QuestionInput {
@@ -2706,8 +2705,6 @@ type SimpleQuestion implements Question {
 
   # Return users who answered the question
   participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
-  isOtherAllowed: Boolean!
-  choices: [QuestionChoice!]
   validationRule: MultipleChoiceQuestionValidationRule
 }
 
