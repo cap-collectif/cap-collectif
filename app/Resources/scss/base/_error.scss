@@ -1,20 +1,23 @@
-#page-error {
+.error-page {
   .cap {
     font-size: 128px;
     color: $icon-gray-color;
     font-weight: bold;
   }
-  #error-name {
+
+  &__name {
     font-size: 36px;
     color: $icon-gray-color;
     font-family: OpenSans-Bold;
   }
-  #error-definition {
+
+  &__definition {
     color: $dark-text;
     font-size: 18px;
     text-align: left;
   }
-  #error-help {
+
+  &__help {
     color: $dark-text;
     font-size: 16px;
     font-family: OpenSans;
