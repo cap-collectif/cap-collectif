@@ -1,21 +1,24 @@
 // @flow
 import * as React from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
 import { Well } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import OpinionBodyDiffContent from './OpinionBodyDiffContent';
 import FormattedText from '../../services/FormattedText';
-import type { OpinionBody_opinion } from './__generated__/OpinionBody_opinion.graphql';
 
 type Props = {
-  opinion: OpinionBody_opinion,
+  opinion: Object,
 };
 
 class OpinionBody extends React.Component<Props> {
+  isVersion = () => {
+    const { opinion } = this.props;
+    return !!opinion.parent;
+  };
+
   render() {
     const { opinion } = this.props;
 
-    if (opinion.__typename === 'Version') {
+    if (this.isVersion()) {
       return (
         <div>
           {opinion.comment !== null && FormattedText.strip(opinion.comment).length ? (
@@ -33,20 +36,8 @@ class OpinionBody extends React.Component<Props> {
       );
     }
 
-    // $FlowFixMe
     return <OpinionBodyDiffContent opinion={opinion} />;
   }
 }
 
-export default createFragmentContainer(OpinionBody, {
-  opinion: graphql`
-    fragment OpinionBody_opinion on OpinionOrVersion {
-      ... on Version {
-        __typename
-        comment
-        diff
-      }
-      ...OpinionBodyDiffContent_opinion
-    }
-  `,
-});
+export default OpinionBody;

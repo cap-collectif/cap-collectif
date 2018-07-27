@@ -13,3 +13,12 @@ QuestionChoice:
         type: 'String'
       image:
         type: 'Media'
+      responses:
+        type: 'ResponseConnection!'
+        argsBuilder: 'Relay::Connection'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\QuestionChoiceResponseResolver", [value, args])'
+        description: 'Display the responses for the choice'
+      ranking:
+        type: "[QuestionChoiceRanking]"
+        description: 'Display the choices ranks of a ranking question'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\QuestionChoiceRankingResolver", [value])'

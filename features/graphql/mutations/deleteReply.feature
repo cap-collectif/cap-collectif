@@ -1,4 +1,4 @@
-@deleteReply
+@delete_reply
 Feature: Delete reply
 
 @database

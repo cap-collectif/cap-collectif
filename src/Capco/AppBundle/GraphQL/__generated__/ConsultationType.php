@@ -89,18 +89,6 @@ final class ConsultationType extends ObjectType implements GeneratedTypeInterfac
                     'public' => null,
                     'access' => null,
                 ],
-                'opinionCountShownBySection' => [
-                    'type' => Type::int(),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'project' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('Project')),
                     'args' => [
@@ -119,30 +107,6 @@ final class ConsultationType extends ObjectType implements GeneratedTypeInterfac
                     ],
                     'resolve' => null,
                     'description' => 'The id of the related project.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'titleHelpText' => [
-                    'type' => Type::string(),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'descriptionHelpText' => [
-                    'type' => Type::string(),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => null,
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

@@ -2,7 +2,7 @@
 
 exports[`<Section /> renders correcty 1`] = `
 <div
-  className="anchor-offset text-center opinion-type__title level--0"
+  className="anchor-offset text-center level--0"
   id="opinion-type--slug"
 >
   title
@@ -20,12 +20,7 @@ exports[`<Section /> renders correcty 1`] = `
     }
   >
     <Relay(InjectIntl(OpinionList))
-      consultation={
-        Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-        }
-      }
+      consultation={Object {}}
       section={
         Object {
           "$fragmentRefs": null,

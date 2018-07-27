@@ -11,7 +11,6 @@ Scenario: User wants to add an argument on an opinion
       addArgument(input: $input) {
         argument {
           id
-          published
           body
           type
           author {
@@ -42,7 +41,6 @@ Scenario: User wants to add an argument on an opinion
       "addArgument": {
           "argument": {
               "id": @uuid@,
-              "published": true,
               "body": "Tololo",
               "type": "FOR",
               "author": {

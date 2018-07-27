@@ -38,10 +38,10 @@ export class ConsultationPropositionBox extends React.Component<Props> {
         return graphqlError;
       }
       if (props) {
-        if (props.consultation) {
+        if (props.consultations[0].sections) {
           return (
             // $FlowFixMe
-            <SectionRecursiveList consultation={props.consultation} />
+            <SectionRecursiveList consultation={step} sections={props.consultations[0].sections} />
           );
         }
         return graphqlError;
@@ -76,13 +76,16 @@ export class ConsultationPropositionBox extends React.Component<Props> {
               </div>
             )}
         </div>
+
         <StepInfos step={step} />
         <QueryRenderer
           environment={environment}
           query={graphql`
             query ConsultationPropositionBoxQuery($consultationId: ID!) {
-              consultation: node(id: $consultationId) {
-                ...SectionRecursiveList_consultation
+              consultations(id: $consultationId) {
+                sections {
+                  ...SectionRecursiveList_sections
+                }
               }
             }
           `}

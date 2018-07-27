@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
 import { Modal } from 'react-bootstrap';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { connect, type MapStateToProps } from 'react-redux';
@@ -11,21 +10,21 @@ import CloseButton from '../../Form/CloseButton';
 import SubmitButton from '../../Form/SubmitButton';
 import { closeOpinionCreateModal } from '../../../redux/modules/opinion';
 import type { State, Dispatch } from '../../../types';
-import type { OpinionCreateModal_section } from './__generated__/OpinionCreateModal_section.graphql';
-import type { OpinionCreateModal_consultation } from './__generated__/OpinionCreateModal_consultation.graphql';
 
 type Props = {
   intl: IntlShape,
   show: boolean,
-  section: OpinionCreateModal_section,
-  consultation: OpinionCreateModal_consultation,
+  projectId: string,
+  stepId: string,
+  step: Object,
+  opinionType: Object,
   submitting: boolean,
   dispatch: Dispatch,
 };
 
 export class OpinionCreateModal extends React.Component<Props> {
   render() {
-    const { section, consultation, submitting, dispatch, show, intl } = this.props;
+    const { opinionType, submitting, dispatch, show, stepId, projectId, step, intl } = this.props;
     return (
       <Modal
         animation={false}
@@ -51,7 +50,12 @@ export class OpinionCreateModal extends React.Component<Props> {
               <FormattedMessage id="opinion.add_new_infos" />
             </p>
           </div>
-          <OpinionCreateForm section={section} consultation={consultation} />
+          <OpinionCreateForm
+            projectId={projectId}
+            stepId={stepId}
+            step={step}
+            opinionType={opinionType}
+          />
         </Modal.Body>
         <Modal.Footer>
           <CloseButton
@@ -75,23 +79,10 @@ export class OpinionCreateModal extends React.Component<Props> {
 
 const mapStateToProps: MapStateToProps<*, *, *> = (state: State, props: Object) => {
   return {
-    show: state.opinion.showOpinionCreateModal === props.section.id,
+    show: state.opinion.showOpinionCreateModal === props.opinionType.id,
     submitting: isSubmitting(formName)(state),
+    step: state.project.projectsById[props.projectId].stepsById[props.stepId],
   };
 };
 
-const container = connect(mapStateToProps)(injectIntl(OpinionCreateModal));
-
-export default createFragmentContainer(container, {
-  section: graphql`
-    fragment OpinionCreateModal_section on Section {
-      id
-      ...OpinionCreateForm_section
-    }
-  `,
-  consultation: graphql`
-    fragment OpinionCreateModal_consultation on Consultation {
-      ...OpinionCreateForm_consultation
-    }
-  `,
-});
+export default connect(mapStateToProps)(injectIntl(OpinionCreateModal));
