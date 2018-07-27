@@ -1078,7 +1078,13 @@ class Proposal
 
     public function isIndexable(): bool
     {
-        return $this->enabled && !$this->expired && !$this->isDraft() && !$this->isDeleted();
+        return (
+            $this->enabled &&
+            !$this->expired &&
+            !$this->isDraft() &&
+            !$this->isDeleted() &&
+            $this->getProject()->isIndexable()
+        );
     }
 
     public static function getElasticsearchTypeName(): string

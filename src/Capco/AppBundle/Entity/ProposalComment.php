@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\EntityNotFoundException;
@@ -38,7 +37,11 @@ class ProposalComment extends Comment
     public function isIndexable(): bool
     {
         try {
-            return $this->getIsEnabled() && !$this->getRelatedObject()->isDeleted();
+            return (
+                $this->getIsEnabled() &&
+                !$this->getRelatedObject()->isDeleted() &&
+                $this->getProposal()->isIndexable()
+            );
         } catch (EntityNotFoundException $e) {
             return false;
         }
