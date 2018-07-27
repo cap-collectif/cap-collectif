@@ -1,29 +1,28 @@
 <?php
 namespace Capco\AppBundle\GraphQL\DataLoader;
 
-use Http\Promise\Promise;
+use GraphQL\Executor\Promise\Promise;
 use Overblog\DataLoader\DataLoader;
 use Overblog\DataLoader\Option;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Psr\Cache\CacheItemPoolInterface;
+use Psr\Log\LoggerInterface;
 
 class BatchDataLoader extends DataLoader
 {
     protected $cache;
+    protected $cacheKey;
+    protected $logger;
 
     public function __construct(
         callable $batchFunction,
         PromiseAdapterInterface $promiseFactory,
-        CacheItemPoolInterface $cache
+        LoggerInterface $logger,
+        CacheItemPoolInterface $cache,
+        Option $options = null
     ) {
-        $options = new Option([
-            'batch' => true,
-            'cacheKeyFn' =>
-                function ($key) {
-                    return '-[' . base64_encode(var_export($key, true)) . ']-';
-                },
-        ]);
         $this->cache = $cache;
+        $this->logger = $logger;
         parent::__construct(
             function ($ids) use ($batchFunction) {
                 return $batchFunction($ids);
@@ -35,8 +34,9 @@ class BatchDataLoader extends DataLoader
 
     public function load($key)
     {
-        $cacheItem = $this->cache->getItem($this->getCacheKeyFromKey($key));
-
+        $cacheKey = $this->getCacheKeyFromKey($key);
+        $cacheItem = $this->cache->getItem($cacheKey);
+        $this->logger->info(__METHOD__);
         if (!$cacheItem->isHit()) {
             $promise = parent::load($key);
             if ($promise instanceof Promise) {
@@ -44,12 +44,12 @@ class BatchDataLoader extends DataLoader
                     $this->prime($key, $value);
                     $cacheItem->set($value);
                     $this->cache->save($cacheItem);
+                    $this->logger->info("Saved key into cache");
                 });
             }
-
             return $promise;
         }
-
+        $this->logger->info("Get key from cache");
         return $this->getPromiseAdapter()->createFulfilled($cacheItem->get());
     }
 }

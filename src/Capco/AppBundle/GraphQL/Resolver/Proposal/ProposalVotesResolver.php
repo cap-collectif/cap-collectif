@@ -4,42 +4,33 @@ namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesCountByStepDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesCountByStepDataLoader;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
+use GraphQL\Executor\Promise\PromiseAdapter;
 use Overblog\GraphQLBundle\Definition\Argument;
-use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
-use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Psr\Log\LoggerInterface;
 
-class ProposalVotesResolver
+class ProposalVotesResolver implements ResolverInterface
 {
     private $logger;
     private $abstractStepRepository;
-    private $proposalCollectVoteRepository;
-    private $proposalSelectionVoteRepository;
-    private $proposalVotesCountByStepDataLoader;
     private $proposalVotesDataLoader;
 
     public function __construct(
-        AbstractStepRepository $repository,
-        ProposalCollectVoteRepository $proposalCollectVoteRepository,
-        ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         LoggerInterface $logger,
-        ProposalVotesCountByStepDataLoader $proposalVotesCountByStepDataLoader,
-        ProposalVotesDataLoader $proposalVotesDataLoader
+        ProposalVotesDataLoader $proposalVotesDataLoader,
+        AbstractStepRepository $abstractStepRepository
     ) {
         $this->logger = $logger;
-        $this->abstractStepRepository = $repository;
-        $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
-        $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
-        $this->proposalVotesCountByStepDataLoader = $proposalVotesCountByStepDataLoader;
         $this->proposalVotesDataLoader = $proposalVotesDataLoader;
+        $this->abstractStepRepository = $abstractStepRepository;
     }
 
-    public function __invoke(Proposal $proposal, Argument $args, \ArrayObject $context): Connection
+    public function __invoke(Proposal $proposal, Argument $args, \ArrayObject $context)
     {
         $includeExpired =
             true === $args->offsetGet('includeExpired') &&
@@ -48,76 +39,13 @@ class ProposalVotesResolver
         if ($args->offsetExists('stepId')) {
             try {
                 $step = $this->abstractStepRepository->find($args->offsetGet('stepId'));
-
                 if (!$step) {
                     // Maybe throw an exception
                     return $this->resolveAllVotes($proposal, $args, $includeExpired);
                 }
-
-                $field = $args->offsetGet('orderBy')['field'];
-                $direction = $args->offsetGet('orderBy')['direction'];
-
-                if ($step instanceof CollectStep) {
-                    $paginator = new Paginator(function (int $offset, int $limit) use (
-                        $proposal,
-                        $step,
-                        $field,
-                        $direction,
-                        $includeExpired
-                    ) {
-                        return $this->proposalCollectVoteRepository->getByProposalAndStep(
-                            $proposal,
-                            $step,
-                            $limit,
-                            $offset,
-                            $field,
-                            $direction,
-                            $includeExpired
-                        )
-                            ->getIterator()
-                            ->getArrayCopy();
-                    });
-
-                    $totalCount = $this->proposalVotesCountByStepDataLoader->load(
-                        $proposal,
-                        $step,
-                        $includeExpired
-                    );
-
-                    return $paginator->auto($args, $totalCount);
-                }
-
-                if ($step instanceof SelectionStep) {
-                    $paginator = new Paginator(function (int $offset, int $limit) use (
-                        $proposal,
-                        $step,
-                        $field,
-                        $direction,
-                        $includeExpired
-                    ) {
-                        return $this->proposalSelectionVoteRepository->getByProposalAndStep(
-                            $proposal,
-                            $step,
-                            $limit,
-                            $offset,
-                            $field,
-                            $direction,
-                            $includeExpired
-                        )
-                            ->getIterator()
-                            ->getArrayCopy();
-                    });
-
-                    $totalCount = $this->proposalVotesCountByStepDataLoader->load(
-                        $proposal,
-                        $step,
-                        $includeExpired
-                    );
-
-                    return $paginator->auto($args, $totalCount);
-                }
-
-                throw new \RuntimeException('Unknown step type.');
+                return $this->proposalVotesDataLoader->load(
+                    compact('proposal', 'step', 'args', 'includeExpired')
+                );
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
                 throw new \RuntimeException($exception->getMessage());
@@ -131,23 +59,7 @@ class ProposalVotesResolver
         Proposal $proposal,
         Argument $args,
         bool $includeExpired = false
-    ): Connection {
-        $paginator = new Paginator(function () {
-            return [];
-        });
-
-        $totalCount = 0;
-        $totalCount += $this->proposalVotesDataLoader->load(
-            $proposal,
-            ProposalVotesDataLoader::COLLECT_STEP_TYPE,
-            $includeExpired
-        );
-        $totalCount += $this->proposalVotesDataLoader->load(
-            $proposal,
-            ProposalVotesDataLoader::SELECTION_STEP_TYPE,
-            $includeExpired
-        );
-
-        return $paginator->auto($args, $totalCount);
+    ) {
+        return $this->proposalVotesDataLoader->load(compact('proposal', 'args', 'includeExpired'));
     }
 }

@@ -1,98 +1,135 @@
 <?php
 namespace Capco\AppBundle\GraphQL\DataLoader\Proposal;
 
-use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\GraphQL\DataLoader\CacheDataLoader;
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
+use Overblog\DataLoader\Option;
+use Overblog\GraphQLBundle\Relay\Connection\Paginator;
+use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Psr\Cache\CacheItemPoolInterface;
+use Psr\Log\LoggerInterface;
 
-class ProposalVotesDataLoader extends CacheDataLoader
+class ProposalVotesDataLoader extends BatchDataLoader
 {
-    public const COLLECT_STEP_TYPE = 'collect';
-    public const SELECTION_STEP_TYPE = 'selection';
-
-    private $proposalVotesCountByStepDataLoader;
-    private $proposalSelectionVoteRepository;
     private $proposalCollectVoteRepository;
+    private $proposalSelectionVoteRepository;
 
     public function __construct(
-        CacheItemPoolInterface $cacheItemPool,
-        ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+        PromiseAdapterInterface $promiseFactory,
+        CacheItemPoolInterface $cache,
+        LoggerInterface $logger,
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
-        ProposalVotesCountByStepDataLoader $proposalVotesCountByStepDataLoader
+        ProposalSelectionVoteRepository $proposalSelectionVoteRepository
     ) {
-        $this->proposalVotesCountByStepDataLoader = $proposalVotesCountByStepDataLoader;
-        $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
+        $options = new Option([
+            'cacheKeyFn' =>
+                function ($key) {
+                    return '-[' . base64_encode(var_export($this->serializeKey($key), true)) . ']-';
+                },
+        ]);
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
-        parent::__construct($cacheItemPool);
+        $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
+        parent::__construct([$this, 'all'], $promiseFactory, $logger, $cache, $options);
     }
 
-    public function load(Proposal $proposal, string $stepType, bool $includeExpired)
+    protected function serializeKey($key): array
     {
-        $key = $this->getCacheKeyNameByParameters([
-            'proposalId' => $proposal->getId(),
-            'stepType' => $stepType,
-            'includeExpired' => $includeExpired,
-        ]);
-        $cacheItem = $this->cacheItemPool->getItem($key);
-
-        if (!$cacheItem->isHit()) {
-            if ($stepType === self::SELECTION_STEP_TYPE) {
-                $count = $this->proposalSelectionVoteRepository->countVotesByProposal(
-                    $proposal,
-                    $includeExpired
-                );
-            } elseif ($stepType === self::COLLECT_STEP_TYPE) {
-                $count = $this->proposalCollectVoteRepository->countVotesByProposal(
-                    $proposal,
-                    $includeExpired
-                );
-            } else {
-                $count = 0;
-            }
-
-            $cacheItem->set($count);
-            $this->cacheItemPool->save($cacheItem);
-        }
-
-        return $cacheItem->get();
+        return [
+            'proposalId' => $key['proposal']->getId(),
+            'stepId' => isset($key['step']) ? $key['step']->getId() : null,
+            'args' => $key['args'],
+            'includeExpired' => $key['includeExpired'],
+        ];
     }
 
-    public function invalidate(Proposal $proposal, string $stepType): bool
+    public function all(array $keys)
     {
-        $includeExpiredKey = $this->getCacheKeyNameByParameters([
-            'proposalId' => $proposal->getId(),
-            'stepType' => $stepType,
-            'includeExpired' => true,
-        ]);
-        $notIncludeExpiredKey = $this->getCacheKeyNameByParameters([
-            'proposalId' => $proposal->getId(),
-            'stepType' => $stepType,
-            'includeExpired' => false,
-        ]);
+        $connections = [];
 
-        return (
-            $this->cacheItemPool->deleteItem($includeExpiredKey) &&
-            $this->cacheItemPool->deleteItem($notIncludeExpiredKey)
-        );
-    }
-
-    public function invalidateAll(Proposal $proposal, ?AbstractStep $step = null): bool
-    {
-        $invalidateVotesByStepSuccess = true;
-        if ($step) {
-            $invalidateVotesByStepSuccess = $this->proposalVotesCountByStepDataLoader->invalidate(
-                $proposal,
-                $step
+        foreach ($keys as $key) {
+            $this->logger->info(
+                __METHOD__ . " called with " . var_export($this->serializeKey($key), true)
             );
+
+            $field = $key['args']->offsetGet('orderBy')['field'];
+            $direction = $key['args']->offsetGet('orderBy')['direction'];
+
+            if (isset($key['step'])) {
+                if ($key['step'] instanceof CollectStep) {
+                    $paginator = new Paginator(function (int $offset, int $limit) use (
+                        $key,
+                        $field,
+                        $direction
+                    ) {
+                        return $this->proposalCollectVoteRepository->getByProposalAndStep(
+                            $key['proposal'],
+                            $key['step'],
+                            $limit,
+                            $offset,
+                            $field,
+                            $direction,
+                            $key['includeExpired']
+                        )
+                            ->getIterator()
+                            ->getArrayCopy();
+                    });
+
+                    $totalCount = $this->proposalCollectVoteRepository->countVotesByProposalAndStep(
+                        $key['proposal'],
+                        $key['step'],
+                        $key['includeExpired']
+                    );
+
+                    $connections[] = $paginator->auto($key['args'], $totalCount);
+                } elseif ($key['step'] instanceof SelectionStep) {
+                    $paginator = new Paginator(function (int $offset, int $limit) use (
+                        $key,
+                        $field,
+                        $direction
+                    ) {
+                        return $this->proposalSelectionVoteRepository->getByProposalAndStep(
+                            $key['proposal'],
+                            $key['step'],
+                            $limit,
+                            $offset,
+                            $field,
+                            $direction,
+                            $key['includeExpired']
+                        )
+                            ->getIterator()
+                            ->getArrayCopy();
+                    });
+
+                    $totalCount = $this->proposalSelectionVoteRepository->countVotesByProposalAndStep(
+                        $key['proposal'],
+                        $key['step'],
+                        $key['includeExpired']
+                    );
+
+                    $connections[] = $paginator->auto($key['args'], $totalCount);
+                } else {
+                    throw new \RuntimeException('Unknown step type.');
+                }
+            } else {
+                $paginator = new Paginator(function (int $offset, int $limit) {
+                    return [];
+                });
+                $totalCount = 0;
+                $totalCount += $this->proposalCollectVoteRepository->countVotesByProposal(
+                    $key['proposal'],
+                    $key['includeExpired']
+                );
+                $totalCount += $this->proposalSelectionVoteRepository->countVotesByProposal(
+                    $key['proposal'],
+                    $key['includeExpired']
+                );
+                $connections[] = $paginator->auto($key['args'], $totalCount);
+            }
         }
 
-        return (
-            $this->invalidate($proposal, self::SELECTION_STEP_TYPE) &&
-            $this->invalidate($proposal, self::COLLECT_STEP_TYPE) &&
-            $invalidateVotesByStepSuccess
-        );
+        return $this->getPromiseAdapter()->createAll($connections);
     }
 }

@@ -1,13 +1,10 @@
 <?php
 namespace Capco\AppBundle\GraphQL\Resolver\ProposalForm;
 
-use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalsDataLoader;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Search\ProposalSearch;
 use Capco\UserBundle\Entity\User;
-use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
@@ -19,20 +16,19 @@ class ProposalFormProposalsResolver implements ResolverInterface
 {
     private $proposalRepo;
     private $proposalSearch;
-    private $proposalsDataLoader;
 
-    public function __construct(
-        ProposalRepository $proposalRepo,
-        ProposalSearch $proposalSearch,
-        ProposalsDataLoader $proposalsDataLoader
-    ) {
+    public function __construct(ProposalRepository $proposalRepo, ProposalSearch $proposalSearch)
+    {
         $this->proposalRepo = $proposalRepo;
         $this->proposalSearch = $proposalSearch;
-        $this->proposalsDataLoader = $proposalsDataLoader;
     }
 
-    public function __invoke(ProposalForm $form, Arg $args, $viewer, RequestStack $request)
-    {
+    public function __invoke(
+        ProposalForm $form,
+        Arg $args,
+        $viewer,
+        RequestStack $request
+    ): Connection {
         $totalCount = 0;
         $filters = [];
         $term = null;
@@ -151,15 +147,11 @@ class ProposalFormProposalsResolver implements ResolverInterface
                 $filters,
                 $seed
             );
-            $ids = array_map(function (Proposal $proposal) {
-                return $proposal->getId();
-            }, $results['proposals']);
 
             $totalCount = $results['count'];
 
-            return $this->proposalsDataLoader->loadMany($ids);
-        },
-        Paginator::MODE_PROMISE);
+            return $results['proposals'];
+        });
 
         $connection = $paginator->auto($args, $totalCount);
         $connection->totalCount = $totalCount;
