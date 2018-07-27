@@ -27,8 +27,8 @@ export class ProposalListTable extends React.Component<Props, State> {
   }
 
   componentDidMount() {
+    // eslint-disable-next-line
     this.setState({
-      // eslint-disable-line
       windowWidth: window.innerWidth,
     });
   }
@@ -77,6 +77,7 @@ export class ProposalListTable extends React.Component<Props, State> {
                 title: this.getPhaseTitle(node.progressSteps),
               },
               width: '250px',
+              hidden: !(node.progressSteps && node.progressSteps.length > 0),
             },
             status: { text: 'admin.fields.theme.status', value: node.status && node.status },
             author: { text: 'project_download.label.author', value: node.author && node.author },
