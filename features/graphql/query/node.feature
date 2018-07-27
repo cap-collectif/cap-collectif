@@ -90,3 +90,155 @@ Scenario: GraphQL client want to get a node of all available types
     }
   }
   """
+
+Scenario: Admin GraphQL client want to get a node of project and proposal types
+  Given I am logged in to graphql as admin
+  When I send a GraphQL POST request:
+  """
+  {
+    "query": "query node ($proposalId: ID!, $projectId: ID!){
+      proposal: node(id: $proposalId) {
+        ... on Proposal {
+          title
+        }
+      }
+      project: node(id: $projectId) {
+        ... on Project {
+          title
+        }
+      }
+    }",
+    "variables": {
+      "proposalId": "proposal34",
+      "projectId": "ProjectAccessibleForMeOnlyByAdmin"
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "proposal": {
+        "title": "Quel type de bière ?"
+      },
+      "project": {
+        "title": "Project pour la création de la capCoBeer (visible par admin seulement)"
+      }
+    }
+  }
+  """
+
+Scenario: Anonymous GraphQL client want to get a node of project and proposal types
+  Given I send a GraphQL POST request:
+  """
+  {
+    "query": "query node ($proposalId: ID!, $projectId: ID!){
+      proposal: node(id: $proposalId) {
+        ... on Proposal {
+          title
+        }
+      }
+      project: node(id: $projectId) {
+        ... on Project {
+          title
+        }
+      }
+    }",
+    "variables": {
+      "proposalId": "proposal34",
+      "projectId": "ProjectAccessibleForMeOnlyByAdmin"
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "errors":[{
+      "message":"Internal server Error",
+      "category":"internal",
+      "locations":[{
+      "line":1,"column":52
+    }],
+      "path":["proposal"]},
+    {
+      "message":"Internal server Error",
+      "category":"internal",
+      "locations":[{"line":1,"column":137}],
+      "path":["project"]
+    }],
+    "data":{
+      "proposal":null,
+      "project":null
+    }
+  }
+  """
+
+Scenario: User GraphQL client want to get a node of project and proposal types
+  Given I am logged in to graphql as pierre
+  When I send a GraphQL POST request:
+  """
+  {
+    "query": "query node ($proposalId: ID!, $projectId: ID!){
+      proposal: node(id: $proposalId) {
+        ... on Proposal {
+          title
+        }
+      }
+      project: node(id: $projectId) {
+        ... on Project {
+          title
+        }
+      }
+    }",
+    "variables": {
+      "proposalId": "proposal34",
+      "projectId": "ProjectAccessibleForMeOnlyByAdmin"
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data":{
+      "proposal":null,
+      "project":null
+    }
+  }
+  """
+
+Scenario: Super Admin GraphQL client want to get a node of project and proposal types
+  Given I am logged in to graphql as super admin
+  When I send a GraphQL POST request:
+  """
+  {
+    "query": "query node ($proposalId: ID!, $projectId: ID!){
+      proposal: node(id: $proposalId) {
+        ... on Proposal {
+          title
+        }
+      }
+      project: node(id: $projectId) {
+        ... on Project {
+          title
+        }
+      }
+    }",
+    "variables": {
+      "proposalId": "proposal34",
+      "projectId": "ProjectAccessibleForMeOnlyByAdmin"
+    }
+  }
+  """
+  Then the JSON response should match:
+  """
+  {
+    "data": {
+      "proposal": {
+        "title": "Quel type de bière ?"
+      },
+      "project": {
+        "title": "Project pour la création de la capCoBeer (visible par admin seulement)"
+      }
+    }
+  }
+  """

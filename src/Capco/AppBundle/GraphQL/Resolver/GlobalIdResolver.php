@@ -139,7 +139,7 @@ class GlobalIdResolver
         return $node;
     }
 
-    private function viewerCanSee($node, User $user): bool
+    private function viewerCanSee($node, $user = null): bool
     {
         $projectContributionClass = [
             Project::class,
