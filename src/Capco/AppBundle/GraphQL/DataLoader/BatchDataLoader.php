@@ -8,7 +8,7 @@ use Overblog\PromiseAdapter\PromiseAdapterInterface;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Log\LoggerInterface;
 
-class BatchDataLoader extends DataLoader
+abstract class BatchDataLoader extends DataLoader
 {
     protected $cache;
     protected $cacheKey;
@@ -18,9 +18,14 @@ class BatchDataLoader extends DataLoader
         callable $batchFunction,
         PromiseAdapterInterface $promiseFactory,
         LoggerInterface $logger,
-        CacheItemPoolInterface $cache,
-        Option $options = null
+        CacheItemPoolInterface $cache
     ) {
+        $options = new Option([
+            'cacheKeyFn' =>
+                function ($key) {
+                    return '-[' . base64_encode(var_export($this->serializeKey($key), true)) . ']-';
+                },
+        ]);
         $this->cache = $cache;
         $this->logger = $logger;
         parent::__construct(
@@ -32,6 +37,26 @@ class BatchDataLoader extends DataLoader
         );
     }
 
+    /**
+     * The serializeKey function is used to serialize into the cache the array of parameters.
+     *
+     * @param mixed $key An array of parameters (e.g ["proposal" => $proposal, "step" => $step, "includeExpired" => false]) or a keyName
+     * @return array
+     */
+    abstract protected function serializeKey($key): array;
+
+    /**
+     * The load function overrides the base load function from DataLoader and extends it to support caching.
+     * Given an array of parameters, it should return a promise that when resolved, return the value from
+     * the batch function. If promise is already in cache, create an already fulfilled promise with value
+     * from cache to immediatly get it.
+     *
+     * @param mixed $key An array of parameters (e.g ["proposal" => $proposal, "step" => $step, "includeExpired" => false]) or a keyName
+     * @return mixed
+     *
+     * @see DataLoader
+     * @throws \Psr\Cache\InvalidArgumentException
+     */
     public function load($key)
     {
         $cacheKey = $this->getCacheKeyFromKey($key);
@@ -50,6 +75,7 @@ class BatchDataLoader extends DataLoader
             return $promise;
         }
         $this->logger->info("Get key from cache");
+
         return $this->getPromiseAdapter()->createFulfilled($cacheItem->get());
     }
 }
