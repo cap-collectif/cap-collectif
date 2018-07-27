@@ -1,9 +1,9 @@
 Comment:
   type: object
-  inherits: [Node, Contribution]
+  inherits: [Node, Publishable, Contribution]
   config:
     description: 'A comment'
-    interfaces: [Node, Contribution]
+    interfaces: [Node, Publishable, Contribution]
     fields:
       body:
         type: 'String'

@@ -7,6 +7,7 @@ Capco\AppBundle\Entity\ProposalComment:
     isEnabled: true
     isTrashed: false
     createdAt: '<dateTimeBetween("-2 days", "now")>'
+    publishedAt: '<dateTimeBetween("-2 days", "now")>'
   propComment5:
     id: 'proposalComment5'
     proposal: '@proposal1'
@@ -16,6 +17,7 @@ Capco\AppBundle\Entity\ProposalComment:
     isEnabled: true
     isTrashed: false
     createdAt: '<dateTimeBetween("-2 days", "now")>'
+    publishedAt: '<dateTimeBetween("-2 days", "now")>'
   anonComment1:
     id: 'proposalComment6'
     proposal: '@proposal1'
@@ -26,6 +28,7 @@ Capco\AppBundle\Entity\ProposalComment:
     isEnabled: true
     isTrashed: false
     createdAt: '<dateTimeBetween("-2 days", "now")>'
+    publishedAt: '<dateTimeBetween("-2 days", "now")>'
   propComment{7..20}:
     id: 'proposalComment<current()>'
     proposal: '@proposal1'
@@ -34,3 +37,4 @@ Capco\AppBundle\Entity\ProposalComment:
     isEnabled: true
     isTrashed: false
     createdAt: '<dateTimeBetween("-2 days", "now")>'
+    publishedAt: '<dateTimeBetween("-2 days", "now")>'

@@ -1,7 +1,9 @@
 VersionVote:
   type: object
+  inherits:
+    - Publishable
   config:
-    interfaces: [YesNoPairedVote]
+    interfaces: [Publishable, YesNoPairedVote]
     fields:
       id:
         builder: "Relay::GlobalId"

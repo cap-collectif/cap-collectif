@@ -585,7 +585,7 @@ type CollectStep implements Node & Step & ProposalStep {
 }
 
 # A comment
-type Comment implements Node & Contribution {
+type Comment implements Node & Publishable & Contribution {
   # The ID of an object
   id: ID!
 
@@ -600,6 +600,15 @@ type Comment implements Node & Contribution {
 
   # Url of the contribution
   url: URI!
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity was not published.
+  notPublishedReason: NotPublishedReason
   body: String
   createdAt: DateTime!
   updatedAt: DateTime
@@ -1560,7 +1569,17 @@ type OpinionModal {
 
 union OpinionOrVersion = Opinion | Version
 
-type OpinionVote implements YesNoPairedVote {
+# Entities that can be published.
+type OpinionVote implements Publishable & YesNoPairedVote {
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity was not published.
+  notPublishedReason: NotPublishedReason
+
   # The ID of an object
   id: ID!
 
@@ -2166,7 +2185,16 @@ enum ProposalStepVoteType {
   BUDGET
 }
 
-type ProposalVote {
+# Entities that can be published.
+type ProposalVote implements Publishable {
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity was not published.
+  notPublishedReason: NotPublishedReason
   id: ID!
 
   # The author of the contribution. If null, the vote is anonymous.
@@ -3623,7 +3651,17 @@ enum VersionOrderField {
   RANDOM
 }
 
-type VersionVote implements YesNoPairedVote {
+# Entities that can be published.
+type VersionVote implements Publishable & YesNoPairedVote {
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity was not published.
+  notPublishedReason: NotPublishedReason
+
   # The ID of an object
   id: ID!
 
