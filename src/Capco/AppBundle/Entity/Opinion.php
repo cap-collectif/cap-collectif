@@ -628,7 +628,7 @@ class Opinion implements OpinionContributionInterface
 
     public function isIndexable(): bool
     {
-        return $this->getIsEnabled() && !$this->isExpired();
+        return $this->getIsEnabled() && !$this->isExpired() && $this->getProject()->isPublic();
     }
 
     public static function getElasticsearchTypeName(): string

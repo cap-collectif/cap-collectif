@@ -110,24 +110,7 @@ class GlobalIdResolver
             throw new UserError($error);
         }
 
-        $projectContributionClass = [
-            Project::class,
-            Proposal::class,
-            Comment::class,
-            Argument::class,
-            ProposalForm::class,
-            AbstractStep::class,
-        ];
-        foreach ($projectContributionClass as $object) {
-            if ($node instanceof $object) {
-                if (!$node->canDisplay($user)) {
-                    throw new \GraphQL\Error\UserError('Access denied');
-                }
-                break;
-            }
-        }
-
-        return $node;
+        return $this->viewerCanSee($node, $user) ? $node : null;
     }
 
     public function resolveByModerationToken(string $token): ModerableInterface
@@ -154,5 +137,26 @@ class GlobalIdResolver
         }
 
         return $node;
+    }
+
+    private function viewerCanSee($node, User $user): bool
+    {
+        $projectContributionClass = [
+            Project::class,
+            Proposal::class,
+            Comment::class,
+            Argument::class,
+            ProposalForm::class,
+            AbstractStep::class,
+        ];
+        foreach ($projectContributionClass as $object) {
+            if ($node instanceof $object) {
+                if (!$node->canDisplay($user)) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }
     }
 }

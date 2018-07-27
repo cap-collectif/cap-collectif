@@ -22,7 +22,7 @@ Project:
               type: "[ProposalStep!]!"
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectVotableStepsResolver", [value])'
             allowedViewers:
-              type: "ProjectConnection!"
+              type: "UserConnection!"
               argsBuilder: "Relay::Connection"
               resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAllowedViewersResolver", [value, args])'
             visibility:

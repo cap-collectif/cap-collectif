@@ -37,7 +37,7 @@ export class ProjectRestrictedAccessAlert extends React.Component<Props> {
             <Alert
               className="alert-dismissible text-center"
               bsStyle="warning"
-              style={{ marginBottom: '0', textAlign: 'center' }}>
+              style={{ marginBottom: '0' }}>
               <i className="cap cap-lock-2 mr-1" />
               <FormattedMessage id={alertText} />
               <a
