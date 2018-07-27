@@ -1,8 +1,0 @@
-ResponseConnection:
-  type: relay-connection
-  config:
-    nodeType: Response!
-    connectionFields:
-      totalCount:
-        type: Int!
-        description: Identifies the total count of items in the connection.

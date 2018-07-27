@@ -1,62 +1,107 @@
 // @flow
 import React from 'react';
-import { connect, type MapStateToProps } from 'react-redux';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage } from 'react-intl';
 import OpinionUserVote from './OpinionUserVote';
 import VotesBar from '../../Utils/VotesBar';
 import OpinionVotesModal from './OpinionVotesModal';
-import type { State, OpinionAndVersion } from '../../../types';
+import VersionVotesModal from '../VersionVotesModal';
+import type { OpinionVotesBar_opinion } from './__generated__/OpinionVotesBar_opinion.graphql';
 
 type Props = {
-  opinion: Object,
+  opinion: OpinionVotesBar_opinion,
 };
 
 class OpinionVotesBar extends React.Component<Props> {
-  getOpinionType = () => {
-    const { opinion } = this.props;
-    return opinion.parent ? opinion.parent.type : opinion.type;
-  };
-
   render() {
     const { opinion } = this.props;
+    if (!opinion.section) return null;
     return (
       <div>
-        {this.getOpinionType().votesThreshold && (
-          <VotesBar
-            max={this.getOpinionType().votesThreshold}
-            value={opinion.votesCountOk}
-            helpText={this.getOpinionType().votesThresholdHelpText}
-          />
-        )}
+        {opinion.section.votesThreshold &&
+          opinion.section.votesThreshold > 0 && (
+            <VotesBar
+              max={opinion.section.votesThreshold}
+              value={opinion.votesYes ? opinion.votesYes.totalCount : 0}
+              helpText={opinion.section.votesThresholdHelpText}
+            />
+          )}
         <div style={{ paddingTop: '20px' }}>
-          {opinion.votes.slice(0, 5).map((vote, index) => {
-            return <OpinionUserVote key={index} vote={vote} style={{ marginRight: 5 }} />;
-          })}
-          <OpinionVotesModal opinion={opinion} />
+          {opinion.previewVotes &&
+            opinion.previewVotes.edges &&
+            opinion.previewVotes.edges
+              .filter(Boolean)
+              .map(edge => edge.node)
+              .filter(Boolean)
+              .slice(0, 5)
+              .map((vote, index) => {
+                /* $FlowFixMe */
+                return <OpinionUserVote key={index} vote={vote} style={{ marginRight: 5 }} />;
+              })}
+          {opinion.__typename === 'Opinion' && (
+            /* $FlowFixMe */
+            <OpinionVotesModal opinion={opinion} />
+          )}
+          {opinion.__typename === 'Version' && (
+            /* $FlowFixMe */
+            <VersionVotesModal version={opinion} />
+          )}
         </div>
         <div>
-          <FormattedMessage
-            id="global.votes"
-            values={{
-              num: opinion.votesCount,
-            }}
-          />
+          {opinion.previewVotes && (
+            <FormattedMessage
+              id="global.votes"
+              values={{
+                num: opinion.previewVotes.totalCount,
+              }}
+            />
+          )}
         </div>
       </div>
     );
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (
-  state: State,
-  props: { opinion: OpinionAndVersion },
-) => ({
-  opinion: {
-    ...props.opinion,
-    ...(Object.keys(state.opinion.opinionsById).length
-      ? state.opinion.opinionsById[props.opinion.id]
-      : state.opinion.versionsById[props.opinion.id]),
-  },
+export default createFragmentContainer(OpinionVotesBar, {
+  opinion: graphql`
+    fragment OpinionVotesBar_opinion on OpinionOrVersion {
+      __typename
+      ... on Opinion {
+        ...OpinionVotesModal_opinion
+        votesYes: votes(first: 0, value: YES) {
+          totalCount
+        }
+        previewVotes: votes(first: 5) @connection(key: "OpinionVotesBar_previewVotes") {
+          totalCount
+          edges {
+            node {
+              ...OpinionUserVote_vote
+            }
+          }
+        }
+        section {
+          votesThresholdHelpText
+          votesThreshold
+        }
+      }
+      ... on Version {
+        ...VersionVotesModal_version
+        votesYes: votes(first: 0, value: YES) {
+          totalCount
+        }
+        previewVotes: votes(first: 5) @connection(key: "OpinionVotesBar_previewVotes") {
+          totalCount
+          edges {
+            node {
+              ...OpinionUserVote_vote
+            }
+          }
+        }
+        section {
+          votesThreshold
+          votesThresholdHelpText
+        }
+      }
+    }
+  `,
 });
-
-export default connect(mapStateToProps)(OpinionVotesBar);

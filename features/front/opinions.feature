@@ -112,9 +112,9 @@ Scenario: Anonymous user wants to share an opinion
   And I click the opinion share link button
   Then I should see the share link modal
 
-@javascript
-Scenario: Anonymous wants to see votes evolution
-  Given feature "votes_evolution" is enabled
-  And I go to an opinion with versions
-  When I go on the votes evolution tab
-  Then I should see 1 ".opinion__history_chart" element
+# @javascript
+# Scenario: Anonymous wants to see votes evolution
+#   Given feature "votes_evolution" is enabled
+#   And I go to an opinion with versions
+#   When I go on the votes evolution tab
+#   Then I should see 1 ".opinion__history_chart" element

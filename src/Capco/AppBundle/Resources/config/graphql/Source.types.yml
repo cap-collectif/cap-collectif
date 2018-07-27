@@ -1,32 +1,42 @@
 Source:
-  type: object
-  inherits:
-    [Node, Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
-  config:
-    description: 'A source'
-    interfaces:
-      [Node, Contribution, TrashableContribution, ContributionWithAuthor, EditableContribution]
-    fields:
-      createdAt:
-        type: 'DateTime!'
-        description: 'Identifies the date and time when the object was created.'
-      expired:
-        type: 'Boolean!'
-      published:
-        type: 'Boolean!'
-      votesCount:
-        type: 'Int!'
-      title:
-        type: 'String!'
-        description: 'The title of the source.'
-      body:
-        type: 'String!'
-        description: 'The content of the source.'
-      kind:
-        resolve: 'source'
-      show_url:
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceUrlResolver", [value])'
-      url:
-        resolve:
-          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceUrlResolver", [value])'
+    type: object
+    inherits: [Node, Contribution, Reportable, TrashableContribution, ContributionWithAuthor, EditableContribution]
+    config:
+        description: "A source"
+        interfaces: [Node, Contribution, Reportable, TrashableContribution, ContributionWithAuthor, EditableContribution]
+        fields:
+            createdAt:
+                type: "DateTime!"
+                description: "Identifies the date and time when the object was created."
+            expired:
+                type: "Boolean!"
+            viewerHasReport:
+                resolve: '@=value.userHasReport(getUser())'
+            published:
+                type: "Boolean!"
+            votesCount:
+                type: "Int!"
+            contribuable:
+                type: "Boolean!"
+                resolve: "@=value.canContribute()"
+            viewerHasVote:
+                type: "Boolean!"
+                resolve: false
+                access: "@=hasRole('ROLE_USER')"
+            category:
+                type: SourceCategory
+            link:
+                type: "URI!"
+                description: "The link of the source."
+            title:
+                type: "String!"
+                description: "The title of the source."
+            body:
+                type: "String!"
+                description: "The content of the source."
+            kind:
+                resolve: "source"
+            show_url:
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceUrlResolver", [value])'
+            url:
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceUrlResolver", [value])'

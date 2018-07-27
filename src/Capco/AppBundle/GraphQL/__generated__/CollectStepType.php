@@ -93,6 +93,26 @@ final class CollectStepType extends ObjectType implements GeneratedTypeInterface
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ProposalConnection')),
                     'args' => [
                         [
+                            'name' => 'after',
+                            'type' => Type::string(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'first',
+                            'type' => Type::int(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'before',
+                            'type' => Type::string(),
+                            'description' => null,
+                        ],
+                        [
+                            'name' => 'last',
+                            'type' => Type::int(),
+                            'description' => null,
+                        ],
+                        [
                             'name' => 'district',
                             'type' => Type::id(),
                             'description' => 'If non-null, filters proposals with the given district.',
@@ -137,27 +157,6 @@ final class CollectStepType extends ObjectType implements GeneratedTypeInterface
                             'name' => 'affiliations',
                             'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('ProposalAffiliation')),
                             'description' => 'Affiliation options for proposals returned from the connection.',
-                        ],
-                        [
-                            'name' => 'after',
-                            'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come after the specified global ID.',
-                        ],
-                        [
-                            'name' => 'first',
-                            'type' => Type::int(),
-                            'description' => 'Returns the first n elements from the list.',
-                            'defaultValue' => 20,
-                        ],
-                        [
-                            'name' => 'before',
-                            'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come before the specified global ID.',
-                        ],
-                        [
-                            'name' => 'last',
-                            'type' => Type::int(),
-                            'description' => 'Returns the last n elements from the list.',
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {

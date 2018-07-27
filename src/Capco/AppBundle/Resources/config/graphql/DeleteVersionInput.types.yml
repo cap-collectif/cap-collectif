@@ -1,0 +1,8 @@
+DeleteVersionInput:
+    type: relay-mutation-input
+    config:
+        description: "Remove a version."
+        fields:
+            versionId:
+              type: "ID!"
+              description: "The version id"
