@@ -29,3 +29,6 @@ parameters:
         - %currentWorkingDirectory%/src/Capco/AppBundle/Mailer/Message/Contribution/ContributionModerationMessage
         - %currentWorkingDirectory%/src/Capco/AppBundle/GraphQL/__generated__/*
         - %currentWorkingDirectory%/spec/*
+        - %currentWorkingDirectory%/src/Capco/AppBundle/Traits/ProjectVisibilityTrait.php
+        - %currentWorkingDirectory%/src/Capco/AppBundle/Repository/AbstractVoteRepository.php
+
