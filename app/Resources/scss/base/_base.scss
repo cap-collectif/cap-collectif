@@ -192,11 +192,6 @@
     }
 }
 
-// Todo remove with btp4
-.badge-pill {
-    border-radius: 10rem;
-}
-
 /* ======================== Button ============================*/
 
 @each $button in $basic-btns {

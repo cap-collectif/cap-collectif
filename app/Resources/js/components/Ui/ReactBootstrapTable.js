@@ -72,8 +72,17 @@ export const Container = styled.div`
   }
 `;
 
+type Cell = {
+  text: string,
+  value: ?any,
+  width?: string,
+  hidden?: boolean,
+};
+
+type Row = {};
+
 export class ReactBootstrapTable extends React.Component<Props> {
-  getFormatter = (cell: Object, row: Object, index: number, key: string) => {
+  getFormatter = (cell: Cell, row: Row, index: number, key: string) => {
     const value = cell.value;
 
     if (key === 'title' && value) {
@@ -86,7 +95,7 @@ export class ReactBootstrapTable extends React.Component<Props> {
         value.list.map(e => {
           let isActive = false;
 
-          if (e.startAt && moment().isSameOrAfter(e.startAt)) {
+          if (e.endAt && moment().isAfter(e.endAt)) {
             isActive = true;
           }
 
@@ -101,7 +110,7 @@ export class ReactBootstrapTable extends React.Component<Props> {
           <div className="mb-10">
             <span>{value.title}</span>
           </div>
-          <ProgressList list={list} className="mt-10" />
+          <ProgressList progressListItem={list} className="mt-10" />
         </div>
       );
     }
@@ -195,7 +204,7 @@ export class ReactBootstrapTable extends React.Component<Props> {
     return column;
   };
 
-  getTableWidth = () => {
+  getTableWidth = (): string => {
     const tableWidth = this.getColumns()
       .filter(column => column.hidden !== true)
       .reduce(
