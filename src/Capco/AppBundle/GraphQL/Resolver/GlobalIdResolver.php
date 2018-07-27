@@ -3,9 +3,12 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
+use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\ModerableInterface;
@@ -146,9 +149,13 @@ class GlobalIdResolver
             Proposal::class,
             Comment::class,
             Argument::class,
+            Source::class,
+            Post::class,
             ProposalForm::class,
+            Event::class,
             AbstractStep::class,
         ];
+
         foreach ($projectContributionClass as $object) {
             if ($node instanceof $object) {
                 if (!$node->canDisplay($user)) {
@@ -158,5 +165,7 @@ class GlobalIdResolver
                 }
             }
         }
+
+        return true;
     }
 }

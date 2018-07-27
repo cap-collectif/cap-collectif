@@ -57,6 +57,7 @@ class AddArgumentMutation
     public function __invoke(Arg $input, User $author): array
     {
         $argumentableId = $input->offsetGet('argumentableId');
+        /** @var Opinion $argumentable */
         $argumentable = $this->opinionRepo->find($argumentableId);
 
         if (!$argumentable) {

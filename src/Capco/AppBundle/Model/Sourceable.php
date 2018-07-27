@@ -9,6 +9,8 @@ interface Sourceable
 
     public function canDisplay($user = null): bool;
 
+    public function isPublished(): bool;
+
     public function getOpinionType();
 
     public function incrementSourcesCount();

@@ -121,10 +121,10 @@ class ProjectAdmin extends CapcoAdmin
         }
 
         $listMapper
-            ->add('visibility', 'choices', [
+            ->add('visibility', ChoiceType::class, [
                 'template' => 'CapcoAdminBundle:Project:visibility_list_field.html.twig',
                 'choices' => ProjectVisibilityMode::REVERSE_KEY_VISIBILITY,
-                'label' => 'who-can-see-this-project',
+                'label' => 'project-access',
                 'catalogue' => 'CapcoAppBundle',
             ])
             ->add('exportable', null, [
@@ -291,7 +291,7 @@ class ProjectAdmin extends CapcoAdmin
         $formMapper
             ->with('project-access')
             ->add('visibility', ChoiceType::class, [
-                'choices' => ProjectVisibilityMode::VISIBILITY,
+                'choices' => ProjectVisibilityMode::VISIBILITY_WITH_HELP_TEXT,
                 'label' => 'who-can-see-this-project',
                 'multiple' => false,
                 'expanded' => true,
@@ -378,7 +378,7 @@ class ProjectAdmin extends CapcoAdmin
             $query
                 ->expr()
                 ->andX(
-                    $query->expr()->eq($query->getRootAliases()[0] . '.author', ':author'),
+                    $query->expr()->eq($query->getRootAliases()[0] . '.Author', ':author'),
                     $query->expr()->eq($query->getRootAliases()[0] . '.visibility', 0)
                 )
         );

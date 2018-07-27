@@ -393,7 +393,12 @@ class ProposalForm
 
     public function canDisplay($user = null): bool
     {
-        return $this->getStep()->canDisplay($user);
+        if ($this->getStep()) {
+            return $this->getStep()->canDisplay($user);
+        }
+
+        // not linked to a project so we can display it
+        return true;
     }
 
     public function isContribuable(): bool

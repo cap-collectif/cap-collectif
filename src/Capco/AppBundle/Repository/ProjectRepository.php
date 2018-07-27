@@ -24,7 +24,6 @@ class ProjectRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry, TokenStorageInterface $tokenStorage)
     {
         $this->token = $tokenStorage;
-        // sometimes, DI failed, and I dont understand why...
         if ($tokenStorage) {
             $this->token = $tokenStorage->getToken();
         }

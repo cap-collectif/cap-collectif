@@ -305,7 +305,7 @@ abstract class AbstractStep
         }
     }
 
-    public function canDisplay($user): bool
+    public function canDisplay($user = null): bool
     {
         return $this->isEnabled && $this->getProject() && $this->getProject()->canDisplay($user);
     }

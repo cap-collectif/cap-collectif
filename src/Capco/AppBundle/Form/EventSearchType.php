@@ -1,7 +1,7 @@
 <?php
-
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Entity\ProjectVisibilityMode;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\Toggle\Manager;
@@ -26,49 +26,43 @@ class EventSearchType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('term',
-                SearchType::class, [
-                'required' => false,
-                'label' => 'event.searchform.term',
-                'translation_domain' => 'CapcoAppBundle',
-            ])
-        ;
-
+        $builder->add('term', SearchType::class, [
+            'required' => false,
+            'label' => 'event.searchform.term',
+            'translation_domain' => 'CapcoAppBundle',
+        ]);
         if ($this->toggleManager->isActive('themes')) {
-            $builder
-                ->add(
-                    'theme',
-                    EntityType::class,
-                    [
-                        'required' => false,
-                        'class' => 'CapcoAppBundle:Theme',
-                        'choice_label' => 'title',
-                        'label' => 'event.searchform.theme',
-                        'translation_domain' => 'CapcoAppBundle',
-                        'query_builder' => function (ThemeRepository $tr) {
-                            return $tr->createQueryBuilder('t')
-                                ->where('t.isEnabled = :enabled')
-                                ->setParameter('enabled', true);
-                        },
-                        'placeholder' => 'event.searchform.all_themes',
-                        'attr' => ['onchange' => 'this.form.submit()'],
-                    ]
-                );
+            $builder->add('theme', EntityType::class, [
+                'required' => false,
+                'class' => 'CapcoAppBundle:Theme',
+                'choice_label' => 'title',
+                'label' => 'event.searchform.theme',
+                'translation_domain' => 'CapcoAppBundle',
+                'query_builder' =>
+                    function (ThemeRepository $tr) {
+                        return $tr
+                            ->createQueryBuilder('t')
+                            ->where('t.isEnabled = :enabled')
+                            ->setParameter('enabled', true);
+                    },
+                'placeholder' => 'event.searchform.all_themes',
+                'attr' => ['onchange' => 'this.form.submit()'],
+            ]);
         }
 
-        $builder->add('project',
-            EntityType::class, [
+        $builder->add('project', EntityType::class, [
             'required' => false,
             'class' => 'CapcoAppBundle:Project',
             'choice_label' => 'title',
             'label' => 'event.searchform.project',
             'translation_domain' => 'CapcoAppBundle',
-            'query_builder' => function (ProjectRepository $cr) {
-                return $cr->createQueryBuilder('c')
-                    ->where('c.isEnabled = :enabled')
-                    ->setParameter('enabled', true);
-            },
+            'query_builder' =>
+                function (ProjectRepository $cr) {
+                    return $cr
+                        ->createQueryBuilder('c')
+                        ->where('c.visibility = :visibility')
+                        ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC);
+                },
             'placeholder' => 'event.searchform.all_projects',
             'attr' => ['onchange' => 'this.form.submit()'],
         ]);
@@ -76,8 +70,6 @@ class EventSearchType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'csrf_protection' => false,
-        ]);
+        $resolver->setDefaults(['csrf_protection' => false]);
     }
 }

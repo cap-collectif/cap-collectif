@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Entity\Project;
@@ -28,7 +27,6 @@ class BlogController extends Controller
      */
     public function indexAction(Request $request, $page, $theme = null, $project = null)
     {
-        $em = $this->getDoctrine()->getManager();
         $currentUrl = $this->generateUrl('app_blog');
 
         $form = $this->createForm(PostSearchType::class, null, [
@@ -43,15 +41,24 @@ class BlogController extends Controller
                 // redirect to the results page (avoids reload alerts)
                 $data = $form->getData();
 
-                return $this->redirect($this->generateUrl('app_blog_search_project', [
-                    'theme' => array_key_exists('theme', $data) && $data['theme'] ? $data['theme']->getSlug() : Theme::FILTER_ALL,
-                    'project' => $data['project'] ? $data['project']->getSlug() : Project::FILTER_ALL,
-                ]));
+                return $this->redirect(
+                    $this->generateUrl('app_blog_search_project', [
+                        'theme' =>
+                            array_key_exists('theme', $data) && $data['theme']
+                                ? $data['theme']->getSlug()
+                                : Theme::FILTER_ALL,
+                        'project' =>
+                            $data['project'] ? $data['project']->getSlug() : Project::FILTER_ALL,
+                    ])
+                );
             }
         } else {
             $form->setData([
-                'theme' => $em->getRepository('CapcoAppBundle:Theme')->findOneBySlug($theme),
-                'project' => $em->getRepository('CapcoAppBundle:Project')->findOneBySlug($project),
+                'theme' => $this->get('capco.theme.repository')->findOneBySlug($theme),
+                'project' =>
+                    $this->get('Capco\AppBundle\Repository\ProjectRepository')->findOneBySlug(
+                        $project
+                    ),
             ]);
         }
 
@@ -98,14 +105,12 @@ class BlogController extends Controller
 
         $serializer = $this->get('jms_serializer');
 
-        $props = $serializer->serialize([
-            'object' => $post->getId(),
-            'uri' => 'posts',
-        ], 'json', SerializationContext::create());
+        $props = $serializer->serialize(
+            ['object' => $post->getId(), 'uri' => 'posts'],
+            'json',
+            SerializationContext::create()
+        );
 
-        return [
-            'post' => $post,
-            'props' => $props,
-        ];
+        return ['post' => $post, 'props' => $props];
     }
 }

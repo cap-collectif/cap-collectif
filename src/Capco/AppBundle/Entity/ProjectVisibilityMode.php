@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Entity;
 
 final class ProjectVisibilityMode
@@ -14,9 +13,15 @@ final class ProjectVisibilityMode
         'public' => self::VISIBILITY_PUBLIC,
     ];
 
+    public const VISIBILITY_WITH_HELP_TEXT = [
+        'myself-visibility-only-me' => self::VISIBILITY_ME,
+        'private-visibility-private' => self::VISIBILITY_ADMIN,
+        'public-everybody' => self::VISIBILITY_PUBLIC,
+    ];
+
     public const REVERSE_KEY_VISIBILITY = [
-        self::VISIBILITY_ME => 'myself' ,
-        self::VISIBILITY_ADMIN =>'private',
-        self::VISIBILITY_PUBLIC =>'public',
+        self::VISIBILITY_ME => 'myself',
+        self::VISIBILITY_ADMIN => 'private',
+        self::VISIBILITY_PUBLIC => 'public',
     ];
 }

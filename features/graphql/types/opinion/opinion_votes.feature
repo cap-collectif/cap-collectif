@@ -94,11 +94,28 @@ Scenario: Anonymous wants to get votes "YES" for an opinion
   Then the JSON response should match:
   """
   {
-    "data": {
-      "opinion": {
-        "votes": {
-          "totalCount": 0,
-          "edges": []
+    "data":{
+      "opinion":{
+        "votes":{
+          "totalCount":2,
+          "edges":[{
+          "cursor":"@string@",
+          "node":{
+            "id":"@string@",
+          "author":{
+            "id":"user3"
+          },
+          "value":"YES"
+          }},
+          {
+          "cursor":"@string@",
+          "node":{
+            "id":"@string@",
+            "author":{
+              "id":"userAdmin"
+            },
+            "value":"YES"
+          }}]
         }
       }
     }

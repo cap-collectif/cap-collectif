@@ -153,19 +153,6 @@ Scenario: Anonymous GraphQL client want to get a node of project and proposal ty
   Then the JSON response should match:
   """
   {
-    "errors":[{
-      "message":"Internal server Error",
-      "category":"internal",
-      "locations":[{
-      "line":1,"column":52
-    }],
-      "path":["proposal"]},
-    {
-      "message":"Internal server Error",
-      "category":"internal",
-      "locations":[{"line":1,"column":137}],
-      "path":["project"]
-    }],
     "data":{
       "proposal":null,
       "project":null
