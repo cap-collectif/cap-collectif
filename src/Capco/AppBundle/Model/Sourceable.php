@@ -1,7 +1,7 @@
 <?php
 namespace Capco\AppBundle\Model;
 
-interface Sourceable extends IsPublishableInterface
+interface Sourceable
 {
     public function getSources();
 

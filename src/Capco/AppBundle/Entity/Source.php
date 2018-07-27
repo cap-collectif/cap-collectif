@@ -1,6 +1,7 @@
 <?php
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Model\Sourceable;
@@ -327,7 +328,7 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable
         return $this->opinionVersion->getParent();
     }
 
-    public function getParent(): Sourceable
+    public function getParent(): OpinionContributionInterface
     {
         if ($this->opinionVersion) {
             return $this->opinionVersion;
