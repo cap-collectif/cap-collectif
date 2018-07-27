@@ -2,7 +2,6 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { ListGroupItem } from 'react-bootstrap';
-import classNames from 'classnames';
 import OpinionPreview from './OpinionPreview';
 import VotePiechart from '../Utils/VotePiechart';
 import type { OpinionVersion_version } from './__generated__/OpinionVersion_version.graphql';
@@ -16,8 +15,10 @@ class OpinionVersion extends React.Component<Props> {
   render() {
     const { version, rankingThreshold } = this.props;
     return (
-      <ListGroupItem 
-              className={`list-group-item__opinion has-chart${version.author && version.author.vip ? ' bg-vip' : ''}`}>
+      <ListGroupItem
+        className={`list-group-item__opinion has-chart${
+          version.author && version.author.vip ? ' bg-vip' : ''
+        }`}>
         <div className="left-block">
           {/* $FlowFixMe */}
           <OpinionPreview opinion={version} rankingThreshold={rankingThreshold} />

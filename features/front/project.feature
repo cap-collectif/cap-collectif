@@ -174,7 +174,7 @@ Scenario: Anonymous try to access to a wrong page
   Then I should see "error.404.title"
 
 @javascript
-Scenario: Users can't access to a private project
+Scenario: Not allowed user can't access to a private project
   Given feature "projects_form" is enabled
   And I am logged in as user
   And I visited "collect page" with:

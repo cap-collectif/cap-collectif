@@ -4,10 +4,11 @@ namespace Capco\AppBundle\GraphQL\Resolver\Project;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\Router;
 
-class ProjectUrlResolver
+class ProjectUrlResolver implements ResolverInterface
 {
     protected $router;
 
@@ -29,7 +30,7 @@ class ProjectUrlResolver
         }
         // if no step, so we redirect to projects list page
         if (!$firstStep) {
-            return '/projects';
+            return $this->router->generate('app_project', UrlGeneratorInterface::ABSOLUTE_URL);
         }
 
         return $this->router->generate(

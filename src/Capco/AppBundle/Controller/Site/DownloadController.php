@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class DownloadController extends Controller
 {
@@ -18,13 +17,13 @@ class DownloadController extends Controller
      * @Route("/download/{responseId}/media/{mediaId}", name="app_media_response_download")
      * @ParamConverter("mediaResponse", options={"mapping": {"responseId": "id"}})
      * @ParamConverter("media", options={"mapping": {"mediaId": "id"}})
-     * @Security("has_role('ROLE_ADMIN')")
      */
     public function downloadAction(MediaResponse $mediaResponse, Media $media, Request $request)
     {
         if (
             !$mediaResponse->getQuestion()->isPrivate() ||
-            $this->getUser() === $mediaResponse->getProposal()->getAuthor()
+            $this->getUser() === $mediaResponse->getProposal()->getAuthor() ||
+            $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
         ) {
             $provider = $this->get('sonata.media.pool')->getProvider($media->getProviderName());
 

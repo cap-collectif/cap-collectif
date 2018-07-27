@@ -4,7 +4,6 @@ import { Alert } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import { QueryRenderer, graphql } from 'react-relay';
 import environment, { graphqlError } from '../../../createRelayEnvironment';
-import type ProjectRestrictedAccessAlertQuery from './__generated__/ProjectRestrictedAccessAlertQuery.graphql';
 
 const query = graphql`
   query ProjectRestrictedAccessAlertQuery($id: ID!) {
@@ -19,7 +18,7 @@ const query = graphql`
 
 type Props = {
   projectId: string,
-  project: ProjectRestrictedAccessAlertQuery,
+  project: Object,
 };
 
 export class ProjectRestrictedAccessAlert extends React.Component<Props> {
