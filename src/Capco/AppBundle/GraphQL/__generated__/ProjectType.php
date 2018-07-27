@@ -124,7 +124,7 @@ final class ProjectType extends ObjectType implements GeneratedTypeInterface
                     'access' => null,
                 ],
                 'allowedViewers' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ProjectConnection')),
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('UserConnection')),
                     'args' => [
                         [
                             'name' => 'after',

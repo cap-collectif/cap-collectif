@@ -1818,31 +1818,11 @@ type Project implements Node {
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
   url: URI
   votableSteps: [ProposalStep!]!
-  allowedViewers(after: String, first: Int, before: String, last: Int): ProjectConnection!
+  allowedViewers(after: String, first: Int, before: String, last: Int): UserConnection!
 
   # The visibility of project
   visibility: ProjectVisibility!
   adminUrl: URI
-}
-
-# A connection to a list of items.
-type ProjectConnection {
-  totalCount: Int!
-
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # Information to aid in pagination.
-  edges: [ProjectEdge]
-}
-
-# An edge in a connection.
-type ProjectEdge {
-  # The item at the end of the edge.
-  node: Project!
-
-  # A cursor for use in pagination.
-  cursor: String!
 }
 
 # 3 possible values
