@@ -1,0 +1,18 @@
+Publishable:
+  type: interface
+  config:
+    description: 'Entities that can be published.'
+    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Publishable\\PublishableTypeResolver", [value])'
+    fields:
+      published:
+        type: 'Boolean!'
+        description: '`true` if the object is published.'
+        resolve: '@=value.isPublished()'
+      publishedAt:
+        type: 'DateTime'
+        description: 'Identifies when the entity was published at.'
+        resolve: '@=value.getPublishedAt()'
+      notPublishedReason:
+        type: "NotPublishedReason"
+        description: 'Reason that the entity was not published.'
+        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Publishable\\PublishableNotPublishedReasonResolver", [value])'

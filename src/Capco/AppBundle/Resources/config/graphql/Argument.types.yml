@@ -1,9 +1,9 @@
 Argument:
     type: object
-    inherits: [Node, Contribution, Reportable, TrashableContribution, ContributionWithAuthor, EditableContribution]
+    inherits: [Node, Publishable, Contribution, Reportable, TrashableContribution, ContributionWithAuthor, EditableContribution]
     config:
         description: "An argument"
-        interfaces: [Node, Contribution, Reportable, TrashableContribution, ContributionWithAuthor, EditableContribution]
+        interfaces: [Node, Publishable, Contribution, Reportable, TrashableContribution, ContributionWithAuthor, EditableContribution]
         fields:
             createdAt:
                 type: "DateTime!"
@@ -13,8 +13,6 @@ Argument:
             url:
                 resolve: "@=resolver('argument_url', [value])"
             expired:
-                type: "Boolean!"
-            published:
                 type: "Boolean!"
             type:
                 type: "ArgumentValue!"

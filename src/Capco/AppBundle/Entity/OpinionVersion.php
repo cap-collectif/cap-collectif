@@ -9,6 +9,7 @@ use Capco\AppBundle\Traits\DiffableTrait;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\ModerableTrait;
+use Capco\AppBundle\Traits\PublishableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
@@ -38,6 +39,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
     use ExpirableTrait;
     use TextableTrait;
     use ModerableTrait;
+    use PublishableTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="opinionVersions")

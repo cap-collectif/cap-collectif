@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import { connect, type MapStateToProps } from 'react-redux';
-import { Button } from 'react-bootstrap';
 import SourceActions from '../../../actions/SourceActions';
 import OpinionSourceVoteButton from './OpinionSourceVoteButton';
 import type { GlobalState } from '../../../types';
@@ -53,10 +52,8 @@ class OpinionSourceVoteBox extends React.Component<Props, State> {
             hasVoted={source.viewerHasVote || hasVoted}
             onClick={source.viewerHasVote || hasVoted ? this.deleteVote : this.vote}
           />
-        </form>
-        <Button className="btn--outline btn-dark-gray btn-xs opinion__votes-nb">
-          {source.votesCount + (hasVoted ? 1 : 0)}
-        </Button>
+        </form>{' '}
+        <span className="opinion__votes-nb">{source.votesCount + (hasVoted ? 1 : 0)}</span>
       </span>
     );
   }

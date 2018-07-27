@@ -11,6 +11,7 @@ use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Traits\PublishableTrait;
 use Capco\AppBundle\Traits\VotableOkNokMitigeTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
 use Capco\UserBundle\Entity\User;
@@ -37,6 +38,7 @@ class Opinion implements OpinionContributionInterface
     use ExpirableTrait;
     use TextableTrait;
     use ModerableTrait;
+    use PublishableTrait;
 
     public static $sortCriterias = [
         'opinion.sort.positions' => 'positions',
@@ -60,7 +62,7 @@ class Opinion implements OpinionContributionInterface
 
     /**
      * @Gedmo\Timestampable(on="change", field={"title", "body", "appendices"})
-     * @ORM\Column(name="updated_at", type="datetime")
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     protected $updatedAt;
 
@@ -149,8 +151,6 @@ class Opinion implements OpinionContributionInterface
         $this->sources = new ArrayCollection();
         $this->versions = new ArrayCollection();
         $this->appendices = new ArrayCollection();
-
-        $this->updatedAt = new \Datetime();
         $this->createdAt = new \Datetime();
     }
 
