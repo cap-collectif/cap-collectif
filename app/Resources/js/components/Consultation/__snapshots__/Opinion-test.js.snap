@@ -9,34 +9,137 @@ exports[`<Opinion /> renders correcty 1`] = `
   <div
     className="left-block"
   >
-    <Relay(OpinionPreview)
-      opinion={
+    <Connect(UserAvatar)
+      user={
         Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "author": Object {
-            "displayName": "",
-            "media": Object {
-              "url": "",
-            },
-            "show_url": "",
-            "vip": false,
+          "displayName": "",
+          "media": Object {
+            "url": "",
           },
-          "votes": Object {
-            "totalCount": 0,
-          },
-          "votesMitige": Object {
-            "totalCount": 0,
-          },
-          "votesNok": Object {
-            "totalCount": 0,
-          },
-          "votesOk": Object {
-            "totalCount": 0,
-          },
+          "show_url": "",
+          "vip": false,
         }
       }
     />
+    <div>
+      <OpinionInfos
+        opinion={
+          Object {
+            "$refType": null,
+            "argumentsCount": 0,
+            "author": Object {
+              "displayName": "",
+              "media": Object {
+                "url": "",
+              },
+              "show_url": "",
+              "vip": false,
+            },
+            "createdAt": "",
+            "id": "opinionId",
+            "pinned": true,
+            "section": Object {
+              "linkable": false,
+              "sourceable": true,
+              "title": "Section",
+              "versionable": true,
+              "voteWidgetType": 1,
+            },
+            "sourcesCount": 0,
+            "title": "title",
+            "updatedAt": "",
+            "url": "",
+            "versionsCount": 0,
+            "votesCount": 0,
+            "votesCountMitige": 0,
+            "votesCountNok": 0,
+            "votesCountOk": 0,
+          }
+        }
+        rankingThreshold={0}
+      />
+      <OpinionPreviewTitle
+        link={true}
+        opinion={
+          Object {
+            "$refType": null,
+            "argumentsCount": 0,
+            "author": Object {
+              "displayName": "",
+              "media": Object {
+                "url": "",
+              },
+              "show_url": "",
+              "vip": false,
+            },
+            "createdAt": "",
+            "id": "opinionId",
+            "pinned": true,
+            "section": Object {
+              "linkable": false,
+              "sourceable": true,
+              "title": "Section",
+              "versionable": true,
+              "voteWidgetType": 1,
+            },
+            "sourcesCount": 0,
+            "title": "title",
+            "updatedAt": "",
+            "url": "",
+            "versionsCount": 0,
+            "votesCount": 0,
+            "votesCountMitige": 0,
+            "votesCountNok": 0,
+            "votesCountOk": 0,
+          }
+        }
+        showTypeLabel={false}
+      />
+      <OpinionPreviewCounters
+        opinion={
+          Object {
+            "$refType": null,
+            "argumentsCount": 0,
+            "author": Object {
+              "displayName": "",
+              "media": Object {
+                "url": "",
+              },
+              "show_url": "",
+              "vip": false,
+            },
+            "createdAt": "",
+            "id": "opinionId",
+            "pinned": true,
+            "section": Object {
+              "linkable": false,
+              "sourceable": true,
+              "title": "Section",
+              "versionable": true,
+              "voteWidgetType": 1,
+            },
+            "sourcesCount": 0,
+            "title": "title",
+            "updatedAt": "",
+            "url": "",
+            "versionsCount": 0,
+            "votesCount": 0,
+            "votesCountMitige": 0,
+            "votesCountNok": 0,
+            "votesCountOk": 0,
+          }
+        }
+      />
+    </div>
   </div>
+  <VotePiechart
+    height="90px"
+    left={0}
+    mitige={0}
+    nok={0}
+    ok={0}
+    top={10}
+    width="145px"
+  />
 </ListGroupItem>
 `;

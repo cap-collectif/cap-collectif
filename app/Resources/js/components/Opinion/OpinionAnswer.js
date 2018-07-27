@@ -1,17 +1,15 @@
 // @flow
 import React from 'react';
 import classNames from 'classnames';
-import { graphql, createFragmentContainer } from 'react-relay';
 import AnswerBody from '../Answer/AnswerBody';
-import type { OpinionAnswer_opinion } from './__generated__/OpinionAnswer_opinion.graphql';
 
 type Props = {
-  opinion: OpinionAnswer_opinion,
+  answer?: Object,
 };
 
 class OpinionAnswer extends React.Component<Props> {
   render() {
-    const answer = this.props.opinion.answer;
+    const answer = this.props.answer;
     if (!answer) {
       return null;
     }
@@ -32,25 +30,4 @@ class OpinionAnswer extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(OpinionAnswer, {
-  opinion: graphql`
-    fragment OpinionAnswer_opinion on OpinionOrVersion {
-      ... on Opinion {
-        answer {
-          title
-          author {
-            vip
-          }
-        }
-      }
-      ... on Version {
-        answer {
-          title
-          author {
-            vip
-          }
-        }
-      }
-    }
-  `,
-});
+export default OpinionAnswer;

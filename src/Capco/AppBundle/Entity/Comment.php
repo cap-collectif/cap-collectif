@@ -1,23 +1,23 @@
 <?php
+
 namespace Capco\AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Traits\UuidTrait;
-use Capco\AppBundle\Model\Publishable;
-use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Model\Contribution;
+use Capco\AppBundle\Model\HasAuthorInterface;
+use Capco\AppBundle\Traits\ExpirableTrait;
 use Capco\AppBundle\Traits\PinnableTrait;
 use Capco\AppBundle\Traits\TextableTrait;
-use Capco\AppBundle\Traits\ExpirableTrait;
-use Capco\AppBundle\Traits\VotableOkTrait;
-use Capco\AppBundle\Traits\PublishableTrait;
-use Capco\AppBundle\Model\HasAuthorInterface;
 use Capco\AppBundle\Traits\TimestampableTrait;
-use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Entity\Interfaces\VotableInterface;
+use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Traits\ValidableTrait;
+use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\CommentRepository")
@@ -32,15 +32,9 @@ use Capco\AppBundle\Validator\Constraints as CapcoAssert;
  * })
  * @CapcoAssert\HasAuthor
  */
-abstract class Comment implements Publishable, Contribution, VotableInterface, HasAuthorInterface
+abstract class Comment implements Contribution, VotableInterface, HasAuthorInterface
 {
-    use VotableOkTrait;
-    use PinnableTrait;
-    use ExpirableTrait;
-    use UuidTrait;
-    use TextableTrait;
-    use TimestampableTrait;
-    use PublishableTrait;
+    use ValidableTrait, VotableOkTrait, PinnableTrait, ExpirableTrait, UuidTrait, TextableTrait, TimestampableTrait;
 
     public static $sortCriterias = [
         'date' => 'argument.sort.date',
@@ -148,11 +142,6 @@ abstract class Comment implements Publishable, Contribution, VotableInterface, H
     }
 
     public function getRelated()
-    {
-        return null;
-    }
-
-    public function getStep()
     {
         return null;
     }

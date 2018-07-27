@@ -1,17 +1,16 @@
 <?php
+
 namespace Capco\AppBundle\Entity;
 
-use Doctrine\ORM\Mapping\Index;
-use Doctrine\ORM\Mapping as ORM;
-use Capco\UserBundle\Entity\User;
-use Capco\AppBundle\Traits\IdTrait;
-use Capco\AppBundle\Model\Publishable;
-use Capco\AppBundle\Traits\ExpirableTrait;
-use Doctrine\ORM\Mapping\UniqueConstraint;
-use Capco\AppBundle\Model\VoteContribution;
-use Capco\AppBundle\Traits\PublishableTrait;
 use Capco\AppBundle\Model\HasAuthorInterface;
+use Capco\AppBundle\Model\VoteContribution;
+use Capco\AppBundle\Traits\ExpirableTrait;
+use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Index;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 
 /**
  * @ORM\Table(
@@ -65,12 +64,9 @@ use Capco\AppBundle\Traits\TimestampableTrait;
  *      "proposalCollect"   = "ProposalCollectVote",
  * })
  */
-abstract class AbstractVote implements Publishable, VoteContribution, HasAuthorInterface
+abstract class AbstractVote implements VoteContribution, HasAuthorInterface
 {
-    use ExpirableTrait;
-    use TimestampableTrait;
-    use IdTrait;
-    use PublishableTrait;
+    use ExpirableTrait, TimestampableTrait, IdTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="votes")

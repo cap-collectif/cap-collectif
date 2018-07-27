@@ -17,7 +17,6 @@ exports[`<OpinionBox /> should render correctly 1`] = `
     >
       <a
         className="pull-left btn btn-default opinion__header__back"
-        href="#"
       >
         <i
           className="cap cap-arrow-1-1"
@@ -50,7 +49,7 @@ exports[`<OpinionBox /> should render correctly 1`] = `
             }
           }
         >
-          sectionTitle
+          opinionType
         </p>
       </h2>
     </div>
@@ -66,40 +65,35 @@ exports[`<OpinionBox /> should render correctly 1`] = `
         <div
           className="left-block"
         >
-          <Relay(OpinionPreview)
+          <OpinionPreview
             link={false}
             opinion={
               Object {
-                "$fragmentRefs": null,
-                "$refType": null,
-                "__typename": "Opinion",
-                "section": Object {
-                  "color": "info",
-                  "title": "sectionTitle",
-                  "url": "#",
-                },
+                "answer": Object {},
                 "title": "title",
+                "type": Object {
+                  "color": "info",
+                  "title": "opinionType",
+                },
               }
             }
             opinionTerm={0}
             rankingThreshold={0}
+            showTypeLabel={false}
           />
         </div>
       </ListGroupItem>
     </ListGroup>
   </div>
-  <Relay(OpinionAppendices)
+  <OpinionAppendices
     opinion={
       Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "__typename": "Opinion",
-        "section": Object {
-          "color": "info",
-          "title": "sectionTitle",
-          "url": "#",
-        },
+        "answer": Object {},
         "title": "title",
+        "type": Object {
+          "color": "info",
+          "title": "opinionType",
+        },
       }
     }
   />
@@ -116,18 +110,15 @@ exports[`<OpinionBox /> should render correctly 1`] = `
     >
       title
     </p>
-    <Relay(OpinionBody)
+    <OpinionBody
       opinion={
         Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "__typename": "Opinion",
-          "section": Object {
-            "color": "info",
-            "title": "sectionTitle",
-            "url": "#",
-          },
+          "answer": Object {},
           "title": "title",
+          "type": Object {
+            "color": "info",
+            "title": "opinionType",
+          },
         }
       }
     />
@@ -146,52 +137,34 @@ exports[`<OpinionBox /> should render correctly 1`] = `
         }
       }
     >
-      <Relay(Connect(OpinionButtons))
+      <Connect(OpinionButtons)
         opinion={
           Object {
-            "$fragmentRefs": null,
-            "$refType": null,
-            "__typename": "Opinion",
-            "section": Object {
-              "color": "info",
-              "title": "sectionTitle",
-              "url": "#",
-            },
+            "answer": Object {},
             "title": "title",
+            "type": Object {
+              "color": "info",
+              "title": "opinionType",
+            },
           }
         }
       />
     </div>
-    <Relay(OpinionVotesBox)
+    <OpinionVotesBox
       opinion={
         Object {
-          "$fragmentRefs": null,
-          "$refType": null,
-          "__typename": "Opinion",
-          "section": Object {
-            "color": "info",
-            "title": "sectionTitle",
-            "url": "#",
-          },
+          "answer": Object {},
           "title": "title",
+          "type": Object {
+            "color": "info",
+            "title": "opinionType",
+          },
         }
       }
     />
   </div>
-  <Relay(OpinionAnswer)
-    opinion={
-      Object {
-        "$fragmentRefs": null,
-        "$refType": null,
-        "__typename": "Opinion",
-        "section": Object {
-          "color": "info",
-          "title": "sectionTitle",
-          "url": "#",
-        },
-        "title": "title",
-      }
-    }
+  <OpinionAnswer
+    answer={Object {}}
   />
 </div>
 `;

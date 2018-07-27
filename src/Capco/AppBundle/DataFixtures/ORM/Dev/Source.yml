@@ -4,37 +4,33 @@ Capco\AppBundle\Entity\Source:
     id: 'source1'
     title: Ma source
     body: blabla
-    author: '@user5'
-    opinion: '@opinion3'
-    category: '@Category2'
-    publishedAt: <(new \DateTime('2016-03-01'))>
+    Author: '@user5'
+    Opinion: '@opinion3'
+    Category: '@Category2'
     link: http://www.google.fr
   source{2..6}:
     id: 'source<current()>'
     title: <text(20)>
     body: <text(1000)>
-    author: '@user<numberBetween(1,3)>'
-    opinion: '@opinion3'
-    category: '@Category<numberBetween(1,5)>'
-    publishedAt: <(new \DateTime('2016-03-01'))>
+    Author: '@user<numberBetween(1,3)>'
+    Opinion: '@opinion3'
+    Category: '@Category<numberBetween(1,5)>'
     link: http://www.cap-collectif.com/
   source{7..10}:
     id: 'source<current()>'
     title: <text(20)>
     body: <text(1000)>
-    author: '@user<numberBetween(1,4)>'
-    opinion: '@opinion4'
-    category: '@Category<numberBetween(1,5)>'
-    publishedAt: <(new \DateTime('2016-03-01'))>
+    Author: '@user<numberBetween(1,4)>'
+    Opinion: '@opinion4'
+    Category: '@Category<numberBetween(1,5)>'
     link: http://www.cap-collectif.com/
   source{11..30}:
     id: 'source<current()>'
     title: <text(20)>
     body: <text(1000)>
-    author: '@user<numberBetween(1,4)>'
-    opinion: '@opinion4'
-    category: '@Category<numberBetween(1,5)>'
-    publishedAt: <(new \DateTime('2016-03-01'))>
+    Author: '@user<numberBetween(1,4)>'
+    Opinion: '@opinion4'
+    Category: '@Category<numberBetween(1,5)>'
     link: https://www.parlement-et-citoyens.fr/
 
   ## Sources on versions
@@ -42,54 +38,48 @@ Capco\AppBundle\Entity\Source:
     id: 'source31'
     title: Source sur une version
     body: <text(1000)>
-    author: '@user5'
+    Author: '@user5'
     opinionVersion: '@version1'
-    category: '@Category<numberBetween(1,5)>'
-    publishedAt: <(new \DateTime('2016-03-01'))>
+    Category: '@Category<numberBetween(1,5)>'
     link: https://www.parlement-et-citoyens.fr/
   source32:
     id: 'source32'
     title: <text(20)>
     body: <text(1000)>
-    author: '@user4'
+    Author: '@user4'
     opinionVersion: '@version1'
-    category: '@Category<numberBetween(1,5)>'
-    publishedAt: <(new \DateTime('2016-03-01'))>
+    Category: '@Category<numberBetween(1,5)>'
     link: https://toto.fr/
 
   source33:
     id: 'source33'
     title: <text(20)>
     body: <text(1000)>
-    author: '@user<numberBetween(1,4)>'
+    Author: '@user<numberBetween(1,4)>'
     opinion: '@opinion59'
-    category: '@Category<numberBetween(1,5)>'
-    publishedAt: <(new \DateTime('2016-03-01'))>
+    Category: '@Category<numberBetween(1,5)>'
     link: https://www.parlement-et-citoyens.fr/
   source34:
     id: 'source34'
     title: <text(20)>
     body: <text(1000)>
-    author: '@user<numberBetween(1,4)>'
+    Author: '@user<numberBetween(1,4)>'
     opinion: '@opinion59'
-    category: '@Category<numberBetween(1,5)>'
-    publishedAt: <(new \DateTime('2016-03-01'))>
+    Category: '@Category<numberBetween(1,5)>'
     link: https://toto.fr/
   source35:
     id: 'source35'
     title: Ma super source
     body: blablablabla
-    author: '@user5'
-    opinion: '@opinion2'
-    category: '@Category2'
-    publishedAt: <(new \DateTime('2016-03-01'))>
+    Author: '@user5'
+    Opinion: '@opinion2'
+    Category: '@Category2'
     link: http://www.google.fr
   source36:
     id: 'source36'
     title: Ma méga super source
     body: blablablabla-blablablabla
-    author: '@user5'
-    opinion: '@opinion2'
-    category: '@Category2'
-    publishedAt: <(new \DateTime('2016-03-01'))>
+    Author: '@user5'
+    Opinion: '@opinion2'
+    Category: '@Category2'
     link: http://www.bing.com

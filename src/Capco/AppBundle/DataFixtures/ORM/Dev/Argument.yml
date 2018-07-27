@@ -6,7 +6,6 @@ Capco\AppBundle\Entity\Argument:
     type: 0
     Author: '@user5'
     body: Coucou, je suis un bel argument !
-    publishedAt: <(new \DateTime('2015-01-01'))>
     isEnabled: true
     isTrashed: false
     moderationToken: 'argument1ModerationToken'
@@ -16,7 +15,6 @@ Capco\AppBundle\Entity\Argument:
     type: 0
     Author: '@user4'
     body: <text(300)>
-    publishedAt: <(new \DateTime('2015-01-01'))>
     isEnabled: true
     isTrashed: false
 
@@ -26,7 +24,6 @@ Capco\AppBundle\Entity\Argument:
     type: <numberBetween(0, 1)>
     Author: '@user<numberBetween(1, 5)>'
     body: <text(300)>
-    publishedAt: <(new \DateTime('2015-01-01'))>
     isEnabled: true
     isTrashed: false
 
@@ -36,7 +33,6 @@ Capco\AppBundle\Entity\Argument:
     type: <numberBetween(0, 1)>
     Author: '@user<numberBetween(1, 5)>'
     body: <text(300)>
-    publishedAt: <(new \DateTime('2015-01-01'))>
     isEnabled: true
     isTrashed: true
 
@@ -45,7 +41,6 @@ Capco\AppBundle\Entity\Argument:
     Opinion: '@opinion<numberBetween(3, 50)>'
     type: <numberBetween(0, 1)>
     Author: '@user<numberBetween(1, 5)>'
-    publishedAt: <(new \DateTime('2015-01-01'))>
     body: <text(300)>
     isEnabled: false
     isTrashed: true
@@ -55,7 +50,6 @@ Capco\AppBundle\Entity\Argument:
     Opinion: '@opinion<numberBetween(3, 50)>'
     type: <numberBetween(0, 1)>
     Author: '@user<numberBetween(1, 5)>'
-    publishedAt: <(new \DateTime('2015-01-01'))>
     body: <text(300)>
     isEnabled: false
     isTrashed: false
@@ -66,7 +60,6 @@ Capco\AppBundle\Entity\Argument:
     type: 0
     Author: '@user1'
     body: <text(300)>
-    publishedAt: <(new \DateTime('2015-01-01'))>
     isEnabled: true
     isTrashed: false
   argument202:
@@ -75,7 +68,6 @@ Capco\AppBundle\Entity\Argument:
     type: 0
     Author: '@user2'
     body: <text(300)>
-    publishedAt: <(new \DateTime('2015-01-01'))>
     isEnabled: true
     isTrashed: false
 
@@ -85,7 +77,6 @@ Capco\AppBundle\Entity\Argument:
     type: 0
     Author: '@user<numberBetween(1, 5)>'
     body: <text(300)>
-    publishedAt: <(new \DateTime('2015-01-01'))>
     isEnabled: true
     isTrashed: false
 
@@ -96,7 +87,6 @@ Capco\AppBundle\Entity\Argument:
     type: 0
     Author: '@user5'
     body: <text(300)>
-    publishedAt: <(new \DateTime('2015-01-01'))>
     isEnabled: true
     isTrashed: false
   argument205:
@@ -105,7 +95,6 @@ Capco\AppBundle\Entity\Argument:
     type: 1
     Author: '@user<numberBetween(1, 5)>'
     body: <text(300)>
-    publishedAt: <(new \DateTime('2015-01-01'))>
     isEnabled: true
     isTrashed: false
 
@@ -117,7 +106,6 @@ Capco\AppBundle\Entity\Argument:
     body: 'Que la force soit avec toi.'
     isEnabled: true
     isTrashed: false
-    publishedAt: <(new \DateTime('2016-03-01'))>
     createdAt: <(new \DateTime('2016-03-01'))>
     moderationToken: 'argument206ModerationToken'
 
@@ -128,7 +116,6 @@ Capco\AppBundle\Entity\Argument:
     Author: '@user1'
     body: 'Que la force soit avec toi et avec Yoda.'
     isEnabled: true
-    publishedAt: <(new \DateTime('2016-03-01'))>
     createdAt: <(new \DateTime('2016-03-01'))>
     updatedAt: <(new \DateTime('2017-03-01'))>
     moderationToken: 'argument207ModerationToken'
@@ -141,7 +128,6 @@ Capco\AppBundle\Entity\Argument:
     body: 'Le spam c cool'
     isEnabled: true
     isTrashed: true
-    publishedAt: <(new \DateTime('2016-03-01'))>
     createdAt: <(new \DateTime('2016-03-01'))>
     trashedAt: <(new \DateTime('2017-03-01'))>
     trashedReason: 'moderation-guideline-violation'
@@ -152,7 +138,6 @@ Capco\AppBundle\Entity\Argument:
     type: 1
     Author: '@user<numberBetween(1, 5)>'
     body: <text(300)>
-    publishedAt: <(new \DateTime('2016-03-01'))>
     isEnabled: true
     isTrashed: false
 
@@ -162,7 +147,6 @@ Capco\AppBundle\Entity\Argument:
     type: 1
     Author: '@user1'
     body: <text(300)>
-    publishedAt: <(new \DateTime('2016-03-01'))>
     isEnabled: true
     isTrashed: false
 
@@ -171,7 +155,6 @@ Capco\AppBundle\Entity\Argument:
     opinionVersion: '@version11'
     type: 1
     Author: '@user1'
-    publishedAt: <(new \DateTime('2016-03-01'))>
     body: <text(300)>
     isEnabled: true
     isTrashed: false

@@ -18,8 +18,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 class CreateCsvFromConsultationStepCommand extends Command
 {
     protected const ARGUMENT_PER_PAGE = 100;
-    protected const SOURCE_PER_PAGE = 100;
-
     protected const ARGUMENT_FRAGMENT = <<<'EOF'
 fragment argumentInfos on Argument {
   ...relatedInfos
@@ -220,15 +218,15 @@ EOF;
         'contributions_trashed' => 'trashed',
         'contributions_trashedAt' => 'trashedAt',
         'contributions_trashedReason' => 'trashedReason',
-        'contributions_votesCount' => 'votes.totalCount',
-        'contributions_votesCountOk' => 'votesOk.totalCount',
-        'contributions_votesCountMitige' => 'votesMitige.totalCount',
-        'contributions_votesCountNok' => 'votesNo.totalCount',
-        'contributions_argumentsCount' => 'arguments.totalCount',
-        'contributions_argumentsCountFor' => 'argumentsFor.totalCount',
-        'contributions_argumentsCountAgainst' => 'argumentsAgainst.totalCount',
-        'contributions_sourcesCount' => 'sources.totalCount',
-        'contributions_versionsCount' => 'versions.totalCount',
+        'contributions_votesCount' => 'votesCount',
+        'contributions_votesCountOk' => 'votesCountOk',
+        'contributions_votesCountMitige' => 'votesCountMitige',
+        'contributions_votesCountNok' => 'votesCountNok',
+        'contributions_argumentsCount' => 'argumentsCount',
+        'contributions_argumentsCountFor' => 'argumentsCountFor',
+        'contributions_argumentsCountAgainst' => 'argumentsCountAgainst',
+        'contributions_sourcesCount' => 'sourcesCount',
+        'contributions_versionsCount' => 'versionsCount',
         'contributions_arguments_related_id' => 'related.id',
         'contributions_arguments_related_kind' => 'related.kind',
         'contributions_arguments_id' => 'id',
@@ -310,8 +308,6 @@ EOF;
             $this->currentStep = $step;
             $this->generateSheet($step);
         }
-
-        $output->writeln('Done !');
     }
 
     protected function generateSheet(ConsultationStep $step): void
@@ -405,38 +401,20 @@ ${sourceFragment}
             expired
             published
             ...trashableInfos
-            votesOk: votes(first: 0, value: YES) {
-                totalCount
+            votesCount
+            votesCountOk
+            votesCountMitige
+            votesCountNok
+            argumentsCount
+            argumentsCountFor
+            argumentsCountAgainst
+            sourcesCount
+            versionsCount
+            votes {
+              ...voteInfos
             }
-            votesMitige: votes(first: 0, value: MITIGE) {
-                totalCount
-            }
-            votesNo: votes(first: 0, value: NO) {
-                totalCount
-            }
-            argumentsFor: arguments(first: 0, type: FOR) {
-                totalCount
-            }
-            argumentsAgainst: arguments(first: 0, type: AGAINST) {
-                totalCount
-            }
-            votes(first: 100) {
-                totalCount
-                edges {
-                    cursor
-                    node {
-                        ...voteInfos
-                    }
-                }
-                pageInfo {
-                    endCursor
-                    hasNextPage
-                }
-            }
-            arguments(first: 100) {
-              totalCount
+            arguments(first: ${argumentsPerPage}${argumentAfter}) {
               edges {
-                cursor
                 node {
                   ...argumentInfos
                 }
@@ -446,97 +424,51 @@ ${sourceFragment}
                 hasNextPage
               }
             }
-            sources(first: 100) {
-                totalCount
-                edges {
-                    cursor
-                    node {
-                      ...sourceInfos
-                    }
-                }
-                pageInfo {
-                    endCursor
-                    hasNextPage
-                }
+            sources {
+              ...sourceInfos
             }
             reportings {
               ...reportInfos
             }
             versions {
-                totalCount
+              ...relatedInfos
+              id
+              ...authorInfos
+              title
+              bodyText
+              comment
+              createdAt
+              updatedAt
+              url
+              expired
+              published
+              ...trashableInfos
+              votesCount
+              votesCountOk
+              votesCountMitige
+              votesCountNok
+              argumentsCount
+              argumentsCountFor
+              argumentsCountAgainst
+              sourcesCount
+              arguments {
                 edges {
-                    cursor
-                    node {
-                        ...relatedInfos
-                        id
-                        ...authorInfos
-                        title
-                        bodyText
-                        comment
-                        createdAt
-                        updatedAt
-                        url
-                        expired
-                        published
-                        ...trashableInfos
-                        votesOk: votes(first: 0, value: YES) {
-                          totalCount
-                        }
-                        votesMitige: votes(first: 0, value: MITIGE) {
-                            totalCount
-                        }
-                        votesNo: votes(first: 0, value: NO) {
-                            totalCount
-                        }
-                        argumentsFor: arguments(first: 0, type: FOR) {
-                            totalCount
-                        }
-                        argumentsAgainst: arguments(first: 0, type: AGAINST) {
-                            totalCount
-                        }
-                        arguments {
-                          totalCount
-                          edges {
-                            node {
-                              ...argumentInfos
-                            }
-                          }
-                          pageInfo {
-                            endCursor
-                            hasNextPage
-                          }
-                        }
-                        sources {
-                          totalCount
-                          edges {
-                            node {
-                              ...sourceInfos
-                            }
-                          }
-                          pageInfo {
-                              endCursor
-                              hasNextPage
-                          }
-                        }
-                        reportings {
-                          ...reportInfos
-                        }
-                        votes {
-                            totalCount
-                            edges {
-                                node {
-                                  ...voteInfos
-                                }
-                            }
-                            pageInfo {
-                              endCursor
-                              hasNextPage
-                            }
-                        }
-                    }
+                  node {
+                    ...argumentInfos
+                  }
                 }
-            }
-            }
+              }
+              sources {
+                ...sourceInfos
+              }
+              reportings {
+                ...reportInfos
+              }
+              votes {
+                ...voteInfos
+              }
+            }   
+          }
           }
         }
       }
@@ -597,28 +529,36 @@ EOF;
                 )
                 : '';
         }
+
         $this->writer->addRow($row);
 
         // we add Opinion's votes rows.
-        $this->connectionTraversor->traverse($contribution, 'votes', function ($edge) use (
-            $contribution
-        ) {
-            $this->addContributionVotesRow($contribution, $edge['node']);
-        });
+        $votes = Arr::path($contribution, 'votes');
 
-        // we add Opinion's sources rows.
-        $this->connectionTraversor->traverse($contribution, 'sources', function ($edge) use (
-            $contribution
-        ) {
-            $this->addContributionSourcesRow($contribution, $edge['node']);
-        });
+        foreach ($votes as $vote) {
+            $this->addContributionVotesRow($contribution, $vote);
+        }
 
-        // we add Opinion's arguments rows.
+        // we add Opinion's Sources rows.
+        $sources = Arr::path($contribution, 'sources');
+
+        foreach ($sources as $source) {
+            $this->addContributionSourcesRow($contribution, $source);
+        }
+
+        $argumentsQuery = $this->getContributionsArgumentsGraphQLQuery($contribution['id']);
+
+        $contributionWithArguments = $this->executor->execute(null, [
+            'query' => $argumentsQuery,
+            'variables' => [],
+        ])->toArray();
+
         $this->connectionTraversor->traverse(
-            $contribution,
-            'arguments',
+            $contributionWithArguments,
+            'data.node.arguments',
             function ($edge) use ($contribution) {
-                $this->addContributionArgumentRow($edge['node'], $contribution);
+                $argument = $edge['node'];
+                $this->addContributionArgumentRow($argument, $contribution);
             },
             function ($pageInfo) use ($contribution) {
                 return $this->getContributionsArgumentsGraphQLQuery(
@@ -650,7 +590,7 @@ ${authorFragment}
 ${trashableFragment}
 {
   node(id: "${contributionId}") {
-    ... on Argumentable {
+    ... on Opinion {
       arguments(first: ${argumentsPerPage}${argumentAfter}) {
         totalCount
         pageInfo {

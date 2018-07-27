@@ -6,7 +6,6 @@ Capco\AppBundle\Entity\PostComment:
     body: <text(300)>
     isEnabled: true
     isTrashed: false
-    publishedAt: <(new \DateTime('yesterday'))>
   pComment{6..50}:
     id: 'postComment<current()>'
     post: '@post1'
@@ -14,4 +13,3 @@ Capco\AppBundle\Entity\PostComment:
     body: <text(300)>
     isEnabled: <boolean()>
     isTrashed: <boolean()>
-    publishedAt: <(new \DateTime('yesterday'))>

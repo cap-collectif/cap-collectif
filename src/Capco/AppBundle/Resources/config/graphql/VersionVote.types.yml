@@ -1,16 +1,12 @@
 VersionVote:
   type: object
-  inherits:
-    - Publishable
   config:
-    interfaces: [Publishable, YesNoPairedVote]
+    interfaces: [YesNoPairedVote, ContributionWithAuthor]
     fields:
       id:
-        builder: "Relay::GlobalId"
-        builderConfig:
-          typeName: VersionVote
+        type: 'ID!'
       author:
-        type: 'User'
+        type: 'User!'
         description: 'The author of the contribution.'
         resolve: "@=resolver('proposition_vote_author', [value])"
       value:

@@ -1,10 +1,6 @@
 ProposalVote:
   type: object
-  inherits:
-    - Publishable
   config:
-    interfaces:
-      - Publishable
     fields:
       id:
         type: 'ID!'

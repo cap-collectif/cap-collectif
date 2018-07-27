@@ -615,27 +615,49 @@ overblog_graphql:
     class_namespace: "Capco\\AppBundle\\GraphQL\\__GENERATED__"
     schema:
       query: Query
-      mutation: Mutation
       # the name of extra types that can not be detected
       # by graphql-php during static schema analysis.
       # These types names should be explicitly declare here
       types:
-          - Argument
-          - CheckboxRequirement
-          - FirstnameRequirement
-          - LastnameRequirement
-          - MediaQuestion
-          - MediaResponse
-          - MultipleChoiceQuestion
-          - OpinionOrVersion
-          - OtherStep
-          - PhoneRequirement
-          - PresentationStep
-          - QuestionnaireStep
-          - RankingStep
-          - SimpleQuestion
-          - ValueResponse
-          - VersionVote
+        [
+          Argument,
+          CheckboxRequirement,
+          CollectStep,
+          Comment,
+          Consultation,
+          Event,
+          FirstnameRequirement,
+          Group,
+          LastnameRequirement,
+          MediaQuestion,
+          MediaResponse,
+          MultipleChoiceQuestion,
+          Opinion,
+          OpinionType,
+          OpinionVote,
+          OtherStep,
+          PhoneRequirement,
+          PresentationStep,
+          Project,
+          Proposal,
+          ProposalForm,
+          ProposalVote,
+          Questionnaire,
+          QuestionnaireStep,
+          RankingStep,
+          Reply,
+          Reporting,
+          Section,
+          SelectionStep,
+          SimpleQuestion,
+          Source,
+          SynthesisStep,
+          User,
+          ValueResponse,
+          Version,
+          VersionVote,
+        ]
+      mutation: Mutation
 
 limenius_react:
   default_rendering: 'both'

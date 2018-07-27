@@ -1,22 +1,25 @@
 // @flow
 import React from 'react';
 import moment from 'moment';
-import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage, FormattedDate } from 'react-intl';
 import UserLink from '../User/UserLink';
 import PinnedLabel from '../Utils/PinnedLabel';
-import type { OpinionInfos_opinion } from './__generated__/OpinionInfos_opinion.graphql';
 
 type Props = {
-  opinion: OpinionInfos_opinion,
-  rankingThreshold?: ?number,
+  opinion: Object,
+  rankingThreshold?: null | number,
   opinionTerm?: number,
 };
 
 class OpinionInfos extends React.Component<Props> {
+  isVersion = () => {
+    const { opinion } = this.props;
+    return !!opinion.parent;
+  };
+
   renderDate = () => {
     const { opinion } = this.props;
-    if (!Modernizr.intl || !opinion.createdAt) {
+    if (!Modernizr.intl) {
       return null;
     }
     return (
@@ -36,7 +39,7 @@ class OpinionInfos extends React.Component<Props> {
 
   renderEditionDate = () => {
     const { opinion } = this.props;
-    if (!Modernizr.intl || !opinion.updatedAt || !opinion.createdAt) {
+    if (!Modernizr.intl) {
       return null;
     }
 
@@ -60,20 +63,27 @@ class OpinionInfos extends React.Component<Props> {
     );
   };
 
+  renderAuthorName = () => {
+    const { opinion } = this.props;
+    if (opinion.author) {
+      return <UserLink user={opinion.author} className="author-name" />;
+    }
+
+    return <span className="author-name">{opinion.authorName}</span>;
+  };
+
   renderRankingLabel = () => {
     const { opinion, opinionTerm, rankingThreshold } = this.props;
     if (
-      opinion.__typename === 'Opinion' &&
       rankingThreshold &&
-      opinion.ranking &&
-      Number.isInteger(opinion.ranking) &&
-      Number.isInteger(rankingThreshold) &&
+      rankingThreshold !== null &&
+      opinion.ranking !== null &&
       opinion.ranking <= rankingThreshold
     ) {
       return (
         <span className="text-label text-label--green ml-10">
           <i className="cap cap-trophy" />
-          {opinion.__typename === 'Version' ? (
+          {this.isVersion() ? (
             <FormattedMessage
               id="opinion.ranking.versions"
               values={{
@@ -103,51 +113,16 @@ class OpinionInfos extends React.Component<Props> {
   };
 
   render() {
-    const { opinion } = this.props;
     return (
-      <p className="opinion__user">
-        {opinion.author && <UserLink user={opinion.author} />}
+      <p>
+        {this.renderAuthorName()}
         {this.renderDate()}
         {this.renderEditionDate()}
-        <PinnedLabel show={opinion.pinned || false} type="opinion" />
+        <PinnedLabel show={this.props.opinion.pinned || false} type="opinion" />
         {this.renderRankingLabel()}
       </p>
     );
   }
 }
 
-export default createFragmentContainer(OpinionInfos, {
-  opinion: graphql`
-    fragment OpinionInfos_opinion on Contribution {
-      ... on Opinion {
-        __typename
-        createdAt
-        updatedAt
-        pinned
-        ranking
-        author {
-          displayName
-          url
-        }
-      }
-      ... on Version {
-        __typename
-        author {
-          displayName
-          url
-        }
-        createdAt
-        updatedAt
-      }
-      ... on Source {
-        __typename
-        author {
-          displayName
-          url
-        }
-        createdAt
-        updatedAt
-      }
-    }
-  `,
-});
+export default OpinionInfos;

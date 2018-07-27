@@ -1,13 +1,12 @@
 <?php
+
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Model\Contribution;
-use Capco\AppBundle\Model\Publishable;
 use Capco\AppBundle\Model\VoteContribution;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\ExpirableTrait;
-use Capco\AppBundle\Traits\PublishableTrait;
 use Capco\AppBundle\Traits\HasResponsesTrait;
 use Capco\AppBundle\Traits\PrivatableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
@@ -19,14 +18,13 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 
 /**
  * @ORM\Table(name="reply")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ReplyRepository")
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="reply.missing_required_responses", formField="questionnaire")
  */
-class Reply implements Publishable, Contribution, VoteContribution
+class Reply implements Contribution, VoteContribution
 {
     use UuidTrait;
     use TimestampableTrait;
@@ -34,7 +32,6 @@ class Reply implements Publishable, Contribution, VoteContribution
     use PrivatableTrait;
     use ExpirableTrait;
     use HasResponsesTrait;
-    use PublishableTrait;
 
     /**
      * @Assert\NotNull()
@@ -102,11 +99,6 @@ class Reply implements Publishable, Contribution, VoteContribution
     public function getQuestionnaire(): ?Questionnaire
     {
         return $this->questionnaire;
-    }
-
-    public function getStep(): ?QuestionnaireStep
-    {
-        return $this->questionnaire && $this->questionnaire->getStep();
     }
 
     public function setQuestionnaire(Questionnaire $questionnaire): self
