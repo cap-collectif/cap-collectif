@@ -15,7 +15,7 @@ trait PublishableTrait
      */
     private $publishedAt = null;
 
-    public function isPublished(): boolean
+    public function isPublished(): bool
     {
         return $this->published;
     }

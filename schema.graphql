@@ -158,7 +158,7 @@ type AppendixType {
 }
 
 # An argument
-type Argument implements Node & Contribution & Reportable & TrashableContribution & ContributionWithAuthor & EditableContribution {
+type Argument implements Node & Publishable & Contribution & Reportable & TrashableContribution & ContributionWithAuthor & EditableContribution {
   # True if the contribution is trashed.
   trashed: Boolean!
 
@@ -192,10 +192,18 @@ type Argument implements Node & Contribution & Reportable & TrashableContributio
   # Identifies the date and time when the object was last updated.
   updatedAt: DateTime
 
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity was not published.
+  notPublishedReason: NotPublishedReason
+
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
   expired: Boolean!
-  published: Boolean!
 
   # The type.
   type: ArgumentValue!
@@ -1398,6 +1406,18 @@ interface Node {
   id: ID!
 }
 
+# 3 possible values
+enum NotPublishedReason {
+  # Author account isn't confirmed yet.
+  WAITING_AUTHOR_CONFIRMATION
+
+  # Author account isn't confirmed and the step has ended.
+  AUTHOR_NOT_CONFIRMED
+
+  # Author account was confirmed after the step has ended.
+  AUTHOR_CONFIRMED_TOO_LATE
+}
+
 # A user without account.
 type NotRegistered {
   # Email of the user.
@@ -1418,7 +1438,7 @@ type NotificationsConfiguration {
 }
 
 # A contribution
-type Opinion implements Node & Argumentable & Sourceable & Reportable & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
+type Opinion implements Node & Publishable & Argumentable & Sourceable & Reportable & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
   # True if the contribution is trashed.
   trashed: Boolean!
 
@@ -1471,6 +1491,15 @@ type Opinion implements Node & Argumentable & Sourceable & Reportable & Contribu
   # The available sources categories of to the sourceable.
   availableSourceCategories: [SourceCategory]
 
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity was not published.
+  notPublishedReason: NotPublishedReason
+
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
 
@@ -1479,7 +1508,6 @@ type Opinion implements Node & Argumentable & Sourceable & Reportable & Contribu
 
   # true if the contribution is expired.
   expired: Boolean!
-  published: Boolean!
   step: Consultation!
 
   # The viewer vote.
@@ -2192,6 +2220,18 @@ type ProposalVoteEdge {
 input ProposalVotesOrder {
   field: VoteOrderField! = CREATED_AT
   direction: OrderDirection! = DESC
+}
+
+# Entities that can be published.
+interface Publishable {
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity was not published.
+  notPublishedReason: NotPublishedReason
 }
 
 type Query {
@@ -3573,8 +3613,8 @@ enum VersionOrderField {
   # Allows ordering a list of versions by the number of votes it have.
   VOTES
 
-  # Allows ordering a list of versions by the number of votes it have.
-  COMMENTS
+  # Allows ordering a list of versions by the number of arguments it have.
+  ARGUMENTS
 
   # Allows ordering a list of versions by the number of votes ok it have.
   VOTES_OK

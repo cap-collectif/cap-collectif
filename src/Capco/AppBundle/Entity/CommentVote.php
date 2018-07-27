@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -37,6 +36,11 @@ class CommentVote extends AbstractVote
     public function getRelated()
     {
         return $this->comment;
+    }
+
+    public function getStep()
+    {
+        return null;
     }
 
     public function getKind(): string

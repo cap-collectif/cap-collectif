@@ -1,9 +1,9 @@
 <?php
-
 namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionVoteRepository")
@@ -65,6 +65,11 @@ class OpinionVote extends AbstractVote
     public function getRelated()
     {
         return $this->opinion;
+    }
+
+    public function getStep(): ?ConsultationStep
+    {
+        return $this->opinion->getStep();
     }
 
     public function getValue(): int
