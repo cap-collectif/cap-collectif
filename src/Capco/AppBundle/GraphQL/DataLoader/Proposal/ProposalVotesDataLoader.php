@@ -6,13 +6,12 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\DataLoader\BatchDataLoader;
+use Capco\AppBundle\Manager\RedisCacheManager;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
-use Overblog\DataLoader\Option;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
-use Psr\Cache\CacheItemPoolInterface;
 use Psr\Log\LoggerInterface;
 
 class ProposalVotesDataLoader extends BatchDataLoader
@@ -22,18 +21,35 @@ class ProposalVotesDataLoader extends BatchDataLoader
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
-        CacheItemPoolInterface $cache,
+        RedisCacheManager $cache,
         LoggerInterface $logger,
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
-        ProposalSelectionVoteRepository $proposalSelectionVoteRepository
+        ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+        string $cachePrefix
     ) {
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
-        parent::__construct([$this, 'all'], $promiseFactory, $logger, $cache);
+        parent::__construct([$this, 'all'], $promiseFactory, $logger, $cache, $cachePrefix);
     }
 
-    protected function serializeKey($key): array
+    public function invalidate(Proposal $proposal): void
     {
+        foreach ($this->getCacheKeys() as $cacheKey) {
+            $decoded = $this->getDecodedKeyFromKey($cacheKey);
+            if (strpos($decoded, $proposal->getId()) !== false) {
+                $this->cache->deleteItem($cacheKey);
+                $this->clear($cacheKey);
+                $this->logger->info('Invalidated cache for proposal ' . $proposal->getId());
+            }
+        }
+    }
+
+    protected function serializeKey($key)
+    {
+        if (\is_string($key)) {
+            return $key;
+        }
+
         return [
             'proposalId' => $key['proposal']->getId(),
             'stepId' => isset($key['step']) ? $key['step']->getId() : null,

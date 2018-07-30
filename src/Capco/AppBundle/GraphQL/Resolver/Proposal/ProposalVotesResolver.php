@@ -2,14 +2,8 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Proposal;
 
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
-use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesCountByStepDataLoader;
 use Capco\AppBundle\Repository\AbstractStepRepository;
-use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
-use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
-use GraphQL\Executor\Promise\PromiseAdapter;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Psr\Log\LoggerInterface;
@@ -39,10 +33,7 @@ class ProposalVotesResolver implements ResolverInterface
         if ($args->offsetExists('stepId')) {
             try {
                 $step = $this->abstractStepRepository->find($args->offsetGet('stepId'));
-                if (!$step) {
-                    // Maybe throw an exception
-                    return $this->resolveAllVotes($proposal, $args, $includeExpired);
-                }
+
                 return $this->proposalVotesDataLoader->load(
                     compact('proposal', 'step', 'args', 'includeExpired')
                 );
@@ -52,14 +43,6 @@ class ProposalVotesResolver implements ResolverInterface
             }
         }
 
-        return $this->resolveAllVotes($proposal, $args, $includeExpired);
-    }
-
-    public function resolveAllVotes(
-        Proposal $proposal,
-        Argument $args,
-        bool $includeExpired = false
-    ) {
         return $this->proposalVotesDataLoader->load(compact('proposal', 'args', 'includeExpired'));
     }
 }

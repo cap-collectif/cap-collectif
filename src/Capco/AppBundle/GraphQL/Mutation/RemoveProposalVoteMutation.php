@@ -70,6 +70,7 @@ class RemoveProposalVoteMutation
 
         $this->em->remove($vote);
         $this->em->flush();
+        $this->proposalVotesDataLoader->invalidate($proposal);
 
         return ['proposal' => $proposal, 'step' => $step, 'viewer' => $user];
     }

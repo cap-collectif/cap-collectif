@@ -115,7 +115,7 @@ class AddProposalVoteMutation
 
         try {
             $this->em->flush();
-            $this->proposalVotesDataLoader->invalidateAll($proposal, $step);
+            $this->proposalVotesDataLoader->invalidate($proposal);
         } catch (\Exception $e) {
             // Let's assume it's a Unique Exception
             throw new UserError('proposal.vote.already_voted');

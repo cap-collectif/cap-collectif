@@ -67,6 +67,11 @@ services:
     class: Capco\AppBundle\Adapter\RedisAdapter
     arguments: ['@snc_redis.default']
 
+  Capco\AppBundle\Manager\RedisCacheManager:
+    autowire: true
+    arguments:
+      $redisClient: '@snc_redis.default'
+
   mailer_service:
     class: Capco\AppBundle\Mailer\MailerService
     arguments:
