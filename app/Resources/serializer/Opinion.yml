@@ -1,121 +1,89 @@
 Capco\AppBundle\Entity\Opinion:
-  exclusion_policy: ALL
-  properties:
-    id:
-      expose: true
-      type: string
-      groups: [Opinions, OpinionVersions, OpinionLinkPreviews, Elasticsearch]
-    title:
-      expose: true
-      type: string
-      groups: [Opinions, OpinionVersions, OpinionLinkPreviews, Elasticsearch]
-    body:
-      expose: true
-      type: string
-      groups: [Opinions, OpinionVersions, Elasticsearch]
-    OpinionType:
-      expose: true
-      serialized_name: type
-      groups:
-        [Opinions, OpinionVersions, OpinionVersionPreviews, OpinionLinkPreviews, Elasticsearch]
-    createdAt:
-      expose: true
-      serialized_name: createdAt
-      type: DateTime
-      groups: [Opinions, OpinionLinkPreviews, Elasticsearch]
-    updatedAt:
-      expose: true
-      type: DateTime
-      serialized_name: updatedAt
-      groups: [Opinions, OpinionLinkPreviews, Elasticsearch]
-    versionsCount:
-      expose: true
-      type: integer
-      serialized_name: versionsCount
-      groups: [Opinions, OpinionLinkPreviews]
-    argumentsCount:
-      expose: true
-      type: integer
-      serialized_name: argumentsCount
-      groups: [Opinions, OpinionLinkPreviews]
-    sourcesCount:
-      expose: true
-      type: integer
-      serialized_name: sourcesCount
-      groups: [Opinions, OpinionLinkPreviews]
-    appendices:
-      expose: true
-      groups: [Opinions, OpinionVersions]
-    votes:
-      expose: true
-      groups: [Opinions]
-    votesCountNok:
-      expose: true
-      type: integer
-      serialized_name: votesCountNok
-      groups: [Opinions, OpinionLinkPreviews]
-    votesCountOk:
-      expose: true
-      type: integer
-      serialized_name: votesCountOk
-      groups: [Opinions, OpinionLinkPreviews]
-    votesCountMitige:
-      expose: true
-      type: integer
-      serialized_name: votesCountMitige
-      groups: [Opinions, OpinionLinkPreviews]
-    arguments:
-      expose: true
-      groups: [Opinions]
-    modals:
-      expose: true
-      groups: [Opinions, OpinionVersions]
-    Sources:
-      expose: true
-      groups: [Opinions]
-      serialized_name: sources
-    Author:
-      expose: true
-      type: Capco\UserBundle\Entity\User
-      serialized_name: author
-      groups: [Opinions, UserMedias, OpinionLinkPreviews]
-    answer:
-      expose: true
-      groups: [Opinions]
-    isTrashed:
-      expose: true
-      type: boolean
-      groups: [Opinions]
-      serialized_name: isTrashed
-    trashedReason:
-      expose: true
-      groups: [Opinions, Elasticsearch]
-      serialized_name: trashedReason
-    ranking:
-      expose: true
-      type: integer
-      groups: [Opinions]
-    step:
-      expose: true
-      groups: [Opinions]
-  virtual_properties:
-    canContribute:
-      serialized_name: isContribuable
-      type: boolean
-      groups: [Opinions, OpinionVersions]
-    getVotesCountAll:
-      serialized_name: votesCount
-      type: integer
-      groups: [Opinions, OpinionLinkPreviews]
-    getArgumentForCount:
-      type: integer
-      serialized_name: argumentsYesCount
-      groups: [Opinions]
-    getArgumentAgainstCount:
-      type: integer
-      serialized_name: argumentsNoCount
-      groups: [Opinions]
-    getStep:
-      type: object
-      serialized_name: step
-      groups: [Opinions]
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            type: string
+            groups: [Opinions, OpinionVersions, OpinionLinkPreviews, Elasticsearch]
+        title:
+            expose: true
+            type: string
+            groups: [Opinions, OpinionVersions, OpinionLinkPreviews, Elasticsearch]
+        body:
+            expose: true
+            type: string
+            groups: [Opinions, OpinionVersions, Elasticsearch]
+        OpinionType:
+            expose: true
+            serialized_name: type
+            groups: [Opinions, OpinionVersions, OpinionVersionPreviews, OpinionLinkPreviews, Elasticsearch]
+        createdAt:
+            expose: true
+            serialized_name: createdAt
+            type: DateTime
+            groups: [Opinions, OpinionLinkPreviews, Elasticsearch]
+        updatedAt:
+            expose: true
+            type: DateTime
+            serialized_name: updatedAt
+            groups: [Opinions, OpinionLinkPreviews, Elasticsearch]
+        appendices:
+            expose: true
+            groups: [Opinions, OpinionVersions]
+        votes:
+            expose: true
+            groups: [Opinions]
+        arguments:
+            expose: true
+            groups: [Opinions]
+        modals:
+            expose: true
+            groups: [Opinions, OpinionVersions]
+        sources:
+            expose: true
+            groups: [Opinions]
+        Author:
+            expose: true
+            type: Capco\UserBundle\Entity\User
+            serialized_name: author
+            groups: [Opinions, UserMedias, OpinionLinkPreviews]
+        answer:
+            expose: true
+            groups: [Opinions]
+        isTrashed:
+            expose: true
+            type: boolean
+            groups: [Opinions]
+            serialized_name: isTrashed
+        trashedReason:
+            expose: true
+            groups: [Opinions, Elasticsearch]
+            serialized_name: trashedReason
+        ranking:
+            expose: true
+            type: integer
+            groups: [Opinions]
+        step:
+            expose: true
+            groups: [Opinions]
+    virtual_properties:
+        canContribute:
+            serialized_name: isContribuable
+            type: boolean
+            groups: [Opinions, OpinionVersions]
+        getVotesCountAll:
+            serialized_name: votesCount
+            type: integer
+            groups: [Opinions, OpinionLinkPreviews]
+        getArgumentForCount:
+            type: integer
+            serialized_name: argumentsYesCount
+            groups: [Opinions]
+        getArgumentAgainstCount:
+            type: integer
+            serialized_name: argumentsNoCount
+            groups: [Opinions]
+        getStep:
+            type: object
+            serialized_name: step
+            groups: [Opinions]

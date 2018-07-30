@@ -1,37 +1,40 @@
 // @flow
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { COMMENT_SYSTEM_SIMPLE, COMMENT_SYSTEM_BOTH } from '../../constants/ArgumentConstants';
 import ArgumentList from './ArgumentList';
 import ArgumentCreate from './Creation/ArgumentCreate';
+import type { ArgumentsBox_opinion } from './__generated__/ArgumentsBox_opinion.graphql';
 
 type Props = {
-  opinion: Object,
+  opinion: ArgumentsBox_opinion,
 };
 
 class ArgumentsBox extends React.Component<Props> {
-  getCommentSystem = () => {
-    const { opinion } = this.props;
-    return opinion.parent ? opinion.parent.type.commentSystem : opinion.type.commentSystem;
-  };
-
   renderArgumentsForType = (type: 'FOR' | 'AGAINST' | 'SIMPLE') => {
+    const argumentable = this.props.opinion;
     return (
       <div id={`arguments-col--${type}`}>
         <div className="opinion opinion--add-argument block block--bordered">
           <ArgumentCreate
             form={`create-argument-${type}`}
             type={type}
-            argumentable={this.props.opinion}
+            argumentable={argumentable}
           />
         </div>
-        <ArgumentList type={type} argumentable={this.props.opinion} />
+        <ArgumentList type={type} argumentable={argumentable} />
       </div>
     );
   };
 
   render() {
-    if (this.getCommentSystem() === COMMENT_SYSTEM_BOTH) {
+    const { opinion } = this.props;
+    if (!opinion.section) {
+      return null;
+    }
+    const commentSystem = opinion.section.commentSystem;
+    if (commentSystem === COMMENT_SYSTEM_BOTH) {
       return (
         <Row>
           <Col sm={12} md={6}>
@@ -44,7 +47,7 @@ class ArgumentsBox extends React.Component<Props> {
       );
     }
 
-    if (this.getCommentSystem() === COMMENT_SYSTEM_SIMPLE) {
+    if (commentSystem === COMMENT_SYSTEM_SIMPLE) {
       return this.renderArgumentsForType('SIMPLE');
     }
 
@@ -52,4 +55,21 @@ class ArgumentsBox extends React.Component<Props> {
   }
 }
 
-export default ArgumentsBox;
+export default createFragmentContainer(ArgumentsBox, {
+  opinion: graphql`
+    fragment ArgumentsBox_opinion on OpinionOrVersion {
+      ...ArgumentCreate_argumentable
+      ...ArgumentList_argumentable
+      ... on Opinion {
+        section {
+          commentSystem
+        }
+      }
+      ... on Version {
+        section {
+          commentSystem
+        }
+      }
+    }
+  `,
+});

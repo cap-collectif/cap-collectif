@@ -1,5 +1,5 @@
 #!/bin/bash
 
-echo "Starting rabbitmq..."
+echo "[$(date -u)][RABBITMQ] Started!"
 
 exec rabbitmq-server

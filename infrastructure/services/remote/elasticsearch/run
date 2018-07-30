@@ -2,4 +2,5 @@
 
 chown -R capco:capco /etc/elasticsearch
 
+echo "[$(date -u)][ELASTICSEARCH] Started!"
 exec su capco -c "/etc/elasticsearch/bin/elasticsearch -Elogger.level=WARN"

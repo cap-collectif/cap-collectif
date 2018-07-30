@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
@@ -22,8 +21,13 @@ class ChangeArgumentMutation
     private $redisStorage;
     private $publisher;
 
-    public function __construct(EntityManagerInterface $em, FormFactory $formFactory, ArgumentRepository $argumentRepo, RedisStorageHelper $redisStorage, $publisher)
-    {
+    public function __construct(
+        EntityManagerInterface $em,
+        FormFactory $formFactory,
+        ArgumentRepository $argumentRepo,
+        RedisStorageHelper $redisStorage,
+        $publisher
+    ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
         $this->argumentRepo = $argumentRepo;
@@ -58,16 +62,14 @@ class ChangeArgumentMutation
             throw GraphQLException::fromFormErrors($form);
         }
 
-        $argument->setValidated(false);
         $argument->resetVotes();
 
         $this->em->flush();
 
-        $this->publisher->publish(CapcoAppBundleMessagesTypes::ARGUMENT_UPDATE, new Message(
-            json_encode([
-                'argumentId' => $argument->getId(),
-            ])
-        ));
+        $this->publisher->publish(
+            CapcoAppBundleMessagesTypes::ARGUMENT_UPDATE,
+            new Message(json_encode(['argumentId' => $argument->getId()]))
+        );
 
         return ['argument' => $argument];
     }

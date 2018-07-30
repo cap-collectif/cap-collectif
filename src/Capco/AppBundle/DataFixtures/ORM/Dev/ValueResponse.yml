@@ -87,11 +87,7 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
   response22:
     question: '@multiplequestion11'
     proposalEvaluation: '@proposalEvaluation2'
-    value: { 'labels': ['Réalisable', 'Importante', 'Compréhensible'], 'other': null }
-  response22-bis:
-    question: '@multiplequestion11'
-    proposalEvaluation: '@proposalEvaluation3'
-    value: { 'labels': ['Réalisable', 'Compréhensible', 'Importante'], 'other': null }
+    value: { 'labels': ['Réalisable', 'Importante'], 'other': null }
   response23:
     question: '@multiplequestion8'
     proposalEvaluation: '@proposalEvaluation2'

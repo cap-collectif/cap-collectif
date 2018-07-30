@@ -34,9 +34,7 @@ class ArgumentRepository extends EntityRepository
             ->leftJoin('a.opinion', 'o')
             ->leftJoin('o.step', 's')
             ->leftJoin('s.projectAbstractStep', 'cas')
-            ->leftJoin('cas.project', 'c')
-            ->where('a.validated = :validated')
-            ->setParameter('validated', false);
+            ->leftJoin('cas.project', 'c');
         return $qb->getQuery()->getArrayResult();
     }
 

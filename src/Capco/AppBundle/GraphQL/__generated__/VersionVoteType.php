@@ -27,8 +27,10 @@ final class VersionVoteType extends ObjectType implements GeneratedTypeInterface
                     'type' => Type::nonNull(Type::id()),
                     'args' => [
                     ],
-                    'resolve' => null,
-                    'description' => null,
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["relay_globalid_field", array(0 => $value, 1 => $info, 2 => null, 3 => "VersionVote")]);
+                    },
+                    'description' => 'The ID of an object',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -36,7 +38,7 @@ final class VersionVoteType extends ObjectType implements GeneratedTypeInterface
                     'access' => null,
                 ],
                 'author' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('User')),
+                    'type' => $globalVariable->get('typeResolver')->resolve('User'),
                     'args' => [
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
@@ -112,7 +114,7 @@ final class VersionVoteType extends ObjectType implements GeneratedTypeInterface
             ];
             },
             'interfaces' => function () use ($globalVariable) {
-                return [$globalVariable->get('typeResolver')->resolve('YesNoPairedVote'), $globalVariable->get('typeResolver')->resolve('ContributionWithAuthor')];
+                return [$globalVariable->get('typeResolver')->resolve('YesNoPairedVote')];
             },
             'isTypeOf' => null,
             'resolveField' => null,

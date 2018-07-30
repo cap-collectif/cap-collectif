@@ -238,21 +238,6 @@ services:
           alias: 'proposition_trashedAt',
           method: 'resolveTrashedAt',
         }
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'proposition_votesCount',
-          method: 'resolveContributionVotesCount',
-        }
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'proposition_argumentsCountFor',
-          method: 'resolveArgumentsCountFor',
-        }
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'proposition_argumentsCountAgainst',
-          method: 'resolveArgumentsCountAgainst',
-        }
       - { name: overblog_graphql.resolver, alias: 'argument_url', method: 'resolveArgumentUrl' }
       - {
           name: overblog_graphql.resolver,
@@ -271,7 +256,6 @@ services:
           alias: 'version_reportings',
           method: 'resolveVersionReportings',
         }
-      - { name: overblog_graphql.resolver, alias: 'version_votes', method: 'resolveVersionVotes' }
       - {
           name: overblog_graphql.resolver,
           alias: 'contribution_type',
@@ -630,4 +614,3 @@ services:
       - '@overblog_graphql.type_resolver'
     tags:
       - { name: overblog_graphql.resolver }
-
