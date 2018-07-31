@@ -28,17 +28,17 @@ class Project implements IndexableInterface
 {
     use UuidTrait, MetaDescriptionCustomCodeTrait, ProjectVisibilityTrait;
 
-    const FILTER_ALL = 'all';
+    public const FILTER_ALL = 'all';
 
-    const SORT_ORDER_PUBLISHED_AT = 0;
-    const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;
+    public const SORT_ORDER_PUBLISHED_AT = 0;
+    public const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;
 
-    const OPENING_STATUS_FUTURE = 0;
-    const OPENING_STATUS_OPENED = 1;
-    const OPENING_STATUS_ENDED = 2;
+    public const OPENING_STATUS_FUTURE = 0;
+    public const OPENING_STATUS_OPENED = 1;
+    public const OPENING_STATUS_ENDED = 2;
 
-    const OPINION_TERM_OPINION = 0;
-    const OPINION_TERM_ARTICLE = 1;
+    public const OPINION_TERM_OPINION = 0;
+    public const OPINION_TERM_ARTICLE = 1;
 
     public static $sortOrder = [
         'date' => self::SORT_ORDER_PUBLISHED_AT,
@@ -143,7 +143,7 @@ class Project implements IndexableInterface
     /**
      * @ORM\Column(name="video", type="string", nullable = true)
      */
-    private $video = null;
+    private $video;
 
     /**
      * @var
@@ -183,14 +183,14 @@ class Project implements IndexableInterface
      *
      * @ORM\Column(name="opinions_ranking_threshold", type="integer", nullable=true)
      */
-    private $opinionsRankingThreshold = null;
+    private $opinionsRankingThreshold;
 
     /**
      * @var int
      *
      * @ORM\Column(name="versions_ranking_threshold", type="integer", nullable=true)
      */
-    private $versionsRankingThreshold = null;
+    private $versionsRankingThreshold;
 
     /**
      * @ORM\Column(name="include_author_in_ranking", type="boolean")
@@ -214,8 +214,10 @@ class Project implements IndexableInterface
     private $visibility = ProjectVisibilityMode::VISIBILITY_ME;
 
     /**
-     * Constructor.
+     * @ORM\Column(name="proposal_follow_up", type="boolean", nullable=false)
      */
+    private $proposalFollowUp = false;
+
     public function __construct()
     {
         $this->themes = new ArrayCollection();
@@ -953,6 +955,7 @@ class Project implements IndexableInterface
         return false;
     }
 
+<<<<<<< master
     public function getVisibility(): int
     {
         return $this->visibility;
@@ -969,4 +972,17 @@ class Project implements IndexableInterface
     {
         return ProjectVisibilityMode::VISIBILITY_PUBLIC === $this->getVisibility();
     }
+=======
+    public function isProposalFollowUp(): bool
+    {
+        return $this->proposalFollowUp;
+    }
+
+    public function setProposalFollowUp(bool $proposalFollowUp = false): self
+    {
+        $this->proposalFollowUp = $proposalFollowUp;
+
+        return $this;
+    }
+>>>>>>> add option in bo
 }
