@@ -214,9 +214,9 @@ class Project implements IndexableInterface
     private $visibility = ProjectVisibilityMode::VISIBILITY_ME;
 
     /**
-     * @ORM\Column(name="proposal_follow_up", type="boolean", nullable=false)
+     * @ORM\Column(name="opinion_can_be_followed", type="boolean", nullable=false, options={"default": false})
      */
-    private $proposalFollowUp = false;
+    private $opinionCanBeFollowed = false;
 
     public function __construct()
     {
@@ -955,7 +955,6 @@ class Project implements IndexableInterface
         return false;
     }
 
-<<<<<<< master
     public function getVisibility(): int
     {
         return $this->visibility;
@@ -972,17 +971,16 @@ class Project implements IndexableInterface
     {
         return ProjectVisibilityMode::VISIBILITY_PUBLIC === $this->getVisibility();
     }
-=======
-    public function isProposalFollowUp(): bool
+
+    public function isOpinionCanBeFollowed(): bool
     {
-        return $this->proposalFollowUp;
+        return $this->opinionCanBeFollowed;
     }
 
-    public function setProposalFollowUp(bool $proposalFollowUp = false): self
+    public function setOpinionCanBeFollowed(bool $opinionCanBeFollowed = false): self
     {
-        $this->proposalFollowUp = $proposalFollowUp;
+        $this->opinionCanBeFollowed = $opinionCanBeFollowed;
 
         return $this;
     }
->>>>>>> add option in bo
 }

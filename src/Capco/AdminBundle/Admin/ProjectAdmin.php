@@ -318,7 +318,7 @@ class ProjectAdmin extends CapcoAdmin
 
         $formMapper->with('group.admin.parameters');
         if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
-            $formMapper->add('proposalFollowUp', null, [
+            $formMapper->add('opinionCanBeFollowed', null, [
                 'label' => 'enable-proposal-tracking',
                 'required' => false,
             ]);

@@ -245,7 +245,7 @@ class User extends BaseUser
 
     protected $alertExpirationSent = false;
 
-    protected $followingProposals;
+    protected $followingContributions;
 
     protected $notificationsConfiguration;
 
@@ -280,7 +280,7 @@ class User extends BaseUser
         $this->proposals = new ArrayCollection();
         $this->replies = new ArrayCollection();
         $this->userGroups = new ArrayCollection();
-        $this->followingProposals = new ArrayCollection();
+        $this->followingContributions = new ArrayCollection();
         $this->notificationsConfiguration = new UserNotificationsConfiguration();
         $this->archives = new ArrayCollection();
     }
@@ -1434,30 +1434,30 @@ class User extends BaseUser
         return $this;
     }
 
-    public function getFollowingProposals(): Collection
+    public function getFollowingContributions(): Collection
     {
-        return $this->followingProposals;
+        return $this->followingContributions;
     }
 
-    public function addFollowingProposal(Follower $followingProposal): self
+    public function addFollowingContribution(Follower $followingContribution): self
     {
-        if (!$this->followingProposals->contains($followingProposal)) {
-            $this->followingProposals->add($followingProposal);
+        if (!$this->followingContributions->contains($followingContribution)) {
+            $this->followingContributions->add($followingContribution);
         }
 
         return $this;
     }
 
-    public function removeFollowingProposal(Follower $followingProposal): self
+    public function removeFollowingContribution(Follower $followingContribution): self
     {
-        $this->followingProposals->removeElement($followingProposal);
+        $this->followingContributions->removeElement($followingContribution);
 
         return $this;
     }
 
-    public function setFollowingProposals(Collection $followingProposals): self
+    public function setFollowingContributions(Collection $followingContributions): self
     {
-        $this->followingProposals = $followingProposals;
+        $this->followingContributions = $followingContributions;
 
         return $this;
     }

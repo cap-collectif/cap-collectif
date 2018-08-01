@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\UuidTrait;
@@ -9,10 +8,10 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Table(name="user_following_proposal",
+ * @ORM\Table(name="user_following",
  *    uniqueConstraints={
- *        @UniqueConstraint(name="follower_unique",
- *            columns={"user_id", "proposal_id"})
+ *      @UniqueConstraint(name="follower_unique_proposal",columns={"user_id", "proposal_id"}),
+ *      @UniqueConstraint(name="follower_unique_opinion",columns={"user_id", "opinion_id"}),
  *    }
  * )
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\FollowerRepository")
@@ -29,20 +28,26 @@ class Follower
     protected $followedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="followingProposals")
+     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="followingContributions")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
     protected $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="followers")
-     * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
-     *
-     * @var Proposal
+     * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
     protected $proposal;
 
-    /** @ORM\Column(name="notified_of", type="string", nullable=false) */
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="followers")
+     * @ORM\JoinColumn(name="opinion_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
+     */
+    protected $opinion;
+
+    /**
+     * @ORM\Column(name="notified_of", type="string", nullable=false)
+     */
     protected $notifiedOf;
 
     public function getFollowedAt(): \DateTime
@@ -65,7 +70,7 @@ class Follower
     public function setUser(User $user): self
     {
         $this->user = $user;
-        $user->addFollowingProposal($this);
+        $user->addFollowingContribution($this);
 
         return $this;
     }
