@@ -114,6 +114,26 @@ class ApiContext extends ApplicationContext
     }
 
     /**
+     * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid source json$/
+     *
+     * @param mixed $method
+     * @param mixed $url
+     */
+    public function iSendSourceRequest($method, $url)
+    {
+        $json = <<<'EOF'
+        {
+            "link": "http://google.com",
+            "title": "Je suis une source",
+            "body": "<div>Jai un corps mais pas de bras :'(</div>",
+            "Category": "category2"
+        }
+EOF;
+
+        $this->iSendARequestWithJson($method, $url, $json);
+    }
+
+    /**
      * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid opinion json$/
      *
      * @param mixed $method

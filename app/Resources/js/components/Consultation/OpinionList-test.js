@@ -3,13 +3,13 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { OpinionList } from './OpinionList';
-import { $refType, $fragmentRefs, intlMock } from '../../mocks';
+import { $refType, intlMock } from '../../mocks';
 
 describe('<OpinionList />', () => {
   const props = {
     section: {
-      $fragmentRefs,
       $refType,
+      appendixTypes: [],
       color: 'red',
       contribuable: true,
       contributionsCount: 0,
@@ -17,7 +17,7 @@ describe('<OpinionList />', () => {
       slug: 'slug',
       url: 'https://capco.dev',
     },
-    consultation: { id: 'consultation1', opinionCountShownBySection: 5, $refType, $fragmentRefs },
+    consultation: {},
     intl: intlMock,
   };
 

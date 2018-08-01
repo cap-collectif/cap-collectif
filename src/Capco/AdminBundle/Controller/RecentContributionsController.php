@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AdminBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -17,6 +18,7 @@ class RecentContributionsController extends Controller
     public function indexAction()
     {
         $resolver = $this->get('capco_admin.recent_contributions_resolver');
+
         $contributions = $resolver->getRecentContributions();
 
         return [
@@ -70,11 +72,16 @@ class RecentContributionsController extends Controller
             throw $this->createNotFoundException('Contribution not found');
         }
 
+        $contribution->setValidated(true);
         $em->flush();
 
         $this->addFlash(
             'sonata_flash_success',
-            $this->get('translator')->trans('admin.global.validate', [], 'CapcoAppBundle')
+            $this->get('translator')->trans(
+                'admin.global.validate',
+                [],
+                'CapcoAppBundle'
+            )
         );
 
         return $this->redirectToRoute('capco_admin_contributions_index');
@@ -99,6 +106,7 @@ class RecentContributionsController extends Controller
 
         if ('POST' === $request->getMethod()) {
             $motives = $request->get('motives');
+            $contribution->setValidated(true);
             $contribution->setIsEnabled(false);
             $contribution->setIsTrashed(true);
             $contribution->setTrashedReason($motives);
@@ -108,23 +116,23 @@ class RecentContributionsController extends Controller
 
             $this->addFlash(
                 'sonata_flash_success',
-                $this->get('translator')->trans('admin.global.unpublish', [], 'CapcoAppBundle')
+                $this->get('translator')->trans(
+                    'admin.global.unpublish',
+                    [],
+                    'CapcoAppBundle'
+                )
             );
 
             return $this->redirectToRoute('capco_admin_contributions_index');
         }
 
-        return $this->render(
-            'CapcoAdminBundle:RecentContributions:confirm.html.twig',
-            [
-                'type' => $type,
-                'id' => $id,
-                'del_action' => 'unpublish',
-                'base_template' => 'CapcoAdminBundle::standard_layout.html.twig',
-                'admin_pool' => $this->get('sonata.admin.pool'),
-            ],
-            null
-        );
+        return $this->render('CapcoAdminBundle:RecentContributions:confirm.html.twig', [
+            'type' => $type,
+            'id' => $id,
+            'del_action' => 'unpublish',
+            'base_template' => 'CapcoAdminBundle::standard_layout.html.twig',
+            'admin_pool' => $this->get('sonata.admin.pool'),
+        ], null);
     }
 
     /**
@@ -146,6 +154,7 @@ class RecentContributionsController extends Controller
 
         if ('POST' === $request->getMethod()) {
             $motives = $request->get('motives');
+            $contribution->setValidated(true);
             $contribution->setIsTrashed(true);
             $contribution->setTrashedReason($motives);
             $contribution->setTrashedAt(new \DateTime());
@@ -154,22 +163,22 @@ class RecentContributionsController extends Controller
 
             $this->addFlash(
                 'sonata_flash_success',
-                $this->get('translator')->trans('admin.global.trash', [], 'CapcoAppBundle')
+                $this->get('translator')->trans(
+                    'admin.global.trash',
+                    [],
+                    'CapcoAppBundle'
+                )
             );
 
             return $this->redirectToRoute('capco_admin_contributions_index');
         }
 
-        return $this->render(
-            'CapcoAdminBundle:RecentContributions:confirm.html.twig',
-            [
-                'type' => $type,
-                'id' => $id,
-                'del_action' => 'trash',
-                'base_template' => 'CapcoAdminBundle::standard_layout.html.twig',
-                'admin_pool' => $this->get('sonata.admin.pool'),
-            ],
-            null
-        );
+        return $this->render('CapcoAdminBundle:RecentContributions:confirm.html.twig', [
+            'type' => $type,
+            'id' => $id,
+            'del_action' => 'trash',
+            'base_template' => 'CapcoAdminBundle::standard_layout.html.twig',
+            'admin_pool' => $this->get('sonata.admin.pool'),
+        ], null);
     }
 }

@@ -1,8 +1,0 @@
-DeleteOpinionInput:
-    type: relay-mutation-input
-    config:
-        description: "Remove an opinion"
-        fields:
-            opinionId:
-              type: "ID!"
-              description: "The opinion id"

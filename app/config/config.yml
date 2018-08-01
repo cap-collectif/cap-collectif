@@ -67,7 +67,8 @@ parameters:
   env(SYMFONY_USE_ASSETIC_CONTROLLER): true
   env(SYMFONY_FACEBOOK_APP_ID): ***REMOVED***
   env(SYMFONY_FACEBOOK_APP_SECRET): ***REMOVED***
-  env(SYMFONY_GOOGLE_APP_ID): ***REMOVED***
+  env(SYMFONY_GOOGLE_APP_ID):
+    ***REMOVED***
   env(SYMFONY_GOOGLE_APP_SECRET): ***REMOVED***
   env(SYMFONY_JWT_TOKEN_TTL): 86400
   env(SYMFONY_LANGUAGE_ANALYZER): french
@@ -84,9 +85,6 @@ parameters:
 
 framework:
   secret: '%secret%'
-  cache:
-    app: cache.adapter.redis
-    default_redis_provider: "redis://%redis_host%"
   router:
     resource: '%kernel.root_dir%/config/routing.yml'
     strict_requirements: null
@@ -603,15 +601,10 @@ exercise_html_purifier:
 hslavich_simplesamlphp:
   sp: '%saml_sp%'
 
-overblog_dataloader:
-  defaults:
-    promise_adapter: 'overblog_dataloader.webonyx_graphql_sync_promise_adapter'
 overblog_graphql:
   security:
     query_max_depth: false
     query_max_complexity: false
-  services:
-        promise_adapter: "webonyx_graphql.sync_promise_adapter"
   definitions:
     show_debug_info: '%kernel.debug%'
     # internal_error_message: "An error occurred, please retry later or contact us!"
@@ -622,27 +615,49 @@ overblog_graphql:
     class_namespace: "Capco\\AppBundle\\GraphQL\\__GENERATED__"
     schema:
       query: Query
-      mutation: Mutation
       # the name of extra types that can not be detected
       # by graphql-php during static schema analysis.
       # These types names should be explicitly declare here
       types:
-          - Argument
-          - CheckboxRequirement
-          - FirstnameRequirement
-          - LastnameRequirement
-          - MediaQuestion
-          - MediaResponse
-          - MultipleChoiceQuestion
-          - OpinionOrVersion
-          - OtherStep
-          - PhoneRequirement
-          - PresentationStep
-          - QuestionnaireStep
-          - RankingStep
-          - SimpleQuestion
-          - ValueResponse
-          - VersionVote
+        [
+          Argument,
+          CheckboxRequirement,
+          CollectStep,
+          Comment,
+          Consultation,
+          Event,
+          FirstnameRequirement,
+          Group,
+          LastnameRequirement,
+          MediaQuestion,
+          MediaResponse,
+          MultipleChoiceQuestion,
+          Opinion,
+          OpinionType,
+          OpinionVote,
+          OtherStep,
+          PhoneRequirement,
+          PresentationStep,
+          Project,
+          Proposal,
+          ProposalForm,
+          ProposalVote,
+          Questionnaire,
+          QuestionnaireStep,
+          RankingStep,
+          Reply,
+          Reporting,
+          Section,
+          SelectionStep,
+          SimpleQuestion,
+          Source,
+          SynthesisStep,
+          User,
+          ValueResponse,
+          Version,
+          VersionVote,
+        ]
+      mutation: Mutation
 
 limenius_react:
   default_rendering: 'both'

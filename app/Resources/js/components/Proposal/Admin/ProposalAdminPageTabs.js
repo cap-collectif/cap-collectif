@@ -34,7 +34,6 @@ export class ProposalAdminPageTabs extends Component<Props> {
             <ProposalAdminSelections proposal={proposal} />
           </Tab>
           <Tab eventKey={3} title={intl.formatMessage({ id: 'proposal.admin.news' })}>
-            {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
             <ProposalAdminNewsForm proposal={proposal} />
           </Tab>
           <Tab
@@ -45,7 +44,6 @@ export class ProposalAdminPageTabs extends Component<Props> {
                 <span className="badge ml-10">{proposal.allFollowers.totalCount}</span>
               </div>
             }>
-            {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
             <ProposalAdminFollowers proposal={proposal} />
           </Tab>
           <Tab eventKey={5} title={intl.formatMessage({ id: 'proposal.admin.notation' })}>

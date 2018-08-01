@@ -3,25 +3,21 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { OpinionCreateForm } from './OpinionCreateForm';
-import { formMock, $refType } from '../../../mocks';
+import { formMock } from '../../../mocks';
 
 describe('<OpinionCreateForm />', () => {
   const props = {
     ...formMock,
-    consultation: {
-      $refType,
-      id: '1',
-      project: {
-        id: '1',
-      },
+    projectId: '1',
+    stepId: '1',
+    step: {
       titleHelpText: null,
       descriptionHelpText: null,
     },
-    section: {
-      $refType,
-      id: 'section1',
+    opinionType: {
       appendixTypes: [
         {
+          type: '1',
           id: '1',
           title: 'appendice',
         },

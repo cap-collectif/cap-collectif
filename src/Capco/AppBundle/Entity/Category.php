@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\UuidTrait;
@@ -8,7 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="category")
- * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\CategoryRepository")
+ * @ORM\Entity
  */
 class Category
 {
@@ -26,30 +27,35 @@ class Category
     private $slug;
 
     /**
+     * @var bool
+     *
      * @ORM\Column(name="isEnabled", type="boolean")
      */
     private $isEnabled;
 
     /**
+     * @var \DateTime
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 
     /**
+     * @var \DateTime
      * @Gedmo\Timestampable(on="change", field={"title"})
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Source", mappedBy="category",  cascade={"persist", "remove"}, orphanRemoval=true)
+     * @var
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Source", mappedBy="Category",  cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private $sources;
+    private $Sources;
 
     public function __construct()
     {
-        $this->sources = new ArrayCollection();
+        $this->Sources = new ArrayCollection();
         $this->updatedAt = new \Datetime();
     }
 
@@ -65,69 +71,124 @@ class Category
         }
     }
 
-    public function getTitle(): ?string
+    /**
+     * Get title.
+     *
+     * @return string
+     */
+    public function getTitle()
     {
         return $this->title;
     }
 
-    public function setTitle(?string $title): self
+    /**
+     * Set title.
+     *
+     * @param string $title
+     *
+     * @return Category
+     */
+    public function setTitle($title)
     {
         $this->title = $title;
 
         return $this;
     }
 
-    public function getSlug(): ?string
+    /**
+     * @return mixed
+     */
+    public function getSlug()
     {
         return $this->slug;
     }
 
-    public function setSlug(?string $slug): self
+    /**
+     * @param $slug
+     *
+     * @return $this
+     */
+    public function setSlug($slug)
     {
         $this->slug = $slug;
 
         return $this;
     }
 
-    public function getIsEnabled(): bool
+    /**
+     * Get isEnabled.
+     *
+     * @return bool
+     */
+    public function getIsEnabled()
     {
         return $this->isEnabled;
     }
 
-    public function setIsEnabled(bool $isEnabled): self
+    /**
+     * Set isEnabled.
+     *
+     * @param bool $isEnabled
+     *
+     * @return Category
+     */
+    public function setIsEnabled($isEnabled)
     {
         $this->isEnabled = $isEnabled;
 
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTime
+    /**
+     * Get createdAt.
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
     {
         return $this->createdAt;
     }
 
-    public function getUpdatedAt(): ?\DateTime
+    /**
+     * Get updatedAt.
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
     {
         return $this->updatedAt;
     }
 
+    /**
+     * @return mixed
+     */
     public function getSources()
     {
-        return $this->sources;
+        return $this->Sources;
     }
 
-    public function addSource(Source $source): self
+    /**
+     * @param Source $source
+     *
+     * @return $this
+     */
+    public function addSource(Source $source)
     {
-        if (!$this->sources->contains($source)) {
-            $this->sources->add($source);
+        if (!$this->Sources->contains($source)) {
+            $this->Sources->add($source);
         }
 
         return $this;
     }
 
-    public function removeSource(Source $source): self
+    /**
+     * @param Source $source
+     *
+     * @return $this
+     */
+    public function removeSource(Source $source)
     {
-        $this->sources->removeElement($source);
+        $this->Sources->removeElement($source);
 
         return $this;
     }

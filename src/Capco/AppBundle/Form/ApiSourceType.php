@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Form\Type\PurifiedTextareaType;
@@ -15,8 +16,12 @@ class ApiSourceType extends AbstractType
         $builder
             ->add('title', PurifiedTextType::class, ['required' => true])
             ->add('body', PurifiedTextareaType::class, ['required' => true])
-            ->add('category', null, ['required' => true])
-            ->add('link', UrlType::class, ['required' => true, 'default_protocol' => 'http']);
+            ->add('Category', null, ['required' => true])
+            ->add('link', UrlType::class, [
+                'required' => true,
+                'default_protocol' => 'http',
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

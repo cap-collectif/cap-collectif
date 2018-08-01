@@ -1,9 +1,8 @@
 #!/bin/bash
 
-echo "[$(date -u)][SUPERVISORD] Waiting for php-fpm..."
 while [ ! -f /var/run/php7.1-fpm.pid ] > /dev/null 2>&1;
   do sleep 1
 done
 
-echo "[$(date -u)][SUPERVISORD] Started!"
+echo "Starting Supervisor..."
 exec supervisord --configuration=/etc/supervisord/supervisord.conf --loglevel=warn

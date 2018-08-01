@@ -1,7 +1,6 @@
 Capco\AppBundle\Entity\OpinionVersion:
   version1:
     id: 'version1'
-    createdAt: <(new \DateTime('2015-01-01'))>
     title: Modification 1
     body: |
       <p><text(100)></p>
@@ -16,7 +15,6 @@ Capco\AppBundle\Entity\OpinionVersion:
     moderationToken: 'version1ModerationToken'
   version2:
     id: 'version2'
-    createdAt: <(new \DateTime('2015-01-02'))>
     title: Modification 2
     body: |
       <p><text(100)></p>
@@ -29,7 +27,6 @@ Capco\AppBundle\Entity\OpinionVersion:
     ranking: <numberBetween(1,5)>
   version3:
     id: 'version3'
-    createdAt: <(new \DateTime('2015-01-03'))>
     title: Modification 3
     body: |
       <p><text(100)></p>

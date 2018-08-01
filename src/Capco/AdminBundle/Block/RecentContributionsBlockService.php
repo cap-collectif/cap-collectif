@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AdminBundle\Block;
 
 use Capco\AdminBundle\Resolver\RecentContributionsResolver;
@@ -15,12 +16,10 @@ class RecentContributionsBlockService extends BaseBlockService
 {
     protected $resolver;
 
-    public function __construct(
-        $name,
-        EngineInterface $templating,
-        RecentContributionsResolver $resolver
-    ) {
+    public function __construct($name, EngineInterface $templating, RecentContributionsResolver $resolver)
+    {
         parent::__construct($name, $templating);
+
         $this->resolver = $resolver;
     }
 
