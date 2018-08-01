@@ -2,8 +2,6 @@
 namespace Capco\AppBundle\Traits;
 
 use Capco\AppBundle\Entity\ProjectVisibilityMode;
-use Capco\AppBundle\Repository\ProjectRepository;
-use Capco\UserBundle\Entity\User;
 
 trait ProjectVisibilityTrait
 {
