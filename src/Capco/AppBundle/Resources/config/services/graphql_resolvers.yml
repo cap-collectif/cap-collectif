@@ -405,14 +405,7 @@ services:
     arguments: ['@capco.blog.post.repository', '@monolog.logger']
 
   Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalVotesResolver:
-    class: Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalVotesResolver
-    tags:
-      - { name: overblog_graphql.resolver }
-    arguments:
-      - '@capco.abstract_step.repository'
-      - '@capco.proposal_collect_vote.repository'
-      - '@capco.proposal_selection_vote.repository'
-      - '@monolog.logger'
+    autowire: true
 
   Capco\AppBundle\GraphQL\Resolver\User\ProposalVotesResolver:
     class: Capco\AppBundle\GraphQL\Resolver\User\ProposalVotesResolver
@@ -516,12 +509,7 @@ services:
       - { name: overblog_graphql.resolver }
 
   Capco\AppBundle\GraphQL\Resolver\ViewerStepVotesResolver:
-    class: Capco\AppBundle\GraphQL\Resolver\ViewerStepVotesResolver
-    arguments:
-      - '@Capco\AppBundle\GraphQL\Resolver\User\ProposalVotesResolver'
-      - '@logger'
-    tags:
-      - { name: overblog_graphql.resolver }
+    autowire: true
 
   Capco\AppBundle\GraphQL\Resolver\Reply\ReplyResponsesResolver:
     class: Capco\AppBundle\GraphQL\Resolver\Reply\ReplyResponsesResolver

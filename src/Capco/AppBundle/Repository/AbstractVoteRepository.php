@@ -1,7 +1,8 @@
 <?php
-
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
@@ -11,11 +12,10 @@ class AbstractVoteRepository extends EntityRepository
     public function countNotExpired(): int
     {
         return $this->createQueryBuilder('v')
-          ->select('COUNT(DISTINCT v.id)')
-          ->andWhere('v.expired = false')
-          ->getQuery()
-          ->getSingleScalarResult()
-          ;
+            ->select('COUNT(DISTINCT v.id)')
+            ->andWhere('v.expired = false')
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 
     public function countAllByAuthor(User $user): int
@@ -24,18 +24,14 @@ class AbstractVoteRepository extends EntityRepository
         $qb
             ->select('count(DISTINCT v)')
             ->andWhere('v.user = :author')
-            ->setParameter('author', $user)
-        ;
-
+            ->setParameter('author', $user);
         return $qb->getQuery()->getSingleScalarResult();
     }
 
     public function findAllByAuthor(User $user): array
     {
         $qb = $this->createQueryBuilder('v');
-        $qb
-            ->andWhere('v.user = :author')
-            ->setParameter('author', $user);
+        $qb->andWhere('v.user = :author')->setParameter('author', $user);
 
         return $qb->getQuery()->getResult();
     }
@@ -48,34 +44,29 @@ class AbstractVoteRepository extends EntityRepository
      */
     public function getHistoryFor($objectType, $object)
     {
-        $qb = $this->getEntityManager()->createQueryBuilder()
+        $qb = $this->getEntityManager()
+            ->createQueryBuilder()
             ->from(sprintf('Capco\\AppBundle\\Entity\\%sVote', ucfirst($objectType)), 'v')
             ->andWhere('v.expired = false')
-            ->addOrderBy('v.createdAt', 'ASC')
-        ;
-
+            ->addOrderBy('v.createdAt', 'ASC');
         if (\in_array($objectType, ['opinion', 'opinionVersion'], true)) {
             $qb
                 ->addOrderBy('v.updatedAt', 'ASC')
                 ->addSelect('v.updatedAt', 'v.value')
                 ->andWhere(sprintf('v.%s = :object', $objectType))
-                ->setParameter('object', $object)
-            ;
+                ->setParameter('object', $object);
         }
 
         $votes = $qb->getQuery()->getScalarResult();
         $result = [];
-        $counts = [
-            'date' => '',
-            '-1' => 0,
-            '0' => 0,
-            '1' => 0,
-        ];
+        $counts = ['date' => '', '-1' => 0, '0' => 0, '1' => 0];
 
         foreach ($votes as $i => $vote) {
             if (isset($counts[$vote['value']])) {
                 ++$counts[$vote['value']];
-                $counts['date'] = (new \DateTime(isset($vote['updatedAt']) ? $vote['updatedAt'] : $vote['createdAt']))->getTimestamp();
+                $counts['date'] = (new \DateTime(
+                    isset($vote['updatedAt']) ? $vote['updatedAt'] : $vote['createdAt']
+                ))->getTimestamp();
                 $result[] = array_values($counts);
             }
         }
@@ -133,6 +124,7 @@ class AbstractVoteRepository extends EntityRepository
                     }
                 }
             } catch (EntityNotFoundException $e) {
+
             }
         }
 
@@ -141,18 +133,17 @@ class AbstractVoteRepository extends EntityRepository
 
     public function getByObjectUser($objectType, $object, $user)
     {
-        $qb = $this->getEntityManager()->createQueryBuilder()
+        $qb = $this->getEntityManager()
+            ->createQueryBuilder()
             ->from(sprintf('Capco\\AppBundle\\Entity\\%sVote', ucfirst($objectType)), 'v')
-            ->andWhere('v.expired = false')
-        ;
-
+            ->andWhere('v.expired = false');
         if (\in_array($objectType, ['opinion', 'opinionVersion'], true)) {
-            $qb->addSelect('v.value')
+            $qb
+                ->addSelect('v.value')
                 ->andWhere(sprintf('v.%s = :object', $objectType))
                 ->andWhere('v.user = :user')
                 ->setParameter('user', $user)
-                ->setParameter('object', $object)
-            ;
+                ->setParameter('object', $object);
         }
 
         $result = $qb->getQuery()->getOneOrNullResult();
@@ -162,8 +153,6 @@ class AbstractVoteRepository extends EntityRepository
 
     protected function getQueryBuilder()
     {
-        return $this->createQueryBuilder('v')
-            ->andWhere('v.expired = false')
-        ;
+        return $this->createQueryBuilder('v')->andWhere('v.expired = false');
     }
 }
