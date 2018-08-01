@@ -1,117 +1,89 @@
 // @flow
 import * as React from 'react';
-import { connect } from 'react-redux';
+import { QueryRenderer, graphql, type ReadyState } from 'react-relay';
 import { FormattedHTMLMessage } from 'react-intl';
 import { Alert, Glyphicon } from 'react-bootstrap';
-import OpinionStore from '../../stores/OpinionStore';
-import OpinionActions from '../../actions/OpinionActions';
-import FlashMessages from '../Utils/FlashMessages';
-import { fetchOpinionVotes } from '../../redux/modules/opinion';
-import type { Dispatch } from '../../types';
-
+import environment, { graphqlError } from '../../createRelayEnvironment';
 import OpinionBox from './OpinionBox';
 import OpinionTabs from './OpinionTabs';
 import Loader from '../Ui/Loader';
+import type {
+  OpinionPageQueryVariables,
+  OpinionPageQueryResponse,
+} from './__generated__/OpinionPageQuery.graphql';
 
 type Props = {
-  opinionId: string,
-  versionId: ?string,
-  fetchOpinionVotes: Function,
-};
-type State = {
-  opinion: ?Object,
-  isLoading: boolean,
-  rankingThreshold: ?number,
-  opinionTerm: number,
-  messages: {
-    errors: Array<string>,
-    success: Array<string>,
-  },
+  opinionId?: string,
+  versionId?: string,
+  isAuthenticated: boolean,
 };
 
-export class OpinionPage extends React.Component<Props, State> {
-  state = {
-    opinion: null,
-    isLoading: true,
-    rankingThreshold: null,
-    opinionTerm: 0,
-    messages: {
-      errors: [],
-      success: [],
-    },
-  };
-
-  componentWillMount = () => {
-    OpinionStore.addChangeListener(this.onChange);
-  };
-
-  componentDidMount = () => {
-    this.loadOpinion();
-  };
-
-  componentWillUnmount = () => {
-    OpinionStore.removeChangeListener(this.onChange);
-  };
-
-  onChange = () => {
-    if (!OpinionStore.isProcessing && OpinionStore.isOpinionSync) {
-      this.setState({
-        opinion: OpinionStore.opinion,
-        rankingThreshold: OpinionStore.rankingThreshold,
-        opinionTerm: OpinionStore.opinionTerm,
-        isLoading: false,
-        messages: OpinionStore.messages,
-      });
-      return;
-    }
-
-    this.loadOpinion();
-  };
-
-  loadOpinion = () => {
-    const { opinionId, versionId } = this.props;
-    OpinionActions.loadOpinion(opinionId, versionId);
-    this.props.fetchOpinionVotes(opinionId, versionId);
-  };
-
+export class OpinionPage extends React.Component<Props> {
   render() {
+    const { opinionId, versionId, isAuthenticated } = this.props;
+    const id = opinionId || versionId;
+    if (!id) {
+      return null;
+    }
     return (
       <div className="has-chart">
-        <FlashMessages errors={this.state.messages.errors} success={this.state.messages.success} />
-        <Loader show={this.state.isLoading}>
-          {this.state.opinion && (
-            <div>
-              {this.state.opinion.isTrashed && (
-                <Alert bsStyle="danger">
-                  <Glyphicon glyph="trash" />{' '}
-                  <FormattedHTMLMessage
-                    id="in-the-trash"
-                    values={{ reason: this.state.opinion.trashedReason || '' }}
-                  />
-                </Alert>
-              )}
-              <OpinionBox
-                {...this.props}
-                rankingThreshold={this.state.rankingThreshold}
-                opinionTerm={this.state.opinionTerm}
-                opinion={this.state.opinion}
-              />
-            </div>
-          )}
-          {this.state.opinion && <OpinionTabs {...this.props} opinion={this.state.opinion} />}
-        </Loader>
+        <QueryRenderer
+          environment={environment}
+          query={graphql`
+            query OpinionPageQuery($opinionId: ID!, $isAuthenticated: Boolean!) {
+              opinion: node(id: $opinionId) {
+                ... on Opinion {
+                  id
+                  trashed
+                  trashedReason
+                }
+                ... on Version {
+                  id
+                  trashed
+                  trashedReason
+                }
+                ...OpinionBox_opinion @arguments(isAuthenticated: $isAuthenticated)
+                ...OpinionTabs_opinion
+              }
+            }
+          `}
+          variables={
+            ({
+              opinionId: id,
+              isAuthenticated,
+            }: OpinionPageQueryVariables)
+          }
+          render={({ error, props }: ReadyState & { props?: ?OpinionPageQueryResponse }) => {
+            if (error) {
+              return graphqlError;
+            }
+            if (props) {
+              const opinion = props.opinion;
+              if (!opinion) {
+                return graphqlError;
+              }
+              return (
+                <div>
+                  {opinion.trashed && (
+                    <Alert bsStyle="danger">
+                      <Glyphicon glyph="trash" />{' '}
+                      <FormattedHTMLMessage
+                        id="in-the-trash"
+                        values={{ reason: opinion.trashedReason || '' }}
+                      />
+                    </Alert>
+                  )}
+                  <OpinionBox rankingThreshold={0} opinionTerm={0} opinion={opinion} />
+                  <OpinionTabs opinion={opinion} />
+                </div>
+              );
+            }
+            return <Loader />;
+          }}
+        />
       </div>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
-  return {
-    fetchOpinionVotes: opinionId => dispatch(fetchOpinionVotes(opinionId)),
-  };
-};
-
-export default connect(
-  null,
-  mapDispatchToProps,
-)(OpinionPage);
+export default OpinionPage;

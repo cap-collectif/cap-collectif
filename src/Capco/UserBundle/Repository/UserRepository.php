@@ -173,16 +173,16 @@ class UserRepository extends EntityRepository
             ->createQuery(
                 'SELECT u.id, count(distinct s) as sources_count
           FROM CapcoUserBundle:User u
-          LEFT JOIN CapcoAppBundle:Source s WITH s.Author = u
+          LEFT JOIN CapcoAppBundle:Source s WITH s.author = u
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
-          LEFT JOIN CapcoAppBundle:Opinion o WITH s.Opinion = o
+          LEFT JOIN CapcoAppBundle:Opinion o WITH s.opinion = o
           LEFT JOIN o.step ostep
           LEFT JOIN ostep.projectAbstractStep opas
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
           LEFT JOIN ovo.step ovostep
           LEFT JOIN ovostep.projectAbstractStep ovopas
           WHERE s.isEnabled = 1 AND s.expired = 0 AND (
-            (s.Opinion IS NOT NULL AND o.isEnabled = 1 AND o.expired = 0 AND opas.project = :project)
+            (s.opinion IS NOT NULL AND o.isEnabled = 1 AND o.expired = 0 AND opas.project = :project)
             OR
             (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ov.expired = 0 AND ovo.isEnabled = 1 AND ovo.expired = 0 AND ovopas.project = :project)
           )
@@ -439,10 +439,10 @@ class UserRepository extends EntityRepository
           LEFT JOIN CapcoAppBundle:SourceVote sv WITH sv.user = u
           LEFT JOIN CapcoAppBundle:Source s WITH sv.source = s
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
-          LEFT JOIN CapcoAppBundle:Opinion o WITH s.Opinion = o
+          LEFT JOIN CapcoAppBundle:Opinion o WITH s.opinion = o
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
           WHERE sv.user = u AND s.isEnabled = 1 AND (
-            (s.Opinion IS NOT NULL AND o.isEnabled = 1 AND o.expired = 0 AND o.step = :project)
+            (s.opinion IS NOT NULL AND o.isEnabled = 1 AND o.expired = 0 AND o.step = :project)
             OR
             (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ov.expired = 0 AND ovo.isEnabled = 1 AND ovo.expired = 0 AND ovo.step = :project)
           )
@@ -547,12 +547,12 @@ class UserRepository extends EntityRepository
             ->createQuery(
                 'SELECT u.id, count(distinct s) as sources_count
           from CapcoUserBundle:User u
-          LEFT JOIN CapcoAppBundle:Source s WITH s.Author = u
+          LEFT JOIN CapcoAppBundle:Source s WITH s.author = u
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
-          LEFT JOIN CapcoAppBundle:Opinion o WITH s.Opinion = o
+          LEFT JOIN CapcoAppBundle:Opinion o WITH s.opinion = o
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
           WHERE s.isEnabled = 1 AND s.expired = 0 AND (
-            (s.Opinion IS NOT NULL AND o.isEnabled = 1 AND o.expired = 0 AND o.step = :step)
+            (s.opinion IS NOT NULL AND o.isEnabled = 1 AND o.expired = 0 AND o.step = :step)
             OR
             (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ov.expired = 0 AND ovo.isEnabled = 1 AND ovo.expired = 0 AND ovo.step = :step)
           )
@@ -752,10 +752,10 @@ class UserRepository extends EntityRepository
           LEFT JOIN CapcoAppBundle:SourceVote sv WITH sv.user = u
           LEFT JOIN CapcoAppBundle:Source s WITH sv.source = s
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
-          LEFT JOIN CapcoAppBundle:Opinion o WITH s.Opinion = o
+          LEFT JOIN CapcoAppBundle:Opinion o WITH s.opinion = o
           LEFT JOIN CapcoAppBundle:Opinion ovo WITH ov.parent = ovo
           WHERE sv.user = u AND s.isEnabled = 1 AND s.expired = 0 AND (
-            (s.Opinion IS NOT NULL AND o.isEnabled = 1 AND o.expired = 0 AND o.step = :step)
+            (s.opinion IS NOT NULL AND o.isEnabled = 1 AND o.expired = 0 AND o.step = :step)
             OR
             (s.opinionVersion IS NOT NULL AND ov.enabled = 1 AND ov.expired = 0 AND ovo.isEnabled = 1 AND ovo.expired = 0 AND ovo.step = :step)
           )

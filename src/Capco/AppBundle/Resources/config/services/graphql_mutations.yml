@@ -20,16 +20,16 @@ services:
       - '@capco.abstract_step.repository'
       - '@logger'
       - '@Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver'
+      - '@Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader'
     tags:
       - { name: overblog_graphql.mutation }
   Capco\AppBundle\GraphQL\Mutation\RemoveProposalVoteMutation:
-    # only for sf < 3.3
-    class: Capco\AppBundle\GraphQL\Mutation\RemoveProposalVoteMutation
     arguments:
       - '@doctrine.orm.default_entity_manager'
       - '@capco.proposal.repository'
       - '@capco.abstract_step.repository'
-      - '@logger'
+      - '@Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader'
+
     tags:
       - { name: overblog_graphql.mutation }
   Capco\AppBundle\GraphQL\Mutation\UpdateProposalVotesMutation:

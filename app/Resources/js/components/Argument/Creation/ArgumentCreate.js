@@ -8,6 +8,7 @@ import {
   clearSubmitErrors,
   type FormProps,
 } from 'redux-form';
+import { graphql, createFragmentContainer } from 'react-relay';
 import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { Button, Alert } from 'react-bootstrap';
 import { connect, type MapStateToProps } from 'react-redux';
@@ -15,13 +16,14 @@ import AppDispatcher from '../../../dispatchers/AppDispatcher';
 import component from '../../Form/Field';
 import AddArgumentMutation from '../../../mutations/AddArgumentMutation';
 import type { State, Dispatch } from '../../../types';
+import type { ArgumentCreate_argumentable } from './__generated__/ArgumentCreate_argumentable.graphql';
 
 type FormValues = { body: ?string };
 type FormValidValues = { body: string };
 
 type Props = FormProps & {
   type: 'FOR' | 'AGAINST' | 'SIMPLE',
-  argumentable: { id: string, isContribuable: boolean },
+  argumentable: ArgumentCreate_argumentable,
   user: { id: string },
   submitting: boolean,
   form: string,
@@ -80,7 +82,7 @@ const validate = ({ body }: FormValues) => {
 export class ArgumentCreate extends React.Component<Props> {
   render() {
     const { user, argumentable, type, dispatch, form, submitting, error } = this.props;
-    const disabled = !argumentable.isContribuable || !user;
+    const disabled = !argumentable.contribuable || !user;
     return (
       <div className="opinion__body box">
         <div className="opinion__data">
@@ -137,9 +139,18 @@ const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   user: state.user.user,
 });
 
-export default connect(mapStateToProps)(
+const container = connect(mapStateToProps)(
   reduxForm({
     onSubmit,
     validate,
   })(ArgumentCreate),
 );
+
+export default createFragmentContainer(container, {
+  argumentable: graphql`
+    fragment ArgumentCreate_argumentable on Argumentable {
+      id
+      contribuable
+    }
+  `,
+});

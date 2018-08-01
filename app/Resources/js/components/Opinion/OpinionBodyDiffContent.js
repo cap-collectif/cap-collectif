@@ -1,33 +1,36 @@
 // @flow
 import * as React from 'react';
+import { graphql, createFragmentContainer } from 'react-relay';
 import OpinionBodyDiffModal from './OpinionBodyDiffModal';
+import type { OpinionBodyDiffContent_opinion } from './__generated__/OpinionBodyDiffContent_opinion.graphql';
 
 type Props = {
-  opinion: Object,
+  opinion: OpinionBodyDiffContent_opinion,
 };
 
 class OpinionBodyDiffContent extends React.Component<Props> {
   render() {
     const opinion = this.props.opinion;
 
-    if (opinion.modals.length < 1) {
+    if (!opinion.modals || opinion.modals.length < 1) {
       return <div dangerouslySetInnerHTML={{ __html: opinion.body }} />;
     }
 
     const modals = opinion.modals;
     const sections = [];
 
-    opinion.body.split('<p>').forEach(sentence => {
-      if (sentence.length > 0) {
-        sections.push(sentence.replace('</p>', ''));
-      }
-    });
-
+    if (opinion.body) {
+      opinion.body.split('<p>').forEach(sentence => {
+        if (sentence.length > 0) {
+          sections.push(sentence.replace('</p>', ''));
+        }
+      });
+    }
     const parts = [];
     sections.forEach(section => {
       let foundModal = false;
       modals.forEach(modal => {
-        if (section.indexOf(modal.key) !== -1) {
+        if (modal && section.indexOf(modal.key) !== -1) {
           foundModal = modal;
         }
       });
@@ -65,4 +68,18 @@ class OpinionBodyDiffContent extends React.Component<Props> {
   }
 }
 
-export default OpinionBodyDiffContent;
+export default createFragmentContainer(OpinionBodyDiffContent, {
+  opinion: graphql`
+    fragment OpinionBodyDiffContent_opinion on OpinionOrVersion {
+      ... on Opinion {
+        body
+        modals {
+          key
+          before
+          after
+          ...OpinionBodyDiffModal_modal
+        }
+      }
+    }
+  `,
+});

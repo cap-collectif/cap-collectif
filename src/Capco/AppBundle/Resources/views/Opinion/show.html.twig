@@ -19,31 +19,12 @@
 {% endblock %}
 
 {% block reduxStore %}
-  {% set initialState = {
-    'opinion': {
-      'currentOpinionId': opinion.id,
-      'versionsById': {},
-      'opinionsById': {
-        (opinion.id) : {
-          'id': opinion.id,
-          'body': opinion.body,
-          'votes': [],
-          'backLink': backLink,
-          'votesCount': opinion.getVotesCountAll(),
-          'votesCountOk': opinion.votesCountOk,
-          'votesCountNok': opinion.votesCountNok,
-          'votesCountMitige': opinion.votesCountMitige,
-          'userVote': opinion.getVoteValueByUser(app.user)
-        }
-      }
-    }
-  } %}
-  {% include '@CapcoApp/redux_store.html.twig' with {'project': project, 'data' : initialState} %}
+  {% include '@CapcoApp/redux_store.html.twig' with {'project': project} %}
 {% endblock %}
 
 {% block content %}
     {{ react_render_component('OpinionPageApp', {
-        'props': {'opinionId': opinion.id},
+        'props': {'opinionId': opinion.id, 'isAuthenticated': is_granted('ROLE_USER')},
       })
     }}
 {% endblock %}

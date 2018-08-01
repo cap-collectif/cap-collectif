@@ -1,57 +1,34 @@
 // @flow
 import React from 'react';
 import { ButtonToolbar } from 'react-bootstrap';
-import { connect, type MapStateToProps } from 'react-redux';
+import { graphql, createFragmentContainer } from 'react-relay';
 import OpinionVotesButton from './OpinionVotesButton';
-import type { State } from '../../../types';
+import type { OpinionVotesButtons_opinion } from './__generated__/OpinionVotesButtons_opinion.graphql';
 
 type Props = {
-  opinion: Object,
-  show: boolean,
-  disabled: boolean,
-  user?: Object,
+  opinion: OpinionVotesButtons_opinion,
 };
 
 class OpinionVotesButtons extends React.Component<Props> {
-  static defaultProps = {
-    user: null,
-  };
-
-  isTheUserTheAuthor = () => {
-    const { opinion, user } = this.props;
-    if (opinion.author === null || !user) {
-      return false;
-    }
-    return user.uniqueId === opinion.author.uniqueId;
-  };
-
   render() {
-    const { opinion, disabled, show } = this.props;
-    if (!show) {
-      return null;
-    }
+    const { opinion } = this.props;
     return (
       <ButtonToolbar className="opinion__votes__buttons">
-        <OpinionVotesButton disabled={disabled} opinion={opinion} value={1} />
-        <OpinionVotesButton
-          disabled={disabled}
-          style={{ marginLeft: 5 }}
-          opinion={opinion}
-          value={0}
-        />
-        <OpinionVotesButton
-          disabled={disabled}
-          style={{ marginLeft: 5 }}
-          opinion={opinion}
-          value={-1}
-        />
+        {/* $FlowFixMe */}
+        <OpinionVotesButton opinion={opinion} value="YES" />
+        {/* $FlowFixMe */}
+        <OpinionVotesButton style={{ marginLeft: 5 }} opinion={opinion} value="MITIGE" />
+        {/* $FlowFixMe */}
+        <OpinionVotesButton style={{ marginLeft: 5 }} opinion={opinion} value="NO" />
       </ButtonToolbar>
     );
   }
 }
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  user: state.user.user,
+export default createFragmentContainer(OpinionVotesButtons, {
+  opinion: graphql`
+    fragment OpinionVotesButtons_opinion on OpinionOrVersion {
+      ...OpinionVotesButton_opinion
+    }
+  `,
 });
-
-export default connect(mapStateToProps)(OpinionVotesButtons);

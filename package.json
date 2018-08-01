@@ -17,10 +17,11 @@
     "download-translations": "bin/console translation:download --no-debug",
     "update-js-translation": "babel-node ./xlf2-to-json.js",
     "trad": "yarn run download-translations && yarn run update-js-translation",
+    "clean-cache": "rm -rf var/cache/*",
     "compile-graphql": "bin/console graphql:compile --no-debug && composer dump-autoload",
     "dump-graphql-schema": "bin/console graphql:dump-schema --no-debug --file schema.graphql --format graphql",
-    "relay": "rm -rf var/cache/* && yarn run compile-graphql && yarn run dump-graphql-schema && yarn run build-relay-schema",
-    "relay:watch": "rm -rf var/cache/* && yarn run compile-graphql && yarn run dump-graphql-schema && yarn run build-relay-schema:watch",
+    "relay": "yarn run clean-cache && yarn run compile-graphql && yarn run dump-graphql-schema && yarn run build-relay-schema",
+    "relay:watch": "yarn run clean-cache && yarn run compile-graphql && yarn run dump-graphql-schema && yarn run build-relay-schema:watch",
     "checkcs": "eslint --cache app/Resources/js",
     "lint": "eslint --cache --fix app/Resources/js",
     "bundlesize": "bundlesize",
@@ -41,7 +42,7 @@
       "gherkin-lint"
     ],
     "*.yml": [
-      "yamllint"
+      "prettier --parser yaml --write"
     ],
     "*.php": [
       "prettier --parser php --write",
@@ -67,7 +68,7 @@
     },
     {
       "path": "./web/js/app.js",
-      "maxSize": "260 KB"
+      "maxSize": "280 KB"
     },
     {
       "path": "./web/js/vendor.js",
@@ -99,7 +100,7 @@
     }
   },
   "dependencies": {
-    "@prettier/plugin-php": "^0.3.1",
+    "@prettier/plugin-php": "^0.4.0",
     "@storybook/addon-info": "^3.4.8",
     "@storybook/addons": "^3.4.8",
     "@storybook/react": "^3.4.8",
@@ -171,7 +172,7 @@
     "moment-timezone": "^0.5.21",
     "points-cluster": "^0.1.4",
     "pre-commit": "^1.2.2",
-    "prettier": "^1.13.7",
+    "prettier": "1.14.0",
     "prop-types": "^15.6.1",
     "qs": "^6.5.0",
     "quill": "^0.20.1",
@@ -214,6 +215,7 @@
     "redux-form": "^7.2.0",
     "redux-saga": "v0.14.0",
     "relay-compiler": "^1.1.0",
+    "relay-devtools": "^1.4.0",
     "relay-runtime": "^1.6.0",
     "sass-brunch": "https://github.com/jukebox017/sass-brunch/tarball/793d58d32664a611794efb3894fa3e9827fae4ff",
     "sass-loader": "^6.0.7",

@@ -1,11 +1,11 @@
 <?php
-
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
@@ -25,15 +25,24 @@ class AddProposalVoteMutation
     private $stepRepo;
     private $logger;
     private $resolver;
+    private $proposalVotesDataLoader;
 
-    public function __construct(EntityManagerInterface $em, ValidatorInterface $validator, ProposalRepository $proposalRepo, AbstractStepRepository $stepRepo, LoggerInterface $logger, StepRequirementsResolver $resolver)
-    {
+    public function __construct(
+        EntityManagerInterface $em,
+        ValidatorInterface $validator,
+        ProposalRepository $proposalRepo,
+        AbstractStepRepository $stepRepo,
+        LoggerInterface $logger,
+        StepRequirementsResolver $resolver,
+        ProposalVotesDataLoader $proposalVotesDataLoader
+    ) {
         $this->em = $em;
         $this->validator = $validator;
         $this->stepRepo = $stepRepo;
         $this->proposalRepo = $proposalRepo;
         $this->logger = $logger;
         $this->resolver = $resolver;
+        $this->proposalVotesDataLoader = $proposalVotesDataLoader;
     }
 
     public function __invoke(Argument $input, User $user, RequestStack $request)
@@ -58,24 +67,18 @@ class AddProposalVoteMutation
                 throw new UserError('This proposal is not associated to this collect step.');
             }
 
-            $countUserVotes = $this->em
-              ->getRepository('CapcoAppBundle:ProposalCollectVote')
-              ->countVotesByStepAndUser($step, $user)
-            ;
-
-            $vote = (new ProposalCollectVote())
-              ->setCollectStep($step);
+            $countUserVotes = $this->em->getRepository(
+                'CapcoAppBundle:ProposalCollectVote'
+            )->countVotesByStepAndUser($step, $user);
+            $vote = (new ProposalCollectVote())->setCollectStep($step);
         } elseif ($step instanceof SelectionStep) {
             if (!\in_array($step, $proposal->getSelectionSteps(), true)) {
                 throw new UserError('This proposal is not associated to this selection step.');
             }
-            $countUserVotes = $this->em
-              ->getRepository('CapcoAppBundle:ProposalSelectionVote')
-              ->countVotesByStepAndUser($step, $user)
-          ;
-            $vote = (new ProposalSelectionVote())
-              ->setSelectionStep($step)
-              ;
+            $countUserVotes = $this->em->getRepository(
+                'CapcoAppBundle:ProposalSelectionVote'
+            )->countVotesByStepAndUser($step, $user);
+            $vote = (new ProposalSelectionVote())->setSelectionStep($step);
         } else {
             throw new UserError('Wrong step with id: ' . $input->offsetGet('stepId'));
         }
@@ -101,9 +104,7 @@ class AddProposalVoteMutation
             ->setIpAddress($request->getCurrentRequest()->getClientIp())
             ->setUser($user)
             ->setPrivate($input->offsetGet('anonymously'))
-            ->setProposal($proposal)
-        ;
-
+            ->setProposal($proposal);
         $errors = $this->validator->validate($vote);
         foreach ($errors as $error) {
             $this->logger->error((string) $error->getMessage());
@@ -114,6 +115,7 @@ class AddProposalVoteMutation
 
         try {
             $this->em->flush();
+            $this->proposalVotesDataLoader->invalidate($proposal);
         } catch (\Exception $e) {
             // Let's assume it's a Unique Exception
             throw new UserError('proposal.vote.already_voted');

@@ -2,11 +2,11 @@
 
 # First boot
 if [ ! -f /var/lib/mysql/ibdata1 ]; then
-  echo "No previous mysql detected in '/var/lib/mysql'."
-  echo "Installing mysql..."
+  echo "[$(date -u)][MYSQL] No previous mysql detected in '/var/lib/mysql'."
+  echo "[$(date -u)][MYSQL] Installing mysql's files..."
   mkdir -p /var/lib/mysql
   cp -R /var/lib/mysql_save/* /var/lib/mysql/
-  echo "Mysql is installed!"
+  echo "[$(date -u)][MYSQL] Mysql'files are installed!"
 fi
 
 chown -R mysql:mysql /var/lib/mysql
@@ -14,5 +14,6 @@ chown -R mysql:mysql /var/lib/mysql
 # We perform a rollback in case of pending transactions
 mysqld_safe --tc-heuristic-recover=ROLLBACK || true
 
+echo "[$(date -u)][MYSQL] Started!"
 # We start mysqld normally
 exec mysqld_safe --slow-query-log

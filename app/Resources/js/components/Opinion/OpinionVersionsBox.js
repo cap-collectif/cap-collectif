@@ -1,75 +1,45 @@
 // @flow
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import { Row, Col } from 'react-bootstrap';
+import { QueryRenderer, createFragmentContainer, graphql, type ReadyState } from 'react-relay';
+import { Row, Col, Panel } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import OpinionVersionList from './OpinionVersionList';
+import environment, { graphqlError } from '../../createRelayEnvironment';
+import OpinionVersionListView, { type VersionOrder } from './OpinionVersionListView';
 import OpinionVersionCreateButton from './OpinionVersionCreateButton';
 import Loader from '../Ui/Loader';
-import Fetcher from '../../services/Fetcher';
 import OpinionVersionCreateModal from './OpinionVersionCreateModal';
+import type {
+  OpinionVersionsBoxQueryVariables,
+  OpinionVersionsBoxQueryResponse,
+} from './__generated__/OpinionVersionsBoxQuery.graphql';
+import type { OpinionVersionsBox_opinion } from './__generated__/OpinionVersionsBox_opinion.graphql';
 
 type Props = {
-  opinionId: string,
-  opinionBody: string,
+  opinion: OpinionVersionsBox_opinion,
+  isAuthenticated: boolean,
 };
 
 type State = {
-  versions: Array<$FlowFixMe>,
-  isLoading: boolean,
-  filter: string,
-  offset: number,
-  rankingThreshold: $FlowFixMe,
+  order: VersionOrder,
 };
 
-class OpinionVersionsBox extends React.Component<Props, State> {
+export class OpinionVersionsBox extends React.Component<Props, State> {
   state = {
-    versions: [],
-    isLoading: true,
-    filter: 'last',
-    offset: 0,
-    rankingThreshold: null,
+    order: 'last',
   };
-
-  componentDidMount() {
-    this.loadVersionsFromServer();
-  }
-
-  componentDidUpdate(prevProps: Object, prevState: Object) {
-    if (this.state.filter !== prevState.filter) {
-      this.loadVersionsFromServer();
-    }
-  }
 
   updateSelectedValue = () => {
     const element = ReactDOM.findDOMNode(this.refs.filter);
     if (element instanceof Element) {
       this.setState({
-        filter: $(element).val(),
-        isLoading: true,
-        versions: [],
+        order: $(element).val(),
       });
     }
   };
 
-  loadVersionsFromServer = () => {
-    const { opinionId } = this.props;
-    this.setState({ isLoading: true });
-
-    Fetcher.get(
-      `/opinions/${opinionId}/versions?offset=${this.state.offset}&filter=${this.state.filter}`,
-    ).then(data => {
-      this.setState({
-        isLoading: false,
-        versions: data.versions,
-        rankingThreshold: data.rankingThreshold,
-      });
-      return true;
-    });
-  };
-
   renderFilter = () => {
-    if (this.state.versions.length > 1) {
+    if (this.props.opinion.allVersions.totalCount > 1) {
       return (
         <form>
           <label htmlFor="filter-opinion-version" className="control-label sr-only">
@@ -79,7 +49,7 @@ class OpinionVersionsBox extends React.Component<Props, State> {
             id="filter-opinion-version"
             ref="filter"
             className="form-control pull-right"
-            value={this.state.filter}
+            value={this.state.order}
             onChange={() => this.updateSelectedValue()}>
             <FormattedMessage id="global.filter_random">
               {message => <option value="random">{message}</option>}
@@ -106,28 +76,80 @@ class OpinionVersionsBox extends React.Component<Props, State> {
   };
 
   render() {
+    const { isAuthenticated, opinion } = this.props;
     return (
-      <div>
-        <OpinionVersionCreateModal />
+      <Panel>
+        <Panel.Heading>
+        <OpinionVersionCreateModal opinion={opinion} />
         <Row>
           <Col xs={12} sm={6} md={6}>
-            <OpinionVersionCreateButton {...this.props} />
+            <OpinionVersionCreateButton opinion={opinion} />
           </Col>
           <Col xs={12} sm={6} md={6} className="block--first-mobile">
             {this.renderFilter()}
           </Col>
         </Row>
-        {!this.state.isLoading ? (
-          <OpinionVersionList
-            versions={this.state.versions}
-            rankingThreshold={this.state.rankingThreshold}
-          />
-        ) : (
-          <Loader />
-        )}
-      </div>
+        </Panel.Heading>
+        <QueryRenderer
+          environment={environment}
+          query={graphql`
+            query OpinionVersionsBoxQuery(
+              $opinionId: ID!
+              $isAuthenticated: Boolean!
+              $count: Int!
+              $cursor: String
+              $orderBy: VersionOrder!
+            ) {
+              opinion: node(id: $opinionId) {
+                ...OpinionVersionListView_opinion
+                  @arguments(
+                    cursor: $cursor
+                    orderBy: $orderBy
+                    count: $count
+                    isAuthenticated: $isAuthenticated
+                  )
+              }
+            }
+          `}
+          variables={
+            ({
+              isAuthenticated,
+              cursor: null,
+              count: 25,
+              opinionId: opinion.id,
+              orderBy: { field: 'CREATED_AT', direction: 'DESC' },
+            }: OpinionVersionsBoxQueryVariables)
+          }
+          render={({ error, props }: ReadyState & { props?: ?OpinionVersionsBoxQueryResponse }) => {
+            if (error) {
+              return graphqlError;
+            }
+            if (props) {
+              if (!props.opinion) {
+                return graphqlError;
+              }
+              return (
+                // $FlowFixMe
+                <OpinionVersionListView order={this.state.order} opinion={props.opinion} />
+              );
+            }
+            return <Loader />;
+          }}
+        />
+      </Panel>
     );
   }
 }
 
-export default OpinionVersionsBox;
+export default createFragmentContainer(OpinionVersionsBox, {
+  opinion: graphql`
+    fragment OpinionVersionsBox_opinion on Opinion {
+      id
+      ...OpinionVersionCreateModal_opinion
+      ...OpinionVersionCreateButton_opinion
+      allVersions: versions(first: 0) {
+        totalCount
+      }
+    }
+  `,
+});

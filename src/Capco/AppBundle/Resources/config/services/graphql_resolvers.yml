@@ -238,21 +238,6 @@ services:
           alias: 'proposition_trashedAt',
           method: 'resolveTrashedAt',
         }
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'proposition_votesCount',
-          method: 'resolveContributionVotesCount',
-        }
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'proposition_argumentsCountFor',
-          method: 'resolveArgumentsCountFor',
-        }
-      - {
-          name: overblog_graphql.resolver,
-          alias: 'proposition_argumentsCountAgainst',
-          method: 'resolveArgumentsCountAgainst',
-        }
       - { name: overblog_graphql.resolver, alias: 'argument_url', method: 'resolveArgumentUrl' }
       - {
           name: overblog_graphql.resolver,
@@ -271,7 +256,6 @@ services:
           alias: 'version_reportings',
           method: 'resolveVersionReportings',
         }
-      - { name: overblog_graphql.resolver, alias: 'version_votes', method: 'resolveVersionVotes' }
       - {
           name: overblog_graphql.resolver,
           alias: 'contribution_type',
@@ -421,14 +405,7 @@ services:
     arguments: ['@capco.blog.post.repository', '@monolog.logger']
 
   Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalVotesResolver:
-    class: Capco\AppBundle\GraphQL\Resolver\Proposal\ProposalVotesResolver
-    tags:
-      - { name: overblog_graphql.resolver }
-    arguments:
-      - '@capco.abstract_step.repository'
-      - '@capco.proposal_collect_vote.repository'
-      - '@capco.proposal_selection_vote.repository'
-      - '@monolog.logger'
+    autowire: true
 
   Capco\AppBundle\GraphQL\Resolver\User\ProposalVotesResolver:
     class: Capco\AppBundle\GraphQL\Resolver\User\ProposalVotesResolver
@@ -532,12 +509,7 @@ services:
       - { name: overblog_graphql.resolver }
 
   Capco\AppBundle\GraphQL\Resolver\ViewerStepVotesResolver:
-    class: Capco\AppBundle\GraphQL\Resolver\ViewerStepVotesResolver
-    arguments:
-      - '@Capco\AppBundle\GraphQL\Resolver\User\ProposalVotesResolver'
-      - '@logger'
-    tags:
-      - { name: overblog_graphql.resolver }
+    autowire: true
 
   Capco\AppBundle\GraphQL\Resolver\Reply\ReplyResponsesResolver:
     class: Capco\AppBundle\GraphQL\Resolver\Reply\ReplyResponsesResolver
@@ -630,4 +602,3 @@ services:
       - '@overblog_graphql.type_resolver'
     tags:
       - { name: overblog_graphql.resolver }
-

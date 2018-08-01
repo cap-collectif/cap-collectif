@@ -3,20 +3,14 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 import { OpinionCreateModal } from './OpinionCreateModal';
-import { intlMock } from '../../../mocks';
+import { intlMock, $refType, $fragmentRefs } from '../../../mocks';
 
 describe('<OpinionCreateModal />', () => {
   const props = {
     intl: intlMock,
     show: true,
-    projectId: 'projectId',
-    stepId: '1',
-    step: {},
-    opinionType: {
-      id: 'opinionTypeId',
-      title: 'opinionTypeTitle',
-      appendixTypes: [],
-    },
+    consultation: { $refType, $fragmentRefs },
+    section: { $refType, $fragmentRefs, id: 'opinionTypeId' },
     submitting: true,
     dispatch: jest.fn(),
   };

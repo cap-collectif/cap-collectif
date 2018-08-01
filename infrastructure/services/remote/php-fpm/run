@@ -1,26 +1,31 @@
 #!/bin/bash
 
-start=$SECONDS
-
 cd /var/www
 
+echo "[$(date -u)][PHP-FPM] Creating var/ files..."
 for directory in var/cache var/logs web/bundles web/media/default web/media/sonata_category; do
   if [ ! -d "$directory" ]; then
     mkdir -p -m 777 $directory
     chown capco:capco $directory
   fi
 done
+echo "[PHP-FPM] Created var/ files!"
 
+
+echo "[$(date -u)][PHP-FPM] Setting permissions to web/ and cache/ ..."
 chmod -R 777 web/media && chown -R capco:capco var && rm -rf var/cache/prod
+echo "[$(date -u)][PHP-FPM] Permissions gived to web/ and cache/!"
 
+echo "[$(date -u)][PHP-FPM] Waiting for MySQL..."
 while ! (mysqladmin ping --host=127.0.0.1)
   do sleep 0.1
 done
 
-echo "Warming up cache and install bundle assets after $(( SECONDS - start )) seconds..."
+echo "[$(date -u)][PHP-FPM] Warming up cache and install bundle assets..."
 chmod -R 777 var/ && chown -R capco:capco var/
 gosu capco php bin/console cache:warmup --no-debug --env=prod --no-interaction --quiet
 gosu capco php bin/console assets:install --symlink --env=prod --no-interaction --quiet
+echo "[$(date -u)][PHP-FPM] Cache warmed!"
 
 
 # Retry variables for migrations (max 3)
@@ -30,7 +35,7 @@ maxRetries=3
 VERSIONS=`php bin/console doctrine:migrations:status --show-versions --env=prod --no-interaction 2>&1`
 database=`echo "$VERSIONS" | grep -o "Unknown database" | wc -l`
 if [ "$database" != "0" ]; then
-    echo "Creating a new database with production data..."
+    echo "[$(date -u)][PHP-FPM] Creating a new database with production data..."
     gosu capco php bin/console doctrine:database:create --env=prod --no-interaction --quiet
     gosu capco php bin/console doctrine:schema:create --env=prod --no-interaction --quiet
     gosu capco php bin/console doctrine:migrations:version --add --all --env=prod --no-interaction --quiet
@@ -38,37 +43,43 @@ if [ "$database" != "0" ]; then
 else
   migrations=`echo "$VERSIONS" | grep -o "not migrated" | wc -l`
   if [ "$migrations" == "0" ]; then
-      echo "No migrations to execute."
+      echo "[$(date -u)][PHP-FPM] No migrations to execute."
   else
-    echo "Migrating an existing database..."
+    echo "[$(date -u)][PHP-FPM] Migrating an existing database..."
     until [ ${retry} -ge ${maxRetries} ]
     do
       su capco -c "php -d memory_limit=-1 bin/console doctrine:migrations:migrate --env=prod --no-interaction" && break
-      echo "Database migration failed... Exiting" >&2
+      echo "[$(date -u)][PHP-FPM] Database migration failed... Exiting" >&2
       retry=$[${retry}+1]
     done
     if [ ${retry} -ge ${maxRetries} ]; then
-      echo "Failed after ${maxRetries} attempts!"
+      echo "[$(date -u)][PHP-FPM] Database migration failed after ${maxRetries} attempts!"
       # Kill docker
       kill -9 1
     fi
   fi
 fi
-echo "Database is ready after $(( SECONDS - start )) seconds!"
+echo "[$(date -u)][PHP-FPM] Database is ready!"
 
+echo "[$(date -u)][PHP-FPM] Waiting RabbitMQ Admin..."
 while ! curl http://127.0.0.1:15672 > /dev/null 2>&1;
   do sleep 0.1
 done
 
+echo "[$(date -u)][PHP-FPM] Waiting RabbitMQ..."
 while ! curl http://127.0.0.1:6379 > /dev/null 2>&1;
   do sleep 0.1
 done
 
-echo "Updating rabbitmq vhost to match schema..."
+echo "[$(date -u)][PHP-FPM] Updating RabbitMQ vhost to match schema..."
 gosu capco php bin/rabbit vhost:mapping:create --password=guest app/config/rabbitmq.yml --quiet
+echo "[$(date -u)][PHP-FPM] RabbitMQ vhost updated!"
 
-echo "Starting daemon to populate elasticsearch..."
+
+echo "[$(date -u)][PHP-FPM] Starting daemon to populate elasticsearch..."
 /etc/service/php-fpm/populate_elasticsearch_index &
+echo "[$(date -u)][PHP-FPM] Daemon started!"
 
-echo "php-fpm is ready to boot after $(( SECONDS - start )) seconds!"
+
+echo "[$(date -u)][PHP-FPM] Started!"
 exec /usr/sbin/php-fpm7.1 --fpm-config /etc/service/php-fpm/fpm.conf --force-stderr
