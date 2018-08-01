@@ -84,9 +84,6 @@ parameters:
 
 framework:
   secret: '%secret%'
-  cache:
-    app: cache.adapter.redis
-    default_redis_provider: "redis://%redis_host%"
   router:
     resource: '%kernel.root_dir%/config/routing.yml'
     strict_requirements: null
@@ -603,15 +600,10 @@ exercise_html_purifier:
 hslavich_simplesamlphp:
   sp: '%saml_sp%'
 
-overblog_dataloader:
-  defaults:
-    promise_adapter: 'overblog_dataloader.webonyx_graphql_sync_promise_adapter'
 overblog_graphql:
   security:
     query_max_depth: false
     query_max_complexity: false
-  services:
-        promise_adapter: "webonyx_graphql.sync_promise_adapter"
   definitions:
     show_debug_info: '%kernel.debug%'
     # internal_error_message: "An error occurred, please retry later or contact us!"

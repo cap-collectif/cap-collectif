@@ -12,71 +12,35 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
 /**
  * THIS FILE WAS GENERATED AND SHOULD NOT BE MODIFIED!
  */
-final class QuestionChoiceType extends ObjectType implements GeneratedTypeInterface
+final class QuestionChoiceRankingType extends ObjectType implements GeneratedTypeInterface
 {
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
-            'name' => 'QuestionChoice',
-            'description' => 'A possible choice of a question',
+            'name' => 'QuestionChoiceRanking',
+            'description' => 'The choice ranking',
             'fields' => function () use ($globalVariable) {
                 return [
-                'id' => [
-                    'type' => Type::nonNull(Type::id()),
+                'position' => [
+                    'type' => Type::nonNull(Type::int()),
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => null,
+                    'description' => 'Return the position of the choice',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
                     'access' => null,
                 ],
-                'title' => [
-                    'type' => Type::nonNull(Type::string()),
+                'answerCount' => [
+                    'type' => Type::nonNull(Type::int()),
                     'args' => [
                     ],
                     'resolve' => null,
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'description' => [
-                    'type' => Type::string(),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'color' => [
-                    'type' => Type::string(),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'image' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('Media'),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => null,
+                    'description' => 'Return the number of responses of the choice at the given position',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -108,23 +72,9 @@ final class QuestionChoiceType extends ObjectType implements GeneratedTypeInterf
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\QuestionChoiceResponseResolver", array(0 => $value, 1 => $args)]);
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\QuestionChoiceRankingResponseResolver", array(0 => $value, 1 => $args)]);
                     },
-                    'description' => 'Select all the responses of the given question choice',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'ranking' => [
-                    'type' => Type::listOf($globalVariable->get('typeResolver')->resolve('QuestionChoiceRanking')),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\QuestionChoiceRankingResolver", array(0 => $value)]);
-                    },
-                    'description' => 'Return the ranking of the given question choice',
+                    'description' => 'Select the responses of the c',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

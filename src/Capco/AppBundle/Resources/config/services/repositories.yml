@@ -267,9 +267,6 @@ services:
     factory: ['@doctrine.orm.entity_manager', getRepository]
     arguments: ['CapcoAppBundle:Steps\AbstractStep']
 
-  Capco\AppBundle\Repository\AbstractStepRepository:
-    alias: capco.abstract_step.repository
-
   capco.consultation_step.repository:
     public: true
     class: Capco\AppBundle\Repository\ConsultationStepRepository
