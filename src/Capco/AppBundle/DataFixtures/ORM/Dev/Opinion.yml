@@ -1,10 +1,10 @@
 Capco\AppBundle\Entity\Opinion:
   # Project 1
-
   opinion1:
     id: 'opinion1'
     step: '@cstep1'
     title: Opinion 1
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     body: On va bientôt me mettre à la corbeille
     isEnabled: true
     isTrashed: false
@@ -15,6 +15,7 @@ Capco\AppBundle\Entity\Opinion:
     id: 'opinion2'
     step: '@cstep1'
     title: Opinion 2
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     body: |
       <p>Magni voluptates harum modi tempore quis numquam. Est atque nulla rerum et aut aut fugit.</p>
     isEnabled: true
@@ -25,6 +26,7 @@ Capco\AppBundle\Entity\Opinion:
     id: 'opinion3'
     step: '@cstep1'
     title: Opinion 3
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
@@ -36,6 +38,7 @@ Capco\AppBundle\Entity\Opinion:
     id: 'opinion4'
     step: '@cstep1'
     title: Opinion 4
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
@@ -47,6 +50,7 @@ Capco\AppBundle\Entity\Opinion:
     id: 'opinion5'
     step: '@cstep1'
     title: Opinion sans sources
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
@@ -57,6 +61,7 @@ Capco\AppBundle\Entity\Opinion:
   opinion{6..40}:
     id: 'opinion<current()>'
     step: '@cstep1'
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     title: Opinion <current()>
     body: |
       <p><text(100)></p>
@@ -70,6 +75,7 @@ Capco\AppBundle\Entity\Opinion:
     id: 'opinion<current()>'
     step: '@cstep1'
     title: Opinion <current()>
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     body: |
       <p><text(100)></p>
       <p><text(300)></p>
@@ -82,6 +88,7 @@ Capco\AppBundle\Entity\Opinion:
   opinion51:
     id: 'opinion51'
     step: '@cstep2'
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     title: Opinion 51
     body: |
       <p><text(100)></p>
@@ -94,6 +101,7 @@ Capco\AppBundle\Entity\Opinion:
   opinion52:
     id: 'opinion52'
     step: '@cstep2'
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     title: Opinion 52
     body: Contenu de ma super opinion !
     isEnabled: true
@@ -105,6 +113,7 @@ Capco\AppBundle\Entity\Opinion:
   opinion53:
     id: 'opinion53'
     step: '@cstep2'
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     title: Opinion 53
     body: |
       <p><text(100)></p>
@@ -117,6 +126,7 @@ Capco\AppBundle\Entity\Opinion:
   opinion54:
     id: 'opinion54'
     step: '@cstep3'
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     title: Opinion 54
     body: |
       <p><text(100)></p>
@@ -129,6 +139,7 @@ Capco\AppBundle\Entity\Opinion:
   opinion55:
     id: 'opinion55'
     step: '@cstep3'
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     title: Opinion 55
     body: |
       <p><text(100)></p>
@@ -140,6 +151,7 @@ Capco\AppBundle\Entity\Opinion:
   opinion56:
     id: 'opinion56'
     step: '@cstep3'
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     title: Opinion 56
     body: |
       <p><text(100)></p>
@@ -152,6 +164,7 @@ Capco\AppBundle\Entity\Opinion:
   opinion57:
     id: 'opinion57'
     step: '@cstep5'
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     title: Article 1
     body: |
       <p><text(100)></p>
@@ -165,6 +178,7 @@ Capco\AppBundle\Entity\Opinion:
   opinion58:
     id: 'opinion58'
     step: '@cstep5'
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     title: Article 3
     body: |
       <p><text(100)></p>
@@ -178,6 +192,7 @@ Capco\AppBundle\Entity\Opinion:
   opinion59:
     id: 'opinion59'
     step: '@cstep5'
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     title: Article 2
     body: |
       <p><text(100)></p>
@@ -191,6 +206,7 @@ Capco\AppBundle\Entity\Opinion:
   opinion60:
     id: 'opinion60'
     step: '@cstep5'
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     title: Article
     createdAt: <(new \DateTime('2016-03-01'))>
     updatedAt: <(new \DateTime('2017-03-01'))>
@@ -206,6 +222,7 @@ Capco\AppBundle\Entity\Opinion:
   opinion61:
     id: 'opinion61'
     step: '@cstep5'
+    publishedAt: <dateTimeBetween("-2 days", "now")>
     title: Lié à article
     body: |
       <p><text(100)></p>
@@ -220,6 +237,7 @@ Capco\AppBundle\Entity\Opinion:
     id: 'opinion62'
     step: '@cstep5'
     title: Très lié à article
+    publishedAt: <dateTimeBetween('+1 days', '+10 days')>
     createdAt: <dateTimeBetween('+1 days', '+10 days')>
     body: |
       <p><text(100)></p>
@@ -235,6 +253,7 @@ Capco\AppBundle\Entity\Opinion:
     step: '@cstep5'
     title: Article visible à la corbeille
     createdAt: <(new \DateTime('2016-03-01'))>
+    publishedAt: <(new \DateTime('2016-03-01'))>
     body: Je suis du spam
     isEnabled: true
     isTrashed: true

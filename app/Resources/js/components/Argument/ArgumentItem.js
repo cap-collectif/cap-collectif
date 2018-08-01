@@ -83,6 +83,9 @@ export default createFragmentContainer(
         displayName
         show_url
         vip
+        media {
+          url
+        }
       }
       body
     }

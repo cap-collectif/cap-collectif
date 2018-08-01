@@ -73,7 +73,7 @@ export class Cookie extends React.Component<Props, CookieState> {
             <div>
               <Col sm={8}>
                 <strong>
-                  <FormattedMessage id="indispensable" />
+                  <FormattedMessage id="essential" />
                 </strong>
               </Col>
               <Col sm={4} className="d-flex flex-end color-green">

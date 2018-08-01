@@ -2,6 +2,8 @@ Capco\AppBundle\Entity\ArgumentVote:
   argumentVote{1..3}:
     argument: '@argument1'
     user (unique): '@user<current()>'
+    publishedAt: <(new \DateTime('yesterday'))>
   argumentVote{6..10}:
     argument: '@argument204'
     user (unique): '@user<current()>'
+    publishedAt: <(new \DateTime('yesterday'))>

@@ -1,35 +1,37 @@
 <?php
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
-use Capco\AppBundle\Entity\Interfaces\SoftDeleteable;
-use Capco\AppBundle\Entity\Responses\AbstractResponse;
-use Capco\AppBundle\Entity\Steps\CollectStep as StepsCollectStep;
-use Capco\AppBundle\Model\CommentableInterface;
+use Capco\AppBundle\Utils\Map;
+use Doctrine\ORM\Mapping as ORM;
+use Capco\UserBundle\Entity\User;
+use Capco\MediaBundle\Entity\Media;
+use Capco\AppBundle\Traits\UuidTrait;
+use Capco\AppBundle\Model\Publishable;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Capco\AppBundle\Model\Contribution;
-use Capco\AppBundle\Traits\CommentableTrait;
-use Capco\AppBundle\Traits\DraftableTrait;
 use Capco\AppBundle\Traits\EnableTrait;
+use Capco\AppBundle\Traits\DraftableTrait;
 use Capco\AppBundle\Traits\ExpirableTrait;
-use Capco\AppBundle\Traits\HasResponsesTrait;
-use Capco\AppBundle\Traits\NullableTextableTrait;
 use Capco\AppBundle\Traits\ReferenceTrait;
-use Capco\AppBundle\Traits\SelfLinkableTrait;
-use Capco\AppBundle\Traits\SluggableTitleTrait;
+use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\SoftDeleteTrait;
+use Doctrine\Common\Collections\Collection;
+use Capco\AppBundle\Traits\CommentableTrait;
+use Capco\AppBundle\Traits\HasResponsesTrait;
+use Capco\AppBundle\Traits\SelfLinkableTrait;
+use Capco\AppBundle\Traits\PublishableTrait;
 use Capco\AppBundle\Traits\SummarizableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
-use Capco\AppBundle\Traits\TrashableTrait;
-use Capco\AppBundle\Traits\UuidTrait;
-use Capco\AppBundle\Utils\Map;
-use Capco\AppBundle\Validator\Constraints as CapcoAssert;
-use Capco\MediaBundle\Entity\Media;
-use Capco\UserBundle\Entity\User;
+use Capco\AppBundle\Model\CommentableInterface;
+use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
+use Capco\AppBundle\Traits\NullableTextableTrait;
+use Capco\AppBundle\Entity\Interfaces\SoftDeleteable;
+use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Symfony\Component\Validator\Constraints as Assert;
+use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
+use Capco\AppBundle\Entity\Steps\CollectStep as StepsCollectStep;
 
 /**
  * @ORM\Table(name="proposal", uniqueConstraints={
@@ -44,7 +46,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @CapcoAssert\HasOnlyOneSelectionPerStep()
  * @CapcoAssert\HasAddressIfMandatory()
  */
-class Proposal implements Contribution, CommentableInterface, SelfLinkableInterface, SoftDeleteable
+class Proposal
+    implements
+        Publishable,
+        Contribution,
+        CommentableInterface,
+        SelfLinkableInterface,
+        SoftDeleteable
 {
     use UuidTrait;
     use ReferenceTrait;
@@ -60,6 +68,7 @@ class Proposal implements Contribution, CommentableInterface, SelfLinkableInterf
     use SummarizableTrait;
     use DraftableTrait;
     use HasResponsesTrait;
+    use PublishableTrait;
 
     const STATE_DRAFT = 'draft';
     const STATE_ENABLED = 'published';

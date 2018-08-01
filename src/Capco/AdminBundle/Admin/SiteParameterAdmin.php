@@ -1,4 +1,5 @@
 <?php
+
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\SiteParameter;
@@ -15,7 +16,10 @@ use Symfony\Component\Form\Extension\Core\Type\UrlType;
 
 class SiteParameterAdmin extends Admin
 {
-    protected $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'isEnabled'];
+    protected $datagridValues = [
+        '_sort_order' => 'ASC',
+        '_sort_by' => 'isEnabled',
+    ];
 
     public function toString($object)
     {
@@ -24,10 +28,7 @@ class SiteParameterAdmin extends Admin
         }
 
         if (method_exists($object, '__toString') && null !== $object->__toString()) {
-            return $this->getConfigurationPool()
-                ->getContainer()
-                ->get('translator')
-                ->trans((string) $object, [], 'CapcoAppBundle');
+            return $this->getConfigurationPool()->getContainer()->get('translator')->trans((string) $object, [], 'CapcoAppBundle');
         }
 
         return parent::toString($object);
@@ -36,9 +37,7 @@ class SiteParameterAdmin extends Admin
     protected function getHelpText(?string $text = null): ?string
     {
         $txt = '';
-        $translator = $this->getConfigurationPool()
-            ->getContainer()
-            ->get('translator');
+        $translator = $this->getConfigurationPool()->getContainer()->get('translator');
         $texts = explode(' ', $text);
         if (\count($texts) > 1) {
             foreach ($texts as $splittedText) {
@@ -56,10 +55,13 @@ class SiteParameterAdmin extends Admin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->add('isEnabled', null, [
-            'label' => 'admin.fields.site_parameter.is_enabled',
-            'required' => false,
-        ]);
+        $formMapper
+            ->add('isEnabled', null, [
+                'label' => 'admin.fields.site_parameter.is_enabled',
+                'required' => false,
+            ])
+        ;
+
         /** @var SiteParameter $subject */
         $subject = $this->getSubject();
         $types = SiteParameter::$types;
@@ -72,7 +74,7 @@ class SiteParameterAdmin extends Admin
             ];
             if ($subject->isSocialNetworkDescription()) {
                 $options['help'] = 'admin.help.metadescription';
-                $options['attr']['max_length'] = 160;
+                $options['max_length'] = 160;
             }
             $formMapper->add('value', TextType::class, $options);
         } elseif ($subject->getType() === $types['rich_text']) {
@@ -93,10 +95,7 @@ class SiteParameterAdmin extends Admin
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
                 'help' => $this->getHelpText($subject->getHelpText()),
-                'attr' => [
-                    'rows' => 10,
-                    'placeholder' => '<script type="text/javascript"> </script>',
-                ],
+                'attr' => ['rows' => 10, 'placeholder' => '<script type="text/javascript"> </script>'],
             ]);
         } elseif ($subject->getType() === $types['email']) {
             $formMapper->add('value', EmailType::class, [
@@ -130,10 +129,7 @@ class SiteParameterAdmin extends Admin
                 'choices' => ['1' => 'Activé', '0' => 'Désactivé'],
                 'help' => $this->getHelpText($subject->getHelpText()),
             ]);
-        } elseif (
-            'homepage.jumbotron.margin' === $subject->getKeyname() &&
-            $subject->getType() === $types['select']
-        ) {
+        } elseif ('homepage.jumbotron.margin' === $subject->getKeyname() && $subject->getType() === $types['select']) {
             $formMapper->add('value', ChoiceType::class, [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
@@ -150,7 +146,10 @@ class SiteParameterAdmin extends Admin
             $formMapper->add('value', ChoiceType::class, [
                 'label' => 'admin.fields.site_parameter.value',
                 'required' => false,
-                'choices' => ['fr-FR' => 'Français', 'en-GB' => 'English'],
+                'choices' => [
+                    'fr-FR' => 'Français',
+                    'en-GB' => 'English',
+                ],
                 'help' => $this->getHelpText($subject->getHelpText()),
             ]);
         } elseif ('global.timezone' === $subject->getKeyname()) {
@@ -180,8 +179,7 @@ class SiteParameterAdmin extends Admin
         $zones = [];
 
         foreach ($timezones as $zone) {
-            $zones[$zone] = sprintf(
-                '%s (GMT%s)',
+            $zones[$zone] = sprintf('%s (GMT%s)',
                 self::formatTimezoneName($zone),
                 (new \DateTime('now', new \DateTimeZone($zone)))->format('P')
             );

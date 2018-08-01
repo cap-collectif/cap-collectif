@@ -97,4 +97,4 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     questionChoices: ['@questionchoice29', '@questionchoice30', '@questionchoice31']
     required: false
     type: 6
-    randomQuestionChoices: false
+    randomQuestionChoices: true

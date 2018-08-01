@@ -158,7 +158,7 @@ type AppendixType {
 }
 
 # An argument
-type Argument implements Node & Contribution & Reportable & TrashableContribution & ContributionWithAuthor & EditableContribution {
+type Argument implements Node & Publishable & Contribution & Reportable & TrashableContribution & ContributionWithAuthor & EditableContribution {
   # True if the contribution is trashed.
   trashed: Boolean!
 
@@ -192,10 +192,18 @@ type Argument implements Node & Contribution & Reportable & TrashableContributio
   # Identifies the date and time when the object was last updated.
   updatedAt: DateTime
 
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity was not published.
+  notPublishedReason: NotPublishedReason
+
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
   expired: Boolean!
-  published: Boolean!
 
   # The type.
   type: ArgumentValue!
@@ -577,7 +585,7 @@ type CollectStep implements Node & Step & ProposalStep {
 }
 
 # A comment
-type Comment implements Node & Contribution {
+type Comment implements Node & Publishable & Contribution {
   # The ID of an object
   id: ID!
 
@@ -592,6 +600,15 @@ type Comment implements Node & Contribution {
 
   # Url of the contribution
   url: URI!
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity was not published.
+  notPublishedReason: NotPublishedReason
   body: String
   createdAt: DateTime!
   updatedAt: DateTime
@@ -1278,11 +1295,10 @@ type MediaQuestion implements Question {
   helpText: String
   description: String
   kind: String!
-  slug: String!
-
-  # Return users who answered the question
-  participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
+  isOtherAllowed: Boolean!
+  choices: [QuestionChoice!]
   validationRule: MultipleChoiceQuestionValidationRule
+  slug: String!
 }
 
 # A response
@@ -1304,13 +1320,10 @@ type MultipleChoiceQuestion implements Question {
   helpText: String
   description: String
   kind: String!
-  slug: String!
-
-  # Return users who answered the question
-  participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
-  validationRule: MultipleChoiceQuestionValidationRule
   isOtherAllowed: Boolean!
   choices: [QuestionChoice!]
+  validationRule: MultipleChoiceQuestionValidationRule
+  slug: String!
 }
 
 # Multiple Choice Question Validation Rule
@@ -1402,6 +1415,18 @@ interface Node {
   id: ID!
 }
 
+# 3 possible values
+enum NotPublishedReason {
+  # Author account isn't confirmed yet.
+  WAITING_AUTHOR_CONFIRMATION
+
+  # Author account isn't confirmed and the step has ended.
+  AUTHOR_NOT_CONFIRMED
+
+  # Author account was confirmed after the step has ended.
+  AUTHOR_CONFIRMED_TOO_LATE
+}
+
 # A user without account.
 type NotRegistered {
   # Email of the user.
@@ -1422,7 +1447,7 @@ type NotificationsConfiguration {
 }
 
 # A contribution
-type Opinion implements Node & Argumentable & Sourceable & Reportable & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
+type Opinion implements Node & Publishable & Argumentable & Sourceable & Reportable & Contribution & TrashableContribution & ContributionWithAuthor & EditableContribution {
   # True if the contribution is trashed.
   trashed: Boolean!
 
@@ -1475,6 +1500,15 @@ type Opinion implements Node & Argumentable & Sourceable & Reportable & Contribu
   # The available sources categories of to the sourceable.
   availableSourceCategories: [SourceCategory]
 
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity was not published.
+  notPublishedReason: NotPublishedReason
+
   # Identifies the date and time when the object was created.
   createdAt: DateTime!
 
@@ -1483,7 +1517,6 @@ type Opinion implements Node & Argumentable & Sourceable & Reportable & Contribu
 
   # true if the contribution is expired.
   expired: Boolean!
-  published: Boolean!
   step: Consultation!
 
   # The viewer vote.
@@ -1536,7 +1569,17 @@ type OpinionModal {
 
 union OpinionOrVersion = Opinion | Version
 
-type OpinionVote implements YesNoPairedVote {
+# Entities that can be published.
+type OpinionVote implements Publishable & YesNoPairedVote {
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity was not published.
+  notPublishedReason: NotPublishedReason
+
   # The ID of an object
   id: ID!
 
@@ -2142,7 +2185,16 @@ enum ProposalStepVoteType {
   BUDGET
 }
 
-type ProposalVote {
+# Entities that can be published.
+type ProposalVote implements Publishable {
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity was not published.
+  notPublishedReason: NotPublishedReason
   id: ID!
 
   # The author of the contribution. If null, the vote is anonymous.
@@ -2196,6 +2248,18 @@ type ProposalVoteEdge {
 input ProposalVotesOrder {
   field: VoteOrderField! = CREATED_AT
   direction: OrderDirection! = DESC
+}
+
+# Entities that can be published.
+interface Publishable {
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity was not published.
+  notPublishedReason: NotPublishedReason
 }
 
 type Query {
@@ -2252,10 +2316,6 @@ interface Question {
   description: String
   kind: String!
   slug: String!
-
-  # Return users who answered the question
-  participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
-  validationRule: MultipleChoiceQuestionValidationRule
 }
 
 # A possible choice of a question
@@ -2265,24 +2325,6 @@ type QuestionChoice {
   description: String
   color: String
   image: Media
-
-  # Select all the responses of the given question choice
-  responses(after: String, first: Int, before: String, last: Int): ResponseConnection!
-
-  # Return the ranking of the given question choice
-  ranking: [QuestionChoiceRanking]
-}
-
-# The choice ranking
-type QuestionChoiceRanking {
-  # Return the position of the choice
-  position: Int!
-
-  # Return the number of responses of the choice at the given position
-  answerCount: Int!
-
-  # Select the responses of the c
-  responses(after: String, first: Int, before: String, last: Int): ResponseConnection!
 }
 
 input QuestionInput {
@@ -2322,7 +2364,6 @@ type Questionnaire implements Node {
   phoneConfirmationRequired: Boolean!
   questions: [Question!]!
   viewerReplies: [Reply!]!
-  participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
 }
 
 input QuestionnaireAbstractQuestionInput {
@@ -2579,27 +2620,6 @@ interface Response {
   question: Question!
 }
 
-# A connection to a list of items.
-type ResponseConnection {
-  # Identifies the total count of items in the connection.
-  totalCount: Int!
-
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # Information to aid in pagination.
-  edges: [ResponseEdge]
-}
-
-# An edge in a connection.
-type ResponseEdge {
-  # The item at the end of the edge.
-  node: Response!
-
-  # A cursor for use in pagination.
-  cursor: String!
-}
-
 # A response
 input ResponseInput {
   # If related to a value question
@@ -2792,11 +2812,10 @@ type SimpleQuestion implements Question {
   helpText: String
   description: String
   kind: String!
-  slug: String!
-
-  # Return users who answered the question
-  participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
+  isOtherAllowed: Boolean!
+  choices: [QuestionChoice!]
   validationRule: MultipleChoiceQuestionValidationRule
+  slug: String!
 }
 
 # A source
@@ -3622,8 +3641,8 @@ enum VersionOrderField {
   # Allows ordering a list of versions by the number of votes it have.
   VOTES
 
-  # Allows ordering a list of versions by the number of votes it have.
-  COMMENTS
+  # Allows ordering a list of versions by the number of arguments it have.
+  ARGUMENTS
 
   # Allows ordering a list of versions by the number of votes ok it have.
   VOTES_OK
@@ -3632,7 +3651,17 @@ enum VersionOrderField {
   RANDOM
 }
 
-type VersionVote implements YesNoPairedVote {
+# Entities that can be published.
+type VersionVote implements Publishable & YesNoPairedVote {
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity was not published.
+  notPublishedReason: NotPublishedReason
+
   # The ID of an object
   id: ID!
 

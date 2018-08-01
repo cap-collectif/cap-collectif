@@ -42,7 +42,7 @@
       "gherkin-lint"
     ],
     "*.yml": [
-      "prettier --parser yaml --write"
+      "yamllint"
     ],
     "*.php": [
       "prettier --parser php --write",
@@ -100,7 +100,7 @@
     }
   },
   "dependencies": {
-    "@prettier/plugin-php": "^0.4.0",
+    "@prettier/plugin-php": "^0.3.1",
     "@storybook/addon-info": "^3.4.8",
     "@storybook/addons": "^3.4.8",
     "@storybook/react": "^3.4.8",
@@ -172,7 +172,7 @@
     "moment-timezone": "^0.5.21",
     "points-cluster": "^0.1.4",
     "pre-commit": "^1.2.2",
-    "prettier": "1.14.0",
+    "prettier": "^1.13.7",
     "prop-types": "^15.6.1",
     "qs": "^6.5.0",
     "quill": "^0.20.1",

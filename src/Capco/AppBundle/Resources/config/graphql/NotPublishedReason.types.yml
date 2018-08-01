@@ -1,0 +1,15 @@
+NotPublishedReason:
+  type: enum
+  config:
+    description: '3 possible values'
+    values:
+      WAITING_AUTHOR_CONFIRMATION:
+        value: WAITING_AUTHOR_CONFIRMATION
+        description: "Author account isn't confirmed yet."
+      AUTHOR_NOT_CONFIRMED:
+        value: AUTHOR_NOT_CONFIRMED
+        description: "Author account isn't confirmed and the step has ended."
+      AUTHOR_CONFIRMED_TOO_LATE:
+        value: ACCOUNT_CONFIRMED_TOO_LATE
+        description: "Author account was confirmed after the step has ended."
+

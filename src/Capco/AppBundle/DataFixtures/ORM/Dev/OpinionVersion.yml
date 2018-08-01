@@ -1,6 +1,7 @@
 Capco\AppBundle\Entity\OpinionVersion:
   version1:
     id: 'version1'
+    publishedAt: <(new \DateTime('2015-01-01'))>
     createdAt: <(new \DateTime('2015-01-01'))>
     title: Modification 1
     body: |
@@ -16,6 +17,7 @@ Capco\AppBundle\Entity\OpinionVersion:
     moderationToken: 'version1ModerationToken'
   version2:
     id: 'version2'
+    publishedAt: <(new \DateTime('2015-01-02'))>
     createdAt: <(new \DateTime('2015-01-02'))>
     title: Modification 2
     body: |
@@ -29,6 +31,7 @@ Capco\AppBundle\Entity\OpinionVersion:
     ranking: <numberBetween(1,5)>
   version3:
     id: 'version3'
+    publishedAt: <(new \DateTime('2015-01-03'))>
     createdAt: <(new \DateTime('2015-01-03'))>
     title: Modification 3
     body: |
@@ -42,6 +45,7 @@ Capco\AppBundle\Entity\OpinionVersion:
     ranking: <numberBetween(1,5)>
   version{4...10}:
     id: 'version<current()>'
+    publishedAt: <(new \DateTime('2015-01-03'))>
     title: Modification <current()>
     body: |
       <p><text(100)></p>
@@ -54,6 +58,7 @@ Capco\AppBundle\Entity\OpinionVersion:
     ranking: <numberBetween(1,5)>
   version11:
     id: 'version11'
+    publishedAt: <(new \DateTime('2015-01-03'))>
     title: Version sur une étape fermée
     body: |
       <p><text(100)></p>

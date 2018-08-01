@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Traits;
 
 use Capco\UserBundle\Entity\User;
@@ -13,17 +12,11 @@ trait HasAuthorTrait
      */
     protected $author;
 
-    /**
-     * @return mixed
-     */
-    public function getAuthor()
+    public function getAuthor(): ?User
     {
         return $this->author;
     }
 
-    /**
-     * @param mixed $author
-     */
     public function setAuthor(User $author)
     {
         $this->author = $author;

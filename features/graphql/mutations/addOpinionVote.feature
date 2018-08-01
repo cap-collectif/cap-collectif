@@ -11,6 +11,7 @@ Scenario: Logged in API client wants to vote for an opinion
       addOpinionVote(input: $input) {
         vote {
           id
+          published
           related {
             id
           }
@@ -35,6 +36,7 @@ Scenario: Logged in API client wants to vote for an opinion
       "addOpinionVote": {
         "vote": {
           "id": @string@,
+          "published": true,
           "related": {
             "id": "opinion57"
           },

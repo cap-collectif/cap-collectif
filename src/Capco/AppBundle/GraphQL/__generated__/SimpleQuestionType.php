@@ -137,11 +137,13 @@ final class SimpleQuestionType extends ObjectType implements GeneratedTypeInterf
                     'public' => null,
                     'access' => null,
                 ],
-                'slug' => [
-                    'type' => Type::nonNull(Type::string()),
+                'isOtherAllowed' => [
+                    'type' => Type::nonNull(Type::boolean()),
                     'args' => [
                     ],
-                    'resolve' => null,
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["question_isOtherAllowed", array(0 => $value)]);
+                    },
                     'description' => null,
                     'deprecationReason' => null,
                     'complexity' => null,
@@ -149,34 +151,14 @@ final class SimpleQuestionType extends ObjectType implements GeneratedTypeInterf
                     'public' => null,
                     'access' => null,
                 ],
-                'participants' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ParticipantConnection')),
+                'choices' => [
+                    'type' => Type::listOf(Type::nonNull($globalVariable->get('typeResolver')->resolve('QuestionChoice'))),
                     'args' => [
-                        [
-                            'name' => 'after',
-                            'type' => Type::string(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'first',
-                            'type' => Type::int(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'before',
-                            'type' => Type::string(),
-                            'description' => null,
-                        ],
-                        [
-                            'name' => 'last',
-                            'type' => Type::int(),
-                            'description' => null,
-                        ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionParticipantsResolver", array(0 => $value, 1 => $args)]);
+                        return $globalVariable->get('resolverResolver')->resolve(["question_choices", array(0 => $value)]);
                     },
-                    'description' => 'Return users who answered the question',
+                    'description' => null,
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
@@ -190,6 +172,18 @@ final class SimpleQuestionType extends ObjectType implements GeneratedTypeInterf
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
                         return $globalVariable->get('resolverResolver')->resolve(["question_validation_rule", array(0 => $value)]);
                     },
+                    'description' => null,
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'slug' => [
+                    'type' => Type::nonNull(Type::string()),
+                    'args' => [
+                    ],
+                    'resolve' => null,
                     'description' => null,
                     'deprecationReason' => null,
                     'complexity' => null,

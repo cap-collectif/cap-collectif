@@ -1,12 +1,10 @@
 <?php
-
 namespace Capco\AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 
 /**
- * ArgumentVote.
- *
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ArgumentVoteRepository")
  * @ORM\HasLifecycleCallbacks()
  */
@@ -44,6 +42,11 @@ class ArgumentVote extends AbstractVote
     public function getRelated()
     {
         return $this->argument;
+    }
+
+    public function getStep(): ?ConsultationStep
+    {
+        return $this->argument && $this->argument->getStep();
     }
 
     // *************************** Lifecycle **********************************

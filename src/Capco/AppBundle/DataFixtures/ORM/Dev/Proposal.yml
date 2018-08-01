@@ -11,6 +11,7 @@ Capco\AppBundle\Entity\Proposal:
     theme: '@theme2'
     district: '@district1'
     status: '@status1'
+    publishedAt: <(new \DateTime('2015-01-01'))>
     createdAt: <(new \DateTime('2015-01-01'))>
     likers: ['@user1', '@user2', '@user3', '@user4', '@user5']
     category: '@pCategory2'
@@ -30,6 +31,7 @@ Capco\AppBundle\Entity\Proposal:
     theme: '@theme2'
     district: '@district1'
     status: '@status1'
+    publishedAt: <(new \DateTime('2015-01-01'))>
     createdAt: <(new \DateTime('2015-01-01'))>
     deletedAt: <(new \DateTime('2018-01-01'))>
     likers: ['@user1', '@user2']
@@ -52,6 +54,7 @@ Capco\AppBundle\Entity\Proposal:
     theme: '@theme3'
     district: '@district2'
     status: '@status2'
+    publishedAt: <(new \DateTime('2015-02-01'))>
     createdAt: <(new \DateTime('2015-02-01'))>
     likers: ['@user504']
     category: '@pCategory1'
@@ -74,6 +77,7 @@ Capco\AppBundle\Entity\Proposal:
     theme: '@theme2'
     district: '@district4'
     status: '@status1'
+    publishedAt: <(new \DateTime('2015-03-01'))>
     createdAt: <(new \DateTime('2015-03-01'))>
     category: '@pCategory2'
     address:
@@ -93,6 +97,7 @@ Capco\AppBundle\Entity\Proposal:
     proposalForm: '@proposalform1'
     theme: '@theme2'
     district: '@district2'
+    publishedAt: <(new \DateTime('2015-03-01'))>
     address:
       '[{"address_components":[{"long_name":"45","short_name":"45","types":["street_number"]},{"long_name":"Rue de Brest","short_name":"Rue de Brest","types":["route"]},{"long_name":"Rennes","short_name":"Rennes","types":["locality","political"]},{"long_name":"Ille-et-Vilaine","short_name":"Ille-et-Vilaine","types":["administrative_area_level_2","political"]},{"long_name":"Bretagne","short_name":"Bretagne","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"35000","short_name":"35000","types":["postal_code"]}],"formatted_address":"45 Rue de Brest, 35000 Rennes, France","geometry":{"location":{"lat":48.1133495,"lng":-1.6984153},"location_type":"ROOFTOP","viewport":{"northeast":{"lat":48.11469848029149,"lng":-1.697066319708498},"southwest":{"lat":48.1120005197085,"lng":-1.699764280291502}}},"place_id":"ChIJ1wi1uoPgDkgREYKb8YA-iqY","types":["church","establishment","place_of_worship","point_of_interest"]}]'
     reference: 4
@@ -105,6 +110,7 @@ Capco\AppBundle\Entity\Proposal:
     isTrashed: true
     rating: 1
     author: '@user7'
+    publishedAt: <(new \DateTime('2015-03-01'))>
     proposalForm: '@proposalform1'
     theme: '@theme4'
     district: '@district3'
@@ -120,6 +126,7 @@ Capco\AppBundle\Entity\Proposal:
     isTrashed: false
     rating: 3
     author: '@user4'
+    publishedAt: <(new \DateTime('2015-03-01'))>
     proposalForm: '@proposalform1'
     theme: '@theme2'
     district: '@district3'
@@ -134,6 +141,7 @@ Capco\AppBundle\Entity\Proposal:
     isTrashed: false
     rating: 3
     author: '@user4'
+    publishedAt: <(new \DateTime('2015-03-01'))>
     proposalForm: '@proposalform3'
     theme: '@theme2'
     district: '@district3'
@@ -158,6 +166,7 @@ Capco\AppBundle\Entity\Proposal:
     estimation: 100
     category: '@pCategory3'
     reference: 2
+    publishedAt: <(new \DateTime('2015-03-01'))>
     updatedAt: <(new \DateTime('yesterday'))>
   proposal9:
     id: proposal9
@@ -174,6 +183,7 @@ Capco\AppBundle\Entity\Proposal:
     status: '@status1'
     category: '@pCategory4'
     reference: 3
+    publishedAt: <(new \DateTime('2015-03-01'))>
   proposal10:
     id: proposal10
     title: Proposition pas encore votable
@@ -189,6 +199,7 @@ Capco\AppBundle\Entity\Proposal:
     status: '@status1'
     estimation: 100
     reference: 7
+    publishedAt: <(new \DateTime('2015-03-01'))>
   proposal11:
     id: proposal11
     title: Proposition plus votable
@@ -204,6 +215,7 @@ Capco\AppBundle\Entity\Proposal:
     status: '@status1'
     estimation: 100
     reference: 8
+    publishedAt: <(new \DateTime('2015-03-01'))>
   proposal12:
     id: proposal12
     title: Proposition plus votable
@@ -219,6 +231,7 @@ Capco\AppBundle\Entity\Proposal:
     status: '@status7'
     estimation: 100
     reference: 1
+    publishedAt: <(new \DateTime('2015-03-01'))>
   proposal13:
     id: proposal13
     title: Proposition plus votable 2
@@ -234,6 +247,7 @@ Capco\AppBundle\Entity\Proposal:
     status: '@status1'
     estimation: 100
     reference: 2
+    publishedAt: <(new \DateTime('2015-03-01'))>
   proposal14:
     id: proposal14
     title: Mon super projet
@@ -248,6 +262,7 @@ Capco\AppBundle\Entity\Proposal:
     status: '@status1'
     estimation: 100
     reference: 1
+    publishedAt: <(new \DateTime('2015-03-01'))>
   proposal15:
     id: proposal15
     title: Proposition 15
@@ -257,6 +272,7 @@ Capco\AppBundle\Entity\Proposal:
     author: '@user1'
     proposalForm: '@proposalform6'
     reference: 1
+    publishedAt: <(new \DateTime('2015-03-01'))>
   proposal16:
     id: proposal16
     title: Proposition 16
@@ -266,6 +282,7 @@ Capco\AppBundle\Entity\Proposal:
     author: '@user1'
     proposalForm: '@proposalform6'
     reference: 2
+    publishedAt: <(new \DateTime('2015-03-01'))>
   proposal17:
     id: proposal17
     title: Proposition 17
@@ -275,6 +292,7 @@ Capco\AppBundle\Entity\Proposal:
     author: '@user5'
     proposalForm: '@proposalform7'
     reference: 1
+    publishedAt: <(new \DateTime('2015-03-01'))>
   proposal18:
     id: proposal18
     title: Proposition 18
@@ -284,6 +302,7 @@ Capco\AppBundle\Entity\Proposal:
     author: '@user1'
     proposalForm: '@proposalform7'
     reference: 2
+    publishedAt: <(new \DateTime('2015-03-01'))>
   proposal19:
     id: proposal19
     title: Proposition brouillon 1
@@ -296,6 +315,7 @@ Capco\AppBundle\Entity\Proposal:
     theme: '@theme2'
     district: '@district3'
     reference: 9
+    publishedAt: <(new \DateTime('2015-03-01'))>
   proposal20:
     id: proposal20
     title: Proposition brouillon 2
@@ -308,6 +328,7 @@ Capco\AppBundle\Entity\Proposal:
     theme: '@theme2'
     district: '@district3'
     reference: 10
+    publishedAt: <(new \DateTime('2015-03-01'))>
   proposal21:
     id: proposal21
     title: Proposition brouillon 3
@@ -320,6 +341,7 @@ Capco\AppBundle\Entity\Proposal:
     theme: '@theme2'
     district: '@district3'
     reference: 11
+    publishedAt: <(new \DateTime('2015-03-01'))>
   proposal22:
     id: proposal22
     title: Proposition vraiment intéressante
@@ -329,6 +351,7 @@ Capco\AppBundle\Entity\Proposal:
     author: '@user4'
     proposalForm: '@proposalFormVote'
     reference: 666
+    publishedAt: <(new \DateTime('2015-03-01'))>
   proposal23:
     id: proposal23
     title: Proposition vraiment intéressante 2
@@ -338,6 +361,7 @@ Capco\AppBundle\Entity\Proposal:
     author: '@user4'
     proposalForm: '@proposalFormVote'
     reference: 667
+    publishedAt: <(new \DateTime('2015-03-01'))>
   proposal24:
     id: proposal24
     title: Proposition 1
@@ -347,6 +371,7 @@ Capco\AppBundle\Entity\Proposal:
     author: '@user1'
     proposalForm: '@proposalFormVoteClassement'
     reference: 1
+    publishedAt: <(new \DateTime('2015-03-01'))>
   proposal25:
     id: proposal25
     title: Proposition 2
@@ -356,6 +381,7 @@ Capco\AppBundle\Entity\Proposal:
     author: '@user1'
     proposalForm: '@proposalFormVoteClassement'
     reference: 2
+    publishedAt: <(new \DateTime('2015-03-01'))>
   proposal26:
     id: proposal26
     title: Proposition 3
@@ -365,3 +391,4 @@ Capco\AppBundle\Entity\Proposal:
     author: '@user1'
     proposalForm: '@proposalFormVoteClassement'
     reference: 3
+    publishedAt: <(new \DateTime('2015-03-01'))>
