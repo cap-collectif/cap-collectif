@@ -13,21 +13,27 @@ ProposalForm:
         type: 'String'
       summaryHelpText:
         type: 'String'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormSummaryHelpTextResolver", [value])'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormSummaryHelpTextResolver", [value])'
       illustrationHelpText:
         type: 'String'
       title:
         type: 'String!'
       proposals:
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormProposalsResolver", [value, args, getUser(), serv("request_stack")])'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormProposalsResolver", [value, args, getUser(), serv("request_stack")])'
       categories:
         type: '[ProposalCategory!]!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormCategoriesResolver", [value])'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormCategoriesResolver", [value])'
         description: 'Available categories for proposals of this form.'
       usingThemes:
         type: 'Boolean!'
       contribuable:
         type: 'Boolean!'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormViewerCanContributeResolver", [value, getUser()])'
+        description: 'Viewer can contribute to the form'
       themeMandatory:
         type: 'Boolean!'
       themeHelpText:
@@ -46,7 +52,8 @@ ProposalForm:
           order:
             type: 'DistrictOrderField'
             defaultValue: 'ALPHABETICAL'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormDistrictsResolver", [value, args["order"]])'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormDistrictsResolver", [value, args["order"]])'
       districtMandatory:
         type: 'Boolean!'
       districtHelpText:
@@ -67,7 +74,8 @@ ProposalForm:
         type: 'String'
       questions:
         type: '[Question!]!'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormQuestionsResolver", [value])'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormQuestionsResolver", [value])'
       latMap:
         type: 'Float'
       lngMap:
@@ -77,7 +85,8 @@ ProposalForm:
       url:
         type: 'URI!'
         description: 'The HTTP url for this proposal form.'
-        resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormUrlResolver", [value])'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormUrlResolver", [value])'
       notificationsConfiguration:
         type: 'NotificationsConfiguration!'
       evaluationForm:

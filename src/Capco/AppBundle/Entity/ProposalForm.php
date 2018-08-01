@@ -401,14 +401,14 @@ class ProposalForm
         return true;
     }
 
-    public function isContribuable(): bool
+    public function isContribuable($user = null): bool
     {
-        return $this->canContribute();
+        return $this->canContribute($user);
     }
 
-    public function canContribute(): bool
+    public function canContribute($user = null): bool
     {
-        return $this->getStep() && $this->getStep()->canContribute();
+        return $this->getStep() && $this->getStep()->canContribute($user);
     }
 
     public function getTitleHelpText()

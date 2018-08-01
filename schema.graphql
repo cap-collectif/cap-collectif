@@ -2117,6 +2117,8 @@ type ProposalForm implements Node {
   # Available categories for proposals of this form.
   categories: [ProposalCategory!]!
   usingThemes: Boolean!
+
+  # Viewer can contribute to the form
   contribuable: Boolean!
   themeMandatory: Boolean!
   themeHelpText: String

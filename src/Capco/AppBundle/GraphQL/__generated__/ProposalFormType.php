@@ -207,8 +207,10 @@ final class ProposalFormType extends ObjectType implements GeneratedTypeInterfac
                     'type' => Type::nonNull(Type::boolean()),
                     'args' => [
                     ],
-                    'resolve' => null,
-                    'description' => null,
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormViewerCanContributeResolver", array(0 => $value, 1 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
+                    },
+                    'description' => 'Viewer can contribute to the form',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

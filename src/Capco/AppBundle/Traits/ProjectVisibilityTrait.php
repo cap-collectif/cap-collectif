@@ -33,6 +33,7 @@ trait ProjectVisibilityTrait
 
     /**
      * get user visibility and check if I'm author of project
+     * TODO rename by isViewerAllowed or isViewerGranted
      */
     public function canDisplayForViewer($user = null): bool
     {

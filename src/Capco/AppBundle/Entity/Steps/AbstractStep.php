@@ -310,14 +310,18 @@ abstract class AbstractStep
         return $this->isEnabled && $this->getProject() && $this->getProject()->canDisplay($user);
     }
 
-    public function canContribute(): bool
+    public function canContribute($user = null): bool
     {
-        return $this->isActive() && $this->isOpen();
+        return $this->isActive($user) && $this->isOpen();
     }
 
-    public function isActive(): bool
+    public function isActive($user = null): bool
     {
-        return $this->getProject() && $this->getProject()->canContribute() && $this->getIsEnabled();
+        return (
+            $this->getProject() &&
+            $this->getProject()->canContribute($user) &&
+            $this->getIsEnabled()
+        );
     }
 
     public function isConsultationStep(): bool
