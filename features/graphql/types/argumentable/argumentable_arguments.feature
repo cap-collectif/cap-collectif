@@ -126,7 +126,7 @@ Scenario: Anonymous wants to get arguments filtered by type for an opinion
     "data": {
         "opinion": {
             "arguments": {
-              "totalCount": 1,
+              "totalCount": @integer@,
               "edges": [
                 {
                   "node": {
@@ -170,7 +170,7 @@ Scenario: Anonymous wants to get arguments filtered by type for an opinion
     "data": {
         "opinion": {
             "arguments": {
-              "totalCount": 1,
+              "totalCount": @integer@,
               "edges": [
                 {
                   "node": {

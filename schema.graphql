@@ -3745,7 +3745,16 @@ enum VoteOrderField {
   POSITION
 }
 
+# Entities that can be published.
 interface YesNoPairedVote {
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity was not published.
+  notPublishedReason: NotPublishedReason
   id: ID!
 
   # The author of the contribution.

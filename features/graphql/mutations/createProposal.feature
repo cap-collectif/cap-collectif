@@ -54,6 +54,7 @@ Scenario: GraphQL client wants to create a proposal
       createProposal(input: $input) {
         proposal {
           id
+          published
           title
           publicationStatus
         }
@@ -98,6 +99,7 @@ Scenario: GraphQL client wants to create a proposal
       "createProposal": {
         "proposal": {
           "id": @uuid@,
+          "published": true,
           "title": "Acheter un sauna pour Capco",
           "publicationStatus": "PUBLISHED"
         }

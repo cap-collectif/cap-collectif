@@ -11,6 +11,7 @@ Scenario: User wants to add a version on an opinion
             addVersion(input: $input) {
                 version {
                     id
+                    published
                     author {
                         id
                     }
@@ -40,6 +41,7 @@ Scenario: User wants to add a version on an opinion
             "addVersion": {
                 "version": {
                     "id": @uuid@,
+                    "published": true,
                     "author": {
                         "id": "user5"
                     }

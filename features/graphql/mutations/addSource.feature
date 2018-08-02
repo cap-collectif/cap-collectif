@@ -11,6 +11,7 @@ Scenario: User wants to add a source on an opinion
       addSource(input: $input) {
         source {
           id
+          published
           body
           title
           link
@@ -51,6 +52,7 @@ Scenario: User wants to add a source on an opinion
         "userErrors": [],
         "source": {
           "id": @string@,
+          "published": true,
           "link": "http://google.com",
           "title": "Je suis une source",
           "category": {

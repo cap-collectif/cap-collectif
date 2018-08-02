@@ -11,6 +11,7 @@ Scenario: User wants to add a reply
       addReply(input: $input) {
         reply {
           id
+          published
           responses {
             question {
               id
@@ -46,6 +47,7 @@ Scenario: User wants to add a reply
       "addReply": {
           "reply": {
               "id": @uuid@,
+              "published": true,
               "responses": [
                 {"question": {"id":"2" }, "value": "Je pense que c\u0027est la ville parfaite pour organiser les JO"},
                 {"question": {"id":"13"}, "value": "{\"labels\":[\"Athl\u00e9tisme\",\"Sports collectifs\"],\"other\":\"Emb\u00eater Maxime\"}"},

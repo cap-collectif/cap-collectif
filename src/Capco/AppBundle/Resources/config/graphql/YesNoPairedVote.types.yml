@@ -1,5 +1,7 @@
 YesNoPairedVote:
   type: interface
+  inherits:
+    - Publishable
   config:
     resolveType: "@=resolver('contribution_type', [value])"
     fields:

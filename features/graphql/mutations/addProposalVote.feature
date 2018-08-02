@@ -87,6 +87,7 @@ Scenario: Logged in API client wants to vote for a proposal
       addProposalVote(input: $input) {
         vote {
           id
+          published
           proposal {
             id
           }
@@ -111,6 +112,7 @@ Scenario: Logged in API client wants to vote for a proposal
       "addProposalVote": {
         "vote": {
           "id": @string@,
+          "published": true,
           "proposal": {
             "id": "proposal2"
           },

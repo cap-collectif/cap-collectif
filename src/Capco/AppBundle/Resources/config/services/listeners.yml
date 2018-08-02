@@ -53,6 +53,11 @@ services:
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
+  Capco\AppBundle\Publishable\DoctrineListener:
+    public: true
+    tags:
+      - { name: doctrine.event_subscriber, connection: default }
+
   capco.diff.subscriber:
     public: true
     class: Capco\AppBundle\EventListener\DiffSubscriber

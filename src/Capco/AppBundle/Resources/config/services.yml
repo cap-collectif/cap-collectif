@@ -98,10 +98,6 @@ services:
       - { name: doctrine.event_subscriber, event: loadClassMetadata }
     arguments: ['%traits%']
 
-    Capco\AppBundle\Publishable\DoctrineListener:
-      tags:
-        - { name: doctrine.event_subscriber, connection: default }
-
   capco.contribution.manager:
     class: Capco\AppBundle\Manager\ContributionManager
     arguments: ['@doctrine.orm.entity_manager']
