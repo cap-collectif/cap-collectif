@@ -198,6 +198,7 @@ Scenario: Super Admin can access to all private projects
   When I visited "collect page" with:
     | projectSlug | project-pour-la-creation-de-la-capcobeer-visible-par-admin-seulement |
     | stepSlug    | collecte-des-propositions-pour-la-capcobeer                          |
+  And I wait 1 seconds
   Then I should see "Collecte des propositions pour la capcoBeer"
   And I should see "global.draft.only_visible_by_you"
   When I visited "collect page" with:
