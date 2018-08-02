@@ -1,5 +1,5 @@
 <?php
-namespace Capco\AppBundle\Entity;
+namespace Capco\AppBundle\Enum;
 
 final class ProjectVisibilityMode
 {
