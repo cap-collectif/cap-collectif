@@ -11,29 +11,17 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
 /**
  * THIS FILE WAS GENERATED AND SHOULD NOT BE MODIFIED!
  */
-final class FollowerType extends ObjectType implements GeneratedTypeInterface
+final class UnfollowOpinionPayloadType extends ObjectType implements GeneratedTypeInterface
 {
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
-            'name' => 'Follower',
-            'description' => 'A follower',
+            'name' => 'UnfollowOpinionPayload',
+            'description' => null,
             'fields' => function () use ($globalVariable) {
                 return [
-                'proposal' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('Proposal'),
-                    'args' => [
-                    ],
-                    'resolve' => null,
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'opinion' => [
                     'type' => $globalVariable->get('typeResolver')->resolve('Opinion'),
                     'args' => [
@@ -46,8 +34,8 @@ final class FollowerType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'user' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('User')),
+                'unfollowerId' => [
+                    'type' => Type::id(),
                     'args' => [
                     ],
                     'resolve' => null,
@@ -58,8 +46,8 @@ final class FollowerType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'notifiedOf' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('SubscriptionTypeValue'),
+                'clientMutationId' => [
+                    'type' => Type::string(),
                     'args' => [
                     ],
                     'resolve' => null,

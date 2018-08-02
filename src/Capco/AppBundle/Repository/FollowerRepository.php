@@ -1,7 +1,7 @@
 <?php
-
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\Proposal;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -20,8 +20,24 @@ class FollowerRepository extends EntityRepository
         return $query->getQuery()->getSingleScalarResult();
     }
 
-    public function getByCriteriaOrdered(array $criteria, array $orderBy, $limit = 32, $offset = 0): Paginator
+    public function countFollowersOfOpinion(Opinion $opinion): int
     {
+        $query = $this->createQueryBuilder('f')
+            ->select('count(f.id)')
+            ->join('f.opinion', 'o')
+            ->join('f.user', 'u')
+            ->andWhere('o.id = :opinionId')
+            ->setParameter('opinionId', $opinion->getId());
+
+        return $query->getQuery()->getSingleScalarResult();
+    }
+
+    public function getByCriteriaOrdered(
+        array $criteria,
+        array $orderBy,
+        $limit = 32,
+        $offset = 0
+    ): Paginator {
         $qb = $this->createQueryBuilder('f')
             ->join('f.proposal', 'p')
             ->join('f.user', 'u');
@@ -38,25 +54,20 @@ class FollowerRepository extends EntityRepository
         switch ($sortField) {
             case 'NAME':
             case 'USERNAME':
-                $qb
-                    ->addOrderBy('u.username', $direction);
+                $qb->addOrderBy('u.username', $direction);
                 break;
             case 'RANDOM':
-                $qb
-                    ->addSelect('RAND() as HIDDEN rand')
-                    ->addOrderBy('rand');
+                $qb->addSelect('RAND() as HIDDEN rand')->addOrderBy('rand');
                 break;
             default:
-                $qb
-                    ->addOrderBy('u.username', $direction);
+                $qb->addOrderBy('u.username', $direction);
                 break;
         }
-        $query = $qb->getQuery()
+        $query = $qb
+            ->getQuery()
             ->setFirstResult($offset)
             ->setMaxResults($limit)
-            ->useQueryCache(true)// ->useResultCache(true, 60)
-        ;
-
+            ->useQueryCache(true); // ->useResultCache(true, 60)
         return new Paginator($query);
     }
 

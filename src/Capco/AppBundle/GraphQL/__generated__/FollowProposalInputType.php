@@ -27,7 +27,7 @@ final class FollowProposalInputType extends InputObjectType implements Generated
                     'description' => 'The proposal id',
                 ],
                 'notifiedOf' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('PickFollowTypeValue'),
+                    'type' => $globalVariable->get('typeResolver')->resolve('ProposalSubscriptionTypeValue'),
                     'description' => 'The type of notification',
                 ],
                 'clientMutationId' => [

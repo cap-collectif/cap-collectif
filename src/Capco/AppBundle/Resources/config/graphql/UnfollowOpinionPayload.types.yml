@@ -1,0 +1,8 @@
+UnfollowOpinionPayload:
+  type: relay-mutation-payload
+  config:
+    fields:
+      opinion:
+        type: 'Opinion'
+      unfollowerId:
+        type: 'ID'

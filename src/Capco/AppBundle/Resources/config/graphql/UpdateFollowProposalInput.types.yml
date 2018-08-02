@@ -6,4 +6,4 @@ UpdateFollowProposalInput:
         type: 'ID!'
         description: 'The proposal id'
       notifiedOf:
-        type: 'PickFollowTypeValue!'
+        type: 'ProposalSubscriptionTypeValue!'

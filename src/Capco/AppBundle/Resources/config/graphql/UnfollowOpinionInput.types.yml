@@ -1,0 +1,10 @@
+UnfollowOpinionInput:
+  type: relay-mutation-input
+  config:
+    fields:
+      opinionId:
+        type: 'ID'
+        description: 'The opinion id'
+      ids:
+        type: '[ID!]'
+        description: 'Array of opinion id'

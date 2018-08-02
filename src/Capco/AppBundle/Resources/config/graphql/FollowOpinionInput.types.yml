@@ -1,10 +1,10 @@
-FollowProposalInput:
+FollowOpinionInput:
   type: relay-mutation-input
   config:
     fields:
-      proposalId:
+      opinionId:
         type: 'ID!'
-        description: 'The proposal id'
+        description: 'The opinion id'
       notifiedOf:
         type: 'ProposalSubscriptionTypeValue'
         description: 'The type of notification'

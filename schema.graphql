@@ -1173,12 +1173,29 @@ type FirstnameRequirement implements Node & Requirement {
   viewerValue: String
 }
 
+input FollowOpinionInput {
+  # The opinion id
+  opinionId: ID!
+
+  # The type of notification
+  notifiedOf: ProposalSubscriptionTypeValue
+  clientMutationId: String
+}
+
+type FollowOpinionPayload {
+  opinion: Opinion
+  follower: User
+  followerEdge: FollowerEdge
+  value: ProposalSubscriptionTypeValue!
+  clientMutationId: String
+}
+
 input FollowProposalInput {
   # The proposal id
   proposalId: ID!
 
   # The type of notification
-  notifiedOf: PickFollowTypeValue
+  notifiedOf: ProposalSubscriptionTypeValue
   clientMutationId: String
 }
 
@@ -1186,15 +1203,16 @@ type FollowProposalPayload {
   proposal: Proposal
   follower: User
   followerEdge: FollowerEdge
-  value: PickFollowTypeValue!
+  value: ProposalSubscriptionTypeValue!
   clientMutationId: String
 }
 
 # A follower
 type Follower {
-  proposal: Proposal!
+  proposal: Proposal
+  opinion: Opinion
   user: User!
-  notifiedOf: PickFollowTypeValue
+  notifiedOf: SubscriptionTypeValue
 }
 
 # A connection to a list of items.
@@ -1379,8 +1397,10 @@ type Mutation {
   changeProposalNotation(input: ChangeProposalNotationInput!): ChangeProposalNotationPayload
   changeProposalEvaluers(input: ChangeProposalEvaluersInput!): ChangeProposalEvaluersPayload
   followProposal(input: FollowProposalInput!): FollowProposalPayload
+  followOpinion(input: FollowOpinionInput!): FollowOpinionPayload
   updateFollowProposal(input: UpdateFollowProposalInput!): UpdateFollowProposalPayload
   unfollowProposal(input: UnfollowProposalInput!): UnfollowProposalPayload
+  unfollowOpinion(input: UnfollowOpinionInput!): UnfollowOpinionPayload
   selectProposal(input: SelectProposalInput!): SelectProposalPayload
   unselectProposal(input: UnselectProposalInput!): UnselectProposalPayload
   changeSelectionStatus(input: ChangeSelectionStatusInput!): ChangeSelectionStatusPayload
@@ -1779,13 +1799,6 @@ type PhoneRequirement implements Node & Requirement {
 
   # The phone of the viewer.
   viewerValue: String
-}
-
-# 3 possible values
-enum PickFollowTypeValue {
-  DEFAULT
-  DEFAULT_AND_COMMENTS
-  ALL
 }
 
 type Post {
@@ -2319,16 +2332,24 @@ enum ProposalStepVoteType {
   BUDGET
 }
 
+# 3 possible values for a subscription of an opinion
+enum ProposalSubscriptionTypeValue {
+  DEFAULT
+  DEFAULT_AND_COMMENTS
+  ALL
+}
+
 # Entities that can be published.
 type ProposalVote implements Publishable {
-  # `true` if the object is published.
-  published: Boolean!
+    # `true` if the object is published.
+    published: Boolean!
 
-  # Identifies when the entity was published at.
-  publishedAt: DateTime
+    # Identifies when the entity was published at.
+    publishedAt: DateTime
 
-  # Reason that the entity was not published.
-  notPublishedReason: NotPublishedReason
+    # Reason that the entity was not published.
+    notPublishedReason: NotPublishedReason
+
   id: ID!
 
   # The author of the contribution. If null, the vote is anonymous.
@@ -3141,6 +3162,13 @@ interface Step {
   url: String!
 }
 
+# 3 possible values for a subscription of an opinion
+enum SubscriptionTypeValue {
+  DEFAULT
+  DEFAULT_AND_COMMENTS
+  ALL
+}
+
 # A theme
 type Theme {
   id: ID!
@@ -3174,6 +3202,21 @@ enum TrashableStatus {
 
 scalar URI
 
+input UnfollowOpinionInput {
+  # The opinion id
+  opinionId: ID
+
+  # Array of opinion id
+  ids: [ID!]
+  clientMutationId: String
+}
+
+type UnfollowOpinionPayload {
+  opinion: Opinion
+  unfollowerId: ID
+  clientMutationId: String
+}
+
 input UnfollowProposalInput {
   # The proposal id
   proposalId: ID
@@ -3206,7 +3249,7 @@ type UnselectProposalPayload {
 input UpdateFollowProposalInput {
   # The proposal id
   proposalId: ID!
-  notifiedOf: PickFollowTypeValue!
+  notifiedOf: ProposalSubscriptionTypeValue!
   clientMutationId: String
 }
 

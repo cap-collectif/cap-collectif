@@ -1,9 +1,9 @@
-FollowProposalPayload:
+FollowOpinionPayload:
   type: relay-mutation-payload
   config:
     fields:
-      proposal:
-        type: 'Proposal'
+      opinion:
+        type: 'Opinion'
       follower:
         type: 'User'
       followerEdge:

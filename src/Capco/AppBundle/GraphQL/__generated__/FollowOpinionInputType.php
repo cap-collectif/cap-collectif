@@ -11,24 +11,24 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
 /**
  * THIS FILE WAS GENERATED AND SHOULD NOT BE MODIFIED!
  */
-final class UpdateFollowProposalInputType extends InputObjectType implements GeneratedTypeInterface
+final class FollowOpinionInputType extends InputObjectType implements GeneratedTypeInterface
 {
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
-            'name' => 'UpdateFollowProposalInput',
+            'name' => 'FollowOpinionInput',
             'description' => null,
             'fields' => function () use ($globalVariable) {
                 return [
-                'proposalId' => [
+                'opinionId' => [
                     'type' => Type::nonNull(Type::id()),
-                    'description' => 'The proposal id',
+                    'description' => 'The opinion id',
                 ],
                 'notifiedOf' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('ProposalSubscriptionTypeValue')),
-                    'description' => null,
+                    'type' => $globalVariable->get('typeResolver')->resolve('ProposalSubscriptionTypeValue'),
+                    'description' => 'The type of notification',
                 ],
                 'clientMutationId' => [
                     'type' => Type::string(),

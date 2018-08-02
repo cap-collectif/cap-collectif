@@ -1,7 +1,8 @@
-PickFollowTypeValue:
+OpinionSubscriptionTypeValue:
   type: enum
+  inherits: [SubscriptionTypeValue]
   config:
-    description: '3 possible values'
+    description: '3 possible values for a subscription of an opinion'
     values:
       DEFAULT:
         value: '1'
