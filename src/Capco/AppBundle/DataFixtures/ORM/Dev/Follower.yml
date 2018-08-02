@@ -1,4 +1,5 @@
 Capco\AppBundle\Entity\Follower:
+  # Proposal
   follower1:
     proposal: '@proposal1'
     user: '@user1'
@@ -122,5 +123,47 @@ Capco\AppBundle\Entity\Follower:
   follower219:
     proposal: '@proposal9'
     user: '@user1'
+    followedAt: <dateTimeBetween('-50 days', 'now')>
+    notifiedOf: 1
+
+  # Opinion
+  follower220:
+    opinion: '@opinion6'
+    user: '@user11'
+    followedAt: <dateTimeBetween('-50 days', 'now')>
+    notifiedOf: 1
+  follower221:
+    opinion: '@opinion6'
+    user: '@user5'
+    followedAt: <dateTimeBetween('-50 days', 'now')>
+    notifiedOf: 1
+  follower222:
+    opinion: '@opinion6'
+    user: '@user10'
+    followedAt: <dateTimeBetween('-50 days', 'now')>
+    notifiedOf: 1
+  follower223:
+    opinion: '@opinion6'
+    user: '@user12'
+    followedAt: <dateTimeBetween('-50 days', 'now')>
+    notifiedOf: 1
+  follower224:
+    opinion: '@opinion7'
+    user: '@user11'
+    followedAt: <dateTimeBetween('-50 days', 'now')>
+    notifiedOf: 1
+  follower225:
+    opinion: '@opinion7'
+    user: '@user10'
+    followedAt: <dateTimeBetween('-50 days', 'now')>
+    notifiedOf: 1
+  follower226:
+    opinion: '@opinion7'
+    user: '@user5'
+    followedAt: <dateTimeBetween('-50 days', 'now')>
+    notifiedOf: 1
+  follower227:
+    opinion: '@opinion8'
+    user: '@user11'
     followedAt: <dateTimeBetween('-50 days', 'now')>
     notifiedOf: 1

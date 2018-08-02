@@ -219,6 +219,29 @@ User:
           last:
             type: 'Int'
             description: 'Returns the last n elements from the list.'
+      followingOpinions:
+        type: 'OpinionConnection!'
+        resolve:
+          '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionsFollowedByUserResolver", [value, args])'
+        description: 'Array of opinions followed by current user.'
+        args:
+          orderBy:
+            type: 'String'
+            description: 'Ordering options for followers returning from the connection'
+          after:
+            type: 'String'
+            description: 'Returns the elements in the list that come after the specified global ID.'
+          first:
+            type: 'Int'
+            defaultValue: 32
+            description: 'Returns the first n elements from the list.'
+          before:
+            type: 'String'
+            description:
+              'Returns the elements in the list that come before the specified global ID.'
+          last:
+            type: 'Int'
+            description: 'Returns the last n elements from the list.'
       contributionsCount:
         type: 'Int!'
         description: 'Total of contributions count'

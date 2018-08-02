@@ -543,11 +543,14 @@ class ProposalRepository extends EntityRepository
         return $queryBuilder->andWhere($alias . '.address IS NOT NULL');
     }
 
-    public function findFollowingProposalByUser(User $user, $first = 0, $offset = 100): Paginator
-    {
+    public function findFollowingProposalByUser(
+        User $user,
+        int $first = 0,
+        int $offset = 100
+    ): Paginator {
         $query = $this->createQueryBuilder('p')
             ->leftJoin('p.followers', 'f')
-            ->where('f.user = :user')
+            ->andWhere('f.user = :user')
             ->setParameter('user', $user)
             ->setMaxResults($offset)
             ->setFirstResult($first);
@@ -561,7 +564,7 @@ class ProposalRepository extends EntityRepository
         $query
             ->select('COUNT(p.id)')
             ->leftJoin('p.followers', 'f')
-            ->where('f.user = :user')
+            ->andWhere('f.user = :user')
             ->setParameter('user', $user);
 
         return (int) $query->getQuery()->getSingleScalarResult();

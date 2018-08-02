@@ -453,4 +453,33 @@ class OpinionRepository extends EntityRepository
             ->andWhere($alias . '.isEnabled = true')
             ->andWhere($alias . '.expired = false');
     }
+
+    public function findFollowingOpinionByUser(
+        User $user,
+        int $first = 0,
+        int $offset = 100
+    ): Paginator {
+        $query = $this->createQueryBuilder('o')
+            ->leftJoin('o.followers', 'f')
+            ->andWhere('f.user = :user')
+            ->andWhere('f.opinion IS NOT NULL')
+            ->setParameter('user', $user)
+            ->setMaxResults($offset)
+            ->setFirstResult($first);
+
+        return new Paginator($query);
+    }
+
+    public function countFollowingOpinionByUser(User $user): int
+    {
+        $query = $this->createQueryBuilder('p');
+        $query
+            ->select('COUNT(p.id)')
+            ->leftJoin('p.followers', 'f')
+            ->andWhere('f.user = :user')
+            ->andWhere('f.opinion IS NOT NULL')
+            ->setParameter('user', $user);
+
+        return (int) $query->getQuery()->getSingleScalarResult();
+    }
 }

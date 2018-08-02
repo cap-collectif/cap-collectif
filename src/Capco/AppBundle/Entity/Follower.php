@@ -75,15 +75,42 @@ class Follower
         return $this;
     }
 
-    public function getProposal(): Proposal
+    public function getProposal(): ?Proposal
     {
         return $this->proposal;
     }
 
-    public function setProposal(Proposal $proposal): self
+    public function setProposal(?Proposal $proposal = null): self
     {
+        if (!$proposal && $this->proposal) {
+            $this->proposal->removeFollower($this);
+        }
+
         $this->proposal = $proposal;
-        $proposal->addFollower($this);
+
+        if ($proposal) {
+            $proposal->addFollower($this);
+        }
+
+        return $this;
+    }
+
+    public function getOpinion(): ?Opinion
+    {
+        return $this->opinion;
+    }
+
+    public function setOpinion(?Opinion $opinion = null): self
+    {
+        if (!$opinion && $this->opinion) {
+            $this->opinion->removeFollower($this);
+        }
+
+        $this->opinion = $opinion;
+
+        if ($opinion) {
+            $opinion->addFollower($this);
+        }
 
         return $this;
     }
@@ -91,9 +118,15 @@ class Follower
     /**
      * @ORM\PreRemove
      */
-    public function deleteFollower()
+    public function deleteFollower(): void
     {
-        $this->proposal->removeFollower($this);
+        if ($this->proposal) {
+            $this->proposal->removeFollower($this);
+        }
+
+        if ($this->opinion) {
+            $this->opinion->removeFollower($this);
+        }
     }
 
     public function getNotifiedOf(): ?string
