@@ -13,7 +13,7 @@ trait PublishableTrait
     /**
      * @ORM\Column(name="publishedAt", type="datetime", nullable=true)
      */
-    private $publishedAt = null;
+    private $publishedAt;
 
     public function isPublished(): bool
     {

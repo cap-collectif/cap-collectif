@@ -1415,7 +1415,7 @@ interface Node {
   id: ID!
 }
 
-# 3 possible values
+# Possible reason that a `Publishable` is not published.
 enum NotPublishedReason {
   # Author account isn't confirmed yet.
   WAITING_AUTHOR_CONFIRMATION

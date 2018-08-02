@@ -21,24 +21,24 @@ final class NotPublishedReasonType extends EnumType implements GeneratedTypeInte
             'values' => [
                 'WAITING_AUTHOR_CONFIRMATION' => [
                     'name' => 'WAITING_AUTHOR_CONFIRMATION',
-                    'value' => 'WAITING_AUTHOR_CONFIRMATION',
+                    'value' => \constant("Capco\\AppBundle\\Entity\\NotPublishedReason::WAITING_AUTHOR_CONFIRMATION"),
                     'deprecationReason' => null,
                     'description' => 'Author account isn\'t confirmed yet.',
                 ],
                 'AUTHOR_NOT_CONFIRMED' => [
                     'name' => 'AUTHOR_NOT_CONFIRMED',
-                    'value' => 'AUTHOR_NOT_CONFIRMED',
+                    'value' => \constant("Capco\\AppBundle\\Entity\\NotPublishedReason::AUTHOR_NOT_CONFIRMED"),
                     'deprecationReason' => null,
                     'description' => 'Author account isn\'t confirmed and the step has ended.',
                 ],
                 'AUTHOR_CONFIRMED_TOO_LATE' => [
                     'name' => 'AUTHOR_CONFIRMED_TOO_LATE',
-                    'value' => 'ACCOUNT_CONFIRMED_TOO_LATE',
+                    'value' => \constant("Capco\\AppBundle\\Entity\\NotPublishedReason::ACCOUNT_CONFIRMED_TOO_LATE"),
                     'deprecationReason' => null,
                     'description' => 'Author account was confirmed after the step has ended.',
                 ],
             ],
-            'description' => '3 possible values',
+            'description' => 'Possible reason that a `Publishable` is not published.',
         ];
         };
         $config = $configProcessor->process(LazyConfig::create($configLoader, $globalVariables))->load();

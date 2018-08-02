@@ -7,6 +7,7 @@ use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Model\Publishable;
 use Capco\AppBundle\GraphQL\Resolver\Publishable\PublishableNotPublishedReasonResolver;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\NotPublishedReason;
 
 class PublishableNotPublishedReasonResolverSpec extends ObjectBehavior
 {
@@ -35,7 +36,7 @@ class PublishableNotPublishedReasonResolverSpec extends ObjectBehavior
         $author->isEmailConfirmed()->willReturn(true);
         $publishable->isPublished()->willReturn(false);
         $publishable->getAuthor()->willReturn($author);
-        $this->__invoke($publishable)->shouldReturn('ACCOUNT_CONFIRMED_TOO_LATE');
+        $this->__invoke($publishable)->shouldReturn(NotPublishedReason::ACCOUNT_CONFIRMED_TOO_LATE);
     }
 
     function it_resolve_WAITING_AUTHOR_CONFIRMATION_if_step_is_null(
@@ -46,7 +47,9 @@ class PublishableNotPublishedReasonResolverSpec extends ObjectBehavior
         $publishable->isPublished()->willReturn(false);
         $publishable->getAuthor()->willReturn($author);
         $publishable->getStep()->willReturn(null);
-        $this->__invoke($publishable)->shouldReturn('WAITING_AUTHOR_CONFIRMATION');
+        $this->__invoke($publishable)->shouldReturn(
+            NotPublishedReason::WAITING_AUTHOR_CONFIRMATION
+        );
     }
 
     function it_resolve_WAITING_AUTHOR_CONFIRMATION_if_step_is_open(
@@ -59,7 +62,9 @@ class PublishableNotPublishedReasonResolverSpec extends ObjectBehavior
         $publishable->isPublished()->willReturn(false);
         $publishable->getAuthor()->willReturn($author);
         $publishable->getStep()->willReturn($step);
-        $this->__invoke($publishable)->shouldReturn('WAITING_AUTHOR_CONFIRMATION');
+        $this->__invoke($publishable)->shouldReturn(
+            NotPublishedReason::WAITING_AUTHOR_CONFIRMATION
+        );
     }
 
     function it_resolve_AUTHOR_NOT_CONFIRMED_if_step_is_open(
@@ -72,6 +77,6 @@ class PublishableNotPublishedReasonResolverSpec extends ObjectBehavior
         $publishable->isPublished()->willReturn(false);
         $publishable->getAuthor()->willReturn($author);
         $publishable->getStep()->willReturn($step);
-        $this->__invoke($publishable)->shouldReturn('AUTHOR_NOT_CONFIRMED');
+        $this->__invoke($publishable)->shouldReturn(NotPublishedReason::AUTHOR_NOT_CONFIRMED);
     }
 }

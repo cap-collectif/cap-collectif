@@ -43,7 +43,7 @@ class SourceVote extends AbstractVote
 
     public function getStep(): ?ConsultationStep
     {
-        return $this->source && $this->source->getStep();
+        return $this->source ? $this->source->getStep() : null;
     }
 
     public function getRelated()

@@ -46,7 +46,7 @@ class ArgumentVote extends AbstractVote
 
     public function getStep(): ?ConsultationStep
     {
-        return $this->argument && $this->argument->getStep();
+        return $this->argument ? $this->argument->getStep() : null;
     }
 
     // *************************** Lifecycle **********************************

@@ -106,7 +106,7 @@ class Reply implements Publishable, Contribution, VoteContribution
 
     public function getStep(): ?QuestionnaireStep
     {
-        return $this->questionnaire && $this->questionnaire->getStep();
+        return $this->questionnaire ? $this->questionnaire->getStep() : null;
     }
 
     public function setQuestionnaire(Questionnaire $questionnaire): self
