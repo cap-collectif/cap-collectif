@@ -40,7 +40,7 @@ class ArgumentButtons extends React.Component<Props, State> {
       <div>
         {/* $FlowFixMe */}
         <ArgumentVoteBox argument={argument} />
-        <ArgumentReportButton argument={argument} />{' '}
+        <ArgumentReportButton argument={argument} />
         <EditButton
           onClick={() => {
             dispatch(openArgumentEditModal(argument.id));

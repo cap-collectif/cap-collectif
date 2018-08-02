@@ -13,7 +13,7 @@ export class OpinionPreviewTitle extends React.Component<Props> {
   render() {
     const { opinion, showTypeLabel } = this.props;
     return (
-      <h3 className="opinion__title">
+      <h3 className="title">
         {/* $FlowFixMe https://github.com/cap-collectif/platform/issues/4973 */}
         {showTypeLabel ? <OpinionTypeLabel section={opinion.section || null} /> : null}
         {showTypeLabel ? ' ' : null}

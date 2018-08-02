@@ -12,6 +12,7 @@ imports:
   - { resource: services/makers.yml }
   - { resource: services/graphql_mutations.yml }
   - { resource: services/graphql_resolvers.yml }
+  - { resource: services/graphql_dataloaders.yml }
   - { resource: services/notifiers.yml }
   - { resource: services/elasticsearch.yml }
 
@@ -65,6 +66,11 @@ services:
   redis_adapter:
     class: Capco\AppBundle\Adapter\RedisAdapter
     arguments: ['@snc_redis.default']
+
+  Capco\AppBundle\Manager\RedisCacheManager:
+    autowire: true
+    arguments:
+      $redisClient: '@snc_redis.default'
 
   mailer_service:
     class: Capco\AppBundle\Mailer\MailerService

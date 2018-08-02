@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Behat;
 
 use Behat\Behat\Context\Context;
@@ -66,21 +65,20 @@ class GraphQLContext implements Context
      */
     public function iSendAraphQLQuery(PyStringNode $query)
     {
-        $response = $this->client->request(
-            'GET',
-            '/graphql/',
-            [
-              'exceptions' => false,
-              'query' => ['query' => $query->getRaw()],
-              'headers' => [
+        $response = $this->client->request('GET', '/graphql/', [
+            'exceptions' => false,
+            'query' => ['query' => $query->getRaw()],
+            'headers' => [
                 'Authorization' => sprintf('Bearer %s', $this->token),
                 'Content-Type' => 'application/graphql',
-              ],
-            ]
-        );
+            ],
+        ]);
         PHPUnit::assertSame(200, (int) $response->getStatusCode());
         $this->response = (string) $response->getBody();
-        PHPUnit::assertFalse(array_key_exists('errors', json_decode($this->response, true)), $this->response);
+        PHPUnit::assertFalse(
+            array_key_exists('errors', json_decode($this->response, true)),
+            $this->response
+        );
     }
 
     /**
@@ -109,18 +107,14 @@ class GraphQLContext implements Context
     {
         // https://stackoverflow.com/questions/1176904/php-how-to-remove-all-non-printable-characters-in-a-string
         $string = preg_replace('/[\x00-\x1F\x7F]/u', '', $string->getRaw());
-        $response = $this->client->request(
-            'POST',
-            '/graphql/',
-            [
-              'json' => json_decode($string, true),
-              'exceptions' => false,
-              'headers' => [
-                  'Authorization' => sprintf('Bearer %s', $this->token),
-                  'Content-Type' => 'application/json',
-              ],
-            ]
-        );
+        $response = $this->client->request('POST', '/graphql/', [
+            'json' => json_decode($string, true),
+            'exceptions' => false,
+            'headers' => [
+                'Authorization' => sprintf('Bearer %s', $this->token),
+                'Content-Type' => 'application/json',
+            ],
+        ]);
         $this->response = (string) $response->getBody();
     }
 
@@ -130,25 +124,20 @@ class GraphQLContext implements Context
     public function theJsonResponseShouldMatch(PyStringNode $pattern)
     {
         $matcher = (new SimpleFactory())->createMatcher();
-
-        PHPUnit::assertTrue($matcher->match($this->response, $pattern->getRaw()), $matcher->getError() . ' ' . $this->response);
+        PHPUnit::assertTrue(
+            $matcher->match($this->response, $pattern->getRaw()),
+            $matcher->getError() . ' ' . $this->response
+        );
     }
 
-    protected function createAuthenticatedClient(string $username = 'test', string $password = 'test')
-    {
-        $response = $this->client->request(
-            'POST',
-            '/api/login_check',
-            [
-                'headers' => [
-                  'X-Requested-With' => 'XMLHttpRequest',
-                ],
-                'json' => [
-                    'username' => $username,
-                    'password' => $password,
-                ],
-            ]
-        );
+    protected function createAuthenticatedClient(
+        string $username = 'test',
+        string $password = 'test'
+    ) {
+        $response = $this->client->request('POST', '/api/login_check', [
+            'headers' => ['X-Requested-With' => 'XMLHttpRequest'],
+            'json' => ['username' => $username, 'password' => $password],
+        ]);
         $body = (string) $response->getBody();
         $this->token = json_decode($body, true)['token'];
     }

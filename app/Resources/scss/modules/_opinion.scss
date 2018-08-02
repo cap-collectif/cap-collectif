@@ -546,9 +546,12 @@
 // Opinion labels
 .opinion__label {
     padding-left: 10px;
+    font-size: 14px;
 
     i {
         padding: 3px 3px 0;
+        font-size: 12px;
+        top: 0;
         @include border-radius(3px)
     }
 

@@ -1295,10 +1295,11 @@ type MediaQuestion implements Question {
   helpText: String
   description: String
   kind: String!
-  isOtherAllowed: Boolean!
-  choices: [QuestionChoice!]
-  validationRule: MultipleChoiceQuestionValidationRule
   slug: String!
+
+  # Return users who answered the question
+  participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
+  validationRule: MultipleChoiceQuestionValidationRule
 }
 
 # A response
@@ -1320,10 +1321,13 @@ type MultipleChoiceQuestion implements Question {
   helpText: String
   description: String
   kind: String!
+  slug: String!
+
+  # Return users who answered the question
+  participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
+  validationRule: MultipleChoiceQuestionValidationRule
   isOtherAllowed: Boolean!
   choices: [QuestionChoice!]
-  validationRule: MultipleChoiceQuestionValidationRule
-  slug: String!
 }
 
 # Multiple Choice Question Validation Rule
@@ -2325,6 +2329,10 @@ interface Question {
   description: String
   kind: String!
   slug: String!
+
+  # Return users who answered the question
+  participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
+  validationRule: MultipleChoiceQuestionValidationRule
 }
 
 # A possible choice of a question
@@ -2334,6 +2342,24 @@ type QuestionChoice {
   description: String
   color: String
   image: Media
+
+  # Select all the responses of the given question choice
+  responses(after: String, first: Int, before: String, last: Int): ResponseConnection!
+
+  # Return the ranking of the given question choice
+  ranking: [QuestionChoiceRanking]
+}
+
+# The choice ranking
+type QuestionChoiceRanking {
+  # Return the position of the choice
+  position: Int!
+
+  # Return the number of responses of the choice at the given position
+  answerCount: Int!
+
+  # Select the responses of the c
+  responses(after: String, first: Int, before: String, last: Int): ResponseConnection!
 }
 
 input QuestionInput {
@@ -2373,6 +2399,7 @@ type Questionnaire implements Node {
   phoneConfirmationRequired: Boolean!
   questions: [Question!]!
   viewerReplies: [Reply!]!
+  participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
 }
 
 input QuestionnaireAbstractQuestionInput {
@@ -2638,6 +2665,27 @@ interface Response {
   question: Question!
 }
 
+# A connection to a list of items.
+type ResponseConnection {
+  # Identifies the total count of items in the connection.
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [ResponseEdge]
+}
+
+# An edge in a connection.
+type ResponseEdge {
+  # The item at the end of the edge.
+  node: Response!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
 # A response
 input ResponseInput {
   # If related to a value question
@@ -2830,10 +2878,11 @@ type SimpleQuestion implements Question {
   helpText: String
   description: String
   kind: String!
-  isOtherAllowed: Boolean!
-  choices: [QuestionChoice!]
-  validationRule: MultipleChoiceQuestionValidationRule
   slug: String!
+
+  # Return users who answered the question
+  participants(after: String, first: Int, before: String, last: Int): ParticipantConnection!
+  validationRule: MultipleChoiceQuestionValidationRule
 }
 
 # A source

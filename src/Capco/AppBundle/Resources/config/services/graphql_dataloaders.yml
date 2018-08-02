@@ -1,0 +1,9 @@
+services:
+  Overblog\PromiseAdapter\PromiseAdapterInterface:
+    alias: overblog_dataloader.webonyx_graphql_sync_promise_adapter
+
+  Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader:
+    autowire: true
+    arguments:
+      $cachePrefix: proposalVote
+      $cacheTtl: 60

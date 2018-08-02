@@ -83,6 +83,7 @@
 
         &__actions {
             display: flex;
+            align-items: center;
 
             button, select {
                 margin-left: 5px;
@@ -136,6 +137,8 @@
         }
 
         &__opinion {
+            font-size: 16px;
+
             .left-block {
                 display: flex;
                 text-align: left;
@@ -147,12 +150,19 @@
 
                 .author-name {
                     color: $dark;
-                    font-size: 16px;
                     font-weight: 500;
                 }
 
                 .excerpt {
                     font-size: 14px;
+                }
+
+                .actions {
+                    margin-top: 10px;
+
+                    .btn {
+                        margin-right: 5px;
+                    }
                 }
             }
 

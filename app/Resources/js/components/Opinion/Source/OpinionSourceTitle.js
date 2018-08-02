@@ -10,7 +10,7 @@ type Props = {
 
 const OpinionSourceTitle = ({ source }: Props) => {
   return (
-    <h3 className="opinion__title">
+    <h3 className="title">
       {source.category && <Label bsStyle="primary">{source.category.title}</Label>}{' '}
       <a className="external-link" href={source.url}>
         {source.title}
