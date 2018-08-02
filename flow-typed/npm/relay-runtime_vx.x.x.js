@@ -4,3 +4,7 @@
 declare module 'relay-runtime' {
   declare module.exports: any;
 }
+
+declare module 'relay-runtime/lib/RelayNetworkLogger' {
+  declare module.exports: any;
+}
