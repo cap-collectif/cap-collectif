@@ -1,9 +1,9 @@
 Reply:
   type: object
-  inherits: [Node, Contribution]
+  inherits: [Node, Publishable, Contribution]
   config:
     description: 'A Reply'
-    interfaces: [Node, Contribution]
+    interfaces: [Node, Publishable, Contribution]
     fields:
       enabled:
         type: 'Boolean!'

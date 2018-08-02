@@ -1767,7 +1767,7 @@ type Project implements Node {
 }
 
 # A budget contribution
-type Proposal implements Node & Contribution & Reportable {
+type Proposal implements Node & Contribution & Publishable & Reportable {
   # The ID of an object
   id: ID!
 
@@ -1785,6 +1785,15 @@ type Proposal implements Node & Contribution & Reportable {
 
   # Does the viewer already submitted a report ?
   viewerHasReport: Boolean!
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity was not published.
+  notPublishedReason: NotPublishedReason
 
   # The admin url for this contribution.
   adminUrl: URI!
@@ -2440,7 +2449,7 @@ type RemoveProposalVotePayload {
 }
 
 # A Reply
-type Reply implements Node & Contribution {
+type Reply implements Node & Publishable & Contribution {
   # The ID of an object
   id: ID!
 
@@ -2455,6 +2464,15 @@ type Reply implements Node & Contribution {
 
   # Url of the contribution
   url: URI!
+
+  # `true` if the object is published.
+  published: Boolean!
+
+  # Identifies when the entity was published at.
+  publishedAt: DateTime
+
+  # Reason that the entity was not published.
+  notPublishedReason: NotPublishedReason
   enabled: Boolean!
   private: Boolean!
   createdAt: DateTime!

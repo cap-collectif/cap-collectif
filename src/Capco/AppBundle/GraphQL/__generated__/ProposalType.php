@@ -103,6 +103,48 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                         return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
                     },
                 ],
+                'published' => [
+                    'type' => Type::nonNull(Type::boolean()),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $value->isPublished();
+                    },
+                    'description' => '`true` if the object is published.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'publishedAt' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('DateTime'),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $value->getPublishedAt();
+                    },
+                    'description' => 'Identifies when the entity was published at.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
+                'notPublishedReason' => [
+                    'type' => $globalVariable->get('typeResolver')->resolve('NotPublishedReason'),
+                    'args' => [
+                    ],
+                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
+                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Publishable\\PublishableNotPublishedReasonResolver", array(0 => $value)]);
+                    },
+                    'description' => 'Reason that the entity was not published.',
+                    'deprecationReason' => null,
+                    'complexity' => null,
+                    # public and access are custom options managed only by the bundle
+                    'public' => null,
+                    'access' => null,
+                ],
                 'adminUrl' => [
                     'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('URI')),
                     'args' => [
@@ -943,7 +985,7 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
             ];
             },
             'interfaces' => function () use ($globalVariable) {
-                return [$globalVariable->get('typeResolver')->resolve('Node'), $globalVariable->get('typeResolver')->resolve('Contribution'), $globalVariable->get('typeResolver')->resolve('Reportable')];
+                return [$globalVariable->get('typeResolver')->resolve('Node'), $globalVariable->get('typeResolver')->resolve('Contribution'), $globalVariable->get('typeResolver')->resolve('Publishable'), $globalVariable->get('typeResolver')->resolve('Reportable')];
             },
             'isTypeOf' => null,
             'resolveField' => null,

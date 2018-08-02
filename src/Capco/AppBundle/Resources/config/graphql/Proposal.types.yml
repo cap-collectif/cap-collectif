@@ -1,9 +1,9 @@
 Proposal:
     type: object
-    inherits: [Node, Contribution, Reportable]
+    inherits: [Node, Contribution, Publishable, Reportable]
     config:
         description: "A budget contribution"
-        interfaces: [Node, Contribution, Reportable]
+        interfaces: [Node, Contribution, Publishable, Reportable]
         fields:
             show_url:
                 resolve: "@=resolver('proposal_show_url', [value])"
