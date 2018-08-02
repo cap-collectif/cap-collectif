@@ -227,6 +227,32 @@ final class OpinionType extends ObjectType implements GeneratedTypeInterface
                 'kind' => [
                     'type' => Type::nonNull(Type::string()),
                     'args' => [
+                        [
+                            'name' => 'orderBy',
+                            'type' => Type::string(),
+                            'description' => 'Ordering options for followers returning from the connection',
+                        ],
+                        [
+                            'name' => 'after',
+                            'type' => Type::string(),
+                            'description' => 'Returns the elements in the list that come after the specified global ID.',
+                        ],
+                        [
+                            'name' => 'first',
+                            'type' => Type::int(),
+                            'description' => 'Returns the first n elements from the list.',
+                            'defaultValue' => 32,
+                        ],
+                        [
+                            'name' => 'before',
+                            'type' => Type::string(),
+                            'description' => 'Returns the elements in the list that come before the specified global ID.',
+                        ],
+                        [
+                            'name' => 'last',
+                            'type' => Type::int(),
+                            'description' => 'Returns the last n elements from the list.',
+                        ],
                     ],
                     'resolve' => null,
                     'description' => 'The kind of contribution.',

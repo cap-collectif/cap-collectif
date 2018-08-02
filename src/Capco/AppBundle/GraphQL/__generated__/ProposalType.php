@@ -120,6 +120,32 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                 'trashedReason' => [
                     'type' => Type::string(),
                     'args' => [
+                        [
+                            'name' => 'orderBy',
+                            'type' => Type::string(),
+                            'description' => 'Ordering options for followers returning from the connection',
+                        ],
+                        [
+                            'name' => 'after',
+                            'type' => Type::string(),
+                            'description' => 'Returns the elements in the list that come after the specified global ID.',
+                        ],
+                        [
+                            'name' => 'first',
+                            'type' => Type::int(),
+                            'description' => 'Returns the first n elements from the list.',
+                            'defaultValue' => 32,
+                        ],
+                        [
+                            'name' => 'before',
+                            'type' => Type::string(),
+                            'description' => 'Returns the elements in the list that come before the specified global ID.',
+                        ],
+                        [
+                            'name' => 'last',
+                            'type' => Type::int(),
+                            'description' => 'Returns the last n elements from the list.',
+                        ],
                     ],
                     'resolve' => null,
                     'description' => 'The reason the moderator trashed the contribution.',
@@ -132,6 +158,32 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                 'id' => [
                     'type' => Type::nonNull(Type::id()),
                     'args' => [
+                        [
+                            'name' => 'orderBy',
+                            'type' => Type::string(),
+                            'description' => 'Ordering options for followers returning from the connection',
+                        ],
+                        [
+                            'name' => 'after',
+                            'type' => Type::string(),
+                            'description' => 'Returns the elements in the list that come after the specified global ID.',
+                        ],
+                        [
+                            'name' => 'first',
+                            'type' => Type::int(),
+                            'description' => 'Returns the first n elements from the list.',
+                            'defaultValue' => 32,
+                        ],
+                        [
+                            'name' => 'before',
+                            'type' => Type::string(),
+                            'description' => 'Returns the elements in the list that come before the specified global ID.',
+                        ],
+                        [
+                            'name' => 'last',
+                            'type' => Type::int(),
+                            'description' => 'Returns the last n elements from the list.',
+                        ],
                     ],
                     'resolve' => null,
                     'description' => 'The id of the contribution.',
@@ -151,7 +203,9 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle
                     'public' => null,
-                    'access' => null,
+                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
+                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
+                    },
                 ],
                 'related' => [
                     'type' => $globalVariable->get('typeResolver')->resolve('Contribution'),
@@ -831,86 +885,6 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                     'public' => null,
                     'access' => null,
                 ],
-                'followers' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('UserConnection')),
-                    'args' => [
-                        [
-                            'name' => 'orderBy',
-                            'type' => Type::string(),
-                            'description' => 'Ordering options for followers returning from the connection',
-                        ],
-                        [
-                            'name' => 'after',
-                            'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come after the specified global ID.',
-                        ],
-                        [
-                            'name' => 'first',
-                            'type' => Type::int(),
-                            'description' => 'Returns the first n elements from the list.',
-                            'defaultValue' => 32,
-                        ],
-                        [
-                            'name' => 'before',
-                            'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come before the specified global ID.',
-                        ],
-                        [
-                            'name' => 'last',
-                            'type' => Type::int(),
-                            'description' => 'Returns the last n elements from the list.',
-                        ],
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalFollowersResolver", array(0 => $value, 1 => $args)]);
-                    },
-                    'description' => 'Array of users following proposal.',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
-                'followerConnection' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('FollowerConnection')),
-                    'args' => [
-                        [
-                            'name' => 'orderBy',
-                            'type' => Type::string(),
-                            'description' => 'Ordering options for followers returning from the connection',
-                        ],
-                        [
-                            'name' => 'after',
-                            'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come after the specified global ID.',
-                        ],
-                        [
-                            'name' => 'first',
-                            'type' => Type::int(),
-                            'description' => 'Returns the first n elements from the list.',
-                            'defaultValue' => 32,
-                        ],
-                        [
-                            'name' => 'before',
-                            'type' => Type::string(),
-                            'description' => 'Returns the elements in the list that come before the specified global ID.',
-                        ],
-                        [
-                            'name' => 'last',
-                            'type' => Type::int(),
-                            'description' => 'Returns the last n elements from the list.',
-                        ],
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalFollowerConnection", array(0 => $value, 1 => $args)]);
-                    },
-                    'description' => null,
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => null,
-                ],
                 'viewerIsFollowing' => [
                     'type' => Type::nonNull(Type::boolean()),
                     'args' => [
@@ -919,22 +893,6 @@ final class ProposalType extends ObjectType implements GeneratedTypeInterface
                         return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowProposalResolver", array(0 => $value, 1 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
                     },
                     'description' => 'View follow current proposal',
-                    'deprecationReason' => null,
-                    'complexity' => null,
-                    # public and access are custom options managed only by the bundle
-                    'public' => null,
-                    'access' => function ($value, $args, $context, ResolveInfo $info, $object) use ($globalVariable) {
-                        return $globalVariable->get('container')->get('security.authorization_checker')->isGranted("ROLE_USER");
-                    },
-                ],
-                'followerConfiguration' => [
-                    'type' => $globalVariable->get('typeResolver')->resolve('Follower'),
-                    'args' => [
-                    ],
-                    'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {
-                        return $globalVariable->get('resolverResolver')->resolve(["Capco\\AppBundle\\GraphQL\\Resolver\\ViewerFollowerProposalResolver", array(0 => $value, 1 => \Overblog\GraphQLBundle\ExpressionLanguage\ExpressionFunction\Security\Helper::getUser($globalVariable))]);
-                    },
-                    'description' => 'Kind of follow',
                     'deprecationReason' => null,
                     'complexity' => null,
                     # public and access are custom options managed only by the bundle

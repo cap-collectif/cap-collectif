@@ -904,9 +904,8 @@ class UserRepository extends EntityRepository
     ): Paginator {
         $query = $this->createQueryBuilder('u')
             ->join('u.followingContributions', 'f')
-            ->join('f.opinion', 'p')
-            ->where('f.opinion = :opinion')
-            ->andWhere('p.deletedAt IS NULL')
+            ->join('f.opinion', 'o')
+            ->andWhere('f.opinion = :opinion')
             ->setParameter('opinion', $opinion)
             ->setMaxResults($offset)
             ->setFirstResult($first);
@@ -945,21 +944,20 @@ class UserRepository extends EntityRepository
         $limit = 32,
         $offset = 0
     ): Paginator {
-        $qb = $this->getIsEnabledQueryBuilder()
-            ->join('u.followingContributions', 'f')
-            ->join('f.proposal', 'p')
-            ->join('f.opinion', 'o')
-            ->andWhere('p.deletedAt IS NULL');
+        $qb = $this->getIsEnabledQueryBuilder()->join('u.followingContributions', 'f');
 
         if (isset($criteria['proposal'])) {
             $qb
+                ->join('f.proposal', 'p')
+                ->andWhere('p.deletedAt IS NULL')
                 ->andWhere('p.id = :proposalId')
                 ->setParameter('proposalId', $criteria['proposal']->getId());
         }
 
         if (isset($criteria['opinion'])) {
             $qb
-                ->andWhere('p.id = :opinionId')
+                ->join('f.opinion', 'o')
+                ->andWhere('o.id = :opinionId')
                 ->setParameter('opinionId', $criteria['opinion']->getId());
         }
 
@@ -995,6 +993,18 @@ class UserRepository extends EntityRepository
             ->andWhere('f.proposal = :proposal')
             ->andWhere('p.deletedAt IS NULL')
             ->setParameter('proposal', $proposal);
+
+        return (int) $query->getQuery()->getSingleScalarResult();
+    }
+
+    public function countFollowerForOpinion(Opinion $opinion): int
+    {
+        $query = $this->createQueryBuilder('u')
+            ->select('count(u.id)')
+            ->join('u.followingContributions', 'f')
+            ->join('f.opinion', 'p')
+            ->andWhere('f.opinion = :opinion')
+            ->setParameter('opinion', $opinion);
 
         return (int) $query->getQuery()->getSingleScalarResult();
     }
