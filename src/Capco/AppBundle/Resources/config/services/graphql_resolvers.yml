@@ -559,3 +559,35 @@ services:
       - '@overblog_graphql.type_resolver'
     tags:
       - { name: overblog_graphql.resolver }
+
+  Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionFollowersResolver:
+    class: Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionFollowersResolver
+    arguments:
+      - '@capco.user.repository'
+      - '@logger'
+    tags:
+      - { name: overblog_graphql.resolver }
+
+  Capco\AppBundle\GraphQL\Resolver\ViewerFollowerOpinionResolver:
+    class: Capco\AppBundle\GraphQL\Resolver\ViewerFollowerOpinionResolver
+    arguments:
+      - '@capco.follower.repository'
+      - '@logger'
+    tags:
+      - { name: overblog_graphql.resolver }
+
+  Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionFollowerConnection:
+    class: Capco\AppBundle\GraphQL\Resolver\Opinion\OpinionFollowerConnection
+    arguments:
+      - '@capco.user.repository'
+      - '@logger'
+    tags:
+      - { name: overblog_graphql.resolver }
+
+  Capco\AppBundle\GraphQL\Resolver\Participant\ParticipantConnectionEdgeRegisteredAnonymouslyResolver:
+    class:
+      Capco\AppBundle\GraphQL\Resolver\Participant\ParticipantConnectionEdgeRegisteredAnonymouslyResolver
+    arguments:
+    - '@capco.event_registration.repository'
+    tags:
+    - { name: overblog_graphql.resolver }
