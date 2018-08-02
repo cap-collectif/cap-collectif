@@ -30,6 +30,7 @@ class OpinionController extends Controller
         int $page,
         string $opinionTypeSlug,
         Request $request,
+        ConsultationStep $currentStep,
         string $opinionsSort = null
     ) {
         if (!$currentStep->canDisplay($this->getUser())) {

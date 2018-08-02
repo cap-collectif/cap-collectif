@@ -1,7 +1,7 @@
 <?php
 namespace Capco\AppBundle\Form;
 
-use Capco\AppBundle\Entity\ProjectVisibilityMode;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\Toggle\Manager;

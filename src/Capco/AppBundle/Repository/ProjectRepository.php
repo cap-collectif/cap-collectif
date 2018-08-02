@@ -2,7 +2,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\ProjectVisibilityMode;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Traits\ProjectVisibilityTrait;
 use Capco\UserBundle\Entity\User;
@@ -275,16 +275,5 @@ class ProjectRepository extends ServiceEntityRepository
             ->select('p')
             ->andWhere("p.visibility >= :visibility")
             ->setParameter('visibility', $visibility);
-    }
-
-    public function countByUser(User $user)
-    {
-        $qb = $this->getVisibilityQueryBuilder();
-        $qb
-            ->select('COUNT(p.id)')
-            ->where('p.Author :author')
-            ->setParameter('author', $user);
-
-        return $qb->getQuery()->getResult();
     }
 }

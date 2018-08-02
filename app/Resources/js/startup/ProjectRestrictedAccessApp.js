@@ -5,7 +5,7 @@ import ReactOnRails from 'react-on-rails';
 import { IntlProvider } from 'react-intl-redux';
 import ProjectRestrictedAccessAlert from '../components/Project/Page/ProjectRestrictedAccessAlert';
 
-export default (props: Object) => (
+export default (props: { projectId: string }) => (
   <Provider store={ReactOnRails.getStore('appStore')}>
     <IntlProvider>
       <ProjectRestrictedAccessAlert {...props} />

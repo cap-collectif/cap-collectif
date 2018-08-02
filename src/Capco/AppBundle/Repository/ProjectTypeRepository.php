@@ -2,7 +2,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\ProjectType;
-use Capco\AppBundle\Entity\ProjectVisibilityMode;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Traits\ProjectVisibilityTrait;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;

@@ -580,7 +580,7 @@ trait OpinionStepsTrait
      *
      * @When I edit my source without confirming my votes lost
      */
-    public function iEditMySourcewithoutConfirmingMyVotesLost()
+    public function iEditMySourceWithoutConfirmingMyVotesLost()
     {
         $page = $this->getCurrentPage();
         $votesCount = $page->getSourceVotesCount();

@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Traits\MetaDescriptionCustomCodeTrait;
 use Capco\AppBundle\Traits\ProjectVisibilityTrait;
 use Capco\AppBundle\Traits\UuidTrait;

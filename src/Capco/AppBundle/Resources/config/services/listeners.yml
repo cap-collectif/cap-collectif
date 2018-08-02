@@ -140,10 +140,10 @@ services:
     public: true
     class: Capco\AppBundle\EventListener\UserSerializationListener
     arguments:
-      - "@router"
-      - "@capco.toggle.manager"
-      - "@user_contribution_by_project_resolver"
-      - "@user_contribution_by_step_resolver"
+      - '@router'
+      - '@capco.toggle.manager'
+      - '@user_contribution_by_project_resolver'
+      - '@user_contribution_by_step_resolver'
       - '@Capco\AppBundle\Repository\ProjectRepository'
     tags:
       - { name: 'jms_serializer.event_subscriber' }
@@ -193,7 +193,7 @@ services:
       - { name: 'jms_serializer.event_subscriber' }
 
   capco.collect_step.serialization_listener:
-    public: truetest
+    public: true
     class: Capco\AppBundle\EventListener\CollectStepSerializationListener
     arguments: []
     tags:
@@ -252,4 +252,4 @@ services:
     public: true
     autowire: true
     tags:
-      - { name: kernel.event_listener, event: kernel.exception,  priority: 250 }
+      - { name: kernel.event_listener, event: kernel.exception, priority: 250 }

@@ -318,7 +318,7 @@ class Argument implements Contribution, VotableInterface, Trashable, Publishable
 
     public function isIndexable(): bool
     {
-        return $this->getProject()->isIndexable();
+        return $this->getIsEnabled();
     }
 
     public static function getElasticsearchTypeName(): string

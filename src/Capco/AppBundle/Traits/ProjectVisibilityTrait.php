@@ -1,7 +1,7 @@
 <?php
 namespace Capco\AppBundle\Traits;
 
-use Capco\AppBundle\Entity\ProjectVisibilityMode;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 
 trait ProjectVisibilityTrait
 {

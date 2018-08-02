@@ -209,7 +209,7 @@ Scenario: Super Admin can access to all private projects
   And I should see "global.draft.only_visible_by_you"
 
 @javascript
-Scenario: Admin can't access to a private project of other admin
+Scenario: An admin can't access a private project of an other admin
   Given feature "projects_form" is enabled
   And I am logged in as admin
   When I visited "collect page" with:
@@ -229,5 +229,3 @@ Scenario: Admin access to his project and click to edit it
   And I should see "global.draft.only_visible_by_you"
   Then I follow "action_edit"
   And I should be redirected to "/admin/capco/app/project/ProjectAccessibleForMeOnlyByAdmin/edit"
-  Then I wait 2 seconds
-  And I should see 'title_edit {"%name%":"Project pour la..."}'

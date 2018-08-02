@@ -158,11 +158,7 @@ class GlobalIdResolver
 
         foreach ($projectContributionClass as $object) {
             if ($node instanceof $object) {
-                if (!$node->canDisplay($user)) {
-                    return false;
-                } else {
-                    return true;
-                }
+                return $node->canDisplay($user);
             }
         }
 

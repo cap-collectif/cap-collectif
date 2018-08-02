@@ -459,9 +459,4 @@ abstract class AbstractStep
 
         return $this;
     }
-
-    public function getVisibility(): int
-    {
-        return $this->getProject()->getVisibility();
-    }
 }

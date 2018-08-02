@@ -1078,13 +1078,7 @@ class Proposal
 
     public function isIndexable(): bool
     {
-        return (
-            $this->enabled &&
-            !$this->expired &&
-            !$this->isDraft() &&
-            !$this->isDeleted() &&
-            $this->getProject()->isIndexable()
-        );
+        return ($this->enabled && !$this->expired && !$this->isDraft() && !$this->isDeleted());
     }
 
     public static function getElasticsearchTypeName(): string
@@ -1105,10 +1099,5 @@ class Proposal
     public function countFollowers(): int
     {
         return \count($this->followers);
-    }
-
-    public function getVisibility(): int
-    {
-        return $this->getProject()->getVisibility();
     }
 }

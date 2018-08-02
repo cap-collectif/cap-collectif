@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AppBundle\Controller\Site;
 
 use Capco\AppBundle\Form\SearchType as SearchForm;
@@ -16,11 +15,7 @@ class SearchController extends Controller
      */
     public function searchAction(Request $request)
     {
-        $searchParams = [
-            'term' => '',
-            'type' => 'all',
-            'sort' => 'score',
-        ];
+        $searchParams = ['term' => '', 'type' => 'all', 'sort' => 'score'];
         $sortField = '_score';
         $sortOrder = 'desc';
 
@@ -39,6 +34,7 @@ class SearchController extends Controller
         }
 
         // Perform the search
+        // TODO bouler sur les résultats de type proposal et faire un viewerCanSee dessus
         $searchResults = $this->container->get('capco.search.global_search')->search(
             $page,
             $searchParams['term'],

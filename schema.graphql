@@ -1818,7 +1818,6 @@ type Project implements Node {
   contributors(after: String, first: Int, before: String, last: Int): UserConnection!
   url: URI
   votableSteps: [ProposalStep!]!
-  allowedViewers(after: String, first: Int, before: String, last: Int): UserConnection!
 
   # The visibility of project
   visibility: ProjectVisibility!

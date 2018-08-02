@@ -91,7 +91,7 @@ Scenario: GraphQL client want to get a node of all available types
   }
   """
 
-Scenario: Admin GraphQL client want to get a node of project and proposal types
+Scenario: Admin GraphQL client want to get nodes from a restricted project
   Given I am logged in to graphql as admin
   When I send a GraphQL POST request:
   """
@@ -128,7 +128,7 @@ Scenario: Admin GraphQL client want to get a node of project and proposal types
   }
   """
 
-Scenario: Anonymous GraphQL client want to get a node of project and proposal types
+Scenario: Anonymous GraphQL client want to get nodes from a private project
   Given I send a GraphQL POST request:
   """
   {
@@ -160,7 +160,7 @@ Scenario: Anonymous GraphQL client want to get a node of project and proposal ty
   }
   """
 
-Scenario: User GraphQL client want to get a node of project and proposal types
+Scenario: Not allowed GraphQL client want to get nodes from a private project
   Given I am logged in to graphql as pierre
   When I send a GraphQL POST request:
   """
@@ -193,7 +193,7 @@ Scenario: User GraphQL client want to get a node of project and proposal types
   }
   """
 
-Scenario: Super Admin GraphQL client want to get a node of project and proposal types
+Scenario: Super Admin GraphQL client want to get nodes from a private project
   Given I am logged in to graphql as super admin
   When I send a GraphQL POST request:
   """

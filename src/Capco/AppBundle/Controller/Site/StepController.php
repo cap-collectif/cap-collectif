@@ -276,6 +276,10 @@ class StepController extends Controller
             throw new ProjectAccessDeniedException();
         }
 
+        if (!$step->getProposalForm()) {
+            $this->createNotFoundException();
+        }
+
         $proposalForm = $step->getProposalForm();
         $searchResults = ['proposals' => [], 'count' => 0];
 
