@@ -7,7 +7,7 @@ abstract class LogicJumpConditionOperatorEnum
     public const CONDITION_OPERATOR_IS_NOT = 'is_not';
 
     protected static $operatorName = [
-        self::CONDITION_OPERATOR_IS => 'logic-jump.is',
+        self::CONDITION_OPERATOR_IS => 'logic-jump.is', // TODO: Put here translation key when they are ready
         self::CONDITION_OPERATOR_IS_NOT => 'logic-jump.is_not',
     ];
 
