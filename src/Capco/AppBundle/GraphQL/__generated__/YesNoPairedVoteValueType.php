@@ -12,6 +12,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class YesNoPairedVoteValueType extends EnumType implements GeneratedTypeInterface
 {
+    const NAME = 'YesNoPairedVoteValue';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

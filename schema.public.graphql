@@ -1,0 +1,143 @@
+# A consultation
+type Consultation implements Node {
+  # The ID of an object
+  id: ID!
+
+  # A list of contributor associated with the consultation.
+  contributors(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): UserConnection!
+
+  # The title of the consultation.
+  title: String!
+
+  # Whether the user has vote for a contribution in this consultation.
+  userHasVote(
+    # The user's login (for example, an email).
+    login: String!
+  ): Boolean!
+
+  # The number of votes in this consultation.
+  votesCount: Int @deprecated(reason: "Field `votesCount` will be removed. Use `votes.totalCount` instead. In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection. Removal on 2019-01-01 UTC.")
+}
+
+# A string containing a datetime.
+scalar DateTime
+
+# Fetches an object given its ID
+interface Node {
+  # The ID of an object
+  id: ID!
+}
+
+# Information about pagination in a connection.
+type PageInfo {
+  # When paginating forwards, are there more items?
+  hasNextPage: Boolean!
+
+  # When paginating backwards, are there more items?
+  hasPreviousPage: Boolean!
+
+  # When paginating backwards, the cursor to continue.
+  startCursor: String
+
+  # When paginating forwards, the cursor to continue.
+  endCursor: String
+}
+
+# Root of the schema.
+type Query {
+  # The currently authenticated user.
+  viewer: User!
+
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
+
+  # Lookup nodes by a list of IDs.
+  nodes(
+    # The list of node IDs.
+    ids: [ID!]!
+  ): [Node]!
+}
+
+# A questionnaire is a form.
+type Questionnaire implements Node {
+  # The ID of an object
+  id: ID!
+
+  # Identifies the questionnaire title.
+  title: String!
+
+  # Whether the user has reply to a questionnaire.
+  userHasReply(
+    # The user's login (for example, an email).
+    login: String!
+  ): Boolean!
+
+  # A list of users that have replied to the questionnaire.
+  participants(
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the first `n` elements from the list.
+    first: Int = 100
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+
+    # Returns the last `n` elements from the list.
+    last: Int
+  ): UserConnection!
+}
+
+# An RFC 3986, RFC 3987, and RFC 6570 (level 4) compliant URI string.
+scalar URI
+
+# A user is an individual's account.
+type User implements Node {
+  # The ID of an object
+  id: ID!
+
+  # The HTTP URL for this user, always `null` if feature toggle `profiles` is disabled.
+  url: URI
+
+  # Identifies the date and time when the object was created.
+  createdAt: DateTime!
+
+  # Whether or not this user is the viewing user.
+  isViewer: Boolean!
+}
+
+# A connection to a list of items.
+type UserConnection {
+  # Identifies the total count of items in the connection.
+  totalCount: Int!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination.
+  edges: [UserEdge]
+}
+
+# An edge in a connection.
+type UserEdge {
+  # The item at the end of the edge.
+  node: User!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}

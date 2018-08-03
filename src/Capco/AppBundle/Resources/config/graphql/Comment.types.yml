@@ -12,7 +12,7 @@ Comment:
       updatedAt:
         type: 'DateTime'
       author:
-        type: 'User'
+        type: 'InternalUser'
       parent:
         type: 'Comment'
       pinned:

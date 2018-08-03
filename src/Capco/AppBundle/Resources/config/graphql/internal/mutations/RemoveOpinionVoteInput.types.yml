@@ -1,0 +1,8 @@
+RemoveOpinionVoteInput:
+  type: relay-mutation-input
+  config:
+    description: 'Remove a vote for a proposal in a contribuable step.'
+    fields:
+      opinionId:
+        type: 'ID!'
+        description: 'The Node ID of the opinion to unvote.'

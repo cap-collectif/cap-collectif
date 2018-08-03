@@ -1,0 +1,93 @@
+<?php
+namespace Capco\AppBundle\Entity;
+
+use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
+use Capco\AppBundle\Traits\UuidTrait;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Table(name="logic_jump")
+ * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\LogicJumpRepository")
+ */
+class LogicJump
+{
+    use UuidTrait;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion", inversedBy="jumps")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    protected $origin;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion")
+     */
+    protected $destination;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\LogicJumpCondition", mappedBy="jump")
+     */
+    protected $conditions;
+
+    public function __construct()
+    {
+        $this->conditions = new ArrayCollection();
+    }
+
+    public function getOrigin(): ?MultipleChoiceQuestion
+    {
+        return $this->origin;
+    }
+
+    public function setOrigin(?MultipleChoiceQuestion $origin): self
+    {
+        $this->origin = $origin;
+
+        return $this;
+    }
+
+    public function getDestination(): ?MultipleChoiceQuestion
+    {
+        return $this->destination;
+    }
+
+    public function setDestination(?MultipleChoiceQuestion $destination): self
+    {
+        $this->destination = $destination;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|LogicJumpCondition[]
+     */
+    public function getConditions(): Collection
+    {
+        return $this->conditions;
+    }
+
+    public function addCondition(LogicJumpCondition $condition): self
+    {
+        if (!$this->conditions->contains($condition)) {
+            $this->conditions[] = $condition;
+            $condition->setJump($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCondition(LogicJumpCondition $condition): self
+    {
+        if ($this->conditions->contains($condition)) {
+            $this->conditions->removeElement($condition);
+            // set the owning side to null (unless already changed)
+            if ($condition->getJump() === $this) {
+                $condition->setJump(null);
+            }
+        }
+
+        return $this;
+    }
+}

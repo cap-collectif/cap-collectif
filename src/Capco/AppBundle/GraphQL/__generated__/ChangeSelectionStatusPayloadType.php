@@ -13,6 +13,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class ChangeSelectionStatusPayloadType extends ObjectType implements GeneratedTypeInterface
 {
+    const NAME = 'ChangeSelectionStatusPayload';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

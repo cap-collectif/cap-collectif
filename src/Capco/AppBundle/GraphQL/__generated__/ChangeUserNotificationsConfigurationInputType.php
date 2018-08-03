@@ -13,6 +13,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class ChangeUserNotificationsConfigurationInputType extends InputObjectType implements GeneratedTypeInterface
 {
+    const NAME = 'ChangeUserNotificationsConfigurationInput';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

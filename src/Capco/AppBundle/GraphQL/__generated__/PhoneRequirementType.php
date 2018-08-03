@@ -14,6 +14,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class PhoneRequirementType extends ObjectType implements GeneratedTypeInterface
 {
+    const NAME = 'PhoneRequirement';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

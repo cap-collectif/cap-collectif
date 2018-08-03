@@ -27,10 +27,6 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
     questionnaire: '@questionnaire2'
     question: '@simplequestion4'
     position: 1
-  qaq24:
-    questionnaire: '@questionnaire2'
-    question: '@simplequestion11'
-    position: 2
   qaq8:
     questionnaire: '@questionnaire3'
     question: '@simplequestion5'
@@ -104,6 +100,46 @@ Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion:
     question: '@sectionquestion2'
     position: 3
   qaq27:
+    proposalForm: '@proposalform1'
+    question: '@sectionquestion3'
+    position: 1
+  qaq28:
+    questionnaire: '@questionnaire2'
+    question: '@simplequestion11'
+    position: 2
+  qaq29:
+    questionnaire: '@questionnaire2'
+    question: '@simplequestion12'
+    position: 3
+  qaq30:
+    questionnaire: '@questionnaireWithJumps'
+    question: '@multiplequestionHapNoel'
+    position: 1
+  qaq31:
+    questionnaire: '@questionnaireWithJumps'
+    question: '@multiplequestionHapCreation'
+    position: 2
+  qaq32:
+    questionnaire: '@questionnaireWithJumps'
+    question: '@multiplequestionIsHapGood'
+    position: 3
+  qaq33:
+    questionnaire: '@questionnaireWithJumps'
+    question: '@multiplequestionNoelFete'
+    position: 4
+  qaq34:
+    questionnaire: '@questionnaireWithJumps'
+    question: '@multiplequestionNoelHatColor'
+    position: 5
+  qaq35:
+    questionnaire: '@questionnaire1'
+    question: '@sectionquestion1'
+    position: 1
+  qaq36:
+    questionnaire: '@questionnaire1'
+    question: '@sectionquestion2'
+    position: 3
+  qaq37:
     proposalForm: '@proposalform1'
     question: '@sectionquestion3'
     position: 1

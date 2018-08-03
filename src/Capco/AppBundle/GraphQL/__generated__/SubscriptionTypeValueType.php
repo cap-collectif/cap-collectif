@@ -12,6 +12,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class SubscriptionTypeValueType extends EnumType implements GeneratedTypeInterface
 {
+    const NAME = 'SubscriptionTypeValue';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

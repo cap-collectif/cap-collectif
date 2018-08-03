@@ -13,6 +13,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class ChangeProposalEvaluationPayloadType extends ObjectType implements GeneratedTypeInterface
 {
+    const NAME = 'ChangeProposalEvaluationPayload';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

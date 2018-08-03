@@ -13,6 +13,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class NotRegisteredType extends ObjectType implements GeneratedTypeInterface
 {
+    const NAME = 'NotRegistered';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

@@ -27,6 +27,14 @@ Capco\AppBundle\Entity\Questionnaire:
     id: questionnaire5
     title: Questionnaire pour budget participatif disponible
     description: <p><text(100)></p>
+  questionnaireWithJumps:
+    id: questionnaireWithJumps
+    title: El famoso questionnaire a branche
+    description: <p><text(100)></p>
+    step: '@questionnairestepJump'
+    multipleRepliesAllowed: true
+    anonymousAllowed: true
+    acknowledgeReplies: true
   questionnaire6:
     id: questionnaire6
     title: Questionnaire pour budget participatif de la Force

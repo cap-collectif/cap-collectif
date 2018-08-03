@@ -13,6 +13,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class RemoveCommentVotePayloadType extends ObjectType implements GeneratedTypeInterface
 {
+    const NAME = 'RemoveCommentVotePayload';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
@@ -47,7 +48,7 @@ final class RemoveCommentVotePayloadType extends ObjectType implements Generated
                     'access' => null,
                 ],
                 'viewer' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('User')),
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalUser')),
                     'args' => [
                     ],
                     'resolve' => null,

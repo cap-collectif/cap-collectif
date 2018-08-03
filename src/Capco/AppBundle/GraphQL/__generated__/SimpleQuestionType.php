@@ -14,6 +14,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class SimpleQuestionType extends ObjectType implements GeneratedTypeInterface
 {
+    const NAME = 'SimpleQuestion';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
@@ -141,22 +142,23 @@ final class SimpleQuestionType extends ObjectType implements GeneratedTypeInterf
                         [
                             'name' => 'after',
                             'type' => Type::string(),
-                            'description' => null,
+                            'description' => 'Returns the elements in the list that come after the specified cursor.',
                         ],
                         [
                             'name' => 'first',
                             'type' => Type::int(),
-                            'description' => null,
+                            'description' => 'Returns the first `n` elements from the list.',
+                            'defaultValue' => 100,
                         ],
                         [
                             'name' => 'before',
                             'type' => Type::string(),
-                            'description' => null,
+                            'description' => 'Returns the elements in the list that come before the specified cursor.',
                         ],
                         [
                             'name' => 'last',
                             'type' => Type::int(),
-                            'description' => null,
+                            'description' => 'Returns the last `n` elements from the list.',
                         ],
                     ],
                     'resolve' => function ($value, $args, $context, ResolveInfo $info) use ($globalVariable) {

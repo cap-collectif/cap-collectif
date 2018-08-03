@@ -12,6 +12,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class ProjectVisibilityType extends EnumType implements GeneratedTypeInterface
 {
+    const NAME = 'ProjectVisibility';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

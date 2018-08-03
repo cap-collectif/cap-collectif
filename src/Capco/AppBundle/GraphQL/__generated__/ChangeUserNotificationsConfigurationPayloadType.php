@@ -13,6 +13,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class ChangeUserNotificationsConfigurationPayloadType extends ObjectType implements GeneratedTypeInterface
 {
+    const NAME = 'ChangeUserNotificationsConfigurationPayload';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
@@ -23,7 +24,7 @@ final class ChangeUserNotificationsConfigurationPayloadType extends ObjectType i
             'fields' => function () use ($globalVariable) {
                 return [
                 'user' => [
-                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('User')),
+                    'type' => Type::nonNull($globalVariable->get('typeResolver')->resolve('InternalUser')),
                     'args' => [
                     ],
                     'resolve' => null,

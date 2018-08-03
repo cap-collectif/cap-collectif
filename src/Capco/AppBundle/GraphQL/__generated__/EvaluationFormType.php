@@ -14,6 +14,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class EvaluationFormType extends ObjectType implements GeneratedTypeInterface
 {
+    const NAME = 'EvaluationForm';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

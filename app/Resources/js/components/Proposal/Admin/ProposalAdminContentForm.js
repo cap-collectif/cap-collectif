@@ -27,6 +27,7 @@ import {
   formatSubmitResponses,
   formatInitialResponsesValues,
   type ResponsesInReduxForm,
+  validateResponses,
 } from '../../../utils/responsesHelper';
 
 type ProposalForm = ProposalForm_proposalForm;
@@ -92,6 +93,7 @@ export const validateProposalContent = (
   // $FlowFixMe $refType
   proposalForm: ProposalForm,
   features: FeatureToggles,
+  intl: IntlShape,
 ) => {
   const errors = {};
   if (!values.title || values.title.length <= 2) {
@@ -125,28 +127,22 @@ export const validateProposalContent = (
   if (features.themes && proposalForm.usingThemes && proposalForm.themeMandatory && !values.theme) {
     errors.theme = 'proposal.constraints.theme';
   }
-  const responsesError = [];
-  proposalForm.questions.map((field, index) => {
-    responsesError[index] = {};
-    if (field.required) {
-      const response = values.responses.filter(res => res && res.question === field.id)[0];
-      if (field.type === 'medias') {
-        if (!response || (Array.isArray(response.value) && response.value.length === 0)) {
-          responsesError[index] = { value: 'proposal.constraints.field_mandatory' };
-        }
-      } else if (!response || !response.value) {
-        responsesError[index] = { value: 'proposal.constraints.field_mandatory' };
-      }
-    }
-  });
-  if (responsesError.length) {
-    errors.responses = responsesError;
+
+  const responsesError = validateResponses(
+    proposalForm.questions,
+    values.responses,
+    'proposal',
+    intl,
+  );
+  if (responsesError.responses && responsesError.responses.length) {
+    errors.responses = responsesError.responses;
   }
+
   return errors;
 };
 
-const validate = (values: FormValues, { proposal, features }: Props) =>
-  validateProposalContent(values, proposal.form, features);
+const validate = (values: FormValues, { proposal, features, intl }: Props) =>
+  validateProposalContent(values, proposal.form, features, intl);
 
 type State = {
   showEditFusionModal: boolean,

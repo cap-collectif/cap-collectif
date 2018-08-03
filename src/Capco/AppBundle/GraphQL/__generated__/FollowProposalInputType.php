@@ -13,6 +13,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class FollowProposalInputType extends InputObjectType implements GeneratedTypeInterface
 {
+    const NAME = 'FollowProposalInput';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

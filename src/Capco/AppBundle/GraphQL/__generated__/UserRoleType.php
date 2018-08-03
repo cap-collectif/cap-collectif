@@ -12,6 +12,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class UserRoleType extends EnumType implements GeneratedTypeInterface
 {
+    const NAME = 'UserRole';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

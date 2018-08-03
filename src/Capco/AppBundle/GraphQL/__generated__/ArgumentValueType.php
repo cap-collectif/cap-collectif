@@ -12,6 +12,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class ArgumentValueType extends EnumType implements GeneratedTypeInterface
 {
+    const NAME = 'ArgumentValue';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

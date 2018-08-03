@@ -167,17 +167,17 @@ Scenario: user try to access to a project with restricted access
   When I visited "collect page" with:
     | projectSlug | un-avenir-meilleur-pour-les-nains-de-jardins-custom-access |
     | stepSlug    | collecte-des-propositions-liberer-les-nains-de-jardin      |
-  And I wait ".project-preview" to appear on current page
+  And I wait ".error-page" to appear on current page
   Then I should see 'restricted-access'
 
 @javascript
 Scenario: Not allowed user can't access to a private project
   Given feature "projects_form" is enabled
   And I am logged in as user
-  And I visited "collect page" with:
+  When I visited "collect page" with:
     | projectSlug | qui-doit-conquerir-le-monde-visible-par-les-admins-seulement |
     | stepSlug    | collecte-des-propositions-pour-conquerir-le-monde            |
-  And I wait ".project-preview" to appear on current page
+  And I wait ".error-page" to appear on current page
   Then I should see 'restricted-access'
   When I follow "error.report"
   Then I should be redirected to "/contact"
@@ -189,7 +189,7 @@ Scenario: user try to access to a project with restricted access
   When I visited "collect page" with:
     | projectSlug | un-avenir-meilleur-pour-les-nains-de-jardins-custom-access |
     | stepSlug    | collecte-des-propositions-liberer-les-nains-de-jardin      |
-  And I wait ".project-preview" to appear on current page
+  And I wait ".error-page" to appear on current page
   Then I should see 'restricted-access'
 
 @javascript
@@ -199,25 +199,25 @@ Scenario: Super Admin can access to all private projects
   And I visited "collect page" with:
     | projectSlug | qui-doit-conquerir-le-monde-visible-par-les-admins-seulement |
     | stepSlug    | collecte-des-propositions-pour-conquerir-le-monde            |
-  And I wait ".project-preview" to appear on current page
+  And I wait "#proposal__step-page-rendered" to appear on current page
   Then I should see "Collecte des propositions pour conquérir le monde"
   And I should see "only-visible-by-administrators"
   When I visited "collect page" with:
     | projectSlug | project-pour-la-creation-de-la-capcobeer-visible-par-admin-seulement |
     | stepSlug    | collecte-des-propositions-pour-la-capcobeer                          |
-  And I wait ".project-preview" to appear on current page
+  And I wait "#proposal__step-page-rendered" to appear on current page
   Then I should see "Collecte des propositions pour la capcoBeer"
   And I should see "global.draft.only_visible_by_you"
   When I visited "collect page" with:
     | projectSlug | project-pour-la-force-visible-par-mauriau-seulement |
     | stepSlug    | collecte-des-propositions-pour-la-force             |
-  And I wait ".project-preview" to appear on current page
+  And I wait "#proposal__step-page-rendered" to appear on current page
   Then I should see "Collecte des propositions pour La Force"
   And I should see "global.draft.only_visible_by_you"
   When I visited "collect page" with:
     | projectSlug | un-avenir-meilleur-pour-les-nains-de-jardins-custom-access |
     | stepSlug    | collecte-des-propositions-liberer-les-nains-de-jardin      |
-  And I wait ".project-preview" to appear on current page
+  And I wait "#proposal__step-page-rendered" to appear on current page
   Then I should see "Un avenir meilleur pour les nains de jardins (custom access)"
 
 @javascript
@@ -236,7 +236,7 @@ Scenario: Admin access to a project accessible for admins only
   And I visited "collect page" with:
     | projectSlug | qui-doit-conquerir-le-monde-visible-par-les-admins-seulement |
     | stepSlug    | collecte-des-propositions-pour-conquerir-le-monde            |
-  And I wait ".project-preview" to appear on current page
+  And I wait "#proposal__step-page-rendered" to appear on current page
   Then I should see "Collecte des propositions pour conquérir le monde"
   And I should see "only-visible-by-administrators"
 
@@ -273,5 +273,5 @@ Scenario: Pierre can access to a restricted project to his user group
   And I should not see "ptondereau" in the "#group3-modal .list-group" element
   And I should see "global.more"
   Then I click on button "#load-more"
-  And I wait ".project-preview" to appear on current page
+  And I wait 2 seconds
   Then I should see "ptondereau" in the "#group3-modal .list-group" element

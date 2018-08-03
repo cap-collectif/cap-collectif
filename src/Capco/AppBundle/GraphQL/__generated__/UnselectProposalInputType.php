@@ -13,6 +13,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class UnselectProposalInputType extends InputObjectType implements GeneratedTypeInterface
 {
+    const NAME = 'UnselectProposalInput';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

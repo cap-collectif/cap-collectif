@@ -13,6 +13,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class UnfollowOpinionPayloadType extends ObjectType implements GeneratedTypeInterface
 {
+    const NAME = 'UnfollowOpinionPayload';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

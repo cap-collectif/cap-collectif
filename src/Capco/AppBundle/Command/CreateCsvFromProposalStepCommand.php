@@ -498,7 +498,7 @@ EOF;
         }
 
         $proposalsQuery = $this->getContributionsGraphQLQueryByProposalStep($this->currentStep);
-        $proposals = $this->executor->execute(null, [
+        $proposals = $this->executor->execute('internal', [
             'query' => $proposalsQuery,
             'variables' => [],
         ])->toArray();
@@ -566,7 +566,7 @@ EOF;
         $this->writer->addRow($row);
 
         $reportingsQuery = $this->getProposalReportingsGraphQLQuery($proposal['id']);
-        $proposalWithReportings = $this->executor->execute(null, [
+        $proposalWithReportings = $this->executor->execute('internal', [
             'query' => $reportingsQuery,
             'variables' => [],
         ])->toArray();
@@ -599,7 +599,7 @@ EOF;
             $proposal['id'],
             $this->currentStep->getId()
         );
-        $proposalsWithVotes = $this->executor->execute(null, [
+        $proposalsWithVotes = $this->executor->execute('internal', [
             'query' => $votesQuery,
             'variables' => [],
         ])->toArray();
@@ -630,7 +630,7 @@ EOF;
         $progress->clear();
 
         $commentsQuery = $this->getProposalCommentsGraphQLQuery($proposal['id']);
-        $proposalsWithComments = $this->executor->execute(null, [
+        $proposalsWithComments = $this->executor->execute('internal', [
             'query' => $commentsQuery,
             'variables' => [],
         ])->toArray();
@@ -660,7 +660,7 @@ EOF;
         $progress->clear();
 
         $newsQuery = $this->getProposalNewsGraphQLQuery($proposal['id']);
-        $proposalWithNews = $this->executor->execute(null, [
+        $proposalWithNews = $this->executor->execute('internal', [
             'query' => $newsQuery,
             'variables' => [],
         ])->toArray();
@@ -742,7 +742,7 @@ EOF;
         $this->writer->addRow($row);
 
         $commentReportings = $this->getProposalCommentReportingsGraphQLQuery($comment['id']);
-        $commentWithReportings = $this->executor->execute(null, [
+        $commentWithReportings = $this->executor->execute('internal', [
             'query' => $commentReportings,
             'variables' => [],
         ])->toArray();
@@ -763,7 +763,7 @@ EOF;
         );
 
         $commentVotesQuery = $this->getProposalCommentVotesGraphQLQuery($comment['id']);
-        $commentWithVotes = $this->executor->execute(null, [
+        $commentWithVotes = $this->executor->execute('internal', [
             'query' => $commentVotesQuery,
             'variables' => [],
         ])->toArray();
@@ -1516,7 +1516,7 @@ ${COMMENT_VOTE_INFOS}
 {
   node(id: "{$proposalStep->getId()}") {
     ... on ProposalStep {
-      proposals(includeUnpublished: true, first: ${PROPOSALS_PER_PAGE}{$proposalAfter}, trashedStatus: TRASHED) {
+      proposals(includeUnpublished: true, first: ${PROPOSALS_PER_PAGE}{$proposalAfter}, trashedStatus: null) {
         totalCount
         pageInfo {
           startCursor

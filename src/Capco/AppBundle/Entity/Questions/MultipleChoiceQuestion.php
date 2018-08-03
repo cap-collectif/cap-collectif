@@ -26,6 +26,11 @@ class MultipleChoiceQuestion extends AbstractQuestion
     protected $questionChoices;
 
     /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\LogicJump", mappedBy="origin", orphanRemoval=true)
+     */
+    protected $jumps;
+
+    /**
      * @ORM\Column(name="random_question_choices", type="boolean", nullable=false)
      */
     protected $randomQuestionChoices = false;

@@ -12,6 +12,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class CssJSONType extends CustomScalarType implements GeneratedTypeInterface
 {
+    const NAME = 'CssJSON';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

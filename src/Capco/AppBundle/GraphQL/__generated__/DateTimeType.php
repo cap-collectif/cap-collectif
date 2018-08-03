@@ -12,13 +12,14 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class DateTimeType extends CustomScalarType implements GeneratedTypeInterface
 {
+    const NAME = 'DateTime';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {
         $configLoader = function(GlobalVariables $globalVariable) {
             return [
             'name' => 'DateTime',
-            'description' => null,
+            'description' => 'A string containing a datetime.',
             'scalarType' => null,
             'serialize' => function () use ($globalVariable) {
                 return call_user_func_array(['Capco\\AppBundle\\GraphQL\\Type\\DateTimeType', 'serialize'], func_get_args());

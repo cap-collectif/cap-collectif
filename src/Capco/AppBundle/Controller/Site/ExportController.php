@@ -108,7 +108,9 @@ query {
         $this->get(GraphQlAclListener::class)->disableAcl();
         $executor = $this->get('overblog_graphql.request_executor');
 
-        $data = $executor->execute(null, ['query' => $requestString, 'variables' => []])->toArray();
+        $data = $executor
+            ->execute('internal', ['query' => $requestString, 'variables' => []])
+            ->toArray();
 
         if (!isset($data['data'])) {
             $this->get('logger')->error('GraphQL Query Error: ' . $data['error']);
@@ -249,7 +251,9 @@ query {
         $this->get(GraphQlAclListener::class)->disableAcl();
         $executor = $this->get('overblog_graphql.request_executor');
 
-        $data = $executor->execute(null, ['query' => $requestString, 'variables' => []])->toArray();
+        $data = $executor
+            ->execute('internal', ['query' => $requestString, 'variables' => []])
+            ->toArray();
 
         if (!isset($data['data'])) {
             $this->get('logger')->error('GraphQL Query Error: ' . $data['error']);
@@ -363,7 +367,9 @@ query {
         $this->get(GraphQlAclListener::class)->disableAcl();
         $executor = $this->get('overblog_graphql.request_executor');
 
-        $data = $executor->execute(null, ['query' => $requestString, 'variables' => []])->toArray();
+        $data = $executor
+            ->execute('internal', ['query' => $requestString, 'variables' => []])
+            ->toArray();
 
         if (!isset($data['data'])) {
             $this->get('logger')->error('GraphQL Query Error: ' . $data['error']);

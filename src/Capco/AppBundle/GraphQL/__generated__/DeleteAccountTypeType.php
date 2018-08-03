@@ -12,6 +12,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class DeleteAccountTypeType extends EnumType implements GeneratedTypeInterface
 {
+    const NAME = 'DeleteAccountType';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

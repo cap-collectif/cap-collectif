@@ -63,7 +63,7 @@ Proposal:
       selections:
         type: '[Selection!]!'
       likers:
-        type: '[User!]!'
+        type: '[InternalUser!]!'
       estimation:
         type: 'Int'
       responses:
@@ -85,7 +85,7 @@ Proposal:
         resolve:
           '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Type\\FormattedAddressTypeResolver", [value])'
       author:
-        type: 'User!'
+        type: 'InternalUser!'
         description: 'The author of the contribution.'
       deletedAt:
         type: 'DateTime'
@@ -94,7 +94,7 @@ Proposal:
         type: 'DateTime'
         description: 'The updated date.'
       updatedBy:
-        type: 'User'
+        type: 'InternalUser'
         description: 'The update user.'
         resolve: '@=value.getUpdateAuthor()'
       publicationStatus:
@@ -166,7 +166,7 @@ Proposal:
         description: 'If the proposal listed in a fusion, contains the list of fusions.'
         resolve: '@=value.getParentConnections()'
       followers:
-        type: 'UserConnection!'
+        type: 'InternalUserConnection!'
         args:
           orderBy:
             type: 'FollowerOrder'

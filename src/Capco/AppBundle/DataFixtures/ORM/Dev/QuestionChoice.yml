@@ -195,3 +195,52 @@ Capco\AppBundle\Entity\QuestionChoice:
     description: Description de ma valeur importante !
     position: 3
     question: '@multiplequestion11'
+
+  questionchoiceHap:
+    id: questionchoiceHap
+    title: Hap
+    position: 1
+  questionchoiceNoel:
+    id: questionchoiceNoel
+    title: Noel
+    position: 2
+  questionchoiceHapJvc:
+    id: questionchoiceJvc
+    title: JVC
+    position: 1
+  questionchoiceHapTesla:
+    id: questionchoiceTesla
+    title: Tesla
+    position: 2
+  questionchoiceHapCisla:
+    id: questionchoiceCisla
+    title: Cisla
+    position: 3
+  questionchoiceHapBonOui:
+    id: questionchoiceHapBonOui
+    title: Oui
+    position: 1
+  questionchoiceHapBonNon:
+    id: questionchoiceHapBonNon
+    title: Non
+    position: 2
+  questionchoiceNoelOui:
+    id: questionchoiceNoelOui
+    title: Oui
+    position: 1
+  questionchoiceNoelNonBaka:
+    id: questionchoiceNoelNonBaka
+    title: Non baka
+    position: 2
+  questionchoiceNoelRedHat:
+    id: questionchoiceNoelRedHat
+    title: Rouge
+    position: 1
+  questionchoiceNoelGreenHat:
+    id: questionchoiceNoelGreenHat
+    title: Vert
+    position: 2
+  questionchoiceNoelBlueHat:
+    id: questionchoiceNoelBlueHat
+    title: Bleu
+    position: 3

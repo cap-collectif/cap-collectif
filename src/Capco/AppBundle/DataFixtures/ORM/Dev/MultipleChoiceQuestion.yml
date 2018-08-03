@@ -85,3 +85,29 @@ Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion:
     required: false
     type: 6
     randomQuestionChoices: false
+  multiplequestionHapNoel:
+    id: 24
+    title: Hap ou Noel ?
+    questionChoices: ['@questionchoiceHap', '@questionchoiceNoel']
+    required: true
+    type: 4
+  multiplequestionHapCreation:
+    id: 25
+    title: Par qui Hap a t-il été créé ?
+    questionChoices: ['@questionchoiceHapJvc', '@questionchoiceHapTesla', '@questionchoiceHapCisla']
+    type: 4
+  multiplequestionIsHapGood:
+    id: 26
+    title: Hap est-il un homme bon ?
+    questionChoices: ['@questionchoiceHapBonOui', '@questionchoiceHapBonNon']
+    type: 4
+  multiplequestionNoelFete:
+    id: 27
+    title: Noel a t-il un rapport avec la fête de Noël ?
+    questionChoices: ['@questionchoiceNoelOui', '@questionchoiceNoelNonBaka']
+    type: 4
+  multiplequestionNoelHatColor:
+    id: 28
+    title: De quelle couleur est le chapeau de Noël ?
+    questionChoices: ['@questionchoiceNoelRedHat', '@questionchoiceNoelGreenHat', '@questionchoiceNoelBlueHat']
+    type: 4

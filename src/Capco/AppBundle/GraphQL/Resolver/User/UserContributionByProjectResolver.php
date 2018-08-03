@@ -8,6 +8,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Overblog\GraphQLBundle\Definition\Argument;
 
 class UserContributionByProjectResolver implements ResolverInterface
 {
@@ -18,7 +19,7 @@ class UserContributionByProjectResolver implements ResolverInterface
         $this->container = $container;
     }
 
-    public function __invoke(User $user, Project $project, array $args): Connection
+    public function __invoke(User $user, Project $project, Argument $args): Connection
     {
         $paginator = new Paginator(function (int $offset, int $limit) {
             return [];

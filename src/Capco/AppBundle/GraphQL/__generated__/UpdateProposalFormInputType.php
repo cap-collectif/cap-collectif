@@ -13,6 +13,7 @@ use Overblog\GraphQLBundle\Definition\Type\GeneratedTypeInterface;
  */
 final class UpdateProposalFormInputType extends InputObjectType implements GeneratedTypeInterface
 {
+    const NAME = 'UpdateProposalFormInput';
 
     public function __construct(ConfigProcessor $configProcessor, GlobalVariables $globalVariables = null)
     {

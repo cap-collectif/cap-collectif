@@ -1,12 +1,14 @@
 <?php
 namespace Capco\AppBundle\GraphQL\Resolver\Sourceable;
 
+use Capco\UserBundle\Entity\User;
 use Capco\AppBundle\Model\Sourceable;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Capco\AppBundle\Repository\SourceRepository;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
+use Overblog\GraphQLBundle\Relay\Connection\Output\ConnectionBuilder;
 
 class SourceableSourcesResolver implements ResolverInterface
 {
