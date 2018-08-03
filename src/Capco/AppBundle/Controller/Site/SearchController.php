@@ -1,6 +1,8 @@
 <?php
 namespace Capco\AppBundle\Controller\Site;
 
+use Capco\AppBundle\Elasticsearch\HybridResult;
+use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Form\SearchType as SearchForm;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -34,7 +36,6 @@ class SearchController extends Controller
         }
 
         // Perform the search
-        // TODO bouler sur les résultats de type proposal et faire un viewerCanSee dessus
         $searchResults = $this->container->get('capco.search.global_search')->search(
             $page,
             $searchParams['term'],
@@ -42,6 +43,23 @@ class SearchController extends Controller
             $sortOrder,
             $searchParams['type']
         );
+
+        /**
+         * Do not display Proposal if we are not available
+         * @var HybridResult $searchResult
+         */
+        foreach ($searchResults['results'] as $key => $searchResult) {
+            /** @var Proposal $proposal */
+            if (
+                $searchResult->getTransformed() instanceof Proposal &&
+                $proposal = $searchResult->getTransformed()
+            ) {
+                if (!$proposal->canDisplay($this->getUser())) {
+                    unset($searchResults['results'][$key]);
+                    --$searchResults['count'];
+                }
+            }
+        }
 
         return [
             'form' => $form->createView(),
