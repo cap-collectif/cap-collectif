@@ -1,17 +1,29 @@
 <?php
 namespace Capco\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Doctrine\DBAL\Query\QueryBuilder;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Capco\AppBundle\Form\Type\TrashedStatusType;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class SourceAdmin extends Admin
+class SourceAdmin extends AbstractAdmin
 {
     protected $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'title'];
+
+    private $tokenStorage;
+
+    public function __construct(
+        string $code,
+        string $class,
+        string $baseControllerName,
+        TokenStorageInterface $tokenStorage
+    ) {
+        parent::__construct($code, $class, $baseControllerName);
+        $this->tokenStorage = $tokenStorage;
+    }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
@@ -100,5 +112,36 @@ class SourceAdmin extends Admin
 
     protected function configureRoutes(RouteCollection $collection)
     {
+    }
+
+    /**
+     * if user is supper admin return all else return only what I can see
+     */
+    public function createQuery($context = 'list')
+    {
+        $user = $this->tokenStorage->getToken()->getUser();
+        if ($user->hasRole('ROLE_SUPER_ADMIN')) {
+            return parent::createQuery($context);
+        }
+
+        /** @var QueryBuilder $query */
+        $query = parent::createQuery($context);
+        $query
+            ->leftJoin($query->getRootAliases()[0] . '.opinion', 'op')
+            ->leftJoin('op.step', 's')
+            ->leftJoin('s.projectAbstractStep', 'pAs')
+            ->leftJoin('pAs.project', 'p')
+            ->andWhere(
+                $query
+                    ->expr()
+                    ->andX(
+                        $query->expr()->eq('p.Author', ':author'),
+                        $query->expr()->eq('p.visibility', 0)
+                    )
+            );
+        $query->orWhere($query->expr()->gte('p.visibility', 1));
+        $query->setParameter('author', $user);
+
+        return $query;
     }
 }

@@ -32,7 +32,8 @@ services:
 
   capco_admin.admin.opinion:
     class: Capco\AdminBundle\Admin\OpinionAdmin
-    arguments: [~, Capco\AppBundle\Entity\Opinion, CapcoAdminBundle:Opinion]
+    arguments:
+      [~, Capco\AppBundle\Entity\Opinion, CapcoAdminBundle:Opinion, '@security.token_storage']
     tags:
       - {
           name: sonata.admin,
@@ -45,7 +46,8 @@ services:
 
   capco_admin.admin.argument:
     class: Capco\AdminBundle\Admin\ArgumentAdmin
-    arguments: [~, Capco\AppBundle\Entity\Argument, SonataAdminBundle:CRUD]
+    arguments:
+      [~, Capco\AppBundle\Entity\Argument, CapcoAdminBundle:CRUD, '@security.token_storage']
     tags:
       - {
           name: sonata.admin,
@@ -121,7 +123,7 @@ services:
 
   capco_admin.admin.project:
     class: Capco\AdminBundle\Admin\ProjectAdmin
-    arguments: [~, Capco\AppBundle\Entity\Project, SonataAdminBundle:CRUD, '@security.token_storage']
+    arguments: [~, Capco\AppBundle\Entity\Project, CapcoAdminBundle:CRUD, '@security.token_storage']
     tags:
       - {
           name: sonata.admin,
@@ -134,7 +136,8 @@ services:
 
   capco_admin.admin.proposal:
     class: Capco\AdminBundle\Admin\ProposalAdmin
-    arguments: [~, Capco\AppBundle\Entity\Proposal, SonataAdminBundle:CRUD]
+    arguments:
+      [~, Capco\AppBundle\Entity\Proposal, CapcoAdminBundle:CRUD, '@security.token_storage']
     tags:
       - {
           name: sonata.admin,
@@ -149,7 +152,7 @@ services:
 
   capco_admin.admin.reply:
     class: Capco\AdminBundle\Admin\ReplyAdmin
-    arguments: [~, Capco\AppBundle\Entity\Reply, SonataAdminBundle:CRUD]
+    arguments: [~, Capco\AppBundle\Entity\Reply, CapcoAdminBundle:CRUD, '@security.token_storage']
     tags:
       - {
           name: sonata.admin,
@@ -162,7 +165,8 @@ services:
 
   capco_admin.admin.questionnaire:
     class: Capco\AdminBundle\Admin\QuestionnaireAdmin
-    arguments: [~, Capco\AppBundle\Entity\Questionnaire, SonataAdminBundle:CRUD]
+    arguments:
+      [~, Capco\AppBundle\Entity\Questionnaire, CapcoAdminBundle:CRUD, '@security.token_storage']
     tags:
       - { name: sonata.admin, manager_type: orm, label: admin.label.questionnaire }
     calls:
@@ -170,7 +174,13 @@ services:
 
   capco_admin.admin.proposal_form:
     class: Capco\AdminBundle\Admin\ProposalFormAdmin
-    arguments: [~, Capco\AppBundle\Entity\ProposalForm, CapcoAdminBundle:ProposalForm]
+    arguments:
+      [
+        ~,
+        Capco\AppBundle\Entity\ProposalForm,
+        CapcoAdminBundle:ProposalForm,
+        '@security.token_storage',
+      ]
     tags:
       - {
           name: sonata.admin,
@@ -185,7 +195,13 @@ services:
 
   capco_admin.admin.question:
     class: Capco\AdminBundle\Admin\QuestionAdmin
-    arguments: [~, Capco\AppBundle\Entity\Questions\AbstractQuestion, SonataAdminBundle:CRUD]
+    arguments:
+      [
+        ~,
+        Capco\AppBundle\Entity\Questions\AbstractQuestion,
+        CapcoAdminBundle:CRUD,
+        '@security.token_storage',
+      ]
     tags:
       - { name: sonata.admin, manager_type: orm, label: admin.label.question }
     calls:
@@ -389,7 +405,7 @@ services:
 
   capco_admin.admin.source:
     class: Capco\AdminBundle\Admin\SourceAdmin
-    arguments: [~, Capco\AppBundle\Entity\Source, SonataAdminBundle:CRUD]
+    arguments: [~, Capco\AppBundle\Entity\Source, CapcoAdminBundle:CRUD, '@security.token_storage']
     tags:
       - {
           name: sonata.admin,
@@ -402,7 +418,7 @@ services:
 
   capco_admin.admin.post:
     class: Capco\AdminBundle\Admin\PostAdmin
-    arguments: [~, Capco\AppBundle\Entity\Post, SonataAdminBundle:CRUD]
+    arguments: [~, Capco\AppBundle\Entity\Post, CapcoAdminBundle:CRUD, '@security.token_storage']
     tags:
       - {
           name: sonata.admin,
@@ -415,7 +431,7 @@ services:
 
   capco_admin.admin.event:
     class: Capco\AdminBundle\Admin\EventAdmin
-    arguments: [~, Capco\AppBundle\Entity\Event, SonataAdminBundle:CRUD]
+    arguments: [~, Capco\AppBundle\Entity\Event, CapcoAdminBundle:CRUD, '@security.token_storage']
     tags:
       - {
           name: sonata.admin,
@@ -428,7 +444,7 @@ services:
 
   capco_admin.admin.video:
     class: Capco\AdminBundle\Admin\VideoAdmin
-    arguments: [~, Capco\AppBundle\Entity\Video, SonataAdminBundle:CRUD]
+    arguments: [~, Capco\AppBundle\Entity\Video, CapcoAdminBundle:CRUD]
     tags:
       - {
           name: sonata.admin,
@@ -441,7 +457,7 @@ services:
 
   capco_admin.admin.comment:
     class: Capco\AdminBundle\Admin\CommentAdmin
-    arguments: [~, Capco\AppBundle\Entity\Comment, SonataAdminBundle:CRUD]
+    arguments: [~, Capco\AppBundle\Entity\Comment, CapcoAdminBundle:CRUD, '@security.token_storage']
     tags:
       - {
           name: sonata.admin,
@@ -561,7 +577,8 @@ services:
 
   capco_admin.admin.opinion_version:
     class: Capco\AdminBundle\Admin\OpinionVersionAdmin
-    arguments: [~, Capco\AppBundle\Entity\OpinionVersion, SonataAdminBundle:CRUD]
+    arguments:
+      [~, Capco\AppBundle\Entity\OpinionVersion, SonataAdminBundle:CRUD, '@security.token_storage']
     tags:
       - {
           name: sonata.admin,

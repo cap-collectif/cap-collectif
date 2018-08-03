@@ -1,12 +1,21 @@
 <?php
-
 namespace Capco\AdminBundle\Controller;
 
+use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Sonata\AdminBundle\Admin\AdminInterface;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
-use Sonata\AdminBundle\Filter\FilterInterface;
+use Sonata\AdminBundle\Exception\LockException;
+use Sonata\AdminBundle\Exception\ModelManagerException;
+use Symfony\Bridge\Twig\AppVariable;
+use Symfony\Bridge\Twig\Command\DebugCommand;
+use Symfony\Bridge\Twig\Extension\FormExtension;
+use Symfony\Bridge\Twig\Form\TwigRenderer;
+use Symfony\Component\Form\FormRenderer;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\PropertyAccess\PropertyPath;
 
 class CRUDController extends Controller
 {
@@ -29,9 +38,10 @@ class CRUDController extends Controller
             throw $this->createAccessDeniedException();
         }
 
-        if ('filter' !== $context
-            && false === $admin->isGranted('CREATE')
-            && false === $admin->isGranted('EDIT')
+        if (
+            'filter' !== $context &&
+            false === $admin->isGranted('CREATE') &&
+            false === $admin->isGranted('EDIT')
         ) {
             throw $this->createAccessDeniedException();
         }
@@ -41,14 +51,20 @@ class CRUDController extends Controller
 
         if ('filter' === $context) {
             // filter
-            $fieldDescription = $this->retrieveFilterFieldDescription($admin, $request->get('field'));
+            $fieldDescription = $this->retrieveFilterFieldDescription(
+                $admin,
+                $request->get('field')
+            );
             $filterAutocomplete = $admin->getDatagrid()->getFilter($fieldDescription->getName());
 
             $property = $filterAutocomplete->getFieldOption('property');
             $callback = $filterAutocomplete->getFieldOption('callback');
             $minimumInputLength = $filterAutocomplete->getFieldOption('minimum_input_length', 3);
             $itemsPerPage = $filterAutocomplete->getFieldOption('items_per_page', 10);
-            $reqParamPageNumber = $filterAutocomplete->getFieldOption('req_param_name_page_number', '_page');
+            $reqParamPageNumber = $filterAutocomplete->getFieldOption(
+                'req_param_name_page_number',
+                '_page'
+            );
             $toStringCallback = $filterAutocomplete->getFieldOption('to_string_callback');
         } else {
             // create/edit form
@@ -56,14 +72,20 @@ class CRUDController extends Controller
             $formAutocomplete = $admin->getForm()->get($fieldDescription->getName());
 
             if ($formAutocomplete->getConfig()->getAttribute('disabled')) {
-                throw $this->createAccessDeniedException('Autocomplete list can`t be retrieved because the form element is disabled or read_only.');
+                throw $this->createAccessDeniedException(
+                    'Autocomplete list can`t be retrieved because the form element is disabled or read_only.'
+                );
             }
 
             $property = $formAutocomplete->getConfig()->getAttribute('property');
             $callback = $formAutocomplete->getConfig()->getAttribute('callback');
-            $minimumInputLength = $formAutocomplete->getConfig()->getAttribute('minimum_input_length');
+            $minimumInputLength = $formAutocomplete
+                ->getConfig()
+                ->getAttribute('minimum_input_length');
             $itemsPerPage = $formAutocomplete->getConfig()->getAttribute('items_per_page');
-            $reqParamPageNumber = $formAutocomplete->getConfig()->getAttribute('req_param_name_page_number');
+            $reqParamPageNumber = $formAutocomplete
+                ->getConfig()
+                ->getAttribute('req_param_name_page_number');
             $toStringCallback = $formAutocomplete->getConfig()->getAttribute('to_string_callback');
         }
 
@@ -77,7 +99,10 @@ class CRUDController extends Controller
         }
 
         if (mb_strlen($searchText, 'UTF-8') < $minimumInputLength) {
-            return new JsonResponse(['status' => 'KO', 'message' => 'Too short search string.'], 403);
+            return new JsonResponse(
+                ['status' => 'KO', 'message' => 'Too short search string.'],
+                403
+            );
         }
 
         $targetAdmin->setPersistFilters(false);
@@ -94,7 +119,13 @@ class CRUDController extends Controller
                 // multiple properties
                 foreach ($property as $prop) {
                     if (!$datagrid->hasFilter($prop)) {
-                        throw new \RuntimeException(sprintf('To retrieve autocomplete items, you should add filter "%s" to "%s" in configureDatagridFilters() method.', $prop, \get_class($targetAdmin)));
+                        throw new \RuntimeException(
+                            sprintf(
+                                'To retrieve autocomplete items, you should add filter "%s" to "%s" in configureDatagridFilters() method.',
+                                $prop,
+                                \get_class($targetAdmin)
+                            )
+                        );
                     }
 
                     $filter = $datagrid->getFilter($prop);
@@ -104,7 +135,13 @@ class CRUDController extends Controller
                 }
             } else {
                 if (!$datagrid->hasFilter($property)) {
-                    throw new \RuntimeException(sprintf('To retrieve autocomplete items, you should add filter "%s" to "%s" in configureDatagridFilters() method.', $property, \get_class($targetAdmin)));
+                    throw new \RuntimeException(
+                        sprintf(
+                            'To retrieve autocomplete items, you should add filter "%s" to "%s" in configureDatagridFilters() method.',
+                            $property,
+                            \get_class($targetAdmin)
+                        )
+                    );
                 }
 
                 $datagrid->setValue($property, null, $searchText);
@@ -113,7 +150,13 @@ class CRUDController extends Controller
 
         foreach ($conditions as $field => $value) {
             if (!$datagrid->hasFilter($field)) {
-                throw new \RuntimeException(sprintf('To retrieve autocomplete items, you should add filter "%s" to "%s" in configureDatagridFilters() method.', $field, \get_class($targetAdmin)));
+                throw new \RuntimeException(
+                    sprintf(
+                        'To retrieve autocomplete items, you should add filter "%s" to "%s" in configureDatagridFilters() method.',
+                        $field,
+                        \get_class($targetAdmin)
+                    )
+                );
             }
             $datagrid->setValue($field, null, $value);
         }
@@ -131,7 +174,9 @@ class CRUDController extends Controller
         foreach ($results as $entity) {
             if (null !== $toStringCallback) {
                 if (!\is_callable($toStringCallback)) {
-                    throw new \RuntimeException('Option "to_string_callback" does not contain callable function.');
+                    throw new \RuntimeException(
+                        'Option "to_string_callback" does not contain callable function.'
+                    );
                 }
 
                 $label = \call_user_func($toStringCallback, $entity, $property);
@@ -140,10 +185,7 @@ class CRUDController extends Controller
                 $label = $resultMetadata->getTitle();
             }
 
-            $items[] = [
-                'id' => $admin->id($entity),
-                'label' => $label,
-            ];
+            $items[] = ['id' => $admin->id($entity), 'label' => $label];
         }
 
         return new JsonResponse([
@@ -171,7 +213,13 @@ class CRUDController extends Controller
         }
 
         if ('sonata_type_model_autocomplete' !== $fieldDescription->getType()) {
-            throw new \RuntimeException(sprintf('Unsupported form type "%s" for field "%s".', $fieldDescription->getType(), $field));
+            throw new \RuntimeException(
+                sprintf(
+                    'Unsupported form type "%s" for field "%s".',
+                    $fieldDescription->getType(),
+                    $field
+                )
+            );
         }
 
         if (null === $fieldDescription->getTargetEntity()) {
@@ -179,5 +227,221 @@ class CRUDController extends Controller
         }
 
         return $fieldDescription;
+    }
+
+    private function checkParentChildAssociation(Request $request, $object)
+    {
+        if (!($parentAdmin = $this->admin->getParent())) {
+            return;
+        }
+
+        // NEXT_MAJOR: remove this check
+        if (!$this->admin->getParentAssociationMapping()) {
+            return;
+        }
+
+        $parentId = $request->get($parentAdmin->getIdParameter());
+
+        $propertyAccessor = PropertyAccess::createPropertyAccessor();
+        $propertyPath = new PropertyPath($this->admin->getParentAssociationMapping());
+
+        if (
+            $parentAdmin->getObject($parentId) !==
+            $propertyAccessor->getValue($object, $propertyPath)
+        ) {
+            // NEXT_MAJOR: make this exception
+            @trigger_error(
+                "Accessing a child that isn't connected to a given parent is deprecated since 3.34" .
+                    " and won't be allowed in 4.0.",
+                E_USER_DEPRECATED
+            );
+        }
+    }
+
+    /**
+     * @throws \Exception
+     */
+    protected function handleModelManagerException(\Exception $e)
+    {
+        if ($this->get('kernel')->isDebug()) {
+            throw $e;
+        }
+
+        $context = ['exception' => $e];
+        if ($e->getPrevious()) {
+            $context['previous_exception_message'] = $e->getPrevious()->getMessage();
+        }
+        $this->getLogger()->error($e->getMessage(), $context);
+    }
+
+    /**
+     * Sets the admin form theme to form view. Used for compatibility between Symfony versions.
+     *
+     * @param string $theme
+     */
+    private function setFormTheme(FormView $formView, $theme)
+    {
+        $twig = $this->get('twig');
+
+        // BC for Symfony < 3.2 where this runtime does not exists
+        if (!method_exists(AppVariable::class, 'getToken')) {
+            $twig->getExtension(FormExtension::class)->renderer->setTheme($formView, $theme);
+
+            return;
+        }
+
+        // BC for Symfony < 3.4 where runtime should be TwigRenderer
+        if (!method_exists(DebugCommand::class, 'getLoaderPaths')) {
+            $twig->getRuntime(TwigRenderer::class)->setTheme($formView, $theme);
+
+            return;
+        }
+
+        $twig->getRuntime(FormRenderer::class)->setTheme($formView, $theme);
+    }
+
+    public function editAction($id = null)
+    {
+        $request = $this->getRequest();
+        // the key used to lookup the template
+        $templateKey = 'edit';
+
+        $id = $request->get($this->admin->getIdParameter());
+        $existingObject = $this->admin->getObject($id);
+
+        if (!$existingObject) {
+            throw $this->createNotFoundException(
+                sprintf('unable to find the object with id: %s', $id)
+            );
+        }
+
+        if (is_object($existingObject) && !$existingObject->canDisplay($this->getUser())) {
+            throw new ProjectAccessDeniedException();
+        }
+
+        $this->checkParentChildAssociation($request, $existingObject);
+
+        $this->admin->checkAccess('edit', $existingObject);
+
+        $preResponse = $this->preEdit($request, $existingObject);
+        if (null !== $preResponse) {
+            return $preResponse;
+        }
+
+        $this->admin->setSubject($existingObject);
+        $objectId = $this->admin->getNormalizedIdentifier($existingObject);
+
+        /** @var $form Form */
+        $form = $this->admin->getForm();
+        $form->setData($existingObject);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $isFormValid = $form->isValid();
+
+            // persist if the form was valid and if in preview mode the preview was approved
+            if ($isFormValid && (!$this->isInPreviewMode() || $this->isPreviewApproved())) {
+                $submittedObject = $form->getData();
+                $this->admin->setSubject($submittedObject);
+
+                try {
+                    $existingObject = $this->admin->update($submittedObject);
+
+                    if ($this->isXmlHttpRequest()) {
+                        return $this->renderJson(
+                            [
+                                'result' => 'ok',
+                                'objectId' => $objectId,
+                                'objectName' => $this->escapeHtml(
+                                    $this->admin->toString($existingObject)
+                                ),
+                            ],
+                            200,
+                            []
+                        );
+                    }
+
+                    $this->addFlash(
+                        'sonata_flash_success',
+                        $this->trans(
+                            'flash_edit_success',
+                            [
+                                '%name%' => $this->escapeHtml(
+                                    $this->admin->toString($existingObject)
+                                ),
+                            ],
+                            'SonataAdminBundle'
+                        )
+                    );
+
+                    // redirect to edit mode
+                    return $this->redirectTo($existingObject);
+                } catch (ModelManagerException $e) {
+                    $this->handleModelManagerException($e);
+
+                    $isFormValid = false;
+                } catch (LockException $e) {
+                    $this->addFlash(
+                        'sonata_flash_error',
+                        $this->trans(
+                            'flash_lock_error',
+                            [
+                                '%name%' => $this->escapeHtml(
+                                    $this->admin->toString($existingObject)
+                                ),
+                                '%link_start%' =>
+                                    '<a href="' .
+                                        $this->admin->generateObjectUrl('edit', $existingObject) .
+                                        '">',
+                                '%link_end%' => '</a>',
+                            ],
+                            'SonataAdminBundle'
+                        )
+                    );
+                }
+            }
+
+            // show an error message if the form failed validation
+            if (!$isFormValid) {
+                if (!$this->isXmlHttpRequest()) {
+                    $this->addFlash(
+                        'sonata_flash_error',
+                        $this->trans(
+                            'flash_edit_error',
+                            [
+                                '%name%' => $this->escapeHtml(
+                                    $this->admin->toString($existingObject)
+                                ),
+                            ],
+                            'SonataAdminBundle'
+                        )
+                    );
+                }
+            } elseif ($this->isPreviewRequested()) {
+                // enable the preview template if the form was valid and preview was requested
+                $templateKey = 'preview';
+                $this->admin->getShow();
+            }
+        }
+
+        $formView = $form->createView();
+        // set the theme for the current Admin Form
+        $this->setFormTheme($formView, $this->admin->getFormTheme());
+
+        // NEXT_MAJOR: Remove this line and use commented line below it instead
+        $template = $this->admin->getTemplate($templateKey);
+
+        // $template = $this->templateRegistry->getTemplate($templateKey);
+
+        return $this->renderWithExtraParams(
+            $template,
+            [
+                'action' => 'edit',
+                'form' => $formView,
+                'object' => $existingObject,
+                'objectId' => $objectId,
+            ],
+            null
+        );
     }
 }

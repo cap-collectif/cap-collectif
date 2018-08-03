@@ -1,6 +1,7 @@
 <?php
 namespace Capco\AdminBundle\Admin;
 
+use Doctrine\DBAL\Query\QueryBuilder;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -8,11 +9,22 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Model\Metadata;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class PostAdmin extends CapcoAdmin
 {
     protected $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'createdAt'];
+    private $tokenStorage;
 
+    public function __construct(
+        string $code,
+        string $class,
+        string $baseControllerName,
+        TokenStorageInterface $tokenStorage
+    ) {
+        parent::__construct($code, $class, $baseControllerName);
+        $this->tokenStorage = $tokenStorage;
+    }
     // For mosaic view
     public function getObjectMetadata($object)
     {
@@ -158,8 +170,10 @@ class PostAdmin extends CapcoAdmin
                 'label' => 'admin.customcode',
                 'required' => false,
                 'help' => 'admin.help.customcode',
-                'attr' =>
-                    ['rows' => 10, 'placeholder' => '<script type="text/javascript"> </script>'],
+                'attr' => [
+                    'rows' => 10,
+                    'placeholder' => '<script type="text/javascript"> </script>',
+                ],
             ])
             ->end();
 
@@ -253,5 +267,33 @@ class PostAdmin extends CapcoAdmin
             ->add('commentsCount', null, ['label' => 'admin.fields.blog_post.comments_count'])
             ->add('updatedAt', null, ['label' => 'admin.fields.blog_post.updated_at'])
             ->add('createdAt', null, ['label' => 'admin.fields.blog_post.created_at']);
+    }
+
+    /**
+     * if user is supper admin return all else return only what I can see
+     */
+    public function createQuery($context = 'list')
+    {
+        $user = $this->tokenStorage->getToken()->getUser();
+        if ($user->hasRole('ROLE_SUPER_ADMIN')) {
+            return parent::createQuery($context);
+        }
+
+        /** @var QueryBuilder $query */
+        $query = parent::createQuery($context);
+        $query
+            ->leftJoin($query->getRootAliases()[0] . '.project', 'p')
+            ->andWhere(
+                $query
+                    ->expr()
+                    ->andX(
+                        $query->expr()->eq('p.Author', ':author'),
+                        $query->expr()->eq('p.visibility', 0)
+                    )
+            );
+        $query->orWhere($query->expr()->gte('p.visibility', 1));
+        $query->setParameter('author', $user);
+
+        return $query;
     }
 }

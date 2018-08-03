@@ -54,6 +54,9 @@ class SearchController extends Controller
                 $searchResult->getTransformed() instanceof Proposal &&
                 $proposal = $searchResult->getTransformed()
             ) {
+                if (!$proposal->getStep()) {
+                    continue;
+                }
                 if (!$proposal->canDisplay($this->getUser())) {
                     unset($searchResults['results'][$key]);
                     --$searchResults['count'];

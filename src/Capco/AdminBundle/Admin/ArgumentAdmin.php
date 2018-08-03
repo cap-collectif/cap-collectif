@@ -1,19 +1,32 @@
 <?php
 namespace Capco\AdminBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
 use Capco\AppBundle\Entity\Argument;
+use Doctrine\DBAL\Query\QueryBuilder;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Capco\AppBundle\Form\Type\TrashedStatusType;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class ArgumentAdmin extends Admin
+class ArgumentAdmin extends AbstractAdmin
 {
     protected $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'updatedAt'];
+    private $tokenStorage;
 
+    public function __construct(
+        string $code,
+        string $class,
+        string $baseControllerName,
+        TokenStorageInterface $tokenStorage
+    ) {
+        parent::__construct($code, $class, $baseControllerName);
+        $this->tokenStorage = $tokenStorage;
+    }
+    /**
+     * @param DatagridMapper $datagridMapper
+     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -29,7 +42,7 @@ class ArgumentAdmin extends Admin
             ->add('votesCount', null, ['label' => 'admin.fields.argument.vote_count'])
             ->add('updatedAt', null, ['label' => 'admin.fields.argument.updated_at'])
             ->add('isEnabled', null, ['label' => 'admin.fields.argument.is_enabled'])
-            ->add('trashedStatus', null, ['label' => 'admin.fields.argument.is_trashed'])
+            ->add('isTrashed', null, ['label' => 'admin.fields.argument.is_trashed'])
             ->add('expired', null, ['label' => 'admin.global.expired']);
     }
 
@@ -59,7 +72,9 @@ class ArgumentAdmin extends Admin
                 'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig',
             ])
             ->add('updatedAt', 'datetime', ['label' => 'admin.fields.argument.updated_at'])
-            ->add('_action', 'actions', ['actions' => ['delete' => []]]);
+            ->add('_action', 'actions', [
+                'actions' => ['show' => [], 'edit' => [], 'delete' => []],
+            ]);
     }
 
     protected function configureFormFields(FormMapper $formMapper)
@@ -104,7 +119,66 @@ class ArgumentAdmin extends Admin
             ]);
     }
 
+    /**
+     * @param ShowMapper $showMapper
+     */
+    protected function configureShowFields(ShowMapper $showMapper)
+    {
+        $subject = $this->getSubject();
+
+        $showMapper
+            ->add('body', null, ['label' => 'admin.fields.argument.body'])
+            ->add('type', null, [
+                'label' => 'admin.fields.argument.type',
+                'template' => 'CapcoAdminBundle:Argument:type_show_field.html.twig',
+                'typesLabels' => Argument::$argumentTypesLabels,
+            ])
+            ->add('opinion', null, ['label' => 'admin.fields.argument.opinion'])
+            ->add('Author', null, ['label' => 'admin.fields.argument.author'])
+            ->add('votesCount', null, ['label' => 'admin.fields.argument.vote_count'])
+            ->add('createdAt', null, ['label' => 'admin.fields.argument.created_at'])
+            ->add('updatedAt', null, ['label' => 'admin.fields.argument.updated_at'])
+            ->add('isEnabled', null, ['label' => 'admin.fields.argument.is_enabled'])
+            ->add('isTrashed', null, ['label' => 'admin.fields.argument.is_trashed']);
+        if ($subject->getIsTrashed()) {
+            $showMapper
+                ->add('trashedAt', null, ['label' => 'admin.fields.argument.trashed_at'])
+                ->add('trashedReason', null, ['label' => 'admin.fields.argument.trashed_reason']);
+        }
+    }
+
     protected function configureRoutes(RouteCollection $collection)
     {
+    }
+
+    /**
+     * if user is supper admin return all else return only what I can see
+     */
+    public function createQuery($context = 'list')
+    {
+        $user = $this->tokenStorage->getToken()->getUser();
+        if ($user->hasRole('ROLE_SUPER_ADMIN')) {
+            return parent::createQuery($context);
+        }
+
+        /** @var QueryBuilder $query */
+        $query = parent::createQuery($context);
+        $query
+            ->leftJoin($query->getRootAliases()[0] . '.opinion', 'op')
+            ->leftJoin('op.step', 's')
+            ->leftJoin('s.projectAbstractStep', 'pAs')
+            ->leftJoin('pAs.project', 'p')
+            ->andWhere(
+                $query
+                    ->expr()
+                    ->andX(
+                        $query->expr()->eq('p.Author', ':author'),
+                        $query->expr()->eq('p.visibility', 0)
+                    )
+            );
+        $query->orWhere($query->expr()->gte('p.visibility', 1));
+        $query->setParameter('author', $user);
+
+        return $query;
     }
 }

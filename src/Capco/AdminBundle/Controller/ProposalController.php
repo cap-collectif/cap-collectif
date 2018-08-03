@@ -1,18 +1,17 @@
 <?php
-
 namespace Capco\AdminBundle\Controller;
 
 use Box\Spout\Common\Type;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
-class ProposalController extends Controller
+class ProposalController extends CRUDController
 {
     /**
      * @Security("has_role('ROLE_ADMIN')")
@@ -22,8 +21,11 @@ class ProposalController extends Controller
      *     }, name="capco_admin_proposal_download_followers")
      * @ParamConverter("proposal", options={"mapping": {"proposalId": "id"}})
      */
-    public function downloadFollowerOfProposalAction(Request $request, Proposal $proposal, string $_format): Response
-    {
+    public function downloadFollowerOfProposalAction(
+        Request $request,
+        Proposal $proposal,
+        string $_format
+    ): Response {
         $followerResolver = $this->get('capco.follower.resolver');
 
         $export = $followerResolver->exportProposalFollowers($proposal, $_format);

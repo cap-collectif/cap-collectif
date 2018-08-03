@@ -1,9 +1,9 @@
 <?php
-
 namespace Capco\AdminBundle\Controller;
 
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionAppendix;
+use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Sonata\AdminBundle\Exception\LockException;
@@ -33,7 +33,9 @@ class OpinionController extends Controller
         $formView = $datagrid->getForm()->createView();
 
         // set the theme for the current Admin Form
-        $this->get('twig')->getExtension('form')->renderer->setTheme($formView, $this->admin->getFilterTheme());
+        $this->get('twig')
+            ->getExtension('form')
+            ->renderer->setTheme($formView, $this->admin->getFilterTheme());
 
         return $this->render(
             $this->admin->getTemplate('list'),
@@ -94,7 +96,10 @@ class OpinionController extends Controller
             $isFormValid = $form->isValid();
 
             // persist if the form was valid and if in preview mode the preview was approved
-            if ($isFormValid && (!$this->isInPreviewMode($request) || $this->isPreviewApproved($request))) {
+            if (
+                $isFormValid &&
+                (!$this->isInPreviewMode($request) || $this->isPreviewApproved($request))
+            ) {
                 if (false === $this->admin->isGranted('CREATE', $object)) {
                     throw $this->createAccessDeniedException();
                 }
@@ -154,7 +159,9 @@ class OpinionController extends Controller
         $view = $form->createView();
 
         // set the theme for the current Admin Form
-        $this->get('twig')->getExtension('form')->renderer->setTheme($view, $this->admin->getFormTheme());
+        $this->get('twig')
+            ->getExtension('form')
+            ->renderer->setTheme($view, $this->admin->getFormTheme());
 
         return $this->render(
             $this->admin->getTemplate($templateKey),
@@ -177,6 +184,9 @@ class OpinionController extends Controller
         $id = $request->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 
+        if (is_object($object) && !$object->canDisplay($this->getUser())) {
+            throw new ProjectAccessDeniedException();
+        }
         if (!$object) {
             throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
         }
@@ -203,7 +213,10 @@ class OpinionController extends Controller
             $isFormValid = $form->isValid();
 
             // persist if the form was valid and if in preview mode the preview was approved
-            if ($isFormValid && (!$this->isInPreviewMode($request) || $this->isPreviewApproved($request))) {
+            if (
+                $isFormValid &&
+                (!$this->isInPreviewMode($request) || $this->isPreviewApproved($request))
+            ) {
                 try {
                     $object = $this->admin->update($object);
 
@@ -242,7 +255,10 @@ class OpinionController extends Controller
                             'flash_lock_error',
                             [
                                 '%name%' => $this->escapeHtml($this->admin->toString($object)),
-                                '%link_start%' => '<a href="' . $this->admin->generateObjectUrl('edit', $object) . '">',
+                                '%link_start%' =>
+                                    '<a href="' .
+                                        $this->admin->generateObjectUrl('edit', $object) .
+                                        '">',
                                 '%link_end%' => '</a>',
                             ],
                             'CapcoAppBundle'
@@ -273,7 +289,9 @@ class OpinionController extends Controller
         $view = $form->createView();
 
         // set the theme for the current Admin Form
-        $this->get('twig')->getExtension('form')->renderer->setTheme($view, $this->admin->getFormTheme());
+        $this->get('twig')
+            ->getExtension('form')
+            ->renderer->setTheme($view, $this->admin->getFormTheme());
 
         return $this->render(
             $this->admin->getTemplate($templateKey),
@@ -295,9 +313,13 @@ class OpinionController extends Controller
         $object = $this->admin->getObject($id);
 
         if (!$object) {
-            throw $this->createNotFoundException(sprintf('unable to find the object with id : %s', $id));
+            throw $this->createNotFoundException(
+                sprintf('unable to find the object with id : %s', $id)
+            );
         }
-
+        if (!$object->canDisplay($this->getUser())) {
+            throw new ProjectAccessDeniedException();
+        }
         if (false === $this->admin->isGranted('VIEW', $object)) {
             throw $this->createAccessDeniedException();
         }
@@ -329,6 +351,10 @@ class OpinionController extends Controller
 
         if (!$object) {
             throw new NotFoundHttpException(sprintf('unable to find the object with id : %s', $id));
+        }
+
+        if (!$object->canDisplay($this->getUser())) {
+            throw new ProjectAccessDeniedException();
         }
 
         if (false === $this->admin->isGranted('DELETE', $object)) {
@@ -406,19 +432,19 @@ class OpinionController extends Controller
             ->andWhere('ot.parent is null')
             ->orderBy('ct.id', 'asc')
             ->getQuery()
-            ->getArrayResult()
-        ;
-
-        $otRepo = $this->get('doctrine')->getManager()
-            ->getRepository('CapcoAppBundle:OpinionType')
-        ;
-
+            ->getArrayResult();
+        $otRepo = $this->get('doctrine')
+            ->getManager()
+            ->getRepository('CapcoAppBundle:OpinionType');
         $consultationStepTypes = [];
 
         foreach ($rootOpinionTypes as $root) {
             $ct = $root['consultationStepType']['title'];
             $root['__children'] = $otRepo->childrenHierarchy($otRepo->find($root['id']));
-            if (array_key_exists($ct, $consultationStepTypes) && \is_array($consultationStepTypes[$ct])) {
+            if (
+                array_key_exists($ct, $consultationStepTypes) &&
+                \is_array($consultationStepTypes[$ct])
+            ) {
                 $consultationStepTypes[$ct][] = $root;
             } else {
                 $consultationStepTypes[$ct] = [$root];
@@ -430,12 +456,10 @@ class OpinionController extends Controller
 
     public function updateAppendicesForOpinion(Opinion $opinion)
     {
-        $appendixTypes = $this->get('doctrine')->getManager()
+        $appendixTypes = $this->get('doctrine')
+            ->getManager()
             ->getRepository('CapcoAppBundle:OpinionTypeAppendixType')
-            ->findBy(
-                ['opinionType' => $opinion->getOpinionType()],
-                ['position' => 'ASC']
-        );
+            ->findBy(['opinionType' => $opinion->getOpinionType()], ['position' => 'ASC']);
         $newAppendices = new ArrayCollection();
         $currentAppendices = $opinion->getAppendices();
         foreach ($appendixTypes as $otat) {

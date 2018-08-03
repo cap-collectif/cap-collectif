@@ -1,14 +1,12 @@
 <?php
-
 namespace Capco\AdminBundle\Controller;
 
 use Capco\AppBundle\Entity\ProposalForm;
-use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class ProposalFormController extends Controller
+class ProposalFormController extends CRUDController
 {
     public function duplicateAction(Request $request)
     {
@@ -30,7 +28,9 @@ class ProposalFormController extends Controller
         $evaluationForm = $clonedProposalForm->getEvaluationForm();
 
         if (null !== $evaluationForm) {
-            $evaluationForm->setTitle($translator->trans('copy-of') . ' ' . $evaluationForm->getTitle());
+            $evaluationForm->setTitle(
+                $translator->trans('copy-of') . ' ' . $evaluationForm->getTitle()
+            );
         }
 
         $em->persist($clonedProposalForm);

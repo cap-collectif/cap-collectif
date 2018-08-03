@@ -1,5 +1,4 @@
 <?php
-
 namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
@@ -8,18 +7,24 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class ProposalFormAdmin extends CapcoAdmin
 {
-    protected $datagridValues = [
-        '_sort_order' => 'ASC',
-        '_sort_by' => 'title',
-    ];
+    protected $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'title'];
 
-    protected $formOptions = [
-        'cascade_validation' => true,
-    ];
+    protected $formOptions = ['cascade_validation' => true];
+    private $tokenStorage;
 
+    public function __construct(
+        string $code,
+        string $class,
+        string $baseControllerName,
+        TokenStorageInterface $tokenStorage
+    ) {
+        parent::__construct($code, $class, $baseControllerName);
+        $this->tokenStorage = $tokenStorage;
+    }
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -29,21 +34,11 @@ class ProposalFormAdmin extends CapcoAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('title', null, [
-                'label' => 'admin.fields.proposal_form.title',
+            ->add('title', null, ['label' => 'admin.fields.proposal_form.title'])
+            ->add('step', null, ['label' => 'project'], 'entity', [
+                'query_builder' => $this->filterByCollectStepQuery(),
             ])
-            ->add('step', null, [
-                'label' => 'project',
-            ],
-                'entity',
-                [
-                    'query_builder' => $this->filterByCollectStepQuery(),
-                ]
-            )
-            ->add('updatedAt', null, [
-                'label' => 'admin.fields.proposal_form.updated_at',
-            ])
-        ;
+            ->add('updatedAt', null, ['label' => 'admin.fields.proposal_form.updated_at']);
     }
 
     // Fields to be shown on lists
@@ -52,28 +47,22 @@ class ProposalFormAdmin extends CapcoAdmin
         unset($this->listModes['mosaic']);
 
         $listMapper
-            ->addIdentifier('title', null, [
-                'label' => 'admin.fields.proposal_form.title',
-            ])
+            ->addIdentifier('title', null, ['label' => 'admin.fields.proposal_form.title'])
             ->add('project', 'sonata_type_model', [
                 'label' => 'project',
                 'template' => 'CapcoAdminBundle:ProposalForm:project_show_field.html.twig',
             ])
-            ->add('createdAt', null, [
-                'label' => 'admin.fields.proposal_form.created_at',
-            ])
-            ->add('updatedAt', null, [
-                'label' => 'admin.fields.proposal_form.updated_at',
-            ])
+            ->add('createdAt', null, ['label' => 'admin.fields.proposal_form.created_at'])
+            ->add('updatedAt', null, ['label' => 'admin.fields.proposal_form.updated_at'])
             ->add('_action', 'actions', [
                 'actions' => [
                     'duplicate' => [
-                        'template' => 'CapcoAdminBundle:ProposalForm:list__action_duplicate.html.twig',
+                        'template' =>
+                            'CapcoAdminBundle:ProposalForm:list__action_duplicate.html.twig',
                     ],
                     'delete' => [],
                 ],
-            ])
-        ;
+            ]);
     }
 
     protected function configureRoutes(RouteCollection $collection)
@@ -84,10 +73,36 @@ class ProposalFormAdmin extends CapcoAdmin
 
     private function filterByCollectStepQuery(): QueryBuilder
     {
-        $query = $this->modelManager
-            ->createQuery(CollectStep::class, 'p')
-            ->select('p')
-        ;
+        $query = $this->modelManager->createQuery(CollectStep::class, 'p')->select('p');
+        return $query;
+    }
+
+    /**
+     * if user is supper admin return all else return only what I can see
+     */
+    public function createQuery($context = 'list')
+    {
+        $user = $this->tokenStorage->getToken()->getUser();
+        if ($user->hasRole('ROLE_SUPER_ADMIN')) {
+            return parent::createQuery($context);
+        }
+
+        /** @var QueryBuilder $query */
+        $query = parent::createQuery($context);
+        $query
+            ->leftJoin($query->getRootAliases()[0] . '.step', 's')
+            ->leftJoin('s.projectAbstractStep', 'pAs')
+            ->leftJoin('pAs.project', 'p')
+            ->andWhere(
+                $query
+                    ->expr()
+                    ->andX(
+                        $query->expr()->eq('p.Author', ':author'),
+                        $query->expr()->eq('p.visibility', 0)
+                    )
+            );
+        $query->orWhere($query->expr()->gte('p.visibility', 1));
+        $query->setParameter('author', $user);
 
         return $query;
     }
