@@ -26,12 +26,18 @@ trait TrashableTrait
         return $this->trashedStatus !== null;
     }
 
-    public function setTrashed(?string $status)
+    public function getTrashedStatus(): ?string
+    {
+        return $this->trashedStatus;
+    }
+
+    public function setTrashedStatus(?string $status)
     {
         if (!$status) {
             $this->trashedStatus = null;
             $this->trashedReason = null;
             $this->trashedAt = null;
+
             return $this;
         }
 

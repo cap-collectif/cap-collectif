@@ -1,0 +1,7 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    {%  if object is not null and object.isTrashed() %}
+        <span>{{ 'trashed-' ~ object.getTrashedStatus() ~ '-content'| trans({}, 'CapcoAppBundle') }}</span>
+    {%  endif %}
+{% endblock %}

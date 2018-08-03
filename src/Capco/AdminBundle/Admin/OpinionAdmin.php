@@ -1,13 +1,15 @@
 <?php
 namespace Capco\AdminBundle\Admin;
 
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
-use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Capco\AppBundle\Form\Type\TrashedStatusType;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
+use Capco\AppBundle\Entity\Interfaces\TrashableInterface;
 
 class OpinionAdmin extends CapcoAdmin
 {
@@ -37,9 +39,6 @@ class OpinionAdmin extends CapcoAdmin
         if ('edit' === $name) {
             return 'CapcoAdminBundle:Opinion:edit.html.twig';
         }
-        if ('show' === $name) {
-            return 'CapcoAdminBundle:Opinion:show.html.twig';
-        }
         if ('delete' === $name) {
             return 'CapcoAdminBundle:Opinion:delete.html.twig';
         }
@@ -51,9 +50,6 @@ class OpinionAdmin extends CapcoAdmin
     {
     }
 
-    /**
-     * @param DatagridMapper $datagridMapper
-     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -77,9 +73,6 @@ class OpinionAdmin extends CapcoAdmin
             ->add('expired', null, ['label' => 'admin.global.expired']);
     }
 
-    /**
-     * @param ListMapper $listMapper
-     */
     protected function configureListFields(ListMapper $listMapper)
     {
         unset($this->listModes['mosaic']);
@@ -104,18 +97,13 @@ class OpinionAdmin extends CapcoAdmin
             ])
             ->add('pinned', null, ['editable' => true, 'label' => 'admin.fields.opinion.pinned'])
             ->add('trashedStatus', null, [
-                'editable' => true,
                 'label' => 'admin.fields.opinion.is_trashed',
+                'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig',
             ])
             ->add('updatedAt', null, ['label' => 'admin.fields.opinion.updated_at'])
-            ->add('_action', 'actions', [
-                'actions' => ['show' => [], 'edit' => [], 'delete' => []],
-            ]);
+            ->add('_action', 'actions', ['actions' => ['delete' => []]]);
     }
 
-    /**
-     * @param FormMapper $formMapper
-     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $subjectHasAppendices =
@@ -193,9 +181,8 @@ class OpinionAdmin extends CapcoAdmin
                     'readonly' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                 ],
             ])
-            ->add('trashedStatus', null, [
+            ->add('trashedStatus', TrashedStatusType::class, [
                 'label' => 'admin.fields.opinion.is_trashed',
-                'required' => false,
             ])
             ->add('trashedReason', null, ['label' => 'admin.fields.opinion.trashed_reason'])
             ->end()
@@ -209,54 +196,9 @@ class OpinionAdmin extends CapcoAdmin
             ->end();
     }
 
-    /**
-     * @param ShowMapper $showMapper
-     */
-    protected function configureShowFields(ShowMapper $showMapper)
-    {
-        $subject = $this->getSubject();
-        $subjectHasAppendices =
-            $this->getSubject()
-                ->getAppendices()
-                ->count() > 0;
-
-        $showMapper
-            ->add('title', null, ['label' => 'admin.fields.opinion.title'])
-            ->add('Author', null, ['label' => 'admin.fields.opinion.author'])
-            ->add('OpinionType', null, ['label' => 'admin.fields.opinion.opinion_type'])
-            ->add('body', null, ['label' => 'admin.fields.opinion.body']);
-        if ($subjectHasAppendices) {
-            $showMapper->add('appendices', null, ['label' => 'admin.fields.opinion.appendices']);
-        }
-
-        $showMapper
-            ->add('step', null, ['label' => 'admin.fields.opinion.step'])
-            ->add('position', null, ['label' => 'admin.fields.opinion.position'])
-            ->add('voteCountTotal', null, [
-                'label' => 'admin.fields.opinion.vote_count_total',
-                'mapped' => false,
-                'template' => 'CapcoAdminBundle:Opinion:vote_count_show_field.html.twig',
-            ])
-            ->add('votesCountOk', null, ['label' => 'admin.fields.opinion.vote_count_ok'])
-            ->add('votesCountNok', null, ['label' => 'admin.fields.opinion.vote_count_nok'])
-            ->add('votesCountMitige', null, ['label' => 'admin.fields.opinion.vote_count_mitige'])
-            ->add('argumentsCount', null, ['label' => 'admin.fields.opinion.argument_count'])
-            ->add('sourcesCount', null, ['label' => 'admin.fields.opinion.source_count'])
-            ->add('isEnabled', null, ['label' => 'admin.fields.opinion.is_enabled'])
-            ->add('pinned', null, ['label' => 'admin.fields.opinion.pinned_long'])
-            ->add('createdAt', null, ['label' => 'admin.fields.opinion.created_at'])
-            ->add('updatedAt', null, ['label' => 'admin.fields.opinion.updated_at'])
-            ->add('trashedStatus', null, ['label' => 'admin.fields.opinion.is_trashed']);
-        if ($subject->getIsTrashed()) {
-            $showMapper
-                ->add('trashedAt', null, ['label' => 'admin.fields.opinion.trashed_at'])
-                ->add('trashedReason', null, ['label' => 'admin.fields.opinion.trashed_reason']);
-        }
-    }
-
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(['list', 'show', 'create', 'edit', 'delete', 'export']);
+        $collection->clearExcept(['list', 'create', 'edit', 'delete', 'export']);
     }
 
     private function createQueryBuilderForStep()

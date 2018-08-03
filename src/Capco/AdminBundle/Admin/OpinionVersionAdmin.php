@@ -1,13 +1,14 @@
 <?php
 namespace Capco\AdminBundle\Admin;
 
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Capco\AppBundle\Form\Type\TrashedStatusType;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 
 class OpinionVersionAdmin extends Admin
 {
@@ -17,9 +18,6 @@ class OpinionVersionAdmin extends Admin
     {
     }
 
-    /**
-     * @param DatagridMapper $datagridMapper
-     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -40,9 +38,6 @@ class OpinionVersionAdmin extends Admin
             ->add('expired', null, ['label' => 'admin.global.expired']);
     }
 
-    /**
-     * @param ListMapper $listMapper
-     */
     protected function configureListFields(ListMapper $listMapper)
     {
         unset($this->listModes['mosaic']);
@@ -59,17 +54,12 @@ class OpinionVersionAdmin extends Admin
             ])
             ->add('trashedStatus', null, [
                 'label' => 'admin.fields.opinion_version.is_trashed',
-                'editable' => true,
+                'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig',
             ])
             ->add('updatedAt', null, ['label' => 'admin.fields.opinion_version.updated_at'])
-            ->add('_action', 'actions', [
-                'actions' => ['show' => [], 'edit' => [], 'delete' => []],
-            ]);
+            ->add('_action', 'actions', ['actions' => ['delete' => []]]);
     }
 
-    /**
-     * @param FormMapper $formMapper
-     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $currentUser = $this->getConfigurationPool()
@@ -118,9 +108,8 @@ class OpinionVersionAdmin extends Admin
                     'readonly' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                 ],
             ])
-            ->add('trashedStatus', null, [
-                'label' => 'admin.fields.opinion_version.is_trashed',
-                'required' => false,
+            ->add('trashedStatus', TrashedStatusType::class, [
+                'label' => 'admin.fields.opinion.is_trashed',
             ])
             ->add('trashedReason', null, ['label' => 'admin.fields.opinion_version.trashed_reason'])
             ->end()
@@ -134,43 +123,8 @@ class OpinionVersionAdmin extends Admin
             ->end();
     }
 
-    /**
-     * @param ShowMapper $showMapper
-     */
-    protected function configureShowFields(ShowMapper $showMapper)
-    {
-        $subject = $this->getSubject();
-
-        $showMapper
-            ->add('title', null, ['label' => 'admin.fields.opinion_version.title'])
-            ->add('author', null, ['label' => 'admin.fields.opinion_version.author'])
-            ->add('parent', null, ['label' => 'admin.fields.opinion_version.parent'])
-            ->add('body', null, ['label' => 'admin.fields.opinion_version.body'])
-            ->add('comment', null, ['label' => 'admin.fields.opinion_version.comment'])
-            ->add('votesCountOk', null, ['label' => 'admin.fields.opinion_version.vote_count_ok'])
-            ->add('votesCountNok', null, ['label' => 'admin.fields.opinion_version.vote_count_nok'])
-            ->add('votesCountMitige', null, [
-                'label' => 'admin.fields.opinion_version.vote_count_mitige',
-            ])
-            ->add('argumentsCount', null, [
-                'label' => 'admin.fields.opinion_version.argument_count',
-            ])
-            ->add('sourcesCount', null, ['label' => 'admin.fields.opinion_version.source_count'])
-            ->add('enabled', null, ['label' => 'admin.fields.opinion_version.is_enabled'])
-            ->add('createdAt', null, ['label' => 'admin.fields.opinion_version.created_at'])
-            ->add('updatedAt', null, ['label' => 'admin.fields.opinion_version.updated_at'])
-            ->add('trashedStatus', null, ['label' => 'admin.fields.opinion_version.is_trashed']);
-        if ($subject->getIsTrashed()) {
-            $showMapper
-                ->add('trashedAt', null, ['label' => 'admin.fields.opinion_version.trashed_at'])
-                ->add('trashedReason', null, [
-                    'label' => 'admin.fields.opinion_version.trashed_reason',
-                ]);
-        }
-    }
-
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->clearExcept(['list', 'show', 'create', 'edit', 'delete']);
+        $collection->clearExcept(['list', 'create', 'edit', 'delete']);
     }
 }

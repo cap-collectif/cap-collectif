@@ -2,11 +2,12 @@
 namespace Capco\AdminBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Capco\AppBundle\Form\Type\TrashedStatusType;
 
 class SourceAdmin extends Admin
 {
@@ -50,13 +51,11 @@ class SourceAdmin extends Admin
                 'label' => 'admin.fields.source.is_enabled',
             ])
             ->add('trashedStatus', null, [
-                'editable' => true,
+                'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig',
                 'label' => 'admin.fields.source.is_trashed',
             ])
             ->add('updatedAt', null, ['label' => 'admin.fields.source.updated_at'])
-            ->add('_action', 'actions', [
-                'actions' => ['show' => [], 'edit' => [], 'delete' => []],
-            ]);
+            ->add('_action', 'actions', ['actions' => ['delete' => []]]);
     }
 
     protected function configureFormFields(FormMapper $formMapper)
@@ -90,36 +89,13 @@ class SourceAdmin extends Admin
                     'readonly' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                 ],
             ])
-            ->add('trashedStatus', null, [
-                'label' => 'admin.fields.source.is_trashed',
-                'required' => false,
+            ->add('trashedStatus', TrashedStatusType::class, [
+                'label' => 'admin.fields.opinion.is_trashed',
             ])
             ->add('trashedReason', null, [
                 'label' => 'admin.fields.source.trashed_reason',
                 'required' => false,
             ]);
-    }
-
-    protected function configureShowFields(ShowMapper $showMapper)
-    {
-        $subject = $this->getSubject();
-        $showMapper
-            ->add('title', null, ['label' => 'admin.fields.source.title'])
-            ->add('body', null, ['label' => 'admin.fields.source.body'])
-            ->add('author', null, ['label' => 'admin.fields.source.author'])
-            ->add('opinion', null, ['label' => 'admin.fields.source.opinion'])
-            ->add('category', null, ['label' => 'admin.fields.source.category'])
-            ->add('link', null, ['label' => 'admin.fields.source.link'])
-            ->add('votesCount', null, ['label' => 'admin.fields.source.vote_count_source'])
-            ->add('isEnabled', null, ['label' => 'admin.fields.source.is_enabled'])
-            ->add('createdAt', null, ['label' => 'admin.fields.source.created_at'])
-            ->add('updatedAt', null, ['label' => 'admin.fields.source.updated_at'])
-            ->add('trashedStatus', null, ['label' => 'admin.fields.source.is_trashed']);
-        if ($subject->getIsTrashed()) {
-            $showMapper
-                ->add('trashedAt', null, ['label' => 'admin.fields.source.trashed_at'])
-                ->add('trashedReason', null, ['label' => 'admin.fields.source.trashed_reason']);
-        }
     }
 
     protected function configureRoutes(RouteCollection $collection)

@@ -176,7 +176,7 @@ class Argument implements Contribution, VotableInterface, Publishable, Moderable
         }
     }
 
-    public function setType(int $type)
+    public function setType($type)
     {
         $this->type = $type;
     }

@@ -1,15 +1,16 @@
 <?php
 namespace Capco\AdminBundle\Admin;
 
-use Capco\AppBundle\Entity\Event;
-use Capco\AppBundle\Entity\EventComment;
 use Capco\AppBundle\Entity\Post;
-use Capco\AppBundle\Entity\PostComment;
+use Capco\AppBundle\Entity\Event;
 use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Datagrid\ListMapper;
+use Capco\AppBundle\Entity\PostComment;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Capco\AppBundle\Entity\EventComment;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Capco\AppBundle\Form\Type\TrashedStatusType;
 
 class CommentAdmin extends Admin
 {
@@ -28,9 +29,6 @@ class CommentAdmin extends Admin
         return $object;
     }
 
-    /**
-     * @param DatagridMapper $datagridMapper
-     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -54,9 +52,6 @@ class CommentAdmin extends Admin
             ->add('expired', null, ['label' => 'admin.global.expired']);
     }
 
-    /**
-     * @param ListMapper $listMapper
-     */
     protected function configureListFields(ListMapper $listMapper)
     {
         unset($this->listModes['mosaic']);
@@ -82,60 +77,13 @@ class CommentAdmin extends Admin
                 'label' => 'admin.fields.comment.is_enabled',
             ])
             ->add('trashedStatus', null, [
-                'editable' => true,
-                'label' => 'admin.fields.comment.is_trashed',
+                'label' => 'admin.fields.opinion.is_trashed',
+                'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig',
             ])
             ->add('updatedAt', 'datetime', ['label' => 'admin.fields.comment.updated_at'])
-            ->add('_action', 'actions', [
-                'actions' => ['show' => [], 'edit' => [], 'delete' => []],
-            ]);
+            ->add('_action', 'actions', ['actions' => ['delete' => []]]);
     }
 
-    /**
-     * @param ShowMapper $showMapper
-     */
-    protected function configureShowFields(ShowMapper $showMapper)
-    {
-        $subject = $this->getSubject();
-
-        if ($subject instanceof EventComment) {
-            $showMapper->add('event', 'sonata_type_model', [
-                'label' => 'admin.fields.comment.idea',
-                'class' => 'Capco\AppBundle\Entity\Event',
-            ]);
-        } elseif ($subject instanceof PostComment) {
-            $showMapper->add('post', 'sonata_type_model', [
-                'label' => 'admin.fields.comment.idea',
-                'class' => 'Capco\AppBundle\Entity\Post',
-            ]);
-        }
-
-        $showMapper->add('body', null, ['label' => 'admin.fields.comment.body']);
-        if (null !== $subject->getAuthor()) {
-            $showMapper->add('Author', null, ['label' => 'admin.fields.comment.author']);
-        } else {
-            $showMapper
-                ->add('authorName', null, ['label' => 'admin.fields.comment.author_name'])
-                ->add('authorEmail', null, ['label' => 'admin.fields.comment.author_email'])
-                ->add('authorIp', null, ['label' => 'admin.fields.comment.author_ip']);
-        }
-
-        $showMapper
-            ->add('votesCount', null, ['label' => 'admin.fields.comment.vote_count'])
-            ->add('createdAt', null, ['label' => 'admin.fields.comment.created_at'])
-            ->add('updatedAt', null, ['label' => 'admin.fields.comment.updated_at'])
-            ->add('isEnabled', null, ['label' => 'admin.fields.comment.is_enabled'])
-            ->add('trashedStatus', null, ['label' => 'admin.fields.comment.is_trashed']);
-        if ($subject->getIsTrashed()) {
-            $showMapper
-                ->add('trashedAt', null, ['label' => 'admin.fields.comment.trashed_at'])
-                ->add('trashedReason', null, ['label' => 'admin.fields.comment.trashed_reason']);
-        }
-    }
-
-    /**
-     * @param FormMapper $formMapper
-     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $subject = $this->getSubject();
@@ -178,9 +126,8 @@ class CommentAdmin extends Admin
                     'readonly' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                 ],
             ])
-            ->add('trashedStatus', null, [
-                'label' => 'admin.fields.comment.is_trashed',
-                'required' => false,
+            ->add('trashedStatus', TrashedStatusType::class, [
+                'label' => 'admin.fields.opinion.is_trashed',
             ])
             ->add('trashedReason', null, ['label' => 'admin.fields.comment.trashed_reason'])
             ->add('pinned', null, ['label' => 'admin.fields.comment.pinned', 'required' => false]);

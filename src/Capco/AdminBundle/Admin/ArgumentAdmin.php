@@ -1,21 +1,19 @@
 <?php
 namespace Capco\AdminBundle\Admin;
 
-use Capco\AppBundle\Entity\Argument;
 use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Datagrid\ListMapper;
+use Capco\AppBundle\Entity\Argument;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Capco\AppBundle\Form\Type\TrashedStatusType;
 
 class ArgumentAdmin extends Admin
 {
     protected $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'updatedAt'];
 
-    /**
-     * @param DatagridMapper $datagridMapper
-     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -35,9 +33,6 @@ class ArgumentAdmin extends Admin
             ->add('expired', null, ['label' => 'admin.global.expired']);
     }
 
-    /**
-     * @param ListMapper $listMapper
-     */
     protected function configureListFields(ListMapper $listMapper)
     {
         unset($this->listModes['mosaic']);
@@ -60,18 +55,13 @@ class ArgumentAdmin extends Admin
                 'label' => 'admin.fields.argument.is_enabled',
             ])
             ->add('trashedStatus', null, [
-                'editable' => true,
-                'label' => 'admin.fields.argument.is_trashed',
+                'label' => 'admin.fields.opinion.is_trashed',
+                'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig',
             ])
             ->add('updatedAt', 'datetime', ['label' => 'admin.fields.argument.updated_at'])
-            ->add('_action', 'actions', [
-                'actions' => ['show' => [], 'edit' => [], 'delete' => []],
-            ]);
+            ->add('_action', 'actions', ['actions' => ['delete' => []]]);
     }
 
-    /**
-     * @param FormMapper $formMapper
-     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $currentUser = $this->getConfigurationPool()
@@ -105,42 +95,13 @@ class ArgumentAdmin extends Admin
                     'readonly' => !$currentUser->hasRole('ROLE_SUPER_ADMIN'),
                 ],
             ])
-            ->add('trashedStatus', null, [
-                'label' => 'admin.fields.argument.is_trashed',
-                'required' => false,
+            ->add('trashedStatus', TrashedStatusType::class, [
+                'label' => 'admin.fields.opinion.is_trashed',
             ])
             ->add('trashedReason', null, [
                 'label' => 'admin.fields.argument.trashed_reason',
                 'required' => false,
             ]);
-    }
-
-    /**
-     * @param ShowMapper $showMapper
-     */
-    protected function configureShowFields(ShowMapper $showMapper)
-    {
-        $subject = $this->getSubject();
-
-        $showMapper
-            ->add('body', null, ['label' => 'admin.fields.argument.body'])
-            ->add('type', null, [
-                'label' => 'admin.fields.argument.type',
-                'template' => 'CapcoAdminBundle:Argument:type_show_field.html.twig',
-                'typesLabels' => Argument::$argumentTypesLabels,
-            ])
-            ->add('opinion', null, ['label' => 'admin.fields.argument.opinion'])
-            ->add('Author', null, ['label' => 'admin.fields.argument.author'])
-            ->add('votesCount', null, ['label' => 'admin.fields.argument.vote_count'])
-            ->add('createdAt', null, ['label' => 'admin.fields.argument.created_at'])
-            ->add('updatedAt', null, ['label' => 'admin.fields.argument.updated_at'])
-            ->add('isEnabled', null, ['label' => 'admin.fields.argument.is_enabled'])
-            ->add('trashedStatus', null, ['label' => 'admin.fields.argument.is_trashed']);
-        if ($subject->getIsTrashed()) {
-            $showMapper
-                ->add('trashedAt', null, ['label' => 'admin.fields.argument.trashed_at'])
-                ->add('trashedReason', null, ['label' => 'admin.fields.argument.trashed_reason']);
-        }
     }
 
     protected function configureRoutes(RouteCollection $collection)
