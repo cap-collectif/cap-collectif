@@ -109,8 +109,8 @@ Capco\AppBundle\Entity\ProposalForm:
     id: proposalForm9
     title: Collecte des propositions pour le budget 2018 de la Ville de La Force
     description: <p><text(100)></p>
-    step: "@collectstep9"
-    notificationsConfiguration: "@proposalFormNotificationConfiguration11"
+    step: '@collectstep9'
+    notificationsConfiguration: '@proposalFormNotificationConfiguration11'
     titleHelpText: Choisissez un titre pour votre proposition
     themeHelpText: Sélectionnez un thème
     districtHelpText: Sélectionnez une zone géographique
@@ -128,14 +128,14 @@ Capco\AppBundle\Entity\ProposalForm:
     latMap: 44.8799786
     lngMap: 0.3404569
     reference: 1980
-    evaluationForm: "@questionnaire6"
+    evaluationForm: '@questionnaire6'
     allowAknowledge: true
   proposalform10:
     id: proposalform10
     title: Qui ? Quoi ? Comment conquerir le monde ?
     description: <p><text(100)></p>
-    step: "@collectstep10"
-    notificationsConfiguration: "@proposalFormNotificationConfiguration12"
+    step: '@collectstep10'
+    notificationsConfiguration: '@proposalFormNotificationConfiguration12'
     titleHelpText: Choisissez un titre pour votre proposition
     themeHelpText: Sélectionnez un thème
     districtHelpText: Sélectionnez une zone géographique
@@ -148,14 +148,14 @@ Capco\AppBundle\Entity\ProposalForm:
     themeMandatory: false
     categoryMandatory: true
     reference: 1664
-    evaluationForm: "@questionnaire7"
+    evaluationForm: '@questionnaire7'
     allowAknowledge: true
   proposalform11:
     id: proposalform11
     title: CapcoBeer ?
     description: <p><text(100)></p>
-    step: "@collectstep11"
-    notificationsConfiguration: "@proposalFormNotificationConfiguration13"
+    step: '@collectstep11'
+    notificationsConfiguration: '@proposalFormNotificationConfiguration13'
     titleHelpText: Choisissez un titre pour votre proposition
     themeHelpText: Sélectionnez un thème
     districtHelpText: Sélectionnez une zone géographique
@@ -168,5 +168,5 @@ Capco\AppBundle\Entity\ProposalForm:
     themeMandatory: false
     categoryMandatory: true
     reference: 86
-    evaluationForm: "@questionnaire8"
+    evaluationForm: '@questionnaire8'
     allowAknowledge: true

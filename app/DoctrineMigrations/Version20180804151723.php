@@ -2,11 +2,11 @@
 declare(strict_types=1);
 namespace Application\Migrations;
 
-use Capco\AppBundle\Entity\ProjectVisibilityMode;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-final class Version20180727151723 extends AbstractMigration
+final class Version20180804151723 extends AbstractMigration
 {
     public function up(Schema $schema): void
     {

@@ -39,7 +39,7 @@ Scenario: Anonymous wants to get votes for an opinion
     "data": {
       "opinion": {
         "votes": {
-          "totalCount": 3,
+          "totalCount": 4,
           "pageInfo": {
             "hasNextPage": false
           },

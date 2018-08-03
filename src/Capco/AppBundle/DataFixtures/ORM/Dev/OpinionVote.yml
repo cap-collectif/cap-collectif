@@ -4,10 +4,25 @@ Capco\AppBundle\Entity\OpinionVote:
     value: <numberBetween(-1, 1)>
     user: '@user4'
     publishedAt: <(new \DateTime('2015-03-01'))>
-  opinionVote{2...5}:
+  opinionVote2:
     Opinion: '@opinion57'
-    value: <numberBetween(-1, 1)>
-    user (unique): '@user<current()>'
+    value: -1
+    user (unique): '@user2'
+    publishedAt: <(new \DateTime('2015-03-01'))>
+  opinionVote3:
+    Opinion: '@opinion57'
+    value: 1
+    user (unique): '@user3'
+    publishedAt: <(new \DateTime('2015-03-01'))>
+  opinionVote4:
+    Opinion: '@opinion57'
+    value: 1
+    user (unique): '@user4'
+    publishedAt: <(new \DateTime('2015-03-01'))>
+  opinionVote5:
+    Opinion: '@opinion57'
+    value: 0
+    user (unique): '@user5'
     publishedAt: <(new \DateTime('2015-03-01'))>
   opinionVote{6...50}:
     Opinion: '@opinion59'

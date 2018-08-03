@@ -45,7 +45,7 @@ class SearchController extends Controller
         );
 
         /**
-         * Do not display Proposal if we are not available
+         * Do not display Proposal if we are not allowed
          * @var HybridResult $searchResult
          */
         foreach ($searchResults['results'] as $key => $searchResult) {
