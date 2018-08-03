@@ -3,7 +3,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\GraphQL\Traits\ProjectOpinionSubscriptionGuard;
 use Capco\AppBundle\Repository\FollowerRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\UserBundle\Entity\User;
@@ -13,6 +13,8 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class UnfollowOpinionMutation
 {
+    use ProjectOpinionSubscriptionGuard;
+
     private $em;
     private $opinionRepository;
     private $followerRepository;
@@ -31,14 +33,12 @@ class UnfollowOpinionMutation
     {
         $opinion = '';
         if (isset($args['opinionId'])) {
-            /** @var Proposal $proposal */
             $opinion = $this->opinionRepository->find($args['opinionId']);
             $this->unfollow($opinion, $user);
         }
 
         if (isset($args['ids'])) {
             foreach ($args['ids'] as $opinionId) {
-                /** @var Proposal $proposal */
                 $opinion = $this->opinionRepository->find($opinionId);
                 $this->unfollow($opinion, $user);
             }
@@ -49,7 +49,7 @@ class UnfollowOpinionMutation
         return ['opinion' => $opinion, 'unfollowerId' => $user->getId()];
     }
 
-    protected function unfollow(Opinion $opinion, User $user)
+    protected function unfollow(Opinion $opinion, User $user): void
     {
         /** @var Follower $follower */
         $follower = $this->followerRepository->findBy(['user' => $user, 'opinion' => $opinion]);
@@ -57,6 +57,11 @@ class UnfollowOpinionMutation
         if (!$follower) {
             throw new UserError('Can\'t find the opinion.');
         }
+
+        if (!$this->canBeFollowed($opinion)) {
+            throw new UserError('Can\'t unsubscribe from this opinion.');
+        }
+
         $follower = $follower[0];
         $this->em->remove($follower);
     }

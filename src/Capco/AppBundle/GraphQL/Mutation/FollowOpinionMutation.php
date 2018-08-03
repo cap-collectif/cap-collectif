@@ -3,6 +3,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Follower;
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\GraphQL\Traits\ProjectOpinionSubscriptionGuard;
 use Capco\AppBundle\Repository\FollowerRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\UserBundle\Entity\User;
@@ -13,6 +14,8 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 
 class FollowOpinionMutation
 {
+    use ProjectOpinionSubscriptionGuard;
+
     private $em;
     private $opinionRepository;
     private $followerRepository;
@@ -34,6 +37,10 @@ class FollowOpinionMutation
 
         if (!$opinion) {
             throw new UserError('Can\’t find this opinion.');
+        }
+
+        if (!$this->canBeFollowed($opinion)) {
+            throw new UserError('Can\'t subscribe to this opinion.');
         }
 
         $follower = new Follower();

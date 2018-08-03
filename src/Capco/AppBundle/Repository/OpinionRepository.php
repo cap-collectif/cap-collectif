@@ -461,8 +461,12 @@ class OpinionRepository extends EntityRepository
     ): Paginator {
         $query = $this->createQueryBuilder('o')
             ->leftJoin('o.followers', 'f')
+            ->leftJoin('o.step', 'step')
+            ->leftJoin('step.projectAbstractStep', 'project_abstract_step')
+            ->leftJoin('project_abstract_step.project', 'project')
             ->andWhere('f.user = :user')
             ->andWhere('f.opinion IS NOT NULL')
+            ->andWhere('project.opinionCanBeFollowed = true')
             ->setParameter('user', $user)
             ->setMaxResults($offset)
             ->setFirstResult($first);
@@ -472,12 +476,16 @@ class OpinionRepository extends EntityRepository
 
     public function countFollowingOpinionByUser(User $user): int
     {
-        $query = $this->createQueryBuilder('p');
+        $query = $this->createQueryBuilder('o');
         $query
-            ->select('COUNT(p.id)')
-            ->leftJoin('p.followers', 'f')
+            ->select('COUNT(o.id)')
+            ->leftJoin('o.followers', 'f')
+            ->leftJoin('o.step', 'step')
+            ->leftJoin('step.projectAbstractStep', 'project_abstract_step')
+            ->leftJoin('project_abstract_step.project', 'project')
             ->andWhere('f.user = :user')
             ->andWhere('f.opinion IS NOT NULL')
+            ->andWhere('project.opinionCanBeFollowed = true')
             ->setParameter('user', $user);
 
         return (int) $query->getQuery()->getSingleScalarResult();

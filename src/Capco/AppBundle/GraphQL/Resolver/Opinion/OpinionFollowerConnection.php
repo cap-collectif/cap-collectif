@@ -2,6 +2,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Opinion;
 
 use Capco\AppBundle\Entity\Opinion;
+use Capco\AppBundle\GraphQL\Traits\ProjectOpinionSubscriptionGuard;
 use Capco\UserBundle\Repository\UserRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\ResolverInterface;
@@ -11,6 +12,8 @@ use Psr\Log\LoggerInterface;
 
 class OpinionFollowerConnection implements ResolverInterface
 {
+    use ProjectOpinionSubscriptionGuard;
+
     private $userRepository;
     private $logger;
 
@@ -27,6 +30,10 @@ class OpinionFollowerConnection implements ResolverInterface
             $direction = $args->offsetGet('orderBy')['direction'];
             $orderBy = [$field => $direction];
             $criteria = ['opinion' => $opinion];
+            if (!$this->canBeFollowed($opinion)) {
+                return [];
+            }
+
             try {
                 $followers = $this->userRepository->getByCriteriaOrdered(
                     $criteria,
@@ -44,7 +51,9 @@ class OpinionFollowerConnection implements ResolverInterface
             return $followers;
         });
 
-        $totalCount = $this->userRepository->countFollowerForOpinion($opinion);
+        $totalCount = $this->canBeFollowed($opinion)
+            ? $this->userRepository->countFollowerForOpinion($opinion)
+            : 0;
 
         return $paginator->auto($args, $totalCount);
     }
